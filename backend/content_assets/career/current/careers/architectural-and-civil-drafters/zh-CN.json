@@ -1290,7 +1290,7 @@
         "status": "mapped"
       },
       "item:architectural-and-civil-drafters.path.seven-day-trial.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:architectural-and-civil-drafters.profile.career-quick-answers-block.1": {
         "status": "mapped"
@@ -23335,13 +23335,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的小任务：用虚构场地与建筑条件画一套小楼的比例图（平面与立面与剖面各一张，标注轴线与尺寸与标高与主要材料图例，并写清所依据的制图标准与图幅与比例）；用虚构图纸做一次规范符合性核查表（防火分区与疏散宽度与净高与无障碍等条目，逐条写明核查结论与依据条款）；把一次专业配合过程写成 500 字说明（结构与水暖电提出的条件、图纸冲突点、拟调整的画法与待确认项，以及如何保留版本）。（编辑建议，不是录用、资格考试或技能测试，也不构成对任何设计或施工图机构流程的说明。）"
+              "三个编辑自测任务：依路径板块给定的虚构尺寸、标高与管线数据完成五张图；核对题设约束并把法规适用待确认项单列；用六项专业冲突表写一份不超过500字的交底说明。练习不作为真实设计、施工或录用凭证。"
             ]
           },
           "id": "architectural-and-civil-drafters.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "operations",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -23366,13 +23365,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页美国工资与就业为 O*NET 17-3011.00 页面展示的 BLS 数据（本职业独立口径）：2025 年 5 月年薪中位数 66,150 美元（时薪 31.80 美元；第 10 分位 46,260、第 25 分位 55,650、第 75 分位 80,870、第 90 分位 99,710 美元），2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%，年均约 10,000 个空缺；该页行业分布为专业、科学与技术服务（75%）、建筑（11%）与其他行业含制造业（14%）。BLS 职业展望手册《制图员》为组合口径（含机械与电气与电子制图等各类制图员）：2025 年中位年薪 68,090 美元（时薪 32.74 美元）、2025 年约 180,200 个岗位、2025—2035 年增长 1%（低于平均）、净增约 1,100 个、年均约 14,400 个空缺，属不同职业范围与资料期，本页单独标注。中国大陆没有该职业精确的全国工资分布，行业门类与岗位类别数字只作宽口径参考；绘制房屋建筑与结构施工图应遵循《房屋建筑制图统一标准》等工程建设标准。本页不构成执业或录用意见。"
+              "美国17-3011：2025年5月工资中位数66,150美元；2025年104,100个岗位，2025—2035增长5%、年均9,100个空缺。群体制图员为180,200个岗位、工资中位数68,090美元、增长1%、年均14,400个空缺，范围另标。中国NBS公告未单列制图工资；行业工资仅供背景，资格与签章按实际专业法规核对。"
             ]
           },
           "id": "architectural-and-civil-drafters.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "bls",
+            "nbs",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -23458,8 +23460,8 @@
           },
           "id": "architectural-and-civil-drafters.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy",
+            "facilities"
           ],
           "type": "prose"
         },
@@ -23473,8 +23475,7 @@
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.2",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -23483,12 +23484,16 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 页面展示的工资与就业数据（本职业独立口径）显示：2025 年 5 月年薪中位数 66,150 美元（时薪 31.80 美元），第 10 分位 46,260、第 25 分位 55,650、第 75 分位 80,870、第 90 分位 99,710 美元；2024 年在岗约 110,500 人；2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺；该页行业分布为专业、科学与技术服务（75%）、建筑（11%）与其他行业含制造业（14%）。学历方面该职业为 Job Zone Three（需要中等准备，SVP 6.0 至 7.0 以下），通常需要职业学校培训或相关在职经验或副学士学位，受访者回答中 42% 认为需学士学位。上述美国数字不能外推为中国大陆。"
+              "本职业美国2025年5月工资中位数66,150美元，P10/P25/P75/P90分别46,260/55,650/80,870/99,710美元/年；BLS 2025年104,100个岗位、2035年109,500个、增长5%、年均9,100个空缺。O*NET行业构成仍为2024年专业科学技术服务75%、建筑11%，余下14%未在本页细分。Job Zone Three与42%学士学历回答均为美国描述性资料。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "ilo",
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -23497,13 +23502,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "承接任务：接收建筑师或工程师的概念与草图与计算与规格与测量数据。 → 熟悉依据：核对建筑规范与地方法规与空间与场地要求及适用的制图标准与图幅与比例。 → 收集数据：获取并汇集设计所需数据，必要时赴现场采集测量数据。 → 绘制图纸：按概念与草图与计算绘制基础与建筑与结构的比例图与详图。 → 专业配合：协调结构与电气与机械设计并确定平面图呈现方法，处理冲突与待确认项。 → 规范与校核：审查图纸与规格是否符合设计概念并核对尺寸与材料与做法。 → 交付与交底：完成并复制图纸与文档包，向生产或施工团队解释图纸并按需调整。 → 修订与归档：按校审意见修订并保留版本与记录。"
+              "确认任务 → 汇集输入 → 绘制图纸 → 配合校核 → 交付交底 → 修订归档。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.3",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -23517,7 +23521,7 @@
           },
           "id": "architectural-and-civil-drafters.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23541,12 +23545,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 17-3011.00 页面展示）：2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%，年均约 10,000 个职位空缺且多数来自替代需求。BLS 职业展望手册《制图员》为组合口径（含各类制图员）：2025 年约 180,200 个岗位，2025—2035 年增长 1%（低于平均），净增约 1,100 个，年均约 14,400 个空缺，属不同职业范围与资料期，本页单独标注。空缺数不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆。本页不提供本职业独立的分行业工资中位数。"
+              "BLS 17-3011当前预测：2025年104,100、2035年109,500个岗位，净增5,400、明细增长5.2%（OOH取整5%）、年均9,100个空缺。群体制图员为180,200个岗位、增长1%、年均14,400个空缺；职业范围不同。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -23555,13 +23560,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认任务：写明项目类型与图纸清单与交付节点与所依据的制图标准。 → 熟悉依据：核对建筑规范与地方法规与场地要求及图幅与比例与图层规则。 → 收集数据：取得概念与草图与计算与规格与测量数据，必要时赴现场补测。 → 绘制图纸：绘制基础与建筑与结构的比例图与详图并确定表达方法。 → 专业配合：汇总结构与水暖电条件并解决图形冲突。 → 规范与校核：逐条核查防火与疏散与净高与无障碍等条目并留痕。 → 交付与交底：复制并交付图纸与文档包并解释图纸与调整。 → 修订与归档：按校审与修改通知修订并保留版本。"
+              "确认任务 → 汇集输入 → 绘制图纸 → 配合校核 → 交付交底 → 修订归档。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -23570,12 +23574,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧制图工作应遵循工程建设标准：《房屋建筑制图统一标准》GB/T 50001-2017 由住房和城乡建设部以公告第1695号批准发布（2017-09-27 发布，2018-05-01 实施，替代 GB/T 50001-2010），规定图纸幅面规格与图纸编排顺序、标题栏、图线、字体、比例、符号、定位轴线、常用建筑材料图例、图样画法（投影法与剖面图与断面图与轴测图与透视图）、尺寸标注以及计算机辅助制图文件与图层与制图规则与协同设计；配套标准包括《建筑制图标准》GB/T 50104-2010、《建筑结构制图标准》GB/T 50105-2010、《总图制图标准》GB/T 50103-2010 与《建筑给水排水制图标准》GB/T 50106-2010 等。按《中华人民共和国职业分类大典（2022 年版）》，对应中类为工程技术人员下的建筑工程技术人员（2-02-18，含建筑和市政设计工程技术人员、土木建筑工程技术人员、道路与桥隧工程技术人员等细类），制图员通常为该中类下相关职业的工种；精确细类与工种编码未在本页核实。本页不构成执业或资格考试意见。"
+              "中国官方目录列GB/T 50001-2017《房屋建筑制图统一标准》2018-05-01实施；深圳2021通知要求其适用项目符合该标准。建筑、结构、道路与管线还须分别核对适用专业标准；本次未逐条核实所有标准条款，题面仅使用编辑给定的几何条件。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "cn-ai"
           ],
           "type": "prose"
         },
@@ -23584,7 +23589,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "图纸与图层与文件命名、计算与核对记录、专业配合与修改通知、材料清单与工程量数据应按机构与技术档案要求如实填写并妥善保存，使图纸与成果可复核、可追溯；不得伪造或篡改图纸与计算与校审记录，不得冒用注册建筑师或注册工程师的名义签字盖章，也不得在未取得授权的情况下外发图纸与客户与项目资料。"
+              "记录冲突与版本，确认后出图。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.6",
@@ -23675,14 +23680,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "建筑土木制图员（美方对应 O*NET 17-3011.00）为建筑物编制建筑与结构特征的详细图纸，或为土木工程项目如公路与桥梁与公共工程编制图纸及地形起伏图，并运用建筑材料与工程实践与数学知识完成图纸。工作包括用计算机辅助制图系统或手工工具绘制比例图与详图、分析建筑规范与地方法规与场地要求、协调结构与电气与机械设计、赴现场采集测量数据、绘制地形与地层剖面图、填写材料清单并在监督下编制成本估算与合同与技术报告。中国大陆侧，绘制房屋建筑与结构施工图应遵循《房屋建筑制图统一标准》GB/T 50001-2017 等工程建设标准，对应《中华人民共和国职业分类大典（2022 年版）》中类为建筑工程技术人员（2-02-18），设计文件的法律效力与签章责任由具备相应资格的注册人员承担。美国工资与就业为 O*NET 17-3011.00 页面展示的 BLS 数据（2025 年 5 月年薪中位数 66,150 美元，2024 年约 110,500 人，2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺），不是中国大陆统计。本页不构成执业或资格考试建议。"
+              "建筑土木制图员按设计与测量输入绘制建筑、结构或土木图纸，核对专业条件、尺寸标高、材料及版本。美国O*NET 17-3011与中国制图员目录3-01-02-07不是已证明的一对一映射；中国单位资质与注册名义另按法规处理。2025年美国104,100个岗位、2025—2035增长5%、年均9,100个空缺，不外推中国。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "cn-occupation",
+            "cn-law",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23691,13 +23697,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "计算机辅助设计（CAD）与建筑信息模型（BIM）软件、制图与图层与文件命名模板、工程量与材料表工具、地形与断面与管线数据处理工具、协同与版本管理与图纸校审工具可用于制图表达、专业配合、校核与出图；部分方向还使用无人机与扫描设备获取地形与现状数据。图纸的技术决策与规范适用取舍与签章仍由具备相应资格的建筑师或工程师负责，工具输出不能替代设计判断与执业责任。"
+              "CAD、BIM、地形与断面工具用于绘图、整理数据、配合专业和输出图纸；部分方向使用无人机获取地形。工具不能自行决定设计依据、替代校审或取得注册签章权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.12",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -23706,13 +23712,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "承接任务 → 熟悉依据 → 收集数据 → 绘制图纸 → 专业配合 → 规范与校核 → 交付与交底 → 修订与归档。"
+              "确认任务与依据 → 汇集草图与测量数据 → 绘制比例图与详图 → 协调专业并校核 → 交付图纸与交底 → 修订版本并归档。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -23721,13 +23726,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "以图纸是否按制图标准与图幅与比例绘制、尺寸与标高与材料图例是否逐项核对、专业条件是否闭合、修改与版本是否留痕、是否经具备资格的人员校审签章衡量，不以出图数量或渲染效果或单次交图速度衡量。"
+              "编辑检查点：尺寸与标高能回溯输入，图纸满足所用制图标准，专业冲突有确认记录，修改后核对关联图纸，交付版本与校审状态一致。签章权限另按法定规定核对。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -23751,13 +23756,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按受托范围与机构流程划分责任，入职前应核对所在机构业务范围与项目类型、本人是独立完成图纸还是在建筑师或工程师指导下完成、是否需要本人签章（一般由具备资格的注册人员签字盖章）、图纸校审与修改流程与版本管理规则、赴现场采集测量与配合施工的安全与保险安排，以及图纸与客户信息与项目资料的保密与档案保存要求。"
+              "入职前核对单位业务资质与项目类型、本人绘图与校核角色、注册签章责任人、版本修改与交付流程、现场安排、资料授权及保密要求。机构内部授权不能替代法定注册资格。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.16",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -23766,13 +23771,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "图纸表达与制图质量由制图员与所在设计或工程单位承担；设计的技术方案与签章由具备相应资格的注册建筑师或注册工程师承担；施工组织与现场安全由施工单位负责；质量与进度监督由监理单位负责；工程量清单与计价由造价人员承担；控制测量与测绘成果由测绘单位与测绘人员承担；室内与景观分别由室内设计师与景观建筑师承担；规划许可与施工图审查由主管部门与审查机构负责。"
+              "按实际分工区分责任：制图人员核对图面与输入；专业设计人员确认方案、计算与专业条件；单位对设计质量负责；法定注册签章按专业规定执行。施工、监理、测绘、计价、审查各有相应职责，不能由一个制图岗位概括代替。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -23781,13 +23786,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：制图员岗位多要求建筑或土木或机械等相关专业的中等职业学校教育、高等职业教育（专科）或本科学历，并按机构要求掌握制图标准与 CAD 与 BIM 等软件；部分机构对学历与专业有明确要求，是否要求测绘或施工图审查等专项经历因机构与项目而异，本页未取得该职业统一的全国准入资格规定。美国侧 O*NET 17-3011.00 显示该职业需中等准备（Job Zone Three，SVP 6.0 至 7.0 以下），通常需职业学校培训或相关在职经验或副学士学位，受访者回答中 42% 认为需学士学位；BLS 职业展望手册《制图员》显示典型入职学历为副学士学位、无需相关工作经验、无在职培训。本页不提供分州执照细则与具体招聘条件。"
+              "证据不足：中国全国制图岗招聘样本与学历分布未取得。美国：BLS 17-3011典型入职学历为副学士，相关工作经验与典型在职培训栏为None，这是统计分类而非不需岗位学习。O*NET为Job Zone Three，42%受访者认为新聘人员需学士学位，二者问题与方法不同。中国：按具体招聘条件核对专业、学历、CAD/BIM和识图训练；本页未取得全国制图岗招聘样本或统一准入条文。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "census",
+            "msresearch",
+            "cn-occupation"
           ],
           "type": "prose"
         },
@@ -23801,8 +23808,8 @@
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -23885,12 +23892,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "图纸的法定效力与签章责任由具备资格的注册人员承担，制图员须核对本人是否被允许代签或代为出具图纸。"
+              "中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.25",
           "source_refs": [
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -23899,13 +23907,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "资格与权限：是否要求相关专业学历与制图软件能力、是否要求掌握特定制图标准与专业软件（CAD 与 BIM 与专业计算工具）、图纸校审与签章由谁承担、能否以本人名义出具图纸或说明、所在单位是否具备相应资质承接该项目、涉及消防与结构等专项内容是否需专项审查、是否要求持续参加制图标准与软件培训。"
+              "资格与权限：核对实际学历与软件要求、本人绘图和校核角色、谁承担注册签字盖章，禁止冒名；专业设计与签章资格须另按相应规定满足。"
             ]
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -24022,8 +24030,8 @@
           },
           "id": "architectural-and-civil-drafters.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         }
@@ -24103,16 +24111,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "比较依据为 O*NET 17-3011.00 与 BLS 与《中华人民共和国职业分类大典（2022 年版）》建筑工程技术人员中类与《房屋建筑制图统一标准》GB/T 50001-2017 等制图标准；相邻职业只作边界说明，不表示资格可以平移。"
+              "相邻职业按O*NET 17-3011的制图任务和各岗位工作对象作编辑比较，不表示资格可平移。中国制图员目录3-01-02-07与美国17-3011的一对一对应尚未证明；制图标准目录只证明标准的名称与生效日期。"
             ]
           },
           "id": "architectural-and-civil-drafters.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cn-occupation",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -24531,22 +24537,22 @@
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/drafters.htm"
               },
               {
-                "entity": "BLS 就业预测表（按详细职业）",
+                "entity": "BLS 2025—2035详细职业预测",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 17-3011.00 详细资料（工作情境与任务）",
+                "entity": "O*NET 2024行业构成",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/17-3011.00"
+                "url": "https://www.onetonline.org/link/industry/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 行业分布",
+                "entity": "O*NET Job Zone与学历调查",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "O*NET 17-3011.00 职业摘要（任务清单）",
@@ -24567,10 +24573,10 @@
                 "url": "https://www.onetonline.org/link/localwages/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 页面展示的 BLS 就业与前景",
+                "entity": "BLS当前17-3011预测",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/17-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 17-3011.00 职业摘要（职业属性）",
@@ -24579,10 +24585,10 @@
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 培训与教育信息（Job Zone 3）",
+                "entity": "O*NET Job Zone与学历调查",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "O*NET 17-3011.00 详细资料（任务与工作活动）",
@@ -24591,10 +24597,10 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "entity": "BLS 就业预测表（按详细职业，经 O*NET 展示）",
+                "entity": "O*NET技能与知识",
                 "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "O*NET 17-3011.00 详细资料（工作情境）",
@@ -24603,16 +24609,16 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 职业摘要（任务描述）",
+                "entity": "BLS当前17-3011预测",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/17-3011.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 17-3011.00 培训与教育信息（学历构成）",
+                "entity": "O*NET监督下作业任务",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "O*NET 17-3011.00 详细资料（工作活动与技能）",
@@ -24768,15 +24774,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对制图员而言，AI 改变的是具体任务而不是整个职业：受影响较明显的是图纸与模型的标注与整理、重复出图与格式转换、规范与标准条文检索、图纸比对与差异清单、材料与工程量初算与文本初稿整理；难以被替代的是对设计意图与构造做法的理解、专业之间的矛盾判读与画法取舍、现场测量与现状核实、图纸校审与依据确认、以及需要具备资格的注册人员承担的设计责任与签章。美国 BLS 对 2024—2034 年的预测为平均增长 3% 至 4%（经 O*NET 17-3011.00 展示），属官方就业预测而不是替代率推断；本页不提供替代年份。"
+              "AI可辅助哪些任务须在具体工具与图纸上验证：标注整理、格式转换、图纸比对、清单初算和文本初稿是本页建议试验的环节。BLS指出CAD/BIM提高效率并可能减少制图需求，同时预计建筑土木制图员2025—2035增长5%；增长预测不能解释为AI替代率或个人就业保证。设计依据、专业冲突、现场数据、校审与注册签章仍须由负责人员确认。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -24818,8 +24823,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24833,8 +24837,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24843,12 +24846,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册《制图员》（组合口径）"
+              "BLS《制图员》：群体数据与17-3011职业明细"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24857,12 +24860,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于岗位规模与前景（含机械与电气与电子制图等全部制图员，资料期 2025—2035，与本职业专属口径分别标注）"
+              "工资与预测表须分别读取：群体68,090美元、增长1%；本职业66,150美元、104,100→109,500个岗位、增长5%。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24871,12 +24875,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 工作情境（受访比例）"
+              "BLS 2025—2035职业预测与人员特征表"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24885,12 +24889,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于工作情境比例（沟通与决策与精确性与错误后果与日程与协作）"
+              "17-3011本职业就业、增长、年均空缺及典型入职准备，不是工作情境调查。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24899,12 +24903,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 行业分布"
+              "O*NET 17-3011.00 行业分布（2024年）"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24913,12 +24917,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于行业分布占比（专业、科学与技术服务 75%、建筑 11%、其他含制造 14%）"
+              "2024年专业科学技术服务业占75%、建筑业占11%；这是就业构成，不是工资或AI采用率。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -24927,12 +24931,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 培训与教育信息（Job Zone 3）"
+              "O*NET 17-3011.00 Job Zone与学历调查"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24941,12 +24946,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于准备路径与学历构成（通常需职业学校培训或相关在职经验或副学士学位；42% 受访者认为需学士学位）"
+              "Job Zone Three与42%受访者认为新聘人员需学士学位；不是中国准入要求。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -24955,7 +24961,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（按详细职业，经 O*NET 展示）"
+              "O*NET较早就业预测（2024—2034年）"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.31",
@@ -24969,12 +24975,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于就业规模与预测口径（2024 年 110,500 人、2024—2034 年平均 3% 至 4%、年均约 10,000 个空缺）"
+              "110,500人、增长3%—4%、年均10,000个空缺是旧资料期；当前主指标采用BLS新明细。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24998,13 +25005,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "重复标注与尺寸与轴网与门窗表批量整理、图纸比对与差异清单、格式转换与批量出图、规范与标准条文检索、材料与工程量初算、文本与说明初稿整理多为效率提升。"
+              "编辑试验方向：批量整理图层、标注与版本差异，保留输入与输出并逐项复核；本页未提供本职业实测效率增幅。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25028,13 +25034,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "地形的读取与断面数据的整理与土方与管线数据的初算可由工具辅助，规范与标准条文检索与合规清单初排的效率提升明显。"
+              "编辑试验方向：辅助整理断面与管线数据、检索条文与生成核查表；必须核对数据来源、规范版本和适用条件，未提供速度排名。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25163,7 +25168,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25177,7 +25182,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25191,7 +25196,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25205,7 +25210,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25219,7 +25224,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25233,7 +25238,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25247,7 +25252,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25261,7 +25266,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25270,12 +25275,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "职业范围大于本职业（含机械与电气与电子制图），资料期与本职业展示口径不同，不得与本职业专属数字混用。"
+              "群体数字包含其他制图职业；资料期虽同为2025—2035，职业范围不同，须与17-3011职业明细区分。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25284,12 +25289,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（按详细职业，经 O*NET 17-3011.00 展示）"
+              "BLS当前就业预测：17-3011明细"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25303,7 +25308,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25312,12 +25317,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2024 年在岗约 110,500 人、2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺且多数来自替代需求。"
+              "2025年104,100个岗位，2035年109,500个；净增5,400个，明细增长5.2%（OOH取整5%），年均9,100个职业空缺。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25326,7 +25331,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "属官方就业预测，不是替代率推断；空缺数不等于净新增岗位，也不代表个人就业保证。"
+              "美国准备分区与受访学历回答，不是法定门槛、AI采用率或中国招聘学历分布；各类资料方法不同。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.57",
@@ -25345,7 +25350,8 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -25359,7 +25365,8 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -25373,7 +25380,8 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -25397,13 +25405,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "第二层问「有没有被采用」：机构是否已在制图与协同流程中实际使用，是否有可查的使用证据与规则。"
+              "机构采用须看具体证据：深圳2021年施工图抽查通知要求先AI审查，再人工审查、复核。这是当地当时流程，不能推定全国当前采用率或节省工时。完整官方通知在来源清单列出。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-ai"
           ],
           "type": "prose"
         },
@@ -25417,8 +25424,7 @@
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25427,13 +25433,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会整体被取代。受影响的是图纸标注与整理、图纸比对、格式转换、条文检索与初算与文本初稿等可标准化任务；设计意图理解、专业配合判断、现场核实与图纸校审与依据确认仍由人负责，设计责任与签章由具备资格的注册人员承担。"
+              "证据不足：未取得建筑土木制图员整体被AI取代的比例或因果研究。BLS只预测职业就业变化；不能保证整个职业不会被替代，也不能给出消失年份。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25442,13 +25448,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 任务清单与工作活动；BLS 职业展望手册《制图员》"
+              "O*NET任务用于划分试验环节；BLS讨论CAD/BIM与就业趋势，没有给出本职业AI替代率。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "bls"
           ],
           "type": "prose"
         },
@@ -25457,13 +25463,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不必。入行门槛是相关专业教育或职业培训加上制图标准与 CAD 与 BIM 能力；脚本或参数化建模在部分方向有加分，但图纸依据核对与专业配合与构造画法仍是核心。"
+              "本页不设通用编程门槛。O*NET列有编程知识但重要性较低；先核对具体岗位的CAD/BIM、数据处理与自动化要求，是否写脚本取决于职责。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25472,13 +25477,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 培训与教育信息；BLS 职业展望手册《制图员》"
+              "O*NET详细资料的知识、技能及软件信息；编程项不是统一录用条件。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25516,13 +25520,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方预测未给出消失判断：O*NET 17-3011.00 展示的 BLS 口径为 2024—2034 年平均增长 3% 至 4%；BLS 职业展望手册《制图员》组合口径为 2025—2035 年增长 1%（低于平均）并有年均约 14,400 个空缺，缺口主要来自替代需求。"
+              "BLS预测本职业2025—2035从104,100增至109,500个岗位，OOH取整增长5%；这是美国全国预测，不等于所有地区或机构都会扩招，也不能外推中国。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25531,13 +25534,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 17-3011.00 展示）；BLS 职业展望手册《制图员》"
+              "BLS 17-3011职业预测明细；群体制图员增长1%须另行阅读。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25546,13 +25548,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。图纸的法律效力与签章责任由具备资格的注册建筑师或注册工程师承担；工具输出不能替代校审与签章，制图员也不得冒用他人名义出具图纸。"
+              "不能由工具替代人的职责。制图人员须核对输入与图纸，单位按流程校审；中国注册签章按法定专业规定执行，未注册者不得冒名。这里的O*NET链接仅支持监督下作业，完整中国法规见路径与来源清单。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -25561,12 +25563,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 任务清单（在监督下代表建筑师或工程师驻施工现场）；本页执业边界说明"
+              "O*NET支持监督下作业任务，不能作为中国法定签章依据；中国依据为《建设工程勘察设计管理条例》第8—10条。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -26272,13 +26275,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "区分工具能力、机构采用与官方就业结果三层证据；本页不把自动化能力等同于岗位被替代，也不提供替代年份，并区分本职业专属口径与职业展望手册的组合口径。"
+              "工具能力、机构采用和就业结果分别核对。本页AI辅助环节为编辑分析；深圳2021流程只作局部采用实例；BLS本职业与群体预测分开列示，均不等于AI因果结论。"
             ]
           },
           "id": "architectural-and-civil-drafters.ai-impact.ai-impact-table.122",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-ai",
+            "ep"
           ],
           "type": "prose"
         }
@@ -26300,7 +26304,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26314,7 +26318,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26328,7 +26332,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26342,7 +26346,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26356,7 +26360,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26365,12 +26369,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业中层及以上管理人员年平均工资（2025 年）；岗位类别口径，只作管理与技术岗位宽口径参照。"
+              "2025年规模以上企业管理人员年平均工资，包含该岗位类别全部职业，不能当作技术人员或制图员工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26384,7 +26388,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26393,12 +26397,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业办事人员和有关人员年平均工资（2025 年）；与图纸与技术资料事务性岗位口径较近，但不等于本职业工资。"
+              "2025年规模以上企业办事人员和有关人员年平均工资；未验证其与制图员的统计对应，不作为职业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26412,7 +26416,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26421,12 +26425,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑业（城镇非私营单位）年平均工资（2025 年）；制图员常受雇于建筑施工与安装企业，该门类只作宽口径参照，不含本单位内部分岗位差异。"
+              "2025年城镇非私营单位建筑业全岗位年平均工资；是行业参照，不是制图员工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26440,7 +26444,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26449,12 +26453,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "科学研究和技术服务业（城镇非私营单位）年平均工资（2025 年）；工程技术与设计服务企业多统计在该门类，该平均工资包含全部岗位与专业设计人员，不等于制图岗工资。"
+              "2025年城镇非私营单位科学研究和技术服务业全岗位年平均工资；不能单独识别工程设计或制图岗位。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26468,7 +26472,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26477,12 +26481,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "教育（城镇非私营单位）年平均工资（2025 年）；部分制图岗位位于院校与培训与科研机构，该门类只作宽口径参照。"
+              "2025年城镇非私营单位教育全岗位年平均工资；不把所有科研机构归入教育。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26496,7 +26500,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26505,12 +26509,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "公共管理、社会保障和社会组织（城镇非私营单位）年平均工资（2025 年）；部分制图与规划与建设管理辅助岗位位于机关与事业单位，该门类只作宽口径参照。"
+              "2025年城镇非私营单位公共管理、社会保障和社会组织全岗位年平均工资；未识别制图岗占比。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26519,13 +26523,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务而不是工资因果：图纸标注与整理、图纸比对、条文检索、工程量初算与文本初稿等环节的效率变化最快，但本页未取得针对本职业的工资因果研究，也未把自动化能力等同于工资下降。"
+              "证据不足：未取得AI对建筑土木制图员工资的因果研究或任务效率排名；本页不据工具能力推算涨薪或降薪。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26539,7 +26543,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26578,13 +26582,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑与土木与市政等专业的中职或高职培养通常包含制图与 CAD 实训与测量实习，可满足制图岗的基础要求；美国侧 O*NET 17-3011.00 亦显示 Job Zone Three（通常需职业学校培训或相关在职经验或副学士学位）。"
+              "编辑核对建议：查院校是否提供识图、制图、CAD与测量实训，再比对目标岗位的实际条件；本页未验证全国岗位学历分布。美国Job Zone信息仅适用于美国。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet",
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -26623,13 +26626,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑学与土木工程与工程管理等相关专业本科培养覆盖面更宽，便于向专业设计与技术管理方向延伸；美国侧受访者回答中 42% 认为需学士学位。学历本身不等于图纸质量与专业配合能力。"
+              "核对具体本科课程与作品要求，不能据学历推定晋升。美国O*NET的42%为受访者对新聘人员学历要求回答，不是中国岗位比例。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -26668,13 +26670,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "总图与场地与管线与 BIM 协同方向更依赖制图标准与软件与协同规则的实际熟练程度，专项训练与项目经验往往比学历层次更能决定上手速度。"
+              "编辑核对建议：用总图、断面或BIM协同作品证明实际能力；本页没有比较学历与专项训练对上手速度的因果证据。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -26713,13 +26714,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "部分岗位要求由具备资格的注册建筑师或注册工程师承担设计与签章，制图岗通常不要求注册资格；具体学历与专业与经历要求应以用人单位公开招聘信息为准。"
+              "中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -26728,13 +26728,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "建筑业（房屋建筑与市政与基础设施的设计与施工）"
+              "建筑业（行业工资参照）"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26743,13 +26742,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "设计院与施工总承包与专业化施工企业需要建筑与结构施工图与深化图与竣工图，2025 年城镇非私营单位建筑业年平均工资为 92,036 元/年（国家统计局）。"
+              "NBS 2025年城镇非私营单位建筑业年平均工资92,036元，覆盖行业全部岗位；不能把所有设计院归入建筑业或据此估计制图岗薪资。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26773,13 +26771,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工程技术与设计服务与工程咨询企业承接建筑与土木与市政设计与制图业务，2025 年城镇非私营单位该门类年平均工资为 182,064 元/年（含全部岗位与专业设计人员）。"
+              "NBS 2025年城镇非私营单位科学研究和技术服务业年平均工资182,064元，包含行业全部岗位，不单列工程制图工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26788,13 +26785,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "租赁和商务服务业（部分工程与建筑咨询与制图外包）"
+              "租赁和商务服务业（行业工资参照）"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.41",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26803,13 +26799,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "部分工程与建筑咨询与制图外包企业统计在该门类，2025 年城镇非私营单位该门类年平均工资为 110,162 元/年；外包计价方式与项目周期使实际收入与平均工资差异较明显。"
+              "NBS 2025年该门类城镇非私营单位平均工资110,162元；本页未核实制图外包企业的行业归类或岗位数量，不能拿它作外包计价。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.42",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26823,7 +26818,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26832,13 +26827,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类口径：按《中华人民共和国职业分类大典（2022 年版）》，本职业对应第二大类专业技术人员下中类 2-02-18 建筑工程技术人员（含建筑和市政设计工程技术人员、土木建筑工程技术人员、道路与桥隧工程技术人员等细类），制图员通常为该中类下相关职业的工种；精确细类与工种编码未在本页核实。"
+              "中国口径须按实际任务识别。江苏官方国家职业标准目录列有制图员3-01-02-07（2002年标准）；工程设计技术人员是另一类。不能把所有制图员笼统归入2-02-18；本页未核实2022大典细分工种与美方职业的一对一映射。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet",
-            "onet"
+            "cn-occupation"
           ],
           "type": "prose"
         },
@@ -26852,8 +26846,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26867,8 +26860,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26882,7 +26874,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26896,8 +26888,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26920,12 +26911,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得职业分类大典该职业的全国或分城市工资价位；本页不使用第三方估算，也不以行业门类或岗位类别数字代替。"
+              "证据不足：本次NBS公告未单列建筑土木制图员全国或分城市工资分布；职业分类目录不提供工资。行业与岗位类别平均数不代填职业中位数。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cn-occupation"
           ],
           "type": "prose"
         },
@@ -26939,7 +26931,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.51",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26953,7 +26945,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26967,7 +26959,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.53",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26976,12 +26968,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "规模以上企业中层及以上管理人员 210,016 元/年；办事人员和有关人员 94,936 元/年；前者含管理与技术负责岗位，后者含事务性岗位，均不等于制图岗工资。"
+              "管理人员210,016元、办事人员和有关人员94,936元，均为2025年规模以上企业各岗位类别全职业平均工资，不作为制图员上下限。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26990,13 +26982,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业分类对应：国家统计局按行业门类与岗位类别发布，不单列本职业，因此本页不以行业数字冒充职业中位数；制图员岗位多以任务与图纸量与项目周期计酬，也常按机构薪酬制度按月发放。"
+              "工资统计按行业、单位类型和岗位类别发布，职业名称不能直接换成行业分类。核对书面薪酬中的基本工资、奖金、加班、项目付款与税费条件。"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27010,7 +27001,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27019,12 +27010,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "平均（3% 至 4%）"
+              "5%（2025—2035年）"
             ]
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27038,7 +27029,7 @@
           },
           "id": "architectural-and-civil-drafters.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27055,14 +27046,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00；BLS 职业展望手册《制图员》（组合口径）｜https://www.bls.gov/ooh/architecture-and-engineering/drafters.htm；O*NET 17-3011.00 职业摘要（就业与预测）｜https://www.onetonline.org/link/summary/17-3011.00"
+              "O*NET全国工资分位｜https://www.onetonline.org/link/localwages/17-3011.00；BLS职业预测17-3011｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS《制图员》群体与职业明细｜https://www.bls.gov/ooh/architecture-and-engineering/drafters.htm"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27076,7 +27067,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27085,12 +27076,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位：约 10% 的从业者年工资低于此值；属于分布低端，多对应经验较少或制图范围较窄的岗位。；O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
+              "第10分位：分布低端位置，不等于新人或起薪；2025年5月美国全国17-3011工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27104,7 +27095,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27113,12 +27104,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位：约四分之一从业者低于此值；可作为入门后的早期水平参照。；O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
+              "第25分位：约四分之一工资低于此位置，不是入门后年资档；2025年5月美国全国17-3011工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27132,7 +27123,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27141,12 +27132,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数：分布的中点，不是起薪，也不代表某一专业方向的水平；本页美国工资分位口径与本职业页展示一致。；O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
+              "中位数：工资分布中点，不是起薪或某专业方向工资；2025年5月美国全国17-3011工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27160,7 +27151,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27169,13 +27160,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位：约四分之三从业者低于此值；多对应经验较丰富或承担专业深化与协同管理职责的岗位。；O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
+              "第75分位：约四分之三工资低于此位置，不能由分位推定资历；2025年5月美国全国17-3011工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "operations",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27189,7 +27179,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27198,12 +27188,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位：分布高端，多对应资深技术岗或专业负责岗；不代表同一岗位的普遍水平。；O*NET 17-3011.00 页面展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
+              "第90分位：分布高端位置，不能推定管理职务或专业负责权限；2025年5月美国全国17-3011工资分位｜https://www.onetonline.org/link/localwages/17-3011.00"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27212,12 +27202,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "110,500 人（2024 年）"
+              "104,100个岗位（2025年）"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27226,13 +27216,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业规模为美国该职业口径，2024 年在岗约 110,500 人；不能外推为中国大陆。；O*NET 17-3011.00 职业摘要（就业规模）｜https://www.onetonline.org/link/summary/17-3011.00"
+              "2025年美国17-3011职业就业规模；BLS职业预测明细｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27241,12 +27230,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "平均（3% 至 4%）（2024—2034 年）"
+              "5%（2025—2035年）"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27255,12 +27244,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长率：O*NET 17-3011.00 展示的 BLS 预测为平均增长 3% 至 4%；BLS 职业展望手册《制图员》组合口径另有 2025—2035 年增长 1%，两者职业范围与资料期不同。；O*NET 17-3011.00 页面展示的 BLS 就业预测｜https://www.onetonline.org/link/summary/17-3011.00"
+              "净增5,400个岗位，明细增长5.2%而OOH取整5%，群体制图员为1%；BLS 17-3011职业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27269,12 +27258,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均约10,000个（2024—2034 年）"
+              "年均约9,100个（2025—2035年）"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27283,13 +27272,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均职位空缺约 10,000 个，多数来自替代需求；空缺数不等于净新增岗位，也不代表个人就业保证。；O*NET 17-3011.00 页面展示的 BLS 就业预测｜https://www.onetonline.org/link/summary/17-3011.00"
+              "年均职业空缺含新增与转岗离岗补充需求，不能等同净增或实时招聘数；BLS 17-3011职业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27298,13 +27286,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页美国数字为 O*NET 17-3011.00 页面展示的 BLS 统计（2025 年 5 月工资分位、2024 年就业、2024—2034 年预测），BLS 职业展望手册《制图员》为组合口径并单独标注；不提供分州与分都市区工资，也不提供本职业独立的分行业工资中位数（BLS 分行业数据以 XLSX 表格发布）。"
+              "本页用2025年5月17-3011工资与BLS 2025—2035同职业预测。群体制图员数据另标；OEWS分行业下载实际403，未取得本职业四行业中位数。全国分位不能推断起薪、年资或个人收入。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27313,13 +27302,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位数 66,150 美元/年、时薪中位数 31.80 美元；第 10 分位 46,260 美元、第 90 分位 99,710 美元；2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺。中位数不是起薪，美国数字不能换算为人民币预期。"
+              "美国本职业工资中位数66,150美元/年、31.80美元/小时，P10为46,260、P90为99,710美元/年；2025年104,100个岗位，2025—2035增长5%、年均9,100个空缺。中位数不是起薪，不能换算为中国预期工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27328,12 +27317,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "全职制图岗通常按固定月薪或年薪计酬（73% 工作周为 40 小时、26% 超过 40 小时），外包与项目制岗位按图量与工期计酬，收入波动更大；本页不提供分方向的计酬细则。"
+              "O*NET受访者73%每周40小时、26%超过40小时；这不是计酬方式统计。入职前核对按时、按年还是按项目支付，以及加班与奖金条款。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
-            "onet"
+            "hr"
           ],
           "type": "prose"
         },
@@ -27356,12 +27345,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "所绘专业方向（建筑与结构或土木与场地或机电配合）与承担职责（制图或深化或协同管理）不同，价值与计价方式不同；高价值方向通常需要更多专业判断与配合经验。"
+              "编辑比较项：所绘专业、制图或深化或协同职责、交付范围与修改次数；这些须在合同与岗位说明中核对，不据此推断固定工资排序。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -27384,12 +27373,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "99% 每天在环境可控室内工作、37% 超过一半时间久坐、59% 持续用手操作工具，精确或准确的重要性很高（32% 极其重要、62% 非常重要）且错误后果较重（27% 非常严重、34% 严重）；强度与责任高的工作通常对应更高层级与收入。"
+              "美国工作情境：99%每天环境可控室内、37%久坐超过一半时间，精确性32%极重要、62%很重要。工作强度与错误后果并不能直接证明工资更高。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -27413,12 +27402,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "平均（3% 至 4%）"
+              "5%（2025—2035年）"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27441,12 +27430,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可读取的该职业分行业工资中位数（未使用第三方估算）。"
+              "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27455,12 +27444,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工程技术与设计服务与建筑与工程咨询企业是主要雇主，制图与深化与协同管理岗位集中在此；BLS 未在可读取页面按行业公布本职业工资中位数。"
+              "2024年O*NET行业构成显示专业科学技术服务业75%；这是旧资料期就业占比，不是2025行业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "ilo",
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27483,12 +27473,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可读取的该职业分行业工资中位数（未使用第三方估算）。"
+              "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27497,12 +27487,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "金融机构的不动产与设施建设与改造项目需要图纸与技术资料整理支持，岗位规模小；BLS 未在可读取页面按行业公布本职业工资中位数。"
+              "金融保险仅保留原行业查询维度，本次未验证本职业行业岗位数量或工资；不宣称岗位规模小。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27525,12 +27515,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可读取的该职业分行业工资中位数（未使用第三方估算）。"
+              "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27539,12 +27529,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公共工程与市政与规划部门需要制图与图纸管理支持，岗位规模小；BLS 未在可读取页面按行业公布本职业工资中位数。"
+              "本次未取得政府行业本职业工资或规模明细；不由公共工程任务推定雇主占比。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27567,12 +27557,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得可读取的该职业分行业工资中位数（未使用第三方估算）。"
+              "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27581,12 +27571,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "院校与职业培训机构的实训与技术辅助岗位规模小；BLS 未在可读取页面按行业公布本职业工资中位数。"
+              "本次未取得教育行业本职业工资或规模明细；不把实训教学岗位自动当作制图岗位。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "oews-industry"
           ],
           "type": "prose"
         },
@@ -27595,13 +27585,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。中位数是分布的中点，低分位多对应经验较少或制图范围较窄的岗位；入门工资需按具体岗位与地区核对。"
+              "不是。中位数是工资分布中点；分位不提供年资、新人或专业方向分组，起薪须另核实际岗位。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27610,12 +27599,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能直接换算。时薪与年薪分别统计且不含加班与非工资报酬，全职与兼职与项目制的工作周差异较大，应用时应分别核对。"
+              "分别读取官方年薪与时薪，不能把兼职时薪直接乘全年工时当作实际收入。工资估计与就业预测是不同统计：OEWS不含自雇，预测就业含自雇，不能混用口径。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27624,12 +27614,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "来自 O*NET 17-3011.00 页面展示的 BLS 职业就业与工资统计（2025 年 5 月工资数据）与 BLS 就业预测（2024—2034 年）；BLS 职业展望手册《制图员》为组合口径，本页单独标注。"
+              "工资来自O*NET展示的BLS 2025年5月17-3011分位，岗位与预测直接取BLS 2025—2035明细。同页群体制图员数据须按职业范围区别。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27658,7 +27649,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27667,13 +27658,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最低 10% 位置：多对应经验较少或制图范围较窄的岗位，不代表起薪，也不含非工资报酬。"
+              "第10分位是工资分布位置，不能判断该组经验、职位或是否新人。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27687,7 +27677,7 @@
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27696,13 +27686,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10% 位置：多对应资深技术岗或专业负责岗，通常需要更完整的专业配合与协同与校审经验。"
+              "第90分位是工资高端位置，不能据此认定资深、管理岗位或签章权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         }
@@ -27816,10 +27805,10 @@
                 "url": "https://www.onetonline.org/link/industry/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 培训与教育信息",
+                "entity": "O*NET Job Zone与学历调查",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "BLS 职业展望手册《制图员》（组合口径）",
@@ -27917,13 +27906,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "尽责性与情绪稳定性对工作表现的预测力有限且方向不一：图纸任务更看重是否按标准核对、是否如实记录、是否能长期稳定出图，这些应以实际图纸与校核记录判断。"
+              "本页把大五特质用于自我观察：能否保持核对习惯、接受返工、按依据解释图纸，以实际作品与修改记录验证；这里没有本职业人格分数与绩效研究结论。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -27932,12 +27921,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格相关研究只说明特质与工作行为的弱相关，不构成选拔或绩效预测依据。"
+              "编辑行为建议，参考制图任务与精确性情境；不是人格效度研究。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.7",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -27991,12 +27981,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持「某种类型最适合制图岗位」；适任与否由制图标准与软件应用、图纸与校核记录、专业配合表现判定。"
+              "本页不用MBTI类型决定制图适任。可用它整理偏好，再以图纸、校核记录及协作任务验证。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28019,12 +28010,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "编辑使用边界；O*NET没有验证本页MBTI与岗位表现的对应关系。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.11",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28091,12 +28083,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格缺乏用于职业适配判断的效度证据；本页不据此推断适任，也不提供类型与岗位的对应表。"
+              "本页不用九型人格推断录用或适任，也不提供类型与岗位的对应表；反思结果须与真实制图任务对照。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28105,12 +28098,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "非标准化测评，无职业适配预测效度。"
+              "编辑使用边界，不是九型人格效度研究。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.15",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28148,13 +28142,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "制图岗位不设 IQ 门槛，也没有证据支持高 IQ 更容易胜任；图纸能力可通过训练与项目经验获得，数学与空间与几何能力可通过识图与制图与测量练习提升。"
+              "本页不设IQ分数门槛。制图需识图、空间理解与数学运用，可通过尺寸换算、比例绘图和标高计算检验实际表现；不能由一次测评分数推定胜任。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28163,12 +28157,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力测验的预测效度限于学业与部分培训表现，不适用岗位适配判断。"
+              "O*NET支持数学和相关能力需求，不支持本页智力测评的岗位预测结论。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.19",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28206,13 +28201,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "制图岗位不要求高情商，但需要能接受反复修改与跨专业反馈、能清楚说明图纸依据、能在交底时把问题讲明白；这些是可训练的行为，不是固定特质。"
+              "本页不设情商分数门槛。先观察能否复述修改意见、记录冲突、向负责人员说明图纸依据。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28221,12 +28216,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力测评的构念与岗位产出关系证据有限，本页不作评分。"
+              "编辑协作建议，参考任务与沟通情境；不是情绪测评效度研究。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.23",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28265,12 +28261,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "以上适配判断均为编辑建议，依据 O*NET 17-3011.00 的兴趣剖面与工作情境与任务，不构成录用或技能测试或健康与心理诊断；制图标准与软件与图纸校核要求应以机构规定与工程建设标准为准，设计文件的法律效力与签章责任由具备资格的注册人员承担，本页不构成执业或资格考试意见。"
+              "本页适配内容为编辑行为建议；O*NET仅支持职业兴趣、任务与工作情境，不证明人格测评分数与绩效关系。图纸质量与实际分工须以作品、校核及反馈核对。中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -28324,13 +28322,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "职责为项目组织与资源协调与合同管理，不承担具体制图与专业设计；与本职业的交付物与责任边界不同。"
+              "建筑与工程经理统筹技术、人员与资源，具体参与设计或审查程度因职位而异；不能一概说不承担专业设计。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "purchasing-managers"
           ],
           "type": "prose"
         },
@@ -28582,13 +28579,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "适合。制图工作以电脑前独立完成图纸为主，与他人接触多为配合与交底（50% 大部分时间与他人接触、20% 约一半时间），内向与否不构成障碍；关键是能否清楚说明图纸依据与接受修改意见。"
+              "不能由内向或外向判断适合。可通过独立绘图、邮件复述条件、冲突登记与交底练习，核对图纸准确性、反馈处理及专业配合表现。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28597,13 +28594,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "能做好。外向有助于专业配合与交底与外部沟通（85% 每天使用电子邮件、58% 每天电话交谈），但制图质量仍取决于标准应用与逐项核对，外向不替代图纸准确性。"
+              "不能由外向或内向推定胜任。沟通情境可通过邮件复述条件、冲突登记与交底练习验证；先看图纸准确性和修改记录。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy",
+            "operations"
           ],
           "type": "prose"
         },
@@ -28612,12 +28609,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有所谓最适合的 MBTI 类型。MBTI 缺乏用于职业筛选的预测效度证据；本页不提供类型与岗位的对应关系，适任判断以图纸与校核记录与专业配合表现为准。"
+              "本页不指定最适合的MBTI类型，也不用类型替代图纸、校核记录与专业配合表现。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.49",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28641,12 +28638,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能。人格特质分数与制图质量的相关性有限且方向不一，也没有岗位门槛性证据；更可靠的做法是用图纸与校核记录与错误率与沟通表现来判断。"
+              "不能。本页不按人格分数评分，也不由分数推断制图质量；编辑建议用图纸、校核记录、错误修正和沟通表现评估实际工作行为。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28655,13 +28652,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以做。制图岗位不设数学门槛，常用到的是尺寸与比例与标高换算与简单几何与工程量计算，均可在识图与制图与测量练习中掌握；若转向结构计算与工程量与成本方向，则需要更多数学与专业训练。"
+              "本页不以MBTI类型筛选制图人员；先看给定任务的实际图纸与核对记录。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.52",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28670,13 +28667,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不需要高情商，但需要能接受反复修改与跨专业反馈、能清楚说明图纸依据、能在交底时把问题讲明白；这些是可训练的工作行为。"
+              "本页不设情商分数门槛。实际练习应观察能否接受修改和跨专业反馈、说明图纸依据，并把交底中的问题与责任记录清楚。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.53",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28685,12 +28681,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不能用。九型人格缺乏职业适配预测效度；本页不提供类型与岗位的对应关系，也不据此判断适任。"
+              "本页不以九型人格决定录用；只用它提出自我观察问题，再验证具体行为。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28699,12 +28696,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "把偏好与真实产出对照：做一次「按虚构草图绘制一套小楼平立剖并列出所依据的标准与图幅与比例、做一次规范符合性核查表、写一份专业配合说明」即可看出自己更适应纯出图、专业配合还是 BIM 协同与深化；每次交付都保留修改与核对记录。"
+              "完成本页虚构绘图练习后比较自己对出图、专业配合与数据整理的体验；一次练习只能提供初步线索，不能确定职业适配。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "operations",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -28799,12 +28797,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于行业分布（专业、科学与技术服务 75%、建筑 11%、其他含制造 14%）。"
+              "用于2024年行业就业构成：专业科学技术服务75%、建筑11%；其余行业不在本页进一步分配。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.62",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -28827,12 +28825,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于岗位规模与前景与学历要求的组合口径参照（含各类制图员）。"
+              "BLS同时列群体概览与17-3011职业明细，典型学历按实际职业行读取。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.64",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -28841,12 +28839,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于工资分位（2025 年 5 月）与就业规模口径。"
+              "用于2025年5月全国工资分位，不提供就业规模。"
             ]
           },
           "id": "architectural-and-civil-drafters.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28930,14 +28928,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "以上风险清单为编辑归纳，不能替代《房屋建筑制图统一标准》GB/T 50001-2017 等工程建设标准与机构制图与校审与档案制度，也不能替代主管部门关于注册执业与图纸签章与施工图审查的规定与机构的保密与信息管理制度；伪造与篡改图纸与计算与校审记录、冒用注册人员名义签字盖章、泄露客户与项目资料、未按标准出图造成损失，应分别由机构程序与主管部门依法处理。本页不构成法律或执业意见。"
+              "本页风险场景为编辑归纳，技术要求以适用工程标准和单位流程为准，注册权限以法规为准；不提供事故率或统一处罚结论。中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.risk.career-risk-cards.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cn-law",
+            "operations"
           ],
           "type": "prose"
         },
@@ -28962,15 +28959,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "风险范围依据 O*NET 17-3011.00 的工作情境比例（99% 每天在环境可控室内、37% 超过一半时间久坐、59% 持续用手操作工具、32% 认为精确或准确极其重要与 62% 认为非常重要、27% 认为错误后果非常严重与 34% 严重、33% 每周至少一次冲突情形）与任务清单（绘制比例图与详图、填写材料清单、在监督下驻场与编制技术报告），以及《房屋建筑制图统一标准》GB/T 50001-2017 等制图标准对图幅与图线与符号与尺寸标注与计算机辅助制图文件与图层与协同设计的统一要求；场景与后果为编辑归纳，不写入未经来源支持的事故率或处罚金额。"
+              "O*NET提供精确性、错误后果、久坐、沟通及现场作业情境，用于识别风险环节；中国条例提供单位资质、注册名义和设计修改边界。以下场景与处置建议由编辑整理，不是事故统计。"
             ]
           },
           "id": "architectural-and-civil-drafters.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "privacy",
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -29482,6 +29478,7 @@
               {
                 "id": "education",
                 "values": [
+                  "教育与训练",
                   "相关专业的中等职业教育或高职专科或本科培养，含制图与识图与 CAD 实训与测量实习。",
                   "美国侧 O*NET 17-3011.00 显示 Job Zone Three（SVP 6.0 至 7.0 以下），42% 受访者认为需学士学位。",
                   "BLS 职业展望手册《制图员》显示典型入职学历为副学士学位。"
@@ -29490,6 +29487,7 @@
               {
                 "id": "clearance",
                 "values": [
+                  "单位与现场准备",
                   "按机构要求完成制图标准与软件与协同平台的使用培训。",
                   "涉及客户与项目资料的岗位需签署保密承诺并遵守信息管理规定。",
                   "涉及施工现场的岗位需接受安全培训与现场安全交底。"
@@ -29498,6 +29496,7 @@
               {
                 "id": "onet-traits",
                 "values": [
+                  "职业兴趣与情境",
                   "兴趣代码 RCA（现实型、常规型、艺术型）。",
                   "99% 每天在环境可控室内、37% 超过一半时间久坐、59% 持续用手操作工具。",
                   "32% 认为精确或准确极其重要、62% 认为非常重要；27% 认为错误后果非常严重、34% 严重。"
@@ -29506,6 +29505,7 @@
               {
                 "id": "tools",
                 "values": [
+                  "工具与数据",
                   "计算机辅助设计（CAD）与建筑信息模型（BIM）与出图与打印设置工具。",
                   "图层与命名与版本与协同管理工具。",
                   "测量与地形与断面与管线数据处理工具；部分岗位使用无人机与扫描设备。"
@@ -29529,33 +29529,35 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构项目「云浦路社区服务中心」：用地条件含净空限制与既有管线穿越，任务书含面积与功能要求，草图片段含轴线与基础尺寸，另有业主来函要求压缩无障碍做法与减少材料规格以降低造价。",
-                  "虚构场地资料：含等高线与道路与现状管线示意，用于绘制总图与横断面。",
-                  "虚构专业条件单：结构与水暖电各提出条件与冲突点各两条。",
-                  "虚构材料表模板：含材料名称与规格与单位与数量栏。"
+                  "虚构题面与输入",
+                  "练习输入（全部虚构，单位m）：云浦路社区资料室，单层矩形建筑外边界12×8；西南角为建筑局部(0,0)，北为+y。轴线1/2/3在x=0/6/12，A/B/C在y=0/4/8；轴线在本题兼作外墙外边界定位线，墙厚0.20向内画，非真实结构轴网。室内为一个开敞房间，无内墙；地面±0.000=绝对100.20，平屋面顶+3.600=103.80，屋面示意厚0.20向下画，无女儿墙。南门中心x=6，洞口宽1.20高2.10；南墙窗口中心x=3/9，各宽1.50高1.20、窗台+0.90；其余三面无门窗。由此可直接画平面、南立面和沿x=6向东看的剖面。",
+                  "场地输入（绝对坐标m）：40×30矩形地块，西南(0,0)，建筑局部原点位于场地(10,10)。道路沿南界y=0；现状地面在x=0处100.00、x=40处100.60，沿x线性上升且y不变。既有管道沿y=14从x=0到40，外径0.40、中心绝对高程99.70；画沿y=14的东西断面，标出建筑投影x=10—22和管道。题设高度限值为屋面相对室内地面不超过4.00，本方案3.60仅满足此题设，不能据此判断法规合规。",
+                  "六项专业待确认条件：S1结构给的门洞中心x=5.5与建筑x=6冲突；S2结构屋面顶+3.50与建筑+3.60冲突。P1给排水拟接管沿y=12而现状管为y=14；P2拟接管中心99.90与现状99.70不同。E1电气箱画在南门洞x=5.4—6.6内；E2电缆拟敷y=14与既有管线同走廊且无埋深。分别记录专业、冲突、拟处理、责任人角色、确认状态，不自行定结构或机电参数。",
+                  "材料与变更输入：M1地面示意面层按净室内长11.60×宽7.60计量，厚0.02；M2屋面示意保护层按12×8计量，厚0.03；M3南门1樘、M4南窗2樘，洞口尺寸按上文。仅算几何净量，不加损耗、不计结构与造价。业主虚构来函要求删掉“无障碍待核”条目并减薄屋面层：保留待核条目，减薄暂不执行，登记请求并交负责设计人员确认；无障碍、消防、结构与材料性能没有完整输入，不能出具合规结论。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "按制图标准绘制该建筑平面与立面与剖面各一张，标注轴线与尺寸与标高与主要材料图例，并写明所依据的标准与图幅与比例。",
-                  "绘制一张场地总图与一张横断面图，标注高程与管线位置并说明数据来源与处理方式。",
-                  "填写材料清单并与图面核对，登记专业冲突与待确认项并写一份交底说明。"
+                  "绘图交付",
+                  "A3横向图幅（本题编辑约定）五张：平面、南立面、x=6剖面按1:100；场地总图1:200；y=14横断面横竖均1:200。每张注明图号、方向、比例、版本V0、单位与虚构练习用途；轴线、尺寸、标高、门窗和管线逐项核对。",
+                  "同时交材料净量表、六项冲突表和≤500字交底；法规核查表分“题设已核”和“专业与法规待核”，不编造条文或注册签章。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先核对设计输入与制图标准与图幅与比例，再确定图层与命名与出图设置。",
-                  "按轴线与尺寸与标高顺序逐项绘制并复核，标注与图例与标准图集逐条对照。",
-                  "对专业冲突逐项登记并注明拟处理方式与待确认项，对业主来函中的压缩要求按标准如实说明并升级。"
+                  "参考答案与核对顺序",
+                  "平面外边界12×8，在1:100纸面120×80mm；内墙面净尺寸11.60×7.60，面积88.16㎡。南门洞x=5.40—6.60，两个窗洞x=2.25—3.75及8.25—9.75。立面窗下+0.90、上+2.10，门上+2.10，屋面顶+3.60。x=6剖面内净高度至示意屋面底3.40；绝对地面100.20、屋面103.80。",
+                  "总图建筑四角(10,10)/(22,10)/(22,18)/(10,18)，地块纸面200×150mm。断面现状地面x=10为100.15、x=22为100.33；管顶99.90、管底99.50，管线与建筑投影重叠，须由负责人员判断保护或迁改，不自行出具基础方案。材料：M1净面88.16㎡、体积1.7632m³；M2面积96㎡、体积2.88m³；M3门1樘、M4窗2樘。",
+                  "六项冲突均保持待确认：S1复核门位、S2确认屋面标高、P1确认接管路线、P2确认接管标高、E1移出门洞方案需专业确认、E2补电缆标高与净距条件。负责角色分别结构、给排水、电气；建筑人员汇总。没有确认输入前不能在V1中把建议当最终设计。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "本练习为编辑建议，不构成技能测试或录用测试或资格考试。",
-                  "不得在未取得授权的情况下使用他人图纸与图库与标准图集，也不得代签或冒用注册人员名义。"
+                  "练习权限与约束",
+                  "本题不构成真实设计、施工、资格或录用测试。按本人实际角色记录，不冒用注册签章；只使用自绘几何和授权素材。"
                 ]
               }
             ]
@@ -29564,7 +29566,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的建筑土木制图员任务任务（虚构材料）",
+          "title": "入行练习：一次完整的建筑土木制图任务（虚构材料）",
           "type": "cards"
         },
         {
@@ -29575,31 +29577,30 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "含图幅与比例与图层与命名规则与所依据标准的核对矩阵。",
-                  "含尺寸与标高与轴网与图例与材料做法逐项核对栏。",
-                  "含专业条件与冲突点与待确认项与责任分工的登记栏。"
+                  "核对矩阵",
+                  "图号/用途/比例/单位/V0版本；几何、标高、门窗、管线与M1—M4量表核对；法规待核独立标记。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "关键尺寸与标高与材料与数量实行双人核对或抽样复核并留痕。",
-                  "修改后重新核对受影响位置并回填修改通知。",
-                  "交付前确认使用经校审的最新版本并检查图层与文件命名。"
+                  "复核与版本",
+                  "独自练习可隔日按原始输入复核，不能伪称双人校审。变化前后逐项记录，V1仅纳入已确认的条件。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页说明：图纸清单与所依据标准与图幅与比例、数据来源与处理方式、已完成与未完成项。",
-                  "一页交底说明：专业条件与冲突处理与待确认项与责任人。"
+                  "交付清单及参考交底",
+                  "目录含五张图、M1—M4净量表、S1/S2/P1/P2/E1/E2冲突表、核查表和版本记录。参考交底：本套V0仅用于虚构制图练习，采用12×8m边界、地面100.20及屋面103.80。现状管线穿建筑投影，接管路线与标高尚冲突；门位、屋面标高、电箱及电缆条件待结构与机电确认。暂不删无障碍待核项，不按业主来函减薄材料。确认后发V1、同步相关图与材料表，真实施工须另走正式设计与审查。",
+                  "核查表：几何面积、门窗坐标、相对/绝对标高、比例和图号可按题设核实；无障碍、消防、结构安全、屋面性能及管线安全均列待专业核查，不能写符合。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "软件与工具清单及各自适用范围与限制。",
-                  "数据与图库与标准图集的授权与来源说明。"
+                  "工具与素材说明",
+                  "写出使用的绘图软件、单位和输出设置；全部图形依本题自绘，外部素材须登记授权。"
                 ]
               }
             ]
@@ -29670,50 +29671,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "官方与院校信息核对：查阅 O*NET 17-3011.00 与 BLS 职业展望手册《制图员》与院校培养方案，写下本职业的任务范围与准备路径。",
-                  "产出：一页信息来源清单与理解要点。"
+                  "查阅职业与准备路径",
+                  "区分O*NET调查与BLS典型学历，记录美国17-3011及中国岗位条件核对项。",
+                  "产出：一页来源与准备清单。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "职业与法规边界：核对《中华人民共和国职业分类大典（2022 年版）》建筑工程技术人员中类与《房屋建筑制图统一标准》GB/T 50001-2017 的适用范围，写下制图员与注册人员的责任界限。",
-                  "产出：一页责任边界笔记。"
+                  "核对责任与题面",
+                  "读中国条例第8—10/25—28条，记录本人图签与注册名义边界；检查本题单位与坐标。",
+                  "产出：边界笔记及输入清单。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "制图标准练习：按虚构草图绘制一张平面图，设置图幅与比例与图层与尺寸标注。",
-                  "产出：一张平面图与一页画法依据说明。"
+                  "画平面与南立面",
+                  "按12×8、门窗洞口与标高输入出图；复核纸面尺寸。",
+                  "产出：两张1:100图。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "规范符合性核查练习：用虚构图纸做一张核查表，登记条目与结论与依据条款。",
-                  "产出：一张规范符合性核查表。"
+                  "画剖面与场地总图",
+                  "按x=6剖面及建筑场地坐标出图，核对绝对与相对标高。",
+                  "产出：剖面1:100、总图1:200。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "构造与节点推敲练习：为虚构外墙与楼板交界处绘制节点详图并标注材料与做法。",
-                  "产出：一张节点详图与做法说明。"
+                  "画横断面并计量",
+                  "沿y=14画地面与既有管线，标出建筑投影；计算M1—M4。",
+                  "产出：断面1:200与材料净量表。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "专业配合与交底写作：整理结构与水暖电条件与冲突点并写一份交底说明与待确认项清单。",
-                  "产出：一份交底说明与冲突登记表。"
+                  "登记冲突及交底",
+                  "六项专业冲突逐项写待确认角色，法规项分已核题设与待专业核查，完成≤500字交底。",
+                  "产出：冲突表、核查表及交底。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘与决策：整理七天产出的图纸与记录，核对是否愿意长期按标准绘图并逐项核对。",
-                  "产出：一页复盘与下一步学习计划。"
+                  "复核五图并复盘",
+                  "隔日按原始输入核对五张图、量表和版本，不把建议擅自改为批准方案。",
+                  "产出：完整作品目录与学习计划。"
                 ]
               }
             ]
@@ -29772,28 +29780,28 @@
               [
                 "相关专业的中等职业教育或高职专科",
                 "准备从事制图与绘图岗位的学生",
-                "建立识图与制图与测量与软件基础，是多数制图岗的最常见起点",
+                "建立识图、制图、测量和软件基础；核对目标岗位是否接受该学历",
                 "机构实际要求",
                 "按院校培养方案与用人单位公开招聘条件",
-                "3 年或 3 至 4 年学制，含实训与实习",
+                "按具体院校公布学制、费用和实训安排",
                 "学历不等于图纸质量与专业配合能力，需以实际图纸与校核记录证明"
               ],
               [
                 "本科（建筑学或土木工程或工程管理等相关专业）",
                 "希望向专业设计或技术管理方向延伸的人",
-                "覆盖面更宽，便于向专业设计与技术负责岗发展",
+                "核对专业课程与目标职责，不能由学历推定晋升",
                 "机构实际要求（部分方向更偏好）",
                 "按院校培养方案与用人单位公开招聘条件",
-                "4 至 5 年学制",
+                "按具体院校培养方案",
                 "学历不等于设计判断能力，涉及专业设计与签章须另行取得相应注册资格"
               ],
               [
                 "制图标准与软件专项训练（CAD 与 BIM 与协同）",
                 "在职提升或转岗人员",
-                "直接决定上手速度与出图规范程度",
+                "练习CAD/BIM出图与复核，作品说明实际掌握程度",
                 "岗位常见要求",
                 "按机构岗位要求与项目安排",
-                "数周至数月，按培训与项目累计",
+                "按课程计划与个人学习投入，不给通用速成年限",
                 "工具能力不等于设计判断与规范适用能力，也不替代图纸校审"
               ],
               [
@@ -29821,17 +29829,15 @@
                 "法定注册执业资格",
                 "按相应条例与主管部门规定参加考试并注册",
                 "按考试与注册与继续教育周期",
-                "未取得资格不得签署设计文件；制图员通常不要求该资格，也不得冒用他人名义签章"
+                "未注册不得冒用注册执业人员名义；本人真实制图/校核图签与法定注册签章不同"
               ]
             ]
           },
           "id": "architectural-and-civil-drafters.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "cn-law",
+            "operations",
+            "census"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29841,17 +29847,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "制图员的从业门槛以相关专业教育或职业培训与制图标准与软件能力为主，本页未取得该职业统一的全国准入资格规定；具体学历与专业与经历要求应以用人单位公开招聘信息为准。",
-              "设计文件的法律效力与签章责任由具备相应资格的注册建筑师或注册工程师承担；制图员在指导与监督下完成图纸，不得以本人名义出具设计文件，也不得代签或冒用他人名义签章。",
-              "图纸与客户与项目资料应按机构保密与信息管理规定处理；图集与图库与标准与第三方素材应按授权范围使用。",
-              "本页不构成执业或资格考试或录用意见。"
+              "证据不足：中国全国制图岗招聘样本与学历分布未取得。中国岗位实际要求须按招聘信息核对，本页未取得全国制图岗学历分布。",
+              "中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。",
+              "工程文件按适用标准与单位流程制作；图纸资料、图库和标准素材的授权须核对。",
+              "本页为学习与岗位核对资料；具体项目按适用法域与专业规定执行。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cn-law",
+            "cn-occupation",
+            "operations"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29888,16 +29894,16 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 页面展示的 BLS 工资与就业",
+                "entity": "O*NET 2025年5月工资分位",
                 "id": "link-2",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/17-3011.00"
               },
               {
-                "entity": "O*NET 17-3011.00 培训与教育信息（Job Zone 3）",
+                "entity": "O*NET Job Zone与学历调查",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -29921,13 +29927,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页路径为编辑整理，说明常见的准备与成长顺序，不代表任一机构或院校的承诺；制图标准与软件与专业配合要求应以机构规定与工程建设标准为准，设计文件签章与执业责任由具备资格的注册人员承担。"
+              "以下能力阶段为编辑成长建议，不是固定年限或自动晋升承诺；每阶段先确认岗位分工和单位授权，注册名义与签章仍按法定规定。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30052,13 +30058,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：制图员岗位多要求建筑或土木或市政等相关专业的中等职业教育或高职专科或本科学历，并按机构要求掌握制图标准与 CAD 与 BIM 等软件；本页未取得该职业统一的全国准入资格规定，具体学历与专业与经历要求以用人单位公开招聘信息为准。美国侧 O*NET 17-3011.00 显示 Job Zone Three（SVP 6.0 至 7.0 以下，42% 受访者认为需学士学位），BLS 职业展望手册《制图员》显示典型入职学历为副学士学位且无需相关工作经验与在职培训。设计文件的法律效力与签章责任由具备资格的注册人员承担。"
+              "美国：BLS 17-3011典型入职学历为副学士，相关工作经验与典型在职培训栏为None，这是统计分类而非不需岗位学习。O*NET为Job Zone Three，42%受访者认为新聘人员需学士学位，二者问题与方法不同。中国：按具体招聘条件核对专业、学历、CAD/BIM和识图训练；本页未取得全国制图岗招聘样本或统一准入条文。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "census",
+            "msresearch",
+            "cn-occupation"
           ],
           "type": "prose"
         },
@@ -30067,14 +30075,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "学历与培训不等于图纸质量与专业配合能力，也不等于执业能力；在中国大陆，签署设计文件须由具备资格的注册建筑师或注册工程师承担，制图员不得以本人名义出具设计文件。"
+              "学历与软件训练不能授予注册权限。中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30083,14 +30089,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页同时采用美国与中国大陆两种口径并列出各自依据（O*NET 17-3011.00 与 BLS 职业展望手册与国家统计局与《房屋建筑制图统一标准》GB/T 50001-2017 与《中华人民共和国职业分类大典（2022 年版）》建筑工程技术人员中类），两法域要求不能互相套用。"
+              "本页美国职业为O*NET 17-3011.00，中国制图员标准目录另列3-01-02-07；二者非已证明的一对一映射。工资统计、资格与标准各按其法域读取。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.22",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "cn-occupation",
+            "nbs",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30099,13 +30106,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "两侧进入路径：美国以相关专业副学士或职业学校训练并掌握 CAD 与规范为主，再在项目中积累；中国大陆以相关专业中职或高职或本科学历并掌握制图标准与软件为主，配合机构内部培训与项目实践，逐步向专业深化或 BIM 协同或技术负责方向发展。本页引用判断不代表在招岗位。"
+              "编辑准备路线：选择识图、制图、测量及CAD/BIM课程，再用本页五图练习检验数据核对与专业配合；核对具体招聘条件。向专业设计或注册执业发展须另满足相应学历、实践与注册规定。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30128,12 +30135,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于工资分位与就业规模口径（2025 年 5 月与 2024 年）。"
+              "仅用于2025年5月工资分位，不提供就业规模。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -30142,12 +30149,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于准备路径与学历构成（Job Zone Three；42% 受访者认为需学士学位）。"
+              "详细资料的Job Zone Three与42%新聘学历回答，不是培训目录页的结论。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "census",
+            "msresearch"
           ],
           "type": "prose"
         },
@@ -30161,7 +30169,7 @@
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30170,13 +30178,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构要求掌握制图标准与 CAD 基础，完成岗位培训与图纸校核训练；无强制注册资格要求。"
+              "核对目标岗位的识图、CAD/BIM、校核与培训要求。是否涉及注册执业名义按实际职责和法规核对，不能由软件证书推定。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30389,13 +30397,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构业务范围与岗位条件按用人单位公开招聘信息核对；本方向不要求注册资格，但需持续完成标准与软件培训。"
+              "机构业务范围与岗位条件按实际招聘信息核对；涉及专业设计、测绘或注册名义的职责须另查适用资格与权限。软件和标准培训不自动赋予执业权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.43",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30462,13 +30470,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构要求掌握测量与地形与断面数据处理与总图与管线制图软件；无强制注册资格要求。"
+              "按实际岗位要求掌握相关测量、制图或BIM工具；是否涉及测绘、专业设计或注册名义须另查该职责的适用规定，不作全体岗位无资格要求的保证。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30681,13 +30689,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构业务范围与项目类型核对岗位条件；不要求注册资格，但需持续完成测量与数据处理与软件培训。"
+              "机构业务范围与岗位条件按实际招聘信息核对；涉及专业设计、测绘或注册名义的职责须另查适用资格与权限。软件和标准培训不自动赋予执业权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30754,13 +30762,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构要求掌握 BIM 建模与命名与图层与协同规则与出图设置；无强制注册资格要求。"
+              "按实际岗位要求掌握相关测量、制图或BIM工具；是否涉及测绘、专业设计或注册名义须另查该职责的适用规定，不作全体岗位无资格要求的保证。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -30973,13 +30981,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "按机构业务范围与项目类型核对岗位条件；不要求注册资格，但需持续完成建模与协同与数据管理培训。"
+              "核对BIM协同岗位是否涉及专业设计与注册名义，按实际职责、单位范围和适用资格规定处理；软件与协同训练本身不授予签章权。"
             ]
           },
           "id": "architectural-and-civil-drafters.path.career-path-block.83",
           "source_refs": [
-            "onet",
-            "onet"
+            "operations",
+            "cn-law"
           ],
           "type": "prose"
         },
@@ -31085,10 +31093,10 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 17-3011.00 培训与教育信息（Job Zone 3）",
+                "entity": "O*NET Job Zone与学历调查",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
                 "entity": "施工经理",
@@ -31154,14 +31162,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧该职业为独立口径（O*NET 17-3011.00 页面展示的 BLS 数据）：2025 年 5 月年薪中位数 66,150 美元（时薪 31.80 美元），2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺；行业分布为专业、科学与技术服务 75%、建筑 11%、其他含制造 14%。BLS 职业展望手册《制图员》为组合口径（含机械与电气与电子制图等全部制图员），2025 年中位年薪 68,090 美元、2025 年约 180,200 个岗位、2025—2035 年增长 1%（低于平均）、净增约 1,100 个、年均约 14,400 个空缺，本页单独标注。中国大陆侧国家统计局不单列该职业工资，只提供行业门类与岗位类别宽口径参照（建筑业 92,036 元/年、科学研究和技术服务业 182,064 元/年等）；美国数字不能换算为人民币预期。"
+              "美国：2025年工资中位数66,150美元，2025年104,100个岗位，2025—2035增长5%、年均9,100个空缺。2024 O*NET行业分布75%专业科学技术服务、11%建筑，与新预测期分开。中国行业平均工资不等于制图工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "ilo",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31184,12 +31193,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034 年"
+              "2025—2035年"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31198,12 +31207,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国该职业独立口径的平均增长（3% 至 4%）与年均约 10,000 个空缺；空缺多数来自替代需求，不等于净新增岗位，也不代表个人就业保证。"
+              "美国17-3011从104,100增至109,500个岗位，净增5,400、增长5%（OOH取整），年均9,100个空缺。空缺含新增及转岗离岗补充需求，非实时招聘数量。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31254,12 +31263,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "平均增长 3% 至 4% 与年均约 10,000 个（2024—2034 年）"
+              "增长5%、年均9,100个空缺（2025—2035年）"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31282,12 +31291,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2025 年 5 月（工资）与 2024 年（就业）"
+              "2025年5月工资；2025年就业"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31296,12 +31306,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "工资分位与就业规模：中位数 66,150 美元/年与在岗约 110,500 人，反映本职业整体的分布与规模。"
+              "美国17-3011：工资中位数66,150美元，2025年104,100个岗位；工资调查与预测就业范围分别读取。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31310,12 +31321,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "分位数值不等于起薪；就业规模不含非工资报酬与兼职与项目制形态；不外推中国大陆。"
+              "分位不能推定新人或年资。OEWS工资不含自雇；预测就业含自雇，不把两类指标混成兼职或项目制收入。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31352,12 +31364,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年薪中位数 66,150 美元、第 10 分位 46,260 美元、第 90 分位 99,710 美元；2024 年在岗约 110,500 人"
+              "年薪中位数66,150美元、P10 46,260、P90 99,710；2025年104,100个岗位。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31394,12 +31407,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "职业工资可得性：国家统计局按行业门类与岗位类别发布平均工资，不单列本职业，故只给宽口径参照。"
+              "证据不足：本次NBS公告未单列本职业工资或就业预测；仅提供2025年行业与岗位类别工资背景。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31464,12 +31477,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于岗位规模与前景的组合口径参照（含各类制图员，资料期 2025—2035）。"
+              "BLS职业群概览及17-3011明细，职业范围分别读取。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -31478,12 +31491,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于工资分位与就业规模（2025 年 5 月与 2024 年）。"
+              "工资链接只支持2025年5月分位，不支持就业规模。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -31492,12 +31505,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于中国大陆行业门类与岗位类别宽口径工资参照。"
+              "2025年中国行业与岗位类别全职业平均工资。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31506,7 +31519,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于职业身份与任务范围与准备路径。"
+              "O*NET描述与准备路径，非中国职业准入规定。"
             ]
           },
           "id": "architectural-and-civil-drafters.market-signals.market-signal-card.33",
@@ -31905,7 +31918,7 @@
                 "question_key": "career.faq.architectural-and-civil-drafters.fit"
               },
               {
-                "answer": "受影响较明显的是图纸与模型的标注与整理、重复出图与格式转换、规范与标准条文检索、图纸比对与差异清单、材料与工程量初算与文本初稿整理；难以被替代的是对设计意图与构造做法的理解、专业矛盾的判读与画法取舍、现场测量与现状核实、图纸校审与依据确认，以及由具备资格的注册人员承担的设计责任与签章。本页不提供替代率或消失年份。",
+                "answer": "AI可辅助哪些任务须在具体工具与图纸上验证：标注整理、格式转换、图纸比对、清单初算和文本初稿是本页建议试验的环节。BLS指出CAD/BIM提高效率并可能减少制图需求，同时预计建筑土木制图员2025—2035增长5%；增长预测不能解释为AI替代率或个人就业保证。设计依据、专业冲突、现场数据、校审与注册签章仍须由负责人员确认。",
                 "id": "architectural-and-civil-drafters.faq.4",
                 "question": "AI 会改变建筑土木制图员的哪些任务？",
                 "question_key": "career.faq.architectural-and-civil-drafters.ai-impact"
@@ -31923,19 +31936,19 @@
                 "question_key": "career.faq.architectural-and-civil-drafters.china-pay"
               },
               {
-                "answer": "本页美国数字取自 O*NET 17-3011.00 页面展示的 BLS 统计（本职业独立口径）：2025 年 5 月年薪中位数 66,150 美元（时薪 31.80 美元），第 10 分位 46,260 美元、第 90 分位 99,710 美元；2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺。BLS 职业展望手册《制图员》为组合口径（含各类制图员），2025 年中位年薪 68,090 美元、2025—2035 年增长 1%、年均约 14,400 个空缺，本页单独标注。分行业工资中位数未取得可读取数值，未使用第三方估算。",
+                "answer": "美国本职业工资中位数66,150美元/年、31.80美元/小时，P10为46,260、P90为99,710美元/年；2025年104,100个岗位，2025—2035增长5%、年均9,100个空缺。中位数不是起薪，不能换算为中国预期工资。 分行业中位数本次未取得，群体制图员中位数68,090美元、增长1%、年均14,400个空缺另标。",
                 "id": "architectural-and-civil-drafters.faq.7",
                 "question": "美国的工资与就业数字可靠吗？",
                 "question_key": "career.faq.architectural-and-civil-drafters.us-pay"
               },
               {
-                "answer": "中国大陆侧多要求建筑或土木或市政等相关专业的中等职业教育或高职专科或本科学历，并按机构要求掌握制图标准与 CAD 与 BIM 等软件；本页未取得该职业统一的全国准入资格规定，具体学历与专业与经历要求以用人单位公开招聘信息为准。美国侧 O*NET 17-3011.00 为 Job Zone Three（SVP 6.0 至 7.0 以下，42% 受访者认为需学士学位），BLS 职业展望手册《制图员》显示典型入职学历为副学士学位且无需相关工作经验与在职培训。",
+                "answer": "美国：BLS 17-3011典型入职学历为副学士，相关工作经验与典型在职培训栏为None，这是统计分类而非不需岗位学习。O*NET为Job Zone Three，42%受访者认为新聘人员需学士学位，二者问题与方法不同。中国：按具体招聘条件核对专业、学历、CAD/BIM和识图训练；本页未取得全国制图岗招聘样本或统一准入条文。",
                 "id": "architectural-and-civil-drafters.faq.8",
                 "question": "入行需要什么学历与专业？",
                 "question_key": "career.faq.architectural-and-civil-drafters.education-path"
               },
               {
-                "answer": "制图员岗位通常不要求注册资格；在中国大陆，签署房屋建筑与结构设计文件须由具备资格的注册建筑师或注册工程师承担，图纸的法律效力与签章责任由具备相应资格的人员承担，制图员不得以本人名义出具设计文件或代签冒用他人名义。绘制房屋建筑与结构施工图应遵循《房屋建筑制图统一标准》GB/T 50001-2017 与《建筑制图标准》GB/T 50104-2010、《建筑结构制图标准》GB/T 50105-2010 等工程建设标准；若希望承担专业设计与签章，需另行满足相应注册资格的学历与实践年限要求。",
+                "answer": "中国大陆：单位按资质范围承揽勘察设计；未注册者不得冒用注册执业人员名义。制图、设计、校核图签按本人实际角色填写，法定注册签字盖章按相应专业规定执行；辅助绘图不等于取得注册权限。 具体图纸标准、招聘条件及注册考试条件按相应专业规定核对。",
                 "id": "architectural-and-civil-drafters.faq.9",
                 "question": "从事这个职业需要注册资格吗？",
                 "question_key": "career.faq.architectural-and-civil-drafters.credentials"
@@ -31951,12 +31964,10 @@
           "id": "architectural-and-civil-drafters.sources.faq.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "oews",
+            "nbs",
+            "cn-law"
           ],
           "type": "faq"
         },
@@ -31979,14 +31990,18 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源清单：O*NET 17-3011.00 职业摘要与详细资料与行业分布与工资分位与培训与教育信息与自定义职业档案；BLS 职业展望手册《制图员》（组合口径）与 BLS 就业预测表；国家统计局《2025 年城镇单位就业人员年平均工资情况》；《房屋建筑制图统一标准》GB/T 50001-2017（住房和城乡建设部公告第1695号）；《建筑信息模型技术员国家职业技能标准（2021版）》。"
+              "来源含O*NET本职业任务、情境、兴趣、学历及工资；BLS当前详细职业预测；NBS 2025工资；中国勘察设计管理条例；制图标准官方目录与江苏职业标准目录；深圳2021 AI审图通知。各来源支持范围在注册清单分别说明。"
             ]
           },
           "id": "architectural-and-civil-drafters.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ep",
+            "nbs",
+            "cn-law",
+            "cnclass",
+            "cn-occupation",
+            "cn-ai"
           ],
           "type": "prose"
         },
@@ -31995,12 +32010,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "核对日期：2026-09-15。美国工资为 2025 年 5 月数据期、就业为 2024 年、预测为 2024—2034 年；BLS 职业展望手册《制图员》为 2025 年与 2025—2035 年资料期；中国大陆工资为国家统计局 2025 年数据（2026-05-15 发布）；制图标准为 GB/T 50001-2017（2018-05-01 实施）。"
+              "核对2026-10-03。美国工资2025年5月、就业2025年、预测2025—2035；O*NET行业构成仍2024。中国工资2025年，标准目录记GB/T50001-2017于2018-05-01实施；深圳采用实例为2021，非当前全国采用统计。"
             ]
           },
           "id": "architectural-and-civil-drafters.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "ep",
+            "oews",
+            "ilo",
+            "nbs",
+            "cnclass",
+            "cn-ai"
           ],
           "type": "prose"
         },
@@ -32009,13 +32029,15 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "使用边界：美国数字为本职业独立口径（职业展望手册为组合口径并单独标注），不外推中国大陆；中国大陆只提供行业门类与岗位类别宽口径参照，不含个体工商户与自由职业者；本页不提供替代率或岗位消失年份，不提供分州与分城市工资；内容不构成法律或执业或资格考试意见。"
+              "证据不足：未取得本职业AI替代率与工资因果研究、中国精确工资或就业预测、美国四行业工资中位数；2022中国细分工种与美方一对一映射未核实。已有全国工资与就业预测按不同范围列示，不能据此推定个人收入或注册权限。"
             ]
           },
           "id": "architectural-and-civil-drafters.sources.source-card.4",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "oews",
+            "nbs",
+            "cn-law"
           ],
           "type": "prose"
         }
@@ -32090,7 +32112,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "O*NET-SOC 17-3011.00 职业摘要（描述与任务与兴趣代码与 Job Zone）",
                   "访问 2026-09-15"
@@ -32106,39 +32128,39 @@
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Drafters 职业群的工资与就业与前景与入职学历要求",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "parent_occupation_proxy",
                 "id": "bls",
-                "limitation": "为组合口径（含机械与电气与电子制图等全部制图员），职业范围大于本职业，资料期与本职业展示口径不同，不得混用。",
+                "limitation": "首页、行业工资及工作环境多为全部制图员；工资与就业表另有17-3011明细，必须按行区分。",
                 "market": "美国",
-                "name": "BLS 职业展望手册《制图员》（组合口径）",
+                "name": "BLS《制图员》职业群与17-3011明细",
                 "period": "2025 年与 2025—2035 年",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/drafters.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "就业预测表用途与口径说明",
-                  "访问 2026-09-15"
+                  "读取17-3011完整行及表头；就业104.1→109.5千、净增5.4千。",
+                  "核对2026-10-03；支持范围与局限分别标注。"
                 ],
-                "evidence_type": "contextual",
+                "evidence_type": "exact",
                 "id": "ep",
-                "limitation": "为全经济范围的就业预测表，本页只用其口径说明，不据此单独推断本职业。",
+                "limitation": "17-3011行就业以千计，增长5.2%、年均9.1千空缺；OOH增长取整5%。不等于AI因果或实时招聘。",
                 "market": "美国",
                 "name": "BLS 就业预测表（按详细职业）",
-                "period": "2024—2034 年",
+                "period": "2025年就业、2025—2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "contextual",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "年薪与工时薪分位（第 10 与第 25 与中位与第 75 与第 90 分位）",
                   "访问 2026-09-15"
@@ -32154,7 +32176,7 @@
                 "url": "https://www.onetonline.org/link/localwages/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "全国城镇非私营与私营单位平均工资；行业门类与岗位类别平均工资",
                   "访问 2026-09-15"
@@ -32170,23 +32192,23 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "公告正文与标准编号与实施日期",
-                  "访问 2026-09-15"
+                  "官方目录列GB/T50001-2017发布时间2017-09-27、实施2018-05-01。",
+                  "核对2026-10-03；支持范围与局限分别标注。"
                 ],
                 "evidence_type": "exact",
                 "id": "cnclass",
-                "limitation": "为工程建设国家标准，规定图纸幅面与图线与符号与尺寸标注与计算机辅助制图文件与图层与协同设计；不涉及工资与就业。",
+                "limitation": "目录仅支持标准名称、编号和日期，不能替代完整标准条款。",
                 "market": "中国大陆",
-                "name": "《房屋建筑制图统一标准》GB/T 50001-2017（住房和城乡建设部公告第1695号）",
+                "name": "玉溪住建：工程建设标准公布目录（GB/T50001-2017）",
                 "period": "2017-09-27 发布；2018-05-01 实施（替代 GB/T 50001-2010）",
                 "publisher": "中华人民共和国住房和城乡建设部",
                 "scope": "exact",
-                "url": "https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2018/art_17339_234638.html"
+                "url": "https://www.yuxi.gov.cn/yxszfxxgk/tzggzjj/20180530/907834.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "工作情境比例（精确性要求与错误后果与日程与久坐与冲突情形）",
                   "访问 2026-09-15"
@@ -32202,7 +32224,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "工作活动权重（使用计算机 90、起草并布置与规定技术设备与部件 86 等）",
                   "访问 2026-09-15"
@@ -32218,7 +32240,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "27 项任务与对应工作活动",
                   "访问 2026-09-15"
@@ -32234,7 +32256,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "工作周时长与日程规律性与室内比例",
                   "访问 2026-09-15"
@@ -32250,7 +32272,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "行业门类与岗位类别统计口径说明",
                   "访问 2026-09-15"
@@ -32266,7 +32288,7 @@
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "行业分布占比",
                   "访问 2026-09-15"
@@ -32289,7 +32311,7 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
-                "limitation": "为相邻技能路径（BIM 技术员）的职业技能标准，可作为能力参照，不能机械等同本职业或替代机构岗位要求。",
+                "limitation": "相邻BIM技能标准存在信息；本次未完整读取所有条款，不作为制图岗位必需证书或全国准入依据。",
                 "market": "中国大陆",
                 "name": "《建筑信息模型技术员国家职业技能标准（2021版）》",
                 "period": "2021 年版；访问 2026-09-15",
@@ -32298,7 +32320,7 @@
                 "url": "https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/qt/fzcwjxx/202112/W020211227599132248667.pdf"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "自定义职业档案字段入口",
                   "访问 2026-09-15"
@@ -32314,7 +32336,7 @@
                 "url": "https://www.onetonline.org/link/custom/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "记录与存档与文件管理相关要求",
                   "访问 2026-09-15"
@@ -32330,7 +32352,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "任务清单（27 项）",
                   "访问 2026-09-15"
@@ -32346,7 +32368,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "数据与记录要求相关条目",
                   "访问 2026-09-15"
@@ -32362,7 +32384,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "相关职业与职业族",
                   "访问 2026-09-15"
@@ -32378,7 +32400,7 @@
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "职业描述文本",
                   "访问 2026-09-15"
@@ -32394,7 +32416,7 @@
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "兴趣代码 RCA 与 Job Zone Three 与学历构成",
                   "访问 2026-09-15"
@@ -32410,7 +32432,7 @@
                 "url": "https://www.onetonline.org/link/summary/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "数据来源与资料期说明",
                   "访问 2026-09-15"
@@ -32426,7 +32448,7 @@
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Job Zone Three 与准备路径说明",
                   "访问 2026-09-15"
@@ -32439,10 +32461,10 @@
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "学历构成受访比例",
                   "访问 2026-09-15"
@@ -32455,10 +32477,10 @@
                 "period": "2026 年更新页面；访问 2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localtraining/17-3011.00"
+                "url": "https://www.onetonline.org/link/details/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "全国工资分位（年薪与工时薪）",
                   "访问 2026-09-15"
@@ -32474,7 +32496,7 @@
                 "url": "https://www.onetonline.org/link/localwages/17-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "作业强度与工作情境比例",
                   "访问 2026-09-15"
@@ -32488,6 +32510,66 @@
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/17-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "第8—10条资质与注册名义；第25—28条依据与设计文件修改。"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-law",
+                "limitation": "适用于条例规定勘察设计活动，注册名义与本人真实角色图签不同；具体专业签章还须按相应规定。",
+                "market": "中国大陆",
+                "name": "建设工程勘察设计管理条例",
+                "period": "2017修订公开文本",
+                "publisher": "国家市场监督管理总局（国务院条例公开文本）",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_7aebb685f7b94720bfdccf8ac71541c9.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "制图员3-01-02-07；建筑信息模型技术员2021标准。"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-occupation",
+                "limitation": "列制图员3-01-02-07/2002标准与BIM2021旧分类编码；不证明2022大典细分工种对美方一对一映射或强制证书。",
+                "market": "中国大陆",
+                "name": "江苏人社国家职业标准目录",
+                "period": "2022公布目录",
+                "publisher": "江苏省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://jshrss.jiangsu.gov.cn/art/2022/5/19/art_85534_10454317.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "适用房建范围；文件加密保密；住宅抽查先AI再人工审查复核。"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-ai",
+                "limitation": "当时当地试运行通知，不证明当前全国采用率、节省工时或本职业替代率。",
+                "market": "中国大陆·深圳",
+                "name": "深圳2021人工智能施工图监督抽查通知",
+                "period": "2021-01-14",
+                "publisher": "深圳市住房和建设局",
+                "scope": "contextual",
+                "url": "https://zjj.sz.gov.cn/gcjs/tzgg/content/post_8466042.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "访问2025职业档案及oesm25in4.zip，下载403，未取行业工资值。"
+                ],
+                "evidence_type": "contextual",
+                "id": "oews-industry",
+                "limitation": "本次职业档案未读到行业明细，行业ZIP实际HTTP403；不能声称XLSX不支持或官方不发布。",
+                "market": "美国",
+                "name": "BLS 2025 OEWS行业数据入口",
+                "period": "2025年5月",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/tables.htm"
               }
             ]
           },
@@ -32889,7 +32971,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与就业",
+            "类型": "官方工资分位",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -32911,7 +32993,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业调查数据",
+            "类型": "官方职业群与明细",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32933,7 +33015,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "工作情境调查",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32955,7 +33037,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "行业分布数据",
+            "类型": "2024行业分布",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32977,7 +33059,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "培训与教育信息",
+            "类型": "Job Zone与学历调查",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -32999,7 +33081,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "旧期就业预测",
             "适用范围": {
               "$item": "architectural-and-civil-drafters.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34398,7 +34480,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "专业配合与现场支持",
+                  "label": "专业配合",
                   "secondary_value": null,
                   "value": {
                     "$item": "architectural-and-civil-drafters.profile.career-quick-answers-block.6",
@@ -34718,7 +34800,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "未经校审或冒用他人名义出具图纸"
+            "title": "尺寸、标高与材料数量错误"
           },
           {
             "affected_roles": {
@@ -34734,8 +34816,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "employer"
+              "operations",
+              "cn-law"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34750,7 +34832,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "尺寸与标高与材料数据错误"
+            "title": "未经校审或冒名注册签章"
           },
           {
             "affected_roles": {
@@ -34767,7 +34849,7 @@
             },
             "evidence_refs": [
               "privacy",
-              "employer"
+              "operations"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34782,7 +34864,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "图纸与图层与文件版本失控"
+            "title": "客户与项目资料外泄"
           },
           {
             "affected_roles": {
@@ -34799,7 +34881,7 @@
             },
             "evidence_refs": [
               "facilities",
-              "bls"
+              "onet"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34830,8 +34912,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "operations",
+              "employer"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34846,7 +34928,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "客户与项目资料外泄"
+            "title": "图纸、图层与文件版本失控"
           },
           {
             "affected_roles": {
@@ -35824,7 +35906,7 @@
       },
       "hero": {
         "h1": "建筑土木制图员",
-        "quick_answer": "建筑土木制图员为建筑物编制建筑与结构特征的详细图纸，或为土木工程项目如公路与桥梁与公共工程编制图纸及地形起伏图。日常重点是按建筑师或工程师的概念与草图与工程计算绘制基础与建筑与结构的比例图与详图、用计算机辅助制图系统或手工工具完成图纸、分析建筑规范与地方法规与空间与场地要求对设计的影响、协调结构与电气与机械设计并确定平面图的呈现方法、向生产或施工团队解释图纸并按需调整、赴施工现场采集测量数据、绘制表示高程与地形等高线与地下地层的图表与剖面图、填写材料清单并在监督下编制成本估算与合同与技术报告；在中国大陆，绘制房屋建筑与结构施工图应遵循《房屋建筑制图统一标准》GB/T 50001-2017 等工程建设标准与机构制图与协同规则，设计文件的法律效力与签章责任由具备相应资格的注册人员承担。",
+        "quick_answer": "建筑土木制图员把设计草图、计算与测量数据转成建筑、结构或土木工程图纸，核对尺寸、标高和专业接口，并维护交付版本。辅助绘图与注册执业权限须分开。",
         "title": "建筑土木制图员"
       },
       "market_signal_card": {
@@ -36353,7 +36435,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 职业展望手册《制图员》",
+            "label": "美国工资、就业与准备路径",
             "secondary_value": null,
             "value": {
               "$item": "architectural-and-civil-drafters.profile.onet-structured-fields-block.2",
@@ -36375,7 +36457,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034，经 O*NET 展示）",
+            "label": "BLS 2025—2035职业预测（17-3011）",
             "secondary_value": null,
             "value": {
               "$item": "architectural-and-civil-drafters.profile.onet-structured-fields-block.4",
@@ -36451,7 +36533,7 @@
               "entry": "link-2",
               "field": "url"
             },
-            "cta_label": "查看我的大五人格特质",
+            "cta_label": "查看大五人格（英文）",
             "evidence_level": {
               "$item": "architectural-and-civil-drafters.fit.personality-fit-block.7",
               "block": "fit",
@@ -36488,7 +36570,7 @@
               "entry": "link-3",
               "field": "url"
             },
-            "cta_label": "了解我的 MBTI 偏好",
+            "cta_label": "查看MBTI偏好（中文）",
             "evidence_level": {
               "$item": "architectural-and-civil-drafters.fit.personality-fit-block.11",
               "block": "fit",
@@ -36525,7 +36607,7 @@
               "entry": "link-4",
               "field": "url"
             },
-            "cta_label": "探索我的九型人格模式",
+            "cta_label": "查看九型人格（中文）",
             "evidence_level": {
               "$item": "architectural-and-civil-drafters.fit.personality-fit-block.15",
               "block": "fit",
@@ -36562,7 +36644,7 @@
               "entry": "link-5",
               "field": "url"
             },
-            "cta_label": "了解我的智力与推理表现",
+            "cta_label": "查看推理练习（中文）",
             "evidence_level": {
               "$item": "architectural-and-civil-drafters.fit.personality-fit-block.19",
               "block": "fit",
@@ -37253,7 +37335,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -37263,7 +37345,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -37273,7 +37355,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -37283,7 +37365,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "推理练习（中文）"
           }
         ]
       },
@@ -37481,86 +37563,86 @@
       },
       {
         "derivation": null,
-        "display_value": "110,500 人（2024 年）",
+        "display_value": "104,100个岗位（2025年）",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
+        "measure": "就业岗位数",
         "occupation_scope": "建筑土木制图员",
-        "period": "2024年",
+        "period": "2025年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "平均（3% 至 4%）（2024—2034 年）",
+        "display_value": "5%（2025—2035年；净增5,400个岗位）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长率与官方净变化",
+        "measure": "就业增长率（OOH取整）与净变化",
         "occupation_scope": "建筑土木制图员",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约10,000个（2024—2034 年）",
+        "display_value": "年均约9,100个（2025—2035年）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺（2024—2034 平均）",
+        "measure": "年均职业空缺",
         "occupation_scope": "建筑土木制图员",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得可读取的该职业分行业工资中位数（BLS OEWS 分行业数据以 XLSX 表格发布，本页未使用第三方估算）",
+        "display_value": "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "建筑土木制图员",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查阅2026-10-03",
         "source_refs": [
-          "operations"
+          "oews-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得可读取的该职业分行业工资中位数（BLS OEWS 分行业数据以 XLSX 表格发布，本页未使用第三方估算）",
+        "display_value": "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "建筑土木制图员",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查阅2026-10-03",
         "source_refs": [
-          "operations"
+          "oews-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得可读取的该职业分行业工资中位数（BLS OEWS 分行业数据以 XLSX 表格发布，本页未使用第三方估算）",
+        "display_value": "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "建筑土木制图员",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查阅2026-10-03",
         "source_refs": [
-          "operations"
+          "oews-industry"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得可读取的该职业分行业工资中位数（BLS OEWS 分行业数据以 XLSX 表格发布，本页未使用第三方估算）",
+        "display_value": "证据不足：本次BLS分行业下载返回HTTP 403，职业档案页未取得本职业该行业工资中位数；保留空值，不采用父职业工资。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数",
         "occupation_scope": "建筑土木制图员",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查阅2026-10-03",
         "source_refs": [
-          "operations"
+          "oews-industry"
         ]
       },
       {
@@ -37569,7 +37651,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "全国城镇非私营单位就业人员年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37581,7 +37663,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "全国城镇私营单位就业人员年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37593,7 +37675,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "规模以上企业中层及以上管理人员年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "规模以上企业中层及以上管理人员年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37605,7 +37687,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "规模以上企业办事人员和有关人员年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37617,7 +37699,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（城镇非私营单位）",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "行业门类年平均工资（城镇非私营单位）；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37629,7 +37711,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（城镇非私营单位）",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "行业门类年平均工资（城镇非私营单位）；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37641,7 +37723,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（城镇非私营单位）",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "行业门类年平均工资（城镇非私营单位）；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37653,7 +37735,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（城镇非私营单位）",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "行业门类年平均工资（城镇非私营单位）；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37665,7 +37747,7 @@
         "fact_id": "cn-construction-wage",
         "market": "中国大陆",
         "measure": "建筑业年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "建筑业年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37677,7 +37759,7 @@
         "fact_id": "cn-tech-services-wage",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业年平均工资",
-        "occupation_scope": "建筑土木制图员",
+        "occupation_scope": "科学研究和技术服务业年平均工资；包含该统计组全部职业",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37719,7 +37801,7 @@
     "badges": [
       "制图工作：图纸表达与数据核对 · 专业配合与规范核查 · 施工图深化与资料编制与现场配合",
       "AI：任务级变化说明 · 不给出替代年份",
-      "美国 O*NET 17-3011.00 与 BLS 工资分位与就业预测（2025 年 5 月工资、2024 年就业、2024—2034 年预测）· BLS 职业展望手册《制图员》组合口径单独标注 · 中国大陆制图标准与数据缺口标注"
+      "美国：2025年5月工资、2025年就业、2025—2035年预测；中国：行业工资参照、制图标准及注册执业边界。"
     ],
     "metrics": [
       {
@@ -37765,10 +37847,10 @@
       "text": "建筑土木制图员"
     }
   },
-  "source_content_sha256": "8c84bdcf37233abffc9ac2b9598b78073f43a98e4edd5150480cd153b709d694",
+  "source_content_sha256": "06395a1227bead43ae9065718f196c53698fbd0fc2256b9469f2bead2aaa0975",
   "subject": {
     "canonical_slug": "architectural-and-civil-drafters",
     "name": "建筑土木制图员",
-    "summary": "建筑土木制图员为建筑物编制建筑与结构特征的详细图纸，或为土木工程项目如公路与桥梁与公共工程编制图纸及地形起伏图。美国侧对应 O*NET 17-3011.00：2025 年 5 月年薪中位数 66,150 美元（时薪 31.80 美元），2024 年在岗约 110,500 人，2024—2034 年平均增长 3% 至 4%、年均约 10,000 个空缺；该页行业分布为专业、科学与技术服务（75%）、建筑（11%）与其他行业含制造业（14%）。BLS 职业展望手册《制图员》为组合口径（含机械与电气与电子制图等各类制图员），另给出 2025 年约 180,200 个岗位、2025—2035 年增长 1%、净增约 1,100 个、年均约 14,400 个空缺与副学士学历的典型入职要求，属不同职业范围与资料期。中国大陆侧，绘制房屋建筑与结构施工图应遵循《房屋建筑制图统一标准》GB/T 50001-2017（住房和城乡建设部公告第1695号，2018-05-01 实施）与《建筑制图标准》GB/T 50104-2010、《建筑结构制图标准》GB/T 50105-2010 等工程建设标准；《中华人民共和国职业分类大典（2022 年版）》对应中类为工程技术人员下的建筑工程技术人员（2-02-18）。美国数字不能外推为中国大陆。"
+    "summary": "建筑土木制图员把设计草图、计算与测量数据转成建筑、结构或土木工程图纸，核对尺寸、标高和专业接口，并维护交付版本。辅助绘图与注册执业权限须分开。"
   }
 }

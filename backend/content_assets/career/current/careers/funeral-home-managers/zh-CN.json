@@ -17,6 +17,18 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-industry-self-income-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-death-care-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-facility-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-other-gap": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -27,6 +39,12 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
       "item:funeral-home-managers.ai-impact.ai-impact-table.10": {
@@ -1224,13 +1242,13 @@
         "status": "pending_mapping"
       },
       "item:funeral-home-managers.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:funeral-home-managers.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:funeral-home-managers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:funeral-home-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -24108,7 +24126,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对殡仪馆经营成效的评价。本页按美国 O*NET-SOC 11-9171.00「Funeral Home Managers」编写（固定索引给本资产的中文名是「殡葬家庭经理」，行业与 O*NET 中也称殡仪馆经理；主要对象是殡仪馆的服务与资源与设施与人员与价格的管理，产出为按法规与家属授权完成的殡仪服务安排、人员与场地与日程管理、许可与价格文件与记录归档）。该职业通常在机构授权与所在地法规范围内行使定价与签放与合规职责，具体权限由机构与主管部门规定决定。"
+              "编辑清单｜固定0436殡葬家庭经理，对应11-9171.00，23核心任务涵盖家属安排、人员设施与价格经营；仅自我提问不作录用评分，实际资格权限另核。"
             ]
           },
           "id": "funeral-home-managers.quick-decision.fit-decision-checklist.1",
@@ -24122,7 +24140,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的殡仪馆一周运营任务包。请写出一份运营与服务安排草案：（1）如何与虚构家属沟通并确认葬礼细节与费用口径；（2）如何排定告别与下葬或火化的时间并配置场地与人员；（3）如何安排遗体接运与授权人员交接、核对证照与许可文件与价格文件；（4）如何监督服务现场并处理投诉与结算与报账；（5）如何在遇到价格公示不完整、许可文件缺失、遗体处置越权、家属投诉与纠纷、个人信息对外提供、员工与遗体接触安全等情况时按预案暂停、通知与升级并按授权处置。使用公开资料与模拟数据作答，不使用任何真实逝者、家属或机构信息。"
+              "纸面演练｜完成H/V2虚构三场告别厅运营题，核逐项假设报价、单厅单人时段冲突、库存及V1/D2/R版本；完整材料答案四作品七日见路径。不做真实报价、遗体处置、收费签约或发布。"
             ]
           },
           "id": "funeral-home-managers.quick-decision.fit-decision-checklist.2",
@@ -24136,7 +24154,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 关注点：每天使用电话沟通（100%）、每天与个人及团队面对面讨论（92%）、每天使用电子邮件（86%）、持续与他人接触（85%）、每天在环境受控的室内工作（83%）、每天在封闭车辆或操作封闭设备中工作（79%）、与工作组或团队共同工作极其重要（79%）、与外部客户或公众打交道极其重要（79%）、决策自由为「很大」（74%）、每天做决策（72%）、工作周超过 40 小时（67%）。若你愿意在悲伤与时间压力下准确倾听、能把家属选择转成清晰清单、逐项确认费用并协调多人交接，且能承担定价与合规与人员管理责任，本职业的日常要求与你的工作方式更接近。"
+              "情境信号｜本职问卷100%每天电话、92%每天面对面、85%持续接触，74%决策自由很大；情境用于探索沟通与组织任务，不判断特定性格胜任。"
             ]
           },
           "id": "funeral-home-managers.quick-decision.fit-decision-checklist.3",
@@ -24150,7 +24168,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示：错误后果极其严重（54%）、精确或准确极其重要（59%）、每天承受时间压力（57%）、每月以上出现冲突情形（58%）、每月以上处理不愉快或愤怒的人（48%）、每周以上接触疾病或感染（46%）与污染物（49%）与极热或极冷温度（55%）。本职业以对家属承诺与价格与遗体处置与人员与合规的综合负责为核心：一次价格公示不完整或未经许可收费、一处许可文件或死亡登记缺失、一次超出授权的遗体处置、或一次个人信息外泄，都可能造成行政处罚与家属纠纷与机构声誉损失；若你难以承担定价与合规与人员管理责任，或对悲伤场景与冲突情形明显不适，应把这些作为需要认真权衡的现实成本。"
+              "权衡建议｜54%错误后果极严重、59%准确极重要；58%冲突与48%不愉快人士是每月至少但非每周选项，非事故率。67%工周超过40，55%常规45%不规则，不能移植个人或中国。"
             ]
           },
           "id": "funeral-home-managers.quick-decision.fermat-decision-card.6",
@@ -24164,7 +24182,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项殡仪馆管理任务上同时完成三件事：把服务做实（与家属确认需求并安排告别与下葬或火化，配置场地与人员与供应商并按承诺交付）、把价格与合规管住（逐项价格与披露与家属选择与事先授权、许可与证照与费用文件、个人信息保护与遗体处置边界）、并承担可核验的管理责任（对人员与场地与日程与费用与记录负责并按授权签放与升级）。建议用一次可核验的体验（为虚构机构完成一份服务安排单与场地人员排程与逐项报价、独立设计一版授权与许可核对清单与异常升级清单、或做一次结算复核演练）来检验，而不是仅依据兴趣问卷的结论。"
+              "探索方法｜独立重算H/V2三场报价、排程与库存，保版本及Q未恢复；可观察纸面方法，不能验证真实悲伤沟通、经营、卫生或法律胜任，不要求外部经验者签认。"
             ]
           },
           "id": "funeral-home-managers.quick-decision.fermat-decision-card.7",
@@ -24186,7 +24204,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜殡葬家庭经理的工作大体可以分成三类：一是家属沟通与服务安排（与逝者家属或亲友商谈并安排葬礼细节如讣告措辞与棺木选择与仪式方案，提供咨询与安慰，为葬礼与下葬或火化排期，应对投诉与法律询问与付款协商等售后事项），二是人员与场地与设施管理（指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员的工作、排定工时、面试与聘用新员工并识别技能培养需求、管理设施与场地与维修与维护与供应商与合同人员），三是价格与合规与经营（为服务或商品设定价格与赊销条件、销售殡葬服务与产品、洽谈预先安排的殡葬服务合同、完成并维护州要求的文书与跟踪文件与产品库存记录、将死亡证明送至医疗机构或办事处取得法定授权人签署、监督服务运营符合政策法规与法律、审阅财务报表与绩效数据并制定营销与销售与财务目标）。三类工作循环衔接：了解家属需求—排期与配置—协调遗体接运与授权人员—核对证照与价格文件—监督服务与记录归档—复核经营与改进。"
+              "直接回答｜编辑按家属安排、价格经营、人员设施三重心组织；23职责完整承接职业档案，不从管理名称排现场任务。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.1",
@@ -24200,7 +24218,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案要点｜O*NET-SOC 11-9171.00「Funeral Home Managers」的官方范围为：规划、指导或协调殡仪馆的服务或资源，包括为服务或商品定价与管理殡仪馆设施（Plan, direct, or coordinate the services or resources of funeral homes. Includes activities such as determining prices for services or merchandise and managing the facilities of funeral homes.）。职业档案给出的 23 项任务（均为核心任务）强调：与逝者家属或亲友商谈并安排葬礼细节如讣告措辞与棺木选择与仪式方案；为葬礼与下葬或火化排期；将死亡证明送至医疗机构或办事处以取得法定授权人签署；为逝者家属或亲友提供咨询与安慰；监督殡仪服务运营以符合适用政策与法规与法律；指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员的工作；完成并维护州要求的文书与跟踪文件与产品库存等记录；向客户销售殡葬服务与产品或商品；规划并实施服务项目调整以满足社区需求或提升殡仪馆收入；应对客户投诉与法律询问与付款协商等售后事项；洽谈预先安排的殡葬服务合同；向员工说明目标与政策或程序；为殡仪馆或合同员工排定工时；为殡葬产品或服务设定价格或赊销条件；审阅财务报表与销售或活动报告或其他绩效数据以识别降本或服务改进机会；面试并聘用新员工；识别殡仪馆员工的技能培养需求；指导或监督殡仪馆的行政与支持与维修或维护服务；为殡葬服务机构设定营销与销售或其他财务目标并跟踪进展；出席或主持社区活动以推广服务或建立社区关系；评估供应商与合同员工或其他服务提供方的质量与成本效益；开展市场研究并分析行业趋势；规划并实施销售推广或其他营销策略与活动。"
+              "职业定义｜O*NET-SOC11-9171.00 Funeral Home Managers，固定中文名殡葬家庭经理；规划、指导或协调殡仪馆服务资源，包括定价和设施管理。23任务均核心：商谈家属葬礼细节/安慰、排葬礼下葬火化、送死亡证明给法定授权者签署、监督合规、指导防腐服务登记化妆等员工、州文书跟踪库存、销售/预先安排合同、服务调整、投诉法律询问付款协商、员工目标排班招聘培训、价格赊销、财务绩效与降本、行政维修、营销财务目标、社区推广、供应商评估、市场研究及促销。经理与专业处置可兼任，名称不授任意处置或签署权，按法域机构核。"
             ]
           },
           "id": "funeral-home-managers.profile.onet-structured-fields-block.1",
@@ -24233,7 +24251,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜每天使用电话沟通（100% 每天），每天与个人及团队面对面讨论（92% 每天）。\n书面与数字沟通｜每天使用电子邮件（86% 每天），每周以上使用书面信函与备忘（34%）。\n联系与团队｜持续与他人接触（85%），与工作组或团队共同工作极其重要（79%），协调或领导他人极其重要（46%），身体接近程度为非常接近（49%）。\n对外接触｜与外部客户或公众打交道极其重要（79%），每月以上处理不愉快或愤怒的人（48%），每周以上需要公开演讲（48%）。\n决策与自主｜决策自由为「很大」（74%），制定任务与优先级与目标的自由为「很大」（60%），每天做决策（72%）。\n精确与后果｜精确或准确极其重要（59%），错误后果极其严重（54%），决策对同事或机构结果有重要影响（47%），对其他工作者成果负高度责任（41%）。\n环境与出行｜每天在环境受控的室内工作（83% 每天），每天在封闭车辆或操作封闭设备中工作（79% 每天），每周以上在户外暴露于各种天气（56%）。\n健康与安全暴露｜每周以上接触污染物（49%）与极热或极冷温度（55%）与疾病或感染（46%），每周以上使用常见防护或安全装备（47%），每周以上接触危险条件（34%）。\n工时与节奏｜工作周超过 40 小时（67%），每天承受时间压力（57%），每月以上出现冲突情形（58%），竞争度为高度（38%），约一半时间站立（61%）与约一半时间坐着（50%）。"
+              "沟通｜100%每天电话、92%每天面对面、86%每天邮件；85%持续接触。\n团队公众｜79%团队极重要、21%非常重要；79%公众极重要、14%非常重要。\n自主影响｜74%决策自由很大、72%每天决策；60%任务优先级自由很大；47%决策结果非常重要，非仅重要；41%他人结果高度责任。\n准确后果｜59%精确极重要、38%非常重要；54%错误后果极严重，为问卷而非事故率。\n压力冲突｜57%压力每天、25%每周至少但非每天；58%冲突和48%不愉快人士为每月至少但非每周。\n环境车辆｜83%每天可控室内、79%每天封闭车辆；56%天气户外每周至少但非每天。\n卫生防护｜46%疾病、49%污染、55%冷热、47%常规防护、34%危险条件均每周至少但非每天；疾病另36%每天，不能把46%作感染率。\n身体节奏｜61%约半时站、50%约半时坐、49%接近近触；67%工周超过40、24%40小时，不编剩余9；55%常规45%不规则，非中国或个人固定工时。\n领导书面｜46%协调领导极重要；34%书面、48%公开演讲每周至少但非每天；40%轻度自动化、24%无，非AI采用。"
             ]
           },
           "id": "funeral-home-managers.profile.work-context-block.1",
@@ -24247,7 +24265,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "家属沟通说明｜以家属需求与授权为起点，把仪式与安葬或火化方案转成清晰的安排单与逐项报价，明确家属选择与事先授权与费用确认，并在悲伤与时间压力下保持准确倾听与逐项确认。"
+              "核家属需求与选择，按流程记录，异常转交。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.2",
@@ -24261,12 +24279,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望与工资口径｜本职业在美国劳工统计局（BLS）职业就业与工资统计（OEWS 2025）与 BLS 职业展望手册（2025—2035 预测，经来源登记核对）中对应精确职业 11-9171.00：2025 年全国年工资中位数为 78,790 美元（时薪 37.88 美元），第 10 分位 49,700 美元、第 90 分位 156,400 美元；就业 2025 年约 34,800 人，2025—2035 年预计增长 4%（增至约 36,200 人）。上述为美国全国口径，不适用其他法域。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24275,7 +24293,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "了解逝者家属需求 → 安排告别或安葬时间 → 协调遗体接运与授权人员 → 配置场地与人员 → 核对证照与价格文件 → 监督服务并归档记录"
+              "核需求 → 列项目 → 核时段 → 配人员 → 核文件 → 记交接"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.3",
@@ -24289,12 +24307,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局与人社部口径｜中国大陆按国民经济行业分类公布城镇单位就业人员平均工资，并另有人力资源和社会保障部门发布的企业薪酬调查信息，两者均为行业或岗位聚合口径、不按本职业精确拆分；殡葬服务机构多由民政部门主管并按国家发展改革与民政与财政等部门政策对殡葬服务收费进行分层管理，行业或调查均值只能作为背景参照，不能替代职业工资；中国大陆未建立与本职业精确对应的全国职业工资分布，本页按可见缺口登记，不以行业均值或美国数据推断起薪或到手收入。"
+              "证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -24303,7 +24321,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "人员与场地说明｜按机构流程核对待办清单，完成人员排班与场地与设备与车辆与物资配置与供应商协调；涉及遗体处置与防腐与整容与火化与死亡登记的环节须由具备资质或获得授权的人员执行，发现安全隐患或授权不清要立即报告而不是自行处置。"
+              "核项目价格与家属选择，保结算版本，异常转交。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.4",
@@ -24317,12 +24335,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测口径｜本页美国就业与增长取 BLS 职业展望手册 2025—2035（经来源登记核对）：就业 2025 年约 34,800 人，预计 2035 年约 36,200 人、增长 4%；本页所列空缺为「殡葬服务人员」组合职业口径的 2025—2035 年平均每年约 5,600 个，**不是殡葬家庭经理的精确空缺数**；预测含增长与替换需求，不等于实际招聘数；中国与美国数据分别列示，不拼接、不换算。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24331,7 +24349,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认家属需求与授权 → 排定仪式与火化或下葬时间 → 分配人员与场地与供应商 → 核对价格与合同与许可文件 → 监督现场服务与投诉处理 → 复核结算与归档与改进"
+              "核价格 → 核选择 → 核许可 → 配资源 → 核结算 → 保版本"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.5",
@@ -24345,12 +24363,17 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "合规与消费者保护边界｜本页涉及美国与中国的两类消费者保护要求：美国《殡葬规则》（FTC Funeral Rule）要求覆盖的服务提供者给出准确逐项价格与披露、尊重消费者选择，并禁止虚假法定要求、未经许可收费防腐及搭售；中国大陆试行规定要求殡葬服务项目与内容与标准与收费与计价规则与定价形式与依据与减免政策清晰公示，并禁止未标费用和诱导性标价，殡葬服务收费按基础与非基础项目及机构性质由国家政策和地方规则分层管理，经理的服务承诺与定价权限必须以属地政策与机构授权为准。涉及逝者与家属的个人信息（身份、联系方式、亲属关系、健康与死亡相关信息）的处理，须遵守《中华人民共和国个人信息保护法》等规定：限于实现殡葬服务目的的最小范围并取得合法依据，不得超范围收集、对外提供或用于其他用途，并按权限访问与限定留存期限。遗体处置与防腐与整容与火化与死亡登记与死亡原因认定的资质与权限由具备资质或获得授权的人员与主管部门确定。本页只作一般性提示，不构成法律或卫生防疫意见。"
+              "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。美国FTC｜同时销售或提供殡葬用品及两类服务的funeral provider适用，也含相应预先安排代理；不只看是否持殡仪馆牌照。面对面讨论服务选择或价格时提供可带走GPL，电话给准确价格信息，不一律需寄GPL；套餐不能代必需逐项价格。防腐收费核州法、明确事先许可或尽力联系等三类条件，不一概全部禁止；联邦法不强制防腐。价格表自最后分发、已选商品服务清单自安排会议至少保存一年，州法可另核。信息边界｜PIPL6/13/19核最小必要、合法依据和保存期限；28/29按法定敏感条件及适用单独同意处理，不一律将姓名、联系方式、亲属关系与哀伤称敏感，健康资料可能符合。49条死者近亲属为自身合法正当利益可行使相关权利，生前另安排除外；51核安全权限，47法定保存未届不能直接删除。公开对外提供另核程序，不造家属同意。"
             ]
           },
           "id": "funeral-home-managers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "infectious-law",
+            "editor",
+            "nist",
+            "health",
+            "pipl-law"
           ],
           "type": "prose"
         },
@@ -24359,7 +24382,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与合规协作｜按机构流程记录家属需求与授权与逐项价格与披露、仪式与火化或下葬安排、遗体接运与交接、许可与证照与费用文件、投诉与异常与结算记录；协助类事务（遗体接运、入殓与整容、火化、死亡登记与下葬许可、死亡证明）只在具备资质或获得授权的范围内执行，并在价格公示缺失、许可文件缺失、遗体处置越权与传染病遗体等情形时立即停止并上报。"
+              "核人员设施和记录，具体事项按法域授权。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.6",
@@ -24373,7 +24396,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「授权与产出」：本职业承担殡仪馆的服务与资源与设施与人员与价格的管理并对经营与合规与家属承诺结果负责，产出是殡仪服务安排、人员与场地与日程管理、许可与价格文件与记录归档；殡葬服务员在机构安排下承担仪式现场服务与灵柩与车辆与场地保障，通常不参与定价与经营与合规决策；殡葬师与殡仪承办人与殡葬安排员以遗体防腐与整容与葬礼安排的专业处置为产出，通常需专门执业资质；医疗与健康服务经理以医疗机构的临床与运营管理为产出；社会与社区服务经理以社会项目与公共服务的管理为产出；综合与运营经理以跨职能业务运营的管理为产出。授权与产出不同，不能跨岗位沿用定价与签放与遗体处置与费用承诺的权限。"
+              "编辑比较｜经理机构运营、服务员具体现场、殡葬师专业操作安排、医疗经理医疗机构、社会社区经理项目、综合运营跨职能是任务重心，可兼任交叉；实际授权按法域机构核。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.7",
@@ -24443,7 +24466,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业在机构授权与所在地法规范围内规划、指导或协调殡仪馆的服务与资源：与逝者家属或亲友商谈并安排葬礼细节、提供咨询与安慰、为葬礼与下葬或火化排期；指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员的工作，排定工时并招聘与培养员工；为服务或商品定价与赊销并销售与洽谈预先安排合同；完成并维护州要求的文书与跟踪文件与产品库存记录并将死亡证明送交取得法定授权人签署；监督服务运营符合政策与法规与法律，审阅财务与绩效数据并制定营销与销售与财务目标、开展市场研究与社区关系。常见用人单位包括殡仪馆与殡葬服务机构、公墓与纪念园、以及提供殡葬服务与预先安排服务的连锁或家族经营机构；工作以高频电话与面对面沟通、在悲伤与时间压力下做决策、对价格与合规与人员与安全负责为特点，错误后果极其严重；涉及遗体处置与死亡登记与死亡原因认定的权限属于具备资质或获得授权的人员与主管部门。官方定义原文：Plan, direct, or coordinate the services or resources of funeral homes. Includes activities such as determining prices for services or merchandise and managing the facilities of funeral homes."
+              "职业定义｜O*NET-SOC11-9171.00 Funeral Home Managers，固定中文名殡葬家庭经理；规划、指导或协调殡仪馆服务资源，包括定价和设施管理。23任务均核心：商谈家属葬礼细节/安慰、排葬礼下葬火化、送死亡证明给法定授权者签署、监督合规、指导防腐服务登记化妆等员工、州文书跟踪库存、销售/预先安排合同、服务调整、投诉法律询问付款协商、员工目标排班招聘培训、价格赊销、财务绩效与降本、行政维修、营销财务目标、社区推广、供应商评估、市场研究及促销。经理与专业处置可兼任，名称不授任意处置或签署权，按法域机构核。"
             ]
           },
           "id": "funeral-home-managers.profile.definition-block.11",
@@ -24527,12 +24550,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的责任主体｜经理对殡仪服务安排与人员与场地与日程与价格与经营结果与合规落实负责，对在授权范围内对外发布的报价与承诺与披露负责；涉及遗体处置与防腐与整容与火化、死亡登记与下葬许可与死亡证明、费用公示与定价权限、个人信息对外提供与重大投诉与法律询问等事项，由具备资质或机构授权的人员与主管部门与专业顾问决定，经理不替代其决定。"
+              "责任主体｜经理承担受任运营管理责任；专业服务、价格和信息责任还需核实际主体、法域及机构范围，名称不代授权。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         },
@@ -24541,12 +24567,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的权限与批准｜同组与相邻岗位的权限来自机构授权与专业准则与法定资格，通常不包含对定价与费用公示与死亡认定与遗体处置自行判断的权限；涉及价格公示与许可与个人信息对外提供与法律争议的事项应移交授权人员与主管部门与专业顾问。"
+              "相邻权限｜现场、专业、医疗、社会项目及跨职能岗位各核法域机构条件；任务可兼任，但不从重心相近推直接授权。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         },
@@ -24555,12 +24584,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜服务安排与人员与场地与日程与价格与营销管理须在机构授权与属地政策范围内进行；涉及逐项价格与披露与消费者选择与事先授权、费用公示与定价形式与减免政策、遗体处置与火化与死亡登记与下葬许可与死亡证明、员工与遗体接触安全与防护、个人信息对外提供与跨机构共享、以及重大投诉与法律询问与舆情的事项，应按规定升级或移交具备资质或获得授权的人员与主管部门，不得越权承诺。"
+              "权限核对｜中国五项专业服务由殡仪馆专门提供，收费核目录标准与明示，死亡证明按法定主体办理；经理任命不代专业权限。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         },
@@ -24569,12 +24601,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的结论边界｜同组与相邻岗位的结论多限于本机构业务与服务与运营层面，且通常不构成对死亡原因与法律责任与医疗判断的认定；跨机构与跨法域的结论适用有其范围限制。"
+              "比较边界｜相邻职责与本职可交叉；具体执业、机构范围及录用条件独立核，不把名称或转向比较当资格认定。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         },
@@ -24583,12 +24618,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的结论边界｜经营与合规结论只陈述可核验的服务与价格与人员与许可与费用事实并区分承诺与预估；不得对死亡原因与遗体处置与费用公示的合法性作出未经授权的判断；涉及许可与死亡登记与个人信息对外提供与重大投诉争议的事项必须升级或移交，口径也要经得住主管与主管部门与审计与家属的复核。"
+              "结论边界｜报价排程库存与绩效记录可显示运营方法；仍须区分事实、假设、待确认，不据纸面作品判断专业资格或真实经营胜任。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         },
@@ -24639,12 +24677,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜价格公示与消费者保护有专门要求，遗体处置与死亡登记与火化有资质要求，逝者与家属信息属敏感个人信息，处理须有依据与权限并限定留存。"
+              "信息边界｜PIPL6/13/19核最小必要、合法依据和保存期限；28/29按法定敏感条件及适用单独同意处理，不一律将姓名、联系方式、亲属关系与哀伤称敏感，健康资料可能符合。49条死者近亲属为自身合法正当利益可行使相关权利，生前另安排除外；51核安全权限，47法定保存未届不能直接删除。公开对外提供另核程序，不造家属同意。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.25",
           "source_refs": [
-            "onet"
+            "pipl-law"
           ],
           "type": "prose"
         },
@@ -24667,12 +24705,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜O*NET 显示本职业 Job Zone 为三级（SVP 6.0 至 <7.0），教育栏显示 50% 需要副学士或其他两年制学位、26% 需要高中文凭或同等学历、15% 需要中学后证书；美国多数雇主与州许可法通常要求殡葬服务申请人年满 21 岁、至少两年高等教育、监督训练并通过州考试（据 BLS 组合口径）。"
+              "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -24695,12 +24735,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜本职业薪酬常含绩效或销售提成或经营奖金与待命与加班安排，葬事发生时间不可控且工作周超过 40 小时常见，须书面确认考核与工时与待命口径。"
+              "收入核对｜全国78,790美元是美国雇员工资非中国工资或自雇经营收益；具体合同工资组成与待命工时未取样，核书面条件。 证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.profile.career-quick-answers-block.29",
           "source_refs": [
-            "onet"
+            "oews",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -24830,7 +24871,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻岗位的核心差别在「授权与产出」：本职业承担殡仪馆的服务与资源与设施与人员与价格管理并对经营与价格与合规与家属承诺结果负责，产出是殡仪服务安排、人员与场地与日程管理、许可与价格文件与记录归档；殡葬服务员在机构安排下承担仪式现场服务与灵柩与车辆与场地保障；殡葬师与殡仪承办人与殡葬安排员以遗体防腐与整容与葬礼安排的专业处置为产出并通常需专门执业资质；医疗与健康服务经理以医疗机构的临床与运营管理为产出；社会与社区服务经理以社会项目与公共服务的管理为产出；综合与运营经理以跨职能业务运营的管理为产出。授权与产出各不相同，不能跨岗位沿用定价与签放与遗体处置与费用承诺的权限。"
+              "编辑区别｜六方向任务重心可交叉，经理以机构运营价格和人员为重心；专业操作、医疗社会项目与跨职能管理需各自条件，不作互斥职责或直接转岗。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24844,7 +24885,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "证据说明｜下表比较对象来自 O*NET 职业分类与在售公开资料，用于帮助区分相邻职业的工作内容与选择适配，不构成资格、录用或薪酬结论。各职业的工资与就业须按各自 SOC 口径分别核对，本表不做数值比较，也不把某一职业的工资当作另一职业的代理。"
+              "证据说明｜依本职O*NET与相邻职责作编辑比较；未核具体招聘，不作资格或薪资结论。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24872,7 +24913,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业承担殡仪馆整体运营与定价与人员与合规并对经营与家属承诺结果负责；其他岗位分别以现场服务执行、遗体处置专业操作、医疗机构管理、社会项目管理、跨职能业务运营为核心，通常不对殡仪馆定价与签放与经营结果负责。"
+              "管理重心｜23核心任务包括家属、价格、人员设施、财务营销等，可兼任专业职责；需独立核法域机构条件。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.11",
@@ -24928,7 +24969,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：殡葬服务员在机构安排下承担仪式现场服务与灵柩与车辆与场地与设备保障，产出是按流程完成的现场服务与交接记录；本职业承担服务安排与人员与价格与合规与经营责任，通常不亲自执行灵柩与遗体操作。"
+              "现场重心｜服务员24职责含8补充任务，经理亦可兼现场/专业角色，不据名称认定不操作或无交叉。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.15",
@@ -24984,7 +25025,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：殡葬师与殡仪承办人与殡葬安排员以遗体防腐与整容与葬礼安排与家属沟通的专业处置为产出，并通常需专门执业资质与监督训练；本职业以机构运营与定价与人员与合规为产出，通常不亲自承担遗体处置操作。"
+              "专业操作重心｜殡葬师/承办人/安排员偏专业操作与安排，经理偏机构运营；可兼任，州法资格和机构范围另核。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.19",
@@ -25208,7 +25249,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "过渡｜本页把相邻岗位按「授权与产出」并列，目的是帮助你判断自己想长期投入哪一类殡葬与照护与运营岗位。无论选择哪一方向，真正决定能否上岗的是对价格与合规与消费者保护与人员与授权边界的理解、把家属需求做成可复核安排与记录的能力，以及通过机构与主管部门要求的资质与考核；兴趣问卷只用于提出问题。"
+              "探索过渡｜比较任务产出并核独立条件，H/V2只是编辑纸面探索，不保证转岗或晋升。"
             ]
           },
           "id": "funeral-home-managers.direction-comparison.adjacent-career-comparison-table.35",
@@ -25303,46 +25344,46 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm"
               },
               {
-                "entity": "O*NET 殡葬家庭经理详细资料",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-13",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-9171.00"
-              },
-              {
-                "entity": "BLS 职业展望手册：殡葬服务职业",
-                "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm"
-              },
-              {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
-                "id": "link-15",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
-              },
-              {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
-                "id": "link-16",
-                "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
-              },
-              {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
-                "id": "link-17",
-                "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
-              },
-              {
-                "entity": "O*NET 殡葬家庭经理职业范围",
-                "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "entity": "O*NET 殡葬家庭经理国家工资",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
+                "id": "link-14",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
+              },
+              {
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
+                "id": "link-15",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
+              },
+              {
+                "entity": "BLS本职EP2025—2035",
+                "id": "link-16",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
+                "id": "link-17",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
+              },
+              {
+                "entity": "BLS本职EP2025—2035",
+                "id": "link-18",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9171.00"
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
               }
             ]
           },
@@ -25469,7 +25510,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业处于中等偏高的生成式 AI 文本与数据任务暴露（排程与价目表与合同与记录密集）：核心工作包含家属对话记录与安排单与合同与告知文案草稿、排程与人员与资源调度、价目表与费用与库存台账整理、绩效与成本与市场数据统计，这些环节与语言与结构化数据高度相关，因此检索与统计与起草可被明显加速。AI 与数字工具最可能改变的是「排程与文书与数据环节」——排程与任务清单整理、价目表与合同与告知文案草稿、库存与采购与供应商台账维护、绩效与成本与市场数据统计与图表、记录检索与汇总；而家属需求确认与悲伤情境沟通、价格与披露与消费者选择与事先授权、遗体交接与许可与死亡登记、费用承诺与最终签放、异常与投诉与合规升级仍由经理与授权人员负责。技术可行不等于组织采用，也不等于岗位减少。"
+              "证据不足：本职AI量化暴露、组织采用、效率及就业因果未取得，不定中高等级或保证短期不替代。虚构报价排程库存与版本草稿为编辑试用，真实家属、服务、数据及法律责任另核。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.18",
@@ -25511,7 +25552,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册殡葬服务职业（2025—2035）"
+              "BLS本职EP2025—2035"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.21",
@@ -25525,7 +25566,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明就业与增长的美国口径；本职业为精确行，空缺为组合行，均非实际招聘数。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.22",
@@ -25539,7 +25580,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资统计（2025）"
+              "BLS OEWS工资统计新闻稿"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.23",
@@ -25553,7 +25594,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资的时点估计；不含福利与绩效与销售提成与加班，不适用于其他法域。"
+              "工资统计发布背景，非AI暴露研究；本职数值以全国表和方法为准。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.24",
@@ -25567,7 +25608,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 任务暴露研究"
+              "ILO未来工作专题"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.25",
@@ -25581,7 +25622,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对任务的影响机制；研究对象以职业大组为主，不预测本职业个人岗位变化。"
+              "职业大组与任务技术机制背景，不能预测本职个人变化或证明效率。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.26",
@@ -25595,7 +25636,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST 人工智能风险管理框架（AI RMF 1.0）"
+              "NIST AI RMF 1.0"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.27",
@@ -25609,7 +25650,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于治理与风险控制的一般原则；不是殡葬或消费者保护或数据保护标准。"
+              "通用AI风险治理原则，非殡葬、消费者保护或数据保护专门法律。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.28",
@@ -25623,7 +25664,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国《殡葬规则》（FTC Funeral Rule）"
+              "O*NET本职概览"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.29",
@@ -25637,7 +25678,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于消费者保护与价格披露边界；覆盖范围与义务以规则原文与主管机关解释为准。"
+              "本职任务与工作情境背景，非消费者保护或价格披露法律，实际法律见同页法规说明。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.30",
@@ -25651,7 +25692,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布（11-9171.00）"
+              "O*NET本职兴趣"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.31",
@@ -25665,7 +25706,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于了解雇主行业结构；为美国口径，不代表中国大陆雇主结构。"
+              "ECS任务兴趣偏好背景，不证明行业结构、人格效度或录用条件。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.32",
@@ -25679,7 +25720,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是排程与文书与数据环节；家属需求确认与悲伤情境沟通、价格与披露与消费者选择与事先授权、遗体交接与许可与死亡登记、费用承诺与最终签放与合规升级始终由经理与授权人员负责。技术可行、组织采用与岗位结果三者必须分开判断。"
+              "编辑用途｜比较可试用的虚构排程文书数据任务，不是已采用或效率排序。真实家属确认、定价签约与法定事项按法域机构责任核，不承诺永久由人或岗位不减。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.33",
@@ -25693,7 +25734,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排程与任务清单与人员与资源调度整理可被工具加速"
+              "编辑试用：虚构排程与资源清单，逐项核原输入"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.34",
@@ -25833,7 +25874,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以决策与沟通与数据与记录为主，工具可增强排程与统计与起草但难以替代授权与签放与合规判断"
+              "任务结构不等自动化风险；工具能否改善效率、适用何种岗位与法律授权仍需验证。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.44",
@@ -25889,7 +25930,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本精确职业（11-9171.00）全国口径，但仍不含福利与绩效与提成与加班"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.48",
@@ -25931,7 +25972,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露研究，以职业大组为主"
+              "一般任务研究背景，本职暴露未量化，不外推个人岗位"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.51",
@@ -26029,7 +26070,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册 2025—2035（经来源登记核对）"
+              "BLS本职EP2025—2035"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.58",
@@ -26043,7 +26084,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "预测含增长与替换需求；本职业为精确行、空缺为组合行"
+              "本职预测含自雇，空缺含增长与替换，非实际招聘"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.59",
@@ -26057,7 +26098,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业就业 2025 约 34,800 人、2035 约 36,200 人（+4%）；组合口径年均空缺约 5,600 个不可读作本职业精确空缺"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.60",
@@ -26113,7 +26154,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "短期内不会。核心工作是把家属需求转成可执行的服务与人员与场地与日程与价格与记录安排，并在授权与消费者保护范围内对费用承诺与签放与合规负责；工具能替代的是排程与文书与数据环节，不能替代家属需求确认与费用承诺与遗体交接与合规升级与最终签放。"
+              "证据不足：本职被替代比例与时间未取得，23管理沟通文书任务结构不证明短期不会替代或永久存在。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.64",
@@ -26127,7 +26168,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-9171.00（任务与工作情境）"
+              "O*NET本职任务（非替代预测）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.65",
@@ -26141,7 +26182,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有殡葬业务与案件管理软件、排程与库存与采购管理、价目表与合同与电子文书系统、会计与财务报告软件、以及办公与演示与视频纪念制作工具；具体以机构安排为准。"
+              "本职O*NET10类软件含账务、数据库、邮件、HR、浏览器、Office、演示、Excel、视频及Word，不证明统一编程门槛；H/V2可不用代码，实际岗位另核。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.66",
@@ -26155,7 +26196,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册（口径说明）"
+              "O*NET本职软件（非编程门槛）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.67",
@@ -26169,12 +26210,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在悲伤与时间压力下准确倾听与沟通的能力、把家属选择转成清晰清单与逐项报价的能力、价格与披露与事先授权的合规意识、协调多人交接与发现文件差错并稳妥升级的能力。"
+              "编辑试用｜可尝试虚构报价排程库存草稿与版本对照，逐条保原输入核算；未证效率、采用率或最高影响排序。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -26183,7 +26224,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资口径）"
+              "O*NET任务背景（编辑试用建议）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.69",
@@ -26197,12 +26238,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有中国大陆该职业的精确公开统计，不能断言其用工与技术采用情况；涉及价格公示与收费分层管理的要求应参考国家发展与改革与民政与财政等部门政策与市场监管部门试行规定，并以属地要求为准。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。本职增长不能归因AI，中国预测未取得。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26211,7 +26252,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "BLS本职EP（非AI因果）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.71",
@@ -26225,12 +26266,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先明确工具生成的价格与合同与告知内容由谁复核、依据什么消费者保护与数据保护要求、出现错误如何回退，并核对逝者与家属信息的权限与留存期限与审计追踪；价格与披露与费用承诺与签放不得由工具自动完成。"
+              "签约责任｜真实合同付款与家属承诺核主体、授权、项目和法域，工具草稿不能造签字/选择/许可。中国清单标准和美国FTC分别适用，编辑题Q未恢复。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "editor",
+            "nist",
+            "health",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26239,7 +26284,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF（治理原则）"
+              "O*NET任务背景（非法律授权）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.73",
@@ -26253,12 +26298,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "逝者与家属的身份与联系方式与亲属关系与健康与死亡与支付相关信息属敏感个人信息，应限定用途与留存期限并做好权限与审计追踪；不得把家属数据上传到外部服务，跨境与对外提供须另行评估与履行程序。"
+              "证据不足：本职消失年份与AI替代时间未取得；BLS预测到2035年增长4.1%，不预测永久存续或某年消失。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26267,7 +26312,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国《殡葬规则》（消费者保护边界）"
+              "BLS本职EP（非消失年份）"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.75",
@@ -26281,12 +26326,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用三层证据判断：技术可行、组织是否采用、岗位结果；并结合本地人口结构与殡葬服务需求与机构规模与门店网络，而不是只看工具演示。"
+              "学习建议｜读23任务及真实法域边界，学清单报价排程库存与10类软件基础，做H/V2四作品；纸面成绩不等资格或实操胜任。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26295,7 +26342,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 行业分布（雇主结构）"
+              "O*NET本职任务与准备"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.77",
@@ -26309,7 +26356,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任前言｜效率可以外包给工具，判断与后果不能。以下五步是采用任何数字工具前后都必须保住的人工责任点。"
+              "编辑责任｜核任务、来源、事实与假设、权限及待确认状态；未经效率验证的工具不能造价格合法、批准或检修。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.78",
@@ -26351,7 +26398,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "遗体与许可：遗体交接与防腐与整容与火化与死亡登记与下葬许可必须按资质与授权由具备资质人员完成并留痕，不得由工具自动生成结论。"
+              "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.81",
@@ -26379,7 +26426,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及价格公示缺失与许可缺失与个人信息对外提供与重大投诉与法律询问的事项须经主管与法务或合规确认并留痕。"
+              "升级核对｜具体价格目录、法定专业服务、死亡证明与数据外供按适用程序核；不能一律全部机关批准或从经理名赋权。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.83",
@@ -26421,7 +26468,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断错误会导致行政处罚与家属纠纷与声誉损失"
+              "可能出现价格记录、选择或授权失真，个案后果按事实与规则，不保证必罚。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.86",
@@ -26463,7 +26510,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限定用途与留存期限与权限，敏感数据不上传外部服务"
+              "虚构练习不上传真实数据；实际对外提供核合法依据、用途权限及适用程序。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.89",
@@ -26925,7 +26972,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "小结｜一句话：排程与文书与数据变快，价格与授权与签放不变。工具可以帮你排程更快、价目表与台账更一致、合同与告知草稿更清楚、绩效与市场统计更省时，但逐项价格与披露与消费者选择是否合规、家属需求与费用承诺是否清晰、遗体交接与许可是否按规定授权、异常与投诉如何升级与是否签放，仍然是经理与主管与授权人员的责任。"
+              "编辑结论｜虚构报价排程与文书草稿可试用，效率、组织采用及岗位因果未核；真实法定与合同责任另核，不承诺文本一定变快或签放永久不变。"
             ]
           },
           "id": "funeral-home-managers.ai-impact.ai-impact-table.122",
@@ -26947,12 +26994,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 37.88 美元 / 中位年薪 78,790 美元（2025，BLS OEWS）"
+              "10分位49,700美元/年（美国2025）"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26961,12 +27008,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 11-9171.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与绩效与销售提成与加班。"
+              "10分位是分布界值，非新手小门店或个人起薪。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -26975,12 +27023,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 49,700 美元/年（2025，BLS OEWS）"
+              "25分位61,890美元/年（美国2025）"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -26989,12 +27037,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应门店规模较小或管理幅度较窄或资历较浅的管理岗位，不代表入职起薪。"
+              "25分位不说明门店、资历或地区因果。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27003,12 +27052,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 61,890 美元/年（2025，BLS OEWS）"
+              "中位78,790美元/年、37.88美元/小时（美国2025）"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27017,12 +27066,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型（连锁、家族经营、公墓与火化设施）与地区与门店规模差异大。"
+              "中位是分布中点，非起薪与个人实收。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27045,7 +27095,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应负责多门店或较大规模与团队与绩效的岗位，不代表全部资深人员。"
+              "全国分位是分布位置，不证明资历、多门店、绩效因果或收入上限；90/10界值比约3.1。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.14",
@@ -27073,7 +27123,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数多门店或高绩效或业主型岗位影响，个体可达性有限；本口径上下十分位跨度约 3.2 倍。"
+              "全国分位是分布位置，不证明资历、多门店、绩效因果或收入上限；90/10界值比约3.1。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.16",
@@ -27087,12 +27137,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 34,800 人（2025，BLS 职业展望手册，经来源登记核对）"
+              "2025就业34.8千人；2035预测36.2千人"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27101,12 +27151,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2025，BLS 职业展望手册经来源登记核对）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27115,12 +27165,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 4%（2025—2035，BLS 职业展望手册：约 34,800 → 约 36,200 人）"
+              "2025—2035增长4.1%，净增1.4千人"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27129,12 +27179,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2025—2035，BLS 职业展望手册经来源登记核对，增长 4%）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27143,12 +27193,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 5,600 个/年（2025—2035，「殡葬服务人员」组合口径，非本职业精确空缺）"
+              "2025—2035本职年均空缺2.6千人"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27157,12 +27207,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国年均空缺为「殡葬服务人员」组合职业口径（2025—2035，约 5,600 个/年）；边界｜该数字不是本职业精确空缺，来自增长与替换需求，不可读作新增岗位。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27171,7 +27221,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业以家属沟通与服务安排与管理决策与价格与合规与数据与文书为主，生成式 AI 的文本与数据任务暴露为中等偏高；本页不对其 AI 影响评分，仅说明可被工具辅助（排程与任务清单整理、价目表与合同与告知文案草稿、库存与采购与供应商台账维护、绩效与成本与市场数据统计与图表、记录检索与汇总）与必须由人负责（家属需求确认与悲伤情境沟通、价格与披露与消费者选择与事先授权、遗体交接与许可与死亡登记、费用承诺与最终签放、异常与投诉与合规升级）的边界。"
+              "证据不足：本职AI暴露采用效率和就业因果未量化；虚构草稿为编辑试用，不定中高或保证增强。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.23",
@@ -27185,7 +27235,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜规划、指导或协调殡仪馆的服务或资源，包括为服务或商品定价与管理殡仪馆设施；工作含与家属商谈并安排葬礼细节与提供咨询与安慰、为葬礼与下葬或火化排期、指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员、排定工时并招聘与培养员工、为服务或商品定价与赊销并销售与洽谈预先安排合同、完成并维护州要求文书与跟踪文件与产品库存记录并将死亡证明送交取得法定授权人签署、监督服务运营符合政策法规与法律、审阅财务与绩效数据并制定营销与销售与财务目标与开展市场研究与社区关系；产出为殡仪服务安排与人员与场地与日程管理结果与许可与价格文件与记录归档；不含依法只能由具备资质或获得授权的人员与机构承担的遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定职责。"
+              "职业定义｜O*NET-SOC11-9171.00 Funeral Home Managers，固定中文名殡葬家庭经理；规划、指导或协调殡仪馆服务资源，包括定价和设施管理。23任务均核心：商谈家属葬礼细节/安慰、排葬礼下葬火化、送死亡证明给法定授权者签署、监督合规、指导防腐服务登记化妆等员工、州文书跟踪库存、销售/预先安排合同、服务调整、投诉法律询问付款协商、员工目标排班招聘培训、价格赊销、财务绩效与降本、行政维修、营销财务目标、社区推广、供应商评估、市场研究及促销。经理与专业处置可兼任，名称不授任意处置或签署权，按法域机构核。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.24",
@@ -27213,7 +27263,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "接待与现场服务或销售辅助岗"
+              "美国新聘问卷26%高中或同等，不是中国岗位层级"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.26",
@@ -27227,7 +27277,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 26% 需要高中文凭或同等学历；美国多数州对殡葬服务执业另有年龄与学历与训练与考试要求，管理岗通常在此之上。"
+              "教育问卷为新聘要求；BLS本职典型副学士和相关经验少于5年，具体州与机构另核。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.27",
@@ -27255,7 +27305,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "遗体处置与殡仪服务专业岗"
+              "美国新聘问卷15%中学后证书，不是中国专业岗映射"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.29",
@@ -27269,7 +27319,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 15% 需要中学后证书；殡葬服务相关证书或课程可提供遗体处置与消费者保护与安全卫生基础，但通常不等同于管理授权的全部条件。"
+              "证书课程不自动赋个人专业操作或机构服务范围，具体课程未取样。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.30",
@@ -27297,7 +27347,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "殡葬服务与管理方向起步岗"
+              "美国新聘问卷50%副学士或两年学位，非从业学历"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.32",
@@ -27311,7 +27361,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 50% 需要副学士或其他两年制学位；BLS 组合口径称多数雇主与州许可法通常要求至少两年高等教育与监督训练与州考试。"
+              "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.33",
@@ -27325,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "学士及以上（工商或管理相关）"
+              "其他准备条件"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.34",
@@ -27339,7 +27389,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机构运营与多门店管理岗"
+              "目标岗位独立核对"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.35",
@@ -27353,7 +27403,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "学士及以上更常见于连锁机构运营与财务与市场与人力方向；本页不提供个人资格结论，以机构招聘条件与属地法规要求为准。"
+              "证据不足：中国本职学历与管理层级、具体课程录用条件未取样，不编本科更常多店管理。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.36",
@@ -27381,12 +27431,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按国家发展改革与民政与财政等部门政策对殡葬服务收费进行分层管理，经理的服务承诺与定价权限以属地政策与机构授权为准。"
+              "中国收费按现行108号通知与明码标价规定，具体属地目录标准及机构条件另核。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "editor",
+            "nist",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27409,12 +27462,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "承担安葬与火化与墓位与纪念服务运营，涉及设施与安全与环保与价格公示要求。"
+              "编辑检索公墓骨灰堂运营任务，不等本职中国官方分类或同一权限，具体设施岗位另核。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "editor",
+            "nist",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27437,7 +27493,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机构规模与门店网络与所有权结构差异大，经理的职责幅度与授权与考核方式随之不同。"
+              "机构规模、门店与所有权可作为核对项；未取样工资绩效因果，家族经营不一律自雇。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.42",
@@ -27451,12 +27507,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "人力资源和社会保障部：企业薪酬调查信息（2025年）｜https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
+              "国家统计局2025行业工资（非本职值）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.43",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27465,7 +27521,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜殡葬家庭经理（行业与招聘中常称殡仪馆经理、殡仪服务经理、殡葬服务门店经理、殡仪馆馆长、墓园经理、殡葬运营经理；在 O*NET 中对应 11-9171.00 Funeral Home Managers，与殡葬服务员与殡葬师与殡仪承办人等岗位分属不同职责与授权层级）"
+              "名称对照｜固定殡葬家庭经理对应美国11-9171.00；殡仪馆经理、殡葬运营经理等为编辑检索别名，不代表中国官方精确分类或墓园经理全部等同。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.44",
@@ -27479,12 +27535,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜截至本轮检索，中国大陆未建立与本职业精确对应的全国职业工资分布；按证据政策，本页展示缺失而不是使用代理数字，不以行业均值或人社部门企业薪酬调查的岗位聚合值或美国数据推断起薪或到手收入。"
+              "证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27493,12 +27549,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，人力资源和社会保障部门另发布企业薪酬调查信息，两者均属聚合口径、不按本职业精确拆分；殡葬服务机构多由民政部门主管并按国家发展改革与民政与财政等部门政策对服务收费进行分层管理，机构性质与门店规模与岗位（运营管理、销售与预先安排、价格与合规、现场与遗体处置协助）与工时与班次与地区差异较大，与行业或调查均值口径不同，不可直接比较。来源与口径｜中国部分仅登记口径与缺口：经有界检索仍未取得可按本职业核验的统计值，因此不以代理数字填充；美国部分来自 BLS OEWS 2025（经 O*NET 呈现）与 BLS 职业展望手册 2025—2035（经来源登记核对）；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "中美口径｜中国本职精确分类工资就业未取得；美国OEWS排自雇、EP含自雇，年份与范围分别核，不拼接或据行业代理断言不存在。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27507,12 +27563,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：城镇单位就业人员平均工资统计口径说明｜https://www.stats.gov.cn/sj/zxfb/"
+              "国家统计局2025行业工资（非本职值）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27521,12 +27577,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜本职业的实际收入通常与机构性质（民政部门主管的殡仪馆、公墓与纪念园、连锁或民营与家族经营机构）、岗位（运营管理、销售与预先安排、价格与合规、现场与遗体处置协助）与门店规模与团队与绩效或销售提成或经营奖金、工时与待命与节假日出勤、地区与生活成本以及资历与管理幅度相关；葬事发生时间不可控，待命与超 40 小时工作周常见，可能显著影响实际投入但不计入统计工资；本页不给出任何具体金额，避免以个别样本代表整体。"
+              "证据不足：中国本职城市合同、工资组成、待命班次与季节规律未取样；可书面核税前后基本计时奖金佣金、加班福利，不推收入幅度或上限。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27619,12 +27675,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 11-9171.00 / O*NET-SOC 11-9171.00 覆盖规划、指导或协调殡仪馆服务与资源并定价与管理设施的管理人员，与殡葬服务员（现场服务）以及殡葬师与殡仪承办人与殡葬安排员（遗体处置与葬礼安排，通常需执业资质）分属不同职业；中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，并按国家发展改革与民政与财政等部门政策对殡葬服务收费进行分层管理、按市场监管部门试行规定要求明码标价，具体职业归类与从业与定价要求以主管部门与地方规定为准；两者分类与统计口径不同，不做数值换算。"
+              "证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "editor",
+            "nist",
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -27647,12 +27706,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 4%（2025—2035，BLS 职业展望手册：约 34,800 → 约 36,200 人）"
+              "2025—2035增长4.1%，净增1.4千人"
             ]
           },
           "id": "funeral-home-managers.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27683,7 +27742,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 11-9171.00 职业与工资数据｜https://www.onetonline.org/link/summary/11-9171.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 殡葬家庭经理国家工资｜https://www.onetonline.org/link/localwages/11-9171.00；BLS 职业展望手册：殡葬服务职业（2025—2035）｜https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm"
+              "OEWS方法｜https://www.bls.gov/oes/oes_ques.htm；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET本職全国工资｜https://www.onetonline.org/link/localwages/11-9171.00?st=CA"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.8",
@@ -27697,12 +27756,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 37.88 美元 / 中位年薪 78,790 美元（2025，BLS OEWS）"
+              "10分位49,700美元/年（美国2025）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27711,12 +27770,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 11-9171.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与绩效与销售提成与加班。"
+              "10分位是分布界值，非新手小门店或个人起薪。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27725,12 +27785,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 49,700 美元/年（2025，BLS OEWS）"
+              "25分位61,890美元/年（美国2025）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27739,12 +27799,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应门店规模较小或管理幅度较窄或资历较浅的管理岗位，不代表入职起薪。"
+              "25分位不说明门店、资历或地区因果。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27753,12 +27814,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 61,890 美元/年（2025，BLS OEWS）"
+              "中位78,790美元/年、37.88美元/小时（美国2025）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -27767,12 +27828,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型与地区与门店规模差异大。"
+              "中位是分布中点，非起薪与个人实收。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27795,7 +27857,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应负责多门店或较大规模与团队与绩效的岗位，不代表全部资深人员。"
+              "全国分位是分布位置，不证明资历、多门店、绩效因果或收入上限；90/10界值比约3.1。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.16",
@@ -27823,7 +27885,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数多门店或高绩效或业主型岗位影响，个体可达性有限；本口径上下十分位跨度约 3.2 倍。"
+              "全国分位是分布位置，不证明资历、多门店、绩效因果或收入上限；90/10界值比约3.1。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.18",
@@ -27837,12 +27899,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 34,800 人（2025，BLS 职业展望手册，经来源登记核对）"
+              "2025就业34.8千人；2035预测36.2千人"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27851,12 +27913,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2025，BLS 职业展望手册经来源登记核对）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27865,12 +27927,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 4%（2025—2035，BLS 职业展望手册：约 34,800 → 约 36,200 人）"
+              "2025—2035增长4.1%，净增1.4千人"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27879,12 +27941,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2025—2035，BLS 职业展望手册经来源登记核对，增长 4%）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27893,12 +27955,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 5,600 个/年（2025—2035，「殡葬服务人员」组合口径，非本职业精确空缺）"
+              "2025—2035本职年均空缺2.6千人"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27907,12 +27969,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国年均空缺为「殡葬服务人员」组合职业口径（2025—2035，约 5,600 个/年）；边界｜该数字不是本职业精确空缺，不可读作新增岗位。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27921,7 +27983,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值均为美国口径，来源为 BLS OEWS 2025 与 BLS 职业展望手册 2025—2035（经来源登记核对），对应精确职业 O*NET-SOC 11-9171.00；其中年均空缺为「殡葬服务人员」组合职业口径，不是本职业精确空缺；不适用于中国大陆或其他法域，也不构成对个人薪酬或录用的承诺。本页未取得可按行业与分地区读取的本职业工资中位数，均按可见缺口登记。"
+              "范围｜OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。 BLS OOH本职殡葬服务业年中位78,810美元（2025）；其他细分行业工资、自雇收入未取得，不以42/58行业比例代填。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.25",
@@ -27935,7 +27997,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年中位时薪 37.88 美元、中位年薪 78,790 美元，工资分布从下十分位 49,700 美元到上十分位 156,400 美元，跨度约 3.2 倍；差异主要来自机构类型（连锁、家族经营、公墓与火化设施）、地区与生活成本、门店规模与管理幅度以及绩效与销售提成结构；中位不代表起薪，也不含福利与提成与加班。"
+              "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.26",
@@ -27949,7 +28011,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "负责多门店或较大规模与团队与绩效的岗位通常高于单店与小规模机构；连锁与家族经营的薪酬与奖金结构差异明显。"
+              "机构与门店影响幅度未核，不从全国分位推规模或绩效因果。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.27",
@@ -27977,7 +28039,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "高成本地区与人口密集地区通常更高，但扣除生活成本后的差异会变化。"
+              "CA页含州城市值，本页取全国；地区比较需同口径，不凭生活成本标签推因果。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.29",
@@ -28005,7 +28067,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "承担销售或预先安排合同或盈利目标的岗位实际收入与提成与奖金关系更大，公开统计难以完整体现。"
+              "具体奖金佣金与待命核合同；OEWS按方法纳排，不能一律称公开统计不含绩效提成。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.31",
@@ -28019,7 +28081,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "绩效与销售结构"
+              "合同工资构成"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.32",
@@ -28033,12 +28095,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 4%（2025—2035，BLS 职业展望手册：约 34,800 → 约 36,200 人）"
+              "2025—2035增长4.1%，净增1.4千人"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -28047,7 +28109,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他服务（除公共管理外）"
+              "殡葬服务业（Death care services）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.34",
@@ -28061,12 +28123,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "2025年工资中位78,810美元（BLS本职行业）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28075,12 +28137,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 2024 年行业分布仅列出该行业（含殡仪馆与殡葬服务与火化与墓园服务），且未给出占比。"
+              "OOH工资本职行11-9171，仅雇员；非组合工人54,530，也非行业雇主比例。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -28089,7 +28151,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（未细分）"
+              "其他行业（合计）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.37",
@@ -28117,12 +28179,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 页面未列出其他行业行与占比，不作推断。"
+              "O*NET当前行业页42%其他服务、58%其他行业，页内未注明年份；不等行业工资或58%实际自雇，EP自雇另58.1%。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "nbs",
+            "ep"
           ],
           "type": "prose"
         },
@@ -28131,7 +28194,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公墓与纪念园与火化设施（细分）"
+              "公墓与火化设施细分"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.40",
@@ -28159,7 +28222,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未给出细分行业行；本页未取得可按本职业读取的细分行业工资中位数。"
+              "未取得该细分本职工资；不能把殡葬服务业总行业78,810拆给所有设施。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.42",
@@ -28173,7 +28236,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "自雇与家族经营机构"
+              "自雇收入（非行业）"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.43",
@@ -28187,7 +28250,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "证据不足：本职自雇经营收入未取得；OEWS排自雇，不以雇员年工资、行业中位或EP自雇比例代填。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.44",
@@ -28201,12 +28264,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 为雇主报告口径、不含自雇；本页未取得可按本职业读取的该部分工资数据。"
+              "EP2025本职自雇58.1%，OEWS工资排自雇；家族机构雇员不等自雇经营者。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
-            "onet"
+            "ep",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -28215,7 +28279,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 3.2 倍的差距主要来自机构类型与门店规模与管理幅度与地区与绩效结构，本口径为精确职业 11-9171.00 全国口径。"
+              "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.46",
@@ -28229,12 +28293,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利、绩效、销售提成、经营奖金与待命补贴；管理岗的提成与奖金结构差异较大，公开统计难以完整反映。"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -28243,12 +28307,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：是否取得州级执业资质与管理多门店或较大团队的经验、是否具备价格与合规与人员管理能力，会明显影响收入上限。"
+              "统计项目｜全国工资来自BLS OEWS2025，经O*NET CA页United States呈现；就业取BLS本职EP2025—2035含自雇，行业工资取OOH本职行，三者范围不同。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "oews",
+            "ep",
+            "operations"
           ],
           "type": "prose"
         },
@@ -28257,7 +28323,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字一起看，并结合本地机构类型与门店规模与绩效结构核对，不用单一数字推断个人薪酬。"
+              "收入核对｜编辑建议核实际合同任务、地点、工时班次、奖金佣金加班福利与税前后；具体影响幅度未核，分位不预测个人工资。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.49",
@@ -28285,7 +28351,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应门店规模较小或管理幅度较窄或资历较浅的管理岗位；进入该区间的常见原因是从现场服务或销售岗转向管理的初期。"
+              "10分位不证明新手、单店或小规模工资。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.51",
@@ -28299,7 +28365,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手管理岗起薪通常接近或低于中位，随门店规模与团队与绩效与地区变化上升。"
+              "中位是分布中点，不证明起薪通常更低或随资历上升。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.52",
@@ -28313,7 +28379,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应负责多门店或较大规模与团队与盈利目标或业主型岗位；高薪端受门店网络与绩效与提成结构影响较大。"
+              "90分位不证明多店、业主或高绩效工资及个人上限。"
             ]
           },
           "id": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.53",
@@ -28384,7 +28450,7 @@
                 "url": "/zh/career/jobs/funeral-attendants"
               },
               {
-                "entity": "本职业（殡葬家庭经理）方向",
+                "entity": "殡葬家庭经理方向",
                 "id": "link-9",
                 "relation": "career.tool",
                 "url": "/zh/career/jobs/funeral-home-managers"
@@ -28426,34 +28492,34 @@
                 "url": "https://www.onetonline.org/link/interest/11-9171.00"
               },
               {
-                "entity": "O*NET 11-9171.00 资格与训练",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/11-9171.00"
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "entity": "O*NET 11-9171.00 证书资料",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/11-9171.00"
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "entity": "O*NET 11-9171.00 国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9171.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 职业展望手册：殡葬服务职业（2025—2035）",
+                "entity": "O*NET本职任务背景与准备（不证明个案授权）",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm"
+                "url": "https://www.onetonline.org/link/summary/11-9171.00"
               }
             ]
           },
@@ -28482,7 +28548,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.3",
@@ -28525,7 +28591,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜外向性偏高、尽责性偏高、情绪稳定性较好、宜人性偏高的人更容易适应高频对外沟通与管理压力与悲伤场景；但人格分数不用于录用或适配结论。"
+              "大五探索｜观察沟通、条目核对、优先级与情绪方法，不从外向尽责稳定等得分推更适合；任务描述不等个体效度。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.6",
@@ -28539,7 +28605,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：人格特质与工作表现的关联为群体统计趋势，不能用于个体预测。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.7",
@@ -28624,7 +28690,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：MBTI 不属于职业资格或能力评估工具，不能作为用工依据。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.11",
@@ -28709,7 +28775,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：属自我探索工具，不构成职业能力或适配结论。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.15",
@@ -28752,7 +28818,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力与推理｜主要反映学习与问题解决的一般能力；本职业更依赖把家属需求转成可执行安排与逐项报价的能力、在悲伤与时间压力与突发调度下做取舍的能力，以及价格与合规与数据与记录的准确性。"
+              "推理探索｜H/V2需基本加法、乘法与时间核对；一般认知或测评分数不能代经验资格，也不定能或不能。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.18",
@@ -28766,7 +28832,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：一般认知能力与学习速度相关，但不能替代管理经验与消费者保护与合规意识与数据分析能力。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.19",
@@ -28809,7 +28875,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力｜本职业常与悲伤中的家属与员工与供应商与主管部门沟通，情绪调节与共情边界影响家属体验与团队稳定与冲突处理。"
+              "情绪探索｜核需求回应、共情与投诉方法；问卷和纸面草稿不验证真实悲伤场景胜任。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.22",
@@ -28823,7 +28889,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：情绪智力测评结果为自我报告，不能作为录用或绩效结论。"
+              "证据不足：本职测评效度、个人预测与证据等级未取得；只用于探索，不据类型或分数录用。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.23",
@@ -28880,7 +28946,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过机构与主管部门的资质与合规考核、能否在悲伤与时间压力与价格与人员压力下稳定经营，也不能替代真实管理实践。最可靠的判断方式是用一次真实或模拟的殡仪馆运营任务来检验你如何确认家属需求与逐项报价、如何排期与配置人员与场地、如何核对许可与价格文件与处理投诉，以及是否清楚自己与机构的授权边界。"
+              "探索边界｜先做H/V2虚构报价排程库存与版本，观察纸面方法；真实家属沟通、经营决策、卫生及法定资格仍未验证，不称最可靠适配测试。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.27",
@@ -28922,7 +28988,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若难以承担定价与费用承诺与人员管理责任，或对悲伤场景与冲突情形明显不适，不建议选择本职业。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.30",
@@ -28964,7 +29030,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望承担机构经营与定价与合规责任，需在积累现场与合规经验后再转向本职业。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.33",
@@ -29006,7 +29072,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若不愿取得遗体处置相关执业资质或无法承担专业操作责任，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.36",
@@ -29048,7 +29114,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若对医疗临床与医患与医疗法规兴趣低，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.39",
@@ -29090,7 +29156,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望面向商业服务运营与消费者交易而非社会项目，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.42",
@@ -29132,7 +29198,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望限定在殡葬服务专门法规与家属服务，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉，核目标方向独立条件/法域机构授权，纸面作品与测评不保证或排除继续本职。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.45",
@@ -29146,7 +29212,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "什么性格的人更适合做殡葬家庭经理？本职业更看重在悲伤与时间压力下准确倾听与沟通的能力、把家属选择转成清晰清单与逐项报价的能力、价格与披露与许可的合规意识、以及协调多人交接与管理的责任感，而不是某一性格类型；O*NET 兴趣代码为 ECS（企业型—常规型—社会型），可作为探索起点。"
+              "性格探索｜ECS为本职兴趣代码，可提出管理、规程记录与服务偏好问题，不能判哪种性格更适合；实际条件另核。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.46",
@@ -29160,7 +29226,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向的人适合做殡葬家庭经理吗？可以，但工作需与家属与员工与遗体处置人员与供应商与主管部门高频沟通（每天电话 100%、每天面对面讨论 92%、每天电子邮件 86%、持续与他人接触 85%、与外部客户或公众打交道极其重要 79%），人际强度较高，且要在悲伤场景中稳定推进。"
+              "内向探索｜不从内向程度保证适合或不适合；本职100%每天电话92%面对面86%邮件85%持续接触为问卷情境，纸面观察方法不等现场胜任。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.47",
@@ -29174,7 +29240,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向的人能做好殡葬家庭经理吗？可以。外向有助于家属沟通与团队带领与社区关系，但本职业更关键的是价格与披露与许可的合规判断、逐项核对与记录留痕，以及错误后果极其严重（54%）下的谨慎，外向程度本身不是门槛。"
+              "外向探索｜外向程度不保证能力或设门槛；54%错误后果极严重为情境不作个体风险，真实沟通与准确性另核。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.48",
@@ -29188,7 +29254,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "哪种 MBTI 最适合殡葬家庭经理？没有哪一种类型被证明最适合。MBTI 不属于职业资格或能力评估工具，管理适应主要取决于沟通与合规意识、决策与组织能力，以及在悲伤与冲突场景中的情绪稳定。"
+              "MBTI探索｜本职最适合类型及效度未核，不判录用；关注任务方法及目标岗位条件。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.49",
@@ -29216,7 +29282,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；管理适应更应通过实习或模拟管理任务与机构与资质考核来验证。"
+              "个人预测｜本职测评效度未核，不能作能/不能的统计断言；H/V2为方法探索。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.51",
@@ -29230,7 +29296,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好能做殡葬家庭经理吗？本职业需要读懂价目表与合同与财务报表与绩效数据、核对费用与库存与结算并做预算与目标测算，因此基础财务与数据能力很重要；但这属于可学习的职业技能，不等同于高等数学，若明显排斥数字与账目核对则需慎重。"
+              "数学探索｜H/V2用乘加和时间核算；官方软件与任务不证明统一高等数学门槛，实际岗位另核，不保证入岗。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.52",
@@ -29244,7 +29310,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做殡葬家庭经理需要高情商吗？需要情绪稳定与共情边界与冲突处理能力，但不要求特定测评分数。工作中要在悲伤与愤怒与投诉场景下保持冷静、清楚沟通，并把个人情绪与专业服务分开。"
+              "情绪能力｜关注需求回应与冲突方法，但本职测评分数或高情商阈值未核，不按标签判胜任。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.53",
@@ -29272,7 +29338,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的殡仪馆运营任务检验：能否完成服务安排单与场地与人员排程与逐项报价、能否设计一版授权与许可核对清单与异常升级清单、能否完成一次结算复核；这些证据比问卷更能说明适配。"
+              "作品探索｜独立H/V2四作品观察报价、排程、库存和版本；不比真实资格考核或保证适配。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.55",
@@ -29314,7 +29380,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的殡仪馆运营任务检验家属需求确认与逐项报价与排期与许可核对与投诉与结算处理，并了解目标机构与属地主管部门对学历与执业资质与管理授权的要求，再决定是否长期投入。"
+              "编辑建议｜先独立做H/V2，核目标机构条件、州法资格或中国机构范围与收费规则；真实实践需独立条件，不把纸面成绩称已通过。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.58",
@@ -29370,7 +29436,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级。"
+              "O*NET本职任务及教育准备背景，不能证明本职测评效度或个案许可。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.62",
@@ -29384,7 +29450,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业相关的证书信息（证书不等于机构聘任或执业资格）。"
+              "本职任务与准备建议背景；证书目录与州法需独立核，不以此概览证明证书要求。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.63",
@@ -29398,7 +29464,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径。"
+              "本职任务与软件背景；不代表雇主行业结构或具体招聘已取样。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.64",
@@ -29412,7 +29478,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与学历与培训口径（BLS 组合与精确行）。"
+              "BLS本职精确EP2025—2035就业、增长、典型教育经验，非组合空缺。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.65",
@@ -29426,7 +29492,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于补充了解该职业的国家工资展示（美国口径，不适用其他法域）。"
+              "O*NET本职任务准备背景；全国工资见本页独立工资来源，不能以本链接代工资表。"
             ]
           },
           "id": "funeral-home-managers.fit.personality-fit-block.66",
@@ -29455,34 +29521,34 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 殡葬家庭经理职业档案",
+                "entity": "O*NET本职任务与情境",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "entity": "O*NET 殡葬家庭经理详细资料",
+                "entity": "中国殡葬条例（2025修订）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/11-9171.00"
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=104495"
               },
               {
-                "entity": "美国《殡葬规则》（FTC Funeral Rule）",
+                "entity": "美国FTC适用指南",
                 "id": "link-4",
                 "relation": "career.authority",
                 "url": "https://www.ftc.gov/business-guidance/resources/complying-funeral-rule"
               },
               {
-                "entity": "殡葬领域明码标价规定（试行）",
+                "entity": "中国明码标价规定（2026试行）",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/jjjzs/art/2026/art_ca9e9d20408f49cfb5dfded70cdfe188.html"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "中国个人信息保护法",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -29497,7 +29563,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在家属服务与价格与许可与人员与遗体交接与记录中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成法律意见、消费者保护裁决或对个案的结论；凡涉及逐项价格与披露与消费者选择与事先授权、费用公示与定价形式与减免政策、遗体处置与防腐与整容与火化与死亡登记与下葬许可、员工与遗体接触安全与卫生、以及逝者与家属个人信息的处理，应由主管与具备资质或获得授权的人员与主管部门按组织流程与所在地法规处置。"
+              "证据不足：本職事故、感染、价格和投诉争议频率未取得；六卡是编辑可能失效例，任务与问卷不等风险率，具体个案法域另核。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.8",
@@ -29511,7 +29577,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业风险的核心不是「能不能经营」，而是四类后果较重的失效：价格与消费者保护失效（未逐项公示价格与披露、未取得事先授权即收费防腐或搭售或诱导性标价，导致处罚与家属纠纷）、许可与遗体处置失效（许可与证照与死亡登记与死亡证明签署链不清、指派无资质人员实施遗体处置或火化，导致程序违法与主管部门处理）、人员与安全卫生失效（员工防护不足导致体液或锐器暴露与感染、现场与搬运与车辆安全疏忽、设施与设备与危险品管理不当），以及信息与记录失效（逝者与家属身份与亲属关系与健康与死亡与支付信息泄露或超范围使用、投诉与结算与费用记录不清）。"
+              "风险回答｜价格选择、专业范围、防护、信息、结算版本与资源冲突。H/V2显示D2双算错、R厅M冲突，纸面不恢复Q；中国规则与美国FTC分别适用。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.9",
@@ -29525,7 +29591,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 11-9171.00 的任务与工作情境（每天电话 100%、每天面对面讨论 92%、每天电子邮件 86%、持续与他人接触 85%、每天环境受控室内 83%、每天封闭车辆或设备 79%、与外部客户或公众极其重要 79%、决策自由「很大」74%、每天做决策 72%、工作周超过 40 小时 67%、精确或准确极其重要 59%、每月以上冲突情形 58%、每天时间压力 57%、错误后果极其严重 54%、每月以上处理不愉快或愤怒的人 48%、每周以上接触疾病或感染 46%）与美国《殡葬规则》与中国大陆明码标价与收费政策的消费者保护要求归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "证据范围｜本職任务和问卷支持工作情境，现行法支持对应条文；H/V2仅虚构反例，不拿工资就业证明风险或断言常见。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.10",
@@ -29539,7 +29605,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与价格与合规负责人；家属与消费者与主管部门"
+              "报价定价及家属服务岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.11",
@@ -29553,7 +29619,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未逐项公示价格与披露或未取得事先授权即收费防腐与搭售或使用诱导性标价与虚假法定要求；消费者争议与行政处罚、退费与声誉损失"
+              "可能引起费用争议或监管责任，按事实与适用规则，不保证必罚。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.12",
@@ -29567,12 +29633,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按适用消费者保护要求逐项列出价格与披露与减免政策与计价规则并保留家属选择与事先授权记录；发现价格公示缺失或被要求搭售时暂停并逐级确认与更正"
+              "中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。美国FTC｜同时销售或提供殡葬用品及两类服务的funeral provider适用，也含相应预先安排代理；不只看是否持殡仪馆牌照。面对面讨论服务选择或价格时提供可带走GPL，电话给准确价格信息，不一律需寄GPL；套餐不能代必需逐项价格。防腐收费核州法、明确事先许可或尽力联系等三类条件，不一概全部禁止；联邦法不强制防腐。价格表自最后分发、已选商品服务清单自安排会议至少保存一年，州法可另核。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "editor",
+            "nist",
+            "health"
           ],
           "type": "prose"
         },
@@ -29581,7 +29649,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜家属在情绪与时间压力下被以套餐报价代替逐项报价，且未被告知可单独选择与自带替代品。"
+              "编辑反例：套餐取代逐项价格，D2算错仍写家属已选择或恢复Q。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.14",
@@ -29595,7 +29663,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与遗体处置人员与登记文员；家属与主管部门"
+              "经理与专业服务协作岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.15",
@@ -29609,7 +29677,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "许可与证照与死亡登记与死亡证明签署链不清，或指派无资质人员实施遗体处置与火化；程序违法与遗体处置争议、主管部门处理与家属纠纷"
+              "可能越权提供服务或文件失真；按法域事实判断。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.16",
@@ -29623,12 +29691,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "只在资质与授权范围内安排遗体处置与火化与登记事项并逐项留痕，签署链与授权人明确；发现许可或授权或签署链缺口立即停止相关安排并上报"
+              "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "infectious-law"
           ],
           "type": "prose"
         },
@@ -29637,7 +29706,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜接到需要火化的遗体，但死亡登记与许可文件不齐，现场仍被要求按常态排期并先收取费用。"
+              "编辑反例：无死亡文件仍标可火化，或非殡仪馆主体以经理任命称可防腐。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.18",
@@ -29651,7 +29720,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与现场团队与安全卫生负责人；员工与家属与公众"
+              "现场员工及安全管理岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.19",
@@ -29665,7 +29734,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "员工防护装备与消毒与暴露后处置不落实，搬运与车辆与设施与危险品安全疏忽；职业伤害与感染风险、公共卫生与合规风险"
+              "可能暴露或伤害；46%每周非每天疾病问卷不是感染率。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.20",
@@ -29679,11 +29748,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规定提供并强制使用防护装备与执行消毒与暴露后处置流程，明确搬运与驾驶与设施安全规程；发现防护缺失或安全隐患立即停止作业并报告"
+              "传染病法71条分病种处理告知，由合格主体按有效技术规范执行；题面不发防护实操算法。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.21",
           "source_refs": [
+            "infectious-law",
             "onet"
           ],
           "type": "prose"
@@ -29693,7 +29763,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜为赶排期指派未取得相应资质的员工实施遗体防腐与整容，仅以内部培训记录为依据。"
+              "编辑反例：防护补给待核仍写可接触遗体，凭纸面成绩称完成培训。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.22",
@@ -29707,7 +29777,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与信息与记录负责人；逝者与家属与个人信息主体"
+              "处理信息记录岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.23",
@@ -29721,7 +29791,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "逝者与家属身份与亲属关系与健康与死亡与支付信息泄露或超范围收集与对外提供；侵犯个人信息权益、家属信任受损与法律责任"
+              "可能超范围处理或侵害相关权利，条件个案另核。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.24",
@@ -29735,12 +29805,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按最小必要收集并限定用途与留存期限与访问权限，敏感信息不在公开或外部渠道流转；发现信息外泄或越权访问立即报告并按机构与法规处置"
+              "信息边界｜PIPL6/13/19核最小必要、合法依据和保存期限；28/29按法定敏感条件及适用单独同意处理，不一律将姓名、联系方式、亲属关系与哀伤称敏感，健康资料可能符合。49条死者近亲属为自身合法正当利益可行使相关权利，生前另安排除外；51核安全权限，47法定保存未届不能直接删除。公开对外提供另核程序，不造家属同意。 殡葬条例28条录像至少90日，不一律最短即删。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29749,7 +29820,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜连续多场服务后员工防护装备补给不足，仍安排接触传染病遗体环境下的搬运与清洁。"
+              "编辑反例：把未核同意写已获，或忽略法定保存删除录像。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.26",
@@ -29763,7 +29834,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与客服与法务；家属与消费者与主管部门"
+              "客服财务记录岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.27",
@@ -29777,7 +29848,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "投诉与法律询问与付款协商处置不当，或结算与费用记录不清与承诺不一致；纠纷升级与诉讼或监管投诉、结算争议与审计问题"
+              "可能结算争议或失真；发生率未核。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.28",
@@ -29791,12 +29862,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按流程受理与记录投诉与法律询问并按时限回应，费用承诺与结算以书面口径与授权为准；发现重大投诉或法律询问或结算异常立即升级并保留证据"
+              "保真实项目选择算式与版本；中国24条先选择确认、结算出项目价格单据，美国清单要求分别核，不造批准。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "nist",
+            "health",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29805,7 +29878,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜家属联系与逝者健康与支付信息在多个工作群与外部渠道流转，含亲属关系与死因描述。"
+              "编辑反例：D2把C花费100误10，总1360仍口头称正确。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.30",
@@ -29819,7 +29892,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "经理与员工与供应商；机构与家属与合作方"
+              "排程人员及供应商管理岗位"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.31",
@@ -29833,7 +29906,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "员工与供应商与合同方的权责与考核与验收不清，或存在利益关系未申报；服务与费用失控、质量缺陷与利益冲突与合规风险"
+              "可能延误或资源冲突；本職频率未核，不把例子作高发。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.32",
@@ -29847,12 +29920,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "明确职责与考核与验收标准并定期评估，按制度申报利益关系并回避相关决策；发现越权或未申报关系或验收缺失立即暂停并复核与追责"
+              "H/V2基线M135/N30，R厅与M重叠15且转场未满足；真实安排核岗位和安全授权，不以工具草稿代验收。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29861,7 +29935,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜家属对费用与结算提出异议并称将投诉，处理仅在口头进行且费用记录与承诺口径不一致。"
+              "编辑反例：R只纠正报价就称可排同厅同人服务，或假写供应商验收。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.34",
@@ -29875,7 +29949,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务范围与工作情境（美国职业分类口径，不覆盖中国大陆职业划分）。"
+              "本職任务与问卷情境，非事故率。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.35",
@@ -29889,7 +29963,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对本职业任务与工作活动细节，帮助识别价格与许可与人员与遗体交接与记录环节的失效类型。"
+              "中国殡葬条例专业服务及文件边界；信息保护法律由正文PIPL source_refs支持，非同一URL。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.36",
@@ -29903,7 +29977,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；工资数字不用于风险评估。"
+              "美国FTC覆盖主体、GPL、明示选择及防腐收费条件，非中国规则。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.37",
@@ -29917,7 +29991,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 职业展望手册 2025—2035，经来源登记核对）；预测不等于实际招聘。"
+              "中国明码标价和收费通知对应项目目录、公示选择结算，不证美国要求。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.38",
@@ -29931,7 +30005,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于理解采用数字工具时的责任归属与回退方案原则；非殡葬或消费者保护或数据保护标准。"
+              "中国个人信息保护法6、13、19、28、29、47、49、51条；依据与敏感信息条件分别核，法定保存未届不直接删除。"
             ]
           },
           "id": "funeral-home-managers.risk.career-risk-cards.39",
@@ -30065,43 +30139,39 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的殡仪馆一周运营任务（含一个虚构机构与三场需安排的告别与安葬或火化、一份需配置的人员与场地清单、一份需核对的许可与价格文件清单）。",
-                  "一份空白的服务安排单与逐项报价表模板。",
-                  "一份空白的场地与人员排程表。",
-                  "一份空白的授权与许可核对表与异常升级清单。",
-                  "一支笔与计算器或电子表格（用于费用与库存与结算试算）。",
-                  "计时器（限时 90 分钟）。"
+                  "H/V2材料",
+                  "H/V2虚构三场礼堂题｜单厅L1、一位现场M（9:00–12:00）、一位协调N（同窗），转场15分钟占厅和M；时段半开区间。A服务9:00–9:30，B10:00–10:30，C11:00–11:30，三场M全程、N各开场10分钟。仅假设报价：每场厅300元/场、M30分钟100元/场、N协调80元/场；C另选花束2束×50元，A/B不选，均无其他收费。库存5束=3已核+1损坏+1待核，最低留1束已核，C用2可剩1。纸面不证明真实价格合法或需求授权；Q真实报价签约收费、遗体操作、发布暂停，无恢复确认。",
+                  "版本反例｜V1把花束待核1计可用，D2把C花费100误10并总三场写1360；候选R只把C提前10:15–10:45，试称报价正确便恢复Q。核项目/单位/选择/库存状态/厅与人员冲突，转场不另收费，不能造批准。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：三场服务的安排单与逐项报价、场地与人员排程、授权与许可核对表与异常升级清单。",
-                  "完成一次费用与库存与结算试算，并写出至少两条可能导致价格或合规或安全风险的情形与对应措施。",
-                  "写出哪些情形必须暂停并升级（价格公示缺失、未获事先授权即收费防腐或搭售、许可与死亡登记缺失、遗体处置越权、员工防护与感染暴露、家属信息对外提供、重大投诉与法律询问）。"
+                  "90分钟任务",
+                  "六段15/10/20/15/20/10分钟：读题→列约束→报价排程库存计算→核V1/D2→核R与Q→整理四作品，合计90。",
+                  "独立写三场逐项假设报价、厅与两人排程、库存账、版本交接；至少记误计库存和越权恢复两类反例。编号及合成数据，不找真实家属。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列家属需求与排期与人员与场地与价格与许可与记录的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对价格与披露写清逐项项目与家属选择与事先授权与复核人，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "可复算答案",
+                  "可复算答案｜A/B各300+100+80=480；C480+2×50=580，总1540元为假设，D2误花费10时C490、总1450也不是1360；需两处更正。库存已核3−C2=1留存达标，损坏待核不计；V1可用误4。基线转场9:30–9:45、10:30–10:45、11:30–11:45，厅和M无冲突、三场M90分钟+转场45=135，N30，无并行冲突。R中B10:00–10:30与C10:15–10:45重叠15分钟，厅与M冲突且转场未满足；仅修报价不修排程，Q未恢复。",
+                  "保每项输入单位、算式、半开时段和更正理由；基线仅纸面算术/资源成立，不是通过真实法律、报价授权或实操验收。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及定价形式与费用公示与遗体处置与火化与死亡登记的最终决定；对价格公示缺失与许可缺失与遗体处置越权与防护不足与隐私疑点一律写明暂停与升级并按机构授权上报主管或法务或合规与主管部门。",
-                  "作品只证明你能按本职业的工作方式组织服务与人员与价格与记录，不构成资格或胜任证明。"
+                  "仅纸面",
+                  "不做真实遗体接运防腐整容火化、驾驶、家属咨询、收费签约或对外发布。真实死亡文件、卫生、机构法定范围与价格另核；纸面不证明经营胜任，不造批准人或恢复Q。"
                 ]
               }
             ]
           },
           "id": "funeral-home-managers.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "入行练习：一次完整的殡仪馆运营任务（虚构材料）",
           "type": "cards"
@@ -30114,40 +30184,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用「任务—方法—证据」三列列出你在模拟运营任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及价格与许可与遗体处置与个人信息与投诉风险，必须按授权上报而非自行处理。"
+                  "作品1报价表",
+                  "逐场项目单位数量单价和选择，A/B480、C580、总1540；保D2的C490/总1360错误及重算1450，全部假设价格，不冒真实合法或家属已选。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的殡葬服务运营或价格与合规或财务负责人复核你的安排与报价与排程与风险处置，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示做完了，要展示从家属需求到报价到排期到许可到现场到结算与记录的流程与留痕。"
+                  "作品2排程表",
+                  "按半开区间列L1/M/N与15分钟转场；基线M135、N30无冲突，R厅M重叠15且转场未满足；不造真实排班批准。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的运营摘要（家属需求与授权、仪式与火化或下葬安排、人员与场地与供应商、价格与合同与许可状态、风险与待办事项）。",
-                  "摘要中不得出现真实逝者或家属或可识别信息，必要时使用编号与合成数据。",
-                  "注明信息来源与假设，区分实测值与估算与预测值。"
+                  "作品3库存与版本",
+                  "保5=3已核+1损坏+1待核，C领2已核留1；V1误计4，保D2/R原错及更正理由，不覆盖旧版。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了排程或文书或数据工具，标注哪些部分由工具生成、哪些由本人核对与修订。",
-                  "说明工具输出在使用前经过了谁的复核与哪次原始资料核对。",
-                  "价格与披露与费用若为假设值或示例值，必须标明并说明由授权人员最终确认。"
+                  "作品4交接摘要",
+                  "分H/V2事实、假设、候选/待确认与Q未恢复；如用工具保草稿及本人重算，不带真实资料或请经验者签认。"
                 ]
               }
             ]
           },
           "id": "funeral-home-managers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -30210,57 +30276,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（家属需求—排期与配置—遗体接运与授权人员—价格与许可核对—服务与投诉监督—结算与归档）。",
-                  "记录你观察到的价格与披露与许可与隐私与留痕要求。"
+                  "第1天·30分钟",
+                  "读本職23任务，写家属/经营/人员三重心与法域边界；不从经理名称排现场兼任。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：工时与待命与周末与节假日排班、电话与面对面沟通强度、防护装备与消毒与安全规程、与员工与遗体处置人员与供应商与主管部门的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "第2天·30分钟",
+                  "读H/V2列项目单位选择、半开时段与15分转场、留1已核库存、Q未恢复。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份服务安排单与逐项报价表样本。",
-                  "按规范列出关键要求（逐项项目与家属选择与事先授权、费用与减免与计价规则、许可与证照字段、异常上报路径）。"
+                  "第3天·30分钟",
+                  "独立三场报价表：480/480/580总1540；核D2花费10致1450不等1360，保两错。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次场地与人员排程与费用与结算试算，并标注假设值。",
-                  "对两个典型风险（价格公示缺失、许可与死亡登记缺失）写出核对与报告方案。"
+                  "第4天·30分钟",
+                  "画厅M/N排程，核基线M135/N30；R厅M重叠15及转场，不能用总工时替冲突。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次遗体接运与授权人员交接与许可核对的联动，或一次投诉受理与结算复核。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "第5天·30分钟",
+                  "做库存版本，3已核领2留1、损坏待核不计；核V1/D2/R反例，不恢复真实服务。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的报价与排程与合规与人员处置。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "第6天·90分钟",
+                  "按六段独立重做H/V2四作品；保原输入算式和更正，不要求外部确认或实操。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如执业资质、门店运营与销售与合规经验），以及下一步行动。"
+                  "第7天·30分钟",
+                  "按作品写继续/暂停/方向理由与目标机构待核条件；真实情绪卫生管理法律胜任仍未验证。"
                 ]
               }
             ]
           },
           "id": "funeral-home-managers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "七天体验：用虚构材料完成一次殡仪馆运营闭环",
           "type": "timeline"
@@ -30270,18 +30336,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按规范完成家属需求确认与逐项报价与排期与许可核对与结算记录并使过程可复核。",
-              "继续：能在悲伤与时间压力与投诉冲突下坚持价格与披露与安全与隐私规范，不省略关键环节。",
-              "继续：愿意从现场服务或销售或运营支持岗做起并把执业资质与价格与合规要求学清楚。",
-              "停止：对悲伤场景或冲突情形或定价与合规责任明显无法适应，且短期无法改善。",
-              "停止：对价格公示与许可与遗体处置授权与个人信息边界缺乏警觉，反复出现越权或记录缺失。",
-              "换方向：偏好现场服务与执行可考虑殡葬服务员；偏好遗体处置专业操作可考虑殡葬师与殡仪承办人与殡葬安排员。",
-              "换方向：偏好医疗机构管理可考虑医疗与健康服务经理；偏好社会项目可考虑社会与社区服务经理；偏好跨职能运营可考虑综合与运营经理。"
+              "继续探索｜能独立复算报价排程库存与版本，区分假设和待核。",
+              "继续探索｜愿意核目标岗位真实职责、工时、合同与法域资格。",
+              "继续探索｜理解作品不授实操、定价签约或机构服务范围。",
+              "暂停｜算式或冲突仍混乱就回题修正，不据一次错判人格。",
+              "暂停｜真实经营情绪卫生条件未核，不称通过。",
+              "换方向｜按现场与专业安排任务重心比较，独立条件另核。",
+              "换方向｜按医疗社会项目与跨职能运营探索，不保证直接转岗。"
             ]
           },
           "id": "funeral-home-managers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -30310,58 +30376,58 @@
             ],
             "rows": [
               [
-                "副学士或其他两年制学位",
-                "多数管理岗位",
-                "满足招聘与州许可的学历要求",
-                "较普遍",
-                "完成殡葬服务或相关专业教育",
-                "按学制",
-                "学历不保证取得定价与签放与遗体处置权限"
+                "副学士/两年学位",
+                "美国典型进入者",
+                "BLS本職典型教育",
+                "典型非个人必需",
+                "具体州/机构另核",
+                "具体投入未取样",
+                "O*NET新聘50%非从业分布"
               ],
               [
-                "州级执业资质（如适用）",
-                "涉遗体处置与葬礼安排岗位",
-                "满足监督训练与考试与执业要求",
-                "视岗位与州法而定",
-                "完成规定教育与实践与监督训练并通过州考试",
-                "数月至数年",
-                "以所在地州委员会要求为准，本页不提供个人资格结论"
+                "州级许可",
+                "适用的专业或管理岗位",
+                "核州法执业条件",
+                "岗位与州另核",
+                "OOH组合21岁/教育/训练/考试",
+                "具体费用考试未取样",
+                "州许可不替机构任命或中国条件"
               ],
               [
-                "价格与消费者保护与合规培训",
-                "所有管理岗位",
-                "降低价格与披露与消费者争议风险",
-                "普遍需要",
-                "参加机构或行业培训并考核",
-                "数小时至数天",
-                "培训不等于法定授权或主管部门认定"
+                "价格与消费者保护准备",
+                "定价报价岗位",
+                "核FTC或中国收费规则",
+                "法规责任非统一课程证",
+                "按法域机构核",
+                "具体课程费用未取样",
+                "培训不证明价格或选择已合法"
               ],
               [
-                "工商与财务与运营管理能力",
-                "运营与多门店岗位",
-                "满足预算与成本与绩效与人员管理要求",
-                "普遍需要",
-                "通过教育与实践与项目积累",
-                "数月至数年",
-                "能力不等于价格与许可与遗体处置的授权"
+                "财务人员运营准备",
+                "运营管理岗位",
+                "核预算排程绩效任务",
+                "真实招聘另核",
+                "本職BLS经验少于5年为典型",
+                "具体年限未取样",
+                "不保证晋升多店"
               ],
               [
-                "个人信息保护与安全卫生培训",
-                "涉家属信息与现场安全岗位",
-                "降低信息泄露与职业伤害与感染风险",
-                "普遍需要",
-                "参加机构或行业培训并考核",
-                "数小时至数天",
-                "以机构制度与所在地法规要求为准"
+                "信息与安全卫生准备",
+                "处理资料/现场岗位",
+                "核有效规则和培训",
+                "课程条件另核",
+                "按具体任务法域核",
+                "投入未取样",
+                "不赋专业操作权限"
               ],
               [
-                "门店运营与销售与社区关系经验",
-                "转向资深或多门店方向者",
-                "提升承担盈利与团队与社区责任的能力",
-                "晋升方向需要",
-                "通过业绩与项目与内部晋升积累",
-                "数月至数年",
-                "不替代合规与签放责任"
+                "机构范围与岗位授权",
+                "遗体专业服务岗位",
+                "中国五项殡仪馆专门提供",
+                "机构范围非个人通用证",
+                "美国州与中国具体条件另核",
+                "具体条件未取样",
+                "经理任命不替法定范围"
               ]
             ]
           },
@@ -30377,10 +30443,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定资质与机构授权是三种不同状态：满足招聘条件不等于取得州级执业资质或机构签放与定价授权，取得培训与证书不等于获得独立处置遗体或对外承诺费用的决定权。",
-              "资格边界（二）｜美国 O*NET 教育栏显示 50% 需要副学士或其他两年制学位、26% 需要高中文凭或同等学历、15% 需要中学后证书（本页不编造其余比例），Job Zone 为三级（SVP 6.0 至 <7.0）；BLS 组合口径称多数雇主与州许可法通常要求殡葬服务申请人年满 21 岁、至少两年高等教育、监督训练并通过州考试。中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，并按收费与明码标价政策分层管理；两者不可互换。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或主管部门要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
+              "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。",
+              "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。",
+              "信息边界｜PIPL6/13/19核最小必要、合法依据和保存期限；28/29按法定敏感条件及适用单独同意处理，不一律将姓名、联系方式、亲属关系与哀伤称敏感，健康资料可能符合。49条死者近亲属为自身合法正当利益可行使相关权利，生前另安排除外；51核安全权限，47法定保存未届不能直接删除。公开对外提供另核程序，不造家属同意。",
+              "准备项为编辑核对方向，具体招聘课程费用未取样，未作个人资格体检或录用结论。"
             ]
           },
           "id": "funeral-home-managers.path.credential-boundary.1",
@@ -30395,8 +30461,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。殡仪馆与公墓等殡葬服务机构常按机构与门店分批发布，且多通过机构直招与内部晋升与行业渠道招募，公开渠道的样本难以代表整体市场；机构规模与门店网络与所有权结构与人口结构与丧事发生时间与季节性负荷的波动会明显影响用人规模。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型（民政部门主管的殡仪馆、公墓与纪念园、连锁或民营与家族经营机构）、岗位职责与授权边界（运营管理、销售与预先安排、价格与合规、现场与遗体处置协助）、门店规模与管理幅度、工时与待命与节假日安排、学历与执业资质与管理经历要求、以及薪酬构成（基本工资、绩效或销售提成或经营奖金、待命或夜班补贴、加班或调休）；这些信息比页面往往更能反映真实条件。"
+              "证据不足：中国本職具体招聘公告、职位数量、合同工资与渠道比例未取得；不编内部晋升/推荐份额或人口季节驱动。",
+              "编辑核对｜记录日期城市机构主体、法定范围实际任务、学历经验州法或中国条件、班次待命与税前后工资、价格与合同权限；H/V2不是招聘真题。"
             ]
           },
           "id": "funeral-home-managers.path.recruitment-sample.1",
@@ -30424,10 +30490,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 殡葬家庭经理国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9171.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 资格与训练资料",
@@ -30462,7 +30528,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在资深经理指导下学习排程与报价辅助与费用与库存台账与投诉受理辅助；不独立承担定价与费用承诺与签放与遗体处置安排责任。"
+              "编辑阶段例｜核该阶段任务、经验、招聘与法域机构条件；未核统一年限，不从阶段名赋专业处置权或保证晋升。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.12",
@@ -30490,7 +30556,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成单店或单店群的服务安排与排期与人员与场地与报价与许可核对与投诉与结算，遇越权与合规与安全疑点按规程上报。"
+              "编辑阶段例｜核该阶段任务、经验、招聘与法域机构条件；未核统一年限，不从阶段名赋专业处置权或保证晋升。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.14",
@@ -30518,7 +30584,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能统筹多门店或较大规模的目标与预算与人员与绩效与合规，负责价格与披露与安全卫生与记录质量。"
+              "编辑阶段例｜核该阶段任务、经验、招聘与法域机构条件；未核统一年限，不从阶段名赋专业处置权或保证晋升。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.16",
@@ -30546,7 +30612,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与治理与定价与政策与培训与门店网络与对外关系管理，处理复杂与争议事项；需相应岗位授权并承担经营责任。"
+              "编辑阶段例｜核该阶段任务、经验、招聘与法域机构条件；未核统一年限，不从阶段名赋专业处置权或保证晋升。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.18",
@@ -30574,7 +30640,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成副学士或相关高等教育（或从现场服务或销售或运营支持岗起步） → 按所在地要求取得殡葬服务执业资质与监督训练与考试（如涉及） → 通过机构招聘与价格与消费者保护与个人信息与安全卫生培训 → 在资深经理带领下学习家属沟通与报价与排期与许可与人员与合规与结算 → 通过考核后独立承担单店或单店群运营并承担经营与合规责任 → 在多门店与绩效与合规与突发事件中积累经验 → 视表现转为多门店或机构与区域运营负责人，或转向殡葬服务员、殡葬师与殡仪承办人与殡葬安排员、医疗与健康服务经理、社会与社区服务经理、综合与运营经理等相邻岗位。价格与合规意识与沟通与管理能力通常构成门槛，真正决定长期发展的是把家属需求做成可交付安排的能力、价格与消费者保护的合规判断、人员与绩效管理能力，以及在悲伤与时间压力下的决策稳定性。"
+              "编辑路径｜核目标机构实际条件，做H/V2探索，再按法域进入训练考核及具体授权；支持独立多店管理为编辑阶段，不保证统一晋升或直接转岗。美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.20",
@@ -30588,7 +30654,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜「受过培训」「取得证书或课程」「取得州级或属地执业资质」「获得机构授权」是四种不同状态；本页列示的准备项不等于任何法定资质，也不自动赋予定价与费用公示与签放与遗体处置与对外发布的决定权。"
+              "资格边界｜招聘条件、课程证书、个人法定资格、机构服务范围与岗位授权分别核，不从经理名赋价目表合法或死亡证明签署权。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.21",
@@ -30602,7 +30668,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国 O*NET 教育栏显示 50% 需要副学士或其他两年制学位、26% 需要高中文凭或同等学历、15% 需要中学后证书（本页不编造其余比例），Job Zone 为三级（SVP 6.0 至 <7.0），BLS 组合口径称多数雇主与州许可法通常要求殡葬服务申请人年满 21 岁、至少两年高等教育、监督训练并通过州考试；中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，并按殡葬服务收费与明码标价政策分层管理；两者不可互换，具体以所在地法规与机构规定为准。"
+              "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.22",
@@ -30616,7 +30682,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为「实践—资质—授权—负责」的循环：先完成教育与执业资质与合规与安全卫生训练，再在家属沟通与报价与排期与许可与人员与结算中积累经验，通过考核后独立承担单店或单店群运营并带教；涉及定价与费用公示与遗体处置与火化与死亡登记与下葬许可与个人信息对外提供与重大投诉与法律询问时，必须按流程取得相应授权或移交具备资质或获得授权的人员与主管部门。"
+              "阶段说明｜按岗位培训经验与条件探索，表中为编辑任务重心，不证明人人按序晋升或任意跨方向。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.23",
@@ -30658,7 +30724,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 职业展望手册 2025—2035，经来源登记核对）；预测不等于实际招聘。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.26",
@@ -30868,7 +30934,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "统筹多门店或较大规模的目标与人员与绩效与合规并指导新人，负责服务与价格与安全与此隐私质量。"
+              "编辑多店例｜统筹目标人员绩效及服务价格安全资料质量，具体任用与授权另核。"
             ]
           },
           "id": "funeral-home-managers.path.career-path-block.41",
@@ -31553,10 +31619,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 殡葬家庭经理国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9171.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "BLS 职业展望手册：殡葬服务职业（2025—2035）",
@@ -31631,12 +31697,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（精确职业 O*NET-SOC 11-9171.00）：2025 年就业约 34,800 人（BLS 职业展望手册，经来源登记核对），2025—2035 年预计增长 4%（增至约 36,200 人）；2025 年中位时薪 37.88 美元、中位年薪 78,790 美元，工资分布从下十分位 49,700 美元到上十分位 156,400 美元。年均空缺约 5,600 个为「殡葬服务人员」组合职业口径，不是本职业精确空缺。中国大陆部分：未建立与本职业精确对应的公开职业工资与就业统计，按证据政策本页只登记口径与缺口，不提供代理数值。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。 美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。 证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31673,12 +31739,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本职业就业为精确行；空缺为组合行，含增长与替换需求，不可读作本职业精确空缺。人口结构与殡葬服务需求与机构规模与门店网络支撑需求，但丧事发生时间与季节性负荷与机构预算与人力结构波动会影响岗位。"
+              "本職EP年空缺2.6千含增长替换，净增1.4千另列；预测不等实际招聘，未核中国人口季节用工因果。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31687,12 +31753,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；分行业与分地区细分可能缺失；预测不等于实际招聘数。"
+              "EP包含自雇，2025本職自雇58.1%；OEWS工资排自雇，预测和工资不可拼作同一群体。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31715,12 +31781,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 11-9171.00；空缺为「殡葬服务人员」组合口径"
+              "本職BLS11-9171精确行，组合殡葬服务人员另列"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31729,12 +31795,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 34,800 人（2025）；2025—2035 年增长 4%（约 36,200 人）；组合口径年均空缺约 5,600 个"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31771,7 +31837,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；上下十分位跨度约 3.2 倍，机构类型与门店规模与管理幅度与地区与绩效结构是主要差异来源。"
+              "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.18",
@@ -31785,7 +31851,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与绩效与销售提成与经营奖金与待命补贴；本精确职业的分行业与分地区工资本页未取得，按可见缺口登记。"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。 行业工资OOH本職殡葬服务业78,810，其他细分与自雇收入未取得。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.19",
@@ -31827,7 +31893,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 37.88 美元、中位年薪 78,790 美元；分位 49,700 / 61,890 / 103,940 / 156,400 美元"
+              "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.22",
@@ -31869,12 +31935,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资、人社部门企业薪酬调查为人社口径聚合，均不按本职业精确拆分；殡葬服务机构多由民政部门主管并按收费与明码标价政策分层管理，机构性质与门店规模与岗位与工时与班次差异较大，聚合均值不能替代职业工资，也不能用于推断起薪或到手收入。"
+              "NBS行业为背景，具体中国本職工资就业分类未取得；不能以代理推起薪或美国机构比例。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -31911,12 +31977,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局城镇单位就业人员平均工资与人社部企业薪酬调查（行业或岗位聚合）与有界检索"
+              "中国NBS行业参考及有界查阅，不冒职业精确统计"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.28",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -31925,12 +31991,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未建立与本职业精确对应的职业工资与就业统计值；按证据政策本页展示缺失而不使用代理数字。"
+              "证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -31953,12 +32019,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国 2025—2035 就业增长与空缺口径（BLS 职业展望手册，经来源登记核对）；空缺为组合口径，预测不等于实际招聘。"
+              "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31967,12 +32033,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对国家统计局与人社部门聚合工资的口径与年份；为背景参照而非职业工资，且本职业精确值不可得。"
+              "中国NBS行业不代本職；精确值本轮未取得。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "r2-pay-2"
           ],
           "type": "prose"
         },
@@ -32023,7 +32089,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由管理岗转向现场服务与执行"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.36",
@@ -32065,7 +32131,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远，需取得相应执业资质与监督训练"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.39",
@@ -32107,7 +32173,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由殡葬服务运营转向医疗管理"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.42",
@@ -32149,7 +32215,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由商业服务运营转向社会项目管理"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.45",
@@ -32191,7 +32257,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由殡仪馆运营转向行政服务管理"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.48",
@@ -32233,7 +32299,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由单行业运营转向跨职能运营"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.51",
@@ -32275,7 +32341,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远，由管理转向一线照护"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.54",
@@ -32317,7 +32383,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由运营合规转向专门合规职能"
+              "编辑任务邻近比较，转向须独立核能力、法域资格和岗位条件，不代表容易或自动晋升。"
             ]
           },
           "id": "funeral-home-managers.market-signals.market-signal-card.57",
@@ -32340,97 +32406,100 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 11-9171.00，本职业规划、指导或协调殡仪馆的服务或资源，包括为服务或商品定价与管理殡仪馆设施。工作包括与逝者家属或亲友商谈并安排葬礼细节与提供咨询与安慰、为葬礼与下葬或火化排期、指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员并排定工时与招聘与培养员工、为服务或商品定价与赊销并销售与洽谈预先安排的殡葬服务合同、完成并维护州要求文书与跟踪文件与产品库存记录并将死亡证明送交取得法定授权人签署、监督服务运营符合政策法规与法律、审阅财务与绩效数据并制定营销与销售与财务目标并开展市场研究与社区关系。不含依法只能由具备资质或获得授权的人员与机构承担的遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定职责。",
+                "answer": "职业定义｜O*NET-SOC11-9171.00 Funeral Home Managers，固定中文名殡葬家庭经理；规划、指导或协调殡仪馆服务资源，包括定价和设施管理。23任务均核心：商谈家属葬礼细节/安慰、排葬礼下葬火化、送死亡证明给法定授权者签署、监督合规、指导防腐服务登记化妆等员工、州文书跟踪库存、销售/预先安排合同、服务调整、投诉法律询问付款协商、员工目标排班招聘培训、价格赊销、财务绩效与降本、行政维修、营销财务目标、社区推广、供应商评估、市场研究及促销。经理与专业处置可兼任，名称不授任意处置或签署权，按法域机构核。",
                 "id": "funeral-home-managers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.funeral-home-managers.q1",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "核心区别在授权与产出：本职业承担殡仪馆的服务与资源与设施与人员与价格管理并对经营与价格与合规与家属承诺结果负责，产出是殡仪服务安排与人员与场地与日程管理结果与许可与价格文件与记录归档；殡葬服务员在机构安排下承担仪式现场服务与灵柩与车辆与场地保障，通常不参与定价与经营决策；殡葬师与殡仪承办人与殡葬安排员以遗体防腐与整容与葬礼安排的专业处置为产出，通常需专门执业资质；医疗与健康服务经理管理医疗机构的临床与运营，社会与社区服务经理管理社会服务项目，综合与运营经理管理跨职能业务运营。上述岗位常在同一照护与殡葬链条中衔接，但衔接不等于可互相替代。",
+                "answer": "编辑比较｜经理运营、现场服务员、专业操作安排、医疗机构、社会项目与跨职能管理为任务重心，可兼任交叉，具体授权另核。",
                 "id": "funeral-home-managers.faq.2",
                 "question": "它和殡葬服务员、殡葬师与殡仪承办人、医疗与健康服务经理有什么区别？",
                 "question_key": "career.faq.funeral-home-managers.q2",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国口径（精确职业 11-9171.00）：2025 年中位时薪 37.88 美元、中位年薪 78,790 美元；分位 49,700 / 61,890 / 103,940 / 156,400 美元/年（跨度约 3.2 倍）；2025 年就业约 34,800 人，2025—2035 年预计增长 4%（增至约 36,200 人）（BLS OEWS 2025 与 BLS 职业展望手册，经来源登记核对）。年均空缺约 5,600 个为「殡葬服务人员」组合职业口径，不是本职业精确空缺；上述为美国全国口径，不适用其他法域；OEWS 不含福利与绩效与销售提成与加班。",
+                "answer": "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。 美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。 OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
                 "id": "funeral-home-managers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.funeral-home-managers.q3",
                 "source_refs": [
                   "oews",
-                  "ep"
+                  "ep",
+                  "oews-method"
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资与就业统计。国家统计局按行业门类公布城镇单位就业人员平均工资，人力资源和社会保障部门另发布企业薪酬调查信息，两者均为聚合口径、不按本职业精确拆分；殡葬服务机构多由民政部门主管并按殡葬服务收费与明码标价政策分层管理。按本页证据政策，中国大陆部分保留「证据不足：」可见标记，展示缺失而不使用行业或调查均值或美国数据推断起薪或到手收入。",
+                "answer": "证据不足：中国本职精确职业分类、全国工资就业、城市招聘合同与工资结构未取得，NBS行业与美国数据不能代填，不据有界查阅断言统计不存在。",
                 "id": "funeral-home-managers.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.funeral-home-managers.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "r2-pay-2"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：每天使用电话沟通 100%、每天与个人及团队面对面讨论 92%、每天使用电子邮件 86%、持续与他人接触 85%、每天在环境受控的室内工作 83%、每天在封闭车辆或操作封闭设备中工作 79%、与工作组或团队共同工作极其重要 79%、与外部客户或公众打交道极其重要 79%、决策自由为「很大」74%、每天做决策 72%、工作周超过 40 小时 67%、精确或准确极其重要 59%、错误后果极其严重 54%、每天时间压力 57%、每月以上冲突情形 58%。工作以高频沟通与在悲伤与时间压力下做决策为主，待命与超 40 小时工作周常见。",
+                "answer": "沟通｜100%每天电话、92%每天面对面、86%每天邮件；85%持续接触。\n团队公众｜79%团队极重要、21%非常重要；79%公众极重要、14%非常重要。\n自主影响｜74%决策自由很大、72%每天决策；60%任务优先级自由很大；47%决策结果非常重要，非仅重要；41%他人结果高度责任。\n准确后果｜59%精确极重要、38%非常重要；54%错误后果极严重，为问卷而非事故率。\n压力冲突｜57%压力每天、25%每周至少但非每天；58%冲突和48%不愉快人士为每月至少但非每周。\n环境车辆｜83%每天可控室内、79%每天封闭车辆；56%天气户外每周至少但非每天。\n卫生防护｜46%疾病、49%污染、55%冷热、47%常规防护、34%危险条件均每周至少但非每天；疾病另36%每天，不能把46%作感染率。\n身体节奏｜61%约半时站、50%约半时坐、49%接近近触；67%工周超过40、24%40小时，不编剩余9；55%常规45%不规则，非中国或个人固定工时。\n领导书面｜46%协调领导极重要；34%书面、48%公开演讲每周至少但非每天；40%轻度自动化、24%无，非AI采用。",
                 "id": "funeral-home-managers.faq.5",
                 "question": "工作环境和沟通强度如何？",
                 "question_key": "career.faq.funeral-home-managers.q5",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "影响主要在排程与文书与数据环节：排程与任务清单整理、价目表与合同与告知文案草稿、库存与采购与供应商台账维护、绩效与成本与市场数据统计与图表、记录检索与汇总可被工具辅助；家属需求确认与悲伤情境沟通、价格与披露与消费者选择与事先授权、遗体交接与许可与死亡登记、费用承诺与最终签放、异常与投诉与合规升级仍由经理与授权人员负责。本职业属中等偏高暴露，但任务暴露不等于岗位替代，工具输出不能替代合规判断与授权签放。",
+                "answer": "证据不足：本職AI量化暴露采用效率就业因果未取得，虚构草稿为编辑试用，不定中高或保证替代年份。",
                 "id": "funeral-home-managers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.funeral-home-managers.q6",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "O*NET 教育栏显示 50% 需要副学士或其他两年制学位、26% 需要高中文凭或同等学历、15% 需要中学后证书（本页不编造其余比例）；Job Zone 为三级（SVP 6.0 至 <7.0）。美国多数雇主与州许可法通常要求殡葬服务申请人年满 21 岁、至少两年高等教育、监督训练并通过州考试（据 BLS 组合口径）；实际以机构与属地要求为准。",
+                "answer": "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。",
                 "id": "funeral-home-managers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.funeral-home-managers.q7",
                 "source_refs": [
                   "onet",
-                  "ep"
+                  "ep",
+                  "operations"
                 ]
               },
               {
-                "answer": "「受过培训」「取得课程或证书」「取得州级或属地执业资质」「获得机构授权」是四种不同状态。美国殡葬服务与遗体处置在美国多数地区需专门执业资质，管理岗通常在此之上并要求管理经历；中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，并按殡葬服务收费与明码标价政策分层管理。本页列示的准备项不构成任何机构的正式资格清单。",
+                "answer": "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。 美国FTC｜同时销售或提供殡葬用品及两类服务的funeral provider适用，也含相应预先安排代理；不只看是否持殡仪馆牌照。面对面讨论服务选择或价格时提供可带走GPL，电话给准确价格信息，不一律需寄GPL；套餐不能代必需逐项价格。防腐收费核州法、明确事先许可或尽力联系等三类条件，不一概全部禁止；联邦法不强制防腐。价格表自最后分发、已选商品服务清单自安排会议至少保存一年，州法可另核。",
                 "id": "funeral-home-managers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.funeral-home-managers.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "funeral-law",
+                  "editor",
+                  "nist",
+                  "health"
                 ]
               },
               {
-                "answer": "常见失效包括：未逐项公示价格与披露或未取得事先授权即收费防腐与搭售或诱导性标价；许可与证照与死亡登记与死亡证明签署链不清或指派无资质人员实施遗体处置与火化；员工防护装备与消毒与暴露后处置不落实或设施与危险品安全疏忽；逝者与家属身份与亲属关系与健康与死亡与支付信息泄露或超范围使用；投诉与法律询问与付款协商处置不当或结算与费用记录不清；员工与供应商权责与验收不清或利益关系未申报。控制要点是按价格与许可与安全与隐私规程核对与留痕、异常与越权事项立即升级。",
+                "answer": "编辑风险｜六卡为可能反例，未核事故感染争议率；按对应现行规则，H/V2不恢复Q，资料敏感与死者近亲属权利按PIPL条件。",
                 "id": "funeral-home-managers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.funeral-home-managers.q9",
                 "source_refs": [
                   "onet",
-                  "cnclass"
+                  "funeral-law",
+                  "infectious-law",
+                  "pipl-law",
+                  "nist",
+                  "health"
                 ]
               },
               {
-                "answer": "美国口径下 2025—2035 年预计增长 4%（约 34,800 增至约 36,200 人），组合口径年均空缺约 5,600 个，含增长与替换需求；预测不等于个人机会，实际机会取决于本地人口结构与殡葬服务需求与机构规模与门店网络。可转向殡葬服务员、殡葬师与殡仪承办人与殡葬安排员、医疗与健康服务经理、社会与社区服务经理、行政服务经理、综合与运营经理、个人护理员、合规专员等相邻岗位（需重新学习与补足证据），或转向多门店与区域运营负责人方向。",
+                "answer": "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。 转向比较只是任务邻近，条件另核；H/V2四作品不证实操或资格。",
                 "id": "funeral-home-managers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.funeral-home-managers.q10",
@@ -32452,7 +32521,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 11-9171.00 的职业范围与任务与工作情境与兴趣与教育与准备层级，再取 BLS OEWS 2025 的工资中位与分位（经 O*NET 呈现）与 BLS 职业展望手册 2025—2035 的就业与增长与空缺（经来源登记核对），最后以国家统计局与人社部门聚合工资作为中国大陆的背景参照；中国大陆未建立与本职业精确对应的统计值，按证据政策展示缺失而不使用代理数字；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "来源卡｜本轮核本職O*NET概览详情57情境、CA内全国工资、行业42/58、BLS本職EP与OOH工资学历。FTC及中国收费108号/明码标价现行原文已读；OEWS方法和中国殡葬/传染/PIPL沿同轮0434/0435已核资料，不声称全部来源重新研究。"
             ]
           },
           "id": "funeral-home-managers.sources.source-card.1",
@@ -32466,7 +32535,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 职业档案与详细资料与兴趣与训练与证书与国家工资与行业与趋势与热门技术与定制页、BLS OEWS 与职业工资页与就业预测与数据总览与全国数据表与新闻稿、BLS 职业展望手册殡葬服务职业的组合行与精确行、国家统计局与人社部门聚合工资、美国《殡葬规则》与中国大陆殡葬服务收费与明码标价规定、ILO 与 NIST 治理参考与 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "来源登记｜保稳定ID与引用，新增对应方法与中国法律；全国雇员工资与含自雇EP、OOH本职行业工资和组合空缺分别标范围。部分旧目录未本轮逐条访问，不冒法规或统计证明。"
             ]
           },
           "id": "funeral-home-managers.sources.source-card.2",
@@ -32480,7 +32549,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 与 FTC 与主管部门官方页面；O*NET 页面标注数据更新年份为 2026，其工资为该页面显示的 2025 年 BLS OEWS 数据；就业与增长与空缺采用 BLS 职业展望手册 2025—2035（经来源登记于 2026-09-02 核对）；国家统计局数据为 2025 年并于 2026 年发布，人社部门企业薪酬调查为 2025 年并于 2026-07-08 发布。"
+              "查阅记录｜本次2026-10-03续核本職资料；原2026-09来源访问不作为本轮已研究凭据。现行收费108号2026-01-26成文、明码标价2026-05-31试行；中国三部法沿同轮0435已核适用条文。"
             ]
           },
           "id": "funeral-home-managers.sources.source-card.3",
@@ -32494,12 +32563,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）中国大陆未建立与本职业精确对应的职业工资与就业统计，按证据政策展示缺失而不使用代理数字；（2）本职业在美国可按行业与分地区读取的工资中位数未取得（O*NET 仅列出单一行业行且未给出占比）；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源。三处均保留「证据不足：」标记，不以行业或调查均值、招聘报价或第三方估算填充；年均空缺以“组合口径、非本职业精确空缺”显式标注。"
+              "证据不足：中国本職精确工资就业分类、城市合同招聘样本、美国其他细分行业工资与自雇收入、AI量化采用效率因果、测评效度及具体个案条件未取得。全国分位、EP与殡葬服务业78,810已核，缺口不豁免完整练习答案作品七日和自审。"
             ]
           },
           "id": "funeral-home-managers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-2",
+            "ilo",
+            "editor",
+            "nist"
           ],
           "type": "prose"
         }
@@ -32571,7 +32644,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业范围：规划、指导或协调殡仪馆的服务或资源，包括为服务或商品定价与管理殡仪馆设施。",
                   "含家属服务与排期与人员与价格与许可与经营与市场等要素。"
@@ -32581,68 +32654,68 @@
                 "limitation": "职业级描述，不代表州级执业许可要求。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬家庭经理职业档案（11-9171.00）",
-                "period": "O*NET 2026 update; accessed 2026-08-30",
+                "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "11-9171.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/11-9171.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "23 项任务（均为核心）与 41 项工作活动与工作情境明细，用于界定本职业边界。",
-                  "用于核对家属服务与价格与许可与人员与记录与经营环节。"
+                  "本職23核心任务、36工作活动与57工作情境完整读取。",
+                  "频率保每周非每天、每月非每周，问卷非事故率或个体适配。"
                 ],
                 "evidence_type": "official task and work context detail",
                 "id": "bls",
                 "limitation": "职业级描述，非自动化风险评估。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬家庭经理详细职业资料（11-9171.00）",
-                "period": "O*NET 2026 update; accessed 2026-08-30",
+                "period": "O*NET 2026 occupational profile",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "11-9171.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/11-9171.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对职业要素与样本岗位名称。",
-                  "样本岗位含殡葬指导与殡仪馆经理与殡葬服务经理与殡仪馆业主与殡葬运营经理等。"
+                  "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。",
+                  "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。"
                 ],
-                "evidence_type": "official custom occupation profile",
+                "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "用于边界与要素核对。",
+                "limitation": "预测含自雇、空缺含增长替换，非实际招聘或个人机会。",
                 "market": "美国",
-                "name": "O*NET OnLine：殡葬家庭经理定制职业页（11-9171.00）",
-                "period": "current page; accessed 2026-09-02",
-                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "name": "BLS本職就业预测与特征11-9171",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "11-9171.00 exact occupation",
-                "url": "https://www.onetonline.org/link/custom/11-9171.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对全国中位与分位工资（精确职业 11-9171.00）。",
-                  "中位时薪 37.88 美元、中位年薪 78,790 美元；10% 分位 49,700 美元/年、25% 分位 61,890 美元/年、75% 分位 103,940 美元/年、90% 分位 156,400 美元/年。"
+                  "美国本职全国2025｜年工资10/25/50/75/90分位49,700/61,890/78,790/103,940/156,400美元，时薪23.90/29.75/37.88/49.97/75.19美元。中位非起薪，90/10界值比约3.1，不证明资历、门店规模、地区或绩效因果及个人上限。",
+                  "CA页内United States全国已核，州城市值不取本页全国。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "全国口径，不含福利与绩效与提成与加班。",
+                "limitation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬家庭经理国家工资（11-9171.00）",
                 "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "11-9171.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/11-9171.00"
+                "url": "https://www.onetonline.org/link/localwages/11-9171.00?st=CA"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年行业分布仅列出除公共管理外的其他服务业（含殡仪馆与殡葬服务与火化与墓园服务），未给出占比。",
-                  "用于理解雇主类型分布，不替代行业工资。"
+                  "本輪行业页42/58已核，不能称只一行或没有占比。",
+                  "未用比例拆出具体设施工资或推中国分布。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "nbs",
-                "limitation": "仅列出单一行业行且未给出占比。",
+                "limitation": "行业页42%其他服务、58%其他行业，页内未注明对应年；比例不代工资。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬家庭经理行业分布（11-9171.00）",
                 "period": "current page; accessed 2026-09-02",
@@ -32699,14 +32772,14 @@
                 "url": "https://www.onetonline.org/link/localtraining/11-9171.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2025 年就业约 34,800 人；2025—2035 年预计增长 4%，增至约 36,200 人。",
-                  "多数雇主与州许可法通常要求殡葬服务申请人年满 21 岁、至少两年高等教育、监督训练并通过州考试。"
+                  "本職全国2025中位78790，殡葬服务业本職行业78810；非组合morticians工资。",
+                  "美国准备｜O*NET本职新聘要求问卷50%副学士或两年学位、26%高中或同等、15%中学后证书，非从业学历，不编其余比例。Zone3/SVP6至小于7为分组，组内一至两年训练非本职每岗统一年限。BLS本职典型副学士、相关经验少于5年、在职培训None，非不得培训。OOH组合口径多数雇主/州法21岁、至少两年高教、监督训练考试，具体州与机构另核，不移植中国门槛。"
                 ],
                 "evidence_type": "official outlook exact rows",
                 "id": "operations",
-                "limitation": "预测口径，不含自雇；不代表实际招聘。",
+                "limitation": "OOH工资和就业分别核：工资排自雇，就业预测含自雇；本職4%为取整，组合5.6千年空缺非本職。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：殡葬服务职业（精确行，2025—2035）",
                 "period": "2025 wages and employment; 2025-2035 projections; updated 2026-08-27",
@@ -32715,7 +32788,7 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "组合职业 2025—2035 平均每年约 5,600 个空缺；该数字不是殡葬家庭经理的精确空缺。",
                   "殡葬服务人员常全职与待命并在晚间周末工作，部分每周超过 40 小时。"
@@ -32731,10 +32804,10 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/funeral-service-occupations.htm#tab-6"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "要求覆盖的服务提供者给出准确逐项价格与披露、尊重消费者选择。",
-                  "禁止虚假法定要求、未经许可收费防腐及搭售。"
+                  "美国FTC｜同时销售或提供殡葬用品及两类服务的funeral provider适用，也含相应预先安排代理；不只看是否持殡仪馆牌照。面对面讨论服务选择或价格时提供可带走GPL，电话给准确价格信息，不一律需寄GPL；套餐不能代必需逐项价格。防腐收费核州法、明确事先许可或尽力联系等三类条件，不一概全部禁止；联邦法不强制防腐。价格表自最后分发、已选商品服务清单自安排会议至少保存一年，州法可另核。",
+                  "FTC为美国适用主体要求，非中国收费/个人信息保护依据。"
                 ],
                 "evidence_type": "consumer protection guidance",
                 "id": "health",
@@ -32763,10 +32836,10 @@
                 "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/laodongguanxi_/fwyd/202607/t20260708_579822.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "殡葬服务收费按基础与非基础项目及机构性质由国家政策和地方规则分层管理。",
-                  "用于说明经理的定价与承诺权限边界。"
+                  "中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。",
+                  "实际属地收费目录和标准仍需核，未取样真实报价。"
                 ],
                 "evidence_type": "official pricing policy",
                 "id": "editor",
@@ -32779,10 +32852,10 @@
                 "url": "https://www.ndrc.gov.cn/xwdt/tzgg/202601/t20260127_1403490.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "要求殡葬服务项目与内容与标准与收费与计价规则与定价形式与依据与减免政策清晰公示。",
-                  "禁止未标费用和诱导性标价。"
+                  "中国收费｜发改价格〔2026〕108号分基础/非基础和机构性质管理，清单外不得收费、未按规定公示或政策不符不得收费，不限制自带骨灰盒。明码标价规定2026-05-31试行，4/15渠道一致、5套餐内容各项服务明示、16殡仪馆性质标准计价形式依据减免、24选择确认和结算项目单据、28/29未标费用及欺诈禁止；个性化6条书面约定。具体属地目录标准另核，不由经理任意定价。",
+                  "2026-05-31试行，含设施用品中介主体，不一概每套餐必须逐项单价而漏原5条内容要求。"
                 ],
                 "evidence_type": "official price transparency rule",
                 "id": "nist",
@@ -32882,7 +32955,7 @@
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "r2-pay-2",
-                "limitation": "行业门类口径，不区分职业；本职业精确值不可得。",
+                "limitation": "行业发布不能代本職值；本輪职业精确数据未取得，不断言不存在。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员平均工资",
                 "period": "2025 annual wage",
@@ -32969,6 +33042,70 @@
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "employment trend context",
                 "url": "https://www.onetonline.org/link/localtrends/11-9171.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "沿同轮0434已核方法，非本职重新逐条读取",
+                  "本轮沿用同轮已核依据，不冒重复独立研究。"
+                ],
+                "evidence_type": "official law or methodology",
+                "id": "oews-method",
+                "limitation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
+                "market": "美国",
+                "name": "BLS OEWS工资方法",
+                "period": "当前方法",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "对应主张范围",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "沿同轮0435已核25/26/28/43/50/73等条文",
+                  "本轮沿用同轮已核依据，不冒重复独立研究。"
+                ],
+                "evidence_type": "official law or methodology",
+                "id": "funeral-law",
+                "limitation": "中国大陆｜殡葬条例2025修订、2026-03-30施行，25条遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26接运凭死亡证明，28火化凭证明及确认书、重点区域录像至少90日，明显死因不符按26报公安；经理任命不使任何主体可供五项服务或签死亡证明。2025传染病法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡卫生处理及告知，不能一概同方案。",
+                "market": "中国大陆",
+                "name": "殡葬条例（2025修订）",
+                "period": "2026-03-30施行",
+                "publisher": "商务部转载中国政府网",
+                "scope": "对应主张范围",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=104495"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "沿同轮0435已核71/115，NPC TLS失败未绕过",
+                  "本轮沿用同轮已核依据，不冒重复独立研究。"
+                ],
+                "evidence_type": "official law or methodology",
+                "id": "infectious-law",
+                "limitation": "71条按病种处理告知，非实操算法",
+                "market": "中国大陆",
+                "name": "传染病法（2025修订）",
+                "period": "2025-09-01施行",
+                "publisher": "国家市场监督管理总局",
+                "scope": "对应主张范围",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_397cd55d710842979494a429d02fa2be.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "沿同轮0435已核6/13/19/28/29/47/49/51",
+                  "本轮沿用同轮已核依据，不冒重复独立研究。"
+                ],
+                "evidence_type": "official law or methodology",
+                "id": "pipl-law",
+                "limitation": "信息边界｜PIPL6/13/19核最小必要、合法依据和保存期限；28/29按法定敏感条件及适用单独同意处理，不一律将姓名、联系方式、亲属关系与哀伤称敏感，健康资料可能符合。49条死者近亲属为自身合法正当利益可行使相关权利，生前另安排除外；51核安全权限，47法定保存未届不能直接删除。公开对外提供另核程序，不造家属同意。",
+                "market": "中国大陆",
+                "name": "中华人民共和国个人信息保护法",
+                "period": "现行法律",
+                "publisher": "国家市场监督管理总局",
+                "scope": "对应主张范围",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -33389,7 +33526,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "funeral-home-managers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33411,7 +33548,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织专题",
             "适用范围": {
               "$item": "funeral-home-managers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33433,7 +33570,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "通用人工智能风险框架",
             "适用范围": {
               "$item": "funeral-home-managers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33455,7 +33592,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业描述",
             "适用范围": {
               "$item": "funeral-home-managers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33477,7 +33614,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方兴趣资料",
             "适用范围": {
               "$item": "funeral-home-managers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34844,7 +34981,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "家属服务与运营管理",
+                  "label": "安排",
                   "secondary_value": {
                     "$item": "funeral-home-managers.profile.career-quick-answers-block.2",
                     "block": "profile",
@@ -34860,7 +34997,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "价格与合规与财务",
+                  "label": "价格",
                   "secondary_value": {
                     "$item": "funeral-home-managers.profile.career-quick-answers-block.4",
                     "block": "profile",
@@ -34876,7 +35013,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "人员与门店与市场",
+                  "label": "人员",
                   "secondary_value": null,
                   "value": {
                     "$item": "funeral-home-managers.profile.career-quick-answers-block.6",
@@ -35181,7 +35318,8 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "facilities",
+              "privacy"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35196,7 +35334,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "未逐项公示价格与披露或未获事先授权收费"
+            "title": "价格披露与选择"
           },
           {
             "affected_roles": {
@@ -35213,7 +35351,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35228,7 +35366,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "许可与死亡登记与遗体处置越权"
+            "title": "许可及专业服务范围"
           },
           {
             "affected_roles": {
@@ -35244,8 +35382,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "employer"
+              "onet",
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35260,7 +35398,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "员工防护与消毒与现场安全疏忽"
+            "title": "防护与现场安全"
           },
           {
             "affected_roles": {
@@ -35276,8 +35414,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "bls",
+              "employer"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35292,7 +35430,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "逝者与家属信息泄露或超范围使用"
+            "title": "逝者家属信息"
           },
           {
             "affected_roles": {
@@ -35308,8 +35446,9 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "facilities",
+              "privacy"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35324,7 +35463,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "投诉与法律询问与结算处置不当"
+            "title": "投诉及结算版本"
           },
           {
             "affected_roles": {
@@ -35341,7 +35480,7 @@
             },
             "evidence_refs": [
               "onet",
-              "facilities"
+              "bls"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35356,7 +35495,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "员工与供应商权责不清或利益关系未申报"
+            "title": "人员场地供应商"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -36064,7 +36203,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-death-care-2025",
             "industry": {
               "$item": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36085,7 +36224,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-other-gap",
             "industry": {
               "$item": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36106,7 +36245,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-facility-gap",
             "industry": {
               "$item": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36127,7 +36266,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-self-income-gap",
             "industry": {
               "$item": "funeral-home-managers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36837,7 +36976,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS11-9171本职EP与全国工资",
             "secondary_value": null,
             "value": {
               "$item": "funeral-home-managers.profile.onet-structured-fields-block.2",
@@ -36870,7 +37009,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "中美现行收费、殡葬及信息边界",
             "secondary_value": null,
             "value": {
               "$item": "funeral-home-managers.profile.onet-structured-fields-block.5",
@@ -37939,7 +38078,7 @@
         ]
       },
       {
-        "derivation": "口径｜美国 2025 年 BLS OEWS 全国年工资中位数（经 O*NET 呈现），对应精确职业 11-9171.00；OEWS 不含福利与绩效与销售提成与经营奖金与待命补贴。",
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "中位时薪 37.88 美元 / 中位年薪 78,790 美元（2025，BLS OEWS）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37947,11 +38086,12 @@
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews",
+          "oews-method"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "10 分位 49,700 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37959,11 +38099,12 @@
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews",
+          "oews-method"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "90 分位 156,400 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37971,67 +38112,143 @@
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews",
+          "oews-method"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 职业展望手册 2025—2035 年（经来源登记核对），对应精确职业 11-9171.00，就业由约 34,800 增至约 36,200 人、增长 4%；预测含增长与替换需求，不等于实际招聘数。",
-        "display_value": "增长 4%（2025—2035，BLS 职业展望手册：约 34,800 → 约 36,200 人）",
+        "derivation": "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。",
+        "display_value": "2025—2035增长4.1%，净增1.4千人",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 职业展望手册 2025 年基期（经来源登记核对），对应精确职业 11-9171.00；不含自雇，分行业与分地区细分可能缺失。",
-        "display_value": "就业 约 34,800 人（2025，BLS 职业展望手册，经来源登记核对）",
+        "derivation": "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。",
+        "display_value": "2025就业34.8千人；2035预测36.2千人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 职业展望手册 2025—2035 平均每年空缺，为「殡葬服务人员」组合职业口径（约 5,600 个/年），不是本职业精确空缺；含增长与替换需求，不可读作新增岗位。",
-        "display_value": "预计岗位空缺约 5,600 个/年（2025—2035，「殡葬服务人员」组合口径，非本职业精确空缺）",
+        "derivation": "美国BLS11-9171｜2025就业34.8千人，2035预测36.2千人；2025—2035增长4.1%、净增1.4千人、年均空缺2.6千人、自雇58.1%。预测含自雇、空缺含增长替换需求，非实际招聘或十年净增。OOH本职四舍五入4%，组合殡葬服务人员5.6千空缺另有范围，不取作本职。",
+        "display_value": "2025—2035本職年均空缺2.6千人",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇非私营单位职业工资统计",
+        "display_value": "中国本职精确职业工资本輪未取得，不用行业代理",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "r2-pay-2"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇私营单位职业工资统计",
+        "display_value": "中国本职精确职业工资本輪未取得，不用行业代理",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：殡葬家庭经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "r2-pay-2"
+        ]
+      },
+      {
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
+        "display_value": "25分位61,890美元/年",
+        "fact_id": "us-wage-q25-2025",
+        "market": "美国",
+        "measure": "工资第25分位",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "oews",
+          "oews-method"
+        ]
+      },
+      {
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、销售提成或津贴；一般年工资按时薪×2080，非个人实收工时。",
+        "display_value": "75分位103,940美元/年",
+        "fact_id": "us-wage-q75-2025",
+        "market": "美国",
+        "measure": "工资第75分位",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "oews",
+          "oews-method"
+        ]
+      },
+      {
+        "derivation": "BLS OOH 2025工资表中11-9171殡葬家庭经理在Death care services的雇员年工资中位78,810美元；非组合职业54,530、非全国78,790、非自雇经营收入。",
+        "display_value": "殡葬服务业本职年中位78,810美元",
+        "fact_id": "us-industry-wage-death-care-2025",
+        "market": "美国",
+        "measure": "行业工资",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "operations"
+        ]
+      },
+      {
+        "derivation": "本职行业值或具体缺口；不以全国、行业比例及自雇率代填。",
+        "display_value": "其他行业本职工资未取得",
+        "fact_id": "us-industry-wage-other-gap",
+        "market": "美国",
+        "measure": "行业数据缺口",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": "本职行业值或具体缺口；不以全国、行业比例及自雇率代填。",
+        "display_value": "具体设施本職工资未取得",
+        "fact_id": "us-industry-wage-facility-gap",
+        "market": "美国",
+        "measure": "细分数据缺口",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "nbs"
+        ]
+      },
+      {
+        "derivation": "本职行业值或具体缺口；不以全国、行业比例及自雇率代填。",
+        "display_value": "自雇经营收入未取得",
+        "fact_id": "us-industry-self-income-gap",
+        "market": "美国",
+        "measure": "自雇收入缺口",
+        "occupation_scope": "本职业11-9171殡葬家庭经理",
+        "period": "2025",
+        "source_refs": [
+          "ep",
+          "oews-method"
         ]
       }
     ]
@@ -38071,7 +38288,7 @@
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预计岗位空缺（2025—2035，组合口径）"
+        "label": "美国本职年均空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38092,10 +38309,10 @@
       "text": "殡葬家庭经理"
     }
   },
-  "source_content_sha256": "7d53bae1879cfa28d2338fe03f742f94b2e16797e915a46a0426c71a088711bb",
+  "source_content_sha256": "f0a9715b1b1f78800e603d937657c6c896a0319af27ab9fa2ec3e33764f0f34e",
   "subject": {
     "canonical_slug": "funeral-home-managers",
     "name": "殡葬家庭经理",
-    "summary": "殡葬家庭经理（O*NET-SOC 11-9171.00，Funeral Home Managers，行业与 O*NET 中也称殡仪馆经理）规划、指导或协调殡仪馆的服务或资源，包括为服务或商品定价与管理殡仪馆设施。工作含与逝者家属或亲友商谈并安排葬礼细节与提供咨询与安慰、为葬礼与下葬或火化排期、指导并监督遗体防腐与整容与殡仪服务与死亡登记与化妆等人员并排定工时与招聘与培养员工、为服务或商品定价与赊销并销售与洽谈预先安排的殡葬服务合同、完成并维护州要求文书与跟踪文件与产品库存记录并将死亡证明送交取得法定授权人签署、监督服务运营符合政策法规与法律、审阅财务与绩效数据并制定营销与销售与财务目标并开展市场研究与社区关系。官方定义原文：Plan, direct, or coordinate the services or resources of funeral homes. Includes activities such as determining prices for services or merchandise and managing the facilities of funeral homes."
+    "summary": "职业定义｜O*NET-SOC11-9171.00 Funeral Home Managers，固定中文名殡葬家庭经理；规划、指导或协调殡仪馆服务资源，包括定价和设施管理。23任务均核心：商谈家属葬礼细节/安慰、排葬礼下葬火化、送死亡证明给法定授权者签署、监督合规、指导防腐服务登记化妆等员工、州文书跟踪库存、销售/预先安排合同、服务调整、投诉法律询问付款协商、员工目标排班招聘培训、价格赊销、财务绩效与降本、行政维修、营销财务目标、社区推广、供应商评估、市场研究及促销。经理与专业处置可兼任，名称不授任意处置或签署权，按法域机构核。"
   }
 }

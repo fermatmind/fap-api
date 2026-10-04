@@ -31022,16 +31022,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.electrical-and-electronics-installers-and-repairers.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国通常高中及以上，多数方向通过职业院校、副学士、在职训练或学徒准备；中国大陆多要求中专、技校、高职或大专加实操经验。涉及电气安装、特殊作业或高压设备时需相应证书与雇主授权，按工作地与用人单位核验。",
+                "answer": "美国通常高中及以上，多数方向通过职业院校、副学士、在职训练或学徒准备；中国大陆的学历与资格要求按目标单位招聘公告与主管部门规定逐项核对，本页未取得可对外引用的全国统一条件；若作业落入《特种作业目录》（如电工作业等），依应急管理部令第 19 号第四条须经专门的安全技术培训并考核合格、取得《特种作业操作证》后方可上岗；未列入目录的岗位其资质与设备放行仍按雇主与行业规定核验。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.electrical-and-electronics-installers-and-repairers.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31308,20 @@
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/electrical-and-electronics-installers-and-repairers.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策与法规入口。",
-                  "入口页不承载职业工资数值。"
+                  "第三条规定特种作业的范围由《特种作业目录》确定；第四条规定特种作业人员必须经专门的安全技术培训并考核合格、取得《特种作业操作证》后方可上岗作业。",
+                  "未列入《特种作业目录》的电气或电子设备安装与维修岗位不适用该证书要求，其资质与设备放行仍按雇主与行业规定核验。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "仅适用于《特种作业目录》所列作业，不构成对全部电气安装岗位的统一资格要求，也不替代雇主授权与设备放行流程。",
                 "market": "中国",
-                "name": "人力资源和社会保障部 — 职业与培训公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "应急管理部：《特种作业人员安全技术培训考核管理规定》（2025 年第 19 号令）",
+                "period": "2025-12-17 公布，自 2026-06-01 施行；accessed 2026-09-30",
+                "publisher": "中华人民共和国应急管理部",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31436,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37089,7 +37091,7 @@
       "text": "电气与电子设备安装维修人员：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "1ce5ecc5eb495fb3fdc56645a8ba19394ad695cb240edf31aeea06fa179fdae5",
+  "source_content_sha256": "22005c0682abb5b62adf6cb233fd0b86e354abeac2546f8da8912b9228987224",
   "subject": {
     "canonical_slug": "electrical-and-electronics-installers-and-repairers",
     "name": "电气与电子设备安装维修人员",

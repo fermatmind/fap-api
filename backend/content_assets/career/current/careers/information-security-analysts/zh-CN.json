@@ -9681,7 +9681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：当前没有与 O*NET 15-1212.00（Information Security Analysts 信息安全分析师）完全对应的中国大陆全国公开职业工资分布；不把行业平均、招聘报价或美国数据写成信息安全分析师薪资。"
+              "证据不足：经有界检索（国家统计局行业门类工资发布、公开企业薪酬调查与职业分类目录），仍没有与 O*NET 15-1212.00（Information Security Analysts 信息安全分析师）对应的中国大陆全国公开职业工资分布可核验；国家统计局按行业门类公布城镇单位就业人员平均工资，不区分职业。本页不把行业平均、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 或美国统计当作中国大陆工资证据。"
             ]
           },
           "fact_refs": [
@@ -9689,7 +9689,7 @@
           ],
           "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "source-pack-onet-summary"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -9698,7 +9698,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆职业映射：待按当地职业分类、城市、雇主和岗位层级另行核验。"
+              "中国大陆职业映射：经有界检索未取得可核验的 O*NET 15-1212.00 对应关系（国家统计局按行业门类公布、不区分职业）；具体职业分类对应须按当地职业目录、城市、雇主和岗位层级另行核验。"
             ]
           },
           "fact_refs": [
@@ -9706,7 +9706,7 @@
           ],
           "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "source-pack-onet-summary"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -9715,7 +9715,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆教育与入门：具体学历、训练、证书和授权按目标岗位与当地规则确认。"
+              "中国大陆教育与入门：本页未取得可对外引用的全国统一学历、训练、证书与授权要求；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，无法据此核验本职业的学历与入门门槛，具体按目标岗位招聘条件与当地主管部门规则逐项确认。"
             ]
           },
           "fact_refs": [
@@ -9723,7 +9723,7 @@
           ],
           "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -9732,7 +9732,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与中国薪资：AI 任务辅助不能填补中国大陆职业工资证据缺口。"
+              "AI 与中国薪资：AI 任务辅助不能填补中国大陆职业工资证据缺口；该缺口按证据政策保留为「证据不足：」，不以美国数据或行业均值替代。"
             ]
           },
           "fact_refs": [
@@ -9740,7 +9740,7 @@
           ],
           "id": "information-security-analysts.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "source-pack-onet-hot_tech"
+            "nbs-wages"
           ],
           "type": "prose"
         }
@@ -11802,12 +11802,12 @@
                 ]
               },
               {
-                "answer": "目前没有与该美国精确职业完全对应的中国大陆全国职业工资分布；页面保留缺口，不使用代理数字。",
+                "answer": "经有界检索（国家统计局行业门类工资发布、公开企业薪酬调查与职业分类目录），仍没有与该美国精确职业对应的中国大陆全国公开职业工资分布可核验；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业。页面保留「证据不足：」缺口，不使用代理数字，也不把 O*NET 或美国统计当作中国大陆工资证据。",
                 "id": "information-security-analysts.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.information-security-analysts.6",
                 "source_refs": [
-                  "source-pack-onet-summary"
+                  "nbs-wages"
                 ]
               },
               {
@@ -12123,6 +12123,22 @@
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm"
+              },
+              {
+                "accessed_at": "2026-09-27",
+                "details": [
+                  "国家统计局按行业门类公布城镇单位就业人员平均工资，不区分职业；用于核对本页中国大陆工资缺口的统计口径。",
+                  "不建立本职业精确工资映射，也不代表个人起薪或到手收入。"
+                ],
+                "evidence_type": "official wage statistics",
+                "id": "nbs-wages",
+                "limitation": "按行业门类公布，不区分职业；不建立本职业精确工资映射。",
+                "market": "中国大陆",
+                "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 annual wages; published 2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_level_only",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               }
             ]
           },
@@ -13727,7 +13743,7 @@
           "china_intl": {
             "$join": [
               {
-                "$source": "source-pack-onet-details",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -13735,7 +13751,7 @@
               },
               "｜",
               {
-                "$source": "source-pack-onet-details",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -13754,7 +13770,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "source-pack-onet-custom",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -13762,7 +13778,7 @@
               },
               "｜",
               {
-                "$source": "source-pack-onet-custom",
+                "$source": "nbs-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -14815,26 +14831,26 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 15-1212.00 精确对应的全国职业工资分布；不把行业均值、招聘报价或美国数据写成信息安全分析师薪资。",
+        "display_value": "证据不足：经有界检索，中国大陆公开职业统计未取得与美国 O*NET/SOC 15-1212.00 对应的全国职业工资分布可核验；国家统计局按行业门类公布平均工资、不区分职业。不把行业均值、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 当作中国统计证据。",
         "fact_id": "cn-wage-nonprivate",
         "market": "中国大陆全国口径",
         "measure": "occupation wage availability",
         "occupation_scope": "no exact CN mapping for O*NET 15-1212.00 Information Security Analysts",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "source-pack-onet-summary"
+          "nbs-wages"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆公开职业统计未建立与美国 O*NET/SOC 15-1212.00 精确对应的全国职业工资分布；不把行业均值、招聘报价或美国数据写成信息安全分析师薪资。",
+        "display_value": "证据不足：经有界检索，中国大陆公开职业统计未取得与美国 O*NET/SOC 15-1212.00 对应的全国职业工资分布可核验；国家统计局按行业门类公布平均工资、不区分职业。不把行业均值、招聘报价或美国数据写成信息安全分析师薪资，也不把 O*NET 当作中国统计证据。",
         "fact_id": "cn-wage-private",
         "market": "中国大陆全国口径",
         "measure": "cross-jurisdiction wage boundary",
         "occupation_scope": "no exact CN mapping for O*NET 15-1212.00 Information Security Analysts",
         "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
         "source_refs": [
-          "source-pack-onet-summary"
+          "nbs-wages"
         ]
       },
       {
@@ -15016,7 +15032,7 @@
       "text": "信息安全分析师"
     }
   },
-  "source_content_sha256": "56e50ff193f767a3b8b6f5846343b14d2dfc90fe17efde6a9b71926066c4f1e2",
+  "source_content_sha256": "7584d74f8201741a7c03ce42f30802d0b6402974d89fb94021b695ad96d6072b",
   "subject": {
     "canonical_slug": "information-security-analysts",
     "name": "信息安全分析师",

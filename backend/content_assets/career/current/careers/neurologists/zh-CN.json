@@ -11723,7 +11723,7 @@
           },
           "id": "neurologists.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "cn-wage-attempt"
+            "china-physician-law"
           ],
           "type": "prose"
         },
@@ -11737,7 +11737,7 @@
           },
           "id": "neurologists.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "cn-wage-attempt"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -11751,7 +11751,7 @@
           },
           "id": "neurologists.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "cn-wage-attempt"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -11765,7 +11765,8 @@
           },
           "id": "neurologists.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "cn-wage-attempt"
+            "nbs-wages",
+            "nhc-specialist-training"
           ],
           "type": "prose"
         }
@@ -12033,7 +12034,9 @@
           },
           "id": "neurologists.risk.career-risk-cards.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "abpn-neurology",
+            "acgme-residency"
           ],
           "type": "prose"
         },
@@ -12355,7 +12358,10 @@
           },
           "id": "neurologists.path.credential-decision.11",
           "source_refs": [
-            "source-pack-onet-localtraining"
+            "source-pack-onet-localtraining",
+            "abpn-neurology",
+            "acgme-residency",
+            "fsmb-licensure"
           ],
           "type": "table"
         }
@@ -12501,7 +12507,7 @@
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.neurologists.china-pay",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "nbs-wages"
                 ]
               },
               {
@@ -12514,12 +12520,18 @@
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 64% 为博士后、29% 为博士、5% 为硕士。美国实际路径为医学院校学位、ACGME 认证的住院医师训练、州级医师执照与 ABPN 专科认证；中国大陆需依《医师法》取得医师资格并注册，并通常需完成住院医师与专科医师规范化培训。",
+                "answer": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 64% 为博士后、29% 为博士、5% 为硕士。美国常见路径为医学院校学位（MD 或 DO）、ACGME 认证项目的神经内科住院医师训练（PGY-1 一年加三年）、由各州医学委员会分别签发的医师执照，以及 ABPN 专科认证；执照与认证要求各州不同，专科认证为自愿性专业凭证，不构成统一的全国门槛。中国大陆需依《医师法》取得医师资格并注册，并通常需完成住院医师与专科医师规范化培训。",
                 "id": "neurologists.faq.8",
                 "question": "需要什么学历和认证？",
                 "question_key": "career.faq.neurologists.education-path",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "abpn-neurology",
+                  "acgme-residency",
+                  "fsmb-licensure",
+                  "china-physician-law",
+                  "nhc-specialist-training",
+                  "nhc-residency"
                 ]
               },
               {
@@ -12528,7 +12540,9 @@
                 "question": "中国大陆怎么成为神经内科医师？",
                 "question_key": "career.faq.neurologists.credentials",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "china-physician-law",
+                  "nhc-specialist-training",
+                  "nhc-residency"
                 ]
               },
               {
@@ -12591,7 +12605,7 @@
                 "entity": "神经科医师",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "神经科医师",
@@ -12810,19 +12824,19 @@
                 "url": "https://abpn.org/become-certified-2/neurology"
               },
               {
-                "accessed_at": "2026-09-26",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "美国神经内科住院医师训练需在 ACGME 认证项目内完成，这是 ABPN 认证考试的训练前提。"
+                  "美国神经内科住院医师训练须在 ACGME 认证项目内完成并满足其项目要求；该页汇总 Review Committee for Neurology 的项目要求与常见问题，并链接项目要求文本。"
                 ],
                 "evidence_type": "programmatic accreditation body",
                 "id": "acgme-residency",
-                "limitation": "项目认证不替代个人执照与专科认证。",
+                "limitation": "认证对象是培训项目而非个人；项目认证不替代州级医师执照与 ABPN 专科认证。",
                 "market": "US",
-                "name": "ACGME — 毕业后医学教育认证",
-                "period": "current accreditation requirements; accessed 2026-09-26",
+                "name": "ACGME — 神经内科住院医师项目要求与认证",
+                "period": "Neurology Program Requirements 现行（页面列 2026-07-01 生效版本）；accessed 2026-09-30",
                 "publisher": "Accreditation Council for Graduate Medical Education",
                 "scope": "exact",
-                "url": "https://www.acgme.org/"
+                "url": "https://www.acgme.org/Specialties/Neurology/Program-Requirements-and-FAQs-and-Applications"
               },
               {
                 "accessed_at": "2026-09-26",
@@ -12853,6 +12867,22 @@
                 "publisher": "国家卫生健康委员会（内蒙古自治区卫生健康委员会转载）",
                 "scope": "exact",
                 "url": "https://wjw.nmg.gov.cn/nmgzzqwsgbjypxzx/zcfg/202401/t20240102_2435336.html"
+              },
+              {
+                "accessed_at": "2026-09-30",
+                "details": [
+                  "美国医学执业由各州分别许可，由各州医学委员会签发医师执照；通用条件包括医学院校学位（MD 或 DO）、研究生（住院医师）训练与通过 USMLE／COMLEX 国家考试。",
+                  "各辖区对研究生训练年限等具体要求不同；专科认证（如 ABMS 成员委员会）不是取得医师执照的法定前提。"
+                ],
+                "evidence_type": "official credential guidance",
+                "id": "fsmb-licensure",
+                "limitation": "执照由各州医学委员会分别签发，条件与互认规则各州不同，不构成统一的全国门槛；不替代机构授权与专科认证。",
+                "market": "US",
+                "name": "About Physician Licensure（美国医师执照说明）",
+                "period": "现行说明；accessed 2026-09-30",
+                "publisher": "Federation of State Medical Boards (FSMB)",
+                "scope": "contextual",
+                "url": "https://www.fsmb.org/u.s.-medical-regulatory-trends-and-actions/guide-to-medical-regulation-in-the-united-states/about-physician-licensure/"
               }
             ]
           },
@@ -14980,7 +15010,8 @@
         "period": "ABPN 与 ACGME 现行要求；访问 2026-09-26",
         "source_refs": [
           "abpn-neurology",
-          "acgme-residency"
+          "acgme-residency",
+          "fsmb-licensure"
         ]
       },
       {
@@ -15079,7 +15110,7 @@
       "text": "神经科医师"
     }
   },
-  "source_content_sha256": "8e6f70fd8be571d6c339532af0b4bce266fa50838be08d23fd6993d05128b787",
+  "source_content_sha256": "331ff024d9cdaac192b22280d2ee878dd5b91a69f65f792dd3585f09ff7003e2",
   "subject": {
     "canonical_slug": "neurologists",
     "name": "神经科医师",

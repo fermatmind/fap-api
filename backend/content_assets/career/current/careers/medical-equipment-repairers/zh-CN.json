@@ -126,7 +126,7 @@
         "status": "mapped"
       },
       "item:medical-equipment-repairers.path.credential-decision.10": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-equipment-repairers.path.employer-evidence.5": {
         "status": "mapped"
@@ -135,13 +135,13 @@
         "status": "mapped"
       },
       "item:medical-equipment-repairers.path.entry-role-comparison.4": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-equipment-repairers.path.entry-work-sample-data.3": {
         "status": "pending_mapping"
       },
       "item:medical-equipment-repairers.path.interview-probation.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-equipment-repairers.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12084,7 +12084,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（完全虚构的维修任务包）：针对一份虚构的医疗设备故障单，在 60 分钟内写出核对设备型号与手册、电气与能源隔离、测试与校准步骤、维修与更换记录、功能复测与放行建议，以及须交有权限者确认的情形；不使用真实患者信息、在用设备或危险能源。"
+              "60分钟纸面核对题（编辑虚构）：三张记录卡的设备代号都为E7，题内要求手册M2、普通读数在98—102之间（含端点）、批准状态为是，三条件齐全才标题内可流转。R1为M2/98/是；R2为M1/100/是；R3为M2/103/待定。分别列手册一致性、读数是否在范围内、批准状态及待确认项，保留原值。这是普通无单位数值题，范围不是制造商医疗设备公差。 参考解：R1三条件均满足，98在含端点范围内；R2读数合范围且已批准，但M1≠M2，须确认正确手册，不能因为读数正常就流转；R3手册一致，但103比上限102高1，且批准待定，应分别记录两个未决项。只有R1满足题内规则，不表示真实设备可用。10分钟读题、20分钟制表、20分钟写R2版本及R3读数/批准确认请求、10分钟遮答案重做并保留纠错版。"
             ]
           },
           "id": "medical-equipment-repairers.quick-decision.fit-decision-checklist.4",
@@ -12138,7 +12138,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境（O*NET 工作情境调查，1—5 分）：精确或高度准确 4.72、环境受控室内 4.70、面对面讨论 4.66、电子邮件 4.66 最为突出；电话沟通 4.50、与他人接触 4.44、自主决策 4.35、团队协作 4.33、确定任务与优先 4.26 也较高；时间压力 3.82、使用双手操作 3.79、错误后果 3.53 为中等，并需按需佩戴防护装备 3.39。"
+              "O*NET美国受访者不同题目选项：73%认为精确极其重要，88%每天受控室内、86%每天邮件、81%每天面对面讨论、71%每天电话；64%持续与人接触，56%很多决策自由，62%认为团队极其重要；34%每天时间压力，29%认为错误后果极其严重，31%每天通用防护装备，62%典型工作周40小时。不是事故概率或中国岗位调查。BLS描述通常全职，部分岗位需晚间/周末待命、出差、搬运或狭小空间作业，按具体岗位核。"
             ]
           },
           "id": "medical-equipment-repairers.profile.work-context-block.6",
@@ -12152,7 +12152,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能力与工作方式：需要电气、机械与仪器基础，能读懂蓝图与技术手册，能按规程独立检测与排故，并重视记录与追溯。"
+              "可观察能力：按手册逐项核对设备身份、版本、原始读数与状态；准确记录未决项，向用户/团队解释设备状态，在授权范围内完成复测与交接。纸面观察不能证明实操胜任。"
             ]
           },
           "id": "medical-equipment-repairers.profile.career-quick-answers-block.7",
@@ -12166,7 +12166,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 49-9062.00 的官方描述、任务、工作情境、兴趣代码（RCI）与 Job Zone Three，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
+              "美国O*NET JobZone3为中等准备职业群，常见职业教育、在岗训练或副学士；群组经验描述不是本职业统一年限。BLS本职业通常生物医学技术或相关副学士/证书，也存在高中加相关训练/经历、学徒及既有军队或机电经验路径。职业认证并非BLS统一强制要求，雇主偏好与申请条件逐项核。中国任用与授权另核，不作资格互认。"
             ]
           },
           "id": "medical-equipment-repairers.profile.onet-structured-fields-block.8",
@@ -12386,7 +12386,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局方法与公开口径有界检索，未取得与 O*NET 49-9062.00 精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "本页未取得与美国49-9062.00安全映射的中国大陆全国本职业工资分布。国家统计局2025城镇单位工资是行业/人员大类聚合，不能将卫生行业均值作为医疗设备维修人员职业中位数；不声称全国不存在其他资料。"
             ]
           },
           "id": "medical-equipment-repairers.china-salary.career-snapshot-primary-locale.1",
@@ -12478,7 +12478,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业口径（BLS 2024—2034 年预测）：2024 年就业约 68,000 人，2034 年预计约 76,800 人，2024—2034 年预计增长约 13%（远高于平均），年均职位空缺约 7,300 个（含替换需求）。"
+              "O*NET2024—2034本职业68,000→76,800，净增8,800，官方13%，年均空缺7,300。BLS2025—2035本职业71,800→80,900，净增9,100，官方13%，年均空缺8,200。两期独立，不拼同比或猜基线变化原因；空缺含替换，不是当前招聘/录用概率。"
             ]
           },
           "id": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.3",
@@ -12492,7 +12492,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布：批发贸易约 32%、医疗与社会援助约 19%、其他服务（不含公共行政）约 16%、其他行业约 33%（含房地产与租赁及零售贸易）。行业分布是雇主场景信号，不是需求预测。"
+              "O*NET行业就业份额32%批发、19%医疗/社会援助、16%其他服务（不含公共行政）、33%其他；这是就业份额，不是工资。BLS2025行业工资另列四行，设备租赁第五行业45,020美元/年。"
             ]
           },
           "id": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.4",
@@ -12740,7 +12740,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：下列为岗位样本的整理方式，不是录用或资格承诺。职位名称可能是生物医学设备技术员、临床工程技师、医疗设备维修工程师或厂商现场服务工程师。"
+              "本页没有已核实的雇主招聘样本。以下是编辑岗位核对清单：设备种类、型号训练、待命/出差、监督、记录及放行授权；不要称已取得雇主要求。"
             ]
           },
           "id": "medical-equipment-repairers.path.recruitment-sample.1",
@@ -12754,7 +12754,7 @@
           "copy_key": "career.item.recruitment-signals",
           "data": {
             "paragraphs": [
-              "招聘信号：样本按院内 BMET、临床工程团队、厂商现场服务与第三方维修分组，核对设备类型、值班、出差、学历、厂商培训与认证偏好；名称相同不代表职责相同。"
+              "编辑岗位核对建议：比较院内维修、临床工程、厂商服务或第三方维修的设备类型、待命/出差、监督、厂商训练及认证偏好；本页没有核实雇主样本，名称不保证范围一致。"
             ]
           },
           "id": "medical-equipment-repairers.path.recruitment-signals.2",
@@ -12768,7 +12768,7 @@
           "copy_key": "career.item.entry-work-sample-data",
           "data": {
             "paragraphs": [
-              "入门工作样本：在监督下完成一次虚构设备的预防性维护与工单记录，展示核对设备身份、按手册检测、记录结果与升级判断，不接触在用设备或危险能源。"
+              "60分钟纸面核对题（编辑虚构）：三张记录卡的设备代号都为E7，题内要求手册M2、普通读数在98—102之间（含端点）、批准状态为是，三条件齐全才标题内可流转。R1为M2/98/是；R2为M1/100/是；R3为M2/103/待定。分别列手册一致性、读数是否在范围内、批准状态及待确认项，保留原值。这是普通无单位数值题，范围不是制造商医疗设备公差。 参考解：R1三条件均满足，98在含端点范围内；R2读数合范围且已批准，但M1≠M2，须确认正确手册，不能因为读数正常就流转；R3手册一致，但103比上限102高1，且批准待定，应分别记录两个未决项。只有R1满足题内规则，不表示真实设备可用。10分钟读题、20分钟制表、20分钟写R2版本及R3读数/批准确认请求、10分钟遮答案重做并保留纠错版。"
             ]
           },
           "id": "medical-equipment-repairers.path.entry-work-sample-data.3",
@@ -12788,37 +12788,44 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "能力阶段（编辑示意）",
+              "任务",
+              "权限边界",
+              "可核证据",
+              "下一步条件"
+            ],
             "rows": [
               [
-                "入职 0—3 个月",
+                "基础学习",
                 "在监督下完成预防性维护与工单记录",
                 "不得单独判定设备放行",
                 "保养清单与工单记录",
                 "扩展到独立检测"
               ],
               [
-                "3—12 个月",
-                "独立完成常见设备的检测与故障诊断",
+                "机型训练",
+                "经机型训练并获相应授权后检测与故障诊断",
                 "校准与放行由责任人确认",
                 "检测记录与故障结论",
                 "扩展到独立校准"
               ],
               [
-                "1—3 年",
+                "检测与校准",
                 "按厂商公差执行校准与功能复测",
                 "越权判定仍由授权链拦截",
                 "校准与复测记录",
                 "扩展到复杂设备"
               ],
               [
-                "3—5 年",
+                "复杂设备",
                 "负责影像、监护等复杂设备的维修与验收",
                 "验收由机构责任流程确认",
                 "复杂维修与验收记录",
                 "扩展到安全与规范支持"
               ],
               [
-                "5 年以上",
+                "带教与改进",
                 "在授权范围内带教与改进维护流程",
                 "不得替代机构管理与医疗判断",
                 "带教与流程改进记录",
@@ -12861,7 +12868,7 @@
                 "id": "path-6-1",
                 "values": [
                   "作品与经验证据",
-                  "保留虚构或脱敏的检测、校准与维修练习记录，展示设备身份、测试方法、结果与升级判断；可检查产出包括检测与故障记录、校准与复测记录、预防性维护清单与安全隔离清单。"
+                  "只提交R1/R2/R3虚构纸面核对表、三条件判断、未决请求及纠错版；不声称完成真实检测、校准或能源隔离。"
                 ]
               }
             ]
@@ -12882,6 +12889,12 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "场景",
+              "可能检查",
+              "复核与授权",
+              "证据"
+            ],
             "rows": [
               [
                 "面试前准备",
@@ -12896,16 +12909,16 @@
                 "结论与升级路径说明"
               ],
               [
-                "试用期前 30 天",
+                "监督训练阶段",
                 "在监督下完成预防性维护与记录",
                 "由主管复核工单质量",
                 "保养与工单记录"
               ],
               [
-                "试用期结束",
-                "独立完成常见设备检测与校准",
-                "由责任人确认校准与放行",
-                "校准与复测记录"
+                "试用阶段核对",
+                "由雇主评价具体机型训练、监督与工作质量",
+                "独立范围按机构授权确认，不由试用结束自动授予",
+                "保留监督反馈与范围说明"
               ]
             ]
           },
@@ -12924,7 +12937,7 @@
                 "id": "path-8-1",
                 "values": [
                   "七天试验安排",
-                  "前两天理解设备身份、手册与安全要求，中间三天针对完全虚构的故障单完成检测、校准与记录，第六天请他人挑战判断，第七天写继续、停止或换方向的证据；全程不接触真实患者、在用设备、危险能源或受限数据。"
+                  "每天30—60分钟，仅纸面：第1天读R1/R2/R3与题内规则；第2天制三条件表；第3天遮答案重做；第4天求R3超上限1并分别记录批准待定；第5天写R2版本确认请求；第6天请他人仅按题面挑战；第7天比较纠错版并写继续/训练/换方向依据。不接触患者、设备、电源或医疗数据，不形成校准/放行能力认证。"
                 ]
               }
             ]
@@ -12962,10 +12975,19 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "状态",
+              "证明",
+              "核验主体",
+              "适用条件",
+              "不等同什么",
+              "责任方",
+              "下一步"
+            ],
             "rows": [
               [
                 "学历",
-                "副学士或相关专业训练",
+                "BLS副学士/相关证书常见，亦有经验/训练路径，按雇主核",
                 "用人单位与院校",
                 "按岗位核验",
                 "学历不等同执业或授权",
@@ -13030,7 +13052,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：证书、学位、厂商认证、机构授权与设备放行不是同一状态；真实要求必须回到雇主、设备系统与所在地规则，认证不等于授权。"
+              "美国O*NET JobZone3为中等准备职业群，常见职业教育、在岗训练或副学士；群组经验描述不是本职业统一年限。BLS本职业通常生物医学技术或相关副学士/证书，也存在高中加相关训练/经历、学徒及既有军队或机电经验路径。职业认证并非BLS统一强制要求，雇主偏好与申请条件逐项核。中国任用与授权另核，不作资格互认。 本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。"
             ]
           },
           "id": "medical-equipment-repairers.path.credential-boundary.11",
@@ -13044,7 +13066,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能力阶梯：进入本职业前应核对官方职业范围、真实雇主要求、教育或训练、所在地设备监管与授权规则，以及在监督下的任务；晋级依据是可复核的检测、校准与维修记录，不是保证年限。"
+              "进阶为编辑示意：先读身份/手册/工单，再在训练和监督下学习维护、检测与记录，按目标设备能力和机构授权扩展；不保证试用结束独立、固定年限晋升或一次证书覆盖全部设备。"
             ]
           },
           "id": "medical-equipment-repairers.path.career-path-block.12",
@@ -13066,7 +13088,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方信号（美国 O*NET 49-9062.00 本职业口径）：2024 年就业约 68,000 人，2034 年预计约 76,800 人，2024—2034 年预计增长约 13%（远高于平均），年均职位空缺约 7,300 个（含替换需求）。"
+              "O*NET2024—2034本职业68,000→76,800，净增8,800，官方13%，年均空缺7,300。BLS2025—2035本职业71,800→80,900，净增9,100，官方13%，年均空缺8,200。两期独立，不拼同比或猜基线变化原因；空缺含替换，不是当前招聘/录用概率。"
             ]
           },
           "id": "medical-equipment-repairers.market-signals.market-signal-card.1",
@@ -13145,12 +13167,13 @@
           "data": {
             "entries": [
               {
-                "answer": "以室内检测、校准与维修为主：O*NET 工作情境显示精确或高度准确 4.72、环境受控室内 4.70、面对面讨论与电子邮件均 4.66 最突出；电话沟通 4.50、与他人接触 4.44、自主决策 4.35、团队协作 4.33、确定任务与优先 4.26 也较高；时间压力 3.82、使用双手操作 3.79、错误后果 3.53 为中等，紧急维修或值守时可能加班。",
+                "answer": "O*NET美国受访者不同题目选项：73%认为精确极其重要，88%每天受控室内、86%每天邮件、81%每天面对面讨论、71%每天电话；64%持续与人接触，56%很多决策自由，62%认为团队极其重要；34%每天时间压力，29%认为错误后果极其严重，31%每天通用防护装备，62%典型工作周40小时。不是事故概率或中国岗位调查。BLS描述通常全职，部分岗位需晚间/周末待命、出差、搬运或狭小空间作业，按具体岗位核。",
                 "id": "medical-equipment-repairers.faq.1",
                 "question": "医疗设备维修人员的日常工作与工时如何？",
                 "question_key": "career.faq.medical-equipment-repairers.daily-work",
                 "source_refs": [
-                  "source-pack-onet-custom"
+                  "onet-summary",
+                  "bls-ooh"
                 ]
               },
               {
@@ -13163,7 +13186,7 @@
                 ]
               },
               {
-                "answer": "看可观察行为：能否按厂商手册核对设备身份与版本、能否用测试仪器定位并复现故障、能否按公差校准并留下可复核记录、能否在电气或机械安全疑问时先隔离并升级、能否与临床用户和厂商清晰交接设备状态。RCI 兴趣代码（现实型、常规型、研究型）只描述活动偏好，不能决定胜任或资格；人格标签同样不能替代真实任务、厂商规范、监督反馈与雇主判断，建议用工作样本和受监督任务核对。",
+                "answer": "观察RCI兴趣与版本/数值/批准核对习惯，纸面正确不等实操资格。",
                 "id": "medical-equipment-repairers.faq.3",
                 "question": "什么信号说明我可能适合？",
                 "question_key": "career.faq.medical-equipment-repairers.fit",
@@ -13172,7 +13195,7 @@
                 ]
               },
               {
-                "answer": "手册检索、工单整理与服务历史汇总更易被软件辅助；故障结论、校准放行与现场安全判断仍以人工为主。现有资料只支持任务层面的辅助判断，不证明机构普遍以自动化替代这些判断，也不构成采用率、失业概率或替代日期；采用前还需核对设备与工单数据许可、厂商限制、网络环境、验证与变更控制。",
+                "answer": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
                 "id": "medical-equipment-repairers.faq.4",
                 "question": "AI 会如何影响这个职业的工作？",
                 "question_key": "career.faq.medical-equipment-repairers.ai-impact",
@@ -13190,7 +13213,7 @@
                 ]
               },
               {
-                "answer": "本轮以国家统计局方法与公开口径有界检索，未取得与 O*NET 49-9062.00 精确对应的中国大陆全国职业工资分布，因此本页标注缺失；公开工资资料为行业或人员大类聚合口径，卫生或制造业均值不能替代本职业工资，在建立精确映射前不使用行业代理或美国数字填补，也不生成起薪或个人到手收入。",
+                "answer": "全国五分位与行业工资分别看；中国本职业工资本页未取得，不用行业均值或美国值代填。",
                 "id": "medical-equipment-repairers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.medical-equipment-repairers.china-pay",
@@ -13199,21 +13222,23 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone Three：通常需要职业培训、相关在职经验或副学士学位；中国大陆的学历、执业与机构授权边界按用人单位、设备监管与主管部门规则确定。证书、学位、厂商认证与机构授权不是同一状态，取得认证不等于获得设备放行或临床判断权限。",
+                "answer": "美国O*NET JobZone3为中等准备职业群，常见职业教育、在岗训练或副学士；群组经验描述不是本职业统一年限。BLS本职业通常生物医学技术或相关副学士/证书，也存在高中加相关训练/经历、学徒及既有军队或机电经验路径。职业认证并非BLS统一强制要求，雇主偏好与申请条件逐项核。中国任用与授权另核，不作资格互认。",
                 "id": "medical-equipment-repairers.faq.7",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.medical-equipment-repairers.education-path",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-summary",
+                  "bls-ooh"
                 ]
               },
               {
-                "answer": "美国 O*NET 49-9062.00 本职业口径：2024 年就业约 68,000 人，2034 年预计约 76,800 人，2024—2034 年预计增长约 13%（远高于平均），年均职位空缺约 7,300 个（含替换需求）。就业规模、增长率、净变化与空缺必须分别解释，不等于个人录用概率，机构与地区差异较大。",
+                "answer": "O*NET2024—2034本职业68,000→76,800，净增8,800，官方13%，年均空缺7,300。BLS2025—2035本职业71,800→80,900，净增9,100，官方13%，年均空缺8,200。两期独立，不拼同比或猜基线变化原因；空缺含替换，不是当前招聘/录用概率。",
                 "id": "medical-equipment-repairers.faq.8",
                 "question": "市场信号应当如何理解与正确使用？",
                 "question_key": "career.faq.medical-equipment-repairers.outlook-transition",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-trends",
+                  "bls-ooh"
                 ]
               }
             ]
@@ -13229,7 +13254,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "中国与美国数据分栏；精确职业、组合职业、父职业与行业口径不得互相改写。AI 内容区分来源支持的通用边界与明确标注的编辑归纳；不声称真实部署率、自动授权或净就业影响。本页练习只用于职业探索，不构成真实执业、设备操作、临床、工程、法律或安全授权。"
+              "本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。"
             ]
           },
           "id": "medical-equipment-repairers.sources.boundary-notice.2",
@@ -13322,7 +13347,7 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于职业探索，不是个人适配诊断。"
                 ],
@@ -13337,22 +13362,22 @@
                 "url": "https://www.mynextmove.org/profile/summary/49-9062.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "未发布医疗设备维修人员单一职业的全国工资分布。"
+                  "本窗口核行业聚合，非本职业全国工资；未取得安全职业映射。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-wages",
-                "limitation": "未发布医疗设备维修人员单一职业的全国工资分布。",
+                "limitation": "行业均值不能代本职业工资。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual average wages; published 2026-05-15; accessed 2026-08-31",
+                "period": "2025行业工资；2026发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "美国工作情境不替代中国安全法规。"
                 ],
@@ -13367,7 +13392,7 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00#WorkContext"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "美国职业定义不建立中国准入或工资口径。"
                 ],
@@ -13382,7 +13407,7 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "教育分布不等于每个雇主的硬性要求。"
                 ],
@@ -13397,7 +13422,7 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00#Education"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "常见准备路径不是统一学历或执照门槛。"
                 ],
@@ -13412,22 +13437,22 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00#JobZone"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "相邻职业仍需按各自责任和资格核对。"
+                  "本轮读20任务、RCI、JobZone3、准备与情境；比例按各题选项，不是事故率。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "相邻职业仍需按各自责任和资格核对。",
                 "market": "US",
                 "name": "Medical Equipment Repairers summary",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET2026摘要；查阅2026-10-03",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/49-9062.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "任务样本不代表每个岗位执行全部任务。"
                 ],
@@ -13442,22 +13467,22 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00#Tasks"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "美国统计不能外推中国；中位数不是起薪。"
+                  "本轮完整核五分位年薪/时薪。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-wages",
                 "limitation": "美国统计不能外推中国；中位数不是起薪。",
                 "market": "US",
                 "name": "Medical Equipment Repairers wages and trends",
-                "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+                "period": "BLS2025工资；查阅2026-10-03",
                 "publisher": "U.S. Department of Labor, O*NET",
                 "scope": "exact",
-                "url": "https://www.onetonline.org/link/details/49-9062.00#WagesEmployment"
+                "url": "https://www.onetonline.org/link/localwages/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13472,7 +13497,7 @@
                 "url": "https://www.onetonline.org/link/custom/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13487,22 +13512,22 @@
                 "url": "https://www.onetonline.org/link/details/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Office7/Excel4/SAP2/PowerPoint2/Outlook1/Word1%；Salesforce无比例；非GenAI采用。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Hot Technologies: 49-9062.00 - Medical Equipment Repairers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025美国Lightcast招聘软件提及",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13517,9 +13542,9 @@
                 "url": "https://www.onetonline.org/link/industry/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核8项认证目录含CBET、CRES等，CareerOneStop供数；目录不等雇主强制或本人满足申请资格。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
@@ -13532,49 +13557,199 @@
                 "url": "https://www.onetonline.org/link/localcert/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核125课程目录、前列Biomedical Technology/Technician及证书/副学士/学士等授予层次，非认可/招生资格或统一培训年限。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "National Training: 49-9062.00 - Medical Equipment Repairers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "IPEDS2025—26目录/2024—25授予情况",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                  "本轮完整核五分位年薪/时薪。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "US",
                 "name": "National Wages: 49-9062.00 - Medical Equipment Repairers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "BLS2025工资；查阅2026-10-03",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/49-9062.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮读20任务、RCI、JobZone3、准备与情境；比例按各题选项，不是事故率。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "49-9062.00 - Medical Equipment Repairers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET2026摘要；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/49-9062.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "2024—2034：68,000→76,800，官方13%，年均7,300。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "onet-trends",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET全国就业趋势",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/localtrends/49-9062.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮核职责、准备、认证非统一强制、五行业工资与2025—2035预测。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "bls-ooh",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "BLS医疗设备维修人员职业手册",
+                "period": "查阅2026-10-03",
+                "publisher": "Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/medical-equipment-repairers.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-17-2031.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：生物工程师与生物医学工程师",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-2031.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-17-3021.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：航空航天工程与运营技术员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3021.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-17-3023.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：电气与电子工程技术员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3023.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-17-3024.01",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：机器人技术员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3024.01"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-17-3026.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：工业工程技术员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/17-3026.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-29-2072.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：病历记录专员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2072.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-49-2094.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：商业与工业电气电子设备维修人员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-2094.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本窗口已读目标定义；补能力是编辑比较，不作互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-29-2012.00",
+                "limitation": "相邻职业仍需按各自责任和资格核对。",
+                "market": "US",
+                "name": "O*NET目标定义：医学与临床实验室技术员",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Department of Labor, O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2012.00"
               }
             ]
           },
@@ -13613,92 +13788,145 @@
     "components": {
       "adjacent_career_comparison_table": {
         "conclusion": {
-          "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.1",
-          "block": "direction-comparison",
-          "copy_key": "career.item.adjacent-career-comparison-table",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.1",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.2",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/49-9062.00",
-            "label": "49-9062.00 - Medical Equipment Repairers"
+            "href": {
+              "$source": "adj-17-2031.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "生物工程师与生物医学工程师"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00",
-            "label": "Medical Equipment Repairers 49-9062.00"
+            "href": {
+              "$source": "adj-17-3021.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "航空航天工程与运营技术员"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/49-9062.00",
-            "label": "Industries: 49-9062.00 - Medical Equipment Repairers"
+            "href": {
+              "$source": "adj-17-3023.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "电气与电子工程技术员"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/49-9062.00",
-            "label": "49-9062.00 - Medical Equipment Repairers"
+            "href": {
+              "$source": "adj-17-3024.01",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "机器人技术员"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#Tasks",
-            "label": "Medical Equipment Repairers tasks"
+            "href": {
+              "$source": "adj-17-3026.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "工业工程技术员"
+          },
+          {
+            "href": {
+              "$source": "adj-29-2072.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "label": "病历记录专员"
           }
         ],
-        "evidence_note": {
-          "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.2",
-          "block": "direction-comparison",
-          "copy_key": "career.item.adjacent-career-comparison-table",
-          "type": "prose"
-        },
+        "evidence_note": "官方目标定义支持对象差异；适合选择与补能力为编辑归纳，不表示资格互认。",
         "heading": "相邻职业比较与方向差异说明",
         "intro": {
-          "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.3",
-          "block": "direction-comparison",
-          "copy_key": "career.item.adjacent-career-comparison-table",
-          "type": "prose"
-        },
-        "rows": [
-          {
-            "关键区别": {
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            {
               "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "更适合什么选择": {
+            {
               "$item": "medical-equipment-repairers.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
-            },
-            "核心工作与产出": "围绕医疗设备维修人员安装、保养、诊断、维修、校准和测试医疗设备，并维护服务记录、与临床用户沟通设备状态；能否放行使用取决于机构流程、厂商要求和具体授权形成可检查结果、记录或交付物。",
-            "职业方向": "相邻技术或运营方向"
+            }
+          ],
+          "separator": "\n"
+        },
+        "rows": [
+          {
+            "关键区别": "工程研发产出不同于维护既有设备",
+            "更适合什么选择": "愿研究设计与验证方法者",
+            "核心工作与产出": "研发/设计、评价医疗相关系统与产品",
+            "职业方向": "生物工程师与生物医学工程师"
           },
           {
-            "关键区别": "对象为航空航天地面与试验设备，不是临床在用医疗设备。",
-            "更适合什么选择": "按行业对象与安全规范比较。",
-            "核心工作与产出": "面向航空航天设备与流程的试验、操作与技术保障。",
-            "职业方向": "航空航天工程与运筹技术员"
+            "关键区别": "目标为航空航天系统，须补行业规范与仪器",
+            "更适合什么选择": "愿转向航空航天试验支持者",
+            "核心工作与产出": "航空航天试验与数据采集系统的操作、安装和测试",
+            "职业方向": "航空航天工程与运营技术员"
           },
           {
-            "关键区别": "覆盖通用电气电子系统，医疗环境与患者安全责任不是通用前提。",
-            "更适合什么选择": "按系统对象与责任边界比较。",
-            "核心工作与产出": "设计、搭建与测试电气电子系统与装置。",
+            "关键区别": "覆盖通用工程装置，不能自动转医疗权限",
+            "更适合什么选择": "愿深化电路与工程测试者",
+            "核心工作与产出": "在工程团队下设计、搭建、调试与评价电气电子装置",
             "职业方向": "电气与电子工程技术员"
           },
           {
-            "关键区别": "面向自动化与机器人系统，不承担医疗设备校准与放行。",
-            "更适合什么选择": "按自动化与维护对象比较。",
-            "核心工作与产出": "装配、调试与维护机器人系统与自动化装置。",
+            "关键区别": "须补机器人控制、系统调试与目标安全训练",
+            "更适合什么选择": "愿学自动化系统者",
+            "核心工作与产出": "构建、安装、测试、维护机器人及自动生产系统",
             "职业方向": "机器人技术员"
           },
           {
-            "关键区别": "以流程与效率为主要对象，不以设备维修与校准为核心产出。",
-            "更适合什么选择": "按流程与设备职责比较。",
-            "核心工作与产出": "面向生产流程的效率、质量与安全改进。",
+            "关键区别": "核心为流程与效率，不是医疗设备维修记录",
+            "更适合什么选择": "愿研究流程与数据者",
+            "核心工作与产出": "在工程团队下研究布局、工时和生产效率",
             "职业方向": "工业工程技术员"
           },
           {
-            "关键区别": "名称相近不等于职责、资格与授权可互换。",
-            "更适合什么选择": "按资格与授权链逐项核对。",
-            "核心工作与产出": "O*NET 相关职业还包括医疗记录专员、电气电子安装维修人员等。",
-            "职业方向": "关联与相关职业"
+            "关键区别": "核心为医疗记录/编码及其要求，不是设备校准",
+            "更适合什么选择": "愿转向记录规则与编码者",
+            "核心工作与产出": "整理、维护、分类患者病历及医疗编码",
+            "职业方向": "病历记录专员"
           }
         ],
         "transition": "相邻关系只用于方向比较，不代表自动转岗或资格互认。"
@@ -13762,7 +13990,7 @@
             }
           }
         ],
-        "answer": "工具可辅助整理工单、检索手册索引与汇总服务历史，但拆修、测试、校准、放行与现场安全判断仍由有权限的人负责。",
+        "answer": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
         "authority_links": [
           {
             "来源": "49-9062.00 - Medical Equipment Repairers",
@@ -13801,26 +14029,26 @@
             "链接": "https://www.onetonline.org/link/details/49-9062.00#Tasks"
           },
           {
-            "来源": "FermatMind occupation task AI rubric v1",
-            "类型": "编辑归纳量表",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00"
+            "来源": "O*NET职责背景",
+            "类型": "职责背景，非编辑量表",
+            "适用范围": "不为编辑纸面假设提供采用/性能实证",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00"
           }
         ],
         "difference_intro": "AI 对检测、校准、维修与记录的影响不同，剩余责任也不同。",
         "difference_rows": [
           {
-            "AI主要改变": "手册检索与历史工单比对辅助",
+            "AI主要改变": "编辑假设：虚构记录整理与差异提示",
             "仍由人负责": "现场复测与故障结论",
             "方向": "故障诊断"
           },
           {
-            "AI主要改变": "记录与公差比对自动化",
+            "AI主要改变": "编辑假设：虚构记录整理与差异提示",
             "仍由人负责": "校准结果确认与放行",
             "方向": "校准与测试"
           },
           {
-            "AI主要改变": "服务历史与异常汇总整理",
+            "AI主要改变": "编辑假设：虚构记录整理与差异提示",
             "仍由人负责": "记录真实性与可追溯责任",
             "方向": "记录与合规"
           }
@@ -13838,7 +14066,7 @@
             "使用限制": "软件需求列表不等于生成式 AI 采用率或替代证据。",
             "来源": "Hot Technologies: 49-9062.00 - Medical Equipment Repairers",
             "研究对象": "需求软件技能（O*NET Hot Technologies）",
-            "结论": "列入的是通用办公与业务软件，未见职业专属 AI 工具",
+            "结论": "2025美国招聘提及：Office7%、Excel4%、SAP2%、PowerPoint2%、Outlook1%、Word1%；Salesforce未给比例。",
             "链接": "https://www.onetonline.org/link/hot_tech/49-9062.00"
           },
           {
@@ -13856,17 +14084,17 @@
             "链接": "https://www.onetonline.org/link/industry/49-9062.00"
           },
           {
-            "使用限制": "编辑量表不等于采用率、裁员、法规或证照证据。",
-            "来源": "FermatMind occupation task AI rubric v1",
-            "研究对象": "任务级 AI 讨论量表（编辑归纳）",
-            "结论": "可区分可辅助任务与人工控制点",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00"
+            "使用限制": "链接只证明职责背景，不证明编辑量表、工具性能或采用。",
+            "来源": "O*NET本职业任务背景（非编辑量表来源）",
+            "研究对象": "纸面假设的职责背景",
+            "结论": "官方任务含测试、维修、校准与记录；本页纸面题及工具试验为编辑设计。",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00"
           }
         ],
         "heading": "医疗设备维修人员的任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "手册检索、工单整理、服务历史汇总与排故检查表草拟可被软件辅助；拆修、测试、校准与放行判断仍由人负责。",
+            "含义": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
             "概念": "任务层面的可被辅助能力"
           },
           {
@@ -13881,44 +14109,44 @@
         "questions": [
           {
             "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
-            "来源": "Hot Technologies: 49-9062.00 - Medical Equipment Repairers",
-            "链接": "https://www.onetonline.org/link/hot_tech/49-9062.00",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "AI 会取代医疗设备维修人员吗？"
           },
           {
-            "回答": "手册检索与历史工单可比对辅助，但复测与故障结论仍由有资质者负责。",
-            "来源": "49-9062.00 - Medical Equipment Repairers",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00",
+            "回答": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "故障诊断能自动完成吗？"
           },
           {
-            "回答": "校准与放行由有权限者按厂商公差与机构流程确认。",
-            "来源": "49-9062.00 - Medical Equipment Repairers",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00",
+            "回答": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "校准结果能自动放行吗？"
           },
           {
             "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
-            "来源": "49-9062.00 - Medical Equipment Repairers",
+            "来源": "O*NET本职业职责背景",
             "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "该用哪些证据判断影响？"
           },
           {
             "回答": "电气与机械隔离、个人防护与停用判断不能被工具替代。",
-            "来源": "49-9062.00 - Medical Equipment Repairers",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "工具能替代现场安全判断吗？"
           },
           {
-            "回答": "服务历史整理可被辅助，但记录真实性与可追溯责任仍由人承担。",
-            "来源": "Industries: 49-9062.00 - Medical Equipment Repairers",
-            "链接": "https://www.onetonline.org/link/industry/49-9062.00",
+            "回答": "编辑纸面试验假设：工具只整理本页R1/R2/R3虚构记录，人工重核M1/M2、98端点、103超上限1及批准待定。未验证临床设备、自动诊断、自动校准或放行，不输入真实医疗数据。招聘软件提及不能证明GenAI采用、性能或岗位替代。",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "记录能完全交给系统吗？"
           },
           {
-            "回答": "需核对数据许可、厂商限制、验证与变更控制。",
-            "来源": "FermatMind occupation task AI rubric v1",
-            "链接": "https://www.onetonline.org/link/details/49-9062.00",
+            "回答": "核用途、数据许可、性能、版本及机构验证/授权；这是编辑核对建议，本页未取得采用率证据。",
+            "来源": "O*NET本职业职责背景",
+            "链接": "https://www.onetonline.org/link/summary/49-9062.00",
             "问题": "如何核对工具的采用与验证条件？"
           }
         ],
@@ -13977,43 +14205,43 @@
             "人的控制点": "核对设备编号、保养项目与完成状态。",
             "任务": "按计划清洁、润滑与调整设备",
             "工作方向": "预防性维护",
-            "当前变化": "计划排程与到期提醒可被系统辅助"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "由有资质者现场复测并确认故障结论。",
             "任务": "使用测试与分析仪器定位并排查故障",
             "工作方向": "故障诊断",
-            "当前变化": "手册检索与历史工单可比对辅助"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "核对部件型号、安装质量与功能复测。",
             "任务": "拆卸故障设备并更换有缺陷部件",
             "工作方向": "维修与部件更换",
-            "当前变化": "备件目录与图纸检索可被辅助"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "由有权限者确认校准结果与放行。",
             "任务": "按厂商手册测试或校准部件与设备",
             "工作方向": "校准与测试",
-            "当前变化": "记录与公差比对可自动生成"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "现场安全与验收由责任人签署。",
             "任务": "按厂商规范安装并核算电源与空间要求",
             "工作方向": "安装与验收",
-            "当前变化": "安装清单与参数核对可被辅助"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "由责任人确认记录真实与可追溯。",
             "任务": "保存维护、维修与更新记录",
             "工作方向": "记录与合规",
-            "当前变化": "服务历史整理与异常汇总可自动化"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           },
           {
             "人的控制点": "隔离、停用与放行由授权人决定。",
             "任务": "检查用电与机械危险并判定设备可用性",
             "工作方向": "安全与范围判定",
-            "当前变化": "风险清单可被辅助生成"
+            "当前变化": "编辑假设：仅整理虚构记录，不代表任务已自动执行。"
           }
         ],
         "transition": "从医疗设备维修人员转向相邻方向，优先比较可迁移能力，再补齐目标方向特有的知识与资格要求。"
@@ -14023,20 +14251,10 @@
         "slug": "medical-equipment-repairers"
       },
       "career_path_block": {
-        "boundary": {
-          "$item": "medical-equipment-repairers.path.recruitment-signals.2",
-          "block": "path",
-          "copy_key": "career.item.recruitment-signals",
-          "type": "prose"
-        },
+        "boundary": "本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。",
         "competence_ladder": [
           {
-            "description": {
-              "$item": "medical-equipment-repairers.path.career-path-block.12",
-              "block": "path",
-              "copy_key": "career.item.career-path-block",
-              "type": "prose"
-            },
+            "description": "设备编号/型号、手册版本、工单与状态逐项核。",
             "stage": "核对输入"
           },
           {
@@ -14048,43 +14266,53 @@
             "stage": "维修与校准"
           },
           {
-            "description": "在授权范围内扩展复核、带教与流程改进职责。",
+            "description": {
+              "$item": "medical-equipment-repairers.path.career-path-block.12",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
             "stage": "责任扩展"
           }
         ],
-        "direct_answer": "入口看能否按厂商规范完成检测、校准与维修并保留记录；美国 Job Zone 需要职校训练、相关在职经验或副学士学位，资格与授权按法域核验。",
+        "direct_answer": {
+          "$item": "medical-equipment-repairers.path.recruitment-signals.2",
+          "block": "path",
+          "copy_key": "career.item.recruitment-signals",
+          "type": "prose"
+        },
         "entry_heading": "入行路径与可检查证据",
         "heading": "医疗设备维修人员的入行路径、资格边界与职业发展",
         "locale_requirements": {
-          "credential_boundary": "证书、学位、厂商认证、机构授权与设备放行不是同一状态；能否使用设备取决于雇主流程与授权链。",
-          "jurisdiction": "美国 Job Zone Three（中等准备）；中国大陆按用人单位、设备监管与机构授权规则核验。",
-          "summary": "美国：Job Zone Three，通常需要职业培训、相关在职经验或副学士学位；中国大陆的学历、执业与机构授权边界按用人单位与主管部门核验。"
+          "credential_boundary": "本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。",
+          "jurisdiction": "美国准备路径与中国机构任用/授权分别核",
+          "summary": "美国O*NET JobZone3为中等准备职业群，常见职业教育、在岗训练或副学士；群组经验描述不是本职业统一年限。BLS本职业通常生物医学技术或相关副学士/证书，也存在高中加相关训练/经历、学徒及既有军队或机电经验路径。职业认证并非BLS统一强制要求，雇主偏好与申请条件逐项核。中国任用与授权另核，不作资格互认。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/medical-equipment-repairers.htm",
             "id": "bls",
-            "label": "Medical Equipment Repairers education",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS本职业手册",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "nasa",
-            "label": "Medical Equipment Repairers job zone",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.onetonline.org/link/localtraining/49-9062.00",
             "id": "onet-training",
-            "label": "National Training: 49-9062.00 - Medical Equipment Repairers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET课程目录",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "faa",
-            "label": "National Certifications: 49-9062.00 - Medical Equipment Repairers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           }
         ],
         "tracks": [
@@ -14092,28 +14320,28 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到独立检测。",
                 "readiness_evidence": "保留保养清单与工单记录。",
                 "responsibility": "在监督下完成预防性维护与工单记录。",
                 "role": "在指导下维护"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到独立校准。",
                 "readiness_evidence": "出示检测记录与故障结论。",
                 "responsibility": "独立完成常见设备的检测与故障诊断。",
                 "role": "独立检测"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到复杂设备。",
                 "readiness_evidence": "出示校准与复测记录。",
                 "responsibility": "按厂商公差执行校准并完成功能复测。",
                 "role": "独立校准"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示复杂维修与验收记录。",
                 "responsibility": "负责影像、监护等复杂设备的维修与验收。",
@@ -14126,28 +14354,28 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到独立安全执行。",
                 "readiness_evidence": "保留安全操作练习记录。",
                 "responsibility": "学习电气与机械隔离及个人防护要求。",
                 "role": "安全学习"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到安全体系支持。",
                 "readiness_evidence": "出示隔离与检查记录。",
                 "responsibility": "独立执行能源隔离与安全检查。",
                 "role": "独立安全执行"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到外部审核准备。",
                 "readiness_evidence": "出示流程改进与整改记录。",
                 "responsibility": "参与设备安全与合规流程改进。",
                 "role": "安全体系支持"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示带教与规范记录。",
                 "responsibility": "在授权范围内带教并维护安全规范。",
@@ -14160,28 +14388,28 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到独立沟通。",
                 "readiness_evidence": "保留沟通与交接练习记录。",
                 "responsibility": "学习与临床用户和厂商的交接要求。",
                 "role": "沟通学习"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到复杂案例协调。",
                 "readiness_evidence": "出示沟通与复核记录。",
                 "responsibility": "向临床用户说明设备状态与使用边界。",
                 "role": "独立沟通"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "扩展到设备生命周期管理。",
                 "readiness_evidence": "出示协调与备件记录。",
                 "responsibility": "协调厂商维保、备件与升级安排。",
                 "role": "厂商与项目管理"
               },
               {
-                "credentials": "按具体法域、厂商与雇主规则核验。",
+                "credentials": "编辑能力进阶示意；按目标设备训练、监督及机构授权核，无固定晋升年限。",
                 "next_moves": "按机构与规则取得授权。",
                 "readiness_evidence": "出示评估与规范记录。",
                 "responsibility": "在授权范围内支持设备采购与规范职责。",
@@ -14198,10 +14426,16 @@
         "items": [
           {
             "answer": {
-              "$item": "medical-equipment-repairers.profile.definition-block.1",
-              "block": "profile",
-              "copy_key": "career.item.definition-block",
-              "type": "prose"
+              "$join": [
+                "先核设备编号、型号、适用手册版本、工单和作业状态，再核自己的授权及机构安全流程。",
+                {
+                  "$item": "medical-equipment-repairers.profile.career-quick-answers-block.7",
+                  "block": "profile",
+                  "copy_key": "career.item.career-quick-answers-block",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
             },
             "key": "qa3",
             "question": "这个职业先核对什么？",
@@ -14210,92 +14444,82 @@
                 {
                   "alternate_value": null,
                   "label": "需要核对的对象",
-                  "secondary_value": {
-                    "$item": "medical-equipment-repairers.profile.work-context-block.6",
-                    "block": "profile",
-                    "copy_key": "career.item.work-context-block",
-                    "type": "prose"
-                  },
-                  "value": {
-                    "$item": "medical-equipment-repairers.profile.career-quick-answers-block.7",
-                    "block": "profile",
-                    "copy_key": "career.item.career-quick-answers-block",
-                    "type": "prose"
-                  }
+                  "secondary_value": "不同型号或版本的规则不可默认互换。",
+                  "value": "设备编号/型号、手册版本、工单与状态"
                 },
                 {
                   "alternate_value": null,
                   "label": "交付产出",
-                  "secondary_value": {
-                    "$item": "medical-equipment-repairers.profile.onet-structured-fields-block.8",
-                    "block": "profile",
-                    "copy_key": "career.item.onet-structured-fields-block",
-                    "type": "prose"
-                  },
+                  "secondary_value": "保留原始结果、方法/版本、异常、复测与批准状态。",
                   "value": "可复核的检测、校准与维修记录"
                 },
                 {
                   "alternate_value": null,
                   "label": "责任边界",
-                  "secondary_value": null,
+                  "secondary_value": "按适用手册、训练和机构授权核。",
                   "value": "放行使用由机构与授权确认"
                 }
               ]
             }
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "按适用手册与机构流程，从身份核对、安全作业、诊断/维护，到复测、记录和授权交接闭环。",
             "key": "qa2",
             "question": "怎样判断这项工作是否形成闭环？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "步骤一",
-                  "secondary_value": "步骤一要点",
-                  "value": "核对设备与工单"
+                  "label": "核对输入",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "设备/型号/手册/工单"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤二 检查",
-                  "secondary_value": "步骤二 检查要点",
-                  "value": "检查与故障诊断"
+                  "label": "确认作业条件",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "按机构流程核停用、交接、防护与能源风险"
                 },
                 {
                   "alternate_value": null,
-                  "label": "第二步 检查与诊断",
-                  "secondary_value": "步骤三要点",
-                  "value": "拆修或更换部件"
+                  "label": "检测排故",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "在授权范围内按手册与适用测试方法"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤四",
-                  "secondary_value": "步骤四要点",
-                  "value": "校准与功能安全测试"
+                  "label": "维护维修",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "记录部件与操作，不以网页代手册"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤五",
-                  "secondary_value": "步骤五要点",
-                  "value": "记录与状态更新"
+                  "label": "复测核验",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "保留原读数、标准与异常处理"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤六",
-                  "secondary_value": "步骤六要点",
-                  "value": "按机构流程交接"
+                  "label": "记录存档",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "原值、复测与未决状态分别留存"
                 },
                 {
                   "alternate_value": null,
-                  "label": "认证与培训",
-                  "secondary_value": "认证与培训要点",
-                  "value": "按岗位与厂商要求"
+                  "label": "授权交接",
+                  "secondary_value": "真实作业依厂商规范、训练与机构授权。",
+                  "value": "按机构批准与交接流程处理"
                 }
               ]
             }
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": {
+              "$item": "medical-equipment-repairers.profile.onet-structured-fields-block.8",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            },
             "key": "qa1",
             "question": "资格边界",
             "table": {
@@ -14344,145 +14568,159 @@
       },
       "career_risk_cards": {
         "boundary": {
-          "$item": "medical-equipment-repairers.risk.career-risk-cards.1",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
+          "$item": "medical-equipment-repairers.sources.boundary-notice.2",
+          "block": "sources",
+          "copy_key": "career.item.boundary-notice",
           "type": "prose"
         },
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-risk",
+            "label": "风险与责任边界"
           }
         ],
         "direct_answer": {
-          "$item": "medical-equipment-repairers.risk.career-risk-cards.2",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "evidence_scope": {
-          "$item": "medical-equipment-repairers.risk.career-risk-cards.3",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "heading": "工作压力、安全风险与职业责任边界",
-        "risks": [
-          {
-            "affected_roles": {
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-equipment-repairers.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-equipment-repairers.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            {
               "$item": "medical-equipment-repairers.risk.career-risk-cards.4",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "consequence": {
+            {
               "$item": "medical-equipment-repairers.risk.career-risk-cards.5",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            },
+            }
+          ],
+          "separator": "\n"
+        },
+        "evidence_scope": "官方任务与情境支持职责/暴露背景；以下为编辑风险场景，不是事故发生率或完整安全操作规程。",
+        "heading": "工作压力、安全风险与职业责任边界",
+        "risks": [
+          {
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-details"
             ],
             "id": "cost-change",
             "mitigation": "按规程执行能源隔离、锁定与个人防护。",
             "scenario": "未执行电气或机械能源隔离即接触设备。",
-            "title": "医疗设备维修人员"
+            "title": "能源与作业状态"
           },
           {
-            "affected_roles": "检测与校准岗位",
-            "consequence": "可能让不合格设备被投入使用。",
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "onet-details",
+              "onet-details"
             ],
             "id": "record-version",
             "mitigation": "按厂商公差复测并由责任人确认校准与放行。",
             "scenario": "校准或功能测试结论错误。",
-            "title": "医疗设备维修人员"
+            "title": "校准与功能测试结论"
           },
           {
-            "affected_roles": "记录与合规岗位",
-            "consequence": "影响追溯、责任认定与后续维护。",
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet-details",
+              "onet-details"
             ],
             "id": "personal-data",
             "mitigation": "按格式记录设备身份、测试结果与放行状态。",
             "scenario": "工单与维修记录缺失、不完整或不实。",
-            "title": "医疗设备维修人员"
+            "title": "测试与校准记录"
           },
           {
-            "affected_roles": "现场维修岗位",
-            "consequence": "可能改变医疗与法律责任并影响临床使用。",
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-details"
             ],
             "id": "technical-boundary",
             "mitigation": "按停用、交接与授权链确认后再处理。",
             "scenario": "超出授权判定设备可用或直接拆卸在用设备。",
-            "title": "医疗设备维修人员"
+            "title": "授权与交接"
           },
           {
-            "affected_roles": "交付与值守岗位",
-            "consequence": "可能放大差错并影响患者与工作人员安全。",
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet-details",
+              "onet-details"
             ],
             "id": "single-coverage",
             "mitigation": "保留测试与记录留痕并按流程升级。",
             "scenario": "时间压力下跳过测试或记录步骤。",
-            "title": "医疗设备维修人员"
+            "title": "时间压力下跳过核验"
           },
           {
-            "affected_roles": "技术与管理岗位",
-            "consequence": "可能导致授权与责任错配。",
+            "affected_roles": "维修者、设备使用者及机构责任团队；按具体场景核。",
+            "consequence": "可能影响设备状态、可追溯性或使用安全，不能由本页估事故概率。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-details"
             ],
             "id": "delivery-acceptance",
             "mitigation": "按 O*NET 49-9062.00 的范围区分相邻岗位。",
             "scenario": "把本职业与生物医学工程师、电气电子技术员等相邻岗位混为一谈。",
-            "title": "医疗设备维修人员"
+            "title": "相邻职业范围混用"
           }
         ],
         "schema_version": "career.work_risk.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "onet-details",
-            "label": "Medical Equipment Repairers 49-9062.00",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/49-9062.00",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "source-pack-onet-custom",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
             "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "source-pack-onet-summary",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/49-9062.00",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "source-pack-onet-industry",
-            "label": "Industries: 49-9062.00 - Medical Equipment Repairers",
-            "scope": "contextual"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "internal-ai-rubric",
-            "label": "FermatMind occupation task AI rubric v1",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           }
         ]
       },
@@ -14521,36 +14759,36 @@
             {
               "学历段": "基础训练",
               "岗位方向": "设备维护与技术支持",
-              "说明": "按雇主、设备类型和授权要求核对。"
+              "说明": "中国真实岗位按所在地/雇主训练与授权核；美国准备路径仅作比较，不作中国互认。"
             },
             {
               "学历段": "相关专业",
               "岗位方向": "医疗设备维修与保养",
-              "说明": "学历不是执业授权或结果放行的替代。"
+              "说明": "中国真实岗位按所在地/雇主训练与授权核；美国准备路径仅作比较，不作中国互认。"
             },
             {
               "学历段": "经验阶段",
               "岗位方向": "现场服务与故障诊断",
-              "说明": "用可复核工作样本证明能力边界。"
+              "说明": "中国真实岗位按所在地/雇主训练与授权核；美国准备路径仅作比较，不作中国互认。"
             },
             {
               "学历段": "进阶阶段",
               "岗位方向": "质量、校准与责任交接",
-              "说明": "具体要求以机构流程和所在地规则为准。"
+              "说明": "中国真实岗位按所在地/雇主训练与授权核；美国准备路径仅作比较，不作中国互认。"
             }
           ],
           "china_industry_table": [
             {
               "行业": "医院与临床工程",
-              "需求": "需核对设备范围、值班与授权链。"
+              "需求": "编辑探索场景，不是中国需求率、行业占比或工资数据。"
             },
             {
               "行业": "设备制造商服务",
-              "需求": "需核对厂商培训、现场服务与记录要求。"
+              "需求": "编辑探索场景，不是中国需求率、行业占比或工资数据。"
             },
             {
               "行业": "第三方维修服务",
-              "需求": "需核对合同边界、出差与责任交接。"
+              "需求": "编辑探索场景，不是中国需求率、行业占比或工资数据。"
             }
           ],
           "china_intl": "Medical Equipment Repairers work context｜https://www.onetonline.org/link/details/49-9062.00#WorkContext",
@@ -14562,8 +14800,43 @@
           },
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
-          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
-          "china_salary_note": "中国精确职业工资数据不可得；本页不展示或换算中国薪资数字。",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
+          "china_salary_note": "本页未取得中国大陆本职业全国工资及安全映射；不展示或换算中国薪资数字。",
           "china_salary_table": [
             {
               "城市/区间": "中国数据状态",
@@ -14584,7 +14857,42 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "sources_note": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-equipment-repairers.source-register.published.1"
+              }
+            ],
+            "separator": ""
+          },
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
@@ -14595,66 +14903,122 @@
             "scenario_role_label": "岗位方向",
             "scenario_value_label": "数据状态"
           },
-          "us_growth": "12.6%",
-          "us_median": "$61,660"
+          "us_growth": "不用于中国口径",
+          "us_median": "不用于中国口径"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "source-pack-onet-localwages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-trends",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-equipment-repairers.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "38,490 美元/年",
+            "说明": "O*NET全国本职业BLS2025工资；18.51 美元/小时；非个人报价。"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "47,470 美元/年",
+            "说明": "O*NET全国本职业BLS2025工资；22.82 美元/小时；非个人报价。"
           },
           {
-            "指标": "薪资中位数",
-            "数值": "$61,660",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+            "指标": "薪资第50百分位",
+            "数值": "61,660 美元/年",
+            "说明": "O*NET全国本职业BLS2025工资；29.64 美元/小时；非个人报价。"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "78,500 美元/年",
+            "说明": "O*NET全国本职业BLS2025工资；37.74 美元/小时；非个人报价。"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "98,280 美元/年",
+            "说明": "O*NET全国本职业BLS2025工资；47.25 美元/小时；非个人报价。"
           },
           {
-            "指标": "就业人数",
-            "数值": "71,800",
-            "说明": "Medical Equipment Repairers work context｜https://www.onetonline.org/link/details/49-9062.00#WorkContext"
+            "指标": "2025就业规模",
+            "数值": "71,800人",
+            "说明": "BLS2025—2035本职业基线。"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "12.6%",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+            "指标": "2025—2035就业增长",
+            "数值": "官方13%；净增9,100人",
+            "说明": "71,800→80,900；不以取整差商替官方比例。"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "8,200",
-            "说明": "Medical Equipment Repairers work context｜https://www.onetonline.org/link/details/49-9062.00#WorkContext"
+            "指标": "2025—2035就业年均空缺",
+            "数值": "约8,200个/年",
+            "说明": "BLS2025—2035，含增长与替换，非当前招聘数。"
           }
         ],
-        "boundary": "美国数据只适用于 medical-equipment-repairers 的标注期间；不外推中国，也不构成个人收入或录用保证。",
+        "boundary": "年薪/时薪均来自全国职业工资页，不换算月薪；不是中国工资或个人收入承诺。",
         "direct_answer": {
           "$join": [
-            "医疗设备维修人员的美国中位年薪事实可以单独引用，但工资分位分布未取得同范围可解释数据，因此不补写分位数。",
             {
               "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
+            },
+            {
+              "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -14666,144 +15030,114 @@
             "factor": "地点与班次"
           },
           {
-            "answer": "核对雇主培训、认证偏好和可复核工作样本。",
+            "answer": {
+              "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
             "factor": "资格与经验"
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "12.6%",
+        "growth": "官方13%（2025—2035）",
         "heading": "医疗设备维修人员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2025",
+        "industry_period": "BLS2025年5月；查阅2026-10-03",
         "industry_rows": [
           {
-            "industry": "医院与临床工程",
-            "median": "需核对具体岗位",
-            "note": "设备范围、值班和授权可能不同。"
+            "industry": "医院（各类所有制）",
+            "median": "75,390 美元/年",
+            "note": "BLS2025本职业行业年薪中位，非行业就业份额。"
           },
           {
-            "industry": "设备制造商服务",
-            "median": "需核对具体岗位",
-            "note": "厂商培训、现场服务与出差要求可能不同。"
+            "industry": "专业/商业设备批发商",
+            "median": "63,050 美元/年",
+            "note": "BLS2025本职业行业年薪中位，非行业就业份额。"
           },
           {
-            "industry": "第三方维修服务",
-            "median": "需核对具体岗位",
-            "note": "合同边界和责任交接可能不同。"
+            "industry": "电子和精密设备维修维护",
+            "median": "62,430 美元/年",
+            "note": "BLS2025本职业行业年薪中位，非行业就业份额。"
           },
           {
-            "industry": "其他雇主与地区",
-            "median": "需核对具体岗位",
-            "note": "地点、经验、福利与资格会改变实际条件。"
+            "industry": "门诊医疗服务",
+            "median": "61,510 美元/年",
+            "note": "BLS2025本职业行业年薪中位，非行业就业份额。"
           }
         ],
-        "industry_value_label": "岗位数据",
+        "industry_value_label": "行业年薪中位数",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
-            "answer": {
-              "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
-                {
-                  "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
+            "answer": "中位数不是起薪、资历档位或个人报价。",
             "question": "中位工资代表什么？"
           },
           {
             "answer": {
-              "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
-                {
-                  "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.6",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
+              "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             },
-            "question": "为什么不展示分位数？"
+            "question": "行业就业份额和行业工资有什么区别？"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
+            "answer": {
+              "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
             "question": "就业人数代表什么？"
           },
           {
-            "answer": "增长预测和年度空缺是市场信号，不是个人录用概率。",
+            "answer": {
+              "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
             "question": "增长与空缺如何使用？"
           }
         ],
-        "median": "$61,660",
+        "median": "61,660 美元/年（2025）",
         "outlook_heading": "就业前景",
-        "outlook_period": "2025—2035",
+        "outlook_period": "BLS2025—2035（O*NET旧期另列）",
         "wage_column_labels": [
           "工资层级",
           "年薪参考",
-          "月度等值",
+          "时薪参考",
           "解释"
         ],
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
-            "interpretation": {
-              "$join": [
-                "仅表示中位年薪事实，不是起薪或个人报价。",
-                {
-                  "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.2",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "已取得的中位水平",
-            "value": "$61,660"
+            "equivalent": "18.51 美元/小时",
+            "interpretation": "全国本职业2025工资分布，非入行或资历档位。",
+            "label": "第10分位",
+            "value": "38,490 美元/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "29.64 美元/小时",
+            "interpretation": "全国本职业2025工资分布，非入行或资历档位。",
+            "label": "中位数",
+            "value": "61,660 美元/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-equipment-repairers.us-salary.career-snapshot-secondary-locale.4",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "47.25 美元/小时",
+            "interpretation": "全国本职业2025工资分布，非入行或资历档位。",
+            "label": "第90分位",
+            "value": "98,280 美元/年"
           }
         ]
       },
-      "definition_block": "医疗设备维修人员对应 O*NET 49-9062.00，官方职责为检测、调试或维修生物医学或电医疗设备；实际工作包括安装、预防性维护、故障排除、校准与维修并保存记录。",
+      "definition_block": {
+        "$item": "medical-equipment-repairers.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
       "faq_block": {
         "items": {
           "$item": "medical-equipment-repairers.sources.faq-block.1",
@@ -14813,26 +15147,32 @@
         }
       },
       "fermat_decision_card": {
-        "caveat": {
-          "$item": "medical-equipment-repairers.quick-decision.fit-decision-checklist.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+        "caveat": "本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。",
+        "summary": {
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.quick-decision.fermat-decision-card.1",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-equipment-repairers.quick-decision.fermat-decision-card.2",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "summary": "适合愿意按厂商规范检测、校准与维修设备、把每次维修留成可追溯记录，并在超出授权时停下并升级的人。",
         "title": "医疗设备维修人员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": {
-          "$item": "medical-equipment-repairers.quick-decision.fermat-decision-card.1",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
-        },
+        "boundary": "谨慎信号：为得到合格结果改读数、跳过版本核对或补批准，先训练真实记录与未决项交接。本页为美国49-9062.00职业探索。检测、校准、维修、判定可用性属于官方任务，但个人范围须符合厂商要求、机构规程和授权；岗位分类不授个人许可。纸面试做不接触患者、实际设备、电源或医疗数据，不形成设备放行结论。",
         "how": {
-          "$item": "medical-equipment-repairers.quick-decision.fermat-decision-card.2",
+          "$item": "medical-equipment-repairers.quick-decision.fit-decision-checklist.4",
           "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
@@ -14859,153 +15199,162 @@
           }
         ],
         "direct_answer": {
-          "$item": "medical-equipment-repairers.market-signals.market-signal-card.1",
-          "block": "market-signals",
-          "copy_key": "career.item.market-signal-card",
-          "type": "prose"
-        },
-        "heading": "职业前景、市场信号与相关职业转向",
-        "outlook_evidence": [
-          {
-            "geography": {
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.market-signals.market-signal-card.1",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
               "$item": "medical-equipment-repairers.market-signals.market-signal-card.2",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "horizon": {
+            {
               "$item": "medical-equipment-repairers.market-signals.market-signal-card.3",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "interpretation": {
+            {
               "$item": "medical-equipment-repairers.market-signals.market-signal-card.4",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "limitation": {
+            {
               "$item": "medical-equipment-repairers.market-signals.market-signal-card.5",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
-            },
-            "metric": "年薪中位数（2025）",
-            "occupation_scope": "展示口径：Medical Equipment Repairers（O*NET 49-9062.00）",
+            }
+          ],
+          "separator": "\n"
+        },
+        "heading": "职业前景、市场信号与相关职业转向",
+        "outlook_evidence": [
+          {
+            "geography": "美国",
+            "horizon": "2025工资",
+            "interpretation": "全国年薪中位",
+            "limitation": "本职业范围；非个人保证，空缺含替换，非在招。",
+            "metric": "年薪中位数",
+            "occupation_scope": "Medical Equipment Repairers 49-9062.00",
             "source_id": "ep",
-            "value": "61,660 美元/年"
+            "value": "61,660美元/年"
           },
           {
-            "geography": "美国全国",
+            "geography": "美国",
             "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
-            "limitation": "不能作为个人录用概率。",
-            "metric": "年均职位空缺",
-            "occupation_scope": "展示口径：49-9062.00",
+            "interpretation": "68,000→76,800；净增8,800",
+            "limitation": "本职业范围；非个人保证，空缺含替换，非在招。",
+            "metric": "官方增长/年均空缺",
+            "occupation_scope": "Medical Equipment Repairers 49-9062.00",
+            "source_id": "ep",
+            "value": "13% / 7,300"
+          },
+          {
+            "geography": "美国",
+            "horizon": "2025—2035",
+            "interpretation": "71,800→80,900；净增9,100",
+            "limitation": "本职业范围；非个人保证，空缺含替换，非在招。",
+            "metric": "官方增长/年均空缺",
+            "occupation_scope": "Medical Equipment Repairers 49-9062.00",
             "source_id": "bls",
-            "value": "约 7,300 个/年"
-          },
-          {
-            "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "就业规模、净变化、增长率与空缺必须分别解释。",
-            "limitation": "为统计预测，不构成单列本职业就业保证。",
-            "metric": "就业规模与变化",
-            "occupation_scope": "展示口径：49-9062.00",
-            "source_id": "nbs",
-            "value": "2024 年约 68,000 人，2034 年预计约 76,800 人"
+            "value": "13% / 8,200"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/medical-equipment-repairers.htm",
             "id": "bls",
-            "label": "Medical Equipment Repairers wages and trends",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS本职业手册",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.onetonline.org/link/localwages/49-9062.00",
             "id": "ep",
-            "label": "Medical Equipment Repairers 49-9062.00",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET全国工资与另列旧期趋势",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
             "id": "nbs",
-            "label": "2025年城镇单位就业人员年平均工资情况",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "国家统计局行业工资（非美国工资）",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
             "id": "onet",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "需补齐工程设计学历与研发方法。",
-            "shared_capabilities": "医疗设备原理与临床需求理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "生物医学工程师",
+            "capability_gaps": "补目标方向工程研发方法、设计与评价及目标学历要求；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/biomedical-engineers",
+            "target_slug": "biomedical-engineers",
+            "target_title": "生物工程师与生物医学工程师",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐航空航天行业规范与试验对象。",
-            "shared_capabilities": "机械与电气检测、试验与设备操作。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "航空航天工程与运筹技术员",
+            "capability_gaps": "补目标方向航空航天试验/数据采集系统、行业规范与训练；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/aerospace-engineering-and-operations-technicians",
+            "target_slug": "aerospace-engineering-and-operations-technicians",
+            "target_title": "航空航天工程与运营技术员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐通用电气电子系统设计知识。",
-            "shared_capabilities": "电路、仪器与电气安全基础。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向电气电子设计搭建与工程评价能力；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/electrical-and-electronics-engineering-technicians",
+            "target_slug": "electrical-and-electronics-engineering-technicians",
             "target_title": "电气与电子工程技术员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐机器人与控制系统知识。",
-            "shared_capabilities": "自动化装置的装配、调试与维护。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向机器人控制与系统调试、目标安全训练；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/robotics-technicians",
+            "target_slug": "robotics-technicians",
             "target_title": "机器人技术员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐工业工程方法与流程分析。",
-            "shared_capabilities": "流程、质量与效率改进意识。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向生产布局、工时研究与效率分析；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/industrial-engineering-technicians",
+            "target_slug": "industrial-engineering-technicians",
             "target_title": "工业工程技术员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐健康信息与隐私合规知识。",
-            "shared_capabilities": "医疗环境与记录规范理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向患者记录、医疗编码与目标合规训练；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/medical-records-and-health-information-technicians",
+            "target_slug": "medical-records-and-health-information-technicians",
             "target_title": "病历记录专员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐医疗设备校准与放行边界。",
-            "shared_capabilities": "电气系统安装与维修基础。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "电气与电子安装维修人员",
+            "capability_gaps": "补目标方向工业控制/发射器等目标设备及其测试安装规范；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/electrical-and-electronics-repairers-commercial-and-industrial-equipment",
+            "target_slug": "electrical-and-electronics-repairers-commercial-and-industrial-equipment",
+            "target_title": "商业与工业电气电子设备维修人员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐设备维修与校准技能。",
-            "shared_capabilities": "检验与质量意识。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向标本/检测、实验室质控、监督及目标训练资格；不是反向补回医疗设备维修。",
+            "shared_capabilities": "可能迁移按规程核对、技术记录和团队沟通习惯；不推已经具备目标岗位实操经验。",
+            "target_href": "/zh/career/jobs/medical-and-clinical-laboratory-technicians",
+            "target_slug": "medical-and-clinical-laboratory-technicians",
             "target_title": "医学与临床实验室技术员",
             "transition_distance": "需补证据"
           }
@@ -15051,20 +15400,10 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "medical-equipment-repairers.fit.personality-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "answer": "RCI描述实际操作、程序记录、调查排故兴趣，不是个人能力门槛。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 RCI 适配测试",
-            "evidence_level": {
-              "$item": "medical-equipment-repairers.fit.personality-fit-block.8",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
             "id": "riasec",
             "label": "RIASEC 兴趣代码（RCI）",
             "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
@@ -15077,10 +15416,10 @@
             "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察能否保留R2版本差和R3两项问题、按步骤复核；本页无大五职业效能常模。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做大五适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或安全判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
             "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
@@ -15093,10 +15432,10 @@
             "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "MBTI只用于表达沟通偏好，不规定哪种类型才能维修设备。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 MBTI 适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或安全判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
             "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
@@ -15109,12 +15448,25 @@
             "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "九型只用于自我反思，不推断维修胜任或职业门槛。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做九型适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或安全判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
             "id": "enneagram",
             "label": "九型人格（Enneagram）",
+            "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
+            "signals": [
+              "观察自己的担忧/复核习惯，不用类型替代实作。"
+            ],
+            "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
+          },
+          {
+            "answer": "观察读题、范围判断和多条件核对；R1端点/R3差1不是IQ分数或常模。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
+            "id": "iq",
+            "label": "认知能力测验（IQ）",
             "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "medical-equipment-repairers.fit.personality-fit-block.4",
@@ -15125,12 +15477,12 @@
             "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "观察能否清楚交接未决项、倾听用户并解释状态；纸面题不是EQ测量。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做认知能力适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或安全判断证据。",
-            "id": "iq",
-            "label": "认知能力测验（IQ）",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑行为观察提示；无本页职业专属预测效能或录用常模。",
+            "id": "eq",
+            "label": "情绪智力测验（EQ 量表）",
             "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
             "signals": {
               "$item": "medical-equipment-repairers.fit.personality-fit-block.5",
@@ -15139,34 +15491,44 @@
               "type": "list"
             },
             "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
-          },
-          {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 EQ 适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或安全判断证据。",
-            "id": "eq",
-            "label": "情绪智力测验（EQ 量表）",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？",
-            "signals": {
+          }
+        ],
+        "boundary": {
+          "$join": [
+            {
               "$item": "medical-equipment-repairers.fit.personality-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
+            }
+          ],
+          "separator": "\n"
+        },
+        "direct_answer": {
+          "$join": [
+            {
+              "$item": "medical-equipment-repairers.fit.personality-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
             },
-            "watchout": "标签只描述倾向，不能替代真实任务、厂商规范与雇主判断。"
-          }
-        ],
-        "boundary": "本页仅用于职业探索；医疗设备检测、校准、维修与放行须以所在地法规、厂商规范、机构流程与授权链为准，人格工具不能替代资格与安全要求。",
-        "direct_answer": "适配看可观察行为：能否按厂商规范检测与校准、能否保留可追溯记录、能否在电气与机械安全疑问时先隔离并升级。",
+            {
+              "$item": "medical-equipment-repairers.fit.personality-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
+        },
         "directions": [
           {
             "direction": "设备检测与排故",
             "fit_signals": "能按厂商手册使用测试仪器定位并复现设备问题。",
             "target": {
-              "href": "/zh/career/jobs/general-and-operations-managers",
-              "slug": "general-and-operations-managers",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "结论须经复测与责任人确认。"
           },
@@ -15174,9 +15536,9 @@
             "direction": "校准与预防性维护",
             "fit_signals": "能按计划与公差执行校准和维护并留痕。",
             "target": {
-              "href": "/zh/career/jobs/purchasing-managers",
-              "slug": "purchasing-managers",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "校准结果与放行由有权限者确认。"
           },
@@ -15184,9 +15546,9 @@
             "direction": "维修与部件更换",
             "fit_signals": "能拆卸、更换并复装部件并完成功能复测。",
             "target": {
-              "href": "/zh/career/jobs/archivists",
-              "slug": "archivists",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "不得跳过安全隔离与功能测试。"
           },
@@ -15194,9 +15556,9 @@
             "direction": "安全与合规",
             "fit_signals": "能识别电气与机械危险并执行隔离与防护。",
             "target": {
-              "href": "/zh/career/jobs/administrative-services-managers",
-              "slug": "administrative-services-managers",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "停用与放行由授权链决定。"
           },
@@ -15204,9 +15566,9 @@
             "direction": "记录与追溯",
             "fit_signals": "能保留设备身份、测试结果与放行状态记录。",
             "target": {
-              "href": "/zh/career/jobs/human-resources-managers",
-              "slug": "human-resources-managers",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "记录真实性与完整性由人负责。"
           },
@@ -15214,9 +15576,9 @@
             "direction": "现场沟通与协作",
             "fit_signals": "能与临床用户和厂商工程师清晰交接设备状态。",
             "target": {
-              "href": "/zh/career/jobs/medical-and-health-services-managers",
-              "slug": "medical-and-health-services-managers",
-              "title": "FermatMind occupation task AI rubric v1"
+              "href": "/zh/career/jobs/medical-equipment-repairers",
+              "slug": "medical-equipment-repairers",
+              "title": "医疗设备维修人员"
             },
             "watchouts": "不越权作临床可用性结论。"
           }
@@ -15224,44 +15586,44 @@
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "RCI描述实际操作、程序记录、调查排故兴趣，不是个人能力门槛。",
+            "question": "兴趣代码能当资格吗？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "观察能否保留R2版本差和R3两项问题、按步骤复核；本页无大五职业效能常模。",
+            "question": "大五怎样观察？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "MBTI只用于表达沟通偏好，不规定哪种类型才能维修设备。",
+            "question": "MBTI能筛人吗？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "九型只用于自我反思，不推断维修胜任或职业门槛。",
+            "question": "九型能定岗位吗？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "观察读题、范围判断和多条件核对；R1端点/R3差1不是IQ分数或常模。",
+            "question": "这道题测IQ吗？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "观察能否清楚交接未决项、倾听用户并解释状态；纸面题不是EQ测量。",
+            "question": "交接能测EQ吗？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "能核R2手册与R3数值/批准两个问题，保留原值和纠错版。",
+            "question": "哪些信号适合继续？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "为得到合格结果改原值、跳过版本或补批准；先训练记录与核对习惯。",
+            "question": "哪些信号须谨慎？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "60分钟纸面核对题（编辑虚构）：三张记录卡的设备代号都为E7，题内要求手册M2、普通读数在98—102之间（含端点）、批准状态为是，三条件齐全才标题内可流转。R1为M2/98/是；R2为M1/100/是；R3为M2/103/待定。分别列手册一致性、读数是否在范围内、批准状态及待确认项，保留原值。这是普通无单位数值题，范围不是制造商医疗设备公差。",
+            "question": "如何试做？"
           },
           {
-            "answer": "医疗设备维修人员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗设备维修人员需要怎样的能力与工作方式？"
+            "answer": "参考解：R1三条件均满足，98在含端点范围内；R2读数合范围且已批准，但M1≠M2，须确认正确手册，不能因为读数正常就流转；R3手册一致，但103比上限102高1，且批准待定，应分别记录两个未决项。只有R1满足题内规则，不表示真实设备可用。10分钟读题、20分钟制表、20分钟写R2版本及R3读数/批准确认请求、10分钟遮答案重做并保留纠错版。",
+            "question": "如何复盘？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15287,44 +15649,44 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "Medical Equipment Repairers 49-9062.00",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "49-9062.00 - Medical Equipment Repairers",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "Industries: 49-9062.00 - Medical Equipment Repairers",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "Medical Equipment Repairers job zone",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "Medical Equipment Repairers education",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.bls.gov/ooh/installation-maintenance-and-repair/medical-equipment-repairers.htm",
+            "label": "BLS本职业手册",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/49-9062.00#WorkContext",
-            "label": "FermatMind occupation task AI rubric v1",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/49-9062.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按标注的职责、准备或统计口径使用；不是工具采用/资格互认证据。"
           }
         ]
       },
@@ -15358,16 +15720,11 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "medical-equipment-repairers.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
-          "source": "O*NET 49-9062.00 与 BLS 2025 年工资、2024—2034 年就业预测",
-          "updated_at": "查阅日期 2026-09-25"
+          "author": "FermatMind编辑核查：官方事实、纸面假设与资格边界分开",
+          "source": "O*NET本职业2026摘要/2025工资/2024—2034趋势及BLS2025—2035手册",
+          "updated_at": "查阅2026-10-03"
         },
-        "note": "证据只支持医疗设备维修人员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": "本轮核美国本职业完整五分位工资、旧期与BLS新期预测、四行行业工资、RCI与任务/情境、7项招聘软件、8项认证及125课程目录。工资/就业份额/招聘提及分开；认证/课程目录不等个人资格。目标定义支持出向比较；纸面题与工具整理为编辑假设，非医疗操作或采用实证。中国本职业工资未取得，不以行业均值代填。",
         "secondary_links": [
           {
             "href": {
@@ -15377,7 +15734,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "O*NET OnLine 职业档案"
+            "label": "英文MBTI探索"
           },
           {
             "href": {
@@ -15387,7 +15744,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "O*NET 全国就业趋势页"
+            "label": "英文大五探索"
           },
           {
             "href": {
@@ -15397,7 +15754,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "O*NET 行业分布"
+            "label": "中文MBTI探索"
           },
           {
             "href": {
@@ -15407,11 +15764,16 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "国家统计局工资统计方法"
+            "label": "中文大五探索"
           }
         ]
       },
-      "work_context_block": "工作情境（O*NET 工作情境调查，1—5 分）：精确或高度准确 4.72、环境受控室内 4.70、面对面讨论 4.66、电子邮件 4.66 最突出；电话沟通 4.50、与他人接触 4.44、自主决策 4.35、团队协作 4.33、确定任务与优先 4.26 也较高；时间压力 3.82、使用双手操作 3.79、错误后果 3.53 为中等，并需按需佩戴防护装备 3.39。"
+      "work_context_block": {
+        "$item": "medical-equipment-repairers.profile.work-context-block.6",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15583,7 +15945,7 @@
         "occupation_scope": "O*NET 49-9062.00 本职业口径",
         "period": "2024；查阅 2026-09-25",
         "source_refs": [
-          "onet-wages"
+          "onet-trends"
         ]
       },
       {
@@ -15595,7 +15957,7 @@
         "occupation_scope": "O*NET 49-9062.00 本职业口径",
         "period": "2024—2034；查阅 2026-09-25",
         "source_refs": [
-          "onet-wages"
+          "onet-trends"
         ]
       },
       {
@@ -15607,7 +15969,7 @@
         "occupation_scope": "O*NET 49-9062.00 本职业口径",
         "period": "2024—2034；查阅 2026-09-25",
         "source_refs": [
-          "onet-wages"
+          "onet-trends"
         ]
       },
       {
@@ -15680,7 +16042,7 @@
       "text": "医疗设备维修人员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "dbee375e5c94d885a6f3057e382c1cf51360f5e68b5e93bb17d6e9f3a7bb2817",
+  "source_content_sha256": "b61746a4628788c552ff67390255023189f5623aa64defc960eb5cf6782f76b7",
   "subject": {
     "canonical_slug": "medical-equipment-repairers",
     "name": "医疗设备维修人员",

@@ -7738,7 +7738,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数为 68,060 美元（约 32.72 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 42,310—130,760 美元；O*NET 引用 BLS 数据显示 2024 年就业约 12,100 人、2024—2034 年预计下降约 1% 或更低、十年合计职位空缺约 800 个。"
+              "美国全国口径下，该职业 2025 年年薪中位数为 68,060 美元（约 32.72 美元/小时），经 O*NET 展示的 2025 年 BLS OEWS 分位为第 10 至第 90 分位 42,310—130,760 美元；O*NET 引用 BLS 数据显示 2024 年就业约 12,100 人、2024—2034 年预计下降约 1% 或更低、预计年均职位空缺约 800 个。"
             ]
           },
           "id": "lighting-technicians.us-salary.career-snapshot-secondary-locale.2",
@@ -8156,7 +8156,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 12,100 人，2024—2034 年预计下降约 1% 或更低，十年合计职位空缺约 800 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 12,100 人，2024—2034 年预计下降约 1% 或更低，预计年均职位空缺约 800 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
             ]
           },
           "id": "lighting-technicians.market-signals.market-signal-card.2",
@@ -8309,7 +8309,7 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 12,100 人，2024—2034 年预计下降约 1% 或更低，十年合计空缺约 800 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
+                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 12,100 人，2024—2034 年预计下降约 1% 或更低，预计年均空缺约 800 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
                 "id": "lighting-technicians.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.lighting-technicians.outlook-transition",
@@ -10050,8 +10050,8 @@
             "说明": "不能从军种宽口径外推。"
           },
           {
-            "指标": "就业 · 空缺",
-            "数值": "约 800 个（2024—2034 合计）",
+            "指标": "就业 · 年均空缺",
+            "数值": "约 800 个/年（预测期年均）",
             "说明": "不能从军种宽口径外推。"
           }
         ],
@@ -10273,9 +10273,9 @@
             "horizon": "2024—2034",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "十年预计职位空缺",
+            "metric": "预计年均职位空缺",
             "occupation_scope": "O*NET 27-4015.00（美国全国）",
-            "value": "800 个（合计）"
+            "value": "800 个/年（预测期年均）"
           },
           {
             "geography": "美国全国",
@@ -10998,11 +10998,11 @@
         ]
       },
       {
-        "derivation": "O*NET 显示 2024—2034 年合计约 800 个职位空缺；按十年折算年均约 80 个。",
-        "display_value": "800 个（2024—2034 合计）",
+        "derivation": "O*NET 显示 2024—2034 年预计年均约 800 个职位空缺；按 BLS 定义，该空缺为预测期年均值，不是十年合计。",
+        "display_value": "800 个/年（2024—2034 预测期年均）",
         "fact_id": "us-openings",
         "market": "美国",
-        "measure": "十年预计职位空缺",
+        "measure": "预计年均职位空缺",
         "occupation_scope": "O*NET 27-4015.00（美国全国）",
         "period": "2024—2034；查阅 2026-09-25",
         "source_refs": [
@@ -11103,7 +11103,7 @@
       "text": "灯光技术员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "1543d65730e23034a6000873af3d181a79be8e63420ce48657e7164496002e7e",
+  "source_content_sha256": "01bb6fcd04325787f9254f5ec5e83be73f8de0d52fc14aedf9af21cedcfa6f8d",
   "subject": {
     "canonical_slug": "lighting-technicians",
     "name": "灯光技术员",

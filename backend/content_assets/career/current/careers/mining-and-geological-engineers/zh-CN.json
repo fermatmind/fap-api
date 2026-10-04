@@ -12375,7 +12375,7 @@
           },
           "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "ai"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -12389,7 +12389,7 @@
           },
           "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "ai"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -12403,7 +12403,7 @@
           },
           "id": "mining-and-geological-engineers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "ai"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -12467,7 +12467,7 @@
           },
           "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "source-pack-bls-ooh"
           ],
           "type": "prose"
         },
@@ -12495,7 +12495,7 @@
           },
           "id": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "source-pack-bls-ooh"
           ],
           "type": "prose"
         },
@@ -13024,12 +13024,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方信号（O*NET 展示的 BLS 本职业口径）：2025 年就业约 6,200 人，2025—2035 年预计增长约 4%（约增加 200 个岗位），年均职位空缺约 300 个（含替换需求）。"
+              "官方信号（BLS 职业展望手册本职业口径）：2025 年就业约 6,200 人，2025—2035 年预计增长约 4%（约增加 200 个岗位），年均职位空缺约 300 个（含替换需求）。"
             ]
           },
           "id": "mining-and-geological-engineers.market-signals.market-signal-card.1",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-bls-ooh"
           ],
           "type": "prose"
         },
@@ -13162,7 +13162,7 @@
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.mining-and-geological-engineers.china-pay",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "nbs"
                 ]
               },
               {
@@ -13568,6 +13568,21 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/17-2151.00"
+              },
+              {
+                "accessed_at": "2026-09-28",
+                "details": [
+                  "Number of jobs, 2025: 6,200；2025—35 就业变化 +200（4%，与全部职业平均持平）；约 300 个年均空缺，含替换需求。"
+                ],
+                "evidence_type": "official employment projections",
+                "id": "source-pack-bls-ooh",
+                "limitation": "美国 17-2151.00 本职业口径的就业规模、增长与年均空缺；不含中国大陆对应数据，也不构成个人录用或收入结论。",
+                "market": "US",
+                "name": "Mining and Geological Engineers（Occupational Outlook Handbook, 2025—35）",
+                "period": "2025—35 employment projections; accessed 2026-09-28",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
               }
             ]
           },
@@ -14638,7 +14653,7 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "National Employment Trends 17-2151.00｜https://www.onetonline.org/link/localtrends/17-2151.00",
+        "authority_sources": "BLS Occupational Outlook Handbook：Mining and Geological Engineers（2025—35）｜https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
@@ -14668,23 +14683,23 @@
           {
             "指标": "就业人数（2025）",
             "数值": "6,200 人",
-            "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2151.00"
+            "说明": "BLS 职业展望手册（2025—35）｜https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
           },
           {
             "指标": "就业前景（2025—2035）",
             "数值": "约 4%（与平均持平）",
-            "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2151.00"
+            "说明": "BLS 职业展望手册（2025—35）｜https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
           },
           {
             "指标": "就业岗位空缺（平均年度）",
             "数值": "约 300 个",
-            "说明": "O*NET 全国就业趋势｜https://www.onetonline.org/link/localtrends/17-2151.00"
+            "说明": "BLS 职业展望手册（2025—35）｜https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm"
           }
         ],
         "boundary": "美国数据只适用于本职业标准期间；不推定中国大陆对应关系，也不构成个人收入或录用保证。",
         "direct_answer": {
           "$join": [
-            "美国工资与就业采用 O*NET 展示的 BLS 2025 年数据",
+            "美国工资与就业采用 BLS 2025 年数据（O*NET 工资页与 BLS 职业展望手册）",
             {
               "$item": "mining-and-geological-engineers.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
@@ -14931,7 +14946,7 @@
             },
             "metric": "2025 年就业规模",
             "occupation_scope": "O*NET 17-2151.00 本职业口径",
-            "source_id": "ep",
+            "source_id": "bls",
             "value": "6,200 人"
           },
           {
@@ -14951,17 +14966,17 @@
             "limitation": "为本职业美国口径，不构成个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "O*NET 17-2151.00 本职业口径",
-            "source_id": "nbs",
+            "source_id": "bls",
             "value": "约 300 个/年"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localtrends/17-2151.00",
+            "href": "https://www.bls.gov/ooh/architecture-and-engineering/mining-and-geological-engineers.htm",
             "id": "bls",
-            "label": "National Employment Trends 17-2151.00",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS Occupational Outlook Handbook：Mining and Geological Engineers（2025—35）",
+            "scope": "美国 2025 年就业规模、2025—35 增长与年均空缺"
           },
           {
             "href": "https://www.onetonline.org/link/localwages/17-2151.00",
@@ -15548,7 +15563,7 @@
         "occupation_scope": "精确职业数据；O*NET 17-2151.00 本职业口径",
         "period": "2025 BLS就业规模",
         "source_refs": [
-          "source-pack-onet-summary"
+          "source-pack-bls-ooh"
         ]
       },
       {
@@ -15560,7 +15575,7 @@
         "occupation_scope": "精确职业数据；O*NET 17-2151.00 本职业口径",
         "period": "2025—2035 BLS就业预测",
         "source_refs": [
-          "source-pack-onet-summary"
+          "source-pack-bls-ooh"
         ]
       },
       {
@@ -15572,7 +15587,7 @@
         "occupation_scope": "精确职业数据；O*NET 17-2151.00 本职业口径",
         "period": "2025—2035 BLS就业预测",
         "source_refs": [
-          "source-pack-onet-summary"
+          "source-pack-bls-ooh"
         ]
       }
     ]
@@ -15633,7 +15648,7 @@
       "text": "采矿与地质工程师：工作内容、美国工资与安全 | 费马测试"
     }
   },
-  "source_content_sha256": "01bcdd35c6b5886ee97b4c7f0799e1f1bd5521f73ce15e1b311197f1b2fc8fa2",
+  "source_content_sha256": "a8d3c62f4efcc513c8f585d0593e224dd79dddf5c3866a2e2801f5168a072e4d",
   "subject": {
     "canonical_slug": "mining-and-geological-engineers",
     "name": "采矿与地质工程师",

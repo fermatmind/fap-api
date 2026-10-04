@@ -1302,7 +1302,7 @@
         "status": "pending_mapping"
       },
       "item:anesthesiologist-assistants.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:anesthesiologist-assistants.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23365,7 +23365,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的小任务：按公开资料整理一份麻醉前评估清单（气道评估、既往史、用药与过敏史、禁食与合并症要点）；用虚构数据完成一份术中监测指标记录与异常提示表（含阈值、判读依据与处置思路）；把一次气道管理或给药决策写成含依据、风险与监督分工的说明。做不完整是正常的，重点是观察自己对按规程与监督要求操作、核对细节与如实记录的真实反应。（编辑建议，不是录用或技能测试，也不构成医学建议。）"
+              "纸面小任务：用下文入行练习的完整虚构材料A/B/C整理记录表、两条报告和权限说明；只检查材料内部一致性，不判读真实生命体征、不设计气道或给药方案。观察自己对逐项核对、保留未知与清楚交接的反应；这不是临床技能或录用测试。"
             ]
           },
           "id": "anesthesiologist-assistants.quick-decision.fit-decision-checklist.2",
@@ -23395,13 +23395,18 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页美国工资与就业为 O*NET 展示的 BLS 数据：O*NET 未单独发布 29-1071.01 的工资与就业，而是引用父职业“医师助理”（Physician Assistants，29-1071.00）——2025 年 5 月年薪中位数 135,880 美元（第 10 分位 99,380、第 25 分位 120,670、第 75 分位 163,980、第 90 分位 190,280 美元），2025 年在岗约 168,900 人，2025—2035 年增长 21%（远快于平均），年均约 11,500 个空缺。该数字不专属于麻醉医师助理，本页据此如实标注父职业口径。麻醉医师助理在美国约 20 个州获得授权执业，须完成 CAAHEP 认证项目、通过 NCCAA 考试并取得州级执照，并在麻醉医师监督下执业（以佛罗里达州为例）；中国大陆未单独设立该法定职业，麻醉由麻醉科医师与麻醉护士等承担。本页不构成医疗、法律或政策意见。"
+              "证据不足：本页未取得麻醉医师助理专属的全国工资和就业预测。美国工资为O*NET展示的父职业医师助理29-1071：2025年5月中位135,880美元、10/25/75/90分位99,380/120,670/163,980/190,280；就业直接取BLS OOH/EP：2025年168,900人，2025—2035年OOH四舍五入增长21%（EP为21.1%）、净增35,700、年均11,500空缺（含增长与替代）。O*NET仍展示旧2024—2034预测。佛州CAA按执照与书面协议在现场直接监督下执业，不能据本页推断所有州授权；中国麻醉医师和护士按各自资格制度，不等同美国CAA。"
             ]
           },
           "id": "anesthesiologist-assistants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ooh",
+            "ep",
+            "flbom",
+            "fl-stat",
+            "cnlaw",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23512,11 +23517,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 未单独发布 29-1071.01 的工资与就业，页面引用父职业“医师助理”（Physician Assistants，29-1071.00）（BLS 职业展望手册 2025 年 5 月工资与 2025—2035 年预测）：年薪中位数 135,880 美元（时薪 65.33 美元），第 10 分位 99,380、第 25 分位 120,670、第 75 分位 163,980、第 90 分位 190,280 美元；2025 年在岗约 168,900 人；2025—2035 年增长 21%（远快于平均），净增约 35,700 人，年均约 11,500 个空缺；主要行业为医疗保健与社会援助。学历方面 96% 受访者认为需硕士学位、4% 需硕士后证书。"
+              "O*NET工资与就业明确引用父职业医师助理29-1071，未单列本职业。2025年5月工资分位由ONET展示：中位135,880美元、时薪65.33美元；10/25/75/90分位99,380/120,670/163,980/190,280美元。当前就业另取BLS OOH/EP：2025年168,900人，2035年204,600人，净增35,700，OOH增长21%（EP21.1%），年均11,500空缺。O*NET学历受访比例为96%硕士、4%硕士后证书，不能当中国学历门槛。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.2",
           "source_refs": [
+            "oews",
+            "ooh",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -23570,12 +23578,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册（父职业口径，经 O*NET 展示）：父职业“医师助理”（Physician Assistants，29-1071.00）在 2025 年在岗约 168,900 人，2025—2035 年增长 21%（远快于平均），净增约 35,700 人，年均约 11,500 个职位空缺且多数来自替代需求。该数字为父职业口径、不专属于麻醉医师助理，也不代表个人就业保证，且不能外推为中国大陆。中国大陆侧没有对应的官方职业就业预测，本页不提供数字。"
+              "美国BLS OOH/EP父职业医师助理2025—2035预测：2025年168,900人，2035年204,600人，OOH增长21%（EP21.1%）、净增35,700、年均11,500空缺，含增长与替代。O*NET仍显示旧2024—2034资料；这些数字不专属CAA、不保证个人就业、不外推中国。中国本职业预测缺口见下方职业前景正文。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23599,12 +23608,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国侧：麻醉医师助理（CAA）为州级授权职业，以佛罗里达州为例，申请执照须毕业于 CAAHEP 认证的麻醉医师助理培训项目、通过 NCCAA 组织的考试、持有有效的 ACLS 证书并完成电子指纹背景审查，且在麻醉医师监督下执业（不得由执业资格被察看的医师监督）；相关规则见佛罗里达州行政法规 64B8-31.003 与州法 458.3475。中国大陆侧：按《中华人民共和国医师法》（2021-08-20 通过，自 2022-03-01 起施行），国家实行医师资格考试与医师执业注册制度，取得医师资格并注册后方可执业，并在注册的执业地点、执业类别、执业范围内执业；国家建立健全住院医师规范化培训与专科医师规范化培训制度。按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13），护理人员（2-05-08）下设麻醉相关护理岗位；大典未单独设立“麻醉医师助理”职业，本职业在中国大陆最贴近的是麻醉科医师等临床医师职业，麻醉护理协作通常由护理团队承担。"
+              "佛州示例：医学委员会当前初次申请页要求CAAHEP项目毕业、NCCAA考试及电子指纹；州法458.3475另规定ACLS及其他申请条件。执业限已备案书面协议内，由现场且立即可协助的麻醉医师直接监督；不能自行开具处方、医嘱或配制药品，按监督医师医嘱给药与开处方不同。中国《医师法》第9、13、14条规定医学学历/实践考试、注册及地点类别范围；护士资格不能由医师法代替。2022版大典列麻醉科医师2-05-01-13及护理人员2-05-08，分类不是CAA等效执业许可。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "flbom",
+            "fl-stat",
+            "cnlaw",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23628,7 +23640,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界看四件事：谁制定麻醉方案并承担监督责任、谁实施气道管理与监测操作、谁提供护理与术后随访、谁承担机构的医疗质量与合规管理。麻醉医师负责制定麻醉方案、指导与监督并由其承担最终医疗责任；麻醉医师助理在其授权与监督关系内实施气道管理、监测与给药等操作并如实记录；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。超出监督范围、授权或州级执照范围的事项须按程序报告并由麻醉医师处理。"
+              "佛州示例中麻醉医师制定方案并直接监督；CAA在备案协议内工作，自身也承担执业义务。护士按护理资格和机构授权协作，不能概括只由某一职业独占全部术后照护。中国医师与护士是不同资格制度，不与美国CAA等效。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.7",
@@ -23674,7 +23686,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不把相邻职责（麻醉医师的方案制定与最终医疗责任、护理团队的护理与术后随访、机构管理与监管监督）算作本职业核心任务。"
+              "资格不能互换：佛州CAA在协议和现场直接监督内执行任务；麻醉医师负法定监督责任，CAA也承担自身义务。护理和术后监测按当地规则与机构授权分工，不把所有术后照护排除出CAA任务。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.10",
@@ -23704,7 +23716,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "麻醉医师助理（美方对应 O*NET/BLS 29-1071.01）协助麻醉医师实施麻醉并在手术过程中监测患者状态与提供患者护理：协助完成麻醉前评估与病史采集，准备、测试并校准麻醉输送系统与监护设备，实施气道管理，在麻醉医师指导下给药并控制麻醉深度，持续监测心血管与呼吸指标，给予血液与液体，协助硬膜外或脊髓等麻醉操作，实施心肺复苏与各级生命支持，监测麻醉后恢复并记录，采集诊断标本并向员工提供临床指导。美国侧为州级授权职业，须完成 CAAHEP 认证项目、通过 NCCAA 考试并持州级执照，在麻醉医师监督下执业；相关规则以佛罗里达州为例。中国大陆侧按《中华人民共和国医师法》实行医师资格考试与执业注册，并按住院医师与专科医师规范化培训制度培养；大典未单独设立该职业，最贴近的是临床和口腔医师（2-05-01）中的麻醉科医师（2-05-01-13），麻醉护理由护理人员（2-05-08）承担。本页不构成医疗建议。"
+              "麻醉医师助理对应美国O*NET详细职业29-1071.01，协助麻醉医师实施麻醉、监测患者并提供围术期照护，任务包括术前资料、设备检查、获准的气道与给药操作、应急协作、术后监测和记录。具体操作须符合当地法律及机构授权。佛州示例要求认可项目、NCCAA考试、执照及备案协议内现场直接监督，CAA不得自行处方或开药品医嘱。中国麻醉医师与护士分别适用医师和护理资格体系；本页采用的2022版职业大典没有单列与美国CAA直接对应的条目，麻醉科医师列于2-05-01-13，护理人员属2-05-08。分类不授予执业资格，也不证明两国资格等效。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.definition-block.11",
@@ -23795,7 +23807,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "麻醉方案与最终医疗责任由麻醉医师承担；气道管理、监测与给药等操作由麻醉医师助理在其授权与监督关系内实施并如实记录；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。"
+              "佛州示例中麻醉医师制定方案并承担法定监督责任；CAA在备案协议和直接监督内执行获准任务、如实记录并承担自身义务。护理、术后监测与质量管理依当地规则和机构授权分工，不能概括为某职业独占全部术后照护。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.17",
@@ -23810,7 +23822,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧执业须持州级执照并通过 NCCAA 认证（AA-C），执业限于麻醉医师监督下；中国大陆侧按《中华人民共和国医师法》与卫生健康主管部门规定取得医师资格并注册，执业范围与授权按机构制度执行。"
+              "美国CAA须核当地许可和NCCAA认证；佛州示例要求协议内现场直接监督。中国麻醉医师须依法取得医师资格并注册，护士须核护理资格与授权；两者都不能直接等同或转换为CAA资格。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.18",
@@ -23870,7 +23882,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "入职前至少核对六项：机构类型（三级医院麻醉科与手术室、专科医院、日间手术中心、教学医院）；岗位方向（手术室内麻醉实施、麻醉前评估与术后恢复、气道与监测技术、教学培训）；资格与授权要求（州级执照与 NCCAA 认证（美国）或医师资格与执业注册（中国大陆）、监督协议与机构授权）；训练路径（本科后硕士级麻醉医师助理项目与认证考试，或住院医师与专科医师规范化培训）；工作模式（手术室排班、值班与夜班、工作周时长、职业暴露防护）；以及晋升路径（临床资深、教学与质量管理方向）。"
+              "入职前核对六项：所在法域与真实职业名称；机构和任务范围；相应资格、许可与监督关系；项目录取、训练和继续教育要求；排班、值班与职业防护；资深、教学或质量管理岗位的实际条件。美国CAA项目与认证、中国医师资格与注册、中国护理资格是不同路径，不以本页中文译名互换资格。佛州CAA工作须在备案协议和麻醉医师现场直接监督内，不以编辑发展路径承诺晋升。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.22",
@@ -23943,7 +23955,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "州级执照与认证（美国）或医师资格与执业注册（中国大陆）是执业前提。"
+              "分别核职业与法域：美国CAA核当地许可、认证与监督；中国麻醉医师核医师资格和注册，护士核护理资格。不同路径不直接等效。"
             ]
           },
           "id": "anesthesiologist-assistants.profile.career-quick-answers-block.27",
@@ -24116,7 +24128,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "选择顺序建议：先确定方向（手术室内麻醉实施、麻醉前评估与术后恢复，还是气道与监测技术方向），再核对资格与授权路径（州级执照与 NCCAA 认证（美国）或医师资格与执业注册（中国大陆）、监督协议与机构授权），最后确认机构类型、训练与继续教育要求、手术室排班与值班安排及资深与教学发展路径。三个方向共享术前评估、气道管理与监测判读、应急协作与记录能力；转向相邻职业需要补足不同的资格序列（医学、护理或通科临床），且监管体系不同，不能直接平移执业资格。"
+              "先确定所在法域和职业身份，再比较机构、任务、训练与排班。美国CAA路径须核当地许可、NCCAA认证及监督要求；中国麻醉医师走医师资格与注册路径，护士走护理资格路径，均不是CAA资格的直接替代。表中三个方向是编辑按任务分组，具体可执行范围以当地法律和机构授权为准；转向医师、护理或其他相邻职业须重新核其资格要求。"
             ]
           },
           "id": "anesthesiologist-assistants.direction-comparison.adjacent-career-comparison-table.8",
@@ -24165,7 +24177,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向手术室内临床操作；对设备操作、监测判读与应急反应要求最高。"
+              "编辑分组：手术室麻醉实施与术中监测；侧重操作、记录与监督协作，不据任务表排名哪个方向要求最高。"
             ]
           },
           "id": "anesthesiologist-assistants.direction-comparison.adjacent-career-comparison-table.11",
@@ -24224,7 +24236,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向评估与恢复照护；对问诊细致、恢复判读与交接记录要求最高。"
+              "编辑分组：病史采集与恢复监测；侧重信息完整和交接，不将其当独立诊疗权限。"
             ]
           },
           "id": "anesthesiologist-assistants.direction-comparison.adjacent-career-comparison-table.15",
@@ -24372,7 +24384,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "制定麻醉方案、指导与监督麻醉实施，并承担麻醉过程的最终医疗责任。"
+              "麻醉医师负责麻醉方案与监督；佛州州法规定监督医师对助理表现承担责任，助理也有自身执业义务，不能概括助理没有责任。"
             ]
           },
           "id": "anesthesiologist-assistants.direction-comparison.adjacent-career-comparison-table.25",
@@ -24431,13 +24443,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "取得护理与麻醉护理资格后独立实施部分麻醉与围术期照护。"
+              "美国CRNA按护理与麻醉护理资格、当地法律及机构授权执业；能否独立执业需按法域核对，不用本页断言所有地区一致。"
             ]
           },
           "id": "anesthesiologist-assistants.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-aa"
           ],
           "type": "prose"
         },
@@ -24548,58 +24559,58 @@
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 任务与工作活动",
+                "entity": "ONET父职业医师助理工资分位",
                 "id": "link-2",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/29-1071.01"
-              },
-              {
-                "entity": "O*NET 展示的 BLS 2025 年 5 月工资分位（29-1071.01，引父职业“医师助理”口径）",
-                "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/29-1071.01"
               },
               {
-                "entity": "BLS 职业展望手册：医师助理（父职业，2025—2035）",
-                "id": "link-4",
+                "entity": "BLS OOH父职业医师助理",
+                "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
               },
               {
-                "entity": "O*NET 29-1071.01 详细资料（工作情境）",
-                "id": "link-5",
+                "entity": "ONET美国任务与工作情境",
+                "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 职业摘要",
-                "id": "link-6",
+                "entity": "ONET美国职业摘要",
+                "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 技术清单",
-                "id": "link-7",
+                "entity": "ONET职业软件清单",
+                "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 行业分布",
-                "id": "link-8",
+                "entity": "ONET父职业行业资料",
+                "id": "link-7",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/industry/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 自定义职业档案",
-                "id": "link-9",
+                "entity": "ONET美国职业摘要与任务",
+                "id": "link-8",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/29-1071.01"
+                "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 职业说明（任务清单）",
+                "entity": "ONET父职业医师助理工资分位",
+                "id": "link-9",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localwages/29-1071.01"
+              },
+              {
+                "entity": "BLS OOH父职业医师助理就业",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/29-1071.01"
+                "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
               },
               {
                 "entity": "O*NET 29-1071.01 职业摘要（任务与职责）",
@@ -24608,10 +24619,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "entity": "BLS 就业预测表（按详细职业）",
+                "entity": "ONET美国任务对照；中国NBS另见登记",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
                 "entity": "O*NET 展示的 BLS 工资分位（29-1071.01）",
@@ -24620,10 +24631,10 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 工作情境与任务数据",
+                "entity": "ONET父职业工资分位",
                 "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/29-1071.01"
+                "url": "https://www.onetonline.org/link/localwages/29-1071.01"
               },
               {
                 "entity": "O*NET 29-1071.01 职业摘要（任务与能力）",
@@ -24632,10 +24643,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "entity": "O*NET 29-1071.01 技术清单（技术条目说明）",
+                "entity": "ONET美国职业摘要；中国分类另见登记",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/29-1071.01"
+                "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
                 "entity": "O*NET 29-1071.01 认证要求",
@@ -24644,10 +24655,10 @@
                 "url": "https://www.onetonline.org/link/localcert/29-1071.01"
               },
               {
-                "entity": "BLS OEWS：29-1071 工资统计（父职业）",
+                "entity": "BLS OEWS工资调查方法",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes291071.htm"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "entity": "O*NET 29-1071.01 任务清单与记录要求",
@@ -24797,7 +24808,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变设备报警与趋势提示、监测数据整合、麻醉记录书写辅助与用药剂量核对等环节，但没有证据表明它会取代气道管理等手动操作、术中临床判断、应急生命支持与监督关系下的责任分工，本页也不据此推测岗位数量变化。技术能力、实际部署与招聘结果要分开判断；本页引用的 2025—2035 年增长 21% 为父职业“医师助理”口径的 BLS 官方预测，不能等同于“AI 会替代”或“AI 会创造”。"
+              "证据不足：本页未取得本职业AI采用率、替代率或工资因果估计。记录整理、报警汇总、趋势呈现只是编辑提出的可能辅助用途，不证明已部署或临床有效；麻醉操作与监督义务按适用法规执行。BLS父职业2025—2035增长21%不能说明AI造成岗位增减。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.18",
@@ -24872,7 +24883,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：29-1071 与 BLS 职业展望手册：医师助理"
+              "BLS OOH：父职业医师助理工资与就业"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.23",
@@ -24886,7 +24897,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于工资中位数、就业规模与就业预测的官方口径（父职业口径）。"
+              "支持父职业工资和2025—2035就业；不单列CAA，不证明AI效果。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.24",
@@ -24900,7 +24911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（经佛州医学委员会）"
+              "O*NET美国任务与工作情境"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.25",
@@ -24914,7 +24925,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国州级执照（CAAHEP 项目、NCCAA 考试、ACLS）与监督要求示例。"
+              "只描述美国任务与受访情境；佛州法律另见本页登记的州法与执照入口。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.26",
@@ -24928,7 +24939,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》（2022-03-01 施行）"
+              "O*NET美国职业摘要（跨国对照）"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.27",
@@ -24942,7 +24953,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆医师资格考试、执业注册、执业范围与规范化培训制度的框架说明。"
+              "仅为美国任务对照，不支持中国执业资格；中国医师法见登记来源。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.28",
@@ -24956,7 +24967,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）与护理人员（2-05-08）"
+              "O*NET职业软件清单"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.29",
@@ -24970,7 +24981,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆对应职业（麻醉科医师 2-05-01-13、麻醉护理）与未单独设立麻醉医师助理的说明。"
+              "软件条目不等于设备操作资格、AI部署或中国职业分类。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.30",
@@ -24984,7 +24995,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "O*NET父职业行业信息"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.31",
@@ -24998,7 +25009,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆民用行业门类工资参照。"
+              "描述美国父职业行业；中国行业工资由NBS另行支持，不可外推。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.32",
@@ -25012,7 +25023,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较本职业内部主要方向在自动化影响上的差别。"
+              "下表为编辑按任务分组的可能辅助用途，不是已部署或临床有效性证据。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.33",
@@ -25027,7 +25038,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备报警与趋势提示、药物剂量核对与麻醉记录书写可自动化处理。"
+              "编辑可能用途：记录整理、报警汇总与趋势呈现；临床效果未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.34",
@@ -25057,7 +25068,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "病史与恢复记录的整理与提醒可自动化处理。"
+              "编辑可能用途：病史与恢复记录整理；不能代替评估。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.36",
@@ -25087,7 +25098,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监测信号处理与设备自检数据可自动化处理。"
+              "编辑可能用途：整理设备自检记录；不能据此保证校准正确。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.38",
@@ -25117,7 +25128,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持职业属性、任务与法规边界、工资与就业口径，不是 AI 替代率或岗位数量预测。"
+              "五卡分别核职业任务、父职业工资/预测及佛州/中国资料边界；法律和NBS见登记来源，相邻ONET不能替代。卡不证明AI采用或替代率。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.40",
@@ -25131,7 +25142,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供工资与就业数字；本页工资与就业取自 O*NET 展示的父职业“医师助理”口径并单独列出。"
+              "ONET仍展示旧2024—2034就业预测；本页当前预测直接取BLS OOH/EP。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.41",
@@ -25145,7 +25156,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 职业摘要"
+              "O*NET美国麻醉医师助理职业摘要"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.42",
@@ -25257,7 +25268,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：医师助理（父职业）"
+              "BLS OOH：父职业医师助理就业"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.50",
@@ -25285,12 +25296,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册显示父职业“医师助理”2025 年在岗约 168,900 人，2025—2035 年增长 21%（远快于平均），净增约 35,700 人，年均约 11,500 个职位空缺，主要行业为医疗保健与社会援助；典型入门学历为硕士。"
+              "BLS OOH/EP父职业医师助理：2025年168,900人，2035年204,600人，OOH增长21%（EP21.1%）、净增35,700，年均11,500空缺。未单列CAA。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25313,7 +25325,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475"
+              "佛州CAA执照与书面协议；相邻ONET链接仅为美国任务对照"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.54",
@@ -25341,12 +25353,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以佛罗里达州为例，麻醉医师助理申请执照须毕业于 CAAHEP 认证的培训项目、通过 NCCAA 考试、持有 ACLS 证书并完成电子指纹背景审查，且执业须在麻醉医师监督下进行（不得由执业资格被察看的医师监督）。"
+              "佛州执照申请页及州法458.3475支持CAAHEP项目、NCCAA考试、ACLS、电子指纹与书面协议内现场直接监督。法律依据见本页佛州执照申请页及州法来源；相邻O*NET链接仅用于职业任务对照。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "flbom",
+            "fl-stat"
           ],
           "type": "prose"
         },
@@ -25355,7 +25368,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该统计为民用行业门类口径、不含本职业单列工资；中国大陆未单独设立“麻醉医师助理”法定职业，该门类覆盖大量非麻醉岗位，本页仅作宽口径对照。"
+              "中国行业工资不是CAA工资；相邻ONET链接只是美国对照，不支持NBS数值。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.57",
@@ -25369,7 +25382,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "NBS中国行业工资登记来源；ONET链接仅美国对照"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.58",
@@ -25383,7 +25396,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆民用行业工资口径"
+              "中国行业口径；相关美国任务仅作对照"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.59",
@@ -25402,7 +25415,7 @@
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25411,7 +25424,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，监护设备报警与趋势提示、监测数据整合、麻醉记录书写辅助、药物剂量核对与设备自检数据可被部分自动化。这些结果仍需在麻醉医师监督下结合患者情况与麻醉方案核实后，才能用于给药与处置决定。"
+              "记录整理、报警汇总、趋势呈现属于编辑可能用途，本页没有据此主张临床有效性。诊疗系统须满足适用审批、验证、机构规程与监督要求，技术功能不能证明安全有效。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.61",
@@ -25441,7 +25454,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册预测父职业“医师助理”2025—2035 年增长 21%（远快于平均），年均约 11,500 个空缺且多数来自替代需求。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS 职业展望手册预测父职业“医师助理”2025—2035 年增长 21%（远快于平均），年均约 11,500 个空缺且包含增长与替代需求。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.63",
@@ -25456,7 +25469,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持“被取代”。自动化可能增强监护报警、数据整合与记录辅助，但气道管理等手动操作、术中临床判断、应急生命支持与监督关系下的责任分工仍由麻醉团队承担；本页引用的 2025—2035 年增长 21% 为父职业“医师助理”口径的 BLS 官方预测，本页不据技术名词推断岗位增减。"
+              "证据不足：本页未取得本职业AI替代因果估计。任务清单和父职业增长预测都不能证明会替代或不会替代；现场资格、监督与临床责任按适用法律执行。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.64",
@@ -25471,7 +25484,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 与 BLS 职业展望手册：医师助理（编辑归纳）"
+              "ONET父职业工资分位；不能支持AI替代结论"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.65",
@@ -25486,7 +25499,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 未单独发布 29-1071.01 的工资，页面引用父职业“医师助理（Physician Assistants，29-1071.00）”口径：2025 年 5 月年薪中位数 135,880 美元，第 10 分位为 99,380 美元、第 90 分位为 190,280 美元（BLS OEWS，经 O*NET 展示）。该数字不专属于麻醉医师助理。中国大陆没有该职业的全国工资分布，本页只给出行业门类的宽口径参照。"
+              "证据不足：本页未取得中国大陆与该美国职业对应的全国工资分布。美国2025年5月工资为父职业医师助理：中位135,880美元，10/90分位99,380/190,280美元；不是CAA专属工资。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.66",
@@ -25501,7 +25514,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 2025 年 5 月工资分位（父职业口径）与 BLS OEWS"
+              "ONET展示的BLS父职业工资分位"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.67",
@@ -25516,7 +25529,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国侧需先取得本科学位并完成先修课程，再就读 CAAHEP 认证的麻醉医师助理项目（通常为硕士级），通过 NCCAA 认证考试取得 AA-C 认证，并申请州级执照；执业须在麻醉医师监督下进行。各授权州的具体要求不同，以佛罗里达州为例需毕业于 CAAHEP 认证项目、通过 NCCAA 考试、持有 ACLS 证书并完成电子指纹背景审查。具体要求以认证机构与各州医学委员会官方信息为准。"
+              "美国项目录取与课程按院校，NCCAA认证考试须满足项目毕业及临床经验要求；佛州执照依CAAHEP毕业、NCCAA考试、ACLS、指纹及其他条件。认证与执照不同，实际操作还受备案协议与现场直接监督限制。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.68",
@@ -25531,7 +25544,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与州法 458.3475（经佛州医学委员会）与 O*NET 29-1071.01"
+              "ONET美国职业摘要；佛州资格另见flbom/fl-stat登记"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.69",
@@ -25545,7 +25558,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆未单独设立“麻醉医师助理”法定职业。按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13），护理人员（2-05-08）下设麻醉相关护理岗位；麻醉由麻醉科医师制定方案并实施，麻醉护理协作由护理团队承担。有意从事麻醉领域工作者，通常按《中华人民共和国医师法》取得医师资格并注册，并按住院医师与专科医师规范化培训制度培养。"
+              "本页采用的2022版大典列麻醉科医师2-05-01-13和护理人员2-05-08，分类不等于美国CAA等效资格。中国医师须依法考试注册并在相应范围执业；护士按护理资格制度，不把全部麻醉领域人员写成医师路径。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.70",
@@ -25560,7 +25573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》与《中华人民共和国医师法》"
+              "ONET美国职业摘要；中国分类/医师法另见登记"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.71",
@@ -25575,7 +25588,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护设备报警与趋势提示、监测数据整合、麻醉记录书写辅助、药物剂量核对与设备自检数据等辅助环节；受影响程度取决于机构设备与信息系统、报警可靠性、数据质量与隐私合规以及临床验证结论。"
+              "编辑可能用途仅包括记录整理、报警汇总与趋势呈现；采用、临床效果、监管状态与岗位影响未核。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.72",
@@ -25590,7 +25603,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 任务描述（编辑归纳）"
+              "ONET软件条目；不是AI临床效果证据"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.73",
@@ -25619,7 +25632,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与《中华人民共和国医师法》（编辑说明）"
+              "ONET认证入口；中美资格制度各按登记来源"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.75",
@@ -25634,7 +25647,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建议次序：按认证机构与院校官方信息核对麻醉医师助理项目的学制、先修课程与录取要求；打牢解剖、生理、药理与气道管理基础；了解 NCCAA 认证考试与州级执照要求及监督关系。若在中国大陆发展，则按《中华人民共和国医师法》核对医学教育与执业注册路径。具体要求以官方与用人单位信息为准；本页不构成医学建议。"
+              "先核目标法域与真实岗位资格，再按官方院校、NCCAA和医学委员会信息核项目与认证；中国医师和护士走不同制度，不凭“助理”岗位名称推断操作权限。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.76",
@@ -25649,7 +25662,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "佛罗里达州行政法规 64B8-31.003 与 O*NET 29-1071.01（编辑建议）"
+              "BLS OEWS方法；项目与执照按登记官方来源"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.77",
@@ -25724,7 +25737,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按病历管理与麻醉记录要求如实及时记录监护数据、用药、操作与不良事件，使过程可追溯且不可篡改。"
+              "按适用病历规范如实记录监护、用药、操作与事件；不得隐匿、伪造或篡改，合法更正按机构流程留痕，不把记录表述成技术上完全不可变。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.82",
@@ -25873,7 +25886,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "每天暴露于疾病或感染（67% 每天）、污染物与辐射，叠加手术室节奏与高责任。"
+              "疾病或感染、污染物与辐射等职业暴露（O*NET美国受访者中67%每天有疾病或感染暴露、30%每天有辐射暴露，不代表每个人），叠加手术室节奏与高责任。"
             ]
           },
           "id": "anesthesiologist-assistants.ai-impact.ai-impact-table.92",
@@ -26422,7 +26435,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "规模以上企业办事人员和有关人员岗位大类的年平均工资；并非行政岗位专属数字，也不是麻醉医师助理工资。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.14",
@@ -26450,7 +26463,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业最贴近的行业门类（医疗卫生机构岗位归入该门类）；该门类覆盖医师、护理、医技与后勤岗位，不能当成麻醉岗位中位数。"
+              "卫生和社会工作是行业门类，覆盖医师、护理、医技、后勤等岗位；机构归类须核主营活动，不能凭岗位名认定，不是麻醉或CAA工资。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.16",
@@ -26548,7 +26561,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（监护数据整合、报警与趋势提示、麻醉记录书写辅助、药物剂量核对）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断涨薪或降薪；工资差异主要由州与地区、机构类型（三级医院、专科医院、日间手术中心）、岗位与班次（含夜班与值班）、经验与认证状态以及是否承担教学与质量管理职责决定。"
+              "证据不足：本页未取得本职业AI工资因果研究，不推断涨薪或降薪。记录整理等只是编辑可能用途；核个人薪酬时须逐项确认法域、雇主、资格、工时、班次和书面条件，这些核对项不等于已证工资因果。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.23",
@@ -26563,7 +26576,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧采用行业门类与单位类型的宽口径代理（卫生和社会工作、公共管理等），不是本职业的全国工资分布；中国大陆未单独设立“麻醉医师助理”法定职业，麻醉岗位薪酬按机构制度、岗位与绩效确定，与行业门类统计口径不同，不得把行业数字当作本职业中位数。"
+              "本页中国侧采用行业门类与单位类型的宽口径代理（卫生和社会工作、公共管理等），不是本职业的全国工资分布；本页未核到中国大陆与美国CAA直接对应的独立资格制度，麻醉岗位薪酬按机构制度、岗位与绩效确定，与行业门类统计口径不同，不得把行业数字当作本职业中位数。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.24",
@@ -26607,7 +26620,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国侧须先取得本科学位并完成解剖、生理、化学、生物等先修课程，方可申请 CAAHEP 认证的麻醉医师助理项目（通常为硕士级）。O*NET 显示该职业 96% 受访者认为需硕士学位、4% 需硕士后证书。中国大陆侧对应的麻醉专业人才通常按《中华人民共和国医师法》取得医师资格并通过住院医师与专科医师规范化培训。"
+              "O*NET美国受访学历比例96%硕士、4%硕士后证书。美国CAA项目录取按院校，佛州执照按当前规则；中国麻醉医师与护士走各自资格路径，不能把美国项目学历比例当中国准入门槛。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.27",
@@ -26652,13 +26665,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "CAAHEP 认证项目通常需约 24 至 28 个月全日制学习，含基础与临床麻醉学、药理学、麻醉物理、患者监护与大量临床轮转。完成项目是通过 NCCAA 认证考试的前提。"
+              "ASA2022比较声明描述CAA项目为硕士级、24—28个月；不能保证当前全部项目。认证考试资格还须满足并记录规定的临床经验，项目与认证要求分别按官方信息核对。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-aa",
+            "nccaa"
           ],
           "type": "prose"
         },
@@ -26682,7 +26695,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "NCCAA 认证（AA-C）与州级执照"
+              "NCCAA 认证（CAA）与州级执照"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.32",
@@ -26697,13 +26710,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "通过 NCCAA 组织的考试取得 AA-C 认证，并向授权州申请执照；以佛罗里达州为例，还须持有 ACLS 证书并完成电子指纹背景审查（佛罗里达州行政法规 64B8-31.003 与州法 458.3475）。认证须通过继续教育与再认证维持。"
+              "NCCAA考试通过后取得CAA认证，认证维持与法域执照分别核对；佛州初次执照另须ACLS、电子指纹及其他申请条件。认证不自动授予所有临床权限。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet",
-            "onet"
+            "nccaa",
+            "flbom",
+            "fl-stat"
           ],
           "type": "prose"
         },
@@ -26847,7 +26861,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：29-1071｜https://www.bls.gov/oes/current/oes291071.htm"
+              "O*NET展示的BLS 2025年5月工资分位（父职业医师助理）｜https://www.onetonline.org/link/localwages/29-1071.01"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.43",
@@ -26920,7 +26934,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。中国大陆未单独设立“麻醉医师助理”法定职业，麻醉岗位薪酬按机构制度、岗位与绩效确定，与行业门类统计口径不同。"
+              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。本页未核到中国大陆与美国CAA直接对应的独立资格制度，麻醉岗位薪酬按机构制度、岗位与绩效确定，与行业门类统计口径不同。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.48",
@@ -27019,7 +27033,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按《国民经济行业分类》（GB/T 4754-2017），医疗卫生机构岗位主要归入卫生和社会工作；按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13），护理人员（2-05-08）下设麻醉相关护理岗位，大典未单独设立“麻醉医师助理”。国家统计局不单列该职业工资，因此本页不以行业数字冒充职业中位数。"
+              "卫生和社会工作只作行业参照，机构归类按主营活动与统计规则核对。2022版大典列麻醉科医师2-05-01-13及护理人员2-05-08，不授予美国CAA等效资格。NBS本页工资表未单列麻醉医师助理，因此行业平均数不是职业中位数。"
             ]
           },
           "id": "anesthesiologist-assistants.china-salary.career-snapshot-primary-locale.55",
@@ -27089,9 +27103,9 @@
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ooh",
+            "bls"
           ],
           "type": "prose"
         },
@@ -27226,7 +27240,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 90 分位下界（时薪 91.48 美元），高收入端常与州、机构与班次相关。；O*NET 展示的 BLS 2025 年 5 月工资分位（引父职业“医师助理”口径）｜https://www.onetonline.org/link/localwages/29-1071.01"
+              "年薪第90分位下界（时薪91.48美元），属于父职业统计位置，不证明州、机构、班次或资历导致高工资。；O*NET展示的BLS父职业工资分位｜https://www.onetonline.org/link/localwages/29-1071.01"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.18",
@@ -27311,7 +27325,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025—2035 年父职业口径预测年均职位空缺（多数来自替代需求），不等于净新增岗位。；BLS 职业展望手册：医师助理（父职业）｜https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
+              "2025—2035 年父职业口径预测年均职位空缺（包含增长与替代需求），不等于净新增岗位。；BLS 职业展望手册：医师助理（父职业）｜https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.24",
@@ -27341,7 +27355,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未单独发布 29-1071.01 的工资，页面引用的父职业“医师助理”口径 2025 年 5 月年薪中位数为 135,880 美元；第 10 分位低于 99,380 美元，第 90 分位高于 190,280 美元。中位数是分布中点，不是起薪，也不代表麻醉医师助理的具体收入；实际收入受州、地区、机构、班次、经验与麻醉团队模式影响。"
+              "父职业医师助理2025年5月中位135,880美元，10/90分位99,380/190,280美元，不是CAA专属收入或起薪。个人收入须核雇主书面报价、工时和条款，本页不据分位推断资历、州或团队模式的因果。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.26",
@@ -27356,7 +27370,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "手术量与麻醉服务需求、州级授权范围与麻醉团队人员配置会影响岗位需求；本页不提供分州或分机构数字。"
+              "证据不足：核真实岗位时确认法域是否允许CAA、监督与团队安排、机构和需求；这些是招聘核对项，本页未取得分州/机构CAA需求数字。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.27",
@@ -27384,7 +27398,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同地区的医疗资源分布与生活成本会影响实际收入水平；本页不提供分地区数字。"
+              "核真实岗位的地区、工时、税前报价与生活成本；这些是个人决策核对项，不是本职业工资差异的因果估计。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.29",
@@ -27412,7 +27426,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机构类型（三级医院／专科医院与日间手术中心／教学医院）、岗位与班次（含夜班与值班）、经验与认证状态以及教学与质量管理职责会影响收入构成；须以用人单位的书面条件为准。"
+              "核目标雇主的机构类型、岗位、班次、资格与书面薪酬；不得从父职业全国分位推导这些因素对CAA工资的因果效应。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.31",
@@ -27469,7 +27483,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得医疗保健与社会援助这一宽行业门类内CAA单独工资中位数，不使用父职业或第三方估算冒充。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.35",
@@ -27483,7 +27497,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗保健与社会援助是 BLS 给出的父职业主要行业；BLS 未按行业公布该职业（父职业口径）工资中位数。"
+              "O*NET行业资料引用父职业医师助理；这不是CAA专属行业分布或该宽行业的职业工资。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.36",
@@ -27497,7 +27511,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医院（Hospitals）"
+              "医院（州、地方及私营；父职业参考）"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.37",
@@ -27511,12 +27525,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "141,150美元/年（2025年5月，父职业医师助理）"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27525,12 +27539,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "多数麻醉岗位设于医院手术室；具体中位数未能取得。"
+              "BLS OOH直接公布父职业医师助理医院中位数141,150美元；覆盖州、地方及私营医院，不是CAA工资。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27539,7 +27553,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（Government）"
+              "政府（不含州/地方教育及医院；父职业参考）"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.40",
@@ -27553,12 +27567,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "157,040美元/年（2025年5月，父职业医师助理）"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27567,12 +27581,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公立医疗机构岗位可能归入该类别；具体中位数未能取得。"
+              "BLS OOH父职业政府中位数157,040美元，明确排除州/地方教育及医院；不能把公立医院直接算进本行，不是CAA工资。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27623,7 +27637,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。135,880 美元是父职业“医师助理”口径的全国年薪中位数，代表分布中点；州、机构、班次与经验差异较大，本页不提供起薪数字，也不代表麻醉医师助理的具体收入。"
+              "不是。135,880美元为父职业医师助理全国中位数；不单列CAA，不代表起薪或个人实收。个人条款须核雇主，不把分位位置当作已证工资差异原因。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.46",
@@ -27638,12 +27652,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该数字为父职业口径，O*NET 明确标注未单列 29-1071.01；时薪与年薪是同一分布的两种表达（中位数 65.33 美元/小时对应 135,880 美元/年）。"
+              "证据不足：不能据此得到个人全年实收。OEWS通常以2080小时年化；65.33×2080约135,886美元与公布135,880取整相近。两数为父职业统计，不说明个人工时、值班或收入；本职业专属工资未取得。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27724,7 +27739,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10%：高于 190,280 美元/年（父职业口径），高收入端常与州、机构与班次相关。"
+              "最高10%：高于190,280美元/年（父职业口径）；分位位置不证明特定资历或雇主导致高工资。"
             ]
           },
           "id": "anesthesiologist-assistants.us-salary.career-snapshot-secondary-locale.53",
@@ -27945,7 +27960,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格属自我探索工具：尽责性与情绪稳定性常与高责任临床岗位相关，但这是群体层面的相关性，不能用于选拔判断。本职业更关心可观察行为（按方案执行、核对设备与剂量、如实记录）。"
+              "证据不足：本页未取得本职业大五分数与工作表现的实证估计。人格测试仅作自我探索；用真实培训考核、记录准确性与监督协作核能力。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.6",
@@ -27960,7 +27975,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格量表与工作表现的相关性有限，也不是选拔依据。"
+              "证据不足：本页未取得人格量表对本职业工作表现的预测研究，不用分数作准入或录用依据。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.7",
@@ -28004,7 +28019,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验按方案与规程操作、核对设备与剂量并书写记录的真实感受，再判断自己是否愿意长期做这类需要高责任、持续学习与细致协作的手术室临床工作；测评结果不保证录用，也不能预测工作表现。"
+              "兴趣仅描述职业任务倾向。先做下文A/B/C纸面记录与交接练习，观察核对、保留未知与沟通的反应；这不能证明临床胜任或授予资格。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.riasec-fit-block.9",
@@ -28047,7 +28062,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "证据不足：本页未取得MBTI对本职业表现的预测研究，不用类型筛选。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.11",
@@ -28534,7 +28549,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向护理执业，不承担麻醉操作与监测判读责任，需护理资格。"
+              "注册护士按护理资格、当地法律和机构授权承担护理及监测职责；不能概括护士不判读监测，也不等于取得CAA资格。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.42",
@@ -28610,7 +28625,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "性格内向并不构成障碍；麻醉岗位以手术团队协作与患者照护为主，关键是能否清楚沟通与报告。"
+              "本页不以内向或外向排除个人；实际沟通、记录与培训表现须核对。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.47",
@@ -28625,7 +28640,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在团队协作与应急沟通上有优势，但同样需要严格遵循规程与记录要求。"
+              "证据不足：本页未取得外向人格对该职业表现有优势的实证；实际团队沟通与训练表现需分别核对。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.48",
@@ -28669,7 +28684,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是准入依据；请用项目录取、认证考试、执照考核与临床表现判断。"
+              "证据不足：本页未取得本职业人格分数与工作表现的实证估计；不用分数替代认证与临床考核。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.51",
@@ -28727,7 +28742,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先按认证机构与院校官方信息核对麻醉医师助理项目的学制、先修课程与录取要求，再用公开资料练习整理麻醉前评估清单与监测记录表来验证自己的细致度与学习能力；不要相信非官方机构的包过或包就业承诺。"
+              "先核官方项目、认证与法域规则，再用下文A/B/C纸面练习核材料记录和交接，不凭准备作品判断临床能力。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.55",
@@ -28771,7 +28786,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次替代性准备：按公开资料整理一份麻醉前评估清单与术中监测记录表（用虚构数据），并把一次气道管理或给药决策写成含依据、风险与监督分工的说明。这不构成技能测试或录用测试，也不能替代项目训练与认证。"
+              "纸面准备沿下文A/B/C，完成三条观察记录、两条报告和权限说明；不设计气道或用药决策，不用真实患者数据，不能替代项目训练或执照。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.58",
@@ -28785,7 +28800,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 职业摘要，用于职业身份、任务与兴趣代码。"
+              "ONET职业摘要支持美国身份、任务与兴趣，不支持人格预测。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.59",
@@ -28799,7 +28814,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 任务与工作活动，用于任务与工作情境判断。"
+              "ONET父职业工资分位支持2025年5月工资，不单列CAA。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.60",
@@ -28813,7 +28828,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 BLS 职业展望手册，用于工资、就业与前景（父职业口径）。"
+              "BLS OOH支持父职业工资和就业，不支持人格效果。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.61",
@@ -28827,7 +28842,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 工作情境（Work Context），用于精确性、错误后果、沟通协作与暴露等比例。"
+              "ONET职业兴趣支持CSI，不是个人诊断或录用结论。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.62",
@@ -28841,7 +28856,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 详细资料，用于任务与工作活动说明。"
+              "ONET工作情境支持美国受访比例，不保证个人暴露或表现。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.63",
@@ -28855,7 +28870,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1071.01 兴趣剖面，用于 CSI 兴趣代码来源。"
+              "ONET详细任务与工作活动，不支持人格预测或中国执业资格。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.64",
@@ -28869,7 +28884,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）与护理人员（2-05-08），用于中国大陆对应职业与未单独设立麻醉医师助理的边界，不用于人格判断。"
+              "《职业分类大典（2022年版）》用于中国职业分类对照；分类名称与代码不授予执业资格，也不能证明与美国CAA资格等效。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.65",
@@ -28883,7 +28898,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》，用于中国大陆医师资格、执业注册与规范化培训框架；国家统计局数字用于行业门类宽口径参考。"
+              "中国医师法支持医师考试、注册和范围，不代表护士或美国CAA资格。"
             ]
           },
           "id": "anesthesiologist-assistants.fit.personality-fit-block.66",
@@ -28974,7 +28989,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是操作风险（气道管理等高风险操作、设备校准与准备不到位），二是监测与用药风险（漏判监护数值异常、延迟报告、剂量或给药时点失误），三是合规与法律风险（超出监督范围或授权执业、记录不规范），四是职业健康风险（每天暴露于疾病或感染与污染物、辐射以及手术室节奏与高责任带来的身心负担）。风险随方向不同：手术室内麻醉实施更贴近操作与监测风险，麻醉前评估与术后恢复更贴近评估与交接风险，气道与监测技术方向更贴近设备与操作风险。"
+              "最需要提前判断的是四类风险：一是操作风险（气道管理等高风险操作、设备校准与准备不到位），二是监测与用药风险（漏判监护数值异常、延迟报告、剂量或给药时点失误），三是合规与法律风险（超出监督范围或授权执业、记录不规范），四是职业健康风险（疾病或感染、污染物及辐射等职业暴露（频率因岗位而异）以及手术室节奏与高责任带来的身心负担）。风险随方向不同：手术室内麻醉实施更贴近操作与监测风险，麻醉前评估与术后恢复更贴近评估与交接风险，气道与监测技术方向更贴近设备与操作风险。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.9",
@@ -29289,7 +29304,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "发生不良事件后未按要求上报或修改记录。"
+              "发生不良事件后未按要求上报，或隐匿、伪造、篡改记录；合法更正须按适用规范和机构流程留痕。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.30",
@@ -29319,7 +29334,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "每天暴露于疾病或感染（67% 每天）、污染物与辐射，叠加手术室节奏与夜班。"
+              "疾病或感染、污染物与辐射等职业暴露（O*NET美国受访者中67%每天有疾病或感染暴露、30%每天有辐射暴露，不代表每个人），叠加手术室节奏与夜班。"
             ]
           },
           "id": "anesthesiologist-assistants.risk.career-risk-cards.32",
@@ -29460,35 +29475,35 @@
                 "手术室内麻醉实施方向",
                 "完成先修课程与认证项目，进入手术室内麻醉实施。",
                 "操作规范、监测记录完整、异常报告及时。",
-                "公开资料整理的麻醉前评估清单（含气道评估与用药过敏史）。",
+                "本页A/B/C观察表与演示规则说明",
                 "与麻醉科医师不同：麻醉医师助理在监督下实施操作，方案制定与最终责任由麻醉医师承担。"
               ],
               [
                 "麻醉前评估与术后恢复方向",
                 "在项目中学习麻醉前评估与恢复监测与交接。",
                 "评估完整、恢复判读规范、交接清楚。",
-                "虚构数据下的术中监测记录与异常提示表。",
-                "与注册护士不同：面向麻醉评估与恢复判读，不承担护理执业职能。"
+                "本页两条差异报告与待确认记录",
+                "与注册护士的资格体系不同；双方职责按当地法律和机构授权，不能概括护士不判读监测。"
               ],
               [
                 "气道与监测技术方向",
                 "在项目中学习设备预测试与校准并应用高级监测技术。",
                 "设备操作与校准规范、故障处置与报告及时。",
-                "一次气道管理或给药决策的依据与监督分工说明框架。",
+                "本页权限说明；不设计临床操作",
                 "与呼吸治疗师不同：面向麻醉与围术期监测，不限于呼吸治疗技术。"
               ],
               [
                 "设备准备与记录",
                 "对麻醉输送系统与监护仪进行预测试与校准并如实记录。",
                 "检查单完整、校准与记录及时。",
-                "一份含预测试、校准与用品核对的设备检查模板。",
+                "本页原始日志核对表；不代表设备校准能力",
                 "与外科技术员不同：面向麻醉设备与监测，不承担无菌区器械支持。"
               ],
               [
                 "气道管理与应急",
                 "实施气管插管与通气支持并按生命支持规范处置。",
                 "操作规范、异常报告及时、记录完整。",
-                "一次困难气道处置的流程与报告框架。",
+                "本页权限与交接说明；不设计困难气道处置",
                 "与护理麻醉师不同：在护理体系之外按认证与执照要求执业，资格序列不同。"
               ]
             ]
@@ -29510,15 +29525,17 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：本科学位与先修课程后就读 CAAHEP 认证的麻醉医师助理项目（通常为硕士级，约 24 至 28 个月）。",
+                  "美国项目准备",
+                  "美国项目的学历、先修课程与录取按院校核对；ASA2022声明描述项目硕士级24—28个月，当前学制另核。",
                   "中国大陆侧：按《中华人民共和国医师法》，具有高等学校相关医学专业本科以上学历并在执业医师指导下参加医学专业工作实践满一年可参加执业医师资格考试；取得资格并注册后方可执业。",
-                  "O*NET 显示该职业 96% 受访者认为需硕士学位、4% 需硕士后证书；两地对项目训练与考核同样看重。"
+                  "O*NET美国受访学历96%硕士、4%硕士后证书；不是中国或所有雇主招聘门槛。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "美国侧：须通过 NCCAA 考试取得 AA-C 认证并持州级执照；以佛罗里达州为例还须持有 ACLS 证书并完成电子指纹背景审查。",
+                  "佛州执照与监督",
+                  "美国侧：须通过 NCCAA 考试取得 CAA 认证并持州级执照；以佛罗里达州为例还须持有 ACLS 证书并完成电子指纹背景审查。",
                   "执业限于麻醉医师监督下（不得由执业资格被察看的医师监督）；认证须经继续教育与再认证维持。",
                   "中国大陆侧：须取得医师资格并注册，在注册的执业地点、执业类别与执业范围内执业。"
                 ]
@@ -29526,6 +29543,7 @@
               {
                 "id": "onet-traits",
                 "values": [
+                  "可观察的任务要求",
                   "O*NET 29-1071.01 兴趣代码为 CSI（常规型、社会型、研究型）。",
                   "工作情境以精确性（81% 极其重要）、错误后果（93% 极其严重）、面对面讨论（100% 每天）与感染暴露（67% 每天）为特征。",
                   "这些是对职业的群体性描述，不用于判断个人是否适合。"
@@ -29534,7 +29552,8 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 29-1071.01 技术清单可复核，列出该职业常用设备与技术条目。",
+                  "软件与学习资料",
+                  "O*NET详细页列职业任务与软件条目；设备准备来自任务描述，不把软件清单当设备型号或操作资格。",
                   "实际使用范围取决于机构设备、监测技术与手术类型。",
                   "准备方向应按公开资料打牢解剖生理与药理学基础、气道管理与监测判读能力，并通过官方渠道了解项目录取与认证要求。"
                 ]
@@ -29544,9 +29563,13 @@
           "id": "anesthesiologist-assistants.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "nccaa",
+            "flbom",
+            "fl-stat",
+            "asa-aa",
+            "cnlaw"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "任务与资格支持的准备核对项（不是招聘样本）",
           "type": "cards"
         },
         {
@@ -29557,33 +29580,36 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构题面一：按公开资料整理一份麻醉前评估清单（气道评估、既往史、用药与过敏史、禁食要点）。",
-                  "虚构题面二：用虚构数据完成一份术中监测指标记录与异常提示表（含阈值、判读依据与处置思路）。",
-                  "虚构题面三：把一次气道管理或给药决策写成含依据、风险与监督分工的说明。",
-                  "全部材料使用公开资料与模拟数据；不使用真实患者资料。"
+                  "材料：角色、日志与演示规则",
+                  "材料A（全为虚构）：你是纸面练习者，没有诊疗、设备操作或给药权限；样本编号M，无真实患者信息。",
+                  "材料B（虚构日志）：09:00信号A=12、标记“待核”；09:05信号A=18、标记“待核”；09:06另一表仍写09:05的A=12。题面没有反馈或复核结论。",
+                  "材料C（仅演示规则）：A≥16时在纸面标“需报告”，低于16仅标“未触发本规则”；同一时点两表不一致须列差异并转给带教。记录时间、原值、规则、报告对象、待确认项；不能推断临床正常或处理完成。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "评估清单：按项目列出问题、记录要点与追问方向。",
-                  "监测记录表：按项目列出指标、阈值、判读依据与处置思路。",
-                  "决策说明：按依据—风险—监督分工—记录要点结构书写。"
+                  "任务：记录、报告与权限说明",
+                  "任务1：按B列三条原始观察，并按C判断演示标记，保留09:05两表差异。",
+                  "任务2：写09:05超演示阈值和09:06表间差异两条报告；对象为带教，反馈未知。",
+                  "任务3：写一段权限说明，区分纸面规则判断、真实临床判读及实际操作，不提出用药或气道方案。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认公开资料与操作规程的适用性与版次，再据此整理，不使用内部或患者资料。",
-                  "对每一处判断保留依据与不确定性，并注明参考来源。",
-                  "对涉及给药的内容标注“以麻醉方案与麻醉医师判断为准，本页不构成医学建议”。"
+                  "参考答案：逐项回指A/B/C",
+                  "参考1：09:00原值12<16，未触发本演示规则；09:05原值18≥16，需报告；09:06另表记录09:05值12，与18冲突，不改掉任何原值。",
+                  "参考2：报告09:05值18触发演示规则；另报09:06发现09:05两表18/12不一致，交带教核对；接收姓名和反馈未给，写待确认，不编造已纠正。",
+                  "参考3：A无诊疗或操作权限；C是假设规则而非生理阈值，不能据12或18判断真实患者状态，也不能自行调整设备、插管或给药。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "作品只用于展示准备程度与方法，不构成技能测试或录用测试，也不代表任何认证或执照。",
-                  "不得在作品中包含或推断真实患者信息；实际训练与考核以认证机构、院校与医疗机构规定为准。"
+                  "边界：演示与真实执业",
+                  "本练习只验证信息核对、记录和交接；信号A不是血压、血氧或药量，阈值16无临床含义，不应用于真实监护。",
+                  "真实评估、用药、气道和设备操作只在合法资格、临床训练、监督协议及机构授权内进行；纸面作品不是认证、执照或技能合格证明。"
                 ]
               }
             ]
@@ -29592,7 +29618,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的麻醉医师助理任务任务（虚构材料）",
+          "title": "入行练习：用完整虚构材料做记录与交接",
           "type": "cards"
         },
         {
@@ -29603,31 +29629,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项要求（本科学位与先修课程、认证项目录取、NCCAA 认证考试、州级执照、继续教育），列出核对来源与状态。",
-                  "把每项要求对应到认证机构、各州医学委员会或主管部门规定，注明查看日期。",
-                  "记录尚未满足或个人需补强的项目与计划。"
+                  "三条观察表",
+                  "按B逐条保留09:00、09:05及09:06观察，列C规则与18/12差异；不改原值。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对是否来自认证机构、州医学委员会、院校或医疗机构官方渠道，是否标注时间与适用范围。",
-                  "资料复核：核对练习材料只使用公开资料与模拟数据。",
-                  "计划复核：核对教育与训练计划是否可持续，避免突击。"
+                  "两条报告",
+                  "沿任务2列09:05演示标记与09:06差异、带教接收对象及待确认反馈，不写处理完成。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向、已满足与待补强项、时间安排。",
-                  "附上公开资料清单与来源链接，注明查看日期。"
+                  "一段权限说明",
+                  "沿A/C说明纸面无诊疗操作权限，阈值无临床含义；真实临床授权另核。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "准备记录应展示对公开资料与操作规程的理解与自身临床基础，而不是内部或患者资料。",
-                  "不把网络传闻或非官方信息写入准备记录。"
+                  "一页复盘",
+                  "核所有数字能回指B、判断能回指C，列缺失的接收姓名与反馈；区分准备与临床资质。"
                 ]
               }
             ]
@@ -29698,50 +29722,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜项目与认证信息核对",
-                  "按认证机构与院校官方渠道核对麻醉医师助理项目的学制、先修课程与录取要求，记录待确认项。"
+                  "第1天｜确认角色与权限",
+                  "读A/B/C，写纸面练习没有诊疗、给药和设备操作权限。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜执照与监督要求",
-                  "阅读佛罗里达州行政法规 64B8-31.003 与州法 458.3475 要点，整理执照与监督要求清单。"
+                  "第2天｜整理输入与规则",
+                  "抄录三条日志与A≥16演示规则，注明不是生理阈值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜麻醉前评估清单",
-                  "按公开资料整理一份麻醉前评估清单（气道评估、既往史、用药与过敏史、禁食要点）。"
+                  "第3天｜完成观察表",
+                  "保留三条原值，识别09:05值18触发演示规则；不写临床异常。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜监测记录练习",
-                  "用虚构数据完成一份术中监测指标记录与异常提示表（含阈值与处置思路）。"
+                  "第4天｜核对两表差异",
+                  "列09:05值18与另表12，不改任何原值，不编造校准或已纠正。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜药理与设备学习",
-                  "选取一类常用麻醉药物与一类监测设备，按公开资料整理作用、风险与校准要点。"
+                  "第5天｜写两条报告",
+                  "把演示标记及18/12差异分别报告给带教，接收姓名和反馈均待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜决策与监督说明",
-                  "把一次气道管理或给药决策写成含依据、风险与监督分工的说明。"
+                  "第6天｜完成权限说明",
+                  "沿A/C区分演示规则与临床判读，写明不能据此调整设备、插管或给药。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜复盘与决策",
-                  "复盘一周准备：是否愿意长期按规程与监督要求操作、承受手术室节奏与持续认证，据此判断是否继续。"
+                  "第7天｜复盘与下一步",
+                  "对照参考核表、报告与权限说明，观察核对/沟通反应；下一步查官方项目与法域要求。"
                 ]
               }
             ]
@@ -29762,9 +29786,9 @@
               "判断方向：偏手术室内麻醉实施、麻醉前评估与术后恢复，还是气道与监测技术方向。",
               "判断准备：本科学位与先修课程、项目录取、NCCAA 认证与州级执照要求是否满足或可补齐；解剖生理、药理学与气道管理基础是否需要补强。",
               "判断边界：是否清楚护理麻醉师、呼吸治疗师与注册护士的资格不等同于麻醉医师助理的认证与执照，几套体系不可互相折算。",
-              "判断耐受：能否适应每天感染与辐射暴露、手术室节奏与夜班，并做好防护与压力管理。",
+              "判断耐受：按真实岗位核感染、污染物、辐射暴露与班次，ONET受访比例不代表所有人每天暴露。",
               "入门后按本科教育、认证项目与继续认证发展：取得更多操作授权或转向高级监测、教学与质量管理方向。",
-              "把公开资料整理、评估清单与监测记录练习持续整理成可核对的准备经历，比相信非官方承诺更可靠。"
+              "保留A/B/C观察表、两条报告与权限说明作为信息核对练习；它们不证明临床技能，不替代项目训练或执照。"
             ]
           },
           "id": "anesthesiologist-assistants.path.seven-day-decision.1",
@@ -29812,12 +29836,12 @@
                 "决定能否参加 NCCAA 认证考试",
                 "必备门槛",
                 "完成认证项目与临床轮转并通过考核",
-                "通常 24 至 28 个月全日制",
+                "ASA2022声明24—28个月；当前院校另核",
                 "未完成项目不能参加认证考试"
               ],
               [
-                "NCCAA 认证（AA-C）",
-                "全部执业者",
+                "NCCAA认证（CAA）",
+                "目标法域CAA执业者",
                 "决定能否取得并维持执业认证",
                 "必备门槛",
                 "通过 NCCAA 考试并完成继续教育与再认证",
@@ -29829,8 +29853,8 @@
                 "全部执业者",
                 "决定能否合法执业及执业范围",
                 "必备门槛",
-                "申请州级执照并在麻醉医师监督下执业",
-                "按各州执照周期",
+                "佛州示例：州执照、备案书面协议及现场直接监督；其他法域另核",
+                "按目标法域执照周期；佛州州法为两年续证",
                 "超出监督范围或授权执业会被追责"
               ],
               [
@@ -29855,11 +29879,10 @@
           },
           "id": "anesthesiologist-assistants.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "asa-aa",
+            "nccaa",
+            "flbom",
+            "fl-stat"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29869,9 +29892,9 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格由认证、执照与监督关系管理：美国侧须完成 CAAHEP 认证项目、通过 NCCAA 考试取得 AA-C 认证并持有州级执照，且在麻醉医师监督下执业。",
+              "本职业的资格由认证、执照与监督关系管理：美国侧须完成 CAAHEP 认证项目、通过 NCCAA 考试取得 CAA 认证并持有州级执照，且在麻醉医师监督下执业。",
               "护理麻醉师、呼吸治疗师、注册护士与外科技术员的资格与职责体系不同，不可互相替代；取得认证与执照前的临床实践须在监督指导下进行。",
-              "中国大陆侧，麻醉领域从业按《中华人民共和国医师法》取得医师资格并注册，并按住院医师与专科医师规范化培训制度培养；相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13），大典未单独设立“麻醉医师助理”。",
+              "中国医师与护士按各自法律资格，不能凭美国CAA认证或“麻醉助理”名称转换。2022版大典原分类说明只用于理解不同职业，不授予操作权限。",
               "有意入行者应核对官方信息中的项目录取、先修课程、认证考试、州级执照与监督要求，并通过官方渠道报名与训练；本页不构成医学建议。"
             ]
           },
@@ -29949,7 +29972,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业为麻醉医师助理（美方对应 O*NET/BLS 29-1071.01）：美国侧路径为先取得本科学位并完成先修课程，再就读 CAAHEP 认证的麻醉医师助理项目（通常为硕士级，约 24 至 28 个月），通过 NCCAA 认证考试取得 AA-C 认证，并申请州级执照后执业（须在麻醉医师监督下）。中国大陆侧，麻醉专业人才按《中华人民共和国医师法》取得医师资格并注册，并按住院医师与专科医师规范化培训制度培养。相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13），麻醉护理由护理人员（2-05-08）承担；大典未单独设立“麻醉医师助理”。本页不提供该职业的分州工资分布与认证通过率。"
+              "美国CAA资格与中国麻醉医师/护士不同。美国项目学历、先修课程与学制按院校核对；ASA2022声明列24–28个月，只作该文献说明，不保证当前全部项目。佛州执照按CAAHEP毕业、NCCAA考试、ACLS、指纹及其他申请条件；执业在备案协议与现场直接监督内。中国医师依法取得资格并注册，护士另走护理制度。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.11",
@@ -29993,13 +30016,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成 CAAHEP 认证的麻醉医师助理项目（约 24 至 28 个月）与临床轮转。"
+              "完成CAAHEP认证项目与临床训练；ASA2022声明描述项目24—28个月，当前学制以具体院校为准。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-aa",
+            "nccaa"
           ],
           "type": "prose"
         },
@@ -30022,7 +30045,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过 NCCAA 考试取得 AA-C 认证，并申请州级执照（以佛罗里达州为例还须 ACLS 与背景审查）。"
+              "通过 NCCAA 考试取得 CAA 认证，并申请州级执照（以佛罗里达州为例还须 ACLS 与背景审查）。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.16",
@@ -30051,7 +30074,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担复杂病例、教学培训、设备与质量管理或高级监测技术职责。"
+              "较高级临床、教学、设备或质量职责按合法监督、机构授权与实际岗位核对；不是保证晋升路线。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.18",
@@ -30080,7 +30103,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进入该职业的路径按国家区分：美国侧需本科学位与先修课程、CAAHEP 认证的麻醉医师助理项目、NCCAA 认证考试与州级执照，并在麻醉医师监督下执业；中国大陆侧，麻醉领域从业按《中华人民共和国医师法》取得医师资格并注册，并按住院医师与专科医师规范化培训制度培养；相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13），大典未单独设立“麻醉医师助理”。具体要求以认证机构、各州医学委员会、卫生健康主管部门、院校与用人单位官方信息为准；本页不提供该职业的分州工资分布与认证通过率。"
+              "本页美国职业是CAA，并非中国麻醉医师或护士的等效资格。佛州初次执照要求与现场直接监督按州法/委员会规则；NCCAA认证与执照是不同事项。中国医师须依医师法取得资格并注册，护士按护理制度，不能由“麻醉助理”招聘名称推断权限。三个方向是编辑按任务分组，不是独立牌照或保证晋升路线。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.20",
@@ -30095,14 +30118,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业的资格由认证、执照与监督关系管理：美国侧执业须完成 CAAHEP 认证项目、通过 NCCAA 考试取得 AA-C 认证并持有州级执照，且在麻醉医师监督下执业（不得由执业资格被察看的医师监督）；认证须通过继续教育与再认证维持。中国大陆侧按《中华人民共和国医师法》取得医师资格并注册，在注册的执业地点、执业类别与执业范围内执业。护理麻醉师、呼吸治疗师、注册护士与外科技术员的资格与职责体系不同，不可互相替代；取得资格前的临床实践须在监督指导下进行。"
+              "佛州CAA须在备案书面协议内接受现场直接监督，不得自行处方、药品医嘱或配制；按监督医师医嘱给药不同。中国医师与护士资格分别核对，不等效美国CAA。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "fl-stat",
+            "flbom",
+            "nccaa",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -30127,7 +30151,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按本科教育、认证项目与继续认证：从本科教育与先修课程、认证项目与临床训练，到认证考试与州级执照，再到资深、教学与质量管理方向。晋升通常与临床经验、认证状态、机构授权与教学科研业绩相关；跨法域执业需要另行取得目标国家或地区的执业资格与训练认可。"
+              "本页按任务提供编辑发展分组；进阶岗位的经验、培训和授权按真实雇主核对，不提供统一晋升年限。跨法域需满足目标地区自己的资格与训练要求。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.23",
@@ -30388,7 +30412,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过 NCCAA 考试并取得州级执照，独立承担手术室内麻醉实施。"
+              "通过 NCCAA 考试并取得州级执照，在现场直接监督与授权范围内承担手术室内麻醉实施。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.41",
@@ -30417,7 +30441,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长临床经历；按机构规定。"
+              "经历、培训与授权按实际机构岗位核对，本页未取得统一晋升年限。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.43",
@@ -30680,7 +30704,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过认证与执照后独立承担评估与恢复照护。"
+              "通过认证与执照后在现场直接监督与授权范围内承担评估与恢复照护。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.61",
@@ -30709,7 +30733,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经历；按机构规定。"
+              "经历、培训与授权按实际机构岗位核对，本页未取得统一晋升年限。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.63",
@@ -30972,7 +30996,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过认证与执照后独立承担设备准备与监测技术操作。"
+              "通过认证与执照后在合法监督与授权范围内承担设备准备与监测技术操作。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.81",
@@ -31001,7 +31025,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经历；按机构规定。"
+              "较高级职责所需经历按真实机构和岗位核对，本页未取得统一晋升年限。"
             ]
           },
           "id": "anesthesiologist-assistants.path.career-path-block.83",
@@ -31182,14 +31206,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧就业前景（父职业口径，经 O*NET 与 BLS 职业展望手册）：O*NET 未单独发布 29-1071.01 的就业与预测，页面引用父职业“医师助理”口径——2025 年在岗约 168,900 人，2025—2035 年增长 21%（远快于平均），净增约 35,700 人，年均约 11,500 个职位空缺，多数来自替代需求；主要行业为医疗保健与社会援助。该数字为父职业口径、不专属于麻醉医师助理，也不代表个人就业保证，且不能外推为中国大陆。中国大陆侧没有对应的官方职业就业预测，本页不提供数字；麻醉服务需求与手术量、州级授权范围及麻醉团队人员配置相关，本页不据此外推。"
+              "证据不足：本页未取得CAA专属及中国对应职业全国就业预测。美国父职业医师助理当前BLS OOH/EP：2025年168,900人，2035年204,600人，净35,700，OOH增长21%（EP21.1%）、年均11,500空缺，含增长与替代；O*NET仍展示旧2024—2034预测。父职业数据不保证CAA岗位，更不能外推中国。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ooh",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31422,7 +31445,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测父职业“医师助理”2025—2035 年年均约 11,500 个职位空缺，多数来自替代需求。"
+              "BLS 预测父职业“医师助理”2025—2035 年年均约 11,500 个职位空缺，包含增长与替代需求。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.25",
@@ -31548,7 +31571,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需取得医师资格并完成麻醉专科培训，承担方案制定与最终医疗责任。"
+              "转为麻醉医师须按目标法域完成医师资格、注册及相应专科训练；不能凭CAA经历自动取得医师资格，也不能以监督者责任豁免CAA自身义务。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.34",
@@ -31728,7 +31751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需护理资格，不承担麻醉操作与监测判读责任。"
+              "注册护士按护理资格、当地法律及机构授权负责护理与监测；不能概括其不判读监测，也不能凭护理资格替代CAA认证。"
             ]
           },
           "id": "anesthesiologist-assistants.market-signals.market-signal-card.46",
@@ -31921,19 +31944,19 @@
                 "question_key": "career.faq.anesthesiologist-assistants.daily-work"
               },
               {
-                "answer": "麻醉医师负责制定麻醉方案并承担最终医疗责任；麻醉医师助理在其监督与授权内实施气道管理、监测与给药等操作并如实记录；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。麻醉科医师、护理麻醉师、医师助理、呼吸治疗师、注册护士与外科技术员的资格与职责体系不同，不可互相替代。",
+                "answer": "佛州CAA在备案协议内接受麻醉医师现场直接监督，有自身执业义务，不得自行处方或药品医嘱。医师、CRNA、CAA、PA、呼吸治疗师、护士及外科技术员的资格体系不同；护理与监测职责按当地法律和机构授权，不能互换资格或概括护士不判读监测。",
                 "id": "anesthesiologist-assistants.faq.2",
                 "question": "这个职业和相邻岗位的边界在哪里？",
                 "question_key": "career.faq.anesthesiologist-assistants.comparison"
               },
               {
-                "answer": "没有证据支持“被取代”。自动化可能增强监护报警、监测数据整合与记录辅助，但气道管理等手动操作、术中临床判断、应急生命支持与监督关系下的责任分工仍由麻醉团队承担；本页引用的 2025—2035 年增长 21% 为父职业“医师助理”口径的 BLS 官方预测，本页不据技术名词推断岗位增减。",
+                "answer": "证据不足：本页未取得CAA的AI采用率或岗位替代因果估计。记录整理等仅为编辑可能用途；父职业增长21%不证明AI影响，真实临床操作按资格与监督法规执行。",
                 "id": "anesthesiologist-assistants.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.anesthesiologist-assistants.ai"
               },
               {
-                "answer": "中国大陆未单独设立“麻醉医师助理”法定职业，也没有公开的该职业全国工资分布；本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如卫生和社会工作非私营 146,266 元/年、私营 75,631 元/年）；该门类覆盖大量非麻醉岗位，麻醉岗位薪酬按机构制度、岗位与绩效确定，不能当作本职业工资。",
+                "answer": "证据不足：本页未取得中国大陆与该美国职业对应的全国工资分布。NBS2025卫生和社会工作非私营146,266元、私营75,631元是行业平均，涵盖大量其他岗位，不是麻醉或CAA工资。",
                 "id": "anesthesiologist-assistants.faq.4",
                 "question": "中国大陆的工资怎么理解？",
                 "question_key": "career.faq.anesthesiologist-assistants.china-pay"
@@ -31945,19 +31968,19 @@
                 "question_key": "career.faq.anesthesiologist-assistants.us-pay"
               },
               {
-                "answer": "美国侧：先取得本科学位并完成解剖、生理、化学、生物等先修课程，再就读 CAAHEP 认证的麻醉医师助理项目（通常为硕士级，约 24 至 28 个月），通过 NCCAA 认证考试取得 AA-C 认证，并申请州级执照后执业（须在麻醉医师监督下）。以佛罗里达州为例还须持有 ACLS 证书并完成电子指纹背景审查。中国大陆侧：麻醉领域通常按《中华人民共和国医师法》取得医师资格并注册，并按住院医师与专科医师规范化培训制度培养。具体要求以官方信息为准。",
+                "answer": "美国CAA按院校项目、NCCAA认证和目标法域执照要求；佛州示例需CAAHEP项目、NCCAA考试、ACLS、电子指纹及其他申请条件，并在备案协议内接受现场直接监督。ASA2022声明的24—28个月仅供理解训练，不保证所有当前项目。中国麻醉医师按医师资格注册，护士走护理资格，两者不等效CAA。",
                 "id": "anesthesiologist-assistants.faq.6",
                 "question": "怎么才能成为这个职业的麻醉医师助理？",
                 "question_key": "career.faq.anesthesiologist-assistants.education"
               },
               {
-                "answer": "主要是气道管理等高风险操作、设备校准与准备不到位、监测数值漏判或延迟报告、给药与麻醉深度控制失误、超出监督范围或授权执业、记录与不良事件报告不规范，以及每天感染与辐射暴露、手术室节奏与夜班带来的职业健康风险。按方案与操作规程实施气道管理、按监护标准判读并报告异常、核对药物与剂量并记录、在执照与监督范围内执业、如实记录与报告是基础控制措施；具体规定以规范与机构制度为准。",
+                "answer": "主要是气道管理等高风险操作、设备校准与准备不到位、监测数值漏判或延迟报告、给药与麻醉深度控制失误、超出监督范围或授权执业、记录与不良事件报告不规范，以及感染与辐射等职业暴露（频率因岗位而异）、手术室节奏与夜班带来的职业健康风险。按方案与操作规程实施气道管理、按监护标准判读并报告异常、核对药物与剂量并记录、在执照与监督范围内执业、如实记录与报告是基础控制措施；具体规定以规范与机构制度为准。",
                 "id": "anesthesiologist-assistants.faq.7",
                 "question": "这个职业的主要风险是什么？",
                 "question_key": "career.faq.anesthesiologist-assistants.risk"
               },
               {
-                "answer": "O*NET 未单独发布 29-1071.01 的预测，页面引用父职业“医师助理”口径：2025 年在岗约 168,900 人，2025—2035 年增长 21%（远快于平均），净增约 35,700 人，年均约 11,500 个职位空缺且多数来自替代需求。该数字为父职业口径、不专属于麻醉医师助理，不等于个人就业保证，也不能外推为中国大陆。",
+                "answer": "当前BLS OOH/EP父职业医师助理预测2025年168,900人至2035年204,600人，净35,700，OOH21%（EP21.1%）、年均11,500空缺，含增长与替代；ONET仍展示旧预测。数据不单列CAA、不保证就业或外推中国。",
                 "id": "anesthesiologist-assistants.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.anesthesiologist-assistants.outlook"
@@ -32023,7 +32046,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮相关事实与消费者核对日期：2026-10-02；未重新研究的登记资料仅保留原查阅日期。"
             ]
           },
           "id": "anesthesiologist-assistants.sources.source-card.3",
@@ -32037,7 +32060,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国侧工资与就业为 O*NET 展示的 BLS 2025 年 5 月工资分位与 BLS 职业展望手册（2025—2035 年预测），均为父职业“医师助理（Physician Assistants，29-1071.00）”口径（O*NET 明确标注未单列 29-1071.01），不是麻醉医师助理专属数字，也不能外推为中国大陆；本页不提供分行业工资中位数（BLS 未公开可读取的该职业分行业中位数，未使用第三方估算）。美国执业要求以佛罗里达州为例（CAAHEP 认证项目、NCCAA 考试、ACLS 与背景审查、麻醉医师监督），各授权州要求不同。中国大陆侧只提供国家统计局 2025 年行业门类与单位类型的宽口径参照，并逐行标注为本职业未单列、仅作对照；中国大陆未单独设立“麻醉医师助理”法定职业，麻醉领域按《中华人民共和国医师法》的医师资格与执业注册制度并由住院医师与专科医师规范化培训制度培养。本页不构成医疗、法律或政策意见。"
+              "证据不足：本页未取得CAA专属及中国对应职业工资/就业预测、宽行业内CAA工资与AI采用/替代因果。美国全国分位为ONET展示的父职业医师助理OEWS；就业直接取BLS OOH/EP。OOH已公布父职业医院141,150、政府157,040行业中位数（政府排除州/地方教育及医院），不等CAA工资。佛州执照和州法为法域示例，NCCAA认证不代替全部操作授权；中国医师与护士资格不同。NBS是行业代理，不当本职业工资。"
             ]
           },
           "id": "anesthesiologist-assistants.sources.source-card.4",
@@ -32128,93 +32151,93 @@
                 "limitation": "用于职业身份、任务与兴趣剖面（CSI）；美国详细职业口径，工资与就业引用父职业口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 麻醉医师助理职业摘要",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "contextual",
                 "id": "bls",
-                "limitation": "用于工资中位数与就业规模的官方口径（父职业“医师助理”口径）。",
+                "limitation": "覆盖雇员及通常2080小时年化；本页具体分位由oews支持，EP就业含自雇，不能混为同一调查。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）：29-1071",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "name": "BLS OEWS工资统计方法",
+                "period": "现行工资调查方法；本轮查询2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes291071.htm"
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "exact",
                 "id": "ooh",
-                "limitation": "用于 2025 年就业规模、2025—2035 年增长 21%、净增 35,700 与年均约 11,500 个空缺（父职业口径）。",
+                "limitation": "父职业医师助理29-1071工资、就业和医院/政府等行业中位数；未单列CAA。",
                 "market": "美国",
                 "name": "BLS 职业展望手册：医师助理（父职业，2025—2035）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2025年5月工资；2025—2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.bls.gov/ooh/healthcare/physician-assistants.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
-                "limitation": "用于核对就业预测口径与年均职位空缺单位的官方来源。",
+                "limitation": "父职业医师助理29-1071：168.9千至204.6千、净35.7千、增长21.1%、年均11.5千空缺；不单列CAA。",
                 "market": "美国",
                 "name": "BLS 就业预测表（按详细职业）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2025—2035年",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "adjacent",
                 "id": "oews",
-                "limitation": "用于年薪 10/25/50/75/90 分位数值与资料期（含父职业口径说明）。",
+                "limitation": "父职业医师助理29-1071五分位，不是麻醉医师助理专属工资。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（29-1071.01，引父职业“医师助理”口径）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
-                "scope": "exact",
+                "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/localwages/29-1071.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "exact",
                 "id": "flbom",
-                "limitation": "用于美国州级执照（CAAHEP 项目、NCCAA 考试、ACLS、背景审查）与麻醉医师监督要求的示例。",
+                "limitation": "支持CAAHEP毕业、NCCAA考试、电子指纹与其他申请条件；ACLS及现场监督另见州法458.3475。",
                 "market": "美国佛罗里达州",
-                "name": "佛罗里达州医学委员会：麻醉医师助理执照要求（行政法规 64B8-31.003 与州法 458.3475）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "name": "Florida Board of Medicine：CAA初次执照申请",
+                "period": "当前初次申请入口；查询2026-10-02",
                 "publisher": "Florida Board of Medicine",
                 "scope": "exact",
-                "url": "https://flboardofmedicine.gov/renewals/anesthesiologist-assistants/"
+                "url": "https://flboardofmedicine.gov/anesthesiologist-assistants/"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "industry_proxy",
                   "访问 2026-09-15"
@@ -32224,26 +32247,26 @@
                 "limitation": "用于中国大陆民用行业门类与单位类型年平均工资；不含本职业单列工资。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnlaw",
-                "limitation": "用于中国大陆医师资格考试、执业注册、执业范围与规范化培训制度的框架说明。",
+                "limitation": "医师考试、注册、执业范围及培训框架；不代表护士资格或美国CAA等效授权。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国医师法》（2021-08-20 通过，2022-03-01 施行）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2021-08-20通过；2022-03-01施行",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "contextual",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32253,10 +32276,10 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "用于中国大陆对应职业（麻醉科医师 2-05-01-13、麻醉护理 2-05-08）与未单独设立“麻醉医师助理”的说明。",
+                "limitation": "保留原2022大典麻醉科医师与护理人员分类说明；条目分类不等于全部现行法定资格制度或麻醉操作授权。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）与护理人员（2-05-08）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2022年版；原查阅2026-09-15；本轮原PDF访问未成功",
                 "publisher": "人力资源和社会保障部（职业分类大典）",
                 "scope": "contextual",
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
@@ -32272,26 +32295,26 @@
                 "limitation": "用于工作情境比例（精确性、错误后果、沟通协作与暴露）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（工作情境）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
-                "limitation": "用于该职业常用设备与技术条目；不表示技术采用率。",
+                "limitation": "任务包含设备预测试与校准；软件清单不是设备型号、AI部署或临床效果。",
                 "market": "美国",
-                "name": "O*NET OnLine 29-1071.01 技术清单",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "name": "O*NET 29-1071.01任务与软件条目",
+                "period": "职业页2026更新",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/hot_tech/29-1071.01"
+                "url": "https://www.onetonline.org/link/details/29-1071.01"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32304,7 +32327,7 @@
                 "limitation": "用于任务清单与工作活动（气道管理、监测、给药、设备与恢复）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（任务与工作活动）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32320,7 +32343,7 @@
                 "limitation": "用于工作周时长、日程规律性与感染、污染物与辐射暴露等比例。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（工作时间与环境）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32336,7 +32359,7 @@
                 "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "工资总额组成规定；原查阅2026-09-15",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/txzfg2020/202605/t20260511_1963662.html"
@@ -32352,7 +32375,7 @@
                 "limitation": "用于兴趣代码 CSI（常规型、社会型、研究型）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 职业摘要（兴趣剖面 CSI）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
@@ -32368,7 +32391,7 @@
                 "limitation": "用于认证与培训要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 认证要求",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/29-1071.01"
@@ -32384,7 +32407,7 @@
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 自定义职业档案",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/29-1071.01"
@@ -32400,7 +32423,7 @@
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
@@ -32416,7 +32439,7 @@
                 "limitation": "用于任务与麻醉程序说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（任务清单）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32432,7 +32455,7 @@
                 "limitation": "用于麻醉记录、监测数据与交接要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（记录与交接要求）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32448,7 +32471,7 @@
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 职业摘要（任务清单）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
@@ -32464,7 +32487,7 @@
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 任务描述",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32480,7 +32503,7 @@
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 职业摘要（职业属性）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1071.01"
@@ -32496,7 +32519,7 @@
                 "limitation": "用于数据口径说明（含父职业口径）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（数据说明）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
@@ -32512,7 +32535,7 @@
                 "limitation": "用于主要行业（医疗保健与社会援助）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 行业分布",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/29-1071.01"
@@ -32528,25 +32551,25 @@
                 "limitation": "用于培训路径与认证项目入口说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 培训与学徒信息",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/29-1071.01"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
-                "evidence_type": "exact",
+                "evidence_type": "adjacent",
                 "id": "onet-wages",
-                "limitation": "用于全国工资分位数值与资料期核对（父职业口径）。",
+                "limitation": "父职业医师助理29-1071五分位，不是麻醉医师助理专属工资。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 全国工资分位页面",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
-                "scope": "exact",
+                "scope": "adjacent",
                 "url": "https://www.onetonline.org/link/localwages/29-1071.01"
               },
               {
@@ -32560,10 +32583,74 @@
                 "limitation": "用于记录、报告与协同过程说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1071.01 详细资料（记录与质量管理要求）",
-                "period": "2025年5月（工资）／2025—2035年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025 年（佛州执照规则）",
+                "period": "职业页2026更新；原查阅2026-09-15",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1071.01"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "查询2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "fl-stat",
+                "limitation": "现场直接监督、备案书面协议、执照申请/ACLS与禁止自行处方医嘱配制；佛州法域示例。",
+                "market": "美国佛罗里达州",
+                "name": "佛州2026州法458.3475：麻醉医师助理",
+                "period": "2026州法；查询2026-10-02",
+                "publisher": "Florida Legislature",
+                "scope": "contextual",
+                "url": "https://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&URL=0400-0499/0458/Sections/0458.3475.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "查询2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "nccaa",
+                "limitation": "毕业于认可项目并满足/记录临床经验才具有认证考试资格；称号CAA，不代替州执照或机构操作授权。",
+                "market": "美国",
+                "name": "NCCAA初次认证资格说明",
+                "period": "当前认证说明；查询2026-10-02",
+                "publisher": "NCCAA",
+                "scope": "contextual",
+                "url": "https://nccaa.org/initialcertoverview"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "查询2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "asa-aa",
+                "limitation": "声明描述CAA项目24—28个月与两种资格路径，不保证当前每所院校学制或跨法域权限。",
+                "market": "美国",
+                "name": "ASA比较CAA与CRNA教育和执业声明",
+                "period": "2022声明；查询2026-10-02",
+                "publisher": "American Society of Anesthesiologists",
+                "scope": "contextual",
+                "url": "https://www.asahq.org/standards-and-practice-parameters/statement-on-comparing-certified-anesthesiologist-assistant-and-certified-registered-nurse-anesthetist-education-and-practice"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "查询2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "oews-method",
+                "limitation": "雇员工资统计及通常2080小时年化，不等个人全年实得或EP就业覆盖。",
+                "market": "美国",
+                "name": "BLS OEWS调查方法",
+                "period": "当前方法；查询2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -33009,7 +33096,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方法规与执照",
+            "类型": "美国任务/软件/行业对照",
             "适用范围": {
               "$item": "anesthesiologist-assistants.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33031,7 +33118,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国法律",
+            "类型": "美国任务/软件/行业对照",
             "适用范围": {
               "$item": "anesthesiologist-assistants.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33053,7 +33140,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国职业分类",
+            "类型": "美国任务/软件/行业对照",
             "适用范围": {
               "$item": "anesthesiologist-assistants.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33075,7 +33162,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国官方统计",
+            "类型": "美国任务/软件/行业对照",
             "适用范围": {
               "$item": "anesthesiologist-assistants.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34437,7 +34524,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "麻醉医师助理任务工作可以分成哪几类？",
+            "question": "麻醉医师助理的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -36451,7 +36538,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 展示的 BLS 工资分位（父职业口径）",
+            "label": "BLS OOH/EP父职业就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologist-assistants.profile.onet-structured-fields-block.4",
@@ -37501,7 +37588,7 @@
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "年薪第 10 分位上界",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
           "oews"
@@ -37513,7 +37600,7 @@
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "年薪第 25 分位",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
           "oews"
@@ -37525,10 +37612,10 @@
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "年薪中位数",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37537,7 +37624,7 @@
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "年薪第 75 分位",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
           "oews"
@@ -37549,7 +37636,7 @@
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "年薪第 90 分位下界",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
           "oews"
@@ -37561,7 +37648,7 @@
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "在岗就业人数",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年",
         "source_refs": [
           "ooh"
@@ -37573,7 +37660,7 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025—2035年",
         "source_refs": [
           "ooh"
@@ -37585,7 +37672,7 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025—2035年",
         "source_refs": [
           "ooh"
@@ -37593,11 +37680,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该宽行业内CAA单列工资中位数；不使用父职业或第三方估算冒充。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（医疗保健与社会援助）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "查询 2026-09-15",
         "source_refs": [
           "operations"
@@ -37605,35 +37692,35 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "141,150美元/年（2025年5月，医院，父职业医师助理）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（医院）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "查询 2026-09-15",
         "source_refs": [
-          "operations"
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "157,040美元/年（2025年5月，政府，不含州/地方教育及医院；父职业医师助理）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（政府）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "查询 2026-09-15",
         "source_refs": [
-          "operations"
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该宽行业内CAA单列工资中位数；不使用父职业或第三方估算冒充。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（其他行业）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "查询 2026-09-15",
         "source_refs": [
           "operations"
@@ -37645,7 +37732,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37657,7 +37744,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37669,7 +37756,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37681,7 +37768,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37693,7 +37780,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "租赁和商务服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37705,7 +37792,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37717,7 +37804,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "教育年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37729,7 +37816,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "公共管理、社会保障和社会组织年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37753,7 +37840,7 @@
         "fact_id": "cn-health-nonprivate-wage",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（非私营）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37765,7 +37852,7 @@
         "fact_id": "cn-health-private-wage",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（私营）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "NBS行业/单位/岗位大类代理；非麻醉医师助理单列",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37777,10 +37864,10 @@
         "fact_id": "us-pa-parent-median",
         "market": "美国",
         "measure": "父职业年薪中位数",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37789,7 +37876,7 @@
         "fact_id": "us-pa-parent-range",
         "market": "美国",
         "measure": "父职业年薪分位区间",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
           "oews"
@@ -37809,23 +37896,23 @@
       },
       {
         "derivation": null,
-        "display_value": "由麻醉医师监督执业（书面监督关系；不得由执业资格被察看（probation）的医师监督）",
+        "display_value": "佛州2026州法：备案书面协议内、现场且立即可协助的麻醉医师直接监督；不得自行处方/医嘱/配制药品",
         "fact_id": "fl-aa-supervision-rule",
         "market": "美国佛罗里达州",
         "measure": "美国州级监督要求（佛罗里达州示例）",
         "occupation_scope": "麻醉医师助理",
         "period": "2025 年；访问 2026-09-15",
         "source_refs": [
-          "flbom"
+          "fl-stat"
         ]
       },
       {
         "derivation": null,
-        "display_value": "中国大陆未单独设立“麻醉医师助理”法定职业；麻醉由麻醉科医师（2-05-01-13）与麻醉护士（2-05-08）等承担",
+        "display_value": "2022版大典列麻醉科医师2-05-01-13及护理人员2-05-08；本页未核到与美国CAA直接对应的独立资格制度，医师与护士资格不同。",
         "fact_id": "cn-role-boundary",
         "market": "中国大陆",
         "measure": "中国大陆对应职业边界",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "中国麻醉医师/护理职业分类与资格边界；非美国CAA等效资格",
         "period": "2022 年版大典；访问 2026-09-15",
         "source_refs": [
           "cnclass",
@@ -37838,7 +37925,7 @@
         "fact_id": "pa-parent-projection",
         "market": "美国",
         "measure": "父职业就业预测",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025—2035年",
         "source_refs": [
           "ooh"
@@ -37862,15 +37949,15 @@
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "职业工资口径（父职业中位数）",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
         "derivation": null,
-        "display_value": "O*NET 29-1071.01 技术清单已复核",
+        "display_value": "O*NET 29-1071.01任务与软件条目；非设备型号或AI部署证据",
         "fact_id": "technology-context",
         "market": "美国",
         "measure": "技术页面可用性",
@@ -37898,7 +37985,7 @@
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
-        "occupation_scope": "麻醉医师助理",
+        "occupation_scope": "父职业医师助理29-1071；非麻醉医师助理单列",
         "period": "2025—2035年",
         "source_refs": [
           "ooh"
@@ -37962,7 +38049,7 @@
       "text": "麻醉医师助理：任务、工资与就业前景（O*NET 29-1071.01）"
     }
   },
-  "source_content_sha256": "d93a30d9c5b3447ba107dac3d0ce75cf6f2d3145aacbb3c116cb74202700d02a",
+  "source_content_sha256": "be00626239c8062caaf75af683d86b298580024e5f1e0eda7799e81b5df8bb53",
   "subject": {
     "canonical_slug": "anesthesiologist-assistants",
     "name": "麻醉医师助理",

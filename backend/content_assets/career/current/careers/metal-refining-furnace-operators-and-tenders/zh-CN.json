@@ -141,7 +141,7 @@
         "status": "mapped"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.employer-evidence.3": {
         "status": "mapped"
@@ -150,16 +150,16 @@
         "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.recruitment-sample.1": {
         "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.path.seven-day-trial.6": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:metal-refining-furnace-operators-and-tenders.profile.career-quick-answers-block.4": {
         "status": "mapped"
@@ -12223,7 +12223,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（完全虚构的炉次数据）：针对一份虚构炉次，在 60 分钟内写出配料与加料核对点、温度与成分监控要点、取样与调整步骤、出钢与协同安排，以及须交有权限者确认的情形；不使用真实熔炼炉或危险能源。"
+              "完全虚构纸面包，60分钟，不接触炉子、钢水或危险能源。A：模拟记录要求炉次F07、装料记录总量1000千克，任何关键测量缺确认先交负责人核验；这只是题内规则，不是工艺配方。B：台账列三笔原料400/350/200千克，报表总量写1000千克；08:00/08:10显示温度1540/1555℃，传感器校准状态未给。C：取样标号F70而台账F07，成分报告未回、交班签字缺失；下一班问能否直接出钢。整理量账、时间/批次、未知项与交接草案，只标记差异和须有权限者决定的事项，不计算加料量、温度设定、合格成分或出钢许可。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.quick-decision.fermat-decision-card.4",
@@ -12279,7 +12279,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境（O*NET 工作情境调查，1—5 分）：以高温与重型设备环境、连续作业与安全风险为特征，需按规程作业并佩戴防护；具体工作情境数值以 O*NET 工作情境调查为准。"
+              "当前O*NET情境调查：常规防护每天100%、污染物每天97%、轻微烧伤割伤等每天92%、高低温每天84%、危险环境每天79%、每周超过40小时64%；均该调查选项受访比例，不是事故率或所有雇主排班。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.profile.work-context-block.3",
@@ -12293,7 +12293,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能力与工作方式：需要炉况判断、参数监控与起重协同基础，能按安全规程作业并在异常时立即停机升级。"
+              "能力与工作方式：核炉次、参数和交接；发现炉况或能源异常立即按现场应急规程交有权限人员，不凭本页自行停炉、隔离或调整设备。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.profile.career-quick-answers-block.4",
@@ -12307,7 +12307,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得 O*NET 51-4051.00 本页可安全提取的准备层级；研究输入还包括官方描述、任务、工作情境与兴趣代码（RC）。不据此推定中国大陆的资格、工资或就业口径。"
+              "美国O*NET Job Zone 1—2：通常高中或GED，部分职业可更低；一般在岗训练从数天到一年，不是本职业统一学历时数，更不设中国门槛。教育栏当前仅列部分岗位高中/低于高中，不据此计算比例。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.profile.onet-structured-fields-block.5",
@@ -12449,7 +12449,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用完全虚构炉次练习参数记录。"
+              "用本页虚构ABC炉次包，核950/1000千克差额、15℃显示差、样品F07/F70及缺校准成分签字；工具只可整理，不能给真实工艺或出钢结论。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.ai-impact.ai-impact-table.2",
@@ -12555,7 +12555,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局方法与公开口径有界检索，未取得与 O*NET 51-4051.00 精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "中国大陆金属精炼炉操作员与看护员：工资证据与适用边界"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
@@ -12611,7 +12611,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆金属精炼炉操作员与看护员的全国职业工资（本轮公开口径）；本页明确标注缺失，不使用行业代理或美国数字填补。"
+              "证据不足：未取得中国大陆金属精炼炉操作员与看护员的全国职业工资（此前有界公开资料核查）；本页明确标注缺失，不使用行业代理或美国数字填补。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.5",
@@ -12647,7 +12647,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资口径（BLS 2025 年工资数据）：中位年薪 54,430 美元（约 26.17 美元/小时）；10 分位 39,200 美元（约 18.85 美元/小时）、25 分位 46,080 美元（约 22.15 美元/小时）、75 分位 62,810 美元（约 30.20 美元/小时）、90 分位 74,470 美元（约 35.80 美元/小时）。以上为本职业口径；分位是统计位置，不含个人到手收入。"
+              "工资口径（BLS 2025 年工资数据）：中位年薪 54,430 美元（约 26.17 美元/小时）；10 分位 39,200 美元（约 18.85 美元/小时）、25 分位 46,080 美元（约 22.15 美元/小时）、75 分位 62,810 美元（约 30.20 美元/小时）、90 分位 74,470 美元（约 35.81 美元/小时）。以上为本职业口径；分位是统计位置，不含个人到手收入。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
@@ -12771,8 +12771,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "认知能力测验：只反映部分认知特征，不覆盖炉况经验与安全判断。",
-              "不宜用单一测验结果替代训练与监督下的表现。"
+              "九型人格描述仅供自我观察，不是炉前胜任或安全资格证据。",
+              "回到ABC数量批次核对，不按类型决定操作权限。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.fit.riasec-fit-block.4",
@@ -12786,8 +12786,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "情绪智力测验：不构成倒班协作或应急沟通的能力证据。",
-              "沟通与协作需用真实任务核对。"
+              "认知测验反映其所测表现，不覆盖炉况经验或能源安全。",
+              "用训练与监督下任务另核，不凭分数取得独立操作权。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.5",
@@ -12801,8 +12801,8 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "综合建议：把信号与具体炉前样本、安全反馈和岗位要求对照。",
-              "不以任何单一测评代替资格与安全核对。"
+              "情绪智力测评可反思回应方式，不是应急协作绩效证据。",
+              "现场交接与异常沟通须核实际规程、训练和岗位职责。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.6",
@@ -12830,7 +12830,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "下一步试验：用完全虚构的炉次数据完成一次参数监控、取样与交班记录演练，再决定是否继续。"
+              "使用前述ABC虚构包和参考，只练数量、时间与批次记录和异常交接；不接设备、不补取样或校准签字、不证明高温实操或安全资格。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.8",
@@ -12908,7 +12908,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级规则：一旦出现炉况、能源或安全异常，先停机或隔离相关环节，把事实、影响和待决问题交有权限者确认后再继续；倒班疲劳时按交接与休息制度执行。"
+              "共同升级规则：发现炉况、能源或安全异常，立即按现场应急规程通知有权限人员；停炉、隔离和恢复须依实际岗位授权，不能照本页自行操作。倒班疲劳按机构交接与休息安排核对。"
             ]
           },
           "id": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.5",
@@ -12950,41 +12950,48 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "阶段",
+              "任务",
+              "权限边界",
+              "证明材料",
+              "下一步"
+            ],
             "rows": [
               [
-                "入职 0—3 个月",
-                "在指导下参与加料与参数记录",
-                "不得独立出钢或调整关键参数",
+                "纸面学习阶段",
+                "用ABC虚构量账与批次写交接",
+                "不接炉子钢水能源，不给操作指令",
                 "参数与记录练习",
-                "扩展到独立看护"
+                "先核下一职责的训练、权限与责任人"
               ],
               [
-                "3—12 个月",
-                "独立看护常见炉次并取样",
+                "受监督训练阶段",
+                "按培训与授权范围参与监控记录",
                 "调整与出钢须经批准",
                 "炉次与取样记录",
-                "扩展到复杂钢种"
+                "先核下一职责的训练、权限与责任人"
               ],
               [
-                "1—3 年",
+                "岗位授权内作业",
                 "负责复杂钢种与出钢协同",
                 "工艺由技术部门确认",
                 "复杂炉次与协同记录",
-                "扩展到带班"
+                "先核下一职责的训练、权限与责任人"
               ],
               [
-                "3—5 年",
+                "复杂协作阶段",
                 "负责班次协调与异常处置",
                 "授权与安全由机构确认",
                 "协调与异常记录",
-                "扩展到带教"
+                "先核下一职责的训练、权限与责任人"
               ],
               [
-                "5 年以上",
+                "授权带教阶段",
                 "在授权范围内带教与改进流程",
                 "不得替代工艺与安全职能",
                 "带教与改进记录",
-                "按机构与规则扩展授权"
+                "先核下一职责的训练、权限与责任人"
               ]
             ]
           },
@@ -13003,7 +13010,7 @@
                 "id": "metal-refining-furnace-operators-and-tenders.employer-evidence.1",
                 "values": [
                   "雇主证据",
-                  "资格按培训、经验与雇主要求分别核对；本轮未取得 O*NET 本页可安全提取的准备层级，常见路径为在岗训练与职业培训。"
+                  "美国O*NET Job Zone 1—2：通常高中或GED，部分职业可更低；一般在岗训练从数天到一年，不是本职业统一学历时数，更不设中国门槛。教育栏当前仅列部分岗位高中/低于高中，不据此计算比例。 另核雇主实际训练与岗位授权。"
                 ]
               },
               {
@@ -13037,16 +13044,16 @@
                 "id": "metal-refining-furnace-operators-and-tenders.portfolio.one",
                 "values": [
                   "作品示例",
-                  "保留虚构或脱敏的炉次参数与交班记录。",
-                  "展示配料核对、参数监控与异常升级判断。"
+                  "ABC虚构量账950/1000、读数1540/1555及F07/F70交接作品。",
+                  "参考差额50千克、显示差15℃；校准成分签字未给，不得臆造。"
                 ]
               },
               {
                 "id": "metal-refining-furnace-operators-and-tenders.portfolio.two",
                 "values": [
                   "可检查产出",
-                  "炉次记录、取样与调整记录与安全交接记录。",
-                  "说明每一步的规程依据与升级路径。"
+                  "事实、未知项、负责人及待确认事项的纸面记录。",
+                  "注明未实操、未校准取样或确认质量安全，不签真实交班。"
                 ]
               }
             ]
@@ -13067,28 +13074,34 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "情境",
+              "行动",
+              "复核要点",
+              "交付证据"
+            ],
             "rows": [
               [
-                "面试前准备",
-                "整理一段虚构炉次的参数与安全案例",
-                "请他人挑战炉况与安全判断",
-                "参数与安全说明"
+                "面试前纸面准备",
+                "用ABC虚构量账、读数和批次写交接",
+                "复核是否臆造校准、成分、归属或签字",
+                "事实、未知项与待负责人核对的说明"
               ],
               [
-                "面试现场",
-                "说明如何核对配料与异常处置",
-                "由面试方确认结论逻辑",
-                "处置与升级说明"
+                "面试纸面讨论",
+                "说明ABC差额、显示差和未知项升级",
+                "由面试方观察事实核对与权限边界意识",
+                "纸面交接草案，不签真实生产记录"
               ],
               [
-                "试用期前 3 个月",
-                "在指导下完成加料与记录任务",
-                "由师傅复核操作与安全",
-                "操作与记录样本"
+                "核训练与授权后",
+                "仅在已核培训、岗位授权和监督范围参与记录",
+                "由有权限负责人按现场规程复核，不凭月份授权",
+                "真实岗位记录只在许可范围形成"
               ],
               [
                 "试用期结束",
-                "独立看护常见炉次并交班",
+                "在已核训练与岗位授权范围参与看护交班",
                 "由责任人确认安全与记录",
                 "炉次与交班记录"
               ]
@@ -13108,22 +13121,50 @@
               {
                 "id": "metal-refining-furnace-operators-and-tenders.trial.day1",
                 "values": [
-                  "第 1—2 天",
-                  "理解炉况、配料与安全规程。"
+                  "第1天，20分钟",
+                  "摘录ABC时间炉次与三笔量账。"
+                ]
+              },
+              {
+                "id": "metal-refining-furnace-operators-and-tenders.trial.day2",
+                "values": [
+                  "第2天，20分钟",
+                  "复算950千克和50千克差额，保留原因未知。"
                 ]
               },
               {
                 "id": "metal-refining-furnace-operators-and-tenders.trial.day3",
                 "values": [
-                  "第 3—5 天",
-                  "针对虚构炉次完成参数监控与取样记录演练。"
+                  "第3天，20分钟",
+                  "算显示差15℃并标校准/工艺限值未知。"
+                ]
+              },
+              {
+                "id": "metal-refining-furnace-operators-and-tenders.trial.day4",
+                "values": [
+                  "第4天，20分钟",
+                  "列F07/F70及成分缺项交负责人核。"
+                ]
+              },
+              {
+                "id": "metal-refining-furnace-operators-and-tenders.trial.day5",
+                "values": [
+                  "第5天，20分钟",
+                  "写未签字及出钢请求的权限交接。"
+                ]
+              },
+              {
+                "id": "metal-refining-furnace-operators-and-tenders.trial.day6",
+                "values": [
+                  "第6天，20分钟",
+                  "对照参考纠错，不补造记录或下操作指令。"
                 ]
               },
               {
                 "id": "metal-refining-furnace-operators-and-tenders.trial.day7",
                 "values": [
-                  "第 6—7 天",
-                  "请他人挑战异常处置判断，写继续、停止或换方向的证据。"
+                  "第7天，20分钟",
+                  "整理作品并查一个实际岗位炉型训练班次权限，记来源日期；未找到如实记。"
                 ]
               }
             ]
@@ -13147,10 +13188,19 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "类别",
+              "证明材料",
+              "核验方",
+              "核验条件",
+              "权限边界",
+              "责任方",
+              "下一步"
+            ],
             "rows": [
               [
                 "学历",
-                "本轮未取得可安全提取的准备层级",
+                "美国Job Zone1—2一般准备，非中国统一门槛",
                 "用人单位与院校",
                 "按岗位核验",
                 "学历不等同操作授权",
@@ -13168,7 +13218,7 @@
               ],
               [
                 "作业证书",
-                "高温或特种作业证书",
+                "按实际作业核是否需证及有效范围",
                 "主管部门",
                 "按作业类型核验",
                 "证书不等同岗位授权",
@@ -13362,7 +13412,8 @@
                 "question": "AI 会如何影响这个职业的工作？",
                 "question_key": "career.faq.metal-refining-furnace-operators-and-tenders.4",
                 "source_refs": [
-                  "source-pack-onet-hot_tech"
+                  "internal-rubric",
+                  "onet-details"
                 ]
               },
               {
@@ -13375,7 +13426,7 @@
                 ]
               },
               {
-                "answer": "本轮以国家统计局方法与公开工资口径有界检索，未取得与 O*NET 51-4051.00 精确对应的中国大陆全国职业工资分布；公开资料为行业或人员大类聚合，不能替代本职业中位数，故本页标注缺失，不代填数值。",
+                "answer": "证据不足：此前公开资料有界核查未取得与O*NET51-4051精确对应的中国大陆全国工资分布；未取得不能证明没有发布，制造业平均不能替代职业中位数，本页不代填。",
                 "id": "metal-refining-furnace-operators-and-tenders.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.metal-refining-furnace-operators-and-tenders.6",
@@ -13393,12 +13444,12 @@
                 ]
               },
               {
-                "answer": "本轮未取得 O*NET 本页可安全提取的准备层级；常见路径为在岗训练与职业培训，冶金与炉前课程可用于发现训练路径。中国大陆按用人单位与特种作业规则确定，证书不等于岗位授权。",
+                "answer": "美国O*NET Job Zone 1—2：通常高中或GED，部分职业可更低；一般在岗训练从数天到一年，不是本职业统一学历时数，更不设中国门槛。教育栏当前仅列部分岗位高中/低于高中，不据此计算比例。 真实训练、起重能源相关作业要求按雇主、具体职责和所在地规则核验，课程不等于授权。",
                 "id": "metal-refining-furnace-operators-and-tenders.faq.8",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.metal-refining-furnace-operators-and-tenders.8",
                 "source_refs": [
-                  "onet-cert"
+                  "source-pack-onet-summary"
                 ]
               }
             ]
@@ -13437,37 +13488,37 @@
           "data": {
             "entries": [
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-1",
                 "relation": "career.section",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-2",
                 "relation": "career.section",
                 "url": "/en/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-3",
                 "relation": "career.section",
                 "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-4",
                 "relation": "career.section",
                 "url": "/zh/tests/mbti-personality-test-16-personality-types"
               },
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-5",
                 "relation": "career.section",
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "金属操作员看护员",
+                "entity": "金属精炼炉操作员与看护员",
                 "id": "navigation-6",
                 "relation": "career.section",
                 "url": "/zh/career/jobs/metal-refining-furnace-operators-and-tenders"
@@ -13499,7 +13550,7 @@
                 "id": "internal-rubric",
                 "limitation": "Not adoption, job-loss, regulation or authorization evidence.",
                 "market": "GLOBAL",
-                "name": "FermatMind 金属操作员看护员任务影响量表",
+                "name": "FermatMind 金属精炼炉操作员与看护员任务影响量表",
                 "period": "FermatMind task rubric v2026.08; reviewed 2026-08-31",
                 "publisher": "FermatMind",
                 "scope": "internal_rubric",
@@ -13598,7 +13649,8 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
+                  "2025年薪P10/25/50/75/90：39200/46080/54430/62810/74470美元；小时18.85/22.15/26.17/30.20/35.81。",
+                  "51-4051本职业全国统计，分位非经验等级，不外推中国个人收入。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
@@ -13774,24 +13826,24 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/29-2072.00",
-            "label": "29-2072.00 Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/summary/51-4051.00",
+            "label": "本职业摘要"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
-            "label": "Medical Records Specialists detailed occupation profile"
+            "href": "https://www.onetonline.org/link/details/51-4051.00",
+            "label": "本职业任务"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-2072.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/industry/51-4051.00",
+            "label": "行业"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/29-2072.00",
-            "label": "29-2072.00 - Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/localtraining/51-4051.00",
+            "label": "训练目录"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/29-2072.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
+            "label": "认证目录"
           }
         ],
         "evidence_note": {
@@ -13809,50 +13861,50 @@
         },
         "rows": [
           {
+            "关键区别": "核浇注成型与精炼成分控制的任务差别",
+            "更适合什么选择": "比较模具、浇注与精炼任务，按岗位核实训练和授权。",
+            "核心工作与产出": "浇注成型",
+            "职业方向": "模塑、制芯与铸造机械设置操作工"
+          },
+          {
+            "关键区别": "核热处理与精炼成分控制差别",
+            "更适合什么选择": "按对象设备任务与资格分别比较，不自动互认。",
+            "核心工作与产出": "热处理循环",
+            "职业方向": "金属与塑料热处理设备设置操作工"
+          },
+          {
+            "关键区别": "核处理对象和设备类型",
+            "更适合什么选择": "按对象设备任务与资格分别比较，不自动互认。",
+            "核心工作与产出": "其他炉窑处理",
+            "职业方向": "炉窑烘炉干燥及锅设备操作工"
+          },
+          {
             "关键区别": {
               "$item": "metal-refining-furnace-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "更适合什么选择": {
+            "更适合什么选择": "按对象设备任务与资格分别比较，不自动互认。",
+            "核心工作与产出": "设备维护",
+            "职业方向": "工业机械维修工"
+          },
+          {
+            "关键区别": {
               "$item": "metal-refining-furnace-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "设计并维护健康信息系统与数据标准，产出系统方案与数据治理规则。",
-            "职业方向": "健康信息学专员"
+            "更适合什么选择": "按对象设备任务与资格分别比较，不自动互认。",
+            "核心工作与产出": "切削与加工",
+            "职业方向": "机械加工工"
           },
           {
-            "关键区别": "面向通用文档生命周期，不承担临床编码与隐私披露责任。",
-            "更适合什么选择": "按记录生命周期职责比较。",
-            "核心工作与产出": "管理组织文件与记录生命周期，产出归档、保留与检索规范。",
-            "职业方向": "文档管理专员"
-          },
-          {
-            "关键区别": "侧重组织与流程分析，不承担记录完整性与编码合规责任。",
-            "更适合什么选择": "按分析与流程对象比较。",
-            "核心工作与产出": "分析业务流程与组织问题，产出改进方案与决策支持。",
-            "职业方向": "管理分析师"
-          },
-          {
-            "关键区别": "以临床诊疗与照护为主，需要相应执业资格与监督。",
-            "更适合什么选择": "按临床与编码分工比较。",
-            "核心工作与产出": "在监督下参与诊疗与病历记录，产出临床评估与处置记录。",
-            "职业方向": "医师助理"
-          },
-          {
-            "关键区别": "以直接照护为主，需要执照与临床授权。",
-            "更适合什么选择": "按照护与记录分工比较。",
-            "核心工作与产出": "执行护理与患者照护，产出台班照护与护理记录。",
-            "职业方向": "注册护士"
-          },
-          {
-            "关键区别": "名称相近不等于职责、资格与授权可互换。",
-            "更适合什么选择": "按资格与授权链逐项核对。",
-            "核心工作与产出": "O*NET 相关职业还包括医疗与健康服务经理、医务秘书等。",
-            "职业方向": "关联与相关职业"
+            "关键区别": "核介质工艺及作业权限",
+            "更适合什么选择": "按对象设备任务与资格分别比较，不自动互认。",
+            "核心工作与产出": "化学生产设备",
+            "职业方向": "化学设备操作与看护工"
           }
         ],
         "transition": "相邻关系只用于方向比较，不代表自动转岗或资格互认。"
@@ -13919,261 +13971,261 @@
         "answer": "工具可辅助炉况数据采集、成分趋势分析与报表整理，但加料、出钢、温度与安全判断仍由有权限的人负责。",
         "authority_links": [
           {
-            "来源": "29-2072.00 Medical Records Specialists",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "来源": "本职业任务",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00"
           },
           {
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
+            "来源": "职业摘要",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/summary/51-4051.00"
           },
           {
-            "来源": "National Employment Trends 29-2072.00 Medical Records Specialists",
-            "类型": "官方统计来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localtrends/29-2072.00"
+            "来源": "工资",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
-            "来源": "National Wages 29-2072.00 Medical Records Specialists",
-            "类型": "官方统计来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localwages/29-2072.00"
+            "来源": "趋势",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/localtrends/51-4051.00"
           },
           {
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "类型": "国际组织研究",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+            "来源": "行业",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/industry/51-4051.00"
           },
           {
-            "来源": "National Certifications 29-2072.00 Medical Records Specialists",
-            "类型": "职业认证来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localcert/29-2072.00"
+            "来源": "训练目录",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/localtraining/51-4051.00"
           },
           {
-            "来源": "29-2072.00 - Medical Records Specialists",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "来源": "软件线索",
+            "类型": "官方职业或统计来源",
+            "适用范围": "仅所列范围，不证明生成式AI采用效能",
+            "链接": "https://www.onetonline.org/link/hot_tech/51-4051.00"
           }
         ],
-        "difference_intro": "AI 对记录汇总、编码、审核与发布的影响不同，剩余责任也不同。",
+        "difference_intro": "量账、读数和交接是不同记录任务；工艺与安全决定不随工具转移。",
         "difference_rows": [
           {
-            "AI主要改变": "编码建议与手册检索辅助",
-            "仍由人负责": "编码判断与依据确认",
-            "方向": "编码与分类"
+            "AI主要改变": "合计差额提示，编辑假设",
+            "仍由人负责": "确认50千克差异来源，不自动加料",
+            "方向": "量账核对"
           },
           {
-            "AI主要改变": "完整性检查与缺项提示",
-            "仍由人负责": "完整性与合规结论",
-            "方向": "记录审核"
+            "AI主要改变": "时间与差值摘要，编辑假设",
+            "仍由人负责": "核校准与真实工况，不给温度设定",
+            "方向": "读数整理"
           },
           {
-            "AI主要改变": "发布清单与权限核对",
-            "仍由人负责": "发布范围与法规责任",
-            "方向": "信息发布"
+            "AI主要改变": "样品编号缺项提示，编辑假设",
+            "仍由人负责": "负责人核F07/F70及取样放行",
+            "方向": "批次交接"
           }
         ],
         "evidence_intro": "三类证据分开核对：任务能力、组织采用与岗位结果不能互相替代。",
         "evidence_rows": [
           {
-            "使用限制": "为全球暴露度指标，不构成地区采用率或替代结论。",
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "研究对象": "生成式 AI 暴露度（ILO 全球职业指数）",
-            "结论": "暴露度为任务层面指标，不等于采用率或岗位结果",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+            "使用限制": "仅按官方职业任务/软件/统计范围使用；辅助推演是编辑假设，不证明采用、安全或岗位结果。",
+            "来源": "O*NET51-4051任务",
+            "研究对象": "炉前任务",
+            "结论": "监控熔炼、取样、温度及协同",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00"
           },
           {
-            "使用限制": "软件需求列表不等于生成式 AI 采用率或替代证据。",
-            "来源": "Hot Technologies 29-2072.00 Medical Records Specialists",
-            "研究对象": "在需求软件技能（O*NET Hot Technologies）",
-            "结论": "列入者多为电子病历与办公软件，属工具线索",
-            "链接": "https://www.onetonline.org/link/hot_tech/29-2072.00"
+            "使用限制": "仅按官方职业任务/软件/统计范围使用；辅助推演是编辑假设，不证明采用、安全或岗位结果。",
+            "来源": "O*NET51-4051摘要",
+            "研究对象": "职业身份",
+            "结论": "熔化精炼金属或生产钢种",
+            "链接": "https://www.onetonline.org/link/summary/51-4051.00"
           },
           {
-            "使用限制": "为美国职业口径，不推定中国大陆对应关系。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "研究对象": "职业身份与职责范围（O*NET 29-2072.00）",
-            "结论": "职责为汇总、维护记录并编入编码系统",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "使用限制": "仅按官方职业任务/软件/统计范围使用；辅助推演是编辑假设，不证明采用、安全或岗位结果。",
+            "来源": "O*NET软件",
+            "研究对象": "工具线索",
+            "结论": "过程控制/安全/生产追踪软件非生成式采用证据",
+            "链接": "https://www.onetonline.org/link/hot_tech/51-4051.00"
           },
           {
-            "使用限制": "行业分布是雇主场景信号，不是需求预测。",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "研究对象": "行业分布（O*NET Industries）",
-            "结论": "医疗与社会援助约占 64%，其余为其他行业",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00"
+            "使用限制": "仅按官方职业任务/软件/统计范围使用；辅助推演是编辑假设，不证明采用、安全或岗位结果。",
+            "来源": "O*NET全国工资",
+            "研究对象": "工资范围",
+            "结论": "2025工资非工具效能",
+            "链接": "https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
-            "使用限制": "工作情境为调查结果，不替代雇主与地方法规。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "研究对象": "任务与工作情境（O*NET 29-2072.00）",
-            "结论": "记录汇总、编码与审核为本职业任务特征",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
+            "使用限制": "仅按官方职业任务/软件/统计范围使用；辅助推演是编辑假设，不证明采用、安全或岗位结果。",
+            "来源": "O*NET全国趋势",
+            "研究对象": "就业范围",
+            "结论": "2024—2034预测非AI净结果",
+            "链接": "https://www.onetonline.org/link/localtrends/51-4051.00"
           }
         ],
         "heading": "金属精炼炉操作员与看护员的熔炼任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "编码建议、文本抽取、记录检索与表单核对可被软件辅助；编码判断、发布与合规责任仍由人负责。",
-            "概念": "任务层面的可被辅助能力"
+            "含义": "按炉次任务推演数据整理及差异提示，不证明真实采用。",
+            "概念": "任务辅助假设"
           },
           {
-            "含义": "工具出现或厂商演示不等于机构已采用；需核对数据许可、隐私与安全、接口验证与变更控制。",
-            "概念": "机构采用的前置条件与验证"
+            "含义": "核设备接口、仪表可靠性、授权及现场安全验证，不凭演示接入控制。",
+            "概念": "现场采用核验"
           },
           {
-            "含义": "任务暴露不等于采用率、失业概率或替代日期。",
-            "概念": "岗位结果与净就业结论边界"
+            "含义": "工具辅助不等于净裁员、工资变化或替代日期。",
+            "概念": "岗位结果边界"
           }
         ],
         "questions": [
           {
-            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "AI 会取代病历记录专员吗？"
+            "回答": "现有任务线索不能证明净岗位结果或替代日期。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "AI会取代炉前操作吗？"
           },
           {
-            "回答": "编码建议与手册检索可被辅助，但编码判断与依据仍由有资质者负责。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "编码能自动完成吗？"
+            "回答": "不能，虚构记录缺量原因未知，只列差异待负责人核。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "差50千克要直接补料吗？"
           },
           {
-            "回答": "记录发布与披露由授权人按法规与机构政策确认。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "记录发布能自动放行吗？"
+            "回答": "不能，校准和工艺限值未给，不作真实炉况结论。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "15℃差能说明炉温合格吗？"
           },
           {
-            "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "该用哪些证据判断影响？"
+            "回答": "F07/F70不一致列待核，不猜归属或直接改标签。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "怎样核样品编号？"
           },
           {
-            "回答": "隐私、合规与发布责任不能被工具替代。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "工具能替代合规判断吗？"
+            "回答": "不能，本页工具和练习不授予工艺或安全权限。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "工具可以批准出钢吗？"
           },
           {
-            "回答": "检索可自动化，但调取权限与用途仍由人核对。",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00",
-            "问题": "记录检索能完全自动化吗？"
+            "回答": "需现场授权、接口与仪表验证等实际证据，软件目录不能证明已采用。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "什么才是采用证据？"
           },
           {
-            "回答": "需核对数据许可、隐私与安全、接口验证与变更控制。",
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "问题": "如何核对工具的采用与验证条件？"
+            "回答": "使用ABC虚构包和参考，算量账读数差及交接，不接炉子能源。",
+            "来源": "本职业任务基础与编辑假设",
+            "链接": "https://www.onetonline.org/link/details/51-4051.00",
+            "问题": "如何开始纸面试验？"
           }
         ],
         "responsibility_intro": "人的责任链：从核对输入、限定任务，到人工复核与记录升级。",
         "responsibility_steps": [
           {
-            "步骤": "核对输入",
-            "说明": "确认患者身份、就诊记录与来源。"
+            "步骤": "核输入",
+            "说明": "只用ABC虚构炉次，不读取控制设备。"
           },
           {
-            "步骤": "限定任务",
-            "说明": "只在已验证的编码与信息系统内辅助。"
+            "步骤": "限任务",
+            "说明": "只做量账、时间、批次及未知清单。"
           },
           {
             "步骤": "人工复核",
-            "说明": "由有资质者确认编码、审核与发布。"
+            "说明": "负责人核校准、样品及工艺。"
           },
           {
-            "步骤": "隐私优先",
-            "说明": "按隐私与安全要求处理访问与披露。"
+            "步骤": "核授权",
+            "说明": "参数、出钢及停炉须按实际职责。"
           },
           {
-            "步骤": "记录并升级",
-            "说明": "偏差与异常立即记录并按流程升级。"
+            "步骤": "记录升级",
+            "说明": "真实异常按现场应急流程及时交有权限者。"
           }
         ],
         "risk_rows": [
           {
-            "为什么重要": "可能影响报销、统计与诊疗追溯。",
-            "控制方式": "按编码规则复核并由责任人确认。",
-            "风险": "编码或分类错误"
+            "为什么重要": "错误加料可影响工况",
+            "控制方式": "50千克差异只列待核",
+            "风险": "臆造缺量"
           },
           {
-            "为什么重要": "影响连续照护与合规审计。",
-            "控制方式": "按完整性清单核对并补齐。",
-            "风险": "记录缺失或不完整"
+            "为什么重要": "校准未给不能判合格",
+            "控制方式": "不据15℃差设置参数",
+            "风险": "读数当真实炉温"
           },
           {
-            "为什么重要": "可能违反隐私法规与机构政策。",
-            "控制方式": "按授权与法规确认发布范围。",
-            "风险": "越权发布或披露信息"
+            "为什么重要": "影响成分追溯",
+            "控制方式": "核F07/F70不改标签",
+            "风险": "样品炉次错配"
           },
           {
-            "为什么重要": "可能把信息关联到错误患者。",
-            "控制方式": "按身份核对流程确认记录归属。",
-            "风险": "身份混淆或记录错配"
+            "为什么重要": "记录辅助不授安全权",
+            "控制方式": "不连接设备或能源",
+            "风险": "工具越权控制"
           },
           {
-            "为什么重要": "可能放大差错并影响合规。",
-            "控制方式": "保留审核留痕并按流程升级。",
-            "风险": "时间压力下跳过审核"
+            "为什么重要": "责任与结果不可追溯",
+            "控制方式": "缺项保留交负责人",
+            "风险": "伪造签字放行"
           }
         ],
         "task_rows": [
           {
-            "人的控制点": "由责任人确认记录真实与来源",
-            "任务": "汇总并维护患者医疗记录与索引",
-            "工作方向": "记录汇总与索引",
-            "当前变化": "记录汇总与检索可被系统辅助"
+            "人的控制点": "核实际称重及来源，不能自动补料",
+            "任务": "核装料记录",
+            "工作方向": "量账",
+            "当前变化": "合计与差额提示（编辑假设）"
           },
           {
-            "人的控制点": "核对字段定义与数据来源",
-            "任务": "录入人口学、病史与诊疗数据",
-            "工作方向": "数据录入",
-            "当前变化": "结构化录入与校验可被辅助"
+            "人的控制点": "核仪表校准及工艺条件",
+            "任务": "整理参数时间",
+            "工作方向": "炉况",
+            "当前变化": "趋势摘要（编辑假设）"
           },
           {
-            "人的控制点": "由有资质者确认编码与依据",
-            "任务": "把诊断与操作编入标准编码系统",
-            "工作方向": "编码与分类",
-            "当前变化": "编码建议与手册检索可比对辅助"
+            "人的控制点": "负责人确认归属及成分",
+            "任务": "核样品炉次",
+            "工作方向": "取样",
+            "当前变化": "编号比对（编辑假设）"
           },
           {
-            "人的控制点": "由审核人确认完整性与合规",
-            "任务": "核对记录完整性、准确与合规",
-            "工作方向": "记录审核",
-            "当前变化": "完整性检查与缺项提示可自动化"
+            "人的控制点": "技术质量人员判定",
+            "任务": "整理检验结果",
+            "工作方向": "质量",
+            "当前变化": "缺项提示（编辑假设）"
           },
           {
-            "人的控制点": "由授权人确认发布范围与法规",
-            "任务": "按法规向授权方发布信息",
-            "工作方向": "信息发布",
-            "当前变化": "发布清单与权限核对可被辅助"
+            "人的控制点": "实际调度及安全责任不自动化授权",
+            "任务": "记录加料出钢交接",
+            "工作方向": "协同",
+            "当前变化": "交接表整理（编辑假设）"
           },
           {
-            "人的控制点": "核对调取权限与用途",
-            "任务": "为医护与技术人员调取记录",
-            "工作方向": "记录检索",
-            "当前变化": "检索与调取可自动完成"
+            "人的控制点": "按现场规程交有权限人员",
+            "任务": "登记能源仪表异常",
+            "工作方向": "设备",
+            "当前变化": "异常信息摘要（编辑假设）"
           },
           {
-            "人的控制点": "由责任人确认保密与处置",
-            "任务": "保护记录保密与数据安全",
-            "工作方向": "保密与合规",
-            "当前变化": "访问日志与异常提示可自动化"
+            "人的控制点": "不补造校准签字或合格结果",
+            "任务": "保留炉次与班次",
+            "工作方向": "记录",
+            "当前变化": "格式检查（编辑假设）"
           }
         ],
-        "transition": "从病历记录专员转向相邻方向，优先比较可迁移能力，再补齐目标方向特有的知识与资格要求。"
+        "transition": "比较铸造、热处理、设备维护方向，另核任务与授权，不因记录能力自动转岗。"
       },
       "breadcrumb": {
-        "label": "金属操作员看护员",
+        "label": "金属精炼炉操作员与看护员",
         "slug": "metal-refining-furnace-operators-and-tenders"
       },
       "career_path_block": {
@@ -14185,55 +14237,55 @@
         },
         "competence_ladder": [
           {
-            "description": "确认患者身份、就诊记录与来源。",
-            "stage": "核对输入"
+            "description": "ABC量账读数及批次未知，只记录交接。",
+            "stage": "纸面核对"
           },
           {
-            "description": "按编码规则整理、分类并保留依据。",
-            "stage": "整理与编码"
+            "description": "先核资格权限，再按实际炉型规程训练。",
+            "stage": "受监督训练"
           },
           {
-            "description": "按清单核对完整性、合规并处理发布。",
-            "stage": "审核与发布"
+            "description": "按授权承担监控取样与协同，不自动扩权。",
+            "stage": "岗位内作业"
           },
           {
-            "description": "在授权范围内扩展复核、带教与规范职责。",
-            "stage": "责任扩展"
+            "description": "另核工艺质量和应急责任链与证据。",
+            "stage": "复杂协作"
           }
         ],
-        "direct_answer": "入口看能否按规程监控炉况并在高温与起重环境中遵守安全；本轮未取得可安全提取的准备层级，作业与培训要求按雇主与法域核验。",
+        "direct_answer": "入口先核炉型、培训及授权；美国JobZone1—2一般准备不能代替本职业或中国具体门槛，纸面练习不等于现场操作。",
         "entry_heading": "入行路径与可检查证据",
         "heading": "金属精炼炉操作员与看护员的入行路径、资格边界与职业发展",
         "locale_requirements": {
           "credential_boundary": "学位、职业培训、作业证书与岗位授权不是同一状态；能否从事高温、起重或能源作业取决于雇主与场所规则。",
           "jurisdiction": "美国按雇主与培训路径核验；中国大陆按用人单位、冶金与特种作业规则核验。",
-          "summary": "美国：本轮未取得可安全提取的准备层级，常见路径为在岗训练与职业培训；中国大陆的学历、高温与特种作业边界按用人单位与主管部门规则核验。"
+          "summary": "美国O*NET Job Zone 1—2：通常高中或GED，部分职业可更低；一般在岗训练从数天到一年，不是本职业统一学历时数，更不设中国门槛。教育栏当前仅列部分岗位高中/低于高中，不据此计算比例。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "bls",
-            "label": "FermatMind 金属操作员看护员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.onetonline.org/link/details/51-4051.00",
+            "id": "onet-details",
+            "label": "任务与JobZone",
+            "scope": "本职业一般准备/训练入口，不证明中国资格或完成培训。"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "nasa",
-            "label": "FermatMind 金属操作员看护员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.onetonline.org/link/summary/51-4051.00",
+            "id": "onet-summary",
+            "label": "职业摘要",
+            "scope": "本职业一般准备/训练入口，不证明中国资格或完成培训。"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
+            "href": "https://www.onetonline.org/link/localtraining/51-4051.00",
             "id": "onet-training",
-            "label": "FermatMind 金属操作员看护员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "训练目录",
+            "scope": "本职业一般准备/训练入口，不证明中国资格或完成培训。"
           },
           {
             "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "faa",
-            "label": "FermatMind 金属操作员看护员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "id": "onet-cert",
+            "label": "认证目录",
+            "scope": "本职业一般准备/训练入口，不证明中国资格或完成培训。"
           }
         ],
         "tracks": [
@@ -14241,32 +14293,32 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立整理。",
-                "readiness_evidence": "保留整理与录入练习记录。",
-                "responsibility": "在监督下整理记录并录入数据。",
-                "role": "整理学习"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "明确虚构的差额与交接作品",
+                "responsibility": "ABC三笔950对1000，差额未知",
+                "role": "纸面量账"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立编码。",
-                "readiness_evidence": "出示数据校验与整理记录。",
-                "responsibility": "独立完成常见记录的整理与数据校验。",
-                "role": "独立整理"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "师傅复核的真实训练记录",
+                "responsibility": "按已核培训权限练监控与记录",
+                "role": "监督训练"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到复杂编码与审核。",
-                "readiness_evidence": "出示编码与依据记录。",
-                "responsibility": "按编码规则分类并保留依据。",
-                "role": "编码负责"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "真实炉次参数与异常记录",
+                "responsibility": "按授权监控炉况并交接",
+                "role": "岗位监控"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
-                "readiness_evidence": "出示复核与带教记录。",
-                "responsibility": "在授权范围内复核并带教编码。",
-                "role": "编码带教"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "经责任人复核协同记录",
+                "responsibility": "按权限协同复杂炉次及改进",
+                "role": "复杂协同"
               }
             ],
             "title": "炉况操作能力"
@@ -14275,32 +14327,32 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立审核。",
-                "readiness_evidence": "保留合规练习记录。",
-                "responsibility": "学习隐私与记录合规要求。",
-                "role": "合规学习"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "虚构批次未知清单",
+                "responsibility": "ABC编号F07/F70不一致交核",
+                "role": "样品核对"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到合规体系支持。",
-                "readiness_evidence": "出示审核与缺项记录。",
-                "responsibility": "独立核对记录完整性与合规。",
-                "role": "独立审核"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "受监督训练记录",
+                "responsibility": "按培训授权范围参与取样记录",
+                "role": "取样训练"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到审计准备。",
-                "readiness_evidence": "出示合规改进与整改记录。",
-                "responsibility": "参与合规与审计流程改进。",
-                "role": "合规体系支持"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "可追溯取样与检验交接",
+                "responsibility": "核样品归属及结果交质量人员",
+                "role": "质量协作"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
-                "readiness_evidence": "出示规范与培训记录。",
-                "responsibility": "在授权范围内维护合规规范。",
-                "role": "规范与带教"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "质量责任人复核的改进记录",
+                "responsibility": "按职责参与流程复核",
+                "role": "质量改进"
               }
             ],
             "title": "成分与质量控制"
@@ -14309,32 +14361,32 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立沟通。",
-                "readiness_evidence": "保留沟通与交接练习记录。",
-                "responsibility": "学习与医护和编码部门的交接要求。",
-                "role": "沟通学习"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "纸面未知与负责人清单",
+                "responsibility": "ABC不接炉子能源不作安全结论",
+                "role": "边界学习"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到发布与索引管理。",
-                "readiness_evidence": "出示沟通与复核记录。",
-                "responsibility": "向医护人员说明记录状态与流程。",
-                "role": "独立沟通"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "真实训练及权限说明",
+                "responsibility": "按机构安排训练交接与应急流程",
+                "role": "监督演练"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到信息管理职责。",
-                "readiness_evidence": "出示发布与索引记录。",
-                "responsibility": "管理发布、索引与保留安排。",
-                "role": "信息与发布管理"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "时间事实与责任交接记录",
+                "responsibility": "按现场规程和岗位职责报告异常",
+                "role": "授权协作"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则取得授权。",
-                "readiness_evidence": "出示信息管理与评估记录。",
-                "responsibility": "在授权范围内支持信息管理职责。",
-                "role": "责任扩展"
+                "credentials": "按炉型、雇主与实际作业所在地规则核训练及权限。",
+                "next_moves": "先核目标职责训练与授权，不按年限自动晋级。",
+                "readiness_evidence": "核准的带教与规程记录",
+                "responsibility": "取得相应授权后参与培训改进",
+                "role": "带教协作"
               }
             ],
             "title": "安全与应急能力"
@@ -14503,112 +14555,131 @@
       },
       "career_risk_cards": {
         "boundary": {
-          "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.1",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "context_links": [
-          {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-work-risk"
-          }
-        ],
-        "direct_answer": {
-          "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.2",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "evidence_scope": {
-          "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.3",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "heading": "工作压力、风险与职业责任边界",
-        "risks": [
-          {
-            "affected_roles": {
-              "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.4",
+          "$join": [
+            "任务编辑风险提示不替代现场规程或法律。",
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.1",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "consequence": {
+            {
               "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.5",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
+        "context_links": [
+          {
+            "href": "#career-visual-group-risk",
+            "label": "查看工作风险与边界"
+          }
+        ],
+        "direct_answer": {
+          "$join": [
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
             },
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.4",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
+        "evidence_scope": {
+          "$join": [
+            "按任务情境归纳风险，不是事故率或法规结论。",
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
+        "heading": "工作压力、风险与职业责任边界",
+        "risks": [
+          {
+            "affected_roles": "炉前操作与协同岗位",
+            "consequence": "可能造成人员烧伤与设备风险。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "cost-change",
             "mitigation": "按要求佩戴高温防护并按规程作业。",
             "scenario": "高温或钢水喷溅造成烧伤。",
-            "title": "金属操作员看护员"
+            "title": "高温与熔融金属喷溅"
           },
           {
             "affected_roles": "加料与出钢岗位",
             "consequence": "可能造成人员与设备事故。",
             "evidence_refs": [
-              "onet",
-              "privacy"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "record-version",
             "mitigation": "按起重与指挥规程作业并复核。",
             "scenario": "起重与运输作业失误。",
-            "title": "金属操作员看护员"
+            "title": "起重运输协同失误"
           },
           {
             "affected_roles": "熔炼与取样岗位",
             "consequence": "影响钢种合格率与后续工序。",
             "evidence_refs": [
-              "privacy",
-              "privacy"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "personal-data",
             "mitigation": "按取样与调整规程操作并复核记录。",
             "scenario": "成分或温度控制偏差。",
-            "title": "金属操作员看护员"
+            "title": "成分或温度控制偏差"
           },
           {
             "affected_roles": "看护与仪控岗位",
             "consequence": "可能造成设备损坏与停炉。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "technical-boundary",
             "mitigation": "按异常处置与升级流程操作。",
             "scenario": "能源或仪表异常未及时处置。",
-            "title": "金属操作员看护员"
+            "title": "能源仪表异常"
           },
           {
             "affected_roles": "一线操作岗位",
             "consequence": "可能放大差错并影响安全。",
             "evidence_refs": [
-              "bls",
-              "bls"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "single-coverage",
             "mitigation": "按交接与休息制度执行并保留记录。",
             "scenario": "倒班疲劳导致操作与记录失误。",
-            "title": "金属操作员看护员"
+            "title": "倒班疲劳与交接缺失"
           },
           {
             "affected_roles": "操作与管理岗位",
             "consequence": "可能导致授权与责任错配。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "source-pack-onet-custom"
             ],
             "id": "delivery-acceptance",
             "mitigation": "按 O*NET 51-4051.00 的范围区分相邻岗位。",
             "scenario": "把本职业与其他冶金或机加工岗位混为一谈。",
-            "title": "金属操作员看护员"
+            "title": "相邻职责授权误用"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -14678,41 +14749,41 @@
           },
           "china_edu_table": [
             {
-              "学历段": "基础训练",
-              "岗位方向": "设备维护与技术支持",
-              "说明": "按雇主、设备类型和授权要求核对。"
+              "学历段": "准备核对",
+              "岗位方向": "炉前任务学习",
+              "说明": "美国一般JobZone1—2不设中国统一学历。"
             },
             {
-              "学历段": "相关专业",
-              "岗位方向": "医疗设备维修与保养",
-              "说明": "学历不是执业授权或结果放行的替代。"
+              "学历段": "训练阶段",
+              "岗位方向": "受监督学习与记录",
+              "说明": "纸面ABC不证明实操或完成训练。"
             },
             {
-              "学历段": "经验阶段",
-              "岗位方向": "现场服务与故障诊断",
-              "说明": "用可复核工作样本证明能力边界。"
+              "学历段": "作业核对",
+              "岗位方向": "起重能源等具体职责",
+              "说明": "按实际作业和所在地规则核是否需证，不宣称统一高温证书。"
             },
             {
-              "学历段": "进阶阶段",
-              "岗位方向": "质量、校准与责任交接",
-              "说明": "具体要求以机构流程和所在地规则为准。"
+              "学历段": "岗位授权",
+              "岗位方向": "参数与协同权限",
+              "说明": "课程与作业证不自动授予调整或出钢权。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "医院与临床工程",
-              "需求": "需核对设备范围、值班与授权链。"
+              "行业": "金属制造场景",
+              "需求": "按编辑任务归纳，核实际炉型与职责，不推算中国工资。"
             },
             {
-              "行业": "设备制造商服务",
-              "需求": "需核对厂商培训、现场服务与记录要求。"
+              "行业": "铸造前熔炼场景",
+              "需求": "核熔化精炼与浇注分工，不把场景当招聘样本。"
             },
             {
-              "行业": "第三方维修服务",
-              "需求": "需核对合同边界、出差与责任交接。"
+              "行业": "钢种生产场景",
+              "需求": "核工艺与安全责任链，不推算需求人数。"
             }
           ],
-          "china_intl": "National Certifications 51-4051.00 Metal Refining Furnace Operators And Tenders｜https://www.onetonline.org/link/localcert/51-4051.00",
+          "china_intl": "美国职业准备｜https://www.onetonline.org/link/details/51-4051.00#JobZone",
           "china_name_row": {
             "$item": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.1",
             "block": "china-salary",
@@ -14724,7 +14795,7 @@
           "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "china_salary_note": {
             "$join": [
-              "中国精确职业工资数据不可得；本页不展示或换算中国薪资数字。",
+              "本页未取得精确中国职业工资，不证明不存在统计，不展示或换算工资数字。",
               {
                 "$item": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.5",
                 "block": "china-salary",
@@ -14749,17 +14820,23 @@
             }
           ],
           "china_soc_row": {
-            "$item": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.2",
-            "block": "china-salary",
-            "copy_key": "career.item.career-snapshot-primary-locale",
-            "type": "prose"
+            "$join": [
+              {
+                "$item": "metal-refining-furnace-operators-and-tenders.china-salary.career-snapshot-primary-locale.2",
+                "block": "china-salary",
+                "copy_key": "career.item.career-snapshot-primary-locale",
+                "type": "prose"
+              },
+              "此前公开资料有界核查未取得与51-4051精确对应的中国全国职业工资，不证明没有发布；本页不生成精确中位数、分位或稳定月薪。"
+            ],
+            "separator": "；"
           },
           "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
             "official_heading": "中国工资数据状态",
-            "scenario_caption": "不以不可得的精确数字替代证据。",
+            "scenario_caption": "以下为训练与授权核对场景，不是中国工资区间或学历统计。",
             "scenario_heading": "场景化判断",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "岗位方向",
@@ -14770,55 +14847,71 @@
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+        "authority_sources": "全国工资｜https://www.onetonline.org/link/localwages/51-4051.00",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$39,200/年（2025）",
+            "说明": "全国工资51-4051｜https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$46,080/年（2025）",
+            "说明": "全国工资51-4051｜https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
-            "指标": "薪资中位数",
-            "数值": "$61,660",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "指标": "薪资第50百分位",
+            "数值": "$54,430/年（2025）",
+            "说明": "全国工资51-4051｜https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$62,810/年（2025）",
+            "说明": "全国工资51-4051｜https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$74,470/年（2025）",
+            "说明": "全国工资51-4051｜https://www.onetonline.org/link/localwages/51-4051.00"
           },
           {
             "指标": "就业人数",
-            "数值": "71,800",
-            "说明": "National Certifications 51-4051.00 Metal Refining Furnace Operators And Tenders｜https://www.onetonline.org/link/localcert/51-4051.00"
+            "数值": "20,800人（2024）；预计20,300人（2034）",
+            "说明": "全国趋势51-4051｜https://www.onetonline.org/link/localtrends/51-4051.00"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "12.6%",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "指标": "就业累计增长",
+            "数值": "-2%（2024—2034）",
+            "说明": "全国趋势51-4051｜https://www.onetonline.org/link/localtrends/51-4051.00"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "8,200",
-            "说明": "National Certifications 51-4051.00 Metal Refining Furnace Operators And Tenders｜https://www.onetonline.org/link/localcert/51-4051.00"
+            "指标": "就业年均职位空缺",
+            "数值": "2,000个/年（2024—2034）",
+            "说明": "全国趋势51-4051｜https://www.onetonline.org/link/localtrends/51-4051.00"
           }
         ],
-        "boundary": "美国数据只适用于 metal-refining-furnace-operators-and-tenders 的标注期间；不外推中国，也不构成个人收入或录用保证。",
+        "boundary": {
+          "$join": [
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "美国51-4051全国职业口径；分位非资历，不外推中国或个人保证。"
+          ],
+          "separator": "；"
+        },
         "direct_answer": {
           "$join": [
-            "金属操作员看护员的美国中位年薪事实可以单独引用，但工资分位分布未取得同范围可解释数据，因此不补写分位数。",
             {
               "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.1",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
@@ -14828,67 +14921,61 @@
         },
         "factor_rows": [
           {
-            "answer": "核对设备类型、校准、测试和结果放行责任。",
-            "factor": "设备与责任范围"
+            "answer": "核炉型、加料出钢协同、参数与权限，不套医疗设备维修。",
+            "factor": "设备与责任"
           },
           {
-            "answer": "核对值班、出差、现场服务和区域差异。",
-            "factor": "地点与班次"
+            "answer": "核轮班连续作业、福利与所在地条件。",
+            "factor": "地区与班次"
           },
           {
-            "answer": "核对雇主培训、认证偏好和可复核工作样本。",
-            "factor": "资格与经验"
+            "answer": "核实际训练、可复核记录及对应作业授权。",
+            "factor": "训练与授权"
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "12.6%",
-        "heading": "金属操作员看护员的美国薪资与就业数据边界",
+        "growth": "-2%",
+        "heading": "金属精炼炉操作员与看护员：美国工资与就业",
         "industry_heading": "行业与岗位差异",
-        "industry_period": "2025",
+        "industry_period": "原页未标统计年；查询2026-10-01",
         "industry_rows": [
           {
-            "industry": "医院与临床工程",
-            "median": "需核对具体岗位",
-            "note": "设备范围、值班和授权可能不同。"
+            "industry": "制造业",
+            "median": "本页未列分行业工资",
+            "note": {
+              "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
           },
           {
-            "industry": "设备制造商服务",
-            "median": "需核对具体岗位",
-            "note": "厂商培训、现场服务与出差要求可能不同。"
+            "industry": "其他行业",
+            "median": "未推算",
+            "note": "占3%，不拆成具体雇主工资。"
           },
           {
-            "industry": "第三方维修服务",
-            "median": "需核对具体岗位",
-            "note": "合同边界和责任交接可能不同。"
+            "industry": "炉型与钢种",
+            "median": "须查实际岗位",
+            "note": "工艺与权限因设备及生产对象核对。"
           },
           {
-            "industry": "其他雇主与地区",
-            "median": "需核对具体岗位",
-            "note": "地点、经验、福利与资格会改变实际条件。"
+            "industry": "地区与班次",
+            "median": "须查实际岗位",
+            "note": "班次福利培训要求不由全国工资保证。"
           }
         ],
-        "industry_value_label": "岗位数据",
+        "industry_value_label": "行业工资状态",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
-            "answer": {
-              "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
-                {
-                  "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "question": "中位工资代表什么？"
+            "answer": "2025OEWS全国分布，不能套用个人经验等级。",
+            "question": "工资分位"
           },
           {
             "answer": {
               "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
+                "实际报价须核炉型、班次与训练。",
                 {
                   "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.6",
                   "block": "us-salary",
@@ -14898,78 +14985,50 @@
               ],
               "separator": "；"
             },
-            "question": "为什么不展示分位数？"
+            "question": "地区与班次"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
-            "question": "就业人数代表什么？"
+            "answer": "2024存量与2034预测，不是当日在招。",
+            "question": "就业人数"
           },
           {
-            "answer": "增长预测和年度空缺是市场信号，不是个人录用概率。",
-            "question": "增长与空缺如何使用？"
+            "answer": {
+              "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "空缺含义"
           }
         ],
-        "median": "$61,660",
+        "median": "$54,430/年",
         "outlook_heading": "就业前景",
-        "outlook_period": "2025—2035",
+        "outlook_period": "2024—2034",
         "wage_column_labels": [
-          "工资层级",
+          "统计分位",
           "年薪参考",
-          "月度等值",
-          "解释"
+          "小时参考",
+          "范围解释"
         ],
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
-            "interpretation": {
-              "$join": [
-                "仅表示中位年薪事实，不是起薪或个人报价。",
-                {
-                  "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.2",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "已取得的中位水平",
-            "value": "$61,660"
+            "equivalent": "$18.85/小时",
+            "interpretation": "2025美国本职业统计位置，不是起薪、资历或到手收入。",
+            "label": "第10百分位",
+            "value": "$39,200/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "$26.17/小时",
+            "interpretation": "2025美国本职业统计位置，不是起薪、资历或到手收入。",
+            "label": "第50百分位",
+            "value": "$54,430/年"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "metal-refining-furnace-operators-and-tenders.us-salary.career-snapshot-secondary-locale.4",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "$35.81/小时",
+            "interpretation": "2025美国本职业统计位置，不是起薪、资历或到手收入。",
+            "label": "第90百分位",
+            "value": "$74,470/年"
           }
         ]
       },
@@ -14999,184 +15058,202 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "how": {
-          "$item": "metal-refining-furnace-operators-and-tenders.quick-decision.fit-decision-checklist.2",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
-        },
+        "how": "完全虚构纸面包，60分钟，不接触炉子、钢水或危险能源。A：模拟记录要求炉次F07、装料记录总量1000千克，任何关键测量缺确认先交负责人核验；这只是题内规则，不是工艺配方。B：台账列三笔原料400/350/200千克，报表总量写1000千克；08:00/08:10显示温度1540/1555℃，传感器校准状态未给。C：取样标号F70而台账F07，成分报告未回、交班签字缺失；下一班问能否直接出钢。整理量账、时间/批次、未知项与交接草案，只标记差异和须有权限者决定的事项，不计算加料量、温度设定、合格成分或出钢许可。 参考交付：三笔合计950千克，与总量1000相差50千克，不知道漏记还是错误，不能补造一笔；温度显示增加15℃只是两次读数差，校准未知不能证明真实炉温或是否合格。F07/F70批次不一致须核样品归属，成分未回和签字缺失不允许学习者给出钢结论；记录未知、负责人和待确认事项，不签真实交班或宣称产品合格。",
         "suit": {
-          "$item": "metal-refining-furnace-operators-and-tenders.quick-decision.fit-decision-checklist.3",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.quick-decision.fit-decision-checklist.3",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            },
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.quick-decision.fit-decision-checklist.2",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
         }
       },
       "hero": {
-        "h1": "金属操作员看护员",
-        "quick_answer": "金属操作员看护员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则。",
-        "title": "金属操作员看护员"
+        "h1": "金属精炼炉操作员与看护员",
+        "quick_answer": "金属精炼炉操作员与看护员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则。",
+        "title": "金属精炼炉操作员与看护员"
       },
       "market_signal_card": {
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "查看市场与转型说明"
           },
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "核工资和年均趋势口径"
           }
         ],
         "direct_answer": {
-          "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.1",
-          "block": "market-signals",
-          "copy_key": "career.item.market-signal-card",
-          "type": "prose"
-        },
-        "heading": "职业前景、市场信号与相关职业转向",
-        "outlook_evidence": [
-          {
-            "geography": {
-              "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.2",
+          "$join": [
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.1",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "horizon": {
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          ],
+          "separator": "；"
+        },
+        "heading": "职业前景、市场信号与相关职业转向",
+        "outlook_evidence": [
+          {
+            "geography": "美国全国",
+            "horizon": "2025",
+            "interpretation": {
+              "$join": [
+                "本职业中位非起薪。",
+                {
+                  "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.2",
+                  "block": "market-signals",
+                  "copy_key": "career.item.market-signal-card",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
+            },
+            "limitation": "不外推中国个人收入。",
+            "metric": "年薪中位数",
+            "occupation_scope": "Metal-Refining Furnace Operators and Tenders，51-4051本职业",
+            "source_id": "onet-wages",
+            "value": "$54,430/年"
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "含替换需求，非十年合计。",
+            "limitation": {
               "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.3",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "interpretation": {
+            "metric": "年均空缺",
+            "occupation_scope": "Metal-Refining Furnace Operators and Tenders，51-4051本职业",
+            "source_id": "onet-trends",
+            "value": "2,000个/年"
+          },
+          {
+            "geography": "美国全国",
+            "horizon": "2024—2034",
+            "interpretation": "下降与替换空缺可并存。",
+            "limitation": {
               "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.4",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "limitation": {
-              "$item": "metal-refining-furnace-operators-and-tenders.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "metric": "年薪中位数（2025）",
-            "occupation_scope": "展示口径：Metal-Refining Furnace Operators and Tenders（O*NET 51-4051.00）",
-            "source_id": "ep",
-            "value": "54,430 美元/年"
-          },
-          {
-            "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
-            "limitation": "不能作为个人录用概率。",
-            "metric": "年均职位空缺",
-            "occupation_scope": "展示口径：29-2072.00",
-            "source_id": "bls",
-            "value": "约 2,000 个/年"
-          },
-          {
-            "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "就业规模、净变化、增长率与空缺必须分别解释。",
-            "limitation": "为统计预测，不构成单列本职业就业保证。",
             "metric": "就业规模与变化",
-            "occupation_scope": "展示口径：29-2072.00",
-            "source_id": "nbs",
-            "value": "2024 年约 20,800 人，2034 年预计约 20,300 人"
+            "occupation_scope": "Metal-Refining Furnace Operators and Tenders，51-4051本职业",
+            "source_id": "onet-trends",
+            "value": "20,800→20,300人；-2%"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "bls",
-            "label": "National Wages 51-4051.00 Metal-Refining Furnace Operators and Tenders",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.onetonline.org/link/localwages/51-4051.00",
+            "id": "onet-wages",
+            "label": "全国工资",
+            "scope": "2025本职业"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "ep",
-            "label": "51-4051.00 - Metal-Refining Furnace Operators and Tenders",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.onetonline.org/link/localtrends/51-4051.00",
+            "id": "onet-trends",
+            "label": "全国趋势",
+            "scope": "2024—2034本职业，年均空缺"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "nbs",
-            "label": "国家统计局工资统计方法",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.onetonline.org/link/summary/51-4051.00",
+            "id": "onet-summary",
+            "label": "职业摘要",
+            "scope": "任务身份非资格互认"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "id": "onet",
-            "label": "Metal-Refining Furnace Operators and Tenders",
-            "scope": "职业范围、来源口径与责任边界"
+            "href": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+            "id": "nbs-wages",
+            "label": "国家统计局行业工资",
+            "scope": "行业平均不替代职业中位数"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "需补齐系统与数据治理知识。",
-            "shared_capabilities": "医学术语与数据标准理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "健康信息学专员",
+            "capability_gaps": "核熔炼与铸造成型分工",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+            "target_title": "模塑、制芯与铸造机械设置操作工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐通用文档与保留规则。",
-            "shared_capabilities": "记录生命周期与归档规范。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "文档管理专员",
+            "capability_gaps": "核热处理与精炼成分控制差别",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+            "target_slug": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+            "target_title": "金属与塑料热处理设备设置操作工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐业务分析与组织方法。",
-            "shared_capabilities": "流程与信息分析基础。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "管理分析师",
+            "capability_gaps": "核处理对象和设备类型",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
+            "target_slug": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
+            "target_title": "炉窑烘炉干燥及锅设备操作工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐行政与排程技能。",
-            "shared_capabilities": "医疗行政与沟通经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医务秘书与行政助理",
+            "capability_gaps": "补维修诊断与维护授权",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
+            "target_slug": "industrial-machinery-mechanics",
+            "target_title": "工业机械维修工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐管理与预算职责。",
-            "shared_capabilities": "医疗机构运作理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医疗与健康服务经理",
+            "capability_gaps": "补加工工具尺寸及设置能力",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/machinists",
+            "target_slug": "machinists",
+            "target_title": "机械加工工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐执照与临床授权。",
-            "shared_capabilities": "患者照护与医疗环境经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "注册护士",
+            "capability_gaps": "核介质工艺及作业权限",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/chemical-equipment-operators-and-tenders",
+            "target_slug": "chemical-equipment-operators-and-tenders",
+            "target_title": "化学设备操作与看护工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐执业与监督要求。",
-            "shared_capabilities": "临床流程理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医师助理",
+            "capability_gaps": "补焊接工艺设备与授权",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/welders-cutters-solderers-and-brazers",
+            "target_slug": "welders-cutters-solderers-and-brazers",
+            "target_title": "焊接切割钎焊工",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐数据库与工程技能。",
-            "shared_capabilities": "数据质量与结构理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "数据库与数据管理员",
+            "capability_gaps": "补锅炉介质规则及权限",
+            "shared_capabilities": "记录、监控与协同为待核迁移线索。",
+            "target_href": "/zh/career/jobs/stationary-engineers-and-boiler-operators",
+            "target_slug": "stationary-engineers-and-boiler-operators",
+            "target_title": "固定设备工程师与锅炉操作工",
             "transition_distance": "需补证据"
           }
         ]
@@ -15201,7 +15278,7 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "证据不足：本轮未取得 O*NET 本页可安全提取的准备层级；以培训与雇主路径核验"
+            "value": "美国O*NET Job Zone 1—2：通常高中或GED，部分职业可更低；一般在岗训练从数天到一年，不是本职业统一学历时数，更不设中国门槛。教育栏当前仅列部分岗位高中/低于高中，不据此计算比例。"
           },
           {
             "alternate_value": null,
@@ -15221,14 +15298,9 @@
       "personality_fit_block": {
         "assessments": [
           {
-            "answer": {
-              "$item": "metal-refining-furnace-operators-and-tenders.fit.riasec-fit-block.7",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "answer": "动手和按规程记录的偏好可提出探索假设，不证明安全操作能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 RCI 适配测试",
+            "cta_label": "做RIASEC兴趣探索",
             "evidence_level": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.8",
               "block": "fit",
@@ -15237,207 +15309,212 @@
             },
             "id": "riasec",
             "label": "RIASEC 兴趣代码（RC）",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "RC兴趣能说明什么？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.riasec-fit-block.1",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣代码只描述活动偏好，不能替代真实任务、编码规则与雇主判断。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做大五适配测试",
+            "answer": "不能把尽责倾向直接等同安全绩效；用受监督的真实任务另证。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "做大五人格探索",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "大五能说明安全绩效吗？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.2",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "标签只描述倾向，不能替代真实任务、合规要求与雇主判断。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 MBTI 适配测试",
+            "answer": "不能，类型不能代替炉型训练、持续监控和岗位授权。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "做MBTI类型探索",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "MBTI能决定炉前胜任吗？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.3",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "类型标签不能判断是否胜任编码或记录审核工作。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "不能，类型描述只供探索，不决定工艺与安全权限。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做九型适配测试",
+            "cta_label": "通过RIASEC继续兴趣探索",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "enneagram",
             "label": "九型人格（Enneagram）",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "九型能授予操作资格吗？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.riasec-fit-block.4",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "类型标签不构成临床沟通或合规能力证据。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "不能，认知表现不覆盖炉况经验、交接和作业授权。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做认知能力适配测试",
+            "cta_label": "通过RIASEC继续兴趣探索",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "iq",
             "label": "认知能力测验（IQ）",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "IQ分数能替代炉前训练吗？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.5",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "测验只反映部分认知特征，不覆盖编码经验与合规判断。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "不能，测评分数不是现场应急沟通和责任分工证据。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 EQ 适配测试",
+            "cta_label": "通过RIASEC继续兴趣探索",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "eq",
             "label": "情绪智力测验（EQ 量表）",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？",
+            "question": "EQ能证明应急协作吗？",
             "signals": {
               "$item": "metal-refining-furnace-operators-and-tenders.fit.personality-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "测验不构成隐私合规与跨部门协作的能力证据。"
+            "watchout": "须核真实训练、现场规则与岗位授权，不以测评判断可操作或放行。"
           }
         ],
-        "boundary": "本页仅用于职业探索；高温、能源、起重与作业安全须以所在地法规、雇主与场所规则为准，人格工具不能替代资格与安全要求。",
+        "boundary": "人格及纸面任务只供职业探索，不能替代真实高温能源起重训练、工艺确认、身体适任或岗位授权。",
         "direct_answer": "适配看可观察行为：能否按规程监控炉况与参数、能否在高温与起重环境中遵守安全、能否准确记录并交班。",
         "directions": [
           {
-            "direction": "记录汇总与索引",
-            "fit_signals": "能按索引与保留规则汇总并保存记录。",
+            "direction": "模塑、制芯与铸造机械设置操作工",
+            "fit_signals": "浇注成型任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/general-and-operations-managers",
-              "slug": "general-and-operations-managers",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+              "slug": "molding-coremaking-and-casting-machine-setters-operators-and-tenders-metal-and-plastic",
+              "title": "模塑、制芯与铸造机械设置操作工"
             },
-            "watchouts": "记录真实性与来源须复核。"
+            "watchouts": "核熔炼与铸造成型分工"
           },
           {
-            "direction": "数据录入与校验",
-            "fit_signals": "能按字段定义录入并校验数据。",
+            "direction": "金属与塑料热处理设备设置操作工",
+            "fit_signals": "热处理循环任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/purchasing-managers",
-              "slug": "purchasing-managers",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+              "slug": "heat-treating-equipment-setters-operators-and-tenders-metal-and-plastic",
+              "title": "金属与塑料热处理设备设置操作工"
             },
-            "watchouts": "字段口径与来源须核对。"
+            "watchouts": "核热处理与精炼成分控制差别"
           },
           {
-            "direction": "编码与分类",
-            "fit_signals": "能按编码规则分类并保留依据。",
+            "direction": "炉窑烘炉干燥及锅设备操作工",
+            "fit_signals": "其他炉窑处理任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/archivists",
-              "slug": "archivists",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
+              "slug": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
+              "title": "炉窑烘炉干燥及锅设备操作工"
             },
-            "watchouts": "编码结论须由有资质者确认。"
+            "watchouts": "核处理对象和设备类型"
           },
           {
-            "direction": "记录审核",
-            "fit_signals": "能按清单核对完整性、准确与合规。",
+            "direction": "工业机械维修工",
+            "fit_signals": "设备维护任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/administrative-services-managers",
-              "slug": "administrative-services-managers",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/industrial-machinery-mechanics",
+              "slug": "industrial-machinery-mechanics",
+              "title": "工业机械维修工"
             },
-            "watchouts": "审核结论须经责任人确认。"
+            "watchouts": "补维修诊断与维护授权"
           },
           {
-            "direction": "信息发布与隐私",
-            "fit_signals": "能按授权与法规处理发布与披露。",
+            "direction": "机械加工工",
+            "fit_signals": "切削与加工任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/human-resources-managers",
-              "slug": "human-resources-managers",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/machinists",
+              "slug": "machinists",
+              "title": "机械加工工"
             },
-            "watchouts": "发布范围不得越权。"
+            "watchouts": "补加工工具尺寸及设置能力"
           },
           {
-            "direction": "跨部门协作",
-            "fit_signals": "能与医护、编码与信息部门清晰交接。",
+            "direction": "化学设备操作与看护工",
+            "fit_signals": "化学生产设备任务更感兴趣，需另核实际工作。",
             "target": {
-              "href": "/zh/career/jobs/medical-and-health-services-managers",
-              "slug": "medical-and-health-services-managers",
-              "title": "FermatMind 金属操作员看护员任务影响量表"
+              "href": "/zh/career/jobs/chemical-equipment-operators-and-tenders",
+              "slug": "chemical-equipment-operators-and-tenders",
+              "title": "化学设备操作与看护工"
             },
-            "watchouts": "不越权作临床或法律结论。"
+            "watchouts": "核介质工艺及作业权限"
           }
         ],
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "不等于。RC描述动手和按规程处理数据偏好，不能证明训练、身体适任或能源操作权限。",
+            "question": "RC偏好等于安全资格吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "本页没有这种个人预测证据；应对照真实训练与记录，不能凭尽责分数放行操作。",
+            "question": "大五能预测安全表现吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "没有本页证据支持必需类型，核实际监控、配料与协同职责比类型标签重要。",
+            "question": "必须某种MBTI类型吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "不能，炉型选择需看实际训练、任务与授权，不按类型给工艺或安全结论。",
+            "question": "九型测试能决定适合炉型吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "不能。认知表现不代替炉况训练、设备规程与雇主岗位授权。",
+            "question": "IQ高能直接独立操作吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "不能。应急分工和指挥权按现场规则与职责，测评不授权限。",
+            "question": "EQ高能承担应急指挥吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "400+350+200为950千克，对1000差50，只记录差额原因未知，不补造原料或指令。",
+            "question": "纸面量账先查什么？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "只是两读数显示差，校准工艺限值未知，不能判断真实炉温或调温。",
+            "question": "温度上升15℃说明什么？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "不能。样品归属和成分未确认，交负责人核，不替换标签或给出钢许可。",
+            "question": "F07/F70能直接改一致吗？"
           },
           {
-            "answer": "金属操作员看护员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做金属操作员看护员需要怎样的能力与工作方式？"
+            "answer": "ABC差异及未知交接供探索，再核一个实际岗位炉型、训练、班次和权限并记录来源日期。",
+            "question": "下一步作品如何使用？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
         "signals": [
           {
-            "body": "愿意按规程持续监控参数、遵守高温与起重防护要求，并能准确记录与交接。",
+            "body": {
+              "$item": "metal-refining-furnace-operators-and-tenders.fit.riasec-fit-block.7",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
             "id": "fit",
             "label": "积极信号",
             "tone": "positive"
@@ -15449,7 +15526,7 @@
             "tone": "caution"
           },
           {
-            "body": "用完全虚构的炉次数据完成一次参数监控、取样与交班记录演练，再决定是否继续。",
+            "body": "用本页ABC虚构包和参考，核量账、读数、批次与交接，不接炉子钢水能源，不作工艺安全结论。",
             "id": "experiment",
             "label": "下一步试验动作",
             "tone": "action"
@@ -15457,44 +15534,44 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "Medical Records Specialists detailed occupation profile",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/details/51-4051.00",
+            "label": "任务",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/51-4051.00",
+            "label": "兴趣RC",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/51-4051.00#WorkContext",
+            "label": "情境",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/details/51-4051.00#JobZone",
+            "label": "准备层级",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/industry/51-4051.00",
+            "label": "行业",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
+          },
+          {
+            "href": "https://www.onetonline.org/link/localtraining/51-4051.00",
+            "label": "训练",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
           },
           {
             "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "label": "认证",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "National Certifications 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/51-4051.00",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/51-4051.00",
+            "label": "职业摘要",
+            "usage": "仅本职业职责/兴趣/训练目录范围，不证明测评效能或中国统一资格。"
           }
         ]
       },
@@ -15528,16 +15605,22 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "metal-refining-furnace-operators-and-tenders.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
+          "author": "FermatMind职业内容编辑",
           "source": "O*NET 51-4051.00 与 BLS 2025 年工资、2024—2034 年就业预测",
           "updated_at": "查阅日期 2026-09-25"
         },
-        "note": "证据只支持金属操作员看护员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": {
+          "$join": [
+            {
+              "$item": "metal-refining-furnace-operators-and-tenders.sources.boundary-notice.2",
+              "block": "sources",
+              "copy_key": "career.item.boundary-notice",
+              "type": "prose"
+            },
+            "本轮查阅2026-10-01；2025全五工资分位直接小时值与2024—2034年均趋势已核，不据软件证明采用。"
+          ],
+          "separator": "；"
+        },
         "secondary_links": [
           {
             "href": {
@@ -15547,7 +15630,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "O*NET OnLine 职业档案"
+            "label": "英文MBTI类型探索入口"
           },
           {
             "href": {
@@ -15557,7 +15640,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "O*NET 全国就业趋势页"
+            "label": "英文大五人格探索入口"
           },
           {
             "href": {
@@ -15567,7 +15650,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "O*NET 行业分布"
+            "label": "中文MBTI类型探索入口"
           },
           {
             "href": {
@@ -15577,7 +15660,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "国家统计局工资统计方法"
+            "label": "中文大五人格探索入口"
           }
         ]
       },
@@ -15585,6 +15668,7 @@
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
+      "interface.ai_impact.evidence.heading": "这些证据支持什么判断？",
       "interface.fit.directions_heading": "适配方向与谨慎条件",
       "interface.fit.interest_code_heading": "兴趣代码与活动偏好",
       "interface.us_salary.industry.industry_header": "行业分布",
@@ -15768,7 +15852,7 @@
       },
       {
         "derivation": "O*NET 全国工资页 90 分位。",
-        "display_value": "74,470 美元/年（约 35.80 美元/小时）",
+        "display_value": "74,470 美元/年（约 35.81 美元/小时）",
         "fact_id": "us-p90",
         "market": "美国",
         "measure": "90 分位年薪",
@@ -15884,10 +15968,10 @@
       "text": "金属精炼炉操作员与看护员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "548b1d5ab636ad852ac84706b5dffca373b846e54585384928a510fa69f2932f",
+  "source_content_sha256": "9f690c36a4579046c21f22f65566a48252d66df87ff121fd5ab17609555178e2",
   "subject": {
     "canonical_slug": "metal-refining-furnace-operators-and-tenders",
-    "name": "金属操作员看护员",
+    "name": "金属精炼炉操作员与看护员",
     "summary": "金属精炼炉操作员与看护员（O*NET 51-4051.00）操作或看护熔炼炉熔化并精炼金属与钢水；高温、起重与能源作业按规范核验。"
   }
 }

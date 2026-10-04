@@ -26024,7 +26024,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26038,7 +26038,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26052,7 +26052,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26066,7 +26066,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26080,7 +26080,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26094,7 +26094,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26108,7 +26109,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26122,7 +26123,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26137,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26150,7 +26151,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26164,7 +26166,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26178,7 +26181,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26192,7 +26195,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26206,7 +26209,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26220,7 +26223,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31022,16 +31025,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.eligibility-interviewers-government-programs.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 26% 回答需要高中或同等学历、24% 需要副学士、24% 需要学士；Job Zone Three，通常需要一定在职训练。中国大陆多要求大专及以上，公共部门岗位通常需参加统一考试或招聘程序。",
+                "answer": "美国 O*NET 调查中约 26% 回答需要高中或同等学历、24% 需要副学士、24% 需要学士；Job Zone Three，通常需要一定在职训练。中国大陆：社会保险与就业等公共服务的资格审核工作由人力资源社会保障、医疗保障等行政部门主管（《社会保险经办条例》，国务院令第 765 号）；具体岗位的学历与资格要求按目标单位招聘公告与主管部门规定逐项核对，本页未取得可对外引用的全国统一条件。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.eligibility-interviewers-government-programs.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31311,20 @@
                 "url": "https://www.bls.gov/ooh/community-and-social-service/eligibility-interviewers-government-programs.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策、职业与培训入口。",
-                  "入口页不承载职业工资数值。"
+                  "第四条规定基本养老保险、工伤保险、失业保险等社会保险经办工作由人力资源社会保障行政部门主管，基本医疗保险、生育保险等由医疗保障行政部门主管。",
+                  "第三十七条规定社会保险经办机构应当明确岗位权责、对重点业务与高风险业务分级审核；条例未对经办岗位设定统一学历或资格证书门槛。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "规范社会保险经办工作与经办机构职责，未对具体经办岗位设定全国统一学历或资格证书要求；具体以条例原文与主管部门规定为准。",
                 "market": "中国",
-                "name": "人力资源和社会保障部 — 职业与培训公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "国务院：《社会保险经办条例》（国务院令第 765 号）",
+                "period": "2023-08-16 公布，自 2023-12-01 施行；accessed 2026-09-30",
+                "publisher": "中华人民共和国国务院",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.gov.cn/zhengce/content/202309/content_6901383.htm"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31439,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37090,7 +37095,7 @@
       "text": "政府项目资格审核员：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "ab79c3b654952d4c716e63499fe110b7f5f79827289354e089c572f76469d1cc",
+  "source_content_sha256": "be19728ab246f9061833dcdc191f70a3b6222c0ece83804f23ef9611250f855c",
   "subject": {
     "canonical_slug": "eligibility-interviewers-government-programs",
     "name": "政府项目资格审核员",

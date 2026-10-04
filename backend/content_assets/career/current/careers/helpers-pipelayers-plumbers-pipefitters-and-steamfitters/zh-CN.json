@@ -1236,7 +1236,7 @@
         "status": "mapped"
       },
       "item:helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.interview-probation.1": {
         "status": "mapped"
@@ -24114,12 +24114,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何安全、职业健康或法律意见。本页对应美国 O*NET/SOC 47-3015.00「Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters」（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。官方范围原文：Help plumbers, pipefitters, steamfitters, or pipelayers by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. O*NET 列出的核心任务包括（该页列出 15 项任务，页面默认展示前 5 项）：使用手动工具把阀门、接头或组件安装或协助安装到储罐、泵或系统上；在墙壁与天花板上安装支架与吊架以固定管道，并设置套管或插入件为管道提供支撑；进行粗装，修理与更换卫浴器具与热水器，并定位、修理或拆除渗漏或破损的管道；切割管材并向上递给管道装配工；测量、切割、套丝并组装新管道，把组装好的管道放置在吊架或其他支撑物上。常见职位名称包括 Pipefitter Helper 与 Plumber Helper 与 Plumber Assistant 与 Plumber Apprentice 与 Plumbing Helper。口径提示：O*NET 在 47-3015.00 页呈现的美国工资与就业数据未标注取自上级或相邻职业，本页按本职业（47-3015.00）自身口径如实标注；该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook；本页不把美国口径外推为中国大陆的岗位名称、资格或工资。"
+              "自我提问｜愿不愿意按图纸与任务单核材料规格、账面长度和记录状态，向师傅说清未知条件？先做P01虚构纸面练习；问卷和纸面不评分录用或授予真实切割连接试压权。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24128,12 +24129,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的管道配合任务包（仅用于练习流程，不代表任何真实企业、项目或数据）。请写出方案草案：（1）如何根据一份虚构的施工任务单与管线图，按结构化思路协助一次管道安装或检修作业（工程部位与图纸编号、管材与管件与阀门规格、测量与切割与套丝与连接方式、支架与吊架与套管、沟槽与支撑与放坡、焊接与切割与动火、试压与清洗、作业后清洁与恢复），并写明哪些信息不足需要补充（管线图版本与系统介质与压力等级、现场条件与沟槽与支撑条件、安全与准入与作业许可要求、材料到货与工序衔接）；（2）如何为一份虚构的材料与作业记录表设计填写与复核要点（字段与口径、部位与管段标识、管材与管件与用量、切割与套丝与连接、支架与吊架、试压与清洗、异常与返工与遗留项、原始记录与修订留痕）；（3）如何撰写一份可交接的班次与作业摘要（部位与管段—材料与规格—测量与切割—连接与支架—试压与清洗—遗留项与建议）；（4）如何记录与保存材料与作业数据，并区分可公开信息与涉及项目与供货方的受控资料；（5）如何在发现沟槽坍塌或焊接与切割或高处或压力风险、超出岗位授权或安全风险时暂停并复核与隔离与上报。使用公开资料与模拟数据作答，不使用任何真实企业或项目数据。"
+              "演练题面｜使用P01纸面v1：三段拟用长度1200/900/600毫米，合计2700；虚构计划余量100，总计2800，备料3000，账面余200。DN25与DN32为不同标签，不代适配判断；09:00需求09:15拟交不证接收，读0.6无单位条件不判试压合格。90分钟做核算、未知清单、拟交接与复核；v2见七日计划，不给真实切割焊接试压步骤。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24156,12 +24158,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（47-3015.00，工作情境与任务口径）：接触危险设备 常见（81% 每天）；接触污染物 常见（75% 每天）；常在狭窄或高处与管井与吊顶作业；错误的后果较严重（13% 极其严重、27% 非常严重、35% 相当严重）；接触极热或极冷温度；暴露于切割与套丝与手持工具振动。本职业以管材与管件与阀门与沟槽与焊接与切割为对象：一次沟槽或支撑或放坡不当、一次焊接或切割或动火处置不当、一次高处或管井作业防护不到位、一次连接或试压不到位，都可能造成坍塌、火灾、人身伤害、系统渗漏与工期与合规风险。O*NET 将该职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook；该页学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位。若你难以在粉尘与污染物与噪声与户外与高处与狭窄环境下作业、难以接受随项目与工序与天气变化与可能加班的节奏，或不愿对安全与工序配合承担责任，应把这些作为现实成本。"
+              "谨慎信号｜真实岗位可能涉及机械、污染物、噪声、不同空间和压力条件，依实际岗位核训练与防护。P01账面算对不证明切割连接、沟槽或压力作业安全；不愿核规格、保留未知或及时移交，可先复练记录后评估。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24170,12 +24173,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项作业上同时完成三件事：把技术做实（依据图纸与师傅指令与工艺完成测量与切割与套丝与连接与支架与试压与清洁，产出可用的材料与作业记录）、把安全与合规与边界管住（按沟槽与支撑与放坡与焊接与切割与动火与高处与临边与管井与压力与作业许可要求工作并留痕、区分可公开信息与涉及项目与供货方的受控资料并按制度处理、不在无授权时动火或进入沟槽或越界处置）、并承担可界定的岗位责任（对本人测量与切割与连接与支架与清洁与记录负责，对超出岗位授权或涉及特种作业与重大安全事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为一份虚构任务单完成一份协助作业方案与一份材料与作业记录说明，或一次沟槽或焊接或试压异常的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "承担判断｜真实帮工任务与允许职责按训练、图纸、资格和现场制度核，记录实际而非生成结果；超出职责按制度移交。P01只复核v1余200毫米与v2缺100毫米、DN25/DN32不同标签、压力读数与接收未知，不检验真实操作或设备安全。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         }
@@ -24192,7 +24196,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「帮工管道铺设工、管道工、管道装配工、蒸汽管道工」是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业，工作可以分成几类：（一）材料与准备——申请工具与设备，选择管道类型与尺寸并把材料与设备收集并运抵现场；（二）测量与加工——在墙壁或地板上切割或钻孔以留出管道通道，使用测量仪器与手动工具对管材进行测量、切割、套丝与穿线；（三）连接与组装——使用手动工具把阀门、接头或组件安装或协助安装到储罐、泵或系统上，组装新管道并把组装好的管道放置在吊架或其他支撑物上；（四）支架与就位——在墙壁与天花板上安装支架与吊架以固定管道，并设置套管或插入件为管道提供支撑；（五）清洁与收尾——清洁作业区与设备，清除切割废料与残料并协助恢复现场与记录。"
+              "直接回答｜本页的「管道铺设工、管道工、管道装配工与蒸汽管道工的帮工」是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业，工作可以分成几类：（一）材料与准备——申请工具与设备，选择管道类型与尺寸并把材料与设备收集并运抵现场；（二）测量与加工——在墙壁或地板上切割或钻孔以留出管道通道，使用测量仪器与手动工具对管材进行测量、切割、套丝与穿线；（三）连接与组装——使用手动工具把阀门、接头或组件安装或协助安装到储罐、泵或系统上，组装新管道并把组装好的管道放置在吊架或其他支撑物上；（四）支架与就位——在墙壁与天花板上安装支架与吊架以固定管道，并设置套管或插入件为管道提供支撑；（五）清洁与收尾——清洁作业区与设备，清除切割废料与残料并协助恢复现场与记录。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.1",
@@ -24206,7 +24210,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 47-3015.00「Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters」（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）这一精确职业，官方范围原文：Help plumbers, pipefitters, steamfitters, or pipelayers by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. 该页列出 15 项任务，页面默认展示前 5 项：使用手动工具把阀门与接头或组件安装或协助安装到储罐与泵或系统上、在墙壁与天花板上安装支架与吊架以固定管道并设置套管或插入件、进行粗装与修理与更换卫浴器具与热水器并定位与修理或拆除渗漏或破损的管道、切割管材并向上递给管道装配工、测量与切割与套丝并组装新管道并把组装好的管道放置在吊架或其他支撑物上。该页工作活动重要性：检查设备、结构或材料（82）、评估信息以判断是否符合标准（78）、获取信息（78）、搬运与移动物体（76）、进行一般身体活动（75）。该页学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；并标注 Bright Outlook。"
+              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 47-3015.00「Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters」（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）这一精确职业，官方范围原文：Help plumbers, pipefitters, steamfitters, or pipelayers by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. 该页列出 15 项任务，页面默认展示前 5 项：使用手动工具把阀门与接头或组件安装或协助安装到储罐与泵或系统上、在墙壁与天花板上安装支架与吊架以固定管道并设置套管或插入件、进行粗装与修理与更换卫浴器具与热水器并定位与修理或拆除渗漏或破损的管道、切割管材并向上递给管道装配工、测量与切割与套丝并组装新管道并把组装好的管道放置在吊架或其他支撑物上。该页工作活动重要性：检查设备、结构或材料（82）、评估信息以判断是否符合标准（78）、获取信息（78）、搬运与移动物体（76）、进行一般身体活动（75）。该页学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；并标注 Bright Outlook。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.onet-structured-fields-block.1",
@@ -24239,7 +24243,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "场所与环境｜在建工程与建筑内部与室外管道沟槽为主要场所；常在狭窄或高处与管井与吊顶作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（81% 每天）；接触污染物 常见（75% 每天）；接触机械与切割与套丝噪声 常见；暴露于切割与套丝与手持工具振动\n体力与姿势｜长时间站立与半程以上站立（62% 超过一半时间）；常在狭窄或高处与管井与吊顶作业；身体接近程度较高（27% 非常接近、37% 一臂之距）\n沟通与协作｜与管道工与班组紧密协作；面对面讨论常见\n精确与责任｜精确性与配合要求高（30% 极其重要、63% 非常重要）；错误的后果较严重（13% 极其严重、27% 非常严重、35% 相当严重）；对他人的健康与安全有一定责任（27% 有限责任）\n进度与节奏｜受项目工期与工序衔接约束；工序衔接与工期带来时间压力；节奏由师傅与工序进度决定\n设备与工具｜切割与套丝与焊接与手持工具与沟槽支撑与支架\n排班与现场｜排班以规律为主（80% 规律、20% 不规律）；以团队协作作业为主；工作日程以规律为主、随天气与生产与合同期变化（80% 规律、20% 不规律）\n数字化｜电子邮件与移动通信使用较少；材料与工时记录与项目沟通应用"
+              "场所与环境｜在建工程与建筑内部与室外管道沟槽为主要场所；常在狭窄或高处与管井与吊顶作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（81% 每天）；接触污染物 常见（75% 每天）；接触机械与切割与套丝噪声 常见；暴露于切割与套丝与手持工具振动\n体力与姿势｜长时间站立与半程以上站立（62% 超过一半时间）；常在狭窄或高处与管井与吊顶作业；身体接近程度较高（27% 非常接近、37% 一臂之距）\n沟通与协作｜与管道工与班组紧密协作；面对面讨论常见\n精确与责任｜精确性与配合要求高（30% 极其重要、63% 非常重要）；错误的后果较严重（13% 极其严重、27% 非常严重、35% 相当严重）；对他人的健康与安全有一定责任（27% 有限责任）\n进度与节奏｜受项目工期与工序衔接约束；工序衔接与工期带来时间压力；节奏由师傅与工序进度决定\n设备与工具｜切割与套丝与焊接与手持工具与沟槽支撑与支架\n排班与现场｜排班以规律为主（80% 规律、20% 不规律）；以团队协作作业为主；该80%/20%分类不证明天气、生产或合同期是排班原因\n数字化｜软件资料仅列Office、Excel、Word；不证明通信较少、项目系统普遍使用或AI采用"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.work-context-block.1",
@@ -24267,7 +24271,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 呈现的 BLS 工资口径｜本页对应 O*NET/SOC 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）。需如实说明：O*NET 在 47-3015.00 页面呈现的 2025 年美国工资为 中位时薪 20.36 美元 / 中位年薪 42,360 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）；分布上第 10 分位为时薪 16.15 美元与年薪 33,590 美元、第 25 分位为时薪 17.76 美元与年薪 36,940 美元、第 75 分位为时薪 22.94 美元与年薪 47,720 美元、第 90 分位为时薪 27.78 美元与年薪 57,780 美元，均取自 BLS 职业就业与工资统计（OEWS 2025 年，经 O*NET 呈现）；该页未标注数据取自上级或相邻职业，故按本职业（47-3015.00）自身口径呈现；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布，本页按证据政策登记缺口而不代填。"
+              "O*NET 呈现的 BLS 工资口径｜本页对应 O*NET/SOC 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）。需如实说明：O*NET 在 47-3015.00 页面呈现的 2025 年美国工资为 中位时薪 20.36 美元 / 中位年薪 42,360 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）；分布上第 10 分位为时薪 16.15 美元与年薪 33,590 美元、第 25 分位为时薪 17.76 美元与年薪 36,940 美元、第 75 分位为时薪 22.94 美元与年薪 47,720 美元、第 90 分位为时薪 27.78 美元与年薪 57,780 美元，均取自 BLS 职业就业与工资统计（OEWS 2025 年，经 O*NET 呈现）；该页未标注数据取自上级或相邻职业，故按本职业（47-3015.00）自身口径呈现；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本，中位数不是入职起薪。证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工及独立安装工只是相关检索，不以行业、招聘或美国数字代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.onet-structured-fields-block.2",
@@ -24295,12 +24299,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径与缺口｜中国大陆在管道安装与给排水与暖通与工业管道领域存在与帮工管道铺设工、管道工、管道装配工、蒸汽管道工相近的岗位（如管道工、水暖工、管道安装工、管工辅助人员、机电安装辅助人员），其作业与沟槽与支撑与焊接与切割与动火与高处与临边与管井与压力与安全与职业健康与记录受《中华人民共和国安全生产法》与特种作业（熔化焊接与热切割作业等）与职业健康与环境保护等相关法规与标准约束。但国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布，本页保留检索范围与缺口，不以行业均值、招聘报价或美国数据推断起薪、到手收入或个人报价。"
+              "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24309,12 +24315,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全与合规说明｜按建筑施工安全与沟槽与支撑与放坡与焊接与切割与动火与高处与临边与管井与压力与职业健康与记录要求组织工作：测量与切割与连接与支架与试压须与图纸与工艺与现行标准一致并标明来源与局限，不得替代沟槽验收、压力管道检验或安全许可要求；涉及沟槽与支撑与焊接与切割与动火与高处与临边与受限空间作业的须按规定办理作业许可与个人防护；涉及项目与供货方图纸与技术资料的收集与使用与对外提供须具有合法依据并限于最小必要范围并按制度审批与留痕。"
+              "安全与合规说明｜中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。 技术资料按实际合法用途与权限处理，P01不提供施工、沟槽、焊接或试压真实步骤。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24379,7 +24387,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以管材与管件与阀门与沟槽与现场配合为对象，产出为按图纸与工艺完成的配合作业（材料与测量与切割与套丝与连接与支架与清洁）与可追溯的材料与作业记录，凭管道与工具与现场配合能力在师傅与岗位授权范围内完成作业，对作业安全与工序质量与现场秩序负责；管道工与管道铺设工与锅炉制造安装工与帮工木工与建筑工人以各自专业作业为产出，责任与授权层级不同。"
+              "边界结论｜本页对应 O*NET 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以管材与管件与阀门与沟槽与现场配合为对象，产出为按图纸与工艺完成的配合作业（材料与测量与切割与套丝与连接与支架与清洁）与可追溯的材料与作业记录，凭管道与工具与现场配合能力在师傅与岗位授权范围内完成作业，对作业安全与工序质量与现场秩序负责；管道工与管道铺设工与锅炉制造安装工与帮工木工与建筑工人以各自专业作业为产出，责任与授权层级不同。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.7",
@@ -24449,7 +24457,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本页的帮工管道铺设工、管道工、管道装配工、蒸汽管道工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业，在房屋建筑与市政与工业安装与设备检修等工程的管道班组承担材料与测量与切割与连接与支架与清洁等现场配合任务；工作以现场体力与管材与工具配合为主，伴有搬运与切割与套丝与清洁与记录与协作，常在粉尘与污染物与噪声与户外与高处与狭窄环境作业，按项目工序与工期组织工作。"
+              "职业画像｜本页的管道铺设工、管道工、管道装配工与蒸汽管道工的帮工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业，在房屋建筑与市政与工业安装与设备检修等工程的管道班组承担材料与测量与切割与连接与支架与清洁等现场配合任务；工作以现场体力与管材与工具配合为主，伴有搬运与切割与套丝与清洁与记录与协作，常在粉尘与污染物与噪声与户外与高处与狭窄环境作业，按项目工序与工期组织工作。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.definition-block.11",
@@ -24561,12 +24569,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜日常测量与切割与套丝与连接与支架与清洁须在师傅与岗位授权与工艺规程范围内进行；涉及沟槽与支撑与焊接与切割与动火与高处与临边与受限空间与压力管道作业、设计或系统变更与重大返工的须按制度与资质执行；涉及熔化焊接与热切割与高处作业等资格与作业许可的以主管机关与企业要求为准。"
+              "权限与批准｜助手可有安装维修与测量连接任务，实际训练和允许职责按具体设备现场核。中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24673,7 +24684,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜美国 O*NET 将 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；该职业标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教，或管道与水暖注册学徒。"
+              "核对要点说明｜美国 O*NET 将 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；该职业标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教，或管道与水暖注册学徒。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.career-quick-answers-block.27",
@@ -24836,7 +24847,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本页（O*NET 47-3015.00 帮工管道铺设工、管道工、管道装配工、蒸汽管道工）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以管材与管件与阀门与沟槽与现场配合为对象，产出为按图纸与工艺完成的配合作业与可追溯的材料与作业记录；管道工与管道铺设工与锅炉制造安装工与帮工木工与建筑工人以各自对象为主，产出与授权层级不同。"
+              "结论｜本页（O*NET 47-3015.00 管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以管材与管件与阀门与沟槽与现场配合为对象，产出为按图纸与工艺完成的配合作业与可追溯的材料与作业记录；管道工与管道铺设工与锅炉制造安装工与帮工木工与建筑工人以各自对象为主，产出与授权层级不同。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.direction-comparison.adjacent-career-comparison-table.8",
@@ -24920,7 +24931,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工（O*NET/SOC 47-3015.00，Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）"
+              "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工（O*NET/SOC 47-3015.00，Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.direction-comparison.adjacent-career-comparison-table.14",
@@ -25237,118 +25248,118 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 47-3015.00 职业档案与官方范围",
+                "entity": "O*NET助手详细任务",
                 "id": "link-1",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 详细资料（任务与工作活动）",
-                "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/47-3015.00"
               },
               {
-                "entity": "O*NET 47-3015.00 职业范围与工作情境",
+                "entity": "O*NET呈现2025工资",
+                "id": "link-2",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/47-3015.00"
+              },
+              {
+                "entity": "O*NET旧期就业预测",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/custom/47-3015.00"
+                "url": "https://www.onetonline.org/link/summary/47-3015.00"
               },
               {
-                "entity": "O*NET 47-3015.00 国家工资（本职业自身口径，BLS OEWS 2025 年）",
+                "entity": "O*NET办公软件资料",
                 "id": "link-4",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 就业趋势（本职业自身口径，BLS 就业预测 2024—2034）",
-                "id": "link-5",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 行业分布",
-                "id": "link-6",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 热门技术（软件技能）",
-                "id": "link-7",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/hot_tech/47-3015.00"
               },
               {
-                "entity": "O*NET 47-3015.00 证书目录",
+                "entity": "ILO2025潜在暴露指数",
+                "id": "link-5",
+                "relation": "career.authority",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST自愿AI风险框架",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "O*NET工作情境",
+                "id": "link-7",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/47-3015.00#WorkContext"
+              },
+              {
+                "entity": "O*NET任务资料",
                 "id": "link-8",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/47-3015.00"
+                "url": "https://www.onetonline.org/link/details/47-3015.00"
               },
               {
-                "entity": "O*NET 47-3015.00 国家培训",
+                "entity": "BLS OEWS统计方法",
                 "id": "link-9",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/47-3015.00"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 47-3015.00 任务与详细工作活动",
+                "entity": "O*NET2024—2034预测",
                 "id": "link-10",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 工作活动重要性",
-                "id": "link-11",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 职业档案与工作情境",
-                "id": "link-12",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/47-3015.00"
               },
               {
-                "entity": "ILO 生成式 AI 与就业职业暴露指数研究",
+                "entity": "O*NET软件清单",
+                "id": "link-11",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/hot_tech/47-3015.00"
+              },
+              {
+                "entity": "NIST风险治理",
+                "id": "link-12",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "ILO潜在暴露研究",
                 "id": "link-13",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "O*NET本职业软件",
                 "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
-              },
-              {
-                "entity": "O*NET 47-3015.00 就业趋势（国家层面，本职业自身口径）",
-                "id": "link-15",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 工作情境（任务与环境与安全）",
-                "id": "link-16",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/custom/47-3015.00"
-              },
-              {
-                "entity": "O*NET 47-3015.00 热门技术（软件技能提及）",
-                "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/hot_tech/47-3015.00"
               },
               {
-                "entity": "ILO 生成式 AI 与就业职业暴露指数研究（任务暴露机制）",
+                "entity": "O*NET本职业任务",
+                "id": "link-15",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/47-3015.00"
+              },
+              {
+                "entity": "O*NET旧期预测",
+                "id": "link-16",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/47-3015.00"
+              },
+              {
+                "entity": "NIST治理建议",
+                "id": "link-17",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "ILO潜在暴露不预测消失年",
                 "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0，治理原则）",
+                "entity": "O*NET助手准备任务",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/details/47-3015.00"
               }
             ]
           },
@@ -25475,12 +25486,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业的自动化暴露以「任务单与材料台账与用量读数与进度与知识检索」为主：材料与工时记录与项目沟通应用与管线图检索已在记录与整理与检索环节部分应用，可减少重复记录与初稿工作；但现场测量与切割与套丝与连接与支架与沟槽与焊接与安全责任仍高度依赖持证或有经验人员。O*NET 47-3015.00 的工作活动重要性最高的是检查设备、结构或材料（82）与评估信息以判断是否符合标准（78）与获取信息（78）与搬运与移动物体（76）与进行一般身体活动（75）；工作情境显示：接触危险设备 常见（81% 每天）、接触污染物 常见（75% 每天）、精确性与配合要求高（30% 极其重要、63% 非常重要）、错误的后果较严重（13% 极其严重、27% 非常严重、35% 相当严重）。该页学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；并标注 Bright Outlook。需如实说明：O*NET 在 47-3015.00 页显示 2024—2034 年增长为 Faster than average（5% 至 6%）并标注 Bright Outlook，且该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页工资为中位时薪 20.36 美元与中位年薪 42,360 美元。AI 与自动化最可能改变的是「任务单与用量与材料与进度与知识检索环节」；而现场测量与切割与连接与支架与焊接与安全责任仍由具备相应资质与授权的人员负责。技术可行不等于企业采用（须取决于沟槽与焊接与特种作业与压力管道要求），也不等于岗位消失。"
+              "直接回答｜任务与潜在研究不足以证明本职业整体必不替代、低实测暴露或企业普遍采用。可受控试验材料台账、长度核算和记录初稿；现场测量切割连接等实际职责依训练资格许可，工具输出不作压力合格证明。技术可能、企业采用与岗位结果分开。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25559,7 +25573,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于就业与增长与空缺口径；为 O*NET 在 47-3015.00 页呈现的本职业口径（增长 Faster than average 5% 至 6% 并标注 Bright Outlook、期间年均空缺约 4,900 个），为投影而非实际招聘。"
+              "2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.24",
@@ -25587,7 +25601,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明材料与工时与项目沟通环节的工具情况；技术提及不等同于能力或自动化程度。"
+              "本职业软件资料列Office、Excel、Word；不是项目系统安装率、AI采用率或统一准入。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.26",
@@ -25615,7 +25629,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对数据与文档与信息类任务的影响机制；研究对象以职业大组为主，不预测本职业个人岗位变化。"
+              "ILO2025工作论文140研究四级潜在任务暴露，不是实际采用；本页未赋本职业实测暴露级别或消失年份。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.28",
@@ -25685,7 +25699,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 与自动化主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被设备与系统增强的是任务单与用量与材料与进度与知识检索；现场测量与切割与连接与支架与沟槽与焊接与安全责任始终由具备相应资质与授权的人员负责。技术可行、企业是否采用（取决于沟槽与焊接与特种作业与压力管道要求）与岗位结果三者必须分开判断。"
+              "下列差异是本职业材料与记录辅助的编辑建议，不是实测自动化排名。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.33",
@@ -25699,7 +25713,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务单与材料台账与用量读数与进度初稿可由设备与系统承担"
+              "可试验任务单与材料标签整理，逐项核原记录，不生成真实材料或验收。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.34",
@@ -25713,7 +25727,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场测量与切割与连接与支架与安全与工序责任"
+              "师傅及获授权人员核实际规格、图纸版本、适配和允许职责；P01不决定可施工。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.35",
@@ -25727,7 +25741,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "多部位与管段与材料与用量数据汇总与统计可被工具加速"
+              "可辅助长度、用量与版本汇总，原始与变更分开，不生成已切割或已测试状态。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.36",
@@ -25741,7 +25755,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "管线设计变更与压力管道与验收与对外披露决策"
+              "真实变更、验收与披露按岗位权限核；记录计算不授批准。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.37",
@@ -25755,7 +25769,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "图纸与管件与规程知识检索与初稿可被工具生成"
+              "可辅助手册检索摘要，核版本与原材料来源。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.38",
@@ -25769,7 +25783,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "内容证据与安全与质量审核与压力责任"
+              "真实安全质量责任由相应人员依制度核，检索不作许可。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.39",
@@ -25839,7 +25853,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场测量与切割与连接与支架不易被纯软件替代，人工更集中于管道与沟槽与安全配合判断"
+              "任务资料支持材料、测量连接及安装配合，不测AI替代率或职业消失。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.44",
@@ -25895,7 +25909,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页展示的中位时薪 20.36 美元与中位年薪 42,360 美元取自本职业自身口径，不含福利与奖金，不代表相邻职业或中国大陆"
+              "2025美国中位20.36美元/42,360美元，全国分位非个人起薪。OEWS包含受雇全职/兼职与生产性奖金，排除加班、轮班差额、非生产性奖金、福利成本及自雇等；就业矩阵含自雇，两类范围不同。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.48",
@@ -25951,7 +25965,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业 2024 年 45,300 人、2034 年预计 47,500 人、增长 Faster than average 5% 至 6% 并标注 Bright Outlook、期间年均空缺约 4,900 个含替补"
+              "2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。 不据增长推AI因果。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.52",
@@ -25993,7 +26007,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "列出企业常用软件与材料与项目沟通工具"
+              "本职业Office、Excel、Word软件提及清单"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.55",
@@ -26007,7 +26021,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "材料与工时与项目沟通使用软件与系统；现场测量与连接与安全判断仍由有经验人员负责"
+              "软件提及作目标条件核对，不证明项目系统普遍采用、自动化程度或现场责任转移。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.56",
@@ -26105,7 +26119,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果：任务变化是否导致岗位增减，取决于房屋与市政与工业安装与设备更新投资与开工量与焊工与管工供给；本页本职业自身口径增长为 Faster than average 5% 至 6% 并标注 Bright Outlook，不能直接推断个人结果。"
+              "岗位结果须核期间、实际招聘与企业需求，预测及潜在暴露不识别投资或AI因果。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.63",
@@ -26119,7 +26133,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会整体被生成式 AI 取代，任务单与用量与材料与进度与知识检索工具会承担部分整理与检索工作；O*NET 显示本职业 2024—2034 年增长为 Faster than average 5% 至 6% 并标注 Bright Outlook，且属 Job Zone 1-2（几乎无需至需要一定准备），但现场测量与切割与连接与支架与沟槽与焊接与安全责任仍是岗位核心，自动化更多改变任务构成而非取消岗位。"
+              "现有任务、预测及潜在研究不足以断言整体必不替代。可受控试验台账与记录；现场任务训练权限另核，不由增长类别推替代率。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.64",
@@ -26133,7 +26147,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET本职业任务；ILO2025潜在指数，非实测替代率。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.65",
@@ -26147,7 +26161,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不是门槛。本职业使用材料与工时记录与项目沟通应用与电子表格与办公工具即可；能把任务单与用量与材料软件用起来是加分项，编程不是本职业的入职要求。"
+              "本职业不以编程任务界定；软件清单只有Office、Excel、Word。目标岗位系统和培训条件另核，不能断言每个岗位无需编程。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.66",
@@ -26161,7 +26175,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET本职业任务与软件；目标招聘另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.67",
@@ -26175,7 +26189,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务单与材料台账整理与录入、用量与进度统计、报表与文档初稿与管线图与管件检索；这些环节可被材料与项目管理与报表工具分担。"
+              "材料台账、账面长度与版本记录初稿可作受控辅助试验；这是编辑任务分析，不是实测最易自动化排名。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.68",
@@ -26189,7 +26203,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET任务；本页辅助建议为编辑分析。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.69",
@@ -26203,7 +26217,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能按比例放大推断。O*NET 在 47-3015.00 页呈现的本职业就业为 2024 年 45,300 人、2034 年预计 47,500 人、2024—2034 年增长 Faster than average 5% 至 6% 并标注 Bright Outlook，期间年均空缺约 4,900 个含替补；房屋与市政与工业安装投资与焊工与管工供给是主要影响因素之一。"
+              "2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。 旧期不说明2035或设备投资、AI因果，实际招聘另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.70",
@@ -26217,7 +26231,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET旧期预测及当前增长类别，不跨2035。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.71",
@@ -26231,7 +26245,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能自行承担。现场测量与切割与套丝与连接与支架与试压与焊接属于具备相应资质与授权的人员与企业的责任；系统可以按设定辅助排管与记录数据，但连接口径与切割与焊接与安全判断必须由人设定与确认。"
+              "AI输出不能作真实连接或试压已合格依据。真实职责按适用训练、资格、图纸标准与现场许可核；本职业助手也有安装维修任务，不由纸面工具授权。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.72",
@@ -26245,7 +26259,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：NIST治理建议；真实任务与权限另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.73",
@@ -26259,7 +26273,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有这样的年份。职业由任务与工序与责任构成，不会因单一技术在某年整体消失；应以本职业的任务变化与工程需求与安全要求为准判断，而非相信确定年份的说法。"
+              "所核任务、预测与潜在研究未给本职业消失年份；不能从增长、软件或技术能力推哪年消失。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.74",
@@ -26273,7 +26287,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET预测、ILO潜在暴露，未识别本职业消失年。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.75",
@@ -26287,7 +26301,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先掌握材料与选材与运料、测量与切割与套丝与穿线、连接与组装与支架与吊架、沟槽与支撑与放坡与焊接与切割与动火与高处与管井与压力安全作业，以及在工序与工期压力下坚持规程与证据与记录与异常上报的能力；数字工具只需会用即可。"
+              "准备读图版本、材料标签、账面长度、如实记录和师傅沟通；真实切割连接等在适用训练资格许可下进行。先用P01纸面核算与未知条件，不在未授权现场试验。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.76",
@@ -26301,7 +26315,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 47-3015.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "来源：O*NET助手任务；P01为本页编辑准备建议。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.77",
@@ -26455,7 +26469,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用自动生成替代现场测量与切割与连接判断"
+              "输入、工具版本与人工修订无法追溯，可能无法重核材料长度与记录差异。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.88",
@@ -26469,7 +26483,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场测量与切割与连接判断须由具备相应资质的人员按工艺判断"
+              "保留原任务单、输入版本、输出与人工修订，生成不得冒充实测或已验收。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.89",
@@ -26483,7 +26497,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以系统生成的内容替代真实用量与作业与试压与异常记录"
+              "长度单位、材料标签、图纸版本或记录状态错配，可能使备料与交接失真。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.90",
@@ -26497,7 +26511,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录须反映真实作业与检验过程，禁止生成未经核实的内容"
+              "核原长度与标签，区别拟交与已接收；未知介质、单位、校准或合格范围不得生成补足。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.91",
@@ -26967,7 +26981,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业（47-3015.00，帮工管道铺设工、管道工、管道装配工、蒸汽管道工）全国中位数（2025 年，BLS OEWS，经 O*NET 在 47-3015.00 页呈现）；边界｜该页未标注取自上级或相邻职业，本页按本职业自身口径呈现；不含福利与奖金；中位为分布中点，不对应个人起薪。"
+              "口径｜美国本职业（47-3015.00，管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）全国中位数（2025 年，BLS OEWS，经 O*NET 在 47-3015.00 页呈现）；边界｜该页未标注取自上级或相邻职业，本页按本职业自身口径呈现；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点，不对应个人起薪。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.8",
@@ -26981,12 +26995,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 10 分位时薪 16.15 美元 / 年薪 33,590 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）"
+              "第 10 分位时薪 16.15 美元 / 年薪 33,590 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）；边界｜全国中位是分布中点，非个人起薪；包含生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27009,12 +27025,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 25 分位时薪 17.76 美元 / 年薪 36,940 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）"
+              "口径｜2025美国本职业第10分位工资；边界｜分布位置不识别新手、清洁或材料搬运岗位。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27037,12 +27055,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 75 分位时薪 22.94 美元 / 年薪 47,720 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）"
+              "口径｜2025美国本职业第25分位工资；边界｜不是某地区、学历或资格的定薪依据。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27065,12 +27085,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "第 90 分位时薪 27.78 美元 / 年薪 57,780 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）"
+              "口径｜2025美国本职业第75分位工资；边界｜不识别独立切割焊接、资深或带班身份。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27093,12 +27115,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 45,300 人（2024，BLS 就业预测基期，本职业（47-3015.00）自身口径）"
+              "口径｜2025美国本职业第90分位工资；边界｜不承诺个人可达或识别压力管道资格岗位。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27121,7 +27145,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 快于平均 Faster than average（5% 至 6%）并标注 Bright Outlook（2024—2034，BLS 就业预测，本职业（47-3015.00）自身口径）"
+              "口径｜2024就业45,300为预测基期；边界｜矩阵含自雇，不混OEWS受雇工资。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.19",
@@ -27177,12 +27201,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业的任务单与用量与材料与进度与知识检索初稿环节可被生成式与统计工具辅助，自动化暴露较低；生成式 AI 本身对其直接影响集中在数据与文档与检索整理；本页不对其 AI 影响作评分或预测。"
+              "AI工资说明｜未取得本职业实测暴露等级、采用率或收入效应；材料台账整理可作虚构/获准数据中的受控试验，软件提及不证明低暴露。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27191,7 +27218,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的帮工管道铺设工、管道工、管道装配工、蒸汽管道工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook。"
+              "职业定义｜本页的管道铺设工、管道工、管道装配工与蒸汽管道工的帮工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.24",
@@ -27205,12 +27232,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "管道或水暖或建筑施工相关学历与训练"
+              "岗位学历与训练核对"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27219,12 +27249,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "多数岗位"
+              "按实际岗位法域核"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27233,12 +27266,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "满足入门的材料与工艺与安全知识起点；该页学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位"
+              "美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27261,12 +27297,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "所有岗位"
+              "依任务与训练核"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27275,12 +27314,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位通常要求能测量与切割与套丝与连接与支架与清洁，并遵守沟槽与支撑与放坡与焊接与切割与动火与高处与管井与压力安全要求"
+              "帮工可有测量切割连接支架任务，但具体训练、设备与现场权限另核，不由名称授权。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27289,12 +27331,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "熔化焊接与热切割与高处作业等资格"
+              "目录内作业资格核对"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27317,12 +27362,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及焊接与切割与动火与高处作业的通常须经培训与考核并取得相应资格或作业许可；管道与水暖注册学徒常见"
+              "中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27359,7 +27407,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及相应危害因素的岗位须按职业健康与劳动保护要求配置防护与体检与轮岗与报告安排"
+              "按真实岗位危害、适用制度与主管条件核职业健康和防护；本页不编所有帮工统一体检、轮岗或报告安排。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.36",
@@ -27471,12 +27519,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜帮工管道铺设工、管道工、管道装配工、蒸汽管道工（O*NET/SOC 47-3015.00 Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters；招聘与行业内常称管道工、水暖工、管道安装工、管工辅助人员、机电安装辅助人员）。"
+              "职业名称对照｜美国47-3015.00是管道工种帮工；管工辅助、安装辅助可作检索。管道工、水暖工、管道安装工可能是独立工种，不当帮工同义或中国法定一对一映射。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27485,12 +27535,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在管道安装与给排水与暖通与工业管道领域存在与帮工管道铺设工、管道工、管道装配工、蒸汽管道工相近的岗位，其作业与沟槽与支撑与焊接与切割与动火与高处与临边与管井与压力与安全与职业健康与记录受《中华人民共和国安全生产法》与特种作业（熔化焊接与热切割作业等）与职业健康与环境保护等相关法规与标准约束；但公开职业统计未按本职业单列全国工资分布。"
+              "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27499,12 +27551,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径、不区分职业；中国大陆管道安装岗位的作业与安全规范由安全生产与特种作业与职业健康与环保制度界定，本页只登记统计口径与缺口。"
+              "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27555,12 +27609,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按该城市或地区核验的管道工种帮工工资；相关独立工种、行业均值、招聘及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27583,12 +27638,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按该城市或地区核验的管道工种帮工工资；相关独立工种、行业均值、招聘及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27611,12 +27667,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按该城市或地区核验的管道工种帮工工资；相关独立工种、行业均值、招聘及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27625,7 +27682,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）这一精确职业，与管道工与配管工与蒸汽管安装工（47-2152.00）、管道铺设工（47-2151.00）、锅炉制造与安装工（47-2011.00）、帮工木工（47-3012.00）、建筑工人（47-2061.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
+              "分类对照说明｜本页为 O*NET 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）这一精确职业，与管道工与配管工与蒸汽管安装工（47-2152.00）、管道铺设工（47-2151.00）、锅炉制造与安装工（47-2011.00）、帮工木工（47-3012.00）、建筑工人（47-2061.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.china-salary.career-snapshot-primary-locale.55",
@@ -27689,12 +27746,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS，2025 年）｜https://www.bls.gov/oes/；BLS 就业预测与特征表（2024—2034）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 47-3015.00 国家工资（本职业自身口径）｜https://www.onetonline.org/link/localwages/47-3015.00"
+              "O*NET本职业工资与旧期预测｜https://www.onetonline.org/link/summary/47-3015.00；BLS职业就业与工资统计｜https://www.bls.gov/oes/；BLS就业矩阵资料方法｜https://www.bls.gov/emp/documentation/data-overview.htm"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "ep",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -27717,12 +27777,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业（47-3015.00）全国中位数（2025 年，BLS OEWS，经 O*NET 在 47-3015.00 页呈现）；边界｜不含福利与奖金，中位为分布中点；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜美国本职业（47-3015.00）全国中位数（2025 年，BLS OEWS，经 O*NET 在 47-3015.00 页呈现）；边界｜全国中位是分布中点，非个人起薪；包含生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27745,12 +27807,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（47-3015.00）的第 10 分位工资（2025 年）；边界｜处于分布下段，可能与地区与工程与系统与资历相关，但不等于入职起薪；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第10分位工资；边界｜分布位置不识别新手、清洁或材料搬运岗位。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27773,12 +27837,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（47-3015.00）的第 25 分位工资（2025 年）；边界｜处于分布下四分位，地区与工程与系统与技能会明显影响实际收入；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第25分位工资；边界｜不是某地区、学历或资格的定薪依据。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27801,12 +27867,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（47-3015.00）的第 75 分位工资（2025 年）；边界｜处于分布上四分位，通常对应经验较多或承担焊接与压力管道与带班职责的岗位；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第75分位工资；边界｜不识别独立切割焊接、资深或带班身份。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27829,12 +27897,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（47-3015.00）的第 90 分位工资（2025 年）；边界｜处于分布上段，受地区与工程与系统与职责影响较大，不代表多数从业者；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第90分位工资；边界｜不承诺个人可达或识别压力管道资格岗位。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27857,7 +27927,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测基期（2024 年本职业，经 O*NET 呈现）；边界｜与 BLS OEWS 的时点就业估计口径不同，本页分别标注不混用；来源｜O*NET 就业趋势（BLS 就业预测 2024—2034）"
+              "口径｜2024就业45,300为预测基期；边界｜矩阵含自雇，与OEWS受雇时点估计不同。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.20",
@@ -27927,7 +27997,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值取自 BLS 职业就业与工资统计（OEWS 2025 年）与 BLS 就业预测（2024—2034），经 O*NET 在 47-3015.00 页面呈现；该页未标注取自上级或相邻职业，本页按本职业自身口径呈现，不借用相邻职业数值；不含福利与奖金。"
+              "边界｜上述数值取自 BLS 职业就业与工资统计（OEWS 2025 年）与 BLS 就业预测（2024—2034），经 O*NET 在 47-3015.00 页面呈现；该页未标注取自上级或相邻职业，本页按本职业自身口径呈现，不借用相邻职业数值；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.25",
@@ -27941,7 +28011,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜O*NET 在 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）页面呈现的 2025 年美国中位时薪 20.36 美元与中位年薪 42,360 美元；分布上第 10 分位为时薪 16.15 美元与年薪 33,590 美元、第 25 分位为时薪 17.76 美元与年薪 36,940 美元、第 75 分位为时薪 22.94 美元与年薪 47,720 美元、第 90 分位为时薪 27.78 美元与年薪 57,780 美元。就业 2024 年 45,300 人、2034 年预计 47,500 人，增长为 Faster than average（5% 至 6%）并标注 Bright Outlook，期间年均空缺约 4,900 个。"
+              "直接回答｜O*NET 在 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）页面呈现的 2025 年美国中位时薪 20.36 美元与中位年薪 42,360 美元；分布上第 10 分位为时薪 16.15 美元与年薪 33,590 美元、第 25 分位为时薪 17.76 美元与年薪 36,940 美元、第 75 分位为时薪 22.94 美元与年薪 47,720 美元、第 90 分位为时薪 27.78 美元与年薪 57,780 美元。就业 2024 年 45,300 人、2034 年预计 47,500 人，增长为 Faster than average（5% 至 6%）并标注 Bright Outlook，期间年均空缺约 4,900 个。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.26",
@@ -27955,7 +28025,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同工程（房屋建筑与市政与工业安装与设备检修）与系统（给排水或暖通或工业或燃气）的工艺复杂与需求差异明显，影响收入与稳定性。"
+              "全国分位不识别工程系统因果；目标合同与薪酬组成另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.27",
@@ -27983,7 +28053,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "是否掌握测量与切割与套丝与连接与支架与沟槽与焊接与多种系统安装能力，以及是否持有相关资格，会明显影响收入。"
+              "学历训练与资格按目标任务核，工资分位不证明其收入因果。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.29",
@@ -28011,7 +28081,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "承担焊接与压力管道与高处与带班与现场管理职责的岗位，其职责与薪酬结构不同于以基础搬运与清洁为主的岗位。"
+              "高分位不识别焊接、压力、高处或管理岗位，不以职责层级推收入。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.31",
@@ -28235,7 +28305,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利与奖金；本页数值经 O*NET 在 47-3015.00 页呈现且该页未标注取自上级或相邻职业，因此按本职业自身口径呈现，不能据此推断相邻职业的个人收入。"
+              "口径解读：OEWS 为雇主报告的工资，包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；本页数值经 O*NET 在 47-3015.00 页呈现且该页未标注取自上级或相邻职业，因此按本职业自身口径呈现，不能据此推断相邻职业的个人收入。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.47",
@@ -28291,7 +28361,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "处于分布下段的多为经验较少或以搬运与清洁与辅料整理为主的岗位；进入该区间的常见原因是刚入职并承担搬运与清洁与辅料工作；该区间为本职业自身口径。"
+              "全国低分位不识别新手、搬运、清洁或辅料岗位；目标合同和薪酬组成另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.51",
@@ -28305,7 +28375,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；随地区、工程、系统、技能、资格与职责范围变化上升；为本职业自身口径，不代表相邻职业。"
+              "中位是分布中点，不等入门工资、技能回报或相邻职业收入。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.52",
@@ -28319,7 +28389,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "处于分布上段的多为经验较多或承担焊接与压力管道与带班职责的岗位；薪酬上限与地区与工程与职责范围相关；为本职业自身口径。"
+              "全国高分位不证明资深、焊接、压力管道或带班身份，不承诺个人可达。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.53",
@@ -28390,7 +28460,7 @@
                 "url": "/zh/career/jobs/plumbers-pipefitters-and-steamfitters"
               },
               {
-                "entity": "本职业（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）方向",
+                "entity": "本职业（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）方向",
                 "id": "link-9",
                 "relation": "career.related",
                 "url": "/zh/career/jobs/helpers-pipelayers-plumbers-pipefitters-and-steamfitters"
@@ -28531,12 +28601,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜注重细节与可靠性与尽责偏高、愿意严格遵守施工与安全与特种作业规范的人更容易适应现场配合工作；但人格分数不用于录用或适配结论。"
+              "大五自问｜可关注细致核对、可靠记录、协作与遵守任务边界，这是编辑探索建议；未以人格高低证明更易适应、表现或录用。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28574,12 +28645,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不要把性格测评说我不适合当作放弃或不入行的依据；应以现场跟岗或实习或模拟测量与切割与连接任务与师傅评价与考核结果为准。"
+              "测评不决定放弃或入行；先P01纸面，真实跟岗实习另核训练带教资格权限。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28872,12 +28944,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分或资格判断；准入以学历与训练与安全与职业健康与资格与企业授权为准。特别是本职业在美国 O*NET 属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook；涉及熔化焊接与热切割与高处作业的还须满足相应资格与作业许可要求。"
+              "边界｜测评方向只探索，不评分录用或授真实施工权限；美国准备描述非中国准入，P01纸面。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28886,12 +28959,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过安全与技能与资格考核，能否在粉尘与噪声与户外高处与工序压力下稳定完成测量与切割与连接与支架与清洁，也不能替代真实现场实务。最可靠的判断方式是用一次真实或模拟的配合任务来检验，而不是只看兴趣或人格分数。"
+              "直接回答｜人格不能预测真实安全或操作表现；先P01核长度标签与状态，真实实務按带教训练资格权限。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28900,7 +28974,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）方向｜以按图纸与工艺完成的配合作业（材料与测量与切割与套丝与连接与支架与清洁）与可追溯的材料与作业记录为产出：材料与准备、测量与加工、连接与组装、支架与就位、清洁与收尾与记录"
+              "本职业（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）方向｜以按图纸与工艺完成的配合作业（材料与测量与切割与套丝与连接与支架与清洁）与可追溯的材料与作业记录为产出：材料与准备、测量与加工、连接与组装、支架与就位、清洁与收尾与记录"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.28",
@@ -28928,12 +29002,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若难以在粉尘与噪声与户外高处与狭窄环境作业，或难以接受随项目工序与工期变化的加班与节奏，不建议选择本职业。"
+              "先核目标现场设备噪声空间体力与工时，不泛化所有帮工环境或按纸面判断适配。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28942,7 +29017,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "管道工、配管工与蒸汽管安装工方向｜以管道工、配管工与蒸汽管安装工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "管道工与配管方向"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.31",
@@ -28956,12 +29031,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备管道工、配管工与蒸汽管安装工的管道或锅炉或木作或施工能力与相应资格"
+              "管道系统安装维修及相应记录；可自问是否愿意准备独立管道专业，实际训练资格另核，不由帮工经历自动取得。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.32",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28984,7 +29060,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "管道铺设工方向｜以管道铺设工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "管道铺设方向"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.34",
@@ -28998,12 +29074,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备管道铺设工的管道或锅炉或木作或施工能力与相应资格"
+              "室外管线铺设、接口与回填记录；可自问是否愿意准备室外工序与现场条件，真实训练权限另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.35",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29026,7 +29103,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "锅炉制造与安装工方向｜以锅炉制造与安装工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "锅炉制造安装方向"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.37",
@@ -29040,12 +29117,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备锅炉制造与安装工的管道或锅炉或木作或施工能力与相应资格"
+              "锅炉组装安装维护与记录；可自问是否愿意准备对应设备专业，帮工经验不自动授锅炉作业资格。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.38",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29068,7 +29146,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "帮工木工方向｜以帮工木工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "木工帮工方向"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.40",
@@ -29082,12 +29160,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备帮工木工的管道或锅炉或木作或施工能力与相应资格"
+              "木材工具供应及木作配合记录；可自问是否愿意准备木作对象和协作，不能要求所有管道锅炉技能。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29110,7 +29189,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "建筑工人方向｜以建筑工人的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "建筑工人方向"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.43",
@@ -29124,12 +29203,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备建筑工人的管道或锅炉或木作或施工能力与相应资格"
+              "一般施工材料设备配合与现场记录；可自问是否愿意准备相应工序，真实工种资格按任务核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29152,7 +29232,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "什么性格的人更适合做帮工管道铺设工、管道工、管道装配工、蒸汽管道工？本职业更看重安全意识与对图纸与工艺与精确要求的严谨、对作业安全与工序质量与现场秩序的责任感、以及在工序与工期压力下的稳定，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型）。"
+              "什么性格的人更适合做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？本职业更看重安全意识与对图纸与工艺与精确要求的严谨、对作业安全与工序质量与现场秩序的责任感、以及在工序与工期压力下的稳定，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型）。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.46",
@@ -29222,12 +29302,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；职业适应更应通过现场跟岗或实习或模拟任务与师傅评价来验证。"
+              "人格分数不预测个人表现；P01只观察长度标签记录表达，真实实习按训练带教授权，不由七日授予。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29264,12 +29345,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格能用来判断我适不适合吗？不能。九型属自我探索工具，不构成职业能力或适配结论；判断适配应看能否在安全与规程要求下完成测量与切割与连接与清洁与记录工作。"
+              "九型仅自问，不是能力；可观察P01核数与记录，不把纸面表现当真实管道安全胜任。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29278,12 +29360,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的配合任务检验：能否完成一份协助作业方案与一份材料与作业记录说明，或能否完成一次沟槽或焊接或试压异常的处置复盘；这些证据比问卷更能说明适配。"
+              "先交P01核算表、未知清单与拟交记录：v1余200毫米、v2缺100；DN25/DN32不同标签，0.6未知不判合格，不做真实沟槽焊接试压异常体验。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29320,12 +29403,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的配合任务检验读图纸与测量与切割与连接与写记录，并了解目标企业与法域对安全与职业健康与熔化焊接与热切割与高处作业资格的要求，再决定是否长期投入。"
+              "验证建议｜先做P01纸面长度标签记录，再核目标训练法域实际任务，纸面不授真实施工资格。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29909,7 +29993,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对数据采集与记录与追溯的合规要求；涉及项目与供货方的受控资料须按保密与最小必要管理。"
+              "OEWS核美国受雇工资统计方法，不证明中国保密或许可法规。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.risk.career-risk-cards.37",
@@ -29923,7 +30007,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对沟槽与支撑与放坡与焊接与切割与动火与高处与临边与管井与职业健康的作业许可与个人防护与应急处置要求（中国大陆口径）。"
+              "热门软件仅Office/Excel/Word提及，不证明中国沟槽特种作业防护制度。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.risk.career-risk-cards.38",
@@ -29937,7 +30021,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对特种作业（熔化焊接与热切割等）与压力管道与建筑施工安全与危险作业与现场管理要求（中国大陆口径）。"
+              "NIST自愿AI治理支持原记录版本与人工复核建议，不是中国特种作业或压力管道法规。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.risk.career-risk-cards.39",
@@ -30014,7 +30098,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工的入门岗位与初期任务怎么比较？",
+          "title": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的入门岗位与初期任务怎么比较？",
           "type": "table"
         },
         {
@@ -30025,40 +30109,43 @@
               {
                 "id": "education",
                 "values": [
-                  "美国 O*NET 将 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；该描述不取代企业与主管机关对资格与作业许可的要求。",
-                  "能否独立完成测量与切割与套丝与连接与支架不取决于学历本身，而取决于是否经过技能训练与取得相应资格并在岗位授权范围内作业。",
-                  "学历与训练只影响准入起点，能否熟练完成测量与切割与套丝与连接与支架与清洁主要取决于在岗训练与带教与考核结果。"
+                  "美国学历与准备描述",
+                  "美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。 Zone1—2、SVP低于6是准备描述。",
+                  "真实岗位条件与允许任务另核，学历不授施工权。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：安全操作与个人防护要求；沟槽与支撑与放坡与临边要求；熔化焊接与热切割与高处作业许可要求；压力与试压要求；粉尘与污染物与噪声防护要求；材料与作业与试压记录要求。",
-                  "涉及沟槽验收、压力管道检验、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。",
-                  "涉及项目与供货方图纸与技术资料的数据须按保密与最小必要要求管理，不得外发至未授权环境。"
+                  "法域与允许任务核对",
+                  "中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。",
+                  "技术资料按合法用途权限处理，纸面不代真实检验验收条件。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 兴趣代码为 RC（现实型—常规型），工作风格为可靠性、注重细节、自我控制；工作活动以检查设备与评估信息以判断是否符合标准与获取信息为主。",
-                  "本职业需在粉尘与污染物与噪声与户外与高处与狭窄环境动手作业，并通过量具与图纸与管段判断系统与安装状态。",
-                  "工作情境显示接触危险设备 81% 每天、接触污染物 75% 每天、精确性要求高、错误的后果较严重、受工序与工期约束。"
+                  "兴趣与现场条件",
+                  "O*NET本职业RC，81%每日危险设备、75%每日污染物为美国调查；真实设备噪声空间及工时另核。",
+                  "P01只观察长度标签核对与记录，不证明真实体力空间适配。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "常用工具与设备：测量仪器与量具、切割与套丝工具、手动与电动工具、焊接与切割设备、沟槽与支撑与吊具、支架与吊架与套管、个人防护装备。",
-                  "常用软件与系统：材料与工时记录与项目沟通应用、电子表格与文档软件（Microsoft Office）。",
-                  "技术提及不等同于自动化程度或责任转移。"
+                  "工具与软件核对",
+                  "本职业任务含手工具、测量切割等；目标设备、允许使用器具和训练另核，P01不用真实工具。",
+                  "软件清单列Office、Excel、Word，不证项目系统普遍采用或编程准入。"
                 ]
               }
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30071,41 +30158,43 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习材料（全部虚构）",
-                  "一份施工任务单与一张管线图与一份材料清单（管材与管件与阀门规格）、一份工艺与连接与支架说明、量具与切割与套丝设备使用说明。",
-                  "一份空白材料与测量与切割与连接与试压记录表。"
+                  "P01虚构材料与图纸记录",
+                  "v1虚构计划三段拟用长度1200、900、600毫米，合计2700；另列作者虚构计划余量100毫米，总计2800；备料长度3000毫米。图纸标v1，DN25与DN32为不同标签，不给实际直径、材质强度、适配或切缝损耗。",
+                  "记录09:00需求、09:15拟交师傅丙，未给接收或允许作业条件。附虚构读数0.6，指标、单位、介质、校准与合格范围缺失，不据此判试压或系统合格。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习任务",
-                  "为一份虚构任务单编制一份协助作业方案并填写一份材料与作业记录。",
-                  "说明材料与选材与运料、沟槽与支撑与放坡确认、测量与切割与套丝、连接与组装与支架、试压与清洗与异常预案。"
+                  "P01纸面任务与90分钟",
+                  "20分钟列原数据与未知，25分钟独立算长度，25分钟写拟交接，20分钟复核反思，合计90；不使用工具或真实切割焊接连接试压。",
+                  "提交长度核算表、标签与未知条件清单、拟交接草案与版本复核；不把计划改成已安装或已验收。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议",
-                  "先核对部位与管段与材料与安全条件，再按图纸与工艺确定测量与切割与连接与支架步骤。",
-                  "执行时记录测量与用量与连接与试压数据，完成后清洗与核对；对信息不足处明确标注并说明为何不代填。"
+                  "P01参考交付",
+                  "v1：1200+900+600=2700；2700+100=2800；3000−2800=200毫米账面余量。100是虚构计划项，不是安全裕量或实测损耗；缺切缝等不能推真实切割下料方案。",
+                  "09:00—09:15为15分钟记录间隔，不是施工完成或接收证明；读0.6缺单位条件不判合格。DN25/DN32不同标签，不推可互换。",
+                  "拟交单写P01、v1原长度及余量、差异、未知条件与拟交状态；要求核原图与接收，未获反馈不补造批准。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界说明",
-                  "本练习只用于检验流程理解与记录能力，所有企业与工程与数据均为虚构。"
+                  "P01体验边界",
+                  "管段、图纸版本、长度、人员与读数全为作者虚构，只纸面核对，不进入真实沟槽或做测量切割焊接连接试压。"
                 ]
               }
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.entry-work-sample-data.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "入行练习：一次完整的测量与切割与连接与支架与试压配合任务（虚构材料）",
+          "title": "P01虚构练习：材料标签、账面长度与拟交接",
           "type": "cards"
         },
         {
@@ -30116,38 +30205,39 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品矩阵",
-                  "把一份虚构的协助作业方案、一份材料与规格与用量记录、一份测量与切割与连接与支架记录、一份试压与清洗与异常处置说明整理成作品集，逐项对应招聘要求中的测量与切割与连接与支架与清洁与安全与记录能力。"
+                  "P01长度与标签表",
+                  "列2700+100=2800与备3000余200，标签DN25/DN32不同；切缝强度适配未知。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核",
-                  "把方案与记录交给他人按图纸与工艺复核，检查测量与连接与支架与试压是否自洽；能被他人在不看说明的情况下复核，才说明方案与记录可交接。"
+                  "P01版本与独立复核",
+                  "自行复算v1/v2，记作者时间及版本；他人评论可选，不伪造师傅批准或验收。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "汇报摘要",
-                  "用一页说明本管段的材料与规格—测量与切割—连接与支架—试压与清洗—遗留项，便于面试或带教时展示你如何把管道与依据与记录串起来。"
+                  "P01拟交接摘要",
+                  "写原长度、差异、未知、版本和拟交状态；09:15不证明施工或接收。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具说明",
-                  "说明你所用测量与量具与切割与套丝设备的读数与误差与设置情况，以及哪些判断依赖经验而非工具，体现对数据与依据边界的把握。"
+                  "P01工具与数据说明",
+                  "未用真实量具或试压设备，0.6为虚构无单位条件读数；若用表格AI，留输入版本与人工修订。"
                 ]
               }
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.entry-portfolio.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "P01可准备的四份纸面作品",
           "type": "cards"
         },
         {
@@ -30208,59 +30298,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（接受任务—材料与选材与运料—沟槽与支撑确认—测量与切割与套丝—连接与组装与支架—试压与清洗与记录）。",
-                  "记录你观察到的沟槽与支撑与焊接与动火与高处与管井安全要求。"
+                  "第1天：读P01原图记录",
+                  "列v1三段1200/900/600毫米，计划项100、备3000、DN标签与拟交/未知，不补接收。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "随师傅观摩一次测量与切割与套丝与连接，记录步骤与用量与安全动作。",
-                  "整理一份你观察到的测量与连接步骤与判据清单。"
+                  "第2天：复核账面长度",
+                  "2700+100=2800；3000−2800=200毫米，仅账面，不是实际下料安全或损耗结论。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "在带教下参与工具与量具准备与记录填写与材料整理。",
-                  "写出你认为最容易出错的三个环节及原因。"
+                  "第3天：列待确认",
+                  "材料适配、切缝损耗、现场许可及0.6指标单位介质校准范围均未知，只写核对问题。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "在带教下参与一次沟槽与支撑确认与管段测量。",
-                  "说明如果沟槽或压力或连接异常你会如何停止与上报。"
+                  "第4天：90分钟纸面交付",
+                  "按20+25+25+20写核算、未知、拟交接和复核，不做真实现场操作。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在带教下参与一次连接与支架与试压并填写记录。",
-                  "列出判定合格与否的依据与不合格的返工处置步骤。"
+                  "第5天：核v2图纸变更",
+                  "只将三段拟用长改1200/1100/700毫米，计划项100、备3000不变：3000+100=3100，缺100毫米；DN32不作替代，不默认补购或安装。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "整理一份虚构管段的测量与连接与试压记录说明并与师傅核对。",
-                  "记录你与师傅在测量或连接或判定上的分歧及处理方式。"
+                  "第6天：保两版本复核",
+                  "核v1余200与v2缺100，保v1/v2输入；评论可选，未获师傅反馈不记已接收。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘七天体验：哪一类任务你有把握、哪一类需要更多训练，并据此决定是否继续投入。",
-                  "把复盘结论写成一页，作为是否入行的依据而不是凭兴趣判断。"
+                  "第7天：反思准备",
+                  "以核标签长度、如实记录及沟通表达决定继续/暂停；纸面七日不检验真实切割焊接试压或授资格。"
                 ]
               }
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.seven-day-trial.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "七天体验：用虚构材料完成一次测量与连接与试压闭环",
+          "title": "七日纸面体验P01：长度、版本与交接复核",
           "type": "timeline"
         },
         {
@@ -30268,17 +30359,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在安全与规程与质量要求下完成测量与切割与套丝与连接与支架与试压并使过程与依据可复核。",
-              "继续：在工序与工期压力下坚持规程与证据与留痕，不因赶工跳过核对或放宽安全或伪造记录。",
-              "继续：能用一次可核验的配合任务或异常处置复盘证明自己的管道与配合能力。",
-              "继续：愿意在粉尘与噪声与户外高处环境中长期动手工作并对作业安全与工序质量负责。",
-              "谨慎：若七天体验中反复对安全规章或规程核对感到难以坚持，应重新评估适配。",
-              "谨慎：若难以接受随项目工序与工期与天气变化的加班与节奏，或难以承受沟槽与户外高处环境，应重新评估适配。",
-              "谨慎：若对沟槽或焊接或压力异常倾向先处置后补依据，应重新评估职业适配与风险意识。"
+              "继续：能算v1账面余200毫米并保DN标签及未知。",
+              "继续：能算v2缺100毫米并保留两版，不默认补购。",
+              "继续：愿核图纸版本材料标签、如实记录并与师傅沟通。",
+              "继续：真实实务另核训练带教许可，不以P01代实习。",
+              "暂停：把拟交或0.6无单位读数写成已接收合格，先练真实状态。",
+              "暂停：纸面不验证噪声体力空间适配，目标现场条件另核。",
+              "谨慎：未获适用训练资格许可，不进行真实切割焊接试压或沟槽异常试验。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.seven-day-decision.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
           "title": "七天结束时如何判断要不要继续",
@@ -30308,64 +30400,67 @@
             ],
             "rows": [
               [
-                "职业学校训练或相关在岗经验",
-                "多数岗位",
-                "满足入门的材料与工艺与安全知识起点",
-                "多数岗位要求在岗经验或职业训练；该页学历显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位",
-                "完成职业学校训练或积累在岗经验",
-                "数周至数月",
-                "学历与训练不等于资格或作业授权"
+                "美国学历与准备描述",
+                "拟在美国求职者",
+                "理解任务知识起点",
+                "真实岗位另核",
+                "新聘要求定性列高中/高中后证书/硕士，无比例，非统一门槛",
+                "依实际课程岗位核",
+                "不是中国准入或在岗构成"
               ],
               [
-                "安全与技能培训与考核",
-                "所有岗位",
-                "满足安全与沟槽与焊接与高处与压力作业要求",
-                "涉及相应作业的岗位普遍要求",
-                "参加企业或机构的安全与技能培训并通过考核",
-                "数天到数周",
-                "培训与考核不等于焊接或压力管道授权"
+                "任务训练与安全准备",
+                "实际助手任务人员",
+                "理解材料、工序与职责",
+                "依任务制度核",
+                "核实际培训考核现场制度及监督",
+                "依培训计划核",
+                "培训不自动授现场施工许可"
               ],
               [
-                "管道与水暖注册学徒或师徒带教",
-                "希望系统入门者",
-                "在带教下系统掌握测量与切割与套丝与连接与支架",
-                "非普遍必需但常见",
-                "参加注册学徒或企业带教并在监督下作业",
-                "数月至数年",
-                "学徒经历不等于自动获得岗位或作业授权"
+                "带教与在岗训练",
+                "希望了解实务者",
+                "在适当监督授权内学习",
+                "真实岗位另核",
+                "先核带教资格允许任务现场条件",
+                "依岗位安排核",
+                "纸面七日不代真实实习或录用"
               ],
               [
-                "熔化焊接与热切割与高处作业资格",
-                "涉及相应作业岗位",
-                "满足焊接与切割与动火与高处作业的法定或合规要求",
-                "涉及相应作业的岗位通常要求",
-                "参加认可培训与考核并取得资格或作业许可",
-                "数天到数周",
-                "资格范围以证书与主管机关与作业许可为准"
+                "相应目录内作业资格",
+                "从事对应特种作业者",
+                "满足适用法定资格",
+                "依第19/60号令实际范围核",
+                "核房屋市政或其他法域及实际工种，培训考核相应证",
+                "依主管条件核",
+                "帮工非全员焊接高处证，证与任务许可不同"
               ],
               [
-                "职业健康检查与防护要求",
-                "涉及粉尘与污染物与噪声与户外岗位",
-                "满足职业健康与劳动保护要求",
-                "涉及相应危害因素的岗位通常要求",
-                "按企业与职业健康规定参加检查与防护与轮岗",
-                "周期性",
-                "检查与防护不改变作业危害与安全责任"
+                "职业健康与防护准备",
+                "真实危害暴露岗位",
+                "核危害和管理措施",
+                "依制度岗位核",
+                "核真实危害健康防护，不照搬美国比例",
+                "依真实安排核",
+                "不编所有岗位统一体检轮岗"
               ],
               [
-                "企业岗位与作业授权",
-                "所有独立作业岗位",
-                "取得独立测量与连接与试压配合的权限前提",
-                "按企业施工与安全管理制度要求",
-                "经考核合格并在岗位与作业授权范围内作业",
-                "随岗位安排",
-                "岗位授权不等于沟槽验收或压力管道检验权限"
+                "岗位与现场允许职责",
+                "按设备任务安排者",
+                "明确允许工作",
+                "依现场制度核",
+                "核资格训练任务范围监督与审批责任",
+                "依实际安排核",
+                "岗位不自动授沟槽验收或压力管道检验权"
               ]
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30375,15 +30470,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、学历、训练证明、安全与技能培训、熔化焊接与热切割与高处作业资格、职业健康检查、岗位与作业授权、沟槽验收与压力管道检验是不同状态：满足招聘条件不等于取得独立焊接或进入沟槽或出具验收与检验结论的权限。在美国，该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook。",
-              "资格边界（二）｜在中国大陆，涉及沟槽与支撑与放坡与焊接与切割与动火与高处与临边与受限空间与特种作业与职业健康的须符合建筑施工安全与特种作业与职业健康与环保要求；涉及沟槽验收与压力管道检验与事故认定的须由具备相应资格的机构与人员处理。在美国，本职业准入通常以在岗训练与技能与资格与专项证书为主，并以企业作业许可界定作业权限。",
-              "资格边界（三）｜本页列示的准备项不等于授权，也不自动带来焊接、进入沟槽、对外披露的权限；真实权限须以企业与主管机关要求为准。",
-              "资格边界（四）｜熔化焊接与热切割与高处作业资格的有效期与复审与范围须以证书与主管机关与作业许可为准；不得以过期或超范围资格作业。"
+              "资格边界（一）｜美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。 Zone1—2和Bright Outlook非中国准入或已获权限。",
+              "资格边界（二）｜中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。",
+              "资格边界（三）｜学历训练证书岗位现场许可与检验验收分开，P01纸面不授实际施工或披露权。",
+              "资格边界（四）｜P01虚构只核长度标签状态，不提供沟槽焊接或压力作业步骤；未核真实条件不开始作业。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30393,8 +30491,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。帮工管道铺设工、管道工、管道装配工、蒸汽管道工岗位多通过房屋建筑与市政与工业安装与设备检修与专业承包企业与劳务与人力资源渠道招聘，且受地区与工程与系统与项目周期影响，公开渠道的样本难以代表整体市场；招聘要求与授权须以书面招聘信息与聘用合同与岗位说明与施工与安全制度文件为准。",
-              "本页只列核对要点，不构成录用或薪酬承诺。"
+              "招聘样本说明｜本页未引用具体招聘数量或薪酬，不从公开渠道推整体市场或无经验普遍条件。目标岗位地区、设备、培训、资格与任务以真实招聘、合同和现行制度核。",
+              "P01四份纸面作品仅准备材料，不保证录用、薪酬或真实作业资格。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.recruitment-sample.1",
@@ -30446,12 +30544,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以安全与技能训练与资格与企业授权与考核为准，也不代表取得独立焊接或进入沟槽或沟槽验收的权限。"
+              "边界｜真实管道任务按适用训练、资格与现场范围，P01仅纸面不代切割连接试压胜任。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30460,12 +30561,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下承担材料与工具准备与测量与切割协助与搬运与清洁与记录协助；不独立焊接或进入沟槽或出具验收结论。"
+              "在适当带教授权内准备工具材料和记录，P01先只纸面核长度标签。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30516,12 +30620,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担焊接与压力管道与复杂系统配合与调配与带教与工艺配合。"
+              "专门训练后准备复杂管道配合与异常记录；特种作业、变更与验收权限另核，不由熟练称谓授全权。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30572,12 +30679,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成职业学校训练或相关在岗经验（该页 Job Zone 1-2（几乎无需至需要一定准备），SVP 低于 6.0（SVP Below 6.0））→ 掌握测量与切割与套丝与连接与支架与试压与清洁 →取得安全与技能培训与必要的熔化焊接与热切割与高处作业资格与注册学徒经历 → 取得企业岗位与作业授权 → 在带教与轮岗中熟悉多种系统与工艺并按授权独立作业 →在材料与准备或管道与管件或安全与清理与记录方向深化。每一步的证书与授权范围以企业与主管机关要求为准。"
+              "直接回答｜先核实际帮工任务训练，练材料标签图纸版本及记录，再在适当带教授权内了解实务。中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。 可先做P01纸面。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30586,12 +30696,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜接受职业训练、完成跟岗与实务、取得学历或训练证明、通过安全与技能考核与熔化焊接与热切割与高处作业资格、并入职业健康管理、取得企业岗位与作业授权是不同状态；本页列示的准备项不等于授权，也不自动带来焊接或进入沟槽或对外披露权限。"
+              "准备不等授权，P01不代真实施工资格或检验许可。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30600,12 +30713,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域与依据｜美国 O*NET 将 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））并标注 Bright Outlook；学历部分显示——该页未给出各教育层次的百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位。中国大陆涉及沟槽与支撑与放坡与焊接与切割与动火与高处与临边与受限空间与特种作业与职业健康与环保的须符合建筑施工安全与特种作业与职业健康与环保要求；两侧的法律与制度与统计口径不同，不做拼接与换算。"
+              "适用法域｜美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30614,12 +30730,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为学习—跟岗与实务—安全与技能与资格—岗位与作业授权—负责的循环：先完成技能训练，再在带教中熟悉测量与切割与连接与支架与试压与施工安全制度，取得资格与作业授权后独立作业并在方向深化；涉及沟槽验收与压力管道检验与重大返工的事项按制度与主管机关要求处理。"
+              "准备摘要｜材料标签长度版本和拟交状态先用P01；真实现场训练资格另核。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30628,12 +30747,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对本职业典型的入门学历与训练描述（O*NET 47-3015.00 的 Job Zone 1-2（几乎无需至需要一定准备） 与学历分布）。"
+              "O*NET美国新聘学历为定性要求，没有比例，非中国准入。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "mohurd-construction",
+            "employer"
           ],
           "type": "prose"
         },
@@ -31629,7 +31751,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径：本页工资与就业取 O*NET 在 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）页面呈现的本职业自身口径（该页未标注取自上级或相邻职业）——2025 年中位时薪 20.36 美元与中位年薪 42,360 美元；第 10 分位时薪 16.15 美元与年薪 33,590 美元、第 25 分位时薪 17.76 美元与年薪 36,940 美元、第 75 分位时薪 22.94 美元与年薪 47,720 美元、第 90 分位时薪 27.78 美元与年薪 57,780 美元。就业 2024 年 45,300 人、2034 年预计 47,500 人，2024—2034 年增长为 Faster than average（5% 至 6%）并标注 Bright Outlook，期间年均空缺约 4,900 个（含增长与替补）。中国大陆口径：公开统计未建立与本职业精确对应的全国职业工资分布，本页展示缺失而不使用代理数字。"
+              "直接回答｜2025美国本职业中位20.36美元/42,360美元；全国分位非个人起薪。2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.8",
@@ -31671,7 +31793,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；差异来自地区与工程与系统与技能与资格与职责；数值为本职业自身口径、不代表相邻职业。"
+              "中位是分布中点非个人起薪，分位不识别地区工程系统经验资格因果。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.11",
@@ -31685,7 +31807,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与奖金；本页按 O*NET 该页未标注取上级或相邻职业的本职业口径呈现；数值取自 2025 年数据，后续更新应以当期查询为准。"
+              "OEWS包含受雇全职/兼职与生产性奖金，排除加班、轮班差额、非生产性奖金、福利成本及自雇等；就业矩阵含自雇，两类范围不同。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.12",
@@ -31769,7 +31891,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为投影，受房屋与市政与工业安装投资与焊工与管工供给影响；空缺主要由替换需求构成；数值为本职业自身口径，不等于个人岗位结果。"
+              "2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。 不归因设施投资或AI。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.18",
@@ -31867,7 +31989,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆在管道安装与给排水与暖通与工业管道领域存在相近岗位且其作业与规范由建筑施工安全与特种作业与职业健康与环保制度界定，但公开统计未按本职业单列全国工资分布，不能用行业均值或招聘报价推断。"
+              "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.25",
@@ -31923,12 +32045,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -32338,46 +32462,82 @@
           "data": {
             "entries": [
               {
-                "answer": "本页的帮工管道铺设工、管道工、管道装配工、蒸汽管道工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。该页列出 15 项任务，最重要的包括使用手动工具把阀门与接头或组件安装或协助安装到储罐与泵或系统上、在墙壁与天花板上安装支架与吊架以固定管道并设置套管或插入件、进行粗装与修理与更换卫浴器具与热水器并定位与修理或拆除渗漏或破损的管道、切割管材并向上递给管道装配工、测量与切割与套丝并组装新管道并把组装好的管道放置在吊架或其他支撑物上。常见职位名称包括 Pipefitter Helper 与 Plumber Helper 与 Plumber Assistant 与 Plumbing Helper。",
+                "answer": "本页的管道铺设工、管道工、管道装配工与蒸汽管道工的帮工是 O*NET 47-3015.00（Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters）这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。该页列出 15 项任务，最重要的包括使用手动工具把阀门与接头或组件安装或协助安装到储罐与泵或系统上、在墙壁与天花板上安装支架与吊架以固定管道并设置套管或插入件、进行粗装与修理与更换卫浴器具与热水器并定位与修理或拆除渗漏或破损的管道、切割管材并向上递给管道装配工、测量与切割与套丝并组装新管道并把组装好的管道放置在吊架或其他支撑物上。常见职位名称包括 Pipefitter Helper 与 Plumber Helper 与 Plumber Assistant 与 Plumbing Helper。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q1"
               },
               {
-                "answer": "美国侧：O*NET 47-3015.00 页呈现的 2025 年工资与就业为本职业自身口径（该页未标注取自上级或相邻职业）；中国大陆侧：公开统计未建立与本职业精确对应的全国职业工资分布，本页登记缺口而不使用代理数字；两侧制度与统计口径不同，不做拼接与换算。",
+                "answer": "美国2025工资与2024—2034旧预测分期，47-3015.00帮工不取相邻数。证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.2",
                 "question": "在美国和中国大陆分别是什么口径？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q2"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q2",
+                "source_refs": [
+                  "onet",
+                  "nbs",
+                  "cnclass",
+                  "employer"
+                ]
               },
               {
-                "answer": "2025 年美国本职业中位时薪 20.36 美元与中位年薪 42,360 美元（BLS OEWS，经 O*NET 呈现，本职业自身口径）；第 10 分位年薪 33,590 美元、第 25 分位 36,940 美元、第 75 分位 47,720 美元、第 90 分位 57,780 美元；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布。",
+                "answer": "2025美国中位时薪20.36美元、年薪42,360美元；旧10/25/75/90年薪33,590/36,940/47,720/57,780美元，分位非起薪或经验等级。OEWS包含受雇全职/兼职与生产性奖金，排除加班、轮班差额、非生产性奖金、福利成本及自雇等；就业矩阵含自雇，两类范围不同。证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.3",
                 "question": "工资是多少？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q3"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q3",
+                "source_refs": [
+                  "onet",
+                  "oews",
+                  "bls-oews-methods",
+                  "bls-matrix-methods",
+                  "nbs",
+                  "employer"
+                ]
               },
               {
-                "answer": "O*NET 在 47-3015.00 页呈现的 BLS 就业预测显示：就业 2024 年 45,300 人、2034 年预计 47,500 人，2024—2034 年增长为 Faster than average（5% 至 6%）并标注 Bright Outlook，期间年均空缺约 4,900 个（含增长与替补）。预测不等于个人岗位结果。",
+                "answer": "2024—2034旧期：就业45,300、原详表2034预计47,500；本轮O*NET摘要仍为增长类别5%—6%、年均空缺4,900含增长与更替并标Bright Outlook。原详值保留旧已核依据，不称本轮重新取得，不跨2035或个人结果。 预测不等真实招聘，不归因投资或AI。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.4",
                 "question": "就业前景如何？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q4"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q4",
+                "source_refs": [
+                  "onet",
+                  "ep",
+                  "employer"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页学历部分未给出各层次百分比，仅定性说明部分岗位要求高中文凭或同等学历、部分岗位要求高中后证书、部分岗位要求硕士学位；标注 Bright Outlook。在中国大陆，涉及焊接与切割与沟槽与高处的岗位须满足安全生产与职业健康要求并取得相应资格或作业许可；具体以企业与主管机关要求为准。",
+                "answer": "美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。中国按真实法域和作业核：应急管理部第19号令与住建部第60号令均自2026-06-01施行。第19号令第2—4条针对直接从事目录内特种作业者，专门培训考核并取相应证，另有法定规定从其规定；第60号令第2—3条针对房屋市政工程相应建筑施工特种作业，须相应资格证。不能由帮工名称推全员焊接/高处证，证书、现场任务许可与压力管道检验权限分开。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.5",
                 "question": "需要什么学历和资格？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q5"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q5",
+                "source_refs": [
+                  "onet",
+                  "facilities",
+                  "mohurd-construction",
+                  "employer"
+                ]
               },
               {
-                "answer": "不需要。本职业使用材料与工时记录与项目沟通应用与电子表格与办公工具即可；编程不是本职业的入职要求。",
+                "answer": "本职业不以编程任务界定，软件资料列Office、Excel、Word。目标招聘系统条件另核，不断言每个岗位不用编程。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.6",
                 "question": "入行要会写代码吗？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q6"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q6",
+                "source_refs": [
+                  "onet",
+                  "weforum",
+                  "employer"
+                ]
               },
               {
-                "answer": "不会整体被取代。任务单与用量与材料与进度与知识检索可被系统辅助，但现场测量与切割与连接与支架与沟槽与焊接与安全责任仍由有经验人员负责；O*NET 显示本职业 2024—2034 年增长为 Faster than average 5% 至 6% 并标注 Bright Outlook，自动化更多改变任务构成而非取消岗位。",
+                "answer": "任务与潜在研究不证明整体必不替代、低实测暴露或普遍采用；可受控试验台账记录。实际现场职责训练资格许可另核；ILO2025潜在指数与旧增长类别不识别AI因果。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q7"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q7",
+                "source_refs": [
+                  "onet",
+                  "ilo",
+                  "nist",
+                  "employer"
+                ]
               },
               {
                 "answer": "O*NET 工作情境显示：接触危险设备 常见（81% 每天）、接触污染物 常见（75% 每天）、精确性与配合要求高（30% 极其重要、63% 非常重要）、常在狭窄或高处与管井与吊顶作业、错误的后果较严重（13% 极其严重、27% 非常严重、35% 相当严重）、对他人的健康与安全有一定责任（27% 有限责任）。",
@@ -32392,10 +32552,20 @@
                 "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q9"
               },
               {
-                "answer": "本页以 O*NET 47-3015.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成安全或特种作业或质量或法律意见。",
+                "answer": "2025工资与2024—2034旧预测分开；OEWS受雇含生产奖金与含自雇矩阵不同。ILO2025潜在暴露、NIST自愿治理和第19/60号令法域各不同；P01为作者虚构纸面。证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。",
                 "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.faq.10",
                 "question": "本页来源与口径边界是什么？",
-                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q10"
+                "question_key": "career.faq.helpers-pipelayers-plumbers-pipefitters-and-steamfitters.q10",
+                "source_refs": [
+                  "onet",
+                  "bls-oews-methods",
+                  "bls-matrix-methods",
+                  "ilo",
+                  "nist",
+                  "facilities",
+                  "mohurd-construction",
+                  "employer"
+                ]
               }
             ]
           },
@@ -32410,7 +32580,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 O*NET/SOC 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2024—2034 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与建筑施工安全与特种作业与职业健康与环保制度登记口径与缺口。"
+              "来源卡｜研究流程：先核对美国 O*NET/SOC 47-3015.00（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2024—2034 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与建筑施工安全与特种作业与职业健康与环保制度登记口径与缺口。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.sources.source-card.1",
@@ -32452,12 +32622,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记两类可见说明——（1）美国侧：O*NET 在 47-3015.00 页未标注工资与就业与行业数据取自上级或相邻职业，本页按本职业自身口径如实呈现，不含福利与奖金，中位不等于起薪；该页学历与部分工作情境项未给出具体数值，本页只按定性说明如实转述，不代填；（2）中国大陆侧：公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布，国家统计局按行业门类公布平均工资、不区分职业，本页展示缺失而不使用代理数字或用美国数据外推。"
+              "来源说明｜证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工、管道安装工只是相关检索，独立工种不作帮工法定一对一映射，行业均值、招聘报价及美国数据不代填。 2025工资与2024—2034旧详值/当前增长类别分开。OEWS包含受雇全职/兼职与生产性奖金，排除加班、轮班差额、非生产性奖金、福利成本及自雇等；就业矩阵含自雇，两类范围不同。美国O*NET新聘者学历要求仅定性列高中或同等学历、高中后证书、硕士学位可为部分岗位要求，没有百分比；不构成中国或全职业统一门槛，也不测在岗学历构成。 ILO2025潜在指数非采用率，NIST非中国安全法源；第19/60号令各按实际目录法域，P01全虚构。"
             ]
           },
           "id": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "facilities",
+            "mohurd-construction",
+            "ilo",
+            "nist",
+            "employer"
           ],
           "type": "prose"
         }
@@ -32505,7 +32682,7 @@
                 "url": "/zh/tests/eq-test"
               },
               {
-                "entity": "本职业（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）",
+                "entity": "本职业（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/helpers-pipelayers-plumbers-pipefitters-and-steamfitters"
@@ -32538,7 +32715,7 @@
                 "id": "onet",
                 "limitation": "职业级描述，不覆盖中国大陆特种作业与压力管道规范。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工详细资料（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工详细资料（47-3015.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32554,7 +32731,7 @@
                 "id": "bls",
                 "limitation": "职业级描述，不构成安全或特种作业或法律意见。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工职业档案与官方范围（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工职业档案与官方范围（47-3015.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32570,7 +32747,7 @@
                 "id": "ep",
                 "limitation": "为 O*NET 在 47-3015.00 页呈现的本职业口径；增长 5% 至 6% 并标注 Bright Outlook。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工就业趋势（47-3015.00，本职业自身口径）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工就业趋势（47-3015.00，本职业自身口径）",
                 "period": "BLS Employment Projections 2024-2034 via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32584,9 +32761,9 @@
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，不含福利与奖金。",
+                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工国家工资（47-3015.00，本职业自身口径）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工国家工资（47-3015.00，本职业自身口径）",
                 "period": "2025 BLS OEWS wage data via O*NET",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32611,8 +32788,8 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "本页所核中国资料未取得可对应管道工种帮工的全国工资分布；不推所有公开数据不存在。",
+                  "中国相关称谓不自动建立与47-3015.00的法定一对一映射。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
@@ -32641,20 +32818,20 @@
                 "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "用于说明沟槽与支撑与放坡与焊接与切割与动火与高处与受限空间等安全生产要求。",
-                  "涉及特种作业的须经安全技术培训与考核并持证作业。"
+                  "第2—4条界定目录主体、培训考核与相应操作证要求。",
+                  "建筑施工另适用相应主管法规；证书与设备任务许可分别核。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "official regulation",
                 "id": "facilities",
-                "limitation": "以主管机关发布的法规与要求为准。",
+                "limitation": "不推所有管道帮工须同一证书，不代现场许可。",
                 "market": "中国大陆",
-                "name": "中华人民共和国应急管理部：安全生产与特种作业与危险作业管理",
-                "period": "current; accessed 2026-09-22",
+                "name": "应急管理部：特种作业人员安全技术培训考核管理规定（第19号令）",
+                "period": "2025-12-17公布；2026-06-01施行",
                 "publisher": "应急管理部",
-                "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "scope": "直接从事目录内特种作业；另有法定规定从其规定",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32705,17 +32882,17 @@
                 "url": "https://www.nhc.gov.cn/"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "用于理解技术对数据与文档与信息类任务的影响机制。",
-                  "研究对象以职业大组为主，不覆盖本职业；本职业现场测量与切割与连接与安全判断更依赖实际技能。"
+                  "四级潜在任务暴露梯度，不是实际企业采用或职业消失预测。",
+                  "本页未赋47-3015.00实测暴露等级或个人结果。"
                 ],
-                "evidence_type": "research publication",
+                "evidence_type": "international organization potential exposure research",
                 "id": "ilo",
                 "limitation": "任务暴露不等于岗位自动消失或具体采用率。",
                 "market": "全球",
-                "name": "ILO 生成式 AI 与就业职业暴露指数研究",
-                "period": "current",
+                "name": "ILO工作论文140：2025生成式AI与就业细化全球暴露指数",
+                "period": "2025-05-20工作论文140",
                 "publisher": "International Labour Organization",
                 "scope": "task exposure context",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -32730,7 +32907,7 @@
                 "id": "editor",
                 "limitation": "职业级描述，不用于个体预测。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工职业范围与工作情境（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工职业范围与工作情境（47-3015.00）",
                 "period": "current page; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32771,14 +32948,14 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于核对软件技能（材料与工时记录与项目沟通应用、电子表格与文档与电子邮件）。",
-                  "用于说明材料与用量与进度与报表环节的工具情况。"
+                  "本职业软件资料列Microsoft Office、Excel、Word。",
+                  "软件提及不是安装率、AI采用或所有岗位编程门槛。"
                 ],
                 "evidence_type": "official technology display",
                 "id": "weforum",
                 "limitation": "技术提及不等同于能力或自动化程度。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工热门技术（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工热门技术（47-3015.00）",
                 "period": "current page; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32804,13 +32981,13 @@
                 "accessed_at": "2026-09-22",
                 "details": [
                   "用于核对与本职业相关的证书与专项资格检索入口。",
-                  "在中国大陆，涉及熔化焊接与热切割与高处作业的须取得主管机关认可的资格或作业许可；具体以企业与主管机关要求为准。"
+                  "美国目录不证明中国证书有效或施工权限，目标法域与现行条件另核。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "purchasing-managers",
                 "limitation": "该页列出与本职业相关的证书与资格检索入口；证书不取代企业与主管机关的资格与作业许可要求。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工证书目录（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工证书目录（47-3015.00）",
                 "period": "current page; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32826,7 +33003,7 @@
                 "id": "r2-pay-1",
                 "limitation": "培训检索入口不取代企业与主管机关的安全与资格与作业许可要求。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工国家培训（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工国家培训（47-3015.00）",
                 "period": "current page; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32906,7 +33083,7 @@
                 "id": "onet-wages",
                 "limitation": "该口径为美国分布，不建立中国大陆映射。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工行业分布（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工行业分布（47-3015.00）",
                 "period": "current page; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
@@ -32922,11 +33099,56 @@
                 "id": "archivists",
                 "limitation": "职业级描述，不等于企业安全或质量或法律结论。",
                 "market": "美国",
-                "name": "O*NET OnLine：帮工管道铺设工、管道工、管道装配工、蒸汽管道工工作情境与详细工作活动（47-3015.00）",
+                "name": "O*NET OnLine：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工工作情境与详细工作活动（47-3015.00）",
                 "period": "O*NET updated 2026; accessed 2026-09-22",
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "47-3015.00 exact occupation",
                 "url": "https://www.onetonline.org/link/longview/47-3015.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "矩阵基期就业包含自雇，不能混受雇时点工资。"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "bls-matrix-methods",
+                "limitation": "美国就业矩阵含自雇，非OEWS工资口径",
+                "market": "美国",
+                "name": "BLS就业矩阵资料方法",
+                "period": "2026-10-02查阅",
+                "publisher": "BLS",
+                "scope": "美国就业矩阵含自雇，非OEWS工资口径",
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "受雇全兼职工资含生产奖金，排除加班轮班差额非生产奖金福利及自雇等。"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "bls-oews-methods",
+                "limitation": "受雇工资含生产奖金及排除范围",
+                "market": "美国",
+                "name": "BLS OEWS常见问题与工资范围",
+                "period": "2026-10-02查阅",
+                "publisher": "BLS",
+                "scope": "受雇工资含生产奖金及排除范围",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "第2—3条相应范围培训考核取资格证，不扩所有帮工；2026-06-01施行。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "mohurd-construction",
+                "limitation": "房屋市政工程相应建筑施工特种作业",
+                "market": "中国大陆",
+                "name": "建筑施工特种作业人员管理规定（住建部第60号令）",
+                "period": "2025-12-17公布；2026-06-01施行",
+                "publisher": "住房和城乡建设部；湖南住建厅转载",
+                "scope": "房屋市政工程相应建筑施工特种作业",
+                "url": "https://zjt.hunan.gov.cn/zjt/c101183/c101184/202601/t20260115_33893734.html"
               }
             ]
           },
@@ -33058,7 +33280,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工的工作方向与相邻职业怎么比较？",
+        "heading": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的工作方向与相邻职业怎么比较？",
         "intro": {
           "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33325,7 +33547,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -33347,7 +33569,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33369,7 +33591,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "官方软件资料",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33391,7 +33613,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "国际组织潜在暴露研究",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33413,7 +33635,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "自愿AI风险框架",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33435,7 +33657,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方工作情境资料",
             "适用范围": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -33677,7 +33899,7 @@
             }
           }
         ],
-        "heading": "AI 会取代帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？",
+        "heading": "AI 会取代管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？",
         "method_cards": [
           {
             "含义": {
@@ -33704,7 +33926,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少帮工管道铺设工、管道工、管道装配工、蒸汽管道工岗位吗？"
+            "概念": "AI 会减少管道铺设工、管道工、管道装配工与蒸汽管道工的帮工岗位吗？"
           }
         ],
         "questions": [
@@ -33728,7 +33950,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工会被 AI 取代吗？"
+            "问题": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -33794,7 +34016,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2035 年这个职业会变少吗？"
+            "问题": "2024—2034美国旧期预测能说明什么？"
           },
           {
             "回答": {
@@ -34264,7 +34486,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为帮工管道铺设工、管道工、管道装配工、蒸汽管道工？教育、资格与职业发展路径",
+        "heading": "怎样成为管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.path.career-path-block.21",
@@ -34797,7 +35019,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工的工作可以分成哪几类？",
+            "question": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -34854,7 +35076,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工和相邻岗位的边界在哪里？",
+            "question": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工和相邻岗位的边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -35122,7 +35344,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工的工作有哪些压力、风险与职业边界？",
+        "heading": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的工作有哪些压力、风险与职业边界？",
         "risks": [
           {
             "affected_roles": {
@@ -35791,11 +36013,11 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响帮工管道铺设工、管道工、管道装配工、蒸汽管道工的工资吗？",
+            "ai_heading": "AI 会影响管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -35823,8 +36045,8 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "fact_ref": "us-wage-2025",
+            "指标": "薪资 · 中位数",
             "数值": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35839,8 +36061,8 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "fact_ref": "us-wage-low10-2025",
+            "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35855,8 +36077,8 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "fact_ref": "us-wage-q25-2025",
+            "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -36007,14 +36229,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国帮工管道铺设工、管道工、管道装配工、蒸汽管道工工资？",
+        "factors_heading": "哪些因素会影响美国管道铺设工、管道工、管道装配工与蒸汽管道工的帮工工资？",
         "growth": {
           "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国帮工管道铺设工、管道工、管道装配工、蒸汽管道工工资多少？",
+        "heading": "美国管道铺设工、管道工、管道装配工与蒸汽管道工的帮工工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36236,7 +36458,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工适合什么样的人？"
+        "title": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36310,7 +36532,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工的前景如何？可以转向哪些相关职业？",
+        "heading": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -36349,7 +36571,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "ep",
+            "source_id": "oews",
             "value": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.15",
               "block": "market-signals",
@@ -36394,7 +36616,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36784,7 +37006,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 47-3015.00 职业档案（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）",
+            "label": "O*NET 47-3015.00 职业档案（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）",
             "secondary_value": null,
             "value": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.profile.onet-structured-fields-block.1",
@@ -36865,7 +37087,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近帮工管道铺设工、管道工、管道装配工、蒸汽管道工？",
+            "question": "霍兰德兴趣中什么类型更接近管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？",
             "signals": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.4",
               "block": "fit",
@@ -36939,7 +37161,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？",
+            "question": "MBTI 能用来判断我适不适合管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？",
             "signals": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.12",
               "block": "fit",
@@ -37013,7 +37235,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？",
+            "question": "数学不好，能做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？",
             "signals": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.20",
               "block": "fit",
@@ -37050,7 +37272,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做帮工管道铺设工、管道工、管道装配工、蒸汽管道工需要高情商吗？",
+            "question": "做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工需要高情商吗？",
             "signals": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.24",
               "block": "fit",
@@ -37100,7 +37322,7 @@
                 "field": "url"
               },
               "slug": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters",
-              "title": "本职业（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）方向"
+              "title": "本职业（管道铺设工、管道工、管道装配工与蒸汽管道工的帮工）方向"
             },
             "watchouts": {
               "$item": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters.fit.personality-fit-block.30",
@@ -37265,7 +37487,7 @@
             }
           }
         ],
-        "heading": "做帮工管道铺设工、管道工、管道装配工、蒸汽管道工，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -37274,7 +37496,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "什么性格的人更适合做帮工管道铺设工、管道工、管道装配工、蒸汽管道工？"
+            "question": "什么性格的人更适合做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？"
           },
           {
             "answer": {
@@ -37283,7 +37505,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "内向的人适合做帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？"
+            "question": "内向的人适合做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？"
           },
           {
             "answer": {
@@ -37292,7 +37514,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "外向的人能做好帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？"
+            "question": "外向的人能做好管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？"
           },
           {
             "answer": {
@@ -37301,7 +37523,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "哪种 MBTI 最适合帮工管道铺设工、管道工、管道装配工、蒸汽管道工？"
+            "question": "哪种 MBTI 最适合管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？"
           },
           {
             "answer": {
@@ -37328,7 +37550,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "数学不好能做帮工管道铺设工、管道工、管道装配工、蒸汽管道工吗？"
+            "question": "数学不好能做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工吗？"
           },
           {
             "answer": {
@@ -37337,7 +37559,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "做帮工管道铺设工、管道工、管道装配工、蒸汽管道工需要高情商吗？"
+            "question": "做管道铺设工、管道工、管道装配工与蒸汽管道工的帮工需要高情商吗？"
           },
           {
             "answer": {
@@ -37582,7 +37804,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "label": "测我的职业兴趣是否适合管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37739,7 +37961,7 @@
       "interface.fit.assessments_heading": "不要用一个测试替你决定职业",
       "interface.fit.direction_caution_label": "注意：",
       "interface.fit.direction_match_label": "更匹配：",
-      "interface.fit.directions_heading": "你更可能适合哪条帮工管道铺设工、管道工、管道装配工、蒸汽管道工工作方向？",
+      "interface.fit.directions_heading": "你更可能适合哪条管道铺设工、管道工、管道装配工与蒸汽管道工的帮工工作方向？",
       "interface.fit.interest_baseline_label": "O*NET 职业兴趣基线",
       "interface.fit.interest_code_heading": "怎样理解职业兴趣代码",
       "interface.fit.interest_experience_heading": "这类工作的兴趣体验",
@@ -37764,9 +37986,9 @@
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
-      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择帮工管道铺设工、管道工、管道装配工、蒸汽管道工？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合帮工管道铺设工、管道工、管道装配工、蒸汽管道工？",
-      "interface.quick_decision.suit_heading": "什么样的人更可能适合帮工管道铺设工、管道工、管道装配工、蒸汽管道工？",
+      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？",
+      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？",
+      "interface.quick_decision.suit_heading": "什么样的人更可能适合管道铺设工、管道工、管道装配工与蒸汽管道工的帮工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
       "interface.risk.evidence_label": "依据",
@@ -37890,43 +38112,43 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "职业身份代码",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "O*NET 2026 occupational profile",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "中位时薪 20.36 美元 / 中位年薪 42,360 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "工资中位数",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 10 分位时薪 16.15 美元 / 年薪 33,590 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 90 分位时薪 27.78 美元 / 年薪 57,780 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
           "onet"
@@ -37938,22 +38160,23 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2024—2034",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 45,300 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
+        "derivation": "口径｜BLS就业预测2024年本职业45,300，矩阵包含自雇；OEWS受雇时点工资估计与其不同，不混两类范围。",
         "display_value": "就业 约 45,300 人（2024，BLS 就业预测基期，本职业（47-3015.00）自身口径）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2024",
         "source_refs": [
-          "onet"
+          "onet",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -37962,55 +38185,59 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2024—2034",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；管道与焊接与切割与沟槽与高处作业另受建筑施工安全与特种作业与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "口径｜本页所核中国资料未取得精确对应帮工全国工资分布；相关独立管道工、水暖工不能作一对一映射，行业招聘美国数字不代填。",
+        "display_value": "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工及独立安装工只是相关检索，不以行业、招聘或美国数字代填。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass",
+          "employer"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；管道与焊接与切割与沟槽与高处作业另受建筑施工安全与特种作业与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 47-3015.00（帮工管道铺设工、管道工、管道装配工、蒸汽管道工）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "口径｜本页所核中国资料未取得精确对应帮工全国工资分布；相关独立管道工、水暖工不能作一对一映射，行业招聘美国数字不代填。",
+        "display_value": "证据不足：本页所核中国资料未取得与47-3015.00管道工种帮工精确对应的全国职业工资分布；管道工、水暖工及独立安装工只是相关检索，不以行业、招聘或美国数字代填。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass",
+          "employer"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 25 分位时薪 17.76 美元 / 年薪 36,940 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第25分位",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 47-3015.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 75 分位时薪 22.94 美元 / 年薪 47,720 美元（2025 年，BLS OEWS，本职业（47-3015.00）自身口径）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第75分位",
-        "occupation_scope": "本职业：帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
+        "occupation_scope": "本职业：管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
         "period": "2025",
         "source_refs": [
           "onet"
@@ -38026,7 +38253,7 @@
       "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
-      "帮工管道铺设工、管道工、管道装配工、蒸汽管道工 · 任务、交付与责任边界",
+      "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工 · 任务、交付与责任边界",
       "测量与切割与连接 · 沟槽与试压留痕 · 管道与人身责任",
       "美国职业资料；中国精确职业工资缺口按来源保留"
     ],
@@ -38067,17 +38294,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 47-3015.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 47-3015.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
     },
     "title": {
       "availability": "available",
-      "text": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工"
+      "text": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工"
     }
   },
-  "source_content_sha256": "f1d6b452f9f4b0245e685afa13cca48b95e03d39a3a22559b1706d7b278591d4",
+  "source_content_sha256": "c93c6753bf6bfb99c47550e4e084e19fb6c705242095361994b3c4a2f30e5d78",
   "subject": {
     "canonical_slug": "helpers-pipelayers-plumbers-pipefitters-and-steamfitters",
-    "name": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工",
-    "summary": "帮工管道铺设工、管道工、管道装配工、蒸汽管道工对应 O*NET/SOC 47-3015.00「Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters」这一精确职业：以较低技能要求的作业协助管道工、管道装配工、蒸汽管道工或管道铺设工：使用、供应或递送材料与工具，并清洁作业区与设备。核心任务包括使用手动工具把阀门与接头或组件安装或协助安装到储罐与泵或系统上、在墙壁与天花板上安装支架与吊架以固定管道并设置套管或插入件、进行粗装与修理与更换卫浴器具与热水器并定位与修理或拆除渗漏或破损的管道、切割管材并向上递给管道装配工、测量与切割与套丝并组装新管道并放置于吊架或其他支撑物上；常见职位名称包括 Pipefitter Helper 与 Plumber Helper 与 Plumber Assistant 与 Plumber Apprentice 与 Plumbing Helper。官方范围原文：Help plumbers, pipefitters, steamfitters, or pipelayers by performing duties requiring less skill. Duties include using, supplying, or holding materials or tools, and cleaning work area and equipment. 口径说明：O*NET 在 47-3015.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（47-3015.00）自身口径如实标注；该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），2024—2034 年增长为 Faster than average（5% 至 6%）并标注 Bright Outlook。本页内容不构成安全、特种作业、职业健康或法律意见。"
+    "name": "管道铺设工、管道工、管道装配工与蒸汽管道工的帮工",
+    "summary": "本职业帮工协助管道工、配管工、蒸汽管道工和铺管工，准备工具材料，配合测量、切割、连接、支架安装与清洁记录。美国代码47-3015.00；真实任务可含安装维修，训练、法定资格及现场允许职责依具体作业核。"
   }
 }

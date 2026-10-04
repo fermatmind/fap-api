@@ -17,8 +17,20 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-industry-other-services-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-other-subsector-wage-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-other-total-wage-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
+      },
+      "fact:us-self-employed-income-2025": {
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
         "status": "mapped"
@@ -27,6 +39,12 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
       "item:funeral-attendants.ai-impact.ai-impact-table.10": {
@@ -1224,13 +1242,13 @@
         "status": "pending_mapping"
       },
       "item:funeral-attendants.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:funeral-attendants.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:funeral-attendants.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:funeral-attendants.path.interview-probation.1": {
         "status": "mapped"
@@ -24108,7 +24126,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对逝者家属服务的评价。本页按美国 O*NET-SOC 39-4021.00「Funeral Attendants」编写（固定索引给本资产的中文名是「殡葬服务员」；主要对象是葬礼与守灵期间的现场服务与遗体与场所与车辆与设备保障，产出为按流程完成的仪式现场服务、灵柩与花圈布置、哀悼者引导与陪同、殡仪车辆与送葬队伍保障、场地与设备维护与记录交接）。殡葬服务员多与殡葬礼仪师、机构管理者与家属协同工作，具体职责与授权范围由所在机构与所在地规定决定。"
+              "编辑清单｜固定名殡葬服务员，对应39-4021.00 Funeral Attendants。24任务含现场与设备车辆保障及8补充任务；本清单用于探索，不作录用评分或赋个人处置权。"
             ]
           },
           "id": "funeral-attendants.quick-decision.fit-decision-checklist.1",
@@ -24122,7 +24140,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的殡仪馆当日葬礼服务任务包。请写出一份服务与保障方案草案：（1）如何按当日仪式流程核对灵柩与花圈与灯光与设备与车辆是否就绪；（2）如何在仪式前把灵柩移入告别厅或礼拜堂并完成布置；（3）如何引导与陪同哀悼者、协助其上下礼车并在适当节点配合关闭灵柩；（4）如何清洁与驾驶殡仪车辆并随送葬车队行进、担任抬棺者并保障队列与停车秩序；（5）如何在遇到遗体接运与入殓与整容、传染病遗体处置、死亡登记与下葬许可与死亡证明等超出本人授权的事项，以及身体接触与搬运伤害、哀悼者情绪与安全、逝者与家属隐私、车辆驾驶安全等情况时按预案暂停、通知与升级并按授权处置。使用公开资料与模拟数据作答，不使用任何真实逝者、家属或机构信息。"
+              "演练题面｜完成F/V2纸面礼堂设备与排程题，核18件可用门槛、9:55准备期限、人员冲突和未确认车辆。材料、版本、答案、四作品及七日计划见路径板块；不接触真实遗体、家属或现场车辆。"
             ]
           },
           "id": "funeral-attendants.quick-decision.fit-decision-checklist.2",
@@ -24136,7 +24154,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 关注点：每天与个人及团队面对面讨论（75%）、每天使用电话沟通（61%）、持续与他人接触（54%）、与工作组或团队共同工作极其重要（48%）、每天在环境受控的室内工作（46%）、每天使用电子邮件（45%）、每周以上在封闭车辆或操作封闭设备中工作（44%）、与外部客户或公众打交道极其重要（42%）、精确或准确极其重要（41%）、时间压力每周以上（39%）。若你愿意在仪式现场长时间站立与走动，能在哀悼者情绪与时间压力下保持沉稳与程序感，把灵柩与花圈与设备与车辆按流程准备到位，并愿意按规定做记录与交接，本职业的日常要求与你的工作方式更接近。"
+              "情境信号｜75%每天面对面、61%每天电话、54%持续接触；53%约半时站立。44%封闭车辆、38%天气户外均为每周至少但非每天选项；比率为受访者回答，非每人固定强度。"
             ]
           },
           "id": "funeral-attendants.quick-decision.fit-decision-checklist.3",
@@ -24150,7 +24168,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示：每周以上在户外暴露于各种天气（38%）、决策对同事或机构结果有重要影响（35%）、身体接近为中等接近（34%）、每天做决策（34%）、制定任务与优先级与目标的自由很小（27%）。本职业以对仪式现场与遗体与家属与安全的现场负责为核心：一次灵柩或棺盖操作失误、一处遗体或家属隐私泄露、一次车辆或搬运安全疏忽、或一项超出授权的处置（如擅自实施入殓与整容或办理死亡登记与下葬许可），都可能造成不可逆的后果与声誉与合规风险；若你难以长时间站立与搬运、难以在丧亲场景中保持稳定情绪，或对遗体接触与殡葬场所明显不适，应把这些作为需要认真权衡的现实成本。"
+              "权衡建议｜35%时间压力每天、39%每周至少但非每天；35%决策结果非常重要。58%固定、42%不规则；工周70%少于40小时，不保证无夜班加班。真实体力、哀伤适应及岗位防护需按机构核。"
             ]
           },
           "id": "funeral-attendants.quick-decision.fermat-decision-card.6",
@@ -24164,7 +24182,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项殡葬服务工作上同时完成三件事：把现场做实（按当日流程完成迎接与引导与陪同、灵柩与花圈与灯光布置、车辆与送葬队伍保障、场地与设备维护）、把安全与尊严守住（遗体处置与搬运与驾驶安全、逝者与家属隐私与个人信息保护、传染防控与防护装备、以及在授权范围内操作）、并承担可核验的现场责任（对仪式节点与设备与车辆与异常如实记录与交接，不越权处置）。建议用一次可核验的体验（为虚构机构完成一份当日葬礼服务与保障流程草案、独立设计一版哀悼者引导与礼车协助与灵柩操作的就位核对清单、或做一次遗体接运与入殓与整容等超出授权事项的升级演练）来检验，而不是仅依据兴趣问卷的结论。"
+              "探索方法｜独立对F/V2核库存、时间和版本，保D2错误及R修正；写未确认事项。纸面结果只支持探索，不能证明搬运驾驶、卫生处置或胜任，不要求经验者签认。"
             ]
           },
           "id": "funeral-attendants.quick-decision.fermat-decision-card.7",
@@ -24186,7 +24204,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜殡葬服务员的工作大体可以分成三类：一是仪式现场与家属服务（迎接来宾、引导并陪同哀悼者进入举行守灵或葬礼的告别厅或礼拜堂、协助哀悼者上下礼车、在适当节点配合关闭灵柩、递送花圈或物品给逝者家属、就如何以逝者名义做慈善捐赠提供建议），二是灵柩与场地与车辆保障（仪式前把灵柩移入告别厅或礼拜堂、布置花圈与灯光、担任抬棺者、清洁并驾驶殡仪车辆并随送葬车队行进、监督送葬队伍并协助墓园停车、执行殡仪馆的一般维护与场地打理、发放与存放殡葬设备），三是记录与协助与合规（按机构安排与授权协助遗体接运与入殓与整容、撰写讣告、办理死亡登记与下葬许可、取得死亡证明与保险理赔文书、协助火化与骨灰处理包装、为丧亲者提供安慰与善后服务、接听电话与文书等行政事务）。三类工作循环衔接：当日流程核对—现场布置与就位—仪式中引导与陪同—灵柩与车辆与队伍保障—清理复位与设备回收—记录与交接与上报。"
+              "直接回答｜编辑按仪式服务、车辆场地保障、记录协作三重心组织；24官方任务和八补充任务完整见职业档案及职责，重心可交叉，具体权限按法域机构核。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.1",
@@ -24200,7 +24218,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 职业档案要点｜O*NET-SOC 39-4021.00「Funeral Attendants」的官方范围为：葬礼期间执行多种任务，例如在仪式前把灵柩移入告别厅或礼拜堂、在灵柩周围布置花圈或灯光、引导或陪同哀悼者、关闭灵柩，以及发放与存放殡葬设备（Perform a variety of tasks during funeral, such as placing casket in parlor or chapel prior to service, arranging floral offerings or lights around casket, directing or escorting mourners, closing casket, and issuing and storing funeral equipment.）。职业档案给出的 24 项任务（16 项核心 + 8 项补充）强调：迎接来宾；在葬礼期间执行多种任务以协助殡葬礼仪师并确保仪式顺利按计划进行；在仪式的适当节点关闭灵柩；引导或陪同哀悼者进入举行守灵或葬礼的告别厅或礼拜堂；仪式前把灵柩移入告别厅或礼拜堂；在哀悼者上下礼车时提供协助；清洁告别厅或礼拜堂；在灵柩周围布置花圈或灯光；清洁并驾驶殡仪车辆（如轿车或灵车）并随送葬车队行进；担任抬棺者；监督送葬队伍并协助墓园停车；把花圈或其他物品递送给逝者家属；把花圈搬上灵车或礼车以运往安葬地点；执行殡仪馆的一般维护（设备保养与场地打理）；发放与存放殡葬设备；就如何以逝者名义做慈善捐赠向哀悼者提供建议。补充任务包括：为遗体做防腐与着装与化妆并入殓；为报纸撰写讣告；办理下葬许可并登记死亡；把遗体运至殡仪馆；取得医生在死亡证明上的签署并完成保险理赔等其他文书；协助火化以及骨灰的处理与包装；照顾丧亲者的需要（安慰、咨询或善后服务）；以及打字与接听电话等行政事务。这些补充任务在多数地区属需要专门资质或机构授权的人员职责，殡葬服务员通常在机构安排与监督下协助完成。"
+              "职业定义｜O*NET-SOC39-4021.00 Funeral Attendants，固定中文名殡葬服务员，在葬礼中移入灵柩、布置花圈灯光、引导陪同哀悼者、关闭灵柩、发放存放设备。24任务为16核心、8补充；核心还含迎宾、协助上下礼车、清洁驾驶殡仪车辆、抬棺、队伍停车、物品递送搬运、场地维护及纪念慈善捐赠建议。补充含防腐着装化妆入殓、讣告、许可死亡登记、遗体运输、医生签署与保险文书、火化骨灰处理、丧亲安慰咨询善后和行政事务，不能整体排出本职。实际任务、资格与授权按法域机构核。"
             ]
           },
           "id": "funeral-attendants.profile.onet-structured-fields-block.1",
@@ -24233,7 +24251,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜每天与个人及团队面对面讨论（75% 每天），每天使用电话沟通（61% 每天）。\n联系强度｜持续与他人接触（54%），每天使用电子邮件（45% 每天）。\n团队与带领｜与工作组或团队共同工作极其重要（48%），协调或领导他人极其重要（28%）。\n对外接触｜与外部客户或公众打交道极其重要（42%），身体接近程度为中等接近（34%）。\n环境｜每天在环境受控的室内工作（46% 每天），每周以上在户外暴露于各种天气（38%）。\n移动与姿势｜每周以上在封闭车辆或操作封闭设备中工作（44%），约一半时间站立（53%）。\n精确与影响｜精确或准确极其重要（41%），决策对同事或机构结果有重要影响（35%）。\n节奏与决策｜时间压力每周以上（39%），每天做决策（34%）。\n自主度｜决策自由为「有一些自由」（40%），制定任务与优先级与目标的自由为「很小」（27%）。"
+              "沟通｜75%每天面对面、61%每天电话、45%每天邮件；54%持续接触。\n团队公众｜48%团队极重要、35%非常重要；42%公众极重要、24%非常重要。\n精确影响｜41%准确极重要；35%决策结果非常重要，非只是重要；37%错误后果严重，非事故率。\n频率自主｜34%每天决策；40%有一些决策自由；27%任务优先级自由很小；28%协调带领极重要。\n时间压力｜35%每天、39%每周至少但非每天，不能合成每天或含每天的每周以上。\n场所车辆｜46%每天可控室内；44%封闭车辆每周至少但非每天；38%天气户外同频率。\n身体｜53%约半时站、31%超过半时；34%中等接近为一臂距离，不等强制搬运量。\n节奏工周｜58%固定常规、42%不规则；70%少于40小时、12%40小时、18%超过40小时，非中国排班或个人工时。\n暴露冲突｜16%疾病暴露每周至少但非每天、42%从不；41%不愉快人士每月至少但非每周；60%无自动化，非AI采用或风险发生率。"
             ]
           },
           "id": "funeral-attendants.profile.work-context-block.1",
@@ -24247,7 +24265,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "现场与家属服务说明｜以当日仪式流程与家属要求为起点，按时间节点完成迎接与引导与陪同与礼车协助，在适当节点配合关闭灵柩，并维持现场秩序与通道畅通；对家属的询问与请求要及时回应或转交礼仪师处理。"
+              "现场核流程与家属需求，回应请求，异常转交。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.2",
@@ -24261,12 +24279,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望与工资口径｜本职业在美国劳工统计局（BLS）职业就业与工资统计（OEWS 2025）与 O*NET 呈现的美国职业数据中对应精确职业 39-4021.00：2025 年全国年工资中位数为 35,680 美元（时薪 17.16 美元）；就业 2024 年约 32,500 人，2024—2034 年预计增长与平均相当（3%—4%），期间预计约 5,700 个岗位空缺。上述为美国全国口径，不适用其他法域。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24275,7 +24293,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "迎接与引导来宾 → 布置灵柩与花圈与灯光 → 引导与陪同哀悼者并协助上下礼车 → 配合关闭灵柩并维持队列与停车秩序 → 清理与复位场地与设备 → 记录异常与交接与上报"
+              "迎宾引导 → 花圈布置 → 礼车协助 → 关闭配合 → 清理复位 → 异常上报"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.3",
@@ -24289,7 +24307,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局口径｜中国大陆按国民经济行业分类公布城镇单位就业人员平均工资，属行业门类口径、不按职业拆分；殡葬服务工作多由民政部门主管的殡仪馆与公墓等殡葬服务机构以及相关社会组织承担，行业平均工资只能作为背景参照，不能替代职业工资；中国大陆未建立与本职业精确对应的全国职业工资分布，本页按可见缺口登记，不以行业均值或美国数据推断起薪或到手收入。"
+              "证据不足：中国大陆本职全国工资、就业及分类精确对应未取得；NBS城镇单位行业工资只能作背景，不能代本职数值，不据有界查阅断言统计不存在。美国O*NET行业页当前94%其他服务（除公共管理）、6%其他行业，页内未注明对应年份，不能标成2025中国分布。"
             ]
           },
           "id": "funeral-attendants.profile.onet-structured-fields-block.3",
@@ -24303,7 +24321,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "灵柩与车辆与场地说明｜按机构流程核对待办清单，完成灵柩移入与布置与礼车安排与送葬车队与停车与场地清理复位；驾驶与搬运环节须遵守交通与安全规定并按规定穿戴防护装备，发现安全隐患或设备故障要立即报告而不是自行处置。"
+              "核设备车辆与分工，按规程作业，异常报告。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.4",
@@ -24317,12 +24335,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测口径｜本页美国就业与增长与空缺取 O*NET 呈现的 BLS 就业预测 2024—2034：就业 2024 年约 32,500 人，预计增长与平均相当（3%—4%），期间预计约 5,700 个岗位空缺；预测含增长与替换需求，不等于实际招聘数；中国与美国数据分别列示，不拼接、不换算。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24331,7 +24349,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认当日流程与家属要求 → 核对灵柩与花圈与设备与车辆就绪 → 按流程引导与陪同并维持秩序 → 在授权范围内完成灵柩操作与车辆任务 → 清理与复位并回收设备 → 记录异常与交接与上报"
+              "核对流程 → 核验设备 → 引导陪同 → 按权操作 → 回收复位 → 记录上报"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.5",
@@ -24345,12 +24363,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "合规与隐私与卫生边界｜中国大陆涉及遗体处置、传染病遗体、火化与墓位与殡葬服务机构资质的事项，按《殡葬管理条例》以及《中华人民共和国传染病防治法》等规定，由民政与卫生健康等部门按职责管理，并须在所在机构的资质与授权范围内执行；殡葬服务员通常不具备独立实施遗体防腐与整容、火化、死亡登记与下葬许可与死亡证明签署等处置的资质，遇到此类事项应移交具备资质或获得授权的人员与机构。涉及逝者与家属的个人信息（身份、联系方式、亲属关系、健康与死亡相关信息）的处理，须遵守《中华人民共和国个人信息保护法》等规定：限于实现殡葬服务目的的最小范围并取得合法依据，不得超范围收集、对外提供或用于其他用途；哀悼者的情绪与家庭情况属敏感信息，应在必要范围内知悉并按权限访问与限定留存期限。本页只作一般性提示，不构成法律或医疗或卫生防疫意见。"
+              "中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。"
             ]
           },
           "id": "funeral-attendants.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "infectious-law",
+            "pipl-law"
           ],
           "type": "prose"
         },
@@ -24359,7 +24379,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协助与合规协作｜按机构流程记录仪式节点与设备与车辆与遗体接运交接与异常情况，保留必要的交接与签字凭证；协助类任务（遗体接运、入殓与整容、死亡登记与下葬许可、死亡证明与保险理赔文书、火化与骨灰处理）只在机构安排与授权范围内执行，并在超出授权或遇到传染病遗体与疑似非正常死亡等情形时立即停止并上报。"
+              "记录节点设备与异常，协助事项按法域授权核。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.6",
@@ -24373,7 +24393,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「授权与产出」：本职业在机构安排下承担仪式现场服务与灵柩与车辆与场地保障与记录交接，产出是按流程完成的现场服务与设施保障与可复核的交接记录，通常不包含遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定的独立处置权；殡葬家庭经理以机构运营与人员与合规与预算与家属安排的管理结果为产出；验尸官以死亡原因与方式的法定调查与认定与相关文书为产出；个人护理员与家庭健康助理以日常生活照护与健康协助为产出且面向在世服务对象；社会与人类服务助理以社会服务与资源转介与个案协助为产出；神职人员以宗教仪式与教导与精神关怀为产出。授权与产出不同，不能跨岗位沿用遗体处置与死亡登记与火化与家属承诺的权限。"
+              "编辑区别｜本职以仪式现场、车辆设备及记录协作为重心，另有防腐火化等补充任务，非从职业名称排权。机构经理侧重运营；验尸官侧重法定死亡调查；照护助理面向在世对象；社会服务助理侧重资源转介。任务可交叉，具体法域资格授权另核。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.7",
@@ -24443,7 +24463,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业在所在机构的资质与授权范围内，于葬礼与守灵期间执行多种现场服务与保障任务：在仪式前把灵柩移入告别厅或礼拜堂并布置花圈与灯光，迎接来宾并引导与陪同哀悼者、协助其上下礼车，在适当节点配合关闭灵柩，清洁并驾驶殡仪车辆并随送葬车队行进，担任抬棺者，监督送葬队伍并协助墓园停车，把花圈与物品运往安葬地点，执行殡仪馆的一般维护与场地打理，发放与存放殡葬设备，并就如何以逝者名义做慈善捐赠提供建议；部分岗位在机构安排与监督下协助遗体接运与入殓与整容与撰写讣告与办理死亡登记与下葬许可与取得死亡证明与保险理赔文书与协助火化与骨灰处理以及行政事务。常见用人单位包括殡仪馆与殡葬服务机构、公墓与纪念园、以及提供殡葬礼仪与善后服务的机构；工作以长时间站立与走动、搬运与驾驶、在丧亲场景中的沟通与情绪承载为特点，结论与处置须可复核并可追溯；涉及遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定等事项的权限属于具备资质或获得授权的人员与机构。官方定义原文：Perform a variety of tasks during funeral, such as placing casket in parlor or chapel prior to service, arranging floral offerings or lights around casket, directing or escorting mourners, closing casket, and issuing and storing funeral equipment."
+              "职业定义｜O*NET-SOC39-4021.00 Funeral Attendants，固定中文名殡葬服务员，在葬礼中移入灵柩、布置花圈灯光、引导陪同哀悼者、关闭灵柩、发放存放设备。24任务为16核心、8补充；核心还含迎宾、协助上下礼车、清洁驾驶殡仪车辆、抬棺、队伍停车、物品递送搬运、场地维护及纪念慈善捐赠建议。补充含防腐着装化妆入殓、讣告、许可死亡登记、遗体运输、医生签署与保险文书、火化骨灰处理、丧亲安慰咨询善后和行政事务，不能整体排出本职。实际任务、资格与授权按法域机构核。"
             ]
           },
           "id": "funeral-attendants.profile.definition-block.11",
@@ -24527,7 +24547,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的责任主体｜殡葬服务员对按流程完成的现场服务与设施保障与记录交接负责，对遵守安全与卫生与隐私规范负责；涉及遗体防腐与整容、火化、死亡登记与下葬许可、死亡证明签署、以及传染病遗体处置等事项，由具备相应资质或机构授权的人员与机构决定，殡葬服务员不替代其决定，也不得越权实施。"
+              "权限与结论｜职责比较是编辑重心，不是互斥清单。美国本职8补充任务含遗体处置与登记等，实际条件按法域机构核；中国遗体五项专业服务由殡仪馆专门提供，证明签署与死因调查按相关制度，不从岗位名推权。记录区分事实、假设与待确认，不造批准。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.17",
@@ -24541,7 +24561,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的权限与批准｜同组与相邻岗位的权限来自机构授权与专业准则与法定资格，通常不包含对遗体处置与死亡认定与医疗判断自行处置的权限；涉及传染病遗体与疑似非正常死亡与火化与登记的事项应移交授权人员与主管部门。"
+              "权限与结论｜职责比较是编辑重心，不是互斥清单。美国本职8补充任务含遗体处置与登记等，实际条件按法域机构核；中国遗体五项专业服务由殡仪馆专门提供，证明签署与死因调查按相关制度，不从岗位名推权。记录区分事实、假设与待确认，不造批准。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.18",
@@ -24555,7 +24575,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜仪式现场服务与灵柩与车辆与场地保障须在机构流程与授权范围内进行；涉及遗体接运与入殓与整容、火化与骨灰处理、死亡登记与下葬许可与死亡证明与保险理赔文书、传染病遗体处置与疑似非正常死亡、以及对逝者与家属个人信息对外提供与跨机构共享的事项，应按规定升级或移交具备资质或获得授权的人员与机构，不得越权操作或作出承诺。"
+              "权限与结论｜职责比较是编辑重心，不是互斥清单。美国本职8补充任务含遗体处置与登记等，实际条件按法域机构核；中国遗体五项专业服务由殡仪馆专门提供，证明签署与死因调查按相关制度，不从岗位名推权。记录区分事实、假设与待确认，不造批准。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.19",
@@ -24569,7 +24589,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的结论边界｜同组与相邻岗位的结论多限于本机构业务与照护与服务层面，且通常不构成对死亡原因与法律责任与医疗判断的认定；跨机构与跨法域的结论适用有其范围限制。"
+              "权限与结论｜职责比较是编辑重心，不是互斥清单。美国本职8补充任务含遗体处置与登记等，实际条件按法域机构核；中国遗体五项专业服务由殡仪馆专门提供，证明签署与死因调查按相关制度，不从岗位名推权。记录区分事实、假设与待确认，不造批准。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.20",
@@ -24583,7 +24603,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的结论边界｜现场记录与交接只陈述按流程完成的服务节点与设备与车辆与异常等可核验事实并区分事实与估算；不得对死亡原因与遗体处置与火化与登记的合法性作出未经授权的判断；涉及传染病遗体与疑似非正常死亡与死亡登记与下葬许可与个人对外提供的事项必须升级或移交，口径也要经得住主管与机构与主管部门与家属的复核。"
+              "权限与结论｜职责比较是编辑重心，不是互斥清单。美国本职8补充任务含遗体处置与登记等，实际条件按法域机构核；中国遗体五项专业服务由殡仪馆专门提供，证明签署与死因调查按相关制度，不从岗位名推权。记录区分事实、假设与待确认，不造批准。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.21",
@@ -24639,12 +24659,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜遗体接触与传染病遗体处置有专门规定，遗体搬运与驾驶与封闭车辆作业有安全要求，逝者与家属信息属敏感个人信息，处理须有依据与权限并限定留存。"
+              "信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.25",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -24667,12 +24688,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜O*NET 显示本职业 Job Zone 为 1-2 级（SVP 低于 6.0），教育栏显示 47% 需要高中文凭或同等学历、22% 需要副学士或其他两年制学位、13% 为上过大学但无学位；实际招聘常看重服务意识与体力与驾驶与可靠性与合规意识。"
+              "美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24695,7 +24717,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜本职业整体工资水平较低且常含班次与待命与加班安排，仪式与丧事发生时间不可控，须书面确认工时与待命与加班与调休与差旅口径。"
+              "收入核对｜美国全国中位35,680美元不是中国薪资或低薪等级。具体合同工时、待命夜班、加班和补贴未取样，核书面条件，不编行业普遍结构。 证据不足：中国大陆本职全国工资、就业及分类精确对应未取得；NBS城镇单位行业工资只能作背景，不能代本职数值，不据有界查阅断言统计不存在。美国O*NET行业页当前94%其他服务（除公共管理）、6%其他行业，页内未注明对应年份，不能标成2025中国分布。"
             ]
           },
           "id": "funeral-attendants.profile.career-quick-answers-block.29",
@@ -24809,7 +24831,7 @@
                 "entity": "O*NET 殡葬服务员国家工资",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.onetonline.org/link/localwages/39-4021.00?st=CA"
               },
               {
                 "entity": "O*NET 殡葬服务员行业分布",
@@ -24830,7 +24852,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻岗位的核心差别在「授权与产出」：本职业在机构安排下承担仪式现场服务与灵柩与车辆与场地与设备保障并对现场安全与尊严与记录交接负责，产出是按流程完成的现场服务与设施保障与可复核的交接记录；殡葬家庭经理以机构运营与人员与合规与预算与家属安排的管理结果为产出；验尸官以死亡原因与方式的法定调查与认定与文书为产出；个人护理员与家庭健康助理以在世服务对象的日常生活照护与健康协助为产出；社会与人类服务助理以社会服务与资源转介与个案协助为产出；神职人员以宗教仪式与教导与精神关怀为产出。授权与产出各不相同，不能跨岗位沿用遗体处置与死亡登记与火化与家属承诺的权限。"
+              "编辑区别｜本职现场设备车辆与8补充任务、机构经理运营、验尸官法定调查、照护助理在世对象、社会服务助理资源转介；任务可交叉，具体权责按法域机构核。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.8",
@@ -24844,7 +24866,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "证据说明｜下表比较对象来自 O*NET 职业分类与在售公开资料，用于帮助区分相邻职业的工作内容与选择适配，不构成资格、录用或薪酬结论。各职业的工资与就业须按各自 SOC 口径分别核对，本表不做数值比较，也不把某一职业的工资当作另一职业的代理。"
+              "证据说明｜编辑按本职O*NET与相邻职责重心比较，未采具体招聘样本；不是官方互斥分类表或从岗位名判资格。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.9",
@@ -24872,7 +24894,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业在机构安排下承担仪式现场服务与灵柩与车辆与场地与设备保障并对现场安全与遗体与家属的尊严负责，通常不包含遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定的独立处置权；其他岗位分别以机构运营管理、法定死亡调查、在世者照护、社会服务转介、宗教与精神关怀为核心，通常不对现场仪式保障负责。"
+              "本职边界｜24任务含8补充任务，不能整体排防腐、火化、登记等；美国条件按州及机构另核，中国五项遗体专业服务由殡仪馆专门提供。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.11",
@@ -24928,7 +24950,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：殡葬家庭经理负责机构运营与人员排班与合规与预算与家属安排与质量监督，对机构整体结果负责；本职业在同一机构内承担具体的仪式现场服务与设施保障，通常不参与运营与预算决策。"
+              "管理方向｜机构经理重心是运营人员预算和服务质量，本职偏具体现场设备保障；不能据名称认定两者无交叉任务。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.15",
@@ -25152,7 +25174,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：社会与人类服务助理以个案受理与需求评估与资源转介与跟进为产出，帮助个人与家庭获得社会服务；本职业以殡葬现场服务与设施保障为产出，通常不承担社会服务转介职能。"
+              "社会服务方向｜资源转介个案协助为重心，本职亦列丧亲安慰咨询善后，不一概排除转介协作。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.31",
@@ -25208,7 +25230,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "过渡｜本页把相邻岗位按「授权与产出」并列，目的是帮助你判断自己想长期投入哪一类殡葬与照护与死亡调查与社会服务岗位。无论选择哪一方向，真正决定能否上岗的是对流程与安全与卫生与隐私与授权边界的理解、把当日任务做成可复核记录与交接的能力，以及通过机构与主管的考核与授权；兴趣问卷只用于提出问题。"
+              "探索过渡｜比较任务重心并核目标条件，F/V2作品仅为纸面探索，不保证晋升、转岗或处置资格。"
             ]
           },
           "id": "funeral-attendants.direction-comparison.adjacent-career-comparison-table.35",
@@ -25237,7 +25259,7 @@
                 "url": "https://www.onetonline.org/link/details/39-4021.00"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -25297,52 +25319,52 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-12",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 殡葬服务员详细资料",
+                "entity": "本职任务，非替代比例",
                 "id": "link-13",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/39-4021.00"
-              },
-              {
-                "entity": "BLS 职业就业预测（2024—2034）",
-                "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
-              },
-              {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
-                "id": "link-15",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
-              },
-              {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
-                "id": "link-16",
-                "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
-              },
-              {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
-                "id": "link-17",
-                "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
-              },
-              {
-                "entity": "O*NET 殡葬服务员职业范围",
-                "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/39-4021.00"
               },
               {
-                "entity": "O*NET 殡葬服务员国家工资",
+                "entity": "本职软件清单",
+                "id": "link-14",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/39-4021.00"
+              },
+              {
+                "entity": "任务背景，试用方案为编辑建议",
+                "id": "link-15",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/39-4021.00"
+              },
+              {
+                "entity": "本职2025—2035预测",
+                "id": "link-16",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "任务范围；不证明法律授权",
+                "id": "link-17",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/39-4021.00"
+              },
+              {
+                "entity": "预测非消失年份",
+                "id": "link-18",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "本职任务与准备",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.onetonline.org/link/summary/39-4021.00"
               }
             ]
           },
@@ -25469,7 +25491,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业的生成式 AI 文本与数据任务暴露相对偏低：核心工作是把灵柩与遗体与花圈与设备在现场就位、驾驶殡仪车辆并随送葬车队行进、引导与陪同哀悼者、清洁与维护场地与设备，这些依赖现场判断、体力与动手能力与人际接触，难以被语言与数据工具直接触及。AI 与数字工具更可能改变的是「排班与文书与记录环节」——当日任务与排班清单整理、讣告与流程与告知文案草稿、接送路线与时间安排、耗材与库存与设备台账维护、异常与交接记录整理；而灵柩与遗体操作与搬运与驾驶、现场引导与陪同与关闭灵柩配合、哀悼者情绪与安全应对、逝者与家属隐私与遗体处置授权判断仍由殡葬服务员与机构授权人员负责。技术可行不等于组织采用，也不等于岗位减少。"
+              "证据不足：本職AI量化暴露、组织采用、效率与就业因果未取得，不评偏低或保证短期不替代。排班文书库存与版本对照为编辑试用用途，现场搬运驾驶服务及法定判断须按法域机构责任核。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.18",
@@ -25511,7 +25533,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业预测 2024—2034（经 O*NET 呈现）"
+              "BLS本职EP2025—2035"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.21",
@@ -25525,7 +25547,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明就业与增长的美国口径；为预测而非实际招聘数，不含自雇。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.22",
@@ -25553,7 +25575,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资的时点估计；不含福利与加班与津贴，不适用于其他法域。"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.24",
@@ -25679,7 +25701,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是排班与文书与记录环节；灵柩与遗体与设备操作、驾驶与搬运、现场引导与陪同、哀悼者安全与隐私与遗体处置授权判断始终由殡葬服务员与机构授权人员负责。技术可行、组织采用与岗位结果三者必须分开判断。"
+              "编辑用途｜任务对照用于探索可试的文书库存草稿，未经效率与采用验证；真实现场、数据及法定权限须另核，不承诺增强。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.33",
@@ -25693,7 +25715,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "当日任务与排班清单整理、接送路线与时间安排可被工具加速"
+              "编辑试用：虚构排班与时间清单草稿，逐项核原输入"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.34",
@@ -25833,7 +25855,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以现场服务与动手与驾驶为主，工具可增强排班与文书与记录但难以替代身体与人际任务"
+              "任务描述不等自动化风险；具体工具质量、权限和现场使用适用性另核。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.44",
@@ -25889,7 +25911,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本精确职业（39-4021.00）全国口径，但仍不含福利与加班"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.48",
@@ -25917,7 +25939,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 研究"
+              "ILO生成式AI研究（一般背景）"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.50",
@@ -25931,7 +25953,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露研究，以职业大组为主"
+              "本轮未取得本职量化暴露，不据通用报告定风险等级"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.51",
@@ -26029,7 +26051,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测 2024—2034（经 O*NET 呈现）"
+              "BLS本职EP2025—2035"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.58",
@@ -26057,7 +26079,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业预计增长与平均相当（3%—4%），期间约 5,700 个空缺含替换需求，不可读作新增岗位"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.60",
@@ -26113,12 +26135,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "短期内不会。核心工作是把灵柩与遗体与花圈与设备在现场就位、驾驶殡仪车辆并随送葬车队行进、引导与陪同哀悼者、清洁与维护场地与设备，这些依赖现场判断与人际接触与动手能力；工具能替代的是排班与文书与记录环节，不能替代遗体与灵柩操作与驾驶与搬运与现场引导与陪同与哀悼者安全应对。"
+              "证据不足：本职替代比例与时间未取得；24职责包括身体现场与文书记录，任务结构不证明岗位不会被替代。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26141,7 +26164,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有排班与任务调度与殡葬业务管理软件、路线与车辆与库存管理、遗体与案件与记录管理与电子登记与文书模板、以及沟通与告知类工具；具体以机构安排为准。"
+              "本职O*NET软件列账务、iCIMS Talent Cloud、Office、Excel、Word，未据此证明统一编程门槛；核具体岗位，纸面F/V2可不用代码。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.66",
@@ -26169,12 +26192,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "遗体与灵柩操作与搬运与车辆驾驶与现场安全处置能力、在哀悼者情绪与家属诉求下的沟通与沉稳、逝者与家属隐私与遗体处置授权边界的把握，以及在时间压力与体力负荷下的可靠性。"
+              "编辑试用文书排班、讣告和库存草稿与版本对照；只用虚构输入，不作为已采用、最高暴露或效率排序。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -26197,12 +26220,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有中国大陆该职业的精确公开统计，不能断言其用工与技术采用情况；涉及遗体处置与传染病遗体与火化与登记的要求应参考《殡葬管理条例》与《中华人民共和国传染病防治法》等规定，并以民政与卫生健康等部门要求为准。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。不能把增长归因AI；中国本职预测未取得。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26225,12 +26248,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先明确工具输出由谁复核、依据什么流程与安全与隐私要求、出现错误如何回退，并核对逝者与家属信息的权限与留存期限与审计追踪；遗体处置与登记与费用与家属承诺不得由工具自动完成。"
+              "合同付款与家属承诺核授权人、项目及法域，工具草稿不能签署审批。中国收费须符合殡葬条例43/50条，不造有效同意。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26253,12 +26277,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "逝者与家属的身份与联系方式与亲属关系与健康与死亡相关信息属敏感个人信息，应限定用途与留存期限并做好权限与审计追踪；不得把逝者与家属数据上传到外部服务，跨境与对外提供须另行评估与履行程序；涉及传染病遗体的信息按卫生防疫要求处理。"
+              "证据不足：没有已核的职业消失年份；BLS本职预测至2035增长2.6%不证明永久存在或AI因果。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26281,12 +26305,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用三层证据判断：技术可行、组织是否采用、岗位结果；并结合本地人口结构与殡葬服务需求与机构规模与人力结构，而不是只看工具演示。"
+              "学习建议｜核24任务与当前法域边界，学清单记录和5类软件基础，再做F/V2库存排程版本题；课程与作品不等岗位资格。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26309,7 +26335,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任前言｜效率可以外包给工具，判断与后果不能。以下五步是采用任何数字工具前后都必须保住的人工责任点。"
+              "工具责任｜以下为编辑核对步骤，未经效率验证。现场与法定责任按机构和法域，文书不能造检查、签字或许可。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.78",
@@ -26351,7 +26377,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "授权与登记：遗体接运与入殓与整容与火化与死亡登记与下葬许可与死亡证明等必须按机构授权由具备资质人员完成并留痕，不得由工具自动生成结论。"
+              "中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.81",
@@ -26379,7 +26405,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及传染病遗体与疑似非正常死亡与投诉舆情与个人信息对外提供的事项须经主管与机构与主管部门确认并留痕。"
+              "升级核对｜具体疑似传染、非正常死亡与数据对外提供按适用程序报告或移交；记录未确认状态，不称一律需全部机关批准。"
             ]
           },
           "id": "funeral-attendants.ai-impact.ai-impact-table.83",
@@ -26947,12 +26973,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.16 美元 / 中位年薪 35,680 美元（2025，BLS OEWS）"
+              "10分位28,070美元/年（美国2025）"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -26961,12 +26988,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 39-4021.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与加班与津贴。"
+              "美国39-4021全国2025｜10分位是分布界值，非新手或兼职工资。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -26975,12 +27003,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 28,070 美元/年（2025，BLS OEWS）"
+              "25分位30,380美元/年（美国2025）"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -26989,12 +27018,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应入职初期或兼职与季节性岗位，不代表本职业的标准起薪。"
+              "美国39-4021全国2025｜25分位不说明机构、地区或差异原因。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27003,12 +27033,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 30,380 美元/年（2025，BLS OEWS）"
+              "中位35,680美元/年、17.16美元/小时（美国2025）"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27017,12 +27048,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型（殡仪馆、公墓、火化设施、家族经营机构）与地区与工时安排差异大。"
+              "美国39-4021全国2025｜中位是分布中点，非起薪或个人实收。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27036,7 +27068,8 @@
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27045,12 +27078,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应资历较长或带班或承担遗体接运与整容协助等额外职责的岗位，不代表全部资深人员。"
+              "美国39-4021全国2025｜75分位不证明资深、带班或整容协助收入。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27064,7 +27098,8 @@
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27073,12 +27108,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数机构与管理岗或高工时岗位影响，个体可达性有限；本口径上下十分位跨度约 1.7 倍。"
+              "美国39-4021全国2025｜90/10界值比约1.7，不证明管理高工时原因或个人上限。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27087,12 +27123,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 32,500 人（2024，BLS 就业预测基期，经 O*NET 呈现）"
+              "2025就业31.3千人"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27101,7 +27137,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.18",
@@ -27115,12 +27151,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 与平均相当（3%—4%，2024—2034，BLS 就业预测）"
+              "2025—2035增长2.6%"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27129,7 +27165,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，与平均相当 3%—4%）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.20",
@@ -27143,12 +27179,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 5,700 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "2025—2035年均空缺5.4千人"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27157,12 +27193,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）；边界｜来自增长与替换需求，按原文呈现，不可读作新增岗位。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27171,7 +27209,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业以灵柩与遗体与设备操作与驾驶与搬运与现场服务与家属沟通为主，生成式 AI 的文本与数据任务暴露相对偏低；本页不对其 AI 影响评分，仅说明可被工具辅助（当日任务与排班清单整理、讣告与流程与告知文案草稿、接送路线与时间安排、耗材与库存与设备台账维护、异常与交接记录整理）与必须由人负责（灵柩与遗体与设备操作与驾驶与搬运、现场引导与陪同与关闭灵柩配合、哀悼者情绪与安全应对、遗体处置与登记与火化授权与逝者与家属隐私判断）的边界。"
+              "证据不足：本职AI量化暴露采用效率与就业因果未取得；虚构文书排班库存草稿为编辑试用，不定偏低或保证增强。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.23",
@@ -27185,7 +27223,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜葬礼期间执行多种现场服务与保障任务：在仪式前把灵柩移入告别厅或礼拜堂并布置花圈与灯光，迎接来宾并引导与陪同哀悼者与协助其上下礼车，在适当节点配合关闭灵柩，清洁并驾驶殡仪车辆并随送葬车队行进，担任抬棺者，监督送葬队伍并协助墓园停车，把花圈与物品运往安葬地点，执行殡仪馆的一般维护与场地打理，发放与存放殡葬设备，并就如何以逝者名义做慈善捐赠提供建议；部分岗位在机构安排与监督下协助遗体接运与入殓与整容与撰写讣告与办理死亡登记与下葬许可与取得死亡证明与保险理赔文书与协助火化与骨灰处理以及行政事务；产出为按流程完成的现场服务与设施保障与可复核的交接记录；不含依法只能由具备资质或获得授权的人员与机构承担的遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定职责。"
+              "职业定义｜O*NET-SOC39-4021.00 Funeral Attendants，固定中文名殡葬服务员，在葬礼中移入灵柩、布置花圈灯光、引导陪同哀悼者、关闭灵柩、发放存放设备。24任务为16核心、8补充；核心还含迎宾、协助上下礼车、清洁驾驶殡仪车辆、抬棺、队伍停车、物品递送搬运、场地维护及纪念慈善捐赠建议。补充含防腐着装化妆入殓、讣告、许可死亡登记、遗体运输、医生签署与保险文书、火化骨灰处理、丧亲安慰咨询善后和行政事务，不能整体排出本职。实际任务、资格与授权按法域机构核。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.24",
@@ -27199,7 +27237,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "初中或高中及以下"
+              "高中或同等学历"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.25",
@@ -27213,7 +27251,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "仪式现场服务与场地维护类起步岗"
+              "美国新聘教育问卷"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.26",
@@ -27227,7 +27265,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业在美国属 Job Zone 1-2 级（SVP 低于 6.0），教育栏显示 47% 需要高中文凭或同等学历；现场服务与搬运与清洁与场地维护类岗位的入门门槛主要在体力与可靠性与服务意识，不在学历。"
+              "47%回答需高中或同等；BLS典型高中、无相关经验、短期OJT，不作中国统一门槛。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.27",
@@ -27241,7 +27279,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中或中等职业教育（含殡葬服务相关方向）"
+              "副学士或两年学位"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.28",
@@ -27255,7 +27293,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "殡仪服务与遗体接运与车辆驾驶类岗"
+              "美国新聘教育问卷"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.29",
@@ -27269,7 +27307,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中等职业教育或殡葬服务相关课程可提供遗体处理与安全与卫生与礼仪基础；涉及遗体防腐与整容与火化与登记类事务仍须具备资质或机构授权。"
+              "22%回答需副学士或两年学位，不代表从业学历分布或中国岗位层级。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.30",
@@ -27283,7 +27321,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "大专（含社会工作与殡葬管理相关方向）"
+              "上过大学无学位"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.31",
@@ -27297,7 +27335,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "殡葬服务与机构运营支持岗"
+              "美国新聘教育问卷"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.32",
@@ -27311,7 +27349,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "大专及以上更常见于需要排班与记录与合规与家属沟通与机构运营协作的岗位；本页不提供个人资格结论，以机构与所在地规定为准。"
+              "13%回答上过大学无学位，未列其余比例；中国具体条件未取样。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.33",
@@ -27325,7 +27363,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科及以上"
+              "其他准备条件"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.34",
@@ -27339,7 +27377,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机构管理与殡葬礼仪与专业方向岗"
+              "目标机构另核"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.35",
@@ -27353,7 +27391,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本科及以上更常见于殡葬礼仪与机构管理与专业教育方向；本职业本身通常不要求本科，学历与岗位层级的对应关系以机构招聘条件为准。"
+              "证据不足：中国本职学历与岗位层级、课程录用条件未取样，不编大专更常管理或本科专业岗位。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.36",
@@ -27381,7 +27419,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "承担遗体接运与守灵与告别仪式与火化等环节的现场服务与保障，是本职业在中国大陆最集中的用人单位；岗位与资质要求以机构与当地民政部门规定为准。"
+              "中国大陆条例25条明确殡仪馆专门提供五项遗体专业服务；未取得本职雇主比例，不称最集中。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.38",
@@ -27409,7 +27447,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "承担安葬仪式现场服务与墓区引导与秩序维护与场地与设施维护，工作含户外与季节性负荷。"
+              "编辑检索公墓纪念园的现场引导与维护岗位，实际职责、工时和条件未取样，不编季节性普遍负荷。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.40",
@@ -27423,7 +27461,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "社区与养老与医疗机构的善后服务协作"
+              "非机构殡仪服务主体"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.41",
@@ -27437,7 +27475,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在机构衔接的善后与告别服务环节提供现场支持，需遵守医疗与卫生防疫与隐私要求。"
+              "条例41条代购策划主持信息咨询主体须县级民政备案；24条医院太平间不得外包或开展殡仪服务。非个人统一职业证书，不把医院写为当然殡仪用人场所。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.42",
@@ -27479,7 +27517,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜截至本轮检索，中国大陆未建立与本职业精确对应的全国职业工资分布；按证据政策，本页展示缺失而不是使用代理数字，不以行业均值或美国数据推断起薪或到手收入。"
+              "证据不足：中国大陆本职全国工资就业未取得，不以NBS行业均值代填，不断言统计不存在。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.45",
@@ -27493,7 +27531,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径，不区分职业；殡葬服务工作多由民政部门主管的殡仪馆与公墓与殡葬服务机构承担，用人单位性质与岗位（现场服务、遗体接运、火化协助、场地维护、机构运营支持）与工时与班次与地区差异较大，与行业平均值口径不同，不可直接比较。来源与口径｜中国部分仅登记口径与缺口：经有界检索仍未取得可按本职业核验的统计值，因此不以行业代理数字填充；美国部分来自 BLS OEWS 2025（经 O*NET 呈现）与 BLS 就业预测 2024—2034（经 O*NET 呈现）；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "中美口径｜NBS行业工资与美国39-4021 OEWS2025工资、EP2025—2035分别阅读，不拼接换算或映射中国雇主比例。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.46",
@@ -27521,7 +27559,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜本职业的实际收入通常与用人单位性质（民政部门主管的殡仪馆、公墓与纪念园、家族经营或民营殡葬服务机构）、岗位（仪式现场服务、遗体接运、火化协助、场地与设备维护、机构运营支持）、工时与班次与待命与加班与季节性负荷、地区与生活成本以及资历相关；殡葬服务的仪式与丧事发生时间不可控，夜间与节假日出勤可能显著影响实际投入但不计入统计工资；本页不给出任何具体金额，避免以个别样本代表整体。"
+              "证据不足：中国本职城市合同、工资构成、工时待命与季节规律未取样。可书面核税前税后、基本计时、奖金提成、加班班次、待命与差旅，不推收入上限。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.48",
@@ -27619,7 +27657,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 39-4021.00 / O*NET-SOC 39-4021.00 覆盖葬礼期间承担现场服务与设备发放存放等任务的服务人员，与葬礼主持与遗体防腐与整容（通常需执业资质）以及死亡调查（验尸官与法医）分属不同职业；中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，涉及遗体处置、传染病遗体、火化与墓位等另有专门规定与技术规范，具体职业归类与从业要求以主管部门与地方规定为准；两者分类与统计口径不同，不做数值换算。"
+              "证据不足：中国职业分类与美国39-4021精确对应未取得。固定名和编辑检索别名非代码对照；美国本职8补充任务不整体排除，中国专业服务机构边界按现行条例。"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.55",
@@ -27638,7 +27676,9 @@
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27647,12 +27687,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 与平均相当（3%—4%，2024—2034，BLS 就业预测）"
+              "2025—2035增长2.6%，净增0.8千人"
             ]
           },
           "id": "funeral-attendants.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27683,12 +27723,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 39-4021.00 职业与工资数据｜https://www.onetonline.org/link/summary/39-4021.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 殡葬服务员国家工资｜https://www.onetonline.org/link/localwages/39-4021.00"
+              "O*NET本职概览｜https://www.onetonline.org/link/summary/39-4021.00；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET CA页内United States全国工资｜https://www.onetonline.org/link/localwages/39-4021.00?st=CA"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27697,12 +27738,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.16 美元 / 中位年薪 35,680 美元（2025，BLS OEWS）"
+              "10分位28,070美元/年（美国2025）"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27711,12 +27753,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 39-4021.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与加班与津贴。"
+              "美国39-4021全国2025｜10分位是分布界值，非新手或兼职工资。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27725,12 +27768,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 28,070 美元/年（2025，BLS OEWS）"
+              "25分位30,380美元/年（美国2025）"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27739,12 +27783,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应入职初期或兼职与季节性岗位，不代表本职业的标准起薪。"
+              "美国39-4021全国2025｜25分位不说明机构、地区或差异原因。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27753,12 +27798,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 30,380 美元/年（2025，BLS OEWS）"
+              "中位35,680美元/年、17.16美元/小时（美国2025）"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27767,12 +27813,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型与地区与工时安排差异大。"
+              "美国39-4021全国2025｜中位是分布中点，非起薪或个人实收。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27786,7 +27833,8 @@
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27795,12 +27843,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应资历较长或带班或承担遗体接运与整容协助等额外职责的岗位，不代表全部资深人员。"
+              "美国39-4021全国2025｜75分位不证明资深、带班或整容协助收入。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27814,7 +27863,8 @@
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27823,12 +27873,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数机构与管理岗或高工时岗位影响，个体可达性有限；本口径上下十分位跨度约 1.7 倍。"
+              "美国39-4021全国2025｜90/10界值比约1.7，不证明管理高工时原因或个人上限。；OEWS方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27837,12 +27888,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 32,500 人（2024，BLS 就业预测基期，经 O*NET 呈现）"
+              "2025就业31.3千人"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27851,7 +27902,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.20",
@@ -27865,12 +27916,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 与平均相当（3%—4%，2024—2034，BLS 就业预测）"
+              "2025—2035增长2.6%"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27879,7 +27930,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，与平均相当 3%—4%）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.22",
@@ -27893,12 +27944,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 5,700 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "2025—2035年均空缺5.4千人"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27907,7 +27958,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）；边界｜来自增长与替换需求，不可读作新增岗位。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.24",
@@ -27921,12 +27972,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值均为美国口径，来源为 BLS OEWS 2025 与 BLS 就业预测 2024—2034（经 O*NET 呈现），对应精确职业 O*NET-SOC 39-4021.00；不适用于中国大陆或其他法域，也不构成对个人薪酬或录用的承诺。本页未取得可按行业与分地区读取的本职业工资中位数，均按可见缺口登记。"
+              "范围｜OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。证据不足：本职美国行业工资当前未取得，所核CA页含全国和州城市工资，本页全国不取州值。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27935,12 +27988,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年中位时薪 17.16 美元、中位年薪 35,680 美元，工资分布从下十分位 28,070 美元到上十分位 48,460 美元，跨度约 1.7 倍；差异主要来自机构类型（殡仪馆、公墓与火化设施、家族经营机构）、地区与生活成本、岗位职责（仪式现场服务、遗体接运、火化协助、场地与设备维护）与工时与班次安排；中位不代表起薪，也不含福利与加班。"
+              "美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27949,7 +28004,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "承担遗体接运与入殓与整容协助或带班与待命职责的岗位通常高于单一现场服务岗位；家族经营与机构化运营的薪酬结构差异明显。"
+              "机构与职责影响方向待核，不从全国工资分位推因果。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.27",
@@ -27977,7 +28032,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "高成本地区与人口密集地区通常更高，但扣除生活成本后的差异会变化。"
+              "所核CA页地区数据未用于本页全国表，不据地名断言成本导致差异。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.29",
@@ -28005,7 +28060,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "夜间与节假日出勤与待命与加班较多的岗位实际到手收入更高，但公开统计只反映时点工资，难以体现这类结构。"
+              "具体夜班待命加班合同未取样；OEWS正常工资纳排按方法，不能说全部津贴不纳或到手必较高。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.31",
@@ -28033,7 +28088,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 与平均相当（3%—4%，2024—2034，BLS 就业预测）"
+              "2025—2035增长2.6%"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.33",
@@ -28075,7 +28130,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年该职业在美国就业占比约 94%；其中的殡葬服务与火化与墓园服务是主要雇主。"
+              "本轮O*NET行业页94%其他服务（除公共管理），页内未注明对应年份，不冒2025工资。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.36",
@@ -28117,7 +28172,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示其余约 6% 就业分布于其他行业；样本较小。"
+              "同页6%其他行业合计，无行业名或样本量，不称样本较小。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.39",
@@ -28159,7 +28214,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 只发布两个顶层行业行，本页未取得可按本职业读取的细分行业工资中位数。"
+              "顶层行业比例不支持细分行业工资。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.42",
@@ -28173,7 +28228,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "自雇与家族经营机构"
+              "自雇范围（非行业）"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.43",
@@ -28201,7 +28256,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "OEWS 为雇主报告口径、不含自雇；本页未取得可按本职业读取的该部分工资数据。"
+              "EP2025自雇0.2%，OEWS工资排自雇；家族经营可能雇员，不能等同自雇。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.45",
@@ -28215,7 +28270,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 1.7 倍的差距主要来自机构类型与岗位职责与地区与工时安排，本口径为精确职业 39-4021.00 全国口径。"
+              "美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.46",
@@ -28229,7 +28284,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利、加班、夜班与待命补贴与季节性奖金；殡葬服务的时间不可控，公开统计难以完整反映这类结构。"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.47",
@@ -28243,7 +28298,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：是否取得遗体接运与整容协助等额外职责与带班资格、是否具备驾驶证与合规记录，会明显影响收入上限。"
+              "统计项目｜全国工资来自BLS OEWS2025，经O*NET CA页United States呈现；就业另取BLS39-4021 EP2025—2035，含自雇，两者不同。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.48",
@@ -28257,7 +28312,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字一起看，并结合本地机构类型与岗位职责与工时安排核对，不用单一数字推断个人薪酬。"
+              "收入条件｜编辑建议核实际合同的任务地点、正常工时、班次待命、奖金佣金、加班福利及税前税后；具体影响幅度未取得，分位不预测个人工资。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.49",
@@ -28285,7 +28340,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应入职初期或兼职与季节性岗位；进入该区间的常见原因是工时不足或仅承担单一现场服务职责。"
+              "10分位界值不证明新手、季节、工时不足或单任务原因。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.51",
@@ -28299,7 +28354,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手起薪通常接近或低于中位，随职责范围与机构与地区与工时安排变化上升。"
+              "中位是分布中点，不证明新手起薪通常更低或后续必上升。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.52",
@@ -28313,7 +28368,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应资历较长或带班或承担遗体接运与整容协助与高工时与高成本地区的岗位；高薪端受岗位职责与工时结构影响较大。"
+              "90分位不证明资历、带班、地区或高工时原因及个人上限。"
             ]
           },
           "id": "funeral-attendants.us-salary.career-snapshot-secondary-locale.53",
@@ -28447,10 +28502,10 @@
                 "entity": "O*NET 39-4021.00 国家工资",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.onetonline.org/link/localwages/39-4021.00?st=CA"
               },
               {
-                "entity": "BLS 就业预测（2024—2034）",
+                "entity": "BLS本职就业预测2025—2035",
                 "id": "link-20",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
@@ -28482,7 +28537,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.3",
@@ -28525,7 +28580,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜尽责性偏高、情绪稳定性较好、宜人性偏高的人更容易适应高体力负荷与丧亲场景的服务与协作；但人格分数不用于录用或适配结论。"
+              "编辑探索｜测评可帮助提出偏好问题；本职具体效度未核，不从分数判现场胜任。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.6",
@@ -28539,7 +28594,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：人格特质与工作表现的关联为群体统计趋势，不能用于个体预测。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.7",
@@ -28624,7 +28679,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：MBTI 不属于职业资格或能力评估工具，不能作为用工依据。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.11",
@@ -28709,7 +28764,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：属自我探索工具，不构成职业能力或适配结论。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.15",
@@ -28752,7 +28807,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力与推理｜主要反映学习与问题解决的一般能力；本职业更依赖现场判断与动线与队列安排、在不可控节奏下的应变以及记录与沟通的准确性。"
+              "编辑探索｜测评可帮助提出偏好问题；本职具体效度未核，不从分数判现场胜任。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.18",
@@ -28766,7 +28821,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：一般认知能力与学习速度相关，但不能替代现场经验与安全与卫生与合规意识。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.19",
@@ -28809,7 +28864,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力｜本职业常与哀悼者与家属与服务团队沟通，情绪调节与共情边界影响现场秩序与家属体验。"
+              "编辑探索｜测评可帮助提出偏好问题；本职具体效度未核，不从分数判现场胜任。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.22",
@@ -28823,7 +28878,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：情绪智力测评结果为自我报告，不能作为录用或绩效结论。"
+              "证据不足：本职测评效度、个体预测与证据等级未取得；仅作反思，不据类型评分录用。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.23",
@@ -28880,7 +28935,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过机构的安全与卫生与流程考核、能否在丧亲场景与体力负荷下稳定完成现场服务，也不能替代真实实践。最可靠的判断方式是用一次真实或模拟的殡葬服务任务来检验你如何核对当日流程与设备与车辆、如何引导与陪同与维护秩序、如何处理疑似传染病遗体或超出授权的事项，以及是否清楚自己与机构的授权边界。"
+              "探索建议｜独立做F/V2纸面核对，查看输入、公式、版本与未确认事项；结果仅反思，真实身体、驾驶、卫生防控与哀伤适应须另核，不能以纸面证明。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.27",
@@ -28922,7 +28977,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若难以承受长时间站立与搬运与遗体接触或哀悼者情绪场景，不建议选择本职业。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.30",
@@ -28964,7 +29019,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望承担机构整体运营与预算责任，需在积累现场与合规经验后再转向本职业。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.33",
@@ -29006,7 +29061,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若对法定调查与尸检与出庭作证无兴趣或无法取得相应资格，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.36",
@@ -29048,7 +29103,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望面向丧亲场景与遗体与仪式现场而非在世者照护，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.39",
@@ -29090,7 +29145,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若无法接受与医护协作与健康照护职责，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.42",
@@ -29132,7 +29187,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若希望承担现场服务与执行保障而非个案与转介工作，不建议选择此方向。"
+              "编辑比较｜任务重心可交叉；核该方向独立条件、法域和机构授权，纸面作品与兴趣不保证转岗或排除继续本职。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.45",
@@ -29146,7 +29201,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "什么性格的人更适合做殡葬服务员？本职业更看重体力与可靠性与服务意识、在哀伤场景中的沉稳与共情边界、对流程与安全与卫生规范的遵守，而不是某一性格类型；O*NET 兴趣代码为 RCS（现实型—常规型—社会型），可作为探索起点。"
+              "性格探索｜本职O*NET兴趣代码RCS可用于提出任务偏好问题，不能判哪种性格更适合；关注服务记录与流程方法，真实岗位条件另核。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.46",
@@ -29160,7 +29215,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向的人适合做殡葬服务员吗？可以，但工作需与服务团队与家属与礼仪师与司机与墓园高频沟通（每天面对面讨论 75%、每天使用电话 61%、持续与他人接触 54%、与外部客户或公众打交道极其重要 42%），人际强度较高，且要在哀悼者情绪场景中保持稳定。"
+              "内向探索｜不从内向程度保证适合或不适合。O*NET75%每天面对面、61%每天电话、54%持续接触、42%公众极重要为工作情境；可用虚构引导文案观察偏好，真实情绪和现场胜任另核。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.47",
@@ -29174,7 +29229,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向的人能做好殡葬服务员吗？可以。外向有助于现场沟通与家属服务，但本职业更关键的是按流程与规范完成灵柩与遗体与设备操作与驾驶与记录交接，外向程度本身不是门槛。"
+              "外向｜不从外向程度保证胜任或认定门槛；用虚构引导文案与F/V2核对观察沟通偏好，真实条件另核。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.48",
@@ -29188,7 +29243,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "哪种 MBTI 最适合殡葬服务员？没有哪一种类型被证明最适合。MBTI 不属于职业资格或能力评估工具，现场适应主要取决于体力与可靠性、对安全与卫生与隐私规范的遵守、以及在哀伤场景中的情绪稳定。"
+              "MBTI｜本职最适合类型及效度未核，不判录用；关注任务方法和实际岗位条件。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.49",
@@ -29216,7 +29271,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；现场适应更应通过实地观察或实习或模拟任务与机构考核来验证。"
+              "测评分数｜本职个人预测未核，不作能或不能的统计断言；纸面核对只为探索。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.51",
@@ -29230,7 +29285,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好能做殡葬服务员吗？可以。本职业不依赖高等数学，但需要读懂当日流程与清单、核对设备与车辆与耗材数量、按规范填写记录与交接信息；基础算术与细致程度比数学水平更重要。"
+              "数学｜F/V2需基础加减与时间核对；官方软件无统一高等数学门槛证据，具体岗位另核，不能保证任何人均可。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.52",
@@ -29244,7 +29299,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做殡葬服务员需要高情商吗？需要情绪稳定与共情边界，但不要求特定测评分数。现场需要在哀悼者情绪与时间压力下保持沉稳、清楚沟通，并把个人情绪与专业服务分开。"
+              "情绪能力｜关注引导、需求回应与安慰善后，但本职测评分数或高情商阈值未核，不以标签判胜任。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.53",
@@ -29272,7 +29327,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的殡葬服务任务检验：能否核对当日流程与设备与车辆清单、能否设计一版哀悼者引导与礼车协助与灵柩操作的就位核对清单、能否对疑似传染病遗体与超出授权事项写出暂停与升级方案；这些证据比问卷更能说明适配。"
+              "作品｜独立F/V2四作品展示库存、排程、版本及待确认；不称已真实服务或有经验人复核。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.55",
@@ -29314,7 +29369,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的殡葬服务任务检验当日流程核对与就位与引导与记录交接，并了解目标机构对体力与健康与驾驶与安全卫生培训与授权的要求，再决定是否长期投入。"
+              "验证建议｜先做F/V2，列目标机构职责、健康体力、驾驶、防护、工资工时与授权待核；不接真实遗体或自行驾驶练习。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.58",
@@ -29412,7 +29467,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与学历与培训口径（经 O*NET 呈现）。"
+              "实际链接国家工资，仅支持全国工资；就业教育另取EP及O*NET概览。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.65",
@@ -29426,7 +29481,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于补充了解该职业的国家工资展示（美国口径，不适用其他法域）。"
+              "实际链接EP，支持本职2025—2035含自雇预测；不是国家工资页。"
             ]
           },
           "id": "funeral-attendants.fit.personality-fit-block.66",
@@ -29455,34 +29510,34 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 殡葬服务员职业档案",
+                "entity": "O*NET本职任务与情境",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/39-4021.00"
               },
               {
-                "entity": "O*NET 殡葬服务员详细资料",
+                "entity": "殡葬管理条例（现行2025修订）",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/39-4021.00"
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=104495"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "传染病防治法（2025修订）",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_397cd55d710842979494a429d02fa2be.html"
               },
               {
-                "entity": "O*NET 殡葬服务员国家工资",
+                "entity": "个人信息保护法",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "费马编辑虚构题",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://fermatmind.com"
               }
             ]
           },
@@ -29497,7 +29552,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在仪式现场服务与遗体与车辆与场地与设备与家属沟通中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成法律意见、医疗或卫生防疫意见或对个案的结论；凡涉及遗体处置与防腐与整容与火化、死亡登记与下葬许可与死亡证明、传染病遗体处置与疑似非正常死亡、哀悼者安全与冲突、以及逝者与家属个人信息的处理，应由主管与机构与具备资质或获得授权的人员按组织流程与所在地法规处置。"
+              "证据不足：本职各类事故、感染、争议频率未取得；六卡为编辑可能失效例，任务描述不等发生率，具体法域机构条件另核。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.8",
@@ -29511,7 +29566,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业风险的核心不是「能不能服务」，而是四类后果较重的失效：授权与遗体处置失效（未获资质或授权实施或协助防腐与入殓与整容与火化与登记类事务，导致程序违法与家属与主管部门争议）、安全与卫生失效（未穿戴防护装备导致体液或锐器暴露、传染病遗体处置不当、抬棺与灵柩搬运与灵车驾驶与送葬队伍安全疏忽造成人身伤害）、隐私与信息失效（逝者与家属的身份与亲属关系与健康与死亡信息泄露或超范围使用）、以及现场与记录失效（哀悼者情绪激化或跌倒与走失、仪式中断、遗体与设备与车辆交接无凭据、费用与承诺口径不一致引发纠纷）。"
+              "风险回答｜关注专业范围、卫生、搬运车辆、资料、情绪秩序与交接费用。F/V2显示库存误计、B晚5分钟及R仍缺1；纸面候选通过不恢复Q。中国条例、传染病法及PIPL仅支持相应法条范围，不借工资数据证风险。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.9",
@@ -29525,7 +29580,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 39-4021.00 的任务与工作情境（每天面对面讨论 75%、每天使用电话 61%、持续与他人接触 54%、与团队共同工作极其重要 48%、每天环境受控室内 46%、每天电子邮件 45%、每周以上在封闭车辆或操作封闭设备中工作 44%、与外部客户或公众打交道极其重要 42%、精确或准确极其重要 41%、时间压力每周以上 39%、每周以上户外暴露于各种天气 38%、身体接近中等 34%、每天做决策 34%、任务与优先级与目标自由度很小 27%）与殡葬服务实务归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "证据范围｜当前O*NET任务情境与三部现行法规支持描述和法律边界，F/V2支持虚构例；未核事故率、个案责任、美国各州规定和真实机构制度。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.10",
@@ -29539,12 +29594,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与礼仪师与授权人员；机构与家属与主管部门"
+              "涉及遗体处置及登记协作岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29553,12 +29609,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未获资质或机构授权即实施或协助遗体防腐与入殓与整容与火化与死亡登记与下葬许可与死亡证明等事务；程序违法与遗体处置争议、行政处罚与家属纠纷与公信力受损"
+              "可能发生越权提供服务或证明责任，按事实和适用规则判断，不保证必然处罚。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29567,12 +29624,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "只在机构资质与授权与监督范围内协助，资质与授权不明时立即停止并上报；发现超出授权或被要求越界操作时暂停并逐级确认与留痕"
+              "中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29581,12 +29639,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜家属希望尽快完成入殓与整容，而本机构尚未由具备资质人员到场，现场人员被要求先行处理。"
+              "编辑反例：非殡仪馆主体称仅获经理批准便自行防腐火化，或把死亡证明签署当个人岗位权限。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29595,12 +29654,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与主管与卫生防疫人员；本人与同事与家属"
+              "涉及遗体接触与卫生协作岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.15",
           "source_refs": [
-            "onet"
+            "onet",
+            "infectious-law"
           ],
           "type": "prose"
         },
@@ -29609,12 +29669,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未按规范穿戴防护装备或消毒，发生体液或锐器暴露与传染病遗体处置不当；感染与职业伤害风险、公共卫生与合规风险"
+              "可能暴露或不当处理；问卷16%疾病每周至少但非每天不是感染率。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "infectious-law"
           ],
           "type": "prose"
         },
@@ -29623,12 +29684,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构规定穿戴手套与口罩与防护服等并执行消毒与暴露后处置流程，传染病遗体按专门规定处置；发现防护装备缺失或传染病遗体信息不明时立即暂停并报告"
+              "2025法71条区分甲类/炭疽与其他传染病死亡处理和告知；按有效技术规范与合格机构人员核，不给纸面操作算法。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "infectious-law"
           ],
           "type": "prose"
         },
@@ -29637,12 +29699,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜接到一例死于传染病的遗体，防护装备不足且转运要求不清，仍按普通遗体流程准备接运。"
+              "编辑反例：忽略病种与有效方案，因一次纸面回答正确便认定可独立处置。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "infectious-law"
           ],
           "type": "prose"
         },
@@ -29651,12 +29714,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与司机与现场团队；本人与家属与其他道路使用者"
+              "承担搬运驾驶引导岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29665,12 +29729,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "抬棺与灵柩搬运姿势或配合不当、灵车驾驶与送葬队伍与墓园停车安全疏忽；人身伤害与交通事故、仪式中断与责任纠纷"
+              "可能伤害、阻塞或延误；未取得事故频率，不能定高风险率。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29679,12 +29744,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按搬运与抬棺与驾驶与队列规范操作并明确分工，疲劳与天气与夜间出勤时降低风险；发现安全隐患或设备故障立即停止并报告，不带险作业"
+              "核真实车辆、驾驶与现场搬运条件。F/V2候选A库存排程假设过关不代V检修和授权。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29693,12 +29759,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜一场仪式需在雨天与夜间进行送葬车队与墓园停车，司机与抬棺人员已连续出勤多场。"
+              "编辑反例：车辆V待核仍标可发车，凭纸面排程恢复Q。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29707,12 +29774,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与机构管理者；逝者与家属与个人信息主体"
+              "处理记录沟通信息岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.23",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29721,12 +29789,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "逝者与家属的身份与亲属关系与健康与死亡信息泄露或超范围收集与对外提供；侵犯个人信息权益、家属情绪与信任受损与法律责任"
+              "可能超范围处理或侵害相关权利；按具体法域、主体、事实认定。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.24",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29735,12 +29804,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按最小必要收集并限定用途与留存期限与访问权限，敏感信息不在公开或外部渠道流转；发现信息外泄或越权访问立即报告并按机构与法规处置"
+              "信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29749,12 +29819,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜纪念册与家属联系名单在多个群组与外部渠道流转，含亲属关系与健康与死亡信息。"
+              "编辑反例：把未核家属同意写已取得，或以最短保存为由删未到法定期限视频。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.26",
           "source_refs": [
-            "onet"
+            "pipl-law",
+            "funeral-law"
           ],
           "type": "prose"
         },
@@ -29763,12 +29834,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与现场团队与家属；家属与来宾与机构"
+              "迎宾引导与丧亲善后岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29777,12 +29849,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "哀悼者情绪激化或发生冲突与跌倒与走失，仪式流程中断或秩序失控；家属与来宾人身安全与体验受损、现场冲突与投诉风险"
+              "可能沟通失当或秩序问题，未核发生率，不能把外向或测评分数当保证。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29791,12 +29864,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "预先明确动线与秩序与应急分工，对情绪激动与身体不适者及时协助并转交主管；发生冲突或伤害时先保障安全并按预案上报与必要时求助"
+              "按机构现场规则回应需求、报告异常；纸面安慰稿不等真实心理诊疗或危机处置。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29805,12 +29879,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜守灵期间家属因费用与流程问题情绪激化并与其他来宾发生争执。"
+              "编辑反例：虚构引导稿承诺能阻止一切冲突，或未经条件核查提供专业诊疗。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29819,12 +29894,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "殡葬服务员与主管与财务；家属与机构与主管部门"
+              "记录设备车辆交接及费用沟通岗位"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.31",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29833,12 +29909,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "遗体与设备与车辆交接无凭据，费用与承诺口径与家属理解不一致；责任无法界定与费用纠纷、审计与合规问题"
+              "可能记录失真、延误或收费争议，违法责任按适用条款与事实核。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.32",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29847,12 +29924,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按流程逐项记录与签字交接并保留凭据，费用与承诺以机构书面口径为准；发现记录缺失或承诺不一致立即暂停并核对与更正与上报"
+              "F/V2保V1/D2/R及未核项；中国条例43条明码标价，不捆绑强制或收费欺诈，50条不得清单外增收费。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29861,12 +29939,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜遗体接运与骨灰与设备交接仅口头确认，事后对不上清单且家属对费用理解不同。"
+              "编辑反例：D2把待核计可用并漏算5分钟；另把未确认费用写家属已接受。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.34",
           "source_refs": [
-            "onet"
+            "funeral-law",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29875,7 +29954,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对本职业的任务范围与工作情境（美国职业分类口径，不覆盖中国大陆职业划分）。"
+              "当前本职任务情境，不支持事故率或个人资格。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.35",
@@ -29889,7 +29968,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对本职业任务与工作活动细节，帮助识别遗体与车辆与场地与家属与记录环节的失效类型。"
+              "殡葬条例25/26/28/41/43/50条机构服务、证明、备案及收费范围。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.36",
@@ -29903,7 +29982,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；工资数字不用于风险评估。"
+              "传染病法71条分类处置与告知，不支持所有病种统一方案。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.37",
@@ -29917,7 +29996,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（经 O*NET 呈现，2024—2034）；预测不等于实际招聘。"
+              "PIPL28/49/51等敏感条件、死者权益及安全措施，不是工资页。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.38",
@@ -29931,7 +30010,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于理解采用数字工具时的责任归属与回退方案原则；非殡葬管理或卫生防疫或数据保护标准。"
+              "内部F/V2编辑虚构例，非雇主资料或已发生事件。"
             ]
           },
           "id": "funeral-attendants.risk.career-risk-cards.39",
@@ -30065,42 +30144,39 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的殡仪馆当日葬礼服务任务（含一场告别仪式、一支送葬车队与一处墓园现场、一份需分工的现场服务清单）。",
-                  "一份空白的当日流程与就位核对表（灵柩、花圈、灯光、设备、车辆）。",
-                  "一份空白的哀悼者引导与礼车协助与秩序维护清单。",
-                  "一份空白的遗体接运与交接与异常记录表。",
-                  "一支笔与计时器（限时 90 分钟）。"
+                  "F/V2材料",
+                  "F/V2虚构礼堂题｜仪式10:00，准备窗口9:20–9:55（35分钟，含9:55截止）。库存20件：16可用、2故障、2待核；就绪最低18可用，故障待核均不得计可用。候选A纸面假设2故障换为2已核备件，仍2待核；M布置10分钟9:20–9:30，N设备检查含纸面换件15分钟9:20–9:35，引导方案M10分钟须布置与检查都完再开始。候选B均M串行：布置10、检查20、引导10分钟。两人不可各自重叠，所有任务不涉及真实操作。车辆V检修与驾驶授权待确认，Q真实服务、搬运驾驶、遗体处置、收费与发布暂停，未给恢复确认。",
+                  "版本反例｜V1只看20件总数就称就绪。D2把2待核也计可用并把B的10+20+10写35。R仅假设新增1件已核备件，B检查缩为15分钟、均M串行；车辆V仍待确认。逐个核数、时间、冲突及恢复条件，不能补造确认。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：当日流程与就位核对表、哀悼者引导与礼车协助与秩序维护清单、遗体接运与交接与异常记录表。",
-                  "写出至少两条可能导致安全或卫生或隐私或合规风险的情形与对应措施。",
-                  "写出哪些情形必须暂停并升级（疑似传染病遗体、疑似非正常死亡、超出授权的遗体处置与登记与火化要求、防护装备缺失、家属安全与冲突、逝者与家属信息对外提供）。"
+                  "90分钟任务",
+                  "六段15/10/20/15/20/10分钟：读题→列约束→算库存与排程→找V1/D2错误→核R与Q→整理四作品；合计90。",
+                  "输出库存账、两方案排程表、版本差异记录、交接摘要；写至少库存误计与越权恢复两类失效例。用编号和合成材料，不自行查真实逝者家属。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列当日流程与现场与遗体与车辆与记录的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对就位与搬运与驾驶写清分工与安全要点与复核人，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "可复算答案",
+                  "基线16可用、缺18−16=2；A是假设换两故障件后18可用，仍2待核，非已发生修复。A劳动35分钟、并行历时25：M引导9:35–9:45，9:45完成距9:55余10分钟，各人无冲突。B串行40分钟9:20–10:00，晚于9:55五分钟。",
+                  "D2把2待核误计后写18可用且B算35，两者均错；R仅增1件为17，仍缺1，串行10+15+10=35到9:55按含截止可过时间，但库存仍不过。V1总数20不能代可用16。A仅库存排程假设可过，车辆V与Q未确认，所有真实服务仍暂停；不写已检修、授权、接受或恢复。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定的最终决定；对传染病遗体与超出授权与防护不足与隐私疑点一律写明暂停与升级并按机构授权上报主管或授权人员与主管部门。",
-                  "作品只证明你能按本职业的工作方式组织现场服务与设施保障，不构成资格或胜任证明。"
+                  "仅纸面",
+                  "题面数值、备件与排程均编辑虚构，不做遗体接触、防腐整容火化、搬运抬棺、驾驶或真实引导收费发布。作品不能证明实操胜任；疑似传染与非正常死亡按有效法域机构程序移交，纸面不发医疗或处置结论。"
                 ]
               }
             ]
           },
           "id": "funeral-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "入行练习：一次完整的殡葬服务任务（虚构材料）",
           "type": "cards"
@@ -30113,40 +30189,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用「任务—方法—证据」三列列出你在模拟任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及遗体处置与安全与卫生与隐私与家属承诺风险，必须按授权上报而非自行处理。"
+                  "作品1库存账",
+                  "逐列总数/可用/故障/待核/假设替换；16+2+2=20，A18可用仍待核2，R17缺1。保存原输入和公式，不以总量、待核或假设代实测。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的殡葬服务或机构管理或安全卫生负责人复核你的流程与就位与风险处置，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示做完了，要展示从流程核对到就位到引导到车辆与队伍到记录与交接的流程与留痕。"
+                  "作品2排程表",
+                  "写M/N开始结束及依赖：A25历时、35劳动、余10；B40晚5；R35到截止，仅过时间。自行按题重算，不请求经验者签认，不造真实排班审批。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的现场摘要（仪式与车队与墓园安排、就位与设备与车辆、分工与人手、风险与待办事项）。",
-                  "摘要中不得出现真实逝者或家属或可识别信息，必要时使用编号与合成数据。",
-                  "注明信息来源与假设，区分实测值与估算与预测值。"
+                  "作品3版本记录",
+                  "保V1只看总数、D2误计与误加、R仍缺1和V待核，列每次更正理由，不覆盖旧错或假写复核人。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了排班或文书或记录工具，标注哪些部分由工具生成、哪些由本人核对与修订。",
-                  "说明工具输出在使用前经过了谁的复核与哪次原始资料核对。",
-                  "涉及遗体与家属信息的部分，说明权限与留存安排。"
+                  "作品4交接摘要",
+                  "列F/V2事实、假设、候选A及未核V、未恢复Q；若用工具保草稿及本人核算。不带真实个人信息、不造收款合同、现场检修或授权。"
                 ]
               }
             ]
           },
           "id": "funeral-attendants.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -30209,57 +30281,57 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（当日流程核对—就位—引导与陪同—灵柩与车辆与队伍保障—清理复位—记录与交接）。",
-                  "记录你观察到的安全与卫生与隐私与留痕要求。"
+                  "第1天·30分钟",
+                  "读官方24任务，写现场与8补充职责及美国/中国边界，不把补充全部排掉。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：工时与待命与夜间与节假日排班、长时间站立与搬运强度、防护装备与消毒安排、与礼仪师与司机与墓园及家属的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "第2天·30分钟",
+                  "读F/V2，列库存18、窗口35、依赖与人员不冲突、V待核和Q暂停五项约束。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份当日流程与就位核对表样本。",
-                  "按规范列出关键要求（灵柩与花圈与灯光与设备与车辆就位、引导动线、防护与消毒、异常上报路径）。"
+                  "第3天·30分钟",
+                  "独立做库存账，算基线缺2、A18为假设、R17缺1，保计算和状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次引导与礼车协助与秩序维护清单。",
-                  "对两个典型风险（疑似传染病遗体、超出授权的遗体处置要求）写出核对与报告方案。"
+                  "第4天·30分钟",
+                  "画两人排程，核A25历时/35劳动及B40晚5；区分总工时与钟表时。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次灵柩就位与车辆与送葬队伍与停车配合，或一次遗体接运与设备与车辆交接记录。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "第5天·30分钟",
+                  "仅纸面对V1/D2/R找错，核R35到9:55但库存不过；不现场搬运、接运或驾驶。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的流程与就位与安全与隐私处置。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "第6天·90分钟",
+                  "按六段独立重做F/V2并完成四作品；保原输入与更正，不要求外部人士确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如驾驶经验与安全卫生培训与遗体处置授权），以及下一步行动。"
+                  "第7天·30分钟",
+                  "按作品写继续/暂停/换方向理由及目标机构待核条件；真实身体、卫生与服务胜任仍未验证。"
                 ]
               }
             ]
           },
           "id": "funeral-attendants.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "七天体验：用虚构材料完成一次殡葬服务闭环",
           "type": "timeline"
@@ -30269,18 +30341,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按规范完成当日流程核对与就位与引导与记录交接并使过程可复核。",
-              "继续：能在体力负荷与哀悼者情绪与不可控节奏下坚持安全与卫生与隐私规范，不省略关键环节。",
-              "继续：愿意从现场服务或遗体接运或场地维护岗做起并把安全与授权与记录要求学清楚。",
-              "停止：对遗体接触或殡葬场所或长时间站立与搬运明显无法适应，且短期无法改善。",
-              "停止：对安全与卫生与个人隐私与遗体处置授权边界缺乏警觉，反复出现越权或记录缺失。",
-              "换方向：偏好机构运营与合规管理可考虑殡葬家庭经理；偏好死亡调查可考虑验尸官。",
-              "换方向：偏好持续照护在世者可考虑个人护理员或家庭健康助理；偏好社会服务与转介可考虑社会与人类服务助理。"
+              "继续探索｜能独立复算库存与排程、区分假设与待核并保版本。",
+              "继续探索｜愿意核目标机构职责、工时、条件和有效法域规则。",
+              "继续探索｜认可纸面作品不授予实操或专业处置权。",
+              "暂停｜输入或算式仍混乱时回题修正，不从一次错误判人格。",
+              "暂停｜真实体力、驾驶、卫生防控与哀伤适应未核，不能称通过。",
+              "换方向｜按运营、法定调查等任务重心探索，独立条件另核。",
+              "换方向｜按在世照护或社会资源转介探索，不给直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -30309,58 +30381,58 @@
             ],
             "rows": [
               [
-                "高中文凭或同等学历",
-                "多数岗位",
-                "满足招聘中的学历门槛",
-                "较普遍",
-                "完成高中或同等学历教育",
-                "按学制",
-                "学历不保证获得遗体处置与登记与火化权限"
+                "高中或同等学历",
+                "美国典型进入者",
+                "BLS典型教育",
+                "美国典型非个人必需",
+                "中国具体招聘另核",
+                "具体投入未取样",
+                "O*NET新聘47%，非从业分布"
               ],
               [
-                "驾驶资格与安全驾驶记录",
-                "遗体接运与车辆驾驶岗",
-                "满足驾驶灵车与礼车与随送葬车队的要求",
-                "视岗位而定",
-                "取得驾驶资格并保持合规记录",
-                "数周至数月",
-                "驾驶资格不等于殡葬处置与登记权限"
+                "驾驶资格",
+                "承担车辆驾驶的岗位",
+                "核合法驾驶与机构安排",
+                "按法域车型职责核",
+                "具体法规与岗位另核",
+                "费用时长未取样",
+                "不是遗体处置授权"
               ],
               [
-                "安全与卫生与感染防控培训",
-                "所有现场岗位",
-                "降低体液与锐器暴露与传染病传播风险",
-                "普遍需要",
-                "参加机构或行业培训并考核",
-                "数小时至数天",
-                "培训不等于医疗或卫生防疫处置资格"
+                "安全卫生培训",
+                "相应现场岗位",
+                "核有效作业与防护规范",
+                "目标机构要求另核",
+                "按岗位培训考核",
+                "具体课程未取样",
+                "不发医疗处置权"
               ],
               [
-                "个人隐私与信息保护意识培训",
-                "接触逝者与家属信息的岗位",
-                "降低敏感信息泄露与违规风险",
-                "普遍需要",
-                "参加机构或行业培训并考核",
-                "数小时至数天",
-                "以机构制度与所在地法规要求为准"
+                "信息保护培训",
+                "处理个人信息岗位",
+                "核用途依据权限保存",
+                "法定责任与课程分别核",
+                "具体方案另核",
+                "费用时长未取样",
+                "资料不一律法定敏感"
               ],
               [
-                "遗体防腐与整容与火化等专业资质（如涉及）",
-                "承担专业处置的岗位",
-                "获得独立实施专业处置的资格",
-                "仅专业处置岗需要",
-                "按所在地主管部门规定的教育与实践与考试取得",
-                "数月至数年",
-                "本页不提供个人资格结论，以所在地法规与机构要求为准"
+                "专业服务范围与岗位条件",
+                "涉及遗体专业服务岗位",
+                "中国五项由殡仪馆专门提供",
+                "机构范围非个人通用证书",
+                "美国州与中国具体条件另核",
+                "费用考试未取样",
+                "培训不替代机构范围或岗位权限"
               ],
               [
-                "带班与现场协调经验",
-                "转向资深或主管方向者",
-                "提升承担多场次与队伍与投诉处置责任的资格",
-                "晋升方向需要",
-                "通过多场次实践与业绩与内部晋升",
-                "数月至数年",
-                "不替代机构运营与合规责任"
+                "带班管理准备",
+                "探索运营方向者",
+                "核人员排程和质量任务",
+                "不是统一晋升门槛",
+                "具体任用条件另核",
+                "年限未取样",
+                "不保证晋升或转岗"
               ]
             ]
           },
@@ -30376,10 +30448,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定资质与机构授权是三种不同状态：满足招聘条件不等于取得遗体处置或火化或登记的资质，取得培训与证书不等于获得独立实施专业处置与对外承诺的决定权。",
-              "资格边界（二）｜美国 O*NET 教育栏显示 47% 需要高中文凭或同等学历、22% 需要副学士或其他两年制学位、13% 为上过大学但无学位（本页不编造其余比例）；遗体防腐与整容与火化与死亡调查在美国多数地区需专门执业资质，殡葬服务员通常在监督下协助而不独立实施。中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，两者不可互换。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或主管机关要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
+              "美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。",
+              "中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。",
+              "信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。",
+              "准备表为编辑核对项，具体招聘、法定条件与课程费用未取样，不构成个人体检、录用或薪酬结论。"
             ]
           },
           "id": "funeral-attendants.path.credential-boundary.1",
@@ -30394,8 +30466,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。殡仪馆与公墓等殡葬服务机构常按机构与岗位分批发布，且多通过机构直招与内部推荐与行业渠道招募，公开渠道的样本难以代表整体市场；人口结构与丧事发生时间与季节性负荷与机构运营模式的波动会明显影响用人规模。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型（民政部门主管的殡仪馆、公墓与纪念园、民营或家族经营殡葬服务机构）、岗位职责与授权边界（仪式现场服务、遗体接运、火化协助、场地与设备维护、机构运营支持）、工时与待命与夜间与节假日安排、学历与体力与驾驶与培训要求、以及薪酬构成（基本工资、班次或待命补贴、加班或调休、值班与差旅补贴）；这些信息比页面往往更能反映真实条件。"
+              "证据不足：本职具体中国招聘公告、职位数量、合同薪酬与渠道比例未取得；不编内部推荐占比或人口季节驱动。",
+              "编辑核对｜逐条记发布日期、城市、机构主体与法定范围、实际任务、教育经验、驾驶防护培训、班次待命工时、税前税后工资及费用授权；纸面练习非真实招聘试卷。"
             ]
           },
           "id": "funeral-attendants.path.recruitment-sample.1",
@@ -30423,10 +30495,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 殡葬服务员国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 资格与训练资料",
@@ -30461,7 +30533,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在资深人员指导下学习当日流程核对与就位与引导辅助与设备与场地维护辅助；不独立承担遗体处置与灵柩与车辆关键操作与登记类事务。"
+              "编辑阶段例｜核本阶段具体任务、培训考核和机构授权；无已核统一年限、保证晋升或从阶段名赋专业处置权。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.12",
@@ -30489,7 +30561,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能独立完成当日流程与就位与引导与陪同与礼车协助与车辆与送葬队伍与停车保障，遇传染病遗体与超出授权与安全异常按规程上报。"
+              "编辑阶段例｜核本阶段具体任务、培训考核和机构授权；无已核统一年限、保证晋升或从阶段名赋专业处置权。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.14",
@@ -30517,7 +30589,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能统筹多场次与队伍与现场分工并指导新人，负责安全与卫生与隐私与记录交接质量。"
+              "编辑阶段例｜核本阶段具体任务、培训考核和机构授权；无已核统一年限、保证晋升或从阶段名赋专业处置权。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.16",
@@ -30545,7 +30617,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与排班与流程与培训与合规与家属安排与质量监督，处理复杂与争议事项；需相应岗位授权并承担管理责任。"
+              "编辑阶段例｜核本阶段具体任务、培训考核和机构授权；无已核统一年限、保证晋升或从阶段名赋专业处置权。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.18",
@@ -30573,7 +30645,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成高中或同等学历教育（或从现场服务或场地维护辅助岗起步） → 通过机构招聘与安全与卫生与隐私培训与驾驶资格核对 → 在资深人员带领下学习当日流程与就位与引导与遗体接运与设备与车辆管理 → 通过考核后独立承担某一岗位方向的现场服务与记录交接并承担安全与合规责任 → 在多场次与不可控节奏与季节性负荷中积累熟练度并学习疑似传染病遗体与超出授权事项的处置与升级 → 视表现转为带班或现场主管方向，或转向殡葬家庭经理、验尸官、个人护理员、家庭健康助理、社会与人类服务助理等相邻岗位。体力与可靠性与驾驶能力与安全卫生意识通常构成门槛，真正决定长期发展的是现场判断与秩序与安全把控、隐私与合规边界意识，以及在哀伤场景中的情绪稳定与沟通。"
+              "编辑路径｜先核目标机构真实条件与24职责，做F/V2探索，再按所在法域进入机构培训、考核与具体岗位授权；现场、带班、管理为编辑重心选项，非统一年限、晋升保证或直接转验尸官。美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.20",
@@ -30587,7 +30659,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜「受过培训」「取得证书或课程」「取得遗体处置与火化或登记相关法定资质」「获得机构授权」是四种不同状态；本页列示的准备项不等于任何法定资质，也不自动赋予遗体处置与登记与火化与费用承诺与对外发布的决定权。"
+              "资格边界｜招聘条件、课程证书、机构法定服务范围及个人岗位授权分别核；培训不能替代授权或医疗死亡证明签署，具体个案未核。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.21",
@@ -30601,7 +30673,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国 O*NET 教育栏显示 47% 需要高中文凭或同等学历、22% 需要副学士或其他两年制学位、13% 为上过大学但无学位（本页不编造其余比例），Job Zone 为 1-2 级（SVP 低于 6.0）；遗体防腐与整容与火化与死亡调查在美国多数地区需专门执业资质。中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理，涉及遗体处置、传染病遗体、火化与墓位等另有专门规定与技术规范；两者不可互换，具体以所在地法规与机构规定为准。"
+              "美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.22",
@@ -30615,7 +30687,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为「实践—培训—授权—负责」的循环：先完成安全与卫生与隐私与驾驶基础训练，再在当日流程与就位与引导与遗体接运与设备与车辆管理中积累经验，通过考核后独立承担某一岗位方向的现场服务并带教；涉及遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定与家属承诺时，必须按流程取得相应授权或移交具备资质的人员与机构。"
+              "路径说明｜培训实践与具体授权按岗位核；F/V2只是探索，表中阶段为编辑举例，不保证人人按序晋升或承担所有专业任务。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.23",
@@ -30657,7 +30729,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（经 O*NET 呈现，2024—2034）；预测不等于实际招聘。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.26",
@@ -30685,7 +30757,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安全与卫生与隐私培训记录；机构服务流程培训。"
+              "编辑准备｜核目标机构的服务安全卫生隐私培训，具体课程条件费用未取样。"
             ]
           },
           "id": "funeral-attendants.path.career-path-block.28",
@@ -31552,10 +31624,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 殡葬服务员国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局 2025 年城镇单位就业人员平均工资",
@@ -31630,12 +31702,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（精确职业 O*NET-SOC 39-4021.00）：2024 年就业约 32,500 人（BLS 就业预测基期，经 O*NET 呈现），2024—2034 年预计增长与平均相当（3%—4%），期间预计约 5,700 个岗位空缺；2025 年中位时薪 17.16 美元、中位年薪 35,680 美元，工资分布从下十分位 28,070 美元到上十分位 48,460 美元。中国大陆部分：未建立与本职业精确对应的公开职业工资与就业统计，按证据政策本页只登记口径与缺口，不提供代理数值。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31658,12 +31730,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.10",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31672,12 +31744,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "空缺含增长与替换需求；人口结构与殡葬服务需求与机构规模与运营模式支撑需求，但丧事发生时间与季节性负荷与机构预算与人力结构波动会影响岗位。"
+              "空缺包括增长与替换；净增0.8千与年均空缺5.4千不同，不据人口、季节或预算编本职因果。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31686,12 +31758,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；分行业与分地区细分可能缺失；预测不等于实际招聘数。"
+              "本职预测含自雇0.2%，非实际招聘，中国另核。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31714,12 +31786,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 39-4021.00（经 O*NET 呈现）"
+              "BLS39-4021精确职业"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.14",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31728,12 +31800,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 32,500 人（2024）；2024—2034 年增长与平均相当（3%—4%）；期间预计约 5,700 个岗位空缺"
+              "2025就业31.3千，2035预测32.1千；增长2.6%，年均空缺5.4千"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31770,12 +31842,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；上下十分位跨度约 1.7 倍，机构类型与岗位职责与地区与工时安排是主要差异来源。"
+              "90/10工资界值比约1.7，不说明原因、起薪或个人上限。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -31784,12 +31857,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与加班与夜班与待命补贴；本精确职业的分行业与分地区工资本页未取得，按可见缺口登记。"
+              "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -31826,12 +31900,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 17.16 美元、中位年薪 35,680 美元；分位 28,070 / 30,380 / 42,870 / 48,460 美元"
+              "美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -31868,7 +31943,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资、不区分职业；殡葬服务工作多由民政部门主管的殡仪馆与公墓等机构承担，用人单位性质与岗位与工时与班次差异较大，行业均值不能替代职业工资，也不能用于推断起薪或到手收入。"
+              "NBS行业统计只能背景，不代本职职业工资或推雇主分布。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.25",
@@ -31924,12 +31999,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未建立与本职业精确对应的职业工资与就业统计值；按证据政策本页展示缺失而不使用代理数字。"
+              "证据不足：中国本职全国工资就业未取得，不据检索不足断言统计不存在。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31943,7 +32018,8 @@
           },
           "id": "funeral-attendants.market-signals.market-signal-card.30",
           "source_refs": [
-            "onet"
+            "hr",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -31952,12 +32028,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国 2024—2034 就业增长与空缺口径（经 O*NET 呈现）；预测不等于实际招聘。"
+              "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31966,7 +32042,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对国家统计局行业门类平均工资的口径与年份；为背景参照而非职业工资，且本职业精确值不可得。"
+              "国家统计局行业工资不能代本职；精确值本轮未取得。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.32",
@@ -32022,7 +32098,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由现场服务转向机构运营与合规管理"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.36",
@@ -32064,7 +32140,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远，需另行取得法定调查所需资格与训练"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.39",
@@ -32106,7 +32182,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由现场服务转向在世者照护"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.42",
@@ -32148,7 +32224,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由现场服务转向家庭健康协助"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.45",
@@ -32190,7 +32266,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由现场服务转向社会服务协助"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.48",
@@ -32232,7 +32308,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远，需相应宗教训练与团体认可"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.51",
@@ -32274,7 +32350,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由现场接待转向前台与信息事务"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.54",
@@ -32316,7 +32392,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由场地维护转向专业清洁与设施维护"
+              "编辑探索｜按任务重心比较，具体招聘、法域及训练条件另核，不给远近等级或直接转岗保证。"
             ]
           },
           "id": "funeral-attendants.market-signals.market-signal-card.57",
@@ -32339,7 +32415,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 39-4021.00，本职业在葬礼期间执行多种现场服务与保障任务：在仪式前把灵柩移入告别厅或礼拜堂并布置花圈与灯光，迎接来宾并引导与陪同哀悼者、协助其上下礼车，在适当节点配合关闭灵柩，清洁并驾驶殡仪车辆并随送葬车队行进，担任抬棺者，监督送葬队伍并协助墓园停车，把花圈与物品运往安葬地点，执行殡仪馆的一般维护与场地打理，发放与存放殡葬设备，并就如何以逝者名义做慈善捐赠提供建议；部分岗位在机构安排与监督下协助遗体接运与入殓与整容与撰写讣告与办理死亡登记与下葬许可与取得死亡证明与保险理赔文书与协助火化与骨灰处理以及行政事务。不含依法只能由具备资质或获得授权的人员与机构承担的遗体防腐与整容与火化与死亡登记与下葬许可与死亡原因认定职责。",
+                "answer": "职业定义｜O*NET-SOC39-4021.00 Funeral Attendants，固定中文名殡葬服务员，在葬礼中移入灵柩、布置花圈灯光、引导陪同哀悼者、关闭灵柩、发放存放设备。24任务为16核心、8补充；核心还含迎宾、协助上下礼车、清洁驾驶殡仪车辆、抬棺、队伍停车、物品递送搬运、场地维护及纪念慈善捐赠建议。补充含防腐着装化妆入殓、讣告、许可死亡登记、遗体运输、医生签署与保险文书、火化骨灰处理、丧亲安慰咨询善后和行政事务，不能整体排出本职。实际任务、资格与授权按法域机构核。",
                 "id": "funeral-attendants.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.funeral-attendants.q1",
@@ -32349,57 +32425,55 @@
                 ]
               },
               {
-                "answer": "核心区别在授权与产出：本职业在机构安排下承担仪式现场服务与灵柩与车辆与场地与设备保障并对现场安全与尊严与记录交接负责，产出是按流程完成的现场服务与设施保障与可复核的交接记录；殡葬家庭经理以机构运营与人员与合规与预算与家属安排的管理结果为产出；验尸官以死亡原因与方式的法定调查与认定为产出；个人护理员与家庭健康助理以在世服务对象的照护与健康协助为产出；社会与人类服务助理以社会服务与资源转介与个案协助为产出；神职人员以宗教仪式与教导与精神关怀为产出。上述岗位常在同一个家庭事件与社区服务链条中衔接，但衔接不等于可互相替代。",
+                "answer": "编辑比较｜本职现场设备车辆及8补充任务，经理运营、验尸官法定调查、照护在世对象、社会服务资源转介为重心，可交叉；具体权限条件另核。",
                 "id": "funeral-attendants.faq.2",
                 "question": "它和殡葬家庭经理、验尸官、个人护理员、家庭健康助理、社会与人类服务助理有什么区别？",
                 "question_key": "career.faq.funeral-attendants.q2",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国口径（精确职业 39-4021.00）：2025 年中位时薪 17.16 美元、中位年薪 35,680 美元；分位 28,070 / 30,380 / 42,870 / 48,460 美元/年（跨度约 1.7 倍）；2024 年就业约 32,500 人，2024—2034 年预计增长与平均相当（3%—4%），期间预计约 5,700 个岗位空缺（BLS OEWS 与就业预测，经 O*NET 呈现）。上述为美国全国口径，不适用其他法域；OEWS 不含福利与加班与夜班与待命补贴。",
+                "answer": "美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
                 "id": "funeral-attendants.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.funeral-attendants.q3",
                 "source_refs": [
-                  "oews",
+                  "hr",
+                  "oews-method",
                   "ep"
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资与就业统计。国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业；按本页证据政策，中国大陆部分保留「证据不足：」可见标记，展示缺失而不使用行业均值或美国数据推断起薪或到手收入。殡葬服务工作多由民政部门依据《殡葬管理条例》等主管的殡仪馆与公墓等机构承担。",
+                "answer": "证据不足：中国本职全国工资就业、城市合同及职业代码精确对应未取得；NBS行业统计不能代填，不断言统计不存在。",
                 "id": "funeral-attendants.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.funeral-attendants.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：每天与个人及团队面对面讨论 75%、每天使用电话沟通 61%、持续与他人接触 54%、与工作组或团队共同工作极其重要 48%、每天在环境受控的室内工作 46%、每天使用电子邮件 45%、每周以上在封闭车辆或操作封闭设备中工作 44%、与外部客户或公众打交道极其重要 42%、精确或准确极其重要 41%、时间压力每周以上 39%、每周以上在户外暴露于各种天气 38%、约一半时间站立 53%。工作以现场站立与走动与搬运与驾驶与家属沟通为主，丧事发生时间不可控，夜间与节假日出勤较多。",
+                "answer": "沟通｜75%每天面对面、61%每天电话、45%每天邮件；54%持续接触。\n团队公众｜48%团队极重要、35%非常重要；42%公众极重要、24%非常重要。\n精确影响｜41%准确极重要；35%决策结果非常重要，非只是重要；37%错误后果严重，非事故率。\n频率自主｜34%每天决策；40%有一些决策自由；27%任务优先级自由很小；28%协调带领极重要。\n时间压力｜35%每天、39%每周至少但非每天，不能合成每天或含每天的每周以上。\n场所车辆｜46%每天可控室内；44%封闭车辆每周至少但非每天；38%天气户外同频率。\n身体｜53%约半时站、31%超过半时；34%中等接近为一臂距离，不等强制搬运量。\n节奏工周｜58%固定常规、42%不规则；70%少于40小时、12%40小时、18%超过40小时，非中国排班或个人工时。\n暴露冲突｜16%疾病暴露每周至少但非每天、42%从不；41%不愉快人士每月至少但非每周；60%无自动化，非AI采用或风险发生率。",
                 "id": "funeral-attendants.faq.5",
                 "question": "工作环境和沟通强度如何？",
                 "question_key": "career.faq.funeral-attendants.q5",
                 "source_refs": [
-                  "onet",
                   "bls"
                 ]
               },
               {
-                "answer": "影响主要在排班与文书与记录环节：当日任务与排班清单整理、讣告与流程与告知文案草稿、接送路线与时间安排、耗材与库存与设备台账维护、异常与交接记录整理可被工具辅助；灵柩与遗体与设备操作与驾驶与搬运、现场引导与陪同与关闭灵柩配合、哀悼者情绪与安全应对、遗体处置与登记与火化授权与逝者与家属隐私判断仍由殡葬服务员与机构授权人员负责。本职业属文本与数据任务暴露偏低的类型，任务暴露不等于岗位替代，工具输出不能替代现场判断与合规结论。",
+                "answer": "证据不足：本职AI量化暴露、采用、效率及就业因果未取得；文书排班库存草稿为编辑试用，不定偏低或替代年份。",
                 "id": "funeral-attendants.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.funeral-attendants.q6",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "ilo",
+                  "employer"
                 ]
               },
               {
-                "answer": "O*NET 教育栏显示 47% 需要高中文凭或同等学历、22% 需要副学士或其他两年制学位、13% 为上过大学但无学位（本页不编造其余比例）；Job Zone 为 1-2 级（SVP 低于 6.0），通常只需很少到一些准备。实际招聘常看重健康状况与体力与可靠性、驾驶资格与安全与卫生与隐私培训，具体以机构要求为准。",
+                "answer": "美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。",
                 "id": "funeral-attendants.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.funeral-attendants.q7",
@@ -32409,33 +32483,34 @@
                 ]
               },
               {
-                "answer": "「受过培训」「取得课程或证书」「取得遗体处置与火化或登记相关法定资质」「获得机构授权」是四种不同状态。遗体防腐与整容与火化与死亡调查在美国多数地区需专门执业资质，殡葬服务员通常在监督下协助而不独立实施；中国大陆由民政部门依据《殡葬管理条例》等对殡仪馆与公墓等殡葬服务机构及从业人员实施管理。本页列示的准备项不构成任何机构的正式资格清单。",
+                "answer": "资格｜课程、招聘条件、机构法定范围与个人岗位授权分别核。中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。",
                 "id": "funeral-attendants.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.funeral-attendants.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "funeral-law",
+                  "infectious-law"
                 ]
               },
               {
-                "answer": "常见失效包括：未获资质或授权即实施或协助遗体防腐与整容与火化与登记类事务；未按规范穿戴防护装备或消毒导致体液与锐器暴露与传染病遗体处置不当；抬棺与灵柩搬运与灵车驾驶与送葬队伍与停车安全疏忽；逝者与家属身份与亲属关系与健康与死亡信息泄露或超范围使用；哀悼者情绪激化或跌倒与走失与仪式秩序失控；遗体与设备与车辆交接无凭据与费用与承诺口径不一致。控制要点是按流程与授权核对与留痕、异常与越权事项立即升级、并按最小必要与权限处理逝者与家属信息。",
+                "answer": "信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。六风险为编辑失效例，未取得发生率，纸面F/V2不代现场检查或恢复Q。",
                 "id": "funeral-attendants.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.funeral-attendants.q9",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "pipl-law",
+                  "funeral-law",
+                  "employer"
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年预计增长与平均相当（3%—4%），期间约 5,700 个空缺，含增长与替换需求；预测不等于个人机会，实际机会取决于本地人口结构与殡葬服务需求与机构规模与人力结构。可转向殡葬家庭经理、验尸官、个人护理员、家庭健康助理、社会与人类服务助理、神职人员、前台接待与信息文员、客房清洁员与清洁工等相邻岗位（需重新学习与补足证据），或转向带班与现场主管方向。",
+                "answer": "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。相邻按任务重心探索，不给远近等级、直接转岗或晋升保证。",
                 "id": "funeral-attendants.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.funeral-attendants.q10",
                 "source_refs": [
                   "ep",
-                  "onet"
+                  "employer"
                 ]
               }
             ]
@@ -32451,7 +32526,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 39-4021.00 的职业范围与任务与工作情境与兴趣与教育与管理层级，再取 BLS OEWS 2025 的工资中位与分位（经 O*NET 呈现）与 BLS 就业预测 2024—2034 的就业与增长与空缺（经 O*NET 呈现），最后以国家统计局 2025 年行业门类平均工资作为中国大陆的背景参照；中国大陆未建立与本职业精确对应的统计值，按证据政策展示缺失而不使用代理数字；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "来源卡｜本轮核本职O*NET概览详情、CA页内全国工资和行业页，BLS39-4021 EP；OEWS方法沿同轮434已核资料。现行殡葬条例、PIPL及2025传染病法支持相应条文，未取得行业工资或中国精确值。"
             ]
           },
           "id": "funeral-attendants.sources.source-card.1",
@@ -32465,7 +32540,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 职业档案与详细资料与兴趣与训练与证书与国家工资与行业与趋势与热门技术、BLS OEWS 与职业工资页与就业预测与数据总览与全国数据表与新闻稿、国家统计局 2025 年城镇单位平均工资与发布索引与口径说明、ILO 与 NIST 治理参考与 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "来源登记｜旧文献身份与日期保留，新登记oews-method、funeral-law、infectious-law、pipl-law；兴趣privacy不冒PIPL，原bls为O*NET详情，不冒本职OOH。"
             ]
           },
           "id": "funeral-attendants.sources.source-card.2",
@@ -32479,7 +32554,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 官方页面；O*NET 页面标注数据更新年份为 2026（工资为该页面显示的 2025 年 BLS OEWS 数据、就业与增长与空缺为该页面显示的 2024—2034 预测），国家统计局数据为 2025 年并于 2026 年发布。"
+              "实际日期｜概览、工资、行业及殡葬条例PIPL在本职业起步2026-10-02核；详情、EP与SAMR传染病法2026-10-03读取。其他旧源未重访保原日期，不冒全部成功访问。"
             ]
           },
           "id": "funeral-attendants.sources.source-card.3",
@@ -32493,7 +32568,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）中国大陆未建立与本职业精确对应的职业工资与就业统计，按证据政策展示缺失而不使用代理数字；（2）本职业在美国可按行业与分地区读取的工资中位数未取得（O*NET 仅发布两个顶层行业行）；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源。三处均保留「证据不足：」标记，不以行业均值、招聘报价或第三方估算填充。"
+              "证据不足：中国精确工资就业分类、城市合同与招聘样本，美国行业工资与自雇收入、AI量化采用因果、测评效度和具体法域个案条件未取得；全国分位与本职EP已核，缺口不豁免完整题答案、作品计划和自审。"
             ]
           },
           "id": "funeral-attendants.sources.source-card.4",
@@ -32586,7 +32661,7 @@
                 "url": "https://www.onetonline.org/link/summary/39-4021.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "24 项任务（16 核心 + 8 补充）与工作情境明细，用于界定本职业边界。",
                   "用于核对仪式现场与遗体与车辆与场地与设备与记录环节。"
@@ -32602,19 +32677,19 @@
                 "url": "https://www.onetonline.org/link/details/39-4021.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年就业约 32,500 人；2024—2034 年预计增长与平均相当（3%—4%）。",
-                  "预计岗位空缺约 5,700 个（O*NET 呈现的 2024—2034 期间字段，来自增长与替换）。"
+                  "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。",
+                  "美国准备｜O*NET Zone1–2、SVP低于6为准备分组，组内一般高中但部分不需，培训几天至一年不是每岗位精确要求。新聘教育问题47%高中或同等、22%副学士或两年学位、13%上过大学无学位，非从业学历分布，不编其余比例。BLS本职典型高中、无相关经验、短期OJT；中国具体招聘未取样，不移植统一门槛。"
                 ],
                 "evidence_type": "official employment projections",
                 "id": "ep",
-                "limitation": "预测口径，不含自雇；不代表实际招聘。",
+                "limitation": "含自雇；空缺不是净增或实际招聘，非AI因果。",
                 "market": "美国",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 就业预测（经 O*NET 呈现）",
-                "period": "2024—2034 projections",
+                "name": "BLS本职39-4021就业预测与特征",
+                "period": "2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "39-4021.00 exact occupation",
+                "scope": "39-4021 exact occupation",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -32625,7 +32700,7 @@
                 ],
                 "evidence_type": "official wage estimates",
                 "id": "oews",
-                "limitation": "不含福利与加班与夜班与待命补贴；为全国口径。",
+                "limitation": "OEWS工资排自雇；EP预测含自雇，两者不可混。具体工资方法取新增oews-method，当前预测取ep。",
                 "market": "美国",
                 "name": "U.S. Bureau of Labor Statistics：2025 职业就业与工资统计（OEWS）",
                 "period": "2025 OEWS",
@@ -32636,8 +32711,8 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策展示缺失而不使用代理数字。"
+                  "原登记城镇单位行业平均工资，非殡葬服务员精确职业工资。",
+                  "本轮未重访保原日期；同轮434已核行业口径不能据此证明精确职业统计不存在。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
@@ -32673,7 +32748,7 @@
                 ],
                 "evidence_type": "official interest profile",
                 "id": "privacy",
-                "limitation": "兴趣数据不构成录用或适配结论。",
+                "limitation": "此原源为兴趣信息，不冒PIPL法律；本职测评效度未核。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬服务员职业兴趣（39-4021.00）",
                 "period": "O*NET 2026 occupational profile",
@@ -32689,7 +32764,7 @@
                 ],
                 "evidence_type": "official training directory",
                 "id": "facilities",
-                "limitation": "培训路径不等于资格或执业许可。",
+                "limitation": "培训目录不是全部岗位统一学历、证照及费用要求；本轮未重访保原日期。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬服务员资格与训练（39-4021.00）",
                 "period": "O*NET training data current 2026",
@@ -32714,20 +32789,20 @@
                 "url": "https://www.onetonline.org/link/localcert/39-4021.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对全国中位与分位工资（精确职业 39-4021.00）。",
-                  "来源标注为 BLS 2025 wage data。"
+                  "美国本职全国2025｜年工资10/25/50/75/90分位为28,070/30,380/35,680/42,870/48,460美元，时薪13.50/14.61/17.16/20.61/23.30美元。中位非起薪，90/10界值比约1.7，不证明资历、工时或差异原因及个人上限。",
+                  "CA入口内United States全国表已核，州和城市值不取作本页全国；具体行业工资未取得。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "hr",
-                "limitation": "全国口径，不含福利与加班。",
+                "limitation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
                 "market": "美国",
                 "name": "O*NET OnLine：殡葬服务员国家工资（39-4021.00）",
                 "period": "2025 wage data",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "39-4021.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/39-4021.00"
+                "url": "https://www.onetonline.org/link/localwages/39-4021.00?st=CA"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32817,7 +32892,7 @@
                 ],
                 "evidence_type": "official projections overview",
                 "id": "weforum",
-                "limitation": "预测不等于实际招聘。",
+                "limitation": "OEWS工资排自雇；EP预测含自雇，两者不可混。具体工资方法取新增oews-method，当前预测取ep。",
                 "market": "美国",
                 "name": "BLS 就业预测方法说明（Employment Projections）",
                 "period": "2024—2034 projections",
@@ -32849,7 +32924,7 @@
                 ],
                 "evidence_type": "official trend display",
                 "id": "purchasing-managers",
-                "limitation": "趋势展示不代表个人机会。",
+                "limitation": "趋势页面不支持招聘样本、采用率、合同或因果。",
                 "market": "美国",
                 "name": "O*NET OnLine：就业趋势（39-4021.00）",
                 "period": "current O*NET/BLS data",
@@ -32908,12 +32983,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "主要行业为除公共管理外的其他服务业约 94%、其他行业合计约 6%（O*NET 只发布两个顶层行业行）。",
-                  "用于理解雇主类型分布。"
+                  "本轮行业页94%其他服务（除公共管理）、6%其他行业，页内未注明对应期间。",
+                  "两个行业比例不支持细分工资、样本量、中国分布或自雇行业。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "census",
-                "limitation": "用于行业背景，不替代行业工资。",
+                "limitation": "行业占比不是行业工资；原登记年份不能当本轮已核期。",
                 "market": "美国",
                 "name": "O*NET OnLine：行业分布（39-4021.00）",
                 "period": "2024 employment",
@@ -32961,13 +33036,77 @@
                 ],
                 "evidence_type": "official projections overview",
                 "id": "archivists",
-                "limitation": "预测口径，不含自雇。",
+                "limitation": "OEWS工资排自雇；EP预测含自雇，两者不可混。具体工资方法取新增oews-method，当前预测取ep。",
                 "market": "美国",
                 "name": "BLS 就业预测总览（Employment Projections）",
                 "period": "2024—2034 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
                 "url": "https://www.bls.gov/emp/"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
+                  "全国分位取hr；未取得本职行业工资，不能用行业就业比例代填。"
+                ],
+                "evidence_type": "methodology",
+                "id": "oews-method",
+                "limitation": "不是个人工资条件。",
+                "market": "美国",
+                "name": "BLS OEWS FAQ",
+                "period": "当前方法",
+                "publisher": "BLS",
+                "scope": "OEWS methodology",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "中国大陆边界｜2025修订殡葬管理条例2026-03-30施行，25条规定遗体接运、存放、防腐、整容、火化由殡仪馆专门提供；26/28条分别要求接运凭死亡证明、火化凭死亡证明及确认书，明显死因不符应报公安。机构指派不是任何主体均可提供服务；死亡证明签署不由本职名称赋权。2025修订传染病防治法2025-09-01施行，71条区分甲类/炭疽与其他传染病死亡的处理及告知，不能一概同方案，具体技术由合格机构人员按有效规范执行。",
+                  "41条非机构服务主体备案；43/50条收费规则；28条重点区域视频至少90日。"
+                ],
+                "evidence_type": "legal text",
+                "id": "funeral-law",
+                "limitation": "机构法定服务范围非个人统一证书。",
+                "market": "中国大陆",
+                "name": "殡葬管理条例（2025修订，商务部转载中国政府网）",
+                "period": "2025修订；2026-03-30施行",
+                "publisher": "国家法律；政府转载",
+                "scope": "funeral service rules",
+                "url": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=104495"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "71条区分甲类/炭疽与其他传染病死亡的处理、家属告知和必要解剖查验条件。",
+                  "当前全文实际访问成功；此前NPC本地TLS及部分网页访问失败，不冒全部成功。"
+                ],
+                "evidence_type": "legal text",
+                "id": "infectious-law",
+                "limitation": "非实操指引或个案认定。",
+                "market": "中国大陆",
+                "name": "传染病防治法（2025修订，市场监管总局转载）",
+                "period": "2025修订；2025-09-01施行",
+                "publisher": "国家法律；政府转载",
+                "scope": "infectious disease law",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2026/art_397cd55d710842979494a429d02fa2be.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "信息边界｜PIPL6/13/19条核最小必要、合法依据与保存，28/29条按法定敏感条件及适用单独同意规则处理；姓名亲属关系或哀伤情绪不一律为敏感，健康资料可能符合。49条保留死者近亲属为自身合法正当利益行使相关权利，生前另安排除外。51条安全权限、47条法定留存未满不能直接删除；殡葬条例28条重点区域视频至少90日。对外提供公开另核程序，不造家属授权。",
+                  "近亲属死者信息权利与家属信息保护分别处理，不一律敏感或推亡者无保护。"
+                ],
+                "evidence_type": "legal text",
+                "id": "pipl-law",
+                "limitation": "个案合法依据和具体授权另核。",
+                "market": "中国大陆",
+                "name": "个人信息保护法（市场监管总局转载）",
+                "period": "2021法律文本",
+                "publisher": "国家法律；政府转载",
+                "scope": "personal information law",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -34843,7 +34982,7 @@
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "仪式与家属服务",
+                  "label": "仪式",
                   "secondary_value": {
                     "$item": "funeral-attendants.profile.career-quick-answers-block.2",
                     "block": "profile",
@@ -34859,7 +34998,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "接运与场所与设备",
+                  "label": "保障",
                   "secondary_value": {
                     "$item": "funeral-attendants.profile.career-quick-answers-block.4",
                     "block": "profile",
@@ -34875,7 +35014,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "记录与合规协作",
+                  "label": "记录",
                   "secondary_value": null,
                   "value": {
                     "$item": "funeral-attendants.profile.career-quick-answers-block.6",
@@ -35180,7 +35319,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35195,7 +35334,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "未获资质或授权实施或协助遗体处置类事务"
+            "title": "专业范围与越权处置"
           },
           {
             "affected_roles": {
@@ -35212,7 +35351,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "facilities"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35227,7 +35366,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "防护装备与消毒不到位导致暴露或传染病处置不当"
+            "title": "防护与传染病处置"
           },
           {
             "affected_roles": {
@@ -35243,7 +35382,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
+              "onet",
               "employer"
             ],
             "id": "personal-data",
@@ -35259,7 +35398,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "抬棺与灵柩搬运与灵车驾驶与送葬队伍安全疏忽"
+            "title": "搬运车辆及队列"
           },
           {
             "affected_roles": {
@@ -35275,8 +35414,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "privacy",
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35291,7 +35430,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "逝者与家属信息泄露或超范围使用"
+            "title": "逝者家属资料"
           },
           {
             "affected_roles": {
@@ -35307,7 +35446,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "single-coverage",
@@ -35323,7 +35462,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "哀悼者情绪激化或跌倒与仪式秩序失控"
+            "title": "情绪秩序与回应"
           },
           {
             "affected_roles": {
@@ -35339,8 +35478,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "bls",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35355,7 +35494,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "遗体与设备与车辆交接无凭据或费用与承诺口径不一致"
+            "title": "交接版本与收费"
           }
         ],
         "schema_version": "career.work_risk.v1",
@@ -36063,7 +36202,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-other-services-wage-2025",
             "industry": {
               "$item": "funeral-attendants.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36084,7 +36223,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-other-total-wage-2025",
             "industry": {
               "$item": "funeral-attendants.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36105,7 +36244,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-other-subsector-wage-2025",
             "industry": {
               "$item": "funeral-attendants.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36126,7 +36265,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-self-employed-income-2025",
             "industry": {
               "$item": "funeral-attendants.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36836,7 +36975,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS Occupational Outlook Handbook",
+            "label": "BLS39-4021本职就业预测与工资范围",
             "secondary_value": null,
             "value": {
               "$item": "funeral-attendants.profile.onet-structured-fields-block.2",
@@ -36858,7 +36997,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "BLS 就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "funeral-attendants.profile.onet-structured-fields-block.4",
@@ -36869,7 +37008,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中华人民共和国个人信息保护法",
+            "label": "中国殡葬、传染病与信息保护现行法规",
             "secondary_value": null,
             "value": {
               "$item": "funeral-attendants.profile.onet-structured-fields-block.5",
@@ -37938,7 +38077,7 @@
         ]
       },
       {
-        "derivation": "口径｜美国 2025 年 BLS OEWS 全国年工资中位数（经 O*NET 呈现），对应精确职业 39-4021.00；OEWS 不含福利与加班与夜班与待命补贴。",
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "中位时薪 17.16 美元 / 中位年薪 35,680 美元（2025，BLS OEWS）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37946,11 +38085,12 @@
         "occupation_scope": "本职业：殡葬服务员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "hr",
+          "oews-method"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "10 分位 28,070 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37958,11 +38098,12 @@
         "occupation_scope": "本职业：殡葬服务员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "hr",
+          "oews-method"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
         "display_value": "90 分位 48,460 美元/年（2025，BLS OEWS）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37970,67 +38111,150 @@
         "occupation_scope": "本职业：殡葬服务员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "hr",
+          "oews-method"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 就业预测 2024—2034 年（经 O*NET 呈现），对应精确职业 39-4021.00，增长与平均相当（3%—4%）；预测含增长与替换需求，不等于实际招聘数。",
-        "display_value": "增长 与平均相当（3%—4%，2024—2034，BLS 就业预测）",
+        "derivation": "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。",
+        "display_value": "2025—2035增长2.6%，净增0.8千人",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
         "occupation_scope": "本职业：殡葬服务员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 就业预测 2024 年基期（经 O*NET 呈现），对应精确职业 39-4021.00；不含自雇，分行业与分地区细分可能缺失。",
-        "display_value": "就业 约 32,500 人（2024，BLS 就业预测基期，经 O*NET 呈现）",
+        "derivation": "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。",
+        "display_value": "2025就业31.3千人；2035预测32.1千人",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "本职业：殡葬服务员",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜O*NET 呈现的 2024—2034 期间 Projected job openings 字段，来自增长与替换需求；按原文呈现，不可读作新增岗位。",
-        "display_value": "预计岗位空缺约 5,700 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）",
+        "derivation": "美国BLS39-4021｜2025就业31.3千人，2035预测32.1千人；2025—2035增长2.6%、净增0.8千人、年均空缺5.4千人、自雇0.2%。预测含自雇和增长替换需求，空缺非十年新增或实际招聘；本职OOH栏为—，不借邻岗手册数值。",
+        "display_value": "2025—2035年均空缺5.4千人",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "本职业：殡葬服务员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇非私营单位职业工资统计",
+        "derivation": "本轮未取得精确值，不推统计不存在。",
+        "display_value": "证据不足：中国大陆本职精确职业工资未取得，不以行业均值代填",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：殡葬服务员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇私营单位职业工资统计",
+        "derivation": "本轮未取得精确值，不推统计不存在。",
+        "display_value": "证据不足：中国大陆本职精确职业工资未取得，不以行业均值代填",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：殡葬服务员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
+        ]
+      },
+      {
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
+        "display_value": "25分位30,380美元/年（美国2025）",
+        "fact_id": "us-wage-q25-2025",
+        "market": "美国",
+        "measure": "工资第25分位",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "oews-method"
+        ]
+      },
+      {
+        "derivation": "OEWS正常工时税前工资，含全兼职雇员、排自雇；纳基本、计件、佣金、生产奖金、生活费用与危险报酬，排加班溢价、班次差额、非生产奖金及福利成本。不统一排绩效、提成与津贴；一般年工资按时薪×2080，非个人实收工时。",
+        "display_value": "75分位42,870美元/年（美国2025）",
+        "fact_id": "us-wage-q75-2025",
+        "market": "美国",
+        "measure": "工资第75分位",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "oews-method"
+        ]
+      },
+      {
+        "derivation": "全国工资、行业比例及自雇就业比例不代填行业工资或自雇收入。",
+        "display_value": "证据不足：本轮未取得本職其他服务精确工资或收入",
+        "fact_id": "us-industry-other-services-wage-2025",
+        "market": "美国",
+        "measure": "其他服务数据缺口",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "census",
+          "ep"
+        ]
+      },
+      {
+        "derivation": "全国工资、行业比例及自雇就业比例不代填行业工资或自雇收入。",
+        "display_value": "证据不足：本轮未取得本職其他行业合计精确工资或收入",
+        "fact_id": "us-industry-other-total-wage-2025",
+        "market": "美国",
+        "measure": "其他行业合计数据缺口",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "census",
+          "ep"
+        ]
+      },
+      {
+        "derivation": "全国工资、行业比例及自雇就业比例不代填行业工资或自雇收入。",
+        "display_value": "证据不足：本轮未取得本職其他服务细分精确工资或收入",
+        "fact_id": "us-industry-other-subsector-wage-2025",
+        "market": "美国",
+        "measure": "其他服务细分数据缺口",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "census",
+          "ep"
+        ]
+      },
+      {
+        "derivation": "全国工资、行业比例及自雇就业比例不代填行业工资或自雇收入。",
+        "display_value": "证据不足：本轮未取得本職自雇收入（非行业）精确工资或收入",
+        "fact_id": "us-self-employed-income-2025",
+        "market": "美国",
+        "measure": "自雇收入（非行业）数据缺口",
+        "occupation_scope": "本职业：殡葬服务员39-4021",
+        "period": "2025",
+        "source_refs": [
+          "hr",
+          "census",
+          "ep"
         ]
       }
     ]
@@ -38058,19 +38282,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预计岗位空缺（2024—2034）"
+        "label": "美国年均岗位空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38091,10 +38315,10 @@
       "text": "殡葬服务员"
     }
   },
-  "source_content_sha256": "f88e5a22db2ae48c862eba1c4c29d39673cb683134ddb0e3720d12fe7304c1e4",
+  "source_content_sha256": "48983d0e950c001c0883d961393039ac7d9d5bcf675d975b21689d3e29be8c1e",
   "subject": {
     "canonical_slug": "funeral-attendants",
     "name": "殡葬服务员",
-    "summary": "殡葬服务员（O*NET-SOC 39-4021.00，Funeral Attendants）在葬礼与守灵期间执行多种现场服务与保障任务：在仪式前把灵柩移入告别厅或礼拜堂并布置花圈与灯光，迎接来宾并引导与陪同哀悼者、协助其上下礼车，在适当节点配合关闭灵柩，清洁并驾驶殡仪车辆并随送葬车队行进，担任抬棺者，监督送葬队伍并协助墓园停车，把花圈与物品运往安葬地点，执行殡仪馆的一般维护与场地打理，发放与存放殡葬设备，并就如何以逝者名义做慈善捐赠提供建议；部分岗位在机构安排与授权下协助遗体接运与入殓与整容与撰写讣告与办理死亡登记与下葬许可与取得死亡证明与保险理赔文书与协助火化与骨灰处理以及行政事务。官方定义原文：Perform a variety of tasks during funeral, such as placing casket in parlor or chapel prior to service, arranging floral offerings or lights around casket, directing or escorting mourners, closing casket, and issuing and storing funeral equipment."
+    "summary": "职业定义｜O*NET-SOC39-4021.00 Funeral Attendants，固定中文名殡葬服务员，在葬礼中移入灵柩、布置花圈灯光、引导陪同哀悼者、关闭灵柩、发放存放设备。24任务为16核心、8补充；核心还含迎宾、协助上下礼车、清洁驾驶殡仪车辆、抬棺、队伍停车、物品递送搬运、场地维护及纪念慈善捐赠建议。补充含防腐着装化妆入殓、讣告、许可死亡登记、遗体运输、医生签署与保险文书、火化骨灰处理、丧亲安慰咨询善后和行政事务，不能整体排出本职。实际任务、资格与授权按法域机构核。"
   }
 }

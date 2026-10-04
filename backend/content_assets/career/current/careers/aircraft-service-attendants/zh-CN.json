@@ -23353,7 +23353,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的小任务：按公开资料整理一份航空器加油作业步骤清单（含停车与接地、油品核对、软管连接、加油与复核、拆卸与离场）；用虚构参数完成一次地面服务班次任务表（含航班级别、服务项目、时间窗口与异常处置）；把一次异常（如加油泄漏或除冰设备故障）写成含现象、风险、处置与上报路径的记录。做不完整是正常的，重点是观察自己在户外与轮班条件下按程序作业、核对油品与记录的真实反应。（编辑建议，不是录用或执照测试。）"
+              "编辑纸面练习G-v1：用下方四条固定记录核时间窗口、时长、同人／同航班重叠与签收。初次答案A/D字段时段符合、B与A冲突、C缺签收待补证；将B改为09:10–09:20可消除重叠，C仍待补证。练习不涉及真实加油、除冰参数或现场操作，不能证明户外耐受或取得作业资格。"
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fit-decision-checklist.2",
@@ -23383,13 +23383,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页美国工资与就业取自 O*NET 展示的同一 BLS 口径：53-6032 航空器服务服务员 2025 年 5 月年薪中位数 40,450 美元（时薪 19.45 美元）；第 10 分位为 33,830 美元、第 90 分位为 57,610 美元；2024 年在岗约 28,000 人；BLS 预测 2024—2034 年增长 5% 至 6%（快于平均水平），年均约 4,300 个职位空缺，多数来自替代需求。中国大陆没有该职业精确的全国工资分布，行业门类与单位类型数字只作宽口径参考。航空器除冰、清洁与机坪加油作业按中国民航局《运输机场运行安全管理规定》与机场、航油及地面服务单位的管理制度执行，本页不构成法律或安全意见。"
+              "证据不足：中国本职精确工资分布未取得。美国53-6032的2025年5月工资中位数40,450美元／年、19.45美元／小时，10/25/75/90分位33,830/35,740/46,830/57,610美元／年（O*NET展示BLS OEWS）。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。中国仅作行业／单位均值对照。中国大陆《运输机场运行安全管理规定》（交通运输部令2025年第5号，2026-07-01施行）：机场运营人指定航空器清洗与除防冰区域，制定除冰液回收措施；飞行区从业人员由所属单位初训、复训，复训间隔不超过13个月，佩带控制区通行证、穿带反光标识工作服。第118条许可及经营性流动加油禁令针对地面设备加油站与服务，并非航空器加油资格；单位自用流动加油按民航规定执行。"
             ]
           },
           "id": "aircraft-service-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "nbs",
+            "airport"
           ],
           "type": "prose"
         },
@@ -23470,13 +23472,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜89% 受访者表示从不在受环境控制的室内工作，主要作业在机坪与户外；28% 每天在户外有遮蔽处工作（O*NET 53-6032.00 受访比例）。\n时间压力｜74% 每天面对时间压力（17% 每月至少一次），航班过站时间窗口决定作业节奏。\n决策与后果｜67% 每天作决定；58% 认为错误后果极其严重，50% 认为决策对同事或公司结果非常重要。\n体力与姿态｜64% 持续或几乎持续做重复动作，44% 持续或几乎持续弯腰或扭身，43% 持续或几乎持续攀爬梯子或脚手架。\n高处与振动｜39% 每天处于高处作业，51% 每天暴露于全身振动（多与驾驶或操作地面设备相关）。\n防护装备｜22% 每天穿戴专用防护装备（如呼吸防护或全套防护服），其余按作业需要佩戴常见防护用品与反光标识。\n沟通与协作｜57% 与他人持续接触，65% 认为团队合作极其重要；与签派、机务、货运与机坪保障岗位协同。\n自动化程度｜53% 认为工作为中等自动化，38% 认为完全不自动化；加油、除冰与清洁仍以人工操作为主。\n工作时间｜17% 的工作周为 40 小时，其余更长；机坪保障常见轮班、夜班与旺季加班（O*NET 53-6032.00 受访比例）。"
+              "工作环境｜证据不足：本次未取得完整工作周时数其他档位，详见第9行。美国O*NET受访者89%答从不在受控室内工作，28%答每天户外有遮蔽；不能由此推算中国班表。\n时间压力｜74%答每天面对时间压力；不是航班延误概率。\n决策后果｜67%答每天作决定，58%答错误后果极其严重，50%答决策影响非常重要。\n体力姿态｜64%答几乎持续重复动作，44%几乎持续弯腰扭身，43%几乎持续攀爬梯子或脚手架。\n高处振动｜39%答每天高处，51%每天全身振动；不是事故发生率。\n专用防护｜22%答每天专用防护装备；不能推断其余人员使用何种装备。\n团队接触｜57%答持续接触他人，65%答团队合作极其重要。\n自动化｜53%答中等自动化、38%无自动化；该问卷不是AI采用率或岗位替代率。\n工作时间｜可见回答17%答典型周40小时；本次未取得完整其他档位，不能声称其余更长。目标班次向雇主核对。"
             ]
           },
           "id": "aircraft-service-attendants.profile.work-context-block.1",
           "source_refs": [
-            "onet",
-            "onet"
+            "privacy"
           ],
           "type": "prose"
         },
@@ -23500,11 +23501,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 O*NET 展示的 53-6032 口径：2025 年 5 月年薪中位数 40,450 美元（时薪 19.45 美元），第 10 分位为 33,830 美元、第 25 分位为 35,740 美元、第 75 分位为 46,830 美元、第 90 分位为 57,610 美元；2024 年在岗约 28,000 人；主要行业为运输与仓储。入门学历通常为高中文凭或同等学历（77% 受访者），11% 为高等教育证书，11% 为部分大学教育但无学位。"
+              "美国2025年5月工资10/25/50/75/90分位为33,830/35,740/40,450/46,830/57,610美元／年，时薪中位数19.45美元。最新BLS预测基年就业31,200人。O*NET问卷问新雇员完成本职需要何种教育，77%答高中或同等学历、11%高中后非学位证书、11%部分大学教育但无学位；这是美国受访回答，不是在岗学历分布或中国准入门槛。当前Job Zone为1–2。BLS典型入门教育为高中或同等学历、短期在岗培训。"
             ]
           },
           "id": "aircraft-service-attendants.profile.onet-structured-fields-block.2",
           "source_refs": [
+            "oews",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -23558,12 +23561,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 展示）：53-6032 在 2024 年在岗约 28,000 人，2024—2034 年增长 5% 至 6%（快于平均水平），年均约 4,300 个职位空缺且多数来自替代需求。空缺数不等于净新增，也不代表个人就业保证，且不能外推为中国大陆。"
+              "BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。"
             ]
           },
           "id": "aircraft-service-attendants.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -23587,12 +23590,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆依据《运输机场运行安全管理规定》（交通运输部规章）：航空器除冰、防冰作业应当在机场管理机构指定的地点进行，机场应当制定除冰液回收措施并（在经常降雪地区且年起降架次达到一定规模时）设置专用或集中除冰坪；清洗航空器应当在机场管理机构指定的位置进行；飞行区内设置地面设备加油站应当征得机场管理机构同意，经营单位应依法取得危险化学品经营许可证与成品油零售经营批准证书，任何单位不得在飞行区内开展经营性流动加油服务；机坪作业车辆与设备应当停放在指定区域并有效固定。"
+              "中国大陆《运输机场运行安全管理规定》（交通运输部令2025年第5号，2026-07-01施行）：机场运营人指定航空器清洗与除防冰区域，制定除冰液回收措施；飞行区从业人员由所属单位初训、复训，复训间隔不超过13个月，佩带控制区通行证、穿带反光标识工作服。第118条许可及经营性流动加油禁令针对地面设备加油站与服务，并非航空器加油资格；单位自用流动加油按民航规定执行。"
             ]
           },
           "id": "aircraft-service-attendants.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "airport"
           ],
           "type": "prose"
         },
@@ -23616,7 +23619,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界看四件事：谁在机坪为航空器加油、除冰与清洁、谁实施航空器维修与放行、谁驾驶与操纵航空器、谁负责机场运行与机坪统一管理。飞机服务服务员在授权范围内实施燃油、液体补给、除冰、清洁与机坪引导作业；航空器维修与适航放行由持照维修人员实施；航空器运行由机组负责；机场运行与机坪统一管理由机场管理机构负责，相关作业须服从其指定地点与管理制度；超出授权范围的事项须按单位程序升级。"
+              "边界看四件事：谁在机坪为航空器加油、除冰与清洁、谁实施航空器维修与放行、谁驾驶与操纵航空器、谁负责机场运行与机坪统一管理。飞机服务服务员在授权范围内实施燃油、液体补给、除冰、清洁与机坪引导作业；航空器维修与适航放行由持照维修人员实施；航空器运行由机组负责；机场运行与机坪统一管理由机场运营人负责，相关作业须服从其指定地点与管理制度；超出授权范围的事项须按单位程序升级。"
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.7",
@@ -23783,7 +23786,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "燃油、除冰、清洁与机坪引导作业在授权范围内由服务人员实施；航空器维修与放行由持照维修人员负责；航空器运行由机组负责；机场运行与机坪统一管理由机场管理机构负责。"
+              "燃油、除冰、清洁与机坪引导作业在授权范围内由服务人员实施；航空器维修与放行由持照维修人员负责；航空器运行由机组负责；机场运行与机坪统一管理由机场运营人负责。"
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.17",
@@ -23813,7 +23816,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "加油与除冰作业须按单位程序与机场管理制度执行，不得在机场未指定的地点除冰或在飞行区开展经营性流动加油；不得超出授权范围实施维修或放行；发现泄漏、破损或设备故障时须按程序停止作业并上报。"
+              "航空器除防冰须在机场运营人指定区域进行并按规定回收除冰液；航空器加油的作业程序与岗位授权另向单位核对。第118条对地面设备经营性流动加油的禁止不能套为航空器加油禁令。超出授权或发现异常按单位程序上报处理。"
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.19",
@@ -23989,7 +23992,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "户外与轮班是常态，须评估个人耐受。"
+              "户外工作情境有美国问卷依据；具体轮班、夜班及加班须向目标雇主核对。"
             ]
           },
           "id": "aircraft-service-attendants.profile.career-quick-answers-block.31",
@@ -24067,7 +24070,7 @@
                 "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
                 "entity": "O*NET 53-6032.00 任务与工作活动",
@@ -24153,7 +24156,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向燃油作业；对油品核对、静电与防火要求最高。"
+              "面向航空器燃油作业，需核专项训练、防火与油品核对程序。"
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.11",
@@ -24271,7 +24274,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向机坪运行；对信号准确、车辆操作与机坪规则要求最高。"
+              "面向机坪引导与牵引，需核信号、车辆操作和机场规则。"
             ]
           },
           "id": "aircraft-service-attendants.direction-comparison.adjacent-career-comparison-table.19",
@@ -24536,109 +24539,109 @@
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 任务与工作活动",
+                "entity": "O*NET展示BLS2025工资分位",
                 "id": "link-2",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/53-6032.00"
-              },
-              {
-                "entity": "O*NET 展示的 BLS 2025 年 5 月工资分位：53-6032.00",
-                "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
-                "id": "link-4",
+                "entity": "BLS2025基年就业：53-6032",
+                "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 53-6032.00 详细资料（工作情境）",
+                "entity": "BLS2025—2035就业预测",
+                "id": "link-4",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET美国工作情境",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 职业摘要",
+                "entity": "O*NET新雇员教育问卷及Job Zone1–2",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 技术清单",
+                "entity": "O*NET2025招聘软件提及清单",
                 "id": "link-7",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 行业分布",
+                "entity": "O*NET职业属性与任务",
                 "id": "link-8",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/53-6032.00"
-              },
-              {
-                "entity": "O*NET 53-6032.00 自定义职业档案",
-                "id": "link-9",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/53-6032.00"
-              },
-              {
-                "entity": "O*NET 53-6032.00 职业说明（任务清单）",
-                "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 职业摘要（任务与职责）",
-                "id": "link-11",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
-              },
-              {
-                "entity": "BLS 2024—2034 年就业预测表",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
-              },
-              {
-                "entity": "O*NET 展示的 BLS 工资分位（53-6032.00）",
-                "id": "link-13",
+                "entity": "O*NET展示BLS2025工资分位",
+                "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 工作情境与任务数据",
-                "id": "link-14",
+                "entity": "BLS2025基年就业",
+                "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/53-6032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 53-6032.00 职业摘要",
-                "id": "link-15",
+                "entity": "BLS2025—2035增长与空缺",
+                "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 53-6032.00 技术清单（技术条目说明）",
-                "id": "link-16",
+                "entity": "O*NET2025招聘软件提及清单",
+                "id": "link-12",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/hot_tech/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 详细资料",
+                "entity": "BLS2025—2035预测",
+                "id": "link-13",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET展示BLS2025工资分位",
+                "id": "link-14",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/localwages/53-6032.00"
+              },
+              {
+                "entity": "O*NET本职任务，仅支持职业对象",
+                "id": "link-15",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
+              },
+              {
+                "entity": "O*NET本职任务：条件性编辑分析",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
+              },
+              {
+                "entity": "O*NET本职任务，不证明中国资格互认",
                 "id": "link-17",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "BLS OEWS：53-6032 工资统计",
+                "entity": "BLS2025—2035预测，不给消失年份",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 53-6032.00 任务清单与记录要求",
+                "entity": "O*NET本职任务：编辑准备建议",
                 "id": "link-19",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
@@ -24785,7 +24788,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变作业单派发、油量与除冰数据记录、设备状态监测与班次排程等环节，但没有证据表明它会取代服务人员的油品核对、机坪安全判断、除冰作业与异常处置责任，本页也不据此推测岗位数量变化。技术能力、实际部署与招聘结果要分开判断；油品核对、安全条件确认与异常停止仍由受过培训的现场人员承担。"
+              "本次未取得本职AI实际采用、替代率或效果研究。编辑提出作业单、计量记录、设备信息与排程的条件性辅助场景；职业任务资料不证明这些场景已部署或有效。真实作业仍按培训、程序和单位授权，不能据预测增长断言AI不会取代岗位。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.18",
@@ -24860,7 +24863,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：53-6032"
+              "BLS2025基年就业：53-6032"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.23",
@@ -24874,7 +24877,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于工资中位数与就业规模口径说明。"
+              "用于31,200人基年就业；它是就业预测矩阵，非OEWS就业规模。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.24",
@@ -24888,7 +24891,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测"
+              "BLS2025—2035就业预测"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.25",
@@ -24902,7 +24905,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于增长区间与年均职位空缺。"
+              "用于5.6%增长、净增约1,700人和年均约4,000个空缺。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.26",
@@ -24916,7 +24919,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》"
+              "O*NET美国工作情境"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.27",
@@ -24930,7 +24933,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆机坪作业、航空器除冰与清洗、飞行区内加油站许可与人员培训复训的框架说明。"
+              "受访者时间压力、体力姿态与自动化程度；不是中国法规或AI采用率。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.28",
@@ -24944,7 +24947,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "O*NET新雇员教育问卷与Job Zone1–2"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.29",
@@ -24958,7 +24961,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆民用行业门类工资参照。"
+              "美国受访教育要求与职业准备分组，不是中国资格或学历分布。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.30",
@@ -24972,7 +24975,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》航空运输地面服务员（4-02-04-02）等"
+              "O*NET2025招聘软件提及清单"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.31",
@@ -24986,7 +24989,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆对应职业与技能等级认定范围说明。"
+              "列出四种软件，提及百分比均Not available；不是航空器设备清单或采用率。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.32",
@@ -25000,7 +25003,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较本职业内部主要方向在自动化影响上的差别。"
+              "下表为三方向的条件性编辑场景；未取得实际部署与效果证据。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.33",
@@ -25015,7 +25018,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "加油计量数据采集、油品核对提示与作业单电子化可辅助减少抄录错误。"
+              "若获准电子记录，可试验计量资料抄录与作业单整理；未取得减少错误的本职研究。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.34",
@@ -25045,7 +25048,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "除冰液配比与用量记录、设备状态监测可自动化处理。"
+              "可研究除冰用量与设备信息记录辅助；不能据此认定配比或操作已自动化。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.36",
@@ -25075,7 +25078,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航班保障排程与车辆定位可辅助调度。"
+              "可研究班次资料与车辆信息整理；实际可行性和部署需另核。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.38",
@@ -25105,7 +25108,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持职业属性、任务边界、工资与就业口径，不是 AI 替代率或岗位数量预测。"
+              "证据不足：未取得本职AI实际采用、替代率或采用效果研究。五卡只支持职业属性、工资、就业与招聘软件信息，不能据此评分或预测消失年份。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.40",
@@ -25119,7 +25122,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供工资与就业数字；本页工资与就业取自 O*NET 展示的同一 BLS 口径并在证据卡中单独列出。"
+              "本卡支持职业对象与任务；不证明AI部署、工资或中国作业权限。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.41",
@@ -25231,7 +25234,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与工资按职业与行业发布，不含按雇主或机型的细分；不能外推为中国大陆。"
+              "美国2025全国基年就业，BLS预测矩阵口径；不是OEWS就业总数、机型细分或中国就业。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.49",
@@ -25245,12 +25248,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：53-6032"
+              "BLS2025全国就业预测矩阵"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25259,7 +25262,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国该职业的就业与工资口径"
+              "美国53-6032基年就业"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.51",
@@ -25273,12 +25276,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS 为美国职业就业与工资统计的官方来源，按职业发布就业规模与工资分位；53-6032 的 2024 年在岗约 28,000 人（经 O*NET 展示），主要行业为运输与仓储。"
+              "2025基年31,200人，2035预测32,900人；表以千人为单位显示31.2和32.9。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25301,12 +25304,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测"
+              "BLS2025—2035就业预测"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25329,12 +25332,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 53-6032 在 2024—2034 年增长 5% 至 6%（快于平均水平），年均约 4,300 个职位空缺，多数来自替代需求而非净新增。"
+              "本职增长5.6%，官方净变化约1,700人，年均空缺约4,000个；空缺包含替代需求。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25343,7 +25346,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "规章只规定机场运行安全的制度框架，不含具体薪酬与岗位设置；实际作业程序与授权以机场与单位管理制度为准。"
+              "招聘提及清单不能证明现场设备使用、AI部署或软件普及率；四项百分比均Not available。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.57",
@@ -25357,12 +25360,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》"
+              "O*NET招聘软件提及清单"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25371,7 +25374,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆机坪作业与航空器除冰、清洗的制度要求"
+              "美国2025年职业关联招聘文本中的软件条目"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.59",
@@ -25385,12 +25388,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "航空器除冰、防冰作业应当在机场管理机构指定的地点进行，机场应当制定除冰液回收措施并在具备条件的机场设置专用或集中除冰坪；清洗航空器应当在指定位置进行；飞行区内设置地面设备加油站应当征得机场管理机构同意，经营单位应依法取得危险化学品经营许可证与成品油零售经营批准证书，任何单位不得在飞行区内开展经营性流动加油服务；飞行区保障作业人员应按培训制度接受初始培训与复训。"
+              "页面列Microsoft Excel、Office、Windows、Word；四项提及比例均Not available，不填比例，也不称为现场常用工具。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "facilities"
           ],
           "type": "prose"
         },
@@ -25399,7 +25402,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，作业单派发与电子签核、加油与除冰计量数据采集、设备状态监测、航班保障排程与车辆定位、服务记录整理可被部分自动化，输出可用于辅助调度与形成作业记录。这些结果仍需现场人员核对油品、数量与安全条件后才能用于作业。"
+              "编辑条件性场景：在获得单位许可、具备设备和数据条件时，可探索作业单与计量记录整理；未取得本职自动化效果研究，不能让辅助输出代替实际操作判据。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.61",
@@ -25414,7 +25417,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于机场与单位的安全管理体系要求、设备与信息化投入、培训条件，以及监管对作业地点、除冰液回收与加油许可的规定。技术可行不等于已获批准或已部署，本页不推测采用进度。"
+              "采用核对建议：确认单位许可、适用设备、资料质量与人员训练，再核实际效果；本次没有部署样本，不能由技术清单推算进度。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.62",
@@ -25429,7 +25432,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供该类推断。BLS 预测该职业 2024—2034 年增长 5% 至 6%（快于平均水平）、年均约 4,300 个空缺且多数来自替代需求；任务自动化程度、实际部署与招聘数量是三种不同的判断，不能相互替代，也不能以任务暴露度推断岗位减少。"
+              "本页不预测岗位减少。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。职业预测不识别AI的因果影响。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.63",
@@ -25444,7 +25447,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持“被取代”。自动化可能增强作业单管理、计量数据采集与设备监测，但油品核对、除冰作业、机坪安全判断与异常停止责任仍由受过培训的现场人员承担；BLS 预测该职业 2024—2034 年增长 5% 至 6%（快于平均水平），本页不据此推测岗位数量变化。"
+              "证据不足：本次未取得本职AI替代率或实际采用研究。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。编辑仅提出记录辅助场景，不能推断必然取代或永不取代。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.64",
@@ -25459,7 +25462,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 与 BLS 2024—2034 年预测（编辑归纳）"
+              "BLS2025—2035预测，不能证明AI因果影响"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.65",
@@ -25504,7 +25507,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》规定航空器除冰、防冰与清洗作业须在指定地点进行并采取除冰液回收措施；飞行区内设置地面设备加油站须经机场管理机构同意并依法取得危险化学品经营许可证与成品油零售经营批准证书，不得开展经营性流动加油服务；飞行区保障作业人员须按培训制度接受初始培训与复训。具体作业程序以机场与单位管理制度为准。"
+              "O*NET描述美国航空器加油、除冰与记录任务，不证明中国大陆通行证、培训或许可。中国要求见下方入行与风险板块的现行规章链接；两法域不互相外推。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.68",
@@ -25519,7 +25522,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》"
+              "O*NET任务对象；中国要求另核入行规章来源"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.69",
@@ -25533,7 +25536,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "作业单派发与电子签核、加油与除冰计量数据采集、设备状态监测、航班保障排程与车辆定位、服务记录整理等辅助环节；受影响程度取决于安全管理体系、设备与信息化投入与培训条件。"
+              "编辑建议可优先研究作业单和记录整理等辅助场景；O*NET任务清单不证明哪些环节最容易自动化，也未提供本职部署效果。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.70",
@@ -25563,7 +25566,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。本职业按机坪作业培训、控制区通行证与单位作业授权管理，车辆服务或工业维修资历不替代航空器加油、除冰与机坪作业的培训与授权；反过来，本职业资历用于其他行业通常也需按目标行业要求重新认定。"
+              "O*NET仅说明本职任务，不能判断跨行业证书互认；须按目标法域、具体作业与主管／单位要求核。中国初训、复训与控制区要求见入行规章原文。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.72",
@@ -25578,7 +25581,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》与 O*NET 53-6032.00（编辑说明）"
+              "O*NET职业任务，不提供证书互认结论"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.73",
@@ -25592,7 +25595,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供消失年份。BLS 预测该职业 2024—2034 年增长 5% 至 6% 并存在大量替代需求，本页不采用“按任务暴露度推断消失时间”的做法。"
+              "本页不提供消失年份。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。就业增长不是AI影响的因果证明。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.74",
@@ -25607,7 +25610,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页证据卡与来源政策（编辑说明）"
+              "BLS2025—2035职业预测；不支持消失年份"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.75",
@@ -25622,7 +25625,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建议次序：按官方信息核对雇主的机坪作业培训与持证要求（控制区通行证、专用车辆操作资格与加油/除冰专项训练）；打牢安全意识、车辆操作与应急处置基础；了解油品核对、除冰液回收与记录要求。具体要求以机场及单位官方信息为准。"
+              "编辑建议：先核目标岗位任务和正式训练要求，再做G-v1纸面记录核对，保留冲突和待补证；中国法规、现场操作与资格按入行板块实际来源核。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.76",
@@ -25637,7 +25640,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 与《运输机场运行安全管理规定》（编辑建议）"
+              "O*NET任务支持准备对象；G-v1为编辑练习"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.77",
@@ -25933,7 +25936,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "作业单派发可自动化，但项目与时间窗口确认仍由人承担。"
+              "条件性编辑场景：若单位允许，可研究派单辅助；不能代替项目与时间窗口确认。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.97",
@@ -25990,7 +25993,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "车辆定位可辅助，但信号引导与安全条件确认仍由人负责。"
+              "条件性编辑场景：可研究定位信息辅助；未核真实部署，实际引导按正式程序。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.101",
@@ -26047,7 +26050,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计量数据采集可自动化，但油品核对与安全判断仍由人负责。"
+              "条件性编辑场景：可研究计量记录采集；未核实际效果，不能代替油品与安全条件核对。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.105",
@@ -26104,7 +26107,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "液位监测可辅助，但处置与污染控制仍由人负责。"
+              "条件性编辑场景：可研究液位记录辅助；实际处置与污染控制按单位程序。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.109",
@@ -26161,7 +26164,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "配比与用量记录可自动化，但作业时机、地点与高处安全仍由人判断。"
+              "条件性编辑场景：可研究用量记录整理；不提供真实配比或除冰操作判据。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.113",
@@ -26218,7 +26221,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "影像与检测数据分析可辅助，但判定与上报仍由人负责。"
+              "条件性编辑场景：可研究检查资料整理；无本职识别效果研究，不自动给放行结论。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.117",
@@ -26274,7 +26277,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "调度与记录可数字化，但牵引操作与交接仍由人负责。"
+              "条件性编辑场景：可研究排程与交接记录整理；实际牵引按训练与授权。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.121",
@@ -26289,7 +26292,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以上内容区分自动化能力、实际部署与招聘结果；进入下一节可以查看中国大陆民用工资参照与其统计范围说明。"
+              "以上为事实来源与条件性编辑建议的分层说明；中国工资另见行业均值参照。"
             ]
           },
           "id": "aircraft-service-attendants.ai-impact.ai-impact-table.122",
@@ -26410,7 +26413,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "规模以上企业办事人员和有关人员类别均值，覆盖不同职业，只作宽口径对照。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.14",
@@ -26438,7 +26441,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业最贴近的行业门类代理（航空运输与机场保障岗位多归入该门类）；该门类覆盖大量非机坪岗位，不能当成飞机服务服务员中位数。"
+              "交通运输、仓储和邮政业宽门类年均工资，覆盖大量非本职岗位；不能作为飞机服务服务员工资。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.16",
@@ -26536,7 +26539,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（作业单派发、计量数据采集、设备状态监测与记录整理）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断降薪；工资差异主要由雇主类型、作业项目（加油、除冰等）、班次与地区决定。"
+              "证据不足：未取得本职AI影响工资的因果研究。辅助任务场景属编辑建议，不能推算降薪；核具体职位书面薪酬、班次与地区条件。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.23",
@@ -26565,7 +26568,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "初中或高中及以上"
+              "核目标公告学历"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.25",
@@ -26580,7 +26583,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机坪保障岗位（加油、除冰、清洁与引导等）"
+              "航空器加油／除冰／清洁／引导任务"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.26",
@@ -26595,7 +26598,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机坪保障岗位通常以初中或高中及以上学历为起点，具体按用人单位招聘条件；须按机场与单位的培训制度接受初始培训并持证上岗。"
+              "证据不足：未取得中国本职统一学历门槛与可逐项核验招聘公告；按目标单位公告核学历、训练和授权，不推测初中起点。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.27",
@@ -26610,7 +26613,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "高中或中专及以上"
+              "相邻标准作对照"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.28",
@@ -26625,7 +26628,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空运输地面服务员（4-02-04-02）等技能等级岗位"
+              "航空运输地面服务员（客运／货运）"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.29",
@@ -26640,7 +26643,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》将航空运输地面服务员（4-02-04-02）列为技能类职业，可按职业技能等级认定；具体申报条件以标准与认定机构公告为准。"
+              "2022国家职业技能标准4-02-04-02只列民航客运员、民航货运员，不能当作航空器加油或除冰统一资格、学历门槛；按实际任务另核。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.30",
@@ -26760,7 +26763,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "机坪加油、除冰、清洁与引导作业的主要岗位来源；须服从机场管理机构的作业地点与运行安全管理要求。"
+              "编辑岗位搜索方向：航空公司或机场地服，先核任务是否包含本职服务项目及所属单位训练制度，不据名称认定招聘需求。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.38",
@@ -26790,7 +26793,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空燃油加注与专用车辆作业岗位；须依法取得相应经营许可并遵守机场加油作业规定。"
+              "编辑搜索方向：航油或第三方保障单位，具体航空器加油项目许可与人员要求另核；不将地面设备加油站经营许可当个人资格。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.40",
@@ -26820,7 +26823,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "通用航空与支线机场的机坪保障岗位；作业量与机型多样，对多项目作业能力要求较高。"
+              "编辑搜索方向：支线机场或通航保障；本次未取得招聘样本，具体项目、机型与班次向雇主核对。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.42",
@@ -26835,7 +26838,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/oes/current/oes536032.htm"
+              "BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.onetonline.org/link/localwages/53-6032.00"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.43",
@@ -26993,7 +26996,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：机场地面服务与航油企业多为国有企业或大型民营企业口径，未单列；规模以上企业专业技术人员为 155,491 元/年"
+              "证据不足：未取得本职分单位工资；规模以上企业专业技术人员155,491元／年仅是另一岗位类别均值，不代表航油企业或本职。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.54",
@@ -27007,7 +27010,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按《国民经济行业分类》（GB/T 4754-2017），本职业相关岗位主要归入交通运输、仓储和邮政业；按《中华人民共和国职业分类大典（2022 年版）》，相关岗位归入航空运输地面服务员（4-02-04-02）等职业与工种，机场场务与专用车辆操作等岗位另有对应职业。国家统计局不单列该职业工资，因此本页不以行业数字冒充职业中位数。"
+              "中国本职精确工资未取得，国家统计局只作宽行业／单位参照。2022国家职业技能标准4-02-04-02面向民航客运员、货运员，不直接对应航空器加油／除冰；不据此给本职技能资格或学历起点。"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.55",
@@ -27036,7 +27039,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "5% 至 6%"
+              "5.6%（2025—2035）"
             ]
           },
           "id": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -27072,7 +27075,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：53-6032.00｜https://www.onetonline.org/link/localwages/53-6032.00；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/oes/current/oes536032.htm；O*NET 53-6032.00 飞机服务服务员职业摘要｜https://www.onetonline.org/link/summary/53-6032.00"
+              "O*NET展示BLS2025年5月工资分位｜https://www.onetonline.org/link/localwages/53-6032.00；BLS2025—2035就业预测矩阵｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET本职职业摘要｜https://www.onetonline.org/link/summary/53-6032.00"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.8",
@@ -27088,7 +27091,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "低于33,830美元/年"
+              "33,830美元／年"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.9",
@@ -27102,7 +27105,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 10 分位上界（时薪 16.26 美元），为统计分布位置，不代表起薪或最低工资。；O*NET 展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/53-6032.00"
+              "2025年5月年工资第10分位，时薪16.26美元；不是起薪或工资下限。；O*NET展示BLS2025年5月工资分位｜https://www.onetonline.org/link/localwages/53-6032.00"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.10",
@@ -27158,7 +27161,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月 53-6032 年薪中位数（时薪 19.45 美元）。；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/oes/current/oes536032.htm"
+              "2025 年 5 月 53-6032 年薪中位数（时薪 19.45 美元）。；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.onetonline.org/link/localwages/53-6032.00"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.14",
@@ -27200,7 +27203,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "高于57,610美元/年"
+              "57,610美元／年"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.17",
@@ -27214,7 +27217,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 90 分位下界（时薪 27.70 美元），高收入端常与雇主类型、作业项目资质与班次安排相关。；O*NET 展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/53-6032.00"
+              "2025年5月年工资第90分位，时薪27.70美元；不是工资上限或资历因果结论。；O*NET展示BLS2025年5月工资分位｜https://www.onetonline.org/link/localwages/53-6032.00"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.18",
@@ -27228,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约28,000人（2024年）"
+              "31,200人（2025基年）"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.19",
@@ -27242,7 +27245,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 53-6032 就业规模（BLS 口径）。；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/oes/current/oes536032.htm"
+              "BLS就业预测矩阵基年值，非OEWS就业规模。；BLS2025—2035就业预测矩阵｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.20",
@@ -27257,7 +27260,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5% 至 6%（2024—2034年）"
+              "5.6%（2025—2035）"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.21",
@@ -27271,7 +27274,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "快于所有职业平均（快于平均）。；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+              "全国职业预测增长率；官方净变化约1,700人。；BLS2025—2035就业预测矩阵｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.22",
@@ -27285,7 +27288,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均约4,300个"
+              "年均约4,000个"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.23",
@@ -27299,7 +27302,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测年均职位空缺（含增长与替代需求），不等于净新增岗位。；BLS 职业就业与工资统计（OEWS）：53-6032｜https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+              "2025—2035预测年均空缺含增长与替代需求，不等于净新增。；BLS2025—2035就业预测矩阵｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.24",
@@ -27314,7 +27317,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以上数字为 BLS 职业就业与工资统计（OEWS）与 O*NET 展示的同一 BLS 口径（2025 年 5 月工资与 2024—2034 年预测），均为美国单一职业口径，不能外推为中国大陆。"
+              "工资为BLS OEWS2025年5月，经O*NET展示；就业为BLS2025—2035预测矩阵。两统计项目分开，中国行业均值不能相互外推。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.25",
@@ -27329,7 +27332,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国 53-6032 飞机服务服务员 2025 年 5 月年薪中位数为 40,450 美元（时薪 19.45 美元）；第 10 分位低于 33,830 美元，第 90 分位高于 57,610 美元。中位数是分布中点，不是起薪。"
+              "美国本职2025年5月工资中位数40,450美元／年、19.45美元／小时；第10和90分位分别33,830、57,610美元／年。分位不是起薪、最低或最高工资。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.26",
@@ -27344,7 +27347,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机队规模、航班量与机坪保障需求决定服务人员需求；本页不提供分雇主或分机场数字。"
+              "证据不足：未取得分雇主／机队需求模型。编辑核对项：向目标雇主确认机型、班次与保障项目，不能据航班量推算岗位数。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.27",
@@ -27372,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同地区的生活成本与枢纽机场聚集度会影响实际收入水平；本页不提供分地区数字。"
+              "编辑核对项：向雇主核具体工作地点和收入条件；本次未取得本职地区工资因果模型。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.29",
@@ -27429,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "5% 至 6%"
+              "5.6%"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.33",
@@ -27457,7 +27460,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本次未取得2025该行业本职工资中位数，不用行业均值或第三方估算代填。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.35",
@@ -27471,7 +27474,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "运输与仓储是 O*NET 给出的 2024 年主要行业；BLS 未按行业公布该职业工资中位数。"
+              "运输与仓储为宽行业范围；全国本职中位数不是该行业中位数，本次未取得对应分行业值。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.36",
@@ -27499,7 +27502,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本次未取得2025该行业本职工资中位数，不以其他统计代填。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.38",
@@ -27513,7 +27516,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "航空运输支持服务是机坪保障岗位的集中类别之一；具体中位数未能取得。"
+              "航空运输支持服务为岗位搜索范围；尚未取得其本职中位数，不推断为已核招聘集中度。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.39",
@@ -27541,7 +27544,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本次未取得2025该范围本职工资中位数，不以其他统计代填。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.41",
@@ -27555,7 +27558,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机场运营相关岗位可能归属公共部门；具体中位数未能取得。"
+              "机场运营与政府混合不同单位，非单一行业分类；不据此生成本职工资。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.42",
@@ -27626,7 +27629,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。时薪与年薪是同一统计分布的两种表达（中位数 19.45 美元/小时对应 40,450 美元/年），实际收入还取决于加班、夜班与冬季除冰时段安排。"
+              "不能据19.45美元时薪推算个人全年收入。OEWS年值使用统计年化口径，实际工作时数、班次与薪酬另核。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.47",
@@ -27640,7 +27643,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "来自美国劳工统计局职业就业与工资统计（OEWS）2025 年 5 月，由 O*NET 展示；就业增长与年均空缺来自 BLS 2024—2034 年预测。"
+              "工资来自BLS OEWS2025年5月，经O*NET展示；就业与空缺来自BLS2025—2035预测矩阵，项目和时期分别标注。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.48",
@@ -27654,7 +27657,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。美国数字是美国单一职业口径，与本页中国侧行业门类代理不是同一体系，两者不可互相外推。"
+              "向雇主核工作地、班次、项目授权、加班与薪酬构成；本页未取得这些因素的因果效应研究。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.49",
@@ -27683,7 +27686,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最低 10%：低于 33,830 美元/年，为美国单一职业口径，不代表起薪或最低工资标准。"
+              "第10分位33,830美元／年，表示分布位置，不是起薪或最低工资标准。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.51",
@@ -27712,7 +27715,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10%：高于 57,610 美元/年，高收入端常与雇主类型、作业项目资质与班次安排相关。"
+              "第90分位57,610美元／年，表示分布位置，不是最高工资或经验薪酬保证。"
             ]
           },
           "id": "aircraft-service-attendants.us-salary.career-snapshot-secondary-locale.53",
@@ -27814,40 +27817,40 @@
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
+                "entity": "O*NET任务与工作活动",
                 "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
-              },
-              {
-                "entity": "O*NET 53-6032.00 任务与工作活动",
-                "id": "link-15",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 兴趣剖面（Interests）",
-                "id": "link-16",
+                "entity": "BLS2025—2035就业预测",
+                "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 53-6032.00 工作情境（Work Context）",
+                "entity": "O*NET美国工作情境",
+                "id": "link-16",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/53-6032.00"
+              },
+              {
+                "entity": "O*NET教育问卷与Job Zone1–2",
                 "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "O*NET 53-6032.00 教育要求（Job Zone 2）",
+                "entity": "O*NET兴趣RC",
                 "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "《运输机场运行安全管理规定》（交通运输部规章）",
+                "entity": "机场运行安全规章：2026-07-01施行",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.gov.cn/gongbao/2025/issue_12466/202512/content_7051956.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -27933,7 +27936,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格属自我探索工具：尽责性与情绪稳定性常与高可靠性岗位相关，但这是群体层面的相关性，不能用于选拔判断。本职业更关心可观察行为（按程序作业、核对油品与安全条件、异常上报）。"
+              "大五只用于编辑自我探索：观察是否逐项核对、接受复核、如实上报。本次未取得本职人格分数预测工作表现研究，不把可靠性相关性当成职业事实。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.6",
@@ -27948,7 +27951,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格量表与工作表现的相关性有限，也不是选拔依据。"
+              "本次未取得本职大五预测表现研究；观察建议不用于录用。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.7",
@@ -27992,7 +27995,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验在机坪按程序加油、除冰与核对记录的真实感受，再判断自己是否愿意长期做这类需要责任心与耐受户外条件的作业；测评结果不保证录用，也不能预测工作表现。"
+              "编辑纸面练习G-v1：用下方四条固定记录核时间窗口、时长、同人／同航班重叠与签收。初次答案A/D字段时段符合、B与A冲突、C缺签收待补证；将B改为09:10–09:20可消除重叠，C仍待补证。练习不涉及真实加油、除冰参数或现场操作，不能证明户外耐受或取得作业资格。"
             ]
           },
           "id": "aircraft-service-attendants.fit.riasec-fit-block.9",
@@ -28007,7 +28010,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持“某种类型最适合飞机服务服务员”；适任职否由培训、持证与单位授权判定。"
+              "本次未取得支持某种MBTI类型最适合本职的研究；只用于整理探索问题，正式适任按实际训练、考核与授权核。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.10",
@@ -28035,7 +28038,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "本次未取得本职MBTI预测效度研究，不作筛选依据。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.11",
@@ -28107,7 +28110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样属于自我探索工具，不能判断你是否适合这个职业；准入关注体检、培训与持证要求。"
+              "九型只作自我探索；本次未取得本职适配效度研究。真实准入按目标单位正式要求核。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.14",
@@ -28164,7 +28167,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "体能、色觉与空间判断：机坪作业需要体力、平衡与对车辆与航空器的空间判断，但没有统一的 IQ 门槛；准入以体检、培训与作业考核为准。"
+              "O*NET任务涉及信号、设备操作与记录，本页据此建议观察空间和数值核对。本次未取得统一本职IQ门槛或中国体检标准，不能把色觉写成普遍法定要求。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.18",
@@ -28222,7 +28225,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力：机坪保障在时间压力与恶劣天气下需要稳定与清晰沟通，但情商不是准入硬指标；关键是在压力下仍按程序作业并把异常如实上报。"
+              "沟通观察建议：压力下能否清晰交接、如实报告不确定项并遵守程序。本次未取得本职EQ录用分数标准。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.22",
@@ -28281,7 +28284,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本页的适配判断均属编辑建议，基于 O*NET 的兴趣剖面、工作情境与任务数据，不构成选拔标准、健康或心理诊断；培训、持证与准入要求以机场及用人单位官方信息为准。"
+              "证据不足：未取得本职大五、MBTI、九型、IQ或EQ分数预测表现与录用的研究。适配内容是基于O*NET任务、情境和RC兴趣的编辑观察建议，不能证明个人适任或健康条件。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.26",
@@ -28613,7 +28616,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在跨岗位协调上有优势，但同样需要严格执行作业程序与安全规定。"
+              "本次未取得外向性带来本职协调优势的研究；建议分别观察清晰交接、遵守程序与异常上报，不用外向标签预测表现。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.48",
@@ -28657,7 +28660,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是准入依据；请用培训表现、安全考核与持证要求判断。"
+              "未取得本职人格分数预测表现研究；本页用纸面核对观察记录习惯，正式适任看真实训练、考核与授权。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.51",
@@ -28671,7 +28674,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "体力、空间判断与操作能力有帮助，但没有统一的 IQ 门槛；可通过训练与实作建立。"
+              "可先观察G-v1时段和时长核对。本次未取得统一IQ分数门槛；数学练习不等于真实操作考核。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.52",
@@ -28686,7 +28689,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力有帮助但不是硬指标；更重要的是在航班窗口压力与恶劣天气下仍按程序执行并及时上报异常。"
+              "未取得本职EQ准入分数依据；本页建议观察压力下的清晰交接与如实上报。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.53",
@@ -28715,7 +28718,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先按机场与雇主的官方信息核对机坪作业培训、持证与作业项目要求，再用公开资料练习读懂作业单与核对油品数量来验证自己的细致度；不要相信非官方机构的包就业承诺。"
+              "编辑纸面练习G-v1：用下方四条固定记录核时间窗口、时长、同人／同航班重叠与签收。初次答案A/D字段时段符合、B与A冲突、C缺签收待补证；将B改为09:10–09:20可消除重叠，C仍待补证。练习不涉及真实加油、除冰参数或现场操作，不能证明户外耐受或取得作业资格。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.55",
@@ -28759,7 +28762,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次替代性准备：按公开资料整理一份航空器加油作业步骤清单（含停车与接地、油品核对、软管连接、加油与复核、拆卸与离场），用虚构参数完成一次地面服务班次任务表（含航班级别、服务项目、时间窗口与异常处置），并写出一次异常的处置与上报记录。这不构成执照或录用测试，也不能替代培训与考核。"
+              "编辑纸面练习G-v1：用下方四条固定记录核时间窗口、时长、同人／同航班重叠与签收。初次答案A/D字段时段符合、B与A冲突、C缺签收待补证；将B改为09:10–09:20可消除重叠，C仍待补证。练习不涉及真实加油、除冰参数或现场操作，不能证明户外耐受或取得作业资格。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.58",
@@ -28801,7 +28804,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 O*NET 展示：用于工资、就业与前景。"
+              "BLS2025—2035就业预测，仅用于美国就业与空缺，不用于适配或中国资格。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.61",
@@ -28829,7 +28832,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 教育要求（Job Zone 2），用于职业准备等级说明。"
+              "O*NET教育问卷及Job Zone1–2，属于美国职业准备资料，不是在岗学历分布。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.63",
@@ -28857,7 +28860,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》，用于中国大陆机坪作业、除冰与清洗、加油站许可与培训复训要求，不用于人格判断。"
+              "现行机场规章用于中国初训、复训、控制区、除防冰与清洗地点；地面设备加油条款不等于航空器加油资格。"
             ]
           },
           "id": "aircraft-service-attendants.fit.personality-fit-block.65",
@@ -28909,7 +28912,7 @@
                 "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
                 "entity": "O*NET 53-6032.00 工作情境（Work Context）",
@@ -28921,7 +28924,7 @@
                 "entity": "《运输机场运行安全管理规定》（交通运输部规章）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/gongbao/2025/issue_12466/202512/content_7051956.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
                 "entity": "O*NET 53-6032.00 职业摘要（任务与职责）",
@@ -28978,7 +28981,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 53-6032.00 提供任务与工作情境（89% 从不在受环境控制的室内工作、74% 每天面对时间压力、58% 认为错误后果极其严重、51% 每天暴露于全身振动、39% 每天处于高处作业）；BLS 职业就业与工资统计提供工资与就业；《运输机场运行安全管理规定》提供中国大陆除冰与清洗作业地点、除冰液回收、飞行区内加油站许可与人员培训复训的框架要求。风险清单为编辑归纳，不含发生概率。"
+              "O*NET本职美国任务与工作情境支持高处、振动、错误后果和时间压力的受访回答；现行机场规章支持中国除防冰／清洗区域、回收、训练和控制区要求。第118条只针对地面设备加油服务。风险例为编辑情景，未提供事故概率。"
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.10",
@@ -29366,7 +29369,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "O*NET展示BLS OEWS2025年5月工资分位，不提供本风险发生率或就业预测。"
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.36",
@@ -29380,7 +29383,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 职业摘要（任务与职责）。"
+              "O*NET美国工作情境：高处、振动与体力姿态受访回答，非事故发生率。"
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.37",
@@ -29408,7 +29411,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表监管或单位的强制流程。"
+              "O*NET本职任务与记录要求；风险例为编辑情景，不代表强制流程或事故概率。"
             ]
           },
           "id": "aircraft-service-attendants.risk.career-risk-cards.39",
@@ -29448,35 +29451,35 @@
                 "加油方向",
                 "完成机坪作业培训并见习加油与液体补给作业。",
                 "能按作业单核对油品与数量并复述接地与防火要求。",
-                "公开资料整理的航空器加油作业步骤清单（含接地、核对与复核）。",
+                "G-v1原始四行与冲突核对表，非加油步骤清单。",
                 "与飞机机械师技术员不同：实施燃油与液体作业，不实施维修或放行。"
               ],
               [
                 "除冰与外部清洁方向",
                 "见习除冰液喷洒与机身清洁作业。",
                 "能复述除冰液配比、作业地点与回收要求。",
-                "虚构参数下的除冰作业记录（含配比、用量与回收）。",
+                "G-v1时窗与时长复核，非除冰配比、用量或实际操作。",
                 "与飞机货物装卸主管不同：面向航空器外表面与液体作业，不承担货物配载。"
               ],
               [
                 "机坪引导与牵引方向",
                 "见习信号引导与牵引车操作。",
                 "信号准确、安全条件确认到位、作业记录完整。",
-                "书面整理的机坪引导信号与安全条件确认清单。",
+                "G-v1同人／同航班冲突与B调整二核，非牵引操作资格。",
                 "与机场运营专家不同：聚焦现场引导与牵引操作，不承担机场运行指挥。"
               ],
               [
                 "液体补给与污水处置",
                 "补充饮用水、水与冷却剂并清空厕所系统。",
                 "处置记录完整、污染控制到位、异常按程序上报。",
-                "一次液体补给与污水处置的记录框架（项目、数量与处置路径）。",
+                "G-v1缺签收待补证记录，非真实液体处置方案。",
                 "与航空器维修岗位不同：承担勤务与液体作业，不涉及部件维修。"
               ],
               [
                 "记录与交接",
                 "填写作业记录并与签派、机务与班次交接。",
                 "记录准确、异常标注完整、交接内容可追溯。",
-                "一次作业记录与班次交接的书面框架（依据、数据与异常）。",
+                "G-v1初核、二核与一页交接摘要，C保留未结案。",
                 "与安全督查岗位不同：兼顾现场作业与记录交接责任。"
               ]
             ]
@@ -29498,15 +29501,15 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧入门学历通常为高中文凭或同等学历（77% 受访者），11% 为高等教育证书，11% 为部分大学教育但无学位（O*NET 53-6032.00 受访比例）。",
-                  "中国大陆侧，机坪保障岗位通常以初中或高中及以上学历为起点，具体按用人单位招聘条件。",
-                  "两地均强调按程序与安全规定实施机坪作业，学历不是唯一门槛，培训与持证同样关键。"
+                  "美国教育问卷",
+                  "O*NET问卷问新雇员完成本职需要何种教育，77%答高中或同等学历、11%高中后非学位证书、11%部分大学教育但无学位；这是美国受访回答，不是在岗学历分布或中国准入门槛。当前Job Zone为1–2。BLS典型入门教育为高中或同等学历、短期在岗培训。",
+                  "证据不足：未取得中国本职统一学历门槛与可逐项核验招聘公告；本卡为职业资料和规则核对项，不冒充招聘调查。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "机坪作业培训、控制区通行证与专用车辆操作资格决定可实施的作业范围。",
+                  "训练与权限核对",
                   "加油、除冰与牵引等作业须按机场与单位规定取得相应训练与授权。",
                   "飞行区保障作业人员须接受初始培训与复训（复训周期不得超过十三个月）。"
                 ]
@@ -29514,7 +29517,7 @@
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 53-6032.00 兴趣代码为 RC（现实型、常规型）。",
+                  "美国兴趣与工作情境",
                   "工作情境以户外作业（89% 从不在受环境控制的室内工作）、时间压力（74% 每天）、错误后果（58% 极其严重）与全身振动（51% 每天）为特征。",
                   "这些是对职业的群体性描述，不用于判断个人是否适合。"
                 ]
@@ -29522,9 +29525,9 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 53-6032.00 技术清单可复核，列出该职业常用工具与技术条目。",
-                  "实际使用范围取决于作业项目、机型与机场设备条件。",
-                  "准备方向应按公开资料打牢安全意识、车辆操作与应急处置基础，并通过官方渠道了解培训与持证要求。"
+                  "招聘软件信息",
+                  "O*NET2025职业关联招聘软件列Excel、Office、Windows、Word；四项比例均Not available，不是现场工具清单。",
+                  "具体加油车、牵引车和除冰设备训练按岗位核；不能从软件条目推断设备熟练度。"
                 ]
               }
             ]
@@ -29534,7 +29537,7 @@
             "onet",
             "onet"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "入门准备需要核对哪些正式要求？",
           "type": "cards"
         },
         {
@@ -29545,33 +29548,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构题面一：按公开资料整理一份航空器加油作业步骤清单（含停车与接地、油品核对、软管连接、加油与复核、拆卸与离场）。",
-                  "虚构题面二：用虚构参数完成一次地面服务班次任务表（含航班级别、服务项目、时间窗口与异常处置）。",
-                  "虚构题面三：写出一次异常（如加油泄漏或除冰设备故障）的处置与上报记录。",
-                  "全部材料使用公开资料与模拟数据；不使用真实机场的涉密或内部资料。"
+                  "G-v1固定题面",
+                  "四条纸面记录（同一虚构日期）：A｜F1｜P1｜窗口09:00–09:20｜起止09:00–09:10｜10分钟｜已签收；B｜F1｜P1｜窗口09:00–09:25｜起止09:05–09:15｜10分钟｜已签收；C｜F2｜P2｜窗口09:00–09:20｜起止09:00–09:15｜15分钟｜缺签收；D｜F2｜P1｜窗口09:20–09:35｜起止09:20–09:30｜10分钟｜已签收。",
+                  "规则：开始不早于窗口起点，结束不晚于窗口终点，结束减开始等于给定时长；同一人员或同一航班不能时段重叠，前一结束等于后一开始允许。缺签收只记待补证，不补造。只检查以上给定字段。",
+                  "任务：逐行分类，列冲突对象、交集与分钟数；只改B起止消除冲突并二次核全部记录，其余输入保留。不存在真实航班、加油或除冰操作要求。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "作业清单：按步骤列出作业项目、工具、判据与安全条件。",
-                  "班次任务表：按航班列出服务项目、时间窗口与人员分工。",
-                  "异常记录：按现象—风险—处置—上报路径结构书写。"
+                  "参考答案",
+                  "初核：A/D字段时段符合（2条），B与A同人且同航班09:05–09:10重叠5分钟（1条冲突）；C时段与时长符合但缺签收（1条待补证）。均在给定窗口，时长10/10/15/10分钟。",
+                  "可行修改：B改09:10–09:20，仍10分钟且在09:00–09:25窗口；P1的A→B→D端点相接、无重叠，同航班F1也无重叠。二核A/B/D字段时段符合，C仍待补证，不能全结案。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认公开资料的适用性与版次，再据此整理，不使用内部资料。",
-                  "对每一项作业保留核对与复核记录，异常重新处置。",
-                  "对每一处判断写明依据与不确定性，并与作业程序逐项比对。"
+                  "复核与10分编辑评分",
+                  "独立再核原始四条：分类每条1分共4分；说明A/B交集5分钟及B可行调整各1分共2分；标C缺签收且拒绝补造各1分共2分。",
+                  "端点相接及窗口／时长边界核对1分，明确纸面不能证明真实操作或授权1分，共10分。无录用通过线；失败定位具体行与条件，修改后再核全部四条。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "作品只用于展示准备程度与方法，不构成培训考核或录用测试，也不代表任何作业资格。",
-                  "不得在作品中包含或推断真实机场或航空器的专有数据；实际训练与考核以机场及单位规定为准。"
+                  "纸面边界",
+                  "G-v1只观察读表、资源冲突、记录缺口与交接；不证明户外耐受、设备操作、真实排班安全、培训或作业资格，不使用真实机场内部资料。"
                 ]
               }
             ]
@@ -29580,7 +29583,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的飞机服务服务员任务任务（虚构材料）",
+          "title": "入行练习：G-v1纸面班次记录核对（虚构材料）",
           "type": "cards"
         },
         {
@@ -29591,31 +29594,31 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项要求（学历、机坪作业培训与复训、控制区通行证、专用车辆操作资格、加油与除冰专项训练、体检），列出核对来源与状态。",
-                  "把每项要求对应到官方文件或单位制度的具体条款，注明查看日期。",
-                  "记录尚未满足或个人需补强的项目与计划。"
+                  "原始输入表",
+                  "原样保留G-v1四条、版本、窗口、时长和签收状态；记录任何修改前后值，不以真实航班替换。",
+                  "附初核四行状态：A/D字段时段符合，B冲突，C待补证；注明A/B重叠5分钟。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对是否来自机场或雇主官方渠道，是否标注时间与适用范围。",
-                  "资料复核：核对练习材料只使用公开资料与模拟数据。",
-                  "计划复核：核对培训与体能准备计划是否可持续，避免突击。"
+                  "独立复核表",
+                  "遮住参考答案，重新计算窗口、时长及同人／同航班交集，再对答案逐项纠错。",
+                  "列B09:10–09:20调整后的四行结果，保留C缺签收待补证及需要谁提供何种记录；不得伪造签收。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向、已满足与待补强项、时间安排。",
-                  "附上公开资料清单与来源链接，注明查看日期。"
+                  "一页交接摘要",
+                  "汇总初核2符合／1冲突／1待补证，二核3符合／1待补证；说明B修正和C未结案，列10分编辑评分与误差定位。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "准备记录应展示对公开资料的理解与自身安全意识、动手能力与学习方法，而不是内部资料。",
-                  "不把网络传闻或非官方信息写入准备记录。"
+                  "要求核对附页",
+                  "另列目标单位学历、训练、通行证、项目授权和班次待确认项及官方来源；与G-v1纸面表现分开，不声称已取得任职权限。"
                 ]
               }
             ]
@@ -29646,9 +29649,9 @@
             "rows": [
               [
                 "报名与体检",
-                "是否符合招聘的年龄、学历与体检（含色觉）等基本条件。",
+                "核目标单位公告学历、体检及岗位条件，本次未取得统一色觉标准。",
                 "能提供官方要求的证明材料并如实填报。",
-                "弄虚作假或通过非官方中介报名，会直接影响资格。"
+                "如实提交官方要求材料，不将未核要求写成普遍门槛。"
               ],
               [
                 "机坪作业初始培训",
@@ -29658,9 +29661,9 @@
               ],
               [
                 "持证与作业授权",
-                "是否取得控制区通行证、专用车辆操作资格与加油/除冰专项训练。",
+                "按实际岗位核通行证、车辆训练与加油／除冰项目权限。",
                 "证件与训练记录齐备，授权范围明确。",
-                "超出授权范围作业会被暂停飞行区作业并接受再培训。"
+                "按机场及单位制度处理越权；不声称所有越权都自动触发同一暂停处罚。"
               ],
               [
                 "复训与违章管理",
@@ -29686,50 +29689,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜招聘与持证信息核对",
-                  "按机场与雇主官方渠道核对学历、体检、机坪作业培训与持证要求，记录待确认项。"
+                  "第1天｜冻结输入",
+                  "冻结G-v1四条输入，读完窗口、时长、同人／同航班和签收规则；另列目标单位待确认要求。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜安全意识与机坪规则",
-                  "学习机坪规则、车辆与航空器安全距离与反光标识要求，整理要点。"
+                  "第2天｜窗口时长",
+                  "逐行核窗口和结束减开始，保留原值与计算。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜加油作业步骤",
-                  "整理一份加油作业步骤清单（接地、油品核对、软管连接、加油与复核、拆卸与离场）。"
+                  "第3天｜重叠核对",
+                  "核P1和F1交集，写A/B重叠09:05–09:10共5分钟，不据题面执行实际操作。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜除冰与清洁要求",
-                  "整理除冰液配比、作业地点与回收要求，标注不确定项。"
+                  "第4天｜缺签收",
+                  "核签收，记录C待补证；列缺哪条证据，不补造签字。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜班次任务表",
-                  "用虚构参数完成一次地面服务班次任务表（含时间窗口与人员分工）。"
+                  "第5天｜候选调整",
+                  "只将B改09:10–09:20，复核窗口、10分钟及A→B→D端点相接。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜异常处置记录",
-                  "写出一次异常（如加油泄漏或除冰设备故障）的处置与上报记录。"
+                  "第6天｜独立复核",
+                  "遮住答案独立再核四条，记录与初核差异；C仍待补证。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜复盘与决策",
-                  "复盘一周准备：是否愿意长期在户外与轮班条件下按程序作业、接受安全复核并承担机坪安全责任，据此判断是否继续。"
+                  "第7天｜汇总决策",
+                  "交付原始表、复核表、交接摘要和要求核对附页；按10分编辑规则定位错误，决定是否继续正式岗位调查。"
                 ]
               }
             ]
@@ -29738,7 +29741,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "七天体验：用虚构材料完成一次飞机服务服务员任务闭环",
+          "title": "七天纸面练习：复核G-v1四条记录",
           "type": "timeline"
         },
         {
@@ -29746,13 +29749,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "做完一周准备后先回答：我是否愿意长期在户外与轮班条件下按程序作业、接受安全复核并对机坪安全承担责任？",
-              "判断方向：偏加油、除冰与外部清洁，还是机坪引导与牵引。",
-              "判断准备：招聘的学历、体检与持证要求是否满足或可补齐；车辆操作与应急处置能力是否需要补强。",
-              "判断边界：是否清楚民用车辆服务或工业维修资质不等同于机坪作业培训与授权，两者不可互相折算。",
-              "判断耐受：能否适应机坪噪音与车辆流动、冬季除冰的低温与高强度、以及夜班与旺季加班，并在时间压力下保持程序与记录标准。",
-              "入门后按培训与持证体系发展：独立承担多项目作业、取得专用车辆与专项资格、或承担班组长与安全督查岗位。",
-              "把公开资料整理、动手练习与培训记录持续整理成可核对的准备经历，比相信非官方承诺更可靠。"
+              "纸面结果只帮助观察记录核对习惯，不能证明机坪、户外或轮班耐受。",
+              "按真实任务区分加油、除冰／清洁、引导／牵引方向；G-v1不替代专项训练。",
+              "核目标单位公告学历、训练、通行证和项目授权；无公告的项目保留待确认。",
+              "确认客运／货运技能标准不等于航空器加油／除冰统一资格，其他证书是否认可另核。",
+              "初核2符合、1冲突、1待补证；B调整后二核3符合、1待补证，C不能结案。",
+              "10分编辑评分只定位四行分类、重叠与调整、缺签收和边界理解，没有录用通过线。",
+              "交付原始表、独立复核、交接摘要及要求附页；正式训练按单位安排，纸面作品不授予作业权限。"
             ]
           },
           "id": "aircraft-service-attendants.path.seven-day-decision.1",
@@ -29786,22 +29789,22 @@
             ],
             "rows": [
               [
-                "机坪作业初始培训与复训",
-                "全部机坪保障人员",
-                "决定能否进入飞行区独立作业",
-                "通常是必备",
-                "按机场与单位培训制度，复训周期不得超过十三个月",
-                "按培训与复训周期",
-                "未完成培训与复训不得独立上岗"
+                "飞行区运行安全初训与复训",
+                "进入飞行区从业人员（中国规章）",
+                "所属单位按制度培训考核",
+                "按适用岗位要求",
+                "复训间隔不超过13个月；初训复训内容按民航规定",
+                "按所属单位安排",
+                "培训记录不是所有设备项目的自动授权"
               ],
               [
                 "控制区通行证",
                 "进入飞行区作业的人员",
                 "决定能否进入控制区作业",
                 "通常是必备",
-                "按机场安全保卫规定与背景审查",
+                "按机场控制区管理与实际岗位要求核",
                 "按证件有效期",
-                "证件失效或违反规定会被收回"
+                "证件不替代车辆训练或项目授权"
               ],
               [
                 "专用车辆操作资格",
@@ -29813,13 +29816,13 @@
                 "超出资格范围操作会带来安全事故与处罚"
               ],
               [
-                "加油与除冰专项训练",
-                "承担加油、除冰作业的人员",
-                "决定能否承担相应专项作业",
-                "相关岗位必备",
-                "按单位作业程序与安全要求培训",
-                "按专项训练周期",
-                "未经专项训练不得承担加油或除冰作业"
+                "加油／除冰项目训练与授权",
+                "承担具体航空器服务项目者",
+                "向单位核项目训练与作业范围",
+                "具体岗位另核",
+                "现行机场规章不提供统一加油／除冰个人证书",
+                "按项目训练制度",
+                "不可用地面设备加油站经营许可代替人员授权"
               ],
               [
                 "安全记录与违章记分",
@@ -29828,7 +29831,7 @@
                 "持续要求",
                 "按违章记分制度接受再培训、考核或暂停作业",
                 "持续管理",
-                "违章达到规定情形会被暂停飞行区作业"
+                "按实际违规记录与管理制度实施再培训、考核或暂停等措施，不预设单次行为必然处罚"
               ],
               [
                 "民用车辆服务或工业维修资质（对照，非本职业资格）",
@@ -29857,7 +29860,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格由机坪作业培训、持证与单位授权管理：控制区通行证、专用车辆操作资格与加油、除冰专项训练决定可实施的作业范围。",
+              "中国飞行区人员按所属单位制度初训、复训，间隔不超过13个月；控制区通行证与具体车辆／项目训练权限分开核。规章未给统一本职学历或加油／除冰个人证书；地面设备加油站许可是经营单位要求，不是航空器加油资格。",
               "民用车辆服务或工业维修资质不替代机坪作业培训与授权；本职业资历用于其他行业通常也需按目标行业要求重新认定。",
               "飞行区保障作业人员须接受初始培训与复训（复训周期不得超过十三个月），并按违章记分制度接受管理。",
               "有意入行者应核对官方信息中的学历、体检、培训与持证要求以及作业项目与班次安排，并通过官方渠道报名。"
@@ -29877,9 +29880,9 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "样本适用范围：本页不引用任何招聘公告作为工资或需求证据；招聘条件、作业项目与持证要求随雇主与时间变化，请以雇主官方发布与机场管理制度为准。",
-              "本页不提供该职业的学历分布：美国侧仅给出 O*NET 入门学历的受访比例（高中或同等学历 77% 等），中国大陆侧给出机坪保障岗位的常见学历起点，两者不是同一统计口径。",
-              "判断一个岗位是否属于本职业，看任务描述而不是名称：是否涉及为航空器加油、除冰、补充水与冷却剂、清空污水箱、维护空气与氧气系统、清洁与抛光机身外表，以及机坪引导与牵引。"
+              "证据不足：本次未取得可逐项核验本职招聘公告；不把准备建议、技能标准或职业问卷当招聘样本。",
+              "美国问卷问新雇员教育要求，非学历分布；中国未取得本职统一学历，客运／货运技能标准不能直接套用。",
+              "判断岗位任务是否涉及航空器加油、除冰、液体补给、清洁、引导／牵引；名称相近不足以认定匹配。"
             ]
           },
           "id": "aircraft-service-attendants.path.recruitment-sample.1",
@@ -29904,22 +29907,22 @@
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
+                "entity": "BLS2025—2035就业预测矩阵",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "《运输机场运行安全管理规定》（交通运输部规章）",
+                "entity": "运输机场运行安全管理规定：2026-07-01施行",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/gongbao/2025/issue_12466/202512/content_7051956.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
-                "entity": "《中华人民共和国职业分类大典（2022 年版）》航空运输地面服务员（4-02-04-02）",
+                "entity": "航空运输地面服务员国家技能标准（2022，客运／货运对照）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.osta.org.cn/zcwj/2025-83.html"
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/rencairenshi/zcwj/jinengrencai/202210/W020221019631687170238.pdf"
               }
             ]
           },
@@ -29937,13 +29940,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业为飞机服务服务员（美方对应 O*NET/BLS 53-6032 航空器服务服务员）：美国侧入门学历通常为高中文凭或同等学历（77% 受访者），入职后按雇主的机坪作业培训与持证要求（控制区通行证、专用车辆操作资格与加油/除冰专项训练）上岗。中国大陆侧，航空器除冰、防冰与清洗作业应当在机场管理机构指定的地点进行并落实除冰液回收，飞行区内设置地面设备加油站须经机场管理机构同意并依法取得相应经营许可，任何单位不得在飞行区内开展经营性流动加油服务；飞行区保障作业人员须按机场与单位的培训制度接受初始培训与复训（复训周期不得超过十三个月），并佩带控制区通行证、穿着带反光标识的工作服、配备防护用品。本页不提供该职业的学历分布（仅给出 O*NET 入门学历受访比例）与分城市工资分布。"
+              "O*NET问卷问新雇员完成本职需要何种教育，77%答高中或同等学历、11%高中后非学位证书、11%部分大学教育但无学位；这是美国受访回答，不是在岗学历分布或中国准入门槛。当前Job Zone为1–2。BLS典型入门教育为高中或同等学历、短期在岗培训。中国要求分别核：中国大陆《运输机场运行安全管理规定》（交通运输部令2025年第5号，2026-07-01施行）：机场运营人指定航空器清洗与除防冰区域，制定除冰液回收措施；飞行区从业人员由所属单位初训、复训，复训间隔不超过13个月，佩带控制区通行证、穿带反光标识工作服。第118条许可及经营性流动加油禁令针对地面设备加油站与服务，并非航空器加油资格；单位自用流动加油按民航规定执行。证据不足：未取得中国本职统一学历要求与完整招聘公告样本。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "ep",
+            "airport"
           ],
           "type": "prose"
         },
@@ -30068,13 +30072,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进入该职业的路径按国家区分：美国侧通常从高中文凭或同等学历起步，入职后按雇主培训与持证要求（机坪作业培训、控制区通行证、专用车辆操作资格与加油/除冰专项训练）上岗；中国大陆侧，机坪保障岗位通常以初中或高中及以上学历为起点，须按机场与单位培训制度接受初始培训与复训（复训周期不得超过十三个月），并按违章记分制度接受管理，专用车辆操作与加油、除冰作业需取得相应资格与授权。具体要求以机场及用人单位官方信息为准；本页不提供该职业的学历分布与分城市工资分布。"
+              "O*NET问卷问新雇员完成本职需要何种教育，77%答高中或同等学历、11%高中后非学位证书、11%部分大学教育但无学位；这是美国受访回答，不是在岗学历分布或中国准入门槛。当前Job Zone为1–2。BLS典型入门教育为高中或同等学历、短期在岗培训。中国不能用客运／货运技能标准推导加油／除冰学历；须向目标单位核。证据不足：本次未取得中国本职统一学历门槛。中国大陆《运输机场运行安全管理规定》（交通运输部令2025年第5号，2026-07-01施行）：机场运营人指定航空器清洗与除防冰区域，制定除冰液回收措施；飞行区从业人员由所属单位初训、复训，复训间隔不超过13个月，佩带控制区通行证、穿带反光标识工作服。第118条许可及经营性流动加油禁令针对地面设备加油站与服务，并非航空器加油资格；单位自用流动加油按民航规定执行。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "ep",
+            "airport"
           ],
           "type": "prose"
         },
@@ -30083,7 +30088,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业的资格由机坪作业培训、持证与单位授权管理：控制区通行证、专用车辆操作资格与加油、除冰专项训练决定可实施的作业范围；民用车辆服务或工业维修资质不替代航空器加油、除冰与机坪作业的培训与授权。反过来，本职业资历用于其他行业通常也需按目标行业要求重新认定。两套体系不可互相折算。"
+              "其他车辆服务或工业维修证书不自动给航空器服务权限；经历是否认可向目标单位核。本页不声称存在统一加油／除冰证书，专项训练与具体项目授权分别确认。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.21",
@@ -30099,14 +30104,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本节采用国家与地区并列口径：美国部分为 O*NET 与 BLS 的职业统计与预测；中国大陆部分为《运输机场运行安全管理规定》与《中华人民共和国职业分类大典（2022 年版）》及国家统计局的行业工资参照。两者不可互相外推，本页不使用民用行业数字替代职业工资。"
+              "美国用O*NET与BLS，教育问卷不等于法规；中国用2026-07-01施行机场规章。2022航空运输地面服务员技能标准仅客运／货运作对照，不是本职统一资格。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.22",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "ep",
+            "airport",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30115,7 +30121,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按培训与持证体系：从完成培训与持证上岗、独立承担多项目作业，到取得专用车辆与专项作业资格，再到承担班组长或安全督查岗位。岗位晋升通常与作业项目范围、持证等级、班次资历与安全记录相关；跨行业流动需要另行取得目标行业的资质与训练。"
+              "编辑发展路线：先完成目标单位要求的训练与权限核对，按具体项目积累真实作业记录，再按单位条件探索多项目或带教／管理岗位；不是已核统一晋升制度。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.23",
@@ -30144,7 +30150,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "BLS就业预测矩阵2025—2035，非OEWS就业规模；不证明岗位训练要求。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.25",
@@ -30158,7 +30164,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》（中国大陆机坪作业、除冰与清洗、加油站许可与培训复训）。"
+              "现行机场规章：初训复训、控制区、除防冰及清洗区域与回收；第118条许可对象为地面设备加油站。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.26",
@@ -30172,7 +30178,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》航空运输地面服务员（4-02-04-02，技能等级认定范围）。"
+              "2022航空运输地面服务员国家技能标准：仅民航客运员、货运员；不直接对应航空器加油／除冰。"
             ]
           },
           "id": "aircraft-service-attendants.path.career-path-block.27",
@@ -31083,16 +31089,16 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "O*NET 53-6032.00 飞机服务服务员职业摘要",
+                "entity": "BLS2025基年就业及2025—2035预测",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/53-6032.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：53-6032",
+                "entity": "BLS2025—2035增长与空缺",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -31104,7 +31110,7 @@
                 "entity": "《运输机场运行安全管理规定》（交通运输部规章）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/gongbao/2025/issue_12466/202512/content_7051956.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
                 "entity": "汽车与水上运输服务服务员",
@@ -31170,13 +31176,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧就业前景（BLS 口径，经 O*NET 展示）：53-6032 在 2024 年在岗约 28,000 人，2024—2034 年增长 5% 至 6%（快于平均水平），年均约 4,300 个职位空缺，多数来自替代需求；该职业被 O*NET 标注为前景光明（Bright Outlook）。空缺数不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆。中国大陆侧没有对应的官方职业就业预测，本页不提供数字；机坪保障岗位需求与机队规模、航班量与机场保障能力布局相关，本页不据此外推。"
+              "证据不足：中国本职对应官方就业预测未取得。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。相关职业转向是编辑能力比较，不是已核转岗成功率。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -31200,7 +31205,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024年"
+              "2025基年"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.10",
@@ -31214,12 +31219,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 口径：53-6032 在 2024 年在岗约 28,000 人。"
+              "BLS2025基年就业31,200人，预测矩阵口径，不是OEWS就业人数。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31270,7 +31275,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "约28,000人（2024年）"
+              "31,200人（2025基年）"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.15",
@@ -31298,7 +31303,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.17",
@@ -31312,12 +31317,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测 53-6032 在 2024—2034 年增长 5% 至 6%（快于平均水平）。"
+              "BLS预测本职就业增长5.6%，官方净变化约1,700人。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31368,7 +31373,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "5% 至 6%（2024—2034年）"
+              "5.6%（2025—2035）"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.22",
@@ -31396,7 +31401,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.24",
@@ -31410,12 +31415,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测 53-6032 在 2024—2034 年年均约 4,300 个职位空缺，多数来自替代需求。"
+              "BLS预测本职年均空缺约4,000个，包含增长和替代需求。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -31466,7 +31471,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均约4,300个"
+              "年均约4,000个"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.29",
@@ -31480,7 +31485,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 任务与职责（美国，2026 年更新页面）。"
+              "BLS2025—2035预测矩阵：基年就业、增长与年均空缺；非OEWS就业值。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.30",
@@ -31494,7 +31499,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "BLS2025—2035预测矩阵：全国职业口径，不保证个人就业。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.31",
@@ -31522,7 +31527,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "《运输机场运行安全管理规定》（中国大陆机坪作业、除冰与清洗、培训复训框架）。"
+              "现行机场规章：初训复训、控制区、除防冰与清洗区域及回收；非职业就业预测。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.33",
@@ -31566,7 +31571,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近距离转向，需适应航空器与机坪规则。"
+              "年均约4,000个"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.36",
@@ -31671,7 +31676,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "偏场地内货物搬运，不涉及航空器燃油与除冰作业。"
+              "编辑比较为较近方向；从本职转到车辆／船只服务仍需核目标设备与规则，不能声称是在转向航空器。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.43",
@@ -31804,7 +31809,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "对象为民用移动与物料搬运设备，需适应民用作业与安全规程。"
+              "编辑比较为较近方向；转入场地车辆／货运设备岗位须核目标设备及安全规程，不是继续转向机坪。"
             ]
           },
           "id": "aircraft-service-attendants.market-signals.market-signal-card.52",
@@ -31909,19 +31914,19 @@
                 "question_key": "career.faq.aircraft-service-attendants.daily-work"
               },
               {
-                "answer": "飞机服务服务员在授权范围内实施燃油、液体补给、除冰、清洁与机坪引导作业；航空器维修与适航放行由持照维修人员实施；航空器运行由机组负责；机场运行与机坪统一管理由机场管理机构负责，相关作业须服从其指定地点与管理制度。汽车与水上运输服务服务员面向车辆与船只，与本职业在对象与规则上不同，不能直接平移。",
+                "answer": "飞机服务服务员在授权范围内实施燃油、液体补给、除冰、清洁与机坪引导作业；航空器维修与适航放行由持照维修人员实施；航空器运行由机组负责；机场运行与机坪统一管理由机场运营人负责，相关作业须服从其指定地点与管理制度。汽车与水上运输服务服务员面向车辆与船只，与本职业在对象与规则上不同，不能直接平移。",
                 "id": "aircraft-service-attendants.faq.2",
                 "question": "这个职业和相邻岗位的边界在哪里？",
                 "question_key": "career.faq.aircraft-service-attendants.comparison"
               },
               {
-                "answer": "没有证据支持“被取代”。自动化可能增强作业单管理、计量数据采集与设备监测，但油品核对、除冰作业、机坪安全判断与异常停止责任仍由受过培训的现场人员承担；BLS 预测该职业 2024—2034 年增长 5% 至 6%（快于平均水平），本页不据此推测岗位数量变化。",
+                "answer": "证据不足：未取得本职AI替代率、采用或效果研究。本页只提出条件性记录辅助场景，不据BLS增长判断AI因果影响。BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。",
                 "id": "aircraft-service-attendants.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.aircraft-service-attendants.ai"
               },
               {
-                "answer": "中国大陆没有该职业精确的全国工资分布，本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如交通运输、仓储和邮政业非私营 133,981 元/年、制造业非私营 113,594 元/年），这些数字覆盖大量非机坪岗位，不能当作本职业工资。",
+                "answer": "证据不足：未取得中国本职精确全国／城市工资分布。国家统计局2025交通运输仓储邮政业非私营133,981元／年、制造业非私营113,594元／年仅是宽门类均值，不代表本职工资。",
                 "id": "aircraft-service-attendants.faq.4",
                 "question": "中国大陆的工资怎么理解？",
                 "question_key": "career.faq.aircraft-service-attendants.china-pay"
@@ -31933,7 +31938,7 @@
                 "question_key": "career.faq.aircraft-service-attendants.us-pay"
               },
               {
-                "answer": "美国侧入门学历通常为高中文凭或同等学历，入职后按雇主培训与持证要求上岗；中国大陆侧，机坪保障岗位通常以初中或高中及以上学历为起点，须按机场与单位培训制度接受初始培训与复训（复训周期不得超过十三个月），并按违章记分制度接受管理，专用车辆操作与加油、除冰作业需取得相应资格与授权。具体要求以机场及用人单位官方信息为准。",
+                "answer": "O*NET问卷问新雇员完成本职需要何种教育，77%答高中或同等学历、11%高中后非学位证书、11%部分大学教育但无学位；这是美国受访回答，不是在岗学历分布或中国准入门槛。当前Job Zone为1–2。BLS典型入门教育为高中或同等学历、短期在岗培训。中国具体学历、体检和项目权限向目标单位核；中国大陆《运输机场运行安全管理规定》（交通运输部令2025年第5号，2026-07-01施行）：机场运营人指定航空器清洗与除防冰区域，制定除冰液回收措施；飞行区从业人员由所属单位初训、复训，复训间隔不超过13个月，佩带控制区通行证、穿带反光标识工作服。第118条许可及经营性流动加油禁令针对地面设备加油站与服务，并非航空器加油资格；单位自用流动加油按民航规定执行。",
                 "id": "aircraft-service-attendants.faq.6",
                 "question": "怎么才能成为这个职业的服务人员？",
                 "question_key": "career.faq.aircraft-service-attendants.education"
@@ -31945,13 +31950,13 @@
                 "question_key": "career.faq.aircraft-service-attendants.risk"
               },
               {
-                "answer": "BLS 预测 53-6032 在 2024—2034 年增长 5% 至 6%（快于平均水平），年均约 4,300 个职位空缺且多数来自替代需求；2024 年在岗约 28,000 人（经 O*NET 展示），该职业被标注为前景光明（Bright Outlook）。空缺数不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆。",
+                "answer": "BLS最新2025—2035预测：美国53-6032基年就业31,200人，2035年32,900人，增长5.6%，官方净变化约1,700人，年均空缺约4,000个。空缺包含替代需求，不等于净新增或个人录用保证。O*NET当前仍显示2024—2034的28,000人、5%至6%和4,300个空缺，本页主数据采用BLS新表。不能外推为中国就业。",
                 "id": "aircraft-service-attendants.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.aircraft-service-attendants.outlook"
               },
               {
-                "answer": "主要在机坪与户外：89% 受访者表示从不在受环境控制的室内工作，28% 每天在户外有遮蔽处工作；74% 每天面对时间压力，67% 每天作决定，58% 认为错误后果极其严重；64% 持续做重复动作，51% 每天暴露于全身振动，39% 每天处于高处作业；工作周多为 40 小时以上，轮班与夜班常见（O*NET 53-6032.00 受访比例）。",
+                "answer": "O*NET美国本职受访回答：89%从不受控室内、28%每天有遮蔽户外、74%每天时间压力、67%每天作决定、58%认为错误后果极其严重、64%几乎持续重复动作、51%每天全身振动、39%每天高处。17%答典型周40小时，其余档位本次未取得；不声称其余更长或代表中国班表。",
                 "id": "aircraft-service-attendants.faq.9",
                 "question": "工作环境是怎样的？",
                 "question_key": "career.faq.aircraft-service-attendants.work-context"
@@ -31995,7 +32000,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 53-6032.00 飞机服务服务员职业摘要与详细资料；BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测；《运输机场运行安全管理规定》（交通运输部规章）；《中华人民共和国职业分类大典（2022 年版）》航空运输地面服务员（4-02-04-02）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "O*NET本职任务、教育与情境；BLS OEWS2025年5月工资和2025—2035预测分别使用；2026-07-01施行机场规章；2022航空运输地面服务员国家技能标准仅客运／货运对照；国家统计局2025行业／单位工资均值。"
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.2",
@@ -32011,7 +32016,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮来源核对日期：2026-10-02；各资料期与适用法域分别登记。"
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.3",
@@ -32025,7 +32030,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国侧工资与就业为 BLS 职业就业与工资统计（OEWS，2025 年 5 月）与 2024—2034 年就业预测，均为美国单一职业口径，不能外推为中国大陆；本页不提供分行业工资中位数（BLS 未公开可读取的该职业分行业中位数，未使用第三方估算）。中国大陆侧只提供国家统计局 2025 年行业门类与单位类型的宽口径参照，并逐行标注为本职业未单列、仅作对照；机坪作业、航空器除冰与清洗、飞行区内加油站许可与人员培训复训按《运输机场运行安全管理规定》与机场、单位管理制度执行。本页不构成法律或安全政策意见。"
+              "证据不足：本次未取得本职美国分行业工资中位数。工资为美国OEWS2025年5月经O*NET展示，就业为BLS2025—2035预测；中国只作行业／单位均值参照，不宣称BLS未公开。中国机场规章规范训练、控制区、除防冰及清洗区域；地面设备加油服务条款不能套为航空器加油资格。G-v1为虚构纸面记录题，不代替正式训练与操作。"
             ]
           },
           "id": "aircraft-service-attendants.sources.source-card.4",
@@ -32106,417 +32111,417 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "用于职业身份、任务与兴趣剖面（RC）；美国单一职业口径，标注为前景光明（Bright Outlook）。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET职业摘要支持身份、任务与RC；旧2024—2034预测不作为本页主预测。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 飞机服务服务员职业摘要",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
-                "limitation": "用于工资中位数与就业规模的官方口径。",
-                "market": "来源覆盖地区",
-                "name": "BLS 职业就业与工资统计（OEWS）：53-6032",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
-                "publisher": "U.S. Bureau of Labor Statistics",
+                "limitation": "本次BLS直接职业页未成功读取；工资通过O*NET展示BLS OEWS核对，不引用其就业规模。",
+                "market": "美国",
+                "name": "O*NET展示BLS OEWS2025年5月工资：53-6032.00",
+                "period": "2025年5月工资",
+                "publisher": "O*NET OnLine（BLS OEWS数据）",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes536032.htm"
+                "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
-                "limitation": "用于就业增长区间与年均职位空缺；全国预测口径。",
-                "market": "来源覆盖地区",
-                "name": "BLS 2024—2034 年就业预测（53-6032）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "limitation": "全国53-6032基年31,200人、增长5.6%、净增约1,700人、年均空缺约4,000个；不是OEWS就业值或中国预测。",
+                "market": "美国",
+                "name": "BLS2025—2035就业预测：53-6032",
+                "period": "2025基年与2025—2035预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
-                "limitation": "用于时薪与年薪 10/25/50/75/90 分位数值。",
-                "market": "来源覆盖地区",
+                "limitation": "BLS OEWS工资经O*NET展示；分位不是起薪或工资上下限。",
+                "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（53-6032.00）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "industry_proxy",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
-                "limitation": "用于中国大陆民用行业门类与单位类型年平均工资；不含本职业单列工资。",
-                "market": "来源覆盖地区",
+                "limitation": "宽行业／单位／岗位类别年均工资，不单列本职；沿用本任务已实际核对的同一国家统计局资料。",
+                "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnclass",
-                "limitation": "用于中国大陆对应技能类职业与职业技能等级认定范围说明。",
-                "market": "来源覆盖地区",
-                "name": "《中华人民共和国职业分类大典（2022 年版）》航空运输地面服务员（4-02-04-02）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "limitation": "4-02-04-02只列民航客运员、民航货运员；不直接对应航空器加油／除冰或本职学历资格。",
+                "market": "中国大陆",
+                "name": "航空运输地面服务员国家职业技能标准（2022，客运／货运对照）",
+                "period": "2022年版国家职业技能标准",
                 "publisher": "人力资源和社会保障部（技能人才评价工作网）",
                 "scope": "contextual",
-                "url": "https://www.osta.org.cn/zcwj/2025-83.html"
+                "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/rencairenshi/zcwj/jinengrencai/202210/W020221019631687170238.pdf"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "airport",
-                "limitation": "用于中国大陆机坪作业、航空器除冰与清洗、飞行区内加油站许可与人员培训复训的框架说明；不含具体薪酬标准。",
-                "market": "来源覆盖地区",
-                "name": "《运输机场运行安全管理规定》（交通运输部规章）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
-                "publisher": "中国民用航空局（国务院公报）",
+                "limitation": "第19/22/23/24条训练管理与控制区、第113/114条清洗除防冰区域及回收、第118条地面设备加油；不提供航空器加油统一证书或工资。",
+                "market": "中国大陆",
+                "name": "运输机场运行安全管理规定（2025年第5号，2026-07-01施行）",
+                "period": "交通运输部令2025年第5号；2026-07-01施行",
+                "publisher": "交通运输部／中国民用航空局",
                 "scope": "exact",
-                "url": "https://www.gov.cn/gongbao/2025/issue_12466/202512/content_7051956.html"
+                "url": "https://www.caac.gov.cn/XXGK/XXGK/MHGZ/202512/t20251201_229272.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
-                "limitation": "用于工作情境比例（户外、时间压力、错误后果与全身振动）。",
-                "market": "来源覆盖地区",
+                "limitation": "受访工作情境，不是事故发生率、中国班表、个人健康判断或AI采用率。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（工作情境与体力要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
-                "limitation": "用于该职业常用工具与技术条目；不表示技术采用率。",
-                "market": "来源覆盖地区",
-                "name": "O*NET OnLine 53-6032.00 技术清单",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "limitation": "2025职业关联招聘的软件清单；Excel、Office、Windows、Word比例均Not available，非现场工具库存或AI采用证据。",
+                "market": "美国",
+                "name": "O*NET2025招聘软件提及清单",
+                "period": "2025-01-01至12-31招聘资料",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/hot_tech/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
-                "limitation": "用于任务清单与工作活动。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务清单与工作活动。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（任务与工作活动）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
-                "limitation": "用于高处作业、全身振动与工作时间比例。",
-                "market": "来源覆盖地区",
+                "limitation": "用于高处作业、全身振动与工作时间比例。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（高处作业与振动）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "health",
-                "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
-                "market": "来源覆盖地区",
+                "limitation": "工资组成法律口径与NBS统计说明分开；本职年薪未单列。",
+                "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "工资总额组成规定；页面2026-05-11",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
-                "limitation": "用于兴趣代码 RC（现实型、常规型）说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于兴趣代码 RC（现实型、常规型）说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 职业摘要（兴趣剖面 RC）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
-                "limitation": "用于入门学历受访比例与职业准备等级说明。",
-                "market": "来源覆盖地区",
-                "name": "O*NET OnLine 53-6032.00 详细资料（教育要求与 Job Zone 2）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "limitation": "77/11/11为新雇员教育需求受访回答，非在岗分布；当前Job Zone1–2，不是中国准入规则。",
+                "market": "美国",
+                "name": "O*NET教育问卷与Job Zone1–2",
+                "period": "2026职业页；新雇员教育要求问卷",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
-                "limitation": "用于职业概述与相关民用职业入口。",
-                "market": "来源覆盖地区",
+                "limitation": "该URL实际为自定义报告选择页面，仅支持职业身份与定制入口，不作为研究、AI或完整职业数据证据。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 自定义职业档案",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页面",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
-                "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务与职责参考。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
-                "limitation": "用于任务与作业工序说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务与作业工序说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
-                "limitation": "用于检查、部件定位与记录要求说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于检查、部件定位与记录要求说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（检查与记录要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
-                "limitation": "用于任务清单参考。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务清单参考。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 职业摘要（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
-                "limitation": "用于任务描述与职责边界。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务描述与职责边界。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 任务描述",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
-                "limitation": "用于职业属性说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于职业属性说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 职业摘要（职业属性）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
-                "limitation": "用于数据口径说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于数据口径说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（数据说明）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
-                "limitation": "用于 2024 年主要行业（运输与仓储）说明。",
-                "market": "来源覆盖地区",
+                "limitation": "88%运输与仓储、12%其他行业；行业构成不是分行业本职工资或中国行业分布。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 行业分布",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "行业构成页；旧2024预测资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
-                "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "limitation": "用于任务与职责参考。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
-                "limitation": "用于全国工资分位数值与资料期核对。",
-                "market": "来源覆盖地区",
+                "limitation": "全国工资五分位与资料期；不提供中国工资或本页所缺分行业中位数。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 全国工资分位页面",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/53-6032.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02；实际范围见限制"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
-                "limitation": "用于检查、部件定位与记录过程说明。",
-                "market": "来源覆盖地区",
+                "limitation": "用于检查、部件定位与记录过程说明。 美国职业资料不证明中国培训资格、AI部署或招聘效果。",
+                "market": "美国",
                 "name": "O*NET OnLine 53-6032.00 详细资料（记录与检查）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／现行（中国机场运行安全规章）",
+                "period": "2026职业页；调查项各有资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/53-6032.00"
@@ -32943,7 +32948,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方就业统计",
+            "类型": "预测基年就业",
             "适用范围": {
               "$item": "aircraft-service-attendants.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32987,7 +32992,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国规章",
+            "类型": "美国工作情境",
             "适用范围": {
               "$item": "aircraft-service-attendants.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33009,7 +33014,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国官方统计",
+            "类型": "教育问卷",
             "适用范围": {
               "$item": "aircraft-service-attendants.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33031,7 +33036,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "职业分类",
+            "类型": "招聘软件清单",
             "适用范围": {
               "$item": "aircraft-service-attendants.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34734,8 +34739,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "employer"
+              "onet",
+              "privacy"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34766,7 +34771,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
+              "privacy",
               "employer"
             ],
             "id": "record-version",
@@ -34798,8 +34803,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "ep"
+              "privacy",
+              "employer"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34830,8 +34835,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "operations"
+              "facilities",
+              "onet"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34862,8 +34867,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "operations"
+              "facilities",
+              "privacy"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34894,8 +34899,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "ep"
+              "facilities",
+              "privacy"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35390,11 +35395,11 @@
             "ai_heading": "AI 会影响飞机服务服务员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "飞机服务服务员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "准备背景与资格核对（编辑整理；本职统一学历与招聘样本未取得）",
+            "scenario_heading": "不同准备背景下，应核哪些正式岗位要求？",
             "scenario_interpretation_label": "说明与核对建议",
-            "scenario_role_label": "学历背景",
-            "scenario_value_label": "常见岗位方向"
+            "scenario_role_label": "准备背景",
+            "scenario_value_label": "核对对象"
           },
           "us_growth": {
             "$item": "aircraft-service-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -35769,7 +35774,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最低 10%",
+            "label": "第10分位",
             "value": {
               "$fact": "us-wage-low10-2025",
               "field": "display_value"
@@ -35797,7 +35802,7 @@
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
             },
-            "label": "最高 10%",
+            "label": "第90分位",
             "value": {
               "$fact": "us-wage-high10-2025",
               "field": "display_value"
@@ -35984,7 +35989,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "bls",
+            "source_id": "ep",
             "value": {
               "$item": "aircraft-service-attendants.market-signals.market-signal-card.22",
               "block": "market-signals",
@@ -36029,7 +36034,7 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "source_id": "nbs",
+            "source_id": "ep",
             "value": {
               "$item": "aircraft-service-attendants.market-signals.market-signal-card.29",
               "block": "market-signals",
@@ -37285,7 +37290,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -37295,7 +37300,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -37305,7 +37310,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -37315,7 +37320,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理（中文）"
           }
         ]
       },
@@ -37446,7 +37451,7 @@
         "market": "美国",
         "measure": "O*NET 职业代码",
         "occupation_scope": "飞机服务服务员",
-        "period": "2026 年更新页面；访问 2026-09-15",
+        "period": "2026 年更新页面；访问 2026-10-02",
         "source_refs": [
           "onet"
         ]
@@ -37456,7 +37461,7 @@
         "display_value": "33,830美元/年（16.26 美元/小时）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
-        "measure": "年薪第 10 分位上界",
+        "measure": "年工资第10分位",
         "occupation_scope": "飞机服务服务员",
         "period": "2025年5月",
         "source_refs": [
@@ -37504,7 +37509,7 @@
         "display_value": "57,610美元/年（27.70 美元/小时）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
-        "measure": "年薪第 90 分位下界",
+        "measure": "年工资第90分位",
         "occupation_scope": "飞机服务服务员",
         "period": "2025年5月",
         "source_refs": [
@@ -37513,84 +37518,84 @@
       },
       {
         "derivation": null,
-        "display_value": "28,000 人（2024 年）",
+        "display_value": "31,200人",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "在岗就业人数",
+        "measure": "BLS就业预测矩阵基年就业（稳定ID保留，非OEWS就业规模）",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024年",
+        "period": "2025基年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "5% 至 6%（快于平均）",
+        "display_value": "5.6%（净增约1,700人）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长率与官方净变化",
+        "measure": "BLS全国职业就业预测增长",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约4,300个",
+        "display_value": "年均约4,000个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
-        "measure": "年均职位空缺",
+        "measure": "BLS预测年均职业空缺（包含替代需求）",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本次未取得2025该范围本职工资中位数，不以其他统计代填。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（运输与仓储）",
         "occupation_scope": "飞机服务服务员",
-        "period": "查询 2026-09-15",
+        "period": "2025；查阅2026-10-02",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本次未取得2025该范围本职工资中位数，不以其他统计代填。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（航空运输支持服务）",
         "occupation_scope": "飞机服务服务员",
-        "period": "查询 2026-09-15",
+        "period": "2025；查阅2026-10-02",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本次未取得2025该范围本职工资中位数，不以其他统计代填。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（机场运营与政府）",
         "occupation_scope": "飞机服务服务员",
-        "period": "查询 2026-09-15",
+        "period": "2025；查阅2026-10-02",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本次未取得2025该范围本职工资中位数，不以其他统计代填。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（其他行业）",
         "occupation_scope": "飞机服务服务员",
-        "period": "查询 2026-09-15",
+        "period": "2025；查阅2026-10-02",
         "source_refs": [
           "operations"
         ]
@@ -37601,7 +37606,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37613,7 +37618,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37625,7 +37630,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37637,7 +37642,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37649,7 +37654,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "交通运输、仓储和邮政业年平均工资（城镇非私营单位）",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37661,7 +37666,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "制造业年平均工资（城镇非私营单位）",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37673,7 +37678,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37685,7 +37690,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "公共管理、社会保障和社会组织年平均工资（城镇非私营单位）",
-        "occupation_scope": "飞机服务服务员",
+        "occupation_scope": "中国宽行业／单位／岗位类别均值；未单列飞机服务服务员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37717,38 +37722,38 @@
       },
       {
         "derivation": null,
-        "display_value": "28,000 人",
+        "display_value": "31,200人",
         "fact_id": "us-employment-2024",
         "market": "美国",
-        "measure": "在岗就业人数（同 us-employment-2025 口径）",
+        "measure": "BLS就业预测矩阵基年就业（稳定ID保留，非OEWS就业规模）",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024年",
+        "period": "2025基年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "5% 至 6%（快于平均）",
+        "display_value": "5.6%（净增约1,700人）",
         "fact_id": "us-growth-2034",
         "market": "美国",
-        "measure": "就业增长率（同 us-growth-2025-2035 口径）",
+        "measure": "BLS全国职业就业预测增长",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约4,300个",
+        "display_value": "年均约4,000个",
         "fact_id": "us-openings-2034",
         "market": "美国",
-        "measure": "年均职位空缺（同 us-openings-2025-2035 口径）",
+        "measure": "BLS预测年均职业空缺（包含替代需求）",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
@@ -37758,7 +37763,7 @@
         "market": "美国",
         "measure": "美国精确职业代码",
         "occupation_scope": "飞机服务服务员",
-        "period": "2026 年更新页面；访问 2026-09-15",
+        "period": "2026 年更新页面；访问 2026-10-02",
         "source_refs": [
           "onet"
         ]
@@ -37777,38 +37782,38 @@
       },
       {
         "derivation": null,
-        "display_value": "O*NET 53-6032.00 技术清单已复核",
+        "display_value": "2025招聘软件四项；提及比例均Not available",
         "fact_id": "technology-context",
         "market": "美国",
         "measure": "技术页面可用性",
         "occupation_scope": "飞机服务服务员",
-        "period": "访问 2026-09-15",
+        "period": "访问 2026-10-02",
         "source_refs": [
           "facilities"
         ]
       },
       {
         "derivation": null,
-        "display_value": "美国入门学历通常为高中文凭或同等学历（77% 受访者）",
+        "display_value": "美国新雇员教育问卷77%高中或同等学历；非在岗分布或中国准入",
         "fact_id": "credential-boundary",
         "market": "美国",
         "measure": "入门学历与培训",
         "occupation_scope": "飞机服务服务员",
-        "period": "2025 年；访问 2026-09-15",
+        "period": "2025 年；访问 2026-10-02",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "5% 至 6%（2024—2034）",
+        "display_value": "5.6%（净增约1,700人）",
         "fact_id": "employment-projection",
         "market": "美国",
-        "measure": "就业预测口径",
+        "measure": "BLS全国职业就业预测增长",
         "occupation_scope": "飞机服务服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       }
     ]
@@ -37869,7 +37874,7 @@
       "text": "飞机服务服务员：机坪加油、除冰与地面服务（O*NET 53-6032）"
     }
   },
-  "source_content_sha256": "f219a947b8afc26b2e9f454cb4d04dc14372256c4219942983fa9a188ef24bc5",
+  "source_content_sha256": "cf747d06184de6530af749b75b63be440e736bd6af0446f147da7486b2c2dc04",
   "subject": {
     "canonical_slug": "aircraft-service-attendants",
     "name": "飞机服务服务员",

@@ -17,6 +17,18 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-industry-wage-0-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-1-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-2-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-3-gap": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -27,6 +39,12 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
       "item:gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.10": {
@@ -1224,13 +1242,13 @@
         "status": "pending_mapping"
       },
       "item:gambling-change-persons-and-booth-cashiers.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:gambling-change-persons-and-booth-cashiers.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:gambling-change-persons-and-booth-cashiers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:gambling-change-persons-and-booth-cashiers.path.interview-probation.1": {
         "status": "mapped"
@@ -24108,7 +24126,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对博彩服务质量的评价。本页按美国 O*NET-SOC 41-2012.00「Gambling Change Persons and Booth Cashiers」编写（固定索引给本资产的中文名是「博彩兑换柜台收银员」；主要对象是持牌博彩场所内顾客的货币与硬币与代币与筹码与票据兑换与兑付交易，产出为按辖区与雇主规程完成的兑换与找零与兑付与清点与对账与合规记录）。重要法域边界：本页描述的是美国等允许持牌博彩的辖区内的合法岗位；中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，该美国合法岗位不能当作中国大陆可经营的职业路径，涉足前必须先核实所在地法律与授权。"
+              "本清单仅自我提问，不是录用评分。固定0442博彩兑换柜台收银员/O*NET41-2012.00，在获准辖区兑换柜台与老虎机区办理兑换找零、兑付签名、抽屉与备用金记录；13任务含信用申请核查补充，不仅找零。中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.quick-decision.fit-decision-checklist.1",
@@ -24122,7 +24140,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的持牌博彩场所兑换柜台当班任务包（仅用于练习流程，不代表任何辖区可实际经营）。请写出当班方案草案：（1）如何为顾客把货币与信用卡与票据与筹码与代币相互兑换并找零，如何受理信用申请与核验信用参考以提供兑现授权或建立场内信用账户；（2）如何在老虎机区运营兑换亭并按规程向兑换人员发放当班备用金，如何在班次结束时清点与审计现金抽屉；（3）如何在奖金超过老虎机内持有金额时取得顾客在收据上的签名，如何依据筹码赢输计算价值并兑付；（4）如何准确记录货币兑换与授权表单与交易对账，并把每日交易汇总对平以平衡账目；（5）如何在遇到证件或年龄存疑、信用或兑现存疑、金额或票据不一致、抽屉账实不符、监听中奖铃与兑付异常、顾客争执、记录缺失、需要上报等情况时按辖区与雇主规程暂停、通知与升级。使用公开资料与模拟数据作答，不使用任何真实场所、顾客或交易信息。"
+              "纸面体验｜入行板块给完整B/V2兑换抽屉合成包：找零、已付与待核、备用金发放回收和账实差。90分钟独立交四作品，含参考和三个反例；无真实场所、顾客、资金、账户或设备。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.quick-decision.fit-decision-checklist.2",
@@ -24136,7 +24154,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 关注点：与他人持续接触（87% 为持续接触）、每天进行面对面讨论（85% 每天）、每天进行影响他人与机构资源的决策（64% 每天）、必须非常精确或高度准确「极其重要」（84%）与「非常重要」（16%）、持续或几乎持续站立（75%）、持续或几乎持续做重复动作（77%）、每天需处理不愉快或愤怒或不礼貌的人（67%）、每天承受严格期限的时间压力（56%）、与工作组或团队共同工作极其重要（41%）、工作安排固定常规（89%）。若你能在高峰与老虎机区高频兑换中持续保持逐笔准确与耐心应对顾客，本职业的日常要求与你的工作方式更接近。"
+              "适配信号｜O*NET 关注点：与他人持续接触（87% 为持续接触）、每天进行面对面讨论（85% 每天）、每天进行影响他人与机构资源的决策（64% 每天）、必须非常精确或高度准确「极其重要」（84%）与「非常重要」（16%）、持续或几乎持续站立（75%）、持续或几乎持续做重复动作（77%）、每天需处理不愉快或愤怒或不礼貌的人（67%）、每天承受严格期限的时间压力（56%）、与工作组或团队共同工作极其重要（41%）、受访者选择规律班表（89%）。若你能在高峰与老虎机区高频兑换中持续保持逐笔准确与耐心应对顾客，本职业的日常要求与你的工作方式更接近。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.quick-decision.fit-decision-checklist.3",
@@ -24150,7 +24168,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示：错误后果为「极其严重」（14%）与「非常严重」（13%）与「严重」（24%）与「较严重」（14%），但有相当比例认为「完全不算严重」（35%），决策自由为「有一定」（34%）与「很有限」（30%）与「很少」（17%），竞争度「极度竞争」（16%）与「高度竞争」（16%）与「中等竞争」（34%），身体接近程度为「非常接近」（22%）与「中等接近（一臂之内）」（56%），每天使用电子邮件的岗位很少（67% 从未），持续或几乎持续坐着（50% 从未，25% 少于一半）。本职业以现金与筹码与票据与兑换与对账与顾客服务为核心：一次身份或年龄核验缺失、一次大额或异常交易未识别上报、一次金额或找零或兑付错误、一次抽屉账实不符或差异被私下补平、一次授权表单或签名或交易记录缺失，都可能造成资金损失与合规处罚与执照风险；此外赌博在中国大陆受法律严格限制，涉足前必须核实所在地法律与授权，若你难以在高度规管且重复度高的现金环境中长期保持逐笔准确与坚持上报，应把这些作为需要认真权衡的现实成本。"
+              "谨慎信号｜O*NET 同时显示：错误后果为「极其严重」（14%）与「非常严重」（13%）与「严重」（24%）与「较严重」（14%），但有相当比例认为「完全不算严重」（35%），决策自由为「有一定」（34%）与「有限」（30%）与「很少」（17%），竞争度「极度竞争」（16%）与「高度竞争」（16%）与「中等竞争」（34%），身体接近程度为「非常接近」（22%）与「中等接近（一臂之内）」（56%），电子邮件67%从未，16%每周至少但非每天，坐着50%从未、25%少于一半、16%约一半。本职业以现金与筹码与票据与兑换与对账与顾客服务为核心：一次身份或年龄核验缺失、一次大额或异常交易未识别上报、一次金额或找零或兑付错误、一次抽屉账实不符或差异被私下补平、一次授权表单或签名或交易记录缺失，都可能造成资金损失与合规处罚与执照风险；此外赌博在中国大陆受法律严格限制，涉足前必须核实所在地法律与授权，若你难以在高度规管且重复度高的现金环境中长期保持逐笔准确与坚持上报，应把这些作为需要认真权衡的现实成本。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.quick-decision.fermat-decision-card.6",
@@ -24164,7 +24182,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项兑换柜台任务上同时完成三件事：把交易做实（为顾客兑换货币与信用卡与票据与筹码与代币并找零、受理与核验信用并办理兑现或信用账户、在老虎机区运营兑换亭并发放备用金、清点与审计抽屉、依据筹码赢输计算与兑付、按需取得中奖签名）、把记录与合规管住（身份与年龄核验、金额与授权表单与交易对账记录、大额与异常交易识别与上报、每日汇总对平、顾客信息与交易记录保护）、并承担可核验的岗位责任（对本岗交易与记录与顾客沟通负责并按辖区与雇主规程上报与交接）。建议用一次可核验的体验（为虚构场所完成一份兑换与兑付与对账方案与授权表单与异常上报清单、独立设计一版年龄与信用核验流程、或做一次当班现金抽屉清点与审计与记录复核）来检验，而不是仅依据兴趣问卷的结论。"
+              "承担判断｜B/V2观察版本、找零、实际收付与抽屉差额、待核与重复记录及交接方法；纸面正确不证健康耐受、真实胜任或录用资格。真实登记训练、兑换兑付信用权限另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.quick-decision.fermat-decision-card.7",
@@ -24233,7 +24251,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜每天进行面对面讨论（85% 每天）；每周以上使用电话（49% 每天，33% 每周以上，15% 从未）。\n联系强度｜与他人持续接触（87% 为持续接触，13% 为大多数时间接触），身体接近程度为「中等接近（一臂之内）」（56%）与「非常接近」（22%）与「略微接近」（12%）。\n团队与协作｜与工作组或团队共同工作极其重要（41%）与非常重要（16%）与重要（16%），协调或带领他人重要（31% 比较重要，21% 极其重要，21% 完全不重要）。\n决策与自主｜每天进行影响他人与机构资源的决策（64% 每天，15% 每周以上，13% 每年以上），不做监督下做决策的自由为「有一定」（34%）与「很有限」（30%）与「很少」（17%）。\n精确与后果｜必须非常精确或高度准确「极其重要」（84%）与「非常重要」（16%），错误后果为「极其严重」（14%）与「非常严重」（13%）与「严重」（24%）与「较严重」（14%），「完全不算严重」（35%）。\n顾客情境｜每天需处理不愉快或愤怒或不礼貌的人（67% 每天，29% 每周以上）；使用口头沟通为主（公开播报「从未」58%）。\n体力与节奏｜持续或几乎持续站立（75%）或约一半时间（16%），持续或几乎持续做重复动作（77%）或超过一半时间（13%），持续或几乎持续用双手操作与控制与感知物体与工具与控件（50%，「从未」40%），坐着的时间「从未」（50%）与「少于一半」（25%）。\n环境与防护｜暴露于污染物「每天」（54%）与「从未」（24%），佩戴常见防护或安全装备「从未」（87%，每天 13%）。\n压力与安排｜每天承受严格期限的时间压力（56% 每天，「从未」36%），竞争度为「中等竞争」（34%）与「完全不竞争」（30%）与「极度竞争」（16%）与「高度竞争」（16%），工作安排固定常规（89%）。"
+              "沟通方式｜每天进行面对面讨论（85% 每天）；电话使用频率（49% 每天，33% 每周至少但非每天，15% 从未）。\n联系强度｜与他人持续接触（87% 为持续接触，13% 为大多数时间接触），身体接近程度为「中等接近（一臂之内）」（56%）与「非常接近」（22%）与「略微接近」（12%）。\n团队与协作｜与工作组或团队共同工作极其重要（41%）与非常重要（16%）与重要（16%），协调或带领他人重要（31% 比较重要，21% 极其重要，21% 完全不重要）。\n决策与自主｜每天进行影响他人与机构资源的决策（64% 每天，15% 每周至少但非每天，13% 每年至少但非每月），不受监督时做决策的自由为「有一定」（34%）与「有限」（30%）与「很少」（17%）。\n精确与后果｜必须非常精确或高度准确「极其重要」（84%）与「非常重要」（16%），错误后果为「极其严重」（14%）与「非常严重」（13%）与「严重」（24%）与「较严重」（14%），「完全不算严重」（35%）。\n顾客情境｜每天需处理不愉快或愤怒或不礼貌的人（67% 每天，29% 每周至少但非每天）；使用口头沟通为主（公开播报「从未」58%）。\n体力与节奏｜持续或几乎持续站立（75%）或约一半时间（16%），持续或几乎持续做重复动作（77%）或超过一半时间（13%），持续或几乎持续用双手操作与控制与感知物体与工具与控件（50%，「从未」40%），坐着的时间「从未」（50%）与「少于一半」（25%）。\n环境与防护｜76%每天在受控室内，24%从未；暴露于污染物「每天」（54%）与「从未」（24%），佩戴常见防护或安全装备「从未」（87%，每天 13%）。\n压力与安排｜每天承受严格期限的时间压力（56% 每天，「从未」36%），竞争度为「中等竞争」（34%）与「完全不竞争」（30%）与「极度竞争」（16%）与「高度竞争」（16%），受访者选择规律班表（89%）。 典型工作周14%超过40小时、65%40小时、21%少40小时；89%规律班表不证无夜班或固定收入，防护问卷不授省略实际PPE。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.work-context-block.1",
@@ -24247,7 +24265,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "兑换与兑付说明｜以顾客到柜台或在老虎机区提出兑换与兑付请求为起点，按辖区与雇主规程先核验顾客身份与年龄与资格，再办理兑换与找零与兑付并在需要时取得顾客在收据上的签名；涉及信用与兑现与信用账户与超额奖金与凭证存疑的，按规程核对与授权后办理，凭证或金额不符时暂停并移交主管或合规岗位处置。"
+              "核证件、凭证、版本与请求类型；按授权兑换兑付，缺件或金额冲突先暂停内部核查。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.2",
@@ -24261,7 +24279,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业与工资口径｜本职业在美国劳工统计局（BLS）职业就业与工资统计（OEWS 2025）与 BLS 2024—2034 职业预测（经 O*NET 呈现并经来源登记核对）中对应精确职业 41-2012.00：2025 年全国年工资中位数为 36,220 美元（时薪 17.41 美元），第 10 分位 24,460 美元、第 90 分位 60,330 美元；就业 2024 年约 22,600 人，2024—2034 年预计增量属「下降（-1% 或更低）」类别，期间约 4,000 个岗位空缺。上述为美国全国口径，不适用其他法域。"
+              "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。 美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。 OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.onet-structured-fields-block.2",
@@ -24275,7 +24293,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核验玩家身份与年龄 → 办理货币与筹码与票据兑换与找零 → 监听中奖铃并兑付或取得签名 → 发放与回收备用金并清点抽屉 → 记录授权与兑换并对平每日汇总 → 上报异常与完成交接"
+              "核身份凭证 → 核版本金额 → 核实际授权 → 办理兑换兑付 → 记录收付状态 → 对账交接"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.3",
@@ -24289,7 +24307,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆法域边界｜中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止；国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业，且未建立与本职业精确对应的全国职业工资分布。因此本页中国部分只登记法律边界与统计缺口，既不使用行业均值或美国数据推断收入，也不把美国持牌博彩岗位当作中国大陆可经营的职业路径；涉足相关业务前必须先核实所在地法律与授权。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.onet-structured-fields-block.3",
@@ -24303,7 +24321,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "合规与资金说明｜按机构流程核对当班备用金与现金抽屉与设备状态，确认顾客身份与年龄核验以及大额与异常交易与可疑活动上报路径后方可办理；涉及信用与兑现与信用账户与超额兑付与中奖签名时要按规定核对与授权并记录，不自行放行或私下处理；发现票面或金额不一致或抽屉与台账不符要立即停止并报告而不是自行补平。"
+              "核抽屉实点、备用金与当前记录；待核不算已付，账差如实交接不私补。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.4",
@@ -24317,7 +24335,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测口径｜本页美国就业与增长与空缺取 O*NET 呈现的 BLS 2024—2034 职业预测（经来源登记核对）：就业 2024 年约 22,600 人，预计增量属「下降（-1% 或更低）」类别，期间约 4,000 个岗位空缺（含替代需求）；预测含替换需求，不等于实际招聘数；中国与美国数据分别列示，不拼接、不换算。"
+              "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.onet-structured-fields-block.4",
@@ -24331,7 +24349,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认顾客身份与年龄与请求类型 → 办理兑换与找零与兑付 → 需要时取得中奖签名 → 清点抽屉并发放与回收备用金 → 记录兑换与授权并核对汇总 → 上报异常与完成交接"
+              "核当前版本 → 核授权状态 → 算兑换找零 → 核实际收付 → 核抽屉差额 → 交接待办"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.5",
@@ -24345,7 +24363,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "法域与合规与数据边界｜本页涉及三类要求：一是法域，赌博在美国等辖区须在持牌场所与获准渠道内依法经营并遵守辖区规则与柜台安全与交易记录要求，而中国大陆除依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，本页的美国合法岗位不能作为中国大陆可经营职业路径；二是反洗钱与客户身份识别，持牌场所须落实客户身份识别与交易记录与异常活动识别与人员培训与升级机制（如美国 FinCEN 对赌场的记录与报告与合规计划要求），柜台人员不得自行弱化这些控制，也不得受理未成年人或自我排除或受限制人员的交易；三是信息与记录，顾客身份与证件与信用与交易与支付数据须限于授权与合规目的并按最小必要与留存期限管理。本页只作一般性提示，不构成法律或合规或投资意见。"
+              "中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。 内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。 FinCEN适用赌场机构履行记录报送；一线人员按内部路径升级，非每笔监管批准。客户资料法域目的权限留存另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.onet-structured-fields-block.5",
@@ -24359,7 +24377,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按机构流程记录玩家身份与年龄核验、货币与筹码与票据兑换与找零、信用与兑现与信用账户、中奖兑付与签名、备用金发放与回收与抽屉清点审计、每日汇总对平、异常与可疑活动与顾客争议与交接事项；发现身份或票据或金额异常或大额可疑交易时立即按授权上报，不自行变更兑付或放行信用或私下补平账目。"
+              "版本、抽屉差额与待办留痕。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.6",
@@ -24373,7 +24391,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与清点为对象，完成兑换与找零与兑付与清点与对账，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台现金与筹码与票据与信用与账务为产出；博彩发牌员以赌台牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付记录为产出；博彩服务工人一线主管以班组排班与现场监督与绩效与合规执行为产出；博彩经理以场所运营与定价与人员与合规管理结果为产出；博彩官与博彩调查员以监控与调查与合规取证为产出。对象与产出各不相同，不能跨岗位沿用放行与授信与资金处置的权限。"
+              "边界结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与清点为对象，完成兑换与找零与兑付与清点与对账，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台现金与筹码与票据与信用与账务为产出；博彩发牌员以赌台牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付记录为产出；博彩服务工人一线主管以班组排班与现场监督与绩效与合规执行为产出；博彩经理以场所运营与定价与人员与合规管理结果为产出；博彩官与博彩调查员以监控与调查与合规取证为产出。对象与产出重心不同可交叉兼任，不能跨岗位沿用放行与授信与资金处置的权限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.7",
@@ -24443,7 +24461,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业在持牌博彩场所的兑换柜台与老虎机区为顾客兑换货币与筹码并办理兑付：把硬币与代币与筹码兑换为顾客货币，为顾客兑换货币与信用与票据或赌场筹码并找零，向顾客或其他工作人员销售筹码与代币与票据，监听中奖铃并向中奖者兑付，在奖金超过老虎机内持有金额时取得顾客在收据上的签名，依据玩家赢输计算筹码价值，受理信用申请并核验信用参考以提供兑现授权或建立场内信用账户，在班次开始时向兑换人员发放备用金并清点与审计现金抽屉，核对货币兑换与授权表单与交易对账的记录并把每日交易汇总对平，检查证件以核验玩家年龄，按规则维护柜台安全并在老虎机区运营兑换亭与清洁赌场区域。常见用人单位包括持牌赌场与博彩服务运营商与部分赛马与体育投注渠道的柜台与老虎机运营部门；工作以高峰时段高频兑换与兑付与逐笔高精度与顾客沟通与高度合规为特点，须长时间站立与重复操作，错误后果可能从较严重到极其严重不等；涉及许可与合规与反洗钱与年龄核验与兑付与授信的权限与资格由辖区监管机关与持牌雇主确定。官方定义原文：Exchange coins, tokens, and chips for patrons' money. May issue payoffs and obtain customer's signature on receipt. May operate a booth in the slot machine area and furnish change persons with money bank at the start of the shift, or count and audit money in drawers."
+              "职业画像｜本职业在持牌博彩场所的兑换柜台与老虎机区为顾客兑换货币与筹码并办理兑付：把硬币与代币与筹码兑换为顾客货币，为顾客兑换货币与信用与票据或赌场筹码并找零，向顾客或其他工作人员销售筹码与代币与票据，监听中奖铃并向中奖者兑付，在奖金超过老虎机内持有金额时取得顾客在收据上的签名，依据玩家赢输计算筹码价值，受理信用申请并核验信用参考以提供兑现授权或建立场内信用账户，在班次开始时向兑换人员发放备用金并清点与审计现金抽屉，核对货币兑换与授权表单与交易对账的记录并把每日交易汇总对平，检查证件以核验玩家年龄，按规则维护柜台安全并在老虎机区运营兑换亭与清洁赌场区域。常见用人单位包括持牌赌场与博彩服务运营商（行业43/32/22/3%份额非雇主名录）；工作以高峰时段高频兑换与兑付与逐笔高精度与顾客沟通与高度合规为特点，须长时间站立与重复操作，错误后果问卷含完全不算严重35%，并非人人严重；涉及许可与合规与反洗钱与年龄核验与兑付与授信的权限与资格由辖区监管机关与持牌雇主确定。官方定义原文：Exchange coins, tokens, and chips for patrons' money. May issue payoffs and obtain customer's signature on receipt. May operate a booth in the slot machine area and furnish change persons with money bank at the start of the shift, or count and audit money in drawers."
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.definition-block.11",
@@ -24527,7 +24545,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的责任主体｜博彩兑换柜台收银员对本岗兑换与找零与兑付与清点与审计与记录与顾客沟通落实负责，对按辖区与雇主规程完成的资金与账务与合规记录负责；涉及限额与授权与规则解释、兑现与授信与信用账户判定、中奖签名与超额兑付与赔付例外、大额与异常交易与可疑活动上报、以及许可与合规与纪录保存等事项，由主管与合规岗位与辖区监管机关决定，本职业不替代其决定。"
+              "本职6核心7补充任务含受理信用申请、核信用参考提供兑现授权或账户，不排除本人真实授权判断；异常和越权内部升级，机构履行适用报告。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.17",
@@ -24541,7 +24559,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的权限与批准｜同组与相邻岗位的权限来自辖区监管规则与机构授权与合规制度，通常不包含对限额与授信与放行自行判断的权限；涉及兑现授权与信用账户与中奖签名与赔付例外与异常交易与争议与合规的事项应移交主管与合规岗位与监管机关。"
+              "相邻可交叉兼任；资金、信用、异常处置按实际任命核，不从职位名推无判断权，不互认法域权限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.18",
@@ -24555,7 +24573,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜兑换与找零与兑付与清点与对账须在辖区许可与雇主授权与规程范围内进行；涉及限额与授权与规则解释、兑现与授信与信用账户与年龄或受限状态判定、中奖签名与超额兑付与赔付例外、大额与异常交易与可疑活动上报、以及记录与许可与合规事项，应按规定升级或移交具备授权的主管与合规岗位与监管机关，不得越权操作或承诺。"
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.19",
@@ -24583,7 +24601,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的结论边界｜当班结论只陈述可核验的兑换与兑付与清点与对账事实并区分实测值与估算值；不得对兑现与授信例外或顾客资格的合法性作出未经授权的判断；涉及异常交易与可疑活动与许可与合规与争议的事项必须升级或移交，口径也要经得住主管与合规岗位与监管检查的复核。"
+              "当班结论区分已授权、实际收付、待核和重复，账差实值不私补，保原稿及更正原因；监管报告由适用机构履行。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.21",
@@ -24639,7 +24657,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜持牌博彩岗位涉及辖区雇员登记与年龄与背景核验与反洗钱与客户身份识别要求，且须在持牌场所与获准渠道内从业；中国大陆除依法批准发行的彩票外赌博受法律严格禁止。"
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。 中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.25",
@@ -24653,7 +24671,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "02 许可与登记与合规要求｜核对机构与岗位是否要求辖区博彩雇员登记与年龄与背景核验，是否提供并强制反洗钱与客户身份识别与现金交易报告与异常上报培训，是否明确中奖签名与超额兑付与信用与兑现与赔付例外的审批与上报路径，以及交易与身份与监控记录的保存与访问权限；同时确认所在地法律是否允许该类经营（中国大陆为禁止，须先核实法律与授权）。"
+              "02 许可与登记与合规要求｜核对机构与岗位是否要求辖区博彩雇员登记与年龄与背景核验，是否提供并强制反洗钱与客户身份识别与现金交易报告与异常上报培训，是否明确中奖签名与超额兑付与信用与兑现与赔付例外的审批与上报路径，以及交易与身份与监控记录的保存与访问权限；同时确认所在地法律是否允许该类经营（美国代码不授中国经营许可）。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.26",
@@ -24667,7 +24685,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜O*NET 显示本职业 Job Zone 为 1-2 级（SVP 低于 6.0），教育栏显示 96% 需要高中文凭或同等学历、2% 需要上过大学但无学位、1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造）；多数岗位以在岗训练为主。"
+              "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.27",
@@ -24695,7 +24713,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜本职业常按班次与营业高峰安排工作并含夜班与周末与假日，薪酬构成常含基本工资与班次或夜班或假日补贴，须书面确认工时与班次与加班口径与现金差错责任约定。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 编辑核合同工时、小费加班班差、备用金差错责任与班表，不把89%规律班表推无夜班固定补贴。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.profile.career-quick-answers-block.29",
@@ -24830,7 +24848,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与现金抽屉为对象，完成兑换与找零与兑付与清点与审计，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台总账与信用与兑现与账务为产出；博彩发牌员以牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付为产出；博彩服务工人一线主管以班组排班与现场监督与绩效与合规执行为产出；博彩经理以场所运营与许可与合规管理为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象与产出各不相同，不能跨岗位沿用放行与授信与资金处置的权限。"
+              "结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与现金抽屉为对象，完成兑换与找零与兑付与清点与审计，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台总账与信用与兑现与账务为产出；博彩发牌员以牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付为产出；博彩服务工人一线主管以班组排班与现场监督与绩效与合规执行为产出；博彩经理以场所运营与许可与合规管理为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象与产出重心不同可交叉兼任，不能跨岗位沿用放行与授信与资金处置的权限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24844,7 +24862,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "证据说明｜下表比较对象来自 O*NET 职业分类与在售公开资料，用于帮助区分相邻职业的工作内容与选择适配，不构成资格、录用或薪酬结论。各职业的工资与就业须按各自 SOC 口径分别核对，本表不做数值比较，也不把某一职业的工资当作另一职业的代理；本页涉及持牌博彩岗位，选择前须先核实所在地法律与授权。"
+              "比较依据｜O*NET本职与相邻对象产出用于编辑探索；本职也含信用核查补充，不把信用所有排给柜台。职责重心可交叉兼任，具体权限与法域另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24872,7 +24890,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与现金抽屉为对象，完成兑换与找零与兑付与清点与审计并对逐笔准确负责；其他岗位分别以柜台总账与信用、牌局与筹码收付、投注票据与赔率、班组与现场监督、场所运营、监控与调查为核心，通常不对兑换窗口与老虎机区兑付与抽屉清点与中奖签名负责。"
+              "本职重心在兑换找零、老虎机兑付签名与现金抽屉，包含信用核查补充；柜台总账、牌局、投注、班组、运营和监控是相邻编辑比较重心，可交叉兼任。不能从职业名称排除实际兑付或清点授权。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.direction-comparison.adjacent-career-comparison-table.11",
@@ -24928,7 +24946,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：博彩柜台工作人员以柜台总账与现金与筹码与票据与信用与兑现与账务为产出，工作更偏柜台资金总账与信用与银行缴款；本职业以兑换窗口与老虎机区的兑换与找零与兑付与抽屉清点为核心，通常不承担柜台总账与银行缴款与信用账户管理职责。"
+              "柜台工作人员更偏现金信用总账及银行缴款；本职更偏兑换找零、老虎机兑付签名与现金抽屉，但本职也含信用申请核查补充。比较重心非排他资格权限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.direction-comparison.adjacent-career-comparison-table.15",
@@ -25237,16 +25255,16 @@
                 "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 职业就业与工资新闻稿（OEWS）",
+                "entity": "OEWS工资定义",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/news.release/ocwage.htm"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "entity": "ILO 未来工作（生成式 AI 与就业）专题",
@@ -25279,10 +25297,10 @@
                 "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "OEWS工资定义",
                 "id": "link-9",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "entity": "ILO 未来工作（生成式 AI 与就业）专题",
@@ -25297,52 +25315,52 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-12",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员详细资料",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-13",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET本职软件目录",
+                "id": "link-14",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员就业趋势（BLS 2024—2034）",
-                "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
-              },
-              {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职任务",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "NIST一般AI治理",
                 "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员职业档案",
+                "entity": "O*NET本职概览",
                 "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/41-2012.00"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员国家工资",
+                "entity": "O*NET本职任务",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/41-2012.00"
+                "url": "https://www.onetonline.org/link/details/41-2012.00"
               }
             ]
           },
@@ -25469,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业处于中等偏高的生成式 AI 文本与数据任务暴露（兑换与兑付录入、凭证与授权表单核对、金额与找零与筹码价值计算、抽屉清点与对账、记录整理密集）：核心工作包含兑换与兑付交易录入与凭证核对、金额与筹码价值与抽成计算、现金抽屉与备用金与对账台账、顾客身份与信用与交易记录，这些环节与结构化数据与文本高度相关，因此录入与核对与记录整理与查询可被明显加速。AI 与数字工具最可能改变的是「录入与核对与记录与查询环节」——兑换与兑付交易录入与凭证与票据扫描、金额与找零与筹码价值计算、现金抽屉与备用金与对账台账、顾客与合规记录整理、培训与合规材料整理；而身份与年龄核验与受限状态判定、兑付与中奖签名与信用与授信决定、大额与异常与可疑交易的识别与上报、超额兑付与赔付例外与规则解释、现金与筹码实物收付、柜台安全与许可以及合规与纪录保存仍由本人与主管与合规岗位负责。技术可行不等于组织采用（须取决于获准平台与辖区规则），也不等于岗位减少。"
+              "证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 编辑机制：规则查询、合成对账交接草稿可试AI；扫描、计算、收银是普通数字工具，不给暴露等级或实测提速。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.18",
@@ -25511,7 +25529,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 41-2012.00 就业趋势（BLS 2024—2034）"
+              "BLS本职直接EP2025—2035"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.21",
@@ -25553,7 +25571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资的时点估计；不含福利与班次补贴，不适用于其他法域。"
+              "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.24",
@@ -25651,7 +25669,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类与数据库"
+              "O*NET本职兴趣CE"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.31",
@@ -25665,7 +25683,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对职业代码与分类归属；不构成任职或许可依据。"
+              "核CE及Accounting/Office Work等子兴趣，非人格录用效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.32",
@@ -25679,7 +25697,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是录入与核对与记录与查询环节；身份与年龄与受限状态核验、兑付与中奖签名与信用与授信判定、大额与异常与可疑交易的识别与上报、超额兑付与赔付例外与规则解释、现金与筹码与票据实物收付、柜台安全与许可与合规与纪录保存始终由一线人员与主管与合规岗位负责。技术可行、组织采用（取决于获准平台与辖区规则）与岗位结果三者必须分开判断。"
+              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是录入与核对与记录与查询环节；身份与年龄与受限状态核验、兑付与中奖签名与信用与授信判定、大额与异常与可疑交易的识别与上报、超额兑付与赔付例外与规则解释、现金与筹码与票据实物收付、柜台安全与许可与合规与纪录保存由机构与岗位按真实授权落实，获准设备亦按现行流程核。技术可行、组织采用（取决于获准平台与辖区规则）与岗位结果三者必须分开判断。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.33",
@@ -25693,7 +25711,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "兑换与兑付录入与凭证与票据扫描与金额计算、抽屉与对账台账整理可被工具加速"
+              "查询合成草稿可试AI，一般扫描计算非GenAI；未核效率。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.34",
@@ -25833,7 +25851,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以兑换与兑付与清点与记录为主，工具可增强录入与核对与记录但难以替代身份与兑付判定与现金收付"
+              "任务机制编辑推断：草稿整理可辅助，真实信用兑付收付按授权流程核，非暴露或替代等级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.44",
@@ -25889,7 +25907,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本精确职业（41-2012.00）全国口径，但仍不含福利与班次补贴"
+              "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.48",
@@ -26029,7 +26047,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 职业预测（经 O*NET 呈现）"
+              "BLS本职直接EP2025—2035"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.58",
@@ -26057,7 +26075,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业就业 2024 约 22,600 人、增量属「下降（-1% 或更低）」类别、期间约 4,000 个空缺含替换需求，不可读作净新增岗位"
+              "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.60",
@@ -26113,7 +26131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部分自动化确实会压缩单纯找零与录入类岗位（自助兑付与无现金化与电子筹码已替代部分窗口交易），但核心工作仍要在持牌场所内核验玩家身份与年龄、监听与核对中奖与兑付并取得签名、处理现金与筹码实物与顾客争议、识别并上报异常与可疑交易；工具能替代的是录入与扫描与计算与记录整理，不能替代核验与判定与上报与现金收付。"
+              "BLS本职预测-1.9%非GenAI因果，也不证自助兑付已替代多少窗口。证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.64",
@@ -26127,7 +26145,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 41-2012.00（任务与工作情境）"
+              "BLS本职EP及O*NET任务"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.65",
@@ -26141,7 +26159,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有兑换与收银与现金管理系统、筹码与票据与凭证清点与扫描设备、老虎机与中奖监控与兑付系统、抽屉与备用金与对账与报表系统、监控与顾客与交易记录系统，以及合规与培训材料工具；具体以机构与辖区许可为准。"
+              "O*NET本职2类软件：Microsoft Excel电子表格、Microsoft Word文字处理；例子非普遍编程门槛或AI采用率，具体收银扫描设备依招聘核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.66",
@@ -26155,7 +26173,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 预测（口径说明）"
+              "O*NET本职软件目录"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.67",
@@ -26169,7 +26187,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在高峰时段保持逐笔准确与冷静的能力、对玩家年龄与证件与受限或自我排除身份的识别与拒绝能力、对中奖异常与大额与可疑交易的敏感与合规上报意识，以及现金与筹码与票据的实物准确与抽屉清点审计能力。"
+              "编辑机制：查询、合成对账交接草稿可试；一般录入扫描计算非GenAI。没有本职AI任务量化排序，真实兑换兑付按机构授权核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.68",
@@ -26183,7 +26201,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资口径）"
+              "O*NET任务（编辑机制）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.69",
@@ -26197,7 +26215,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不相同。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，美国持牌博彩岗位不能当作中国大陆可经营的职业路径；涉足相关业务前必须先核实所在地法律与授权。"
+              "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。 下降不保证每雇主减员，也不证AI完全替代。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.70",
@@ -26211,7 +26229,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "BLS本职EP2025—2035"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.71",
@@ -26225,7 +26243,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先明确工具输出与金额与兑付与清点与记录由谁复核、依据什么辖区规则与许可与雇主合规制度、出现错误如何回退，并核对顾客身份与信用与交易数据的权限与留存期限与审计追踪；兑付与中奖签名与信用与例外兑付与异常上报不得由工具自动完成。"
+              "生成文字不自动取得签约信用付款权限；真实岗位与系统现行内控分别核，获准自动设备存在，机构与岗位责任不因采用转移。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.72",
@@ -26239,7 +26257,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF（治理原则）"
+              "NIST一般AI治理"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.73",
@@ -26253,7 +26271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "顾客身份与年龄与证件与信用与交易与支付与自我排除信息属敏感个人信息，须限于许可与合规与反洗钱目的并按最小必要与留存期限与权限管理；不得把顾客与交易与信用数据上传到未授权外部服务，跨境与对外提供须另行评估并履行程序；监控与记录按辖区保存期限管理。"
+              "无可靠来源给本职消失年份。证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 预测期和软件目录不证明消失年或永久保留。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.74",
@@ -26267,7 +26285,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业范围（边界）"
+              "O*NET本职描述（非消失预测）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.75",
@@ -26281,7 +26299,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用三层证据判断：技术可行、组织是否采用（取决于获准平台与辖区规则）、岗位结果（就业预测为下降）；并结合本地持牌场所与老虎机与设备数量与自助兑付与无现金化渗透，而不是只看工具演示。"
+              "先做B/V2版本、找零、抽屉账和状态交接四作品及三个反例；计算器表格可用，工具生成与本人复算分开，再核真实登记训练授权。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.76",
@@ -26295,7 +26313,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类（分类归属）"
+              "O*NET任务及编辑练习"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.77",
@@ -26309,7 +26327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任前言｜效率可以外包给工具，判断与后果不能。以下五步是采用任何数字工具前后都必须保住的人工责任点。"
+              "编辑工具核对｜先核用途、版本、授权、记录及回退，再复算；五步建议非所有辖区统一法定流程。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.78",
@@ -26323,7 +26341,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "身份与资格：玩家年龄与身份与受限或自我排除状态由本人按辖区与雇主规程核验，工具不替代证件与名单核验。"
+              "身份与资格：按具体法域机构证件名单核，工具结果对有效依据，例外内部升级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.79",
@@ -26337,7 +26355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "兑付与签名：中奖核对与兑付与超额奖金与非老虎机内持有金额的签名要求由本人与主管按规则确认，赔付例外不得由工具放行。"
+              "兑付与签名：当前凭证金额及付款状态核；O*NET补充任务的超机器余额签名条件非所有赔付统一数额阈值，实际授权内控另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.80",
@@ -26351,7 +26369,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资金与兑付：现金与筹码与票据的实物收付与兑换与兑付与备用金发放由本人按规程完成并双人复核，工具结果须与实物一致。"
+              "资金：收支实物及实际支付状态核，复核人数按内控，预计算非已付；获准设备按现行流程处理。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.81",
@@ -26365,7 +26383,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录与数据：兑换与兑付与授权表单与对账与顾客记录须真实完整，顾客敏感数据须限定用途，不得用工具生成未经核实的内容或对外发送。"
+              "记录：保真实版本、收付和更正原因，资料按法域用途权限留存；合成草稿不替真实票据数据。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.82",
@@ -26379,7 +26397,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及大额与异常交易与可疑活动与受限顾客与中奖异常与赔付例外与顾客争议与许可合规的事项须经主管与合规岗位与监管机关确认并留痕。"
+              "资格凭证金额存疑、账差和可疑活动按内部路径升级，机构履行适用报送，不每笔监管批准。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.83",
@@ -26449,7 +26467,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "敏感个人信息可能外泄或被滥用"
+              "客户身份信用交易数据泄露滥用风险，法定敏感类别按具体法域核，不一律套PIPL。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.88",
@@ -26561,7 +26579,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录可辅助，核验与拒绝由人负责"
+              "编辑机制：核验提示可辅助，实际核验拒绝按获准流程与责任核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.96",
@@ -26589,7 +26607,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实物收付与兑换与找零由本人按规程完成"
+              "实际收付与系统状态按内控核，获准设备不一概禁止。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.98",
@@ -26617,7 +26635,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "录入与金额计算可辅助，实物收付由人负责"
+              "编辑机制：录入计算可辅助，实际收付按获准设备和内控核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.100",
@@ -26645,7 +26663,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中奖核对与兑付与签名要求由本人与主管确认"
+              "中奖凭证签名及实付状态按具体规则授权核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.102",
@@ -26673,7 +26691,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "提示与统计可辅助，兑付与签名由人负责"
+              "编辑机制：提示草稿可试，获准兑付设备与签名条件分别核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.104",
@@ -26687,7 +26705,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监听中奖铃并兑付并在超额时取得顾客签名"
+              "监听中奖铃并兑付；超机器内持有金额取得收据签名，非统一所有赔付阈值。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.105",
@@ -26701,7 +26719,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "兑现与授信与信用账户判定由本人与主管确认"
+              "信用参考与兑现账户按本职真实授权核，缺件越权内部升级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.106",
@@ -26729,7 +26747,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资料整理可辅助，授信决定由人负责"
+              "编辑机制：整理信用资料可试，实际授信系统及岗位权限另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.108",
@@ -26757,7 +26775,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "实物清点与审计与备用金发放由本人与复核人完成"
+              "实点审计与备用金按具体内控核实物记录及复核人。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.110",
@@ -26785,7 +26803,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "台账可辅助，实物与确认由人负责"
+              "编辑机制：台账草稿可试，实点确认与复核人数按内控核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.112",
@@ -26841,7 +26859,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "整理可辅助，确认由人负责"
+              "编辑机制：交接草稿可试，真实对账记录版本按制度核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.116",
@@ -26897,7 +26915,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排程可辅助，现场服务由人负责"
+              "编辑机制：排程草稿可试，现场职责按机构流程核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.120",
@@ -26925,7 +26943,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "小结｜一句话：录入与核对与记录变快，核验与判定与资金与合规不变。工具可以帮你整理兑换与兑付与对账记录更快、清点与扫描更省心、备用金与抽屉统计更清楚、合规与培训材料更省力，但玩家身份与年龄与受限状态是否核验、中奖与兑付与信用与授信是否符合规则、异常与大额与可疑交易是否识别与上报、现金与筹码与票据是否与抽屉与台账一致、许可与合规与纪录保存是否到位，仍然是一线人员与主管与合规岗位的责任；此外中国大陆除依法批准发行的彩票外赌博受法律严格禁止，涉足前必须先核实所在地法律与授权。"
+              "证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 查询合成草稿是编辑机制，一般扫描计算非GenAI；实际权限流程和收付状态分别核，未给量化提速或永久分工。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.122",
@@ -26947,7 +26965,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.41 美元 / 中位年薪 36,220 美元（2025，BLS OEWS）"
+              "中位时薪17.41美元 / 中位年薪36,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.7",
@@ -26961,7 +26979,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 41-2012.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与班次补贴。"
+              "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.8",
@@ -26989,7 +27007,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担窗口找零与引导职责的岗位，不代表入职起薪；本岗位常含班次与夜班补贴。"
+              "全国10分位24460非新手岗位专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.10",
@@ -27017,7 +27035,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型（持牌赌场与赛马场与体育投注站兑换柜台）与地区与班次差异较大。"
+              "全国25分位29630非机构台位资历分组。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.12",
@@ -27045,7 +27063,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担老虎机区兑付或带教与对账职责的岗位，不代表全部资深人员。"
+              "全国75分位41530非带教或老虎机专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.14",
@@ -27073,7 +27091,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数高责任或高技能与高班次补贴柜台影响，个体可达性有限；本口径上下十分位跨度约 2.5 倍。"
+              "全国90分位60330，90/10约2.5仅分布，非班差因果或个人上限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.16",
@@ -27087,7 +27105,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 22,600 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "就业22,000人（2025，BLS本职41-2012，预测含自雇口径）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.17",
@@ -27101,7 +27119,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "EP就业预测含自雇口径；本职自雇比例未公布（破折号），不当0；与OEWS雇员工资分开。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.18",
@@ -27115,7 +27133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「下降（-1% 或更低）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长-1.9%（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.19",
@@ -27129,7 +27147,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「下降（-1% 或更低）」类别）；边界｜下降类别不等于绝对岗位数，也不适用其他法域。"
+              "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.20",
@@ -27143,7 +27161,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 4,000 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均岗位空缺3,900个（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.21",
@@ -27157,7 +27175,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的期间空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 4,000 个）；边界｜来自替换需求与有限增长，按原文呈现，不可读作净新增岗位。"
+              "年均空缺含转出退出，非净增或十年总量或实际招聘。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.22",
@@ -27171,7 +27189,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业以兑换与兑付与清点与记录为主，生成式 AI 的文本与数据任务暴露为中等偏高；本页不对其 AI 影响评分，仅说明可被工具辅助（兑换与兑付录入与凭证与票据扫描与金额与找零计算、抽屉与备用金与对账台账整理、信用与兑现资料整理、顾客与合规记录整理、培训与合规材料整理）与必须由人负责（身份与年龄与受限状态核验、兑付与中奖签名与信用与授信判定、大额与异常与可疑交易识别与上报、超额兑付与赔付例外与规则解释、现金与筹码与票据实物收付、柜台安全与许可与合规与纪录保存）的边界，并注明是否采用取决于获准平台与辖区规则。"
+              "证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 工具机制为编辑建议，一般设备非AI，不给等级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.23",
@@ -27213,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "窗口找零与兑换起步岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.26",
@@ -27227,7 +27245,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 96% 需要高中文凭或同等学历；多数兑换与兑付岗位以此为起点并结合在岗训练。"
+              "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.27",
@@ -27255,7 +27273,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "老虎机区兑付或系统操作方向岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.29",
@@ -27269,7 +27287,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 2% 需要上过大学但无学位；涉及中奖兑付与系统操作与带教的岗位更常见。"
+              "2%大学无学位为新聘问卷，非老虎机或带教专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.30",
@@ -27297,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "主管或合规支持方向岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.32",
@@ -27311,7 +27329,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造）。"
+              "1%中学后证书为新聘问卷，非主管合规专属，99%不补余项。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.33",
@@ -27339,7 +27357,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "持牌场所内所有岗位"
+              "具体法域纳入gaming employee定义者"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.35",
@@ -27353,7 +27371,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在允许持牌博彩的辖区（如美国内华达州）须办理博彩雇员登记并按雇主与辖区要求接受反洗钱与客户身份识别与现金交易报告培训；中国大陆除依法批准发行的彩票外赌博为禁止，本页不提供任何个人资格或经营结论。"
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.36",
@@ -27465,7 +27483,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜博彩兑换柜台收银员（行业与招聘中常称兑换员、筹码兑换员、老虎机区服务员、老虎机区楼面服务员、收银员、赌场出纳、备用金与抽屉管理员；在 O*NET 中对应 41-2012.00 Gambling Change Persons and Booth Cashiers，与博彩柜台工作人员、发牌员、投注受理员、现场主管、博彩经理与监控调查岗位分属不同职责与授权层级）"
+              "职业名称对照｜博彩兑换柜台收银员（行业与招聘中常称兑换员、筹码兑换员、老虎机区服务员、老虎机区楼面服务员、收银员、赌场出纳、备用金与抽屉管理员；在 O*NET 中对应 41-2012.00 Gambling Change Persons and Booth Cashiers，与博彩柜台工作人员、发牌员、投注受理员、现场主管、博彩经理与监控调查岗位职责重心不同、具体授权可交叉）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.44",
@@ -27479,7 +27497,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜除国家依法批准发行的彩票外，中国大陆的赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与 O*NET 41-2012.00 对应的合法经营岗位；公开企业薪酬调查亦未建立与本职业精确对应的全国工资分布。按证据政策，本页只登记法律边界与统计缺口：展示缺失而不使用代理数字，不以行业均值或美国数据推断收入，也不把美国持牌博彩岗位当作中国大陆可经营的职业路径。"
+              "中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.45",
@@ -27493,7 +27511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径，不区分职业；中国大陆除依法批准发行的彩票外不存在合法博彩经营岗位，故不以任何行业均值或彩票销售等相邻岗位数据代填本职业收入；在允许持牌博彩的辖区，本岗位收入通常与机构类型（持牌赌场、赛马场与体育投注站兑换柜台、政府相关经营机构）、岗位（窗口找零、老虎机区兑付、抽屉清点与审计、备用金管理）、班次与夜班或假日补贴、地区与许可状态以及资历相关。来源与口径｜中国部分仅登记法律边界与缺口：经有界检索仍未取得可按本职业核验的统计值，因此不以代理数字填充；美国部分来自 O*NET 呈现的 2025 年 BLS OEWS 工资数据与 BLS 2024—2034 职业预测（经来源登记核对）；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。 美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。 OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.46",
@@ -27507,7 +27525,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：城镇单位就业人员平均工资统计口径说明｜https://www.stats.gov.cn/sj/zxfb/"
+              "NBS2025城镇单位行业及五大岗位组，非本职值｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.47",
@@ -27521,7 +27539,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜在允许持牌博彩的辖区，本岗位实际收入通常与机构类型（持牌赌场、赛马场与体育投注站兑换柜台、政府相关经营机构）、岗位（窗口找零、老虎机区兑付、抽屉清点与审计、备用金管理、清洁与区域服务）、班次与营业高峰与夜班与假日、地区与许可状态以及资历相关；柜台岗位常含班次或夜班补贴，且现金差错责任约定会影响实际到手；本页不给出任何具体金额，也不提供中国大陆收入估计，避免以个别样本或跨境外推代表整体。"
+              "编辑核真实合同工时工资小费加班班差和福利，不从美国分位推中国收入。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.48",
@@ -27535,7 +27553,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "允许持牌博彩的辖区（如美国内华达州）主要博彩城市"
+              "中国大陆全国"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.49",
@@ -27549,7 +27567,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.50",
@@ -27563,7 +27581,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他允许持牌博彩的州或地区"
+              "中国大陆城市地区"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.51",
@@ -27577,7 +27595,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：未取得中国大陆本职城市工资就业，不用美国或彩票销售代填。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.52",
@@ -27591,7 +27609,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（除依法批准发行的彩票外为禁止）"
+              "中国大陆用工形式"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.53",
@@ -27605,7 +27623,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：未取得中国大陆本职不同用工形式工资就业，不用行业或招聘报价代填。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.54",
@@ -27619,7 +27637,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 41-2012.00 / O*NET-SOC 41-2012.00 覆盖在博彩场所兑换柜台与老虎机区为顾客兑换货币与筹码并兑付并清点与审计现金抽屉的人员，与博彩柜台工作人员、发牌员、投注受理员、现场主管、博彩经理、监控调查员以及一般收银员等分属不同对象与产出；国际父级职业分类（如 ISCO-08）只能说明兑换与收银事务的宽泛位置，不能替代美国精确职业或辖区许可。中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与该美国职业对应的合法经营分类；两者法律环境与分类统计口径不同，不做数值换算。"
+              "分类对照说明｜美国 SOC 41-2012.00 / O*NET-SOC 41-2012.00 覆盖在博彩场所兑换柜台与老虎机区为顾客兑换货币与筹码并兑付并清点与审计现金抽屉的人员，与博彩柜台工作人员、发牌员、投注受理员、现场主管、博彩经理、监控调查员以及一般收银员等分属不同对象与产出；国际父级职业分类（如 ISCO-08）只能说明兑换与收银事务的宽泛位置，不能替代美国精确职业或辖区许可。中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，美国分类不直接授中国经营许可；两者法律环境与分类统计口径不同，不做数值换算。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.55",
@@ -27647,7 +27665,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「下降（-1% 或更低）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长-1.9%（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.58",
@@ -27661,7 +27679,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.41 美元 / 中位年薪 36,220 美元（2025，BLS OEWS）"
+              "中位时薪17.41美元 / 中位年薪36,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.china-salary.career-snapshot-primary-locale.59",
@@ -27683,7 +27701,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 41-2012.00 职业档案与工资数据｜https://www.onetonline.org/link/summary/41-2012.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 博彩兑换柜台收银员国家工资｜https://www.onetonline.org/link/localwages/41-2012.00"
+              "O*NET本职国家工资2025｜https://www.onetonline.org/link/localwages/41-2012.00?st=CA；BLS本职EP2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS工资纳排｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.8",
@@ -27697,7 +27715,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.41 美元 / 中位年薪 36,220 美元（2025，BLS OEWS）"
+              "10分位24,460美元/年（2025全国本职）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.9",
@@ -27711,7 +27729,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 41-2012.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与班次补贴。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜10分位为分布边界，非新手找零窗口专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.10",
@@ -27725,7 +27743,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 24,460 美元/年（2025，BLS OEWS）"
+              "25分位29,630美元/年（2025全国本职）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.11",
@@ -27739,7 +27757,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担窗口找零与引导职责的岗位，不代表入职起薪；本岗位常含班次与夜班补贴。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜25分位非按岗位年资划分。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.12",
@@ -27753,7 +27771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 29,630 美元/年（2025，BLS OEWS）"
+              "中位时薪17.41美元 / 中位年薪36,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.13",
@@ -27767,7 +27785,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型与地区与班次差异较大。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.14",
@@ -27781,7 +27799,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 41,530 美元/年（2025，BLS OEWS）"
+              "75分位41,530美元/年（2025全国本职）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.15",
@@ -27795,7 +27813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担老虎机区兑付或带教与对账职责的岗位，不代表全部资深人员。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜75分位非带教老虎机兑付专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.16",
@@ -27809,7 +27827,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 60,330 美元/年（2025，BLS OEWS）"
+              "90分位60,330美元/年（2025全国本职）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.17",
@@ -27823,7 +27841,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数高责任或高技能与高班次补贴柜台影响，个体可达性有限；本口径上下十分位跨度约 2.5 倍。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜90/10约2.5倍仅分布，非责任资历班差因果或个人上限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.18",
@@ -27837,7 +27855,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 22,600 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "就业22,000人（2025，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.19",
@@ -27851,7 +27869,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜EP含自雇口径；本职自雇比例为破折号未公布，不当0。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.20",
@@ -27865,7 +27883,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「下降（-1% 或更低）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长-1.9%（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.21",
@@ -27879,7 +27897,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「下降（-1% 或更低）」类别）；边界｜下降类别不等于绝对岗位数，也不适用其他法域。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.22",
@@ -27893,7 +27911,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 4,000 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均空缺3,900个（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.23",
@@ -27907,7 +27925,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的期间空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 4,000 个）；边界｜来自替换需求与有限增长，不可读作净新增岗位。"
+              "口径｜本职41-2012全国工资2025或EP2025—2035，工资与就业分别核；边界｜年均空缺含转出退出，非净新增、十年总数或实际招聘。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.24",
@@ -27921,7 +27939,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值取自 O*NET OnLine 41-2012.00 页面显示的 2025 年 BLS OEWS 工资数据与 BLS 2024—2034 职业预测（经来源登记核对），对应精确职业 O*NET-SOC 41-2012.00；不适用于中国大陆或其他法域，也不构成对个人薪酬或录用的承诺；该岗位须在允许持牌博彩的辖区的持牌场所与获准渠道内从业。本页未取得可按行业与分地区读取的本职业工资中位数，均按可见缺口登记；如官方页面在后续期间更新数值，应以页面当期查询结果为准。"
+              "2025全国已核，加州年中位37,350美元地方非全国36,220；本职四行业工资未取，不用一般收银员或博彩服务组合代填。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.25",
@@ -27935,7 +27953,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年中位时薪 17.41 美元、中位年薪 36,220 美元，工资分布从下十分位 24,460 美元到上十分位 60,330 美元，跨度约 2.5 倍；差异主要来自机构类型（持牌赌场、赛马场与体育投注站兑换柜台、政府相关经营机构）、岗位（窗口找零、老虎机区兑付、抽屉清点与审计、备用金管理）、地区与生活成本、班次与夜班或假日补贴；中位不代表起薪，也不含福利与班次补贴。"
+              "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。 OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.26",
@@ -27949,7 +27967,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "承担老虎机区兑付与抽屉清点与审计与备用金与带教责任的柜台岗位，通常高于纯窗口找零与引导岗位。"
+              "证据不足：未取得本职按找零兑付、抽屉审计与带教职责工资分解；分位不证职责差异，合同另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.27",
@@ -27977,7 +27995,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "持牌赌场与赛马场与体育投注站兑换柜台与政府相关经营机构的薪酬与补贴结构差异明显，且随地区与许可状态变化。"
+              "全国和CA地方差异已核，机构岗位工资条件仍需实际合同，不由行业就业份额推工资。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.29",
@@ -28005,7 +28023,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "夜班与假日班次与营业高峰会明显影响实际收入，但公开统计只反映时点工资。"
+              "证据不足：未取得本职统一夜班假日旺季工资溢价或因果分解；具体工时小费加班班差按合同核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.31",
@@ -28033,7 +28051,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「下降（-1% 或更低）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长-1.9%（2025—2035，BLS本职41-2012）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.33",
@@ -28075,7 +28093,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年本职业在美国的主要行业之一（未给占比）。"
+              "industry政府43%，原页面未给参考年份；份额非行业工资。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.36",
@@ -28117,7 +28135,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年本职业在美国的主要行业之一（未给占比）。"
+              "industry艺术娱乐休闲32%，页面无参考年份；非行业工资。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.39",
@@ -28131,7 +28149,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "持牌赌场与老虎机运营服务商"
+              "住宿与餐饮服务"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.40",
@@ -28159,7 +28177,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "industry住宿餐饮22%，页面无参考年份；非行业工资。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.42",
@@ -28173,7 +28191,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（未给占比）"
+              "其他行业"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.43",
@@ -28201,7 +28219,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "industry其他3%，页面无参考年份；非行业工资。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.45",
@@ -28215,7 +28233,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 2.5 倍的差距主要来自岗位与责任结构与机构类型与地区与班次，本口径为精确职业 41-2012.00 全国口径。"
+              "中位是分布中点非起薪；分位未按年资兑付职责分层，实际招聘条件另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.46",
@@ -28229,7 +28247,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利与班次或夜班或假日补贴；本职业的班次与现金差错责任结构明显，公开统计难以完整反映。"
+              "个人年薪需真实合同工时纳排；本职典型周14%超40小时65%40小时21%少40小时，不固定个人全年。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.47",
@@ -28243,7 +28261,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：是否承担老虎机区兑付与抽屉清点与审计与备用金与带教职责，会明显影响收入上限。"
+              "2025全国本职OEWS雇员工资，经O*NET页展示；OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.48",
@@ -28257,7 +28275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字一起看，并结合本地机构类型与岗位与班次安排核对，也可用 O*NET 国家工资页按地区与期间查询，不用单一数字推断个人薪酬。"
+              "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。 实际基本工资小费工时加班班差福利另核，未取职责因素分解不推收入因果。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.49",
@@ -28271,7 +28289,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 17.41 美元 / 中位年薪 36,220 美元（2025，BLS OEWS）"
+              "中位时薪17.41美元 / 中位年薪36,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.50",
@@ -28285,7 +28303,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应资历较浅或仅承担窗口找零与引导职责的岗位；进入该区间的常见原因是从引导或收银辅助岗起步且尚未承担老虎机区兑付与抽屉审计职责。"
+              "第10分位非新手辅助窗口专属。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.51",
@@ -28299,7 +28317,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手起薪通常接近或低于中位，随岗位与班次与机构变化上升。"
+              "全国中位非个人起薪，不能断新手通常低于中位。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.52",
@@ -28313,7 +28331,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应承担老虎机区兑付与抽屉清点与审计与备用金与带教职责的资深岗位；高薪端受岗位结构与被替代压力（自助兑付与无现金化）影响较大。"
+              "第90分位非资深身份个人上限，表未测自助设备工资因果。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.53",
@@ -28438,22 +28456,22 @@
                 "url": "https://www.onetonline.org/link/localcert/41-2012.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职2025全国及CA工资",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/41-2012.00?st=CA"
               },
               {
-                "entity": "O*NET 41-2012.00 国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/41-2012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 41-2012.00 就业趋势（BLS 2024—2034）",
+                "entity": "O*NET本职任务概览",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
+                "url": "https://www.onetonline.org/link/summary/41-2012.00"
               }
             ]
           },
@@ -28482,7 +28500,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "证据用途｜O*NET职业CE用于偏好提问，不证个体绩效或录用效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.3",
@@ -28525,7 +28543,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜尽责性偏高、情绪稳定性较好、宜人性中等的人更容易适应高频兑换与兑付与顾客争议与严格合规；但人格分数不用于录用或适配结论。"
+              "大五用于反思压力记录习惯，未取本职人格分数绩效效度，不设最适合组合或阈值。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.6",
@@ -28539,7 +28557,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：人格特质与工作表现的关联为群体统计趋势，不能用于个体预测。"
+              "证据用途｜自我反思非本职人格效度评级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.7",
@@ -28624,7 +28642,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：MBTI 不属于职业资格或能力评估工具，不能作为用工依据。"
+              "证据用途｜MBTI只作自我反思，未取本职绩效录用效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.11",
@@ -28709,7 +28727,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：属自我探索工具，不构成职业能力或适配结论。"
+              "证据用途｜九型仅自我探索，未取本职能力适配效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.15",
@@ -28752,7 +28770,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力与推理｜主要反映学习与问题解决的一般能力；本职业更依赖在高峰时段快速准确处理兑换与兑付的能力、发现票据与金额与抽屉不一致的敏感度，以及筹码价值与对账与记录细节的准确性。"
+              "B/V2版本找零和账差题观察理解复算，不设本职IQ门槛，真实训练独立核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.18",
@@ -28766,7 +28784,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：一般认知能力与学习速度相关，但不能替代辖区登记训练与在岗实操与合规意识。"
+              "证据用途｜任务观察非认知测评本职效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.19",
@@ -28823,7 +28841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：情绪智力测评结果为自我报告，不能作为录用或绩效结论。"
+              "证据用途｜情绪智力仅反思沟通，未取本职分数绩效效度。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.23",
@@ -28866,7 +28884,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分、资格判断或对博彩服务的评价；准入以机构招聘条件、学历与经历与辖区博彩雇员登记与背景核验与合规培训为准，且所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。"
+              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分、资格判断或对博彩服务的评价；准入以机构招聘条件、学历与经历与辖区博彩雇员登记与背景核验与合规培训为准，且所在地法律是否允许该类经营须先行核实（美国代码不授中国经营许可）。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.26",
@@ -28880,7 +28898,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过辖区登记与背景核验、能否在高峰与顾客争执中稳定完成核验与兑换与兑付与抽屉清点，也不能替代真实现场实践。最可靠的判断方式是用一次真实或模拟的兑换柜台任务来检验你如何核验年龄与办理兑换与兑付与清点与对账，以及是否清楚自己与机构的许可与授权边界。"
+              "先用本页B/V2匿名合成纸面观察版本找零、双账和状态交接方法；四作品和三个反例不预测真实压力耐受、胜任或登记结果，现实训练与岗位授权另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.27",
@@ -29216,7 +29234,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；职业适应更应通过现场观察或实习或模拟任务与机构与辖区登记培训来验证。"
+              "人格分数不能直接预测本职个体绩效，职业CE非人格模型；纸面B/V2观察方法，再核真实岗位训练。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.51",
@@ -29230,7 +29248,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好能做博彩兑换柜台收银员吗？需要基础算术与快速心算与金额与找零与筹码价值计算能力（必须非常精确或高度准确「极其重要」84%），但不依赖高等数学；准确性远比数学水平更重要。"
+              "本职基础算术复算可练，84%精确极重要非数学录用阈值。O*NET有Number Facility但不设普遍心算门槛，B/V2可用计算器保公式单位。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.52",
@@ -29272,7 +29290,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的兑换柜台任务检验：能否完成兑换与兑付与对账方案与授权表单与异常上报清单、能否设计一版年龄与信用核验流程、或能否完成一次当班现金抽屉清点与审计与记录复核；这些证据比问卷更能说明适配。"
+              "用B/V2四作品和三个反例观察版本、找零、抽屉账与待核留痕，不替真实资金权限或资格。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.55",
@@ -29314,7 +29332,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的兑换柜台任务检验核验与兑换与兑付与清点与对账与异常上报处理，并了解目标机构与辖区主管机关对雇员登记与背景核验与合规培训的要求（中国大陆除依法批准发行的彩票外为禁止），再决定是否长期投入。"
+              "先用B/V2匿名纸面观察方法，再核现实法域登记训练岗位授权；作品不授胜任录用结论。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.58",
@@ -29398,7 +29416,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径。"
+              "本职国家工资核全国与CA地方工资，非就业学历来源。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.64",
@@ -29412,7 +29430,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与学历与培训口径（经 O*NET 呈现）。"
+              "BLS直接EP2025—2035核就业增长年均空缺与典型入门，非招聘数。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.65",
@@ -29426,7 +29444,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于补充了解该职业的国家工资与就业趋势展示（美国口径，不适用其他法域）。"
+              "O*NET本职概览核身份任务，旧2024就业不当当前。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.fit.personality-fit-block.66",
@@ -29467,22 +29485,22 @@
                 "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "FinCEN赌场记录报告FAQ",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员国家工资",
+                "entity": "内华达NRS463人员登记",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/41-2012.00"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
-                "entity": "美国 FinCEN 赌场记录与报告与合规计划要求",
+                "entity": "FinCEN赌场记录报告FAQ",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting-0"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               }
             ]
           },
@@ -29497,7 +29515,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在兑换与兑付与清点与审计与记录与老虎机区服务中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成法律或合规或投资意见或对个案的结论；凡涉及许可与登记与受限或自我排除顾客判定、兑付与中奖签名与信用与授信决定、大额与异常交易与可疑活动上报、赔付例外与争议裁定、以及顾客身份与信用与交易数据保护，应由主管与合规岗位与辖区监管机关按组织流程与所在地法规处置。本页所述为美国等允许持牌博彩辖区的合法岗位；中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。"
+              "法域边界｜六卡编辑场景非发生率，按实际辖区内控核身份签名兑付；本职信用核查补充不排除自身授权判断。内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。 FinCEN机构现金入出分聚合、SAR保密与员工内部升级分开，不每笔监管批准。中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.8",
@@ -29525,7 +29543,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 41-2012.00 的任务与工作情境（与他人持续接触 87%、每天进行面对面讨论 85%、每天进行影响他人与机构资源的决策 64%、必须非常精确或高度准确「极其重要」84% 与「非常重要」16%、错误后果为「极其严重」14% 与「非常严重」13% 与「严重」24% 与「较严重」14% 与「完全不算严重」35%、持续或几乎持续站立 75%、持续或几乎持续做重复动作 77%、每天需处理不愉快或愤怒或不礼貌的人 67%、每天承受严格期限的时间压力 56%、竞争度「中等竞争」34% 与「完全不竞争」30% 与「极度竞争」16% 与「高度竞争」16%、工作安排固定常规 89%、暴露于污染物「每天」54%、佩戴防护装备「从未」87%）与持牌场所合规实务及辖区规则与反洗钱与客户身份识别要求归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "证据范围｜本页依据 O*NET 41-2012.00 的任务与工作情境（与他人持续接触 87%、每天进行面对面讨论 85%、每天进行影响他人与机构资源的决策 64%、必须非常精确或高度准确「极其重要」84% 与「非常重要」16%、错误后果为「极其严重」14% 与「非常严重」13% 与「严重」24% 与「较严重」14% 与「完全不算严重」35%、持续或几乎持续站立 75%、持续或几乎持续做重复动作 77%、每天需处理不愉快或愤怒或不礼貌的人 67%、每天承受严格期限的时间压力 56%、竞争度「中等竞争」34% 与「完全不竞争」30% 与「极度竞争」16% 与「高度竞争」16%、受访者选择规律班表 89%、暴露于污染物「每天」54%、佩戴防护装备「从未」87%）与持牌场所合规实务及辖区规则与反洗钱与客户身份识别要求归纳；工资与就业数字仅作背景信息，不用于风险评估。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.10",
@@ -29623,7 +29641,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规则核对金额与筹码价值并双人复核关键兑付，票据与系统记录一致后才办理与兑付；超出授权或金额不一致时立即停止并移交主管"
+              "核当前金额、票据与系统，超机器余额签名条件按实际规则，复核人数依内控；缺件冲突或越权先暂停内部升级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.17",
@@ -29679,7 +29697,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程清点与审计与发放与回收并双人复核，差异须如实记录并上报而非自行补平；发现账实不符或短缺立即上报并按流程处置"
+              "核实点、备用金实际发放回收及版本；复核人数按内控，差额如实记录内部上报，不私补或他窗盈余抵差。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.21",
@@ -29735,7 +29753,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程取得中奖签名并保留货币兑换与授权表单与交易对账的准确记录，并按保存期限归档；发现记录缺失或不可追溯立即补齐并报告"
+              "按真实条件取得签名并保原收据授权表单对账版本，缺记录报告并据有效原件补核；不得倒签或把未核数据写已核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.25",
@@ -29791,7 +29809,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构反洗钱与客户身份识别规程记录与识别异常并按时限上报，不得自行弱化控制；发现大额或异常或可疑活动立即按路径上报"
+              "适用赌场按规则分别聚合现金入出不净额相抵；员工异常记录内部升级，机构履行报告，不向顾客透露SAR，金额不自动等犯罪。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.29",
@@ -29903,7 +29921,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；工资数字不用于风险评估。"
+              "FinCEN适用赌场机构记录报告，现金入出分计与SAR保密，不授每笔员工监管确认。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.37",
@@ -29917,7 +29935,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "NRS463内华达gaming employee定义登记，非全国人人同牌。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.38",
@@ -29931,7 +29949,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对赌场记录与报告与合规计划与客户身份识别与异常活动上报要求；非投资或法律意见。"
+              "FinCEN机构规则，员工按真实岗位内部路径记录升级，具体报送主体与时限另核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.risk.career-risk-cards.39",
@@ -30019,33 +30037,33 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 教育栏显示 96% 需要高中文凭或同等学历、2% 需要上过大学但无学位、1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造）。",
-                  "Job Zone 为 1-2 级（SVP 低于 6.0），通常以在岗训练为主；在允许持牌博彩的辖区另有博彩雇员登记与背景核验要求。",
-                  "学历只影响筛选起点，能否独立承担兑换与兑付与清点与审计主要取决于辖区登记与在岗训练与合规考核。"
+                  "新聘问卷与典型入门",
+                  "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。",
+                  "问卷与典型统计不同，不互相覆盖；实际招聘登记训练核。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：辖区博彩雇员登记与年龄与背景核验、现金与凭证处理训练、反洗钱与客户身份识别与现金交易报告培训。",
-                  "涉及中奖兑付与超额赔付与信用与兑现与异常上报的岗位须取得机构授权与合规培训，须另行核对。",
-                  "顾客身份与信用与交易与监控记录的保存与访问须按辖区与雇主合规制度管理；中国大陆除依法批准发行的彩票外赌博为禁止。"
+                  "法域登记与权限",
+                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。",
+                  "中奖签名实际条件及授权按辖区机构，机构报告与员工升级分开。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 兴趣代码 CE（常规型—企业型），偏向按规程与标准处理兑换与筹码与票据与账务信息（子兴趣含会计与办公工作）、以及在柜台与老虎机区沟通与服务中达成结果。",
-                  "工作情境强调与他人持续接触（87%）、面对面讨论（85% 每天）、每天决策（64%）、精确或高度准确「极其重要」（84%）、持续站立（75%）、持续或几乎持续做重复动作（77%）、每天处理不愉快或愤怒的顾客（67%）、每天时间压力（56%）。",
-                  "兴趣与人格数据仅用于自我提问，不构成录用或绩效结论。"
+                  "兴趣与情境用途",
+                  "CE Accounting/Office Work等子兴趣；87持续接触85每日面谈84精确极重要75持续站立77重复。",
+                  "问卷非个体能力阈值或事故概率，不授测评录用效度。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "常用工具：兑换与收银与现金管理系统、筹码与票据与凭证清点与扫描设备、老虎机与中奖监控与兑付系统、抽屉与备用金与对账与报表系统、监控与顾客与交易记录系统。",
-                  "常用资料：兑换与兑付与限额与规则说明、货币兑换与授权表单与交易对账与抽屉清点记录表、客户身份识别与异常活动与升级规程、辖区规则与许可与记录保存要求。",
-                  "限额与兑付与信用与放行与合规以辖区规则与机构授权为准。"
+                  "软件与实际设备",
+                  "O*NET两类Excel表格、Word文字处理例子，非采纳率或编程必需。",
+                  "具体兑换扫描中奖系统另按招聘核；B/V2计算器表格即可。"
                 ]
               }
             ]
@@ -30065,36 +30083,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的持牌博彩场所兑换柜台当班任务（含两位模拟顾客与一份兑换与兑付与限额清单）。",
-                  "一份空白的兑换与兑付与清点与对账方案模板。",
-                  "一份空白的证件与年龄核验与中奖兑付与签名与异常交易上报清单。",
-                  "一份空白的当班现金抽屉与备用金清点与审计表。",
-                  "一支笔与计算器或电子表格（用于金额与筹码价值与对账试算）。",
-                  "计时器（限时 90 分钟）。"
+                  "B/V2完整合成输入",
+                  "B/V2匿名纸面包，现金抽象元、筹码枚，每枚5仅题设，无真实经营。V2替V1：E1实际交100买16枚=80，应找并实找20；V1误写交120。期初抽屉500/筹码100，期末实点425/92。E2收回10枚并实付50；P1合成中奖60凭证签名授权齐且已付；P2声称40票面系统冲突未付；F1向兑换员实发备用金100，实退70；E2复扫原交易已完不再收付。",
+                  "草稿X用V1交120、P2未付40计支、重复E2再付50再收10枚，称抽屉390筹码104并用他窗盈余补差。错误现金式500+120+70-20-50-60-100-40-50=370，声称390也不一致；104筹码是重复收10后错误值。 使用纸笔计算器表格及90分钟，不需真实终端。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：兑换与兑付与对账方案、证件年龄与中奖签名与异常交易清单、当班现金抽屉与备用金清点与审计表。",
-                  "完成一次金额与筹码价值与对账试算，并写出至少两条可能导致核验或资金或记录或合规或顾客风险的情形与对应措施。",
-                  "写出哪些情形必须暂停并升级（证件存疑、受限或自我排除或未成年人、中奖异常或票面与系统不一致、超额兑付、大额或异常或可疑交易、抽屉账实不符、顾客冲突升级、顾客信息外泄）。"
+                  "90分钟抽屉账参考",
+                  "90分钟15核版本、25找零双账、20状态、15交接、15反例；交版本输入/现金筹码公式/状态/交接四作品，保X原稿与改因。参考：E1找零100-16×5=20，净入80。抽屉实入100+70=170，实支20+50+60+100=230，应500+170-230=440，实425减账440=-15；净流出60=500-440=230-170。筹码100-16+10=94，实92减账94=-2枚，估值-10只筹码差不能抵现金。",
+                  "草稿X用V1交120、P2未付40计支、重复E2再付50再收10枚，称抽屉390筹码104并用他窗盈余补差。错误现金式500+120+70-20-50-60-100-40-50=370，声称390也不一致；104筹码是重复收10后错误值。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列核验证件与年龄与办理兑换与兑付与清点与对账与上报的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对身份核验与异常上报与关键兑付与中奖签名写清授权与复核人与记录方式，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "三个状态反例",
+                  "反例1：P2金额核成40但未实际付仍440/94；新合成版本实际付40则400/94，实点若仍425/92现金+25筹码-2，不冒原题结果。 反例2：E2复扫不计仍440/94；错误再付50收10会390/104，仅错误情景非操作方法。P1签名遗失但确已付60不可倒回收入，另记记录待核。",
+                  "反例3：新版本F1又实际退30（累计退100），现金470筹码94，若实点仍425/92则现金-45筹码-2；不是原题已退70版本。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及限额与兑付与赔付例外与信用与放行的最终决定；对证件或授权或受限顾客或中奖异常或数据外泄疑点一律写明暂停与升级并按机构授权上报主管或合规岗位与监管机关；并声明所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。",
-                  "作品只证明你能按本职业的工作方式组织兑换与兑付与记录，不构成资格或胜任证明。"
+                  "纸面边界",
+                  "全匿名合成无真实顾客场所资金交易；P1与P2状态是题设不授现实操作程序，只写合成负责人待办不实际报送，作品不证胜任资格。"
                 ]
               }
             ]
@@ -30114,33 +30128,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用「任务—方法—证据」三列列出你在模拟兑换柜台任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及证件年龄核验与中奖签名与赔付例外与异常上报与数据风险，必须按授权上报而非自行处理。"
+                  "作品1：版本输入",
+                  "列B/V2替V1、E1交100/找20/发16，E2付50/收10、P1已付60、P2未付40、F1实发100退70、复扫不重算；保X原稿改因。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的兑换柜台或合规或现场主管复核你的方案与核验与兑付与清点与风险处置，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示做完了，要展示从核验证件到兑换到兑付到清点与对账与上报的流程与留痕。"
+                  "作品2：找零双账",
+                  "参考：E1找零100-16×5=20，净入80。抽屉实入100+70=170，实支20+50+60+100=230，应500+170-230=440，实425减账440=-15；净流出60=500-440=230-170。筹码100-16+10=94，实92减账94=-2枚，估值-10只筹码差不能抵现金。 另做三状态反例保新版本输入，现金筹码估值不相抵。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的当班摘要（兑换与兑付交易、核验与拒绝与上报事项、备用金与抽屉与对账状态、异常与争议与待办）。",
-                  "摘要中不得出现真实顾客或场所或交易或可识别信息，必要时使用编号与合成数据。",
-                  "注明信息来源与假设，区分实测值与估算与预测值。"
+                  "作品3：收付状态",
+                  "逐项实际收付、待核或重复；金额核成不等已付，P1签名丢失不逆现金已付，备用金发退不是兑换，复扫不重算。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了收银或扫描或对账工具，标注哪些部分由工具生成、哪些由本人核对与修订。",
-                  "说明工具输出在使用前经过了谁的复核与哪次原始资料核对。",
-                  "金额与对账若为示例值，必须标明并说明由授权人员最终确认。"
+                  "作品4：交接摘要",
+                  "写B/V2现金-15筹码-2、P2冲突待核及E2复扫，保原稿不私补；工具生成与本人复算分清，仅合成负责人角色不真实报送。"
                 ]
               }
             ]
@@ -30210,50 +30220,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（核验证件—兑换与找零—中奖兑付与签名—清点抽屉—对账与上报异常）。",
-                  "记录你观察到的证件核验与中奖签名与异常上报与资金与记录要求。"
+                  "第1天30分钟：读13任务与法域，列三个学习问题。",
+                  "标B/V2纸面，信用核查补充不能排除本职。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：班次与营业高峰与夜班与假日、长时间站立与高重复度操作强度、现金与筹码与票据实物处理要求、差错责任约定、与主管与合规与柜台的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "第2天30分钟：列V2全部输入与交易状态。",
+                  "作品1，E1用100不是120，P1已付P2未付F1发退复扫保。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份兑换与兑付与对账方案与金额与凭证记录表样本。",
-                  "按规范列出关键要求（证件与年龄核验与受限名单与自我排除、中奖签名与超额兑付条件、异常与上报路径）。"
+                  "第3天30分钟：算找零20及双账440/94。",
+                  "作品2，现金-15筹码-2，净流60两式、筹码净出6反算不抵差。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次金额与筹码价值与对账试算，并标注假设值。",
-                  "对两个典型风险（未核验或向受限者办理交易、票面与系统不一致）写出核对与报告方案。"
+                  "第4天30分钟：核P2冲突、P1已付与F1发退。",
+                  "作品3，核成金额不等实际付；签名丢失不逆已付现金。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次当班现金抽屉与备用金清点与审计，或一次证件核验与拒绝办理的模拟演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "第5天30分钟：核X五错及式370却称390。",
+                  "作品4保差额、待办及原稿，不私补、不补未知。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的核验与兑付与清点与异常处置。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "第6天90分钟：独立交四作品和三个状态反例。",
+                  "P2新付400/94；错复扫390/104；F1另实退30为470/94，均另版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如辖区雇员登记、反洗钱与客户身份识别培训、中奖兑付与抽屉审计经验），以及下一步行动。"
+                  "第7天30分钟：据版本找零账差与状态留痕作探索判断。",
+                  "列现实法域登记训练权限与合同待核，不把纸面成绩当录用资格。"
                 ]
               }
             ]
@@ -30270,13 +30280,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按辖区与雇主规程完成证件与年龄核验与兑换与兑付与清点与审计并使过程可复核。",
-              "继续：能在高峰与争执场景下坚持合规与记录规范，不因催促或人情弱化核验与上报。",
-              "继续：愿意从窗口找零或引导岗做起并把兑换与兑付与中奖与抽屉与合规要求学清楚。",
-              "停止：难以承受高频兑换与兑付或顾客冲突或高重复度操作或轮班安排，且短期无法改善。",
-              "停止：对证件核验与中奖签名与异常上报与资金与记录边界缺乏警觉，反复出现越权或记录缺失。",
-              "换方向：偏好柜台总账与信用可考虑博彩柜台工作人员；偏好牌局运行可考虑博彩发牌员。",
-              "换方向：偏好现场管理可考虑博彩服务工人一线主管；偏好场所运营可考虑博彩经理；偏好监控与调查可考虑博彩官与博彩调查员。注意：中国大陆除依法批准发行的彩票外赌博受法律严格禁止，上述方向均须先核实所在地法律与授权。"
+              "继续探索：保B/V2完整输入，V1不冒当前。",
+              "继续探索：找零20双账440/94差-15/-2、净流60可复算，单位不相抵。",
+              "继续探索：解释核成未付、复扫及签名丢失不逆已付，3反例与原题分开。",
+              "暂缓：仍把未付当已付或重复交易，先重做纸面题。",
+              "暂缓：用他窗盈余私补或把未知写已核，先练如实记录。",
+              "转向提示：柜台信用或牌局可分别探索柜台工作人员与发牌，另核真实训练授权。",
+              "转向提示：主管经理监控另需经验任命及资格，纸面方法不互认法域权限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.seven-day-decision.1",
@@ -30311,56 +30321,56 @@
             "rows": [
               [
                 "高中文凭或同等学历",
-                "多数岗位",
+                "具体招聘要求高中或同等者",
                 "满足招聘的学历基础",
-                "较普遍",
+                "BLS典型无正式学历要求，招聘与新聘问卷另核",
                 "完成高中或同等学力教育",
-                "按学制",
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
                 "学历不保证取得辖区雇员登记或授权"
               ],
               [
                 "辖区博彩雇员登记与背景核验（如适用）",
-                "持牌场所内所有岗位",
+                "具体法域纳入gaming employee定义者",
                 "满足在持牌场所从业的登记要求",
-                "视辖区要求而定",
+                "内华达纳入gaming employee定义者按463.335登记",
                 "按辖区主管机关要求提交申请并通过核验",
-                "数周至数月",
-                "以辖区主管机关要求为准，本页不提供个人资格结论；中国大陆除依法批准发行的彩票外为禁止"
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
+                "以具体辖区定义申请要求为准；美国分类不授中国经营许可"
               ],
               [
                 "反洗钱与客户身份识别与现金交易报告培训",
-                "所有兑换与兑付岗位",
+                "适用赌场及实际职责需训练者",
                 "降低异常与可疑交易与合规风险",
-                "普遍必需",
+                "适用赌场及具体职责培训，非全国统一证",
                 "参加机构或行业培训并考核",
-                "数小时至数天",
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
                 "培训不等于法定授权或监管认定"
               ],
               [
                 "现金与凭证与抽屉清点与审计训练",
                 "所有涉及资金收付岗位",
                 "降低账实不符与资金差错风险",
-                "普遍必需",
+                "实际兑换抽屉学习重心，非统一证书",
                 "参加机构培训并在岗练习与复核",
-                "数天至数周",
-                "训练不替代内控与双人复核要求"
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
+                "训练不替代内控，复核人数依机构现行规则"
               ],
               [
                 "中奖兑付与赔付例外与签名处置授权",
                 "涉及中奖兑付的岗位",
                 "降低超额兑付与争议风险",
-                "视岗位而定",
+                "具体兑付签名权限按辖区机构核",
                 "机构授权与专项培训与考核",
-                "数天至数周",
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
                 "授权范围以机构与辖区规则为准"
               ],
               [
                 "带教与对账与缴款经验",
                 "转向骨干或主管方向者",
                 "提升承担关键柜台与带教与对账责任的能力",
-                "晋升方向需要",
+                "编辑进阶技能，非自动晋升资格",
                 "多班次实践与内部晋升积累",
-                "数月至数年",
+                "按学校、监管申请或机构训练核时间费用，本页不给统一期限",
                 "不替代合规判定与放行责任"
               ]
             ]
@@ -30377,10 +30387,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、辖区登记与机构授权是三种不同状态：满足招聘条件不等于取得辖区博彩雇员登记或机构兑付与中奖签名与放行与异常处置授权，取得培训与证书不等于获得独立兑付或裁定争议或处置可疑活动的决定权。",
-              "资格边界（二）｜美国 O*NET 教育栏显示 96% 需要高中文凭或同等学历、2% 需要上过大学但无学位、1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造），Job Zone 为 1-2 级（SVP 低于 6.0）；在允许持牌博彩的辖区（如美国内华达州）另有博彩雇员登记与背景核验与辖区交易与记录规则要求。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在对应的合法从业路径；涉足前必须先核实所在地法律与授权。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或辖区主管机关要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人背景核验结论、录用可能性或薪酬承诺。"
+              "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。",
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。",
+              "中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。",
+              "招聘培训证书法定登记与真实兑付授权分别核，时间费用按学校主管机构，不给统一期限。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.credential-boundary.1",
@@ -30395,7 +30405,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。持牌赌场与赛马场与体育投注站兑换柜台与政府相关经营机构常按场所与班次与营业高峰分批发布招聘，且多通过企业直招与内部晋升与行业渠道招募，公开渠道的样本难以代表整体市场；场所规模与老虎机与设备数量与自助兑付与无现金化渗透与夜班与旺季负荷的波动会明显影响用人规模。",
+              "证据不足：未取得本职代表招聘渠道、季节及用人规模样本，不引具体公告。 编辑核发布时间地点、职责、登记训练授权、学历、工时工资小费与差错约定，不编内部晋升或旺季规律。",
               "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型（持牌赌场、赛马场与体育投注站兑换柜台、政府相关经营机构）、岗位职责与授权边界（窗口找零、老虎机区兑付、抽屉清点与审计、备用金管理、清洁与区域服务）、是否要求辖区雇员登记与背景核验与合规培训、工时与班次与夜班与差错责任安排、学历与经历要求、以及薪酬构成（基本工资、班次或夜班或假日补贴、加班或调休）；这些信息比页面往往更能反映真实条件；同时务必先确认所在地法律是否允许该类经营。"
             ]
           },
@@ -30430,10 +30440,10 @@
                 "url": "https://www.onetonline.org/link/localwages/41-2012.00"
               },
               {
-                "entity": "O*NET 资格与训练资料",
+                "entity": "内华达NRS463人员登记",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/41-2012.00"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               }
             ]
           },
@@ -30448,7 +30458,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与经历与考核，以及所在辖区对博彩雇员登记与背景核验与合规培训的要求为准，也不代表取得兑付与中奖签名与放行与记录保存的权限；且所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。"
+              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与经历与考核，以及所在辖区对博彩雇员登记与背景核验与合规培训的要求为准，也不代表取得兑付与中奖签名与放行与记录保存的权限；且所在地法律是否允许该类经营须先行核实（美国代码不授中国经营许可）。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.11",
@@ -30574,7 +30584,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成高中或同等学历（或从窗口收银与顾客服务岗起步） → 按辖区要求办理博彩雇员登记与背景核验 → 接受兑换与兑付与筹码与票据与抽屉清点与对账与反洗钱与客户身份识别与现金交易报告培训 → 在带教下学习证件核验与兑换与兑付与中奖签名与抽屉清点与异常上报 → 通过考核后独立承担兑换与兑付与清点与记录责任 → 在多窗口与高峰与异常处置中积累经验 → 视表现转为带教或合规与运营支持方向，或转向博彩柜台工作人员、博彩发牌员、博彩服务工人一线主管、博彩经理、博彩官与博彩调查员等相邻岗位。须特别说明：中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，本路径仅描述允许持牌博彩辖区的合法岗位，不构成中国大陆从业建议；涉足前必须先核实所在地法律与授权。 逐笔准确、合规意识与资金与记录严谨通常构成门槛，真正决定长期发展的是把高频兑换与兑付做准做全的能力、对中奖异常与受限情形的识别与上报能力，以及在高替代压力（自助兑付与无现金化）下的适应能力。"
+              "编辑学习路径｜按实际招聘法域登记训练权限，学习版本、找零、抽屉现金与筹码记录、凭证签名及内部异常交接。O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。 管理監控需实际经验任命，不自动晋升；B/V2仅纸面观察方法。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.20",
@@ -30602,7 +30612,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国 O*NET 教育栏显示 96% 需要高中文凭或同等学历、2% 需要上过大学但无学位、1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造），Job Zone 为 1-2 级（SVP 低于 6.0）；在允许持牌博彩的辖区（如美国内华达州）另有博彩雇员登记与背景核验与辖区交易与记录规则要求。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与该美国职业对应的合法从事路径；两者法律环境不同，不可互换。"
+              "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。 内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.22",
@@ -30616,7 +30626,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为「实践—训练—登记—授权—负责」的循环：先完成学历与辖区雇员登记与合规培训，再在证件核验与兑换与兑付与清点与对账与上报中积累经验，通过考核后独立承担兑换与兑付与记录并带教；涉及兑付与中奖签名与赔付例外与放行、受限或自我排除顾客与大额与可疑活动判定、以及记录与许可与合规事项时，必须按流程取得相应授权或移交主管与合规岗位与监管机关；并始终先核实所在地法律是否允许该类经营（中国大陆除依法批准发行的彩票外为禁止）。"
+              "登记、机构许可、训练、任命与权限分别核；B/V2四作品不授兑换兑付信用或真实报送权限，异常按内部路径升级。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.23",
@@ -30658,7 +30668,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "本职国家工资2025核全国CA，非就业来源。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.26",
@@ -30672,7 +30682,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于了解该职业通常需要的准备与培训层级（O*NET 训练资料口径）。"
+              "NRS463州人员定义及登记，非全国统一培训资格目录。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.path.career-path-block.27",
@@ -31547,22 +31557,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职2025全国及CA工资",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/localwages/41-2012.00?st=CA"
               },
               {
-                "entity": "O*NET 博彩兑换柜台收银员国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/41-2012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 就业趋势（BLS 2024—2034）",
+                "entity": "现行刑法303法域",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/11033925/index.html"
               },
               {
                 "entity": "O*NET 博彩兑换柜台收银员职业档案",
@@ -31631,7 +31641,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（精确职业 O*NET-SOC 41-2012.00）：2024 年就业约 22,600 人（BLS 职业预测基期，经 O*NET 呈现），2024—2034 年预计增量属「下降（-1% 或更低）」类别，期间约 4,000 个岗位空缺；2025 年中位时薪 17.41 美元、中位年薪 36,220 美元，工资分布从下十分位 24,460 美元到上十分位 60,330 美元。中国大陆部分：除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在与该职业对应的合法经营岗位，且未建立精确对应的公开职业工资与就业统计，按证据政策本页只登记法律边界与缺口，不提供代理数值。"
+              "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。 美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.8",
@@ -31659,7 +31669,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.10",
@@ -31673,7 +31683,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长为负，空缺主要来自替换需求；自助兑付与无现金化渗透与持牌场所规模与老虎机与设备数量共同影响岗位，不能把替换空缺读作净新增。"
+              "本职直接EP-1.9%净-.4千，空缺含转出退出；不证GenAI或自助设备的本职就业因果。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.11",
@@ -31687,7 +31697,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；分行业与分地区细分可能缺失；预测不等于实际招聘数。"
+              "就业预测含自雇口径；本职自雇比例破折号未公布非0，OEWS排自雇；预测非招聘。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.12",
@@ -31715,7 +31725,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 41-2012.00（经 O*NET 呈现）"
+              "BLS本职41-2012直接EP"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.14",
@@ -31729,7 +31739,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 22,600 人（2024）；2024—2034 年增量属「下降（-1% 或更低）」类别；期间约 4,000 个岗位空缺"
+              "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.15",
@@ -31771,7 +31781,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；上下十分位跨度约 2.5 倍，岗位与责任结构与机构类型与地区与班次是主要差异来源。"
+              "90/10约2.5倍仅分布，分位非职责年资，不推岗位班差工资因果。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.18",
@@ -31785,7 +31795,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与班次与夜班或假日补贴；本精确职业的分行业与分地区工资本页未取得，按可见缺口登记；数值取自 O*NET 页面显示的 2025 年数据，后续更新应以当期查询为准；该岗位须在允许持牌博彩的辖区从业。"
+              "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。 CA37350地方非全国36220；四行业工资未取。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.19",
@@ -31827,7 +31837,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 17.41 美元、中位年薪 36,220 美元；分位 24,460 / 29,630 / 41,530 / 60,330 美元"
+              "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.22",
@@ -31869,7 +31879,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆法律禁止赌博与开设赌场，美国持牌博彩岗位不能当作中国大陆可经营的职业路径；国家统计局按行业门类公布平均工资、不区分职业，且无对应合法岗位，行业均值不能替代职业工资，也不得用彩票销售等相邻岗位代填。"
+              "中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.25",
@@ -31911,7 +31921,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国人大网赌博犯罪定罪处罚说明与有界检索"
+              "中国现行刑法303法域及有界统计查阅"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.28",
@@ -31925,7 +31935,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；按证据政策本页展示缺失而不使用代理数字。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.29",
@@ -31939,7 +31949,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径（2025，O*NET 页面显示的 BLS OEWS 数据）；不构成对某一机构或地区的薪酬承诺。"
+              "2025本职全国及CA工资页，非个人工资承诺。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.30",
@@ -31953,7 +31963,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国 2024—2034 就业增长与空缺口径（经 O*NET 呈现）；预测不等于实际招聘。"
+              "BLS直接EP2025—2035核就业增长年均空缺典型入门，非招聘数。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.31",
@@ -31967,7 +31977,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对中国大陆赌博刑事边界与美国持牌博彩岗位不可直接移植；涉足前须先核实所在地法律与授权。"
+              "现行刑法303法域，不由美国职业代码授中国经营许可。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.market-signals.market-signal-card.32",
@@ -32340,7 +32350,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 41-2012.00，本职业为顾客把硬币与代币与筹码兑换为其货币；可能签发赔付并取得顾客在收据上的签名；可能在老虎机区运营兑换亭，并在班次开始时向兑换人员提供备用金，或清点与审计现金抽屉。工作包括为顾客兑换货币与信用与票据或赌场筹码并找零、清点现金并审计现金抽屉、检查证件以核验玩家年龄、按规则维护柜台安全、把每日交易汇总对平以平衡账目、在超额时取得顾客签名、计算玩家赢输的筹码价值、受理信用申请并核验信用参考、在开班时发放备用金、监听中奖铃并兑付、销售筹码与代币与票据、维护准确记录并清洁赌场区域。本页所述为美国等允许持牌博彩辖区的合法岗位；中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。",
+                "answer": "按 O*NET-SOC 41-2012.00，本职业为顾客把硬币与代币与筹码兑换为其货币；可能签发赔付并取得顾客在收据上的签名；可能在老虎机区运营兑换亭，并在班次开始时向兑换人员提供备用金，或清点与审计现金抽屉。工作包括为顾客兑换货币与信用与票据或赌场筹码并找零、清点现金并审计现金抽屉、检查证件以核验玩家年龄、按规则维护柜台安全、把每日交易汇总对平以平衡账目、在奖金超机器内持有金额时取得收据签名、计算玩家赢输的筹码价值、受理信用申请并核验信用参考、在开班时发放备用金、监听中奖铃并兑付、销售筹码与代币与票据、维护准确记录并清洁赌场区域。本页所述为美国等允许持牌博彩辖区的合法岗位；中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q1",
@@ -32350,7 +32360,7 @@
                 ]
               },
               {
-                "answer": "核心区别在对象与产出：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与现金抽屉为对象，完成兑换与找零与兑付与清点与审计，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台总账与信用与兑现与账务为产出；博彩发牌员以赌台牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付记录为产出；博彩服务工人一线主管以班组与现场监督与绩效与合规执行为产出；博彩经理以场所运营与许可与合规管理为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象与产出各不相同，不能跨岗位沿用放行与授信与资金处置的权限。",
+                "answer": "核心区别在对象与产出：本职业以兑换窗口与老虎机区的货币与筹码与票据与兑付与现金抽屉为对象，完成兑换与找零与兑付与清点与审计，产出是已核验并记录的兑换与兑付与账务记录；博彩柜台工作人员以柜台总账与信用与兑现与账务为产出；博彩发牌员以赌台牌局运行与筹码收付为产出；博彩与体育投注写作者跑腿员以投注受理与赔率核对与兑付记录为产出；博彩服务工人一线主管以班组与现场监督与绩效与合规执行为产出；博彩经理以场所运营与许可与合规管理为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象产出重心不同可交叉兼任，不能跨岗位沿用放行与授信与资金处置的权限。 本职含信用核查补充任务，不排除定义内真实授权判断。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.2",
                 "question": "它和博彩柜台工作人员、发牌员、现场主管有什么区别？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q2",
@@ -32360,7 +32370,7 @@
                 ]
               },
               {
-                "answer": "美国口径（精确职业 41-2012.00）：2025 年中位时薪 17.41 美元、中位年薪 36,220 美元；分位 24,460 / 29,630 / 41,530 / 60,330 美元/年（跨度约 2.5 倍）；2024 年就业约 22,600 人，2024—2034 年增量属「下降（-1% 或更低）」类别，期间约 4,000 个岗位空缺。数值取自 O*NET 页面显示的 2025 年 BLS OEWS 数据与 BLS 2024—2034 职业预测（经来源登记核对）；因增长为负，空缺主要来自替换需求，不可读作净新增。上述为美国全国口径，不适用其他法域；OEWS 不含福利与班次与夜班或假日补贴。",
+                "answer": "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。 OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。 美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q3",
@@ -32370,17 +32380,19 @@
                 ]
               },
               {
-                "answer": "没有对应的合法岗位与工资数据。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与 O*NET 41-2012.00 对应的合法经营岗位；公开企业薪酬调查亦未建立与本职业精确对应的全国工资分布。按本页证据政策，中国部分只登记法律边界与「证据不足：」可见标记，展示缺失而不使用行业均值或美国数据推断收入，也不把美国持牌博彩岗位当作中国大陆可经营的职业路径。",
+                "answer": "中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.4",
                 "question": "中国大陆有对应的工资数据或职业路径吗？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "facilities",
+                  "operations",
+                  "hr",
+                  "nbs"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：与他人持续接触 87%、每天进行面对面讨论 85%、每天进行影响他人与机构资源的决策 64%、必须非常精确或高度准确「极其重要」84% 与「非常重要」16%、错误后果为「极其严重」14% 与「非常严重」13% 与「严重」24% 与「较严重」14%、持续或几乎持续站立 75%、持续或几乎持续做重复动作 77%、每天需处理不愉快或愤怒或不礼貌的人 67%、每天承受严格期限的时间压力 56%、竞争度「中等竞争」34% 与「完全不竞争」30% 与「极度竞争」16% 与「高度竞争」16%、工作安排固定常规 89%、暴露于污染物「每天」54%、佩戴防护装备「从未」87%。工作以高峰与老虎机区高频兑换与兑付与逐笔高精度与顾客沟通与高度合规为主，须长时间站立与高重复度操作。",
+                "answer": "O*NET 工作情境显示：与他人持续接触 87%、每天进行面对面讨论 85%、每天进行影响他人与机构资源的决策 64%、必须非常精确或高度准确「极其重要」84% 与「非常重要」16%、错误后果为「极其严重」14% 与「非常严重」13% 与「严重」24% 与「较严重」14%及「完全不算严重」35%、持续或几乎持续站立 75%、持续或几乎持续做重复动作 77%、每天需处理不愉快或愤怒或不礼貌的人 67%、每天承受严格期限的时间压力 56%、竞争度「中等竞争」34% 与「完全不竞争」30% 与「极度竞争」16% 与「高度竞争」16%、受访者89%规律班表（不证无夜班）、暴露于污染物「每天」54%、佩戴防护装备「从未」87%。工作以高峰与老虎机区高频兑换与兑付与逐笔高精度与顾客沟通与高度合规为主，须长时间站立与高重复度操作。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.5",
                 "question": "工作环境和沟通强度如何？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q5",
@@ -32390,7 +32402,7 @@
                 ]
               },
               {
-                "answer": "影响主要在录入与核对与记录与查询环节：兑换与兑付录入与凭证与票据扫描与金额与找零与筹码价值计算、抽屉与备用金与对账台账整理、信用与兑现资料整理、顾客与合规记录整理、培训与合规材料整理可被工具辅助；身份与年龄与受限状态核验、兑付与中奖签名与信用与授信判定、大额与异常与可疑交易的识别与上报、超额兑付与赔付例外与规则解释、现金与筹码与票据实物收付、柜台安全与许可与合规与纪录保存仍由一线人员与主管与合规岗位负责。本职业属中等偏高暴露，且是否采用取决于获准平台与辖区规则；自助兑付与无现金化已替代部分窗口交易，但任务暴露不等于岗位完全替代。",
+                "answer": "证据不足：本轮未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 查询合成草稿为编辑机制，一般扫描计算非GenAI；EP下降-1.9%非完全替代或设备因果，不编消失年。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q6",
@@ -32400,7 +32412,7 @@
                 ]
               },
               {
-                "answer": "O*NET 教育栏显示 96% 需要高中文凭或同等学历、2% 需要上过大学但无学位、1% 需要中学后证书（三项合计 99%，其余 1% 未给，本页不编造）；Job Zone 为 1-2 级（SVP 低于 6.0），通常以在岗训练为主。在允许持牌博彩的辖区（如美国内华达州）另要求办理博彩雇员登记与背景核验并接受反洗钱与客户身份识别与现金交易报告培训；实际以机构与辖区要求为准。",
+                "answer": "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。 内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q7",
@@ -32410,27 +32422,27 @@
                 ]
               },
               {
-                "answer": "「受过培训」「取得课程或证书」「取得辖区雇员登记」「获得机构授权」是四种不同状态。在允许持牌博彩的辖区，从业通常要求博彩雇员登记与背景核验与反洗钱与客户身份识别培训；而中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在对应资格路径。本页列示的准备项不构成任何机构的正式资格清单，也不代表任何辖区许可。",
+                "answer": "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。 中国大陆《刑法》第303条分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达到法定情节的刑事责任；现行《治安管理处罚法》第82条涵盖营利提供赌博条件或参与赌博赌资较大的行为（2026-01-01生效）。《彩票管理条例》第3条规定福彩体彩特许发行及境内禁发售境外彩票；美国职业代码不授中国经营许可。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "r2-pay-1",
+                  "facilities"
                 ]
               },
               {
-                "answer": "常见失效包括：未核验证件与年龄或向未成年人或受限与自我排除者办理兑换与兑付；兑换与找零或筹码价值或兑付金额计算错误或超额兑付越权；现金抽屉账实不符或差异被私下补平；中奖签名收据或授权表单或交易对账记录缺失或不可追溯；大额与异常交易与可疑活动未按反洗钱与客户身份识别与现金交易报告要求识别与上报；未按规则维护柜台安全或顾客争执处置不当或顾客信息泄露。控制要点是按辖区与雇主规程核对与留痕与双人复核、异常与越权事项立即升级，并始终先确认所在地法律是否允许该类经营。",
+                "answer": "六风险卡为编辑场景非发生率；核资格票据金额实付实点与签名记录，不倒签或私补。复核人数按具体内控，员工异常内部升级，机构履行适用报送，现金入出分别聚合、SAR保密。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q9",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "bls",
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年增量属「下降（-1% 或更低）」类别，期间约 4,000 个空缺且主要来自替换需求；自助兑付与无现金化渗透对窗口交易岗位构成压力。可转向博彩柜台工作人员、博彩发牌员、博彩与体育投注写作者跑腿员、博彩服务工人一线主管、博彩经理、博彩官与博彩调查员，以及一般收银与娱乐休闲服务等相邻岗位（需重新学习与补足证据）。中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，上述方向均须先核实所在地法律与授权。",
+                "answer": "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。 相邻转向为编辑学习方向，另核实际经验训练资格，不自动晋升互认。",
                 "id": "gambling-change-persons-and-booth-cashiers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.gambling-change-persons-and-booth-cashiers.q10",
@@ -32452,7 +32464,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 41-2012.00 的职业范围与任务与工作情境与兴趣与教育与准备层级，再取 O*NET 页面显示的 2025 年 BLS OEWS 工资中位与分位与 BLS 2024—2034 职业预测的就业与增长与空缺（经来源登记核对），并以美国 SOC 直接匹配文件与美国 FinCEN 赌场记录与报告要求作为辖区与合规边界参考；中国大陆以中国人大网赌博犯罪定罪处罚说明作为法律边界，未建立与本职业精确对应的合法岗位与统计值，按证据政策展示缺失而不使用代理数字；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "本职O*NET13任务6核心7补充、41活动14详细57情境、2软件；2025全国与CA工资、BLS直接EP2025—2035分开。公共中法域及OEWS方法按实际范围，AI任务仅编辑机制不授量化影响。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.sources.source-card.1",
@@ -32466,7 +32478,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 职业档案与详细资料与定制页与兴趣与训练与证书与国家工资与行业与热门技术与就业趋势、O*NET 数据库、BLS OEWS 与数据总览与就业预测总览与美国 SOC 直接匹配标题文件、美国 FinCEN 赌场记录与报告与合规计划要求、内华达州博彩委员会博彩法规与登记要求与博彩雇员登记申请、国际劳工组织未来工作专题、国家统计局城镇单位平均工资与发布索引、人力资源和社会保障部企业薪酬调查信息、中国人大网赌博犯罪定罪处罚说明，以及 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "25稳定来源按实际URL用途登记；本職工资直接EP、任务软件兴趣及州登记机构合规分别支持，不从稳定id猜用途，通用框架和目录不是职业量化事实。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.sources.source-card.2",
@@ -32480,7 +32492,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 官方页面；O*NET 页面标注数据更新年份为 2026（工资为该页面显示的 2025 年 BLS OEWS 数据、就业与增长与空缺为该页面显示的 2024—2034 预测）；辖区规则与合规与法律来源的期间以各自页面标注为准。"
+              "查阅日期2026-10-03；工资2025、直接EP2025—2035；公共OEWS方法、中国法域统计与NRS沿已有已核范围，非本轮重新读所有辅助来源。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.sources.source-card.3",
@@ -32494,7 +32506,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与本职业对应的合法经营岗位与职业工资与就业统计，按证据政策展示缺失而不使用代理数字；（2）本职业在美国可按行业与分地区读取的工资中位数未取得（O*NET 仅列出政府与艺术娱乐和休闲两个主要行业且未给占比）；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源且无对应合法岗位。三处均保留「证据不足：」标记，不以行业均值、招聘报价、彩票销售等相邻岗位或第三方估算填充；美国数值取自官方页面显示的 2025 年数据，后续更新应以当期查询为准。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 本职4行业工资、代表招聘渠道季节规模、收入因素及GenAI量化影响未取；industry43/32/22/3未给年份，不用份额或组合职业工资代填。"
             ]
           },
           "id": "gambling-change-persons-and-booth-cashiers.sources.source-card.4",
@@ -32517,37 +32529,37 @@
           "data": {
             "entries": [
               {
-                "entity": "博彩兑换柜台收银员相关方向 1",
+                "entity": "霍兰德兴趣探索",
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "博彩兑换柜台收银员相关方向 2",
+                "entity": "MBTI自我反思",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test"
               },
               {
-                "entity": "博彩兑换柜台收银员相关方向 3",
+                "entity": "大五自我反思",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test"
               },
               {
-                "entity": "博彩兑换柜台收银员相关方向 4",
+                "entity": "MBTI自我反思",
                 "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test"
               },
               {
-                "entity": "博彩兑换柜台收银员相关方向 5",
+                "entity": "大五自我反思",
                 "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test"
               },
               {
-                "entity": "博彩兑换柜台收银员相关方向 6",
+                "entity": "本职兑换柜台方向",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/gambling-change-persons-and-booth-cashiers"
@@ -32571,7 +32583,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业范围：为顾客兑换货币与筹码与票据并可能兑付与取得签名并清点与审计现金抽屉。",
                   "用于界定本职业边界与样本岗位与就业与教育口径。"
@@ -32582,12 +32594,12 @@
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员职业档案（41-2012.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/41-2012.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "13 项任务（6 项核心 + 7 项补充）与 41 项工作活动与工作情境明细，用于界定本职业边界。",
                   "用于核对证件与兑换与兑付与清点与对账与安全环节。"
@@ -32598,51 +32610,51 @@
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员详细资料（41-2012.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年就业约 22,600 人；2024—2034 年增量属「下降（-1% 或更低）」类别。",
-                  "期间约 4,000 个岗位空缺，因增长为负主要来自替换需求。"
+                  "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。",
+                  "典型无正式学历要求、无相关经验、短期OJT，与新聘问卷不同。"
                 ],
                 "evidence_type": "official trend display",
                 "id": "ep",
-                "limitation": "预测口径，不含自雇；不代表实际招聘。",
+                "limitation": "就业含自雇口径，本职自雇比例未公布非0；非实际招聘。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩兑换柜台收银员就业趋势（41-2012.00）",
-                "period": "BLS 2024-2034 projections via O*NET",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "BLS本职41-2012就业预测2025—2035",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/41-2012.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "中位时薪 17.41 美元、中位年薪 36,220 美元；10% 分位 24,460 美元/年、25% 分位 29,630 美元/年、75% 分位 41,530 美元/年、90% 分位 60,330 美元/年。",
-                  "用于核对全国中位与分位工资（精确职业 41-2012.00）。"
+                  "2025美国全国OEWS本职年工资10/25/50/75/90分位24,460/29,630/36,220/41,530/60,330美元，小时11.76/14.25/17.41/19.96/29.01美元。",
+                  "CA年中位37350地方非全国36220。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "全国口径，不含福利与班次与夜班或假日补贴；后续更新以页面当期查询为准。",
+                "limitation": "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员国家工资（41-2012.00）",
                 "period": "2025 BLS OEWS wage data via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/41-2012.00"
+                "url": "https://www.onetonline.org/link/localwages/41-2012.00?st=CA"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策与法律边界展示缺失而不使用代理数字。"
+                  "2025城镇单位行业与五大岗位组范围，排个体自由职业非本职值。",
+                  "有界查阅不证明统计不存在，法律与统计分开。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
-                "limitation": "行业门类口径，不区分职业；本职业在中国大陆无对应合法岗位。",
+                "limitation": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 annual wages; published 2026-05-15",
@@ -32653,12 +32665,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "官方标题摘要可查，正文未取得，未核本职映射。",
+                  "访问限制不能当本职统计值。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "证据不足：未取得中国本职精确工资就业；企业薪酬正文未读，不证明统计不存在。",
                 "market": "中国大陆",
                 "name": "人力资源和社会保障部：企业薪酬调查信息",
                 "period": "2025 survey; accessed 2026-08-31",
@@ -32683,68 +32695,68 @@
                 "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明中国大陆除依法批准发行的彩票外赌博与开设赌场受法律严格禁止。",
-                  "美国持牌博彩岗位不能作为中国大陆可经营的职业路径。"
+                  "营利聚众以赌博为业、开赌场及组织中国公民境外赌博法定情节分别规定。",
+                  "美国代码不授中国经营许可。"
                 ],
                 "evidence_type": "legal guidance",
                 "id": "facilities",
-                "limitation": "以法律原文与司法解释为准；该说明为解释性资料。",
+                "limitation": "已核公共法律范围，不从法域推统计不存在。",
                 "market": "中国大陆",
-                "name": "中国人大网：对赌博犯罪如何定罪处罚（法域边界）",
-                "period": "published 2002-04-19; accessed 2026-08-31",
-                "publisher": "中国人大网",
-                "scope": "gambling criminal boundary",
-                "url": "https://www.npc.gov.cn/zgrdw/npc/flsyywd/flwd/2002-04/19/content_293480.htm"
+                "name": "刑法303含修正案十一",
+                "period": "2021相关修正条文",
+                "publisher": "北京市公安局公安交通管理局转载法律",
+                "scope": "中国刑事法域",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/11033925/index.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于定位历年城镇单位平均工资发布。",
-                  "用于核对年度口径发布周期与统计范围。"
+                  "82营利提供条件或参与赌博赌资较大。",
+                  "144生效日期2026-01-01。"
                 ],
                 "evidence_type": "official release index",
                 "id": "operations",
-                "limitation": "发布索引，不含职业级数据。",
+                "limitation": "现行法域与刑法分别核。",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位平均工资统计发布索引与口径说明",
-                "period": "2025 release index",
-                "publisher": "国家统计局",
-                "scope": "release index",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/"
+                "name": "2025修订治安管理处罚法",
+                "period": "2026-01-01生效",
+                "publisher": "国家市场监督管理总局转载",
+                "scope": "82及144条",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2025/art_8a1c722747214869b28c0ad7a0f8bb7a.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明博彩雇员登记需记录雇主与岗位与个人信息。",
-                  "登记与背景核验以主管机关要求为准。"
+                  "福彩体彩依法特许发行，未经批准其他彩票不许。",
+                  "境内禁发售境外彩票，彩票销售不代本职统计。"
                 ],
-                "evidence_type": "official registration form",
+                "evidence_type": "official regulation",
                 "id": "hr",
-                "limitation": "登记程序不等于全国统一资格或无限授权。",
-                "market": "美国",
-                "name": "内华达州博彩委员会：博彩雇员登记申请",
-                "period": "current form; accessed 2026-08-31",
-                "publisher": "Nevada Gaming Control Board",
-                "scope": "gaming employee registration",
-                "url": "https://www.gaming.nv.gov/siteassets/content/forms/Gaming_Employee_Registration_Paper_Application.pdf"
+                "limitation": "福彩体彩特许不授美国职业许可。",
+                "market": "中国大陆",
+                "name": "彩票管理条例",
+                "period": "现行行政法规",
+                "publisher": "司法部行政法规库",
+                "scope": "中国彩票第2/3条",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=292"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "岗位公告中的技术与软件提及汇总。",
-                  "含兑换与收银与筹码清点与对账系统等。"
+                  "两类Microsoft Excel表格、Microsoft Word文字处理。",
+                  "实际收银扫描与中奖设备依招聘核。"
                 ],
                 "evidence_type": "official technology display",
                 "id": "health",
-                "limitation": "技术提及不等同于能力或自动化程度。",
+                "limitation": "例子不是普遍采纳或编程要求。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩兑换柜台收银员热门技术（41-2012.00）",
+                "name": "O*NET本职软件目录",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/hot_tech/41-2012.00"
+                "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32754,7 +32766,7 @@
                 ],
                 "evidence_type": "research paper",
                 "id": "ilo",
-                "limitation": "任务暴露不等于岗位自动消失或具体采用率。",
+                "limitation": "历史辅助来源，本轮不新增精确本职量化影响或资格结论。",
                 "market": "全球",
                 "name": "ILO 未来工作与生成式 AI 任务暴露研究（Working Paper 140）",
                 "period": "ILO Working Paper 140, 2025",
@@ -32763,20 +32775,20 @@
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "兴趣代码为 CE（常规型—企业型）。",
-                  "子兴趣领域含会计与办公工作等常规型方向。"
+                  "CE，Accounting/Office Work等子兴趣。",
+                  "O*NET新聘所需学历问卷96%高中或同等、2%大学无学位、1%中学后证书，合99%不补余项；不是全体从业者学历或台位分层。Zone1–2是准备分组；BLS本职典型入门无正式学历要求、无相关经验、短期OJT，与问卷口径不同，招聘及个人训练另核。"
                 ],
                 "evidence_type": "official interest profile",
                 "id": "editor",
-                "limitation": "兴趣数据不构成录用或适配结论。",
+                "limitation": "兴趣非人格效度，学历新聘问卷非全员。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员职业兴趣（41-2012.00）",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/interest/41-2012.00"
+                "url": "https://www.onetonline.org/link/details/41-2012.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32795,36 +32807,36 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对时点工资与就业口径与覆盖范围。",
-                  "用于核对抽样与缺失限制。"
+                  "正常工时税前含小费佣金生产奖。",
+                  "排自雇福利加班溢价班差非生产奖，非个人实发。"
                 ],
                 "evidence_type": "official statistics overview",
                 "id": "arxiv",
-                "limitation": "覆盖非农机构雇主，不含自雇。",
+                "limitation": "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）数据总览",
-                "period": "2025 OEWS",
+                "name": "BLS OEWS工资定义FAQ",
+                "period": "current methodology",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS national estimates",
-                "url": "https://www.bls.gov/oes/data-overview.htm"
+                "scope": "wage definition",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对预测方法与期间口径。",
-                  "用于核对增长类别与替换需求说明。"
+                  "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。",
+                  "典型无正式学历要求、无经验、短期OJT，不覆盖实际招聘条件。"
                 ],
                 "evidence_type": "official projections overview",
                 "id": "weforum",
-                "limitation": "预测不等于实际招聘。",
+                "limitation": "本职41-2012与一般收银员41-2011及41-2010组合不同，不套组合值。",
                 "market": "美国",
-                "name": "BLS 就业预测总览（Employment Projections）",
-                "period": "2024—2034 projections",
+                "name": "BLS本职直接EP2025—2035",
+                "period": "2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
-                "url": "https://www.bls.gov/emp/"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32859,50 +32871,50 @@
                 "url": "https://www.onetonline.org/link/localcert/41-2012.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Job Zone 1-2 级（SVP 低于 6.0）；教育栏显示 96% 高中文凭或同等学历、2% 上过大学但无学位、1% 中学后证书。",
-                  "通常需要很少至中等程度准备，含在岗训练。"
+                  "463.0157按职责gaming employee非场所人人。",
+                  "463.335登记调查，经营许可个人登记训练授权分开。"
                 ],
-                "evidence_type": "official training directory",
+                "evidence_type": "official state statute",
                 "id": "r2-pay-1",
-                "limitation": "培训路径不等于辖区登记或机构授权。",
+                "limitation": "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。 不冒本轮新读全部州法。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩兑换柜台收银员训练资料（41-2012.00）",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtraining/41-2012.00"
+                "name": "内华达NRS463人员登记",
+                "period": "已有已核公共条文范围",
+                "publisher": "Nevada Legislature",
+                "scope": "Nevada gaming employee",
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业要素与样本岗位名称。",
                   "样本岗位含 Booth Cashier 与 Change Person 与 Slot Attendant 与 Slot Floor Person 与 Vault Cashier 等。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "r2-pay-2",
-                "limitation": "用于边界与要素核对。",
+                "limitation": "样本职位名不证明每人全部任务或互认权限。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员定制职业页（41-2012.00）",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
-                "url": "https://www.onetonline.org/link/custom/41-2012.00"
+                "url": "https://www.onetonline.org/link/summary/41-2012.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年主要行业为政府与艺术娱乐和休闲（O*NET 未给占比）。",
-                  "用于理解雇主类型分布。"
+                  "政府43艺术娱乐休闲32住宿餐饮22其他3%，页面无年份。",
+                  "份额不当工资或因果解释。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "r2-pay-3",
-                "limitation": "用于行业背景，不替代行业工资。",
+                "limitation": "证据不足：未取得本职四行业工资中位数，行业份额非工资。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩兑换柜台收银员行业分布（41-2012.00）",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "period": "页面未给参考年份",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "41-2012.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/41-2012.00"
               },
@@ -32923,52 +32935,52 @@
                 "url": "https://www.onetcenter.org/database.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明 Booth Cashier 与 Change Person 与 Slot Attendant 等样本标题归属本职业岗位族。",
-                  "该岗位为兑换与兑付与清点与审计岗位，不是投注受理或发牌或监控调查岗位。"
+                  "Booth Cashier/Cage Cashier/Change Person/Slot Attendant等实际reported jobtitles。",
+                  "credit reference为本职补充任务，不能用标题排除。"
                 ],
                 "evidence_type": "official taxonomy mapping",
                 "id": "msresearch",
-                "limitation": "用于标题到 SOC 的映射，不构成许可依据。",
+                "limitation": "样本职位名不是法定许可，也不代表岗位任务互斥。",
                 "market": "美国",
-                "name": "美国 BLS：2018 SOC 直接匹配标题文件",
-                "period": "2018 SOC; accessed 2026-08-31",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "SOC direct match titles",
-                "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
+                "name": "O*NET本职reported job titles",
+                "period": "2026职业档案",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "reported title examples",
+                "url": "https://www.onetonline.org/link/summary/41-2012.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明赌场客户身份与交易记录与异常活动识别与人员培训与升级机制要求。",
-                  "一线人员不得自行弱化这些控制。"
+                  "现金入出分别聚合不净额相抵；可疑报告保密。",
+                  "获准kiosk自动支付存在，具体流程授权核。"
                 ],
                 "evidence_type": "official regulatory guidance",
                 "id": "onet-wages",
-                "limitation": "以法规与主管机关指引原文为准。",
+                "limitation": "适用赌场机构记录报送，员工内部升级不等每笔监管批准。",
                 "market": "美国",
                 "name": "美国 FinCEN：赌场记录与报告与合规计划要求",
                 "period": "current guidance; accessed 2026-08-31",
                 "publisher": "Financial Crimes Enforcement Network",
                 "scope": "casino AML compliance",
-                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting-0"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明持牌场所与柜台安全与交易记录与雇员登记要求。",
-                  "用于说明柜台人员须按辖区与雇主程序处理例外与上报。"
+                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或美国全国统一执照。机构经营许可、个人登记、训练及实际兑换信用权限分别核。",
+                  "超机器余额签名是本职O*NET补充任务，实际内控授权另核。"
                 ],
                 "evidence_type": "official jurisdiction regulator",
                 "id": "archivists",
-                "limitation": "以该辖区规则与要求原文为准，不适用其他辖区。",
+                "limitation": "州法范围非全美统一资格或交易规则，不冒本轮重新读全部州法。",
                 "market": "美国",
-                "name": "内华达州博彩委员会：博彩法规与登记要求",
-                "period": "current page; accessed 2026-08-31",
-                "publisher": "Nevada Gaming Control Board",
+                "name": "内华达NRS463博彩人员规则",
+                "period": "已有已核公共条文范围",
+                "publisher": "Nevada Legislature",
                 "scope": "gaming regulations and registration",
-                "url": "https://www.gaming.nv.gov/"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               }
             ]
           },
@@ -33367,7 +33379,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -33389,7 +33401,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方工资方法",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33411,7 +33423,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织专题",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33433,7 +33445,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "通用治理框架",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33455,7 +33467,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业定义",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33477,7 +33489,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方职业兴趣",
             "适用范围": {
               "$item": "gambling-change-persons-and-booth-cashiers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35181,7 +35193,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "privacy"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35212,7 +35224,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
+              "bls",
               "privacy"
             ],
             "id": "record-version",
@@ -35244,7 +35256,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
+              "bls",
               "employer"
             ],
             "id": "personal-data",
@@ -35276,8 +35288,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "bls",
+              "employer"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35308,7 +35320,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "onet",
               "employer"
             ],
             "id": "single-coverage",
@@ -35340,8 +35352,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "bls",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -36064,7 +36076,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-0-gap",
             "industry": {
               "$item": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36085,7 +36097,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-1-gap",
             "industry": {
               "$item": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36106,7 +36118,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-2-gap",
             "industry": {
               "$item": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36127,7 +36139,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-3-gap",
             "industry": {
               "$item": "gambling-change-persons-and-booth-cashiers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36859,7 +36871,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "BLS本职就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "gambling-change-persons-and-booth-cashiers.profile.onet-structured-fields-block.4",
@@ -37939,7 +37951,7 @@
         ]
       },
       {
-        "derivation": "口径｜O*NET OnLine 41-2012.00 页面显示的 2025 年 BLS OEWS 全国年工资中位数（经来源登记核对），对应精确职业 41-2012.00；OEWS 不含福利与班次与夜班或假日补贴；后续更新以官方页面当期查询为准。",
+        "derivation": "OEWS是雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差及非生产奖金。分位未按资历或兑付职责分层，不等个人实发。",
         "display_value": "中位时薪 17.41 美元 / 中位年薪 36,220 美元（2025，BLS OEWS）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37947,7 +37959,7 @@
         "occupation_scope": "本职业：博彩兑换柜台收银员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -37975,63 +37987,137 @@
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034 年（经 O*NET 呈现），对应精确职业 41-2012.00，增量属「下降（-1% 或更低）」类别；预测含替换需求，不等于实际招聘数。",
-        "display_value": "增长 属「下降（-1% 或更低）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）",
+        "derivation": "美国BLS本职41-2012：2025就业22.0千人→2035预测21.6千人，公布净减0.4千人、增长-1.9%，年均岗位空缺3.9千个；自雇比例表内为破折号，非0或已核比例。就业预测包含自雇口径，空缺含职业转出退出需求，非净新增、十年总量或实际招聘；不由圆整人数反算比例。",
+        "display_value": "增长-1.9%（2025—2035，BLS本职41-2012）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
         "occupation_scope": "本职业：博彩兑换柜台收银员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024 年基期（经 O*NET 呈现），对应精确职业 41-2012.00；不含自雇，分行业与分地区细分可能缺失。",
-        "display_value": "就业 约 22,600 人（2024，BLS 职业预测基期，经 O*NET 呈现）",
+        "derivation": "就业预测含自雇口径，自雇比例本职破折号未公布非0。",
+        "display_value": "就业22,000人（2025，BLS本职41-2012）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "本职业：博彩兑换柜台收银员",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜O*NET 呈现的 2024—2034 期间 Projected job openings 字段（约 4,000 个），因增长为负主要来自替换需求；按原文呈现，不可读作净新增岗位。",
-        "display_value": "预计岗位空缺约 4,000 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）",
+        "derivation": "含职业转出退出需求，非净新增、十年总量或实际招聘。",
+        "display_value": "年均岗位空缺3,900个（2025—2035，BLS本职41-2012）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "本职业：博彩兑换柜台收银员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆除依法批准发行的彩票外赌博受法律禁止，无对应的合法经营岗位与职业工资统计",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：博彩兑换柜台收银员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆除依法批准发行的彩票外赌博受法律禁止，无对应的合法经营岗位与职业工资统计",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射41-2012，不以彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：博彩兑换柜台收银员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass"
+        ]
+      },
+      {
+        "derivation": "全国分位非职责资历分层。",
+        "display_value": "29630美元/年（2025全国本职）",
+        "fact_id": "us-wage-q25-2025",
+        "market": "美国",
+        "measure": "工资第25分位",
+        "occupation_scope": "本职41-2012",
+        "period": "2025",
+        "source_refs": [
+          "oews"
+        ]
+      },
+      {
+        "derivation": "全国分位非职责资历分层。",
+        "display_value": "41530美元/年（2025全国本职）",
+        "fact_id": "us-wage-q75-2025",
+        "market": "美国",
+        "measure": "工资第75分位",
+        "occupation_scope": "本职41-2012",
+        "period": "2025",
+        "source_refs": [
+          "oews"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职政府行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-0-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职41-2012",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职艺术娱乐休闲行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-1-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职41-2012",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职住宿餐饮行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-2-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职41-2012",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职其他行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-3-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职41-2012",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
         ]
       }
     ]
@@ -38059,25 +38145,25 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025，预测含自雇口径）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预计岗位空缺（2024—2034）"
+        "label": "美国年均岗位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（法律禁止且无对应统计）"
+        "label": "中国精确职业数据缺口"
       }
     ]
   },
@@ -38092,7 +38178,7 @@
       "text": "博彩兑换柜台收银员"
     }
   },
-  "source_content_sha256": "798b3baf358ee1c15aed7adcee817cd5c97be9fbfce567302c0d7bd0ae66f78d",
+  "source_content_sha256": "5b3c793b15d00ad83e3f1ef3fa3e7a7f5e5f521cb350d9e80eb0dc597d8e6a85",
   "subject": {
     "canonical_slug": "gambling-change-persons-and-booth-cashiers",
     "name": "博彩兑换柜台收银员",

@@ -17,6 +17,18 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-industry-wage-0-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-1-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-2-gap": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-3-gap": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -27,6 +39,12 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
       "item:gambling-managers.ai-impact.ai-impact-table.10": {
@@ -1224,13 +1242,13 @@
         "status": "pending_mapping"
       },
       "item:gambling-managers.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:gambling-managers.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:gambling-managers.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:gambling-managers.path.interview-probation.1": {
         "status": "mapped"
@@ -24122,7 +24140,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的持牌博彩场所运营任务包（仅用于练习流程，不代表任何辖区可实际经营）。请写出运营方案草案：（1）如何制定场馆规则（可提供的游戏种类与赔率、信用授信、餐饮供应），如何设定并维护每局游戏的资金池与赌桌限额；（2）如何编排名工作表与站点安排并保存考勤，如何监控各班次人员配置并在需要时安排轮班与休息与替补，如何培训新员工并评估其绩效，如何面试招聘员工；（3）如何在赌桌间巡视以确保运营依规进行、发牌员遵守场馆规则、玩家没有作弊，如何识别并驱逐疑似作弊者（如算牌者或其他可能改变胜率的人），如何按玩家游玩时长与投注总额决定赠房赠餐与折扣等赠品的发放；（4）如何追踪各赌桌的资金补给并办理所需文书，如何指导编制显示投注额与派彩的汇总表，如何审核运营费用与预算估算与投注账户与收款报告，如何记录与收取或赔付投注并按需开具收据，如何监控向玩家提供的信用，如何通知引座员赌桌空位以便候场玩家入场，如何监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏；（5）如何处理顾客关于派彩错误等投诉，如何解答与解释场馆规则（游戏规则或投注限额），如何在遇到资金或设备异常、投注或派彩争议、疑似作弊或异常与可疑活动、信用或合规问题、人员与顾客冲突、记录缺失、需要上报等情况时按辖区与雇主规程暂停、通知与升级。使用公开资料与模拟数据作答，不使用任何真实场所、顾客或交易信息。"
+              "编辑探索｜M/V2匿名纸面核资格排班、独立资金余额、实付费用及投诉状态；作品只观察复算、权限与留痕，不授现实经理资格。"
             ]
           },
           "id": "gambling-managers.quick-decision.fit-decision-checklist.2",
@@ -24136,7 +24154,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "适配信号｜O*NET 关注点：与他人持续接触（79% 为持续接触）、每天进行面对面讨论（93% 每天）、每天进行影响他人与机构资源的决策（86% 每天）、与工作组或团队共同工作极其重要（81%）、协调或带领他人极其重要（77%）、必须非常精确或高度准确「极其重要」（62%）与「非常重要」（28%）、不做监督下做决策的自由「很大」（51%）与「有一定」（33%）、每天使用电子邮件（69%）与每天使用电话（57%）、对他人健康与安全「很高」责任（53%）。若你愿意在高度规管的场所中同时承担经营决策与人员与合规责任，并能在高频沟通中保持判断与记录一致，本职业的日常要求与你的工作方式更接近。"
+              "适配信号｜O*NET 关注点：与他人持续接触（79% 为持续接触）、每天进行面对面讨论（93% 每天）、每天进行影响他人与机构资源的决策（86% 每天）、与工作组或团队共同工作极其重要（81%）、协调或带领他人极其重要（77%）、必须非常精确或高度准确「极其重要」（62%）与「非常重要」（28%）、不受监督时做决策的自由「很大」（51%）与「有一定」（33%）、每天使用电子邮件（69%）与每天使用电话（57%）、对他人健康与安全「很高」责任（53%）。若你愿意在高度规管的场所中同时承担经营决策与人员与合规责任，并能在高频沟通中保持判断与记录一致，本职业的日常要求与你的工作方式更接近。"
             ]
           },
           "id": "gambling-managers.quick-decision.fit-decision-checklist.3",
@@ -24150,7 +24168,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示：错误后果为「极其严重」（29%）与「非常严重」（31%）与「严重」（18%），「完全不算严重」仅 13%；每天需处理不愉快或愤怒或不礼貌的人（26% 每天，49% 每周以上）；竞争度为「极度竞争」（21%）与「高度竞争」（26%）；每天承受严格期限的时间压力（34% 每天，31% 每周以上）；工作周超过 40 小时（47%）；身体接近程度为「中等接近（一臂之内）」（59%）与「非常接近」（18%）；持续或几乎持续站立（28%）与约一半时间站立（33%），持续或几乎持续坐着（22%）与少于一半（37%）；公开演讲每天（20%）。本职业以场所运营与定价与人员与合规与反洗钱控制为核心：一次定价或授信或派彩争议处置不当、一次作弊或异常与可疑活动未识别与上报、一次排班或资金或记录或合规失职，都可能造成执照与罚款与声誉与资金后果；此外赌博在中国大陆受法律严格限制，涉足前必须核实所在地法律与授权，若你难以在高度规管且责任集中的管理环境中长期承担决策后果与合规压力，应把这些作为需要认真权衡的现实成本。"
+              "谨慎信号｜O*NET 同时显示：错误后果为「极其严重」（29%）与「非常严重」（31%）与「严重」（18%），「完全不算严重」仅 13%；每天需处理不愉快或愤怒或不礼貌的人（26% 每天，49% 每周至少但非每天）；竞争度为「极度竞争」（21%）与「高度竞争」（26%）；每天承受严格期限的时间压力（34% 每天，31% 每周至少但非每天）；工作周超过 40 小时（47%）；身体接近程度为「中等接近（一臂之内）」（59%）与「非常接近」（18%）；持续或几乎持续站立（28%）与约一半时间站立（33%），持续或几乎持续坐着（22%）与少于一半（37%）；公开演讲每天（20%）。本职业以场所运营与定价与人员与合规与反洗钱控制为核心：一次定价或授信或派彩争议处置不当、一次作弊或异常与可疑活动未识别与上报、一次排班或资金或记录或合规失职，都可能造成执照与罚款与声誉与资金后果；此外赌博在中国大陆受法律严格限制，涉足前必须核实所在地法律与授权，若你难以在高度规管且责任集中的管理环境中长期承担决策后果与合规压力，应把这些作为需要认真权衡的现实成本。"
             ]
           },
           "id": "gambling-managers.quick-decision.fermat-decision-card.6",
@@ -24164,7 +24182,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项运营任务上同时完成三件事：把运营做实（制定场馆规则与游戏种类与赔率与授信与餐饮政策、设定并维护每局资金池与赌桌限额、编排出勤与站点安排并保存考勤、监控班次人员配置与轮班休息替补、培训与评估与面试招聘员工、巡视赌桌并识别与驱逐作弊者、按游玩与投注决定赠品发放、追踪赌桌资金补给与文书、指导编制投注与派彩汇总表、审核费用与预算与投注账户与收款报告、记录与收付投注并开收据、监控玩家信用、通知空位、监控博彩大厅并移动或安装游戏、处理顾客投诉与解释场馆规则）、把合规与资金与人员管住（许可与登记与反洗钱与客户身份识别与年龄限制、信用与投注与派彩与资金记录、异常与可疑活动识别与上报、顾客与员工数据保护）、并承担可核验的管理责任（对场所运营与定价与人员与合规与经营结果负责并按辖区与雇主规程上报与交接）。建议用一次可核验的体验（为虚构场所完成一份运营规则与资金池设置方案与异常上报清单、独立设计一版排班与人员配置与考勤流程、或做一次投注账户与收款报告与费用审核复核）来检验，而不是仅依据兴趣问卷的结论。"
+              "独立完成M/V2四作品与三反例，不需真实场所资金或资深人签认；真实经验、训练、登记和管理任命另核。"
             ]
           },
           "id": "gambling-managers.quick-decision.fermat-decision-card.7",
@@ -24186,7 +24204,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜博彩经理的工作大体可以分成三类：一是运营与规则与定价（计划与指导或协调赌场内的博彩运营，制定可提供的游戏种类与赔率与信用授信与餐饮供应等场馆规则，设定并维护每局游戏的资金池与赌桌限额，监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏，追踪各赌桌的资金补给并办理所需文书，指导编制显示投注额与派彩的汇总表），二是人员与顾客与赠品（编排名工作表与站点安排并保存考勤，监控各班次人员配置并安排轮班与休息与替补，面试招聘员工、培训新员工并评估其绩效，在赌桌间巡视以确保运营依规进行且发牌员遵守场馆规则且玩家没有作弊，识别并驱逐疑似作弊者，按玩家游玩时长与投注总额决定赠房赠餐与折扣等赠品的发放，通知引座员赌桌空位以便候场玩家入场，处理顾客关于派彩错误等投诉，解答与解释场馆规则），三是资金与合规与记录（记录与收取或赔付投注并按需开具收据，监控向玩家提供的信用，审核运营费用与预算估算与投注账户与收款报告，落实许可与登记与反洗钱与客户身份识别与年龄限制要求并识别与上报异常与可疑活动）。三类工作循环衔接：制定规则与限额—编排人员与巡场—运行与监控牌局与资金—审核与记录与合规上报。"
+              "三类任务重心可交叉：经营规则与游戏知识及营销、人员巡场与顾客、资金与合规记录；来源任务不是所有人统一分工。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.1",
@@ -24214,7 +24232,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "运营与规则与定价｜计划与指导｜计划与指导或协调赌场内的博彩运营，就可能的问题制定政策（游戏种类与赔率与信用授信与餐饮供应），并可能负责制定场馆规则。",
+              "经营规则与游戏知识营销｜政策推广｜按实际授权制定游戏种类赔率信用餐饮政策，熟悉场内游戏与策略并营销推广赌场；非获利教学。",
               "限额与大厅｜资金池与游戏布局｜为每局游戏设定并维护资金池与赌桌限额，追踪各赌桌的资金补给并办理所需文书，监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏。",
               "人员与培训｜排班与招聘与绩效｜编排名工作表与站点安排并保存考勤，监控各班次人员配置并安排轮班与休息与替补，面试招聘员工、培训新员工并评估其绩效。",
               "巡场与秩序｜防作弊与赠品｜在赌桌间巡视以确保运营依规进行且发牌员遵守场馆规则且玩家没有作弊，驱逐疑似作弊者（如算牌者），按游玩时长与投注总额决定赠品发放，通知引座员赌桌空位。",
@@ -24233,7 +24251,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜每天进行面对面讨论（93% 每天）；每天使用电子邮件（69% 每天，22% 每周以上）；每天使用电话（57% 每天，29% 每周以上）。\n联系强度｜与他人持续接触（79% 为持续接触，20% 为大多数时间接触）；身体接近程度为「中等接近（一臂之内）」（59%）与「非常接近」（18%）。\n团队与带领｜与工作组或团队共同工作极其重要（81%）与非常重要（15%）；协调或带领他人极其重要（77%）与重要（14%）。\n决策与自主｜每天进行影响他人与机构资源的决策（86% 每天）；不做监督下做决策的自由为「很大」（51%）与「有一定」（33%）。\n精确与后果｜必须非常精确或高度准确「极其重要」（62%）与「非常重要」（28%）；错误后果为「极其严重」（29%）与「非常严重」（31%）与「严重」（18%），「完全不算严重」（13%）。\n顾客与压力｜每天需处理不愉快或愤怒或不礼貌的人（26% 每天，49% 每周以上）；每天承受严格期限的时间压力（34% 每天，31% 每周以上）；竞争度为「极度竞争」（21%）与「高度竞争」（26%）。\n责任与安全｜对他人健康与安全为「很高」责任（53%）与「高」责任（19%）与「中等」责任（28%）。\n体力与节奏｜持续或几乎持续站立（28%）与约一半时间站立（33%）；持续或几乎持续坐着（22%）与少于一半时间坐着（37%）；持续或几乎持续用双手操作与控制与感知（28%）与超过一半时间（21%）；持续或几乎持续做重复动作（18%）与超过一半时间（28%）。\n环境与安排｜每天暴露于污染物（21%，从未 49%）；佩戴常见防护或安全装备「从未」（74%）；工作安排为「固定常规」（89%），工作周超过 40 小时（47%）。"
+              "沟通方式｜每天进行面对面讨论（93% 每天）；每天使用电子邮件（69% 每天，22% 每周至少但非每天）；每天使用电话（57% 每天，29% 每周至少但非每天）。\n联系强度｜与他人持续接触（79% 为持续接触，20% 为大多数时间接触）；身体接近程度为「中等接近（一臂之内）」（59%）与「非常接近」（18%）。\n团队与带领｜与工作组或团队共同工作极其重要（81%）与非常重要（15%）；协调或带领他人极其重要（77%）与重要（14%）。\n决策与自主｜每天进行影响他人与机构资源的决策（86% 每天）；不受监督时做决策的自由为「很大」（51%）与「有一定」（33%）。\n精确与后果｜必须非常精确或高度准确「极其重要」（62%）与「非常重要」（28%）；错误后果为「极其严重」（29%）与「非常严重」（31%）与「严重」（18%），「完全不算严重」（13%）。\n顾客与压力｜每天需处理不愉快或愤怒或不礼貌的人（26% 每天，49% 每周至少但非每天）；每天承受严格期限的时间压力（34% 每天，31% 每周至少但非每天）；竞争度为「极度竞争」（21%）与「高度竞争」（26%）。\n责任与安全｜对他人健康与安全为「很高」责任（53%）与「高」责任（19%）与「中等」责任（28%）。\n体力与节奏｜持续或几乎持续站立（28%）与约一半时间站立（33%）；持续或几乎持续坐着（22%）与少于一半时间坐着（37%）；持续或几乎持续用双手操作与控制与感知（28%）与超过一半时间（21%）；持续或几乎持续做重复动作（18%）与超过一半时间（28%）。\n环境与安排｜每天暴露于污染物（21%，从未 49%）；佩戴常见防护或安全装备「从未」（74%）；工作安排为「固定常规」（89%），工作周超过 40 小时（47%）。"
             ]
           },
           "id": "gambling-managers.profile.work-context-block.1",
@@ -24247,7 +24265,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "运营与规则说明｜以场所运营与场馆规则为起点，按辖区许可与雇主制度先明确游戏种类与赔率与信用授信与餐饮政策与赌桌限额，再编排人员与巡场与监控牌局与资金；涉及定价与授信与限额调整与派彩争议与作弊疑点与异常与可疑活动的，按规程核对与授权后办理，出现不一致时暂停并移交上级或合规岗位处置。"
+              "核规则、游戏、营销和预算；具体权限依机构。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.2",
@@ -24261,7 +24279,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业与工资口径｜本职业在美国劳工统计局（BLS）职业就业与工资统计（OEWS 2025）与 BLS 2024—2034 职业预测（经 O*NET 呈现并经来源登记核对）中对应精确职业 11-9071.00：2025 年全国年工资中位数为 93,220 美元（时薪 44.82 美元），第 10 分位 55,960 美元、第 90 分位 164,350 美元；就业 2024 年约 5,100 人，2024—2034 年预计增量属「低于平均（1% 至 2%）」类别，期间约 600 个岗位空缺。上述为美国全国口径，不适用其他法域。"
+              "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。 OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。"
             ]
           },
           "id": "gambling-managers.profile.onet-structured-fields-block.2",
@@ -24289,7 +24307,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆法域边界｜中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止；国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业，且未建立与本职业精确对应的全国职业工资分布。因此本页中国部分只登记法律边界与统计缺口，既不使用行业均值或美国数据推断收入，也不把美国持牌博彩岗位当作中国大陆可经营的职业路径；涉足相关业务前必须先核实所在地法律与授权。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-managers.profile.onet-structured-fields-block.3",
@@ -24303,7 +24321,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "合规与巡场说明｜按机构流程核对场馆规则与资金池与赌桌限额与人员配置与信用与投注状态，确认年龄段核验与信用授信与异常与可疑活动上报路径后方可运营；涉及派彩争议与投注例外与信用授信与作弊疑点与资金差异时要按规定核对与授权并记录，不自行裁定或私下处理；发现作弊线索或异常或可疑活动或资金账实不符要立即启动调查并按流程报告，而不要自行调整或掩盖。"
+              "核排班、训练、巡场和投诉；疑点按权限处理。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.4",
@@ -24317,7 +24335,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测口径｜本页美国就业与增长与空缺取 O*NET 呈现的 BLS 2024—2034 职业预测（经来源登记核对）：就业 2024 年约 5,100 人，预计增量属「低于平均（1% 至 2%）」类别，期间约 600 个岗位空缺（含替代需求）；预测含替换需求，不等于实际招聘数；中国与美国数据分别列示，不拼接、不换算。"
+              "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-managers.profile.onet-structured-fields-block.4",
@@ -24359,7 +24377,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按机构流程记录场馆规则与资金池与赌桌限额、人员排班与考勤与绩效、巡场与防作弊与赠品发放、投注与派彩与信用与收据、费用与预算与投注账户与收款报告审核、投诉与异常与可疑活动与交接事项；发现作弊线索或资金账实不符或合规异常时立即按授权上报，不自行调整或放行或私下处理。"
+              "留当前版本、账目、未知与升级依据。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.6",
@@ -24373,7 +24391,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以场所运营与定价与人员与合规与反洗钱控制为对象，产出是合规运营的场所与牌局与资金与许可结果；总经理与运营经理以机构整体运营与战略与资源为产出；财务经理以财务规划与报表与资金为产出；餐饮服务经理以餐饮服务运营与成本与顾客体验为产出；住宿经理以住宿运营与客房与顾客体验为产出；运动员与体育竞赛选手以竞赛表现与成绩为产出；博彩服务工人一线主管以班组排班与现场监督与绩效为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象与产出各不相同，不能跨岗位沿用定价与授信与放行与许可证照与资金处置的权限。"
+              "边界结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以场所运营与定价与人员与合规与反洗钱控制为对象，产出是合规运营的场所与牌局与资金与许可结果；总经理与运营经理以机构整体运营与战略与资源为产出；财务经理以财务规划与报表与资金为产出；餐饮服务经理以餐饮服务运营与成本与顾客体验为产出；住宿经理以住宿运营与客房与顾客体验为产出；运动员与体育竞赛选手以竞赛表现与成绩为产出；博彩服务工人一线主管以班组排班与现场监督与绩效为产出；博彩官与博彩调查员以监控与调查与取证为产出。对象产出重心不同可交叉兼任，不能跨岗位沿用定价与授信与放行与许可证照与资金处置的权限。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.7",
@@ -24387,7 +24405,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的核心理念｜同组与相邻岗位大多以「在受高度规管的场所或行业内提供合规运营并可核验的结果」为目标，差别在于对象与产出：有的以场所博彩运营与定价与合规为对象，有的以机构整体运营与战略为对象，有的以财务规划与报表为对象，有的以餐饮服务运营为对象，有的以住宿运营为对象，有的以竞赛表现与成绩为对象，有的以班组与现场监督为对象，有的以监控与调查为对象。"
+              "相邻方向以整体运营、财务、餐饮、住宿、竞赛、班组或监控重心比较，可交叉，不将所有相邻行业都称高度规管；真实资格权限分别核。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.8",
@@ -24443,7 +24461,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业在持牌赌场内计划、指导或协调博彩运营，并可能负责制定场馆规则：制定可提供的赌博种类与赔率与信用授信与餐饮供应等政策，为每局游戏设定并维护资金池与赌桌限额，追踪各赌桌的资金补给并办理所需文书，监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏；编排名工作表与站点安排并保存考勤，监控各班次人员配置并安排轮班与休息与替补，面试招聘员工、培训新员工并评估其绩效，在赌桌间巡视以确保运营依规进行且发牌员遵守场馆规则且玩家没有作弊，驱逐疑似作弊者，按玩家游玩时长与投注总额决定赠房赠餐与折扣等赠品发放，通知引座员赌桌空位，处理顾客关于派彩错误等投诉，解答与解释场馆规则；记录与收取或赔付投注并按需开具收据，监控向玩家提供的信用，指导编制投注与派彩汇总表，审核运营费用与预算估算与投注账户与收款报告。常见用人单位包括持牌赌场与博彩服务运营商与部分住宿娱乐场所内的博彩运营部门；工作以频繁决策与协调带领与巡场与顾客投诉与高度合规为特点，错误后果可能从严重到极其严重不等；涉及许可与合规与反洗钱与信用与定价与赔付裁定的权限与资格由辖区监管机关与持牌雇主确定。官方定义原文：Plan, direct, or coordinate gambling operations in a casino. May formulate house rules."
+              "按实际授权制定政策、人员安排、投诉和资金判断；核心含游戏知识及营销推广。错误问卷29%极严重31%很严重18%严重13%不严重，未显示余项不补，非事故率或人人同后果。"
             ]
           },
           "id": "gambling-managers.profile.definition-block.11",
@@ -24527,7 +24545,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的责任主体｜博彩经理对场所博彩运营与定价与人员与合规与资金与记录落实负责，对按辖区与雇主规则完成的运营与资金与合规结果负责；涉及许可与登记与信用与定价与赔付争议裁定、作弊与异常与可疑活动调查与上报、以及罚款与执照与纪录保存等事项，由上级与合规岗位与辖区监管机关决定，本职业在授权范围内承担相应管理责任。"
+              "权限｜经理可在授权范围作经营政策、人员、投诉、赠品和资金判断；缺件越权内部升级，机构履行适用监管报送，不每笔监管确认。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.17",
@@ -24541,7 +24559,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的权限与批准｜同组与相邻岗位的权限来自机构授权与行业规范与辖区规则，通常不包含对定价与授信与赔付争议与放行自行判断的跨岗权限；涉及争议与例外与异常交易与作弊疑点与合规的事项应移交上级与合规岗位与监管机关。"
+              "机构许可、个人登记、游戏规则、限额、信用、赔付与数据权限分别核，纸面M/V2不授现实权限。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.18",
@@ -24555,7 +24573,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜制定场馆规则与游戏种类与赔率与授信与餐饮政策与设定资金池与赌桌限额须在辖区许可与雇主授权范围内进行，部分事项须报上级或监管备案；涉及信用授信与定价与赔付争议与例外裁定、玩家年龄与受限状态判定、疑似作弊与异常与可疑活动调查与上报、以及记录与许可与合规事项，应按规定升级或移交上级与合规岗位与监管机关，不得越权操作或承诺。"
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。 员工内部交接与机构法定报告分开。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.19",
@@ -24583,7 +24601,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的结论边界｜当期结论只陈述可核验的运营与规则与资金与人员与合规事实并区分实测值与估算值；不得对许可证照或顾客资格或争议的合法性作出未经授权的判断；涉及作弊与异常交易与许可与合规与争议的事项必须升级或移交，口径也要经得住上级与合规岗位与监管检查的复核。"
+              "结论按当前来源区分已核、估计、未知；经理在授权内判断经营、投诉与资金，疑点缺件越权内部升级，机构履行适用报告，不把所有事项都排除本职决定权。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.21",
@@ -24667,7 +24685,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜O*NET 显示本职业 Job Zone 为 1-2 级（SVP 低于 6.0），教育栏显示 57% 需要高中文凭或同等学历、30% 需要上过大学但无学位、7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造）；本职业为管理岗，实际多以经验与在岗训练为主。"
+              "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.27",
@@ -24695,7 +24713,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜本职业常按营业时段与高峰安排工作并含夜班与周末与假日，工作周超过 40 小时（47%），部分岗位时间压力较大（每天 34%），薪酬构成常含基本工资与绩效或奖金，须书面确认工时与绩效与奖金与加班口径。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 实际合同核工时基本工资奖金纳排加班班差福利，规律班表不保证无夜班。"
             ]
           },
           "id": "gambling-managers.profile.career-quick-answers-block.29",
@@ -24830,7 +24848,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以场所博彩运营与定价与人员与合规与反洗钱控制为对象，产出是合规运营的场所与牌局与资金与许可结果；总经理与运营经理以机构整体运营与战略与资源为产出；财务经理以财务规划与报表与资金为产出；餐饮服务经理以餐饮服务运营与成本与顾客体验为产出；住宿经理以住宿运营与客房与顾客体验为产出；运动员与体育竞赛选手以竞赛成绩与表现为产出。对象与产出各不相同，不能跨岗位沿用定价与授信与放行与许可证照与资金处置的权限。"
+              "结论｜本职业与相邻岗位的核心差别在「对象与产出」：本职业以场所博彩运营与定价与人员与合规与反洗钱控制为对象，产出是合规运营的场所与牌局与资金与许可结果；总经理与运营经理以机构整体运营与战略与资源为产出；财务经理以财务规划与报表与资金为产出；餐饮服务经理以餐饮服务运营与成本与顾客体验为产出；住宿经理以住宿运营与客房与顾客体验为产出；运动员与体育竞赛选手以竞赛成绩与表现为产出。对象产出重心不同可交叉兼任，不能跨岗位沿用定价与授信与放行与许可证照与资金处置的权限。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24844,7 +24862,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "证据说明｜下表比较对象来自 O*NET 职业分类与在售公开资料，用于帮助区分相邻职业的工作内容与选择适配，不构成资格、录用或薪酬结论。各职业的工资与就业须按各自 SOC 口径分别核对，本表不做数值比较，也不把某一职业的工资当作另一职业的代理；本页涉及持牌博彩岗位，选择前须先核实所在地法律与授权。"
+              "编辑比较｜本职20任务含经营规则、游戏知识、营销推广、人员巡场投诉及资金；六方向按对象产出重心比较，可兼任，训练权限不互认。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.9",
@@ -24872,7 +24890,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业以场所博彩运营与定价与人员与合规与反洗钱控制为对象，制定场馆规则与限额并对运营与资金与合规结果负责；其他岗位分别以机构整体运营与战略、财务规划与报表、餐饮服务运营、住宿运营、竞赛表现为核心，通常不对博彩定价与授信与许可证照与反洗钱控制负责。"
+              "经理与财务、餐饮、住宿、整体运营及竞赛重心不同，非互斥清单；本职可制定餐饮供应政策、赠品与营销，不排相关经营职责。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.11",
@@ -24928,7 +24946,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：总经理与运营经理以机构整体运营与战略与资源与绩效为产出，负责跨部门目标与预算与人事顶层安排；本职业以场所博彩运营与定价与人员与合规为核心，通常在机构整体战略下对博彩板块负责，不承担全机构战略与全部职能管理职责。"
+              "整体运营以跨部门战略资源重心，本职以博彩板块经营重心；实际可能兼任，不以分类排除整体管理职责。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.15",
@@ -24984,7 +25002,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：财务经理以财务规划与预算与报表与资金与税务与内控为产出，负责会计与资金与合规报告；本职业以博彩运营与定价与人员为核心并对博彩板块经营与合规负责，通常不承担机构财务报告与资金管理职责（但需审核博彩相关的费用与预算与投注账户与收款报告）。"
+              "财务方向侧重财务规划报表，本职可审核费用预算投注账户收款报告；重心可交叉，实际权限另核。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.19",
@@ -25040,7 +25058,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：餐饮服务经理以餐饮服务运营与成本与食品安全与顾客体验为产出；本职业以博彩运营与定价与人员与合规为核心，可能就餐饮供应制定政策（作为场馆规则的一部分）但不负责餐饮日常运营。"
+              "餐饮方向侧重日常服务成本食品安全，本职可制定餐饮供应政策；重心可交叉，不排兼任。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.23",
@@ -25096,7 +25114,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：住宿经理以住宿运营与客房与预订与顾客体验为产出；本职业以博彩运营与定价与人员与合规为核心，可能参与赠房等赠品政策但不负责住宿日常运营。"
+              "住宿方向侧重客房预订体验，本职可决定赠房政策；重心可交叉，不排兼任。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.27",
@@ -25208,7 +25226,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "过渡｜本页把相邻岗位按「对象与产出」并列，目的是帮助你判断自己想长期投入哪一类场所运营与合规或行业管理与竞赛岗位。无论选择哪一方向，真正决定能否上手的是对辖区规则与合规与运营与记录的理解、把定价与人员与资金与合规管好做全的能力，以及通过机构与监管要求的登记与培训；并且中国大陆除依法批准发行的彩票外赌博受法律严格禁止，涉足前必须先核实所在地法律与授权；兴趣问卷只用于提出问题。"
+              "编辑转向｜先选想投入的对象产出，再核具体职责经验任命和适用登记；竞赛财务餐饮等不一概套博彩许可，纸面和兴趣问卷不替真实准入。"
             ]
           },
           "id": "gambling-managers.direction-comparison.adjacent-career-comparison-table.35",
@@ -25237,16 +25255,16 @@
                 "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "entity": "O*NET 博彩经理就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "BLS 职业就业与工资新闻稿（OEWS）",
+                "entity": "OEWS工资定义",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/news.release/ocwage.htm"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "entity": "ILO 未来工作（生成式 AI 与就业）专题",
@@ -25267,10 +25285,10 @@
                 "url": "https://www.onetonline.org/link/summary/11-9071.00"
               },
               {
-                "entity": "O*NET 博彩经理职业兴趣",
+                "entity": "O*NET本职代码与要素",
                 "id": "link-7",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/interest/11-9071.00"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
                 "entity": "O*NET 博彩经理详细资料",
@@ -25279,10 +25297,10 @@
                 "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "OEWS工资定义",
                 "id": "link-9",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
                 "entity": "ILO 未来工作（生成式 AI 与就业）专题",
@@ -25297,34 +25315,34 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 博彩经理就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-12",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 博彩经理详细资料",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-13",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET本职软件",
+                "id": "link-14",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "entity": "O*NET 博彩经理就业趋势（BLS 2024—2034）",
-                "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
-              },
-              {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职任务",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
@@ -25333,16 +25351,16 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 博彩经理职业档案",
+                "entity": "O*NET本职概览",
                 "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/11-9071.00"
               },
               {
-                "entity": "O*NET 博彩经理国家工资",
+                "entity": "O*NET本职任务",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               }
             ]
           },
@@ -25399,7 +25417,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用数字工具做投注与派彩与信用录入与对账统计、辅助识别账实不一致与异常；赔付争议与例外与作弊疑点与大额与异常交易的判定与上报仍由本人按规程与合规岗位确认。"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.13",
@@ -25427,7 +25445,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具做多部门与高峰排班与绩效与资金与报告统计、培训与合规与场馆规则清单与模拟材料整理、异常与争议汇总；重大定价与授信与可疑活动判断由本人与合规岗位确认。"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.15",
@@ -25455,7 +25473,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用工具做数据分析与知识管理与培训材料；许可与合规与异常与定价例外与纪录保存结论须人工核准并留痕。"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.17",
@@ -25469,7 +25487,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业处于中等的生成式 AI 文本与数据任务暴露（投注与派彩与信用录入、排班与考勤、费用与投注账户与收款报告审核、异常与监控记录整理）：核心工作包含投注与派彩与信用记录、费用与预算与收款报告审核、排班与绩效与合规记录，这些环节与结构化数据与文本相关，因此录入与核对与汇总与草拟可被一定加速。AI 与数字工具最可能改变的是「录入与核对与汇总与查询环节」——投注与信用与派彩记录录入、费用与投注账户与收款报告草拟与对账、排班与考勤与绩效台账、场馆规则与合规与培训材料整理；而制定场馆规则与定价与赔率与授信政策、设定资金池与赌桌限额、作弊与异常与可疑活动的识别与调查与上报、赔付争议裁定、许可与合规与纪录保存决策仍由本人与合规岗位与上级负责。技术可行不等于组织采用（须取决于获准平台与辖区规则），也不等于岗位减少。"
+              "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 合成排班账目与交接草稿可试为编辑机制，普通系统不等GenAI。O*NET八软件类别：员工排班、Outlook邮件、HRMS人力、浏览器、Office套件、PowerPoint演示、Excel表格、Word文字；目录例子非全员采用、必须编程或GenAI采用率。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.18",
@@ -25511,7 +25529,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-9071.00 就业趋势（BLS 2024—2034）"
+              "BLS本职直接EP2025—2035"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.21",
@@ -25553,7 +25571,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资的时点估计；不含福利与奖金，不适用于其他法域。"
+              "OEWS工资定义FAQ"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.24",
@@ -25651,7 +25669,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类与数据库"
+              "O*NET本职代码与职业要素"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.31",
@@ -25665,7 +25683,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对职业代码与分类归属；不构成任职或许可依据。"
+              "本职11-9071.00的代码及兴趣任务等职业要素，非登记许可或完整数据库方法。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.32",
@@ -25679,7 +25697,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是录入与核对与汇总与查询环节；定价与授信与赔付争议裁定、作弊与异常与可疑交易的识别与调查与上报、许可与合规与纪录保存、人员与资金与场所运营决策始终由管理者与合规岗位负责。技术可行、组织采用（取决于获准平台与辖区规则）与岗位结果三者必须分开判断。"
+              "实际经理授权内判断，不承诺所有事项永远人工或必须每笔上级监管批准。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.33",
@@ -25693,7 +25711,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "投注与派彩与信用录入与费用与投注账户与收款报告与对账统计可被工具加速"
+              "编辑建议试合成资料草稿，提速幅度采纳率未核，不给暴露等级。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.34",
@@ -25833,7 +25851,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以场所运营与定价与人员与合规为主，工具可增强记录与汇总但难以替代定价与决策与合规判断"
+              "机制推断｜草稿可能受工具影响，不自行授政策信用资金数据权限；一般技术可行不证明本职减少。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.44",
@@ -25889,7 +25907,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本精确职业（11-9071.00）全国口径，但仍不含福利与奖金"
+              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.48",
@@ -26029,7 +26047,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 职业预测（经 O*NET 呈现）"
+              "BLS本职直接EP2025—2035"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.58",
@@ -26057,7 +26075,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业就业 2024 约 5,100 人、增量属「低于平均（1% 至 2%）」类别、期间约 600 个空缺含替换需求，不可读作净新增岗位"
+              "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.60",
@@ -26099,7 +26117,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果：任务变化是否导致岗位增减，取决于持牌场所规模与游戏种类与电子或自动化游戏装置渗透与管理层级结构，不能由技术可行直接推断。"
+              "岗位结果需具体采用、需求与组织资料；本轮未核本职因果效应，不由普通电子系统或技术可行推岗位减少。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.63",
@@ -26113,7 +26131,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部分自动化会压缩运营与记录岗位（电子与自动化牌桌与下注终端与合规与分析系统已承担部分统计与监控），但核心工作仍要在持牌场所内制定场馆规则与定价与授信、编排人员与巡场、识别并调查作弊与异常与可疑活动、处理顾客投诉与赔付争议、承担许可与合规与纪录保存责任；工具能替代的是记录与汇总与计算与草拟，不能替代经营判断与合规决策与人员管理。"
+              "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 本职增长3.6%非AI因果，普通系统不证完全替代或永久存续。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.64",
@@ -26127,7 +26145,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 11-9071.00（任务与工作情境）"
+              "O*NET本职任务与BLS直接EP，非GenAI量化研究。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.65",
@@ -26141,7 +26159,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有牌局与注额与派彩与信用系统、监控与博彩大厅与异常记录与调查系统、费用与投注账户与收款报告与对账系统、排班与考勤与绩效系统，以及合规与培训材料工具；具体以机构与辖区许可为准。"
+              "O*NET八软件类别：员工排班、Outlook邮件、HRMS人力、浏览器、Office套件、PowerPoint演示、Excel表格、Word文字；目录例子非全员采用、必须编程或GenAI采用率。 实际招聘技能另核，典型入门不指定程序语言。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.66",
@@ -26155,7 +26173,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 预测（口径说明）"
+              "O*NET本职软件目录。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.67",
@@ -26169,7 +26187,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对场馆规则与定价与信用的判断能力、对作弊与异常与可疑活动的识别与调查与合规上报能力、对顾客投诉与赔付争议的处置与沟通能力、对人员与资金与场所运营的统筹与决策能力，以及在高度规管环境下承担经营与合规责任的意愿与经验。"
+              "编辑机制｜合成排班检查、费用去重、账目复算解释及投诉交接草稿可试；收益未核，真实版本资格金额实付状态由当前输入复核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.68",
@@ -26183,7 +26201,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资口径）"
+              "本职实际任务提供机制依据，非采纳效率统计。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.69",
@@ -26197,7 +26215,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不相同。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，美国持牌博彩岗位不能当作中国大陆可经营的职业路径；涉足相关业务前必须先核实所在地法律与授权。"
+              "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。 OOH组合服务3%或20,200空缺不可替本职3.6%或600。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.70",
@@ -26211,7 +26229,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "BLS直接EP2025—2035本职11-9071。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.71",
@@ -26225,7 +26243,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先明确工具输出与定价与授信与赔付与异常上报与记录由谁复核、依据什么辖区规则与许可与雇主合规制度、出现错误如何回退，并核对顾客与员工身份与交易数据的权限与留存期限与审计追踪；定价与授信与例外与异常上报决策不得由工具自动完成。"
+              "生成文字不自行取得合同付款权；获准系统可依有效制度执行，机构及岗位负责输入权限复核回退，不断所有工具不能自动执行。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.72",
@@ -26239,7 +26257,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF（治理原则）"
+              "NIST一般治理不授赌场合同付款许可。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.73",
@@ -26253,7 +26271,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "顾客与员工身份与交易与投注与自我排除信息属敏感个人信息，须限于许可与合规与反洗钱目的并按最小必要与留存期限与权限管理；不得把顾客与交易数据传输到未授权外部服务，跨境与对外提供须另行评估并履行程序；监控与记录按辖区保存期限管理。"
+              "未取得可靠本职消失年；2025—2035预测不等消失时点或永久存在。证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.74",
@@ -26267,7 +26285,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业范围（边界）"
+              "本职任务与预测不支持消失年份。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.75",
@@ -26281,7 +26299,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用三层证据判断：技术可行、组织是否采用（取决于获准平台与辖区规则）、岗位结果（就业预测为低于平均）；并结合本地持牌场所规模与游戏种类与电子与自动化游戏装置渗透与管理层级结构，而不是只看工具演示。"
+              "编辑先学经理实际权限、游戏知识与经营规则、人员安排、资金与费用实付及留痕，再核真实相关经验任命登记；软件目录不等必须编程。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.76",
@@ -26295,7 +26313,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类（分类归属）"
+              "O*NET任务及BLS典型入门，非个人录用承诺。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.77",
@@ -26309,7 +26327,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任前言｜效率可以外包给工具，判断与后果不能。以下五步是采用任何数字工具前后都必须保住的人工责任点。"
+              "五步为编辑核对清单，不把人工复核或复核人数写成统一法定流程。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.78",
@@ -26323,7 +26341,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "资格与许可：场所与岗位的经营与登记与许可状态由本人按辖区与雇主规程核对，工具不替代许可证照与登记核验。"
+              "资格｜分别核机构许可、岗位权限和适用个人登记；员工顾客年龄受限要求依适用制度。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.79",
@@ -26337,7 +26355,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "定价与授信：游戏种类与赔率与信用授信与赌桌限额由本人与合规岗位按规则与授权确定，工具草拟须经人工核准。"
+              "版本｜按有效经营规则与实际授权实施经理判断，疑点缺件内部升级，不全排本职决定权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.80",
@@ -26351,7 +26369,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "作弊与异常：作弊疑点与异常与可疑活动的识别与调查与上报由本人与合规岗位按反洗钱与客户身份识别要求完成，工具结果须人工复核。"
+              "账目｜各资金池独立复算调拨不当收入，已付待核与重复分开，不净额掩差。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.81",
@@ -26365,7 +26383,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录与数据：投注与派彩与信用与费用与收款报告与异常记录须真实完整，顾客与员工敏感数据须限定用途，不得用工具生成未经核实的内容或对外发送。"
+              "数据｜按适用法律依据权限必要范围处理，PIPL先核适用，不把所有交易字段自动定为敏感或上传未授权服务。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.82",
@@ -26379,7 +26397,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及定价与授信与赔付争议与例外与许可与合规与争议的事项须经上级与合规岗位与监管机关确认并留痕。"
+              "异常｜疑似作弊非犯罪认定，经理按权限保事实处理、越权内部升级；机构履行适用报告，不每次监管批准。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.83",
@@ -26435,7 +26453,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "定价与授信与异常上报须经授权人员与合规岗位确认"
+              "核当前授权与来源，经理可作自身判断；疑点越权内部升级，不所有人上级逐笔批准。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.87",
@@ -26533,7 +26551,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "规则与定价与限额由本人与合规岗位按授权确定"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.94",
@@ -26561,7 +26579,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "草拟可辅助，决策由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.96",
@@ -26589,7 +26607,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "排班与人员配置由本人与管理团队确定"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.98",
@@ -26617,7 +26635,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "台账可辅助，配置决策由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.100",
@@ -26645,7 +26663,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "巡场与防作弊由本人与监控与安保完成"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.102",
@@ -26673,7 +26691,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "异常提示可辅助，识别与处置由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.104",
@@ -26687,7 +26705,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在赌桌间巡视并识别与驱逐作弊者"
+              "巡视核规则与记录疑点，按有效权限处理疑似作弊者；观察不等犯罪认定。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.105",
@@ -26701,7 +26719,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "投注与信用与审核由本人与财务按规程完成"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.106",
@@ -26729,7 +26747,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计算与草拟可辅助，实物与确认由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.108",
@@ -26757,7 +26775,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "投诉与规则解释由本人与各岗位按规则完成"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.110",
@@ -26785,7 +26803,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "话术可辅助，处置与答复由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.112",
@@ -26813,7 +26831,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "合规落实与异常上报由本人与合规岗位完成"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.114",
@@ -26841,7 +26859,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "清单可辅助，合规判断由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.116",
@@ -26869,7 +26887,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "大厅运营与游戏布局由本人与运营团队决策"
+              "编辑机制｜可试合成资料草稿，真实对应判断依经理与岗位有效权限，疑点越权内部升级；机构履行适用报告，不每笔人工或合规确认，量化效果未核。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.118",
@@ -26897,7 +26915,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据可辅助，决策由人负责"
+              "编辑机制｜对应任务可用合成资料试草稿或核对；实际经营规则、人员安排、投诉、资金和数据依有效经理权限，不承诺永久人工或已核效率，保当前输入未知并内部升级越权。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.120",
@@ -26925,7 +26943,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "小结｜一句话：记录与汇总与查询变快，定价与决策与合规不变。工具可以帮你整理投注与派彩与收款报告记录更快、统计与对账更省心、排班与绩效台账更清楚、场馆规则与合规与培训材料更省力，但场馆规则与定价与授信是否合规、作弊与异常与可疑活动是否识别与上报、赔付争议是否按规则处置、人员与资金与大厅运营是否管好、许可与合规与纪录保存是否到位，仍然是管理者与合规岗位的责任；此外中国大陆除依法批准发行的彩票外赌博受法律严格禁止，涉足前必须先核实所在地法律与授权。"
+              "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 工具草稿是编辑机制，非已证提速或替代率。"
             ]
           },
           "id": "gambling-managers.ai-impact.ai-impact-table.122",
@@ -26947,7 +26965,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 44.82 美元 / 中位年薪 93,220 美元（2025，BLS OEWS）"
+              "中位时薪44.82美元 / 中位年薪93,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.7",
@@ -26961,7 +26979,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 11-9071.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与奖金与分红。"
+              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.8",
@@ -26989,7 +27007,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担部分运营与事务性职责的岗位，不代表入职起薪；本岗位绩效与奖金差异较大，公开统计难以完整反映。"
+              "全国10分位55960，非新手或小场所专属。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.10",
@@ -27017,7 +27035,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型（持牌赌场与博彩服务运营商）与地区与场所规模差异较大。"
+              "全国25分位72570，非年资管理层级。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.12",
@@ -27045,7 +27063,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担核心运营与合规与人员管理职责的岗位，不代表全部资深人员。"
+              "全国75分位122990，非大型场所专属。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.14",
@@ -27073,7 +27091,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数大型持牌场所与高责任岗位影响，个体可达性有限；本口径上下十分位跨度约 2.9 倍。"
+              "全国90分位164350；90/10约2.9仅分布，非规模奖金因果或个人上限。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.16",
@@ -27087,7 +27105,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 5,100 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "就业5,600人（2025，BLS本职11-9071）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.17",
@@ -27101,7 +27119,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "口径｜就业预测含自雇，本职7.7%；边界｜非OEWS雇员工资或实际招聘。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.18",
@@ -27115,7 +27133,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「低于平均（1% 至 2%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长3.6%（2025—2035）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.19",
@@ -27129,7 +27147,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「低于平均（1% 至 2%）」类别）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "口径｜直接EP本职11-9071；边界｜非AI因果或个人结果。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.20",
@@ -27143,7 +27161,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 600 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均岗位空缺600个（2025—2035）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.21",
@@ -27157,7 +27175,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的期间空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 600 个）；边界｜来自替换需求与有限增长，按原文呈现，不可读作净新增岗位。"
+              "口径｜年均空缺含转出退出；边界｜非净新增十年总量或招聘。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.22",
@@ -27171,7 +27189,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业以场所运营与定价与人员与合规与反洗钱控制为主，生成式 AI 的文本与数据任务暴露为中等；本页不对其 AI 影响评分，仅说明可被工具辅助（投注与派彩与信用记录录入、费用与投注账户与收款报告草拟与对账、排班与考勤与绩效台账、异常与监控记录整理、场馆规则与合规与培训材料整理）与必须由人负责（制定场馆规则与定价与授信、设定资金池与赌桌限额、作弊与异常与可疑活动识别与调查与上报、赔付争议裁定、许可与合规与纪录保存）的边界，并注明是否采用取决于获准平台与辖区规则。"
+              "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.23",
@@ -27185,7 +27203,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜计划、指导或协调赌场内的博彩运营；可能负责制定场馆规则。工作含制定可提供的赌博种类与赔率与信用授信与餐饮供应等政策，为每局游戏设定并维护资金池与赌桌限额，追踪各赌桌的资金补给并办理所需文书，监控博彩大厅运营表现并在需要时移动游戏与安装新游戏，编排名工作表与站点安排并保存考勤，监控班次人员配置并安排轮班与休息与替补，面试招聘与培训与评估员工，在赌桌间巡视以确保运营依规且发牌员遵守场馆规则且玩家没有作弊，驱逐疑似作弊者，按游玩时长与投注总额决定赠品发放，通知引座员赌桌空位，处理顾客关于派彩错误等投诉，解答与解释场馆规则，记录与收取或赔付投注并按需开具收据，监控玩家信用，指导编制投注与派彩汇总表，审核运营费用与预算估算与投注账户与收款报告；产出为合规运营的场所与牌局与资金与许可结果；且本页所述为美国等允许持牌博彩的辖区内的合法岗位，中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。"
+              "本职11-9071计划指导协调博彩运营并可制定场馆规则；任务含游戏知识营销、政策人员投诉及资金，20任务12核心7补充1新增，经理实际授权内判断。美国分类不授中国经营许可。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.24",
@@ -27213,7 +27231,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "多数运营与管理入门岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.26",
@@ -27227,7 +27245,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 57% 需要高中文凭或同等学历；本职业为管理岗，多数以此为基础并结合经验与在岗训练。"
+              "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.27",
@@ -27255,7 +27273,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "运营与人员管理方向岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.29",
@@ -27269,7 +27287,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 30% 需要上过大学但无学位；部分机构接受以经验与在岗训练为主的路径。"
+              "30%大学无学位为新聘所需问卷，非场所或职责分层。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.30",
@@ -27297,7 +27315,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "合规或专业方向岗"
+              "美国新聘学历问卷"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.32",
@@ -27311,7 +27329,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造）。"
+              "7%中学后证书为新聘所需问卷，三项合94%不补余项，非高层专属。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.33",
@@ -27339,7 +27357,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "持牌场所内相关岗位"
+              "具体法域实际纳入登记定义者"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.35",
@@ -27353,7 +27371,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在允许持牌博彩的辖区（如美国内华达州）须办理博彩雇员登记并按雇主与辖区要求接受反洗钱与客户身份识别与年龄限制培训；中国大陆除依法批准发行的彩票外赌博为禁止，本页不提供任何个人资格或经营结论。"
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.36",
@@ -27437,7 +27455,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "在 O*NET 未单列占比的持牌赌场与博彩服务运营商承担博彩运营与管理职责，按辖区许可与反洗钱与年龄限制要求运营。"
+              "industry本职四行业份额已核，非行业工资，页面未给参考年。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.42",
@@ -27465,7 +27483,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜博彩经理（行业与招聘中常称赌场经理、赌场运营经理、赌场值班经理、博彩经理、赌桌经理、值班经理、老虎机经理、老虎机运营经理、桌面游戏经理、桌面游戏值班经理；在 O*NET 中对应 11-9071.00 Gambling Managers，与博彩服务工人一线主管、博彩发牌员、博彩柜台工作人员、兑换柜台收银员、投注受理员、监控调查岗位与机构总经理分属不同职责与授权层级）"
+              "名称对照：博彩经理、赌场运营经理、赌场值班经理、赌桌经理；样本名称非资格或任务互斥。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.44",
@@ -27479,7 +27497,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜除国家依法批准发行的彩票外，中国大陆的赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与 O*NET 11-9071.00 对应的合法经营岗位；公开企业薪酬调查亦未建立与本职业精确对应的全国工资分布。按证据政策，本页只登记法律边界与统计缺口：展示缺失而不使用代理数字，不以行业均值或美国数据推断收入，也不把美国持牌博彩岗位当作中国大陆可经营的职业路径。"
+              "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.45",
@@ -27493,7 +27511,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径，不区分职业；中国大陆除依法批准发行的彩票外不存在合法博彩经营岗位，故不以任何行业均值或彩票销售等相邻岗位数据代填本职业收入；在允许持牌博彩的辖区，本岗位收入通常与机构类型（持牌赌场、博彩服务运营商、住宿娱乐场所内的博彩运营部门）、场所规模与游戏种类、地区与许可状态、绩效与奖金结构以及资历相关。来源与口径｜中国部分仅登记法律边界与缺口：经有界检索仍未取得可按本职业核验的统计值，因此不以代理数字填充；美国部分来自 O*NET 呈现的 2025 年 BLS OEWS 工资数据与 BLS 2024—2034 职业预测（经来源登记核对）；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。 BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.46",
@@ -27507,7 +27525,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局：城镇单位就业人员平均工资统计口径说明｜https://www.stats.gov.cn/sj/zxfb/"
+              "NBS2025行业及五大岗位组非本职值｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.47",
@@ -27521,7 +27539,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜在允许持牌博彩的辖区，本岗位实际收入通常与机构类型（持牌赌场、博彩服务运营商、住宿娱乐场所内的博彩运营部门）、场所规模与游戏种类与赌桌数量、地区与许可状态以及绩效与奖金结构相关；管理岗位的绩效与奖金在总收入中占比可能明显但不计入官方统计，且部分机构工时安排为不定期并含夜班与假日；本页不给出任何具体金额，也不提供中国大陆收入估计，避免以个别样本或跨境外推代表整体。"
+              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。 合同核实际奖金规则加班班差福利，不推奖金比例或规模因果。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.48",
@@ -27535,7 +27553,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "允许持牌博彩的辖区（如美国内华达州）主要博彩城市"
+              "中国大陆全国"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.49",
@@ -27549,7 +27567,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.50",
@@ -27563,7 +27581,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "其他允许持牌博彩的州或地区"
+              "中国大陆城市地区"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.51",
@@ -27577,7 +27595,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：未取得中国大陆本职城市工资就业，不用美国州或彩票销售代填。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.52",
@@ -27591,7 +27609,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（除依法批准发行的彩票外为禁止）"
+              "中国大陆用工形式"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.53",
@@ -27605,7 +27623,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；不以招聘报价、行业均值或他国数据代填。"
+              "证据不足：未取得中国大陆本职不同用工形式工资就业，不用行业平均或报价代填。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.54",
@@ -27619,7 +27637,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 11-9071.00 / O*NET-SOC 11-9071.00 覆盖计划与指导或协调赌场内博彩运营并可能制定场馆规则的管理人员，与博彩服务工人一线主管、博彩发牌员、博彩柜台工作人员、兑换柜台收银员、投注受理员、监控调查员以及机构总经理与餐饮住宿经理等分属不同对象与产出；国际父级职业分类（如 ISCO-08）只能说明博彩与管理类岗位的宽泛位置，不能替代美国精确职业或辖区许可。中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与该美国职业对应的合法经营分类；两者法律环境与分类统计口径不同，不做数值换算。"
+              "O*NET-SOC11-9071.00 / BLS SOC11-9071；不从ISCO名称推已核精确跨分类映射。"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.55",
@@ -27647,7 +27665,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「低于平均（1% 至 2%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长3.6%（2025—2035，BLS本职11-9071）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.58",
@@ -27661,7 +27679,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 44.82 美元 / 中位年薪 93,220 美元（2025，BLS OEWS）"
+              "中位时薪44.82美元 / 中位年薪93,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-managers.china-salary.career-snapshot-primary-locale.59",
@@ -27683,7 +27701,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 11-9071.00 职业档案与工资数据｜https://www.onetonline.org/link/summary/11-9071.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 博彩经理国家工资｜https://www.onetonline.org/link/localwages/11-9071.00"
+              "O*NET本职2025全国工资｜https://www.onetonline.org/link/localwages/11-9071.00?st=CA；BLS本职直接EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；OEWS工资纳排｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.8",
@@ -27697,7 +27715,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 44.82 美元 / 中位年薪 93,220 美元（2025，BLS OEWS）"
+              "55,960美元/年"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.9",
@@ -27711,7 +27729,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 11-9071.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与奖金与分红。"
+              "口径｜2025全国本职OEWS第10分位55960；边界｜非起薪或机构规模。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.10",
@@ -27725,7 +27743,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 55,960 美元/年（2025，BLS OEWS）"
+              "72,570美元/年"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.11",
@@ -27739,7 +27757,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担部分运营与事务性职责的岗位，不代表入职起薪；本岗位绩效与奖金差异较大。"
+              "口径｜2025全国第25分位72570；边界｜非管理年资组。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.12",
@@ -27753,7 +27771,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 72,570 美元/年（2025，BLS OEWS）"
+              "93,220美元/年"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.13",
@@ -27767,7 +27785,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，机构类型与地区与场所规模差异较大。"
+              "口径｜2025全国第50分位93220；边界｜非个人实发。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.14",
@@ -27781,7 +27799,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 122,990 美元/年（2025，BLS OEWS）"
+              "122,990美元/年"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.15",
@@ -27795,7 +27813,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担核心运营与合规与人员管理职责的岗位，不代表全部资深人员。"
+              "口径｜2025全国第75分位122990；边界｜非大场所专属。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.16",
@@ -27809,7 +27827,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 164,350 美元/年（2025，BLS OEWS）"
+              "164,350美元/年"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.17",
@@ -27823,7 +27841,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数大型持牌场所与高责任岗位影响，个体可达性有限；本口径上下十分位跨度约 2.9 倍。"
+              "口径｜2025全国第90分位164350；边界｜非个人上限奖金因果。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.18",
@@ -27837,7 +27855,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 5,100 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "5,600人（2025，BLS本职11-9071）"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.19",
@@ -27851,7 +27869,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "口径｜2025直接EP本职就业5600含自雇7.7%；边界｜非OEWS工资人数或招聘。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.20",
@@ -27865,7 +27883,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「低于平均（1% 至 2%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长3.6%（2025—2035）"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.21",
@@ -27879,7 +27897,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「低于平均（1% 至 2%）」类别）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "口径｜2025—2035增长3.6%；边界｜预测非AI因果。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.22",
@@ -27893,7 +27911,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 600 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均600个（2025—2035）"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.23",
@@ -27907,7 +27925,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的期间空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 600 个）；边界｜来自替换需求与有限增长，不可读作净新增岗位。"
+              "口径｜2025—2035年均空缺600；边界｜非十年总量或净增。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.24",
@@ -27921,7 +27939,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值取自 O*NET OnLine 11-9071.00 页面显示的 2025 年 BLS OEWS 工资数据与 BLS 2024—2034 职业预测（经来源登记核对），对应精确职业 O*NET-SOC 11-9071.00；不适用于中国大陆或其他法域，也不构成对个人薪酬或录用的承诺；该岗位须在允许持牌博彩的辖区的持牌场所与获准渠道内从业。本页未取得可按行业与分地区读取的本职业工资中位数，均按可见缺口登记；如官方页面在后续期间更新数值，应以页面当期查询结果为准。"
+              "全国本职及CA2025年中位99,230已核，地方非全国93,220；四行业工资未取。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.25",
@@ -27935,7 +27953,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年中位时薪 44.82 美元、中位年薪 93,220 美元，工资分布从下十分位 55,960 美元到上十分位 164,350 美元，跨度约 2.9 倍；差异主要来自场所规模与游戏种类与赌桌数量、机构类型（持牌赌场与博彩服务运营商与住宿娱乐场所内的博彩运营部门）、地区与生活成本、绩效与奖金结构；中位不代表起薪，也不含福利与奖金。"
+              "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。 OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.26",
@@ -27949,7 +27967,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "承担大型持牌场所或跨部门运营与管理职责的岗位，实际收入通常高于小型场所或仅负责单一游戏区的岗位。"
+              "证据不足：未取得本职按场所规模、管理层级或职责的工资因素分解，不断大场所工资较高。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.27",
@@ -27977,7 +27995,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "持牌赌场与博彩服务运营商与住宿娱乐场所内的博彩运营部门，其薪酬与奖金结构差异明显，且随地区与许可状态变化。"
+              "CA2025本职年中位99,230是地方统计，非机构规模或奖金因果；industry份额不证工资。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.29",
@@ -28005,7 +28023,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "管理岗位收入中的绩效与奖金占比可能明显，且随经营与合规表现变化。"
+              "证据不足：未取得本职统一奖金比例、夜班假日溢价及因果分解，实际构成按合同核。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.31",
@@ -28033,7 +28051,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「低于平均（1% 至 2%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "增长3.6%（2025—2035，BLS本职11-9071）"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.33",
@@ -28047,7 +28065,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（Government）"
+              "政府"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.34",
@@ -28075,7 +28093,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年本职业在美国的主要行业之一（未给占比）。"
+              "industry政府35%，页面未给参考年，份额非工资。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.36",
@@ -28089,7 +28107,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "艺术、娱乐与休闲（Arts, Entertainment, and Recreation）"
+              "艺术娱乐与休闲"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.37",
@@ -28117,7 +28135,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年本职业在美国的主要行业之一（未给占比）。"
+              "industry艺术娱乐休闲29%，页面未给参考年，非工资。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.39",
@@ -28131,7 +28149,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "持牌赌场与博彩服务运营商"
+              "住宿与餐饮服务"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.40",
@@ -28159,7 +28177,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "industry住宿餐饮26%，页面未给参考年，非工资。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.42",
@@ -28173,7 +28191,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "其他行业（未给占比）"
+              "其他行业"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.43",
@@ -28201,7 +28219,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "industry其他10%，页面未给参考年，非工资。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.45",
@@ -28215,7 +28233,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 2.9 倍的差距主要来自场所规模与职责范围与机构类型与地区与绩效奖金，本口径为精确职业 11-9071.00 全国口径。"
+              "中位为分布中点非起薪，分位不按规模年资职责分层，实际招聘另核。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.46",
@@ -28229,7 +28247,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利与奖金与分红；本职业管理岗位的绩效与奖金结构明显，公开统计难以完整反映。"
+              "不能固定全年2080小时推个人实发；需真实工时合同及纳排。周47%超40、49%为40，未显示余项不补。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.47",
@@ -28243,7 +28261,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：是否承担大型场所或跨部门运营与合规与人员管理职责，会明显影响收入上限。"
+              "2025本职全国OEWS雇员工资经O*NET显示；方法含小费佣金生产奖，排自雇福利加班溢价班差非生产奖。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.48",
@@ -28257,7 +28275,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字一起看，并结合本地机构类型与场所规模与绩效奖金核对，也可用 O*NET 国家工资页按地区与期间查询，不用单一数字推断个人薪酬。"
+              "核实际工时奖金条件、加班班差福利和税费；未核本职规模或奖金贡献分解，不从分布推原因。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.49",
@@ -28271,7 +28289,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 44.82 美元 / 中位年薪 93,220 美元（2025，BLS OEWS）"
+              "中位时薪44.82美元 / 中位年薪93,220美元（2025，BLS OEWS）"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.50",
@@ -28285,7 +28303,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应资历较浅或仅承担部分运营与事务性职责的岗位；进入该区间的常见原因是从助理或单一游戏区岗起步且尚未承担跨部门运营与合规与人员管理职责。"
+              "全国10分位55960，非入门小机构专属。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.51",
@@ -28299,7 +28317,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手起薪通常接近或低于中位，随职责范围与场所规模与绩效变化上升。"
+              "全国中位93220，非某管理层或个人实发。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.52",
@@ -28313,7 +28331,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应承担大型场所或跨部门运营与合规与人员管理职责的资深岗位；高薪端受场所规模与绩效奖金与责任范围影响较大。"
+              "全国90分位164350，非大型机构奖金上限；90/10约2.9仅分布。"
             ]
           },
           "id": "gambling-managers.us-salary.career-snapshot-secondary-locale.53",
@@ -28438,22 +28456,22 @@
                 "url": "https://www.onetonline.org/link/localcert/11-9071.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "OEWS工资纳排定义",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 11-9071.00 国家工资",
+                "entity": "BLS本职直接EP2025—2035",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 11-9071.00 就业趋势（BLS 2024—2034）",
+                "entity": "O*NET本职任务情境",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               }
             ]
           },
@@ -28482,7 +28500,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.3",
@@ -28525,7 +28543,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜尽责性偏高、情绪稳定性较好、宜人性中等的人更容易适应高频决策与顾客投诉与严格合规；但人格分数不用于录用或适配结论。"
+              "编辑探索｜做M/V2版本排班账目复算，观察方法偏好，不从大五人格推经理绩效。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.6",
@@ -28539,7 +28557,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：人格特质与工作表现的关联为群体统计趋势，不能用于个体预测。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.7",
@@ -28624,7 +28642,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：MBTI 不属于职业资格或能力评估工具，不能作为用工依据。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.11",
@@ -28709,7 +28727,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：属自我探索工具，不构成职业能力或适配结论。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.15",
@@ -28766,7 +28784,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：一般认知能力与学习速度相关，但不能替代辖区登记训练与在岗管理实操与合规意识。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.19",
@@ -28823,7 +28841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：情绪智力测评结果为自我报告，不能作为录用或绩效结论。"
+              "用途边界｜用于自我提问或职业偏好探索，不是已核本职绩效效度、录用门槛或人格评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.23",
@@ -28866,7 +28884,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分、资格判断或对博彩服务的评价；准入以机构招聘条件、学历与经历与辖区博彩相关登记与背景核验与合规培训为准，且所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。"
+              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分、资格判断或对博彩服务的评价；准入以机构招聘条件、学历与经历与辖区博彩相关登记与背景核验与合规培训为准，且所在地法律是否允许该类经营须先行核实（美国代码不授中国经营许可）。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.26",
@@ -28880,7 +28898,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过辖区登记与背景核验、能否在频繁决策与顾客投诉与合规压力下稳定完成运营与定价与人员与合规管理，也不能替代真实现场实践。最可靠的判断方式是用一次真实或模拟的运营任务来检验你如何制定规则与限额与编排人员与监控资金与处理投诉与上报异常，以及是否清楚自己与机构的许可与授权边界。"
+              "M/V2是纸面编辑练习，不是最可靠实际胜任证据；真实相关经验、训练、任命和法域另核。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.27",
@@ -29174,7 +29192,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向的人能做好博彩经理吗？可以。外向有助于顾客与员工沟通与协调带领，但本职业更关键的是运营与合规与资金的判断与落实，外向程度本身不是门槛。"
+              "外向可用于沟通偏好自问；本职绩效效度未核，不把社交偏好或工作接触79%当录用标准。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.48",
@@ -29216,7 +29234,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；职业适应更应通过现场观察或实习或模拟任务与机构与辖区登记培训来验证。"
+              "职业兴趣EC及管理行政、企业倡议、会计子兴趣是职业偏好；未核个体预测效度或绩效趋势。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.51",
@@ -29230,7 +29248,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好能做博彩经理吗？需要资金与帐务与赔率与绩效数据的阅读与核对能力（必须非常精确或高度准确极其重要 62%），但不依赖高等数学；准确性与判断力远比数学水平更重要。"
+              "算账可练核对方法，精确62%极重要28%很重要非智力数学分数门槛。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.52",
@@ -29272,7 +29290,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的运营任务检验：能否完成一份规则与限额与授信方案与异常上报清单、能否设计一版排班与人员配置与考勤流程、或能否完成一次投注账户与收款报告与费用审核复核；这些证据比问卷更能说明适配。"
+              "M/V2作品用于观察复算留痕，未核比问卷更可靠的预测效度，不做录用判断。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.55",
@@ -29314,7 +29332,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的运营任务检验规则与限额制定与人员编排与资金监控与投诉处置与异常上报，并了解目标机构与辖区主管机关对登记与背景核验与合规培训的要求（中国大陆除依法批准发行的彩票外为禁止），再决定是否长期投入。"
+              "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.58",
@@ -29398,7 +29416,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径。"
+              "OEWS工资含小费佣金生产奖金，排自雇福利加班溢价班差非生产奖金，非个人实发。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.64",
@@ -29412,7 +29430,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与学历与培训口径（经 O*NET 呈现）。"
+              "BLS本职直接EP2025—2035，非实际招聘。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.65",
@@ -29426,7 +29444,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于补充了解该职业的国家工资与就业趋势展示（美国口径，不适用其他法域）。"
+              "O*NET本职任务情境及经理权限，非个人胜任评分。"
             ]
           },
           "id": "gambling-managers.fit.personality-fit-block.66",
@@ -29467,22 +29485,22 @@
                 "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "FinCEN赌场记录报告",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               },
               {
-                "entity": "O*NET 博彩经理国家工资",
+                "entity": "内华达NRS463人员规则",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               },
               {
-                "entity": "美国 FinCEN 赌场记录与报告与合规计划要求",
+                "entity": "FinCEN机构合规边界",
                 "id": "link-6",
                 "relation": "career.evidence",
-                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting-0"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               }
             ]
           },
@@ -29497,7 +29515,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在运营与定价与人员与资金与合规中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成法律或合规或投资意见或对个案的结论；凡涉及许可与登记与顾客年龄与受限或自我排除状态判定、信用授信与定价与赔付争议与例外裁定、作弊与异常与可疑活动调查与上报、以及顾客与员工身份与交易数据保护，应由上级与合规岗位与辖区监管机关按组织流程与所在地法规处置。本页所述为美国等允许持牌博彩辖区的合法岗位；中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。"
+              "六卡为编辑风险场景，非本职发生率；经理可作授权内判断，疑点越权内部升级，机构履行适用法定报告。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.8",
@@ -29525,7 +29543,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 11-9071.00 的任务与工作情境（与他人持续接触 79%、每天进行面对面讨论 93%、每天进行影响他人与机构资源的决策 86%、与团队共同工作极其重要 81%、协调或带领他人极其重要 77%、必须非常精确或高度准确「极其重要」62% 与「非常重要」28%、不做监督下做决策的自由「很大」51% 与「有一定」33%、错误后果为「极其严重」29% 与「非常严重」31% 与「严重」18% 与「完全不算严重」13%、每天需处理不愉快或愤怒或不礼貌的人 26%、竞争度「极度竞争」21% 与「高度竞争」26%、每天时间压力 34%、对他人健康与安全「很高」责任 53%、工作周超过 40 小时 47%）与持牌场所合规实务及辖区规则与反洗钱与客户身份识别要求归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "错误后果29%极严重31%很严重18%严重13%不严重，非事故率；47%周超40及89%规律不保证无夜班，具体场所另核。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.10",
@@ -29679,7 +29697,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按机构反洗钱与客户身份识别规程组织观察与记录与调查异常并按时限上报，不得自行弱化控制；发现作弊线索或异常或可疑活动立即按路径组织调查并上报合规岗位与监管机关"
+              "按权限处理资金投诉并保当前金额状态；缺件越权内部升级，机构履行适用报告，不每次组织犯罪调查或监管批准。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.21",
@@ -29693,7 +29711,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "场景｜监控发现一名玩家在短时间内改变下注模式并频繁观察发牌动作，行为符合疑似作弊特征，但现场被建议先观察以免影响顾客体验。"
+              "示例观察只记录具体异常与未知，不把投注模式或疑似作弊直接定为犯罪；本职可按有效场馆规则处理，正式调查权限另核。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.22",
@@ -29777,7 +29795,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客或员工身份与交易与投注数据泄露或超范围使用，或对外提供未履行程序；敏感个人信息侵权与法律责任与声誉损失与监管处罚"
+              "身份或交易记录泄露、超范围使用或未获准外传可能造成个人信息与合规损害；字段敏感性及法律适用具体核，不一概自动敏感。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.28",
@@ -29791,7 +29809,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "顾客与员工数据按最小必要与权限与留存期限管理，对外提供与跨境须另行评估并履行程序；发现数据外泄或超范围使用立即上报并按应急预案处置"
+              "按适用法律依据、岗位权限与必要范围控制记录访问；PIPL先核适用，不所有字段自动敏感，勿传未授权工具。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.29",
@@ -29903,7 +29921,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；工资数字不用于风险评估。"
+              "FinCEN机构赌场记录报告指引，现金入出分别聚合、SAR保密，员工内部升级不同。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.37",
@@ -29917,7 +29935,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "内华达NRS463.0157/335职责定义与登记，非全美统一证。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.38",
@@ -29931,7 +29949,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对赌场记录与报告与合规计划与客户身份识别与异常活动上报要求；非投资或法律意见。"
+              "FinCEN机构合规范围，工具不自行授权限，非每笔监管确认。"
             ]
           },
           "id": "gambling-managers.risk.career-risk-cards.39",
@@ -30019,33 +30037,33 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 教育栏显示 57% 需要高中文凭或同等学历、30% 需要上过大学但无学位、7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造）。",
-                  "Job Zone 为 1-2 级（SVP 低于 6.0），通常以在岗训练与经验积累为主；在允许持牌博彩的辖区另有博彩相关登记与背景核验要求。",
-                  "学历只影响筛选起点，能否独立统筹场所运营与完成定价与人员与资金与合规管理主要取决于经验与辖区登记与在岗训练与管理考核。"
+                  "学历与相关经验",
+                  "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。 经理典型经验及OOH部分雇主大学条件，纸面作品不取代相关经历。",
+                  "真实招聘核学历经验与任命，不能把Zone分组推无经验经理。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：辖区博彩相关登记与年龄与背景核验、反洗钱与客户身份识别与年龄限制培训、场馆规则与合规与人员管理培训。",
-                  "涉及定价与授信与限额与赔付例外与作弊调查的岗位须取得机构授权与专项培训，须另行核对。",
-                  "顾客与员工身份与交易与监控记录的保存与访问须按辖区与雇主合规制度管理；中国大陆除依法批准发行的彩票外赌博为禁止。"
+                  "登记与法域",
+                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。 FinCEN机构记录报告、适用年龄与身份要求由真实法域机构核，训练非全国统一证。",
+                  "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 兴趣代码 EC（企业型—常规型），偏向在经营与管理与协商与服务中达成结果（子兴趣含管理与行政与企业倡议）以及按规程与标准处理资金与帐务与合规信息（子兴趣含会计）。",
-                  "工作情境强调与他人持续接触（79%）、面对面讨论（93% 每天）、每天决策（86%）、与团队共同工作极其重要（81%）、协调或带领他人极其重要（77%）、精确或高度准确极其重要（62%）、决策自由很大（51%）、对他人健康与安全很高责任（53%）。",
-                  "兴趣与人格数据仅用于自我提问，不构成录用或绩效结论。"
+                  "兴趣与工作情境",
+                  "O*NET EC职业偏好，子兴趣管理行政90、企业倡议58、会计49；非个体门槛。 接触79%持续、面谈93%日、决策86%日、团队81%极、领导77%极、精确62%极、自由51%大，均问卷。",
+                  "兴趣或人格不构成录用效度。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "常用工具：牌局与注额与派彩与信用系统、监控与博彩大厅与异常记录与调查系统、费用与投注账户与收款报告与对账系统、排班与考勤与绩效系统、场馆规则与合规与培训管理系统。",
-                  "常用资料：场馆规则与游戏种类与赔率与授信与限额文件、排班与考勤与绩效记录表、投注与派彩与信用与收据与费用与收款报告审核表、客户身份识别与异常活动与升级规程、辖区规则与许可与记录保存要求。",
-                  "定价与授信与限额与放行与合规以辖区规则与机构授权为准。"
+                  "软件与工作资料",
+                  "O*NET八软件类别：员工排班、Outlook邮件、HRMS人力、浏览器、Office套件、PowerPoint演示、Excel表格、Word文字；目录例子非全员采用、必须编程或GenAI采用率。 游戏规则、营销、排班、预算、投诉与记录资料按实际任务使用，不冒系统普遍采用率。",
+                  "具体权限和版本依真实机构核。"
                 ]
               }
             ]
@@ -30065,36 +30083,32 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的持牌博彩场所运营任务（含场所与游戏种类与投注与信用与人员配置清单）。",
-                  "一份空白的场馆规则与资金池与赌桌限额方案模板。",
-                  "一份空白的排班与人员配置与考勤与绩效要点表。",
-                  "一份空白的投注账户与收款报告与费用审核与异常上报清单。",
-                  "一支笔与计算器或电子表格（用于资金与账务与绩效试算）。",
-                  "计时器（限时 120 分钟）。"
+                  "M/V2完整合成输入",
+                  "M/V2全部合成。三时段T1/T2/T3每段60分钟，A/B区各需1名获该区资格者；每人三段恰休1段、其余各上1岗且不能同时两岗。甲仅A、乙仅B、丙AB；都已核资格，甲T2休、乙T3休、丙T1休。管理纸面权限：可排已核资格者、核预算与记录；资格待核者不上岗，未知投诉不写已结，无实际付款依据不计支出。资金开A1000/B800/储备2200；F1储备→A300，F2 A→B200，F3 B→储备100均实际完成，各只计一次，F1复扫不再转；结盘实数A1090/B910/储备2000。费用预算500独立于三资金池；E1实际支付120、E2实际支付80、E3申请90未付，重复E1不再付。投诉C1有收据与核对结果但尚未实际退款50；C2记录矛盾未核金额。旧M/V1草稿X把丙T1上A、甲T2上A、丙T2兼A/B；写三池1300/1000/2200，把内部调拨当收入600；费用410（120+80+90+120），C1/C2均写已退款。",
+                  "纸笔计算器或表格，120分钟；无真实账号场所资金。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 120 分钟内完成：场馆规则与资金池与赌桌限额方案、排班与人员配置与考勤要点表、投注账户与收款报告与费用审核要点与异常与作弊疑点上报清单。",
-                  "完成一次资金与账务与绩效试算，并写出至少两条可能导致许可或资金或防作弊或顾客风险的情形与对应措施。",
-                  "写出哪些情形必须暂停并升级（许可或登记或培训不齐备、玩家年龄或受限或自我排除或未成年人、定价或授信或限额例外、作弊线索或异常与可疑活动、资金账实不符、顾客冲突升级、顾客或员工信息外泄）。"
+                  "120分钟四作品",
+                  "20分钟核资格规则、30排班、30资金费用、20投诉交接、20反例，交权限/排班/双账/交接四件。M/V2唯一排班：T1甲A乙B丙休；T2丙A乙B甲休；T3甲A丙B乙休，每人2岗1休且资格覆盖。资金应有A1000+300-200=1100，B800+200-100=900，储备2200-300+100=2000，总4000不变；实数总4000却A差-10/B差+10/储备0，不能因合计相符消局部差。费用实付120+80=200，预算余300；E3待付90和复扫均不入实际，若仅看申请加实付为290非410。C1核成但未付、C2待核，不计实际退款；未给资金池退款来源，不能擅扣A/B/储备。",
+                  "保X错误：旧休段及资格重叠、三池重复调拨与收入、费用待付重复、投诉未付冒付逐条纠。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列许可与合规与场馆规则与限额与人员与资金的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对定价与授信与异常上报与关键审核写清授权与复核人与记录方式，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "三个状态反例",
+                  "反例1：丙资格改为待核，T2 A与T3 B无人可替，当前三人条件下无可行排班；写缺岗内部升级，不把甲休段或乙未获A改成合格。 反例2：仅F2改未实际执行，其他仍完成且实数不变：应A1300/B700/储备2000，总4000，差A-210/B+210/储备0；未执行调拨不计。",
+                  "反例3：仅E3新增实际支付90且与E1/E2同费用账：实付290、预算余210；C1仍未付，三资金池不变。未给退款付款账号，不从已核投诉推已付。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及定价与授信与赔付争议与例外与放行的最终决定；对证件或授权或受限玩家或作弊线索或异常或数据外泄疑点一律写明暂停与升级并按机构授权上报上级或合规岗位与监管机关；并声明所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。",
-                  "作品只证明你能按本职业的工作方式组织运营与合规与记录，不构成资格或胜任证明。"
+                  "纸面边界",
+                  "不学习获利策略、不实际经营或报送。M/V2只是独立核对练习；保原稿未知与版本，工具和本人复算分开，不授经理资格或真实资金权限。"
                 ]
               }
             ]
@@ -30114,33 +30128,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用任务—方法—证据三列列出你在模拟运营任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及定价与授信与例外与作弊疑点与异常上报与数据风险，必须按授权上报而非自行处理。"
+                  "作品1：版本权限",
+                  "列M/V2替旧V1、资格甲A乙B丙AB及指定休段，权限允许与待核禁止，保X原稿。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的管理者或合规岗位复核你的方案与场馆规则与限额与资金与异常处置，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示做完了，要展示从制定规则到编排人员到监控资金到处理投诉到上报异常的流程与留痕。"
+                  "作品2：三段排班",
+                  "T1甲A乙B、T2丙A乙B、T3甲A丙B，各另1人休；资格、2岗1休、不兼岗逐格验。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的运营摘要（规则与限额与人员与资金与账务与合规状态、核验与拒绝与上报事项、异常与争议与待办）。",
-                  "摘要中不得出现真实顾客或场所或交易或可识别信息，必要时使用编号与合成数据。",
-                  "注明信息来源与假设，区分实测值与估算与预测值。"
+                  "作品3：独立双账",
+                  "M/V2唯一排班：T1甲A乙B丙休；T2丙A乙B甲休；T3甲A丙B乙休，每人2岗1休且资格覆盖。资金应有A1000+300-200=1100，B800+200-100=900，储备2200-300+100=2000，总4000不变；实数总4000却A差-10/B差+10/储备0，不能因合计相符消局部差。费用实付120+80=200，预算余300；E3待付90和复扫均不入实际，若仅看申请加实付为290非410。C1核成但未付、C2待核，不计实际退款；未给资金池退款来源，不能擅扣A/B/储备。 三反例另版本保输入结果，内部调拨不当收入，费用预算非三池资金。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了账务或排班或报告工具，标注哪些部分由工具生成、哪些由本人核对与修订。",
-                  "说明工具输出在使用前经过了谁的复核与哪次原始资料核对。",
-                  "定价与授信若为示例值，必须标明并说明由授权人员最终确认。"
+                  "作品4：投诉交接",
+                  "写A-10/B+10不可净额消、C1核成未付/C2待核、E3未付与复扫；注明合成方法、本人复算及真实权限待核，不假监管报送。"
                 ]
               }
             ]
@@ -30210,50 +30220,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（制定规则与限额—编排人员与巡场—监控牌局与资金—审核账务—处理投诉与上报异常）。",
-                  "记录你观察到的许可与合规与反洗钱与年龄限制与定价与记录要求。"
+                  "第1天30分钟：核20任务与经理授权边界。",
+                  "记录游戏知识营销排班投诉资金重心及真实法域经验待核。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：班次与营业高峰与夜班与假日、工作时间与压力强度、绩效与奖金与差错责任约定、与上级与合规与各部门的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "第2天30分钟：列M/V2资格休段及权限。",
+                  "作品1保X与新版本，不用旧休段安排人员。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份场馆规则与资金池与赌桌限额方案与投注账户与账务记录表样本。",
-                  "按规范列出关键要求（年龄段核验与受限名单与自我排除、定价与授信例外条件、异常与上报路径）。"
+                  "第3天30分钟：逐格排三时段。",
+                  "作品2核甲A乙B丙AB、每人2岗1休与不兼岗。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次资金与账务与绩效试算，并标注假设值。",
-                  "对两个典型风险（许可或培训不齐备即开业、资金账实不符）写出核对与报告方案。"
+                  "第4天30分钟：算三池1100/900/2000。",
+                  "作品3记差-10/+10/0，总4000不能免局部差。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次排班与人员配置与考勤，或一次巡场与防作弊与异常上报的模拟演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "第5天30分钟：算费用200余300与投诉状态。",
+                  "作品4保E3待付、复扫不动、C1未付及C2待核。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的规则与限额与定价与异常处置。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "第6天120分钟：独立四作品和三反例。",
+                  "丙待核无可行排班、F2未转1300/700/2000、E3实付290余210，版本分开。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如辖区博彩相关登记、反洗钱与客户身份识别培训、定价与授信与人员与合规管理经验），以及下一步行动。"
+                  "第7天30分钟：据复算权限未知留痕作探索决定。",
+                  "列现实相关经验任命登记合同训练待核，不当胜任录用结论。"
                 ]
               }
             ]
@@ -30270,13 +30280,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按辖区与雇主规则完成许可与合规与人员与资金与记录管理并使过程可复核。",
-              "继续：能在运营高峰与顾客投诉与合规压力下坚持规则与记录规范，不因业绩或人情弱化核验与上报。",
-              "继续：愿意从助理或单一游戏区岗做起并把场馆规则与合规与资金与人员要求学清楚。",
-              "停止：难以承受频繁决策与顾客投诉与合规压力，且短期无法改善。",
-              "停止：对许可与反洗钱与定价与异常上报与资金与记录边界缺乏警觉，反复出现越权或记录缺失。",
-              "换方向：偏好机构整体运营可考虑总经理和运营经理；偏好财务规划可考虑财务经理。",
-              "换方向：偏好餐饮服务可考虑餐饮服务经理；偏好住宿运营可考虑住宿经理；偏好竞赛表现可考虑运动员与体育竞赛选手。注意：中国大陆除依法批准发行的彩票外赌博受法律严格禁止，上述方向均须先核实所在地法律与授权。"
+              "继续探索：保M/V2资格、休段和权限，不沿旧草稿。",
+              "继续探索：独立验三段2岗1休、不兼岗与获资格。",
+              "继续探索：算三池及局部差、费用实付预算余，投诉已核与已付分开。",
+              "暂缓：丙待核仍排或兼岗，先重做纸面规则。",
+              "暂缓：净額消局部差、调拨当收入、重复或待付计支，先重做账目。",
+              "转向提示：整体运营财务餐饮住宿各有不同重心，另核真实经历。",
+              "转向提示：本职监督调查销售营销等方向不自动互认经验任命登记权限。"
             ]
           },
           "id": "gambling-managers.path.seven-day-decision.1",
@@ -30312,55 +30322,55 @@
               [
                 "高中文凭或同等学历",
                 "多数岗位",
-                "满足招聘的学历基础",
-                "较普遍",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "BLS典型高中同等，OOH部分雇主大学要求",
                 "完成高中或同等学力教育",
-                "按学制",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "学历不保证取得辖区登记或授权"
               ],
               [
                 "辖区博彩相关登记与背景核验（如适用）",
-                "持牌场所内相关岗位",
-                "满足在持牌场所从业的登记要求",
-                "视辖区要求而定",
+                "实际纳入适用登记定义者",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "具体法域实际纳入登记定义者按规定",
                 "按辖区主管机关要求提交申请并通过核验",
-                "数周至数月",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "以辖区主管机关要求为准，本页不提供个人资格结论；中国大陆除依法批准发行的彩票外为禁止"
               ],
               [
                 "反洗钱与客户身份识别与年龄限制培训",
                 "相关管理与面向顾客岗位",
-                "降低异常与可疑交易与年龄违规风险",
-                "普遍必需",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "适用机构岗位训练，非全美统一证",
                 "参加机构或行业培训并考核",
-                "数小时至数天",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "培训不等于法定授权或监管认定"
               ],
               [
                 "场馆规则与合规与定价与限额管理培训",
                 "运营与管理岗位",
-                "满足按规则运营与定价与管理的能力要求",
-                "普遍必需",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "按真实经理经营规则授权核",
                 "参加机构培训并在岗实践与考核",
-                "数天至数周",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "训练与考核不替代辖区登记"
               ],
               [
                 "人员管理与排班与绩效与巡场训练",
                 "管理岗位",
-                "降低人员与运营与安全失效风险",
-                "普遍必需",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "按实际人员职责训练，非入门统一期限",
                 "参加机构培训并在岗实践与复核",
-                "数天至数周",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "训练不替代内控与复核要求"
               ],
               [
                 "预算与投注账户与收款报告与内控经验",
                 "转向资金与合规方向者",
-                "提升承担资金与账务与合规责任的能力",
-                "晋升方向需要",
+                "为对应职责提供准备，不证明风险降低幅度或自动授权",
+                "本职可审核预算账目，职责授权另核",
                 "多岗位实践与内部晋升积累",
-                "数月至数年",
+                "按具体学校、监管申请或机构训练核时间费用，不给统一期限",
                 "不替代合规判定与放行责任"
               ]
             ]
@@ -30377,10 +30387,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、辖区登记与机构授权是三种不同状态：满足招聘条件不等于取得辖区博彩相关登记或机构定价与授信与例外处置授权，取得培训与证书不等于获得独立裁定赔付争议或处置作弊疑点的决定权。",
-              "资格边界（二）｜美国 O*NET 教育栏显示 57% 需要高中文凭或同等学历、30% 需要上过大学但无学位、7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造），Job Zone 为 1-2 级（SVP 低于 6.0）；在允许持牌博彩的辖区（如美国内华达州）另有博彩相关登记与背景核验与辖区交易与记录规则要求。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在对应的合法从业路径；涉足前必须先核实所在地法律与授权。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或辖区主管机关要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人背景核验结论、录用可能性或薪酬承诺。"
+              "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。",
+              "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。",
+              "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。",
+              "路径为编辑准备方向，真实机构要求优先，不给统一投入或个人录用薪酬承诺。"
             ]
           },
           "id": "gambling-managers.path.credential-boundary.1",
@@ -30395,8 +30405,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。持牌赌场与博彩服务运营商与住宿娱乐场所内的博彩运营部门常按场所与营业时段分批发布招聘，且多通过企业直招与内部晋升与行业渠道招募，公开渠道的样本难以代表整体市场；场所规模与游戏种类与赌桌数量与电子与自动化游戏装置渗透与旺季负荷的波动会明显影响用人规模。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、机构类型（持牌赌场、博彩服务运营商、住宿娱乐场所内的博彩运营部门）、岗位职责与授权边界（规则与定价、人员与排班、巡场与防作弊、资金与账务、合规与反洗钱）、是否要求辖区相关登记与背景核验与合规培训、工时与排班与夜班安排、绩效与奖金结构、学历与经历要求、以及薪酬构成（基本工资、绩效或奖金、夜班或假日补贴、加班或调休）；这些信息比页面往往更能反映真实条件；同时务必先确认所在地法律是否允许该类经营。"
+              "证据不足：未取得本职代表招聘样本的渠道占比、季节规模或奖金分解，不推内部晋升为主要渠道。",
+              "核真实公告日期地点机构职责授权、学历相关经验、适用登记、工时工资奖金纳排与任命；公开个案非整体市场。"
             ]
           },
           "id": "gambling-managers.path.recruitment-sample.1",
@@ -30424,10 +30434,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 博彩经理国家工资",
+                "entity": "BLS本职直接EP2025—2035",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 资格与训练资料",
@@ -30448,7 +30458,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与经历与考核，以及所在辖区对博彩相关登记与背景核验与合规培训的要求为准，也不代表取得定价与授信与例外处置与记录保存的权限；且所在地法律是否允许该类经营须先行核实（中国大陆除依法批准发行的彩票外为禁止）。"
+              "编辑路径非统一入职或晋升程序；本职典型相关经验少于5年，实际经理任命授权按机构与法域，纸面不替资格。"
             ]
           },
           "id": "gambling-managers.path.career-path-block.11",
@@ -30574,7 +30584,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成高中或同等学历（或从柜台或发牌或顾客服务岗起步） → 按辖区要求办理博彩相关登记与背景核验 → 接受场馆规则与游戏与合规与反洗钱与客户身份识别与年龄限制与人员管理培训 → 在带教下学习规则与定价与限额与排班与巡场与资金与账务与异常上报 → 通过考核后独立负责一个游戏区或班次并承担经营与合规与资金与记录责任 → 在多游戏区与跨部门与争议处置中积累经验 → 视表现转为团队管理或合规与运营统筹方向，或转向总经理和运营经理、财务经理、餐饮服务经理、住宿经理、博彩服务工人一线主管、博彩官与博彩调查员等相邻岗位。须特别说明：中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，本路径仅描述允许持牌博彩辖区的合法岗位，不构成中国大陆从业建议；涉足前必须先核实所在地法律与授权。经营判断、合规意识与人员与资金统筹通常构成门槛，真正决定长期发展的是在高度规管环境中同时把经营与合规做好的能力、对定价与授信与作弊与异常与资金风险的识别与处置能力，以及在高替代压力（电子与自动化与合规与分析系统）下的适应能力。"
+              "编辑路径｜核真实相关经验和招聘学历→核适用登记及机构任命→学实际游戏知识与经营政策、营销、人员、投诉资金→按获准职责积累证据。O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。 中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。 不作高替代压力判断，不承诺自动晋升。"
             ]
           },
           "id": "gambling-managers.path.career-path-block.20",
@@ -30602,7 +30612,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国 O*NET 教育栏显示 57% 需要高中文凭或同等学历、30% 需要上过大学但无学位、7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造），Job Zone 为 1-2 级（SVP 低于 6.0）；在允许持牌博彩的辖区（如美国内华达州）另有博彩相关登记与背景核验与辖区交易与记录规则要求。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与该美国职业对应的合法从事路径；两者法律环境不同，不可互换。"
+              "美国经理学历、经验与适用登记"
             ]
           },
           "id": "gambling-managers.path.career-path-block.22",
@@ -30616,7 +30626,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为实践—训练—登记—授权—负责的循环：先完成学历与辖区相关登记与合规培训，再在规则与定价与限额与排班与巡场与资金与账务与上报中积累经验，通过考核后独立负责运营并带教；涉及定价与授信与例外与放行、受限或自我排除玩家与作弊与异常判定、以及记录与许可与合规事项时，必须按流程取得相应授权或移交上级与合规岗位与监管机关；并始终先核实所在地法律是否允许该类经营（中国大陆除依法批准发行的彩票外为禁止）。"
+              "按实际经验训练登记任命取得对应经理权限，授权内自己判断，越权内部升级；机构履行适用报告，不一律移交监管机关。"
             ]
           },
           "id": "gambling-managers.path.career-path-block.23",
@@ -30658,7 +30668,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "BLS本职直接EP2025—2035核典型入门与预测，非招聘数。"
             ]
           },
           "id": "gambling-managers.path.career-path-block.26",
@@ -31547,22 +31557,22 @@
                 "url": "#career-visual-group-us-salary"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "OEWS工资定义",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 博彩经理国家工资",
+                "entity": "O*NET本职2025工资",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.onetonline.org/link/localwages/11-9071.00?st=CA"
               },
               {
-                "entity": "O*NET 就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职直接EP2025—2035",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 博彩经理职业档案",
@@ -31631,7 +31641,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（精确职业 O*NET-SOC 11-9071.00）：2024 年就业约 5,100 人（BLS 职业预测基期，经 O*NET 呈现），2024—2034 年预计增量属「低于平均（1% 至 2%）」类别，期间约 600 个岗位空缺；2025 年中位时薪 44.82 美元、中位年薪 93,220 美元，工资分布从下十分位 55,960 美元到上十分位 164,350 美元。中国大陆部分：除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在与该职业对应的合法经营岗位，且未建立精确对应的公开职业工资与就业统计，按证据政策本页只登记法律边界与缺口，不提供代理数值。"
+              "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。 BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.8",
@@ -31659,7 +31669,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.10",
@@ -31673,7 +31683,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "增长低于平均，空缺主要来自替换需求；持牌场所规模与游戏种类与电子与自动化游戏装置渗透与管理层级结构共同影响岗位，不能把替换空缺读作净新增。"
+              "直接EP增长3.6%、净增0.2千、年均空缺600；含转出退出，不证明AI设备岗位因果。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.11",
@@ -31687,7 +31697,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；分行业与分地区细分可能缺失；预测不等于实际招聘数。"
+              "就业预测含自雇，本职自雇比例7.7%；OEWS工资排自雇，预测非实际招聘。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.12",
@@ -31715,7 +31725,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 11-9071.00（经 O*NET 呈现）"
+              "BLS本职11-9071直接EP"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.14",
@@ -31729,7 +31739,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 5,100 人（2024）；2024—2034 年增量属「低于平均（1% 至 2%）」类别；期间约 600 个岗位空缺"
+              "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.15",
@@ -31771,7 +31781,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；上下十分位跨度约 2.9 倍，场所规模与职责范围与机构类型与地区与绩效奖金是主要差异来源。"
+              "90/10约2.9仅全国分布，分位非机构规模年资，未核奖金贡献因果。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.18",
@@ -31785,7 +31795,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与奖金与分红；本精确职业的分行业与分地区工资本页未取得，按可见缺口登记；数值取自 O*NET 页面显示的 2025 年数据，后续更新应以当期查询为准；该岗位须在允许持牌博彩的辖区从业。"
+              "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。 CA2025年中位99230地方非全国93220，四行业工资未取。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.19",
@@ -31827,7 +31837,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位时薪 44.82 美元、中位年薪 93,220 美元；分位 55,960 / 72,570 / 122,990 / 164,350 美元"
+              "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.22",
@@ -31869,7 +31879,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆法律禁止赌博与开设赌场，美国持牌博彩岗位不能当作中国大陆可经营的职业路径；国家统计局按行业门类公布平均工资、不区分职业，且无对应合法岗位，行业均值不能替代职业工资，也不得用彩票销售等相邻岗位代填。"
+              "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.25",
@@ -31911,7 +31921,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国人大网赌博犯罪定罪处罚说明与有界检索"
+              "现行刑法303法域及有界统计查阅"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.28",
@@ -31925,7 +31935,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在与该职业对应的合法经营岗位与可核验工资数据；按证据政策本页展示缺失而不使用代理数字。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.29",
@@ -31939,7 +31949,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径（2025，O*NET 页面显示的 BLS OEWS 数据）；不构成对某一机构或地区的薪酬承诺。"
+              "本职2025全国与CA工资，非个人承诺。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.30",
@@ -31953,7 +31963,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国 2024—2034 就业增长与空缺口径（经 O*NET 呈现）；预测不等于实际招聘。"
+              "BLS本职直接EP2025—2035核就业增长年均空缺及典型入门。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.31",
@@ -31967,7 +31977,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对中国大陆赌博刑事边界与美国持牌博彩岗位不可直接移植；涉足前须先核实所在地法律与授权。"
+              "现行刑法303，美国代码不授中国经营许可。"
             ]
           },
           "id": "gambling-managers.market-signals.market-signal-card.32",
@@ -32340,7 +32350,7 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 11-9071.00，本职业计划、指导或协调赌场内的博彩运营并可能负责制定场馆规则。工作包括制定可提供的赌博种类与赔率与信用授信与餐饮供应等政策，为每局游戏设定并维护资金池与赌桌限额，追踪各赌桌的资金补给并办理所需文书，监控博彩大厅运营表现并在需要时移动游戏与安装新游戏，编排名工作表与站点安排并保存考勤，监控班次人员配置并安排轮班与休息与替补，面试招聘与培训与评估员工，在赌桌间巡视以确保运营依规且发牌员遵守场馆规则且玩家没有作弊，驱逐疑似作弊者，按游玩时长与投注总额决定赠品发放，通知引座员赌桌空位，处理顾客关于派彩错误等投诉，解答与解释场馆规则，记录与收取或赔付投注并按需开具收据，监控玩家信用，指导编制投注与派彩汇总表，审核运营费用与预算估算与投注账户与收款报告。本页所述为美国等允许持牌博彩辖区的合法岗位；中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止。",
+                "answer": "本职计划指导协调赌场运营并可制定政策规则，20任务12核心7补充1新增：游戏知识与营销推广、人员招聘训练评估及排班、顾客投诉规则赠品、资金信用收付预算与报告；新增大厅表现和游戏移置安装，不冒核心评分。授权内经理判断，疑似作弊非犯罪认定。中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。",
                 "id": "gambling-managers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.gambling-managers.q1",
@@ -32350,7 +32360,7 @@
                 ]
               },
               {
-                "answer": "核心区别在对象与产出：本职业以场所博彩运营与定价与人员与合规与反洗钱控制为对象，产出是合规运营的场所与牌局与资金与许可结果；总经理与运营经理以机构整体运营与战略与资源为产出；财务经理以财务规划与报表与资金为产出；餐饮服务经理以餐饮服务运营与成本与顾客体验为产出；住宿经理以住宿运营与客房与顾客体验为产出；运动员与体育竞赛选手以竞赛成绩与表现为产出。对象与产出各不相同，不能跨岗位沿用定价与授信与放行与许可证照与资金处置的权限。",
+                "answer": "按对象产出重心比较，整体运营、财务、餐饮、住宿、竞赛与本职可交叉；本职餐饮政策和营销不排除，不互认任命登记权限。",
                 "id": "gambling-managers.faq.2",
                 "question": "它和总经理、财务经理、餐饮与住宿经理有什么区别？",
                 "question_key": "career.faq.gambling-managers.q2",
@@ -32360,7 +32370,7 @@
                 ]
               },
               {
-                "answer": "美国口径（精确职业 11-9071.00）：2025 年中位时薪 44.82 美元、中位年薪 93,220 美元；分位 55,960 / 72,570 / 122,990 / 164,350 美元/年（跨度约 2.9 倍）；2024 年就业约 5,100 人，2024—2034 年增量属「低于平均（1% 至 2%）」类别，期间约 600 个岗位空缺。数值取自 O*NET 页面显示的 2025 年 BLS OEWS 数据与 BLS 2024—2034 职业预测（经来源登记核对）；空缺主要来自替换需求与有限增长，不可读作净新增。上述为美国全国口径，不适用其他法域；OEWS 不含福利与奖金与分红。",
+                "answer": "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。 OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。 BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。",
                 "id": "gambling-managers.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.gambling-managers.q3",
@@ -32370,17 +32380,19 @@
                 ]
               },
               {
-                "answer": "没有对应的合法岗位与工资数据。中国大陆除国家依法批准发行的彩票外，赌博与开设赌场受《刑法》等法律严格禁止，因此不存在与 O*NET 11-9071.00 对应的合法经营岗位；公开企业薪酬调查亦未建立与本职业精确对应的全国工资分布，也不能把行业均值写成该职业中位数或起薪。按本页证据政策，中国部分只登记法律边界与「证据不足：」可见标记，展示缺失而不使用代理数字。",
+                "answer": "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。 证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
                 "id": "gambling-managers.faq.4",
                 "question": "中国大陆有对应的工资数据或职业路径吗？",
                 "question_key": "career.faq.gambling-managers.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "facilities",
+                  "operations",
+                  "hr",
+                  "nbs"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：与他人持续接触 79%、每天进行面对面讨论 93%、每天进行影响他人与机构资源的决策 86%、与工作组或团队共同工作极其重要 81%、协调或带领他人极其重要 77%、必须非常精确或高度准确「极其重要」62% 与「非常重要」28%、不做监督下做决策的自由「很大」51% 与「有一定」33%、错误后果为「极其严重」29% 与「非常严重」31% 与「严重」18% 与「完全不算严重」13%、每天需处理不愉快或愤怒或不礼貌的人 26%、竞争度「极度竞争」21% 与「高度竞争」26%、每天时间压力 34%、对他人健康与安全「很高」责任 53%、工作安排固定常规 89%、工作周超过 40 小时 47%。工作以频繁决策与协调带领与巡场与顾客投诉与高度合规为主。",
+                "answer": "O*NET 工作情境显示：与他人持续接触 79%、每天进行面对面讨论 93%、每天进行影响他人与机构资源的决策 86%、与工作组或团队共同工作极其重要 81%、协调或带领他人极其重要 77%、必须非常精确或高度准确「极其重要」62% 与「非常重要」28%、不受监督时做决策的自由「很大」51% 与「有一定」33%、错误后果为「极其严重」29% 与「非常严重」31% 与「严重」18% 与「完全不算严重」13%、每天需处理不愉快或愤怒或不礼貌的人 26%、竞争度「极度竞争」21% 与「高度竞争」26%、每天时间压力 34%、对他人健康与安全「很高」责任 53%、工作安排固定常规 89%、工作周超过 40 小时 47%。工作以频繁决策与协调带领与巡场与顾客投诉与高度合规为主。 规律不保证无夜班，问卷非个体事故概率。",
                 "id": "gambling-managers.faq.5",
                 "question": "工作环境和沟通强度如何？",
                 "question_key": "career.faq.gambling-managers.q5",
@@ -32390,7 +32402,7 @@
                 ]
               },
               {
-                "answer": "影响主要在记录与汇总与查询环节：投注与派彩与信用记录录入、费用与投注账户与收款报告草拟与对账、排班与考勤与绩效台账、异常与监控记录整理、场馆规则与合规与培训材料整理可被工具辅助；制定场馆规则与定价与授信、设定资金池与赌桌限额、作弊与异常与可疑活动的识别与调查与上报、赔付争议裁定、许可与合规与纪录保存仍由管理者与合规岗位负责。本职业属中等暴露，且是否采用取决于获准平台与辖区规则；电子与自动化与合规与分析系统已替代部分统计与监控，但任务暴露不等于岗位替代。",
+                "answer": "证据不足：未取得本职生成式AI量化暴露、采用率、效率与就业因果证据。 合成排班账目草稿为编辑机制，一般软件非GenAI；不打中等暴露或已替代分数，3.6%预测非AI因果。",
                 "id": "gambling-managers.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.gambling-managers.q6",
@@ -32400,7 +32412,7 @@
                 ]
               },
               {
-                "answer": "O*NET 教育栏显示 57% 需要高中文凭或同等学历、30% 需要上过大学但无学位、7% 需要中学后证书（三项合计 94%，其余 6% 未给，本页不编造）；Job Zone 为 1-2 级（SVP 低于 6.0），通常以在岗训练与经验积累为主。在允许持牌博彩的辖区（如美国内华达州）另要求办理博彩相关登记与背景核验并接受反洗钱与年龄限制培训；实际以机构与辖区要求为准。",
+                "answer": "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。 内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。",
                 "id": "gambling-managers.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.gambling-managers.q7",
@@ -32410,27 +32422,27 @@
                 ]
               },
               {
-                "answer": "受过培训、取得课程或证书、取得辖区相关登记、获得机构授权是四种不同状态。在允许持牌博彩的辖区，从业通常要求博彩相关登记与背景核验与反洗钱与年龄限制培训；而中国大陆除国家依法批准发行的彩票外赌博与开设赌场受《刑法》等法律严格禁止，不存在对应资格路径。本页列示的准备项不构成任何机构的正式资格清单，也不代表任何辖区许可。",
+                "answer": "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。 中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。",
                 "id": "gambling-managers.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.gambling-managers.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "archivists",
+                  "facilities"
                 ]
               },
               {
-                "answer": "常见失效包括：未按许可与反洗钱与客户身份识别与年龄限制要求运营或未制定或未执行场馆规则与资金池与赌桌限额；投注或派彩或信用或费用或投注账户或收款报告错误或资金账实不符；作弊线索或异常与可疑活动未按反洗钱要求识别与调查与上报；排班或人员配置或巡场失职或顾客投诉处置不当；顾客与员工身份与交易数据泄露或超范围使用。控制要点是按辖区与雇主规程核对与留痕与复核、异常与越权事项立即升级，并始终先确认所在地法律是否允许该类经营。",
+                "answer": "六卡是编辑场景非发生率，经理可作授权内政策人员投诉资金判断；疑点越权内部升级，机构履行适用记录报告，现金入出分聚合SAR保密，不每笔监管确认。",
                 "id": "gambling-managers.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.gambling-managers.q9",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "bls",
+                  "onet-wages"
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年增量属「低于平均（1% 至 2%）」类别，期间约 600 个空缺且主要来自替换需求；电子与自动化与合规与分析系统渗透对记录与统计岗位构成压力。可转向总经理和运营经理、财务经理、餐饮服务经理、住宿经理、博彩服务工人一线主管、博彩官与博彩调查员，以及销售与营销管理等相邻岗位（需重新学习与补足证据）。中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，上述方向均须先核实所在地法律与授权。",
+                "answer": "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。 OOH可由监督或其它管理岗转任需真实经验训练，八转向编辑重心非资格互认；不由普通系统推AI因果。",
                 "id": "gambling-managers.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.gambling-managers.q10",
@@ -32452,7 +32464,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 11-9071.00 的职业范围与任务与工作情境与兴趣与教育与准备层级，再取 O*NET 页面显示的 2025 年 BLS OEWS 工资中位与分位与 BLS 2024—2034 职业预测的就业与增长与空缺（经来源登记核对），并以美国 SOC 直接匹配文件与美国 FinCEN 赌场记录与报告要求作为辖区与合规边界参考；中国大陆以中国人大网赌博犯罪定罪处罚说明作为法律边界，未建立与本职业精确对应的合法岗位与统计值，按证据政策展示缺失而不使用代理数字；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "本轮核O*NET20任务12核心7补充1新增、41活动22详细57情境8软件、EC兴趣新聘学历；2025全国CA工资、直接EP2025—2035及OOH经理经验入门分别核。公共法域方法沿本批已核，不冒全部辅助源新读。"
             ]
           },
           "id": "gambling-managers.sources.source-card.1",
@@ -32466,7 +32478,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 职业档案与详细资料与定制页与兴趣与训练与证书与国家工资与行业与热门技术与就业趋势、O*NET 数据库、BLS OEWS 与数据总览与就业预测总览与美国 SOC 直接匹配标题文件、美国 FinCEN 赌场记录与报告与合规计划要求、内华达州博彩委员会博彩法规与登记要求与博彩雇员登记申请、国际劳工组织未来工作专题、国家统计局城镇单位平均工资与发布索引、人力资源和社会保障部企业薪酬调查信息、中国人大网赌博犯罪定罪处罚说明，以及 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "25稳定来源按实际URL用途登记；经理权限、软件目录、工资及直接EP、州登记和机构合规分别支持，不从稳定id猜来源，通用框架不当量化AI研究。"
             ]
           },
           "id": "gambling-managers.sources.source-card.2",
@@ -32480,7 +32492,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 官方页面；O*NET 页面标注数据更新年份为 2026（工资为该页面显示的 2025 年 BLS OEWS 数据、就业与增长与空缺为该页面显示的 2024—2034 预测）；辖区规则与合规与法律来源的期间以各自页面标注为准。"
+              "本轮查阅2026-10-03，工资2025、EP2025—2035；industry页面未给参考年。公共OEWS及中国法域NBS/NRS/FinCEN沿本批已核范围。"
             ]
           },
           "id": "gambling-managers.sources.source-card.3",
@@ -32494,7 +32506,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）中国大陆除国家依法批准发行的彩票外赌博受法律严格禁止，不存在与本职业对应的合法经营岗位与职业工资与就业统计，按证据政策展示缺失而不使用代理数字；（2）本职业在美国可按行业与分地区读取的工资中位数未取得（O*NET 仅列出政府以及艺术娱乐与休闲两个主要行业且未给占比）；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源且无对应合法岗位。三处均保留「证据不足：」标记，不以行业均值、招聘报价、彩票销售等相邻岗位或第三方估算填充；美国数值取自官方页面显示的 2025 年数据，后续更新应以当期查询为准。"
+              "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。 美国本职四行业工资、代表招聘渠道季节规模、奖金夜班因素及GenAI量化未取；CA99230是地方，industry35/29/26/10仅份额无参考年。"
             ]
           },
           "id": "gambling-managers.sources.source-card.4",
@@ -32517,37 +32529,37 @@
           "data": {
             "entries": [
               {
-                "entity": "博彩经理相关方向 1",
+                "entity": "霍兰德兴趣探索",
                 "id": "navigation-1",
                 "relation": "related-evidence",
                 "url": "/zh/tests/holland-career-interest-test-riasec"
               },
               {
-                "entity": "博彩经理相关方向 2",
+                "entity": "MBTI自我反思",
                 "id": "navigation-2",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test"
               },
               {
-                "entity": "博彩经理相关方向 3",
+                "entity": "大五自我反思",
                 "id": "navigation-3",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test"
               },
               {
-                "entity": "博彩经理相关方向 4",
+                "entity": "MBTI自我反思",
                 "id": "navigation-4",
                 "relation": "related-evidence",
                 "url": "/zh/tests/mbti-personality-test"
               },
               {
-                "entity": "博彩经理相关方向 5",
+                "entity": "大五自我反思",
                 "id": "navigation-5",
                 "relation": "related-evidence",
                 "url": "/zh/tests/big-five-personality-test"
               },
               {
-                "entity": "博彩经理相关方向 6",
+                "entity": "本职经理方向",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/gambling-managers"
@@ -32571,7 +32583,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业范围：计划与指导或协调赌场内的博彩运营并可能制定场馆规则。",
                   "用于界定本职业边界与样本岗位与就业与教育口径。"
@@ -32582,15 +32594,15 @@
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理职业档案（11-9071.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
                 "url": "https://www.onetonline.org/link/summary/11-9071.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "20 项任务（12 项核心 + 7 项补充 + 1 项新增）与 41 项工作活动与工作情境明细，用于界定本职业边界。",
-                  "用于核对规则与定价与人员与巡场与资金与合规环节。"
+                  "20任务12核心7补充1新增、41活动22详细57情境，职业问卷非全员或发生率。",
+                  "游戏知识营销、经营政策、人员投诉和资金；经理实际授权内判断。"
                 ],
                 "evidence_type": "official task and work context detail",
                 "id": "bls",
@@ -32598,51 +32610,51 @@
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理详细资料（11-9071.00）",
                 "period": "O*NET current occupation profile",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
                 "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年就业约 5,100 人；2024—2034 年增量属「低于平均（1% 至 2%）」类别。",
-                  "期间约 600 个岗位空缺，主要来自替换需求。"
+                  "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。",
+                  "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。"
                 ],
                 "evidence_type": "official trend display",
                 "id": "ep",
-                "limitation": "预测口径，不含自雇；不代表实际招聘。",
+                "limitation": "就业含自雇，本职7.7%；非实际招聘。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩经理就业趋势（11-9071.00）",
-                "period": "BLS 2024-2034 projections via O*NET",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "name": "BLS本职11-9071直接EP2025—2035",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/11-9071.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "中位时薪 44.82 美元、中位年薪 93,220 美元；10% 分位 55,960 美元/年、25% 分位 72,570 美元/年、75% 分位 122,990 美元/年、90% 分位 164,350 美元/年。",
-                  "用于核对全国中位与分位工资（精确职业 11-9071.00）。"
+                  "2025美国全国本职年工资10/25/50/75/90分位55,960/72,570/93,220/122,990/164,350美元，小时26.90/34.89/44.82/59.13/79.01美元。",
+                  "CA2025年中位99230地方非全国93220。"
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "全国口径，不含福利与奖金与分红；后续更新以页面当期查询为准。",
+                "limitation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理国家工资（11-9071.00）",
                 "period": "2025 BLS OEWS wage data via O*NET",
-                "publisher": "O*NET / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localwages/11-9071.00"
+                "url": "https://www.onetonline.org/link/localwages/11-9071.00?st=CA"
               },
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明中国大陆按行业门类公布平均工资、不拆分职业。",
-                  "本页按证据政策与法律边界展示缺失而不使用代理数字。"
+                  "2025城镇单位行业及五大岗位组，非精确本职值。",
+                  "有界未取不证明统计不存在，法域统计分开。"
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
-                "limitation": "行业门类口径，不区分职业；本职业在中国大陆无对应合法岗位。",
+                "limitation": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 annual wages; published 2026-05-15",
@@ -32653,12 +32665,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "官方标题摘要可查，正文未取得。",
+                  "不从访问限制推本职统计缺失。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "证据不足：企业薪酬正文未取得、精确本职映射未核，不证明统计不存在。",
                 "market": "中国大陆",
                 "name": "人力资源和社会保障部：企业薪酬调查信息",
                 "period": "2025 survey; accessed 2026-08-31",
@@ -32683,68 +32695,68 @@
                 "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明中国大陆除依法批准发行的彩票外赌博与开设赌场受法律严格禁止。",
-                  "美国持牌博彩岗位不能作为中国大陆可经营的职业路径。"
+                  "中国大陆刑法303分别规定营利聚众赌博或以赌博为业、开设赌场及组织中国公民参与国境外赌博达法定情节的刑事责任；现行治安法82涉及营利提供赌博条件或参与赌博赌资较大（2026-01-01生效）；彩票条例3规定福彩体彩特许及境内禁发售境外彩票。美国代码不授中国经营许可。",
+                  "美国代码不授中国经营许可。"
                 ],
                 "evidence_type": "legal guidance",
                 "id": "facilities",
-                "limitation": "以法律原文与司法解释为准；该说明为解释性资料。",
+                "limitation": "已核公共法律范围，不从法域推统计不存在。",
                 "market": "中国大陆",
-                "name": "中国人大网：对赌博犯罪如何定罪处罚（法域边界）",
-                "period": "published 2002-04-19; accessed 2026-08-31",
-                "publisher": "中国人大网",
-                "scope": "gambling criminal boundary",
-                "url": "https://www.npc.gov.cn/zgrdw/npc/flsyywd/flwd/2002-04/19/content_293480.htm"
+                "name": "刑法303含修正案十一",
+                "period": "2021相关修正条文",
+                "publisher": "北京市公安局公安交通管理局转载法律",
+                "scope": "中国刑事法域",
+                "url": "https://jtgl.beijing.gov.cn/jgj/jgxx/flfg/fl/11033925/index.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于定位历年城镇单位平均工资发布。",
-                  "用于核对年度口径发布周期与统计范围。"
+                  "82营利提供条件或参与赌博赌资较大。",
+                  "144生效2026-01-01。"
                 ],
                 "evidence_type": "official release index",
                 "id": "operations",
-                "limitation": "发布索引，不含职业级数据。",
+                "limitation": "行政与刑事范围分开。",
                 "market": "中国大陆",
-                "name": "国家统计局：城镇单位平均工资统计发布索引与口径说明",
-                "period": "2025 release index",
-                "publisher": "国家统计局",
-                "scope": "release index",
-                "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/"
+                "name": "2025修订治安管理处罚法",
+                "period": "2026-01-01生效",
+                "publisher": "国家市场监督管理总局转载",
+                "scope": "82/144条",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2025/art_8a1c722747214869b28c0ad7a0f8bb7a.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明博彩雇员登记需记录雇主与岗位与个人信息。",
-                  "登记与背景核验以主管机关要求为准。"
+                  "福彩体彩依法特许，未经批准其它彩票不许。",
+                  "境内禁发售境外彩票，彩票销售不代本职统计。"
                 ],
-                "evidence_type": "official registration form",
+                "evidence_type": "official regulation",
                 "id": "hr",
-                "limitation": "登记程序不等于全国统一资格或无限授权。",
-                "market": "美国",
-                "name": "内华达州博彩委员会：博彩雇员登记申请",
-                "period": "current form; accessed 2026-08-31",
-                "publisher": "Nevada Gaming Control Board",
-                "scope": "gaming employee registration",
-                "url": "https://www.gaming.nv.gov/siteassets/content/forms/Gaming_Employee_Registration_Paper_Application.pdf"
+                "limitation": "福彩体彩特许不授美国本职许可。",
+                "market": "中国大陆",
+                "name": "彩票管理条例",
+                "period": "现行行政法规",
+                "publisher": "司法部行政法规库",
+                "scope": "中国彩票2/3条",
+                "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=292"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "岗位公告中的技术与软件提及汇总。",
-                  "含牌局与投注与信用与监控与账务与排班系统等。"
+                  "O*NET八软件类别：员工排班、Outlook邮件、HRMS人力、浏览器、Office套件、PowerPoint演示、Excel表格、Word文字；目录例子非全员采用、必须编程或GenAI采用率。",
+                  "实际系统训练依招聘机构。"
                 ],
                 "evidence_type": "official technology display",
                 "id": "health",
-                "limitation": "技术提及不等同于能力或自动化程度。",
+                "limitation": "目录非全员采用编程必需。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩经理热门技术（11-9071.00）",
+                "name": "O*NET本职软件目录",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/hot_tech/11-9071.00"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32754,7 +32766,7 @@
                 ],
                 "evidence_type": "research topic page",
                 "id": "ilo",
-                "limitation": "任务暴露不等于岗位自动消失或具体采用率。",
+                "limitation": "历史辅助专题，本轮未新增精确本职GenAI量化结论。",
                 "market": "全球",
                 "name": "ILO 未来工作与生成式 AI 任务暴露研究",
                 "period": "current",
@@ -32763,20 +32775,20 @@
                 "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "兴趣代码为 EC（企业型—常规型）。",
-                  "子兴趣领域含管理与行政与企业倡议与会计。"
+                  "E96 C74 S31 R30 I6 A2；管理行政90企业倡议58会计49，非人格门槛。",
+                  "O*NET新聘所需学历问卷57%高中同等、30%大学无学位、7%中学后证书，合94%不补余项，非全体学历或管理层级。Zone1–2 SVP<6为准备分组，不是经理统一训练期限。BLS本职典型高中同等、相关经验少于5年、无典型在岗训练；OOH说经理通常有数年相关经验，部分雇主需大学或学位，可能由监督或其他管理岗转入，不等无经验直接任经理。"
                 ],
                 "evidence_type": "official interest profile",
                 "id": "editor",
-                "limitation": "兴趣数据不构成录用或适配结论。",
+                "limitation": "EC职业偏好非个体录用效度。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理职业兴趣（11-9071.00）",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/interest/11-9071.00"
+                "url": "https://www.onetonline.org/link/details/11-9071.00"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32795,36 +32807,36 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对时点工资与就业口径与覆盖范围。",
-                  "用于核对抽样与缺失限制。"
+                  "正常工时税前含小费佣金生产奖。",
+                  "排自雇福利加班溢价班差非生产奖。"
                 ],
                 "evidence_type": "official statistics overview",
                 "id": "arxiv",
-                "limitation": "覆盖非农机构雇主，不含自雇。",
+                "limitation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）数据总览",
-                "period": "2025 OEWS",
+                "name": "BLS OEWS工资定义FAQ",
+                "period": "current methodology",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "OEWS national estimates",
-                "url": "https://www.bls.gov/oes/data-overview.htm"
+                "scope": "wage definition",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对预测方法与期间口径。",
-                  "用于核对增长类别与替换需求说明。"
+                  "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。",
+                  "典型高中同等、相关经验少于5年、无典型OJT；不等实际机构不培训。"
                 ],
                 "evidence_type": "official projections overview",
                 "id": "weforum",
-                "limitation": "预测不等于实际招聘。",
+                "limitation": "本职11-9071不套组合服务3%及20200空缺。",
                 "market": "美国",
-                "name": "BLS 就业预测总览（Employment Projections）",
-                "period": "2024—2034 projections",
+                "name": "BLS本职直接EP2025—2035",
+                "period": "2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
-                "url": "https://www.bls.gov/emp/"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32859,50 +32871,50 @@
                 "url": "https://www.onetonline.org/link/localcert/11-9071.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Job Zone 1-2 级（SVP 低于 6.0）；教育栏显示 57% 高中文凭或同等学历、30% 上过大学但无学位、7% 中学后证书。",
-                  "通常需要很少至中等程度准备，含在岗训练与经验积累。"
+                  "经理通常数年相关经验、部分雇主大学学位；可由监督或其他管理岗转入，不保证晋升。",
+                  "机构各有训练，发牌员数周学校或投注受理<1月不套经理；规律不免夜周末假日。"
                 ],
-                "evidence_type": "official training directory",
+                "evidence_type": "official occupational handbook",
                 "id": "r2-pay-1",
-                "limitation": "培训路径不等于辖区登记或机构授权。",
+                "limitation": "组合工资37460、146500就业及20200空缺不代本职；OOH本职4%圆整，直接EP3.6%。",
                 "market": "美国",
-                "name": "O*NET OnLine：博彩经理训练资料（11-9071.00）",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtraining/11-9071.00"
+                "name": "BLS OOH博彩服务中的经理",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "manager passages",
+                "url": "https://www.bls.gov/ooh/personal-care-and-service/gaming-services-occupations.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业要素与样本岗位名称。",
                   "样本岗位含 Casino Manager 与 Casino Operations Manager 与 Casino Shift Manager 与 Gaming Manager 与 Pit Manager 与 Table Games Manager 等。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "r2-pay-2",
-                "limitation": "用于边界与要素核对。",
+                "limitation": "样本名称非资格或职责互斥。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理定制职业页（11-9071.00）",
                 "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
-                "url": "https://www.onetonline.org/link/custom/11-9071.00"
+                "url": "https://www.onetonline.org/link/summary/11-9071.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年主要行业为政府以及艺术娱乐与休闲（O*NET 未给占比）。",
-                  "用于理解雇主类型分布。"
+                  "政府35、艺术娱乐休闲29、住宿餐饮26、其他10%，页面无参考年。",
+                  "不套组合服务行业工资。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "r2-pay-3",
-                "limitation": "用于行业背景，不替代行业工资。",
+                "limitation": "证据不足：未取得本职四行业工资，份额非工资。",
                 "market": "美国",
                 "name": "O*NET OnLine：博彩经理行业分布（11-9071.00）",
-                "period": "current page; accessed 2026-09-01",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
+                "period": "页面未给参考年份",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "11-9071.00 exact occupation",
                 "url": "https://www.onetonline.org/link/industry/11-9071.00"
               },
@@ -32923,52 +32935,52 @@
                 "url": "https://www.onetcenter.org/database.html"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明 Casino Manager 与 Gaming Manager 与 Slot Manager 与 Table Games Manager 等样本标题归属本职业岗位族。",
-                  "该岗位为场所运营与管理岗位，不是发牌或柜台结算或监控调查或投注受理岗位。"
+                  "Casino Manager、Casino Operations Manager、Casino Shift Manager、Gaming Manager、Pit Manager、Table Games Manager等。",
+                  "本职政策人员投诉资金可按实际授权判断，并含游戏知识营销。"
                 ],
                 "evidence_type": "official taxonomy mapping",
                 "id": "msresearch",
-                "limitation": "用于标题到 SOC 的映射，不构成许可依据。",
+                "limitation": "样本名称非权限互斥或资格依据。",
                 "market": "美国",
-                "name": "美国 BLS：2018 SOC 直接匹配标题文件",
-                "period": "2018 SOC; accessed 2026-08-31",
-                "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "SOC direct match titles",
-                "url": "https://www.bls.gov/soc/2018/soc_2018_direct_match_title_file.pdf"
+                "name": "O*NET本职reported job titles",
+                "period": "2026职业档案",
+                "publisher": "O*NET / U.S. Department of Labor",
+                "scope": "reported titles",
+                "url": "https://www.onetonline.org/link/summary/11-9071.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明赌场客户身份与交易记录与异常活动识别与人员培训与升级机制要求。",
-                  "管理岗位不得自行弱化这些控制。"
+                  "现金入出分别聚合不净额抵，SAR保密。",
+                  "获准自动系统可能按有效流程执行，不等GenAI自获权限。"
                 ],
                 "evidence_type": "official regulatory guidance",
                 "id": "onet-wages",
-                "limitation": "以法规与主管机关指引原文为准。",
+                "limitation": "机构报告员工内部升级，非每笔监管确认。",
                 "market": "美国",
                 "name": "美国 FinCEN：赌场记录与报告与合规计划要求",
                 "period": "current guidance; accessed 2026-08-31",
                 "publisher": "Financial Crimes Enforcement Network",
                 "scope": "casino AML compliance",
-                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting-0"
+                "url": "https://www.fincen.gov/resources/statutes-regulations/guidance/frequently-asked-questions-casino-recordkeeping-reporting"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于说明持牌场所与游戏与定价与信用与交易记录与雇员登记要求。",
-                  "用于说明管理岗位须按辖区与雇主程序处理例外与上报。"
+                  "内华达NRS463.0157按实际职责界定gaming employee，463.335规定临时或正式登记及申请调查；非场所人人同证或全美统一执照。经理与监督岗位要求可不同，机构许可、个人登记、训练及岗位权限分别核。",
+                  "经理授权内判断，越权内部升级。"
                 ],
                 "evidence_type": "official jurisdiction regulator",
                 "id": "archivists",
-                "limitation": "以该辖区规则与要求原文为准，不适用其他辖区。",
+                "limitation": "州范围非全美统一资格，不冒本轮重新读全部州法。",
                 "market": "美国",
-                "name": "内华达州博彩委员会：博彩法规与登记要求",
-                "period": "current page; accessed 2026-08-31",
-                "publisher": "Nevada Gaming Control Board",
+                "name": "内华达NRS463人员规则",
+                "period": "沿本批已核公共条文范围",
+                "publisher": "Nevada Legislature",
                 "scope": "gaming regulations and registration",
-                "url": "https://www.gaming.nv.gov/"
+                "url": "https://www.leg.state.nv.us/NRS/NRS-463.html"
               }
             ]
           },
@@ -33389,7 +33401,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方统计方法",
             "适用范围": {
               "$item": "gambling-managers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33411,7 +33423,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织辅助专题",
             "适用范围": {
               "$item": "gambling-managers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33433,7 +33445,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "一般AI治理框架",
             "适用范围": {
               "$item": "gambling-managers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33455,7 +33467,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业范围",
             "适用范围": {
               "$item": "gambling-managers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33477,7 +33489,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方职业要素",
             "适用范围": {
               "$item": "gambling-managers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -34876,7 +34888,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "资金与合规与记录",
+                  "label": "留痕",
                   "secondary_value": null,
                   "value": {
                     "$item": "gambling-managers.profile.career-quick-answers-block.6",
@@ -35276,8 +35288,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "onet",
+              "bls"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -35308,7 +35320,7 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
+              "facilities",
               "employer"
             ],
             "id": "single-coverage",
@@ -36064,7 +36076,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-0-gap",
             "industry": {
               "$item": "gambling-managers.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36085,7 +36097,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-1-gap",
             "industry": {
               "$item": "gambling-managers.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36106,7 +36118,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-2-gap",
             "industry": {
               "$item": "gambling-managers.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36127,7 +36139,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-3-gap",
             "industry": {
               "$item": "gambling-managers.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36859,7 +36871,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "BLS就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "gambling-managers.profile.onet-structured-fields-block.4",
@@ -37939,15 +37951,15 @@
         ]
       },
       {
-        "derivation": "口径｜O*NET OnLine 11-9071.00 页面显示的 2025 年 BLS OEWS 全国年工资中位数（经来源登记核对），对应精确职业 11-9071.00；OEWS 不含福利与奖金与分红；后续更新以官方页面当期查询为准。",
-        "display_value": "中位时薪 44.82 美元 / 中位年薪 93,220 美元（2025，BLS OEWS）",
+        "derivation": "OEWS为雇员税前正常工时工资，含小费、佣金和生产奖金；排自雇、福利、加班溢价、班差与非生产奖金。全国分位非机构规模、年资或奖金分层，不等个人实发。",
+        "display_value": "中位时薪44.82美元 / 中位年薪93,220美元（2025，BLS OEWS）",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "工资中位数",
         "occupation_scope": "本职业：博彩经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -37959,7 +37971,7 @@
         "occupation_scope": "本职业：博彩经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
@@ -37971,67 +37983,141 @@
         "occupation_scope": "本职业：博彩经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "oews"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024—2034 年（经 O*NET 呈现），对应精确职业 11-9071.00，增量属「低于平均（1% 至 2%）」类别；预测含替换需求，不等于实际招聘数。",
-        "display_value": "增长 属「低于平均（1% 至 2%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）",
+        "derivation": "BLS本职11-9071：2025就业5.6千人→2035预测5.8千人，公布净增0.2千、增长3.6%，年均岗位空缺0.6千（600个），自雇比例7.7%。空缺含转出退出需求，非净新增、十年总量或实际招聘，不由圆整人数反算比例。",
+        "display_value": "增长3.6%（2025—2035，BLS本职11-9071）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
         "occupation_scope": "本职业：博彩经理",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测 2024 年基期（经 O*NET 呈现），对应精确职业 11-9071.00；不含自雇，分行业与分地区细分可能缺失。",
-        "display_value": "就业 约 5,100 人（2024，BLS 职业预测基期，经 O*NET 呈现）",
+        "derivation": "就业预测含自雇，本职7.7%。",
+        "display_value": "就业5,600人（2025，BLS本职11-9071）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
         "occupation_scope": "本职业：博彩经理",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜O*NET 呈现的 2024—2034 期间 Projected job openings 字段（约 600 个），主要来自替换需求与有限增长；按原文呈现，不可读作净新增岗位。",
-        "display_value": "预计岗位空缺约 600 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）",
+        "derivation": "含转出退出，非净新增十年总量或招聘。",
+        "display_value": "年均岗位空缺600个（2025—2035，BLS本职11-9071）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "本职业：博彩经理",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆除依法批准发行的彩票外赌博受法律禁止，无对应的合法经营岗位与职业工资统计",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：博彩经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆除依法批准发行的彩票外赌博受法律禁止，无对应的合法经营岗位与职业工资统计",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确全国、城市与用工形式工资就业。NBS城镇单位行业及五大岗位组、企业薪酬摘要不能直接映射11-9071，不用彩票销售、行业或美国值代填；有界查阅不证明统计不存在。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：博彩经理",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs",
+          "cnclass"
+        ]
+      },
+      {
+        "derivation": "全国分位非规模年资。",
+        "display_value": "72570美元/年（2025全国本职）",
+        "fact_id": "us-wage-q25-2025",
+        "market": "美国",
+        "measure": "工资第25分位",
+        "occupation_scope": "本职11-9071",
+        "period": "2025",
+        "source_refs": [
+          "oews"
+        ]
+      },
+      {
+        "derivation": "全国分位非规模年资。",
+        "display_value": "122990美元/年（2025全国本职）",
+        "fact_id": "us-wage-q75-2025",
+        "market": "美国",
+        "measure": "工资第75分位",
+        "occupation_scope": "本职11-9071",
+        "period": "2025",
+        "source_refs": [
+          "oews"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职政府行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-0-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职11-9071",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职艺术娱乐与休闲行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-1-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职11-9071",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职住宿与餐饮服务行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-2-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职11-9071",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "证据不足：未取得本职其他行业行业工资中位数，不用份额或组合值代填。",
+        "fact_id": "us-industry-wage-3-gap",
+        "market": "美国",
+        "measure": "本职行业工资缺口",
+        "occupation_scope": "本职11-9071",
+        "period": "页面未给参考年份",
+        "source_refs": [
+          "r2-pay-3"
         ]
       }
     ]
@@ -38059,25 +38145,25 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025，预测含自雇）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预计岗位空缺（2024—2034）"
+        "label": "美国年均岗位空缺（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "cn-urban-nonprivate-2025",
         "key": "china_pay",
-        "label": "中国大陆（法律禁止且无对应统计）"
+        "label": "中国精确职业数据缺口"
       }
     ]
   },
@@ -38092,10 +38178,10 @@
       "text": "博彩经理"
     }
   },
-  "source_content_sha256": "8e74942c740d9aed415d07dc044f4e0af20393ca0e21dd1fc76535334eb5ee79",
+  "source_content_sha256": "047d4b07d49d45c41f452c8e1d258dc87b347c1bd6406b4e5021fbbfa7757420",
   "subject": {
     "canonical_slug": "gambling-managers",
     "name": "博彩经理",
-    "summary": "博彩经理（O*NET-SOC 11-9071.00，Gambling Managers）在持牌赌场内计划、指导或协调博彩运营，并可能负责制定场馆规则：制定可提供的赌博种类与赔率与信用授信与餐饮供应等政策；为每局游戏设定并维护资金池与赌桌限额；追踪各赌桌的资金补给并办理所需文书；监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏；编排名工作表与站点安排并保存考勤；监控各班次人员配置并在需要时安排轮班与休息与替补；面试招聘员工、培训新员工并评估其绩效；在赌桌间巡视以确保运营依规进行且发牌员遵守场馆规则且玩家没有作弊，并驱逐疑似作弊者（如算牌者）；按玩家游玩时长与投注总额决定赠房赠餐与折扣等赠品的发放；通知引座员赌桌空位以便候场玩家入场；处理顾客关于派彩错误等问题的投诉；解答与解释场馆规则（游戏规则或投注限额）；记录与收取或赔付投注并按需开具收据；监控向玩家提供的信用；指导编制显示投注额与派彩的汇总表；审核运营费用与预算估算与投注账户与收款报告。官方定义原文：Plan, direct, or coordinate gambling operations in a casino. May formulate house rules."
+    "summary": "博彩经理（O*NET-SOC 11-9071.00，Gambling Managers）在持牌赌场内计划、指导或协调博彩运营，并可能负责制定场馆规则：制定可提供的赌博种类与赔率与信用授信与餐饮供应等政策；为每局游戏设定并维护资金池与赌桌限额；追踪各赌桌的资金补给并办理所需文书；监控博彩大厅的运营表现并在需要时移动游戏与安装新游戏；编排名工作表与站点安排并保存考勤；监控各班次人员配置并在需要时安排轮班与休息与替补；面试招聘员工、培训新员工并评估其绩效；在赌桌间巡视以确保运营依规进行且发牌员遵守场馆规则且玩家没有作弊，并驱逐疑似作弊者（如算牌者）；按玩家游玩时长与投注总额决定赠房赠餐与折扣等赠品的发放；通知引座员赌桌空位以便候场玩家入场；处理顾客关于派彩错误等问题的投诉；解答与解释场馆规则（游戏规则或投注限额）；记录与收取或赔付投注并按需开具收据；监控向玩家提供的信用；指导编制显示投注额与派彩的汇总表；审核运营费用与预算估算与投注账户与收款报告。官方定义原文：Plan, direct, or coordinate gambling operations in a casino. May formulate house rules. 本职核心还含熟悉场内游戏与营销推广，经理在实际授权内判断；任务分类非人人统一分工，疑似作弊非犯罪认定。"
   }
 }

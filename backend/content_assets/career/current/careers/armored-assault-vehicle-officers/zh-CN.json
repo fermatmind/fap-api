@@ -54,10 +54,10 @@
         "status": "pending_mapping"
       },
       "fact:us-employment-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-growth-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-industry-wage-education-2025": {
         "status": "pending_mapping"
@@ -72,10 +72,10 @@
         "status": "pending_mapping"
       },
       "fact:us-openings-2025-2035": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-2025": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "fact:us-wage-high10-2025": {
         "status": "pending_mapping"
@@ -23415,13 +23415,17 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "装甲突击车辆官的工作可分四类：分队指挥与作战（在陆地或水域的战斗环境中指挥坦克、轻型装甲部队与两栖突击车辆部队的作战行动，指导车组按命令完成任务）；车组与系统运用（指导车组成员操作瞄准与射击系统，协调先进车载通信与导航设备的运行）；计划与协同（制定与实施作战计划，含装甲车辆部队的战术运用，并与步兵、炮兵和空中支援部队协同）；人员与装备输送指挥（指挥作战期间人员与装备的运输）。四类职责都要求在本国军队的任命与指挥链范围内执行，并形成可供上级复核的计划、命令与行动记录。"
+              "证据不足：O*NET 不采集该军队职业的数据，未提供工资分位、中位数及职业就业统计；BLS OEWS 不调查 SOC 55 类军职。\n\n证据不足：本次国家统计局2025年工资公告未提供装甲突击车辆官的中国大陆专属工资，行业、单位类型和宽岗位均值不能替代。\n\n证据不足：本次未取得该职业就业规模、增长率及年均空缺预测，不能据军职名称或其他岗位推算。\n\n证据不足：本次未核到中国大陆与 O*NET 55-1013.00 一对一对应细类及专属资格清单；不能据内部映射空值认定中国没有对应军职。\n\n本次也未取得本职业周时长、日程规律和健康暴露统计；不能据职责环境推比例。\n\n工作分四类：指挥坦克、轻型装甲和两栖突击车辆部队在陆地或水域的行动；指导车组操作瞄准与射击系统并协调车载通信导航；制定与实施作战计划并与步兵、炮兵、空中支援协同；指挥作战期间人员与装备输送。以上来自 O*NET 摘要。计划、报告与记录的核对方法属于本页编辑建议；具体分工与授权以所属军队正式要求为准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "ep",
+            "nbs",
+            "arxiv",
+            "census"
           ],
           "type": "prose"
         },
@@ -23430,12 +23434,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 装甲突击车辆官（Armored Assault Vehicle Officers）属美国军队职业（2018 SOC 大类 55）。官方职责为：在陆地或水域的战斗环境中指挥坦克、轻型装甲部队与两栖突击车辆部队的作战行动；职责包括指导车组成员操作瞄准与射击系统、协调先进车载通信与导航设备的运行、指挥作战期间人员与装备的运输、制定与实施作战计划（含装甲车辆部队的战术运用），并与步兵、炮兵和空中支援部队协同。（原文：Direct the operation of tanks, light armor, and amphibious assault vehicle units during combat situations on land or in aquatic environments. Duties include directing crew members in the operation of targeting and firing systems; coordinating the operation of advanced onboard communications and navigation equipment; directing the transport of personnel and equipment during combat; formulating and implementing battle plans, including the tactical employment of armored vehicle units; and coordinating with infantry, artillery, and air support units.）O*NET 对该军队职业未发布工资、就业、增长、行业分布、兴趣代码、工作情境、任务清单、技术清单、学历构成与 Job Zone 数据，本页在这些字段一律显示「证据不足」，不使用代理数字。"
+              "数据口径：美国 O*NET 55-1013.00，Armored Assault Vehicle Officers。摘要列出装甲车辆部队指挥、车组系统指导、通信导航协调、作战计划和兵种协同；页面明确不采集军职数据，详细页与自定义页不能补足任务评分、软件、学历、兴趣和工作情境统计。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "bls",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23444,18 +23450,18 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "分队指挥与作战｜把任务决心变成分队行动｜在陆地或水域的战斗环境中指挥坦克、轻型装甲部队与两栖突击车辆部队的作战行动，按指挥链下达命令并承担任务结果责任。",
-              "作战计划与战术运用｜让行动有可行方案｜制定与实施作战计划（含装甲车辆部队的战术运用），结合地形、敌情与车辆与车组战备状态确定队形与优先级。",
-              "车组与系统运用指导｜让火力与系统可用｜指导车组成员操作瞄准与射击系统，协调先进车载通信与导航设备的运行，按技术规定检查与报告异常。",
-              "协同与联合行动｜让兵种之间衔接｜与步兵、炮兵和空中支援部队协调火力与机动，按程序建立通联、明确协同要求与升级路径。",
-              "人员与装备输送指挥｜把人员与装备送到位｜指挥作战期间人员与装备的运输，明确装载、路线与交接要求并保留可复核记录。",
-              "指挥与安全边界｜让每一步可追溯｜按所属军队的作战与作业规程执行，遵守武力使用与保密规定，发现异常按指挥链上报并按程序处置。"
+              "装甲部队指挥｜核心对象为车辆部队｜在陆地或水域的战斗环境中指挥坦克、轻型装甲和两栖突击车辆部队。",
+              "作战计划｜制定并实施计划｜O*NET 明确包括装甲车辆部队的战术运用，摘要没有给出具体方案或技术步骤。",
+              "车组系统指导｜指导与协调系统运用｜指导车组操作瞄准射击系统，协调车载通信和导航设备。",
+              "兵种协同｜协调相关单位｜与步兵、炮兵及空中支援协同，不据摘要推导具体武力使用许可。",
+              "人员装备输送｜指挥作战期间运输｜职业概述只支持职责，不提供装载、路线或安全操作标准。",
+              "记录与边界｜编辑核对建议｜保留材料版本和待核事项，具体纪律、保密与授权以正式制度为准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.responsibilities-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "list"
         },
@@ -23464,13 +23470,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作环境｜官方职责描述为在陆地或水域的战斗环境中指挥作战；O*NET 未发布该职业工作情境的受访比例。\n主要装备与系统｜指导车组使用瞄准与射击系统，协调车载通信与导航设备，并指挥人员与装备输送。\n指挥与计划｜以制定与实施作战计划（含装甲车辆部队的战术运用）为核心职责。\n协同对象｜与步兵、炮兵和空中支援部队协同，属联合与合成兵种行动的一部分。\n团队作业｜职责以指挥分队与车组的方式描述；O*NET 未发布协调领导他人与团队协作的受访比例。\n风险与安全｜属战斗岗位，风险与安全要求由所属军队的训练与作业规程与交战规则规定；O*NET 未发布事故、健康暴露或有害环境的受访比例。\n工作强度｜Armor Branch 指南显示任职在排级领导、连队指挥与更高层级参谋之间递进；O*NET 未发布该职业工作周时长与日程规律性的受访比例。\n决策与授权｜指挥与武力使用须在任命与指挥链授权范围内进行；O*NET 未发布决策自由度的受访比例。\n记录与程序｜核查应围绕计划、命令、现场与记录证据；O*NET 未发布书面沟通与记录的受访比例。"
+              "工作环境｜摘要描述陆地或水域战斗环境，无暴露比例。\n装备对象｜坦克、轻型装甲和两栖突击车辆部队。\n系统指导｜涉及瞄准射击系统与车载通信导航。\n计划工作｜制定并实施作战计划，无任务频率评分。\n协同对象｜步兵、炮兵与空中支援单位。\n输送职责｜指挥作战期间人员和装备运输。\n任职实例｜2021年陆军指南列排长、分队指挥和参谋等历史实例。\n强度边界｜未取得本职业周时长、日程规律与健康暴露统计。\n核对方法｜编辑建议保存来源、版本及待核项，不是作战程序。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.work-context-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "oews",
+            "editor"
           ],
           "type": "prose"
         },
@@ -23494,12 +23501,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "美国侧：O*NET 55-1013.00 页面未提供可安全引用的工资分位、中位数、就业规模、增长率与年均职位空缺；本页因此不生成美国中位数或起薪，也不使用其他职业或行业数字替代。美国军人基本工资按军衔等级与服役年限确定，当前官方口径不是该职业的工资分布。证据不足：O*NET 未发布该军队职业的工资、就业与增长数据。"
+              "数据口径：O*NET 不采集该军队职业的数据，未提供工资分位、中位数及职业就业统计；BLS OEWS 不调查 SOC 55 类军职。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -23508,13 +23516,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "受领任务与授权：确认任务、指挥关系与行动授权范围。 → 判断情况：综合作战计划、地形与敌情、车辆与车组战备状态形成行动方案。 → 下达指挥：把意图与任务分解为车组与分队可执行的指令。 → 组织协同：与步兵、炮兵和空中支援部队协调火力与机动。 → 监控与调整：持续接收报告并按情况调整队形与优先级。 → 复核与记录：核对任务进展与伤亡与装备损耗并形成行动记录。"
+              "核对来源：确认公开职责和材料版本。 → 区分职责：标明计划、车组指导与协同。 → 整理问题：列出任职及授权待核项。 → 对照资料：检查相互矛盾和缺失。 → 请示复核：把未决事项交正式渠道。 → 形成记录：保留来源与修改依据。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.3",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23523,12 +23531,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧：国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布，https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html）按行业门类、单位类型与岗位类别发布平均工资，不含军队职业口径；本页不引用行业门类数字作为本职业工资。证据不足：中国大陆统计未单列该职业的工资，国家统计局按行业门类与单位类型发布的平均工资不含军队职业口径。"
+              "数据口径：本次国家统计局2025年工资公告未提供装甲突击车辆官的中国大陆专属工资，行业、单位类型和宽岗位均值不能替代。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -23552,12 +23561,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "就业预测：O*NET 该军队职业页面未提供 2024—2034 年或任何期间的就业预测与年均职位空缺；本页不把其他职业或职业组合的预测当作本职业数字，也不据此推测岗位增减。证据不足：O*NET 未发布该军队职业的工资、就业与增长数据。"
+              "数据口径：本次未取得该职业就业规模、增长率及年均空缺预测，不能据军职名称或其他岗位推算。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -23566,13 +23576,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "明确系统与通联要求：确定车组分工、通联对象与位置报告要求。 → 指导系统运用：指导车组操作瞄准与射击系统，协调车载通信与导航设备运行。 → 保持通联：按指挥链报告位置与态势并核对信息。 → 指挥输送：指挥作战期间人员与装备的运输并明确装载与交接要求。 → 协同与升级：按授权处置并把超出权限的事项升级给上级指挥。 → 记录与复盘：如实记录指挥过程并根据复盘调整。"
+              "限定材料：只用公开或虚构记录。 → 标明分工：区分整理人与复核人。 → 对照版本：检查通知和引用是否一致。 → 核查状态：未知项不写成已确认。 → 提交问题：说明冲突及待核条件。 → 保存更正：保留原文与复核结果。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.5",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23581,12 +23591,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧对应口径：该职业为美国军队职业，中国大陆统计与职业分类未建立对应口径（路由资料标注中国大陆映射状态为「无」、中国工资状态为「记录为不可得」）；军官身份、军衔与岗位权力来自军队制度、任命与授权链，不是面向公众申请的职业执照，因此本页不提供未核实的中国对应编码、资格条件或工资数字，只保留来源与边界记录。"
+              "数据口径：本次未核到中国大陆与 O*NET 55-1013.00 一对一对应细类及专属资格清单；不能据内部映射空值认定中国没有对应军职。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -23595,13 +23606,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "按所属军队要求保存作战计划、命令与行动记录、车辆与车组战备记录以及训练与考核记录，使指挥过程可复核、可追溯；不得伪造记录，也不得把模拟推演结果当作真实作战结果。"
+              "如实留痕；不替授权。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23610,14 +23620,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界看四件事：谁制定与下达作战计划、谁指挥分队与车组、谁批准武力使用与目标处置、谁承担人员与任务结果责任。装甲突击车辆官在其职责内制定与实施作战计划、指挥装甲车辆分队与车组、指导车组成员操作瞄准与射击系统、协调车载通信与导航设备并指挥人员与装备输送；更高层级的战役决心、作战区域划分与交战规则由上级指挥体系下达；车辆与装备检修由维修与保障单位负责；训练标准与任职审查由所属军队规定。指挥与处置是否被授权以任命与指挥链为准，涉及人员安全或武力使用的判断须按交战规则与指挥程序上报。"
+              "官方核心是指挥装甲车辆部队、制定并实施作战计划、指导车组系统运用及协调相关兵种。车组操作、保障维修、训练教育与指挥工作可能交叉，不能凭职业概述断言军官不管维护或训练。美国陆军2021年装甲分支指南还讨论领导培养、训练和其他任职；本页的职责比较不替具体岗位编成和授权。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -23656,13 +23665,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不把相邻职责算作本职业核心任务：空勤官以航空任务与机组指挥为主，飞机弹射与回收官以舰面或基地的起降与回收指挥为主，火炮导弹官以间接火力系统与火力指挥为主，指挥与控制中心官以跨单元态势与指令流为主，步兵军官以地面步兵单位作战指挥为主；装甲突击车辆成员以车辆与武器系统操作执行为主，不承担指挥与计划职责。车辆大修、后勤补给与训练制度制定也不属于本职业指挥职责。"
+              "相邻职业按各自摘要区分主要对象：空勤官在航空器上执行并指导任务；起降回收官计划、指挥航母相关系统的运作与维护；火炮导弹官管理相应人员和武器系统；指挥控制中心官管理通信、探测及武器系统；步兵军官指挥步兵，也可部署车辆装备；装甲车组侧重操作车辆与武器系统。边界并非全部互斥，不能把比较当转任资格。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.10",
           "source_refs": [
-            "onet",
-            "onet"
+            "facilities",
+            "archivists",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -23686,13 +23696,11 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "装甲突击车辆官（美方对应 O*NET 55-1013.00，Armored Assault Vehicle Officers）在陆地或水域的战斗环境中指挥坦克、轻型装甲部队与两栖突击车辆部队的作战行动；官方职责包括指导车组成员操作瞄准与射击系统、协调先进车载通信与导航设备的运行、指挥作战期间人员与装备的运输、制定与实施作战计划（含装甲车辆部队的战术运用），并与步兵、炮兵和空中支援部队协同。该职业在美国属军队职业：O*NET 未发布其工资、就业、增长、兴趣代码、工作情境与学历数据，本页对这些字段一律显示「证据不足」并保留来源与边界记录。中国大陆统计未单列该职业，国家统计局 2025 年城镇单位就业人员年平均工资只能作为宽口径背景，不能当作本职业工资。本页不构成招募、服役、训练或作战指挥建议。"
+              "装甲突击车辆官指挥装甲车辆部队，制定并实施作战计划，指导车组运用系统，组织兵种协同和人员装备输送。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.definition-block.11",
           "source_refs": [
-            "onet",
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -23717,13 +23725,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "受领任务与授权 → 判断情况并制定方案 → 下达指挥与组织协同 → 监控进展并调整 → 复核记录与向上级报告。"
+              "核对任务 → 区分职责 → 整理资料 → 人工复核 → 请示待核 → 保存记录。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.13",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23732,13 +23739,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "以任务是否达成、计划与指挥是否有效、协同是否顺畅、人员与装备安全与记录是否可复核衡量，不以单次演练成绩或单项技能考核衡量。"
+              "本页建议观察计划说明是否清晰、协同问题是否有据、记录是否真实；这些是编辑核对点，不是所属军队正式考核标准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.14",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23747,13 +23753,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "作战计划与命令文本、行动与态势记录、车辆与车组战备记录、训练与考核记录、与步兵炮兵空中支援的协同记录、复盘与评估报告。"
+              "按所属军队要求保存作战计划、命令与行动记录、车辆与车组战备记录以及训练与考核记录，使指挥过程可复核、可追溯；不得伪造记录，也不得把模拟推演结果当作真实作战结果。 以上记录类别为编辑核对建议，不公开真实部队任务资料。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.15",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -23777,13 +23782,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "分队指挥与作战计划由指挥员承担；车组车辆与武器系统操作由车组成员执行；车辆与装备检修由维修与保障单位负责；训练标准与任职审查由所属军队规定。"
+              "装甲军官摘要侧重指挥与计划，车组摘要侧重系统操作；具体维修、训练和保障责任应核岗位制度，不能把概述当作排他分工表。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.17",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -23792,13 +23797,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧：O*NET 55-1013.00 属军队职业，官方资料只提供职责描述，未发布该职业的学历构成、Job Zone 与入门准备数据；委任、分支分配、训练与任职要求由所属军队规定，本页不提供标准内容。中国大陆侧：该职业为美国军队职业，中国大陆统计与职业分类未单列对应口径，本页不提供未核实的对应编码或资格条件；军官身份、军衔与岗位权力来自军队制度、任命与授权链，不是面向公众申请的职业执照。"
+              "美国侧：O*NET 不采集军职学历构成或 Job Zone，不能给出通用学历门槛。美国陆军2021年装甲分支指南提供历史专业教育与任职实例，不能代表所有军种和当前个人资格。中国2021年制度公告涉及选拔、教育、考核、任用与岗位管理；本次未取得与该美国代码一对一的完整资格清单，应以当期正式渠道为准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.18",
           "source_refs": [
             "onet",
-            "onet"
+            "oews",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -23910,12 +23916,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "委任与训练：军官岗位属于军队任命与分支管理体系，Armor Branch 路径以委任后的专业军事教育与岗位发展为核心；具体委任、分支分配、训练科目与考核标准由所属军队规定，本页不提供标准内容，也不把一般教育学历或民间证书等同于军官委任或装甲岗位任职资格。"
+              "历史实例：美国陆军2021年装甲分支指南讨论初期坦克或侦察排长能力、进阶专业教育、连队或骑兵分队指挥及营旅参谋岗位。这是特定军种旧版职业发展材料，不能作为现行统一晋升顺序或录用保证；学历和纸面练习不自动取得委任或指挥权。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.26",
           "source_refs": [
-            "onet",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -23998,13 +24004,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "可迁移方向：分队指挥、作战计划与协同、通信与导航协调等能力可迁移到空勤官、飞机弹射与回收官、火炮导弹官、指挥与控制中心官、步兵军官等相邻军官岗位，以及装甲突击车辆成员方向；但各岗位的委任、资格、授权与责任边界不同，不能只按职位名称平移。"
+              "可比较航空器任务、起降回收系统、火炮导弹系统、指挥中心、步兵指挥与装甲车组操作等方向。共享沟通和资料核对经验只是编辑比较，各自任职资格和授权须正式核实，不表示可以直接转任。"
             ]
           },
           "id": "armored-assault-vehicle-officers.profile.career-quick-answers-block.32",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "facilities",
+            "archivists"
           ],
           "type": "prose"
         },
@@ -24070,16 +24077,16 @@
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               }
             ]
           },
@@ -24114,16 +24121,19 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "对照依据为 O*NET 55-1013.00 官方职责描述与路由资料标注的相邻职业关系；相邻关系只说明职责邻近，不代表资格、授权或责任可以互换。"
+              "六方向以各自 O*NET 55-1011、1012、1014、1015、1016、3013 摘要核职责，本职业为55-1013。表中适合选择与边界是编辑比较，不是官方相邻推荐或资格转换表。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.9",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "editor",
+            "r2-pay-2",
+            "r2-pay-3",
+            "facilities",
+            "archivists",
+            "msresearch",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -24147,13 +24157,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以航空器为载体、以飞行任务与机组指挥为核心；不指挥装甲车辆分队的机动与火力，编成与资格不同。"
+              "侧重航空器上任务的执行与指导，包括通信、雷达、武器系统和检查；装甲军官侧重车辆部队指挥，不能断言空勤只做指挥。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24168,7 +24179,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.12",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24177,13 +24189,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "在航空器上指挥机组完成任务与机上任务系统运用，产出是航空任务的指挥与执行结果。"
+              "执行并指导飞行中任务，服务战斗、侦察、运输和搜救；涉及机上通信雷达、武器系统、检查及投送。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24197,7 +24210,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24206,13 +24221,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以固定设施的起降与回收指挥为主，作业对象是航空器与甲板/基地设备，不指挥装甲车辆分队作战。"
+              "侧重航母起降回收的弹射、拦阻及相关系统运作维护，并包括设计测试、技术说明与培训，不仅是固定场地作业。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.15",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24227,7 +24243,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.16",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24236,13 +24253,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "指挥舰面或基地的航空器起降与回收作业与相关保障，产出是起降与回收作业的安全执行结果。"
+              "计划并指挥航母起降回收相关机械、液压及控制系统的操作与维护，监督装备准备和安全。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.17",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24256,7 +24274,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24265,13 +24285,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以间接火力系统与火力指挥为中心；装甲突击车辆官以装甲分队机动与直瞄火力为中心，装备与编成不同。"
+              "侧重火炮与导弹人员及武器系统运作；摘要涵盖野战炮兵、防空及导弹等范围，不能统一简化为间接火力。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.19",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24286,7 +24307,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.20",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24295,13 +24317,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "指挥火炮与导弹系统分队与间接火力运用，产出是火力打击计划与射击指挥结果。"
+              "管理火炮、导弹相关人员与武器运作，涉及部署计划、火控通信、相关设施安全与武器系统维护。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.21",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24315,7 +24338,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24324,13 +24349,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以跨单元信息汇集与指令流为主，不直接指挥装甲车辆分队；责任中心是态势与协调而非车辆与直瞄火力。"
+              "侧重控制空地海行动的通信、探测和武器系统，也指导武器瞄准、射击与发射计算机，不能写成只传递信息。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.23",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24345,7 +24371,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.24",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24354,13 +24381,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "在指挥所或控制中心汇集态势、协调资源与传递指令，产出是态势判断与指令流结果。"
+              "管理通信、探测及武器系统、评估指挥中心信息、组织紧急计划和相关协调，并指导武器计算机系统。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.25",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24374,7 +24402,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24383,13 +24413,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以徒步或机步步兵单位为中心；机动方式、装备与编制不同，与装甲分队的战术运用与协同要求不同。"
+              "侧重步兵部队指挥与训练，也涉及武器、车辆和装备部署及装甲协同；不能按徒步与车辆做绝对划分。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.27",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24404,7 +24435,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.28",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24419,7 +24451,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.29",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24433,7 +24466,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24442,13 +24477,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "以车辆驾驶、武器与车载系统操作执行和车组分工为主，不承担分队指挥与作战计划责任，任职路径不同。"
+              "车组侧重操作车辆及武器系统，摘要也包括维护和运输；装甲军官摘要明确计划和部队指挥，不推所有车组均无任何带队职责。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.31",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24463,7 +24499,8 @@
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.32",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24472,13 +24509,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "操作装甲车辆与武器与车载系统并执行车组任务，产出是车辆与系统操作执行结果。"
+              "操作装甲车辆、瞄准射击与通信系统，实施相关维护及战斗环境人员装备输送。"
             ]
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.33",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24492,7 +24530,9 @@
           },
           "id": "armored-assault-vehicle-officers.direction-comparison.adjacent-career-comparison-table.34",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24542,25 +24582,25 @@
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "BLS OEWS FAQ（SOC55不调查）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 55-1013.00 认证发现",
+                "entity": "O*NET军种资料指引",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "O*NET职责概述与资料边界",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 职业摘要（职责范围）",
+                "entity": "O*NET 55-1013职责概述",
                 "id": "link-7",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
@@ -24584,16 +24624,16 @@
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "BLS OEWS FAQ（SOC55不调查）",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 55-1013.00 认证发现",
+                "entity": "O*NET军种资料指引",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
                 "entity": "O*NET 55-1013.00 职业摘要",
@@ -24608,34 +24648,34 @@
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 自定义职业档案",
+                "entity": "O*NET军职采集边界",
                 "id": "link-15",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/55-1013.00"
+                "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "O*NET军职采集边界",
                 "id": "link-16",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 认证发现",
+                "entity": "O*NET职责概述与资料边界",
                 "id": "link-17",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "O*NET军职采集边界",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 详细资料",
+                "entity": "O*NET职责概述",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               }
             ]
           },
@@ -24779,15 +24819,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化可能改变计划文书与命令初稿、态势与情报信息整理、训练推演与复盘材料等环节，但没有官方证据表明它会取代分队指挥与作战计划、车组与系统运用指导、兵种协同、人员与装备输送指挥，以及武力使用与目标处置的授权责任；O*NET 未发布该军队职业的就业预测，本页也不据此推测岗位数量变化。技术能力、实际部署与就业结果要分开判断。"
+              "本页未取得装甲军官 AI 采用率、绩效或岗位数量因果研究。文书整理、差异比对和复盘材料可作编辑层面的辅助试验；O*NET 只支持职责与军职数据边界。美国国防部2023年自主武器政策说明人类判断和合法谨慎使用要求，不证明所有任务永远不可自动化。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.18",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -24882,12 +24920,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 技术清单"
+              "BLS OEWS 调查范围"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -24896,12 +24934,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明美国职位的技术信号；不是采用率或自动化比例。"
+              "FAQ列明 SOC55军职不纳入调查，不能用于AI采用率。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -24910,12 +24948,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 认证发现"
+              "O*NET军种资料指引"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24924,12 +24963,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于发现相关认证；不能当作委任、指挥授权或签字权。"
+              "摘要建议向军种查资料，本页不声称获得认证清单。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24938,7 +24978,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 培训发现"
+              "O*NET职责概述（非任用条件）"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.29",
@@ -24952,7 +24992,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于发现相关教育训练路径；不构成录用或授权。"
+              "仅提供概述及军种资料入口，未提供完整个人资格。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.30",
@@ -24966,12 +25006,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 职业摘要（职责范围）"
+              "各自职业摘要对照"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -24980,12 +25021,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对官方职责范围与排除的相邻身份。"
+              "职责比较需读各职业摘要，不能由本职业摘要排除全部相邻任务。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.32",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25099,12 +25141,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持官方职责、身份边界与技术信号，不是 AI 替代率或岗位数量预测。"
+              "五卡分别核职业职责、军职采集边界、自定义可选内容、OEWS调查范围和后续资料指引；均不提供AI岗位替代率。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25169,12 +25212,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务清单即使存在也不代表每个岗位都承担全部任务，也不能外推为中国大陆。"
+              "明确不采集军职，不是任务评分或AI研究。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25183,12 +25227,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 详细资料"
+              "O*NET详细页军职边界"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25197,12 +25242,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业的任务与工作活动"
+              "军职资料的采集范围"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25211,12 +25257,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该军队职业在 O*NET 未提供任务清单与工作活动数据；官方资料只给出职责描述。"
+              "页面明确O*NET不采集军职数据，仅提供职业概述和军种职业资料入口。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25225,12 +25272,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该页不设定个人胜任阈值，也不提供工资或就业数据。"
+              "不能补出任务评分、学历或个人胜任阈值。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25239,12 +25287,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 自定义职业档案"
+              "O*NET自定义页"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25253,12 +25302,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方档案可选取的字段"
+              "可选取的内容"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25267,12 +25317,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "官方档案仅提供职业身份与职责描述，可用于核对职业范围。"
+              "当前页可选Crosswalk和Military Career Summaries；不提供一般民用职业的全部数据栏目。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25281,12 +25332,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术信号不是采用率、自动化比例或岗位数量预测。"
+              "调查范围不等于AI采用、自动化比例或工资因果。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -25295,12 +25346,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 技术清单"
+              "BLS OEWS FAQ"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -25309,12 +25360,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国职位的技术信号"
+              "SOC55类调查范围"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -25323,12 +25374,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该军队职业未提供技术清单，本页不引用其他职业的软件或装备清单替代。"
+              "FAQ明确 Military Specific Occupations 不在OEWS调查之内，不能由此推论所有政府渠道均无军人薪酬信息。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "census"
           ],
           "type": "prose"
         },
@@ -25337,12 +25388,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不构成委任、指挥授权或签字权，也不能作为中国大陆资格依据。"
+              "指向后续核查，不代表已经取得完整训练、认证或任用清单。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25351,12 +25403,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 认证与培训发现"
+              "O*NET军种资料指引"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25365,12 +25418,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国认证与培训路径"
+              "继续查阅的渠道"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25379,12 +25433,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业未提供专属认证或培训清单；委任与训练由所属军队规定。"
+              "摘要说明军种是获取本职业资料的更好渠道，并列军事职业摘要入口；本页只据已读概述核范围。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25393,13 +25448,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面：文本与表格工具可用于计划文书与命令初稿、情报与态势信息整理与记录汇总；通信与导航数据、地图与态势工具可用于信息整理。这些是辅助能力，输出仍需结合实际态势与指挥要求核实后才能使用，也不能替代指挥与武力使用判断。技术可行不等于已采用。"
+              "编辑辅助试验：仅用公开或虚构材料，让工具整理表格、标注版本差异或生成问题初稿，再由人对照输入核实；不宣称部队已经部署，不向未授权工具提交内部资料。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.61",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25408,13 +25462,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "是否采用取决于所属军队的装备与作战规程、涉密与信息安全要求、系统条件与人员能力；本页不推测采用进度，也没有该职业的采用率统计。"
+              "证据不足：本次未取得该职业AI实际采用率、部署效果或收益研究；是否允许使用须依所属军队制度与信息要求核实。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.62",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25423,13 +25476,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的就业预测，本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "证据不足：本次未取得该职业AI引起岗位增减的因果研究，任务可被辅助不能直接换算就业变化。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25438,13 +25490,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有官方证据支持「被取代」。自动化可能辅助计划文书与态势信息整理，但分队指挥与作战计划、车组与系统运用指导、兵种协同、人员与装备输送指挥以及武力使用授权责任仍由指挥员与指挥链承担；O*NET 未发布该职业的就业预测，本页也不据技术名词推断岗位增减。"
+              "不能据本次资料判断整体被取代。文书和表格整理属于编辑辅助试验，没有岗位级部署或就业因果证据，不能给替代率。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.64",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25468,13 +25520,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不需要。核心能力是分队指挥与作战计划、情况判断、兵种协同与指挥链沟通；推演与记录类工具会用即可，是否需要额外技术能力取决于所属军队与岗位要求。"
+              "本次已读职责概述没有规定编程条件，但不能由此保证所有岗位均无需编程；具体条件须核当期正式岗位资料。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.66",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25498,13 +25550,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计划文书与命令初稿、情报与态势信息整理、战备数据比对、训练推演与复盘材料等环节信息化程度较高；受影响程度取决于所属军队的作战规程、涉密与信息安全要求与系统条件。"
+              "编辑试验可优先比较资料汇总、版本差异和复盘初稿，尚未取得该职业实际采用及相对暴露排序的研究。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25513,12 +25565,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 任务与工作活动（编辑说明）"
+              "编辑任务比较，非O*NET工作活动评分"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25527,13 +25580,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供此类预测。O*NET 未发布该军队职业的就业预测，也没有任何来源给出该职业的岗位数量变化；技术能力、实际采用与就业结果要分开判断。"
+              "证据不足：本次未取得该职业2035年岗位数量预测或AI就业因果研究，不能据工具能力推断增减。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.70",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25542,13 +25595,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 就业预测（官方资料边界说明）"
+              "O*NET军职数据边界"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.71",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25557,13 +25610,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。指挥与武力使用授权、目标处置与任务决定必须由指挥链按程序下达，涉及武力使用的自主或半自主系统仍要求受训指挥员保持适当的人类判断；工具可用于信息整理，但不能替代指挥、授权与责任承担。"
+              "O*NET概述不能赋予读者指挥或武力使用权限。编辑建议将工具处理限于允许的材料整理，正式使用条件、授权及责任须依所属军队制度核实；本页不据概述保证所有AI任务永久不可自动化。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.72",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25572,12 +25625,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 官方职责描述与人类判断要求（编辑说明）"
+              "O*NET职责概述与编辑授权核对建议"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "onet",
+            "editor"
           ],
           "type": "prose"
         },
@@ -25586,13 +25640,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供此类年份。官方资料只给出该军队职业的职责描述，没有任何来源给出该职业的消失年份。"
+              "证据不足：本次未取得该职业消失年份研究，不提供年份。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.74",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25631,13 +25685,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 培训发现（编辑建议）"
+              "O*NET职责概述与编辑学习建议"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.77",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -25766,13 +25820,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "部队位置、任务与作战计划属受保护信息，外发会造成安全风险。"
+              "可能涉及受保护的部队任务信息，公开资料练习不得夹带真实内部材料；具体分类以正式保密规定为准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.86",
           "source_refs": [
             "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -26320,12 +26374,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆职业分类与工资统计未单列该美国军队职业（O*NET 55-1013.00）。"
+              "证据不足：本次国家统计局2025年工资公告未提供装甲突击车辆官的中国大陆专属工资，行业、单位类型和宽岗位均值不能替代。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26404,12 +26458,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：非私营与私营单位划分不适用于军队职业。"
+              "证据不足：该公告单位类型均值不是装甲军官专属工资，本页不代填。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26432,12 +26486,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局按城镇 5 人及以上法人单位统计，军队职业不在其统计口径内。"
+              "城镇5人及以上法人单位，按行业、单位类型和宽岗位发布；未提供本职业专属值。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26474,12 +26528,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "年薪口径（不适用于本职业）"
+              "年平均税前工资（宽口径）"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26488,12 +26542,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "军队人员的薪酬按所属军队的薪酬与津贴制度执行，国家统计局年平均工资不是本职业的工资单位口径。"
+              "公告工资总额含个人缴纳社保、公积金和个税；不是个人实发，也不是本职业专属工资。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26530,13 +26584,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（计划文书与命令初稿、情报与态势信息整理、战备与训练数据汇总）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断涨薪或降薪；军队岗位的薪酬与津贴按所属军队制度执行，不由行业工资决定。"
+              "证据不足：本次未取得该职业AI与中国工资变化的因果研究；不能由辅助任务推涨薪降薪。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26545,12 +26599,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧不采用行业门类与岗位类别的宽口径代理：该职业为美国军队职业，中国大陆统计与职业分类未建立对应口径（路由资料标注中国大陆映射状态为「无」、中国工资状态为「记录为不可得」）。军官身份、军衔与岗位权力来自军队制度、任命与授权链，不是面向公众申请的职业执照；国家统计局按法人单位统计，军队职业不在其口径内，因此本页保留可见缺口，不以行业数字冒充职业中位数。"
+              "本次未核到中国大陆与该美国代码一对一细类及专属工资。内部映射状态不是中国军职不存在的证据；2021年军官制度公告只支持制度背景。国家统计局2025年公告按行业、单位类型与宽岗位发布，未提供本职业专属数字，不能直接代作军官收入。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26559,12 +26614,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国侧：官方未发布学历要求"
+              "美国侧：O*NET未提供学历构成"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.25",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26574,12 +26628,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "无公开口径（委任与任职由所属军队规定）"
+              "按军種与当期岗位核任职要求"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26604,13 +26657,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆侧：未建立对应口径"
+              "中国大陆侧：对应细类待核"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.28",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26619,13 +26671,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "无公开口径"
+              "本次未核完整资格清单"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26634,13 +26685,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "该职业为美国军队职业，中国大陆统计与职业分类未建立对应口径，本页不提供未核实的对应编码或资格条件。"
+              "2021年制度公告涉及选拔、教育、考核和任用，未给本职业一对一资格清单；不由内部映射状态推无对应军职。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26739,12 +26790,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "美国军队（现役）"
+              "美国军队职业"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.37",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26754,12 +26804,11 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 官方口径只覆盖美国军队职业，未发布行业分布数据。"
+              "O*NET摘要支持美国军职身份，不提供行业份额或实时招募名额。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
-            "onet",
             "onet"
           ],
           "type": "prose"
@@ -26769,7 +26818,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（无对应口径）"
+              "中国大陆（本次未核对应细类）"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.39",
@@ -26784,13 +26833,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆统计与职业分类未建立对应口径，无法给出行业分布。"
+              "本次未取得中国大陆专属行业分布；不推中国没有相关军职。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.40",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26829,7 +26877,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 职业摘要（美国军队职业，未提供中国大陆口径）｜https://www.onetonline.org/link/summary/55-1013.00"
+              "O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.43",
@@ -26888,12 +26936,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "国家统计局2025年工资公告（统计背景）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26902,13 +26950,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额。该口径不含军队职业，本页不以行业或岗位类别数字冒充本职业工资，也不把美国数字换算成人民币预期。"
+              "2025年公告覆盖城镇5人及以上法人单位，不含个体工商户和自由职业者；工资总额含个人税、社保和公积金。公告未给本职业专属值，不推所有军队人员被排除，不用宽行业均值或汇率换算代填。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26931,12 +26978,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆统计未单列该职业，本页不提供月薪或年薪数字"
+              "证据不足：本次国家统计局2025年工资公告未提供装甲突击车辆官的中国大陆专属工资，行业、单位类型和宽岗位均值不能替代。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27001,13 +27048,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "路由资料标注：该职业为美国军队职业（2018 SOC 大类 55，O*NET-SOC 2019 精确匹配），中国大陆映射状态为「无」，中国工资状态为「记录为不可得」；本页不提供未核实的中国职业编码或资格条件。"
+              "本页主体为美国 O*NET 55-1013.00。中国一对一细类与资格清单本次未核，内部映射空值不能作为国家分类不存在的结论。"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -27016,12 +27063,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              "国家统计局2025年工资公告（统计背景）｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "armored-assault-vehicle-officers.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27066,14 +27113,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 职业摘要（装甲突击车辆官，美国军队职业）｜https://www.onetonline.org/link/summary/55-1013.00；O*NET 55-1013.00 详细资料（工资与就业字段为空）｜https://www.onetonline.org/link/details/55-1013.00；O*NET 55-1013.00 自定义职业档案（用于核对字段可用性）｜https://www.onetonline.org/link/custom/55-1013.00"
+              "O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00；BLS OEWS FAQ（SOC55不调查）｜https://www.bls.gov/oes/oes_ques.htm；O*NET自定义页（Crosswalk与军事资料入口）｜https://www.onetonline.org/link/custom/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "census",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27096,12 +27143,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的工资分位，本页不提供第 10 分位数字，也不使用代理数字；O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
+              "未取得本职业全国工资10分位，不提供数字或起薪；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -27124,12 +27172,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的工资分位，本页不提供第 25 分位数字，也不使用代理数字；O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
+              "未取得本职业全国工资25分位，不提供数字或起薪；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -27152,12 +27201,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的工资中位数，本页不生成中位数或起薪，也不使用代理数字；O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
+              "未取得本职业全国工资中位数，不提供数字或起薪；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -27180,12 +27230,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的工资分位，本页不提供第 75 分位数字，也不使用代理数字；O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
+              "未取得本职业全国工资75分位，不提供数字或起薪；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -27208,12 +27259,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的工资分位，本页不提供第 90 分位数字，也不使用代理数字；O*NET 55-1013.00 职业摘要｜https://www.onetonline.org/link/summary/55-1013.00"
+              "未取得本职业全国工资90分位，不提供数字或起薪；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "census"
           ],
           "type": "prose"
         },
@@ -27236,13 +27288,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的就业规模，本页不提供就业人数，也不使用代理数字；O*NET 55-1013.00 详细资料｜https://www.onetonline.org/link/details/55-1013.00"
+              "未取得本职业就业规模，不使用其他军职或组合替代；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
             "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27265,12 +27317,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的就业预测，本页不提供增长率，也不使用代理数字；O*NET 55-1013.00 详细资料｜https://www.onetonline.org/link/details/55-1013.00"
+              "未取得本职业增长率，不使用其他军职或组合替代；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27293,13 +27346,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业的年均职位空缺，本页不提供空缺数字，也不使用代理数字；O*NET 55-1013.00 详细资料｜https://www.onetonline.org/link/details/55-1013.00"
+              "未取得本职业年均空缺，不使用其他军职或组合替代；O*NET军职职责与不采集说明｜https://www.onetonline.org/link/summary/55-1013.00"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "onet",
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27308,13 +27361,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以上美国侧字段在 O*NET 55-1013.00 页面均未提供：该职业为美国军队职业，O*NET 不收集其工资、就业与预测数据。本页因此不生成美国中位数、分位数、就业规模或空缺数字，也不使用其他职业、职业组合或行业数字替代。美国军人基本工资按军衔等级与服役年限确定，当前官方口径不是该职业的工资分布，与 O*NET/BLS 的职业工资统计不是同一口径。"
+              "证据不足：本次未取得本职业全国工资分位、就业规模或空缺预测，不代填。O*NET明确不采集军职数据；BLS OEWS FAQ说明SOC55类不调查。USAGov说明现役收入包括基本工资、餐食和住房津贴，部分人员还有因岗位或条件而异的特别工资；基本工资表按军衔等级及服役年限，不是55-1013的工资分布。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "onet",
-            "onet"
+            "census",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27323,13 +27377,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 均未公布该军队职业（55-1013.00）的全国工资数字，因此本页不提供美国中位数或起薪。可核对的是该职业的官方职责描述，以及美国军人基本工资按军衔等级与服役年限确定、不由职业工资统计决定这一事实。"
+              "O*NET明确不采集军职数据；BLS OEWS FAQ说明SOC55类不调查。本次未取得本职业全国工资分位、就业规模或空缺预测，不代填。USAGov说明现役收入包括基本工资、餐食和住房津贴，部分人员还有因岗位或条件而异的特别工资；基本工资表按军衔等级及服役年限，不是55-1013的工资分布。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "onet",
-            "onet"
+            "census",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27366,12 +27421,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "军衔与职级、服役年限、岗位与专业方向、地区与任务条件会影响津贴与补助；本页不提供任何分项数字。"
+              "USAGov：基本工资按军衔等级和服役年限，现役有餐食与住房津贴，部分人员有特别工资；本页不推算个人收入，也不保证每人收到相同项目。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
-            "onet"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27394,12 +27449,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该职业的就业与工资数据，也没有针对该职业的工资因果研究，因此不能用任务暴露度推断涨薪或降薪。"
+              "证据不足：本次未取得该职业AI与工资因果研究，不能据任务辅助推涨薪或降薪。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "editor",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27521,7 +27577,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆（无对应口径）"
+              "中国大陆（本次未核对应细类）"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.40",
@@ -27535,7 +27591,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆统计未单列该职业"
+              "证据不足：本次查阅未取得中国大陆该职业专属统计"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.41",
@@ -27549,12 +27605,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆职业分类与工资统计未建立对应口径，本页不作推测。"
+              "本次未核中国一对一对应细类或专属分行业工资，保持缺口。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27634,12 +27690,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页美国侧不引用任何统计项目数字：O*NET 55-1013.00 属军队职业，O*NET 与 BLS 未发布其工资与就业数据；美国军人基本工资按军衔等级与服役年限确定。"
+              "O*NET明确不采集军职数据；BLS OEWS FAQ说明SOC55类不调查。本次未取得本职业全国工资分位、就业规模或空缺预测，不代填。USAGov说明现役收入包括基本工资、餐食和住房津贴，部分人员还有因岗位或条件而异的特别工资；基本工资表按军衔等级及服役年限，不是55-1013的工资分布。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "census",
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27648,13 +27706,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "军衔与职级、服役年限、岗位与专业方向、地区与任务条件及各类津贴都会影响实际收入；本页不提供分项数字。"
+              "USAGov：基本工资按军衔等级和服役年限，现役有餐食与住房津贴，部分人员有特别工资；本页不推算个人收入，也不保证每人收到相同项目。"
             ]
           },
           "id": "armored-assault-vehicle-officers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
-            "onet"
+            "arxiv"
           ],
           "type": "prose"
         },
@@ -27820,22 +27877,22 @@
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 认证发现",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-17",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "美国陆军 Armor Branch 历史职业发展指南",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.benning.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
               },
               {
                 "entity": "O*NET 55-1013.00 职业摘要（职责范围）",
@@ -27927,13 +27984,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格属自我探索工具：尽责性与情绪稳定性常与需要长期按程序作业与高压决策的岗位相关，但这是群体层面的相关性，不能用于选拔判断。本职业更关心可观察行为。"
+              "证据不足：本次未取得装甲军官专属招聘或绩效效度研究，不用量表分数预测任职。大五人格仅用于整理自我观察；编辑建议把反思落到资料准确、协同沟通、待核项记录等具体行为。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -27942,11 +27998,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格量表与工作表现的相关性有限，也不是选拔依据。"
+              "本次未取得该职业专属测评效度研究。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.7",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28002,11 +28059,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持「某种类型最适合装甲突击车辆官」；适任与否由委任、训练合格与指挥表现判定。"
+              "本页不据MBTI给装甲军官适配或录用结论；类型标签只能帮助反思偏好，不能代替正式资格及任职评价。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.10",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28030,11 +28088,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "本次未核该职业MBTI招聘预测效度。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.11",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28116,11 +28175,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "缺乏用于职业适配判断的效度证据。"
+              "本次未核该职业九型人格适配效度。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.15",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28311,7 +28371,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.28",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28326,7 +28387,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.29",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28335,13 +28397,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "空勤官以航空器与飞行任务指挥为主，不指挥装甲车辆分队；需要另行取得飞行相关资格与分支分配。"
+              "空勤摘要涉及飞行中任务的执行和指导；岗位资格另核，不把本页比较当转任路线。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.30",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28356,7 +28419,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.31",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28371,7 +28435,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.32",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28386,7 +28451,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.33",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28395,13 +28461,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "指挥火炮与导弹分队与间接火力的火炮导弹官方向"
+              "火炮导弹人员与武器系统管理方向"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.34",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28410,13 +28477,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "愿意围绕间接火力系统做火力计划与射击指挥，并能按技术规定组织分队。"
+              "编辑自省：是否愿意了解火炮导弹系统岗位并核其正式训练条件。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.35",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28425,13 +28493,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该方向以间接火力系统与火力指挥为中心，不指挥装甲分队的机动与直瞄火力。"
+              "火炮导弹摘要涵盖野战炮兵、防空与导弹等系统；不能统一分成间接火力对直瞄火力。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28446,7 +28515,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.37",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28461,7 +28531,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.38",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28470,13 +28541,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该方向以跨单元态势与指令流为主，不直接指挥装甲车辆分队。"
+              "指挥控制中心摘要包括通信探测和武器系统管理；也指导武器计算机系统，不仅汇集信息。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.39",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28491,8 +28563,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.40",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28507,8 +28579,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.41",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28523,8 +28595,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.42",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28539,7 +28611,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.43",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28554,7 +28627,8 @@
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.44",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28563,13 +28637,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该方向以操作执行为主，不承担分队指挥与作战计划责任，任职路径不同。"
+              "车组摘要侧重车辆和系统操作维护，军官摘要侧重部队计划与指挥；不据概述排除所有成员带队任务。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.45",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -28578,12 +28653,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有官方证据支持用性格类型判断适配；更可靠的是核对能否在指挥与授权体系下稳定制定与实施作战计划，并能承担人员与任务结果责任。"
+              "本页建议看可复核的资料和协同行为；没有取得本职业人格适配研究，不把建议说成招聘预测标准。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.46",
           "source_refs": [
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28593,12 +28668,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。分队指挥与兵种协同要求沟通，但官方职责描述并未规定外向性格要求；适配判断应看指挥决策、协同表现与责任承担。"
+              "O*NET概述未规定内外向条件；能否正式任职仍须核个人资格和所属军队要求，不能因性格标签保证适任。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.47",
           "source_refs": [
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28608,12 +28683,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向与否不是官方口径中的条件；能否按程序下决心、保持协同与遵守交战规则才是可观察的适配信号。"
+              "O*NET概述未规定外向要求；清晰沟通是编辑观察点，不能保证外向者符合委任或训练要求。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.48",
           "source_refs": [
-            "onet",
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28623,11 +28698,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有任何官方或研究证据支持用 MBTI 类型判断该职业适配；本页不提供类型结论。"
+              "本次未取得该职业MBTI适配研究，不给类型结论。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.49",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28754,11 +28830,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次可安全模拟的练习：给定三辆虚构车辆的状态、天气变化与道路封闭（完全虚构，无真实坐标、武器参数或人员信息），制作一页任务优先级、通信节点、停止条件与复盘问题；这不构成训练考核、委任测试或作战训练，也不能替代所属军队的正规训练。"
+              "完成下方虚构排课案例：核版本、两处时间重叠及四条资料矛盾，整理待复核通知和问题清单；题面和完整参考都在入行练习，不涉及车辆或作战操作。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.58",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28810,11 +28887,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明美国职位的技术信号；不是采用率或自动化比例。"
+              "本页使用已核摘要说明军职采集边界，不称取得岗位技术清单。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.62",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28824,11 +28902,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于发现相关认证；不能当作委任、指挥授权或签字权。"
+              "摘要未给完整任用或民用认证清单；不能据O*NET缺项推所有军种无条件。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.63",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -28838,12 +28917,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于发现相关教育训练路径；不构成录用或授权。"
+              "历史2021年陆军指南提供特定装甲分支发展实例，不代表所有军种现行训练。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.64",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -28866,12 +28945,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径与覆盖范围（不含军队职业）。"
+              "国家统计局公告仅作工资统计背景，未提供本职业专属值。"
             ]
           },
           "id": "armored-assault-vehicle-officers.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -28907,16 +28986,16 @@
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "美国陆军 Armor Branch 历史职业发展指南",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.benning.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
               },
               {
-                "entity": "O*NET 55-1013.00 技术清单",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -28973,15 +29052,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 55-1013.00 只提供官方职责描述，未提供工作情境、事故或健康暴露数据；中国大陆统计不含军队职业口径。风险场景、后果与应对为编辑归纳；本页不写入未经来源支持的事故率或处罚金额。"
+              "O*NET摘要只支持战斗环境与指挥职责，不给事故率、健康暴露或处罚统计。六卡为编辑风险场景与核对建议；美国2023年自主武器政策仅涉及其特定系统的人类判断及使用原则，其他具体安全保密规则仍须正式核实。"
             ]
           },
           "id": "armored-assault-vehicle-officers.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "health",
+            "editor"
           ],
           "type": "prose"
         },
@@ -29124,12 +29202,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "部队位置、任务与作战计划属受保护信息，外发会造成安全风险。"
+              "真实资料可能有保密或访问限制；未经正式分类不能一概判定所有公开任务信息均涉密，练习只用虚构数据。"
             ]
           },
           "id": "armored-assault-vehicle-officers.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -29375,12 +29453,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国的培训与认证发现入口，不构成委任或授权。"
+              "2021年陆军指南为特定军种历史任职背景，不是现行安全规程。"
             ]
           },
           "id": "armored-assault-vehicle-officers.risk.career-risk-cards.37",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -29389,11 +29467,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明美国职位的技术信号，不是采用率或自动化比例。"
+              "编辑风险核对，不从摘要推出现行装备技术要求或事故统计。"
             ]
           },
           "id": "armored-assault-vehicle-officers.risk.career-risk-cards.38",
           "source_refs": [
+            "editor",
             "onet"
           ],
           "type": "prose"
@@ -29403,12 +29482,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径与覆盖范围（不含军队职业）。"
+              "国家统计局该工资公告未提供本职业事故、健康或需求统计。"
             ]
           },
           "id": "armored-assault-vehicle-officers.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -29432,57 +29511,57 @@
               "distinction"
             ],
             "column_labels": [
-              "方向",
-              "该方向的主要任务",
-              "能力凭证",
-              "可出示的准备证据",
-              "与相邻方向的区别"
+              "编辑比较方向",
+              "已核职责或历史实例",
+              "建议观察证据",
+              "公开资料练习",
+              "边界"
             ],
             "rows": [
               [
-                "装甲分队指挥方向",
-                "指挥坦克与轻型装甲分队作战并制定与实施作战计划。",
-                "能形成可行方案并下达清晰指令的演练与任职记录。",
-                "一份虚构的分队行动方案与指挥演练记录示例。",
-                "与其他方向不同：以装甲分队机动与直瞄火力指挥为主，不负责间接火力计划。"
+                "装甲部队指挥",
+                "O*NET：指挥装甲部队并制定实施作战计划。",
+                "编辑建议：能清楚区分任务、依据和待核项。",
+                "提交虚构排课调整和送审稿，不做真实行动方案。",
+                "本页不按直瞄/间接火力作绝对排除。"
               ],
               [
-                "侦察与骑兵方向",
-                "指挥侦察与骑兵分队执行侦察与掩护任务。",
-                "能完成侦察任务规划与报告并保持分队安全。",
-                "一份虚构的侦察任务计划与情况报告示例。",
-                "与步兵军官不同：以装甲侦察与骑兵分队为中心，编成与装备不同。"
+                "侦察与骑兵历史实例",
+                "2021年陆军指南讨论坦克或侦察排长及骑兵任职。",
+                "建议核历史实例与当前个人条件的差别。",
+                "完成陆军2021年来源卡。",
+                "是特定军种历史材料，不是当前招聘空缺。"
               ],
               [
-                "火力与协同参谋方向",
-                "在参谋岗位上协调火力与兵种协同并形成行动方案。",
-                "能把多方要求整合为可执行方案并留痕。",
-                "一份虚构的火力协同方案与协调记录示例。",
-                "与火炮导弹官不同：本方向以跨兵种协调为主，不负责间接火力系统本身的射击指挥。"
+                "协同资料整理",
+                "O*NET摘要支持与步兵、炮兵及空中支援协同。",
+                "建议能标明资料冲突和责任待核。",
+                "提交N1—N4四条问题，不拟火力方案。",
+                "正式分工须核单位制度，不能凭表取得参谋资格。"
               ],
               [
-                "训练与教育方向",
-                "承担分队与院校训练课目设计与考核评估。",
-                "能设计课目并给出可核对的考核结论。",
-                "一份虚构的训练课目设计与考核评估示例。",
-                "与装甲突击车辆成员不同：本方向以训练设计与评估为主，不承担车辆操作执行。"
+                "训练教育历史实例",
+                "2021年指南列训练发展、学校教学等拓展岗位。",
+                "建议分清教育记录与实际任用条件。",
+                "整理公开来源与局限，不设计作战训练。",
+                "不是所有人必经的线性晋升路线。"
               ],
               [
-                "通信与导航协调方向",
-                "协调车载通信与导航设备的运行并保持通联与态势掌握。",
-                "能按程序建立通联并准确报告位置与态势。",
-                "一份虚构的通联与态势报告示例。",
-                "与指挥与控制中心官不同：本方向在分队内协调，不承担指挥所值守与跨单元信息汇集。"
+                "车载通信导航协调",
+                "O*NET列协调先进车载通信导航运作。",
+                "建议能在纸面核状态与版本。",
+                "完成两处冲突检查和待复核通知。",
+                "本页不提供设备操作和通信参数。"
               ]
             ]
           },
           "id": "armored-assault-vehicle-officers.path.entry-role-comparison.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "editor"
           ],
-          "title": "装甲突击车辆官的入门岗位与初期任务怎么比较？",
+          "title": "职责侧重与历史任职实例怎么比较？",
           "type": "table"
         },
         {
@@ -29493,14 +29572,16 @@
               {
                 "id": "education",
                 "values": [
+                  "资格资料待核",
                   "美国侧：该职业属军队职业，O*NET 未发布学历、Job Zone 或培训路径数据；委任、分支分配与专业军事教育要求由所属军队规定。",
-                  "中国大陆侧：统计与职业分类未建立对应口径，本页不提供未核实的资格条件。",
+                  "中国大陆侧：本次未核到一对一对应细类和专属统计，本页不提供未核实的资格条件。",
                   "两侧都以委任与训练合格与任职表现为核心：资格是起点，指挥与计划表现更重要。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
+                  "信息与授权",
                   "涉及部队位置、任务与作战计划的信息须遵守保密规定，不向未授权渠道提供相关信息。",
                   "指挥与武力使用授权以任命与指挥链为准，推演训练不等于真实指挥许可。",
                   "本页不提供任何审查标准或流程细节。"
@@ -29509,7 +29590,8 @@
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 未发布该军队职业的兴趣代码、工作风格与工作情境数据，雇主侧没有可核对的公开特质口径。",
+                  "观察证据（编辑建议）",
+                  "O*NET没有该军职特质数据，不能推所有雇主无公开条件；任职标准须从当期正式资料核。",
                   "可核对的替代信号是任职与训练表现：计划质量、指挥沟通、协同效果、异常上报与记录完整。",
                   "人格测试结果不作为委任或任职合格标准。"
                 ]
@@ -29517,6 +29599,7 @@
               {
                 "id": "tools",
                 "values": [
+                  "系统资料边界",
                   "车辆与武器系统按技术规定使用与维护，战备与检查记录须真实可追溯。",
                   "通信与导航设备按规程操作，通联与位置报告须准确。",
                   "涉及涉密信息与武力使用的操作须按所属军队规定与交战规则执行。"
@@ -29527,9 +29610,11 @@
           "id": "armored-assault-vehicle-officers.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "editor"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "任职资料需要核对什么？（非招聘样本）",
           "type": "cards"
         },
         {
@@ -29540,42 +29625,47 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构材料一：一份桌面情境（三辆虚构车辆的状态、天气变化与道路封闭，无真实坐标或装备参数）。",
-                  "虚构材料二：一段虚构分队通联与位置报告记录（含 3 处信息不一致）。",
-                  "虚构材料三：一份虚构训练课目进度表（含 4 个课目与考核结论）。",
-                  "全部材料为虚构，不含真实部队信息、真实装备参数或任务信息。"
+                  "虚构排课输入（公开资料整理，不是军训）",
+                  "东桥学习组仅在纸上安排资料讨论。规则R1：讨论只可10:00—12:00；同一人或同一讨论室不能时间重叠；相邻端点不算重叠；每人须留至少15分钟用于会后复核。R2：材料主题只能取已批准清单V3：A职业概述、B统计边界、C任职来源。V2为旧版；整理员沈青只能拟稿，复核员周宁才可标记通知“可发”；这里的批准仅指学习材料，不是军职或作战授权。",
+                  "排课原表：E1 10:00—10:30，沈青，室甲，A；E2 10:20—10:50，沈青，室乙，B；E3 10:45—11:15，叶晨，室甲，C；E4 11:00—11:30，何舟，室甲，B。三人均可10:00—12:00，周宁只负责纸面复核，不占讨论室。",
+                  "待核通知原文四条：N1“主题按V2”；N2“E3讨论D其他主题”；N3“沈青已批准通知可发”；N4“已完成4场讨论”。题面没有讨论完成记录，也没有周宁复核结果。",
+                  "全部人名、时间和场地虚构；只组织学习材料，不设计真实行动、路线、火力或车组操作。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "任务一：依桌面情境写出一页任务优先级、通信节点、停止条件与复盘问题。",
-                  "任务二：在通联记录中找出 3 处不一致并说明应按什么程序核实。",
-                  "任务三：为训练课目进度表写出补训建议与依据。"
+                  "交付：重叠检查、可行排课与待核通知",
+                  "任务一：按R1找出所有原表重叠；写一张调整表，保留每场时长30分钟和原人员/主题，且每人有至少15分钟会后复核；没有开始过的讨论不得写“已完成”。",
+                  "任务二：逐条写N1—N4的问题、依据和建议改写。任务三：拟一段≤150字的送周宁复核说明，列新排课、材料V3及待核项，不越权标可发。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议一：先列行动前提与判断依据，再给出方案与优先级并标注不确定项。",
-                  "做法建议二：对不一致信息先记录原始内容，再按指挥链确定核实与升级路径。",
-                  "做法建议三：把结论写成可复核的短记录，注明依据、责任层级与停止条件。"
+                  "参考交付（可有其他满足全部规则的排课）",
+                  "原表2处重叠：E1与E2在10:20—10:30占同一人沈青；E3与E4在11:00—11:15占同一室甲。E1与E3不重叠，E2与E3既不同人也不同室，不算冲突。",
+                  "一套可行调整：E1 10:00—10:30沈青室甲A，10:30—10:45复核；E2 10:45—11:15沈青室乙B，11:15—11:30复核；E3 10:45—11:15叶晨室甲C，11:15—11:30复核；E4 11:30—12:00何舟室甲B，12:00—12:15复核。R1只限制讨论窗口，未限制会后复核在12:00后，故E4合规；若另加复核须12:00前这一新条件则必须重新排课，不能暗中改题。",
+                  "N1引用过期V2，建议“拟按V3，待核版本”；N2 D不在V3，E3应按原表C，建议“E3任职来源C”；N3沈青无标可发权限，改“沈青拟稿，待周宁复核”；N4缺完成记录，改“拟安排4场，实际完成待记录”。四处分别是版本、主题、权限、状态问题，均须保留原文。",
+                  "送审示例：拟按V3安排E1 10:00、E2/E3 10:45、E4 11:30，各30分钟。已在纸面消除同人和同室重叠并留复核时段；N1—N4已附原文、依据和改写建议。请周宁核版本与通知；现为草稿，未记录讨论完成或批准可发。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "全部材料为虚构，不含真实部队信息、真实装备参数或任务信息。",
-                  "不构成训练考核、指挥授权或安全操作依据；该练习只测试信息组织，不训练作战。"
+                  "练习边界",
+                  "只练计划说明、分工、资料比对与待核记录；排课规则为编辑设定，不是军队指挥程序。",
+                  "不得由本练习推定委任、体能、心理、操作或任职合格；不用真实部队位置、人员、装备、计划及内部材料。"
                 ]
               }
             ]
           },
           "id": "armored-assault-vehicle-officers.path.entry-work-sample-data.1",
           "source_refs": [
+            "editor",
             "onet"
           ],
-          "title": "入行练习：一次完整的装甲突击车辆官任务任务（虚构材料）",
+          "title": "入行练习：虚构学习排课与记录复核",
           "type": "cards"
         },
         {
@@ -29586,38 +29676,40 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项（委任与分支分配条件、专业军事教育与训练课目、指挥与武力使用授权范围、保密与信息安全要求、健康与安全要求），列出核对来源与状态。",
-                  "把每项要求对应到所属军队的公开招募渠道或人事管理制度信息，注明查看日期。",
-                  "记录尚未确认或个人需补强的项目。"
+                  "规则与排课表",
+                  "逐条抄录R1/R2，写原表两处冲突及调整表4行，另列3人复核时段；保留V3主题与原人员。",
+                  "核E4复核可在12:00后，不能偷偷增加新限制；若自行设计扩展题须另标新条件。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对信息是否来自官方招募或人事管理渠道，是否标注时间与适用范围。",
-                  "材料复核：核对练习材料只使用虚构数据，不含真实部队位置、任务或作战计划。",
-                  "记录复核：核对计划与通联与训练记录是否可追溯、异常是否按指挥链上报。"
+                  "四条问题清单",
+                  "N1—N4逐条保留原文、规则依据、建议改写及待复核状态；问题数4条，不把缺完成记录变成完成。",
+                  "请另一读者只对照题面核所有时间、场地、人员、主题；记录实际反馈，没有反馈就写未取得。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向（分队指挥、侦察与骑兵、火力与协同参谋、训练与教育、通信与导航协调）与已满足条件。",
-                  "待补项与下一步行动，并注明全部信息的来源与查看日期。"
+                  "≤150字送审稿与来源卡",
+                  "包括新排课、V3、四处待核和周宁复核职责，状态仅为拟稿。",
+                  "另写3张来源卡：O*NET职责、2021年陆军历史路径、2021年中国制度公告，分别列适用范围和未核现行条件。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "练习只使用虚构数据与公开资料，不使用真实部队位置、任务或作战计划。",
-                  "计划与记录用通用工具整理即可，不需要专门系统。"
+                  "版本与边界说明",
+                  "保存原表、调整表和问题清单；可用纸笔或表格工具，不用装备和内部资料。",
+                  "所有输出注明虚构学习案例，不能把编辑规则当正式军职资格或指挥授权。"
                 ]
               }
             ]
           },
           "id": "armored-assault-vehicle-officers.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -29681,59 +29773,59 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜职业范围核对",
-                  "按 O*NET 55-1013.00 官方职责描述核对职业范围：分队指挥与作战、作战计划与战术运用、车组与系统运用指导、兵种协同、人员与装备输送指挥，并记录待确认项。"
+                  "第1天｜核职业范围",
+                  "读本页职责与采集边界，写5类官方职责和3条未核条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜官方职责拆解",
-                  "把官方职责拆成可观察行为：制定与实施作战计划、指导车组操作瞄准与射击系统、协调通信与导航设备、与步兵炮兵空中支援协同，并标注哪些需要授权。"
+                  "第2天｜核历史来源",
+                  "完成3张来源卡，区分2021年材料和现行个人条件；未取得当前资格就标待核。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜桌面情境练习",
-                  "用完全虚构的三辆车辆状态、天气变化与道路封闭，写出一页任务优先级、通信节点、停止条件与复盘问题。"
+                  "第3天｜检查原表",
+                  "按R1核E1—E4，写两处冲突及非冲突对，不先看参考。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜通联与记录练习",
-                  "在虚构通联与位置报告记录中找出 3 处不一致，说明应按什么程序核实并写出更正记录示例。"
+                  "第4天｜调整排课",
+                  "保留人员主题时长，消除全部人/室冲突并留至少15分钟复核，再对照参考核规则。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜指挥与保密边界",
-                  "整理指挥授权范围、交战规则与保密与信息安全要求与健康与安全要求的核对清单，标注仍需核实的项目。"
+                  "第5天｜修通知",
+                  "对N1—N4留原文、依据和改写建议，完成≤150字送审稿；没有复核不标可发。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜相邻方向比较",
-                  "按空勤官、飞机弹射与回收官、火炮导弹官、指挥与控制中心官、步兵军官与装甲突击车辆成员方向比较核心产出与资格差别。"
+                  "第6天｜独立复核",
+                  "让读者对照题面核调整表和四问；记录真实反馈或未取得反馈，不虚构通过。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜准备结论",
-                  "汇总一页准备摘要：目标方向、已满足条件、待补项与下一步行动，并核对全部信息来源与日期。"
+                  "第7天｜整理决定",
+                  "汇总四作品与待核清单；仅判断是否愿意继续资料学习，正式资格、任职和授权另核。"
                 ]
               }
             ]
           },
           "id": "armored-assault-vehicle-officers.path.seven-day-trial.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
-          "title": "七天体验：用虚构材料完成一次装甲突击车辆官任务闭环",
+          "title": "七天体验：完成虚构学习排课复核",
           "type": "timeline"
         },
         {
@@ -29741,18 +29833,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "做完一周核对后先回答：我是否理解该职业属美国军队职业，进入须通过所属军队的委任、分支分配与训练？",
-              "判断方向：偏装甲分队指挥、侦察与骑兵、火力与协同参谋、训练与教育，还是通信与导航协调方向。",
-              "判断准备：委任与分支分配条件、专业军事教育课目、指挥与武力使用授权范围、保密与信息安全要求、健康与安全要求是否已核对清楚。",
-              "判断边界：是否清楚 O*NET 未发布该职业的学历、Job Zone、工资与就业数据，中国大陆统计与职业分类也未建立对应口径。",
-              "判断耐受：能否接受战斗环境与高强度指挥节律、严格指挥约束与纪律要求，以及任务结果责任。",
-              "入门后按所属军队的委任与任职制度积累：先达到训练标准，再形成稳定的计划与指挥能力。",
-              "把作战计划、通联记录与训练课目记录持续整理成可核对的材料，比相信非官方承诺更可靠。"
+              "是否理解55-1013为美国军职概述、统计与个人资格仍有缺口？",
+              "能否解释两处冲突、四条通知问题，并保留所有规则和原文？",
+              "能否在不假称已完成或已批准的情况下交付清晰送审稿？",
+              "3张来源卡是否区分历史与现行、职责与任用资格？",
+              "是否愿意继续学习计划说明、协同和资料核对？纸面表现不能证明军职合格。",
+              "正式进入须核当期所属军队渠道，不能按本页相邻比较直接转任。",
+              "作品只保存虚构和公开资料，不收集真实部队任务、位置或内部记录。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "editor"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -29784,65 +29876,63 @@
                 "所属军队的委任与分支分配条件",
                 "拟进入军官路径者",
                 "决定能否进入该职业与装甲岗位分支",
-                "由所属军队规定",
-                "按所属军队公开招募与委任与分支分配程序",
-                "按委任周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "本页不提供标准内容，也不提供任何国家的入伍或委任建议"
               ],
               [
                 "专业军事教育与分队指挥训练",
                 "已委任军官",
                 "决定能否承担分队指挥职责",
-                "岗位必备",
-                "按所属军队训练大纲与考核标准",
-                "按训练周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "模拟推演或一般教育学历不等同于分队指挥资格"
               ],
               [
                 "作战计划与战术运用训练",
                 "装甲分队指挥员",
                 "决定能否制定与实施作战计划",
-                "岗位必备",
-                "按战术训练大纲与考核标准",
-                "按训练周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "指挥授权以任命与指挥链为准"
               ],
               [
                 "与步兵炮兵空中支援协同训练",
                 "装甲分队指挥员",
                 "决定能否实施跨兵种协同",
-                "岗位必备",
-                "按联合与合成兵种训练要求",
-                "按训练周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "协同要求随编成与任务不同"
               ],
               [
                 "保密与信息安全要求",
                 "全部岗位",
                 "影响能否接触与处理受保护信息",
-                "制度要求",
-                "按保密规定与信息安全要求",
-                "按任职周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "未遵守保密要求会造成安全风险与责任"
               ],
               [
                 "健康与安全要求",
                 "全部岗位",
                 "影响能否持续承担战斗岗位作业",
-                "按所属军队规定",
-                "按训练与作业规程与健康管理要求",
-                "按服役周期",
+                "需依当期所属军队要求核实",
+                "本页为待核项目，非完整现行资格清单",
+                "本次未核具体费用或周期",
                 "本页不提供体检标准或健康建议"
               ]
             ]
           },
           "id": "armored-assault-vehicle-officers.path.credential-decision.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "editor"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29853,7 +29943,7 @@
           "data": {
             "paragraphs": [
               "资格边界按法域区分：美国侧该职业属军队职业，军官身份来自委任与分支分配，任职与训练要求由所属军队规定，O*NET 未显示统一执照要求。",
-              "中国大陆侧军官身份、军衔与岗位权力来自军队制度、任命与授权链，不是面向公众申请的职业执照；统计与职业分类未建立对应口径，本页不提供未核实的对应编码或资格条件，也不提供任何国家的入伍或委任建议。",
+              "中国大陆侧军官身份、军衔与岗位权力来自军队制度、任命与授权链，不是面向公众申请的职业执照；本次未核到一对一对应细类与专属统计，本页不提供未核实的对应编码或资格条件，也不提供任何国家的入伍或委任建议。",
               "任何指挥与武力使用授权以任命与指挥链为准：目标处置与交战规则适用须按指挥程序确定，涉密信息处理须按保密规定执行。",
               "模拟推演或辅助工具输出不能作为作战依据，也不能替代所属军队的正规训练与考核。"
             ]
@@ -29905,10 +29995,10 @@
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "美国陆军2021年装甲分支历史指南",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.benning.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -29932,13 +30022,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页的路径说明以 O*NET 55-1013.00 官方职责描述与美国陆军 Armor Branch 军官职业管理指南（DA Pam 600-3）的一般世代为准：该职业属美国军队职业，进入须通过委任、分支分配与专业军事教育；指南列出专业军事教育结业、排长任职、连队或骑兵分队指挥与营旅级参谋等阶段。中国大陆统计与职业分类未建立对应口径。本页不提供招募标准、体检标准、训练科目或考核内容，也不构成任何国家的入伍或委任建议。"
+              "美国 O*NET 摘要支持职责概述。陆军 Armor Branch 2021-10-06指南提供初期坦克/侦察排长、连队/骑兵分队指挥、营旅参谋与教育拓展实例；以下阶段和记录核对点为据此编辑整理，不是所有军种现行必经路线、年限或个人录用保证。中国2021年制度公告提供选拔教育考核任用框架，本次未核一对一细类和完整现行条件。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30063,13 +30155,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业为装甲突击车辆官（O*NET 55-1013.00，Armored Assault Vehicle Officers，美国军队职业）。进入方式由所属军队的委任、分支分配与专业军事教育制度决定；O*NET 未发布该职业的学历要求、Job Zone 或培训路径，本页因此不提供入门学历、资格或考试内容。可核对的是官方职责描述、Armor Branch 指南列出的任职阶段，以及能力可迁移的相邻方向。中国大陆统计与职业分类未建立对应口径。"
+              "进入美国军官岗位应核所属军队的委任、分支及当期任职要求；O*NET无学历构成和Job Zone不能推无门槛。2021年陆军装甲指南提供历史教育与任职实例，不等同所有军种现行资格。本页练习只做虚构学习排课和资料核对；中国对应细类及现行专属资格本次未核。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30078,7 +30172,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界：美国侧该职业属军队职业，O*NET 未显示统一执照要求，委任与任职要求由所属军队规定；中国大陆侧无对应职业口径，本页不提供未核实的资格条件。指挥与武力使用授权、目标处置与交战规则适用、涉密信息处理均须按任命与指挥链规定执行，模拟推演或辅助工具输出不能作为作战依据。"
+              "资格边界：美国侧该职业属军队职业，O*NET 未显示统一执照要求，委任与任职要求由所属军队规定；中国大陆侧对应细类待核，本页不提供未核实的资格条件。指挥与武力使用授权、目标处置与交战规则适用、涉密信息处理均须按任命与指挥链规定执行，模拟推演或辅助工具输出不能作为作战依据。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.21",
@@ -30094,14 +30188,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本页同时说明两种口径：美国侧为 O*NET 55-1013.00 的官方职责描述（军队职业，未发布工资、就业、培训与学历数据）与美国陆军 Armor Branch 指南的任职阶段；中国大陆侧无对应职业口径，仅保留国家统计局统计覆盖范围的边界说明。两者不可互相外推。"
+              "美国：O*NET军职职责概述与陆军2021年历史指南。中国：2021年军官制度公告及NBS2025年工资背景。各自适用范围不同，不互推代码、资格、收入或招募名额。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.22",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30110,13 +30205,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径由所属军队的军职体系决定：从专业军事教育与排级任职，到分队指挥岗位与更高层级参谋，再到部队指挥与联合岗位。Armor Branch 指南显示评价重点随阶段从车辆与分队战术技术能力转向联合、合成兵种规划和组织领导；O*NET 未发布该职业的晋升与资格数据，本页不作推测。"
+              "历史指南包含专业教育、排级领导、分队指挥、营旅参谋和拓展任职。下方阶段是编辑学习/资料核对框架，任职并非每人按同一路线递进；本次未核所有当前版本及个人条件，不保证晋升。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.23",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "editor"
           ],
           "type": "prose"
         },
@@ -30153,12 +30248,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明培训与教育信息入口，不构成录用或授权。"
+              "仅支持2021年陆军特定分支历史发展实例，不能直接用作当前录用、资格或授权。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -30167,7 +30262,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计口径与覆盖范围（不含军队职业）。"
+              "用于说明中国大陆统计口径与覆盖范围（该公告未给出本职业专属工资）。"
             ]
           },
           "id": "armored-assault-vehicle-officers.path.career-path-block.27",
@@ -31096,10 +31191,10 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 55-1013.00 培训发现",
+                "entity": "O*NET55-1013军职概述与资料边界",
                 "id": "link-6",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
                 "entity": "空勤官",
@@ -31165,14 +31260,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 未发布该军队职业（55-1013.00）的就业预测与行业分布，因此本页不提供就业增长数字；该职业的机会不是开放市场职位数量，而是军队编制、委任、分支分配、训练完成、岗位空缺与考核共同作用的结果，民间招聘样本不能证明装甲军官需求。可转向的方向包括空勤官、飞机弹射与回收官、火炮导弹官、指挥与控制中心官、步兵军官等相邻军官岗位，以及装甲突击车辆成员与火炮导弹成员等成员方向，但各方向的委任、资格与责任边界不同。"
+              "证据不足：本次未取得该军职专属就业预测、行业分布或实时招募样本，不能给增长数字和录用概率。八方向是职责比较，沟通与资料核对经验可能相关，但正式转任须另核资格。军官与成员职责不同，不把相邻页面存在当真实岗位名额。 本次也未取得完整任用或培训清单，O*NET摘要不能补足现行条件。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31307,7 +31401,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆统计与职业分类未建立该职业的对应口径，不提供相关就业数字。"
+              "本次未核到中国大陆与该美国职业一对一的细类及专属统计，不提供相关就业数字。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.18",
@@ -31321,12 +31415,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按法人单位统计，军队职业不在其口径内。"
+              "国家统计局该工资公告未提供本职业需求或就业预测；不能由工资公告推出军队需求为零。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31349,7 +31443,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "无对应口径"
+              "本次未核对应细类"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.21",
@@ -31475,7 +31569,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明美国官方职业口径与职责描述；未提供就业与工资数据。"
+              "O*NET概述支持军职职责与数据边界，不提供工资就业数字。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.30",
@@ -31489,7 +31583,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明中国大陆统计的口径与覆盖范围（不含军队职业）。"
+              "O*NET详细页说明军职不采集，不是中国统计来源。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.31",
@@ -31503,7 +31597,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明职业分类与相邻职业关系的来源与边界。"
+              "国家统计局2025年公告为宽口径工资背景，非军职需求预测。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.32",
@@ -31517,7 +31611,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于说明本页的数据缺口与不可得字段。"
+              "本页使用已核摘要说明军职数据边界，未取得完整任用或培训清单。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.33",
@@ -31537,7 +31631,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.34",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31552,7 +31647,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.35",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31567,7 +31663,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.36",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-2",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31582,7 +31679,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.37",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31597,7 +31695,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.38",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31612,7 +31711,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.39",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-3",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31621,13 +31721,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补足间接火力系统的火力计划与射击指挥训练。"
+              "需另核火炮导弹系统管理与相应任职条件，不能概括全部为间接火力。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.40",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31642,7 +31743,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.41",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31657,7 +31759,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.42",
           "source_refs": [
             "onet",
-            "onet"
+            "facilities",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31672,7 +31775,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.43",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31687,7 +31791,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.44",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31702,7 +31807,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.45",
           "source_refs": [
             "onet",
-            "onet"
+            "archivists",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31717,7 +31823,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.46",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31732,7 +31839,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.47",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31747,7 +31855,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.48",
           "source_refs": [
             "onet",
-            "onet"
+            "msresearch",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31762,7 +31871,8 @@
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.49",
           "source_refs": [
             "onet",
-            "onet"
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31776,7 +31886,9 @@
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.50",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31790,7 +31902,9 @@
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "r2-pay-1",
+            "editor"
           ],
           "type": "prose"
         },
@@ -31844,13 +31958,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需完成徒步班组作战与轻武器训练。"
+              "需另核步兵岗位具体训练与任职条件；步兵摘要不只包含徒步任务。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         },
@@ -31874,13 +31987,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较远：从指挥与计划转为徒步作战执行。"
+              "编辑比较：从指挥计划侧重转为地面作战执行，不代表可直接转任。"
             ]
           },
           "id": "armored-assault-vehicle-officers.market-signals.market-signal-card.57",
           "source_refs": [
-            "onet",
-            "onet"
+            "editor"
           ],
           "type": "prose"
         }
@@ -31904,7 +32016,7 @@
                 "question_key": "career.faq.armored-assault-vehicle-officers.daily-work"
               },
               {
-                "answer": "空勤官以航空器上的飞行任务与机组指挥为主；飞机弹射与回收官以舰面或基地的起降与回收指挥为主；火炮导弹官以间接火力系统的火力计划与射击指挥为主；指挥与控制中心官以跨单元态势与指令流为主；步兵军官以地面步兵单位作战指挥为主；装甲突击车辆成员以车辆与武器系统操作执行为主。装甲突击车辆官的核心是装甲车辆分队的机动、直瞄火力与车组指挥，责任边界与资格要求不能与其他方向互换。",
+                "answer": "空勤官执行并指导飞行中任务；起降回收官管理航母起降回收相关系统运作维护；火炮导弹官管理相应人员和武器系统，不能全部简化为间接火力；指挥中心官管理通信探测和武器系统，也指导武器计算机。步兵军官可部署车辆装备；装甲车组侧重操作维护，装甲军官明确部队指挥和作战计划。比较不是资格或全部排他分工。",
                 "id": "armored-assault-vehicle-officers.faq.2",
                 "question": "装甲突击车辆官和相邻职业有什么区别？",
                 "question_key": "career.faq.armored-assault-vehicle-officers.role-comparison"
@@ -31922,13 +32034,13 @@
                 "question_key": "career.faq.armored-assault-vehicle-officers.ai-impact"
               },
               {
-                "answer": "行动前提与态势判断、作战决心与计划制定、武力使用与目标处置决定、火力协调与协同冲突处置、人员与装备输送的方案判断，以及涉密信息的处理。这些环节由指挥员与指挥链承担；涉及武力使用的自主或半自主系统仍要求受训指挥员保持适当的人类判断，工具输出必须经人工核对，不能作为作战依据。",
+                "answer": "美国国防部2023年政策说明要求自主及半自主武器系统允许指挥员、操作员对武力使用保持适当人类判断，并以谨慎方式遵守战争法、适用条约、安全规则和交战规则。这是特定政策对象，不是AI授权任何人的依据，也不证明所有职业任务必须由人独占。",
                 "id": "armored-assault-vehicle-officers.faq.5",
                 "question": "哪些环节必须保留人工复核？",
                 "question_key": "career.faq.armored-assault-vehicle-officers.human-control"
               },
               {
-                "answer": "美国侧：该职业属军队职业，O*NET 未发布学历要求、Job Zone 或培训路径；委任、分支分配、专业军事教育、训练与任职要求由所属军队规定，本页不提供标准内容。中国大陆侧：军官身份来自军队制度与任命与授权链，不是面向公众申请的职业执照，统计与职业分类未建立对应口径，本页不提供未核实的对应编码或资格条件。任何指挥与武力使用授权以任命与指挥链为准。",
+                "answer": "美国：核当期所属军队的委任、分支和任职条件；O*NET无学历统计不能推没有要求，2021年陆军指南仅作历史实例。中国2021年制度公告支持选拔、教育、考核、任用框架，本次未核与该美国代码一对一的细类和完整现行资格。模拟学习不产生任职或指挥权。",
                 "id": "armored-assault-vehicle-officers.faq.6",
                 "question": "进入装甲突击车辆官需要核对哪些资格？",
                 "question_key": "career.faq.armored-assault-vehicle-officers.credentials"
@@ -31940,13 +32052,13 @@
                 "question_key": "career.faq.armored-assault-vehicle-officers.risk-boundary"
               },
               {
-                "answer": "O*NET 未发布该军队职业的就业预测与行业分布，本页不提供就业增长数字；该职业的机会取决于军队编制、委任、分支分配、训练完成、岗位空缺与考核，而不是开放市场职位数量。可转向的方向包括空勤官、飞机弹射与回收官、火炮导弹官、指挥与控制中心官、步兵军官等相邻军官岗位，以及装甲突击车辆成员与火炮导弹成员等成员方向，但各方向的委任、资格与责任边界不同。",
+                "answer": "本次未取得就业预测或实时招募样本，不能给增长或录用概率。相邻八方向只用于比较职责，不能从纸面案例或指挥经历自动获得另一军职资格。",
                 "id": "armored-assault-vehicle-officers.faq.8",
                 "question": "装甲突击车辆官的前景与转向如何判断？",
                 "question_key": "career.faq.armored-assault-vehicle-officers.outlook-transition"
               },
               {
-                "answer": "因为 O*NET 55-1013.00 属美国军队职业，O*NET 与 BLS 未发布其工资分位、中位数、就业规模与空缺数据；美国军人基本工资按军衔等级与服役年限确定，当前官方口径不是该职业的工资分布，与职业工资统计不是同一口径。中国大陆统计与职业分类也未建立对应口径。本页因此保留可见缺口，不使用任何代理数字。",
+                "answer": "O*NET明确不采集军职数据；BLS OEWS FAQ说明SOC55类不调查。本次未取得本职业全国工资分位、就业规模或空缺预测，不代填。USAGov说明现役收入包括基本工资、餐食和住房津贴，部分人员还有因岗位或条件而异的特别工资；基本工资表按军衔等级及服役年限，不是55-1013的工资分布。 中国专属细类和工资本次未核，不以NBS宽口径代填。",
                 "id": "armored-assault-vehicle-officers.faq.9",
                 "question": "装甲突击车辆官的工资为什么没有数字？",
                 "question_key": "career.faq.armored-assault-vehicle-officers.pay-boundary"
@@ -31962,12 +32074,19 @@
           "id": "armored-assault-vehicle-officers.sources.faq.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "health",
+            "arxiv",
+            "census",
+            "nbs",
+            "editor",
+            "r2-pay-2",
+            "r2-pay-3",
+            "facilities",
+            "archivists",
+            "msresearch",
+            "r2-pay-1"
           ],
           "type": "faq"
         },
@@ -31990,14 +32109,24 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 55-1013.00 装甲突击车辆官（Armored Assault Vehicle Officers）职业摘要与详细资料（官方职责描述；该军队职业未发布工资、就业、增长、行业、兴趣代码、工作情境、任务清单、技术清单与学历数据）；美国陆军 Armor Branch 军官职业管理指南（DA Pam 600-3）与陆军 G-1 人事管理信息（委任、分支分配与任职阶段）；美国国防部指令 3000.09（自主与半自主系统的人类判断与适当控制要求）；中国司法部公布的军官军衔制度与国防部公布的军官管理制度材料（军官身份来自军队制度与任命授权链）；国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆统计覆盖范围与工资总额口径，不含军队职业）。"
+              "证据不足：本次未取得本职业专属就业预测、实时招募样本、工资分位及完整技术、认证或培训清单；不以军衔薪酬制度、行业平均或相邻岗位代填。\n\n本轮已核O*NET55-1013概述/详细/自定义及六相邻概述，BLS OEWS SOC55调查边界、USAGov薪酬制度、NBS2025工资背景；陆军2021年装甲指南和中国2021年制度公告仅用于历史/制度范围，美国2023年自主武器政策说明仅涉及特定武器系统。原技术/认证/培训发现页本次未取得内容，不据其宣称清单。"
             ]
           },
           "id": "armored-assault-vehicle-officers.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "oews",
+            "ilo",
+            "health",
+            "census",
+            "arxiv",
+            "nbs",
+            "r2-pay-2",
+            "r2-pay-3",
+            "facilities",
+            "archivists",
+            "msresearch",
+            "r2-pay-1"
           ],
           "type": "prose"
         },
@@ -32006,7 +32135,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮本地核对日期：2026-10-03。"
             ]
           },
           "id": "armored-assault-vehicle-officers.sources.source-card.3",
@@ -32020,13 +32149,16 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国侧：O*NET 55-1013.00 属军队职业，官网只提供职业名称与官方职责描述；工资、就业、增长、行业分布、兴趣代码、工作情境、任务清单、技术清单与学历数据均未发布，本页对这些字段一律显示「证据不足」，不使用其他职业、职业组合或行业数字替代。美国军人基本工资按军衔等级与服役年限确定，当前官方口径不是该职业的工资分布，本页也不把军衔工资表改写为该职业的中位数或起薪。中国大陆侧：该职业为美国军队职业，中国大陆统计与职业分类未建立对应口径（路由资料标注中国大陆映射状态为「无」、中国工资状态为「记录为不可得」）；军官身份、军衔与岗位权力来自军队制度、任命与授权链，而不是面向公众申请的职业执照；国家统计局按法人单位统计，军队职业不在其口径内，本页不以行业或岗位类别数字冒充职业中位数。本页不构成招募、服役、训练或作战指挥建议，也不构成法律或职业资格意见。"
+              "本页分清官方职责、统计边界、历史任职实例和编辑建议。O*NET不采集军职，OEWS不调查SOC55；公开军人薪酬制度仍存在，不能因此说没有任何工资资料。NBS2025公告只作宽口径背景，没有本职业专属工资；内部中国映射空值不能证明中国军职不存在。AI采用、替代因果、专属测评效度与现行完整资格未核，均不代填。完整排课练习只组织虚构学习资料，不构成军职训练、录用或指挥许可。"
             ]
           },
           "id": "armored-assault-vehicle-officers.sources.source-card.4",
           "source_refs": [
             "onet",
-            "onet"
+            "census",
+            "arxiv",
+            "nbs",
+            "editor"
           ],
           "type": "prose"
         }
@@ -32101,404 +32233,404 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "onet",
                 "limitation": "用于职业身份与官方职责描述；该军队职业未提供工资、就业、兴趣代码、工作情境与学历数据，也不含中国大陆映射。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 装甲突击车辆官职业摘要",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业详细资料",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方职业详细资料",
                 "id": "bls",
                 "limitation": "用于任务与工作活动口径；该职业未提供相应数据，不能外推为中国大陆。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 详细资料（任务与工作活动）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方自定义职业档案",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方自定义职业档案",
                 "id": "ep",
                 "limitation": "用于核对官方档案可选取的字段，不设定个人胜任阈值。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 自定义职业档案",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方人事管理指南",
-                  "2021 年版；访问 2026-09-15"
+                  "官方历史指南",
+                  "2021-10-06版本；本次核官方索引摘录"
                 ],
-                "evidence_type": "官方人事管理指南",
+                "evidence_type": "官方历史指南",
                 "id": "oews",
-                "limitation": "用于说明装甲军官的专业军事教育、排长任职、分队指挥与营旅级参谋等任职阶段；不提供招募标准或工资。",
+                "limitation": "仅支持2021年陆军装甲分支教育和任职实例，未取得全部现行版本及个人任用条件；不是所有軍种统一规则。",
                 "market": "美国",
-                "name": "美国陆军 Armor Branch 军官职业管理指南（DA Pam 600-3）",
-                "period": "2021 年版；访问 2026-09-15",
-                "publisher": "U.S. Army Armor Branch / OCoA",
-                "scope": "exact",
-                "url": "https://www.moore.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
+                "name": "美国陆军 Armor Branch 历史职业发展指南",
+                "period": "2021-10-06版本；本次核官方索引摘录",
+                "publisher": "U.S. Army",
+                "scope": "contextual",
+                "url": "https://www.benning.army.mil/Armor/OCoA/content/References%20and%20Guides/DA%20Pam%20600-3%20Officer%20Career%20Management-AR.pdf"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方工资统计",
-                  "2025 年；2026-05-15 发布；访问 2026-09-15"
+                  "官方统计背景",
+                  "2025年；2026-05-15发布"
                 ],
-                "evidence_type": "官方工资统计",
+                "evidence_type": "官方统计背景",
                 "id": "nbs",
-                "limitation": "按行业门类、单位类型与岗位类别发布，不含军队职业；不能替代本职业工资。",
+                "limitation": "城镇5人及以上法人单位税前工资，含个人社保、公积金、个税，不含个体自雇；公告未给本职业专属工资，不推全部军职都被排除。",
                 "market": "中国大陆",
-                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025 年；2026-05-15 发布；访问 2026-09-15",
+                "name": "国家统计局2025年城镇单位工资公告",
+                "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方培训发现",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无职业工资就业资料期"
                 ],
-                "evidence_type": "官方培训发现",
+                "evidence_type": "官方职业概述",
                 "id": "cnclass",
-                "limitation": "仅支持发现美国相关教育训练路径，不构成录用或委任。",
+                "limitation": "本次未取得旧技术/认证/培训发现入口内容，改用已核军职概述；不能声称得到技术、认证或训练清单。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 培训发现",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET55-1013军职概述与采集边界",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方认证发现",
-                  "2026 年更新页面；访问 2026-09-15"
-                ],
-                "evidence_type": "官方认证发现",
-                "id": "privacy",
-                "limitation": "仅支持发现美国相关认证，不能当作委任、指挥授权或签字权。",
-                "market": "美国",
-                "name": "O*NET 55-1013.00 认证发现",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
-                ],
-                "evidence_type": "官方职业摘要",
-                "id": "facilities",
-                "limitation": "用于核对官方职责范围与排除的相邻身份（空勤官、飞机弹射与回收官、火炮导弹官）。",
-                "market": "美国",
-                "name": "O*NET 55-1013.00 职业摘要（职责范围）",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方职业概述",
+                  "当前已核页面；无职业工资就业资料期"
+                ],
+                "evidence_type": "官方职业概述",
+                "id": "privacy",
+                "limitation": "本次未取得旧技术/认证/培训发现入口内容，改用已核军职概述；不能声称得到技术、认证或训练清单。",
+                "market": "美国",
+                "name": "O*NET55-1013军职概述与采集边界",
+                "period": "当前已核页面；无职业工资就业资料期",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
+                ],
+                "evidence_type": "官方职业概述",
+                "id": "facilities",
+                "limitation": "仅支持该相邻职业职责，比较为编辑整理，不证明资格可互换。",
+                "market": "美国",
+                "name": "O*NET 55-1014.00 火炮导弹官职责概述",
+                "period": "当前已核页面；无专属统计资料期",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-1014.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "operations",
                 "limitation": "该军队职业未提供就业与预测数据；本页不生成就业规模、增长率或空缺数字，也不使用代理数字。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 职业摘要（就业与预测字段）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方人事管理入口",
-                  "现行；访问 2026-09-15"
+                  "官方制度说明",
+                  "2021年制度改革说明"
                 ],
-                "evidence_type": "官方人事管理入口",
+                "evidence_type": "官方制度说明",
                 "id": "hr",
-                "limitation": "用于说明军官委任与分支分配与人事管理制度的一般框架；本页不提供任何国家的招募标准或个人建议。",
+                "limitation": "仅支持历史制度框架和岗位管理说明，不是装甲岗位当期资格清单。",
                 "market": "美国",
-                "name": "美国陆军 G-1 人事管理信息",
-                "period": "现行；访问 2026-09-15",
-                "publisher": "U.S. Army G-1",
-                "scope": "exact",
-                "url": "https://www.army.mil/G-1"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方指令",
-                  "2023-01-25；访问 2026-09-15"
-                ],
-                "evidence_type": "官方指令",
-                "id": "health",
-                "limitation": "用于说明涉及武力使用的自主或半自主系统仍要求受训人员保持适当的人类判断与控制程序。",
-                "market": "美国",
-                "name": "美国国防部指令 3000.09（自主与半自主系统的人类判断要求）",
-                "period": "2023-01-25；访问 2026-09-15",
-                "publisher": "U.S. Department of Defense",
-                "scope": "exact",
-                "url": "https://www.esd.whs.mil/portals/54/documents/dd/issuances/dodd/300009p.pdf"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方制度材料",
-                  "2021-01-01 施行；访问 2026-09-15"
-                ],
-                "evidence_type": "官方制度材料",
-                "id": "ilo",
-                "limitation": "用于说明军官身份与军衔与岗位权力来自军队制度与任命授权链，而不是面向公众申请的职业执照。",
-                "market": "中国大陆",
-                "name": "中华人民共和国国防部公布的军官管理制度材料",
-                "period": "2021-01-01 施行；访问 2026-09-15",
+                "name": "中国2021年军官制度改革答记者问",
+                "period": "2021年制度改革说明",
                 "publisher": "中华人民共和国国防部",
-                "scope": "combined_official",
-                "url": "https://www.mod.gov.cn/gfbw/qwfb/yw_214049/16065672.html"
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/qwfb/jwzzgzb/4876776.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方政策说明",
+                  "2023-01-25说明；本次核官方索引正文"
+                ],
+                "evidence_type": "官方政策说明",
+                "id": "health",
+                "limitation": "限定自主和半自主武器系统的人类判断和谨慎合法使用原则；不是整体职业AI替代率或全球统一制度。",
+                "market": "美国",
+                "name": "美国国防部2023年自主武器政策更新说明",
+                "period": "2023-01-25说明；本次核官方索引正文",
+                "publisher": "U.S. Department of Defense",
+                "scope": "contextual",
+                "url": "https://www.defense.gov/News/Releases/Release/Article/3278076/dod-announces-update-to-dod-directive-300009-autonomy-in-weapon-systems/"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方制度公告",
+                  "2021-01-01公告"
+                ],
+                "evidence_type": "官方制度公告",
+                "id": "ilo",
+                "limitation": "支持选拔、教育、考核、任用及岗位管理的制度框架；不提供与美国55-1013一对一细类及完整当期资格。",
+                "market": "中国大陆",
+                "name": "中国2021年现役军官制度发布公告",
+                "period": "2021-01-01公告",
+                "publisher": "中华人民共和国国防部 / 新华社",
+                "scope": "contextual",
+                "url": "https://www.mod.gov.cn/gfbw/sy/tt_214026/4876347.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
                 "details": [
                   "编辑核对",
-                  "本轮核对 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "编辑核对",
                 "id": "editor",
                 "limitation": "仅用于本页编辑核对，不新增事实。",
                 "market": "美国",
                 "name": "费马测试职业内容编辑组核对记录",
-                "period": "本轮核对 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "费马测试职业内容编辑组",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方制度材料",
-                  "2021 年公布；访问 2026-09-15"
+                  "官方历史法规文本",
+                  "1988通过、1994修正文本；网页2021-01-06"
                 ],
-                "evidence_type": "官方制度材料",
+                "evidence_type": "官方历史法规文本",
                 "id": "nist",
-                "limitation": "用于说明军官军衔制度与任命授权链；不提供工资、统计或招募信息。",
+                "limitation": "本次只核历史文本与发布日期；不能以网页2021日期当作全部现行资格制度。",
                 "market": "中国大陆",
-                "name": "中华人民共和国司法部公布的军官军衔制度材料",
-                "period": "2021 年公布；访问 2026-09-15",
-                "publisher": "中华人民共和国司法部",
-                "scope": "combined_official",
+                "name": "中国军官军衔条例历史文本",
+                "period": "1988通过、1994修正文本；网页2021-01-06",
+                "publisher": "司法部全国行政复议服务平台",
+                "scope": "contextual",
                 "url": "https://xzfy.moj.gov.cn/c/2021-01-06/487602.shtml"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方工资表",
-                  "现行；访问 2026-09-15"
+                  "官方制度说明",
+                  "页面2026-05-18更新"
                 ],
-                "evidence_type": "官方工资表",
+                "evidence_type": "官方制度说明",
                 "id": "arxiv",
-                "limitation": "用于说明基本工资按军衔等级与服役年限确定；不是 O*NET 职业工资分布，不能改写为本职业中位数或起薪。",
+                "limitation": "现役基本工资、餐食住房津贴与部分特别工资；基本工资依军衔等级及服役年限，不是本职业工资分布。",
                 "market": "美国",
-                "name": "美国国防部军人基本工资表",
-                "period": "现行；访问 2026-09-15",
-                "publisher": "U.S. Department of Defense",
+                "name": "USAGov 军人薪酬制度",
+                "period": "页面2026-05-18更新",
+                "publisher": "USAGov",
                 "scope": "combined_official",
-                "url": "https://militarypay.defense.gov/Pay/Basic-Pay/Charts/"
+                "url": "https://www.usa.gov/military-pay"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方自定义职业档案",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方自定义职业档案",
                 "id": "weforum",
                 "limitation": "用于说明字段可用性与数据缺口。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 自定义职业档案（字段可用性）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方技术信号",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无职业工资就业资料期"
                 ],
-                "evidence_type": "官方技术信号",
+                "evidence_type": "官方职业概述",
                 "id": "employer",
-                "limitation": "该军队职业未提供技术清单；本页不引用其他职业的软件或装备清单替代。",
+                "limitation": "本次未取得旧技术/认证/培训发现入口内容，改用已核军职概述；不能声称得到技术、认证或训练清单。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 技术清单（空）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET55-1013军职概述与采集边界",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/hot_tech/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方培训发现",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无职业工资就业资料期"
                 ],
-                "evidence_type": "官方培训发现",
+                "evidence_type": "官方职业概述",
                 "id": "purchasing-managers",
-                "limitation": "该军队职业未提供培训清单；委任与训练由所属军队规定。",
+                "limitation": "本次未取得旧技术/认证/培训发现入口内容，改用已核军职概述；不能声称得到技术、认证或训练清单。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 培训发现（空）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET55-1013军职概述与采集边界",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localtraining/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方认证发现",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
                 ],
-                "evidence_type": "官方认证发现",
+                "evidence_type": "官方职业概述",
                 "id": "r2-pay-1",
-                "limitation": "该军队职业未提供认证清单；本页不提供未核实的资格条件。",
+                "limitation": "仅支持该相邻职业职责，比较为编辑整理，不证明资格可互换。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 认证发现（空）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET 55-3013.00 装甲车组成员职责概述",
+                "period": "当前已核页面；无专属统计资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/localcert/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-3013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
                 ],
-                "evidence_type": "官方职业摘要",
+                "evidence_type": "官方职业概述",
                 "id": "r2-pay-2",
-                "limitation": "仅适用于美国军队职业口径；不能外推为中国大陆或其他国家。",
+                "limitation": "只支持该相邻职业公开职责；比较是编辑归纳，不证明资格互认或自动转任。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 职业摘要（口径说明）",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/55-1013.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
-                ],
-                "evidence_type": "官方职业摘要",
-                "id": "r2-pay-3",
-                "limitation": "资料期以 O*NET 页面标注为准；该职业未提供工资与就业资料期。",
-                "market": "美国",
-                "name": "O*NET 55-1013.00 职业摘要（资料期）",
-                "period": "2026 年更新页面；访问 2026-09-15",
-                "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/55-1013.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方工资统计",
-                  "2025 年；2026-05-15 发布；访问 2026-09-15"
-                ],
-                "evidence_type": "官方工资统计",
-                "id": "census",
-                "limitation": "用于核对统计口径与覆盖范围，不提供本职业工资。",
-                "market": "中国大陆",
-                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》（口径核对）",
-                "period": "2025 年；2026-05-15 发布；访问 2026-09-15",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "官方职业详细资料",
-                  "2026 年更新页面；访问 2026-09-15"
-                ],
-                "evidence_type": "官方职业详细资料",
-                "id": "msresearch",
-                "limitation": "用于说明该职业资料的可用范围与缺口。",
-                "market": "美国",
-                "name": "O*NET 55-1013.00 详细资料（资料完整性）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET 55-1011.00 空勤官职责概述",
+                "period": "当前已核页面；无专属统计资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/55-1013.00"
+                "url": "https://www.onetonline.org/link/summary/55-1011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
+                ],
+                "evidence_type": "官方职业概述",
+                "id": "r2-pay-3",
+                "limitation": "只支持该相邻职业公开职责；比较是编辑归纳，不证明资格互认或自动转任。",
+                "market": "美国",
+                "name": "O*NET 55-1012.00 飞机弹射与回收官职责概述",
+                "period": "当前已核页面；无专属统计资料期",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-1012.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方调查范围",
+                  "当前网页；无本职业统计资料期"
+                ],
+                "evidence_type": "官方调查范围",
+                "id": "census",
+                "limitation": "仅说明OEWS不调查SOC55，不能推所有政府部门均无军人薪酬资料。",
+                "market": "中国大陆",
+                "name": "BLS OEWS FAQ（SOC55军职不调查）",
+                "period": "当前网页；无本职业统计资料期",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
+                ],
+                "evidence_type": "官方职业概述",
+                "id": "msresearch",
+                "limitation": "只支持该相邻职业公开职责；比较是编辑归纳，不证明资格互认或自动转任。",
+                "market": "美国",
+                "name": "O*NET 55-1016.00 步兵军官职责概述",
+                "period": "当前已核页面；无专属统计资料期",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-1016.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "当前已核页面；无职业工资就业资料期"
                 ],
                 "evidence_type": "官方职业摘要",
                 "id": "onet-wages",
                 "limitation": "该军队职业未提供工资字段；本页不提供中位数、分位数或起薪。",
                 "market": "美国",
                 "name": "O*NET 55-1013.00 职业摘要（工资字段）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "period": "当前已核页面；无职业工资就业资料期",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-1013.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方职业摘要",
-                  "2026 年更新页面；访问 2026-09-15"
+                  "官方职业概述",
+                  "当前已核页面；无专属统计资料期"
                 ],
-                "evidence_type": "官方职业摘要",
+                "evidence_type": "官方职业概述",
                 "id": "archivists",
-                "limitation": "用于核对排除的相邻身份（空勤官、飞机弹射与回收官、火炮导弹官），不代表资格可互换。",
+                "limitation": "仅支持该相邻职业职责，比较为编辑整理，不证明资格可互换。",
                 "market": "美国",
-                "name": "O*NET 55-1013.00 职业摘要（相邻身份）",
-                "period": "2026 年更新页面；访问 2026-09-15",
+                "name": "O*NET 55-1015.00 指挥控制中心官职责概述",
+                "period": "当前已核页面；无专属统计资料期",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
-                "url": "https://www.onetonline.org/link/summary/55-1013.00"
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/55-1015.00"
               }
             ]
           },
@@ -32944,7 +33076,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方技术信号",
+            "类型": "官方调查范围",
             "适用范围": {
               "$item": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32966,7 +33098,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方认证发现",
+            "类型": "军种资料指引",
             "适用范围": {
               "$item": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32988,7 +33120,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方培训发现",
+            "类型": "官方职业概述",
             "适用范围": {
               "$item": "armored-assault-vehicle-officers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -34409,7 +34541,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "指挥与记录",
+                  "label": "记录",
                   "secondary_value": null,
                   "value": {
                     "$item": "armored-assault-vehicle-officers.profile.career-quick-answers-block.6",
@@ -34714,7 +34846,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "health"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34746,7 +34878,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "editor"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34777,8 +34909,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "employer"
+              "onet",
+              "editor"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34809,8 +34941,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "facilities",
-              "onet"
+              "onet",
+              "health"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34841,8 +34973,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "bls",
-              "employer"
+              "onet",
+              "editor"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34874,7 +35006,7 @@
             },
             "evidence_refs": [
               "onet",
-              "facilities"
+              "health"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35835,7 +35967,7 @@
       },
       "hero": {
         "h1": "装甲突击车辆官",
-        "quick_answer": "装甲突击车辆官以美国 O*NET 55-1013.00 为 canonical 主体，负责装甲车辆分队的管理协调、人员装备运输交付、车辆设备状态、行动记录与责任边界；岗位权力来自军队任命和任务授权，不是公众执业许可。",
+        "quick_answer": "装甲突击车辆官是美国军队职业，指挥装甲车辆部队行动、制定并实施作战计划，指导车组系统运用并组织协同。O*NET 不采集军职统计；进入与任职须核对所属军队正式要求。",
         "title": "装甲突击车辆官"
       },
       "market_signal_card": {
@@ -36386,7 +36518,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 与 BLS 就业预测（该军队职业未提供）",
+            "label": "职业就业预测（本次未取得）",
             "secondary_value": null,
             "value": {
               "$item": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.4",
@@ -36397,7 +36529,7 @@
           },
           {
             "alternate_value": null,
-            "label": "中国大陆侧对应职业口径（未建立）",
+            "label": "中国大陆侧对应职业细类（本次未核）",
             "secondary_value": null,
             "value": {
               "$item": "armored-assault-vehicle-officers.profile.onet-structured-fields-block.5",
@@ -37187,7 +37319,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合装甲突击车辆官",
+        "label": "了解我的职业兴趣",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37425,13 +37557,13 @@
         "market": "美国",
         "measure": "O*NET 职业代码",
         "occupation_scope": "装甲突击车辆官",
-        "period": "2026 年更新页面；访问 2026-09-15",
+        "period": "当前职业概述；无职业统计资料期",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布工资数据）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
@@ -37439,11 +37571,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "onet-wages"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布工资数据）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
@@ -37451,11 +37584,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "onet-wages"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布工资数据）",
         "fact_id": "us-wage-2025",
         "market": "美国",
@@ -37463,11 +37597,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "onet-wages"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布工资数据）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
@@ -37475,11 +37610,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "onet-wages"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布工资数据）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
@@ -37487,11 +37623,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "onet-wages"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布就业数据）",
         "fact_id": "us-employment-2025",
         "market": "美国",
@@ -37499,11 +37636,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布就业预测）",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
@@ -37511,11 +37649,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布空缺数据）",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
@@ -37523,11 +37662,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布分行业工资）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
@@ -37535,11 +37675,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布分行业工资）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
@@ -37547,11 +37688,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布分行业工资）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
@@ -37559,11 +37701,12 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
+        "derivation": "O*NET不采集军职，OEWS不调查SOC55；本次未取得本职业专属值，不以军衔工资代分位。",
         "display_value": "证据不足（O*NET 未发布分行业工资）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
@@ -37571,12 +37714,13 @@
         "occupation_scope": "装甲突击车辆官",
         "period": "不可得（O*NET 未发布）",
         "source_refs": [
-          "operations"
+          "onet",
+          "census"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "宽口径岗位类别年平均工资（不适用）",
@@ -37587,8 +37731,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "宽口径岗位类别年平均工资（不适用）",
@@ -37599,8 +37743,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "宽口径岗位类别年平均工资（不适用）",
@@ -37611,8 +37755,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "宽口径岗位类别年平均工资（不适用）",
@@ -37623,8 +37767,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（不适用）",
@@ -37635,8 +37779,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（不适用）",
@@ -37647,8 +37791,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（不适用）",
@@ -37659,8 +37803,8 @@
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足（国家统计局不单列该军队职业）",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "证据不足（本次NBS2025公告未给本职业专属工资）",
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "行业门类年平均工资（不适用）",
@@ -37677,50 +37821,53 @@
         "market": "美国",
         "measure": "来源支持的职业事实",
         "occupation_scope": "装甲突击车辆官",
-        "period": "2026 年更新页面；访问 2026-09-15",
+        "period": "当前职业概述；无职业统计资料期",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "任务命令、地形敌情与车辆与车组战备状态 → 机动、火力、通信与补给协同方案 → 执行中接收车组与友邻分队报告并调整队形与优先级 → 形成可供上级复核的态势与行动记录",
+        "display_value": "编辑核对流程：核来源、区分职责、整理资料、人工复核、请示待核、保存记录；不是官方作战步骤。",
         "fact_id": "armor-command-workflow",
         "market": "美国",
-        "measure": "来源支持的职业事实",
+        "measure": "编辑建议",
         "occupation_scope": "装甲突击车辆官",
         "period": "2026 年更新页面；访问 2026-09-15",
         "source_refs": [
-          "onet"
+          "editor"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "中国军官身份、军衔与岗位权力来自军队制度、任命与授权链，而不是个人面向公众申请的职业执照；本页不把美国 O*NET 标题直接映射为中国同名岗位。",
+        "derivation": "本次未核一对一细类或专属统计；NBS公告不能替代职业工资及资格。",
+        "display_value": "2021年军官制度公告涉及选拔、教育、考核、晋升任用与岗位管理；不提供本职业一对一现行资格清单。",
         "fact_id": "cn-authorization-boundary",
         "market": "中国大陆",
         "measure": "来源支持的职业事实",
         "occupation_scope": "装甲突击车辆官",
-        "period": "2021 年制度材料；访问 2026-09-15",
+        "period": "2021-01-01公告",
         "source_refs": [
           "ilo"
         ]
       },
       {
         "derivation": null,
-        "display_value": "55-1013.00 的责任中心是装甲车辆分队的机动、直瞄火力与车组指挥；步兵军官以地面步兵单位为中心，火炮导弹官以间接火力系统为中心，指挥与控制中心官以跨单元态势与指令流为中心，空勤官则以航空任务与机组为中心。",
+        "display_value": "相邻职业按各自概述区分对象和职责侧重；火炮导弹并非全部间接火力，指挥中心也管武器系统，车组和军官不全互斥。",
         "fact_id": "adjacent-boundary",
         "market": "美国",
-        "measure": "来源支持的职业事实",
+        "measure": "编辑比较",
         "occupation_scope": "装甲突击车辆官",
         "period": "2026 年更新页面；访问 2026-09-15",
         "source_refs": [
-          "onet"
+          "onet",
+          "facilities",
+          "archivists",
+          "r2-pay-1"
         ]
       },
       {
         "derivation": null,
-        "display_value": "涉及武力使用的自主或半自主系统仍要求受训指挥员与操作员保持适当的人类判断，遵守战争法、适用条约、武器安全规则与交战规则，并具备测试验证、状态反馈与启停程序。",
+        "display_value": "美国国防部2023年政策说明：自主及半自主武器系统须允许指挥员与操作员对武力使用保持适当人类判断，使用者谨慎遵守战争法、适用条约、武器安全及交战规则。",
         "fact_id": "ai-human-judgment",
         "market": "美国",
         "measure": "来源支持的职业事实",
@@ -37735,33 +37882,34 @@
         "display_value": "能在动态态势与多路报告中保持方位与优先级；能用简短通信让车组理解意图；能在情况变化或授权不清时停下复核并按指挥链升级，而不是某种人格标签。",
         "fact_id": "fit-signals",
         "market": "美国",
-        "measure": "来源支持的职业事实",
+        "measure": "编辑建议",
         "occupation_scope": "装甲突击车辆官",
         "period": "2026 年更新页面；访问 2026-09-15",
         "source_refs": [
-          "onet"
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "目标识别、武力使用与系统自动化出现不确定时，控制链必须包括停止或限制动作、核验目标与系统状态、按交战规则与指挥链升级、保留记录；工具建议不能替代有权人员的决定。",
+        "display_value": "不得由纸面或工具输出推定授权；具体指挥和武力使用规则须正式核实。2023年美国政策说明仅针对自主与半自主武器系统。",
         "fact_id": "risk-force-authorization",
         "market": "美国",
-        "measure": "来源支持的职业事实",
+        "measure": "编辑风险建议",
         "occupation_scope": "装甲突击车辆官",
         "period": "2023-01-25 指令；访问 2026-09-15",
         "source_refs": [
-          "health"
+          "health",
+          "editor"
         ]
       },
       {
         "derivation": null,
-        "display_value": "美国陆军 Armor Branch 路径以委任后的专业军事教育与岗位发展为核心；官方指南列出专业军事教育结业、坦克或侦察排长、连队或骑兵分队指挥以及营旅级参谋等阶段。",
+        "display_value": "美国陆军2021年装甲指南讨论坦克/侦察排长、连队/骑兵分队指挥和营旅参谋等任职实例，不能当作全部军种现行通用资格。",
         "fact_id": "entry-armor-training",
         "market": "美国",
-        "measure": "来源支持的职业事实",
+        "measure": "官方历史实例",
         "occupation_scope": "装甲突击车辆官",
-        "period": "2021 年指南；访问 2026-09-15",
+        "period": "2021-10-06历史指南",
         "source_refs": [
           "oews"
         ]
@@ -37778,7 +37926,7 @@
     "badges": [
       "官方职责：分队指挥与作战计划 · 车组与系统运用指导 · 兵种协同",
       "指挥与授权边界 · 计划与记录证据 · 异常按指挥链升级",
-      "数据缺口标注 · O*NET 未发布工资与就业数据 · 中国大陆无对应口径"
+      "数据缺口标注 · O*NET 未发布工资与就业数据 · 中国大陆本次未核对应细类"
     ],
     "metrics": [
       {
@@ -37824,10 +37972,10 @@
       "text": "装甲突击车辆官"
     }
   },
-  "source_content_sha256": "a5c788a063a007fab48525629becc5ff4e5225209548cdb36c83f7b4e19a5e19",
+  "source_content_sha256": "23b538c0038eb6bb319a59bd471312b960349a902a02920080c426fbf3898396",
   "subject": {
     "canonical_slug": "armored-assault-vehicle-officers",
     "name": "装甲突击车辆官",
-    "summary": "装甲突击车辆官（O*NET 55-1013.00，Armored Assault Vehicle Officers）是美国军队职业，在陆地或水域的战斗环境中指挥坦克、轻型装甲部队与两栖突击车辆部队的作战行动。本页核查官方职责、指挥与授权边界与数据缺口：O*NET 未发布该职业的工资、就业、增长、行业、兴趣代码、工作情境与学历数据，本页对这些字段一律显示「证据不足」，不使用代理数字；中国大陆统计与职业分类也未建立对应口径。"
+    "summary": "装甲突击车辆官（O*NET55-1013.00）是美国军队职业，指挥装甲车辆部队、制定并实施作战计划、指导车组系统运用和组织协同。本页区分官方职责、历史任职实例与编辑建议；O*NET不采集军职数据，中国一对一细类和专属统计本次未核，不以行业或其他岗位数字代填。"
   }
 }

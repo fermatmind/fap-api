@@ -1260,7 +1260,7 @@
         "status": "pending_mapping"
       },
       "item:food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23073,7 +23073,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一家完全虚构的食品加工厂需要完成一批咖啡豆或谷物的烘焙与干燥。请写出一份设备操作与质量记录草案：（1）如何按工单核对品种、数量与目标水分；（2）如何按工艺设定温度与时间并启动设备，逐步调整温度、湿度、压力与阀门；（3）如何观察物料流量与设备声音以发现堵塞或溢出并及时处置；（4）如何取样检测水分并做外观与口感核对；（5）如何记录产量、品种与处理的温度与时间，并在异常时停机上报。使用公开资料与模拟数据作答，不使用任何真实企业、产品或客户信息。"
+              "纸面体验｜使用下方虚构干燥批次D01的工单、记录与样本读数，完成批次核对、数量计算、偏差清单和交接草稿。只在纸面处理给定数据，不设定真实设备参数、不试吃或处理真实产品；核对参考交付后记录遗漏。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -23117,13 +23117,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在设备运行中同时完成三件事：按工艺守住参数（温度、时间、湿度与压力、阀门与进料速度）、把质量做稳定（取样、水分检测、外观与口感核对）、并承担可复核的留痕责任（工单、产量与温度时间记录、异常停机与上报）。建议用一次可核验的体验（加工厂设备旁见习或帮工、参加设备操作与食品安全培训并完成实操考核、或完成一次模拟烘焙干燥批次演练）来检验，而不是仅依据兴趣问卷的结论。"
+              "准备观察｜先用本页虚构批次核数量与异常，再核目标雇主的设备、班次、训练和授权条件。纸面练习可观察记录与上报习惯，不能证明能承受真实高温噪声、独立操作、检修或产品放行。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -23531,12 +23531,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未建立与「食品、机器操作员看护员」精确对应的公开职业工资统计值；不以行业均值、招聘报价或第三方估算代填。"
+              "证据不足：本页所核中国行业工资资料未取得精确对应本职业的全国工资统计；不以行业均值、招聘报价或第三方估算代填。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet-summary",
+            "nbs-wages-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -23591,7 +23591,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按职业核验的食品、机器操作员看护员工资中位数；不以行业门类均值代填。"
+              "证据不足：中国大陆未取得可按职业核验的食品与烟草烘烤、烘焙与干燥设备操作与看护员工资中位数；不以行业门类均值代填。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.23",
@@ -23634,13 +23634,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "中国大陆薪资证据—计量单位｜国家统计局以「元/年」公布年平均工资，为税前工资总额口径（含单位代扣的个人所得税与个人缴纳的社会保险和住房公积金）；美国 OEWS 以「美元/小时」或「美元/年」公布，不含加班、奖金与福利。单位与包含项不同，不能直接比较。"
+              "中国大陆薪资证据—计量单位｜国家统计局以「元/年」公布年平均工资，为税前工资总额口径（含单位代扣的个人所得税与个人缴纳的社会保险和住房公积金）；美国 OEWS 以「美元/小时」或「美元/年」公布，工资包含生产奖金等常规税前薪酬，不含加班费、轮班差额、非生产奖金与雇主福利成本。单位与包含项不同，不能直接比较。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.26",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "nbs-wages-2025",
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -23649,7 +23649,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未取得可按地区或用工形式核验的食品、机器操作员看护员工资数据；不以个别报价或他人转述代填。"
+              "证据不足：中国大陆未取得可按地区或用工形式核验的食品与烟草烘烤、烘焙与干燥设备操作与看护员工资数据；不以个别报价或他人转述代填。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.27",
@@ -23751,12 +23751,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国薪资证据—抽样与缺失限制｜OEWS 为抽样估计，存在抽样误差，行业与地区细分下可能出现缺失或不可靠估计；本职业就业规模较小（2024 约 20,700 人，BLS 职业投影基期，经 O*NET 呈现；OEWS 呈现约 20,370 人），细分估计更易缺失；本页未取得可按行业读取的分行业工资，该位置按可见缺口登记；不以行业均值或第三方估算代填。"
+              "美国薪资证据—抽样与缺失限制｜OEWS为调查估计，有抽样误差与细分不可靠值。本页未取得本职业分行业工资，不由就业规模或访问失败推官方未发布；不以行业均值代填。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.profile.career-quick-answers-block.34",
           "source_refs": [
-            "onet-summary",
+            "bls-oews-methods",
             "internal-rubric"
           ],
           "type": "prose"
@@ -23775,13 +23775,13 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 食品、机器操作员看护员职业范围",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业范围",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员详细资料",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员详细资料",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
@@ -23799,7 +23799,7 @@
                 "url": "https://www.bls.gov/news.release/ocwage.htm"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业兴趣",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业兴趣",
                 "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/interest/51-3091.00"
@@ -23907,7 +23907,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本职业：食品、机器操作员看护员"
+              "本职业：食品与烟草烘烤、烘焙与干燥设备操作与看护员"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.14",
@@ -24232,16 +24232,16 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 食品、机器操作员看护员详细资料",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员详细资料",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "O*NET呈现BLS2024—2034就业预测",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
                 "entity": "BLS 职业就业与工资新闻稿（OEWS May 2025）",
@@ -24250,10 +24250,10 @@
                 "url": "https://www.bls.gov/news.release/ocwage.htm"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "ILO工作论文96（2023）",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-job-quantity-and"
               },
               {
                 "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
@@ -24262,19 +24262,19 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业范围",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业范围",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业兴趣",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业兴趣",
                 "id": "link-7",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/interest/51-3091.00"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员详细资料",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员详细资料",
                 "id": "link-8",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
@@ -24298,34 +24298,34 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "BLS就业矩阵资料方法",
                 "id": "link-12",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员详细资料",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员详细资料",
                 "id": "link-13",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "entity": "BLS 职业就业预测（2024—2034）",
+                "entity": "O*NET设备监控与记录任务",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/details/51-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET本职业任务",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "O*NET美国职业范围；中国工资资料见本页来源卡",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
                 "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
@@ -24334,16 +24334,16 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业范围",
+                "entity": "NIST AI RMF 1.0",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/51-3091.00"
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业兴趣",
+                "entity": "BLS就业矩阵资料方法；本页三层核对建议",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/interest/51-3091.00"
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
               }
             ]
           },
@@ -24472,14 +24472,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业整体处于中低水平的生成式 AI 任务暴露：核心工作是设备旁的参数监控与调节、异常处置、取样检测与清洁，多数任务需要在场完成。AI 与数字工具最可能改变的是「记录与看板与提醒环节」——参数与产量记录、温度与湿度趋势看板、报警与维护提醒、水分与检验数据汇总、简单排产；而现场对产品与设备状态的判断、参数设定与调节、异常处置与停机决定、取样与放行仍由现场人员与班组长负责。技术可行不等于组织采用，也不等于岗位减少。"
+              "直接回答｜O*NET本职业任务涉及设备控制、观察产品和仪表、取样及生产记录；本页建议先探索记录整理与偏差提示辅助，现场判断由相应授权人员负责。所核资料未给本职业生成式AI实测暴露等级、采用率或替代年份，不把任务分析写成“中低暴露”或整体必不替代。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "internal-rubric",
             "onet-summary",
-            "bls-projections-2025-35"
+            "ilo-wp96",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -24516,13 +24516,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业预测 2024—2034"
+              "O*NET呈现BLS2024—2034就业预测"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24531,13 +24530,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明就业与增长与岗位空缺的美国口径；为预测而非实际招聘数，不含自雇。"
+              "精确51-3091的旧期间就业、增长类别与年均空缺；预测含增长和更替，矩阵包括自雇，非实际招聘数。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -24546,12 +24545,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS 工资统计（May 2025）"
+              "BLS OEWS May 2025工资统计"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -24560,12 +24559,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资与就业的时点估计；不含加班与福利，不适用于其他法域。"
+              "美国受雇工资项目，非生成式AI暴露研究"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -24574,12 +24573,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作与生成式 AI 任务暴露研究"
+              "ILO工作论文96（2023）"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24588,12 +24587,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对任务的影响机制；研究对象以职业大组与民事职业为主，不预测本职业个人岗位变化。"
+              "ILO工作论文96分析潜在生成式AI任务暴露；全球研究不等于本职业实际采用率或个人岗位结果。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24602,12 +24601,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST 人工智能风险管理框架（AI RMF 1.0）"
+              "NIST AI RMF 1.0"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "internal-rubric"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -24616,12 +24615,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于治理与风险控制的一般原则；不是设备安全、食品安全或压力容器标准。"
+              "自愿AI风险框架，不是设备/食品安全标准或雇主采用调查"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "internal-rubric"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -24630,12 +24629,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-3091.00 职业范围"
+              "O*NET 51-3091.00职业范围"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24644,12 +24643,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于界定职业边界（烘焙、烘烤与干燥设备操作）；用于分类核对。"
+              "食品与烟草烘烤、烘焙和干燥设备操作，非AI风险框架"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24686,13 +24685,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是记录、看板、趋势与提醒环节；产品与设备判断、参数调节、异常处置、取样与放行始终由现场人员负责。技术可行、制度采用与岗位结果三者必须分开判断。"
+              "方向比较｜以下按设备运行记录、取样质检记录及设备维护支持分析可探索的辅助环节，是本页编辑建议；未实测工具效果或企业采用。各方向的实际权限须由岗位与规程确定。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -24842,11 +24841,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以设备旁监控与调节为主，参数判断与异常处置难以被远程工具替代"
+              "按本页任务分析，记录辅助和现场判断应分别核验；O*NET任务清单不测AI替代程度。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.44",
           "source_refs": [
+            "onet-details",
             "internal-rubric"
           ],
           "type": "prose"
@@ -24856,12 +24856,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不含加班、奖金与福利；不适用于其他法域"
+              "OEWS常规税前工资含生产奖金，排除加班费、轮班差额、非生产奖金与雇主福利成本，不覆盖自雇。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -24898,11 +24898,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工资与就业口径与美国职业分类绑定；本职业规模较小，细分估计更易缺失"
+              "OEWS工资与受雇就业口径不同于预测矩阵；细分未取得不由规模推官方未发布。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.48",
           "source_refs": [
+            "bls-oews-methods",
+            "bls-matrix-methods",
             "internal-rubric"
           ],
           "type": "prose"
@@ -24940,12 +24942,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露研究，以职业大组与民事职业为主"
+              "全球潜在生成式AI任务暴露，非本职业企业采用调查"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24954,11 +24956,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "任务暴露只说明任务可被技术触及，不等于岗位减少"
+              "ILO讨论技术可能影响任务与工作质量，不能由潜在暴露推本职业已采用或个人失业。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.52",
           "source_refs": [
+            "ilo-wp96",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25038,12 +25041,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业预测方法说明"
+              "BLS就业矩阵方法"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet-summary"
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -25052,12 +25055,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "预测含增长与替换需求"
+              "就业矩阵包含自雇；年均空缺含更替"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet-summary"
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -25066,12 +25069,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位空缺含替换需求，不可读作新增岗位"
+              "空缺不是净新增，也不是个人录用概率"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet-summary"
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -25123,13 +25126,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "短期内不会。核心工作是设备旁的参数监控与调节、异常处置与取样检测，工具能替代的是记录、看板与提醒环节，不能替代设备安全判断、参数调节与放行责任。"
+              "所核任务与潜在暴露资料不能断言本职业短期必不替代。可试验记录整理与偏差提示；现场取样、设备状态及质量判断需要相应训练和授权，工具效果、采用与岗位结果须分别核验。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "ilo-wp96",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25153,11 +25157,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有设备数据采集与看板、温度与湿度趋势监控、水分仪数据记录、报警与维护提醒、简单排产与追溯系统；具体以企业与车间安排为准。"
+              "本页建议核目标车间的仪表记录、批次追溯与报警系统，再用虚构数据练记录核对。O*NET任务涉及仪表监控与生产记录；它不能证明每家企业普遍采用特定软件或生成式AI。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.66",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25167,11 +25172,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业预测（口径说明）"
+              "O*NET设备监控与生产记录任务；本页工具核对建议"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.67",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25181,12 +25187,26 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "对温度与湿度与压力异常的敏感度、按工艺卡调节参数的经验、卡料与堵塞处置、粉尘与高温安全控制、以及记录与追溯的严谨。"
+              "按O*NET任务，值得准备仪表读数核对、产品取样与记录、异常上报及按规程工作。哪些能力更难替代是本页任务分析，非实测排名；不把工艺经验等同自动取得检修或放行权限。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "internal-rubric",
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.ai-impact-table",
+          "data": {
+            "paragraphs": [
+              "O*NET本职业任务与工作活动"
+            ]
+          },
+          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.69",
+          "source_refs": [
             "onet-summary"
           ],
           "type": "prose"
@@ -25196,11 +25216,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资与就业口径）"
+              "证据不足：本页所核中国行业工资资料未取得精确对应51-3091的职业工资、就业或AI采用率；制造业均值仅作行业背景，不能据此断言全国不存在其他职业统计。"
             ]
           },
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.69",
+          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.70",
           "source_refs": [
+            "nbs-wages-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25210,28 +25231,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有中国大陆该职业的精确公开统计，不能断言其用工与技术采用情况；行业背景可参考国家统计局行业门类平均工资（如制造业），但那是行业口径而非职业工资。"
-            ]
-          },
-          "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.70",
-          "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.ai-impact-table",
-          "data": {
-            "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "所链O*NET仅支持美国职业范围；中国行业资料与检索缺口见本页来源卡"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "nbs-wages-2025",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25282,11 +25288,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业范围（边界）"
+              "NIST AI RMF风险治理；实际制度与适用法律另核"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.75",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25310,7 +25317,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业兴趣（偏好方向）"
+              "本页三层核对方法，非职业兴趣或实测研究结论"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.77",
@@ -25436,11 +25443,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "跳过实测会导致工艺失控与产品不合格"
+              "未经授权外发配方、客户信息或批次资料会造成泄露和用途失控。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.86",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25450,11 +25458,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "温度与水分须现场实测并记录，工具只作提醒形式"
+              "按组织制度核用途、权限与留存，外部工具只使用获准或虚构数据；不以上传代替授权。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.87",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25464,11 +25473,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工艺与商业信息可能违规外传或被滥用"
+              "工具版本、输入和修改不可追溯，可能无法复核参数摘要与异常报告。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.88",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25478,11 +25488,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "限定用途与留存期限，敏感资料不上传外部服务"
+              "保留原始记录、工具版本、输出与人工修订依据；工具输出不能冒充实测数据。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.89",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25492,7 +25503,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参数与产量记录失真会影响追溯与责任界定"
+              "混用批次、数量单位或记录期间，会使产量和交接汇总失真。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.90",
@@ -25506,7 +25517,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录须反映真实过程，禁止生成未经核实的记录"
+              "逐项核批次、千克、时间与来源，先算清进料出料关系，再由授权人员复核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.91",
@@ -26117,12 +26128,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径；边界｜不含自雇，且 OEWS 呈现口径约 20,370 人，两者统计项目不同，不可混用。"
+              "口径｜2024预测基期就业来自O*NET呈现；边界｜BLS矩阵包括自雇，与OEWS受雇工资不同，不混其他年份或统计项目人数。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "nbs-wages-2025"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -26496,7 +26508,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜食品、机器操作员看护员（行业与招聘中常称烘焙机操作工、干燥设备操作工、烘烤看护工、脱水设备操作工）"
+              "职业名称对照｜食品与烟草烘烤、烘焙与干燥设备操作与看护员（行业与招聘中常称烘焙机操作工、干燥设备操作工、烘烤看护工、脱水设备操作工）"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.44",
@@ -26510,7 +26522,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜截至本轮检索，中国大陆未建立与本职业精确对应的公开职业工资统计；本页只提供口径说明、行业背景代理与可见缺口登记，不提供估算薪酬。"
+              "证据不足：中国大陆部分｜截至本轮检索，本页所核中国资料未取得与本职业精确对应的职业工资统计；本页只提供口径说明、行业背景代理与可见缺口登记，不提供估算薪酬。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.china-salary.career-snapshot-primary-locale.45",
@@ -26715,13 +26727,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 51-3091.00 职业与工资数据｜https://www.onetonline.org/link/summary/51-3091.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS 职业就业预测 2024—2034｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              "O*NET职业、工资与2024—2034预测｜https://www.onetonline.org/link/summary/51-3091.00；BLS职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS就业矩阵资料方法｜https://www.bls.gov/emp/documentation/data-overview.htm"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -26772,11 +26785,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位；边界｜通常对应经验较少或工时较短的从业者，不代表入职起薪。"
+              "口径｜美国全国工资分布下十分位；边界｜不能由分位识别年龄、经验或兼职，不等于新手起薪。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -26828,11 +26842,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位；边界｜通常对应较长经验或高成本地区，不代表全部资深人员。"
+              "口径｜美国全国工资分布上四分位；边界｜不能由分位推全部资深人员收入。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -26884,13 +26899,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径；边界｜不含自雇，且 OEWS 呈现口径约 20,370 人，两者统计项目不同，不可混用。"
+              "口径｜2024就业约20,700人来自O*NET呈现的BLS预测基期；边界｜矩阵包括自雇，与OEWS受雇工资不同；不混其他年份或统计项目人数。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -26971,12 +26986,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业美国 2025 年中位年薪 44,810 美元（中位时薪 21.54 美元），工资分布从下十分位 33,250 美元到上十分位 62,680 美元，跨度约 1.9 倍，主要差异来自地区与生活成本、班次与加班、经验与设备等级；中位不代表起薪。"
+              "本职业美国2025年中位年薪44,810美元、中位时薪21.54美元；原分位资料为33,250至62,680美元。分布不能解释经验、班次或地区的因果贡献，中位不等于起薪。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -27253,12 +27268,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 1.9 倍的差距主要来自地区、班次与经验。"
+              "分布解读：中位为分布中点，下十分位至上十分位约1.9倍；统计本身不识别经验、班次或地区导致的差异。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -27268,12 +27283,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含加班、奖金、福利与自雇收入；轮班与季节用工的收入难以完整反映。"
+              "口径解读：OEWS常规税前工资包含生产奖金等项目，不含加班费、轮班差额、非生产奖金和雇主福利成本；不覆盖自雇收入。不能把工资统计当总报酬。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "internal-rubric"
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -27325,12 +27340,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应经验较少、工时较短或季节性用工的从业者；进入该区间的常见原因是新手期或辅助工序。"
+              "下十分位是全国工资分布位置，不能据此认定新手、季节工或工时较短者。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -27340,12 +27355,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手起薪通常接近或低于中位，随经验与班次变化上升。"
+              "中位是分布中点，不代表起薪；目标雇主的实际报价与薪酬组成另核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-2025",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -27354,12 +27370,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应经验丰富、能独立处理复杂设备与参数异常或处于高成本地区的从业者；并非普遍可达。"
+              "上十分位是分布位置，不能据此认定资深、复杂设备岗位或个人可达性。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "bls-projections-2025-35",
+            "bls-oews-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -27432,7 +27448,7 @@
                 "url": "/zh/career/jobs/food-batchmakers"
               },
               {
-                "entity": "食品、机器操作员看护员方向",
+                "entity": "食品与烟草烘烤、烘焙与干燥设备操作与看护员方向",
                 "id": "link-10",
                 "relation": "career.tool",
                 "url": "/zh/career/jobs/food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders"
@@ -28119,7 +28135,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "食品、机器操作员看护员｜以烘焙、烘烤与干燥设备的热量与时间与水分控制为产出：工单核对、参数设定与启动、运行监控与调节、异常处置、取样与水分检测、记录与清洁"
+              "食品与烟草烘烤、烘焙与干燥设备操作与看护员｜以烘焙、烘烤与干燥设备的热量与时间与水分控制为产出：工单核对、参数设定与启动、运行监控与调节、异常处置、取样与水分检测、记录与清洁"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.40",
@@ -28221,13 +28237,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "偏内向的人适合吗？适合。设备操作以独自动手监控为主，但需能主动上报异常与配合换线，社交强度不高。"
+              "内向不是拒绝探索的依据，但不能据本页确认适合。O*NET记录73%受访者每天面对面讨论；异常上报与同事协调是任务部分。先用虚构批次交接草稿观察沟通与记录准备差距。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.47",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -28280,11 +28296,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需要学历吗？O*NET 显示该职业通常要求高中或同等学历（61% 受访者），23% 认为低于高中即可，11% 认为需要部分大学教育；实际以雇主招聘条件为准。"
+              "美国O*NET调查列高中或同等学历61%、低于高中23%、上过大学但未获学位11%；这是受访者关于新聘者教育需求的回答，不是全球统一准入。目标雇主学历、训练与授权条件另核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.51",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28324,11 +28341,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "中美路径差异？美国以在职培训为主，O*NET 将本职业归入 Job Zone 1-2；中国大陆以企业用工与车间培训为主，食品生产许可与烟草专卖与卫生规范另有要求，具体以所在地法规与雇主规定为准。"
+              "美国O*NET的Job Zone 1–2和学历回答是美国职业资料，不能推中国统一门槛。中国食品企业职工知识培训及相应直接入口食品接触人员健康证明按食品安全法第44/45条；设备专项作业和授权另核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.54",
           "source_refs": [
+            "onet-summary",
+            "cn-food-safety-law",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28338,7 +28357,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "怎么验证自己适配？用一次真实或模拟的设备操作任务检验：能否按工艺设定与调节参数、能否发现并处置卡料与异常、能否接受高温与连班排班。"
+              "先完成本页D01纸面批次记录，核数量、异常与待确认条件，再按参考交付记录遗漏。它只能观察纸面核对与上报习惯，不能验证高温噪声身体适应、真实设备操作或食品合格；实际训练、体检及岗位权限另核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.55",
@@ -28523,13 +28542,13 @@
                 "url": "#career-visual-group-ai-impact"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业档案",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业档案",
                 "id": "link-2",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员详细资料",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员详细资料",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/details/51-3091.00"
@@ -29095,7 +29114,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "入门方向与任务比较",
           "type": "table"
         },
         {
@@ -29106,17 +29125,17 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 显示该职业通常要求高中或同等学历（61% 受访者），23% 认为低于高中即可，11% 认为需要部分大学教育。",
-                  "食品、机械或自动化相关的中职与高职学历在应聘质检、设备维护与班组岗位时更有优势。",
-                  "学历只影响筛选起点，能否上岗主要取决于在职培训与实操考核结果。"
+                  "美国O*NET受访者回答：高中或同等61%、低于高中23%、上过大学但未获学位11%；非中国统一入职门槛。",
+                  "目标雇主的学历、经验与训练要求逐项核招聘原文，不将相关专业推统一优势或录用保证。",
+                  "训练考核与岗位授权分别核实；学历或纸面练习不等于独立操作资格。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：设备操作与安全培训记录、食品安全与卫生培训记录、个人防护用品使用规范。",
-                  "部分雇主要求叉车、压力容器或电气相关培训记录（视设备与工序而定）。",
-                  "涉及压力容器、电气与受限空间等作业须由具备相应条件的一方承担；具体以雇主与所在地要求为准。"
+                  "核实际设备、任务及适用的安全训练、专项资格与单位授权。",
+                  "中国食品企业职工知识培训；直接入口食品接触人员每年健康检查取得健康证明，按食品安全法第44/45条具体范围。",
+                  "压力容器、电气或叉车作业按实际职责与适用法规另核，本页不列统一证书或周期。"
                 ]
               },
               {
@@ -29140,9 +29159,10 @@
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.employer-evidence.1",
           "source_refs": [
             "onet-summary",
+            "cn-food-safety-law",
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "雇主要求核对",
           "type": "cards"
         },
         {
@@ -29153,38 +29173,34 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的烘焙或干燥工单（品种、数量、目标水分与一项温度上限）。",
-                  "一份空白工单核对与批次记录表。",
-                  "一份空白参数设定与启动记录表（温度、时间与进料速度）。",
-                  "一份空白运行监控记录表（温度、湿度、压力与物料流量）。",
-                  "一份空白取样与水分与外观检测表。",
-                  "一份工序流程图（工单核对—设定启动—监控调节—异常处置—取样检测—记录清洁）。",
-                  "一支笔与计算器（用于产量与水分试算）。",
-                  "计时器（限时 60 分钟）。"
+                  "完全虚构纸面题D01：谷物进料100kg，收集出料88kg；包装10袋，每袋8kg，另留样2kg，记录余料6kg。质量状态全部待检，数量平衡不等于合格。",
+                  "虚构监控日志：09:00读数T=60；09:10读数T=70且记载异常信号；09:20读数T=68。T为无量纲练习读数，不是真实设备温度或工艺参数；单位、工艺卡和校验资料未给。",
+                  "虚构水分记录：样本A读数7.8%、B读数9.1%；验收范围、采样方法与仪器校验资料未给。只能登记，不得判断合格或指导生产。",
+                  "只需纸笔或表格、计算器与60分钟；表头：批次、原记录、计算/观察、缺失条件、上报对象、待确认状态。不得另找真实工单、操作设备、试吃或制造产品。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 60 分钟内完成：工单核对记录、参数设定与启动方案、运行监控记录、取样与水分检测方案。",
-                  "完成产量与水分试算，并写出至少两条可能导致批量报废或安全风险的情形与对应措施。",
-                  "写出哪些情形必须暂停上报而不是自行处理（如温度失控、压力异常、卡料与粉尘积聚）。"
+                  "60分钟：15分钟核原记录，15分钟计算数量，15分钟列偏差与未决条件，15分钟写班组交接草稿。",
+                  "分别算进出料差、包装总量及出料分配平衡；记录09:10异常及A/B水分读数，列不能判定之处。",
+                  "写两项需交授权负责人复核的条件：监控异常与缺少合格标准；不编启动、阀门调节或停机操作步骤。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列工单核对顺序与不可省略项，再逐项记录确认方式与结果。",
-                  "对参数写清设定值、允许范围与调节依据。",
-                  "对异常写清识别信号、处置步骤与升级对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "参考交付：100−88=12kg为进出料账面差，未说明水分蒸发、损耗或称量原因，不能直接称废料；10×8+2+6=88kg，出料分配账面平衡。",
+                  "09:10异常要保留原时间和T=70，上报授权班组负责人；无真实单位、工艺卡和仪器校验，不能判真实温度超限或自行调整。",
+                  "A=7.8%、B=9.1%只作给定样本读数；验收范围、取样和校验缺失，两个样本及整批均保持待确认，不可平均后宣布合格。",
+                  "交接草稿应列D01、100/88/80/2/6kg、12kg未解释差、09:10异常、A/B读数、缺失条件和待确认负责人；不写“已整改”或“可放行”。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及设备维修、电气与压力容器与粉尘防爆设计；对参数失控与卡料一律写明先停机并转交班组长与维护。",
-                  "作品只证明你能按本职业的工作方式组织任务与留痕，不构成资格或胜任证明。"
+                  "仅虚构数据与纸面记录，不是设备启停、参数设定、取样检测、检修或产品放行培训；所有实际操作须按有效规程、训练资格和岗位授权。",
+                  "数量算对只能证明本次纸面核对；不能证明高温噪声适应、食品安全、工艺合格或现场胜任。"
                 ]
               }
             ]
@@ -29193,7 +29209,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "虚构练习题面与参考交付",
           "type": "cards"
         },
         {
@@ -29204,33 +29220,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用「任务—能力—证据」三列列出你在模拟任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤属于必须上报而非自行判断。"
+                  "作品一：D01任务—证据表，逐项对应数量、监控日志与样本读数，标纸面独立完成或实际受指导情况。",
+                  "写明没有真实设备、合格标准、校验、操作或放行权限。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的班组长或质检复核你的参数设定与异常处置方案，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示结果，要展示从工单核对到记录交接的流程与留痕。"
+                  "作品二：对照本页参考交付自核100−88=12、10×8+2+6=88及所有待确认状态。",
+                  "若有合适且自愿的有经验者可请其评论纸面记录；未取得评论就记未复核，不虚构签名或审批。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的班次摘要（批次与产量、参数与水分、异常与处置、设备与清洁情况、交接事项）。",
-                  "摘要中不得出现客户姓名、配方细节、联系方式或任何可识别与敏感信息。",
-                  "注明信息来源与假设，区分实测值与估算值。"
+                  "作品三：一页D01交接草稿，保留原始数字、09:10异常、A/B读数、缺失条件与拟上报对象。",
+                  "注明全部虚构，不能写已整改、实测或已放行。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了计算工具或数据采集系统，标注哪些部分由工具生成、哪些由本人核对修订。",
-                  "说明工具输出在使用前经过了谁的复核。",
-                  "工具参数（损耗率、水分公差假设等）若为假设值，必须标明是假设。"
+                  "作品四：计算及修订记录，保存公式、输入版本、本人发现的遗漏和更正。",
+                  "工具输出须逐项核原输入，不将结果冒充真实生产数据。"
                 ]
               }
             ]
@@ -29239,7 +29251,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "可准备的作品",
           "type": "cards"
         },
         {
@@ -29290,7 +29302,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "面试与带教观察",
           "type": "table"
         },
         {
@@ -29301,50 +29313,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（工单核对—设定启动—监控调节—异常处置—取样检测—记录清洁）。",
-                  "记录你观察到的车间温度环境、噪声与设备种类。"
+                  "阅读本职业任务与D01原记录，画纸面流程；不进车间或操作设备。",
+                  "标注监控、记录与上报对应的O*NET任务。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：高温与噪声、粉尘、长时间站立与连班、防护装备配备。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "核对O*NET的站立、防护与噪声情境，列目标岗位要询问的条件。",
+                  "不能由纸面体验确认自己实际身体适应或体检结果。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份工单核对与批次记录的样本。",
-                  "按当班工艺卡列出关键参数（温度与时间设定、目标水分、压力上限）。"
+                  "做D01数量表：100、88、80、2、6及12kg未解释差。",
+                  "全部质量状态保持待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "用虚构工单完成产量与水分试算，并标注假设值。",
-                  "对两个典型失效（参数失控与卡料）写出应对与升级对象。"
+                  "登记09:10异常与A/B读数，写工艺卡、校验及验收范围等缺失。",
+                  "不自行给真实参数、调节或判合格。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "完成一次模拟设备操作或监控演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "虚构追加记录：余料台账误填5kg，其他记录仍为88、80、2；A/B合格标准仍未给。",
+                  "参考复核：80+2+5=87，与88差1kg；记账面不一致并请求核原记录，不默认补改1kg或判合格。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的参数与异常处置判断。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "对照参考交付自核，并记录遗漏与修订；可请自愿有经验者评论纸面记录。",
+                  "没有第三方评论则如实记未复核，不假称主管确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与训练，以及下一步行动。"
+                  "写继续准备、暂缓或转方向的证据及一个下一步。",
+                  "本周只观察纸面记录习惯；实际训练、操作授权和工作条件须另核。"
                 ]
               }
             ]
@@ -29353,7 +29365,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "七日纸面体验",
           "type": "timeline"
         },
         {
@@ -29361,20 +29373,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按工艺设定与调节参数并保持记录准确，接受高温与噪声环境与防护装备。",
-              "继续：能在连班与停线压力下仍保留参数核对与安全处置步骤，不省略关键环节。",
-              "继续：愿意从设备旁辅助或清洗工做起并把设备与工艺学清楚。",
-              "停止：对高温与噪声环境、长时间站立或佩戴防护装备明显无法适应，且短期无法改善。",
-              "停止：对参数与安全要求缺乏警觉，反复出现参数或操作差错。",
-              "换方向：偏好配方可考虑食品批量制作工；偏好熟制工艺可考虑食品机器操作员。",
-              "换方向：偏好混合搅拌可考虑混合与搅拌机器操作员；偏好包装可考虑包装与灌装机器操作员；偏好烘焙食品制作可考虑面包师（需另行准备）。"
+              "继续准备：能算清D01数量并保留12kg差、日5的1kg不一致和全部待确认质量状态。",
+              "继续准备：能保留异常时间、读数与缺失依据，写出拟上报对象而不假称已整改。",
+              "继续准备：愿意核目标岗位班次、实际训练和操作授权；纸面表现不能替代这些要求。",
+              "暂缓：反复把数量平衡或两个样本读数当整批合格，先补记录核对训练。",
+              "暂缓：把未知原因或未复核事项写成已确认，先纠正记录习惯。",
+              "转方向探索：偏配方可另核食品批量制作，偏熟制可另核烹饪机器操作；不由本练习确认胜任。",
+              "转方向探索：混合、包装或面包制作任务不同，应分别核对象、训练和授权。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "七日判断清单",
           "type": "list"
         },
         {
@@ -29401,31 +29413,31 @@
             ],
             "rows": [
               [
-                "高中或同等学历（多数岗位为常见要求）",
-                "所有入行者",
-                "影响筛选起点，部分雇主不设硬性要求",
-                "非普遍必需",
-                "完成高中阶段教育或同等学历认定",
-                "按教育阶段",
-                "学历不决定实操能力"
+                "目标雇主学历条件",
+                "拟申请者",
+                "核岗位学历原文",
+                "按目标岗位，非统一高中门槛",
+                "按目标教育及招聘要求核验",
+                "按实际安排",
+                "美国调查不推中国全部岗位"
               ],
               [
                 "设备操作与安全培训",
                 "所有设备作业人员",
                 "具备设备启停、防护与应急处置的基本能力",
-                "普遍需要",
+                "按岗位、设备及适用规定核验",
                 "参加企业或第三方培训并考核",
-                "数小时至数天",
+                "按实际训练考核安排",
                 "培训记录不能替代现场设备安全责任"
               ],
               [
-                "食品安全与卫生培训",
-                "所有车间作业人员",
-                "具备卫生操作、清洁消毒与个人防护的基本能力",
-                "普遍需要",
-                "参加企业或第三方培训并考核",
-                "数小时至数天",
-                "培训记录不能替代现场食品安全责任"
+                "中国食品安全知识培训与适用健康证明",
+                "食品企业职工；健康证明限接触直接入口食品人员",
+                "培训及符合适用健康要求",
+                "按食品安全法第44/45条具体范围",
+                "企业知识培训；相应人员健康检查取得证明",
+                "相应健康检查每年；培训日程另核",
+                "不扩大到所有烟草或设备岗位，不赋放行权"
               ],
               [
                 "在职培训与车间实践",
@@ -29433,16 +29445,16 @@
                 "掌握参数设定、监控调节、取样检测与清洁操作",
                 "普遍需要",
                 "由雇主或带班带教，边做边学",
-                "数天至一年",
+                "按实际设备、岗位训练考核安排",
                 "熟练度取决于设备种类与产品复杂度"
               ],
               [
                 "专项作业培训（叉车/压力容器/电气等）",
                 "承担相应作业者",
                 "满足特定设备与工序的准入与安全要求",
-                "视工序而定",
-                "参加专项培训并取得记录",
-                "数小时至数天",
+                "按实际专项作业适用规定",
+                "核适用培训、考核、资格和单位授权，不仅凭培训记录",
+                "按实际专项安排",
                 "证书不等于可独立作业，仍受岗位授权约束"
               ],
               [
@@ -29451,18 +29463,18 @@
                 "为承担参数放行、批次追溯与现场管理做准备",
                 "非普遍必需",
                 "按企业晋升通道参加培训与实践",
-                "数周至数月",
+                "按企业岗位训练安排",
                 "管理权限需雇主正式任命"
               ]
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.credential-decision.1",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "cn-food-safety-law",
+            "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "资格与准备项比较",
           "type": "table"
         },
         {
@@ -29470,7 +29482,7 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定准入与岗位授权是三种不同状态：满足招聘条件不等于取得法定资格，取得培训记录不等于获得参数调整、设备检修与放行权限。",
+              "法域与授权｜美国O*NET Job Zone 1–2及学历调查不能推中国统一门槛。中国食品生产经营企业须对职工进行食品安全知识培训（食品安全法第44条）；从事接触直接入口食品工作的食品生产经营人员须每年健康检查、取得健康证明后上岗（第45条）。健康证明条件不扩为所有烟草或食品设备岗位统一适用；设备专项作业、培训和权限按实际职责及适用法规另核。",
               "资格边界（二）｜美国以在职培训为主，O*NET 将本职业归入 Job Zone 1-2；中国大陆以企业用工与车间培训为主，涉及压力容器、电气与烟草专卖与食品生产许可另有要求，两者不可互换。",
               "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与雇主公告或主管机关要求不一致，以后者为准。",
               "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
@@ -29478,10 +29490,11 @@
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.credential-boundary.1",
           "source_refs": [
-            "bls-projections-2025-35",
+            "onet-summary",
+            "cn-food-safety-law",
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "资格、培训与授权边界",
           "type": "notice"
         },
         {
@@ -29498,7 +29511,7 @@
             "onet-summary",
             "internal-rubric"
           ],
-          "title": "食品、机器操作员看护员｜path",
+          "title": "如何读取招聘公告",
           "type": "notice"
         },
         {
@@ -29507,7 +29520,7 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 食品、机器操作员看护员职业档案",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业档案",
                 "id": "link-1",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
@@ -29676,12 +29689,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：满足基本招聘与安全与卫生条件 → 由雇主或带班带教并在职培训 → 通过实操考核后独立操作设备 → 在设备与产品积累中熟练掌握参数控制与异常处置 → 视表现转为熟练操作工或班组长，或转向质检、设备维护、食品批量制作、烹饪机器操作与混合搅拌等相邻岗位。学历通常不构成硬性门槛（多数岗位要求高中或同等学历），真正决定上岗的是设备操作能力、安全意识与稳定性。"
+              "准备路径｜先核目标岗位对象、学历与班次，再核所在地适用培训、健康或专项资格，按有效规程带教与考核后由单位确定可承担任务。O*NET Job Zone 1–2是美国准备程度分类，不保证统一入职学历、训练周期、晋升或独立操作权。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.career-path-block.20",
           "source_refs": [
-            "bls-projections-2025-35",
+            "onet-summary",
+            "cn-food-safety-law",
             "internal-rubric"
           ],
           "type": "prose"
@@ -29706,14 +29720,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国以在职培训为主，O*NET 将本职业归入 Job Zone 1-2（SVP 低于 6.0）；中国大陆以企业用工与车间培训为主，涉及压力容器、电气与烟草专卖与食品生产许可另有要求；两者不可互换，具体以所在地法规与雇主规定为准。"
+              "法域与授权｜美国O*NET Job Zone 1–2及学历调查不能推中国统一门槛。中国食品生产经营企业须对职工进行食品安全知识培训（食品安全法第44条）；从事接触直接入口食品工作的食品生产经营人员须每年健康检查、取得健康证明后上岗（第45条）。健康证明条件不扩为所有烟草或食品设备岗位统一适用；设备专项作业、培训和权限按实际职责及适用法规另核。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.career-path-block.22",
           "source_refs": [
-            "nbs-wages-2025",
-            "bls-projections-2025-35",
-            "onet-summary"
+            "onet-summary",
+            "cn-food-safety-law",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -30708,7 +30722,7 @@
                 "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "entity": "O*NET 食品、机器操作员看护员职业档案",
+                "entity": "O*NET 食品与烟草烘烤、烘焙与干燥设备操作与看护员职业档案",
                 "id": "link-6",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/51-3091.00"
@@ -30777,13 +30791,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径：本职业 2024 年就业约 20,700 人（BLS 职业投影基期，经 O*NET 呈现），2024—2034 年预计增长低于平均（约 1%–2%），年均岗位空缺约 2,400 个（含替换需求，为年均而非净增）；2025 年中位年薪 44,810 美元。中国大陆部分：未建立与本职业精确对应的公开职业工资与就业统计，本页只登记口径与行业背景代理，不提供估算数值。"
+              "直接回答｜O*NET呈现本职业2024就业约20,700人、2024—2034增长类别1%至2%、年均空缺2,400；2025中位年薪44,810美元。BLS矩阵包括自雇，工资OEWS覆盖不同；本页所核中国行业资料未取得精确职业工资或就业，代理值不当职业统计。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.8",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "bls-matrix-methods",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -30834,12 +30849,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；OEWS 呈现口径约 20,370 人，与预测基期口径不同；预测不等于实际招聘数。"
+              "2024—2034预测来自O*NET呈现，矩阵包括自雇；年均空缺含更替非净增，也不是实际招聘数或个人录用保证。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.12",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -30932,12 +30948,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含加班、奖金与福利，也不含自雇收入；分行业工资本页未取得，按可见缺口登记。"
+              "OEWS常规税前工资含生产奖金，不含加班费、轮班差额、非生产奖金和雇主福利成本，不覆盖自雇；本页分行业工资未取得，缺口见美国工资部分。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.19",
           "source_refs": [
-            "bls-projections-2025-35"
+            "bls-oews-methods",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -31072,7 +31089,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未建立与本职业精确对应的职业工资与就业统计值；本页仅登记口径与授权来源，不提供估算数值。"
+              "证据不足：本页所核中国资料未取得与本职业精确对应的职业工资与就业统计值；本页仅登记口径与授权来源，不提供估算数值。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.market-signals.market-signal-card.29",
@@ -31530,7 +31547,7 @@
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资统计。国家统计局按行业门类公布城镇单位就业人员平均工资（如制造业：城镇非私营 113,594 元/年、城镇私营 76,055 元/年），属行业口径、不区分职业，只能作为背景代理；本页在中国大陆部分保留「证据不足：」可见标记，不以行业均值、招聘报价或第三方估算代填。",
+                "answer": "本页所核中国资料未取得与本职业精确对应的职业工资统计。国家统计局按行业门类公布城镇单位就业人员平均工资（如制造业：城镇非私营 113,594 元/年、城镇私营 76,055 元/年），属行业口径、不区分职业，只能作为背景代理；本页在中国大陆部分保留「证据不足：」可见标记，不以行业均值、招聘报价或第三方估算代填。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q4",
@@ -31550,17 +31567,18 @@
                 ]
               },
               {
-                "answer": "影响主要在记录与看板与提醒环节：参数与产量记录、温度与湿度趋势看板、报警与维护提醒、水分与检验数据汇总、简单排产可被工具辅助；现场对产品与设备状态的判断、参数设定与调节、异常处置与停机、取样与放行仍由现场人员与班组长负责。任务暴露不等于岗位替代。",
+                "answer": "本页建议探索记录整理、批次核对和偏差提示辅助；现场产品及设备判断按训练和权限由人负责。O*NET任务与ILO潜在暴露研究不能证明本职业普遍采用、中低暴露或必不替代。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q6",
                 "source_refs": [
                   "onet-summary",
+                  "ilo-wp96",
                   "internal-rubric"
                 ]
               },
               {
-                "answer": "O*NET 显示该职业通常要求高中或同等学历（61% 受访者），23% 认为低于高中即可，11% 认为需要部分大学教育，并通过在职培训掌握技能（Job Zone 1-2，SVP 低于 6.0）。实际以雇主招聘条件与设备要求为准。",
+                "answer": "O*NET 显示该职业通常要求高中或同等学历（61% 受访者），23% 认为低于高中即可，11% 认为需要上过大学但未获学位，并通过在职培训掌握技能（Job Zone 1-2，SVP 低于 6.0）。实际以雇主招聘条件与设备要求为准。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q7",
@@ -31570,12 +31588,12 @@
                 ]
               },
               {
-                "answer": "「受过培训」「取得证书」「获得雇主任命」「拥有参数放行与设备检修权」是四种不同状态。设备操作与安全培训、食品安全与卫生培训多为普遍要求；涉及压力容器、电气与叉车等专项作业可能另有要求。本页列示的准备项不构成任何机构的正式资格清单。",
+                "answer": "中国食品生产经营企业须对职工进行食品安全知识培训（食品安全法第44条）；从事接触直接入口食品工作的食品生产经营人员须每年健康检查、取得健康证明后上岗（第45条）。健康证明条件不扩为所有烟草或食品设备岗位统一适用；设备专项作业、培训和权限按实际职责及适用法规另核。",
                 "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.q8",
                 "source_refs": [
-                  "onet-summary",
+                  "cn-food-safety-law",
                   "internal-rubric"
                 ]
               },
@@ -31645,12 +31663,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 官方页面；O*NET 页面标注数据更新年份为 2026，工资为 2025 年、就业预测为 2024—2034 年，国家统计局数据为 2025 年并于 2026 年发布。"
+              "本次于2026-10-02核O*NET本职业摘要/详细任务、教育及2025中位工资和2024—2034预测，另核BLS矩阵方法、ILO工作论文96、NIST AI RMF与市场监管总局食品安全法第44/45条。原2025工资分位与NBS制造业代理沿用既有登记，未宣称本次重取全部细分值。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.3",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "onet-details",
+            "bls-matrix-methods",
+            "ilo-wp96",
+            "nist-ai-rmf",
+            "cn-food-safety-law"
           ],
           "type": "prose"
         },
@@ -31659,11 +31682,14 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）美国分行业工资未取得可按本职业读取的行业细分中位数；（2）中国大陆未建立与本职业精确对应的职业工资与就业统计；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源。三处均保留「证据不足：」标记，不以行业均值、招聘报价或第三方估算填充。"
+              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）美国分行业工资未取得可按本职业读取的行业细分中位数；（2）本页所核中国资料未取得与本职业精确对应的职业工资与就业统计；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源。三处均保留「证据不足：」标记，不以行业均值、招聘报价或第三方估算填充。 本次OEWS细分与O*NET工资分布页面访问未成功，不能据此推官方未发布；行业与地区细分保留本页未取得。"
             ]
           },
           "id": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.sources.source-card.4",
           "source_refs": [
+            "onet-summary",
+            "bls-oews-2025",
+            "nbs-wages-2025",
             "internal-rubric"
           ],
           "type": "prose"
@@ -31712,7 +31738,7 @@
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "回到食品、机器操作员看护员职业页",
+                "entity": "回到食品与烟草烘烤、烘焙与干燥设备操作与看护员职业页",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders"
@@ -31774,13 +31800,13 @@
                 ],
                 "evidence_type": "official projection table",
                 "id": "bls-projections-2025-35",
-                "limitation": "不得把预测增量或年均空缺直接解释为个人收入或录用保证。",
+                "limitation": "2024—2034预测非实际结果；矩阵包括自雇，不能套OEWS工资覆盖。",
                 "market": "US",
-                "name": "U.S. Bureau of Labor Statistics：2024—2034 Occupational Projections and Characteristics",
+                "name": "O*NET呈现BLS精确51-3091的2024—2034预测",
                 "period": "2024—2034",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "51-3091 Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/summary/51-3091.00"
               },
               {
                 "accessed_at": "2026-09-13",
@@ -31802,7 +31828,7 @@
                 "accessed_at": "2026-09-13",
                 "details": [
                   "城镇非私营单位制造业平均工资 113,594 元/年；城镇私营单位制造业平均工资 76,055 元/年。",
-                  "这是行业代理值，不是食品、机器操作员看护员职业中位数、起薪或个人报价。"
+                  "这是行业代理值，不是食品与烟草烘烤、烘焙与干燥设备操作与看护员职业中位数、起薪或个人报价。"
                 ],
                 "evidence_type": "official industry proxy",
                 "id": "nbs-wages-2025",
@@ -31828,6 +31854,81 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "矩阵结合OEWS、CES、CPS，自雇资料来自CPS职业对照。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "bls-matrix-methods",
+                "limitation": "就业矩阵自雇覆盖，非OEWS受雇工资",
+                "market": "美国/全球",
+                "name": "BLS就业矩阵资料方法",
+                "period": "核对2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "就业矩阵自雇覆盖，非OEWS受雇工资",
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "任务暴露机制不能推个人岗位结果或企业采用。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "ilo-wp96",
+                "limitation": "全球潜在生成式AI任务暴露，非本职业采用率",
+                "market": "美国/全球",
+                "name": "ILO工作论文96（2023）",
+                "period": "核对2026-10-02",
+                "publisher": "International Labour Organization",
+                "scope": "全球潜在生成式AI任务暴露，非本职业采用率",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-job-quantity-and"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "框架支持风险识别、复核与治理原则，不授予操作资格。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "nist-ai-rmf",
+                "limitation": "自愿AI风险治理，非设备或食品安全标准",
+                "market": "美国/全球",
+                "name": "NIST AI RMF 1.0",
+                "period": "核对2026-10-02",
+                "publisher": "NIST",
+                "scope": "自愿AI风险治理，非设备或食品安全标准",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "第44条职工知识培训；第45条相应人员每年健康检查取得健康证明。"
+                ],
+                "evidence_type": "primary official source",
+                "id": "cn-food-safety-law",
+                "limitation": "中国食品企业培训；健康证明限直接入口食品接触人员",
+                "market": "中国大陆",
+                "name": "中华人民共和国食品安全法",
+                "period": "核对2026-10-02",
+                "publisher": "国家市场监督管理总局公布法律文本",
+                "scope": "中国食品企业培训；健康证明限直接入口食品接触人员",
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2023/art_6bff4ef87291497fa72949e1fc88efb5.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "D2/3包括全兼职受雇，工资含生产奖金；排除加班费、轮班差额、非生产奖金，C8排除雇主福利成本。"
+                ],
+                "evidence_type": "official statistical definitions",
+                "id": "bls-oews-methods",
+                "limitation": "方法不推个人报酬或分位的年龄经验构成，不等于矩阵就业覆盖。",
+                "market": "美国",
+                "name": "BLS OEWS常见问题与工资定义",
+                "period": "现行方法；核对2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "OEWS受雇覆盖与常规税前工资包含/排除项",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -31962,7 +32063,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "食品、机器操作员看护员的工作方向与相邻职业怎么比较？",
+        "heading": "食品与烟草烘烤、烘焙与干燥设备操作与看护员的工作方向与相邻职业怎么比较？",
         "intro": {
           "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -32229,7 +32330,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -32251,7 +32352,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32273,7 +32374,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织任务暴露研究",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32295,7 +32396,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "自愿AI风险框架",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32317,7 +32418,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业范围",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -32339,7 +32440,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方职业兴趣",
             "适用范围": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -32375,7 +32476,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "本职业工作运行支持"
+            "方向": "设备运行记录"
           },
           {
             "AI主要改变": {
@@ -32390,7 +32491,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "本职业记录与信息管理"
+            "方向": "取样与质量记录"
           },
           {
             "AI主要改变": {
@@ -32405,7 +32506,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "方向": "相关方与费用"
+            "方向": "设备维护支持"
           }
         ],
         "evidence_intro": {
@@ -32581,7 +32682,7 @@
             }
           }
         ],
-        "heading": "AI 会取代食品、机器操作员看护员吗？",
+        "heading": "AI 会取代食品与烟草烘烤、烘焙与干燥设备操作与看护员吗？",
         "method_cards": [
           {
             "含义": {
@@ -32608,7 +32709,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少食品、机器操作员看护员岗位吗？"
+            "概念": "AI 会减少食品与烟草烘烤、烘焙与干燥设备操作与看护员岗位吗？"
           }
         ],
         "questions": [
@@ -32632,7 +32733,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "食品、机器操作员看护员会被 AI 取代吗？"
+            "问题": "食品与烟草烘烤、烘焙与干燥设备操作与看护员会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -32654,7 +32755,7 @@
               "entry": "link-14",
               "field": "url"
             },
-            "问题": "现在入行需要会写代码吗？"
+            "问题": "车间里常见哪些数字化工具或系统？"
           },
           {
             "回答": {
@@ -32676,7 +32777,7 @@
               "entry": "link-15",
               "field": "url"
             },
-            "问题": "哪些任务最容易受 AI 影响？"
+            "问题": "哪些能力更难被工具替代？"
           },
           {
             "回答": {
@@ -32698,7 +32799,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2035 年这个职业会变少吗？"
+            "问题": "中国大陆有该职业的精确统计吗？"
           },
           {
             "回答": {
@@ -32720,7 +32821,7 @@
               "entry": "link-17",
               "field": "url"
             },
-            "问题": "AI 能签署合同或批准付款吗？"
+            "问题": "使用 AI 工具前需要先确认什么？"
           },
           {
             "回答": {
@@ -32742,7 +32843,7 @@
               "entry": "link-18",
               "field": "url"
             },
-            "问题": "哪一年这个岗位会消失？"
+            "问题": "工艺参数与客户信息应如何使用与保存？"
           },
           {
             "回答": {
@@ -32764,7 +32865,7 @@
               "entry": "link-19",
               "field": "url"
             },
-            "问题": "现在应该优先学什么？"
+            "问题": "怎样判断 AI 对岗位的真实影响？"
           }
         ],
         "responsibility_intro": {
@@ -33168,7 +33269,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为食品、机器操作员看护员？教育、资格与职业发展路径",
+        "heading": "怎样成为食品与烟草烘烤、烘焙与干燥设备操作与看护员？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.path.career-path-block.21",
@@ -33701,7 +33802,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "食品、机器操作员看护员需要什么准备？",
+            "question": "食品与烟草烘烤、烘焙与干燥设备操作与看护员需要什么准备？",
             "table": {
               "rows": [
                 {
@@ -33758,7 +33859,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "食品、机器操作员看护员和相邻岗位有什么区别？",
+            "question": "食品与烟草烘烤、烘焙与干燥设备操作与看护员和相邻岗位有什么区别？",
             "table": {
               "rows": [
                 {
@@ -33884,7 +33985,7 @@
               "type": "prose"
             },
             "key": "qa1",
-            "question": "食品、机器操作员看护员的工资数据覆盖哪些人群？",
+            "question": "食品与烟草烘烤、烘焙与干燥设备操作与看护员的工资数据覆盖哪些人群？",
             "table": {
               "rows": [
                 {
@@ -34026,7 +34127,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "食品、机器操作员看护员的工作有哪些压力、风险与职业边界？",
+        "heading": "食品与烟草烘烤、烘焙与干燥设备操作与看护员的工作有哪些压力、风险与职业边界？",
         "risks": [
           {
             "affected_roles": {
@@ -34695,11 +34796,11 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响食品、机器操作员看护员的工资吗？",
+            "ai_heading": "AI 会影响食品与烟草烘烤、烘焙与干燥设备操作与看护员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "食品、机器操作员看护员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "食品与烟草烘烤、烘焙与干燥设备操作与看护员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -34727,7 +34828,7 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
+            "fact_ref": "us-wage-2025",
             "指标": "薪资 · 中位年薪",
             "数值": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.9",
@@ -34743,7 +34844,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
+            "fact_ref": "us-wage-low10-2025",
             "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.11",
@@ -34759,7 +34860,7 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
+            "fact_ref": "us-wage-q25-2025",
             "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.13",
@@ -34911,14 +35012,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国食品、机器操作员看护员工资？",
+        "factors_heading": "哪些因素会影响美国食品与烟草烘烤、烘焙与干燥设备操作与看护员工资？",
         "growth": {
           "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国食品、机器操作员看护员工资多少？",
+        "heading": "美国食品与烟草烘烤、烘焙与干燥设备操作与看护员工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35140,7 +35241,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "食品、机器操作员看护员适合什么样的人？"
+        "title": "食品与烟草烘烤、烘焙与干燥设备操作与看护员适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35214,7 +35315,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "食品、机器操作员看护员的前景如何？可以转向哪些相关职业？",
+        "heading": "食品与烟草烘烤、烘焙与干燥设备操作与看护员的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -35769,7 +35870,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近食品、机器操作员看护员？",
+            "question": "霍兰德兴趣中什么类型更接近食品与烟草烘烤、烘焙与干燥设备操作与看护员？",
             "signals": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.4",
               "block": "fit",
@@ -35843,7 +35944,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合食品、机器操作员看护员吗？",
+            "question": "MBTI 能用来判断我适不适合食品与烟草烘烤、烘焙与干燥设备操作与看护员吗？",
             "signals": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.12",
               "block": "fit",
@@ -35917,7 +36018,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做食品、机器操作员看护员吗？",
+            "question": "数学不好，能做食品与烟草烘烤、烘焙与干燥设备操作与看护员吗？",
             "signals": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.20",
               "block": "fit",
@@ -35954,7 +36055,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做食品、机器操作员看护员需要高情商吗？",
+            "question": "做食品与烟草烘烤、烘焙与干燥设备操作与看护员需要高情商吗？",
             "signals": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.24",
               "block": "fit",
@@ -36128,7 +36229,7 @@
                 "field": "url"
               },
               "slug": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders",
-              "title": "本职业（食品、机器操作员看护员）方向"
+              "title": "本职业（食品与烟草烘烤、烘焙与干燥设备操作与看护员）方向"
             },
             "watchouts": {
               "$item": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders.fit.personality-fit-block.42",
@@ -36169,7 +36270,7 @@
             }
           }
         ],
-        "heading": "做食品、机器操作员看护员，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做食品与烟草烘烤、烘焙与干燥设备操作与看护员，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -36486,7 +36587,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对食品、机器操作员看护员是否适合你",
+        "label": "开始核对食品与烟草烘烤、烘焙与干燥设备操作与看护员是否适合你",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36723,7 +36824,7 @@
         "fact_id": "identity",
         "market": "US",
         "measure": "职业身份与职责范围",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "O*NET 2026 occupational profile",
         "source_refs": [
           "onet-summary",
@@ -36736,7 +36837,7 @@
         "fact_id": "us-wage-low10-2025",
         "market": "US",
         "measure": "精确职业 10 分位年工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
           "bls-oews-2025"
@@ -36748,7 +36849,7 @@
         "fact_id": "us-wage-q25-2025",
         "market": "US",
         "measure": "精确职业 25 分位年工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
           "bls-oews-2025"
@@ -36760,7 +36861,7 @@
         "fact_id": "us-wage-2025",
         "market": "US",
         "measure": "工资中位数",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36772,7 +36873,7 @@
         "fact_id": "us-wage-q75-2025",
         "market": "US",
         "measure": "精确职业 75 分位年工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
           "bls-oews-2025"
@@ -36784,7 +36885,7 @@
         "fact_id": "us-wage-high10-2025",
         "market": "US",
         "measure": "精确职业 90 分位年工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025 BLS OEWS",
         "source_refs": [
           "bls-oews-2025"
@@ -36792,14 +36893,15 @@
       },
       {
         "derivation": null,
-        "display_value": "约 20,700 人（2024，BLS 职业投影基期，经 O*NET 呈现；OEWS 呈现口径约 20,370 人）",
+        "display_value": "约20,700人（2024，BLS预测基期经O*NET呈现；就业矩阵包括自雇）",
         "fact_id": "us-employment-2025",
         "market": "US",
         "measure": "就业规模",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
-        "period": "2025",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
+        "period": "2024",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36808,10 +36910,11 @@
         "fact_id": "us-growth-2025-2035",
         "market": "US",
         "measure": "就业增长率",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2024—2034",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36820,10 +36923,11 @@
         "fact_id": "us-openings-2025-2035",
         "market": "US",
         "measure": "年均职位空缺",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2024—2034",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36832,7 +36936,7 @@
         "fact_id": "us-industry-wage-finance-2025",
         "market": "US",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36844,7 +36948,7 @@
         "fact_id": "us-industry-wage-professional-2025",
         "market": "US",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36856,7 +36960,7 @@
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "US",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36868,7 +36972,7 @@
         "fact_id": "us-industry-wage-education-2025",
         "market": "US",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36880,7 +36984,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "CN",
         "measure": "行业平均工资代理",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36892,7 +36996,7 @@
         "fact_id": "cn-private-2025",
         "market": "CN",
         "measure": "行业平均工资代理",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36900,11 +37004,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与食品、机器操作员看护员精确对应的职业工资统计值；不用行业均值或招聘报价代填。",
+        "display_value": "证据不足：本页所核中国行业工资资料未取得本职业精确全国工资；不用行业均值、招聘报价或第三方估算代填。",
         "fact_id": "cn-mid-managers-2025",
         "market": "CN",
         "measure": "精确职业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36912,11 +37016,11 @@
       },
       {
         "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与食品、机器操作员看护员精确对应的职业工资统计值；不用行业均值或招聘报价代填。",
+        "display_value": "证据不足：本页所核中国行业工资资料未取得本职业精确全国工资；不用行业均值、招聘报价或第三方估算代填。",
         "fact_id": "cn-clerical-2025",
         "market": "CN",
         "measure": "精确职业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36928,7 +37032,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "CN",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36940,7 +37044,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "CN",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36952,7 +37056,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "CN",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36964,7 +37068,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "CN",
         "measure": "行业工资",
-        "occupation_scope": "食品、机器操作员看护员；51-3091.00",
+        "occupation_scope": "食品与烟草烘烤、烘焙与干燥设备操作与看护员；51-3091.00",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36980,7 +37084,7 @@
       "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
-      "食品、机器操作员看护员 · 官方职业范围 · 工作闭环",
+      "食品与烟草烘烤、烘焙与干燥设备操作与看护员 · 官方职业范围 · 工作闭环",
       "输入核对 · 过程复核 · 异常升级",
       "美国职业资料；中国精确工资缺口按来源保留"
     ],
@@ -37021,17 +37125,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "食品、机器操作员看护员做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
+      "text": "食品与烟草烘烤、烘焙与干燥设备操作与看护员做什么、如何入行、工作边界与发展方向。基于官方职业资料，区分职业统计、行业代理和资格缺口。"
     },
     "title": {
       "availability": "available",
-      "text": "食品、机器操作员看护员"
+      "text": "食品与烟草烘烤、烘焙与干燥设备操作与看护员"
     }
   },
-  "source_content_sha256": "a359b6177a3a4c30eb69aee583cf1e56701054da673fc321c3e796a8e87cb9f0",
+  "source_content_sha256": "3051e5ec5c283118e0ebd51c41387c761ea4394d82fdb62feacafc5030a2e5c6",
   "subject": {
     "canonical_slug": "food-and-tobacco-roasting-baking-and-drying-machine-operators-and-tenders",
-    "name": "食品、机器操作员看护员",
-    "summary": "食品、机器操作员看护员围绕本职业对象、流程、质量与交付完成工作；具体任务、训练、资格、协议和授权须按所在地与雇主原文核对。"
+    "name": "食品与烟草烘烤、烘焙与干燥设备操作与看护员",
+    "summary": "操作或看护食品与烟草烘烤、烘焙和干燥设备，按工单及有效工艺监控温度、时间与水分，记录批次、取样及异常；实际操作、检修和放行按培训、规程与岗位授权开展。"
   }
 }

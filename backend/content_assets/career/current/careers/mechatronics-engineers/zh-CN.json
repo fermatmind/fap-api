@@ -7217,7 +7217,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "机电一体化工程师的核心是把机械、电气与控制整合成可运行、可验证的系统：解读需求与控制规格，研究自动化与智能系统方案，设计控制逻辑、传感与执行机构，编写与联调程序，验证性能与安全功能，并对控制方案、联调结论与签核负责。工作以室内设计分析为主，联调阶段需到设备与产线现场。"
+              "机电一体化工程师把机械、电气与控制整合成可运行、可验证的系统：解读需求，设计传感与执行机构和控制逻辑，编写与联调程序，记录测试结果。工作可在受控室内或设备现场进行；项目中的安全审查、交付与签署责任须按实际岗位和所在地规则核对。"
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.2",
@@ -7233,12 +7233,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的任务包：给出一份虚构的输送线控制需求（含 1 份功能与节拍指标、1 组虚构传感器与执行机构清单、1 个待判断的安全停机条件），要求在 60 分钟内写出控制方案与安全逻辑、联调步骤、验证判据，以及需向责任工程师确认的情形；不使用真实客户、企业数据或未公开程序。"
+              "60分钟纸面练习（完全虚构，不连接设备）：输送线每次只处理1件，运行后应在10秒内收到出口传感器信号。输入为启动按钮S、出口传感器X、急停状态E（1表示触发）、护罩状态G（1表示关闭）；输出为电机命令M。初始待机，M=0、E=0、G=1；仅待机时按S进入运行。运行中X=1则完成并回到待机；超过10秒仍未收到X则进入故障；任何状态E=1或G=0都进入锁定且M=0。锁定/故障恢复条件满足后仅复位到待机，必须再次按S才能运行。请画待机/运行/故障/锁定状态表，列出M=1的条件，并按以下4组独立事件写出状态、M与理由：①S后8秒X=1；②S后11秒X=0；③运行中G=0；④急停后E回到0并复位但未按S。前10分钟核输入，25分钟写方案，15分钟核四例，最后10分钟记录未决条件；不设计真实安全回路。"
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "onet-tasks"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7247,13 +7247,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先核对需求与安全要求，是否说明控制逻辑与联调顺序，是否给出验证判据，是否区分功能、安全与接口三类问题；再问自己能否按标准完成设计与联调、能否在异常时先停机并升级，以及是否愿意对安全结论承担责任。"
+              "参考交付：M=1仅限运行状态且E=0、G=1，任何故障或锁定均为0。①8秒收到X：运行转待机，M=0；②11秒无X：转故障，M=0；③G=0：转锁定，M=0；④复位只到待机，M仍为0，不自动重启。状态表应写明急停/护罩优先于正常完成；运行中再次按S不能开启第二件。作品包含状态表、四例结果、一次错误方案与修正、尚待确认的传感器故障检测/真实停止时间/安全回路要求。未提供实机参数，不能据此声称满足安全等级；这些事项交有相应职责与授权的人员复核。用是否能追溯条件、发现冲突和修正推理来决定下一步。"
             ]
           },
           "id": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "onet-tasks",
-            "onet-context"
+            "internal-rubric"
           ],
           "type": "prose"
         }
@@ -7406,7 +7405,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖 17-2199.05 的机电一体化与自动化控制；机械工程师（17-2141.00）负责机械本体设计与签核，机械工程技师与技术员（17-3027.00）在指导下执行装配与测试，工业工程师（17-2112.00）面向生产系统与效率；各岗位的对象、标准与责任不得互换。"
+              "相邻职责边界：机械工程师（17-2141.00）侧重机械与热系统，机械工程技术员（17-3027.00）协助开发、测试与记录，工业工程师（17-2112.00）侧重综合生产系统。工作可能交叉；具体对象、授权和责任按实际岗位核对。"
             ]
           },
           "id": "mechatronics-engineers.profile.definition-block.10",
@@ -7472,7 +7471,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与机械工程师的区别：机械工程师面向纯机械产品与设备的设计与签核；本职业面向机械、电气与控制的系统集成、联调与验证。"
+              "机械工程师研究、设计、开发或测试机械与热系统及设备；机电一体化工程师更侧重机械、电气、传感与控制整合。两者可以有交集，签署责任由实际岗位与适用规则确定。"
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.2",
@@ -7486,7 +7485,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与机械工程技师与技术员的区别：技师在工程师指导下装配、测试与记录；本职业负责控制方案、联调结论与签核。"
+              "机械工程技术员协助工程师开发、测试机械设备，记录测试并处理现场技术问题；本职业更侧重系统方案与控制集成。职责随岗位而变，职称不能直接授予签核权。"
             ]
           },
           "id": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.3",
@@ -7551,12 +7550,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：AI 可辅助控制逻辑草拟、代码片段生成、数据整理与故障检索；安全逻辑、联调结论与工程签核仍需人工负责。"
+              "编辑判断：可在隔离仿真中试验用AI草拟逻辑、代码和整理数据；必须对照原需求与异常条件验证，不能把O*NET任务清单当作采用事实。安全与交付责任按具体岗位和授权核对。"
             ]
           },
           "id": "mechatronics-engineers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-tasks"
+            "onet-tasks",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -7657,7 +7657,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：国家统计局按行业门类发布城镇单位就业人员年平均工资，本职业主要计入制造业（以及科学研究和技术服务等行业），行业平均不能替代本职业工资。"
+              "中国大陆薪资边界：本页未取得与O*NET 17-2199.05精确对应的全国职业工资中位数。国家统计局制造业行业平均仅作宽口径背景；不据美国行业分布推定中国雇主结构。"
             ]
           },
           "fact_refs": [
@@ -7699,7 +7699,7 @@
           ],
           "id": "mechatronics-engineers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "nbs-wages"
+            "mohrss-wage"
           ],
           "type": "prose"
         },
@@ -7789,7 +7789,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该职业 2024 年行业分布为政府（约 28%）、专业、科学与技术服务（约 24%）、制造业（约 23%）与其他行业（约 25%）；行业分布是雇主场景信号，不是需求预测。"
+              "证据不足：未取得该父职业分行业工资；全国职业工资分位不能代填各行业工资。 行业分布与局限：O*NET本页采用Engineers, All Other（17-2199）父职业2024年行业数据：政府28%、专业科学与技术服务24%、制造业23%、其他25%；这是父职业雇主分布，不是单列机电一体化工程师行业工资或需求预测。"
             ]
           },
           "id": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
@@ -7825,7 +7825,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "任务信号：能把需求与安全要求转成可运行、可验证的控制方案。"
+              "如何试验机电一体化工程师适配"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.1",
@@ -7839,7 +7839,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "任务信号：能按条件联调并定位问题，说明验证判据与结论。"
+              "编辑适配建议：观察自己能否把需求转成可验证的控制方案，按条件联调并说明验证判据，再用记录复核推理；这些是工作样本信号，不是录用或资格标准。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.2",
@@ -7867,7 +7867,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "任务信号：遇到安全或现场条件不明确时，会先停机并升级，而不是自行假定结论。"
+              "谨慎信号：面对护罩打开、急停或超时异常仍直接恢复运行，或不愿记录未确认条件。先在本页纸面四例中检查自己的推理与纠错，不把安全事件当作必须亲自实机体验的试验。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.4",
@@ -7881,7 +7881,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎条件：若难以承担安全判断与签核责任、对反复联调与排故缺乏耐心，可优先比较相邻方向或现场岗位。"
+              "试验动作：按本页输入在纸面完成状态表与四组事件结果，先遮住参考答案，再标记错误和未决条件。若更偏好机械装配或流程改善，带着这份作品比较相邻方向。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.5",
@@ -7895,7 +7895,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "谨慎条件：机电一体化工程师兴趣测评仅用于探索，还需验证真实任务、环境、资格与学习成本，不能决定胜任或资格。"
+              "RIC描述现实型、研究型与常规型活动偏好，可用设备对象、逻辑推理与按规程记录来提出探索问题；兴趣测评不决定胜任、资格或学习成本，还须核实际任务与环境。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.6",
@@ -7909,12 +7909,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "RIASEC 兴趣代码 RIC 描述活动偏好：偏好实物与系统（现实型）、分析与推理（研究型）与按规程处理数据（常规型）。"
+              "编辑自查：注重精确可体现为核对10秒超时、急停/护罩优先级和复位不自动启动，留下错误与修正记录；大五人格标签本身不能授予工程能力或签核权限。"
             ]
           },
           "id": "mechatronics-engineers.fit.riasec-fit-block.7",
           "source_refs": [
-            "onet-context"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -8052,12 +8052,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "无经验作品：一份完全虚构的控制需求；在 60 分钟内写出控制方案与安全逻辑、联调步骤、验证判据，以及需向责任工程师确认的情形，且不使用真实客户与企业数据。"
+              "无经验作品：完成本页60分钟纸面输送线练习，提交状态表、四组事件的状态与电机命令、错误方案修正和未决条件清单；只用题面输入，不接真实设备、不提交真实企业程序。"
             ]
           },
           "id": "mechatronics-engineers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -8080,12 +8080,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七天试验：前两天理解需求、安全要求与约束，中间三天完成一次虚构控制方案与联调演练，第六天请他人挑战安全逻辑与联调条件，第七天写继续/停止/换方向的证据。"
+              "七日计划（每天30–60分钟，纸面模拟）：第1天抄录本页输入、四状态和10秒时限；第2天画状态表并注明急停/护罩优先级；第3天写M=1条件并算四例；第4天构造重复启动和超时两种反例；第5天对照参考交付修正并留版本差异；第6天请同伴只依据题面复算，不具备同伴时自行遮住答案复算；第7天整理一页作品、未决实机条件和继续/换方向理由。"
             ]
           },
           "id": "mechatronics-engineers.path.career-path-block.5",
           "source_refs": [
-            "onet-education"
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -8192,7 +8192,8 @@
           },
           "id": "mechatronics-engineers.market-signals.market-signal-card.4",
           "source_refs": [
-            "onet-trends"
+            "ilo-genai",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -8233,7 +8234,7 @@
                 ]
               },
               {
-                "answer": "机械工程师面向纯机械产品与设备的设计与签核；机械工程技师与技术员在指导下执行装配与测试；工业工程师面向生产系统与效率；机电一体化工程师面向机械、电气与控制的系统集成、联调与验证。",
+                "answer": "机械工程师侧重机械与热系统的设计和测试；机械工程技术员协助开发、测试与记录；工业工程师侧重综合生产系统；本职业侧重机械、电气与控制整合。职责可能交叉，签核权由实际岗位和适用规则核对。",
                 "id": "mechatronics-engineers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.mechatronics-engineers.role-comparison",
@@ -8252,7 +8253,7 @@
                 ]
               },
               {
-                "answer": "控制逻辑草拟、代码片段生成、数据整理与故障检索更易被软件辅助；安全逻辑、联调结论与工程签核仍以人工为主，现有资料不证明机构普遍以自动化替代安全判断。",
+                "answer": "编辑判断：可在隔离仿真中试验控制逻辑草拟、代码片段和数据整理；输出必须核验。ILO研究是任务暴露评估，不是本职业采用率或替代概率，不能据此批准现场运行。",
                 "id": "mechatronics-engineers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.mechatronics-engineers.ai-impact",
@@ -8262,7 +8263,7 @@
                 ]
               },
               {
-                "answer": "安全功能与风险判断、联调结论、故障根因以及交付签核，必须由责任工程师按职责负责。",
+                "answer": "需求冲突、安全功能与风险判断、联调结论和故障处置应由有相应职责与授权的人员复核；是否需要特定签署资格须按所在地规定与岗位授权确认，不能从职业名称推定。",
                 "id": "mechatronics-engineers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.mechatronics-engineers.human-control",
@@ -8319,7 +8320,7 @@
                 ]
               },
               {
-                "answer": "若能用完全虚构的控制需求完成一次方案、安全逻辑与联调演练，并能按标准核对、在异常时停机升级，值得进一步试验；具体岗位与执业要求以雇主与主管部门为准。",
+                "answer": "先完成本页纸面状态表与四例，查看自己是否能追溯条件、发现冲突和修正；再核真实岗位任务、准备要求与授权。此练习是编辑探索建议，不证明已能控制设备或签署安全结论。",
                 "id": "mechatronics-engineers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.mechatronics-engineers.career-worth",
@@ -8568,12 +8569,12 @@
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "onet-industry",
-                "limitation": "行业分布是雇主场景信号，不是需求预测。",
+                "limitation": "Engineers, All Other（17-2199）父职业2024年雇主分布，非单列17-2199.05；不提供行业工资或需求预测。",
                 "market": "美国",
-                "name": "O*NET 17-2199.05 行业分布（Industries）",
+                "name": "O*NET父职业Engineers, All Other行业分布（2024）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/17-2199.05"
               },
               {
@@ -8632,12 +8633,12 @@
                 ],
                 "evidence_type": "official research report",
                 "id": "ilo-genai",
-                "limitation": "暴露指数不等于采用率、岗位结果或录用概率。",
+                "limitation": "任务暴露研究，不提供本职业机构采用率、裁员率、执业规定或替代日期。",
                 "market": "全球任务研究",
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)",
                 "period": "ILO Working Paper 140, 2025; accessed 2026-09-25",
                 "publisher": "International Labour Organization",
-                "scope": "market_signal",
+                "scope": "contextual",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
@@ -8648,12 +8649,12 @@
                 ],
                 "evidence_type": "editorial rubric",
                 "id": "internal-rubric",
-                "limitation": "编辑量表不等于采用率、裁员、法规或证照证据。",
+                "limitation": "编辑判断与纸面练习设计，非采用率、裁员、法规或证照证据。",
                 "market": "编辑归纳",
                 "name": "FermatMind 机电一体化工程师任务影响量表",
                 "period": "本地编辑量表；查阅 2026-09-25",
                 "publisher": "FermatMind research workflow",
-                "scope": "editorial",
+                "scope": "editorial_synthesis",
                 "url": null
               }
             ]
@@ -8698,13 +8699,21 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "mohrss-wage",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": "本职业任务与边界"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/17-2141.00",
+            "label": "机械工程师：O*NET 17-2141.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/17-3027.00",
+            "label": "机械工程技术员：O*NET 17-3027.00"
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8712,7 +8721,7 @@
         "intro": "比较核心产出、责任边界与工作模式，不按名称互换。",
         "rows": [
           {
-            "关键区别": "面向纯机械产品与设备的设计；本职业面向机械、电气与控制的系统集成。",
+            "关键区别": "机械工程师侧重机械和热系统的研究、设计与测试；机电一体化侧重机械、电气与控制整合，职责存在交集。",
             "更适合什么选择": "按机械与机电系统比较。",
             "核心工作与产出": {
               "$item": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.2",
@@ -8723,7 +8732,7 @@
             "职业方向": "机械工程师"
           },
           {
-            "关键区别": "在工程师指导下装配、测试与记录；本职业负责控制方案、联调结论与签核。",
+            "关键区别": "技术员侧重协助开发、测试和记录；本职业更侧重系统方案与控制集成。",
             "更适合什么选择": "按设计与执行分工比较。",
             "核心工作与产出": {
               "$item": "mechatronics-engineers.direction-comparison.adjacent-career-comparison-table.3",
@@ -8926,7 +8935,7 @@
         },
         "method_cards": [
           {
-            "含义": "控制逻辑草拟、代码片段生成、数据整理与故障检索可辅助；安全判断、联调结论与签核仍需人负责。",
+            "含义": "编辑任务判断：可试验用工具辅助草拟、检索和数据整理；须逐项验证输出，不是机构采用事实。",
             "概念": "任务能力"
           },
           {
@@ -8958,7 +8967,7 @@
             "问题": "AI 会取代机电一体化工程师吗？"
           },
           {
-            "回答": "安全逻辑、联调结论与签核仍需人工负责。",
+            "回答": "可在隔离仿真中试验生成草稿，逐项检查逻辑和异常状态；现有研究不能证明自动生成程序满足现场安全或机构已普遍采用。",
             "来源": {
               "$source": "onet-context",
               "block": "source-register",
@@ -9206,7 +9215,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助控制逻辑草拟、代码片段生成、数据整理与故障检索，但系统安全判断、联调结论、现场风险与工程签核仍由人负责。"
+          "编辑判断：可在隔离纸面或仿真环境试验AI辅助草拟、检索和数据整理；原需求、程序行为和异常结果仍须人工核验。ILO研究不提供本职业采用率，不能据此批准实机运行。"
         ],
         "heading": "机电一体化工程师的工作对象与 AI 边界"
       },
@@ -9231,105 +9240,113 @@
           }
         ],
         "direct_answer": {
-          "$item": "mechatronics-engineers.path.career-path-block.2",
-          "block": "path",
-          "copy_key": "career.item.career-path-block",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "mechatronics-engineers.path.career-path-block.1",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.path.career-path-block.2",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.path.career-path-block.3",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.path.career-path-block.4",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "heading": {
-          "$item": "mechatronics-engineers.path.career-path-block.1",
-          "block": "path",
-          "copy_key": "career.item.career-path-block",
-          "type": "prose"
-        },
+        "heading": "机电一体化工程师的入行与能力路径",
         "locale_requirements": {
-          "credential_boundary": {
-            "$item": "mechatronics-engineers.path.career-path-block.4",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          },
+          "credential_boundary": "学位、课程证书、执照与雇主授权分别核验；签署工程结论须先确认所在地规定和本人职责。",
           "jurisdiction": "美国 Job Zone 4：通常要求四年制学士学位，并需数年相关工作与在职经验；中国大陆按用人单位与相关执业要求核对",
-          "summary": {
-            "$item": "mechatronics-engineers.path.career-path-block.3",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          }
+          "summary": "美国职业准备资料与中国岗位要求须分开核对；本页不认定统一中国执业门槛。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": {
-              "$source": "ilo-genai",
+              "$source": "onet-education",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.0",
+            "id": "mechatronics-engineers.review.source.0",
             "label": {
-              "$source": "ilo-genai",
+              "$source": "onet-education",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "准备程度不是统一录用门槛。"
           },
           {
             "href": {
-              "$source": "mohrss-wage",
+              "$source": "onet-jobzone",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.1",
+            "id": "mechatronics-engineers.review.source.1",
             "label": {
-              "$source": "mohrss-wage",
+              "$source": "onet-jobzone",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的全国工资分布。"
+            "scope": "准备程度不是统一录用门槛。"
           },
           {
             "href": {
-              "$source": "onet-context",
+              "$source": "onet-tasks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.2",
+            "id": "mechatronics-engineers.review.source.2",
             "label": {
-              "$source": "onet-context",
+              "$source": "onet-tasks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "工作情境为调查结果；非精确映射时仅作父职业代理。"
+            "scope": "任务样本不代表每个岗位执行全部任务。"
           },
           {
             "href": {
-              "$source": "onet-details",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.3",
+            "id": "mechatronics-engineers.review.source.3",
             "label": {
-              "$source": "onet-details",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "自定义报告仍是美国职业调查；非精确映射时仅作父职业代理。"
+            "scope": "美国职业口径；不推定中国大陆存在精确等价映射。"
           }
         ],
         "tracks": [
@@ -9463,10 +9480,21 @@
         "items": [
           {
             "answer": {
-              "$item": "mechatronics-engineers.profile.career-quick-answers-block.8",
-              "block": "profile",
-              "copy_key": "career.item.career-quick-answers-block",
-              "type": "prose"
+              "$join": [
+                {
+                  "$item": "mechatronics-engineers.profile.career-quick-answers-block.8",
+                  "block": "profile",
+                  "copy_key": "career.item.career-quick-answers-block",
+                  "type": "prose"
+                },
+                {
+                  "$item": "mechatronics-engineers.profile.work-context-block.5",
+                  "block": "profile",
+                  "copy_key": "career.item.work-context-block",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
             },
             "key": "qa3",
             "question": "这份工作先核对什么？",
@@ -9617,13 +9645,13 @@
             ],
             "id": "risk-1",
             "mitigation": "按安全标准设计并做验证。",
-            "scenario": "未确认安全要求与适用标准即设计控制逻辑。",
-            "title": {
+            "scenario": {
               "$item": "mechatronics-engineers.risk.career-risk-cards.1",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "安全功能遗漏"
           },
           {
             "affected_roles": "系统联调岗位",
@@ -9633,13 +9661,13 @@
             ],
             "id": "risk-2",
             "mitigation": "按现场条件复核并重测。",
-            "scenario": "联调条件与现场不符。",
-            "title": {
+            "scenario": {
               "$item": "mechatronics-engineers.risk.career-risk-cards.2",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "测试与现场不符"
           },
           {
             "affected_roles": "传感与执行岗位",
@@ -9649,13 +9677,13 @@
             ],
             "id": "risk-3",
             "mitigation": "按工况与规格核对并验证。",
-            "scenario": "传感或执行机构选型不适应工况。",
-            "title": {
+            "scenario": {
               "$item": "mechatronics-engineers.risk.career-risk-cards.3",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "选型不匹配"
           },
           {
             "affected_roles": "安全与签核岗位",
@@ -9665,13 +9693,13 @@
             ],
             "id": "risk-4",
             "mitigation": "按授权链交由责任工程师签发。",
-            "scenario": "在授权范围外签发安全或交付结论。",
-            "title": {
+            "scenario": {
               "$item": "mechatronics-engineers.risk.career-risk-cards.4",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "超出签署授权"
           },
           {
             "affected_roles": "故障诊断岗位",
@@ -9681,13 +9709,19 @@
             ],
             "id": "risk-5",
             "mitigation": "先停机并完成根因分析后恢复。",
-            "scenario": "故障根因判断不足即恢复运行。",
-            "title": {
-              "$item": "mechatronics-engineers.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
-            }
+            "scenario": {
+              "$join": [
+                "根因判断不足即恢复运行。",
+                {
+                  "$item": "mechatronics-engineers.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "\n"
+            },
+            "title": "根因未确认"
           },
           {
             "affected_roles": "工程与技术岗位",
@@ -9705,39 +9739,21 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-genai",
+              "$source": "onet-tasks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.0",
+            "id": "mechatronics-engineers.review.source.0",
             "label": {
-              "$source": "ilo-genai",
+              "$source": "onet-tasks",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
-          },
-          {
-            "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "id": "mechatronics-engineers.display.source.1",
-            "label": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "scope": "未建立与该 O*NET 精确职业一一对应的全国工资分布。"
+            "scope": "任务样本不代表每个岗位执行全部任务。"
           },
           {
             "href": {
@@ -9747,7 +9763,7 @@
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.2",
+            "id": "mechatronics-engineers.review.source.1",
             "label": {
               "$source": "onet-context",
               "block": "source-register",
@@ -9755,7 +9771,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "工作情境为调查结果；不替代雇主与地方法规。"
+            "scope": "美国工作情境不替代中国法律与雇主要求。"
           },
           {
             "href": {
@@ -9765,7 +9781,7 @@
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.3",
+            "id": "mechatronics-engineers.review.source.2",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9774,6 +9790,24 @@
               "item": "mechatronics-engineers.source-register.published.1"
             },
             "scope": "不等于统一录用或考核标准。"
+          },
+          {
+            "href": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "mechatronics-engineers.source-register.published.1"
+            },
+            "id": "mechatronics-engineers.review.source.3",
+            "label": {
+              "$source": "onet-summary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "mechatronics-engineers.source-register.published.1"
+            },
+            "scope": "美国职业口径；不推定中国大陆存在精确等价映射。"
           }
         ]
       },
@@ -9810,38 +9844,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "四年制学士学位",
+              "学历段": "本科",
               "岗位方向": "机电与自动化岗位",
-              "说明": "Job Zone 4 常见准备方式。"
+              "说明": "美国O*NET常见准备信息；中国具体录用要求需查岗位公告。"
             },
             {
-              "学历段": "硕士或以上",
-              "岗位方向": "控制与算法研发",
-              "说明": "部分岗位要求。"
+              "学历段": "研究生",
+              "岗位方向": "控制或算法研发探索",
+              "说明": "编辑建议：先核具体岗位公告，不宣称统一学历门槛。"
             },
             {
-              "学历段": "相关在职经验",
+              "学历段": "工程实践",
               "岗位方向": "系统集成与现场",
-              "说明": "与学历并用。"
+              "说明": "用程序、联调和验证记录证明能力；非学历等级。"
             },
             {
-              "学历段": "职业培训或认证",
-              "岗位方向": "控制与安全",
-              "说明": "非强制，按雇主核验。"
+              "学历段": "培训或认证",
+              "岗位方向": "控制相关训练",
+              "说明": "是否必需须查所在地规则和雇主要求，不由本页认定。"
             }
           ],
           "china_industry_table": [
             {
               "行业": "制造业",
-              "需求": "主要雇主场景"
+              "需求": "编辑选取的岗位检索场景；未取得中国职业行业分布。"
             },
             {
-              "行业": "专业、科学与技术服务",
-              "需求": "自动化集成服务"
+              "行业": "技术服务",
+              "需求": "可检索系统集成岗位；不表示全国需求份额。"
             },
             {
-              "行业": "政府与其他行业",
-              "需求": "公共与专业场景"
+              "行业": "其他组织",
+              "需求": "按具体公告核任务和责任；不推定政府行业占比。"
             }
           ],
           "china_intl": {
@@ -10122,10 +10156,39 @@
         ],
         "boundary": "美国数据为 Engineers, All Other（O*NET 17-2199）组合口径，不能当作单列本职业；分位为统计位置，不等于个人到手收入。",
         "direct_answer": {
-          "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "factor_rows": [
           {
@@ -10141,12 +10204,7 @@
             "factor": "地区"
           }
         ],
-        "factors_heading": {
-          "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.6",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "factors_heading": "工资比较前需核对的条件",
         "growth": "慢于平均（约 1%—2%，2024—2034，组合口径）",
         "heading": {
           "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.1",
@@ -10154,42 +10212,32 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_heading": {
-          "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.5",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "industry_heading": "父职业行业分布与工资缺口",
         "industry_period": "2024；查阅 2026-09-25",
         "industry_rows": [
           {
             "industry": "政府（约 28%）",
-            "median": "见组合分位",
-            "note": "行业分布为雇主场景信号。"
+            "median": "证据不足：未取得该父职业分行业工资",
+            "note": "Engineers, All Other父职业2024年雇主分布；不是本职业单列分布。"
           },
           {
             "industry": "专业、科学与技术服务（约 24%）",
-            "median": "见组合分位",
-            "note": "工程与集成服务。"
+            "median": "证据不足：未取得该父职业分行业工资",
+            "note": "Engineers, All Other父职业2024年雇主分布；不是本职业单列分布。"
           },
           {
             "industry": "制造业（约 23%）",
-            "median": "见组合分位",
-            "note": "设备与产线场景。"
+            "median": "证据不足：未取得该父职业分行业工资",
+            "note": "Engineers, All Other父职业2024年雇主分布；不是本职业单列分布。"
           },
           {
             "industry": "其他行业（约 25%）",
-            "median": "见组合分位",
-            "note": "含其他组合行业。"
+            "median": "证据不足：未取得该父职业分行业工资",
+            "note": "Engineers, All Other父职业2024年雇主分布；不是本职业单列分布。"
           }
         ],
-        "industry_value_label": "行业值",
-        "interpretation_heading": {
-          "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.4",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "industry_value_label": "行业工资资料",
+        "interpretation_heading": "统计分位与预测怎样读",
         "interpretation_rows": [
           {
             "answer": "不是，分位为统计位置。",
@@ -10212,17 +10260,12 @@
         "outlook_heading": "就业展望与职位空缺",
         "outlook_period": "2024—2034；查阅 2026-09-25",
         "wage_column_labels": [
-          "分位",
-          "年度参考",
-          "月度等值",
-          "解释"
+          "统计分位",
+          "年薪（美元/年）",
+          "时薪（美元/小时）",
+          "口径说明"
         ],
-        "wage_heading": {
-          "$item": "mechatronics-engineers.us-salary.career-snapshot-secondary-locale.3",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "wage_heading": "美国父职业工资分位（2025）",
         "wage_tiers": [
           {
             "equivalent": "约 32.12 美元/小时",
@@ -10274,19 +10317,25 @@
         "title": "机电一体化工程师适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "若遇到超时、急停或护罩异常仍想直接恢复运行，或不愿记录未确认条件，应先练习条件核对与纠错，再探索需要现场联调责任的岗位。 这是工作样本核对，不是人格诊断或录用结论。",
         "how": {
-          "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.3",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "suit": {
-          "$item": "mechatronics-engineers.quick-decision.fermat-decision-card.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
-        }
+        "suit": "编辑探索信号：愿意拆解机械、电气和控制条件，遮住答案推导四例，再用记录说明错误与修正；这只帮助选择下一步学习任务，不证明已胜任实机工作。"
       },
       "hero": {
         "h1": {
@@ -10307,17 +10356,41 @@
           }
         ],
         "direct_answer": {
-          "$item": "mechatronics-engineers.market-signals.market-signal-card.2",
-          "block": "market-signals",
-          "copy_key": "career.item.market-signal-card",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "mechatronics-engineers.market-signals.market-signal-card.1",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.market-signals.market-signal-card.2",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.market-signals.market-signal-card.3",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.market-signals.market-signal-card.4",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
+              "$item": "mechatronics-engineers.market-signals.market-signal-card.5",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "heading": {
-          "$item": "mechatronics-engineers.market-signals.market-signal-card.1",
-          "block": "market-signals",
-          "copy_key": "career.item.market-signal-card",
-          "type": "prose"
-        },
+        "heading": "就业信号与相邻转型",
         "outlook_evidence": [
           {
             "geography": "美国全国",
@@ -10326,12 +10399,7 @@
             "limitation": "为组合口径统计预测，不能当作单列本职业或个人就业保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：Engineers, All Other（O*NET 17-2199 组合口径）",
-            "value": {
-              "$item": "mechatronics-engineers.market-signals.market-signal-card.3",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            }
+            "value": "158,800人（2024）→162,100人（2034）；父职业增长约2%"
           },
           {
             "geography": "美国全国",
@@ -10356,98 +10424,88 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-genai",
+              "$source": "onet-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.0",
+            "id": "mechatronics-engineers.review.source.0",
             "label": {
-              "$source": "ilo-genai",
+              "$source": "onet-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "组合口径：为 Engineers, All Other（17-2199）数据，非单列本职业；含替换需求。"
           },
           {
             "href": {
-              "$source": "mohrss-wage",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.1",
+            "id": "mechatronics-engineers.review.source.1",
             "label": {
-              "$source": "mohrss-wage",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的全国工资分布。"
+            "scope": "组合口径：为 Engineers, All Other（17-2199）数据，非单列 17-2199.05；分位不含个人到手收入。"
           },
           {
             "href": {
-              "$source": "onet-context",
+              "$source": "onet-industry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.2",
+            "id": "mechatronics-engineers.review.source.2",
             "label": {
-              "$source": "onet-context",
+              "$source": "onet-industry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "工作情境为调查结果；不替代雇主与地方法规。"
+            "scope": "Engineers, All Other父职业2024年雇主分布，非单列本职业；不提供行业工资。"
           },
           {
             "href": {
-              "$source": "onet-details",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "id": "mechatronics-engineers.display.source.3",
+            "id": "mechatronics-engineers.review.source.3",
             "label": {
-              "$source": "onet-details",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "scope": "不等于统一录用或考核标准。"
+            "scope": "美国职业口径；不推定中国大陆存在精确等价映射。"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": {
-              "$item": "mechatronics-engineers.market-signals.market-signal-card.5",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
-            "shared_capabilities": {
-              "$item": "mechatronics-engineers.market-signals.market-signal-card.4",
-              "block": "market-signals",
-              "copy_key": "career.item.market-signal-card",
-              "type": "prose"
-            },
+            "capability_gaps": "需核目标岗位的机械分析、设计验证和具体授权要求；不能靠本页完成资格互认。",
+            "shared_capabilities": "机械设计文档、建模、试验与跨专业协作。",
             "target_href": "/zh/career/jobs/mechanical-engineers",
             "target_slug": "mechanical-engineers",
             "target_title": "机械工程师",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐控制与安全设计责任。",
+            "capability_gaps": "需核目标技术员岗位的装配、仪器测试、记录和受指导职责，不能假定转岗即取得工程设计签核权。",
             "shared_capabilities": "机械装配与测试基础。",
             "target_href": "/zh/career/jobs/mechanical-engineering-technicians",
             "target_slug": "mechanical-engineering-technicians",
@@ -10471,7 +10529,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐性能计算与控制设计。",
+            "capability_gaps": "需补齐制图规范、尺寸公差、图纸版本管理及目标CAD交付要求。",
             "shared_capabilities": "图纸理解与建模。",
             "target_href": "/zh/career/jobs/mechanical-drafters",
             "target_slug": "mechanical-drafters",
@@ -10566,13 +10624,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "编辑自查：请同伴用“急停解除但未按启动”挑战方案，观察你是否先复核条件并修正；本页不以九型标签预测职业表现。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "九型标签之外，你如何面对反例？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10580,13 +10638,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "遮住答案后推导四例，再解释为什么复位不能直接令电机运行；这是任务推理练习，不是标准化智力测验或录用分数。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否解释状态转换而不是只背答案？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10594,13 +10652,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "记录冲突的输入、可能后果和需要确认的负责人，用事实请求澄清；纸面沟通练习不能替代临床或标准化情绪测量。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "协作中发现条件冲突时怎样表达？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10683,7 +10741,7 @@
             "question": "你的结论如何被复核与签核？"
           },
           {
-            "answer": "用完全虚构的控制需求完成一次方案与联调演练。",
+            "answer": "按本页S/X/E/G输入、10秒时限和四组事件在纸面完成状态表；不接真实设备，再对照参考交付记录错误。",
             "question": "下一步如何试验？"
           }
         ],
@@ -10726,37 +10784,20 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-genai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "mechatronics-engineers.source-register.published.1"
             },
             "label": {
-              "$source": "ilo-genai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "mohrss-wage",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "美国职业口径；不推定中国大陆存在精确等价映射。"
           },
           {
             "href": {
@@ -10773,7 +10814,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "美国工作情境不替代中国法律与雇主要求。"
           },
           {
             "href": {
@@ -10790,24 +10831,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "不等于统一录用或考核标准。"
           },
           {
             "href": {
@@ -10824,194 +10848,7 @@
               "field": "name",
               "item": "mechatronics-engineers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-education",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "mechatronics-engineers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "准备程度不是统一录用门槛。"
           }
         ]
       },
@@ -11092,16 +10929,15 @@
             "item": "mechatronics-engineers.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：O*NET 17-2199.05 摘要（职业身份与描述）：官方职业描述、报告岗位名称、兴趣代码与 Job Zone。。为美国职业口径，不推定中国大陆对应关系。。；美国职业口径；不推定中国大陆存在精确等价映射。。；O*NET 17-2199.05 任务（Tasks）：研究、设计、开发与测试自动化与智能系统控制的任务清单。。任务样本不代表每个岗位执行全部任务。。；任务样本不代表每个岗位执行全部任务。。；O*NET 17-2199.05 工作情境（Work Context）：室内环境、工时、沟通、精确性与团队协作的比例分布。。美国工作情境不替代中国法律与雇主要求。。；美国工作情境不替代中国法律与雇主要求。。；O*NET 17-2199.05 教育与职业准备（Education）：教育、培训与资质入口（通常要求四年制学士学位）。。准备程度不是统一录用门槛。。；准备程度不是统一录用门槛。。；O*NET 17-2199.05 职业区（Job Zone）：Job Zone 4：通常要求四年制学士学位，并需数年相关工作与在职经验。。准备程度不是统一录用门槛。。；准备程度不是统一录用门槛。。；O*NET 17-2199.05 全国工资（Engineers, All Other 组合口径；BLS 2025 年工资数据）：BLS 2025 年工资数据 10/25/中位/75/90 分位及小时值。。O*NET 页面标注为 Engineers, All Other（17-2199）组合口径，非单列本职业。。；组合口径：为 Engineers, All Other（17-2199）数据，非单列 17-2199.05；分位不含个人到手收入。。；O*NET 17-2199.05 全国就业趋势（Engineers, All Other 组合口径；BLS 2024—2034 年预测）：2024 年组合口径就业 158,800 人、2024—2034 年预计慢于平均（约 1%—2%）、年均空缺约 9,300 个。。为组合口径，含替换需求，不等于单列职业净增岗位。。；组合口径：为 Engineers, All Other（17-2199）数据，非单列本职业；含替换需求。。；O*NET 17-2199.05 行业分布（Industries）：2024 年行业分布：政府约 28%、专业科学与技术服务约 24%、制造业约 23%、其他行业约 25%。。行业分布是雇主场景信号，不是需求预测。。；行业分布是雇主场景信号，不是需求预测。。；O*NET 17-2199.05 详细档案（技能与知识）：基本技能、可迁移技能、知识与能力清单。。不等于统一录用或考核标准。。；不等于统一录用或考核标准。。；2025年城镇单位就业人员年平均工资情况：提供城镇非私营与私营单位分行业门类年平均工资（含制造业）。。行业平均不是职业中位数，且不含个体工商户与自由职业者。。；行业平均不是职业中位数，且不含个体工商户与自由职业者。。；企业薪酬调查信息（2024年）：按职业/岗位分类发布企业薪酬调查信息。。未取得与 O*NET 17-2199.05 精确对应的条目。。；未取得与 O*NET 17-2199.05 精确对应的条目。。；Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。。暴露指数不等于采用率、岗位结果或录用概率。。；暴露指数不等于采用率、岗位结果或录用概率。。；FermatMind 机电一体化工程师任务影响量表：整理可辅助任务与人工控制点，用于任务级 AI 与适配讨论。。编辑量表不等于采用率、裁员、法规或证照证据。。；编辑量表不等于采用率、裁员、法规或证照证据。。；"
+        "note": "来源使用边界：O*NET 17-2199.05摘要、任务和详细档案支持美国职业身份、工作情境与准备信息；工资、就业及行业分布采用Engineers, All Other父职业，不能当作单列本职业。国家统计局2025表2/表5只支持行业平均工资；人社部2024调查未建立本页精确映射。ILO 2025论文评估任务暴露，不提供本职业机构采用率；本页练习、适配和路径是编辑设计。完整来源及限制见下方注册表。"
       },
-      "work_context_block": {
-        "$item": "mechatronics-engineers.profile.work-context-block.5",
-        "block": "profile",
-        "copy_key": "career.item.work-context-block",
-        "type": "prose"
-      }
+      "work_context_block": "美国O*NET调查：87%每日在受控室内工作，90%每日使用电子邮件、81%每日面对面讨论，58%通常每周超过40小时；63%认为准确性极其重要，59%认为团队协作极其重要。现场联调可能涉及设备，具体环境和工时须核岗位；这些比例不能直接外推中国。"
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪类机电工作任务？",
+      "interface.fit.interest_code_heading": "怎样理解 RIC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11273,10 +11109,10 @@
       "text": "机电一体化工程师：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "e20666a733c834f71e9287e5666c95eecf65a5695e0cb95c91467fb9ca5a013f",
+  "source_content_sha256": "09d3e53d237b5184b3a5afb0dacf256cd00a375b29cf40a26f02f26c6f98ddec",
   "subject": {
     "canonical_slug": "mechatronics-engineers",
     "name": "机电一体化工程师",
-    "summary": "机电一体化工程师（O*NET 17-2199.05）研究、设计、开发与测试自动化、智能系统、智能设备与工业系统控制，负责控制方案、联调验证与安全签核。"
+    "summary": "机电一体化工程师（O*NET 17-2199.05）研究、设计、开发或测试自动化、智能系统、智能设备与工业系统控制；工作可涉及系统方案、传感与执行机构选型、联调与验证，具体交付和签署责任按岗位授权确定。"
   }
 }

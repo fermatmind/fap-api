@@ -1284,10 +1284,10 @@
         "status": "mapped"
       },
       "item:amusement-and-recreation-attendants.path.employer-evidence.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:amusement-and-recreation-attendants.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:amusement-and-recreation-attendants.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23341,7 +23341,9 @@
           "id": "amusement-and-recreation-attendants.quick-decision.fit-decision-checklist.1",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23350,7 +23352,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的小任务：按公开资料整理一份游乐设施每日运营前检查与试运行清单（设备外观、安全装置、束缚装置、警示与乘客须知）；用一次虚构场景写出一段安全提示与禁止事项播报（乘车须知、身高与禁忌、紧急情况指引）；把一次现场异常（如设备异响或顾客纠纷）写成含现象、处置、升级与记录对象的记录。做不完整是正常的，重点是观察自己对按流程检查、按规章提示顾客并在压力下如实记录的真实反应。（编辑建议，不是录用或技能测试，也不构成操作指导。）"
+              "三个纸面小任务：用本页入行练习材料A/B/C做状态核对表、两段顾客提示和两条异常记录。只按给定信息记录，暂停原因、恢复时间与接收人姓名未给就保留未知；不得操作设备或作安全放行。观察自己对信息冲突、顾客追问和如实记录的反应，不能把练习结果当录用或资格证明。"
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fit-decision-checklist.2",
@@ -23380,13 +23382,17 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页美国工资与就业取自 O*NET 展示的 BLS 口径：39-3091 娱乐与休闲服务员 2025 年 5 月年薪中位数 32,150 美元（时薪 15.46 美元）；第 10 分位为 22,350 美元、第 25 分位为 27,660 美元、第 75 分位为 36,590 美元、第 90 分位为 42,490 美元；2024 年在岗约 392,300 人；BLS 预测 2024—2034 年平均增长 3% 至 4%，年均约 102,400 个职位空缺（多数来自替代需求，反映该职业的高流动性与季节性）；主要行业为艺术、娱乐与休闲以及政府；O*NET 标注为前景光明（Bright Outlook）；工作周以不足 40 小时为主（93%）。中国大陆没有该职业精确的全国工资分布，行业门类数字只作宽口径参考；大型游乐设施操作人员属特种设备作业人员，须取得相应资格并按特种设备法律法规执行每日运营前试运行与例行安全检查，本页不构成法律或操作指导。"
+              "证据不足：本页未取得中国大陆本职业全国工资分布，行业门类数字仅作参照。美国工资由O*NET展示的BLS2025年5月分位提供：39-3091年薪中位数32,150美元（时薪15.46美元），第10/25/75/90分位分别22,350/27,660/36,590/42,490美元。就业另取BLS EP：2025年约408,400人，2025—2035年增长3.7%，年均约100,400个空缺（含增长与替代需求），不能据此归因为高流动性或季节性。O*NET描述的主要行业为艺术娱乐休闲及政府，93%受访者工作周不足40小时；它仍展示旧预测，不能支持上述新EP数值。中国大型游乐设施操作须取得相应资格，运营单位须落实每日试运行和例行检查。"
             ]
           },
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.6",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -23401,7 +23407,9 @@
           "id": "amusement-and-recreation-attendants.quick-decision.fermat-decision-card.7",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         }
@@ -23424,7 +23432,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23433,7 +23443,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 娱乐与休闲服务员（Amusement and Recreation Attendants）：在娱乐或休闲设施执行各类服务职责，可能包括安排休闲设施的使用、为体育赛事或休闲活动的参与者维护和提供设备，或操作娱乐摊位和游乐设施。常见职位名称包括活动服务员（Activities Attendant）、过山车服务员（Coaster Attendant）、游乐设施操作员（Ride Operator）、滑雪缆车操作员（Ski Lift Operator）、休闲服务员（Recreation Attendant）、体育综合设施服务员（Sports Complex Attendant）、高尔夫球场巡场员与发球员等；O*NET 标注为前景光明（Bright Outlook）。"
+              "用于美国39-3091任务、兴趣和工作情境；不规定中国作业资格。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.1",
@@ -23458,7 +23468,9 @@
           "id": "amusement-and-recreation-attendants.profile.responsibilities-block.1",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "list"
         },
@@ -23497,12 +23509,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 O*NET 展示的 39-3091 口径：2025 年 5 月年薪中位数 32,150 美元（时薪 15.46 美元），第 10 分位为 22,350 美元、第 25 分位为 27,660 美元、第 75 分位为 36,590 美元、第 90 分位为 42,490 美元；2024 年在岗约 392,300 人；主要行业为艺术、娱乐与休闲以及政府。学历方面 64% 受访者认为低于高中文凭、32% 需高中文凭或同等学历、3% 需副学士学位；职业准备等级为 Job Zone 1-2；O*NET 标注为前景光明（Bright Outlook）。"
+              "用于中国2025年城镇单位工资范围；不含本职业单列工资。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "oews"
           ],
           "type": "prose"
         },
@@ -23517,7 +23531,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.3",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23526,12 +23542,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》（2026-05-15 发布）：全国城镇非私营单位 129,441 元/年，城镇私营单位 71,590 元/年；文化、体育和娱乐业（非私营）129,447 元/年，公共管理、社会保障和社会组织（非私营）119,465 元/年。该表按行业门类与单位类型发布，不含本职业单列工资。"
+              "用于中国2022年职业分类框架，不规定薪酬或设备资格。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23546,7 +23563,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.4",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23555,12 +23574,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（经 O*NET 展示）：39-3091 在 2024 年在岗约 392,300 人，2024—2034 年平均增长 3% 至 4%，年均约 102,400 个职位空缺且多数来自替代需求（反映该职业的高流动性与季节性）。空缺数不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆。"
+              "BLS EP直接提供39-3091：2025年约408,400人，2025—2035年增长3.7%，年均约100,400个空缺，含增长与替代需求。空缺不是净新增，也不代表个人就业保证；不外推中国或归因于季节性。O*NET仍展示旧预测。"
             ]
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -23575,7 +23595,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.5",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23589,7 +23611,11 @@
           },
           "id": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-tsg",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -23604,7 +23630,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.6",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23620,7 +23648,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23635,7 +23665,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.8",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23650,7 +23682,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.9",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23680,7 +23714,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23696,7 +23732,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23711,7 +23749,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.12",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23726,7 +23766,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.13",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23756,7 +23798,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.15",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23771,7 +23815,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.16",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23786,7 +23832,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.17",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23801,7 +23849,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.18",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23816,7 +23866,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.19",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23831,7 +23883,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23861,7 +23915,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.22",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23919,7 +23975,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.26",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23933,7 +23991,9 @@
           },
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23948,7 +24008,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.28",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -23977,7 +24039,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.30",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24037,7 +24101,9 @@
           "id": "amusement-and-recreation-attendants.profile.career-quick-answers-block.34",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         }
@@ -24061,10 +24127,10 @@
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
+                "entity": "O*NET展示的BLS2025年工资分位（39-3091.00）",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
                 "entity": "O*NET 39-3091.00 任务与工作活动",
@@ -24108,7 +24174,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24126,7 +24194,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24150,13 +24220,15 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向设备操作与顾客安全；对作业资格、操作规程、安全装置确认与应急处置要求最高。"
+              "面向设备操作与顾客安全；大型游乐设施操作需核对应作业资格、操作规程、安全装置确认与应急处置。"
             ]
           },
           "id": "amusement-and-recreation-attendants.direction-comparison.adjacent-career-comparison-table.11",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24186,7 +24258,9 @@
           "id": "amusement-and-recreation-attendants.direction-comparison.adjacent-career-comparison-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24509,7 +24583,9 @@
           },
           "id": "amusement-and-recreation-attendants.direction-comparison.adjacent-career-comparison-table.35",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         }
@@ -24527,115 +24603,115 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 39-3091.00 娱乐与休闲服务员职业摘要（前景光明）",
+                "entity": "O*NET职业摘要",
                 "id": "link-1",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 任务与工作活动",
+                "entity": "O*NET展示的BLS2025年工资分位",
                 "id": "link-2",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/39-3091.00"
-              },
-              {
-                "entity": "O*NET 展示的 BLS 2025 年 5 月工资分位：39-3091.00",
-                "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
-                "id": "link-4",
+                "entity": "BLS OEWS工资统计方法",
+                "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 39-3091.00 详细资料（工作情境）",
+                "entity": "BLS2025—2035年就业预测",
+                "id": "link-4",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET工作情境（美国；非中国法规）",
                 "id": "link-5",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 职业摘要",
+                "entity": "O*NET任务（美国；非中国资格规则）",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 技术清单",
+                "entity": "O*NET任务与技术条目（非中国工资）",
                 "id": "link-7",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/39-3091.00"
-              },
-              {
-                "entity": "O*NET 39-3091.00 行业分布",
-                "id": "link-8",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/industry/39-3091.00"
-              },
-              {
-                "entity": "O*NET 39-3091.00 自定义职业档案",
-                "id": "link-9",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/39-3091.00"
-              },
-              {
-                "entity": "O*NET 39-3091.00 职业说明（任务清单）",
-                "id": "link-10",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 职业摘要（任务与职责）",
-                "id": "link-11",
+                "entity": "O*NET职业任务",
+                "id": "link-8",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "BLS 2024—2034 年就业预测表",
-                "id": "link-12",
-                "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
-              },
-              {
-                "entity": "O*NET 展示的 BLS 工资分位（39-3091.00）",
-                "id": "link-13",
+                "entity": "O*NET全国工资分位",
+                "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 工作情境与任务数据",
-                "id": "link-14",
+                "entity": "BLS2025—2035年就业预测",
+                "id": "link-10",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "BLS2025—2035年就业预测",
+                "id": "link-11",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET任务对照（中国法规另见登记来源）",
+                "id": "link-12",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 职业摘要",
-                "id": "link-15",
+                "entity": "O*NET职业任务与AI判断边界",
+                "id": "link-13",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 技术清单（技术条目说明）",
-                "id": "link-16",
+                "entity": "O*NET展示的BLS2025年工资分位",
+                "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/39-3091.00"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 详细资料",
+                "entity": "BLS2025—2035年就业预测",
+                "id": "link-15",
+                "relation": "career.source",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "entity": "O*NET美国任务对照（非中国资格依据）",
+                "id": "link-16",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/39-3091.00"
+              },
+              {
+                "entity": "O*NET任务与工作活动",
                 "id": "link-17",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "BLS OEWS：39-3091 工资统计",
+                "entity": "BLS2025—2035年就业预测",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 39-3091.00 任务清单与记录要求",
+                "entity": "O*NET职业任务与工作情境",
                 "id": "link-19",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
@@ -24651,7 +24727,11 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "ep",
+            "nbs"
           ],
           "type": "links"
         },
@@ -24681,7 +24761,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.11",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24711,7 +24793,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.13",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24741,7 +24825,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.15",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24773,7 +24859,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -24782,7 +24870,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变票务与排队系统、监控与客流分析、设备状态监测、以及排班与库存管理等人环节，但没有证据表明它会取代现场操作、安全装置确认、顾客引导与应急处置责任，本页也不据此推测岗位数量变化。技术能力、实际部署与招聘结果要分开判断；本职业 2024—2034 年平均增长 3% 至 4%、年均约 102,400 个空缺（多数来自替代需求）来自 BLS 官方口径，不能等同于“AI 会替代”或“AI 会创造”。"
+              "证据不足：本页未取得本职业AI采用率、岗位替代率或工资因果估计。票务整理、记录汇总与异常提示仅为编辑提出的可能用途；现场确认、操作授权与应急责任仍按适用规程执行。BLS2025—2035年预测增长3.7%、年均约100,400个空缺，不能用来推断AI造成岗位增减。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.18",
@@ -24790,7 +24878,10 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24857,7 +24948,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：39-3091"
+              "BLS OEWS工资统计方法"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.23",
@@ -24871,12 +24962,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于工资中位数与就业规模口径说明。"
+              "用于雇员工资覆盖与年薪年化；EP就业规模另列。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -24885,12 +24977,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测"
+              "BLS 2025—2035 年就业预测"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24899,7 +24992,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于增长幅度与年均职位空缺（含高流动性说明）。"
+              "用于2025与2035年就业、净变化和年均空缺；不提供AI或季节性因果解释。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.26",
@@ -24913,12 +25006,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国特种设备安全法》"
+              "O*NET工作情境（美国）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -24927,12 +25023,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆大型游乐设施作业人员资格、使用登记、每日试运行与例行安全检查、维护保养与事故应急预案的框架说明。"
+              "美国职业工作情境；中国大型游乐设施安全法与资格来源见本页路径、风险及来源登记，不由此链接证明。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -24941,12 +25040,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《大型游乐设施安全监察规定》与《大型游乐设施安全技术规程》（TSG 71-2023）"
+              "O*NET职业任务（美国）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -24955,12 +25057,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于运营使用单位的试运行检查、警示与乘客须知、应急预案与演练、持证操作人员配备等要求。"
+              "美国任务范围；不能作为中国作业资格或安全技术规范。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "cn-tsg",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -24969,12 +25075,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "O*NET职业任务与技术条目"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -24983,7 +25090,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆民用行业门类工资参照。"
+              "职业任务对照，不是中国工资统计；中国工资参照见下一节及国家统计局来源。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.32",
@@ -25012,7 +25119,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备状态监测与运行记录可数字化采集并预警。"
+              "编辑可能用途：汇总设备状态与异常提示；部署及效果未核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.34",
@@ -25033,7 +25140,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.35",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25042,7 +25151,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "票务与排队系统、电子验票与客流分析可自动化处理。"
+              "编辑可能用途：辅助票务核对与客流提示；部署及效果未核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.36",
@@ -25072,7 +25181,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "库存与维护台账可自动化管理。"
+              "编辑可能用途：整理库存与维护记录；部署及效果未核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.38",
@@ -25102,7 +25211,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "五张证据卡分别说明来源、研究对象、结论与使用限制；它们支持职业属性、任务边界、工资与就业口径，不是 AI 替代率或岗位数量预测。"
+              "证据卡区分职业任务、工资分布、OEWS统计方法、EP就业预测和中国法规。中国法规由本行登记的SAMR来源支持；相邻O*NET链接仅作美国任务对照，不是中国法律依据。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.40",
@@ -25116,7 +25225,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供工资与就业数字；本页工资与就业取自 O*NET 展示的同一 BLS 口径并在证据卡中单独列出。"
+              "美国任务描述；工资由工资卡、就业由EP卡支持，不证明AI采用率。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.41",
@@ -25163,7 +25272,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25219,7 +25330,8 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -25228,7 +25340,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与工资按职业与行业发布，不含按雇主或地区的细分；不能外推为中国大陆。"
+              "OEWS工资覆盖雇员，EP就业规模含自雇；两者调查对象不同。全国分位数不能替代雇主报价或行业工资。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.49",
@@ -25242,7 +25354,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：39-3091"
+              "BLS OEWS工资统计方法"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.50",
@@ -25256,7 +25368,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国该职业的就业与工资口径"
+              "美国雇员工资覆盖与统计方法"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.51",
@@ -25270,12 +25382,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS 为美国职业就业与工资统计的官方来源，按职业发布就业规模与工资分位；39-3091 的 2024 年在岗约 392,300 人（经 O*NET 展示），主要行业为艺术、娱乐与休闲以及政府。"
+              "OEWS覆盖雇员；通常用2,080小时把时薪年化。408,400人的2025年就业规模属于EP，含自雇，不属于OEWS工资统计。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25284,12 +25397,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "年均空缺数反映该职业的高流动性与季节性，不等于净新增岗位，也不代表个人就业保证，也不能外推为中国大陆。"
+              "年均空缺含增长和替代需求，不等于十年净增15,200人；短工时与季节安排来自另一项O*NET情境调查，不能据此分解空缺原因。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25298,12 +25412,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测"
+              "BLS 2025—2035 年就业预测"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25326,12 +25441,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测 39-3091 在 2024—2034 年平均增长 3% 至 4%（2034 年约 405,500 人），年均约 102,400 个职位空缺，多数来自替代需求。"
+              "BLS 预测 39-3091 在 2025—2035 年增长 3.7%（2035 年约 423,600 人），年均约 100,400 个职位空缺，多数来自替代需求。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25340,12 +25456,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为行政管理规定，不提供工资与就业数字；本页据此外说明中国大陆对应岗位的作业资格与安全义务，不能与美国的职业统计口径互相折算。"
+              "中国法规见本行《特种设备安全法》、《大型游乐设施安全监察规定》与TSG71—2023登记来源；相邻O*NET链接仅作美国任务对照，不支持中国法定义务。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25354,12 +25473,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国特种设备安全法》与《大型游乐设施安全监察规定》"
+              "中国法规登记来源；O*NET链接仅为美国任务对照"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25373,7 +25495,10 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25387,7 +25512,10 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25396,13 +25524,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，票务与排队系统、电子验票与客流分析、设备状态监测与预警、排班与库存管理、监控与广播可被部分自动化，输出可用于辅助入场、记录与预警。这些结果仍需现场人员按操作规程确认后才能用于设备操作、放行与停用决定。"
+              "编辑可能用途：票务核对、记录整理、客流提示与设备异常信息汇总。O*NET任务和软件清单不证明这些AI用途已在本职业部署或有效；输出应由现场人员复核，不能代替设备安全与放行判断。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.61",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25417,7 +25547,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.62",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25426,13 +25558,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测该职业 2024—2034 年平均增长 3% 至 4%，年均约 102,400 个空缺且多数来自替代需求（反映高流动性与季节性）。本页不把自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS2025—2035年预测增长3.7%、年均约100,400个空缺，含增长与替代需求。不能由短工时、季节性比例分解空缺原因，也不能据此归因于AI。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.63",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25441,13 +25574,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持“被取代”。票务、监控与监测系统可能增强效率与预警，但现场设备操作、安全装置确认、顾客引导与应急处置仍由持证或受训人员承担；本页引用的 2024—2034 年平均增长 3% 至 4% 与年均约 102,400 个空缺为 BLS 官方口径，本页不据技术名词推断岗位增减。"
+              "证据不足：本页未取得本职业AI采用率或岗位替代因果估计。O*NET描述现场服务与安全相关任务，不能单凭任务清单判断岗位是否被AI取代。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.64",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25456,13 +25592,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 与 BLS 2024—2034 年预测（编辑归纳）"
+              "O*NET职业任务（不提供AI替代率）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.65",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25471,13 +25608,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国口径：2025 年 5 月 39-3091 年薪中位数 32,150 美元（时薪 15.46 美元），第 10 分位为 22,350 美元、第 90 分位为 42,490 美元（BLS OEWS，经 O*NET 展示）。中国大陆没有该职业精确的全国工资分布，本页只给出行业门类与单位类型的宽口径参照，不作为职业工资。"
+              "证据不足：本页未取得中国大陆该职业精确的全国工资分布，本页只给出行业门类与单位类型的宽口径参照，不作为职业工资。美国口径：2025 年 5 月 39-3091 年薪中位数 32,150 美元（时薪 15.46 美元），第 10 分位为 22,350 美元、第 90 分位为 42,490 美元（BLS OEWS，经 O*NET 展示）。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.66",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -25501,13 +25639,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测该职业 2024—2034 年年均约 102,400 个职位空缺，多数来自替代需求而非净新增（2034 年就业约 405,500 人、净增长约 3%）。这反映该职业的高流动性与季节性（93% 工作周少于 40 小时、17% 为季节性日程），岗位数量大但单个岗位通常为短期或兼职。"
+              "BLS预测2025—2035年年均约100,400个空缺，含增长与替代需求；十年净增加约15,200人（3.7%），不是同一量。O*NET另有93%工作周不足40小时、17%季节日程；这些比例不能分解空缺原因或证明所有岗位短期兼职。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.68",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25516,12 +25655,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 与 BLS 2024—2034 年就业预测（编辑归纳）"
+              "O*NET 39-3091.00 与 BLS 2025—2035 年就业预测（编辑归纳）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25530,13 +25670,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆未单列“娱乐与休闲服务员”，相关岗位主要受《中华人民共和国特种设备安全法》与《大型游乐设施安全监察规定》管理：大型游乐设施操作人员属特种设备作业人员，须取得特种设备作业人员证（作业项目“大型游乐设施操作”，项目代号 Y2）；运营使用单位须在每日投入使用前进行试运行和例行安全检查并确认安全附件与安全保护装置，配备持证操作人员并制定应急预案。具体要求以特种设备安全技术规范、地方监管规定与运营使用单位制度为准。"
+              "中国大陆具体资格和每日检查义务由本页路径及登记的《特种设备安全法》、《大型游乐设施安全监察规定》、作业人员证书对应表来源支持。此处O*NET链接仅说明美国娱乐休闲服务任务，不是中国法律或Y2资格依据。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.70",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25545,13 +25688,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国特种设备安全法》与《大型游乐设施安全监察规定》（编辑归纳）"
+              "O*NET美国任务对照；中国资格见本页路径与法规来源"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.71",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25560,13 +25706,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "票务与排队系统、电子验票与客流分析、设备状态监测与预警、排班与库存管理、监控与广播等辅助环节；受影响程度取决于雇主设备与系统配置、投资与培训条件、特种设备安全技术规范与监管要求。"
+              "编辑可能用途：辅助核验票务、整理导览和维护记录、汇总异常提示。O*NET任务资料提供工作对象，不提供这些AI用途的采用率或效果证据。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.72",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25575,7 +25723,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 任务描述（编辑归纳）"
+              "O*NET任务描述；可能用途为编辑建议"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.73",
@@ -25589,13 +25737,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供消失年份。BLS 预测该职业 2024—2034 年平均增长 3% 至 4% 并保持大量替代需求，本页不采用“按任务暴露度推断消失时间”的做法。"
+              "不提供岗位消失年份。BLS2025—2035年就业预测不归因于AI，也不能用于推断此职业消失时间。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.74",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25604,7 +25753,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页证据卡与来源政策（编辑说明）"
+              "BLS2025—2035年就业预测（非AI因果估计）"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.75",
@@ -25619,13 +25768,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建议次序：按雇主与主管部门官方信息核对作业资格与岗前培训要求（如大型游乐设施操作等特种设备作业人员证）；打牢顾客沟通、安全装置确认、设备检查与应急处置基础；了解运营使用单位的安全制度与应急演练要求。具体要求以官方与雇主信息为准。"
+              "编辑建议：先核雇主岗位职责、培训与合法操作授权，练习顾客沟通、信息核验、异常记录和上报。中国大型游乐设施操作资格另按本页路径所列官方法规核对。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.76",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25634,13 +25786,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 与《大型游乐设施安全监察规定》（编辑建议）"
+              "O*NET任务与工作情境；中国资格另见路径法规"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.77",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -25670,7 +25825,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.79",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25685,7 +25842,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.80",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25700,7 +25859,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.81",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25715,7 +25876,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.82",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25730,7 +25893,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.83",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25745,7 +25910,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.84",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25760,7 +25927,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.85",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25769,7 +25938,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "未监控规则执行或处置不当代顾客违规会造成伤害、纠纷与运营中断。"
+              "未监控规则执行或处置顾客违规不当会造成伤害、纠纷与运营中断。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.86",
@@ -25804,7 +25973,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25819,7 +25990,9 @@
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.89",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -25930,7 +26103,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "票务与验票系统可自动化，但引导与特殊情况处置仍由人承担。"
+              "编辑可能用途：辅助验票记录；例外情况由人处理。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.97",
@@ -25987,7 +26160,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "导览与信息屏可辅助，但沟通与秩序维护仍由人负责。"
+              "编辑可能用途：整理导览信息；现场沟通由人负责。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.101",
@@ -26007,7 +26180,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.102",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26021,7 +26196,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.103",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26035,7 +26212,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.104",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26044,13 +26223,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监测与预警可辅助，但操作与停用决定仍由人负责。"
+              "编辑可能用途：汇总异常提示；操作与停用按规程。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.105",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26078,7 +26259,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.107",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26092,7 +26275,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.108",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26101,7 +26286,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "联锁与监测可辅助，但确认与提示仍由人负责。"
+              "编辑可能用途：汇总确认记录；不能替代逐位确认。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.109",
@@ -26158,7 +26343,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监控系统可辅助发现，但处置与升级仍由人负责。"
+              "编辑可能用途：提供监控提示；违规处置由人负责。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.113",
@@ -26215,7 +26400,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "维护台账可自动化管理，但检查与执行仍由人负责。"
+              "编辑可能用途：整理维护台账；现场检查由人执行。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.117",
@@ -26248,7 +26433,9 @@
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26271,7 +26458,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录系统与监测可辅助，但记录准确与上报决定仍由人负责。"
+              "编辑可能用途：汇总记录；准确性与上报由人负责。"
             ]
           },
           "id": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.121",
@@ -26314,7 +26501,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26328,7 +26516,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26342,7 +26531,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26398,7 +26588,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26426,7 +26617,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26533,13 +26725,15 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（票务与排队系统、电子验票与客流分析、设备状态监测与预警、排班与库存管理）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断涨薪或降薪；工资差异主要由雇主类型（主题公园、体育与休闲设施、市政与景区运营单位）、作业资格与岗位方向、班次与季节性安排以及地区与最低工资标准决定。"
+              "证据不足：本页未取得本职业AI工资因果研究，不推断涨薪或降薪。编辑可能用途包括辅助票务核验、记录整理和异常提示，采用率与效果未核。个人薪酬应核雇主、岗位、资格、地区、工时、班次及书面条件；这些核对项不是工资差异的因果估计。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26548,12 +26742,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧采用行业门类与单位类型的宽口径代理（文化、体育和娱乐业等），不是本职业的全国工资分布；这些门类覆盖大量非本职业岗位，不得把行业数字当作本职业中位数。中国大陆未单列“娱乐与休闲服务员”职业工资。"
+              "本页中国侧采用行业门类与单位类型的宽口径代理（文化、体育和娱乐业等），不是本职业的全国工资分布；这些门类覆盖大量非本职业岗位，不得把行业数字当作本职业中位数。本页采用的国家统计局工资资料未单列“娱乐与休闲服务员”。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26562,7 +26757,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "初中或高中及以上"
+              "学历按真实招聘核对"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.25",
@@ -26592,7 +26787,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "现场服务、票务与清洁保障岗位通常以初中或高中为起点，具体按用人单位招聘条件；美国侧 O*NET 显示 64% 受访者认为该职业低于高中文凭、32% 需高中文凭或同等学历、3% 需副学士学位。"
+              "中国大陆现场服务岗位的学历按具体招聘核对，本页未取得统一门槛；美国O*NET受访比例为64%低于高中文凭、32%高中文凭或同等学历、3%副学士学位。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.27",
@@ -26643,7 +26838,10 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -26688,7 +26886,9 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26733,7 +26933,10 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -26763,7 +26966,9 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.38",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26832,7 +27037,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/oes/current/oes393091.htm"
+              "BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.onetonline.org/link/localwages/39-3091.00"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.43",
@@ -26867,7 +27072,9 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26882,7 +27089,9 @@
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -26896,7 +27105,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26905,13 +27115,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位，不含个体工商户与自由职业者；工资为税前工资总额，含个人缴纳的社保、公积金与个税。行业门类数字不等于本职业工资。本职业薪酬按用人单位制度、岗位与班次确定，且较多为兼职或季节性工作。"
+              "国家统计局城镇单位工资为税前口径，含个人缴纳社保、公积金与个税，不含个体工商户和自由职业者。行业门类数字不等于本职业工资。中国岗位工时、季节安排与薪酬须按真实招聘核对，不能把美国O*NET情境比例外推中国。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26967,7 +27178,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26995,7 +27207,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27004,13 +27217,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按《国民经济行业分类》（GB/T 4754-2017），游乐与休闲设施岗位主要归入文化、体育和娱乐业，市政公园与政府运营景区岗位可能归入公共管理、社会保障和社会组织；《中华人民共和国职业分类大典（2022 年版）》未单列“娱乐与休闲服务员”，相关岗位按所属服务领域归入相应小类。国家统计局不单列该职业工资，因此本页不以行业数字冒充职业中位数。"
+              "文化、体育和娱乐业仅作为宽口径参照；单位归类按真实主营活动与统计规则核对，不能仅由“景区”或“公园”岗位名认定行业。本页未取得中美职业分类一对一映射。国家统计局本页采用的工资表未单列该职业，因此行业数字不是职业工资。"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27024,7 +27238,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27033,7 +27248,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）"
+              "3.7%"
             ]
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.58",
@@ -27052,7 +27267,8 @@
           },
           "id": "amusement-and-recreation-attendants.china-salary.career-snapshot-primary-locale.59",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         }
@@ -27069,7 +27285,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS OEWS 2025 年 5 月工资分位：39-3091.00｜https://www.onetonline.org/link/localwages/39-3091.00；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/oes/current/oes393091.htm；O*NET 39-3091.00 娱乐与休闲服务员职业摘要｜https://www.onetonline.org/link/summary/39-3091.00"
+              "O*NET展示的BLS2025年工资分位｜https://www.onetonline.org/link/localwages/39-3091.00；BLS2025—2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS工资统计方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.8",
@@ -27090,7 +27306,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27118,7 +27335,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27146,7 +27364,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27155,7 +27374,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2025 年 5 月 39-3091 年薪中位数（时薪 15.46 美元）。；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/oes/current/oes393091.htm"
+              "2025 年 5 月 39-3091 年薪中位数（时薪 15.46 美元）。；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.onetonline.org/link/localwages/39-3091.00"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.14",
@@ -27174,7 +27393,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27202,7 +27422,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27211,7 +27432,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 90 分位下界（时薪 20.43 美元），高收入端常与雇主类型、岗位与班次加班相关。；O*NET 展示的 BLS 2025 年 5 月工资分位｜https://www.onetonline.org/link/localwages/39-3091.00"
+              "年薪第90分位（时薪20.43美元），是工资分布位置，不证明特定资历或雇主导致高工资。；O*NET展示的BLS2025年工资分位｜https://www.onetonline.org/link/localwages/39-3091.00"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.18",
@@ -27225,12 +27446,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约392,300人（2024年）"
+              "约408,400人（2025年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27239,13 +27461,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 39-3091 就业规模（BLS 口径）。；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/oes/current/oes393091.htm"
+              "BLS就业预测表39-3091行2025年就业规模，含自雇；不是OEWS雇员就业数。；BLS2025—2035年就业预测｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27254,12 +27477,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）（2024—2034年）"
+              "3.7%（2025—2035年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27268,12 +27492,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 预测为平均增长（2034 年约 405,500 人），主要受休闲娱乐消费与人口结构影响。；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+              "2025—2035年就业预计增长3.7%，2035年约423,600人，净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27282,12 +27507,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均约102,400个"
+              "年均约100,400个"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27296,13 +27522,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年预测年均职位空缺，多数来自替代需求（反映该职业的高流动性与季节性），不等于净新增岗位。；BLS 职业就业与工资统计（OEWS）：39-3091｜https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+              "2025—2035年年均约100,400个空缺，含增长和替代需求；不等于十年净增加约15,200人。；BLS就业预测表39-3091｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27311,13 +27538,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以上数字为 BLS 职业就业与工资统计（OEWS）与 O*NET 展示的同一 BLS 口径（2025 年 5 月工资与 2024—2034 年预测），均为美国单一职业口径，不能外推为中国大陆；美国该职业以不足 40 小时工作周为主（93%），工资数字为时薪与年薪中位数口径；本页不使用民用行业数字替代。"
+              "工资分位为BLS OEWS2025年5月，经O*NET展示；就业预测直接取BLS EP2025—2035年，含自雇。美国39-3091职业口径不能外推中国；O*NET93%短工时比例不能把年化工资变为兼职实际全年收入。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27332,7 +27560,8 @@
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27402,7 +27631,9 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -27426,7 +27657,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）"
+              "3.7%"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.33",
@@ -27454,7 +27685,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.35",
@@ -27468,7 +27699,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "艺术、娱乐与休闲是 O*NET 给出的主要行业；BLS 未按行业公布该职业工资中位数。"
+              "O*NET行业分布列出艺术、娱乐与休闲；本轮未取得该行业本职业工资中位数。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.36",
@@ -27496,7 +27727,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.38",
@@ -27538,7 +27769,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得该行业本职业可核对的工资中位数；不使用第三方估算。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.41",
@@ -27585,7 +27816,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27614,7 +27846,8 @@
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27623,12 +27856,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。时薪与年薪是同一统计分布的两种表达（中位数 15.46 美元/小时对应 32,150 美元/年），但该职业多为兼职或季节性工作，实际年收入取决于工作小时数。"
+              "不能把它当个人全年实得收入。OEWS通常以每年2,080小时把时薪年化；15.46×2,080约32,157美元，与公布的32,150美元受取整影响。兼职、季节工的实际工时另核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27637,12 +27872,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "来自美国劳工统计局职业就业与工资统计（OEWS）2025 年 5 月，由 O*NET 展示；就业预测来自 BLS 2024—2034 年预测，为平均增长（3% 至 4%）与年均约 102,400 个空缺（多数来自替代需求）。"
+              "来自美国劳工统计局职业就业与工资统计（OEWS）2025 年 5 月，由 O*NET 展示；就业预测来自 BLS 2025—2035 年预测，为增长 3.7%与年均约 100,400 个空缺（多数来自替代需求）。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -27657,7 +27893,9 @@
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -27671,7 +27909,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27686,7 +27925,8 @@
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27700,7 +27940,8 @@
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         },
@@ -27709,13 +27950,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10%：高于 42,490 美元/年，高收入端常与雇主类型、岗位与班次加班相关。"
+              "最高10%：高于42,490美元/年。分布位置不证明特定雇主、资历或加班导致高工资；个人收入按工时和书面条件核对。"
             ]
           },
           "id": "amusement-and-recreation-attendants.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "oews"
           ],
           "type": "prose"
         }
@@ -27811,16 +28053,16 @@
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
+                "entity": "O*NET展示的BLS2025年工资分位（39-3091.00）",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "entity": "O*NET 39-3091.00 任务与工作活动",
+                "entity": "BLS2025—2035年就业预测（39-3091）",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/39-3091.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 39-3091.00 兴趣剖面（Interests）",
@@ -27844,13 +28086,13 @@
                 "entity": "《中华人民共和国特种设备安全法》",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
               },
               {
                 "entity": "《大型游乐设施安全监察规定》",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://www.gov.cn/zhengce/2021-04/22/content_5723679.htm"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
               }
             ]
           },
@@ -27861,7 +28103,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "links"
         },
@@ -27876,7 +28120,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.2",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -27930,7 +28176,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格属自我探索工具：尽责性与情绪稳定性常与顾客安全与现场秩序相关，但这是群体层面的相关性，不能用于选拔判断。本职业更关心可观察行为（按规程执行、耐心沟通、异常上报）。"
+              "编辑自查：用大五人格测评整理自己在按清单执行、顾客沟通与异常上报中的习惯，再用具体练习观察。本页未取得尽责性或情绪稳定性对该职业安全表现的实证估计，不把量表分数当录用依据。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.6",
@@ -27945,7 +28191,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格量表与工作表现的相关性有限，也不是选拔依据。"
+              "证据不足：本页未取得人格量表对该职业工作表现的预测研究；实际能力用培训和工作任务核对。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.7",
@@ -27989,7 +28235,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验按检查单准备设备、与顾客沟通与填写记录的真实感受，再判断自己是否愿意长期做这类需要耐心沟通、长时间站立与严格按规程执行的现场服务工作；测评结果不保证录用，也不能预测工作表现。"
+              "编辑建议：先按本页A/B/C完成一周纸面信息核对、顾客提示和记录练习，观察细致度、沟通与如实记录习惯。兴趣代码不保证录用或工作表现；不通过自行操作设备体验岗位。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.riasec-fit-block.9",
@@ -28004,12 +28250,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持“某种类型最适合这个职业”；适任职否由作业资格、岗前培训与雇主考核判定。"
+              "本页不按MBTI类型推荐职业或判断适任；本轮未取得该职业类型匹配的预测研究。实际准入与表现按培训、资格和雇主任务核对。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28032,7 +28280,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "证据不足：本页未取得MBTI对本职业工作表现的预测研究；不用类型作筛选。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.11",
@@ -28109,7 +28357,9 @@
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28161,13 +28411,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "空间与反应能力：设备操作、顾客引导与安全装置确认需要一定的空间感与反应能力，但没有统一的 IQ 门槛；准入以岗前培训、考核与作业资格为准。"
+              "编辑核对项：能否在培训和授权范围内准确确认位置、按规程操作并清楚引导。本页引用的O*NET资料不提供IQ录用分数；真实雇主考核另核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.18",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28283,7 +28535,9 @@
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28298,7 +28552,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.27",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28388,7 +28644,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.33",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28433,7 +28691,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28571,7 +28831,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.45",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28595,7 +28857,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "性格内向并不构成障碍；该职业以顾客沟通与现场协作为主，关键是能否清楚说明规则与安全事项。"
+              "编辑建议：用清楚说明规则、回答追问和转交异常等任务判断沟通表现；不以“内向”标签推断适任。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.47",
@@ -28610,13 +28872,15 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在顾客服务与现场沟通上有优势，但同样需要严格按规程确认安全装置。"
+              "可以用顾客沟通任务核对表现；“外向”标签不证明优势或适任，仍须按规程确认和记录。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.48",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28654,12 +28918,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是准入依据；请用岗前培训考核、作业资格与现场表现判断。"
+              "证据不足：本页未取得本职业人格分数与工作表现的实证估计；不把分数作准入依据。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28668,7 +28934,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "空间与反应能力对设备操作与顾客引导有帮助，但没有统一的 IQ 门槛；可通过岗前培训与实操建立。"
+              "本页O*NET来源没有IQ录用分数。准确操作与引导应按培训、资格和真实考核核对，不由IQ推断。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.52",
@@ -28712,7 +28978,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先按雇主与主管部门官方信息核对岗前培训与作业资格要求（如大型游乐设施操作等特种设备作业人员证），再用公开资料练习整理每日运营前检查清单与安全提示播报来验证自己的细致度与沟通能力；不要相信非官方机构的包过或包上岗承诺。"
+              "先核具体雇主的培训与岗位资格，再按材料A/B/C完成纸面核对表、提示和记录，观察细致度与沟通习惯；作品不证明能够操作设备。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.55",
@@ -28732,7 +28998,9 @@
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.56",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28756,12 +29024,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次替代性准备：按公开资料整理一份游乐设施每日运营前检查与试运行清单，并写出一段安全提示与禁止事项播报。这不构成技能测试或录用测试，也不能替代岗前培训、作业资格与实操考核。"
+              "按本页材料A/B/C做一次纸面状态核对、顾客提示与异常记录，检查能否分清已知和未知并按流程转交；不接触设备，不作放行，不能替代岗前培训、作业资格或实操考核。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28784,7 +29054,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 任务与工作活动，用于任务与工作情境判断。"
+              "O*NET展示的BLS2025年工资分位；不提供任务或人格预测。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.60",
@@ -28798,7 +29068,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 O*NET 展示：用于工资、就业与前景。"
+              "O*NET展示2025年BLS工资分位；当前就业与前景另取BLS EP2025—2035年，不能混为同一展示版本。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.61",
@@ -28812,7 +29082,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 工作情境（Work Context），用于顾客接触、户外天气、站立与工作周等比例。"
+              "O*NET39-3091.00兴趣剖面，支持CSR兴趣代码，不是个人适任诊断。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.62",
@@ -28826,7 +29096,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 详细资料，用于任务与工作活动说明。"
+              "O*NET39-3091.00工作情境，支持顾客接触、户外、站立与工作周受访比例。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.63",
@@ -28840,7 +29110,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 兴趣剖面，用于 CSR 兴趣代码来源。"
+              "O*NET39-3091.00任务与工作活动，支持设备、服务与记录任务；不提供中国资格。"
             ]
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.64",
@@ -28859,7 +29129,9 @@
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.65",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28873,7 +29145,9 @@
           },
           "id": "amusement-and-recreation-attendants.fit.personality-fit-block.66",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         }
@@ -28903,10 +29177,10 @@
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
+                "entity": "O*NET展示的BLS2025年工资分位（39-3091.00）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
                 "entity": "O*NET 39-3091.00 工作情境（Work Context）",
@@ -28918,13 +29192,13 @@
                 "entity": "《中华人民共和国特种设备安全法》",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
               },
               {
                 "entity": "《大型游乐设施安全监察规定》",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/zhengce/2021-04/22/content_5723679.htm"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
               }
             ]
           },
@@ -28934,7 +29208,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "links"
         },
@@ -28950,7 +29226,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28966,7 +29244,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -28975,7 +29255,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 39-3091.00 提供任务与工作情境（99% 每天面对面讨论、96% 持续与他人接触、91% 认为与外部顾客打交道极其重要、64% 每天户外暴露于各种天气、55% 持续站立、46% 每周至少一次需应对不愉快或愤怒的人；93% 工作周少于 40 小时）；BLS 职业就业与工资统计提供工资与就业；《中华人民共和国特种设备安全法》与《大型游乐设施安全监察规定》提供中国大陆作业资格与运营安全义务框架。风险清单为编辑归纳，不含发生概率。"
+              "O*NET提供美国任务与工作情境：99%每天面对面讨论、96%持续接触、91%认为外部顾客极其重要、64%每天户外天气暴露、55%持续站立、46%每周至少一次应对不愉快或愤怒者、93%工作周不足40小时。中国作业资格与运营安全义务由《特种设备安全法》、《大型游乐设施安全监察规定》、TSG71—2023提供。风险清单为编辑归纳，不含发生概率；BLS工资表不能证明风险。"
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.10",
@@ -28983,7 +29263,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29013,7 +29295,9 @@
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.12",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29028,7 +29312,9 @@
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.13",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29067,7 +29353,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未监控规则执行或处置不当代顾客违规会造成伤害、纠纷与运营中断。"
+              "未监控规则执行或处置顾客违规不当会造成伤害、纠纷与运营中断。"
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.16",
@@ -29131,7 +29417,9 @@
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29145,7 +29433,9 @@
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29160,7 +29450,9 @@
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.22",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29363,12 +29655,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "BLS就业预测为2025—2035年；风险情境主要依据O*NET任务及中国安全法律，工资表不证明安全风险。"
             ]
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -29396,7 +29689,9 @@
           },
           "id": "amusement-and-recreation-attendants.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29443,7 +29738,7 @@
             "rows": [
               [
                 "游乐设施操作方向",
-                "完成岗前安全培训并在带教下参与设备操作与检查。",
+                "先完成相应资格、岗前培训和授权，再按规程在带教中参与大型游乐设施操作；无资格不承担操作。",
                 "试运行检查与安全装置确认规范、异常按程序停用与上报。",
                 "公开资料整理的每日运营前检查与试运行清单。",
                 "与娱乐与休闲经理不同：承担一线设备操作与安全确认，不负责排班与经营决策。"
@@ -29482,7 +29777,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "娱乐与休闲服务员的入门岗位与初期任务怎么比较？",
           "type": "table"
@@ -29495,33 +29792,29 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：入门学历按受访项列出（64% 低于高中文凭、32% 需高中文凭或同等学历、3% 需副学士学位），职业准备等级为 Job Zone 1-2。",
-                  "中国大陆侧：一般现场服务岗位以岗前安全培训为主；大型游乐设施操作岗位属特种设备作业岗位，须取得特种设备作业人员证（作业项目“大型游乐设施操作”，项目代号 Y2）。",
-                  "两地均强调岗前安全培训与现场考核，学历门槛较低，实操能力与安全意识更关键。"
+                  "美国入门准备",
+                  "美国O*NET受访学历为64%低于高中、32%高中或同等、3%副学士；Job Zone1—2。中国一般现场服务培训按真实雇主安排，大型游乐设施操作须取得相应资格。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "作业资格与岗前培训决定可承担的操作范围：大型游乐设施操作人员须持证并在授权范围内操作。",
-                  "运营使用单位须在每日投入使用前进行试运行和例行安全检查并确认安全附件与安全保护装置，在显著位置张贴安全注意事项与警示标志。",
-                  "发现设备异常或严重事故隐患应停止使用并报告，不得带病运营。"
+                  "资格、培训与安全",
+                  "大型游乐设施操作须持相应资格并按授权范围操作。每日试运行与安全检查是运营单位义务，准备作品不证明已完成检查或获得授权。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 39-3091.00 兴趣代码为 CSR（常规型、社会型、现实型）。",
-                  "工作情境以顾客接触（99% 每天面对面、96% 持续接触）、户外天气（64% 每天）、长时间站立（55%）与短时工作周（93% 少于 40 小时）为特征。",
-                  "这些是对职业的群体性描述，不用于判断个人是否适合。"
+                  "可观察的沟通与记录",
+                  "O*NET兴趣代码CSR及美国工作情境只支持任务准备。用本页纸面材料观察信息核对、沟通和记录习惯，不作录用或人格预测。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 39-3091.00 技术清单可复核，列出该职业常用工具与技术条目。",
-                  "实际使用范围取决于雇主设备配置、票务与监控系统与安全制度。",
-                  "准备方向应按公开资料打牢顾客沟通、安全装置确认、设备检查与应急处置基础，并通过官方渠道了解岗前培训与作业资格要求。"
+                  "工具与系统核对",
+                  "O*NET列出软件技术条目；入职前核真实雇主的票务、记录及监控系统和培训安排。技术清单不证明本职业采用AI，也不是招聘样本。"
                 ]
               }
             ]
@@ -29529,9 +29822,12 @@
           "id": "amusement-and-recreation-attendants.path.employer-evidence.1",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "任务与法规支持的准备核对项（不是招聘样本）",
           "type": "cards"
         },
         {
@@ -29542,42 +29838,47 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构题面一：按公开资料整理一份游乐设施每日运营前检查与试运行清单（设备外观、安全装置、束缚装置、警示与乘客须知）。",
-                  "虚构题面二：写出一段安全提示与禁止事项播报稿（乘车须知、身高与禁忌、紧急情况指引）。",
-                  "虚构题面三：把一次现场异常（如设备异响或顾客纠纷）写成含现象、处置、升级与记录对象的记录。",
-                  "全部材料使用公开资料与模拟数据；不使用雇主的内部或安全敏感资料。"
+                  "材料：角色、状态与规则",
+                  "材料A（全为虚构）：你是入口服务练习者，没有设备操作授权。园区样例说明：设施R今日暂停；设施S须知写明身高至少1.20米、听从现场人员指引。你不得据身高自行判定安全或改变设施状态。",
+                  "材料B（虚构观察表）：09:00设施R状态牌显示“暂停”，但电子导览仍显示“开放”；09:05一位顾客询问R能否进入；09:08另一位顾客询问身高1.18米能否乘坐S。尚无负责人恢复开放通知。",
+                  "材料C（虚构流程）：服务人员核对须知并回答一般信息；状态信息冲突交值班负责人确认；记录时间、设施、原话或观察、已做动作、接收人及待确认项。不得编造设备检查、停用原因或恢复时间。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "检查清单：按设备与安全装置列出检查项、判据与处置。",
-                  "安全播报：按须知、禁忌与紧急指引结构撰写。",
-                  "异常记录：按现象—处置—升级—记录结构书写。"
+                  "任务：核对、提示与记录",
+                  "任务1：整理R状态核对表，列现场牌、电子导览、冲突、询问对象与仍未知事项；不得填“检查合格”。",
+                  "任务2：分别向两位顾客写两句提示，说明已知规则与转交现场人员核对的事项；不得承诺开放时间或作安全放行。",
+                  "任务3：按材料C填写09:05与09:08两条记录，并写值班负责人未反馈时的后续待办。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认公开资料与规程的适用性与版次，再据此整理，不使用内部资料。",
-                  "对每一处判断保留依据与不确定性，并注明参考来源。",
-                  "对涉及设备操作与安全的内容标注“以操作规程与专业判断为准，本页不构成操作指导”。"
+                  "参考答案：逐项回指题面",
+                  "参考1：R现场牌暂停、电子导览开放，信息冲突；应向值班负责人核对并记录，暂停原因、检查结果和恢复时间均未知。不能据电子导览让顾客进入。",
+                  "参考2：对R顾客可说“现场标示暂停，开放信息正在向负责人核对，请依现场指引”；对S顾客可说“样例须知至少1.20米，1.18米未满足该数值，请向现场人员核对适用须知”。不推断其他健康或资格条件。",
+                  "参考3：09:05记录R开放询问及两处信息冲突，动作是提示现场状态并转交值班负责人；09:08记录1.18米与样例1.20米条件不符，转交现场人员。接收人姓名未给，记“待确认”，不编造回执或处置完成。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "作品只用于展示准备程度与方法，不构成技能测试或录用测试，也不代表任何作业资格。",
-                  "不得在作品中包含或推断雇主的内部或安全敏感资料；实际训练与考核以主管部门与雇主规定为准。"
+                  "边界：纸面与现场权限",
+                  "仅做纸面信息、沟通与记录练习；虚构身高阈值不适用于真实设备，不能据此实施操作或放行。",
+                  "真实安全检查、试运行、停用或恢复按资格、使用维护说明书与现场授权执行；准备作品不能替代资格和培训。"
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-work-sample-data.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
-          "title": "入行练习：一次完整的娱乐与休闲服务员任务任务（虚构材料）",
+          "title": "入行练习：用完整虚构材料做服务提示与异常记录",
           "type": "cards"
         },
         {
@@ -29588,38 +29889,38 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项要求（岗前安全培训与考核、特种设备作业人员证（操作类岗位）、健康条件、安全与应急培训），列出核对来源与状态。",
-                  "把每项要求对应到特种设备安全技术规范、地方监管规定或雇主制度的具体要求，注明查看日期。",
-                  "记录尚未满足或个人需补强的项目与计划。"
+                  "状态核对表",
+                  "沿用材料A/B列出R现场牌与电子导览、矛盾、询问对象和未知项；S仅比较给定身高条件，不写检查合格。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对是否来自主管部门或雇主官方渠道，是否标注时间与适用范围。",
-                  "资料复核：核对练习材料只使用公开资料与模拟数据。",
-                  "计划复核：核对培训与资格提升计划是否可持续，避免突击。"
+                  "两段服务提示",
+                  "分别回答R开放询问和S身高问题，区分已知信息与须转交现场人员的事项，不承诺恢复开放。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向、已满足与待补强项、时间安排。",
-                  "附上公开资料清单与来源链接，注明查看日期。"
+                  "两条异常记录",
+                  "按材料C记录09:05和09:08的观察、动作、接收人及待确认项；没有真实反馈就不填处置完成。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "准备记录应展示对公开资料与规程的理解与自身服务与安全意识，而不是内部或安全敏感资料。",
-                  "不把网络传闻或非官方信息写入准备记录。"
+                  "一页复盘",
+                  "检查每个结论能回指A/B/C；列出暂停原因、恢复时间、接收人姓名未给等未知项，说明纸面练习与作业资格的区别。"
                 ]
               }
             ]
           },
           "id": "amusement-and-recreation-attendants.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -29670,7 +29971,9 @@
           "id": "amusement-and-recreation-attendants.path.interview-probation.1",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "面试与试用期可能考察什么，哪些结论不能推断？",
           "type": "table"
@@ -29683,50 +29986,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜招聘与培训信息核对",
-                  "按雇主与主管部门官方渠道核对岗前培训、作业资格与健康条件要求，记录待确认项。"
+                  "第1天｜明确角色与授权",
+                  "阅读A/B/C，列明入口服务角色没有设备操作授权。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜法规与规程要点",
-                  "阅读《特种设备安全法》与《大型游乐设施安全监察规定》要点，整理关键规定清单。"
+                  "第2天｜整理材料条件与记录字段",
+                  "摘出样例R暂停、S至少1.20米及C记录字段；另核法律第14、41—43条用途。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜运营前检查清单",
-                  "按公开资料整理一份游乐设施每日运营前检查与试运行清单。"
+                  "第3天｜完成状态核对表",
+                  "完成R状态核对表，保留现场牌与电子导览冲突以及未知项。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
                   "第 4 天｜安全提示播报",
-                  "写出一段安全提示与禁止事项播报稿（乘车须知、禁忌与紧急指引）。"
+                  "完成R和S两段服务提示，1.18米不满足样例1.20米；不作安全放行。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
                   "第 5 天｜顾客沟通练习",
-                  "整理常见顾客问题与秩序维护话术，并列出升级上报情形。"
+                  "模拟顾客追问开放时间，练习说明未获负责人反馈并按流程转交。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
                   "第 6 天｜异常处置记录",
-                  "把一次现场异常（设备异响或顾客纠纷）写成含现象、处置、升级与记录对象的记录。"
+                  "完成09:05和09:08两条记录；接收人姓名与回执未给就标待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
                   "第 7 天｜复盘与决策",
-                  "复盘一周准备：是否愿意长期按规程执行、在户外与高峰客流中提供服务并对顾客安全负责，据此判断是否继续。"
+                  "将表、提示、记录对照参考答案复盘，判断自己对准确记录和顾客沟通的耐受；核下一步培训要求。"
                 ]
               }
             ]
@@ -29754,7 +30057,9 @@
           },
           "id": "amusement-and-recreation-attendants.path.seven-day-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "七天结束时如何判断要不要继续",
           "type": "list"
@@ -29788,7 +30093,7 @@
                 "决定能否独立上岗承担现场服务职责",
                 "通常必备",
                 "按雇主培训制度与安全要求",
-                "数天至数周",
+                "按真实雇主安排核对；本页不设统一周期",
                 "未通过培训与考核不得独立上岗"
               ],
               [
@@ -29805,7 +30110,7 @@
                 "安全员与管理岗位人员",
                 "决定能否承担安全管理职责",
                 "相关岗位需要",
-                "按地方要求取得特种设备安全管理类证书（项目代号 A）",
+                "按主管部门规则核对相应安全管理资格（A）与职责范围",
                 "按考核与发证周期",
                 "未取得资格不得承担相应安全管理职责"
               ],
@@ -29844,7 +30149,10 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -29864,7 +30172,9 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29884,7 +30194,9 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "title": "招聘样本说明",
           "type": "notice"
@@ -29901,16 +30213,16 @@
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
+                "entity": "O*NET展示的BLS2025年工资分位（39-3091.00）",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
                 "entity": "《中华人民共和国特种设备安全法》",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -29925,7 +30237,10 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "nbs"
           ],
           "type": "links"
         },
@@ -29940,7 +30255,10 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.11",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -29955,7 +30273,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.12",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29984,7 +30304,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.14",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -29998,7 +30320,9 @@
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.15",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30071,7 +30395,10 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.20",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual"
           ],
           "type": "prose"
         },
@@ -30080,14 +30407,16 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业的资格由岗前安全培训与（操作类岗位的）特种设备作业资格管理：大型游乐设施操作人员须取得特种设备作业人员证并在授权范围内操作；设备维护保养与定期检验由具备资格的单位与人员实施；安全管理人员按地方要求取得特种设备安全管理类证书。救生员与滑雪巡逻等其他休闲保护服务岗位须另行取得相应资格，与本职业不通用；取得资格前的作业须在持有资格人员监督指导下进行。"
+              "大型游乐设施操作人员须取得相应作业资格并按授权范围操作；一般票务、引导、清洁岗位的培训按雇主安排。维护保养按安全技术规范配备相应资格人员与工具，定期检验由依法核准的机构实施。未持证者不得承担相应操作，纸面准备不能替代资格。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.21",
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30103,7 +30432,11 @@
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-tsg",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30112,7 +30445,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按岗前培训、作业资格与现场经验体系：从完成岗前安全培训与考核、取得作业资格并独立值守，到承担多设备操作与新人带教职责，再到转向安全员、组长或运营管理岗位。晋升通常与作业资格范围、安全记录、服务表现与管理培训相关；转向管理岗位需要补足排班、安全制度与经营能力。"
+              "以下三条路径和四个能力阶段是编辑组织方式：设备操作、票务服务、场地保障各有不同准备。带教或晋升须按真实雇主安排核对；本页不保证获得管理岗位，也不统一规定经历年限。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.23",
@@ -30141,12 +30474,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "O*NET展示的BLS2025年工资分位；就业预测另见BLS2025—2035年表。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -30155,12 +30489,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国特种设备安全法》与《大型游乐设施安全监察规定》（中国大陆作业资格与运营安全要求）。"
+              "《中华人民共和国特种设备安全法》第14、41—43条：资格、异常处理与每日检查。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30169,12 +30505,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《大型游乐设施安全技术规程》（TSG 71-2023）、地方合规指引与国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆口径）。"
+              "国家统计局2025年城镇单位工资：宽口径参照，不规定游乐设施作业资格。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -30198,12 +30537,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在带教下参与设备操作与检查。"
+              "先完成岗位培训与资格核对；未取得相应操作资格前不承担大型游乐设施操作，仅在规定培训中学习或做纸面记录练习。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30233,7 +30574,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.31",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30262,7 +30605,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.33",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30291,7 +30636,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.35",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30306,7 +30653,9 @@
           "id": "amusement-and-recreation-attendants.path.career-path-block.36",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30320,7 +30669,9 @@
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.37",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride"
           ],
           "type": "prose"
         },
@@ -30694,7 +31045,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长经历与基础管理培训；按雇主规定。"
+              "管理岗位经历与培训要求按具体雇主招聘核对，本页未取得统一年限。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.63",
@@ -30884,7 +31235,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "独立完成设备检查、小修调整与上油、清洁与库存补给。"
+              "在培训和授权范围内做日常检查、清洁与库存补给；涉及大型游乐设施修理或维护保养时按安全技术规范配置相应资格人员。"
             ]
           },
           "id": "amusement-and-recreation-attendants.path.career-path-block.76",
@@ -31086,10 +31437,10 @@
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：39-3091",
+                "entity": "O*NET展示的BLS2025年工资分位（39-3091.00）",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -31101,7 +31452,7 @@
                 "entity": "《大型游乐设施安全监察规定》",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.gov.cn/zhengce/2021-04/22/content_5723679.htm"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
               },
               {
                 "entity": "娱乐与休闲经理（不含赌博）",
@@ -31158,7 +31509,8 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "links"
         },
@@ -31167,14 +31519,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧就业前景（BLS 口径，经 O*NET 展示）：39-3091 在 2024 年在岗约 392,300 人，2024—2034 年平均增长 3% 至 4%（2034 年约 405,500 人），年均约 102,400 个职位空缺，多数来自替代需求；该职业主要行业为艺术、娱乐与休闲以及政府，O*NET 标注为前景光明。年均空缺数很高，主要反映该职业的高流动性与季节性（93% 工作周少于 40 小时、17% 为季节性日程），不等于净新增岗位，也不代表个人就业保证，且不能外推为中国大陆。中国大陆侧没有对应的官方职业就业预测，本页不提供数字；岗位需求与休闲娱乐消费、旅游客流与场馆建设相关，本页不据此外推。"
+              "证据不足：本页未取得中国大陆对应职业的全国就业预测；雇主岗位需求应按真实招聘、设施运营和班次核对。美国BLS EP表39-3091：2025年约408,400人，2035年约423,600人，净增约15,200人（3.7%）；年均约100,400个空缺，包含增长与替代需求。O*NET任务资料另描述现场服务、短工时和季节安排，不能据此分解空缺来源，O*NET仍展示旧预测。两者均不能保证个人就业或外推中国。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.8",
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31197,7 +31550,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024年"
+              "2025年"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.10",
@@ -31211,12 +31564,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 口径：39-3091 在 2024 年在岗约 392,300 人。"
+              "BLS EP表39-3091直接提供2025年约408,400人，覆盖含自雇就业；O*NET仍显示旧预测。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31267,12 +31621,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "约392,300人（2024年）"
+              "约408,400人（2025年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31295,12 +31650,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035年"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.17",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31309,7 +31665,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测 39-3091 在 2024—2034 年平均增长 3% 至 4%（2034 年约 405,500 人）。"
+              "美国全国就业预测，含自雇；不代表雇主承诺，也不能外推为中国大陆。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.18",
@@ -31365,12 +31721,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）（2024—2034年）"
+              "3.7%（2025—2035年）"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31393,12 +31750,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035年"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31407,12 +31765,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测 39-3091 在 2024—2034 年年均约 102,400 个职位空缺，多数来自替代需求。"
+              "BLS 预测 39-3091 在 2025—2035 年年均约 100,400 个职位空缺，多数来自替代需求。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31421,7 +31780,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均空缺数很高，主要反映该职业的高流动性与季节性（93% 工作周少于 40 小时、17% 季节性日程）；空缺数不等于净新增岗位，不能外推为中国大陆。"
+              "空缺包含增长与替代需求，不能当作净新增或个人就业保证。O*NET的短工时、季节性比例是另一项调查，不能据此分解空缺来源。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.26",
@@ -31463,12 +31822,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均约102,400个"
+              "年均约100,400个"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31491,12 +31851,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国）。"
+              "BLS 职业就业与工资统计（OEWS）与 2025—2035 年就业预测（美国）。"
             ]
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -31510,7 +31871,8 @@
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.32",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31524,7 +31886,10 @@
           },
           "id": "amusement-and-recreation-attendants.market-signals.market-signal-card.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-tsg"
           ],
           "type": "prose"
         },
@@ -31912,13 +32277,13 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.comparison"
               },
               {
-                "answer": "没有证据支持“被取代”。票务、监控与设备监测系统可能增强效率与预警，但现场设备操作、安全装置确认、顾客引导与应急处置仍由持证或受训人员承担；本页引用的 2024—2034 年平均增长 3% 至 4% 与年均约 102,400 个空缺为 BLS 官方口径，本页不据技术名词推断岗位增减。",
+                "answer": "证据不足：本页未取得该职业AI采用率或岗位替代因果估计。票务、监控与设备监测系统可能增强效率与预警，但现场设备操作、安全装置确认、顾客引导与应急处置仍由持证或受训人员承担；本页引用的 2025—2035 年增长 3.7% 与年均约 100,400 个空缺为 BLS 官方口径，本页不据技术名词推断岗位增减。",
                 "id": "amusement-and-recreation-attendants.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.ai"
               },
               {
-                "answer": "中国大陆未单列“娱乐与休闲服务员”职业工资，本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如文化、体育和娱乐业非私营 129,447 元/年、公共管理社会保障和社会组织非私营 119,465 元/年）；这些门类覆盖大量非本职业岗位，不能当作本职业工资。",
+                "answer": "本页采用的国家统计局工资资料未单列“娱乐与休闲服务员”，本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如文化、体育和娱乐业非私营 129,447 元/年、公共管理社会保障和社会组织非私营 119,465 元/年）；这些门类覆盖大量非本职业岗位，不能当作本职业工资。",
                 "id": "amusement-and-recreation-attendants.faq.4",
                 "question": "中国大陆的工资怎么理解？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.china-pay"
@@ -31942,7 +32307,7 @@
                 "question_key": "career.faq.amusement-and-recreation-attendants.risk"
               },
               {
-                "answer": "BLS 预测 39-3091 在 2024—2034 年平均增长 3% 至 4%（2034 年约 405,500 人），年均约 102,400 个职位空缺且多数来自替代需求；2024 年在岗约 392,300 人（经 O*NET 展示），O*NET 标注为前景光明。年均空缺数很高，主要反映该职业的高流动性与季节性（93% 工作周少于 40 小时），不等于净新增岗位，也不能外推为中国大陆。",
+                "answer": "BLS EP直接提供39-3091：2025年约408,400人，2035年约423,600人，净增约15,200人（3.7%）；年均约100,400个空缺，含增长与替代需求，不等于净新增或个人就业保证。O*NET仍展示旧预测，其短工时比例不能解释空缺原因。不能外推中国。",
                 "id": "amusement-and-recreation-attendants.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.amusement-and-recreation-attendants.outlook"
@@ -31969,7 +32334,13 @@
             "onet",
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-qual",
+            "ep",
+            "oews",
+            "nbs"
           ],
           "type": "faq"
         },
@@ -31992,14 +32363,19 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 39-3091.00 娱乐与休闲服务员职业摘要与详细资料（前景光明）；BLS 职业就业与工资统计（OEWS）：39-3091 与 2024—2034 年就业预测；《中华人民共和国特种设备安全法》；《大型游乐设施安全监察规定》与《大型游乐设施安全技术规程》（TSG 71-2023）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "O*NET 39-3091.00 娱乐与休闲服务员职业摘要与详细资料（前景光明）；BLS 职业就业与工资统计（OEWS）：39-3091 与 2025—2035 年就业预测；《中华人民共和国特种设备安全法》；《大型游乐设施安全监察规定》与《大型游乐设施安全技术规程》（TSG 71-2023）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.2",
           "source_refs": [
             "onet",
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "cn-tsg",
+            "ep",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -32008,12 +32384,13 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮核对与更新日期：2026-10-02；2025年工资、2025—2035年BLS预测与O*NET仍展示的旧预测分开。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.3",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -32022,13 +32399,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国侧工资与就业为 BLS 职业就业与工资统计（OEWS，2025 年 5 月）与 2024—2034 年就业预测，均为美国单一职业口径，不能外推为中国大陆；本页不提供分行业工资中位数（BLS 未公开可读取的该职业分行业中位数，未使用第三方估算）。该职业 2024—2034 年平均增长 3% 至 4%，年均约 102,400 个职位空缺且多数来自替代需求，反映高流动性与季节性（93% 工作周少于 40 小时、17% 季节性日程），本页如实标注且不把空缺数表述为净新增。中国大陆侧只提供国家统计局 2025 年行业门类与单位类型的宽口径参照，并逐行标注为本职业未单列、仅作对照；大型游乐设施操作人员属特种设备作业人员，须按《中华人民共和国特种设备安全法》取得相应资格，运营使用单位须落实每日试运行与例行安全检查、警示与乘客须知、应急预案与演练等要求。本页不构成法律、医疗或操作指导。"
+              "证据不足：本轮未取得本职业可核对的分行业工资中位数及中国大陆本职业全国工资分布；中国2025年城镇单位与行业工资仅作宽口径参照。美国2025年5月工资为BLS OEWS经O*NET展示的职业分位；2025—2035年就业预测直接取BLS EP，含自雇，与OEWS雇员覆盖不同。年均空缺包含增长与替代需求，不能解释为净新增、AI效应或季节性因果。中国大型游乐设施操作资格与每日试运行检查等义务见《特种设备安全法》、《大型游乐设施安全监察规定》、TSG71—2023登记来源；本页不替代法律或操作规程。"
             ]
           },
           "id": "amusement-and-recreation-attendants.sources.source-card.4",
           "source_refs": [
             "onet",
-            "onet"
+            "onet",
+            "cnlaw",
+            "cnride",
+            "ep",
+            "nbs"
           ],
           "type": "prose"
         }
@@ -32103,7 +32484,7 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
@@ -32111,47 +32492,47 @@
                 "evidence_type": "exact",
                 "id": "onet",
                 "limitation": "用于职业身份、任务与兴趣剖面（CSR）；美国单一职业口径。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 娱乐与休闲服务员职业摘要（前景光明）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
-                "limitation": "用于工资中位数与就业规模的官方口径。",
-                "market": "来源覆盖地区",
-                "name": "BLS 职业就业与工资统计（OEWS）：39-3091",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "limitation": "雇员工资覆盖与2,080小时年化方法，不支持EP就业规模。",
+                "market": "美国",
+                "name": "BLS OEWS工资统计方法",
+                "period": "OEWS现行统计方法；查阅2026-10-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes393091.htm"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
-                "limitation": "用于增长幅度与年均职位空缺（含高流动性与季节性说明）。",
-                "market": "来源覆盖地区",
-                "name": "BLS 2024—2034 年就业预测（39-3091）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "limitation": "2025与2035年就业、净变化及年均空缺；含自雇，与OEWS工资覆盖不同。",
+                "market": "美国",
+                "name": "BLS2025—2035年就业预测表39-3091",
+                "period": "2025年就业；2025—2035年预测",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
@@ -32159,15 +32540,15 @@
                 "evidence_type": "exact",
                 "id": "oews",
                 "limitation": "用于时薪与年薪 10/25/50/75/90 分位数值与资料期。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（39-3091.00）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2025年5月工资",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "industry_proxy",
                   "访问 2026-09-15"
@@ -32175,9 +32556,9 @@
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
                 "limitation": "用于中国大陆民用行业门类与单位类型年平均工资；不含本职业单列工资。",
-                "market": "来源覆盖地区",
+                "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2025年工资；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
@@ -32191,28 +32572,28 @@
                 "evidence_type": "contextual",
                 "id": "cnse",
                 "limitation": "用于中国大陆大型游乐设施每日投入使用前试运行与例行安全检查、作业人员经考核合格持证上岗等要求的框架说明（与《中华人民共和国特种设备安全法》并行适用）。",
-                "market": "来源覆盖地区",
+                "market": "中国大陆",
                 "name": "《特种设备安全监察条例》（国务院，含大型游乐设施每日试运行与作业人员持证要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2003年公布；2009年修订",
                 "publisher": "国务院",
                 "scope": "contextual",
                 "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/flfg/2009-02/06/content_1225116.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnride",
-                "limitation": "用于运营使用单位的试运行检查、警示与乘客须知、应急预案与演练、持证操作人员配备等要求。",
-                "market": "来源覆盖地区",
-                "name": "《大型游乐设施安全监察规定》与《大型游乐设施安全技术规程》（TSG 71-2023）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "limitation": "中国大陆运营、人员培训、试运行检查、乘客须知和应急管理；TSG另列。",
+                "market": "中国大陆",
+                "name": "《大型游乐设施安全监察规定》（2021年修正）",
+                "period": "2013年公布；2021年修正",
                 "publisher": "国家市场监督管理总局（原国家质检总局）",
                 "scope": "contextual",
-                "url": "https://www.gov.cn/zhengce/2021-04/22/content_5723679.htm"
+                "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/fgs/art/2025/art_9956bbbb4120480db071119c3957f81e.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32223,15 +32604,15 @@
                 "evidence_type": "contextual",
                 "id": "cnclass",
                 "limitation": "用于中国大陆相关服务岗位归类说明；大典未单列“娱乐与休闲服务员”。",
-                "market": "来源覆盖地区",
+                "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》社会生产服务和生活服务人员（4）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2022年版",
                 "publisher": "人力资源和社会保障部（职业分类大典）",
                 "scope": "contextual",
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32239,15 +32620,15 @@
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（顾客接触、户外天气、站立与工作周）。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（工作情境）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32255,15 +32636,15 @@
                 "evidence_type": "contextual",
                 "id": "facilities",
                 "limitation": "用于该职业常用工具与技术条目；不表示技术采用率。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 技术清单",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/hot_tech/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32271,15 +32652,15 @@
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（任务与工作活动）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32287,9 +32668,9 @@
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与冲突和天气暴露等比例。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（工作时间与环境暴露）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
@@ -32303,15 +32684,15 @@
                 "evidence_type": "contextual",
                 "id": "health",
                 "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
-                "market": "来源覆盖地区",
+                "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "工资总额统计规定；原资料保留",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/txzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32319,15 +32700,15 @@
                 "evidence_type": "contextual",
                 "id": "ilo",
                 "limitation": "用于兴趣代码 CSR（常规型、社会型、现实型）说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 职业摘要（兴趣剖面 CSR）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32335,15 +32716,15 @@
                 "evidence_type": "contextual",
                 "id": "editor",
                 "limitation": "用于入门学历受访比例与职业准备等级说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（学历与培训要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32351,15 +32732,15 @@
                 "evidence_type": "contextual",
                 "id": "nist",
                 "limitation": "用于职业概述与相关职业入口。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 自定义职业档案",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32367,15 +32748,15 @@
                 "evidence_type": "contextual",
                 "id": "arxiv",
                 "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32383,15 +32764,15 @@
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务与现场服务流程说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32399,15 +32780,15 @@
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "用于票务、检查与事件记录要求说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（记录与报告要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32415,15 +32796,15 @@
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
                 "limitation": "用于任务清单参考。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 职业摘要（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32431,15 +32812,15 @@
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述与职责边界。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 任务描述",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32447,15 +32828,15 @@
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
                 "limitation": "用于职业属性说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 职业摘要（职业属性）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32463,15 +32844,15 @@
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
                 "limitation": "用于数据口径说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（数据说明）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32479,15 +32860,15 @@
                 "evidence_type": "contextual",
                 "id": "census",
                 "limitation": "用于主要行业（艺术、娱乐与休闲；政府）说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 行业分布",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2024年行业分布",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32495,15 +32876,15 @@
                 "evidence_type": "contextual",
                 "id": "msresearch",
                 "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
                   "访问 2026-09-15"
@@ -32511,15 +32892,15 @@
                 "evidence_type": "exact",
                 "id": "onet-wages",
                 "limitation": "用于全国工资分位数值与资料期核对。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 全国工资分位页面",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "2025年5月工资",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/39-3091.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
@@ -32527,12 +32908,76 @@
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "用于检查、清洁与记录过程说明。",
-                "market": "来源覆盖地区",
+                "market": "美国",
                 "name": "O*NET OnLine 39-3091.00 详细资料（检查与清洁记录要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／中国特种设备法律法规（现行）",
+                "period": "职业页面更新2026年；本轮查阅2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/39-3091.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "cnlaw",
+                "limitation": "第14、41—43、69条：资格、异常处理、每日检查与应急。",
+                "market": "中国大陆",
+                "name": "《中华人民共和国特种设备安全法》",
+                "period": "2013年通过；2014-01-01施行",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-tsg",
+                "limitation": "大型游乐设施技术与使用管理要求；不能作为通用纸面操作指导。",
+                "market": "中国大陆",
+                "name": "《大型游乐设施安全技术规程》（TSG71—2023）",
+                "period": "2023年发布；2024-03-01施行",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/aqjsgf/art/2025/art_18ed3bbd68a445cc8f8896924d70ca71.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "cn-qual",
+                "limitation": "用于Y2操作、Y1修理与A安全管理的项目区分；办证按当前主管部门流程。",
+                "market": "中国大陆",
+                "name": "特种设备作业人员证书换发对应表（市监特设〔2019〕32号附件2）",
+                "period": "2019年",
+                "publisher": "国家市场监督管理总局",
+                "scope": "contextual",
+                "url": "https://www.samr.gov.cn/tzsbj/dtzb/gzdt/art/2019/art_32e551419a794822ba116151f3379cad.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "oews-method",
+                "limitation": "年薪通常采用2,080小时年化，不是兼职人员实际全年收入。",
+                "market": "美国",
+                "name": "BLS OEWS常见问题：工资覆盖与年化",
+                "period": "现行方法；查阅2026-10-02",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -33000,7 +33445,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国法律",
+            "类型": "美国官方工作情境",
             "适用范围": {
               "$item": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33022,7 +33467,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国监管规定",
+            "类型": "美国官方职业任务",
             "适用范围": {
               "$item": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33044,7 +33489,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国官方统计",
+            "类型": "美国官方职业资料",
             "适用范围": {
               "$item": "amusement-and-recreation-attendants.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35869,7 +36314,7 @@
       },
       "hero": {
         "h1": "娱乐与休闲服务员",
-        "quick_answer": "娱乐与休闲服务员在游乐园与休闲设施售票核验、引导顾客并介绍设施与规则，操作游乐设施与其他自动化设备并为顾客确认安全装置，监控规则与安全程序并在必要时升级处置，检查设备并做小修调整、清洁设备与场地、维护库存，并记录出勤、销售与维修活动。本页给出美国 OEWS 工资分位与 BLS 就业预测（平均增长、年均约 102,400 个空缺），中国侧仅提供行业口径与特种设备作业资格框架参照。",
+        "quick_answer": "娱乐与休闲服务员在游乐园与休闲设施售票核验、引导顾客并介绍设施与规则，操作游乐设施与其他自动化设备并为顾客确认安全装置，监控规则与安全程序并在必要时升级处置，检查设备并做小修调整、清洁设备与场地、维护库存，并记录出勤、销售与维修活动。本页给出美国 OEWS 工资分位与 BLS 就业预测（平均增长、年均约 100,400 个空缺），中国侧仅提供行业口径与特种设备作业资格框架参照。",
         "title": "娱乐与休闲服务员"
       },
       "market_signal_card": {
@@ -36420,7 +36865,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 2024—2034 年就业预测（年均约 102,400 个空缺）",
+            "label": "BLS 2025—2035 年就业预测（年均约 100,400 个空缺）",
             "secondary_value": null,
             "value": {
               "$item": "amusement-and-recreation-attendants.profile.onet-structured-fields-block.4",
@@ -37497,7 +37942,7 @@
         "occupation_scope": "娱乐与休闲服务员",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37526,84 +37971,84 @@
       },
       {
         "derivation": null,
-        "display_value": "392,300 人（2024 年）",
+        "display_value": "408,400 人（2025 年）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "在岗就业人数",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2024年",
+        "period": "2025年",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3% 至 4%（平均）",
+        "display_value": "3.7%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约102,400个",
+        "display_value": "年均约100,400个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（艺术、娱乐与休闲）",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "查询 2026-09-15",
+        "period": "有限查阅2026-10-02；未取得分行业中位数",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（娱乐与主题公园）",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "查询 2026-09-15",
+        "period": "有限查阅2026-10-02；未取得分行业中位数",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（政府）",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "查询 2026-09-15",
+        "period": "有限查阅2026-10-02；未取得分行业中位数",
         "source_refs": [
           "operations"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：未取得该行业本职业工资中位数（本轮未取得可核对的该职业分行业工资中位数，不使用第三方估算）",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（其他行业）",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "查询 2026-09-15",
+        "period": "有限查阅2026-10-02；未取得分行业中位数",
         "source_refs": [
           "operations"
         ]
@@ -37614,7 +38059,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37626,7 +38071,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37638,7 +38083,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37650,7 +38095,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37662,7 +38107,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "租赁和商务服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37674,7 +38119,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37686,7 +38131,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "教育年平均工资（城镇非私营单位）",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37698,7 +38143,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "公共管理、社会保障和社会组织年平均工资（城镇非私营单位）",
-        "occupation_scope": "娱乐与休闲服务员",
+        "occupation_scope": "国家统计局城镇单位或规模以上企业宽口径，不是本职业工资",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37761,7 +38206,7 @@
         "occupation_scope": "娱乐与休闲服务员",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37802,14 +38247,14 @@
       },
       {
         "derivation": null,
-        "display_value": "3% 至 4%（平均）（2024—2034）",
+        "display_value": "3.7%（2025—2035）",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
         "occupation_scope": "娱乐与休闲服务员",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "bls"
+          "ep"
         ]
       }
     ]
@@ -37870,7 +38315,7 @@
       "text": "娱乐与休闲服务员：任务、工资与就业前景（O*NET 39-3091，前景光明）"
     }
   },
-  "source_content_sha256": "f44a20be0860a4214cd56b3966bcb6bf90cd5fb264877d7b4bfffc48416d14fe",
+  "source_content_sha256": "fce9cca13ca9b6ab51b0e4246f0a4a1b899df91ce588a4ec0485bd01a670b24b",
   "subject": {
     "canonical_slug": "amusement-and-recreation-attendants",
     "name": "娱乐与休闲服务员",

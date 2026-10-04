@@ -13184,25 +13184,33 @@
                 "question": "工资和实际收入怎么理解？",
                 "question_key": "career.faq.nurse-anesthetists-nurse-midwives-and-nurse-practitioners.salary",
                 "source_refs": [
-                  "onet-wages"
+                  "onet-wages",
+                  "mohrss-wage",
+                  "nbs-wages"
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 65% 硕士学位、26% 博士学位、4% 学士学位；该职业要求为接受过专业研究生教育的注册护士，美国通常需完成经认证的高级实践护理研究生项目并取得专业认证。中国大陆路径为护理专业教育加护士执业注册与临床经验，国内未设与 O*NET 执业护士对应的独立处方与诊断授权岗位。",
+                "answer": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 65% 硕士学位、26% 博士学位、4% 学士学位；该职业要求为接受过专业研究生教育的注册护士，美国通常需完成经认证的高级实践护理研究生项目并取得专业认证。中国大陆路径为护理专业教育加护士执业注册与临床经验，国家层面未设与 O*NET 执业护士对应的独立处方与诊断授权岗位；深圳经济特区为地区例外：依《深圳经济特区医疗条例》第六十五条，符合条件的专科护士经培训考核与机构授权，可在规定范围内开具检查/治疗申请与外用药（2024 年起实施，限目录与机构授权，不等同于全国独立处方权）。",
                 "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.faq.7",
                 "question": "需要什么学历和训练？",
                 "question_key": "career.faq.nurse-anesthetists-nurse-midwives-and-nurse-practitioners.education",
                 "source_refs": [
-                  "onet-education"
+                  "onet-education",
+                  "cn-nurse-regulation",
+                  "cn-nurse-registration",
+                  "sz-medical-regulation"
                 ]
               },
               {
-                "answer": "美国须持有州级注册护士执照，完成高级实践护理研究生教育，取得 Family／Adult-Gerontology 等专业认证，并满足州级高级实践护理授权与执业协议要求。中国大陆护士须经执业注册取得《护士执业证书》（有效期 5 年）方可从事护理活动；中国大陆不因培训或职称取得处方权。",
+                "answer": "美国须持有州级注册护士执照，完成高级实践护理研究生教育，取得 Family／Adult-Gerontology 等专业认证，并满足州级高级实践护理授权与执业协议要求。中国大陆护士须经执业注册取得《护士执业证书》（有效期 5 年）方可从事护理活动；国家层面护士不因培训或职称取得独立处方与诊断权。深圳经济特区为地区例外：依《深圳经济特区医疗条例》第六十五条，符合条件的专科护士经培训考核与机构授权，可在目录限定的检查/治疗申请与外用药范围内开具，不构成全国独立处方权。",
                 "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.faq.8",
                 "question": "是否必须取得专门资格？",
                 "question_key": "career.faq.nurse-anesthetists-nurse-midwives-and-nurse-practitioners.credentials",
                 "source_refs": [
-                  "cn-nurse-regulation"
+                  "onet-education",
+                  "cn-nurse-regulation",
+                  "cn-nurse-registration",
+                  "sz-medical-regulation"
                 ]
               },
               {
@@ -13236,12 +13244,13 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "本页证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或执业授权；诊断、开具检查与处方须由在相应法域取得执业资格并在授权范围内的人员作出，中国大陆护士不具处方权，诊疗决定权属医师。"
+              "本页证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或执业授权；诊断、开具检查与处方须由在相应法域取得执业资格并在授权范围内的人员作出。中国大陆国家层面护士不具独立处方与诊断权，诊疗决定权属医师；深圳经济特区为地区例外，符合条件的专科护士经培训考核与机构授权，可在规定范围内开具检查/治疗申请与外用药（《深圳经济特区医疗条例》第六十五条）。"
             ]
           },
           "id": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners.sources.boundary-notice.2",
           "source_refs": [
-            "cn-nurse-regulation"
+            "cn-nurse-regulation",
+            "sz-medical-regulation"
           ],
           "type": "prose"
         }
@@ -13592,7 +13601,7 @@
                 ],
                 "evidence_type": "national administrative regulation",
                 "id": "cn-nurse-regulation",
-                "limitation": "为卫生健康机构公开解读中引用的条文；中国大陆护士不具处方权，诊疗决定权属医师，具体岗位职责由机构与主管部门规定。",
+                "limitation": "为卫生健康机构公开解读中引用的条文；中国大陆国家层面护士不因培训或职称取得独立处方与诊断权，诊疗决定权属医师；深圳经济特区例外见《深圳经济特区医疗条例》第六十五条（经培训考核、机构授权、目录限定的检查/治疗申请与外用药），具体岗位职责由机构与主管部门规定。",
                 "market": "CN",
                 "name": "《护士条例》（国务院令第 517 号，2020 年修订）",
                 "period": "2008-05-12 施行，2020 年修订；accessed 2026-09-26",
@@ -13616,6 +13625,22 @@
                 "publisher": "国家卫生健康委员会",
                 "scope": "exact",
                 "url": "https://www.nhc.gov.cn/wjw/c100221/202201/924b1bc5efd7489e8041f98799e06037.shtml"
+              },
+              {
+                "accessed_at": "2026-09-30",
+                "details": [
+                  "第六十五条规定符合条件的专科护士经培训考核与机构授权，可在规定范围内开具检查与治疗申请以及外用药处方。",
+                  "深圳自 2024 年起实施配套的专科护士培训与授权管理，权限限目录与机构授权，属地区性有限授权。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "sz-medical-regulation",
+                "limitation": "仅适用深圳经济特区，为经培训考核、机构授权与目录限定的检查/治疗申请与外用药权限，不构成全国范围的独立处方权，也不替代《护士条例》与《护士执业注册管理办法》。",
+                "market": "中国",
+                "name": "深圳市：《深圳经济特区医疗条例》（第六十五条）",
+                "period": "现行有效（深圳经济特区法规）；accessed 2026-09-30",
+                "publisher": "深圳市人民代表大会常务委员会",
+                "scope": "jurisdiction_specific",
+                "url": "https://www.sz.gov.cn/cn/xxgk/zfxxgj/zcfg/content/post_10144785.html"
               }
             ]
           },
@@ -14127,7 +14152,7 @@
         "entry_heading": "从受监督学习到专科方向与质量改进",
         "heading": "执业护士的入行、资格与职业发展路径",
         "locale_requirements": {
-          "credential_boundary": "学历、注册护士执照、高级实践护理教育、专业认证、州级执业授权与机构岗位授权是不同状态；中国大陆不因培训或职称取得处方权，任一证书都不自动赋予诊断与处方权限。",
+          "credential_boundary": "学历、注册护士执照、高级实践护理教育、专业认证、州级执业授权与机构岗位授权是不同状态；中国大陆国家层面不因培训或职称取得独立处方与诊断权，任一证书都不自动赋予诊断与处方权限；深圳经济特区作为地区例外，符合条件的专科护士经培训考核与机构授权，可在目录限定的检查/治疗申请与外用药范围内开具（《深圳经济特区医疗条例》第六十五条），该地方有限权限不等于全国独立处方权。",
           "jurisdiction": "本页职业事实采用美国 O*NET 29-1171.00 口径；美国执照与认证参考 O*NET 教育要求、认证清单与州监管要求；中国执业注册、职业健康监护与病情危急报告参考《护士条例》与《护士执业注册管理办法》。其他辖区与机构要求须另查现行法规与机构制度。",
           "summary": "O*NET 将本职业列为 Job Zone 5（SVP 8.0 及以上），教育调查显示 65% 硕士学位、26% 博士学位、4% 学士学位，该职业要求为接受过专业研究生教育的注册护士。中国大陆护士须经执业注册取得《护士执业证书》（有效期 5 年），不具处方权，诊疗决定权属医师。"
         },
@@ -15003,7 +15028,7 @@
             "limitation": "调查对象为企业，公立医院等事业单位岗位不完全覆盖，且不单列本职业。",
             "metric": "中国职业中类工资价位（代理值）",
             "occupation_scope": "人社部 2024 年企业薪酬调查，卫生专业技术人员（职业中类 205）",
-            "source_id": "nbs",
+            "source_id": "mohrss",
             "value": "中位 6.36 万元/年；10%—90% 分位 3.50—14.51 万元/年（2024）"
           }
         ],
@@ -15457,7 +15482,7 @@
           "source": "本页职业事实来自 O*NET 29-1171.00 官方档案（定义、27 项任务、工作情境、兴趣代码 ISC、Job Zone 5 与教育调查构成），以及 O*NET 展示的 2025 BLS OEWS 与 2024—2034 年就业预测；美国执照与认证参考 O*NET 教育要求与认证清单；中国执业注册、职业健康监护与病情危急报告参考《护士条例》与《护士执业注册管理办法》；中国工资使用人社部 2024 年企业薪酬调查与国家统计局 2025 年行业门类数据。",
           "updated_at": "O*NET 档案更新 2026；BLS 工资为 2025 年数据；就业与预测为 2024—2034 年；O*NET 行业分布为现行页面；中国法规以现行文本为准；人社部为 2024 年数据（2025-06-27 发布）、国家统计局为 2025 年数据（2026-05-15 发布）；本页查阅 2026-09-26。"
         },
-        "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或执业授权；诊断、开具检查与处方须由在相应法域取得执业资格并在授权范围内的人员作出，中国大陆护士不具处方权。",
+        "note": "证据只支持在标注市场、职业口径与期间内的范围性判断，不构成个人收入、录用或执业授权；诊断、开具检查与处方须由在相应法域取得执业资格并在授权范围内的人员作出。中国大陆国家层面护士不具独立处方与诊断权；深圳经济特区为地区例外（《深圳经济特区医疗条例》第六十五条）。",
         "secondary_links": [
           {
             "href": {
@@ -15908,7 +15933,7 @@
       "text": "执业护士"
     }
   },
-  "source_content_sha256": "73f7949c4d73e56f6a6a00bcad540cd7123527ab4a3dbf4d5fc5e0507e3622a8",
+  "source_content_sha256": "d1af4aadee8968d62bb1a26f7946cffe875d4353163878b3515d413954683545",
   "subject": {
     "canonical_slug": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
     "name": "执业护士",

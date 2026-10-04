@@ -129,7 +129,7 @@
         "status": "mapped"
       },
       "item:medical-records-and-health-information-technicians.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.path.employer-evidence.3": {
         "status": "mapped"
@@ -138,10 +138,10 @@
         "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-records-and-health-information-technicians.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12223,7 +12223,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（完全虚构的病历包）：针对一份虚构的病历与编码任务，在 60 分钟内写出患者身份核对、数据录入与校验、诊断与操作编码、完整性与合规审核、发布范围判断，以及须交有权限者确认的情形；不使用真实患者信息或受限数据。"
+              "60分钟纸面档案题（编辑虚构）：采用题内字典D2，标签K对应普通分类代号C1、L对应C2；流转条件为档案号与附件号相同、标签在D2内且批准为是。U101：标签K、附件U101、批准是；U102：标签L、附件U120、批准是；U103：标签?、附件U103、批准待定。列出分类、归属、批准和未决请求，保留原值。K/L/C1/C2只是普通文档代号，不是ICD、DRG或诊断编码。 参考解：U101查到C1、归属一致且已批准，符合题内流转条件；U102可查到C2，但U102≠U120，不可并档或流转，应请求确认附件归属；U103归属一致，但标签?不在D2且批准待定，分别请求标签依据与批准状态，不猜分类、不补批准。10分钟读题、20分钟制表、20分钟写两张问题记录的确认请求、10分钟遮答案重做并保存纠错版。题内流转不表示真实病历可发布。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.4",
@@ -12279,12 +12279,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境（O*NET 工作情境调查，1—5 分）：电子邮件 4.82、电话沟通 4.77、面对面讨论 4.77、团队协作 4.70 最为突出；精确或高度准确 4.60、重复性任务 4.37、确定任务与优先 4.36、受控室内 4.32、与他人接触 4.27 也较高；时间压力 4.08、自主决策 3.80、错误对同事与结果的影响 3.50 为中等。"
+              "O*NET美国受访者各题选项：88%每天邮件、89%每天面对面讨论、79%每天电话；72%认为团队极其重要、78%认为精确极其重要、48%认为重复同样任务极其重要、78%每天受控室内、47%持续与人接触；53%每周而非每天有时间压力，71%有一些决策自由，33%认为决策对同事/公司结果的影响重要，79%典型工作周40小时。各数来自不同题目，不是事故率或中国调查。BLS描述多数全职，在全天营业医院等可能需夜班或周末。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.profile.work-context-block.3",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-summary",
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -12307,13 +12308,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 29-2072.00 的官方描述、任务、工作情境、兴趣代码（CI）与 Job Zone Three，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
+              "美国BLS本职业通常需高中后证书；部分职位可凭高中学历及医疗环境经验，另一些需副学士或更高教育。课程常涉及医学术语、健康数据要求和分类编码。雇主可能要求或偏好认证，也可能要求入职后取得。O*NET JobZone3是中等准备职业群，群组训练年限不是本职业统一要求。教育、认证与机构信息权限分别核，中国要求不能由美国分类或证书推定。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "source-pack-onet-details",
-            "onet-wages"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -12386,7 +12387,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与健康信息学专员区别：后者负责健康信息系统、数据标准与治理；本职业负责逐条记录整理、编码与合规审核。"
+              "健康信息学专家官方定义为结合护理与信息学协助健康系统设计、开发和修改，并支持实施；本职业侧重记录整理、分类编码、完整性查询与合规处理。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.3",
@@ -12400,7 +12401,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与文档管理专员区别：后者面向组织通用文档生命周期；本职业的差异在于医学术语、编码规则与患者隐私披露责任。"
+              "文档管理专员实施企业文档系统及电子记录存储、检索、共享和销毁程序；本职业以医疗记录与编码要求为对象。两者实际隐私责任按岗位核，不凭名称免除。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.4",
@@ -12450,7 +12451,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用完全虚构的病历包练习编码与审核。"
+              "用U101/U102/U103普通档案纸面题核对归属、字典与未决项，不声称真实医疗编码能力。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.ai-impact.ai-impact-table.2",
@@ -12534,7 +12535,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "示范编码规则与合规要求。"
+              "示范按依据分类、查询矛盾资料及权限核对；纸面练习不替代正式编码训练。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.ai-impact.ai-impact-table.8",
@@ -12556,7 +12557,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局方法与公开口径有界检索，未取得与 O*NET 29-2072.00 精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "本页未取得与美国29-2072.00精确对应的中国大陆全国职业工资分布，不生成中国职业中位数、分位数或稳定月薪；不是断言全国无公开资料。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.china-salary.career-snapshot-primary-locale.1",
@@ -12648,7 +12649,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "工资口径（BLS 2025 年工资数据）：中位年薪 51,140 美元（约 24.59 美元/小时）；10 分位 37,000 美元（17.79 美元/小时）、25 分位 43,490 美元（约 20.91 美元/小时）、75 分位 64,820 美元（约 31.16 美元/小时）、90 分位 81,150 美元（39.02 美元/小时）。以上为本职业口径；分位是统计位置，不含个人到手收入。"
+              "美国2025全国本职业五分位：年薪37,000/43,490/51,140/64,820/81,150美元，对应官网展示时薪17.79/20.91/24.59/31.17/39.01美元（10/25/50/75/90分位）。分位不是起薪、经验阶梯或到手收入，不从年薪除以工时替代来源时薪。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.2",
@@ -12662,7 +12663,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业口径（BLS 2024—2034 年预测）：2024 年就业约 194,800 人，2034 年预计约 208,600 人，2024—2034 年预计增长约 7%（远高于平均），年均职位空缺约 14,200 个（含替换需求）。"
+              "O*NET旧期2024—2034：194,800→208,600人，净增加13,800（两端相减），官方增长7%，年均空缺14,200；BLS新期2025—2035：200,700→216,300人，净增加15,600，官方增长8%，年均空缺14,000。两个预测期间分开，空缺含增长与替换，非当前在招数或个人录用率。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.3",
@@ -12832,7 +12833,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "下一步试验：用完全虚构的病历包完成一次编码、审核与发布演练，再决定是否继续。"
+              "60分钟纸面档案题（编辑虚构）：采用题内字典D2，标签K对应普通分类代号C1、L对应C2；流转条件为档案号与附件号相同、标签在D2内且批准为是。U101：标签K、附件U101、批准是；U102：标签L、附件U120、批准是；U103：标签?、附件U103、批准待定。列出分类、归属、批准和未决请求，保留原值。K/L/C1/C2只是普通文档代号，不是ICD、DRG或诊断编码。 参考解：U101查到C1、归属一致且已批准，符合题内流转条件；U102可查到C2，但U102≠U120，不可并档或流转，应请求确认附件归属；U103归属一致，但标签?不在D2且批准待定，分别请求标签依据与批准状态，不猜分类、不补批准。10分钟读题、20分钟制表、20分钟写两张问题记录的确认请求、10分钟遮答案重做并保存纠错版。题内流转不表示真实病历可发布。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.fit.personality-fit-block.8",
@@ -12868,7 +12869,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "记录缺失或不完整：整理与审核时，触发条件为未按完整性清单核对；影响连续照护与合规审计；控制为按清单核对并补齐缺项。"
+              "记录缺失或不完整：核对完整性清单，向医生或其他相关人员请求确认、补资料并按机构更正流程留痕；不得凭猜测补写病历原始内容。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.risk.career-risk-cards.2",
@@ -12932,7 +12933,7 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：下列为岗位样本的整理方式，不是录用或资格承诺。职位名称可能是病历记录专员、医疗编码员、健康信息技师或医疗记录技术员。"
+              "编辑岗位核对清单：比较病历记录、编码、记录审核和医疗行政任务。未取得雇主招聘样本，以下不是招聘统计，也不证明不同职位名称的范围相同。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.path.recruitment-sample.1",
@@ -12952,47 +12953,55 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "能力阶段",
+              "任务",
+              "权限边界",
+              "可核对证据",
+              "下一步条件"
+            ],
             "rows": [
               [
-                "入职 0—3 个月",
+                "监督学习",
                 "在监督下整理记录并录入数据",
                 "不得越权发布记录",
                 "整理与录入记录",
-                "扩展到独立整理"
+                "依训练、质量评价与具体岗位授权，不按固定年限晋级。"
               ],
               [
-                "3—12 个月",
+                "记录整理",
                 "独立完成常见记录的整理与数据校验",
                 "编码与发布由责任人确认",
                 "数据校验记录",
-                "扩展到独立编码"
+                "依训练、质量评价与具体岗位授权，不按固定年限晋级。"
               ],
               [
-                "1—3 年",
+                "分类编码训练",
                 "按编码规则分类诊断与操作并保留依据",
                 "编码结论须经复核",
                 "编码与依据记录",
-                "扩展到审核"
+                "依训练、质量评价与具体岗位授权，不按固定年限晋级。"
               ],
               [
-                "3—5 年",
+                "审核能力核验",
                 "负责完整性与合规审核",
                 "发布范围由机构确认",
                 "审核与缺项记录",
-                "扩展到合规支持"
+                "依训练、质量评价与具体岗位授权，不按固定年限晋级。"
               ],
               [
-                "5 年以上",
+                "带教/流程改进",
                 "在授权范围内带教与改进流程",
                 "不得替代机构管理与法规判断",
                 "带教与流程改进记录",
-                "按机构与规则扩展授权"
+                "依训练、质量评价与具体岗位授权，不按固定年限晋级。"
               ]
             ]
           },
           "id": "medical-records-and-health-information-technicians.path.entry-role-comparison.2",
           "source_refs": [
-            "onet-cert"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "table"
         },
@@ -13004,15 +13013,15 @@
               {
                 "id": "medical-records-and-health-information-technicians.employer-evidence.1",
                 "values": [
-                  "雇主证据",
-                  "资格按教育、培训、编码认证、经验与雇主要求分别核对；美国 Job Zone Three 通常需要职业培训、相关在职经验或副学士学位。"
+                  "准备核验",
+                  "美国BLS本职业通常需高中后证书；部分职位可凭高中学历及医疗环境经验，另一些需副学士或更高教育。课程常涉及医学术语、健康数据要求和分类编码。雇主可能要求或偏好认证，也可能要求入职后取得。O*NET JobZone3是中等准备职业群，群组训练年限不是本职业统一要求。教育、认证与机构信息权限分别核，中国要求不能由美国分类或证书推定。"
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.employer-evidence.2",
                 "values": [
-                  "记录经验",
-                  "整理与编码经验常以病例量与准确率为证据，需说明来源、字段口径与审核方式。"
+                  "编辑证据建议",
+                  "若岗位用数量或质量指标评价，先核采样、字段与审核方式；本页未核雇主样本，不声称行业普遍采用。"
                 ]
               },
               {
@@ -13026,7 +13035,8 @@
           },
           "id": "medical-records-and-health-information-technicians.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "cards"
         },
@@ -13038,17 +13048,17 @@
               {
                 "id": "medical-records-and-health-information-technicians.portfolio.one",
                 "values": [
-                  "作品示例",
-                  "保留虚构或脱敏的编码与审核练习记录。",
-                  "展示患者身份核对、编码依据、完整性清单与发布判断。"
+                  "纸面作品",
+                  "60分钟纸面档案题（编辑虚构）：采用题内字典D2，标签K对应普通分类代号C1、L对应C2；流转条件为档案号与附件号相同、标签在D2内且批准为是。U101：标签K、附件U101、批准是；U102：标签L、附件U120、批准是；U103：标签?、附件U103、批准待定。列出分类、归属、批准和未决请求，保留原值。K/L/C1/C2只是普通文档代号，不是ICD、DRG或诊断编码。",
+                  "不使用真实或所谓脱敏患者资料；纯虚构普通档案题。"
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.portfolio.two",
                 "values": [
                   "可检查产出",
-                  "编码完整的记录样本、审核记录与索引结果。",
-                  "说明每一步的规则依据与升级路径。"
+                  "三张档案核对表、分类依据、归属/标签/批准未决请求与纠错版。",
+                  "参考解：U101查到C1、归属一致且已批准，符合题内流转条件；U102可查到C2，但U102≠U120，不可并档或流转，应请求确认附件归属；U103归属一致，但标签?不在D2且批准待定，分别请求标签依据与批准状态，不猜分类、不补批准。10分钟读题、20分钟制表、20分钟写两张问题记录的确认请求、10分钟遮答案重做并保存纠错版。题内流转不表示真实病历可发布。"
                 ]
               }
             ]
@@ -13069,12 +13079,18 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "场景",
+              "行动",
+              "复核",
+              "证据"
+            ],
             "rows": [
               [
                 "面试前准备",
-                "整理一段虚构记录的编码与审核案例",
-                "请他人挑战编码与合规判断",
-                "编码与审核样本"
+                "重做本页普通档案题",
+                "请他人按D2与三条件挑战",
+                "核对表与纠错版"
               ],
               [
                 "面试现场",
@@ -13083,22 +13099,23 @@
                 "结论与升级路径说明"
               ],
               [
-                "试用期前 30 天",
+                "监督学习阶段",
                 "在监督下完成记录整理与编码",
                 "由主管复核编码质量",
                 "整理与编码记录"
               ],
               [
-                "试用期结束",
-                "独立完成常见记录的编码与审核",
-                "由责任人确认合规与发布",
-                "编码与审核记录"
+                "试用阶段评价",
+                "由雇主核实际体系训练与质量",
+                "独立范围依机构授权，不由试用结束自动取得",
+                "监督反馈与权限范围说明"
               ]
             ]
           },
           "id": "medical-records-and-health-information-technicians.path.interview-probation.5",
           "source_refs": [
-            "onet-cert"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "table"
         },
@@ -13110,22 +13127,22 @@
               {
                 "id": "medical-records-and-health-information-technicians.trial.day1",
                 "values": [
-                  "第 1—2 天",
-                  "理解患者身份核对、编码规则与隐私要求。"
+                  "第1—2天，每天30—60分钟",
+                  "读题内D2字典与三张档案，建立分类/归属/批准表；核U102≠U120，不接触真实患者资料。"
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.trial.day3",
                 "values": [
-                  "第 3—5 天",
-                  "针对完全虚构的病历包完成编码、审核与发布判断并保留记录。"
+                  "第3—5天，每天30—60分钟",
+                  "遮答案重做，给U102写归属查询，给U103分别写标签依据及批准请求，不猜分类或补批准。"
                 ]
               },
               {
                 "id": "medical-records-and-health-information-technicians.trial.day7",
                 "values": [
-                  "第 6—7 天",
-                  "请他人挑战编码与合规判断，写继续、停止或换方向的证据。"
+                  "第6—7天，每天30—60分钟",
+                  "请他人仅按题面挑战，再与参考解比较；保存原版/纠错版及体验，决定继续训练或比较其他方向。不是医疗编码认证。"
                 ]
               }
             ]
@@ -13149,10 +13166,19 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "状态",
+              "证明",
+              "核验来源",
+              "条件",
+              "边界",
+              "责任方",
+              "下一步"
+            ],
             "rows": [
               [
                 "学历",
-                "副学士或相关专业训练",
+                "BLS通常高中后证书；部分高中+医疗经验，另一些需副学士或更高教育",
                 "用人单位与院校",
                 "按岗位核验",
                 "学历不等同执业或授权",
@@ -13172,14 +13198,14 @@
                 "编码认证",
                 "职业或专业编码认证",
                 "认证机构",
-                "按认证范围核验",
+                "雇主可能要求或偏好；核认证申请与有效性",
                 "认证不等同执照",
                 "认证机构",
                 "核对认证有效性"
               ],
               [
-                "注册或执照",
-                "按法域要求的证明",
+                "如法域适用注册/执照",
+                "仅在具体职位和法域确实要求时核验，不由职业分类推定",
                 "主管部门",
                 "按所在地规则核验",
                 "注册不等同机构发布授权",
@@ -13208,7 +13234,9 @@
           },
           "id": "medical-records-and-health-information-technicians.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "bls-ooh",
+            "onet-cert",
+            "onet-summary"
           ],
           "type": "table"
         },
@@ -13222,7 +13250,8 @@
           },
           "id": "medical-records-and-health-information-technicians.path.credential-boundary.8",
           "source_refs": [
-            "onet-cert"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "notice"
         },
@@ -13236,7 +13265,8 @@
           },
           "id": "medical-records-and-health-information-technicians.path.career-path-block.9",
           "source_refs": [
-            "source-pack-onet-details"
+            "bls-ooh",
+            "onet-summary"
           ],
           "type": "prose"
         }
@@ -13295,7 +13325,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "AI 或技术研究说明任务可被辅助的范围，不等同于组织采用、更不等同于净岗位变化；隐私合规责任仍由人承担。"
+              "BLS本职业手册预计AI驱动的编码提高效率可能影响人员需求，这是职业预测中的判断，未给机构采用率、裁员比例或替代日期。O*NET任务和招聘软件是职责/技能背景；ILO全球暴露研究不等于本职业采用实测。编辑试验仅让工具整理U101/U102/U103题面，人工复核D2分类、U102附件错配及U103两个未决项，不输入真实医疗数据。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.market-signals.market-signal-card.4",
@@ -13332,21 +13362,26 @@
           "data": {
             "entries": [
               {
-                "answer": "以室内记录整理、编码与审核为主：O*NET 工作情境显示电子邮件 4.82、电话沟通 4.77、面对面讨论 4.77、团队协作 4.70 最突出；精确或高度准确 4.60、重复性任务 4.37、时间压力 4.08 也较高，急诊或结算周期可能加班。",
+                "answer": "O*NET美国受访者各题选项：88%每天邮件、89%每天面对面讨论、79%每天电话；72%认为团队极其重要、78%认为精确极其重要、48%认为重复同样任务极其重要、78%每天受控室内、47%持续与人接触；53%每周而非每天有时间压力，71%有一些决策自由，33%认为决策对同事/公司结果的影响重要，79%典型工作周40小时。各数来自不同题目，不是事故率或中国调查。BLS描述多数全职，在全天营业医院等可能需夜班或周末。",
                 "id": "medical-records-and-health-information-technicians.faq.1",
                 "question": "病历记录专员的日常工作与工时如何？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.1",
                 "source_refs": [
-                  "source-pack-onet-custom"
+                  "onet-summary",
+                  "bls-ooh"
                 ]
               },
               {
-                "answer": "病历记录专员负责记录汇总、编码、审核与发布；健康信息学专员负责系统与数据架构；文档管理专员面向通用文档生命周期；管理分析师面向流程分析；医师助理与注册护士提供临床诊疗与照护并需相应执业资格。名称相近不等于职责、资格与授权可互换。",
+                "answer": "本职业以医疗记录整理、分类编码与合规处理为主；健康信息学专家结合护理/信息学协助健康系统设计与实施；文档管理专员实施企业电子记录系统和流程；管理咨询分析师研究组织与流程。医师助理在医师监督下提供诊疗，注册护士承担护理评估和照护并需执照或注册。各方向准备与权限不互换。",
                 "id": "medical-records-and-health-information-technicians.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.2",
                 "source_refs": [
-                  "source-pack-onet-summary"
+                  "adj-15-1211.01",
+                  "adj-15-1299.03",
+                  "adj-13-1111.00",
+                  "adj-29-1071.00",
+                  "adj-29-1141.00"
                 ]
               },
               {
@@ -13359,12 +13394,14 @@
                 ]
               },
               {
-                "answer": "编码建议、文本抽取、记录检索与表单核对更易被软件辅助；编码判断、完整性审核与合规发布仍以人工为主，现有资料只支持任务层面的辅助判断，不证明机构普遍以自动化替代这些判断。",
+                "answer": "BLS本职业手册预计AI驱动的编码提高效率可能影响人员需求，这是职业预测中的判断，未给机构采用率、裁员比例或替代日期。O*NET任务和招聘软件是职责/技能背景；ILO全球暴露研究不等于本职业采用实测。编辑试验仅让工具整理U101/U102/U103题面，人工复核D2分类、U102附件错配及U103两个未决项，不输入真实医疗数据。",
                 "id": "medical-records-and-health-information-technicians.faq.4",
                 "question": "AI 会如何影响这个职业的工作？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.4",
                 "source_refs": [
-                  "ilo-ai"
+                  "bls-ooh",
+                  "ilo-ai",
+                  "onet-summary"
                 ]
               },
               {
@@ -13378,7 +13415,7 @@
                 ]
               },
               {
-                "answer": "本轮以国家统计局方法与公开工资口径有界检索，未取得与 O*NET 29-2072.00 精确对应的中国大陆全国职业工资分布；公开资料为行业或人员大类聚合，不能替代本职业中位数，故本页标注缺失，不代填数值。",
+                "answer": "本页未取得中国大陆全国本职业工资分布；国家统计局为行业聚合，不用其均值或美国数字补填，也不推断全国不存在公开资料。",
                 "id": "medical-records-and-health-information-technicians.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.6",
@@ -13387,7 +13424,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年工资数据：中位年薪 51,140 美元（约 24.59 美元/小时），10 分位 37,000、25 分位 43,490、75 分位 64,820、90 分位 81,150 美元；为 29-2072.00 本职业口径，分位不含个人到手收入。",
+                "answer": "美国2025全国本职业五分位：年薪37,000/43,490/51,140/64,820/81,150美元，对应官网展示时薪17.79/20.91/24.59/31.17/39.01美元（10/25/50/75/90分位）。分位不是起薪、经验阶梯或到手收入，不从年薪除以工时替代来源时薪。",
                 "id": "medical-records-and-health-information-technicians.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.7",
@@ -13396,11 +13433,13 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone Three：通常需要职业培训、相关在职经验或副学士学位；中国大陆按用人单位、医疗信息与隐私保护规则确定。证书、编码认证与机构授权不是同一状态，取得认证不等于获得记录发布权限。",
+                "answer": "美国BLS本职业通常需高中后证书；部分职位可凭高中学历及医疗环境经验，另一些需副学士或更高教育。课程常涉及医学术语、健康数据要求和分类编码。雇主可能要求或偏好认证，也可能要求入职后取得。O*NET JobZone3是中等准备职业群，群组训练年限不是本职业统一要求。教育、认证与机构信息权限分别核，中国要求不能由美国分类或证书推定。",
                 "id": "medical-records-and-health-information-technicians.faq.8",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.medical-records-and-health-information-technicians.8",
                 "source_refs": [
+                  "bls-ooh",
+                  "onet-summary",
                   "onet-cert"
                 ]
               }
@@ -13417,7 +13456,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "paragraphs": [
-              "中国与美国数据分栏；精确职业、组合职业、父职业与行业口径不得互相改写。AI 内容区分来源支持的通用边界与明确标注的编辑归纳；不声称真实部署率、自动授权或净就业影响。本页练习只用于职业探索，不构成真实执业、编码发布、临床或法律授权。"
+              "本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。"
             ]
           },
           "id": "medical-records-and-health-information-technicians.sources.boundary-notice.2",
@@ -13456,7 +13495,7 @@
                 "entity": "病历记录专员",
                 "id": "navigation-3",
                 "relation": "career.section",
-                "url": "/zh/tests/big-five-personality-test-ocean-model"
+                "url": "/en/tests/big-five-personality-test-ocean-model"
               },
               {
                 "entity": "病历记录专员",
@@ -13495,46 +13534,46 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Global exposure evidence is not adoption, job-loss probability, regulation or authorization evidence."
+                  "实读官网概览/摘要，不声称核全文或本职业指标；全球任务暴露不等采用/裁员或授权。"
                 ],
                 "evidence_type": "official research",
                 "id": "ilo-ai",
                 "limitation": "Global exposure evidence is not adoption, job-loss probability, regulation or authorization evidence.",
                 "market": "GLOBAL",
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-                "period": "ILO 2025; accessed 2026-08-31",
+                "period": "ILO2025；本轮读出版概览与摘要",
                 "publisher": "International Labour Organization",
                 "scope": "market_signal",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。"
+                  "本窗口核官方行业聚合，无安全的本职业全国工资映射。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
                 "limitation": "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "period": "2025行业工资；2026发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Directory entries are not state licenses, employer authorization or proof of universal requirement."
+                  "本轮核25项认证目录，含CCA/CPC/CMC等；RHIT是报告职位名，不在本次25项列表；目录由CareerOneStop供数，不证明个人资格或统一强制。"
                 ],
                 "evidence_type": "official credential directory",
                 "id": "onet-cert",
                 "limitation": "Directory entries are not state licenses, employer authorization or proof of universal requirement.",
                 "market": "US",
                 "name": "National Certifications 29-2072.00 Medical Records Specialists",
-                "period": "O*NET credential data current 2026; accessed 2026-08-31",
+                "period": "CareerOneStop认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/29-2072.00"
@@ -13555,61 +13594,61 @@
                 "url": "https://www.onetonline.org/link/details/29-2072.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Posting mentions do not prove proficiency, adoption or automation rate."
+                  "本轮读23项：8项≥1%、6项不足1%、9项无比例；不是采用率。"
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
                 "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
                 "market": "US",
                 "name": "Hot Technologies 29-2072.00 Medical Records Specialists",
-                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "period": "2025美国Lightcast招聘提及",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2072.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "US occupation evidence; China mapping and authorization require separate review."
+                  "本轮核16任务、CI、JobZone3和各题情境选项。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
                 "limitation": "US occupation evidence; China mapping and authorization require separate review.",
                 "market": "US",
                 "name": "29-2072.00 Medical Records Specialists",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET2026职业摘要；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2072.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Projection is not a hiring guarantee; parent data are not exact occupation counts."
+                  "194,800→208,600，官方7%，年均14,200。"
                 ],
                 "evidence_type": "official employment data",
                 "id": "onet-trends",
-                "limitation": "Projection is not a hiring guarantee; parent data are not exact occupation counts.",
+                "limitation": "本职业旧期预测，非BLS新期，不是录用概率。",
                 "market": "US",
                 "name": "National Employment Trends 29-2072.00 Medical Records Specialists",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+                "period": "2024—2034预测；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/29-2072.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
+                  "本轮完整核五年薪/时薪：37,000/43,490/51,140/64,820/81,150；17.79/20.91/24.59/31.17/39.01。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
+                "limitation": "美国29-2072.00全国本职业；分位不是起薪，不换成中国工资。",
                 "market": "US",
                 "name": "National Wages 29-2072.00 Medical Records Specialists",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "period": "2025BLS工资；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-2072.00"
@@ -13645,24 +13684,24 @@
                 "url": "https://www.onetonline.org/link/details/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮读23项：8项≥1%、6项不足1%、9项无比例；不是采用率。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Hot Technologies: 29-2072.00 - Medical Records Specialists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025美国Lightcast招聘提及",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核医疗社会援助64%、其他36%；就业份额非工资或预测。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
@@ -13675,64 +13714,199 @@
                 "url": "https://www.onetonline.org/link/industry/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核25项认证目录，含CCA/CPC/CMC等；RHIT是报告职位名，不在本次25项列表；目录由CareerOneStop供数，不证明个人资格或统一强制。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "National Certifications: 29-2072.00 - Medical Records Specialists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "CareerOneStop认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核1013课程目录计数、前列记录技术/编码/记录管理类别及证书至硕士等层次和供数日期；未逐一核全部招生/认可。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "National Training: 29-2072.00 - Medical Records Specialists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "IPEDS2025—26目录/2024—25授予情况",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                  "本轮完整核五年薪/时薪：37,000/43,490/51,140/64,820/81,150；17.79/20.91/24.59/31.17/39.01。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
+                "limitation": "美国29-2072.00全国本职业；分位不是起薪，不换成中国工资。",
                 "market": "US",
                 "name": "National Wages: 29-2072.00 - Medical Records Specialists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "2025BLS工资；查阅2026-10-03",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-2072.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "本轮核16任务、CI、JobZone3和各题情境选项。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "29-2072.00 - Medical Records Specialists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET2026职业摘要；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2072.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮核教育/认证偏好、夜班周末、AI编码预期、五行业工资及2025—2035预测。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "bls-ooh",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "BLS病历记录专员职业手册",
+                "period": "查阅2026-10-03",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-15-1211.01",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：健康信息学专家",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1211.01"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-15-1299.03",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：文档管理专员",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1299.03"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-13-1111.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：管理咨询分析师",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/13-1111.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-43-6013.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：秘书与行政助理（含医务方向）",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/43-6013.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-11-9111.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：医疗与健康服务经理",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9111.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-29-1141.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：注册护士",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1141.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-29-1071.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：医师助理",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-1071.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮实读目标定义；编辑迁移建议不表示互认。"
+                ],
+                "evidence_type": "official occupation profile",
+                "id": "adj-15-1242.00",
+                "limitation": "US occupation evidence; China mapping and authorization require separate review.",
+                "market": "US",
+                "name": "O*NET目标定义：数据库管理员",
+                "period": "查阅2026-10-03",
+                "publisher": "O*NET OnLine, U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1242.00"
               }
             ]
           },
@@ -13778,24 +13952,54 @@
         },
         "evidence_links": [
           {
-            "href": "https://www.onetonline.org/link/summary/29-2072.00",
-            "label": "29-2072.00 Medical Records Specialists"
+            "href": {
+              "$source": "adj-15-1211.01",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "label": "健康信息学专家"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
-            "label": "Medical Records Specialists detailed occupation profile"
+            "href": {
+              "$source": "adj-15-1299.03",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "label": "文档管理专员"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-2072.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists"
+            "href": {
+              "$source": "adj-13-1111.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "label": "管理咨询分析师"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/29-2072.00",
-            "label": "29-2072.00 - Medical Records Specialists"
+            "href": {
+              "$source": "adj-29-1071.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "label": "医师助理"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/29-2072.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists"
+            "href": {
+              "$source": "adj-29-1141.00",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "label": "注册护士"
           }
         ],
         "evidence_note": {
@@ -13806,30 +14010,37 @@
         },
         "heading": "相邻职业比较与方向差异说明",
         "intro": {
-          "$item": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.3",
-          "block": "direction-comparison",
-          "copy_key": "career.item.adjacent-career-comparison-table",
-          "type": "prose"
-        },
-        "rows": [
-          {
-            "关键区别": {
+          "$join": [
+            {
+              "$item": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.3",
+              "block": "direction-comparison",
+              "copy_key": "career.item.adjacent-career-comparison-table",
+              "type": "prose"
+            },
+            {
               "$item": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.4",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "更适合什么选择": {
+            {
               "$item": "medical-records-and-health-information-technicians.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
-            },
-            "核心工作与产出": "设计并维护健康信息系统与数据标准，产出系统方案与数据治理规则。",
-            "职业方向": "健康信息学专员"
+            }
+          ],
+          "separator": "\n"
+        },
+        "rows": [
+          {
+            "关键区别": "核心为系统设计/实施，不能由逐条编码经验自动取得目标准备",
+            "更适合什么选择": "愿补系统与护理信息学知识者",
+            "核心工作与产出": "结合护理与信息学协助健康系统设计、开发、修改及人员实施支持",
+            "职业方向": "健康信息学专家"
           },
           {
-            "关键区别": "面向通用文档生命周期，不承担临床编码与隐私披露责任。",
+            "关键区别": "面向企业文档系统和电子记录流程；具体数据责任依岗位，不能断言不涉隐私。",
             "更适合什么选择": "按记录生命周期职责比较。",
             "核心工作与产出": "管理组织文件与记录生命周期，产出归档、保留与检索规范。",
             "职业方向": "文档管理专员"
@@ -13838,7 +14049,7 @@
             "关键区别": "侧重组织与流程分析，不承担记录完整性与编码合规责任。",
             "更适合什么选择": "按分析与流程对象比较。",
             "核心工作与产出": "分析业务流程与组织问题，产出改进方案与决策支持。",
-            "职业方向": "管理分析师"
+            "职业方向": "管理咨询分析师"
           },
           {
             "关键区别": "以临床诊疗与照护为主，需要相应执业资格与监督。",
@@ -13853,10 +14064,10 @@
             "职业方向": "注册护士"
           },
           {
-            "关键区别": "名称相近不等于职责、资格与授权可互换。",
-            "更适合什么选择": "按资格与授权链逐项核对。",
-            "核心工作与产出": "O*NET 相关职业还包括医疗与健康服务经理、医务秘书等。",
-            "职业方向": "关联与相关职业"
+            "关键区别": "管理服务与资源不同于逐条记录编码",
+            "更适合什么选择": "愿补管理、教育与经验者",
+            "核心工作与产出": "规划、指导或协调医疗健康服务",
+            "职业方向": "医疗与健康服务经理"
           }
         ],
         "transition": "相邻关系只用于方向比较，不代表自动转岗或资格互认。"
@@ -13920,7 +14131,7 @@
             }
           }
         ],
-        "answer": "工具可辅助编码建议、文本抽取、表单核对与记录检索，但编码判断、记录完整性与合规发布仍由有资质的人负责。",
+        "answer": "BLS本职业手册预计AI驱动的编码提高效率可能影响人员需求，这是职业预测中的判断，未给机构采用率、裁员比例或替代日期。O*NET任务和招聘软件是职责/技能背景；ILO全球暴露研究不等于本职业采用实测。编辑试验仅让工具整理U101/U102/U103题面，人工复核D2分类、U102附件错配及U103两个未决项，不输入真实医疗数据。",
         "authority_links": [
           {
             "来源": "29-2072.00 Medical Records Specialists",
@@ -13929,10 +14140,10 @@
             "链接": "https://www.onetonline.org/link/summary/29-2072.00"
           },
           {
-            "来源": "Medical Records Specialists detailed occupation profile",
+            "来源": "O*NET本职业摘要",
             "类型": "官方职业来源",
             "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
+            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
           },
           {
             "来源": "National Employment Trends 29-2072.00 Medical Records Specialists",
@@ -13959,26 +14170,26 @@
             "链接": "https://www.onetonline.org/link/localcert/29-2072.00"
           },
           {
-            "来源": "29-2072.00 - Medical Records Specialists",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "来源": "BLS本职业手册",
+            "类型": "本职业就业预测",
+            "适用范围": "美国2025—2035，非机构采用率",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm"
           }
         ],
         "difference_intro": "AI 对记录汇总、编码、审核与发布的影响不同，剩余责任也不同。",
         "difference_rows": [
           {
-            "AI主要改变": "编码建议与手册检索辅助",
+            "AI主要改变": "编辑假设：虚构档案整理与差异提示，需人工核验。",
             "仍由人负责": "编码判断与依据确认",
             "方向": "编码与分类"
           },
           {
-            "AI主要改变": "完整性检查与缺项提示",
+            "AI主要改变": "编辑假设：虚构档案整理与差异提示，需人工核验。",
             "仍由人负责": "完整性与合规结论",
             "方向": "记录审核"
           },
           {
-            "AI主要改变": "发布清单与权限核对",
+            "AI主要改变": "编辑假设：虚构档案整理与差异提示，需人工核验。",
             "仍由人负责": "发布范围与法规责任",
             "方向": "信息发布"
           }
@@ -13993,10 +14204,10 @@
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
           },
           {
-            "使用限制": "软件需求列表不等于生成式 AI 采用率或替代证据。",
+            "使用限制": "Lightcast职业关联招聘技能提及，不是系统安装率或GenAI采用。",
             "来源": "Hot Technologies 29-2072.00 Medical Records Specialists",
             "研究对象": "在需求软件技能（O*NET Hot Technologies）",
-            "结论": "列入者多为电子病历与办公软件，属工具线索",
+            "结论": "2025美国招聘软件提及：Excel13%、Office12%、Epic8%、Outlook7%、Word4%、PowerPoint3%、eClinicalWorks1%、MEDITECH1%；另6项不足1%、9项无比例。",
             "链接": "https://www.onetonline.org/link/hot_tech/29-2072.00"
           },
           {
@@ -14014,70 +14225,70 @@
             "链接": "https://www.onetonline.org/link/industry/29-2072.00"
           },
           {
-            "使用限制": "工作情境为调查结果，不替代雇主与地方法规。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "研究对象": "任务与工作情境（O*NET 29-2072.00）",
-            "结论": "记录汇总、编码与审核为本职业任务特征",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
+            "使用限制": "预测判断，不是裁员/机构采用实測或替代日期。",
+            "来源": "BLS病历记录专员职业手册",
+            "研究对象": "2025—2035本职业就业展望",
+            "结论": "AI编码效率可能影响需求；官方预测增长8%、年均空缺14,000。",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm"
           }
         ],
         "heading": "病历记录专员的记录任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "编码建议、文本抽取、记录检索与表单核对可被软件辅助；编码判断、发布与合规责任仍由人负责。",
+            "含义": "BLS预计AI编码效率可能影响需求；本页任务提示为编辑假设，未实测工具准确率。",
             "概念": "任务层面的可被辅助能力"
           },
           {
-            "含义": "工具出现或厂商演示不等于机构已采用；需核对数据许可、隐私与安全、接口验证与变更控制。",
+            "含义": "现有招聘提及不证明机构采用。编辑核对建议：确认数据许可、权限、系统验证及异常处理。",
             "概念": "机构采用的前置条件与验证"
           },
           {
-            "含义": "任务暴露不等于采用率、失业概率或替代日期。",
+            "含义": "BLS就业预测、ILO全球暴露指数与机构采用率是不同证据，不能推出本职业裁员比例。",
             "概念": "岗位结果与净就业结论边界"
           }
         ],
         "questions": [
           {
-            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
-            "来源": "29-2072.00 Medical Records Specialists",
+            "回答": "BLS本职业手册预计AI驱动的编码提高效率可能影响人员需求，这是职业预测中的判断，未给机构采用率、裁员比例或替代日期。O*NET任务和招聘软件是职责/技能背景；ILO全球暴露研究不等于本职业采用实测。编辑试验仅让工具整理U101/U102/U103题面，人工复核D2分类、U102附件错配及U103两个未决项，不输入真实医疗数据。",
+            "来源": "BLS本职业展望",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm",
+            "问题": "AI会取代这个职业吗？"
+          },
+          {
+            "回答": "编辑建议：按适用规则与文档核对；缺失、矛盾或不清楚的信息向相关人员查询，不猜疾病/操作。",
+            "来源": "O*NET职责背景",
             "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "AI 会取代病历记录专员吗？"
+            "问题": "编码建议如何核验？"
           },
           {
-            "回答": "编码建议与手册检索可被辅助，但编码判断与依据仍由有资质者负责。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "编码能自动完成吗？"
-          },
-          {
-            "回答": "记录发布与披露由授权人按法规与机构政策确认。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "记录发布能自动放行吗？"
-          },
-          {
-            "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
-            "来源": "29-2072.00 Medical Records Specialists",
+            "回答": "实际披露须核记录类型、用途、接收方和机构权限；题内批准不能转成真实授权。",
+            "来源": "O*NET职责背景",
             "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "该用哪些证据判断影响？"
+            "问题": "批准意味着可自动披露吗？"
           },
           {
-            "回答": "隐私、合规与发布责任不能被工具替代。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "工具能替代合规判断吗？"
+            "回答": "BLS职业预测、ILO全球任务暴露、招聘软件提及和本页纸面假设分别使用。",
+            "来源": "BLS职业预测",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm",
+            "问题": "不同证据如何区分？"
           },
           {
-            "回答": "检索可自动化，但调取权限与用途仍由人核对。",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00",
-            "问题": "记录检索能完全自动化吗？"
+            "回答": "编辑建议：保留原始资料，向责任人请求补资料并留痕；不编造病历内容。",
+            "来源": "O*NET查询职责背景",
+            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
+            "问题": "缺项能让工具补写吗？"
           },
           {
-            "回答": "需核对数据许可、隐私与安全、接口验证与变更控制。",
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "问题": "如何核对工具的采用与验证条件？"
+            "回答": "先核记录归属、访问权限、来源与用途；检索并不授披露权限。",
+            "来源": "O*NET职责背景",
+            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
+            "问题": "检索结果能直接使用吗？"
+          },
+          {
+            "回答": "只用U101/U102/U103题面，核D2分类、错配和未决项。工具性能与采用未验证。",
+            "来源": "编辑题面的职责背景",
+            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
+            "问题": "怎样试验工具？"
           }
         ],
         "responsibility_intro": "人的责任链：从核对输入、限定任务，到人工复核与记录升级。",
@@ -14111,7 +14322,7 @@
           },
           {
             "为什么重要": "影响连续照护与合规审计。",
-            "控制方式": "按完整性清单核对并补齐。",
+            "控制方式": "核完整性，向相关人员请求补资料并保留更正记录，不编造原始内容。",
             "风险": "记录缺失或不完整"
           },
           {
@@ -14135,43 +14346,43 @@
             "人的控制点": "由责任人确认记录真实与来源",
             "任务": "汇总并维护患者医疗记录与索引",
             "工作方向": "记录汇总与索引",
-            "当前变化": "记录汇总与检索可被系统辅助"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "核对字段定义与数据来源",
             "任务": "录入人口学、病史与诊疗数据",
             "工作方向": "数据录入",
-            "当前变化": "结构化录入与校验可被辅助"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "由有资质者确认编码与依据",
             "任务": "把诊断与操作编入标准编码系统",
             "工作方向": "编码与分类",
-            "当前变化": "编码建议与手册检索可比对辅助"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "由审核人确认完整性与合规",
             "任务": "核对记录完整性、准确与合规",
             "工作方向": "记录审核",
-            "当前变化": "完整性检查与缺项提示可自动化"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "由授权人确认发布范围与法规",
             "任务": "按法规向授权方发布信息",
             "工作方向": "信息发布",
-            "当前变化": "发布清单与权限核对可被辅助"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "核对调取权限与用途",
             "任务": "为医护与技术人员调取记录",
             "工作方向": "记录检索",
-            "当前变化": "检索与调取可自动完成"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           },
           {
             "人的控制点": "由责任人确认保密与处置",
             "任务": "保护记录保密与数据安全",
             "工作方向": "保密与合规",
-            "当前变化": "访问日志与异常提示可自动化"
+            "当前变化": "编辑假设：可试验虚构文档整理或核对提示，人工验证结果；不声称已自动执行。"
           }
         ],
         "transition": "从病历记录专员转向相邻方向，优先比较可迁移能力，再补齐目标方向特有的知识与资格要求。"
@@ -14181,12 +14392,7 @@
         "slug": "medical-records-and-health-information-technicians"
       },
       "career_path_block": {
-        "boundary": {
-          "$item": "medical-records-and-health-information-technicians.path.career-path-block.9",
-          "block": "path",
-          "copy_key": "career.item.career-path-block",
-          "type": "prose"
-        },
+        "boundary": "本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。",
         "competence_ladder": [
           {
             "description": "确认患者身份、就诊记录与来源。",
@@ -14201,43 +14407,48 @@
             "stage": "审核与发布"
           },
           {
-            "description": "在授权范围内扩展复核、带教与规范职责。",
+            "description": {
+              "$item": "medical-records-and-health-information-technicians.path.career-path-block.9",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
             "stage": "责任扩展"
           }
         ],
-        "direct_answer": "入口看能否按编码规则整理、核对并保护医疗记录；美国 Job Zone Three 需要职业培训、相关在职经验或副学士学位，编码与发布权限按机构与法规核验。",
+        "direct_answer": "美国BLS本职业通常需高中后证书；部分职位可凭高中学历及医疗环境经验，另一些需副学士或更高教育。课程常涉及医学术语、健康数据要求和分类编码。雇主可能要求或偏好认证，也可能要求入职后取得。O*NET JobZone3是中等准备职业群，群组训练年限不是本职业统一要求。教育、认证与机构信息权限分别核，中国要求不能由美国分类或证书推定。",
         "entry_heading": "入行路径与可检查证据",
         "heading": "病历记录专员的入行路径、资格边界与职业发展",
         "locale_requirements": {
           "credential_boundary": "证书、学位、编码认证、机构授权与信息发布不是同一状态；能否发布记录取决于雇主政策与法规授权。",
-          "jurisdiction": "美国 Job Zone Three（中等准备）；中国大陆按用人单位、医疗信息与隐私保护规则核验。",
-          "summary": "美国：Job Zone Three，通常需要职业培训、相关在职经验或副学士学位；中国大陆的学历、执业与机构授权边界按用人单位与主管部门核验。"
+          "jurisdiction": "美国BLS本职业教育路径与O*NET职业群分开；中国具体要求按实际职位和所在地规则核验。",
+          "summary": "美国BLS本职业通常需高中后证书；部分职位可凭高中学历及医疗环境经验，另一些需副学士或更高教育。课程常涉及医学术语、健康数据要求和分类编码。雇主可能要求或偏好认证，也可能要求入职后取得。O*NET JobZone3是中等准备职业群，群组训练年限不是本职业统一要求。教育、认证与机构信息权限分别核，中国要求不能由美国分类或证书推定。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm",
             "id": "bls",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS本职业手册",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "nasa",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/localtraining/29-2072.00",
             "id": "onet-training",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业课程目录",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "faa",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           }
         ],
         "tracks": [
@@ -14246,28 +14457,28 @@
             "stages": [
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立整理。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "保留整理与录入练习记录。",
                 "responsibility": "在监督下整理记录并录入数据。",
                 "role": "整理学习"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立编码。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示数据校验与整理记录。",
                 "responsibility": "独立完成常见记录的整理与数据校验。",
                 "role": "独立整理"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到复杂编码与审核。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示编码与依据记录。",
                 "responsibility": "按编码规则分类并保留依据。",
                 "role": "编码负责"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示复核与带教记录。",
                 "responsibility": "在授权范围内复核并带教编码。",
                 "role": "编码带教"
@@ -14280,28 +14491,28 @@
             "stages": [
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立审核。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "保留合规练习记录。",
                 "responsibility": "学习隐私与记录合规要求。",
                 "role": "合规学习"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到合规体系支持。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示审核与缺项记录。",
                 "responsibility": "独立核对记录完整性与合规。",
                 "role": "独立审核"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到审计准备。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示合规改进与整改记录。",
                 "responsibility": "参与合规与审计流程改进。",
                 "role": "合规体系支持"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示规范与培训记录。",
                 "responsibility": "在授权范围内维护合规规范。",
                 "role": "规范与带教"
@@ -14314,28 +14525,28 @@
             "stages": [
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立沟通。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "保留沟通与交接练习记录。",
                 "responsibility": "学习与医护和编码部门的交接要求。",
                 "role": "沟通学习"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到发布与索引管理。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示沟通与复核记录。",
                 "responsibility": "向医护人员说明记录状态与流程。",
                 "role": "独立沟通"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到信息管理职责。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示发布与索引记录。",
                 "responsibility": "管理发布、索引与保留安排。",
                 "role": "信息与发布管理"
               },
               {
                 "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则取得授权。",
+                "next_moves": "依实际训练、任务评价与授权扩展，不保证自动晋级。",
                 "readiness_evidence": "出示信息管理与评估记录。",
                 "responsibility": "在授权范围内支持信息管理职责。",
                 "role": "责任扩展"
@@ -14351,9 +14562,9 @@
         "items": [
           {
             "answer": {
-              "$item": "medical-records-and-health-information-technicians.profile.definition-block.1",
+              "$item": "medical-records-and-health-information-technicians.profile.career-quick-answers-block.4",
               "block": "profile",
-              "copy_key": "career.item.definition-block",
+              "copy_key": "career.item.career-quick-answers-block",
               "type": "prose"
             },
             "key": "qa3",
@@ -14363,28 +14574,7 @@
                 {
                   "alternate_value": null,
                   "label": "需要核对的对象",
-                  "secondary_value": {
-                    "$item": "medical-records-and-health-information-technicians.profile.work-context-block.3",
-                    "block": "profile",
-                    "copy_key": "career.item.work-context-block",
-                    "type": "prose"
-                  },
-                  "value": {
-                    "$item": "medical-records-and-health-information-technicians.profile.career-quick-answers-block.4",
-                    "block": "profile",
-                    "copy_key": "career.item.career-quick-answers-block",
-                    "type": "prose"
-                  }
-                },
-                {
-                  "alternate_value": null,
-                  "label": "交付产出",
-                  "secondary_value": {
-                    "$item": "medical-records-and-health-information-technicians.profile.onet-structured-fields-block.5",
-                    "block": "profile",
-                    "copy_key": "career.item.onet-structured-fields-block",
-                    "type": "prose"
-                  },
+                  "secondary_value": "逐项核对记录来源、身份、适用规则版本与自己的权限。",
                   "value": {
                     "$item": "medical-records-and-health-information-technicians.profile.definition-block.6",
                     "block": "profile",
@@ -14394,110 +14584,121 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "责任边界",
-                  "secondary_value": null,
+                  "label": "交付产出",
+                  "secondary_value": "保留分类依据、核对记录、未决查询、变更和交接状态。",
                   "value": {
                     "$item": "medical-records-and-health-information-technicians.profile.work-context-block.8",
                     "block": "profile",
                     "copy_key": "career.item.definition-block",
                     "type": "prose"
                   }
+                },
+                {
+                  "alternate_value": null,
+                  "label": "责任边界",
+                  "secondary_value": null,
+                  "value": "本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。"
                 }
               ]
             }
           },
           {
-            "answer": "能力与工作方式：需要医学与编码知识，能按标准分类系统与手册核对，重视记录完整性与隐私，并能在重复任务与时间压力下保持准确。",
+            "answer": "闭环看输入归属、分类依据、完整性查询、访问/披露条件和记录交接；遇到缺失、矛盾或不清楚的诊断/编码资料，应向医生或其他相关人员确认。",
             "key": "qa2",
             "question": "怎样判断这项工作是否形成闭环？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "步骤一",
-                  "secondary_value": "来源与身份",
-                  "value": "核对患者身份与就诊记录"
+                  "label": "核输入",
+                  "secondary_value": "不得误挂他人记录",
+                  "value": "身份与记录来源"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤二 录入",
-                  "secondary_value": "字段定义",
-                  "value": "录入并校验诊疗数据"
+                  "label": "录入核对",
+                  "secondary_value": "保留原始来源",
+                  "value": "按字段定义录入"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤三",
-                  "secondary_value": "编码规则",
-                  "value": "按编码系统分类诊断与操作"
+                  "label": "分类编码",
+                  "secondary_value": "不以编码代临床诊断",
+                  "value": "按适用标准与文档依据"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤四",
-                  "secondary_value": "合规清单",
-                  "value": "核对完整性与合规"
+                  "label": "审核查询",
+                  "secondary_value": "缺失或矛盾向相关人员确认",
+                  "value": "核完整性、准确与合规"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤五",
-                  "secondary_value": "隐私与授权",
-                  "value": "按授权发布与披露"
+                  "label": "访问披露",
+                  "secondary_value": "不由题内批准推实际授权",
+                  "value": "核用途、权限与范围"
                 },
                 {
                   "alternate_value": null,
-                  "label": "步骤六",
-                  "secondary_value": "索引与保留",
-                  "value": "更新索引与保存记录"
+                  "label": "保存检索",
+                  "secondary_value": "按机构流程",
+                  "value": "索引、存储、调取与变更留痕"
                 },
                 {
                   "alternate_value": null,
-                  "label": "认证与培训",
-                  "secondary_value": "认证范围",
-                  "value": "按岗位与雇主要求"
+                  "label": "交接未决项",
+                  "secondary_value": "不凭猜测补资料",
+                  "value": "记录问题、状态与责任人"
                 }
               ]
             }
           },
           {
-            "answer": "资格与合规边界：美国 Job Zone Three 通常需要职业培训、相关在职经验或副学士学位；编码与发布权限按机构与法规核验，认证不等于执业或发布授权。",
+            "answer": {
+              "$item": "medical-records-and-health-information-technicians.profile.onet-structured-fields-block.5",
+              "block": "profile",
+              "copy_key": "career.item.onet-structured-fields-block",
+              "type": "prose"
+            },
             "key": "qa1",
             "question": "资格边界",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "01",
-                  "secondary_value": "需核对证据",
-                  "value": "核对患者身份与记录来源"
+                  "label": "教育",
+                  "secondary_value": "分别取得和核验",
+                  "value": "证书/学历按职位要求"
                 },
                 {
                   "alternate_value": null,
-                  "label": "02",
-                  "secondary_value": "需核对证据",
-                  "value": "按编码规则分类并保留依据"
+                  "label": "培训",
+                  "secondary_value": "分别取得和核验",
+                  "value": "医学术语与适用编码体系"
                 },
                 {
                   "alternate_value": null,
-                  "label": "03",
-                  "secondary_value": "需核对证据",
-                  "value": "核对记录完整性与合规"
+                  "label": "认证",
+                  "secondary_value": "分别取得和核验",
+                  "value": "雇主可能要求或偏好；核申请条件"
                 },
                 {
                   "alternate_value": null,
-                  "label": "04",
-                  "secondary_value": "需核对证据",
-                  "value": "按隐私要求处理访问与披露"
+                  "label": "记录更正",
+                  "secondary_value": "分别取得和核验",
+                  "value": "依机构更正流程与责任人"
                 },
                 {
                   "alternate_value": null,
-                  "label": "05",
-                  "secondary_value": "需核对证据",
-                  "value": "异常记录先隔离再升级"
+                  "label": "机构权限",
+                  "secondary_value": "分别取得和核验",
+                  "value": "访问、录入、审核范围分别确认"
                 },
                 {
                   "alternate_value": null,
-                  "label": "06",
-                  "secondary_value": "需核对证据",
-                  "value": "按授权链确认发布范围"
+                  "label": "披露权限",
+                  "secondary_value": "分别取得和核验",
+                  "value": "记录类型、用途、接收方与批准流程"
                 }
               ]
             }
@@ -14507,145 +14708,150 @@
       },
       "career_risk_cards": {
         "boundary": {
-          "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.1",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
+          "$item": "medical-records-and-health-information-technicians.sources.boundary-notice.2",
+          "block": "sources",
+          "copy_key": "career.item.boundary-notice",
           "type": "prose"
         },
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-work-risk"
+            "href": "#career-visual-group-risk",
+            "label": "风险与责任边界"
           }
         ],
-        "direct_answer": {
-          "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.2",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
-        "evidence_scope": {
-          "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.3",
-          "block": "risk",
-          "copy_key": "career.item.career-risk-cards",
-          "type": "prose"
-        },
+        "direct_answer": "风险看具体触发条件、涉及记录及权限，出现归属、编码或披露疑问按机构流程暂停相关处理并查询，不推全部临床服务停止。",
+        "evidence_scope": "O*NET职责/查询/保密要求支持风险背景；以下后果与控制为编辑归纳，不是事故概率或新增法律条文。",
         "heading": "工作压力、风险与职业责任边界",
         "risks": [
           {
-            "affected_roles": {
+            "affected_roles": "涉及该记录的录入、编码、审核或授权人员",
+            "consequence": "分类错误可能影响统计、报销或记录追溯；本页未核事故发生率。",
+            "evidence_refs": [
+              "onet-details",
+              "onet-details"
+            ],
+            "id": "cost-change",
+            "mitigation": "按编码规则复核并由责任人确认。",
+            "scenario": {
+              "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.1",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "编码依据与分类错误"
+          },
+          {
+            "affected_roles": "涉及该记录的录入、编码、审核或授权人员",
+            "consequence": "影响连续照护、报销与合规审计。",
+            "evidence_refs": [
+              "onet-details",
+              "onet-details"
+            ],
+            "id": "record-version",
+            "mitigation": "保留原资料，向责任人查询缺项，按更正流程留痕。",
+            "scenario": {
+              "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.2",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "缺失资料的确认与更正"
+          },
+          {
+            "affected_roles": "涉及该记录的录入、编码、审核或授权人员",
+            "consequence": "可能违反隐私法规与机构政策。",
+            "evidence_refs": [
+              "onet-details",
+              "onet-details"
+            ],
+            "id": "personal-data",
+            "mitigation": "按授权与法规确认发布范围。",
+            "scenario": {
+              "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.3",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "type": "prose"
+            },
+            "title": "访问与披露越权"
+          },
+          {
+            "affected_roles": "涉及该记录的录入、编码、审核或授权人员",
+            "consequence": "可能把信息关联到错误患者。",
+            "evidence_refs": [
+              "onet-details",
+              "onet-details"
+            ],
+            "id": "technical-boundary",
+            "mitigation": "按身份核对流程确认记录归属。",
+            "scenario": {
               "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.4",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "consequence": {
+            "title": "身份与附件错配"
+          },
+          {
+            "affected_roles": "涉及该记录的录入、编码、审核或授权人员",
+            "consequence": "可能放大差错并影响合规。",
+            "evidence_refs": [
+              "onet-details",
+              "onet-details"
+            ],
+            "id": "single-coverage",
+            "mitigation": "保留审核留痕并按流程升级。",
+            "scenario": {
               "$item": "medical-records-and-health-information-technicians.risk.career-risk-cards.5",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "evidence_refs": [
-              "onet",
-              "onet"
-            ],
-            "id": "cost-change",
-            "mitigation": "按编码规则复核并由责任人确认。",
-            "scenario": "编码或分类错误且未保留依据。",
-            "title": "病历记录专员"
-          },
-          {
-            "affected_roles": "记录与审核岗位",
-            "consequence": "影响连续照护、报销与合规审计。",
-            "evidence_refs": [
-              "onet",
-              "privacy"
-            ],
-            "id": "record-version",
-            "mitigation": "按完整性清单核对并补齐缺项。",
-            "scenario": "记录缺失、不完整或不准确。",
-            "title": "病历记录专员"
-          },
-          {
-            "affected_roles": "信息发布岗位",
-            "consequence": "可能违反隐私法规与机构政策。",
-            "evidence_refs": [
-              "privacy",
-              "privacy"
-            ],
-            "id": "personal-data",
-            "mitigation": "按授权与法规确认发布范围。",
-            "scenario": "越权发布或披露患者信息。",
-            "title": "病历记录专员"
-          },
-          {
-            "affected_roles": "录入与索引岗位",
-            "consequence": "可能把信息关联到错误患者。",
-            "evidence_refs": [
-              "onet",
-              "onet"
-            ],
-            "id": "technical-boundary",
-            "mitigation": "按身份核对流程确认记录归属。",
-            "scenario": "患者身份混淆导致记录错配。",
-            "title": "病历记录专员"
-          },
-          {
-            "affected_roles": "交付与值守岗位",
-            "consequence": "可能放大差错并影响合规。",
-            "evidence_refs": [
-              "bls",
-              "bls"
-            ],
-            "id": "single-coverage",
-            "mitigation": "保留审核留痕并按流程升级。",
-            "scenario": "时间压力或重复任务下跳过审核。",
-            "title": "病历记录专员"
+            "title": "时间压力下遗漏核对"
           },
           {
             "affected_roles": "技术与管理岗位",
             "consequence": "可能导致授权与责任错配。",
             "evidence_refs": [
-              "onet",
-              "onet"
+              "onet-details",
+              "onet-details"
             ],
             "id": "delivery-acceptance",
             "mitigation": "按 O*NET 29-2072.00 的范围区分相邻岗位。",
             "scenario": "把本职业与健康信息学专员、文档管理专员等相邻岗位混为一谈。",
-            "title": "病历记录专员"
+            "title": "相邻角色与权限混用"
           }
         ],
         "schema_version": "career.work_risk.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "onet-details",
-            "label": "Medical Records Specialists detailed occupation profile",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/29-2072.00",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "source-pack-onet-custom",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
             "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "source-pack-onet-summary",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-2072.00",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "source-pack-onet-industry",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "source-pack-onet-details",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           }
         ]
       },
@@ -14683,40 +14889,58 @@
           "china_edu_table": [
             {
               "学历段": "基础训练",
-              "岗位方向": "设备维护与技术支持",
-              "说明": "按雇主、设备类型和授权要求核对。"
+              "岗位方向": "记录归属与字段核对",
+              "说明": "编辑核对清单，不是中国统一学历要求"
             },
             {
-              "学历段": "相关专业",
-              "岗位方向": "医疗设备维修与保养",
-              "说明": "学历不是执业授权或结果放行的替代。"
+              "学历段": "相关课程",
+              "岗位方向": "医学术语与分类编码",
+              "说明": "核具体院校、岗位和所用体系"
             },
             {
-              "学历段": "经验阶段",
-              "岗位方向": "现场服务与故障诊断",
-              "说明": "用可复核工作样本证明能力边界。"
+              "学历段": "经验核验",
+              "岗位方向": "记录质量审核与查询",
+              "说明": "不提交真实患者资料；按机构权限评价"
             },
             {
-              "学历段": "进阶阶段",
-              "岗位方向": "质量、校准与责任交接",
-              "说明": "具体要求以机构流程和所在地规则为准。"
+              "学历段": "责任扩展",
+              "岗位方向": "信息流程与带教",
+              "说明": "以岗位聘任、训练和权限为准"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "医院与临床工程",
-              "需求": "需核对设备范围、值班与授权链。"
+              "行业": "医院与诊所",
+              "需求": "核病历归属、记录质量和访问/披露范围"
             },
             {
-              "行业": "设备制造商服务",
-              "需求": "需核对厂商培训、现场服务与记录要求。"
+              "行业": "医疗信息与编码服务",
+              "需求": "核委托范围、所用分类体系和资料处理权限"
             },
             {
-              "行业": "第三方维修服务",
-              "需求": "需核对合同边界、出差与责任交接。"
+              "行业": "机构记录与行政支持",
+              "需求": "核是否实际承担本职业职责，不凭名称映射"
             }
           ],
-          "china_intl": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+          "china_intl": {
+            "$join": [
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-records-and-health-information-technicians.source-register.published.1"
+              },
+              {
+                "$source": "onet-summary",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-records-and-health-information-technicians.source-register.published.1"
+              }
+            ],
+            "separator": "｜"
+          },
           "china_name_row": {
             "$item": "medical-records-and-health-information-technicians.china-salary.career-snapshot-primary-locale.1",
             "block": "china-salary",
@@ -14725,10 +14949,28 @@
           },
           "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
-          "china_ref": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+          "china_ref": {
+            "$join": [
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "medical-records-and-health-information-technicians.source-register.published.1"
+              },
+              {
+                "$source": "nbs-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "medical-records-and-health-information-technicians.source-register.published.1"
+              }
+            ],
+            "separator": "｜"
+          },
           "china_salary_note": {
             "$join": [
-              "中国精确职业工资数据不可得；本页不展示或换算中国薪资数字。",
+              "本页未取得中国精确职业工资，不换算美国工资补缺",
               {
                 "$item": "medical-records-and-health-information-technicians.china-salary.career-snapshot-primary-locale.5",
                 "block": "china-salary",
@@ -14758,7 +15000,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+          "sources_note": "国家统计局为行业聚合，O*NET为美国职责背景；都不建立中国本职业工资或资格互认。",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
@@ -14769,215 +15011,225 @@
             "scenario_role_label": "岗位方向",
             "scenario_value_label": "数据状态"
           },
-          "us_growth": "未提供",
-          "us_median": "未提供"
+          "us_growth": "不适用于中国",
+          "us_median": "不适用于中国"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+        "authority_sources": {
+          "$join": [
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "medical-records-and-health-information-technicians.source-register.published.1"
+            }
+          ],
+          "separator": ""
+        },
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$37,000",
+            "说明": "美国29-2072.00；2025全国工资；时薪$17.79"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$43,490",
+            "说明": "美国29-2072.00；2025全国工资；时薪$20.91"
           },
           {
             "指标": "薪资中位数",
-            "数值": "$61,660",
-            "说明": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+            "数值": "$51,140",
+            "说明": "美国29-2072.00；2025全国工资；时薪$24.59"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$64,820",
+            "说明": "美国29-2072.00；2025全国工资；时薪$31.17"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "$81,150",
+            "说明": "美国29-2072.00；2025全国工资；时薪$39.01"
           },
           {
             "指标": "就业人数",
-            "数值": "71,800",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "数值": "200,700→216,300",
+            "说明": "BLS2025→2035；净增加15,600"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "12.6%",
-            "说明": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure｜https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+            "指标": "就业前景2025—2035",
+            "数值": "8%",
+            "说明": "BLS官网整数增长率，不自行替为比值"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "8,200",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "指标": "就业岗位空缺（年均）",
+            "数值": "14,000",
+            "说明": "BLS2025—2035；含替换需求，非现有招聘"
           }
         ],
-        "boundary": "美国数据只适用于 medical-records-and-health-information-technicians 的标注期间；不外推中国，也不构成个人收入或录用保证。",
+        "boundary": "本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。 BLS另列专业、科学和技术服务年薪中位数46,800美元；五全国分位与五行业中位数口径不同。",
         "direct_answer": {
           "$join": [
-            "病历记录专员的美国中位年薪事实可以单独引用，但工资分位分布未取得同范围可解释数据，因此不补写分位数。",
             {
               "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.1",
               "block": "us-salary",
               "copy_key": "career.item.career-snapshot-secondary-locale",
               "type": "prose"
+            },
+            {
+              "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             }
           ],
-          "separator": "；"
+          "separator": "\n"
         },
         "factor_rows": [
           {
-            "answer": "核对设备类型、校准、测试和结果放行责任。",
-            "factor": "设备与责任范围"
+            "answer": "核编码体系、记录类型、质量审核和访问/披露范围",
+            "factor": "任务与权限"
           },
           {
-            "answer": "核对值班、出差、现场服务和区域差异。",
+            "answer": "核地区、合同工时、夜班或周末及福利",
             "factor": "地点与班次"
           },
           {
-            "answer": "核对雇主培训、认证偏好和可复核工作样本。",
-            "factor": "资格与经验"
+            "answer": {
+              "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "factor": "准备与具体岗位"
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "12.6%",
+        "growth": "8%",
         "heading": "病历记录专员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "医院与临床工程",
-            "median": "需核对具体岗位",
-            "note": "设备范围、值班和授权可能不同。"
+            "industry": "企业管理",
+            "median": "$60,980",
+            "note": "BLS本职业2025各行业年薪中位数；不是行业就业份额。"
           },
           {
-            "industry": "设备制造商服务",
-            "median": "需核对具体岗位",
-            "note": "厂商培训、现场服务与出差要求可能不同。"
+            "industry": "医院",
+            "median": "$59,120",
+            "note": "BLS本职业2025各行业年薪中位数；不是行业就业份额。"
           },
           {
-            "industry": "第三方维修服务",
-            "median": "需核对具体岗位",
-            "note": "合同边界和责任交接可能不同。"
+            "industry": "行政与支持服务",
+            "median": "$49,490",
+            "note": "BLS本职业2025各行业年薪中位数；不是行业就业份额。"
           },
           {
-            "industry": "其他雇主与地区",
-            "median": "需核对具体岗位",
-            "note": "地点、经验、福利与资格会改变实际条件。"
+            "industry": "医生诊所",
+            "median": "$47,120",
+            "note": "BLS本职业2025各行业年薪中位数；不是行业就业份额。"
           }
         ],
-        "industry_value_label": "岗位数据",
+        "industry_value_label": "2025年薪中位数（美元）",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
-            "answer": {
-              "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
-                {
-                  "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "question": "中位工资代表什么？"
+            "answer": "同职业全国工资分布位置，不代表统一起薪、年限或个人到手收入。",
+            "question": "分位数说明什么？"
           },
           {
             "answer": {
-              "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
-                {
-                  "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.6",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
+              "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             },
-            "question": "为什么不展示分位数？"
+            "question": "行业份额和行业工资相同吗？"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
+            "answer": {
+              "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
             "question": "就业人数代表什么？"
           },
           {
-            "answer": "增长预测和年度空缺是市场信号，不是个人录用概率。",
-            "question": "增长与空缺如何使用？"
+            "answer": {
+              "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "增长与空缺如何分开？"
           }
         ],
-        "median": "$61,660",
+        "median": "$51,140",
         "outlook_heading": "就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资层级",
-          "年薪参考",
-          "月度等值",
+          "统计位置",
+          "年薪（美元）",
+          "官网时薪（美元）",
           "解释"
         ],
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
-            "interpretation": {
-              "$join": [
-                "仅表示中位年薪事实，不是起薪或个人报价。",
-                {
-                  "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.2",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "已取得的中位水平",
-            "value": "$61,660"
+            "equivalent": "$17.79/小时",
+            "interpretation": "统计位置，不是固定入门工资",
+            "label": "第10百分位",
+            "value": "$37,000"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "$24.59/小时",
+            "interpretation": "全国分布中间位置，不是个人报价",
+            "label": "中位数",
+            "value": "$51,140"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-records-and-health-information-technicians.us-salary.career-snapshot-secondary-locale.4",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "$39.01/小时",
+            "interpretation": "高分位，不等同资深职级",
+            "label": "第90百分位",
+            "value": "$81,150"
           }
         ]
       },
-      "definition_block": "病历记录专员对应 O*NET 29-2072.00，官方职责为按医疗、行政、伦理、法律与监管要求汇总、处理并维护医院与诊所患者的医疗记录，并把诊断与操作等编入编码系统。",
+      "definition_block": {
+        "$item": "medical-records-and-health-information-technicians.profile.definition-block.1",
+        "block": "profile",
+        "copy_key": "career.item.definition-block",
+        "type": "prose"
+      },
       "faq_block": {
         "items": {
           "$item": "medical-records-and-health-information-technicians.sources.faq-block.1",
@@ -14987,26 +15239,32 @@
         }
       },
       "fermat_decision_card": {
-        "caveat": {
-          "$item": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+        "caveat": "本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。",
+        "summary": {
+          "$join": [
+            {
+              "$item": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.1",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-records-and-health-information-technicians.quick-decision.fit-decision-checklist.2",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "summary": "适合愿意按编码规则与合规要求整理、核对并保护医疗记录、能在重复任务与时间压力下坚持准确性的人。",
         "title": "病历记录专员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": {
-          "$item": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.1",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
-        },
+        "boundary": "谨慎信号：经提示仍跳过记录归属或批准、用猜测补缺项、为流转改原值，先补核对与查询训练再试。一次纸面错误不决定职业资格。本页用于美国29-2072.00职业探索，医学文档解释服务于编码，不授临床诊断权；实际编码、改正记录、访问与披露依适用规则、训练和机构授权。试做仅用下列编辑虚构的普通档案，不含患者信息，也不是真实医疗编码、发布或资格考核。",
         "how": {
-          "$item": "medical-records-and-health-information-technicians.quick-decision.fit-decision-checklist.2",
+          "$item": "medical-records-and-health-information-technicians.quick-decision.fermat-decision-card.4",
           "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
+          "copy_key": "career.item.fit-decision-checklist",
           "type": "prose"
         },
         "suit": {
@@ -15018,53 +15276,62 @@
       },
       "hero": {
         "h1": "病历记录专员",
-        "quick_answer": "病历记录专员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则。",
+        "quick_answer": "整理、维护、审核患者医疗记录，按标准分类系统编码，遇到缺失或矛盾资料向相关人员确认，按授权访问与披露。分类编码不等于作临床诊断。",
         "title": "病历记录专员"
       },
       "market_signal_card": {
         "context_links": [
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-us-salary",
+            "label": "美国工资与双期预测"
           },
           {
-            "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "href": "#career-visual-group-path",
+            "label": "入行与准备条件"
           }
         ],
         "direct_answer": {
-          "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.1",
-          "block": "market-signals",
-          "copy_key": "career.item.market-signal-card",
-          "type": "prose"
-        },
-        "heading": "职业前景、市场信号与相关职业转向",
-        "outlook_evidence": [
-          {
-            "geography": {
+          "$join": [
+            {
+              "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.1",
+              "block": "market-signals",
+              "copy_key": "career.item.market-signal-card",
+              "type": "prose"
+            },
+            {
               "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.2",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "horizon": {
+            {
               "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.3",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "interpretation": {
+            {
               "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.4",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "limitation": {
+            {
               "$item": "medical-records-and-health-information-technicians.market-signals.market-signal-card.5",
               "block": "market-signals",
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
-            },
+            }
+          ],
+          "separator": "\n"
+        },
+        "heading": "职业前景、市场信号与相关职业转向",
+        "outlook_evidence": [
+          {
+            "geography": "美国全国",
+            "horizon": "2025工资",
+            "interpretation": "同职业全国工资中位数，不是起薪",
+            "limitation": "不跨地区推个人收入",
             "metric": "年薪中位数（2025）",
             "occupation_scope": "展示口径：Medical Records Specialists（O*NET 29-2072.00）",
             "source_id": "ep",
@@ -15072,115 +15339,115 @@
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
+            "horizon": "2025—2035",
+            "interpretation": "BLS新期年均空缺，含增长和替换，不是现有在招",
             "limitation": "不能作为个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "展示口径：29-2072.00",
             "source_id": "bls",
-            "value": "约 14,200 个/年"
+            "value": "14,000个/年"
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
+            "horizon": "2025—2035",
             "interpretation": "就业规模、净变化、增长率与空缺必须分别解释。",
             "limitation": "为统计预测，不构成单列本职业就业保证。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：29-2072.00",
-            "source_id": "nbs",
-            "value": "2024 年约 194,800 人，2034 年预计约 208,600 人"
+            "source_id": "bls",
+            "value": "200,700→216,300；净+15,600；官方8%"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.bls.gov/ooh/healthcare/medical-records-and-health-information-technicians.htm",
             "id": "bls",
-            "label": "National Wages 29-2072.00 Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS本职业手册",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/localwages/29-2072.00",
             "id": "ep",
-            "label": "Medical Records Specialists detailed occupation profile",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业全国工资",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "nbs",
-            "label": "2025年城镇单位就业人员年平均工资情况",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
             "id": "onet",
-            "label": "29-2072.00 Medical Records Specialists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET本职业职责与准备",
+            "scope": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "需补齐系统与数据治理知识。",
-            "shared_capabilities": "医学术语与数据标准理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "健康信息学专员",
+            "capability_gaps": "补目标方向护理与信息学知识、健康系统设计实施及目标岗位准备；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/health-informatics-specialists",
+            "target_slug": "health-informatics-specialists",
+            "target_title": "健康信息学专家",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐通用文档与保留规则。",
-            "shared_capabilities": "记录生命周期与归档规范。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向企业文档系统、电子记录存储检索/共享/销毁规程；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/document-management-specialists",
+            "target_slug": "document-management-specialists",
             "target_title": "文档管理专员",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐业务分析与组织方法。",
-            "shared_capabilities": "流程与信息分析基础。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "管理分析师",
+            "capability_gaps": "补目标方向组织研究、测量、流程设计与管理建议；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/management-analysts",
+            "target_slug": "management-analysts",
+            "target_title": "管理咨询分析师",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐行政与排程技能。",
-            "shared_capabilities": "医疗行政与沟通经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医务秘书与行政助理",
+            "capability_gaps": "补目标方向预约、账务、报告/通信等医务行政任务；本地页为合并职业；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/secretaries-and-administrative-assistants",
+            "target_slug": "secretaries-and-administrative-assistants",
+            "target_title": "秘书与行政助理（含医务方向）",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐管理与预算职责。",
-            "shared_capabilities": "医疗机构运作理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向服务规划、组织管理和目标岗位教育/经验；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/medical-and-health-services-managers",
+            "target_slug": "medical-and-health-services-managers",
             "target_title": "医疗与健康服务经理",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐执照与临床授权。",
-            "shared_capabilities": "患者照护与医疗环境经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向护理评估、照护实践与目标执照或注册；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/registered-nurses",
+            "target_slug": "registered-nurses",
             "target_title": "注册护士",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐执业与监督要求。",
-            "shared_capabilities": "临床流程理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "补目标方向认可的医师助理教育、医师监督下诊疗及适用执业要求；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/physician-assistants",
+            "target_slug": "physician-assistants",
             "target_title": "医师助理",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐数据库与工程技能。",
-            "shared_capabilities": "数据质量与结构理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "数据库与数据管理员",
+            "capability_gaps": "补目标方向数据库系统管理、性能/容量/扩展性和安全措施；不是补回病历编码。",
+            "shared_capabilities": "可能迁移记录核对、依据留痕和沟通习惯；不推已具目标实操或临床照护经验。",
+            "target_href": "/zh/career/jobs/database-administrators",
+            "target_slug": "database-administrators",
+            "target_title": "数据库管理员",
             "transition_distance": "需补证据"
           }
         ]
@@ -15232,13 +15499,8 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 RCI 适配测试",
-            "evidence_level": {
-              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.8",
-              "block": "fit",
-              "copy_key": "career.item.personality-fit-block",
-              "type": "prose"
-            },
+            "cta_label": "探索CI职业兴趣",
+            "evidence_level": "官方CI是美国职业活动兴趣描述，不是资格或表现分数。",
             "id": "riasec",
             "label": "RIASEC 兴趣代码（CI）",
             "question": "做病历记录专员需要怎样的能力与工作方式？",
@@ -15251,13 +15513,13 @@
             "watchout": "兴趣代码只描述活动偏好，不能替代真实任务、编码规则与雇主判断。"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "用尽责、压力和协作自述提出假设，再核题面是否遗漏归属或批准。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
             "cta_label": "做大五适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "evidence_level": "编辑探索建议，不是本职业效能或资格验证。",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
-            "question": "做病历记录专员需要怎样的能力与工作方式？",
+            "question": "大五倾向如何核对？",
             "signals": {
               "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.2",
               "block": "fit",
@@ -15267,13 +15529,13 @@
             "watchout": "标签只描述倾向，不能替代真实任务、合规要求与雇主判断。"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "answer": "类型不能证明编码训练、精确性或权限；用具体核对行为评估。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
             "cta_label": "做 MBTI 适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "evidence_level": "编辑探索建议，不是本职业效能或资格验证。",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
-            "question": "做病历记录专员需要怎样的能力与工作方式？",
+            "question": "MBTI能决定编码胜任吗？",
             "signals": {
               "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.3",
               "block": "fit",
@@ -15283,31 +15545,29 @@
             "watchout": "类型标签不能判断是否胜任编码或记录审核工作。"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "只反思面对重复核对、催促和出错时的行为；不能授资格。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做九型适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑探索建议，不是本职业效能或资格验证。",
             "id": "enneagram",
             "label": "九型人格（Enneagram）",
-            "question": "做病历记录专员需要怎样的能力与工作方式？",
-            "signals": {
-              "$item": "medical-records-and-health-information-technicians.fit.riasec-fit-block.4",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "list"
-            },
+            "question": "九型如何用于反思？",
+            "signals": [
+              "编辑反思：遇到错配是否先求证，而不是迎合催促。",
+              "类型不预测编码准确率或合规能力。"
+            ],
             "watchout": "类型标签不构成临床沟通或合规能力证据。"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "不能覆盖医学术语、编码体系训练和合规经验。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做认知能力适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑探索建议，不是本职业效能或资格验证。",
             "id": "iq",
             "label": "认知能力测验（IQ）",
-            "question": "做病历记录专员需要怎样的能力与工作方式？",
+            "question": "认知测验能覆盖职业技能吗？",
             "signals": {
-              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.5",
+              "$item": "medical-records-and-health-information-technicians.fit.riasec-fit-block.4",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
@@ -15315,15 +15575,15 @@
             "watchout": "测验只反映部分认知特征，不覆盖编码经验与合规判断。"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "看能否准确传递未决问题和权限限制；沟通顺畅不免除隐私责任。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 EQ 适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "cta_label": "继续职业兴趣探索",
+            "evidence_level": "编辑探索建议，不是本职业效能或资格验证。",
             "id": "eq",
             "label": "情绪智力测验（EQ 量表）",
-            "question": "做病历记录专员需要怎样的能力与工作方式？",
+            "question": "沟通风格怎样用？",
             "signals": {
-              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.6",
+              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.5",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
@@ -15331,58 +15591,68 @@
             "watchout": "测验不构成隐私合规与跨部门协作的能力证据。"
           }
         ],
-        "boundary": "本页仅用于职业探索；编码、记录发布与隐私合规须以所在地法规、机构政策与授权链为准，人格工具不能替代资格与合规要求。",
+        "boundary": {
+          "$join": [
+            {
+              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.6",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "list"
+            }
+          ],
+          "separator": "\n"
+        },
         "direct_answer": "适配看可观察行为：能否按编码规则分类并保留依据、能否坚持记录完整性与隐私、能否在重复任务与时间压力下保持准确。",
         "directions": [
           {
             "direction": "记录汇总与索引",
             "fit_signals": "能按索引与保留规则汇总并保存记录。",
             "target": {
-              "href": "/zh/career/jobs/general-and-operations-managers",
-              "slug": "general-and-operations-managers",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "href": "/zh/career/jobs/document-management-specialists",
+              "slug": "document-management-specialists",
+              "title": "文档管理专员"
             },
-            "watchouts": "记录真实性与来源须复核。"
+            "watchouts": "仅为编辑探索比较；须补目标方向企业文档系统、电子记录存储检索/共享/销毁规程，不表示直接转岗或当前具备实操。"
           },
           {
             "direction": "数据录入与校验",
             "fit_signals": "能按字段定义录入并校验数据。",
             "target": {
-              "href": "/zh/career/jobs/purchasing-managers",
-              "slug": "purchasing-managers",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "href": "/zh/career/jobs/database-administrators",
+              "slug": "database-administrators",
+              "title": "数据库管理员"
             },
-            "watchouts": "字段口径与来源须核对。"
+            "watchouts": "仅为编辑探索比较；须补目标方向数据库系统管理、性能/容量/扩展性和安全措施，不表示直接转岗或当前具备实操。"
           },
           {
             "direction": "编码与分类",
             "fit_signals": "能按编码规则分类并保留依据。",
             "target": {
-              "href": "/zh/career/jobs/archivists",
-              "slug": "archivists",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "href": "/zh/career/jobs/health-informatics-specialists",
+              "slug": "health-informatics-specialists",
+              "title": "健康信息学专家"
             },
-            "watchouts": "编码结论须由有资质者确认。"
+            "watchouts": "仅为编辑探索比较；须补目标方向护理与信息学知识、健康系统设计实施及目标岗位准备，不表示直接转岗或当前具备实操。"
           },
           {
             "direction": "记录审核",
             "fit_signals": "能按清单核对完整性、准确与合规。",
             "target": {
-              "href": "/zh/career/jobs/administrative-services-managers",
-              "slug": "administrative-services-managers",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "href": "/zh/career/jobs/management-analysts",
+              "slug": "management-analysts",
+              "title": "管理咨询分析师"
             },
-            "watchouts": "审核结论须经责任人确认。"
+            "watchouts": "仅为编辑探索比较；须补目标方向组织研究、测量、流程设计与管理建议，不表示直接转岗或当前具备实操。"
           },
           {
             "direction": "信息发布与隐私",
             "fit_signals": "能按授权与法规处理发布与披露。",
             "target": {
-              "href": "/zh/career/jobs/human-resources-managers",
-              "slug": "human-resources-managers",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "href": "/zh/career/jobs/secretaries-and-administrative-assistants",
+              "slug": "secretaries-and-administrative-assistants",
+              "title": "秘书与行政助理（含医务方向）"
             },
-            "watchouts": "发布范围不得越权。"
+            "watchouts": "仅为编辑探索比较；须补目标方向预约、账务、报告/通信等医务行政任务；本地页为合并职业，不表示直接转岗或当前具备实操。"
           },
           {
             "direction": "跨部门协作",
@@ -15390,70 +15660,75 @@
             "target": {
               "href": "/zh/career/jobs/medical-and-health-services-managers",
               "slug": "medical-and-health-services-managers",
-              "title": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure"
+              "title": "医疗与健康服务经理"
             },
-            "watchouts": "不越权作临床或法律结论。"
+            "watchouts": "仅为编辑探索比较；须补目标方向服务规划、组织管理和目标岗位教育/经验，不表示直接转岗或当前具备实操。"
           }
         ],
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "常规型偏数据规程，研究型偏分析核对；美国职业兴趣不是个人录用分数。",
+            "question": "CI说明什么？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "遮住答案重做，记录是否发现U102错配及U103两个未决项。",
+            "question": "怎样观察精确性？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "还需医学术语、所用体系训练、监督表现与权限核验。",
+            "question": "喜欢重复记录足够吗？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "保留原值，向相关人员查询，不自己编造原始病历。",
+            "question": "怎样处理缺项？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "不能替代任务、准备和权限条件。",
+            "question": "MBTI能筛选职业吗？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "提出行为假设并对照核对表与纠错版，不直接换算准确率。",
+            "question": "大五怎样帮助探索？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "不能。须实际体系训练、文档理解和岗位评价。",
+            "question": "认知测验高分能独立编码吗？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "写清问题、来源、影响、待决状态和需要谁确认。",
+            "question": "沟通能力如何观察？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "每天30—60分钟重复本题核对和查询，比较纠错及体验。",
+            "question": "七日试做怎么用？"
           },
           {
-            "answer": "病历记录专员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做病历记录专员需要怎样的能力与工作方式？"
+            "answer": "只代表按题面完成普通档案规则，不是真实医疗编码或披露资格。",
+            "question": "试做通过代表什么？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
         "signals": [
           {
-            "body": "愿意反复核对患者身份与编码依据、遵守隐私与记录规范，并能与医护和信息部门清晰沟通。",
+            "body": "观察是否逐项核对身份、字典、来源与批准；愿意保留原值并提出缺失或矛盾查询。",
             "id": "fit",
             "label": "积极信号",
             "tone": "positive"
           },
           {
-            "body": "若难以承受重复性任务与高精确要求、对隐私与合规责任压力不适，可先比较相邻方向。",
+            "body": "若经提示仍跳过归属/权限，或总用猜测补缺项，先补训练并再试；一次纸面表现不决定职业资格。",
             "id": "caution",
             "label": "需谨慎的条件",
             "tone": "caution"
           },
           {
-            "body": "用完全虚构的病历包完成一次编码、审核与发布演练，再决定是否继续。",
+            "body": {
+              "$item": "medical-records-and-health-information-technicians.fit.personality-fit-block.8",
+              "block": "fit",
+              "copy_key": "career.item.personality-fit-block",
+              "type": "prose"
+            },
             "id": "experiment",
             "label": "下一步试验动作",
             "tone": "action"
@@ -15461,44 +15736,44 @@
         ],
         "source_links": [
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Medical Records Specialists detailed occupation profile",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "National Certifications 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           },
           {
-            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/29-2072.00",
+            "label": "O*NET本职业职责与准备",
+            "usage": "仅按所列职责、准备或统计期间使用；不作为机构采用率或资格互认证据。"
           }
         ]
       },
@@ -15532,16 +15807,11 @@
       },
       "source_card": {
         "eeat_signals": {
-          "author": {
-            "$item": "medical-records-and-health-information-technicians.sources.boundary-notice.2",
-            "block": "sources",
-            "copy_key": "career.item.boundary-notice",
-            "type": "prose"
-          },
-          "source": "O*NET 29-2072.00 与 BLS 2025 年工资、2024—2034 年就业预测",
-          "updated_at": "查阅日期 2026-09-25"
+          "author": "FermatMind编辑核查：事实、预测与纸面假设分开",
+          "source": "O*NET本职业2026摘要、2025工资/招聘、2024—2034趋势；BLS2025—2035手册",
+          "updated_at": "查阅2026-10-03"
         },
-        "note": "证据只支持病历记录专员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
+        "note": "本轮核完整五工资分位/时薪、BLS五行业工资与新期预测、O*NET旧期趋势/16任务/CI/情境、23招聘软件、25认证及1013课程目录的计数/前列/供数日期。BLS明确AI编码效率可能影响需求；ILO仅读概览/摘要。八目标定义支持编辑比较，本地秘书页为合并范围。中国全国职业工资未取得；本页普通档案题非真实医疗编码或授权考核。",
         "secondary_links": [
           {
             "href": {
@@ -15551,7 +15821,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "O*NET OnLine 职业档案"
+            "label": "英文MBTI探索"
           },
           {
             "href": {
@@ -15561,7 +15831,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "O*NET 全国就业趋势页"
+            "label": "英文大五探索"
           },
           {
             "href": {
@@ -15571,7 +15841,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "O*NET 行业分布"
+            "label": "中文MBTI探索"
           },
           {
             "href": {
@@ -15581,11 +15851,16 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "国家统计局工资统计方法"
+            "label": "中文大五探索"
           }
         ]
       },
-      "work_context_block": "工作情境（O*NET 工作情境调查，1—5 分）：电子邮件 4.82、电话沟通 4.77、面对面讨论 4.77、团队协作 4.70 最为突出；精确或高度准确 4.60、重复性任务 4.37、确定任务与优先 4.36、受控室内 4.32、与他人接触 4.27 也较高；时间压力 4.08、自主决策 3.80、错误对同事与结果的影响 3.50 为中等。"
+      "work_context_block": {
+        "$item": "medical-records-and-health-information-technicians.profile.work-context-block.3",
+        "block": "profile",
+        "copy_key": "career.item.work-context-block",
+        "type": "prose"
+      }
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15693,7 +15968,7 @@
         "market": "美国",
         "measure": "occupation identity",
         "occupation_scope": "精确职业数据；O*NET 29-2072.00",
-        "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+        "period": "O*NET 2026 职业档案；查阅2026-10-03",
         "source_refs": [
           "source-pack-onet-summary"
         ]
@@ -15705,7 +15980,7 @@
         "market": "美国（Medical Records Specialists 29-2072.00）",
         "measure": "2025 年年薪中位数",
         "occupation_scope": "Medical Records Specialists（O*NET 29-2072.00，本职业口径）",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "period": "2025 年工资数据；查阅2026-10-03",
         "source_refs": [
           "onet-wages"
         ]
@@ -15717,19 +15992,19 @@
         "market": "美国",
         "measure": "10 分位年薪",
         "occupation_scope": "O*NET 29-2072.00 本职业口径",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "period": "2025 年工资数据；查阅2026-10-03",
         "source_refs": [
           "onet-wages"
         ]
       },
       {
         "derivation": "O*NET 全国工资页 90 分位。",
-        "display_value": "81,150 美元/年（约 39.02 美元/小时）",
+        "display_value": "81,150 美元/年（39.01 美元/小时）",
         "fact_id": "us-p90",
         "market": "美国",
         "measure": "90 分位年薪",
         "occupation_scope": "O*NET 29-2072.00 本职业口径",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "period": "2025 年工资数据；查阅2026-10-03",
         "source_refs": [
           "onet-wages"
         ]
@@ -15741,7 +16016,7 @@
         "market": "美国",
         "measure": "2024 年就业规模",
         "occupation_scope": "O*NET 29-2072.00 本职业口径",
-        "period": "2024；查阅 2026-09-25",
+        "period": "2024；查阅2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -15753,7 +16028,7 @@
         "market": "美国",
         "measure": "就业增长预测",
         "occupation_scope": "O*NET 29-2072.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2024—2034；查阅2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -15765,7 +16040,7 @@
         "market": "美国",
         "measure": "预计职位空缺（年均）",
         "occupation_scope": "O*NET 29-2072.00 本职业口径",
-        "period": "2024—2034；查阅 2026-09-25",
+        "period": "2024—2034；查阅2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -15840,7 +16115,7 @@
       "text": "病历记录专员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "00931ec01b1788ba4ac5b1f2d064e0a45e2c480789b627b9157de0dcde3af3f0",
+  "source_content_sha256": "1187656f01036f217ba3cd7a17684f6b79ddec22654feb9e0c227daf2b0f4239",
   "subject": {
     "canonical_slug": "medical-records-and-health-information-technicians",
     "name": "病历记录专员",

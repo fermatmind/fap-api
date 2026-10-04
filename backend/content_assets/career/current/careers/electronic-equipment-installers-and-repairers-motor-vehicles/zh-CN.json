@@ -26024,7 +26024,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26038,7 +26038,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26052,7 +26052,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26066,7 +26066,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26080,7 +26080,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26094,7 +26094,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26108,7 +26108,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26122,7 +26122,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26136,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26150,7 +26150,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26164,7 +26165,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26178,7 +26180,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26192,7 +26194,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26206,7 +26208,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26220,7 +26222,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31022,16 +31024,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 47% 回答需要中学后证书、45% 需要高中文凭、4% 需要副学士；部分岗位要求品牌厂商培训认证。中国大陆学历与证书要求以用人单位招聘条件为准。",
+                "answer": "美国 O*NET 调查中约 47% 回答需要中学后证书、45% 需要高中文凭、4% 需要副学士；部分岗位要求品牌厂商培训认证。中国大陆机动车维修经营单位的技术人员配备与维修质量检验按《机动车维修管理规定》（交通运输部令 2023 年第 14 号）执行（如质量检验人员签发机动车维修竣工出厂合格证）；学历与证书要求以用人单位招聘条件为准，涉及机动车维修经营的按交通运输主管部门要求核验。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和证书？",
                 "question_key": "career.faq.electronic-equipment-installers-and-repairers-motor-vehicles.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31310,20 @@
                 "url": "https://www.bls.gov/ooh/installation-maintenance-and-repair/home.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策、职业与培训入口。",
-                  "入口页不承载职业工资数值。"
+                  "规定机动车维修经营单位的分类备案与技术负责人、质量检验人员、机修/电器等维修技术人员配备要求。",
+                  "第三十二条规定机动车维修竣工质量检验合格后由质量检验人员签发《机动车维修竣工出厂合格证》；学历与证书要求仍以用人单位招聘条件为准。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "适用从事机动车维修经营的单位及其技术人员配备与质量检验，不构成对该职业全部岗位的统一学历或证书要求。",
                 "market": "中国",
-                "name": "人力资源和社会保障部 — 职业与培训公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "交通运输部：《机动车维修管理规定》（2023 年第 14 号令修正）",
+                "period": "2023-11-10 公布并施行；accessed 2026-09-30",
+                "publisher": "中华人民共和国交通运输部",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://xxgk.mot.gov.cn/2020/jigou/fgs/202312/t20231204_3961931.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31438,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37090,7 +37094,7 @@
       "text": "机动车电子设备安装维修工：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "e6b956868b24daa9503f9ba07b70e4cb0da118bb7ebf2a7e15a70ed6ffb49f00",
+  "source_content_sha256": "2636721960cff34eb03bd1b0314c97800c6a06044a7c3cecce301a697f2ac3d3",
   "subject": {
     "canonical_slug": "electronic-equipment-installers-and-repairers-motor-vehicles",
     "name": "机动车电子设备安装维修工",

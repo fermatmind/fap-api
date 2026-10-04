@@ -26024,7 +26024,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26038,7 +26038,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26052,7 +26052,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26066,7 +26066,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26080,7 +26080,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26094,7 +26094,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26108,7 +26108,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26122,7 +26122,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26136,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26150,7 +26150,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26164,7 +26165,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26178,7 +26180,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26192,7 +26194,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26206,7 +26208,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26220,7 +26222,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31022,16 +31024,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.electronics-engineers-except-computer.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 83% 回答需要学士学位、14% 需要副学士、3% 需要硕士；中国大陆多要求本科及以上。对外提供工程服务或签署设计文件时可能需相应资格，按工作地与单位核验。",
+                "answer": "美国 O*NET 调查中约 83% 回答需要学士学位、14% 需要副学士、3% 需要硕士；中国大陆的学历与资格要求按目标单位招聘公告与主管部门规定逐项核对，本页未取得可对外引用的全国统一条件。对外提供建设工程勘察、设计及有关业务活动时，依《勘察设计注册工程师管理规定》（建设部令第 137 号）须经考试取得资格证书并注册、取得注册证书与执业印章后方可执业，其他单位内部岗位仍按雇主要求核验。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.electronics-engineers-except-computer.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31310,20 @@
                 "url": "https://www.bls.gov/ooh/architecture-and-engineering/electrical-and-electronics-engineers.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策、职业与培训入口。",
-                  "入口页不承载职业工资数值。"
+                  "第三条规定注册工程师须经考试取得资格证书、按规定注册取得注册证书与执业印章后方可从事建设工程勘察、设计及有关业务活动；未取得注册证书及执业印章的人员不得以注册工程师名义从事相应业务活动。",
+                  "第四条规定注册工程师按专业类别设置，具体专业划分由国务院住房城乡建设主管部门和人事主管部门商国务院有关部门制定；某专业是否属现行已开考、可注册的专业，应以住房城乡建设主管部门公布的注册专业目录与考试安排为准，不宜据《勘察设计注册工程师制度总体框架及实施规划》（人发〔2001〕5 号）的专业划分直接推断该注册执业已实施。不对外提供工程服务或签署设计文件的岗位不必然需要该执业资格，具体按单位与岗位核验。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "仅适用于建设工程勘察、设计及有关业务活动的注册执业管理，不构成对该职业全部岗位的统一准入要求；具体以规定原文与主管部门要求为准。",
                 "market": "中国",
-                "name": "人力资源和社会保障部 — 职业与培训公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "住房和城乡建设部：《勘察设计注册工程师管理规定》（建设部令第 137 号）",
+                "period": "2005-02-04 发布（2016 年修正）；accessed 2026-09-30",
+                "publisher": "中华人民共和国住房和城乡建设部",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.mohurd.gov.cn/gongkai/zhengce/gzk/art/2022/art_17337_763864.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31438,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37090,7 +37094,7 @@
       "text": "电子工程师（计算机除外）：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "96748ada8ff081c2fcb6945c194fa94e4668e158d95f7d3aa7a8ca68e6830997",
+  "source_content_sha256": "cf704367555c1d286506a6c774c5107bfe5d3e8ea0d7b6ba3fe7a4c07fbf3faf",
   "subject": {
     "canonical_slug": "electronics-engineers-except-computer",
     "name": "电子工程师（计算机除外）",

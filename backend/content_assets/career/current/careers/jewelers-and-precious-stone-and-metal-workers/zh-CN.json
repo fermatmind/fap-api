@@ -7218,12 +7218,14 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 51-9071.00「Jewelers and Precious Stone and Metal Workers」。官方范围为：设计、制作、调整、修理或鉴定珠宝、金、银、其他贵金属或宝石。核心交付是符合精度与外观要求的作品或鉴定意见，而不是「做得像」。风险来自贵金属与宝石的价值与真伪、焊接与退火等热处理、粉尘与化学浴安全、以及鉴定与估值结论的授权与责任。美国工资与就业为 O*NET/BLS 精确职业口径（中位年薪 52,540 美元；2024 年就业约 35,100 人、2024—2034 展望为下降、年均空缺约 4,000 个）。中国大陆精确职业工资未取得，按可见缺口登记。若你难以承受长时间精细手工作业、精度压力与材料价值风险，应把这些作为需要认真权衡的现实成本。"
+              "证据不足：已查国家统计局2025年行业工资公报，未建立中国大陆本精确职业全国工资分布；行业均值、历史岗位报价和美国工资均不代填。本页对应美国O*NET-SOC 51-9071.00；以设计、规格、材料及记录核制作或修复结果。职业任务含鉴定，不意味着每位工人都有鉴定、签字或估值权限。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "mynextmove"
+            "onet-details",
+            "nbs-wages",
+            "gia-report-boundary"
           ],
           "type": "prose"
         },
@@ -7246,12 +7248,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合珠宝与贵金属加工人员，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的作品与要求，写出从确认设计与规格、选择与核对材料、切割与成型、镶嵌与装配、抛光与检验、到记录与交接的流程，标注每一步的核对点与可能出现的问题（尺寸或克重偏差、宝石分级或真伪判断依据不足、焊接与退火温度失控、粉尘或化学浴防护不足、越权给出估值或真伪结论）。完成后核对：是否把规格、材料与克重记录、安全防护与鉴定依据作为不可省略项；是否把超出个人权限的估值或真伪结论写成请示或转交；是否把过程留成可复核记录。全部材料须为虚构，不进行真实高温或化学品作业。"
+              "编辑试验｜做下文虚构吊坠P纸面练习：核孔径、公差、克重去向与石料标识。路径板块给参考答案、96虚构单位复算、四份作品和七日计划；不操作热设备、化学品或真实贵重物。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "mynextmove"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7282,21 +7284,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "珠宝与贵金属加工人员对应 O*NET-SOC 51-9071.00「Jewelers and Precious Stone and Metal Workers」。官方范围为：设计、制作、调整、修理或鉴定珠宝、金、银、其他贵金属或宝石。典型工作闭环是确认设计与规格、选择与核对材料、切割与成型、镶嵌与装配、抛光与检验、记录与交接。本页美国工资与就业采用 O*NET/BLS 51-9071.00 精确职业口径（2025 年中位时薪 25.26 美元、中位年薪 52,540 美元；2024 年就业约 35,100 人、2024—2034 展望为下降、年均空缺约 4,000 个）；中国大陆精确职业工资未取得，按可见缺口登记。"
+              "证据不足：已查国家统计局2025年行业工资公报，未建立中国大陆本精确职业全国工资分布；行业均值、历史岗位报价和美国工资均不代填。珠宝与贵金属加工人员对应O*NET-SOC 51-9071.00，设计、制作、调整、修理或鉴定珠宝、金银及其他贵金属或宝石。交付可包括作品、规格检验、克重工时和交接记录；本页流程为任务归纳，实际工序及权限按岗位核查。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.definition-block.1",
           "source_refs": [
             "onet-details",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary",
-            "onet-tasks"
+            "nbs-wages"
           ],
           "type": "prose"
         },
@@ -7333,7 +7327,7 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "完整工作流程｜确认设计与规格→选择与核对材料→切割与成型→镶嵌与装配→抛光与检验→记录与交接。"
+              "编辑整理的工作流程｜确认设计与规格→选择与核对材料→切割与成型→镶嵌与装配→抛光与检验→记录与交接；具体工序按岗位核查。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.responsibilities-block.4",
@@ -7361,12 +7355,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏｜工作以工作台精细作业与客户沟通为主：用手操作 62% 持续或几乎持续、久坐 66% 超过一半时间、与他人共同工作 66% 极其重要、他人工作成果责任 51% 责任非常高、工作周超过 40 小时 47%、竞争 48% 中等；接触污染物 34% 每周一次以上、轻微烧伤割伤 31% 每天。"
+              "环境与节奏｜工作以工作台精细作业与客户沟通为主：用手操作 62% 持续或几乎持续、久坐 66% 超过一半时间、与他人共同工作 66% 极其重要、他人工作成果责任 51% 责任非常高、工作周超过 40 小时 47%、竞争 48% 中等；接触污染物 34% 每周至少一次但非每日、轻微烧伤割伤 31% 每天。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.work-context-block.6",
           "source_refs": [
-            "onet-details"
+            "onet-context"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7376,12 +7370,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 51-9071.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 RAC（现实型—艺术型—常规型），Job Zone 第三级（25% 回答高中文凭、21% 回答高等教育证书、19% 部分大学无学位），未标注 Bright Outlook；主要行业为零售贸易与制造业。可用美国数据为 O*NET/BLS 精确职业口径：2025 年中位时薪 25.26 美元、中位年薪 52,540 美元；2024 年就业约 35,100 人、2024—2034 展望为下降、年均空缺约 4,000 个。O*NET 摘要页未列 10/25/75/90 分位；中国大陆精确职业工资未取得；未打开或未发布的字段不能从职业身份推导。"
+              "研究输入｜O*NET精确职业51-9071.00、RAC兴趣及Job Zone第三级。受访教育回答为高中25%、高等教育证书21%、部分大学无学位19%；教育分布和一般准备分类不是所有岗位统一学历或训练年限。2025工资、2024就业及2024—2034预测在美国区域分列，BLS新期展望另作解释。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-ooh-jewelers"
           ],
           "type": "prose"
         },
@@ -7475,7 +7470,12 @@
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "adj-craft-artists",
+            "adj-structural-metal-fabricators-and-fitters",
+            "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "adj-patternmakers-metal-and-plastic",
+            "adj-tool-and-die-makers"
           ],
           "type": "links"
         },
@@ -7489,7 +7489,12 @@
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "adj-craft-artists",
+            "adj-structural-metal-fabricators-and-fitters",
+            "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "adj-patternmakers-metal-and-plastic",
+            "adj-tool-and-die-makers"
           ],
           "type": "prose"
         },
@@ -7503,7 +7508,12 @@
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "adj-craft-artists",
+            "adj-structural-metal-fabricators-and-fitters",
+            "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "adj-patternmakers-metal-and-plastic",
+            "adj-tool-and-die-makers"
           ],
           "type": "prose"
         },
@@ -7517,7 +7527,12 @@
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "adj-craft-artists",
+            "adj-structural-metal-fabricators-and-fitters",
+            "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+            "adj-patternmakers-metal-and-plastic",
+            "adj-tool-and-die-makers"
           ],
           "type": "prose"
         },
@@ -7526,12 +7541,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "金属与塑料制模工方向｜核心产出是模具与模型制作。本职业以最终作品与修复为主；工艺路径与精度要求不同，不能相互套用。"
+              "金属与塑料制模工方向｜O*NET 51-4062.00制作铸造用模样、芯盒和模板；并非泛指所有模型或珠宝设计。须补铸造对象、机床和模样检验能力，不凭珠宝作品直接互换岗位。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-summary"
+            "adj-patternmakers-metal-and-plastic"
           ],
           "type": "prose"
         }
@@ -7563,12 +7578,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜生成式 AI 与设计软件可辅助款型草图与渲染、工序排布、材料与克重估算、鉴定资料检索与记录整理，但工艺判断、精度控制、热处理与化学浴安全、宝石分级与真伪依据、以及鉴定与估值结论仍由人员按授权承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕。本页不给出替代概率或时间表。"
+              "直接回答｜费马建议用虚构工单试验草图说明、克重复算和异常摘要辅助，逐项对照固定输入；未测收益前不称提效。BLS展望提及3D打印与机器人抛光可能提高生产率并压低需求，这是行业预测，不是生成式AI采用实测。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "onet-context"
+            "onet-details",
+            "bls-ooh-jewelers",
+            "nist-genai-profile"
           ],
           "type": "prose"
         },
@@ -7577,12 +7594,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据说明｜本表只使用来源原始口径：O*NET 51-9071.00 提供精确职业身份、任务、工作活动与工作情境；美国工资与就业为 O*NET/BLS 精确职业口径；内部任务规范只用于任务拆分与责任边界，不测量采用率；国家统计局按行业和岗位大类公布平均工资，不能替代本职业精确工资。"
+              "证据说明｜O*NET热门技术页统计美国2025全年招聘软件提及：Illustrator、Photoshop各3%，Excel 1%；不是AI采用率。BLS提供自动化展望，NIST提供通用生成式AI虚构输出等风险；两者都未测本页纸面试验的实际效果。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "onet-context"
+            "source-pack-onet-hot_tech",
+            "bls-ooh-jewelers",
+            "nist-genai-profile"
           ],
           "type": "prose"
         },
@@ -7591,12 +7610,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明｜同一职业内不同环节受影响不同：越可视化、可事后核对的部分（草图与渲染、工序排布、材料估算、资料检索）越容易被工具加速；越涉及手工精度、热处理与化学浴安全、宝石分级与真伪判断的部分越必须由人承担。"
+              "差异说明｜草图、规格与记录可设计回核试验；实际镶嵌、精度检验和化学浴涉及实物、设备及安全。文本草稿不能直接变成工艺参数、鉴定结论或估值，软件提及比例也不能证明这些任务已经自动化。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "onet-context"
+            "onet-details",
+            "nist-genai-profile",
+            "gia-report-boundary"
           ],
           "type": "prose"
         },
@@ -7619,12 +7640,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转折｜工具改变的是草图与资料处理效率，不改变手工精度、热处理安全与鉴定判断的归属；务实的做法是先把工艺精度与材料安全能力练扎实，再在可复核、可追溯的低风险环节引入工具。"
+              "转折｜先练规格读表、材料复算和偏差交接，再比较人工与工具草稿的遗漏、算错及耗时；按记录判断收益，不预先宣布效率提高。实际工艺与安全放行仍按机构规则。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "onet-context"
+            "onet-details",
+            "nist-genai-profile"
           ],
           "type": "prose"
         },
@@ -7633,12 +7655,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能被辅助：款型草图与渲染、工序排布、材料与克重估算、鉴定资料检索与记录整理；这些环节结果可事后核对，但仍须回看材料实物、规格与安全要求。"
+              "编辑试验建议｜输入本页虚构吊坠工单，要求工具整理规格、克重及异常清单；回核2.08毫米超差、0.10克未解释和石号不一致。不得生成真实合金配方、热处理参数或化学浴比例。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "onet-context"
+            "onet-details",
+            "nist-genai-profile"
           ],
           "type": "prose"
         },
@@ -7647,12 +7670,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点：必须回看材料与规格并复核关键判断，并对工艺精度、热处理与化学浴安全、宝石分级与鉴定结论承担责任。"
+              "人的控制点｜规格与实物、材料标识、设备条件和检验结果分别核查；分级报告不等于估值，报告数据库匹配不替代实物对应核验。热与化学工序须按机构培训和产品安全资料执行。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "onet-context"
+            "onet-details",
+            "gia-report-boundary",
+            "gia-report-check",
+            "osha-hazcom"
           ],
           "type": "prose"
         }
@@ -7669,11 +7695,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜珠宝与贵金属加工人员（美国 O*NET-SOC 51-9071.00 Jewelers and Precious Stone and Metal Workers）。中国公开统计没有与该精确职业对应的单职业工资；行业或岗位大类均值不能冒充中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "职业名称对照｜本页中文名对照美国51-9071.00，不构成中国职业分类、资格或工资映射。已查国家统计局2025年行业工资公报，行业均值不可改称本职业中位数。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
+            "onet-details",
             "nbs-wages"
           ],
           "type": "prose"
@@ -7683,11 +7710,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围｜本页的中国侧结论只限中国大陆市场与当前统计口径；国家统计局公开工资表提供行业和岗位大类平均工资，未提供该单一职业的全国中位数、分位数或统一起薪。"
+              "职业范围｜中国岗位逐条核制作、修复、镶嵌或设计等具体任务、地点、工时和用工形态。盐田2026年8月执模公告可作历史任务样本，不能推算全国工资分布。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
+            "yantian-jewelry-202608",
             "nbs-wages"
           ],
           "type": "prose"
@@ -7697,7 +7725,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：国家统计局公开工资表提供行业和岗位大类平均工资，但未提供珠宝与贵金属加工人员单一职业的全国中位数、分位数或统一起薪，因此本页不展示中国职业工资数字；不以行业平均、美国数据或不透明招聘样本填补。"
+              "证据不足：已查国家统计局2025年行业工资公报，未建立中国大陆本精确职业全国工资分布；行业均值、历史岗位报价和美国工资均不代填。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.china-salary.career-snapshot-primary-locale.3",
@@ -7711,12 +7739,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与薪资判断边界｜设计软件与生成式 AI 可能辅助草图与资料处理，但不改变该职业薪酬由所属机构、地区与岗位职责决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资。"
+              "AI与薪资边界｜本页未建立AI对本职业工资变化的因果证据。软件招聘提及、自动化展望及具体工资报价分别核查。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages"
+            "source-pack-onet-hot_tech",
+            "bls-ooh-jewelers"
           ],
           "type": "prose"
         }
@@ -7750,7 +7779,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜按 O*NET/BLS 口径：2025 年中位时薪 25.26 美元、中位年薪 52,540 美元；2024 年就业约 35,100 人、2024—2034 展望为下降（-1% 或更低）、预计年均空缺约 4,000 个；主要行业为零售贸易与制造业。O*NET 摘要页未列出 10/25/75/90 分位，本页不发布这些分位。"
+              "证据不足：本页未取得2025美国51-9071的25及75工资分位。已核中位时薪25.26美元、年薪52,540美元；BLS OOH同年最低10%低于35,580美元/年、最高10%高于87,540美元/年。O*NET当前保留2024就业35,100人、2024—2034下降及年均空缺4,000个，BLS新期另列，不混算。"
             ]
           },
           "fact_refs": [
@@ -7758,7 +7787,8 @@
           ],
           "id": "jewelers-and-precious-stone-and-metal-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "onet-wages"
+            "onet-details",
+            "bls-ooh-jewelers"
           ],
           "type": "prose"
         },
@@ -7767,7 +7797,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资口径｜数据为 BLS OEWS 2025 年与 2024—2034 就业预测，经 O*NET 呈现为 51-9071.00 精确职业口径；OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入。"
+              "薪资口径｜OEWS为税前常规工资，含符合定义的佣金、激励工资和生产奖金，排除非生产奖金、加班溢价、利润分享和雇主福利成本。年薪和时薪保留原单位；中位数不是起薪、全部薪酬或个人实发收入。"
             ]
           },
           "fact_refs": [
@@ -7775,7 +7805,8 @@
           ],
           "id": "jewelers-and-precious-stone-and-metal-workers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "onet-wages"
+            "bls-oews-methods",
+            "bls-ooh-jewelers"
           ],
           "type": "prose"
         },
@@ -7801,7 +7832,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET 行业页显示该职业在美国的主要行业为零售贸易（Retail Trade）与制造业（Manufacturing）；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。"
+              "行业口径｜下表为BLS OOH的2025年美国51-9071四类行业年薪中位数。O*NET另列2024人数行业占比：零售34%、制造17%；人数占比与工资统计的分类、时期不同，不合并排名。"
             ]
           },
           "fact_refs": [
@@ -7809,7 +7840,8 @@
           ],
           "id": "jewelers-and-precious-stone-and-metal-workers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-wages"
+            "bls-ooh-jewelers",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7899,12 +7931,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的材料与图纸做一次演练：完成设计说明、工序与材料与克重记录、检验与偏差处理说明；用可观察交付检验，而不是只凭兴趣问卷。"
+              "试验题面（费马原创，全部纸面）｜虚构吊坠P要求孔径2.00±0.05毫米、成品金属记录3.00±0.10克。输入金属4.00克，成品2.95克、回收余料0.95克；检验记录孔径2.08毫米。石料标签S，所附报告标识T，未建立对应关系。模拟成本仅用虚构单位：材料60单位，人工45分钟×0.8单位/分钟，其他成本设0。请算公差、克重差额、成本并列放行阻断与交接；不得假定允许损耗率，不能凭报告作价格结论。不操作真实贵重物、热设备、化学品或切割工具。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.fit.riasec-fit-block.5",
           "source_refs": [
-            "mynextmove"
+            "onet-details",
+            "gia-report-boundary"
           ],
           "type": "prose"
         },
@@ -7927,12 +7960,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "结论｜人格特质不能预测该职业的工作表现；应结合真实任务、责任边界与可复核交付继续核对，而不是依据单一标签下结论。"
+              "结论｜本页不依据单一人格标签预测珠宝工作表现；观察能否按规格复算、发现孔径及标识偏差、如实交接未解释克重。纸面理解、受训手工表现、录用和实际权限分别核。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.fit.riasec-fit-block.7",
           "source_refs": [
-            "mynextmove"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7963,12 +7996,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "材料与价值风险｜触发：贵金属与宝石清点、保管或交接不严，克重与材料记录缺失。后果：可能造成资产损失与责任纠纷。控制：按制度清点与登记、双人交接、保留材料与克重记录。边界：资产与客户财物处置按机构制度确定。"
+              "材料与资产记录｜克重差额或交接漏项可能造成资产与责任争议。控制建议：按机构规程清点、记录去向与交接人；未解释差额先核查，不虚构统一允许损耗率。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-context"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7977,12 +8010,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工艺精度风险｜触发：尺寸、克重或外观偏差未按规格调整、检验流于形式。后果：可能造成返工、客户投诉与材料损耗。控制：按规格检验、记录偏差与调整过程、必要时返工。边界：成品放行与交付标准按机构制度确定。"
+              "工艺精度｜孔径、尺寸或镶嵌偏差可能导致返工与质量问题。控制建议：按明确规格和检验条件复核，记录偏差；一项合格不覆盖其他超差。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.2",
           "source_refs": [
-            "onet-context"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7991,12 +8024,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "热处理与化学浴风险｜触发：焊接、退火温度失控，电镀或化学浴通风与防护不足。后果：可能造成火灾、灼伤或化学品伤害。控制：按工艺参数作业、使用防护与通风、异常立即停止上报。边界：危险作业要求按法规与机构制度确定。"
+              "热与化学品｜焊接烟尘、紫外线及灼伤、眼伤、电击和化学品暴露须控制。控制建议：核设备规程、标签/SDS和培训；机构确认防护与安全条件，异常停止相关工序；本页不提供参数或配方。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.3",
           "source_refs": [
-            "onet-context"
+            "osha-welding",
+            "osha-hazcom"
           ],
           "type": "prose"
         },
@@ -8005,12 +8039,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "鉴定与估值风险｜触发：宝石分级或真伪判断依据不足、越权出具估值或真伪结论。后果：可能造成客户损失与责任风险。控制：按依据与流程记录、将争议或超出授权的事项转交有资质者。边界：鉴定与估值结论按资质与授权确定。"
+              "分级与估值｜材料标识不一致或将分级报告当价格结论可造成错误交付。控制建议：GIA报告无估值；Report Check只核归档信息。实物对应、签字和估值权限分别核，疑问交机构指定责任人。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.4",
           "source_refs": [
-            "onet-context"
+            "gia-report-boundary",
+            "gia-report-check"
           ],
           "type": "prose"
         },
@@ -8019,12 +8054,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "共同升级规则｜一旦材料、工艺或授权条件不足，先停止相关步骤，把事实、影响与待决问题以可复核记录交接给有权限的责任人；不得越过安全要求、专业资质或机构授权，也不得用模型输出替代工艺与鉴定判断。"
+              "赶工与升级｜交期压力可诱发漏检、漏记或错误放行。控制建议：超差、未解释克重与标识问题分别登记；先停相关步骤、交待决事项，不因催促隐去异常。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.5",
           "source_refs": [
-            "onet-context"
+            "onet-details"
           ],
           "type": "prose"
         }
@@ -8056,12 +8091,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜现实入口通常为高中文凭或以上加在职培训或学徒（Job Zone 第三级；25% 回答高中文凭、21% 回答高等教育证书、19% 部分大学无学位），先确认岗位第一年的任务与监督方式，再核对金工与镶嵌技能要求，并准备可验证的作品与工序记录；具体要求取决于美国岗位与适用规则，学历、证书、资质、岗位录用、机构授权与鉴定与估值权限必须分别核对。"
+              "入行参考｜BLS OOH称美国典型入口为高中学历，雇主要求可不同；在岗达到熟练往往至少一年且取决于专业，认证可选。O*NET Job Zone第三级为一般准备分类，不能当统一一至两年硬门槛；按目标岗位核工艺、监督与作品要求。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.2",
           "source_refs": [
-            "onet-education"
+            "bls-ooh-jewelers",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8070,12 +8106,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国侧以 O*NET 准备信息代表典型路径并结合岗位训练；中国大陆的岗位准入、贵金属管理与安全生产要求受相关法规与机构制度约束，须分别核对，不能互相套用。"
+              "法域核对｜美国侧参考BLS入口与OSHA危害沟通；中国大陆逐岗位核当地适用要求、工艺设备及机构规程。金工、化学浴、鉴定报告和估值分别核训练与授权，不把美国职业页或GIA方法说明当中国资格依据。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.3",
           "source_refs": [
-            "onet-education"
+            "bls-ooh-jewelers",
+            "osha-hazcom",
+            "gia-report-boundary"
           ],
           "type": "prose"
         },
@@ -8112,12 +8150,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的材料与图纸展示能力：设计说明、工序与材料与克重记录、检验与偏差处理说明；不使用真实贵金属、宝石或客户财物，注明依据与假设。"
+              "参考交付｜孔径范围1.95—2.05毫米，2.08超上限0.03毫米；成品克重范围2.90—3.10克，2.95在范围内。投入减成品及余料为4.00−2.95−0.95=0.10克未解释，不能自动记为允许损耗。人工36单位，总模拟成本96单位，非市场报价。孔径超差、克重未解释、S/T对应未核三项均须交接，产品暂不放行；重量合格和成本算对不解除其他阻断。交四份注明虚构的作品：输入/规格表、克重与成本复算表、检验偏差单、待决事项交接单；后者列事实、待查项、接收责任人与复核结果，不给实物鉴定或估值。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.6",
           "source_refs": [
-            "onet-education"
+            "onet-details",
+            "gia-report-boundary"
           ],
           "type": "prose"
         },
@@ -8126,12 +8165,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构作品工序与检验任务包并复盘，请有经验者挑战你的精度控制、材料记录与鉴定边界，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
+              "七日计划（每天20—30分钟，编辑建议）｜第1日抄工单及边界；第2日算两个公差区间；第3日复算0.10克差额和96单位成本；第4日写孔径超差单；第5日写S/T与克重待决交接；第6日请同伴按固定输入查算术、漏项和擅自放行；第7日修订四份作品并记修改理由。合格观察点为输入可追溯、计算可复算、三项阻断不遗漏；纸面样本不验证真实手工熟练度或授予鉴定权限。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.7",
           "source_refs": [
-            "onet-education"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8176,12 +8215,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国侧按 O*NET/BLS 精确职业口径：2024 年就业约 35,100 人、2024—2034 展望为下降、预计年均空缺约 4,000 个；需求受珠宝零售、定制与修复业务、贵金属价格与进口竞争影响。上述数值为本职业精确职业口径，但不能转换为个人录用概率；中国大陆侧公开统计未按本职业单列，本页登记缺口。"
+              "直接回答｜O*NET当前保留2024就业35,100人、2024—2034下降（−1%或更低）、年均空缺4,000个。BLS OOH新期为2025就业32,800人、2025—2035下降3%、年均空缺3,700个，均为转岗或退出替换；两期分开解释，不相减为实际需求变化。盐田2026年8月执模公告仅为历史岗位样本。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "onet-wages"
+            "onet-details",
+            "bls-ooh-jewelers",
+            "yantian-jewelry-202608"
           ],
           "type": "prose"
         },
@@ -8190,12 +8231,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET/BLS 口径，2024—2034）：展望为下降、预计年均空缺约 4,000 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人就业保证。"
+              "就业展望｜保留O*NET 2024—2034下降及年均空缺4,000个；空缺不等于净新增。BLS OOH新期2025—2035下降3%、年均3,700个均为替换需求，并列进口竞争及3D打印、机器人抛光的展望因素；这不是本职业当前在招数量或AI独立因果效应。"
             ]
           },
           "id": "jewelers-and-precious-stone-and-metal-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "onet-wages"
+            "onet-details",
+            "bls-ooh-jewelers"
           ],
           "type": "prose"
         },
@@ -8251,13 +8293,17 @@
                 ]
               },
               {
-                "answer": "本职业设计、制作、调整、修理或鉴定珠宝与贵金属与宝石作品。工艺艺术家以原创手工艺表达为主，结构金属制造工以结构金属件为主，磨工按公差磨削抛光，金属与塑料制模工负责模具与模型，工具和模具制造工负责工具与模具。应按核心产出、材料尺度与精度要求判断，不能只按职位名称互换。",
+                "answer": "本职业设计、制作、调整、修理或鉴定珠宝与贵金属与宝石作品。工艺艺术家以原创手工艺表达为主，结构金属制造工以结构金属件为主，磨工按公差磨削抛光，金属与塑料制模工负责铸造用模样、芯盒和模板，工具和模具制造工负责工具与模具。应按核心产出、材料尺度与精度要求判断，不能只按职位名称互换。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.role-comparison",
                 "source_refs": [
                   "onet-details",
-                  "onet-tasks"
+                  "adj-craft-artists",
+                  "adj-structural-metal-fabricators-and-fitters",
+                  "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+                  "adj-patternmakers-metal-and-plastic",
+                  "adj-tool-and-die-makers"
                 ]
               },
               {
@@ -8271,12 +8317,13 @@
                 ]
               },
               {
-                "answer": "生成式 AI 与设计软件可辅助款型草图与渲染、工序排布、材料与克重估算、鉴定资料检索与记录整理；但工艺判断、精度控制、热处理与化学浴安全、宝石分级与真伪依据以及鉴定与估值结论仍由人员按授权承担。任务暴露不等于岗位替代，也不等于已普遍采用，本页不给出替代概率或时间表。",
+                "answer": "编辑建议用虚构工单试验草稿、复算和异常摘要，尚无本页提效实测。BLS预测3D打印与机器人抛光影响需求，非生成式AI采用测量；软件招聘提及也不是AI采用率。本页不提供裁撤日期。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.ai-impact",
                 "source_refs": [
-                  "internal-ai-rubric",
+                  "bls-ooh-jewelers",
+                  "nist-genai-profile",
                   "source-pack-onet-hot_tech"
                 ]
               },
@@ -8291,7 +8338,7 @@
                 ]
               },
               {
-                "answer": "证据不足：国家统计局公开工资表提供行业和岗位大类平均工资，但未提供珠宝与贵金属加工人员单一职业的全国中位数、分位数或统一起薪，因此本页不展示中国职业工资数字；不以行业平均、美国数据或不透明招聘样本填补。",
+                "answer": "证据不足：已查国家统计局2025年行业工资公报，未建立中国大陆本精确职业全国工资分布；行业均值、历史岗位报价和美国工资均不代填。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.china-pay",
@@ -8300,57 +8347,61 @@
                 ]
               },
               {
-                "answer": "按 O*NET/BLS 2025 年数据（51-9071.00 精确职业）：中位时薪 25.26 美元、中位年薪 52,540 美元。O*NET 摘要页未列 10/25/75/90 分位，本页不发布；OEWS 为雇主报告的工资、不含福利与奖金，中位数不等于起薪或个人实发收入。",
+                "answer": "证据不足：本页未取得2025美国51-9071的25及75工资分位。已核2025中位时薪25.26美元、年薪52,540美元；最低10%低于35,580美元/年、最高10%高于87,540美元/年。OEWS含符合定义的佣金、激励工资及生产奖金，排除非生产奖金、加班溢价、利润分享和雇主福利成本；不是起薪或个人实发收入。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.us-pay",
                 "source_refs": [
-                  "onet-wages",
-                  "source-pack-onet-localwages"
+                  "onet-details",
+                  "bls-ooh-jewelers",
+                  "bls-oews-methods"
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业 Job Zone 第三级：通常要求职业培训、相关在职经验或副学士学位（25% 回答高中文凭、21% 回答高等教育证书、19% 部分大学无学位），在职培训通常 1—2 年并可能包含学徒。进入该职业应结合训练与可验证作品；学历、证书、资质、岗位录用、机构授权与鉴定与估值权限必须分别核对。",
+                "answer": "BLS OOH称美国典型入口为高中学历，在岗达到熟练往往至少一年且取决于专业，认证可选。O*NET Job Zone第三级是一般准备分类，教育回答分布不是统一门槛；岗位任用、工艺设备、鉴定和估值权限分别核。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.education-path",
                 "source_refs": [
-                  "onet-education",
-                  "source-pack-onet-localtraining"
+                  "onet-details",
+                  "bls-ooh-jewelers"
                 ]
               },
               {
-                "answer": "主要风险包括材料与价值、工艺精度、热处理与化学浴、鉴定与估值四类。控制重点是把清点与交接记录、规格与检验标准、工艺参数与防护，以及鉴定依据与授权边界写清，并在材料、工艺或授权条件不足时立即停止并上报。",
+                "answer": "材料差额、规格超差、热与化学品及分级/估值边界分别控制。按机构规程记录、核标签/SDS和培训；GIA报告无估值，Report Check只核归档信息，实物对应另核。不确定或超权限时停止相关步骤并交接。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.risk-boundary",
                 "source_refs": [
                   "onet-details",
-                  "internal-ai-rubric"
+                  "osha-hazcom",
+                  "gia-report-boundary",
+                  "gia-report-check"
                 ]
               },
               {
-                "answer": "美国侧按 O*NET/BLS 精确职业口径：2024 年就业约 35,100 人、2024—2034 展望为下降、预计年均空缺约 4,000 个；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "O*NET保留2024就业35,100人及2024—2034年均空缺4,000个；BLS新期2025就业32,800人、2025—2035下降3%、年均3,700个均为替换需求。两期不混算；盐田2026年8月执模样本不代表当前在招量或全国需求。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.outlook-transition",
                 "source_refs": [
-                  "source-pack-onet-summary",
-                  "onet-context"
+                  "onet-details",
+                  "bls-ooh-jewelers",
+                  "yantian-jewelry-202608"
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的材料与图纸完成设计说明、工序与材料与克重记录、检验与偏差处理说明；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
+                "answer": "先做虚构吊坠P纸面练习，复算孔径超上限0.03毫米、0.10克未解释及96虚构单位成本；交四份作品、按七日计划复盘三项阻断。样本不验证真实手工熟练度或授予鉴定、估值与设备权限。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.career-worth",
                 "source_refs": [
-                  "onet-tasks",
-                  "source-pack-onet-details"
+                  "onet-details",
+                  "gia-report-boundary"
                 ]
               },
               {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；珠宝与贵金属加工人员页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET/SOC 51-9071.00「Jewelers and Precious Stone and Metal Workers」这一精确职业。",
+                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。珠宝与贵金属加工人员页面提供职业决策与安全试验信息，不替代所在地法律、医疗、金融、安全、执业或其他专业意见。任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET/SOC 51-9071.00「Jewelers and Precious Stone and Metal Workers」这一精确职业。",
                 "id": "jewelers-and-precious-stone-and-metal-workers.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.jewelers-and-precious-stone-and-metal-workers.boundary",
@@ -8510,11 +8561,11 @@
                 "accessed_at": "2026-08-31",
                 "details": [
                   "行业和岗位大类平均工资口径核查。",
-                  "未发布珠宝与贵金属加工人员单一职业的全国工资分布。"
+                  "已查本公报未建立珠宝与贵金属加工人员的全国工资分布。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-wages",
-                "limitation": "未发布珠宝与贵金属加工人员单一职业的全国工资分布。",
+                "limitation": "已查本公报未建立珠宝与贵金属加工人员的全国工资分布。",
                 "market": "中国大陆",
                 "name": "2025年城镇单位就业人员年平均工资情况",
                 "period": "2025 annual average wages; published 2026-05-15; accessed 2026-08-31",
@@ -8669,15 +8720,15 @@
               {
                 "accessed_at": "2026-09-02",
                 "details": [
-                  "用于核对与本职业相关的热门技术清单。",
-                  "技术提及不等同于能力、采用或自动化程度。"
+                  "美国2025全年岗位广告中Illustrator和Photoshop各3%、Excel 1%；统计为软件技能提及。",
+                  "软件技能提及比例不等于AI采用率、能力或替代率。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
+                "limitation": "软件技能提及比例不等于AI采用率、能力或替代率。",
                 "market": "美国",
                 "name": "Hot Technologies: 51-9071.00 - Jewelers and Precious Stone and Metal Workers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "美国2025全年招聘；2026-10-03核查",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/51-9071.00"
@@ -8693,7 +8744,7 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "Industries: 51-9071.00 - Jewelers and Precious Stone and Metal Workers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2024年就业行业分布；2026-10-03核查",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-9071.00"
@@ -8734,7 +8785,7 @@
                 "accessed_at": "2026-09-02",
                 "details": [
                   "用于核对本页美国工资口径：51-9071.00 精确职业，2025 年中位时薪 25.26 美元、中位年薪 52,540 美元。",
-                  "保留所显示的期间、就业人群、地域与计量单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。"
+                  "2026-10-03经O*NET details及BLS OOH交叉核实中位数；保留来源原单位。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
@@ -8757,10 +8808,234 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或法律授权。",
                 "market": "美国",
                 "name": "51-9071.00 - Jewelers and Precious Stone and Metal Workers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "职业页2026；工资2025、就业2024、预测2024—2034；2026-10-03核查",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-9071.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "典型高中入口、按专业而异的在岗训练、工资阈值和行业年薪；3D打印与机器人抛光为展望因素。",
+                  "美国51-9071精确职业；不证明生成式AI采用率或中国需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-ooh-jewelers",
+                "limitation": "美国51-9071精确职业；不证明生成式AI采用率或中国需求。",
+                "market": "美国",
+                "name": "BLS OOH：珠宝与贵金属加工人员",
+                "period": "2025工资、就业；2025—2035预测",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/production/jewelers-and-precious-stone-and-metal-workers.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "工资含符合定义的佣金、激励工资和生产奖金；排除非生产奖金、加班溢价、利润分享和雇主福利成本。",
+                  "方法说明，不是本职业工资数值。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-oews-methods",
+                "limitation": "方法说明，不是本职业工资数值。",
+                "market": "美国",
+                "name": "BLS OEWS 工资定义 FAQ",
+                "period": "当前方法页",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "烟尘、紫外线、灼伤、眼损伤、电击与割伤等危害。",
+                  "美国跨工种安全指导；不提供珠宝专用配方或中国作业许可。"
+                ],
+                "evidence_type": "official source",
+                "id": "osha-welding",
+                "limitation": "美国跨工种安全指导；不提供珠宝专用配方或中国作业许可。",
+                "market": "美国",
+                "name": "OSHA：焊接、切割与钎焊危害",
+                "period": "当前职业安全指导",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/welding-cutting-brazing/hazards-solutions"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "化学品标签、SDS与员工培训。",
+                  "美国规则；具体化学浴控制按产品信息、设备和机构规程核查。"
+                ],
+                "evidence_type": "official source",
+                "id": "osha-hazcom",
+                "limitation": "美国规则；具体化学浴控制按产品信息、设备和机构规程核查。",
+                "market": "美国",
+                "name": "OSHA：危害沟通",
+                "period": "当前HCS概览",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/hazcom"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "GIA不出具估值；报告记录尺寸、质量及识别特征，不含价格估值。",
+                  "GIA自身报告边界，不建立所有机构或中国鉴定资格规则。"
+                ],
+                "evidence_type": "official source",
+                "id": "gia-report-boundary",
+                "limitation": "GIA自身报告边界，不建立所有机构或中国鉴定资格规则。",
+                "market": "全球",
+                "name": "GIA：分级报告与估值的区别",
+                "period": "当前FAQ",
+                "publisher": "Gemological Institute of America",
+                "scope": "contextual",
+                "url": "https://www.gia.edu/FAQ/gia-faq-analysis-grading-certify-appraise-diamond-gemstone"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "核对报告信息与GIA归档数据库记录是否一致。",
+                  "数据库匹配不能代替持有实物与报告对应关系的核验，不提供价格结论。"
+                ],
+                "evidence_type": "official source",
+                "id": "gia-report-check",
+                "limitation": "数据库匹配不能代替持有实物与报告对应关系的核验，不提供价格结论。",
+                "market": "全球",
+                "name": "GIA：Report Check",
+                "period": "当前查询说明",
+                "publisher": "Gemological Institute of America",
+                "scope": "contextual",
+                "url": "https://www.gia.edu/gia-website/report-check-landing"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "跨领域虚构输出、隐私及信息完整性风险。",
+                  "不是珠宝AI采用率、鉴定效度或机器人抛光性能研究。"
+                ],
+                "evidence_type": "official source",
+                "id": "nist-genai-profile",
+                "limitation": "不是珠宝AI采用率、鉴定效度或机器人抛光性能研究。",
+                "market": "全球",
+                "name": "NIST AI 600-1：生成式AI风险画像",
+                "period": "2024年7月",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "万丰珠宝执模师傅：倒模、油压工艺，素金手环、戒指、项链、吊坠、耳饰；同工种三年经验优先；单位在盐田北山道146号北山工业区。",
+                  "历史岗位样本，当前是否在招未核；不计全国需求或职业工资分布，报价单位未明确不换算。"
+                ],
+                "evidence_type": "official source",
+                "id": "yantian-jewelry-202608",
+                "limitation": "历史岗位样本，当前是否在招未核；不计全国需求或职业工资分布，报价单位未明确不换算。",
+                "market": "中国大陆",
+                "name": "盐田区企业招聘信息（2026.8.8—2026.8.14）",
+                "period": "2026-08-14发布；公告窗口2026-08-08—08-14",
+                "publisher": "深圳市盐田区人力资源局",
+                "scope": "job_sample",
+                "url": "https://www.yantian.gov.cn/cn/service/ldjy/jyzpxx/content/post_12935440.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-craft-artists",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 工艺艺术家 27-1012.00",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/27-1012.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-structural-metal-fabricators-and-fitters",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 结构金属制造工 51-2041.00",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-2041.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 磨工 51-4033.00",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-4033.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-patternmakers-metal-and-plastic",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 金属与塑料制模工 51-4062.00",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-4062.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-tool-and-die-makers",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 工具和模具制造工 51-4111.00",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-4111.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "对应工作对象和核心职责。",
+                  "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-gem-and-diamond-workers",
+                "limitation": "美国相邻或细分职业边界；不证明自动转岗、资格互认或中国招聘需求。",
+                "market": "美国",
+                "name": "O*NET 宝石琢磨工 51-9071.06",
+                "period": "2026职业页",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/summary/51-9071.06"
               }
             ]
           },
@@ -8804,13 +9079,53 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "onet-context",
+              "$source": "adj-craft-artists",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": "工艺艺术家：美国官方职责边界"
+          },
+          {
+            "href": {
+              "$source": "adj-structural-metal-fabricators-and-fitters",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "label": "结构金属制造工：美国官方职责边界"
+          },
+          {
+            "href": {
+              "$source": "adj-grinding-lapping-polishing-and-buffing-machine-tool-setters-operators-and-tenders-metal-and-plastic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "label": "磨工：美国官方职责边界"
+          },
+          {
+            "href": {
+              "$source": "adj-patternmakers-metal-and-plastic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "label": "金属与塑料制模工：美国官方职责边界"
+          },
+          {
+            "href": {
+              "$source": "adj-tool-and-die-makers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "label": "工具和模具制造工：美国官方职责边界"
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8851,8 +9166,8 @@
             "职业方向": "磨工"
           },
           {
-            "关键区别": "核心产出是模具与模型制作。",
-            "更适合什么选择": "愿意做模具与模型时比较。",
+            "关键区别": "铸造用模样、芯盒与模板，区别于珠宝成品与修复。",
+            "更适合什么选择": "愿意学习铸造模样、机床和检验时比较。",
             "核心工作与产出": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
@@ -8888,32 +9203,14 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            }
-          },
-          {
-            "来源": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "任务、就业展望或通用风险框架",
+            "适用范围": "不是AI效果或采用测量",
             "链接": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8924,16 +9221,34 @@
           },
           {
             "来源": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "任务、就业展望或通用风险框架",
+            "适用范围": "预测不是生成式AI采用率",
             "链接": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            }
+          },
+          {
+            "来源": {
+              "$source": "nist-genai-profile",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "类型": "任务、就业展望或通用风险框架",
+            "适用范围": "不评价珠宝鉴定效度或机器人性能",
+            "链接": {
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8967,26 +9282,7 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "美国工作情境不替代中国安全法规。",
-            "来源": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
-            "链接": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            }
-          },
-          {
-            "使用限制": "美国职业定义不建立中国准入或工资口径。",
+            "使用限制": "不是AI效果或采用测量",
             "来源": {
               "$source": "onet-details",
               "block": "source-register",
@@ -8994,8 +9290,8 @@
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "美国51-9071.00任务",
+            "结论": "制作、修复、检验和材料记录等对象",
             "链接": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9005,18 +9301,37 @@
             }
           },
           {
-            "使用限制": "教育分布不等于每个雇主的硬性要求。",
+            "使用限制": "预测不是生成式AI采用率",
             "来源": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025—2035就业展望",
+            "结论": "预测3D打印、机器人抛光提高生产率并压需求",
             "链接": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不评价珠宝鉴定效度或机器人性能",
+            "来源": {
+              "$source": "nist-genai-profile",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "研究对象": "跨领域生成式AI风险",
+            "结论": "须回核虚构输出及信息完整性",
+            "链接": {
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9046,16 +9361,16 @@
         ],
         "questions": [
           {
-            "回答": "不能从任务暴露推导岗位裁撤日期；本页不给出替代概率或时间表。",
+            "回答": "BLS预测总体就业下降3%，并列自动化及进口竞争因素；不提供生成式AI独立因果效应或裁撤日期。",
             "来源": {
-              "$source": "onet-context",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-context",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9064,16 +9379,16 @@
             "问题": "AI 会取代珠宝与贵金属加工人员岗位吗？"
           },
           {
-            "回答": "不能。任务暴露、组织采用、生产率变化与岗位数量是四个不同测量对象，不能互相推导。",
+            "回答": "软件提及、采用、辅助效果与就业数量分别测量；本页不推导裁撤时间。",
             "来源": {
-              "$source": "onet-details",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-details",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9082,16 +9397,16 @@
             "问题": "任务暴露能推导裁撤时间吗？"
           },
           {
-            "回答": "不能。工艺精度、热处理安全、分级与鉴定结论必须由人按资质与授权负责。",
+            "回答": "编辑建议：按NIST风险画像回核虚构输出与原始输入；模型草稿不作工艺、安全或鉴定放行。具体报告/估值区别见本板块人的控制点。",
             "来源": {
-              "$source": "onet-education",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-education",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9144,7 +9459,7 @@
         "task_rows": [
           {
             "人的控制点": "核对原始记录与失败模式。",
-            "任务": "整理记录",
+            "任务": "虚构工单和草图说明",
             "工作方向": "草图与估算",
             "当前变化": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.ai-impact.ai-impact-table.7",
@@ -9162,19 +9477,19 @@
             },
             "任务": "执行核心任务",
             "工作方向": "工艺与精度",
-            "当前变化": "辅助信息汇总"
+            "当前变化": "编辑试验：只整理已给规格"
           },
           {
-            "人的控制点": "按法定授权和指挥链升级。",
-            "任务": "关键判断",
+            "人的控制点": "实物与规格另核，异常不得自行放行。",
+            "任务": "复算克重、记录偏差",
             "工作方向": "检验与记录",
-            "当前变化": "不作自动授权"
+            "当前变化": "编辑试验：对照固定题面"
           },
           {
-            "人的控制点": "由责任人确认结论。",
-            "任务": "形成复盘记录",
+            "人的控制点": "鉴定、估值与处置权限分别确认。",
+            "任务": "拟定异常交接摘要",
             "工作方向": "鉴定与升级",
-            "当前变化": "可能辅助整理"
+            "当前变化": "编辑试验：核漏项和错误"
           }
         ],
         "transition": {
@@ -9312,28 +9627,28 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "编辑试验以虚构工单核草稿、算术和异常摘要；BLS自动化展望独立说明，不等于本职业生成式AI采用实测。"
         ],
         "heading": "珠宝与贵金属加工人员的工作对象与 AI 边界"
       },
       "career_path_block": {
-        "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
+        "boundary": "以下为编辑训练与责任递进建议，不是固定晋升年限；每一步按雇主、专业工艺和机构授权核查。",
         "competence_ladder": [
           {
-            "description": "确认来源、权限和版本。",
-            "stage": "输入核对"
+            "description": "核规格、材料标识、单位和来源。",
+            "stage": "读图与记录"
           },
           {
-            "description": "遵守停止和升级条件。",
-            "stage": "过程控制"
+            "description": "按授权工序操作并记录偏差。",
+            "stage": "受训制作与检验"
           },
           {
-            "description": "形成可复核记录。",
-            "stage": "结果复盘"
+            "description": "追材料差额、返工和未放行项。",
+            "stage": "交接与复盘"
           },
           {
-            "description": "在授权范围内扩展。",
-            "stage": "责任扩展"
+            "description": "补目标工种训练，不凭资历扩大鉴定权限。",
+            "stage": "协调与拓展"
           }
         ],
         "direct_answer": {
@@ -9367,49 +9682,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.0",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "内部任务规范只用于任务拆分与责任边界，不测量采用率。"
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.1",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "中国行业和岗位大类平均工资，未建立与该精确职业对应的全国分布。"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.2",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.onet-details",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9417,25 +9696,61 @@
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-9071.00 精确职业范围，不设定中国资格。"
+            "scope": "职业任务及准备分类。"
           },
           {
             "href": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.3",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.bls-ooh-jewelers",
             "label": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "热门技术提及不等同于本职业能力、采用或自动化程度。"
+            "scope": "典型入口、训练和可选认证。"
+          },
+          {
+            "href": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.osha-hazcom",
+            "label": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "美国化学品信息与培训。"
+          },
+          {
+            "href": {
+              "$source": "gia-report-boundary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.gia-report-boundary",
+            "label": {
+              "$source": "gia-report-boundary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "分级报告不作估值。"
           }
         ],
         "tracks": [
@@ -9443,7 +9758,7 @@
             "id": "entry-and-trial",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
                 "next_moves": {
                   "$item": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.7",
                   "block": "path",
@@ -9462,33 +9777,33 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "入口与试验阶段 1"
+                "role": "纸面规格与偏差试验"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
                 "next_moves": {
                   "$item": "jewelers-and-precious-stone-and-metal-workers.path.career-path-block.8",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 2"
+                "readiness_evidence": "材料接收表能追到工单、数量和差额待查状态。",
+                "responsibility": "按指定材料表核标识、克重、来源与工单版本。",
+                "role": "监督下材料核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 3"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "按岗位补金工、镶嵌或抛光技能，分别核设备权限。",
+                "readiness_evidence": "受监督作品附规格、检验和返工记录。",
+                "responsibility": "在合适训练场景按指定工序与设备规程操作。",
+                "role": "受训单项工艺"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 4"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "复盘一项返工及未放行原因。",
+                "readiness_evidence": "偏差单写数值、单位、事实与接收责任人。",
+                "responsibility": "按规格核结果，不把外观满意当尺寸合格。",
+                "role": "检验与交接练习"
               }
             ],
             "title": "入口与试验"
@@ -9497,32 +9812,32 @@
             "id": "independent-bench",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 1"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "由雇主确认可独立承担的工序。",
+                "readiness_evidence": "连续作品的尺寸、克重及检验记录可追溯。",
+                "responsibility": "在已确认的工种范围内完成制作或修复。",
+                "role": "授权工作台作业"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 2"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "补机构库存和工单成本口径。",
+                "readiness_evidence": "材料去向及成本假设可复算，无虚构损耗率。",
+                "responsibility": "记录投入、成品、余料与工时；未解释差额上报。",
+                "role": "材料与成本复核"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 3"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "核不得返工或须升级的产品条件。",
+                "readiness_evidence": "返工前后记录和复检结果齐全。",
+                "responsibility": "分类规格、表面或标识问题并安排授权返工。",
+                "role": "质量偏差闭环"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 4"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "学习本机构争议和复核流程。",
+                "readiness_evidence": "客户确认记录不冒充鉴定或估值报告。",
+                "responsibility": "澄清规格、交期和未确认项，区分估算与承诺。",
+                "role": "客户需求交接"
               }
             ],
             "title": "独立工作台作业"
@@ -9531,32 +9846,32 @@
             "id": "expanded-responsibility",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 1"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "补带教观察与工艺授权边界。",
+                "readiness_evidence": "新人受监督交付中的漏检得到具体反馈。",
+                "responsibility": "示范读图、记录与异常停止条件。",
+                "role": "带教基础检验"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 2"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "补库存协调和质量管理能力。",
+                "readiness_evidence": "记录可追到各工序及未放行状态。",
+                "responsibility": "按人员技能分工，核材料流转和检验节点。",
+                "role": "工单与资产协调"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 3"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "核签字和估值权限，不自动扩大。",
+                "readiness_evidence": "目标方向作品及相应仪器/工艺证据成立。",
+                "responsibility": "选择金工、镶嵌、修复或分级，分别补训练。",
+                "role": "专业方向拓展"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 4"
+                "credentials": "培训、岗位任用和工艺/鉴定/估值权限分别核查，不由本页授予。",
+                "next_moves": "先补目标对象的训练和作品，再求职。",
+                "readiness_evidence": "新岗位工具、规格与安全能力缺口明确。",
+                "responsibility": "比较铸造模样、机床磨削、工具制造或宝石加工对象。",
+                "role": "相邻职业准备"
               }
             ],
             "title": "扩大责任"
@@ -9712,94 +10027,97 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据本职业研究输入和来源注册表，不能跨法域外推。",
+        "evidence_scope": "O*NET任务与情境、OSHA美国安全指导、GIA自身报告边界；控制点为有界编辑建议，具体处置按机构规程。",
         "heading": "珠宝与贵金属加工人员的工作风险与边界",
         "risks": [
           {
             "affected_roles": "珠宝与贵金属加工人员",
-            "consequence": "可能造成资产损失与责任纠纷。",
+            "consequence": "克重差额或交接漏项可能造成资产与责任争议。",
             "evidence_refs": [
-              "nbs-wages"
+              "jewelers-and-precious-stone-and-metal-workers.review.onet-details"
             ],
             "id": "risk-1",
-            "mitigation": "按制度清点与登记、双人交接、保留材料与克重记录。",
-            "scenario": "贵金属与宝石清点、保管或交接不严，克重与材料记录缺失。",
-            "title": {
+            "mitigation": "按机构规程清点、记录去向与交接人；未解释差额先核查，不虚构统一允许损耗率。",
+            "scenario": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.1",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "材料与资产记录"
           },
           {
             "affected_roles": "珠宝与贵金属加工人员",
-            "consequence": "可能造成返工、客户投诉与材料损耗。",
+            "consequence": "孔径、尺寸或镶嵌偏差可能导致返工与质量问题。",
             "evidence_refs": [
-              "onet-context"
+              "jewelers-and-precious-stone-and-metal-workers.review.onet-details"
             ],
             "id": "risk-2",
-            "mitigation": "按规格检验、记录偏差与调整过程、必要时返工。",
-            "scenario": "尺寸、克重或外观偏差未按规格调整、检验流于形式。",
-            "title": {
+            "mitigation": "按明确规格和检验条件复核，记录偏差；一项合格不覆盖其他超差。",
+            "scenario": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.2",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "工艺精度"
           },
           {
             "affected_roles": "珠宝与贵金属加工人员",
-            "consequence": "可能造成火灾、灼伤或化学品伤害。",
+            "consequence": "焊接烟尘、紫外线及灼伤、眼伤、电击和化学品暴露须控制。",
             "evidence_refs": [
-              "onet-details"
+              "jewelers-and-precious-stone-and-metal-workers.review.osha-welding",
+              "jewelers-and-precious-stone-and-metal-workers.review.osha-hazcom"
             ],
             "id": "risk-3",
-            "mitigation": "按工艺参数作业、使用防护与通风、异常立即停止上报。",
-            "scenario": "焊接、退火温度失控，电镀或化学浴通风与防护不足。",
-            "title": {
+            "mitigation": "核设备规程、标签/SDS和培训；机构确认防护与安全条件，异常停止相关工序；本页不提供参数或配方。",
+            "scenario": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.3",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "热与化学品"
           },
           {
             "affected_roles": "珠宝与贵金属加工人员",
-            "consequence": "可能造成客户损失与责任风险。",
+            "consequence": "材料标识不一致或将分级报告当价格结论可造成错误交付。",
             "evidence_refs": [
-              "onet-education"
+              "jewelers-and-precious-stone-and-metal-workers.review.gia-report-boundary",
+              "jewelers-and-precious-stone-and-metal-workers.review.gia-report-check"
             ],
             "id": "risk-4",
-            "mitigation": "按依据与流程记录、将争议或超出授权的事项转交有资质者。",
-            "scenario": "宝石分级或真伪判断依据不足、越权出具估值或真伪结论。",
-            "title": {
+            "mitigation": "GIA报告无估值；Report Check只核归档信息。实物对应、签字和估值权限分别核，疑问交机构指定责任人。",
+            "scenario": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.4",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "分级与估值"
           },
           {
             "affected_roles": "珠宝与贵金属加工人员",
-            "consequence": "可能造成质量缺陷与责任不清。",
+            "consequence": "交期压力可诱发漏检、漏记或错误放行。",
             "evidence_refs": [
-              "onet-job-zone"
+              "jewelers-and-precious-stone-and-metal-workers.review.onet-details"
             ],
             "id": "risk-5",
-            "mitigation": "按流程完成检验与记录、不以赶工替代精度。",
-            "scenario": "交期压力下跳过检验或记录。",
-            "title": {
+            "mitigation": "超差、未解释克重与标识问题分别登记；先停相关步骤、交待决事项，不因催促隐去异常。",
+            "scenario": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.risk.career-risk-cards.5",
               "block": "risk",
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
-            }
+            },
+            "title": "赶工与升级"
           },
           {
             "affected_roles": "珠宝与贵金属加工人员",
             "consequence": "可能越过安全要求、专业资质或机构授权。",
             "evidence_refs": [
-              "onet-summary"
+              "jewelers-and-precious-stone-and-metal-workers.review.onet-details",
+              "jewelers-and-precious-stone-and-metal-workers.review.gia-report-boundary"
             ],
             "id": "risk-6",
             "mitigation": "先停止相关步骤，把事实、影响与待决问题交接给有权限的责任人。",
@@ -9811,49 +10129,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.0",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "内部任务规范只用于任务拆分与责任边界，不测量采用率。"
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.1",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "中国行业和岗位大类平均工资，未建立与该精确职业对应的全国分布。"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.2",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.onet-details",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9861,25 +10143,79 @@
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-9071.00 精确职业范围，不设定中国资格。"
+            "scope": "制作、精度、材料记录与时间压力。"
           },
           {
             "href": {
-              "$source": "onet-education",
+              "$source": "osha-welding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.3",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.osha-welding",
             "label": {
-              "$source": "onet-education",
+              "$source": "osha-welding",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "热门技术提及不等同于本职业能力、采用或自动化程度。"
+            "scope": "美国焊接等跨工种危害，非珠宝配方。"
+          },
+          {
+            "href": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.osha-hazcom",
+            "label": {
+              "$source": "osha-hazcom",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "美国化学标签/SDS与培训。"
+          },
+          {
+            "href": {
+              "$source": "gia-report-boundary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.gia-report-boundary",
+            "label": {
+              "$source": "gia-report-boundary",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "GIA分级报告不作估值。"
+          },
+          {
+            "href": {
+              "$source": "gia-report-check",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.gia-report-check",
+            "label": {
+              "$source": "gia-report-check",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "报告信息归档查询，非价格或实物对应结论。"
           }
         ]
       },
@@ -10056,7 +10392,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "nbs-wages",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10064,7 +10400,39 @@
             },
             "｜",
             {
-              "$source": "nbs-wages",
+              "$source": "onet-details",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-ooh-jewelers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-ooh-jewelers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-oews-methods",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-oews-methods",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10076,138 +10444,43 @@
         "bls_table": [
           {
             "指标": "薪资 · 10 分位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "最低10%低于35,580美元/年",
+            "说明": "2025年美国51-9071，BLS OOH；不作个人报价。"
           },
           {
             "指标": "薪资 · 25 分位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-context",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-context",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "本页未取得25分位",
+            "说明": "2025年美国51-9071，BLS OOH；不作个人报价。"
           },
           {
             "指标": "薪资 · 中位数",
-            "数值": "52,540 美元/年",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "52,540美元/年；25.26美元/小时",
+            "说明": "2025年美国51-9071，BLS OOH；不作个人报价。"
           },
           {
             "指标": "薪资 · 75 分位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "onet-context",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "onet-context",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "本页未取得75分位",
+            "说明": "2025年美国51-9071，BLS OOH；不作个人报价。"
           },
           {
             "指标": "薪资 · 90 分位",
-            "数值": "暂无安全数值",
-            "说明": {
-              "$join": [
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "name",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                },
-                "｜",
-                {
-                  "$source": "nbs-wages",
-                  "block": "source-register",
-                  "copy_key": "career.item.published-sources",
-                  "field": "url",
-                  "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-                }
-              ],
-              "separator": ""
-            }
+            "数值": "最高10%高于87,540美元/年",
+            "说明": "2025年美国51-9071，BLS OOH；不作个人报价。"
           },
           {
             "指标": "就业 · 规模",
             "数值": "约 35,100 人（2024 年）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": "美国51-9071，O*NET当前展示2024就业或2024—2034预测；空缺非净新增。"
           },
           {
             "指标": "就业 · 增长",
             "数值": "下降（-1% 或更低，2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": "美国51-9071，O*NET当前展示2024就业或2024—2034预测；空缺非净新增。"
           },
           {
             "指标": "就业 · 空缺",
             "数值": "约 4,000 个/年（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": "美国51-9071，O*NET当前展示2024就业或2024—2034预测；空缺非净新增。"
           }
         ],
         "boundary": "美国精确职业与更宽组口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10219,15 +10492,15 @@
         },
         "factor_rows": [
           {
-            "answer": "按具体法域核验。",
+            "answer": "制作、维修、分级与估值权限按岗位另核，证书不代表全部权限。",
             "factor": "资格"
           },
           {
-            "answer": "按岗位责任核验。",
+            "answer": "核作品、精度、材料记录和监督下训练，不凭任职年限估算工资。",
             "factor": "经验"
           },
           {
-            "answer": "不得跨地区外推。",
+            "answer": "城市、行业、工时及合同分别核，全国中位数不作地区个人报价。",
             "factor": "地区"
           }
         ],
@@ -10250,30 +10523,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "accessed 2026-08-30",
+        "industry_period": "2025年美国51-9071行业年薪中位数（BLS OOH）",
         "industry_rows": [
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "耐用品商贸批发",
+            "median": "58,320美元/年",
+            "note": "2025年美国51-9071该行业年薪中位数，BLS OOH。"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "珠宝、箱包和皮具零售",
+            "median": "53,990美元/年",
+            "note": "2025年美国51-9071该行业年薪中位数，BLS OOH。"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "珠宝与银器制造",
+            "median": "48,800美元/年",
+            "note": "2025年美国51-9071该行业年薪中位数，BLS OOH。"
           },
           {
-            "industry": "职业大类",
-            "median": "暂无安全数值",
-            "note": "范围需单独核验。"
+            "industry": "个人与家庭用品维修",
+            "median": "46,390美元/年",
+            "note": "2025年美国51-9071该行业年薪中位数，BLS OOH。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "年薪中位数（美元，2025）",
         "interpretation_heading": {
           "$item": "jewelers-and-precious-stone-and-metal-workers.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10282,29 +10555,29 @@
         },
         "interpretation_rows": [
           {
-            "answer": "不是。",
+            "answer": "不是个人报价；地区、工时、材料及具体责任另核。",
             "question": "这是不是个人报价？"
           },
           {
-            "answer": "需核对覆盖范围。",
+            "answer": "覆盖美国51-9071，不建立中国工资映射。",
             "question": "这是否覆盖精确职业？"
           },
           {
-            "answer": "以来源时期为准。",
+            "answer": "工资2025；本表就业2024、预测2024—2034，新期另列。",
             "question": "时期是什么？"
           },
           {
-            "answer": "不能直接拼接。",
+            "answer": "保留年/小时原单位，不假定工时或换算个人月薪。",
             "question": "能否跨市场比较？"
           }
         ],
         "median": "25.26 美元/小时；52,540 美元/年（2025 年，精确职业口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "accessed 2026-08-30",
+        "outlook_period": "O*NET：2024—2034；BLS OOH新期2025—2035另列",
         "wage_column_labels": [
-          "分位",
+          "统计位置",
           "年度参考",
-          "月度等值",
+          "换算边界",
           "解释"
         ],
         "wage_heading": {
@@ -10315,22 +10588,22 @@
         },
         "wage_tiers": [
           {
-            "equivalent": "—",
-            "interpretation": "不作个人报价。",
+            "equivalent": "不推算个人月薪",
+            "interpretation": "2025美国51-9071统计；不是起薪或个人报价。",
             "label": "低分位",
-            "value": "暂无安全数值"
+            "value": "最低10%低于35,580美元/年"
           },
           {
-            "equivalent": "—",
-            "interpretation": "不作个人报价。",
+            "equivalent": "不推算个人月薪",
+            "interpretation": "2025美国51-9071统计；不是起薪或个人报价。",
             "label": "中位数",
-            "value": "52,540 美元/年"
+            "value": "52,540美元/年；25.26美元/小时"
           },
           {
-            "equivalent": "—",
-            "interpretation": "不作个人报价。",
+            "equivalent": "不推算个人月薪",
+            "interpretation": "2025美国51-9071统计；不是起薪或个人报价。",
             "label": "高分位",
-            "value": "暂无安全数值"
+            "value": "最高10%高于87,540美元/年"
           }
         ]
       },
@@ -10410,12 +10683,12 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "珠宝与贵金属加工人员",
+            "geography": "美国",
+            "horizon": "O*NET：2024—2034",
+            "interpretation": "旧期年均4,000；BLS新期3,700个另列。",
+            "limitation": "两期不混算；空缺非净新增或个人录用概率。",
+            "metric": "增长及年均空缺",
+            "occupation_scope": "51-9071精确职业",
             "value": {
               "$item": "jewelers-and-precious-stone-and-metal-workers.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10424,71 +10697,35 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
+            "geography": "中国大陆",
+            "horizon": "截至2026-10-03",
+            "interpretation": "行业均值不能代填职业分布。",
+            "limitation": "有界查阅未建立数值，不表示所有数据不存在。",
+            "metric": "全国职业工资",
             "occupation_scope": "珠宝与贵金属加工人员",
-            "value": "暂无安全数值"
+            "value": "证据不足：已查国家统计局2025年行业工资公报，未建立中国大陆本精确职业全国工资分布；行业均值、历史岗位报价和美国工资均不代填。"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "珠宝与贵金属加工人员",
-            "value": "暂无安全数值"
+            "geography": "中国大陆深圳盐田",
+            "horizon": "2026-08-08—08-14；08-14发布",
+            "interpretation": "按单位、任务和地点核对，计一条去重样本；公告2名为当期职位名额。",
+            "limitation": "当前是否在招未核；不推算全国需求、工资分布或录用概率。",
+            "metric": "已核岗位样本",
+            "occupation_scope": "万丰珠宝执模师傅历史样本",
+            "value": "深圳市万丰珠宝首饰有限公司：倒模、油压工艺，素金手环、戒指、项链、吊坠、耳饰；同工种三年经验优先。单位在盐田北山道146号北山工业区。"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.0",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "内部任务规范只用于任务拆分与责任边界，不测量采用率。"
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.1",
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "scope": "中国行业和岗位大类平均工资，未建立与该精确职业对应的全国分布。"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.2",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.onet-details",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -10496,25 +10733,79 @@
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-9071.00 精确职业范围，不设定中国资格。"
+            "scope": "旧期2024就业与2024—2034预测。"
           },
           {
             "href": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "id": "jewelers-and-precious-stone-and-metal-workers.display.source.3",
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.bls-ooh-jewelers",
             "label": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "scope": "热门技术提及不等同于本职业能力、采用或自动化程度。"
+            "scope": "新期2025就业与2025—2035预测。"
+          },
+          {
+            "href": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.nbs-wages",
+            "label": {
+              "$source": "nbs-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "中国行业工资，非职业分布。"
+          },
+          {
+            "href": {
+              "$source": "yantian-jewelry-202608",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.yantian-jewelry-202608",
+            "label": {
+              "$source": "yantian-jewelry-202608",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "万丰执模师傅历史任务及地点。"
+          },
+          {
+            "href": {
+              "$source": "adj-gem-and-diamond-workers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "id": "jewelers-and-precious-stone-and-metal-workers.review.adj-gem-and-diamond-workers",
+            "label": {
+              "$source": "adj-gem-and-diamond-workers",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
+            },
+            "scope": "宝石加工细分对象，非自动转岗。"
           }
         ],
         "transitions": [
@@ -10534,7 +10825,7 @@
             "target_href": "/zh/career/jobs/craft-artists",
             "target_slug": "craft-artists",
             "target_title": "工艺艺术家",
-            "transition_distance": "需补证据"
+            "transition_distance": "编辑建议：须补原创作品与展示能力"
           },
           {
             "capability_gaps": "结构件尺度、焊接与安装安全",
@@ -10553,12 +10844,12 @@
             "transition_distance": "较近，需补公差与批量证据"
           },
           {
-            "capability_gaps": "模具设计与模型制作工艺",
-            "shared_capabilities": "模型与模具基础",
+            "capability_gaps": "铸造用模样、芯盒、模板及机床检验技能",
+            "shared_capabilities": "读图、材料与工具意识",
             "target_href": "/zh/career/jobs/patternmakers-metal-and-plastic",
             "target_slug": "patternmakers-metal-and-plastic",
             "target_title": "金属与塑料制模工",
-            "transition_distance": "中等，需补模具工艺证据"
+            "transition_distance": "须补铸造模样对象的训练与作品"
           },
           {
             "capability_gaps": "工具与模具制造精度标准",
@@ -10569,12 +10860,12 @@
             "transition_distance": "较远，需补工具模具证据"
           },
           {
-            "capability_gaps": "原创工艺与作品表达体系",
-            "shared_capabilities": "手工制作与造型能力",
-            "target_href": "/zh/career/jobs/craft-artists",
-            "target_slug": "craft-artists",
-            "target_title": "工艺艺术家",
-            "transition_distance": "中等，需补原创作品证据"
+            "capability_gaps": "宝石切磨抛光设备、宝石评价方法与受训实物操作",
+            "shared_capabilities": "材料识别、精细加工与检验记录",
+            "target_href": "/zh/career/jobs/gem-and-diamond-workers",
+            "target_slug": "gem-and-diamond-workers",
+            "target_title": "宝石琢磨工",
+            "transition_distance": "相关细分方向，须补宝石工艺与仪器证据"
           }
         ]
       },
@@ -10607,15 +10898,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "riasec",
             "label": "RIASEC",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "RAC偏好怎样用珠宝任务试验？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "规格读表",
+              "造型与记录选择"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           },
           {
             "answer": {
@@ -10626,15 +10917,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "big-five",
             "label": "大五人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "怎样观察细致和如实记录？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "不漏孔径偏差",
+              "保留克重差额"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           },
           {
             "answer": {
@@ -10645,57 +10936,57 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "mbti",
             "label": "MBTI",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "沟通风格怎样接受检验？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "描述S/T事实",
+              "确认接收责任人"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "观察如实交接，不按人格类型判断诚信。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "面对材料差额怎样处理？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "承认未解释项",
+              "不填虚构损耗"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "固定输入检验算术和理解；不凭标签判断鉴定能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "怎样检验计算和读表？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "复算0.10克和96单位",
+              "区分两项公差"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           },
           {
-            "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
+            "answer": "模拟沟通过程可复盘；工具标签不代替工作表现。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑工作样本建议，非量表效度研究",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "怎样回应催促放行？",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "说明三项阻断",
+              "交机构责任人复核"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "纸面样本不授予设备、鉴定或估值权限。"
           }
         ],
         "boundary": "RIASEC、人格和能力工具不能替代资格、医疗、安全或雇主判断。",
@@ -10724,7 +11015,7 @@
           {
             "direction": "宝石分级与鉴定基础",
             "fit_signals": "愿意学习宝石等级与鉴定依据。",
-            "watchouts": "结论须按资质与授权。"
+            "watchouts": "分级报告、实物对应及估值分别核；机构签字权限另查。"
           },
           {
             "direction": "精度与检验",
@@ -10745,35 +11036,35 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "用规格检查、造型说明、材料记录三类纸面任务比较偏好，说明选择理由。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "纸面试验不测长时间精细手工或工作台耐受；真实任务须受训、受监督评估。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "四份作品写清输入、单位、计算和待决状态，别人能重建结论。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "发现0.10克未解释或S/T不一致时写事实及接收责任人，不自行补成确定结果。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "报告查询、培训证书、雇主任用和鉴定/估值权限分别核，不能由一个推出全部。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "比较初稿与复核稿，解释算错、漏检或不当放行如何改正。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "规格表、复算表、偏差单和交接单是虚构作品，不冒充真实客户经历。",
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "从吊坠P固定输入开始，按七日计划修订，再核目标工种的工具及监督要求。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -10816,57 +11107,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "mynextmove",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "mynextmove",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-context",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10880,228 +11120,58 @@
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "任务及RAC兴趣；适配观察为编辑建议。"
           },
           {
             "href": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "label": {
-              "$source": "onet-education",
+              "$source": "bls-ooh-jewelers",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "入门与在岗训练，不是人格效度。"
           },
           {
             "href": {
-              "$source": "onet-job-zone",
+              "$source": "gia-report-boundary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "label": {
-              "$source": "onet-job-zone",
+              "$source": "gia-report-boundary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "GIA报告边界，不提供心理测量依据。"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "osha-hazcom",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
             "label": {
-              "$source": "onet-summary",
+              "$source": "osha-hazcom",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-tasks",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "jewelers-and-precious-stone-and-metal-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "化学品培训，不以测试替代。"
           }
         ]
       },
@@ -11192,6 +11262,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪条珠宝加工方向？",
+      "interface.fit.interest_code_heading": "怎样理解RAC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11252,7 +11326,7 @@
         "market": "美国",
         "measure": "2025 年年薪中位数",
         "occupation_scope": "O*NET 51-9071.00 Jewelers And Precious Stone And Metal Workers",
-        "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+        "period": "2025工资；2026-10-03核查",
         "source_refs": [
           "onet-wages"
         ]
@@ -11264,7 +11338,7 @@
         "market": "美国",
         "measure": "2024 年就业基数",
         "occupation_scope": "O*NET 51-9071.00 Jewelers And Precious Stone And Metal Workers",
-        "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+        "period": "2024就业基期；2026-10-03核查",
         "source_refs": [
           "source-pack-onet-summary"
         ]
@@ -11276,19 +11350,19 @@
         "market": "美国",
         "measure": "2024—2034 就业增长标签",
         "occupation_scope": "O*NET 51-9071.00 Jewelers And Precious Stone And Metal Workers",
-        "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+        "period": "2024—2034预测；2026-10-03核查",
         "source_refs": [
           "source-pack-onet-summary"
         ]
       },
       {
         "derivation": null,
-        "display_value": "预计年均岗位空缺 约 4,000 个（2024—2034，BLS 就业预测，51-9071.00 精确职业，含增长与替补）",
+        "display_value": "预计年均岗位空缺约4,000个（2024—2034，BLS就业预测，美国51-9071精确职业；非净新增岗位）",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
         "measure": "2024—2034 年均职位空缺",
         "occupation_scope": "O*NET 51-9071.00 Jewelers And Precious Stone And Metal Workers",
-        "period": "2025 wages and 2024-2034 projections; accessed 2026-08-31",
+        "period": "2024—2034预测；2026-10-03核查",
         "source_refs": [
           "source-pack-onet-summary"
         ]
@@ -11351,10 +11425,10 @@
       "text": "珠宝与贵金属加工人员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "afd84c639f44cfa437ffd30aa0875be2ad964c57c6b5f6f29fa34228499a10a2",
+  "source_content_sha256": "53429554f2998d6e59de28c36ba6c973eef06c1c2f5e734b97fdeaaef966936c",
   "subject": {
     "canonical_slug": "jewelers-and-precious-stone-and-metal-workers",
     "name": "珠宝与贵金属加工人员",
-    "summary": "珠宝与贵金属加工人员设计、制作、调整、修理或鉴定珠宝、金、银、其他贵金属或宝石。工作包括确认设计与规格、选择与核对材料、切割与成型、镶嵌与装配、抛光与检验、记录与交接。美国工资与就业采用 O*NET/BLS 51-9071.00 精确职业口径（2025 年中位年薪 52,540 美元；2024 年就业约 35,100 人、2024—2034 展望为下降、年均空缺约 4,000 个）；中国大陆精确职业工资未取得，按可见缺口登记。"
+    "summary": "珠宝与贵金属加工人员设计、制作、调整、修理或鉴定珠宝及贵金属、宝石，交付作品、规格检验和材料记录。应关注手工精度、资产交接及热和化学品安全；分级报告不等于估值，权限按岗位另核。美国工资与就业分期展示，中国全国职业工资证据不足。"
   }
 }

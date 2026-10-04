@@ -1236,7 +1236,7 @@
         "status": "mapped"
       },
       "item:helpers-installation-maintenance-and-repair-workers.path.entry-work-sample-data.1": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:helpers-installation-maintenance-and-repair-workers.path.interview-probation.1": {
         "status": "mapped"
@@ -24114,12 +24114,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对岗位胜任度的评价，也不构成任何安全、职业健康或法律意见。本页对应美国 O*NET/SOC 49-9098.00「Helpers--Installation, Maintenance, and Repair Workers」（安装维护工人修理）这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。官方范围原文：Help installation, maintenance, and repair workers in maintenance, parts replacement, and repair of vehicles, industrial machinery, and electrical and electronic equipment. Perform duties such as furnishing tools, materials, and supplies to other workers; cleaning work area, machines, and tools; and holding materials or tools for other workers. O*NET 列出的核心任务包括（该页列出 16 项任务，页面默认展示前 5 项）：使用手动或电动工具安装或更换机械、设备以及新的或替换的零件与仪器；检查和测试机械、设备、组件与零件是否有缺陷；照看和观察设备与机械以验证高效与安全运行；使用手动或电动工具调整、连接或断开线路、管道、管件及其他部件；使用手动工具、电动工具与清洁设备清洁或润滑车辆、机械、设备、仪器、工具与工作区。常见职位名称包括 Maintenance Helper 与 Mechanic Helper 与 Mechanic's Assistant 与 HVAC Helper 与 Maintenance Aide 与 Technician's Helper。口径提示：O*NET 在 49-9098.00 页呈现的美国工资与就业数据未标注取自上级或相邻职业，本页按本职业（49-9098.00）自身口径如实标注；该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；本页不把美国口径外推为中国大陆的岗位名称、资格或工资。"
+              "自我提问｜愿不愿意按工单核材料规格、记录差异并与技工沟通，保持作业与资料权限？先用R01虚构纸面任务体验工具材料准备和记录，不触碰真实设备；清单不是能力评分或录用标准。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.quick-decision.fit-decision-checklist.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24128,12 +24129,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的设备维护与维修配合任务包（仅用于练习流程，不代表任何真实企业、设备或数据）。请写出方案草案：（1）如何根据一份虚构的维修工单与设备资料，按结构化思路协助一次维护或零件更换或维修作业（设备与部件与工单编号、故障现象与报修描述、机械与电气与电子系统、工具与材料与备件、检查与测试与更换步骤、能源隔离与上锁挂牌与断电验电、作业后清洁与润滑与恢复），并写明哪些信息不足需要补充（设备历史与维修记录、现场条件与支撑与起重条件、安全与准入与作业许可要求、备件供应与停机窗口）；（2）如何为一份虚构的维护与维修记录表设计填写与复核要点（字段与口径、设备与工单标识、检查与测试与缺陷、更换与调整、清洁与润滑、异常与返工与遗留项、原始记录与修订留痕）；（3）如何撰写一份可交接的维修摘要（设备—现象与检查—处置与更换—测试与恢复—遗留项与建议）；（4）如何记录与保存设备与维修数据，并区分可公开信息与涉及企业与设备厂商的受控资料；（5）如何在发现带电或能源未隔离或机械或高处风险、超出岗位授权或安全风险时暂停并复核与隔离与上报。使用公开资料与模拟数据作答，不使用任何真实企业或设备数据。"
+              "演练题面｜直接使用R01虚构工单v1及备料：需求4个M6和8个垫圈，备6个M6、2个M8和10个垫圈。核规格数量、未知适配/强度和拟交状态，90分钟完成差异表、未知清单、拟交接与复核。08:00需求至08:10拟交不证明接收或维修；读数33无指标单位校准范围，不判合格。不编安装、测试、能源隔离或验电步骤。七日v2需求7/14，备料不变；完整题面答案在R01练习。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.quick-decision.fit-decision-checklist.2",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24156,12 +24158,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜O*NET 同时显示（49-9098.00，工作情境与任务口径）：接触危险设备 常见（36% 每天、27% 每周一次或以上）；接触污染物 常见（35% 每天、48% 每周一次或以上）；常在狭窄或高处与设备内部作业；错误的后果较严重（39% 极其严重、25% 非常严重）；对他人的健康与安全责任较高（39% 极高责任、29% 高责任）；维修计划与工期带来时间压力（27% 每天、30% 每周一次或以上）。本职业以车辆与工业机械与电气与电子设备与工具为对象：一次能源未隔离即拆装、一次带电或电气作业失误、一次检查或测试不到位导致故障复发、一次清洁或润滑不当，都可能造成设备损坏、人身伤害与停机损失与合规风险。O*NET 将该职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）；增长标为 Slower than average（2%），该页未标注 Bright Outlook。若你难以在粉尘与污染物与噪声与油污与高处与狭窄环境下作业、难以接受随维修计划与停机与工期变化与可能加班的节奏，或不愿对安全与维修配合承担责任，应把这些作为现实成本。"
+              "谨慎信号｜本职业可能接触机械、电气、噪声、污染物与不同现场条件。不能仅凭兴趣或纸面算对就开始拆装、测试或送电；核实际培训、作业范围、现场制度及防护。若难坚持规格核对、未知条件记录和异常移交，先用R01复核体验再评估投入。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24170,12 +24173,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项作业上同时完成三件事：把技术做实（依据手册与工单与技工指令完成检查与测试与更换与清洁与润滑，产出可用的维护与维修记录）、把安全与合规与边界管住（按能源隔离与上锁挂牌与断电验电与机械与高处与临边与粉尘与污染物要求工作并留痕、区分可公开信息与涉及企业与设备厂商的受控资料并按制度处理、不在无授权时带电作业或越界处置）、并承担可界定的岗位责任（对本人检查与测试与更换与清洁与记录负责，对超出岗位授权或涉及特种作业与重大安全事项按制度提请相应岗位或机构处理）。建议用一次可核验的体验（为一份虚构工单完成一份维护与维修方案与一份维护与维修记录说明，或一次带电或能源未隔离或机械异常的处置复盘）来检验，而不是仅依据兴趣问卷的结论。"
+              "承担判断｜实际助手可有供料、检查、测试、连接、更换及清洁任务，依据实际培训、手册、资格和现场允许职责工作，技术资料按真实用途权限处理，超出职责及时按制度移交。先用R01虚构清单核v1两类余2与v2缺1/4、M8不替代、读数与接收未知。纸面体验只观察核对记录与表达，不检验真实操作、设备安全或代替资格。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.quick-decision.fermat-decision-card.7",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         }
@@ -24192,7 +24196,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "直接回答｜本页的「安装维护工人修理」是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业，工作可以分成几类：（一）材料与工具准备——向技工提供工具、材料与用品，维护工具与车辆与设备并使零件与用品井然有序；（二）安装与更换——使用手动或电动工具安装或更换机械与设备与新的或替换的零件与仪器；（三）检查与测试——检查和测试机械、设备、组件与零件是否有缺陷以确保正常运转，照看和观察设备与机械以验证高效与安全运行；（四）连接与调整——使用手动或电动工具调整、连接或断开线路与管道与管件及其他部件；（五）清洁与润滑——使用手动工具与电动工具与清洁设备清洁或润滑车辆、机械、设备、仪器、工具与工作区。"
+              "直接回答｜本页的「安装、维护与维修工人帮工」是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业，工作可以分成几类：（一）材料与工具准备——向技工提供工具、材料与用品，维护工具与车辆与设备并使零件与用品井然有序；（二）安装与更换——使用手动或电动工具安装或更换机械与设备与新的或替换的零件与仪器；（三）检查与测试——检查和测试机械、设备、组件与零件是否有缺陷以确保正常运转，照看和观察设备与机械以验证高效与安全运行；（四）连接与调整——使用手动或电动工具调整、连接或断开线路与管道与管件及其他部件；（五）清洁与润滑——使用手动工具与电动工具与清洁设备清洁或润滑车辆、机械、设备、仪器、工具与工作区。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.career-quick-answers-block.1",
@@ -24206,7 +24210,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 49-9098.00「Helpers--Installation, Maintenance, and Repair Workers」（安装维护工人修理）这一精确职业，官方范围原文：Help installation, maintenance, and repair workers in maintenance, parts replacement, and repair of vehicles, industrial machinery, and electrical and electronic equipment. Perform duties such as furnishing tools, materials, and supplies to other workers; cleaning work area, machines, and tools; and holding materials or tools for other workers. 该页列出 16 项任务，页面默认展示前 5 项：使用手动或电动工具安装或更换机械与设备以及新的或替换的零件与仪器、检查和测试机械与设备与组件与零件是否有缺陷、照看和观察设备与机械以验证高效与安全运行、使用手动或电动工具调整与连接或断开线路与管道与管件及其他部件、使用手动工具与电动工具与清洁设备清洁或润滑车辆与机械与设备与仪器与工具与工作区。该页工作活动重要性：检查设备、结构或材料（87）、维修与维护机械设备（80）、决策与解决问题（79）、进行一般身体活动（77）、与主管与同事或下属沟通（72）。该页学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项），增长标为 Slower than average（2%），未标注 Bright Outlook。"
+              "O*NET 与 BLS 职业档案要点｜本页对应 O*NET/SOC 49-9098.00「Helpers--Installation, Maintenance, and Repair Workers」（安装、维护与维修工人帮工）这一精确职业，官方范围原文：Help installation, maintenance, and repair workers in maintenance, parts replacement, and repair of vehicles, industrial machinery, and electrical and electronic equipment. Perform duties such as furnishing tools, materials, and supplies to other workers; cleaning work area, machines, and tools; and holding materials or tools for other workers. 该页列出 16 项任务，页面默认展示前 5 项：使用手动或电动工具安装或更换机械与设备以及新的或替换的零件与仪器、检查和测试机械与设备与组件与零件是否有缺陷、照看和观察设备与机械以验证高效与安全运行、使用手动或电动工具调整与连接或断开线路与管道与管件及其他部件、使用手动工具与电动工具与清洁设备清洁或润滑车辆与机械与设备与仪器与工具与工作区。该页工作活动重要性：检查设备、结构或材料（87）、维修与维护机械设备（80）、决策与解决问题（79）、进行一般身体活动（77）、与主管与同事或下属沟通（72）。该页学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项），增长标为 Slower than average（2%），未标注 Bright Outlook。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.onet-structured-fields-block.1",
@@ -24239,7 +24243,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "场所与环境｜厂房与设备现场与建筑内部为主要作业场所；常在狭窄或高处与设备内部作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（36% 每天、27% 每周一次或以上）；接触污染物 常见（35% 每天、48% 每周一次或以上）；接触机械与电动工具噪声 常见；暴露于机械与手持工具振动\n体力与姿势｜长时间站立（34% 持续或几乎持续、40% 超过一半时间）；常在狭窄或高处与设备内部作业；身体接近程度中等（19% 非常接近、44% 一臂之距）\n沟通与协作｜与技工与同事紧密协作（30% 持续与他人接触、50% 大部分时间）；面对面讨论频繁（75% 每天）\n精确与责任｜精确性与配合要求较高（25% 极其重要、44% 非常重要）；错误的后果较严重（39% 极其严重、25% 非常严重）；对他人的健康与安全责任较高（39% 极高责任、29% 高责任）\n进度与节奏｜受生产与维修计划与工序衔接约束；维修计划与工期带来时间压力（27% 每天、30% 每周一次或以上）；节奏由技工与维修进度决定\n决策与设备｜决策频率较高（53% 每天）；机械与电气与电子设备与手动与电动工具\n排班与现场｜排班以规律为主（58% 规律、40% 不规律）；以团队协作作业为主；工作日程以规律为主、随天气与生产与合同期变化（58% 规律、40% 不规律）\n数字化｜电子邮件与移动通信使用较少；维护管理与工单软件（CMMS）与项目沟通应用"
+              "场所与环境｜厂房与设备现场与建筑内部为主要作业场所；常在狭窄或高处与设备内部作业（O*NET 工作情境与任务口径，下同）\n防护与暴露｜接触危险设备 常见（36% 每天、27% 每周一次或以上）；接触污染物 常见（35% 每天、48% 每周一次或以上）；接触机械与电动工具噪声 常见；暴露于机械与手持工具振动\n体力与姿势｜长时间站立（34% 持续或几乎持续、40% 超过一半时间）；常在狭窄或高处与设备内部作业；身体接近程度中等（19% 非常接近、44% 一臂之距）\n沟通与协作｜与技工与同事紧密协作（30% 持续与他人接触、50% 大部分时间）；面对面讨论频繁（75% 每天）\n精确与责任｜精确性与配合要求较高（25% 极其重要、44% 非常重要）；错误的后果较严重（39% 极其严重、25% 非常严重）；对他人的健康与安全责任较高（39% 极高责任、29% 高责任）\n进度与节奏｜受生产与维修计划与工序衔接约束；维修计划与工期带来时间压力（27% 每天、30% 每周一次或以上）；节奏由技工与维修进度决定\n决策与设备｜决策频率较高（53% 每天）；机械与电气与电子设备与手动与电动工具\n排班与现场｜排班以规律为主（58% 规律、40% 不规律）；以团队协作作业为主；该58%/40%分类不证明天气、生产或合同期是排班原因\n数字化｜目标软件另核；O*NET清单含办公、记录与设施工具，不证明CMMS普遍采用或通信使用较少"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.work-context-block.1",
@@ -24267,7 +24271,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 呈现的 BLS 工资口径｜本页对应 O*NET/SOC 49-9098.00（安装维护工人修理）。需如实说明：O*NET 在 49-9098.00 页面呈现的 2025 年美国工资为 中位时薪 19.05 美元 / 中位年薪 39,630 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）；分布上第 10 分位为时薪 14.09 美元与年薪 29,310 美元、第 25 分位为时薪 16.78 美元与年薪 34,910 美元、第 75 分位为时薪 22.55 美元与年薪 46,890 美元、第 90 分位为时薪 26.87 美元与年薪 55,890 美元，均取自 BLS 职业就业与工资统计（OEWS 2025 年，经 O*NET 呈现）；该页未标注数据取自上级或相邻职业，故按本职业（49-9098.00）自身口径呈现；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布，本页按证据政策登记缺口而不代填。"
+              "O*NET 呈现的 BLS 工资口径｜本页对应 O*NET/SOC 49-9098.00（安装、维护与维修工人帮工）。需如实说明：O*NET 在 49-9098.00 页面呈现的 2025 年美国工资为 中位时薪 19.05 美元 / 中位年薪 39,630 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）；分布上第 10 分位为时薪 14.09 美元与年薪 29,310 美元、第 25 分位为时薪 16.78 美元与年薪 34,910 美元、第 75 分位为时薪 22.55 美元与年薪 46,890 美元、第 90 分位为时薪 26.87 美元与年薪 55,890 美元，均取自 BLS 职业就业与工资统计（OEWS 2025 年，经 O*NET 呈现）；该页未标注数据取自上级或相邻职业，故按本职业（49-9098.00）自身口径呈现；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本，中位数不是入职起薪。本页所核中国资料未取得与本职业精确对应的全国职业工资分布，缺口见中国区，不以行业或招聘估算代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.onet-structured-fields-block.2",
@@ -24295,12 +24299,14 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆口径与缺口｜中国大陆在设备维护与维修与机电与物业与工业服务领域存在与安装维护工人修理相近的岗位（如维修工、机修工辅助人员、设备维护工、物业维修人员、机电维修辅助人员），其作业与能源隔离与断电验电与机械与高处与临边与粉尘与污染物与安全与职业健康与记录受《中华人民共和国安全生产法》与特种作业（低压电工作业等）与职业健康与环境保护等相关法规与标准约束。但国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布，本页保留检索范围与缺口，不以行业均值、招聘报价或美国数据推断起薪、到手收入或个人报价。"
+              "证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24309,12 +24315,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "安全与合规说明｜按安全生产与能源隔离与上锁挂牌与断电验电与机械与高处与临边与粉尘与污染物与职业健康与记录要求组织工作：检查与测试与更换与连接与清洁须与手册与工单与现行标准一致并标明来源与局限，不得替代设备安全检验、送电验收或安全许可要求；涉及带电作业与能源隔离与高处与临边与受限空间作业的须按规定办理作业许可与个人防护；涉及企业与设备厂商技术资料的收集与使用与对外提供须具有合法依据并限于最小必要范围并按制度审批与留痕。"
+              "安全与合规说明｜按实际设备任务核培训、资格、现场制度与允许职责。中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。技术资料按真实合法用途、合同和企业权限处理，工具输出不成为设备合格或作业许可。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24379,7 +24387,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本页对应 O*NET 49-9098.00（安装维护工人修理），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以车辆与工业机械与电气与电子设备与现场配合为对象，产出为按工单与手册完成的配合作业（供料与检查与测试与更换与连接与清洁与润滑）与可追溯的维护与维修记录，凭设备与工具与现场配合能力在技工与岗位授权范围内完成作业，对作业安全与维修配合质量负责；综合维修人员与工业机械机械师与公交卡车机械师与家电维修工与机械安装工以各自专业维修为产出，责任与授权层级不同。"
+              "边界结论｜本页对应 O*NET 49-9098.00（安装、维护与维修工人帮工），与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以车辆与工业机械与电气与电子设备与现场配合为对象，产出为按工单与手册完成的配合作业（供料与检查与测试与更换与连接与清洁与润滑）与可追溯的维护与维修记录，凭设备与工具与现场配合能力在技工与岗位授权范围内完成作业，对作业安全与维修配合质量负责；综合维修人员与工业机械机械师与公交卡车机械师与家电维修工与机械安装工以各自专业维修为产出，责任与授权层级不同。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.career-quick-answers-block.7",
@@ -24449,7 +24457,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本页的安装维护工人修理是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业，在制造与建筑与物业与设备租赁与服务等企业的设备维护班组承担供料与检查与测试与更换与连接与清洁与润滑等现场配合任务；工作以现场体力与设备与工具配合为主，伴有搬运与清洁与记录与协作，常在粉尘与污染物与噪声与油污与高处与狭窄环境作业，按维修计划与停机窗口与工期组织工作。"
+              "职业画像｜本页的安装、维护与维修工人帮工是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业，在制造与建筑与物业与设备租赁与服务等企业的设备维护班组承担供料与检查与测试与更换与连接与清洁与润滑等现场配合任务；工作以现场体力与设备与工具配合为主，伴有搬运与清洁与记录与协作，常在粉尘与污染物与噪声与油污与高处与狭窄环境作业，按维修计划与停机窗口与工期组织工作。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.definition-block.11",
@@ -24561,12 +24569,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜日常供料与检查与测试与更换与连接与清洁与润滑须在技工与岗位授权与手册规程范围内进行；涉及带电作业与能源隔离与高处与临边与受限空间作业、设备改造与重大返修的须按制度与资质执行；涉及低压电工作业与高处作业等资格与作业许可的以主管机关与企业要求为准。"
+              "权限与批准｜助手任务可含供料、检查连接清洁和维修配合；实际允许工作按设备训练、资格及现场制度核，不能由名称或AI输出推权限。中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -24673,7 +24683,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜美国 O*NET 将 49-9098.00（安装维护工人修理）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）；增长标为 Slower than average（2%），未标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教。"
+              "核对要点说明｜美国 O*NET 将 49-9098.00（安装、维护与维修工人帮工）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）；增长标为 Slower than average（2%），未标注 Bright Outlook；在美国该职业准备通常为短期在岗训练与师徒带教。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.profile.career-quick-answers-block.27",
@@ -24836,7 +24846,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本页（O*NET 49-9098.00 安装维护工人修理）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以车辆与工业机械与电气与电子设备与现场配合为对象，产出为按工单与手册完成的配合作业与可追溯的维护与维修记录；综合维修人员与工业机械机械师与公交卡车机械师与家电维修工与机械安装工以各自对象为主，产出与授权层级不同。"
+              "结论｜本页（O*NET 49-9098.00 安装、维护与维修工人帮工）与相邻岗位的核心差别在「对象与产出与授权层级」：本职业以车辆与工业机械与电气与电子设备与现场配合为对象，产出为按工单与手册完成的配合作业与可追溯的维护与维修记录；综合维修人员与工业机械机械师与公交卡车机械师与家电维修工与机械安装工以各自对象为主，产出与授权层级不同。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.direction-comparison.adjacent-career-comparison-table.8",
@@ -24920,7 +24930,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "本职业：安装维护工人修理（O*NET/SOC 49-9098.00，Helpers--Installation, Maintenance, and Repair Workers）"
+              "本职业：安装、维护与维修工人帮工（O*NET/SOC 49-9098.00，Helpers--Installation, Maintenance, and Repair Workers）"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.direction-comparison.adjacent-career-comparison-table.14",
@@ -25243,112 +25253,112 @@
                 "url": "https://www.onetonline.org/link/summary/49-9098.00"
               },
               {
-                "entity": "O*NET 49-9098.00 详细资料（任务与工作活动）",
+                "entity": "BLS OEWS受雇工资",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/49-9098.00"
+                "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 49-9098.00 职业范围与工作情境",
+                "entity": "O*NET旧期预测与当前类别",
                 "id": "link-3",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/custom/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 国家工资（本职业自身口径，BLS OEWS 2025 年）",
-                "id": "link-4",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 就业趋势（本职业自身口径，BLS 就业预测 2024—2034）",
-                "id": "link-5",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 行业分布",
-                "id": "link-6",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/industry/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 热门技术（软件技能）",
-                "id": "link-7",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/hot_tech/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 证书目录",
-                "id": "link-8",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localcert/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 国家培训",
-                "id": "link-9",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtraining/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 任务与详细工作活动",
-                "id": "link-10",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 工作活动重要性",
-                "id": "link-11",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 职业档案与工作情境",
-                "id": "link-12",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/summary/49-9098.00"
               },
               {
-                "entity": "ILO 生成式 AI 与就业职业暴露指数研究",
+                "entity": "O*NET软件资料",
+                "id": "link-4",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/hot_tech/49-9098.00"
+              },
+              {
+                "entity": "ILO2025工作论文140",
+                "id": "link-5",
+                "relation": "career.authority",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "entity": "NIST AI RMF",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "O*NET助手工作情境",
+                "id": "link-7",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/49-9098.00"
+              },
+              {
+                "entity": "O*NET助手任务",
+                "id": "link-8",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/49-9098.00"
+              },
+              {
+                "entity": "BLS OEWS口径",
+                "id": "link-9",
+                "relation": "career.authority",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "entity": "O*NET旧期就业预测",
+                "id": "link-10",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/49-9098.00"
+              },
+              {
+                "entity": "O*NET软件技能",
+                "id": "link-11",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/hot_tech/49-9098.00"
+              },
+              {
+                "entity": "NIST风险治理",
+                "id": "link-12",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "ILO潜在任务暴露",
                 "id": "link-13",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
+                "entity": "O*NET软件与目标系统",
                 "id": "link-14",
-                "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
-              },
-              {
-                "entity": "O*NET 49-9098.00 就业趋势（国家层面，本职业自身口径）",
-                "id": "link-15",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 工作情境（任务与环境与安全）",
-                "id": "link-16",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/custom/49-9098.00"
-              },
-              {
-                "entity": "O*NET 49-9098.00 热门技术（软件技能提及）",
-                "id": "link-17",
                 "relation": "career.authority",
                 "url": "https://www.onetonline.org/link/hot_tech/49-9098.00"
               },
               {
-                "entity": "ILO 生成式 AI 与就业职业暴露指数研究（任务暴露机制）",
+                "entity": "O*NET助手任务分析",
+                "id": "link-15",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/details/49-9098.00"
+              },
+              {
+                "entity": "O*NET旧期预测",
+                "id": "link-16",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/49-9098.00"
+              },
+              {
+                "entity": "NIST风险与人工责任",
+                "id": "link-17",
+                "relation": "career.authority",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "ILO不预测职业消失年份",
                 "id": "link-18",
                 "relation": "career.authority",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0，治理原则）",
+                "entity": "O*NET助手任务与准备",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+                "url": "https://www.onetonline.org/link/details/49-9098.00"
               }
             ]
           },
@@ -25475,12 +25485,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业的自动化暴露以「工单与设备台账与检查读数与备件与报表与知识检索」为主：维护管理与工单软件与备件与知识库已在记录与检索与整理环节部分应用，可减少重复记录与初稿工作；但现场检查与测试与更换与连接与能源隔离与安全责任仍高度依赖持证或有经验人员。O*NET 49-9098.00 的工作活动重要性最高的是检查设备、结构或材料（87）与维修与维护机械设备（80）与决策与解决问题（79）与进行一般身体活动（77）与与主管、同事或下属沟通（72）；工作情境显示：面对面讨论频繁（75% 每天）、决策频率较高（53% 每天）、接触危险设备 常见（36% 每天、27% 每周一次或以上）、错误的后果较严重（39% 极其严重、25% 非常严重）。该页学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项），增长标为 Slower than average（2%），未标注 Bright Outlook。需如实说明：O*NET 在 49-9098.00 页显示 2024—2034 年增长为 Slower than average（2%），且该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；该页工资为中位时薪 19.05 美元与中位年薪 39,630 美元。AI 与自动化最可能改变的是「工单与检查与设备与备件与知识检索环节」；而现场检查与测试与更换与能源隔离与安全责任仍由具备相应资质与授权的人员负责。技术可行不等于企业采用（须取决于带电与特种作业与设备安全要求），也不等于岗位消失。"
+              "本页建议在获准或虚构资料中试验工单、备件与记录整理；没有本职业实测AI等级、普遍采用率或替代率。O*NET支持助手的材料准备、检查与维修配合任务；ILO研究潜在任务暴露，NIST为自愿治理。真实设备、测试、隔离与放行依据任务训练、资格和权限，不以工具输出判安全。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25545,12 +25558,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（2024—2034）"
+              "O*NET呈现BLS旧期就业预测"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -25559,12 +25573,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于就业与增长与空缺口径；为 O*NET 在 49-9098.00 页呈现的本职业口径（增长 Slower than average 2%、期间年均空缺约 11,800 个），为投影而非实际招聘。"
+              "本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25573,12 +25589,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 49-9098.00 热门技术（软件技能）"
+              "O*NET软件与热门技能资料"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "onet"
+            "weforum"
           ],
           "type": "prose"
         },
@@ -25587,12 +25603,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明工单与检查与备件与报表环节的工具情况；技术提及不等同于能力或自动化程度。"
+              "软件清单提供目标系统核对线索，非企业安装率、AI采用率或统一准入。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "onet"
+            "weforum",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25601,12 +25618,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 生成式 AI 与就业职业暴露指数研究"
+              "ILO工作论文140：生成式AI与就业细化全球暴露指数（2025）"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "ilo"
           ],
           "type": "prose"
         },
@@ -25615,12 +25632,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于理解技术对数据与文档与信息类任务的影响机制；研究对象以职业大组为主，不预测本职业个人岗位变化。"
+              "四级潜在任务暴露梯度不是实际采用或本职业消失年份；本页未赋49-9098.00实测暴露级别。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25643,12 +25661,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于治理与风险控制的一般原则；不是设备或特种作业或安全或法律标准。"
+              "NIST为自愿AI风险框架，不是中国特种作业法律或设备放行规程。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.30",
           "source_refs": [
-            "onet"
+            "nist"
           ],
           "type": "prose"
         },
@@ -25685,12 +25703,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 与自动化主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被设备与系统增强的是工单与检查与设备与备件与知识检索；现场检查与测试与更换与连接与能源隔离与安全责任始终由具备相应资质与授权的人员负责。技术可行、企业是否采用（取决于带电与特种作业与设备安全要求）与岗位结果三者必须分开判断。"
+              "下列差异是依本职业任务提出的辅助试验与人工责任建议，不是实测自动化排名。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.33",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25699,12 +25718,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单与设备台账与检查读数与备件初稿可由设备与系统承担"
+              "可试验工单与材料规格清单整理，逐项查原记录，不用生成内容替代真实备件。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.34",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25713,12 +25733,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场检查与测试与更换与连接与安全与工序责任"
+              "技工与授权人员核实际规格适配、设备条件与作业权限；R01纸面不决定可安装。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.35",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25727,12 +25748,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "多设备与故障与停机与备件数据汇总与统计可被工具加速"
+              "可辅助检查记录、数量差异和版本汇总；未经真实记录的测试不能生成成已完成。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25741,12 +25763,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "设备改造与安全与验收与对外披露决策"
+              "人工核数量单位、规格、测试来源与原始状态，未知条件保持待确认。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.37",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25755,12 +25778,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "手册与规程与故障知识检索与初稿可被工具生成"
+              "可辅助手册检索与拟写记录，核版本、设备型号及原文。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.38",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25769,12 +25793,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "内容证据与安全与质量审核与带电责任"
+              "真实现场安全、作业许可和放行由相应人员按制度确认，AI检索不授作业权。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.39",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -25839,7 +25864,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场检查与测试与更换与连接不易被纯软件替代，人工更集中于检查与设备与安全配合判断"
+              "任务资料支持设备配合、材料与记录，不测AI替代率或职业消失。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.44",
@@ -25895,12 +25920,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页展示的中位时薪 19.05 美元与中位年薪 39,630 美元取自本职业自身口径，不含福利与奖金，不代表相邻职业或中国大陆"
+              "2025美国本职业中位时薪19.05美元、年薪39,630美元；全国分位不是个人起薪。OEWS包括受雇全职/兼职及生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本及自雇等人群；就业矩阵包括自雇，两者不能混用。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -25951,12 +25979,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业 2024 年 98,700 人、2034 年预计 101,000 人、增长 Slower than average 2%、期间年均空缺约 11,800 个含替补，未标注 Bright Outlook"
+              "本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。不据增长推AI因果。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26007,12 +26037,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单与检查与备件使用软件与系统；现场检查与更换与安全判断仍由有经验人员负责"
+              "软件资料是目标工具线索，不证明普遍采用；现场任务条件与权限另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26105,12 +26137,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "岗位结果：任务变化是否导致岗位增减，取决于设备保有量与更新与制造与建筑与设施投资与技工供给；本页本职业自身口径增长为 Slower than average 2%，不能直接推断个人结果。"
+              "岗位结果应核期间、实际招聘与目标企业；预测与潜在任务暴露不识别AI因果或个人机会。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26119,12 +26153,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不会整体被生成式 AI 取代，工单与检查与设备与备件与知识检索工具会承担部分记录与检索工作；O*NET 显示本职业 2024—2034 年增长为 Slower than average 2%，且属 Job Zone 1-2（几乎无需至需要一定准备），但现场检查与测试与更换与能源隔离与安全责任仍是岗位核心，自动化更多改变任务构成而非取消岗位。"
+              "现有任务、预测与潜在研究不足以断言整体必不替代。可受控试验记录检索辅助；现场配合、训练和许可另核。技术可行、企业采用和岗位结果分开看。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26133,12 +26169,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET助手任务；ILO2025潜在暴露，非实测替代率"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26147,12 +26184,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不是门槛。本职业使用维护管理与工单软件与电子表格与办公工具即可；能把工单与检查与备件软件用起来是加分项，编程不是本职业的入职要求。"
+              "O*NET不以编程任务界定本职业；其软件资料包含记录、办公和设施工具。应核目标岗位系统与训练，不能断言每个岗位都无编程门槛。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26161,12 +26200,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET本职业任务与软件；目标招聘另核"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet"
+            "onet",
+            "weforum"
           ],
           "type": "prose"
         },
@@ -26175,12 +26215,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工单与设备台账整理与录入、检查与故障与备件统计、报表与文档初稿与手册与规程检索；这些环节可被维护管理与报表工具分担。"
+              "工单/材料清单、读数摘要、备件数量与记录初稿可作为受控辅助试验；这是编辑任务分析，不是最易自动化实测排名。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26189,12 +26230,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET本职业任务；本页辅助环节分析"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26203,12 +26245,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能按比例放大推断。O*NET 在 49-9098.00 页呈现的本职业就业为 2024 年 98,700 人、2034 年预计 101,000 人、2024—2034 年增长 Slower than average 2%，期间年均空缺约 11,800 个含替补；设备保有量与更新与设施投资与技工供给是主要影响因素之一。"
+              "本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。旧期预测不能证明AI导致变化，实际需求另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26217,12 +26261,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET旧期详表与当前类别；BLS矩阵方法"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -26231,12 +26277,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能自行承担。现场检查与测试与更换与连接与能源隔离与验收属于具备相应资质与授权的人员与企业的责任；系统可以按设定辅助检查与记录数据，但检查口径与更换与安全判断必须由人设定与确认。"
+              "AI输出不能自行成为诊断故障或维修放行依据。助手任务清单包含检查和维修配合，实际设备测试与决定仍依本人训练、资格及现场职责，不由纸面或AI授予。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "onet",
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26245,12 +26293,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "NIST风险治理；真实设备与作业权限另核"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.73",
           "source_refs": [
-            "onet"
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26259,12 +26308,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有这样的年份。职业由任务与工序与责任构成，不会因单一技术在某年整体消失；应以本职业的任务变化与设备需求与安全要求为准判断，而非相信确定年份的说法。"
+              "所核任务、预测与潜在研究没有给本职业消失年份；不能从低增长、软件提及或AI能力推哪年岗位消失。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26273,12 +26324,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET预测与ILO潜在暴露均不预测岗位消失年份"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo"
           ],
           "type": "prose"
         },
@@ -26287,12 +26339,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先掌握检查与测试与缺陷判断、安装与更换与连接与调整、清洁与润滑与恢复、能源隔离与上锁挂牌与断电验电与带电与高处与机械与粉尘与污染物安全作业，以及在维修计划与工序压力下坚持规程与证据与记录与异常上报的能力；数字工具只需会用即可。"
+              "准备工单阅读、规格和数量核对、如实记录与技工沟通；真实检查连接维修训练按适用资格和现场制度进行。先以R01观察纸面证据与未知条件处理，不能在未授权设备上试验。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26301,12 +26354,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "（来源：O*NET 49-9098.00 / BLS OEWS 2025 / BLS 就业预测 2024—2034）"
+              "O*NET助手任务；R01是本页编辑准备建议"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.77",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26455,12 +26509,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用自动生成替代现场检查与测试与设备判断"
+              "工具版本、输入与修改无法追溯，可能无法重核材料清单、读数摘要或差异记录。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.88",
           "source_refs": [
-            "onet"
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26469,12 +26524,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "现场检查与测试与设备判断须由具备相应资质的人员按规程判断"
+              "保留原记录、输入和工具版本、输出及人工修订，生成不得冒充实测或已验收。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.89",
           "source_refs": [
-            "onet"
+            "nist",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26483,12 +26539,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "以系统生成的内容替代真实检查与维修与验收与异常记录"
+              "数量、材料规格或记录状态错配，可能使材料准备与维修交接失真。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.90",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26497,12 +26554,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "记录须反映真实作业与检验过程，禁止生成未经核实的内容"
+              "核原工单数量与规格，区别拟交和已接收；未知适配、隔离或测试条件不得以摘要补造。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.91",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -26967,7 +27025,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业（49-9098.00，安装维护工人修理）全国中位数（2025 年，BLS OEWS，经 O*NET 在 49-9098.00 页呈现）；边界｜该页未标注取自上级或相邻职业，本页按本职业自身口径呈现；不含福利与奖金；中位为分布中点，不对应个人起薪。"
+              "口径｜美国本职业（49-9098.00，安装、维护与维修工人帮工）全国中位数（2025 年，BLS OEWS，经 O*NET 在 49-9098.00 页呈现）；边界｜该页未标注取自上级或相邻职业，本页按本职业自身口径呈现；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点，不对应个人起薪。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.8",
@@ -26995,12 +27053,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 10 分位工资（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜处于分布下段，可能与地区与企业与设备与资历相关，但不等于入职起薪。"
+              "口径｜2025美国本职业第10分位工资；边界｜分布位置不识别新手、供料或清洁职责。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27023,12 +27085,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 25 分位工资（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜处于分布下四分位，地区与企业与设备与技能与资历会明显影响实际收入。"
+              "口径｜2025美国本职业第25分位工资；边界｜不是某类地区、学历或资格的定薪依据。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27051,12 +27117,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 75 分位工资（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜处于分布上四分位，通常对应经验较多或承担带电与专科与带班职责的岗位。"
+              "口径｜2025美国本职业第75分位工资；边界｜不证明资深、带电或带班职责。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27079,12 +27149,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 90 分位工资（2025 年，BLS OEWS，经 O*NET 呈现）；边界｜处于分布上段，受地区与企业与设备与职责影响较大，不代表多数从业者。"
+              "口径｜2025美国本职业第90分位工资；边界｜不证明复杂设备、专项资格或个人可达。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27107,12 +27181,16 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测基期（2024 年本职业约 98,700 人，经 O*NET 呈现）；边界｜与 BLS OEWS 的时点就业估计口径不同，本页分别标注不混用；受设备保有量与更新与制造与设施投资影响。"
+              "口径｜2024就业98,700为BLS预测基期；边界｜矩阵含自雇，与OEWS受雇时点估计不同。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27177,12 +27255,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业的工单与检查与设备与备件与知识检索初稿环节可被生成式与统计工具辅助，自动化暴露中等偏低；生成式 AI 本身对其直接影响集中在数据与文档与检索整理；本页不对其 AI 影响作评分或预测。"
+              "AI工资说明｜没有本职业实测AI等级、采用率或收入效应；工单与材料记录可在虚构或获准资料中试验，设备与现场权限另核，不从软件清单推中等偏低暴露。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "ilo",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27191,7 +27271,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜本页的安装维护工人修理是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；增长标为 Slower than average（2%），该页未标注 Bright Outlook。"
+              "职业定义｜本页的安装、维护与维修工人帮工是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。该职业在美国属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；增长标为 Slower than average（2%），该页未标注 Bright Outlook。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.24",
@@ -27219,12 +27299,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "多数岗位"
+              "按实际岗位与法域核"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.26",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27233,12 +27313,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "满足入门的设备与电气与安全知识起点；该页学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）"
+              "美国新聘者学历要求调查32%高中、25%副学士/两年制、23%高中后证书；不是中国所有岗位条件或在岗学历构成。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27261,12 +27342,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "所有岗位"
+              "依任务与训练核"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.29",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27275,12 +27356,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "岗位通常要求能检查与测试缺陷并安装与更换与连接与清洁与润滑，并遵守能源隔离与带电与高处与机械与粉尘与污染物安全要求"
+              "助手任务可含供料、检查、连接、清洁与维修配合；所需训练和权限按具体任务核，不以职业名称授任何设备作业权。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.30",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27289,12 +27371,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "低压电工作业与高处作业与机械操作等资格"
+              "目录内特种作业证与现场许可"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.31",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "type": "prose"
         },
@@ -27317,12 +27399,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及低压电工作业与高处作业与机械操作的通常须经培训与考核并取得相应资格或作业许可"
+              "中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.33",
           "source_refs": [
-            "onet"
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27359,12 +27442,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及相应危害因素的岗位须按职业健康与劳动保护要求配置防护与体检与轮岗与报告安排"
+              "应核真实岗位危害、职业健康与防护制度；不由美国职业情境百分比推所有岗位统一体检、轮岗或证书条件。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27471,12 +27555,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜安装维护工人修理（O*NET/SOC 49-9098.00 Helpers--Installation, Maintenance, and Repair Workers；招聘与行业内常称维修工、机修工辅助人员、设备维护工、物业维修人员、机电维修辅助人员）。"
+              "职业名称对照｜本页美国49-9098.00为安装维护维修助手；机修辅助、机电维修辅助可作相关检索，维修工/设备维护/物业维修可能是独立岗位，不能当帮工同义或中国法定一对一映射。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27485,12 +27571,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜中国大陆在设备维护与维修与机电与物业与工业服务领域存在与安装维护工人修理相近的岗位，其作业与能源隔离与断电验电与机械与高处与临边与粉尘与污染物与安全与职业健康与记录受《中华人民共和国安全生产法》与特种作业（低压电工作业等）与职业健康与环境保护等相关法规与标准约束；但公开职业统计未按本职业单列全国工资分布。"
+              "证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27499,12 +27587,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径、不区分职业；中国大陆设备维护岗位的作业与安全规范由安全生产与特种作业与职业健康与环保制度界定，本页只登记统计口径与缺口。"
+              "证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27555,12 +27645,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按城市或地区核验的安装维修助手工资；相关维修工名称、行业均值、招聘或美国数字不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27583,12 +27675,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按城市或地区核验的安装维修助手工资；相关维修工名称、行业均值、招聘或美国数字不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27611,12 +27705,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得可按城市或地区核验的安装维修助手工资；相关维修工名称、行业均值、招聘或美国数字不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.54",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27625,7 +27721,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜本页为 O*NET 49-9098.00（安装维护工人修理）这一精确职业，与综合维修人员（49-9071.00）、工业机械机械师（49-9041.00）、公交卡车机械师与发动机专员（49-3031.00）、家电维修工（49-9031.00）、机械安装工（49-9044.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
+              "分类对照说明｜本页为 O*NET 49-9098.00（安装、维护与维修工人帮工）这一精确职业，与综合维修人员（49-9071.00）、工业机械机械师（49-9041.00）、公交卡车机械师与发动机专员（49-3031.00）、家电维修工（49-9031.00）、机械安装工（49-9044.00）等相邻职业不同；工资与就业须按各自职业代码与统计口径核对，不能互相套用。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.china-salary.career-snapshot-primary-locale.55",
@@ -27689,12 +27785,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS，2025 年）｜https://www.bls.gov/oes/；BLS 就业预测与特征表（2024—2034）｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；O*NET 49-9098.00 国家工资（本职业自身口径）｜https://www.onetonline.org/link/localwages/49-9098.00"
+              "O*NET本职业工资与旧期预测｜https://www.onetonline.org/link/summary/49-9098.00；BLS职业就业与工资统计｜https://www.bls.gov/oes/；BLS矩阵资料方法｜https://www.bls.gov/emp/documentation/data-overview.htm"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -27717,7 +27815,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国本职业（49-9098.00）全国中位数（2025 年，BLS OEWS，经 O*NET 在 49-9098.00 页呈现）；边界｜不含福利与奖金，中位为分布中点；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜美国本职业（49-9098.00）全国中位数（2025 年，BLS OEWS，经 O*NET 在 49-9098.00 页呈现）；边界｜包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本，中位为分布中点；来源｜O*NET 国家工资（BLS OEWS 2025）"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.10",
@@ -27745,12 +27843,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 10 分位工资（2025 年）；边界｜处于分布下段，可能与地区与企业与设备与资历相关，但不等于入职起薪；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第10分位工资；边界｜分布位置不识别新手、供料或清洁职责。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27773,12 +27875,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 25 分位工资（2025 年）；边界｜处于分布下四分位，地区与企业与设备与技能会明显影响实际收入；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第25分位工资；边界｜不是某类地区、学历或资格的定薪依据。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27801,12 +27907,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 75 分位工资（2025 年）；边界｜处于分布上四分位，通常对应经验较多或承担带电与专科与带班职责的岗位；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第75分位工资；边界｜不证明资深、带电或带班职责。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27829,12 +27939,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜本职业（49-9098.00）的第 90 分位工资（2025 年）；边界｜处于分布上段，受地区与企业与设备与职责影响较大，不代表多数从业者；来源｜O*NET 国家工资（BLS OEWS 2025）"
+              "口径｜2025美国本职业第90分位工资；边界｜不证明复杂设备、专项资格或个人可达。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27857,12 +27971,16 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜BLS 就业预测基期（2024 年本职业，经 O*NET 呈现）；边界｜与 BLS OEWS 的时点就业估计口径不同，本页分别标注不混用；来源｜O*NET 就业趋势（BLS 就业预测 2024—2034）"
+              "口径｜2024就业98,700为BLS预测基期；边界｜矩阵含自雇，与OEWS受雇时点估计不同。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "bls-matrix-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -27927,7 +28045,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值取自 BLS 职业就业与工资统计（OEWS 2025 年）与 BLS 就业预测（2024—2034），经 O*NET 在 49-9098.00 页面呈现；该页未标注取自上级或相邻职业，本页按本职业自身口径呈现，不借用相邻职业数值；不含福利与奖金。"
+              "边界｜上述数值取自 BLS 职业就业与工资统计（OEWS 2025 年）与 BLS 就业预测（2024—2034），经 O*NET 在 49-9098.00 页面呈现；该页未标注取自上级或相邻职业，本页按本职业自身口径呈现，不借用相邻职业数值；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.25",
@@ -27941,12 +28059,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜O*NET 在 49-9098.00（安装维护工人修理）页面呈现的 2025 年美国中位时薪 19.05 美元与中位年薪 39,630 美元；分布上第 10 分位为时薪 14.09 美元与年薪 29,310 美元、第 25 分位为时薪 16.78 美元与年薪 34,910 美元、第 75 分位为时薪 22.55 美元与年薪 46,890 美元、第 90 分位为时薪 26.87 美元与年薪 55,890 美元。就业 2024 年 98,700 人、2034 年预计 101,000 人，增长为 Slower than average（2%），期间年均空缺约 11,800 个。"
+              "2025美国本职业中位时薪19.05美元、年薪39,630美元；全国分位不是个人起薪。本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28221,12 +28341,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位数是分布中点，不等于起点；本职业的 10 分位到 90 分位之间年薪跨度约从 29,310 美元到 55,890 美元，差异主要来自地区与企业与设备与技能与资格与职责。"
+              "分布解读：29,310至55,890美元约1.91倍，只是全国工资分布跨度，不识别企业、设备、经验或资格因果。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28235,12 +28358,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利与奖金；本页数值经 O*NET 在 49-9098.00 页呈现且该页未标注取自上级或相邻职业，因此按本职业自身口径呈现，不能据此推断相邻职业的个人收入。"
+              "口径解读：OEWS包括受雇全职/兼职及生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本及自雇等人群；就业矩阵包括自雇，两者不能混用。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28249,12 +28375,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：学历与训练（该页学历部分显示 32% 高中文凭或同等学历与 25% 副学士或其他两年制学位与 23% 高中后证书）与资格与经验与职责会明显影响收入与稳定性；入职者应以企业与主管机关要求为准。"
+              "资历解读：美国新聘者学历要求调查32%高中、25%副学士/两年制、23%高中后证书；不是中国准入、在岗构成或工资因果。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28263,12 +28392,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字与「本职业自身口径、不代表相邻职业」以及「2024—2034 年增长 2% 慢于平均、空缺主要由替换需求构成」一起读，避免把中位当作起薪或把预测当作个人结果。"
+              "使用建议：2025工资与2024旧期预测分开，不等个人起薪、岗位稳定或净新增；目标合同组成和资格另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28291,12 +28423,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "处于分布下段的多为经验较少或以供料与清洁与辅助为主的岗位；进入该区间的常见原因是刚入职并承担供料与清洁与辅助工作；该区间为本职业自身口径。"
+              "全国低分位不识别新手、供料清洁或辅助职责；目标合同和薪酬组成另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28305,12 +28440,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；随地区、企业、设备、技能、资格与职责范围变化上升；为本职业自身口径，不代表相邻职业。"
+              "中位是分布中点，不是入门工资、技能回报或相邻职业薪酬。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28319,12 +28457,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "处于分布上段的多为经验较多或承担带电与紧急维修与带班职责的岗位；薪酬上限与地区与企业与职责范围相关；为本职业自身口径。"
+              "全国高分位不证明资深、带电、紧急维修或带班岗位身份，不承诺个人可达。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet"
+            "onet",
+            "oews",
+            "bls-oews-methods",
+            "employer"
           ],
           "type": "prose"
         }
@@ -28390,7 +28531,7 @@
                 "url": "/zh/career/jobs/general-maintenance-and-repair-workers"
               },
               {
-                "entity": "本职业（安装维护工人修理）方向",
+                "entity": "本职业（安装、维护与维修工人帮工）方向",
                 "id": "link-9",
                 "relation": "career.related",
                 "url": "/zh/career/jobs/helpers-installation-maintenance-and-repair-workers"
@@ -28531,11 +28672,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜注重细节与可靠性与尽责偏高、愿意严格遵守设备与安全与质量规范的人更容易适应设备维护工作；但人格分数不用于录用或适配结论。"
+              "大五自问｜可关注记录细致、可靠协作与遵守任务边界，这是编辑探索建议；未以人格分数证明岗位表现、录用或适配。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.6",
           "source_refs": [
+            "employer",
             "onet"
           ],
           "type": "prose"
@@ -28574,7 +28716,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "不要把性格测评说我不适合当作放弃或不入行的依据；应以设备维护跟岗或实习或模拟检查与更换任务与技工评价与考核结果为准。"
+              "人格测评不决定入行或放弃。可先做R01纸面核对；真实跟岗、实习、设备测试更换须另核训练、带教、资格与现场权限，不由问卷授予。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.9",
@@ -28872,12 +29014,14 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的测评与方向比较只用于自我提问与探索，不构成录用标准、能力评分或资格判断；准入以学历与训练与安全与职业健康与资格与企业授权为准。特别是本职业在美国 O*NET 属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；涉及低压电工作业与高处作业的还须满足相应资格与作业许可要求。"
+              "边界｜测评和方向比较仅探索，不构成录用、评分或资格。美国Zone1—2不等中国准入；目录内特种作业主体与现场权限按具体作业核，R01仅纸面。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.26",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28886,12 +29030,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过安全与技能与资格考核，能否在粉尘与噪声与油污与设备压力下稳定完成检查与测试与更换与清洁，也不能替代真实设备维护实务。最可靠的判断方式是用一次真实或模拟的维修任务来检验，而不是只看兴趣或人格分数。"
+              "直接回答｜测评不能预测安全考核或真实设备操作表现；先用R01虚构纸面清单观察规格数量、记录和未知条件处理。真实实务另核训练、带教与权限，纸面不证明操作胜任。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.27",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28900,7 +29045,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "本职业（安装维护工人修理）方向｜以按工单与手册完成的配合作业（供料与检查与测试与更换与连接与清洁与润滑）与可追溯的维护与维修记录为产出：材料与准备、安装与更换、检查与测试、连接与调整、清洁与润滑与记录"
+              "本职业（安装、维护与维修工人帮工）方向｜以按工单与手册完成的配合作业（供料与检查与测试与更换与连接与清洁与润滑）与可追溯的维护与维修记录为产出：材料与准备、安装与更换、检查与测试、连接与调整、清洁与润滑与记录"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.28",
@@ -28928,7 +29073,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "若难以在粉尘与噪声与油污与高处与狭窄环境作业，或难以接受随维修计划与停机窗口变化的加班与节奏，不建议选择本职业。"
+              "先核目标岗位真实设备、噪声污染物、空间体力与工时条件，再判断是否愿意准备；各现场不同，不把纸面或测评结果当所有帮工环境的适配证明。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.30",
@@ -28942,12 +29087,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "综合维修人员方向｜以综合维修人员的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "综合维修方向"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.31",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28956,12 +29102,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备综合维修人员的综合维修或机械或车辆或家电或安装能力与相应资格"
+              "设施综合维护、修理与相应记录；可自问是否愿意准备相应设施知识、独立维修与记录，具体训练资格另核，不由本页问卷证明已具备。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.32",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28984,12 +29131,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "工业机械机械师方向｜以工业机械机械师的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "工业机械维修方向"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.34",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -28998,12 +29146,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备工业机械机械师的综合维修或机械或车辆或家电或安装能力与相应资格"
+              "工业机械检查、修理与测试记录；可自问是否愿意准备机械维护和异常核对，独立职责、训练与資格另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.35",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29026,12 +29175,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "公交卡车机械师与发动机专员方向｜以公交卡车机械师与发动机专员的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "公交卡车机械维修方向"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.37",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29040,12 +29190,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备公交卡车机械师与发动机专员的综合维修或机械或车辆或家电或安装能力与相应资格"
+              "车辆与发动机检查、维修记录；可自问是否愿意准备车辆专业与维修记录，不把一般助手经历当车辆维修资格。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.38",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29068,12 +29219,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "家电维修工方向｜以家电维修工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "家电维修方向"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.40",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29082,12 +29234,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备家电维修工的综合维修或机械或车辆或家电或安装能力与相应资格"
+              "家用电器检查、修理与服务记录；可自问是否愿意准备对应电器与服务流程，真实资格权限另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.41",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29110,12 +29263,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "机械安装工方向｜以机械安装工的核心产出为参照：见方向比较表；与本职业在对象与专业与授权层级上不同"
+              "机械安装方向"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.43",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29124,12 +29278,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "具备机械安装工的综合维修或机械或车辆或家电或安装能力与相应资格"
+              "机械就位、连接与安装调试记录；可自问是否愿意准备安装工序与记录，材料配合不自动成为独立安装权限。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.44",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29152,7 +29307,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "什么性格的人更适合做安装维护工人修理？本职业更看重安全意识与对手册与工单与精确要求的严谨、对作业安全与维修配合质量的责任感、以及在维修计划与工序压力下的稳定，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型）。"
+              "什么性格的人更适合做安装、维护与维修工人帮工？本职业更看重安全意识与对手册与工单与精确要求的严谨、对作业安全与维修配合质量的责任感、以及在维修计划与工序压力下的稳定，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型）。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.46",
@@ -29222,12 +29377,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；职业适应更应通过设备维护跟岗或实习或模拟任务与技工评价来验证。"
+              "人格分数不能预测个人本职业表现；先用R01纸面观察核对与协作表达。真实跟岗实习须在适当训练、带教与授权范围内，不由问卷或七日计划授予。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.51",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29264,12 +29420,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格能用来判断我适不适合吗？不能。九型属自我探索工具，不构成职业能力或适配结论；判断适配应看能否在安全与规程要求下完成检查与测试与更换与清洁与记录工作。"
+              "九型仅自问，不是能力或适配结论。可观察R01规格数量与拟交记录，不把纸面表现当真实设备安全或维修胜任。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.54",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29278,12 +29435,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的维修任务检验：能否完成一份维护与维修方案与一份维护与维修记录说明，或能否完成一次带电或能源未隔离或机械异常的处置复盘；这些证据比问卷更能说明适配。"
+              "先交R01数量表、未知清单和拟交记录：v1M6与垫圈各余2，M8不替代；v2需求7/14则缺1/4。反思如实记录与权限意识，不做真实带电/能源未隔离异常试验。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.55",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29320,12 +29478,13 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的维修任务检验读手册与检查与更换与写记录，并了解目标企业与法域对安全与职业健康与低压电工作业与高处作业资格的要求，再决定是否长期投入。"
+              "验证建议：先用R01虚构纸面材料核工单数量、规格和拟交状态，再核目标企业任务、训练带教及适用资格；不请未获条件的新手操作真实设备。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.58",
           "source_refs": [
-            "onet"
+            "onet",
+            "employer"
           ],
           "type": "prose"
         },
@@ -29895,7 +30054,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径（本职业自身口径，不代表相邻职业；2024—2034 年增长 Slower than average 2%）；工资数字不用于风险评估。"
+              "用于核本职业美国任务、2025工资与2024—2034旧期预测；增长类别与旧详值分层，工资不作风险测量。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.risk.career-risk-cards.36",
@@ -29909,7 +30068,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对数据采集与记录与追溯的合规要求；涉及企业与设备厂商的受控资料须按保密与最小必要管理。"
+              "用于核美国OEWS受雇工资统计方法；不是中国资料保密、作业许可或设备安全法规。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.risk.career-risk-cards.37",
@@ -29923,7 +30082,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对能源隔离与上锁挂牌与断电验电与带电作业与高处与临边与机械与受限空间与职业健康的作业许可与个人防护与应急处置要求（中国大陆口径）。"
+              "用于核本职业软件提及，不证明企业采用率；不是中国能源隔离、特种作业或防护法源。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.risk.career-risk-cards.38",
@@ -29937,7 +30096,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对特种作业与安全生产与危险作业与现场管理与设备维护要求（中国大陆口径）。"
+              "NIST自愿AI风险治理框架，可作输入版本、人工复核与责任建议；不是中国特种作业法规。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.risk.career-risk-cards.39",
@@ -30014,7 +30173,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "安装维护工人修理的入门岗位与初期任务怎么比较？",
+          "title": "安装、维护与维修工人帮工的入门岗位与初期任务怎么比较？",
           "type": "table"
         },
         {
@@ -30025,40 +30184,42 @@
               {
                 "id": "education",
                 "values": [
-                  "美国 O*NET 将 49-9098.00（安装维护工人修理）列入 Job Zone 1-2（几乎无需至需要一定准备），SVP 区间为 低于 6.0（SVP Below 6.0）；学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）；该描述不取代企业与主管机关对资格与作业许可的要求。",
-                  "能否独立完成检查与测试与更换与连接不取决于学历本身，而取决于是否经过技能训练与取得相应资格并在岗位授权范围内作业。",
-                  "学历与训练只影响准入起点，能否熟练完成检查与测试与更换与连接与清洁主要取决于在岗训练与带教与考核结果。"
+                  "美国学历与准备描述",
+                  "O*NET新聘者学历要求32%高中、25%副学士/两年制、23%高中后证书；Zone1—2、SVP低于6为美国职业准备描述，不是中国准入或在岗构成。",
+                  "真实任务、训练、资格与现场允许职责另核，学历本身不授设备作业权。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：安全操作与个人防护要求；能源隔离与上锁挂牌与断电验电要求；低压电工作业与高处作业与机械操作许可要求；粉尘与污染物与噪声与油污防护要求；维护与维修记录要求。",
-                  "涉及设备安全检验、送电验收、事故认定、职业病诊断的须由具备相应资格的岗位或机构处理。",
-                  "涉及企业与设备厂商技术资料的数据须按保密与最小必要要求管理，不得外发至未授权环境。"
+                  "任务与权限核对",
+                  "按真实岗位设备核安全训练、防护、资格、监督和现场允许任务；第19号令限定直接从事目录内作业者，不由帮工名推全员电工高处证。",
+                  "技术资料按合法用途与权限处理；纸面不代设备安全检验、送电验收或事故认定条件。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 兴趣代码为 RC（现实型—常规型），工作风格为可靠性、注重细节、自我控制；工作活动以检查设备与维修与维护机械设备与决策与解决问题为主。",
-                  "本职业需在粉尘与污染物与噪声与油污与高处与狭窄环境动手作业，并通过量具与测试仪与手册判断设备状态。",
-                  "工作情境显示接触危险设备与污染物与噪声常见、决策频率较高、错误的后果较严重、对他人的健康与安全责任较高、受维修计划与工序约束。"
+                  "兴趣与工作情境",
+                  "O*NET本职业RC兴趣代码及工作情境可作探索线索；噪声、污染物、设备和团队条件依真实岗位核，不按问卷定胜任。",
+                  "R01先观察规格数量核对与记录表达；不能用纸面证明真实体力、高处或噪声现场适配。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "常用工具与设备：手动与电动工具、量具与测试仪与万用表、起重与顶升与支撑设备、清洁与润滑设备、能源隔离与上锁挂牌器具、个人防护装备。",
-                  "常用软件与系统：维护管理与工单软件（CMMS）、数据采集与查询软件、电子表格与文档软件（Microsoft Office）与电子邮件（Outlook）。",
-                  "技术提及不等同于自动化程度或责任转移。"
+                  "工具与软件核对",
+                  "O*NET任务含手动/电动工具与检查测试；目标设备、训练和允许使用的器具另核，R01不使用真实工具。",
+                  "软件资料列记录、设施管理、Office/Outlook/Excel等，清单不是CMMS普遍采用、编程要求或AI采用率。"
                 ]
               }
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "title": "雇主在招聘中通常看什么？",
           "type": "cards"
@@ -30071,41 +30232,44 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "练习材料（全部虚构）",
-                  "一份维修工单与一份设备资料与机械与电气系统说明、一份手册与图纸、能源隔离与上锁挂牌与量具与测试仪使用说明。",
-                  "一份空白检查与测试与更换与清洁与润滑记录表。"
+                  "R01虚构材料与记录",
+                  "虚构工单v1要求4个M6螺栓和8个垫圈；纸面备料单列6个M6、2个M8、10个垫圈。M6/M8为不同规格标签，题面不给强度等级、适配与检验结论。",
+                  "记录08:00提出需求，08:10拟交技工乙；接收、设备状态、隔离和作业许可均未知。附虚构读数33，但指标、单位、校准与判定范围缺失，不据此判设备合格。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "练习任务",
-                  "为一份虚构工单编制一份维护与维修方案并填写一份维护与维修记录。",
-                  "说明工具与材料与备件准备、能源隔离与上锁挂牌与断电验电、检查与测试与缺陷判断、安装与更换与连接与调整、清洁与润滑与恢复与异常预案。"
+                  "R01纸面任务与90分钟",
+                  "20分钟列原记录/缺口，20分钟独立核数量规格，25分钟写拟交接单，25分钟复核与反思，合计90；不实际安装、拆装、通电或使用工具。",
+                  "提交数量差异表、状态与未知条件清单、拟交接草案和复核记录；不把拟交写成已接收或已维修。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "做法建议",
-                  "先核对设备与部件与工单与安全条件，再按手册与规程确定检查与更换与连接步骤。",
-                  "执行时记录检查与测试与维修数据，完成后清洁与恢复并核对；对信息不足处明确标注并说明为何不代填。"
+                  "R01参考交付",
+                  "v1：M6需求4、备6，账面余2；垫圈需求8、备10，账面余2。M8有2个是另一规格，不计入M6；数量够不等于强度、适配或可安装已验证。",
+                  "08:00—08:10为10分钟记录间隔，不是维修完成时长或技工接收证明。读数33没有指标单位/校准/范围，不判合格；隔离和许可未知，不开始真实作业。",
+                  "拟交接单写R01、原数量/规格、账面差异、未知条件和拟交状态；要求核原工单与接收记录，不补造批准或实测。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "边界说明",
-                  "本练习只用于检验流程理解与记录能力，所有企业与合作与数据均为虚构。"
+                  "R01体验边界",
+                  "工单、数量、标签、人员和读数全部作者虚构；只纸面核对，不进入真实现场、不操作或提供能源隔离/验电步骤。",
+                  "真实检查、连接、替换及危险作业必须有适用训练、资格与权限；纸面作品不证明设备安全、职业胜任或已取得作业权。"
                 ]
               }
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.entry-work-sample-data.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "入行练习：一次完整的检查与更换与连接与清洁配合任务（虚构材料）",
+          "title": "R01虚构练习：材料规格、数量与拟交接记录",
           "type": "cards"
         },
         {
@@ -30116,38 +30280,39 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品矩阵",
-                  "把一份虚构的维护与维修方案、一份检查与测试记录、一份更换与连接记录、一份清洁与润滑与异常处置说明整理成作品集，逐项对应招聘要求中的检查与测试与更换与连接与清洁与安全与记录能力。"
+                  "R01数量与规格表",
+                  "列M6余2、垫圈余2，M8另列2不替M6；保留适配、强度与检验未知。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "独立复核",
-                  "把方案与记录交给他人按手册与工单复核，检查检查与更换与连接与清洁是否自洽；能被他人在不看说明的情况下复核，才说明方案与记录可交接。"
+                  "R01复核与版本",
+                  "自行复算并记作者/时间/v1-v2；评论可选，未得技工意见不伪造接收、验收或专业批准。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "汇报摘要",
-                  "用一页说明本设备的现象与检查—处置与更换—测试与恢复—遗留项，便于面试或带教时展示你如何把设备与依据与记录串起来。"
+                  "R01拟交接草案",
+                  "写编号、需求、备料、差异、待确认和拟交状态；08:10不冒充已交付或已安装。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "工具说明",
-                  "说明你所用测试仪与量具与工具的读数与误差与校准情况，以及哪些判断依赖经验而非工具，体现对数据与依据边界的把握。"
+                  "R01工具与数据说明",
+                  "未用真实测试仪，33是虚构无单位读数；若用表格/AI，列输入、版本及人工修订，不冒充校准实测。"
                 ]
               }
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.entry-portfolio.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "入门时可以准备哪些可复核的作品材料？",
+          "title": "R01可准备的四份纸面作品",
           "type": "cards"
         },
         {
@@ -30208,59 +30373,60 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（接受工单—工具与备件准备—能源隔离与断电验电—检查与测试—安装与更换与连接—清洁与润滑与记录）。",
-                  "记录你观察到的能源隔离与上锁挂牌与触电急救与高处与机械安全要求。"
+                  "第1天：读R01原记录",
+                  "列需求4/8、备料6M6/2M8/10垫圈、拟交与未知条件，不补造接收。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "随技工观摩一次检查与测试与更换，记录步骤与测试数据与安全动作。",
-                  "整理一份你观察到的检查与更换步骤与判据清单。"
+                  "第2天：核规格数量",
+                  "M6余2、垫圈余2；M8不同规格不替代，数量够不代表适配或安全。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "在带教下参与工具与测试仪准备与记录填写与备件整理。",
-                  "写出你认为最容易出错的三个环节及原因。"
+                  "第3天：列待确认",
+                  "强度适配、读数33单位校准范围、设备状态隔离许可和接收均未知，写核对问题，不真实操作。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "在带教下参与一次设备检查与缺陷判断。",
-                  "说明如果带电或能源未隔离或机械异常你会如何停止与上报。"
+                  "第4天：90分钟交付",
+                  "按20+20+25+25提交数量差异、缺口、拟交接和复核，全部纸面。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在带教下参与一次更换与连接与清洁与润滑并填写记录。",
-                  "列出判定合格与否的依据与不合格的隔离处置步骤。"
+                  "第5天：核v2工单",
+                  "仅需求改为7个M6和14个垫圈，备料不变：M6缺1、垫圈缺4；M8仍不替代，不默认批准采购或安装。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "整理一份虚构设备的检查与更换与清洁记录说明并与技工核对。",
-                  "记录你与技工在检查或更换或判定上的分歧及处理方式。"
+                  "第6天：独立复核",
+                  "对照v1余2/2与v2缺1/4，保留两个版本；评论可选，未获技工意见不得生成已接收。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "复盘七天体验：哪一类任务你有把握、哪一类需要更多训练，并据此决定是否继续投入。",
-                  "把复盘结论写成一页，作为是否入行的依据而不是凭兴趣判断。"
+                  "第7天：反思准备",
+                  "依规格核对、如实记录与协作表达判断继续/暂停；纸面七日不检验真实设备操作或授资格。"
                 ]
               }
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.seven-day-trial.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "七天体验：用虚构材料完成一次检查与更换与清洁闭环",
+          "title": "七日纸面体验R01：规格、缺口与交接复核",
           "type": "timeline"
         },
         {
@@ -30268,17 +30434,18 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能在安全与规程与质量要求下完成检查与测试与更换与连接与清洁与润滑并使过程与依据可复核。",
-              "继续：在维修计划与工序压力下坚持规程与证据与留痕，不因赶工跳过核对或放宽安全或伪造记录。",
-              "继续：能用一次可核验的维修任务或异常处置复盘证明自己的设备与配合能力。",
-              "继续：愿意在粉尘与噪声与油污与高处环境中长期动手工作并对作业安全与维修配合质量负责。",
-              "谨慎：若七天体验中反复对安全规章或规程核对感到难以坚持，应重新评估适配。",
-              "谨慎：若难以接受随维修计划与停机窗口变化的加班与节奏，或难以承受油污与狭窄环境，应重新评估适配。",
-              "谨慎：若对带电或能源未隔离或机械异常倾向先处置后补依据，应重新评估职业适配与风险意识。"
+              "继续：能复核v1M6与垫圈各余2，M8另列不替代。",
+              "继续：v2需求7/14可算缺1/4，保留原版本和未知条件。",
+              "继续：愿意练工单、规格、数量、记录和协作，实际现场条件另核。",
+              "继续：愿在适当训练带教与授权下了解真实助手工作，不以R01代实务。",
+              "暂停：把拟交、未知检验或生成读数写成已接收合格，先练如实记录。",
+              "暂停：七日纸面不验证噪声高处体力等现场适配，另核真实岗位与条件。",
+              "谨慎：不能仅凭账面数量就开始真实安装、送电或异常处置；先核训练权限。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.seven-day-decision.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
           "title": "七天结束时如何判断要不要继续",
@@ -30308,64 +30475,66 @@
             ],
             "rows": [
               [
-                "职业学校训练或相关在岗经验",
-                "多数岗位",
-                "满足入门的设备与电气与安全知识起点",
-                "多数岗位要求在岗经验或职业训练；该页学历显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）",
-                "完成职业学校训练或积累在岗经验",
-                "数周至数月",
-                "学历与训练不等于资格或作业授权"
+                "美国学历与准备描述",
+                "拟在美国求职者",
+                "理解任务知识起点",
+                "真实岗位另核",
+                "O*NET新聘者要求32%高中/25%两年制/23%高中后证书，非统一门槛",
+                "依实际课程岗位核",
+                "不是中国准入或所有从业者学历构成"
               ],
               [
-                "安全与技能培训与考核",
-                "所有岗位",
-                "满足安全与能源隔离与带电与高处与机械作业要求",
-                "涉及相应作业的岗位普遍要求",
-                "参加企业或机构的安全与技能培训并通过考核",
-                "数天到数周",
-                "培训与考核不等于设备安全检验或送电授权"
+                "任务训练与安全准备",
+                "实际助手任务人员",
+                "理解规格、设备与职责",
+                "依任务和制度核",
+                "核实际培训、考核、现场制度和监督条件",
+                "依培训计划核",
+                "培训不自动授作业许可或设备放行权"
               ],
               [
-                "师徒带教或在岗训练",
-                "希望系统入门者",
-                "在带教下系统掌握检查与测试与更换与连接与清洁",
-                "非普遍必需但常见",
-                "参加企业带教或在岗训练并在监督下作业",
-                "数周至数月",
-                "带教经历不等于自动获得岗位或作业授权"
+                "带教与在岗训练",
+                "希望了解真实实务者",
+                "在适当监督授权内学习",
+                "依实际岗位核",
+                "先确认带教、资格、允许任务和现场条件",
+                "依岗位安排核",
+                "纸面七日不代真实实务或录用"
               ],
               [
-                "低压电工作业与高处作业资格",
-                "涉及相应作业岗位",
-                "满足带电作业与高处作业的法定或合规要求",
-                "涉及相应作业的岗位通常要求",
-                "参加认可培训与考核并取得资格或作业许可",
-                "数天到数周",
-                "资格范围以证书与主管机关与作业许可为准"
+                "目录内特种作业操作证",
+                "直接从事目录内作业者",
+                "满足对应法定作业资格",
+                "适用第19号令范围者持相应证",
+                "按适用制度专门培训考核取相应证，另有规定从其规定",
+                "依实际主管条件核",
+                "帮工名称不代表所有人持电工高处证；证与现场许可分开"
               ],
               [
-                "职业健康检查与防护要求",
-                "涉及油污与粉尘与噪声与污染物岗位",
-                "满足职业健康与劳动保护要求",
-                "涉及相应危害因素的岗位通常要求",
-                "按企业与职业健康规定参加检查与防护与轮岗",
-                "周期性",
-                "检查与防护不改变作业危害与安全责任"
+                "职业健康与防护准备",
+                "真实危害暴露岗位",
+                "核岗位危害与管理措施",
+                "依适用制度及岗位核",
+                "核真实危害、职业健康要求与防护，不照搬美国百分比",
+                "依真实安排核",
+                "本页不编统一体检轮岗或防护方案"
               ],
               [
-                "企业岗位与作业授权",
-                "所有独立作业岗位",
-                "取得独立检查与更换与作业配合的权限前提",
-                "按企业设备与安全管理制度要求",
-                "经考核合格并在岗位与作业授权范围内作业",
-                "随岗位安排",
-                "岗位授权不等于设备安全检验或送电验收权限"
+                "企业岗位与现场许可",
+                "按设备和任务安排者",
+                "明确实际允许职责",
+                "依设备现场制度核",
+                "核资格训练、任务范围、监督与审批责任",
+                "依现场条件核",
+                "岗位安排不自动授送电、检验或事故认定权"
               ]
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30375,15 +30544,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、学历、训练证明、安全与技能培训、低压电工作业与高处作业资格、职业健康检查、岗位与作业授权、设备安全检验与送电验收是不同状态：满足招聘条件不等于取得独立带电作业或送电或出具检验结论的权限。在美国，该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），增长标为 Slower than average（2%）。",
-              "资格边界（二）｜在中国大陆，涉及低压电工作业与高处与机械与受限空间与特种作业与职业健康的须符合安全生产与特种作业与职业健康与环保要求；涉及设备安全检验与送电验收与事故认定的须由具备相应资格的机构与人员处理。在美国，本职业准入通常以在岗训练与技能与资格与专项证书为主，并以企业作业许可界定作业权限。",
-              "资格边界（三）｜本页列示的准备项不等于授权，也不自动带来带电作业、送电、对外披露的权限；真实权限须以企业与主管机关要求为准。",
-              "资格边界（四）｜低压电工作业与高处作业资格的有效期与复审与范围须以证书与主管机关与作业许可为准；不得以过期或超范围资格作业。"
+              "资格边界（一）｜美国Zone1—2/SVP低于6为职业准备描述，新聘者学历要求32/25/23不是中国门槛；任务清单含检查维修，助手身份不代表只搬工具，也不自动授任意操作权。",
+              "资格边界（二）｜中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。",
+              "资格边界（三）｜学历、培训、证书、岗位任务、现场许可和设备放行责任分开核；不能用纸面、师徒称谓或AI输出替代真实条件。",
+              "资格边界（四）｜R01只处理虚构纸面清单和记录，不给真实能源隔离、验电、拆装或送电步骤，不构成资格与设备安全证明。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30393,8 +30564,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。安装维护工人修理岗位多通过制造与建筑与物业与设备租赁与服务企业与人力资源渠道招聘，且受地区与行业与设备与项目周期影响，公开渠道的样本难以代表整体市场；招聘要求与授权须以书面招聘信息与聘用合同与岗位说明与设备与安全制度文件为准。",
-              "本页只列核对要点，不构成录用或薪酬承诺。"
+              "招聘样本说明｜本页没有代表性招聘样本，不判断全国招聘数量、渠道比例或薪酬；美国职业统计不是中国招聘调查。",
+              "核对建议｜记录地区企业、设备任务、助手/独立职责、工时、合同与工资组成、训练带教、目录持证及现场许可要求，以真实招聘和制度核，不从名称推全部资格。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.recruitment-sample.1",
@@ -30446,12 +30617,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以安全与技能训练与资格与企业授权与考核为准，也不代表取得独立带电作业或送电或设备安全检验的权限。"
+              "路径边界｜四阶段是编辑准备建议，非统一晋升、年限或许可；真实任务资格按设备和作业核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30516,12 +30689,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能承担带电与复杂设备配合与故障初判与带教与工艺配合。"
+              "专门训练后可准备复杂设备配合、异常记录和带教能力；带电或危险任务必须另核法定资格、范围与现场许可，不能由熟练称谓推已授权。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.16",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30572,12 +30747,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成职业学校训练或相关在岗经验（该页 Job Zone 1-2（几乎无需至需要一定准备），SVP 低于 6.0（SVP Below 6.0））→ 掌握检查与测试与更换与连接与清洁与润滑 →取得安全与技能培训与必要的低压电工作业与高处作业资格与在岗训练经历 → 取得企业岗位与作业授权 → 在带教与轮岗中熟悉多种设备与系统并按授权独立作业 →在材料与准备或维护与维修或安全与清理与记录方向深化。每一步的证书与授权范围以企业与主管机关要求为准。"
+              "直接回答｜先核目标岗位实际助手任务与训练，学习工单规格数量和记录，再在适当带教授权内接触真实实务。中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。可先用R01纸面准备，不代设备操作胜任。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30586,12 +30763,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜接受职业训练、完成跟岗与实务、取得学历或训练证明、通过安全与技能考核与低压电工作业与高处作业资格、并入职业健康管理、取得企业岗位与作业授权是不同状态；本页列示的准备项不等于授权，也不自动带来带电作业或送电或对外披露权限。"
+              "资格边界｜学历、训练、目录内操作证、岗位任务与现场许可是不同状态；真实检测、送电与事故认定依适用职责执行，R01不授任何权限。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.21",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30600,12 +30779,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域与依据｜美国 O*NET 将 49-9098.00（安装维护工人修理）列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）；增长标为 Slower than average（2%）。中国大陆涉及低压电工作业与高处与机械与受限空间与特种作业与职业健康与环保的须符合安全生产与特种作业与职业健康与环保要求；两侧的法律与制度与统计口径不同，不做拼接与换算。"
+              "适用法域与依据｜美国O*NET新聘者学历调查32%高中/25%两年制/23%高中后证书，Zone1—2非中国准入。中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.22",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -30614,12 +30795,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "小结｜把路径理解为学习—跟岗与实务—安全与技能与资格—岗位与作业授权—负责的循环：先完成技能训练，再在带教中熟悉检查与测试与更换与连接与设备安全制度，取得资格与作业授权后独立作业并在方向深化；涉及带电作业与设备安全检验与重大返修的事项按制度与主管机关要求处理。"
+              "小结｜按目标设备任务核训练、资格与现场权限；R01可准备记录与数量核对，真实检查、连接维修应接受适当训练监督，不按纸面表现保证录用或晋升。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.23",
           "source_refs": [
-            "onet"
+            "onet",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         },
@@ -31629,12 +31812,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径：本页工资与就业取 O*NET 在 49-9098.00（安装维护工人修理）页面呈现的本职业自身口径（该页未标注取自上级或相邻职业）——2025 年中位时薪 19.05 美元与中位年薪 39,630 美元；第 10 分位时薪 14.09 美元与年薪 29,310 美元、第 25 分位时薪 16.78 美元与年薪 34,910 美元、第 75 分位时薪 22.55 美元与年薪 46,890 美元、第 90 分位时薪 26.87 美元与年薪 55,890 美元。就业 2024 年 98,700 人、2034 年预计 101,000 人，2024—2034 年增长为 Slower than average（2%），期间年均空缺约 11,800 个（含增长与替补）。中国大陆口径：公开统计未建立与本职业精确对应的全国职业工资分布，本页展示缺失而不使用代理数字。"
+              "直接回答｜2025美国本职业中位时薪19.05美元、年薪39,630美元；全国分位不是个人起薪。本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "nbs",
+            "employer"
           ],
           "type": "prose"
         },
@@ -31671,12 +31857,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；差异来自地区与企业与设备与技能与资格与职责；数值为本职业自身口径、不代表相邻职业。"
+              "本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。实际设备与企业需求另核，不归因AI或设施投资。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "employer"
           ],
           "type": "prose"
         },
@@ -31685,12 +31873,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与奖金；本页按 O*NET 该页未标注取上级或相邻职业的本职业口径呈现；数值取自 2025 年数据，后续更新应以当期查询为准。"
+              "OEWS包括受雇全职/兼职及生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本及自雇等人群；就业矩阵包括自雇，两者不能混用。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls-oews-methods",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -31769,12 +31958,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "该口径为投影，受设备保有量与更新与制造与设施投资与技工供给影响；空缺主要由替换需求构成；数值为本职业自身口径，不等于个人岗位结果。"
+              "全国工资分位不识别地区、设备、经验或资格因果；目标薪酬组成与实际合同另核。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "oews",
+            "employer"
           ],
           "type": "prose"
         },
@@ -31867,7 +32057,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中国大陆在设备维护与维修与机电与物业与工业服务领域存在相近岗位且其作业与规范由安全生产与特种作业与职业健康与环保制度界定，但公开统计未按本职业单列全国工资分布，不能用行业均值或招聘报价推断。"
+              "本页所核中国资料未取得与安装维修助手精确对应的全国职业工资分布；设备维护、物业维修等仅相关检索，独立维修岗位不能自动视为本职业。实际岗位、法域与制度另核，不以行业或招聘估算代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.25",
@@ -31923,12 +32113,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "nbs",
+            "cnclass",
+            "employer"
           ],
           "type": "prose"
         },
@@ -32338,46 +32530,81 @@
           "data": {
             "entries": [
               {
-                "answer": "本页的安装维护工人修理是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。该页列出 16 项任务，最重要的包括使用手动或电动工具安装或更换机械与设备以及新的或替换的零件与仪器、检查和测试机械与设备与组件与零件是否有缺陷、照看和观察设备与机械以验证高效与安全运行、使用手动或电动工具调整与连接或断开线路与管道与管件及其他部件、清洁或润滑车辆与机械与设备与仪器与工具与工作区。常见职位名称包括 Maintenance Helper 与 Mechanic Helper 与 Mechanic's Assistant 与 HVAC Helper。",
+                "answer": "本页的安装、维护与维修工人帮工是 O*NET 49-9098.00（Helpers--Installation, Maintenance, and Repair Workers）这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。该页列出 16 项任务，最重要的包括使用手动或电动工具安装或更换机械与设备以及新的或替换的零件与仪器、检查和测试机械与设备与组件与零件是否有缺陷、照看和观察设备与机械以验证高效与安全运行、使用手动或电动工具调整与连接或断开线路与管道与管件及其他部件、清洁或润滑车辆与机械与设备与仪器与工具与工作区。常见职位名称包括 Maintenance Helper 与 Mechanic Helper 与 Mechanic's Assistant 与 HVAC Helper。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q1"
               },
               {
-                "answer": "美国侧：O*NET 49-9098.00 页呈现的 2025 年工资与就业为本职业自身口径（该页未标注取自上级或相邻职业）；中国大陆侧：公开统计未建立与本职业精确对应的全国职业工资分布，本页登记缺口而不使用代理数字；两侧制度与统计口径不同，不做拼接与换算。",
+                "answer": "美国2025工资与2024—2034旧期预测分期，范围49-9098.00助手。证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。两侧分类与资格不自动等同。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.2",
                 "question": "在美国和中国大陆分别是什么口径？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q2"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q2",
+                "source_refs": [
+                  "onet",
+                  "nbs",
+                  "cnclass",
+                  "employer"
+                ]
               },
               {
-                "answer": "2025 年美国本职业中位时薪 19.05 美元与中位年薪 39,630 美元（BLS OEWS，经 O*NET 呈现，本职业自身口径）；第 10 分位年薪 29,310 美元、第 25 分位 34,910 美元、第 75 分位 46,890 美元、第 90 分位 55,890 美元；不含福利与奖金，中位数不是入职起薪。中国大陆未建立与本职业精确对应的全国职业工资分布。",
+                "answer": "2025美国本职业中位时薪19.05美元、年薪39,630美元；全国分位不是个人起薪。旧依据年薪10/25/75/90分位29,310/34,910/46,890/55,890美元；分位不識別经验/资格。OEWS包括受雇全职/兼职及生产性奖金，排除加班、轮班差额、非生产性奖金与福利成本及自雇等人群；就业矩阵包括自雇，两者不能混用。证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.3",
                 "question": "工资是多少？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q3"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q3",
+                "source_refs": [
+                  "onet",
+                  "oews",
+                  "bls-oews-methods",
+                  "bls-matrix-methods",
+                  "nbs",
+                  "employer"
+                ]
               },
               {
-                "answer": "O*NET 在 49-9098.00 页呈现的 BLS 就业预测显示：就业 2024 年 98,700 人、2034 年预计 101,000 人，2024—2034 年增长为 Slower than average（2%，该页未标注 Bright Outlook），期间年均空缺约 11,800 个（含增长与替补）。预测不等于个人岗位结果。",
+                "answer": "本页保留2024—2034旧期详表：2024就业98,700、2034预计101,000、约2%、年均空缺11,800含增长与更替；当前O*NET摘要显示增长类别1%—2%，类别与旧详值分层阅读，不跨2035或个人结果。实际招聘另核，不据此归因设备投资或AI。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.4",
                 "question": "就业前景如何？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q4"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q4",
+                "source_refs": [
+                  "onet",
+                  "ep",
+                  "employer"
+                ]
               },
               {
-                "answer": "O*NET 将本职业列入 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0））；学历部分显示 32% 表示要求高中文凭或同等学历、25% 表示要求副学士或其他两年制学位、23% 表示要求高中后证书（该页列出上述三项）。在中国大陆，涉及低压电工作业与高处作业与机械与受限空间的岗位须满足安全生产与职业健康要求并取得相应资格或作业许可；具体以企业与主管机关要求为准。",
+                "answer": "美国O*NET新聘者要求调查32%高中、25%副学士/两年制、23%高中后证书，Zone1—2是准备描述，不是中国统一准入。中国应急管理部令第19号自2026-06-01施行，第2—4条适用于直接从事目录内特种作业者，须专门培训、考核并取得相应操作证；另有法定管理规定的从其规定。不能由帮工名称推所有人须低压电工/高处证，不能把机械操作或受限空间一概等同统一证书。岗位、设备、现场许可与持证范围另核。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.5",
                 "question": "需要什么学历和资格？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q5"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q5",
+                "source_refs": [
+                  "onet",
+                  "facilities",
+                  "employer"
+                ]
               },
               {
-                "answer": "不需要。本职业使用维护管理与工单软件与电子表格与办公工具即可；编程不是本职业的入职要求。",
+                "answer": "本职业不以编程任务界定；软件资料列办公、记录及设施工具。目标招聘、系统与权限另核，不断言所有岗位无需编程。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.6",
                 "question": "入行要会写代码吗？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q6"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q6",
+                "source_refs": [
+                  "onet",
+                  "weforum",
+                  "employer"
+                ]
               },
               {
-                "answer": "不会整体被取代。工单与检查与设备与备件与知识检索可被系统辅助，但现场检查与测试与更换与能源隔离与安全责任仍由有经验人员负责；O*NET 显示本职业 2024—2034 年增长为 Slower than average 2%，自动化更多改变任务构成而非取消岗位。",
+                "answer": "现有任务与潜在研究不足以断言整体必不替代、实测中等偏低或普遍采用。可受控试验工单与备件记录辅助；真实设备训练、資格與權限另核。ILO2025指数为潜在任务暴露，旧预测不证明AI因果。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.7",
                 "question": "这个职业会被 AI 或自动化取代吗？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q7"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q7",
+                "source_refs": [
+                  "onet",
+                  "ilo",
+                  "nist",
+                  "employer"
+                ]
               },
               {
                 "answer": "O*NET 工作情境显示：面对面讨论频繁（75% 每天）、决策频率较高（53% 每天）、接触危险设备 常见（36% 每天、27% 每周一次或以上）、接触污染物 常见（35% 每天、48% 每周一次或以上）、错误的后果较严重（39% 极其严重、25% 非常严重）、对他人的健康与安全责任较高（39% 极高责任、29% 高责任）。",
@@ -32392,10 +32619,19 @@
                 "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q9"
               },
               {
-                "answer": "本页以 O*NET 49-9098.00 与美国 BLS OEWS 2025 与 BLS 就业预测 2024—2034 为主要来源，并引用 ILO 与 NIST 的职业暴露与治理研究；所有数值为美国本职业自身口径，不覆盖中国大陆；中国大陆只登记统计口径与可见缺口；本页不构成安全或特种作业或质量或法律意见。",
+                "answer": "2025工资与2024—2034旧预测不混；OEWS受雇统计和含自雇矩阵范围不同。ILO2025潜在暴露、NIST自愿治理及中国第19号令各支持不同主张；R01为作者虚构题面，非实测现场或许可。证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。",
                 "id": "helpers-installation-maintenance-and-repair-workers.faq.10",
                 "question": "本页来源与口径边界是什么？",
-                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q10"
+                "question_key": "career.faq.helpers-installation-maintenance-and-repair-workers.q10",
+                "source_refs": [
+                  "onet",
+                  "bls-oews-methods",
+                  "bls-matrix-methods",
+                  "ilo",
+                  "nist",
+                  "facilities",
+                  "employer"
+                ]
               }
             ]
           },
@@ -32410,7 +32646,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对美国 O*NET/SOC 49-9098.00（安装维护工人修理）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2024—2034 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与安全生产与特种作业与职业健康与环保制度登记口径与缺口。"
+              "来源卡｜研究流程：先核对美国 O*NET/SOC 49-9098.00（安装、维护与维修工人帮工）的官方范围与任务与工作活动与工作情境与兴趣代码与 Job Zone 与证书与培训机会，再取 BLS OEWS 2025 年工资与 BLS 就业预测 2024—2034 的就业与增长与空缺（均经 O*NET 页面呈现，且该页未标注取自上级或相邻职业，故按本职业自身口径呈现），并对中国大陆按国家统计局与安全生产与特种作业与职业健康与环保制度登记口径与缺口。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.sources.source-card.1",
@@ -32452,12 +32688,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记两类可见说明——（1）美国侧：O*NET 在 49-9098.00 页未标注工资与就业与行业数据取自上级或相邻职业，本页按本职业自身口径如实呈现，不含福利与奖金，中位不等于起薪；（2）中国大陆侧：公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布，国家统计局按行业门类公布平均工资、不区分职业，本页展示缺失而不使用代理数字或用美国数据外推。"
+              "来源说明｜证据不足：本页所核中国资料未取得与49-9098.00安装维修助手精确对应的全国职业工资分布；维修工、设备维护、物业维修仅是相关检索称谓，不是帮工一对一法定映射；行业均值、招聘报价和美国工资不代填。2025工资与2024—2034旧详值/当前增长类别分开；OEWS含生产奖金且矩阵含自雇。美国新聘者学历调查非中国准入，ILO2025潜在指数非采用率，NIST非特种作业法律。第19号令针对直接从事目录内作业，R01全部虚构只作纸面核对。"
             ]
           },
           "id": "helpers-installation-maintenance-and-repair-workers.sources.source-card.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "nbs",
+            "ilo",
+            "nist",
+            "facilities",
+            "employer"
           ],
           "type": "prose"
         }
@@ -32496,7 +32737,7 @@
                 "entity": "智力与推理测试",
                 "id": "navigation-4",
                 "relation": "related-evidence",
-                "url": "/zh/tests/iq-test-intelligence-quotient-assessment"
+                "url": "/zh/tests/iq-test"
               },
               {
                 "entity": "情绪智力测试",
@@ -32505,7 +32746,7 @@
                 "url": "/zh/tests/eq-test"
               },
               {
-                "entity": "本职业（安装维护工人修理）",
+                "entity": "本职业（安装、维护与维修工人帮工）",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/helpers-installation-maintenance-and-repair-workers"
@@ -32584,7 +32825,7 @@
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，不含福利与奖金。",
+                "limitation": "O*NET 在该页未标注工资数据取自上级或相邻职业；本页按本职业自身口径呈现，包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本。",
                 "market": "美国",
                 "name": "O*NET OnLine：安装维护与维修工帮工国家工资（49-9098.00，本职业自身口径）",
                 "period": "2025 BLS OEWS wage data via O*NET",
@@ -32611,12 +32852,12 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于说明公开企业薪酬调查未建立与本职业精确对应的全国工资分布。",
-                  "不作为本职业工资代理数字使用。"
+                  "本页所核中国资料未取得可对应安装维修助手的全国工资分布；不推所有公开数据不存在。",
+                  "设备维护与物业维修可作相关检索方向，须核助手或独立职责层级。"
                 ],
                 "evidence_type": "official survey release",
                 "id": "cnclass",
-                "limitation": "为岗位大类聚合口径，未建立与本职业精确对应的统计值。",
+                "limitation": "相关维修名称不是助手与美国SOC的一对一法定映射。",
                 "market": "中国大陆",
                 "name": "人力资源和社会保障部：企业薪酬调查信息",
                 "period": "current; accessed 2026-09-22",
@@ -32641,20 +32882,20 @@
                 "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
               },
               {
-                "accessed_at": "2026-09-22",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "用于说明能源隔离与带电作业与高处与机械与受限空间等安全生产要求。",
-                  "涉及特种作业的须经安全技术培训与考核并持证作业。"
+                  "第2—4条限定适用主体与目录内作业，要求培训考核并取得相应操作证。",
+                  "职业名称、训练、操作证和现场任务权限不能自动互换。"
                 ],
-                "evidence_type": "regulator portal",
+                "evidence_type": "official regulation",
                 "id": "facilities",
-                "limitation": "以主管机关发布的法规与要求为准。",
+                "limitation": "不由帮工名称推所有人统一电工高处证；现场许可另核",
                 "market": "中国大陆",
                 "name": "中华人民共和国应急管理部：安全生产与特种作业与危险作业管理",
-                "period": "current; accessed 2026-09-22",
+                "period": "第19号令2025-12-17公布，2026-06-01施行",
                 "publisher": "应急管理部",
-                "scope": "work safety and special operations",
-                "url": "https://www.mem.gov.cn/"
+                "scope": "直接从事目录内特种作业；另有规定从其规定",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
               },
               {
                 "accessed_at": "2026-09-22",
@@ -32707,15 +32948,15 @@
               {
                 "accessed_at": "2026-09-22",
                 "details": [
-                  "用于理解技术对数据与文档与信息类任务的影响机制。",
-                  "研究对象以职业大组为主，不覆盖本职业；本职业现场检查与设备与安全判断更依赖实际技能。"
+                  "生成式AI潜在任务暴露细化全球指数，四级梯度不是实际采用或岗位消失年份。",
+                  "本页不据此赋49-9098.00实测暴露等级或个人结果。"
                 ],
-                "evidence_type": "research publication",
+                "evidence_type": "international organization potential exposure research",
                 "id": "ilo",
                 "limitation": "任务暴露不等于岗位自动消失或具体采用率。",
                 "market": "全球",
                 "name": "ILO 生成式 AI 与就业职业暴露指数研究",
-                "period": "current",
+                "period": "2025-05-20工作论文140；本任务核2026-10-02",
                 "publisher": "International Labour Organization",
                 "scope": "task exposure context",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
@@ -32927,6 +33168,36 @@
                 "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
                 "scope": "49-9098.00 exact occupation",
                 "url": "https://www.onetonline.org/link/longview/49-9098.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "美国就业矩阵包括自雇，与OEWS项目不同"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "bls-matrix-methods",
+                "limitation": "美国就业矩阵包括自雇，与OEWS项目不同",
+                "market": "美国",
+                "name": "BLS就业矩阵资料方法",
+                "period": "2026-10-02查阅",
+                "publisher": "BLS",
+                "scope": "美国就业矩阵包括自雇，与OEWS项目不同",
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "受雇全兼职工资含生产奖金，排除加班轮班差额福利等"
+                ],
+                "evidence_type": "official statistical methods",
+                "id": "bls-oews-methods",
+                "limitation": "受雇全兼职工资含生产奖金，排除加班轮班差额福利等",
+                "market": "美国",
+                "name": "BLS OEWS常见问题",
+                "period": "2026-10-02查阅",
+                "publisher": "BLS",
+                "scope": "受雇全兼职工资含生产奖金，排除加班轮班差额福利等",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -33058,7 +33329,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "安装维护工人修理的工作方向与相邻职业怎么比较？",
+        "heading": "安装、维护与维修工人帮工的工作方向与相邻职业怎么比较？",
         "intro": {
           "$item": "helpers-installation-maintenance-and-repair-workers.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -33325,7 +33596,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与展望",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -33347,7 +33618,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33369,7 +33640,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "官方软件资料",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33391,7 +33662,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "国际组织潜在暴露研究",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33413,7 +33684,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "自愿AI风险框架",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33435,7 +33706,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方工作情境资料",
             "适用范围": {
               "$item": "helpers-installation-maintenance-and-repair-workers.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -33677,7 +33948,7 @@
             }
           }
         ],
-        "heading": "AI 会取代安装维护工人修理吗？",
+        "heading": "AI 会取代安装、维护与维修工人帮工吗？",
         "method_cards": [
           {
             "含义": {
@@ -33704,7 +33975,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "概念": "AI 会减少安装维护工人修理岗位吗？"
+            "概念": "AI 会减少安装、维护与维修工人帮工岗位吗？"
           }
         ],
         "questions": [
@@ -33728,7 +33999,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "安装维护工人修理会被 AI 取代吗？"
+            "问题": "安装、维护与维修工人帮工会被 AI 取代吗？"
           },
           {
             "回答": {
@@ -33794,7 +34065,7 @@
               "entry": "link-16",
               "field": "url"
             },
-            "问题": "到 2035 年这个职业会变少吗？"
+            "问题": "2024—2034的美国旧期预测能说明什么？"
           },
           {
             "回答": {
@@ -34264,7 +34535,7 @@
           "type": "prose"
         },
         "entry_heading": "应届生或转行者如何验证并入门",
-        "heading": "怎样成为安装维护工人修理？教育、资格与职业发展路径",
+        "heading": "怎样成为安装、维护与维修工人帮工？教育、资格与职业发展路径",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "helpers-installation-maintenance-and-repair-workers.path.career-path-block.21",
@@ -34797,7 +35068,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "安装维护工人修理的工作可以分成哪几类？",
+            "question": "安装、维护与维修工人帮工的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -34854,7 +35125,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "安装维护工人修理和相邻岗位的边界在哪里？",
+            "question": "安装、维护与维修工人帮工和相邻岗位的边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -35122,7 +35393,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "安装维护工人修理的工作有哪些压力、风险与职业边界？",
+        "heading": "安装、维护与维修工人帮工的工作有哪些压力、风险与职业边界？",
         "risks": [
           {
             "affected_roles": {
@@ -35791,11 +36062,11 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响安装维护工人修理的工资吗？",
+            "ai_heading": "AI 会影响安装、维护与维修工人帮工的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "安装维护工人修理在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "安装、维护与维修工人帮工在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -35823,8 +36094,8 @@
         },
         "bls_table": [
           {
-            "fact_ref": "us-wage-low10-2025",
-            "指标": "薪资 · 10 分位",
+            "fact_ref": "us-wage-2025",
+            "指标": "薪资 · 中位数",
             "数值": {
               "$item": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.9",
               "block": "us-salary",
@@ -35839,8 +36110,8 @@
             }
           },
           {
-            "fact_ref": "us-wage-q25-2025",
-            "指标": "薪资 · 25 分位",
+            "fact_ref": "us-wage-low10-2025",
+            "指标": "薪资 · 10 分位",
             "数值": {
               "$item": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.11",
               "block": "us-salary",
@@ -35855,8 +36126,8 @@
             }
           },
           {
-            "fact_ref": "us-wage-2025",
-            "指标": "薪资 · 中位数",
+            "fact_ref": "us-wage-q25-2025",
+            "指标": "薪资 · 25 分位",
             "数值": {
               "$item": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.13",
               "block": "us-salary",
@@ -36007,14 +36278,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国安装维护工人修理工资？",
+        "factors_heading": "哪些因素会影响美国安装、维护与维修工人帮工工资？",
         "growth": {
           "$item": "helpers-installation-maintenance-and-repair-workers.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国安装维护工人修理工资多少？",
+        "heading": "美国安装、维护与维修工人帮工工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -36236,7 +36507,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "安装维护工人修理适合什么样的人？"
+        "title": "安装、维护与维修工人帮工适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -36310,7 +36581,7 @@
           "copy_key": "career.item.market-signal-card",
           "type": "prose"
         },
-        "heading": "安装维护工人修理的前景如何？可以转向哪些相关职业？",
+        "heading": "安装、维护与维修工人帮工的前景如何？可以转向哪些相关职业？",
         "outlook_evidence": [
           {
             "geography": {
@@ -36784,7 +37055,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 49-9098.00 职业档案（安装维护工人修理）",
+            "label": "O*NET 49-9098.00 职业档案（安装、维护与维修工人帮工）",
             "secondary_value": null,
             "value": {
               "$item": "helpers-installation-maintenance-and-repair-workers.profile.onet-structured-fields-block.1",
@@ -36865,7 +37136,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近安装维护工人修理？",
+            "question": "霍兰德兴趣中什么类型更接近安装、维护与维修工人帮工？",
             "signals": {
               "$item": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.4",
               "block": "fit",
@@ -36939,7 +37210,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合安装维护工人修理吗？",
+            "question": "MBTI 能用来判断我适不适合安装、维护与维修工人帮工吗？",
             "signals": {
               "$item": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.12",
               "block": "fit",
@@ -37013,7 +37284,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做安装维护工人修理吗？",
+            "question": "数学不好，能做安装、维护与维修工人帮工吗？",
             "signals": {
               "$item": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.20",
               "block": "fit",
@@ -37050,7 +37321,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做安装维护工人修理需要高情商吗？",
+            "question": "做安装、维护与维修工人帮工需要高情商吗？",
             "signals": {
               "$item": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.24",
               "block": "fit",
@@ -37100,7 +37371,7 @@
                 "field": "url"
               },
               "slug": "helpers-installation-maintenance-and-repair-workers",
-              "title": "本职业（安装维护工人修理）方向"
+              "title": "本职业（安装、维护与维修工人帮工）方向"
             },
             "watchouts": {
               "$item": "helpers-installation-maintenance-and-repair-workers.fit.personality-fit-block.30",
@@ -37265,7 +37536,7 @@
             }
           }
         ],
-        "heading": "做安装维护工人修理，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做安装、维护与维修工人帮工，哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -37274,7 +37545,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "什么性格的人更适合做安装维护工人修理？"
+            "question": "什么性格的人更适合做安装、维护与维修工人帮工？"
           },
           {
             "answer": {
@@ -37283,7 +37554,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "内向的人适合做安装维护工人修理吗？"
+            "question": "内向的人适合做安装、维护与维修工人帮工吗？"
           },
           {
             "answer": {
@@ -37292,7 +37563,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "外向的人能做好安装维护工人修理吗？"
+            "question": "外向的人能做好安装、维护与维修工人帮工吗？"
           },
           {
             "answer": {
@@ -37301,7 +37572,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "哪种 MBTI 最适合安装维护工人修理？"
+            "question": "哪种 MBTI 最适合安装、维护与维修工人帮工？"
           },
           {
             "answer": {
@@ -37328,7 +37599,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "数学不好能做安装维护工人修理吗？"
+            "question": "数学不好能做安装、维护与维修工人帮工吗？"
           },
           {
             "answer": {
@@ -37337,7 +37608,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "做安装维护工人修理需要高情商吗？"
+            "question": "做安装、维护与维修工人帮工需要高情商吗？"
           },
           {
             "answer": {
@@ -37582,7 +37853,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合安装维护工人修理",
+        "label": "测我的职业兴趣是否适合安装、维护与维修工人帮工",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37739,7 +38010,7 @@
       "interface.fit.assessments_heading": "不要用一个测试替你决定职业",
       "interface.fit.direction_caution_label": "注意：",
       "interface.fit.direction_match_label": "更匹配：",
-      "interface.fit.directions_heading": "你更可能适合哪条安装维护工人修理工作方向？",
+      "interface.fit.directions_heading": "你更可能适合哪条安装、维护与维修工人帮工工作方向？",
       "interface.fit.interest_baseline_label": "O*NET 职业兴趣基线",
       "interface.fit.interest_code_heading": "怎样理解职业兴趣代码",
       "interface.fit.interest_experience_heading": "这类工作的兴趣体验",
@@ -37764,9 +38035,9 @@
       "interface.profile.comparison.primary_header": "主要方向",
       "interface.profile.comparison.secondary_header": "比较方向",
       "interface.profile.responsibilities_heading": "核心工作",
-      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择安装维护工人修理？",
-      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合安装维护工人修理？",
-      "interface.quick_decision.suit_heading": "什么样的人更可能适合安装维护工人修理？",
+      "interface.quick_decision.caution_heading": "什么情况下需要慎重选择安装、维护与维修工人帮工？",
+      "interface.quick_decision.experiment_heading": "如何用一次小实验判断自己是否适合安装、维护与维修工人帮工？",
+      "interface.quick_decision.suit_heading": "什么样的人更可能适合安装、维护与维修工人帮工？",
       "interface.risk.affected_roles_label": "主要岗位",
       "interface.risk.consequence_label": "可能后果",
       "interface.risk.evidence_label": "依据",
@@ -37890,43 +38161,43 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "职业身份代码",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "O*NET 2026 occupational profile",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "中位时薪 19.05 美元 / 中位年薪 39,630 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）",
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "工资中位数",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 10 分位时薪 14.09 美元 / 年薪 29,310 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 90 分位时薪 26.87 美元 / 年薪 55,890 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
@@ -37938,19 +38209,19 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2024—2034",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜BLS 就业预测基期（2024 年本职业约 98,700 人，经 O*NET 呈现）；与 BLS OEWS 的时点就业估计口径不同（OEWS 只覆盖被抽样非农机构雇主、不含自雇），本页分别标注不混用。",
+        "derivation": "2024年就业98,700为BLS预测基期；矩阵包括自雇，与OEWS受雇时点估计不同，不推AI因果或个人结果。",
         "display_value": "就业 约 98,700 人（2024，BLS 就业预测基期，本职业（49-9098.00）自身口径）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "就业人数",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2024",
         "source_refs": [
           "onet"
@@ -37962,55 +38233,55 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2024—2034",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；设备维护与电气与机械与高处作业另受安全生产与特种作业与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "证据不足：本页所核中国资料未取得与49-9098.00助手精确对应的全国职业工资，相关名称和行业数据不代填。",
+        "display_value": "证据不足：本页所核中国资料未取得与49-9098.00助手精确对应的全国职业工资，相关名称和行业数据不代填。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜中国大陆公开职业统计未建立与本职业精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业；设备维护与电气与机械与高处作业另受安全生产与特种作业与职业健康与环保等法规与标准约束；本页按证据政策登记缺口而不使用代理数字。",
-        "display_value": "证据不足：中国大陆公开职业统计未建立与 O*NET 49-9098.00（安装维护工人修理）精确对应的全国职业工资分布；国家统计局按行业门类公布城镇单位就业人员平均工资、不区分职业，本页不以行业均值、招聘报价或美国数据代填。",
+        "derivation": "证据不足：本页所核中国资料未取得与49-9098.00助手精确对应的全国职业工资，相关名称和行业数据不代填。",
+        "display_value": "证据不足：本页所核中国资料未取得与49-9098.00助手精确对应的全国职业工资，相关名称和行业数据不代填。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 25 分位时薪 16.78 美元 / 年薪 34,910 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）",
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "工资第25分位",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；不含福利与奖金；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
+        "derivation": "口径｜2025 年 BLS OEWS 全国工资，经 O*NET 在 49-9098.00 页呈现；该页未标注数据取自上级或相邻职业，本页按本职业自身口径如实标注；包含生产性奖金，不含加班、轮班差额、非生产性奖金及福利成本；中位为分布中点、分位为分布位置，均不对应个人起薪；后续更新以官方页面当期查询为准。",
         "display_value": "第 75 分位时薪 22.55 美元 / 年薪 46,890 美元（2025 年，BLS OEWS，本职业（49-9098.00）自身口径）",
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "工资第75分位",
-        "occupation_scope": "本职业：安装维护工人修理",
+        "occupation_scope": "本职业：安装、维护与维修工人帮工",
         "period": "2025",
         "source_refs": [
           "onet"
@@ -38026,7 +38297,7 @@
       "label": "AI 任务暴露（本页不评分）"
     },
     "badges": [
-      "安装维护工人修理 · 任务、交付与责任边界",
+      "安装、维护与维修工人帮工 · 任务、交付与责任边界",
       "检查与更换与连接 · 能源隔离与维修留痕 · 设备与人身责任",
       "美国职业资料；中国精确职业工资缺口按来源保留"
     ],
@@ -38067,17 +38338,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "安装维护工人修理做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 49-9098.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
+      "text": "安装、维护与维修工人帮工做什么、需要什么能力与资格、工资与前景如何，以及 AI 会改变哪些任务。保留职业范围（O*NET 49-9098.00）、Job Zone 1-2（几乎无需至需要一定准备） 与学历说明、美国工资与就业的本职业自身口径与中国大陆数据缺口。"
     },
     "title": {
       "availability": "available",
-      "text": "安装维护工人修理"
+      "text": "安装、维护与维修工人帮工"
     }
   },
-  "source_content_sha256": "b7d7cc1e6ffc2cf766e0bc03c017e683a8318bb49fb0f3d0db7558923c0ced3b",
+  "source_content_sha256": "fd20e3b8e52e10d88d9f819fc7fa78e70a111355ff3b10bc369b9fe8bfddabfa",
   "subject": {
     "canonical_slug": "helpers-installation-maintenance-and-repair-workers",
-    "name": "安装维护工人修理",
-    "summary": "安装维护工人修理对应 O*NET/SOC 49-9098.00「Helpers--Installation, Maintenance, and Repair Workers」这一精确职业：协助安装、维护与维修工人进行车辆、工业机械以及电气与电子设备的维护、零件更换与维修：向其他工人提供工具、材料与用品；清洁作业区、机器与工具；并为其他工人扶住材料或工具。核心任务包括使用手动或电动工具安装或更换机械与设备以及新的或替换的零件与仪器、检查和测试机械与设备与组件与零件是否有缺陷、照看和观察设备与机械以验证高效与安全运行、使用手动或电动工具调整与连接或断开线路与管道与管件及其他部件、清洁或润滑车辆与机械与设备与仪器与工具与工作区；常见职位名称包括 Maintenance Helper 与 Mechanic Helper 与 Mechanic's Assistant 与 HVAC Helper 与 Maintenance Aide。官方范围原文：Help installation, maintenance, and repair workers in maintenance, parts replacement, and repair of vehicles, industrial machinery, and electrical and electronic equipment. Perform duties such as furnishing tools, materials, and supplies to other workers; cleaning work area, machines, and tools; and holding materials or tools for other workers. 口径说明：O*NET 在 49-9098.00 页呈现的美国工资与就业与行业数据未标注取自上级或相邻职业，本页按本职业（49-9098.00）自身口径如实标注；该职业属 Job Zone 1-2（几乎无需至需要一定准备）（低于 6.0（SVP Below 6.0）），2024—2034 年增长为 Slower than average（2%）。本页内容不构成安全、特种作业、职业健康或法律意见。"
+    "name": "安装、维护与维修工人帮工",
+    "summary": "安装、维护与维修工人帮工协助技工维护、替换与维修车辆、工业机械及电气电子设备，准备工具与材料，配合检查、连接、清洁及记录。美国代码49-9098.00；实际任务可含维修与测试，法定资格、训练和现场权限按具体作业核。"
   }
 }

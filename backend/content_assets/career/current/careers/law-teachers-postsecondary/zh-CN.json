@@ -17,10 +17,19 @@
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2024-2034": {
         "status": "pending_mapping"
       },
+      "fact:us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2024-2034": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings-2025-2035": {
         "status": "pending_mapping"
       },
       "fact:us-projected-employment-2034": {
@@ -7214,12 +7223,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 25-1112.00「Law Teachers, Postsecondary」。官方范围为：教授法律课程；包括以教学为主，以及教学与研究并重的教师。典型任务包括编写课程大纲与教学材料、讲授与主持课堂讨论、编写并批改考试与论文、指导学生学习与论文、开展并发表法学研究、参与院系与学术服务。核心交付是可复核的课程设计、评分依据与研究成果，而不是「把课讲完」。风险来自学术诚信与评分公平、学生指导的边界（不把课堂讨论变成针对具体个案的法律意见）、研究与引用规范、教学与考试内容保密，以及竞争与工作量压力。美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业 29,500 人；2024—2034 预测增长 2%、年均空缺 2,200 个；2025 年中位年薪 128,500 美元；主要行业教育服务）。中国大陆精确职业工资未取得，按可见缺口登记。本页不构成法律意见。若你难以承受长期研究产出压力与高竞争环境，应把这些作为需要认真权衡的现实成本。"
+              "谨慎信号｜25-1112.00教授法律课程，含教学为主和教学研究并重；交付课程材料、评分依据、学生指导研究成果。2025美国年薪中位128,500美元，第10/90分位64,250/287,900。BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。学术线索按机构程序处理，课堂身份不授律师权限，中国全国工资缺口与行业参考分列。"
             ]
           },
           "id": "law-teachers-postsecondary.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "cn-wage-attempt"
+            "source-pack-onet-details",
+            "source-pack-onet-localwages",
+            "review-bls",
+            "review-teacherlaw",
+            "review-academic"
           ],
           "type": "prose"
         },
@@ -7233,7 +7246,8 @@
           },
           "id": "law-teachers-postsecondary.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "cn-wage-attempt"
+            "source-pack-onet-details",
+            "review-academic"
           ],
           "type": "prose"
         },
@@ -7242,12 +7256,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合高校法学教师，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的课程与班次，写出从确定培养目标与课时、设计大纲与阅读材料、组织一次讨论并预设提问与追问、到编制评分标准并对两份虚构作业判分与给反馈的流程，标注每一步的核对点与可能出现的问题（教学目标与考核不匹配、评分标准模糊导致争议、引用与数据不规范、把课堂讨论变成针对具体个案的结论、学生信息或考题外泄）。完成后核对：是否把培养目标与考核对齐、评分标准与依据、学术规范与学生边界作为不可省略项；是否把需要其他部门或专业判断的事项写成转介；是否把过程留成可复核记录。全部课程与学生材料须为虚构，不使用真实学生信息。本页不构成法律意见。"
+              "体验建议｜用路径LT-01唯一虚构R1与两份答案，完成10分钟教学设计、四项评分、两份反馈和修订记录；核A4/B0与课堂目标一致，不用真实学生、考题、案件或生成法条。七日计划每天20—30分钟：D1抄题号R1与甲乙及边界；D2核目标和2+3+3+2=10分钟；D3写四项评分标准；D4独立给A4/B0并写依据；D5写两份反馈和草稿修订；D6请同行按同题评分比较差异；D7组合四作品与待核雇主要求。纸面模拟不证明真实教学绩效或授课/律师权限。"
             ]
           },
           "id": "law-teachers-postsecondary.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "cn-wage-attempt"
+            "source-pack-onet-details",
+            "review-academic"
           ],
           "type": "prose"
         },
@@ -7261,7 +7276,8 @@
           },
           "id": "law-teachers-postsecondary.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "cn-wage-attempt"
+            "source-pack-onet-details",
+            "review-academic"
           ],
           "type": "prose"
         }
@@ -7278,13 +7294,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "高校法学教师对应美国 O*NET-SOC 25-1112.00「Law Teachers, Postsecondary」。官方范围为：教授法律课程；包括以教学为主，以及教学与研究并重的教师。典型工作链是编写课程大纲与教学材料、讲授并主持课堂讨论、编写与批改考试和论文、指导学生学习与论文、开展并发表研究、参与院系与学术服务。本页美国数值采用 O*NET 呈现的 BLS 精确职业口径（2024 年就业 29,500 人；2024—2034 预测增长 2%、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；2025 年年薪第 10 分位 64,250 美元、中位 128,500 美元、第 90 分位 287,900 美元；主要行业教育服务）；中国大陆精确职业工资未取得，按可见缺口登记。本页不构成法律意见。"
+              "高校法学教师25-1112.00教授法律课程，含以教学为主及教学研究并重。O*NET任务包括课堂讨论、编大纲、考核评分、研究发表、更新知识、学生记录与指导、委员会和行政服务，也列部分专业咨询；教师可能另有合法执业身份，但教学身份本身不授代理或法律服务权限。BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。"
             ]
           },
           "id": "law-teachers-postsecondary.profile.definition-block.1",
           "source_refs": [
-            "source-pack-onet-summary",
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "review-bls",
+            "review-trends",
+            "review-lawyerlaw"
           ],
           "type": "prose"
         },
@@ -7298,7 +7316,7 @@
           },
           "id": "law-teachers-postsecondary.profile.responsibilities-block.2",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "list"
         },
@@ -7312,7 +7330,7 @@
           },
           "id": "law-teachers-postsecondary.profile.responsibilities-block.3",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "list"
         },
@@ -7326,7 +7344,7 @@
           },
           "id": "law-teachers-postsecondary.profile.responsibilities-block.4",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "list"
         },
@@ -7340,7 +7358,7 @@
           },
           "id": "law-teachers-postsecondary.profile.work-context-block.5",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7349,12 +7367,12 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏｜工作以教室、办公室与研究场景为主：室内受控环境 77% 每天、工作周 89% 超过 40 小时、学期与考核周期形成明显波峰。教学、指导学生与学术服务并行，研究产出与同行评审构成长期节奏。"
+              "环境节奏｜O*NET美国受访者室内受控77%每日、工作周89%超过40小时/11%40小时，工作安排50%规则/29%季节性/21%不规则；不外推中国统一工时，学期波峰仅待雇主核。"
             ]
           },
           "id": "law-teachers-postsecondary.profile.work-context-block.6",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7364,12 +7382,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 25-1112.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 SI（社会型—研究型），Job Zone 第五级（Extensive Preparation Needed：多数要求研究生学历，部分要求 Ph.D.、M.D. 或 J.D. 法律学位；通常需要五年以上相关积累，SVP 8.0 及以上），未标注 Bright Outlook；主要行业为教育服务（100%）。可用美国数据为 O*NET 呈现的 BLS 精确职业口径：2024 年就业 29,500 人；2024—2034 预测增长 2%、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；2025 年年薪第 10 分位 64,250 美元、第 25 分位 88,700 美元、中位 128,500 美元、第 75 分位 176,490 美元、第 90 分位 287,900 美元。中国大陆精确职业工资未取得。本页不构成法律意见。"
+              "研究输入｜SI保：S91/I73/C45/E42/A40/R24为兴趣强度非能力，未标Bright。O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。主要行业2024教育服务100%，非2026行业统计。五工资64,250/88,700/128,500/176,490/287,900美元年保。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。"
             ]
           },
           "id": "law-teachers-postsecondary.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details",
+            "source-pack-onet-localwages",
+            "review-trends",
+            "review-bls"
           ],
           "type": "prose"
         },
@@ -7383,7 +7404,7 @@
           },
           "id": "law-teachers-postsecondary.profile.career-quick-answers-block.8",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7397,7 +7418,7 @@
           },
           "id": "law-teachers-postsecondary.profile.career-quick-answers-block.9",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7411,7 +7432,7 @@
           },
           "id": "law-teachers-postsecondary.profile.definition-block.10",
           "source_refs": [
-            "source-pack-onet-summary"
+            "source-pack-onet-details"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7477,7 +7498,7 @@
           },
           "id": "law-teachers-postsecondary.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "source-pack-onet-custom"
+            "review-adj-admin"
           ],
           "type": "prose"
         },
@@ -7491,7 +7512,7 @@
           },
           "id": "law-teachers-postsecondary.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "source-pack-onet-custom"
+            "review-adj-polit"
           ],
           "type": "prose"
         },
@@ -7500,12 +7521,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "律师方向｜核心产出是为当事人提供代理与辩护。本职业以教学与研究为主、不代理具体当事人；立场、执业许可与责任边界不同，不能相互套用。"
+              "律师方向｜代表当事人参与民刑诉讼及其他程序、起草法律文书或管理咨询法律交易；本职业主要教学研究。教师可能另获合法律师执业身份，须分别核授权、客户委托及责任，不能把课堂身份直接当代理许可。"
             ]
           },
           "id": "law-teachers-postsecondary.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "source-pack-onet-custom"
+            "review-adj-lawyer",
+            "review-lawyerlaw"
           ],
           "type": "prose"
         },
@@ -7519,7 +7541,7 @@
           },
           "id": "law-teachers-postsecondary.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "source-pack-onet-custom"
+            "review-adj-business"
           ],
           "type": "prose"
         }
@@ -7551,12 +7573,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜生成式 AI 可辅助教学材料初稿、案例与法条检索、习题草稿、评分要点整理与文献梳理，但教学目标与考核对齐、评分与学术判断、学生指导、研究结论与学术诚信责任仍由教师承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕，并须遵守学术诚信与学生信息保护要求。本页不给出替代概率或时间表。"
+              "证据不足：本职业生成AI实际采用、提效幅度与工资因果未建立。材料初稿、检索摘要可作为受控试验建议，须回看原文、法条版本、课程目标与评分标准；技术提及不证明GenAI使用，任务暴露不等于替代。"
             ]
           },
           "id": "law-teachers-postsecondary.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7565,12 +7588,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据说明｜本表只使用来源原始口径：O*NET 25-1112.00 提供精确职业身份、任务、工作活动与工作情境；美国数值为 O*NET 呈现的 BLS 精确职业口径；O*NET 技术页面提及率不等于岗位必需或自动化率；中国大陆官方检索未建立与该精确职业对应的全国工资分布，不据此推断中国工资。"
+              "证据口径｜本轮hot六软件：2025美国招聘Office/Excel各3%、PowerPoint2%，GoogleDocs/Outlook/Word为Notavailable；招聘提及非实际使用，更非GenAI采用。O*NET任务支持教学评分研究职责，BLS新旧期支持就业总体预测，不证明AI造成岗位或工资变化。"
             ]
           },
           "id": "law-teachers-postsecondary.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "source-pack-onet-hot_tech",
+            "review-bls",
+            "review-trends"
           ],
           "type": "prose"
         },
@@ -7579,7 +7605,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明｜同一职业内不同环节受影响不同：越可文本化、且结果可事后核对的部分（材料初稿、检索与摘要、习题草稿、格式整理）越容易被工具加速；越涉及教学目标与考核对齐、评分判断、学生指导、研究结论与学术诚信的部分越必须由教师承担。"
+              "编辑建议｜先在LT-01虚构R1和A/B纸面评分中比较草稿与人工复核，记录错判和引用；未实测不得写更容易加速。对教学目标、评分和研究结论逐项回核，由授权教师承担正式判断。"
             ]
           },
           "id": "law-teachers-postsecondary.ai-impact.ai-impact-table.4",
@@ -7607,7 +7633,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转折｜工具改变的是材料准备与检索效率，不改变教学与评分判断、学生指导、研究结论与学术诚信责任的归属；务实的做法是先把课程设计、评分标准与研究方法练扎实，再在可复核、可追溯的环节引入工具。"
+              "行动建议｜先练课程目标、评分标准和研究原文核对，再在学校批准的环境试验工具；本页没有效率提升或薪酬不变的因果结论。"
             ]
           },
           "id": "law-teachers-postsecondary.ai-impact.ai-impact-table.6",
@@ -7657,12 +7683,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜本页对应美国 O*NET-SOC 25-1112.00「Law Teachers, Postsecondary」。中国公开统计没有与该精确职业对应的单职业工资；行业或岗位大类均值不能冒充该职业的全国中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "名称范围｜中文高校法学教师是美国25-1112.00页面名称，中国教育资格及招聘分别按本地规则核，不称公开统计没有任何职业数据；本轮未建立全国精确工资。"
             ]
           },
           "id": "law-teachers-postsecondary.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "cn-wage-attempt"
+            "source-pack-onet-details",
+            "review-teacherlaw",
+            "review-nbs"
           ],
           "type": "prose"
         },
@@ -7671,12 +7699,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围｜本页的中国侧结论只限中国大陆市场与当前统计口径；中国高校教师的资格、聘用与薪酬由教师法、主管部门与学校制度规定，与美国高校法教师资体系不一一对应，因此不建立工资映射。"
+              "中国资格与参考｜教育部公布教师法第10—13条规定教师资格认定，高校资格学历条件为研究生或大学本科毕业；学历条件不等于认定合格或学校录用。广州大学法学院2026-06-01单公告各教学科研方向列博士及分项职称科研条件，非全国统一门槛；综合年薪未列金额，安家/租房/科研资助不能当工资。"
             ]
           },
           "id": "law-teachers-postsecondary.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "cn-wage-attempt"
+            "review-teacherlaw",
+            "review-gzhu"
           ],
           "type": "prose"
         },
@@ -7685,12 +7714,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本次有界检索未建立与美国 O*NET 25-1112.00 高校法学教师完全对应的中国大陆全国职业工资分布，因此不生成起薪、中位数或分位数，也不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：中国大陆全国高校法学教师精确工资分布未建立；NBS2025教育门类非私营133,539、私营63,908元/年，税前年均、排个体自由职业，分别呈现，不当本职业中位起薪或范围。"
             ]
           },
           "id": "law-teachers-postsecondary.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "cn-wage-attempt"
+            "review-nbs"
           ],
           "type": "prose"
         },
@@ -7699,12 +7728,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与薪资判断边界｜生成式 AI 可能辅助教学与研究资料整理，但不改变该职业薪酬由所在高校、地区、职称与考核制度决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资，也不构成法律意见。"
+              "证据不足：中国高校法学教师AI采用与工资变化因果未建立；目标学校职称合同岗位考核等应逐项核，不能断言AI不改变工资。行业年均和招聘条件不填全国职业分位。"
             ]
           },
           "id": "law-teachers-postsecondary.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "cn-wage-attempt"
+            "review-nbs",
+            "review-gzhu"
           ],
           "type": "prose"
         }
@@ -7755,7 +7785,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资口径｜数据为 BLS OEWS 2025 年工资与 2024—2034 就业预测，经 O*NET 呈现为 25-1112.00 精确职业口径；OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入；高校教师薪酬常按职称与合同期分层，年度总额与教学期安排相关。"
+              "美国工资方法｜五分位为2025BLS OEWS经O*NET精确25-1112.00显示。OEWS雇主工资统计包括激励工资和生产奖金，排加班及非生产奖金、雇主福利和自雇。高校教师未列小时工资，不按2080小时或月份自行折算；年薪按雇主报告，不假定所有合同期一致。分位不是起薪或个人实发。"
             ]
           },
           "fact_refs": [
@@ -7789,7 +7819,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET 行业页显示该职业全部位于教育服务；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。"
+              "行业口径｜O*NET details列2024教育服务100%，仅美国本职业就业行业分布，不是行业工资或中国比例。"
             ]
           },
           "fact_refs": [
@@ -7797,7 +7827,7 @@
           ],
           "id": "law-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7887,12 +7917,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的课程大纲做一次演练：完成一节课的教学设计、讨论问题、评分标准与两份示例判分；用可观察交付检验，而不是只凭兴趣问卷（本页不构成法律意见）。"
+              "试验动作｜完成路径LT-01：仅虚构R1、甲乙案例和A/B答案，核A4/B0、10分钟目标对齐，交四作品与七日复盘；不使用真实学生成绩案件。"
             ]
           },
           "id": "law-teachers-postsecondary.fit.riasec-fit-block.5",
           "source_refs": [
-            "source-pack-onet-custom"
+            "source-pack-onet-details",
+            "review-academic"
           ],
           "type": "prose"
         },
@@ -7915,12 +7946,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "结论｜人格特质不能预测该职业的工作表现；应结合真实任务、责任边界与可复核交付继续核对，而不是依据单一标签下结论。"
+              "测评边界｜本轮未建立人格量表对本职业工作表现的预测效度；用LT-01四作品及真实授权教学研究证据继续核，不从标签推出录用或资格。"
             ]
           },
           "id": "law-teachers-postsecondary.fit.riasec-fit-block.7",
           "source_refs": [
-            "source-pack-onet-custom"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -7965,11 +7996,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "研究与引用规范风险｜触发：引用不当、数据存疑或署名争议。后果：可能构成学术不端并损害学术声誉。控制：规范引用与数据管理、保存原始资料与过程记录、按期刊与学校规范处理署名。边界：研究规范按学术共同体与机构制度确定。"
+              "研究规范风险｜引用数据署名存疑应保留原文及版本、按学校流程报告。中国教育部令40号要求学术诚信指导审核、保存原始数据，调查认定按高校及学术委员会程序；线索不是个人已经认定不端，评分争议不自动等同科研不端。"
             ]
           },
           "id": "law-teachers-postsecondary.risk.career-risk-cards.2",
           "source_refs": [
+            "review-academic",
             "source-pack-onet-details"
           ],
           "type": "prose"
@@ -7979,11 +8011,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "教学与学生边界风险｜触发：把课堂讨论变成针对具体个案的法律结论、或对学生提供超出职责的法律意见。后果：可能误导学生并越出教学与执业边界。控制：以教学与学术讨论为限、明确不构成法律意见、必要时提示学生寻求执业律师。边界：执业范围与法律意见按所在地法与职业规范确定。"
+              "教学与执业边界｜课堂讨论、课程示例与受托法律服务分别核。教师身份和免责声明都不自动授权律师代理；中国法学教育研究人员可依法申请兼职执业，是否获证及实际业务权限须另核。遇真实个案咨询先界定职责并转介，未核授权不以律师身份处理。"
             ]
           },
           "id": "law-teachers-postsecondary.risk.career-risk-cards.3",
           "source_refs": [
+            "review-lawyerlaw",
+            "review-adj-lawyer",
             "source-pack-onet-details"
           ],
           "type": "prose"
@@ -7993,12 +8027,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "学生信息与考题保密风险｜触发：成绩、学生信息或考试内容在未授权范围内处理或外泄。后果：可能侵犯学生权益并影响考核公平。控制：按最小必要使用、限定系统与范围、考题按制度管理。边界：信息与考试管理按学校制度与适用法规确定。"
+              "学生信息与考题风险｜公开教学样本全部虚构；真实成绩和未公开考题只按学校批准的权限环境处理，不上传外部生成工具。O*NET列学生记录职责，具体数据保护考试制度按机构适用规则核，本文是作业建议而非已核全套法规。"
             ]
           },
           "id": "law-teachers-postsecondary.risk.career-risk-cards.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "source-pack-onet-details",
+            "review-academic"
           ],
           "type": "prose"
         },
@@ -8029,13 +8064,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "怎样成为高校法学教师：教育与资格路径。O*NET 准备信息显示该职业为 Job Zone 第五级（多数要求研究生学历，部分要求 Ph.D.、M.D. 或 J.D. 法律学位；通常需要五年以上相关积累）。O*NET 证书目录只说明可能关联的认证发现入口；具体资格是否必需以及能否执业，仍须核对实际司法辖区和雇主规则。本页不构成法律意见。"
+              "入行范围｜O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。O*NET证书培训目录仅发现入口，不替代精确学历统计、雇主条件或许可。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.1",
           "source_refs": [
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining"
+            "source-pack-onet-details",
+            "review-bls"
           ],
           "type": "prose"
         },
@@ -8044,12 +8079,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜现实入口以法律学位（如 J.D.）或相关博士教育加研究产出为主（Job Zone 第五级）：先确认目标机构对应聘者学位、研究发表与教学经验的要求，再核对课程设计、评分与研究方法能力，并准备可验证的教学与研究成果作品（如教学大纲样本与论文）；学位、资格、执业许可、岗位录用与教学授权必须分别核对。"
+              "路径建议｜先区分美国典型博士/专业学位统计与中国资格认定，再逐目标学校核学位、学科、科研、教学成果和岗位类别；广州大学2026单公告列博士与分项科研职称条件，不把M.D.通用例子或J.D.写中国统一要求。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "review-bls",
+            "review-teacherlaw",
+            "review-gzhu"
           ],
           "type": "prose"
         },
@@ -8058,12 +8095,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国高校的聘任与晋升要求因机构类型与院系而异，须逐一核对，不将任一机构做法写成统一标准；若岗位涉及执业或法律意见，还须遵守相应司法辖区的执业规则；中国大陆高校教师的资格、聘用与考核由教师法、主管部门与学校规定，不能互相套用。"
+              "中国与美国分核｜中国教师资格学历条件、认定、高校招聘及律师许可分开；教师法本科或研究生条件不等于每校只需本科，广州大学样本的博士/科研条件仅本校。美国各校任用规则仍逐岗核；另行受托法律实务须核实际执业身份。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "review-teacherlaw",
+            "review-gzhu",
+            "review-lawyerlaw",
+            "review-bls"
           ],
           "type": "prose"
         },
@@ -8086,12 +8126,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "阶段责任｜入口阶段以助教、讲师或博士后身份完成课程支持与研究；获得教职后独立承担课程设计与评分、指导学生并持续产出研究成果，并参与学术服务。"
+              "固定纸面题LT-01：虚构10分钟课，目标是从规则原文区分条件与例外。唯一虚构规则R1「材料齐全可进入评审；材料缺页须补齐后再评审；进入评审不等于批准」。虚构案例甲材料齐全但尚未评审，乙缺第2页。作业题要求各写下一步并引用R1。评分每份满分4：甲下一步进入评审1分，乙先补缺页1分，解释评审不等批准1分，标R1引用1分；未写对应内容不得分。虚构答案A「甲可进入评审，乙先补第2页；评审不等批准（R1）」；B「甲已获批准，乙直接评审，规则如上」；草稿将两份都判4分，并把R1称真实法律。交付10分钟教学设计、逐项评分表、两份反馈和修订记录，不用真实法律案件学生或成绩。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.5",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -8100,12 +8140,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的课程与学生材料展示能力：课程大纲与一节课教学设计、讨论问题、评分标准与示例判分、研究问题与引用规范说明；不使用真实学生信息，注明依据与假设，且不构成法律意见。"
+              "参考交付：A=1+1+1+1=4，B=0+0+0+0=0，原双4分错；B的「规则如上」没有R1明确引用。甲仅可进入评审未获批准，乙补缺页后才评审；R1是虚构规则不是法条。课程设计2分钟读R1、3分钟比较甲乙、3分钟独立评分、2分钟回核，合计10分钟；反馈逐项引用R1与评分标准，不据错误判分认定现实学术不端。四作品教学设计/评分表/两反馈/修订记录只证明纸面核对。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -8114,12 +8154,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构课程的教学设计与评分方案任务包与复盘，请有经验的教师或同行挑战你的目标与考核对齐、评分依据与研究规范，并据此判断是否继续投入该方向；用可观察交付而不是课程名称证明能力。"
+              "七日计划每天20—30分钟：D1抄题号R1与甲乙及边界；D2核目标和2+3+3+2=10分钟；D3写四项评分标准；D4独立给A4/B0并写依据；D5写两份反馈和草稿修订；D6请同行按同题评分比较差异；D7组合四作品与待核雇主要求。纸面模拟不证明真实教学绩效或授课/律师权限。"
             ]
           },
           "id": "law-teachers-postsecondary.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "source-pack-onet-details"
           ],
           "type": "prose"
         },
@@ -8165,12 +8205,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国侧按 O*NET 呈现的 BLS 精确职业口径（25-1112.00）：2024 年就业 29,500 人、2024—2034 预测增长 2%（slower than average）、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；高校教职竞争激烈，机会受机构类型、经费与学科需求影响，官方预测不能替代目标岗位核验，也不能转换为个人录用概率。中国大陆侧公开统计未按该职业单列，本页登记缺口。"
+              "证据不足：中国全国高校法学教师精确岗位需求未建立。BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。广州大学2026-06-01教学科研单公告覆盖六方向，条件逐类别且未列具体薪金额；不推全国需求、岗位总数或当前仍招。总体预测非AI归因。"
             ]
           },
           "id": "law-teachers-postsecondary.market-signals.market-signal-card.2",
           "source_refs": [
-            "source-pack-onet-summary"
+            "review-bls",
+            "review-trends",
+            "review-gzhu"
           ],
           "type": "prose"
         },
@@ -8179,12 +8221,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET 呈现的 BLS 口径，2024—2034）：增长 2%（slower than average）、预计年均空缺 2,200 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人就业保证。"
+              "BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。总体就业预测非AI归因。"
             ]
           },
           "id": "law-teachers-postsecondary.market-signals.market-signal-card.3",
           "source_refs": [
-            "source-pack-onet-summary"
+            "review-bls"
           ],
           "type": "prose"
         },
@@ -8260,13 +8302,13 @@
                 ]
               },
               {
-                "answer": "生成式 AI 可辅助教学材料初稿、案例与法条检索、习题草稿、评分要点整理与文献梳理；但教学目标与考核对齐、评分与学术判断、学生指导、研究结论与学术诚信责任仍由教师承担。任务暴露不等于岗位替代，也不等于已普遍采用；本页不给出替代概率或时间表，也不构成法律意见。",
+                "answer": "证据不足：本职业生成AI实际采用、提效幅度与工资因果未建立。材料初稿、检索摘要可作为受控试验建议，须回看原文、法条版本、课程目标与评分标准；技术提及不证明GenAI使用，任务暴露不等于替代。",
                 "id": "law-teachers-postsecondary.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.law-teachers-postsecondary.ai-impact",
                 "source_refs": [
-                  "source-pack-onet-hot_tech",
-                  "source-pack-onet-details"
+                  "source-pack-onet-details",
+                  "source-pack-onet-hot_tech"
                 ]
               },
               {
@@ -8280,16 +8322,16 @@
                 ]
               },
               {
-                "answer": "证据不足：本次有界检索未建立与美国 O*NET 25-1112.00 高校法学教师完全对应的中国大陆全国职业工资分布，因此不生成起薪、中位数或分位数，本页展示缺失而不使用代理数字。",
+                "answer": "证据不足：中国大陆全国高校法学教师精确工资分布未建立；NBS2025教育门类非私营133,539、私营63,908元/年，税前年均、排个体自由职业，分别呈现，不当本职业中位起薪或范围。",
                 "id": "law-teachers-postsecondary.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.law-teachers-postsecondary.china-pay",
                 "source_refs": [
-                  "cn-wage-attempt"
+                  "review-nbs"
                 ]
               },
               {
-                "answer": "按 O*NET 呈现的 BLS 2025 年数据（25-1112.00 精确职业）：年薪第 10 分位 64,250 美元、第 25 分位 88,700 美元、中位 128,500 美元、第 75 分位 176,490 美元、第 90 分位 287,900 美元。OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入。",
+                "answer": "美国五年薪分位64,250/88,700/128,500/176,490/287,900美元（2025精确25-1112.00）。OEWS雇主工资统计包括激励工资和生产奖金，排加班及非生产奖金、雇主福利和自雇。高校教师未列小时工资，不按2080小时或月份自行折算；年薪按雇主报告，不假定所有合同期一致。分位不是起薪或个人实发。",
                 "id": "law-teachers-postsecondary.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.law-teachers-postsecondary.us-pay",
@@ -8299,13 +8341,15 @@
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业为 Job Zone 第五级（多数要求研究生学历，部分要求 Ph.D.、M.D. 或 J.D. 法律学位；通常需要五年以上相关积累，SVP 8.0 及以上）。O*NET 证书目录只说明可能关联的认证发现入口；具体资格是否必需以及能否执业，仍须核对实际司法辖区和雇主规则。本页不构成法律意见。",
+                "answer": "O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。中国资格认定与单校招聘分别核。",
                 "id": "law-teachers-postsecondary.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.law-teachers-postsecondary.education-path",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "source-pack-onet-details",
+                  "review-bls",
+                  "review-teacherlaw",
+                  "review-gzhu"
                 ]
               },
               {
@@ -8319,17 +8363,17 @@
                 ]
               },
               {
-                "answer": "美国侧按 O*NET 呈现的 BLS 精确职业口径：2024 年就业 29,500 人、2024—2034 预测增长 2%、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。",
                 "id": "law-teachers-postsecondary.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.law-teachers-postsecondary.outlook-transition",
                 "source_refs": [
-                  "source-pack-onet-summary",
-                  "source-pack-onet-details"
+                  "review-bls",
+                  "review-trends"
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的课程大纲交付一节课教学设计、讨论问题、评分标准与示例判分；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。本页不构成法律意见。",
+                "answer": "用路径LT-01完成固定R1与A/B两份评分：A4/B0、10分钟设计、两反馈和修订记录，七日逐项复盘；全部虚构，不是实际教学绩效或许可。",
                 "id": "law-teachers-postsecondary.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.law-teachers-postsecondary.career-worth",
@@ -8339,7 +8383,7 @@
                 ]
               },
               {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；高校法学教师页面提供职业决策与安全试验信息，不构成法律意见，也不替代所在地法律、教育、安全或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 25-1112.00「Law Teachers, Postsecondary」这一精确职业。",
+                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。高校法学教师页面提供职业决策与安全试验信息，不构成法律意见，也不替代所在地法律、教育、安全或其他专业意见。任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 25-1112.00「Law Teachers, Postsecondary」这一精确职业。",
                 "id": "law-teachers-postsecondary.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.law-teachers-postsecondary.boundary",
@@ -8606,6 +8650,201 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/25-1112.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "精确职业旧期，空缺含增长替换，与2025—2035分别陈述。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-trends",
+                "limitation": "精确职业旧期，空缺含增长替换，与2025—2035分别陈述。",
+                "market": "美国",
+                "name": "O*NET精确25-1112.00旧期就业趋势",
+                "period": "2024—2034",
+                "publisher": "O*NET / BLS",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/localtrends/25-1112.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "25-1112行：25.8→26.5千人、2.6%、净增0.7千、年均空缺1.8千；总体预测非AI归因。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-bls",
+                "limitation": "25-1112行：25.8→26.5千人、2.6%、净增0.7千、年均空缺1.8千；总体预测非AI归因。",
+                "market": "美国",
+                "name": "BLS精确法学教师2025—2035就业预测",
+                "period": "2025—2035",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "bounded",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "教育门类非私营133539/私营63908元税前年均分列，排个体自由职业，非高校法学教师精确分位或起薪。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-nbs",
+                "limitation": "教育门类非私营133539/私营63908元税前年均分列，排个体自由职业，非高校法学教师精确分位或起薪。",
+                "market": "中国大陆",
+                "name": "NBS2025城镇单位分行业平均工资",
+                "period": "2025统计；2026-05-16发布",
+                "publisher": "国家统计局",
+                "scope": "bounded",
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "单机构教学科研岗、按类别学位科研职称条件；综合年薪无具体工资金额，租房安家科研等不冒工资或全国门槛；当前是否仍招聘未核。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-gzhu",
+                "limitation": "单机构教学科研岗、按类别学位科研职称条件；综合年薪无具体工资金额，租房安家科研等不冒工资或全国门槛；当前是否仍招聘未核。",
+                "market": "中国广州",
+                "name": "广州大学法学院2026教学科研岗招聘公告",
+                "period": "2026-06-01公告",
+                "publisher": "广州大学法学院",
+                "scope": "bounded",
+                "url": "https://fx.gzhu.edu.cn/info/1065/12208.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "第10—13条教师资格认定与学历条件，学历不等于认定或招聘；高校资格学历本科或研究生不代表各校聘任只需本科。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-teacherlaw",
+                "limitation": "第10—13条教师资格认定与学历条件，学历不等于认定或招聘；高校资格学历本科或研究生不代表各校聘任只需本科。",
+                "market": "中国大陆",
+                "name": "中华人民共和国教师法资格与任用条文",
+                "period": "2009修正文本；本轮有界核对",
+                "publisher": "中华人民共和国教育部",
+                "scope": "bounded",
+                "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/tnull_1314.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "高校主体、学术委员会调查认定与程序、导师检查审核和原始数据保存；线索非作者自定不端结论。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-academic",
+                "limitation": "高校主体、学术委员会调查认定与程序、导师检查审核和原始数据保存；线索非作者自定不端结论。",
+                "market": "中国大陆",
+                "name": "高等学校预防与处理学术不端行为办法",
+                "period": "教育部令40号；2016-09-01施行",
+                "publisher": "教育部；北京市政府公布",
+                "scope": "bounded",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_59345.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "教师身份不自动取得律师权限；官方文本列法学教育研究人员可依法申请兼职执业；具体申请按司法行政机关现行规则核验，不以课堂身份授法律服务权限。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-lawyerlaw",
+                "limitation": "教师身份不自动取得律师权限；官方文本列法学教育研究人员可依法申请兼职执业；具体申请按司法行政机关现行规则核验，不以课堂身份授法律服务权限。",
+                "market": "中国大陆",
+                "name": "中华人民共和国律师法2026修正官方公布文本",
+                "period": "2026-08-28修正",
+                "publisher": "北京市司法局",
+                "scope": "bounded",
+                "url": "https://sfj.beijing.gov.cn/sfj/zwgk/2024zcwj/744120751/fl91/744123073/index.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "仅核修改决定施行日期，不替代全部律师执业条件。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-law-effective",
+                "limitation": "仅核修改决定施行日期，不替代全部律师执业条件。",
+                "market": "中国大陆",
+                "name": "律师法修改决定施行日期",
+                "period": "2026-08-28公布；2026-09-01施行",
+                "publisher": "最高人民法院转载受权发布",
+                "scope": "bounded",
+                "url": "https://www.court.gov.cn/xinshidai/xiangqing/510011.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只支持职责产出比较，不授跨学科教学、行政或律师资格。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-adj-admin",
+                "limitation": "只支持职责产出比较，不授跨学科教学、行政或律师资格。",
+                "market": "美国",
+                "name": "O*NET教育行政管理者职责定义",
+                "period": "本轮相关定义",
+                "publisher": "O*NET OnLine",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/summary/11-9033.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只支持职责产出比较，不授跨学科教学、行政或律师资格。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-adj-polit",
+                "limitation": "只支持职责产出比较，不授跨学科教学、行政或律师资格。",
+                "market": "美国",
+                "name": "O*NET政治学家职责定义",
+                "period": "本轮相关定义",
+                "publisher": "O*NET OnLine",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/summary/19-3094.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只支持职责产出比较，不授跨学科教学、行政或律师资格。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-adj-lawyer",
+                "limitation": "只支持职责产出比较，不授跨学科教学、行政或律师资格。",
+                "market": "美国",
+                "name": "O*NET律师职责定义",
+                "period": "本轮相关定义",
+                "publisher": "O*NET OnLine",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/summary/23-1011.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只支持职责产出比较，不授跨学科教学、行政或律师资格。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-adj-business",
+                "limitation": "只支持职责产出比较，不授跨学科教学、行政或律师资格。",
+                "market": "美国",
+                "name": "O*NET商学教师职责定义",
+                "period": "本轮相关定义",
+                "publisher": "O*NET OnLine",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/summary/25-1011.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只支持职责产出比较，不授跨学科教学、行政或律师资格。"
+                ],
+                "evidence_type": "本轮相关一手资料",
+                "id": "review-adj-area",
+                "limitation": "只支持职责产出比较，不授跨学科教学、行政或律师资格。",
+                "market": "美国",
+                "name": "O*NET地区民族文化研究教师职责定义",
+                "period": "本轮相关定义",
+                "publisher": "O*NET OnLine",
+                "scope": "bounded",
+                "url": "https://www.onetonline.org/link/summary/25-1062.00"
               }
             ]
           },
@@ -8649,13 +8888,83 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "cn-wage-attempt",
+              "$source": "review-adj-admin",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": {
+              "$source": "review-adj-admin",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-adj-polit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-adj-polit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-adj-lawyer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-adj-lawyer",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-adj-business",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-adj-business",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "review-adj-area",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "label": {
+              "$source": "review-adj-area",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8685,7 +8994,7 @@
             "职业方向": "政治学家"
           },
           {
-            "关键区别": "核心产出是为当事人提供代理与辩护。",
+            "关键区别": "诉讼代理、文书及法律交易服务；教学身份不自动授执业权限。",
             "更适合什么选择": "愿意做法律实务时比较。",
             "核心工作与产出": {
               "$item": "law-teachers-postsecondary.direction-comparison.adjacent-career-comparison-table.4",
@@ -8740,7 +9049,7 @@
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
             "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "适用范围": "本职业发现入口，非GenAI效果。",
             "链接": {
               "$source": "source-pack-onet-custom",
               "block": "source-register",
@@ -8812,26 +9121,7 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
-            "来源": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
-            "链接": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            }
-          },
-          {
-            "使用限制": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+            "使用限制": "美国职业资料，不替代许可。",
             "来源": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
@@ -8839,8 +9129,8 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "精确教学评分研究任务",
+            "结论": "支持职业职责，不是AI效果",
             "链接": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
@@ -8850,7 +9140,7 @@
             }
           },
           {
-            "使用限制": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+            "使用限制": "招聘提及非GenAI采用或效率。",
             "来源": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -8858,10 +9148,29 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025美国招聘提及",
+            "结论": "Office/Excel3%、PowerPoint2%；另三项Notavailable",
             "链接": {
               "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "不是AI归因、裁撤日期或当前招聘。",
+            "来源": {
+              "$source": "review-bls",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "研究对象": "BLS2025—2035精确总体就业预测",
+            "结论": "增长2.6%，年均空缺1800",
+            "链接": {
+              "$source": "review-bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8927,16 +9236,16 @@
             "问题": "任务暴露能推导裁撤时间吗？"
           },
           {
-            "回答": "不能。教学目标与考核对齐、评分与学术判断、学生指导与研究结论必须由教师负责。",
+            "回答": "O*NET列考核评分、研究发表与学生指导任务；工具草稿须回原文和评分标准，不能直接授权正式评分。",
             "来源": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "source-pack-onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
             "链接": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "source-pack-onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9010,7 +9319,7 @@
             "当前变化": "辅助信息汇总"
           },
           {
-            "人的控制点": "按法定授权和指挥链升级。",
+            "人的控制点": "按学校评分复议和学术程序处理，不把线索自定不端。",
             "任务": "关键判断",
             "工作方向": "评分与反馈",
             "当前变化": "不作自动授权"
@@ -9157,7 +9466,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "工具辅助仅编辑建议；实际采用效果未建立，教学评分研究须人工核原文。"
         ],
         "heading": "高校法学教师的工作对象与 AI 边界"
       },
@@ -9212,49 +9521,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "id": "law-teachers-postsecondary.display.source.0",
-            "label": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "scope": "O*NET 25-1112.00 精确职业范围，不建立中国映射或执业授权。"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "id": "law-teachers-postsecondary.display.source.1",
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "scope": "O*NET 证书目录只用于发现可能的认证入口，不等于资格必需或执业许可。"
-          },
-          {
-            "href": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.2",
+            "id": "law-teachers-postsecondary.review.source-pack-onet-details",
             "label": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
@@ -9262,25 +9535,79 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
+            "scope": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或执业授权。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.3",
+            "id": "law-teachers-postsecondary.review.review-bls",
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "本次有界检索未建立与该精确职业对应的中国大陆全国工资分布。"
+            "scope": "25-1112行：25.8→26.5千人、2.6%、净增0.7千、年均空缺1.8千；总体预测非AI归因。"
+          },
+          {
+            "href": {
+              "$source": "review-teacherlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-teacherlaw",
+            "label": {
+              "$source": "review-teacherlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "第10—13条教师资格认定与学历条件，学历不等于认定或招聘；高校资格学历本科或研究生不代表各校聘任只需本科。"
+          },
+          {
+            "href": {
+              "$source": "review-gzhu",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-gzhu",
+            "label": {
+              "$source": "review-gzhu",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "单机构教学科研岗、按类别学位科研职称条件；综合年薪无具体工资金额，租房安家科研等不冒工资或全国门槛；当前是否仍招聘未核。"
+          },
+          {
+            "href": {
+              "$source": "review-lawyerlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-lawyerlaw",
+            "label": {
+              "$source": "review-lawyerlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "教师身份不自动取得律师权限；官方文本列法学教育研究人员可依法申请兼职执业；具体申请按司法行政机关现行规则核验，不以课堂身份授法律服务权限。"
           }
         ],
         "tracks": [
@@ -9288,7 +9615,7 @@
             "id": "graduate-and-research",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
                 "next_moves": {
                   "$item": "law-teachers-postsecondary.path.career-path-block.7",
                   "block": "path",
@@ -9307,33 +9634,33 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "入口与试验阶段 1"
+                "role": "LT-01纸面教学评分"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
                 "next_moves": {
                   "$item": "law-teachers-postsecondary.path.career-path-block.8",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 2"
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
+                "role": "逐项评分复核"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 3"
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
+                "role": "反馈修订"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 4"
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
+                "role": "核目标岗位条件"
               }
             ],
             "title": "研究生与科研训练"
@@ -9342,31 +9669,31 @@
             "id": "independent-teaching",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "独立交付阶段 1"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "独立交付阶段 2"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "独立交付阶段 3"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "独立交付阶段 4"
               }
             ],
@@ -9376,31 +9703,31 @@
             "id": "expanded-responsibility",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "扩大责任阶段 1"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "扩大责任阶段 2"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "扩大责任阶段 3"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
+                "credentials": "学位、资格认定、录用及律师许可分别核。",
+                "next_moves": "核目标学校具体学科科研教学要求再决定投入。",
+                "readiness_evidence": "LT-01四作品；实际教学研究另经机构评价。",
+                "responsibility": "仅纸面练习；真实课程评分按机构教学授权。",
                 "role": "扩大责任阶段 4"
               }
             ],
@@ -9564,7 +9891,7 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能造成成绩争议与学术信任受损。",
             "evidence_refs": [
-              "cn-wage-attempt"
+              "law-teachers-postsecondary.review.source-pack-onet-details"
             ],
             "id": "risk-1",
             "mitigation": "公布评分标准与依据、保留批改与复议记录、按学校流程处理学术不端线索。",
@@ -9580,10 +9907,10 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能构成学术不端并损害学术声誉。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "law-teachers-postsecondary.review.review-academic"
             ],
             "id": "risk-2",
-            "mitigation": "规范引用与数据管理、保存原始资料与过程记录、按期刊与学校规范处理署名。",
+            "mitigation": "核原文引用数据署名，保留线索并按学校程序报告；不自行认定。",
             "scenario": "引用不当、数据存疑或署名争议。",
             "title": {
               "$item": "law-teachers-postsecondary.risk.career-risk-cards.2",
@@ -9596,10 +9923,10 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能误导学生并越出教学与执业边界。",
             "evidence_refs": [
-              "source-pack-onet-details"
+              "law-teachers-postsecondary.review.review-lawyerlaw"
             ],
             "id": "risk-3",
-            "mitigation": "以教学与学术讨论为限、明确不构成法律意见、必要时提示学生寻求执业律师。",
+            "mitigation": "教学与另行受托执业分开核身份权限；未核授权先转介。",
             "scenario": "把课堂讨论变成针对具体个案的法律结论、或对学生提供超出职责的法律意见。",
             "title": {
               "$item": "law-teachers-postsecondary.risk.career-risk-cards.3",
@@ -9612,10 +9939,10 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能侵犯学生权益并影响考核公平。",
             "evidence_refs": [
-              "source-pack-onet-hot_tech"
+              "law-teachers-postsecondary.review.source-pack-onet-details"
             ],
             "id": "risk-4",
-            "mitigation": "按最小必要使用、限定系统与范围、考题按制度管理。",
+            "mitigation": "真实成绩考题仅用机构批准环境，公开样本全虚构。",
             "scenario": "成绩、学生信息或考试内容在未授权范围内处理或外泄。",
             "title": {
               "$item": "law-teachers-postsecondary.risk.career-risk-cards.4",
@@ -9628,7 +9955,7 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能影响教学质量与个人健康。",
             "evidence_refs": [
-              "source-pack-onet-industry"
+              "law-teachers-postsecondary.review.source-pack-onet-details"
             ],
             "id": "risk-5",
             "mitigation": "按优先级安排教学与研究工作、保留核心准备与评估步骤、必要时按制度申请支持与调整。",
@@ -9644,7 +9971,7 @@
             "affected_roles": "高校法学教师",
             "consequence": "可能造成程序不当与越界风险。",
             "evidence_refs": [
-              "source-pack-onet-localcert"
+              "law-teachers-postsecondary.review.review-academic"
             ],
             "id": "risk-6",
             "mitigation": "先停止相关动作，把事实、影响与待决问题按学校制度报告或转介给有权限的部门。",
@@ -9656,49 +9983,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "id": "law-teachers-postsecondary.display.source.0",
-            "label": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "scope": "O*NET 25-1112.00 精确职业范围，不建立中国映射或执业授权。"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "id": "law-teachers-postsecondary.display.source.1",
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "scope": "O*NET 证书目录只用于发现可能的认证入口，不等于资格必需或执业许可。"
-          },
-          {
-            "href": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.2",
+            "id": "law-teachers-postsecondary.review.source-pack-onet-details",
             "label": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
@@ -9706,25 +9997,61 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
+            "scope": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或执业授权。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-academic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.3",
+            "id": "law-teachers-postsecondary.review.review-academic",
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-academic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "本次有界检索未建立与该精确职业对应的中国大陆全国工资分布。"
+            "scope": "高校主体、学术委员会调查认定与程序、导师检查审核和原始数据保存；线索非作者自定不端结论。"
+          },
+          {
+            "href": {
+              "$source": "review-lawyerlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-lawyerlaw",
+            "label": {
+              "$source": "review-lawyerlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "教师身份不自动取得律师权限；官方文本列法学教育研究人员可依法申请兼职执业；具体申请按司法行政机关现行规则核验，不以课堂身份授法律服务权限。"
+          },
+          {
+            "href": {
+              "$source": "review-teacherlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-teacherlaw",
+            "label": {
+              "$source": "review-teacherlaw",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "第10—13条教师资格认定与学历条件，学历不等于认定或招聘；高校资格学历本科或研究生不代表各校聘任只需本科。"
           }
         ]
       },
@@ -9732,19 +10059,19 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "2025教育非私营行业均值",
+              "数值": "133,539元/年",
+              "说明": "税前年均、行业背景，非本职业分位。"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "2025教育私营行业均值",
+              "数值": "63,908元/年",
+              "说明": "同口径分列，不拼本职业范围。"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "广州大学2026单公告",
+              "数值": "未列具体综合年薪金额",
+              "说明": "博士科研职称逐岗位核，补助不当工资。"
             }
           ],
           "china_ai_row": {
@@ -9761,24 +10088,24 @@
           },
           "china_edu_table": [
             {
-              "学历段": "证据不足：未建立安全映射（硕士）",
-              "岗位方向": "按主管部门与学校规定核验",
-              "说明": "不使用代理数字。"
+              "学历段": "资格学历条件",
+              "岗位方向": "研究生或大学本科",
+              "说明": "教师法第11条，高校资格条件非每校招聘门槛。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（博士）",
-              "岗位方向": "按主管部门与学校规定核验",
-              "说明": "不使用代理数字。"
+              "学历段": "资格认定",
+              "岗位方向": "认定与录用分开",
+              "说明": "教师法第10/13条，不凭学位自动取得。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体机构要求核验",
-              "说明": "不使用代理数字。"
+              "学历段": "广州大学单校招聘",
+              "岗位方向": "逐类别博士科研职称条件",
+              "说明": "2026-06-01，非全国统一门槛。"
             },
             {
-              "学历段": "证据不足：未建立安全映射（其他）",
-              "岗位方向": "按具体机构要求核验",
-              "说明": "不使用代理数字。"
+              "学历段": "兼职法律实务",
+              "岗位方向": "须另核律师执业身份",
+              "说明": "不由教师身份或免责文字授权。"
             }
           ],
           "china_industry_table": [
@@ -9798,7 +10125,7 @@
           "china_intl": {
             "$join": [
               {
-                "$source": "source-pack-onet-custom",
+                "$source": "source-pack-onet-details",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9806,7 +10133,7 @@
               },
               "｜",
               {
-                "$source": "source-pack-onet-custom",
+                "$source": "source-pack-onet-details",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -9825,7 +10152,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "cn-wage-attempt",
+                "$source": "review-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9833,7 +10160,7 @@
               },
               "｜",
               {
-                "$source": "cn-wage-attempt",
+                "$source": "review-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -9866,7 +10193,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "cn-wage-attempt",
+                "$source": "review-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9874,7 +10201,7 @@
               },
               "｜",
               {
-                "$source": "cn-wage-attempt",
+                "$source": "review-nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -9901,7 +10228,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "cn-wage-attempt",
+              "$source": "source-pack-onet-localwages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -9909,7 +10236,7 @@
             },
             "｜",
             {
-              "$source": "cn-wage-attempt",
+              "$source": "source-pack-onet-localwages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9925,7 +10252,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -9933,7 +10260,7 @@
                 },
                 "｜",
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -9949,7 +10276,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "source-pack-onet-custom",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -9957,7 +10284,7 @@
                 },
                 "｜",
                 {
-                  "$source": "source-pack-onet-custom",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -9973,7 +10300,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -9981,7 +10308,7 @@
                 },
                 "｜",
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -9997,7 +10324,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "source-pack-onet-custom",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10005,7 +10332,7 @@
                 },
                 "｜",
                 {
-                  "$source": "source-pack-onet-custom",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10021,7 +10348,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10029,7 +10356,7 @@
                 },
                 "｜",
                 {
-                  "$source": "cn-wage-attempt",
+                  "$source": "source-pack-onet-localwages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10042,17 +10369,74 @@
           {
             "指标": "就业 · 规模",
             "数值": "29,500 人（2024 年）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": {
+              "$join": [
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
           },
           {
             "指标": "就业 · 增长",
             "数值": "2%（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": {
+              "$join": [
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
           },
           {
             "指标": "就业 · 空缺",
             "数值": "2,200 个/年（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "说明": {
+              "$join": [
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "review-trends",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "law-teachers-postsecondary.source-register.published.1"
+                }
+              ],
+              "separator": ""
+            }
           }
         ],
         "boundary": "美国精确职业与父级或代理口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10082,7 +10466,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "2%（2024—2034，slower than average）",
+        "growth": "2.6%（BLS2025—2035）；旧期2%（2024—2034）",
         "heading": {
           "$item": "law-teachers-postsecondary.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10095,12 +10479,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "O*NET 行业页，2026 年访问",
+        "industry_period": "O*NET details行业统计2024；2026访问",
         "industry_rows": [
           {
             "industry": "教育服务（Educational Services）",
             "median": "暂无安全数值",
-            "note": "O*NET 行业页显示占 100%；未提供行业工资数值。"
+            "note": "2024教育服务100%就业，非行业工资。"
           },
           {
             "industry": "其他未单列行业",
@@ -10145,11 +10529,11 @@
         ],
         "median": "128,500 美元/年（2025 年，精确职业口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "BLS 就业预测 2024—2034（经 O*NET 呈现，2026 年访问）",
+        "outlook_period": "BLS2025—2035与O*NET旧期2024—2034分列",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "小时口径",
           "解释"
         ],
         "wage_heading": {
@@ -10255,12 +10639,12 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "高校法学教师",
+            "geography": "美国",
+            "horizon": "2025—2035",
+            "interpretation": "BLS精确25-1112新期2025就业25,800→2035年26,500、增长2.6%、表列净增700，年均空缺1,800，含增长与替换，不等净新增或当前招聘。",
+            "limitation": "总体预测非AI因果、净新增或个人保证。",
+            "metric": "新期就业预测",
+            "occupation_scope": "25-1112精确职业",
             "value": {
               "$item": "law-teachers-postsecondary.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10269,61 +10653,79 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
+            "geography": "美国",
+            "horizon": "2024—2034",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
             "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "高校法学教师",
-            "value": "暂无安全数值"
+            "metric": "旧期预测",
+            "occupation_scope": "25-1112.00精确职业",
+            "value": "O*NET旧期2024就业29,500→2034年30,200、增长2%、年均空缺2,200；新旧期分列，不相加。"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
+            "geography": "中国广州",
+            "horizon": "2026-06-01公告",
             "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "高校法学教师",
-            "value": "暂无安全数值"
+            "limitation": "非全国需求、工资分位或当前仍招证明。",
+            "metric": "单机构样本",
+            "occupation_scope": "广州大学法学院教学科研岗",
+            "value": "六学科方向，博士及分项职称科研条件；未列具体综合年薪金额"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "cn-wage-attempt",
+              "$source": "review-bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.0",
+            "id": "law-teachers-postsecondary.review.review-bls",
             "label": {
-              "$source": "cn-wage-attempt",
+              "$source": "review-bls",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "O*NET 25-1112.00 精确职业范围，不建立中国映射或执业授权。"
+            "scope": "25-1112行：25.8→26.5千人、2.6%、净增0.7千、年均空缺1.8千；总体预测非AI归因。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-custom",
+              "$source": "review-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.1",
+            "id": "law-teachers-postsecondary.review.review-trends",
             "label": {
-              "$source": "source-pack-onet-custom",
+              "$source": "review-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "O*NET 证书目录只用于发现可能的认证入口，不等于资格必需或执业许可。"
+            "scope": "精确职业旧期，空缺含增长替换，与2025—2035分别陈述。"
+          },
+          {
+            "href": {
+              "$source": "review-gzhu",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "id": "law-teachers-postsecondary.review.review-gzhu",
+            "label": {
+              "$source": "review-gzhu",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "law-teachers-postsecondary.source-register.published.1"
+            },
+            "scope": "单机构教学科研岗、按类别学位科研职称条件；综合年薪无具体工资金额，租房安家科研等不冒工资或全国门槛；当前是否仍招聘未核。"
           },
           {
             "href": {
@@ -10333,7 +10735,7 @@
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "id": "law-teachers-postsecondary.display.source.2",
+            "id": "law-teachers-postsecondary.review.source-pack-onet-details",
             "label": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
@@ -10341,25 +10743,7 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "id": "law-teachers-postsecondary.display.source.3",
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "scope": "本次有界检索未建立与该精确职业对应的中国大陆全国工资分布。"
+            "scope": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或执业授权。"
           }
         ],
         "transitions": [
@@ -10379,15 +10763,15 @@
             "target_href": "/zh/career/jobs/education-administrators-postsecondary",
             "target_slug": "education-administrators-postsecondary",
             "target_title": "高校教育行政管理者",
-            "transition_distance": "需补证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
             "capability_gaps": "政治学课程与学科体系",
-            "shared_capabilities": "政治与制度研究方法",
+            "shared_capabilities": "研究写作、课程或工单记录可作比较基础，目标学科和行政能力须另举证。",
             "target_href": "/zh/career/jobs/political-scientists",
             "target_slug": "political-scientists",
             "target_title": "政治学家",
-            "transition_distance": "中等，需补学科教学证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
             "capability_gaps": "执业许可与代理立场",
@@ -10395,15 +10779,15 @@
             "target_href": "/zh/career/jobs/lawyers",
             "target_slug": "lawyers",
             "target_title": "律师",
-            "transition_distance": "中等，需补执业资格证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
             "capability_gaps": "商科课程体系与研究",
-            "shared_capabilities": "商法与管理类课程基础",
+            "shared_capabilities": "研究写作、课程或工单记录可作比较基础，目标学科和行政能力须另举证。",
             "target_href": "/zh/career/jobs/business-teachers-postsecondary",
             "target_slug": "business-teachers-postsecondary",
             "target_title": "商学教师（高等教育）",
-            "transition_distance": "中等，需补商科教学证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
             "capability_gaps": "学科研究与课程体系差异",
@@ -10411,15 +10795,15 @@
             "target_href": "/zh/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary",
             "target_slug": "area-ethnic-and-cultural-studies-teachers-postsecondary",
             "target_title": "高校地区、民族和文化研究教师",
-            "transition_distance": "中等，需补学科研究证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           },
           {
             "capability_gaps": "高校行政管理与资源统筹",
-            "shared_capabilities": "院系与项目协调经验",
+            "shared_capabilities": "与第一项同为教育行政，仅补项目协调专项核对，不新增第六职业。",
             "target_href": "/zh/career/jobs/education-administrators-postsecondary",
             "target_slug": "education-administrators-postsecondary",
             "target_title": "高校教育行政管理者",
-            "transition_distance": "中等，需补行政管理证据"
+            "transition_distance": "须补目标学科职责与资格证据，不量化距离"
           }
         ]
       },
@@ -10618,7 +11002,7 @@
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "完成LT-01固定题、A4/B0评分与四作品七日，见路径。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -10661,40 +11045,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "label": {
-              "$source": "cn-wage-attempt",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
               "$source": "source-pack-onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10708,109 +11058,58 @@
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或执业授权。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-academic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "review-academic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "高校主体、学术委员会调查认定与程序、导师检查审核和原始数据保存；线索非作者自定不端结论。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-industry",
+              "$source": "review-teacherlaw",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
             "label": {
-              "$source": "source-pack-onet-industry",
+              "$source": "review-teacherlaw",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "第10—13条教师资格认定与学历条件，学历不等于认定或招聘；高校资格学历本科或研究生不代表各校聘任只需本科。"
           },
           {
             "href": {
-              "$source": "source-pack-onet-localcert",
+              "$source": "review-gzhu",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
             "label": {
-              "$source": "source-pack-onet-localcert",
+              "$source": "review-gzhu",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "law-teachers-postsecondary.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "law-teachers-postsecondary.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "单机构教学科研岗、按类别学位科研职称条件；综合年薪无具体工资金额，租房安家科研等不冒工资或全国门槛；当前是否仍招聘未核。"
           }
         ]
       },
@@ -10891,7 +11190,7 @@
             "item": "law-teachers-postsecondary.source-register.published.1"
           }
         },
-        "note": "来源说明｜本页按来源原始范围与限制分别核对：O*NET 25-1112.00 提供精确职业身份、任务、工作活动与工作情境（兴趣代码 SI、Job Zone 第五级，主要行业教育服务 100%）；美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业 29,500 人；2024—2034 预测增长 2%、预计年均空缺 2,200 个、2034 年预测就业 30,200 人；2025 年年薪第 10 分位 64,250 美元、第 25 分位 88,700 美元、中位 128,500 美元、第 75 分位 176,490 美元、第 90 分位 287,900 美元）；O*NET 证书目录只用于发现认证入口，不等于资格必需或执业许可；技术页面提及率不等于岗位必需或自动化率；本次有界检索未建立与该精确职业对应的中国大陆全国工资分布，本页不提供中国职业工资数字。所有来源均不建立中国映射、中国工资或执业授权；本页不构成法律意见。"
+        "note": "来源分别支持职责、工资、新旧就业期、中国教育行业年均、单校招聘与资格规范；不跨法域拼接，不把教学身份授律师权限。全国职业工资需求及AI效果因果缺口公开，行业均值补助样本不代填。"
       },
       "work_context_block": {
         "$item": "law-teachers-postsecondary.profile.work-context-block.5",
@@ -10901,6 +11200,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "高校法学教学方向",
+      "interface.fit.interest_code_heading": "官方兴趣代码 SI"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -10932,26 +11235,27 @@
     "facts": [
       {
         "derivation": null,
-        "display_value": "AI 可辅助材料初稿与检索整理，但教学目标与考核对齐、评分判断、学生指导与研究结论仍由教师承担",
+        "display_value": "AI资料整理仅受控编辑建议，实际采用与提效幅度未建立；教学评分研究须人工核原文。",
         "fact_id": "ai-task",
         "market": "美国",
         "measure": "来源绑定的职业事实",
         "occupation_scope": "高校法学教师；25-1112.00",
-        "period": "current page; accessed 2026-08-31",
+        "period": "本页编辑建议",
         "source_refs": [
-          "source-pack-onet-hot_tech"
+          "source-pack-onet-details"
         ]
       },
       {
         "derivation": null,
-        "display_value": "Job Zone 第五级：多数要求研究生学历，部分要求 Ph.D.、M.D. 或 J.D. 法律学位；资格与执业仍按辖区与雇主规则核对",
+        "display_value": "O*NET Job Zone第五级是同区职业通用准备说明，不是本职业统一M.D.要求或五年执业门槛。本职业教育调查46%专业学位、35%博士、15%硕士；BLS精确25-1112典型入门为博士或专业学位、相关经验少于5年、OJT无列项，均美国统计而非个人许可。",
         "fact_id": "entry",
         "market": "美国",
         "measure": "来源绑定的职业事实",
         "occupation_scope": "高校法学教师；25-1112.00",
-        "period": "current page; accessed 2026-08-31",
+        "period": "当前准备资料与2025典型入门统计",
         "source_refs": [
-          "source-pack-onet-localtraining"
+          "source-pack-onet-details",
+          "review-bls"
         ]
       },
       {
@@ -10973,9 +11277,9 @@
         "market": "美国",
         "measure": "来源绑定的职业事实",
         "occupation_scope": "高校法学教师；25-1112.00",
-        "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+        "period": "2024—2034就业预测",
         "source_refs": [
-          "source-pack-onet-summary"
+          "review-trends"
         ]
       },
       {
@@ -11061,6 +11365,42 @@
         "source_refs": [
           "source-pack-onet-summary"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "预测增长2.6%（2025—2035，精确25-1112）",
+        "fact_id": "us-growth-2025-2035",
+        "market": "US",
+        "measure": "projected employment change",
+        "occupation_scope": "25-1112 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "review-bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "就业25,800人（2025，精确25-1112）",
+        "fact_id": "us-employment-2025",
+        "market": "US",
+        "measure": "employment base",
+        "occupation_scope": "25-1112 exact occupation",
+        "period": "2025",
+        "source_refs": [
+          "review-bls"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均空缺1,800个（2025—2035，含增长替换）",
+        "fact_id": "us-openings-2025-2035",
+        "market": "US",
+        "measure": "projected annual openings",
+        "occupation_scope": "25-1112 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "review-bls"
+        ]
       }
     ]
   },
@@ -11085,21 +11425,21 @@
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2024-2034",
+        "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，2%）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2024",
+        "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2024-2034",
+        "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034）"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11120,7 +11460,7 @@
       "text": "高校法学教师职业判断：教学、学术规范与执业边界"
     }
   },
-  "source_content_sha256": "0496faad371c8002a4c78e51b0c67ac30ad7ab875078ef19fb457334b98e37a8",
+  "source_content_sha256": "8fbb9e60385e675e2fb3bc1909bf13a1aefe7dfc50c66191451e32a3ca4eb9a4",
   "subject": {
     "canonical_slug": "law-teachers-postsecondary",
     "name": "高校法学教师",

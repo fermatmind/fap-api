@@ -23219,7 +23219,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 27-1013.00 的职业身份与工作情境来自该精确职业档案：中位时薪 26.68 美元；中位年薪 55,490 美元（2025，BLS OEWS，经 O*NET 呈现）；2024 年就业约 26,500 人；2024—2034 年预计下降（-1% 或更低）；预计年均岗位空缺约 2,200 个。该职业的学历调查百分比官方未公布，本页按缺口登记。"
+              "O*NET 27-1013.00 的职业身份与工作情境来自该精确职业档案：中位时薪 26.68 美元；中位年薪 55,490 美元（2025，BLS OEWS，经 O*NET 呈现）；2024 年就业约 26,500 人；2024—2034 年预计下降（-1% 或更低）；预计年均岗位空缺约 2,200 个。该职业的学历类别百分比本页所核O*NET摘要/详细页尚未取得，本页按缺口登记。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.profile.onet-structured-fields-block.2",
@@ -23248,7 +23248,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局 2025 年城镇单位工资：未单列本职业全国值；本页以「文化、体育和娱乐业」（非私营 129,447 元/年、私营 64,015 元/年）与「教育」（非私营 133,539 元/年、私营 63,908 元/年）行业平均工资，以及规模以上企业岗位类别平均工资（中层及以上管理人员 210,016 元/年、办事人员和有关人员 94,936 元/年）作代理，仅说明背景，不能替代本职业工资或个人创作收入。"
+              "本页所核国家统计局2025行业与岗位类别工资资料未取得本职业精确全国工资；文化体育娱乐、教育行业及企业岗位类别均值仅作背景，不能替代个人创作、稿费或作品销售收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.profile.onet-structured-fields-block.3",
@@ -23277,7 +23277,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "口径提示：O*NET 27-1013.00 的工资（中位时薪 26.68 美元、中位年薪 55,490 美元）、就业（2024 年约 26,500 人）、增长（2024—2034 年下降 -1% 或更低）与岗位空缺（约 2,200 个/年）均为该精确职业口径；该职业的学历调查百分比官方未公布，本页按缺口登记、不代填。分行业值来自 BLS OOH 的职业组口径并在正文逐处标注。"
+              "口径提示：O*NET 27-1013.00 的工资（中位时薪 26.68 美元、中位年薪 55,490 美元）、就业（2024 年约 26,500 人）、增长（2024—2034 年下降 -1% 或更低）与岗位空缺（约 2,200 个/年）均为该精确职业口径；该职业的学历类别百分比本页所核O*NET摘要/详细页尚未取得，本页按缺口登记、不代填。分行业值来自 BLS OOH 的职业组口径并在正文逐处标注。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.profile.onet-structured-fields-block.4",
@@ -24238,40 +24238,40 @@
                 "url": "https://www.onetonline.org/link/summary/27-1013.00"
               },
               {
-                "entity": "O*NET OnLine：任务与工作活动资料",
+                "entity": "BLS职业展望：Craft and Fine Artists",
                 "id": "link-2",
-                "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/details/27-1013.00"
-              },
-              {
-                "entity": "BLS OOH：Craft and Fine Artists",
-                "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/arts-and-design/craft-and-fine-artists.htm"
               },
               {
-                "entity": "BLS 职业投影与特征表",
-                "id": "link-4",
-                "relation": "career.authority",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
-              },
-              {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
-                "id": "link-5",
+                "entity": "BLS OEWS工资统计",
+                "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "ILO 工作论文 96：Generative AI and Jobs（2023）",
-                "id": "link-6",
+                "entity": "ILO工作论文96（2023）",
+                "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/publications/working-papers/WCMS_890761/lang--en/index.htm"
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-global-analysis-potential-effects-job-quantity-and"
               },
               {
-                "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
-                "id": "link-7",
+                "entity": "NIST AI RMF 1.0",
+                "id": "link-5",
                 "relation": "career.authority",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "O*NET本职业资料",
+                "id": "link-6",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
+              },
+              {
+                "entity": "O*NET呈现BLS2024—2034精确预测",
+                "id": "link-7",
+                "relation": "career.authority",
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
               },
               {
                 "entity": "ILO 工作论文 96：任务暴露研究",
@@ -24286,10 +24286,10 @@
                 "url": "https://www.onetonline.org/link/details/27-1013.00"
               },
               {
-                "entity": "BLS 就业预测（2024—2034，经 O*NET 呈现）",
+                "entity": "O*NET呈现2024—2034精确就业预测",
                 "id": "link-10",
                 "relation": "career.evidence",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
               },
               {
                 "entity": "BLS OEWS（May 2025 工资统计）",
@@ -24322,10 +24322,10 @@
                 "url": "https://www.onetonline.org/link/details/27-1013.00"
               },
               {
-                "entity": "BLS 职业投影与特征表",
+                "entity": "O*NET呈现2024—2034精确就业预测",
                 "id": "link-16",
                 "relation": "career.related",
-                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+                "url": "https://www.onetonline.org/link/summary/27-1013.00"
               },
               {
                 "entity": "NIST AI RMF 1.0",
@@ -24521,8 +24521,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-ooh-craft-fine"
           ],
           "type": "prose"
         },
@@ -24536,8 +24535,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "bls-projections-2025-35",
-            "internal-rubric"
+            "bls-ooh-craft-fine"
           ],
           "type": "prose"
         },
@@ -24579,7 +24577,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.25",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24593,7 +24591,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.26",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24607,7 +24605,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "internal-rubric"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -24621,7 +24619,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "internal-rubric"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -24805,7 +24803,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.41",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24819,7 +24817,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.42",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24833,7 +24831,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.43",
           "source_refs": [
-            "internal-rubric"
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -24842,11 +24840,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "多数岗位仅部分任务暴露，生成式 AI 更可能增强而非整体替代；文员类任务暴露最高，管理和专业类职业中高度暴露的任务比例较低；艺术创作类任务中，技术可行不等于可以由机器替代创作判断。"
+              "ILO 2023研究评估全球职业任务的潜在生成式AI暴露，总体讨论增强的可能性；它不是本职业实际采用率或岗位结果调查。本页关于草图辅助与创作判断的划分另属结合本职业任务的编辑分析。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.44",
           "source_refs": [
+            "ilo-wp96",
             "internal-rubric"
           ],
           "type": "prose"
@@ -24861,7 +24860,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.45",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24875,7 +24874,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24889,7 +24888,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24898,11 +24897,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业的核心任务为使用多种媒介创作原创艺术作品：与客户和艺术指导沟通作品内容、整合视觉元素、维护作品集、推广与投稿参展、学习技法、研究主题；其中参考收集、草图变体与图像生成类工序较易被工具辅助，但构思、媒介控制与原创性判断依赖个人。"
+              "O*NET本职业任务包括使用多种媒介创作、与客户沟通、组织视觉元素、维护作品集与研究主题。本页建议将参考整理、草图候选与档案草拟作为可试验辅助环节；效率、采用和交付质量仍需实际验证。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.48",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -24917,7 +24917,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24931,7 +24931,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24945,7 +24945,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24959,7 +24959,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -24973,7 +24973,8 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -24987,7 +24988,8 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25001,7 +25003,8 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25015,7 +25018,8 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "bls-oews-2025"
           ],
           "type": "prose"
         },
@@ -25029,7 +25033,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet-summary"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -25043,7 +25047,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet-summary"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -25057,7 +25061,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet-summary"
+            "nist-ai-rmf"
           ],
           "type": "prose"
         },
@@ -25066,12 +25070,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "框架要求为 AI 使用设定明确的治理与人工监督安排，并记录风险与责任；可用于设计本职业使用生成式工具时的复核与留痕规则，但不是职业前景或就业证据；版权与授权要求以所在地法规与合同原文为准。"
+              "NIST AI RMF 1.0是自愿风险框架，提出治理、风险测绘、衡量与管理；本页据此建议对工具使用设定人工复核与记录。这是编辑应用，不是本职业就业或采用率证据；版权、授权按实际项目另核。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet-summary"
+            "nist-ai-rmf",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25123,13 +25128,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "更准确的判断是参考收集、草图变体、图像生成与档案描述类工序会被工具接手，职业整体以增强与职责重心上移为主。ILO 2023 年的研究显示任务暴露在职业间差异很大，管理和专业类职业中高度暴露的任务比例相对较低，技术可行不等于机构已经采用；而构思取舍、媒介控制、原创性判断与署名责任需要个人承担，因此结论是工作方式会变化，而不是整体被取代。"
+              "本页倾向于把参考整理、草图候选与档案草拟作为辅助机会，把构思、媒介控制、作品完成与署名决策保留人工复核；这是编辑分析。ILO研究与O*NET任务不能证明本职业已普遍采用、必然增强或整体不会被替代。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.64",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "ilo-wp96",
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25138,13 +25144,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 工作论文 96（2023）；O*NET 27-1013.00 任务资料"
+              "ILO全球潜在任务暴露研究；O*NET本职业任务；本页编辑分析"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.65",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "ilo-wp96",
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25153,11 +25160,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "需要，但不是算法的全部。数字工具已进入参考整理、图像生成、版式试排与作品档案环节，会用工具能提高效率；不过这一职业的核心是媒介控制、视觉判断与作品完成度，工具能力不能替代创作练习与作品积累。"
+              "值得学习与方向相关的数字工具，但本页所核软件与任务列表不把编程变成所有美术家的入门条件。可在虚构方案中试验候选生成与档案整理，并记录人工修改；工具技能不能替代媒介控制与作品积累，也不保证效率或收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.66",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25181,13 +25189,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "参考收集与草图变体、图像生成与版式试排、作品照片整理与档案描述等工序受影响最直接；构思取舍、媒介与材料控制、作品完成与署名、与客户和画廊沟通等环节仍以人工为主。"
+              "本页建议先试验参考整理、草图候选、版式试排和档案草拟，并记录质量与返工；构思、媒介控制、作品完成和客户沟通仍须负责人员复核。这是任务分析，不是实测影响排名。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "internal-rubric"
           ],
           "type": "prose"
         },
@@ -25210,13 +25218,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无法给出年份，也不应给出。公开来源没有支持「某年消失」的证据；比较可靠的表述是任务结构与推广渠道会变化，一部分技法性工序被工具接手，而努力成果仍取决于个人创作与市场接受度，属不确定量。"
+              "当前O*NET呈现本精确职业2024—2034下降类别（-1%或更低），2024就业约26,500人、年均空缺2,200个；这是有假设的预测，不是已发生减少，也未单列AI因果。不要与OOH职业组2025—2035预测混期。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -25225,13 +25233,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（2024—2034）；ILO 工作论文 96"
+              "O*NET呈现BLS2024—2034精确职业就业预测"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.71",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -25268,11 +25275,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "优先学三件事：一是基础造型与色彩训练（把观察到的东西准确画出来），二是媒介与材料控制（熟悉所用材质与工具的特性与安全），三是作品完成与档案管理（把系列作品做完整并记录清楚）。三者共同决定能否持续接单与参展。"
+              "本页所核BLS预测与ILO潜在任务暴露研究不能给出本职业消失年份。下降预测仍可有更替空缺，任务可辅助也不等于职业消失；继续核真实岗位与项目变化，不能承诺整体不会被替代。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.74",
           "source_refs": [
+            "onet-summary",
+            "ilo-wp96",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25282,12 +25291,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 27-1013.00；BLS 就业与工资统计"
+              "O*NET旧期间就业预测；ILO潜在任务暴露研究"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.75",
           "source_refs": [
-            "internal-rubric"
+            "onet-summary",
+            "ilo-wp96"
           ],
           "type": "prose"
         },
@@ -25296,11 +25306,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "使用 AI 辅助本职业工作时，建议按以下顺序确认边界与责任："
+              "本页建议优先练基础造型色彩、媒介材料控制、作品完成与档案管理。用本题两种构图、20/60/80费用核对和版本记录观察准备差距；这些与职业任务相关，但七天练习不能保证接单、参展或收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.76",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -25310,11 +25321,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先确认版权、委托合同与工作室安全要求，判断哪些素材与环节可以使用工具，避免未授权使用他人作品或商标。"
+              "O*NET本职业任务；本页虚构练习与准备建议"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.77",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -26019,7 +26031,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未单列「艺术家、油漆工」，没有精确对应的职业工资统计"
+              "本页所核中国行业与岗位类别资料未取得本职业精确工资，代理均值不能当作创作者收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.china-salary.career-snapshot-primary-locale.11",
@@ -26510,7 +26522,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆未建立与「艺术家、油漆工」精确对应的全国单职业工资统计值；下列数值为行业与岗位类别背景代理。"
+              "本页所核中国资料尚未取得本职业精确全国工资分布；以下行业和岗位类别均值只是背景代理，不能当职业中位、起薪或个人报价，不据此断言其他官方资料未发布。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.china-salary.career-snapshot-primary-locale.45",
@@ -26581,7 +26593,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆没有与本职业精确对应的全国单职业月薪或年薪统计值；本页只能给出行业平均工资（文化、体育和娱乐业非私营 129,447、私营 64,015 元/年；教育非私营 133,539、私营 63,908 元/年）与岗位类别均值作背景，无法换算成创作者月收入。"
+              "证据不足：本页所核资料未取得与中国大陆本职业精确对应的全国工资分布；文化体育娱乐2025非私营129,447/私营64,015元/年、教育非私营133,539/私营63,908元/年及岗位类别均值仅作背景，不能换算为创作者月收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.china-salary.career-snapshot-primary-locale.50",
@@ -26715,7 +26727,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET OnLine 艺术家、油漆工（27-1013.00）职业档案｜https://www.onetonline.org/link/summary/27-1013.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS OOH：Craft and Fine Artists（职业组工资与展望）｜https://www.bls.gov/ooh/arts-and-design/craft-and-fine-artists.htm"
+              "O*NET OnLine 美术家（画家、雕塑家与插画师）（27-1013.00）职业档案｜https://www.onetonline.org/link/summary/27-1013.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；BLS OOH：Craft and Fine Artists（职业组工资与展望）｜https://www.bls.gov/ooh/arts-and-design/craft-and-fine-artists.htm"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.us-salary.career-snapshot-secondary-locale.8",
@@ -26884,13 +26896,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 · 就业规模｜约 26,500 人；2024 年精确职业 27-1013 口径，经 O*NET 呈现｜不含多数自雇创作者。"
+              "就业 · 就业规模｜约26,500人；2024年精确27-1013经O*NET呈现｜就业预测矩阵包含自雇，与OEWS受雇工资覆盖不同。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "internal-rubric",
-            "bls-projections-2025-35"
+            "onet-summary",
+            "bls-matrix-methods"
           ],
           "type": "prose"
         },
@@ -26956,7 +26968,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以上为美国 Fine Artists, Including Painters, Sculptors, and Illustrators（O*NET-SOC 27-1013.00）的职业身份、任务与工作情境，以及该精确职业的工资、就业与增长统计；分行业工资来自 BLS OOH 的职业组（craft and fine artists）口径并在表中逐行标注，不能当作本精细职业单列值。该职业的学历调查百分比官方未公布，本页按缺口登记、不代填。"
+              "以上为美国 Fine Artists, Including Painters, Sculptors, and Illustrators（O*NET-SOC 27-1013.00）的职业身份、任务与工作情境，以及该精确职业的工资、就业与增长统计；分行业工资来自 BLS OOH 的职业组（craft and fine artists）口径并在表中逐行标注，不能当作本精细职业单列值。该职业的学历类别百分比本页所核O*NET摘要/详细页尚未取得，本页按缺口登记、不代填。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.us-salary.career-snapshot-secondary-locale.25",
@@ -28206,56 +28218,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "作品集与练习记录（素描、色彩与系列作品）、参展与投稿记录、委托与销售记录是判断适配度最直接的材料。"
+              "本页不把一种性格当成美术家准入条件。可观察是否愿意反复创作、接受修改、处理材料与作品档案，并向委托方说明想法；用具体作品和练习记录判断，不能由性格标签预测天赋或录用。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.46",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
-              "完成一组可展示的系列作品并参加一次公开投稿或小型展览，是成本较低且可信的验证方式。"
-            ]
-          },
-          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.47",
-          "source_refs": [
-            "internal-rubric",
-            "onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
-              "对创作方向没有把握时，可以先以插画或教学等交付节奏较明确的路径为主，同时保持个人创作。"
-            ]
-          },
-          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.48",
-          "source_refs": [
-            "internal-rubric",
-            "onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
-              "收入不稳定是这一职业的常态：多数人需要组合收入（作品销售、委托、教学、兼职）。评估适配度时要同时看创作热情与对不确定性的容忍度。"
-            ]
-          },
-          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.49",
-          "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28265,7 +28233,52 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "该职业的学历调查百分比官方未公布，本页不代填；BLS 指出本职业通常无相关工作经验要求，但雇主常要求长期在职训练与作品证明。"
+              "可以把内向作为沟通偏好观察，不是不能创作的依据。原任务包括独立制作，也包括向客户说明与修改；本页建议用书面创作说明、需求核对与修改记录试验沟通方式，不据此预测成功。"
+            ]
+          },
+          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.47",
+          "source_refs": [
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "外向不是创作质量或收入保证。可以观察能否在合作沟通之外持续独立制作、按要求修改与整理作品档案；用同一委托练习看实际交付，不以外向标签决定是否适合。"
+            ]
+          },
+          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.48",
+          "source_refs": [
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "本页没有用MBTI类型筛选美术家的证据，也不给出最适合类型。可把偏好当自我反思线索，重点仍是构思、制作、修改及沟通记录；不从类型推创作能力、收入或录用。"
+            ]
+          },
+          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.49",
+          "source_refs": [
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "所核O*NET本职业兴趣代码以A艺术型为主、兼R现实型，对应表达审美与动手制作。这是职业活动兴趣描述，不是必须拥有某类型、天赋或录用标准；可用自己的创作与材料操作记录比较。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.50",
@@ -28280,11 +28293,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "少数方向（公共艺术、教学岗位、机构策展）可能要求学历、教师资格或单位编制条件，须按目标单位与所在地规定核对。"
+              "本页没有把人格分数换算成美术家表现预测的依据。记录具体作品是否满足用途、修改要求与交付条件，比用测试标签下结论更合适；测试只可帮助自我观察，不能作录用评分。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.51",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28294,41 +28308,12 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "从事商业委托与合作前，建议先明确署名方式、复制授权范围与交付标准，避免后续争议。"
+              "数学成绩不能单独决定能否从事美术创作。实际任务仍会用尺寸、比例、材料成本和工时；可在本页虚构题面复核尺寸与报价，发现缺项后补相应技能，不把数学分数当作品能力门槛。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.52",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
-              "能否靠这一职业生活，很大程度取决于作品流通渠道与收入组合，而不是单一技能水平。"
-            ]
-          },
-          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.53",
-          "source_refs": [
-            "internal-rubric",
-            "onet-summary"
-          ],
-          "type": "prose"
-        },
-        {
-          "availability": "available",
-          "copy_key": "career.item.personality-fit-block",
-          "data": {
-            "paragraphs": [
-              "在职创作者与自由艺术家：这一职业以作品积累与渠道建设为主，收入结构会随代理、委托与教学比例变化。"
-            ]
-          },
-          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.54",
-          "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28338,11 +28323,42 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "在校学生与转行者：先核对目标方向（绘画、插画、公共艺术、数字内容）与所需作品类型。"
+              "本页不设情商分数门槛。实际委托沟通需要听清需求、说明修改与授权待确认项并保存记录；可用虚构反馈练习表达与复核，不据情商标签预测收入或艺术成就。"
+            ]
+          },
+          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.53",
+          "source_refs": [
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "九型人格只能作为自我反思线索，本页不以类型判断能否当美术家。可观察面对作品修改、拒绝或不确定收入时怎样整理反馈并继续制作；用具体记录比较，不能由标签作准入或录用结论。"
+            ]
+          },
+          "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.54",
+          "source_refs": [
+            "onet-summary",
+            "internal-rubric"
+          ],
+          "type": "prose"
+        },
+        {
+          "availability": "available",
+          "copy_key": "career.item.personality-fit-block",
+          "data": {
+            "paragraphs": [
+              "先选具体方向，再给相同虚构主题制作两种构图说明、成本/进度表及修改记录。比较哪种产出更愿意反复完成、哪些约束会漏掉；本题交付物用于兴趣与准备探索，不代表实际参展获选或销售收入。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.55",
           "source_refs": [
+            "onet-summary",
             "internal-rubric"
           ],
           "type": "prose"
@@ -28978,7 +28994,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.risk.career-risk-cards.36",
           "source_refs": [
-            "bls-projections-2025-35"
+            "onet-summary"
           ],
           "type": "prose"
         },
@@ -28992,7 +29008,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.risk.career-risk-cards.37",
           "source_refs": [
-            "onet-summary"
+            "bls-ooh-craft-fine"
           ],
           "type": "prose"
         },
@@ -29006,6 +29022,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.risk.career-risk-cards.38",
           "source_refs": [
+            "nist-ai-rmf",
             "internal-rubric"
           ],
           "type": "prose",
@@ -29021,6 +29038,7 @@
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.risk.career-risk-cards.39",
           "source_refs": [
+            "bls-oews-2025",
             "onet-summary"
           ],
           "type": "prose"
@@ -29095,7 +29113,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "入门方向与任务比较",
           "type": "table"
         },
         {
@@ -29142,7 +29160,7 @@
             "onet-summary",
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "雇主要求核对",
           "type": "cards"
         },
         {
@@ -29153,37 +29171,37 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "材料一：虚构委托创作任务",
-                  "给出主题与用途、媒介与尺寸限制、交付时间与修改轮次、预算与材料清单、署名与版权约定，作为本次练习输入。",
-                  "标注单位与缺失项，说明材料为完全虚构。",
-                  "列出可能影响判断的缺失信息。",
-                  "说明练习使用虚构材料，不代表任何真实机构、产品或委托方。",
-                  "可检查产出：创作方案与视觉元素安排、材料与技法选择及理由、进度与修改节点、作品集与展览呈现、成本与报价拆分、必须由委托方书面确认的条款。",
-                  "说明边界：版权、税务与合同结论须由专业机构或主管部门作出。"
+                  "材料一：虚构插画委托输入",
+                  "虚构主题城市清晨，纸面构图说明按1200×800像素横幅；上方160像素留标题位，主体不进入该区，不用真实品牌、人像或他人作品。",
+                  "第7天交付草稿，最多两轮修改；拟议用途为校内印100张，署名保留，其余用途和权利条款待双方书面确认，不作法律判断。",
+                  "虚构费用：纸2元、颜料12元、装裱6元，材料预算上限50元；工时估2小时、练习报价单价30元/小时。税费、运费与额外修改费用未知。",
+                  "只做纸面构图与费用计划，不操作溶剂、电动工具或真实公共装置；所有材料与授权均为本题假设。",
+                  "交付两种原创几何构图说明、成本/进度表及待确认授权清单；不用真实客户资料或发布作品。",
+                  "纸面模拟不代表实际委托、版权许可、材料安全批准或收入报价。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "材料二：创作与呈现要点（虚构）",
-                  "要求写出构思与草图、媒介与技法选择、材料安全与作业安排、完成与装裱方式，并说明哪些条款必须书面确认。",
-                  "练习产出：一份可执行的创作与交付要点。"
+                  "材料二：交付任务（虚构）",
+                  "写出两种符合标题留白的构图说明，说明为何适合主题；核材料与工时费用、交付/修改节点并列待确认授权和未知费用。",
+                  "交付物为纸面方案、费用表与版本/待确认清单，不是已完成真实艺术作品或合同。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "材料三：参考思路摘录（虚构）",
-                  "先明确主题与用途并做草图比选，再确定媒介与材料并安排工序，最后完成拍摄归档与交付说明。",
-                  "对无法确认的授权或安全事项保留未知并请委托方或专业机构确认，而不是按经验处理。",
-                  "说明参考思路只是示例，不是唯一正确方法。"
+                  "材料三：参考交付（虚构）",
+                  "构图A：深蓝底、橙色圆形在(900,450)、窗形在左下；构图B：浅底、树形与斜线在下方。两案主体均避开y=0至160标题区，均为原创几何说明，不模仿名作。",
+                  "材料2+12+6=20元不超过50元；工时2×30=60元，练习基础报价80元，税费运费和额外修改另待确认，不把预算余额当利润。",
+                  "第2天选两案、第3天写选择理由、第4天费用表、第5天记录拟议修改、第7天交草稿；最多两轮修改与100张校内用途均待书面确认。其他满足约束的原创方案亦可接受。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
                   "材料四：边界说明",
-                  "本练习不构成法律、税务、检测或安全操作结论；合同、版权、材料安全与项目审批由委托方、专业机构与主管部门按原文要求执行。"
+                  "本题自创条件只供信息核对；不签真实合同、不授版权、不报价成交，也不推测未知税费或安全操作条件。"
                 ]
               }
             ]
@@ -29192,7 +29210,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "虚构练习题面与参考交付",
           "type": "cards"
         },
         {
@@ -29203,33 +29221,33 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "作品一：岗位与项目要求对照表",
-                  "把目标公告或委托要求逐条列成对照表。",
-                  "标出已满足、待补齐与需核实项。"
+                  "作品一：虚构委托要求对照",
+                  "逐条核1200×800、上方160留白、第7天、两轮修改与拟议100张用途。",
+                  "区分满足、待确认与未知费用，不虚构真实授权。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "作品二：可复现的创作说明",
-                  "选一个虚构主题，写出构思、媒介选择与工序，并附过程照片。",
-                  "展示让他人理解创作与完成过程的能力。"
+                  "作品二：两种原创构图说明",
+                  "给几何构图A/B位置与选择理由，保留A圆心改到(850,420)的虚构版本记录。",
+                  "纸面方案不冒充真实作品或过程照片。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "作品三：一页作品与报价摘要",
-                  "用一页纸记录作品规格、材料与成本、工时与报价、交付与授权条件。",
-                  "标注依据来源与未能核实的部分。"
+                  "作品三：虚构费用与进度摘要",
+                  "材料20元、工时60元、基础80元；列交期与剩余一次修改轮次。",
+                  "税费、运费及额外修改未知，不当真实报价成交。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "作品四：工具与材料说明",
-                  "说明使用的媒介、工具、软件与安全防护方式，使他人能复现工序。",
-                  "标注哪些环节使用了 AI 辅助并被人工核对。"
+                  "作品四：材料与工具边界",
+                  "只记录题面假设、未操作材料及待核工具/授权，不写真实安全批准。",
+                  "如用数字辅助，列生成与人工修改；无需发布或联系客户。"
                 ]
               }
             ]
@@ -29238,7 +29256,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "可准备的作品",
           "type": "cards"
         },
         {
@@ -29289,7 +29307,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "面试与带教观察",
           "type": "table"
         },
         {
@@ -29300,50 +29318,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天：读一份委托或授权条款",
-                  "摘录一项署名、授权或交付要求，并写出执行要点。"
+                  "第1天：读虚构要求",
+                  "列1200×800、上方160留白、第7天与两轮修改，以及用途/费用未知待确认项。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天：写一份媒介与材料要点",
-                  "按材料特性写出工序、干燥与防护处理方式。"
+                  "第2天：写两种构图说明",
+                  "用原始几何形状说明位置，检查主体不进标题区；不实际操作材料或使用他人作品。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天：写一份创作说明",
-                  "写出构思、视觉元素安排与技法选择的理由。"
+                  "第3天：写选择理由",
+                  "比较两种主题表达与限制符合程度，保留被舍弃方案与理由。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天：写一份报价与成本要点",
-                  "写出材料成本、工时估算与报价结构。"
+                  "第4天：核费用表",
+                  "材料20元、工时60元、基础80元；税费运费与额外修改待确认，不据余额判断利润。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天：写一份作品档案要点",
-                  "写出作品规格、照片与来源记录方式。"
+                  "第5天：写虚构修改记录",
+                  "新增虚构反馈：要求把构图A圆心改为(850,420)，其余限制不变；记录第一轮修改，仍保留一次可用轮次与待确认项。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天：请他人挑战",
-                  "请一位有经验的创作者或委托方指出创作与交付环节的遗漏并记录反馈。"
+                  "第6天：自行复核或请他人挑战",
+                  "核标题留白、费用、修改轮次和用途限制；他人帮助可选，不必联系真实委托方。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天：写判断",
-                  "写下是否愿意继续、需要补什么，以及哪些判断不能由自己作出。"
+                  "第7天：交草稿并写判断",
+                  "交纸面方案与未决清单，写兴趣和技能需补项；不把七天模拟作参展获选、销售或法律许可。"
                 ]
               }
             ]
@@ -29352,7 +29370,7 @@
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "七日纸面体验",
           "type": "timeline"
         },
         {
@@ -29360,20 +29378,20 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "第 1 天：能否找出署名或授权要求并写清执行要点。",
-              "第 2 天：能否写出合理的材料与工序处理方式。",
-              "第 3 天：能否写出创作理由与视觉元素安排。",
-              "第 4 天：能否写出可执行的报价与成本要点。",
-              "第 5 天：能否写出具体的作品档案记录要点。",
-              "第 6 天：能否在接受指正后修正创作与交付安排。",
-              "第 7 天：能否说出需要补齐的能力与判断边界。"
+              "第1天：能否列出尺寸、留白、交期与授权待确认。",
+              "第2天：能否给两案原创几何构图并满足标题区。",
+              "第3天：能否解释选择并保留修改记录。",
+              "第4天：能否核20+60=80及未知费用。",
+              "第5天：能否记录一次修改并保留另一次轮次。",
+              "第6天：能否复核用途、预算与版本而不虚构确认。",
+              "第7天：能否区分兴趣探索、真实作品交付与授权许可。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.path.seven-day-decision.1",
           "source_refs": [
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "七日判断清单",
           "type": "list"
         },
         {
@@ -29461,7 +29479,7 @@
             "internal-rubric",
             "onet-summary"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "资格与准备项比较",
           "type": "table"
         },
         {
@@ -29480,7 +29498,7 @@
             "bls-projections-2025-35",
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "资格、培训与授权边界",
           "type": "notice"
         },
         {
@@ -29497,7 +29515,7 @@
             "onet-summary",
             "internal-rubric"
           ],
-          "title": "艺术家、油漆工｜path",
+          "title": "如何读取招聘公告",
           "type": "notice"
         },
         {
@@ -30776,13 +30794,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国口径（O*NET 27-1013.00 与 BLS）：2024 年就业约 26,500 人、2024—2034 年预计下降（-1% 或更低）、年均岗位空缺约 2,200 个；2025 年中位时薪 26.68 美元、中位年薪 55,490 美元。分行业值与职业组数据来自 BLS OOH 的 craft and fine artists 口径并在正文标注；该职业未被标记为 Bright Outlook。中国大陆未单列本职业，只能用行业与岗位类别平均工资作代理。"
+              "美国O*NET27-1013：2024就业26,500人、2024—2034下降类别、年均空缺2,200个；2025工资26.68美元/时、55,490美元/年。BLS就业矩阵含自雇，OEWS工资通常排除自雇，不能混用。OOH的craft and fine artists组行业工资另列。本页所核中国资料未取得本职业精确工资，行业/岗位类别均值仅作背景。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.market-signals.market-signal-card.8",
           "source_refs": [
-            "internal-rubric",
-            "onet-summary"
+            "onet-summary",
+            "bls-matrix-methods",
+            "bls-oews-2025",
+            "nbs-wages-2025"
           ],
           "type": "prose"
         },
@@ -31501,7 +31521,7 @@
               {
                 "answer": "本页按美国 O*NET-SOC 27-1013.00「Fine Artists, Including Painters, Sculptors, and Illustrators」编写（固定索引给本资产的中文名是「艺术家、油漆工」）：使用钢笔墨水、水彩、油画颜料、黏土、石材、木材与金属等多种媒介与技术创作原创艺术作品。具体包括：研究主题、趋势与参考资料并形成构思；整合线条、空间、体块、色彩与透视等视觉元素表达想法、情绪或氛围；与客户、编辑、作者与艺术指导沟通作品内容；以手工或数字方式完成作品并处理材料特性；装框、加衬垫、拍摄并建立作品档案；通过画册、邮件、网站与展览投稿推广作品；承接插画、肖像、壁画、雕塑与定制项目，并可向儿童或成人教授技法。",
                 "id": "fine-artists-including-painters-sculptors-and-illustrators.faq.1",
-                "question": "艺术家、油漆工主要做什么？",
+                "question": "美术家（画家、雕塑家与插画师）主要做什么？",
                 "question_key": "career.faq.fine-artists-including-painters-sculptors-and-illustrators.q1",
                 "source_refs": [
                   "onet-summary",
@@ -31519,7 +31539,7 @@
                 ]
               },
               {
-                "answer": "美国 O*NET-SOC 27-1013.00「Fine Artists, Including Painters, Sculptors, and Illustrators」：兴趣代码 AR，属 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0），未被标记为 Bright Outlook（2024—2034 年预计下降 -1% 或更低）。口径提示：工资、就业与增长为该精确职业 27-1013.00 口径（2025 年中位时薪 26.68 美元、中位年薪 55,490 美元；2024 年就业约 26,500 人；年均岗位空缺约 2,200 个）；分行业工资来自 BLS OOH 的 craft and fine artists 职业组口径并在表中逐行标注；此外该职业的学历调查百分比官方未公布，本页按缺口登记、不代填。",
+                "answer": "美国 O*NET-SOC 27-1013.00「Fine Artists, Including Painters, Sculptors, and Illustrators」：兴趣代码 AR，属 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0），未被标记为 Bright Outlook（2024—2034 年预计下降 -1% 或更低）。口径提示：工资、就业与增长为该精确职业 27-1013.00 口径（2025 年中位时薪 26.68 美元、中位年薪 55,490 美元；2024 年就业约 26,500 人；年均岗位空缺约 2,200 个）；分行业工资来自 BLS OOH 的 craft and fine artists 职业组口径并在表中逐行标注；此外该职业的学历类别比例本页所核O*NET摘要/详细页尚未取得，本页按缺口登记、不代填。",
                 "id": "fine-artists-including-painters-sculptors-and-illustrators.faq.3",
                 "question": "美国统计口径与档案完整度是什么（重要）？",
                 "question_key": "career.faq.fine-artists-including-painters-sculptors-and-illustrators.q3",
@@ -31529,7 +31549,7 @@
                 ]
               },
               {
-                "answer": "O*NET 将该职业列为 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0），工作场景以个人工作室、共享工作室或家中独立工作室为主，日程以不规律为主（57%），每周少于 40 小时占 68%、40 小时占 26%，持续或几乎持续坐着占 21%、约一半时间占 16%，认为精确与准确重要的占 27%，每天有严格截止期限占 29%、每月一次以上占 31%、每年一次以上占 32%，与他人持续接触占 29%。收入与创作周期存在明显波动，多数从业者需要组合收入来源。该职业的学历调查百分比官方未公布（证据不足），本页不代填。",
+                "answer": "O*NET 将该职业列为 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0），工作场景以个人工作室、共享工作室或家中独立工作室为主，日程以不规律为主（57%），每周少于 40 小时占 68%、40 小时占 26%，持续或几乎持续坐着占 21%、约一半时间占 16%，认为精确与准确重要的占 27%，每天有严格截止期限占 29%、每月一次以上占 31%、每年一次以上占 32%，与他人持续接触占 29%。收入与创作周期存在明显波动，多数从业者需要组合收入来源。该职业的学历类别比例本页所核O*NET摘要/详细页尚未取得（证据不足），本页不代填。",
                 "id": "fine-artists-including-painters-sculptors-and-illustrators.faq.4",
                 "question": "日常工作情境与准备层级是怎样的？",
                 "question_key": "career.faq.fine-artists-including-painters-sculptors-and-illustrators.q4",
@@ -31539,11 +31559,12 @@
                 ]
               },
               {
-                "answer": "更准确的判断是参考收集、草图变体、图像生成、版式试排与作品照片整理类工序会被工具接手，职业整体以增强与职责重心上移为主。ILO 2023 年的研究显示任务暴露在职业间差异很大，管理和专业类职业中高度暴露的任务比例相对较低，技术可行不等于机构与个人已经采用；而构思取舍、媒介与材料控制、原创性判断与署名责任需要个人承担，因此结论是工作方式会变化，而不是整体被取代。",
+                "answer": "本页建议将参考整理、草图候选、试排与档案草拟作为可试验辅助环节，构思、媒介控制、作品完成与署名仍由负责人员复核。这是编辑分析；ILO全球潜在暴露研究不是本职业采用率或岗位结果，O*NET任务也不能证明职业整体不会被替代。",
                 "id": "fine-artists-including-painters-sculptors-and-illustrators.faq.5",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.fine-artists-including-painters-sculptors-and-illustrators.q5",
                 "source_refs": [
+                  "onet-summary",
                   "ilo-wp96",
                   "internal-rubric"
                 ]
@@ -31559,13 +31580,13 @@
                 ]
               },
               {
-                "answer": "O*NET 将本职业列为 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0），但该职业的学历调查百分比官方未公布（证据不足：未取得本职业学历调查的官方百分比），本页不代填。BLS 指出该职业常见学历为学士学位，通常无相关工作经验要求，但雇主常要求长期在职训练与作品证明。中国大陆多以美术或设计类学历加作品集与项目经验为常见要求；具体以招聘公告与所在地规定为准。",
+                "answer": "O*NET将本职业列为Job Zone Three；当前教育段列部分岗位的大专未毕业、学士及高中类别，本页尚未取得类别比例，不代填。BLS OOH职业组典型入门为学士、无相关工作经验、长期在职训练，这是美国组级准备口径，不能说全部雇主强制。中国资格、学历与作品要求须核目标招聘或项目原文，本页未取得全国统一要求。",
                 "id": "fine-artists-including-painters-sculptors-and-illustrators.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.fine-artists-including-painters-sculptors-and-illustrators.education-path",
                 "source_refs": [
                   "onet-summary",
-                  "nbs-wages-2025",
+                  "bls-ooh-craft-fine",
                   "internal-rubric"
                 ]
               },
@@ -31630,7 +31651,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本页来源与事实登记（O*NET 27-1013.00 职业档案与详细资料、BLS OEWS May 2025 精确职业工资分位、BLS OOH：Craft and Fine Artists（职业组工资、就业与展望、分行业值、自雇说明）、O*NET 呈现的 BLS 2024—2034 投影、国家统计局 2025 年行业门类与岗位类别平均工资、ILO 工作论文 96、NIST AI RMF）"
+              "本页来源与事实登记（O*NET 27-1013.00 职业档案与详细资料、BLS OEWS May 2025 精确职业工资分位、BLS OOH：Craft and Fine Artists（职业组工资、就业与展望、分行业值、自雇说明）、O*NET 呈现的 BLS 2024—2034 投影、国家统计局 2025 年行业门类与岗位类别平均工资、ILO 工作论文 96、NIST AI RMF）；BLS就业矩阵方法说明工资与含自雇就业的覆盖差异。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.sources.source-card.2",
@@ -31660,7 +31681,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "证据不足：①本职业的学历调查百分比官方未公布（O*NET 摘要页与详细资料页均未给出按学历类别的百分比），本页按缺口登记、不代填；②中国大陆未建立与本职业精确对应的全国单职业工资统计值，本页以行业平均工资（文化、体育和娱乐业 2025 年非私营 129,447、私营 64,015 元/年；教育非私营 133,539、私营 63,908 元/年）与规模以上企业岗位类别平均工资（中层及以上管理人员 210,016 元/年、办事人员和有关人员 94,936 元/年）作背景，不使用行业均值、岗位类别均值或单条稿约报价替代。口径说明：本页工资（中位时薪 26.68 美元、中位年薪 55,490 美元）、就业（2024 年约 26,500 人）、增长（2024—2034 年下降 -1% 或更低）与岗位空缺（约 2,200 个/年）均为精确职业 27-1013.00 口径；分行业值取自 BLS OOH 的 craft and fine artists 职业组口径并在表格中逐行标注，不当作本精细职业单列值；OEWS 不含多数自雇创作者与作品销售收入。来源范围与统计时期按原始证据分别核对：中位与各分位为 May 2025 OEWS 经 O*NET 呈现；就业与增长来自 O*NET 呈现的 BLS 2024—2034 投影；职业组数据来自 BLS OOH；国家统计局数据为行业门类与岗位类别口径。执业与法域边界：本页不提供法律、税务、检测或安全操作意见；材料安全与化学品使用、版权与署名、委托与买卖合同、以及展览与公共艺术审批要求须由专业机构与主管部门按原文确认。"
+              "证据不足：本页所核O*NET本职业摘要与详细教育段尚未取得学历类别百分比，不代填；本页所核中国资料未取得本职业精确全国工资分布，文化体育娱乐/教育行业与企业岗位类别均值仅作背景，不能作职业工资。2025工资为OEWS受雇口径通常排除自雇，2024就业26,500及2024—2034年均空缺2,200为O*NET呈现的就业预测矩阵，包含自雇，覆盖不同。组行业工资来自BLS OOH craft and fine artists，非精确27-1013。材料安全、版权合同和税务须按实际项目原文另核，本页不作审批或法律结论。"
             ]
           },
           "id": "fine-artists-including-painters-sculptors-and-illustrators.sources.source-card.4",
@@ -31713,7 +31734,7 @@
                 "url": "/zh/tests/big-five-personality-test-ocean-model"
               },
               {
-                "entity": "回到艺术家、油漆工职业页",
+                "entity": "回到美术家（画家、雕塑家与插画师）职业页",
                 "id": "navigation-6",
                 "relation": "related-evidence",
                 "url": "/zh/career/jobs/fine-artists-including-painters-sculptors-and-illustrators"
@@ -31741,13 +31762,13 @@
                 "details": [
                   "官方职业范围：使用多种媒介与技术创作原创艺术作品。",
                   "兴趣代码 AR（艺术型、现实型）；准备层级 Job Zone Three（需要中等程度准备，SVP 6.0 至 <7.0）；未被标记为 Bright Outlook。",
-                  "学历调查百分比未公布：摘要页与详细资料页均未给出按学历类别的百分比，仅列示「部分岗位要求」的类别与准备层级描述。",
+                  "本页所核O*NET摘要与详细教育段列部分岗位学历类别，尚未取得类别百分比；不由此断言其他官方资料未发布。",
                   "工资与就业（该精确职业）：2025 年中位时薪 26.68 美元、中位年薪 55,490 美元；2024 年就业 26,500 人；2024—2034 年预计下降（-1% 或更低）；预计年均岗位空缺约 2,200 个。",
                   "2024 年主要行业为艺术、娱乐与休闲。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-summary",
-                "limitation": "学历调查百分比未公布，本页不代填；美国资料不自动推导中国大陆的资格、经营与税务要求。",
+                "limitation": "本页未取得学历类别比例，不代填；美国资料不自动推中国资格、经营与税务要求。",
                 "market": "美国",
                 "name": "O*NET OnLine：Fine Artists, Including Painters, Sculptors, and Illustrators（27-1013.00）",
                 "period": "current page (updated 2026); accessed 2026-09-20",
@@ -31765,7 +31786,7 @@
                 ],
                 "evidence_type": "official occupation details",
                 "id": "onet-details",
-                "limitation": "学历调查百分比未公布；工作情境百分比为受访者调查结果，不代表所有岗位；材料安全与版权要求须另行核验。",
+                "limitation": "本页所核教育段未取得学历类别百分比；工作情境比例是受访调查结果非所有岗位；材料安全和版权另核。",
                 "market": "美国",
                 "name": "O*NET OnLine：Fine Artists 详细职业资料（27-1013.00）",
                 "period": "current page (updated 2026); accessed 2026-09-20",
@@ -31782,12 +31803,12 @@
                 ],
                 "evidence_type": "official employment projections (exact occupation scope)",
                 "id": "bls-projections-2025-35",
-                "limitation": "预测不等于实际结果；年均空缺含替补需求，不能拆成个人获得委托或售出作品的概率；统计不含多数自雇创作者。",
+                "limitation": "预测不是实际结果；空缺为年均含更替，不是个人获委托或售出作品概率。BLS就业矩阵包括自雇，不能套OEWS工资排除自雇范围。",
                 "market": "美国",
-                "name": "BLS：职业投影与特征表（2024—2034 投影，经 O*NET 呈现，精确职业口径）",
-                "period": "2024—2034 projections as presented by O*NET OnLine; accessed 2026-09-20",
+                "name": "BLS：职业投影与特征表（精确职业 2024—2034，经 O*NET 呈现；另含职业组 craft and fine artists 2025—2035）",
+                "period": "exact occupation 27-1013.00 2024—2034 projections as presented by O*NET OnLine; plus craft-and-fine-artists group 2025—2035 from BLS OOH; accessed 2026-09-20",
                 "publisher": "U.S. Bureau of Labor Statistics",
-                "scope": "exact occupation 27-1013.00",
+                "scope": "exact occupation 27-1013.00 (2024—2034, via O*NET) and craft-and-fine-artists group (2025—2035, BLS OOH)",
                 "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
@@ -31814,7 +31835,7 @@
                   "城镇非私营单位「文化、体育和娱乐业」平均工资 129,447 元/年；城镇私营单位 64,015 元/年（2025）。",
                   "城镇非私营单位「教育」平均工资 133,539 元/年；城镇私营单位 63,908 元/年（2025）。",
                   "规模以上企业岗位类别平均工资：中层及以上管理人员 210,016 元/年；办事人员和有关人员 94,936 元/年（2025）。",
-                  "中国大陆未单列本职业；行业与岗位类别代理值不能替代本职业收入。"
+                  "本页所核行业与岗位类别资料未取得精确职业工资，代理均值不能替创作者收入；不据此断言所有官方资料未发布。"
                 ],
                 "evidence_type": "official industry and position proxy",
                 "id": "nbs-wages-2025",
@@ -31873,6 +31894,37 @@
                 "publisher": "FermatMind",
                 "scope": "field review and source disclosure",
                 "url": "https://fermatmind.com"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "国家就业矩阵结合OEWS、CES和CPS；自雇资料来自CPS并经职业对照分配。"
+                ],
+                "evidence_type": "official employment methodology",
+                "id": "bls-matrix-methods",
+                "limitation": "方法说明统计覆盖，不证明个人收入或录用概率，也不把不同预测期数值混用。",
+                "market": "美国",
+                "name": "BLS就业预测矩阵资料与自雇覆盖",
+                "period": "当前就业预测方法；核对2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "就业矩阵与OEWS工资覆盖边界",
+                "url": "https://www.bls.gov/emp/documentation/data-overview.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "组行业工资：映画与录音132,950、联邦政府115,150、独立艺术家作家表演者49,100、个人护理38,790美元/年。",
+                  "职业组典型准备为学士、无相关工作经验、长期在职训练；不作中国资格要求。"
+                ],
+                "evidence_type": "official occupation handbook",
+                "id": "bls-ooh-craft-fine",
+                "limitation": "组行业工资非精确27-1013；典型准备不是全部雇主强制门槛，自雇收入另述。",
+                "market": "美国",
+                "name": "BLS职业展望：Craft and Fine Artists",
+                "period": "2025工资与2025—2035展望",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "craft and fine artists组及表内精确美术家项目，按各表范围区分",
+                "url": "https://www.bls.gov/ooh/arts-and-design/craft-and-fine-artists.htm"
               }
             ]
           },
@@ -32007,7 +32059,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "type": "prose"
         },
-        "heading": "艺术家、油漆工的作品方向与相邻职业怎么比较？",
+        "heading": "美术家（画家、雕塑家与插画师）的作品方向与相邻职业怎么比较？",
         "intro": {
           "$item": "fine-artists-including-painters-sculptors-and-illustrators.direction-comparison.adjacent-career-comparison-table.10",
           "block": "direction-comparison",
@@ -32296,7 +32348,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方工资统计",
             "适用范围": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -32318,7 +32370,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织任务暴露研究",
             "适用范围": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32340,7 +32392,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "自愿AI风险框架",
             "适用范围": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32362,7 +32414,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业资料",
             "适用范围": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -32384,7 +32436,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方就业预测",
             "适用范围": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -32626,7 +32678,7 @@
             }
           }
         ],
-        "heading": "AI 会取代艺术家、油漆工吗？",
+        "heading": "AI 会取代美术家（画家、雕塑家与插画师）吗？",
         "method_cards": [
           {
             "含义": {
@@ -32677,7 +32729,7 @@
               "entry": "link-13",
               "field": "url"
             },
-            "问题": "艺术家、油漆工会由 AI 取代吗？"
+            "问题": "美术家（画家、雕塑家与插画师）会由 AI 取代吗？"
           },
           {
             "回答": {
@@ -33213,7 +33265,7 @@
           "type": "prose"
         },
         "entry_heading": "入门方向与准备",
-        "heading": "怎么进入艺术家、油漆工这个职业？",
+        "heading": "怎么进入美术家（画家、雕塑家与插画师）这个职业？",
         "locale_requirements": {
           "credential_boundary": {
             "$item": "fine-artists-including-painters-sculptors-and-illustrators.path.career-path-block.21",
@@ -33746,7 +33798,7 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "艺术家、油漆工的工作可以分成哪几类？",
+            "question": "美术家（画家、雕塑家与插画师）的工作可以分成哪几类？",
             "table": {
               "rows": [
                 {
@@ -33803,7 +33855,7 @@
               "type": "prose"
             },
             "key": "qa2",
-            "question": "艺术家、油漆工与手工艺师、艺术指导的边界在哪里？",
+            "question": "美术家（画家、雕塑家与插画师）与手工艺师、艺术指导的边界在哪里？",
             "table": {
               "rows": [
                 {
@@ -34071,7 +34123,7 @@
           "copy_key": "career.item.career-risk-cards",
           "type": "prose"
         },
-        "heading": "艺术家、油漆工的主要风险与边界是什么？",
+        "heading": "美术家（画家、雕塑家与插画师）的主要风险与边界是什么？",
         "risks": [
           {
             "affected_roles": {
@@ -34740,11 +34792,11 @@
             "type": "prose"
           },
           "ui": {
-            "ai_heading": "AI 会影响艺术家、油漆工的收入吗？",
+            "ai_heading": "AI 会影响美术家（画家、雕塑家与插画师）的收入吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本与行业代理（非本职业统计）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "艺术家、油漆工在不同学历与训练背景下通常从哪些岗位方向开始？",
+            "scenario_heading": "美术家（画家、雕塑家与插画师）在不同学历与训练背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -34956,14 +35008,14 @@
             }
           }
         ],
-        "factors_heading": "哪些因素会影响美国艺术家、油漆工工资？",
+        "factors_heading": "哪些因素会影响美国美术家（画家、雕塑家与插画师）工资？",
         "growth": {
           "$item": "fine-artists-including-painters-sculptors-and-illustrators.us-salary.career-snapshot-secondary-locale.33",
           "block": "us-salary",
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "heading": "美国艺术家、油漆工工资多少？",
+        "heading": "美国美术家（画家、雕塑家与插画师）工资多少？",
         "industry_heading": "不同行业的美国工资差多少？",
         "industry_period": {
           "$fact": "us-wage-2025",
@@ -35185,7 +35237,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "type": "prose"
         },
-        "title": "艺术家、油漆工适合什么样的人？"
+        "title": "美术家（画家、雕塑家与插画师）适合什么样的人？"
       },
       "fit_decision_checklist": {
         "boundary": {
@@ -35733,7 +35785,7 @@
         "rows": [
           {
             "alternate_value": null,
-            "label": "O*NET 艺术家、油漆工职业档案（27-1013.00）",
+            "label": "O*NET 美术家（画家、雕塑家与插画师）职业档案（27-1013.00）",
             "secondary_value": null,
             "value": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.profile.onet-structured-fields-block.1",
@@ -35814,7 +35866,7 @@
             },
             "id": "riasec",
             "label": "霍兰德职业兴趣模型（RIASEC）",
-            "question": "霍兰德兴趣中什么类型更接近艺术家、油漆工？",
+            "question": "霍兰德兴趣中什么类型更接近美术家（画家、雕塑家与插画师）？",
             "signals": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.4",
               "block": "fit",
@@ -35888,7 +35940,7 @@
             },
             "id": "mbti",
             "label": "迈尔斯-布里格斯类型指标（MBTI）",
-            "question": "MBTI 能用来判断我适不适合艺术家、油漆工吗？",
+            "question": "MBTI 能用来判断我适不适合美术家（画家、雕塑家与插画师）吗？",
             "signals": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.12",
               "block": "fit",
@@ -35962,7 +36014,7 @@
             },
             "id": "iq",
             "label": "智力商数（IQ）与数理推理",
-            "question": "数学不好，能做艺术家、油漆工吗？",
+            "question": "数学不好，能做美术家（画家、雕塑家与插画师）吗？",
             "signals": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.20",
               "block": "fit",
@@ -35999,7 +36051,7 @@
             },
             "id": "eq",
             "label": "情绪智力（EI，常称“情商”）",
-            "question": "做艺术家、油漆工需要高情商吗？",
+            "question": "做美术家（画家、雕塑家与插画师）需要高情商吗？",
             "signals": {
               "$item": "fine-artists-including-painters-sculptors-and-illustrators.fit.personality-fit-block.24",
               "block": "fit",
@@ -36250,7 +36302,7 @@
             }
           }
         ],
-        "heading": "做艺术家、油漆工，哪些兴趣、能力与工作方式更重要？",
+        "heading": "做美术家（画家、雕塑家与插画师），哪些兴趣、能力与工作方式更重要？",
         "questions": [
           {
             "answer": {
@@ -36259,7 +36311,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "什么性格的人更适合做艺术家、油漆工？"
+            "question": "什么性格的人更适合做美术家（画家、雕塑家与插画师）？"
           },
           {
             "answer": {
@@ -36268,7 +36320,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "内向的人适合做艺术家、油漆工吗？"
+            "question": "内向的人适合做美术家（画家、雕塑家与插画师）吗？"
           },
           {
             "answer": {
@@ -36277,7 +36329,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "外向的人能做好艺术家、油漆工吗？"
+            "question": "外向的人能做好美术家（画家、雕塑家与插画师）吗？"
           },
           {
             "answer": {
@@ -36286,7 +36338,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "哪种 MBTI 最适合艺术家、油漆工？"
+            "question": "哪种 MBTI 最适合美术家（画家、雕塑家与插画师）？"
           },
           {
             "answer": {
@@ -36313,7 +36365,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "数学不好能做艺术家、油漆工吗？"
+            "question": "数学不好能做美术家（画家、雕塑家与插画师）吗？"
           },
           {
             "answer": {
@@ -36322,7 +36374,7 @@
               "copy_key": "career.item.personality-fit-block",
               "type": "prose"
             },
-            "question": "做艺术家、油漆工需要高情商吗？"
+            "question": "做美术家（画家、雕塑家与插画师）需要高情商吗？"
           },
           {
             "answer": {
@@ -36567,7 +36619,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "开始核对艺术家、油漆工是否适合你",
+        "label": "开始核对美术家（画家、雕塑家与插画师）是否适合你",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -36804,7 +36856,7 @@
         "fact_id": "identity",
         "market": "美国",
         "measure": "职业身份与职责范围",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "O*NET 2026 occupational profile",
         "source_refs": [
           "onet-summary",
@@ -36817,7 +36869,7 @@
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "美国 10 分位年工资",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36829,7 +36881,7 @@
         "fact_id": "us-wage-q25-2025",
         "market": "美国",
         "measure": "美国 25 分位年工资",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36841,7 +36893,7 @@
         "fact_id": "us-wage-2025",
         "market": "美国",
         "measure": "美国中位工资",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36853,7 +36905,7 @@
         "fact_id": "us-wage-q75-2025",
         "market": "美国",
         "measure": "美国 75 分位年工资",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36865,7 +36917,7 @@
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "美国 90 分位年工资",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "May 2025",
         "source_refs": [
           "bls-oews-2025"
@@ -36873,14 +36925,15 @@
       },
       {
         "derivation": null,
-        "display_value": "约 26,500 人（2024，经 O*NET 呈现；该数值为本精确职业口径，不含多数自雇创作者）",
+        "display_value": "约26,500人（2024，精确27-1013，经O*NET呈现；就业预测矩阵包含自雇，与OEWS工资覆盖不同）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "美国就业规模",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "2024",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36889,10 +36942,11 @@
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "美国就业变化",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "2024–2034 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36901,10 +36955,11 @@
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "美国年均岗位空缺",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）",
         "period": "2024–2034 projection",
         "source_refs": [
-          "bls-projections-2025-35"
+          "onet-summary",
+          "bls-matrix-methods"
         ]
       },
       {
@@ -36913,10 +36968,10 @@
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业中位年薪（电影与录音业）",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）；职业组口径",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）；职业组口径",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "bls-ooh-craft-fine"
         ]
       },
       {
@@ -36925,10 +36980,10 @@
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业中位年薪（联邦政府）",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）；职业组口径",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）；职业组口径",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "bls-ooh-craft-fine"
         ]
       },
       {
@@ -36937,10 +36992,10 @@
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业中位年薪（独立艺术家、作家与表演者）",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）；职业组口径",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）；职业组口径",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "bls-ooh-craft-fine"
         ]
       },
       {
@@ -36949,10 +37004,10 @@
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业中位年薪（个人护理服务等）",
-        "occupation_scope": "艺术家、油漆工（O*NET-SOC 27-1013.00）；职业组口径",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（O*NET-SOC 27-1013.00）；职业组口径",
         "period": "May 2025",
         "source_refs": [
-          "bls-oews-2025"
+          "bls-ooh-craft-fine"
         ]
       },
       {
@@ -36961,7 +37016,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "行业平均工资代理（城镇非私营单位）",
-        "occupation_scope": "艺术家、油漆工（中国大陆未单列；行业代理为「文化、体育和娱乐业」）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36973,7 +37028,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "行业平均工资代理（城镇私营单位）",
-        "occupation_scope": "艺术家、油漆工（中国大陆未单列；行业代理为「文化、体育和娱乐业」）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36985,7 +37040,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "岗位类别工资代理（中层及以上管理人员）",
-        "occupation_scope": "艺术家、油漆工（中国大陆未单列；岗位类别代理）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -36997,7 +37052,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "岗位类别工资代理（办事人员和有关人员）",
-        "occupation_scope": "艺术家、油漆工（中国大陆未单列；岗位类别代理）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -37009,7 +37064,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "行业工资（行业代理）",
-        "occupation_scope": "艺术家、油漆工（行业代理为「文化、体育和娱乐业」）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（行业代理为「文化、体育和娱乐业」）",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -37021,7 +37076,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "行业工资（行业代理）",
-        "occupation_scope": "艺术家、油漆工（行业代理为「教育」）",
+        "occupation_scope": "美术家（画家、雕塑家与插画师）（行业代理为「教育」）",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -37033,7 +37088,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "行业工资",
-        "occupation_scope": "艺术家、油漆工（中国大陆未建立精确对应）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -37045,7 +37100,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "行业工资",
-        "occupation_scope": "艺术家、油漆工（中国大陆未建立精确对应）",
+        "occupation_scope": "本页所核中国行业或岗位类别工资代理，非本职业精确收入分布",
         "period": "2025",
         "source_refs": [
           "nbs-wages-2025"
@@ -37061,9 +37116,9 @@
       "label": "AI 任务暴露（不评分）"
     },
     "badges": [
-      "艺术家、油漆工 · 官方职业范围（27-1013.00）",
+      "美术家（画家、雕塑家与插画师） · 官方职业范围（27-1013.00）",
       "原创创作 · 作品集 · 展览与委托",
-      "美国工资与就业为精确职业口径；O*NET 未公布学历调查百分比；中国仅行业代理"
+      "美国工资与就业覆盖不同；本页未取得学历类别比例；中国仅代理背景"
     ],
     "metrics": [
       {
@@ -37102,17 +37157,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "艺术家、油漆工做什么、如何入行、工作边界与发展方向。基于 O*NET 与 BLS 官方职业资料（O*NET-SOC 27-1013.00）；该职业的学历调查百分比官方未公布，页面按缺口与口径逐项标注。"
+      "text": "美术家（画家、雕塑家与插画师）做什么、如何准备、工作边界与方向。基于O*NET与BLS官方职业资料（27-1013.00），区分工资与就业覆盖、职业与行业代理；学历类别比例以本页所核资料范围标注。"
     },
     "title": {
       "availability": "available",
-      "text": "艺术家、油漆工"
+      "text": "美术家（画家、雕塑家与插画师）"
     }
   },
-  "source_content_sha256": "e26d1f4710a30b7f3d41d48a7b3659cf450a81749cbad58301b5e15df25cd14d",
+  "source_content_sha256": "84ab10b016e20904b7b93447078fd3d04e880d92424283d0189d9ee4b1ca7c7b",
   "subject": {
     "canonical_slug": "fine-artists-including-painters-sculptors-and-illustrators",
-    "name": "艺术家、油漆工",
+    "name": "美术家（画家、雕塑家与插画师）",
     "summary": "使用多种媒介与技术创作原创艺术作品：结合钢笔、墨水、水彩、油画颜料、黏土、石材、木材与金属等材料，以及计算机软件与数位板等工具进行创作；整合线条、空间、体块、色彩与透视等视觉元素表达想法、情绪或氛围；与客户、编辑、作者与艺术指导就作品性质与内容沟通；维护作品集以展示风格与能力；通过画册、邮件与个人网站推广作品并向展览与画廊投稿；持续学习技法、关注艺术界动态与研究特定主题；为作品装框、加衬垫并布展，必要时与工程师或技师合作完成大型或装置类作品；也可承接插图、肖像、壁画、雕塑与定制创作项目，并向儿童或成人教授艺术技法。"
   }
 }

@@ -17,6 +17,18 @@
       "fact:us-growth-2025-2035": {
         "status": "mapped"
       },
+      "fact:us-industry-wage-chemical-soap-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-glass-ceramics-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-manufacturing-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-industry-wage-wood-rubber-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2025-2035": {
         "status": "mapped"
       },
@@ -27,6 +39,12 @@
         "status": "pending_mapping"
       },
       "fact:us-wage-low10-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q25-2025": {
+        "status": "pending_mapping"
+      },
+      "fact:us-wage-q75-2025": {
         "status": "pending_mapping"
       },
       "item:furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.10": {
@@ -1224,13 +1242,13 @@
         "status": "pending_mapping"
       },
       "item:furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.entry-role-comparison.1": {
         "status": "mapped"
       },
       "item:furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.entry-work-sample-data.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.interview-probation.1": {
         "status": "mapped"
@@ -24108,7 +24126,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "本清单只用于自我提问，不构成录用标准、能力评分或对炉窑运行质量与职业生涯的评价。本页按美国 O*NET-SOC 51-9051.00「Furnace, Kiln, Oven, Drier, and Kettle Operators and Tenders」编写（固定索引给本资产的中文名是「炉窑干燥设备操作与看护员」；主要对象是玻璃退火、木材干燥、橡胶硫化、物料去湿与皂料熬煮等以加热设备为主的连续或批次处理过程，产出为按工艺规格完成的热处理结果与设备运行与质量记录）。该职业以现场操作与看护为主，涉及高温设备、燃料与灰渣、粉尘与污染物与噪声，须按机构与所在地安全与职业卫生规程执行，熔炼与铸造等涉及高温熔融金属的作业按专门规程并通常需相应资质或授权。"
+              "本页固定职业为炉窑干燥设备操作与看护员（O*NET 51-9051.00），不是锅炉操作员。玻璃退火、木材干燥、橡胶硫化、去湿和皂料熬煮是定义示例；任务表另列铸造前熔化或精炼金属等补充任务，不能概括为只做非金属。现场职责依具体工序、培训、合法资格和岗位授权核对；本清单只用于自我探索。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.quick-decision.fit-decision-checklist.1",
@@ -24122,7 +24140,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "演练题面｜一份完全虚构的炉窑干燥设备运行班次任务包。请写出当班操作与看护方案草案：（1）如何阅读工单与工艺规格并确认当班任务与处理物料；（2）如何按规格设定与调节设备参数并装载物料；（3）如何在运行中监控仪表与面板指示灯并记录读数与产量；（4）如何取样或检测处理结果并按规格判定是否合格；（5）如何在遇到参数偏差、设备故障与堵塞卡料、高温灼伤风险、粉尘与有害气体、燃料与灰渣处置、防护装备缺失、熔融金属异常等情况时按预案暂停、通知与升级并按授权处置。使用公开资料与模拟数据作答，不使用任何真实企业、工艺配方或现场信息。"
+              "编辑纸面练习 T/V2：用下方完整合成工单、两设备读数及两批物料，核版本、单位、质量平衡、异常与待核状态，交四份作品；限90分钟，不操作设备、不设真实温度或配方、不进行清堵、检修或隔离演练。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.quick-decision.fit-decision-checklist.2",
@@ -24164,7 +24182,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项炉窑运行任务上同时完成三件事：把过程做实（读工单与工艺规格、按规格设定与调节设备、装载与卸载物料、监控仪表并记录读数与产量、取样或检测并判定合格）、把安全与设备管住（防护装备与灼伤与噪声与粉尘与有害气体防护、设备锁定与清堵与检修安全、燃料与灰渣与熔融金属处置、参数与报警与故障升级）、并承担可核验的现场责任（对当班运行与质量与记录与异常处理负责并按授权上报与交接）。建议用一次可核验的体验（为虚构车间完成一份当班操作与看护方案与参数记录表与异常升级清单、独立设计一版取样与检测与判定流程、或做一次设备点检与清堵安全复核）来检验，而不是仅依据兴趣问卷的结论。"
+              "编辑判断｜用 T/V2 观察能否核对工单版本、换算单位、保留缺项、区分异常与待核并形成交接记录。纸面完成不证明能在高温、噪声或污染物环境工作，也不证明具备取样、检修、操作或产品放行资格。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.quick-decision.fermat-decision-card.7",
@@ -24233,7 +24251,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "沟通方式｜每天使用书面信函与备忘（19% 每天，49% 从未）、每天使用电话（16% 每天，64% 从未）、使用电子邮件（84% 从未）。\n联系强度｜与他人持续接触（41% 为持续接触，21% 为大多数时间接触），面对面讨论（68% 每天）。\n团队与带领｜与工作组或团队共同工作极其重要（44%），协调或领导他人重要（31%）。\n决策与自主｜制定任务与优先级与目标的自由为「很大」（32%），不做监督下做决策的自由为「很大」（32%）或「有一些」（32%）。\n决策影响｜决策对同事或机构结果产生「非常重要」的结果（40%），对他人工作成果负「很高」责任（47%），对他人健康与安全负「很高」责任（57%）。\n精确与后果｜错误后果为「极其严重」（60%），必须非常精确或高度准确「极其重要」（38%）与「非常重要」（39%）。\n环境与暴露｜每天在非环境受控的室内工作（81%），每天暴露于极热或极冷温度（76%），每天暴露于污染物（83%），每天暴露于干扰性或不适的噪声（82%）。\n健康与安全｜每天佩戴常见防护或安全装备（100%），每天暴露于危险设备（56%），每天暴露于轻微灼伤或割伤或咬伤或叮伤（65%），每天暴露于危险条件（33%）。\n体力与节奏｜持续或几乎持续站立（50%），持续或几乎持续用双手操作与控制与感知物体与工具与控件（57%），由设备速度决定工作节奏极其重要（43%），持续或几乎持续做重复动作（41%）。"
+              "沟通方式｜每天使用书面信函与备忘（19% 每天，49% 从未）、每天使用电话（16% 每天，64% 从未）、使用电子邮件（84% 从未）。\n联系强度｜与他人持续接触（41% 为持续接触，21% 为大多数时间接触），面对面讨论（68% 每天）。\n团队与带领｜与工作组或团队共同工作极其重要（44%），协调或领导他人重要（31%）。\n决策与自主｜制定任务与优先级与目标的自由为「很大」（32%），不受监督时做决策的自由为「很大」（32%）或「有一些」（32%）。\n决策影响｜决策对同事或机构结果产生「非常重要」的结果（40%），对他人工作成果负「很高」责任（47%），对他人健康与安全负「很高」责任（57%）。\n精确与后果｜错误后果为「极其严重」（60%），必须非常精确或高度准确「极其重要」（38%）与「非常重要」（39%）。\n环境与暴露｜每天在非环境受控的室内工作（81%），每天暴露于极热或极冷温度（76%），每天暴露于污染物（83%），每天暴露于干扰性或不适的噪声（82%）。\n健康与安全｜每天佩戴常见防护或安全装备（100%），每天暴露于危险设备（56%），每天暴露于轻微灼伤或割伤或咬伤或叮伤（65%），每天暴露于危险条件（33%）。\n体力与节奏｜持续或几乎持续站立（50%），持续或几乎持续用双手操作与控制与感知物体与工具与控件（57%），由设备速度决定工作节奏极其重要（43%），持续或几乎持续做重复动作（41%）。 上述为受访者所选工作情境比例，不是事故发生率、个人暴露剂量或每个岗位必然要求；设备自动化程度也不是AI采用率。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.work-context-block.1",
@@ -24247,7 +24265,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "过程说明｜以工单与工艺规格与主管指令为起点，按机构与所在地规程启动与设定加热设备，确认物料与设备状态与安全条件后再装载，运行中按规格与标准反复核对仪表与面板指示灯与样品结果，发现偏离立即按程序调节或停止并上报，全程留痕并交接。"
+              "按工单规格处理；异常按预案报告。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.2",
@@ -24261,12 +24279,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资口径｜本职业在美国劳工统计局（BLS）职业就业与工资统计（OEWS 2025）与 BLS 2024—2034 职业预测（经 O*NET 呈现并经来源登记核对）中对应精确职业 51-9051.00：2025 年全国年工资中位数为 48,040 美元（时薪 23.10 美元），第 10 分位 35,960 美元、第 90 分位 69,800 美元；就业 2024 年约 16,500 人，2024—2034 年预计增长「平均（3% 至 4%）」类别，期间预计约 1,900 个岗位空缺。上述为美国全国口径，不适用其他法域。"
+              "美国全国2025 OEWS雇员年工资中位48,040美元、时薪23.10美元，10/25/75/90年工资35,960/41,130/59,830/69,800。美国BLS本职51-9051：2025就业14.5千、2035预测14.9千，2025—2035增长2.6%、净增0.4千、年均空缺1.8千个，基期自雇占1.8%。空缺非十年总数、净新增或实际招聘。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "ep"
           ],
           "type": "prose"
         },
@@ -24275,7 +24294,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "阅读工单与工艺规格并确认当班任务 → 按规格启动与设定并调节设备 → 装载待处理物料并监控仪表与指示灯 → 取样或检测并判定是否符合规格 → 记录读数与产量并处理堵塞与故障 → 完成交接并归档记录"
+              "核工单 → 核条件 → 按规格运行 → 观察取样 → 记录异常 → 交接待办"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.3",
@@ -24289,7 +24308,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "国家统计局口径｜中国大陆按国民经济行业分类公布城镇单位就业人员平均工资，属行业门类口径、不按职业拆分；炉窑与干燥设备操作岗位多分布在制造业（如非金属矿物制品、木材加工、橡胶与塑料制品、化学原料与化学制品等行业）并按安全生产与职业卫生与特种作业要求管理，行业平均工资只能作为背景参照，不能替代职业工资；中国大陆未建立与本职业精确对应的全国职业工资分布，本页按可见缺口登记，不以行业均值或美国数据推断起薪或到手收入。"
+              "证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；NBS行业平均工资仅背景，有界查阅不证明统计不存在，不用行业或美国值代填。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.onet-structured-fields-block.3",
@@ -24303,12 +24322,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "设备与安全说明｜按机构流程核对当班检查与点检清单，确认防护装备与安全联锁与警示标识到位后才操作；涉及清堵与检修与更换零件时须按上锁挂牌或停机确认程序执行，不在设备运转或高温未降时徒手处理；发现参数偏差或设备故障或泄漏或异常声响时要立即报告而不是自行处置。"
+              "按岗位规程作业；检修先核隔离。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.4",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -24317,12 +24337,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测口径｜本页美国就业与增长与空缺取 O*NET 呈现的 BLS 2024—2034 职业预测（经来源登记核对）：就业 2024 年约 16,500 人，预计增长属「平均（3% 至 4%）」类别，期间预计约 1,900 个岗位空缺；预测含增长与替换需求，不等于实际招聘数；中国与美国数据分别列示，不拼接、不换算。"
+              "美国BLS本职51-9051：2025就业14.5千、2035预测14.9千，2025—2035增长2.6%、净增0.4千、年均空缺1.8千个，基期自雇占1.8%。空缺非十年总数、净新增或实际招聘。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -24331,12 +24351,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "确认工单与规格与物料 → 设定与装载并启动设备 → 监控仪表与调节参数 → 取样与检测结果 → 记录读数与产量并清堵与报修 → 交接班并归档与异常上报"
+              "核授权 → 核防护 → 核设备 → 识别异常 → 按预案上报 → 交接状态"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.5",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -24345,12 +24366,16 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "安全与卫生与合规边界｜本页涉及三类要求：一是安全操作与设备完整性，加热设备与危险设备与高温熔融金属与压力部件按机构与所在地安全生产与设备管理制度执行，清堵与检修按停机与上锁挂牌程序进行，特种设备（如锅炉与压力容器）与特定作业按所在地规定由取得相应资格的人员操作；二是职业卫生与防护，高温与噪声与粉尘与有害气体与污染物暴露须按职业接触限值与防护要求管理，佩戴规定防护装备并落实通风与检测与暴露后处置；三是数据与记录真实性，仪表读数与试验结果与班次产量与异常处置记录须真实完整，涉及工艺配方与产品质量与个人信息的数据限于授权范围使用。本页只作一般性提示，不构成法律或安全或职业卫生意见。"
+              "美国清堵检修有危险能量时按适用1910.147及设备专用程序核隔离验证，不以停机按钮替代。中国接触职业病危害作业按职业卫生制度核培训防护及检查，目录设备与作业按项目核资格；法定证件与单位授权分别核。工艺质量按单位制度，含个人健康信息再核PIPL。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "osha-loto",
+            "operations",
+            "special-work",
+            "special-equipment",
+            "privacy"
           ],
           "type": "prose"
         },
@@ -24359,7 +24384,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "记录与协作｜按机构流程记录当班工单与工艺规格、设备设定与参数调节、仪表读数与试验结果、取样与检测与判定、装料与出料数量、堵塞与故障与维修与更换零件、燃料与灰渣处置、异常与报警与交接事项；发现参数偏离或设备故障或安全隐患时立即停止相关步骤并按授权上报，不擅自变更工艺或绕过安全装置。"
+              "记录版本、读数与异常；更正留依据。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.6",
@@ -24373,7 +24398,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界结论｜本职业与相邻岗位的核心差别在「对象与授权」：本职业以加热设备与热处理过程为对象，按工单与规格操作与看护设备并完成取样与记录，产出是符合规格的热处理结果与设备运行与质量记录；工业机械机械师与机械维护工以设备与机械系统的检修与维护为产出，通常不负责工艺参数与产品判定；食品与烟草烘焙干燥设备操作员处理食品与烟草类物料，属被本职业范围明确排除的食品加工设备；金属轧制工与磨工与金属热处理工分别以轧制与磨削与金属热处理为对象，属基本金属加工的相邻方向。授权与对象不同，不能跨岗位沿用工艺变更与产品判定与安全放行的权限。"
+              "边界结论｜本职业与相邻岗位的核心差别在「对象与授权」：本职业以加热设备与热处理过程为对象，按工单与规格操作与看护设备并完成取样与记录，产出是符合规格的热处理结果与设备运行与质量记录；工业机械机械师与机械维护工以设备与机械系统的检修与维护为产出，以机械诊断检修为重心，具体兼任及产品判定权限另核；食品与烟草烘焙干燥设备操作员处理食品与烟草类物料，属被本职业范围明确排除的食品加工设备；金属轧制工与磨工与金属热处理工分别以轧制与磨削与金属热处理为对象，属基本金属加工的相邻方向。授权与对象不同，不能跨岗位沿用工艺变更与产品判定与安全放行的权限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.7",
@@ -24443,12 +24468,14 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "职业画像｜本职业操作或看护用于基本金属、塑料或食品加工以外的加热设备：按工单与工艺规格启动与设定与调节设备并监控仪表与面板指示灯；装载与取出物料与产品并按条件计算与称量投料量；铸造前熔化或精炼金属并维持温度；取样或检测处理后的物料以确认符合规格；记录仪表读数与试验结果与班次产量；停机清除堵塞与卡料、更换磨损零件并清洁与润滑与调整设备；添加燃料并清除灰渣；与主管或其他设备操作人员沟通设备故障与生产问题。常见用人单位包括玻璃与陶瓷制造、木材与木制品加工、橡胶与塑料制品、化学原料与化学制品、非金属矿物制品等以加热处理为关键工序的制造企业；工作以高温与噪声与粉尘与污染物环境、持续体力与重复动作、佩戴防护装备与班次交接为特点，错误后果极其严重；涉及锅炉与压力容器等特种设备与熔融金属等作业的权限与资格由具备相应资质或获得授权的人员与机构与所在地规程确定。官方定义原文：Operate or tend heating equipment other than basic metal, plastic, or food processing equipment. Includes activities such as annealing glass, drying lumber, curing rubber, removing moisture from materials, or boiling soap."
+              "职业画像｜定义排除基本金属、塑料或食品加工设备，列玻璃退火、木材干燥、橡胶硫化、去湿与皂料熬煮；详情17项任务含7核心、10补充，补充中也有铸造前熔化或精炼金属。任务覆盖工单规格、控制与观察、计算称量和搬运、样品测试、读数与产量记录、故障沟通及条件适用的维护工作。问卷描述非每个岗位全做；中国资格按目录项目核，不能直接等同锅炉岗位。官方定义：Operate or tend heating equipment other than basic metal, plastic, or food processing equipment. Includes activities such as annealing glass, drying lumber, curing rubber, removing moisture from materials, or boiling soap."
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.definition-block.11",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -24527,7 +24554,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的责任主体｜操作与看护员对当班运行参数与装料与出料与取样与记录与清堵与设备日常维护与安全防护落实负责，对按规格完成的热处理结果负责；涉及工艺变更与配方调整、产品放行与判废、特种设备与熔融金属与压力部件操作、设备大修与安全装置变更、异常与事故处置等事项，由具备相应资质或机构授权的人员与主管部门决定，本职业不替代其决定。"
+              "本职可在岗位范围内操作、看护、取样和记录；具体工艺变更、放行、设备检修及应急处置是否由本人承担，依实际职责、资格和授权核，不一律排除或都由主管机关决定。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.17",
@@ -24541,7 +24568,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "相邻岗位的权限与批准｜同组与相邻岗位的权限来自机构授权与专业资格与设备与工艺规范，通常不包含对产品放行与工艺变更与设备结构变更自行判断的权限；涉及特种设备与危险作业与产品判定与事故处置的事项应移交授权人员与主管部门。"
+              "相邻岗位权限依实际职责、法定资格和单位授权核，不一律排产品放行或工艺判断，也不因相邻任务自动互认。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.18",
@@ -24555,12 +24582,15 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的权限与批准｜启动与设定与调节设备与装载与出料与取样与记录与清堵与日常清洁润滑须在工艺规格与机构授权与安全规程范围内进行；涉及工艺配方与温度曲线等关键参数变更、产品放行与判废与让步接收、锅炉与压力容器等特种设备与熔融金属作业、设备检修与安全装置与联锁变更、以及异常与事故与泄漏与人员伤害处置的事项，应按规定升级或移交具备资质或获得授权的人员与主管部门，不得越权操作或承诺。"
+              "本职操作与清堵维护须依具体工单、设备规程、培训和合法授权。特种设备及特种作业是否涉及按目录和项目核；产品放行或工艺变更权限单独核，单位授权不能替代法定证件。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.19",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment",
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -24583,7 +24613,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "本职业的结论边界｜当班结论只陈述可核验的运行参数与取样与检测与产量事实并区分实测值与估算值；不得对工艺配方与产品放行与设备结构变更的合法性或产品最终质量作出未经授权的判断；涉及工艺变更与产品判废与特种设备与熔融金属与事故处置的事项必须升级或移交，口径也要经得住主管与质量与安全部门与监管检查的复核。"
+              "结论边界｜原读数、样品与产量按实际记录，假设估算单列；工艺变更、放行和检修按具体授权与规程核，不一律必须移交主管机关。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.21",
@@ -24695,7 +24725,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "核对要点说明｜本职业常按班次与轮班安排工作且含夜班与加班与高温津贴，薪酬构成常含基本工资与班次或高温或绩效补贴，须书面确认工时与轮班与加班与调休口径。"
+              "证据不足：本轮未取得中国本职精确全国、城市及用工形式工资就业；NBS行业平均工资仅背景，有界查阅不证明统计不存在，不用行业或美国值代填。 编辑核对｜书面确认工时、班次、是否夜班或加班、津贴奖金与调休；O*NET90%选择规律班表不证明无夜班，也不证明所有岗位含统一津贴。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.career-quick-answers-block.29",
@@ -24830,7 +24860,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "结论｜本职业与相邻岗位的核心差别在「对象与授权」：本职业以加热设备与热处理过程为对象，按工单与规格操作与看护设备并完成取样与记录，产出是符合规格的热处理结果与设备运行与质量记录；工业机械机械师以设备与机械系统的故障诊断与检修与校准为产出，通常不负责工艺参数与产品判定；机械维护工以设备与设施的日常维护与保养与报修为产出；食品与烟草烘焙干燥设备操作员处理食品与烟草类物料并受食品安全与卫生规范约束；金属轧制工以金属坯料的轧制与尺寸控制为产出；磨工以工件磨削与表面与尺寸控制为产出。对象与授权各不相同，不能跨岗位沿用工艺变更与产品放行与安全装置的权限。"
+              "编辑结论｜本职以加热设备过程看护、样品及记录为重心；机械师重在诊断检修、维护工重在保养，食品、轧制、磨削各有处理对象。职责可能交叉，岗位资格及产品放行、工艺变更和检修权限独立核，不能直接互认。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.8",
@@ -24844,7 +24874,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "证据说明｜下表比较对象来自 O*NET 职业分类与在售公开资料，用于帮助区分相邻职业的工作内容与选择适配，不构成资格、录用或薪酬结论。各职业的工资与就业须按各自 SOC 口径分别核对，本表不做数值比较，也不把某一职业的工资当作另一职业的代理。"
+              "比较依据｜以O*NET本职任务及相邻处理对象作编辑对照，不是已核招聘调查或资格结论。各职业工资就业按其独立SOC统计，任务邻近不能作工资代理或转岗许可。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.9",
@@ -24872,7 +24902,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：本职业以加热设备与热处理过程为对象，按工艺规格操作与看护设备并完成取样与检测与记录，对当班运行与质量与安全落实负责；其他岗位分别以设备检修与维护、食品与烟草物料加工、金属轧制、工件磨削为核心，通常不对加热工艺参数与热处理结果判定负责。"
+              "区别重心｜本职按工单规格操作与看护加热设备并取样记录；其他方向重在机械诊断维护、食品加工、轧制或磨削。职责可重叠，具体工艺和产品判定权限另核。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.11",
@@ -24928,7 +24958,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "关键区别：工业机械机械师以设备与机械系统的故障诊断与拆装与维修与校准与状态监测为产出，对设备可用性负责；本职业在同车间内承担加热设备的工艺操作与看护与取样与记录，通常不负责机械系统的检修与改造。"
+              "机械师重心｜故障诊断、拆装检修和校准；本职任务也含条件适用的更换、清洁润滑和调整，不绝对排维修。具体大修、改造与授权按岗位核。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.direction-comparison.adjacent-career-comparison-table.15",
@@ -25237,10 +25267,10 @@
                 "url": "https://www.onetonline.org/link/details/51-9051.00"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "BLS 职业就业与工资新闻稿（OEWS）",
@@ -25297,10 +25327,10 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-12",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 炉窑干燥设备操作与看护员详细资料",
@@ -25309,22 +25339,22 @@
                 "url": "https://www.onetonline.org/link/details/51-9051.00"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员就业趋势（BLS 2024—2034）",
+                "entity": "O*NET软件（非编程门槛）",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/51-9051.00"
+                "url": "https://www.onetonline.org/link/details/51-9051.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "O*NET任务（编辑试用背景）",
                 "id": "link-15",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.onetonline.org/link/summary/51-9051.00"
               },
               {
-                "entity": "ILO 未来工作（生成式 AI 与就业）专题",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-16",
                 "relation": "career.authority",
-                "url": "https://www.ilo.org/global/topics/future-of-work/lang--en/index.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
@@ -25333,16 +25363,16 @@
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员职业档案",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-18",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/summary/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员国家工资",
+                "entity": "O*NET任务与准备",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/51-9051.00"
+                "url": "https://www.onetonline.org/link/summary/51-9051.00"
               }
             ]
           },
@@ -25469,7 +25499,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜本职业处于中等的生成式 AI 文本与数据任务暴露（读数与记录、台账、排程与培训材料较密集）：核心工作包含仪表读数与试验结果与班次产量记录、工单与工艺规格查询、装料与出料与能耗与物料台账、点检与备件清单与排程，这些环节与结构化数据与文本高度相关，因此记录整理与统计与查询与培训材料可被明显加速。AI 与数字工具最可能改变的是「读数与记录与台账与培训环节」——读数抄录与记录整理、工单与工艺规格与安全规程查询、装料与出料与能耗与物料台账、点检与备件与排程与统计报表、培训与模拟训练材料整理；而现场工艺判断与参数调节、装料与出料与清堵等体力与动手操作、高温与有害环境中的设备与安全管理、熔融金属与特种设备操作、产品取样与判定与放行、异常与事故应急与升级仍由操作与看护员与授权人员负责。技术可行不等于组织采用，也不等于岗位减少。"
+              "证据不足：未取得本职生成式AI量化暴露、采用率、效率效果或就业因果。编辑试用可从虚构读数表、工单文本对照、台账草稿与培训材料起步，人工核对每个输入与缺项。O*NET列任务和软件类别，不证明工具已采用或明显提速；现场控制、样品判定、检修与异常处置依具体规程和授权，不能由生成文本自动获得权限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.18",
@@ -25511,12 +25541,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-9051.00 就业趋势（BLS 2024—2034）"
+              "BLS 本职就业预测（2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -25553,12 +25583,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于美国工资的时点估计；不含福利与绩效与班次补贴，不适用于其他法域。"
+              "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.24",
           "source_refs": [
-            "onet"
+            "oews-method",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -25595,7 +25626,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST 人工智能风险管理框架（AI RMF 1.0）"
+              "NIST AI RMF 1.0"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.27",
@@ -25609,7 +25640,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于治理与风险控制的一般原则；不是安全或职业卫生或设备标准。"
+              "通用AI风险治理参考，不是设备安全、职业卫生或本职采用统计。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.28",
@@ -25623,7 +25654,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-9051.00 职业范围"
+              "O*NET本职职业概览"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.29",
@@ -25637,7 +25668,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于界定职业边界（操作或看护基本金属与塑料与食品加工以外的加热设备）；用于分类核对。"
+              "用于本职定义和任务分类，不产生资格。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.30",
@@ -25651,7 +25682,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类与数据库"
+              "O*NET本职兴趣"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.31",
@@ -25665,7 +25696,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于核对职业代码与分类归属；不构成任职或授权依据。"
+              "RC职业偏好描述，非个人录用或AI采用结论。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.32",
@@ -25679,7 +25710,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异前言｜下面按「AI 主要改变什么 / 仍由人负责什么」比较相邻岗位。结论一致：可被工具增强的是读数与记录与台账与培训环节；现场工艺判断与参数调节、装料与出料与清堵等体力操作、高温与有害环境中的设备与安全管理、熔融金属与特种设备操作、产品取样与判定与放行与事故应急升级始终由操作与看护员与授权人员负责。技术可行、组织采用与岗位结果三者必须分开判断。"
+              "编辑比较｜以下三个方向是本职过程操作、质量记录和设备协作的工作重心。工具可试作草稿，采用和效果未核；现场参数、质量与安全责任按当前规程和授权核，不能从任务描述预测永久不变或不可替代。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.33",
@@ -25693,7 +25724,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "读数抄录与记录整理、台账与统计报表可被工具加速"
+              "编辑试用：合成读数与台账整理，逐项校对原输入；未证提速。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.34",
@@ -25833,7 +25864,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业以加热设备操作与看护与参数调节与取样与记录为主，工具可增强读数与记录与查询与排程但难以替代现场工艺判断与动手操作"
+              "本职任务含控制观察、工单、样品和记录；可尝试草稿辅助，不能据此推出替代率或难以替代程度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.44",
@@ -25889,12 +25920,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "为本精确职业（51-9051.00）全国口径，但仍不含福利与绩效与班次补贴"
+              "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "oews-method",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -26029,7 +26061,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 职业预测（经 O*NET 呈现）"
+              "BLS 本职EP2025—2035"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.58",
@@ -26043,7 +26075,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "预测含增长与替换需求"
+              "美国本职就业规模、增长及年均空缺预测"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.59",
@@ -26057,12 +26089,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本职业就业 2024 约 16,500 人、增长属「平均（3% 至 4%）」类别、期间空缺约 1,900 个含替换需求，不可读作新增岗位"
+              "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26113,7 +26145,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "短期内不会。核心工作是在高温与噪声与粉尘环境中按住工艺规格操作与看护加热设备、调节参数并对热处理结果与安全负责；工具能替代的是读数抄录与记录整理与查询与排程与培训材料，不能替代现场工艺判断与动手操作与设备与安全处置与产品判定与事故升级。"
+              "证据不足：没有已核本职替代比例或时间。任务含现场操作及记录，不证明短期不会替代，也不证明永久存在。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.64",
@@ -26127,7 +26159,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 51-9051.00（任务与工作情境）"
+              "O*NET任务（非替代预测）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.65",
@@ -26141,7 +26173,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "常见的有过程控制与数据采集系统（PLC/DCS）与人机界面、设备状态监测与预测性维护、实验室信息管理与质量记录系统、能耗与物料与备件管理系统、排程与工单系统，以及工艺仿真与培训材料工具；具体以机构安排为准。"
+              "O*NET软件列工业控制/机器操作、库存跟踪、Excel和Word四类；软件清单不是统一编程门槛。T/V2可用纸笔或表格，真实招聘要求另核。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.66",
@@ -26155,7 +26187,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 预测（口径说明）"
+              "O*NET软件（非编程门槛）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.67",
@@ -26169,7 +26201,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "在高温与噪声与粉尘环境中稳定操作与观察设备状态的能力、手感与听音与看颜色等经验判断、异常与故障的现场处置与升级判断、以及安全与职业卫生规程的执行与记录能力。"
+              "编辑试用：合成读数表、工单版本对照和记录摘要较适合先核草稿。未取得本职任务影响排序、采用率或效率证据。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.68",
@@ -26183,7 +26215,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS OEWS（工资口径）"
+              "O*NET任务（编辑试用背景）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.69",
@@ -26197,12 +26229,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页没有中国大陆该职业的精确公开统计，不能断言其用工与技术采用情况；涉及加热设备与特种设备与熔融金属与粉尘与噪声与有害气体的作业要求应参考《安全生产法》《职业病防治法》与特种设备与特种作业相关规定，并以属地要求为准。"
+              "证据不足：中国本职精确就业预测未取得。 美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。增长不能归因于AI；中国精确预测未取得。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.70",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26211,7 +26243,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "ILO 未来工作研究（任务暴露机制）"
+              "BLS本职EP（非AI因果）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.71",
@@ -26225,12 +26257,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先明确工具输出与联锁与报警由谁复核、依据什么工艺规格与安全与设备规程、出现错误如何回退，并核对记录的真实性与权限与审计追踪；工艺变更与产品放行与安全联锁变更不得由工具自动完成。"
+              "本职任务档案不是合同签署或付款权限依据；生成草稿不产生单位授权，不代签或虚构批准。T/V2不涉及真实合同付款。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.72",
           "source_refs": [
-            "onet"
+            "onet",
+            "nist"
           ],
           "type": "prose"
         },
@@ -26239,7 +26272,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "NIST AI RMF（治理原则）"
+              "NIST风险治理（非签署授权）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.73",
@@ -26253,12 +26286,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "工艺配方与关键温度曲线与产品质量数据与设备参数属机构核心数据，应限定用途与留存期限并做好权限与审计追踪；不得把工艺与质量数据上传到未授权外部服务，跨境与对外提供须另行评估与履行程序；员工健康与职业卫生相关数据按个人信息保护与职业健康要求处理。"
+              "证据不足：未取得本职消失年份；EP增长也不证明职业永久存在。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -26267,7 +26300,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业范围（边界）"
+              "BLS本职EP（非消失年份）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.75",
@@ -26281,12 +26314,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用三层证据判断：技术可行、组织是否采用、岗位结果；并结合本地制造业产出与设备更新与班次人力结构，而不是只看工具演示。"
+              "编辑学习：先读工单、单位与版本，学准确记录、样品结果核对、异常报告及软件基础，再做T/V2。现场操作与检修须另经培训和授权。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.76",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep"
           ],
           "type": "prose"
         },
@@ -26295,7 +26329,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 职业分类（分类归属）"
+              "O*NET任务与准备"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.77",
@@ -26309,7 +26343,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任前言｜效率可以外包给工具，判断与后果不能。以下五步是采用任何数字工具前后都必须保住的人工责任点。"
+              "编辑责任｜以下五步用于核工单、工具范围、人工复核、记录和授权；未核效率不能直接称效率可以外包。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.78",
@@ -26337,11 +26371,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "安全与防护：防护装备与通风与检测与停机确认与上锁挂牌与高温与有害环境安全是否到位，由本人与主管现场确认。"
+              "安全与防护按设备规程与适用制度核；美国危险能量控制不以停机按钮代隔离验证，涉及检修由受训授权人员承担，本人并非自动有检修权限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.80",
           "source_refs": [
+            "osha-loto",
             "onet"
           ],
           "type": "prose"
@@ -26379,12 +26414,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "升级与确认：涉及工艺变更与产品判废与特种设备与熔融金属与泄漏与人员伤害与重大质量偏差的事项须经主管与授权人员与主管部门确认并留痕。"
+              "升级确认｜工艺变更、判废、检修、异常和数据外供按实际法域、岗位授权与预案核；不是每件都必须由主管机关批准。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.83",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -26421,12 +26458,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "判断错误会导致批量报废与设备损坏与人身伤害"
+              "工艺与质量记录按单位数据制度限定用途和权限；含可识别个人及健康信息时另核PIPL等适用规则，纯工艺数据不自动成为敏感个人信息。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.86",
           "source_refs": [
-            "onet"
+            "privacy",
+            "nist"
           ],
           "type": "prose"
         },
@@ -26883,12 +26921,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "沟通与交接"
+              "燃料灰渣和熔融金属作业按具体规程培训授权核；是否需法定证件看实际设备或作业目录，不能据名称统一断一证。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.119",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -26925,7 +26965,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "小结｜一句话：读数与记录与查询变快，工艺与设备与安全不变。工具可以帮你整理读数与记录更快、查询工单与规格与规程更清楚、台账与报表更省心、培训与模拟训练更省力，但工艺参数设定与调节是否稳定、装料与出料与清堵是否安全、取样与判定与放行是否合规、异常与事故如何升级与是否处置，仍然是操作与看护员与主管与授权人员的责任。"
+              "编辑结论｜先核虚构表格与文书草稿，工具效率、采用与岗位结果未核。软件目录、自动化问卷与就业增长均不证明AI替代结论；真实现场任务、记录及数据使用依规程和合法授权。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.122",
@@ -26947,7 +26987,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 23.10 美元 / 中位年薪 48,040 美元（2025，BLS OEWS）"
+              "48,040 美元/年（美国2025）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.7",
@@ -26961,7 +27001,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 51-9051.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与绩效与班次补贴。"
+              "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.8",
@@ -26975,7 +27015,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 35,960 美元/年（2025，BLS OEWS）"
+              "35960 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.9",
@@ -26989,7 +27029,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担装卸与辅助职责的岗位，不代表入职起薪。"
+              "美国全国工资第10百分位，不是辅助岗或起薪。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.10",
@@ -27003,7 +27043,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 41,130 美元/年（2025，BLS OEWS）"
+              "41130 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.11",
@@ -27017,7 +27057,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，工序类型（玻璃、木材、橡胶、化学等）与地区与班次与工艺复杂程度差异较大。"
+              "美国全国工资第25百分位，不代表特定工序或资历。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.12",
@@ -27031,7 +27071,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 59,830 美元/年（2025，BLS OEWS）"
+              "59830 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.13",
@@ -27045,7 +27085,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担关键工艺与多设备看护或带教与班组长职责的岗位，不代表全部资深人员。"
+              "美国全国工资第75百分位，不代表骨干或班组长。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.14",
@@ -27059,7 +27099,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 69,800 美元/年（2025，BLS OEWS）"
+              "69800 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.15",
@@ -27073,7 +27113,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数高技能或高险工序与高班次补贴岗位影响，个体可达性有限；本口径上下十分位跨度约 1.9 倍。"
+              "美国全国工资第90百分位；90/10约1.9，不是个人可达上限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.16",
@@ -27087,7 +27127,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 16,500 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "14.5 千人（美国2025）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.17",
@@ -27101,7 +27141,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.18",
@@ -27115,7 +27155,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「平均（3% 至 4%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "2.6%（美国2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.19",
@@ -27129,7 +27169,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「平均（3% 至 4%）」类别）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "BLS本职51-9051预测，非AI因果。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.20",
@@ -27143,7 +27183,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 1,900 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均1.8千个（美国2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.21",
@@ -27157,7 +27197,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 1,900 个）；边界｜来自增长与替换需求，按原文呈现，不可读作新增岗位。"
+              "增长及转出退出需求，不是十年总量。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.22",
@@ -27171,7 +27211,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 暴露｜本职业以加热设备操作与看护与参数调节与取样与记录为主，生成式 AI 的文本与数据任务暴露为中等；本页不对其 AI 影响评分，仅说明可被工具辅助（读数抄录与记录整理、工单与工艺规格与安全规程查询、装料与出料与能耗与物料台账、点检与备件与排程与统计报表、培训与模拟训练材料整理）与必须由人负责（现场工艺判断与参数调节、装料与出料与清堵等体力操作、高温与有害环境中的设备与安全处置、熔融金属与特种设备操作、取样与判定与放行、异常与事故应急与升级）的边界。"
+              "证据不足：未取得本职AI量化暴露、采用、效果及工资因果。编辑可试合成记录草稿；真实任务按规程授权，工具目录不证采用。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.23",
@@ -27185,12 +27225,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业定义｜操作或看护用于基本金属、塑料或食品加工以外的加热设备，包括玻璃退火、木材干燥、橡胶硫化、物料去湿或皂料熬煮等活动；工作含按工单与工艺规格启动与设定与调节设备并监控仪表与面板指示灯、装载与取出物料与产品并按条件计算与称量投料量、铸造前熔化或精炼金属并维持温度、取样或检测处理后的物料以确认符合规格、记录仪表读数与试验结果与班次产量、停机清除堵塞与卡料与更换磨损零件与清洁与润滑与调整设备、添加燃料并清除灰渣、以及与主管或其他设备操作人员沟通设备故障与生产问题；产出为符合规格的热处理结果与设备运行与质量记录；不含依法只能由具备相应资质或获得授权的人员与机构承担的特种设备（如锅炉与压力容器）操作与工艺变更与产品放行与设备结构变更与事故认定职责。"
+              "本职51-9051.00操作或看护定义中所列加热设备，包括玻璃退火、木材干燥、橡胶硫化、去湿和皂料熬煮；补充任务还有铸造前熔化或精炼金属。分类范围不等中国特种设备或特种作业资格；中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -27213,7 +27255,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "装卸与现场辅助岗"
+              "核具体招聘学历，不预设辅助岗"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.26",
@@ -27227,7 +27269,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 21% 需要低于高中文凭；此类岗位通常以装卸与搬运与清洁与辅助为主，需在指导下作业。"
+              "美国O*NET新聘学历问卷21%低于高中，不等中国岗位分层或从业学历。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.27",
@@ -27255,7 +27297,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "加热设备操作方向起步岗"
+              "核具体岗位工单与记录要求"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.29",
@@ -27269,7 +27311,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 56% 需要高中文凭或同等学历；多数操作与看护岗位以此为起点并结合在职训练。"
+              "美国O*NET新聘学历问卷56%高中或同等，BLS典型入门高中及中期OJT；不能替代中国招聘条件。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.30",
@@ -27297,7 +27339,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "工艺与设备与操作骨干岗"
+              "核课程内容与实际岗位"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.32",
@@ -27311,7 +27353,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 教育栏显示 16% 需要中学后证书；工艺较复杂或多设备看护的岗位更常见（其余比例 O*NET 未给，本页不编造）。"
+              "美国O*NET新聘学历问卷16%中学后证书，不证明骨干或多设备岗位更常见；其余不代填。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.33",
@@ -27339,7 +27381,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及锅炉与压力容器与熔融金属的岗位"
+              "核实际目录、设备与作业项目"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.35",
@@ -27353,12 +27395,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "涉及特种设备与特定危险作业的岗位按所在地规定须取得相应资格或授权；本页不提供个人资格结论，以属地要求为准。"
+              "中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.36",
           "source_refs": [
-            "onet"
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -27395,7 +27438,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "木材加工与木制品与橡胶与塑料制品"
+              "木材干燥与橡胶硫化方向"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.39",
@@ -27409,7 +27452,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "承担木材干燥与橡胶硫化与塑料热处理等工序，涉及蒸汽与热油与加热设备与噪声与有害气体。"
+              "编辑任务对照：木材干燥、橡胶硫化是定义示例，不将塑料加工列为本职范围。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.40",
@@ -27479,7 +27522,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆部分｜截至本轮检索，中国大陆未建立与本职业精确对应的全国职业工资分布；按证据政策，本页展示缺失而不是使用代理数字，不以行业均值或美国数据推断起薪或到手收入。"
+              "证据不足：本轮有界查阅未取得中国大陆与本职精确对应的全国职业工资分布和就业统计；不证明统计不存在，不用行业均值或美国数值代填。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.45",
@@ -27493,7 +27536,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "说明｜国家统计局按行业门类公布城镇单位就业人员平均工资，属全国城镇单位口径，不区分职业；炉窑与干燥设备操作岗位多分布在制造业（非金属矿物制品、木材加工、橡胶与塑料制品、化学原料与化学制品等行业），并按安全生产与职业卫生与特种作业要求管理，行业平均工资与工序类型（玻璃、木材、橡胶、化学等）与班次与工艺复杂程度与地区差异较大，与行业平均值口径不同，不可直接比较。来源与口径｜中国部分仅登记口径与缺口：经有界检索仍未取得可按本职业核验的统计值，因此不以代理数字填充；美国部分来自 BLS OEWS 2025（经 O*NET 呈现）与 BLS 2024—2034 职业预测（经 O*NET 呈现并经来源登记核对）；两者法域、期间与统计口径不同，本页不拼接、不换算。"
+              "NBS城镇单位行业平均工资只是背景，与本職职业分布不同；有界查阅未取得本职精确全国、城市和用工形式工资就业。美国工资为OEWS2025，全国就业为EP2025—2035，分别列示不拼接。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.46",
@@ -27521,7 +27564,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "薪酬结构说明｜本职业的实际收入通常与工序类型（玻璃、陶瓷、木材、橡胶、塑料、化学、日化等）、岗位（装卸与辅助、加热设备操作与看护、工艺与设备骨干、班组长）与是否持特种作业或特种设备操作资格与是否承担带教或管理职责、班次与夜班与高温津贴、加班与调休、地区与生活成本以及资历相关；高温与有害环境岗位常见津贴与劳保用品配备，但公开统计难以完整反映；本页不给出任何具体金额，避免以个别样本代表整体。"
+              "证据不足：未取得中国本职收入因素分解或代表性招聘样本。 编辑核对薪酬：记录基本工资、奖金、加班、班次与高温相关款项、工时地点及岗位职责；未取得本职因素分解或代表性招聘样本，不承诺某资历或资格提高收入。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.48",
@@ -27619,12 +27662,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "分类对照说明｜美国 SOC 51-9051.00 / O*NET-SOC 51-9051.00 覆盖操作或看护基本金属与塑料与食品加工以外加热设备的人员，与金属热处理工（金属与塑料热处理）、金属轧制工、磨工以及食品与烟草烘焙干燥设备操作员分属不同处理对象与职业；中国大陆由应急管理与市场监管与卫生健康等部门依据《安全生产法》《职业病防治法》与特种设备与特种作业相关规定对相关企业及从业人员实施管理；涉及锅炉与压力容器与熔融金属与粉尘与噪声与有害气体的作业另有专门规定与技术规范；两者分类与统计口径不同，不做数值换算。"
+              "美国SOC51-9051与中国岗位名称不保证一一对应；中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet"
+            "onet",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -27647,7 +27692,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「平均（3% 至 4%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "2.6%（美国2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.58",
@@ -27661,7 +27706,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 23.10 美元 / 中位年薪 48,040 美元（2025，BLS OEWS）"
+              "48,040 美元/年（美国2025）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.china-salary.career-snapshot-primary-locale.59",
@@ -27683,12 +27728,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 51-9051.00 职业与工资数据｜https://www.onetonline.org/link/summary/51-9051.00；BLS 职业就业与工资统计（OEWS）｜https://www.bls.gov/oes/；O*NET 炉窑干燥设备操作与看护员国家工资｜https://www.onetonline.org/link/localwages/51-9051.00；O*NET 就业趋势（BLS 2024—2034）｜https://www.onetonline.org/link/localtrends/51-9051.00"
+              "O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA；BLS本职EP2025—2035｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm；BLS OEWS工资方法｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet"
+            "onet-wages",
+            "ep",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27697,12 +27744,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 23.10 美元 / 中位年薪 48,040 美元（2025，BLS OEWS）"
+              "35960 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27711,12 +27758,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国中位数（2025，BLS OEWS 经 O*NET 呈现，对应精确职业 51-9051.00）；边界｜中位是分布中点，不等于起薪，也不代表任一机构或地区；OEWS 不含福利与绩效与班次补贴。"
+              "美国全国工资第10百分位，不是辅助岗或起薪。；O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27725,12 +27772,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "10 分位 35,960 美元/年（2025，BLS OEWS）"
+              "41130 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27739,12 +27786,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下十分位（2025）；边界｜通常对应资历较浅或仅承担装卸与辅助职责的岗位，不代表入职起薪。"
+              "美国全国工资第25百分位，不代表特定工序或资历。；O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27753,12 +27800,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "25 分位 41,130 美元/年（2025，BLS OEWS）"
+              "48040 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27767,12 +27814,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布下四分位（2025）；边界｜处于分布下段，工序类型与地区与班次与工艺复杂程度差异较大。"
+              "美国全国工资分布中点，不是新聘工资或实收。；O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27781,12 +27828,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "75 分位 59,830 美元/年（2025，BLS OEWS）"
+              "59830 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27795,12 +27842,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上四分位（2025）；边界｜通常对应承担关键工艺与多设备看护或带教与班组长职责的岗位，不代表全部资深人员。"
+              "美国全国工资第75百分位，不代表骨干或班组长。；O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27809,12 +27856,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "90 分位 69,800 美元/年（2025，BLS OEWS）"
+              "69800 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27823,12 +27870,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国全国工资分布上端十分位（2025）；边界｜受少数高技能或高险工序与高班次补贴岗位影响，个体可达性有限；本口径上下十分位跨度约 1.9 倍。"
+              "美国全国工资第90百分位；90/10约1.9，不是个人可达上限。；O*NET全国2025工资｜https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
-            "onet"
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27837,12 +27884,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业 约 16,500 人（2024，BLS 职业预测基期，经 O*NET 呈现）"
+              "14.5 千人（2025）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27851,12 +27898,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测基期口径（2024，经 O*NET 呈现）；边界｜不含自雇，分行业与分地区细分可能缺失，不可外推至其他法域。"
+              "EP基期含自雇，自雇占1.8%；不与OEWS雇员混同；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27865,12 +27912,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「平均（3% 至 4%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "2.6%（2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27879,12 +27926,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测增长率（2024—2034，经 O*NET 呈现，O*NET 显示为「平均（3% 至 4%）」类别）；边界｜增长类别不等于绝对岗位数，也不适用其他法域。"
+              "就业规模变化百分比，净增0.4千；非AI因果；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27893,12 +27940,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "预计岗位空缺约 1,900 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）"
+              "年均 1.8 千个"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27907,12 +27954,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径｜美国就业预测的空缺（2024—2034 期间，O*NET 呈现的 Projected job openings 字段，约 1,900 个）；边界｜来自增长与替换需求，不可读作新增岗位。"
+              "2025—2035年均，含增长及转出退出需求，非十年总数或净新增；BLS本职EP｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -27921,12 +27968,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "边界｜上述数值均为美国口径，来源为 BLS OEWS 2025 与 BLS 2024—2034 职业预测（经 O*NET 呈现并经来源登记核对），对应精确职业 O*NET-SOC 51-9051.00；不适用于中国大陆或其他法域，也不构成对个人薪酬或录用的承诺。本页未取得可按行业与分地区读取的本职业工资中位数，均按可见缺口登记。"
+              "证据不足：未取得美国本职工序风险、地区或规模导致工资差异的分解统计。 2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。 美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet"
+            "oews-method",
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -27935,7 +27984,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜美国 2025 年中位时薪 23.10 美元、中位年薪 48,040 美元，工资分布从下十分位 35,960 美元到上十分位 69,800 美元，跨度约 1.9 倍；差异主要来自工序类型（玻璃、木材、橡胶、化学等）、地区与生活成本、是否持特种作业或特种设备操作资格与是否承担关键工艺与带教或班组长职责，以及班次与夜班与高温津贴与加班；中位不代表起薪，也不含福利与津贴。"
+              "美国2025年全国中位年薪48,040美元、时薪23.10美元；美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.26",
@@ -27949,7 +27998,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "涉及高温窑炉与熔融金属与危险化学品工序的岗位通常高于简单干燥与装卸岗位。"
+              "编辑核对：问实际工序、设备与职责及书面工资构成；未取得高温或熔融金属岗位必然高于干燥辅助岗的本职统计。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.27",
@@ -27977,7 +28026,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "轮班与夜班与高温津贴与加班会明显影响实际收入，但公开统计只反映时点工资。"
+              "编辑核对：分别记录班次差额、夜班、高温及加班款项，依OEWS定义与合同核；不从全国分位推本职各款项影响幅度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.29",
@@ -28005,7 +28054,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业密集地区与大型企业与小企业的工资与津贴结构差异明显。"
+              "编辑核对：按具体工厂地点和企业条件核工资，未取得本职地区或规模因素导致多少差异的统计。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.31",
@@ -28033,12 +28082,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "增长 属「平均（3% 至 4%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）"
+              "2.6%（美国2025—2035）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep"
           ],
           "type": "prose"
         },
@@ -28047,7 +28096,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "制造业（Manufacturing）"
+              "制造业总体"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.34",
@@ -28061,7 +28110,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "证据不足：未取得制造业总体内本职业2025工资中位数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.35",
@@ -28075,7 +28124,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 显示 2024 年本职业在美国的主要行业为制造业（未给占比）。"
+              "O*NET行业页列制造业85%、其他15%，未标年份；不是本行工资或各细分行业占比。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.36",
@@ -28089,7 +28138,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "玻璃与陶瓷与非金属矿物制品"
+              "玻璃、陶瓷等加热处理"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.37",
@@ -28103,7 +28152,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "证据不足：未取得玻璃、陶瓷等加热处理内本职业2025工资中位数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.38",
@@ -28117,7 +28166,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "按本职任务示例区分编辑核对方向，不将制造业占比拆成子行业，不代填工资。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.39",
@@ -28131,7 +28180,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "木材加工与橡胶与塑料制品"
+              "木材干燥与橡胶硫化"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.40",
@@ -28145,7 +28194,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "证据不足：未取得木材干燥与橡胶硫化内本职业2025工资中位数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.41",
@@ -28159,7 +28208,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "按本职任务示例区分编辑核对方向，不将制造业占比拆成子行业，不代填工资。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.42",
@@ -28173,7 +28222,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "化学原料与化学制品与日化"
+              "化学与皂料熬煮"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.43",
@@ -28187,7 +28236,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未取得可按本职业读取的该行业工资中位数；不以行业均值或第三方估算代填。"
+              "证据不足：未取得化学与皂料熬煮内本职业2025工资中位数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.44",
@@ -28201,7 +28250,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页未取得可按本职业读取的该细分行业工资中位数。"
+              "按本职任务示例区分编辑核对方向，不将制造业占比拆成子行业，不代填工资。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.45",
@@ -28215,7 +28264,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "分布解读：中位是分布中点，不等于起点；下十分位与上十分位之间约 1.9 倍的差距主要来自工序类型与资格与班次与地区，本口径为精确职业 51-9051.00 全国口径。"
+              "不是起薪；分位按全国雇员分布，不按资历、班次或工序直接分层。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.46",
@@ -28229,7 +28278,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "口径解读：OEWS 为雇主报告的工资，不含福利、绩效、班次与夜班与高温津贴；本职业的轮班与津贴结构明显，公开统计难以完整反映。"
+              "一般以2080小时折算年工资，不能据时薪推个人实际工作小时、加班或到手收入。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.47",
@@ -28243,12 +28292,14 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "资历解读：是否持特种作业或特种设备操作资格与是否承担关键工艺与多设备看护与带教或班组长职责，会明显影响收入上限。"
+              "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
-            "onet"
+            "oews-method",
+            "ep",
+            "onet-wages"
           ],
           "type": "prose"
         },
@@ -28257,7 +28308,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "使用建议：把中位、分位与就业三组数字一起看，并结合本地工序类型与资格状态与班次安排核对，不用单一数字推断个人薪酬。"
+              "编辑核对：看岗位、工厂地点、班次、实际职责与薪酬构成；本页没有本职这些因素导致多少差异的分解。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.49",
@@ -28271,7 +28322,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位时薪 23.10 美元 / 中位年薪 48,040 美元（2025，BLS OEWS）"
+              "48,040 美元/年"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.50",
@@ -28285,7 +28336,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "下端十分位对应资历较浅或仅承担装卸与辅助职责的岗位；进入该区间的常见原因是从装卸或清洁或辅助岗起步且尚未承担关键工艺。"
+              "美国全国工资第10百分位，不是辅助岗或起薪。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.51",
@@ -28299,7 +28350,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "中位代表分布中点的典型水平，但不代表入职起薪；新手起薪通常接近或低于中位，随工艺与资格与班次与地区变化上升。"
+              "美国全国工资分布中点，不是新聘工资或实收。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.52",
@@ -28313,7 +28364,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "上端十分位对应持特种作业或特种设备操作资格且承担关键工艺与多设备看护与带教或班组长职责的资深岗位；高薪端受高温与高险工序与班次补贴影响较大。"
+              "美国全国工资第90百分位；90/10约1.9，不是个人可达上限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.53",
@@ -28444,10 +28495,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 51-9051.00 国家工资",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 51-9051.00 就业趋势（BLS 2024—2034）",
@@ -28468,7 +28519,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "霍兰德（RIASEC）｜用于了解自己在现实型与常规型偏好上的相对位置。本职业的 O*NET 兴趣代码为 RC（现实型—常规型），对应动手操作设备与物料并在现场作业中获得动力、以及按规程与标准处理参数与读数与记录信息。问卷只用于提出问题，不用于判断是否适合或能否上岗。"
+              "RC是本职业兴趣基线，不是你的个人适配率。可观察是否喜欢动手操作及按规程处理记录。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.2",
@@ -28482,7 +28533,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：兴趣代码来自 O*NET 对从业者与职业分析的结果，但个体分数与职业代码之间不是一一对应关系。"
+              "证据不足：未取得RIASEC对本职个人表现、录用或安全结果的预测效度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.3",
@@ -28525,7 +28576,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格｜尽责性偏高、情绪稳定性较好、宜人性中等的人更容易适应高温与危险环境下的规程执行与班组协作；但人格分数不用于录用或适配结论。"
+              "编辑探索：观察能否持续核单位、保留缺项、按规程沟通；不据人格分数定胜任。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.6",
@@ -28539,7 +28590,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：人格特质与工作表现的关联为群体统计趋势，不能用于个体预测。"
+              "证据不足：未取得大五人格对本职个人工作表现的预测效度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.7",
@@ -28596,7 +28647,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI｜类型学用于自我反思沟通与工作偏好；本职业需要与班组成员与主管与维修与质量与安全人员按规程高频沟通，偏好并不决定能否胜任。"
+              "MBTI可作偏好提问，不设本职最佳类型或录用条件。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.10",
@@ -28624,7 +28675,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：MBTI 不属于职业资格或能力评估工具，不能作为用工依据。"
+              "证据不足：未取得MBTI对本职个人表现或录用的预测效度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.11",
@@ -28695,7 +28746,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格｜用于观察自己在高压与危险情境下的反应方式；设备报警或参数失控或班组冲突时，能否先按程序与授权核对处理比类型标签更重要。"
+              "九型可整理自我描述，不证明能操作设备或处理异常。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.14",
@@ -28709,7 +28760,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：属自我探索工具，不构成职业能力或适配结论。"
+              "证据不足：未取得九型人格对本职个体表现的预测效度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.15",
@@ -28752,7 +28803,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "智力与推理｜主要反映学习与问题解决的一般能力；本职业更依赖把工艺规格转成可执行操作步骤的能力、在设备波动与异常与班次压力下做取舍的能力，以及读数与参数与记录细节的准确性。"
+              "本职含计算称量、读数与记录；用T/V2核单位和质量平衡，错误可训练，不能从数学自评判胜任。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.18",
@@ -28766,7 +28817,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜中等：一般认知能力与学习速度相关，但不能替代岗位训练与设备操作经验与安全意识。"
+              "证据不足：未取得IQ分数对本职胜任及安全结果的判定阈值。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.19",
@@ -28809,7 +28860,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力｜本职业常与班组成员与合作部门在高压与危险环境中沟通，情绪调节与冲突处理与安全沟通影响现场秩序与事故预防。"
+              "本职需要故障沟通与交接；用具体表达与核对观察，不要求统一高情商分数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.22",
@@ -28823,7 +28874,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "证据等级｜较低：情绪智力测评结果为自我报告，不能作为录用或绩效结论。"
+              "证据不足：未取得情绪智力对本职个人表现或安全结果的预测效度。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.23",
@@ -28880,7 +28931,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "直接回答｜工具与测评不能预测你是否能通过机构与安全考核、能否在高温与噪声与粉尘环境中稳定完成设备操作与参数调节与异常处置，也不能替代真实现场实践。最可靠的判断方式是用一次真实或模拟的运行任务来检验你如何读工单与设定参数与装载与监控、如何取样与判定并记录读数与产量，以及是否清楚自己与机构的授权与安全边界。"
+              "编辑适配探索｜用T/V2观察工单版本、算术、缺项和交接的处理，不能据纸面完成判现场安全、健康或实操胜任。真实岗位条件、培训、资格与授权独立核。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.27",
@@ -29146,7 +29197,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "什么性格的人更适合做炉窑干燥设备操作与看护员？本职业更看重在高温与噪声与粉尘环境中按规格稳定操作与观察设备状态的能力、异常与故障的现场处置与升级判断、以及安全与职业卫生规程的执行与记录能力，而不是某一性格类型；O*NET 兴趣代码为 RC（现实型—常规型），可作为探索起点。"
+              "没有单一适合性格。观察能否读工单、核记录并报告异常，纸面作品不等实际安全胜任。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.46",
@@ -29160,7 +29211,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "内向的人适合做炉窑干燥设备操作与看护员吗？可以，但工作需与班组成员与主管与维修与质量与安全人员沟通（与他人持续接触 41%、面对面讨论 68% 每天、与团队共同工作极其重要 44%），且要在设备异常与交接班时清楚表达。"
+              "不能据内向作录用结论；观察是否能清楚交接异常并核对同事反馈。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.47",
@@ -29174,7 +29225,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "外向的人能做好炉窑干燥设备操作与看护员吗？可以。外向有助于班组协作与交接沟通，但本职业更关键的是工艺参数与设备状态的准确判断与安全规程执行，错误后果极其严重（60%），外向程度本身不是门槛。"
+              "外向不保证胜任。观察是否按规格核记录、不凭自信跳过缺项。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.48",
@@ -29188,7 +29239,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "哪种 MBTI 最适合炉窑干燥设备操作与看护员？没有哪一种类型被证明最适合。MBTI 不属于职业资格或能力评估工具，职业适应主要取决于规程执行与观察判断与安全意识与体力耐受。"
+              "未取得本职最佳MBTI类型证据，不按类型选职业。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.49",
@@ -29216,7 +29267,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格特质分数能预测这个职业的工作表现吗？不能。人格与兴趣分数属群体统计趋势，与个体表现不是一一对应；职业适应更应通过现场观察或实习或模拟任务与机构与安全考核来验证。"
+              "本页未取得个体预测效度；职业问卷和你的测试分数不能推出表现或事故概率。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.51",
@@ -29230,7 +29281,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数学不好能做炉窑干燥设备操作与看护员吗？可以。本职业不依赖高等数学，但需要按条件计算与称量投料量、读数与换算单位、判断参数偏离与记录产量；基础算术与细致程度比数学水平更重要。"
+              "先用T/V2核单位、减法与判定条件，再记录需补能力；纸面正确不等现场操作资格。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.52",
@@ -29244,7 +29295,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做炉窑干燥设备操作与看护员需要高情商吗？需要情绪稳定与冲突处理与安全沟通能力，但不要求特定测评分数。工作中要在设备异常与班次压力下保持冷静、按程序处置并与班组清楚交接。"
+              "没有已核统一高情商门槛；用故障报告与交接是否清楚作编辑观察。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.53",
@@ -29258,7 +29309,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格能用来判断我适不适合吗？不能。九型属自我探索工具，不构成职业能力或适配结论；判断适配应看能否在高温与噪声环境中按规格稳定完成设备操作与参数调节并承担安全与记录责任。"
+              "不按九型给录用或安全结论；本职预测效度缺口见上。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.54",
@@ -29272,7 +29323,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "我怎么用可交付物判断自己适合哪个方向？用一次真实或模拟的运行任务检验：能否完成当班操作与看护方案与参数与读数记录表与异常升级清单、能否设计一版取样与检测与判定流程、或能否完成一次设备点检与清堵安全复核；这些证据比问卷更能说明适配。"
+              "T/V2四作品分别保原输入、算表、样品条件和交接；比较自己偏好记录、操作或检修的学习重心，不能直接授相邻岗位资格。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.55",
@@ -29314,7 +29365,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "验证建议：先用一次模拟或真实的运行任务检验读工单与设定参数与装载与监控与取样与判定与清堵与交接处理，并了解目标机构与属地主管部门对学历与安全培训与特种作业资格与授权的要求，再决定是否长期投入。"
+              "编辑纸面练习 T/V2：用下方完整合成工单、两设备读数及两批物料，核版本、单位、质量平衡、异常与待核状态，交四份作品；限90分钟，不操作设备、不设真实温度或配方、不进行清堵、检修或隔离演练。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.fit.personality-fit-block.58",
@@ -29467,22 +29518,28 @@
                 "url": "https://www.onetonline.org/link/details/51-9051.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）",
+                "entity": "OSHA1910.147危险能量控制",
                 "id": "link-4",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/"
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员国家工资",
+                "entity": "中国职业病防治法（2018修正）",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/51-9051.00"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992844.html"
               },
               {
                 "entity": "NIST 人工智能风险管理框架（AI RMF 1.0）",
                 "id": "link-6",
                 "relation": "career.evidence",
                 "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+              },
+              {
+                "entity": "中国个人信息保护法",
+                "id": "link-7",
+                "relation": "career.authority",
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               }
             ]
           },
@@ -29497,7 +29554,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "边界｜本页列出的是本职业在设备操作与看护与装料与出料与清堵与检修与记录中较常见的失效类型与控制要点，用于帮助识别与管理风险，不构成法律意见、安全或职业卫生意见或对个案的结论；凡涉及工艺变更与产品放行与判废、特种设备（锅炉与压力容器等）与熔融金属与危险化学品与有限空间作业、以及异常与事故与泄漏与人员伤害的处置，应由主管与具备相应资质或获得授权的人员与主管部门按组织流程与所在地法规处置。"
+              "编辑风险提示｜以下是按本职任务与问卷构造的场景，非已核事故频率。现场异常按该设备预案、培训与授权上报处置；不是一律突然切断设备。中国职业健康、特种设备及特种作业分别核，美国1910.147只在适用检修维护危险能量范围使用。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.8",
@@ -29525,12 +29582,16 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围｜本页依据 O*NET 51-9051.00 的任务与工作情境（错误后果为「极其严重」60%、每天佩戴常见防护或安全装备 100%、每天暴露于危险设备 56%、每天暴露于污染物 83%、每天暴露于极热或极冷温度 76%、每天暴露于干扰性或不适的噪声 82%、每天暴露于轻微灼伤或割伤或咬伤或叮伤 65%、对他人健康与安全负「很高」责任 57%、必须非常精确或高度准确「极其重要」38% 与「非常重要」39%、每天在非环境受控的室内工作 81%）与制造业安全与职业卫生实务归纳；工资与就业数字仅作背景信息，不用于风险评估。"
+              "O*NET本职详情支持读数、样品、记录、条件适用清堵维护任务及情境比例，不支持事故发生率。美国危险能量控制据1910.147的适用范围、授权培训及隔离验证；中国职业卫生据职业病防治法34/35条、资格据目录及相应制度。各法域不能互换。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.10",
           "source_refs": [
-            "onet"
+            "onet",
+            "osha-loto",
+            "operations",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -29679,12 +29740,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "落实通风与除尘与检测与降噪与个体防护并按规定进行职业健康检查；发现气味异常或粉尘外溢或噪声超标时暂停并报告"
+              "中国接触职业病危害作业按职业病防治法核防护及用人单位组织上岗前、在岗、离岗职业健康检查；费用单位承担。异常按预案上报，不由气味或纸面题作职业病诊断。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.21",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -29721,7 +29782,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "清堵与卡料或检修时未停机确认或未上锁挂牌或未泄压，导致卷入与剪切与烫伤；严重人身伤害与设备二次损坏"
+              "清堵或检修若有意外启动或储能释放危险，仅按停止按钮不代表隔离完成；未确认状态可能造成机械或热能伤害。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.24",
@@ -29735,12 +29796,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "清堵与检修前执行停机确认与上锁挂牌与泄压与冷却与能量隔离程序并明确分工；发现未隔离或未确认状态立即停止作业并报告"
+              "美国1910.147适用时，由受训授权维护人员按设备专用程序核停机、能量隔离、适用锁定或挂牌、残余能量及隔离验证；不以停机按钮替代隔离，也不是所有挂牌都无效。本页不提供现场操作步骤；未确认状态先停止相关作业并按预案上报。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.25",
           "source_refs": [
-            "onet"
+            "osha-loto"
           ],
           "type": "prose"
         },
@@ -29791,7 +29852,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "按规程取样与检测并如实完整记录读数与结果与产量与异常，不事后补记或代签；发现记录缺失或数据矛盾立即上报并核查"
+              "如实记录读数、样品和产量；缺项写待核，不用估数冒实测、不代签。合法更正或补记保留原版本、时间、依据与原因；矛盾上报核查。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.29",
@@ -29847,12 +29908,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工艺变更与产品放行与设备结构变更须按授权流程审批，工艺与质量与职业健康数据按最小必要与权限管理；发现越权要求或数据外泄立即停止并升级报告"
+              "工艺变更、产品放行和数据外供按岗位授权核。工艺质量数据按单位制度保护；含可识别人员及医疗健康信息时另按PIPL适用基础和敏感个人信息要求处理，纯工艺参数不自动是敏感个人信息。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.33",
           "source_refs": [
-            "onet"
+            "privacy",
+            "nist"
           ],
           "type": "prose"
         },
@@ -29903,7 +29965,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对美国工资的时点估计口径；工资数字不用于风险评估。"
+              "美国1910.147适用检修维护的危险能量隔离与授权培训，不是中国法规或全部生产操作通则。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.37",
@@ -29917,7 +29979,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "中国职业病防治法34/35条支持职业卫生培训及接触危害人员的职业健康检查，不给个人诊断。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.38",
@@ -30019,17 +30081,17 @@
               {
                 "id": "education",
                 "values": [
-                  "O*NET 教育栏显示 56% 需要高中文凭或同等学历、21% 需要低于高中文凭、16% 需要中学后证书（本页不编造其余比例）。",
-                  "Job Zone 为 1-2 级（SVP 低于 6.0），通常以在职训练为主；部分工艺较复杂的工序或班组长岗位要求相关经验或资格。",
-                  "学历只影响筛选起点，能否独立承担加热设备操作与看护主要取决于岗位训练与安全考核与实践经验。"
+                  "编辑核对：读工单、观察仪表、取样与检测、读数与产量记录及故障沟通，依具体岗位范围判断。",
+                  "美国BLS本职典型入门高中或同等、相关经验None及中期OJT，是职业总体描述不是每个雇主要求。",
+                  "中国按实际设备和作业目录核法定证件、培训与授权，不从岗位名字判所有人同一证。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "常见要求：安全与职业卫生培训、设备操作与工艺培训、防护装备与应急处置训练，以及涉及特种作业与特种设备与危险化学品与有限空间作业的专门资格。",
-                  "涉及锅炉与压力容器与熔融金属与危险化学品等作业的岗位须取得相应资格与机构授权，须另行核对。",
-                  "涉及工艺变更与产品放行与设备结构变更与数据对外提供的事项，只能在机构授权与属地要求范围内处理。"
+                  "编辑核对：岗位安全、职业卫生、设备工艺及应急培训。",
+                  "法定资格是否需要按实际设备目录、作业目录及对应项目核，不从炉窑或熔融金属字样统一断证。",
+                  "工艺变更、产品放行、设备检修及数据外供另核单位岗位授权，授权不能替代法定资格。"
                 ]
               },
               {
@@ -30043,18 +30105,22 @@
               {
                 "id": "tools",
                 "values": [
-                  "常用工具：过程控制与数据采集系统（PLC/DCS）与人机界面、仪表与热电偶与流量与料位检测、装卸与起重设备与输送带、除尘与通风与降噪设施、手动工具与量具（秤与卡尺）。",
-                  "常用资料：工单与工艺规格与温度曲线、设备操作规程与点检表、安全与上锁挂牌与应急处置规程、取样与检测与质量记录与交接记录模板。",
-                  "工艺参数与产品判定与特种设备与危险作业以机构授权与所在地要求为准。"
+                  "O*NET本职软件四类：工业控制/机器操作、库存跟踪、Excel、Word，目录不证本企业采用率或编程门槛。",
+                  "任务涉及控制仪表、搬运、称量与样品；实际型号、系统和点检规程由岗位资料核，不能一律断PLC/DCS或预测维护已用。",
+                  "T/V2只用纸笔或表格；现场设备和软件访问依授权。"
                 ]
               }
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.employer-evidence.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "special-work",
+            "special-equipment",
+            "employer"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "应聘时可核对哪些任务、条件与工具？（编辑清单）",
           "type": "cards"
         },
         {
@@ -30065,45 +30131,42 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "一份完全虚构的加热设备运行班次任务（含两台设备与两种物料与一份工单与工艺规格）。",
-                  "一份空白的当班操作与看护方案与参数与读数记录表模板。",
-                  "一份空白的取样与检测与判定记录表。",
-                  "一份空白的设备点检与清堵与检修安全与异常升级清单。",
-                  "一支笔与计算器或电子表格（用于投料量与环境与产量试算）。",
-                  "计时器（限时 90 分钟）。"
+                  "T/V2全为合成纸面数据。工单V2：A设备处理甲批100kg，B设备处理乙批80kg；每批只去水且无干物质损失，甲湿基含水20%、乙25%；终点湿基含水均为10%。湿基含水=水质量/总湿物料质量。虚构指标u不是温度：A允许10≤u≤12，B允许20≤u≤24。",
+                  "原读数：A在09:00为10u、09:20为13u、09:40缺失；B在09:00为20u、09:20为22u、09:40为24u。旧工单V1误写A允许10≤u≤14；V2替代V1。不得补读数、调机器或把旧版当当前。",
+                  "终点样品：甲10.0%含水且编号完整；乙9.5%含水但编号缺失。题设纸面合格必须同时满足：含水≤10.0%、样品编号完整、该设备三次读数全部已取得且均在V2范围内。状态优先：任一已知越界→异常；无已知越界但缺条件→待核；三条件全部满足→纸面符合。无实际放行权限。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "在 90 分钟内完成：当班操作与看护方案、参数与读数记录表、取样与检测与判定记录、设备点检与清堵安全与异常升级清单。",
-                  "完成一次投料量与环境与产量试算，并写出至少两条可能导致工艺或安全或职业卫生或质量风险的情形与对应措施。",
-                  "写出哪些情形必须暂停并升级（参数越界与设备带病运行、未停机或未隔离即清堵与检修、防护装备缺失、特种作业与特种设备越权操作、工艺变更与产品放行未授权、质量数据与工艺数据外泄、重大质量偏差与人员伤害）。"
+                  "90分钟：15分核V1/V2与单位，15分算质量平衡，20分逐读数及样品判定，15分做缺项与异常表，15分写交接，10分对参考答案纠错；15+15+20+15+15+10=90。",
+                  "计算两批干物质、终点总质量与去水量，kg保留两位；另给终点总质量克数。逐项写原读数、V2范围、是否已知越界、缺项和样品编号，分别判设备及批次状态。",
+                  "交四作品：原输入版本表、质量算表、读数与样品判定表、异常与待核交接。写清甲不能用V1把13u判正常；乙低含水不能替代缺失编号。无数据不得写实测或批准。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先列读工单与规格与设定与装载与监控与取样与记录与交接的关键步骤与不可省略项，再逐项记录依据与结果。",
-                  "对参数设定与清堵与检修写清授权与资格与安全隔离与复核人，保留原始记录与版本。",
-                  "对风险写清识别信号、处置步骤与报告对象。",
-                  "最后写一段反思：哪些步骤被压缩会导致什么后果。"
+                  "参考计算：甲干物质100×(1−20%)=80kg，终点80/(1−10%)=88.89kg，去水100−88.89=11.11kg；乙干物质80×75%=60kg，终点60/90%=66.67kg，去水13.33kg。按未舍入值折克：甲88,888.89g、乙66,666.67g；两批去水合计24.44kg，舍入差单列。",
+                  "参考判定：A10u正常、13u越界、09:40缺失；甲即使样品10.0%且编号完整仍为异常，不作符合。B20/22/24u均在含端点范围；乙9.5%满足含水但编号缺失→待核，不作符合。两批均不能纸面确认全部合格。",
+                  "反例自查：用V1会错判A13u；把乙编号改为完整只能使乙纸面符合，不能消除甲越界与缺读数。把A13改12但仍缺09:40→待核；再补入“合成11u”且标明题设改版才纸面符合，不能冒原实测。保V2原记录与新增假设版本。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "不涉及工艺变更与产品放行与判废与设备结构变更的最终决定；对资格或授权不明与设备带病运行与防护缺失与数据外泄疑点一律写明暂停与升级并按机构授权上报主管或授权人员与主管部门。",
-                  "作品只证明你能按本职业的工作方式组织设备操作与看护与取样与记录，不构成资格或胜任证明。"
+                  "所有指标、材料、允许范围和合格条件都是本题假设，不是工艺配方、真实温度、安全限或现场操作规程；只在纸面核版本和记录，不做设定、取样、清堵、检修、隔离或真实放行。",
+                  "参考答案只是独立自查；可选请他人讨论但不必外部签认。作品不证明高温环境适应、职业健康或安全实操能力，法定资格和岗位授权另核。"
                 ]
               }
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.entry-work-sample-data.1",
           "source_refs": [
+            "employer",
             "onet"
           ],
-          "title": "入行练习：一次完整的加热设备当班运行任务（虚构材料）",
+          "title": "入行练习：T/V2工单、质量平衡与异常交接（90分钟纸面）",
           "type": "cards"
         },
         {
@@ -30114,40 +30177,36 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "用「任务—方法—证据」三列列出你在模拟运行任务中完成的每一步。",
-                  "标注每一步是独立完成还是他人指导下完成。",
-                  "标注哪些步骤涉及工艺变更与产品判定与特种设备与安全隔离与数据风险，必须按授权上报而非自行处理。"
+                  "原输入版本表：保V1/V2、六读数、两样品及全部题设，明确当前V2与缺项。",
+                  "验收：不把13u改成正常，不把缺失读数或编号伪造成实测。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "请一位有经验的设备操作或工艺或安全负责人复核你的运行方案与记录与风险处置，并书面指出问题。",
-                  "记录复核意见、时间与依据，便于后续复盘。",
-                  "不要只展示做完了，要展示从读工单到设定到装载到监控到取样到记录到交接的流程与留痕。"
+                  "质量算表：列湿基公式、干物质、终点kg/g和去水，保未舍入过程。",
+                  "验收：甲80/88.89/11.11kg，乙60/66.67/13.33kg，合计去水24.44kg；不误用干基定义。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "写一份可交接的运行摘要（当班任务与工艺规格、设备设定与参数调节、装料与出料与投料量、取样与检测与判定、异常与故障与处理、待办与交接事项）。",
-                  "摘要中不得出现真实企业或工艺配方或可识别信息，必要时使用编号与合成数据。",
-                  "注明信息来源与假设，区分实测值与估算与预测值。"
+                  "判定表：六读数分别对V2，样品含水与编号独立列，写三条件及状态优先。",
+                  "验收：甲异常、乙待核；低含水不替代编号，正常单个读数不代表整批符合。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "若使用了记录或报表或排程工具，标注哪些部分由工具生成、哪些由本人核对与修订。",
-                  "说明工具输出在使用前经过了谁的复核与哪次原始资料核对。",
-                  "参数与检测与产量若为示例值，必须标明并说明由授权人员最终确认。"
+                  "交接摘要：列设备、批次、版本、原异常、缺项、需核输入及未获放行。",
+                  "验收：记录V1误判反例和新假设版本，不修改原值；可自行对参考答案，无外部签认依赖。"
                 ]
               }
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.entry-portfolio.1",
           "source_refs": [
-            "onet"
+            "employer"
           ],
           "title": "入门时可以准备哪些可复核的作品材料？",
           "type": "cards"
@@ -30210,50 +30269,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "理解本职业的工作对象与流程（读工单与规格—设定与装载—监控与调节—取样与检测—记录与交接）。",
-                  "记录你观察到的安全与职业卫生与设备与记录与授权要求。"
+                  "第1天30分钟：读本职定义与17任务，区分核心与条件补充，记录与锅炉岗位差别。",
+                  "交一页任务与权限提问，不操作设备。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "核对工作条件：班次与轮班与夜班与高温津贴、高温与噪声与粉尘与有害气体暴露与防护装备配备、体力与重复动作强度、与维修与质量与安全部门的协作方式。",
-                  "写下你最不适应的一个现实成本并判断能否接受。"
+                  "第2天30分钟：读工作情境比例，列需向用人单位核对的班次、暴露、防护与培训。",
+                  "交现实条件待核清单，纸面不证明能适应高温或噪声。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "完成一份当班操作与看护方案与参数与读数记录表样本。",
-                  "按规范列出关键要求（工艺规格与参数上下限、设备点检与安全隔离、取样与检测与判定标准、异常上报路径）。"
+                  "第3天30分钟：抄T/V2原工单六读数两样品，比较V1旧范围与V2。",
+                  "交作品1，不补缺项或把假设作实测。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "完成一次投料量与环境与产量试算，并标注假设值。",
-                  "对两个典型风险（参数越界或设备带病运行、未停机或未隔离即清堵检修）写出核对与报告方案。"
+                  "第4天30分钟：按湿基假设算干物质、终点kg/g与去水。",
+                  "交作品2，对参考计算查单位与舍入。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "在指导下完成一次设备点检与装料与取样记录，或一次停机确认与上锁挂牌的模拟演练。",
-                  "对照检查单找出至少两处偏差并记录整改方式。"
+                  "第5天30分钟：逐条判V2范围、含水及编号，写异常优先与待核状态。",
+                  "交作品3，检查甲异常乙待核；不进行隔离、清堵或取样演练。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "请有经验的人挑战你的运行方案与参数与异常处置。",
-                  "记录对方的异议与你的回应，不回避反例。"
+                  "第6天90分钟：独立按15/15/20/15/15/10重做完整T/V2，再对参考答案和三个反例。",
+                  "交四作品与自查修改记录，可选讨论不依赖专家签认。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "写出继续、停止或转向的判断与证据。",
-                  "列出若继续需要补齐的能力与经历（如安全与职业卫生培训、特种作业与设备操作经验、工艺与记录经验），以及下一步行动。"
+                  "第7天30分钟：比较你对记录、操作或检修学习的兴趣和错误。",
+                  "交继续、暂停探索或转向判断及一项下一步；不从七天推现场胜任。"
                 ]
               }
             ]
@@ -30270,13 +30329,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "继续：能按工艺规格完成设定与装载与监控与取样与检测与记录并使过程可复核。",
-              "继续：能在高温与噪声与粉尘环境中坚持安全与职业卫生与记录规范，不省略关键环节。",
-              "继续：愿意从装卸或辅助岗做起并把设备操作与安全与工艺要求学清楚。",
-              "停止：对高温或噪声或粉尘或有害气体环境明显无法适应，且短期无法改善。",
-              "停止：对安全规程与设备联锁与防护与记录边界缺乏警觉，反复出现越权或记录缺失。",
-              "换方向：偏好设备检修与维护可考虑工业机械机械师或机械维护工；偏好食品加工可考虑食品与烟草烘焙干燥设备操作员。",
-              "换方向：偏好金属轧制可考虑金属轧制工；偏好精密磨削可考虑磨工；偏好管理与排产可考虑生产一线主管方向。"
+              "继续探索：愿意读工单、核版本及单位，并保原记录。",
+              "继续探索：能完成T/V2四作品，说明甲异常乙待核。",
+              "继续探索：愿意补岗位培训和资格；纸面通过不替代现场条件核对。",
+              "暂停探索：连合成缺项也反复猜填，先练记录和核对。",
+              "暂停探索：对高温噪声污染物条件存在疑问，先核真实岗位防护与工作安排，不由本题作健康判断。",
+              "转向探索：偏好诊断维修可看工业机械机械师或维护工，独立核任务培训权限。",
+              "转向探索：偏好食品、金属或生产管理可读相邻档案，任务邻近不保证转岗或晋升。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.seven-day-decision.1",
@@ -30310,64 +30369,68 @@
             ],
             "rows": [
               [
-                "高中文凭或同等学历",
-                "多数岗位",
-                "满足招聘的学历基础",
-                "较普遍",
-                "完成高中或同等学力教育",
-                "按学制",
-                "学历不保证取得岗位或资格"
+                "高中或同等学历",
+                "美国本职入门参考",
+                "BLS典型入门学历",
+                "职业总体参考，非统一中国要求",
+                "核具体招聘条件",
+                "具体学制另核",
+                "不保证岗位或操作授权"
               ],
               [
-                "中学后证书（如适用）",
-                "工艺较复杂或多设备看护岗位",
-                "形成工艺与设备与质量的基础知识",
-                "视岗位要求而定",
-                "完成相关职业教育或培训课程",
-                "数月至两年",
-                "证书不等于特种作业或设备操作资格"
+                "中学后证书",
+                "按课程与岗位核",
+                "O*NET新聘问卷16%此选项",
+                "不是本职统一必需",
+                "核课程及雇主要求",
+                "费用时长另核",
+                "不等法定特种作业证"
               ],
               [
                 "安全与职业卫生培训",
-                "所有现场岗位",
-                "降低高温与粉尘与噪声与有害气体与机械伤害风险",
-                "普遍必需",
-                "参加机构或行业培训并考核",
-                "数小时至数天",
-                "培训不等于医疗或职业卫生处置资格"
+                "具体现场岗位",
+                "核岗位规程及危害防护",
+                "按法域岗位适用要求",
+                "单位组织及适用考核",
+                "按适用制度核",
+                "不等健康结论或独立维修权限"
               ],
               [
-                "特种作业与特种设备操作资格（如适用）",
-                "涉及锅炉与压力容器与熔融金属与危险作业的岗位",
-                "满足特定危险作业的上岗要求",
-                "视作业与地区要求而定",
-                "完成规定培训与考核并取得相应资格",
-                "数周至数月",
-                "以所在地与主管部门要求为准，本页不提供个人资格结论"
+                "特种作业及特种设备相关资格",
+                "实际目录设备作业项目涉及者",
+                "依法满足对应上岗条件",
+                "不是所有炉窑一证通用",
+                "按相应项目法定培训考试与发证",
+                "具体项目费用时长另核",
+                "两套制度及单位授权分别核"
               ],
               [
-                "设备操作与工艺与质量记录经验",
-                "转向骨干或带教或班组长方向者",
-                "提升承担关键工艺与多设备看护与带教责任的能力",
-                "晋升方向需要",
-                "通过多班次与多工序实践与内部晋升积累",
-                "数月至数年",
-                "不替代安全与工艺变更与放行责任"
+                "设备工艺及记录经验",
+                "拟承担更多实际职责者",
+                "核岗位实践证据",
+                "编辑学习方向非保证晋升",
+                "依岗位培训与授权积累",
+                "无统一晋升年限",
+                "不能由纸面作品替代实操"
               ],
               [
-                "应急处置与事故演练经历",
-                "所有现场与带班岗位",
-                "提升异常与事故处置与人员保护能力",
-                "普遍需要",
-                "参加机构应急演练与培训",
-                "数小时至数天",
-                "演练经历不等于事故处置授权"
+                "异常与应急训练",
+                "适用现场与带班岗位",
+                "核预案、报告与职责",
+                "按实际岗位制度",
+                "单位按预案组织训练",
+                "具体安排另核",
+                "不是任意事故处置授权"
               ]
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.credential-decision.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "operations",
+            "special-work",
+            "special-equipment"
           ],
           "title": "学历、培训与资格：哪些是本职业的真实门槛？",
           "type": "table"
@@ -30377,15 +30440,18 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界（一）｜应聘条件、法定资格与机构授权是三种不同状态：满足招聘条件不等于取得特种作业或设备操作资格或机构工艺变更与放行与数据对外提供授权，取得培训与证书不等于获得独立操作特种设备或变更工艺的决定权。",
-              "资格边界（二）｜美国 O*NET 教育栏显示 56% 需要高中文凭或同等学历、21% 需要低于高中文凭、16% 需要中学后证书（本页不编造其余比例），Job Zone 为 1-2 级（SVP 低于 6.0）；涉及锅炉与压力容器等特种设备与熔融金属与危险化学品与有限空间作业在美国与多数地区另有资格与规程要求。中国大陆由应急管理与市场监管与卫生健康等部门依据《安全生产法》《职业病防治法》与特种设备与特种作业相关规定对相关企业及从业人员实施管理；两者不可互换。",
-              "资格边界（三）｜本页列示的准备项为检索与核对方向，不构成任何机构的正式资格清单；如与机构公告或主管部门要求不一致，以后者为准。",
-              "资格边界（四）｜本页不提供个人体检结论、录用可能性或薪酬承诺。"
+              "学历与课程、法定资格、岗位培训和单位授权分别核；学历或单位授权不能替代法定证件。",
+              "美国O*NET新聘学历56%高中、21%低于高中、16%中学后证书；不是现职全体学历，也不能造中国辅助/操作/骨干分层。Zone1—2与SVP低于6是分组准备描述，BLS本职典型中期OJT不等个人固定训练时长。",
+              "中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。",
+              "本页不提供个人健康、录用、收入或真实操作结论；资格是否需要按实际目录和项目核，不从“炉窑”或“熔融金属”字样统一判断。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.credential-boundary.1",
           "source_refs": [
-            "onet"
+            "onet",
+            "ep",
+            "special-work",
+            "special-equipment"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -30395,8 +30461,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明｜本页不引用任何具体招聘公告的数量或薪酬数字。制造业企业常按工厂与工序与班次分批发布招聘，且多通过企业直招与劳务与内部培养渠道招募，公开渠道的样本难以代表整体市场；企业规模与工序类型与设备更新与订单与季节性负荷与班次人力结构的波动会明显影响用人规模。",
-              "核对建议｜查看招聘信息时应记录发布时间、地点、企业类型（玻璃与陶瓷、木材加工、橡胶与塑料、化学与日化等）、岗位职责与授权边界（装卸与辅助、加热设备操作与看护、工艺与设备骨干、班组长）、是否要求安全培训与特种作业与设备操作资格、工时与班次与夜班与高温津贴安排、学历与经历要求、以及薪酬构成（基本工资、班次或夜班或高温或绩效补贴、加班或调休）；这些信息比页面往往更能反映真实条件。"
+              "证据不足：本轮未取得可核验、可对应本职的代表性招聘公告与薪酬样本；不写渠道、季节性或订单对本职机会的已证因果。",
+              "编辑核对：记录公告日期、工厂地点、设备与物料、职责、班次、学历经验、具体证件项目、培训防护及工资奖金加班构成；历史公告不是当前在招或全国工资。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.recruitment-sample.1",
@@ -30424,10 +30490,10 @@
                 "url": "https://www.bls.gov/oes/"
               },
               {
-                "entity": "O*NET 炉窑干燥设备操作与看护员国家工资",
+                "entity": "BLS本职EP2025—2035与入门特征",
                 "id": "link-3",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localwages/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 资格与训练资料",
@@ -30448,7 +30514,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "边界｜本页的准备路径与能力阶梯用于帮助你规划学习与积累证据，不构成录用、晋升或资格判定。真正的准入以机构招聘条件、学历与安全培训与经历与考核，以及所在地区对特种作业与特种设备与危险作业相关岗位的资格与授权要求为准，也不代表取得工艺变更与设备结构与数据对外提供的权限。"
+              "编辑学习路径｜三条路径列操作看护、设备质量协作及记录排程的学习重心。四阶段是作品与职责讨论框架，不是固定晋升时间、职称或授权；现场职责依具体岗位。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.11",
@@ -30574,12 +30640,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜进入本职业的完整路径通常是：完成高中或同等学历与相关职业教育（或从装卸与辅助岗起步） → 接受设备操作与工艺与安全与职业卫生培训（涉及特种作业与特种设备者另行取得资格） → 通过机构招聘与在岗安全考核 → 在资深操作人员带领下学习读工单与设定参数与装载与监控与取样与检测与清堵与记录 → 通过考核后独立承担当班操作与看护并承担安全与质量与记录责任 → 在多工序与多设备与异常处置中积累经验 → 视表现转为带教或生产与合规支持方向，或转向工业机械机械师、机械维护工、食品与烟草烘焙干燥设备操作员、金属轧制工、磨工与生产一线主管等相邻岗位。安全与职业卫生意识与规程执行能力通常构成门槛，真正决定长期发展的是把工艺规格做成稳定运行的能力、异常与故障的判断与处置能力、以及对记录与质量的严谨程度。"
+              "中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.20",
           "source_refs": [
-            "onet"
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -30602,12 +30669,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "适用法域｜美国 O*NET 教育栏显示 56% 需要高中文凭或同等学历、21% 需要低于高中文凭、16% 需要中学后证书（本页不编造其余比例），Job Zone 为 1-2 级（SVP 低于 6.0）；涉及锅炉与压力容器等特种设备与熔融金属与危险化学品与有限空间作业在美国与多数地区另有资格与规程要求。中国大陆由应急管理与市场监管与卫生健康等部门依据《安全生产法》《职业病防治法》与特种设备与特种作业相关规定对相关企业及从业人员实施管理；两者不可互换，具体以所在地法规与机构规定为准。"
+              "美国本职典型入门高中或同等、相关经验None、中期OJT；中国条件依具体招聘及目录项目核，统计和资格不可互换。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.22",
           "source_refs": [
-            "onet"
+            "ep",
+            "special-work",
+            "special-equipment"
           ],
           "type": "prose"
         },
@@ -30658,7 +30727,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "用于核对该职业的就业与增长与空缺口径（BLS 2024—2034 经 O*NET 呈现）；预测不等于实际招聘。"
+              "核BLS本职EP2025—2035典型入门学历、相关经验和中期OJT；不是个人训练期限或中国资格。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.26",
@@ -30686,7 +30755,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安全与职业卫生基础培训记录；机构设备与工艺培训。"
+              "编辑准备｜安全与职业卫生基础培训记录；机构设备与工艺培训。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.28",
@@ -30756,7 +30825,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在岗培训与考核记录；多工序实践与特种作业资格（如涉及）。"
+              "编辑准备｜在岗培训与考核记录；多工序实践与特种作业资格（如涉及）。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.33",
@@ -30826,7 +30895,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应岗位授权；带教与考核记录。"
+              "编辑准备｜相应岗位授权；带教与考核记录。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.38",
@@ -30896,7 +30965,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "编辑准备｜相应管理资历或机构任命。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.43",
@@ -30966,7 +31035,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "安全与设备基础培训记录；无工艺变更与产品放行权限。"
+              "编辑准备｜安全与设备基础培训记录；无工艺变更与产品放行权限。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.48",
@@ -31036,7 +31105,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构授权与相关培训；实践经验。"
+              "编辑准备｜机构授权与相关培训；实践经验。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.53",
@@ -31106,7 +31175,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "编辑准备｜相应管理资历或机构任命。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.58",
@@ -31176,7 +31245,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或机构授权。"
+              "编辑准备｜相应管理任命或机构授权。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.63",
@@ -31246,7 +31315,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "记录与工艺培训记录；无工艺变更与放行权限。"
+              "编辑准备｜记录与工艺培训记录；无工艺变更与放行权限。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.68",
@@ -31316,7 +31385,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "机构授权与相关培训；多工序实践经历。"
+              "编辑准备｜机构授权与相关培训；多工序实践经历。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.73",
@@ -31386,7 +31455,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理资历或机构任命。"
+              "编辑准备｜相应管理资历或机构任命。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.78",
@@ -31456,7 +31525,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "相应管理任命或机构授权。"
+              "编辑准备｜相应管理任命或机构授权。 具体法定证件与岗位授权另核，不是全员统一门槛。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.path.career-path-block.83",
@@ -31559,10 +31628,10 @@
                 "url": "https://www.onetonline.org/link/localwages/51-9051.00"
               },
               {
-                "entity": "O*NET 就业趋势（BLS 2024—2034）",
+                "entity": "BLS本职EP2025—2035",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/localtrends/51-9051.00"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 炉窑干燥设备操作与看护员职业档案",
@@ -31631,12 +31700,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国口径（精确职业 O*NET-SOC 51-9051.00）：2024 年就业约 16,500 人（BLS 职业预测基期，经 O*NET 呈现），2024—2034 年预计增长属「平均（3% 至 4%）」类别，期间预计约 1,900 个岗位空缺；2025 年中位时薪 23.10 美元、中位年薪 48,040 美元，工资分布从下十分位 35,960 美元到上十分位 69,800 美元。中国大陆部分：未建立与本职业精确对应的公开职业工资与就业统计，按证据政策本页只登记口径与缺口，不提供代理数值。"
+              "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。 美国2025雇员中位年薪48,040美元、时薪23.10美元，10/25/75/90年工资35,960/41,130/59,830/69,800。证据不足：中国精确全国、城市及用工形式工资就业未取得，不证明不存在。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet"
+            "ep",
+            "onet-wages",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -31659,7 +31730,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034"
+              "2025—2035"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.10",
@@ -31673,7 +31744,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "空缺含增长与替换需求；制造业产出与设备更新与班次人力结构支撑需求，但订单与季节性负荷与自动化投资与工序外迁会影响岗位。"
+              "年均空缺含增长及转出退出；具体订单、班次或技术对本职招聘的因果未核，不能把预测当实际职位。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.11",
@@ -31687,7 +31758,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不含自雇；为美国就业预测口径，不适用中国大陆与其他法域；分行业与分地区细分可能缺失；预测不等于实际招聘数。"
+              "EP含自雇，2025占1.8%；OEWS雇员工资排自雇。预测不适用中国或保证个人机会。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.12",
@@ -31715,7 +31786,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "精确职业 O*NET-SOC 51-9051.00（经 O*NET 呈现）"
+              "BLS本职51-9051（不是相邻OOH代理）"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.14",
@@ -31729,7 +31800,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业约 16,500 人（2024）；2024—2034 年增长属「平均（3% 至 4%）」类别；期间预计约 1,900 个岗位空缺"
+              "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.15",
@@ -31771,7 +31842,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中位是分布中点，不等于起薪；上下十分位跨度约 1.9 倍，工序类型与资格与班次与地区是主要差异来源。"
+              "90/10年工资约1.9倍；分位不是资历或工序等级，本页未取因素分解。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.18",
@@ -31785,7 +31856,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "OEWS 不含福利与绩效与班次与夜班与高温津贴；本精确职业的分行业与分地区工资本页未取得，按可见缺口登记。"
+              "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.19",
@@ -31869,7 +31940,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类公布平均工资、不区分职业；炉窑与干燥设备操作岗位多分布在制造业（非金属矿物制品、木材加工、橡胶与塑料制品、化学原料与化学制品等行业）并按安全生产与职业卫生与特种作业要求管理，工序与班次与地区差异较大，行业均值不能替代职业工资，也不能用于推断起薪或到手收入。"
+              "证据不足：未取得中国本职行业细分、班次与地区机会的代表样本。 NBS行业平均工资仅背景，不替代中国本职工资就业；本职国内行业细分、班次与地区机会未取得代表样本。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.25",
@@ -31925,7 +31996,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "证据不足：中国大陆未建立与本职业精确对应的职业工资与就业统计值；按证据政策本页展示缺失而不使用代理数字。"
+              "证据不足：未取得中国大陆本职精确全国、城市与用工形式工资就业；有界查阅不证明统计不存在，不代填。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.29",
@@ -31953,7 +32024,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对美国 2024—2034 就业增长与空缺口径（经 O*NET 呈现）；预测不等于实际招聘。"
+              "用于核对BLS本职2025—2035规模、增长与年均空缺；非AI因果或实际招聘。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.31",
@@ -31967,7 +32038,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "用于核对国家统计局行业门类平均工资的口径与年份；为背景参照而非职业工资，且本职业精确值不可得。"
+              "NBS行业工资只支持行业背景，不能推出本职精确值不存在或以均值代职业工资。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.32",
@@ -32149,7 +32220,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，由非金属物料转向基本金属轧制"
+              "编辑相邻学习：转向金属轧制须另核轧制任务、岗位要求和权限。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.45",
@@ -32233,7 +32304,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "较近，由非金属热处理转向金属热处理"
+              "编辑相邻学习：转向金属热处理，不能概括本职绝无金属任务。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.51",
@@ -32317,7 +32388,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "中等，需另行取得特种设备操作资格"
+              "编辑相邻学习：锅炉等具体设备与资格项目另核，不按邻近任务自动转岗。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.market-signals.market-signal-card.57",
@@ -32340,67 +32411,64 @@
           "data": {
             "entries": [
               {
-                "answer": "按 O*NET-SOC 51-9051.00，本职业操作或看护用于基本金属、塑料或食品加工以外的加热设备，包括玻璃退火、木材干燥、橡胶硫化、物料去湿或皂料熬煮等活动。工作包括按工单与工艺规格启动与设定与调节设备并监控仪表与面板指示灯；装载与取出物料与产品并按条件计算与称量投料量；铸造前熔化或精炼金属并维持温度；取样或检测处理后的物料以确认符合规格；记录仪表读数与试验结果与班次产量；停机清除堵塞与卡料、更换磨损零件并清洁与润滑与调整设备；添加燃料并清除灰渣；以及与主管或其他设备操作人员沟通设备故障与生产问题。不含依法只能由具备相应资质或获得授权的人员与机构承担的特种设备（如锅炉与压力容器）操作与工艺变更与产品放行与事故认定职责。",
+                "answer": "本职51-9051.00操作或看护定义所列基本金属、塑料或食品加工设备以外的加热设备，包括玻璃退火、木材干燥、橡胶硫化、去湿和皂料熬煮。17任务7核心10补充；补充含铸造前熔化或精炼金属，不可说绝无金属工作。按工单观察控制、样品及记录故障；任务描述不授现场资格。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.1",
                 "question": "这个职业具体做什么？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q1",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "核心区别在对象与授权：本职业以加热设备与热处理过程为对象，按工艺规格操作与看护设备并完成取样与记录，产出是符合规格的热处理结果与设备运行与质量记录；工业机械机械师以设备与机械系统的故障诊断与检修与校准为产出，通常不负责工艺参数与产品判定；机械维护工以设备与设施的日常维护与保养与报修为产出；金属热处理工以金属与塑料的热处理为对象，属基本金属加工的相邻方向（本职业范围明确排除基本金属加热设备）；金属轧制工与磨工分别以金属轧制与工件磨削为产出；食品与烟草烘焙干燥设备操作员处理食品与烟草类物料并受食品安全与卫生规范约束。上述岗位常在同一个制造链条中衔接，但衔接不等于可互相替代。",
+                "answer": "本职重心在加热设备过程看护与记录；机械师重在诊断检修、维护工重在保养维护，职责可交叉。金属热处理、轧制、磨削和食品烟草设备为不同处理对象的相邻方向；具体岗位和资格独立核。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.2",
                 "question": "它和工业机械机械师、机械维护工、金属热处理工有什么区别？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q2",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "美国口径（精确职业 51-9051.00）：2025 年中位时薪 23.10 美元、中位年薪 48,040 美元；分位 35,960 / 41,130 / 59,830 / 69,800 美元/年（跨度约 1.9 倍）；2024 年就业约 16,500 人，2024—2034 年预计增长属「平均（3% 至 4%）」类别，期间预计约 1,900 个岗位空缺（BLS OEWS 2025 与 BLS 2024—2034 职业预测，经 O*NET 呈现）。上述为美国全国口径，不适用其他法域；OEWS 不含福利与绩效与班次与夜班与高温津贴。",
+                "answer": "美国2025全国雇员中位年薪48,040美元、时薪23.10美元；10/25/75/90年工资35,960/41,130/59,830/69,800。美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。 2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.3",
                 "question": "美国工资和就业情况如何？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q3",
                 "source_refs": [
-                  "oews",
-                  "ep"
+                  "onet-wages",
+                  "ep",
+                  "oews-method"
                 ]
               },
               {
-                "answer": "中国大陆未建立与本职业精确对应的公开职业工资与就业统计。国家统计局按行业门类公布城镇单位就业人员平均工资，属行业口径、不区分职业；炉窑与干燥设备操作岗位多分布在制造业（非金属矿物制品、木材加工、橡胶与塑料制品、化学原料与化学制品等行业）并按安全生产与职业卫生与特种作业要求管理。按本页证据政策，中国大陆部分保留「证据不足：」可见标记，展示缺失而不使用行业均值或美国数据推断起薪或到手收入。",
+                "answer": "证据不足：本轮未取得中国本职精确全国工资就业及城市用工形式数据，不证明统计不存在。NBS行业均值只是背景，不用美国或行业数值推中国起薪。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.4",
                 "question": "中国大陆有对应的工资数据吗？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q4",
                 "source_refs": [
-                  "nbs",
-                  "cnclass"
+                  "nbs"
                 ]
               },
               {
-                "answer": "O*NET 工作情境显示：每天佩戴常见防护或安全装备 100%、每天暴露于污染物 83%、每天暴露于干扰性或不适的噪声 82%、每天在非环境受控的室内工作 81%、每天暴露于极热或极冷温度 76%、每天暴露于轻微灼伤或割伤或咬伤或叮伤 65%、每天暴露于危险设备 56%、每天暴露于危险条件 33%、对他人健康与安全负「很高」责任 57%、错误后果为「极其严重」60%、持续或几乎持续站立 50%、持续或几乎持续用双手操作与控制与感知物体与工具与控件 57%。工作以高温与噪声与粉尘与污染物环境、持续体力与重复动作、佩戴防护装备与班次交接为主，安全与职业卫生要求高。",
+                "answer": "O*NET 工作情境显示：每天佩戴常见防护或安全装备 100%、每天暴露于污染物 83%、每天暴露于干扰性或不适的噪声 82%、每天在非环境受控的室内工作 81%、每天暴露于极热或极冷温度 76%、每天暴露于轻微灼伤或割伤或咬伤或叮伤 65%、每天暴露于危险设备 56%、每天暴露于危险条件 33%、对他人健康与安全负「很高」责任 57%、错误后果为「极其严重」60%、持续或几乎持续站立 50%、持续或几乎持续用双手操作与控制与感知物体与工具与控件 57%。工作以高温与噪声与粉尘与污染物环境、持续体力与重复动作、佩戴防护装备与班次交接为主，安全与职业卫生要求高。 这些是问卷选项比例，不是事故率或每个人必然暴露；不能作个人健康结论。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.5",
                 "question": "工作环境和职业卫生情况如何？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q5",
                 "source_refs": [
-                  "onet",
-                  "bls"
+                  "onet"
                 ]
               },
               {
-                "answer": "影响主要在读数与记录与台账与培训环节：读数抄录与记录整理、工单与工艺规格与安全规程查询、装料与出料与能耗与物料台账、点检与备件与排程与统计报表、培训与模拟训练材料整理可被工具辅助；现场工艺判断与参数调节、装料与出料与清堵等体力操作、高温与有害环境中的设备与安全处置、熔融金属与特种设备操作、取样与判定与放行、异常与事故应急与升级仍由操作与看护员与授权人员负责。本职业属中等暴露，但任务暴露不等于岗位替代，工具输出不能替代现场判断与授权放行。",
+                "answer": "证据不足：本职AI量化暴露、采用、效率或就业因果未取得。编辑可试虚构工单与记录草稿；现场任务按规程和授权，软件目录不证提速或替代。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.6",
                 "question": "AI 会影响这个职业吗？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q6",
                 "source_refs": [
                   "onet",
-                  "bls"
+                  "nist"
                 ]
               },
               {
-                "answer": "O*NET 教育栏显示 56% 需要高中文凭或同等学历、21% 需要低于高中文凭、16% 需要中学后证书（本页不编造其余比例）；Job Zone 为 1-2 级（SVP 低于 6.0），通常以在职训练为主。涉及锅炉与压力容器等特种设备与熔融金属与危险化学品与有限空间作业的岗位另有资格与规程要求；实际以机构与属地要求为准。",
+                "answer": "美国O*NET新聘学历问卷56%高中、21%低于高中、16%中学后证书，不是全部从业学历。BLS典型入门高中或同等、相关经验None、中期OJT；Zone1—2是分组准备描述，不等中国招聘或个人固定时长。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.7",
                 "question": "需要什么学历和培训？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q7",
@@ -32410,27 +32478,29 @@
                 ]
               },
               {
-                "answer": "「受过培训」「取得课程或证书」「取得特种作业或设备操作资格」「获得机构授权」是四种不同状态。涉及锅炉与压力容器等特种设备与熔融金属与危险化学品与有限空间作业在美国与多数地区另有资格与规程要求；中国大陆由应急管理与市场监管与卫生健康等部门依据《安全生产法》《职业病防治法》与特种设备与特种作业相关规定对相关企业及从业人员实施管理。本页列示的准备项不构成任何机构的正式资格清单。",
+                "answer": "中国大陆按具体设备是否列入特种设备目录、具体作业是否列入特种作业目录及资格项目核对；两类资格不是同一证件。特种作业19号令自2026-06-01施行。法定资格、培训记录与单位岗位授权分别核，单位授权不能替代法定证件；美国职业代码不授予中国资格，也不能从“炉窑”或“熔融金属”名称断定人人持同一证。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.8",
                 "question": "需要证书或资格吗？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q8",
                 "source_refs": [
-                  "onet",
-                  "cnclass"
+                  "special-work",
+                  "special-equipment"
                 ]
               },
               {
-                "answer": "常见失效包括：未按工艺规格设定与调节或参数越界或误判读数或设备带病运行导致批量报废与设备损坏；高温设备与熔融金属与蒸汽与热油造成灼伤；粉尘与有害气体与噪声暴露超标与通风除尘失效；清堵与检修未停机或未上锁挂牌导致卷入与剪切伤害；取样与检测与判定不规范或读数与产量与检测记录不实导致质量追溯失效；擅自变更工艺参数或产品放行或设备结构变更与工艺与质量数据或职业健康数据泄露。控制要点是按工艺规格与授权与安全与职业卫生与记录规范核对与留痕、异常与越权事项立即升级。",
+                "answer": "编辑风险场景含参数版本误用、热能及机械危险、污染物防护、样品与记录缺项、越权及数据外供。美国危险能量隔离按适用1910.147，停机按钮不能替代隔离验证；中国危害作业按职业卫生制度核。记录更正保原版本，不估数冒实测；工艺数据不自动敏感个人信息。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.9",
                 "question": "这个职业有哪些主要风险？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q9",
                 "source_refs": [
                   "onet",
-                  "cnclass"
+                  "osha-loto",
+                  "operations",
+                  "privacy"
                 ]
               },
               {
-                "answer": "美国口径下 2024—2034 年预计增长属「平均（3% 至 4%）」类别，期间约 1,900 个空缺，含增长与替换需求；预测不等于个人机会，实际机会取决于本地制造业产出与设备更新与班次人力结构。可转向工业机械机械师、机械维护工、食品与烟草烘焙干燥设备操作员、金属轧制工、磨工、金属热处理工、生产一线主管、固定设备工程师与锅炉操作员等相邻岗位（需重新学习与补足证据），或转向带教与生产与合规支持方向。",
+                "answer": "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。 八相邻方向只是编辑任务邻近，不保证自动转岗、资格互认或晋升。",
                 "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.faq.10",
                 "question": "前景如何、能转向哪些方向？",
                 "question_key": "career.faq.furnace-kiln-oven-drier-and-kettle-operators-and-tenders.q10",
@@ -32452,7 +32522,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜研究流程：先核对 O*NET-SOC 51-9051.00 的职业范围与任务与工作情境与兴趣与教育与准备层级，再取 BLS OEWS 2025 的工资中位与分位（经 O*NET 呈现）与 BLS 2024—2034 职业预测的就业与增长与空缺（经 O*NET 呈现并经来源登记核对），最后以国家统计局 2025 年行业门类平均工资作为中国大陆的背景参照；中国大陆未建立与本职业精确对应的统计值，按证据政策展示缺失而不使用代理数字；美国与中国大陆数据分别列示，不拼接、不换算。"
+              "本轮2026-10-03核本职O*NET概览、详情17任务57情境、四类软件、全国2025工资、行业85%/15%未标年份，以及BLS51-9051当前EP2025—2035；旧ONET概览2024人数与旧预测不作当前。美国与中国分别核，不拼接。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.sources.source-card.1",
@@ -32466,7 +32536,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜来源登记：本页的来源登记列出 O*NET 职业档案与详细资料与定制页与兴趣与训练与证书与国家工资与行业与热门技术与就业趋势、O*NET 数据库与职业分类、BLS OEWS 与职业工资页与就业预测与数据总览与全国数据表与新闻稿、国家统计局 2025 年城镇单位平均工资与发布索引与口径说明、ILO 未来工作与 NIST AI RMF 治理参考与 FermatMind 口径规则；每条事实的 source_refs 均指向该登记内的 id。"
+              "来源登记保稳定ID并新增具体OEWS方法、OSHA危险能量控制、2026特种作业规章及特种设备法；任务来源不能支持法律资格，软件目录不能支持AI采用。旧目录页未逐个新访问，不冒其支持具体公告或法定证件。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.sources.source-card.2",
@@ -32480,7 +32550,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜查阅日期：本页数据于 2026-09-21 查阅 O*NET 与 BLS 官方页面；O*NET 页面标注数据更新年份为 2026（工资为该页面显示的 2025 年 BLS OEWS 数据、就业与增长与空缺为该页面显示的 2024—2034 预测），国家统计局数据为 2025 年并于 2026 年发布。"
+              "本轮查阅日2026-10-03；工资观察期2025，就业预测2025—2035，O*NET概览更新2026。行业85%制造业15%其他没有年份，不能标2024或推细分工资。法规日期按具体制定与施行，不用网页发布日期替代。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.sources.source-card.3",
@@ -32494,7 +32564,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "来源卡｜证据不足与口径说明：本页登记三类可见缺口——（1）中国大陆未建立与本职业精确对应的职业工资与就业统计，按证据政策展示缺失而不使用代理数字；（2）本职业在美国可按行业与分地区读取的工资中位数未取得（O*NET 仅列出制造业为 2024 年主要行业且未给占比）；（3）中国大陆城市或地区与用工形式的收入数据未取得可按职业核验的来源。三处均保留「证据不足：」标记，不以行业均值、招聘报价或第三方估算填充。"
+              "证据不足：中国精确本职全国、城市及用工形式工资就业与代表招聘样本未取得，美国四行业工资未取得，本职AI量化采用效果和六测评个体效度未取得；分别在工资、AI、适配及入行板块明确，不代填。制造业85%已核不再称行业占比完全缺失。"
             ]
           },
           "id": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.sources.source-card.4",
@@ -32603,20 +32673,20 @@
                 "url": "https://www.onetonline.org/link/details/51-9051.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年就业约 16,500 人；2024—2034 年预计增长属「平均（3% 至 4%）」类别。",
-                  "期间预计约 1,900 个岗位空缺，来自增长与替换需求。"
+                  "美国BLS本职51-9051：2025就业14.5千、2035预测14.9千，2025—2035增长2.6%、净增0.4千、年均空缺1.8千个，基期自雇占1.8%。空缺非十年总数、净新增或实际招聘。",
+                  "典型入门高中或同等，相关经验None、中期OJT；无对应OOH链接，不借相邻OOH。"
                 ],
-                "evidence_type": "official trend display",
+                "evidence_type": "official occupational projection",
                 "id": "ep",
-                "limitation": "预测口径，不含自雇；不代表实际招聘。",
+                "limitation": "含自雇；空缺为年均；不证AI因果或实际招聘。",
                 "market": "美国",
-                "name": "O*NET OnLine：炉窑干燥设备操作与看护员就业趋势（51-9051.00）",
-                "period": "BLS 2024-2034 projections via O*NET",
-                "publisher": "O*NET OnLine / U.S. Bureau of Labor Statistics",
-                "scope": "51-9051.00 exact occupation",
-                "url": "https://www.onetonline.org/link/localtrends/51-9051.00"
+                "name": "BLS本职51-9051就业预测2025—2035",
+                "period": "2025—2035 projections; 2025 base",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "BLS51-9051 exact occupation",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32626,7 +32696,7 @@
                 ],
                 "evidence_type": "official wage display",
                 "id": "oews",
-                "limitation": "全国口径，不含福利与绩效与班次与夜班与高温津贴。",
+                "limitation": "OEWS排自雇，工资纳排见oews-method；分位不是资历或班次层级。",
                 "market": "美国",
                 "name": "O*NET OnLine：炉窑干燥设备操作与看护员国家工资（51-9051.00）",
                 "period": "BLS 2025 wage data via O*NET",
@@ -32642,7 +32712,7 @@
                 ],
                 "evidence_type": "official industry wage release",
                 "id": "nbs",
-                "limitation": "行业门类口径，不区分职业；本职业精确值不可得。",
+                "limitation": "行业门类口径非本职工资；本轮页面访问超时，有界未取本职统计不证明不存在。",
                 "market": "中国大陆",
                 "name": "国家统计局：2025 年城镇单位就业人员年平均工资情况",
                 "period": "2025 annual wages; published 2026-05-15",
@@ -32669,18 +32739,18 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于说明工艺与质量数据与职业健康数据的收集与使用边界。",
-                  "要求处理个人信息具有合法依据并限于最小必要范围。"
+                  "可识别个人信息按合法基础、用途与保护措施核；医疗健康属于敏感个人信息。",
+                  "纯工艺质量参数不自动落入敏感个人信息范围，按单位制度及适用规则核。"
                 ],
                 "evidence_type": "statute",
                 "id": "privacy",
-                "limitation": "以法律原文与主管部门解释为准。",
+                "limitation": "适用可识别个人信息，医疗健康敏感；纯工艺质量数据不自动敏感。",
                 "market": "中国大陆",
-                "name": "中华人民共和国个人信息保护法",
+                "name": "中国个人信息保护法",
                 "period": "effective 2021-11-01",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "personal information protection",
-                "url": "https://www.gov.cn/xinwen/2021-08/20/content_5632486.htm"
+                "url": "https://www.samr.gov.cn/wljys/gzzd/art/2023/art_3ef1e889c1e644d4b65b5f5c7f432386.html"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32706,13 +32776,13 @@
                 ],
                 "evidence_type": "statute",
                 "id": "operations",
-                "limitation": "以法律原文与职业卫生标准为准。",
+                "limitation": "34/35条职业卫生培训及接触危害人员检查，非个人诊断。",
                 "market": "中国大陆",
-                "name": "中华人民共和国职业病防治法",
+                "name": "中国职业病防治法（2018修正）",
                 "period": "current",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "occupational disease prevention",
-                "url": "https://www.gov.cn/xinwen/2018-12/30/content_5353570.htm"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992844.html"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32733,12 +32803,12 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "岗位公告中的技术与软件提及汇总。",
-                  "含过程控制与数据采集与设备状态监测与办公与电子表格工具等。"
+                  "本职概览已核软件四类：工业控制/机器操作、库存跟踪、Excel、Word。",
+                  "未证统一PLC/DCS、实验室系统或预测维护采纳。"
                 ],
                 "evidence_type": "official technology display",
                 "id": "health",
-                "limitation": "技术提及不等同于能力或自动化程度。",
+                "limitation": "本轮未新读取热门技术明细，不用目录推采用率。",
                 "market": "美国",
                 "name": "O*NET OnLine：炉窑干燥设备操作与看护员热门技术（51-9051.00）",
                 "period": "current page; accessed 2026-09-02",
@@ -32813,15 +32883,15 @@
               {
                 "accessed_at": "2026-09-21",
                 "details": [
-                  "用于核对预测方法与期间口径。",
-                  "用于核对增长类别与替换需求说明。"
+                  "BLS总体预测入口；本职具体值引用ep精确行。",
+                  "年均空缺不等净增或实际招聘。"
                 ],
                 "evidence_type": "official projections overview",
                 "id": "weforum",
                 "limitation": "预测不等于实际招聘。",
                 "market": "美国",
                 "name": "BLS 就业预测总览（Employment Projections）",
-                "period": "2024—2034 projections",
+                "period": "2025—2035 projections",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "national projections",
                 "url": "https://www.bls.gov/emp/"
@@ -32891,10 +32961,10 @@
                 "url": "https://www.onetonline.org/link/custom/51-9051.00"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "2024 年主要行业为制造业（O*NET 未给占比）。",
-                  "用于理解雇主类型分布。"
+                  "O*NET本职行业85%制造业、15%其他，页面未标年份。",
+                  "不是子行业占比或行业内本职工资。"
                 ],
                 "evidence_type": "official industry display",
                 "id": "r2-pay-3",
@@ -32939,20 +33009,20 @@
                 "url": "https://www.bls.gov/oes/2025/may/oes_nat.htm"
               },
               {
-                "accessed_at": "2026-09-21",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对发布时点与统计范围。",
-                  "用于核对生产类职业大类的工资与就业描述。"
+                  "United States全国2025年工资35,960/41,130/48,040/59,830/69,800。",
+                  "时薪17.29/19.77/23.10/28.77/33.56；CA入口州数据不用。"
                 ],
                 "evidence_type": "official news release",
                 "id": "onet-wages",
-                "limitation": "为发布口径，不代表个人薪酬。",
+                "limitation": "CA入口只读取United States全国行，不用CA工资；雇员非自雇。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资新闻稿（OEWS）",
+                "name": "O*NET本职全国2025工资",
                 "period": "2025 OEWS",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "OEWS national release",
-                "url": "https://www.bls.gov/news.release/ocwage.htm"
+                "url": "https://www.onetonline.org/link/localwages/51-9051.00?st=CA"
               },
               {
                 "accessed_at": "2026-09-21",
@@ -32962,13 +33032,93 @@
                 ],
                 "evidence_type": "statute",
                 "id": "archivists",
-                "limitation": "以法律原文与主管部门规定为准。",
+                "limitation": "目录管理、相关岗位资格与单位制度，不指所有炉窑统一资格。",
                 "market": "中国大陆",
-                "name": "中华人民共和国特种设备安全法",
+                "name": "中国特种设备安全法",
                 "period": "current",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "special equipment safety",
-                "url": "https://www.gov.cn/flfg/2013-06/29/content_2436365.htm"
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "雇员工资纳基本工资、计件、佣金、生产奖金及符合口径款项；排加班溢价、班次差额、非生产奖金与福利。",
+                  "通常2080小时折年，不等个人实际小时或实发。"
+                ],
+                "evidence_type": "official methodology",
+                "id": "oews-method",
+                "limitation": "工资纳排与2080折年，非个人实发。",
+                "market": "美国",
+                "name": "BLS OEWS工资方法",
+                "period": "current OEWS methodology",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "OEWS employee wage definitions",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "授权维护人员按设备专用程序隔离、处理残余能量并验证；停机按钮不等能量隔离。",
+                  "适用范围及例外、锁定与挂牌条件、培训均依原文，不作中国法律。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "osha-loto",
+                "limitation": "美国适用检修维护能量控制、培训授权及隔离验证，不是中国规定。",
+                "market": "美国",
+                "name": "OSHA1910.147危险能量控制",
+                "period": "current 29 CFR1910.147",
+                "publisher": "OSHA, U.S. Department of Labor",
+                "scope": "applicable servicing/maintenance hazardous energy control",
+                "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "19号令2025-12-17公布，2026-06-01施行。",
+                  "3/4条按目录界定作业，专门培训考核并取相应证；单位授权不代证。"
+                ],
+                "evidence_type": "official regulation",
+                "id": "special-work",
+                "limitation": "2026-06-01施行，按目录作业与项目核资格，不是所有炉窑同证。",
+                "market": "中国大陆",
+                "name": "特种作业人员安全技术培训考核管理规定（19号令）",
+                "period": "effective2026-06-01",
+                "publisher": "中华人民共和国应急管理部",
+                "scope": "目录内特种作业及对应人员",
+                "url": "https://www.mem.gov.cn/gk/zfxxgkpt/fdzdgknr/gz11/202512/t20251219_589223.shtml"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "2条目录管理；14条相关人员依法取得相应资格。",
+                  "运行维护及异常按单位岗位制度与规程；不把所有炉窑作为锅炉。"
+                ],
+                "evidence_type": "official law",
+                "id": "special-equipment",
+                "limitation": "实际设备目录及项目对应资格，与特种作业制度分别核。",
+                "market": "中国大陆",
+                "name": "中国特种设备安全法",
+                "period": "2013 adopted law",
+                "publisher": "国家市场监督管理总局（法律原文）",
+                "scope": "目录内特种设备及适用相关岗位",
+                "url": "https://www.samr.gov.cn/tzsbj/zcfg/flfg/art/2019/art_39715c5a62f64e32aa522fcc2afd6298.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "制造业85%、其他行业15%。",
+                  "没有各细分行业工资或独立比例，不据此造四行业工资。"
+                ],
+                "evidence_type": "official occupational industry display",
+                "id": "onet-industry",
+                "limitation": "85%制造业、15%其他，无年份，无各子行业工资。",
+                "market": "美国",
+                "name": "O*NET本职行业分布",
+                "period": "网页未标年份",
+                "publisher": "O*NET OnLine",
+                "scope": "51-9051.00 industry distribution",
+                "url": "https://www.onetonline.org/link/industry/51-9051.00"
               }
             ]
           },
@@ -33389,7 +33539,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "国际组织暴露度研究",
+            "类型": "官方OEWS新闻稿",
             "适用范围": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33411,7 +33561,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "学术研究",
+            "类型": "国际组织专题",
             "适用范围": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33433,7 +33583,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "雇主预期调查",
+            "类型": "通用AI风险框架",
             "适用范围": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33455,7 +33605,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "人工智能风险框架",
+            "类型": "官方职业概览",
             "适用范围": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33477,7 +33627,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方职业任务资料",
+            "类型": "官方职业兴趣",
             "适用范围": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35181,7 +35331,7 @@
             },
             "evidence_refs": [
               "onet",
-              "employer"
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -35213,7 +35363,7 @@
             },
             "evidence_refs": [
               "onet",
-              "privacy"
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -35245,7 +35395,7 @@
             },
             "evidence_refs": [
               "privacy",
-              "employer"
+              "onet"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -35292,7 +35442,7 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             },
-            "title": "清堵与检修未停机或未上锁挂牌"
+            "title": "清堵与检修未确认危险能量隔离"
           },
           {
             "affected_roles": {
@@ -35309,7 +35459,7 @@
             },
             "evidence_refs": [
               "bls",
-              "employer"
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -35340,8 +35490,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "onet",
-              "facilities"
+              "pipl-law",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35475,6 +35625,24 @@
               "copy_key": "career.item.career-risk-cards",
               "type": "prose"
             }
+          },
+          {
+            "href": {
+              "$link": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "url"
+            },
+            "id": "pipl-law",
+            "label": {
+              "$link": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.risk.career-risk-cards.7",
+              "block": "risk",
+              "copy_key": "career.item.career-risk-cards",
+              "entry": "link-7",
+              "field": "entity"
+            },
+            "scope": "中国PIPL仅可识别个人信息，医疗健康敏感；纯工艺数据非自动敏感。"
           }
         ]
       },
@@ -35836,8 +36004,8 @@
             "ai_heading": "AI 会影响炉窑干燥设备操作与看护员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
             "official_heading": "公开招聘样本（历史公告，非官方统计）",
-            "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
-            "scenario_heading": "炉窑干燥设备操作与看护员在不同学历背景下通常从哪些岗位方向开始？",
+            "scenario_caption": "美国新聘学历问卷与编辑核对建议，不是中国岗位分层",
+            "scenario_heading": "不同学历背景应核对哪些实际招聘要求？",
             "scenario_interpretation_label": "说明与核对建议",
             "scenario_role_label": "学历背景",
             "scenario_value_label": "常见岗位方向"
@@ -36064,7 +36232,7 @@
         },
         "industry_rows": [
           {
-            "fact_ref": "us-industry-wage-aerospace-mfg-2025",
+            "fact_ref": "us-industry-wage-manufacturing-2025",
             "industry": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.34",
               "block": "us-salary",
@@ -36085,7 +36253,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-engineering-services-2025",
+            "fact_ref": "us-industry-wage-glass-ceramics-2025",
             "industry": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.37",
               "block": "us-salary",
@@ -36106,7 +36274,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-federal-2025",
+            "fact_ref": "us-industry-wage-wood-rubber-2025",
             "industry": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.40",
               "block": "us-salary",
@@ -36127,7 +36295,7 @@
             }
           },
           {
-            "fact_ref": "us-industry-wage-rd-2025",
+            "fact_ref": "us-industry-wage-chemical-soap-2025",
             "industry": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.us-salary.career-snapshot-secondary-locale.43",
               "block": "us-salary",
@@ -36859,7 +37027,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 就业预测（2024—2034）",
+            "label": "BLS就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders.profile.onet-structured-fields-block.4",
@@ -37939,99 +38107,176 @@
         ]
       },
       {
-        "derivation": "口径｜美国 2025 年 BLS OEWS 全国年工资中位数（经 O*NET 呈现），对应精确职业 51-9051.00；OEWS 不含福利与绩效与班次与夜班与高温津贴。",
-        "display_value": "中位时薪 23.10 美元 / 中位年薪 48,040 美元（2025，BLS OEWS）",
+        "derivation": "2025 年美国全国 OEWS 雇员税前工资；不含自雇。包括基本工资、计件、佣金、生产奖金及符合口径的生活成本或危险工作报酬，排除加班溢价、班次差额、非生产奖金及雇主福利；不能一律说绩效或高温相关款项都排除。",
+        "display_value": "48,040 美元/年",
         "fact_id": "us-wage-2025",
         "market": "美国",
-        "measure": "工资中位数",
+        "measure": "年工资中位数",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "onet-wages",
+          "oews-method"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "10 分位 35,960 美元/年（2025，BLS OEWS）",
+        "derivation": "美国全国工资第10百分位，不是辅助岗或起薪。",
+        "display_value": "35960 美元/年",
         "fact_id": "us-wage-low10-2025",
         "market": "美国",
         "measure": "工资第10分位",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "90 分位 69,800 美元/年（2025，BLS OEWS）",
+        "derivation": "美国全国工资第90百分位；90/10约1.9，不是个人可达上限。",
+        "display_value": "69800 美元/年",
         "fact_id": "us-wage-high10-2025",
         "market": "美国",
         "measure": "工资第90分位",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "onet-wages"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 就业预测 2024—2034 年（经 O*NET 呈现），对应精确职业 51-9051.00，增长属「平均（3% 至 4%）」类别；预测含增长与替换需求，不等于实际招聘数。",
-        "display_value": "增长 属「平均（3% 至 4%）」类别（2024—2034，BLS 职业预测经 O*NET 呈现）",
+        "derivation": "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。",
+        "display_value": "2.6%",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
-        "measure": "就业增长",
+        "measure": "就业增长率",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜美国 BLS 就业预测 2024 年基期（经 O*NET 呈现），对应精确职业 51-9051.00；不含自雇，分行业与分地区细分可能缺失。",
-        "display_value": "就业 约 16,500 人（2024，BLS 职业预测基期，经 O*NET 呈现）",
+        "derivation": "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。",
+        "display_value": "14.5 千人",
         "fact_id": "us-employment-2025",
         "market": "美国",
-        "measure": "就业人数",
+        "measure": "基期就业人数",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
-        "period": "2024",
+        "period": "2025",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": "口径｜O*NET 呈现的 2024—2034 期间 Projected job openings 字段（约 1,900 个），来自增长与替换需求；按原文呈现，不可读作新增岗位。",
-        "display_value": "预计岗位空缺约 1,900 个（2024—2034 期间，O*NET 呈现的 Projected job openings 字段）",
+        "derivation": "美国本职 BLS 51-9051：2025 年就业 14.5 千人，2035 年预测 14.9 千人，2025—2035 增长 2.6%、净增 0.4 千人、年均空缺 1.8 千个；基期自雇占 1.8%。空缺含增长及人员转出和退出需求，不是十年总数、净新增或实际招聘数。",
+        "display_value": "年均1.8千个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
-        "period": "2024—2034",
+        "period": "2025—2035",
         "source_refs": [
-          "onet"
+          "ep"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇非私营单位职业工资统计",
+        "derivation": "NBS行业均值仅背景，有界检索不证明数据不存在。",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确非私营单位职业工资统计。",
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
         ]
       },
       {
-        "derivation": null,
-        "display_value": "证据不足：中国大陆未建立与本职业精确对应的城镇私营单位职业工资统计",
+        "derivation": "NBS行业均值仅背景，有界检索不证明数据不存在。",
+        "display_value": "证据不足：本轮未取得中国大陆本职精确私营单位职业工资统计。",
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "中国大陆精确职业工资",
         "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
         "period": "2025",
         "source_refs": [
-          "onet"
+          "nbs"
+        ]
+      },
+      {
+        "derivation": "美国2025全国51-9051.00雇员年工资，不是资历层级。",
+        "display_value": "41130 美元/年",
+        "fact_id": "us-wage-q25-2025",
+        "market": "美国",
+        "measure": "工资第25分位",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": "美国2025全国51-9051.00雇员年工资，不是资历层级。",
+        "display_value": "59830 美元/年",
+        "fact_id": "us-wage-q75-2025",
+        "market": "美国",
+        "measure": "工资第75分位",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages"
+        ]
+      },
+      {
+        "derivation": "有界查阅全国工资与行业页未得本行数值；全国工资及85%制造业比例不能代填细分工资。",
+        "display_value": "证据不足：未取得制造业总体内本职业2025工资中位数。",
+        "fact_id": "us-industry-wage-manufacturing-2025",
+        "market": "美国",
+        "measure": "行业内本职工资中位数",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages",
+          "onet-industry"
+        ]
+      },
+      {
+        "derivation": "有界查阅全国工资与行业页未得本行数值；全国工资及85%制造业比例不能代填细分工资。",
+        "display_value": "证据不足：未取得玻璃、陶瓷等加热处理内本职业2025工资中位数。",
+        "fact_id": "us-industry-wage-glass-ceramics-2025",
+        "market": "美国",
+        "measure": "行业内本职工资中位数",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages",
+          "onet-industry"
+        ]
+      },
+      {
+        "derivation": "有界查阅全国工资与行业页未得本行数值；全国工资及85%制造业比例不能代填细分工资。",
+        "display_value": "证据不足：未取得木材干燥与橡胶硫化内本职业2025工资中位数。",
+        "fact_id": "us-industry-wage-wood-rubber-2025",
+        "market": "美国",
+        "measure": "行业内本职工资中位数",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages",
+          "onet-industry"
+        ]
+      },
+      {
+        "derivation": "有界查阅全国工资与行业页未得本行数值；全国工资及85%制造业比例不能代填细分工资。",
+        "display_value": "证据不足：未取得化学与皂料熬煮内本职业2025工资中位数。",
+        "fact_id": "us-industry-wage-chemical-soap-2025",
+        "market": "美国",
+        "measure": "行业内本职工资中位数",
+        "occupation_scope": "本职业：炉窑干燥设备操作与看护员",
+        "period": "2025",
+        "source_refs": [
+          "onet-wages",
+          "onet-industry"
         ]
       }
     ]
@@ -38059,19 +38304,19 @@
         "availability": "available",
         "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
         "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国就业人数（2025，含自雇）"
       },
       {
         "availability": "available",
         "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国预计岗位空缺（2024—2034）"
+        "label": "美国年均空缺（2025—2035）"
       },
       {
         "availability": "available",
@@ -38092,7 +38337,7 @@
       "text": "炉窑干燥设备操作与看护员"
     }
   },
-  "source_content_sha256": "0137f7b06333bab19884b163fb7f431785b5f759959a5a5d6de415b23c322118",
+  "source_content_sha256": "85b8b7f2da30387de8b509f36d5b0529083232a738c7f88e538f66bb65aeaf69",
   "subject": {
     "canonical_slug": "furnace-kiln-oven-drier-and-kettle-operators-and-tenders",
     "name": "炉窑干燥设备操作与看护员",

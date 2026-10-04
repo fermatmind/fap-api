@@ -1317,7 +1317,7 @@
         "status": "pending_mapping"
       },
       "item:anesthesiologists.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:anesthesiologists.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23380,7 +23380,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的小任务：按公开资料整理一份麻醉前风险评估清单（合并症、气道评估、用药与过敏史、禁食与抗凝要点）；用虚构数据完成一份麻醉方案与监测计划表（含麻醉方式选择依据、监测项目与异常阈值）；把一次术后转归判断或不良事件处置写成含依据、风险分级与交接要点的说明。做不完整是正常的，重点是观察自己对按循证与指南作判断、核对细节与如实记录的真实反应。（编辑建议，不是录用或技能测试，也不构成医学建议。）"
+              "纸面小任务：用下文完整虚构材料A/B/C核对方案文件的版本、审核状态和授权记录，列差异与待确认项，完成三任务及四份作品。题面不含临床数据，不选择麻醉方式、药物或异常阈值；观察记录与协作习惯，不能据此判断临床能力或录用。"
             ]
           },
           "id": "anesthesiologists.quick-decision.fit-decision-checklist.2",
@@ -23394,7 +23394,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "更可能适应的人：能长期按循证证据与临床指南作临床决策而不凭印象，愿意在高风险、信息不完整的围术期情境下快速判断并承担责任，能在长时间手术与值班中保持警觉，能以清楚沟通协调外科、护理与技师团队并主导麻醉方案，接受长周期训练（医学院、住院医师与专科培训）与持续学习、考核与执照维护，并对医疗责任与患者隐私有敬畏。若不愿按指南与证据决策、难以承受高风险与长时间值守，或对持续学习与团队责任不适，风险通常更大。"
+              "编辑自查建议：观察自己能否逐项核对资料、保留未知、清楚沟通和承担适用职责；同时核长周期医学训练、值班、防护和持续考核条件。该建议来自任务与工作情境，不能预测谁更适合或个人失败风险。"
             ]
           },
           "id": "anesthesiologists.quick-decision.fit-decision-checklist.3",
@@ -23410,13 +23410,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页美国工资与就业为 O*NET 展示的 BLS 数据（麻醉科医师专属口径）：2025 年 5 月年薪中位数 391,490 美元（时薪 188.22 美元；第 10 分位 101,460、第 25 分位 207,000、第 75 分位 490,530、第 90 分位 557,130 美元），2024 年在岗约 45,300 人，2024—2034 年平均增长 3% 至 4%，年均约 1,300 个空缺；主要行业为医疗保健与社会援助。BLS 职业展望手册另按更大的「医师与外科医师」组合发布口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺、中位 275,930 美元），本页仅作对照、不当作本职业数字。中国大陆没有该职业精确的全国工资分布，行业门类数字只作宽口径参考；执业须依《中华人民共和国医师法》取得医师资格并注册，专科训练按住院医师与专科医师规范化培训制度执行。本页不构成医疗、法律或政策意见。"
+              "证据不足：本页未取得中国大陆麻醉医师全国工资分布；行业均值仅参照。美国2025年5月工资由ONET展示BLS OEWS麻醉医师29-1211数据：年中位391,490美元，时薪188.22；10/25/75/90分位101,460/207,000/490,530/557,130美元。BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。ONET仍展示旧2024—2034就业数据，当前预测直接取EP。OOH也列麻醉医师明细，另有医师与外科医师组合862,800人、增长4%、年均22,100空缺、工资中位275,930美元，组合不替代本职业。"
             ]
           },
           "id": "anesthesiologists.quick-decision.fermat-decision-card.6",
           "source_refs": [
-            "onet",
-            "onet"
+            "oews",
+            "ep",
+            "ooh",
+            "nbs",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -23527,11 +23530,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00（麻醉科医师专属口径）显示：2025 年 5 月年薪中位数 391,490 美元（时薪 188.22 美元），第 10 分位 101,460、第 25 分位 207,000、第 75 分位 490,530、第 90 分位 557,130 美元；2024 年在岗约 45,300 人；2024—2034 年平均增长 3% 至 4%、年均约 1,300 个空缺；主要行业为医疗保健与社会援助。学历方面 69% 受访者认为需博士后训练、25% 需博士学位、5% 需专业学位；Job Zone Five（SVP 8.0+）。BLS 职业展望手册另按「医师与外科医师」组合发布口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺、中位 275,930 美元），本页仅作对照。"
+              "工资由ONET展示的BLS OEWS麻醉医师明细支持：2025年5月中位391,490美元、时薪188.22，10/25/75/90分位101,460/207,000/490,530/557,130美元。BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。O*NET学历受访比例为69% Post-Doctoral Training、25% Doctoral Degree、5% Professional Degree；是美国受访类别，不能推出中国必须读学术博士后或博士。Job Zone Five为准备程度分类，不授予执业资格。"
             ]
           },
           "id": "anesthesiologists.profile.onet-structured-fields-block.2",
           "source_refs": [
+            "oews",
+            "ep",
             "onet"
           ],
           "type": "prose"
@@ -23585,12 +23590,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 就业预测（麻醉科医师专属口径，经 O*NET 展示）：2024 年在岗约 45,300 人，2024—2034 年平均增长 3% 至 4%，年均约 1,300 个职位空缺且多数来自替代需求。该数字为本职业专属口径、不代表个人就业保证，且不能外推为中国大陆。BLS 职业展望手册的「医师与外科医师」组合口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺）覆盖多个专科，本页仅作对照。中国大陆侧没有对应的官方职业就业预测，本页不提供数字。"
+              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。当前预测直接来自EP，ONET仍显示旧2024—2034。OOH既列麻醉医师明细，也列较大的医师组合，两者范围不同；均不保证个人就业、不外推中国。"
             ]
           },
           "id": "anesthesiologists.profile.onet-structured-fields-block.4",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -23614,12 +23620,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆依据《中华人民共和国医师法》（2021-08-20 通过，自 2022-03-01 起施行）：国家实行医师资格考试制度与医师执业注册制度，取得医师资格并注册后方可执业；医师经注册后在医疗卫生机构中按照注册的执业地点、执业类别、执业范围执业，经相关专业培训和考核合格可以增加执业范围；国家建立健全住院医师规范化培训制度与专科医师规范化培训制度；医学文书须亲自诊查后如实及时填写，实施特殊检查与治疗须向患者说明并取得明确同意，发现传染病、医疗事故或药品与器械不良事件须按规定报告。按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13）；美国侧麻醉科医师为持照医师（MD/DO），完成医学院、住院医师与麻醉专科（或亚专科 fellowship）培训并取得州行医执照后执业。"
+              "美国MD/DO是医学院学位，不是执照；ASA所述麻醉住院医师培训为四年，执业另需州行医执照。亚专科fellowship是进一步训练路径，不能写成所有人的普遍门槛；BLS称专科board certification并非普遍法定必需。中国《医师法》规定资格考试及注册，并有本科相关医学专业加一年指导实践、执业助理医师加相关专科两年执业等报考路径；不能把本科路径写成唯一途径。法律建立规范化培训框架，具体岗位培训、考核和授权须核现行主管部门与机构条件。医学文书、知情同意和报告义务按医师法与机构规定。2022版职业分类列麻醉科医师2-05-01-13，分类本身不授予执业许可。"
             ]
           },
           "id": "anesthesiologists.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "cnlaw",
+            "cnclass",
+            "asa-career",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -23643,14 +23652,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "边界看四件事：谁制定麻醉方案并承担最终医疗责任、谁在监督下实施操作、谁提供护理与术后随访、谁承担机构的医疗质量与合规管理。麻醉科医师负责术前评估与风险判断、制定麻醉方案、指导与监督麻醉实施并承担最终医疗责任；麻醉医师助理与护理麻醉师在其监督或协作关系内实施气道管理、监测与给药等操作；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。超出执业范围、专科资质或机构授权的事项须按程序会诊或转诊。"
+              "麻醉医师在合法执业范围与机构授权内评估、制定并实施麻醉方案，负责自身诊疗与记录；ASA描述的美国麻醉照护团队由麻醉医师领导，可委派适当任务但保留总体责任。助理和护理人员仍有各自执业义务；CRNA权限随法域和机构变化。监测、给药、恢复照护与随访可有团队任务重叠，不能把这些排除出医师任务或概括其他成员没有临床判断。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.7",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "asa-career",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -23689,7 +23697,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "不把相邻职责（麻醉医师助理与护理麻醉师在监督下实施的操作、护理团队的护理随访、机构管理与监管监督）算作本职业核心任务。"
+              "本职业也亲自实施麻醉、监测、给药、恢复评估与照护；团队可在各自资格与授权范围分工，相同操作不能单凭名称划成另一职业专属任务。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.10",
@@ -23719,7 +23727,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "麻醉科医师（美方对应 O*NET/BLS 29-1211.00）在手术前、手术中或手术后为疼痛管理施用麻醉剂与镇痛剂：评估围术期风险、制定并实施麻醉方案、在全程监测患者并对不良反应或并发症作出处置、判断恢复并完成复苏交接，同时协调与指导麻醉团队、开展教学与研究并管理麻醉服务。执业须先取得医师资格并注册（中国大陆），美国侧为持照医师并完成麻醉专科培训；执业范围、专科资质与机构授权约束临床决策。美国工资与就业为 O*NET 展示的麻醉科医师专属口径（2025 年 5 月年薪中位数 391,490 美元，2024 年约 45,300 人，2024—2034 年平均增长 3% 至 4%、年均约 1,300 个空缺）。本页不构成医疗建议。"
+              "麻醉医师29-1211在围术期评估、制定并实施麻醉方案、监测并处理不良反应，判断恢复、协调团队及开展教学研究。中国依法取得医师资格并注册；美国MD/DO学位、住院医师训练与州执照分开核。美国2025年5月工资中位391,490美元；当前就业见本页BLS EP 2025—2035明细，不引用ONET旧预测冒充当前。"
             ]
           },
           "id": "anesthesiologists.profile.definition-block.11",
@@ -23765,7 +23773,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "以风险评估充分、麻醉方案有循证依据、监测与处置规范、知情同意与记录完整、患者安全事件少衡量，不以手术台数单项衡量。"
+              "编辑核对维度：评估依据、授权范围、方案与操作记录、知情同意、异常上报及交接是否完整。不能只按手术台数或未经风险调整的事件数量评价个人质量，本页不提供临床绩效测量标准。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.14",
@@ -23810,13 +23818,13 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "麻醉方案与最终医疗责任由麻醉科医师承担；在监督或协作关系内的操作由麻醉医师助理或护理麻醉师实施；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。"
+              "麻醉医师在合法执业范围与机构授权内评估、制定并实施麻醉方案，负责自身诊疗与记录；ASA描述的美国麻醉照护团队由麻醉医师领导，可委派适当任务但保留总体责任。助理和护理人员仍有各自执业义务；CRNA权限随法域和机构变化。监测、给药、恢复照护与随访可有团队任务重叠，不能把这些排除出医师任务或概括其他成员没有临床判断。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.17",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-career",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -23825,13 +23833,14 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "美国侧执业须持州行医执照（MD/DO）并完成麻醉专科培训；中国大陆侧按《中华人民共和国医师法》与卫生健康主管部门规定取得医师资格并注册，执业范围变更与专科资质按主管部门规定执行；机构内的处方权与操作授权按机构制度执行。"
+              "中国依法取得医师资格并注册，按地点、类别、范围执业；美国MD/DO学位与州行医执照不同。具体训练、考核及处方/操作授权按适用规则与机构核。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.18",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-career",
+            "ooh",
+            "cnlaw"
           ],
           "type": "prose"
         },
@@ -23885,7 +23894,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "入职前至少核对六项：机构类型（三级医院麻醉科与手术室、专科医院、日间手术中心、教学医院）；岗位方向（手术室内麻醉、产科与儿科麻醉、重症与疼痛方向、教学科研）；资格与授权要求（行医执照与麻醉专科培训（美国）或医师资格与执业注册、专科资质与机构授权）；训练路径（医学院与住院医师及专科 fellowship，或住院医师与专科医师规范化培训与继续医学教育）；工作模式（手术室排班与值班、每周工作时长、感染与辐射暴露防护）；以及晋升路径（职称、亚专科、教学与科研方向）。"
+              "入职前核机构与患者类型、手术室/产儿/重症疼痛等方向、法域资格与机构授权、具体培训考核、排班防护与晋升书面条件。美国fellowship属于进一步亚专科路径；中国医师法培训框架不能单独证明所有岗位有同一额外麻醉专科证。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.22",
@@ -23958,7 +23967,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "行医执照与专科培训（美国）或医师资格与执业注册（中国大陆）是执业前提。"
+              "中国资格与执业注册、美国州行医执照及相应医学教育/训练分别核；学位和认证不能代替执照。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.27",
@@ -23972,7 +23981,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "资格与授权：是否持州行医执照并完成麻醉专科培训（美国）或已取得医师资格并完成执业注册（中国大陆），以及机构内的处方与操作授权范围。"
+              "核合法执业资格、注册范围与机构处方/操作授权；美国另核州规则和训练条件，不把MD/DO当执照。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.28",
@@ -23987,7 +23996,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "规范化培训与继续教育影响长期发展与职称晋升。"
+              "具体培训、继续教育和晋升要求按主管部门与机构当前条件核对，不据制度框架推断每个岗位一致。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.29",
@@ -24001,7 +24010,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "训练路径：医学院、住院医师与麻醉专科（或亚专科 fellowship）培训（美国）；或住院医师规范化培训与专科医师规范化培训、继续医学教育学分与职称晋升条件（中国大陆）。"
+              "美国核医学院与麻醉住院医师路径，亚专科fellowship按目标方向；中国核报考/注册路径和适用规范化培训、继续教育及职称条件，不能推导普遍硕博或统一额外麻醉证要求。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.30",
@@ -24046,7 +24055,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "授权范围与晋升路径影响长期发展与收入。"
+              "授权与晋升需核岗位书面条件；本页未估计其对收入的因果影响。"
             ]
           },
           "id": "anesthesiologists.profile.career-quick-answers-block.33",
@@ -24091,13 +24100,13 @@
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：29-1211",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-2",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "entity": "BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）",
+                "entity": "BLS OOH医师与外科医师：含麻醉医师明细与组合",
                 "id": "link-3",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
@@ -24180,7 +24189,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向手术室内临床决策；对风险评估、方案制定与应急处置要求最高。"
+              "编辑分组：手术室内麻醉侧重围术期方案、实施与监测，不据任务清单排名“要求最高”。"
             ]
           },
           "id": "anesthesiologists.direction-comparison.adjacent-career-comparison-table.11",
@@ -24239,7 +24248,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向特定人群；对特殊生理、剂量与沟通要求最高。"
+              "编辑分组：产科与儿科方向侧重相应人群的评估、麻醉与沟通，不以该分组证明风险或要求高低。"
             ]
           },
           "id": "anesthesiologists.direction-comparison.adjacent-career-comparison-table.15",
@@ -24357,7 +24366,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "面向受监督的操作实施；麻醉方案与最终医疗责任由麻醉科医师承担，认证与执照体系不同。"
+              "美国CAA与医师资格不同；在麻醉医师监督下实施授权任务，也有自身执业义务。"
             ]
           },
           "id": "anesthesiologists.direction-comparison.adjacent-career-comparison-table.23",
@@ -24372,7 +24381,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "更愿意在监督下专注操作实施而非承担方案决策责任的人。"
+              "麻醉医师负责自身方案、实施与诊疗；ASA团队模型保留总体责任，不等于助理没有责任。"
             ]
           },
           "id": "anesthesiologists.direction-comparison.adjacent-career-comparison-table.24",
@@ -24446,7 +24455,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "走护理资格序列并取得麻醉护理执业资格，独立实施部分麻醉与围术期照护。"
+              "CRNA走护理麻醉路径；独立权限、监督与机构授权按法域核，不能概括所有地区一致。"
             ]
           },
           "id": "anesthesiologists.direction-comparison.adjacent-career-comparison-table.29",
@@ -24575,7 +24584,7 @@
                 "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "entity": "BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）",
+                "entity": "BLS OOH医师与外科医师：含麻醉医师明细与组合",
                 "id": "link-4",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
@@ -24626,7 +24635,7 @@
                 "entity": "BLS 就业预测表（按详细职业）",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
                 "entity": "O*NET 展示的 BLS 工资分位（29-1211.00）",
@@ -24659,10 +24668,10 @@
                 "url": "https://www.onetonline.org/link/localcert/29-1211.00"
               },
               {
-                "entity": "BLS OEWS：29-1211 工资统计",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
                 "entity": "O*NET 29-1211.00 任务清单与病历要求",
@@ -24812,7 +24821,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变监护报警与趋势提示、监测数据整合、麻醉记录书写辅助与药物剂量核对等环节，但没有证据表明它会取代术前风险评估与麻醉方案判断、气道管理与生命支持的操作与决策、应急处置与最终医疗责任，本页也不据此推测岗位数量变化。技术能力、实际部署与招聘结果要分开判断；本页引用的 2024—2034 年平均增长 3% 至 4% 为麻醉科医师专属口径的 BLS 官方预测，不能等同于「AI 会替代」或「AI 会创造」。"
+              "证据不足：本页未取得麻醉医师AI采用率、替代率或工资因果估计。记录整理、趋势汇总与提示仅为编辑可能用途，不证明已部署或临床有效；资格与诊疗责任按适用法律和机构制度。EP增长预测不能归因于AI。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.18",
@@ -24857,7 +24866,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 工资分位（麻醉科医师专属）"
+              "O*NET任务与工作活动"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.21",
@@ -24872,7 +24881,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于年薪 10/25/50/75/90 分位数值与资料期（含时薪中位数）。"
+              "描述美国任务，不是工资、就业或AI效果研究。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.22",
@@ -24887,7 +24896,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：29-1211"
+              "O*NET展示的BLS工资分位"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.23",
@@ -24901,7 +24910,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于工资中位数与就业规模的官方口径（麻醉科医师专属）。"
+              "2025年5月29-1211工资；不支持就业预测或AI效果。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.24",
@@ -24915,7 +24924,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测（经 O*NET 展示）"
+              "BLS OOH职业手册"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.25",
@@ -24929,7 +24938,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于增长幅度与年均职位空缺（麻醉科医师专属口径）。"
+              "有麻醉医师工资与就业明细及医师组合；EP提供未四舍五入增长率与年均空缺。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.26",
@@ -24943,7 +24952,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：医师与外科医师（2025—2035 组合口径）"
+              "O*NET详细职业工作情境"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.27",
@@ -24957,7 +24966,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明更大组合口径与麻醉科医师专属口径的差异，仅作对照。"
+              "美国受访任务与工作情境，不能用组合统计或法律标签冒充。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.28",
@@ -24971,7 +24980,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》（2022-03-01 施行）"
+              "O*NET美国职业摘要"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.29",
@@ -24985,7 +24994,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆医师资格考试、执业注册、执业范围与规范化培训制度的框架说明。"
+              "支持美国职业对照；中国医师法另见本页cnlaw登记，不由相邻ONET链接支持。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.30",
@@ -24999,7 +25008,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）麻醉科医师（2-05-01-13）"
+              "O*NET职业软件技术清单"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.31",
@@ -25013,7 +25022,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆对应职业与麻醉专科定位的说明。"
+              "软件条目不支持中国分类或临床权限；分类见cnclass登记。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.32",
@@ -25027,7 +25036,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "下表比较本职业内部主要方向在自动化影响上的差别。"
+              "下表为编辑提出的任务辅助可能性，各方向的实际采用和临床效果未核，不是自动化影响比较研究。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.33",
@@ -25042,7 +25051,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护报警与趋势提示、剂量核对与麻醉记录书写可自动化处理。"
+              "编辑可能用途：整理监护记录与趋势；效果及临床采用未核。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.34",
@@ -25072,7 +25081,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护数据整合与用药核对可自动化提示。"
+              "编辑可能用途：汇总记录供复核；不自行判断特殊人群剂量。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.36",
@@ -25102,7 +25111,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "生命支持数据与用药记录可自动化管理。"
+              "编辑可能用途：整理生命支持与用药记录；不替代临床决定。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.38",
@@ -25146,7 +25155,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不提供分行业工资；本页工资与就业取自 O*NET 展示的 BLS 麻醉科医师专属口径并单独列出。"
+              "O*NET旧就业预测未用作当前数字；工资见ONET工资页，当前就业直接取BLS EP。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.41",
@@ -25258,7 +25267,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "就业与工资为麻醉科医师专属口径；不含按亚专科细分，也不能外推为中国大陆。"
+              "以下链接是O*NET任务资料，不支持就业统计；当前就业见本页ep登记。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.49",
@@ -25272,7 +25281,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）：29-1211"
+              "O*NET详细职业任务"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.50",
@@ -25286,7 +25295,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国该职业的就业与工资口径（麻醉科医师专属）"
+              "美国任务与工作活动，不是OEWS就业统计"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.51",
@@ -25300,12 +25309,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "OEWS 为美国职业就业与工资统计的官方来源，按职业发布就业规模与工资分位；本页采用麻醉科医师 2024 年在岗约 45,300 人，主要行业为医疗保健与社会援助。"
+              "O*NET任务支持术前评估、麻醉实施、监测与记录、恢复判断和团队协作；工资及就业另见oews/ep登记，不能由任务表推出人数。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "operations"
           ],
           "type": "prose"
         },
@@ -25314,7 +25323,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "麻醉科医师口径为本职业专属预测；组合口径覆盖多个专科，本页仅作对照，不把组合数字当作本职业数字，也不外推为中国大陆。"
+              "相邻链接为美国职业摘要；当前BLS详细预测另见ep，数字不等于个人保证或中国预测。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.53",
@@ -25328,7 +25337,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 2024—2034 年就业预测（经 O*NET 展示）与职业展望手册组合口径"
+              "O*NET职业摘要与当前BLS EP另行登记"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.54",
@@ -25342,7 +25351,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "美国该职业的就业前景与对照口径"
+              "美国职业身份与任务对照；当前预测为EP明细"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.55",
@@ -25356,12 +25365,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测麻醉科医师在 2024—2034 年平均增长 3% 至 4%，年均约 1,300 个职位空缺，多数来自替代需求；BLS 职业展望手册另按「医师与外科医师」组合发布口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺、中位 275,930 美元），覆盖多个专科。"
+              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。当前数字直接取登记ep，不由相邻ONET摘要支持。OOH含明细，组合只作对照。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -25370,7 +25380,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该统计为民用行业门类口径、不含本职业单列工资；该门类覆盖大量非麻醉岗位，本页仅作宽口径对照。"
+              "相邻链接是BLS EP而不是NBS；下列中国数字实际由登记nbs支持，不外推本职业工资。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.57",
@@ -25384,7 +25394,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "国家统计局中国行业工资（登记nbs；相邻链接为美国EP）"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.58",
@@ -25417,7 +25427,7 @@
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -25426,7 +25436,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，监护设备报警与趋势提示、监测数据整合、麻醉记录书写辅助、药物剂量核对与设备自检数据可被部分自动化，输出可用于辅助信息核对与提示。这些结果仍需执业医师结合术前评估、指南与患者情况核实后才能用于麻醉方案与处置决定。"
+              "编辑可能用途为记录整理、趋势汇总与提示；临床有效性、实际采用和监管状态本轮未核，不把技术清单当诊疗验证。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.61",
@@ -25456,13 +25466,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 预测麻醉科医师 2024—2034 年平均增长 3% 至 4%，年均约 1,300 个空缺且多数来自替代需求。本页不把任务自动化程度等同于岗位数量变化，也不据技术名词推断岗位增减。"
+              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。该预测不能证明AI引起增减。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.63",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -25471,7 +25482,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持「被取代」。自动化可能增强监护报警、数据整合与记录辅助，但术前风险评估与麻醉方案判断、气道管理与生命支持的操作与决策、应急处置与最终医疗责任仍由执业医师承担；本页引用的 2024—2034 年平均增长 3% 至 4% 为麻醉科医师专属口径的 BLS 官方预测，本页不据技术名词推断岗位增减。"
+              "证据不足：本页未取得本职业AI替代因果估计，不能断言会取代或不会取代。记录辅助只是可能用途，临床决定与授权责任另核。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.64",
@@ -25486,7 +25497,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 与 BLS 2024—2034 年预测（编辑归纳）"
+              "O*NET任务资料及BLS EP 2025—2035预测；不支持AI替代因果。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.65",
@@ -25501,7 +25512,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00（麻醉科医师专属）显示：2025 年 5 月年薪中位数 391,490 美元（时薪 188.22 美元），第 10 分位 101,460 美元、第 25 分位 207,000 美元、第 75 分位 490,530 美元、第 90 分位 557,130 美元（BLS OEWS，经 O*NET 展示）。中国大陆没有该职业精确的全国工资分布，本页只给出行业门类的宽口径参照。"
+              "证据不足：本页未取得中国大陆麻醉医师全国工资分布。美国2025年5月专属工资中位391,490美元，10/90分位101,460/557,130；中国行业均值不能代替职业中位。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.66",
@@ -25531,13 +25542,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13）。执业须依《中华人民共和国医师法》取得医师资格并注册后方可执业，并在注册的执业地点、执业类别与执业范围内执业；国家建立健全住院医师规范化培训制度与专科医师规范化培训制度。美国侧麻醉科医师为持照医师（MD/DO），完成医学院、住院医师与麻醉专科（或亚专科 fellowship）培训后执业。"
+              "中国依法取得医师资格并注册，职业分类麻醉科医师2-05-01-13不授予许可。美国MD/DO为学位，另有麻醉住院医师训练及州执照；fellowship为进一步亚专科路径，不是所有人通用门槛。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnlaw",
+            "cnclass",
+            "asa-career",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -25590,7 +25603,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。麻醉科医师须依《中华人民共和国医师法》取得医师资格并注册后方可执业（美国侧须持州行医执照并完成麻醉专科培训），并按注册的执业地点、类别与范围执业；麻醉医师助理与护理麻醉师走各自的认证、执照与监管体系，不可互相替代，转换须按相应主管部门与院校规定重新完成教育与考试。"
+              "不能。相邻职业走各自资格与授权制度，不能折算成麻醉医师学位、执照或注册；团队任务可重叠，成员仍有各自义务。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.72",
@@ -25619,13 +25632,14 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "两者口径不同。BLS 职业展望手册按更大的「医师与外科医师」组合发布（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺、中位 275,930 美元），覆盖多个专科；本页采用 O*NET 展示的麻醉科医师专属口径（2024 年约 45,300 人、2024—2034 年平均增长 3% 至 4%、年均约 1,300 个空缺、中位 391,490 美元）。本页不把组合数字当作本职业数字，两者也不互相折算。"
+              "OOH同时列麻醉医师明细和医师组合；麻醉医师2025年41,500人、2035年43,000人、增长4%（整数），EP为3.6%、年均1,100空缺。医师组合2025年862,800人、增长4%、年均22,100、中位275,930美元，不能替代麻醉医师工资391,490美元。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.74",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "ooh",
+            "oews"
           ],
           "type": "prose"
         },
@@ -25634,7 +25648,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：医师与外科医师（组合口径）与 O*NET 29-1211.00（专属口径）"
+              "BLS OOH及EP的详细职业/组合口径；O*NET工资页"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.75",
@@ -25649,7 +25663,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "建议次序：按卫生健康主管部门与院校官方信息核对医学教育与执业路径；打牢生理、药理、气道管理与循证医学基础；了解住院医师与专科医师规范化培训与继续教育要求（美国侧为医学院、住院医师与麻醉专科 fellowship 与州行医执照）。具体要求以官方与用人单位信息为准；本页不构成医学建议。"
+              "先按目标法域核医学教育、报考/州执照、适用麻醉住院医师训练及机构授权。MD/DO为学位，fellowship是进一步亚专科路径；中国不能仅凭培训框架推断所有岗位有统一额外证书。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.76",
@@ -25739,7 +25753,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "按病历管理与麻醉记录要求如实及时记录评估、方案、监测数据、用药与不良事件，使过程可追溯且不可篡改。"
+              "按法律与机构要求如实及时记录；不得非法隐匿、伪造、篡改或销毁，合法更正按流程留痕。“不可篡改”不能表示技术上不可能改动。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.82",
@@ -25769,7 +25783,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "未充分评估合并症与气道风险就实施麻醉会显著提高围术期不良事件风险。"
+              "编辑风险场景：术前评估材料缺失或未经适当复核；本页不估计其造成不良事件的概率或显著性。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.84",
@@ -26074,7 +26088,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "监护报警与趋势提示可自动化，但判读与处置仍由人负责。"
+              "编辑可能用途为记录与趋势提示；实际采用和临床有效性未核，判读及处置须合法授权。"
             ]
           },
           "id": "anesthesiologists.ai-impact.ai-impact-table.105",
@@ -26437,7 +26451,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按岗位类别统计，用于对照行政事务类岗位的收入水平。"
+              "规模以上企业办事人员和有关人员为岗位大类，不只行政岗位，也不是麻醉医师工资。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.14",
@@ -26465,7 +26479,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本职业最贴近的行业门类（医疗卫生机构岗位归入该门类）；该门类覆盖医师、护理、医技与后勤岗位，不能当成麻醉科医师中位数。"
+              "卫生和社会工作为行业门类；机构归类须按主营活动和统计规则，岗位名称不能决定归类。覆盖多种岗位，不是本职业工资。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.16",
@@ -26563,7 +26577,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 改变的是具体任务（监护数据整合、报警与趋势提示、麻醉记录书写辅助、药物剂量核对）。目前没有针对本职业的工资因果研究，不能用任务暴露度推断涨薪或降薪；工资差异主要由机构类型（三级医院、专科医院、日间手术中心）、职级与职称、亚专科方向（产科、儿科、重症、疼痛）、科研与教学职责以及地区与绩效制度决定。"
+              "证据不足：本页未取得本职业AI与工资的因果估计，不推断涨薪或降薪。核实际报酬时比较法域、机构、职责、班次、工时及书面薪酬条件，核对项不是已证因果。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.23",
@@ -26622,7 +26636,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按《中华人民共和国医师法》，具有高等学校相关医学专业本科以上学历、在执业医师指导下在医疗卫生机构中参加医学专业工作实践满一年，可以参加执业医师资格考试；取得资格并注册后方可执业。国家建立健全住院医师规范化培训制度，临床医师须完成规范化培训并结业考核。美国侧为医学院学位（MD/DO）与住院医师培训。"
+              "中国医师法有相关医学本科加一年指导实践、助理医师加相关专科两年等报考路径；资格、注册与岗位训练分别核，不能概括本科为唯一途径。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.27",
@@ -26652,7 +26666,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "麻醉专科医师规范化培训与专科资质"
+              "研究生学习与目标方向准备（须另核资格/授权）"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.29",
@@ -26667,7 +26681,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家建立健全专科医师规范化培训制度；麻醉科医师通常需完成麻醉专科培训与考核，部分方向还需亚专科 fellowship（产科、儿科、重症、疼痛等）。O*NET 显示 69% 受访者认为该职业需博士后训练、25% 需博士学位、5% 需专业学位。"
+              "研究生学历不替代资格、注册或机构授权；不能用美国受访学历类别推出中国硕博门槛，目标方向训练与岗位条件另核。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.30",
@@ -27020,7 +27034,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：公立医院医师薪酬按事业单位岗位绩效制度确定，未单列；规模以上企业专业技术人员为 155,491 元/年"
+              "证据不足：本页未取得麻醉医师全国或分城市工资分布。规模以上企业专业技术人员155,491元/年是多职业类别，不代替医院医师工资。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.54",
@@ -27034,7 +27048,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "按《国民经济行业分类》（GB/T 4754-2017），医疗卫生机构岗位主要归入卫生和社会工作；按《中华人民共和国职业分类大典（2022 年版）》，卫生专业技术人员（2-05）中临床和口腔医师（2-05-01）下设麻醉科医师（2-05-01-13）。国家统计局不单列该职业工资，因此本页不以行业数字冒充职业中位数。"
+              "行业归类按机构主营活动核；2022版职业分类麻醉科医师2-05-01-13只说明职业定位。本页NBS工资表未单列麻醉医师，行业均值不冒充职业中位。"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.55",
@@ -27063,12 +27077,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）"
+              "3.6%（2025—2035；OOH四舍五入为4%）"
             ]
           },
           "id": "anesthesiologists.china-salary.career-snapshot-primary-locale.58",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27241,7 +27256,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年薪第 90 分位下界（时薪 267.85 美元），高收入端常与亚专科、机构与地区相关。；O*NET 展示的 BLS 2025 年 5 月工资分位（29-1211.00）｜https://www.onetonline.org/link/localwages/29-1211.00"
+              "年薪第90分位下界（时薪267.85美元），仅为职业分布位置，不证明亚专科、机构或地区造成高工资。；O*NET展示BLS 2025年5月工资分位｜https://www.onetonline.org/link/localwages/29-1211.00"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.18",
@@ -27255,12 +27270,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "约45,300人（2024年）"
+              "41,500人（2025年，BLS EP）"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27269,13 +27285,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 麻醉科医师专属就业规模。；BLS 职业就业与工资统计（OEWS）：29-1211｜https://www.bls.gov/oes/current/oes291211.htm"
+              "BLS EP 29-1211基期就业规模，非OEWS受雇人数。；BLS EP职业预测与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27284,12 +27300,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）（2024—2034年）"
+              "3.6%（2025—2035；OOH四舍五入为4%）"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27298,12 +27315,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 预测为平均增长；为麻醉科医师专属口径（BLS 职业展望手册的「医师与外科医师」组合口径为 4%，仅作对照）。；BLS 职业就业与工资统计（OEWS）：29-1211｜https://www.bls.gov/oes/current/oes291211.htm"
+              "EP预测41,500→43,000人，净增1,500；不是医师组合数据。；BLS EP职业预测与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27312,12 +27330,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "年均约1,300个"
+              "年均1,100个（2025—2035）"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27326,13 +27345,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "2024—2034 年麻醉科医师专属预测年均职位空缺（多数来自替代需求），不等于净新增岗位。；BLS 职业就业与工资统计（OEWS）：29-1211｜https://www.bls.gov/oes/current/oes291211.htm"
+              "含增长与替代需求，不等于净增1,500人。；BLS EP职业预测与特征表｜https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27341,7 +27360,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "以上数字为 O*NET 展示的 BLS 职业就业与工资统计（OEWS，2025 年 5 月）与 2024—2034 年 BLS 就业预测，均为麻醉科医师（29-1211.00）专属口径，不是「医师与外科医师」组合口径数字，也不能外推为中国大陆；本页不使用行业数字或第三方估算替代。"
+              "工资来自ONET展示BLS OEWS 2025年5月29-1211分位；就业、增长及空缺直接来自BLS EP 2025—2035。OOH也列本职业明细，其4%是3.6%的整数表达；组合数字另作对照，不外推中国。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.25",
@@ -27356,7 +27375,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00（麻醉科医师专属）2025 年 5 月年薪中位数为 391,490 美元（时薪 188.22 美元）；第 10 分位低于 101,460 美元，第 90 分位高于 557,130 美元。中位数是分布中点，不是起薪；实际收入受亚专科方向、机构类型、地区、值班与科研教学职责影响。BLS 职业展望手册另按更大的「医师与外科医师」组合发布口径（2025—2035 年中位 275,930 美元、增长 4%、年均约 22,100 个空缺），覆盖多个专科，本页仅作对照。"
+              "2025年5月麻醉医师年工资中位391,490美元、时薪188.22；10/25/75/90分位101,460/207,000/490,530/557,130。是分布位置而非起薪，不能由本表推断亚专科、机构或地区的工资因果。实际条件须核书面岗位。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.26",
@@ -27371,7 +27390,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "人口老龄化与手术量、麻醉服务可及性与医疗支付政策影响专科需求；本页不提供分州或分机构数字。"
+              "编辑核对项：岗位职责、服务范围、班次和工时；本页没有需求因素的工资因果估计。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.27",
@@ -27399,7 +27418,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不同地区的医疗资源分布与生活成本会影响实际收入水平；本页不提供分地区数字。"
+              "编辑核对项：岗位地区、报酬和生活成本分别核，不能用生活成本直接预测工资。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.29",
@@ -27427,7 +27446,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "机构类型（三级医院／专科医院与日间手术中心／教学医院）、亚专科方向（产科、儿科、重症、疼痛）、职级与职称以及科研与教学职责会影响收入构成；须以用人单位的书面条件为准。"
+              "编辑核对项：机构、亚专科、职级、教学科研职责与报酬条款；须逐项核用人单位书面条件，不当作已证工资因果。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.31",
@@ -27456,12 +27475,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）"
+              "3.6%（2025—2035；OOH四舍五入为4%）"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -27484,12 +27504,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得医疗保健与社会援助宽行业内29-1211的2025年5月工资中位数，不用全国分位或第三方估算替代。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27498,12 +27519,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "医疗保健与社会援助是 O*NET 给出的主要行业；BLS 未按行业公布该职业工资中位数。"
+              "O*NET 2024行业信息为医疗保健与社会援助约93%，不等于该行业内职业工资。BLS有行业表入口，不能概括为未发布。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27526,12 +27548,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得医院NAICS 622000内29-1211的2025年5月工资中位数，不用全国中位替代。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27540,12 +27563,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "多数麻醉岗位设于医院手术室；具体中位数未能取得。"
+              "医院为机构行业范围，需精确匹配NAICS、职业、所有制和年份；不据岗位常识断言多数或填数。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27554,7 +27578,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "政府（Government）"
+              "政府（OEWS行业定义，排除州/地方学校及医院等）"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.40",
@@ -27568,12 +27592,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：BLS 未公开可读取的本职业分行业工资中位数；本页未使用第三方估算。"
+              "证据不足：本轮未取得所列政府行业内29-1211的2025年5月工资中位数，不以公立医院工资替代。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27582,12 +27607,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "公立医疗机构与公共卫生岗位可能归属该类别；具体中位数未能取得。"
+              "BLS政府行业99排除州/地方政府学校、医院及USPS；公立医院不能直接归入该行。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
-            "onet"
+            "bls",
+            "census"
           ],
           "type": "prose"
         },
@@ -27638,7 +27664,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不是。391,490 美元是麻醉科医师专属口径的全国年薪中位数，代表分布中点；亚专科、机构与地区差异较大，本页不提供起薪数字。"
+              "391,490美元为2025年5月本职业全国年工资中位，不是起薪；本页未估计个人或亚专科起薪。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.46",
@@ -27653,12 +27679,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不能。该数字为麻醉科医师专属口径（29-1211.00），与「医师与外科医师」组合口径（2025—2035 年中位 275,930 美元）不是同一口径；时薪与年薪是同一分布的两种表达（中位数 188.22 美元/小时对应 391,490 美元/年）。"
+              "不能推算个人年薪。OEWS一般按时薪×2,080年化，188.22×2,080=391,497.6，与公布391,490有舍入差；年化并非个人保证工时、实发或班次收入。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
-            "onet"
+            "oews",
+            "oews-method"
           ],
           "type": "prose"
         },
@@ -27667,7 +27694,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "来自 O*NET 展示的 BLS 2025 年 5 月工资分位与 BLS 2024—2034 年就业预测（麻醉科医师专属口径）。"
+              "工资由ONET展示BLS OEWS 2025年5月29-1211分位，就业由BLS EP 2025—2035明细。OEWS受雇范围与EP包含自雇等就业口径不同。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.48",
@@ -27739,7 +27766,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "最高 10%：高于 557,130 美元/年（麻醉科医师专属口径），高收入端常与亚专科、机构与地区相关。"
+              "最高10%对应第90分位557,130美元；不代表个人达到该数或证明亚专科、机构、地区造成工资差异。"
             ]
           },
           "id": "anesthesiologists.us-salary.career-snapshot-secondary-locale.53",
@@ -27841,13 +27868,13 @@
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：29-1211",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-14",
                 "relation": "career.authority",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "entity": "BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）",
+                "entity": "BLS OOH医师与外科医师：含麻醉医师明细与组合",
                 "id": "link-15",
                 "relation": "career.authority",
                 "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
@@ -27880,7 +27907,7 @@
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-20",
                 "relation": "career.authority",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               }
             ]
           },
@@ -27960,7 +27987,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格属自我探索工具：尽责性与情绪稳定性常与高风险临床岗位相关，但这是群体层面的相关性，不能用于选拔判断。本职业更关心可观察行为（按指南决策、核对剂量、如实记录）。"
+              "证据不足：本页未取得麻醉医师大五人格分数与工作表现的实证估计。尽责、稳定等只用于自我探索；核对记录、学习与沟通行为，不能据分数选拔。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.6",
@@ -27975,7 +28002,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格量表与工作表现的相关性有限，也不是选拔依据。"
+              "证据不足：本页未取得本职业人格量表的表现预测证据；职业任务资料不支持相关性估计。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.7",
@@ -28019,7 +28046,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "兴趣代码是可核对的起点：先用一周小任务体验按指南评估围术期风险、制定麻醉方案与判读监测数据的真实感受，再判断自己是否愿意长期做这类需要高责任、持续学习与高强度协作的临床工作；测评结果不保证录用，也不能预测工作表现。"
+              "用下文完整A/B/C纸面材料观察核对、保留未知与交接习惯；不据未给数据自行制定麻醉方案。"
             ]
           },
           "id": "anesthesiologists.fit.riasec-fit-block.9",
@@ -28034,7 +28061,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持「某种类型最适合麻醉科医师」；适任职否由医师资格、专科培训与机构考核判定。"
+              "证据不足：本页未取得本职业MBTI类型与表现的预测研究，不作最适合类型或录用判断；合法资格与机构考核需另核。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.10",
@@ -28062,7 +28089,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "证据不足：本页未取得麻醉医师MBTI类型与表现的预测研究，不作最适合类型或录用判断。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.11",
@@ -28134,7 +28161,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样属于自我探索工具，不能判断你是否适合这个职业；准入关注医学教育、执业资格与专科培训要求。"
+              "证据不足：本页未取得九型人格与麻醉医师表现的实证估计；可用于自我探索，不能据类型作适配或录用结论。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.14",
@@ -28191,7 +28218,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "逻辑与临床推理能力：评估围术期风险、解读监测数据与阅读文献需要清晰的逻辑与统计素养，但没有统一的 IQ 门槛；准入以医学教育、执业考试与专科培训考核为准。"
+              "证据不足：本页未取得本职业IQ分数门槛或表现预测研究。本页不设分数准入；官方医学教育、考试、训练和授权条件另核。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.18",
@@ -28206,7 +28233,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 不提供用于筛选的 IQ 门槛；本页不把分数当作录用依据。"
+              "O*NET职业任务资料不提供个人IQ录用门槛或预测效度。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.19",
@@ -28249,7 +28276,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力：与焦虑患者和家属沟通、在高风险情境中协调团队与处理冲突需要稳定与共情，但情商不是准入硬指标；关键是在压力下仍按规范决策并如实记录。"
+              "证据不足：本页未取得麻醉医师情绪智力分数与表现的实证估计。沟通和压力下记录可作行为自查；分数不替代资格与考核。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.22",
@@ -28264,7 +28291,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与沟通能力属于可训练技能，不是筛选分数。"
+              "沟通与情绪观察为编辑建议，本页未核分数预测本职业表现。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.23",
@@ -28367,7 +28394,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "认证与执照体系不同，麻醉方案与最终医疗责任由麻醉科医师承担，不可互相替代。"
+              "医师与美国CAA资格不同；ASA团队模型由医师保留总体责任，助理仍有自身义务，各自按法域和授权。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.30",
@@ -28502,7 +28529,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "面向护理执业，不承担麻醉方案与临床决策责任，需护理资格。"
+              "护士负责自身护理、观察判断和协作；不能用护理资格替代医师执业，也不能概括其没有临床判断。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.39",
@@ -28625,7 +28652,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "性格内向并不构成障碍；麻醉岗位以医患沟通与手术团队协作为主，关键是能否清楚说明方案与风险。"
+              "证据不足：本页未取得内向与本职业表现的比较研究；用实际沟通、核对和学习行为自查，不据内外向判断适任。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.47",
@@ -28640,7 +28667,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在团队协调与沟通上有优势，但同样需要严格遵循指南与病历规范。"
+              "证据不足：本页未取得内外向与本职业表现的比较研究。用实际沟通、学习、核对行为自查，不能断言外向有优势。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.48",
@@ -28655,7 +28682,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有。MBTI 不是职业匹配工具，也不是准入依据。"
+              "证据不足：本页未取得麻醉医师MBTI类型与表现的实证研究；不作最适合类型判断。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.49",
@@ -28684,7 +28711,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是准入依据；请用医学教育、执业考试、专科培训考核与临床表现判断。"
+              "证据不足：本页未取得人格分数预测本职业表现的实证估计。合法资格、机构考核与真实工作表现需分别核对。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.51",
@@ -28698,7 +28725,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "逻辑与统计素养对评估风险与阅读文献有帮助，但没有统一的 IQ 门槛；可通过循证医学与临床流行病学训练建立。"
+              "本页不设IQ分数门槛；可核官方学习、考试和岗位条件，用实际阅读与推理任务观察准备，不能由个人标签推断能否执业。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.52",
@@ -28713,7 +28740,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力有帮助但不是硬指标；更重要的是在高风险与时间压力下仍按规范决策并如实记录。"
+              "证据不足：本页未取得情绪智力分数预测本职业表现的研究；核压力下沟通、记录等行为，不据分数判断准入。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.53",
@@ -28742,7 +28769,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "先按卫生健康主管部门与院校官方信息核对医学教育与执业路径，再用公开资料练习整理麻醉前风险评估清单与麻醉方案与监测计划表来验证自己的细致度与判断力；不要相信非官方机构的包过或包就业承诺。"
+              "先核官方医学教育、资格与法域条件，再用下文完整A/B/C做版本与授权记录练习；不把纸面成果当临床能力。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.55",
@@ -28786,7 +28813,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次替代性准备：按公开资料整理一份麻醉前风险评估清单与麻醉方案与监测计划表（用虚构数据），并把一次术后转归判断或不良事件处置写成含依据、风险分级与交接要点的说明。这不构成技能测试或录用测试，也不能替代医学教育与执业资格。"
+              "纸面准备沿下文A/B/C完成三任务和四作品，不选择麻醉方式、药物或异常阈值，不使用患者数据；实际训练按院校和医疗机构要求。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.58",
@@ -28814,7 +28841,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 任务与工作活动，用于任务与工作情境判断。"
+              "当前链接为ONET工资页：支持2025年5月29-1211全国分位，不支持人格或任务。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.60",
@@ -28828,7 +28855,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 O*NET 展示：用于工资、就业与前景（麻醉科医师专属口径）。"
+              "当前链接为BLS OOH：含本职业工资/就业明细及组合，不支持人格预测。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.61",
@@ -28842,7 +28869,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 工作情境（Work Context），用于精确性、错误后果、沟通协作与暴露等比例。"
+              "当前链接为ONET职业摘要：任务与兴趣，不冒充专门工作情境表。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.62",
@@ -28856,7 +28883,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 详细资料，用于任务与工作活动说明。"
+              "当前链接为ONET详细资料：支持受访工作情境，不能保证个人暴露或表现。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.63",
@@ -28870,7 +28897,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 兴趣剖面，用于 ISR 兴趣代码来源。"
+              "当前链接为ONET详细资料：支持任务与ISR兴趣，不支持中国资格或人格效度。"
             ]
           },
           "id": "anesthesiologists.fit.personality-fit-block.64",
@@ -28933,10 +28960,10 @@
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：29-1211",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
                 "entity": "O*NET 29-1211.00 工作情境（Work Context）",
@@ -28948,7 +28975,7 @@
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "entity": "《中华人民共和国职业分类大典（2022 年版）》麻醉科医师（2-05-01-13）",
@@ -28989,7 +29016,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "最需要提前判断的是四类风险：一是围术期决策风险（术前风险评估不足、麻醉方案与用药决策失误），二是操作与监测风险（气道管理与生命支持、监测判读与异常处置不足），三是合规与法律风险（知情同意与病历记录不规范、超出执业范围或授权执业），四是职业健康风险（每天暴露于疾病或感染与污染物与辐射、长时间工作与高责任带来的身心负担）。风险随方向不同：手术室内麻醉更贴近方案与监测风险，产科与儿科麻醉更贴近特殊人群剂量与沟通风险，重症与疼痛方向更贴近长期管理与多学科协作风险。"
+              "感染、污染物和辐射暴露因岗位而异：ONET美国受访者94%每天感染暴露、14%每天辐射暴露、72%每周至少一次辐射暴露；不是每个人每日两类暴露。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.9",
@@ -29005,15 +29032,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 29-1211.00 提供任务与工作情境（84% 认为精确或准确极其重要、83% 认为错误后果极其严重、97% 每天作决定、67% 拥有很大决策自由度、98% 持续与他人接触、99% 每天有面对面讨论、94% 每天暴露于疾病或感染、81% 每天面对时间压力、99% 工作周超过 40 小时、74% 对其他工作人员的工作成果承担极高责任）；BLS 职业就业与工资统计与 2024—2034 年预测（麻醉科医师专属口径）提供工资、就业与前景；《中华人民共和国医师法》与《中华人民共和国职业分类大典（2022 年版）》提供中国大陆执业与职业框架。风险清单为编辑归纳，不含发生概率。"
+              "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。就业预测不表示个人就业或AI因果。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.10",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -29037,7 +29062,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "未充分评估合并症、气道与用药风险就实施麻醉会显著提高围术期不良事件风险。"
+              "编辑风险识别项：资料、授权与沟通缺失可能影响合规及协作；本页不估计临床事故概率或量化效果。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.12",
@@ -29334,7 +29359,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "94% 每天暴露于疾病或感染，52% 每天暴露于污染物、14% 每天暴露于辐射，叠加长时间工作与高责任。"
+              "感染、污染物和辐射暴露因岗位而异：ONET美国受访者94%每天感染暴露、14%每天辐射暴露、72%每周至少一次辐射暴露；不是每个人每日两类暴露。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.32",
@@ -29393,12 +29418,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国，麻醉科医师专属口径）。"
+              "当前链接为本职业2025年5月工资分位；风险与执业边界不由工资表证明。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -29407,7 +29433,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 职业摘要（任务与职责）。"
+              "O*NET美国任务与受访工作情境，不提供法律许可或个人风险概率。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.37",
@@ -29421,7 +29447,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》（2022-03-01 施行）与《中华人民共和国职业分类大典（2022 年版）》麻醉科医师（2-05-01-13）。"
+              "中国医师法：资格、注册、范围及病历/同意义务；不是职业分类文件。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.38",
@@ -29435,7 +29461,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表监管或医疗机构的强制流程。"
+              "2022版职业分类定位，不授予许可，也不是临床风险研究。"
             ]
           },
           "id": "anesthesiologists.risk.career-risk-cards.39",
@@ -29475,36 +29501,36 @@
                 "手术室内麻醉方向",
                 "完成医学教育与执业资格，进入规范化培训并学习手术室内麻醉。",
                 "方案有循证依据、监测与处置规范、病历与知情同意记录完整。",
-                "公开资料整理的麻醉前风险评估清单（含气道评估与用药过敏史）。",
-                "与麻醉医师助理不同：麻醉科医师制定方案并承担最终医疗责任。"
+                "A/B/C三条记录表（纸面）",
+                "医师与CAA资格及责任体系不同，双方有自身义务。"
               ],
               [
                 "产科与儿科麻醉方向",
                 "在规范化培训中学习产科与儿科麻醉要点与家属沟通。",
                 "剂量与风险判断规范、沟通与说明到位。",
-                "虚构数据下的麻醉方案与监测计划表。",
-                "与护理麻醉师不同：走医师资格序列并承担方案与诊疗决策责任。"
+                "A/B/C两条冲突报告（纸面）",
+                "医师与护理麻醉资格不同，权限按法域核。"
               ],
               [
                 "重症与疼痛方向",
                 "在规范化培训中学习生命支持与镇痛诊疗基础。",
                 "长期管理与多学科协作规范、记录完整。",
-                "一次术后转归判断或不良事件处置的依据与交接说明框架。",
-                "与呼吸治疗师不同：承担诊疗决策与方案制定，不限于呼吸支持技术。"
+                "A/B/C一段权限说明（纸面）",
+                "呼吸治疗与医师资格不同；操作可重叠，授权分别核。"
               ],
               [
                 "术前评估与知情同意",
                 "完成术前评估、说明风险并取得知情同意。",
                 "评估完整、说明清楚、同意与病历记录齐全。",
-                "一份含合并症、气道评估与用药过敏史的评估模板。",
-                "与注册护士不同：按医师执业规范作出风险评估与临床决策。"
+                "A/B/C缺失字段清单（纸面）",
+                "护士有自身护理判断，不能替代医师资格。"
               ],
               [
                 "气道管理与抢救",
                 "实施气道管理与生命支持并按规范处置不良事件。",
                 "操作规范、异常处置与上报及时、记录完整。",
-                "一次困难气道处置的流程与报告框架。",
-                "与重症监护护士不同：承担气道与生命支持的操作与决策责任，资格体系不同。"
+                "A/B/C一页复盘（纸面）",
+                "护理与医师在授权内协作，不把气道操作概括为一方专属。"
               ]
             ]
           },
@@ -29525,33 +29551,37 @@
               {
                 "id": "education",
                 "values": [
-                  "美国侧：医学院学位（MD/DO）后完成住院医师培训并通常需麻醉专科或亚专科 fellowship；O*NET 显示 69% 受访者认为该职业需博士后训练、25% 需博士学位、5% 需专业学位。",
-                  "中国大陆侧：按《中华人民共和国医师法》，具有高等学校相关医学专业本科以上学历并在执业医师指导下参加医学专业工作实践满一年可参加执业医师资格考试；取得资格并注册后方可执业。",
-                  "两地均强调执业资格与专科训练，学历不是唯一门槛，规范化培训与考核同样关键。"
+                  "美国教育与州执照",
+                  "MD/DO为学位；ASA麻醉住院医师四年，州执照另核。",
+                  "fellowship是亚专科进一步训练，board certification不概括为普遍法定门槛。",
+                  "美国ONET受访学历类别不是中国硕博或学术博士后要求。"
                 ]
               },
               {
                 "id": "clearance",
                 "values": [
-                  "医师须在注册的执业地点、执业类别与执业范围内执业，经相关专业培训和考核合格可以增加执业范围（美国侧须持州行医执照）。",
-                  "处方权、操作授权与抗菌药物等分级管理按机构制度执行；特殊检查与治疗须取得患者明确同意。",
-                  "发现传染病、不明原因疾病、医疗事故或药品与器械不良事件须按规定报告。"
+                  "中国报考、注册与授权",
+                  "医师法有相关医学本科加一年指导实践、执业助理医师加相关专科两年等报考路径。",
+                  "取得资格并依法注册，在地点类别范围内执业；具体培训和岗位条件另核。",
+                  "不能由制度框架推断所有岗位需同一额外麻醉专科证。"
                 ]
               },
               {
                 "id": "onet-traits",
                 "values": [
-                  "O*NET 29-1211.00 兴趣代码为 ISR（研究型、社会型、现实型）。",
-                  "工作情境以精确性（84% 极其重要）、错误后果（83% 极其严重）、每天决策（97%）、持续接触（98%）与感染暴露（94% 每天）为特征。",
-                  "这些是对职业的群体性描述，不用于判断个人是否适合。"
+                  "可观察的职业任务",
+                  "O*NET ISR与美国受访工作情境是群体职业描述。",
+                  "核资料、如实记录、协作及持续学习只作编辑观察点。",
+                  "不能由人格分数或纸面作品证明临床能力。"
                 ]
               },
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 29-1211.00 技术清单可复核，列出该职业常用设备与技术条目。",
-                  "实际使用范围取决于机构设备、信息系统与亚专科方向。",
-                  "准备方向应按公开资料打牢生理、药理、气道管理与循证医学基础，并通过官方渠道了解医学教育与执业要求。"
+                  "软件与公开资料",
+                  "ONET技术页列软件需求和条目，不是设备操作资格。",
+                  "学习和实际系统使用由院校、合法训练及机构授权决定。",
+                  "准备可用本页A/B/C模拟材料，不借用真实患者资料。"
                 ]
               }
             ]
@@ -29561,7 +29591,7 @@
             "onet",
             "onet"
           ],
-          "title": "雇主在招聘中通常看什么？",
+          "title": "任务与资格支持的准备核对项（不是招聘样本）",
           "type": "cards"
         },
         {
@@ -29572,33 +29602,36 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构题面一：按公开资料整理一份麻醉前风险评估清单（合并症、气道评估、用药与过敏史、禁食与抗凝要点）。",
-                  "虚构题面二：用虚构数据完成一份麻醉方案与监测计划表（含麻醉方式选择依据、监测项目与异常阈值）。",
-                  "虚构题面三：把一次术后转归判断或不良事件处置写成含依据、风险分级与交接要点的说明。",
-                  "全部材料使用公开资料与模拟数据；不使用真实患者资料。"
+                  "材料：角色、记录与核对规则",
+                  "材料A（全部虚构）：你是纸面练习者，编号M，无诊疗、处方或操作权限；文件名“方案”只是模拟记录，不含患者或临床数据。",
+                  "材料B：08:30登记表写方案V1、状态“待医师审核”；08:40文件清单写方案V2、状态“待医师审核”；08:45交接表仍引用08:40方案V1、写“已审核”，审核人和授权依据为空。未给医师确认或反馈。",
+                  "材料C（本题规则）：按时间保留原记录；同一时点版本或审核状态不一致列差异；审核人/授权依据空缺写待确认并交带教。不能把“已审核”当真实许可，更不能开展临床操作。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "评估清单：按项目列出问题、记录要点与追问方向。",
-                  "方案与监测表：按项目列出麻醉方式、药物与监测项目及依据。",
-                  "处置说明：按依据—风险分级—处置—交接要点结构书写。"
+                  "任务：对照、报告与说明",
+                  "任务1：列B三条记录，逐项核版本、审核状态与缺失字段，不覆盖旧记录。",
+                  "任务2：写08:45引用08:40版本V1/V2的差异报告和“已审核/待审核”的状态报告，接收对象为带教，反馈未知。",
+                  "任务3：说明A无执业权限及C仅是纸面核对规则；不能由文件名、状态字样或纸面完成证明获临床授权。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认公开资料与指南的适用性与版次，再据此整理，不使用内部或患者资料。",
-                  "对每一处判断保留依据与不确定性，并注明参考来源。",
-                  "对涉及用药与操作的内容标注「以临床指南与医师判断为准，本页不构成医学建议」。"
+                  "参考：答案逐项回指A/B/C",
+                  "参考1：08:30为V1待审核，08:40为V2待审核；08:45交接表引用08:40V1已审核。保留三条，标V1/V2冲突及已审核/待审核冲突。",
+                  "参考2：两报告都交带教，审核人、授权依据、接收姓名和反馈均未给，写待确认；不能改成已纠正或许可实施。",
+                  "参考3：A无诊疗、处方和操作权限；C只检查内部记录一致性，不涉及医学判断。文件“方案”不含可执行治疗内容，完成练习不获得执业资格。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "作品只用于展示准备程度与方法，不构成技能测试或录用测试，也不代表任何执业资格。",
-                  "不得在作品中包含或推断真实患者信息；实际训练与考核以院校、卫生健康主管部门与医疗机构规定为准。"
+                  "边界：纸面与真实执业",
+                  "本练习只核信息来源、版本、状态与授权缺项；不设计麻醉方式、药量、气道方案或生理阈值。",
+                  "真实诊疗需合法资格、临床训练及机构授权；模拟作品不能替代医学教育、注册、考核或临床能力证明。"
                 ]
               }
             ]
@@ -29607,7 +29640,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的麻醉医师任务任务（虚构材料）",
+          "title": "入行练习：虚构版本、审核与授权记录核对",
           "type": "cards"
         },
         {
@@ -29618,31 +29651,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项要求（医学学历、执业医师资格、执业注册、住院医师规范化培训、麻醉专科资质），列出核对来源与状态。",
-                  "把每项要求对应到《中华人民共和国医师法》条款或主管部门与机构规定，注明查看日期。",
-                  "记录尚未满足或个人需补强的项目与计划。"
+                  "三条记录对照表",
+                  "沿B保留时间、版本和审核状态，列缺失字段，差异不得覆盖原值。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对是否来自卫生健康主管部门、院校或医疗机构官方渠道，是否标注时间与适用范围。",
-                  "资料复核：核对练习材料只使用公开资料与模拟数据。",
-                  "计划复核：核对教育与培训计划是否可持续，避免突击。"
+                  "两条差异报告",
+                  "分别报告08:40引用版本V1/V2和审核状态冲突，接收对象为带教，反馈待确认。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向、已满足与待补强项、时间安排。",
-                  "附上公开资料清单与来源链接，注明查看日期。"
+                  "一段权限说明",
+                  "沿A/C区分信息核对与真实诊疗许可；文件名和纸面完成不授予执业权限。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "准备记录应展示对公开资料与指南的理解与自身临床基础，而不是内部或患者资料。",
-                  "不把网络传闻或非官方信息写入准备记录。"
+                  "一页复盘清单",
+                  "逐项回指B/C，核三记录、两报告及缺项；写下一步官方资格信息核对，不编造临床结论。"
                 ]
               }
             ]
@@ -29684,16 +29715,16 @@
                 "未注册取得执业证书不得从事医师执业活动。"
               ],
               [
-                "住院医师规范化培训",
-                "是否完成规范化培训并通过结业考核。",
-                "培训与考核记录完整，能独立完成常见评估与记录。",
-                "未完成规范化培训会影响专科培训与晋升。"
+                "适用规范化培训",
+                "核目标岗位实际培训、考核条件",
+                "提供真实培训与考核记录，不用纸面练习冒充",
+                "医师法建立框架，不能单凭该法推断所有岗位条件一致"
               ],
               [
-                "麻醉专科培训与考核",
-                "是否完成麻醉专科规范化培训并取得专科资质。",
-                "专科资质与授权记录齐备，麻醉方案与记录规范。",
-                "超出执业范围或授权执业会被追责并影响执业资格。"
+                "麻醉方向训练与授权",
+                "核院校/机构适用训练、考核与操作范围",
+                "真实记录与授权文件对应目标任务",
+                "不能假设全国所有岗位有统一额外麻醉专科证"
               ]
             ]
           },
@@ -29713,50 +29744,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜教育与执业信息核对",
-                  "按卫生健康主管部门与院校官方渠道核对医学教育、执业医师资格与注册要求，记录待确认项。"
+                  "第1天｜读角色与规则",
+                  "读A/B/C，记录无执业权限、全部虚构与核对范围。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜医师法要点",
-                  "阅读《中华人民共和国医师法》关于考试、注册、执业范围与规范化培训的要点，整理关键条款清单。"
+                  "第2天｜列三条原记录",
+                  "逐条抄B时间、版本、审核状态和缺项，不改原值。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜术前评估清单",
-                  "按公开资料整理一份麻醉前风险评估清单（合并症、气道评估、用药与过敏史、禁食与抗凝要点）。"
+                  "第3天｜找两个冲突",
+                  "沿C比较08:40引用的V1/V2和已审核/待审核状态。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜方案与监测计划",
-                  "用虚构数据完成一份麻醉方案与监测计划表（含麻醉方式选择依据、监测项目与异常阈值）。"
+                  "第4天｜写两条报告",
+                  "交带教核对版本与状态；审核人、依据和反馈待确认。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜药理与气道学习",
-                  "选取一类常用麻醉药物与一类气道管理技术，按公开资料整理作用、风险与操作要点。"
+                  "第5天｜写权限说明",
+                  "沿A/C说明纸面不能提供诊疗许可，不设计医学处置。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜转归与处置说明",
-                  "把一次术后转归判断或不良事件处置写成含依据、风险分级与交接要点的说明。"
+                  "第6天｜整理四作品",
+                  "完成三条表、两报告、权限说明和复盘；逐项回指题面。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜复盘与决策",
-                  "复盘一周准备：是否愿意长期按指南与证据决策、承受高风险与长时间值守，据此判断是否继续。"
+                  "第7天｜核官方下一步",
+                  "复核参考与未知项，再按教育、报考、注册及机构训练条件评估后续准备。"
                 ]
               }
             ]
@@ -29775,11 +29806,11 @@
             "entries": [
               "做完一周准备后先回答：我是否愿意长期按指南与证据作围术期决策、接受长周期训练与持续考核，并对医疗责任承担责任？",
               "判断方向：偏手术室内麻醉、产科与儿科麻醉，还是重症与疼痛方向。",
-              "判断准备：医学学历、执业医师资格与注册、规范化培训与专科资质要求是否满足或可补齐；生理、药理与气道管理基础是否需要补强。",
+              "核实际报考、资格、注册和目标岗位训练条件；不把纸面作品当资质。",
               "判断边界：是否清楚麻醉医师助理、护理麻醉师与注册护士的资质不等同于麻醉科医师执业资格，几套体系不可互相折算。",
-              "判断耐受：能否适应每天感染与辐射暴露、长时间手术与值班、高责任与时间压力，并做好防护与压力管理。",
+              "判断耐受：能否适应感染与辐射等职业暴露（频率因岗位而异）、长时间手术与值班、高责任与时间压力，并做好防护与压力管理。",
               "入门后按医学教育、规范化培训与职称体系发展：取得专科资质与更多操作授权，或转向亚专科、教学与科研方向。",
-              "把公开资料整理、评估清单与方案与监测练习持续整理成可核对的准备经历，比相信非官方承诺更可靠。"
+              "把A/B/C三记录、两报告、权限说明和复盘保留为纸面准备，实际临床训练另走正式路径。"
             ]
           },
           "id": "anesthesiologists.path.seven-day-decision.1",
@@ -29813,13 +29844,13 @@
             ],
             "rows": [
               [
-                "医学学历（临床医学等）",
-                "报考执业医师者",
-                "决定能否参加执业医师资格考试",
-                "必备门槛",
-                "按《中华人民共和国医师法》与院校规定",
-                "本科及以上学历教育周期",
-                "学历不符合要求不能报考执业医师"
+                "相关医学学历及报考路径",
+                "中国执业医师报考者",
+                "核医师法第9条及当前考试条件",
+                "需符合相应路径，非只有本科",
+                "相关本科加一年指导实践，或助理医师加相关专科两年等法定路径",
+                "按个人路径核",
+                "学历、资格、注册及授权分别核"
               ],
               [
                 "执业医师资格与注册",
@@ -29831,22 +29862,22 @@
                 "未注册取得执业证书不得执业"
               ],
               [
-                "住院医师规范化培训",
-                "临床医师",
-                "决定能否独立承担基础临床工作",
-                "临床岗位必备",
-                "按国家规范化培训制度与结业考核",
-                "按培训周期（数年）",
-                "未完成培训会影响专科培训与职称晋升"
+                "适用规范化培训",
+                "目标临床岗位人员",
+                "提供真实训练与考核记录",
+                "依适用规则及岗位，不能仅凭医师法推断全部一致",
+                "核主管部门、院校和机构现行条件",
+                "按项目核",
+                "培训不自动扩大注册范围或全部操作权限"
               ],
               [
-                "麻醉专科培训与专科资质",
-                "麻醉专科医师",
-                "决定能否独立制定与实施麻醉方案",
-                "专科岗位必备",
-                "按国家专科医师规范化培训制度与机构授权",
-                "按专科培训周期",
-                "超出专科范围执业须会诊或转诊"
+                "麻醉方向训练与机构授权",
+                "目标麻醉岗位人员",
+                "核目标任务的训练考核及权限",
+                "具体条件分别核，不概括统一额外麻醉证",
+                "核主管部门与机构现行制度",
+                "按实际项目核",
+                "学历、训练、执照/注册与操作授权不能互代"
               ],
               [
                 "继续医学教育与定期考核",
@@ -29884,10 +29915,10 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "本职业的资格由医师资格、执业注册与专科培训管理：须依《中华人民共和国医师法》取得医师资格并注册后方可执业，并在注册的执业地点、执业类别与执业范围内执业（美国侧须持州行医执照）。",
+              "美国MD/DO是医学院学位，不是执照；ASA所述麻醉住院医师培训为四年，执业另需州行医执照。亚专科fellowship是进一步训练路径，不能写成所有人的普遍门槛；BLS称专科board certification并非普遍法定必需。中国《医师法》规定资格考试及注册，并有本科相关医学专业加一年指导实践、执业助理医师加相关专科两年执业等报考路径；不能把本科路径写成唯一途径。法律建立规范化培训框架，具体岗位培训、考核和授权须核现行主管部门与机构条件。",
               "麻醉医师助理、护理麻醉师、注册护士与呼吸治疗师的资格与职责体系不同，不可互相替代；取得资格前的临床实践须在执业医师监督指导下进行。",
               "中国大陆侧，相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13）。",
-              "有意入行者应核对官方信息中的医学学历、报考条件、执业注册、规范化培训与专科资质要求，并通过官方渠道报名与训练；本页不构成医学建议。"
+              "按官方现行教育、报考、注册、适用培训和机构授权条件准备；不能以纸面练习替代正式临床训练。"
             ]
           },
           "id": "anesthesiologists.path.credential-boundary.1",
@@ -29904,9 +29935,9 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "样本适用范围：本页不引用任何招聘公告作为工资或需求证据；招聘条件、执业与专科要求随机构与地区变化，请以卫生健康主管部门与用人单位官方发布为准。",
-              "本页不提供该职业的分城市工资分布与专科通过率：美国侧给出 O*NET 与 BLS 的麻醉科医师专属口径工资、就业与预测（并以 BLS 职业展望手册的「医师与外科医师」组合口径仅作对照），中国大陆侧给出行业门类宽口径参照与执业框架，两者不是同一统计口径。",
-              "判断一个岗位是否属于本职业，看任务描述而不是名称：是否涉及术前风险评估与麻醉方案制定、实施麻醉与气道管理、术中监测与不良事件处置、转归判断与复苏交接，并承担最终医疗责任。"
+              "公开准备范围：本页不引用招聘公告作为工资或需求证据，目标岗位以主管部门和机构当前书面条件核。",
+              "本页工资取美国本职业OEWS分位，就业取EP当前详细预测，OOH也列本职业明细；中国行业工资只参照，不提供城市工资和专科通过率。",
+              "判断岗位须核具体任务、法域资格、注册与机构授权；不能仅靠“最终责任”或岗位名划分，更不能据任务表授予权限。"
             ]
           },
           "id": "anesthesiologists.path.recruitment-sample.1",
@@ -29931,16 +29962,16 @@
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：29-1211",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -29964,13 +29995,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业为麻醉科医师（美方对应 O*NET/BLS 29-1211.00）：美国侧路径为医学院学位（MD/DO）后完成住院医师培训并通常需麻醉专科或亚专科 fellowship，取得州行医执照后执业；O*NET 显示该职业 69% 受访者需博士后训练、25% 需博士学位、5% 需专业学位。中国大陆侧，执业须依《中华人民共和国医师法》：国家实行医师资格考试与医师执业注册制度，具有高等学校相关医学专业本科以上学历并在执业医师指导下参加医学专业工作满一年可参加执业医师资格考试，取得资格并注册后方可执业；国家建立健全住院医师规范化培训制度与专科医师规范化培训制度。相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13）。本页不提供该职业的分城市工资分布与专科通过率。"
+              "美国MD/DO是医学院学位，不是执照；ASA所述麻醉住院医师培训为四年，执业另需州行医执照。亚专科fellowship是进一步训练路径，不能写成所有人的普遍门槛；BLS称专科board certification并非普遍法定必需。中国《医师法》规定资格考试及注册，并有本科相关医学专业加一年指导实践、执业助理医师加相关专科两年执业等报考路径；不能把本科路径写成唯一途径。法律建立规范化培训框架，具体岗位培训、考核和授权须核现行主管部门与机构条件。2022版大典麻醉科医师2-05-01-13只说明分类；本页没有招聘公告样本，也不提供城市工资或专科通过率。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.11",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-career",
+            "ooh",
+            "cnlaw",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30037,7 +30070,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成麻醉专科医师规范化培训与考核（或亚专科 fellowship），取得专科资质。"
+              "按目标麻醉或亚专科岗位核适用培训、考核和机构授权；美国fellowship不是所有人的通用要求。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.16",
@@ -30095,13 +30128,15 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进入该职业的路径按国家区分：美国侧需医学院学位（MD/DO）、住院医师培训与麻醉专科（或亚专科 fellowship）培训，并取得州行医执照；中国大陆侧，执业须依《中华人民共和国医师法》取得医师资格并注册，并按住院医师规范化培训与专科医师规范化培训制度培养；相关职业归入职业分类大典临床和口腔医师（2-05-01）的麻醉科医师（2-05-01-13）。具体要求以卫生健康主管部门、院校与用人单位官方信息为准；本页不提供该职业的分城市工资分布与专科通过率。"
+              "中国依法取得医师资格并注册，具体培训与机构授权另核；美国MD/DO学位、麻醉住院医师与州执照分开。fellowship为亚专科进一步路径，board certification不概括为普遍法定门槛。分类不授予许可，纸面练习不证明临床能力。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.20",
           "source_refs": [
-            "onet",
-            "onet"
+            "asa-career",
+            "ooh",
+            "cnlaw",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30171,7 +30206,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国，麻醉科医师专属口径）。"
+              "当前链接支持2025年5月本职业工资分位，不支持就业预测或资格；就业另见BLS EP登记。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.25",
@@ -30199,7 +30234,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国职业分类大典（2022 年版）》麻醉科医师（2-05-01-13）与国家统计局《2025 年城镇单位就业人员年平均工资情况》（中国大陆口径）。"
+              "NBS 2025行业工资为多职业代理；不是职业分类或医师工资。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.27",
@@ -30403,7 +30438,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成麻醉专科规范化培训并考核，独立制定与实施麻醉方案。"
+              "在合法资格、适用麻醉训练考核与机构授权内承担相应诊疗，不能用培训完成自动证明全部独立权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.41",
@@ -30432,7 +30467,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长临床经历与职称；按机构规定。"
+              "经历、职称和岗位条件按目标机构当前书面要求核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.43",
@@ -30695,7 +30730,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成产科或儿科麻醉亚专科培训并独立实施。"
+              "产科/儿科方向按适用训练与实际机构授权承担任务；不假设所有方向同一证书或权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.61",
@@ -30724,7 +30759,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长亚专科经历与职称；按机构规定。"
+              "亚专科经历、职称和岗位条件按机构书面要求核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.63",
@@ -30987,7 +31022,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成亚专科培训并独立管理重症患者或慢性疼痛患者。"
+              "重症/疼痛方向核适用训练、注册范围及机构授权；不能以亚专科培训自动取得全部独立管理权限。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.81",
@@ -31016,7 +31051,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长专科经历与职称；按机构规定。"
+              "专科经历、职称及授权按目标机构当前要求核。"
             ]
           },
           "id": "anesthesiologists.path.career-path-block.83",
@@ -31116,10 +31151,10 @@
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "entity": "BLS 职业就业与工资统计（OEWS）：29-1211",
+                "entity": "O*NET展示的BLS 2025年5月麻醉医师工资分位",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
@@ -31131,7 +31166,7 @@
                 "entity": "《中华人民共和国医师法》（2022-03-01 施行）",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "entity": "麻醉医师助理",
@@ -31197,14 +31232,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国侧就业前景（麻醉科医师专属口径，经 O*NET 与 BLS）：2024 年在岗约 45,300 人，2024—2034 年平均增长 3% 至 4%，年均约 1,300 个职位空缺，多数来自替代需求；主要行业为医疗保健与社会援助。BLS 职业展望手册另按更大的「医师与外科医师」组合发布口径（2025—2035 年 862,800 人、增长 4%、净增约 31,300 人、年均约 22,100 个空缺、中位 275,930 美元），覆盖多个专科，本页仅作对照、不当作本职业数字。该数字不代表个人就业保证，且不能外推为中国大陆。中国大陆侧没有对应的官方职业就业预测，本页不提供数字；麻醉服务需求与手术量、人口老龄化、专科可及性与麻醉团队人员配置相关，本页不据此外推。"
+              "证据不足：本页未取得中国大陆麻醉医师全国就业预测。BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。O*NET仍展示旧2024—2034，当前直接取EP。OOH含麻醉医师明细及医师组合；组合862,800人、增长4%、年均22,100空缺、工资中位275,930仅作范围对照，不能替代本职业或保证个人就业。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31227,7 +31261,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024年"
+              "2025年"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.10",
@@ -31241,12 +31275,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 展示的 BLS 麻醉科医师在 2024 年在岗约 45,300 人。"
+              "BLS EP详细职业29-1211基期就业41,500人。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31297,12 +31332,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "约45,300人（2024年）"
+              "41,500人（2025年）"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.15",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31325,7 +31361,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035年"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.17",
@@ -31339,12 +31375,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测麻醉科医师在 2024—2034 年平均增长 3% 至 4%。"
+              "BLS EP麻醉医师41,500→43,000人，净增1,500，增长3.6%（OOH整数4%）。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31353,7 +31390,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "为麻醉科医师专属口径全国预测；BLS 职业展望手册的「医师与外科医师」组合口径为 4%，覆盖多个专科，仅作对照，二者不互相折算。"
+              "同一麻醉医师明细：EP保留小数，OOH四舍五入为整数。医师组合范围不同，不能替代。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.19",
@@ -31395,12 +31432,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "3% 至 4%（平均）（2024—2034年）"
+              "3.6%（EP；OOH为4%整数）"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.22",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31423,7 +31461,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "2024—2034年"
+              "2025—2035年"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.24",
@@ -31437,12 +31475,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 预测麻醉科医师在 2024—2034 年年均约 1,300 个职位空缺，多数来自替代需求。"
+              "BLS EP麻醉医师年均1,100个空缺，含增长与替代需求；净增1,500为十年变化。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31493,12 +31532,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "年均约1,300个"
+              "年均1,100个"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.29",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31521,12 +31561,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业就业与工资统计（OEWS）与 2024—2034 年就业预测（美国，麻醉科医师专属口径）；BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）。"
+              "当前链接支持2025年5月工资分位；就业直接取BLS EP登记，不能由工资页推出预测。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "ep",
+            "ooh"
           ],
           "type": "prose"
         },
@@ -31549,7 +31590,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "《中华人民共和国医师法》与《中华人民共和国职业分类大典（2022 年版）》麻醉科医师（2-05-01-13）。"
+              "中国医师法支持資格、注册与执业范围；职业分类另见其登记来源。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.33",
@@ -31563,7 +31604,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "认证与执照体系不同，须在麻醉医师监督下执业，不可替代医师方案与医疗责任。"
+              "CAA资格与医师不同，在麻醉医师监督与适用授权内执业，并有自身义务，不替代医师资格。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.34",
@@ -31698,7 +31739,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需护理资格，不承担麻醉方案与临床决策责任。"
+              "护士按护理资格负责自身护理、观察判断和协作；不能代替医师资格，不概括其没有临床判断。"
             ]
           },
           "id": "anesthesiologists.market-signals.market-signal-card.43",
@@ -31936,19 +31977,19 @@
                 "question_key": "career.faq.anesthesiologists.daily-work"
               },
               {
-                "answer": "麻醉科医师负责术前评估与风险判断、制定麻醉方案、指导与监督麻醉实施并承担最终医疗责任；麻醉医师助理与护理麻醉师在其监督或协作关系内实施气道管理、监测与给药等操作；护理与术后随访由护理团队承担；医疗质量与合规由机构与卫生健康主管部门监督。麻醉医师助理、护理麻醉师、医师助理、注册护士、呼吸治疗师与重症监护护士的资格与职责体系不同，不可互相替代。",
+                "answer": "麻醉医师在合法执业范围与机构授权内评估、制定并实施麻醉方案，负责自身诊疗与记录；ASA描述的美国麻醉照护团队由麻醉医师领导，可委派适当任务但保留总体责任。助理和护理人员仍有各自执业义务；CRNA权限随法域和机构变化。监测、给药、恢复照护与随访可有团队任务重叠，不能把这些排除出医师任务或概括其他成员没有临床判断。",
                 "id": "anesthesiologists.faq.2",
                 "question": "这个职业和相邻岗位的边界在哪里？",
                 "question_key": "career.faq.anesthesiologists.comparison"
               },
               {
-                "answer": "没有证据支持「被取代」。自动化可能增强监护报警、数据整合与记录辅助，但术前风险评估与麻醉方案判断、气道管理与生命支持的操作与决策、应急处置与最终医疗责任仍由执业医师承担；本页引用的 2024—2034 年平均增长 3% 至 4% 为麻醉科医师专属口径的 BLS 官方预测，本页不据技术名词推断岗位增减。",
+                "answer": "证据不足：本页未取得本职业AI替代率或因果研究，不能断言会取代或不会取代。记录与趋势辅助只是可能用途；BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。增长不能归因AI。",
                 "id": "anesthesiologists.faq.3",
                 "question": "这个职业会被 AI 取代吗？",
                 "question_key": "career.faq.anesthesiologists.ai"
               },
               {
-                "answer": "中国大陆没有公开的该职业全国工资分布，本页只给出国家统计局 2025 年行业门类与单位类型的宽口径参照（如卫生和社会工作非私营 146,266 元/年、私营 75,631 元/年）；该门类覆盖大量非麻醉岗位，麻醉科医师薪酬按机构制度、职级与绩效确定，不能当作本职业工资。",
+                "answer": "证据不足：本页未取得中国大陆麻醉医师全国工资分布。NBS卫生和社会工作2025年非私营146,266元、私营75,631元为行业年平均，覆盖多职业，不是麻醉医师中位；实际报酬核岗位书面条件。",
                 "id": "anesthesiologists.faq.4",
                 "question": "中国大陆的工资怎么理解？",
                 "question_key": "career.faq.anesthesiologists.china-pay"
@@ -31960,19 +32001,19 @@
                 "question_key": "career.faq.anesthesiologists.us-pay"
               },
               {
-                "answer": "美国侧：医学院学位（MD/DO）后完成住院医师培训，通常还需麻醉专科或亚专科 fellowship，并取得州行医执照。中国大陆侧：按《中华人民共和国医师法》，具有高等学校相关医学专业本科以上学历并在执业医师指导下参加医学专业工作实践满一年可参加执业医师资格考试，取得资格并注册后方可执业，并按住院医师与专科医师规范化培训制度培养。O*NET 显示该职业 69% 受访者需博士后训练、25% 需博士学位、5% 需专业学位。具体要求以官方信息为准。",
+                "answer": "美国MD/DO是医学院学位，不是执照；ASA所述麻醉住院医师培训为四年，执业另需州行医执照。亚专科fellowship是进一步训练路径，不能写成所有人的普遍门槛；BLS称专科board certification并非普遍法定必需。中国《医师法》规定资格考试及注册，并有本科相关医学专业加一年指导实践、执业助理医师加相关专科两年执业等报考路径；不能把本科路径写成唯一途径。法律建立规范化培训框架，具体岗位培训、考核和授权须核现行主管部门与机构条件。O*NET学历类别比例仅为美国受访资料，不作为中国准入门槛。",
                 "id": "anesthesiologists.faq.6",
                 "question": "怎么才能成为麻醉科医师？",
                 "question_key": "career.faq.anesthesiologists.education"
               },
               {
-                "answer": "主要是术前风险评估不足、麻醉方案与用药决策失误、气道管理与生命支持风险、监测判读与异常处置不足、知情同意与病历记录不规范、超出执业范围执业，以及每天感染与辐射暴露、长时间工作与高责任带来的职业健康风险。按指南完成评估与方案、按操作规程实施气道管理与生命支持、按监护标准判读并处置异常、如实及时记录、在注册与授权范围内执业是基础控制措施；具体规定以法律、规范与机构制度为准。",
+                "answer": "风险识别涵盖资料与方案复核、气道/生命支持、监测异常、同意与病历、超范围及职业暴露；不估计事故概率。美国受访者94%每天感染、14%每天辐射暴露，不能写每个人每日两类暴露；具体措施按正式指南和机构规程。",
                 "id": "anesthesiologists.faq.7",
                 "question": "这个职业的主要风险是什么？",
                 "question_key": "career.faq.anesthesiologists.risk"
               },
               {
-                "answer": "O*NET 与 BLS 的麻醉科医师专属口径：2024 年在岗约 45,300 人，2024—2034 年平均增长 3% 至 4%，年均约 1,300 个职位空缺且多数来自替代需求。BLS 职业展望手册另按「医师与外科医师」组合发布口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺），覆盖多个专科，本页仅作对照。该数字不代表个人就业保证，也不能外推为中国大陆。",
+                "answer": "BLS EP麻醉医师29-1211明细：2025年41,500人，2035年43,000人，净增1,500；2025—2035增长3.6%（OOH四舍五入为4%），年均1,100个空缺，包含增长与替代需求。OOH列明细及医师组合；组合范围不同不替代本职业，预测不保证个人就业、不外推中国。",
                 "id": "anesthesiologists.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.anesthesiologists.outlook"
@@ -32022,7 +32063,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "O*NET 29-1211.00 麻醉科医师职业摘要与详细资料；BLS 职业就业与工资统计（OEWS）：29-1211 与 O*NET 展示的 BLS 2024—2034 年就业预测（麻醉科医师专属口径）；BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）；《中华人民共和国医师法》（2022-03-01 施行）；《中华人民共和国职业分类大典（2022 年版）》麻醉科医师（2-05-01-13）；国家统计局《2025 年城镇单位就业人员年平均工资情况》。"
+              "O*NET麻醉医师职业资料与2025年5月工资；BLS EP 2025—2035详细职业表及OOH明细/组合；ASA医学训练与团队说明；中国医师法；2022版大典职业定位；NBS 2025行业工资。"
             ]
           },
           "id": "anesthesiologists.sources.source-card.2",
@@ -32038,7 +32079,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮核对与更新日期：2026-10-02；未重新取得的旧来源保留原访问日期，来源登记分别标资料期。"
             ]
           },
           "id": "anesthesiologists.sources.source-card.3",
@@ -32052,7 +32093,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "美国侧工资与就业为 O*NET 展示的 BLS 职业就业与工资统计（OEWS，2025 年 5 月）与 2024—2034 年就业预测，均为麻醉科医师（29-1211.00）专属口径，不是「医师与外科医师」组合口径数字，也不能外推为中国大陆；本页不提供分行业工资中位数（BLS 未公开可读取的该职业分行业中位数，未使用第三方估算）。中国大陆侧只提供国家统计局 2025 年行业门类与单位类型的宽口径参照，并逐行标注为本职业未单列、仅作对照；执业按《中华人民共和国医师法》的医师资格与执业注册制度，培养按住院医师与专科医师规范化培训制度；相关职业归入职业分类大典麻醉科医师（2-05-01-13）。本页不构成医疗、法律或政策意见。"
+              "证据不足：本页未取得中国大陆麻醉医师全国工资分布、全国职业预测及所列美国行业内本职业中位数。已核工资为ONET展示BLS OEWS 2025年5月29-1211；就业为EP 2025—2035，OOH含详细和组合，两者分开。BLS有行业表入口，未取得不表示未发布。中国行业工资不能冒充职业工资，资格、注册、训练、授权按法域分别核。"
             ]
           },
           "id": "anesthesiologists.sources.source-card.4",
@@ -32143,106 +32184,106 @@
                 "limitation": "用于职业身份、任务（20 项）与兴趣剖面（ISR）；美国详细职业口径，工资与就业亦为该职业专属口径。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 麻醉科医师职业摘要",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "exact",
                 "id": "bls",
-                "limitation": "用于工资中位数与就业规模的官方口径（麻醉科医师专属）。",
+                "limitation": "证据不足：本轮从BLS行业表入口及动态职业/行业页未取得所列行业内29-1211的2025年5月工资中位数；未取得不表示未发布，任务或全国工资不能代替。就业另取EP。",
                 "market": "美国",
-                "name": "BLS 职业就业与工资统计（OEWS）：29-1211",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "name": "BLS 2025年5月行业职业工资表入口",
+                "period": "2025年5月",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/oes/current/oes291211.htm"
+                "url": "https://www.bls.gov/oes/2025/may/oessrci.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "ooh",
-                "limitation": "用于说明更大的「医师与外科医师」组合口径（2025—2035 年 862,800 人、增长 4%、年均约 22,100 个空缺、中位 275,930 美元），本页仅作对照、不当作本职业数字。",
+                "limitation": "含麻醉医师工资391,490、就业41,500→43,000和增长4%整数；组合另列；详细增长及空缺取EP。",
                 "market": "美国",
-                "name": "BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "name": "BLS OOH医师与外科医师（含麻醉医师明细与组合）",
+                "period": "工资2025年5月；就业2025—2035",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/healthcare/physicians-and-surgeons.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "exact",
                 "id": "ep",
                 "limitation": "用于核对就业预测口径与年均职位空缺单位的官方来源。",
                 "market": "美国",
                 "name": "BLS 就业预测表（按详细职业）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2025—2035年；工资2025年5月",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "exact",
-                "url": "https://www.bls.gov/emp/tables/emp-by-detailed-occupation.htm"
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "exact",
                 "id": "oews",
                 "limitation": "用于年薪 10/25/50/75/90 分位数值与资料期（麻醉科医师专属口径）。",
                 "market": "美国",
                 "name": "O*NET 展示的 BLS 2025 年 5 月工资分位（29-1211.00）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "industry_proxy",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "industry_proxy",
                 "id": "nbs",
                 "limitation": "用于中国大陆民用行业门类与单位类型年平均工资；不含本职业单列工资。",
                 "market": "中国大陆",
                 "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2025年；2026-05-15发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "cnlaw",
                 "limitation": "用于中国大陆医师资格考试、执业注册、执业范围、规范化培训、知情同意与报告义务的框架说明。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国医师法》（2021-08-20 通过，2022-03-01 施行）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2021年通过，2022-03-01施行",
                 "publisher": "全国人民代表大会常务委员会",
                 "scope": "contextual",
-                "url": "https://cpc.people.com.cn/n1/2021/0826/c64387-32208638.html"
+                "url": "https://wjw.beijing.gov.cn/zwgk_20040/zcwj2022/flfg/202304/t20230407_2992842.html"
               },
               {
                 "accessed_at": "2026-09-15",
@@ -32255,23 +32296,23 @@
                 "limitation": "用于中国大陆对应职业（麻醉科医师 2-05-01-13）与卫生专业技术人员（2-05）定位说明。",
                 "market": "中国大陆",
                 "name": "《中华人民共和国职业分类大典（2022 年版）》临床和口腔医师（2-05-01）麻醉科医师（2-05-01-13）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2022年版",
                 "publisher": "人力资源和社会保障部（职业分类大典）",
                 "scope": "contextual",
                 "url": "https://hrss.sz.gov.cn/attachment/0/731/731778/8340671.pdf"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "privacy",
                 "limitation": "用于工作情境比例（精确性、错误后果、决策、沟通协作与暴露）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（工作情境）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32284,42 +32325,42 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "facilities",
-                "limitation": "用于该职业常用设备与技术条目；不表示技术采用率。",
+                "limitation": "职业软件技术条目，不是设备操作资格或AI部署/采用率；实际系统和训练另核。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 技术清单",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/hot_tech/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
                 "limitation": "用于任务清单与工作活动（术前评估、麻醉实施、术中监测、气道与生命支持、转归判断、教学研究）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（任务与工作活动）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
                 "limitation": "用于工作周时长、日程规律性与感染、污染物与辐射暴露等比例。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（工作时间与环境）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32335,7 +32376,7 @@
                 "limitation": "用于解释民用工资总额为税前口径及其组成范围。",
                 "market": "中国大陆",
                 "name": "国家统计局《关于工资总额组成的规定》",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "资料期按原文；本轮未重新取得",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/txzfg2020/202605/t20260511_1963662.html"
@@ -32351,7 +32392,7 @@
                 "limitation": "用于兴趣代码 ISR（研究型、社会型、现实型）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（兴趣剖面 ISR）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
@@ -32364,10 +32405,10 @@
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
-                "limitation": "用于执照与认证要求说明。",
+                "limitation": "认证检索入口，不代表所有州执照或普遍必需证书；资格边界由OOH/ASA及当地法规另核。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 执照与认证要求",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localcert/29-1211.00"
@@ -32383,7 +32424,7 @@
                 "limitation": "用于职业概述与相关职业入口。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 自定义职业档案",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/29-1211.00"
@@ -32399,39 +32440,39 @@
                 "limitation": "用于任务与职责参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（任务与职责）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
                 "limitation": "用于任务与麻醉程序说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
                 "limitation": "用于麻醉记录、监护数据与交接要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（记录与交接要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32447,23 +32488,23 @@
                 "limitation": "用于任务清单参考。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（任务清单）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
                 "limitation": "用于任务描述与职责边界。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 任务描述",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32479,23 +32520,23 @@
                 "limitation": "用于职业属性说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 职业摘要（职业属性）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
-                "limitation": "用于数据口径说明（专属口径与组合口径对照）。",
+                "limitation": "ONET任务与工作情境资料，不支持当前EP人数或详细/组合统计比较。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（数据说明）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
@@ -32511,7 +32552,7 @@
                 "limitation": "用于主要行业（医疗保健与社会援助）说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 行业分布",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/industry/29-1211.00"
@@ -32527,42 +32568,74 @@
                 "limitation": "用于培训路径与教育要求说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 培训与教育信息",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/localtraining/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "exact",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "exact",
                 "id": "onet-wages",
                 "limitation": "用于全国工资分位数值与资料期核对（麻醉科医师专属口径）。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 全国工资分位页面",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "2025年5月",
                 "publisher": "O*NET OnLine（BLS OEWS 数据）",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/29-1211.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
-                  "访问 2026-09-15"
+                  "访问2026-10-02"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
                 "limitation": "用于记录、报告与教学科研过程说明。",
                 "market": "美国",
                 "name": "O*NET OnLine 29-1211.00 详细资料（记录与质量管理要求）",
-                "period": "2025年5月（工资）／2024—2034年（预测）／2025年（中国民用工资参照）／2022 年版（中国职业分类）／2021 年通过、2022-03-01 施行（中国医师法）／2025—2035年（组合口径对照）",
+                "period": "O*NET当前职业资料；就业仍为2024—2034，工资为2025年5月，行业2024年",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/29-1211.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "asa-career",
+                "limitation": "支持MD/DO医学学位、四年麻醉住院医师和可选进一步训练；总体责任为其麻醉照护团队模型，不能概括全部法域。",
+                "market": "美国",
+                "name": "ASA Anesthesia as a Career",
+                "period": "2024-03-25更新",
+                "publisher": "American Society of Anesthesiologists",
+                "scope": "contextual",
+                "url": "https://www.asahq.org/education-and-career/career-resources/anesthesia-as-a-career"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "contextual",
+                  "访问2026-10-02"
+                ],
+                "evidence_type": "contextual",
+                "id": "oews-method",
+                "limitation": "一般时薪乘2080年化；受雇范围排除自雇，非个人实际工时工资保证。",
+                "market": "美国",
+                "name": "BLS OEWS常见问题与方法",
+                "period": "当前方法说明",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               }
             ]
           },
@@ -32964,7 +33037,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资分位",
+            "类型": "美国任务",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.22",
               "block": "ai-impact",
@@ -32986,7 +33059,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方工资与就业",
+            "类型": "官方工资分位",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.24",
               "block": "ai-impact",
@@ -33008,7 +33081,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "官方就业预测",
+            "类型": "职业手册明细与组合",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -33030,7 +33103,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "对照口径",
+            "类型": "美国工作情境",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -33052,7 +33125,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国法律",
+            "类型": "美国职业对照",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33074,7 +33147,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国职业分类",
+            "类型": "软件技术清单",
             "适用范围": {
               "$item": "anesthesiologists.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -35432,7 +35505,7 @@
           "ui": {
             "ai_heading": "AI 会影响麻醉医师的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "职业工资缺口与行业参考",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "麻醉医师在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -36428,7 +36501,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 职业就业与工资统计（OEWS）：29-1211（专属口径）",
+            "label": "O*NET展示BLS 2025年5月职业工资分位",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologists.profile.onet-structured-fields-block.2",
@@ -36450,7 +36523,7 @@
           },
           {
             "alternate_value": null,
-            "label": "O*NET 展示的 BLS 工资分位（2025 年 5 月）",
+            "label": "BLS EP详细职业就业预测（2025—2035）",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologists.profile.onet-structured-fields-block.4",
@@ -36461,7 +36534,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 职业展望手册：医师与外科医师（组合口径，仅作对照）",
+            "label": "医师资格与训练边界（两国分别核）",
             "secondary_value": null,
             "value": {
               "$item": "anesthesiologists.profile.onet-structured-fields-block.5",
@@ -37527,7 +37600,7 @@
         "occupation_scope": "麻醉医师",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37556,86 +37629,89 @@
       },
       {
         "derivation": null,
-        "display_value": "45,300 人（2024 年）",
+        "display_value": "41,500人（2025年，BLS EP）",
         "fact_id": "us-employment-2025",
         "market": "美国",
         "measure": "在岗就业人数",
         "occupation_scope": "麻醉医师",
-        "period": "2024年",
+        "period": "2025年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3% 至 4%（平均）",
+        "display_value": "3.6%（EP；OOH四舍五入为4%）；净增1,500人",
         "fact_id": "us-growth-2025-2035",
         "market": "美国",
         "measure": "就业增长率与官方净变化",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约1,300个",
+        "display_value": "年均1,100个",
         "fact_id": "us-openings-2025-2035",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该行业内29-1211的2025年5月工资中位数；全国分位不替代，未取得不表示BLS未发布。",
         "fact_id": "us-industry-wage-finance-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（医疗保健与社会援助）",
         "occupation_scope": "麻醉医师",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查询2026-10-02",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该行业内29-1211的2025年5月工资中位数；全国分位不替代，未取得不表示BLS未发布。",
         "fact_id": "us-industry-wage-professional-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（医院）",
         "occupation_scope": "麻醉医师",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查询2026-10-02",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该行业内29-1211的2025年5月工资中位数；全国分位不替代，未取得不表示BLS未发布。",
         "fact_id": "us-industry-wage-localgov-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（政府）",
         "occupation_scope": "麻醉医师",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查询2026-10-02",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "证据不足：未取得该行业本职业工资中位数（BLS 未按行业公开可读取的该职业中位数，本页未使用第三方估算）",
+        "display_value": "证据不足：本轮未取得该行业内29-1211的2025年5月工资中位数；全国分位不替代，未取得不表示BLS未发布。",
         "fact_id": "us-industry-wage-education-2025",
         "market": "美国",
         "measure": "行业内该职业工资中位数（其他行业）",
         "occupation_scope": "麻醉医师",
-        "period": "查询 2026-09-15",
+        "period": "2025年5月；查询2026-10-02",
         "source_refs": [
-          "operations"
+          "bls"
         ]
       },
       {
@@ -37644,7 +37720,7 @@
         "fact_id": "cn-urban-nonprivate-2025",
         "market": "中国大陆",
         "measure": "全国城镇非私营单位就业人员年平均工资",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "全国城镇非私营单位就业人员年平均工资（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37656,7 +37732,7 @@
         "fact_id": "cn-private-2025",
         "market": "中国大陆",
         "measure": "全国城镇私营单位就业人员年平均工资",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "全国城镇私营单位就业人员年平均工资（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37668,7 +37744,7 @@
         "fact_id": "cn-mid-managers-2025",
         "market": "中国大陆",
         "measure": "规模以上企业专业技术人员年平均工资",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "规模以上企业专业技术人员年平均工资（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37680,7 +37756,7 @@
         "fact_id": "cn-clerical-2025",
         "market": "中国大陆",
         "measure": "规模以上企业办事人员和有关人员年平均工资",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "规模以上企业办事人员和有关人员年平均工资（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37692,7 +37768,7 @@
         "fact_id": "cn-industry-rental-business-2025",
         "market": "中国大陆",
         "measure": "租赁和商务服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "租赁和商务服务业年平均工资（城镇非私营单位）（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37704,7 +37780,7 @@
         "fact_id": "cn-industry-science-tech-2025",
         "market": "中国大陆",
         "measure": "科学研究和技术服务业年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "科学研究和技术服务业年平均工资（城镇非私营单位）（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37716,7 +37792,7 @@
         "fact_id": "cn-industry-education-2025",
         "market": "中国大陆",
         "measure": "教育年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "教育年平均工资（城镇非私营单位）（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37728,7 +37804,7 @@
         "fact_id": "cn-industry-public-admin-2025",
         "market": "中国大陆",
         "measure": "公共管理、社会保障和社会组织年平均工资（城镇非私营单位）",
-        "occupation_scope": "麻醉医师",
+        "occupation_scope": "公共管理、社会保障和社会组织年平均工资（城镇非私营单位）（多职业代理，非麻醉医师）",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37760,12 +37836,12 @@
       },
       {
         "derivation": null,
-        "display_value": "69% 受访者需博士后训练、25% 需博士学位、5% 需专业学位",
+        "display_value": "美国受访类别69% Post-Doctoral Training、25% Doctoral Degree、5% Professional Degree（非中国准入门槛）",
         "fact_id": "us-education-profile",
         "market": "美国",
         "measure": "入门学历与培训",
         "occupation_scope": "麻醉医师",
-        "period": "2025 年；访问 2026-09-15",
+        "period": "O*NET当前职业资料；访问2026-10-02",
         "source_refs": [
           "onet"
         ]
@@ -37779,7 +37855,7 @@
         "occupation_scope": "麻醉医师",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37796,62 +37872,67 @@
       },
       {
         "derivation": null,
-        "display_value": "3%—4%（平均；基期 45,300 人）",
+        "display_value": "3.6%（EP；OOH为4%）；41,500→43,000人",
         "fact_id": "us-outlook-2024-2034",
         "market": "美国",
         "measure": "就业增长与基期规模",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "约1,300个/年",
+        "display_value": "1,100个/年",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "45,300人（2024年）",
+        "display_value": "41,500人（2025年）",
         "fact_id": "market-employment-us",
         "market": "美国",
         "measure": "在岗就业规模",
         "occupation_scope": "麻醉医师",
-        "period": "2024年",
+        "period": "2025年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3% 至 4%（平均）（2024—2034）",
+        "display_value": "3.6%（EP；OOH为4%）",
         "fact_id": "market-growth-us",
         "market": "美国",
         "measure": "就业增长率",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
         "derivation": null,
-        "display_value": "年均约1,300个（2024—2034）",
+        "display_value": "年均1,100个",
         "fact_id": "market-openings-us",
         "market": "美国",
         "measure": "年均职位空缺",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       },
       {
@@ -37887,7 +37968,7 @@
         "occupation_scope": "麻醉医师",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37899,7 +37980,7 @@
         "occupation_scope": "麻醉医师",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37923,7 +38004,7 @@
         "occupation_scope": "麻醉医师",
         "period": "2025年5月",
         "source_refs": [
-          "bls"
+          "oews"
         ]
       },
       {
@@ -37940,26 +38021,27 @@
       },
       {
         "derivation": null,
-        "display_value": "美国该职业 69% 受访者需博士后训练、25% 需博士学位、5% 需专业学位",
+        "display_value": "美国受访类别69% Post-Doctoral Training、25% Doctoral Degree、5% Professional Degree（非中国准入门槛）",
         "fact_id": "credential-boundary",
         "market": "美国",
         "measure": "入门学历与培训",
         "occupation_scope": "麻醉医师",
-        "period": "2025 年；访问 2026-09-15",
+        "period": "O*NET当前职业资料；访问2026-10-02",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "3% 至 4%（平均）（2024—2034）",
+        "display_value": "3.6%（EP；OOH为4%）；净增1,500人",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
         "occupation_scope": "麻醉医师",
-        "period": "2024—2034年",
+        "period": "2025—2035年",
         "source_refs": [
-          "onet"
+          "ep",
+          "ooh"
         ]
       }
     ]
@@ -38020,7 +38102,7 @@
       "text": "麻醉科医师：任务、工资与就业前景（O*NET 29-1211.00）"
     }
   },
-  "source_content_sha256": "53b5167e86be68b943174fdcc266c46baf4d015257ac5c7a6a0a7246717fad61",
+  "source_content_sha256": "fd36943c11dfd4c08be6f1a528defb0ccab5ba8427520232bb3a03a41175b2d5",
   "subject": {
     "canonical_slug": "anesthesiologists",
     "name": "麻醉医师",

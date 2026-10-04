@@ -15006,7 +15006,7 @@
             },
             "metric": "美国就业变化",
             "occupation_scope": "BLS/O*NET 49-9063.00 单列职业口径",
-            "source_id": "bls",
+            "source_id": "ep",
             "value": "增长 1%—2%（2024—2034 年，年均约 600 个空缺）"
           },
           {
@@ -15055,6 +15055,12 @@
             "id": "onet",
             "label": "O*NET 49-9063.00 Musical Instrument Repairers and Tuners",
             "scope": "任务、兴趣代码与准备要求"
+          },
+          {
+            "href": "https://www.onetonline.org/link/localtrends/49-9063.00",
+            "id": "ep",
+            "label": "O*NET 49-9063.00 就业趋势（BLS 预测）",
+            "scope": "美国就业规模与增长预测"
           }
         ],
         "transitions": [
@@ -15829,7 +15835,7 @@
       "text": "乐器维修工"
     }
   },
-  "source_content_sha256": "876f61804655aae4571cee14e2d2c39d24bc5a0831558b4237d76e6976910417",
+  "source_content_sha256": "9946a55dabb0531ea7ab5fad4537d287079a2c7ecb081d656b810007ffb01f90",
   "subject": {
     "canonical_slug": "musical-instrument-repairers-and-tuners",
     "name": "乐器维修工",

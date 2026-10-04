@@ -17,10 +17,19 @@
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2024-2034": {
         "status": "pending_mapping"
       },
+      "fact:us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2024-2034": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings-2025-2035": {
         "status": "pending_mapping"
       },
       "fact:us-projected-employment-2034": {
@@ -7211,12 +7220,15 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 51-4034.00「Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic」。官方范围为：装设、操作或看管车床与车削机床，对金属或塑料线材、棒材等工件进行车削、镗孔、车螺纹、成形或端面加工。典型任务包括读懂图纸与工艺要求、装夹与找正工件、安装与调整刀具与夹具、设定转速与进给、操作机床加工、用量具测量并修正尺寸、检查表面与公差、清理切屑与维护设备。核心交付是符合图纸与公差的合格工件与可追溯的加工记录，而不是「把料车掉」。风险来自旋转主轴与切屑、刀具与工件装夹、测量与公差错误导致的批量报废、冷却液与切屑处理，以及参数或程序设置错误。美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业 18,900 人；2024—2034 预测下降 14%、年均空缺 1,500 个；2025 年中位年薪 50,620 美元；主要行业制造业）。中国大陆精确职业工资未取得，按可见缺口登记。若你难以承受设备噪声、站立作业与高精度测量强度，应把这些作为需要认真权衡的现实成本。"
+              "谨慎信号｜车工51-4034.00处理金属塑料车削、镗孔、螺纹及端面；交付是图纸公差与可核测量记录。2025美国年薪10/25/50/75/90分位36,670、43,250、50,620、60,700、69,700美元；官方时薪17.63、20.79、24.34、29.18、33.51美元。BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。中国精确工资缺口见中国薪资；AB只纸面，护罩和训练未知不操作。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "nbs-wages"
+            "onet-details",
+            "onet-wages",
+            "bls-projections",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7225,12 +7237,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把加工做实（读懂图纸与公差、按工艺装夹找正并设定参数、加工后用量具复测并修正、保留首件与抽检记录）；把设备与人身安全管住（佩戴防护并防止切屑飞溅与缠绕、确认护罩与急停可用、装夹牢固并留出安全距离、按说明处理冷却液与切屑）；并承担可界定的岗位责任（对本人加工尺寸质量与安全操作负责，对超差、刀具异常或程序存疑立即停机报告）。建议用一次可核验的体验（用完全虚构的图纸与工件完成一份装夹与参数设定说明、测量与首件判定记录）来检验，而不是仅依据兴趣问卷的结论。"
+              "承担判断｜按图工艺读图、装夹、加工、测量与记录；操作需训练与雇主授权，护罩异常停止受影响作业。测量和清屑须先完全停稳；记录质量异常与待核，不能把纸面作品当实操能力。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "nbs-wages"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7239,12 +7252,13 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合车工，先用公开或模拟材料做一次可核验的演练：设定一个完全虚构的零件图纸与公差要求，写出从读图与确认材料、选择装夹与找正方式、安装刀具与设定转速进给、首件加工与测量、到判定合格与否并记录的过程，标注每一步的核对点与可能出现的问题（图纸或公差理解错误、装夹不稳或悬伸过长、刀具磨损未更换、转速进给设置不当造成振刀或烧刀、测量方法或量具误差、切屑缠绕未停机清理）。完成后核对：是否把图纸与公差、装夹与刀具状态、测量与首件判定作为不可省略项；是否把超差与设备异常写成停机报告；是否把过程留成可复核记录。全部图纸与工件须为虚构，不使用真实客户图纸或订单信息。"
+              "判断是否适合｜先做路径AB固定题：19.95—20.05毫米、AB2超上限0.03，另两件仅模拟范围内；校准未知、护罩破损和未培训不放行。路径有完整题面、参考答案、四作品与七日计划。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "nbs-wages"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7258,7 +7272,8 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "nbs-wages"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         }
@@ -7275,15 +7290,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "车工对应美国 O*NET-SOC 51-4034.00「Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic」。官方范围为：装设、操作或看管车床与车削机床，对金属或塑料线材、棒材等工件进行车削、镗孔、车螺纹、成形或端面加工。典型工作链是读图与确认工艺、装夹找正工件、安装刀具与设定参数、加工并测量、修正尺寸与检查表面、清理与维护设备。本页美国数值采用 O*NET 呈现的 BLS 精确职业口径（2024 年就业 18,900 人；2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；2025 年年薪第 10 分位 36,670 美元、中位 50,620 美元、第 90 分位 69,700 美元，小时中位 24.34 美元；主要行业制造业）；中国大陆精确职业工资未取得，按可见缺口登记。"
+              "车工对应美国51-4034.00，装设操作看管车床，对金属塑料线材棒料进行车削镗孔螺纹成形端面加工，包含数控任务但不等数控程序员。中国2018车工技能标准6-18-01-01定义为操作车床进行工件旋转表面切削；五级初级工至一级高级技师、普通受教育程度初中或相当。标准鉴定条件、雇主招聘与设备授权分别核，不写全国统一持证上岗。2025美国年薪10/25/50/75/90分位36,670、43,250、50,620、60,700、69,700美元；官方时薪17.63、20.79、24.34、29.18、33.51美元。BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。中国工资分位缺口另列。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.definition-block.1",
           "source_refs": [
             "onet-details",
-            "source-pack-onet-details",
-            "source-pack-onet-summary",
-            "onet-summary"
+            "cn-turner-standard",
+            "onet-wages",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7320,12 +7335,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "完整工作流程｜读图并确认材料与工艺→装夹找正工件→安装调整刀具并设定转速进给→加工、测量并修正尺寸→检查表面与公差、清理并维护设备。"
+              "完整流程｜训练和授权后读图工艺→按说明装夹刀具并设定→按工艺加工→停稳测量并按质量流程复核→停稳清屑与获准维护；异常停止并交授权人员核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.responsibilities-block.4",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "list"
         },
@@ -7334,12 +7350,14 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断｜O*NET 工作情境显示：佩戴防护或安全装备 100% 每天、用手操作控制或感受物体 63% 持续、室内受控环境 79% 每天、站立 55% 持续、面对面讨论 42% 每天。判断依据是图纸与公差、测量数据与首件判定，以及设备与刀具状态。"
+              "O*NET美国样本：PPE100%每天、手部操作63%持续、室内受控79%每天、站立55%持续、面谈42%每天；工作周59%为40小时、41%超过40。准确性16%非常重要是特定回答档，不降低图纸公差要求；噪声13%每年但非每月、23%从不，不断言所有岗位持续噪声。BLS宽组多数全职，可有晚班周末；雇主节奏另核。PPE统计不表示车床旋转中可戴手套；具体防护按风险评估。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.work-context-block.5",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-ooh",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7348,12 +7366,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏｜工作以机床旁站立作业为主：工作周 59% 为 40 小时、精度要求高（精确或准确 16% 非常重要但尺寸测量与公差本身不因百分比降低要求）、设备噪声与切屑与冷却液持续存在、加工周期决定节奏。批量任务中首件判定与抽检频率是控制质量的关节点。"
+              "环境与节奏｜O*NET美国样本：PPE100%每天、手部操作63%持续、室内受控79%每天、站立55%持续、面谈42%每天；工作周59%为40小时、41%超过40。准确性16%非常重要是特定回答档，不降低图纸公差要求；噪声13%每年但非每月、23%从不，不断言所有岗位持续噪声。BLS宽组多数全职，可有晚班周末；雇主节奏另核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.work-context-block.6",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "bls-ooh"
           ],
           "type": "prose",
           "visibility": "internal"
@@ -7363,12 +7382,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 51-4034.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 RC（现实型—常规型），Job Zone 1—2 级（Very Little to Some Preparation Needed：通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年，SVP 低于 6.0），未标注 Bright Outlook；主要行业为制造业（约 95%）。可用美国数据为 O*NET 呈现的 BLS 精确职业口径：2024 年就业 18,900 人；2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；2025 年年薪第 10 分位 36,670 美元、第 25 分位 43,250 美元、中位 50,620 美元、第 75 分位 60,700 美元、第 90 分位 69,700 美元（小时中位 24.34 美元）。中国大陆精确职业工资未取得。"
+              "研究输入｜官方RC，detail兴趣R100/C56/I19/A0/E0/S0；兴趣强度非能力或成功率，未标Bright。O*NET Job Zone1—2通用描述通常高中/GED、部分不要求；经验数月到一年或很少，OJT数日至一年、SVP<6。BLS精确本职业典型高中或同等、中期在职训练；两者描述层级不同，不承诺数日独立操作。制造业95%为2024行业分布。2025美国年薪10/25/50/75/90分位36,670、43,250、50,620、60,700、69,700美元；官方时薪17.63、20.79、24.34、29.18、33.51美元。BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "onet-wages",
+            "onet-trends",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7476,7 +7498,7 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "onet-taxonomy"
+            "adj-mechanic"
           ],
           "type": "prose"
         },
@@ -7490,7 +7512,7 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "onet-taxonomy"
+            "adj-coil"
           ],
           "type": "prose"
         },
@@ -7504,7 +7526,7 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "onet-taxonomy"
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -7518,7 +7540,7 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "onet-taxonomy"
+            "bls-ooh"
           ],
           "type": "prose"
         }
@@ -7535,14 +7557,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "车工的工作对象与 AI 边界：哪些环节可能被辅助、哪些判断必须由人承担。"
+              "车工AI边界与可核试验"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "editorial-ai",
             "onet-details",
-            "source-pack-onet-hot_tech"
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7551,12 +7575,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜CAM 编程、刀具寿命监测与在线测量可辅助刀路生成、参数推荐、刀具磨损预警与尺寸趋势记录，但装夹与找正判断、刀具实际状态、首件与超差判定、设备与人身安全处置仍由操作人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要授权、人工复核与留痕。本页不给出替代概率或时间表。"
+              "证据不足：车工生成AI采用率、提效和工资因果本轮未建立。常规CNC、CAM与在线监测不等生成AI。本轮未取得车工生成AI采用率、提效或薪酬因果；可在虚构记录整理中试验，原记录逐项核，不能执行生成程序或按模型建议改变真实参数。装夹、测量、安全与授权仍由实际责任人核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7565,12 +7593,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据说明｜本表只使用来源原始口径：O*NET 51-4034.00 提供精确职业身份、任务、工作活动与工作情境；美国数值为 O*NET 呈现的 BLS 精确职业口径；O*NET 技术页面提及率不等于岗位必需或自动化率；中国大陆官方统计未提供与该精确职业对应的全国工资分布，不据此推断中国工资。"
+              "证据说明｜ILO全球暴露研究非本职业采用，NIST通用风险非实测；O*NET热技术页基于美国2025招聘帖，本轮显示0 software skills shown；表示本页未列软件，不能解释为零工具或零AI使用。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7579,12 +7611,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明｜同一职业内不同环节受影响不同：越可标准化、且结果可事后核对的部分（刀路与参数推荐、刀具磨损预警、尺寸趋势记录、程序校验）越容易被系统加速；越涉及装夹找正、刀具与工件实际状态判断、首件与超差判定、设备与人身安全处置的部分越必须由人承担。"
+              "差异说明｜信息整理可做纸面对照，效果必须实测准确率、漏项和耗时；实体装夹与测量不能由文本结果证明。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7593,12 +7629,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任链｜从图纸与授权确认、系统或程序处理、人工复核、加工与测量到记录与异常处置，每一步都要明确由谁负责，并保留可追溯证据；不得用程序或监测提示替代装夹确认与首件判定。"
+              "责任链｜核图号、量具、授权与停止条件；对模型输出逐项回到AB原始读数，保版本，异常交责任人核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7607,12 +7647,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转折｜工具改变的是编程与监测效率，不改变装夹找正、尺寸与超差判定、设备安全处置的归属；务实的做法是先把读图、装夹、测量与设备安全能力练扎实，再在可复核、可追溯的环节引入工具。"
+              "转折｜先练公差和记录核对，再在获准的非控制环节试验工具，不承诺效率提高。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7621,12 +7665,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能被辅助：刀路与参数推荐、刀具寿命与磨损监测、在线尺寸测量与趋势记录、程序校验提示；这些环节结果可事后核对，但仍须回看图纸、刀具与设备实况。"
+              "任务试验｜仅整理AB1/2/3模拟读数，检查AB2超差0.03与量具待核是否漏掉；不是加工程序或参数推荐。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7635,12 +7683,16 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点：必须核对图纸与公差、确认装夹与刀具实际状态、复核首件与抽检结果，并对加工尺寸质量、设备安全与异常停机承担责任。"
+              "实体控制｜护罩坏、未培训不操作；停稳再测量清屑，纸面正常值不能放行真实工件。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "editorial-ai"
+            "onet-details",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech",
+            "ccohs-lathe"
           ],
           "type": "prose"
         }
@@ -7657,12 +7709,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜本页对应美国 O*NET-SOC 51-4034.00「Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic」。中国公开统计没有与该精确职业对应的单职业工资；行业或岗位大类均值不能冒充该职业的全国中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "名称与统计对照｜美国51-4034.00与中国车工6-18-01-01有车削任务交集，但不是官方一一工资映射。中国2018车工技能标准6-18-01-01定义为操作车床进行工件旋转表面切削；五级初级工至一级高级技师、普通受教育程度初中或相当。标准鉴定条件、雇主招聘与设备授权分别核，不写全国统一持证上岗。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs-wages"
+            "onet-details",
+            "cn-turner-standard"
           ],
           "type": "prose"
         },
@@ -7671,12 +7724,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围｜本页的中国侧结论只限中国大陆市场与当前统计口径；中国相关岗位的技能等级、培训与设备授权要求由主管部门、行业与雇主规定，与美国该精确职业的岗位设置不一一对应，因此不建立工资映射。"
+              "相关行业参考｜制造业与金属塑料零件加工有实际产出交集，NBS覆盖多职业，不直接给车工工资。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs-wages"
+            "nbs-wages",
+            "shanghai-recruit"
           ],
           "type": "prose"
         },
@@ -7685,12 +7739,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未建立中国大陆与 O*NET 51-4034.00 车工精确对应的全国职业工资分布；行业工资统计不能提供该职业的全国中位数、统一起薪或个人到手收入，本页不以行业均值、招聘报价或美国数据代填。"
+              "证据不足：本轮未建立与美国51-4034.00精确对应的中国全国车工工资分位或起薪。相关制造业2025城镇非私营113,594、私营76,055元/年为税前年均、排个体自由职业，分别列示不拼工资区间；制造业覆盖多职业，可作行业背景，不代车工中位。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "nbs-wages"
+            "nbs-wages",
+            "shanghai-recruit"
           ],
           "type": "prose"
         },
@@ -7699,12 +7754,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与薪资判断边界｜CAM 与在线监测可能辅助编程与测量，但不改变该职业薪酬由行业、批量与计件或计时方式、技能等级与设备类型决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资。"
+              "证据不足：车工生成AI采用率、提效和工资因果本轮未建立。AI与工资｜常规CNC、CAM与在线监测不等生成AI。本轮未取得车工生成AI采用率、提效或薪酬因果；可在虚构记录整理中试验，原记录逐项核，不能执行生成程序或按模型建议改变真实参数。装夹、测量、安全与授权仍由实际责任人核。工资组成、班次、设备经验和技能等级须按目标雇主核，不承诺AI不改变工资。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs-wages"
+            "ilo-genai",
+            "shanghai-recruit"
           ],
           "type": "prose"
         }
@@ -7726,7 +7782,6 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "source-pack-onet-localwages",
             "onet-wages"
           ],
           "type": "prose"
@@ -7736,12 +7791,15 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜按 O*NET 呈现的 BLS 精确职业口径：2025 年年薪第 10 分位 36,670 美元、第 25 分位 43,250 美元、中位 50,620 美元、第 75 分位 60,700 美元、第 90 分位 69,700 美元（小时中位 24.34 美元）；2024 年就业 18,900 人、2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；主要行业为制造业（约 95%）。"
+              "2025美国年薪10/25/50/75/90分位36,670、43,250、50,620、60,700、69,700美元；官方时薪17.63、20.79、24.34、29.18、33.51美元。BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。制造业95%为美国2024行业分布。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "onet-wages",
+            "onet-trends",
+            "onet-details",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7750,12 +7808,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资口径｜数据为 BLS OEWS 2025 年工资与 2024—2034 就业预测，经 O*NET 呈现为 51-4034.00 精确职业口径；OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入；小时口径由同一来源单独披露，不作个人换算。"
+              "工资口径｜OEWS为雇主常规税前工资，含激励工资与生产奖金，排加班费、非生产奖金、雇主福利及自雇；分位非起薪、个人实发或全年收入保证。时薪为同源单独披露，不作月度换算。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "onet-wages",
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -7769,7 +7828,8 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "onet-wages",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7778,12 +7838,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET 行业页显示该职业高度集中于制造业（约 95%），其余为其他行业；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。"
+              "行业口径｜O*NET本职业2024制造业95%，不是中国比例；行业工资未在该页列。BLS宽组金属塑料机床工2025年薪中位47,700美元，仅合并组背景，精确职业50,620优先。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "onet-details",
+            "bls-ooh"
           ],
           "type": "prose"
         },
@@ -7797,7 +7858,8 @@
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "source-pack-onet-localwages"
+            "onet-wages",
+            "shanghai-recruit"
           ],
           "type": "prose"
         }
@@ -7871,12 +7933,13 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的图纸与工件做一次演练：完成装夹与找正说明、刀具与参数设定、首件测量与合格判定记录；用可观察交付检验，而不是只凭兴趣问卷。"
+              "试验动作｜AB纸面练习（约40分钟，完全虚构，无车床/工具操作）：图AB-01外径20.00±0.05毫米，边界含等号；三件单次模拟读数AB1=20.02、AB2=20.08、AB3=19.95毫米。题面另给量具校准状态未知、护罩损坏、未经设备培训；草稿误称“三件均合格，可继续加工”。只算区间、列超差与待核，改草稿并写未发送核查请求，不设转速进给、不加工。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.fit.riasec-fit-block.5",
           "source_refs": [
-            "onet-summary"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7899,12 +7962,12 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "结论｜人格特质不能预测该职业的工作表现；应结合真实任务、安全责任与可复核交付继续核对，而不是依据单一标签下结论。"
+              "人格边界｜本轮未建立人格量表对车工加工绩效的预测效度，不凭标签推断能力、录用或授权；用AB记录反馈继续核对。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.fit.riasec-fit-block.7",
           "source_refs": [
-            "onet-summary"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -7935,12 +7998,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "旋转与切屑伤害风险｜触发：主轴旋转、切屑缠绕、刀具崩碎或工件飞溅。后果：可能造成割伤、卷入与眼部伤害。控制：佩戴防护与护目镜、禁止徒手清理缠绕切屑、使用钩具并及时停机、确认护罩与急停可用。边界：防护与操作要求按雇主制度与所在地安全规程确定。"
+              "旋转与切屑伤害｜先停机并等待完全停止，再按规程用适当工具清屑或测量，禁止运行中伸手、测量及戴手套；护罩坏不得继续，装拆附件前关闭电机电源，需维护按设备规定隔离能源。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.1",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7949,12 +8013,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "装夹与工件固定风险｜触发：卡盘或夹具未夹紧、悬伸过长、支撑不足。后果：可能造成工件飞出与设备损坏。控制：按工艺夹紧并复核、控制悬伸与支撑、加工前手动盘车确认无干涉。边界：装夹方案按工艺文件与设备说明书确定。"
+              "装夹与工件固定｜按设备说明与获准工艺核装夹支撑、卡盘磨损及钥匙移除；不把手动盘车写成适用每型机床的默认步骤，未确认状态停止交授权人员核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.2",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7963,12 +8028,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "尺寸与公差错误风险｜触发：测量方法或量具误差、未做首件判定或未及时换刀。后果：可能造成批量超差与报废。控制：按标准方法测量并复核量具、执行首件与抽检、按刀具寿命换刀并记录。边界：公差判定以图纸与检验标准为准。"
+              "尺寸与公差错误｜停稳后测量，核量具校准与方法、图号公差，首件及抽检依雇主质量流程；数值在范围不独自证明合格或安全。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.3",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -7977,12 +8043,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "冷却液与切屑处理风险｜触发：冷却液飞溅或变质、切屑堆积与划伤。后果：可能造成皮肤与呼吸不适及滑倒风险。控制：按制度使用与更换冷却液、及时清理切屑、佩戴防护并保持通道畅通。边界：冷却液与废弃物处理按雇主制度与环保规定确定。"
+              "冷却液与切屑处理｜取具体加工液SDS，核围挡、维护及通风；防化手套仅在不会卷入旋转部件的任务评估下使用，出现皮肤或呼吸症状报告并求医，不自行诊断。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.4",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-fluid"
           ],
           "type": "prose"
         },
@@ -7991,12 +8058,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "参数与程序设置风险｜触发：擅自更改转速进给或程序、刀具补偿设置错误。后果：可能造成撞机与设备损坏。控制：按工艺文件设定、变更前复核并记录、程序首次运行采用单段或空运行确认。边界：关键参数变更须经授权人员批准。"
+              "参数与程序设置｜参数程序变更按工艺与授权，首次运行的验证由受训授权人员依设备说明执行；单段或空运行不自动安全，纸面练习不提供真实转速进给。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.5",
           "source_refs": [
-            "onet-details"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         }
@@ -8013,15 +8081,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "怎样成为车工：入行准备与训练。O*NET 准备信息显示该职业为 Job Zone 1—2 级（通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年）。具体训练与任职要求由雇主或主管机构决定。本页不构成法律或安全意见。"
+              "入行与训练｜O*NET Job Zone1—2通用描述通常高中/GED、部分不要求；经验数月到一年或很少，OJT数日至一年、SVP<6。BLS精确本职业典型高中或同等、中期在职训练；两者描述层级不同，不承诺数日独立操作。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.1",
           "source_refs": [
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "onet-database",
-            "onet-summary"
+            "onet-details",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8030,12 +8096,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜现实入口以在职训练为主（Job Zone 1—2 级）：先确认雇主的设备类型（普通车床或数控车床）、批量特点与培训安排，再核对读图、装夹找正、刀具设定、测量与首件判定能力，并准备可验证的加工与测量作品；学历、培训、技能等级、设备授权、岗位录用与编程权限必须分别核对。"
+              "入口核对｜上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.2",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "shanghai-recruit"
           ],
           "type": "prose"
         },
@@ -8044,12 +8110,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国该职业的设备操作与安全要求由联邦、州与雇主共同规定，须逐一核对，不将任一工厂做法写成统一标准；中国大陆相关岗位的技能等级、培训与设备授权要求由主管部门、行业与雇主规定。"
+              "中国技能与法域｜中国2018车工技能标准6-18-01-01定义为操作车床进行工件旋转表面切削；五级初级工至一级高级技师、普通受教育程度初中或相当。标准鉴定条件、雇主招聘与设备授权分别核，不写全国统一持证上岗。加拿大指南仅技术参考，不能写成中国或美国法规。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.3",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "cn-turner-standard",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -8058,12 +8125,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜在职训练或短期课程不自动授予数控编程、设备维修或关键参数变更权限；学历、培训、技能等级、设备授权、岗位录用与编程权限是不同状态，具体要求取决于雇主与设备类型。"
+              "资格边界｜学历、技能等级、课程、岗位录用和设备/参数权限分别核；国家标准的申报条件非统一就业许可，O*NET认证目录不授设备权限。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.4",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "cn-turner-standard",
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8072,12 +8140,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "阶段责任｜入口阶段在有经验人员指导下完成简单工件的加工与测量；熟练后独立完成中等复杂度工件并对尺寸质量、刀具状态与设备安全负责，复杂程序与工艺变更按授权处理。"
+              "AB纸面练习（约40分钟，完全虚构，无车床/工具操作）：图AB-01外径20.00±0.05毫米，边界含等号；三件单次模拟读数AB1=20.02、AB2=20.08、AB3=19.95毫米。题面另给量具校准状态未知、护罩损坏、未经设备培训；草稿误称“三件均合格，可继续加工”。只算区间、列超差与待核，改草稿并写未发送核查请求，不设转速进给、不加工。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.5",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "onet-details"
           ],
           "type": "prose"
         },
@@ -8086,12 +8154,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的图纸与工件展示能力：装夹与找正说明、刀具与参数设定记录、首件测量与合格判定、超差处理说明；不使用真实客户图纸或订单信息，注明依据与假设。"
+              "AB参考答案与四作品：①尺寸表合格区间19.95—20.05毫米；AB1仅按给定数值在区间，AB2比上限高0.03毫米，AB3等于下限在区间；②状态单：模拟数值判断非真实首件放行，量具状态未知须核，护罩损坏/未培训不得开机；③未发送请求列图纸版本、量具校准、护罩维修和培训授权，交雇主授权人员核；④修订草稿：“AB2数值超差，其余仅纸面范围内；实际测量及三件真实合格状态未核，未加工、未放行”。不把本题当计量能力或设备权限证明。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.6",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "onet-details",
+            "ccohs-lathe"
           ],
           "type": "prose"
         },
@@ -8100,12 +8169,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构图纸的加工方案与首件判定任务包与复盘，请有经验的技师挑战你的装夹方式、参数设定与测量方法，并据此判断是否继续投入该方向；用可观察交付而不是口头描述证明能力。"
+              "七日计划，每天20—30分钟且只纸面：D1抄图号单位与公差；D2算上下限及0.03超差；D3标量具未知和边界值；D4读安全指南列停稳测量清屑、护罩和培训；D5改错误草稿写未发请求；D6请同伴复核等号与待核后修订；D7组合四作品，核目标雇主学历、设备经验、班次与工资组成。结束只有模拟作品，实际加工需另经培训与授权。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.7",
           "source_refs": [
-            "source-pack-onet-localcert"
+            "onet-details",
+            "ccohs-lathe",
+            "shanghai-recruit"
           ],
           "type": "prose"
         },
@@ -8153,12 +8224,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国侧按 O*NET 呈现的 BLS 精确职业口径（51-4034.00）：2024 年就业 18,900 人、2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；预测下降意味着岗位机会更多来自替换与特定制造领域需求，实际岗位还受行业、地区与自动化程度影响，官方预测不能替代目标岗位核验，也不能转换为个人录用概率。中国大陆侧公开统计未按该职业单列，本页登记缺口。"
+              "证据不足：中国全国车工精确就业需求本轮未建立；上海单公告不代全国。BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。中国全国精确需求未建立，不外推单公告。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.2",
           "source_refs": [
-            "editorial-market"
+            "bls-projections",
+            "onet-trends",
+            "shanghai-recruit"
           ],
           "type": "prose"
         },
@@ -8167,12 +8240,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET 呈现的 BLS 口径，2024—2034）：预测下降 14%、预计年均空缺 1,500 个；空缺含替换需求，不等于净新增岗位，也不构成个人就业保证。"
+              "新期就业预测｜BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。总体就业预测，非AI归因。"
             ]
           },
           "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.3",
           "source_refs": [
-            "editorial-market"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8218,13 +8291,13 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 51-4034.00 的工作以机床旁站立作业为主：佩戴防护或安全装备 100% 每天、用手操作控制或感受物体 63% 持续、室内受控环境 79% 每天、站立 55% 持续、面对面讨论 42% 每天；工作周 59% 为 40 小时，设备噪声与切屑持续存在。",
+                "answer": "O*NET美国样本：PPE100%每天、手部操作63%持续、室内受控79%每天、站立55%持续、面谈42%每天；工作周59%为40小时、41%超过40。准确性16%非常重要是特定回答档，不降低图纸公差要求；噪声13%每年但非每月、23%从不，不断言所有岗位持续噪声。BLS宽组多数全职，可有晚班周末；雇主节奏另核。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.daily-work",
                 "source_refs": [
                   "onet-details",
-                  "source-pack-onet-custom"
+                  "bls-ooh"
                 ]
               },
               {
@@ -8233,8 +8306,9 @@
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.role-comparison",
                 "source_refs": [
-                  "onet-details",
-                  "onet-summary"
+                  "adj-mechanic",
+                  "adj-coil",
+                  "bls-ooh"
                 ]
               },
               {
@@ -8248,86 +8322,91 @@
                 ]
               },
               {
-                "answer": "CAM 编程、刀具寿命监测与在线测量可辅助刀路生成、参数推荐、刀具磨损预警与尺寸趋势记录；但装夹与找正判断、刀具实际状态、首件与超差判定、设备与人身安全处置仍由操作人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；本页不给出替代概率或时间表。",
+                "answer": "证据不足：车工生成AI采用率、提效和工资因果本轮未建立。常规CNC、CAM与在线监测不等生成AI。本轮未取得车工生成AI采用率、提效或薪酬因果；可在虚构记录整理中试验，原记录逐项核，不能执行生成程序或按模型建议改变真实参数。装夹、测量、安全与授权仍由实际责任人核。O*NET热技术页基于美国2025招聘帖，本轮显示0 software skills shown；表示本页未列软件，不能解释为零工具或零AI使用。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact",
                 "source_refs": [
-                  "source-pack-onet-hot_tech",
-                  "editorial-ai"
+                  "ilo-genai",
+                  "nist-genai-profile",
+                  "source-pack-onet-hot_tech"
                 ]
               },
               {
-                "answer": "程序与监测输出不能替代装夹确认与首件判定。人类必须核对图纸与公差、确认装夹与刀具实际状态、复核首件与抽检结果，并对加工尺寸质量、设备安全与异常停机承担责任。",
+                "answer": "先停机并等待完全停止，再按规程用适当工具清屑或测量，禁止运行中伸手、测量及戴手套；护罩坏不得继续，装拆附件前关闭电机电源，需维护按设备规定隔离能源。停稳后测量，核量具校准与方法、图号公差，首件及抽检依雇主质量流程；数值在范围不独自证明合格或安全。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.human-control",
                 "source_refs": [
                   "onet-details",
-                  "editorial-context"
+                  "ccohs-lathe"
                 ]
               },
               {
-                "answer": "证据不足：本轮未建立中国大陆与 O*NET 51-4034.00 车工精确对应的全国职业工资分布；行业工资统计不能提供该职业的全国中位数、统一起薪或个人到手收入，本页展示缺失而不使用代理数字。",
+                "answer": "证据不足：本轮未建立与美国51-4034.00精确对应的中国全国车工工资分位或起薪。相关制造业2025城镇非私营113,594、私营76,055元/年为税前年均、排个体自由职业，分别列示不拼工资区间；制造业覆盖多职业，可作行业背景，不代车工中位。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.china-pay",
                 "source_refs": [
-                  "nbs-wages"
+                  "nbs-wages",
+                  "shanghai-recruit"
                 ]
               },
               {
-                "answer": "按 O*NET 呈现的 BLS 2025 年数据（51-4034.00 精确职业）：年薪第 10 分位 36,670 美元、第 25 分位 43,250 美元、中位 50,620 美元、第 75 分位 60,700 美元、第 90 分位 69,700 美元（小时中位 24.34 美元）。OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入。",
+                "answer": "2025美国年薪10/25/50/75/90分位36,670、43,250、50,620、60,700、69,700美元；官方时薪17.63、20.79、24.34、29.18、33.51美元。OEWS为雇主常规税前工资，含激励工资与生产奖金，排加班费、非生产奖金、雇主福利及自雇；分位非起薪、个人实发或全年收入保证。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-pay",
                 "source_refs": [
                   "onet-wages",
-                  "source-pack-onet-summary"
+                  "bls-oews-methods"
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业为 Job Zone 1—2 级（通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年）。O*NET 培训与认证入口只用于发现可能的准备路径，不等于设备授权或岗位录用；具体训练与任职要求由雇主或主管机构决定。",
+                "answer": "O*NET Job Zone1—2通用描述通常高中/GED、部分不要求；经验数月到一年或很少，OJT数日至一年、SVP<6。BLS精确本职业典型高中或同等、中期在职训练；两者描述层级不同，不承诺数日独立操作。中国2018车工技能标准6-18-01-01定义为操作车床进行工件旋转表面切削；五级初级工至一级高级技师、普通受教育程度初中或相当。标准鉴定条件、雇主招聘与设备授权分别核，不写全国统一持证上岗。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.education-path",
                 "source_refs": [
-                  "source-pack-onet-localtraining",
-                  "source-pack-onet-localcert"
+                  "onet-details",
+                  "bls-projections",
+                  "cn-turner-standard",
+                  "shanghai-recruit"
                 ]
               },
               {
-                "answer": "主要风险包括旋转与切屑伤害、装夹与工件固定、尺寸与公差错误、冷却液与切屑处理、参数与程序设置五类。控制重点是把防护与切屑清理方式、装夹复核与悬伸控制、首件与抽检及换刀制度、冷却液与废弃物处理、以及参数变更授权写清，并在超差或设备异常时立即停机报告。",
+                "answer": "先停机并等待完全停止，再按规程用适当工具清屑或测量，禁止运行中伸手、测量及戴手套；护罩坏不得继续，装拆附件前关闭电机电源，需维护按设备规定隔离能源。取具体加工液SDS，核围挡、维护及通风；防化手套仅在不会卷入旋转部件的任务评估下使用，出现皮肤或呼吸症状报告并求医，不自行诊断。参数程序变更按工艺与授权，首次运行的验证由受训授权人员依设备说明执行；单段或空运行不自动安全，纸面练习不提供真实转速进给。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk-boundary",
                 "source_refs": [
-                  "onet-details",
-                  "editorial-context"
+                  "ccohs-lathe",
+                  "ccohs-fluid"
                 ]
               },
               {
-                "answer": "美国侧按 O*NET 呈现的 BLS 精确职业口径：2024 年就业 18,900 人、2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；空缺含替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.outlook-transition",
                 "source_refs": [
+                  "bls-projections",
                   "onet-trends",
-                  "editorial-market"
+                  "shanghai-recruit"
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的图纸交付装夹与找正说明、刀具与参数设定、首件测量与合格判定记录；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
+                "answer": "AB纸面练习（约40分钟，完全虚构，无车床/工具操作）：图AB-01外径20.00±0.05毫米，边界含等号；三件单次模拟读数AB1=20.02、AB2=20.08、AB3=19.95毫米。题面另给量具校准状态未知、护罩损坏、未经设备培训；草稿误称“三件均合格，可继续加工”。只算区间、列超差与待核，改草稿并写未发送核查请求，不设转速进给、不加工。AB参考答案与四作品：①尺寸表合格区间19.95—20.05毫米；AB1仅按给定数值在区间，AB2比上限高0.03毫米，AB3等于下限在区间；②状态单：模拟数值判断非真实首件放行，量具状态未知须核，护罩损坏/未培训不得开机；③未发送请求列图纸版本、量具校准、护罩维修和培训授权，交雇主授权人员核；④修订草稿：“AB2数值超差，其余仅纸面范围内；实际测量及三件真实合格状态未核，未加工、未放行”。不把本题当计量能力或设备权限证明。七日计划，每天20—30分钟且只纸面：D1抄图号单位与公差；D2算上下限及0.03超差；D3标量具未知和边界值；D4读安全指南列停稳测量清屑、护罩和培训；D5改错误草稿写未发请求；D6请同伴复核等号与待核后修订；D7组合四作品，核目标雇主学历、设备经验、班次与工资组成。结束只有模拟作品，实际加工需另经培训与授权。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.career-worth",
                 "source_refs": [
-                  "source-pack-onet-details",
-                  "source-pack-onet-localtraining"
+                  "onet-details",
+                  "ccohs-lathe"
                 ]
               },
               {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；车工页面提供职业决策与安全试验信息，不构成法律或安全意见，也不替代所在地安全规程、雇主制度或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 51-4034.00「Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic」这一精确职业。",
+                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。车工页面提供职业决策与安全试验信息，不构成法律或安全意见，也不替代所在地安全规程、雇主制度或其他专业意见。任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 51-4034.00「Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic」这一精确职业。",
                 "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.boundary",
@@ -8500,20 +8579,20 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "中国行业工资统计及税前口径。",
-                  "行业平均不能替代本职业精确工资。"
+                  "制造业城镇非私营113594、私营76055元/年，税前年均分别列示。",
+                  "行业门类覆盖多职业，排个体与自由职业，不代车工全国中位或起薪。"
                 ],
                 "evidence_type": "official wage statistics",
                 "id": "nbs-wages",
-                "limitation": "行业平均不能替代本职业精确工资。",
+                "limitation": "仅相关制造业行业参考，两单位类型不拼工资区间。",
                 "market": "中国",
-                "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wages; published 2026-05-15; retrieved 2026-08-31",
+                "name": "国家统计局2025年城镇单位就业人员平均工资",
+                "period": "2025统计；2026-05-16 16:00发布",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
                 "accessed_at": "2026-08-31",
@@ -8532,7 +8611,7 @@
                 "url": "https://www.onetcenter.org/database.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "职业身份、职责、对象、工具与风险。",
                   "美国职业范围，不设定中国资格。"
@@ -8548,7 +8627,7 @@
                 "url": "https://www.onetonline.org/link/details/51-4034.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "职业摘要、任务、知识与工作活动。",
                   "摘要需与详细职业范围合并解释。"
@@ -8580,7 +8659,7 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "美国精确职业就业预测页面及覆盖边界。",
                   "无数字时只支持不可用或窄口径边界。"
@@ -8596,7 +8675,7 @@
                 "url": "https://www.onetonline.org/link/localtrends/51-4034.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "美国精确职业工资页面及覆盖边界。",
                   "无数字时只支持不可用边界。"
@@ -8628,7 +8707,7 @@
                 "url": "https://www.onetonline.org/link/custom/51-4034.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业身份、任务、工作活动与工作情境。",
                   "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。"
@@ -8644,17 +8723,17 @@
                 "url": "https://www.onetonline.org/link/details/51-4034.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对与本职业相关的热门技术清单。",
                   "技术提及不等同于能力、采用或自动化程度。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
+                "limitation": "未显示软件不等零使用或零AI采用；非本职业效果实测。",
                 "market": "美国",
                 "name": "Hot Technologies: 51-4034.00 - Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "current page; accessed 2026-08-31",
+                "period": "美国2025招聘帖；本轮原页0 software skills shown",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/51-4034.00"
@@ -8670,7 +8749,7 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "Industries: 51-4034.00 - Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic",
-                "period": "current page; accessed 2026-08-31",
+                "period": "本轮details明确Top industries (2024)：制造业95%",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-4034.00"
@@ -8724,7 +8803,7 @@
                 "url": "https://www.onetonline.org/link/localwages/51-4034.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业身份、入门与就业展望入口（就业与展望为 51-4034.00 精确职业口径）。",
                   "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。"
@@ -8738,6 +8817,182 @@
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-4034.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "常规税前工资含符合定义的佣金、激励工资和生产奖金；排除非生产奖金、加班溢价、利润分享及雇主福利成本。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-oews-methods",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "美国",
+                "name": "BLS OEWS：工资定义 FAQ",
+                "period": "当前方法页",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "跨领域虚构输出、隐私与信息完整性风险。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "nist-genai-profile",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "全球",
+                "name": "NIST AI 600-1：生成式AI风险画像",
+                "period": "2024年7月",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持把生成式 AI 影响解释为任务暴露与岗位转型。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "institutional task research",
+                "id": "ilo-genai",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "全球任务研究",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "就业16.7至14.8千人，变化-11.3%、净减1.9千、年均空缺1.4千；高中或同等、中期在职训练。",
+                  "总体就业预测，非生成AI因果，空缺非净新增。"
+                ],
+                "evidence_type": "official employment projection table",
+                "id": "bls-projections",
+                "limitation": "美国精确职业；不推中国需求、个人就业概率或AI替代率。",
+                "market": "US",
+                "name": "BLS 2025—2035职业就业预测及典型训练",
+                "period": "2025—2035，51-4034精确行",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "51-4034详细行16700→14800，取整下降11%；宽组中位47700、就业963000、年均空缺78100。",
+                  "宽组包括多种机床职业，不套本职业分位与空缺。"
+                ],
+                "evidence_type": "official occupational outlook",
+                "id": "bls-ooh",
+                "limitation": "详细职业行和金属塑料机床工合并组分开，非AI归因。",
+                "market": "US",
+                "name": "BLS金属与塑料机床工职业手册",
+                "period": "2025工资、2025—2035预测；本轮相关正文核",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "Grounds Maintenance Workers",
+                "url": "https://www.bls.gov/ooh/production/metal-and-plastic-machine-workers.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "培训、说明书、护罩、停稳后测量清屑，装拆附件前关闭电机电源；运行中不戴手套。",
+                  "加拿大技术指南，不等中国法规或每型设备操作许可。"
+                ],
+                "evidence_type": "official source",
+                "id": "ccohs-lathe",
+                "limitation": "加拿大技术指南，不等中国法规或每型设备操作许可。",
+                "market": "加拿大",
+                "name": "CCOHS金工车床安全指南",
+                "period": "2018-11-28修订；2024-11-28确认当前",
+                "publisher": "加拿大职业健康安全中心",
+                "scope": "contextual",
+                "url": "https://www.ccohs.ca/oshanswers/safety_haz/metalworking/lathes.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "加工液接触与雾可致皮肤或呼吸问题；SDS、维护、围挡与通风、任务防护评估。",
+                  "不是个体诊断；防化手套不可引入旋转卷入危险。"
+                ],
+                "evidence_type": "official source",
+                "id": "ccohs-fluid",
+                "limitation": "不是个体诊断；防化手套不可引入旋转卷入危险。",
+                "market": "加拿大",
+                "name": "CCOHS金属加工液健康与控制",
+                "period": "本轮健康危害与控制段核",
+                "publisher": "加拿大职业健康安全中心",
+                "scope": "contextual",
+                "url": "https://www.ccohs.ca/oshanswers/chemicals/metalworking_fluids.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "车工6-18-01-01，操作车床进行旋转表面切削；五级至一级，普通受教育程度初中或相当。",
+                  "技能标准及鉴定条件，不证明全国一律持证上岗；不与美国代码一一互认。"
+                ],
+                "evidence_type": "official source",
+                "id": "cn-turner-standard",
+                "limitation": "技能标准及鉴定条件，不证明全国一律持证上岗；不与美国代码一一互认。",
+                "market": "中国大陆",
+                "name": "车工国家职业技能标准（2018年版）",
+                "period": "2018-12-26公布；本轮PDF第4—8页核",
+                "publisher": "人力资源社会保障部",
+                "scope": "contextual",
+                "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F30%2F2046e0007ffc4ed5b5c0cbea2ca9411b.pdf"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中、读图精加工及普通车床镗床经验。",
+                  "单公告标价非全国分布或实发；以即时岗位信息为准，本轮未确认仍在招；网页PDF正文取得，本地下载403。"
+                ],
+                "evidence_type": "official source",
+                "id": "shanghai-recruit",
+                "limitation": "单公告标价非全国分布或实发；以即时岗位信息为准，本轮未确认仍在招；网页PDF正文取得，本地下载403。",
+                "market": "中国大陆上海",
+                "name": "上海人社岗位版：振栋研究所车工招聘",
+                "period": "2026-01-08岗位版第3版",
+                "publisher": "上海市人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://rsj.sh.gov.cn/dzb/rsj/2026-01-08/pdf/03.pdf"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "维修安装调整维护工业生产机械，设备诊断与恢复。",
+                  "美国邻职职责，非转岗授权。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-mechanic",
+                "limitation": "美国邻职职责，非转岗授权。",
+                "market": "美国",
+                "name": "O*NET工业机械机械师职责",
+                "period": "本轮定义与相关任务核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/49-9041.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "绕制电阻变压器电机等电气线圈，处理绝缘线端及检验记录。",
+                  "与车削工艺不同，不自动转岗。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-coil",
+                "limitation": "与车削工艺不同，不自动转岗。",
+                "market": "美国",
+                "name": "O*NET线圈绕线工职责",
+                "period": "本轮定义与相关任务核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-2021.00"
               }
             ]
           },
@@ -8781,13 +9036,51 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "onet-details",
+              "$source": "adj-mechanic",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": {
+              "$source": "adj-mechanic",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "adj-coil",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-coil",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8865,16 +9158,16 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方资料",
+            "适用范围": "全球任务暴露",
             "链接": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8883,16 +9176,16 @@
           },
           {
             "来源": {
-              "$source": "onet-summary",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方资料",
+            "适用范围": "通用风险",
             "链接": {
-              "$source": "onet-summary",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8901,16 +9194,16 @@
           },
           {
             "来源": {
-              "$source": "onet-trends",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方资料",
+            "适用范围": "真实任务范围",
             "链接": {
-              "$source": "onet-trends",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8926,7 +9219,7 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "可试验整理、尚无本职业效果实测",
             "仍由人负责": "责任与授权",
             "方向": "编程与监测辅助"
           },
@@ -8944,18 +9237,18 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "美国职业范围，不设定中国资格。",
+            "使用限制": "非车工采用或效果实测",
             "来源": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "全球任务暴露",
+            "结论": "暴露与岗位替代不同",
             "链接": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8963,18 +9256,18 @@
             }
           },
           {
-            "使用限制": "摘要需与详细职业范围合并解释。",
+            "使用限制": "非车工效度",
             "来源": {
-              "$source": "onet-summary",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "通用生成AI风险",
+            "结论": "核生成错误与信息风险",
             "链接": {
-              "$source": "onet-summary",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8982,18 +9275,37 @@
             }
           },
           {
-            "使用限制": "无数字时只支持不可用或窄口径边界。",
+            "使用限制": "不等零使用",
             "来源": {
-              "$source": "onet-trends",
+              "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025美国招聘软件",
+            "结论": "本页未列软件",
             "链接": {
-              "$source": "onet-trends",
+              "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "总体就业预测，非AI归因",
+            "来源": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "研究对象": "51-4034总体就业预测",
+            "结论": "BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。",
+            "链接": {
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9025,14 +9337,14 @@
           {
             "回答": "不能从任务暴露推导岗位裁撤日期；本页不给出替代概率或时间表。",
             "来源": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-details",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9043,14 +9355,14 @@
           {
             "回答": "不能。任务暴露、组织采用、生产率变化与岗位数量是四个不同测量对象，不能互相推导。",
             "来源": {
-              "$source": "onet-summary",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-summary",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9059,16 +9371,16 @@
             "问题": "任务暴露能推导裁撤时间吗？"
           },
           {
-            "回答": "不能。装夹确认、刀具实际状态、首件与超差判定必须由操作人员负责。",
+            "回答": "O*NET把样件量测、规格符合性检验列为实际任务；本页建议将监测提示回核实测记录，不能把提示本身当真实首件合格证据。",
             "来源": {
-              "$source": "onet-trends",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-trends",
+              "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9121,8 +9433,8 @@
         "task_rows": [
           {
             "人的控制点": "核对原始记录与失败模式。",
-            "任务": "整理记录",
-            "工作方向": "编程与参数",
+            "任务": "核AB读数、图号和待核项",
+            "工作方向": "模拟记录整理",
             "当前变化": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.ai-impact.ai-impact-table.7",
               "block": "ai-impact",
@@ -9142,7 +9454,7 @@
             "当前变化": "辅助信息汇总"
           },
           {
-            "人的控制点": "按法定授权和指挥链升级。",
+            "人的控制点": "停稳测量，量具状态与真实首件由授权人员核。",
             "任务": "关键判断",
             "工作方向": "测量与判定",
             "当前变化": "不作自动授权"
@@ -9289,7 +9601,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "常规CNC、CAM与在线监测不等生成AI。本轮未取得车工生成AI采用率、提效或薪酬因果；可在虚构记录整理中试验，原记录逐项核，不能执行生成程序或按模型建议改变真实参数。装夹、测量、安全与授权仍由实际责任人核。"
         ],
         "heading": "车工的工作对象与 AI 边界"
       },
@@ -9297,19 +9609,19 @@
         "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
         "competence_ladder": [
           {
-            "description": "确认来源、权限和版本。",
+            "description": "核图AB-01公差和单位。",
             "stage": "输入核对"
           },
           {
-            "description": "遵守停止和升级条件。",
+            "description": "核量具未知、护罩损坏和未培训。",
             "stage": "过程控制"
           },
           {
-            "description": "形成可复核记录。",
+            "description": "AB2超差0.03，另外两件仅模拟区间内。",
             "stage": "结果复盘"
           },
           {
-            "description": "在授权范围内扩展。",
+            "description": "真实加工另经培训、授权及岗位验收。",
             "stage": "责任扩展"
           }
         ],
@@ -9344,31 +9656,13 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.0",
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "scope": "O*NET 51-4034.00 精确职业范围，不建立中国映射或资质结论。"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.1",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9376,43 +9670,79 @@
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "编辑性就业与市场边界说明只用于解释口径，不构成官方统计。"
+            "scope": "JobZone通用范围"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.2",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.bls-projections",
             "label": {
-              "$source": "onet-summary",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
+            "scope": "精确职业中期训练"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.3",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.cn-turner-standard",
             "label": {
-              "$source": "onet-trends",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "中国2018技能标准"
+          },
+          {
+            "href": {
+              "$source": "shanghai-recruit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.shanghai-recruit",
+            "label": {
+              "$source": "shanghai-recruit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "scope": "单雇主月薪与经验"
+          },
+          {
+            "href": {
+              "$source": "ccohs-lathe",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+            "label": {
+              "$source": "ccohs-lathe",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "scope": "车床技术安全指南"
           }
         ],
         "tracks": [
@@ -9420,7 +9750,7 @@
             "id": "entry-and-training",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "技能等级、培训与设备操作权限分别核。",
                 "next_moves": {
                   "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.7",
                   "block": "path",
@@ -9439,33 +9769,33 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "入口与试验阶段 1"
+                "role": "AB纸面核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "技能等级、培训与设备操作权限分别核。",
                 "next_moves": {
                   "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.path.career-path-block.8",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 2"
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "AB仅纸面，实际作业另需训练授权。",
+                "role": "雇主条件核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 3"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "AB仅纸面，实际作业另需训练授权。",
+                "role": "受训监督下作业"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 4"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "AB仅纸面，实际作业另需训练授权。",
+                "role": "岗位验收"
               }
             ],
             "title": "入口与在职训练"
@@ -9474,32 +9804,32 @@
             "id": "independent-machining",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 1"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "按图和工艺核质量，异常停止交授权人员。",
+                "role": "图纸与量具核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 2"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "按图和工艺核质量，异常停止交授权人员。",
+                "role": "获准装夹加工"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 3"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "按图和工艺核质量，异常停止交授权人员。",
+                "role": "首件与抽检"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 4"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "按图和工艺核质量，异常停止交授权人员。",
+                "role": "异常质量复盘"
               }
             ],
             "title": "独立加工"
@@ -9508,32 +9838,32 @@
             "id": "expanded-responsibility",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 1"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "新编程维修或带教职责须另补真实证据。",
+                "role": "换岗要求核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 2"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "新编程维修或带教职责须另补真实证据。",
+                "role": "数控权限核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 3"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "新编程维修或带教职责须另补真实证据。",
+                "role": "维修责任核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 4"
+                "credentials": "技能等级、培训与设备操作权限分别核。",
+                "next_moves": "核目标雇主要求和停止条件后再承担获准任务。",
+                "readiness_evidence": "AB四作品及真实岗位另行验收；模拟读数不证明实际能力。",
+                "responsibility": "新编程维修或带教职责须另补真实证据。",
+                "role": "带教责任核对"
               }
             ],
             "title": "扩大职责"
@@ -9689,17 +10019,18 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据本职业研究输入和来源注册表，不能跨法域外推。",
+        "evidence_scope": "本职业任务与CCOHS技术指南分别，具体法域及雇主规程另核。",
         "heading": "车工的工作风险与边界",
         "risks": [
           {
             "affected_roles": "车工",
             "consequence": "可能造成割伤、卷入与眼部伤害。",
             "evidence_refs": [
-              "nbs-wages"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-1",
-            "mitigation": "佩戴防护与护目镜、禁止徒手清理缠绕切屑、使用钩具并及时停机、确认护罩与急停可用。",
+            "mitigation": "先停机并等待完全停止，再按规程用适当工具清屑或测量，禁止运行中伸手、测量及戴手套；护罩坏不得继续，装拆附件前关闭电机电源，需维护按设备规定隔离能源。",
             "scenario": "主轴旋转、切屑缠绕、刀具崩碎或工件飞溅。",
             "title": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.1",
@@ -9712,10 +10043,11 @@
             "affected_roles": "车工",
             "consequence": "可能造成工件飞出与设备损坏。",
             "evidence_refs": [
-              "onet-details"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-2",
-            "mitigation": "按工艺夹紧并复核、控制悬伸与支撑、加工前手动盘车确认无干涉。",
+            "mitigation": "按设备说明与获准工艺核装夹支撑、卡盘磨损及钥匙移除；不把手动盘车写成适用每型机床的默认步骤，未确认状态停止交授权人员核。",
             "scenario": "卡盘或夹具未夹紧、悬伸过长、支撑不足。",
             "title": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.2",
@@ -9728,10 +10060,11 @@
             "affected_roles": "车工",
             "consequence": "可能造成批量超差与报废。",
             "evidence_refs": [
-              "onet-summary"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-3",
-            "mitigation": "按标准方法测量并复核量具、执行首件与抽检、按刀具寿命换刀并记录。",
+            "mitigation": "停稳后测量，核量具校准与方法、图号公差，首件及抽检依雇主质量流程；数值在范围不独自证明合格或安全。",
             "scenario": "测量方法或量具误差、未做首件判定或未及时换刀。",
             "title": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.3",
@@ -9744,10 +10077,11 @@
             "affected_roles": "车工",
             "consequence": "可能造成皮肤与呼吸不适及滑倒风险。",
             "evidence_refs": [
-              "onet-trends"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-fluid",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-4",
-            "mitigation": "按制度使用与更换冷却液、及时清理切屑、佩戴防护并保持通道畅通。",
+            "mitigation": "取具体加工液SDS，核围挡、维护及通风；防化手套仅在不会卷入旋转部件的任务评估下使用，出现皮肤或呼吸症状报告并求医，不自行诊断。",
             "scenario": "冷却液飞溅或变质、切屑堆积与划伤。",
             "title": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.4",
@@ -9760,10 +10094,11 @@
             "affected_roles": "车工",
             "consequence": "可能造成撞机与设备损坏。",
             "evidence_refs": [
-              "onet-wages"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-5",
-            "mitigation": "按工艺文件设定、变更前复核并记录、程序首次运行采用单段或空运行确认。",
+            "mitigation": "参数程序变更按工艺与授权，首次运行的验证由受训授权人员依设备说明执行；单段或空运行不自动安全，纸面练习不提供真实转速进给。",
             "scenario": "擅自更改转速进给或程序、刀具补偿设置错误。",
             "title": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.risk.career-risk-cards.5",
@@ -9776,7 +10111,8 @@
             "affected_roles": "车工",
             "consequence": "可能造成批量报废与设备损坏。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
+              "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details"
             ],
             "id": "risk-6",
             "mitigation": "先停机并隔离，把事实、影响与待决问题按雇主制度报告或交由授权人员处理。",
@@ -9788,21 +10124,39 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "ccohs-lathe",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.0",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-lathe",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "ccohs-lathe",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "O*NET 51-4034.00 精确职业范围，不建立中国映射或资质结论。"
+            "scope": "加拿大车床安全技术指南，非中国法规"
+          },
+          {
+            "href": {
+              "$source": "ccohs-fluid",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.ccohs-fluid",
+            "label": {
+              "$source": "ccohs-fluid",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "scope": "加工液健康与防护"
           },
           {
             "href": {
@@ -9812,7 +10166,7 @@
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.1",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-details",
             "label": {
               "$source": "onet-details",
               "block": "source-register",
@@ -9820,43 +10174,25 @@
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "编辑性就业与市场边界说明只用于解释口径，不构成官方统计。"
+            "scope": "本职业测量和控制任务"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.2",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.cn-turner-standard",
             "label": {
-              "$source": "onet-summary",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
-          },
-          {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.3",
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "中国技能范围"
           }
         ]
       },
@@ -9864,14 +10200,14 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "相关制造业：城镇非私营单位",
+              "数值": "113,594元/年（2025年均）",
+              "说明": "中国制造业门类税前年均，非车工中位，排个体自由职业。"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "相关制造业：城镇私营单位",
+              "数值": "76,055元/年（2025年均）",
+              "说明": "中国制造业门类，另列人群；不与非私营拼成本职业工资区间。"
             },
             {
               "指标": "中国大陆薪资口径",
@@ -9895,22 +10231,22 @@
             {
               "学历段": "证据不足：未建立安全映射（初中及以下）",
               "岗位方向": "按雇主与主管部门规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "全国学历工资分布未建立；上海单公告初中不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（高中/中专）",
               "岗位方向": "按雇主与主管部门规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "全国学历工资分布未建立；上海单公告初中不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（大专）",
               "岗位方向": "按雇主与主管部门规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "全国学历工资分布未建立；上海单公告初中不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（其他）",
               "岗位方向": "按具体雇主要求核验",
-              "说明": "不使用代理数字。"
+              "说明": "全国学历工资分布未建立；上海单公告初中不等全国门槛。"
             }
           ],
           "china_industry_table": [
@@ -9943,6 +10279,22 @@
                 "copy_key": "career.item.published-sources",
                 "field": "url",
                 "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "cn-turner-standard",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "cn-turner-standard",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
               }
             ],
             "separator": ""
@@ -9953,7 +10305,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "有界检索未建立安全数值；本项不是起薪、到手收入或个人报价。",
+          "china_open": "三精确职业工资占位保留；行业均值与招聘标价在附注分列，不代全国分位。",
           "china_ref": {
             "$join": [
               {
@@ -9974,7 +10326,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_salary_note": "证据不足：本轮未建立与美国51-4034.00精确对应的中国全国车工工资分位或起薪。相关制造业2025城镇非私营113,594、私营76,055元/年为税前年均、排个体自由职业，分别列示不拼工资区间；制造业覆盖多职业，可作行业背景，不代车工中位。上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。",
           "china_salary_table": [
             {
               "城市/区间": "证据不足：未建立安全映射",
@@ -10033,7 +10385,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10041,7 +10393,23 @@
             },
             "｜",
             {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10057,7 +10425,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10065,7 +10433,23 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10081,7 +10465,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-details",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10089,7 +10473,23 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-details",
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10105,7 +10505,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10113,7 +10513,23 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10129,7 +10545,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "onet-details",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10137,7 +10553,23 @@
                 },
                 "｜",
                 {
-                  "$source": "onet-details",
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10153,7 +10585,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10161,7 +10593,23 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs-wages",
+                  "$source": "onet-wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10173,18 +10621,18 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "18,900 人（2024 年）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "16,700人（2025）",
+            "说明": "BLS51-4034精确新期，非招聘规模、AI归因或个人保证"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "下降 14%（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "下降11.3%（2025—2035）",
+            "说明": "BLS51-4034精确新期，非招聘规模、AI归因或个人保证"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "1,500 个/年（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "1,400个/年（2025—2035）",
+            "说明": "BLS51-4034精确新期，非招聘规模、AI归因或个人保证"
           }
         ],
         "boundary": "美国精确职业与父级或代理口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10214,7 +10662,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "下降 14%（2024—2034）",
+        "growth": "下降11.3%（2025—2035）",
         "heading": {
           "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10227,12 +10675,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "O*NET 行业页，2026 年访问",
+        "industry_period": "O*NET2024行业分布，本轮details核",
         "industry_rows": [
           {
             "industry": "制造业",
             "median": "暂无安全数值",
-            "note": "O*NET 行业页显示约占 95%；未提供行业工资数值。"
+            "note": "O*NET 2024分布显示约占 95%；未提供行业工资数值。"
           },
           {
             "industry": "其他行业（约 5%）",
@@ -10277,11 +10725,11 @@
         ],
         "median": "50,620 美元/年（2025 年，精确职业口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "BLS 就业预测 2024—2034（经 O*NET 呈现，2026 年访问）",
+        "outlook_period": "BLS2025—2035新期；O*NET2024—2034旧期另列",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "官方时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10387,12 +10835,12 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "车工",
+            "geography": "美国",
+            "horizon": "2025—2035",
+            "interpretation": "BLS精确51-4034新期：2025就业16,700→2035年14,800，下降11.3%、净减1,900；年均空缺1,400，含替换需求，不是净新增。OOH详细行取整下降11%。",
+            "limitation": "分期分范围，不作AI归因或个人保证。",
+            "metric": "新期就业预测",
+            "occupation_scope": "51-4034精确职业",
             "value": {
               "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10401,79 +10849,43 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "车工",
-            "value": "暂无安全数值"
+            "geography": "美国",
+            "horizon": "2024—2034",
+            "interpretation": "O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。",
+            "limitation": "分期分范围，不作AI归因或个人保证。",
+            "metric": "旧期预测",
+            "occupation_scope": "51-4034精确职业",
+            "value": "O*NET仍列旧期2024就业18,900→2034年16,400，下降14%、年均空缺1,500；新旧基期不同，分别列示不相加。"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "车工",
-            "value": "暂无安全数值"
+            "geography": "中国上海",
+            "horizon": "2026-01-08公告",
+            "interpretation": "上海人社2026-01-08岗位版：上海振栋工程设备成套研究所车工2人，6000—10000元/月、初中；需读图精加工、普通车床和镗床操作经验，含维护和安全意识。单公告非起薪或工资分布，计酬组成与本轮是否仍在招待雇主核。",
+            "limitation": "分期分范围，不作AI归因或个人保证。",
+            "metric": "单机构招聘",
+            "occupation_scope": "振栋研究所车工",
+            "value": "2人，6000—10000元/月；即时状态未核"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.0",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.bls-projections",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "O*NET 51-4034.00 精确职业范围，不建立中国映射或资质结论。"
-          },
-          {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.1",
-            "label": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "scope": "编辑性就业与市场边界说明只用于解释口径，不构成官方统计。"
-          },
-          {
-            "href": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.2",
-            "label": {
-              "$source": "onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "scope": "O*NET 技术页面只提示招聘中出现的软件或工具，不证明岗位必需或自动化率。"
+            "scope": "新期精确预测"
           },
           {
             "href": {
@@ -10483,7 +10895,7 @@
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.display.source.3",
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.onet-trends",
             "label": {
               "$source": "onet-trends",
               "block": "source-register",
@@ -10491,7 +10903,43 @@
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "旧期分开"
+          },
+          {
+            "href": {
+              "$source": "shanghai-recruit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.shanghai-recruit",
+            "label": {
+              "$source": "shanghai-recruit",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "scope": "单公告非本轮空岗"
+          },
+          {
+            "href": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "id": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.review.bls-ooh",
+            "label": {
+              "$source": "bls-ooh",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
+            },
+            "scope": "宽组背景及邻职业"
           }
         ],
         "transitions": [
@@ -10511,47 +10959,47 @@
             "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "工业机械机械师",
-            "transition_distance": "需补证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           },
           {
             "capability_gaps": "绕制与包扎工艺",
-            "shared_capabilities": "金属材料与成形基础",
+            "shared_capabilities": "读工单、尺寸核对、过程记录与设备安全基础；不表示已有该岗成形工艺",
             "target_href": "/zh/career/jobs/coil-winders-tapers-and-finishers",
             "target_slug": "coil-winders-tapers-and-finishers",
             "target_title": "线圈绕线工、包扎工、修整工",
-            "transition_distance": "中等，需补绕制工艺证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           },
           {
             "capability_gaps": "锻造温度与模具控制",
-            "shared_capabilities": "压力成形与设备操作",
+            "shared_capabilities": "读工单、尺寸核对、过程记录与设备安全基础；不表示已有该岗成形工艺",
             "target_href": "/zh/career/jobs/forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "锻造工",
-            "transition_distance": "中等，需补锻造工艺证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           },
           {
             "capability_gaps": "轧机与板型控制",
-            "shared_capabilities": "轧制与尺寸控制",
+            "shared_capabilities": "读工单、尺寸核对、过程记录与设备安全基础；不表示已有该岗成形工艺",
             "target_href": "/zh/career/jobs/rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "rolling-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "金属轧制工",
-            "transition_distance": "中等，需补轧机操作证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           },
           {
             "capability_gaps": "冲压安全与模具调试",
-            "shared_capabilities": "模具与冲剪操作",
+            "shared_capabilities": "读工单、尺寸核对、过程记录与设备安全基础；不表示已有该岗成形工艺",
             "target_href": "/zh/career/jobs/cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_slug": "cutting-punching-and-press-machine-setters-operators-and-tenders-metal-and-plastic",
             "target_title": "金属冲压与剪压设备操作工",
-            "transition_distance": "中等，需补冲压与模具证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           },
           {
             "capability_gaps": "机械诊断与维修技能",
-            "shared_capabilities": "设备点检与故障判断",
+            "shared_capabilities": "工业机械机械师维修专项，与首项目标相同，不是第六独立职业",
             "target_href": "/zh/career/jobs/industrial-machinery-mechanics",
             "target_slug": "industrial-machinery-mechanics",
             "target_title": "工业机械机械师",
-            "transition_distance": "较远，需补维修与诊断证据"
+            "transition_distance": "需补新设备工艺和实际责任证据，不量化转岗难度"
           }
         ]
       },
@@ -10584,15 +11032,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           },
           {
             "answer": {
@@ -10603,15 +11051,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           },
           {
             "answer": {
@@ -10622,57 +11070,57 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面工作样本，非绩效预测",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "公差计算",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "不以纸面AB证明真实计量、加工或设备操作能力。"
           }
         ],
         "boundary": "RIASEC、人格和能力工具不能替代资格、医疗、安全或雇主判断。",
@@ -10722,35 +11170,35 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AB核19.95—20.05及AB2超差0.03，护罩、量具、培训待核；保反馈版本，不操作真实车床。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -10793,40 +11241,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-database",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-database",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
               "$source": "onet-details",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10840,211 +11254,58 @@
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "RC与工作情境"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "ccohs-lathe",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "label": {
-              "$source": "onet-summary",
+              "$source": "ccohs-lathe",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "停稳测量及训练"
           },
           {
             "href": {
-              "$source": "onet-taxonomy",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "label": {
-              "$source": "onet-taxonomy",
+              "$source": "cn-turner-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "中国技能范围"
           },
           {
             "href": {
-              "$source": "onet-trends",
+              "$source": "shanghai-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
             "label": {
-              "$source": "onet-trends",
+              "$source": "shanghai-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "单一雇主条件"
           }
         ]
       },
@@ -11111,21 +11372,21 @@
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "nbs-wages",
+            "$source": "onet-details",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
           },
           "updated_at": {
-            "$source": "nbs-wages",
+            "$source": "onet-details",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
             "item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.source-register.published.1"
           }
         },
-        "note": "来源说明｜本页按来源原始范围与限制分别核对：O*NET 51-4034.00 提供精确职业身份、任务、工作活动与工作情境（兴趣代码 RC、Job Zone 1—2 级，主要行业制造业约 95%）；美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业 18,900 人；2024—2034 预测下降 14%、预计年均空缺 1,500 个、2034 年预测就业 16,400 人；2025 年年薪第 10 分位 36,670 美元、第 25 分位 43,250 美元、中位 50,620 美元、第 75 分位 60,700 美元、第 90 分位 69,700 美元，小时中位 24.34 美元）；编辑性边界说明只用于解释口径与责任，不构成官方统计；O*NET 技术页面提及率不等于岗位必需或自动化率；国家统计局行业工资为行业口径，未建立与该精确职业对应的中国大陆全国工资分布，本页不提供中国职业工资数字。所有来源均不建立中国映射、中国工资或资质授权。"
+        "note": "来源说明｜O*NET身份RC/JobZone与2024行业制造95%、2025工资五分位保；BLS2025—2035精确下降11.3%/年均1400与旧期下降14%/1500分开。OEWS奖金与自雇口径依官方方法。中国技能标准6-18-01-01与美国非一一映射；NBS制造业非私113594/私76055为相关行业税前年均，不代精确工资；上海公告月薪6000—10000仅样本，本轮空岗未核。CCOHS为技术指南非中国法规，停稳测量清屑、手套卷入与加工液防护分别。ILO/NIST通用，hot未列软件不等零使用。AB固定题面/答案/四作品/七日，只纸面不加工、不放行。"
       },
       "work_context_block": {
         "$item": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic.profile.work-context-block.5",
@@ -11135,6 +11396,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "车削工作的能力方向比较",
+      "interface.fit.interest_code_heading": "官方兴趣代码 RC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11283,6 +11548,42 @@
         "source_refs": [
           "onet-trends"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "预测下降11.3%（2025—2035，51-4034精确职业）",
+        "fact_id": "us-growth-2025-2035",
+        "market": "US",
+        "measure": "projected employment change",
+        "occupation_scope": "51-4034 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "就业16,700人（2025，51-4034精确职业）",
+        "fact_id": "us-employment-2025",
+        "market": "US",
+        "measure": "employment base",
+        "occupation_scope": "51-4034 exact occupation",
+        "period": "2025",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均职位空缺1,400个（2025—2035，含替换）",
+        "fact_id": "us-openings-2025-2035",
+        "market": "US",
+        "measure": "projected annual openings",
+        "occupation_scope": "51-4034 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "bls-projections"
+        ]
       }
     ]
   },
@@ -11307,21 +11608,21 @@
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2024-2034",
+        "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，下降 14%）"
+        "label": "美国就业增长（2025—2035，下降11.3%）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2024",
+        "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2024-2034",
+        "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
@@ -11342,7 +11643,7 @@
       "text": "车工职业判断：车削加工、尺寸控制与作业安全"
     }
   },
-  "source_content_sha256": "1144aca352cd834ef0e51ffe9b6b1d14d581892e067891fe9e18069b66cc2294",
+  "source_content_sha256": "319db2dfcd73c5e592db0c2e490878376cf7635e36a28165f7fb3f57cefa2a98",
   "subject": {
     "canonical_slug": "lathe-and-turning-machine-tool-setters-operators-and-tenders-metal-and-plastic",
     "name": "车工",

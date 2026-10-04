@@ -7760,7 +7760,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国全国口径下，该职业 2025 年年薪中位数 33,580 美元（约 16.14 美元/小时），经 O*NET 展示的 2025 年 OEWS 分位为第 10 至第 90 分位 25,780—43,970 美元；O*NET 引用 BLS 数据显示 2024 年就业约 149,700 人、2024—2034 年预计增长约 5%—6%（高于平均）、十年合计职位空缺约 42,700 个。"
+              "美国全国口径下，该职业 2025 年年薪中位数 33,580 美元（约 16.14 美元/小时），经 O*NET 展示的 2025 年 OEWS 分位为第 10 至第 90 分位 25,780—43,970 美元；O*NET 引用 BLS 数据显示 2024 年就业约 149,700 人、2024—2034 年预计增长约 5%—6%（高于平均）、预计年均职位空缺约 42,700 个。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.us-salary.career-snapshot-secondary-locale.2",
@@ -8197,7 +8197,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 149,700 人，2024—2034 年预计增长约 5%—6%（高于平均），十年合计职位空缺约 42,700 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
+              "美国 O*NET 引用 BLS 数据：该职业 2024 年就业约 149,700 人，2024—2034 年预计增长约 5%—6%（高于平均），预计年均职位空缺约 42,700 个；这是职业统计，不是个人录用概率，也不同于招聘样本。"
             ]
           },
           "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.market-signals.market-signal-card.2",
@@ -8352,7 +8352,7 @@
                 ]
               },
               {
-                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 149,700 人，2024—2034 年预计增长约 5%—6%（高于平均），十年合计空缺约 42,700 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
+                "answer": "O*NET 引用 BLS 数据显示，该职业 2024 年就业约 149,700 人，2024—2034 年预计增长约 5%—6%（高于平均），预计年均空缺约 42,700 个；预测是职业统计，不等于个人录用概率，也不等同于招聘样本。",
                 "id": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.lifeguards-ski-patrol-and-other-recreational-protective-service-workers.outlook-transition",
@@ -10153,8 +10153,8 @@
             }
           },
           {
-            "指标": "就业 · 空缺",
-            "数值": "约 42,700 个（2024—2034 合计）",
+            "指标": "就业 · 年均空缺",
+            "数值": "约 42,700 个/年（预测期年均）",
             "说明": {
               "$join": [
                 {
@@ -10395,9 +10395,9 @@
             "horizon": "2024—2034",
             "interpretation": "含替代与新增需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
-            "metric": "十年预计职位空缺",
+            "metric": "预计年均职位空缺",
             "occupation_scope": "O*NET 33-9092.00（美国全国）",
-            "value": "42,700 个（合计）"
+            "value": "42,700 个/年（预测期年均）"
           },
           {
             "geography": "美国全国",
@@ -11077,11 +11077,11 @@
         ]
       },
       {
-        "derivation": "O*NET 显示 2024—2034 年合计约 42,700 个职位空缺；按十年折算年均约 4,270 个。",
-        "display_value": "约 42,700 个（2024—2034 合计）",
+        "derivation": "O*NET 显示 2024—2034 年预计年均约 42,700 个职位空缺；按 BLS 定义，该空缺为预测期年均值，不是十年合计。",
+        "display_value": "约 42,700 个/年（2024—2034 预测期年均）",
         "fact_id": "us-openings-2024-2034",
         "market": "美国",
-        "measure": "十年预计职位空缺",
+        "measure": "预计年均职位空缺",
         "occupation_scope": "O*NET 33-9092.00（美国全国）",
         "period": "2024—2034；查阅 2026-09-24",
         "source_refs": [
@@ -11171,7 +11171,7 @@
       "text": "救生员与休闲保护服务人员职业判断：工作、入行与风险边界"
     }
   },
-  "source_content_sha256": "7bb9abc556f320a88ee58baf590d1cbee42861d472d3cbd13ea979ea5f6d89cf",
+  "source_content_sha256": "a4638e82fe0e8aa7a750e73c7f20491fb52487fac6f8be36a6a2ce660a361508",
   "subject": {
     "canonical_slug": "lifeguards-ski-patrol-and-other-recreational-protective-service-workers",
     "name": "救生员与休闲保护服务人员",

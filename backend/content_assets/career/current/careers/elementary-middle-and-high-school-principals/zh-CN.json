@@ -26024,7 +26024,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26038,7 +26038,8 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26052,7 +26053,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26066,7 +26067,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26080,7 +26081,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26094,7 +26095,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26108,7 +26109,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26122,7 +26123,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26137,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26150,7 +26152,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26164,7 +26167,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26178,7 +26181,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26192,7 +26195,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26206,7 +26210,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26220,7 +26224,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31022,16 +31026,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.elementary-middle-and-high-school-principals.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 62% 回答需要硕士学位、27% 需要学士学位、10% 需要硕士后证书，且多需五年以上课堂教学经验；中国大陆多要求本科及以上并具备教师资格，校长任职另按当地教育行政部门规定核验。",
+                "answer": "美国 O*NET 调查中约 62% 回答需要硕士学位、27% 需要学士学位、10% 需要硕士后证书，且多需五年以上课堂教学经验；中国大陆公办中小学领导人员按《中小学校领导人员管理办法》（2026 年修订）要求：一般应具有大学本科以上文化程度、相应的教师资格和已聘用中小学一级教师以上专业技术岗位，校长一般应具有 5 年以上教育教学工作经历，并应经过任职资格培训取得合格证书；具体以招聘公告与主管部门规定为准。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.elementary-middle-and-high-school-principals.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31312,20 @@
                 "url": "https://www.bls.gov/ooh/management/elementary-middle-and-high-school-principals.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策、职业与培训入口。",
-                  "入口页不承载职业工资数值。"
+                  "规定公办中小学校领导人员任职条件与资格：一般应具有大学本科以上文化程度（幼儿园与艰苦边远地区小学可放宽至大专）、相应的教师资格和已聘用中小学一级教师以上专业技术岗位。",
+                  "校长一般应具有 5 年以上教育教学工作经历；高级中学校长应已聘用中小学高级教师以上专业技术岗位；并应经过任职资格培训取得合格证书。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "适用公办中小学校领导班子成员，不构成对该职业全部岗位（含民办学校）的统一准入要求；具体以办法原文与主管部门规定为准。",
                 "market": "中国",
-                "name": "人力资源和社会保障部 — 职业与培训公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "中央组织部、教育部：《中小学校领导人员管理办法》（2026 年修订）",
+                "period": "2017-01-13 制定，2026-07-22 修订、2026-08-12 发布；accessed 2026-09-30",
+                "publisher": "中共中央组织部、教育部",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1779/202609/t20260916_1451047.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31440,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37090,7 +37096,7 @@
       "text": "幼儿园至中学教育行政管理者（中小学校长）：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "d6e4a8d0f5c8d3dd49d932d9ee8700cf8faf71f4395cf226e9bc99344da9a298",
+  "source_content_sha256": "881d1a2269d196efd7ef24e6bae5e37f0007cf89344188a7aa83ee35db82dd06",
   "subject": {
     "canonical_slug": "elementary-middle-and-high-school-principals",
     "name": "幼儿园至中学教育行政管理者",

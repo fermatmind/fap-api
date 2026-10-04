@@ -5,10 +5,19 @@
       "fact:us-employment-2024": {
         "status": "pending_mapping"
       },
+      "fact:us-employment-2025": {
+        "status": "pending_mapping"
+      },
       "fact:us-growth-2024-2034": {
         "status": "pending_mapping"
       },
+      "fact:us-growth-2025-2035": {
+        "status": "pending_mapping"
+      },
       "fact:us-openings-2024-2034": {
+        "status": "pending_mapping"
+      },
+      "fact:us-openings-2025-2035": {
         "status": "pending_mapping"
       },
       "fact:us-wage-median-2025": {
@@ -7196,12 +7205,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "谨慎信号｜本页对应 O*NET-SOC 51-6011.00「Laundry and Dry-Cleaning Workers」（该职业标注 Bright Outlook）。官方范围为：操作或看管洗涤或干洗设备，清洗工业或家用物品，如布制服装、麂皮、皮革、皮草、毯子、帷幔、床品、地毯与地垫；包括对这些物品的去渍与染色岗位。典型任务包括分拣与检查物品、识别护理标签与面料、处理污渍、按程序与化学品装载设备、烘干与整烫、检查质量、折叠包装，并安全维护设备与化学品。核心交付是干净、完好、按标签处理的物品与可追溯的工序记录，而不是「把衣服洗了」。风险来自溶剂与清洁剂的皮肤与呼吸接触及易燃、机器与蒸汽烫伤、面料损伤与错加工导致的赔付，以及标签与工序错误。美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业约 202,600 人；2024—2034 增长快于平均 5%—6%、年均空缺约 31,900 个；2025 年中位年薪 34,890 美元；主要行业其他服务（除公共管理））。中国大陆精确职业工资未取得，按可见缺口登记。若你难以承受长时间站立、重复动作与化学品接触，应把这些作为需要认真权衡的现实成本。"
+              "谨慎信号｜洗衣师51-6011.00含工业家用布衣、麂皮皮革皮草、毯帷床品及地毯洗干、去渍染色；交付是可核工序和物品质量。美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。化学品危害各异，未知标签与泄漏先停待核；中国全国缺口和省级参考分列。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.quick-decision.fermat-decision-card.1",
           "source_refs": [
-            "authority"
+            "profile",
+            "wages",
+            "bls-projections",
+            "osha-perc",
+            "niosh-dryclean"
           ],
           "type": "prose"
         },
@@ -7210,12 +7223,13 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "承担判断｜真正的适配来自能不能在同一项工作中同时完成三件事：把洗涤与整烫做实（分拣并检查物品、识别护理标签与面料、按污渍与材质选择工序、按程序装载与运行设备、检查质量后折叠包装并记录）；把化学品与设备安全管住（佩戴防护、通风与密闭操作溶剂、按说明稀释与存放清洁剂、防止蒸汽与滚筒烫伤、发现泄漏或设备异常立即停机）；并承担可界定的岗位责任（对本人处理的物品质量与安全操作负责，对不熟悉面料、标签存疑或超出授权的事项按流程请示）。建议用一次可核验的体验（用完全虚构的物品清单与护理标签完成一份分拣与工序记录）来检验，而不是仅依据兴趣问卷的结论。"
+              "承担判断｜训练授权后按标签材质分拣、获准工艺洗干整烫、检查包装并记录；泄漏按雇主应急计划交受训人员，不能让未训者默认清理。先用AC模拟件卡核六件、分组和待核，不把纸面交付当实操能力。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.quick-decision.fermat-decision-card.2",
           "source_refs": [
-            "authority"
+            "profile",
+            "osha-perc"
           ],
           "type": "prose"
         },
@@ -7224,12 +7238,12 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "判断是否适合洗衣师，先用公开或模拟材料做一次可核验的演练：使用完全虚构的物品清单与护理标签，写出从分拣与检查、识别材质与污渍、选择洗涤或干洗工序与化学品、设定设备程序、到检查质量并折叠包装与记录异常的流程，标注每一步的核对点与可能出现的问题（护理标签或材质误判、污渍处理不当损伤面料、溶剂或清洁剂配比与存放错误、未佩戴防护或通风不足、设备超载或程序错误、物品混洗导致串色）。完成后核对：是否把标签与材质、化学品防护、设备程序与质量检查作为不可省略项；是否把不熟悉面料或设备异常写成请示或停机；是否把过程留成可复核记录。全部物品与订单须为虚构，不使用真实客户物品或订单信息。"
+              "判断是否适合｜路径AC固定题核3+2+1=6，草稿7多1；甲乙只是虚构代号，C1标签缺失待核、全件实际未洗未交。完整题面、答案、四作品与七日计划见路径。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.quick-decision.fermat-decision-card.3",
           "source_refs": [
-            "authority"
+            "profile"
           ],
           "type": "prose"
         },
@@ -7243,7 +7257,7 @@
           },
           "id": "laundry-and-dry-cleaning-workers.quick-decision.fermat-decision-card.4",
           "source_refs": [
-            "authority"
+            "profile"
           ],
           "type": "prose"
         }
@@ -7260,21 +7274,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "洗衣师对应美国 O*NET-SOC 51-6011.00「Laundry and Dry-Cleaning Workers」。官方范围为：操作或看管洗涤或干洗设备，清洗工业或家用物品，如布制服装、麂皮、皮革、皮草、毯子、帷幔、床品、地毯与地垫；包括对这些物品的去渍与染色岗位。典型工作链是分拣并检查物品、识别护理标签与面料、处理污渍、按程序与化学品装载并运行设备、烘干整烫与质量检查、折叠包装并记录异常。本页美国数值采用 O*NET 呈现的 BLS 精确职业口径（2024 年就业约 202,600 人；2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；2025 年年薪第 10 分位 27,440 美元、中位 34,890 美元、第 90 分位 43,190 美元，小时中位 16.78 美元；主要行业其他服务（除公共管理））；中国大陆精确职业工资未取得，按可见缺口登记。"
+              "洗衣师对应美国51-6011.00，操作看管洗涤干洗机清工业家用布衣、麂皮皮革皮草、毯帷床品和地毯，含去渍染色。中国官方附件《洗衣师国家职业标准（2007年修订）》定义织物皮革水洗、干洗、去渍、保养、整烫，五级初级至一级高级技师、基本文化程度初中毕业；旧版鉴定标准、当前雇主招聘与设备授权分别核。中美任务交集非一一统计互认。美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.definition-block.1",
           "source_refs": [
             "profile",
-            "work",
-            "source-pack-onet-custom",
-            "source-pack-onet-details",
-            "source-pack-onet-hot_tech",
-            "source-pack-onet-industry",
-            "source-pack-onet-localcert",
-            "source-pack-onet-localtraining",
-            "source-pack-onet-localwages",
-            "source-pack-onet-summary"
+            "cn-laundry-standard",
+            "wages",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7288,7 +7296,8 @@
           },
           "id": "laundry-and-dry-cleaning-workers.profile.responsibilities-block.2",
           "source_refs": [
-            "profile"
+            "profile",
+            "cn-laundry-standard"
           ],
           "type": "list"
         },
@@ -7311,12 +7320,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "完整工作流程｜分拣并检查物品→识别护理标签与材质→按污渍与材质选择工序并配比化学品→装载运行设备→烘干整烫与质量检查→折叠包装并记录异常。"
+              "完整流程｜训练授权后核物品标签材质→按批准工艺分拣去渍→按说明运行洗干设备→整烫检查→核订单件数和质量包装记录；未知标签、泄漏或设备异常暂停交责任人核，不把职责当新手操作指令。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.responsibilities-block.4",
           "source_refs": [
-            "profile"
+            "profile",
+            "osha-perc"
           ],
           "type": "list"
         },
@@ -7325,7 +7335,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "关键判断｜O*NET 工作情境显示：站立 70% 持续、重复动作 60% 持续、用手操作或感受物品 49% 持续、节奏由设备速度决定 47% 极其重要、时间压力 49% 每天、决策自由 49% 一些自由。判断依据是护理标签与材质、污渍类型与工序要求，以及化学品与设备安全规范。"
+              "O*NET美国样本：站立70%、重复动作60%、手部操作49%持续；设备定节奏47%极其重要、时间压力49%每天、决策自由49%一些。室内受控78%每天、持续接触53%、面谈51%每天、弯扭与行走各40%持续、PPE59%每天、接近36%手臂距离。典型周68%为40小时、29%少于40，排班89%固定；不据此断言季节性或兼职普遍、旺季必增压力，具体班次与任务防护另核。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.work-context-block.5",
@@ -7339,7 +7349,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏｜工作以设备旁站立与重复操作为主：室内受控环境 78% 每天、与他人持续接触 53%、面对面讨论 51% 每天、弯腰或扭转身体 40% 持续、行走 40% 持续、佩戴防护装备 59% 每天、身体接近 36% 手臂距离内。节奏由洗涤批量、门店收件与交付时限驱动，旺季集中交件时压力明显上升。"
+              "环境与节奏｜O*NET美国样本：站立70%、重复动作60%、手部操作49%持续；设备定节奏47%极其重要、时间压力49%每天、决策自由49%一些。室内受控78%每天、持续接触53%、面谈51%每天、弯扭与行走各40%持续、PPE59%每天、接近36%手臂距离。典型周68%为40小时、29%少于40，排班89%固定；不据此断言季节性或兼职普遍、旺季必增压力，具体班次与任务防护另核。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.work-context-block.6",
@@ -7354,12 +7364,15 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入｜O*NET 51-6011.00 提供精确职业身份、任务、工作活动与工作情境；兴趣代码为 RC（现实型—常规型），Job Zone 1—2 级（Very Little to Some Preparation Needed：通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年，SVP 低于 6.0），标注 Bright Outlook；主要行业为其他服务（除公共管理，约 49%）。可用美国数据为 O*NET 呈现的 BLS 精确职业口径：2024 年就业约 202,600 人；2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；2025 年年薪第 10 分位 27,440 美元、第 25 分位 30,360 美元、中位 34,890 美元、第 75 分位 37,560 美元、第 90 分位 43,190 美元（小时中位 16.78 美元）。中国大陆精确职业工资未取得。"
+              "研究输入｜RC，兴趣R90/C54/E9/S6/A3/I0，兴趣强度非能力；页面标Bright。O*NET Job Zone1—2通用描述通常高中/GED但部分不要求，经验很少至数月一年、OJT数日至一年、SVP<6；BLS本职业典型无正式学历要求、短期在职训练。统计描述非每个雇主门槛或独立操作承诺。Top industries明确2024其他服务除公共管理49%、住宿餐饮20%、医疗社会援助16%，余15%由100减三项，只作剩余，未列行业不猜。美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.profile.onet-structured-fields-block.7",
           "source_refs": [
-            "profile"
+            "profile",
+            "wages",
+            "outlook",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7467,7 +7480,7 @@
           },
           "id": "laundry-and-dry-cleaning-workers.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "related"
+            "adj-dish"
           ],
           "type": "prose"
         },
@@ -7476,12 +7489,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "清洁员清洁工、客房清洁员清洁工方向｜核心产出是室内外保洁与废弃物处理。本职业以布艺洗涤与整烫为主；设备与化学品种类不同，须分别核对。"
+              "清洁员比较｜37-2011主范围是场所保洁与废弃物处理，排除客房与家务清洁；与洗衣师衣物洗干设备工序不同，应按代码和对象核职责。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "related"
+            "adj-cleaner"
           ],
           "type": "prose"
         },
@@ -7490,12 +7503,12 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "烫工方向｜核心产出是纺织与服装的整烫定型。本职业覆盖洗涤全流程并包含去渍与设备运行；工序范围与责任不同，不能相互套用。"
+              "客房及家务清洁比较｜37-2012在家庭或酒店医院等商业场所做轻清洁，铺床、补布草、清房间走廊和吸尘，可含衣物分拣折叠；本职业专门洗干设备工序范围不同，不自动转岗。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "related"
+            "adj-maid"
           ],
           "type": "prose"
         },
@@ -7504,12 +7517,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "缝纫机操作工方向｜核心产出是缝纫加工与成衣制作。本职业以清洗与整烫护理为主；设备与产出不同，须分别核对。"
+              "烫工比较｜51-6021手工或机器压烫成形物品；洗衣师含洗干、去渍和染色，整烫任务有交集但整体范围不同，不自动互授操作权限。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.direction-comparison.adjacent-career-comparison-table.5",
           "source_refs": [
-            "related"
+            "adj-presser",
+            "adj-sewing"
           ],
           "type": "prose"
         }
@@ -7526,13 +7540,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "洗衣师的工作对象与 AI 边界：哪些环节可能被辅助、哪些判断必须由人承担。"
+              "洗衣师AI边界与可核试验"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.1",
           "source_refs": [
-            "authority",
-            "ai"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7541,12 +7557,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答｜洗涤设备程序库、条码与订单追踪系统、污渍识别与配比提示可辅助工序选择、批次追踪与化学品用量记录，但材质与护理标签判定、污渍处理方案、面料损伤判断、化学品与设备安全处置仍由作业人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；正式使用需要培训、授权与人工复核。本页不给出替代概率或时间表。"
+              "证据不足：本轮未取得洗衣师生成AI采用率、提效或薪酬因果；常规设备程序、条码与订单追踪不等生成AI。可试验整理虚构件数记录，逐项回核原卡，不生成真实化学品配方或设备参数、不凭输出放行物品。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.2",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7555,12 +7574,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据说明｜本表只使用来源原始口径：O*NET 51-6011.00 提供精确职业身份、任务、工作活动与工作情境；美国数值为 O*NET 呈现的 BLS 精确职业口径；FermatMind 任务量规只用于任务拆分，不测量采用率；职业安全监管材料只说明安全与劳动边界方向，不构成事故率证据；中国大陆无该精确职业的全国工资分布。"
+              "证据说明｜ILO全球任务暴露非本职业采用，NIST通用风险非洗衣师实测；本轮O*NET热技术2025美国招聘列4软件：Excel、Office、Word各低于1%，Windows比例未给；提及不等使用或生成AI采用，未给比例不填0。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.3",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7569,12 +7591,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "差异说明｜同一职业内不同环节受影响不同：越可标准化、且结果可事后核对的部分（工序推荐、批次追踪、化学品用量记录、设备程序调用）越容易被系统加速；越涉及材质与标签判定、污渍与面料风险、化学品与设备安全处置的部分越必须由人承担。"
+              "差异说明｜可在AC模拟件卡对照准确率、漏项与耗时，不能先断言标准化工序已被加速或程序调用等于生成AI。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.4",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7583,12 +7608,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "责任链｜从物品与授权确认、系统或设备处理、人工复核、洗涤整烫到质量检查与包装，每一步都要明确由谁负责，并保留可追溯证据；不得用系统提示替代材质确认与安全防护。"
+              "责任链｜物品订单、标签材质、工艺授权与质量各核依据，保版本；AC文字提示须回六件原卡，缺标签不可推断。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.5",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7597,12 +7625,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "转折｜工具改变的是工序选择与追踪效率，不改变材质判定、污渍与面料风险判断、化学品与设备安全处置的归属；务实的做法是先把标签识别、工序控制与安全操作能力练扎实，再在可复核、可追溯的环节引入工具。"
+              "转折｜先练件数、标签待核和过程记录，再在获准的信息环节试验；不承诺效率提升。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.6",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7611,12 +7642,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "可能被辅助：洗涤程序与用量推荐、批次与订单追踪、污渍处理提示、设备维护提醒与记录；这些环节结果可事后核对，但仍须回看护理标签、面料与化学品说明书。"
+              "任务试验｜仅整理AC模拟件数和分组，核总6、草稿多1、C1待核；不推荐真实化学品配比、温度或设备程序。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.7",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         },
@@ -7625,12 +7659,15 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "人的控制点：必须核对护理标签与材质、确认化学品配比与设备程序，并对物品完好、加工质量与化学品和作业安全承担责任；不熟悉面料或设备异常必须停止并请示。"
+              "实体控制｜物品实际状态与安全须真实检查，模型提示不证明已清洗；未知标签或泄漏暂停交雇主受训授权人员核。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.8",
           "source_refs": [
-            "authority"
+            "profile",
+            "ilo-genai",
+            "nist-genai-profile",
+            "source-pack-onet-hot_tech"
           ],
           "type": "prose"
         }
@@ -7647,12 +7684,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业名称对照｜本页对应美国 O*NET-SOC 51-6011.00「Laundry and Dry-Cleaning Workers」。中国公开统计没有与该精确职业对应的单职业工资；行业均值不能冒充该职业的全国中位数，中文页面语言也不构成中国等价职业或工资映射。"
+              "职业名称对照｜中国官方附件《洗衣师国家职业标准（2007年修订）》定义织物皮革水洗、干洗、去渍、保养、整烫，五级初级至一级高级技师、基本文化程度初中毕业；旧版鉴定标准、当前雇主招聘与设备授权分别核。中美任务交集非一一统计互认。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "nbs"
+            "profile",
+            "cn-laundry-standard"
           ],
           "type": "prose"
         },
@@ -7661,12 +7699,14 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "职业范围与行业代理｜本页的中国侧结论只限中国大陆市场与当前统计口径。作为可核对但范围不同的代理，国家统计局 2025 年城镇单位就业人员年平均工资按行业门类公布（如居民服务、修理和其他服务业等），该口径混合多种岗位且不含个体经营，不能当作洗衣师的全国中位数、分位数或起薪。"
+              "省级职业及行业参考｜湖南人社2023企业抽样“洗衣师”工资价位10/25/50/75/90分位为2.81/3.19/3.40/3.93/5.02万元/年（2024-10-18发布）；省级企业样本非全国或2026报价，原页未列该行样本量和薪酬组成，不推税后或起薪。NBS居民服务、修理和其他服务业与洗染服务有任务交集，覆盖其他多职业；酒店及药企洗衣房可属不同门类，不按美国行业比例代中国。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "nbs"
+            "hunan-wages",
+            "nbs",
+            "profile"
           ],
           "type": "prose"
         },
@@ -7675,11 +7715,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：本轮未建立中国大陆与 O*NET 51-6011.00 洗衣师精确对应的全国职业工资分布；国家统计局工资表没有该职业的单职业口径，行业均值不能生成其全国中位数、分位数或起薪，本页不以行业代理、招聘报价或美国数据代填。"
+              "证据不足：本轮未建立与美国51-6011.00严格对应的中国全国洗衣师工资分位或起薪。湖南人社2023企业抽样“洗衣师”工资价位10/25/50/75/90分位为2.81/3.19/3.40/3.93/5.02万元/年（2024-10-18发布）；省级企业样本非全国或2026报价，原页未列该行样本量和薪酬组成，不推税后或起薪。相关居民服务、修理和其他服务业2025城镇非私营70,226、私营52,059元/年为税前年均、排个体与自由职业，两类型分列不拼工资区间；行业参考不代职业工资。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
+            "hunan-wages",
             "nbs"
           ],
           "type": "prose"
@@ -7689,12 +7730,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "AI 与薪资判断边界｜设备程序库与订单追踪可能辅助工序与批次管理，但不改变该职业薪酬由地区、门店类型、计时或计件方式与技能等级决定这一事实；本页不对该职业的 AI 暴露评分，也不据此推断薪资。"
+              "证据不足：本轮未取得洗衣师生成AI采用率、提效或薪酬因果；AI与工资｜常规设备程序、条码与订单追踪不等生成AI。可试验整理虚构件数记录，逐项回核原卡，不生成真实化学品配方或设备参数、不凭输出放行物品。求职核工资周期、计时计件、班次与职责，不能承诺AI不改变薪资因素。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "nbs"
+            "ilo-genai",
+            "beijing-recruit"
           ],
           "type": "prose"
         }
@@ -7728,7 +7770,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "直接回答｜按 O*NET 呈现的 BLS 精确职业口径：2025 年年薪第 10 分位 27,440 美元、第 25 分位 30,360 美元、中位 34,890 美元、第 75 分位 37,560 美元、第 90 分位 43,190 美元（小时中位 16.78 美元）；2024 年就业约 202,600 人、2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；主要行业为其他服务（除公共管理，约 49%）。"
+              "美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。"
             ]
           },
           "fact_refs": [
@@ -7736,7 +7778,9 @@
           ],
           "id": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.2",
           "source_refs": [
-            "wages"
+            "wages",
+            "outlook",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -7745,7 +7789,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "薪资口径｜数据为 BLS OEWS 2025 年 5 月工资与 2024—2034 就业预测，经 O*NET 呈现为 51-6011.00 精确职业口径；OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或个人实发收入；小时口径由同一来源单独披露，不作个人换算。"
+              "工资口径｜OEWS为雇主常规税前工资，含激励工资和生产奖金，排加班费、非生产奖金、雇主福利与自雇；分位不是起薪、税后实发或全年收入保证。时薪同源单独披露，不称月度等值。"
             ]
           },
           "fact_refs": [
@@ -7753,7 +7797,8 @@
           ],
           "id": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
-            "wages"
+            "wages",
+            "bls-oews-methods"
           ],
           "type": "prose"
         },
@@ -7762,7 +7807,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "解读说明｜该口径可用于理解本职业的工资分布与需求方向，不能作为个人报价，也不能与中国大陆或任何其他市场直接比较；兼职与季节性比例较高，分位不代表全年收入。"
+              "解读说明｜分位非全年收入保证。O*NET工作周68%为40小时、29%少于40，89%固定排班；不据此写兼职与季节性比例普遍较高。"
             ]
           },
           "fact_refs": [
@@ -7770,6 +7815,7 @@
           ],
           "id": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
+            "profile",
             "wages"
           ],
           "type": "prose"
@@ -7779,7 +7825,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业口径｜O*NET 行业页显示该职业分布于其他服务（除公共管理，约 49%）、住宿与餐饮服务（约 20%）、医疗与社会援助（约 16%），其余包括行政与支持服务等（约 15%）；行业分布、招聘需求与年度空缺是不同指标，不能混写为单一增长率。"
+              "行业口径｜O*NET明确2024其他服务除公共管理49%、住宿餐饮20%、医疗社会援助16%；余15%只是100减已列三项，未列具体行业与工资。行业占比、预测空缺和当前招聘不同。"
             ]
           },
           "fact_refs": [
@@ -7787,7 +7833,7 @@
           ],
           "id": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "wages"
+            "profile"
           ],
           "type": "prose"
         },
@@ -7796,7 +7842,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "影响因素｜门店类型（干洗店、酒店布草房、医院与养老机构洗衣房或工业洗涤厂）、地区、班次与季节、计时或计件方式会影响实际收入水平与稳定性；本页分位是统计位置，不对应具体门店或具体岗位。"
+              "影响因素核对｜求职逐项问门店或工业洗涤厂、酒店药企洗衣房的职责、设备、班次、计薪周期与计件条件；本页分位不对应具体雇主。"
             ]
           },
           "fact_refs": [
@@ -7804,7 +7850,8 @@
           ],
           "id": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "wages"
+            "profile",
+            "beijing-recruit"
           ],
           "type": "prose"
         }
@@ -7868,7 +7915,8 @@
           },
           "id": "laundry-and-dry-cleaning-workers.fit.riasec-fit-block.4",
           "source_refs": [
-            "profile"
+            "profile",
+            "osha-perc"
           ],
           "type": "prose"
         },
@@ -7877,7 +7925,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作｜用完全虚构的物品清单与护理标签做一次演练：完成分拣与材质判定、工序与化学品选择、设备程序设定、质量检查与异常记录；用可观察交付检验，而不是只凭兴趣问卷。"
+              "试验动作｜AC纸面练习，约40分钟、全部虚构且不操作设备或化学品：订单AC01为A1—A3共3件，模拟标签文字“仅方案甲”；AC02为B1—B2共2件，模拟文字“仅方案乙”；C1单独1件标签缺失。甲乙只是虚构分类代号，不代表水洗、干洗或真实护理符号。交付草稿误称“AC01四件、AC02两件、C1归甲，共七件，全部已处理可交付”。按原卡核件数、分组、待核与交付状态，改草稿并写未发送询问；不得凭代号选真实工序、配比或温度。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.fit.riasec-fit-block.5",
@@ -7905,7 +7953,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "结论｜人格特质不能预测该职业的工作表现；应结合真实任务、安全责任与可复核交付继续核对，而不是依据单一标签下结论。"
+              "人格边界｜本轮未建立人格量表对洗衣师绩效的预测效度，不凭标签推录用、能力或设备权限；以AC反馈记录继续核对。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.fit.riasec-fit-block.7",
@@ -7941,12 +7989,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "化学品接触与燃爆风险｜触发：溶剂或清洁剂皮肤与呼吸接触、通风不足或存放不当。后果：可能造成皮肤与呼吸不适及火灾风险。控制：按说明稀释与密闭存放、佩戴防护并保持通风、泄漏立即处置并报告。边界：化学品使用与存放要求按雇主制度与所在地法规确定。"
+              "化学品接触与场所火灾风险｜先查具体化学品SDS及雇主风险评估，核通风、密闭与任务防护。石油基溶剂可燃或易燃，PERC不易燃却有健康危害；场所仍可能有其他可燃物。发现泄漏停止受影响作业、远离暴露区并通知责任人，按应急计划交受训授权人员处理，不让未训者进入清理；不能只靠气味判断安全。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.1",
           "source_refs": [
-            "authority"
+            "profile",
+            "osha-perc"
           ],
           "type": "prose"
         },
@@ -7955,12 +8004,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "机器与蒸汽烫伤风险｜触发：滚筒、压力机、蒸汽与烘干设备操作或清理时防护不足。后果：可能造成烫伤与夹伤。控制：停机并确认隔离后清理、按说明操作设备、佩戴防护并设置警示。边界：设备操作与停机清理要求按雇主制度与设备说明书确定。"
+              "机器蒸汽与维护风险｜按设备说明与培训操作，运行中不得打开干洗机门或维护；清理维护前由授权人员确认停止、冷却及适用能源隔离，防护异常暂停。不把按下停止键等同隔离蒸汽、电力等全部能源。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.2",
           "source_refs": [
-            "authority"
+            "profile",
+            "osha-perc"
           ],
           "type": "prose"
         },
@@ -7969,12 +8019,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "面料损伤与错加工风险｜触发：护理标签或材质误判、污渍处理或温度程序不当。后果：可能造成衣物损坏、赔付与信誉损失。控制：核对标签与材质、对不熟悉面料先小范围测试或请示、保留处理记录。边界：赔付与责任按门店制度与合同确定。"
+              "未知面料标签与错加工｜先核护理标签、材质和批准工艺；未知标签或面料停止待核，交受训责任人。O*NET列局部试验为职责，不授予未训者自行试溶剂或火焰；无许可不做小样化学试验，记录损伤与处理状态。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.3",
           "source_refs": [
-            "authority"
+            "profile",
+            "profile"
           ],
           "type": "prose"
         },
@@ -7983,12 +8034,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "工序与批次混淆风险｜触发：不同客户或不同工序的物品混放混洗。后果：可能造成串色、错交与投诉。控制：按批次与标签分区、使用标识与记录、交付前复核件数。边界：分批与核对要求按门店制度确定。"
+              "件数批次与交付风险｜用订单、件ID及批次标识核分区和件数，交付前再复核处理与质量状态；件数相符不等质量合格，AC的六件仅模拟记录。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.4",
           "source_refs": [
-            "authority"
+            "profile",
+            "profile"
           ],
           "type": "prose"
         },
@@ -7997,12 +8049,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "人体工效与重复劳损风险｜触发：长时间站立、重复动作与弯腰扭转。后果：可能造成腰背与上肢劳损。控制：交替姿势与合理摆放工位、使用辅助工具、按制度安排休息。边界：工位与劳动安排按雇主制度与所在地规定确定。"
+              "人体工效与劳损｜参考CCOHS酒店案例评估弯扭伸臂及搬运；改善工位与料车、减少重复搬运、核轮子维护和休息安排。相似任务轮换不保证消除风险，案例负重与人数不套所有岗位。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.5",
           "source_refs": [
-            "authority"
+            "profile",
+            "ccohs-laundry"
           ],
           "type": "prose"
         }
@@ -8019,13 +8072,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "怎样成为洗衣师：入行准备与训练。O*NET 准备信息显示该职业为 Job Zone 1—2 级（通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年）。课程或证书不自动授予执照、签字或高风险权限；具体要求取决于岗位与适用规则。本页不构成法律或安全意见。"
+              "入行与训练｜O*NET Job Zone1—2通用描述通常高中/GED但部分不要求，经验很少至数月一年、OJT数日至一年、SVP<6；BLS本职业典型无正式学历要求、短期在职训练。统计描述非每个雇主门槛或独立操作承诺。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.1",
           "source_refs": [
-            "authority",
-            "jobzone"
+            "profile",
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8034,12 +8087,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "直接回答｜现实入口以在职训练为主（Job Zone 1—2 级）：先确认雇主的设备类型（洗涤、干洗、整烫）、化学品种类与班次安排，再核对标签识别、工序选择、设备操作与质量检查能力，并准备可验证的工序与质量检查记录；学历、培训、证书、执照、岗位录用与设备操作授权必须分别核对。"
+              "入口核对｜密云人社2026-07-22公告、7-29招聘会：博恩特药业洗衣工1人、高中及以上、薪资栏原文“4-6K”；该行未明确币种计薪周期、具体职责或本轮仍在招，不补写元/月。具体工序设备与安全训练另向雇主核。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.2",
           "source_refs": [
-            "authority"
+            "beijing-recruit"
           ],
           "type": "prose"
         },
@@ -8048,12 +8101,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "特定法域要求｜美国该职业的化学品与设备安全要求由联邦、州与雇主共同规定，须逐一核对，不将任一门店做法写成统一标准；中国大陆相关岗位的安全与劳动保护要求由雇主与所在地法规规定，本页不建立与美国精确职业的一一映射。"
+              "中国技能与法域｜中国官方附件《洗衣师国家职业标准（2007年修订）》定义织物皮革水洗、干洗、去渍、保养、整烫，五级初级至一级高级技师、基本文化程度初中毕业；旧版鉴定标准、当前雇主招聘与设备授权分别核。中美任务交集非一一统计互认。OSHA2005及NIOSH1997为美国历史技术资料、CCOHS为加拿大酒店案例，不构成当前中国法规或溶剂许可。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.3",
           "source_refs": [
-            "authority"
+            "cn-laundry-standard",
+            "osha-perc",
+            "ccohs-laundry"
           ],
           "type": "prose"
         },
@@ -8062,12 +8117,13 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格边界｜课程或证书不自动授予洗衣师的执照、签字或高风险权限；学历、培训、证书、执照、岗位录用与设备操作授权是不同状态，具体要求取决于岗位与适用规则。"
+              "资格边界｜旧技能鉴定申报、学历、雇主培训、录用与设备维护操作权限分别核；标准和课程不独自证明当前就业许可。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.4",
           "source_refs": [
-            "authority"
+            "cn-laundry-standard",
+            "profile"
           ],
           "type": "prose"
         },
@@ -8076,12 +8132,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "阶段责任｜入口阶段在有经验人员指导下完成分拣、装洗与整烫；熟练后独立完成常见面料的洗涤全流程并对物品质量、化学品使用与安全操作负责，不熟悉面料与特殊污渍按流程请示。"
+              "AC纸面练习，约40分钟、全部虚构且不操作设备或化学品：订单AC01为A1—A3共3件，模拟标签文字“仅方案甲”；AC02为B1—B2共2件，模拟文字“仅方案乙”；C1单独1件标签缺失。甲乙只是虚构分类代号，不代表水洗、干洗或真实护理符号。交付草稿误称“AC01四件、AC02两件、C1归甲，共七件，全部已处理可交付”。按原卡核件数、分组、待核与交付状态，改草稿并写未发送询问；不得凭代号选真实工序、配比或温度。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.5",
           "source_refs": [
-            "authority"
+            "profile"
           ],
           "type": "prose"
         },
@@ -8090,12 +8146,12 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "可复核证据｜用完全虚构的物品清单与护理标签展示能力：分拣与材质判定、工序与化学品选择、设备程序设定、质量检查与异常记录；不使用真实客户物品或订单信息，注明依据与假设。"
+              "AC参考答案与四作品：①件数表AC01=3、AC02=2、C1=1，总6，草稿7多1；②纸面分组A1—A3归甲、B1—B2归乙，C1标签缺失单列待核，不归甲且不处理；③未发送询问列C1原标签、订单归属及授权处理依据，交雇主责任人核；④修订交付单：“共六件，仅纸面分类，C1待核；所有真实洗涤与质量状态未验证，未加工、未交付”。数目与分类正确不证明衣物洁净或已完成处理。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.6",
           "source_refs": [
-            "authority"
+            "profile"
           ],
           "type": "prose"
         },
@@ -8104,12 +8160,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "下一步动作｜完成一次虚构物品清单的处理方案与质量检查任务包与复盘，请有经验的作业人员挑战你的材质判定、工序选择与安全处置，并据此判断是否继续投入该方向；用可观察交付而不是口头描述证明能力。"
+              "七日计划，每天20—30分钟，仅纸面：D1抄订单与六件ID；D2核3+2+1=6及草稿多1；D3按模拟文字分甲乙、C1待核；D4读安全指南列运行不维护、泄漏按计划交受训人员；D5写未发询问并修交付单；D6请同伴核件数与未处理状态后修订；D7组合四作品，核雇主设备、化学品、培训、班次和薪资周期。结束只有模拟作品，实际洗干整烫另需培训授权。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.path.career-path-block.7",
           "source_refs": [
-            "authority"
+            "profile",
+            "osha-perc",
+            "beijing-recruit"
           ],
           "type": "prose"
         },
@@ -8155,12 +8213,14 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "直接回答｜美国侧按 O*NET 呈现的 BLS 精确职业口径（51-6011.00）：2024 年就业约 202,600 人、2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；该职业规模较大、空缺含增长与替换需求，实际机会还受地区、门店类型与季节性影响，官方预测不能替代目标岗位核验，也不能转换为个人录用概率。中国大陆侧公开统计未按该职业单列，本页登记缺口。"
+              "证据不足：中国全国洗衣师精确需求未建立，单公告不外推。BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。密云人社2026-07-22公告、7-29招聘会：博恩特药业洗衣工1人、高中及以上、薪资栏原文“4-6K”；该行未明确币种计薪周期、具体职责或本轮仍在招，不补写元/月。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.market-signals.market-signal-card.2",
           "source_refs": [
-            "outlook"
+            "bls-projections",
+            "outlook",
+            "beijing-recruit"
           ],
           "type": "prose"
         },
@@ -8169,12 +8229,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业展望（O*NET 呈现的 BLS 口径，2024—2034）：增长快于平均（5%—6%）、预计年均空缺约 31,900 个；空缺含增长与替换需求，不等于净新增岗位，也不构成个人就业保证。"
+              "新期就业预测｜BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。总体就业预测非AI归因。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.market-signals.market-signal-card.3",
           "source_refs": [
-            "outlook"
+            "bls-projections"
           ],
           "type": "prose"
         },
@@ -8183,12 +8243,15 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "可迁移能力｜相邻方向共享的基础包括：标签与材质识别、洗涤与整烫工序控制、化学品安全使用、设备操作与点检、质量检查与记录；但每条路径都要补齐与新职责和设备类型相对应的证据。"
+              "可迁移基础｜工单件数、过程记录、质量核对与安全意识是可比较基础，不表示已有餐厨、客房、缝纫或维修专项能力；每目标须补设备工艺和责任证据。"
             ]
           },
           "id": "laundry-and-dry-cleaning-workers.market-signals.market-signal-card.4",
           "source_refs": [
-            "outlook"
+            "profile",
+            "adj-dish",
+            "adj-maid",
+            "adj-sewing"
           ],
           "type": "prose"
         },
@@ -8220,23 +8283,26 @@
           "data": {
             "entries": [
               {
-                "answer": "O*NET 51-6011.00 的工作以设备旁站立与重复操作为主：站立 70% 持续、重复动作 60% 持续、用手操作或感受物品 49% 持续、节奏由设备速度决定 47% 极其重要、时间压力 49% 每天；室内受控环境 78% 每天、佩戴防护装备 59% 每天、与他人持续接触 53%。",
+                "answer": "O*NET美国样本：站立70%、重复动作60%、手部操作49%持续；设备定节奏47%极其重要、时间压力49%每天、决策自由49%一些。室内受控78%每天、持续接触53%、面谈51%每天、弯扭与行走各40%持续、PPE59%每天、接近36%手臂距离。典型周68%为40小时、29%少于40，排班89%固定；不据此断言季节性或兼职普遍、旺季必增压力，具体班次与任务防护另核。",
                 "id": "laundry-and-dry-cleaning-workers.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.daily-work",
                 "source_refs": [
-                  "work",
                   "profile"
                 ]
               },
               {
-                "answer": "本职业操作洗涤与干洗设备处理布艺与服装，并包含去渍与染色。洗碗工负责餐具器皿清洗，清洁员负责保洁与废弃物处理，烫工负责整烫定型，缝纫机操作工负责缝纫加工。应按处理对象、设备与工序范围判断，不能只按职位名称互换。",
+                "answer": "洗碗工35-9021餐厨器具清洗；37-2011场所保洁排客房，37-2012家务客房轻清洁可含布草；51-6021压烫成形，51-6031缝纫连接加固装饰服装及其他产品。按代码对象与设备核，不互授资格。",
                 "id": "laundry-and-dry-cleaning-workers.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.role-comparison",
                 "source_refs": [
-                  "profile",
-                  "related"
+                  "adj-dish",
+                  "related",
+                  "adj-maid",
+                  "adj-presser",
+                  "adj-sewing",
+                  "adj-cleaner"
                 ]
               },
               {
@@ -8250,86 +8316,91 @@
                 ]
               },
               {
-                "answer": "洗涤设备程序库、条码与订单追踪系统、污渍识别与配比提示可辅助工序选择、批次追踪与化学品用量记录；但材质与护理标签判定、污渍处理方案、面料损伤判断、化学品与设备安全处置仍由作业人员承担。任务暴露不等于岗位替代，也不等于已普遍采用；本页不给出替代概率或时间表。",
+                "answer": "证据不足：本轮未取得洗衣师生成AI采用率、提效或薪酬因果；常规设备程序、条码与订单追踪不等生成AI。可试验整理虚构件数记录，逐项回核原卡，不生成真实化学品配方或设备参数、不凭输出放行物品。本轮O*NET热技术2025美国招聘列4软件：Excel、Office、Word各低于1%，Windows比例未给；提及不等使用或生成AI采用，未给比例不填0。",
                 "id": "laundry-and-dry-cleaning-workers.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.ai-impact",
                 "source_refs": [
-                  "ai",
+                  "ilo-genai",
+                  "nist-genai-profile",
                   "source-pack-onet-hot_tech"
                 ]
               },
               {
-                "answer": "系统与设备输出不能替代材质确认与安全防护。人类必须核对护理标签与材质、确认化学品配比与设备程序，并对物品完好、加工质量与化学品和作业安全承担责任；不熟悉面料或设备异常必须停止并请示。",
+                "answer": "先核护理标签、材质和批准工艺；未知标签或面料停止待核，交受训责任人。O*NET列局部试验为职责，不授予未训者自行试溶剂或火焰；无许可不做小样化学试验，记录损伤与处理状态。用订单、件ID及批次标识核分区和件数，交付前再复核处理与质量状态；件数相符不等质量合格，AC的六件仅模拟记录。",
                 "id": "laundry-and-dry-cleaning-workers.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.human-control",
                 "source_refs": [
-                  "profile",
-                  "authority"
+                  "profile"
                 ]
               },
               {
-                "answer": "证据不足：本轮未建立中国大陆与 O*NET 51-6011.00 洗衣师精确对应的全国职业工资分布；国家统计局工资表没有该职业的单职业口径，行业均值不能生成其全国中位数、分位数或起薪，本页展示缺失而不使用代理数字。",
+                "answer": "证据不足：本轮未建立与美国51-6011.00严格对应的中国全国洗衣师工资分位或起薪。湖南人社2023企业抽样“洗衣师”工资价位10/25/50/75/90分位为2.81/3.19/3.40/3.93/5.02万元/年（2024-10-18发布）；省级企业样本非全国或2026报价，原页未列该行样本量和薪酬组成，不推税后或起薪。相关居民服务、修理和其他服务业2025城镇非私营70,226、私营52,059元/年为税前年均、排个体与自由职业，两类型分列不拼工资区间；行业参考不代职业工资。",
                 "id": "laundry-and-dry-cleaning-workers.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.china-pay",
                 "source_refs": [
+                  "hunan-wages",
                   "nbs"
                 ]
               },
               {
-                "answer": "按 O*NET 呈现的 BLS 2025 年 5 月数据（51-6011.00 精确职业）：年薪第 10 分位 27,440 美元、第 25 分位 30,360 美元、中位 34,890 美元、第 75 分位 37,560 美元、第 90 分位 43,190 美元（小时中位 16.78 美元）。OEWS 为雇主报告的工资、不含福利与奖金；分位是统计位置，不等于起薪或全年收入保证。",
+                "answer": "美国2025年薪10/25/50/75/90分位27,440、30,360、34,890、37,560、43,190美元；官方时薪13.19、14.60、16.78、18.06、20.77美元。OEWS为雇主常规税前工资，含激励工资和生产奖金，排加班费、非生产奖金、雇主福利与自雇；分位不是起薪、税后实发或全年收入保证。",
                 "id": "laundry-and-dry-cleaning-workers.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.us-pay",
                 "source_refs": [
                   "wages",
-                  "source-pack-onet-summary"
+                  "bls-oews-methods"
                 ]
               },
               {
-                "answer": "O*NET 准备信息显示该职业为 Job Zone 1—2 级（通常要求高中文凭或同等学历，部分不作要求；典型在职训练从数天到一年）。课程或证书不自动授予执照、签字或高风险权限；具体要求取决于岗位与适用规则。",
+                "answer": "O*NET Job Zone1—2通用描述通常高中/GED但部分不要求，经验很少至数月一年、OJT数日至一年、SVP<6；BLS本职业典型无正式学历要求、短期在职训练。统计描述非每个雇主门槛或独立操作承诺。中国官方附件《洗衣师国家职业标准（2007年修订）》定义织物皮革水洗、干洗、去渍、保养、整烫，五级初级至一级高级技师、基本文化程度初中毕业；旧版鉴定标准、当前雇主招聘与设备授权分别核。中美任务交集非一一统计互认。密云人社2026-07-22公告、7-29招聘会：博恩特药业洗衣工1人、高中及以上、薪资栏原文“4-6K”；该行未明确币种计薪周期、具体职责或本轮仍在招，不补写元/月。",
                 "id": "laundry-and-dry-cleaning-workers.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.education-path",
                 "source_refs": [
-                  "jobzone",
-                  "authority"
+                  "profile",
+                  "bls-projections",
+                  "cn-laundry-standard",
+                  "beijing-recruit"
                 ]
               },
               {
-                "answer": "主要风险包括化学品接触与燃爆、机器与蒸汽烫伤、面料损伤与错加工、工序与批次混淆、人体工效与重复劳损五类。控制重点是把化学品配比与存放、通风与防护、停机清理与警示、标签与材质核对、分批标识与交付复核，以及工位与休息安排写清，并在泄漏或设备异常时立即停机报告。",
+                "answer": "先查具体化学品SDS及雇主风险评估，核通风、密闭与任务防护。石油基溶剂可燃或易燃，PERC不易燃却有健康危害；场所仍可能有其他可燃物。发现泄漏停止受影响作业、远离暴露区并通知责任人，按应急计划交受训授权人员处理，不让未训者进入清理；不能只靠气味判断安全。按设备说明与培训操作，运行中不得打开干洗机门或维护；清理维护前由授权人员确认停止、冷却及适用能源隔离，防护异常暂停。不把按下停止键等同隔离蒸汽、电力等全部能源。参考CCOHS酒店案例评估弯扭伸臂及搬运；改善工位与料车、减少重复搬运、核轮子维护和休息安排。相似任务轮换不保证消除风险，案例负重与人数不套所有岗位。",
                 "id": "laundry-and-dry-cleaning-workers.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.risk-boundary",
                 "source_refs": [
-                  "authority",
-                  "profile"
+                  "osha-perc",
+                  "niosh-dryclean",
+                  "ccohs-laundry"
                 ]
               },
               {
-                "answer": "美国侧按 O*NET 呈现的 BLS 精确职业口径：2024 年就业约 202,600 人、2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；空缺含增长与替换需求，不等于净新增岗位，也不能直接转换为招聘规模或个人录用概率。",
+                "answer": "BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。密云人社2026-07-22公告、7-29招聘会：博恩特药业洗衣工1人、高中及以上、薪资栏原文“4-6K”；该行未明确币种计薪周期、具体职责或本轮仍在招，不补写元/月。",
                 "id": "laundry-and-dry-cleaning-workers.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.outlook-transition",
                 "source_refs": [
+                  "bls-projections",
                   "outlook",
-                  "employment"
+                  "beijing-recruit"
                 ]
               },
               {
-                "answer": "本页不给出就业或录用结论，而是提供可核验的试验路径：用完全虚构的物品清单与护理标签交付分拣与材质判定、工序与化学品选择、质量检查与异常记录；用可观察交付判断是否继续，而不是只凭兴趣问卷或宣传。",
+                "answer": "AC纸面练习，约40分钟、全部虚构且不操作设备或化学品：订单AC01为A1—A3共3件，模拟标签文字“仅方案甲”；AC02为B1—B2共2件，模拟文字“仅方案乙”；C1单独1件标签缺失。甲乙只是虚构分类代号，不代表水洗、干洗或真实护理符号。交付草稿误称“AC01四件、AC02两件、C1归甲，共七件，全部已处理可交付”。按原卡核件数、分组、待核与交付状态，改草稿并写未发送询问；不得凭代号选真实工序、配比或温度。AC参考答案与四作品：①件数表AC01=3、AC02=2、C1=1，总6，草稿7多1；②纸面分组A1—A3归甲、B1—B2归乙，C1标签缺失单列待核，不归甲且不处理；③未发送询问列C1原标签、订单归属及授权处理依据，交雇主责任人核；④修订交付单：“共六件，仅纸面分类，C1待核；所有真实洗涤与质量状态未验证，未加工、未交付”。数目与分类正确不证明衣物洁净或已完成处理。七日计划，每天20—30分钟，仅纸面：D1抄订单与六件ID；D2核3+2+1=6及草稿多1；D3按模拟文字分甲乙、C1待核；D4读安全指南列运行不维护、泄漏按计划交受训人员；D5写未发询问并修交付单；D6请同伴核件数与未处理状态后修订；D7组合四作品，核雇主设备、化学品、培训、班次和薪资周期。结束只有模拟作品，实际洗干整烫另需培训授权。",
                 "id": "laundry-and-dry-cleaning-workers.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.career-worth",
                 "source_refs": [
                   "profile",
-                  "source-pack-onet-localtraining"
+                  "osha-perc"
                 ]
               },
               {
-                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。；洗衣师页面提供职业决策与安全试验信息，不构成法律或安全意见，也不替代所在地化学品与设备安全法规、医疗或其他专业意见。；任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 51-6011.00「Laundry and Dry-Cleaning Workers」这一精确职业。",
+                "answer": "中国、美国、全球与具体法域证据分别陈述；工资、就业、资格、安全和 AI 结论不得跨范围拼接。洗衣师页面提供职业决策与安全试验信息，不构成法律或安全意见，也不替代所在地化学品与设备安全法规、医疗或其他专业意见。任何「证据不足」都只表示有界检索后未建立安全数据，不允许用代理或模型记忆伪造数字。本页只覆盖 O*NET-SOC 51-6011.00「Laundry and Dry-Cleaning Workers」这一精确职业。",
                 "id": "laundry-and-dry-cleaning-workers.faq.boundary",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.laundry-and-dry-cleaning-workers.boundary",
@@ -8472,8 +8543,8 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "真实美国法域的路线安全、权利或劳动边界。",
-                  "不外推到中国，不替代更具体规则。"
+                  "美国OSHA法规发现入口。",
+                  "不是路线安全或洗干职业数值来源；具体技术控制见另列干洗指南，不代表中国。"
                 ],
                 "evidence_type": "official source",
                 "id": "authority",
@@ -8486,7 +8557,7 @@
                 "url": "https://www.osha.gov/laws-regs"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "2024 就业基数。",
                   "不代表中国。"
@@ -8502,7 +8573,7 @@
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "准备与培训。",
                   "美国典型路径。"
@@ -8518,23 +8589,23 @@
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "中国行业和宽口径工资。",
-                  "无精确单职业中位数。"
+                  "居民服务、修理和其他服务业非私营70226、私营52059元/年。",
+                  "税前年均排个体与自由职业；行业覆盖多职业，不代洗衣师全国分位或起薪。"
                 ],
                 "evidence_type": "official source",
                 "id": "nbs",
-                "limitation": "无精确单职业中位数。",
+                "limitation": "相关行业背景，两单位类型分别列示不拼工资区间。",
                 "market": "中国大陆",
-                "name": "Average Annual Wages 2025",
-                "period": "2025 annual wage statistics; released 2026-05-16; accessed 2026-08-31",
+                "name": "国家统计局2025城镇单位行业工资",
+                "period": "2025统计；2026-05-16发布",
                 "publisher": "National Bureau of Statistics of China",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "增长与空缺。",
                   "美国预测不是保证。"
@@ -8550,7 +8621,7 @@
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "职业身份与任务。",
                   "美国职业口径。"
@@ -8566,7 +8637,7 @@
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "相邻职业。",
                   "只用于比较。"
@@ -8578,7 +8649,7 @@
                 "name": "O*NET Related Section 51-6011.00",
                 "period": "O*NET current related section; accessed 2026-08-31",
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
-                "scope": "combined_official",
+                "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
@@ -8598,7 +8669,7 @@
                 "url": "https://www.onetonline.org/link/custom/51-6011.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业身份、任务、工作活动与工作情境。",
                   "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。"
@@ -8614,17 +8685,17 @@
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "用于核对与本职业相关的热门技术清单。",
-                  "技术提及不等同于能力、采用或自动化程度。"
+                  "Excel、Office、Word各低于1%；Windows比例Not available。",
+                  "招聘提及不等实际使用或生成AI采用率，不拿未列比例当0。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
+                "limitation": "US2025招聘帖软件技能，非中国或洗衣师AI效果实测。",
                 "market": "美国",
                 "name": "Hot Technologies: 51-6011.00 - Laundry and Dry-Cleaning Workers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "美国2025全年招聘帖；本轮4 software skills shown",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/51-6011.00"
@@ -8640,7 +8711,7 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "Industries: 51-6011.00 - Laundry and Dry-Cleaning Workers",
-                "period": "current page; accessed 2026-09-02",
+                "period": "本轮details明确Top industries (2024)",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/51-6011.00"
@@ -8678,7 +8749,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/51-6011.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对本页美国工资口径：51-6011.00 精确职业，2025 年年薪第 10 分位 27,440 美元、中位 34,890 美元、第 90 分位 43,190 美元（小时中位 16.78 美元）。",
                   "保留所显示的期间、就业人群、地域与计量单位；直接访问 BLS 失败不影响已打开的 O*NET 页面。"
@@ -8694,7 +8765,7 @@
                 "url": "https://www.onetonline.org/link/localwages/51-6011.00"
               },
               {
-                "accessed_at": "2026-09-02",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "用于核对职业身份、入门与就业展望入口（就业与展望为 51-6011.00 精确职业口径）。",
                   "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。"
@@ -8704,13 +8775,13 @@
                 "limitation": "仅适用于该 O*NET 职业与美国市场；不建立中国映射、中国工资或资质结论。",
                 "market": "美国",
                 "name": "51-6011.00 - Laundry and Dry-Cleaning Workers",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "本轮2026更新页；工资2025与旧就业2024—2034分开",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "2025 工资分位。",
                   "不是具体报价。"
@@ -8726,7 +8797,7 @@
                 "url": "https://www.onetonline.org/link/localwages/51-6011.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "工作活动与流程。",
                   "精确职业页工作活动。"
@@ -8740,6 +8811,246 @@
                 "publisher": "O*NET OnLine / U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/51-6011.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "常规税前工资含符合定义的佣金、激励工资和生产奖金；排除非生产奖金、加班溢价、利润分享及雇主福利成本。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "bls-oews-methods",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "美国",
+                "name": "BLS OEWS：工资定义 FAQ",
+                "period": "当前方法页",
+                "publisher": "BLS",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "跨领域虚构输出、隐私与信息完整性风险。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "nist-genai-profile",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "全球",
+                "name": "NIST AI 600-1：生成式AI风险画像",
+                "period": "2024年7月",
+                "publisher": "NIST",
+                "scope": "contextual",
+                "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+              },
+              {
+                "accessed_at": "2026-08-31",
+                "details": [
+                  "支持把生成式 AI 影响解释为任务暴露与岗位转型。",
+                  "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。"
+                ],
+                "evidence_type": "institutional task research",
+                "id": "ilo-genai",
+                "limitation": "通用方法或研究，不提供本职业AI采用、提效实测、工资因果或资格。",
+                "market": "全球任务研究",
+                "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
+                "period": "ILO Working Paper 140, 2025; accessed 2026-08-31",
+                "publisher": "International Labour Organization",
+                "scope": "market_signal",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "就业204.9→213.7千、增长4.3%、表列净增8.7千、年均空缺28.2千；典型无正式学历要求、短期在职训练。",
+                  "端点与净变化分别取表列取整值，不用端点相减重造净变化；总体预测非AI归因。"
+                ],
+                "evidence_type": "official employment projection table",
+                "id": "bls-projections",
+                "limitation": "美国精确职业预测，非中国需求、当前招聘或个人保证。",
+                "market": "US",
+                "name": "BLS2025—2035洗衣及干洗工就业预测",
+                "period": "2025—2035，51-6011精确行",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "设备维护、泄漏控制、通风、任务防护与训练；运行中不维护，不能只靠气味判断泄漏。",
+                  "美国历史技术指南非当前法规全表，也不证明溶剂当前准用；泄漏需雇主安全响应计划和受训人员。"
+                ],
+                "evidence_type": "official source",
+                "id": "osha-perc",
+                "limitation": "美国历史技术指南非当前法规全表，也不证明溶剂当前准用；泄漏需雇主安全响应计划和受训人员。",
+                "market": "美国",
+                "name": "OSHA3253：减少干洗PERC暴露",
+                "period": "2005技术指南；本轮相关正文核",
+                "publisher": "OSHA",
+                "scope": "contextual",
+                "url": "https://www.osha.gov/sites/default/files/publications/OSHA3253.pdf"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "石油基溶剂易燃或可燃，PERC不易燃，但场所仍有其他可燃物与点火源。",
+                  "历史危害机制参考，旧溶剂占比与法规不作当前事实，不外推中国。"
+                ],
+                "evidence_type": "official source",
+                "id": "niosh-dryclean",
+                "limitation": "历史危害机制参考，旧溶剂占比与法规不作当前事实，不外推中国。",
+                "market": "美国",
+                "name": "NIOSH商业干洗健康安全控制",
+                "period": "1997；本轮火灾危害段核",
+                "publisher": "NIOSH",
+                "scope": "contextual",
+                "url": "https://archive.cdc.gov/www_cdc_gov/niosh/docs/97-150/default.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "反复弯扭、伸臂和硬地站立风险；工位、料车轮维护、减重复搬运与任务变化。",
+                  "单酒店案例非所有洗衣工负重或事故率；轮换任务相似时不能消除风险。"
+                ],
+                "evidence_type": "official source",
+                "id": "ccohs-laundry",
+                "limitation": "单酒店案例非所有洗衣工负重或事故率；轮换任务相似时不能消除风险。",
+                "market": "加拿大",
+                "name": "CCOHS酒店洗衣房人体工效案例",
+                "period": "本轮酒店布草分拣、折叠风险及控制段核",
+                "publisher": "加拿大职业健康安全中心",
+                "scope": "contextual",
+                "url": "https://www.ccohs.ca/oshanswers/occup_workplace/laundry.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "织物皮革水洗干洗去渍保养整烫，五级初级至一级高级技师、基本文化程度初中毕业。",
+                  "旧版技能与鉴定标准，不是当前全国就业许可或中美工资一一映射，申报与招聘分开。"
+                ],
+                "evidence_type": "official source",
+                "id": "cn-laundry-standard",
+                "limitation": "旧版技能与鉴定标准，不是当前全国就业许可或中美工资一一映射，申报与招聘分开。",
+                "market": "中国大陆",
+                "name": "洗衣师国家职业标准（2007年修订）",
+                "period": "2007年修订；本轮PDF第1—3页核",
+                "publisher": "国家职业标准官方附件",
+                "scope": "contextual",
+                "url": "https://www.osta.org.cn/api/sys/downloadFile/decrypt?fileName=4eNsZIOv3WFNDfbnldJHeA%2F2024%2F4%2F29%2F087c3083dd73451da036957e8e64e9c8.pdf"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "省企业抽样工资价位，细类92洗衣师10/25/50/75/90分位2.81/3.19/3.40/3.93/5.02万元/年。",
+                  "省级企业样本非全国、非2026报价；原页未列该行样本量与薪酬组成，不推税后起薪或与美国严格等价。"
+                ],
+                "evidence_type": "official source",
+                "id": "hunan-wages",
+                "limitation": "省级企业样本非全国、非2026报价；原页未列该行样本量与薪酬组成，不推税后起薪或与美国严格等价。",
+                "market": "中国大陆湖南",
+                "name": "湖南2023年度企业薪酬调查：洗衣师",
+                "period": "2023年1—12月；2024-10-18发布",
+                "publisher": "湖南省人力资源和社会保障厅",
+                "scope": "contextual",
+                "url": "https://rst.hunan.gov.cn/xxgk/zfxxgknb/202410/t20241018_33479798.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "博恩特药业洗衣工1人、高中及以上，薪资栏原文4-6K。",
+                  "单招聘会公告，原行未明确币种、计薪周期、职责及当前是否仍招；不自行写成元/月，不推全国需求。"
+                ],
+                "evidence_type": "official source",
+                "id": "beijing-recruit",
+                "limitation": "单招聘会公告，原行未明确币种、计薪周期、职责及当前是否仍招；不自行写成元/月，不推全国需求。",
+                "market": "中国大陆北京",
+                "name": "密云人社2026年7月现场招聘：洗衣工",
+                "period": "2026-07-22发布，7-29招聘会",
+                "publisher": "北京市密云区人力资源和社会保障局",
+                "scope": "recruitment_proxy",
+                "url": "https://www.bjmy.gov.cn/zwgk/jy1/202607/t20260722_548726.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "清洗餐具、厨房及备餐设备器具。",
+                  "美国邻职范围，非互授资格。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-dish",
+                "limitation": "美国邻职范围，非互授资格。",
+                "market": "美国",
+                "name": "O*NET洗碗工定义",
+                "period": "本轮定义任务核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/35-9021.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "家庭或商业场所轻清洁、铺床、补布草、清房间走廊及吸尘，可含衣物分拣折叠。",
+                  "美国邻职，工作范围不限酒店客房。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-maid",
+                "limitation": "美国邻职，工作范围不限酒店客房。",
+                "market": "美国",
+                "name": "O*NET客房及家务清洁定义",
+                "period": "本轮定义任务核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "手工或机器压烫、成形物品。",
+                  "不等洗干全流程或相互授权。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-presser",
+                "limitation": "不等洗干全流程或相互授权。",
+                "market": "美国",
+                "name": "O*NET烫工定义",
+                "period": "本轮定义核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-6021.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "操作缝纫机连接、加固、装饰或缝制服装及非服装产品。",
+                  "不是泛指所有机器操作员，需缝纫设备工艺训练。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-sewing",
+                "limitation": "不是泛指所有机器操作员，需缝纫设备工艺训练。",
+                "market": "美国",
+                "name": "O*NET缝纫机操作工定义",
+                "period": "本轮定义核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/51-6031.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "场所重清洁、地面墙玻璃及垃圾处理；职业标题排客房与家务清洁。",
+                  "美国邻职范围，不按中文混合名称合并统计或授权。"
+                ],
+                "evidence_type": "official source",
+                "id": "adj-cleaner",
+                "limitation": "美国邻职定义，非中国资质。",
+                "market": "美国",
+                "name": "O*NET场所保洁员定义",
+                "period": "本轮定义与清洁任务核",
+                "publisher": "O*NET",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/37-2011.00"
               }
             ]
           },
@@ -8783,13 +9094,67 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "employment",
+              "$source": "adj-dish",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": {
+              "$source": "adj-dish",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "adj-maid",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-maid",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "adj-presser",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-presser",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            }
+          },
+          {
+            "href": {
+              "$source": "adj-cleaner",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "label": {
+              "$source": "adj-cleaner",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            }
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8867,16 +9232,16 @@
         "authority_links": [
           {
             "来源": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方資料",
+            "适用范围": "全球暴露",
             "链接": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8885,16 +9250,16 @@
           },
           {
             "来源": {
-              "$source": "source-pack-onet-custom",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方資料",
+            "适用范围": "通用风险",
             "链接": {
-              "$source": "source-pack-onet-custom",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8903,16 +9268,16 @@
           },
           {
             "来源": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "类型": "官方或研究来源",
-            "适用范围": "仅按来源原始口径使用",
+            "类型": "研究或官方資料",
+            "适用范围": "精确任务",
             "链接": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8928,7 +9293,7 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "信息整理",
+            "AI主要改变": "可试验整理，效果未建立",
             "仍由人负责": "责任与授权",
             "方向": "工序与追踪辅助"
           },
@@ -8946,18 +9311,18 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "不代表中国。",
+            "使用限制": "非洗衣师采用",
             "来源": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "全球任务暴露",
+            "结论": "暴露非裁撤日期",
             "链接": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8965,18 +9330,18 @@
             }
           },
           {
-            "使用限制": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+            "使用限制": "非职业效果",
             "来源": {
-              "$source": "source-pack-onet-custom",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "通用生成AI风险",
+            "结论": "核生成错误和信息风险",
             "链接": {
-              "$source": "source-pack-onet-custom",
+              "$source": "nist-genai-profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -8984,7 +9349,7 @@
             }
           },
           {
-            "使用限制": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+            "使用限制": "不等使用或AI采用",
             "来源": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -8992,10 +9357,29 @@
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "研究对象": "来源覆盖范围",
-            "结论": "仅支持有界判断",
+            "研究对象": "2025美国招聘软件",
+            "结论": "本轮O*NET热技术2025美国招聘列4软件：Excel、Office、Word各低于1%，Windows比例未给；提及不等使用或生成AI采用，未给比例不填0。",
             "链接": {
               "$source": "source-pack-onet-hot_tech",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            }
+          },
+          {
+            "使用限制": "总体预测非AI归因",
+            "来源": {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "研究对象": "51-6011总体就业",
+            "结论": "BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。",
+            "链接": {
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9027,14 +9411,14 @@
           {
             "回答": "不能从任务暴露推导岗位裁撤日期；本页不给出替代概率或时间表。",
             "来源": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "employment",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9045,14 +9429,14 @@
           {
             "回答": "不能。任务暴露、组织采用、生产率变化与岗位数量是四个不同测量对象，不能互相推导。",
             "来源": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ilo-genai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9061,16 +9445,16 @@
             "问题": "任务暴露能推导裁撤时间吗？"
           },
           {
-            "回答": "不能。护理标签与材质判定、化学品配比与设备安全处置必须由作业人员负责。",
+            "回答": "O*NET实际任务含检查分拣及依面料污渍选择处理；本页建议系统提示回核原标签和批准工艺，不能用提示证明安全或完成质量。",
             "来源": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "链接": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9123,8 +9507,8 @@
         "task_rows": [
           {
             "人的控制点": "核对原始记录与失败模式。",
-            "任务": "整理记录",
-            "工作方向": "工序与程序",
+            "任务": "核AC件数与待核",
+            "工作方向": "模拟订单记录",
             "当前变化": {
               "$item": "laundry-and-dry-cleaning-workers.ai-impact.ai-impact-table.7",
               "block": "ai-impact",
@@ -9144,7 +9528,7 @@
             "当前变化": "辅助信息汇总"
           },
           {
-            "人的控制点": "按法定授权和指挥链升级。",
+            "人的控制点": "真实标签工艺授权与质量检查另核。",
             "任务": "关键判断",
             "工作方向": "质量与检查",
             "当前变化": "不作自动授权"
@@ -9291,7 +9675,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助记录整理与信息汇总，但不能替代授权判断和最终责任。"
+          "常规设备程序、条码与订单追踪不等生成AI。证据不足：本轮未取得洗衣师生成AI采用率、提效或薪酬因果；可试验整理虚构件数记录，逐项回核原卡，不生成真实化学品配方或设备参数、不凭输出放行物品。"
         ],
         "heading": "洗衣师的工作对象与 AI 边界"
       },
@@ -9299,19 +9683,19 @@
         "boundary": "入口要求、执照、训练和最终责任由具体法域、机构或雇主核验。",
         "competence_ladder": [
           {
-            "description": "确认来源、权限和版本。",
+            "description": "AC订单和六件ID逐项核。",
             "stage": "输入核对"
           },
           {
-            "description": "遵守停止和升级条件。",
+            "description": "C1标签缺失单列待核，不归甲。",
             "stage": "过程控制"
           },
           {
-            "description": "形成可复核记录。",
+            "description": "草稿七件多一，真实处理状态未核。",
             "stage": "结果复盘"
           },
           {
-            "description": "在授权范围内扩展。",
+            "description": "实际作业另需培训、授权与质量验收。",
             "stage": "责任扩展"
           }
         ],
@@ -9346,75 +9730,93 @@
         "source_links": [
           {
             "href": {
-              "$source": "employment",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.0",
+            "id": "laundry-and-dry-cleaning-workers.review.profile",
             "label": {
-              "$source": "employment",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-6011.00 精确职业范围，不建立中国映射或资质结论。"
+            "scope": "通用JobZone"
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.1",
+            "id": "laundry-and-dry-cleaning-workers.review.bls-projections",
             "label": {
-              "$source": "nbs",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "职业安全与监管材料只说明安全与劳动边界方向，不构成事故率证据，也不外推到中国。"
+            "scope": "精确典型教育训练"
           },
           {
             "href": {
-              "$source": "source-pack-onet-custom",
+              "$source": "cn-laundry-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.2",
+            "id": "laundry-and-dry-cleaning-workers.review.cn-laundry-standard",
             "label": {
-              "$source": "source-pack-onet-custom",
+              "$source": "cn-laundry-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "FermatMind 任务量规只用于任务拆分，不测量采用率。"
+            "scope": "旧版鉴定范围"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "beijing-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.3",
+            "id": "laundry-and-dry-cleaning-workers.review.beijing-recruit",
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "beijing-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "单公告条件"
+          },
+          {
+            "href": {
+              "$source": "osha-perc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "id": "laundry-and-dry-cleaning-workers.review.osha-perc",
+            "label": {
+              "$source": "osha-perc",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "scope": "受训响应与维护"
           }
         ],
         "tracks": [
@@ -9422,7 +9824,7 @@
             "id": "entry-and-training",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
                 "next_moves": {
                   "$item": "laundry-and-dry-cleaning-workers.path.career-path-block.7",
                   "block": "path",
@@ -9441,33 +9843,33 @@
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "role": "入口与试验阶段 1"
+                "role": "AC输入核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
                 "next_moves": {
                   "$item": "laundry-and-dry-cleaning-workers.path.career-path-block.8",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 2"
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "纸面件数复核"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 3"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "纸面标签待核"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "入口与试验阶段 4"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "核真实岗位入口"
               }
             ],
             "title": "入口与在职训练"
@@ -9476,32 +9878,32 @@
             "id": "independent-processing",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 1"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "受训分拣核验"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 2"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "批准工艺范围"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 3"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "真实质量复核"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "独立交付阶段 4"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "异常记录升级"
               }
             ],
             "title": "独立处理"
@@ -9510,32 +9912,32 @@
             "id": "expanded-responsibility",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 1"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "新设备职责核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 2"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "带教责任核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 3"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "布草协调核对"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
-                "next_moves": "补足工具、资格和责任证据。",
-                "readiness_evidence": "保留可复核交付。",
-                "responsibility": "按岗位授权完成职责。",
-                "role": "扩大责任阶段 4"
+                "credentials": "技能鉴定、培训、录用和设备权限分开。",
+                "next_moves": "核目标雇主工序与停止条件，再承担获准任务。",
+                "readiness_evidence": "AC四作品；实际操作与质量须另经雇主验收。",
+                "responsibility": "AC仅纸面；真实洗干按培训和授权，不自行试剂或参数。",
+                "role": "维护权限核对"
               }
             ],
             "title": "扩大职责"
@@ -9691,17 +10093,17 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理。",
-        "evidence_scope": "依据本职业研究输入和来源注册表，不能跨法域外推。",
+        "evidence_scope": "美国干洗历史技术指南、加拿大酒店案例与本职业任务分开，不作中国法规或事故率。",
         "heading": "洗衣师的工作风险与边界",
         "risks": [
           {
             "affected_roles": "洗衣师",
-            "consequence": "可能造成皮肤与呼吸不适及火灾风险。",
+            "consequence": "健康危害与场所火灾须按具体物质和设备核，不能断言所有溶剂易燃。",
             "evidence_refs": [
-              "employment"
+              "laundry-and-dry-cleaning-workers.review.osha-perc"
             ],
             "id": "risk-1",
-            "mitigation": "按说明稀释与密闭存放、佩戴防护并保持通风、泄漏立即处置并报告。",
+            "mitigation": "先查具体化学品SDS及雇主风险评估，核通风、密闭与任务防护。石油基溶剂可燃或易燃，PERC不易燃却有健康危害；场所仍可能有其他可燃物。发现泄漏停止受影响作业、远离暴露区并通知责任人，按应急计划交受训授权人员处理，不让未训者进入清理；不能只靠气味判断安全。",
             "scenario": "溶剂或清洁剂皮肤与呼吸接触、通风不足或存放不当。",
             "title": {
               "$item": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.1",
@@ -9714,10 +10116,10 @@
             "affected_roles": "洗衣师",
             "consequence": "可能造成烫伤与夹伤。",
             "evidence_refs": [
-              "nbs"
+              "laundry-and-dry-cleaning-workers.review.osha-perc"
             ],
             "id": "risk-2",
-            "mitigation": "停机并确认隔离后清理、按说明操作设备、佩戴防护并设置警示。",
+            "mitigation": "按设备说明与培训操作，运行中不得打开干洗机门或维护；清理维护前由授权人员确认停止、冷却及适用能源隔离，防护异常暂停。不把按下停止键等同隔离蒸汽、电力等全部能源。",
             "scenario": "滚筒、压力机、蒸汽与烘干设备操作或清理时防护不足。",
             "title": {
               "$item": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.2",
@@ -9730,10 +10132,10 @@
             "affected_roles": "洗衣师",
             "consequence": "可能造成衣物损坏、赔付与信誉损失。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "laundry-and-dry-cleaning-workers.review.profile"
             ],
             "id": "risk-3",
-            "mitigation": "核对标签与材质、对不熟悉面料先小范围测试或请示、保留处理记录。",
+            "mitigation": "先核护理标签、材质和批准工艺；未知标签或面料停止待核，交受训责任人。O*NET列局部试验为职责，不授予未训者自行试溶剂或火焰；无许可不做小样化学试验，记录损伤与处理状态。",
             "scenario": "护理标签或材质误判、污渍处理或温度程序不当。",
             "title": {
               "$item": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.3",
@@ -9746,10 +10148,10 @@
             "affected_roles": "洗衣师",
             "consequence": "可能造成串色、错交与投诉。",
             "evidence_refs": [
-              "source-pack-onet-hot_tech"
+              "laundry-and-dry-cleaning-workers.review.profile"
             ],
             "id": "risk-4",
-            "mitigation": "按批次与标签分区、使用标识与记录、交付前复核件数。",
+            "mitigation": "用订单、件ID及批次标识核分区和件数，交付前再复核处理与质量状态；件数相符不等质量合格，AC的六件仅模拟记录。",
             "scenario": "不同客户或不同工序的物品混放混洗。",
             "title": {
               "$item": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.4",
@@ -9762,10 +10164,10 @@
             "affected_roles": "洗衣师",
             "consequence": "可能造成腰背与上肢劳损。",
             "evidence_refs": [
-              "source-pack-onet-industry"
+              "laundry-and-dry-cleaning-workers.review.ccohs-laundry"
             ],
             "id": "risk-5",
-            "mitigation": "交替姿势与合理摆放工位、使用辅助工具、按制度安排休息。",
+            "mitigation": "参考CCOHS酒店案例评估弯扭伸臂及搬运；改善工位与料车、减少重复搬运、核轮子维护和休息安排。相似任务轮换不保证消除风险，案例负重与人数不套所有岗位。",
             "scenario": "长时间站立、重复动作与弯腰扭转。",
             "title": {
               "$item": "laundry-and-dry-cleaning-workers.risk.career-risk-cards.5",
@@ -9778,10 +10180,11 @@
             "affected_roles": "洗衣师",
             "consequence": "可能造成伤害与赔付。",
             "evidence_refs": [
-              "source-pack-onet-localcert"
+              "laundry-and-dry-cleaning-workers.review.osha-perc",
+              "laundry-and-dry-cleaning-workers.review.profile"
             ],
             "id": "risk-6",
-            "mitigation": "先停机或隔离风险，把事实、影响与待决问题按门店制度报告或交由有经验人员处理。",
+            "mitigation": "发现泄漏或设备异常停止受影响作业、远离暴露并通知，按雇主应急计划交受训授权人员处置；未知标签待核，不自行试剂或火焰试验。",
             "scenario": "出现化学品泄漏、设备异常或不熟悉面料时仍继续处理。",
             "title": "授权与记录风险"
           }
@@ -9790,75 +10193,75 @@
         "source_links": [
           {
             "href": {
-              "$source": "employment",
+              "$source": "osha-perc",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.0",
+            "id": "laundry-and-dry-cleaning-workers.review.osha-perc",
             "label": {
-              "$source": "employment",
+              "$source": "osha-perc",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-6011.00 精确职业范围，不建立中国映射或资质结论。"
+            "scope": "2005干洗技术指导，不证明当前准用"
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "niosh-dryclean",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.1",
+            "id": "laundry-and-dry-cleaning-workers.review.niosh-dryclean",
             "label": {
-              "$source": "nbs",
+              "$source": "niosh-dryclean",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "职业安全与监管材料只说明安全与劳动边界方向，不构成事故率证据，也不外推到中国。"
+            "scope": "1997危害机制，非当前比例"
           },
           {
             "href": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ccohs-laundry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.2",
+            "id": "laundry-and-dry-cleaning-workers.review.ccohs-laundry",
             "label": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ccohs-laundry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "FermatMind 任务量规只用于任务拆分，不测量采用率。"
+            "scope": "加拿大单酒店工效案例"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.3",
+            "id": "laundry-and-dry-cleaning-workers.review.profile",
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "实际任务"
           }
         ]
       },
@@ -9866,14 +10269,14 @@
         "salary": {
           "bls_table": [
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "湖南2023洗衣师企业样本五分位",
+              "数值": "湖南人社2023企业抽样“洗衣师”工资价位10/25/50/75/90分位为2.81/3.19/3.40/3.93/5.02万元/年（2024-10-18发布）；省级企业样本非全国或2026报价，原页未列该行样本量和薪酬组成，不推税后或起薪。",
+              "说明": "省级职业样本和行业均值分列，非全国精确分布。"
             },
             {
-              "指标": "中国大陆薪资口径",
-              "数值": "暂无安全数值",
-              "说明": "有界检索未建立安全映射。"
+              "指标": "相关行业2025年均",
+              "数值": "居民服务非私营70226、私营52059元/年",
+              "说明": "省级职业样本和行业均值分列，非全国精确分布。"
             },
             {
               "指标": "中国大陆薪资口径",
@@ -9897,40 +10300,56 @@
             {
               "学历段": "证据不足：未建立安全映射（初中及以下）",
               "岗位方向": "按雇主与所在地规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "按学历的全国职业工资未建立；北京单公告高中及以上不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（高中/中专）",
               "岗位方向": "按雇主与所在地规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "按学历的全国职业工资未建立；北京单公告高中及以上不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（大专）",
               "岗位方向": "按雇主与所在地规定核验",
-              "说明": "不使用代理数字。"
+              "说明": "按学历的全国职业工资未建立；北京单公告高中及以上不等全国门槛。"
             },
             {
               "学历段": "证据不足：未建立安全映射（其他）",
               "岗位方向": "按具体雇主要求核验",
-              "说明": "不使用代理数字。"
+              "说明": "按学历的全国职业工资未建立；北京单公告高中及以上不等全国门槛。"
             }
           ],
           "china_industry_table": [
             {
               "行业": "居民服务、修理和其他服务业（行业门类，仅作代理参考）",
-              "需求": "暂无安全数值"
+              "需求": "未建立该行业洗衣师全国需求数量"
             },
             {
               "行业": "住宿和餐饮业（行业门类，仅作代理参考）",
-              "需求": "暂无安全数值"
+              "需求": "未建立该行业洗衣师全国需求数量"
             },
             {
               "行业": "其他未单列行业",
-              "需求": "暂无安全数值"
+              "需求": "未建立该行业洗衣师全国需求数量"
             }
           ],
           "china_intl": {
             "$join": [
+              {
+                "$source": "hunan-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "hunan-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+              },
+              "；",
               {
                 "$source": "nbs",
                 "block": "source-register",
@@ -9955,7 +10374,7 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "有界检索未建立安全数值；本项不是起薪、到手收入或个人报价。",
+          "china_open": "全国精确职业占位保；湖南省级年薪分位和NBS相关行业年均在附注分开，非起薪或个人报价。",
           "china_ref": {
             "$join": [
               {
@@ -9976,7 +10395,7 @@
             ],
             "separator": ""
           },
-          "china_salary_note": "中国大陆口径与美国、全球及具体单位分开，不能跨市场拼接。",
+          "china_salary_note": "证据不足：本轮未建立与美国51-6011.00严格对应的中国全国洗衣师工资分位或起薪。湖南人社2023企业抽样“洗衣师”工资价位10/25/50/75/90分位为2.81/3.19/3.40/3.93/5.02万元/年（2024-10-18发布）；省级企业样本非全国或2026报价，原页未列该行样本量和薪酬组成，不推税后或起薪。相关居民服务、修理和其他服务业2025城镇非私营70,226、私营52,059元/年为税前年均、排个体与自由职业，两类型分列不拼工资区间；行业参考不代职业工资。",
           "china_salary_table": [
             {
               "城市/区间": "证据不足：未建立安全映射",
@@ -10000,7 +10419,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "employment",
+                "$source": "hunan-wages",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10008,7 +10427,23 @@
               },
               "｜",
               {
-                "$source": "employment",
+                "$source": "hunan-wages",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "url",
+                "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+              },
+              "；",
+              {
+                "$source": "nbs",
+                "block": "source-register",
+                "copy_key": "career.item.published-sources",
+                "field": "name",
+                "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+              },
+              "｜",
+              {
+                "$source": "nbs",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10035,7 +10470,7 @@
         "authority_sources": {
           "$join": [
             {
-              "$source": "employment",
+              "$source": "wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
@@ -10043,7 +10478,23 @@
             },
             "｜",
             {
-              "$source": "employment",
+              "$source": "wages",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "url",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "；",
+            {
+              "$source": "bls-projections",
+              "block": "source-register",
+              "copy_key": "career.item.published-sources",
+              "field": "name",
+              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+            },
+            "｜",
+            {
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10059,7 +10510,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "employment",
+                  "$source": "wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10067,7 +10518,23 @@
                 },
                 "｜",
                 {
-                  "$source": "employment",
+                  "$source": "wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10083,7 +10550,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs",
+                  "$source": "wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10091,7 +10558,23 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs",
+                  "$source": "wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10107,7 +10590,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "employment",
+                  "$source": "wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10115,7 +10598,23 @@
                 },
                 "｜",
                 {
-                  "$source": "employment",
+                  "$source": "wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10131,7 +10630,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "nbs",
+                  "$source": "wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10139,7 +10638,23 @@
                 },
                 "｜",
                 {
-                  "$source": "nbs",
+                  "$source": "wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10155,7 +10670,7 @@
             "说明": {
               "$join": [
                 {
-                  "$source": "employment",
+                  "$source": "wages",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "name",
@@ -10163,7 +10678,23 @@
                 },
                 "｜",
                 {
-                  "$source": "employment",
+                  "$source": "wages",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "url",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "；",
+                {
+                  "$source": "bls-oews-methods",
+                  "block": "source-register",
+                  "copy_key": "career.item.published-sources",
+                  "field": "name",
+                  "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
+                },
+                "｜",
+                {
+                  "$source": "bls-oews-methods",
                   "block": "source-register",
                   "copy_key": "career.item.published-sources",
                   "field": "url",
@@ -10175,18 +10706,18 @@
           },
           {
             "指标": "就业 · 规模",
-            "数值": "约 202,600 人（2024 年）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "204,900人（2025）",
+            "说明": "BLS51-6011精确新期；非当前招聘规模、净新增或AI归因。"
           },
           {
             "指标": "就业 · 增长",
-            "数值": "快于平均 5%—6%（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "增长4.3%（2025—2035）",
+            "说明": "BLS51-6011精确新期；非当前招聘规模、净新增或AI归因。"
           },
           {
             "指标": "就业 · 空缺",
-            "数值": "约 31,900 个/年（2024—2034）",
-            "说明": "不能从军种宽口径外推。"
+            "数值": "28,200个/年（2025—2035）",
+            "说明": "BLS51-6011精确新期；非当前招聘规模、净新增或AI归因。"
           }
         ],
         "boundary": "美国精确职业与父级或代理口径必须分开；具体统计范围以来源标注为准，未取得的分位不等于零。",
@@ -10216,7 +10747,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "growth": "快于平均 5%—6%（2024—2034）",
+        "growth": "增长4.3%（2025—2035）",
         "heading": {
           "$item": "laundry-and-dry-cleaning-workers.us-salary.career-snapshot-secondary-locale.1",
           "block": "us-salary",
@@ -10229,12 +10760,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "O*NET 行业页，2026 年访问",
+        "industry_period": "O*NET Top industries (2024)，非访问年",
         "industry_rows": [
           {
             "industry": "其他服务（除公共管理）",
             "median": "暂无安全数值",
-            "note": "O*NET 行业页显示约占 49%；未提供行业工资数值。"
+            "note": "O*NET2024分布49%，未列该行业工资。"
           },
           {
             "industry": "住宿与餐饮服务（约 20%）",
@@ -10247,9 +10778,9 @@
             "note": "未单列行业工资，不使用代理数字。"
           },
           {
-            "industry": "其他行业（含行政与支持服务，约 15%）",
+            "industry": "其余行业（15%仅剩余计算）",
             "median": "暂无安全数值",
-            "note": "未单列，不使用代理数字。"
+            "note": "100%−49%−20%−16%=15%；未列具体行业，不断言行政支持业占比。"
           }
         ],
         "industry_value_label": "行业值",
@@ -10279,11 +10810,11 @@
         ],
         "median": "34,890 美元/年（2025 年 5 月，精确职业口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "BLS 就业预测 2024—2034（经 O*NET 呈现，2026 年访问）",
+        "outlook_period": "BLS2025—2035新期；O*NET2024—2034旧期分列",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "官方时薪",
           "解释"
         ],
         "wage_heading": {
@@ -10389,12 +10920,12 @@
         },
         "outlook_evidence": [
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "洗衣师",
+            "geography": "美国",
+            "horizon": "2025—2035",
+            "interpretation": "BLS精确51-6011新期2025就业204,900→2035年213,700、增长4.3%；表列净增8,700，年均空缺28,200，含增长与替换，不等净新增或当前招聘。端点和净变化均按表列取整，不另用端点差改写。",
+            "limitation": "范围和期间分开，不作AI归因或个人保证。",
+            "metric": "新期总体就业",
+            "occupation_scope": "51-6011精确职业",
             "value": {
               "$item": "laundry-and-dry-cleaning-workers.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10403,97 +10934,97 @@
             }
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "洗衣师",
-            "value": "暂无安全数值"
+            "geography": "美国",
+            "horizon": "2024—2034",
+            "interpretation": "O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。",
+            "limitation": "范围和期间分开，不作AI归因或个人保证。",
+            "metric": "旧期总体就业",
+            "occupation_scope": "51-6011精确职业",
+            "value": "O*NET旧期2024就业202,600→2034年213,500、增长5%（details类别5%—6%）、年均空缺31,900；与新期分列，不相加。"
           },
           {
-            "geography": "来源覆盖范围",
-            "horizon": "当前来源时期",
-            "interpretation": "招聘样本、就业规模和职位空缺必须分别解释。",
-            "limitation": "不能作为个人就业保证。",
-            "metric": "市场信号",
-            "occupation_scope": "洗衣师",
-            "value": "暂无安全数值"
+            "geography": "中国北京密云",
+            "horizon": "2026-07-22公告",
+            "interpretation": "密云人社2026-07-22公告、7-29招聘会：博恩特药业洗衣工1人、高中及以上、薪资栏原文“4-6K”；该行未明确币种计薪周期、具体职责或本轮仍在招，不补写元/月。",
+            "limitation": "范围和期间分开，不作AI归因或个人保证。",
+            "metric": "单招聘会样本",
+            "occupation_scope": "博恩特药业洗衣工",
+            "value": "1人；薪资原文4-6K，周期和当前岗位状态未核"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
             "href": {
-              "$source": "employment",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.0",
+            "id": "laundry-and-dry-cleaning-workers.review.bls-projections",
             "label": {
-              "$source": "employment",
+              "$source": "bls-projections",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "O*NET 51-6011.00 精确职业范围，不建立中国映射或资质结论。"
+            "scope": "新期精确预测"
           },
           {
             "href": {
-              "$source": "nbs",
+              "$source": "outlook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.1",
+            "id": "laundry-and-dry-cleaning-workers.review.outlook",
             "label": {
-              "$source": "nbs",
+              "$source": "outlook",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "职业安全与监管材料只说明安全与劳动边界方向，不构成事故率证据，也不外推到中国。"
+            "scope": "旧期分列"
           },
           {
             "href": {
-              "$source": "source-pack-onet-custom",
+              "$source": "beijing-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.2",
+            "id": "laundry-and-dry-cleaning-workers.review.beijing-recruit",
             "label": {
-              "$source": "source-pack-onet-custom",
+              "$source": "beijing-recruit",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "FermatMind 任务量规只用于任务拆分，不测量采用率。"
+            "scope": "过期招聘会非实时空岗"
           },
           {
             "href": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "adj-sewing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "id": "laundry-and-dry-cleaning-workers.display.source.3",
+            "id": "laundry-and-dry-cleaning-workers.review.adj-sewing",
             "label": {
-              "$source": "source-pack-onet-hot_tech",
+              "$source": "adj-sewing",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "scope": "国家统计局行业工资为行业口径，未建立与该精确职业对应的全国分布。"
+            "scope": "缝纫专项邻职"
           }
         ],
         "transitions": [
@@ -10513,47 +11044,47 @@
             "target_href": "/zh/career/jobs/dishwashers",
             "target_slug": "dishwashers",
             "target_title": "洗碗工",
-            "transition_distance": "需补证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           },
           {
             "capability_gaps": "保洁流程与地面设备",
-            "shared_capabilities": "清洁与卫生作业基础",
+            "shared_capabilities": "工单、过程记录、质量和安全基础，不表示已有目标设备工艺",
             "target_href": "/zh/career/jobs/janitors-and-cleaners-except-maids-and-housekeeping-cleaners",
             "target_slug": "janitors-and-cleaners-except-maids-and-housekeeping-cleaners",
             "target_title": "清洁员清洁工、客房清洁员清洁工",
-            "transition_distance": "较近，需补保洁流程证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           },
           {
             "capability_gaps": "客房标准与布草更换流程",
-            "shared_capabilities": "布草与客房物品处理",
+            "shared_capabilities": "工单、过程记录、质量和安全基础，不表示已有目标设备工艺",
             "target_href": "/zh/career/jobs/maids-and-housekeeping-cleaners",
             "target_slug": "maids-and-housekeeping-cleaners",
             "target_title": "客房清洁员清洁工",
-            "transition_distance": "较近，需补客房标准证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           },
           {
             "capability_gaps": "面料定型与烫伤防护要求",
-            "shared_capabilities": "蒸汽与整烫设备操作",
+            "shared_capabilities": "工单、过程记录、质量和安全基础，不表示已有目标设备工艺",
             "target_href": "/zh/career/jobs/pressers-textile-garment-and-related-materials",
             "target_slug": "pressers-textile-garment-and-related-materials",
             "target_title": "烫工",
-            "transition_distance": "较近，需补整烫技术证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           },
           {
             "capability_gaps": "缝纫设备操作与工艺",
-            "shared_capabilities": "重复工序与质量意识",
+            "shared_capabilities": "工单、过程记录、质量和安全基础，不表示已有目标设备工艺",
             "target_href": "/zh/career/jobs/sewing-machine-operators",
             "target_slug": "sewing-machine-operators",
             "target_title": "机器操作员",
-            "transition_distance": "中等，需补缝纫工艺证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           },
           {
             "capability_gaps": "餐厨卫生与洗涤剂安全",
-            "shared_capabilities": "餐具清洗与热水设备使用",
+            "shared_capabilities": "与第一项同为洗碗工，仅餐厨专项核对，不新增第六职业",
             "target_href": "/zh/career/jobs/dishwashers",
             "target_slug": "dishwashers",
             "target_title": "洗碗工",
-            "transition_distance": "较近，需补餐厨卫生证据"
+            "transition_distance": "须补目标工艺与责任证据，不量化转岗距离"
           }
         ]
       },
@@ -10586,15 +11117,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "riasec",
             "label": "RIASEC",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
             "answer": {
@@ -10605,15 +11136,15 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "big-five",
             "label": "大五人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
             "answer": {
@@ -10624,57 +11155,57 @@
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "mbti",
             "label": "MBTI",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "enneagram",
             "label": "九型人格",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "iq",
             "label": "认知能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           },
           {
             "answer": "需要结合真实任务、责任边界和可复核交付继续核对。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
-            "evidence_level": "工作样本",
+            "evidence_level": "编辑建议：纸面任务记录非绩效预测",
             "id": "eq",
             "label": "情绪能力",
             "question": "用工作样本核对，而不是用标签替代判断。",
             "signals": [
-              "可观察任务",
-              "过程记录"
+              "件数核对",
+              "待核记录"
             ],
-            "watchout": "不能据此推导录用、资格或表现。"
+            "watchout": "模拟作品不证明实际洗干或化学品设备操作能力。"
           }
         ],
         "boundary": "RIASEC、人格和能力工具不能替代资格、医疗、安全或雇主判断。",
@@ -10698,7 +11229,7 @@
           {
             "direction": "化学品安全使用",
             "fit_signals": "愿意按说明配比、存放并佩戴防护。",
-            "watchouts": "泄漏须立即处置。"
+            "watchouts": "泄漏按应急计划交受训授权人员，未训者远离通知、不进入清理。"
           },
           {
             "direction": "设备操作与点检",
@@ -10724,35 +11255,35 @@
         },
         "questions": [
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "喜欢哪些任务？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "能否承受工作节奏？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "是否愿意记录过程？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "能否在不确定时升级？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "是否理解授权边界？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "能否复盘失败？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "是否有可观察交付？"
           },
           {
-            "answer": "用安全工作样本和责任边界继续核对。",
+            "answer": "AC核六件及草稿多一、C1待核，全部实际未加工未交付；记录反馈，实际岗位另核培训授权。",
             "question": "下一步试验是什么？"
           }
         ],
@@ -10795,91 +11326,6 @@
         "source_links": [
           {
             "href": {
-              "$source": "authority",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "authority",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "employment",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "employment",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "jobzone",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "nbs",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "outlook",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "outlook",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
               "$source": "profile",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
@@ -10893,194 +11339,58 @@
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "RC和工作情境"
           },
           {
             "href": {
-              "$source": "related",
+              "$source": "osha-perc",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "label": {
-              "$source": "related",
+              "$source": "osha-perc",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "干洗技术控制"
           },
           {
             "href": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ccohs-laundry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "label": {
-              "$source": "source-pack-onet-custom",
+              "$source": "ccohs-laundry",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "酒店工效案例"
           },
           {
             "href": {
-              "$source": "source-pack-onet-details",
+              "$source": "cn-laundry-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
             "label": {
-              "$source": "source-pack-onet-details",
+              "$source": "cn-laundry-standard",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "work",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "label": {
-              "$source": "work",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "旧版技能范围"
           }
         ]
       },
@@ -11147,21 +11457,21 @@
         "eeat_signals": {
           "author": "FermatMind research workflow",
           "source": {
-            "$source": "employment",
+            "$source": "profile",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "name",
             "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
           },
           "updated_at": {
-            "$source": "employment",
+            "$source": "profile",
             "block": "source-register",
             "copy_key": "career.item.published-sources",
             "field": "period",
             "item": "laundry-and-dry-cleaning-workers.source-register.published.1"
           }
         },
-        "note": "来源说明｜本页按来源原始范围与限制分别核对：O*NET 51-6011.00 提供精确职业身份、任务、工作活动与工作情境（兴趣代码 RC、Job Zone 1—2 级、Bright Outlook，主要行业其他服务（除公共管理）约 49%）；美国数值为 O*NET 呈现的 BLS 精确职业口径（2024 年就业约 202,600 人；2024—2034 增长快于平均（5%—6%）、预计年均空缺约 31,900 个；2025 年年薪第 10 分位 27,440 美元、第 25 分位 30,360 美元、中位 34,890 美元、第 75 分位 37,560 美元、第 90 分位 43,190 美元，小时中位 16.78 美元）；职业安全与监管材料只说明安全与劳动边界方向，不构成事故率证据，也不外推到中国；FermatMind 任务量规只用于任务拆分，不测量采用率；国家统计局行业工资为行业口径，未建立与该精确职业对应的中国大陆全国工资分布，本页不提供中国职业工资数字。所有来源均不建立中国映射、中国工资或资质授权。"
+        "note": "来源说明｜O*NET51-6011身份RC/JobZone/Bright、2024行业49/20/16、2025五工资保；BLS2025—2035新期增长4.3/annual28200与旧期5/31900分列。OEWS激励生产奖金含，非生产及加班福利自雇排。湖南2023洗衣师企业样本五分位2.81/3.19/3.40/3.93/5.02万元年、NBS相关行业2025非私70226/私52059年均及北京公告原文4-6K各保范围，非全国或个人报价。旧技能标准与当前雇主权限分开。OSHA2005/NIOSH1997/CCOHS酒店案例为有界技术资料非中国现行法规全表；ILO/NIST通用非职业采用效果。AC仅纸面六件分组、缺标签待核，不洗干配药设参或交付。"
       },
       "work_context_block": {
         "$item": "laundry-and-dry-cleaning-workers.profile.work-context-block.5",
@@ -11171,6 +11481,10 @@
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "洗衣工序方向",
+      "interface.fit.interest_code_heading": "官方兴趣代码 RC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11259,6 +11573,42 @@
         "source_refs": [
           "wages"
         ]
+      },
+      {
+        "derivation": null,
+        "display_value": "预测增长4.3%（2025—2035，51-6011精确职业）",
+        "fact_id": "us-growth-2025-2035",
+        "market": "美国",
+        "measure": "projected employment change",
+        "occupation_scope": "51-6011 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "就业204,900人（2025，51-6011精确职业）",
+        "fact_id": "us-employment-2025",
+        "market": "美国",
+        "measure": "employment base",
+        "occupation_scope": "51-6011 exact occupation",
+        "period": "2025",
+        "source_refs": [
+          "bls-projections"
+        ]
+      },
+      {
+        "derivation": null,
+        "display_value": "年均职位空缺28,200个（2025—2035，含替换）",
+        "fact_id": "us-openings-2025-2035",
+        "market": "美国",
+        "measure": "projected annual openings",
+        "occupation_scope": "51-6011 exact occupation",
+        "period": "2025—2035",
+        "source_refs": [
+          "bls-projections"
+        ]
       }
     ]
   },
@@ -11272,7 +11622,7 @@
     "badges": [
       "洗衣师 · 洗涤工序、化学品与作业安全",
       "来源范围 · 统计口径 · 人工复核",
-      "中国大陆精确职业工资缺口按证据保留"
+      "中国全国精确工资缺口；湖南省级参考分列"
     ],
     "metrics": [
       {
@@ -11283,27 +11633,27 @@
       },
       {
         "availability": "available",
-        "fact_ref": "us-growth-2024-2034",
+        "fact_ref": "us-growth-2025-2035",
         "key": "us_growth",
-        "label": "美国就业增长（2024—2034，快于平均）"
+        "label": "美国就业增长（2025—2035）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-employment-2024",
+        "fact_ref": "us-employment-2025",
         "key": "us_employment",
-        "label": "美国在岗人数（2024）"
+        "label": "美国在岗人数（2025）"
       },
       {
         "availability": "available",
-        "fact_ref": "us-openings-2024-2034",
+        "fact_ref": "us-openings-2025-2035",
         "key": "us_openings",
-        "label": "美国年均职位空缺（2024—2034）"
+        "label": "美国年均职位空缺（2025—2035）"
       },
       {
         "availability": "missing",
         "fact_ref": null,
         "key": "china_pay",
-        "label": "中国大陆精确职业工资（未取得）"
+        "label": "中国全国精确职业工资（缺口）"
       }
     ]
   },
@@ -11318,7 +11668,7 @@
       "text": "洗衣师职业判断：洗涤工序、化学品与作业安全"
     }
   },
-  "source_content_sha256": "17084c131cd9b375ecc64ce44ef9e9055bbd12824e202015e9488cebd31f84c3",
+  "source_content_sha256": "28d375f209f5a956ab80716cfbdbee6323cf59273b160c604465aaf8bfbea845",
   "subject": {
     "canonical_slug": "laundry-and-dry-cleaning-workers",
     "name": "洗衣师",

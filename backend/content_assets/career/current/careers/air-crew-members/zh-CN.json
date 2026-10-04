@@ -1287,7 +1287,7 @@
         "status": "pending_mapping"
       },
       "item:air-crew-members.path.entry-portfolio.1": {
-        "status": "pending_mapping"
+        "status": "mapped"
       },
       "item:air-crew-members.path.entry-role-comparison.1": {
         "status": "mapped"
@@ -23350,7 +23350,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "三个可自测的替代性准备：把一份虚构任务清单拆解为飞行前、飞行中与飞行后三个阶段的检查项，并标出必须由授权人员确认的环节；用模拟数据完成一次重量与平衡核算表，说明每一项对安全的意义；写出一次通信中断与一次应急下降的处置顺序。这些练习只用于了解任务结构，不能替代军队的选拔、训练与保密审查。（编辑建议，不是录用标准。）"
+              "做一次AC28-V1虚构纸面练习：依据本页给定输入分别核算V1/V2质量、力矩与位置，登记S2异常、S3缺复核及接收版本未确认；按八分规准独立评分并交四作品。它只练数据、版本与交接，不能验证真实航空操作、体检或军职资格。"
             ]
           },
           "id": "air-crew-members.quick-decision.fit-decision-checklist.2",
@@ -23380,13 +23380,16 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "本页对应 O*NET 55-3011.00，属美国军人职业，O*NET 明确说明不采集军人职业数据，因此本页不提供该职业的工资、就业与职位空缺数字（BLS 职业就业与工资统计与职业展望手册同样不发布军人职业数据）；军人待遇按军衔与军龄的薪级制度与津贴构成，不按职业工资发布。中国大陆侧，军人的服役与待遇按《中华人民共和国军人地位和权益保障法》等规定执行，国家统计局发布的行业工资为民用口径、不含军人，本页仅作转业后民用就业的参照。民用航空机组成员（如民航驾驶员、乘务员）是不同体系的民用职业，本页不与之混同。本页不构成法律或政策意见。"
+              "证据不足：未取得55-3011本职细分统计、中国具体待遇及本职AI替代/编制因果资料，已核的美军一般制度与中国法框架如下。 本页对应美国军职O*NET55-3011，不能等同民航驾驶员或乘务员。BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。美国基本薪资按军衔和服役时长，另有符合条件的额外待遇。中国大陆《军人地位和权益保障法》第33–34条规定待遇保障：军官和军士实行工资制度，义务兵实行供给制生活待遇制度，结构、标准及调整办法由中央军委规定；特定任务、地区和岗位按法条从优。它不提供机组成员具体待遇数字或招募门槛。NBS城镇单位行业工资仅为民用背景，不能估算军人待遇。"
             ]
           },
           "id": "air-crew-members.quick-decision.fermat-decision-card.6",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "oews",
+            "cnclass",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23452,7 +23455,7 @@
               "空中加油系统｜操作与维护｜操作并维护空中加油系统，按程序完成对接与输油相关检查。",
               "检查与维护｜飞行前中后｜执行机上设备的飞行前、飞行中与飞行后检查，记录状态与异常。",
               "载荷与重量平衡｜数据核算与核对｜核算旅客、货物、燃油与应急特种设备的重量与平衡数据，核对后交接确认。",
-              "任务执行与应急｜空投与应急处置｜实施货物与人员空投，按程序执行通信中断、设备故障与应急下降等处置。"
+              "任务执行与应急｜空投与安全程序｜按实际授权与手册执行货物人员空投及航空器安全应急程序；本页只描述任务，不提供具体动作。"
             ]
           },
           "id": "air-crew-members.profile.responsibilities-block.1",
@@ -23467,7 +23470,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "职业属性｜O*NET 55-3011.00 为军人职业，O*NET 不采集军人职业数据，权威信息以军队发布为准。\n工作环境｜军用航空器机舱与任务舱内，涉及高空、振动、噪声与加压环境，并按任务要求穿戴飞行装备。\n任务节奏｜任务与训练按计划与命令安排，存在长时间待命、夜航与跨时区执行。\n安全责任｜任务系统、武器与加油系统操作与应急处置直接关系飞行安全与任务成败。\n纪律与保密｜按军队纪律、指挥链与保密规定执行，任务信息与设备参数受保密约束。\n体能要求｜需长期维持体检与体能标准，并接受飞行相关的生理与生存训练。\n数据敏感度｜重量与平衡、燃油与载荷数据必须核算并核对，误差会直接影响飞行安全。\n团队协作｜机组按岗位固定分工，需与机长、其他机组成员及地面保障协同。\n职业发展｜按军队任职、军衔与专业岗位体系发展，与民用职业的晋升与资格体系不同。"
+              "职业属性｜未核本职情境分布及具体训练要求；O*NET 55-3011.00 为军人职业，O*NET 不采集军人职业数据，权威信息以军队发布为准。\n工作环境｜编辑情境提示：在军用航空器任务环境中工作，具体噪声、振动、加压与装备要求按机型岗位核，无本职分布。\n任务节奏｜编辑情境提示：任务与训练可能有待命、夜间或跨区域安排，具体工时与频率未核，按岗位确认。\n安全责任｜任务系统、武器与加油系统操作与应急处置直接关系飞行安全与任务成败。\n纪律与保密｜按军队纪律、指挥链与保密规定执行，任务信息与设备参数受保密约束。\n体能要求｜证据不足：未核本职具体体检、体能、生理或生存训练要求；以当期官方岗位条件为准。\n数据敏感度｜重量与平衡、燃油与载荷数据必须核算并核对，误差会直接影响飞行安全。\n团队协作｜机组按岗位固定分工，需与机长、其他机组成员及地面保障协同。\n职业发展｜按军队任职、军衔与专业岗位体系发展，与民用职业的晋升与资格体系不同。"
             ]
           },
           "id": "air-crew-members.profile.work-context-block.1",
@@ -23497,12 +23500,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册设有「军人职业（Military Careers）」总览页，说明军队区分士兵与军官路径：士兵承担军事行动执行与装备操作维护，军官负责计划、组织与指挥，部分技术岗位由准尉担任（如陆军航空兵）。BLS 不在职业展望手册与职业就业与工资统计（OEWS）中发布军人职业的工资、就业与职位空缺数据，因此本页不提供该类数字。"
+              "BLS军人总览区分enlisted与officer：前者执行行动、装备操作维护及部分基层监督，后者计划组织指挥，准尉可承担技术专业职责。其资料是美国军队一般说明，不能直接生成中国本职业任职门槛。BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。"
             ]
           },
           "id": "air-crew-members.profile.onet-structured-fields-block.2",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -23526,12 +23530,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "中国大陆侧，军人的服役与待遇按《中华人民共和国军人地位和权益保障法》（2021 年 8 月 1 日施行）等规定执行：国家建立军人待遇保障制度与相对独立的军人工资待遇制度，对执行特殊任务和在特殊岗位工作的军人待遇保障从优。军人待遇不属于国家统计局城镇单位就业人员工资统计的范围；本页中国侧列出的行业数字为民用口径，仅作转业后民用就业的参照。"
+              "中国大陆《军人地位和权益保障法》第33–34条规定待遇保障：军官和军士实行工资制度，义务兵实行供给制生活待遇制度，结构、标准及调整办法由中央军委规定；特定任务、地区和岗位按法条从优。它不提供机组成员具体待遇数字或招募门槛。国家统计局2025城镇单位工资是法人单位行业背景，不是本军职待遇。"
             ]
           },
           "id": "air-crew-members.profile.onet-structured-fields-block.3",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -23555,11 +23560,13 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "本页不提供军人职业的就业规模与增长预测：O*NET 明确不采集军人职业数据，BLS 职业就业与工资统计与职业展望手册均不发布军人职业的就业与空缺统计。军队的人员需求由国防与军队建设需要决定，不适用民用劳动力市场预测口径。"
+              "BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。本页不推算人员需求或承诺录用。"
             ]
           },
           "id": "air-crew-members.profile.onet-structured-fields-block.4",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -23584,12 +23591,12 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "《中华人民共和国军人地位和权益保障法》第二条规定，本法所称军人是指在中国人民解放军服现役的军官、军士、义务兵等人员；第四章「待遇保障」规定国家建立军人待遇保障制度与相对独立的军人工资待遇制度，并对执行特殊任务和在特殊岗位工作的军人从优保障。中国人民武装警察部队服现役的警官、警士和义务兵等人员适用本法。军人服役、选拔与任职按军队有关规定执行。"
+              "《军人地位和权益保障法》第2条所称军人为解放军现役军官、军士、义务兵等；第69条规定武警现役警官、警士、义务兵等适用。中国大陆《军人地位和权益保障法》第33–34条规定待遇保障：军官和军士实行工资制度，义务兵实行供给制生活待遇制度，结构、标准及调整办法由中央军委规定；特定任务、地区和岗位按法条从优。它不提供机组成员具体待遇数字或招募门槛。"
             ]
           },
           "id": "air-crew-members.profile.onet-structured-fields-block.5",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23689,14 +23696,15 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "机组成员（Air Crew Members，美方对应 O*NET 55-3011.00）属军人职业，在军用航空器上执行作战、侦察、运输与搜救任务的飞行中职责：操作机上通信与探测设备、武器与防御系统、空中加油系统，执行设备检查、重量与平衡核算、货物与人员空投以及飞行安全与应急程序。O*NET 明确说明不采集军人职业数据，权威信息以军队发布为准，因此本页不提供该职业的工资、就业与空缺数字。中国大陆侧，军人（含机组成员）按《中华人民共和国军人地位和权益保障法》与军队有关规定服役并享有待遇保障，军人不在国家统计局城镇单位工资统计范围内；民用航空驾驶员与乘务员属民用职业，与本页军职不是同一职业。"
+              "证据不足：未核本职情境分布及具体体检、体能、训练与招募条件；已核任务身份与统计范围如下。 机组成员（Air Crew Members，美国O*NET55-3011）在军用航空器上执行作战、侦察、运输和搜救任务的机上职责：通信探测、武器防御、空中加油系统操作维护，设备检查、重量平衡核算、空投及安全应急程序。O*NET不采集军人职业调查数据。BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。中国具体对应岗位须按实际军队任职体系核对，不能由美国代码作一对一映射；军职和民航岗位分别核资格与待遇。"
             ]
           },
           "id": "air-crew-members.profile.definition-block.11",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "oews",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23913,7 +23921,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "选拔与体检：身高、视力、听力、心肺与前庭功能等标准，以及政治考核与心理测试要求。"
+              "编辑核对项：按目标军种、岗位与当期官方公告核体检、能力及审查要求；本页未核具体项目或阈值，不把一般清单当统一选拔标准。"
             ]
           },
           "id": "air-crew-members.profile.career-quick-answers-block.26",
@@ -23942,12 +23950,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "教育与训练路径：军官通常经军队院校培养或地方高校毕业后选拔，军士多经专业技术训练。"
+              "BLS美国军队一般说明：士兵通常需高中或同等凭证，军官通常需学士，具体军种及专业另核；这些不是55-3011统一学历分布或中国门槛。证据不足：本页未核中国机组具体岗位当年招募与教育训练条件。"
             ]
           },
           "id": "air-crew-members.profile.career-quick-answers-block.28",
           "source_refs": [
-            "onet",
+            "bls",
             "onet"
           ],
           "type": "prose"
@@ -23957,12 +23965,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "军人服役与待遇按《军人地位和权益保障法》与军队规定执行，不适用普通劳动合同管理。"
+              "中国大陆军人服役、纪律与待遇须核军人法及所属单位规定，不把民用合同经验直接套用军职。"
             ]
           },
           "id": "air-crew-members.profile.career-quick-answers-block.29",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -23986,13 +23994,12 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "涉及特殊岗位与特殊任务时待遇保障从优，具体按军队规定。"
+              "法条仅对特定作战、重大非战争任务、艰苦边远地区及特殊岗位规定待遇从优，不推定所有任务均适用。"
             ]
           },
           "id": "air-crew-members.profile.career-quick-answers-block.31",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -24079,10 +24086,10 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 技术清单（无匹配条目说明）",
+                "entity": "O*NET军职调查范围",
                 "id": "link-5",
                 "relation": "career.authority",
-                "url": "https://www.onetonline.org/link/hot_tech/55-3011.00"
+                "url": "https://www.onetonline.org/link/summary/55-3011.00"
               }
             ]
           },
@@ -24101,14 +24108,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "比较顺序建议：先确认任务类型（运输与空投／侦察与电子战／搜救与特种），再看机型与岗位授权，最后确认军种与服役路径。三个方向共享飞行程序、设备检查与应急处置能力；转向民用航空岗位需要补足民航法规、民用执照与运行经历，且军职经历不能直接折算为民用执照，须按民航主管部门规定办理。"
+              "编辑比较：先区分运输空投、通信探测及搜救任务，再核实际机型、岗位授权和军种路径。三个任务组不是所有部队统一岗位分类。转向民用岗位须核法域、目标资质与真实履历；军职经历不自动给执照，也不能断言一概不认定。美国14 CFR61.73对符合条件的军方飞行员有申请民用证照/等级规则，不自动适用于所有机组成员。"
             ]
           },
           "id": "air-crew-members.direction-comparison.adjacent-career-comparison-table.8",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "faa-military"
           ],
           "type": "prose"
         },
@@ -24150,7 +24157,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "重心在运输与空投程序、载荷核算与装卸协同；任务系统相对固定。"
+              "编辑比较：侧重运输与空投程序、载荷核算和装卸协同；具体设备及任务复杂程度另核。"
             ]
           },
           "id": "air-crew-members.direction-comparison.adjacent-career-comparison-table.11",
@@ -24209,7 +24216,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "重心在传感器与电子系统操作，对设备原理与保密要求更高。"
+              "编辑比较：侧重通信探测设备原理、信息核对与保密；不据此排名各方向难度。"
             ]
           },
           "id": "air-crew-members.direction-comparison.adjacent-career-comparison-table.15",
@@ -24268,7 +24275,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "任务环境与气象条件更复杂，应急处置与协同要求最高。"
+              "编辑比较：搜救可能涉及不同气象与协同对象，应按具体任务核程序和训练；本页无统一“要求最高”的比较证据。"
             ]
           },
           "id": "air-crew-members.direction-comparison.adjacent-career-comparison-table.19",
@@ -24527,118 +24534,118 @@
           "data": {
             "entries": [
               {
-                "entity": "O*NET 55-3011.00 机组成员职业摘要（军人职业）",
+                "entity": "O*NET55-3011军职身份与任务",
                 "id": "link-1",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 军人职业说明与任务描述",
+                "entity": "BLS军人职业总览",
                 "id": "link-2",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 任务描述（军人职业）",
+                "entity": "O*NET55-3011任务与调查范围",
                 "id": "link-3",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 技术清单（无匹配条目）",
+                "entity": "BLS美国军队一般教育训练",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 职业说明（军人职业）",
+                "entity": "BLS OEWS55类军职覆盖边界",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 机组成员职业摘要",
+                "entity": "O*NET军职调查范围",
                 "id": "link-6",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 军人职业数据说明",
+                "entity": "O*NET55-3011职业说明及延伸入口",
                 "id": "link-7",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "BLS 职业展望手册：军人职业（数据范围说明）",
+                "entity": "O*NET55-3011军职身份与任务",
                 "id": "link-8",
+                "relation": "career.source",
+                "url": "https://www.onetonline.org/link/summary/55-3011.00"
+              },
+              {
+                "entity": "BLS军队结构与宽类人数",
+                "id": "link-9",
                 "relation": "career.source",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 自定义职业档案",
-                "id": "link-9",
-                "relation": "career.source",
-                "url": "https://www.onetonline.org/link/custom/55-3011.00"
-              },
-              {
-                "entity": "O*NET 55-3011.00 任务与职责描述",
+                "entity": "BLS OEWS调查覆盖与缺少指标",
                 "id": "link-10",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 职业说明（任务清单）",
+                "entity": "BLS美国一般教育训练",
                 "id": "link-11",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 军人职业与数据边界",
+                "entity": "BLS美国待遇制度",
                 "id": "link-12",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 机组成员职业摘要",
+                "entity": "O*NET军职任务描述（非AI实效研究）",
                 "id": "link-13",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 技术清单（无匹配条目）",
+                "entity": "BLS美国基本薪资与额外待遇",
                 "id": "link-14",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/hot_tech/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 军人职业说明",
+                "entity": "BLS美国士兵军官与训练",
                 "id": "link-15",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 任务描述",
+                "entity": "O*NET任务描述（编辑候选辅助环节）",
                 "id": "link-16",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 职业摘要（任务与职责）",
+                "entity": "O*NET军职范围（资格细则见路径）",
                 "id": "link-17",
                 "relation": "career.source",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 军人职业数据说明",
+                "entity": "O*NET军职调查范围（编辑缺口说明）",
                 "id": "link-18",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 任务清单与记录要求",
+                "entity": "BLS一般教育训练（非具体招募标准）",
                 "id": "link-19",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               }
             ]
           },
@@ -24782,7 +24789,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "结论：AI 与自动化会改变传感器数据处理、状态监测与辅助决策等环节，但没有证据表明它会取代机组成员的任务操作与安全责任，本页也不据此推测军人岗位数量变化。技术能力、组织采用与编制结果要分开判断；武器与加油系统操作、应急处置、载荷核算与飞行安全责任仍由受过授权训练的机组承担。"
+              "证据不足：未取得55-3011机组成员AI采用率、替代比例或实际效果研究。以下仅为编辑条件场景：资料整理、状态提示与计算可能获得工具辅助，是否可靠和采用须另核；不预测岗位消失或编制变化。武器、加油及应急操作按真实手册和授权，纸面示例不产生操作资格。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.18",
@@ -24832,8 +24839,7 @@
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.21",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24842,13 +24848,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明军队士兵／军官结构与 BLS 不发布军人职业工资与就业数据。"
+              "用于美国军队一般职责、宽类人数和待遇制度；就业预测只覆盖民用劳动力，不是本职AI效果来源。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.22",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -24885,7 +24890,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国军人地位和权益保障法》"
+              "BLS军人职业总览：美国教育与训练框架"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.25",
@@ -24899,7 +24904,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆军人范围与待遇保障制度的框架说明；不含具体待遇标准。"
+              "用于美国一般教育训练说明，不是中国招募条件或机组专门训练大纲。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.26",
@@ -24913,12 +24918,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "BLS OEWS常见问题：55类军职不在调查内"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.27",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24927,12 +24932,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于中国大陆民用行业与岗位类别工资参照，不含军人。"
+              "用于说明OEWS覆盖范围；不支持军人待遇金额、AI效果或全部军事资料不存在。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.28",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -24941,7 +24946,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-3011.00 技术清单（无匹配条目）"
+              "O*NET55-3011职业调查范围"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.29",
@@ -24955,7 +24960,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于说明该军人职业无招聘技术条目，不表示技术采用率。"
+              "军人职业不采集O*NET调查数据，不能由此推所有技术采用率为零。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.30",
@@ -24983,7 +24988,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用于职业概述与相关民用职业入口。"
+              "职业说明及延伸入口；链接导航不等于已核每个军种现行要求。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.32",
@@ -25012,7 +25017,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "传感器数据处理与链路管理可辅助提升态势整合速度。"
+              "编辑条件场景：允许的数据处理或链路记录可获工具辅助，实际准确性和效果未核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.34",
@@ -25042,7 +25047,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "状态监测与故障预警可辅助维护安排。"
+              "编辑条件场景：状态提示可能协助人工检查，实际故障预警效度未核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.36",
@@ -25072,7 +25077,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查单数字化与重量平衡计算可自动化并减少抄录错误。"
+              "编辑条件场景：检查单和计算记录可数字化；不能假定已减少抄录或核算错误。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.38",
@@ -25116,7 +25121,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "无可用的工资、就业、教育分布与工作情境统计；本页不使用民用岗位数据替代。"
+              "O*NET不采集军职调查数据，未提供本职兴趣/学历/情境分布；BLS另有宽类军队人数与待遇制度，不能填成本职细分指标。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.41",
@@ -25172,7 +25177,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "总览为定性说明，不含军人职业的工资与就业数字；不能据此推断个人待遇或岗位数量。"
+              "任务描述不验证AI效果，不能据此推个人待遇或本職规模。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.45",
@@ -25191,7 +25196,7 @@
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.46",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25205,7 +25210,7 @@
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.47",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25214,12 +25219,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "军队区分士兵与军官路径：士兵承担军事行动执行与装备操作维护，军官负责计划、组织与指挥，部分技术岗位由准尉担任。BLS 不发布军人职业的工资、就业与空缺统计。"
+              "BLS区分士兵、军官及准尉一般职责，并发布军队宽类人数与待遇制度；就业预测只覆盖民用劳动力，未提供55-3011细分前景指标。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.48",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25228,12 +25233,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "说明数据不可得的具体范围；不以估计值或相邻民用职业数据替代。"
+              "OEWS排除55类军职，不调查职位空缺；军队宽类人数或民用岗位不能代填本职业工资分位。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.49",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25242,12 +25247,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-3011.00 军人职业数据说明"
+              "BLS OEWS常见问题"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.50",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25256,12 +25261,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该职业不采集数据的范围"
+              "美国职业工资就业调查的覆盖范围"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.51",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25270,12 +25275,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 页面提示该职业为军人职业、不采集数据，且其工资页与行业页不存在（访问返回 404）；技术清单亦无匹配条目。"
+              "OEWS的SOC职业组列表明确55-0000军职不在调查内；该调查也不提供任何职业的职位空缺或就业预测。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.52",
           "source_refs": [
-            "onet"
+            "oews"
           ],
           "type": "prose"
         },
@@ -25284,12 +25289,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "法律只规定制度框架，不含具体待遇标准；军人待遇不属于国家统计局城镇单位工资统计范围。"
+              "美国一般教育训练与本职招募门槛不同；不能外推中国要求。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.53",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25298,12 +25303,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国军人地位和权益保障法》"
+              "BLS军人总览：教育与训练"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.54",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25312,12 +25317,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆军人的范围与待遇保障制度"
+              "美国军队一般入伍及教育训练说明"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.55",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25326,12 +25331,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "第二条规定军人指在中国人民解放军服现役的军官、军士、义务兵等人员；第四章规定国家建立军人待遇保障制度与相对独立的军人工资待遇制度，对执行特殊任务和在特殊岗位工作的军人从优保障。"
+              "BLS说明各军种、士兵和军官条件不同：通常士兵需高中或同等凭证，军官通常需学士；初训后有专业训练。本页不以此生成55-3011统一门槛。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.56",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25340,12 +25345,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "该统计为民用口径、不含军人；本页仅作转业后民用就业参照，不代表军人待遇。"
+              "美国军人待遇制度不是职业工资中位，不支持中国待遇金额。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.57",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25354,12 +25359,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》"
+              "BLS军人总览：待遇制度"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.58",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25368,12 +25373,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "中国大陆民用单位与行业工资口径"
+              "美国军队基本薪资与额外待遇的制度口径"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.59",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25382,12 +25387,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "2025 年全国城镇非私营单位 129,441 元/年、私营单位 71,590 元/年，各行业门类与岗位类别分别发布（如交通运输、仓储和邮政业 133,981 元/年）。"
+              "BLS说明美国基本薪资按军衔和服役时长，特定任务或资格可能获得额外待遇及住房保障；本页未计算个人金额，也不按职业工资分位发布。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.60",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25396,7 +25401,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "技术层面，传感器数据融合、设备状态监测、检查单数字化与重量平衡计算可被部分自动化，输出可用于辅助态势判断与减少抄录错误。这些结果仍需机组按手册与授权核实后才能用于任务执行。"
+              "证据不足：未取得本职AI具体效果验证。以下是编辑条件讨论：记录整理、状态提示和重量计算可作为候选辅助环节；实际可靠性、适用设备与人工核对要求另核，不能当已列装能力。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.61",
@@ -25426,7 +25431,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供该类推断。O*NET 与 BLS 均不采集军人职业数据，军队编制由国防与军队建设需要决定，不适用民用劳动力市场预测口径；任务暴露程度、实际采用与编制数量是三种不同的判断，不能相互替代。"
+              "证据不足：未取得本职AI采用与编制变化因果证据，不由任务变化推人员变化。BLS总览发布军队宽类人数和待遇制度，但未提供55-3011工资分位、单职规模及年均空缺，就业预测覆盖民用劳动力；OEWS不调查55类军职。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.63",
@@ -25441,7 +25446,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "没有证据支持“被取代”。任务系统的辅助功能可能增强态势整合与状态监测，但任务操作授权、武器与加油系统操作、应急处置与飞行安全责任仍由受过授权训练的机组承担；本页也不据此推测军人编制变化。"
+              "证据不足：未取得本职AI替代比例或编制因果研究。可能的工具辅助只是编辑讨论，不能断言一定取代或永远不能取代；实际系统与权限按所属军队规定。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.64",
@@ -25471,13 +25476,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "本页不提供该职业的工资数字。该职业为美国军人职业，O*NET 明确不采集军人职业数据，BLS 也不发布军人职业工资与就业统计；军人待遇按军衔与军龄的薪级制度与津贴构成，不按职业工资发布。"
+              "本页未取得55-3011职业工资分位。美国军人基本薪资按军衔、服役时长，另有符合条件的额外待遇；OOH有制度说明，OEWS不调查55类军职，不用民航薪资代填。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.66",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25491,8 +25495,7 @@
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.67",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25501,13 +25504,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国军人地位和权益保障法》规定国家建立军人待遇保障制度与相对独立的军人工资待遇制度，并对执行特殊任务和在特殊岗位工作的军人从优保障；具体标准按军队规定执行，不属于国家统计局城镇单位工资统计范围，本页不提供数字。"
+              "美国BLS一般说明区分士兵、军官与准尉职责，通常士兵需高中或同等凭证、军官通常需学士；军种与专业要求不同。它不是55-3011具体招募公告，也不生成中国学历门槛。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.68",
           "source_refs": [
-            "onet",
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25516,12 +25518,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "《中华人民共和国军人地位和权益保障法》（2021-08-01 施行）"
+              "BLS军人总览：美国一般教育训练"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.69",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -25530,7 +25532,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "传感器数据处理与态势整合、设备状态监测与故障预警、检查单数字化与重量平衡计算等辅助环节；受影响程度取决于装备体系、保密要求与指挥链对人机分工的规定。"
+              "编辑候选环节：记录整理、状态提示及重量计算；本页未核相对任务暴露排序或效果，不称“最容易”，实际适用性按设备和权限核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.70",
@@ -25560,13 +25562,13 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "不能。该职业为军人职业，按军队选拔、训练与授权管理；民用航空执照与运行经历属民用体系，两者不互相替代，转换须按各自主管部门规定办理。"
+              "民用执照不自动赋予军队岗位授权；实际资格认可按法域和具体岗位另核，不凭机组名称判断所有转换规则。关于美国军方飞行员民用申请的61.73限定与实际法条，见本页路径和来源登记。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.72",
           "source_refs": [
             "onet",
-            "onet"
+            "faa-military"
           ],
           "type": "prose"
         },
@@ -25575,11 +25577,12 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "O*NET 55-3011.00 与 BLS 军人职业总览（编辑说明）"
+              "O*NET军职身份与任务；具体资格认定见路径"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.73",
           "source_refs": [
+            "faa-military",
             "onet"
           ],
           "type": "prose"
@@ -25930,7 +25933,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据处理可辅助态势整合，但操作授权与判断仍由机组负责。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.97",
@@ -25987,7 +25990,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "状态监测可辅助维护安排，但不改变操作授权与交战规则。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.101",
@@ -26044,7 +26047,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "系统监测可提示状态，但对接与输油程序仍由机组执行。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.105",
@@ -26101,7 +26104,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "检查单数字化可减少漏项，但异常判断仍需人工。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.109",
@@ -26158,7 +26161,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "计算可自动化，但数据来源核对与签字责任仍由人承担。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.113",
@@ -26215,7 +26218,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "辅助系统无法替代现场判断与机组协同。"
+              "编辑条件场景：辅助提示可供复核，不能根据本页任务描述确定现场判断或机组协同的未来自动化边界。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.117",
@@ -26271,7 +26274,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "数据回放可辅助复盘，但改进措施仍需人员决定。"
+              "编辑条件场景：允许范围内的记录、计算或状态提示可能获工具辅助；本页未核实际采用或效果，任务输出仍须按真实程序复核。"
             ]
           },
           "id": "air-crew-members.ai-impact.ai-impact-table.121",
@@ -26314,7 +26317,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.7",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26323,12 +26326,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "民用单位口径，不含军人；国家统计局按城镇 5 人及以上法人单位统计，为税前工资总额。"
+              "国家统计局2025城镇非私营单位总体年均，城镇5人及以上法人单位、税前；不是军职工资或个人实发。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.8",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26342,7 +26345,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.9",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26351,12 +26354,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "民用私营单位口径，不含军人；与非私营单位统计范围不同。"
+              "2025城镇私营单位总体年均；与非私营范围不同，不能直接比较个人待遇。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.10",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26370,7 +26373,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.11",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26379,12 +26382,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "民航运输等相关民用岗位的行业门类口径，可作为转业后民用就业参照，不代表军人待遇。"
+              "2025城镇非私营交通运输、仓储和邮政业年均；包括多个行业，不是民航机组或转业起薪。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.12",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26398,7 +26401,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.13",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26407,12 +26410,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空制造等相关民用岗位的行业门类口径，仅作参照。"
+              "2025城镇非私营制造业年均；不是航空制造或维修职业工资。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.14",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26426,7 +26429,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.15",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26435,12 +26438,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "航空研发与技术服务等民用岗位口径，仅作参照。"
+              "2025城镇非私营科研和技术服务业年均；不是航空研发岗位工资。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.16",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26454,7 +26457,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.17",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26463,12 +26466,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "党政机关与事业单位口径，可作为转业后进入公共部门工作的参照。"
+              "2025城镇非私营公共管理、社会保障和社会组织年均；不是所有党政机关/事业单位或转业待遇。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.18",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26482,7 +26485,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.19",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26491,12 +26494,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "民用岗位类别口径（专业技术人员），与本职业的军人岗位不可直接对比。"
+              "2025规模以上企业专业技术人员岗位类别年均；不是本军职工资。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.20",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26510,7 +26513,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.21",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26519,12 +26522,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "民用岗位类别口径，仅作参照。"
+              "2025规模以上企业办事人员和有关人员类别年均；不能推定转业收入。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.22",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26533,7 +26536,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "自动化改变的是机上辅助环节（态势整合、状态监测、检查单与重量计算）。军人职业不适用市场化的工资因果推断；本页不提供军人待遇数字，中国侧数字均为民用口径，只用于了解转业后可能面对的民用行业工资水平。"
+              "证据不足：未取得本职AI导致待遇变化的因果研究，不从工具讨论或民用行业背景推薪酬变化。中国军官军士与义务兵待遇制度不同，具体金额须按适用规定核。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.23",
@@ -26548,12 +26551,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "本页中国侧列出的是国家统计局民用口径的行业门类与岗位类别年平均工资，不含军人；军人待遇按《军人地位和权益保障法》与军队规定执行，不属于该统计范围。不得把民用行业数字当作本职业待遇。"
+              "中国大陆《军人地位和权益保障法》第33–34条规定待遇保障：军官和军士实行工资制度，义务兵实行供给制生活待遇制度，结构、标准及调整办法由中央军委规定；特定任务、地区和岗位按法条从优。它不提供机组成员具体待遇数字或招募门槛。NBS仅城镇法人单位行业与规上岗位类别背景，不是本职待遇统计。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.24",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26592,7 +26596,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "以军队官方招募信息为准，本页不含军人学历统计；本行为路径说明而非工资数据。"
+              "证据不足：未核中国本职当年具体招募公告及学历条件；本行为可了解的路径提示，不是统一门槛。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.27",
@@ -26637,7 +26641,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "具体要求按军队当年招募计划与政治考核标准执行。"
+              "证据不足：未核中国本职当年直招条件或岗位开放情况，需核军队正式公告，不能仅由学历推入选。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.30",
@@ -26682,7 +26686,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "培养与分配按军队制度执行，与民用航空院校体系不同。"
+              "军队院校专业与任职分配需按具体公告核；本页不承诺毕业即可成为机组成员。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.33",
@@ -26727,7 +26731,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "需通过体检、专业改训与岗位授权，具体按军队规定执行。"
+              "现役改训是否开放及标准须核所属单位，未据本页取得岗位授权。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.36",
@@ -26866,8 +26870,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.45",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26881,8 +26884,7 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.46",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26891,12 +26893,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.47",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26905,13 +26907,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局数据覆盖城镇 5 人及以上法人单位的民用就业人员，不含军人，也不含个体工商户与自由职业者；工资为税前工资总额。该表与本职业待遇无关，仅作转业参照。"
+              "NBS统计覆盖城镇5人及以上法人单位，不含个体工商户与自由职业者，按税前年工资总额；行业与岗位类别无本军职专门统计，本页不以此估算待遇。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.48",
           "source_refs": [
-            "onet",
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26934,12 +26935,13 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：军人待遇按《中华人民共和国军人地位和权益保障法》与军队规定的薪级与津贴制度执行，不按职业发布公开工资统计，本页不提供数字。"
+              "证据不足：未取得中国本职可匹配岗位、身份与期间的待遇金额。第34条军官军士工资与义务兵供给生活待遇分开，具体标准由中央军委规定，本页不以民用行业工资代填。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.50",
           "source_refs": [
-            "onet"
+            "cnclass",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26962,12 +26964,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局按行业门类与单位类型发布民用工资（如交通运输、仓储和邮政业 133,981 元/年），但不含军人，仅作转业后民用就业参照。"
+              "NBS2025城镇非私营交通运输、仓储和邮政业133981元/年是广义行业背景，不是民航或军队机组薪资。"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.52",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27009,8 +27011,8 @@
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.55",
           "source_refs": [
-            "onet",
-            "onet"
+            "cnclass",
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27019,12 +27021,12 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+              "国家统计局《2025 年城镇单位就业人员年平均工资情况》｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.57",
           "source_refs": [
-            "onet"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -27047,7 +27049,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "不适用：军人待遇按军衔与军龄的薪级制度，不适用 BLS 职业工资统计"
+              "未提供本职工资中位"
             ]
           },
           "id": "air-crew-members.china-salary.career-snapshot-primary-locale.59",
@@ -27069,13 +27071,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 55-3011.00 机组成员职业摘要（军人职业，不采集数据）｜https://www.onetonline.org/link/summary/55-3011.00；BLS 职业展望手册：军人职业（不发布军人职业工资与就业数据）｜https://www.bls.gov/ooh/military/military-careers.htm；O*NET 55-3011.00 职业详细资料（任务与数据边界说明）｜https://www.onetonline.org/link/details/55-3011.00"
+              "O*NET55-3011军职身份与任务｜https://www.onetonline.org/link/summary/55-3011.00；BLS军人总览：宽类人数与待遇制度｜https://www.bls.gov/ooh/military/military-careers.htm；BLS OEWS覆盖说明｜https://www.bls.gov/oes/oes_ques.htm"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.8",
           "source_refs": [
-            "onet",
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27090,6 +27092,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.9",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27104,6 +27108,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.10",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27118,6 +27124,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.11",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27132,6 +27140,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.12",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27146,6 +27156,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.13",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27155,11 +27167,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册的军人职业页说明军队区分士兵与军官路径，并明确不发布军人职业工资；军人待遇按军队薪级与津贴制度确定。；BLS 职业展望手册：军人职业｜https://www.bls.gov/ooh/military/military-careers.htm"
+              "BLS军人总览说明美国基本薪资按军衔与服役时长及额外待遇；未提供55-3011工资中位，不能由制度推职业分位。；BLS军人职业总览｜https://www.bls.gov/ooh/military/military-careers.htm"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.14",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27174,6 +27188,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.15",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27188,6 +27204,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.16",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27202,6 +27220,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.17",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27216,6 +27236,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.18",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27225,11 +27247,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不适用：BLS 不发布军人职业的就业规模"
+              "不适用：本页未取得55-3011细分规模（BLS有军队宽类人数）"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.19",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27239,12 +27263,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 不发布军人职业的就业统计；军队人员规模由国防与军队建设需要决定，不由劳动力市场调查口径测定。；BLS 职业展望手册：军人职业｜https://www.bls.gov/ooh/military/military-careers.htm"
+              "BLS总览有军队宽类人数，不是55-3011细分规模；OEWS不调查55类军职，本页不代填。；BLS军人职业总览｜https://www.bls.gov/ooh/military/military-careers.htm"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.20",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27259,6 +27284,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.21",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27273,6 +27300,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.22",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27282,11 +27311,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不适用：BLS 不发布军人职业的职位空缺统计"
+              "未提供55-3011年均职位空缺"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.23",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27296,12 +27327,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 不发布军人职业的职位空缺统计；招募与补员按军队年度计划执行。；BLS 职业展望手册：军人职业｜https://www.bls.gov/ooh/military/military-careers.htm"
+              "本页未取得55-3011年均职位空缺；OEWS不调查空缺，BLS就业预测只覆盖民用劳动力，不用招募计划代填。；BLS军人总览｜https://www.bls.gov/ooh/military/military-careers.htm"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.24",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27311,12 +27343,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本节不包含任何工资或就业数字，因为该职业属军人职业：O*NET 明确不采集军人职业数据，BLS 职业就业与工资统计与职业展望手册均不发布军人职业的工资、就业与空缺数据。任何把民用航空岗位工资当作本职业待遇的写法都是错误口径。"
+              "BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。本节保留未提供状态，不能由宽类人数或军衔薪级推本职分位。"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.25",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27331,7 +27364,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.26",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27341,11 +27375,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "O*NET 在该页明确标注为军人职业且不采集数据；其工资页与行业页不存在（访问返回 404），技术清单亦无匹配条目。因此不存在可核实的工资分位或就业规模。"
+              "证据不足：本页未取得55-3011本職工资分位、单职规模或年均空缺。O*NET不采集军职调查数据，OEWS不调查55类军职；BLS总览另有宽类人数和待遇制度。访问失败不能证明所有公开数据不存在，不用相邻民用职业代填。"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.27",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27360,6 +27396,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.28",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27374,6 +27412,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.29",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27388,6 +27428,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.30",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27402,6 +27444,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.31",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27416,7 +27460,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.32",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27431,6 +27476,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.33",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27445,6 +27492,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.34",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27459,6 +27508,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.35",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27468,11 +27519,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "该职业属军人职业，O*NET 明确不采集数据；不存在可核实的行业工资中位数。"
+              "未提供55-3011按行业工资中位；OEWS不调查55类军职，O*NET无军职调查数据，不能由民用行业数字估算本职待遇。"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.36",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27487,6 +27540,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.37",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27501,6 +27556,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.38",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27515,6 +27572,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.39",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27529,6 +27588,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.40",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27543,6 +27604,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.41",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27557,6 +27620,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.42",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27571,6 +27636,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.43",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27585,6 +27652,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.44",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27599,6 +27668,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.45",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27613,7 +27684,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.46",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27623,11 +27695,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本页不提供时薪或年薪换算：军人待遇不按小时或按年职业工资发布，任何换算都会造成错误理解。"
+              "本页无55-3011时薪与年薪统计，不作两者换算；军人基本薪资按军衔与服役时长等制度核，不能把民用工资乘工时推成军职待遇。"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.47",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27637,11 +27711,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "本节数字来源为 O*NET 55-3011.00 的军人职业说明与 BLS 职业展望手册的军人职业总览，两者均不包含工资与就业数据；本页未引用 OEWS 或职业展望手册的任何职业工资数字。"
+              "本节依据O*NET职业调查范围、BLS军人总览及OEWS覆盖说明；无本职工资分位数值。BLS另有军队宽类人数与待遇制度，不能称两来源完全无军人信息。"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.48",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27656,7 +27732,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.49",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27666,11 +27743,13 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "不适用：军人待遇按军衔与军龄的薪级制度，不适用 BLS 职业工资统计"
+              "未提供本职工资中位"
             ]
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.50",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27685,7 +27764,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.51",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27700,6 +27780,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.52",
           "source_refs": [
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27714,7 +27796,8 @@
           },
           "id": "air-crew-members.us-salary.career-snapshot-secondary-locale.53",
           "source_refs": [
-            "onet",
+            "bls",
+            "oews",
             "onet"
           ],
           "type": "prose"
@@ -27844,7 +27927,7 @@
                 "entity": "《中华人民共和国军人地位和权益保障法》",
                 "id": "link-19",
                 "relation": "career.authority",
-                "url": "https://yncn.gov.cn/info/9654/8710920.htm"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202106/t20210611_2411278.html"
               },
               {
                 "entity": "O*NET 55-3011.00 军人职业说明（无情境调查数据）",
@@ -27885,7 +27968,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "军人职业无 O*NET 兴趣数据；兴趣量表也不用于军队选拔。"
+              "本军职无O*NET兴趣调查；本页兴趣测试只供自我探索，不能替代官方选拔要求。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.3",
@@ -27929,7 +28012,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格等量表属自我探索工具：尽责性与情绪稳定性常与高可靠性岗位相关，但这是群体层面的相关性，不能用于军队选拔判断。"
+              "证据不足：未取得本机组职业大五人格与绩效关系或选拔分数线研究。编辑建议观察注意力、如实记录及协作，不由尽责性或情绪稳定性分数推个人胜任。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.6",
@@ -27944,7 +28027,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是军队选拔依据。"
+              "本页未核本职人格筛选效度和官方使用情况，不把自测结果当选拔依据。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.7",
@@ -28003,7 +28086,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 不是职业匹配工具，也没有证据支持“某种类型最适合机组成员”；军人职业的适配由军队选拔与训练体系判定。"
+              "证据不足：未取得本职MBTI类型分布或职业筛选效度研究；本页只作个人偏好描述，不能由类型推入选或训练表现。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.10",
@@ -28031,7 +28114,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "MBTI 缺乏用于职业筛选的预测效度证据。"
+              "本页未取得本职MBTI筛选效度证据；不宣称所有军队一概不用任何相关心理工具。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.11",
@@ -28103,7 +28186,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "九型人格同样属于自我探索工具，不能判断你是否适合这个职业；军队选拔关注身体、心理、政治考核与专业潜质。"
+              "证据不足：未取得本职九型人格与任务表现或招募判断的有效研究；可整理个人反应偏好，不据标签给胜任结论。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.14",
@@ -28117,7 +28200,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格类型学不是职业胜任力证据。"
+              "本页九型人格自测不是军职任职凭证；真实标准需核所属军队。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.15",
@@ -28160,7 +28243,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "IQ 与数理推理：任务系统操作与重量平衡核算需要数理基础与快速判断，但没有统一的 IQ 门槛；军队以文化考试与专业训练考核为准。"
+              "证据不足：未取得本职按法域与具体岗位区分的IQ录用阈值。本页不说阈值一定不存在；编辑建议用AC28-V1练核数与复核，真实文化/能力选拔另核。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.18",
@@ -28218,7 +28301,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力：长时间任务、轮班与应急处置需要情绪稳定与团队协同，但情商不是选拔硬指标；关键是在压力下按程序执行并保持机组协同。"
+              "证据不足：未取得本职EI效度研究、招募阈值或使用规定。编辑建议观察压力下沟通与协作，不能声称情商一定不是硬指标或由分数保证表现。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.22",
@@ -28233,7 +28316,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪与沟通能力属于可训练技能，不是筛选分数。"
+              "本页EI自测不是任职资格；可把沟通观察转为练习目标，不据一次分数筛选。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.23",
@@ -28336,7 +28419,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需按民航主管部门规定取得执照与训练，军职经历不能直接折算。"
+              "民用资格需按法域、目标岗位与真实履历核；军职经历不自动给执照，也不一概拒绝认定。美国61.73规则针对符合条件的军方飞行员，不能仅凭本机组名称适用。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.30",
@@ -28471,7 +28554,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需补民用维修资质与机型培训。"
+              "编辑转向比较：先核目标维修职责、当地资质和实际机型训练；不同岗位要求不同，本页不称所有航电或机务岗位均需同一种执照。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.39",
@@ -28564,7 +28647,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "需按民航维修资质要求培训并取证。"
+              "编辑转向比较：先核目标维修职责、当地资质和实际机型训练；不同岗位要求不同，本页不称所有航电或机务岗位均需同一种执照。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.45",
@@ -28609,7 +28692,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "可以。外向者在机组沟通与对外协调上有优势，但同样需要严格按程序执行。"
+              "外向者可以了解本职，但本页未核外向带来绩效优势的研究；需看实际沟通、程序执行与官方要求。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.48",
@@ -28624,7 +28707,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "没有。MBTI 不是职业匹配工具，也不是军队选拔依据。"
+              "本页未取得本职最适合的MBTI类型资料；不由类型给录用或胜任结论。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.49",
@@ -28653,7 +28736,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "人格分数与工作表现的相关性有限，也不是军队选拔依据；请用体检、考核与训练表现判断。"
+              "证据不足：未取得本职人格分数预测绩效的有效研究；本页用AC28-V1观察记录核对，真实任职仍按官方标准。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.51",
@@ -28667,7 +28750,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "数理与物理基础有帮助，但没有统一的 IQ 门槛；可通过文化考试准备与专业训练建立。"
+              "本页未核具体岗位IQ阈值，不能说统一门槛不存在；可先练AC28-V1纸面核算，实际文化和能力考核另核。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.52",
@@ -28682,7 +28765,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "情绪智力有帮助但不是硬指标；更重要的是在压力与疲劳下仍按程序执行并保持协同。"
+              "本页未核本职EI阈值或招募使用规定；沟通与协同可作编辑观察，但不能由自测代替官方考核。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.53",
@@ -28755,7 +28838,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "做一次替代性准备：按公开资料整理一份任务三阶段检查清单、用模拟数据完成一次重量与平衡核算、写出一次应急情况的处置顺序；并逐步开展体能训练。这不构成招募测试，也不能替代军队选拔。"
+              "做一次AC28-V1虚构纸面练习：依据本页给定输入分别核算V1/V2质量、力矩与位置，登记S2异常、S3缺复核及接收版本未确认；按八分规准独立评分并交四作品。它只练数据、版本与交接，不能验证真实航空操作、体检或军职资格。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.58",
@@ -28797,7 +28880,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：军人职业，用于说明士兵／军官结构与数据不发布范围。"
+              "BLS军人总览用于美国一般职责、宽类人数与待遇制度；未提供本职细分统计。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.61",
@@ -28825,7 +28908,7 @@
           "copy_key": "career.item.personality-fit-block",
           "data": {
             "paragraphs": [
-              "O*NET 55-3011.00 职业摘要，用于职业身份与任务清单。"
+              "BLS军人总览用于美国一般职责与待遇制度，不能用于人格类型或录用结论。"
             ]
           },
           "id": "air-crew-members.fit.personality-fit-block.63",
@@ -28902,16 +28985,16 @@
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "entity": "O*NET 55-3011.00 任务描述",
+                "entity": "BLS职业展望手册：军人职业",
                 "id": "link-3",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
+                "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "《中华人民共和国军人地位和权益保障法》",
+                "entity": "O*NET55-3011军职任务摘要",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://yncn.gov.cn/info/9654/8710920.htm"
+                "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
                 "entity": "BLS 职业展望手册：军人职业",
@@ -28920,20 +29003,18 @@
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "entity": "O*NET 55-3011.00 职业摘要",
+                "entity": "《中华人民共和国军人地位和权益保障法》",
                 "id": "link-6",
                 "relation": "career.source",
-                "url": "https://www.onetonline.org/link/summary/55-3011.00"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202106/t20210611_2411278.html"
               }
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.7",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cnclass"
           ],
           "type": "links"
         },
@@ -28974,15 +29055,14 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "证据范围：O*NET 55-3011.00 为军人职业，O*NET 明确不采集军人职业数据，本页据此不引用工资、就业与工作情境统计；BLS 职业展望手册的军人职业总览用于说明军队士兵／军官结构与数据不发布范围；《中华人民共和国军人地位和权益保障法》用于中国大陆军人范围与待遇保障框架说明。具体安全与操作规定以军队文件为准。风险清单为编辑归纳，不含发生概率。"
+              "证据范围：O*NET55-3011只提供军职任务说明，不采集兴趣、工资或工作情境调查。BLS军人总览提供军队宽类人数、一般职责与待遇制度；未提供55-3011细分指标，民用预测不覆盖军职。中国军人法仅支持身份、纪律与待遇框架。风险清单为编辑归纳，无发生率；具体操作规定按所属单位文件。"
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.10",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29096,7 +29176,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "遭遇通信中断时未按应急程序切换备份手段，也未及时报告机长。"
+              "编辑风险示例：发生异常后未按适用手册报告与记录；本页不提供备份通信切换等真实操作程序。"
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.18",
@@ -29243,7 +29323,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "疲劳与缺氧、气压变化等生理应激会降低判断与操作能力。"
+              "编辑风险示例：长时间任务或环境变化可能影响注意力，应由所属单位按实际休息、医疗及任务规定核；本页无本职发生率或个体健康判断。"
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.28",
@@ -29362,12 +29442,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：军人职业（士兵／军官结构与数据不发布范围）。"
+              "BLS军人总览：一般职责、宽类人数与待遇制度；不提供本职细分统计或安全规程。"
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.36",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29390,12 +29470,12 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "本页编辑归纳（条件性建议），不代表军队统一规程或强制流程。"
+              "BLS一般职责与任务环境用于背景；风险及控制建议由编辑归纳，不代表军队统一规程。"
             ]
           },
           "id": "air-crew-members.risk.career-risk-cards.38",
           "source_refs": [
-            "onet"
+            "bls"
           ],
           "type": "prose"
         },
@@ -29409,7 +29489,7 @@
           },
           "id": "air-crew-members.risk.career-risk-cards.39",
           "source_refs": [
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         }
@@ -29435,45 +29515,45 @@
             "column_labels": [
               "入门方向",
               "初期任务",
-              "军队认可能力的凭证",
+              "编辑建议观察的任务证据",
               "无经验可出示的准备证据",
               "与相邻岗位的区别"
             ],
             "rows": [
               [
                 "运输与空投任务方向",
-                "完成入伍与基础训练，随机组见习检查与装载流程。",
-                "能在带教下完成检查单项目并说明安全要点。",
-                "公开资料整理的检查清单与模拟载荷核算表（不使用涉密信息）。",
+                "编辑任务示例：完成入伍与基础训练，随机组见习检查与装载流程。",
+                "编辑观察：能在带教下完成检查单项目并说明安全要点。",
+                "AC28-V1四份纸面作品，仅显示核算、版本与交接方法，不证明真实操作或任职。",
                 "与商业飞行员不同：执行军事运输与空投任务，按军队体系管理。"
               ],
               [
                 "侦察与电子战任务方向",
-                "随机组见习设备状态检查与保密要求。",
-                "能复述设备状态检查与保密要点。",
-                "模拟数据下的设备状态记录与保密要点清单。",
-                "与航空电子技术员不同：机上操作任务系统，不承担地面维修。"
+                "编辑任务示例：随机组见习设备状态检查与保密要求。",
+                "编辑观察：能复述设备状态检查与保密要点。",
+                "AC28-V1四份纸面作品，仅显示核算、版本与交接方法，不证明真实操作或任职。",
+                "与航空电子技术员的比较：本页聚焦机上任务；具体维护和维修权限须核实际岗位。"
               ],
               [
                 "搜救与特种任务方向",
-                "学习应急处置与生存训练基础，参与低空与协同训练。",
-                "能复述应急程序与生存要求。",
-                "书面整理的应急程序与生存要点（公开资料）。",
+                "编辑任务示例：学习应急处置与生存训练基础，参与低空与协同训练。",
+                "编辑观察：能复述应急程序与生存要求。",
+                "AC28-V1四份纸面作品，仅显示核算、版本与交接方法，不证明真实操作或任职。",
                 "与空乘人员不同：机上岗位承担军事任务与系统操作。"
               ],
               [
                 "检查与载荷核算",
-                "执行飞行前中后检查并核算重量与平衡。",
-                "检查记录完整、核算可核对且双人确认。",
-                "模拟重量与平衡核算表与核对记录。",
+                "编辑任务示例：执行飞行前中后检查并核算重量与平衡。",
+                "编辑观察：检查记录完整、核算可核对且双人确认。",
+                "AC28-V1四份纸面作品，仅显示核算、版本与交接方法，不证明真实操作或任职。",
                 "与民用航班签派不同：由机组在机上承担核算与核对责任。"
               ],
               [
                 "应急处置与训练复盘",
-                "按程序处置异常并参与任务复盘。",
-                "能说明处置依据并落实改进措施。",
-                "一次应急处置的书面复盘框架。",
-                "与管理岗不同：不承担任务决心与指挥责任。"
+                "编辑任务示例：按程序处置异常并参与任务复盘。",
+                "编辑观察：能说明处置依据并落实改进措施。",
+                "AC28-V1四份纸面作品，仅显示核算、版本与交接方法，不证明真实操作或任职。",
+                "与管理岗的比较：本页聚焦任务执行；具体指挥及决策职责须核岗位授权。"
               ]
             ]
           },
@@ -29502,9 +29582,9 @@
               {
                 "id": "clearance",
                 "values": [
-                  "入伍与任职须通过体检、政治考核与专业训练，具体标准按军队当年招募计划执行。",
+                  "编辑核对项：按法域和具体岗位确认官方招募、体检、审查与专业训练条件，本页未核本职当期门槛。",
                   "涉及武器、加油与任务系统时按岗位授权与手册操作，并遵守保密规定。",
-                  "中国大陆侧，军人按《中华人民共和国军人地位和权益保障法》与军队规定服役并享有待遇保障；民用航空执照不适用于本职业。"
+                  "中国大陆军人身份、纪律与待遇按法律及所属单位规定核；民用航空执照不自动授予军职操作权限。"
                 ]
               },
               {
@@ -29518,8 +29598,8 @@
               {
                 "id": "tools",
                 "values": [
-                  "O*NET 55-3011.00 技术清单无匹配条目，说明该军人职业没有基于招聘文本的技术统计。",
-                  "机上任务系统的装备信息属军队装备体系与保密范围，不作公开技术清单使用。",
+                  "O*NET55-3011明确不采集军职调查数据；原Hot Technology入口本轮未获可读内容，本页不声称技术清单已验证为零。",
+                  "本页未核机型装备清单或公开程度；只使用公开职业任务描述，真实参数与操作权限按所属单位核。",
                   "准备方向应按公开资料打牢数理、物理与体能基础，并通过官方招募渠道了解专业要求。"
                 ]
               }
@@ -29541,33 +29621,33 @@
               {
                 "id": "exercise-materials",
                 "values": [
-                  "虚构题面一：把公开资料整理成一份任务三阶段检查清单，标出必须由授权人员确认的环节。",
-                  "虚构题面二：用模拟数据完成重量与平衡核算表，说明每一项对安全的意义。",
-                  "虚构题面三：写出一次通信中断与一次应急下降的处置顺序。",
-                  "全部材料使用公开资料与模拟数据；不使用任何涉密信息、真实任务数据或装备参数。"
+                  "AC28-V1｜虚构纸面任务，所有数值与界限仅为本题定义，不能用于任何航空器。时间2026-10-02；09:00版本V1输入：基础质量1000 kg、力矩3000 kg·u；A货物100 kg位于2 u，B货物200 kg位于5 u；力矩=质量×位置，合计位置=总力矩÷总质量。u是虚构位置单位，非真实机型基准。",
+                  "本题纸面复核规则：总质量不得超过1400 kg，合计位置须在3.0–3.5 u（含端点）。09:10版本V2新增C货物100 kg位于6 u；必须重算V2，V1不能作为V2结果。通过数值条件只代表本题核算条件满足，不表示实际放行。",
+                  "09:15纸面状态记录：S1已由模拟责任人甲核对；S2记录显示异常但未说明原因；S3复核栏为空。异常与空白均标待责任人核查，不猜原因，不填写已合格。09:20接收人乙只回复“收到文件”，没有写版本与确认项。",
+                  "本题交接规则：记录版本、时间、输入单位、计算、三状态及待确认项；摘要须注明V2和接收确认不完整。未解决项保持待确认，由题中模拟责任人核查；不写飞行、武器、通信中断或应急下降操作步骤。"
                 ]
               },
               {
                 "id": "exercise-task",
                 "values": [
-                  "检查规划：按阶段列出检查项、责任岗位与确认方式。",
-                  "数据核算：逐项列出输入、单位、计算与核对方式。",
-                  "应急书写：按处置顺序写明判断依据与报告对象。"
+                  "交付一｜分别计算V1/V2总质量、力矩、合计位置（保留4位小数），逐版本判断两项纸面条件；写明为什么不能沿用V1。",
+                  "交付二｜制作S1/S2/S3状态表与09:20交接记录，区分已核对、异常待查、缺确认；用两句摘要说明数值和未闭合事项。",
+                  "交付三｜按八项规准评分。甲写“V1=1300/4200/3.2308，两条件通过；V2仍用V1所以通过；S2/S3合格，乙收到即可闭合”。乙写“09:00 V1输入1000 kg/3000 kg·u、A100 kg×2 u、B200 kg×5 u，结果1300 kg/4200 kg·u/3.2308 u；09:10 V2加C100 kg×6 u，结果1400/4800/3.4286，两版均满足题定质量与位置条件，但必须重算保留版本。09:15 S1已核对、S2异常待查、S3缺确认；09:20乙仅收到文件，V2接收确认未闭合。均为虚构纸面，不能据此真实放行或取得军职资格”。"
                 ]
               },
               {
                 "id": "exercise-approach",
                 "values": [
-                  "先确认公开资料的适用性与版本，再据此整理，不使用内部或涉密材料。",
-                  "对每一项核算保留输入与核对记录，异常重新计算。",
-                  "对每一处异常写明识别依据、处置与上报路径。"
+                  "独立参考：V1总质量1000+100+200=1300 kg；总力矩3000+100×2+200×5=4200 kg·u；合计位置4200/1300=3.2308 u，质量和位置均符合本题条件。",
+                  "V2总质量1400 kg、总力矩4800 kg·u、合计位置3.4286 u，两数值条件仍符合；与V1相比质量+100、力矩+600，位置改变，须保留V2新计算和V1历史记录。",
+                  "S1已核对，S2异常待责任人核查，S3缺复核待确认。09:20仅收到文件不能闭合交接；待乙明确V2和未解决项。摘要：V2纸面数值条件通过；状态核查及接收版本确认未闭合，不能据此宣称真实放行。"
                 ]
               },
               {
                 "id": "exercise-boundary",
                 "values": [
-                  "作品只用于展示准备程度与方法，不构成军队招募测试，也不代表任何军职资格。",
-                  "不得在作品中包含、推断或传播任何涉密信息；实际选拔与训练以军队官方信息为准。"
+                  "8项各1分，需全项正确才得该分：①V1三结果；②V2三结果；③逐版本判断两数值条件；④指出新增C必须重算且保留版本；⑤S1已核对、S2异常待查、S3缺确认；⑥09:20接收版本确认未闭合；⑦记录时间、单位、输入与计算痕迹；⑧说明虚构纸面结果不等真实放行或军职资格。",
+                  "按本题规准：甲只有①正确，1/8；乙①–⑧完整，8/8。分数只衡量本题记录与复核，不是军队招募标准、体检结果、岗位操作或飞行能力证据。"
                 ]
               }
             ]
@@ -29576,7 +29656,7 @@
           "source_refs": [
             "onet"
           ],
-          "title": "入行练习：一次完整的机组成员任务任务（虚构材料）",
+          "title": "入行练习：一次机组成员纸面核算与交接（虚构材料）",
           "type": "cards"
         },
         {
@@ -29587,31 +29667,29 @@
               {
                 "id": "requirements-matrix",
                 "values": [
-                  "准备要求矩阵：一行一项要求（体检、政治考核、体能、数理基础、专业方向），列出核对来源与状态。",
-                  "把每项要求对应到官方招募信息的具体条款，注明查看日期。",
-                  "记录尚未满足或个人需补强的项目与计划。"
+                  "AC28-V1要求矩阵｜列两条纸面数值条件、状态确认与接收版本确认，注明均为本题虚构规则，不是军队招募或运行要求。",
+                  "每项对应输入、结果、满足状态及待确认责任人；不得把V2数值通过改写成所有条件闭合。"
                 ]
               },
               {
                 "id": "independent-recheck",
                 "values": [
-                  "信息复核：核对是否来自军队官方渠道，是否标注时间与适用军种。",
-                  "材料复核：核对练习材料不含涉密信息，来源为公开资料。",
-                  "计划复核：核对体能与其他准备计划是否可持续，避免突击。"
+                  "独立复核表｜按原输入重算V1=1300/4200/3.2308、V2=1400/4800/3.4286；列新增C变化与原记录版本。",
+                  "附S1已核对、S2异常待查、S3缺确认以及乙接收版本未确认；保留每个待办。"
                 ]
               },
               {
                 "id": "report-summary",
                 "values": [
-                  "一页准备摘要：目标方向、已满足与待补强项、时间安排。",
-                  "附上公开资料清单与来源链接，注明查看日期。"
+                  "一页交接摘要｜版本V2、09:10输入变化、两数值条件通过、09:15状态与09:20接收确认缺口。",
+                  "两句结论：V2纸面数值满足题定条件；状态与接收版本尚待确认，不能据此宣称真实放行。"
                 ]
               },
               {
                 "id": "tooling-note",
                 "values": [
-                  "准备记录应展示对公开资料的理解与自身体能、学业准备，而不是涉密或内部信息。",
-                  "不把网络传闻或非官方信息写入准备记录。"
+                  "边界说明｜列虚构单位u与题定界限、原输入、计算来源和留痕方法。",
+                  "不含真实设备、涉密数据、运行检查单或应急动作；作品不能替代官方选拔、体检、训练和授权。"
                 ]
               }
             ]
@@ -29641,28 +29719,28 @@
             ],
             "rows": [
               [
-                "报名与资格审查",
-                "是否符合当年招募的年龄、学历与户籍等基本条件。",
-                "能提供官方要求的证明材料并如实填报。",
-                "弄虚作假或通过非官方中介报名，会直接取消资格。"
+                "公告资格核对",
+                "编辑建议：先核实际国家、军种、年份与岗位公告。",
+                "保留官方条件、适用范围与待确认记录。",
+                "本页未核具体公告，不给录用或自动取消资格判断。"
               ],
               [
-                "体检与体能",
-                "视力、听力、心肺与前庭功能等标准，以及体能测试要求。",
-                "体检结论合格，体能项目达标且可持续。",
-                "隐瞒病史或突击应付体能测试，既通不过也带来健康风险。"
+                "体检与体能要求",
+                "编辑建议：按官方当前要求由有资质机构核。",
+                "只引用正式检查与要求，AC28-V1不验证健康。",
+                "不能以纸面高分或自测代替正式检查。"
               ],
               [
-                "政治考核与心理测试",
-                "政治考核标准与心理适应性测试结果。",
-                "如实说明个人情况，配合考核流程。",
-                "隐瞒或提供不实信息，会直接影响资格。"
+                "身份与适岗考核",
+                "编辑建议：按法域核实际审查、考核及材料。",
+                "如实记录官方要求与材料核对状态。",
+                "不从框架法推统一心理测验或处罚结果。"
               ],
               [
-                "专业训练与岗位考核",
-                "能否按手册完成检查、核算与基本操作并通过考核。",
-                "训练考核记录完整，程序执行准确。",
-                "跳过步骤、凭感觉操作或违反保密要求，会被终止岗位资格。"
+                "岗位训练与授权",
+                "编辑建议：核实际设备、训练及操作权限。",
+                "真实岗位记录按所属单位认可规则办理。",
+                "本页纸面练习不提供军职操作授权。"
               ]
             ]
           },
@@ -29682,50 +29760,50 @@
               {
                 "id": "entry-trial-day-1",
                 "values": [
-                  "第 1 天｜招募信息核对",
-                  "按官方渠道核对年龄、学历、体检与专业方向要求，记录待确认项。"
+                  "第1天｜职业与法域核对",
+                  "阅读O*NET55-3011描述，列任务与民用相邻职业区别；官方招募条件未核项标待确认，不作报名资格判断。"
                 ]
               },
               {
                 "id": "entry-trial-day-2",
                 "values": [
-                  "第 2 天｜体能基线",
-                  "完成一次体能自测（耐力、力量与柔韧），记录基线并制定逐步提升计划。"
+                  "第2天｜题面要求矩阵",
+                  "把AC28-V1虚构数值条件、状态与交接规则列成矩阵；标出u为虚构单位。"
                 ]
               },
               {
                 "id": "entry-trial-day-3",
                 "values": [
-                  "第 3 天｜数理与物理基础",
-                  "复习与航空相关的物理与数理基础，做题并记录薄弱环节。"
+                  "第3天｜V1独立核算",
+                  "计算1300 kg、4200 kg·u、3.2308 u，并判断两项题定数值条件。"
                 ]
               },
               {
                 "id": "entry-trial-day-4",
                 "values": [
-                  "第 4 天｜任务流程学习",
-                  "按公开资料整理一份任务三阶段检查清单，标出授权确认环节。"
+                  "第4天｜V2版本变化",
+                  "加入C后重算1400 kg、4800 kg·u、3.4286 u；说明不能沿用V1，保留两版本。"
                 ]
               },
               {
                 "id": "entry-trial-day-5",
                 "values": [
-                  "第 5 天｜载荷核算练习",
-                  "用模拟数据完成一次重量与平衡核算表并核对。"
+                  "第5天｜状态与交接",
+                  "写S1已核对、S2异常待查、S3缺确认；乙收到文件但未确认版本，交接保持未闭合。"
                 ]
               },
               {
                 "id": "entry-trial-day-6",
                 "values": [
-                  "第 6 天｜应急处置书写",
-                  "写出通信中断与应急下降的处置顺序与报告路径。"
+                  "第6天｜参考复核与评分",
+                  "逐项核八分规准，甲1/8、乙8/8；分数不是录用、体力或真实操作结论。"
                 ]
               },
               {
                 "id": "entry-trial-day-7",
                 "values": [
-                  "第 7 天｜复盘与决策",
-                  "复盘一周准备：是否愿意长期维持体能、纪律与保密要求，并据此判断是否继续。"
+                  "第7天｜四作品与选择",
+                  "交要求矩阵、独立复核表、一页摘要、边界说明；复盘是否愿意继续了解官方路径，真实体检/训练与环境适配尚需另核。"
                 ]
               }
             ]
@@ -29742,13 +29820,13 @@
           "copy_key": "career.item.seven-day-decision",
           "data": {
             "entries": [
-              "做完一周准备后先回答：我是否愿意长期维持体能、纪律与保密要求，而不是只想体验飞行？",
-              "判断方向：偏运输与空投、侦察与电子战，还是搜救与特种任务。",
-              "判断准备：体检项目与体能基线是否可持续，数理与物理基础是否需要补强。",
-              "判断边界：是否清楚民用航空执照不等同于本职业资格，两者不可互相折算。",
-              "判断耐受：能否适应长时间待命、轮班、驻防与信息受限。",
-              "入门后按军队体系发展：完成基础训练、取得岗位资格、胜任多任务机组、担任骨干或教员。",
-              "把公开资料整理、体能记录与学业准备持续整理成可核对的准备经历，比相信非官方承诺更可靠。"
+              "完成AC28-V1后核四作品与八分规准：是否能如实保留原输入、版本与未闭合事项。",
+              "三个任务方向是编辑分类，须以目标军种和实际岗位设置核对，不承诺可自由选择。",
+              "纸面核算不能验证体检、体力、高空耐受、真实设备操作或应急处置能力。",
+              "民用执照不能自动替代军队授权；军职经历能否用于民用资质须按法域、实际职责与记录核，不作一律不能认定判断。",
+              "官方当年招募、任职与训练条件需另核；本页不是军队招募测试。",
+              "了解发展时分别核军衔、任职、专业训练及带教要求，不把编辑阶段当统一晋升路线。",
+              "决定继续了解后保留公开来源核对记录与纸面作品，不把一次高分当已适合或已取得资格。"
             ]
           },
           "id": "air-crew-members.path.seven-day-decision.1",
@@ -29784,56 +29862,56 @@
               [
                 "军队招募选拔（含体检与政治考核）",
                 "全部有意入伍者",
-                "进入本职业的必经环节，决定能否进入训练体系",
-                "通常是必备",
-                "按军队当年招募计划与标准",
-                "按招募周期",
-                "未通过即为硬性限制，无法用其他资历替代"
+                "编辑了解方向：核入伍或内部改训路径及实际岗位是否开放",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "不自动取得岗位资格；按实际官方要求核。"
               ],
               [
                 "军队院校或专业训练",
                 "士兵与军官路径",
-                "决定能否进入航空与任务系统相关岗位",
-                "相关岗位通常需要",
-                "按军种与专业方向规定",
-                "数月到数年",
-                "训练内容与分配按军队需要安排，个人选择空间有限"
+                "编辑了解方向：决定能否进入航空与任务系统相关岗位",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "不自动取得岗位资格；按实际官方要求核。"
               ],
               [
                 "航空生理与生存训练",
                 "机组成员岗位",
-                "用于证明能适应高空与应急环境",
-                "机上岗位通常需要",
-                "按军队训练大纲",
-                "阶段性训练",
-                "训练合格不等于获得全部岗位授权"
+                "编辑了解方向：用于证明能适应高空与应急环境",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "不自动取得岗位资格；按实际官方要求核。"
               ],
               [
                 "保密审查与岗位授权",
                 "涉及任务系统与装备的岗位",
-                "决定可接触的设备与信息范围",
-                "涉密岗位必备",
-                "按军队保密与授权规定",
-                "持续管理",
-                "违反保密要求会被终止岗位资格"
+                "编辑了解方向：决定可接触的设备与信息范围",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "不自动取得岗位资格；按实际官方要求核。"
               ],
               [
                 "体能维持",
                 "全部军人岗位",
-                "影响能否长期保持岗位资格与任务能力",
-                "持续要求",
-                "按军队体检与体能标准",
-                "长期维持",
-                "体能下降会影响岗位与任务安排"
+                "编辑了解方向：影响能否长期保持岗位资格与任务能力",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "不自动取得岗位资格；按实际官方要求核。"
               ],
               [
                 "民用航空执照（对照，非本职业资格）",
                 "转业或退出后的民用就业",
-                "用于进入民用航空体系的资质认定，与本职业资格不通用",
-                "不适用于本职业",
-                "按民航主管部门规定",
-                "按执照训练周期",
-                "军职经历不能直接折算为民用执照，须按民用规定重新认定"
+                "民用目标资质须按职责与履历认定，不自动等于军职授权。",
+                "须核具体岗位/法域",
+                "证据不足：本页未核本职具体条件",
+                "未核本职周期或费用",
+                "美国军方飞行员符合61.73条件可申请相应民用资格，不能一概不认可经验，也不能推所有机组适用。"
               ]
             ]
           },
@@ -29853,17 +29931,17 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "军人职业的资格由军队制度管理，与民用资格体系不通用：民用航空执照、维修资质等属民用体系，不能替代军队的选拔、训练与岗位授权。",
-              "转业或退出后进入民用航空岗位，须按民用主管部门的资质认定规定办理，军职经历通常不能直接折抵。",
-              "本页不提供学历分布与工资数字：O*NET 明确不采集军人职业数据，BLS 也不发布军人职业的工资与就业统计。",
-              "有意向者应核对官方招募信息中的体检、政治考核、专业方向与时间安排，并通过官方渠道报名。"
+              "军队岗位授权与民用资质分别管理，不能仅持民用执照宣称已有军职操作权限。",
+              "民用资格需按法域、目标岗位与真实履历核；军职经历不自动给执照，也不一概拒绝认定。美国61.73规则针对符合条件的军方飞行员，不能仅凭本机组名称适用。",
+              "BLS总览有军队宽类人数和待遇制度；OEWS不调查55类军职，未提供本职工资分位或民用就业预测。",
+              "证据不足：未核中国具体机组岗位当年招募公告、任职条件、训练标准和资格认定细则；美国一般资料及待遇框架法不能代填。"
             ]
           },
           "id": "air-crew-members.path.credential-boundary.1",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnclass",
+            "faa-military",
+            "bls"
           ],
           "title": "资格与授权边界说明",
           "type": "notice"
@@ -29873,8 +29951,8 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "样本适用范围：本页不引用任何招募公告作为工资或需求证据；招募条件、专业方向与计划随时间与军种变化，请以军队官方发布为准。",
-              "判断一个岗位是否属于本职业，看任务描述而不是名称：是否涉及军用航空器飞行中的任务系统操作、武器与防御或加油系统操作、设备检查与载荷核算、空投与应急处置。"
+              "证据不足：本页未取得本职业当前中国具体招募公告样本，不能给录用学历、名额、待遇或在招结论；按军队官方当年公告核。",
+              "判断岗位看实际任务与体系：军用航空器上任务系统操作、设备检查、核算与安全应急职责，不仅凭“机组”名称。"
             ]
           },
           "id": "air-crew-members.path.recruitment-sample.1",
@@ -29914,7 +29992,7 @@
                 "entity": "《中华人民共和国军人地位和权益保障法》",
                 "id": "link-4",
                 "relation": "career.source",
-                "url": "https://yncn.gov.cn/info/9654/8710920.htm"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202106/t20210611_2411278.html"
               }
             ]
           },
@@ -29932,13 +30010,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本职业为军人职业，入职路径与民用职业完全不同：美国军队区分士兵与军官路径，士兵承担军事行动执行与装备操作维护，军官负责计划、组织与指挥，部分技术岗位由准尉担任；O*NET 明确不采集军人职业数据，教育与训练要求以各军种官方招募信息为准。中国大陆侧，军人按《中华人民共和国军人地位和权益保障法》与军队有关规定服役，入伍与任职路径包括应征入伍、报考军队院校与直招等，均须通过体检、政治考核与专业训练。本页不提供学历分布或工资数字，也不把民用航空执照当作本职业资格。"
+              "美国BLS一般说明区分士兵、军官与准尉职责及教育训练，本机组为55-3011军职描述，不等同所有军官或飞行员。中国第2条军人身份与第33–34条待遇框架可核，但不足以确定某机组招募条件。证据不足：未核中国本职当年具体招募或内部改训公告；下列阶段只为编辑了解路径，不是统一入门或晋升标准。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.11",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -29947,7 +30026,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过入伍选拔与基础训练，掌握军纪、体能基础与岗位通识。"
+              "编辑角色示例：通过入伍选拔与基础训练，掌握军纪、体能基础与岗位通识。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.12",
@@ -29976,7 +30055,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成航空生理、设备原理与专业训练，取得本岗位操作授权。"
+              "编辑角色示例：完成航空生理、设备原理与专业训练，取得本岗位操作授权。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.14",
@@ -30005,7 +30084,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同任务类型间轮换，独立承担本岗位操作与应急处置。"
+              "编辑角色示例：在不同任务类型间轮换，独立承担本岗位操作与应急处置。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.16",
@@ -30034,7 +30113,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担带教、程序优化与部分指挥协同职责。"
+              "编辑角色示例：承担带教、程序优化与部分指挥协同职责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.18",
@@ -30063,13 +30142,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "进入该职业的路径按国家区分：美国军队分士兵与军官路径，士兵经入伍与专业训练进入相关岗位，军官通常经军队院校或地方高校毕业后选拔，技术岗位可能由准尉担任；中国大陆侧，入伍与任职路径包括应征入伍、报考军队院校与直招等，均须通过体检、政治考核与专业训练，并按《中华人民共和国军人地位和权益保障法》与军队规定服役。具体要求以军队官方招募信息为准；本页不提供军人职业的学历分布或工资数字。"
+              "按国家与具体军种核入职路径。BLS美国一般资料描述士兵初训后专业训练，军官常见院校/ROTC/OCS等途径；不保证进入55-3011。中国具体招募或改训条件本页未核，不能由待遇框架法推学历、分配或岗位开放。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.20",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30078,14 +30158,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "军人职业的资格由军队制度管理，与民用资格体系不通用：民用航空执照、维修资质等属民用体系，不能替代军队的选拔、训练与岗位授权；反过来，军职经历若要用于民用岗位，须按民用主管部门的资质认定规定办理。两套体系不可互相折算。"
+              "民用资格需按法域、目标岗位与真实履历核；军职经历不自动给执照，也不一概拒绝认定。美国61.73规则针对符合条件的军方飞行员，不能仅凭本机组名称适用。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.21",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "cnclass",
+            "faa-military",
+            "bls"
           ],
           "type": "prose"
         },
@@ -30094,14 +30174,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "本节采用国家与地区并列口径：美国部分为 O*NET 与 BLS 的军人职业说明；中国大陆部分以《中华人民共和国军人地位和权益保障法》与军队规定为准。两者均不提供本职业的工资与就业统计，本页不互相外推，也不使用民用职业数据替代。"
+              "美国资料用于55-3011身份任务、一般军队训练与待遇；中国法律用于现役军人身份、纪律与待遇框架。两边不一对一映射岗位或互推选拔门槛；NBS仅民用行业背景。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.22",
           "source_refs": [
+            "bls",
             "onet",
-            "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30110,13 +30190,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "发展路径按军队体系：从完成基础训练到取得岗位资格、胜任多任务机组、担任骨干或教员，按军衔、岗位与专业等级晋升。退出现役后的安置与转业路径按国家与军队规定执行；民用航空岗位通常需要另行取得相应执照与训练。"
+              "编辑阶段示例为了解基础训练、岗位训练、任务协作与带教；实际晋升、任职与教员条件按所属军队核，不将四阶段当统一职级。退出现役安置与民用就业需按具体制度另核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.23",
           "source_refs": [
+            "bls",
             "onet",
-            "onet"
+            "cnclass"
           ],
           "type": "prose"
         },
@@ -30181,7 +30262,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过军队选拔与体检；具体按招募信息。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.28",
@@ -30196,7 +30277,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得本岗位见习记录并通过检查单考核。"
+              "编辑角色示例：取得本岗位见习记录并通过检查单考核。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.29",
@@ -30210,7 +30291,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在带教下完成检查单项目并说明安全要点。"
+              "编辑角色示例：能在带教下完成检查单项目并说明安全要点。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.30",
@@ -30225,7 +30306,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成入伍与基础训练，随机组见习飞行前检查与装载流程。"
+              "编辑角色示例：完成入伍与基础训练，随机组见习飞行前检查与装载流程。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.31",
@@ -30254,7 +30335,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成专业训练与岗位授权；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.33",
@@ -30269,7 +30350,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与多机型或多种空投方式的训练。"
+              "编辑角色示例：参与多机型或多种空投方式的训练。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.34",
@@ -30283,7 +30364,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "载荷核算准确，程序执行符合手册。"
+              "编辑角色示例：载荷核算准确，程序执行符合手册。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.35",
@@ -30298,7 +30379,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担装载核算、任务通信与空投程序操作。"
+              "编辑角色示例：承担装载核算、任务通信与空投程序操作。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.36",
@@ -30327,7 +30408,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具多次任务经历与带教能力；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.38",
@@ -30342,7 +30423,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与任务规划与机组资源管理训练。"
+              "编辑角色示例：参与任务规划与机组资源管理训练。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.39",
@@ -30356,7 +30437,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能说明处置依据并改进操作程序。"
+              "编辑角色示例：能说明处置依据并改进操作程序。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.40",
@@ -30371,7 +30452,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在不同运输与空投任务间轮换，承担部分带教与程序改进。"
+              "编辑角色示例：在不同运输与空投任务间轮换，承担部分带教与程序改进。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.41",
@@ -30400,7 +30481,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长服役与专业资历；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.43",
@@ -30415,7 +30496,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "扩展至跨机型或跨任务类型教学。"
+              "编辑角色示例：扩展至跨机型或跨任务类型教学。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.44",
@@ -30429,7 +30510,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对训练质量与程序执行负责。"
+              "编辑角色示例：能对训练质量与程序执行负责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.45",
@@ -30444,7 +30525,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担带教、程序优化与部分指挥协同职责。"
+              "编辑角色示例：承担带教、程序优化与部分指挥协同职责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.46",
@@ -30473,7 +30554,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过军队选拔与政治考核；具体按招募信息。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.48",
@@ -30488,7 +30569,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得见习记录并通过设备状态检查考核。"
+              "编辑角色示例：取得见习记录并通过设备状态检查考核。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.49",
@@ -30502,7 +30583,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能复述设备状态检查与保密要点。"
+              "编辑角色示例：能复述设备状态检查与保密要点。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.50",
@@ -30517,7 +30598,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成入伍与基础训练，随机组见习设备状态与保密要求。"
+              "编辑角色示例：完成入伍与基础训练，随机组见习设备状态与保密要求。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.51",
@@ -30546,7 +30627,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成专业训练与岗位授权；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.53",
@@ -30561,7 +30642,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与复杂电磁环境下的训练。"
+              "编辑角色示例：参与复杂电磁环境下的训练。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.54",
@@ -30575,7 +30656,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "设备操作符合手册，异常记录完整。"
+              "编辑角色示例：设备操作符合手册，异常记录完整。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.55",
@@ -30590,7 +30671,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "操作探测与电子对抗设备，执行链路与干扰相关任务。"
+              "编辑角色示例：操作探测与电子对抗设备，执行链路与干扰相关任务。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.56",
@@ -30619,7 +30700,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具多次任务经历与带教能力；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.58",
@@ -30634,7 +30715,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与任务方案细化与设备改进建议。"
+              "编辑角色示例：参与任务方案细化与设备改进建议。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.59",
@@ -30648,7 +30729,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能说明干扰与反干扰判断依据。"
+              "编辑角色示例：能说明干扰与反干扰判断依据。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.60",
@@ -30663,7 +30744,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在多种设备与任务间轮换，承担带教与数据复盘。"
+              "编辑角色示例：在多种设备与任务间轮换，承担带教与数据复盘。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.61",
@@ -30692,7 +30773,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长服役与专业资历；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.63",
@@ -30707,7 +30788,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "扩展至跨任务类型教学与程序制定。"
+              "编辑角色示例：扩展至跨任务类型教学与程序制定。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.64",
@@ -30721,7 +30802,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对训练质量与保密执行负责。"
+              "编辑角色示例：能对训练质量与保密执行负责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.65",
@@ -30736,7 +30817,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担带教、程序优化与保密管理协同职责。"
+              "编辑角色示例：承担带教、程序优化与保密管理协同职责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.66",
@@ -30765,7 +30846,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通过军队选拔与体检；具体按招募信息。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.68",
@@ -30780,7 +30861,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "取得见习记录并通过应急程序考核。"
+              "编辑角色示例：取得见习记录并通过应急程序考核。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.69",
@@ -30794,7 +30875,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能复述应急程序与生存要求。"
+              "编辑角色示例：能复述应急程序与生存要求。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.70",
@@ -30809,7 +30890,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成入伍与基础训练，学习应急处置与生存训练基础。"
+              "编辑角色示例：完成入伍与基础训练，学习应急处置与生存训练基础。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.71",
@@ -30838,7 +30919,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "完成专业训练与岗位授权；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.73",
@@ -30853,7 +30934,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与复杂气象与夜间任务训练。"
+              "编辑角色示例：参与复杂气象与夜间任务训练。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.74",
@@ -30867,7 +30948,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "气象与协同判断符合程序，异常及时上报。"
+              "编辑角色示例：气象与协同判断符合程序，异常及时上报。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.75",
@@ -30882,7 +30963,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与搜救、低空任务与投放回收操作。"
+              "编辑角色示例：参与搜救、低空任务与投放回收操作。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.76",
@@ -30911,7 +30992,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "具多次复杂任务经历；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.78",
@@ -30926,7 +31007,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "参与联合演练与方案制定。"
+              "编辑角色示例：参与联合演练与方案制定。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.79",
@@ -30940,7 +31021,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能在复杂条件下保持程序与判断。"
+              "编辑角色示例：能在复杂条件下保持程序与判断。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.80",
@@ -30955,7 +31036,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "在复杂气象与多力量协同任务中承担本岗位关键操作。"
+              "编辑角色示例：在复杂气象与多力量协同任务中承担本岗位关键操作。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.81",
@@ -30984,7 +31065,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "通常要求较长服役与专业资历；按军队规定。"
+              "证据不足：本页未核此编辑阶段的具体招募、任职或带教条件；按实际国家、军种、岗位与当期规定核。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.83",
@@ -30999,7 +31080,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "扩展至跨军种或跨部门联合教学。"
+              "编辑角色示例：扩展至跨军种或跨部门联合教学。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.84",
@@ -31013,7 +31094,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能对应急程序与训练质量负责。"
+              "编辑角色示例：能对应急程序与训练质量负责。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.85",
@@ -31028,7 +31109,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "承担带教、应急程序优化与协同指挥支持。"
+              "编辑角色示例：承担带教、应急程序优化与协同指挥支持。具体职责与可否开展训练须核真实岗位授权。"
             ]
           },
           "id": "air-crew-members.path.career-path-block.86",
@@ -31093,7 +31174,7 @@
                 "entity": "国家统计局《2025 年城镇单位就业人员年平均工资情况》（民用口径）",
                 "id": "link-5",
                 "relation": "career.source",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "entity": "O*NET 55-3011.00 任务描述",
@@ -31165,14 +31246,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "本页不提供该职业的就业规模、增长率与空缺数字：该职业为美国军人职业，O*NET 明确不采集军人职业数据，BLS 职业就业与工资统计与职业展望手册均不发布军人职业的工资、就业与空缺统计。军队人员规模与岗位设置由国防与军队建设需要决定，不适用民用劳动力市场预测口径；退出现役后的民用就业路径需按民用资质与招聘条件另行评估。"
+              "证据不足：未取得55-3011细分就业规模、增长或年均空缺；已有军队宽类人数不代填，民用预测不覆盖本军职。 BLS军人职业总览发布军队宽类人数和待遇制度说明，但未提供55-3011机组成员的工资分位、单职规模或年均空缺；就业预测覆盖民用劳动力。OEWS不调查55类军职，不能用民用航空统计代填。本页不预测录用或部队岗位数量，退出现役后须按实际目标职业条件核。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.8",
           "source_refs": [
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31209,12 +31289,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "O*NET 明确该职业为军人职业且不采集数据，BLS 也不发布军人职业的就业统计，因此没有可核实的在岗规模数字。"
+              "BLS总览可见军队宽类人数，但未给55-3011细分规模；本页不由宽类人员推算本职人数。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.11",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31228,7 +31309,8 @@
           },
           "id": "air-crew-members.market-signals.market-signal-card.12",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31265,7 +31347,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不适用：无公开就业统计"
+              "未提供55-3011细分规模"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.15",
@@ -31312,7 +31394,8 @@
           },
           "id": "air-crew-members.market-signals.market-signal-card.18",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31326,7 +31409,8 @@
           },
           "id": "air-crew-members.market-signals.market-signal-card.19",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31405,12 +31489,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 不发布军人职业的职位空缺统计；招募与补员按军队年度计划执行。"
+              "本页未取得55-3011年均职位空缺；民用就业预测不覆盖军职，不以招募计划或宽类军队人数代填。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.25",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31424,7 +31509,8 @@
           },
           "id": "air-crew-members.market-signals.market-signal-card.26",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31461,7 +31547,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "不适用：无公开空缺统计"
+              "未提供55-3011年均空缺"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.29",
@@ -31489,12 +31575,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "BLS 职业展望手册：军人职业（说明不发布军人职业工资与就业数据）。"
+              "BLS军人总览：一般职责、宽类人数、待遇制度与民用预测边界。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.31",
           "source_refs": [
-            "onet"
+            "bls",
+            "oews"
           ],
           "type": "prose"
         },
@@ -31531,7 +31618,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需按民航主管部门规定取得执照与训练，军职经历不能直接折算。"
+              "民用资格需按法域、目标岗位与真实履历核；军职经历不自动给执照，也不一概拒绝认定。美国61.73规则针对符合条件的军方飞行员，不能仅凭本机组名称适用。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.34",
@@ -31561,7 +31648,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "跨体系转向，须重新取得民用资质。"
+              "跨体系转向，核目标法域民用资质及经历认定。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.36",
@@ -31711,7 +31798,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需补民用维修资质与机型培训。"
+              "编辑转向比较：先核目标维修职责、当地资质和实际机型训练；不同岗位要求不同，本页不称所有航电或机务岗位均需同一种执照。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.46",
@@ -31756,7 +31843,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "需按民航维修资质要求培训并取证。"
+              "编辑转向比较：先核目标维修职责、当地资质和实际机型训练；不同岗位要求不同，本页不称所有航电或机务岗位均需同一种执照。"
             ]
           },
           "id": "air-crew-members.market-signals.market-signal-card.49",
@@ -31904,31 +31991,31 @@
                 "question_key": "career.faq.air-crew-members.daily-work"
               },
               {
-                "answer": "机组成员在飞行任务中按岗位操作任务与武器系统并执行应急程序；任务决心与飞行计划由指挥体系下达；机型定检与深度维修由军队维修体系承担。民用航空驾驶员、乘务员与机务岗位属民用体系，与本职业不是同一职业，两套资格不可互相折算。",
+                "answer": "机组成员在飞行任务中按实际岗位操作系统、检查和核算；O*NET描述含操作维护，但具体深度维修和指挥权限须核岗位，不仅凭名称划分。民用与军职分别核权限，军职经历可否用于民用资质按法域与实际记录认定，不自动转换也不一概否定。",
                 "id": "air-crew-members.faq.2",
                 "question": "机组成员和相邻岗位的边界在哪里？",
                 "question_key": "career.faq.air-crew-members.comparison"
               },
               {
-                "answer": "没有证据支持“被取代”。自动化可能增强态势整合、状态监测与检查单与重量计算等辅助环节，但任务操作授权、武器与加油系统操作、应急处置与飞行安全责任仍由受过授权训练的机组承担；本页不据此推测军人编制变化。",
+                "answer": "证据不足：未取得本职AI替代比例、采用率或编制因果研究。资料与计算辅助为编辑条件讨论，不能据此给消失年份或断言永远不能替代；实际系统按真实授权和手册核。",
                 "id": "air-crew-members.faq.3",
                 "question": "机组成员会被 AI 取代吗？",
                 "question_key": "career.faq.air-crew-members.ai"
               },
               {
-                "answer": "《中华人民共和国军人地位和权益保障法》规定国家建立军人待遇保障制度与相对独立的军人工资待遇制度，并对执行特殊任务和在特殊岗位工作的军人从优保障；具体标准按军队规定执行，不属于国家统计局城镇单位工资统计范围，本页不提供数字。中国侧列出的行业工资为民用口径，仅作转业后民用就业参照。",
+                "answer": "证据不足：未取得本职具体中国待遇金额。第33–34条规定军官军士工资、义务兵供给生活待遇，结构标准由中央军委规定；特定任务地区岗位按法条从优。NBS只是民用行业背景，不估算军人待遇。",
                 "id": "air-crew-members.faq.4",
                 "question": "中国大陆的军人待遇如何理解？",
                 "question_key": "career.faq.air-crew-members.china-pay"
               },
               {
-                "answer": "本页不提供该职业的工资数字。该职业为美国军人职业（O*NET 55-3011.00），O*NET 明确不采集军人职业数据，BLS 职业就业与工资统计与职业展望手册也不发布军人职业的工资与就业统计；军人待遇按军衔与军龄的薪级制度与津贴构成，不按职业工资发布。",
+                "answer": "OEWS不调查55类军职；BLS总览有军队宽类人数及美国待遇制度，但未提供55-3011工资分位。美国基本薪资按军衔、服役时长，另有符合条件的额外待遇，不用民航职业中位代填。",
                 "id": "air-crew-members.faq.5",
                 "question": "美国机组成员的工资是多少？",
                 "question_key": "career.faq.air-crew-members.us-pay"
               },
               {
-                "answer": "本职业为军人职业，路径与民用职业不同：美国军队分士兵与军官路径，士兵经入伍与专业训练进入相关岗位，军官通常经军队院校或地方高校毕业后选拔；中国大陆侧包括应征入伍、报考军队院校与直招等，均须通过体检、政治考核与专业训练。具体要求以军队官方招募信息为准，本页不提供学历分布。",
+                "answer": "美国BLS一般说明有士兵初训/专业训练与军官院校等路径，不保证进入本机组。证据不足：未核中国本职当前具体招募、学历与改训条件；军人身份与待遇框架法不是招募公告。",
                 "id": "air-crew-members.faq.6",
                 "question": "怎么才能成为机组成员？",
                 "question_key": "career.faq.air-crew-members.education"
@@ -31940,13 +32027,13 @@
                 "question_key": "career.faq.air-crew-members.risk"
               },
               {
-                "answer": "本页不提供该职业的就业前景数字。该职业为美国军人职业，O*NET 明确不采集军人职业数据，BLS 也不发布军人职业的就业与空缺统计；军队人员规模与岗位设置由国防与军队建设需要决定，不适用民用劳动力市场预测口径。",
+                "answer": "BLS就业预测只覆盖民用劳动力，总览另有军队宽类人数，但未提供55-3011细分增长或年均空缺。不能把宽类人数、招募名额或AI讨论改成职业前景指标。",
                 "id": "air-crew-members.faq.8",
                 "question": "美国就业前景如何？",
                 "question_key": "career.faq.air-crew-members.outlook"
               },
               {
-                "answer": "在军用航空器的机舱与任务舱内工作，涉及高空、振动、噪声与加压环境，并按任务要求穿戴飞行装备；任务与训练按计划与命令安排，存在长时间待命、夜航与跨时区执行。O*NET 不采集军人职业的工作情境统计，本页不使用民用岗位数据替代。",
+                "answer": "编辑情境提示：军用航空器任务环境可能涉及噪声、振动、待命、夜间或跨区域安排，具体条件与频率须按机型和岗位核。O*NET不采集军职工作情境调查，本页没有本职工时、暴露率或统一装备要求，不能用民用岗位分布代填。",
                 "id": "air-crew-members.faq.9",
                 "question": "工作环境是怎样的？",
                 "question_key": "career.faq.air-crew-members.work-context"
@@ -31962,12 +32049,11 @@
           "id": "air-crew-members.sources.faq.1",
           "source_refs": [
             "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet",
-            "onet"
+            "bls",
+            "oews",
+            "cnclass",
+            "nbs",
+            "faa-military"
           ],
           "type": "faq"
         },
@@ -31996,8 +32082,11 @@
           "id": "air-crew-members.sources.source-card.2",
           "source_refs": [
             "onet",
-            "onet",
-            "onet"
+            "bls",
+            "oews",
+            "cnclass",
+            "nbs",
+            "faa-military"
           ],
           "type": "prose"
         },
@@ -32006,7 +32095,7 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "本轮核对与更新日期：2026-09-15。"
+              "本轮核对与修订日期：2026-10-02。"
             ]
           },
           "id": "air-crew-members.sources.source-card.3",
@@ -32020,13 +32109,17 @@
           "copy_key": "career.item.source-card",
           "data": {
             "paragraphs": [
-              "该职业为美国军人职业，O*NET 与 BLS 均不提供其工资、就业与空缺数据；本页因此不提供该类数字。中国大陆侧军人待遇按《中华人民共和国军人地位和权益保障法》与军队规定执行，不属于国家统计局民用工资统计范围，本页仅将民用行业数字列为转业参照。民用航空岗位与本职业不是同一职业，两套资格不可互相折算。本页不构成法律或军事政策意见。"
+              "O*NET不采集军职调查数据，OEWS不调查55类军职；BLS总览另有军队宽类人数和待遇制度，但未给55-3011细分指标，不能称所有军人数据不存在。中国军官军士与义务兵待遇分开，NBS仅民用背景。军职经历是否可用于民用资质须按具体法域、岗位与记录核；本页不判断所有转换都不可认定。"
             ]
           },
           "id": "air-crew-members.sources.source-card.4",
           "source_refs": [
             "onet",
-            "onet"
+            "bls",
+            "oews",
+            "cnclass",
+            "nbs",
+            "faa-military"
           ],
           "type": "prose"
         }
@@ -32101,404 +32194,420 @@
           "data": {
             "entries": [
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "exact",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "exact",
                 "id": "onet",
-                "limitation": "用于职业身份与任务描述；该页明确说明其为军人职业且 O*NET 不采集军人职业数据，本页不据此引用工资或就业数字。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 机组成员职业摘要（军人职业）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "士兵/军官/准尉为一般职责；具体军种和本職要求另核。",
+                  "总览有军队宽类人数与待遇说明，不能称所有军职资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "bls",
-                "limitation": "用于说明军队士兵／军官结构与 BLS 不发布军人职业工资与就业数据的范围；该页在核对时对自动访问返回 403，已多次重试确认，故仅登记地址与用途，未引用其未读到的数字。",
-                "market": "来源覆盖地区",
+                "limitation": "本轮实际读到军队宽类人数、一般职责教育训练、基本薪资制度；这些不是55-3011细分工资分位、规模或空缺。就业预测仅民用劳动力。",
+                "market": "美国军队一般职业资料",
                 "name": "U.S. BLS 职业展望手册：军人职业（Military Careers）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "OOH更新2026-08-27；人数表2024-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "ep",
-                "limitation": "用于任务清单与职责边界；该职业为军人职业，无工资、就业与工作情境数据。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 详细资料（军人职业说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "SOC组55-0000明确not surveyed in OEWS。",
+                  "不使用民用工资分位或行业人数代填55-3011。"
                 ],
                 "evidence_type": "contextual",
                 "id": "oews",
-                "limitation": "用于说明该职业不适用 BLS 职业就业与工资统计（OEWS）；其工资页不存在（访问返回 404），本页未引用任何工资数字。",
-                "market": "来源覆盖地区",
-                "name": "O*NET OnLine 55-3011.00 职业摘要（军人职业无 OEWS 数据说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "limitation": "55-0000军职不在OEWS调查内；OEWS不调查任何职业空缺，也不提供就业预测，不能解释成全部官方军职资料不存在。",
+                "market": "美国OEWS调查",
+                "name": "BLS OEWS常见问题：55类军职不在调查内",
+                "period": "当前覆盖说明，访问2026-10-02",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "contextual",
+                "url": "https://www.bls.gov/oes/oes_ques.htm"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "非私营129441、私营71590；非私营交通133981、制造113594、科研182064、公共119465元/年。",
+                  "规上专业技术155491、办事94936、中层以上管理210016元/年；不按军衔或个人岗位发布。"
+                ],
+                "evidence_type": "industry_proxy",
+                "id": "nbs",
+                "limitation": "行业与规模以上岗位类别年均，非军职/民航具体职业工资或转业待遇；税前5人及以上城镇法人单位，不含个体和自由职业。",
+                "market": "中国大陆城镇法人单位及规上企业",
+                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
+                "period": "2025；发布2026-05-15",
+                "publisher": "国家统计局",
+                "scope": "industry_proxy",
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "军官军士工资、义务兵供给制生活待遇；结构标准由中央军委规定。",
+                  "法条特定任务地区岗位从优，不外推所有任务；第39条教育训练不等招募门槛。"
+                ],
+                "evidence_type": "contextual",
+                "id": "cnclass",
+                "limitation": "第2/69条身份范围、第18条纪律、第33–34条待遇制度；不提供本机组具体招募、资格或待遇金额。",
+                "market": "中国大陆现役军人法律框架",
+                "name": "《中华人民共和国军人地位和权益保障法》（2021-08-01 施行）",
+                "period": "2021-06-10通过；2021-08-01施行",
+                "publisher": "全国人大常委会；北京市政府公布全文",
+                "scope": "contextual",
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202106/t20210611_2411278.html"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
+                ],
+                "evidence_type": "contextual",
+                "id": "privacy",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
+                "name": "O*NET OnLine 55-3011.00 详细资料（任务与工作活动）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
+                "publisher": "O*NET OnLine",
+                "scope": "contextual",
+                "url": "https://www.onetonline.org/link/details/55-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "O*NET军職不采集调查数据。",
+                  "任务描述不能验证工具实效或列装。"
+                ],
+                "evidence_type": "contextual",
+                "id": "facilities",
+                "limitation": "原Hot Technology入口本轮未取得可读资料，不声称已验证零条目或采用率。依据职业页军职不采集调查提示，不使用相邻职业技术频率。",
+                "market": "美国55-3011军职描述",
+                "name": "O*NET55-3011军职调查范围",
+                "period": "当前职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "industry_proxy",
-                  "访问 2026-09-15"
-                ],
-                "evidence_type": "industry_proxy",
-                "id": "nbs",
-                "limitation": "用于中国大陆民用行业门类与岗位类别年平均工资；不含军人，仅作转业后民用就业参照。",
-                "market": "来源覆盖地区",
-                "name": "国家统计局《2025 年城镇单位就业人员年平均工资情况》",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
-                "publisher": "国家统计局",
-                "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/zwfwck/sjfb/202605/t20260515_1963707.html"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "contextual",
-                  "访问 2026-09-15"
-                ],
-                "evidence_type": "contextual",
-                "id": "cnclass",
-                "limitation": "用于中国大陆军人范围（第二条）与待遇保障制度（第四章，含相对独立的军人工资待遇制度与特殊任务从优保障）的框架说明；不含具体待遇标准。",
-                "market": "来源覆盖地区",
-                "name": "《中华人民共和国军人地位和权益保障法》（2021-08-01 施行）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
-                "publisher": "全国人民代表大会常务委员会（地方政府网站转载全文）",
-                "scope": "contextual",
-                "url": "https://yncn.gov.cn/info/9654/8710920.htm"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "contextual",
-                  "访问 2026-09-15"
-                ],
-                "evidence_type": "contextual",
-                "id": "privacy",
-                "limitation": "用于任务与职责说明；军人职业不采集工作情境数据。",
-                "market": "来源覆盖地区",
-                "name": "O*NET OnLine 55-3011.00 详细资料（任务与工作活动）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/details/55-3011.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "contextual",
-                  "访问 2026-09-15"
-                ],
-                "evidence_type": "contextual",
-                "id": "facilities",
-                "limitation": "用于说明该军人职业无基于招聘文本的技术条目；不表示任何技术采用率。",
-                "market": "来源覆盖地区",
-                "name": "O*NET OnLine 55-3011.00 技术清单（无匹配条目）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
-                "publisher": "O*NET OnLine",
-                "scope": "contextual",
-                "url": "https://www.onetonline.org/link/hot_tech/55-3011.00"
-              },
-              {
-                "accessed_at": "2026-09-15",
-                "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "operations",
-                "limitation": "用于职业概述与相关民用职业入口。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 自定义职业档案",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "hr",
-                "limitation": "用于任务清单与职责说明；军人职业无就业与工资数据。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 职业摘要（任务清单）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
                   "contextual",
                   "访问 2026-09-15"
                 ],
                 "evidence_type": "contextual",
                 "id": "health",
-                "limitation": "用于解释民用工资总额为税前口径及其组成范围（不适用于军人待遇）。",
-                "market": "来源覆盖地区",
+                "limitation": "用于民用工资组成的统计定义，不是本军职待遇标准。",
+                "market": "中国大陆工资总额组成规定",
                 "name": "国家统计局《关于工资总额组成的规定》",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "工资总额组成规定；仅统计定义",
                 "publisher": "国家统计局",
                 "scope": "contextual",
                 "url": "https://www.stats.gov.cn/xxgk/zcfggz/tjxzfg2020/202605/t20260511_1963662.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "士兵/军官/准尉为一般职责；具体军种和本職要求另核。",
+                  "总览有军队宽类人数与待遇说明，不能称所有军职资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "ilo",
-                "limitation": "用于说明军队士兵与军官的职责分工与准尉技术岗位；该页不提供军人职业的工资与就业数字。",
-                "market": "来源覆盖地区",
+                "limitation": "本轮实际读到军队宽类人数、一般职责教育训练、基本薪资制度；这些不是55-3011细分工资分位、规模或空缺。就业预测仅民用劳动力。",
+                "market": "美国军队一般职业资料",
                 "name": "BLS 职业展望手册：军人职业（士兵／军官路径说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "OOH更新2026-08-27；人数表2024-02",
                 "publisher": "U.S. Bureau of Labor Statistics",
                 "scope": "contextual",
                 "url": "https://www.bls.gov/ooh/military/military-careers.htm"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军官军士工资、义务兵供给制生活待遇；结构标准由中央军委规定。",
+                  "法条特定任务地区岗位从优，不外推所有任务；第39条教育训练不等招募门槛。"
                 ],
                 "evidence_type": "contextual",
                 "id": "editor",
-                "limitation": "用于中国大陆军人的服役与待遇保障框架说明；不含具体待遇标准，也不构成法律意见。",
-                "market": "来源覆盖地区",
+                "limitation": "第2/69条身份范围、第18条纪律、第33–34条待遇制度；不提供本机组具体招募、资格或待遇金额。",
+                "market": "中国大陆现役军人法律框架",
                 "name": "《中华人民共和国军人地位和权益保障法》全文",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
-                "publisher": "全国人民代表大会常务委员会（地方政府网站转载全文）",
+                "period": "2021-06-10通过；2021-08-01施行",
+                "publisher": "全国人大常委会；北京市政府公布全文",
                 "scope": "contextual",
-                "url": "https://yncn.gov.cn/info/9654/8710920.htm"
+                "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202106/t20210611_2411278.html"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "nist",
-                "limitation": "用于任务与职责边界说明。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 详细资料（任务与职责）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "arxiv",
-                "limitation": "用于说明军人职业不采集数据的范围。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 职业摘要（军人职业数据说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "weforum",
-                "limitation": "用于说明数据不可得的具体范围。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 军人职业数据边界说明",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "employer",
-                "limitation": "用于相关民用职业入口。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 自定义职业档案（相关民用职业）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/custom/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "purchasing-managers",
-                "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 职业摘要（任务与职责）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-1",
-                "limitation": "用于任务描述与职责边界。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 任务描述",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-2",
-                "limitation": "用于职业属性说明。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 职业摘要（军人职业属性）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "r2-pay-3",
-                "limitation": "用于数据不适用说明。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 详细资料（数据不适用说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "census",
-                "limitation": "用于任务清单参考。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 详细资料（任务清单）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "msresearch",
-                "limitation": "用于任务与职责参考。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 职业摘要（任务与职责）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "onet-wages",
-                "limitation": "用于说明该职业不存在可核实的工资数据（工资页返回 404）。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 军人职业无工资数据说明",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/summary/55-3011.00"
               },
               {
-                "accessed_at": "2026-09-15",
+                "accessed_at": "2026-10-02",
                 "details": [
-                  "contextual",
-                  "访问 2026-09-15"
+                  "军人职业不采集O*NET调查数据；最佳具体资料由军种提供。",
+                  "本页仅用可读任务描述，不由失败工资页或无调查数据推所有军职公开资料不存在。"
                 ],
                 "evidence_type": "contextual",
                 "id": "archivists",
-                "limitation": "用于检查、记录与应急处置过程说明。",
-                "market": "来源覆盖地区",
+                "limitation": "O*NET军职身份和任务描述；不含本职兴趣、学历、情境调查或AI采用实效。延伸链接仅导航，不假称已核现行资格。",
+                "market": "美国55-3011军职描述",
                 "name": "O*NET OnLine 55-3011.00 详细资料（记录与检查要求说明）",
-                "period": "不适用（军人职业无工资与就业统计）／2025 年（中国民用工资参照）",
+                "period": "当前O*NET职业说明；访问2026-10-02",
                 "publisher": "O*NET OnLine",
                 "scope": "contextual",
                 "url": "https://www.onetonline.org/link/details/55-3011.00"
+              },
+              {
+                "accessed_at": "2026-10-02",
+                "details": [
+                  "符合条件者可基于军方飞行员资格申请商业飞行员、仪表或机型等级，需考试及官方记录等。",
+                  "不是所有Air Crew Members均为飞行员，也不是持军职经历自动得民用执照。"
+                ],
+                "evidence_type": "contextual",
+                "id": "faa-military",
+                "limitation": "只作美国特定资格认定边界，不外推中国或本机组全体成员。",
+                "market": "美国，符合条款的军方或前军方飞行员",
+                "name": "14 CFR61.73：军方飞行员申请民用证照/等级条件",
+                "period": "eCFR截至2026-09-30；访问2026-10-02",
+                "publisher": "Office of the Federal Register / eCFR；FAA条文",
+                "scope": "contextual",
+                "url": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-D/part-61/subpart-B/section-61.73"
               }
             ]
           },
@@ -32944,7 +33053,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国法律",
+            "类型": "美国一般教育训练",
             "适用范围": {
               "$item": "air-crew-members.ai-impact.ai-impact-table.26",
               "block": "ai-impact",
@@ -32966,7 +33075,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "中国官方统计",
+            "类型": "OEWS调查范围",
             "适用范围": {
               "$item": "air-crew-members.ai-impact.ai-impact-table.28",
               "block": "ai-impact",
@@ -32988,7 +33097,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "技术清单说明",
+            "类型": "O*NET军职数据边界",
             "适用范围": {
               "$item": "air-crew-members.ai-impact.ai-impact-table.30",
               "block": "ai-impact",
@@ -33010,7 +33119,7 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "类型": "职业档案",
+            "类型": "职业说明导航",
             "适用范围": {
               "$item": "air-crew-members.ai-impact.ai-impact-table.32",
               "block": "ai-impact",
@@ -33347,7 +33456,7 @@
               "entry": "link-15",
               "field": "url"
             },
-            "问题": "中国大陆的军人待遇如何理解？"
+            "问题": "美国士兵、军官与专业训练怎样区分？"
           },
           {
             "回答": {
@@ -34713,8 +34822,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "facilities"
+              "onet",
+              "bls"
             ],
             "id": "cost-change",
             "mitigation": {
@@ -34745,8 +34854,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "ep",
-              "operations"
+              "onet",
+              "bls"
             ],
             "id": "record-version",
             "mitigation": {
@@ -34777,8 +34886,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "operations",
-              "employer"
+              "onet",
+              "bls"
             ],
             "id": "personal-data",
             "mitigation": {
@@ -34809,8 +34918,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "privacy",
-              "operations"
+              "onet",
+              "employer"
             ],
             "id": "technical-boundary",
             "mitigation": {
@@ -34841,8 +34950,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "hr",
-              "ep"
+              "bls",
+              "onet"
             ],
             "id": "single-coverage",
             "mitigation": {
@@ -34873,8 +34982,8 @@
               "type": "prose"
             },
             "evidence_refs": [
-              "editor",
-              "operations"
+              "onet",
+              "employer"
             ],
             "id": "delivery-acceptance",
             "mitigation": {
@@ -35368,7 +35477,7 @@
           "ui": {
             "ai_heading": "AI 会影响机组成员的工资吗？",
             "driver_heading": "哪些行业与方向会用到这个职业？",
-            "official_heading": "公开招聘样本（历史公告，非官方统计）",
+            "official_heading": "NBS行业与规上岗位背景（非军职工资）",
             "scenario_caption": "学历背景、常见岗位方向与核对建议（编辑整理，不是薪资统计）",
             "scenario_heading": "机组成员在不同学历背景下通常从哪些岗位方向开始？",
             "scenario_interpretation_label": "说明与核对建议",
@@ -35741,7 +35850,7 @@
         "wage_heading": "美国工资分布",
         "wage_tiers": [
           {
-            "equivalent": "官方年工资，非个人月收入",
+            "equivalent": "未提供本職工资分位",
             "interpretation": {
               "$item": "air-crew-members.us-salary.career-snapshot-secondary-locale.51",
               "block": "us-salary",
@@ -35755,7 +35864,7 @@
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "未提供本職工资中位",
             "interpretation": {
               "$item": "air-crew-members.us-salary.career-snapshot-secondary-locale.52",
               "block": "us-salary",
@@ -35769,7 +35878,7 @@
             }
           },
           {
-            "equivalent": "官方年工资，非个人实发",
+            "equivalent": "未提供本職工资分位",
             "interpretation": {
               "$item": "air-crew-members.us-salary.career-snapshot-secondary-locale.53",
               "block": "us-salary",
@@ -35835,7 +35944,7 @@
       },
       "hero": {
         "h1": "机组成员",
-        "quick_answer": "机组成员是在军用航空器飞行任务中操作通信与探测、武器与防御、空中加油等任务系统，执行检查、载荷核算、空投与应急处置的军人岗位；本页不提供军人待遇数字，也不套用民用航空岗位的工资统计；适合先用公开资料与模拟数据做一次检查、核算与应急书写准备。",
+        "quick_answer": "机组成员是军用航空器上的任务系统操作与检查核算岗位；本页军职与民用航空分开，工资及就业指标不以相邻民用统计代填。可用AC28-V1虚构纸面核算和交接练习了解记录方法，不能代替真实选拔或操作。",
         "title": "机组成员"
       },
       "market_signal_card": {
@@ -36386,7 +36495,7 @@
           },
           {
             "alternate_value": null,
-            "label": "BLS 军人职业（不发布军人工资与就业数据）",
+            "label": "BLS：宽类军队人数与民用预测边界",
             "secondary_value": null,
             "value": {
               "$item": "air-crew-members.profile.onet-structured-fields-block.4",
@@ -37187,7 +37296,7 @@
           "entry": "navigation-1",
           "field": "url"
         },
-        "label": "测我的职业兴趣是否适合机组成员",
+        "label": "探索我的职业兴趣（不作军队选拔结论）",
         "source_page_type": "career_job_detail",
         "subject_key": {
           "$subject": "canonical_slug"
@@ -37264,7 +37373,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "MBTI（英文）"
+            "label": "大五人格（英文）"
           },
           {
             "href": {
@@ -37274,7 +37383,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "Big Five（英文）"
+            "label": "MBTI（中文）"
           },
           {
             "href": {
@@ -37284,7 +37393,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "MBTI（中文）"
+            "label": "九型人格（中文）"
           },
           {
             "href": {
@@ -37294,7 +37403,7 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "Big Five（中文）"
+            "label": "智力与推理测试"
           }
         ]
       },
@@ -37422,155 +37531,164 @@
         "derivation": null,
         "display_value": "O*NET 55-3011.00（军人职业）",
         "fact_id": "identity",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国军职分类",
         "measure": "官方职业代码",
         "occupation_scope": "机组成员",
-        "period": "2026 年更新页面；访问 2026-09-15",
+        "period": "访问2026-10-02",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：O*NET/BLS 不采集军人职业的工资数据",
+        "display_value": "未提供本职P10",
         "fact_id": "us-wage-low10-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业工资分位",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
-          "onet"
+          "oews",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：O*NET/BLS 不采集军人职业的工资数据",
+        "display_value": "未提供本职P25",
         "fact_id": "us-wage-q25-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业工资分位",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
-          "onet"
+          "oews",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：军人待遇按军衔与军龄的薪级制度，不适用 BLS 职业工资统计",
+        "display_value": "未提供本职工资中位",
         "fact_id": "us-wage-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人待遇口径",
         "occupation_scope": "机组成员",
-        "period": "现行制度",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：O*NET/BLS 不采集军人职业的工资数据",
+        "display_value": "未提供本职P75",
         "fact_id": "us-wage-q75-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业工资分位",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
-          "onet"
+          "oews",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：O*NET/BLS 不采集军人职业的工资数据",
+        "display_value": "未提供本职P90",
         "fact_id": "us-wage-high10-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业工资分位",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
-          "onet"
+          "oews",
+          "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不发布军人职业的就业统计",
+        "display_value": "未提供55-3011细分规模",
         "fact_id": "us-employment-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业就业规模",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不发布军人职业的就业预测",
+        "display_value": "民用预测不覆盖军职",
         "fact_id": "us-growth-2025-2035",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业就业预测",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不发布军人职业的职位空缺统计",
+        "display_value": "未提供55-3011年均空缺",
         "fact_id": "us-openings-2025-2035",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业职位空缺",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不按行业发布军人职业工资",
+        "display_value": "未提供本职按行业工资",
         "fact_id": "us-industry-wage-finance-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业行业工资",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不按行业发布军人职业工资",
+        "display_value": "未提供本职按行业工资",
         "fact_id": "us-industry-wage-professional-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业行业工资",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不按行业发布军人职业工资",
+        "display_value": "未提供本职按行业工资",
         "fact_id": "us-industry-wage-localgov-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业行业工资",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不按行业发布军人职业工资",
+        "display_value": "未提供本职按行业工资",
         "fact_id": "us-industry-wage-education-2025",
-        "market": "中国大陆与美国分开核对",
+        "market": "美国",
         "measure": "军人职业行业工资",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
@@ -37578,9 +37696,9 @@
         "derivation": null,
         "display_value": "129,441元/年（2025，城镇非私营单位，民用口径）",
         "fact_id": "cn-urban-nonprivate-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用单位年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用单位年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37590,9 +37708,9 @@
         "derivation": null,
         "display_value": "71,590元/年（2025，城镇私营单位，民用口径）",
         "fact_id": "cn-private-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用私营单位年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用私营单位年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37602,9 +37720,9 @@
         "derivation": null,
         "display_value": "210,016元/年（2025，规上企业中层及以上管理人员）",
         "fact_id": "cn-mid-managers-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用岗位类别年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用岗位类别年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37614,9 +37732,9 @@
         "derivation": null,
         "display_value": "94,936元/年（2025，规上企业办事人员和有关人员）",
         "fact_id": "cn-clerical-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用岗位类别年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用岗位类别年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37626,9 +37744,9 @@
         "derivation": null,
         "display_value": "74,424元/年（2025，城镇非私营单位农、林、牧、渔业）",
         "fact_id": "cn-industry-rental-business-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用行业门类年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用行业门类年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37638,9 +37756,9 @@
         "derivation": null,
         "display_value": "182,064元/年（2025，城镇非私营单位科学研究和技术服务业）",
         "fact_id": "cn-industry-science-tech-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用行业门类年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用行业门类年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37650,9 +37768,9 @@
         "derivation": null,
         "display_value": "133,981元/年（2025，城镇非私营单位交通运输、仓储和邮政业）",
         "fact_id": "cn-industry-education-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用行业门类年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用行业门类年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37662,9 +37780,9 @@
         "derivation": null,
         "display_value": "119,465元/年（2025，城镇非私营单位公共管理、社会保障和社会组织）",
         "fact_id": "cn-industry-public-admin-2025",
-        "market": "中国大陆与美国分开核对",
-        "measure": "民用行业门类年平均工资（不含军人）",
-        "occupation_scope": "机组成员",
+        "market": "中国大陆",
+        "measure": "民用行业门类年平均工资（非本军职指标）",
+        "occupation_scope": "NBS城镇单位行业或规上岗位类别背景，非机组成员",
         "period": "2025年；2026-05-15 发布",
         "source_refs": [
           "nbs"
@@ -37677,13 +37795,13 @@
         "market": "美国军职分类",
         "measure": "官方职业代码",
         "occupation_scope": "机组成员",
-        "period": "访问 2026-09-15",
+        "period": "访问2026-10-02",
         "source_refs": [
           "onet"
         ]
       },
       {
-        "derivation": "对来源支持的定性事实做中文归一化，不生成数值。",
+        "derivation": "编辑依据O*NET任务列表整理的流程示意，不是军队统一操作顺序或运行规程。",
         "display_value": "任务—飞行前检查—任务执行—应急处置—飞行后检查与记录",
         "fact_id": "occupation-workflow",
         "market": "美国军职分类",
@@ -37701,21 +37819,22 @@
         "market": "美国标准职业分类",
         "measure": "职业边界",
         "occupation_scope": "机组成员",
-        "period": "访问 2026-09-15",
+        "period": "访问2026-10-02",
         "source_refs": [
           "onet"
         ]
       },
       {
         "derivation": "对来源支持的定性事实做中文归一化，不生成数值。",
-        "display_value": "军人职业不适用 BLS OEWS／OOH 的工资与就业统计",
+        "display_value": "本职细分指标未提供",
         "fact_id": "market-data-unavailable",
-        "market": "美国 O*NET 职业目录",
+        "market": "美国",
         "measure": "市场数据可得性",
         "occupation_scope": "机组成员",
-        "period": "访问 2026-09-15",
+        "period": "本职指标未提供",
         "source_refs": [
-          "onet"
+          "oews",
+          "bls"
         ]
       },
       {
@@ -37732,48 +37851,51 @@
       },
       {
         "derivation": null,
-        "display_value": "不适用：军人待遇不按职业工资统计发布",
+        "display_value": "未提供本职工资中位",
         "fact_id": "us-wage",
         "market": "美国",
         "measure": "军人待遇口径",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
+          "oews",
           "bls"
         ]
       },
       {
         "derivation": null,
-        "display_value": "O*NET 55-3011.00 技术清单无匹配条目（军人职业不采集数据）",
+        "display_value": "O*NET不采集55-3011军职调查数据；不提供技术采用率",
         "fact_id": "technology-context",
         "market": "美国",
         "measure": "技术页面可用性",
         "occupation_scope": "机组成员",
-        "period": "访问 2026-09-15",
+        "period": "访问2026-10-02",
         "source_refs": [
-          "facilities"
+          "onet"
         ]
       },
       {
         "derivation": null,
-        "display_value": "军人职业按军队选拔、训练与任职制度管理，不使用民用职业资格目录",
+        "display_value": "军职授权与民用资格分开核具体法域",
         "fact_id": "credential-boundary",
-        "market": "美国",
+        "market": "美国与中国大陆分别核",
         "measure": "资格制度边界",
         "occupation_scope": "机组成员",
-        "period": "访问 2026-09-15",
+        "period": "访问2026-10-02",
         "source_refs": [
-          "editor"
+          "onet",
+          "cnclass",
+          "faa-military"
         ]
       },
       {
         "derivation": null,
-        "display_value": "不适用：BLS 不发布军人职业的就业预测",
+        "display_value": "民用预测不覆盖军职",
         "fact_id": "employment-projection",
         "market": "美国",
         "measure": "就业预测口径",
         "occupation_scope": "机组成员",
-        "period": "不适用",
+        "period": "本职指标未提供",
         "source_refs": [
           "bls"
         ]
@@ -37790,7 +37912,7 @@
     "badges": [
       "军人职业：机上任务系统操作 · 检查与载荷核算 · 应急处置",
       "AI：任务级变化说明 · 不给出替代年份",
-      "军人职业不适用 BLS 工资与就业统计 · 数据缺口标注"
+      "本职细分指标未提供 · 民用与军职口径分开"
     ],
     "metrics": [
       {
@@ -37836,7 +37958,7 @@
       "text": "机组成员（军人职业）：任务、路径与数据边界"
     }
   },
-  "source_content_sha256": "27541d5fa5bfeaf5cdd19253609310a08f7c65f9af207a4f18ab81a954881bf8",
+  "source_content_sha256": "ba4b008b3863e007a77b7dcf800e255660ce1bf46e22c445345e4283c4b3e0a1",
   "subject": {
     "canonical_slug": "air-crew-members",
     "name": "机组成员",

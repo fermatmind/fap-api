@@ -26024,7 +26024,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.1",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26038,7 +26038,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.2",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26052,7 +26052,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.3",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26066,7 +26066,8 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.4",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26080,7 +26081,7 @@
           },
           "id": "actors.china-salary.career-snapshot-primary-locale.5",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26094,7 +26095,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.heading",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26108,7 +26109,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.quote-limits",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26122,7 +26123,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.missing-pay",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26136,7 +26137,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.featured",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26150,7 +26152,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.background",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26164,7 +26167,8 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.theater",
           "source_refs": [
-            "sag-moa"
+            "nbs",
+            "cn-rule"
           ],
           "type": "prose"
         },
@@ -26178,7 +26182,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.scenario.national",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26192,7 +26196,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.driver.continuity",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26206,7 +26210,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.ai-answer",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         },
@@ -26220,7 +26224,7 @@
           },
           "id": "actors.display.career_snapshot_primary_locale.boundary",
           "source_refs": [
-            "sag-moa"
+            "nbs"
           ],
           "type": "prose"
         }
@@ -31022,16 +31026,18 @@
                 "question": "中国大陆的工资能查到吗？",
                 "question_key": "career.faq.embalmers.6",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "nbs"
                 ]
               },
               {
-                "answer": "美国 O*NET 调查中约 86% 回答需要副学士或两年制学位、14% 需要学士；通常就读殡葬科学专业并通过考试取得州执照。中国大陆多要求相关专业学历并按殡葬行业与卫生规定取得岗位资质。",
+                "answer": "美国 O*NET 调查中约 86% 回答需要副学士或两年制学位、14% 需要学士；通常就读殡葬科学专业并通过考试取得州执照。中国大陆：殡葬管理与殡葬服务由民政部门主管（《殡葬管理条例》，2025 年修订，国务院令第 824 号，自 2026 年 3 月 30 日施行）；遗体接运、存放、火化、骨灰寄存等基础服务项目纳入国家清单管理；具体岗位的学历与资格要求按目标单位招聘公告与主管部门规定逐项核对，本页未取得可对外引用的全国统一条件。",
                 "id": "actors.faq.7",
                 "question": "需要什么学历和资格？",
                 "question_key": "career.faq.embalmers.7",
                 "source_refs": [
-                  "onet"
+                  "onet",
+                  "cn-rule"
                 ]
               },
               {
@@ -31306,20 +31312,20 @@
                 "url": "https://www.bls.gov/ooh/personal-care-and-service/morticians-undertakers-and-funeral-arrangers.htm"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "用于检索中国公开政策、职业与培训入口。",
-                  "入口页不承载职业工资数值。"
+                  "第四条规定国务院民政部门负责全国的殡葬管理工作，县级以上地方人民政府民政部门负责本行政区域内的殡葬管理工作。",
+                  "第五条规定殡葬服务分为基础项目与非基础项目，遗体接运、存放、告别、火化、骨灰寄存、生态安葬等纳入国家基础项目清单；条例未对殡葬服务岗位设定统一学历或资格证书门槛。"
                 ],
-                "evidence_type": "official policy portal",
+                "evidence_type": "official regulation",
                 "id": "cn-rule",
-                "limitation": "入口页不承载职业工资数值。",
+                "limitation": "规范殡葬管理与服务，未对具体服务岗位设定全国统一学历或资格证书要求；具体以条例原文与民政部门规定为准。",
                 "market": "中国",
-                "name": "民政部与人力资源和社会保障部公开入口",
-                "period": "current portal; accessed 2026-09-20",
-                "publisher": "中华人民共和国人力资源和社会保障部",
+                "name": "国务院：《殡葬管理条例》（2025 年修订，国务院令第 824 号）",
+                "period": "2025-12-12 公布第二次修订，自 2026-03-30 施行；accessed 2026-09-30",
+                "publisher": "中华人民共和国国务院",
                 "scope": "contextual",
-                "url": "https://www.mohrss.gov.cn/"
+                "url": "https://www.gov.cn/zhengce/content/202601/content_7054168.htm"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -31434,20 +31440,20 @@
                 "url": "https://www.onetonline.org/"
               },
               {
-                "accessed_at": "2026-09-20",
+                "accessed_at": "2026-09-30",
                 "details": [
-                  "核对中国行业与人员大类工资口径。",
-                  "不能替代本职业精确工资。"
+                  "2025 年城镇单位（非私营与私营）分区域、行业门类、登记注册统计类别与岗位类别的就业人员年平均工资。",
+                  "用于说明中国大陆工资统计口径与行业门类量级；不提供本职业职业级工资分位。"
                 ],
                 "evidence_type": "official aggregate wage statistics",
                 "id": "nbs",
                 "limitation": "不能替代职业级工资；仅用于说明口径边界。",
                 "market": "中国",
-                "name": "国家统计局 — 城镇单位就业人员年平均工资情况",
-                "period": "annual wages; accessed 2026-09-20",
+                "name": "国家统计局 — 2025 年城镇单位就业人员年平均工资情况",
+                "period": "2025 年数据，2026-05-15 发布；accessed 2026-09-30",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/sj/zxfb/"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
                 "accessed_at": "2026-09-20",
@@ -37090,7 +37096,7 @@
       "text": "遗体防腐师：职责、工资与入行路径"
     }
   },
-  "source_content_sha256": "ddbf58a7cf1439ab6bf739de4eb6dc81d2a2a1204c290b73454af7b800059cbc",
+  "source_content_sha256": "79e34efa595d3d5c6da2f079bd41cdfdd83cbefbd62726df64c50fd0549421d8",
   "subject": {
     "canonical_slug": "embalmers",
     "name": "遗体防腐师",

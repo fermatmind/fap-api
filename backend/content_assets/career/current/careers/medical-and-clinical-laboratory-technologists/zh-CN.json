@@ -7193,7 +7193,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "以下判断针对医疗临床技术专家执行复杂医学检验、进行方法学与质量保证工作并可培训或监督人员的日常工作；不预测录用、执业资格或最终诊断责任。"
+              "本页探索复杂医学检验、方法评估与质量保证职责；官方描述为“可”培训或监督人员，实际授权不能由职位名称或纸面作品推定。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.1",
@@ -7224,7 +7224,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的任务包：给出一份虚构的复杂生化检验任务（含 1 份虚构标本与申请、1 组虚构质控与校准数据、1 项待评估的方法学变更），要求在 60 分钟内写出检验与质控步骤、结果验证要点、方法变更评估与升级路径，以及需向有权限者确认的情形；不使用真实患者信息或真实标本。"
+              "60分钟纸面方法比较题（编辑虚构，不含患者、标本或仪器操作）：旧方法M0对三个模拟对象K1/K2/K3给出的数值为100/200/300；候选M1为102/198/312。题内比较规则为每一对的绝对差不超过5才满足数据条件，不能取平均掩盖单项失败。M0质控状态“通过”，M1质控状态“通过”；变更申请V7审批状态“待审”，无签名。计算逐对差值，判断数据条件与审批条件分别是否满足；即使数据条件满足，未获审批也不得写“已获准使用”。形成一页原值、差值、失败项、待决问题与交接对象清单。5仅是题内游戏规则，不是临床容许误差、健康阈值或真实方法验证标准。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.3",
@@ -7238,7 +7238,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先核对标本与申请，是否按方法与质控要求处理，是否说明结果验证与方法变更判断，是否区分标本差错、方法结论与感染控制三类问题；再问自己能否在高精确要求下承担方法与质量责任、能否在异常时停下并升级。"
+              "参考解：K1差2、K2差2、K3差12；前两对满足题内规则，K3超规则上限7，整体数据条件不满足。两方法的“质控通过”不能代替逐对比较，也不能覆盖K3；V7待审且无签名，审批条件也不满足。结论只能是“数据条件失败、审批待审，交指定方法/质量审核者确认”，不能写M1已验证、已批准或可临床使用。交接保留100/102、200/198、300/312与原状态，不擅改312或补签名。10分钟读题、20分钟独立计算、20分钟写清单、10分钟遮盖原解重算并保留纠错版本。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.4",
@@ -7333,7 +7333,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：O*NET 工作情境显示电话沟通（4.98）、精确或高度准确（4.95）、穿戴防护或安全装备（4.87）、电子邮件（4.86）、环境受控的室内工作（4.79）与接触疾病或感染（4.74）最为突出；面对面讨论（4.60）、团队协作（4.45）、决策频率（4.40）、时间压力（4.36）与手工操作（4.23）也较高。"
+              "O*NET美国受访者：95%认为精确极其重要，93%每天穿戴防护/安全装备，95%每天在受控室内工作，85%每天接触疾病或感染，61%认为差错后果极其严重；各比例对应不同问题与选项，不是感染概率。47%回答高度自动化，不等于生成式AI采用率。具体班次核雇主岗位和合同。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.work-context-block.6",
@@ -7341,14 +7341,14 @@
             "source-pack-onet-custom"
           ],
           "type": "prose",
-          "visibility": "internal"
+          "visibility": "public"
         },
         {
           "availability": "available",
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 29-2011.00 的官方描述、任务、技能、兴趣代码、工作活动与工作情境，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（后者为 Clinical Laboratory Technologists and Technicians 29-2011 组合口径）；研究结论不据此推定中国大陆的资格、工资或就业口径。"
+              "研究输入：O*NET 29-2011.00 的官方描述、任务、技能、兴趣代码、工作活动与工作情境，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（后者为 Clinical Laboratory Technologists and Technicians 组合口径）；研究结论不据此推定中国大陆的资格、工资或就业口径。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.onet-structured-fields-block.7",
@@ -7377,7 +7377,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "工作闭环：从核对标本与申请开始，经过方法处理与检测、结果验证、质量保证与设备维护，到复核、报告与技术沟通；标本身份未确认前不检测，方法变更未验证前不使用，任一异常或感染控制疑问未确认前不推进。"
+              "工作闭环由机构规程规定：核对输入与方法，执行检测，复核结果和质量记录，依授权审核报告并交接异常。身份、方法或感染控制有未决疑问时记录并升级，是否暂停或恢复由适用程序与授权人员判断。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.career-quick-answers-block.9",
@@ -7391,7 +7391,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖 29-2011.00 的复杂医学检验与方法／质量工作；微生物学家面向研究与方法开发，医学科学家面向疾病机制科研，化学家面向化学分析；各岗位的对象、资格与责任不得互换。"
+              "中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.profile.definition-block.10",
@@ -7399,7 +7399,7 @@
             "onet-summary"
           ],
           "type": "prose",
-          "visibility": "internal"
+          "visibility": "public"
         }
       ]
     },
@@ -7536,7 +7536,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：AI 可辅助数据整理、结果初筛、方法检索与记录草拟；复杂判读、方法结论、异常升级与感染控制仍由有权限的人负责。"
+              "编辑试验假设：只让工具整理本页虚构M0/M1比较表和交接草稿，再由人核原值、差值、失败项及审批状态；不上传患者数据，不用于临床初筛、诊断、真实方法验证或报告放行。本页热门软件招聘提及不是生成式AI采用或性能证据。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.ai-impact.ai-impact-table.2",
@@ -7550,7 +7550,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "证据方法：任务能力、组织采用与岗位结果是三类不同证据，需分别核对。"
+              "证据方法：O*NET描述职业任务；2025年美国招聘软件提及描述技能需求；编辑纸面试验描述待验证用途。三者都不直接证明临床AI性能、机构采用或岗位减少。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.ai-impact.ai-impact-table.3",
@@ -7592,7 +7592,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "使用边界：工具输出必须能追回到原始标本、方法、质控状态与真实记录。"
+              "编辑试验只用虚构方法表，必须回查原值、比较规则和待审状态；真实实验室用途另需验证、隐私与机构授权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.ai-impact.ai-impact-table.6",
@@ -7606,7 +7606,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "辅助数据整理、结果初筛、方法检索与记录草拟。"
+              "编辑假设：整理虚构M0/M1表；不作为临床结果初筛。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.ai-impact.ai-impact-table.7",
@@ -7620,7 +7620,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "由有权限者复核判读、方法与放行判断。"
+              "逐对复算差值，保留K3失败及V7待审；真实方法结论依验证程序及岗位授权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.ai-impact.ai-impact-table.8",
@@ -7642,7 +7642,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局公开口径有界检索，未取得与 O*NET 29-2011.00 医疗临床技术专家精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "本页未取得与O*NET 29-2011.00精确对应的中国大陆全国职业工资分布。国家统计局2025年城镇单位工资按行业等口径聚合，不能替代本职业中位、分位或稳定月薪；这不等于证明所有中国公开来源都没有职业工资。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.china-salary.career-snapshot-primary-locale.1",
@@ -7706,7 +7706,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国医疗临床技术专家薪资与就业口径（BLS 2025 年工资数据与 2024—2034 年预测；O*NET 展示为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径）"
+              "美国医疗临床技术专家薪资与就业口径（BLS 2025 年工资数据与 2024—2034 年预测；O*NET 展示为 Clinical Laboratory Technologists and Technicians组合口径）"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.1",
@@ -7720,7 +7720,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "BLS 2025 年组合口径工资数据：中位年薪 62,930 美元（约 30.26 美元/小时）；10 分位 38,910 美元（18.71 美元/小时）、25 分位 47,650 美元（22.91 美元/小时）、75 分位 81,450 美元（39.16 美元/小时）、90 分位 100,990 美元（48.55 美元/小时）。以上为 O*NET 展示的 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，不能当作单列本职业；分位是统计位置，不含个人到手收入。"
+              "BLS 2025 年组合口径工资数据：中位年薪 62,930 美元（约 30.26 美元/小时）；10 分位 38,910 美元（18.71 美元/小时）、25 分位 47,650 美元（22.91 美元/小时）、75 分位 81,450 美元（39.16 美元/小时）、90 分位 100,990 美元（48.55 美元/小时）。以上为 O*NET 展示的 Clinical Laboratory Technologists and Technicians组合口径，不能当作单列本职业；分位是统计位置，不含个人到手收入。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.2",
@@ -7748,7 +7748,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该职业 2024 年行业分布为医疗保健与社会援助（约 83%）与其他行业（约 17%，含教育服务）；行业分布是雇主场景信号，不是需求预测。"
+              "证据不足：未取得美国各行业工资，不能用全国分位填行业工资。行业组合范围：O*NET摘要明确行业数据覆盖Clinical Laboratory Technologists and Technicians。83%医疗保健与社会援助、17%其他行业沿本职业冻结报告2026-09-25记录，本轮完整行业页未成功读取，不作为新核比例。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.4",
@@ -7854,7 +7854,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的标本完成一次复杂检验与方法验证演练，再决定是否继续。"
+              "试验动作：用M0/M1虚构方法表逐对计算，区分数据失败与审批待审，保留纠错作品；不进行复杂检验或真实方法验证。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.fit.riasec-fit-block.5",
@@ -7882,7 +7882,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格：工具只描述倾向，不能替代真实任务、标准与雇主判断；用工作样本核对精确性与压力下的表现。"
+              "大五人格只用于提出倾向假设，不替代任务或资格判断；在本题观察是否逐对核K3差12、保留原值并面对催促仍记录V7待审，不由一次题目推断人格分数。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.fit.riasec-fit-block.7",
@@ -7960,7 +7960,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "质控或设备维护不足仍出结果：放行结果时，触发条件为质控未在控或设备未校准；可能造成系统性错误；控制为停用并纠正后复检。"
+              "设备或质控异常仍报告结果可能造成系统性错误；按实验室质量系统记录、查因、纠正与复核，由授权人员决定检测和报告是否恢复，本页不提供临床复检操作指令。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.risk.career-risk-cards.4",
@@ -8011,7 +8011,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主证据：用教育、培训、经验与雇主要求分别核对；美国 Job Zone 4 通常要求四年制学士学位并需相当工作经验（约 52% 报告学士学位要求），执业与监督边界按法域核验。"
+              "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。 中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.path.career-path-block.2",
@@ -8025,7 +8025,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品与经验：可从检验技术员或实验室助理岗位逐步积累，保留可复核的方法验证、质控与检验记录作为能力证据。"
+              "编辑作品：交M0/M1原表、逐对计算、数据条件/审批条件两栏结论、交接单及纠错版本。纸面作品仅供职业探索，不替代临床训练、专业资格或实际方法性能验证。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.path.career-path-block.3",
@@ -8053,7 +8053,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七天试验：前两天理解检验流程、方法学与感染控制要求，中间三天完成一次虚构标本的复杂检验与方法验证演练，第六天请他人挑战结果与方法判断，第七天写继续/停止/换方向的证据。"
+              "七日纸面探索，每日30—60分钟：第1天区分技术专家与技术员职责及法域；第2天画数据/审批两个独立条件图；第3天遮住答案完成M0/M1逐对计算；第4天写失败项与V7待审交接；第5天对照答案保留纠错；第6天请同伴只看题面挑战结论；第7天归档原表、两版答案与反馈，写继续/停止/换方向依据。不操作仪器、不使用患者数据，同伴不能批准临床方法。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.path.career-path-block.5",
@@ -8067,7 +8067,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格决策：O*NET 的认证与培训目录用于发现可能的证书与训练路径，但认证不等于执照、雇主任命或签字权；证书、录用与执业授权是不同状态。"
+              "本轮认证目录显示38条，混含检验科学、神经传导、激光安全、医师及其他专业，不能全部说必需或适用。培训目录显示452项目，含临床实验室科学、细胞生物/组织学等专业，毕业人数不是席位或就业率；先核项目和颁证机构条件，再核当地人员资格与岗位授权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.path.career-path-block.6",
@@ -8117,7 +8117,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方与行业信号：美国 Clinical Laboratory Technologists and Technicians（29-2011）组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径，口径边界必须随数字保留。"
+              "官方与行业信号：美国 Clinical Laboratory Technologists and Technicians组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径，口径边界必须随数字保留。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.1",
@@ -8146,7 +8146,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本只能说明采样时间、地区和岗位组合中的需求，不是全国需求率。"
+              "美国组合统计：2024年351,200人→2034年357,200人，净增6,000（约2%），年均空缺22,600含增长与替换；净变化不等于年均空缺，也不是当前在招岗位或本技术专家单列需求。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.3",
@@ -8160,7 +8160,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "AI 或技术研究说明任务可被辅助的范围，不等同于组织采用、更不等同于净岗位变化。"
+              "编辑邻接：微生物操作、记录与方法评估经验可帮助探索微生物学家，但临床检验与研究问题、实验设计和研究产出不同。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.4",
@@ -8174,7 +8174,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻转型：从医疗临床技术专家向微生物学家、医学科学家或临床检验技术专家与技术员转型，需逐项核对工具、资格与责任差异；每条路径都要补齐与新输出相对应的证据。"
+              "从本职业向微生物学家需补微生物研究问题、实验设计、研究数据与论文/技术报告证据，分别核目标岗位教育和研究责任；临床方法评估不能自动等同科研胜任。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.5",
@@ -8197,7 +8197,7 @@
           "data": {
             "entries": [
               {
-                "answer": "以环境受控的室内实验室为主，电话沟通（4.98）、精确或高度准确（4.95）、穿戴防护装备（4.87）与接触疾病或感染（4.74）最为突出；团队协作（4.45）、决策频率（4.40）与时间压力（4.36）也较高，可能涉及轮班。",
+                "answer": "O*NET美国受访者：95%认为精确极其重要，93%每天穿戴防护/安全装备，95%每天在受控室内工作，85%每天接触疾病或感染，61%认为差错后果极其严重；各比例对应不同问题与选项，不是感染概率。47%回答高度自动化，不等于生成式AI采用率。具体班次核雇主岗位和合同。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.daily-work",
@@ -8224,7 +8224,7 @@
                 ]
               },
               {
-                "answer": "数据整理、结果初筛、方法检索与记录草拟更易被软件辅助；复杂判读、方法结论、异常升级与感染控制仍以人工为主，现有资料不证明机构普遍以自动化替代这些判断。",
+                "answer": "编辑试验假设：只让工具整理本页虚构M0/M1比较表和交接草稿，再由人核原值、差值、失败项及审批状态；不上传患者数据，不用于临床初筛、诊断、真实方法验证或报告放行。本页热门软件招聘提及不是生成式AI采用或性能证据。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.ai-impact",
@@ -8233,12 +8233,13 @@
                 ]
               },
               {
-                "answer": "标本身份核对、复杂结果判读、方法验证结论、质控放行、检验结果沟通与监督责任，必须由有权限的人按职责负责。",
+                "answer": "检测、方法评估、报告审核与诊断责任必须区分。中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.human-control",
                 "source_refs": [
-                  "onet-details"
+                  "nhc-lab",
+                  "cdc-complexity"
                 ]
               },
               {
@@ -8251,7 +8252,7 @@
                 ]
               },
               {
-                "answer": "BLS 2025 年组合口径工资数据：中位 62,930 美元/年（30.26 美元/小时），10 分位 38,910、25 分位 47,650、75 分位 81,450、90 分位 100,990 美元/年；为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，非单列本职业，分位不含个人到手收入。",
+                "answer": "BLS 2025 年组合口径工资数据：中位 62,930 美元/年（30.26 美元/小时），10 分位 38,910、25 分位 47,650、75 分位 81,450、90 分位 100,990 美元/年；为 Clinical Laboratory Technologists and Technicians组合口径，非单列本职业，分位不含个人到手收入。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.7",
                 "question": "美国薪资证据是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.us-pay",
@@ -8260,25 +8261,28 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone 4：通常要求四年制学士学位并需相当工作经验，可培训或监督人员；中国大陆按用人单位、执业与监督规则确定。",
+                "answer": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。 中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.education-path",
                 "source_refs": [
-                  "onet-details"
+                  "onet-summary",
+                  "nhc-lab",
+                  "cdc-complexity"
                 ]
               },
               {
-                "answer": "主要风险为标本身份差错、复杂结果或方法结论误判、感染暴露、质控失败仍出结果、越权作出诊断或放行；应对为按规程核对、按质控与验证复核并升级、按感染控制作业、停用纠正后复检、按授权交有权限者确认。",
+                "answer": "身份差错、方法误判、感染暴露和质控异常可能影响安全，依机构质量系统记录、纠正、复核与升级；本页纸面规则不能用于临床恢复判断。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.risk-boundary",
                 "source_refs": [
-                  "onet-details"
+                  "nhc-lab",
+                  "cms-clia"
                 ]
               },
               {
-                "answer": "美国 Clinical Laboratory Technologists and Technicians（29-2011）组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径统计预测，不等于单列职业需求或个人录用概率。",
+                "answer": "美国 Clinical Laboratory Technologists and Technicians组合口径 2024 年就业约 351,200 人，2034 年预计约 357,200 人，2024—2034 年预计慢于平均（约 2%），年均职位空缺约 22,600 个（含替换需求）；为组合口径统计预测，不等于单列职业需求或个人录用概率。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.10",
                 "question": "市场信号应如何理解？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.outlook-transition",
@@ -8287,7 +8291,7 @@
                 ]
               },
               {
-                "answer": "若能用完全虚构的标本完成一次复杂检验、方法验证与感染控制演练，并能按规程核对、在异常时先停下并升级，值得进一步试验；具体岗位与执业要求以雇主与主管部门为准。",
+                "answer": "先完成M0/M1纸面题，观察能否保留原值、识别K3失败并区分V7待审；作品不证明真实方法验证能力或资格。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.career-worth",
@@ -8296,7 +8300,7 @@
                 ]
               },
               {
-                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，不替代单列本职业。；医疗临床技术专家涉及患者安全、感染控制与执业监督边界，本页提供职业判断与研究演练信息，不替代所在地法律、医疗标准、执业要求或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
+                "answer": "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 Clinical Laboratory Technologists and Technicians组合口径，不替代单列本职业。；医疗临床技术专家涉及患者安全、感染控制与执业监督边界，本页提供职业判断与研究演练信息，不替代所在地法律、医疗标准、执业要求或其他专业意见。；任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。",
                 "id": "medical-and-clinical-laboratory-technologists.faq.12",
                 "question": "页面使用边界是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technologists.boundary"
@@ -8311,7 +8315,7 @@
           "copy_key": "career.item.boundary-notice",
           "data": {
             "entries": [
-              "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，不替代单列本职业。",
+              "中国、美国与具体机构口径的证据分别陈述：工资、就业、资格、医疗与 AI 结论不得跨范围拼接；本页美国统计为 Clinical Laboratory Technologists and Technicians组合口径，不替代单列本职业。",
               "医疗临床技术专家涉及患者安全、感染控制与执业监督边界，本页提供职业判断与研究演练信息，不替代所在地法律、医疗标准、执业要求或其他专业意见。",
               "任何「证据不足」只表示在有界检索后未建立安全对应的数据，不使用代理或记忆伪造数字。"
             ]
@@ -8465,17 +8469,17 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "按行业门类发布城镇单位就业人员年平均工资。",
-                  "行业均值不是职业中位数，且不含个体工商户与自由职业者。"
+                  "相同组合完整表由技术员29-2012.00入口读取；本职业摘要明确工资覆盖同组，分位不作技术专家单列统计。"
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
                 "limitation": "行业均值不是职业中位数；未取得本职业精确条目。",
                 "market": "中国大陆全国口径",
                 "name": "国家统计局：城镇单位就业人员年平均工资（2025）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "2025年度工资；发布2026-05-16；查阅2026-10-03",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
@@ -8497,33 +8501,33 @@
                 "url": "https://www.onetcenter.org/database.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "任务、技能、工作活动与工作情境清单。",
-                  "不等于统一录用或考核标准。"
+                  "复杂医学检验、方法评估、质量保证及可培训/监督职责；为美国职业范围。",
+                  "不证明中国等价资格、诊断或报告权限。"
                 ],
                 "evidence_type": "official occupation profile",
                 "id": "onet-details",
                 "limitation": "为美国职业口径，不推定中国大陆对应关系。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 详细档案（任务、技能与情境）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "官方职业描述、报告岗位名称、兴趣代码与 Job Zone。",
-                  "不等于统一录用或考核标准。"
+                  "复杂医学检验、方法评估、质量保证及可培训/监督职责；为美国职业范围。",
+                  "不证明中国等价资格、诊断或报告权限。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "onet-summary",
                 "limitation": "任务与情境样本随雇主与检验科室而变。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 摘要（职业身份与描述）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2011.00"
@@ -8545,7 +8549,7 @@
                 "url": "https://www.onetcenter.org/taxonomy.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "2024 年组合口径就业约 351,200 人、2034 年预计约 357,200 人、2024—2034 年预计慢于平均（约 2%）、年均空缺约 22,600 个。",
                   "为组合口径，含替换需求。"
@@ -8554,8 +8558,8 @@
                 "id": "onet-trends",
                 "limitation": "组合口径：非单列本职业；含替换需求。",
                 "market": "美国",
-                "name": "O*NET 29-2011.00 全国就业趋势（Clinical Laboratory Technologists and Technicians 29-2011 口径；BLS 2024—2034 年预测）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "name": "O*NET 29-2011.00 全国就业趋势（Clinical Laboratory Technologists and Technicians 组合口径；BLS 2024—2034 年预测）",
+                "period": "BLS2024—2034预测；查阅2026-10-03",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localtrends/29-2011.00"
@@ -8563,15 +8567,15 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "BLS 2025 年组合口径工资数据 10/25/中位/75/90 分位及小时值。",
-                  "O*NET 页面标注为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，非单列本职业。"
+                  "全国组合年薪分位38910/47650/62930/81450/100990美元；时薪18.71/22.91/30.26/39.16/48.55美元。",
+                  "相同组合完整表由技术员29-2012.00入口读取；本职业摘要明确工资覆盖同组，分位不作技术专家单列统计。"
                 ],
                 "evidence_type": "official wage data",
                 "id": "onet-wages",
-                "limitation": "组合口径：非单列 29-2011.00；分位不含个人到手收入。",
+                "limitation": "本职业完整页读取失败；摘要确认同组合中位；完整分位由同组工资表核验，非本技术专家单列数据。",
                 "market": "美国",
-                "name": "O*NET 29-2011.00 全国工资（Clinical Laboratory Technologists and Technicians 29-2011 口径；BLS 2025 年工资数据）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "name": "O*NET 29-2011.00 全国工资（Clinical Laboratory Technologists and Technicians 组合口径；BLS 2025 年工资数据）",
+                "period": "BLS2025工资；本轮本职业摘要和相同组合29-2012.00完整工资表交叉核验",
                 "publisher": "O*NET OnLine / BLS",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-2011.00"
@@ -8579,12 +8583,11 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "工作情境与工作要求的比例分布。",
-                  "美国工作情境不替代中国法律与雇主要求。"
+                  "工作情境的本轮可见主张由当前summary同组问题与选项核验；不沿用无量表4.xx。"
                 ],
                 "evidence_type": "official custom occupation profile",
                 "id": "source-pack-onet-custom",
-                "limitation": "美国工作情境不替代中国法律与雇主要求。",
+                "limitation": "本轮summary支持页面比例，custom仅保留原入口，不声称完整custom已重读。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 定制档案（工作情境）",
                 "period": "O*NET 2026 职业档案；查阅 2026-09-25",
@@ -8593,33 +8596,33 @@
                 "url": "https://www.onetonline.org/link/custom/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "复杂医学检验、方法评估、质量保证及可培训/监督职责；为美国职业范围。",
+                  "不证明中国等价资格、诊断或报告权限。"
                 ],
                 "evidence_type": "official occupation details",
                 "id": "source-pack-onet-details",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "29-2011.00 - Medical and Clinical Laboratory Technologists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "技术工具线索，用于讨论任务层面的技术辅助。",
-                  "工具出现不等于生成式 AI 已被普遍采用。"
+                  "Office/Excel各1%，MEDITECH/PowerPoint/Word各不足1%；eClinicalWorks与Project比例不可用。",
+                  "招聘提及不是生成式AI采用或临床性能。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "工具出现不等于采用率、失业概率或替代日期。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 热门技术（Hot Technologies）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "Lightcast2025美国招聘提及；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2011.00"
@@ -8627,47 +8630,44 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "行业分布：医疗保健与社会援助约 83%、其他行业约 17%（含教育服务）。",
-                  "行业分布是雇主场景信号，不是需求预测。"
+                  "组合行业比例不是技术专家单列分布，也不提供分行业工资。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "行业分布是雇主场景信号，不是需求预测。",
+                "limitation": "摘要核组合范围；83/17沿冻结报告历史记录，不作为新核单职业行业比例或工资。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 行业分布（Industries）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "2024组合比例；沿本职业历史2026-09-25，本轮完整页读取失败",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "认证发现路径，用于讨论入行与资格边界。",
-                  "认证不等于执照、雇主任命或签字权。"
+                  "38条混合专业认证；仅候选发现，不是全部岗位必需或适用。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
                 "limitation": "认证不等于执照、雇主任命或签字权。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 全国认证发现（National Certifications）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "发现目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "培训发现路径与教育入口。",
-                  "准备程度不是统一录用门槛。"
+                  "452培训项目，含多类专业与毕业人数；非录用、席位或执业资格证明。"
                 ],
                 "evidence_type": "official local training discovery",
                 "id": "source-pack-onet-localtraining",
                 "limitation": "准备程度不是统一录用门槛。",
                 "market": "美国",
                 "name": "O*NET 29-2011.00 全国培训发现（National Training）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "发现目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/29-2011.00"
@@ -8675,34 +8675,97 @@
               {
                 "accessed_at": "2026-09-01",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.",
-                  "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
+                  "全国组合年薪分位38910/47650/62930/81450/100990美元；时薪18.71/22.91/30.26/39.16/48.55美元。",
+                  "相同组合完整表由技术员29-2012.00入口读取；本职业摘要明确工资覆盖同组，分位不作技术专家单列统计。"
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
                 "id": "source-pack-onet-localwages",
-                "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
+                "limitation": "本职业完整页读取失败；摘要确认同组合中位；完整分位由同组工资表核验，非本技术专家单列数据。",
                 "market": "美国",
                 "name": "National Wages: 29-2011.00 - Medical and Clinical Laboratory Technologists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "BLS2025工资；本轮本职业摘要和相同组合29-2012.00完整工资表交叉核验",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-2011.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "复杂医学检验、方法评估、质量保证及可培训/监督职责；为美国职业范围。",
+                  "不证明中国等价资格、诊断或报告权限。"
                 ],
                 "evidence_type": "official occupation summary",
                 "id": "source-pack-onet-summary",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "29-2011.00 - Medical and Clinical Laboratory Technologists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2011.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "第12条人员学历/专业技术资格，第16—19条报告制度、操作者与审核者、诊断性报告权限。",
+                  "第25条质控异常纠正记录，第34—38条安全制度、培训与防护；具体项目另核适用规则。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "nhc-lab",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "中国大陆",
+                "name": "医疗机构临床实验室管理办法（地方卫健委公布2020修订文本）",
+                "period": "2006办法、2020修订；地方公布2023-02-13",
+                "publisher": "无锡市卫生健康委员会（公布国家管理办法）",
+                "scope": "china_regulation",
+                "url": "https://wjw.wuxi.gov.cn/doc/2023/02/13/3881836.shtml"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "美国人体检验质量监管按检测复杂程度实施；不提供中国资格互认。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "cms-clia",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "美国",
+                "name": "Clinical Laboratory Improvement Amendments (CLIA)",
+                "period": "网页更新2026-09-09",
+                "publisher": "Centers for Medicare & Medicaid Services",
+                "scope": "us_regulation",
+                "url": "https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "非豁免检测须符合质量系统与人员要求；中、高复杂度人员标准不同。",
+                  "不是本职业所有岗位的一套统一教育或监督规则。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "cdc-complexity",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "美国",
+                "name": "CLIA Test Complexities",
+                "period": "网页2024-09-11",
+                "publisher": "Centers for Disease Control and Prevention",
+                "scope": "us_regulation",
+                "url": "https://www.cdc.gov/clia/php/test-complexities/index.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本职业摘要明确同为Clinical Laboratory Technologists and Technicians工资组；本轮核全国五档年薪与时薪。",
+                  "入口职业是技术员，数据组包括技术专家与技术员，不是两个单职业工资可互换。"
+                ],
+                "evidence_type": "official combined wage statistics",
+                "id": "combined-wages",
+                "limitation": "仅同组合全国工资；不提供本技术专家单列或行业工资。",
+                "market": "美国",
+                "name": "O*NET同组合工资完整分位（29-2012.00入口）",
+                "period": "BLS2025工资；查阅2026-10-03",
+                "publisher": "O*NET OnLine / BLS",
+                "scope": "parent_occupation_proxy",
+                "url": "https://www.onetonline.org/link/localwages/29-2012.00"
               }
             ]
           },
@@ -8745,14 +8808,28 @@
         "conclusion": "相邻职业需分别补足工具、资格与责任证据。",
         "evidence_links": [
           {
-            "href": {
-              "$source": "onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
-            },
-            "label": "本职业来源"
+            "href": "https://www.onetonline.org/link/summary/29-2011.00",
+            "label": "本职业复杂检验定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-1022.00",
+            "label": "微生物学家研究定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-1042.00",
+            "label": "医学科学家研究定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-2031.00",
+            "label": "化学家研究定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-4021.00",
+            "label": "生物技术员科研辅助定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/19-4031.00",
+            "label": "化学技术员测试定义"
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8872,8 +8949,8 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "类型": "编辑归纳",
-            "适用范围": "仅按编辑口径使用",
+            "类型": "招聘软件需求统计",
+            "适用范围": "美国2025招聘提及，非AI采用证据",
             "链接": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -8891,12 +8968,12 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "初筛与检索",
+            "AI主要改变": "编辑假设：虚构表整理",
             "仍由人负责": "判读与异常升级",
             "方向": "复杂检验与判读"
           },
           {
-            "AI主要改变": "数据整理与趋势",
+            "AI主要改变": "编辑假设：虚构比较记录",
             "仍由人负责": "验证结论与放行",
             "方向": "方法学与质控"
           }
@@ -8909,7 +8986,7 @@
         },
         "evidence_rows": [
           {
-            "使用限制": "不提供该职业采用率、失业概率或替代日期。",
+            "使用限制": "招聘提及不是生成式AI采用率、临床性能或替代率。",
             "来源": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -8917,8 +8994,8 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "研究对象": "生成式 AI 任务暴露（编辑归纳）",
-            "结论": "按任务评估可辅助范围",
+            "研究对象": "2025年美国招聘软件技能提及（Lightcast）",
+            "结论": "Office和Excel各1%，MEDITECH/PowerPoint/Word各不足1%；eClinicalWorks EHR与Project比例不可用。",
             "链接": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -8974,7 +9051,7 @@
         },
         "method_cards": [
           {
-            "含义": "数据整理、结果初筛、方法检索与记录草拟可被软件辅助；复杂判读、方法验证与感染控制仍由人负责。",
+            "含义": "编辑试验假设：只让工具整理本页虚构M0/M1比较表和交接草稿，再由人核原值、差值、失败项及审批状态；不上传患者数据，不用于临床初筛、诊断、真实方法验证或报告放行。本页热门软件招聘提及不是生成式AI采用或性能证据。",
             "概念": "任务能力"
           },
           {
@@ -8988,7 +9065,7 @@
         ],
         "questions": [
           {
-            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
+            "回答": "招聘软件提及不能推导AI采用、裁员或替代时间。",
             "来源": {
               "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
@@ -9006,25 +9083,25 @@
             "问题": "AI 会取代医疗临床技术专家吗？"
           },
           {
-            "回答": "方法结论、结果复核与最终交付仍由有权限的人负责。",
+            "回答": "不能；需求信号不证明自动审批或方法验证，纸面题仍有K3失败与V7待审。",
             "来源": {
-              "$source": "source-pack-onet-details",
+              "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
             "链接": {
-              "$source": "source-pack-onet-details",
+              "$source": "source-pack-onet-hot_tech",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "问题": "方法验证能自动完成吗？"
+            "问题": "软件招聘提及能证明方法变更自动获批吗？"
           },
           {
-            "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
+            "回答": "O*NET支持职业身份和职责；组织采用与岗位结果须另外取得证据。",
             "来源": {
               "$source": "source-pack-onet-summary",
               "block": "source-register",
@@ -9104,19 +9181,19 @@
             },
             "任务": "开发、标准化并评估检验方法",
             "工作方向": "方法学开发与验证",
-            "当前变化": "辅助数据整理与文献检索"
+            "当前变化": "编辑假设：整理虚构比较表与公开资料，不提供临床方法建议"
           },
           {
             "人的控制点": "由有权限者确认放行与纠正。",
             "任务": "建立并监控质量保证项目",
             "工作方向": "质量保证",
-            "当前变化": "辅助趋势分析"
+            "当前变化": "编辑假设：汇总虚构记录，不判断真实质控状态"
           },
           {
             "人的控制点": "由有权限者承担监督责任。",
             "任务": "培训或监督实验室人员",
             "工作方向": "带教与监督",
-            "当前变化": "辅助记录与排程"
+            "当前变化": "编辑假设：草拟虚构排程，不承担监督责任"
           }
         ],
         "transition": {
@@ -9254,7 +9331,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助数据整理、结果初筛、方法检索与记录草拟；但复杂检验判读、方法验证结论、异常升级、感染控制与最终交付仍由有权限的人负责，AI 不承担诊断或放行责任。"
+          "编辑试验假设：只让工具整理本页虚构M0/M1比较表和交接草稿，再由人核原值、差值、失败项及审批状态；不上传患者数据，不用于临床初筛、诊断、真实方法验证或报告放行。本页热门软件招聘提及不是生成式AI采用或性能证据。"
         ],
         "heading": "医疗临床技术专家的工作对象与 AI 边界"
       },
@@ -9279,10 +9356,39 @@
           }
         ],
         "direct_answer": {
-          "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.2",
-          "block": "path",
-          "copy_key": "career.item.career-path-block",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.2",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.3",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.4",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.5",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.6",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "heading": {
           "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.1",
@@ -9291,19 +9397,9 @@
           "type": "prose"
         },
         "locale_requirements": {
-          "credential_boundary": {
-            "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.4",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          },
-          "jurisdiction": "美国 Job Zone 4：通常要求四年制学士学位并需相当工作经验；中国大陆按用人单位、执业与监督规则核验",
-          "summary": {
-            "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.3",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          }
+          "credential_boundary": "中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。",
+          "jurisdiction": "中美法域分别核，Job Zone不是临床授权",
+          "summary": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
@@ -9323,7 +9419,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "行业平均不能替代本职业精确工资。"
+            "scope": "中国行业工资不能代替本职业工资"
           },
           {
             "href": {
@@ -9341,7 +9437,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国职业范围，不设定中国资格。"
+            "scope": "美国复杂检验、方法与质量职责，非中国资格"
           },
           {
             "href": {
@@ -9359,7 +9455,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "摘要需与详细职业范围合并解释。"
+            "scope": "美国身份、IRC和通常准备程度，不是执业授权"
           },
           {
             "href": {
@@ -9377,7 +9473,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "无数字时只支持不可用或窄口径边界。"
+            "scope": "美国组合2024—2034就业与空缺预测"
           }
         ],
         "tracks": [
@@ -9385,29 +9481,19 @@
             "id": "track-0",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": {
                   "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.7",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": {
-                  "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.6",
-                  "block": "path",
-                  "copy_key": "career.item.career-path-block",
-                  "type": "prose"
-                },
-                "responsibility": {
-                  "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.5",
-                  "block": "path",
-                  "copy_key": "career.item.career-path-block",
-                  "type": "prose"
-                },
+                "readiness_evidence": "原值、差2/2/12、整体失败与V7待审两栏判断。",
+                "responsibility": "用M0/M1题理解逐对比较及待审交接。",
                 "role": "检验学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": {
                   "$item": "medical-and-clinical-laboratory-technologists.path.career-path-block.8",
                   "block": "path",
@@ -9419,14 +9505,14 @@
                 "role": "独立检验"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到质量体系。",
                 "readiness_evidence": "出示方法验证与评估记录。",
                 "responsibility": "参与方法开发、标准化与评估。",
                 "role": "方法学"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示带教与复核记录。",
                 "responsibility": "在授权范围内带教并复核检验。",
@@ -9439,28 +9525,28 @@
             "id": "track-1",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到独立质控。",
                 "readiness_evidence": "保留质控练习记录。",
                 "responsibility": "学习质量保证、设备维护与校准。",
                 "role": "质控学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到质量体系评估。",
                 "readiness_evidence": "出示质控与纠正记录。",
                 "responsibility": "独立建立并监控质控项目。",
                 "role": "独立质控"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到外部评审准备。",
                 "readiness_evidence": "出示评估与整改记录。",
                 "responsibility": "参与质量体系与合规评估。",
                 "role": "体系评估"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示改进前后对比记录。",
                 "responsibility": "在授权范围内改进质控与方法流程。",
@@ -9473,28 +9559,28 @@
             "id": "track-2",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到独立沟通。",
                 "readiness_evidence": "保留报告与沟通练习记录。",
                 "responsibility": "学习结果沟通、报告与交接要求。",
                 "role": "沟通学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到复杂案例协调。",
                 "readiness_evidence": "出示沟通与技术说明记录。",
                 "responsibility": "向医师、家属或研究者提供技术信息。",
                 "role": "独立沟通"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "扩展到团队质量职责。",
                 "readiness_evidence": "出示带教与监督记录。",
                 "responsibility": "负责培训或监督实验室人员。",
                 "role": "监督带教"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "编辑职责进阶示意，实际检测、审核、报告与带教先满足适用人员资格与机构授权；不保证晋升。",
                 "next_moves": "按机构与规则取得授权。",
                 "readiness_evidence": "出示方法与质量记录。",
                 "responsibility": "在授权范围内支持方法与质量职责。",
@@ -9598,7 +9684,7 @@
             }
           },
           {
-            "answer": "美国 O*NET 将本职业列为 Job Zone 4：通常要求四年制学士学位并需相当的工作经验，可培训或监督实验室人员；认证不等于执照、雇主任命或签字权。中国大陆的学历、执业与监督边界由用人单位与主管部门按所在地规则核验，学位与证书不等于授权。",
+            "answer": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。 中国大陆：医疗机构临床实验室专业技术人员应具相应专业学历与专业技术职务任职资格；检验报告区分操作者与审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度设质量与人员要求，非豁免检测须满足相应人员标准，另核州规则及机构授权。技术专家称谓不自动授予诊断、报告签发或监督权。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -9654,7 +9740,7 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替医疗标准与感染控制要求。",
-        "evidence_scope": "依据 O*NET 29-2011.00 的任务与工作情境；患者安全、感染控制与执业监督边界按雇主与适用规则核对，不跨范围外推。",
+        "evidence_scope": "O*NET支持美国任务与情境；中国医疗机构实验室管理办法与美国CLIA分别支持各自法域的人员和质量边界。",
         "heading": "医疗临床技术专家的工作风险与边界",
         "risks": [
           {
@@ -9712,7 +9798,7 @@
               "onet-details"
             ],
             "id": "risk-4",
-            "mitigation": "按质控规则停用并纠正后复检。",
+            "mitigation": "按质量系统记录、查因、纠正与复核，恢复须由授权人员判断。",
             "scenario": "质控或设备维护不足仍出结果。",
             "title": {
               "$item": "medical-and-clinical-laboratory-technologists.risk.career-risk-cards.4",
@@ -9725,7 +9811,8 @@
             "affected_roles": "结果与沟通岗位",
             "consequence": "可能改变医疗与法律责任。",
             "evidence_refs": [
-              "source-pack-onet-custom"
+              "nhc-lab",
+              "cms-clia"
             ],
             "id": "risk-5",
             "mitigation": "按监督与授权规则交有权限者确认。",
@@ -9803,7 +9890,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径。"
+            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians组合口径。"
           },
           {
             "href": {
@@ -9858,38 +9945,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "四年制学士学位",
-              "岗位方向": "临床检验技术岗位",
-              "说明": "美国 Job Zone 4 常见准备方式（约 52% 报告学士学位）。"
+              "学历段": "中国专业学历",
+              "岗位方向": "医疗机构临床实验室",
+              "说明": "按管理办法第12条核相应专业学历及专业技术职务任职资格。"
             },
             {
-              "学历段": "在职训练与经验",
-              "岗位方向": "方法学与质量保证",
-              "说明": "按雇主与岗位要求核验。"
+              "学历段": "岗位授权",
+              "岗位方向": "检测/审核/诊断分开",
+              "说明": "学位和技术专家称谓不能代替岗位授权。"
             },
             {
-              "学历段": "认证或培训",
-              "岗位方向": "按岗位要求",
-              "说明": "认证不等于执照或授权，按雇主核验。"
+              "学历段": "美国准备程度",
+              "岗位方向": "O*NET 29-2011.00",
+              "说明": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。"
             },
             {
-              "学历段": "监督与带教责任",
-              "岗位方向": "实验室技术管理",
-              "说明": "按组织授权链确认。"
+              "学历段": "训练目录",
+              "岗位方向": "美国候选项目发现",
+              "说明": "全国目录452项目含多类专业；须核项目条件与当地人员资格，不保证可入职。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "卫生和社会工作",
-              "需求": "医院与临床检验为主要雇主场景"
+              "行业": "医疗机构实验室",
+              "需求": "编辑场景分类，不提供中国雇主比例或需求率。"
             },
             {
-              "行业": "教育与其他",
-              "需求": "教学与科研实验室场景"
+              "行业": "医学科研实验室",
+              "需求": "科研职责与临床报告不同，分别核岗位要求。"
             },
             {
-              "行业": "其他行业",
-              "需求": "第三方检验与相关服务"
+              "行业": "教学与服务场景",
+              "需求": "仅作探索提示，不表示全部机构可出诊断报告。"
             }
           ],
           "china_intl": {
@@ -9922,7 +10009,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9930,7 +10017,7 @@
               },
               "｜",
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -9963,7 +10050,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9971,7 +10058,7 @@
               },
               "｜",
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10225,7 +10312,7 @@
             }
           }
         ],
-        "boundary": "美国数据为 O*NET 展示的 Clinical Laboratory Technologists and Technicians（29-2011 组合口径），非单列 29-2011.00；分位为统计位置，不等于个人到手收入。",
+        "boundary": "美国数据为 O*NET 展示的 Clinical Laboratory Technologists and Technicians（组合口径），非单列 29-2011.00；分位为统计位置，不等于个人到手收入。",
         "direct_answer": {
           "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.2",
           "block": "us-salary",
@@ -10234,11 +10321,11 @@
         },
         "factor_rows": [
           {
-            "answer": "美国 Job Zone 4：通常要求四年制学士学位；按法域核验执业与监督边界。",
+            "answer": "美国 Job Zone 4：多数相关岗位需要四年制学士学位，但有例外，并通常需要较多工作相关技能、经验或训练；52%是O*NET受访者对新入职者所需学历回答“学士”的比例，不是中国要求、录用率或全员学历分布。",
             "factor": "资格"
           },
           {
-            "answer": "需相当的工作相关经验，并可培训或监督实验室人员。",
+            "answer": "经验与训练需按实际岗位核验；可带教/监督不等于全员获得监督授权。",
             "factor": "经验"
           },
           {
@@ -10265,30 +10352,30 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_period": "当前页面；查阅 2026-09-25",
+        "industry_period": "2024组合比例，沿本职业历史2026-09-25记录；本轮完整行业页未读取成功",
         "industry_rows": [
           {
             "industry": "医疗保健与社会援助（约 83%）",
-            "median": "见组合分位",
-            "note": "医院与临床检验为主要雇主场景。"
+            "median": "证据不足：未取得美国各行业工资",
+            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
           },
           {
             "industry": "其他行业（约 17%）",
-            "median": "见组合分位",
-            "note": "含教育服务与其他场景。"
+            "median": "证据不足：未取得美国各行业工资",
+            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
           },
           {
             "industry": "方法学与质控岗位",
-            "median": "见组合分位",
-            "note": "科室与职责差异较大。"
+            "median": "证据不足：未取得美国各行业工资",
+            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
           },
           {
             "industry": "地区差异",
-            "median": "见组合分位",
-            "note": "不得跨地区外推。"
+            "median": "证据不足：未取得美国各行业工资",
+            "note": "行业比例或编辑场景不是行业工资；全国组合分位不能填入此格。"
           }
         ],
-        "industry_value_label": "行业值",
+        "industry_value_label": "行业工资证据",
         "interpretation_heading": {
           "$item": "medical-and-clinical-laboratory-technologists.us-salary.career-snapshot-secondary-locale.4",
           "block": "us-salary",
@@ -10301,7 +10388,7 @@
             "question": "这是不是个人报价？"
           },
           {
-            "answer": "为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径，非单列本职业。",
+            "answer": "为 Clinical Laboratory Technologists and Technicians组合口径，非单列本职业。",
             "question": "这是否覆盖精确职业？"
           },
           {
@@ -10315,11 +10402,11 @@
         ],
         "median": "62,930 美元/年（组合口径）",
         "outlook_heading": "就业展望与职位空缺",
-        "outlook_period": "2024—2034；查阅 2026-09-25",
+        "outlook_period": "2024—2034；查阅2026-10-03",
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "时薪参考",
           "解释"
         ],
         "wage_heading": {
@@ -10350,10 +10437,21 @@
         ]
       },
       "definition_block": {
-        "$item": "medical-and-clinical-laboratory-technologists.profile.definition-block.1",
-        "block": "profile",
-        "copy_key": "career.item.definition-block",
-        "type": "prose"
+        "$join": [
+          {
+            "$item": "medical-and-clinical-laboratory-technologists.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "medical-and-clinical-laboratory-technologists.profile.definition-block.10",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
       },
       "faq_block": {
         "items": {
@@ -10371,27 +10469,44 @@
           "type": "prose"
         },
         "summary": {
-          "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.2",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.2",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.profile.work-context-block.5",
+              "block": "profile",
+              "copy_key": "career.item.work-context-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "title": "医疗临床技术专家适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "谨慎条件：若对感染暴露、高精确复核或方法责任明显不适，先比较实际岗位。纸面计算不证明临床方法验证能力或资格。",
         "how": {
-          "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.3",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.3",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.4",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "suit": {
-          "$item": "medical-and-clinical-laboratory-technologists.quick-decision.fermat-decision-card.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
-        }
+        "suit": "积极信号：愿意逐对核原值，不用平均掩盖失败，并把数据判断与审批状态分开说明。"
       },
       "hero": {
         "h1": {
@@ -10430,7 +10545,7 @@
             "interpretation": "组合口径的就业规模、变化与职位空缺必须分别解释。",
             "limitation": "为组合口径统计预测，不能当作单列本职业或个人就业保证。",
             "metric": "就业规模与变化",
-            "occupation_scope": "展示口径：Clinical Laboratory Technologists and Technicians（O*NET 29-2011 组合口径）",
+            "occupation_scope": "展示口径：Clinical Laboratory Technologists and Technicians（组合口径）",
             "value": {
               "$item": "medical-and-clinical-laboratory-technologists.market-signals.market-signal-card.3",
               "block": "market-signals",
@@ -10444,7 +10559,7 @@
             "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "职位空缺（年均）",
-            "occupation_scope": "展示口径：29-2011 组合",
+            "occupation_scope": "展示口径：Clinical Laboratory Technologists and Technicians组合",
             "value": "约 22,600 个/年（组合口径）"
           },
           {
@@ -10453,7 +10568,7 @@
             "interpretation": "为 BLS 2025 年组合口径工资数据中位数，不代表起薪或到手收入。",
             "limitation": "组合口径；分位为统计位置。",
             "metric": "年薪中位数",
-            "occupation_scope": "展示口径：29-2011 组合",
+            "occupation_scope": "展示口径：Clinical Laboratory Technologists and Technicians组合",
             "value": "62,930 美元/年（组合口径）"
           }
         ],
@@ -10475,7 +10590,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "中国行业工资不能代替本职业工资"
           },
           {
             "href": {
@@ -10493,7 +10608,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+            "scope": "美国复杂检验、方法与质量职责，非中国资格"
           },
           {
             "href": {
@@ -10511,7 +10626,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians（29-2011）组合口径。"
+            "scope": "美国身份、IRC和通常准备程度，不是执业授权"
           },
           {
             "href": {
@@ -10529,7 +10644,7 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
             },
-            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+            "scope": "美国组合2024—2034就业与空缺预测"
           }
         ],
         "transitions": [
@@ -10552,7 +10667,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐临床检验与质量保证责任。",
+            "capability_gaps": "需补疾病与健康研究设计、研究方法及科学报告证据。",
             "shared_capabilities": "医学科学与实验设计基础。",
             "target_href": "/zh/career/jobs/medical-scientists-except-epidemiologists",
             "target_slug": "medical-scientists-except-epidemiologists",
@@ -10560,7 +10675,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐体液标本与临床判读。",
+            "capability_gaps": "需补目标物质化学性质研究、化学分析方法与科研产出证据。",
             "shared_capabilities": "化学分析与仪器方法基础。",
             "target_href": "/zh/career/jobs/chemists",
             "target_slug": "chemists",
@@ -10568,7 +10683,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐复杂检验与方法验证。",
+            "capability_gaps": "需补科研实验实施、观察记录与研究数据采集证据。",
             "shared_capabilities": "实验操作与标本处理经验。",
             "target_href": "/zh/career/jobs/biological-technicians",
             "target_slug": "biological-technicians",
@@ -10576,7 +10691,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐临床场景与感染控制。",
+            "capability_gaps": "需补目标材料/产品的化学与物理测试及相应仪器和安全要求。",
             "shared_capabilities": "分析与检测操作经验。",
             "target_href": "/zh/career/jobs/chemical-technicians",
             "target_slug": "chemical-technicians",
@@ -10584,8 +10699,8 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐监督与质量体系责任。",
-            "shared_capabilities": "检验流程与方法学基础。",
+            "capability_gaps": "若目标是具体岗位，另核任务复杂度、资格和责任，不用组合工资档位定义转岗或晋升。",
+            "shared_capabilities": "标题是工资/就业组合统计范围，包含技术专家与技术员，不能视为一个独立新职业。",
             "target_href": "/zh/career/jobs/clinical-laboratory-technologists-and-technicians",
             "target_slug": "clinical-laboratory-technologists-and-technicians",
             "target_title": "临床检验技术专家与技术员",
@@ -10671,13 +10786,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "记录原312、差12和失败理由；此行为题不验证九型人格与职业表现的关系。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "面对K3失败会改原值还是如实交接？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10685,13 +10800,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "用原值重算并保留纠错；算术题不是IQ常模、岗位资格或临床能力测验。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否逐对计算2、2、12并识别规则失败？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10699,13 +10814,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "展示原值、规则、未决审批并请求复核；不能由一次交接判断EQ分数。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "同伴质疑方法结论时怎样沟通？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10768,8 +10883,8 @@
             "question": "你能按质控与方法验证规则工作吗？"
           },
           {
-            "answer": "用虚构培养流程核对。",
-            "question": "你能按感染控制与无菌要求操作吗？"
+            "answer": "不能；需实际专业训练与机构要求，本题不涉及标本操作。",
+            "question": "感染控制判断可以用纸面题证明吗？"
           },
           {
             "answer": "先停止或隔离、记录并升级。",
@@ -10788,7 +10903,7 @@
             "question": "你的判断如何被复核与放行？"
           },
           {
-            "answer": "用完全虚构的标本完成一次复杂检验与方法验证演练。",
+            "answer": "完成M0/M1纸面比较及V7待审交接，保留首次答案和纠错版本。",
             "question": "下一步如何试验？"
           }
         ],
@@ -11163,16 +11278,20 @@
             "item": "medical-and-clinical-laboratory-technologists.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：2025年城镇单位就业人员年平均工资情况：中国行业工资统计及税前口径。；行业平均不能替代本职业精确工资。；O*NET Database：职业代码、数据库版本与教育准备入口。；不等于雇主录用或法定许可。；Medical And Clinical Laboratory Technologists 29-2011.00：职业身份、职责、对象、工具与风险。；美国职业范围，不设定中国资格。；Medical And Clinical Laboratory Technologists Summary：职业摘要、任务、知识与工作活动。；摘要需与详细职业范围合并解释。；O*NET-SOC Taxonomy：职业分类和相邻职业边界。；分类邻近不代表权限可互换。；National employment trends for 29-2011.00：美国精确职业就业预测页面及覆盖边界。；无数字时只支持不可用或窄口径边界。；National wages for 29-2011.00：美国精确职业工资页面及覆盖边界。；无数字时只支持不可用边界。；29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Hot Technologies: 29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Industries: 29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: work setting, market scope.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Certifications: 29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Training: 29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: entry education.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Wages: 29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.；O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.；29-2011.00 - Medical and Clinical Laboratory Technologists：Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+        "note": "来源逐项区分：O*NET支持美国复杂检验职责、IRC、Job Zone与情境；工资/就业/行业覆盖Clinical Laboratory Technologists and Technicians组合，不是本技术专家单列。完整工资页未读取成功，分位经同组合29-2012.00表核，行业83/17仅沿本职业冻结历史记录。热门技术是招聘软件提及；认证38条与培训452项仅作发现。NBS行业均值不填中国职业工资；中美人员、质量与报告规则分别见管理办法和CLIA/CDC。编辑纸面题与AI试验不是临床规程。"
       },
       "work_context_block": {
-        "$item": "medical-and-clinical-laboratory-technologists.profile.work-context-block.5",
+        "$item": "medical-and-clinical-laboratory-technologists.profile.work-context-block.6",
         "block": "profile",
         "copy_key": "career.item.work-context-block",
         "type": "prose"
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪类复杂检验任务？",
+      "interface.fit.interest_code_heading": "怎样理解 IRC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11206,10 +11325,10 @@
         "derivation": "O*NET 全国工资页展示的 BLS 2025 年组合口径工资数据中位数。",
         "display_value": "62,930 美元/年（约 30.26 美元/小时；组合口径）",
         "fact_id": "us-wage",
-        "market": "美国（Clinical Laboratory Technologists and Technicians 29-2011 组合口径）",
+        "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "2025 年年薪中位数（组合口径）",
-        "occupation_scope": "Clinical Laboratory Technologists and Technicians（O*NET 29-2011 组合口径，非单列 29-2011.00）",
-        "period": "2025 年工资数据；查阅 2026-09-25",
+        "occupation_scope": "Clinical Laboratory Technologists and Technicians（Clinical Laboratory Technologists and Technicians组合口径，非单列 29-2011.00）",
+        "period": "2025 年工资数据；查阅 2026-10-03",
         "source_refs": [
           "onet-wages"
         ]
@@ -11218,10 +11337,10 @@
         "derivation": null,
         "display_value": "351,200 人（组合口径）",
         "fact_id": "us-employment-2024",
-        "market": "美国（Clinical Laboratory Technologists and Technicians 29-2011 组合口径）",
+        "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "2024 年就业规模（组合口径）",
-        "occupation_scope": "O*NET 29-2011 组合口径，非单列 29-2011.00",
-        "period": "2024；查阅 2026-09-25",
+        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列 29-2011.00",
+        "period": "2024；查阅 2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -11230,10 +11349,10 @@
         "derivation": "O*NET 全国就业趋势页：2024—2034 年预计慢于平均（约 2%）。",
         "display_value": "慢于平均（约 2%，2024—2034；组合口径）",
         "fact_id": "us-growth",
-        "market": "美国（Clinical Laboratory Technologists and Technicians 29-2011 组合口径）",
+        "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "就业增长预测（组合口径）",
-        "occupation_scope": "O*NET 29-2011 组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列本职业",
+        "period": "2024—2034；查阅 2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -11242,10 +11361,10 @@
         "derivation": "为预测期内的职位空缺估计，含替换需求。",
         "display_value": "约 22,600 个/年（2024—2034；组合口径）",
         "fact_id": "us-openings",
-        "market": "美国（Clinical Laboratory Technologists and Technicians 29-2011 组合口径）",
+        "market": "美国（Clinical Laboratory Technologists and Technicians 组合口径）",
         "measure": "预计职位空缺（年均，组合口径）",
-        "occupation_scope": "O*NET 29-2011 组合口径，非单列本职业",
-        "period": "2024—2034；查阅 2026-09-25",
+        "occupation_scope": "Clinical Laboratory Technologists and Technicians组合口径，非单列本职业",
+        "period": "2024—2034；查阅 2026-10-03",
         "source_refs": [
           "onet-trends"
         ]
@@ -11301,17 +11420,17 @@
   "seo": {
     "description": {
       "availability": "available",
-      "text": "医疗临床技术专家（O*NET 29-2011.00）执行复杂医学检验，负责方法学与质量保证、结果验证、技术沟通并可培训或监督人员。美国 BLS 2025 年 Clinical Laboratory Technologists and Technicians（29-2011）组合口径中位年薪 62,930 美元；2024 年组合口径就业约 351,200 人。含工作情境、风险与入行路径。"
+      "text": "医疗临床技术专家（O*NET 29-2011.00）执行复杂医学检验，负责方法学与质量保证、结果验证、技术沟通并可培训或监督人员。美国 BLS 2025 年 Clinical Laboratory Technologists and Technicians组合口径中位年薪 62,930 美元；2024 年组合口径就业约 351,200 人。含工作情境、风险与入行路径。"
     },
     "title": {
       "availability": "available",
       "text": "医疗临床技术专家：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "27d8bdc4e65950172f7894d32344bd010c72db9d424923672961555de633b6f9",
+  "source_content_sha256": "5f1be8d98c83757d746a2cb84aa9184446e69434b7511359485434802b5fa354",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technologists",
     "name": "医疗临床技术专家",
-    "summary": "医疗临床技术专家（O*NET 29-2011.00）执行用于诊断与治疗的复杂医学检验，负责方法学与质量保证、结果验证和异常升级，并可培训或监督实验室人员。"
+    "summary": "医疗临床技术专家（O*NET 29-2011.00）执行复杂医学检验、评估方法与质量保证，可培训或监督人员；实际检测、报告审核、诊断及监督权限须按法域、检测类型和机构岗位核验。"
   }
 }

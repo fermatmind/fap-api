@@ -7218,7 +7218,7 @@
           "copy_key": "career.item.fermat-decision-card",
           "data": {
             "paragraphs": [
-              "以下判断针对医疗临床技术员在监督下执行常规医学检验、核对标本与结果并记录异常的日常工作；不预测录用、执业资格或最终诊断责任。"
+              "本页针对常规检验、质量控制、记录与异常交接的职业探索；O*NET称可在医学技术师监督下工作，不能由职业名称推定独立诊断或报告签发权。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.1",
@@ -7249,7 +7249,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "完全虚构的任务包：给出一份虚构的全血细胞计数检验任务（含 1 份虚构标本与申请信息、1 组虚构质控数据、1 项待确认的异常复检条件），要求在 60 分钟内写出标本核对步骤、检测与质控要点、异常识别与升级路径，以及需向有权限者确认的情形；不使用真实患者信息或真实标本。"
+              "60分钟纸面题（编辑虚构，无患者、标本或仪器操作）：题内规则规定批次Q的质控数值须在90—110（含端点）才能继续纸面核对；标识必须完全一致；任一FLAG须记录并交指定审核者，不得自动忽略。批次Q1质控108，Q2质控112。记录A：Q1、申请ID A01、标本标签A01、FLAG无；B：Q1、申请B01、标签B10、FLAG无；C：Q1、申请C01、标签C01、FLAG有；D：Q2、申请D01、标签D01、FLAG无。将每条分为“可交审核”“身份疑问待确认”“FLAG待审核”或“批次质控不合格待处理”，说明原因；写一份交接单并指出谁仍须核验授权。90—110只是游戏规则，不是临床质控或健康参考范围。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.3",
@@ -7263,7 +7263,7 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "样本输出与反思：检查是否先核对标本与申请，是否按规程与质控要求处理，是否标出异常与复检条件，是否区分标本差错、结果判读与感染控制三类问题；再问自己能否在高精确要求下按规程执行、能否在异常时停下并升级，以及是否愿意对检验记录负责。"
+              "参考解：Q1的108符合题内区间，Q2的112超上限2。A可交审核，仍不能据此放行真实报告；B因B01≠B10标记身份疑问，不能擅改标签；C保留FLAG并交指定审核者，不能据此诊断疾病；D因Q2不合格标记批次问题，不能用Q1的合格值覆盖Q2。交接单逐条保留批次、原ID、原质控值、FLAG、判断、待决问题与交接对象；无授权者确认时不写“已纠正/已放行”。用10分钟读规则、25分钟独立分类、15分钟写交接、10分钟对照答案并保留纠错版本。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.4",
@@ -7358,7 +7358,7 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "环境与节奏：O*NET 工作情境显示穿戴防护或安全装备（4.99）、精确或高度准确（4.85）、环境受控的室内工作（4.54）最为突出；决策对同事或机构结果的影响（4.16）、面对面讨论（4.14）、重复同一任务（4.12）、接触疾病或感染（4.11）、电话沟通（4.09）与手工操作（4.05）也较高。"
+              "O*NET美国受访者：99%每天穿戴防护/安全装备，85%认为精确极其重要，81%每天在受控室内环境工作，70%每天接触疾病或感染，57%认为差错后果极其严重。比例对应不同问题和选项，不是感染概率，也不能推定中国工时或轮班制度；班次须看具体招聘和合同。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.profile.work-context-block.6",
@@ -7366,7 +7366,7 @@
             "onet-custom"
           ],
           "type": "prose",
-          "visibility": "internal"
+          "visibility": "public"
         },
         {
           "availability": "available",
@@ -7416,7 +7416,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "相邻职责边界：本页只覆盖 29-2012.00 的常规医学检验与记录；校准技术员面向仪器校准与计量，微生物学家面向研究与方法开发，病理医师负责最终诊断与执业签字；各岗位的对象、资格与责任不得互换。"
+              "病理医师的官方核心是用器官、组织和体液检验来诊断疾病；技术员常规检验与记录不自动产生医师诊断权限。中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.profile.definition-block.10",
@@ -7424,7 +7424,7 @@
             "onet-summary"
           ],
           "type": "prose",
-          "visibility": "internal"
+          "visibility": "public"
         }
       ]
     },
@@ -7496,7 +7496,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与微生物学家区别：微生物学家面向研究与方法开发；本职业在监督下执行常规检验并记录结果。"
+              "微生物学家研究微生物的生长、结构、发育与其他特征；本职业以常规临床检验为核心，岗位可能交叉，但不能由相似名称推定研究或诊断资格。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.direction-comparison.adjacent-career-comparison-table.3",
@@ -7524,7 +7524,7 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与病理医师区别：病理医师负责最终诊断与执业签字；本职业仅按规程执行检验并提供可复核结果，不越权作出诊断。"
+              "病理医师通过器官、组织和体液的检验诊断疾病；本职业执行常规检验并提供可复核记录，医疗报告审核与诊断权限按适用法域和机构核验。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.direction-comparison.adjacent-career-comparison-table.5",
@@ -7561,7 +7561,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "直接回答：AI 可辅助资料整理、结果初筛、排程与记录草拟；标本核对、结果判读、异常升级与感染控制仍由有权限的人负责。"
+              "编辑试验假设：可用本页虚构记录测试AI整理表格或交接草稿，逐项对照原ID、质控值与FLAG，记录遗漏和擅改。不使用患者数据，不让AI诊断或放行。Hot Technologies是招聘技能提及，ILO是任务暴露方法；两者均不证明本职业AI采用率、临床性能或替代比例。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.ai-impact.ai-impact-table.2",
@@ -7631,7 +7631,7 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "辅助资料整理、结果初筛与记录草拟。"
+              "虚构输入中试验记录整理，输出需逐字段核对；这是编辑假设，未测机构采用或临床性能。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.ai-impact.ai-impact-table.7",
@@ -7667,7 +7667,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局公开口径有界检索，未取得与 O*NET 29-2012.00 医疗临床技术员精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "本页未取得与 O*NET 29-2012.00 精确对应的中国大陆全国职业工资分布。国家统计局2025年度单位就业人员工资为聚合口径，不能用卫生行业均值推出本职业工资、中位数或稳定月薪。"
             ]
           },
           "fact_refs": [
@@ -7794,7 +7794,7 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布与局限：该职业 2024 年行业分布为医疗保健与社会援助（约 83%）与其他行业（约 17%，含教育服务）；行业分布是雇主场景信号，不是需求预测。"
+              "证据不足：未取得美国各行业工资，不能用组合全国分位代填。行业范围：O*NET摘要明确行业数据来自Clinical Laboratory Technologists and Technicians组合口径。完整industry页本轮读取失败，约83%医疗保健与社会援助/17%其他沿用冻结原报告历史记录，不能冒称本轮比例核验或技术员单列结构。"
             ]
           },
           "fact_refs": [
@@ -7909,7 +7909,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "试验动作：用完全虚构的标本完成一次检验与质控演练，再决定是否继续。"
+              "完成本页A—D四条虚构记录纸面分类与交接，保留首次答案和纠错，不进行真实采样、检验或感染控制操作。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.fit.riasec-fit-block.5",
@@ -7937,7 +7937,7 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "paragraphs": [
-              "大五人格：工具只描述倾向，不能替代真实任务、标准与雇主判断；用工作样本核对精确性与压力下的表现。"
+              "大五人格只描述倾向。用工作样本观察：是否保留B01/B10原值、在质控112时不套用108、面对催促仍保留C的FLAG；不能据此认定真实岗位胜任。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.fit.riasec-fit-block.7",
@@ -7973,7 +7973,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "标本标识或身份差错：处理标本时，触发条件为未按规程核对身份与申请；可能导致错误结果与患者风险；控制为按规程核对并双人复核关键步骤；边界由医疗机构与检验标准确定。"
+              "标本身份差错可能影响患者安全；按机构规程核对标识和申请，保留差异并交有权限者处理。是否双人复核由适用规程决定，本页不把它列为所有岗位统一法条。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.risk.career-risk-cards.1",
@@ -8015,7 +8015,7 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "设备未校准或质控失败仍出结果：放行结果时，触发条件为质控未在控；可能造成系统性错误；控制为停用并纠正后复检。"
+              "设备或质控异常仍报告结果可能造成系统性错误；按实验室质量系统记录异常、查因、纠正与复核，由授权人员决定检测和报告是否可恢复，本页不提供临床操作指令。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.risk.career-risk-cards.4",
@@ -8066,7 +8066,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "雇主证据：用教育、培训、经验与雇主要求分别核对；美国 Job Zone 3 常需职业培训、副学士学位与在职训练，并可在医学技术师监督下工作；执业与监督边界按法域核验。"
+              "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。 中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.path.career-path-block.2",
@@ -8080,7 +8080,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "作品与经验：可从标本处理、实验室助理等岗位逐步积累，保留可复核的检验与质控记录作为能力证据。"
+              "编辑作品：提交A—D原输入、首次分类、逐条理由、交接单、参考解对照和纠错记录。纸面作品只供职业探索，不替代专业学历、临床训练、资格或真实检验质量记录。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.path.career-path-block.3",
@@ -8108,7 +8108,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "七天试验：前两天理解检验流程、质控与感染控制要求，中间三天完成一次虚构标本的检验与质控演练，第六天请他人挑战结果与异常判断，第七天写继续/停止/换方向的证据。"
+              "七日纸面探索，每日30—60分钟：第1天读本页职责与法域边界；第2天画标识、质控、FLAG三条件决策图；第3天遮住参考解完成A—D分类；第4天写交接单并区分事实/未决问题；第5天对照参考解保留纠错版本；第6天让同伴只看题面挑战你的理由；第7天归档作品与反馈，写继续/停止/换方向的证据。全程不采样、不检验、不使用患者数据，同伴不是资格审核者。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.path.career-path-block.5",
@@ -8122,7 +8122,7 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "资格决策：O*NET 的认证与培训目录及学徒机会用于发现可能的证书与训练路径，但认证不等于执照、雇主任命或签字权；证书、录用与执业授权是不同状态。"
+              "认证目录仅用于发现候选路径，本页列表混含医学检验技术员、医师及其他专业证书，不能说所有条目都适用或必需；先到颁证机构核教育、经验和考试条件，再核州规则/中国岗位资格。培训页本轮未成功读取，不能据此编造课程。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.path.career-path-block.6",
@@ -8201,7 +8201,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本只能说明采样时间、地区和岗位组合中的需求，不是全国需求率。"
+              "美国组合统计：2024年351,200人→2034年357,200人，净增6,000（约2%），预计年均空缺22,600含替换；净增不是年均空缺。本职业技术员未单列，不能用于个人录用预测。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.market-signals.market-signal-card.3",
@@ -8215,7 +8215,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "AI 或技术研究说明任务可被辅助的范围，不等同于组织采用、更不等同于净岗位变化。"
+              "编辑邻接：实验室设备状态记录、校准记录与追溯意识可能帮助探索校准技术员方向，不能证明已具计量标准和校准方法能力。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.market-signals.market-signal-card.4",
@@ -8229,7 +8229,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "相邻转型：从医疗临床技术员向微生物学家、生物技术员或临床检验技术专家与技术员转型，需逐项核对工具、资格与责任差异；每条路径都要补齐与新输出相对应的证据。"
+              "本职业向校准方向需补测量科学、标准适用性、量程/误差与校准程序的作品证据，分别核目标雇主要求；临床检验记录不能自动等同于计量能力。"
             ]
           },
           "id": "medical-and-clinical-laboratory-technicians.market-signals.market-signal-card.5",
@@ -8252,7 +8252,7 @@
           "data": {
             "entries": [
               {
-                "answer": "以环境受控的室内实验室为主，穿戴防护或安全装备（4.99）、精确或高度准确（4.85）与室内环境（4.54）最为突出；接触疾病或感染（4.11）、重复同一任务（4.12）、决策影响（4.16）与电话沟通（4.09）也较高，可能涉及轮班。",
+                "answer": "O*NET美国受访者：99%每天穿戴防护/安全装备，85%认为精确极其重要，81%每天在受控室内环境工作，70%每天接触疾病或感染，57%认为差错后果极其严重。比例对应不同问题和选项，不是感染概率，也不能推定中国工时或轮班制度；班次须看具体招聘和合同。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.1",
                 "question": "日常工作和工时如何？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.daily-work",
@@ -8261,12 +8261,14 @@
                 ]
               },
               {
-                "answer": "校准技术员面向仪器校准；微生物学家面向研究与方法开发；生物技术员面向研究与制备；病理医师负责最终诊断与执业签字；医疗临床技术员在监督下执行常规检验与记录。",
+                "answer": "校准、微生物研究、生物科研协助与病理医师诊断具有不同重心；本职业执行常规检验，不由职位名称授予独立诊断权。中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.role-comparison",
                 "source_refs": [
-                  "onet-summary"
+                  "onet-summary",
+                  "nhc-lab",
+                  "cms-clia"
                 ]
               },
               {
@@ -8279,7 +8281,7 @@
                 ]
               },
               {
-                "answer": "资料整理、结果初筛、排程与记录草拟更易被软件辅助；标本核对、结果判读、异常升级与感染控制仍以人工为主，现有资料不证明机构普遍以自动化替代这些判断。",
+                "answer": "编辑试验假设：可用本页虚构记录测试AI整理表格或交接草稿，逐项对照原ID、质控值与FLAG，记录遗漏和擅改。不使用患者数据，不让AI诊断或放行。Hot Technologies是招聘技能提及，ILO是任务暴露方法；两者均不证明本职业AI采用率、临床性能或替代比例。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.4",
                 "question": "AI 会如何影响这个职业？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.ai-impact",
@@ -8288,12 +8290,13 @@
                 ]
               },
               {
-                "answer": "标本身份核对、结果判读与异常升级、设备校准与质控放行、感染控制作业，以及最终诊断与签字，必须由有权限的人按职责负责。",
+                "answer": "标本、质控与异常记录须由适用岗位人员核对；检验操作、审核和诊断责任须区分。中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.human-control",
                 "source_refs": [
-                  "onet-details"
+                  "nhc-lab",
+                  "cdc-complexity"
                 ]
               },
               {
@@ -8315,21 +8318,24 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone 3：常需职业培训、副学士学位与在职训练，并可在医学技术师监督下工作；中国大陆按用人单位、执业与监督规则确定。",
+                "answer": "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。 中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.8",
                 "question": "入行和训练路径是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.education-path",
                 "source_refs": [
-                  "onet-details"
+                  "onet-summary",
+                  "nhc-lab",
+                  "cdc-complexity"
                 ]
               },
               {
-                "answer": "主要风险为标本身份差错、结果误判或漏报、感染暴露、质控失败仍出结果、越权作出诊断；应对为按规程核对、按质控复核并升级、按感染控制作业、停用纠正后复检、按授权交有权限者确认。",
+                "answer": "标本身份差错、异常漏报、感染暴露和质控异常可能影响安全；按机构质量系统记录、纠正、复核与升级，不由通用AI或纸面题决定临床处置。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.9",
                 "question": "主要风险和控制边界是什么？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.risk-boundary",
                 "source_refs": [
-                  "onet-details"
+                  "nhc-lab",
+                  "cms-clia"
                 ]
               },
               {
@@ -8342,7 +8348,7 @@
                 ]
               },
               {
-                "answer": "若能用完全虚构的标本完成一次检验、质控与感染控制演练，并能按规程核对、在异常时先停下并升级，值得进一步试验；具体岗位与执业要求以雇主与主管部门为准。",
+                "answer": "先完成A—D虚构记录的纸面分类和交接，观察能否保留原值并识别三类未决问题；全程不采样或操作仪器。纸面题不证明临床能力或岗位资格。",
                 "id": "medical-and-clinical-laboratory-technicians.faq.11",
                 "question": "这个职业值得进一步试验吗？",
                 "question_key": "career.faq.medical-and-clinical-laboratory-technicians.career-worth",
@@ -8482,13 +8488,13 @@
                 "limitation": "暴露指数不等于采用率、岗位结果或录用概率。",
                 "market": "全球任务研究",
                 "name": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "ILO Working Paper 140，2025；历史查阅2026-09-25",
                 "publisher": "International Labour Organization",
                 "scope": "market_signal",
                 "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "按行业门类发布城镇单位就业人员年平均工资。",
                   "行业均值不是职业中位数，且不含个体工商户与自由职业者。"
@@ -8498,23 +8504,23 @@
                 "limitation": "行业均值不是职业中位数；未取得本职业精确条目。",
                 "market": "中国大陆全国口径",
                 "name": "国家统计局：城镇单位就业人员年平均工资（2025）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "2025年度工资；发布2026-05-16；查阅2026-10-03",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
                 "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "认证发现路径，用于讨论入行与资格边界。",
-                  "认证不等于执照、雇主任命或签字权。"
+                  "目录含17条混合专业认证，需到颁证机构核具体适用条件。",
+                  "认证发现不等于执照、岗位授权或统一必需证书。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "onet-cert",
                 "limitation": "认证不等于执照、雇主任命或签字权。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 全国认证发现（National Certifications）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "认证发现目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/29-2012.00"
@@ -8536,7 +8542,7 @@
                 "url": "https://www.onetonline.org/link/custom/29-2012.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "任务、技能、工作活动与工作情境清单。",
                   "不等于统一录用或考核标准。"
@@ -8546,29 +8552,29 @@
                 "limitation": "为美国职业口径，不推定中国大陆对应关系。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 详细档案（任务、技能与情境）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-2012.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "技术工具线索，用于讨论任务层面的技术辅助。",
-                  "工具出现不等于生成式 AI 已被普遍采用。"
+                  "Office和Excel各8%、Outlook4%、Word3%、PowerPoint2%、SAP1%、MEDITECH不足1%、Google Docs比例不可用。",
+                  "招聘技能提及不证明GenAI采用率、熟练度或临床性能。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "onet-hot",
                 "limitation": "工具出现不等于采用率、失业概率或替代日期。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 热门技术（Hot Technologies）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "Lightcast美国2025招聘提及；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2012.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "官方职业描述、报告岗位名称、兴趣代码与 Job Zone。",
                   "不等于统一录用或考核标准。"
@@ -8578,7 +8584,7 @@
                 "limitation": "任务与情境样本随雇主与检验科室而变。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 摘要（职业身份与描述）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2012.00"
@@ -8600,7 +8606,7 @@
                 "url": "https://www.onetonline.org/link/localtraining/29-2012.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "2024 年组合口径就业约 351,200 人、2034 年预计约 357,200 人、2024—2034 年预计慢于平均（约 2%）、年均空缺约 22,600 个。",
                   "为组合口径，含替换需求。"
@@ -8610,13 +8616,13 @@
                 "limitation": "组合口径：非单列本职业；含替换需求。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 全国就业趋势（Clinical Laboratory Technologists and Technicians 29-2012 口径；BLS 2024—2034 年预测）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "BLS 2024—2034预测；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localtrends/29-2012.00"
               },
               {
-                "accessed_at": "2026-09-25",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "BLS 2025 年组合口径工资数据 10/25/中位/75/90 分位及小时值。",
                   "O*NET 页面标注为 Clinical Laboratory Technologists and Technicians（29-2012）组合口径，非单列本职业。"
@@ -8626,7 +8632,7 @@
                 "limitation": "组合口径：非单列 29-2012.00；分位不含个人到手收入。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 全国工资（Clinical Laboratory Technologists and Technicians 29-2012 口径；BLS 2025 年工资数据）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "BLS 2025工资；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-2012.00"
@@ -8634,7 +8640,7 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.",
+                  "提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。",
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
                 "evidence_type": "official custom occupation profile",
@@ -8648,9 +8654,9 @@
                 "url": "https://www.onetonline.org/link/custom/29-2012.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.",
+                  "提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。",
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
                 "evidence_type": "official occupation details",
@@ -8658,23 +8664,23 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "29-2012.00 - Medical and Clinical Laboratory Technicians",
-                "period": "current page; accessed 2026-08-31",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/29-2012.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "Office和Excel各8%、Outlook4%、Word3%、PowerPoint2%、SAP1%、MEDITECH不足1%、Google Docs比例不可用。",
+                  "招聘技能提及不证明GenAI采用率、熟练度或临床性能。"
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "Hot Technologies: 29-2012.00 - Medical and Clinical Laboratory Technicians",
-                "period": "current page; accessed 2026-08-31",
+                "period": "Lightcast美国2025招聘提及；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/29-2012.00"
@@ -8682,31 +8688,31 @@
               {
                 "accessed_at": "2026-09-25",
                 "details": [
-                  "行业分布：医疗保健与社会援助约 83%、其他行业约 17%（含教育服务）。",
-                  "行业分布是雇主场景信号，不是需求预测。"
+                  "组合行业范围由本轮摘要确认；83%/17%为原报告历史记录。",
+                  "完整industry页本轮读取失败；未取得分行业工资。"
                 ],
                 "evidence_type": "official industry distribution",
                 "id": "source-pack-onet-industry",
-                "limitation": "行业分布是雇主场景信号，不是需求预测。",
+                "limitation": "组合行业不是技术员单列结构；本轮摘要仅核组合范围，83%/17%沿用原报告历史记录，不提供行业工资。",
                 "market": "美国",
                 "name": "O*NET 29-2012.00 行业分布（Industries）",
-                "period": "O*NET 2026 职业档案；查阅 2026-09-25",
+                "period": "2024组合行业比例；历史查阅2026-09-25，本轮完整页读取失败",
                 "publisher": "O*NET OnLine",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/industry/29-2012.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.",
-                  "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+                  "目录含17条混合专业认证，需到颁证机构核具体适用条件。",
+                  "认证发现不等于执照、岗位授权或统一必需证书。"
                 ],
                 "evidence_type": "official certification discovery",
                 "id": "source-pack-onet-localcert",
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "National Certifications: 29-2012.00 - Medical and Clinical Laboratory Technicians",
-                "period": "current page; accessed 2026-08-31",
+                "period": "认证发现目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/29-2012.00"
@@ -8714,7 +8720,7 @@
               {
                 "accessed_at": "2026-08-31",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: entry education.",
+                  "提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。",
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
                 "evidence_type": "official local training discovery",
@@ -8728,9 +8734,9 @@
                 "url": "https://www.onetonline.org/link/localtraining/29-2012.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.",
+                  "提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。",
                   "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
                 ],
                 "evidence_type": "O*NET display of BLS OEWS wage data",
@@ -8738,15 +8744,15 @@
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "美国",
                 "name": "National Wages: 29-2012.00 - Medical and Clinical Laboratory Technicians",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "BLS 2025工资；查阅2026-10-03",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
-                "scope": "exact",
+                "scope": "parent_occupation_proxy",
                 "url": "https://www.onetonline.org/link/localwages/29-2012.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
-                  "Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.",
+                  "提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。",
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
                 "evidence_type": "official occupation summary",
@@ -8754,10 +8760,57 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "美国",
                 "name": "29-2012.00 - Medical and Clinical Laboratory Technicians",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET2026职业档案；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/29-2012.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "第12条人员学历/专业技术资格，第16—19条报告制度、操作者与审核者、诊断性报告权限。",
+                  "第25条质控异常纠正记录，第34—38条安全制度、培训与防护；具体项目另核适用规则。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "nhc-lab",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "中国大陆",
+                "name": "医疗机构临床实验室管理办法（地方卫健委公布2020修订文本）",
+                "period": "2006办法、2020修订；地方公布2023-02-13",
+                "publisher": "无锡市卫生健康委员会（公布国家管理办法）",
+                "scope": "china_regulation",
+                "url": "https://wjw.wuxi.gov.cn/doc/2023/02/13/3881836.shtml"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "美国人体检验质量监管按检测复杂程度实施；不提供中国资格互认。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "cms-clia",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "美国",
+                "name": "Clinical Laboratory Improvement Amendments (CLIA)",
+                "period": "网页更新2026-09-09",
+                "publisher": "Centers for Medicare & Medicaid Services",
+                "scope": "us_regulation",
+                "url": "https://www.cms.gov/medicare/quality/clinical-laboratory-improvement-amendments"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "非豁免检测须符合质量系统与人员要求；中、高复杂度人员标准不同。",
+                  "不是本职业所有岗位的一套统一教育或监督规则。"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "cdc-complexity",
+                "limitation": "仅适用所述法域与实验室范围；具体岗位和项目须核现行规则及机构授权。",
+                "market": "美国",
+                "name": "CLIA Test Complexities",
+                "period": "网页2024-09-11",
+                "publisher": "Centers for Disease Control and Prevention",
+                "scope": "us_regulation",
+                "url": "https://www.cdc.gov/clia/php/test-complexities/index.html"
               }
             ]
           },
@@ -8801,13 +8854,17 @@
         "evidence_links": [
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "label": "本职业来源"
+            "label": "本职业官方定义"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/29-1222.00",
+            "label": "病理医师官方定义"
           }
         ],
         "evidence_note": "相邻关系只用于方向比较，不代表自动转岗或资格互认。",
@@ -8826,7 +8883,7 @@
             "职业方向": "校准技术员"
           },
           {
-            "关键区别": "面向研究与方法开发；本职业在监督下执行常规检验。",
+            "关键区别": "研究微生物特征与常规临床检验的工作重心不同。",
             "更适合什么选择": "按研究与常规检验比较。",
             "核心工作与产出": {
               "$item": "medical-and-clinical-laboratory-technicians.direction-comparison.adjacent-career-comparison-table.3",
@@ -8848,15 +8905,15 @@
             "职业方向": "生物技术员"
           },
           {
-            "关键区别": "面向化学分析与材料检测；本职业面向体液与组织标本的临床检验。",
-            "更适合什么选择": "按标本与临床责任比较。",
+            "关键区别": "医学诊断职责不由技术员职位名称授予。",
+            "更适合什么选择": "研究诊断方向前先核医师资格与完整训练路径。",
             "核心工作与产出": {
               "$item": "medical-and-clinical-laboratory-technicians.direction-comparison.adjacent-career-comparison-table.5",
               "block": "direction-comparison",
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "职业方向": "化学技术员"
+            "职业方向": "病理医师"
           }
         ],
         "transition": "下一步用可观察交付验证方向。"
@@ -8865,7 +8922,7 @@
         "action_rows": [
           {
             "人群": "入行者",
-            "应对重点": "练习可复核的标本处理与记录样本。"
+            "应对重点": "先做本页纸面分类与交接，不处理真实标本。"
           },
           {
             "人群": "在岗者",
@@ -8946,14 +9003,14 @@
         },
         "difference_rows": [
           {
-            "AI主要改变": "记录与提醒",
-            "仍由人负责": "标本核对与检测判断",
-            "方向": "标本与检测"
+            "AI主要改变": "编辑假设：生成虚构记录草稿",
+            "仍由人负责": "逐字段核对原记录与交接对象",
+            "方向": "记录整理"
           },
           {
-            "AI主要改变": "初筛与比对",
-            "仍由人负责": "判读与异常升级",
-            "方向": "结果复核"
+            "AI主要改变": "本页未建立临床性能或采用证据",
+            "仍由人负责": "按规程与权限审核、纠正和升级",
+            "方向": "结果与质控"
           }
         ],
         "evidence_intro": {
@@ -9029,7 +9086,7 @@
         },
         "method_cards": [
           {
-            "含义": "资料整理、结果初筛、排程与记录草拟可被软件辅助；标本核对、结果判读、异常升级与感染控制仍由人负责。",
+            "含义": "任务能力需用适用输入、验证方法和错误记录证明；本页仅提出虚构记录整理试验。",
             "概念": "任务能力"
           },
           {
@@ -9043,7 +9100,7 @@
         ],
         "questions": [
           {
-            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
+            "回答": "编辑试验假设：可用本页虚构记录测试AI整理表格或交接草稿，逐项对照原ID、质控值与FLAG，记录遗漏和擅改。不使用患者数据，不让AI诊断或放行。Hot Technologies是招聘技能提及，ILO是任务暴露方法；两者均不证明本职业AI采用率、临床性能或替代比例。",
             "来源": {
               "$source": "ilo-ai",
               "block": "source-register",
@@ -9061,34 +9118,34 @@
             "问题": "AI 会取代医疗临床技术员吗？"
           },
           {
-            "回答": "结果复核、异常升级与最终交付仍由有权限的人负责。",
+            "回答": "不能。招聘软件提及和虚构记录整理都不是临床系统性能验证，也不证明已有自动放行能力；具体质量与权限见本页风险/法域部分。",
             "来源": {
-              "$source": "onet-custom",
+              "$source": "onet-hot",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-custom",
+              "$source": "onet-hot",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "问题": "检验结果能自动放行吗？"
+            "问题": "本页AI试验能证明自动放行安全吗？"
           },
           {
             "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
             "来源": {
-              "$source": "onet-details",
+              "$source": "ilo-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
             "链接": {
-              "$source": "onet-details",
+              "$source": "ilo-ai",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9157,21 +9214,21 @@
               "copy_key": "career.item.ai-impact-table",
               "type": "prose"
             },
-            "任务": "分析结果并识别异常",
+            "任务": "记录FLAG并交有权限者审核",
             "工作方向": "结果分析与复核",
-            "当前变化": "辅助初筛与比对"
+            "当前变化": "编辑试验：仅用虚构记录检验整理/提醒，效果需人工核对。"
           },
           {
             "人的控制点": "由有权限者确认放行与纠正。",
             "任务": "维护设备并进行质量控制",
             "工作方向": "设备与质控",
-            "当前变化": "辅助状态记录与提醒"
+            "当前变化": "编辑试验：仅用虚构记录检验整理/提醒，效果需人工核对。"
           },
           {
             "人的控制点": "由有权限者按感染控制要求执行。",
             "任务": "按规程处理标本并交接",
             "工作方向": "感染控制与交接",
-            "当前变化": "辅助记录"
+            "当前变化": "编辑试验：仅用虚构记录检验整理/提醒，效果需人工核对。"
           }
         ],
         "transition": {
@@ -9309,7 +9366,7 @@
       },
       "career_ai_description_block": {
         "body": [
-          "AI 可辅助资料整理、结果初筛、排程与记录草拟；但标本核对、结果判读、异常升级、感染控制与最终交付仍由有权限的人负责，AI 不承担诊断或放行责任。"
+          "编辑试验假设：可用本页虚构记录测试AI整理表格或交接草稿，逐项对照原ID、质控值与FLAG，记录遗漏和擅改。不使用患者数据，不让AI诊断或放行。Hot Technologies是招聘技能提及，ILO是任务暴露方法；两者均不证明本职业AI采用率、临床性能或替代比例。"
         ],
         "heading": "医疗临床技术员的工作对象与 AI 边界"
       },
@@ -9334,10 +9391,39 @@
           }
         ],
         "direct_answer": {
-          "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.2",
-          "block": "path",
-          "copy_key": "career.item.career-path-block",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.2",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.3",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.4",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.5",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.6",
+              "block": "path",
+              "copy_key": "career.item.career-path-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "heading": {
           "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.1",
@@ -9346,25 +9432,15 @@
           "type": "prose"
         },
         "locale_requirements": {
-          "credential_boundary": {
-            "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.4",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          },
-          "jurisdiction": "美国 Job Zone 3：常需职业培训、副学士学位与在职训练，并可在医学技术师监督下工作；中国大陆按用人单位、执业与监督规则核验",
-          "summary": {
-            "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.3",
-            "block": "path",
-            "copy_key": "career.item.career-path-block",
-            "type": "prose"
-          }
+          "credential_boundary": "中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。",
+          "jurisdiction": "中国医疗机构实验室与美国CLIA分别核验，Job Zone不是执业授权",
+          "summary": "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9372,17 +9448,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "Global exposure evidence is not adoption, job-loss probability, regulation or authorization evidence."
+            "scope": "美国通常准备程度"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "onet-cert",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9390,17 +9466,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "onet-cert",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。"
+            "scope": "混合目录不代表全部适用"
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9408,17 +9484,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "Directory entries are not state licenses, employer authorization or proof of universal requirement."
+            "scope": "中国学历/资格与诊断性报告权限"
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9426,13 +9502,13 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "US occupation evidence; it does not establish China mapping, pay or authorization."
+            "scope": "美国非豁免人员要求"
           }
         ],
         "tracks": [
@@ -9440,29 +9516,19 @@
             "id": "track-0",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": {
                   "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.7",
                   "block": "path",
                   "copy_key": "career.item.career-path-block",
                   "type": "prose"
                 },
-                "readiness_evidence": {
-                  "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.6",
-                  "block": "path",
-                  "copy_key": "career.item.career-path-block",
-                  "type": "prose"
-                },
-                "responsibility": {
-                  "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.5",
-                  "block": "path",
-                  "copy_key": "career.item.career-path-block",
-                  "type": "prose"
-                },
+                "readiness_evidence": "A—D逐条理由、原值、交接单及纠错版本。",
+                "responsibility": "用题内三个条件学习纸面记录分类与交接。",
                 "role": "检验学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": {
                   "$item": "medical-and-clinical-laboratory-technicians.path.career-path-block.8",
                   "block": "path",
@@ -9474,14 +9540,14 @@
                 "role": "独立检验"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到方法学与带教。",
                 "readiness_evidence": "出示复杂检验与复核记录。",
                 "responsibility": "负责微生物、细胞等较复杂检验。",
                 "role": "复杂项目"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示带教与复核记录。",
                 "responsibility": "在授权范围内带教并复核检验。",
@@ -9494,28 +9560,28 @@
             "id": "track-1",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到独立质控。",
                 "readiness_evidence": "保留质控练习记录。",
                 "responsibility": "学习设备维护、校准与质控流程。",
                 "role": "质控学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到方法验证。",
                 "readiness_evidence": "出示质控与纠正记录。",
                 "responsibility": "独立完成设备维护与质控分析。",
                 "role": "独立质控"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到质量体系。",
                 "readiness_evidence": "出示验证与评估记录。",
                 "responsibility": "参与方法学验证与性能评估。",
                 "role": "方法验证"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "按机构与规则扩展授权。",
                 "readiness_evidence": "出示改进前后对比记录。",
                 "responsibility": "在授权范围内改进质控与流程。",
@@ -9528,28 +9594,28 @@
             "id": "track-2",
             "stages": [
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到独立报告。",
                 "readiness_evidence": "保留报告练习记录。",
                 "responsibility": "学习结果记录、报告与交接要求。",
                 "role": "报告学习"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到异常处置协调。",
                 "readiness_evidence": "出示报告与复核记录。",
                 "responsibility": "独立整理结果并形成图表或报告。",
                 "role": "独立报告"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "扩展到科室质量协作。",
                 "readiness_evidence": "出示升级与处置记录。",
                 "responsibility": "负责异常结果的复核与升级协调。",
                 "role": "异常协调"
               },
               {
-                "credentials": "按具体法域和雇主规则核验。",
+                "credentials": "阶段为编辑探索路径；实际检测、审核、报告与带教必须先满足适用人员资格及机构岗位授权。",
                 "next_moves": "按机构与规则取得授权。",
                 "readiness_evidence": "出示质量与培训记录。",
                 "responsibility": "在授权范围内支持质量与培训职责。",
@@ -9653,7 +9719,7 @@
             }
           },
           {
-            "answer": "美国 O*NET 将本职业列为 Job Zone 3（常需职业培训、副学士学位与在职训练），并可在医学技术师监督下工作；认证不等于执照、雇主任命或签字权。中国大陆的学历、执业与监督边界由用人单位与主管部门按所在地规则核验，学位与证书不等于授权。",
+            "answer": "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。 中国大陆：医疗机构临床实验室专业技术人员应有相应专业学历与专业技术职务任职资格；报告制度须区分操作者和审核者，诊断性临床检验报告由执业医师出具，乡、民族乡、镇的医疗机构可由执业助理医师出具（管理办法第12、16—19条）。美国：CLIA按检测复杂程度规定实验室质量与人员要求，非豁免检测须满足相应人员标准；另核所在地执照和机构岗位授权。O*NET的“可在医学技术师监督下工作”不是所有岗位统一监督规则。",
             "key": "qa1",
             "question": "资格边界是什么？",
             "table": {
@@ -9709,7 +9775,7 @@
           }
         ],
         "direct_answer": "风险必须按触发、后果、控制和升级边界处理，不以编辑归纳代替医疗标准与感染控制要求。",
-        "evidence_scope": "依据 O*NET 29-2012.00 的任务与工作情境；患者安全、感染控制与执业监督边界按雇主与适用规则核对，不跨范围外推。",
+        "evidence_scope": "O*NET提供美国任务背景；中国医疗机构实验室要求及美国CLIA分别支持各自法域的人员、质量和安全边界。",
         "heading": "医疗临床技术员的工作风险与边界",
         "risks": [
           {
@@ -9767,7 +9833,7 @@
               "onet-details"
             ],
             "id": "risk-4",
-            "mitigation": "按质控规则停用并纠正后复检。",
+            "mitigation": "按实验室质量系统记录、查因、纠正与复核，报告恢复须经授权判断。",
             "scenario": "设备未校准或质控失败仍出结果。",
             "title": {
               "$item": "medical-and-clinical-laboratory-technicians.risk.career-risk-cards.4",
@@ -9780,7 +9846,8 @@
             "affected_roles": "结果与报告岗位",
             "consequence": "可能改变医疗与法律责任。",
             "evidence_refs": [
-              "onet-custom"
+              "nhc-lab",
+              "cms-clia"
             ],
             "id": "risk-5",
             "mitigation": "按监督与授权规则交有权限者确认。",
@@ -9808,7 +9875,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9816,17 +9883,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "美国任务背景"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9834,17 +9901,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+            "scope": "中国人员、报告、质控与安全"
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "cms-clia",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9852,17 +9919,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "cms-clia",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians（29-2012）组合口径。"
+            "scope": "美国人体检验质量监管"
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -9870,13 +9937,13 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+            "scope": "检测复杂度与人员标准"
           }
         ]
       },
@@ -9913,38 +9980,38 @@
           },
           "china_edu_table": [
             {
-              "学历段": "副学士学位",
-              "岗位方向": "临床检验技术岗位",
-              "说明": "美国 Job Zone 3 常见准备方式。"
+              "学历段": "中国大陆专业学历",
+              "岗位方向": "医疗机构临床实验室",
+              "说明": "管理办法第12条规定相应专业学历及专业技术职务任职资格；不由美国Job Zone替代。"
             },
             {
-              "学历段": "职业培训或在职训练",
-              "岗位方向": "检验或标本处理",
-              "说明": "按雇主与岗位要求核验。"
+              "学历段": "美国通常准备程度",
+              "岗位方向": "O*NET Job Zone 3",
+              "说明": "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。"
             },
             {
-              "学历段": "相关在职经验",
-              "岗位方向": "检验科室协作",
-              "说明": "常与学历并用。"
+              "学历段": "岗位权限",
+              "岗位方向": "检测、审核与诊断",
+              "说明": "中国报告制度区分操作者/审核者及诊断性报告；美国按检测复杂度、州规则与机构岗位核验。"
             },
             {
-              "学历段": "认证或培训",
-              "岗位方向": "按岗位要求",
-              "说明": "认证不等于执照或授权，按雇主核验。"
+              "学历段": "专业项目培训",
+              "岗位方向": "按具体检测项目",
+              "说明": "核对上岗安全培训与项目要求，不能用通用纸面题替代。"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "卫生和社会工作",
-              "需求": "医院与临床检验为主要雇主场景"
+              "行业": "医院或医学检验机构",
+              "需求": "编辑检索场景：核招聘科室、检测项目与人员要求，不表示中国行业占比。"
             },
             {
-              "行业": "教育与其他",
-              "需求": "教学与科研实验室场景"
+              "行业": "科研或教学实验室",
+              "需求": "比较是否属于临床检验服务，不能把研究岗位当作有临床报告权限。"
             },
             {
-              "行业": "其他行业",
-              "需求": "第三方检验与相关服务"
+              "行业": "具体科室或项目",
+              "需求": "核对标本类型、质量系统和岗位授权，不把行业名称当作资格证明。"
             }
           ],
           "china_intl": {
@@ -9977,7 +10044,7 @@
           "china_ref": {
             "$join": [
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -9985,7 +10052,7 @@
               },
               "｜",
               {
-                "$source": "onet-wages",
+                "$source": "onet-summary",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10018,7 +10085,7 @@
           "sources_note": {
             "$join": [
               {
-                "$source": "onet-wages",
+                "$source": "nhc-lab",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "name",
@@ -10026,7 +10093,7 @@
               },
               "｜",
               {
-                "$source": "onet-wages",
+                "$source": "nhc-lab",
                 "block": "source-register",
                 "copy_key": "career.item.published-sources",
                 "field": "url",
@@ -10282,18 +10349,47 @@
         ],
         "boundary": "美国数据为 O*NET 展示的 Clinical Laboratory Technologists and Technicians（29-2012 组合口径），非单列 29-2012.00；分位为统计位置，不等于个人到手收入。",
         "direct_answer": {
-          "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.2",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "factor_rows": [
           {
-            "answer": "美国 Job Zone 3：常需职业培训、副学士学位与在职训练；按法域核验执业与监督边界。",
+            "answer": "美国 Job Zone 3 是通常准备程度：职业培训、相关在职经验或副学士学位等路径，并非三者人人必须同时具备；具体教育、人员资格与监督要求由检测类型、州规则和机构岗位确定。",
             "factor": "资格"
           },
           {
-            "answer": "需相关在职训练，并可在医学技术师监督下工作。",
+            "answer": "岗位所需经验、监督及检测权限需逐项核验，不按工资分位定义资历。",
             "factor": "经验"
           },
           {
@@ -10301,12 +10397,7 @@
             "factor": "地区"
           }
         ],
-        "factors_heading": {
-          "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.6",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "factors_heading": "岗位差异与资格核验",
         "growth": "慢于平均（约 2%，2024—2034；组合口径）",
         "heading": {
           "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.1",
@@ -10314,42 +10405,32 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "type": "prose"
         },
-        "industry_heading": {
-          "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.5",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
-        "industry_period": "当前页面；查阅 2026-09-25",
+        "industry_heading": "行业范围与工资缺口",
+        "industry_period": "2024组合行业口径；比例历史记录，本轮完整页未读取",
         "industry_rows": [
           {
             "industry": "医疗保健与社会援助（约 83%）",
-            "median": "见组合分位",
-            "note": "医院与临床检验为主要雇主场景。"
+            "median": "证据不足：未取得该行业工资",
+            "note": "医院与临床检验为主要雇主场景。 不能以全国组合分位填行业工资。"
           },
           {
             "industry": "其他行业（约 17%）",
-            "median": "见组合分位",
-            "note": "含教育服务与其他场景。"
+            "median": "证据不足：未取得该行业工资",
+            "note": "含教育服务与其他场景。 不能以全国组合分位填行业工资。"
           },
           {
             "industry": "检验科室细分",
-            "median": "见组合分位",
-            "note": "科室与班次差异较大。"
+            "median": "证据不足：未取得该行业工资",
+            "note": "科室与班次差异较大。 不能以全国组合分位填行业工资。"
           },
           {
             "industry": "地区差异",
-            "median": "见组合分位",
-            "note": "不得跨地区外推。"
+            "median": "证据不足：未取得该行业工资",
+            "note": "不得跨地区外推。 不能以全国组合分位填行业工资。"
           }
         ],
         "industry_value_label": "行业值",
-        "interpretation_heading": {
-          "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.4",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "interpretation_heading": "统计分布与使用限制",
         "interpretation_rows": [
           {
             "answer": "不是，分位为统计位置。",
@@ -10374,15 +10455,10 @@
         "wage_column_labels": [
           "分位",
           "年度参考",
-          "月度等值",
+          "小时工资",
           "解释"
         ],
-        "wage_heading": {
-          "$item": "medical-and-clinical-laboratory-technicians.us-salary.career-snapshot-secondary-locale.3",
-          "block": "us-salary",
-          "copy_key": "career.item.career-snapshot-secondary-locale",
-          "type": "prose"
-        },
+        "wage_heading": "工资分位（组合全国口径）",
         "wage_tiers": [
           {
             "equivalent": "约 18.71 美元/小时",
@@ -10405,10 +10481,21 @@
         ]
       },
       "definition_block": {
-        "$item": "medical-and-clinical-laboratory-technicians.profile.definition-block.1",
-        "block": "profile",
-        "copy_key": "career.item.definition-block",
-        "type": "prose"
+        "$join": [
+          {
+            "$item": "medical-and-clinical-laboratory-technicians.profile.definition-block.1",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          },
+          {
+            "$item": "medical-and-clinical-laboratory-technicians.profile.definition-block.10",
+            "block": "profile",
+            "copy_key": "career.item.definition-block",
+            "type": "prose"
+          }
+        ],
+        "separator": "\n"
       },
       "faq_block": {
         "items": {
@@ -10426,27 +10513,44 @@
           "type": "prose"
         },
         "summary": {
-          "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.2",
-          "block": "quick-decision",
-          "copy_key": "career.item.fermat-decision-card",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.2",
+              "block": "quick-decision",
+              "copy_key": "career.item.fermat-decision-card",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.profile.work-context-block.5",
+              "block": "profile",
+              "copy_key": "career.item.work-context-block",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
         "title": "医疗临床技术员适合什么样的人？"
       },
       "fit_decision_checklist": {
-        "boundary": "这是工作样本核对，不是人格诊断或录用结论。",
+        "boundary": "谨慎条件：若对血液、体液、感染暴露或重复核对明显不适，先比较岗位实际任务与非临床方向。纸面题不证明真实检验能力或资格。",
         "how": {
-          "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.3",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
+          "$join": [
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.3",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            },
+            {
+              "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.4",
+              "block": "quick-decision",
+              "copy_key": "career.item.fit-decision-checklist",
+              "type": "prose"
+            }
+          ],
+          "separator": "\n"
         },
-        "suit": {
-          "$item": "medical-and-clinical-laboratory-technicians.quick-decision.fermat-decision-card.4",
-          "block": "quick-decision",
-          "copy_key": "career.item.fit-decision-checklist",
-          "type": "prose"
-        }
+        "suit": "积极信号：愿意保留原记录，发现身份、质控或FLAG疑问时暂停判断并交接，能说明依据。"
       },
       "hero": {
         "h1": {
@@ -10516,7 +10620,7 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "onet-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10524,17 +10628,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.0",
             "label": {
-              "$source": "ilo-ai",
+              "$source": "onet-trends",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "不提供该职业采用率、失业概率或替代日期。"
+            "scope": "组合就业预测"
           },
           {
             "href": {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10542,17 +10646,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.1",
             "label": {
-              "$source": "nbs-wages",
+              "$source": "onet-wages",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "未建立与该 O*NET 精确职业一一对应的中国全国工资分布。"
+            "scope": "组合工资分布"
           },
           {
             "href": {
-              "$source": "onet-cert",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10560,17 +10664,17 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.2",
             "label": {
-              "$source": "onet-cert",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "美国数据为 Clinical Laboratory Technologists and Technicians（29-2012）组合口径。"
+            "scope": "常规检验任务与相关方向"
           },
           {
             "href": {
-              "$source": "onet-custom",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
@@ -10578,13 +10682,13 @@
             },
             "id": "medical-and-clinical-laboratory-technicians.display.source.3",
             "label": {
-              "$source": "onet-custom",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "scope": "工作情境与行业分布为调查结果，不替代雇主与地方法规。"
+            "scope": "中国临床权限不由转型表授予"
           }
         ],
         "transitions": [
@@ -10615,7 +10719,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐临床标本与结果责任。",
+            "capability_gaps": "需补研究实验设计执行、实验观察和科研数据采集证据。",
             "shared_capabilities": "标本处理与实验操作经验。",
             "target_href": "/zh/career/jobs/biological-technicians",
             "target_slug": "biological-technicians",
@@ -10623,7 +10727,7 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐体液标本与感染控制。",
+            "capability_gaps": "需补材料/产品的化学与物理测试、目标仪器方法及实验室安全要求。",
             "shared_capabilities": "分析与仪器操作经验。",
             "target_href": "/zh/career/jobs/chemical-technicians",
             "target_slug": "chemical-technicians",
@@ -10631,16 +10735,16 @@
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐执业资格与诊断签字权。",
-            "shared_capabilities": "临床诊断与病理知识。",
+            "capability_gaps": "须完成目标法域医师教育、临床训练与执业资格，不能通过短期技术员作品取得诊断权限。",
+            "shared_capabilities": "临床实验室记录与异常交接是邻接经验，不表示已有医师诊断能力。",
             "target_href": "/zh/career/jobs/physicians-pathologists",
             "target_slug": "physicians-pathologists",
             "target_title": "病理医师",
             "transition_distance": "需补证据"
           },
           {
-            "capability_gaps": "需补齐监督与复杂检验责任。",
-            "shared_capabilities": "检验流程与方法学基础。",
+            "capability_gaps": "若具体目标是医学检验技术师，应另核真实岗位教育、检测复杂度、人员资格和责任，不能用组合工资档位定义晋升。",
+            "shared_capabilities": "该标题是工资/就业组合统计范围，包含技术师和技术员，不能视为一个独立新岗位。",
             "target_href": "/zh/career/jobs/clinical-laboratory-technologists-and-technicians",
             "target_slug": "clinical-laboratory-technologists-and-technicians",
             "target_title": "临床检验技术专家与技术员",
@@ -10726,13 +10830,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "以B身份差异和C的FLAG为反例，记录催促下的选择；九型标签不能替代规程或资格。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "enneagram",
             "label": "九型人格",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "面对催促你会忽略哪条题内规则？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10740,13 +10844,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "分开核ID、批次质控和FLAG；112超上限2，C仍须审核。纸面推理不等于临床判读能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "iq",
             "label": "认知能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否遮住答案按三个条件独立复算？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10754,13 +10858,13 @@
             "watchout": "不能据此推导录用、资格或表现。"
           },
           {
-            "answer": "先核对真实任务、标准与责任边界，再判断是否继续。",
+            "answer": "交接说明原值、差异和待审核事项，不把疑问写成结论；沟通表现需真实岗位进一步观察。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
             "cta_label": "开始职业兴趣试验",
             "evidence_level": "工作样本",
             "id": "eq",
             "label": "情绪能力",
-            "question": "用工作样本核对，而不是用标签替代判断。",
+            "question": "能否向催促者准确说明未决问题？",
             "signals": [
               "可观察任务",
               "过程记录"
@@ -10819,7 +10923,7 @@
             "question": "你愿意反复核对标本与结果吗？"
           },
           {
-            "answer": "用虚构标本流程核对。",
+            "answer": "只在纸面核对上岗培训和防护要求，真实作业须由机构培训与授权。",
             "question": "你能按感染控制与防护规程作业吗？"
           },
           {
@@ -10843,7 +10947,7 @@
             "question": "你的判断如何被复核与放行？"
           },
           {
-            "answer": "用完全虚构的标本完成一次检验与质控演练。",
+            "answer": "完成A—D虚构记录纸面分类与交接，不接触患者或标本。",
             "question": "下一步如何试验？"
           }
         ],
@@ -10886,71 +10990,20 @@
         "source_links": [
           {
             "href": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
             "label": {
-              "$source": "ilo-ai",
+              "$source": "onet-summary",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "nbs-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-cert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "RIC兴趣及工作风格"
           },
           {
             "href": {
@@ -10967,228 +11020,41 @@
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "美国任务/能力背景非人格因果证据"
           },
           {
             "href": {
-              "$source": "onet-hot",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
             "label": {
-              "$source": "onet-hot",
+              "$source": "nhc-lab",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "usage": "来源范围与限制"
+            "usage": "中国资格边界"
           },
           {
             "href": {
-              "$source": "onet-summary",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "url",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
             "label": {
-              "$source": "onet-summary",
+              "$source": "cdc-complexity",
               "block": "source-register",
               "copy_key": "career.item.published-sources",
               "field": "name",
               "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
             },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-training",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-training",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-trends",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "onet-wages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-custom",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-details",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-hot_tech",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-industry",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localcert",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localtraining",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-localwages",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
-          },
-          {
-            "href": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "url",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "label": {
-              "$source": "source-pack-onet-summary",
-              "block": "source-register",
-              "copy_key": "career.item.published-sources",
-              "field": "name",
-              "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
-            },
-            "usage": "来源范围与限制"
+            "usage": "美国检测复杂度边界"
           }
         ]
       },
@@ -11269,16 +11135,20 @@
             "item": "medical-and-clinical-laboratory-technicians.source-register.published.1"
           }
         },
-        "note": "来源范围、限制和统计时期按原始证据分别核对。来源使用说明：Generative AI and Jobs: A Refined Global Index of Occupational Exposure：Supports task-level exposure, job transformation and continued human-input boundaries.；Global exposure evidence is not adoption, job-loss probability, regulation or authorization evidence.；2025年城镇单位就业人员年平均工资情况：证明当前公开统计是行业聚合口径，未建立与 canonical occupation 精确对应的全国职业工资分布。；中文页面语言不证明该美国职业分类在中国大陆存在精确等价映射；不使用行业均值或美国数据填补。；National Certifications 29-2012.00 Medical And Clinical Laboratory Technicians：Current certification directory for the occupation.；Directory entries are not state licenses, employer authorization or proof of universal requirement.；29-2012.00 Medical And Clinical Laboratory Technicians custom profile：Current tasks, skills and work context for the exact occupation.；US occupation evidence; it does not establish China mapping, pay or authorization.；Medical And Clinical Laboratory Technicians detailed occupation profile：Detailed tasks, work context, skills and work styles.；Employer tasks and local authorization vary.；Hot Technologies 29-2012.00 Medical And Clinical Laboratory Technicians：Technology mentions linked to the occupation.；Posting mentions do not prove proficiency, adoption or automation rate.；29-2012.00 Medical And Clinical Laboratory Technicians：Exact identity, official scope and related occupations.；US occupation evidence; China mapping and authorization require separate review.；National Training 29-2012.00 Medical And Clinical Laboratory Technicians：Current education and training discovery for the exact occupation.；Training listings are not licenses, appointments or universal entry requirements.；National Employment Trends 29-2012.00 Medical And Clinical Laboratory Technicians：Current employment and projection measure shown for the occupation page.；Projection is not a hiring guarantee; parent data are not exact occupation counts.；National Wages 29-2012.00 Medical And Clinical Laboratory Technicians：Current wage measure shown for the occupation page.；Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.；29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: tasks, skills, work context.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: identity, workflow, work context, fit, risk.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Hot Technologies: 29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: technology and AI task change.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Industries: 29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: work setting, market scope.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Certifications: 29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: credential boundary.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Training: 29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: entry education.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Wages: 29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: US wage distribution.；O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.；29-2012.00 - Medical and Clinical Laboratory Technicians：Candidate only; Worker must reopen and bind reviewed claims for: identity, entry, outlook.；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
+        "note": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure (ILO Working Paper 140, 2025)：按任务层面评估生成式 AI 的职业暴露。；暴露指数不等于采用率、岗位结果或录用概率。；国家统计局：城镇单位就业人员年平均工资（2025）：按行业门类发布城镇单位就业人员年平均工资。；行业均值不是职业中位数，且不含个体工商户与自由职业者。；O*NET 29-2012.00 全国认证发现（National Certifications）：目录含17条混合专业认证，需到颁证机构核具体适用条件。；认证发现不等于执照、岗位授权或统一必需证书。；O*NET 29-2012.00 定制档案（工作情境）：工作情境与工作要求的比例分布。；美国工作情境不替代中国法律与雇主要求。；O*NET 29-2012.00 详细档案（任务、技能与情境）：任务、技能、工作活动与工作情境清单。；不等于统一录用或考核标准。；O*NET 29-2012.00 热门技术（Hot Technologies）：Office和Excel各8%、Outlook4%、Word3%、PowerPoint2%、SAP1%、MEDITECH不足1%、Google Docs比例不可用。；招聘技能提及不证明GenAI采用率、熟练度或临床性能。；O*NET 29-2012.00 摘要（职业身份与描述）：官方职业描述、报告岗位名称、兴趣代码与 Job Zone。；不等于统一录用或考核标准。；O*NET 29-2012.00 全国培训发现（National Training）：培训与学徒发现路径与教育入口。；准备程度不是统一录用门槛。；O*NET 29-2012.00 全国就业趋势（Clinical Laboratory Technologists and Technicians 29-2012 口径；BLS 2024—2034 年预测）：2024 年组合口径就业约 351,200 人、2034 年预计约 357,200 人、2024—2034 年预计慢于平均（约 2%）、年均空缺约 22,600 个。；为组合口径，含替换需求。；O*NET 29-2012.00 全国工资（Clinical Laboratory Technologists and Technicians 29-2012 口径；BLS 2025 年工资数据）：BLS 2025 年组合口径工资数据 10/25/中位/75/90 分位及小时值。；O*NET 页面标注为 Clinical Laboratory Technologists and Technicians（29-2012）组合口径，非单列本职业。；29-2012.00 - Medical and Clinical Laboratory Technicians：提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；29-2012.00 - Medical and Clinical Laboratory Technicians：提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；Hot Technologies: 29-2012.00 - Medical and Clinical Laboratory Technicians：Office和Excel各8%、Outlook4%、Word3%、PowerPoint2%、SAP1%、MEDITECH不足1%、Google Docs比例不可用。；招聘技能提及不证明GenAI采用率、熟练度或临床性能。；O*NET 29-2012.00 行业分布（Industries）：组合行业范围由本轮摘要确认；83%/17%为原报告历史记录。；完整industry页本轮读取失败；未取得分行业工资。；National Certifications: 29-2012.00 - Medical and Clinical Laboratory Technicians：目录含17条混合专业认证，需到颁证机构核具体适用条件。；认证发现不等于执照、岗位授权或统一必需证书。；National Training: 29-2012.00 - Medical and Clinical Laboratory Technicians：提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；National Wages: 29-2012.00 - Medical and Clinical Laboratory Technicians：提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。；O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.；29-2012.00 - Medical and Clinical Laboratory Technicians：提供该美国职业的资料入口；引用主张须按具体任务、地区和统计范围区分。；Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.；医疗机构临床实验室管理办法（地方卫健委公布2020修订文本）：第12条人员学历/专业技术资格，第16—19条报告制度、操作者与审核者、诊断性报告权限。；第25条质控异常纠正记录，第34—38条安全制度、培训与防护；具体项目另核适用规则。；Clinical Laboratory Improvement Amendments (CLIA)：美国人体检验质量监管按检测复杂程度实施；不提供中国资格互认。；CLIA Test Complexities：非豁免检测须符合质量系统与人员要求；中、高复杂度人员标准不同。；不是本职业所有岗位的一套统一教育或监督规则。"
       },
       "work_context_block": {
-        "$item": "medical-and-clinical-laboratory-technicians.profile.work-context-block.5",
+        "$item": "medical-and-clinical-laboratory-technicians.profile.work-context-block.6",
         "block": "profile",
         "copy_key": "career.item.work-context-block",
         "type": "prose"
       }
     },
     "contract_version": "career.detail.display.v1",
+    "interface": {
+      "interface.fit.directions_heading": "你更可能适合哪类临床检验任务？",
+      "interface.fit.interest_code_heading": "怎样理解 RIC"
+    },
     "locale": "zh-CN",
     "native_items": [
       {
@@ -11438,10 +11308,10 @@
       "text": "医疗临床技术员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "2451011cd2c1678ff52d396f986f79e9bddf942e774a0c8127bd3fa7b383db81",
+  "source_content_sha256": "ff0e01e6e2db0d8ddcbb17f007eb6a4b27988803e546c970ffb1792538306142",
   "subject": {
     "canonical_slug": "medical-and-clinical-laboratory-technicians",
     "name": "医学与临床实验室检验技术员",
-    "summary": "医疗临床技术员（O*NET 29-2012.00）在监督下执行常规医学检验，负责标本核对、检测与质量对照、结果记录和异常升级，并在感染控制与执业边界内工作。"
+    "summary": "医疗临床技术员（O*NET 29-2012.00）执行常规医学检验，核对标本、进行检验与质量控制、记录结果并升级异常；监督方式、报告审核和诊断权限按法域、检测类型与机构岗位核验。"
   }
 }

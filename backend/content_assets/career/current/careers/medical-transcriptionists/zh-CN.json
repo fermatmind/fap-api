@@ -126,7 +126,7 @@
         "status": "mapped"
       },
       "item:medical-transcriptionists.path.credential-decision.7": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-transcriptionists.path.employer-evidence.3": {
         "status": "mapped"
@@ -135,10 +135,10 @@
         "status": "pending_mapping"
       },
       "item:medical-transcriptionists.path.entry-role-comparison.2": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-transcriptionists.path.interview-probation.5": {
-        "status": "mapped"
+        "status": "pending_mapping"
       },
       "item:medical-transcriptionists.path.recruitment-sample.1": {
         "status": "pending_mapping"
@@ -12208,13 +12208,10 @@
           "copy_key": "career.item.fit-decision-checklist",
           "data": {
             "paragraphs": [
-              "安全工作样本（完全虚构的口述音频）：针对一段虚构的门诊与影像报告音频，在 60 分钟内完成转录、缩写还原、用药与数值核对、格式编辑与歧义标注，并说明须交有权限者确认的情形；不使用真实患者信息或受限数据。"
+              "60分钟编辑虚构题：可自行朗读下列稿件录成音频，也可做文本校对；未录音不声称验证听辨速度。口述稿：“训练报告R-01，训练日D1。MRI在本题展开为磁共振成像。模拟药物Z，记录量2.5模拟单位。记录状态：未核定。报告R-02，训练日D2。复查间隔［听不清］。本段无诊断结论。”待校初稿：“R-01，D1，MRI，药物Z，25模拟单位，状态已核定。R-02，D2，复查间隔三天，诊断正常。”所有对象、药物及单位虚构，无患者或给药建议。交付分段转录、缩写展开、逐处差异清单与待确认问题；不得猜补听不清内容或作临床判断。 参考解：R-01保留D1，MRI展开为磁共振成像，25纠正为2.5模拟单位，已核定纠正为未核定；R-02保留D2，复查间隔标［听不清，待口述者确认］，删除初稿无来源的“诊断正常”，并记录删除依据“口述无诊断结论”。至少记录四类差异：缩写、数值、状态、无依据的间隔/诊断。该训练稿不是临床模板。10分钟读题/录音、20分钟首稿、20分钟逐句核对及疑点、10分钟遮答案复核并留纠错记录；听辨与文本校对结果分别标明。"
             ]
           },
           "id": "medical-transcriptionists.quick-decision.fermat-decision-card.4",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -12244,13 +12241,13 @@
           "copy_key": "career.item.responsibilities-block",
           "data": {
             "entries": [
-              "报告转录：按音频转录门诊、急诊、影像、手术与出院总结等医学报告。",
-              "缩写还原：把医学缩写翻译为完整可理解的表述。",
-              "术语与用药核对：核对解剖术语、用药名称与剂量数值。",
-              "编辑与格式：按模板编辑格式、清晰度与可读性。",
-              "歧义处理：对听不清或矛盾内容标注并交回确认。",
-              "保密与访问：按隐私与访问控制要求处理与保存记录。",
-              "交回与协作：把报告交回审核、签名或更正并配合质量抽检。"
+              "报告转录：听音写稿。",
+              "缩写还原：核语境。",
+              "术语数值：逐项核。",
+              "编辑格式：按模板。",
+              "疑点处理：不猜补。",
+              "保密访问：按权限。",
+              "交回报告：待审核。"
             ]
           },
           "id": "medical-transcriptionists.profile.responsibilities-block.2",
@@ -12264,12 +12261,13 @@
           "copy_key": "career.item.work-context-block",
           "data": {
             "paragraphs": [
-              "工作情境（O*NET 工作情境调查，1—5 分）：本职业以室内转录与编辑为主，重视准确性与保密；具体工作情境数值以 O*NET 工作情境调查为准。"
+              "美国O*NET：精确、重复任务重要，常有时间压力；完整情境见下方正文。"
             ]
           },
           "id": "medical-transcriptionists.profile.work-context-block.3",
           "source_refs": [
-            "source-pack-onet-custom"
+            "onet-summary",
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -12278,7 +12276,7 @@
           "copy_key": "career.item.career-quick-answers-block",
           "data": {
             "paragraphs": [
-              "能力与工作方式：需要医学与解剖术语、缩写还原与打字基础，能长时间专注并按模板编辑，重视准确性与保密。"
+              "转录编辑"
             ]
           },
           "id": "medical-transcriptionists.profile.career-quick-answers-block.4",
@@ -12292,7 +12290,7 @@
           "copy_key": "career.item.onet-structured-fields-block",
           "data": {
             "paragraphs": [
-              "研究输入：O*NET 31-9094.00 的官方描述、任务、工作情境、兴趣代码（CSI）与 Job Zone Three，以及 BLS 2025 年工资数据与 2024—2034 年就业预测（本职业口径）；不据此推定中国大陆的资格、工资或就业口径。"
+              "数据口径见下文。"
             ]
           },
           "id": "medical-transcriptionists.profile.onet-structured-fields-block.5",
@@ -12307,7 +12305,7 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "投入对象：口述音频、报告模板、医学与解剖术语，以及隐私与记录保存要求。"
+              "交付转录、编辑稿与疑点清单。"
             ]
           },
           "id": "medical-transcriptionists.profile.definition-block.6",
@@ -12321,12 +12319,13 @@
           "copy_key": "career.item.definition-block",
           "data": {
             "paragraphs": [
-              "可检查产出：完整准确的转录文本、缩写还原与疑点标注、编辑后的报告，以及交回审核与质量抽检记录。"
+              "转录不授予独立诊疗权。"
             ]
           },
           "id": "medical-transcriptionists.profile.work-context-block.8",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-summary",
+            "bls-current"
           ],
           "type": "prose"
         }
@@ -12343,12 +12342,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "相邻关系只用于方向比较：本职业负责口述报告的转录与编辑，病历记录专员负责记录整理、编码与发布，法庭记录员面向司法听录，医师与外科医师提供诊疗，心血管技术员面向检查操作，各岗位资格与责任不得互换。"
+              "比较按主要产出：本职业口述转录/初稿编辑；相邻编码、司法逐字稿、通用文档、归档、系统、医疗行政/临床各另有职责。任务可重叠，例如本职业可兼文书或保险表单，不能把重叠写成资格互认。"
             ]
           },
           "id": "medical-transcriptionists.direction-comparison.adjacent-career-comparison-table.1",
           "source_refs": [
-            "source-pack-onet-summary"
+            "onet-summary",
+            "adj-29-2072.00"
           ],
           "type": "prose"
         },
@@ -12362,7 +12362,8 @@
           },
           "id": "medical-transcriptionists.direction-comparison.adjacent-career-comparison-table.2",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-summary",
+            "adj-29-2072.00"
           ],
           "type": "prose"
         },
@@ -12371,12 +12372,13 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与病历记录专员区别：后者负责记录汇总、编码与合规发布；本职业负责把口述内容转录与编辑为可读文本。"
+              "病历记录专员含医疗编码；本职业主产出是转录与编辑稿。适配编码需另补规则，不因转录经验自动合格。"
             ]
           },
           "id": "medical-transcriptionists.direction-comparison.adjacent-career-comparison-table.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-summary",
+            "adj-29-2072.00"
           ],
           "type": "prose"
         },
@@ -12385,12 +12387,14 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与法庭记录员区别：后者面向司法与听证场景，本职业面向医疗报告与术语。"
+              "法庭记录员与字幕员记录司法等程序逐字稿/字幕；医疗转录面向医学报告，术语、格式和场景要求不同。"
             ]
           },
           "id": "medical-transcriptionists.direction-comparison.adjacent-career-comparison-table.4",
           "source_refs": [
-            "source-pack-onet-details"
+            "onet-summary",
+            "adj-29-2072.00",
+            "adj-27-3092.00"
           ],
           "type": "prose"
         },
@@ -12399,13 +12403,10 @@
           "copy_key": "career.item.adjacent-career-comparison-table",
           "data": {
             "paragraphs": [
-              "与医师、外科医师区别：后两者提供诊疗并签署报告；本职业不承担诊断或签名责任。"
+              "编辑选择建议：愿做司法逐字记录或字幕可比较此方向；需另学设备、程序与职责，不表示可直接转岗。"
             ]
           },
           "id": "medical-transcriptionists.direction-comparison.adjacent-career-comparison-table.5",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -12435,13 +12436,10 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "用完全虚构音频练习转录与缩写还原。"
+              "编辑建议：用本页虚构稿完成首稿/校稿/差异清单，标录音或文本模式。"
             ]
           },
           "id": "medical-transcriptionists.ai-impact.ai-impact-table.2",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12463,13 +12461,10 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "保留转录、审核与保密记录。"
+              "编辑建议：核实际报告逐句完整性、疑点与交回批准状态。"
             ]
           },
           "id": "medical-transcriptionists.ai-impact.ai-impact-table.4",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12491,13 +12486,10 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "先定保密、质量与交付边界。"
+              "编辑建议：先核合法用途、批准系统、质量与交付条件，不称采用实测。"
             ]
           },
           "id": "medical-transcriptionists.ai-impact.ai-impact-table.6",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -12519,13 +12511,10 @@
           "copy_key": "career.item.ai-impact-table",
           "data": {
             "paragraphs": [
-              "示范术语规范与保密要求。"
+              "编辑建议：用虚构稿展示2.5/25、未核定/已核定与无依据诊断的纠错。"
             ]
           },
           "id": "medical-transcriptionists.ai-impact.ai-impact-table.8",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -12541,7 +12530,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "中国大陆没有单列本职业的公开职业工资：本轮以国家统计局方法与公开口径有界检索，未取得与 O*NET 31-9094.00 精确对应的全国职业工资分布，因此不生成中国精确中位数、分位数或稳定月薪。"
+              "本职业对应美国31-9094.00，不能仅凭中文名称证明中国精确等价分类。本轮未取得中国全国本职业工资分布；可用医院等医疗雇主场景匹配卫生和社会工作行业作宽口径参考。"
             ]
           },
           "id": "medical-transcriptionists.china-salary.career-snapshot-primary-locale.1",
@@ -12555,7 +12544,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "口径说明：公开工资资料为行业或人员大类聚合口径，卫生与社会工作均值不能替代本职业工资；在建立精确映射前不使用代理数字。"
+              "国家统计局2025中国全国城镇单位卫生和社会工作税前年平均工资：非私营146,266元/年，私营75,631元/年（表2、表5）。为全行业就业人员均值，不是转录员中位数、起薪、月薪区间或个人到手收入。"
             ]
           },
           "id": "medical-transcriptionists.china-salary.career-snapshot-primary-locale.2",
@@ -12569,7 +12558,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "类别边界：zh-CN 只是页面语言，不是本职业在中国大陆存在精确等价职业的证明；不得用行业均值或美国工资跨法域外推起薪、中位数或个人收入。"
+              "行业匹配依据是本职业医疗报告转录及医院/医师办公室雇主背景，不要求精确职业先等价；不能把美国第三方转录公司直接等同某个中国行业。调查为城镇地区5人及以上法人单位，排除个体工商户及自由职业者，私营/非私营分列，工资总额与人员口径按统计附注。"
             ]
           },
           "id": "medical-transcriptionists.china-salary.career-snapshot-primary-locale.3",
@@ -12583,7 +12572,7 @@
           "copy_key": "career.item.career-snapshot-primary-locale",
           "data": {
             "paragraphs": [
-              "证据不足：未取得中国大陆医疗文书转录员的全国职业工资（本轮公开口径）；本页明确标注缺失，不使用行业代理或美国数字填补。"
+              "证据不足：未取得中国大陆医疗文书转录员全国精确职业工资中位数、分位数及统一起薪。相关行业税前年均工资只作背景，不填补上述缺口，不换算稳定月薪。"
             ]
           },
           "id": "medical-transcriptionists.china-salary.career-snapshot-primary-locale.4",
@@ -12605,12 +12594,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "美国本职业官方口径为 O*NET 31-9094.00 本职业统计（展示 BLS 2025 年工资数据与 2024—2034 年预测）：该值只用于所列市场与期间，不能当作入门工资、中国工资或个人保证。"
+              "美国O*NET31-9094.00/BLS SOC31-9094本职业口径；工资为2025，O*NET旧就业2024—2034与BLS新就业2025—2035分别标年。分位不是起薪或个人到手收入，不外推中国。"
             ]
           },
           "id": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.1",
           "source_refs": [
-            "onet-wages"
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -12633,11 +12622,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "就业口径（BLS 2024—2034 年预测）：2024 年就业约 43,900 人，2034 年预计约 41,800 人，2024—2034 年预计下降约 5%，年均职位空缺约 7,400 个（含替换需求）。"
+              "O*NET旧期2024—2034：43,900→41,800人，官方下降5%，年均空缺7,400；旧期独立保留，不拼接新期。 BLS新期2025—2035：42,000→40,200人，官方下降4%、净变化−1,900人，年均空缺6,200，全为转岗或退出劳动力的替换需求。官方端点、净变化独立舍入，不能用端点相减改写净变化。总体就业预测，非AI归因；不是当前招聘数或录用概率。"
             ]
           },
           "id": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.3",
           "source_refs": [
+            "bls-current",
             "onet-trends"
           ],
           "type": "prose"
@@ -12647,11 +12637,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "行业分布（O*NET 31-9094.00）：医疗与社会援助约 58%，行政与支持服务约 36%，其他行业约 6%。行业分布是雇主场景信号，不是需求预测。"
+              "O*NET2024雇主行业分布：医疗与社会援助58%、行政与支持36%、其他6%。BLS2025主要雇主另列医师办公室39%、行政与支持30%、医院11%、门诊中心4%、其他医护办公室4%；为不同年份/分类，不相互替换，不是岗位需求率。"
             ]
           },
           "id": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.4",
           "source_refs": [
+            "bls-current",
             "source-pack-onet-industry"
           ],
           "type": "prose"
@@ -12661,12 +12652,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "怎样理解这些数字：本职业就业规模预计下降，但仍有相当数量的替换需求；规模、增长率、净变化与空缺必须分别解释。"
+              "工资分位是统计位置；行业内本职业中位年薪仍不同：2025医院46,750、门诊中心46,110、医师办公室44,670、其他医护办公室39,220、行政与支持33,280美元。不是整个行业均值，亦非个人报价。"
             ]
           },
           "id": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.5",
           "source_refs": [
-            "onet-trends"
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -12675,12 +12666,12 @@
           "copy_key": "career.item.career-snapshot-secondary-locale",
           "data": {
             "paragraphs": [
-              "比较岗位还要核对行业、工时、远程与外包安排；机构与地区差异较大，不得跨地区外推。"
+              "BLS描述可按转录产量、小时或年薪计酬，通常全职但兼职常见；比岗位要核支付口径、报告难度、工时及远程安排。总体就业预测与替换空缺分别使用，不作录用承诺。"
             ]
           },
           "id": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.6",
           "source_refs": [
-            "source-pack-onet-custom"
+            "bls-current"
           ],
           "type": "prose"
         }
@@ -12718,9 +12709,6 @@
             ]
           },
           "id": "medical-transcriptionists.fit.personality-fit-block.2",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "list"
         },
         {
@@ -12733,9 +12721,6 @@
             ]
           },
           "id": "medical-transcriptionists.fit.personality-fit-block.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "list"
         },
         {
@@ -12748,9 +12733,6 @@
             ]
           },
           "id": "medical-transcriptionists.fit.riasec-fit-block.4",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "list"
         },
         {
@@ -12764,9 +12746,6 @@
             ]
           },
           "id": "medical-transcriptionists.fit.personality-fit-block.5",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "list"
         },
         {
@@ -12774,14 +12753,11 @@
           "copy_key": "career.item.riasec-fit-block",
           "data": {
             "entries": [
-              "综合建议：把信号与具体工作样本、质量抽检和岗位要求对照。",
-              "不以任何单一测评代替资格与保密核对。"
+              "九型人格仅作自我探索，不证明术语、听辨或保密能力。",
+              "综合判断应核首稿、校稿与岗位要求，不由类型标签决定。"
             ]
           },
           "id": "medical-transcriptionists.fit.personality-fit-block.6",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "list"
         },
         {
@@ -12807,9 +12783,6 @@
             ]
           },
           "id": "medical-transcriptionists.fit.personality-fit-block.8",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         }
       ]
@@ -12853,12 +12826,13 @@
           "copy_key": "career.item.career-risk-cards",
           "data": {
             "paragraphs": [
-              "保密或数据处理不当：处理记录时，触发条件为未按隐私与访问控制要求执行；可能违反隐私法规与机构政策；控制为按保密要求处理并留痕。"
+              "美国：HIPAA适用于受规制实体及相关业务伙伴，并非全球所有医疗文书；HHS将向医师提供转录服务的独立转录员或应用供应商列为业务伙伴示例，应按实际关系确认BAA及允许用途、保护义务。中国：个人信息保护法将医疗健康列为敏感个人信息，核处理依据、必要性、严格保护及适用告知/同意规则；第13条存在不需同意的法定情形，第21条约束受托范围和转委托。去掉姓名不等于匿名化，岗位授权不替代法律条件。"
             ]
           },
           "id": "medical-transcriptionists.risk.career-risk-cards.3",
           "source_refs": [
-            "source-pack-onet-details"
+            "hhs-business-associates",
+            "cn-pipl"
           ],
           "type": "prose"
         },
@@ -12903,13 +12877,10 @@
           "copy_key": "career.item.recruitment-sample",
           "data": {
             "paragraphs": [
-              "招聘样本说明：下列为岗位样本的整理方式，不是录用或资格承诺。职位名称可能是医疗文书转录员、医学转录员、转录编辑或医学语言专员。"
+              "本页未采集真实招聘广告；以下是编辑制定的岗位核对与能力阶段，不是招聘样本统计。核具体雇主、报告范围、支付方式、工时、测试要求、批准系统与保密条件，不设统一晋级年限或保证录用。"
             ]
           },
           "id": "medical-transcriptionists.path.recruitment-sample.1",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "notice"
         },
         {
@@ -12923,48 +12894,52 @@
               "career.column.evidence",
               "career.column.next"
             ],
+            "column_labels": [
+              "编辑能力阶段",
+              "任务",
+              "责任边界",
+              "可查证据",
+              "下一步"
+            ],
             "rows": [
               [
-                "入职 0—3 个月",
-                "在监督下转录常见报告并还原缩写",
-                "不得跳过术语与用药核对",
-                "转录与术语练习记录",
-                "扩展到独立转录"
+                "基础练习",
+                "虚构常见报告转录/编辑",
+                "不碰真实患者资料",
+                "首稿与逐句差异清单",
+                "复算并记录疑点"
               ],
               [
-                "3—12 个月",
-                "独立完成门诊与影像报告转录",
-                "疑点须标注并交回确认",
-                "转录与疑点记录",
-                "扩展到复杂报告"
+                "常见报告",
+                "按模板交付常见报告",
+                "是否独立按雇主与权限核",
+                "复核和报告交回记录",
+                "学习新报告格式"
               ],
               [
-                "1—3 年",
-                "负责手术与出院总结等复杂报告",
-                "报告须经审核与签名",
-                "复杂报告与审核记录",
-                "扩展到质量复核"
+                "复杂报告",
+                "核复杂术语与矛盾信息",
+                "疑点由口述者确认",
+                "复杂稿与确认记录",
+                "在授权内参与质量工作"
               ],
               [
-                "3—5 年",
-                "参与转录质量抽检与模板维护",
-                "抽检结论由责任流程确认",
-                "抽检与模板记录",
-                "扩展到带教"
+                "质量复核",
+                "核版本、模板与返工原因",
+                "不替代临床批准或隐私责任",
+                "抽检与模板改进材料",
+                "按实际评价扩展任务"
               ],
               [
-                "5 年以上",
-                "在授权范围内带教与改进流程",
-                "不得替代机构保密与合规职能",
-                "带教与流程改进记录",
-                "按机构与规则扩展授权"
+                "带教改进",
+                "授权范围内带教与改流程",
+                "无固定晋级年限或自动授权",
+                "培训与流程评价材料",
+                "按机构确认职责"
               ]
             ]
           },
           "id": "medical-transcriptionists.path.entry-role-comparison.2",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "table"
         },
         {
@@ -12975,15 +12950,15 @@
               {
                 "id": "medical-transcriptionists.employer-evidence.1",
                 "values": [
-                  "雇主证据",
-                  "资格按教育、培训、术语测试与经验分别核对；美国 Job Zone Three 通常需要职业培训、相关在职经验或副学士学位。"
+                  "教育线索",
+                  "美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。"
                 ]
               },
               {
                 "id": "medical-transcriptionists.employer-evidence.2",
                 "values": [
-                  "技能证据",
-                  "转录准确率、速度与术语还原常以测试样本与质量抽检为证据。"
+                  "任务证据",
+                  "编辑建议：核首稿、校稿、歧义确认与交回记录；不虚设统一速度或准确率合格线。"
                 ]
               },
               {
@@ -12997,7 +12972,8 @@
           },
           "id": "medical-transcriptionists.path.employer-evidence.3",
           "source_refs": [
-            "onet-cert"
+            "bls-current",
+            "onet-summary"
           ],
           "type": "cards"
         },
@@ -13009,25 +12985,22 @@
               {
                 "id": "medical-transcriptionists.portfolio.one",
                 "values": [
-                  "作品示例",
-                  "保留虚构或脱敏的转录样本、缩写还原与疑点标注记录。",
-                  "展示术语核对、格式编辑与保密处理。"
+                  "完整虚构作品",
+                  "60分钟编辑虚构题：可自行朗读下列稿件录成音频，也可做文本校对；未录音不声称验证听辨速度。口述稿：“训练报告R-01，训练日D1。MRI在本题展开为磁共振成像。模拟药物Z，记录量2.5模拟单位。记录状态：未核定。报告R-02，训练日D2。复查间隔［听不清］。本段无诊断结论。”待校初稿：“R-01，D1，MRI，药物Z，25模拟单位，状态已核定。R-02，D2，复查间隔三天，诊断正常。”所有对象、药物及单位虚构，无患者或给药建议。交付分段转录、缩写展开、逐处差异清单与待确认问题；不得猜补听不清内容或作临床判断。",
+                  "材料：题面/自录音或模式说明、首稿、校稿、逐句差异与待确认清单。"
                 ]
               },
               {
                 "id": "medical-transcriptionists.portfolio.two",
                 "values": [
-                  "可检查产出",
-                  "转录文本、疑点标注清单与质量抽检记录。",
-                  "说明每一步的规范依据与升级路径。"
+                  "参考解与纠错",
+                  "参考解：R-01保留D1，MRI展开为磁共振成像，25纠正为2.5模拟单位，已核定纠正为未核定；R-02保留D2，复查间隔标［听不清，待口述者确认］，删除初稿无来源的“诊断正常”，并记录删除依据“口述无诊断结论”。至少记录四类差异：缩写、数值、状态、无依据的间隔/诊断。该训练稿不是临床模板。10分钟读题/录音、20分钟首稿、20分钟逐句核对及疑点、10分钟遮答案复核并留纠错记录；听辨与文本校对结果分别标明。",
+                  "遮答案再核，记录修改理由；不使用真实或自行去姓名的病历，作品不证明执业/雇主授权。"
                 ]
               }
             ]
           },
           "id": "medical-transcriptionists.path.entry-portfolio.4",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "cards"
         },
         {
@@ -13040,37 +13013,40 @@
               "career.column.review",
               "career.column.evidence"
             ],
+            "column_labels": [
+              "编辑准备阶段",
+              "动作",
+              "复核",
+              "产出"
+            ],
             "rows": [
               [
-                "面试前准备",
-                "整理一段虚构音频的转录与缩写还原案例",
-                "请他人挑战术语与保密判断",
-                "转录与疑点样本"
+                "申请前演练",
+                "完成虚构R-01/R-02稿",
+                "核2.5、未核定与无依据文本",
+                "首稿/校稿/差异清单"
               ],
               [
-                "面试现场",
-                "说明如何核对术语与用药名称",
-                "由面试方确认结论逻辑",
-                "术语与格式说明"
+                "面试讨论",
+                "解释缩写/疑点核实方法",
+                "不声称本题替代真实招聘测试",
+                "理由与问题清单"
               ],
               [
-                "试用期前 30 天",
-                "在监督下完成常见报告转录",
-                "由主管复核转录质量",
-                "转录与抽检记录"
+                "入职准备",
+                "核岗位系统、报告及权限",
+                "按实际雇主训练计划，不设30天达标",
+                "培训与访问范围记录"
               ],
               [
-                "试用期结束",
-                "独立完成门诊与影像报告转录",
-                "由责任人确认质量与保密",
-                "转录与保密记录"
+                "监督下交付",
+                "按授权与批准流程完成报告",
+                "责任人确认质量与交回状态",
+                "版本、复核及疑点记录"
               ]
             ]
           },
           "id": "medical-transcriptionists.path.interview-probation.5",
-          "source_refs": [
-            "onet-cert"
-          ],
           "type": "table"
         },
         {
@@ -13081,30 +13057,27 @@
               {
                 "id": "medical-transcriptionists.trial.day1",
                 "values": [
-                  "第 1—2 天",
-                  "理解报告类型、模板、术语与保密要求。"
+                  "第1—2天，每天30—60分钟",
+                  "读完整虚构题，选录音/文本模式；建MRI展开、2.5、未核定核对表，保存题面与首稿。"
                 ]
               },
               {
                 "id": "medical-transcriptionists.trial.day3",
                 "values": [
-                  "第 3—5 天",
-                  "针对完全虚构音频完成转录、缩写还原与疑点标注。"
+                  "第3—5天，每天30—60分钟",
+                  "同一题逐句比对，修25/已核定与无依据间隔/诊断；保留校稿、差异、待确认清单，遮答案再查。"
                 ]
               },
               {
                 "id": "medical-transcriptionists.trial.day7",
                 "values": [
-                  "第 6—7 天",
-                  "请他人挑战术语与保密判断，写继续、停止或换方向的证据。"
+                  "第6—7天，每天30—60分钟",
+                  "对照参考解并记录纠错，请他人指出漏项；整理完整作品，写兴趣、压力与继续/停止/换方向理由，不设统一合格阈值。"
                 ]
               }
             ]
           },
           "id": "medical-transcriptionists.path.seven-day-trial.6",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "timeline"
         },
         {
@@ -13120,15 +13093,24 @@
               "career.column.owner",
               "career.column.next"
             ],
+            "column_labels": [
+              "状态",
+              "证明",
+              "核验方",
+              "条件",
+              "边界",
+              "责任方",
+              "下一步"
+            ],
             "rows": [
               [
-                "学历",
-                "副学士或相关专业训练",
-                "用人单位与院校",
-                "按岗位核验",
-                "学历不等同执业或授权",
-                "用人单位",
-                "按岗位要求核对"
+                "教育",
+                "BLS通常高中后证书；副学士可选",
+                "雇主与院校",
+                "具体岗位核",
+                "非统一执照门槛",
+                "雇主/学习者",
+                "核真实招聘要求"
               ],
               [
                 "转录培训",
@@ -13140,22 +13122,22 @@
                 "核对课程范围"
               ],
               [
-                "转录认证",
-                "职业或专业转录认证",
-                "认证机构",
-                "按认证范围核验",
-                "认证不等同执照",
-                "认证机构",
-                "核对认证有效性"
+                "职业认证",
+                "目录8项含RHDS一级/CHDS二级",
+                "对应认证机构",
+                "BLS认证自愿；按实际名称核",
+                "不等同执照或病历权限",
+                "认证方/雇主",
+                "核考试、有效期与适用范围"
               ],
               [
-                "注册或执照",
-                "按法域要求的证明",
-                "主管部门",
-                "按所在地规则核验",
-                "注册不等同机构授权",
-                "主管部门",
-                "核对适用范围"
+                "执照/注册核对",
+                "不预设转录统一医疗执照",
+                "所在法域主管部门",
+                "若岗位另有受规制活动再核",
+                "认证目录不是执照证据",
+                "雇主/主管部门",
+                "区分转录与临床任务"
               ],
               [
                 "机构授权",
@@ -13167,19 +13149,22 @@
                 "核对授权链"
               ],
               [
-                "病历处理权",
-                "隐私与访问控制记录",
-                "机构与责任人",
-                "按记录类型与流程核验",
-                "处理不等同医疗决策",
-                "机构责任人",
-                "按流程确认"
+                "数据处理条件",
+                "用途、系统、合同与保护措施",
+                "机构及适用责任方",
+                "中美规则分别核适用性",
+                "岗位权限不替代法律条件",
+                "机构责任方",
+                "美国业务伙伴核BAA；中国核受托范围"
               ]
             ]
           },
           "id": "medical-transcriptionists.path.credential-decision.7",
           "source_refs": [
-            "onet-cert"
+            "bls-current",
+            "onet-cert",
+            "hhs-business-associates",
+            "cn-pipl"
           ],
           "type": "table"
         },
@@ -13188,12 +13173,13 @@
           "copy_key": "career.item.credential-boundary",
           "data": {
             "paragraphs": [
-              "资格边界：证书、学位、转录认证、机构授权与病历处理不是同一状态；真实要求必须回到雇主、转录系统与所在地隐私法规，认证不等于签字授权。"
+              "美国：HIPAA适用于受规制实体及相关业务伙伴，并非全球所有医疗文书；HHS将向医师提供转录服务的独立转录员或应用供应商列为业务伙伴示例，应按实际关系确认BAA及允许用途、保护义务。中国：个人信息保护法将医疗健康列为敏感个人信息，核处理依据、必要性、严格保护及适用告知/同意规则；第13条存在不需同意的法定情形，第21条约束受托范围和转委托。去掉姓名不等于匿名化，岗位授权不替代法律条件。"
             ]
           },
           "id": "medical-transcriptionists.path.credential-boundary.8",
           "source_refs": [
-            "onet-cert"
+            "hhs-business-associates",
+            "cn-pipl"
           ],
           "type": "notice"
         },
@@ -13202,12 +13188,14 @@
           "copy_key": "career.item.career-path-block",
           "data": {
             "paragraphs": [
-              "能力阶梯：进入本职业前应核对官方职业范围、真实雇主要求、教育与训练、所在地医疗信息与隐私规则，以及在监督下的任务；晋级依据是可复核的转录、审核与保密记录，不是保证年限。"
+              "编辑能力阶梯仅用于按证据规划，不设保证年限。美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。 培训目录页58项目，IPEDS2025—26目录/2024—25毕业完成，前列医学转录证书及副学士等；目录供给不证明在招职位、入学资格或就业结果。"
             ]
           },
           "id": "medical-transcriptionists.path.career-path-block.9",
           "source_refs": [
-            "source-pack-onet-details"
+            "bls-current",
+            "onet-summary",
+            "source-pack-onet-localtraining"
           ],
           "type": "prose"
         }
@@ -13224,12 +13212,13 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "官方信号（美国 O*NET 31-9094.00 本职业口径）：2024 年就业约 43,900 人，2034 年预计约 41,800 人，2024—2034 年预计下降约 5%（Decline），年均职位空缺约 7,400 个（含替换需求）。"
+              "O*NET旧期2024—2034：43,900→41,800人，官方下降5%，年均空缺7,400；旧期独立保留，不拼接新期。 BLS新期2025—2035：42,000→40,200人，官方下降4%、净变化−1,900人，年均空缺6,200，全为转岗或退出劳动力的替换需求。官方端点、净变化独立舍入，不能用端点相减改写净变化。总体就业预测，非AI归因；不是当前招聘数或录用概率。"
             ]
           },
           "id": "medical-transcriptionists.market-signals.market-signal-card.1",
           "source_refs": [
-            "onet-trends"
+            "onet-trends",
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -13238,7 +13227,7 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "就业人数、增长率、净变化和年度空缺必须分别解释，不能合并成个人就业保证；语音识别与外包改变的是部分任务，替换需求仍然存在。"
+              "美国全国31-9094，2025工资/2025—2035就业新期；净变化、端点、整数比例分别舍入。"
             ]
           },
           "id": "medical-transcriptionists.market-signals.market-signal-card.2",
@@ -13252,13 +13241,10 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "招聘样本只能说明采样时间、地区和岗位组合中的需求，不是全国需求率；远程与外包安排会影响岗位结构。"
+              "工资2025；旧就业2024—2034、新就业2025—2035，不拼接序列；招聘样本未采集，非全国需求率。"
             ]
           },
           "id": "medical-transcriptionists.market-signals.market-signal-card.3",
-          "source_refs": [
-            "source-pack-onet-details"
-          ],
           "type": "prose"
         },
         {
@@ -13266,12 +13252,12 @@
           "copy_key": "career.item.market-signal-card",
           "data": {
             "paragraphs": [
-              "AI 或技术研究说明任务可被辅助的范围，不等同于组织采用、更不等同于净岗位变化；准确性、保密与交回审核仍由人承担。"
+              "BLS明确将语音识别生成初稿、人工听音复核与编辑列为本职业工作，并在就业背景讨论语音识别和自然语言处理带来的效率变化。其2025—2035下降4%为总体就业预测，非AI归因；不能读作生成式AI造成的净裁员率。语言模型的其他用法仅为编辑演练方案，不是采用率实测；真实病历输入另核合法用途、权限与供应商条件。"
             ]
           },
           "id": "medical-transcriptionists.market-signals.market-signal-card.4",
           "source_refs": [
-            "internal-rubric"
+            "bls-current"
           ],
           "type": "prose"
         },
@@ -13303,21 +13289,25 @@
           "data": {
             "entries": [
               {
-                "answer": "以室内转录与编辑为主，需长时间专注并反复核对术语与用药名称；多数全职工作，部分机构按产量计酬，急诊与高峰时段可能加班。具体工作情境数值以 O*NET 工作情境调查为准。",
+                "answer": "O*NET31-9094工作情境是不同问题的回答比例：100%每天室内环境、88%认为精确极其重要、72%认为重复任务极其重要、73%每天有时间压力、64%认为团队极其重要；不是1—5分，也不是事故率或中国调查。BLS描述医院、医师办公室与第三方转录公司，通常全职但兼职常见，可远程并可能在常规营业时间外工作；不保证远程职位或统一加班安排。",
                 "id": "medical-transcriptionists.faq.1",
                 "question": "医疗文书转录员的日常工作与工时如何？",
                 "question_key": "career.faq.medical-transcriptionists.1",
                 "source_refs": [
-                  "source-pack-onet-custom"
+                  "onet-summary",
+                  "bls-current"
                 ]
               },
               {
-                "answer": "本职业负责把口述报告转录与编辑为可读文本；病历记录专员负责记录整理、编码与发布；法庭记录员面向司法听录；医师与外科医师提供诊疗并签署报告；心血管技术员面向检查操作。名称相近不等于职责、资格与授权可互换。",
+                "answer": "本职业口述转录/初稿编辑；病历记录专员含标准编码，法庭记录员含司法逐字记录/字幕。可兼文书任务但任务重叠不代表资格互认；医疗助理另含医师指导下的部分临床职责。",
                 "id": "medical-transcriptionists.faq.2",
                 "question": "这个职业与相邻职业如何区分？",
                 "question_key": "career.faq.medical-transcriptionists.2",
                 "source_refs": [
-                  "source-pack-onet-summary"
+                  "onet-summary",
+                  "adj-29-2072.00",
+                  "adj-27-3092.00",
+                  "adj-31-9092.00"
                 ]
               },
               {
@@ -13330,25 +13320,28 @@
                 ]
               },
               {
-                "answer": "语音识别与语言模型可辅助初稿转录、术语替换与格式整理；医学准确性、缩写还原、保密与交回审核仍以人工为主，现有资料只支持任务层面的辅助判断，不证明机构普遍以自动化替代这些判断。",
+                "answer": "BLS明确将语音识别生成初稿、人工听音复核与编辑列为本职业工作，并在就业背景讨论语音识别和自然语言处理带来的效率变化。其2025—2035下降4%为总体就业预测，非AI归因；不能读作生成式AI造成的净裁员率。语言模型的其他用法仅为编辑演练方案，不是采用率实测；真实病历输入另核合法用途、权限与供应商条件。",
                 "id": "medical-transcriptionists.faq.4",
                 "question": "AI 会如何影响这个职业的工作？",
                 "question_key": "career.faq.medical-transcriptionists.4",
                 "source_refs": [
-                  "internal-rubric"
+                  "bls-current"
                 ]
               },
               {
-                "answer": "术语与用药名称的准确还原、歧义与矛盾内容的标注、保密与访问控制、交回审核与签名，必须由有资质的人按职责负责；AI 输出不得直接作为记录结论。",
+                "answer": "转录员核术语、数值与疑点，报告按流程交回医护审核批准；不能自行补造医学结论。真实记录处理按岗位权限及所在地适用隐私规则，工具不授予诊疗或披露权限。",
                 "id": "medical-transcriptionists.faq.5",
                 "question": "哪些判断必须由人负责？",
                 "question_key": "career.faq.medical-transcriptionists.5",
                 "source_refs": [
-                  "source-pack-onet-details"
+                  "onet-summary",
+                  "bls-current",
+                  "hhs-business-associates",
+                  "cn-pipl"
                 ]
               },
               {
-                "answer": "本轮以国家统计局方法与公开工资口径有界检索，未取得与 O*NET 31-9094.00 精确对应的中国大陆全国职业工资分布；公开资料为行业或人员大类聚合，不能替代本职业中位数，故本页标注缺失，不代填数值。",
+                "answer": "精确本职业全国分布未取得；国家统计局2025卫生和社会工作相关行业税前年均工资：非私营146,266、私营75,631元/年。匹配医疗雇主场景，是行业全员均值，非转录员中位/起薪/月薪区间，不含自由职业者。",
                 "id": "medical-transcriptionists.faq.6",
                 "question": "中国大陆薪资证据是什么？",
                 "question_key": "career.faq.medical-transcriptionists.6",
@@ -13366,11 +13359,13 @@
                 ]
               },
               {
-                "answer": "美国 Job Zone Three：通常需要职业培训、相关在职经验或副学士学位，并常需通过术语与转录测试；中国大陆按用人单位与隐私保护规则确定。证书、转录认证与机构授权不是同一状态。",
+                "answer": "美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。 O*NET认证目录8项含RHDS一级与CHDS二级，是查找线索，不表示都适用或必需。",
                 "id": "medical-transcriptionists.faq.8",
                 "question": "入行和训练路径通常是什么样的？",
                 "question_key": "career.faq.medical-transcriptionists.8",
                 "source_refs": [
+                  "bls-current",
+                  "onet-summary",
                   "onet-cert"
                 ]
               }
@@ -13480,22 +13475,22 @@
                 "url": null
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Industry means are not occupation medians and exclude self-employed workers."
                 ],
                 "evidence_type": "official industry wage statistics",
                 "id": "nbs-wages",
-                "limitation": "Industry means are not occupation medians and exclude self-employed workers.",
+                "limitation": "城镇5人及以上法人单位相关行业税前年均；私营/非私营分列；排除个体及自由职业者；非精确职业工资",
                 "market": "CN",
                 "name": "2025年城镇单位就业人员年平均工资情况",
-                "period": "2025 annual wage; published 2026-05-16; accessed 2026-08-31",
+                "period": "2025工资；发布2026-05-15；本窗口2026-10-03已读表2/5及附注",
                 "publisher": "国家统计局",
                 "scope": "industry_proxy",
-                "url": "https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+                "url": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Directory entries are not state licenses, employer authorization or proof of universal requirement."
                 ],
@@ -13504,7 +13499,7 @@
                 "limitation": "Directory entries are not state licenses, employer authorization or proof of universal requirement.",
                 "market": "US",
                 "name": "National Certifications 31-9094.00 Medical Transcriptionists",
-                "period": "O*NET credential data current 2026; accessed 2026-08-31",
+                "period": "O*NET当前职业摘要/认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/31-9094.00"
@@ -13525,22 +13520,22 @@
                 "url": "https://www.onetonline.org/link/details/31-9094.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Posting mentions do not prove proficiency, adoption or automation rate."
                 ],
                 "evidence_type": "official job-posting technology summary",
                 "id": "onet-hot",
-                "limitation": "Posting mentions do not prove proficiency, adoption or automation rate.",
+                "limitation": "9项软件招聘提及；非机构使用率或生成式AI采用率；ASP.NET/Windows比例未提供",
                 "market": "US",
                 "name": "Hot Technologies 31-9094.00 Medical Transcriptionists",
-                "period": "O*NET technology data current 2026; accessed 2026-08-31",
+                "period": "2025美国全国Lightcast招聘数据；原站当前页查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/31-9094.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "US occupation evidence; China mapping and authorization require separate review."
                 ],
@@ -13549,13 +13544,13 @@
                 "limitation": "US occupation evidence; China mapping and authorization require separate review.",
                 "market": "US",
                 "name": "31-9094.00 Medical Transcriptionists",
-                "period": "O*NET 2026 occupational profile; accessed 2026-08-31",
+                "period": "O*NET当前职业摘要/认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine, U.S. Department of Labor",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/31-9094.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Projection is not a hiring guarantee; parent data are not exact occupation counts."
                 ],
@@ -13564,13 +13559,13 @@
                 "limitation": "Projection is not a hiring guarantee; parent data are not exact occupation counts.",
                 "market": "US",
                 "name": "National Employment Trends 31-9094.00 Medical Transcriptionists",
-                "period": "current O*NET/BLS employment data; accessed 2026-08-31",
+                "period": "2024—2034旧预测；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtrends/31-9094.00"
               },
               {
-                "accessed_at": "2026-08-31",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay."
                 ],
@@ -13579,7 +13574,7 @@
                 "limitation": "Parent or combined data remain visible when exact data are unavailable; percentiles are not entry pay.",
                 "market": "US",
                 "name": "National Wages 31-9094.00 Medical Transcriptionists",
-                "period": "2025 wage data; accessed 2026-08-31",
+                "period": "2025工资；查阅2026-10-03",
                 "publisher": "O*NET OnLine using U.S. Bureau of Labor Statistics data",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/31-9094.00"
@@ -13609,28 +13604,28 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "31-9094.00 - Medical Transcriptionists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "职业详细档案；历史查阅保留，本轮使用已读摘要核相同职责，非仅工资页",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/details/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
                 "evidence_type": "official technology profile",
                 "id": "source-pack-onet-hot_tech",
-                "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
+                "limitation": "9项软件招聘提及；非机构使用率或生成式AI采用率；ASP.NET/Windows比例未提供",
                 "market": "US",
                 "name": "Hot Technologies: 31-9094.00 - Medical Transcriptionists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2025美国全国Lightcast招聘数据；原站当前页查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/hot_tech/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13639,13 +13634,13 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "Industries: 31-9094.00 - Medical Transcriptionists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "2024雇主行业；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/industry/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13654,13 +13649,13 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "National Certifications: 31-9094.00 - Medical Transcriptionists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "O*NET当前职业摘要/认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localcert/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13669,13 +13664,13 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "National Training: 31-9094.00 - Medical Transcriptionists",
-                "period": "current page; accessed 2026-09-02",
+                "period": "IPEDS2025—26目录、2024—25完成；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localtraining/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page."
                 ],
@@ -13684,13 +13679,13 @@
                 "limitation": "O*NET OnLine presents BLS OEWS wage data; preserve the displayed period, worker population, geography and unit. A direct BLS access failure does not invalidate this opened O*NET page.",
                 "market": "US",
                 "name": "National Wages: 31-9094.00 - Medical Transcriptionists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "2025工资；查阅2026-10-03",
                 "publisher": "O*NET / U.S. Bureau of Labor Statistics",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/localwages/31-9094.00"
               },
               {
-                "accessed_at": "2026-09-01",
+                "accessed_at": "2026-10-03",
                 "details": [
                   "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization."
                 ],
@@ -13699,10 +13694,190 @@
                 "limitation": "Use only for the stated O*NET occupation, US market and page subject. It does not establish a China mapping, China pay, or legal authorization.",
                 "market": "US",
                 "name": "31-9094.00 - Medical Transcriptionists",
-                "period": "2025 BLS OEWS wage data displayed by O*NET OnLine",
+                "period": "O*NET当前职业摘要/认证目录；查阅2026-10-03",
                 "publisher": "O*NET OnLine",
                 "scope": "exact",
                 "url": "https://www.onetonline.org/link/summary/31-9094.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "精确31-9094；总体就业预测非AI归因，端点/净变化独立舍入"
+                ],
+                "evidence_type": "official occupation wages employment and preparation",
+                "id": "bls-current",
+                "limitation": "精确31-9094；总体就业预测非AI归因，端点/净变化独立舍入",
+                "market": "US",
+                "name": "BLS Medical Transcriptionists",
+                "period": "2025工资与2025—2035就业；查阅2026-10-03",
+                "publisher": "U.S. Bureau of Labor Statistics",
+                "scope": "exact",
+                "url": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "实际受规制实体/业务伙伴关系，独立转录员为例；不泛化全球所有文书"
+                ],
+                "evidence_type": "official regulatory guidance",
+                "id": "hhs-business-associates",
+                "limitation": "实际受规制实体/业务伙伴关系，独立转录员为例；不泛化全球所有文书",
+                "market": "US",
+                "name": "HHS HIPAA Business Associates",
+                "period": "官网复核2026-07-30；查阅2026-10-03",
+                "publisher": "U.S. Department of Health and Human Services",
+                "scope": "contextual",
+                "url": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "本轮第3/4/13/21/28—30条，核实际适用性与例外；不出具体项目法律结论"
+                ],
+                "evidence_type": "official legislation text",
+                "id": "cn-pipl",
+                "limitation": "本轮第3/4/13/21/28—30条，核实际适用性与例外；不出具体项目法律结论",
+                "market": "CN",
+                "name": "个人信息保护法（网信办转载人大文本）",
+                "period": "2021通过、2021-11-01施行；查阅2026-10-03",
+                "publisher": "国家互联网信息办公室（中国人大网来源）",
+                "scope": "contextual",
+                "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "仅全球暴露背景，非本职业采用率、个人失业或替代日期"
+                ],
+                "evidence_type": "international research overview",
+                "id": "ilo-background",
+                "limitation": "仅全球暴露背景，非本职业采用率、个人失业或替代日期",
+                "market": "GLOBAL",
+                "name": "ILO2025生成式AI职业暴露指数",
+                "period": "2025研究；本窗口已读摘要概览",
+                "publisher": "International Labour Organization",
+                "scope": "contextual",
+                "url": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-29-2072.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "病历记录专员｜O*NET 29-2072.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-2072.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-27-3092.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "法庭记录员与实时字幕员｜O*NET 27-3092.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/27-3092.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-43-9022.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "文字处理员与打字员｜O*NET 43-9022.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/43-9022.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-43-4071.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "档案文员｜O*NET 43-4071.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/43-4071.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-29-9021.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "健康信息技师与医疗登记专员｜O*NET 29-9021.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/29-9021.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-31-9092.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "医疗助理｜O*NET 31-9092.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/31-9092.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-11-9111.00",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "医疗与健康服务经理｜O*NET 11-9111.00",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/11-9111.00"
+              },
+              {
+                "accessed_at": "2026-10-03",
+                "details": [
+                  "只按实际职责比较，不证明中国等价、工资或资格互认"
+                ],
+                "evidence_type": "official adjacent occupation definition",
+                "id": "adj-15-1211.01",
+                "limitation": "只按实际职责比较，不证明中国等价、工资或资格互认",
+                "market": "US",
+                "name": "健康信息学专家｜O*NET 15-1211.01",
+                "period": "当前职业定义；查阅2026-10-03",
+                "publisher": "O*NET OnLine / U.S. Department of Labor",
+                "scope": "exact",
+                "url": "https://www.onetonline.org/link/summary/15-1211.01"
               }
             ]
           },
@@ -13749,23 +13924,35 @@
         "evidence_links": [
           {
             "href": "https://www.onetonline.org/link/summary/29-2072.00",
-            "label": "29-2072.00 Medical Records Specialists"
+            "label": "病历记录专员｜O*NET 29-2072.00"
           },
           {
-            "href": "https://www.onetonline.org/link/details/29-2072.00",
-            "label": "Medical Records Specialists detailed occupation profile"
+            "href": "https://www.onetonline.org/link/summary/27-3092.00",
+            "label": "法庭记录员与实时字幕员｜O*NET 27-3092.00"
           },
           {
-            "href": "https://www.onetonline.org/link/industry/29-2072.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/summary/43-9022.00",
+            "label": "文字处理员与打字员｜O*NET 43-9022.00"
           },
           {
-            "href": "https://www.onetonline.org/link/custom/29-2072.00",
-            "label": "29-2072.00 - Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/summary/43-4071.00",
+            "label": "档案文员｜O*NET 43-4071.00"
           },
           {
-            "href": "https://www.onetonline.org/link/localtrends/29-2072.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists"
+            "href": "https://www.onetonline.org/link/summary/29-9021.00",
+            "label": "健康信息技师与医疗登记专员｜O*NET 29-9021.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/31-9092.00",
+            "label": "医疗助理｜O*NET 31-9092.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/11-9111.00",
+            "label": "医疗与健康服务经理｜O*NET 11-9111.00"
+          },
+          {
+            "href": "https://www.onetonline.org/link/summary/15-1211.01",
+            "label": "健康信息学专家｜O*NET 15-1211.01"
           }
         ],
         "evidence_note": {
@@ -13795,38 +13982,38 @@
               "copy_key": "career.item.adjacent-career-comparison-table",
               "type": "prose"
             },
-            "核心工作与产出": "设计并维护健康信息系统与数据标准，产出系统方案与数据治理规则。",
-            "职业方向": "健康信息学专员"
+            "核心工作与产出": "记录司法等程序逐字稿并提供实时字幕",
+            "职业方向": "法庭记录员与实时字幕员"
           },
           {
-            "关键区别": "面向通用文档生命周期，不承担临床编码与隐私披露责任。",
-            "更适合什么选择": "按记录生命周期职责比较。",
-            "核心工作与产出": "管理组织文件与记录生命周期，产出归档、保留与检索规范。",
-            "职业方向": "文档管理专员"
+            "关键区别": "要补编码规则与实际岗位要求",
+            "更适合什么选择": "编辑比较：按编码与记录管理任务核兴趣，非自动转岗。",
+            "核心工作与产出": "汇总维护病历并进行标准编码，包含医疗编码员",
+            "职业方向": "病历记录专员"
           },
           {
-            "关键区别": "侧重组织与流程分析，不承担记录完整性与编码合规责任。",
-            "更适合什么选择": "按分析与流程对象比较。",
-            "核心工作与产出": "分析业务流程与组织问题，产出改进方案与决策支持。",
-            "职业方向": "管理分析师"
+            "关键区别": "要补通用文档规范；不代表医疗权限",
+            "更适合什么选择": "编辑比较：按从草稿或录音输入通用文档并校对核兴趣与新任务，非自动转岗。",
+            "核心工作与产出": "从草稿或录音输入通用文档并校对",
+            "职业方向": "文字处理员与打字员"
           },
           {
-            "关键区别": "以临床诊疗与照护为主，需要相应执业资格与监督。",
-            "更适合什么选择": "按临床与编码分工比较。",
-            "核心工作与产出": "在监督下参与诊疗与病历记录，产出临床评估与处置记录。",
-            "职业方向": "医师助理"
+            "关键区别": "要补归档、检索与保留规则",
+            "更适合什么选择": "编辑比较：按按归档系统排列记录并按请求查找取出核兴趣与新任务，非自动转岗。",
+            "核心工作与产出": "按归档系统排列记录并按请求查找取出",
+            "职业方向": "档案文员"
           },
           {
-            "关键区别": "以直接照护为主，需要执照与临床授权。",
-            "更适合什么选择": "按照护与记录分工比较。",
-            "核心工作与产出": "执行护理与患者照护，产出台班照护与护理记录。",
-            "职业方向": "注册护士"
+            "关键区别": "要补数据与系统技能；官方档案尚部分开放",
+            "更适合什么选择": "编辑比较：按协助医疗信息系统并摘录分析治疗随访信息核兴趣与新任务，非自动转岗。",
+            "核心工作与产出": "协助医疗信息系统并摘录分析治疗随访信息",
+            "职业方向": "健康信息技师与医疗登记专员"
           },
           {
-            "关键区别": "名称相近不等于职责、资格与授权可互换。",
-            "更适合什么选择": "按资格与授权链逐项核对。",
-            "核心工作与产出": "O*NET 相关职业还包括医疗与健康服务经理、医务秘书等。",
-            "职业方向": "关联与相关职业"
+            "关键区别": "要补岗位训练、监督与适用临床要求",
+            "更适合什么选择": "编辑比较：按在医师指导下做行政及部分临床任务核兴趣与新任务，非自动转岗。",
+            "核心工作与产出": "在医师指导下做行政及部分临床任务",
+            "职业方向": "医疗助理"
           }
         ],
         "transition": "相邻关系只用于方向比较，不代表自动转岗或资格互认。"
@@ -13890,261 +14077,261 @@
             }
           }
         ],
-        "answer": "语音识别与语言模型可辅助初稿转录、术语替换与格式整理，但医学准确性、缩写还原、保密与交回审核仍由有资质的人负责。",
+        "answer": "BLS明确将语音识别生成初稿、人工听音复核与编辑列为本职业工作，并在就业背景讨论语音识别和自然语言处理带来的效率变化。其2025—2035下降4%为总体就业预测，非AI归因；不能读作生成式AI造成的净裁员率。语言模型的其他用法仅为编辑演练方案，不是采用率实测；真实病历输入另核合法用途、权限与供应商条件。",
         "authority_links": [
           {
-            "来源": "29-2072.00 Medical Records Specialists",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
-          },
-          {
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
-          },
-          {
-            "来源": "National Employment Trends 29-2072.00 Medical Records Specialists",
-            "类型": "官方统计来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localtrends/29-2072.00"
-          },
-          {
-            "来源": "National Wages 29-2072.00 Medical Records Specialists",
-            "类型": "官方统计来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localwages/29-2072.00"
-          },
-          {
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "类型": "国际组织研究",
-            "适用范围": "仅按来源原始口径使用",
+            "来源": "ILO2025职业暴露指数",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
           },
           {
-            "来源": "National Certifications 29-2072.00 Medical Records Specialists",
-            "类型": "职业认证来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/localcert/29-2072.00"
+            "来源": "O*NET Hot Technologies",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.onetonline.org/link/hot_tech/31-9094.00"
           },
           {
-            "来源": "29-2072.00 - Medical Records Specialists",
-            "类型": "官方职业来源",
-            "适用范围": "仅按来源原始口径使用",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "来源": "BLS本职业工作方式",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm"
+          },
+          {
+            "来源": "BLS本职业总体预测",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm"
+          },
+          {
+            "来源": "O*NET旧期/行业",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.onetonline.org/link/localtrends/31-9094.00"
+          },
+          {
+            "来源": "O*NET职业摘要",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.onetonline.org/link/summary/31-9094.00"
+          },
+          {
+            "来源": "O*NET职业行业",
+            "类型": "职业任务、招聘软件或官方研究统计",
+            "适用范围": "按31-9094与标注年份使用；非生成式AI采用/裁员实测",
+            "链接": "https://www.onetonline.org/link/industry/31-9094.00"
           }
         ],
-        "difference_intro": "AI 对记录汇总、编码、审核与发布的影响不同，剩余责任也不同。",
+        "difference_intro": "以下工具应用为编辑方案；语音识别初稿复核是BLS已描述的工作。",
         "difference_rows": [
           {
-            "AI主要改变": "编码建议与手册检索辅助",
-            "仍由人负责": "编码判断与依据确认",
-            "方向": "编码与分类"
+            "AI主要改变": "语音识别生成初稿",
+            "仍由人负责": "听音复核与报告交回",
+            "方向": "初稿转录"
           },
           {
-            "AI主要改变": "完整性检查与缺项提示",
-            "仍由人负责": "完整性与合规结论",
-            "方向": "记录审核"
+            "AI主要改变": "编辑方案：术语/格式差异提示",
+            "仍由人负责": "语境、数值与疑点核实",
+            "方向": "文本校对"
           },
           {
-            "AI主要改变": "发布清单与权限核对",
-            "仍由人负责": "发布范围与法规责任",
-            "方向": "信息发布"
+            "AI主要改变": "编辑方案：状态与版本提醒",
+            "仍由人负责": "批准流程、访问与隐私责任",
+            "方向": "记录交接"
           }
         ],
-        "evidence_intro": "三类证据分开核对：任务能力、组织采用与岗位结果不能互相替代。",
+        "evidence_intro": "职责、招聘软件提及、总体就业预测分开；未提供生成式AI采用率或因果裁员率。",
         "evidence_rows": [
           {
-            "使用限制": "为全球暴露度指标，不构成地区采用率或替代结论。",
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "研究对象": "生成式 AI 暴露度（ILO 全球职业指数）",
-            "结论": "暴露度为任务层面指标，不等于采用率或岗位结果",
+            "使用限制": "本轮沿用已读摘要概览，未给本职业百分比",
+            "来源": "ILO2025职业暴露指数",
+            "研究对象": "全球生成式AI任务暴露",
+            "结论": "暴露度不等同采用或岗位结果",
             "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure"
           },
           {
-            "使用限制": "软件需求列表不等于生成式 AI 采用率或替代证据。",
-            "来源": "Hot Technologies 29-2072.00 Medical Records Specialists",
-            "研究对象": "在需求软件技能（O*NET Hot Technologies）",
-            "结论": "列入者多为电子病历与办公软件，属工具线索",
-            "链接": "https://www.onetonline.org/link/hot_tech/29-2072.00"
+            "使用限制": "招聘提及非机构采用率；ASP.NET/Windows比例未提供",
+            "来源": "O*NET Hot Technologies",
+            "研究对象": "2025美国全国招聘提及",
+            "结论": "9项：Office/Excel各4%、Word3%、Outlook2%、PowerPoint/EHR各1%、Access低于1%",
+            "链接": "https://www.onetonline.org/link/hot_tech/31-9094.00"
           },
           {
-            "使用限制": "为美国职业口径，不推定中国大陆对应关系。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "研究对象": "职业身份与职责范围（O*NET 29-2072.00）",
-            "结论": "职责为汇总、维护记录并编入编码系统",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00"
+            "使用限制": "来源无生成式AI机构普及率",
+            "来源": "BLS本职业工作方式",
+            "研究对象": "Medical Transcriptionists职责",
+            "结论": "语音识别先生成初稿，转录员听音复核编辑",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm"
           },
           {
-            "使用限制": "行业分布是雇主场景信号，不是需求预测。",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "研究对象": "行业分布（O*NET Industries）",
-            "结论": "医疗与社会援助约占 64%，其余为其他行业",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00"
+            "使用限制": "总体就业预测，非AI归因；官方值分别舍入",
+            "来源": "BLS本职业总体预测",
+            "研究对象": "2025—2035美国31-9094",
+            "结论": "42,000→40,200，下降4%、净变−1,900，年均空缺6,200",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm"
           },
           {
-            "使用限制": "工作情境为调查结果，不替代雇主与地方法规。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "研究对象": "任务与工作情境（O*NET 29-2072.00）",
-            "结论": "记录汇总、编码与审核为本职业任务特征",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00"
+            "使用限制": "旧预测单列；不是AI采用或裁员测量",
+            "来源": "O*NET旧期/行业",
+            "研究对象": "2024—2034旧期美国31-9094",
+            "结论": "43,900→41,800，下降5%，年均空缺7,400",
+            "链接": "https://www.onetonline.org/link/localtrends/31-9094.00"
           }
         ],
         "heading": "医疗文书转录员的转录任务与 AI 边界",
         "method_cards": [
           {
-            "含义": "编码建议、文本抽取、记录检索与表单核对可被软件辅助；编码判断、发布与合规责任仍由人负责。",
+            "含义": "语音识别初稿已有BLS职责证据；语言模型校对/提示为编辑方案，不据此称普遍部署。",
             "概念": "任务层面的可被辅助能力"
           },
           {
-            "含义": "工具出现或厂商演示不等于机构已采用；需核对数据许可、隐私与安全、接口验证与变更控制。",
+            "含义": "BLS描述工具工作方式，不给机构采用率；真实病历核合法用途、批准系统、供应商和责任条件。",
             "概念": "机构采用的前置条件与验证"
           },
           {
-            "含义": "任务暴露不等于采用率、失业概率或替代日期。",
+            "含义": "总体就业预测，非AI归因；不能将下降4%读成生成式AI因果裁员率或个人失业概率。",
             "概念": "岗位结果与净就业结论边界"
           }
         ],
         "questions": [
           {
-            "回答": "现有资料只支持任务层面的辅助判断，不能推导岗位裁撤时间表。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "AI 会取代病历记录专员吗？"
+            "回答": "BLS预期总体职业下降4%；不能给生成式AI替代日期。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
+            "问题": "AI会取代医疗转录员吗？"
           },
           {
-            "回答": "编码建议与手册检索可被辅助，但编码判断与依据仍由有资质者负责。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "编码能自动完成吗？"
+            "回答": "BLS仍要求听音复核准确、完整与风格，并交回审核。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
+            "问题": "初稿可以直接交付吗？"
           },
           {
-            "回答": "记录发布与披露由授权人按法规与机构政策确认。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "记录发布能自动放行吗？"
+            "回答": "当前源为2025美国招聘提及，非机构部署调查；旧缓存2024不混用。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.onetonline.org/link/hot_tech/31-9094.00",
+            "问题": "软件比例是采用率吗？"
           },
           {
-            "回答": "需区分任务能力、组织采用与岗位结果三类证据。",
-            "来源": "29-2072.00 Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/summary/29-2072.00",
-            "问题": "该用哪些证据判断影响？"
+            "回答": "总体就业预测，非AI归因；BLS提技术背景而非生成式AI因果估计。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
+            "问题": "总体下降能归因AI吗？"
           },
           {
-            "回答": "隐私、合规与发布责任不能被工具替代。",
-            "来源": "Medical Records Specialists detailed occupation profile",
-            "链接": "https://www.onetonline.org/link/details/29-2072.00",
-            "问题": "工具能替代合规判断吗？"
+            "回答": "编辑建议：不猜补，标待核并向口述者核实。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.onetonline.org/link/summary/31-9094.00",
+            "问题": "缩写歧义如何处理？"
           },
           {
-            "回答": "检索可自动化，但调取权限与用途仍由人核对。",
-            "来源": "Industries: 29-2072.00 - Medical Records Specialists",
-            "链接": "https://www.onetonline.org/link/industry/29-2072.00",
-            "问题": "记录检索能完全自动化吗？"
+            "回答": "职业任务不授予披露权限，真实规则见本页中美隐私来源。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.onetonline.org/link/summary/31-9094.00",
+            "问题": "能自动决定记录发布吗？"
           },
           {
-            "回答": "需核对数据许可、隐私与安全、接口验证与变更控制。",
-            "来源": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "链接": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
-            "问题": "如何核对工具的采用与验证条件？"
+            "回答": "编辑建议：仅用本页虚构稿，明确录音/文本校对模式。",
+            "来源": "所列职业资料；应用建议为编辑归纳",
+            "链接": "https://www.onetonline.org/link/summary/31-9094.00",
+            "问题": "怎么开始安全演练？"
           }
         ],
         "responsibility_intro": "人的责任链：从核对输入、限定任务，到人工复核与记录升级。",
         "responsibility_steps": [
           {
             "步骤": "核对输入",
-            "说明": "确认患者身份、就诊记录与来源。"
+            "说明": "核录音、初稿、报告归属与使用权限"
           },
           {
             "步骤": "限定任务",
-            "说明": "只在已验证的编码与信息系统内辅助。"
+            "说明": "只在批准系统内转录/校对，不推断诊断"
           },
           {
             "步骤": "人工复核",
-            "说明": "由有资质者确认编码、审核与发布。"
+            "说明": "逐句核数值、缩写和矛盾并交回审核"
           },
           {
             "步骤": "隐私优先",
-            "说明": "按隐私与安全要求处理访问与披露。"
+            "说明": "核授权、用途与供应商条件，详见隐私来源"
           },
           {
             "步骤": "记录并升级",
-            "说明": "偏差与异常立即记录并按流程升级。"
+            "说明": "疑点不猜补，记录待确认人、版本和更正"
           }
         ],
         "risk_rows": [
           {
-            "为什么重要": "可能影响报销、统计与诊疗追溯。",
-            "控制方式": "按编码规则复核并由责任人确认。",
-            "风险": "编码或分类错误"
+            "为什么重要": "可能改变报告含义",
+            "控制方式": "听音逐句核，疑点交回",
+            "风险": "术语或数值误转"
           },
           {
-            "为什么重要": "影响连续照护与合规审计。",
-            "控制方式": "按完整性清单核对并补齐。",
-            "风险": "记录缺失或不完整"
+            "为什么重要": "可能写入不存在的结论",
+            "控制方式": "不猜补，不自动诊断",
+            "风险": "无依据补全文本"
           },
           {
-            "为什么重要": "可能违反隐私法规与机构政策。",
-            "控制方式": "按授权与法规确认发布范围。",
-            "风险": "越权发布或披露信息"
+            "为什么重要": "真实数据可能泄露或超用途",
+            "控制方式": "按机构与适用法律核系统/供应商",
+            "风险": "隐私与越权上传"
           },
           {
-            "为什么重要": "可能把信息关联到错误患者。",
-            "控制方式": "按身份核对流程确认记录归属。",
-            "风险": "身份混淆或记录错配"
+            "为什么重要": "可能关联错误记录",
+            "控制方式": "核报告标识与版本",
+            "风险": "报告归属错配"
           },
           {
-            "为什么重要": "可能放大差错并影响合规。",
-            "控制方式": "保留审核留痕并按流程升级。",
-            "风险": "时间压力下跳过审核"
+            "为什么重要": "放大差错和返工",
+            "控制方式": "保留核对与升级记录",
+            "风险": "赶工省略复核"
           }
         ],
         "task_rows": [
           {
-            "人的控制点": "由责任人确认记录真实与来源",
-            "任务": "汇总并维护患者医疗记录与索引",
-            "工作方向": "记录汇总与索引",
-            "当前变化": "记录汇总与检索可被系统辅助"
+            "人的控制点": "核录音、报告归属与逐句完整性",
+            "任务": "将医护录音转成报告",
+            "工作方向": "口述转录",
+            "当前变化": "BLS已有语音识别初稿；人工听音复核"
           },
           {
-            "人的控制点": "核对字段定义与数据来源",
-            "任务": "录入人口学、病史与诊疗数据",
-            "工作方向": "数据录入",
-            "当前变化": "结构化录入与校验可被辅助"
+            "人的控制点": "按语境核实，歧义交口述者",
+            "任务": "将医学缩写展开为可理解文字",
+            "工作方向": "缩写展开",
+            "当前变化": "编辑方案：提示候选展开"
           },
           {
-            "人的控制点": "由有资质者确认编码与依据",
-            "任务": "把诊断与操作编入标准编码系统",
-            "工作方向": "编码与分类",
-            "当前变化": "编码建议与手册检索可比对辅助"
+            "人的控制点": "不能改写或补造医学结论",
+            "任务": "核拼写、语法、格式与清晰度",
+            "工作方向": "文本编辑",
+            "当前变化": "编辑方案：提示文本差异"
           },
           {
-            "人的控制点": "由审核人确认完整性与合规",
-            "任务": "核对记录完整性、准确与合规",
-            "工作方向": "记录审核",
-            "当前变化": "完整性检查与缺项提示可自动化"
+            "人的控制点": "无法确认的内容标待核",
+            "任务": "发现矛盾、遗漏、术语与数值差错",
+            "工作方向": "差错识别",
+            "当前变化": "编辑方案：核对清单辅助"
           },
           {
-            "人的控制点": "由授权人确认发布范围与法规",
-            "任务": "按法规向授权方发布信息",
-            "工作方向": "信息发布",
-            "当前变化": "发布清单与权限核对可被辅助"
+            "人的控制点": "按机构流程确认最终报告",
+            "任务": "将报告交回审核、批准或更正",
+            "工作方向": "审核交回",
+            "当前变化": "编辑方案：版本与状态提醒"
           },
           {
-            "人的控制点": "核对调取权限与用途",
-            "任务": "为医护与技术人员调取记录",
-            "工作方向": "记录检索",
-            "当前变化": "检索与调取可自动完成"
+            "人的控制点": "核记录归属、访问与用途",
+            "任务": "将报告录入EHR并维护文书记录",
+            "工作方向": "电子记录",
+            "当前变化": "编辑方案：字段与版本核对"
           },
           {
-            "人的控制点": "由责任人确认保密与处置",
-            "任务": "保护记录保密与数据安全",
-            "工作方向": "保密与合规",
-            "当前变化": "访问日志与异常提示可自动化"
+            "人的控制点": "实际用途、系统与供应商由机构核验",
+            "任务": "保护隐私并向医护追问歧义",
+            "工作方向": "保密协作",
+            "当前变化": "编辑方案：交接记录整理"
           }
         ],
-        "transition": "从病历记录专员转向相邻方向，优先比较可迁移能力，再补齐目标方向特有的知识与资格要求。"
+        "transition": "从转录转向病历编码、系统或管理，要补新职责的训练与权限，不能凭相邻关系自动转岗。"
       },
       "breadcrumb": {
         "label": "医疗文书转录员",
@@ -14159,7 +14346,7 @@
         },
         "competence_ladder": [
           {
-            "description": "确认患者身份、就诊记录与来源。",
+            "description": "核录音、初稿、报告标识、模板与使用权限",
             "stage": "核对输入"
           },
           {
@@ -14175,39 +14362,39 @@
             "stage": "责任扩展"
           }
         ],
-        "direct_answer": "入口看能否按术语与缩写规则准确转录并保密；美国 Job Zone Three 需要职业培训、相关在职经验或副学士学位，保密与记录处理按机构与法规核验。",
+        "direct_answer": "美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。",
         "entry_heading": "入行路径与可检查证据",
         "heading": "医疗文书转录员的入行路径、资格边界与职业发展",
         "locale_requirements": {
-          "credential_boundary": "证书、学位、转录认证、机构授权与记录处理不是同一状态；能否接触与处理真实病历取决于雇主政策与法规。",
-          "jurisdiction": "美国 Job Zone Three（中等准备）；中国大陆按用人单位、医疗信息与隐私保护规则核验。",
-          "summary": "美国：Job Zone Three，通常需要职业培训、相关在职经验或副学士学位；中国大陆的学历、执业与机构授权边界按用人单位与主管部门核验。"
+          "credential_boundary": "美国：HIPAA适用于受规制实体及相关业务伙伴，并非全球所有医疗文书；HHS将向医师提供转录服务的独立转录员或应用供应商列为业务伙伴示例，应按实际关系确认BAA及允许用途、保护义务。中国：个人信息保护法将医疗健康列为敏感个人信息，核处理依据、必要性、严格保护及适用告知/同意规则；第13条存在不需同意的法定情形，第21条约束受托范围和转委托。去掉姓名不等于匿名化，岗位授权不替代法律条件。",
+          "jurisdiction": "美国与中国分别核验；Job Zone是职业群组准备信息",
+          "summary": "美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。"
         },
         "schema_version": "career.career_progression.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
             "id": "bls",
-            "label": "FermatMind 医疗文书转录员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS医疗转录员",
+            "scope": "教育与认证自愿，2025工资/新预测"
           },
           {
             "href": "https://www.onetonline.org/link/localcert/31-9094.00",
             "id": "nasa",
-            "label": "FermatMind 医疗文书转录员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET认证目录",
+            "scope": "8项目录线索，不表示全部适用或必需"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.onetonline.org/link/localtraining/31-9094.00",
             "id": "onet-training",
-            "label": "FermatMind 医疗文书转录员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET培训目录",
+            "scope": "IPEDS2025—26目录/2024—25完成"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.onetonline.org/link/summary/31-9094.00",
             "id": "faa",
-            "label": "FermatMind 医疗文书转录员任务影响量表",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET职业摘要",
+            "scope": "Job Zone Three、任务、教育调查"
           }
         ],
         "tracks": [
@@ -14215,31 +14402,31 @@
             "id": "office-support",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立整理。",
-                "readiness_evidence": "保留整理与录入练习记录。",
-                "responsibility": "在监督下整理记录并录入数据。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "扩展到格式核对",
+                "readiness_evidence": "首稿与差异清单",
+                "responsibility": "虚构常见报告转录/初稿编辑",
                 "role": "转录学习"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立编码。",
-                "readiness_evidence": "出示数据校验与整理记录。",
-                "responsibility": "独立完成常见记录的整理与数据校验。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "学习复杂报告",
+                "readiness_evidence": "校稿与疑点清单",
+                "responsibility": "按模板转录，听不清标待核",
                 "role": "独立转录"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到复杂编码与审核。",
-                "readiness_evidence": "出示编码与依据记录。",
-                "responsibility": "按编码规则分类并保留依据。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "参与质量复核",
+                "readiness_evidence": "复杂稿与确认记录",
+                "responsibility": "识别复杂术语及前后矛盾",
                 "role": "复杂报告"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
-                "readiness_evidence": "出示复核与带教记录。",
-                "responsibility": "在授权范围内复核并带教编码。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "按实际评价扩展职责",
+                "readiness_evidence": "复核与带教记录",
+                "responsibility": "授权内复核并带教转录",
                 "role": "转录带教"
               }
             ],
@@ -14249,31 +14436,31 @@
             "id": "supplier-cost",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立审核。",
-                "readiness_evidence": "保留合规练习记录。",
-                "responsibility": "学习隐私与记录合规要求。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "追问歧义",
+                "readiness_evidence": "术语/缩写核对表",
+                "responsibility": "核术语、缩写和语境",
                 "role": "术语学习"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到合规体系支持。",
-                "readiness_evidence": "出示审核与缺项记录。",
-                "responsibility": "独立核对记录完整性与合规。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "学习模板维护",
+                "readiness_evidence": "差异与确认材料",
+                "responsibility": "核数值、状态与遗漏",
                 "role": "术语负责"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到审计准备。",
-                "readiness_evidence": "出示合规改进与整改记录。",
-                "responsibility": "参与合规与审计流程改进。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "参与质量流程",
+                "readiness_evidence": "抽检与整改材料",
+                "responsibility": "分析转录差错与返工",
                 "role": "质量体系支持"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则扩展授权。",
-                "readiness_evidence": "出示规范与培训记录。",
-                "responsibility": "在授权范围内维护合规规范。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "核实际质量责任",
+                "readiness_evidence": "模板版本与培训记录",
+                "responsibility": "授权内维护模板并培训",
                 "role": "规范与带教"
               }
             ],
@@ -14283,31 +14470,31 @@
             "id": "records-information",
             "stages": [
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到独立沟通。",
-                "readiness_evidence": "保留沟通与交接练习记录。",
-                "responsibility": "学习与医护和编码部门的交接要求。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "核批准系统",
+                "readiness_evidence": "学习及范围确认材料",
+                "responsibility": "学习合法用途与机构访问规则",
                 "role": "保密学习"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到发布与索引管理。",
-                "readiness_evidence": "出示沟通与复核记录。",
-                "responsibility": "向医护人员说明记录状态与流程。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "学习跨岗位交接",
+                "readiness_evidence": "访问与交回记录",
+                "responsibility": "按授权处理并交回报告",
                 "role": "独立保密"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "扩展到信息管理职责。",
-                "readiness_evidence": "出示发布与索引记录。",
-                "responsibility": "管理发布、索引与保留安排。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "支持流程改善",
+                "readiness_evidence": "条件与升级记录",
+                "responsibility": "核供应商、版本及异常交接",
                 "role": "保密体系支持"
               },
               {
-                "credentials": "按具体法域、机构与雇主规则核验。",
-                "next_moves": "按机构与规则取得授权。",
-                "readiness_evidence": "出示信息管理与评估记录。",
-                "responsibility": "在授权范围内支持信息管理职责。",
+                "credentials": "按本职业教育、真实雇主及所在地数据规则核；非固定年限",
+                "next_moves": "按机构确认职责",
+                "readiness_evidence": "协作与流程评价材料",
+                "responsibility": "授权内支持协作及改进",
                 "role": "责任扩展"
               }
             ],
@@ -14327,12 +14514,12 @@
               "type": "prose"
             },
             "key": "qa3",
-            "question": "这个职业先核对什么？",
+            "question": "对象、交付与责任分别是什么？",
             "table": {
               "rows": [
                 {
                   "alternate_value": null,
-                  "label": "需要核对的对象",
+                  "label": "关键能力",
                   "secondary_value": {
                     "$item": "medical-transcriptionists.profile.work-context-block.3",
                     "block": "profile",
@@ -14348,7 +14535,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "交付产出",
+                  "label": "交付与数据口径",
                   "secondary_value": {
                     "$item": "medical-transcriptionists.profile.onet-structured-fields-block.5",
                     "block": "profile",
@@ -14364,7 +14551,7 @@
                 },
                 {
                   "alternate_value": null,
-                  "label": "责任边界",
+                  "label": "边界",
                   "secondary_value": null,
                   "value": {
                     "$item": "medical-transcriptionists.profile.work-context-block.8",
@@ -14377,7 +14564,7 @@
             }
           },
           {
-            "answer": "能力与工作方式：需要医学与解剖术语、缩写还原与打字基础，能长时间专注并按模板编辑，重视准确性与保密。",
+            "answer": "能力与工作方式：主动倾听、阅读理解、写作、监控与批判思考；理解医学术语、解剖生理及英语语法，能核对缩写、数值与格式并追问歧义。报告仍须交回医护人员审核批准；转录与编辑不授予独立诊疗权。",
             "key": "qa2",
             "question": "怎样判断这项工作是否形成闭环？",
             "table": {
@@ -14428,9 +14615,9 @@
             }
           },
           {
-            "answer": "资格与合规边界：美国 Job Zone Three 通常需要职业培训、相关在职经验或副学士学位；保密与记录处理按机构与法规核验，认证不等于执业或签字授权。",
+            "answer": "美国BLS：通常完成高中后非学位转录教育，常为证书课程；副学士课程是可选路径，认证非必需。O*NET Job Zone Three为中等准备职业群组，不是本职业执照或固定晋级年限；新聘教育回答39%高中后证书、34%部分大学未获学位、17%高中或同等为调查类别，不是法律准入比例。中国按实际职位另核。",
             "key": "qa1",
-            "question": "资格边界",
+            "question": "美国常见准备路径与权限边界",
             "table": {
               "rows": [
                 {
@@ -14467,7 +14654,7 @@
                   "alternate_value": null,
                   "label": "06",
                   "secondary_value": "需核对证据",
-                  "value": "异常记录先隔离再升级"
+                  "value": "疑点标注，向口述者核实后更正"
                 }
               ]
             }
@@ -14485,7 +14672,7 @@
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-work-risk"
+            "label": "市场与转向背景"
           }
         ],
         "direct_answer": {
@@ -14504,16 +14691,28 @@
         "risks": [
           {
             "affected_roles": {
-              "$item": "medical-transcriptionists.risk.career-risk-cards.4",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "编辑与交付人员：",
+                {
+                  "$item": "medical-transcriptionists.risk.career-risk-cards.4",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "consequence": {
-              "$item": "medical-transcriptionists.risk.career-risk-cards.5",
-              "block": "risk",
-              "copy_key": "career.item.career-risk-cards",
-              "type": "prose"
+              "$join": [
+                "可能改变报告含义并影响复核；处理建议：",
+                {
+                  "$item": "medical-transcriptionists.risk.career-risk-cards.5",
+                  "block": "risk",
+                  "copy_key": "career.item.career-risk-cards",
+                  "type": "prose"
+                }
+              ],
+              "separator": "；"
             },
             "evidence_refs": [
               "onet",
@@ -14522,7 +14721,7 @@
             "id": "cost-change",
             "mitigation": "按术语表与用药命名核对并由复核者确认。",
             "scenario": "术语或用药名称转录错误。",
-            "title": "医疗文书转录员"
+            "title": "术语与用药名差错"
           },
           {
             "affected_roles": "转录与编辑岗位",
@@ -14534,19 +14733,19 @@
             "id": "record-version",
             "mitigation": "按缩写与数值规则还原并标注歧义。",
             "scenario": "缩写或数值还原错误。",
-            "title": "医疗文书转录员"
+            "title": "缩写与数值误转"
           },
           {
             "affected_roles": "数据处理岗位",
             "consequence": "可能违反隐私法规与机构政策。",
             "evidence_refs": [
               "privacy",
-              "privacy"
+              "cn-privacy"
             ],
             "id": "personal-data",
-            "mitigation": "按保密与访问控制要求处理数据。",
+            "mitigation": "按中美实际适用性核用途、系统、供应商与保护条件，不把去姓名当匿名化。",
             "scenario": "保密或数据处理不当。",
-            "title": "医疗文书转录员"
+            "title": "隐私及超用途处理"
           },
           {
             "affected_roles": "编辑与交付岗位",
@@ -14558,7 +14757,7 @@
             "id": "technical-boundary",
             "mitigation": "按模板与清晰度要求编辑并复核。",
             "scenario": "格式或清晰度不足导致返工。",
-            "title": "医疗文书转录员"
+            "title": "格式与交付返工"
           },
           {
             "affected_roles": "交付与值守岗位",
@@ -14570,7 +14769,7 @@
             "id": "single-coverage",
             "mitigation": "保留核对留痕并按流程升级。",
             "scenario": "时间压力或重复任务下跳过核对。",
-            "title": "医疗文书转录员"
+            "title": "时间压力下漏核"
           },
           {
             "affected_roles": "技术与管理岗位",
@@ -14582,40 +14781,40 @@
             "id": "delivery-acceptance",
             "mitigation": "按 O*NET 31-9094.00 的范围区分相邻岗位。",
             "scenario": "把本职业与病历记录专员、医学编码员等相邻岗位混为一谈。",
-            "title": "医疗文书转录员"
+            "title": "相邻岗位责任混淆"
           }
         ],
         "schema_version": "career.work_risk.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/details/31-9094.00",
-            "id": "onet-details",
-            "label": "Medical Transcriptionists detailed occupation profile",
-            "scope": "职业范围、来源口径与责任边界"
-          },
-          {
-            "href": "https://www.onetonline.org/link/details/31-9094.00",
-            "id": "source-pack-onet-details",
-            "label": "31-9094.00 - Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
-          },
-          {
             "href": "https://www.onetonline.org/link/summary/31-9094.00",
-            "id": "source-pack-onet-summary",
-            "label": "31-9094.00 - Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
+            "id": "onet",
+            "label": "O*NET31-9094摘要",
+            "scope": "转录、差错确认与保密任务"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
+            "id": "bls",
+            "label": "BLS本职业",
+            "scope": "准确、完整及快速交付背景"
+          },
+          {
+            "href": "https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/business-associates/index.html",
+            "id": "privacy",
+            "label": "HHS业务伙伴",
+            "scope": "美国HIPAA实际适用关系与BAA"
+          },
+          {
+            "href": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm",
+            "id": "cn-privacy",
+            "label": "中国个人信息保护法",
+            "scope": "第13/21/28—30条适用处理条件"
           },
           {
             "href": "https://www.onetonline.org/link/industry/31-9094.00",
-            "id": "source-pack-onet-industry",
-            "label": "Industries: 31-9094.00 - Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
-          },
-          {
-            "href": "https://www.onetonline.org/link/custom/31-9094.00",
-            "id": "source-pack-onet-custom",
-            "label": "31-9094.00 - Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
+            "id": "onet-industry",
+            "label": "O*NET行业",
+            "scope": "2024雇主分布，非需求"
           }
         ]
       },
@@ -14628,9 +14827,9 @@
               "说明": "未取得与该职业精确对应的全国工资分布。"
             },
             {
-              "指标": "行业平均工资",
-              "数值": "不替代职业工资",
-              "说明": "行业平均不能直接当作职业中位数。"
+              "指标": "相关行业参考（2025元/年）",
+              "数值": "非私营146,266；私营75,631",
+              "说明": "卫生和社会工作全行业人员均值，匹配医疗雇主场景；非转录员工资"
             },
             {
               "指标": "统一起薪",
@@ -14653,62 +14852,62 @@
           "china_edu_table": [
             {
               "学历段": "基础训练",
-              "岗位方向": "设备维护与技术支持",
-              "说明": "按雇主、设备类型和授权要求核对。"
+              "岗位方向": "术语、缩写与文本核对",
+              "说明": "编辑建议，不是中国统一学历规定"
             },
             {
-              "学历段": "相关专业",
-              "岗位方向": "医疗设备维修与保养",
-              "说明": "学历不是执业授权或结果放行的替代。"
+              "学历段": "相关学习",
+              "岗位方向": "口述转录与模板编辑",
+              "说明": "BLS教育路径只作美国参考；中国核具体岗位"
             },
             {
-              "学历段": "经验阶段",
-              "岗位方向": "现场服务与故障诊断",
-              "说明": "用可复核工作样本证明能力边界。"
+              "学历段": "监督阶段",
+              "岗位方向": "疑点标注与报告交回",
+              "说明": "按雇主流程复核，不设置固定晋级时间"
             },
             {
               "学历段": "进阶阶段",
-              "岗位方向": "质量、校准与责任交接",
-              "说明": "具体要求以机构流程和所在地规则为准。"
+              "岗位方向": "转录复核、模板与带教",
+              "说明": "按实际评价及权限核，不自动取得临床职责"
             }
           ],
           "china_industry_table": [
             {
-              "行业": "医院与临床工程",
-              "需求": "需核对设备范围、值班与授权链。"
+              "行业": "医疗机构文书场景",
+              "需求": "对应卫生和社会工作行业背景；非职业需求率"
             },
             {
-              "行业": "设备制造商服务",
-              "需求": "需核对厂商培训、现场服务与记录要求。"
+              "行业": "门诊口述报告场景",
+              "需求": "据本职业任务作编辑比较，核具体中国单位分类"
             },
             {
-              "行业": "第三方维修服务",
-              "需求": "需核对合同边界、出差与责任交接。"
+              "行业": "第三方转录场景",
+              "需求": "美国雇主背景不直接等同中国外包行业，另核单位及合同"
             }
           ],
-          "china_intl": "National Certifications 31-9094.00 Medical Transcriptionists｜https://www.onetonline.org/link/localcert/31-9094.00",
+          "china_intl": "O*NET转录任务与雇主行业背景｜https://www.onetonline.org/link/industry/31-9094.00",
           "china_name_row": {
             "$item": "medical-transcriptionists.china-salary.career-snapshot-primary-locale.1",
             "block": "china-salary",
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "china_open": "可用公开职责与技能信息做职业探索，但不能据此推导中国市场工资。",
+          "china_open": "可按职责和医疗雇主背景匹配相关行业参考；不能当中国本职业等价证明。",
           "china_open_note": "如需薪资判断，应回到具体城市、雇主、岗位级别和公开招聘条件核对。",
-          "china_ref": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
-          "china_salary_note": "中国精确职业工资数据不可得；本页不展示或换算中国薪资数字。",
+          "china_ref": "国家统计局2025表2/表5及附注｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
+          "china_salary_note": "中国精确职业分布缺；仅列相关卫生和社会工作行业2025税前年均工资，非起薪、月薪区间或到手收入。",
           "china_salary_table": [
             {
-              "城市/区间": "中国数据状态",
-              "月薪参考": "不展示数字"
+              "城市/区间": "卫生和社会工作，城镇非私营（2025中国全国）",
+              "月薪参考": "146,266元/年，税前年均行业工资；非月薪、职业中位数或到手收入"
             },
             {
-              "城市/区间": "公开来源覆盖",
-              "月薪参考": "不足以支持该职业的精确工资"
+              "城市/区间": "卫生和社会工作，城镇私营（2025中国全国）",
+              "月薪参考": "75,631元/年，税前年均行业工资；非月薪、职业中位数或到手收入"
             },
             {
-              "城市/区间": "使用边界",
-              "月薪参考": "不得用其他职业或泛岗位数字替代"
+              "城市/区间": "全国精确转录员工资（2025中国全国）",
+              "月薪参考": "证据不足：未取得中位数、分位及统一起薪"
             }
           ],
           "china_soc_row": {
@@ -14717,86 +14916,80 @@
             "copy_key": "career.item.career-snapshot-primary-locale",
             "type": "prose"
           },
-          "sources_note": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+          "sources_note": "国家统计局相关行业均值｜https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html；O*NET本职业定义｜https://www.onetonline.org/link/summary/31-9094.00",
           "ui": {
             "ai_heading": "工具与责任边界",
             "driver_heading": "影响因素",
-            "official_heading": "中国工资数据状态",
-            "scenario_caption": "不以不可得的精确数字替代证据。",
+            "official_heading": "中国精确工资缺口与相关行业参考",
+            "scenario_caption": "医疗雇主场景匹配行业参考；精确职业缺口仍保留。",
             "scenario_heading": "场景化判断",
             "scenario_interpretation_label": "解释",
             "scenario_role_label": "岗位方向",
-            "scenario_value_label": "数据状态"
+            "scenario_value_label": "任务与训练方向"
           },
           "us_growth": "未提供",
           "us_median": "未提供"
         }
       },
       "career_snapshot_secondary_locale": {
-        "authority_sources": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html",
+        "authority_sources": "O*NET2025全国工资｜https://www.onetonline.org/link/localwages/31-9094.00；BLS医疗转录员2025—2035｜https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
         "bls_table": [
           {
             "指标": "薪资第10百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "28,250美元/年",
+            "说明": "2025美国全国31-9094本职业；O*NET展示BLS工资，非起薪或到手收入"
           },
           {
             "指标": "薪资第25百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "34,150美元/年",
+            "说明": "2025美国全国31-9094本职业；O*NET展示BLS工资，非起薪或到手收入"
           },
           {
             "指标": "薪资中位数",
-            "数值": "$61,660",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "数值": "40,410美元/年",
+            "说明": "2025美国全国31-9094本职业；O*NET展示BLS工资，非起薪或到手收入"
           },
           {
             "指标": "薪资第75百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "48,000美元/年",
+            "说明": "2025美国全国31-9094本职业；O*NET展示BLS工资，非起薪或到手收入"
           },
           {
             "指标": "薪资第90百分位",
-            "数值": "未提供可解释为该职业工资分布的同范围数据",
-            "说明": "未取得同范围、可解释的分位工资数据。"
+            "数值": "55,950美元/年",
+            "说明": "2025美国全国31-9094本职业；O*NET展示BLS工资，非起薪或到手收入"
           },
           {
-            "指标": "就业人数",
-            "数值": "71,800",
-            "说明": "National Certifications 31-9094.00 Medical Transcriptionists｜https://www.onetonline.org/link/localcert/31-9094.00"
+            "指标": "就业人数2025→2035",
+            "数值": "42,000→40,200",
+            "说明": "官方端点分别舍入，不是当前招聘数"
           },
           {
-            "指标": "就业前景 2025—2035",
-            "数值": "12.6%",
-            "说明": "2025年城镇单位就业人员年平均工资情况｜https://www.stats.gov.cn/english/PressRelease/202605/t20260518_1963740.html"
+            "指标": "就业变化2025—2035",
+            "数值": "−4%；净变−1,900",
+            "说明": "官方比例/净变独立舍入；总体就业预测，非AI归因"
           },
           {
-            "指标": "就业岗位空缺（平均年度）",
-            "数值": "8,200",
-            "说明": "National Certifications 31-9094.00 Medical Transcriptionists｜https://www.onetonline.org/link/localcert/31-9094.00"
+            "指标": "就业年均职位空缺2025—2035",
+            "数值": "6,200个/年",
+            "说明": "全为转岗或退出劳动力替换需求，非净增"
           }
         ],
         "boundary": "美国数据只适用于 medical-transcriptionists 的标注期间；不外推中国，也不构成个人收入或录用保证。",
         "direct_answer": {
-          "$join": [
-            "医疗文书转录员的美国中位年薪事实可以单独引用，但工资分位分布未取得同范围可解释数据，因此不补写分位数。",
-            {
-              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.1",
-              "block": "us-salary",
-              "copy_key": "career.item.career-snapshot-secondary-locale",
-              "type": "prose"
-            }
-          ],
-          "separator": "；"
+          "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.1",
+          "block": "us-salary",
+          "copy_key": "career.item.career-snapshot-secondary-locale",
+          "type": "prose"
         },
         "factor_rows": [
           {
-            "answer": "核对设备类型、校准、测试和结果放行责任。",
-            "factor": "设备与责任范围"
+            "answer": "核报告难度、按产量/小时/年薪计酬及复核职责",
+            "factor": "报告、计酬与责任范围"
           },
           {
-            "answer": "核对值班、出差、现场服务和区域差异。",
-            "factor": "地点与班次"
+            "answer": "核全职/兼职、非营业时间工作与批准系统，不保证远程岗位",
+            "factor": "工时与远程安排"
           },
           {
             "answer": "核对雇主培训、认证偏好和可复核工作样本。",
@@ -14804,139 +14997,109 @@
           }
         ],
         "factors_heading": "影响实际报价的因素",
-        "growth": "12.6%",
+        "growth": "−4%",
         "heading": "医疗文书转录员的美国薪资与就业数据边界",
         "industry_heading": "行业与岗位差异",
         "industry_period": "2025",
         "industry_rows": [
           {
-            "industry": "医院与临床工程",
-            "median": "需核对具体岗位",
-            "note": "设备范围、值班和授权可能不同。"
+            "industry": "医院",
+            "median": "46,750美元/年",
+            "note": "2025行业内转录员中位年薪"
           },
           {
-            "industry": "设备制造商服务",
-            "median": "需核对具体岗位",
-            "note": "厂商培训、现场服务与出差要求可能不同。"
+            "industry": "医师办公室",
+            "median": "44,670美元/年",
+            "note": "2025行业内转录员中位年薪"
           },
           {
-            "industry": "第三方维修服务",
-            "median": "需核对具体岗位",
-            "note": "合同边界和责任交接可能不同。"
+            "industry": "行政与支持服务",
+            "median": "33,280美元/年",
+            "note": "2025行业内转录员中位年薪，含转录及临时用工公司"
           },
           {
-            "industry": "其他雇主与地区",
-            "median": "需核对具体岗位",
-            "note": "地点、经验、福利与资格会改变实际条件。"
+            "industry": "门诊/其他医护办公室",
+            "median": "46,110 / 39,220美元/年",
+            "note": "2025分别为本职业中位年薪，非行业全员均值"
           }
         ],
-        "industry_value_label": "岗位数据",
+        "industry_value_label": "本职业中位年薪",
         "interpretation_heading": "如何解读",
         "interpretation_rows": [
           {
             "answer": {
-              "$join": [
-                "中位工资不是起薪，也不是个人收入承诺。",
-                {
-                  "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.5",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
+              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.5",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             },
-            "question": "中位工资代表什么？"
+            "question": "行业内本职业工资为何不同？"
           },
           {
             "answer": {
-              "$join": [
-                "现有材料没有同范围、可解释的分位工资分布。",
-                {
-                  "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.6",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
+              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.6",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             },
-            "question": "为什么不展示分位数？"
+            "question": "怎样核实际报价和工时？"
           },
           {
-            "answer": "它是职业就业存量，不是当前招聘数量。",
-            "question": "就业人数代表什么？"
+            "answer": {
+              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.4",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "雇主行业份额如何理解？"
           },
           {
-            "answer": "增长预测和年度空缺是市场信号，不是个人录用概率。",
-            "question": "增长与空缺如何使用？"
+            "answer": {
+              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.3",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
+            },
+            "question": "旧期与新期就业预测怎么用？"
           }
         ],
-        "median": "$61,660",
+        "median": "$40,410",
         "outlook_heading": "就业前景",
         "outlook_period": "2025—2035",
         "wage_column_labels": [
-          "工资层级",
-          "年薪参考",
-          "月度等值",
-          "解释"
+          "2025工资层级",
+          "年薪（美元）",
+          "时薪（美元）",
+          "范围与解释"
         ],
         "wage_heading": "工资数据",
         "wage_tiers": [
           {
-            "equivalent": "未换算",
+            "equivalent": "13.58 / 16.42",
             "interpretation": {
-              "$join": [
-                "仅表示中位年薪事实，不是起薪或个人报价。",
-                {
-                  "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.2",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
+              "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.2",
+              "block": "us-salary",
+              "copy_key": "career.item.career-snapshot-secondary-locale",
+              "type": "prose"
             },
-            "label": "已取得的中位水平",
-            "value": "$61,660"
+            "label": "第10/25分位",
+            "value": "28,250 / 34,150"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.3",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "19.43",
+            "interpretation": "2025本职业美国全国中位年薪/时薪，非起薪、月薪换算或到手收入。",
+            "label": "第50分位（中位）",
+            "value": "40,410"
           },
           {
-            "equivalent": "未提供",
-            "interpretation": {
-              "$join": [
-                "没有同范围可解释的分位工资数据。",
-                {
-                  "$item": "medical-transcriptionists.us-salary.career-snapshot-secondary-locale.4",
-                  "block": "us-salary",
-                  "copy_key": "career.item.career-snapshot-secondary-locale",
-                  "type": "prose"
-                }
-              ],
-              "separator": "；"
-            },
-            "label": "其他分布位置",
-            "value": "未提供"
+            "equivalent": "23.08 / 26.90",
+            "interpretation": "2025本职业美国全国上四分位/第90分位，非高薪承诺。",
+            "label": "第75/90分位",
+            "value": "48,000 / 55,950"
           }
         ]
       },
-      "definition_block": "医疗文书转录员对应 O*NET 31-9094.00，职责为使用电子设备转录医师与医护人员口述的医学报告，覆盖门诊、急诊、影像、手术与出院总结；把缩写还原为可理解表述，编辑后以打印或电子形式交回审核、签名或更正。",
+      "definition_block": "医疗口述的转录、复核与交回",
       "faq_block": {
         "items": {
           "$item": "medical-transcriptionists.sources.faq-block.1",
@@ -14977,18 +15140,18 @@
       },
       "hero": {
         "h1": "医疗文书转录员",
-        "quick_answer": "医疗文书转录员围绕工作对象、任务过程、结果复核与责任交接完成可检查的职业闭环；具体要求应回到官方职业来源、雇主流程和所在地规则。",
+        "quick_answer": "医疗文书转录员把医护口述转为报告，复核语音识别初稿、展开缩写并标注疑点，再交回审核；转录不等于独立诊疗。",
         "title": "医疗文书转录员"
       },
       "market_signal_card": {
         "context_links": [
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "就业预测与转向"
           },
           {
             "href": "#career-visual-group-market-signals",
-            "label": "#career-visual-group-market-signals"
+            "label": "核对总体市场背景"
           }
         ],
         "direct_answer": {
@@ -15024,123 +15187,123 @@
               "copy_key": "career.item.market-signal-card",
               "type": "prose"
             },
-            "metric": "年薪中位数（2025）",
+            "metric": "2025工资与数据适用范围",
             "occupation_scope": "展示口径：Medical Transcriptionists（O*NET 31-9094.00）",
-            "source_id": "ep",
-            "value": "40,410 美元/年"
+            "source_id": "onet",
+            "value": "中位40,410美元/年，19.43美元/小时"
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "为 2024—2034 年十年平均，含增长与替换需求，不等于在招岗位数。",
+            "horizon": "2025—2035",
+            "interpretation": "全部为转岗或退出劳动力的替换空缺，非净增或当前招聘数。",
             "limitation": "不能作为个人录用概率。",
             "metric": "年均职位空缺",
             "occupation_scope": "展示口径：31-9094.00",
             "source_id": "bls",
-            "value": "约 7,400 个/年"
+            "value": "约6,200个/年"
           },
           {
             "geography": "美国全国",
-            "horizon": "2024—2034",
-            "interpretation": "就业规模、净变化、增长率与空缺必须分别解释；本职业预计下降。",
-            "limitation": "为统计预测，不构成单列本职业就业保证。",
+            "horizon": "2025—2035",
+            "interpretation": "官方值分别舍入，保留独立净变化；总体就业预测，非AI归因。",
+            "limitation": "不作个人录用概率或生成式AI因果估计。",
             "metric": "就业规模与变化",
             "occupation_scope": "展示口径：31-9094.00",
-            "source_id": "nbs",
-            "value": "2024 年约 43,900 人，2034 年预计约 41,800 人"
+            "source_id": "ep",
+            "value": "42,000→40,200人；−4%；净变−1,900人"
           }
         ],
         "schema_version": "career.outlook_transitions.v1",
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
             "id": "bls",
-            "label": "National Wages 31-9094.00 Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS医疗转录员",
+            "scope": "2025—2035替换空缺"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
             "id": "ep",
-            "label": "Medical Transcriptionists detailed occupation profile",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "BLS新期就业表",
+            "scope": "端点、净变化分别舍入"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.stats.gov.cn/sj/zxfb/202605/t20260515_1963707.html",
             "id": "nbs",
-            "label": "国家统计局工资统计方法",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "国家统计局2025工资",
+            "scope": "相关行业年均，非精确职业工资"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
+            "href": "https://www.onetonline.org/link/localwages/31-9094.00",
             "id": "onet",
-            "label": "Medical Transcriptionists",
-            "scope": "职业范围、来源口径与责任边界"
+            "label": "O*NET全国工资",
+            "scope": "2025本职业五分位"
           }
         ],
         "transitions": [
           {
-            "capability_gaps": "需补齐系统与数据治理知识。",
-            "shared_capabilities": "医学术语与数据标准理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "健康信息学专员",
-            "transition_distance": "需补证据"
+            "capability_gaps": "要补编码规则与实际岗位要求",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明病历记录专员胜任",
+            "target_href": "/zh/career/jobs/medical-records-and-health-information-technicians",
+            "target_slug": "medical-records-and-health-information-technicians",
+            "target_title": "病历记录专员",
+            "transition_distance": "需补新任务证据与实际资格"
           },
           {
-            "capability_gaps": "需补齐通用文档与保留规则。",
-            "shared_capabilities": "记录生命周期与归档规范。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "文档管理专员",
-            "transition_distance": "需补证据"
+            "capability_gaps": "要补速录、司法程序与字幕技能",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明法庭记录员与实时字幕员胜任",
+            "target_href": "/zh/career/jobs/court-reporters",
+            "target_slug": "court-reporters",
+            "target_title": "法庭记录员与实时字幕员",
+            "transition_distance": "需补新任务证据与实际资格"
           },
           {
-            "capability_gaps": "需补齐业务分析与组织方法。",
-            "shared_capabilities": "流程与信息分析基础。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "管理分析师",
-            "transition_distance": "需补证据"
+            "capability_gaps": "要补通用文档规范；不代表医疗权限",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明文字处理员与打字员胜任",
+            "target_href": "/zh/career/jobs/word-processors-and-typists",
+            "target_slug": "word-processors-and-typists",
+            "target_title": "文字处理员与打字员",
+            "transition_distance": "需补新任务证据与实际资格"
           },
           {
-            "capability_gaps": "需补齐行政与排程技能。",
-            "shared_capabilities": "医疗行政与沟通经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医务秘书与行政助理",
-            "transition_distance": "需补证据"
+            "capability_gaps": "要补归档、检索与保留规则",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明档案文员胜任",
+            "target_href": "/zh/career/jobs/file-clerks",
+            "target_slug": "file-clerks",
+            "target_title": "档案文员",
+            "transition_distance": "需补新任务证据与实际资格"
           },
           {
-            "capability_gaps": "需补齐管理与预算职责。",
-            "shared_capabilities": "医疗机构运作理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
+            "capability_gaps": "要补数据与系统技能；官方档案尚部分开放",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明健康信息技师与医疗登记专员胜任",
+            "target_href": "/zh/career/jobs/health-information-technologists-and-medical-registrars",
+            "target_slug": "health-information-technologists-and-medical-registrars",
+            "target_title": "健康信息技师与医疗登记专员",
+            "transition_distance": "需补新任务证据与实际资格"
+          },
+          {
+            "capability_gaps": "要补岗位训练、监督与适用临床要求",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明医疗助理胜任",
+            "target_href": "/zh/career/jobs/medical-assistants",
+            "target_slug": "medical-assistants",
+            "target_title": "医疗助理",
+            "transition_distance": "需补新任务证据与实际资格"
+          },
+          {
+            "capability_gaps": "要补预算、人员、运营及质量责任",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明医疗与健康服务经理胜任",
+            "target_href": "/zh/career/jobs/medical-and-health-services-managers",
+            "target_slug": "medical-and-health-services-managers",
             "target_title": "医疗与健康服务经理",
-            "transition_distance": "需补证据"
+            "transition_distance": "需补新任务证据与实际资格"
           },
           {
-            "capability_gaps": "需补齐执照与临床授权。",
-            "shared_capabilities": "患者照护与医疗环境经验。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "注册护士",
-            "transition_distance": "需补证据"
-          },
-          {
-            "capability_gaps": "需补齐执业与监督要求。",
-            "shared_capabilities": "临床流程理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "医师助理",
-            "transition_distance": "需补证据"
-          },
-          {
-            "capability_gaps": "需补齐数据库与工程技能。",
-            "shared_capabilities": "数据质量与结构理解。",
-            "target_href": "/zh/career/jobs/general-and-operations-managers",
-            "target_slug": "general-and-operations-managers",
-            "target_title": "数据库与数据管理员",
-            "transition_distance": "需补证据"
+            "capability_gaps": "精确范围含护理信息学，要补领域与系统技能",
+            "shared_capabilities": "可比较的记录、文本核对或医疗流程经验；不证明健康信息学专家胜任",
+            "target_href": "/zh/career/jobs/health-informatics-specialists",
+            "target_slug": "health-informatics-specialists",
+            "target_title": "健康信息学专家",
+            "transition_distance": "需补新任务证据与实际资格"
           }
         ]
       },
@@ -15164,7 +15327,7 @@
             "alternate_value": null,
             "label": "准备层级",
             "secondary_value": null,
-            "value": "Job Zone Three：中等准备，通常需要职业培训、相关在职经验或副学士学位"
+            "value": "Job Zone Three：中等准备职业群组；本职业BLS通常高中后证书教育，认证自愿。"
           },
           {
             "alternate_value": null,
@@ -15191,7 +15354,7 @@
               "type": "prose"
             },
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 RCI 适配测试",
+            "cta_label": "了解RIASEC探索工具",
             "evidence_level": {
               "$item": "medical-transcriptionists.fit.personality-fit-block.8",
               "block": "fit",
@@ -15200,201 +15363,201 @@
             },
             "id": "riasec",
             "label": "RIASEC 兴趣代码（CSI）",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
+            "question": "RIASEC如何用于职业探索？",
             "signals": {
               "$item": "medical-transcriptionists.fit.riasec-fit-block.1",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "兴趣代码只描述活动偏好，不能替代真实任务、编码规则与雇主判断。"
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做大五适配测试",
+            "answer": "先看重复核对、纠错与持续专注样本；不把人格分数当准确率。",
+            "cta_href": "/zh/tests/big-five-personality-test-ocean-model",
+            "cta_label": "了解大五人格探索工具",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "big-five",
             "label": "大五人格（OCEAN）",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
+            "question": "大五人格如何用于职业探索？",
             "signals": {
               "$item": "medical-transcriptionists.fit.personality-fit-block.2",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "标签只描述倾向，不能替代真实任务、合规要求与雇主判断。"
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 MBTI 适配测试",
+            "answer": "类型标签不证明医学术语、听辨或隐私处理能力。",
+            "cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "cta_label": "了解MBTI探索工具",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "mbti",
             "label": "MBTI 十六型人格类型测试",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
+            "question": "MBTI如何用于职业探索？",
             "signals": {
               "$item": "medical-transcriptionists.fit.personality-fit-block.3",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "类型标签不能判断是否胜任编码或记录审核工作。"
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
+            "answer": "类型用于自我探索，不证明医学术语、听辨或合规能力。",
             "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做九型适配测试",
+            "cta_label": "用RIASEC设计下一步试验",
             "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
             "id": "enneagram",
-            "label": "九型人格（Enneagram）",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
-            "signals": {
-              "$item": "medical-transcriptionists.fit.riasec-fit-block.4",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "list"
-            },
-            "watchout": "类型标签不构成临床沟通或合规能力证据。"
-          },
-          {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做认知能力适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
-            "id": "iq",
-            "label": "认知能力测验（IQ）",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
-            "signals": {
-              "$item": "medical-transcriptionists.fit.personality-fit-block.5",
-              "block": "fit",
-              "copy_key": "career.item.riasec-fit-block",
-              "type": "list"
-            },
-            "watchout": "测验只反映部分认知特征，不覆盖编码经验与合规判断。"
-          },
-          {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
-            "cta_label": "做 EQ 适配测试",
-            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
-            "id": "eq",
-            "label": "情绪智力测验（EQ 量表）",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？",
+            "label": "九型人格探索",
+            "question": "九型人格如何用于职业探索？",
             "signals": {
               "$item": "medical-transcriptionists.fit.personality-fit-block.6",
               "block": "fit",
               "copy_key": "career.item.riasec-fit-block",
               "type": "list"
             },
-            "watchout": "测验不构成隐私合规与跨部门协作的能力证据。"
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
+          },
+          {
+            "answer": "测验不覆盖完整任务，另核听音、术语与数值复核。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "用RIASEC设计下一步试验",
+            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "id": "iq",
+            "label": "认知能力测验（IQ）",
+            "question": "认知能力如何用于职业探索？",
+            "signals": {
+              "$item": "medical-transcriptionists.fit.riasec-fit-block.4",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "list"
+            },
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
+          },
+          {
+            "answer": "沟通倾向不等于保密义务或歧义核实能力。",
+            "cta_href": "/zh/tests/holland-career-interest-test-riasec",
+            "cta_label": "用RIASEC设计下一步试验",
+            "evidence_level": "该工具为探索性参考，不构成效能、资格或合规判断证据。",
+            "id": "eq",
+            "label": "情绪智力测验（EQ）",
+            "question": "情绪智力如何用于职业探索？",
+            "signals": {
+              "$item": "medical-transcriptionists.fit.personality-fit-block.5",
+              "block": "fit",
+              "copy_key": "career.item.riasec-fit-block",
+              "type": "list"
+            },
+            "watchout": "仅探索性参考，真实转录表现、教育与隐私要求分别核验。"
           }
         ],
         "boundary": "本页仅用于职业探索；医学转录的准确、保密与记录处理须以所在地法规、机构政策与授权链为准，人格工具不能替代资格与合规要求。",
         "direct_answer": "适配看可观察行为：能否按术语与缩写规则准确转录、能否长时间专注并核对细节、能否严格遵守保密与记录要求。",
         "directions": [
           {
-            "direction": "记录汇总与索引",
-            "fit_signals": "能按索引与保留规则汇总并保存记录。",
+            "direction": "病历记录专员",
+            "fit_signals": "编辑比较：愿意尝试汇总维护病历并进行标准编码，包含医疗编码员",
             "target": {
-              "href": "/zh/career/jobs/general-and-operations-managers",
-              "slug": "general-and-operations-managers",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/medical-records-and-health-information-technicians",
+              "slug": "medical-records-and-health-information-technicians",
+              "title": "病历记录专员"
             },
-            "watchouts": "记录真实性与来源须复核。"
+            "watchouts": "要补编码规则与实际岗位要求"
           },
           {
-            "direction": "数据录入与校验",
-            "fit_signals": "能按字段定义录入并校验数据。",
+            "direction": "法庭记录员与实时字幕员",
+            "fit_signals": "编辑比较：愿意尝试记录司法等程序逐字稿并提供实时字幕",
             "target": {
-              "href": "/zh/career/jobs/purchasing-managers",
-              "slug": "purchasing-managers",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/court-reporters",
+              "slug": "court-reporters",
+              "title": "法庭记录员与实时字幕员"
             },
-            "watchouts": "字段口径与来源须核对。"
+            "watchouts": "要补速录、司法程序与字幕技能"
           },
           {
-            "direction": "编码与分类",
-            "fit_signals": "能按编码规则分类并保留依据。",
+            "direction": "文字处理员与打字员",
+            "fit_signals": "编辑比较：愿意尝试从草稿或录音输入通用文档并校对",
             "target": {
-              "href": "/zh/career/jobs/archivists",
-              "slug": "archivists",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/word-processors-and-typists",
+              "slug": "word-processors-and-typists",
+              "title": "文字处理员与打字员"
             },
-            "watchouts": "编码结论须由有资质者确认。"
+            "watchouts": "要补通用文档规范；不代表医疗权限"
           },
           {
-            "direction": "记录审核",
-            "fit_signals": "能按清单核对完整性、准确与合规。",
+            "direction": "档案文员",
+            "fit_signals": "编辑比较：愿意尝试按归档系统排列记录并按请求查找取出",
             "target": {
-              "href": "/zh/career/jobs/administrative-services-managers",
-              "slug": "administrative-services-managers",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/file-clerks",
+              "slug": "file-clerks",
+              "title": "档案文员"
             },
-            "watchouts": "审核结论须经责任人确认。"
+            "watchouts": "要补归档、检索与保留规则"
           },
           {
-            "direction": "信息发布与隐私",
-            "fit_signals": "能按授权与法规处理发布与披露。",
+            "direction": "健康信息技师与医疗登记专员",
+            "fit_signals": "编辑比较：愿意尝试协助医疗信息系统并摘录分析治疗随访信息",
             "target": {
-              "href": "/zh/career/jobs/human-resources-managers",
-              "slug": "human-resources-managers",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/health-information-technologists-and-medical-registrars",
+              "slug": "health-information-technologists-and-medical-registrars",
+              "title": "健康信息技师与医疗登记专员"
             },
-            "watchouts": "发布范围不得越权。"
+            "watchouts": "要补数据与系统技能；官方档案尚部分开放"
           },
           {
-            "direction": "跨部门协作",
-            "fit_signals": "能与医护、编码与信息部门清晰交接。",
+            "direction": "医疗助理",
+            "fit_signals": "编辑比较：愿意尝试在医师指导下做行政及部分临床任务",
             "target": {
-              "href": "/zh/career/jobs/medical-and-health-services-managers",
-              "slug": "medical-and-health-services-managers",
-              "title": "FermatMind 医疗文书转录员任务影响量表"
+              "href": "/zh/career/jobs/medical-assistants",
+              "slug": "medical-assistants",
+              "title": "医疗助理"
             },
-            "watchouts": "不越权作临床或法律结论。"
+            "watchouts": "要补岗位训练、监督与适用临床要求"
           }
         ],
         "heading": "适配信号、人格工具边界与实际使用方法",
         "questions": [
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "本页虚构首稿、校稿与差异清单；不等于招聘测试合格。",
+            "question": "什么是可靠适配证据？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "不，兴趣代码不是资格或权限。",
+            "question": "CSI意味着有诊疗权吗？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "不能，应逐句核对工作样本。",
+            "question": "能否用MBTI判断准确率？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "O*NET回答73%每天；为美国不同题目的调查比例。",
+            "question": "常有时间压力吗？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "还要核医学术语、缩写、数值、格式和交回审核。",
+            "question": "可以只练打字吗？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "自读录音；未录音只记录文本校对，不称听辨结果。",
+            "question": "虚构稿如何试听？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "本题标待口述者确认；不补“三天”。",
+            "question": "听不清可以猜吗？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "另学编码规则和实际岗位要求，不由转录经验自动取得。",
+            "question": "换到编码岗位要补什么？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "真实数据仍核机构批准系统和合法用途。",
+            "question": "远程就能自由用工具吗？"
           },
           {
-            "answer": "医疗文书转录员可以使用工具辅助信息整理，但真实采用、权限、结果放行和异常升级仍需由有责任的人核对。",
-            "question": "做医疗文书转录员需要怎样的能力与工作方式？"
+            "answer": "编辑建议：看纠错依据、持续专注和兴趣，不设统一合格线。",
+            "question": "用什么决定继续？"
           }
         ],
         "schema_version": "career.fit_decision_center.v1",
@@ -15420,44 +15583,44 @@
         ],
         "source_links": [
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "Medical Records Specialists detailed occupation profile",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/summary/31-9094.00",
+            "label": "O*NET31-9094摘要",
+            "usage": "职责、CSI、工作情境及教育调查"
+          },
+          {
+            "href": "https://www.bls.gov/ooh/healthcare/medical-transcriptionists.htm",
+            "label": "BLS医疗转录员",
+            "usage": "常见教育、认证自愿、工作方式"
+          },
+          {
+            "href": "https://www.onetonline.org/link/localwages/31-9094.00",
+            "label": "O*NET全国工资",
+            "usage": "2025本职业分位工资"
+          },
+          {
+            "href": "https://www.onetonline.org/link/localtrends/31-9094.00",
+            "label": "O*NET旧就业趋势",
+            "usage": "2024—2034，非AI归因"
+          },
+          {
+            "href": "https://www.onetonline.org/link/industry/31-9094.00",
+            "label": "O*NET行业",
+            "usage": "2024雇主分布"
           },
           {
             "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "label": "O*NET认证目录",
+            "usage": "8项探索线索，非统一准入"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.onetonline.org/link/localtraining/31-9094.00",
+            "label": "O*NET培训目录",
+            "usage": "IPEDS目录供给，非职位数"
           },
           {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "Industries: 29-2072.00 - Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "National Certifications 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "National Employment Trends 29-2072.00 Medical Records Specialists",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
-          },
-          {
-            "href": "https://www.onetonline.org/link/localcert/31-9094.00",
-            "label": "Generative AI and Jobs: A Refined Global Index of Occupational Exposure",
-            "usage": "仅按该来源标注的市场、职业范围与期间使用。"
+            "href": "https://www.ilo.org/publications/generative-ai-and-jobs-refined-global-index-occupational-exposure",
+            "label": "ILO2025摘要",
+            "usage": "全球任务暴露背景；非个人或职业采用率"
           }
         ]
       },
@@ -15497,8 +15660,8 @@
             "copy_key": "career.item.boundary-notice",
             "type": "prose"
           },
-          "source": "O*NET 31-9094.00 与 BLS 2025 年工资、2024—2034 年就业预测",
-          "updated_at": "查阅日期 2026-09-25"
+          "source": "O*NET31-9094；BLS2025工资/2025—2035；国家统计局2025相关行业；中美隐私按适用范围",
+          "updated_at": "查阅2026-10-03"
         },
         "note": "证据只支持医疗文书转录员在标注市场和期间内的范围性判断，不构成个人收入、录用或适配保证。",
         "secondary_links": [
@@ -15510,7 +15673,7 @@
               "entry": "navigation-2",
               "field": "url"
             },
-            "label": "O*NET OnLine 职业档案"
+            "label": "英文MBTI探索"
           },
           {
             "href": {
@@ -15520,7 +15683,7 @@
               "entry": "navigation-3",
               "field": "url"
             },
-            "label": "O*NET 全国就业趋势页"
+            "label": "英文大五探索"
           },
           {
             "href": {
@@ -15530,7 +15693,7 @@
               "entry": "navigation-4",
               "field": "url"
             },
-            "label": "O*NET 行业分布"
+            "label": "中文MBTI探索"
           },
           {
             "href": {
@@ -15540,11 +15703,11 @@
               "entry": "navigation-5",
               "field": "url"
             },
-            "label": "国家统计局工资统计方法"
+            "label": "中文大五探索"
           }
         ]
       },
-      "work_context_block": "工作情境（O*NET 工作情境调查，1—5 分）：本职业以室内转录与编辑为主，重视准确性与保密；具体工作情境数值以 O*NET 工作情境调查为准。"
+      "work_context_block": "O*NET31-9094工作情境是不同问题的回答比例：100%每天室内环境、88%认为精确极其重要、72%认为重复任务极其重要、73%每天有时间压力、64%认为团队极其重要；不是1—5分，也不是事故率或中国调查。BLS描述医院、医师办公室与第三方转录公司，通常全职但兼职常见，可远程并可能在常规营业时间外工作；不保证远程职位或统一加班安排。 能力与工作方式：主动倾听、阅读理解、写作、监控与批判思考；理解医学术语、解剖生理及英语语法，能核对缩写、数值与格式并追问歧义。报告仍须交回医护人员审核批准；转录与编辑不授予独立诊疗权。 完整职责：报告转录：按音频转录门诊、急诊、影像、手术与出院总结等医学报告。；缩写还原：把医学缩写翻译为完整可理解的表述。；术语与用药核对：核对解剖术语、用药名称与剂量数值。；编辑与格式：按模板编辑格式、清晰度与可读性。；歧义处理：对听不清或矛盾内容标注并交回确认。；保密与访问：按隐私与访问控制要求处理与保存记录。；交回与协作：把报告交回审核、签名或更正并配合质量抽检。 文书与权限补充：报告交回审核、批准或更正；可兼接听电话、预约及保险表单等文书任务，不等于独立诊疗、编码资格或披露权限。"
     },
     "contract_version": "career.detail.display.v1",
     "interface": {
@@ -15799,7 +15962,7 @@
       "text": "医疗文书转录员：工作内容、美国工资与入行 | 费马测试"
     }
   },
-  "source_content_sha256": "a5bd087bf02d2965c4c787a29dc44f0a39195b2eb7ddca597ba7bbb001ab7657",
+  "source_content_sha256": "a72a463a56b19ea1073ec69318e009595782e801205d22eda2041ac455c4ed19",
   "subject": {
     "canonical_slug": "medical-transcriptionists",
     "name": "医疗文书转录员",
