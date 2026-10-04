@@ -34,7 +34,7 @@ final class CareerJobSeoServiceTest extends TestCase
     public function test_fixed_preschool_metadata_preserves_each_self_canonical_identity(): void
     {
         foreach (['preschool-teachers', 'preschool-teachers-except-special-education'] as $slug) {
-            $job = $this->createJob(['slug' => $slug]);
+            $job = $this->createJob(['job_code' => $slug, 'slug' => $slug]);
             $this->createSeoMeta($job, ['canonical_url' => 'https://fermatmind.com/zh/career/jobs/'.$slug]);
             $meta = app(CareerJobSeoService::class)->buildMeta($job, 'zh-CN', true);
             self::assertSame('noindex,follow', $meta['robots']);
