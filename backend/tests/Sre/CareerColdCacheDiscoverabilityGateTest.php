@@ -270,7 +270,7 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
-    public function retained_alias_is_required_in_storage_but_excluded_from_public_inventory(): void
+    public function stored_identity_can_remain_outside_public_inventory_when_not_eligible(): void
     {
         $snapshot = $this->completePreSitemapSnapshot();
         $snapshot['public_authority'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(

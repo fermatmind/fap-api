@@ -94,7 +94,12 @@ class SitemapSourceApiTest extends TestCase
             ->assertJsonPath('source', 'backend_sitemap_generator')
             ->assertJsonPath('career_current_identity.storage_count', 1046)
             ->assertJsonPath('career_current_identity.file_count', 2092)
-            ->assertJsonPath('career_current_identity.aliases.preschool-teachers', 'preschool-teachers-except-special-education');
+            ->assertJsonMissingPath('career_current_identity.aliases.preschool-teachers')
+            ->assertJsonMissingPath('career_current_identity.aliases.preschool-teachers-except-special-education');
+
+        foreach (['preschool-teachers', 'preschool-teachers-except-special-education'] as $slug) {
+            $this->assertContains($slug, $response->json('career_current_identity.slugs'));
+        }
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
 

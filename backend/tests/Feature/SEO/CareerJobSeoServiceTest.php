@@ -31,14 +31,16 @@ final class CareerJobSeoServiceTest extends TestCase
         }
     }
 
-    public function test_alias_metadata_only_points_to_canonical_target(): void
+    public function test_fixed_preschool_metadata_preserves_each_self_canonical_identity(): void
     {
-        $job = $this->createJob(['slug' => 'preschool-teachers']);
-        $this->createSeoMeta($job, ['canonical_url' => 'https://fermatmind.com/en/career/jobs/preschool-teachers']);
-        $meta = app(CareerJobSeoService::class)->buildMeta($job, 'zh-CN', true);
-        self::assertSame('noindex,follow', $meta['robots']);
-        self::assertSame('https://fermatmind.com/zh/career/jobs/preschool-teachers-except-special-education', $meta['canonical']);
-        self::assertSame('https://fermatmind.com/en/career/jobs/preschool-teachers-except-special-education', $meta['alternates']['en']);
+        foreach (['preschool-teachers', 'preschool-teachers-except-special-education'] as $slug) {
+            $job = $this->createJob(['slug' => $slug]);
+            $this->createSeoMeta($job, ['canonical_url' => 'https://fermatmind.com/zh/career/jobs/'.$slug]);
+            $meta = app(CareerJobSeoService::class)->buildMeta($job, 'zh-CN', true);
+            self::assertSame('noindex,follow', $meta['robots']);
+            self::assertSame('https://fermatmind.com/zh/career/jobs/'.$slug, $meta['canonical']);
+            self::assertSame('https://fermatmind.com/en/career/jobs/'.$slug, $meta['alternates']['en']);
+        }
     }
 
     public function test_frontend_unavailable_public_job_is_forced_noindex(): void
