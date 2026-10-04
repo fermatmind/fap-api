@@ -355,7 +355,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      *   version: string|null
      * }
      */
-    public function jobDetailCacheReadiness(string $slug, string $publicLocale = 'zh-CN'): array
+    public function jobDetailCacheReadiness(string $slug, string $publicLocale = 'zh-CN', bool $includePayload = true): array
     {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
@@ -363,7 +363,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         return $this->jobDetailCacheReadinessBatch([[
             'slug' => $normalizedSlug,
             'locale' => $normalizedLocale,
-        ]])[$normalizedSlug.'|'.$normalizedLocale];
+        ]], $includePayload)[$normalizedSlug.'|'.$normalizedLocale];
     }
 
     public function jobDetailCacheReadinessBatch(array $targets, bool $includePayload = true): array
@@ -485,7 +485,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     {
         $normalizedSlug = strtolower(trim($slug));
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
-        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale, false);
         if (! in_array($readiness['classification'], ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
             return false;
         }

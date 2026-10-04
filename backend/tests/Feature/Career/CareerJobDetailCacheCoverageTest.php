@@ -639,6 +639,32 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertNull($reader->loadedIdentity);
     }
 
+    public function test_boolean_directory_readiness_releases_pages_but_keeps_payload_reads_available(): void
+    {
+        $reader = new class(app(CareerContentV3Projector::class)) extends DynamicCareerContentV3CanonicalReader
+        {
+            public int $releases = 0;
+
+            public function forgetLoadedPages(): void
+            {
+                $this->releases++;
+                parent::forgetLoadedPages();
+            }
+        };
+        $this->app->instance(CareerContentV3CanonicalReader::class, $reader);
+        $this->bindProjection(['one']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            Cache::forever($cache->jobDetailCacheKey('one', $locale), $this->detailPayload('one', $locale));
+            $this->assertTrue($cache->jobDetailCacheIsReady('one', $locale));
+        }
+        $this->assertSame(2, $reader->releases);
+        $payloadRead = $cache->jobDetailCacheReadiness('one', 'en');
+        $this->assertSame('legacy_migratable', $payloadRead['classification']);
+        $this->assertIsArray($payloadRead['payload']);
+        $this->assertSame(2, $reader->releases);
+    }
+
     public function test_sync_repair_refuses_before_writes_when_missing_count_exceeds_limit(): void
     {
         $slugs = array_map(static fn (int $index): string => sprintf('career-%03d', $index), range(1, 251));
