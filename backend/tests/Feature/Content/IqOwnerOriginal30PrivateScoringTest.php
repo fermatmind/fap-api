@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Content;
 
+use App\Services\Assessment\Drivers\IqTestDriver;
 use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Iq\IqResultPayloadRedactor;
 use PHPUnit\Framework\Attributes\Test;
@@ -139,6 +140,62 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
 
         $this->assertSame('IQ_OWNER_ORIGINAL_30', $redacted['bank_id'] ?? null);
         $this->assertPayloadHasNoPrivateIqFields($redacted);
+    }
+
+    #[Test]
+    public function corrected_private_answers_are_used_by_runtime_scoring(): void
+    {
+        $spec = app(IqOwnerOriginal30BankService::class)->runtimeScoringSpec();
+        $answerKey = $this->readJson('answer_key.json');
+        $this->assertSame('owner_original_30_answer_key_2026_10_04', $answerKey['answer_key_version']);
+        $this->assertSame($answerKey['answer_key_version'], $spec['answer_key_version']);
+
+        $corrections = [
+            9 => ['old' => 'E', 'correct' => 'A'],
+            10 => ['old' => 'F', 'correct' => 'E'],
+            18 => ['old' => 'E', 'correct' => 'A'],
+            24 => ['old' => 'C', 'correct' => 'E'],
+            26 => ['old' => 'D', 'correct' => 'F'],
+        ];
+        $answers = [];
+        $obsoleteAnswers = [];
+        foreach ($spec['items'] as $index => $item) {
+            $correction = $corrections[$index + 1] ?? null;
+            if ($correction !== null) {
+                $this->assertSame($correction['correct'], $item['correct_answer']);
+            }
+            $answers[] = ['question_id' => $item['question_id'], 'code' => $item['correct_answer']];
+            $obsoleteAnswers[] = [
+                'question_id' => $item['question_id'],
+                'code' => $correction['old'] ?? $item['correct_answer'],
+            ];
+        }
+
+        $driver = new IqTestDriver;
+        $context = ['duration_ms' => 600000];
+        $result = $driver->score($answers, $spec, $context);
+        $this->assertSame(30.0, $result->rawScore);
+        $this->assertSame(30.0, $result->finalScore);
+        $this->assertSame(25.0, $driver->score($obsoleteAnswers, $spec, $context)->rawScore);
+        $this->assertPayloadHasNoPrivateIqFields(IqResultPayloadRedactor::redactAnswerKeys($result->toArray()));
+    }
+
+    #[Test]
+    public function second_question_has_six_distinct_assets_with_matching_runtime_hashes(): void
+    {
+        $item = $this->readJson('items.json')['items'][1];
+        $hashes = [];
+        foreach ($item['options'] as $option) {
+            $path = base_path('../content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/'.$option['assets']['image']);
+            $hash = 'sha256:'.hash_file('sha256', $path);
+            $this->assertSame($hash, $option['sha256']);
+            $this->assertSame($hash, $item['asset_hashes']['options'][$option['code']]);
+            $dimensions = getimagesize($path);
+            $this->assertSame(296, $dimensions[0]);
+            $this->assertSame(168, $dimensions[1]);
+            $hashes[] = $hash;
+        }
+        $this->assertCount(6, array_unique($hashes));
     }
 
     private function assertPayloadHasNoPrivateIqFields(array $payload, string $path = '$'): void
