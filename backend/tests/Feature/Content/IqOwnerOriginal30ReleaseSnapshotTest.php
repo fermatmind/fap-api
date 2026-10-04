@@ -42,6 +42,16 @@ final class IqOwnerOriginal30ReleaseSnapshotTest extends TestCase
             $this->assertFalse($process->isSuccessful());
             $this->assertSame('release_snapshot_fixture', $service->runtimeScoringSpec()['answer_key_version']);
 
+            // Career-only incremental materialization copies the accepted snapshot.
+            $inherited = new Process(['bash', $originalBase.'/scripts/iq/freeze_iq_owner30_release.sh', $root, '--inherited-snapshot']);
+            $inherited->mustRun();
+            $this->assertSame('release_snapshot_fixture', $service->runtimeScoringSpec()['answer_key_version']);
+            $this->assertSame(hash_file('sha256', $source.'/assets/iq_owner_original_30/q02/q2-option-b.webp'), hash_file('sha256', $asset['absolute_path']));
+            File::delete($snapshot.'/banks/IQ_OWNER_ORIGINAL_30/manifest.json');
+            $inherited->run();
+            $this->assertFalse($inherited->isSuccessful());
+            $this->assertSame('release_snapshot_fixture', $service->runtimeScoringSpec()['answer_key_version']);
+
             $this->app->setBasePath($originalBase);
             $this->assertSame('owner_original_30_answer_key_2026_10_04', $service->runtimeScoringSpec()['answer_key_version']);
         } finally {

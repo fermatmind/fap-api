@@ -4883,7 +4883,8 @@ task('fap:seed_shared_content_packages', function () {
     // IQ files belong to the code release, so activation/LKG switches the key,
     // metadata and images together without overwriting shared content authority.
     run('bash '.deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/iq/freeze_iq_owner30_release.sh')
-        .' '.deployPlaceholderPathArg('{{release_path}}'));
+        .' '.deployPlaceholderPathArg('{{release_path}}')
+        .(deployUsesCareerContentPackage() ? ' --inherited-snapshot' : ''));
 
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skip shared content package copy in authority-mutation-free deploy mode</comment>');
