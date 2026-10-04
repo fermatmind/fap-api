@@ -278,7 +278,7 @@ final class CareerContentV3AuthorityPackage
                 'career_count' => count($sortedSlugs),
                 'stored_identity_count' => count($sortedSlugs),
                 'alias_count' => count($manifest['identity_aliases'] ?? []),
-                'independent_identity_count' => count($sortedSlugs) - count($manifest['identity_aliases'] ?? []),
+                'independent_identity_count' => count($sortedSlugs),
                 'file_count' => count($localePageSet),
                 'locale_page_count' => count($localePageSet),
                 'enhanced_locale_page_count' => $enhanced,
@@ -400,15 +400,12 @@ final class CareerContentV3AuthorityPackage
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIASES_INVALID');
         }
         foreach ($aliases as $alias => $target) {
-            if (! is_string($alias) || ! is_string($target) || $alias === $target
-                || ! isset($entries[$alias], $entries[$target]) || isset($aliases[$target])) {
+            // Fixed Current slugs are independent careers. Only historical URLs outside
+            // the manifest inventory can redirect to one validated Current identity.
+            if (! is_string($alias) || ! is_string($target)
+                || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $alias) !== 1
+                || isset($entries[$alias]) || ! isset($entries[$target]) || isset($aliases[$target])) {
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIASES_INVALID');
-            }
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $page = $this->readObject($root.'/'.$entries[$alias][$locale]['path'], 'CURRENT_CONTENT_V3_JSON_INVALID');
-                if (($page['content_state'] ?? null) !== 'legacy' || ($page['blocks'] ?? null) !== []) {
-                    throw new CareerCurrentAuthorityPackageFailure('CURRENT_IDENTITY_ALIAS_BODY_NOT_EMPTY');
-                }
             }
         }
     }

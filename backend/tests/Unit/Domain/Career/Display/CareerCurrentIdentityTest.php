@@ -25,41 +25,62 @@ final class CareerCurrentIdentityTest extends TestCase
         self::assertSame(hash_file('sha256', base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/manifest.json')), $inventory['manifest_sha256']);
         self::assertSame($identity->aliases(), (array) $inventory['aliases']);
         foreach ((array) $inventory['aliases'] as $alias => $target) {
-            self::assertContains($alias, $inventory['slugs']);
+            self::assertNotContains($alias, $inventory['slugs']);
             self::assertContains($target, $inventory['slugs']);
         }
     }
 
-    public function test_retained_aliases_resolve_names_without_changing_physical_identity(): void
+    public function test_all_fixed_slugs_keep_independent_bilingual_identity(): void
     {
         $identity = app(CareerCurrentIdentity::class);
-        $package = app(CareerContentV3AuthorityPackage::class)->load(base_path());
-        self::assertSame(1046, $package['manifest']['coverage']['slugs']);
-        self::assertSame(2092, $package['manifest']['coverage']['files']);
-        foreach ($identity->aliases() as $alias => $target) {
-            self::assertSame($target, $identity->canonicalSlug($alias));
-            self::assertFalse($identity->isAlias($target));
-            foreach ($identity->searchTerms($target) as $name) {
-                self::assertSame($target, $identity->canonicalQuery($name));
-            }
+        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        $inventory = $identity->inventory();
+        foreach ($inventory['slugs'] as $slug) {
+            self::assertFalse($identity->isAlias($slug), $slug);
+            self::assertSame($slug, $identity->canonicalSlug($slug));
+        }
+        foreach (['preschool-teachers', 'preschool-teachers-except-special-education'] as $slug) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $page = json_decode(file_get_contents(base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/careers/'.$alias.'/'.$locale.'.json')), true);
-                self::assertSame($alias, $page['subject']['canonical_slug']);
-                self::assertSame('legacy', $page['content_state']);
-                self::assertSame([], $page['blocks']);
+                self::assertSame($slug, $reader->page($slug, $locale)['subject']['canonical_slug']);
             }
         }
         self::assertSame('unmatched query', $identity->canonicalQuery('unmatched query'));
     }
 
-    public function test_distinct_fermatmind_careers_keep_their_own_public_identity(): void
+    public function test_historical_url_aliases_outside_the_fixed_inventory_remain_valid(): void
     {
-        $identity = app(CareerCurrentIdentity::class);
-        $reader = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
-        foreach (['insulation-workers', 'insulation-workers-mechanical', 'librarians', 'librarians-and-media-collections-specialists'] as $slug) {
-            self::assertFalse($identity->isAlias($slug));
+        $package = app(CareerContentV3AuthorityPackage::class);
+        $manifest = $package->manifestIndex(base_path())['manifest'];
+        $manifest['identity_aliases'] = ['old-preschool-teacher-url' => 'preschool-teachers'];
+        $package->validateIdentityAliases($manifest, base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH));
+        $reader = $this->createStub(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        $reader->method('authority')->willReturn(['manifest' => $manifest]);
+        $identity = new CareerCurrentIdentity($reader);
+        self::assertSame('preschool-teachers', $identity->canonicalSlug('old-preschool-teacher-url'));
+        self::assertTrue($identity->isAlias('old-preschool-teacher-url'));
+        self::assertFalse($identity->isAlias('preschool-teachers'));
+        self::assertContains('old-preschool-teacher-url', $identity->searchTerms('preschool-teachers'));
+    }
+
+    public function test_shared_official_crosswalk_codes_do_not_merge_fixed_slugs(): void
+    {
+        $package = app(CareerContentV3AuthorityPackage::class);
+        $manifest = $package->manifestIndex(base_path())['manifest'];
+        $definition = [
+            'scope_type' => 'exact_official_occupation',
+            'occupations' => [['code' => '25-2011.00', 'title' => 'Preschool Teachers, Except Special Education']],
+            'source_route_sha256' => hash('sha256', 'shared-official-reference'),
+        ];
+        $manifest['identity_scopes']['preschool-teachers'] = $definition;
+        $manifest['identity_scopes']['preschool-teachers-except-special-education'] = $definition;
+        $package->validateIdentityAliases($manifest, base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH));
+        $reader = $this->createStub(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class);
+        $reader->method('authority')->willReturn(['manifest' => $manifest]);
+        $identity = new CareerCurrentIdentity($reader);
+        foreach (['preschool-teachers', 'preschool-teachers-except-special-education'] as $slug) {
             self::assertSame($slug, $identity->canonicalSlug($slug));
-            self::assertSame($slug, $reader->page($slug, 'zh-CN')['subject']['canonical_slug']);
+            self::assertFalse($identity->isAlias($slug));
+            self::assertSame($definition, $identity->definition($slug));
         }
     }
 
@@ -147,7 +168,6 @@ final class CareerCurrentIdentityTest extends TestCase
             [$slug => array_replace($valid, ['occupations' => [$valid['occupations'][0], $valid['occupations'][0]]])],
             [$slug => array_replace($valid, ['source_route_sha256' => 'invalid'])],
             ['missing-target' => $valid],
-            ['preschool-teachers' => $valid],
         ] as $scopes) {
             try {
                 $package->validateIdentityScopes(array_replace($manifest, ['identity_scopes' => $scopes]));
@@ -176,12 +196,15 @@ final class CareerCurrentIdentityTest extends TestCase
                 ['librarians-and-media-collections-specialists' => 'preschool-teachers', 'preschool-teachers' => 'librarians'],
                 ['librarians-and-media-collections-specialists' => 'preschool-teachers', 'preschool-teachers' => 'librarians-and-media-collections-specialists'],
                 ['actors' => 'librarians'],
+                ['preschool-teachers' => 'preschool-teachers-except-special-education'],
+                ['old-url' => 'missing-target'],
+                ['old-url' => 'older-url', 'older-url' => 'librarians'],
             ] as $aliases) {
                 try {
                     $updater->update($root, 'librarians-and-media-collections-specialists', 'zh-CN', true, $aliases);
                     self::fail('Invalid identity must fail closed');
                 } catch (CareerCurrentAuthorityPackageFailure $failure) {
-                    self::assertContains($failure->getMessage(), ['CURRENT_IDENTITY_ALIASES_INVALID', 'CURRENT_IDENTITY_ALIAS_BODY_NOT_EMPTY']);
+                    self::assertContains($failure->getMessage(), ['CURRENT_IDENTITY_ALIASES_INVALID']);
                 }
                 self::assertSame($before, array_map('file_get_contents', $paths));
             }

@@ -15,9 +15,9 @@
   },
   "identity_aliases": {
     "authority": "manifest.json#identity_aliases",
-    "storage_identity": "Retain original slug, directory and two empty legacy files",
-    "public_identity": "Resolve to one existing non-alias target; exclude aliases from public inventories",
-    "compatibility": "Missing mapping means no aliases; physical counts remain 1046 and 2092"
+    "storage_identity": "Each fixed canonical slug and its validated JSON files define one independent career; locales are language versions",
+    "public_identity": "All 1046 fixed slugs remain independent; O*NET/SOC are shareable fact-source and crosswalk references only",
+    "compatibility": "Aliases may only be historical URLs outside the fixed slug inventory targeting one Current slug; counts remain 1046 careers and 2092 language pages"
   },
   "fail_closed": [
     "invalid_root_manifest", "missing_or_undeclared_file", "duplicate_slug_locale",

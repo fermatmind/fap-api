@@ -6,6 +6,8 @@ description: Use for fap-api career release authority changes involving career g
 ## Purpose
 Keep fap-api as the authority for career content, release state, and public career API contracts.
 
+- Fixed Current canonical slugs and their validated JSON files define 1046 independent careers; en/zh-CN are language versions. Shared O*NET/SOC references must not merge identities or block publication. Only historical URLs outside the fixed manifest inventory may be identity aliases.
+
 ## When to use
 - Use for career guide, career job, recommendation, personality profile, topic, SEO, FAQ, section, and publication-state behavior.
 - Use when Big Five, MBTI, Enneagram, or RIASEC content is proposed as an input to a Career surface.

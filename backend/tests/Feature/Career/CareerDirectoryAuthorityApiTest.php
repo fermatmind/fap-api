@@ -32,21 +32,47 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         Cache::flush();
     }
 
-    public function test_current_aliases_resolve_detail_and_search_but_are_not_directory_members(): void
+    public function test_preschool_slugs_keep_independent_detail_and_directory_with_shared_onet_code(): void
     {
-        $target = 'preschool-teachers-except-special-education';
-        $alias = 'preschool-teachers';
-        $this->createDirectoryOccupation($target, 'Preschool Teachers, Except Special Education', '学前教师', 'education', 'Education');
-        $this->createDirectoryOccupation($alias, 'Preschool Teachers', '学前教师', 'education', 'Education');
-        $this->publishRuntimeProjection([$target, $alias]);
+        $slugs = ['preschool-teachers', 'preschool-teachers-except-special-education'];
+        foreach ($slugs as $slug) {
+            $occupation = $this->createDirectoryOccupation($slug, $slug, '学前教师', 'education', 'Education');
+            OccupationCrosswalk::query()->where('occupation_id', $occupation->id)
+                ->where('source_system', 'onet_soc_2019')->update(['source_code' => '25-2011.00']);
+            OccupationCrosswalk::query()->where('occupation_id', $occupation->id)
+                ->where('source_system', 'us_soc')->update(['source_code' => '25-2011']);
+        }
+        $this->publishRuntimeProjection($slugs);
         $this->warmDirectoryAuthority();
         foreach (['en', 'zh-CN'] as $locale) {
-            $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale='.$locale)
-                ->assertOk()->assertJsonPath('identity.canonical_slug', $target);
-            $this->getJson('/api/v0.5/career/directory?locale='.$locale)
-                ->assertOk()->assertJsonPath('pagination.total', 1)
-                ->assertJsonPath('items.0.slug', $target);
+            foreach ($slugs as $slug) {
+                $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale='.$locale)
+                    ->assertOk()->assertJsonPath('identity.canonical_slug', $slug)
+                    ->assertJsonPath('career_page.subject.canonical_slug', $slug);
+            }
+            $items = $this->getJson('/api/v0.5/career/directory?locale='.$locale)
+                ->assertOk()->assertJsonPath('pagination.total', 2)->json('items');
+            self::assertEqualsCanonicalizing($slugs, array_column($items, 'slug'));
+            $this->getJson('/api/v0.5/career/directory?locale='.$locale.'&q=preschool')
+                ->assertOk()->assertJsonPath('pagination.total', 2);
         }
+    }
+
+    public function test_historical_url_outside_fixed_inventory_still_resolves_detail(): void
+    {
+        $target = 'preschool-teachers';
+        $this->createDirectoryOccupation($target, 'Preschool Teachers', '学前教师', 'education', 'Education');
+        $this->publishRuntimeProjection([$target]);
+        $reader = $this->getMockBuilder(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)
+            ->setConstructorArgs([app(\App\Domain\Career\Display\CareerContentV3AuthorityPackage::class)])
+            ->onlyMethods(['authority'])->getMock();
+        $authority = app(\App\Domain\Career\Display\CareerContentV3CanonicalReader::class)->authority();
+        $authority['manifest']['identity_aliases'] = ['old-preschool-teacher-url' => $target];
+        $reader->expects(self::atLeastOnce())->method('authority')->willReturn($authority);
+        app()->instance(\App\Domain\Career\Display\CareerCurrentIdentity::class,
+            new \App\Domain\Career\Display\CareerCurrentIdentity($reader));
+        $this->getJson('/api/v0.5/career/jobs/old-preschool-teacher-url?locale=zh-CN')
+            ->assertOk()->assertJsonPath('identity.canonical_slug', $target);
     }
 
     public function test_fermatmind_career_slugs_keep_distinct_detail_and_directory_identity(): void
@@ -72,12 +98,15 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         self::assertEqualsCanonicalizing(array_keys($careers), array_column($items, 'slug'));
     }
 
-    public function test_alias_never_serves_its_placeholder_when_target_is_not_published(): void
+    public function test_preschool_detail_does_not_depend_on_other_slug_publication(): void
     {
-        $alias = 'preschool-teachers';
-        $this->createDirectoryOccupation($alias, 'Old librarian', '旧图书馆员', 'education', 'Education');
-        $this->publishRuntimeProjection([$alias]);
-        $this->getJson('/api/v0.5/career/jobs/'.$alias.'?locale=zh-CN')->assertNotFound();
+        $slug = 'preschool-teachers';
+        $this->createDirectoryOccupation($slug, 'Preschool Teachers', '学前教师', 'education', 'Education');
+        $this->publishRuntimeProjection([$slug]);
+        $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+            ->assertOk()->assertJsonPath('identity.canonical_slug', $slug);
+        $this->getJson('/api/v0.5/career/jobs/preschool-teachers-except-special-education?locale=zh-CN')
+            ->assertNotFound();
     }
 
     public function test_current_combination_names_reach_detail_directory_and_name_search(): void
