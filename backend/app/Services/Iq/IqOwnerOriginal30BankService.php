@@ -170,7 +170,7 @@ final class IqOwnerOriginal30BankService
             'engine_version' => 'owner_original_30_runtime_scoring_v1',
             'scoring_engine_version' => 'iq_scoring_v2',
             'scoring_mode' => 'scored',
-            'answer_key_version' => 'owner_original_30_answer_key_2026_06_23',
+            'answer_key_version' => (string) ($answerKeyDoc['answer_key_version'] ?? 'owner_original_30_answer_key_2026_06_23'),
             'norm_table_version' => 'unavailable',
             'item_bank' => [
                 'bank_id' => self::BANK_ID,
