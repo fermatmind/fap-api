@@ -61,6 +61,66 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertSame($reader->publicAuthorityRevision($article->fresh()), $record->attributes['authority_revision']);
     }
 
+    public function test_public_taxonomy_model_and_pivot_clocks_do_not_change_truth_revision(): void
+    {
+        $category = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'public-category', 'name' => 'Public category']);
+        $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'public-tag', 'name' => 'Public tag']);
+        $article = $this->createArticle(['category_id' => $category->id, 'sitemap_eligible' => true, 'llms_eligible' => true]);
+        $article->tags()->attach($tag->id, ['org_id' => 0]);
+        $reader = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class);
+        $before = $reader->publicAuthorityRevision($article->fresh());
+        $category->forceFill(['updated_at' => now()->addDay()])->saveQuietly();
+        $tag->forceFill(['updated_at' => now()->addDays(2)])->saveQuietly();
+        $article->tags()->updateExistingPivot($tag->id, ['updated_at' => now()->addDays(3)]);
+        $this->assertSame($before, $reader->publicAuthorityRevision($article->fresh()));
+        $category->forceFill(['name' => 'Changed public category'])->save();
+        $changed = $reader->publicAuthorityRevision($article->fresh());
+        $this->assertNotSame($before, $changed);
+        $tag->forceFill(['name' => 'Changed public tag'])->save();
+        $this->assertNotSame($changed, $reader->publicAuthorityRevision($article->fresh()));
+    }
+
+    public function test_taxonomy_events_wait_for_commit_and_only_target_qualified_global_articles(): void
+    {
+        $category = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'event-category', 'name' => 'Category']);
+        $tag = ArticleTag::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'event-tag', 'name' => 'Tag']);
+        $article = $this->createArticle(['category_id' => $category->id, 'sitemap_eligible' => true, 'llms_eligible' => true]);
+        $article->tags()->attach($tag->id, ['org_id' => 0]);
+        $this->createArticle(['org_id' => 7, 'slug' => 'tenant-article', 'category_id' => $category->id,
+            'sitemap_eligible' => true, 'llms_eligible' => true]);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
+        $reader = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class);
+        foreach ([$category, $tag] as $taxonomy) {
+            \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+            $before = $reader->publicAuthorityRevision($article->fresh());
+            $taxonomy->forceFill(['updated_at' => now()->addDay()])->save();
+            \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+            DB::beginTransaction();
+            DB::transaction(fn () => $taxonomy->forceFill(['name' => 'Rolled back taxonomy'])->save());
+            \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+            DB::rollBack();
+            $this->assertSame($before, $reader->publicAuthorityRevision($article->fresh()));
+            DB::beginTransaction();
+            DB::transaction(fn () => $taxonomy->refresh()->forceFill(['name' => 'Committed taxonomy'])->save());
+            \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+            DB::commit();
+            \Illuminate\Support\Facades\Bus::assertDispatchedTimes(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class, 1);
+            \Illuminate\Support\Facades\Bus::assertDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class,
+                fn ($job) => $job->scopedWrite && $job->entityIdentity === (string) $article->id);
+            $this->assertNotSame($before, $reader->publicAuthorityRevision($article->fresh()));
+            \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+            DB::beginTransaction();
+            $taxonomy->delete();
+            \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+            DB::commit();
+            \Illuminate\Support\Facades\Bus::assertDispatchedTimes(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class, 1);
+        }
+        \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+        $private = ArticleCategory::withoutGlobalScopes()->create(['org_id' => 7, 'slug' => 'private-category', 'name' => 'Private']);
+        $private->forceFill(['name' => 'Private change'])->save();
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+    }
+
     public function test_public_seo_event_waits_for_outer_commit_and_rollback_keeps_projection(): void
     {
         $article = $this->createArticle();

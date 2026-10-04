@@ -151,7 +151,10 @@ class ArticleController extends Controller
 
         return CanonicalTranslationPayloadHash::hash([
             'schema_version' => 'article.public_authority_revision.v1',
-            'projection' => $normalize($this->publicDetailProjection($article)),
+            'projection' => $normalize(json_decode(
+                json_encode($this->publicDetailProjection($article), JSON_THROW_ON_ERROR),
+                true, 512, JSON_THROW_ON_ERROR,
+            )),
         ]);
     }
 

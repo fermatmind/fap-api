@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\EmitsArticleTaxonomyAuthorityChanges;
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ArticleCategory extends Model
 {
-    use HasFactory, HasOrgScope;
+    use EmitsArticleTaxonomyAuthorityChanges, HasFactory, HasOrgScope;
 
     protected $table = 'article_categories';
 
