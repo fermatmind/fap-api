@@ -138,7 +138,8 @@ $app = Application::configure(basePath: dirname(__DIR__))
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250')
-            ->dailyAt('02:40')
+            ->timezone('Asia/Shanghai')
+            ->dailyAt('06:10')
             ->withoutOverlapping()
             ->onOneServer();
         $schedule->command('career:warm-public-authority-cache --verify-only --json')->everyTenMinutes()->withoutOverlapping();

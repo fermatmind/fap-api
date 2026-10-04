@@ -107,6 +107,12 @@ final class ArticleService
 
             $orgId = (int) $article->org_id;
             $this->assertWritableInCurrentOrgContext($orgId);
+            $wasPublic = $orgId === 0 && Article::withoutGlobalScopes()->whereKey($article->id)->publiclyReadable()->exists();
+            $publicBefore = $wasPublic
+                ? app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class)->publicAuthorityRevision($article)
+                : null;
+            $previousLocale = (string) $article->locale;
+
             $nextLocale = array_key_exists('locale', $fields)
                 ? $this->normalizeLocale((string) $fields['locale'])
                 : (string) $article->locale;
@@ -193,6 +199,23 @@ final class ArticleService
 
             $nextRevisionNo = $this->nextRevisionNo((int) $article->id, $orgId);
             $this->createRevision($article, $nextRevisionNo, 'update');
+            if ($wasPublic) {
+                $fresh = $article->fresh();
+                $isPublic = Article::withoutGlobalScopes()->whereKey($article->id)->publiclyReadable()->exists();
+                $publicAfter = $isPublic
+                    ? app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class)->publicAuthorityRevision($fresh)
+                    : null;
+                if ($publicBefore !== $publicAfter) {
+                    if (! $isPublic || $previousLocale !== (string) $fresh->locale) {
+                        event(new \App\Events\PublicAuthorityChanged('article', (string) $article->id,
+                            $previousLocale, (string) $publicBefore, 'unpublish'));
+                    }
+                    if ($isPublic) {
+                        event(new \App\Events\PublicAuthorityChanged('article', (string) $article->id,
+                            (string) $fresh->locale, (string) $publicAfter, 'authority_revision'));
+                    }
+                }
+            }
 
             return $article->fresh() ?? $article;
         });

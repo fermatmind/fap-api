@@ -27,40 +27,37 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
         CurrentPublicUrlAuthoritySource $source,
         ControlledUrlTruthReconciliationService $service,
     ): int {
-        $originalWrite = config('seo_intel.write_enabled', false);
-        $originalConnection = config('seo_intel.connection', 'seo_intel');
         $expected = trim((string) $this->option('expected-plan-hash'));
         // Keep the existing natural command and its scheduling mutex identity.
         $maintenance = $this->option('maintenance')
             || ($this->option('execute') && $this->option('no-http') && $expected === '');
         try {
-            if ($this->option('scoped-write') || $maintenance) {
-                if (PHP_SAPI !== 'cli' || ! app()->runningInConsole() || ! config('seo_intel.enabled', false)) {
-                    throw new \RuntimeException('SCOPED_URL_TRUTH_CLI_REQUIRED');
+            $operation = function () use ($source, $service, $maintenance, $expected): array {
+                $records = $source->candidates();
+                $metadata = $source->metadata();
+                if ($maintenance) {
+                    if (! $this->option('execute') || $expected !== '') {
+                        throw new \RuntimeException('URL_TRUTH_MAINTENANCE_MODE_INVALID');
+                    }
+                    $plan = $service->run($records, $metadata, false, false,
+                        (int) $this->option('max-records'), (int) $this->option('batch-size'));
+                    $expected = (string) data_get($plan, 'plan.plan_hash', '');
                 }
-                config(['seo_intel.write_enabled' => true]);
-                config(['seo_intel.connection' => $this->scopedWriteConnection()]);
-            }
-            $records = $source->candidates();
-            $metadata = $source->metadata();
-            if ($maintenance) {
-                if (! $this->option('execute') || $expected !== '') {
-                    throw new \RuntimeException('URL_TRUTH_MAINTENANCE_MODE_INVALID');
-                }
-                $plan = $service->run($records, $metadata, false, false,
-                    (int) $this->option('max-records'), (int) $this->option('batch-size'));
-                $expected = (string) data_get($plan, 'plan.plan_hash', '');
-            }
-            $receipt = $service->run(
-                $records,
-                $metadata,
-                (bool) $this->option('execute'),
-                ! (bool) $this->option('no-http'),
-                (int) $this->option('max-records'),
-                (int) $this->option('batch-size'),
-                $expected === '' ? null : $expected,
-                fn (): array => [$source->candidates(), $source->metadata()],
-            );
+
+                return $service->run(
+                    $records,
+                    $metadata,
+                    (bool) $this->option('execute'),
+                    ! (bool) $this->option('no-http'),
+                    (int) $this->option('max-records'),
+                    (int) $this->option('batch-size'),
+                    $expected === '' ? null : $expected,
+                    fn (): array => [$source->candidates(), $source->metadata()],
+                );
+            };
+            $receipt = ($this->option('scoped-write') || $maintenance)
+                ? app(\App\Services\SeoIntel\UrlTruth\ScopedUrlTruthWriter::class)->run($operation)
+                : $operation();
         } catch (Throwable $exception) {
             $receipt = [
                 'schema_version' => ControlledUrlTruthReconciliationService::SCHEMA_VERSION,
@@ -70,9 +67,7 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
                 'failure' => $this->failureDetails($exception),
                 'boundaries' => ['search_submission_allowed' => false, 'raw_error_output' => false],
             ];
-        } finally {
-            config(['seo_intel.write_enabled' => $originalWrite]);
-            config(['seo_intel.connection' => $originalConnection]);
+
         }
 
         if ((bool) $this->option('json')) {
@@ -85,26 +80,6 @@ final class SeoPlatformControlledUrlTruthReconcileCommand extends Command
         }
 
         return ($receipt['status'] ?? null) === 'success' ? self::SUCCESS : self::FAILURE;
-    }
-
-    private function scopedWriteConnection(): string
-    {
-        $reader = (string) config('seo_intel.connection', 'seo_intel');
-        $writer = (string) config('seo_council.connection', $reader);
-        $read = config('database.connections.'.$reader);
-        $write = config('database.connections.'.$writer);
-        if (! is_array($read) || ! is_array($write)) {
-            throw new \RuntimeException('URL_TRUTH_WRITER_UNAVAILABLE');
-        }
-        // The deployed Council writer is already authorized for these derived
-        // tables. Never broaden the web reader's grants or cross a database.
-        foreach (['driver', 'host', 'port', 'unix_socket', 'database', 'prefix', 'charset', 'collation', 'url', 'read', 'write'] as $key) {
-            if (($read[$key] ?? null) !== ($write[$key] ?? null)) {
-                throw new \RuntimeException('URL_TRUTH_WRITER_DATABASE_MISMATCH');
-            }
-        }
-
-        return $writer;
     }
 
     private function failureDetails(Throwable $exception): array

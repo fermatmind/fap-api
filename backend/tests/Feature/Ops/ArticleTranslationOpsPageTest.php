@@ -26,6 +26,7 @@ use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -888,7 +889,15 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $draft = $workflow->createMachineDraft($source, 'en', (int) $admin->id)['article'];
         $workflow->promoteToHumanReview($draft);
         $workflow->approveTranslation($draft);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
+        \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+        DB::beginTransaction();
         $publishedRevision = $workflow->publishTranslation($draft);
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+        DB::commit();
+        \Illuminate\Support\Facades\Bus::assertDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class,
+            fn ($job) => $job->pageEntityType === 'article' && $job->entityIdentity === (string) $draft->id && $job->scopedWrite);
+
         $translation = $draft->fresh(['workingRevision', 'publishedRevision']);
 
         $this->assertSame('published', (string) $translation->status);
@@ -1010,6 +1019,8 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $historyCount = ArticleTranslationRevision::query()->count();
 
         $draft->fresh()->workingRevision->forceFill(['content_md' => "# Unreviewed body heading\n\nBody"])->save();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
+        \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
         $targetBefore = $draft->fresh()->getAttributes();
         $revisionBefore = $draft->fresh()->workingRevision->getAttributes();
         $auditCount = AuditLog::query()->count();
@@ -1021,6 +1032,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             $this->assertNotEmpty($exception->getMessage());
         }
 
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
         $this->assertSame($targetBefore, $draft->fresh()->getAttributes());
         $this->assertSame($revisionBefore, $draft->fresh()->workingRevision->getAttributes());
         $this->assertSame($historyCount, ArticleTranslationRevision::query()->count());

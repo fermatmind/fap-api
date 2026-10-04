@@ -55,6 +55,22 @@ class ArticleSeoMeta extends Model
             $seoMeta->org_id = (int) $article->org_id;
             $seoMeta->locale = (string) $article->locale;
         });
+        static::saved(static function (self $seoMeta): void {
+            if (array_diff(array_keys($seoMeta->getDirty()), ['created_at', 'updated_at']) === []) {
+                return;
+            }
+            $article = Article::withoutGlobalScopes()->where('org_id', 0)
+                ->where('id', $seoMeta->article_id)->publiclyReadable()->first();
+            if (! $article instanceof Article) {
+                return;
+            }
+            event(new \App\Events\PublicAuthorityChanged(
+                'article', (string) $article->id, (string) $article->locale,
+                \App\Support\CanonicalTranslationPayloadHash::hash($seoMeta->getAttributes()),
+                'authority_revision',
+            ));
+        });
+
     }
 
     public function article(): BelongsTo

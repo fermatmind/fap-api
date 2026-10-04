@@ -400,12 +400,11 @@ final class SeoPlatform05ControlledUrlTruthReconciliationTest extends TestCase
         $this->prepareSchema();
         $reader = config('database.connections.seo_intel');
         config(['seo_council.connection' => 'seo_council', 'database.connections.seo_council' => $reader]);
-        $command = app(\App\Console\Commands\SeoPlatformControlledUrlTruthReconcileCommand::class);
-        $select = new \ReflectionMethod($command, 'scopedWriteConnection');
-        $this->assertSame('seo_council', $select->invoke($command));
+        $scope = app(\App\Services\SeoIntel\UrlTruth\ScopedUrlTruthWriter::class);
+        $this->assertSame('seo_council', $scope->connectionName());
         config(['database.connections.seo_council.database' => 'another_database']);
         $this->expectExceptionMessage('URL_TRUTH_WRITER_DATABASE_MISMATCH');
-        $select->invoke($command);
+        $scope->connectionName();
     }
 
     public function test_scoped_connection_is_restored_when_authority_read_fails(): void

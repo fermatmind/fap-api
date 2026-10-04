@@ -22,6 +22,84 @@ final class ArticlePublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_truth_revision_uses_public_projection_and_ignores_working_copy_and_clocks(): void
+    {
+        $article = $this->createArticle(['sitemap_eligible' => true, 'llms_eligible' => true]);
+        $seo = $this->createSeoMeta($article, ['schema_json' => ['editorial_package_v1' => [
+            'answer_surface_policy' => 'editor_supplied', 'answer_surface_visibility' => 'visible',
+            'answer_surface_v1' => ['faq_items' => [['question' => 'Question?', 'answer' => 'Original answer.']]],
+        ]]]);
+        $reader = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class);
+        $original = $reader->publicAuthorityRevision($article->fresh());
+        $projection = $reader->publicDetailProjection($article->fresh());
+        $this->getJson('/api/v0.5/articles/article-slug?locale=en')->assertExactJson($projection);
+        $working = $this->createRevision($article, [
+            'revision_number' => 2, 'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
+            'title' => 'Private draft', 'content_md' => 'Private working body',
+        ]);
+        $article->forceFill(['working_revision_id' => $working->id, 'title' => 'Private title',
+            'content_md' => 'Private article projection', 'updated_at' => now()->addDay()])->saveQuietly();
+        $working->forceFill(['content_md' => 'Changed private draft', 'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW])->save();
+        $this->assertSame($original, $reader->publicAuthorityRevision($article->fresh()));
+        $seo->forceFill(['updated_at' => now()->addDays(2)])->saveQuietly();
+        $this->assertSame($original, $reader->publicAuthorityRevision($article->fresh()));
+        $schema = $seo->schema_json;
+        $schema['editorial_package_v1']['answer_surface_v1']['faq_items'][0]['answer'] = 'Changed public answer.';
+        $seo->forceFill(['schema_json' => $schema])->save();
+        $faqRevision = $reader->publicAuthorityRevision($article->fresh());
+        $this->assertNotSame($original, $faqRevision);
+        $seo->forceFill(['og_description' => 'Changed public SEO'])->save();
+        $this->assertNotSame($faqRevision, $reader->publicAuthorityRevision($article->fresh()));
+        $beforePublish = $reader->publicAuthorityRevision($article->fresh());
+        $working->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'content_md' => 'New published body'])->save();
+        $article->forceFill(['published_revision_id' => $working->id])->saveQuietly();
+        $this->assertNotSame($beforePublish, $reader->publicAuthorityRevision($article->fresh()));
+        $candidates = app(\App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource::class)->candidates();
+        $record = collect($candidates)->first(fn ($record) => $record->pageEntityType === 'article' && $record->entityIdOrSlug === (string) $article->id);
+        $this->assertNotNull($record);
+        $this->assertSame($reader->publicAuthorityRevision($article->fresh()), $record->attributes['authority_revision']);
+    }
+
+    public function test_public_seo_event_waits_for_outer_commit_and_rollback_keeps_projection(): void
+    {
+        $article = $this->createArticle();
+        $seo = $this->createSeoMeta($article);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
+        \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+        $reader = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class);
+        $before = $reader->publicAuthorityRevision($article->fresh());
+        DB::beginTransaction();
+        DB::transaction(fn () => $seo->forceFill(['og_description' => 'Rolled back SEO'])->save());
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+        DB::rollBack();
+        $this->assertSame($before, $reader->publicAuthorityRevision($article->fresh()));
+        DB::beginTransaction();
+        DB::transaction(fn () => $seo->refresh()->forceFill(['og_description' => 'Committed SEO'])->save());
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+        DB::commit();
+        \Illuminate\Support\Facades\Bus::assertDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class,
+            fn ($job) => $job->scopedWrite && $job->entityIdentity === (string) $article->id);
+        $this->assertNotSame($before, $reader->publicAuthorityRevision($article->fresh()));
+    }
+
+    public function test_article_updates_emit_only_when_the_public_projection_changes(): void
+    {
+        $article = $this->createArticle(['content_md' => 'Public body without H1']);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false]);
+        \Illuminate\Support\Facades\Bus::fake([\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class]);
+        $service = app(\App\Services\Cms\ArticleService::class);
+        $reader = app(\App\Http\Controllers\API\V0_5\Cms\ArticleController::class);
+        $before = $reader->publicAuthorityRevision($article->fresh());
+        $service->updateArticle((int) $article->id, ['title' => 'Private working title', 'content_md' => 'Private working body']);
+        $this->assertSame($before, $reader->publicAuthorityRevision($article->fresh()));
+        \Illuminate\Support\Facades\Bus::assertNotDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class);
+        $service->updateArticle((int) $article->id, ['cover_image_alt' => 'New public cover description']);
+        $this->assertNotSame($before, $reader->publicAuthorityRevision($article->fresh()));
+        \Illuminate\Support\Facades\Bus::assertDispatched(\App\Jobs\SeoIntel\SyncPublicAuthorityUrlTruth::class,
+            fn ($job) => $job->scopedWrite && $job->entityIdentity === (string) $article->id);
+    }
+
     public function test_public_review_contract_redacts_private_article_reviewer_identity(): void
     {
         $this->createArticle([

@@ -52,6 +52,22 @@ final class SeoPlatform05IncrementalUrlTruthContractTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_global_write_stays_closed_while_bounded_events_enqueue_scoped_jobs(): void
+    {
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_intel.incremental_sync_inline' => false]);
+        Queue::fake();
+        $listener = new QueueUrlTruthIncrementalSync;
+        $listener->handle($this->event('revision-a'));
+        $listener->handle(new PublicAuthorityChanged('personality_profile', '42', 'en', 'revision-a', 'publish'));
+        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, fn ($job) => $job->scopedWrite);
+        Queue::assertPushed(SyncPublicAuthorityUrlTruth::class, 1);
+        self::assertFalse(config('seo_intel.write_enabled'));
+        config(['seo_intel.incremental_sync_inline' => true]);
+        $this->expectExceptionMessage('SCOPED_URL_TRUTH_INLINE_FORBIDDEN');
+        $listener->handle($this->event('revision-b'));
+    }
+
     public function test_real_cms_publication_and_scheduler_are_wired_to_the_incremental_and_bounded_paths(): void
     {
         $root = dirname(__DIR__, 3);

@@ -23,13 +23,18 @@ final class SyncPublicAuthorityUrlTruth implements ShouldBeUnique, ShouldQueue
 
     public int $uniqueFor = 86400;
 
+    public bool $scopedWrite = false;
+
     public function __construct(
         public readonly string $pageEntityType,
         public readonly string $entityIdentity,
         public readonly string $locale,
         public readonly string $revision,
         public readonly string $change,
-    ) {}
+        bool $scopedWrite = false,
+    ) {
+        $this->scopedWrite = $scopedWrite;
+    }
 
     public function uniqueId(): string
     {
@@ -43,12 +48,18 @@ final class SyncPublicAuthorityUrlTruth implements ShouldBeUnique, ShouldQueue
 
     public function handle(IncrementalUrlTruthSyncService $service): void
     {
-        $service->sync(
+        $operation = fn () => $service->sync(
             $this->pageEntityType,
             $this->entityIdentity,
             $this->locale,
             $this->revision,
             $this->change,
+            $this->scopedWrite,
         );
+        if ($this->scopedWrite) {
+            app(\App\Services\SeoIntel\UrlTruth\ScopedUrlTruthWriter::class)->run($operation);
+        } else {
+            $operation();
+        }
     }
 }

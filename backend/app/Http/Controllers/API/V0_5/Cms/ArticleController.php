@@ -22,6 +22,7 @@ use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use App\Support\CanonicalFrontendUrl;
+use App\Support\CanonicalTranslationPayloadHash;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -105,18 +106,52 @@ class ArticleController extends Controller
             ], 404);
         }
 
+        return response()->json($this->publicDetailProjection($article));
+    }
+
+    /** The reader and derived Truth consume the same public projection. */
+    public function publicDetailProjection(Article $article): array
+    {
+        $article->loadMissing($this->articleRelations());
+        $revision = $this->publicRevision($article);
+        if (! $revision instanceof ArticleTranslationRevision || ! $revision->isPubliclyReadableForArticle($article)) {
+            throw new RuntimeException('published revision not found.');
+        }
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
             $this->articleSeoService->buildSeoPayload($article, $revision)
         );
         $jsonLd = $this->articleSeoService->generateJsonLd($article, $revision);
         $payload = $this->publicArticlePayload($article, $revision);
 
-        return response()->json([
+        return [
             'ok' => true,
             'article' => $payload,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'article_public_detail'),
-            'landing_surface_v1' => $this->buildDetailLandingSurface($article, $payload, $locale),
-            'answer_surface_v1' => $this->buildDetailAnswerSurface($article, $payload, $locale),
+            'landing_surface_v1' => $this->buildDetailLandingSurface($article, $payload, (string) $article->locale),
+            'answer_surface_v1' => $this->buildDetailAnswerSurface($article, $payload, (string) $article->locale),
+        ];
+    }
+
+    public function publicAuthorityRevision(Article $article): string
+    {
+        // Publication/lastmod clocks and review workflow are not content revisions.
+        $normalize = function (array $payload) use (&$normalize): array {
+            foreach (['created_at', 'updated_at', 'published_at', 'scheduled_at', 'last_reviewed_at',
+                'review_state', 'reviewer', 'datePublished', 'dateModified', 'metadata_fingerprint'] as $key) {
+                unset($payload[$key]);
+            }
+            foreach ($payload as $key => $value) {
+                if (is_array($value)) {
+                    $payload[$key] = $normalize($value);
+                }
+            }
+
+            return $payload;
+        };
+
+        return CanonicalTranslationPayloadHash::hash([
+            'schema_version' => 'article.public_authority_revision.v1',
+            'projection' => $normalize($this->publicDetailProjection($article)),
         ]);
     }
 

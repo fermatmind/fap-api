@@ -12,16 +12,24 @@ final class QueueUrlTruthIncrementalSync
 {
     public function handle(PublicAuthorityChanged $event): void
     {
-        if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {
+        if (! (bool) config('seo_intel.enabled', false)) {
             return;
         }
 
+        $scoped = ! (bool) config('seo_intel.write_enabled', false);
+        if ($scoped && ! in_array($event->pageEntityType, ['article', 'career_guide', 'career_job'], true)) {
+            return;
+        }
+        if ($scoped && (bool) config('seo_intel.incremental_sync_inline', false)) {
+            throw new \RuntimeException('SCOPED_URL_TRUTH_INLINE_FORBIDDEN');
+        }
         $arguments = [
             $event->pageEntityType,
             $event->entityIdentity,
             $event->locale,
             $event->revision,
             $event->change,
+            $scoped,
         ];
 
         $job = new SyncPublicAuthorityUrlTruth(...$arguments);

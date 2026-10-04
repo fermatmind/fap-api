@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Sources;
 
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\CareerGuide;
@@ -138,7 +139,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         try {
             $articles = Article::query()
                 ->withoutGlobalScope(TenantScope::class)
-                ->with('seoMeta')
+                ->with(['seoMeta', 'publishedRevision'])
                 ->where('org_id', 0)
                 ->publiclySitemapEligible()
                 ->where('llms_eligible', true)
@@ -198,6 +199,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ],
                 attributes: [
                     'source_authority' => 'backend_cms',
+                    'authority_revision' => app(ArticleController::class)->publicAuthorityRevision($article),
                     'claim_safe' => true,
                     'article_id_hash' => hash('sha256', (string) $article->id),
                     'translation_group_hash' => hash('sha256', (string) $article->translation_group_id),

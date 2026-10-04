@@ -14,6 +14,7 @@ use App\Services\SeoIntel\UrlTruth\IncrementalUrlTruthSyncService;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use App\Services\SeoIntel\UrlTruthInventoryRecordWriter;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,8 @@ use Tests\TestCase;
 
 final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function tearDown(): void
     {
         DB::purge('seo_intel');
@@ -146,7 +149,7 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertSame('safe-guide', $connection->table('career_guides')->value('slug'));
     }
 
-    public function test_guide_draft_tenant_and_disabled_write_events_do_not_dispatch_jobs(): void
+    public function test_guide_draft_and_tenant_do_not_dispatch_but_global_write_closed_uses_scoped_job(): void
     {
         $this->prepareSchema();
         $this->prepareGuideSchema();
@@ -156,9 +159,10 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         $this->createGuide(['is_public' => false]);
         $this->createGuide(['is_indexable' => false]);
         $this->createGuide(['org_id' => 7]);
+        Bus::assertNotDispatched(SyncPublicAuthorityUrlTruth::class);
         config(['seo_intel.write_enabled' => false]);
         $this->createGuide();
-        Bus::assertNotDispatched(SyncPublicAuthorityUrlTruth::class);
+        Bus::assertDispatched(SyncPublicAuthorityUrlTruth::class, fn ($job) => $job->scopedWrite);
     }
 
     public function test_guide_changed_locale_and_unpublication_keep_the_old_identity_syncable(): void
@@ -351,6 +355,166 @@ final class SeoPlatform05IncrementalUrlTruthSyncTest extends TestCase
         self::assertNotNull($failure);
         self::assertStringContainsString('canonical binding conflict', $failure->getMessage());
         self::assertSame($before, $connection->table('seo_url_entities')->orderBy('id')->get()->toJson());
+    }
+
+    public function test_scoped_article_sync_uses_published_body_and_metadata_with_global_write_closed(): void
+    {
+        $this->prepareSchema();
+        Bus::fake([SyncPublicAuthorityUrlTruth::class]);
+        $article = \App\Models\Article::create([
+            'org_id' => 0, 'slug' => 'scoped-public-article', 'locale' => 'en',
+            'title' => 'Public title', 'content_md' => 'Published body', 'status' => 'published',
+            'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true,
+        ]);
+        $revision = \App\Models\ArticleTranslationRevision::create([
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+            'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => 'en',
+            'revision_number' => 1, 'revision_status' => 'published', 'title' => 'Public title',
+            'content_md' => 'Published body',
+        ]);
+        $article->forceFill(['published_revision_id' => $revision->id])->saveQuietly();
+        $seo = \App\Models\ArticleSeoMeta::create([
+            'org_id' => 0, 'article_id' => $article->id, 'locale' => 'en',
+            'canonical_url' => 'https://fermatmind.com/en/articles/scoped-public-article',
+            'robots' => 'index,follow', 'is_indexable' => true,
+        ]);
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_council.connection' => 'seo_intel', 'seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        $source = new \App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        $job = new SyncPublicAuthorityUrlTruth('article', (string) $article->id, 'en', 'old-delayed-event', 'publish', true);
+        $job->handle($service);
+        $first = DB::connection('seo_intel')->table('seo_urls')->value('authority_revision');
+        $article->forceFill(['updated_at' => now()->addDay(), 'title' => 'Private working title'])->saveQuietly();
+        $job->handle($service);
+        self::assertSame($first, DB::connection('seo_intel')->table('seo_urls')->value('authority_revision'));
+        $seo->forceFill(['og_description' => 'New public SEO description'])->save();
+        $job->handle($service);
+        $latest = DB::connection('seo_intel')->table('seo_urls')->value('authority_revision');
+        self::assertNotSame($first, $latest);
+        self::assertSame($latest, DB::connection('seo_intel')->table('seo_url_entities')->value('authority_revision'));
+        self::assertFalse(config('seo_intel.write_enabled'));
+        self::assertSame('seo_intel', config('seo_intel.connection'));
+    }
+
+    public function test_scoped_queue_job_reads_current_authority_and_restores_worker_capability(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_council.connection' => 'seo_intel', 'seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+        $source = new class($this->record()) implements UrlTruthInventorySource
+        {
+            public function __construct(public UrlTruthInventoryRecord $record) {}
+
+            public function candidates(): array
+            {
+                return [$this->record];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        $job = new SyncPublicAuthorityUrlTruth('career_job', 'safe-job', 'en', 'stale-event', 'publish', true);
+        $job->handle($service);
+        $expected = (new EffectivePublicUrlEvaluator)->evaluate($source->record)['authority_revision'];
+        self::assertSame($expected, DB::connection('seo_intel')->table('seo_urls')->value('authority_revision'));
+        self::assertSame($expected, DB::connection('seo_intel')->table('seo_url_entities')->value('authority_revision'));
+        $job->handle($service);
+        self::assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
+        self::assertFalse(config('seo_intel.write_enabled'));
+        self::assertSame('seo_intel', config('seo_intel.connection'));
+        try {
+            (new SyncPublicAuthorityUrlTruth('career_job', 'missing-job', 'en', 'revision', 'publish', true))->handle($service);
+            self::fail('Missing scoped authority must fail.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('SCOPED_URL_TRUTH_AUTHORITY_MISSING', $exception->getMessage());
+        }
+        self::assertFalse(config('seo_intel.write_enabled'));
+        self::assertSame('seo_intel', config('seo_intel.connection'));
+        $source->record = new UrlTruthInventoryRecord(
+            canonicalUrl: 'https://fermatmind.com/en/career/jobs/safe-job', locale: 'en',
+            pageEntityType: 'career_job', entityIdOrSlug: 'safe-job', sourceAuthority: 'untrusted_source',
+        );
+        try {
+            $job->handle($service);
+            self::fail('Invalid scoped source must fail.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('SCOPED_URL_TRUTH_SOURCE_INVALID', $exception->getMessage());
+        }
+        self::assertFalse(config('seo_intel.write_enabled'));
+    }
+
+    public function test_scoped_job_rejects_tenants_other_families_and_web_context(): void
+    {
+        $this->prepareSchema();
+        $this->prepareGuideSchema();
+        config(['seo_intel.enabled' => true,
+            'seo_intel.write_enabled' => false, 'seo_council.connection' => 'seo_intel']);
+        $guide = CareerGuide::create(['org_id' => 7, 'guide_code' => 'tenant-guide', 'slug' => 'tenant-guide',
+            'locale' => 'en', 'title' => 'Tenant guide', 'status' => 'published', 'is_public' => true, 'is_indexable' => true]);
+        $source = new class implements UrlTruthInventorySource
+        {
+            public function candidates(): array
+            {
+                return [];
+            }
+
+            public function metadata(): array
+            {
+                return [];
+            }
+        };
+        $service = new IncrementalUrlTruthSyncService($source, new EffectivePublicUrlEvaluator, new UrlTruthInventoryRecordWriter);
+        foreach ([['career_guide', (string) $guide->id], ['personality_profile', '42']] as [$type, $identity]) {
+            try {
+                (new SyncPublicAuthorityUrlTruth($type, $identity, 'en', 'revision', 'publish', true))->handle($service);
+                self::fail('Invalid identity must fail.');
+            } catch (\RuntimeException $exception) {
+                self::assertSame('SCOPED_URL_TRUTH_IDENTITY_INVALID', $exception->getMessage());
+            }
+            self::assertFalse(config('seo_intel.write_enabled'));
+        }
+        $console = new \ReflectionProperty(app(), 'isRunningInConsole');
+        $original = app()->runningInConsole();
+        $console->setValue(app(), false);
+        try {
+            (new SyncPublicAuthorityUrlTruth('career_job', 'safe-job', 'en', 'revision', 'publish', true))->handle($service);
+            self::fail('Web scope must fail.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('SCOPED_URL_TRUTH_CLI_REQUIRED', $exception->getMessage());
+        } finally {
+            $console->setValue(app(), $original);
+        }
+        self::assertFalse(config('seo_intel.write_enabled'));
+        self::assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+    }
+
+    public function test_scoped_writer_rejects_cross_database_and_stale_cached_connection(): void
+    {
+        $this->prepareSchema();
+        config(['seo_intel.enabled' => true, 'seo_intel.write_enabled' => false,
+            'seo_council.connection' => 'seo_council',
+            'database.connections.seo_council' => config('database.connections.seo_intel')]);
+        config(['database.connections.seo_council.database' => 'another_database']);
+        $scope = new \App\Services\SeoIntel\UrlTruth\ScopedUrlTruthWriter;
+        try {
+            $scope->run(fn () => self::fail('Cross database operation must not run.'));
+            self::fail('Cross database writer must fail.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('URL_TRUTH_WRITER_DATABASE_MISMATCH', $exception->getMessage());
+        }
+        config(['seo_council.connection' => 'seo_intel', 'database.connections.seo_intel.database' => 'changed_after_cache']);
+        try {
+            $scope->run(fn () => self::fail('Cached connection mismatch must not run.'));
+            self::fail('Cached connection mismatch must fail.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('URL_TRUTH_WRITER_DATABASE_MISMATCH', $exception->getMessage());
+        }
+        self::assertFalse(config('seo_intel.write_enabled'));
+        self::assertSame('seo_intel', config('seo_intel.connection'));
     }
 
     private function prepareGuideSchema(): void

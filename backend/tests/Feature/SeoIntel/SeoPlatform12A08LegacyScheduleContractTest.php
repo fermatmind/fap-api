@@ -46,14 +46,14 @@ final class SeoPlatform12A08LegacyScheduleContractTest extends TestCase
             ->expectsOutput('{"status":"SCHEDULED_IDENTITY_HOLD","execution_allowed":false}')->assertFailed();
     }
 
-    public function test_existing_schedules_remain_serial_and_unchanged_outside_the_council_background_job(): void
+    public function test_existing_schedules_remain_serial_with_truth_maintenance_before_natural_m2(): void
     {
         $source = file_get_contents(base_path('bootstrap/app.php'));
         foreach ([
             ['seo:weekly-decisions --trigger=scheduled --json', "weeklyOn(4, '13:45')"],
             ['analytics:refresh-seo-conversion-daily --trigger=scheduled --json', "dailyAt('05:50')"],
             ['seo:runtime-probe-scheduled --trigger=scheduled --json', 'everyTenMinutes()'],
-            ['seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', "dailyAt('02:40')"],
+            ['seo-intel:url-truth-controlled-reconcile --execute --no-http --max-records=5000 --batch-size=250', "timezone('Asia/Shanghai')\n            ->dailyAt('06:10')"],
         ] as [$command, $cadence]) {
             preg_match('/command\(\''.preg_quote($command, '/').'\'\)([^;]+);/', $source, $matches);
             $this->assertNotEmpty($matches);

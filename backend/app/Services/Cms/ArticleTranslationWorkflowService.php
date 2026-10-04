@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
+use App\Events\PublicAuthorityChanged;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\Article;
@@ -485,6 +486,11 @@ final class ArticleTranslationWorkflowService
                 'revision_id' => (int) $revision->id,
                 'published_revision_id' => (int) $revision->id,
             ]);
+            event(new PublicAuthorityChanged(
+                'article', (string) $locked->id, (string) $locked->locale,
+                hash('sha256', 'article|'.$locked->id.'|'.$locked->locale.'|'.$revision->id),
+                'publish',
+            ));
 
             return $revision->refresh();
         });

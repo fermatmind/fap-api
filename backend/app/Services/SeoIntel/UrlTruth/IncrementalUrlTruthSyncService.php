@@ -27,6 +27,7 @@ final class IncrementalUrlTruthSyncService
         string $locale,
         string $revision,
         string $change,
+        bool $scopedWrite = false,
     ): array {
         $pageEntityType = trim($pageEntityType);
         $entityIdentity = trim($entityIdentity);
@@ -39,6 +40,10 @@ final class IncrementalUrlTruthSyncService
             throw new RuntimeException('incremental URL Truth writes are disabled.');
         }
         $this->assertSchemaReady();
+        $mayRetire = false;
+        if ($scopedWrite) {
+            $mayRetire = $this->assertScopedIdentity($pageEntityType, $entityIdentity, $locale, $change);
+        }
 
         $matches = array_values(array_filter(
             $this->authority->candidates(),
@@ -50,14 +55,30 @@ final class IncrementalUrlTruthSyncService
             throw new RuntimeException('incremental URL Truth authority identity is ambiguous.');
         }
 
+        if ($scopedWrite && $matches !== []) {
+            $expected = match ($pageEntityType) {
+                'article', 'career_guide' => 'backend_cms',
+                'career_job' => 'career_runtime_publish_projection',
+            };
+            if ($matches[0]->sourceAuthority !== $expected || $matches[0]->authorityStatus !== 'published_approved'
+                || $matches[0]->entitySource !== match ($pageEntityType) {
+                    'article' => 'articles', 'career_guide' => 'career_guides', 'career_job' => 'career_directory_authority',
+                }) {
+                throw new RuntimeException('SCOPED_URL_TRUTH_SOURCE_INVALID');
+            }
+        }
         if ($matches === []) {
-            return $this->retire($pageEntityType, $entityIdentity, $locale, $revision, $change);
+            if ($scopedWrite && ! $mayRetire) {
+                throw new RuntimeException('SCOPED_URL_TRUTH_AUTHORITY_MISSING');
+            }
+
+            return $this->retire($pageEntityType, $entityIdentity, $locale, $revision, $change, $scopedWrite);
         }
 
         $record = $matches[0];
         $evaluation = $this->evaluator->evaluate($record);
         if (! (bool) ($evaluation['effective_public'] ?? false)) {
-            return $this->retire($pageEntityType, $entityIdentity, $locale, $revision, $change);
+            return $this->retire($pageEntityType, $entityIdentity, $locale, $revision, $change, $scopedWrite);
         }
 
         $authorityRevision = $this->revisionHash((string) ($evaluation['authority_revision'] ?? ''));
@@ -113,6 +134,38 @@ final class IncrementalUrlTruthSyncService
         });
     }
 
+    private function assertScopedIdentity(string $type, string $identity, string $locale, string $change): bool
+    {
+        if (! in_array($type, ['article', 'career_guide', 'career_job'], true)
+            || ! in_array($change, ['publish', 'unpublish', 'authority_revision'], true)) {
+            throw new RuntimeException('SCOPED_URL_TRUTH_IDENTITY_INVALID');
+        }
+        if ($type === 'career_job') {
+            // Current authority candidates enforce org-0 publication plus Current body eligibility.
+            return false;
+        }
+        if (! ctype_digit($identity) || (int) $identity <= 0) {
+            throw new RuntimeException('SCOPED_URL_TRUTH_IDENTITY_INVALID');
+        }
+        $model = $type === 'article' ? \App\Models\Article::class : \App\Models\CareerGuide::class;
+        $query = $model::withoutGlobalScopes()->where('org_id', 0)->where('id', (int) $identity);
+        if ($type === 'article') {
+            $query->withTrashed();
+        }
+        $entity = $query->first();
+        if ($entity === null || ($change !== 'unpublish' && (string) $entity->locale !== $locale)) {
+            throw new RuntimeException('SCOPED_URL_TRUTH_IDENTITY_INVALID');
+        }
+        $eligible = $model::withoutGlobalScopes()->where('org_id', 0)->where('id', (int) $identity)->where('locale', $locale);
+        if ($type === 'article') {
+            $eligible->publiclySitemapEligible()->where('llms_eligible', true);
+        } else {
+            $eligible->publishedPublic()->indexable();
+        }
+
+        return ! $eligible->exists();
+    }
+
     private function hasCurrentReadback(UrlTruthInventoryRecord $record, string $revision, string $family): bool
     {
         $connection = $this->connection();
@@ -145,15 +198,25 @@ final class IncrementalUrlTruthSyncService
     }
 
     /** @return array<string,mixed> */
-    private function retire(string $type, string $identity, string $locale, string $revision, string $change): array
+    private function retire(string $type, string $identity, string $locale, string $revision, string $change, bool $scopedWrite = false): array
     {
         $connection = $this->connection();
         $bindingKey = $this->bindingKey($type, $identity, $locale);
-        $changed = $connection->transaction(function () use ($connection, $bindingKey, $locale, $revision): bool {
+        $changed = $connection->transaction(function () use ($connection, $bindingKey, $locale, $revision, $type, $identity, $change, $scopedWrite): bool {
+            if ($scopedWrite && ! $this->assertScopedIdentity($type, $identity, $locale, $change)) {
+                throw new RuntimeException('SCOPED_URL_TRUTH_AUTHORITY_MISSING');
+            }
             $bindings = $connection->table('seo_url_entities')
                 ->where('current_binding_key', $bindingKey)
                 ->lockForUpdate()
                 ->get();
+            if ($scopedWrite && ($bindings->count() > 1 || $bindings->contains(
+                fn ($binding) => (string) $binding->page_entity_type !== $type
+                    || (string) $binding->entity_id_or_slug !== $identity || (string) $binding->locale !== $locale
+                    || (string) $binding->entity_source !== ($type === 'article' ? 'articles' : 'career_guides')
+            ))) {
+                throw new RuntimeException('SCOPED_URL_TRUTH_SOURCE_INVALID');
+            }
             if ($bindings->isEmpty()) {
                 return false;
             }
