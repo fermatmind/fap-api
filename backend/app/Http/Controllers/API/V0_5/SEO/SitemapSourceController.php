@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
@@ -216,12 +217,24 @@ class SitemapSourceController extends Controller
             return false;
         }
 
-        return ($item['public_resolution_type'] ?? null) === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+        $published = ($item['public_resolution_type'] ?? null) === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
             && ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED
             && ($item['detail_route_enabled'] ?? false) === true
             && ($item['canonical_self'] ?? false) === true
-            && ($item['robots_indexable'] ?? false) === true
             && ($item['release_gate_pass'] ?? false) === true;
+        if (! $published) {
+            return false;
+        }
+
+        // Frozen transport flags cannot shadow a newly qualified Current locale
+        // body, or make an English placeholder indexable. Publication stays above.
+        $content = app(CareerContentV3CanonicalReader::class);
+        $locale = $route['locale'] === 'zh' ? 'zh-CN' : 'en';
+        if (isset($content->authority()['entries'][$route['slug']][$locale])) {
+            return $content->hasPublicBody($route['slug'], $locale);
+        }
+
+        return ($item['robots_indexable'] ?? false) === true;
     }
 
     /**

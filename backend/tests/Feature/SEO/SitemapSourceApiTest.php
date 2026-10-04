@@ -179,6 +179,52 @@ class SitemapSourceApiTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/still-quarantined', $locs);
     }
 
+    public function test_current_body_qualification_replaces_frozen_robots_flags_without_indexing_english_placeholders(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $slug = 'nurse-practitioners';
+        CareerGenerationAuthorityFixture::write([
+            $this->projectionItem($slug, 'en', overrides: ['robots_indexable' => false]),
+            $this->projectionItem($slug, 'zh', overrides: ['robots_indexable' => false]),
+        ]);
+
+        // The generator has already applied directory and discoverability authority.
+        // Exercise the same second-stage filter used by the warm command.
+        $controller = app(SitemapSourceController::class);
+        $payload = $controller->buildPayloadFromAuthorityUrls(array_map(static fn (string $segment): array => [
+            'loc' => 'https://fermatmind.com/'.$segment.'/career/jobs/'.$slug,
+            'lastmod' => '2026-10-04T00:00:00+00:00',
+        ], ['en', 'zh']), app(CareerRuntimePublishProjectionLookup::class));
+        $controller->storeCache($payload);
+        $locs = collect($this->getJson('/api/v0.5/seo/sitemap-source')->assertOk()->json('items'))->pluck('loc')->all();
+
+        $this->assertContains('https://fermatmind.com/zh/career/jobs/'.$slug, $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/'.$slug, $locs);
+    }
+
+    public function test_current_body_qualification_cannot_override_publication_boundaries(): void
+    {
+        $cases = [
+            ['nurse-practitioners', ['detail_route_enabled' => false]],
+            ['nursing-assistants', ['canonical_self' => false]],
+            ['nursing-instructors-and-teachers-postsecondary', ['release_gate_pass' => false]],
+            ['obstetricians-and-gynecologists', ['runtime_publish_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE]],
+            ['occupational-therapists', ['public_resolution_type' => CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY]],
+        ];
+        CareerGenerationAuthorityFixture::write(array_map(
+            fn (array $case): array => $this->projectionItem($case[0], 'zh', overrides: $case[1]),
+            $cases,
+        ));
+        $urls = array_map(static fn (array $case): array => [
+            'loc' => 'https://fermatmind.com/zh/career/jobs/'.$case[0],
+            'lastmod' => '2026-10-04T00:00:00+00:00',
+        ], $cases);
+
+        $payload = app(SitemapSourceController::class)->buildPayloadFromAuthorityUrls($urls, app(CareerRuntimePublishProjectionLookup::class));
+
+        $this->assertSame([], $payload['items']);
+    }
+
     public function test_sitemap_source_warm_includes_released_zh_big_five_public_content_assets(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
