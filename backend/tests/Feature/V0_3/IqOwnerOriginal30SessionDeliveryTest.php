@@ -83,6 +83,9 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         );
         $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable($response->json('questions.items.0'));
         $this->assertPayloadHasNoPrivateIqFields($response->json());
+        foreach ($response->json('questions.items.0.options') as $option) {
+            $this->assertStringContainsString('&v='.str_replace('sha256:', '', $option['sha256']), $option['src']);
+        }
     }
 
     #[Test]
