@@ -85,7 +85,7 @@ final class Career1046DiscoverabilityReleaseCacheTransitionTest extends TestCase
             self::assertStringContainsString($targetZh, $body, $surface);
             self::assertNotSame($held[$surface], $body, $surface);
         }
-        $publicCount = 1046 - count(app(CareerCurrentIdentity::class)->aliases());
+        $publicCount = 1046;
         foreach (app(CareerCurrentIdentity::class)->aliases() as $alias => $formal) {
             foreach ($released as $surface => $body) {
                 $found = $this->targetSlugsInBody($body, $fixture['slugs']);

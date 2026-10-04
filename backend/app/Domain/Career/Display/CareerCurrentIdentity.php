@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
-/** Manifest-bound identity; retained directory IDs are not independent public careers. */
+/** Each fixed manifest slug is one independent career; locales are language versions. */
 final class CareerCurrentIdentity
 {
     public function __construct(private readonly CareerContentV3CanonicalReader $reader) {}
@@ -153,9 +153,6 @@ final class CareerCurrentIdentity
                 continue;
             }
             $terms[] = $alias;
-            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                $terms[] = $this->reader->subjectName($alias, $locale);
-            }
         }
 
         return array_values(array_unique($terms));
