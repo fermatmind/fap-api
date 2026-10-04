@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
@@ -34,6 +35,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
     public function __construct(
         private readonly CareerJobDetailCacheCoverageService $coverageService,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerContentV3CanonicalReader $canonicalContent,
     ) {
         parent::__construct();
     }
@@ -261,11 +263,15 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
 
         $entries = [];
         foreach ($targets as $target) {
-            $entries[] = $this->responseCache->warmJobDetailPayload(
-                $target['slug'],
-                $target['locale'],
-                false,
-            );
+            try {
+                $entries[] = $this->responseCache->warmJobDetailPayload(
+                    $target['slug'],
+                    $target['locale'],
+                    false,
+                );
+            } finally {
+                $this->canonicalContent->forgetLoadedPages();
+            }
         }
 
         $postRepair = $this->coverageService->inspect($locales)['report'];

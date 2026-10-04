@@ -599,6 +599,46 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         }
     }
 
+    public function test_sync_repair_releases_page_working_sets_between_locale_targets(): void
+    {
+        $reader = new class(app(CareerContentV3Projector::class)) extends DynamicCareerContentV3CanonicalReader
+        {
+            public ?string $loadedIdentity = null;
+
+            public function hydrate(array $surface, string $slug, string $locale, ?string $backendRoot = null): ?array
+            {
+                $identity = $slug.'|'.$locale;
+                if ($this->loadedIdentity !== null && $this->loadedIdentity !== $identity) {
+                    throw new \RuntimeException('Previous target working set was retained.');
+                }
+                $this->loadedIdentity = $identity;
+
+                return parent::hydrate($surface, $slug, $locale, $backendRoot);
+            }
+
+            public function forgetLoadedPages(): void
+            {
+                $this->loadedIdentity = null;
+                parent::forgetLoadedPages();
+            }
+        };
+        $this->app->instance(CareerContentV3CanonicalReader::class, $reader);
+        $this->createOccupation('one');
+        $this->bindProjection(['one']);
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--maximum-sync-repairs' => 2,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame(2, $report['repair']['cached_target_count']);
+        $this->assertSame(2, $report['covered_target_count']);
+        $this->assertNull($reader->loadedIdentity);
+    }
+
     public function test_sync_repair_refuses_before_writes_when_missing_count_exceeds_limit(): void
     {
         $slugs = array_map(static fn (int $index): string => sprintf('career-%03d', $index), range(1, 251));

@@ -90,14 +90,22 @@ final class CareerJobDetailCanonicalCacheReader
     }
 
     /** @return array<string,mixed>|null */
-    public function read(mixed $stored, string $slug, string $locale): ?array
+    public function read(mixed $stored, string $slug, string $locale, bool $retainLoadedPages = true): ?array
     {
-        $payload = $this->decode($stored);
-        if ($payload === null) {
-            return null;
-        }
+        try {
+            $payload = $this->decode($stored);
+            if ($payload === null) {
+                return null;
+            }
 
-        return $this->normalizeAndHydrate($payload, $slug, $locale);
+            return $this->normalizeAndHydrate($payload, $slug, $locale);
+        } finally {
+            // Coverage needs the same complete reader validation, but never a
+            // process-wide copy of all 2092 decoded Current pages.
+            if (! $retainLoadedPages) {
+                ($this->canonicalContent ?? app(CareerContentV3CanonicalReader::class))->forgetLoadedPages();
+            }
+        }
     }
 
     /** @param array<string,mixed> $payload @return array<string,mixed>|null */

@@ -841,12 +841,15 @@ task('career:repair-published-detail-cache-coverage', function () {
         : '';
 
     $repairOutput = run(sprintf(
-        'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi%s',
+        // Two complete reader passes over 2092 pages exceed the old five-minute
+        // budget even locally. Keep a fixed 15-minute ceiling after bounding
+        // decoded-page retention; the complete coverage guard remains mandatory.
+        'timeout --kill-after=30s 900 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi%s',
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
         $minimumTargets,
         (int) $maximumRepairsRaw,
         $productionConfirmation,
-    ));
+    ), ['timeout' => 960]);
 
     $repairReport = json_decode(trim($repairOutput), true, flags: JSON_THROW_ON_ERROR);
     if (! is_array($repairReport)

@@ -438,7 +438,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
                     continue;
                 }
-                $payload = $this->canonicalJobDetailReader->read($storedPayload, $target['slug'], $target['locale']);
+                $payload = $this->canonicalJobDetailReader->read($storedPayload, $target['slug'], $target['locale'], $includePayload);
                 if ($payload === null) {
                     $issues[] = 'invalid_payload';
 
@@ -455,7 +455,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
             $legacyKey = $this->jobDetailCacheKey($target['slug'], $target['locale']);
             $legacy = $legacyPayloads[$legacyKey] ?? null;
-            $legacyPayload = $this->canonicalJobDetailReader->read($legacy, $target['slug'], $target['locale']);
+            $legacyPayload = $this->canonicalJobDetailReader->read($legacy, $target['slug'], $target['locale'], $includePayload);
             if (is_array($legacyPayload)) {
                 $result[$identity] = [
                     'classification' => 'legacy_migratable',

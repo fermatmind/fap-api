@@ -111,6 +111,7 @@ namespace Deployer;
 $input = json_decode(base64_decode('${input}'), true);
 $config = ['release_path' => '/fixture/candidate'];
 $commands = [];
+$runOptions = [];
 $host = $input['host'] ?? 'production';
 function get($key, $default = null) { return $GLOBALS['config'][$key] ?? $default; }
 function set($key, $value) { $GLOBALS['config'][$key] = $value; }
@@ -119,8 +120,10 @@ function deploySkipsAuthorityMutations() { return $GLOBALS['input']['skip'] ?? f
 function deployCareerDetailMinimumTargets($host) { return 1; }
 function deployPlaceholderPathArg($root, $suffix) { return $root.'/'.$suffix; }
 function writeln($message) {}
-function run($command) {
+function run($command, $options = []) {
     $GLOBALS['commands'][] = $command;
+    $GLOBALS['runOptions'][] = $options;
+    if ($GLOBALS['input']['command_error'] ?? false) { throw new \\RuntimeException('Remote command exited 124.'); }
     return json_encode($GLOBALS['input']['report'] ?? []);
 }
 $repair = function () { ${body('career:repair-published-detail-cache-coverage')} };
@@ -133,7 +136,7 @@ try {
     $guard();
     if ($input['second_guard'] ?? false) { $guard(); }
 } catch (\\Throwable $e) { $error = $e->getMessage(); }
-echo json_encode(['commands' => $commands, 'error' => $error, 'coverage' => get('career_detail_post_repair_coverage')]);
+echo json_encode(['commands' => $commands, 'run_options' => $runOptions, 'error' => $error, 'coverage' => get('career_detail_post_repair_coverage')]);
 `], { encoding: 'utf8' }));
 }
 
@@ -170,6 +173,25 @@ test('standalone and repeated coverage guards still perform live read-only verif
   assert.equal(repeated.error, null);
   assert.equal(repeated.commands.length, 2);
   assert.match(repeated.commands[1], /--verify-only/);
+});
+
+test('full-cohort synchronous repair retains a fixed bounded budget and complete readback', () => {
+  const result = coverageTasks({ report: coverageReport(1046, true) });
+  assert.equal(result.error, null);
+  assert.equal(result.commands.length, 1);
+  assert.match(result.commands[0], /timeout --kill-after=30s 900 .*--repair-missing-sync/);
+  assert.match(result.commands[0], /--minimum-targets=1/);
+  assert.match(result.commands[0], /--maximum-sync-repairs=2092/);
+  assert.match(result.commands[0], /--confirm-production-write/);
+  assert.deepEqual(result.run_options[0], { timeout: 960 });
+  assert.equal(result.coverage, null);
+});
+
+test('synchronous repair timeout cannot become successful coverage or continue activation', () => {
+  const result = coverageTasks({ command_error: true, report: coverageReport() });
+  assert.equal(result.error, 'Remote command exited 124.');
+  assert.equal(result.commands.length, 1);
+  assert.equal(result.coverage, null);
 });
 
 test('incomplete or differently bound post-repair coverage fails closed', () => {

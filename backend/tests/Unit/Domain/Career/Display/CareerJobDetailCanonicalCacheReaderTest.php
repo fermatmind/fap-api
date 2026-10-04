@@ -79,6 +79,33 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         self::assertNull($reader->read($payload, 'actors', 'en'));
     }
 
+    public function test_coverage_reads_keep_full_validation_without_retaining_decoded_pages(): void
+    {
+        [$reader, $payload, , $canonical] = $this->fixtureReader();
+        $retained = new \ReflectionProperty(CareerContentV3CanonicalReader::class, 'pages');
+        $expected = $reader->read($reader->encode($payload), 'actors', 'en');
+        self::assertNotNull($expected);
+        self::assertCount(1, $retained->getValue($canonical));
+
+        self::assertSame($expected, $reader->read($reader->encode($payload), 'actors', 'en', false));
+        self::assertSame([], $retained->getValue($canonical));
+        self::assertSame($expected, $reader->read($payload, 'actors', 'en', false));
+        self::assertSame([], $retained->getValue($canonical));
+
+        data_set($payload, 'display_surface_v1.page.locale', 'zh-CN');
+        self::assertNull($reader->read($payload, 'actors', 'en', false));
+        self::assertSame([], $retained->getValue($canonical));
+        $corrupt = $reader->encode($payload);
+        $corrupt['sha256'] = str_repeat('0', 64);
+        self::assertNull($reader->read($corrupt, 'actors', 'en', false));
+        self::assertSame([], $retained->getValue($canonical));
+
+        data_set($payload, 'display_surface_v1.page.locale', 'en');
+        file_put_contents($this->fixtureRoot.'/content_assets/career/current/careers/actors/en.json', ' ', FILE_APPEND);
+        self::assertNull($reader->read($payload, 'actors', 'en', false));
+        self::assertSame([], $retained->getValue($canonical));
+    }
+
     public function test_placeholder_authority_removes_every_legacy_visible_body(): void
     {
         [$reader, $payload] = $this->fixtureReader(true);
@@ -119,7 +146,7 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
         ));
     }
 
-    /** @return array{CareerJobDetailCanonicalCacheReader,array<string,mixed>,array<string,array<string,mixed>>} */
+    /** @return array{CareerJobDetailCanonicalCacheReader,array<string,mixed>,array<string,array<string,mixed>>,CareerContentV3CanonicalReader} */
     private function fixtureReader(bool $placeholder = false): array
     {
         $root = tempnam(sys_get_temp_dir(), 'career-cache-v3-');
@@ -205,6 +232,6 @@ final class CareerJobDetailCanonicalCacheReaderTest extends TestCase
             $canonical,
         );
 
-        return [$reader, ['display_surface_v1' => $surface], $pages];
+        return [$reader, ['display_surface_v1' => $surface], $pages, $canonical];
     }
 }
