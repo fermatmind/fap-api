@@ -10,6 +10,7 @@ use App\Domain\Career\Display\CareerCurrentIdentity;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Controllers\Controller;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use App\Support\PublicProjectionCache as Cache;
 use Illuminate\Http\JsonResponse;
@@ -212,7 +213,14 @@ class SitemapSourceController extends Controller
             return false;
         }
 
-        $item = $projection->itemForSlug($route['slug'], $route['locale']);
+        $content = app(CareerContentV3CanonicalReader::class);
+        $locale = $route['locale'] === 'zh' ? 'zh-CN' : 'en';
+        $current = isset($content->authority()['entries'][$route['slug']][$locale]);
+        // Current file pages and their inventories must use the same validated
+        // active publication snapshot, including promotions newer than generation.
+        $item = $current
+            ? app(PublicCareerAuthorityResponseCache::class)->filePagePublication($route['slug'], $locale)
+            : $projection->itemForSlug($route['slug'], $route['locale']);
         if (! is_array($item)) {
             return false;
         }
@@ -221,20 +229,13 @@ class SitemapSourceController extends Controller
             && ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED
             && ($item['detail_route_enabled'] ?? false) === true
             && ($item['canonical_self'] ?? false) === true
+            && ($item['robots_indexable'] ?? false) === true
             && ($item['release_gate_pass'] ?? false) === true;
         if (! $published) {
             return false;
         }
 
-        // Frozen transport flags cannot shadow a newly qualified Current locale
-        // body, or make an English placeholder indexable. Publication stays above.
-        $content = app(CareerContentV3CanonicalReader::class);
-        $locale = $route['locale'] === 'zh' ? 'zh-CN' : 'en';
-        if (isset($content->authority()['entries'][$route['slug']][$locale])) {
-            return $content->hasPublicBody($route['slug'], $locale);
-        }
-
-        return ($item['robots_indexable'] ?? false) === true;
+        return ! $current || $content->hasPublicBody($route['slug'], $locale);
     }
 
     /**

@@ -179,14 +179,25 @@ class SitemapSourceApiTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/still-quarantined', $locs);
     }
 
-    public function test_current_body_qualification_replaces_frozen_robots_flags_without_indexing_english_placeholders(): void
+    public function test_current_sitemap_uses_the_same_active_publication_as_the_file_page_api(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $slug = 'nurse-practitioners';
         CareerGenerationAuthorityFixture::write([
-            $this->projectionItem($slug, 'en', overrides: ['robots_indexable' => false]),
-            $this->projectionItem($slug, 'zh', overrides: ['robots_indexable' => false]),
+            $this->projectionItem($slug, 'en', CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE),
+            $this->projectionItem($slug, 'zh', CareerRuntimePublishProjectionService::STATE_PUBLISHED_CANDIDATE),
         ]);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $versions = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            $snapshot = $this->projectionItem($slug, $locale);
+            $this->assertFalse($cache->jobDetailProjectionItemIsPublished($cache->filePagePublication($slug, $locale)));
+            $versions[$locale] = $cache->publishJobDetailReadModel(
+                $slug, $locale, $this->detailCacheFixture(['slug' => $slug], $slug, $locale), $snapshot,
+            );
+            $this->assertTrue($cache->jobDetailProjectionItemIsPublished($cache->filePagePublication($slug, $locale)));
+        }
+        $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN&projection_contract=career.detail.page.v1')->assertOk();
 
         // The generator has already applied directory and discoverability authority.
         // Exercise the same second-stage filter used by the warm command.
@@ -200,6 +211,12 @@ class SitemapSourceApiTest extends TestCase
 
         $this->assertContains('https://fermatmind.com/zh/career/jobs/'.$slug, $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/'.$slug, $locs);
+
+        \App\Support\PublicProjectionCache::forget('career:public-authority:job-detail:v3:'.$slug.':zh-CN:versions:'.$versions['zh-CN']);
+        $missing = $controller->buildPayloadFromAuthorityUrls([
+            ['loc' => 'https://fermatmind.com/zh/career/jobs/'.$slug, 'lastmod' => '2026-10-04T00:00:00+00:00'],
+        ], app(CareerRuntimePublishProjectionLookup::class));
+        $this->assertSame([], $missing['items']);
     }
 
     public function test_current_body_qualification_cannot_override_publication_boundaries(): void
