@@ -447,7 +447,8 @@ final class IqOwnerOriginal30BankService
         $publicUrl = $this->publicAssetUrl(
             is_string($assets['image'] ?? null) ? (string) $assets['image'] : '',
             $publicAssetOrigin,
-            $attemptId
+            $attemptId,
+            (string) ($media['sha256'] ?? '')
         );
 
         return [
@@ -464,15 +465,19 @@ final class IqOwnerOriginal30BankService
         ];
     }
 
-    private function publicAssetUrl(string $assetPath, string $publicAssetOrigin, string $attemptId): ?string
+    private function publicAssetUrl(string $assetPath, string $publicAssetOrigin, string $attemptId, string $sha256): ?string
     {
         $routePath = $this->publicRoutePathForAsset($assetPath);
         if ($routePath === null || $attemptId === '') {
             return null;
         }
 
+        $version = preg_match('/\A(?:sha256:)?([a-f0-9]{64})\z/D', $sha256, $matches) === 1
+            ? '&v='.$matches[1] : '';
+
         return $publicAssetOrigin.'/api/v0.3/iq-owner-original-30/assets/'.$this->encodePublicPath($routePath)
-            .'?attempt_id='.rawurlencode($attemptId);
+            .'?attempt_id='.rawurlencode($attemptId)
+            .$version;
     }
 
     private function publicRequestOrigin(): string
@@ -558,11 +563,21 @@ final class IqOwnerOriginal30BankService
 
     private function bankDir(): string
     {
-        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION.'/banks/'.self::BANK_ID);
+        return $this->packageDir().'/banks/'.self::BANK_ID;
     }
 
     private function assetDir(): string
     {
-        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION.'/assets');
+        return $this->packageDir().'/assets';
+    }
+
+    private function packageDir(): string
+    {
+        $snapshot = resource_path('iq_owner_original30');
+        if (File::isDirectory($snapshot) || app()->environment(['production', 'staging'])) {
+            return $snapshot;
+        }
+
+        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION);
     }
 }
