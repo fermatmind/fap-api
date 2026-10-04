@@ -50,6 +50,9 @@ final readonly class Platform12MissionEvidenceReadService
 
             return ['origin' => $context['trigger'], 'state' => $this->code($output['state']),
                 'is_gsc' => $slot['mission_id'] === 'seo.platform12.daily_gsc_core_runtime',
+                'is_url_truth' => $slot['mission_id'] === 'seo.platform12.daily_url_truth_reconciliation',
+                'url_truth_reconciliation' => $slot['mission_id'] === 'seo.platform12.daily_url_truth_reconciliation'
+                    ? $this->urlTruthReconciliation($output, $mission->envelope['evidence']['input']) : null,
                 'evaluated_at' => Platform12OperationsTime::iso($evaluated),
                 'receipt_hash' => $receipt['receipt_hash'], 'sources' => $sources,
                 'data_max_date' => $this->date($gsc['data_max_date'] ?? null),
@@ -61,6 +64,33 @@ final readonly class Platform12MissionEvidenceReadService
         } catch (Throwable) {
             return null;
         }
+    }
+
+    private function urlTruthReconciliation(array $output, array $input): ?array
+    {
+        $authority = $output['authority_reconciliation'] ?? [];
+        if (($authority['availability'] ?? null) !== 'AVAILABLE') {
+            return null;
+        }
+        $counts = [
+            'denominator' => $authority['fixed_denominator'] ?? null,
+            'valid_truth' => $authority['url_truth_count'] ?? null,
+            'wrong_canonical' => data_get($authority, 'wrong_canonical.candidate_count'),
+            'false_noindex' => data_get($authority, 'false_noindex.candidate_count'),
+        ];
+        foreach ($counts as $count) {
+            if (! is_int($count) || $count < 0 || $count > $counts['denominator']) {
+                return null;
+            }
+        }
+        if ($counts['denominator'] !== data_get($input, 'authority.current_public_count')
+            || $counts['valid_truth'] !== data_get($input, 'url_truth.current_url_truth_count')
+            || $counts['wrong_canonical'] !== data_get($input, 'url_truth.wrong_canonical_count')
+            || $counts['false_noindex'] !== data_get($input, 'url_truth.false_noindex_count')) {
+            return null;
+        }
+
+        return $counts + ['difference' => $counts['denominator'] - $counts['valid_truth']];
     }
 
     private function gscCollection(array $envelope, CarbonImmutable $evaluated): ?array

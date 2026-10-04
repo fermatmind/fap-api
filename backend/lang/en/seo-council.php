@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'url_truth_counts' => ['denominator' => 'Frozen effective public denominator', 'valid_truth' => 'Valid URL Truth identities', 'difference' => 'Count difference', 'wrong_canonical' => 'Wrong canonical', 'false_noindex' => 'False noindex'],
     'latest_natural' => 'Latest natural result',
     'latest_controlled' => 'Latest controlled result',
     'evaluated_at' => 'Formal evaluation time',

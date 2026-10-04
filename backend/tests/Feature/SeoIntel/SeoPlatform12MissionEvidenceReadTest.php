@@ -6,6 +6,7 @@ namespace Tests\Feature\SeoIntel;
 
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform12\Evaluation\Platform12DailyGscCoreRuntimeEvaluator;
+use App\Services\SeoCouncil\Platform12\Evaluation\Platform12DailyUrlTruthEvaluator;
 use App\Services\SeoCouncil\Platform12\Operations\Platform12MissionEvidenceReadService;
 use App\Services\SeoCouncil\Platform12\Operations\Platform12SystemHealthReadService;
 use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
@@ -144,7 +145,35 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         $this->assertSame(0, collect($snapshot['items'])->firstWhere('component', 'execution_anomalies')['count']);
     }
 
-    private function fixture(string $at, string $trigger): array
+    public function test_url_truth_counts_are_frozen_and_render_in_both_ops_locales(): void
+    {
+        [$row, $receipt] = $this->fixture('2026-09-21T22:25:00Z', 'scheduled', true);
+        $reader = app(Platform12MissionEvidenceReadService::class);
+        $now = CarbonImmutable::parse('2026-09-22T09:00:00Z');
+        $result = $reader->summary($row, $receipt, $now);
+        $this->assertSame(['denominator' => 100, 'valid_truth' => 97, 'wrong_canonical' => 0,
+            'false_noindex' => 0, 'difference' => 3], $result['url_truth_reconciliation']);
+        $this->assertSame('RECONCILIATION_INCOMPLETE_HOLD', $result['state']);
+        foreach (['en', 'zh_CN'] as $locale) {
+            app()->setLocale($locale);
+            $html = view('filament.ops.components.ops-mission-result-evidence', ['result' => $result, 'label' => 'latest_natural'])->render();
+            foreach ($result['url_truth_reconciliation'] as $key => $count) {
+                $this->assertStringContainsString(__('seo-council.url_truth_counts.'.$key).': '.$count, $html);
+            }
+            $this->assertStringContainsString($receipt['receipt_hash'], $html);
+            $this->assertStringNotContainsString('seo-council.', $html);
+        }
+        $receipt['route_plan'][1]['output']['authority_reconciliation']['fixed_denominator'] = 99;
+        $hasher = app(SeoRegistryHasher::class);
+        $receipt['route_plan'][1]['output']['receipt_hash'] = $hasher->hashWithout($receipt['route_plan'][1]['output'], 'receipt_hash');
+        $receipt['receipt_hash'] = $hasher->hashWithout($receipt, 'receipt_hash');
+        $invalid = $reader->summary($row, $receipt, $now);
+        $this->assertNull($invalid['url_truth_reconciliation']);
+        $html = view('filament.ops.components.ops-mission-result-evidence', ['result' => $invalid, 'label' => 'latest_natural'])->render();
+        $this->assertStringContainsString(__('seo-council.url_truth_counts.denominator').': UNAVAILABLE', $html);
+    }
+
+    private function fixture(string $at, string $trigger, bool $urlTruth = false): array
     {
         $r = $this->storeGsc('original-run', '2026-09-21T21:00:00Z', '2026-09-18');
         $hasher = app(SeoRegistryHasher::class);
@@ -156,11 +185,22 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
                 'production_sha' => str_repeat('a', 40), 'readback_sha' => str_repeat('a', 40)]],
             'sources' => [['id' => 'gsc_scheduled_receipt', 'hash' => $hasher->hash($projection), 'observed_at' => $projection['observed_at'], 'read_at' => $at]],
             'source_gaps' => [], 'captured_at' => $at, 'expires_at' => CarbonImmutable::parse($at)->addHour()->toAtomString()];
+        if ($urlTruth) {
+            $cases = json_decode(file_get_contents(resource_path('seo-agent/council/platform12/fixtures/seo.platform12_daily_url_truth.v1.json')), true);
+            $evidence['input'] = $cases['cases'][0]['evidence'];
+            $evidence['input']['evaluated_at'] = $at;
+            $evidence['input']['authority']['current_public_count'] = 100;
+            $evidence['input']['url_truth'] = ['availability' => 'AVAILABLE', 'revision_hash' => str_repeat('b', 64),
+                'current_url_truth_count' => 97, 'wrong_canonical_count' => 0, 'false_noindex_count' => 0];
+            $evidence['sources'] = [['id' => 'url_truth_reconciliation', 'hash' => $hasher->hash($evidence['input']),
+                'observed_at' => $at, 'read_at' => $at]];
+        }
+        $missionId = Platform12DailyMissionSet::IDS[$urlTruth ? 1 : 0];
         $date = substr($at, 0, 10);
-        $slot = ['mission_id' => Platform12DailyMissionSet::IDS[0], 'trigger_mode' => $trigger, 'scheduled_for' => $at,
-            'slot_key' => $trigger === 'scheduled' ? Platform12DailyMissionSet::IDS[0].':'.$date : 'a08:acceptance:0:'.$date.':'.str_repeat('a', 12)];
+        $slot = ['mission_id' => $missionId, 'trigger_mode' => $trigger, 'scheduled_for' => $at,
+            'slot_key' => $trigger === 'scheduled' ? $missionId.':'.$date : 'a08:acceptance:0:'.$date.':'.str_repeat('a', 12)];
         $mission = Platform12FrozenMission::freeze($slot, $evidence, array_fill_keys(Platform12ReadOnlyRuntimeGate::VERSION_DIMENSIONS, str_repeat('a', 64)), str_repeat('a', 64));
-        $output = app(Platform12DailyGscCoreRuntimeEvaluator::class)->evaluate($evidence['input']);
+        $output = app($urlTruth ? Platform12DailyUrlTruthEvaluator::class : Platform12DailyGscCoreRuntimeEvaluator::class)->evaluate($evidence['input']);
         $receipt = ['receipt_id' => hash('sha256', $at), 'request_hash' => $mission->request->requestHash,
             'status' => $output['state'] === 'READY' ? 'DAILY_MISSION_READY' : 'DAILY_MISSION_HOLD',
             'route_plan' => [array_merge($slot, ['kind' => 'scheduled_delivery', 'source_refs' => $evidence['sources'], 'source_gaps' => []]),

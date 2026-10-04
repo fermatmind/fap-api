@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'url_truth_counts' => ['denominator' => '冻结有效公开分母', 'valid_truth' => '有效 URL Truth 身份', 'difference' => '数量差异', 'wrong_canonical' => 'Canonical 错误', 'false_noindex' => '错误 noindex'],
     'latest_natural' => '最近自然结果',
     'latest_controlled' => '最新受控结果',
     'evaluated_at' => '正式评估时间',

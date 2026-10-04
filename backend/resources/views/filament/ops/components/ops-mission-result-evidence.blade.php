@@ -34,6 +34,11 @@
             <small>Production SHA: <code>{{ $result['production_sha'] ?? 'UNAVAILABLE' }}</code></small>
             <small>Readback SHA: <code>{{ $result['readback_sha'] ?? 'UNAVAILABLE' }}</code></small>
         @endif
+        @if ($result['is_url_truth'] ?? false)
+            @foreach (['denominator', 'valid_truth', 'difference', 'wrong_canonical', 'false_noindex'] as $count)
+                <small>{{ __('seo-council.url_truth_counts.'.$count) }}: {{ $result['url_truth_reconciliation'][$count] ?? 'UNAVAILABLE' }}</small>
+            @endforeach
+        @endif
         <small>{{ __('seo-council.result_receipt') }}: <code>{{ $result['receipt_hash'] }}</code></small>
     @else
         <small>{{ __('seo-council.source_unlinked') }}</small>
