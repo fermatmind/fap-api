@@ -1119,7 +1119,7 @@ jobs:
               and .invariants.search_submission == false
               and .read_only == true
             ' career-content-change-receipt.json >/dev/null
-            career_change="$(jq -c . career-content-change-receipt.json)"
+            career_change_file=career-content-change-receipt.json
             jq -e --arg sha "$GITHUB_SHA" --arg base "$(jq -r .scope.validation_base_sha trunk-path-classification.json)" \
               --arg tree "$(jq -r .career_content_change.candidate_tree_sha trunk-path-classification.json)" \
               --arg compiler "$(jq -r .package.compiler_digest career-parity/career-current-authority-parity.json)" \
@@ -1135,7 +1135,8 @@ jobs:
               ' career-content-package/package-receipt.json >/dev/null
             career_package="$(jq -c . career-content-package/package-receipt.json)"
           else
-            career_change='{"status":"not_applicable"}'
+            printf '%s\n' '{"status":"not_applicable"}' > career-content-change-not-applicable.json
+            career_change_file=career-content-change-not-applicable.json
             career_package='{"status":"not_applicable"}'
           fi
           closeout_required="$(jq -r .operations.seo_platform_11a_closeout trunk-path-classification.json)"
@@ -1365,9 +1366,9 @@ jobs:
             competitive='{"required":false,"result":"skipped"}'
           fi
           jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
-            --slurpfile parity career-parity/career-current-authority-parity.json --argjson career_change "$career_change" --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
+            --slurpfile parity career-parity/career-current-authority-parity.json --slurpfile career_change "$career_change_file" --argjson closeout "$closeout" --argjson evidence "$evidence" --argjson gateway "$gateway" --argjson council "$council" --argjson competitive "$competitive" \
             --argjson career_package "$career_package" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],career_content_change:$career_change,career_content_package:$career_package,publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0],career_content_change:$career_change[0],career_content_package:$career_package,publisher:{required:$classification[0].operations.publisher_required,parity:$parity[0]},seo_platform_11a_closeout:$closeout,seo_agent_evidence_boundary:$evidence,seo_agent_policy_gateway:$gateway,seo_council_orchestration:$council,seo_competitive_evidence:$competitive}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
