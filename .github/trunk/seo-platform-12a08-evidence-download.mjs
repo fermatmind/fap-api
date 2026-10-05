@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyRevalidationPaths } from './seo-platform-12a08-release.mjs';
+import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyRevalidationPaths, readNightlyArtifactEvidence } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -17,7 +17,7 @@ const loadNightly = run => {
     if (`sha256:${digest(bytes)}` !== artifact.digest) throw new Error('NIGHTLY_ARTIFACT_DIGEST_HOLD');
     const path = `${process.env.RUNNER_TEMP ?? '.'}/a08-nightly-${run.id}.zip`;
     writeFileSync(path, bytes);
-    evidence = {junit:execFileSync('unzip', ['-p', path, 'nightly-full-phpunit.xml'], {maxBuffer:64*1024*1024}).toString(), artifact_digest:artifact.digest};
+    evidence = readNightlyArtifactEvidence(path, artifact.digest);
   } else {
     evidence = {log:fullJob.conclusion === 'success' ? '' : execFileSync('gh', ['api', '--allow-escape-sequences', `repos/${repo}/actions/jobs/${fullJob.id}/logs`], {maxBuffer:32*1024*1024}).toString()};
   }

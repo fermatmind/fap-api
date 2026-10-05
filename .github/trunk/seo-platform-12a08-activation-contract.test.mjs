@@ -376,3 +376,37 @@ test('Nightly revalidation selects actual failed classes and preserves domain ho
  assert.match(downloader,/checks\?\.nightly_source/);
  assert.match(downloader,/JSON.stringify\(loaded.source\)/);
 });
+
+test('incomplete Nightly XML retains digest-bound OOM evidence and requires the named test', async () => {
+ const {readNightlyArtifactEvidence,nightlyRevalidationPaths,assessNightly}=await import('./seo-platform-12a08-release.mjs');
+ const root=mkdtempSync(`${tmpdir()}/nightly-incomplete-`);
+ const log='Fatal error: Premature end of PHP process when running Tests\\Unit\\Services\\Career\\CareerAliasResolutionBundleBuilderTest::test_alias.\nIn CareerCurrentAuthorityPackage.php line 840:\nAllowed memory size of 2147483648 bytes exhausted (tried to allocate 909312 bytes)';
+ const zip=members=>{
+  const path=`${root}/evidence.zip`;
+  rmSync(path,{force:true});
+  execFileSync('zip',['-q',path,...members],{cwd:root});
+  return [path,`sha256:${digest(readFileSync(path))}`];
+ };
+ try {
+  writeFileSync(`${root}/nightly-full-phpunit.xml.invalid`,'');
+  writeFileSync(`${root}/nightly-full-phpunit.log`,log);
+  const binding=zip(['nightly-full-phpunit.xml.invalid','nightly-full-phpunit.log']);
+  const evidence=readNightlyArtifactEvidence(...binding);
+  assert.equal(evidence.log,log);
+  assert.equal(evidence.artifact_digest,binding[1]);
+  const jobs=[{name:'Full PHPUnit regression and performance contracts',conclusion:'failure'}];
+  const path='tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php';
+  assert.deepEqual(nightlyRevalidationPaths({},jobs,evidence,[path]),[path]);
+  assert.throws(()=>assessNightly({},jobs,evidence,{covered_classes:[]}),/UNKNOWN/);
+  assert.equal(assessNightly({},jobs,evidence,{sha:'candidate',covered_classes:['CareerAliasResolutionBundleBuilderTest']}).disposition,'CURRENT_CANDIDATE_FOCUSED_REVALIDATION');
+  assert.throws(()=>nightlyRevalidationPaths({},[...jobs,{name:'Security scan',conclusion:'failure'}],evidence,[path]),/HIGH_RISK/);
+  assert.throws(()=>readNightlyArtifactEvidence(binding[0],`sha256:${'0'.repeat(64)}`),/DIGEST_HOLD/);
+  writeFileSync(`${root}/nightly-full-phpunit.xml`,'<testsuites><testcase file="tests/Unit/PassTest.php"/></testsuites>');
+  assert.ok(readNightlyArtifactEvidence(...zip(['nightly-full-phpunit.xml','nightly-full-phpunit.log'])).junit);
+  assert.throws(()=>readNightlyArtifactEvidence(...zip(['nightly-full-phpunit.log'])),/INCOMPLETE/);
+  writeFileSync(`${root}/nightly-full-phpunit.log`,log+'\nFatal error: unrelated failure');
+  assert.throws(()=>readNightlyArtifactEvidence(...zip(['nightly-full-phpunit.xml.invalid','nightly-full-phpunit.log'])),/UNKNOWN/);
+  writeFileSync(`${root}/nightly-full-phpunit.log`,'Fatal error: unknown process failure');
+  assert.throws(()=>readNightlyArtifactEvidence(...zip(['nightly-full-phpunit.xml.invalid','nightly-full-phpunit.log'])),/UNKNOWN/);
+ } finally {rmSync(root,{recursive:true,force:true});}
+});

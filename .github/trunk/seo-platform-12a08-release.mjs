@@ -107,7 +107,14 @@ const focusedClass = (path, context = '') => {
   return focused;
 };
 export function parseLegacyNightlyFailures(log) {
-  if (typeof log !== 'string' || !log.includes('FAILED')) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  if (typeof log !== 'string') throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const memoryFailures = [...log.matchAll(/Fatal error: Premature end of PHP process when running (Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)::[A-Za-z0-9_]+\.(?:(?!Fatal error)[\s\S])*?Allowed memory size of \d+ bytes exhausted/g)]
+    .map(match => { const path = pestClassPath(match[1]); return {failed_test:path, focused_test:focusedClass(path, match[0])}; });
+  if ([...log.matchAll(/Fatal error:/g)].length !== memoryFailures.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  if (!log.includes('FAILED')) {
+    if (!memoryFailures.length || /\bFAIL\s{2,}Tests\\/.test(log)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    return memoryFailures;
+  }
   const declared = new Map();
   for (const match of log.matchAll(/\bFAIL\s{2,}(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)\s*$/gm)) {
     const path = pestClassPath(match[1]);
@@ -134,9 +141,26 @@ export function parseLegacyNightlyFailures(log) {
   }
   if (declared.size) {
     if ([...declared.keys()].some(path => !supported.has(path))) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    return [...declared.keys()].map(path => ({failed_test:path, focused_test:focusedClass(path, log)}));
+    return [...declared.keys()].map(path => ({failed_test:path, focused_test:focusedClass(path, log)})).concat(memoryFailures);
   }
-  return [...found.values()];
+  return [...found.values(), ...memoryFailures];
+}
+
+// Nightly deliberately renames incomplete XML and retains its failure log.
+// Both formats stay bound to the same immutable archive; failures still require revalidation.
+export function readNightlyArtifactEvidence(path, artifactDigest) {
+  if (artifactDigest !== `sha256:${digest(readFileSync(path))}`) throw new Error('NIGHTLY_ARTIFACT_DIGEST_HOLD');
+  const members = execFileSync('unzip', ['-Z1', path], {encoding:'utf8'}).trim().split('\n');
+  const xml = 'nightly-full-phpunit.xml';
+  const log = 'nightly-full-phpunit.log';
+  if ([xml, xml+'.invalid', log].some(name => members.filter(member => member === name).length > 1)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  const readMember = name => execFileSync('unzip', ['-p', path, name], {maxBuffer:64*1024*1024}).toString();
+  if (members.filter(name => name === xml).length === 1) return {junit:readMember(xml), artifact_digest:artifactDigest};
+  if (members.filter(name => name === xml+'.invalid').length !== 1
+    || members.filter(name => name === log).length !== 1) throw new Error('NIGHTLY_ARTIFACT_INCOMPLETE');
+  const output = readMember(log);
+  parseLegacyNightlyFailures(output);
+  return {log:output, artifact_digest:artifactDigest};
 }
 export function parseJUnitNightlyFailures(xml) {
   // Parse the actual XML, including nested suites and escaped failure text. A
