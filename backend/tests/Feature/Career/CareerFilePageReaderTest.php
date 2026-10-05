@@ -125,12 +125,35 @@ final class CareerFilePageReaderTest extends TestCase
         self::assertNull(\App\Support\PublicProjectionCache::get($key));
     }
 
+    public function test_file_detail_and_seo_publication_decisions_are_never_http_cached(): void
+    {
+        foreach (['zh-CN', 'en'] as $locale) {
+            foreach (["/api/v0.5/career/jobs/actors?locale={$locale}", "/api/v0.5/career-jobs/actors/seo?locale={$locale}"] as $uri) {
+                $this->publication(true);
+                $response = $this->getJson($uri)->assertOk();
+                $this->assertNoStore($response);
+                $this->publication(false);
+                $this->assertNoStore($this->getJson($uri)->assertNotFound());
+            }
+        }
+        $this->assertNoStore($this->getJson('/api/v0.5/career-jobs/actors/seo?locale=invalid')->assertStatus(422));
+    }
+
+    private function assertNoStore(\Illuminate\Testing\TestResponse $response): void
+    {
+        $cacheControl = (string) $response->headers->get('Cache-Control');
+        self::assertStringContainsString('no-store', $cacheControl);
+        self::assertStringNotContainsString('public', $cacheControl);
+        self::assertStringNotContainsString('s-maxage', $cacheControl);
+        self::assertStringNotContainsString('stale-while-revalidate', $cacheControl);
+    }
+
     public function test_absent_authoritative_file_returns_explicit_503_instead_of_old_body(): void
     {
         $this->publication(true);
-        $this->getJson('/api/v0.5/career/jobs/missing-file-role?locale=en')->assertStatus(503)
-            ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE');
-        $this->getJson('/api/v0.5/career-jobs/missing-file-role/seo?locale=en')->assertStatus(503)
-            ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE');
+        $this->assertNoStore($this->getJson('/api/v0.5/career/jobs/missing-file-role?locale=en')->assertStatus(503)
+            ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE'));
+        $this->assertNoStore($this->getJson('/api/v0.5/career-jobs/missing-file-role/seo?locale=en')->assertStatus(503)
+            ->assertJsonPath('error', 'CAREER_PAGE_UNAVAILABLE'));
     }
 }

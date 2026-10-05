@@ -23,12 +23,12 @@ final class CareerJobDetailController extends Controller
         try {
             $payload = app(\App\Services\Career\CareerFilePageReader::class)->read($slug, $publicLocale, ! app(\App\Support\Career\CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request));
         } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure $error) {
-            return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503);
+            return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503)->header('Cache-Control', 'private, no-store');
         }
         if ($payload === null) {
-            return $this->notFoundResponse('career job detail bundle unavailable.');
+            return $this->notFoundResponse('career job detail bundle unavailable.')->header('Cache-Control', 'private, no-store');
         }
 
-        return response()->json($payload)->header(self::PUBLIC_READ_CACHE_HEADER, 'fresh');
+        return response()->json($payload)->header(self::PUBLIC_READ_CACHE_HEADER, 'fresh')->header('Cache-Control', 'private, no-store');
     }
 }
