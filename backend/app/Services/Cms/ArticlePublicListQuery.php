@@ -20,7 +20,26 @@ final class ArticlePublicListQuery
      */
     public function paginate(array $filters): LengthAwarePaginator
     {
-        $query = Article::query()
+        $query = $this->publicQuery($filters);
+
+        $this->applyFilters($query, $filters);
+        $this->applyOrdering($query, $filters);
+
+        $paginator = $query->paginate(
+            $filters['per_page'],
+            ['*'],
+            'page',
+            $filters['page'],
+        );
+
+        $this->hydrate($paginator->getCollection());
+
+        return $paginator;
+    }
+
+    private function publicQuery(array $filters): Builder
+    {
+        return Article::query()
             ->withoutGlobalScopes()
             ->join('article_translation_revisions as list_revision', function (JoinClause $join): void {
                 $join
@@ -42,23 +61,38 @@ final class ArticlePublicListQuery
             })
             ->where('articles.org_id', $filters['org_id'])
             ->published()
+            ->where(fn (Builder $q) => $q->whereNull('articles.published_at')->orWhere('articles.published_at', '<=', now()))
+            ->where(fn (Builder $q) => $q->whereNull('articles.scheduled_at')->orWhere('articles.scheduled_at', '<=', now()))
             ->select(array_merge(
                 ['articles.*'],
                 $this->revisionSelects(),
                 $this->categorySelects(),
             ));
 
-        $this->applyFilters($query, $filters);
-        $this->applyOrdering($query, $filters);
+    }
 
-        $paginator = $query->paginate(
-            $filters['per_page'],
-            ['*'],
-            'page',
-            $filters['page'],
-        );
+    /** Selected records share the exact list eligibility and retain CMS order. */
+    public function selected(int $orgId, string $locale, array $ids): \Illuminate\Database\Eloquent\Collection
+    {
+        $articles = $this->publicQuery(['org_id' => $orgId])->where('articles.locale', $locale)
+            ->whereIn('articles.id', $ids)->get();
+        $this->hydrate($articles);
+        $rank = array_flip($ids);
 
-        $articles = $paginator->getCollection();
+        return $articles->sortBy(fn (Article $article) => $rank[$article->id])->values();
+    }
+
+    /** Counts are scoped to a language and qualifying published revisions. */
+    public function categoryCounts(int $orgId, string $locale): array
+    {
+        return $this->publicQuery(['org_id' => $orgId])->where('articles.locale', $locale)
+            ->where('list_category.is_active', true)->reorder()
+            ->select('list_category.slug')->selectRaw('count(*) as article_count')
+            ->groupBy('list_category.slug')->pluck('article_count', 'list_category.slug')->all();
+    }
+
+    private function hydrate(\Illuminate\Database\Eloquent\Collection $articles): void
+    {
         foreach ($articles as $article) {
             $this->hydrateJoinedRelations($article);
         }
@@ -72,7 +106,6 @@ final class ArticlePublicListQuery
                 ->orderBy('id'),
         ]);
 
-        return $paginator;
     }
 
     /**
@@ -81,6 +114,10 @@ final class ArticlePublicListQuery
      */
     private function applyFilters(Builder $query, array $filters): void
     {
+        if (($filters['category'] ?? null) !== null) {
+            $query->where('list_category.slug', $filters['category'])->where('list_category.is_active', true);
+        }
+
         if ($filters['locale'] !== null) {
             $query->where('articles.locale', $filters['locale']);
         }

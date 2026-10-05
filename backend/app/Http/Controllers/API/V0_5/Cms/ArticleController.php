@@ -11,6 +11,7 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\Article15ExactPackageRevisionBoundAdapter;
+use App\Services\Cms\ArticleBlogService;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublicListQuery;
 use App\Services\Cms\ArticlePublicListReadCache;
@@ -36,6 +37,7 @@ class ArticleController extends Controller
 {
     public function __construct(
         private readonly ArticleService $articleService,
+        private readonly ArticleBlogService $articleBlogService,
         private readonly ArticlePublishService $articlePublishService,
         private readonly ArticlePublicListQuery $articlePublicListQuery,
         private readonly ArticlePublicListReadCache $articlePublicListReadCache,
@@ -57,13 +59,29 @@ class ArticleController extends Controller
             return $validated;
         }
 
+        if ($validated['category'] !== null) {
+            $category = ArticleCategory::withoutGlobalScopes()->where('org_id', $validated['org_id'])
+                ->where('slug', $validated['category'])->first();
+            $validated['category_cache_token'] = $category === null ? 'missing' : hash('sha256', json_encode([
+                $category->id, $category->is_active, $category->name, $category->description,
+            ], JSON_THROW_ON_ERROR));
+        }
+
         $resolved = $this->articlePublicListReadCache->resolve(
             $validated,
             fn (): array => $this->buildArticleListResponse($validated),
         );
 
+        $payload = $resolved['payload'];
+        if ($validated['include_blog']) {
+            $payload['blog_v1'] = $this->articleBlogService->read(
+                $validated['org_id'], $validated['locale'],
+                fn (Article $article): array => $this->publicArticleListPayload($article),
+            );
+        }
+
         return response()
-            ->json($resolved['payload'])
+            ->json($payload)
             ->header('X-FM-Article-List-Cache', $resolved['state']);
     }
 
@@ -907,6 +925,8 @@ class ArticleController extends Controller
             'locale' => ['nullable', 'in:en,zh-CN'],
             'related_test_slug' => ['nullable', 'string', 'max:127'],
             'voice' => ['nullable', 'string', 'max:32'],
+            'category' => ['nullable', 'string', 'max:127', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'include_blog' => ['nullable', 'boolean'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
@@ -916,12 +936,17 @@ class ArticleController extends Controller
         }
 
         $validated = $validator->validated();
+        if (($validated['include_blog'] ?? false) && ! isset($validated['locale'])) {
+            return $this->invalidArgumentMessage('locale is required for include_blog.');
+        }
 
         return [
             'org_id' => (int) ($validated['org_id'] ?? 0),
             'locale' => isset($validated['locale']) ? (string) $validated['locale'] : null,
             'related_test_slug' => isset($validated['related_test_slug']) ? trim((string) $validated['related_test_slug']) : null,
             'voice' => isset($validated['voice']) ? trim((string) $validated['voice']) : null,
+            'category' => $validated['category'] ?? null,
+            'include_blog' => (bool) ($validated['include_blog'] ?? false),
             'page' => (int) ($validated['page'] ?? 1),
             'per_page' => (int) ($validated['per_page'] ?? 20),
         ];
