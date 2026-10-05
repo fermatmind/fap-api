@@ -88,7 +88,7 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
     public function test_batch_execute_promotes_all_thirteen_atomically_and_preserves_holds(): void
     {
         $this->createCohort();
-        Cache::put('seo:sitemap-source:v1:fresh', 'held-source', 600);
+        Cache::put('seo:sitemap-source:v2:fresh', 'held-source', 600);
         Cache::put('seo:sitemap:xml:v6', 'held-xml', 600);
         Cache::put('seo:sitemap:etag:v6', 'held-etag', 600);
 
@@ -137,7 +137,7 @@ final class Seo13ArticleAtomicPromotionCommandTest extends TestCase
             );
         }
 
-        $this->assertSame('held-source', Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->assertSame('held-source', Cache::get('seo:sitemap-source:v2:fresh'));
         $this->assertSame('held-xml', Cache::get('seo:sitemap:xml:v6'));
         $this->assertSame('held-etag', Cache::get('seo:sitemap:etag:v6'));
         $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()

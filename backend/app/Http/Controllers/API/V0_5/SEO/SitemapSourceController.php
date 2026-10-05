@@ -17,11 +17,13 @@ use Illuminate\Http\JsonResponse;
 
 class SitemapSourceController extends Controller
 {
-    public const CACHE_KEY_FRESH = 'seo:sitemap-source:v1:fresh';
+    // Old schedulers retain v1 while this release validates Current body eligibility.
+    // Separate identities keep their shared-cache writes from replacing this candidate.
+    public const CACHE_KEY_FRESH = 'seo:sitemap-source:v2:fresh';
 
-    public const CACHE_KEY_STALE = 'seo:sitemap-source:v1:stale';
+    public const CACHE_KEY_STALE = 'seo:sitemap-source:v2:stale';
 
-    public const CACHE_KEY_LOCK = 'seo:sitemap-source:v1:lock';
+    public const CACHE_KEY_LOCK = 'seo:sitemap-source:v2:lock';
 
     public const FRESH_TTL_SECONDS = 600;
 

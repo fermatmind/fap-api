@@ -78,6 +78,22 @@ final class PublicProjectionMigrationTest extends TestCase
         return $base;
     }
 
+    public function test_sitemap_release_identities_remain_isolated_in_the_serving_store(): void
+    {
+        Projection::mutation(fn () => Projection::writeState(['version' => 1, 'mode' => 'isolated']));
+        $controller = \App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::class;
+        $keys = [$controller::CACHE_KEY_FRESH, $controller::CACHE_KEY_STALE,
+            \App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY];
+        foreach ($keys as $key) {
+            Projection::put($key, ['candidate' => true], 600);
+            $this->assertSame(['candidate' => true], Cache::store('public_projection')->get($key));
+            $this->assertNull(Cache::store('redis')->get($key));
+        }
+        Projection::put('seo:sitemap-source:v1:fresh', ['legacy' => true], 600);
+        $this->assertSame(['candidate' => true], Projection::get($controller::CACHE_KEY_FRESH));
+        $this->assertSame(['legacy' => true], Projection::get('seo:sitemap-source:v1:fresh'));
+    }
+
     public function test_career_page_expiry_detection_and_retention_follow_the_serving_and_mirror_stores(): void
     {
         $key = 'career:page:career.detail.page.v1:actors:zh-CN:'.str_repeat('a', 64);

@@ -65,7 +65,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
     {
         $this->createCohort();
         $this->publishEmptyCareerDirectories();
-        Cache::put('seo:sitemap-source:v1:fresh', ['sentinel' => true]);
+        Cache::put('seo:sitemap-source:v2:fresh', ['sentinel' => true]);
 
         Artisan::call('articles:seo13-discoverability-cache-refresh', [
             '--dry-run' => true,
@@ -75,7 +75,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
 
         $this->assertFalse($payload['ok']);
         $this->assertContains('schema_release_incomplete', array_column($payload['errors'], 'code'));
-        $this->assertSame(['sentinel' => true], Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->assertSame(['sentinel' => true], Cache::get('seo:sitemap-source:v2:fresh'));
     }
 
     public function test_execute_refreshes_only_nine_bounded_cache_keys_after_schema_release(): void
@@ -147,8 +147,8 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
                 && $paths === ['/sitemap.xml', '/llms.txt', '/llms-full.txt'];
         });
         $this->assertSame($beforeAuthority, $this->authorityState());
-        $this->assertIsArray(Cache::get('seo:sitemap-source:v1:fresh'));
-        $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
+        $this->assertIsArray(Cache::get('seo:sitemap-source:v2:fresh'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v2:stale'));
         $this->assertIsString(Cache::get(SitemapCache::XML_CACHE_KEY));
         $this->assertIsString(Cache::get(SitemapCache::ETAG_CACHE_KEY));
         $this->assertIsString(Cache::get(SitemapCache::IDENTITY_CACHE_KEY));
@@ -342,8 +342,8 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
     private function cacheKeys(): array
     {
         return [
-            'seo:sitemap-source:v1:fresh',
-            'seo:sitemap-source:v1:stale',
+            'seo:sitemap-source:v2:fresh',
+            'seo:sitemap-source:v2:stale',
             SitemapCache::XML_CACHE_KEY,
             SitemapCache::ETAG_CACHE_KEY,
             SitemapCache::IDENTITY_CACHE_KEY,

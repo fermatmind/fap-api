@@ -15,6 +15,7 @@ final class PublicProjectionCache
             return true;
         }
         if (in_array($key, ['seo:sitemap-source:v1:fresh', 'seo:sitemap-source:v1:stale', 'seo:sitemap-source:warm-fingerprint:v1',
+            'seo:sitemap-source:v2:fresh', 'seo:sitemap-source:v2:stale', 'seo:sitemap-source:warm-fingerprint:v2',
             'career:public-authority:dataset-hub:v3', 'career:public-authority:dataset-method:v3',
             'career:public-authority:launch-governance-closure:v1', 'career:public-authority:warm-fingerprint:v1'], true)) {
             return true;

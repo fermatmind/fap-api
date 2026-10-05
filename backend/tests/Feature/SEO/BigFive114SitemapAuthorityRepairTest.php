@@ -37,7 +37,7 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
             '--allow-indexable' => true,
             '--write' => true,
         ])
-            ->expectsOutputToContain('discoverability_cache_keys_flushed=seo:sitemap-source:v1:fresh')
+            ->expectsOutputToContain('discoverability_cache_keys_flushed=seo:sitemap-source:v2:fresh')
             ->assertExitCode(0);
 
         self::assertNull(Cache::get(SitemapSourceController::CACHE_KEY_FRESH));

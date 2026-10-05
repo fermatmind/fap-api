@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 
 final class WarmSitemapSourceCacheCommand extends Command
 {
-    public const FINGERPRINT_CACHE_KEY = 'seo:sitemap-source:warm-fingerprint:v1';
+    public const FINGERPRINT_CACHE_KEY = 'seo:sitemap-source:warm-fingerprint:v2';
 
     private const FINGERPRINT_SCHEMA_VERSION = 'fermatmind.sitemap-source-warm-fingerprint.v1';
 

@@ -26,6 +26,28 @@ class SitemapSourceCacheTest extends TestCase
     use MockeryPHPUnitIntegration;
     use RefreshDatabase;
 
+    public function test_old_scheduler_writes_cannot_replace_the_current_sitemap_candidate(): void
+    {
+        $controller = app(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::class);
+        $candidate = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/zh/career/jobs/nurse-practitioners',
+                'lastmod' => '2026-10-05T00:00:00Z']]];
+        $controller->storeCache($candidate);
+
+        // The still-active release runs this legacy write every five minutes.
+        Cache::put('seo:sitemap-source:v1:fresh', [...$candidate, 'count' => 0, 'items' => []], 600);
+        Cache::forever('seo:sitemap-source:warm-fingerprint:v1', ['old' => true]);
+
+        $this->getJson('/api/v0.5/seo/sitemap-source')->assertOk()
+            ->assertJsonPath('count', 1)
+            ->assertJsonPath('items.0.loc', $candidate['items'][0]['loc']);
+        $this->assertTrue(\App\Support\PublicProjectionCache::selected($controller::CACHE_KEY_FRESH));
+        $this->assertTrue(\App\Support\PublicProjectionCache::selected($controller::CACHE_KEY_STALE));
+        $fingerprintKey = \App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY;
+        $this->assertTrue(\App\Support\PublicProjectionCache::selected($fingerprintKey));
+        $this->assertNull(Cache::get($fingerprintKey));
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -58,8 +80,8 @@ class SitemapSourceCacheTest extends TestCase
         $this->assertGreaterThan(10, $response->json('count'));
         $this->assertContains('https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types', $locs);
         $this->assertContains('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec', $locs);
-        $this->assertNull(Cache::get('seo:sitemap-source:v1:fresh'));
-        $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v2:fresh'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v2:stale'));
 
         foreach ($locs as $loc) {
             $this->assertDoesNotMatchRegularExpression(
@@ -113,7 +135,7 @@ class SitemapSourceCacheTest extends TestCase
                 ['loc' => 'https://fermatmind.com/en/career/jobs/stale-test-slug', 'lastmod' => '2026-01-01T00:00:00+00:00'],
             ],
         ];
-        Cache::put('seo:sitemap-source:v1:stale', $stalePayload, 86400);
+        Cache::put('seo:sitemap-source:v2:stale', $stalePayload, 86400);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -123,7 +145,7 @@ class SitemapSourceCacheTest extends TestCase
 
         $locs = collect($response->json('items'))->pluck('loc')->all();
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/stale-test-slug', $locs);
-        $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v2:stale'));
     }
 
     public function test_stale_cache_miss_uses_short_fallback_cache_control(): void
@@ -137,7 +159,7 @@ class SitemapSourceCacheTest extends TestCase
             'count' => 0,
             'items' => [],
         ];
-        Cache::put('seo:sitemap-source:v1:stale', $stalePayload, 86400);
+        Cache::put('seo:sitemap-source:v2:stale', $stalePayload, 86400);
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -161,8 +183,8 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
-        $stale = Cache::get('seo:sitemap-source:v1:stale');
+        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
+        $stale = Cache::get('seo:sitemap-source:v2:stale');
 
         $this->assertIsArray($fresh);
         $this->assertTrue($fresh['ok']);
@@ -179,7 +201,7 @@ class SitemapSourceCacheTest extends TestCase
         $this->runRefreshIfChanged('rebuilt');
 
         $receipt = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
+        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
         $this->assertIsArray($receipt);
         $this->assertIsArray($fresh);
 
@@ -190,7 +212,7 @@ class SitemapSourceCacheTest extends TestCase
             $receipt,
             Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY),
         );
-        $this->assertSame($fresh, Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->assertSame($fresh, Cache::get('seo:sitemap-source:v2:fresh'));
     }
 
     public function test_refresh_if_changed_rebuilds_when_published_indexable_authority_changes(): void
@@ -217,7 +239,7 @@ class SitemapSourceCacheTest extends TestCase
 
         $this->runRefreshIfChanged('rebuilt');
         $after = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
+        $fresh = Cache::get('seo:sitemap-source:v2:fresh');
 
         $this->assertIsArray($after);
         $this->assertNotSame($before['fingerprint_sha256'], $after['fingerprint_sha256']);
@@ -246,7 +268,7 @@ class SitemapSourceCacheTest extends TestCase
             $this->runRefreshIfChanged('rebuilt');
         }
 
-        Cache::put('seo:sitemap-source:v1:fresh', ['ok' => true, 'count' => 0], 600);
+        Cache::put('seo:sitemap-source:v2:fresh', ['ok' => true, 'count' => 0], 600);
         $this->runRefreshIfChanged('rebuilt');
     }
 
@@ -254,15 +276,15 @@ class SitemapSourceCacheTest extends TestCase
     {
         $original = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
             'items' => [['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-01-01T00:00:00Z']]];
-        Cache::put('seo:sitemap-source:v1:fresh', $original, 600);
+        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
         $this->mock(SitemapGenerator::class, function ($mock): void {
             $mock->shouldReceive('generateSitemapUrls')->twice()->andThrow(new \RuntimeException('OOM simulated'));
         });
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
-        $this->assertSame($original, Cache::get('seo:sitemap-source:v1:fresh'));
-        Cache::forget('seo:sitemap-source:v1:fresh');
+        $this->assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        Cache::forget('seo:sitemap-source:v2:fresh');
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
-        $this->assertNull(Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v2:fresh'));
         $this->getJson('/api/v0.5/seo/sitemap-source')->assertHeader('X-Fermat-Cache', 'fallback');
     }
 
@@ -329,7 +351,7 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $cached = Cache::get('seo:sitemap-source:v1:fresh');
+        $cached = Cache::get('seo:sitemap-source:v2:fresh');
         $this->assertIsArray($cached);
 
         $locs = collect($cached['items'])->pluck('loc')->all();
@@ -354,7 +376,7 @@ class SitemapSourceCacheTest extends TestCase
         $this->artisan('seo:warm-sitemap-source-cache --json')
             ->assertSuccessful();
 
-        $cached = Cache::get('seo:sitemap-source:v1:fresh');
+        $cached = Cache::get('seo:sitemap-source:v2:fresh');
         $this->assertIsArray($cached);
 
         $forbiddenPatterns = [
