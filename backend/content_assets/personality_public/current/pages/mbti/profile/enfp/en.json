@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enfp",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "1c9e2caf18415a83b8d9dee0838b0cd744c198c4",
+      "answer_fingerprint": "99450101c7d0307911558bfe3c09397196bc1c80",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "eca73b6933cb1d086bdc3731b343ae07f4b17302",
-        "7903cfb07b7c11961aaebf05cba9d38d9a9f40e0",
+        "27c29290590abd09c276e141167513960793e16e",
+        "b3f3eb1786d181e525f65dd5d467c2d6b69f9ba0",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "7903cfb07b7c11961aaebf05cba9d38d9a9f40e0",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Choose which possibility serves a current value and what you can finish. Keep other ideas in a separate list so exploration does not silently replace a commitment.",
+          "key": "faq-0",
+          "question": "Does ENFP mean following every exciting possibility?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/enfp",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does ENFP indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for ENFP?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do ENFP-A and ENFP-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can ENFP predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "b3f3eb1786d181e525f65dd5d467c2d6b69f9ba0",
+      "next_step_blocks": [],
       "primary_content_ref": "ENFP",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,47 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/enfp",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "eca73b6933cb1d086bdc3731b343ae07f4b17302",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "27c29290590abd09c276e141167513960793e16e",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ENFP profiles.",
+          "body": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ENFP - Campaigner"
+          "title": "ENFP Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/enfp-a",
+        "label": "ENFP-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/enfp-t",
+        "label": "ENFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/enfp-a-vs-enfp-t",
+        "label": "ENFP-A vs ENFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/enfp-vs-entp",
+        "label": "ENFP vs ENTP",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/enfp",
@@ -162,7 +156,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "7903cfb07b7c11961aaebf05cba9d38d9a9f40e0",
+      "landing_fingerprint": "b3f3eb1786d181e525f65dd5d467c2d6b69f9ba0",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ENFP",
       "public_surface_ref": null,
@@ -177,10 +171,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ENFP profiles.",
+          "body": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ENFP - Campaigner"
+          "title": "ENFP Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +192,7 @@
       "display_type": "ENFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ENFP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Campaigner",
         "rarity": null,
@@ -207,156 +201,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ENFP uses four preference labels: Extraversion, Intuition, Feeling, and Perceiving. Treat the description as a set of questions about interaction, information, decisions, and planning. It does not establish ability, a best career, or a complete identity.",
+          "body_md": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ENFP is commonly described as Ne–Fi–Te–Si. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ENFP-style description asks both what could be possible and why it matters. You might connect a new idea with a person's experience, see several ways forward and want room to explore before committing. This can broaden a limited discussion. A possible blind spot is letting enthusiasm create more commitments than a project can support.\n\nCounterexample: an imaginative person can maintain routines and finish detailed work. An Extraversion preference does not rule out needing solitude. Being cheerful, easily bored or artistic does not establish ENFP; compare the decisions you make when an exciting possibility conflicts with a lasting priority.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a community project receives an unexpected offer to collaborate. You see three attractive possibilities, but the team has time for one. Write the beneficiary, cost and smallest useful outcome of each option before making promises. Choose a trial that preserves the purpose without expanding every idea into a project.\n\nExplore tasks such as developing an initiative, interviewing users or communicating a new concept. Check whether the routine follow-through interests you as much as the beginning. Creative, commercial and helping roles have different skills and constraints; the label does not establish ability or select an occupation.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: a meaningful conversation inspires you to suggest an ambitious shared plan. Your friend appreciates the idea but cannot match your availability. Ask what commitment is realistic, then agree on one small next step. Enthusiasm should not become an obligation for either person.\n\nWhen a conversation changes direction, check that the other person had room to finish. Feeling preferences do not prove emotional insight, and sharing interests or type letters cannot guarantee compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several interesting commitments now compete for attention, and every task feels connected to an important value. Separate a current obligation from an idea that can wait. Renegotiate one promise rather than trying to rescue all of them with a new plan.\n\nDifficulty focusing can have many causes. It cannot establish an ENFP type or a diagnosis, and a personality story should not replace attention to workload, sleep or persistent distress.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Keep a possibility list separate from a commitment list. For one idea, define who benefits, what you will deliver and what you will stop doing to make space. Try a small version before adding more people or scope.\n\nAfter a week, compare excitement at the start with satisfaction during the actual work. Notice a completed routine task as well as an abandoned idea; both help challenge stereotypes about how an ENFP must behave.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ENFP-A](/en/personality/enfp-a)\n- [ENFP-T](/en/personality/enfp-t)\n- [ENFP-A vs ENFP-T](/en/personality/enfp-a-vs-enfp-t)\n- [ENFP vs ENTP](/en/personality/enfp-vs-entp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "physician",
-                "title": "Physician"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Pick a task that matters to you. Record how you explored alternatives, which personal values affected the choice, and how you kept room to revise. Add one counterexample where you worked differently. These observations help test whether the description is useful in context; they do not prove a type or predict an outcome.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Choose which possibility serves a current value and what you can finish. Keep other ideas in a separate list so exploration does not silently replace a commitment.",
+                "question": "Does ENFP mean following every exciting possibility?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ENFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ENFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ENFP-A and ENFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ENFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/enfp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
+        "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/enfp",
+          "name": "ENFP Personality",
+          "url": "https://fermatmind.com/en/personality/enfp"
+        },
+        "og_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ENFP Personality Guide",
+        "og_title": "ENFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ENFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
+        "title": "ENFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ENFP Personality Guide"
+        "twitter_title": "ENFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ENFP profiles.",
+        "summary": "",
         "tagline": "Campaigner",
-        "title": "ENFP - Campaigner"
+        "title": "ENFP Personality"
       },
       "variant_code": null
     },
@@ -372,7 +356,7 @@
       "display_type": "ENFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ENFP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Campaigner",
         "rarity": null,
@@ -381,166 +365,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ENFP uses four preference labels: Extraversion, Intuition, Feeling, and Perceiving. Treat the description as a set of questions about interaction, information, decisions, and planning. It does not establish ability, a best career, or a complete identity.",
+          "body_md": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ENFP is commonly described as Ne–Fi–Te–Si. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ENFP-style description asks both what could be possible and why it matters. You might connect a new idea with a person's experience, see several ways forward and want room to explore before committing. This can broaden a limited discussion. A possible blind spot is letting enthusiasm create more commitments than a project can support.\n\nCounterexample: an imaginative person can maintain routines and finish detailed work. An Extraversion preference does not rule out needing solitude. Being cheerful, easily bored or artistic does not establish ENFP; compare the decisions you make when an exciting possibility conflicts with a lasting priority.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a community project receives an unexpected offer to collaborate. You see three attractive possibilities, but the team has time for one. Write the beneficiary, cost and smallest useful outcome of each option before making promises. Choose a trial that preserves the purpose without expanding every idea into a project.\n\nExplore tasks such as developing an initiative, interviewing users or communicating a new concept. Check whether the routine follow-through interests you as much as the beginning. Creative, commercial and helping roles have different skills and constraints; the label does not establish ability or select an occupation.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: a meaningful conversation inspires you to suggest an ambitious shared plan. Your friend appreciates the idea but cannot match your availability. Ask what commitment is realistic, then agree on one small next step. Enthusiasm should not become an obligation for either person.\n\nWhen a conversation changes direction, check that the other person had room to finish. Feeling preferences do not prove emotional insight, and sharing interests or type letters cannot guarantee compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several interesting commitments now compete for attention, and every task feels connected to an important value. Separate a current obligation from an idea that can wait. Renegotiate one promise rather than trying to rescue all of them with a new plan.\n\nDifficulty focusing can have many causes. It cannot establish an ENFP type or a diagnosis, and a personality story should not replace attention to workload, sleep or persistent distress.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Keep a possibility list separate from a commitment list. For one idea, define who benefits, what you will deliver and what you will stop doing to make space. Try a small version before adding more people or scope.\n\nAfter a week, compare excitement at the start with satisfaction during the actual work. Notice a completed routine task as well as an abandoned idea; both help challenge stereotypes about how an ENFP must behave.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ENFP-A](/en/personality/enfp-a)\n- [ENFP-T](/en/personality/enfp-t)\n- [ENFP-A vs ENFP-T](/en/personality/enfp-a-vs-enfp-t)\n- [ENFP vs ENTP](/en/personality/enfp-vs-entp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "physician",
-                "title": "Physician"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Pick a task that matters to you. Record how you explored alternatives, which personal values affected the choice, and how you kept room to revise. Add one counterexample where you worked differently. These observations help test whether the description is useful in context; they do not prove a type or predict an outcome.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Choose which possibility serves a current value and what you can finish. Keep other ideas in a separate list so exploration does not silently replace a commitment.",
+                "question": "Does ENFP mean following every exciting possibility?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ENFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ENFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ENFP-A and ENFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ENFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/enfp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
+        "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/enfp",
+          "name": "ENFP Personality",
+          "url": "https://fermatmind.com/en/personality/enfp"
+        },
+        "og_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ENFP Personality Guide",
+        "og_title": "ENFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ENFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
+        "title": "ENFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ENFP Personality Guide"
+        "twitter_title": "ENFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ENFP profiles.",
+        "summary": "",
         "tagline": "Campaigner",
-        "title": "ENFP - Campaigner"
+        "title": "ENFP Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ENFP",
-      "excerpt": "Role recommendations and work-environment guidance for ENFP profiles.",
+      "excerpt": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
       "hero_image_url": null,
       "hero_kicker": "Campaigner",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ENFP profiles.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,454 +526,166 @@
       "slug": "enfp",
       "status": "published",
       "subtitle": null,
-      "title": "ENFP - Campaigner",
+      "title": "ENFP Personality",
       "type_code": "ENFP",
       "type_name": "Campaigner"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "ENFP uses four preference labels: Extraversion, Intuition, Feeling, and Perceiving. Treat the description as a set of questions about interaction, information, decisions, and planning. It does not establish ability, a best career, or a complete identity.",
+        "body_md": "ENFP describes Extraversion, Intuition, Feeling and Perceiving preferences. The type description highlights exploring possibilities and their personal meaning. It does not establish creativity, sociability or a particular career path.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ENFP is commonly described as Ne–Fi–Te–Si. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An ENFP-style description asks both what could be possible and why it matters. You might connect a new idea with a person's experience, see several ways forward and want room to explore before committing. This can broaden a limited discussion. A possible blind spot is letting enthusiasm create more commitments than a project can support.\n\nCounterexample: an imaginative person can maintain routines and finish detailed work. An Extraversion preference does not rule out needing solitude. Being cheerful, easily bored or artistic does not establish ENFP; compare the decisions you make when an exciting possibility conflicts with a lasting priority.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+        "body_md": "Original scenario: a community project receives an unexpected offer to collaborate. You see three attractive possibilities, but the team has time for one. Write the beneficiary, cost and smallest useful outcome of each option before making promises. Choose a trial that preserves the purpose without expanding every idea into a project.\n\nExplore tasks such as developing an initiative, interviewing users or communicating a new concept. Check whether the routine follow-through interests you as much as the beginning. Creative, commercial and helping roles have different skills and constraints; the label does not establish ability or select an occupation.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: a meaningful conversation inspires you to suggest an ambitious shared plan. Your friend appreciates the idea but cannot match your availability. Ask what commitment is realistic, then agree on one small next step. Enthusiasm should not become an obligation for either person.\n\nWhen a conversation changes direction, check that the other person had room to finish. Feeling preferences do not prove emotional insight, and sharing interests or type letters cannot guarantee compatibility.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: several interesting commitments now compete for attention, and every task feels connected to an important value. Separate a current obligation from an idea that can wait. Renegotiate one promise rather than trying to rescue all of them with a new plan.\n\nDifficulty focusing can have many causes. It cannot establish an ENFP type or a diagnosis, and a personality story should not replace attention to workload, sleep or persistent distress.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "physician",
-              "title": "Physician"
-            },
-            {
-              "slug": "data-scientist",
-              "title": "Data Scientist"
-            },
-            {
-              "slug": "frontend-engineer",
-              "title": "Frontend Engineer"
-            },
-            {
-              "slug": "fullstack-engineer",
-              "title": "Fullstack Engineer"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            }
-          ],
-          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "Keep a possibility list separate from a commitment list. For one idea, define who benefits, what you will deliver and what you will stop doing to make space. Try a small version before adding more people or scope.\n\nAfter a week, compare excitement at the start with satisfaction during the actual work. Notice a completed routine task as well as an abandoned idea; both help challenge stereotypes about how an ENFP must behave.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENFP-A](/en/personality/enfp-a)\n- [ENFP-T](/en/personality/enfp-t)\n- [ENFP-A vs ENFP-T](/en/personality/enfp-a-vs-enfp-t)\n- [ENFP vs ENTP](/en/personality/enfp-vs-entp)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "Pick a task that matters to you. Record how you explored alternatives, which personal values affected the choice, and how you kept room to revise. Add one counterexample where you worked differently. These observations help test whether the description is useful in context; they do not prove a type or predict an outcome.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Choose which possibility serves a current value and what you can finish. Keep other ideas in a separate list so exploration does not silently replace a commitment.",
+              "question": "Does ENFP mean following every exciting possibility?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does ENFP indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for ENFP?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do ENFP-A and ENFP-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can ENFP predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
-            },
-            {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "ENFP-A and ENFP-T share the same ENFP core. Within possibility, connection and creative momentum, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "ENFP-A and ENFP-T share the same ENFP core. Within possibility, connection and creative momentum, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around possibility, connection and creative momentum, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ENFP core.",
-              "question": "What is the main ENFP-A vs ENFP-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. ENFP situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is ENFP-A better than ENFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to possibility, connection and creative momentum-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am ENFP-A or ENFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support ENFP work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "ENFP",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/enfp-a-vs-enfp-t",
-            "url": "https://fermatmind.com/en/personality/enfp-a-vs-enfp-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "ENFP-A profile",
-              "href": "/en/personality/enfp-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ENFP-T profile",
-              "href": "/en/personality/enfp-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare ENFP-A and ENFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/enfp-a-vs-enfp-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare ENFP-A and ENFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare ENFP-A and ENFP-T through possibility, connection and creative momentum, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/enfp-a-vs-enfp-t with possibility, connection and creative momentum rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around possibility, connection and creative momentum, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ENFP core.",
-                  "question": "What is the main ENFP-A vs ENFP-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. ENFP situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is ENFP-A better than ENFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to possibility, connection and creative momentum-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am ENFP-A or ENFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support ENFP work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "ENFP-A vs ENFP-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "ENFP-A profile",
-                  "href": "/en/personality/enfp-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "ENFP-T profile",
-                  "href": "/en/personality/enfp-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "ENFP-A and ENFP-T share the same ENFP core. Within possibility, connection and creative momentum, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "ENFP-A vs ENFP-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/enfp-a-vs-enfp-t"
-          },
-          "seo": {
-            "description": "Compare ENFP-A and ENFP-T through possibility, connection and creative momentum, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "ENFP-A vs ENFP-T: Key Differences",
-            "title": "ENFP-A vs ENFP-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare ENFP-A and ENFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ENFP-A vs ENFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/enfp-a-vs-enfp-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/enfp-a-vs-enfp-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ENFP-A vs ENFP-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/enfp",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
-      "seo_title": "ENFP Personality Guide",
-      "twitter_description": null,
+      "og_title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/enfp-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/enfp-a"
+        "en": "https://fermatmind.com/en/personality/enfp",
+        "zh-CN": "https://fermatmind.com/zh/personality/enfp"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/enfp-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/enfp",
+      "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "eca73b6933cb1d086bdc3731b343ae07f4b17302",
+      "metadata_fingerprint": "27c29290590abd09c276e141167513960793e16e",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
-        "title": "ENFP Personality Guide",
+        "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/enfp-a"
+        "url": "https://fermatmind.com/en/personality/enfp"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1008,18 +694,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ENFP Personality Guide",
+      "title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ENFP personality type.",
-        "title": "ENFP Personality Guide"
+        "description": "Understand ENFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ENFP Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "b18995c2f1208e9de4166e30f7b28fdd69f058889dc88d3c805f2ca1e39eb988"
+  "source_content_sha256": "94a7e286e7cf8695f29df1f33e88d3c9f0098121cc1edb42e8cd0a3b7655ed30"
 }

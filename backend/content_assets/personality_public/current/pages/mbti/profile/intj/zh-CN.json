@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "de19c186ac4d71543a778f15b23a5820fdd64f9d",
+      "answer_fingerprint": "47bc1d1f3e530bf023544a3f0738c2ad82dc99e4",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "998ac8adbde5594fd663835a75454f1bbf4de9de",
-        "5005e75cd314f80a00407b6e3f5659108a5b827b",
+        "9a39557a0426f12d502269b32b5576487441e2e2",
+        "468f5411b41ace42cb94d0492b65d98a80d2bb1b",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "5005e75cd314f80a00407b6e3f5659108a5b827b",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "开始测试"
+          "answer": "把计划当工作假设，明确什么迹象要求修改，并区分目标与某条实现路线。",
+          "key": "faq-0",
+          "question": "INTJ 一定要坚持长期计划吗？"
         },
         {
-          "body": null,
-          "href": "/zh/career/recommendations/mbti/intj",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "查看职业推荐"
+          "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+          "key": "faq-1",
+          "question": "INTJ 能说明智力或能力吗？"
         },
         {
-          "body": null,
-          "href": "/zh/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "查看主题聚合"
+          "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+          "key": "faq-2",
+          "question": "INTJ 最适合哪些职业？"
+        },
+        {
+          "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+          "key": "faq-3",
+          "question": "INTJ-A 与 INTJ-T 增加了什么？"
+        },
+        {
+          "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+          "key": "faq-4",
+          "question": "INTJ 能预测伴侣匹配吗？"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "468f5411b41ace42cb94d0492b65d98a80d2bb1b",
+      "next_step_blocks": [],
       "primary_content_ref": "INTJ",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,52 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "先看职业推荐入口，再回到类型页做验证。",
-          "href": "/zh/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "职业方向"
-        },
-        {
-          "body": "先回 MBTI 主题页整理判断框架，再做路径选择。",
-          "href": "/zh/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "专业选择"
-        },
-        {
-          "body": "保留当前类型页，继续对照团队协作特征。",
-          "href": "/zh/personality/intj",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "团队协作"
-        },
-        {
-          "body": "从类型页回到主题页，补齐关系场景解释。",
-          "href": "/zh/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "关系相处"
-        },
-        {
-          "body": "直接开始测试，拿到结构化成长建议。",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "成长建议"
-        }
-      ],
-      "seo_surface_ref": "998ac8adbde5594fd663835a75454f1bbf4de9de",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "9a39557a0426f12d502269b32b5576487441e2e2",
       "summary_blocks": [
         {
-          "body": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+          "body": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "INTJ - 建筑师"
+          "title": "INTJ 人格"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/zh/personality/intj-a",
+        "label": "INTJ-A",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/intj-t",
+        "label": "INTJ-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/intj-a-vs-intj-t",
+        "label": "INTJ-A vs INTJ-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/entj-vs-intj",
+        "label": "ENTJ vs INTJ",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/intj-vs-intp",
+        "label": "INTJ vs INTP",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality",
+        "label": "浏览 16 型目录",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/zh/career/recommendations/mbti/intj",
@@ -162,7 +161,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "5005e75cd314f80a00407b6e3f5659108a5b827b",
+      "landing_fingerprint": "468f5411b41ace42cb94d0492b65d98a80d2bb1b",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INTJ",
       "public_surface_ref": null,
@@ -177,10 +176,10 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+          "body": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
           "key": "hero",
           "kind": "answer_first",
-          "title": "INTJ - 建筑师"
+          "title": "INTJ 人格"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +197,7 @@
       "display_type": "INTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "建筑师",
         "rarity": null,
@@ -224,105 +223,146 @@
       },
       "sections": [
         {
-          "body_md": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+          "body_md": "**I — 内向**: 注意力更倾向内部的想法与思考，不等于害羞或社交能力差。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，INTJ 常被描述为 Ni–Te–Fi–Se。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "INTJ 的阅读重点可以是：先想清系统应该怎样运转，再辨认目标与现实之间的约束和决定。有价值的产出是一条可检验的方向，可能的盲区则是把计划的自洽当作已经得到现实验证。\n\n反例：喜欢确定安排的人，也可以享受即兴创作、艺术或热闹的社交。话少、表达直接、有野心都不能确认 INTJ。观察在没有期限或他人规则强迫时，你更愿意怎样组织一个选择。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：产品团队有六个改进方向，资源有限。你提出一个目标，排清依赖关系，设置早期里程碑。正式投入前，请同事挑战最薄弱的假设，并给出另一条路线。路线图只有在约束与反馈保持可见时才有用。\n\n探索工作时，分别体验规划、研究、交付任务，再判断日常兴趣。战略、工程、管理都有技能和经验要求，类型不能认证。了解具体岗位的自主空间、会议负担、责任范围和错误成本。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：你把旅行安排得很高效，朋友却希望一起决定部分行程。问清哪些选择需要共同讨论，哪些愿意交给你。方案能执行，不代表已经包含对方的优先事项。\n\n说明行动背后的在意，不默认对方已经看见。争论时区分对方想被理解，还是想一起优化方案。思考偏好不代表没有情感，也没有某种伴侣类型能保证关系结果。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：外部依赖变化，精心安排的日程失效。不断压紧日程，并不能修复外部条件。分清仍可控制、需要重新协商和可以等待的部分，用现有事实制定更小的计划。\n\n这是规划问题的例子，不是类型专属的压力机制。焦虑、疲惫或强烈控制冲动，需要结合处境了解，不能从字母诊断。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "选一个当前计划，写下目标和最可能失效的假设。事先决定哪些早期证据会促使你换路，邀请受计划影响的人指出一个被忽略的成本。\n\n复盘时比较预期与实际：事实变化时有没有改计划？别人是否理解决定的理由？保留一次成功即兴应对的记录，作为“我总需要掌控”的反例。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [INTJ-A](/zh/personality/intj-a)\n- [INTJ-T](/zh/personality/intj-t)\n- [INTJ-A vs INTJ-T](/zh/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/zh/personality/entj-vs-intj)\n- [INTJ vs INTP](/zh/personality/intj-vs-intp)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
+                "answer": "把计划当工作假设，明确什么迹象要求修改，并区分目标与某条实现路线。",
+                "question": "INTJ 一定要坚持长期计划吗？"
               },
               {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "INTJ 能说明智力或能力吗？"
+              },
+              {
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "INTJ 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "INTJ-A 与 INTJ-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "INTJ 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/intj",
-        "description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/intj",
+          "name": "INTJ 人格",
+          "url": "https://fermatmind.com/zh/personality/intj"
+        },
+        "og_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "INTJ 人格指南",
+        "og_title": "INTJ 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "INTJ 人格指南",
-        "twitter_description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
+        "title": "INTJ 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "INTJ 人格指南"
+        "twitter_title": "INTJ 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "summary": "",
         "tagline": "建筑师",
-        "title": "INTJ - 建筑师"
+        "title": "INTJ 人格"
       },
       "variant_code": null
     },
@@ -338,7 +378,7 @@
       "display_type": "INTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "建筑师",
         "rarity": null,
@@ -364,115 +404,156 @@
       },
       "sections": [
         {
-          "body_md": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+          "body_md": "**I — 内向**: 注意力更倾向内部的想法与思考，不等于害羞或社交能力差。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，INTJ 常被描述为 Ni–Te–Fi–Se。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "INTJ 的阅读重点可以是：先想清系统应该怎样运转，再辨认目标与现实之间的约束和决定。有价值的产出是一条可检验的方向，可能的盲区则是把计划的自洽当作已经得到现实验证。\n\n反例：喜欢确定安排的人，也可以享受即兴创作、艺术或热闹的社交。话少、表达直接、有野心都不能确认 INTJ。观察在没有期限或他人规则强迫时，你更愿意怎样组织一个选择。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：产品团队有六个改进方向，资源有限。你提出一个目标，排清依赖关系，设置早期里程碑。正式投入前，请同事挑战最薄弱的假设，并给出另一条路线。路线图只有在约束与反馈保持可见时才有用。\n\n探索工作时，分别体验规划、研究、交付任务，再判断日常兴趣。战略、工程、管理都有技能和经验要求，类型不能认证。了解具体岗位的自主空间、会议负担、责任范围和错误成本。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：你把旅行安排得很高效，朋友却希望一起决定部分行程。问清哪些选择需要共同讨论，哪些愿意交给你。方案能执行，不代表已经包含对方的优先事项。\n\n说明行动背后的在意，不默认对方已经看见。争论时区分对方想被理解，还是想一起优化方案。思考偏好不代表没有情感，也没有某种伴侣类型能保证关系结果。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：外部依赖变化，精心安排的日程失效。不断压紧日程，并不能修复外部条件。分清仍可控制、需要重新协商和可以等待的部分，用现有事实制定更小的计划。\n\n这是规划问题的例子，不是类型专属的压力机制。焦虑、疲惫或强烈控制冲动，需要结合处境了解，不能从字母诊断。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "选一个当前计划，写下目标和最可能失效的假设。事先决定哪些早期证据会促使你换路，邀请受计划影响的人指出一个被忽略的成本。\n\n复盘时比较预期与实际：事实变化时有没有改计划？别人是否理解决定的理由？保留一次成功即兴应对的记录，作为“我总需要掌控”的反例。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [INTJ-A](/zh/personality/intj-a)\n- [INTJ-T](/zh/personality/intj-t)\n- [INTJ-A vs INTJ-T](/zh/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/zh/personality/entj-vs-intj)\n- [INTJ vs INTP](/zh/personality/intj-vs-intp)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
+                "answer": "把计划当工作假设，明确什么迹象要求修改，并区分目标与某条实现路线。",
+                "question": "INTJ 一定要坚持长期计划吗？"
               },
               {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "INTJ 能说明智力或能力吗？"
+              },
+              {
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "INTJ 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "INTJ-A 与 INTJ-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "INTJ 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/intj",
-        "description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/intj",
+          "name": "INTJ 人格",
+          "url": "https://fermatmind.com/zh/personality/intj"
+        },
+        "og_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "INTJ 人格指南",
+        "og_title": "INTJ 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "INTJ 人格指南",
-        "twitter_description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
+        "title": "INTJ 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "INTJ 人格指南"
+        "twitter_title": "INTJ 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "summary": "",
         "tagline": "建筑师",
-        "title": "INTJ - 建筑师"
+        "title": "INTJ 人格"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "INTJ",
-      "excerpt": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+      "excerpt": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
       "hero_image_url": null,
       "hero_kicker": "建筑师",
       "hero_quote": null,
-      "hero_summary": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -484,66 +565,90 @@
       "slug": "intj",
       "status": "published",
       "subtitle": null,
-      "title": "INTJ - 建筑师",
+      "title": "INTJ 人格",
       "type_code": "INTJ",
       "type_name": "建筑师"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "基于 INTJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+        "body_md": "INTJ 指内向、直觉、思考、判断四组偏好。类型叙述常强调独立思考、将可能性整理成计划；它不能证明战略能力、智力或领导水平。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**I — 内向**: 注意力更倾向内部的想法与思考，不等于害羞或社交能力差。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，INTJ 常被描述为 Ni–Te–Fi–Se。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "字母含义与框架"
+      },
+      {
+        "body_html": null,
+        "body_md": "INTJ 的阅读重点可以是：先想清系统应该怎样运转，再辨认目标与现实之间的约束和决定。有价值的产出是一条可检验的方向，可能的盲区则是把计划的自洽当作已经得到现实验证。\n\n反例：喜欢确定安排的人，也可以享受即兴创作、艺术或热闹的社交。话少、表达直接、有野心都不能确认 INTJ。观察在没有期限或他人规则强迫时，你更愿意怎样组织一个选择。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "人格概览"
+        "title": "核心模式、价值与反例"
       },
       {
         "body_html": null,
-        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据INTJ类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "body_md": "原创情景：产品团队有六个改进方向，资源有限。你提出一个目标，排清依赖关系，设置早期里程碑。正式投入前，请同事挑战最薄弱的假设，并给出另一条路线。路线图只有在约束与反馈保持可见时才有用。\n\n探索工作时，分别体验规划、研究、交付任务，再判断日常兴趣。战略、工程、管理都有技能和经验要求，类型不能认证。了解具体岗位的自主空间、会议负担、责任范围和错误成本。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与职业探索"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创情景：你把旅行安排得很高效，朋友却希望一起决定部分行程。问清哪些选择需要共同讨论，哪些愿意交给你。方案能执行，不代表已经包含对方的优先事项。\n\n说明行动背后的在意，不默认对方已经看见。争论时区分对方想被理解，还是想一起优化方案。思考偏好不代表没有情感，也没有某种伴侣类型能保证关系结果。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "职业概览"
+        "title": "关系与沟通"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "avoid_jobs": [],
-          "recommended_jobs": [],
-          "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
-        "sort_order": 70,
-        "title": "推荐职业方向"
-      },
-      {
-        "body_html": null,
-        "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+        "body_md": "原创情景：外部依赖变化，精心安排的日程失效。不断压紧日程，并不能修复外部条件。分清仍可控制、需要重新协商和可以等待的部分，用现有事实制定更小的计划。\n\n这是规划问题的例子，不是类型专属的压力机制。焦虑、疲惫或强烈控制冲动，需要结合处境了解，不能从字母诊断。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
-        "sort_order": 90,
-        "title": "成长概览"
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "压力与恢复"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "items": []
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "成长优势"
+        "body_md": "选一个当前计划，写下目标和最可能失效的假设。事先决定哪些早期证据会促使你换路，邀请受计划影响的人指出一个被忽略的成本。\n\n复盘时比较预期与实际：事实变化时有没有改计划？别人是否理解决定的理由？保留一次成功即兴应对的记录，作为“我总需要掌控”的反例。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "实际观察练习"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INTJ-A](/zh/personality/intj-a)\n- [INTJ-T](/zh/personality/intj-t)\n- [INTJ-A vs INTJ-T](/zh/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/zh/personality/entj-vs-intj)\n- [INTJ vs INTP](/zh/personality/intj-vs-intp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 70,
+        "title": "相关类型与对比"
       },
       {
         "body_html": null,
@@ -552,264 +657,74 @@
         "payload_json": {
           "items": [
             {
-              "body": null,
-              "title": "过度单一专精导致横向能力不足"
+              "answer": "把计划当工作假设，明确什么迹象要求修改，并区分目标与某条实现路线。",
+              "question": "INTJ 一定要坚持长期计划吗？"
             },
             {
-              "body": null,
-              "title": "反馈周期过长影响迭代速度"
+              "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+              "question": "INTJ 能说明智力或能力吗？"
+            },
+            {
+              "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+              "question": "INTJ 最适合哪些职业？"
+            },
+            {
+              "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+              "question": "INTJ-A 与 INTJ-T 增加了什么？"
+            },
+            {
+              "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+              "question": "INTJ 能预测伴侣匹配吗？"
             }
           ]
         },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "成长盲点"
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "常见问题"
       },
       {
         "body_html": null,
-        "body_md": "你更容易通过稳定的一对一沟通、留白和安静空间来建立信任。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "关系模式"
-      },
-      {
-        "body_html": null,
-        "body_md": "INTJ-A 与 INTJ-T 的最大区别，是在相同建筑师核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出长期系统、独立判断和结构化推进，不应用于诊断、招聘、能力排名或关系裁决。",
-        "is_enabled": true,
-        "payload_json": {
-          "canonical": "https://fermatmind.com/zh/personality/intj-a-vs-intj-t",
-          "claim_boundary": "本文不是医学诊断、心理治疗建议、职业录取建议、雇佣筛选工具、领导力筛选工具或关系决策依据。INTJ-A 与 INTJ-T 的对比只用于帮助用户理解行为倾向、压力反应、决策节奏、反馈处理和沟通偏好。人格类型不是身份限制，也不能证明一个人的智力、能力、价值、职业结果或关系质量。更合适的使用方式是：把测评结果当作复盘工具，再结合真实经历、长期反馈、能力证据、职业兴趣、工作环境和关系互动来判断。",
-          "content": {
-            "confusion_reason": "INTJ-A 与 INTJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-            "max_difference": "INTJ-A 与 INTJ-T 的最大区别，是在相同建筑师核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出长期系统、独立判断和结构化推进，不应用于诊断、招聘、能力排名或关系裁决。",
-            "misjudgment_warning": "不要把 INTJ-A 写成更好、更强或必然更自信，也不要把 INTJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-            "quick_answer": "INTJ-A 与 INTJ-T 的最大区别，是在相同建筑师核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出长期系统、独立判断和结构化推进，不应用于诊断、招聘、能力排名或关系裁决。",
-            "quick_judgment_table": [
-              {
-                "a": "更快回到自己的判断并保持行动节奏",
-                "dimension": "最大区别",
-                "t": "更频繁检查评价、风险与可改进处"
-              },
-              {
-                "a": "INTJ 的长期系统、独立判断和结构化推进更容易先保持稳定推进",
-                "dimension": "压力反应",
-                "t": "INTJ 的长期系统、独立判断和结构化推进更容易先复盘遗漏与外部反馈"
-              },
-              {
-                "a": "先搭建判断框架，再安排验证与推进，再用最小证据修正",
-                "dimension": "工作场景",
-                "t": "先搭建判断框架，再安排验证与推进，并先补足风险检查与反馈窗口"
-              },
-              {
-                "a": "可能被误读为把稳定判断误作不需要外部反证",
-                "dimension": "容易误判",
-                "t": "可能被误读为犹豫或不够坚定"
-              }
-            ],
-            "real_scene_differences": [
-              "在工作中，INTJ-A 往往在先搭建判断框架，再安排验证与推进后较快进入执行与迭代；INTJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "在关系中，INTJ-A 可能较快确认自己的理解并提出下一步；INTJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "压力下，INTJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；INTJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。"
-            ]
-          },
-          "faq": [
-            {
-              "answer": "INTJ-A 与 INTJ-T 共享同一基础类型和建筑师偏好；差异主要体现在面对评价、压力和自我确认时的节奏，不是能力或价值高低。",
-              "question": "INTJ-A 和 INTJ-T 最大区别是什么？"
-            },
-            {
-              "answer": "回看最近的决定、反馈和压力场景：你是更快恢复判断后推进，还是更常追加复盘和风险检查。再结合长期行为与完整测试结果理解。",
-              "question": "怎么快速判断自己更像 INTJ-A 还是 INTJ-T？"
-            },
-            {
-              "answer": "不一定。A/T 只能描述自我确认和反馈处理的倾向，不能替代对具体能力、成熟度、训练或环境支持的判断。",
-              "question": "INTJ-A 一定比 INTJ-T 更自信吗？"
-            },
-            {
-              "answer": "不能。职业与关系需要结合技能、兴趣、经验、现实约束、沟通和双方边界；页面只提供自我观察与沟通线索。",
-              "question": "这个 A/T 对比能决定职业或关系吗？"
-            },
-            {
-              "answer": "不能。该内容不是医学诊断、招聘筛选、能力证明或关系裁决工具，也不应据此为自己或他人贴确定性标签。",
-              "question": "这个页面可以用于诊断或招聘筛选吗？"
-            }
-          ],
-          "identity": {
-            "base_type_code": "INTJ",
-            "comparison_kind": "at",
-            "comparison_slug": "intj-a-vs-intj-t",
-            "left_type_code": "INTJ-A",
-            "right_type_code": "INTJ-T"
-          },
-          "indexability_held": false,
-          "internal_links": [
-            {
-              "anchor_text": "INTJ-A",
-              "href": "/zh/personality/intj-a",
-              "role": "left_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "INTJ-T",
-              "href": "/zh/personality/intj-t",
-              "role": "right_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "INTP A/T 对比",
-              "href": "/zh/personality/intp-a-vs-intp-t",
-              "role": "related_at_comparison",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI 人格",
-              "href": "/zh/personality",
-              "role": "personality_hub",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "免费 MBTI 测试",
-              "href": "/zh/tests/mbti-personality-test-16-personality-types",
-              "role": "test_loop",
-              "safe_public_route": true
-            }
-          ],
-          "payload_sha256": "00e02fb3c67aadc6af161f2634469d53aefe7ca316d619308627d49fb9012bab",
-          "robots": "index,follow",
-          "sections": [
-            {
-              "body": "INTJ-A 与 INTJ-T 的最大区别，是在相同建筑师核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出长期系统、独立判断和结构化推进，不应用于诊断、招聘、能力排名或关系裁决。",
-              "key": "biggest_difference",
-              "title": "最大区别"
-            },
-            {
-              "body": "最大区别：INTJ-A=更快回到自己的判断并保持行动节奏；INTJ-T=更频繁检查评价、风险与可改进处；压力反应：INTJ-A=INTJ 的长期系统、独立判断和结构化推进更容易先保持稳定推进；INTJ-T=INTJ 的长期系统、独立判断和结构化推进更容易先复盘遗漏与外部反馈；工作场景：INTJ-A=先搭建判断框架，再安排验证与推进，再用最小证据修正；INTJ-T=先搭建判断框架，再安排验证与推进，并先补足风险检查与反馈窗口；容易误判：INTJ-A=可能被误读为把稳定判断误作不需要外部反证；INTJ-T=可能被误读为犹豫或不够坚定",
-              "key": "quick_judgment_table",
-              "rows": [
-                {
-                  "a": "更快回到自己的判断并保持行动节奏",
-                  "dimension": "最大区别",
-                  "t": "更频繁检查评价、风险与可改进处"
-                },
-                {
-                  "a": "INTJ 的长期系统、独立判断和结构化推进更容易先保持稳定推进",
-                  "dimension": "压力反应",
-                  "t": "INTJ 的长期系统、独立判断和结构化推进更容易先复盘遗漏与外部反馈"
-                },
-                {
-                  "a": "先搭建判断框架，再安排验证与推进，再用最小证据修正",
-                  "dimension": "工作场景",
-                  "t": "先搭建判断框架，再安排验证与推进，并先补足风险检查与反馈窗口"
-                },
-                {
-                  "a": "可能被误读为把稳定判断误作不需要外部反证",
-                  "dimension": "容易误判",
-                  "t": "可能被误读为犹豫或不够坚定"
-                }
-              ],
-              "title": "快速判断表"
-            },
-            {
-              "body": "INTJ-A 与 INTJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-              "key": "easy_misread",
-              "title": "为什么容易混淆"
-            },
-            {
-              "body": "在工作中，INTJ-A 往往在先搭建判断框架，再安排验证与推进后较快进入执行与迭代；INTJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "key": "work_scenarios",
-              "title": "真实工作场景"
-            },
-            {
-              "body": "在关系中，INTJ-A 可能较快确认自己的理解并提出下一步；INTJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "key": "relationship_scenarios",
-              "title": "真实关系场景"
-            },
-            {
-              "body": "压力下，INTJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；INTJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。",
-              "key": "stress_scenarios",
-              "title": "压力场景差异"
-            },
-            {
-              "body": "不要把 INTJ-A 写成更好、更强或必然更自信，也不要把 INTJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-              "key": "do_not_misjudge",
-              "title": "不要如何误判"
-            },
-            {
-              "body": "INTJ-A 与 INTJ-T 都共享建筑师的长期系统、独立判断和结构化推进。它们共同面对的不是谁更优，而是怎样把偏好转成更清楚的决定、协作和复盘。",
-              "key": "common_ground",
-              "title": "共同点"
-            },
-            {
-              "body": "该对比仅用于自我理解、沟通与成长复盘，不构成医学诊断、招聘筛选、智力或能力证明、职业保证、伴侣匹配或未来预测。",
-              "key": "usage_boundary",
-              "title": "使用边界"
-            }
-          ],
-          "seo": {
-            "breadcrumb_title": "INTJ-A 和 INTJ-T 的区别",
-            "h1": "INTJ-A 和 INTJ-T 的区别",
-            "quick_answer_summary": "INTJ-A 与 INTJ-T 的最大区别，是在相同建筑师核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出长期系统、独立判断和结构化推进，不应用于诊断、招聘、能力排名或关系裁决。",
-            "robots": "index,follow",
-            "seo_description": "对比 INTJ-A 与 INTJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
-            "seo_title": "INTJ-A 和 INTJ-T 的区别：建筑师 A/T 对比 | FermatMind"
-          },
-          "source": "mbti_cms_import_40_at_comparison_draft_v1",
-          "structured_metadata": {
-            "primary_query": "INTJ-A 和 INTJ-T 的区别",
-            "route_safety": "public_routes_only",
-            "secondary_queries": [
-              "INTJ-A",
-              "INTJ-T",
-              "INTJ A/T 区别"
-            ],
-            "source_document": [
-              "MBTI-FULL-AUDIT-30",
-              "public_profile_seo_asset_factory",
-              "mbti64_remaining_58_v2"
-            ]
-          },
-          "url": "/zh/personality/intj-a-vs-intj-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "INTJ-A 和 INTJ-T 的区别"
+        "section_key": "sources_and_method",
+        "sort_order": 90,
+        "title": "来源与方法边界"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/intj",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
-      "seo_title": "INTJ 人格指南",
-      "twitter_description": null,
+      "og_title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+      "seo_title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "twitter_description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/intj-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/intj-a"
+        "en": "https://fermatmind.com/en/personality/intj",
+        "zh-CN": "https://fermatmind.com/zh/personality/intj"
       },
-      "canonical_url": "https://fermatmind.com/zh/personality/intj-a",
-      "description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
+      "canonical_url": "https://fermatmind.com/zh/personality/intj",
+      "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "998ac8adbde5594fd663835a75454f1bbf4de9de",
+      "metadata_fingerprint": "9a39557a0426f12d502269b32b5576487441e2e2",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
-        "title": "INTJ 人格指南",
+        "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/zh/personality/intj-a"
+        "url": "https://fermatmind.com/zh/personality/intj"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -818,18 +733,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "INTJ 人格指南",
+      "title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "了解 INTJ 的优势、弱项、人际模式和职业方向。",
-        "title": "INTJ 人格指南"
+        "description": "了解 INTJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "INTJ 人格：字母含义、特点与实际情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "0ec791b2fe629a74614a7b007bd8e226d3aad63cbc6dc47c4c2c03dfdb7940b5"
+  "source_content_sha256": "b30c6bbff7b625416db90955bb849f9f8127594db129285a6746d211ea4d003b"
 }

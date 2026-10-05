@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/intj-vs-intp",
@@ -12,109 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-          "key": "direct_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "最大区别"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。",
-          "key": "easy_misread",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么容易混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。",
-          "key": "real_scenario_differences",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "真实场景差异"
-        },
-        {
-          "body": "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。",
-          "key": "do_not_misjudge",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "不要这样误判"
-        },
-        {
-          "body": "继续查看 INTJ、INTP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。",
-          "key": "next_reading",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "下一步阅读"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "0ef0b169c1b18b6b128380cece29e1f3b4ef1672",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-          "question": "INTJ 和 INTP 最大区别是什么？"
+          "answer": "可以。J/P 描述面对外部事务的偏好，不是自律分数。技能、期限和处境都可能使任何一方计划或即兴应对。",
+          "key": "faq-0",
+          "question": "INTP 可以有条理、INTJ 可以改计划吗？"
         },
         {
-          "answer": "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。",
-          "question": "为什么 INTJ 和 INTP 容易被混淆？"
+          "answer": "四字母代码差别是 J/P。功能栈理论提供另外的解释，不应当成已测得的心理机制或经过验证的判定捷径。",
+          "key": "faq-1",
+          "question": "差别是认知功能还是 J/P？"
         },
         {
-          "answer": "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。",
-          "question": "在工作场景怎么区分 INTJ 和 INTP？"
+          "answer": "本页不提供智力排名。人格偏好不是能力测量，推理与技能应通过相关证据了解。",
+          "key": "faq-2",
+          "question": "INTJ 与 INTP 谁更聪明？"
         },
         {
-          "answer": "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。",
-          "question": "判断 INTJ 和 INTP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "先检查工具、题目、时点或处境有没有不同，再比较偏好解释与真实例子。本页不能裁定最佳拟合类型，也不能证明持续变化。",
+          "key": "faq-3",
+          "question": "测验两种结果都出现时怎么办？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "",
-          "href": "/zh/personality/intj-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INTJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/intp-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INTP A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/entj-vs-intj",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ENTJ VS INTJ"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 人格"
-        },
-        {
-          "body": "",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 免费测试"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "intj-vs-intp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "08de13c38c9084edaa0b82f5662e73a904c0575d",
       "summary_blocks": [
         {
-          "body": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
+          "body": "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "INTJ 和 INTP 的区别：战略收敛与模型探索"
+          "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
         "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "answer_surface_v1": {
@@ -226,64 +203,45 @@
         "INTP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/intj-vs-intp",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "intj-vs-intp",
       "comparison_type": "mbti_cross_type",
-      "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-          "question": "INTJ 和 INTP 最大区别是什么？"
+          "answer": "可以。J/P 描述面对外部事务的偏好，不是自律分数。技能、期限和处境都可能使任何一方计划或即兴应对。",
+          "question": "INTP 可以有条理、INTJ 可以改计划吗？"
         },
         {
-          "answer": "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。",
-          "question": "为什么 INTJ 和 INTP 容易被混淆？"
+          "answer": "四字母代码差别是 J/P。功能栈理论提供另外的解释，不应当成已测得的心理机制或经过验证的判定捷径。",
+          "question": "差别是认知功能还是 J/P？"
         },
         {
-          "answer": "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。",
-          "question": "在工作场景怎么区分 INTJ 和 INTP？"
+          "answer": "本页不提供智力排名。人格偏好不是能力测量，推理与技能应通过相关证据了解。",
+          "question": "INTJ 与 INTP 谁更聪明？"
         },
         {
-          "answer": "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。",
-          "question": "判断 INTJ 和 INTP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "先检查工具、题目、时点或处境有没有不同，再比较偏好解释与真实例子。本页不能裁定最佳拟合类型，也不能证明持续变化。",
+          "question": "测验两种结果都出现时怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INTJ A",
-          "href": "/zh/personality/intj-a",
-          "label": "INTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intj",
+          "label": "INTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTP A",
-          "href": "/zh/personality/intp-a",
-          "label": "INTP A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intp",
+          "label": "INTP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ENTJ VS INTJ",
-          "href": "/zh/personality/entj-vs-intj",
-          "label": "ENTJ VS INTJ",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -303,87 +261,104 @@
       "sections": [
         {
           "body": [
-            "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。"
+            "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INTJ": "先问长期方向和关键路径",
-              "INTP": "先问概念是否自洽",
-              "dimension": "问题入口"
-            },
-            {
-              "INTJ": "路线、优先级、决策标准",
-              "INTP": "模型、假设、反例空间",
-              "dimension": "输出形态"
-            },
-            {
-              "INTJ": "觉得讨论没有推进",
-              "INTP": "觉得结论太早关闭",
-              "dimension": "协作痛点"
-            },
-            {
-              "INTJ": "保留反证入口",
-              "INTP": "把模型转成可执行试验",
-              "dimension": "成熟表现"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。"
+            "共同字母指内向、直觉、思考：内部思考、关注模式或可能性、决定时考虑逻辑和非个人化标准。它们不能证明两个人兴趣、智力或社交表现相同。",
+            "实际代码差别是判断与知觉。INTJ 式解释可能围绕选定方向组织可能性；INTP 式解释可能在检验假设时让解释继续开放。但两者都能认真计划、改变主意，期限、角色要求、已学习的技能也可能产生任何一种表现。",
+            "功能栈理论常将 INTJ 写为 Ni–Te–Fi–Se，将 INTP 写为 Ti–Ne–Si–Fe。这是理论解释，不证明不同大脑机制。A/T 是另外的扩展，也不是本页比较的差别。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。"
+            "| 观察点 | INTJ | INTP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：较倾向确定外部安排 | 知觉 P：较倾向对新信息保持开放 |\n| 原创项目例子 | 围绕目标和约束组织选项 | 选择前检验分类与假设 |\n| 该做法可能的成本 | 有用的例外尚未检查，就关闭路线 | 已经需要决定，却仍继续探索 |\n| 共同实践步骤 | 说明什么证据会促使重新调整计划 | 说明哪些证据足够开展一个小试验 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。"
+            "原创工作情景：团队在两个产品想法之间选择。一种方法先明确目标、排列约束、选一条路线；另一种方法先检查用户分类和因果假设是否合理。任何一种都不能直接确认 INTJ 或 INTP，同一个人也能贡献两种方法。共同约定探索时间、决定标准和重新打开决定的条件。",
+            "原创关系情景：两位朋友计划旅行，一方想提前确定住宿，另一方想探索后再调整目的地。预算、出行便利和可用时间，也许比类型更能解释选择。共同确定什么必须固定、什么可以保留弹性。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 INTJ、INTP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "桌面整洁不能确认 INTJ，拖延不能确认 INTP；P 可以喜欢战略，J 可以探索理论。决定快慢、话少、喜欢科学都不是判定规则。本对比不能排名智力或证明谁更理性。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较三次有时间、确实有自由的选择：你希望先确定什么，想继续开放哪些信息？做法来自自己的偏好，还是岗位要求？再寻找一次喜欢相反做法的经历。两种描述都适用时，可以保留疑问；叙述吻合不是验证过的测评结果。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [INTJ 基础人格](/zh/personality/intj)\n- [INTP 基础人格](/zh/personality/intp)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+      "seo_description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-      "title": "INTJ 和 INTP 的区别：战略收敛与模型探索"
+      "source_sha256": "05b434b623346d0e1b61e2b0fafd011939d54399987f180665af51a6dc98e23c",
+      "summary": "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。",
+      "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
         "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "answer_surface_v1": {
@@ -495,64 +470,45 @@
         "INTP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/intj-vs-intp",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "intj-vs-intp",
       "comparison_type": "mbti_cross_type",
-      "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-          "question": "INTJ 和 INTP 最大区别是什么？"
+          "answer": "可以。J/P 描述面对外部事务的偏好，不是自律分数。技能、期限和处境都可能使任何一方计划或即兴应对。",
+          "question": "INTP 可以有条理、INTJ 可以改计划吗？"
         },
         {
-          "answer": "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。",
-          "question": "为什么 INTJ 和 INTP 容易被混淆？"
+          "answer": "四字母代码差别是 J/P。功能栈理论提供另外的解释，不应当成已测得的心理机制或经过验证的判定捷径。",
+          "question": "差别是认知功能还是 J/P？"
         },
         {
-          "answer": "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。",
-          "question": "在工作场景怎么区分 INTJ 和 INTP？"
+          "answer": "本页不提供智力排名。人格偏好不是能力测量，推理与技能应通过相关证据了解。",
+          "question": "INTJ 与 INTP 谁更聪明？"
         },
         {
-          "answer": "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。",
-          "question": "判断 INTJ 和 INTP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "先检查工具、题目、时点或处境有没有不同，再比较偏好解释与真实例子。本页不能裁定最佳拟合类型，也不能证明持续变化。",
+          "question": "测验两种结果都出现时怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INTJ A",
-          "href": "/zh/personality/intj-a",
-          "label": "INTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intj",
+          "label": "INTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTP A",
-          "href": "/zh/personality/intp-a",
-          "label": "INTP A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intp",
+          "label": "INTP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ENTJ VS INTJ",
-          "href": "/zh/personality/entj-vs-intj",
-          "label": "ENTJ VS INTJ",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -572,198 +528,250 @@
       "sections": [
         {
           "body": [
-            "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。"
+            "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INTJ": "先问长期方向和关键路径",
-              "INTP": "先问概念是否自洽",
-              "dimension": "问题入口"
-            },
-            {
-              "INTJ": "路线、优先级、决策标准",
-              "INTP": "模型、假设、反例空间",
-              "dimension": "输出形态"
-            },
-            {
-              "INTJ": "觉得讨论没有推进",
-              "INTP": "觉得结论太早关闭",
-              "dimension": "协作痛点"
-            },
-            {
-              "INTJ": "保留反证入口",
-              "INTP": "把模型转成可执行试验",
-              "dimension": "成熟表现"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。"
+            "共同字母指内向、直觉、思考：内部思考、关注模式或可能性、决定时考虑逻辑和非个人化标准。它们不能证明两个人兴趣、智力或社交表现相同。",
+            "实际代码差别是判断与知觉。INTJ 式解释可能围绕选定方向组织可能性；INTP 式解释可能在检验假设时让解释继续开放。但两者都能认真计划、改变主意，期限、角色要求、已学习的技能也可能产生任何一种表现。",
+            "功能栈理论常将 INTJ 写为 Ni–Te–Fi–Se，将 INTP 写为 Ti–Ne–Si–Fe。这是理论解释，不证明不同大脑机制。A/T 是另外的扩展，也不是本页比较的差别。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。"
+            "| 观察点 | INTJ | INTP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：较倾向确定外部安排 | 知觉 P：较倾向对新信息保持开放 |\n| 原创项目例子 | 围绕目标和约束组织选项 | 选择前检验分类与假设 |\n| 该做法可能的成本 | 有用的例外尚未检查，就关闭路线 | 已经需要决定，却仍继续探索 |\n| 共同实践步骤 | 说明什么证据会促使重新调整计划 | 说明哪些证据足够开展一个小试验 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。"
+            "原创工作情景：团队在两个产品想法之间选择。一种方法先明确目标、排列约束、选一条路线；另一种方法先检查用户分类和因果假设是否合理。任何一种都不能直接确认 INTJ 或 INTP，同一个人也能贡献两种方法。共同约定探索时间、决定标准和重新打开决定的条件。",
+            "原创关系情景：两位朋友计划旅行，一方想提前确定住宿，另一方想探索后再调整目的地。预算、出行便利和可用时间，也许比类型更能解释选择。共同确定什么必须固定、什么可以保留弹性。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 INTJ、INTP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "桌面整洁不能确认 INTJ，拖延不能确认 INTP；P 可以喜欢战略，J 可以探索理论。决定快慢、话少、喜欢科学都不是判定规则。本对比不能排名智力或证明谁更理性。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较三次有时间、确实有自由的选择：你希望先确定什么，想继续开放哪些信息？做法来自自己的偏好，还是岗位要求？再寻找一次喜欢相反做法的经历。两种描述都适用时，可以保留疑问；叙述吻合不是验证过的测评结果。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [INTJ 基础人格](/zh/personality/intj)\n- [INTP 基础人格](/zh/personality/intp)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+      "seo_description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。",
-      "title": "INTJ 和 INTP 的区别：战略收敛与模型探索"
+      "source_sha256": "05b434b623346d0e1b61e2b0fafd011939d54399987f180665af51a6dc98e23c",
+      "summary": "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。",
+      "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/intj-vs-intp",
-            "name": "INTJ vs INTP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "INTJ 更容易把复杂信息收敛成路线图，INTP 更容易把问题拆成可讨论的模型。最大区别不是谁更理性，而是谁更快走向执行结构。"
-            },
-            "name": "INTJ 和 INTP 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "两者都可能安静、抽象、重逻辑，因此容易混淆。区别要看他们如何结束讨论：INTJ 倾向形成方向，INTP 倾向保留问题空间。"
-            },
-            "name": "为什么 INTJ 和 INTP 容易被混淆？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "做新产品定位时，INTJ 会追问哪条路径最可能赢；INTP 会追问定义、分类和假设是否站得住。好的协作是先允许模型展开，再设定决策截止点。"
-            },
-            "name": "在工作场景怎么区分 INTJ 和 INTP？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不要用是否喜欢独处判断 INTJ/INTP，也不要把组织能力等同于 INTJ、好奇心等同于 INTP。要看信息处理后的自然落点。"
-            },
-            "name": "判断 INTJ 和 INTP 时最容易犯什么错？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。"
-            },
-            "name": "这个对比能决定职业或关系选择吗？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "INTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/intj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INTP",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/intp-a"
-          }
-        ]
-      },
-      "name": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+      "@type": "AboutPage",
+      "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/intj-vs-intp",
+      "name": "INTJ 与 INTP 的区别：计划、开放问题与实际情景",
       "url": "https://fermatmind.com/zh/personality/intj-vs-intp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "INTJ 与 INTP 共用 I、N、T，四字母代码只在 J/P 上不同。偏好词汇中，J 较重视确定外部安排，P 较重视对新信息保持开放。计划能力、智力和好奇心不能用来判定这两个类型。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "共同字母指内向、直觉、思考：内部思考、关注模式或可能性、决定时考虑逻辑和非个人化标准。它们不能证明两个人兴趣、智力或社交表现相同。\n\n实际代码差别是判断与知觉。INTJ 式解释可能围绕选定方向组织可能性；INTP 式解释可能在检验假设时让解释继续开放。但两者都能认真计划、改变主意，期限、角色要求、已学习的技能也可能产生任何一种表现。\n\n功能栈理论常将 INTJ 写为 Ni–Te–Fi–Se，将 INTP 写为 Ti–Ne–Si–Fe。这是理论解释，不证明不同大脑机制。A/T 是另外的扩展，也不是本页比较的差别。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | INTJ | INTP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：较倾向确定外部安排 | 知觉 P：较倾向对新信息保持开放 |\n| 原创项目例子 | 围绕目标和约束组织选项 | 选择前检验分类与假设 |\n| 该做法可能的成本 | 有用的例外尚未检查，就关闭路线 | 已经需要决定，却仍继续探索 |\n| 共同实践步骤 | 说明什么证据会促使重新调整计划 | 说明哪些证据足够开展一个小试验 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：团队在两个产品想法之间选择。一种方法先明确目标、排列约束、选一条路线；另一种方法先检查用户分类和因果假设是否合理。任何一种都不能直接确认 INTJ 或 INTP，同一个人也能贡献两种方法。共同约定探索时间、决定标准和重新打开决定的条件。\n\n原创关系情景：两位朋友计划旅行，一方想提前确定住宿，另一方想探索后再调整目的地。预算、出行便利和可用时间，也许比类型更能解释选择。共同确定什么必须固定、什么可以保留弹性。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "桌面整洁不能确认 INTJ，拖延不能确认 INTP；P 可以喜欢战略，J 可以探索理论。决定快慢、话少、喜欢科学都不是判定规则。本对比不能排名智力或证明谁更理性。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "比较三次有时间、确实有自由的选择：你希望先确定什么，想继续开放哪些信息？做法来自自己的偏好，还是岗位要求？再寻找一次喜欢相反做法的经历。两种描述都适用时，可以保留疑问；叙述吻合不是验证过的测评结果。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "可以。J/P 描述面对外部事务的偏好，不是自律分数。技能、期限和处境都可能使任何一方计划或即兴应对。",
+              "question": "INTP 可以有条理、INTJ 可以改计划吗？"
+            },
+            {
+              "answer": "四字母代码差别是 J/P。功能栈理论提供另外的解释，不应当成已测得的心理机制或经过验证的判定捷径。",
+              "question": "差别是认知功能还是 J/P？"
+            },
+            {
+              "answer": "本页不提供智力排名。人格偏好不是能力测量，推理与技能应通过相关证据了解。",
+              "question": "INTJ 与 INTP 谁更聪明？"
+            },
+            {
+              "answer": "先检查工具、题目、时点或处境有没有不同，再比较偏好解释与真实例子。本页不能裁定最佳拟合类型，也不能证明持续变化。",
+              "question": "测验两种结果都出现时怎么办？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INTJ 基础人格](/zh/personality/intj)\n- [INTP 基础人格](/zh/personality/intp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/intj-vs-intp",
       "jsonld_overrides_json": null,
-      "og_description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "og_description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+      "og_title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
-      "twitter_description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "seo_description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind",
+      "twitter_description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind"
+      "twitter_title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
         "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/intj-vs-intp",
-      "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "0ee7eb27f993254c8e0da5247327ec523a04f435",
+      "metadata_fingerprint": "08de13c38c9084edaa0b82f5662e73a904c0575d",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+        "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
@@ -773,24 +781,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind",
+      "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "INTJ 和 INTP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "INTJ 和 INTP 的区别：战略收敛与模型探索 | FermatMind"
+        "description": "对照 INTJ 与 INTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "INTJ 与 INTP 的区别：计划、开放问题与实际情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "4cc13d95a77b9464cbbbf31a9ae632c4d96a39b9f1bdb51a45dc5d4535c2c167"
+  "source_content_sha256": "6def60817eb7b13b9717b96d78b04156c2a94d66010bea086f7f4a1e3e24498c"
 }

@@ -4,6 +4,8 @@ namespace App\Services\SEO;
 
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
+use App\Domain\Personality\Current\PersonalityCurrentPageReader;
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -354,6 +356,10 @@ class SitemapGenerator
 
     private function getPersonalityUrls(): array
     {
+        if ($this->usesCurrentPersonalityAuthority()) {
+            return $this->getCurrentMbtiUrls();
+        }
+
         $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
         if ($baseUrl === '') {
             return [];
@@ -529,10 +535,49 @@ class SitemapGenerator
 
     private function getPersonalityComparisonUrls(): array
     {
+        if ($this->usesCurrentPersonalityAuthority()) {
+            // Current enumerates all five MBTI page families in one authority snapshot.
+            return [];
+        }
+
         return array_merge(
             $this->getPersonalityAtComparisonUrls(),
             $this->getPersonalityCrossTypeComparisonUrls()
         );
+    }
+
+    private function usesCurrentPersonalityAuthority(): bool
+    {
+        return PersonalityLegacyPublicAuthorityArchive::shouldUseCurrentAuthority(
+            0,
+            app()->runningUnitTests(),
+            (bool) config(PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG, false),
+        );
+    }
+
+    private function getCurrentMbtiUrls(): array
+    {
+        $urls = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach (app(PersonalityCurrentPageReader::class)->payloads('mbti', null, $locale) as $payload) {
+                $meta = $payload['seo_meta'] ?? [];
+                $canonical = trim((string) ($meta['canonical_url'] ?? ''));
+                $robots = strtolower((string) ($meta['robots'] ?? 'noindex'));
+                if ($canonical === '' || str_contains($robots, 'noindex')) {
+                    continue;
+                }
+
+                $lastmod = Carbon::parse($meta['updated_at']);
+                $urls[] = [
+                    'loc' => CanonicalFrontendUrl::normalizeAbsoluteUrl($canonical),
+                    'lastmod' => $lastmod->toAtomString(),
+                    'slug' => 'personality:current:'.($locale === 'en' ? 'en' : 'zh').':'.basename($canonical),
+                    'updated_at' => $lastmod->toDateTimeString(),
+                ];
+            }
+        }
+
+        return $urls;
     }
 
     private function getPersonalityAtComparisonUrls(): array

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentSeoRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '57503703711caea999d727e68206d8107def3561159e7f0988e649bf032a6427';
+    private const AGGREGATE = '95de3b7bced31d5861681e9b38aa54194e00cfcb1581f32a57efbe9000e5f045';
 
     #[DataProvider('mbtiIdentityProvider')]
     public function test_all_mbti_seo_endpoints_project_their_per_page_authority(
@@ -67,58 +67,18 @@ final class PersonalityCurrentSeoRuntimeTest extends TestCase
         }
     }
 
-    public function test_current_seo_projection_matches_the_frozen_base_and_variant_contracts(): void
+    public function test_base_and_variant_keep_distinct_canonicals_and_visible_titles(): void
     {
-        $this->getJson('/api/v0.5/personality/intj/seo?locale=en&org_id=0&scale_code=MBTI')
-            ->assertOk()
-            ->assertExactJson([
-                'meta' => [
-                    'title' => 'INTJ Personality Guide',
-                    'description' => 'Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.',
-                    'canonical' => 'https://fermatmind.com/en/personality/intj-a',
-                    'alternates' => [
-                        'en' => 'https://fermatmind.com/en/personality/intj-a',
-                        'zh-CN' => 'https://fermatmind.com/zh/personality/intj-a',
-                    ],
-                    'og' => [
-                        'title' => 'INTJ Personality Guide',
-                        'description' => 'Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.',
-                        'image' => null,
-                        'type' => 'article',
-                    ],
-                    'twitter' => [
-                        'card' => 'summary_large_image',
-                        'title' => 'INTJ Personality Guide',
-                        'description' => 'Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.',
-                        'image' => null,
-                    ],
-                    'robots' => 'index,follow',
-                ],
-                'jsonld' => [
-                    '@context' => 'https://schema.org',
-                    '@type' => 'AboutPage',
-                    'name' => 'INTJ Personality Guide',
-                    'description' => 'Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.',
-                    'about' => [
-                        '@type' => 'DefinedTerm',
-                        'name' => 'INTJ',
-                        'inDefinedTermSet' => 'MBTI',
-                    ],
-                    'mainEntityOfPage' => 'https://fermatmind.com/en/personality/intj-a',
-                ],
-                'seo_surface_v1' => json_decode(
-                    file_get_contents(base_path('content_assets/personality_public/current/pages/mbti/profile/intj/en.json')),
-                    true,
-                    512,
-                    JSON_THROW_ON_ERROR,
-                )['payload']['seo_surface_v1'],
-            ]);
-
-        $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en&org_id=0&scale_code=MBTI')
-            ->assertOk()
-            ->assertJsonPath('jsonld.name', 'INTJ-A Personality')
-            ->assertJsonPath('jsonld.url', '/en/personality/intj-a')
-            ->assertJsonPath('jsonld.mainEntityOfPage', 'https://fermatmind.com/en/personality/intj-a');
+        foreach (['intj', 'intj-a'] as $slug) {
+            $kind = $slug === 'intj' ? 'profile' : 'variant';
+            $payload = app(PersonalityCurrentPageReader::class)->payload('mbti', $kind, $slug, 'en');
+            $this->getJson("/api/v0.5/personality/{$slug}/seo?locale=en&org_id=0&scale_code=MBTI")
+                ->assertOk()
+                ->assertJsonPath('meta.canonical', "https://fermatmind.com/en/personality/{$slug}")
+                ->assertJsonPath('meta.alternates.zh-CN', "https://fermatmind.com/zh/personality/{$slug}")
+                ->assertJsonPath('jsonld.name', $payload['profile']['title'])
+                ->assertJsonPath('jsonld.mainEntityOfPage', "https://fermatmind.com/en/personality/{$slug}");
+        }
     }
 
     public function test_missing_current_seo_identity_fails_closed(): void

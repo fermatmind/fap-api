@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/infj-vs-infp",
@@ -11,10 +11,88 @@
   },
   "locale": "en",
   "payload": {
-    "answer_surface_v1": [],
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 11,
+          "key": "compare",
+          "title": "compare"
+        },
+        {
+          "count": 7,
+          "key": "faq",
+          "title": "faq"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "9326e073d46feb22ef11839a45325f9b0f191cda",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
+      ],
+      "faq_blocks": [
+        {
+          "answer": "Yes. J/P does not measure discipline or flexibility as a skill. Circumstances and learned habits can produce either behavior.",
+          "key": "faq-0",
+          "question": "Can an INFP keep routines and an INFJ improvise?"
+        },
+        {
+          "answer": "No. Neither quality is owned by a type. The codes differ on J/P; function-stack stories offer a theoretical reading, not a proven division of those qualities.",
+          "key": "faq-1",
+          "question": "Is the real difference empathy versus authenticity?"
+        },
+        {
+          "answer": "Those experiences cannot determine type or a diagnosis. Consider their causes directly and compare preferences across ordinary situations.",
+          "key": "faq-2",
+          "question": "Can sadness or sensitivity help me distinguish them?"
+        },
+        {
+          "answer": "Keep both as hypotheses for reflection, check the instrument used and seek counterexamples. This page cannot decide an official best-fit type for you.",
+          "key": "faq-3",
+          "question": "What if both descriptions resonate?"
+        }
+      ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "infj-vs-infp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "e2d395c9bcd8239370eca1f24df2edc000d49649",
+      "summary_blocks": [
+        {
+          "body": "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity.",
+          "href": null,
+          "key": "comparison_summary",
+          "kind": "answer_first",
+          "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices"
+        }
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
+    },
     "comparison": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/infj-vs-infp"
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
+        "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -24,71 +102,52 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/infj-vs-infp",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "infj-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
+      "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "INFJ may organize a situation into a broader pattern of meaning, while INFP may first check whether a response remains true to inner values. Neither route measures kindness.",
-          "question": "What is the main difference between INFJ and INFP?"
+          "answer": "Yes. J/P does not measure discipline or flexibility as a skill. Circumstances and learned habits can produce either behavior.",
+          "question": "Can an INFP keep routines and an INFJ improvise?"
         },
         {
-          "answer": "Both may be sensitive, idealistic, and concerned with meaning. INFJ may organize a relationship pattern, while INFP may protect personal authenticity.",
-          "question": "Why are INFJ and INFP easy to confuse?"
+          "answer": "No. Neither quality is owned by a type. The codes differ on J/P; function-stack stories offer a theoretical reading, not a proven division of those qualities.",
+          "question": "Is the real difference empathy versus authenticity?"
         },
         {
-          "answer": "In a work setting, observe how each supports a colleague facing difficulty: INFJ may help the person see patterns and a future path, while INFP may first ensure that the person's real feelings are respected. Both approaches can be helpful, but their pacing can differ.",
-          "question": "How can INFJ and INFP be distinguished in a work setting?"
+          "answer": "Those experiences cannot determine type or a diagnosis. Consider their causes directly and compare preferences across ordinary situations.",
+          "question": "Can sadness or sensitivity help me distinguish them?"
         },
         {
-          "answer": "Do not infer type from sociability or comforting behavior. Watch how a person handles value conflict and moves from empathy toward a judgment or boundary.",
-          "question": "What is a common mistake when comparing INFJ and INFP?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Keep both as hypotheses for reflection, check the instrument used and seek counterexamples. This page cannot decide an official best-fit type for you.",
+          "question": "What if both descriptions resonate?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INFJ profile",
-          "href": "/en/personality/infj-a",
-          "label": "INFJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/infj",
+          "label": "INFJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INFP profile",
-          "href": "/en/personality/infp-a",
-          "label": "INFP profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/infp",
+          "label": "INFP base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFP profile",
-          "href": "/en/personality/isfp-a",
-          "label": "ISFP profile",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "INFJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -101,84 +160,105 @@
       "sections": [
         {
           "body": [
-            "INFJ may organize a person's situation into a coherent pattern of meaning, while INFP may first check whether inner values feel authentic. The key difference is not who is gentler, but how judgment develops after empathy."
+            "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INFJ": "Notice relationship patterns and long-term effects",
-              "INFP": "Notice personal feelings and value alignment",
-              "dimension": "Entry point for empathy"
-            },
-            {
-              "INFJ": "Guide, explain, and connect clues",
-              "INFP": "Write, listen, and protect a sense of authenticity",
-              "dimension": "Expression"
-            },
-            {
-              "INFJ": "May over-explain another person's meaning",
-              "INFP": "May retreat too far into personal feelings",
-              "dimension": "Conflict risk"
-            },
-            {
-              "INFJ": "Avoid defining another person's life for them",
-              "INFP": "Turn values into boundaries others can understand",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both may be sensitive, idealistic, and concerned with meaning. INFJ may be more likely to organize the relationship pattern, while INFP may be more likely to protect personal authenticity."
+            "Both describe Introversion, Intuition and Feeling: inward reflection, attention to patterns or possibilities, and consideration of values and effects on people. They do not establish that two people share beliefs, emotional sensitivity or a life purpose.",
+            "An INFJ-style account may organize a meaningful aim into a considered direction; an INFP-style account may keep several expressions of a value open before committing. Either can be organized, spontaneous, decisive or uncertain. A deadline, family responsibility or learned skill may explain visible behavior better than type.",
+            "Function-stack theory commonly uses Ni–Fe–Ti–Se for INFJ and Fi–Ne–Si–Te for INFP. This is an additional theoretical interpretation, not evidence of different forms of consciousness or a validated shortcut for distinguishing people. A/T is a separate extension."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "When a friend is struggling, INFJ may help them see a pattern and a future path, while INFP may first make sure the person's real feelings are respected. Both forms of support can matter, but their pacing differs."
+            "| Observation | INFJ | INFP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settled outer-world arrangements | Perceiving (P): a preference for openness to new information |\n| Original project example | Choose a direction that organizes the meaningful aim | Explore several ways to express the underlying value |\n| Possible cost | Settling an interpretation before hearing a relevant alternative | Keeping expressions open after a commitment is needed |\n| Shared practical step | State what could reopen the direction | Choose what is sufficient for a small trial |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not distinguish INFJ from INFP by sociability or by who seems more comforting. Observe whether value conflict leads first to a broader meaning structure or to a check of inner authenticity."
+            "Original work scenario: volunteers are planning a support activity. One approach chooses a clear purpose and a sequence; another explores several formats that could respect participants' values. Ask the participants what they need, set an exploration period and agree on a small trial. The same person may contribute both approaches.",
+            "Original relationship scenario: two friends discuss a meaningful change. One wants an agreed next step, while another wants time to understand what each option represents. Decide what must be settled now and what can wait. Do not infer that a request for closure is controlling or that a request for time is uncaring."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual INFJ and INFP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "Neatness does not identify INFJ, and artistic interests do not identify INFP. Empathy, spirituality, emotional intensity and feeling misunderstood cannot settle the distinction. J/P describes an outer-world preference, not a moral or discipline score. Avoid typing someone from their response to a single difficult experience."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Recall three choices with real freedom over the process. What did you want to settle, what did you prefer to keep open and what made that preference useful or costly? Compare a personal choice with a shared commitment. Keep a counterexample and leave room for uncertainty; the exercise cannot verify a test result."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [INFJ base profile](/en/personality/infj)\n- [INFP base profile](/en/personality/infp)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-      "seo_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "e2c426ffed25ac9b6780494ce35a626f1a1566dd6a4d0e050a577a86fddf256a",
-      "summary": "INFJ may organize a person's situation into a broader pattern and direction, while INFP may first check whether a response remains true to inner values. The contrast concerns what happens after empathy, not who is kinder, more sensitive, or more emotionally mature.",
-      "title": "INFJ vs INFP: Organizing a Vision and Protecting Inner Values"
+      "source_sha256": "835f8b06c32f1babaefe1bfe89aaf9e2d7c43a1b5081e9aa08e4a686fd19b1db",
+      "summary": "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity.",
+      "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices"
     },
     "comparison_public_projection_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/infj-vs-infp"
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
+        "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -188,71 +268,52 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/infj-vs-infp",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "infj-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
+      "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "INFJ may organize a situation into a broader pattern of meaning, while INFP may first check whether a response remains true to inner values. Neither route measures kindness.",
-          "question": "What is the main difference between INFJ and INFP?"
+          "answer": "Yes. J/P does not measure discipline or flexibility as a skill. Circumstances and learned habits can produce either behavior.",
+          "question": "Can an INFP keep routines and an INFJ improvise?"
         },
         {
-          "answer": "Both may be sensitive, idealistic, and concerned with meaning. INFJ may organize a relationship pattern, while INFP may protect personal authenticity.",
-          "question": "Why are INFJ and INFP easy to confuse?"
+          "answer": "No. Neither quality is owned by a type. The codes differ on J/P; function-stack stories offer a theoretical reading, not a proven division of those qualities.",
+          "question": "Is the real difference empathy versus authenticity?"
         },
         {
-          "answer": "In a work setting, observe how each supports a colleague facing difficulty: INFJ may help the person see patterns and a future path, while INFP may first ensure that the person's real feelings are respected. Both approaches can be helpful, but their pacing can differ.",
-          "question": "How can INFJ and INFP be distinguished in a work setting?"
+          "answer": "Those experiences cannot determine type or a diagnosis. Consider their causes directly and compare preferences across ordinary situations.",
+          "question": "Can sadness or sensitivity help me distinguish them?"
         },
         {
-          "answer": "Do not infer type from sociability or comforting behavior. Watch how a person handles value conflict and moves from empathy toward a judgment or boundary.",
-          "question": "What is a common mistake when comparing INFJ and INFP?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Keep both as hypotheses for reflection, check the instrument used and seek counterexamples. This page cannot decide an official best-fit type for you.",
+          "question": "What if both descriptions resonate?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INFJ profile",
-          "href": "/en/personality/infj-a",
-          "label": "INFJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/infj",
+          "label": "INFJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INFP profile",
-          "href": "/en/personality/infp-a",
-          "label": "INFP profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/infp",
+          "label": "INFP base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFP profile",
-          "href": "/en/personality/isfp-a",
-          "label": "ISFP profile",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "INFJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -265,221 +326,273 @@
       "sections": [
         {
           "body": [
-            "INFJ may organize a person's situation into a coherent pattern of meaning, while INFP may first check whether inner values feel authentic. The key difference is not who is gentler, but how judgment develops after empathy."
+            "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INFJ": "Notice relationship patterns and long-term effects",
-              "INFP": "Notice personal feelings and value alignment",
-              "dimension": "Entry point for empathy"
-            },
-            {
-              "INFJ": "Guide, explain, and connect clues",
-              "INFP": "Write, listen, and protect a sense of authenticity",
-              "dimension": "Expression"
-            },
-            {
-              "INFJ": "May over-explain another person's meaning",
-              "INFP": "May retreat too far into personal feelings",
-              "dimension": "Conflict risk"
-            },
-            {
-              "INFJ": "Avoid defining another person's life for them",
-              "INFP": "Turn values into boundaries others can understand",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both may be sensitive, idealistic, and concerned with meaning. INFJ may be more likely to organize the relationship pattern, while INFP may be more likely to protect personal authenticity."
+            "Both describe Introversion, Intuition and Feeling: inward reflection, attention to patterns or possibilities, and consideration of values and effects on people. They do not establish that two people share beliefs, emotional sensitivity or a life purpose.",
+            "An INFJ-style account may organize a meaningful aim into a considered direction; an INFP-style account may keep several expressions of a value open before committing. Either can be organized, spontaneous, decisive or uncertain. A deadline, family responsibility or learned skill may explain visible behavior better than type.",
+            "Function-stack theory commonly uses Ni–Fe–Ti–Se for INFJ and Fi–Ne–Si–Te for INFP. This is an additional theoretical interpretation, not evidence of different forms of consciousness or a validated shortcut for distinguishing people. A/T is a separate extension."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "When a friend is struggling, INFJ may help them see a pattern and a future path, while INFP may first make sure the person's real feelings are respected. Both forms of support can matter, but their pacing differs."
+            "| Observation | INFJ | INFP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settled outer-world arrangements | Perceiving (P): a preference for openness to new information |\n| Original project example | Choose a direction that organizes the meaningful aim | Explore several ways to express the underlying value |\n| Possible cost | Settling an interpretation before hearing a relevant alternative | Keeping expressions open after a commitment is needed |\n| Shared practical step | State what could reopen the direction | Choose what is sufficient for a small trial |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not distinguish INFJ from INFP by sociability or by who seems more comforting. Observe whether value conflict leads first to a broader meaning structure or to a check of inner authenticity."
+            "Original work scenario: volunteers are planning a support activity. One approach chooses a clear purpose and a sequence; another explores several formats that could respect participants' values. Ask the participants what they need, set an exploration period and agree on a small trial. The same person may contribute both approaches.",
+            "Original relationship scenario: two friends discuss a meaningful change. One wants an agreed next step, while another wants time to understand what each option represents. Decide what must be settled now and what can wait. Do not infer that a request for closure is controlling or that a request for time is uncaring."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual INFJ and INFP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "Neatness does not identify INFJ, and artistic interests do not identify INFP. Empathy, spirituality, emotional intensity and feeling misunderstood cannot settle the distinction. J/P describes an outer-world preference, not a moral or discipline score. Avoid typing someone from their response to a single difficult experience."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Recall three choices with real freedom over the process. What did you want to settle, what did you prefer to keep open and what made that preference useful or costly? Compare a personal choice with a shared commitment. Keep a counterexample and leave room for uncertainty; the exercise cannot verify a test result."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [INFJ base profile](/en/personality/infj)\n- [INFP base profile](/en/personality/infp)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-      "seo_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "e2c426ffed25ac9b6780494ce35a626f1a1566dd6a4d0e050a577a86fddf256a",
-      "summary": "INFJ may organize a person's situation into a broader pattern and direction, while INFP may first check whether a response remains true to inner values. The contrast concerns what happens after empathy, not who is kinder, more sensitive, or more emotionally mature.",
-      "title": "INFJ vs INFP: Organizing a Vision and Protecting Inner Values"
+      "source_sha256": "835f8b06c32f1babaefe1bfe89aaf9e2d7c43a1b5081e9aa08e4a686fd19b1db",
+      "summary": "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity.",
+      "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality",
-            "name": "Personality types",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality/infj-vs-infp",
-            "name": "INFJ vs INFP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "INFJ may organize a situation into a broader pattern of meaning, while INFP may first check whether a response remains true to inner values. Neither route measures kindness."
-            },
-            "name": "What is the main difference between INFJ and INFP?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Both may be sensitive, idealistic, and concerned with meaning. INFJ may organize a relationship pattern, while INFP may protect personal authenticity."
-            },
-            "name": "Why are INFJ and INFP easy to confuse?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In a work setting, observe how each supports a colleague facing difficulty: INFJ may help the person see patterns and a future path, while INFP may first ensure that the person's real feelings are respected. Both approaches can be helpful, but their pacing can differ."
-            },
-            "name": "How can INFJ and INFP be distinguished in a work setting?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Do not infer type from sociability or comforting behavior. Watch how a person handles value conflict and moves from empathy toward a judgment or boundary."
-            },
-            "name": "What is a common mistake when comparing INFJ and INFP?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
-            },
-            "name": "Can this comparison decide a career or relationship choice?"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "INFJ",
-            "position": 1,
-            "url": "https://fermatmind.com/en/personality/infj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INFP",
-            "position": 2,
-            "url": "https://fermatmind.com/en/personality/infp-a"
-          }
-        ]
-      },
-      "name": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
+      "@type": "AboutPage",
+      "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://fermatmind.com/en/personality/infj-vs-infp",
+      "name": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices",
       "url": "https://fermatmind.com/en/personality/infj-vs-infp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "INFJ and INFP share I, N and F; their four-letter codes differ on J/P. Judging emphasizes settling outer-world arrangements, while Perceiving emphasizes keeping them open to incoming information. The difference does not rank empathy, depth or personal authenticity.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "Both describe Introversion, Intuition and Feeling: inward reflection, attention to patterns or possibilities, and consideration of values and effects on people. They do not establish that two people share beliefs, emotional sensitivity or a life purpose.\n\nAn INFJ-style account may organize a meaningful aim into a considered direction; an INFP-style account may keep several expressions of a value open before committing. Either can be organized, spontaneous, decisive or uncertain. A deadline, family responsibility or learned skill may explain visible behavior better than type.\n\nFunction-stack theory commonly uses Ni–Fe–Ti–Se for INFJ and Fi–Ne–Si–Te for INFP. This is an additional theoretical interpretation, not evidence of different forms of consciousness or a validated shortcut for distinguishing people. A/T is a separate extension.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "What is shared and what differs"
+      },
+      {
+        "body_html": null,
+        "body_md": "| Observation | INFJ | INFP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settled outer-world arrangements | Perceiving (P): a preference for openness to new information |\n| Original project example | Choose a direction that organizes the meaningful aim | Explore several ways to express the underlying value |\n| Possible cost | Settling an interpretation before hearing a relevant alternative | Keeping expressions open after a commitment is needed |\n| Shared practical step | State what could reopen the direction | Choose what is sufficient for a small trial |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "Side-by-side comparison"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original work scenario: volunteers are planning a support activity. One approach chooses a clear purpose and a sequence; another explores several formats that could respect participants' values. Ask the participants what they need, set an exploration period and agree on a small trial. The same person may contribute both approaches.\n\nOriginal relationship scenario: two friends discuss a meaningful change. One wants an agreed next step, while another wants time to understand what each option represents. Decide what must be settled now and what can wait. Do not infer that a request for closure is controlling or that a request for time is uncaring.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Examples in work and relationships"
+      },
+      {
+        "body_html": null,
+        "body_md": "Neatness does not identify INFJ, and artistic interests do not identify INFP. Empathy, spirituality, emotional intensity and feeling misunderstood cannot settle the distinction. J/P describes an outer-world preference, not a moral or discipline score. Avoid typing someone from their response to a single difficult experience.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "Avoid these misreadings"
+      },
+      {
+        "body_html": null,
+        "body_md": "Recall three choices with real freedom over the process. What did you want to settle, what did you prefer to keep open and what made that preference useful or costly? Compare a personal choice with a shared commitment. Keep a counterexample and leave room for uncertainty; the exercise cannot verify a test result.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "How to continue your self-observation"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Yes. J/P does not measure discipline or flexibility as a skill. Circumstances and learned habits can produce either behavior.",
+              "question": "Can an INFP keep routines and an INFJ improvise?"
+            },
+            {
+              "answer": "No. Neither quality is owned by a type. The codes differ on J/P; function-stack stories offer a theoretical reading, not a proven division of those qualities.",
+              "question": "Is the real difference empathy versus authenticity?"
+            },
+            {
+              "answer": "Those experiences cannot determine type or a diagnosis. Consider their causes directly and compare preferences across ordinary situations.",
+              "question": "Can sadness or sensitivity help me distinguish them?"
+            },
+            {
+              "answer": "Keep both as hypotheses for reflection, check the instrument used and seek counterexamples. This page cannot decide an official best-fit type for you.",
+              "question": "What if both descriptions resonate?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "Sources and method limits"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INFJ base profile](/en/personality/infj)\n- [INFP base profile](/en/personality/infp)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "Related types and comparisons"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/infj-vs-infp",
       "jsonld_overrides_json": null,
-      "og_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
+      "og_description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "og_image_url": null,
-      "og_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
-      "robots": "noindex,follow",
-      "seo_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-      "seo_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
-      "twitter_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
+      "og_title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind",
+      "twitter_description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "twitter_image_url": null,
-      "twitter_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work"
+      "twitter_title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/infj-vs-infp"
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
+        "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "canonical_url": "https://fermatmind.com/en/personality/infj-vs-infp",
-      "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-      "indexability_state": "noindex",
-      "llms_exposure_state": "withhold",
+      "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "544b1dc516cfda4ce64433f7e75336f8f0b93a93",
+      "metadata_fingerprint": "e2d395c9bcd8239370eca1f24df2edc000d49649",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-        "title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
+        "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/en/personality/infj-vs-infp"
       },
       "public_summary_fingerprint": null,
-      "robots_policy": "noindex,follow",
+      "robots_policy": "index,follow",
       "runtime_artifact_ref": null,
       "share_safety_state": null,
-      "sitemap_state": "excluded",
+      "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
+      "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-        "title": "INFJ vs INFP: Values, Decisions, Relationships, and Work"
+        "description": "Compare INFJ and INFP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "INFJ vs INFP: Judging, Perceiving and Meaningful Choices | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "11b21b18eae19c3c3b9ddc55e843480e57d5e176b47b23e2db0ba86f9bd6c064"
+  "source_content_sha256": "c84ba5e1a193dbd544dcd5eb17a85df7a0dd0527c2eb1dbba5cb76bc7c12262b"
 }

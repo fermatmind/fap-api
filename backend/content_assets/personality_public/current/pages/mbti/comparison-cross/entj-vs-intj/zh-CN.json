@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/entj-vs-intj",
@@ -12,109 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-          "key": "direct_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "最大区别"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "相同的任务和职责可能带来相似表现；不能仅凭果断、安静或组织行为确定类型。",
-          "key": "easy_misread",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么容易混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "可以比较讨论中形成想法与先独立整理后表达的体验，但这些编辑案例不是类型判定或工作表现测试。",
-          "key": "real_scenario_differences",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "真实场景差异"
-        },
-        {
-          "body": "把强势当 E、安静当 I，或把一次行动方式当稳定类型；还要了解任务、文化和当事人自述。",
-          "key": "do_not_misjudge",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "不要这样误判"
-        },
-        {
-          "body": "如需继续，可查看单独类型描述与测评方法，并把描述与自己的具体经历比较。职业与关系选择仍需实际任务、能力、条件和双方沟通，类型阅读不能完成这些验证。",
-          "key": "next_reading",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "下一步阅读"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "8cea2cf474249f3073f758b32c47c2d6474185e5",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-          "question": "ENTJ 和 INTJ 最大区别是什么？"
+          "answer": "能。E/I 是偏好词汇，不是能力边界。领导和独立工作需要技能、责任与情境。",
+          "key": "faq-0",
+          "question": "INTJ 能领导，ENTJ 能独自工作吗？"
         },
         {
-          "answer": "相同的任务和职责可能带来相似表现；不能仅凭果断、安静或组织行为确定类型。",
-          "question": "为什么 ENTJ 和 INTJ 容易被混淆？"
+          "answer": "不是。发言时间可能取决于角色、话题、熟悉程度。比较不同场景中的注意方向和形成观点方式。",
+          "key": "faq-1",
+          "question": "区别只是话多话少吗？"
         },
         {
-          "answer": "可以比较讨论中形成想法与先独立整理后表达的体验，但这些编辑案例不是类型判定或工作表现测试。",
-          "question": "在工作场景怎么区分 ENTJ 和 INTJ？"
+          "answer": "不会。A/T 属于另外扩展，不代替 E/I。信心与外向不是同一个标签。",
+          "key": "faq-2",
+          "question": "A 后缀会让 INTJ 变成 ENTJ 吗？"
         },
         {
-          "answer": "把强势当 E、安静当 I，或把一次行动方式当稳定类型；还要了解任务、文化和当事人自述。",
-          "question": "判断 ENTJ 和 INTJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。具体选择需要实际能力、经验、条件和沟通证据，描述不能证明职业或关系结果。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留反例，核查产生结果的工具和处境。阅读练习不能验证官方最适类型。",
+          "key": "faq-3",
+          "question": "两种描述都符合怎么办？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "",
-          "href": "/zh/personality/entj-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ENTJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/intj-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INTJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/intj-vs-intp",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INTJ VS INTP"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 人格"
-        },
-        {
-          "body": "",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 免费测试"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "entj-vs-intj",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "625c6d756bed0c8481078310e1e1557123bf8f73",
       "summary_blocks": [
         {
-          "body": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
+          "body": "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模"
+          "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
         "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "answer_surface_v1": {
@@ -226,64 +203,45 @@
         "INTJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/entj-vs-intj",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "entj-vs-intj",
       "comparison_type": "mbti_cross_type",
-      "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-          "question": "ENTJ 和 INTJ 最大区别是什么？"
+          "answer": "能。E/I 是偏好词汇，不是能力边界。领导和独立工作需要技能、责任与情境。",
+          "question": "INTJ 能领导，ENTJ 能独自工作吗？"
         },
         {
-          "answer": "相同的任务和职责可能带来相似表现；不能仅凭果断、安静或组织行为确定类型。",
-          "question": "为什么 ENTJ 和 INTJ 容易被混淆？"
+          "answer": "不是。发言时间可能取决于角色、话题、熟悉程度。比较不同场景中的注意方向和形成观点方式。",
+          "question": "区别只是话多话少吗？"
         },
         {
-          "answer": "可以比较讨论中形成想法与先独立整理后表达的体验，但这些编辑案例不是类型判定或工作表现测试。",
-          "question": "在工作场景怎么区分 ENTJ 和 INTJ？"
+          "answer": "不会。A/T 属于另外扩展，不代替 E/I。信心与外向不是同一个标签。",
+          "question": "A 后缀会让 INTJ 变成 ENTJ 吗？"
         },
         {
-          "answer": "把强势当 E、安静当 I，或把一次行动方式当稳定类型；还要了解任务、文化和当事人自述。",
-          "question": "判断 ENTJ 和 INTJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。具体选择需要实际能力、经验、条件和沟通证据，描述不能证明职业或关系结果。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留反例，核查产生结果的工具和处境。阅读练习不能验证官方最适类型。",
+          "question": "两种描述都符合怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ENTJ A",
-          "href": "/zh/personality/entj-a",
-          "label": "ENTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/entj",
+          "label": "ENTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ A",
-          "href": "/zh/personality/intj-a",
-          "label": "INTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intj",
+          "label": "INTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ VS INTP",
-          "href": "/zh/personality/intj-vs-intp",
-          "label": "INTJ VS INTP",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -303,87 +261,104 @@
       "sections": [
         {
           "body": [
-            "在四字母框架中，ENTJ 与 INTJ 的区别是外向/内向偏好，另外三个字母相同。用这个差别提出问题：你更愿意在交流中整理想法，还是先独立整理再交流？真实行为仍受任务、熟悉程度、文化和情境影响。"
+            "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ENTJ": "试着边交流边记录形成的想法",
-              "INTJ": "试着先写一页想法再交流",
-              "dimension": "准备讨论"
-            },
-            {
-              "ENTJ": "说明讨论中仍未确认的条件",
-              "INTJ": "说明书面推演中仍未确认的条件",
-              "dimension": "信息缺口"
-            },
-            {
-              "ENTJ": "问对方如何理解刚才的提议",
-              "INTJ": "问对方如何理解自己的说明",
-              "dimension": "沟通核对"
-            },
-            {
-              "ENTJ": "保留讨论前后判断变化",
-              "INTJ": "保留说明修改前后的依据",
-              "dimension": "可观察产出"
-            }
-          ],
-          "title": "两种准备方式的观察练习"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "一个人在会议上主动分工，另一个先写说明，并不直接确定类型。两种动作都可能来自职责、经验或会议安排；需要了解当事人的偏好与具体情境，而不是由可见动作推断内部模型。"
+            "两者都描述直觉、思考、判断：关注模式或可能性、逻辑或非个人化标准、组织外部事务的偏好。类型叙述可能都把计划与长期方向联系，实际规划技能和野心需要另外的证据。",
+            "ENTJ 式叙述可能通过互动与协调形成方向，INTJ 式叙述可能先独自形成观点。两者都能公开说话、倾听、领导、独自工作。责任、熟悉程度和团队会改变可见表现。",
+            "功能栈理论常安排 ENTJ 为 Te–Ni–Se–Fi，INTJ 为 Ni–Te–Fi–Se。排序是理论解释，不证明分别测得的心理机制。A/T 不属于官方 MBTI，不能判定 E/I。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "下面是虚构探索案例，不是类型群体差异研究：给同一个三人项目，两种准备方式分别为先讨论并记录问题、先写一页假设再讨论。两次都检查负责人、依据和未确认事项，再比较你在过程中得到哪些信息；不由完成方式认定 ENTJ 或 INTJ。"
+            "| 观察点 | ENTJ | INTJ |\n| --- | --- | --- |\n| 代码差别 | 外向 E：关注外部 | 内向 I：关注内部思考 |\n| 原创会议例子 | 讨论中发展提议 | 先准备考虑过的提议再讨论 |\n| 可能盲点 | 把活跃讨论当作观点已确定 | 独自完善时未分享有用推理 |\n| 共同实践 | 区分探索与决定 | 说明草稿和反馈时点 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "虚构项目中的观察练习"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "强势、安静、行动快或思考久都不是单独的类型判定规则。也不要把 E 当沟通能力、I 当分析能力，或把一次项目表现当稳定偏好。"
+            "原创工作情景：团队要定下季度计划。一人希望讨论资源，另一人先整理限制。会前发简报、允许私人笔记，再比较方案。两种方式都不决定谁该领导，同一人也会随任务改变。",
+            "原创关系情景：重要对话后，一方想立即谈影响，另一方需要思考。约定何时继续，不把继续说话当作支配，也不把暂停当作撤回关心。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "如需继续，可查看单独类型描述与测评方法，并把描述与自己的具体经历比较。职业与关系选择仍需实际任务、能力、条件和双方沟通，类型阅读不能完成这些验证。"
+            "声音大的经理不一定 ENTJ，安静的策略者不一定 INTJ。E/I 不是害羞、强势或领导力量表。喜欢独自工作不排除 E，会公开演讲不排除 I。职位和一次会议不能确认类型。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较有选择自由的三次陌生决定：互动帮助形成观点，还是更想先独自确定？讨论后需要什么？保留另一处境中的相反偏好，区分自己的选择与岗位要求。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [ENTJ 基础人格](/zh/personality/entj)\n- [INTJ 基础人格](/zh/personality/intj)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+      "seo_description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-      "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模"
+      "source_sha256": "d0181d8ee5282310efdf200ba4653977b4172d1a8ffa3b88c2ce47146a755043",
+      "summary": "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。",
+      "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
         "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "answer_surface_v1": {
@@ -495,64 +470,45 @@
         "INTJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/entj-vs-intj",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "entj-vs-intj",
       "comparison_type": "mbti_cross_type",
-      "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-          "question": "ENTJ 和 INTJ 最大区别是什么？"
+          "answer": "能。E/I 是偏好词汇，不是能力边界。领导和独立工作需要技能、责任与情境。",
+          "question": "INTJ 能领导，ENTJ 能独自工作吗？"
         },
         {
-          "answer": "相同的任务和职责可能带来相似表现；不能仅凭果断、安静或组织行为确定类型。",
-          "question": "为什么 ENTJ 和 INTJ 容易被混淆？"
+          "answer": "不是。发言时间可能取决于角色、话题、熟悉程度。比较不同场景中的注意方向和形成观点方式。",
+          "question": "区别只是话多话少吗？"
         },
         {
-          "answer": "可以比较讨论中形成想法与先独立整理后表达的体验，但这些编辑案例不是类型判定或工作表现测试。",
-          "question": "在工作场景怎么区分 ENTJ 和 INTJ？"
+          "answer": "不会。A/T 属于另外扩展，不代替 E/I。信心与外向不是同一个标签。",
+          "question": "A 后缀会让 INTJ 变成 ENTJ 吗？"
         },
         {
-          "answer": "把强势当 E、安静当 I，或把一次行动方式当稳定类型；还要了解任务、文化和当事人自述。",
-          "question": "判断 ENTJ 和 INTJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。具体选择需要实际能力、经验、条件和沟通证据，描述不能证明职业或关系结果。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留反例，核查产生结果的工具和处境。阅读练习不能验证官方最适类型。",
+          "question": "两种描述都符合怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ENTJ A",
-          "href": "/zh/personality/entj-a",
-          "label": "ENTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/entj",
+          "label": "ENTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ A",
-          "href": "/zh/personality/intj-a",
-          "label": "INTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/intj",
+          "label": "INTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ VS INTP",
-          "href": "/zh/personality/intj-vs-intp",
-          "label": "INTJ VS INTP",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -572,198 +528,250 @@
       "sections": [
         {
           "body": [
-            "在四字母框架中，ENTJ 与 INTJ 的区别是外向/内向偏好，另外三个字母相同。用这个差别提出问题：你更愿意在交流中整理想法，还是先独立整理再交流？真实行为仍受任务、熟悉程度、文化和情境影响。"
+            "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ENTJ": "试着边交流边记录形成的想法",
-              "INTJ": "试着先写一页想法再交流",
-              "dimension": "准备讨论"
-            },
-            {
-              "ENTJ": "说明讨论中仍未确认的条件",
-              "INTJ": "说明书面推演中仍未确认的条件",
-              "dimension": "信息缺口"
-            },
-            {
-              "ENTJ": "问对方如何理解刚才的提议",
-              "INTJ": "问对方如何理解自己的说明",
-              "dimension": "沟通核对"
-            },
-            {
-              "ENTJ": "保留讨论前后判断变化",
-              "INTJ": "保留说明修改前后的依据",
-              "dimension": "可观察产出"
-            }
-          ],
-          "title": "两种准备方式的观察练习"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "一个人在会议上主动分工，另一个先写说明，并不直接确定类型。两种动作都可能来自职责、经验或会议安排；需要了解当事人的偏好与具体情境，而不是由可见动作推断内部模型。"
+            "两者都描述直觉、思考、判断：关注模式或可能性、逻辑或非个人化标准、组织外部事务的偏好。类型叙述可能都把计划与长期方向联系，实际规划技能和野心需要另外的证据。",
+            "ENTJ 式叙述可能通过互动与协调形成方向，INTJ 式叙述可能先独自形成观点。两者都能公开说话、倾听、领导、独自工作。责任、熟悉程度和团队会改变可见表现。",
+            "功能栈理论常安排 ENTJ 为 Te–Ni–Se–Fi，INTJ 为 Ni–Te–Fi–Se。排序是理论解释，不证明分别测得的心理机制。A/T 不属于官方 MBTI，不能判定 E/I。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "下面是虚构探索案例，不是类型群体差异研究：给同一个三人项目，两种准备方式分别为先讨论并记录问题、先写一页假设再讨论。两次都检查负责人、依据和未确认事项，再比较你在过程中得到哪些信息；不由完成方式认定 ENTJ 或 INTJ。"
+            "| 观察点 | ENTJ | INTJ |\n| --- | --- | --- |\n| 代码差别 | 外向 E：关注外部 | 内向 I：关注内部思考 |\n| 原创会议例子 | 讨论中发展提议 | 先准备考虑过的提议再讨论 |\n| 可能盲点 | 把活跃讨论当作观点已确定 | 独自完善时未分享有用推理 |\n| 共同实践 | 区分探索与决定 | 说明草稿和反馈时点 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "虚构项目中的观察练习"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "强势、安静、行动快或思考久都不是单独的类型判定规则。也不要把 E 当沟通能力、I 当分析能力，或把一次项目表现当稳定偏好。"
+            "原创工作情景：团队要定下季度计划。一人希望讨论资源，另一人先整理限制。会前发简报、允许私人笔记，再比较方案。两种方式都不决定谁该领导，同一人也会随任务改变。",
+            "原创关系情景：重要对话后，一方想立即谈影响，另一方需要思考。约定何时继续，不把继续说话当作支配，也不把暂停当作撤回关心。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "如需继续，可查看单独类型描述与测评方法，并把描述与自己的具体经历比较。职业与关系选择仍需实际任务、能力、条件和双方沟通，类型阅读不能完成这些验证。"
+            "声音大的经理不一定 ENTJ，安静的策略者不一定 INTJ。E/I 不是害羞、强势或领导力量表。喜欢独自工作不排除 E，会公开演讲不排除 I。职位和一次会议不能确认类型。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较有选择自由的三次陌生决定：互动帮助形成观点，还是更想先独自确定？讨论后需要什么？保留另一处境中的相反偏好，区分自己的选择与岗位要求。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [ENTJ 基础人格](/zh/personality/entj)\n- [INTJ 基础人格](/zh/personality/intj)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+      "seo_description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。",
-      "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模"
+      "source_sha256": "d0181d8ee5282310efdf200ba4653977b4172d1a8ffa3b88c2ce47146a755043",
+      "summary": "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。",
+      "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/entj-vs-intj",
-            "name": "ENTJ vs INTJ",
-            "position": 2
-          }
-        ]
-      },
-      "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "共享 N、T、J，四字母词汇中的区别是 E/I 偏好。它不是领导力、战略能力或职业胜任的差别。"
-            },
-            "name": "ENTJ 和 INTJ 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "相同的任务和职责可能带来相似表现；不能仅凭果断、安静或组织行为确定类型。"
-            },
-            "name": "为什么 ENTJ 和 INTJ 容易被混淆？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "可以比较讨论中形成想法与先独立整理后表达的体验，但这些编辑案例不是类型判定或工作表现测试。"
-            },
-            "name": "在工作场景怎么区分 ENTJ 和 INTJ？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "把强势当 E、安静当 I，或把一次行动方式当稳定类型；还要了解任务、文化和当事人自述。"
-            },
-            "name": "判断 ENTJ 和 INTJ 时最容易犯什么错？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。具体选择需要实际能力、经验、条件和沟通证据，描述不能证明职业或关系结果。"
-            },
-            "name": "这个对比能决定职业或关系选择吗？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ENTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/entj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INTJ",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/intj-a"
-          }
-        ]
-      },
-      "name": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+      "@type": "AboutPage",
+      "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/entj-vs-intj",
+      "name": "ENTJ 与 INTJ 的区别：外向、内向与规划情景",
       "url": "https://fermatmind.com/zh/personality/entj-vs-intj"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ENTJ 与 INTJ 共用 N、T、J，代码差别是 E/I。外向关注外部，内向关注内部思考；区别不排名领导力、信心或社交能力。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者都描述直觉、思考、判断：关注模式或可能性、逻辑或非个人化标准、组织外部事务的偏好。类型叙述可能都把计划与长期方向联系，实际规划技能和野心需要另外的证据。\n\nENTJ 式叙述可能通过互动与协调形成方向，INTJ 式叙述可能先独自形成观点。两者都能公开说话、倾听、领导、独自工作。责任、熟悉程度和团队会改变可见表现。\n\n功能栈理论常安排 ENTJ 为 Te–Ni–Se–Fi，INTJ 为 Ni–Te–Fi–Se。排序是理论解释，不证明分别测得的心理机制。A/T 不属于官方 MBTI，不能判定 E/I。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | ENTJ | INTJ |\n| --- | --- | --- |\n| 代码差别 | 外向 E：关注外部 | 内向 I：关注内部思考 |\n| 原创会议例子 | 讨论中发展提议 | 先准备考虑过的提议再讨论 |\n| 可能盲点 | 把活跃讨论当作观点已确定 | 独自完善时未分享有用推理 |\n| 共同实践 | 区分探索与决定 | 说明草稿和反馈时点 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：团队要定下季度计划。一人希望讨论资源，另一人先整理限制。会前发简报、允许私人笔记，再比较方案。两种方式都不决定谁该领导，同一人也会随任务改变。\n\n原创关系情景：重要对话后，一方想立即谈影响，另一方需要思考。约定何时继续，不把继续说话当作支配，也不把暂停当作撤回关心。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "声音大的经理不一定 ENTJ，安静的策略者不一定 INTJ。E/I 不是害羞、强势或领导力量表。喜欢独自工作不排除 E，会公开演讲不排除 I。职位和一次会议不能确认类型。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "比较有选择自由的三次陌生决定：互动帮助形成观点，还是更想先独自确定？讨论后需要什么？保留另一处境中的相反偏好，区分自己的选择与岗位要求。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "能。E/I 是偏好词汇，不是能力边界。领导和独立工作需要技能、责任与情境。",
+              "question": "INTJ 能领导，ENTJ 能独自工作吗？"
+            },
+            {
+              "answer": "不是。发言时间可能取决于角色、话题、熟悉程度。比较不同场景中的注意方向和形成观点方式。",
+              "question": "区别只是话多话少吗？"
+            },
+            {
+              "answer": "不会。A/T 属于另外扩展，不代替 E/I。信心与外向不是同一个标签。",
+              "question": "A 后缀会让 INTJ 变成 ENTJ 吗？"
+            },
+            {
+              "answer": "保留反例，核查产生结果的工具和处境。阅读练习不能验证官方最适类型。",
+              "question": "两种描述都符合怎么办？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENTJ 基础人格](/zh/personality/entj)\n- [INTJ 基础人格](/zh/personality/intj)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/entj-vs-intj",
       "jsonld_overrides_json": null,
-      "og_description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "og_description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+      "og_title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
-      "twitter_description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "seo_description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind",
+      "twitter_description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind"
+      "twitter_title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
         "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/entj-vs-intj",
-      "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "e3954a400c1276db8247bdf1d4f857d0ad78c191",
+      "metadata_fingerprint": "625c6d756bed0c8481078310e1e1557123bf8f73",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+        "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
@@ -773,24 +781,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind",
+      "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "ENTJ 和 INTJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "ENTJ 和 INTJ 的区别：外部推进与内部战略建模 | FermatMind"
+        "description": "对照 ENTJ 与 INTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ENTJ 与 INTJ 的区别：外向、内向与规划情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "d6caaca1b49dab1de45a389169d67bb9cc430f785e26c045c92cf109396754d1"
+  "source_content_sha256": "61b9a2074ed340e552e4733cb2d6712ad744bfa5791ed7463a304e6cd9cc4610"
 }

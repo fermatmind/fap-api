@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality",
@@ -43,7 +43,7 @@
       "entry_type": "personality_family_index",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "a47d86c0821e2647df6a73694697e964e3808a3f",
+      "landing_fingerprint": "32ff281d1f9087bc7f9a7bfc2b2f53c42b8d9ec5",
       "landing_scope": "public_indexable_index",
       "primary_content_ref": "personality:index",
       "public_surface_ref": null,
@@ -58,16 +58,102 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "浏览 16 型人格的公开画像、职业建议与延伸阅读。",
+          "body": "16 型词汇把 E/I、S/N、T/F、J/P 四组偏好组合成类型。基础页负责完整说明，A/T 页解释附加标签，对比页区分具体差异。A/T 不属于官方 MBTI；这些描述都不能测量能力或决定未来。",
           "key": "hero",
           "kind": "hero",
-          "title": "人格类型"
+          "title": "探索 MBTI 16 型人格"
         }
       ],
       "surface_family": "personality",
       "version": "landing.surface.v1"
+    },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "16 型词汇把 E/I、S/N、T/F、J/P 四组偏好组合成类型。基础页负责完整说明，A/T 页解释附加标签，对比页区分具体差异。A/T 不属于官方 MBTI；这些描述都不能测量能力或决定未来。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E/I — 外向与内向：**关注外部或内部思考，不是社交能力、害羞分数。\n\n**S/N — 实感与直觉：**关注具体信息与经验，或模式与可能性，不是智力、创造力排名。\n\n**T/F — 思考与情感：**决定时偏好逻辑一致与非个人化标准，或价值与对人的影响。两种方式都能包含推理和情绪。\n\n**J/P — 判断与知觉：**偏好确定外部安排，或向新信息保留空间，不是责任心、规划技能测量。\n\n每组取一个字母得到 16 个代码。称呼与颜色分组方便浏览，不是额外测得的特质。下面的描述帮助阅读，不能完整验证每个持有代码的人。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "四组偏好怎样组合"
+      },
+      {
+        "body_html": null,
+        "body_md": "**基础人格页：**先了解四组偏好、具体工作与关系情景，再寻找不符合描述的反例。不需要 A/T 后缀也能阅读基础页。\n\n**A/T 详情页：**扩展词汇中的 A 指 Assertive，T 指 Turbulent。后缀另描述自我确信、自我评价，不是官方第五组偏好、诊断或能力排名。末尾 T 与四字母中的 T（思考）不同。\n\n**同类型 A/T 对比：**对照相同基础类型中的两种描述，用情景检查反馈与决定，不把原创例子当作已经证明的群体差异。\n\n**跨类型对比：**检查实际不同的偏好字母，不能计算关系匹配或判定哪个类型更好。\n\n原创例子：读完一页，记录一个符合的近期决定、一个不符合的决定，问行为来自偏好、学到的技能还是处境要求。需要问卷时使用免费测试入口；目录本身不生成结果。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 20,
+        "title": "按问题选择阅读页面"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "官方四组偏好组合成 16 个代码。目录另外提供 32 个 A/T 描述和 23 个对比，阅读页数量不会让 A/T 变成官方偏好。",
+              "question": "MBTI 有多少种人格？"
+            },
+            {
+              "answer": "详情解释词汇、提供教育例子；测试提问并按具体工具产生结果。字母相似不能证明计分或验证等价。",
+              "question": "人格详情和测试有什么不同？"
+            },
+            {
+              "answer": "结果可能随工具、时点、处境变化。标签改变本身不能证明持续人格变化；核查工具与背景，比较真实例子。",
+              "question": "结果或描述会变化吗？"
+            },
+            {
+              "answer": "偏好定义、框架主张、实证发现的证据作用不同。类型与功能栈属于理论解释，情景为原创例子；来源与方法模块说明研究局限。",
+              "question": "这些描述都经过科学证明吗？"
+            },
+            {
+              "answer": "可以。从实际任务、兴趣、已展示技能、资格、工作条件开始。类型可以提示问题，不是前提或岗位适合结论。",
+              "question": "不知道类型也能探索职业吗？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 30,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 40,
+        "title": "来源与方法边界"
+      }
+    ],
+    "seo_meta": {
+      "canonical_url": "https://fermatmind.com/zh/personality",
+      "og_description": "浏览 16 个基础人格、32 个 A/T 描述与人格对比，了解四组偏好、实际情景、反例与科学边界，按阅读目标找到对应内容。",
+      "og_title": "MBTI 16 型人格大全：字母含义、A/T 解释与人格对比",
+      "robots": "index,follow",
+      "seo_description": "浏览 16 个基础人格、32 个 A/T 描述与人格对比，了解四组偏好、实际情景、反例与科学边界，按阅读目标找到对应内容。",
+      "seo_title": "MBTI 16 型人格大全：字母含义、A/T 解释与人格对比 | FermatMind",
+      "twitter_description": "浏览 16 个基础人格、32 个 A/T 描述与人格对比，了解四组偏好、实际情景、反例与科学边界，按阅读目标找到对应内容。",
+      "twitter_title": "MBTI 16 型人格大全：字母含义、A/T 解释与人格对比",
+      "updated_at": "2026-10-05"
     }
   },
   "payload_contract": "personality.mbti.hub.current.v1",
-  "source_content_sha256": "f364ae938b4fc33dd6cac12961ccd1deea1fd93777b33f4ab634e19442c03dfc"
+  "source_content_sha256": "6f2c7e3542637a9b064ed365ffeb8f09f6cbaf8bf7994c532c07f0aaca6a8371"
 }

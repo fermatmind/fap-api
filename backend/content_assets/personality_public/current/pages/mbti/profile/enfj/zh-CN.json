@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enfj",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "4be612c329c295342eefae2bfcd120a70c4e1b43",
+      "answer_fingerprint": "75018a0455e13e63e320bc3baa09622f4c8595b8",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "f8890d92db54acae80eb0e4b08c6f28d09760863",
-        "1fa9f80f50f92c755fbdb71e5a7d0e6dd1064d2f",
+        "cf6a816991a5b2bb0359bbb539bffb3e0e9d326a",
+        "dae46690b2334ba53c5ef54fd8aa50a5d9ddf91c",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "1fa9f80f50f92c755fbdb71e5a7d0e6dd1064d2f",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "开始测试"
+          "answer": "询问对方要什么帮助，核实自己的容量；允许异议、拒绝任务也可以是负责的合作。",
+          "key": "faq-0",
+          "question": "ENFJ 就应该支持每个人吗？"
         },
         {
-          "body": null,
-          "href": "/zh/career/recommendations/mbti/enfj",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "查看职业推荐"
+          "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+          "key": "faq-1",
+          "question": "ENFJ 能说明智力或能力吗？"
         },
         {
-          "body": null,
-          "href": "/zh/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "查看主题聚合"
+          "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+          "key": "faq-2",
+          "question": "ENFJ 最适合哪些职业？"
+        },
+        {
+          "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+          "key": "faq-3",
+          "question": "ENFJ-A 与 ENFJ-T 增加了什么？"
+        },
+        {
+          "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+          "key": "faq-4",
+          "question": "ENFJ 能预测伴侣匹配吗？"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "dae46690b2334ba53c5ef54fd8aa50a5d9ddf91c",
+      "next_step_blocks": [],
       "primary_content_ref": "ENFJ",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,42 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "先看职业推荐入口，再回到类型页做验证。",
-          "href": "/zh/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "职业方向"
-        },
-        {
-          "body": "先回 MBTI 主题页整理判断框架，再做路径选择。",
-          "href": "/zh/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "专业选择"
-        },
-        {
-          "body": "保留当前类型页，继续对照团队协作特征。",
-          "href": "/zh/personality/enfj",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "团队协作"
-        },
-        {
-          "body": "从类型页回到主题页，补齐关系场景解释。",
-          "href": "/zh/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "关系相处"
-        },
-        {
-          "body": "直接开始测试，拿到结构化成长建议。",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "成长建议"
-        }
-      ],
-      "seo_surface_ref": "f8890d92db54acae80eb0e4b08c6f28d09760863",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "cf6a816991a5b2bb0359bbb539bffb3e0e9d326a",
       "summary_blocks": [
         {
-          "body": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+          "body": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ENFJ - 主人公"
+          "title": "ENFJ 人格"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/zh/personality/enfj-a",
+        "label": "ENFJ-A",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/enfj-t",
+        "label": "ENFJ-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/enfj-a-vs-enfj-t",
+        "label": "ENFJ-A vs ENFJ-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality",
+        "label": "浏览 16 型目录",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/zh/career/recommendations/mbti/enfj",
@@ -162,7 +151,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "1fa9f80f50f92c755fbdb71e5a7d0e6dd1064d2f",
+      "landing_fingerprint": "dae46690b2334ba53c5ef54fd8aa50a5d9ddf91c",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ENFJ",
       "public_surface_ref": null,
@@ -177,10 +166,10 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+          "body": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ENFJ - 主人公"
+          "title": "ENFJ 人格"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +187,7 @@
       "display_type": "ENFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "主人公",
         "rarity": null,
@@ -224,156 +213,146 @@
       },
       "sections": [
         {
-          "body_md": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：律师, 教师, 机器学习工程师。",
+          "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**F — 情感**: 决定时较重视价值与对人的影响，不表示推理能力较弱。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，ENFJ 常被描述为 Fe–Ni–Se–Ti。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "ENFJ 的阅读重点可以是：关注人的处境，同时希望把共同进展组织起来。你可能注意到团队没有一致目标，邀请大家表达顾虑，再形成具体承诺。有价值的是让参与方式与方向清楚；可能的盲区是把安慰性回应当作真正同意。\n\n反例：重视人的决定方式，也可以包括拒绝、作出不受欢迎的选择或深入技术分析。乐于帮助、善于说服不能确认 ENFJ。观察认可与自己的优先事项冲突时，究竟什么在引导决定。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：新同事开会时很少发言，你邀请其表达，并提议协助准备下次讨论。先问对方希望得到什么支持，再制定成长安排。有效协作包含同意、现实工作量和明确责任。\n\n可以体验主持讨论、解释一项变化、支持学习项目等任务，观察是否喜欢日常要求、别人怎样评价成果。教学、管理和助人职业都有培训与资格要求，ENFJ 不能证明胜任。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：朋友说起不满，你立即给出改善生活的方案。先问是否需要建议、什么对对方最重要。即便出发点是关心，替别人确定目标也可能形成压力。\n\n像询问他人一样清楚表达自己的需要。为维持和气而隐藏分歧，可能只是推迟重要交流。类型字母不能确定别人的情绪，也不提供最佳恋爱配对。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：困难的一周里，多位同事向你求助，你开始觉得每个未解决问题都是自己的责任。列出已经答应的事、属于别人的事、需要组织支持的事，先调整分工，再增加承诺。\n\n这是工作量示例，不证明 ENFJ 会以特定方式耗竭。资源、关系与处境也影响压力，持续困扰不能缩减为一个类型故事。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "组织共同目标前，询问每个人希望如何参与、哪些事项无法承诺。写清任务、负责人和复查时间，在总结中保留一条不同意见。\n\n复盘大家能否自由反对、支持是否帮助了接受者。记录一次你选择边界而非认可的经历，不把积极昵称变成“必须帮助所有人”的责任。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [ENFJ-A](/zh/personality/enfj-a)\n- [ENFJ-T](/zh/personality/enfj-t)\n- [ENFJ-A vs ENFJ-T](/zh/personality/enfj-a-vs-enfj-t)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "销售经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              }
-            ],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "战略性模式识别"
+                "answer": "询问对方要什么帮助，核实自己的容量；允许异议、拒绝任务也可以是负责的合作。",
+                "question": "ENFJ 就应该支持每个人吗？"
               },
               {
-                "body": null,
-                "title": "在约束下保持执行稳定"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "ENFJ 能说明智力或能力吗？"
               },
               {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "ENFJ 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "ENFJ-A 与 ENFJ-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "ENFJ 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": null,
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
-              },
-              {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
-        },
-        {
-          "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/enfj",
-        "description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/enfj",
+          "name": "ENFJ 人格",
+          "url": "https://fermatmind.com/zh/personality/enfj"
+        },
+        "og_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "ENFJ 人格指南",
+        "og_title": "ENFJ 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "ENFJ 人格指南",
-        "twitter_description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
+        "title": "ENFJ 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "ENFJ 人格指南"
+        "twitter_title": "ENFJ 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "",
         "tagline": "主人公",
-        "title": "ENFJ - 主人公"
+        "title": "ENFJ 人格"
       },
       "variant_code": null
     },
@@ -389,7 +368,7 @@
       "display_type": "ENFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "主人公",
         "rarity": null,
@@ -415,166 +394,156 @@
       },
       "sections": [
         {
-          "body_md": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：律师, 教师, 机器学习工程师。",
+          "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**F — 情感**: 决定时较重视价值与对人的影响，不表示推理能力较弱。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，ENFJ 常被描述为 Fe–Ni–Se–Ti。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "ENFJ 的阅读重点可以是：关注人的处境，同时希望把共同进展组织起来。你可能注意到团队没有一致目标，邀请大家表达顾虑，再形成具体承诺。有价值的是让参与方式与方向清楚；可能的盲区是把安慰性回应当作真正同意。\n\n反例：重视人的决定方式，也可以包括拒绝、作出不受欢迎的选择或深入技术分析。乐于帮助、善于说服不能确认 ENFJ。观察认可与自己的优先事项冲突时，究竟什么在引导决定。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：新同事开会时很少发言，你邀请其表达，并提议协助准备下次讨论。先问对方希望得到什么支持，再制定成长安排。有效协作包含同意、现实工作量和明确责任。\n\n可以体验主持讨论、解释一项变化、支持学习项目等任务，观察是否喜欢日常要求、别人怎样评价成果。教学、管理和助人职业都有培训与资格要求，ENFJ 不能证明胜任。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：朋友说起不满，你立即给出改善生活的方案。先问是否需要建议、什么对对方最重要。即便出发点是关心，替别人确定目标也可能形成压力。\n\n像询问他人一样清楚表达自己的需要。为维持和气而隐藏分歧，可能只是推迟重要交流。类型字母不能确定别人的情绪，也不提供最佳恋爱配对。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：困难的一周里，多位同事向你求助，你开始觉得每个未解决问题都是自己的责任。列出已经答应的事、属于别人的事、需要组织支持的事，先调整分工，再增加承诺。\n\n这是工作量示例，不证明 ENFJ 会以特定方式耗竭。资源、关系与处境也影响压力，持续困扰不能缩减为一个类型故事。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "组织共同目标前，询问每个人希望如何参与、哪些事项无法承诺。写清任务、负责人和复查时间，在总结中保留一条不同意见。\n\n复盘大家能否自由反对、支持是否帮助了接受者。记录一次你选择边界而非认可的经历，不把积极昵称变成“必须帮助所有人”的责任。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [ENFJ-A](/zh/personality/enfj-a)\n- [ENFJ-T](/zh/personality/enfj-t)\n- [ENFJ-A vs ENFJ-T](/zh/personality/enfj-a-vs-enfj-t)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "销售经理"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "lawyer",
-                "title": "律师"
-              },
-              {
-                "slug": "teacher",
-                "title": "教师"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "机器学习工程师"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "后端工程师"
-              },
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "网络安全分析师"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "运营经理"
-              }
-            ],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "战略性模式识别"
+                "answer": "询问对方要什么帮助，核实自己的容量；允许异议、拒绝任务也可以是负责的合作。",
+                "question": "ENFJ 就应该支持每个人吗？"
               },
               {
-                "body": null,
-                "title": "在约束下保持执行稳定"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "ENFJ 能说明智力或能力吗？"
               },
               {
-                "body": null,
-                "title": "对关键目标具备持续投入能力"
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "ENFJ 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "ENFJ-A 与 ENFJ-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "ENFJ 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": null,
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
-              },
-              {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
-        },
-        {
-          "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/enfj",
-        "description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/enfj",
+          "name": "ENFJ 人格",
+          "url": "https://fermatmind.com/zh/personality/enfj"
+        },
+        "og_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "ENFJ 人格指南",
+        "og_title": "ENFJ 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "ENFJ 人格指南",
-        "twitter_description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
+        "title": "ENFJ 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "ENFJ 人格指南"
+        "twitter_title": "ENFJ 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+        "summary": "",
         "tagline": "主人公",
-        "title": "ENFJ - 主人公"
+        "title": "ENFJ 人格"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ENFJ",
-      "excerpt": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+      "excerpt": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
       "hero_image_url": null,
       "hero_kicker": "主人公",
       "hero_quote": null,
-      "hero_summary": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -586,383 +555,166 @@
       "slug": "enfj",
       "status": "published",
       "subtitle": null,
-      "title": "ENFJ - 主人公",
+      "title": "ENFJ 人格",
       "type_code": "ENFJ",
       "type_name": "主人公"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "基于 ENFJ 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+        "body_md": "ENFJ 指外向、直觉、情感、判断四组偏好。类型叙述常强调围绕有意义的方向组织协作；它不能证明同理心、领导能力或准确了解别人需要的能力。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**F — 情感**: 决定时较重视价值与对人的影响，不表示推理能力较弱。\n\n**J — 判断**: 面对外部事务较倾向组织与确定安排，不是自律或判断质量分数。\n\n在功能栈理论中，ENFJ 常被描述为 Fe–Ni–Se–Ti。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "字母含义与框架"
+      },
+      {
+        "body_html": null,
+        "body_md": "ENFJ 的阅读重点可以是：关注人的处境，同时希望把共同进展组织起来。你可能注意到团队没有一致目标，邀请大家表达顾虑，再形成具体承诺。有价值的是让参与方式与方向清楚；可能的盲区是把安慰性回应当作真正同意。\n\n反例：重视人的决定方式，也可以包括拒绝、作出不受欢迎的选择或深入技术分析。乐于帮助、善于说服不能确认 ENFJ。观察认可与自己的优先事项冲突时，究竟什么在引导决定。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "人格概览"
+        "title": "核心模式、价值与反例"
       },
       {
         "body_html": null,
-        "body_md": "你通常更适合在高自主度、目标清晰、反馈节奏稳定的工作环境中发挥优势。优先探索这些方向：律师, 教师, 机器学习工程师。",
+        "body_md": "原创情景：新同事开会时很少发言，你邀请其表达，并提议协助准备下次讨论。先问对方希望得到什么支持，再制定成长安排。有效协作包含同意、现实工作量和明确责任。\n\n可以体验主持讨论、解释一项变化、支持学习项目等任务，观察是否喜欢日常要求、别人怎样评价成果。教学、管理和助人职业都有培训与资格要求，ENFJ 不能证明胜任。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与职业探索"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创情景：朋友说起不满，你立即给出改善生活的方案。先问是否需要建议、什么对对方最重要。即便出发点是关心，替别人确定目标也可能形成压力。\n\n像询问他人一样清楚表达自己的需要。为维持和气而隐藏分歧，可能只是推迟重要交流。类型字母不能确定别人的情绪，也不提供最佳恋爱配对。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "职业概览"
+        "title": "关系与沟通"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "原创情景：困难的一周里，多位同事向你求助，你开始觉得每个未解决问题都是自己的责任。列出已经答应的事、属于别人的事、需要组织支持的事，先调整分工，再增加承诺。\n\n这是工作量示例，不证明 ENFJ 会以特定方式耗竭。资源、关系与处境也影响压力，持续困扰不能缩减为一个类型故事。",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "网络安全分析师"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "运营经理"
-            },
-            {
-              "slug": "sales-manager",
-              "title": "销售经理"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "lawyer",
-              "title": "律师"
-            },
-            {
-              "slug": "teacher",
-              "title": "教师"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "机器学习工程师"
-            },
-            {
-              "slug": "backend-engineer",
-              "title": "后端工程师"
-            },
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "网络安全分析师"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "运营经理"
-            }
-          ],
-          "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "压力与恢复"
+      },
+      {
+        "body_html": null,
+        "body_md": "组织共同目标前，询问每个人希望如何参与、哪些事项无法承诺。写清任务、负责人和复查时间，在总结中保留一条不同意见。\n\n复盘大家能否自由反对、支持是否帮助了接受者。记录一次你选择边界而非认可的经历，不把积极昵称变成“必须帮助所有人”的责任。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "实际观察练习"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENFJ-A](/zh/personality/enfj-a)\n- [ENFJ-T](/zh/personality/enfj-t)\n- [ENFJ-A vs ENFJ-T](/zh/personality/enfj-a-vs-enfj-t)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "推荐职业方向"
+        "title": "相关类型与对比"
       },
       {
         "body_html": null,
-        "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "询问对方要什么帮助，核实自己的容量；允许异议、拒绝任务也可以是负责的合作。",
+              "question": "ENFJ 就应该支持每个人吗？"
+            },
+            {
+              "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+              "question": "ENFJ 能说明智力或能力吗？"
+            },
+            {
+              "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+              "question": "ENFJ 最适合哪些职业？"
+            },
+            {
+              "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+              "question": "ENFJ-A 与 ENFJ-T 增加了什么？"
+            },
+            {
+              "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+              "question": "ENFJ 能预测伴侣匹配吗？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "成长概览"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "战略性模式识别"
-            },
-            {
-              "body": null,
-              "title": "在约束下保持执行稳定"
-            },
-            {
-              "body": null,
-              "title": "对关键目标具备持续投入能力"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "成长优势"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "过度单一专精导致横向能力不足"
-            },
-            {
-              "body": null,
-              "title": "反馈周期过长影响迭代速度"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "成长盲点"
-      },
-      {
-        "body_html": null,
-        "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先照顾感受和氛围，因此需要主动讲清原则和底线。亲密关系与协作关系里，你通常更喜欢明确承诺、稳定节奏和可预期安排。",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "关系模式"
-      },
-      {
-        "body_html": null,
-        "body_md": "ENFJ-A 与 ENFJ-T 的最大区别，是在相同主人公核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出群体协调、价值鼓励和关系动员，不应用于诊断、招聘、能力排名或关系裁决。",
-        "is_enabled": true,
-        "payload_json": {
-          "canonical": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t",
-          "claim_boundary": "本文不是医学诊断、心理治疗建议、职业录取建议、雇佣筛选工具或关系决策依据。ENFJ-A 与 ENFJ-T 的对比只用于帮助用户理解行为倾向、压力反应、反馈处理、关系表达和成长策略。人格类型不是身份限制，也不能证明一个人的智力、能力、价值、职业结果或关系质量。更合适的使用方式是：把测评结果当作复盘工具，再结合真实经历、长期反馈、能力证据、职业兴趣、工作环境和关系互动来判断。",
-          "content": {
-            "confusion_reason": "ENFJ-A 与 ENFJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-            "max_difference": "ENFJ-A 与 ENFJ-T 的最大区别，是在相同主人公核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出群体协调、价值鼓励和关系动员，不应用于诊断、招聘、能力排名或关系裁决。",
-            "misjudgment_warning": "不要把 ENFJ-A 写成更好、更强或必然更自信，也不要把 ENFJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-            "quick_answer": "ENFJ-A 与 ENFJ-T 的最大区别，是在相同主人公核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出群体协调、价值鼓励和关系动员，不应用于诊断、招聘、能力排名或关系裁决。",
-            "quick_judgment_table": [
-              {
-                "a": "更快回到自己的判断并保持行动节奏",
-                "dimension": "最大区别",
-                "t": "更频繁检查评价、风险与可改进处"
-              },
-              {
-                "a": "ENFJ 的群体协调、价值鼓励和关系动员更容易先保持稳定推进",
-                "dimension": "压力反应",
-                "t": "ENFJ 的群体协调、价值鼓励和关系动员更容易先复盘遗漏与外部反馈"
-              },
-              {
-                "a": "先理解共同需要，再组织支持与行动，再用最小证据修正",
-                "dimension": "工作场景",
-                "t": "先理解共同需要，再组织支持与行动，并先补足风险检查与反馈窗口"
-              },
-              {
-                "a": "可能被误读为把支持他人误作必须替代他人决定",
-                "dimension": "容易误判",
-                "t": "可能被误读为犹豫或不够坚定"
-              }
-            ],
-            "real_scene_differences": [
-              "在工作中，ENFJ-A 往往在先理解共同需要，再组织支持与行动后较快进入执行与迭代；ENFJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "在关系中，ENFJ-A 可能较快确认自己的理解并提出下一步；ENFJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "压力下，ENFJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；ENFJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。"
-            ]
-          },
-          "faq": [
-            {
-              "answer": "ENFJ-A 与 ENFJ-T 共享同一基础类型和主人公偏好；差异主要体现在面对评价、压力和自我确认时的节奏，不是能力或价值高低。",
-              "question": "ENFJ-A 和 ENFJ-T 最大区别是什么？"
-            },
-            {
-              "answer": "回看最近的决定、反馈和压力场景：你是更快恢复判断后推进，还是更常追加复盘和风险检查。再结合长期行为与完整测试结果理解。",
-              "question": "怎么快速判断自己更像 ENFJ-A 还是 ENFJ-T？"
-            },
-            {
-              "answer": "不一定。A/T 只能描述自我确认和反馈处理的倾向，不能替代对具体能力、成熟度、训练或环境支持的判断。",
-              "question": "ENFJ-A 一定比 ENFJ-T 更自信吗？"
-            },
-            {
-              "answer": "不能。职业与关系需要结合技能、兴趣、经验、现实约束、沟通和双方边界；页面只提供自我观察与沟通线索。",
-              "question": "这个 A/T 对比能决定职业或关系吗？"
-            },
-            {
-              "answer": "不能。该内容不是医学诊断、招聘筛选、能力证明或关系裁决工具，也不应据此为自己或他人贴确定性标签。",
-              "question": "这个页面可以用于诊断或招聘筛选吗？"
-            }
-          ],
-          "identity": {
-            "base_type_code": "ENFJ",
-            "comparison_kind": "at",
-            "comparison_slug": "enfj-a-vs-enfj-t",
-            "left_type_code": "ENFJ-A",
-            "right_type_code": "ENFJ-T"
-          },
-          "indexability_held": false,
-          "internal_links": [
-            {
-              "anchor_text": "ENFJ-A",
-              "href": "/zh/personality/enfj-a",
-              "role": "left_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ENFJ-T",
-              "href": "/zh/personality/enfj-t",
-              "role": "right_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ENFP A/T 对比",
-              "href": "/zh/personality/enfp-a-vs-enfp-t",
-              "role": "related_at_comparison",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI 人格",
-              "href": "/zh/personality",
-              "role": "personality_hub",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "免费 MBTI 测试",
-              "href": "/zh/tests/mbti-personality-test-16-personality-types",
-              "role": "test_loop",
-              "safe_public_route": true
-            }
-          ],
-          "payload_sha256": "d64628608d9026a3b3b3956337d9a3bb8dc6c62fbd787a844a26d5fe5fe17b83",
-          "robots": "index,follow",
-          "sections": [
-            {
-              "body": "ENFJ-A 与 ENFJ-T 的最大区别，是在相同主人公核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出群体协调、价值鼓励和关系动员，不应用于诊断、招聘、能力排名或关系裁决。",
-              "key": "biggest_difference",
-              "title": "最大区别"
-            },
-            {
-              "body": "最大区别：ENFJ-A=更快回到自己的判断并保持行动节奏；ENFJ-T=更频繁检查评价、风险与可改进处；压力反应：ENFJ-A=ENFJ 的群体协调、价值鼓励和关系动员更容易先保持稳定推进；ENFJ-T=ENFJ 的群体协调、价值鼓励和关系动员更容易先复盘遗漏与外部反馈；工作场景：ENFJ-A=先理解共同需要，再组织支持与行动，再用最小证据修正；ENFJ-T=先理解共同需要，再组织支持与行动，并先补足风险检查与反馈窗口；容易误判：ENFJ-A=可能被误读为把支持他人误作必须替代他人决定；ENFJ-T=可能被误读为犹豫或不够坚定",
-              "key": "quick_judgment_table",
-              "rows": [
-                {
-                  "a": "更快回到自己的判断并保持行动节奏",
-                  "dimension": "最大区别",
-                  "t": "更频繁检查评价、风险与可改进处"
-                },
-                {
-                  "a": "ENFJ 的群体协调、价值鼓励和关系动员更容易先保持稳定推进",
-                  "dimension": "压力反应",
-                  "t": "ENFJ 的群体协调、价值鼓励和关系动员更容易先复盘遗漏与外部反馈"
-                },
-                {
-                  "a": "先理解共同需要，再组织支持与行动，再用最小证据修正",
-                  "dimension": "工作场景",
-                  "t": "先理解共同需要，再组织支持与行动，并先补足风险检查与反馈窗口"
-                },
-                {
-                  "a": "可能被误读为把支持他人误作必须替代他人决定",
-                  "dimension": "容易误判",
-                  "t": "可能被误读为犹豫或不够坚定"
-                }
-              ],
-              "title": "快速判断表"
-            },
-            {
-              "body": "ENFJ-A 与 ENFJ-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-              "key": "easy_misread",
-              "title": "为什么容易混淆"
-            },
-            {
-              "body": "在工作中，ENFJ-A 往往在先理解共同需要，再组织支持与行动后较快进入执行与迭代；ENFJ-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "key": "work_scenarios",
-              "title": "真实工作场景"
-            },
-            {
-              "body": "在关系中，ENFJ-A 可能较快确认自己的理解并提出下一步；ENFJ-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "key": "relationship_scenarios",
-              "title": "真实关系场景"
-            },
-            {
-              "body": "压力下，ENFJ-A 的优势是维持节奏，风险是过早把稳定感当成结论；ENFJ-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。",
-              "key": "stress_scenarios",
-              "title": "压力场景差异"
-            },
-            {
-              "body": "不要把 ENFJ-A 写成更好、更强或必然更自信，也不要把 ENFJ-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-              "key": "do_not_misjudge",
-              "title": "不要如何误判"
-            },
-            {
-              "body": "ENFJ-A 与 ENFJ-T 都共享主人公的群体协调、价值鼓励和关系动员。它们共同面对的不是谁更优，而是怎样把偏好转成更清楚的决定、协作和复盘。",
-              "key": "common_ground",
-              "title": "共同点"
-            },
-            {
-              "body": "该对比仅用于自我理解、沟通与成长复盘，不构成医学诊断、招聘筛选、智力或能力证明、职业保证、伴侣匹配或未来预测。",
-              "key": "usage_boundary",
-              "title": "使用边界"
-            }
-          ],
-          "seo": {
-            "breadcrumb_title": "ENFJ-A 和 ENFJ-T 的区别",
-            "h1": "ENFJ-A 和 ENFJ-T 的区别",
-            "quick_answer_summary": "ENFJ-A 与 ENFJ-T 的最大区别，是在相同主人公核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出群体协调、价值鼓励和关系动员，不应用于诊断、招聘、能力排名或关系裁决。",
-            "robots": "index,follow",
-            "seo_description": "对比 ENFJ-A 与 ENFJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
-            "seo_title": "ENFJ-A 和 ENFJ-T 的区别：主人公 A/T 对比 | FermatMind"
-          },
-          "source": "mbti_cms_import_40_at_comparison_draft_v1",
-          "structured_metadata": {
-            "primary_query": "ENFJ-A 和 ENFJ-T 的区别",
-            "route_safety": "public_routes_only",
-            "secondary_queries": [
-              "ENFJ-A",
-              "ENFJ-T",
-              "ENFJ A/T 区别"
-            ],
-            "source_document": [
-              "MBTI-FULL-AUDIT-30",
-              "public_profile_seo_asset_factory",
-              "mbti64_remaining_58_v2"
-            ]
-          },
-          "url": "/zh/personality/enfj-a-vs-enfj-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ENFJ-A 和 ENFJ-T 的区别"
+        "title": "来源与方法边界"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/enfj",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
-      "seo_title": "ENFJ 人格指南",
-      "twitter_description": null,
+      "og_title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+      "seo_title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "twitter_description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/enfj-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/enfj-a"
+        "en": "https://fermatmind.com/en/personality/enfj",
+        "zh-CN": "https://fermatmind.com/zh/personality/enfj"
       },
-      "canonical_url": "https://fermatmind.com/zh/personality/enfj-a",
-      "description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
+      "canonical_url": "https://fermatmind.com/zh/personality/enfj",
+      "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "f8890d92db54acae80eb0e4b08c6f28d09760863",
+      "metadata_fingerprint": "cf6a816991a5b2bb0359bbb539bffb3e0e9d326a",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
-        "title": "ENFJ 人格指南",
+        "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/zh/personality/enfj-a"
+        "url": "https://fermatmind.com/zh/personality/enfj"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -971,18 +723,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ENFJ 人格指南",
+      "title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "了解 ENFJ 的优势、弱项、人际模式和职业方向。",
-        "title": "ENFJ 人格指南"
+        "description": "了解 ENFJ 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "ENFJ 人格：字母含义、特点与实际情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "40ae88955ba91f15484d1b74706bdf63fd5472451d372ed64e6085a8a3b17e19"
+  "source_content_sha256": "91942ba0301ba754d6f08e9de08450d2efa69982f50f7ea167385c62b97cc271"
 }

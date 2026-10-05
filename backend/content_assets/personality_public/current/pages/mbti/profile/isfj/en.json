@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/isfj",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "363e4fc70c7e870a0c2e6203fe5aad606513cb2a",
+      "answer_fingerprint": "fc4a99d7623dc95d78dbe01c7e9fea83a54e0804",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "a20bcd44747b6c9e80605cffb8e475258c9cae94",
-        "d880315383ce42445622b089dc5c68339e59e0b2",
+        "aa86442c036b45e1ea93c735419e944de53d41e8",
+        "c87db582a42a833bcad993e91df1c2c6cf7d3c81",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "d880315383ce42445622b089dc5c68339e59e0b2",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Clarify what help is wanted and what you can sustainably offer. A clear limit prevents practical care from becoming an unspoken obligation.",
+          "key": "faq-0",
+          "question": "Does ISFJ mean putting other people's needs first?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/isfj",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does ISFJ indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for ISFJ?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do ISFJ-A and ISFJ-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can ISFJ predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "c87db582a42a833bcad993e91df1c2c6cf7d3c81",
+      "next_step_blocks": [],
       "primary_content_ref": "ISFJ",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,47 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/isfj",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "a20bcd44747b6c9e80605cffb8e475258c9cae94",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "aa86442c036b45e1ea93c735419e944de53d41e8",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ISFJ profiles.",
+          "body": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ISFJ - Defender"
+          "title": "ISFJ Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/isfj-a",
+        "label": "ISFJ-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/isfj-t",
+        "label": "ISFJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/isfj-a-vs-isfj-t",
+        "label": "ISFJ-A vs ISFJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/istj-vs-isfj",
+        "label": "ISTJ vs ISFJ",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/isfj",
@@ -162,7 +156,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "d880315383ce42445622b089dc5c68339e59e0b2",
+      "landing_fingerprint": "c87db582a42a833bcad993e91df1c2c6cf7d3c81",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ISFJ",
       "public_surface_ref": null,
@@ -177,10 +171,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ISFJ profiles.",
+          "body": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ISFJ - Defender"
+          "title": "ISFJ Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +192,7 @@
       "display_type": "ISFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ISFJ profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Defender",
         "rarity": null,
@@ -207,156 +201,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ISFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ISFJ is commonly described as Si–Fe–Ti–Ne. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ISFJ-style description asks what a person needs in the actual situation and what previous experience suggests will help. You might remember a practical detail and prefer to support someone through a clear arrangement. This can prevent a need from being overlooked. A possible blind spot is silently taking responsibility instead of checking whether the help is wanted or sustainable.\n\nCounterexample: a considerate person can be direct, set limits and enjoy novelty. An Introversion preference does not prevent public-facing work. Being helpful or remembering a birthday cannot determine ISFJ; look at your preferred information and decision process.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: you notice a new colleague has missed an important handover detail. You quietly fix it, then become the person everyone expects to fix it. Explain the missing instruction and improve the handover so responsibility can be shared. Useful support need not become invisible extra work.\n\nTry tasks such as clarifying a person's practical need, maintaining a service record or preparing a reliable handover. Check the workload and the support available. Care, education and administrative roles require skills and often qualifications; a type result cannot demonstrate them.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you remember what helped a friend last time and arrange the same support. Their circumstances have changed. Ask what would help now before acting. Familiarity can guide a question without deciding the answer.\n\nTell people what you can offer and what you need in return. Caring does not require unlimited availability. Disagreement can coexist with commitment, and letters cannot establish a best partner.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several people rely on small favors that have grown into regular duties. List the commitments and identify which were actually agreed. Renegotiate one recurring request rather than waiting until you have no capacity left.\n\nFeeling overwhelmed does not prove an ISFJ trait or a diagnosis. Look at workload, reciprocity and rest directly instead of treating strain as the price of being caring.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Before helping with one request, ask what outcome is needed, what you can realistically offer and who else can contribute. Make the scope explicit.\n\nAfterward, compare the benefit with the time used. Notice a time when saying no allowed a better solution. Keep evidence of assertive or unfamiliar behavior alongside examples that fit the type narrative.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ISFJ-A](/en/personality/isfj-a)\n- [ISFJ-T](/en/personality/isfj-t)\n- [ISFJ-A vs ISFJ-T](/en/personality/isfj-a-vs-isfj-t)\n- [ISTJ vs ISFJ](/en/personality/istj-vs-isfj)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              }
-            ],
-            "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Clarify what help is wanted and what you can sustainably offer. A clear limit prevents practical care from becoming an unspoken obligation.",
+                "question": "Does ISFJ mean putting other people's needs first?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ISFJ indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ISFJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ISFJ-A and ISFJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ISFJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/isfj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
+        "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/isfj",
+          "name": "ISFJ Personality",
+          "url": "https://fermatmind.com/en/personality/isfj"
+        },
+        "og_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ISFJ Personality Guide",
+        "og_title": "ISFJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ISFJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
+        "title": "ISFJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ISFJ Personality Guide"
+        "twitter_title": "ISFJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ISFJ profiles.",
+        "summary": "",
         "tagline": "Defender",
-        "title": "ISFJ - Defender"
+        "title": "ISFJ Personality"
       },
       "variant_code": null
     },
@@ -372,7 +356,7 @@
       "display_type": "ISFJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ISFJ profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Defender",
         "rarity": null,
@@ -381,166 +365,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for ISFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ISFJ is commonly described as Si–Fe–Ti–Ne. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ISFJ-style description asks what a person needs in the actual situation and what previous experience suggests will help. You might remember a practical detail and prefer to support someone through a clear arrangement. This can prevent a need from being overlooked. A possible blind spot is silently taking responsibility instead of checking whether the help is wanted or sustainable.\n\nCounterexample: a considerate person can be direct, set limits and enjoy novelty. An Introversion preference does not prevent public-facing work. Being helpful or remembering a birthday cannot determine ISFJ; look at your preferred information and decision process.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: you notice a new colleague has missed an important handover detail. You quietly fix it, then become the person everyone expects to fix it. Explain the missing instruction and improve the handover so responsibility can be shared. Useful support need not become invisible extra work.\n\nTry tasks such as clarifying a person's practical need, maintaining a service record or preparing a reliable handover. Check the workload and the support available. Care, education and administrative roles require skills and often qualifications; a type result cannot demonstrate them.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you remember what helped a friend last time and arrange the same support. Their circumstances have changed. Ask what would help now before acting. Familiarity can guide a question without deciding the answer.\n\nTell people what you can offer and what you need in return. Caring does not require unlimited availability. Disagreement can coexist with commitment, and letters cannot establish a best partner.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several people rely on small favors that have grown into regular duties. List the commitments and identify which were actually agreed. Renegotiate one recurring request rather than waiting until you have no capacity left.\n\nFeeling overwhelmed does not prove an ISFJ trait or a diagnosis. Look at workload, reciprocity and rest directly instead of treating strain as the price of being caring.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Before helping with one request, ask what outcome is needed, what you can realistically offer and who else can contribute. Make the scope explicit.\n\nAfterward, compare the benefit with the time used. Notice a time when saying no allowed a better solution. Keep evidence of assertive or unfamiliar behavior alongside examples that fit the type narrative.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ISFJ-A](/en/personality/isfj-a)\n- [ISFJ-T](/en/personality/isfj-t)\n- [ISFJ-A vs ISFJ-T](/en/personality/isfj-a-vs-isfj-t)\n- [ISTJ vs ISFJ](/en/personality/istj-vs-isfj)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              }
-            ],
-            "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Clarify what help is wanted and what you can sustainably offer. A clear limit prevents practical care from becoming an unspoken obligation.",
+                "question": "Does ISFJ mean putting other people's needs first?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ISFJ indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ISFJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ISFJ-A and ISFJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ISFJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/isfj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
+        "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/isfj",
+          "name": "ISFJ Personality",
+          "url": "https://fermatmind.com/en/personality/isfj"
+        },
+        "og_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ISFJ Personality Guide",
+        "og_title": "ISFJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ISFJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
+        "title": "ISFJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ISFJ Personality Guide"
+        "twitter_title": "ISFJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ISFJ profiles.",
+        "summary": "",
         "tagline": "Defender",
-        "title": "ISFJ - Defender"
+        "title": "ISFJ Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ISFJ",
-      "excerpt": "Role recommendations and work-environment guidance for ISFJ profiles.",
+      "excerpt": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
       "hero_image_url": null,
       "hero_kicker": "Defender",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ISFJ profiles.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,454 +526,166 @@
       "slug": "isfj",
       "status": "published",
       "subtitle": null,
-      "title": "ISFJ - Defender",
+      "title": "ISFJ Personality",
       "type_code": "ISFJ",
       "type_name": "Defender"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "Role recommendations and work-environment guidance for ISFJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "body_md": "ISFJ describes Introversion, Sensing, Feeling and Judging preferences. The narrative emphasizes noticing concrete needs and maintaining considered commitments. It does not establish kindness, loyalty, caregiving ability or a duty to put everyone else first.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ISFJ is commonly described as Si–Fe–Ti–Ne. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An ISFJ-style description asks what a person needs in the actual situation and what previous experience suggests will help. You might remember a practical detail and prefer to support someone through a clear arrangement. This can prevent a need from being overlooked. A possible blind spot is silently taking responsibility instead of checking whether the help is wanted or sustainable.\n\nCounterexample: a considerate person can be direct, set limits and enjoy novelty. An Introversion preference does not prevent public-facing work. Being helpful or remembering a birthday cannot determine ISFJ; look at your preferred information and decision process.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+        "body_md": "Original scenario: you notice a new colleague has missed an important handover detail. You quietly fix it, then become the person everyone expects to fix it. Explain the missing instruction and improve the handover so responsibility can be shared. Useful support need not become invisible extra work.\n\nTry tasks such as clarifying a person's practical need, maintaining a service record or preparing a reliable handover. Check the workload and the support available. Care, education and administrative roles require skills and often qualifications; a type result cannot demonstrate them.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: you remember what helped a friend last time and arrange the same support. Their circumstances have changed. Ask what would help now before acting. Familiarity can guide a question without deciding the answer.\n\nTell people what you can offer and what you need in return. Caring does not require unlimited availability. Disagreement can coexist with commitment, and letters cannot establish a best partner.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: several people rely on small favors that have grown into regular duties. List the commitments and identify which were actually agreed. Renegotiate one recurring request rather than waiting until you have no capacity left.\n\nFeeling overwhelmed does not prove an ISFJ trait or a diagnosis. Look at workload, reciprocity and rest directly instead of treating strain as the price of being caring.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            },
-            {
-              "slug": "business-analyst",
-              "title": "Business Analyst"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "data-scientist",
-              "title": "Data Scientist"
-            },
-            {
-              "slug": "frontend-engineer",
-              "title": "Frontend Engineer"
-            },
-            {
-              "slug": "fullstack-engineer",
-              "title": "Fullstack Engineer"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            }
-          ],
-          "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "Before helping with one request, ask what outcome is needed, what you can realistically offer and who else can contribute. Make the scope explicit.\n\nAfterward, compare the benefit with the time used. Notice a time when saying no allowed a better solution. Keep evidence of assertive or unfamiliar behavior alongside examples that fit the type narrative.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ISFJ-A](/en/personality/isfj-a)\n- [ISFJ-T](/en/personality/isfj-t)\n- [ISFJ-A vs ISFJ-T](/en/personality/isfj-a-vs-isfj-t)\n- [ISTJ vs ISFJ](/en/personality/istj-vs-isfj)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Clarify what help is wanted and what you can sustainably offer. A clear limit prevents practical care from becoming an unspoken obligation.",
+              "question": "Does ISFJ mean putting other people's needs first?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does ISFJ indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for ISFJ?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do ISFJ-A and ISFJ-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can ISFJ predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
-            },
-            {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "ISFJ-A and ISFJ-T share the same ISFJ core. Within care, memory and dependable support, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "ISFJ-A and ISFJ-T share the same ISFJ core. Within care, memory and dependable support, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around care, memory and dependable support, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ISFJ core.",
-              "question": "What is the main ISFJ-A vs ISFJ-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. ISFJ situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is ISFJ-A better than ISFJ-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to care, memory and dependable support-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am ISFJ-A or ISFJ-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support ISFJ work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "ISFJ",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/isfj-a-vs-isfj-t",
-            "url": "https://fermatmind.com/en/personality/isfj-a-vs-isfj-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "ISFJ-A profile",
-              "href": "/en/personality/isfj-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ISFJ-T profile",
-              "href": "/en/personality/isfj-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare ISFJ-A and ISFJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/isfj-a-vs-isfj-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare ISFJ-A and ISFJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare ISFJ-A and ISFJ-T through care, memory and dependable support, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/isfj-a-vs-isfj-t with care, memory and dependable support rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around care, memory and dependable support, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ISFJ core.",
-                  "question": "What is the main ISFJ-A vs ISFJ-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. ISFJ situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is ISFJ-A better than ISFJ-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to care, memory and dependable support-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am ISFJ-A or ISFJ-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support ISFJ work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "ISFJ-A vs ISFJ-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "ISFJ-A profile",
-                  "href": "/en/personality/isfj-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "ISFJ-T profile",
-                  "href": "/en/personality/isfj-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "ISFJ-A and ISFJ-T share the same ISFJ core. Within care, memory and dependable support, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "ISFJ-A vs ISFJ-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/isfj-a-vs-isfj-t"
-          },
-          "seo": {
-            "description": "Compare ISFJ-A and ISFJ-T through care, memory and dependable support, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "ISFJ-A vs ISFJ-T: Key Differences",
-            "title": "ISFJ-A vs ISFJ-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare ISFJ-A and ISFJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ISFJ-A vs ISFJ-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/isfj-a-vs-isfj-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/isfj-a-vs-isfj-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ISFJ-A vs ISFJ-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/isfj",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
-      "seo_title": "ISFJ Personality Guide",
-      "twitter_description": null,
+      "og_title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/isfj-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/isfj-a"
+        "en": "https://fermatmind.com/en/personality/isfj",
+        "zh-CN": "https://fermatmind.com/zh/personality/isfj"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/isfj-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/isfj",
+      "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "a20bcd44747b6c9e80605cffb8e475258c9cae94",
+      "metadata_fingerprint": "aa86442c036b45e1ea93c735419e944de53d41e8",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
-        "title": "ISFJ Personality Guide",
+        "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/isfj-a"
+        "url": "https://fermatmind.com/en/personality/isfj"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1008,18 +694,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ISFJ Personality Guide",
+      "title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ISFJ personality type.",
-        "title": "ISFJ Personality Guide"
+        "description": "Understand ISFJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ISFJ Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "623ed7275382f5e46e16efe9d2dfa284d71784ef1ae83b7e2b4006daebd73652"
+  "source_content_sha256": "72997d1f716f6fd96fff6d8c3630bec9c359def2ef8bbbc2124abff811916cca"
 }

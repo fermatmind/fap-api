@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality",
@@ -43,7 +43,7 @@
       "entry_type": "personality_family_index",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "00c48cf6e25ae0bbca03cf3f1dc10a285c0baf3e",
+      "landing_fingerprint": "268ac4be34cf66f01b5b6d7bd55fda7ce2f359c0",
       "landing_scope": "public_indexable_index",
       "primary_content_ref": "personality:index",
       "public_surface_ref": null,
@@ -58,16 +58,102 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Browse public personality profiles, career guidance, and next reading paths across all 16 types.",
+          "body": "The 16-type vocabulary combines four preference pairs: E/I, S/N, T/F and J/P. Browse a base type for the full description, an A/T page for the added label, or a comparison to examine a specific difference. A/T is outside official MBTI, and none of these descriptions measures ability or determines your future.",
           "key": "hero",
           "kind": "hero",
-          "title": "Personality types"
+          "title": "Explore the 16 personality types"
         }
       ],
       "surface_family": "personality",
       "version": "landing.surface.v1"
+    },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "The 16-type vocabulary combines four preference pairs: E/I, S/N, T/F and J/P. Browse a base type for the full description, an A/T page for the added label, or a comparison to examine a specific difference. A/T is outside official MBTI, and none of these descriptions measures ability or determines your future.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E/I — Extraversion and Introversion:** attention toward the outer world or inner reflection. This is not a social-skill or shyness score.\n\n**S/N — Sensing and Intuition:** attention to concrete information and experience or to patterns and possibilities. This is not an intelligence or creativity ranking.\n\n**T/F — Thinking and Feeling:** a preference for logical consistency and impersonal criteria or for values and effects on people in decisions. Both approaches can include reason and emotion.\n\n**J/P — Judging and Perceiving:** a preference for settling outer-world arrangements or keeping them open to incoming information. This is not a measure of responsibility or planning skill.\n\nCombining one letter from each pair gives 16 codes. Nicknames and colored groups help you browse; they are not additional measured traits. The descriptions below are reading aids rather than a verified account of every person with a code.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "The four preference pairs"
+      },
+      {
+        "body_html": null,
+        "body_md": "**Base type pages:** start here to understand the four preferences, read concrete work and relationship examples, and look for counterexamples. You do not need an A/T suffix to read a base profile.\n\n**A/T pages:** A means Assertive and T means Turbulent in the extension's vocabulary. The suffix describes a separate account of self-assurance and self-evaluation; it is not a fifth official MBTI preference, a diagnosis or an ability rank. The final T is different from the Thinking letter within a four-letter code.\n\n**A/T comparisons:** compare two descriptions within the same base type. Use the scenarios to inspect feedback and decisions, without treating the examples as proven differences between groups.\n\n**Cross-type comparisons:** examine the actual differing preference letters. A comparison cannot calculate compatibility or decide which type is better.\n\nOriginal example: after reading a profile, record one recent decision that fits and one that does not. Ask whether the behavior was a preference, a learned skill or a response to circumstances. Use the free test entry if you want a questionnaire; this directory itself does not produce a result.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 20,
+        "title": "Choose the page for your question"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "The official four-preference framework combines four pairs into 16 codes. This directory also includes 32 A/T descriptions and 23 comparisons; those reading pages do not turn A/T into official MBTI preferences.",
+              "question": "How many MBTI personality types are there?"
+            },
+            {
+              "answer": "A type page explains vocabulary and offers educational examples. A test asks questions and returns a result using its own instrument. Similar letter codes do not establish equivalent scoring or validation.",
+              "question": "What is the difference between a type page and a test?"
+            },
+            {
+              "answer": "A result can differ with the instrument, timing or circumstances. A label change alone does not prove a lasting personality change. Keep the tool and context in view and compare real examples.",
+              "question": "Can my result or the description change?"
+            },
+            {
+              "answer": "The preference definitions, framework claims and empirical findings have different evidential roles. Type narratives and function stacks are theoretical interpretations; the situations are original examples. Read the source and method module for the research limits.",
+              "question": "Are these descriptions scientifically proven?"
+            },
+            {
+              "answer": "Yes. Begin with actual tasks, interests, demonstrated skills, qualifications and working conditions. A personality description can prompt questions, but it is not a prerequisite or a job-fit verdict.",
+              "question": "Can I explore work without knowing my type?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 30,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 40,
+        "title": "Sources and method limits"
+      }
+    ],
+    "seo_meta": {
+      "canonical_url": "https://fermatmind.com/en/personality",
+      "og_description": "Browse all 16 four-letter personality types, 32 A/T descriptions and clear comparisons. Learn the preference meanings, examples and scientific limits.",
+      "og_title": "16 Personality Types: MBTI Meanings, A/T Labels and Comparisons",
+      "robots": "index,follow",
+      "seo_description": "Browse all 16 four-letter personality types, 32 A/T descriptions and clear comparisons. Learn the preference meanings, examples and scientific limits.",
+      "seo_title": "16 Personality Types: MBTI Meanings, A/T Labels and Comparisons | FermatMind",
+      "twitter_description": "Browse all 16 four-letter personality types, 32 A/T descriptions and clear comparisons. Learn the preference meanings, examples and scientific limits.",
+      "twitter_title": "16 Personality Types: MBTI Meanings, A/T Labels and Comparisons",
+      "updated_at": "2026-10-05"
     }
   },
   "payload_contract": "personality.mbti.hub.current.v1",
-  "source_content_sha256": "d7f2523b6ea337221492006f4e0eb3e4329017dd2d3333bce185916b22b94ddc"
+  "source_content_sha256": "92601f2c836da6955ceef482548728ef7cd84f6897cbb1f73b75d16c4a7a81a6"
 }

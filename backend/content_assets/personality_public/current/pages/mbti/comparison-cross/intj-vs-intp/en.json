@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/intj-vs-intp",
@@ -11,10 +11,88 @@
   },
   "locale": "en",
   "payload": {
-    "answer_surface_v1": [],
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 11,
+          "key": "compare",
+          "title": "compare"
+        },
+        {
+          "count": 7,
+          "key": "faq",
+          "title": "faq"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "d93c7f687fc8028fa025c7e830fabb1befea0115",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
+      ],
+      "faq_blocks": [
+        {
+          "answer": "Yes. J/P describes a preference for approaching the outer world, not a discipline score. Skills, deadlines and circumstances can make either person plan or improvise.",
+          "key": "faq-0",
+          "question": "Can an INTP be organized and an INTJ change plans?"
+        },
+        {
+          "answer": "The four-letter codes differ on J/P. Function-stack theory offers another interpretation, but it should not be treated as a measured psychological mechanism or a validated typing shortcut.",
+          "key": "faq-1",
+          "question": "Is the difference about cognitive functions or J/P?"
+        },
+        {
+          "answer": "This comparison provides no intelligence ranking. A personality preference is not an aptitude measurement; evaluate reasoning or skill with relevant evidence.",
+          "key": "faq-2",
+          "question": "Who is more intelligent, INTJ or INTP?"
+        },
+        {
+          "answer": "Check whether the tool, questions, timing or context changed. Compare the underlying preference descriptions and real examples; this page cannot adjudicate a best-fit type or prove a lasting change.",
+          "key": "faq-3",
+          "question": "What should I do if my test gives both results?"
+        }
+      ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "intj-vs-intp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "19c955d89da0aca784874fccc8a6bd003ce7ae27",
+      "summary_blocks": [
+        {
+          "body": "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types.",
+          "href": null,
+          "key": "comparison_summary",
+          "kind": "answer_first",
+          "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples"
+        }
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
+    },
     "comparison": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/intj-vs-intp"
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
+        "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -24,71 +102,52 @@
         "INTP"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/intj-vs-intp",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "intj-vs-intp",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
+      "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "INTJ may converge complex information into a roadmap, while INTP may break a problem into models that remain open to discussion. The key difference is not who is more rational, but who moves toward an execution structure sooner.",
-          "question": "What is the main difference between INTJ and INTP?"
+          "answer": "Yes. J/P describes a preference for approaching the outer world, not a discipline score. Skills, deadlines and circumstances can make either person plan or improvise.",
+          "question": "Can an INTP be organized and an INTJ change plans?"
         },
         {
-          "answer": "Both may be quiet, abstract, and logic-focused. INTJ may be more inclined to form a direction, while INTP may preserve more of the problem space.",
-          "question": "Why are INTJ and INTP easy to confuse?"
+          "answer": "The four-letter codes differ on J/P. Function-stack theory offers another interpretation, but it should not be treated as a measured psychological mechanism or a validated typing shortcut.",
+          "question": "Is the difference about cognitive functions or J/P?"
         },
         {
-          "answer": "INTJ may ask which route is most likely to work, while INTP may test definitions and assumptions. Collaboration improves when exploration has a clear decision deadline.",
-          "question": "How might INTJ and INTP differ at work?"
+          "answer": "This comparison provides no intelligence ranking. A personality preference is not an aptitude measurement; evaluate reasoning or skill with relevant evidence.",
+          "question": "Who is more intelligent, INTJ or INTP?"
         },
         {
-          "answer": "Do not infer type from solitude, organization, or curiosity alone. Observe whether analysis naturally lands on a direction or remains open for further model testing.",
-          "question": "What is a common mistake when comparing INTJ and INTP?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Check whether the tool, questions, timing or context changed. Compare the underlying preference descriptions and real examples; this page cannot adjudicate a best-fit type or prove a lasting change.",
+          "question": "What should I do if my test gives both results?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INTJ profile",
-          "href": "/en/personality/intj-a",
-          "label": "INTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intj",
+          "label": "INTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTP profile",
-          "href": "/en/personality/intp-a",
-          "label": "INTP profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intp",
+          "label": "INTP base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ENTJ vs INTJ",
-          "href": "/en/personality/entj-vs-intj",
-          "label": "ENTJ vs INTJ",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "INTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -101,84 +160,105 @@
       "sections": [
         {
           "body": [
-            "INTJ may converge complex information into a roadmap, while INTP may separate the problem into models that can still be debated. The key difference is not who is more rational, but who moves toward an execution structure sooner."
+            "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INTJ": "Ask first about long-term direction and the critical path",
-              "INTP": "Ask first whether the concept is internally coherent",
-              "dimension": "Starting question"
-            },
-            {
-              "INTJ": "Roadmap, priorities, and decision criteria",
-              "INTP": "Models, assumptions, and room for counterexamples",
-              "dimension": "Typical output"
-            },
-            {
-              "INTJ": "May feel that discussion is not moving forward",
-              "INTP": "May feel that the conclusion closed too early",
-              "dimension": "Collaboration friction"
-            },
-            {
-              "INTJ": "Keep an explicit route for disconfirming evidence",
-              "INTP": "Turn the model into an executable experiment",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both may be quiet, abstract, and logic-focused. A useful difference appears in how they end a discussion: INTJ may form a direction, while INTP may preserve more of the problem space."
+            "The shared letters refer to Introversion, Intuition and Thinking: inward reflection, attention to patterns or possibilities, and consideration of logical or impersonal decision criteria. They do not establish that two people have the same interests, intelligence or social behavior.",
+            "The actual code difference is Judging versus Perceiving. An INTJ-style interpretation may organize possibilities around a chosen direction; an INTP-style interpretation may keep an explanation open while testing assumptions. Both can plan carefully and change their minds. Deadline pressure, role expectations and learned skills can produce either behavior.",
+            "Function-stack theory commonly assigns Ni–Te–Fi–Se to INTJ and Ti–Ne–Si–Fe to INTP. These are theoretical interpretations, not evidence that the types have distinct brain mechanisms. A/T is a separate extension and is not the difference being compared here."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "When positioning a new product, INTJ may ask which path is most likely to work, while INTP may ask whether the definitions, categories, and assumptions hold. Good collaboration allows the model to expand before setting a decision deadline."
+            "| Observation | INTJ | INTP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settling outer-world arrangements | Perceiving (P): a preference for openness to incoming information |\n| Original project example | Organize options around an agreed outcome and constraints | Test categories and assumptions before selecting an option |\n| Potential cost of that approach | Closing a route before a useful exception is examined | Continuing exploration after a decision is needed |\n| Shared practical step | State what evidence would reopen the plan | State what evidence is enough to run a small trial |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not distinguish INTJ from INTP by whether someone likes solitude, and do not equate organization with INTJ or curiosity with INTP. Observe where their information processing naturally tends to land."
+            "Original work scenario: a team is choosing between two product ideas. One approach defines the intended outcome, ranks constraints and selects a route. Another asks whether the customer categories and causal assumptions are sound before choosing. Neither is automatically INTJ or INTP, and both contributions may come from the same person. Agree on a time for exploration, a decision criterion and a condition for reopening the decision.",
+            "Original relationship scenario: two friends plan a trip. One wants accommodation settled early; another wants room to change destinations after exploring options. Budget, accessibility and availability may explain the preference better than type. Decide together what must be fixed and what can remain flexible."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual INTJ and INTP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "A tidy desk does not establish INTJ; procrastination does not establish INTP. Enjoying strategy is compatible with P, and exploring a theory is compatible with J. Do not use fast decisions, a quiet demeanor or an interest in science as typing rules. The comparison cannot rank intelligence or identify which person is more rational."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare three choices made when you had time and real freedom. What did you prefer to settle? Which information did you want to keep open? Was your approach chosen or required by your role? Then look for an occasion on which you preferred the opposite. If both descriptions fit, leave the question open; a narrative match is not a verified test result."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [INTJ base profile](/en/personality/intj)\n- [INTP base profile](/en/personality/intp)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-      "seo_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INTJ vs INTP: Planning, Open Questions and Practical Examples",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "cdd6ff50c8246b3c1271b056dfa2559ca65c7521fd53170b00167bd342136275",
-      "summary": "INTJ may converge on a roadmap and critical path sooner, while INTP may keep separating the problem into models, premises, and alternatives. The contrast is not about who is more rational or intelligent, but how quickly analysis moves toward an execution structure.",
-      "title": "INTJ vs INTP: Strategic Convergence and Open-Ended Model Building"
+      "source_sha256": "434af0f5e10bc0e75122d5cbe4707726b0cd5da8188976bc55f2999fee907d44",
+      "summary": "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types.",
+      "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples"
     },
     "comparison_public_projection_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/intj-vs-intp"
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
+        "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -188,71 +268,52 @@
         "INTP"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/intj-vs-intp",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "intj-vs-intp",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
+      "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "INTJ may converge complex information into a roadmap, while INTP may break a problem into models that remain open to discussion. The key difference is not who is more rational, but who moves toward an execution structure sooner.",
-          "question": "What is the main difference between INTJ and INTP?"
+          "answer": "Yes. J/P describes a preference for approaching the outer world, not a discipline score. Skills, deadlines and circumstances can make either person plan or improvise.",
+          "question": "Can an INTP be organized and an INTJ change plans?"
         },
         {
-          "answer": "Both may be quiet, abstract, and logic-focused. INTJ may be more inclined to form a direction, while INTP may preserve more of the problem space.",
-          "question": "Why are INTJ and INTP easy to confuse?"
+          "answer": "The four-letter codes differ on J/P. Function-stack theory offers another interpretation, but it should not be treated as a measured psychological mechanism or a validated typing shortcut.",
+          "question": "Is the difference about cognitive functions or J/P?"
         },
         {
-          "answer": "INTJ may ask which route is most likely to work, while INTP may test definitions and assumptions. Collaboration improves when exploration has a clear decision deadline.",
-          "question": "How might INTJ and INTP differ at work?"
+          "answer": "This comparison provides no intelligence ranking. A personality preference is not an aptitude measurement; evaluate reasoning or skill with relevant evidence.",
+          "question": "Who is more intelligent, INTJ or INTP?"
         },
         {
-          "answer": "Do not infer type from solitude, organization, or curiosity alone. Observe whether analysis naturally lands on a direction or remains open for further model testing.",
-          "question": "What is a common mistake when comparing INTJ and INTP?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Check whether the tool, questions, timing or context changed. Compare the underlying preference descriptions and real examples; this page cannot adjudicate a best-fit type or prove a lasting change.",
+          "question": "What should I do if my test gives both results?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INTJ profile",
-          "href": "/en/personality/intj-a",
-          "label": "INTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intj",
+          "label": "INTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTP profile",
-          "href": "/en/personality/intp-a",
-          "label": "INTP profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intp",
+          "label": "INTP base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ENTJ vs INTJ",
-          "href": "/en/personality/entj-vs-intj",
-          "label": "ENTJ vs INTJ",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "INTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -265,221 +326,273 @@
       "sections": [
         {
           "body": [
-            "INTJ may converge complex information into a roadmap, while INTP may separate the problem into models that can still be debated. The key difference is not who is more rational, but who moves toward an execution structure sooner."
+            "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INTJ": "Ask first about long-term direction and the critical path",
-              "INTP": "Ask first whether the concept is internally coherent",
-              "dimension": "Starting question"
-            },
-            {
-              "INTJ": "Roadmap, priorities, and decision criteria",
-              "INTP": "Models, assumptions, and room for counterexamples",
-              "dimension": "Typical output"
-            },
-            {
-              "INTJ": "May feel that discussion is not moving forward",
-              "INTP": "May feel that the conclusion closed too early",
-              "dimension": "Collaboration friction"
-            },
-            {
-              "INTJ": "Keep an explicit route for disconfirming evidence",
-              "INTP": "Turn the model into an executable experiment",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both may be quiet, abstract, and logic-focused. A useful difference appears in how they end a discussion: INTJ may form a direction, while INTP may preserve more of the problem space."
+            "The shared letters refer to Introversion, Intuition and Thinking: inward reflection, attention to patterns or possibilities, and consideration of logical or impersonal decision criteria. They do not establish that two people have the same interests, intelligence or social behavior.",
+            "The actual code difference is Judging versus Perceiving. An INTJ-style interpretation may organize possibilities around a chosen direction; an INTP-style interpretation may keep an explanation open while testing assumptions. Both can plan carefully and change their minds. Deadline pressure, role expectations and learned skills can produce either behavior.",
+            "Function-stack theory commonly assigns Ni–Te–Fi–Se to INTJ and Ti–Ne–Si–Fe to INTP. These are theoretical interpretations, not evidence that the types have distinct brain mechanisms. A/T is a separate extension and is not the difference being compared here."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "When positioning a new product, INTJ may ask which path is most likely to work, while INTP may ask whether the definitions, categories, and assumptions hold. Good collaboration allows the model to expand before setting a decision deadline."
+            "| Observation | INTJ | INTP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settling outer-world arrangements | Perceiving (P): a preference for openness to incoming information |\n| Original project example | Organize options around an agreed outcome and constraints | Test categories and assumptions before selecting an option |\n| Potential cost of that approach | Closing a route before a useful exception is examined | Continuing exploration after a decision is needed |\n| Shared practical step | State what evidence would reopen the plan | State what evidence is enough to run a small trial |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not distinguish INTJ from INTP by whether someone likes solitude, and do not equate organization with INTJ or curiosity with INTP. Observe where their information processing naturally tends to land."
+            "Original work scenario: a team is choosing between two product ideas. One approach defines the intended outcome, ranks constraints and selects a route. Another asks whether the customer categories and causal assumptions are sound before choosing. Neither is automatically INTJ or INTP, and both contributions may come from the same person. Agree on a time for exploration, a decision criterion and a condition for reopening the decision.",
+            "Original relationship scenario: two friends plan a trip. One wants accommodation settled early; another wants room to change destinations after exploring options. Budget, accessibility and availability may explain the preference better than type. Decide together what must be fixed and what can remain flexible."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual INTJ and INTP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "A tidy desk does not establish INTJ; procrastination does not establish INTP. Enjoying strategy is compatible with P, and exploring a theory is compatible with J. Do not use fast decisions, a quiet demeanor or an interest in science as typing rules. The comparison cannot rank intelligence or identify which person is more rational."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare three choices made when you had time and real freedom. What did you prefer to settle? Which information did you want to keep open? Was your approach chosen or required by your role? Then look for an occasion on which you preferred the opposite. If both descriptions fit, leave the question open; a narrative match is not a verified test result."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [INTJ base profile](/en/personality/intj)\n- [INTP base profile](/en/personality/intp)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-      "seo_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INTJ vs INTP: Planning, Open Questions and Practical Examples",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "cdd6ff50c8246b3c1271b056dfa2559ca65c7521fd53170b00167bd342136275",
-      "summary": "INTJ may converge on a roadmap and critical path sooner, while INTP may keep separating the problem into models, premises, and alternatives. The contrast is not about who is more rational or intelligent, but how quickly analysis moves toward an execution structure.",
-      "title": "INTJ vs INTP: Strategic Convergence and Open-Ended Model Building"
+      "source_sha256": "434af0f5e10bc0e75122d5cbe4707726b0cd5da8188976bc55f2999fee907d44",
+      "summary": "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types.",
+      "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality",
-            "name": "Personality types",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality/intj-vs-intp",
-            "name": "INTJ vs INTP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "INTJ may converge complex information into a roadmap, while INTP may break a problem into models that remain open to discussion. The key difference is not who is more rational, but who moves toward an execution structure sooner."
-            },
-            "name": "What is the main difference between INTJ and INTP?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Both may be quiet, abstract, and logic-focused. INTJ may be more inclined to form a direction, while INTP may preserve more of the problem space."
-            },
-            "name": "Why are INTJ and INTP easy to confuse?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "INTJ may ask which route is most likely to work, while INTP may test definitions and assumptions. Collaboration improves when exploration has a clear decision deadline."
-            },
-            "name": "How might INTJ and INTP differ at work?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Do not infer type from solitude, organization, or curiosity alone. Observe whether analysis naturally lands on a direction or remains open for further model testing."
-            },
-            "name": "What is a common mistake when comparing INTJ and INTP?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
-            },
-            "name": "Can this comparison decide a career or relationship choice?"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "INTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/en/personality/intj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INTP",
-            "position": 2,
-            "url": "https://fermatmind.com/en/personality/intp-a"
-          }
-        ]
-      },
-      "name": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
+      "@type": "AboutPage",
+      "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://fermatmind.com/en/personality/intj-vs-intp",
+      "name": "INTJ vs INTP: Planning, Open Questions and Practical Examples",
       "url": "https://fermatmind.com/en/personality/intj-vs-intp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "INTJ and INTP share I, N and T; their four-letter codes differ on J/P. In the preference vocabulary, J emphasizes settling outer-world arrangements and P emphasizes keeping them open to new information. Planning skill, intelligence and curiosity do not distinguish the types.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "The shared letters refer to Introversion, Intuition and Thinking: inward reflection, attention to patterns or possibilities, and consideration of logical or impersonal decision criteria. They do not establish that two people have the same interests, intelligence or social behavior.\n\nThe actual code difference is Judging versus Perceiving. An INTJ-style interpretation may organize possibilities around a chosen direction; an INTP-style interpretation may keep an explanation open while testing assumptions. Both can plan carefully and change their minds. Deadline pressure, role expectations and learned skills can produce either behavior.\n\nFunction-stack theory commonly assigns Ni–Te–Fi–Se to INTJ and Ti–Ne–Si–Fe to INTP. These are theoretical interpretations, not evidence that the types have distinct brain mechanisms. A/T is a separate extension and is not the difference being compared here.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "What is shared and what differs"
+      },
+      {
+        "body_html": null,
+        "body_md": "| Observation | INTJ | INTP |\n| --- | --- | --- |\n| Code difference | Judging (J): a preference for settling outer-world arrangements | Perceiving (P): a preference for openness to incoming information |\n| Original project example | Organize options around an agreed outcome and constraints | Test categories and assumptions before selecting an option |\n| Potential cost of that approach | Closing a route before a useful exception is examined | Continuing exploration after a decision is needed |\n| Shared practical step | State what evidence would reopen the plan | State what evidence is enough to run a small trial |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "Side-by-side comparison"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original work scenario: a team is choosing between two product ideas. One approach defines the intended outcome, ranks constraints and selects a route. Another asks whether the customer categories and causal assumptions are sound before choosing. Neither is automatically INTJ or INTP, and both contributions may come from the same person. Agree on a time for exploration, a decision criterion and a condition for reopening the decision.\n\nOriginal relationship scenario: two friends plan a trip. One wants accommodation settled early; another wants room to change destinations after exploring options. Budget, accessibility and availability may explain the preference better than type. Decide together what must be fixed and what can remain flexible.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Examples in work and relationships"
+      },
+      {
+        "body_html": null,
+        "body_md": "A tidy desk does not establish INTJ; procrastination does not establish INTP. Enjoying strategy is compatible with P, and exploring a theory is compatible with J. Do not use fast decisions, a quiet demeanor or an interest in science as typing rules. The comparison cannot rank intelligence or identify which person is more rational.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "Avoid these misreadings"
+      },
+      {
+        "body_html": null,
+        "body_md": "Compare three choices made when you had time and real freedom. What did you prefer to settle? Which information did you want to keep open? Was your approach chosen or required by your role? Then look for an occasion on which you preferred the opposite. If both descriptions fit, leave the question open; a narrative match is not a verified test result.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "How to continue your self-observation"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Yes. J/P describes a preference for approaching the outer world, not a discipline score. Skills, deadlines and circumstances can make either person plan or improvise.",
+              "question": "Can an INTP be organized and an INTJ change plans?"
+            },
+            {
+              "answer": "The four-letter codes differ on J/P. Function-stack theory offers another interpretation, but it should not be treated as a measured psychological mechanism or a validated typing shortcut.",
+              "question": "Is the difference about cognitive functions or J/P?"
+            },
+            {
+              "answer": "This comparison provides no intelligence ranking. A personality preference is not an aptitude measurement; evaluate reasoning or skill with relevant evidence.",
+              "question": "Who is more intelligent, INTJ or INTP?"
+            },
+            {
+              "answer": "Check whether the tool, questions, timing or context changed. Compare the underlying preference descriptions and real examples; this page cannot adjudicate a best-fit type or prove a lasting change.",
+              "question": "What should I do if my test gives both results?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "Sources and method limits"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INTJ base profile](/en/personality/intj)\n- [INTP base profile](/en/personality/intp)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "Related types and comparisons"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/intj-vs-intp",
       "jsonld_overrides_json": null,
-      "og_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
+      "og_description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "og_image_url": null,
-      "og_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
-      "robots": "noindex,follow",
-      "seo_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-      "seo_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
-      "twitter_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
+      "og_title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind",
+      "twitter_description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "twitter_image_url": null,
-      "twitter_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work"
+      "twitter_title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/intj-vs-intp"
+        "en": "https://fermatmind.com/en/personality/intj-vs-intp",
+        "zh-CN": "https://fermatmind.com/zh/personality/intj-vs-intp"
       },
       "canonical_url": "https://fermatmind.com/en/personality/intj-vs-intp",
-      "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-      "indexability_state": "noindex",
-      "llms_exposure_state": "withhold",
+      "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "9d123c1e7801271e5b8da56f6404ab434b67bedb",
+      "metadata_fingerprint": "19c955d89da0aca784874fccc8a6bd003ce7ae27",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-        "title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
+        "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/en/personality/intj-vs-intp"
       },
       "public_summary_fingerprint": null,
-      "robots_policy": "noindex,follow",
+      "robots_policy": "index,follow",
       "runtime_artifact_ref": null,
       "share_safety_state": null,
-      "sitemap_state": "excluded",
+      "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
+      "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-        "title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work"
+        "description": "Compare INTJ and INTP through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "INTJ vs INTP: Planning, Open Questions and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "3d2e0391016ccbb30420d6ef004b82bb2cc71fcce3017e71edf2f40229c2e3dc"
+  "source_content_sha256": "8f280c65db329e68fbc7a688b48be4aa47e3dc9883036f668b1876f41a1f332a"
 }

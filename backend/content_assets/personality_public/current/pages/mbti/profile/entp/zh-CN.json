@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "2ed98e7144c621de35a74297d99687e91887198b",
+      "answer_fingerprint": "68ad3e57ce72545909d698d233a3c7ce4a7ad49d",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "b6ccf37161b205e949a9dca12b80204804489965",
-        "23d084b9ed90fbe967b4a592678ff945729fedb1",
+        "6adb88d15ab41015304ab987b1ab1d9b1d385b9e",
+        "414068c64c5284d1eb18af038cb76981ba300dfe",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "23d084b9ed90fbe967b4a592678ff945729fedb1",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "开始测试"
+          "answer": "先确认是在探索选项还是形成承诺，征得讨论挑战想法的同意，偏离目的时停止争论。",
+          "key": "faq-0",
+          "question": "ENTP 就表示争论总有用吗？"
         },
         {
-          "body": null,
-          "href": "/zh/career/recommendations/mbti/entp",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "查看职业推荐"
+          "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+          "key": "faq-1",
+          "question": "ENTP 能说明智力或能力吗？"
         },
         {
-          "body": null,
-          "href": "/zh/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "查看主题聚合"
+          "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+          "key": "faq-2",
+          "question": "ENTP 最适合哪些职业？"
+        },
+        {
+          "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+          "key": "faq-3",
+          "question": "ENTP-A 与 ENTP-T 增加了什么？"
+        },
+        {
+          "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+          "key": "faq-4",
+          "question": "ENTP 能预测伴侣匹配吗？"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "414068c64c5284d1eb18af038cb76981ba300dfe",
+      "next_step_blocks": [],
       "primary_content_ref": "ENTP",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,47 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "先看职业推荐入口，再回到类型页做验证。",
-          "href": "/zh/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "职业方向"
-        },
-        {
-          "body": "先回 MBTI 主题页整理判断框架，再做路径选择。",
-          "href": "/zh/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "专业选择"
-        },
-        {
-          "body": "保留当前类型页，继续对照团队协作特征。",
-          "href": "/zh/personality/entp",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "团队协作"
-        },
-        {
-          "body": "从类型页回到主题页，补齐关系场景解释。",
-          "href": "/zh/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "关系相处"
-        },
-        {
-          "body": "直接开始测试，拿到结构化成长建议。",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "成长建议"
-        }
-      ],
-      "seo_surface_ref": "b6ccf37161b205e949a9dca12b80204804489965",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "6adb88d15ab41015304ab987b1ab1d9b1d385b9e",
       "summary_blocks": [
         {
-          "body": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+          "body": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ENTP - 辩论家"
+          "title": "ENTP 人格"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/zh/personality/entp-a",
+        "label": "ENTP-A",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/entp-t",
+        "label": "ENTP-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/entp-a-vs-entp-t",
+        "label": "ENTP-A vs ENTP-T",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality/enfp-vs-entp",
+        "label": "ENFP vs ENTP",
+        "reason": "阅读基础偏好或独立对比说明。"
+      },
+      {
+        "href": "/zh/personality",
+        "label": "浏览 16 型目录",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/zh/career/recommendations/mbti/entp",
@@ -162,7 +156,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "23d084b9ed90fbe967b4a592678ff945729fedb1",
+      "landing_fingerprint": "414068c64c5284d1eb18af038cb76981ba300dfe",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ENTP",
       "public_surface_ref": null,
@@ -177,10 +171,10 @@
       "start_test_target": "/zh/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+          "body": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ENTP - 辩论家"
+          "title": "ENTP 人格"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +192,7 @@
       "display_type": "ENTP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "辩论家",
         "rarity": null,
@@ -224,105 +218,146 @@
       },
       "sections": [
         {
-          "body_md": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ENTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+          "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**P — 知觉**: 面对外部事务较倾向保留接收新信息的空间，不等于懒散或不会计划。\n\n在功能栈理论中，ENTP 常被描述为 Ne–Ti–Fe–Si。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "阅读 ENTP 可以问：还有什么解释或做法可行？你可能喜欢通过交谈建立想法、质疑假设、试探替代方案。这能发现遗漏可能，也可能让别人分不清你是在探索立场，还是已经支持它。\n\n反例：喜欢检验论点的人，也可能避免竞争性辩论；保留选择与完成细节任务可以共存。挑衅、说话快、不喜欢重复，都不能确定类型。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：团队准备改善熟悉的服务，你建议替换底层流程。先说明这是探索，再用相同成本、风险和用户需要比较新旧做法。选择一项试验，不要求同事追逐每种替代方案。\n\n可以体验探索新服务、质疑需求、解释复杂取舍等任务，也了解是否愿意维护自己创造的东西。创业、研究、协商、产品工作各有要求，ENTP 不能证明商业能力或成功。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：聚餐时，你为了检验朋友观点而站到对立面，对方却感到被批评。先问是否愿意探索论点，说明自己的真实立场。同意交谈不等于接受任何辩论方式。\n\n有趣的反驳不总是最有用的回应。先承认评论造成的影响，再解释意图。机智相投或字母不同都不能证明关系匹配。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：截止日期临近，几条有吸引力的路线仍未确定。另起方案似乎比接受不完美选择容易。定义最小有用成果与真正阻塞它的不确定性，其他想法留待以后。\n\n无聊或持续注意困难有多种原因，不能用 ENTP 忽略责任或解释健康问题。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "选一个想法，写清解决的问题、另一种解释、什么观察会让你放弃。告诉合作者什么时候在探索，什么时候已承诺。\n\n试验结束后，先交付承诺，再提下个版本。比较一次质疑改善结果的经历和一次接受可行答案更有帮助的经历。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [ENTP-A](/zh/personality/entp-a)\n- [ENTP-T](/zh/personality/entp-t)\n- [ENTP-A vs ENTP-T](/zh/personality/entp-a-vs-entp-t)\n- [ENFP vs ENTP](/zh/personality/enfp-vs-entp)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
+                "answer": "先确认是在探索选项还是形成承诺，征得讨论挑战想法的同意，偏离目的时停止争论。",
+                "question": "ENTP 就表示争论总有用吗？"
               },
               {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "ENTP 能说明智力或能力吗？"
+              },
+              {
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "ENTP 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "ENTP-A 与 ENTP-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "ENTP 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢弹性空间、自然推进和保留选择余地。",
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/entp",
-        "description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/entp",
+          "name": "ENTP 人格",
+          "url": "https://fermatmind.com/zh/personality/entp"
+        },
+        "og_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "ENTP 人格指南",
+        "og_title": "ENTP 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "ENTP 人格指南",
-        "twitter_description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
+        "title": "ENTP 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "ENTP 人格指南"
+        "twitter_title": "ENTP 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ENTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "summary": "",
         "tagline": "辩论家",
-        "title": "ENTP - 辩论家"
+        "title": "ENTP 人格"
       },
       "variant_code": null
     },
@@ -338,7 +373,7 @@
       "display_type": "ENTP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "辩论家",
         "rarity": null,
@@ -364,115 +399,156 @@
       },
       "sections": [
         {
-          "body_md": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+          "body_md": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "人格概览"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ENTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+          "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**P — 知觉**: 面对外部事务较倾向保留接收新信息的空间，不等于懒散或不会计划。\n\n在功能栈理论中，ENTP 常被描述为 Ne–Ti–Fe–Si。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "职业概览"
+          "source": "current",
+          "title": "字母含义与框架"
+        },
+        {
+          "body_md": "阅读 ENTP 可以问：还有什么解释或做法可行？你可能喜欢通过交谈建立想法、质疑假设、试探替代方案。这能发现遗漏可能，也可能让别人分不清你是在探索立场，还是已经支持它。\n\n反例：喜欢检验论点的人，也可能避免竞争性辩论；保留选择与完成细节任务可以共存。挑衅、说话快、不喜欢重复，都不能确定类型。",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "核心模式、价值与反例"
+        },
+        {
+          "body_md": "原创情景：团队准备改善熟悉的服务，你建议替换底层流程。先说明这是探索，再用相同成本、风险和用户需要比较新旧做法。选择一项试验，不要求同事追逐每种替代方案。\n\n可以体验探索新服务、质疑需求、解释复杂取舍等任务，也了解是否愿意维护自己创造的东西。创业、研究、协商、产品工作各有要求，ENTP 不能证明商业能力或成功。",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "工作与职业探索"
+        },
+        {
+          "body_md": "原创情景：聚餐时，你为了检验朋友观点而站到对立面，对方却感到被批评。先问是否愿意探索论点，说明自己的真实立场。同意交谈不等于接受任何辩论方式。\n\n有趣的反驳不总是最有用的回应。先承认评论造成的影响，再解释意图。机智相投或字母不同都不能证明关系匹配。",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "关系与沟通"
+        },
+        {
+          "body_md": "原创情景：截止日期临近，几条有吸引力的路线仍未确定。另起方案似乎比接受不完美选择容易。定义最小有用成果与真正阻塞它的不确定性，其他想法留待以后。\n\n无聊或持续注意困难有多种原因，不能用 ENTP 忽略责任或解释健康问题。",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "压力与恢复"
+        },
+        {
+          "body_md": "选一个想法，写清解决的问题、另一种解释、什么观察会让你放弃。告诉合作者什么时候在探索，什么时候已承诺。\n\n试验结束后，先交付承诺，再提下个版本。比较一次质疑改善结果的经历和一次接受可行答案更有帮助的经历。",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "实际观察练习"
+        },
+        {
+          "body_md": "- [ENTP-A](/zh/personality/entp-a)\n- [ENTP-T](/zh/personality/entp-t)\n- [ENTP-A vs ENTP-T](/zh/personality/entp-a-vs-entp-t)\n- [ENFP vs ENTP](/zh/personality/enfp-vs-entp)\n- [浏览 16 型目录](/zh/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "相关类型与对比"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "推荐职业方向"
-        },
-        {
-          "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "成长概览"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长优势"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "过度单一专精导致横向能力不足"
+                "answer": "先确认是在探索选项还是形成承诺，征得讨论挑战想法的同意，偏离目的时停止争论。",
+                "question": "ENTP 就表示争论总有用吗？"
               },
               {
-                "body": null,
-                "title": "反馈周期过长影响迭代速度"
+                "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+                "question": "ENTP 能说明智力或能力吗？"
+              },
+              {
+                "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+                "question": "ENTP 最适合哪些职业？"
+              },
+              {
+                "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+                "question": "ENTP-A 与 ENTP-T 增加了什么？"
+              },
+              {
+                "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+                "question": "ENTP 能预测伴侣匹配吗？"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "成长盲点"
+          "render": "faq",
+          "source": "current",
+          "title": "常见问题"
         },
         {
-          "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢弹性空间、自然推进和保留选择余地。",
+          "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "关系模式"
+          "source": "current",
+          "title": "来源与方法边界"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/zh/personality/entp",
-        "description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
-        "jsonld": [],
-        "og_description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
+        "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+          "inLanguage": "zh-CN",
+          "mainEntityOfPage": "https://fermatmind.com/zh/personality/entp",
+          "name": "ENTP 人格",
+          "url": "https://fermatmind.com/zh/personality/entp"
+        },
+        "og_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "og_image_url": null,
-        "og_title": "ENTP 人格指南",
+        "og_title": "ENTP 人格：字母含义、特点与实际情景",
         "robots": "index,follow",
-        "title": "ENTP 人格指南",
-        "twitter_description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
+        "title": "ENTP 人格：字母含义、特点与实际情景",
+        "twitter_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
         "twitter_image_url": null,
-        "twitter_title": "ENTP 人格指南"
+        "twitter_title": "ENTP 人格：字母含义、特点与实际情景"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ENTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "summary": "",
         "tagline": "辩论家",
-        "title": "ENTP - 辩论家"
+        "title": "ENTP 人格"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ENTP",
-      "excerpt": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+      "excerpt": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
       "hero_image_url": null,
       "hero_kicker": "辩论家",
       "hero_quote": null,
-      "hero_summary": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -484,66 +560,90 @@
       "slug": "entp",
       "status": "published",
       "subtitle": null,
-      "title": "ENTP - 辩论家",
+      "title": "ENTP 人格",
       "type_code": "ENTP",
       "type_name": "辩论家"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "基于 ENTP 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+        "body_md": "ENTP 指外向、直觉、思考、知觉四组偏好。类型叙述强调探索替代方案与检验论点，不能证明辩论能力、创造力、智力，也不要求对所有人提出反对。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — 外向**: 注意力更倾向外部的人与活动，不要求一直热衷社交。\n\n**N — 直觉**: 更关注模式、含义与可能性，不代表智力更高。\n\n**T — 思考**: 决定时较重视逻辑一致性与非个人化标准，不表示没有情感。\n\n**P — 知觉**: 面对外部事务较倾向保留接收新信息的空间，不等于懒散或不会计划。\n\n在功能栈理论中，ENTP 常被描述为 Ne–Ti–Fe–Si。这是理论阅读惯例，不证明已测得的心理过程，也不规定年龄发展时间表。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "字母含义与框架"
+      },
+      {
+        "body_html": null,
+        "body_md": "阅读 ENTP 可以问：还有什么解释或做法可行？你可能喜欢通过交谈建立想法、质疑假设、试探替代方案。这能发现遗漏可能，也可能让别人分不清你是在探索立场，还是已经支持它。\n\n反例：喜欢检验论点的人，也可能避免竞争性辩论；保留选择与完成细节任务可以共存。挑衅、说话快、不喜欢重复，都不能确定类型。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "人格概览"
+        "title": "核心模式、价值与反例"
       },
       {
         "body_html": null,
-        "body_md": "职业选择需要结合兴趣、技能、经验、价值观和具体岗位条件。本页不据ENTP类型给出适合或不适合的职业名单。可通过课程、项目与真实工作任务验证个人匹配。",
+        "body_md": "原创情景：团队准备改善熟悉的服务，你建议替换底层流程。先说明这是探索，再用相同成本、风险和用户需要比较新旧做法。选择一项试验，不要求同事追逐每种替代方案。\n\n可以体验探索新服务、质疑需求、解释复杂取舍等任务，也了解是否愿意维护自己创造的东西。创业、研究、协商、产品工作各有要求，ENTP 不能证明商业能力或成功。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与职业探索"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创情景：聚餐时，你为了检验朋友观点而站到对立面，对方却感到被批评。先问是否愿意探索论点，说明自己的真实立场。同意交谈不等于接受任何辩论方式。\n\n有趣的反驳不总是最有用的回应。先承认评论造成的影响，再解释意图。机智相投或字母不同都不能证明关系匹配。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "职业概览"
+        "title": "关系与沟通"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "avoid_jobs": [],
-          "recommended_jobs": [],
-          "work_env": "高自主度、目标清晰、反馈节奏稳定的工作环境。"
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
-        "sort_order": 70,
-        "title": "推荐职业方向"
-      },
-      {
-        "body_html": null,
-        "body_md": "高自主度、目标清晰、反馈节奏稳定的工作环境。",
+        "body_md": "原创情景：截止日期临近，几条有吸引力的路线仍未确定。另起方案似乎比接受不完美选择容易。定义最小有用成果与真正阻塞它的不确定性，其他想法留待以后。\n\n无聊或持续注意困难有多种原因，不能用 ENTP 忽略责任或解释健康问题。",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
-        "sort_order": 90,
-        "title": "成长概览"
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "压力与恢复"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "items": []
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "成长优势"
+        "body_md": "选一个想法，写清解决的问题、另一种解释、什么观察会让你放弃。告诉合作者什么时候在探索，什么时候已承诺。\n\n试验结束后，先交付承诺，再提下个版本。比较一次质疑改善结果的经历和一次接受可行答案更有帮助的经历。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "实际观察练习"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENTP-A](/zh/personality/entp-a)\n- [ENTP-T](/zh/personality/entp-t)\n- [ENTP-A vs ENTP-T](/zh/personality/entp-a-vs-entp-t)\n- [ENFP vs ENTP](/zh/personality/enfp-vs-entp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 70,
+        "title": "相关类型与对比"
       },
       {
         "body_html": null,
@@ -552,264 +652,74 @@
         "payload_json": {
           "items": [
             {
-              "body": null,
-              "title": "过度单一专精导致横向能力不足"
+              "answer": "先确认是在探索选项还是形成承诺，征得讨论挑战想法的同意，偏离目的时停止争论。",
+              "question": "ENTP 就表示争论总有用吗？"
             },
             {
-              "body": null,
-              "title": "反馈周期过长影响迭代速度"
+              "answer": "不能。偏好描述不是能力测验，具体技能要通过相关任务、学习和反馈了解。",
+              "question": "ENTP 能说明智力或能力吗？"
+            },
+            {
+              "answer": "本页不按类型排名职业。比较实际任务、兴趣、已展示的技能、资格、工作条件和现实限制，可以先体验小任务或向从业者了解。",
+              "question": "ENTP 最适合哪些职业？"
+            },
+            {
+              "answer": "它们增加官方四组偏好以外的 A/T 描述。请通过独立变体页和对比页了解，不把后缀与基础类型混为一谈。",
+              "question": "ENTP-A 与 ENTP-T 增加了什么？"
+            },
+            {
+              "answer": "本页不提供匹配分数。讨论需要、价值、边界与实际修复分歧的方式；相同或不同字母都不保证结果。",
+              "question": "ENTP 能预测伴侣匹配吗？"
             }
           ]
         },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "成长盲点"
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "常见问题"
       },
       {
         "body_html": null,
-        "body_md": "你往往通过直接交流、共同经历和快速反馈来建立关系。你倾向于和能讨论长期可能性、模式和意义的人建立更深连接。在冲突里你通常优先讲逻辑和边界，因此需要主动补充情绪确认。亲密关系与协作关系里，你通常更喜欢弹性空间、自然推进和保留选择余地。",
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "关系模式"
-      },
-      {
-        "body_html": null,
-        "body_md": "ENTP-A 与 ENTP-T 的最大区别，是在相同辩论家核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出机会试探、快速验证和观点碰撞，不应用于诊断、招聘、能力排名或关系裁决。",
-        "is_enabled": true,
-        "payload_json": {
-          "canonical": "https://fermatmind.com/zh/personality/entp-a-vs-entp-t",
-          "claim_boundary": "本文不是医学诊断、心理治疗建议、职业录取建议、雇佣筛选工具或关系决策依据。ENTP-A 与 ENTP-T 的对比只用于帮助用户理解行为倾向、压力反应、决策风格、反馈处理和成长策略。人格类型是自我理解工具，不是身份限制；任何职业、关系或长期选择，都需要结合真实经历、能力证据、环境条件和长期复盘。",
-          "content": {
-            "confusion_reason": "ENTP-A 与 ENTP-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-            "max_difference": "ENTP-A 与 ENTP-T 的最大区别，是在相同辩论家核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出机会试探、快速验证和观点碰撞，不应用于诊断、招聘、能力排名或关系裁决。",
-            "misjudgment_warning": "不要把 ENTP-A 写成更好、更强或必然更自信，也不要把 ENTP-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-            "quick_answer": "ENTP-A 与 ENTP-T 的最大区别，是在相同辩论家核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出机会试探、快速验证和观点碰撞，不应用于诊断、招聘、能力排名或关系裁决。",
-            "quick_judgment_table": [
-              {
-                "a": "更快回到自己的判断并保持行动节奏",
-                "dimension": "最大区别",
-                "t": "更频繁检查评价、风险与可改进处"
-              },
-              {
-                "a": "ENTP 的机会试探、快速验证和观点碰撞更容易先保持稳定推进",
-                "dimension": "压力反应",
-                "t": "ENTP 的机会试探、快速验证和观点碰撞更容易先复盘遗漏与外部反馈"
-              },
-              {
-                "a": "先测试可能性与反例，再选择值得投入的方向，再用最小证据修正",
-                "dimension": "工作场景",
-                "t": "先测试可能性与反例，再选择值得投入的方向，并先补足风险检查与反馈窗口"
-              },
-              {
-                "a": "可能被误读为把开放讨论误作不愿意收束",
-                "dimension": "容易误判",
-                "t": "可能被误读为犹豫或不够坚定"
-              }
-            ],
-            "real_scene_differences": [
-              "在工作中，ENTP-A 往往在先测试可能性与反例，再选择值得投入的方向后较快进入执行与迭代；ENTP-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "在关系中，ENTP-A 可能较快确认自己的理解并提出下一步；ENTP-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "压力下，ENTP-A 的优势是维持节奏，风险是过早把稳定感当成结论；ENTP-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。"
-            ]
-          },
-          "faq": [
-            {
-              "answer": "ENTP-A 与 ENTP-T 共享同一基础类型和辩论家偏好；差异主要体现在面对评价、压力和自我确认时的节奏，不是能力或价值高低。",
-              "question": "ENTP-A 和 ENTP-T 最大区别是什么？"
-            },
-            {
-              "answer": "回看最近的决定、反馈和压力场景：你是更快恢复判断后推进，还是更常追加复盘和风险检查。再结合长期行为与完整测试结果理解。",
-              "question": "怎么快速判断自己更像 ENTP-A 还是 ENTP-T？"
-            },
-            {
-              "answer": "不一定。A/T 只能描述自我确认和反馈处理的倾向，不能替代对具体能力、成熟度、训练或环境支持的判断。",
-              "question": "ENTP-A 一定比 ENTP-T 更自信吗？"
-            },
-            {
-              "answer": "不能。职业与关系需要结合技能、兴趣、经验、现实约束、沟通和双方边界；页面只提供自我观察与沟通线索。",
-              "question": "这个 A/T 对比能决定职业或关系吗？"
-            },
-            {
-              "answer": "不能。该内容不是医学诊断、招聘筛选、能力证明或关系裁决工具，也不应据此为自己或他人贴确定性标签。",
-              "question": "这个页面可以用于诊断或招聘筛选吗？"
-            }
-          ],
-          "identity": {
-            "base_type_code": "ENTP",
-            "comparison_kind": "at",
-            "comparison_slug": "entp-a-vs-entp-t",
-            "left_type_code": "ENTP-A",
-            "right_type_code": "ENTP-T"
-          },
-          "indexability_held": false,
-          "internal_links": [
-            {
-              "anchor_text": "ENTP-A",
-              "href": "/zh/personality/entp-a",
-              "role": "left_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ENTP-T",
-              "href": "/zh/personality/entp-t",
-              "role": "right_profile",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ENTJ A/T 对比",
-              "href": "/zh/personality/entj-a-vs-entj-t",
-              "role": "related_at_comparison",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI 人格",
-              "href": "/zh/personality",
-              "role": "personality_hub",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "免费 MBTI 测试",
-              "href": "/zh/tests/mbti-personality-test-16-personality-types",
-              "role": "test_loop",
-              "safe_public_route": true
-            }
-          ],
-          "payload_sha256": "e9fe547dde966ca4bfe6db52a1626f625c7a9cd3164b83ef7eb433574844bdfa",
-          "robots": "index,follow",
-          "sections": [
-            {
-              "body": "ENTP-A 与 ENTP-T 的最大区别，是在相同辩论家核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出机会试探、快速验证和观点碰撞，不应用于诊断、招聘、能力排名或关系裁决。",
-              "key": "biggest_difference",
-              "title": "最大区别"
-            },
-            {
-              "body": "最大区别：ENTP-A=更快回到自己的判断并保持行动节奏；ENTP-T=更频繁检查评价、风险与可改进处；压力反应：ENTP-A=ENTP 的机会试探、快速验证和观点碰撞更容易先保持稳定推进；ENTP-T=ENTP 的机会试探、快速验证和观点碰撞更容易先复盘遗漏与外部反馈；工作场景：ENTP-A=先测试可能性与反例，再选择值得投入的方向，再用最小证据修正；ENTP-T=先测试可能性与反例，再选择值得投入的方向，并先补足风险检查与反馈窗口；容易误判：ENTP-A=可能被误读为把开放讨论误作不愿意收束；ENTP-T=可能被误读为犹豫或不够坚定",
-              "key": "quick_judgment_table",
-              "rows": [
-                {
-                  "a": "更快回到自己的判断并保持行动节奏",
-                  "dimension": "最大区别",
-                  "t": "更频繁检查评价、风险与可改进处"
-                },
-                {
-                  "a": "ENTP 的机会试探、快速验证和观点碰撞更容易先保持稳定推进",
-                  "dimension": "压力反应",
-                  "t": "ENTP 的机会试探、快速验证和观点碰撞更容易先复盘遗漏与外部反馈"
-                },
-                {
-                  "a": "先测试可能性与反例，再选择值得投入的方向，再用最小证据修正",
-                  "dimension": "工作场景",
-                  "t": "先测试可能性与反例，再选择值得投入的方向，并先补足风险检查与反馈窗口"
-                },
-                {
-                  "a": "可能被误读为把开放讨论误作不愿意收束",
-                  "dimension": "容易误判",
-                  "t": "可能被误读为犹豫或不够坚定"
-                }
-              ],
-              "title": "快速判断表"
-            },
-            {
-              "body": "ENTP-A 与 ENTP-T 的字母核心相同，日常行为也可能相似。只看一次自信、一次焦虑或一个标签会造成误判；更可靠的是观察反馈后如何复盘、压力下如何恢复，以及是否愿意根据证据调整。",
-              "key": "easy_misread",
-              "title": "为什么容易混淆"
-            },
-            {
-              "body": "在工作中，ENTP-A 往往在先测试可能性与反例，再选择值得投入的方向后较快进入执行与迭代；ENTP-T 往往会增加对标准、遗漏和风险的核对。两种方式都需要清楚的责任、证据和复盘节点，不能替代岗位技能判断。",
-              "key": "work_scenarios",
-              "title": "真实工作场景"
-            },
-            {
-              "body": "在关系中，ENTP-A 可能较快确认自己的理解并提出下一步；ENTP-T 可能更在意是否遗漏对方感受或误解。有效沟通不是选出更好的一方，而是说清期待、边界、事实和需要复盘的地方。",
-              "key": "relationship_scenarios",
-              "title": "真实关系场景"
-            },
-            {
-              "body": "压力下，ENTP-A 的优势是维持节奏，风险是过早把稳定感当成结论；ENTP-T 的优势是发现风险，风险是让复盘无限延长。两者都可用可逆下一步、反馈时间和休息边界恢复校准。",
-              "key": "stress_scenarios",
-              "title": "压力场景差异"
-            },
-            {
-              "body": "不要把 ENTP-A 写成更好、更强或必然更自信，也不要把 ENTP-T 写成更弱或必然焦虑。A/T 只是观察语言；任何结论都应回到真实行为、情境、经验和反馈。",
-              "key": "do_not_misjudge",
-              "title": "不要如何误判"
-            },
-            {
-              "body": "ENTP-A 与 ENTP-T 都共享辩论家的机会试探、快速验证和观点碰撞。它们共同面对的不是谁更优，而是怎样把偏好转成更清楚的决定、协作和复盘。",
-              "key": "common_ground",
-              "title": "共同点"
-            },
-            {
-              "body": "该对比仅用于自我理解、沟通与成长复盘，不构成医学诊断、招聘筛选、智力或能力证明、职业保证、伴侣匹配或未来预测。",
-              "key": "usage_boundary",
-              "title": "使用边界"
-            }
-          ],
-          "seo": {
-            "breadcrumb_title": "ENTP-A 和 ENTP-T 的区别",
-            "h1": "ENTP-A 和 ENTP-T 的区别",
-            "quick_answer_summary": "ENTP-A 与 ENTP-T 的最大区别，是在相同辩论家核心偏好下处理反馈、压力与自我确认的节奏不同。A 型通常更快恢复判断并继续推进；T 型通常更愿意复盘风险、标准和外部反馈。两者都可能表现出机会试探、快速验证和观点碰撞，不应用于诊断、招聘、能力排名或关系裁决。",
-            "robots": "index,follow",
-            "seo_description": "对比 ENTP-A 与 ENTP-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
-            "seo_title": "ENTP-A 和 ENTP-T 的区别：辩论家 A/T 对比 | FermatMind"
-          },
-          "source": "mbti_cms_import_40_at_comparison_draft_v1",
-          "structured_metadata": {
-            "primary_query": "ENTP-A 和 ENTP-T 的区别",
-            "route_safety": "public_routes_only",
-            "secondary_queries": [
-              "ENTP-A",
-              "ENTP-T",
-              "ENTP A/T 区别"
-            ],
-            "source_document": [
-              "MBTI-FULL-AUDIT-30",
-              "public_profile_seo_asset_factory",
-              "mbti64_remaining_58_v2"
-            ]
-          },
-          "url": "/zh/personality/entp-a-vs-entp-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ENTP-A 和 ENTP-T 的区别"
+        "section_key": "sources_and_method",
+        "sort_order": 90,
+        "title": "来源与方法边界"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/entp",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
-      "seo_title": "ENTP 人格指南",
-      "twitter_description": null,
+      "og_title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+      "seo_title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind",
+      "twitter_description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/entp-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/entp-a"
+        "en": "https://fermatmind.com/en/personality/entp",
+        "zh-CN": "https://fermatmind.com/zh/personality/entp"
       },
-      "canonical_url": "https://fermatmind.com/zh/personality/entp-a",
-      "description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
+      "canonical_url": "https://fermatmind.com/zh/personality/entp",
+      "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "b6ccf37161b205e949a9dca12b80204804489965",
+      "metadata_fingerprint": "6adb88d15ab41015304ab987b1ab1d9b1d385b9e",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
-        "title": "ENTP 人格指南",
+        "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/zh/personality/entp-a"
+        "url": "https://fermatmind.com/zh/personality/entp"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -818,18 +728,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ENTP 人格指南",
+      "title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "了解 ENTP 的优势、弱项、人际模式和职业方向。",
-        "title": "ENTP 人格指南"
+        "description": "了解 ENTP 的含义、工作与关系中的原创情景、反例和实践问题。四组偏好不能证明能力或预测人生结果。",
+        "title": "ENTP 人格：字母含义、特点与实际情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "fbaf43a370ec21bc8a786cc3d38219f97ae5e9a5fbe8f885344df83d295a01c3"
+  "source_content_sha256": "482105b02d6e86641bb1dfd01d34cde383516c34196be8dd71537ee7b79b4565"
 }

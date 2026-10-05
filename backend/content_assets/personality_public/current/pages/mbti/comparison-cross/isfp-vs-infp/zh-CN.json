@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/isfp-vs-infp",
@@ -12,153 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "ISFP 和 INFP 的最大区别，不是一个更艺术、一个更文学，也不是一个更现实、一个更理想。更准确地说，ISFP 更容易从具体体验进入判断：环境是否舒服，行动是否自然，关系是否让人感到真实；INFP 更容易从内在意义进入判断：这件事是否符合价值，表达是否忠于自我，选择是否仍然像自己。",
-          "key": "quick_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "快速结论：ISFP 和 INFP 最大区别是什么"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "ISFP 和 INFP 容易被混淆，是因为两者都属于内向情感驱动明显的类型。外界经常先看到他们安静、重视个人感受、讨厌被强迫、对真实关系有高要求，于是把他们归为同一种“温柔、敏感、有审美或有理想”的人。但这种观察只停留在表层。",
-          "key": "why_they_are_confused",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么 ISFP 和 INFP 容易被混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "不要根据 ISFP 或 INFP 标签排除标准化环境。可以记录自己需要多少个人空间、明确规则和表达自主，以及这些条件在现实任务中是否可协商；用实际代价与反馈判断环境，而不是把类型当作适配结论。",
-          "key": "shared_traits",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "共同点：同样重视真实、自主与个人价值"
-        },
-        {
-          "body": "ISFP 的判断更贴近当下体验。他们会通过具体生活来确认自己：这个空间让我放松吗，这个人的行动是否真诚，这个作品是否有质感，这个选择是否让我仍然感到自由。很多 ISFP 不一定先用语言解释价值，但他们会用选择和行动表达价值。",
-          "key": "core_difference",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "核心差异：具体体验 vs 内在意义"
-        },
-        {
-          "body": "可以用具体材料、现场体验和可见成果做一次小规模任务练习，记录兴趣、投入与反馈。是否容易进入状态或取得成果需要实际证据，不能由 ISFP 标签推定。",
-          "key": "work_and_learning",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "工作与学习场景差异"
-        },
-        {
-          "body": "ISFP 在关系里常用行动表达在意。他们可能不擅长长篇解释，但会通过陪伴、审美细节、实际帮助、记住偏好和创造舒服环境来传达关心。别人如果只期待明确语言，可能会误以为他们不够投入；事实上，他们只是更相信具体行为比情绪宣言更可靠。",
-          "key": "communication_and_relationships",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "沟通与关系中的差异"
-        },
-        {
-          "body": "给 ISFP 的建议：观察指标：当你感到不舒服时，先区分是环境刺激、他人控制、价值冲突，还是单纯疲惫。练习方式：把“我不想继续”写成一个具体原因，而不是只用撤退表达。复盘问题：我是在保护真实边界，还是因为不想解释而让误解继续扩大？",
-          "key": "stress_and_growth",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "压力反应与成长建议"
-        },
-        {
-          "body": "误解一：ISFP 就是艺术型，INFP 就是文学型。更准确的说法是，ISFP 更偏向用具体体验和审美行动确认真实，INFP 更偏向用内在意义和价值叙事确认真实。具体兴趣仍要看个人经验。",
-          "key": "misconceptions",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "常见误解"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "cabb223e9b3424ec318d4a5050da35d7cf9a5de8",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "ISFP 更容易从具体体验、审美行动和现实感受进入判断；INFP 更容易从内在价值、想象世界和意义叙事进入判断。两者都重视真实和自主，但确认真实的路径不同。",
-          "question": "ISFP 和 INFP 最大区别是什么？"
+          "answer": "这是刻板印象，不是定型或能力规则。艺术兴趣和技能需要信息偏好之外的证据。",
+          "key": "faq-0",
+          "question": "ISFP 是画家，INFP 是作家吗？"
         },
         {
-          "answer": "不能简单排序。ISFP 的创造力常落在具体体验、审美选择、空间、行动和真实生活细节中；INFP 的创造力常落在故事、象征、价值命题、文字和内在世界表达中。",
-          "question": "ISFP 和 INFP 谁更有创造力？"
+          "answer": "可以。实感是偏好词汇，不限制理解或想象；INFP 也能认真关注具体细节。",
+          "key": "faq-1",
+          "question": "ISFP 可以喜欢抽象知识吗？"
         },
         {
-          "answer": "ISFP 通常更贴近当下体验和现实反馈，但这不代表他们没有理想。INFP 更关注内在意义和长期价值，但也可以通过作品、行动和承诺进入现实。",
-          "question": "ISFP 是不是比 INFP 更现实？"
+          "answer": "部分功能栈理论安排共同领先 Fi、中间位置不同。这是理论阅读，不是已测共享心理机制。",
+          "key": "faq-2",
+          "question": "两者共用认知功能吗？"
         },
         {
-          "answer": "两者都可能敏感。ISFP 更容易对环境、评价、身体感受和具体体验敏感；INFP 更容易对价值冲突、误解、关系意义和自我一致性感到敏感。",
-          "question": "INFP 是不是比 ISFP 更敏感？"
-        },
-        {
-          "answer": "可以观察他们如何进入任务。ISFP 往往需要具体材料、现实反馈和自由行动空间；INFP 往往需要理解任务意义、价值位置和表达方向。两者都需要边界和尊重。",
-          "question": "工作中怎么区分 ISFP 和 INFP？"
-        },
-        {
-          "answer": "ISFP 常通过陪伴、行动和细节表达在意；INFP 更需要价值和内心世界被理解。和 ISFP 沟通要尊重空间，和 INFP 沟通要认真听见意义。",
-          "question": "关系中怎么理解 ISFP 和 INFP 的差异？"
-        },
-        {
-          "answer": "人格结果描述的是偏好倾向，不是固定命运。经验、环境、关系、职业训练和长期复盘都会影响一个人表达类型的方式。",
-          "question": "ISFP 和 INFP 会随着时间改变吗？"
-        },
-        {
-          "answer": "不能。ISFP / INFP 的对比只能提供行为和偏好线索。职业选择还需要结合 RIASEC 职业兴趣、Big Five 特质维度、技能证据、现实机会和长期反馈。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "记录处境与反例，两种信息方式都可能有用。阅读练习不能验证分类结果。",
+          "key": "faq-3",
+          "question": "我同时喜欢体验与可能性怎么办？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "左侧类型详情页（canonical ISFP-A 公开画像）",
-          "href": "/zh/personality/isfp-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ISFP-A 人格特点"
-        },
-        {
-          "body": "右侧类型详情页（canonical INFP-A 公开画像）",
-          "href": "/zh/personality/infp-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 INFP-A 人格特点"
-        },
-        {
-          "body": "MBTI 测试页",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "做免费 16 型人格测试"
-        },
-        {
-          "body": "Big Five 交叉验证",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用大五人格交叉验证特质维度"
-        },
-        {
-          "body": "RIASEC 职业兴趣",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用 RIASEC 检查职业兴趣方向"
-        },
-        {
-          "body": "ISFP A/T 对比",
-          "href": "/zh/personality/isfp-a-vs-isfp-t",
-          "key": "internal_link_6",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ISFP-A 与 ISFP-T 的区别"
-        },
-        {
-          "body": "INFP A/T 对比",
-          "href": "/zh/personality/infp-a-vs-infp-t",
-          "key": "internal_link_7",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 INFP-A 与 INFP-T 的区别"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "isfp-vs-infp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "26de56c19cfb63dea872c669389eb8fe664451df",
       "summary_blocks": [
         {
-          "body": "ISFP 和 INFP 都重视真实、自主、个人价值和不被外界粗暴定义的生活方式，但两者进入世界的入口不同。ISFP 更依靠当下体验、感官真实、具体行动和审美选择来确认什么适合自己；INFP 更依靠内在意义、价值叙事、想象世界和长期理想来解释自己。本文用于帮助用户区分两者在行动节奏、情绪复盘、创造路径、关系表达和成长策略中的差异，不用于诊断、筛选或决定职业关系。",
+          "body": "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "ISFP 和 INFP 的区别：当下体验、内在意义与价值表达"
+          "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/isfp-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/isfp-vs-infp"
       },
       "answer_surface_v1": {
@@ -314,95 +247,45 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ISFP 与 INFP 的对比只用于帮助用户理解行为倾向、价值表达、压力反应、沟通方式和成长策略。人格类型是自我理解工具，不是身份限制；任何重要选择都需要结合真实经历、能力证据、长期反馈、职业兴趣和现实环境。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "isfp-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+      "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "ISFP 更容易从具体体验、审美行动和现实感受进入判断；INFP 更容易从内在价值、想象世界和意义叙事进入判断。两者都重视真实和自主，但确认真实的路径不同。",
-          "question": "ISFP 和 INFP 最大区别是什么？"
+          "answer": "这是刻板印象，不是定型或能力规则。艺术兴趣和技能需要信息偏好之外的证据。",
+          "question": "ISFP 是画家，INFP 是作家吗？"
         },
         {
-          "answer": "不能简单排序。ISFP 的创造力常落在具体体验、审美选择、空间、行动和真实生活细节中；INFP 的创造力常落在故事、象征、价值命题、文字和内在世界表达中。",
-          "question": "ISFP 和 INFP 谁更有创造力？"
+          "answer": "可以。实感是偏好词汇，不限制理解或想象；INFP 也能认真关注具体细节。",
+          "question": "ISFP 可以喜欢抽象知识吗？"
         },
         {
-          "answer": "ISFP 通常更贴近当下体验和现实反馈，但这不代表他们没有理想。INFP 更关注内在意义和长期价值，但也可以通过作品、行动和承诺进入现实。",
-          "question": "ISFP 是不是比 INFP 更现实？"
+          "answer": "部分功能栈理论安排共同领先 Fi、中间位置不同。这是理论阅读，不是已测共享心理机制。",
+          "question": "两者共用认知功能吗？"
         },
         {
-          "answer": "两者都可能敏感。ISFP 更容易对环境、评价、身体感受和具体体验敏感；INFP 更容易对价值冲突、误解、关系意义和自我一致性感到敏感。",
-          "question": "INFP 是不是比 ISFP 更敏感？"
-        },
-        {
-          "answer": "可以观察他们如何进入任务。ISFP 往往需要具体材料、现实反馈和自由行动空间；INFP 往往需要理解任务意义、价值位置和表达方向。两者都需要边界和尊重。",
-          "question": "工作中怎么区分 ISFP 和 INFP？"
-        },
-        {
-          "answer": "ISFP 常通过陪伴、行动和细节表达在意；INFP 更需要价值和内心世界被理解。和 ISFP 沟通要尊重空间，和 INFP 沟通要认真听见意义。",
-          "question": "关系中怎么理解 ISFP 和 INFP 的差异？"
-        },
-        {
-          "answer": "人格结果描述的是偏好倾向，不是固定命运。经验、环境、关系、职业训练和长期复盘都会影响一个人表达类型的方式。",
-          "question": "ISFP 和 INFP 会随着时间改变吗？"
-        },
-        {
-          "answer": "不能。ISFP / INFP 的对比只能提供行为和偏好线索。职业选择还需要结合 RIASEC 职业兴趣、Big Five 特质维度、技能证据、现实机会和长期反馈。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "记录处境与反例，两种信息方式都可能有用。阅读练习不能验证分类结果。",
+          "question": "我同时喜欢体验与可能性怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ISFP-A 人格特点",
-          "href": "/zh/personality/isfp-a",
-          "label": "查看 ISFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ISFP-A 公开画像）"
+          "href": "/zh/personality/isfp",
+          "label": "ISFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 INFP-A 人格特点",
-          "href": "/zh/personality/infp-a",
-          "label": "查看 INFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical INFP-A 公开画像）"
+          "href": "/zh/personality/infp",
+          "label": "INFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ISFP-A 与 ISFP-T 的区别",
-          "href": "/zh/personality/isfp-a-vs-isfp-t",
-          "label": "查看 ISFP-A 与 ISFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ISFP A/T 对比"
-        },
-        {
-          "anchor_text": "查看 INFP-A 与 INFP-T 的区别",
-          "href": "/zh/personality/infp-a-vs-infp-t",
-          "label": "查看 INFP-A 与 INFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "INFP A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -422,113 +305,104 @@
       "sections": [
         {
           "body": [
-            "ISFP 和 INFP 的最大区别，不是一个更艺术、一个更文学，也不是一个更现实、一个更理想。更准确地说，ISFP 更容易从具体体验进入判断：环境是否舒服，行动是否自然，关系是否让人感到真实；INFP 更容易从内在意义进入判断：这件事是否符合价值，表达是否忠于自我，选择是否仍然像自己。",
-            "两者都重视真实和个人边界。ISFP 的真实更常通过行动、审美、身体感受和生活选择显现，可能是一种穿搭、一段空间安排、一次安静陪伴，或一个“不想再勉强”的决定。INFP 的真实更常通过故事、语言、想象、价值立场和自我解释显现，他们会不断追问一个选择背后的意义。",
-            "在工作和学习中，ISFP 往往需要看见现实材料、具体反馈和可操作路径，才会真正进入状态；INFP 则更需要知道这个任务为什么值得做、它与个人价值或长期理想有什么连接。一个偏向体验落地，一个偏向意义建构，但两者都可能有创造力，也都可能在被压迫、被催促或被误解时退回内在世界。",
-            "使用这组差异时，要避免把 ISFP 写成“不思考”，也不要把 INFP 写成“不行动”。ISFP 也会有深层价值，只是常通过具体体验确认；INFP 也会行动，只是常需要先确认内在意义。人格类型只能提供复盘语言，不能替代真实经历、能力证据、职业兴趣和长期反馈。"
+            "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ISFP 和 INFP 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ISFP 和 INFP 容易被混淆，是因为两者都属于内向情感驱动明显的类型。外界经常先看到他们安静、重视个人感受、讨厌被强迫、对真实关系有高要求，于是把他们归为同一种“温柔、敏感、有审美或有理想”的人。但这种观察只停留在表层。",
-            "真正的差别要看他们如何确认一个选择。ISFP 更容易问：这件事在现实中是否舒服、自然、贴合当下？我能不能用行动、作品、身体体验或生活方式把它做出来？INFP 更容易问：这件事是否符合我的内在价值？它能否被我放进一个更大的意义结构里？它会不会让我偏离真正的自己？",
-            "在关系里，两者也都可能不喜欢强硬冲突，但沉默的含义不同。ISFP 的沉默可能是在感受环境、观察对方的真实行动，或保护自己的体验边界；INFP 的沉默可能是在整理价值冲突、回放情绪细节，或寻找一种既真实又不伤人的表达方式。只看“都不爱争”，很容易误判。",
-            "在创作和职业探索中，ISFP 可能从材料、空间、身体、色彩、手感、服务体验或真实生活片段出发；INFP 可能从主题、人物、象征、价值命题、叙事和情绪深度出发。两者都能创造，但创造的起点和验证方式不同。"
+            "两者都描述内向、情感、知觉：内部思考、价值与对人的影响、向新信息保留空间。类型叙述可能都看选择是否表达个人价值，不表示价值或表达方式相同。",
+            "ISFP 式问题可能问直接体验是什么样，INFP 式问题可能问打开什么可能与意义。两者都能用经验和想象。实感不表示思考浅，直觉不证明创意更高。",
+            "功能栈理论常安排 ISFP 为 Fi–Se–Ni–Te，INFP 为 Fi–Ne–Si–Te。这是解释惯例，不是已测心理机制。A/T 是另外扩展，不能确定 S/N。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ISFP 和 INFP 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "不要根据 ISFP 或 INFP 标签排除标准化环境。可以记录自己需要多少个人空间、明确规则和表达自主，以及这些条件在现实任务中是否可协商；用实际代价与反馈判断环境，而不是把类型当作适配结论。",
-            "他们也都可能对表面正确但缺乏真实感的东西保持距离。一个关系如果只有礼貌却没有真诚，一个工作如果只有流程却没有个人意义，一个环境如果总要求他们压掉感受，他们都会逐渐失去投入。区别在于，ISFP 可能先通过身体和体验感到“不对”，INFP 则可能先在内心价值层面意识到“不像我”。",
-            "两者都有柔软的一面，但柔软不等于没有边界。ISFP 的边界常体现在选择上：不再参加某个场合，不再回应某种要求，换一个更自在的环境。INFP 的边界常体现在意义判断上：这件事违背我的核心价值，我不能继续假装认同。",
-            "共同点并不意味着两者可以被同一套建议处理。对 ISFP 有用的建议往往要落到具体行动和现实反馈，对 INFP 有用的建议往往需要先承认内在价值和情绪逻辑。费马测试的对比页应帮助用户看到这种细微差别，而不是把两者都写成“敏感理想型”。"
+            "| 观察点 | ISFP | INFP |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式、意义与可能性 |\n| 原创学习例子 | 体验小部分活动并检查感受 | 探索活动意味什么、能通向什么 |\n| 可能盲点 | 用一次体验代替代表性检查 | 发展有意义解释但没有实际试行 |\n| 共同实践 | 比较另一例子及其条件 | 尝试小版本，核实真实条件 |"
           ],
-          "id": "shared_traits",
-          "title": "共同点：同样重视真实、自主与个人价值"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "ISFP 的判断更贴近当下体验。他们会通过具体生活来确认自己：这个空间让我放松吗，这个人的行动是否真诚，这个作品是否有质感，这个选择是否让我仍然感到自由。很多 ISFP 不一定先用语言解释价值，但他们会用选择和行动表达价值。",
-            "INFP 的判断更贴近内在意义。他们会把经历放进自我叙事里：这件事说明我在乎什么，我是否背离了自己的价值，我想成为怎样的人，这段关系是否真正理解我的内在世界。INFP 的现实行动常常需要先通过意义确认，否则他们很难长期投入。",
-            "这就是 J/P 以外更重要的差异：不是谁更有秩序，也不是谁更散漫，而是信息落点不同。ISFP 的开放更多发生在现实体验里，他们愿意通过尝试、感受和具体反馈调整方向；INFP 的开放更多发生在想象和价值结构里，他们愿意不断重新解释自己与世界的关系。",
-            "这种差异也解释了为什么两者在压力下的表现不同。ISFP 被控制、评价或剥夺自由时，可能用沉默、离开、减少回应来保护感受空间；INFP 被误解、催促或价值否定时，可能进入更长的自我解释和情绪复盘。两者都不是简单逃避，而是在用自己熟悉的方式维持真实感。"
+            "原创工作情景：考虑创作课程。一种方式试样课，注意材料、节奏、互动；另一种探索未来能做的工作及长期价值。结合试行、日常任务、成本核查。做法不能确认类型。",
+            "原创关系情景：朋友选活动。一方说明上次喜欢什么，另一方想象新可能和意义。问现在想要什么，选可行体验。不把具体偏好解释为缺乏想象，也不把可能性解释为不实际。"
           ],
-          "id": "core_difference",
-          "title": "核心差异：具体体验 vs 内在意义"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "可以用具体材料、现场体验和可见成果做一次小规模任务练习，记录兴趣、投入与反馈。是否容易进入状态或取得成果需要实际证据，不能由 ISFP 标签推定。",
-            "可以把意义、表达和价值命题作为探索问题：选一个感兴趣的任务，说明为什么想做，再核对技能、训练与资格、现实机会和试做反馈。INFP 标签不能确定职业兴趣或任务适配。",
-            "面对不确定任务时，ISFP 可能先尝试一个小动作，看现实反馈如何；INFP 可能先在脑中展开多种意义路径，判断哪个方向更真实。前者的风险是只看当下感觉，低估长期结构；后者的风险是意义推演太久，迟迟无法进入现实验证。",
-            "协作中，ISFP 通常更需要尊重个人节奏和表达方式。他们不喜欢被过度管理，也不喜欢被迫用高调语言解释自己。INFP 更需要知道团队为什么要做这件事、自己在其中的价值位置是什么，以及沟通是否保持真诚。如果只给任务不给意义，INFP 容易失去动力。",
-            "职业成长建议也应不同。ISFP 需要练习把感受判断转成可沟通的标准：我喜欢这个方案，是因为质感、效率、舒适度还是价值贴合？INFP 需要练习把价值判断转成可执行的小步：我认同这个方向，下一周可以完成什么具体动作？两者都不能只靠类型决定职业选择。"
+            "视觉艺术不能确认 ISFP，写作不能确认 INFP，两者都能擅长或困难。关注感官细节不表示思考少，谈意义不表示更深刻。类型不能预测后勤、钱或未来规划技能。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "ISFP 在关系里常用行动表达在意。他们可能不擅长长篇解释，但会通过陪伴、审美细节、实际帮助、记住偏好和创造舒服环境来传达关心。别人如果只期待明确语言，可能会误以为他们不够投入；事实上，他们只是更相信具体行为比情绪宣言更可靠。",
-            "INFP 在关系里更重视被理解。他们需要的不只是陪伴，还包括对方愿意听见自己的内在逻辑、价值感、矛盾和想象。一个 INFP 即使外表安静，内心可能已经组织了大量关于关系的解释。如果对方只处理表面问题，而不触碰意义层，他们仍可能觉得孤独。",
-            "冲突中，ISFP 可能先撤退到感受安全的地方，等情绪和身体状态稳定后再决定是否沟通。INFP 则可能在心里反复组织语言，试图找到既不背叛自己、又不伤害对方的表达方式。两者都可能沉默，但 ISFP 的沉默更像保护体验边界，INFP 的沉默更像整理内在价值冲突。",
-            "可执行沟通建议是：和 ISFP 沟通时，少一点抽象追问，多一点具体尊重，例如“你需要空间，还是需要我调整这个安排？”和 INFP 沟通时，少一点只问结果，多一点承认意义，例如“我想理解这件事为什么对你重要。”对两者来说，清楚边界比猜测更有效。"
+            "比较三个能选择信息来源的决定：先想要亲身例子，还是可能意义与结果？为何信任，何时相反方式有用？区分偏好与机会，有时只是没有试行条件。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "给 ISFP 的建议：观察指标：当你感到不舒服时，先区分是环境刺激、他人控制、价值冲突，还是单纯疲惫。练习方式：把“我不想继续”写成一个具体原因，而不是只用撤退表达。复盘问题：我是在保护真实边界，还是因为不想解释而让误解继续扩大？",
-            "给 ISFP 的建议：观察指标：当你用行动照顾别人时，留意对方是否真的理解你的在意。练习方式：在行动之外补一句简短说明，例如“我这样做是因为我在意这件事”。复盘问题：我是否把所有关心都藏在行动里，导致别人无法接住？",
-            "给 ISFP 的建议：观察指标：当你选择一个创作或职业方向时，确认它是否只有当下舒服，还是也有长期承接。练习方式：给每个喜欢的方向写下三项现实条件：时间、技能、反馈来源。复盘问题：这个选择能不能支持我持续表达，而不是只满足一时自由感？",
-            "给 ISFP 的建议：观察指标：当别人评价你时，判断自己是否立刻收回表达。练习方式：把反馈分成事实、审美偏好和对方情绪。复盘问题：我是否把别人的偏好误认为自己的价值被否定？",
-            "给 INFP 的建议：观察指标：当你陷入意义复盘时，确认自己是否还在产生新信息。练习方式：给每次复盘设一个结束点，写下一个最小行动。复盘问题：我现在是在理解自己，还是在用理解拖延现实行动？",
-            "给 INFP 的建议：观察指标：当你觉得不被理解时，先区分对方没有理解、对方不同意、还是你还没有说清。练习方式：把内心复杂感受压缩成三句话：我在意什么，我受影响在哪里，我希望下一步怎么做。复盘问题：我是否期待别人自动读懂我的内在世界？",
-            "给 INFP 的建议：观察指标：当你开始一个理想项目时，看它是否有现实容器。练习方式：把一个大主题拆成一周内可完成的具体成果。复盘问题：我的理想是否已经有可以被别人看见的形状？",
-            "给 INFP 的建议：观察指标：当价值受到挑战时，判断自己是否把不同意见理解成否定人格。练习方式：把“他不理解我”改写成“他不同意这个表达 / 这个方案 / 这个时间点”。复盘问题：我能否保护价值，同时允许现实讨论存在？"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "误解一：ISFP 就是艺术型，INFP 就是文学型。更准确的说法是，ISFP 更偏向用具体体验和审美行动确认真实，INFP 更偏向用内在意义和价值叙事确认真实。具体兴趣仍要看个人经验。",
-            "误解二：ISFP 不思考。ISFP 也会有深层判断，只是他们常通过感受、行动和现实选择来表达，而不是先建立长篇理论。",
-            "误解三：INFP 不行动。INFP 也可以很有行动力，只是他们通常需要先确认行动是否符合价值和意义，否则容易难以持续。",
-            "误解四：ISFP 比 INFP 更现实。ISFP 的确更贴近具体体验，但这不等于缺少理想；INFP 更关注内在意义，也不等于脱离现实。",
-            "误解五：一个人测出 ISFP 或 INFP 就能决定职业。人格类型只能提示偏好，不能替代能力、兴趣、训练、行业环境和真实反馈。",
-            "误解六：测评结果应该用来给人贴标签。更合适的用法是把它当作复盘工具，帮助用户观察自己在行动、关系、压力和选择中的反复模式。"
+            "- [ISFP 基础人格](/zh/personality/isfp)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-      "seo_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+      "seo_description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISFP 与 INFP 的区别：直接体验、可能性与价值",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "medical_or_career_decision_claims": false
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65",
-      "summary": "ISFP 和 INFP 都重视真实、自主、个人价值和不被外界粗暴定义的生活方式，但两者进入世界的入口不同。ISFP 更依靠当下体验、感官真实、具体行动和审美选择来确认什么适合自己；INFP 更依靠内在意义、价值叙事、想象世界和长期理想来解释自己。本文用于帮助用户区分两者在行动节奏、情绪复盘、创造路径、关系表达和成长策略中的差异，不用于诊断、筛选或决定职业关系。",
-      "title": "ISFP 和 INFP 的区别：当下体验、内在意义与价值表达"
+      "source_sha256": "fb4ec6d017258e6d1235b47950fd80a5023fbf7762d13aa316bf2b10deb21678",
+      "summary": "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。",
+      "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/isfp-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/isfp-vs-infp"
       },
       "answer_surface_v1": {
@@ -684,95 +558,45 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ISFP 与 INFP 的对比只用于帮助用户理解行为倾向、价值表达、压力反应、沟通方式和成长策略。人格类型是自我理解工具，不是身份限制；任何重要选择都需要结合真实经历、能力证据、长期反馈、职业兴趣和现实环境。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "isfp-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+      "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "ISFP 更容易从具体体验、审美行动和现实感受进入判断；INFP 更容易从内在价值、想象世界和意义叙事进入判断。两者都重视真实和自主，但确认真实的路径不同。",
-          "question": "ISFP 和 INFP 最大区别是什么？"
+          "answer": "这是刻板印象，不是定型或能力规则。艺术兴趣和技能需要信息偏好之外的证据。",
+          "question": "ISFP 是画家，INFP 是作家吗？"
         },
         {
-          "answer": "不能简单排序。ISFP 的创造力常落在具体体验、审美选择、空间、行动和真实生活细节中；INFP 的创造力常落在故事、象征、价值命题、文字和内在世界表达中。",
-          "question": "ISFP 和 INFP 谁更有创造力？"
+          "answer": "可以。实感是偏好词汇，不限制理解或想象；INFP 也能认真关注具体细节。",
+          "question": "ISFP 可以喜欢抽象知识吗？"
         },
         {
-          "answer": "ISFP 通常更贴近当下体验和现实反馈，但这不代表他们没有理想。INFP 更关注内在意义和长期价值，但也可以通过作品、行动和承诺进入现实。",
-          "question": "ISFP 是不是比 INFP 更现实？"
+          "answer": "部分功能栈理论安排共同领先 Fi、中间位置不同。这是理论阅读，不是已测共享心理机制。",
+          "question": "两者共用认知功能吗？"
         },
         {
-          "answer": "两者都可能敏感。ISFP 更容易对环境、评价、身体感受和具体体验敏感；INFP 更容易对价值冲突、误解、关系意义和自我一致性感到敏感。",
-          "question": "INFP 是不是比 ISFP 更敏感？"
-        },
-        {
-          "answer": "可以观察他们如何进入任务。ISFP 往往需要具体材料、现实反馈和自由行动空间；INFP 往往需要理解任务意义、价值位置和表达方向。两者都需要边界和尊重。",
-          "question": "工作中怎么区分 ISFP 和 INFP？"
-        },
-        {
-          "answer": "ISFP 常通过陪伴、行动和细节表达在意；INFP 更需要价值和内心世界被理解。和 ISFP 沟通要尊重空间，和 INFP 沟通要认真听见意义。",
-          "question": "关系中怎么理解 ISFP 和 INFP 的差异？"
-        },
-        {
-          "answer": "人格结果描述的是偏好倾向，不是固定命运。经验、环境、关系、职业训练和长期复盘都会影响一个人表达类型的方式。",
-          "question": "ISFP 和 INFP 会随着时间改变吗？"
-        },
-        {
-          "answer": "不能。ISFP / INFP 的对比只能提供行为和偏好线索。职业选择还需要结合 RIASEC 职业兴趣、Big Five 特质维度、技能证据、现实机会和长期反馈。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "记录处境与反例，两种信息方式都可能有用。阅读练习不能验证分类结果。",
+          "question": "我同时喜欢体验与可能性怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ISFP-A 人格特点",
-          "href": "/zh/personality/isfp-a",
-          "label": "查看 ISFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ISFP-A 公开画像）"
+          "href": "/zh/personality/isfp",
+          "label": "ISFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 INFP-A 人格特点",
-          "href": "/zh/personality/infp-a",
-          "label": "查看 INFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical INFP-A 公开画像）"
+          "href": "/zh/personality/infp",
+          "label": "INFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ISFP-A 与 ISFP-T 的区别",
-          "href": "/zh/personality/isfp-a-vs-isfp-t",
-          "label": "查看 ISFP-A 与 ISFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ISFP A/T 对比"
-        },
-        {
-          "anchor_text": "查看 INFP-A 与 INFP-T 的区别",
-          "href": "/zh/personality/infp-a-vs-infp-t",
-          "label": "查看 INFP-A 与 INFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "INFP A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -792,248 +616,250 @@
       "sections": [
         {
           "body": [
-            "ISFP 和 INFP 的最大区别，不是一个更艺术、一个更文学，也不是一个更现实、一个更理想。更准确地说，ISFP 更容易从具体体验进入判断：环境是否舒服，行动是否自然，关系是否让人感到真实；INFP 更容易从内在意义进入判断：这件事是否符合价值，表达是否忠于自我，选择是否仍然像自己。",
-            "两者都重视真实和个人边界。ISFP 的真实更常通过行动、审美、身体感受和生活选择显现，可能是一种穿搭、一段空间安排、一次安静陪伴，或一个“不想再勉强”的决定。INFP 的真实更常通过故事、语言、想象、价值立场和自我解释显现，他们会不断追问一个选择背后的意义。",
-            "在工作和学习中，ISFP 往往需要看见现实材料、具体反馈和可操作路径，才会真正进入状态；INFP 则更需要知道这个任务为什么值得做、它与个人价值或长期理想有什么连接。一个偏向体验落地，一个偏向意义建构，但两者都可能有创造力，也都可能在被压迫、被催促或被误解时退回内在世界。",
-            "使用这组差异时，要避免把 ISFP 写成“不思考”，也不要把 INFP 写成“不行动”。ISFP 也会有深层价值，只是常通过具体体验确认；INFP 也会行动，只是常需要先确认内在意义。人格类型只能提供复盘语言，不能替代真实经历、能力证据、职业兴趣和长期反馈。"
+            "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ISFP 和 INFP 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ISFP 和 INFP 容易被混淆，是因为两者都属于内向情感驱动明显的类型。外界经常先看到他们安静、重视个人感受、讨厌被强迫、对真实关系有高要求，于是把他们归为同一种“温柔、敏感、有审美或有理想”的人。但这种观察只停留在表层。",
-            "真正的差别要看他们如何确认一个选择。ISFP 更容易问：这件事在现实中是否舒服、自然、贴合当下？我能不能用行动、作品、身体体验或生活方式把它做出来？INFP 更容易问：这件事是否符合我的内在价值？它能否被我放进一个更大的意义结构里？它会不会让我偏离真正的自己？",
-            "在关系里，两者也都可能不喜欢强硬冲突，但沉默的含义不同。ISFP 的沉默可能是在感受环境、观察对方的真实行动，或保护自己的体验边界；INFP 的沉默可能是在整理价值冲突、回放情绪细节，或寻找一种既真实又不伤人的表达方式。只看“都不爱争”，很容易误判。",
-            "在创作和职业探索中，ISFP 可能从材料、空间、身体、色彩、手感、服务体验或真实生活片段出发；INFP 可能从主题、人物、象征、价值命题、叙事和情绪深度出发。两者都能创造，但创造的起点和验证方式不同。"
+            "两者都描述内向、情感、知觉：内部思考、价值与对人的影响、向新信息保留空间。类型叙述可能都看选择是否表达个人价值，不表示价值或表达方式相同。",
+            "ISFP 式问题可能问直接体验是什么样，INFP 式问题可能问打开什么可能与意义。两者都能用经验和想象。实感不表示思考浅，直觉不证明创意更高。",
+            "功能栈理论常安排 ISFP 为 Fi–Se–Ni–Te，INFP 为 Fi–Ne–Si–Te。这是解释惯例，不是已测心理机制。A/T 是另外扩展，不能确定 S/N。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ISFP 和 INFP 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "不要根据 ISFP 或 INFP 标签排除标准化环境。可以记录自己需要多少个人空间、明确规则和表达自主，以及这些条件在现实任务中是否可协商；用实际代价与反馈判断环境，而不是把类型当作适配结论。",
-            "他们也都可能对表面正确但缺乏真实感的东西保持距离。一个关系如果只有礼貌却没有真诚，一个工作如果只有流程却没有个人意义，一个环境如果总要求他们压掉感受，他们都会逐渐失去投入。区别在于，ISFP 可能先通过身体和体验感到“不对”，INFP 则可能先在内心价值层面意识到“不像我”。",
-            "两者都有柔软的一面，但柔软不等于没有边界。ISFP 的边界常体现在选择上：不再参加某个场合，不再回应某种要求，换一个更自在的环境。INFP 的边界常体现在意义判断上：这件事违背我的核心价值，我不能继续假装认同。",
-            "共同点并不意味着两者可以被同一套建议处理。对 ISFP 有用的建议往往要落到具体行动和现实反馈，对 INFP 有用的建议往往需要先承认内在价值和情绪逻辑。费马测试的对比页应帮助用户看到这种细微差别，而不是把两者都写成“敏感理想型”。"
+            "| 观察点 | ISFP | INFP |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式、意义与可能性 |\n| 原创学习例子 | 体验小部分活动并检查感受 | 探索活动意味什么、能通向什么 |\n| 可能盲点 | 用一次体验代替代表性检查 | 发展有意义解释但没有实际试行 |\n| 共同实践 | 比较另一例子及其条件 | 尝试小版本，核实真实条件 |"
           ],
-          "id": "shared_traits",
-          "title": "共同点：同样重视真实、自主与个人价值"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "ISFP 的判断更贴近当下体验。他们会通过具体生活来确认自己：这个空间让我放松吗，这个人的行动是否真诚，这个作品是否有质感，这个选择是否让我仍然感到自由。很多 ISFP 不一定先用语言解释价值，但他们会用选择和行动表达价值。",
-            "INFP 的判断更贴近内在意义。他们会把经历放进自我叙事里：这件事说明我在乎什么，我是否背离了自己的价值，我想成为怎样的人，这段关系是否真正理解我的内在世界。INFP 的现实行动常常需要先通过意义确认，否则他们很难长期投入。",
-            "这就是 J/P 以外更重要的差异：不是谁更有秩序，也不是谁更散漫，而是信息落点不同。ISFP 的开放更多发生在现实体验里，他们愿意通过尝试、感受和具体反馈调整方向；INFP 的开放更多发生在想象和价值结构里，他们愿意不断重新解释自己与世界的关系。",
-            "这种差异也解释了为什么两者在压力下的表现不同。ISFP 被控制、评价或剥夺自由时，可能用沉默、离开、减少回应来保护感受空间；INFP 被误解、催促或价值否定时，可能进入更长的自我解释和情绪复盘。两者都不是简单逃避，而是在用自己熟悉的方式维持真实感。"
+            "原创工作情景：考虑创作课程。一种方式试样课，注意材料、节奏、互动；另一种探索未来能做的工作及长期价值。结合试行、日常任务、成本核查。做法不能确认类型。",
+            "原创关系情景：朋友选活动。一方说明上次喜欢什么，另一方想象新可能和意义。问现在想要什么，选可行体验。不把具体偏好解释为缺乏想象，也不把可能性解释为不实际。"
           ],
-          "id": "core_difference",
-          "title": "核心差异：具体体验 vs 内在意义"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "可以用具体材料、现场体验和可见成果做一次小规模任务练习，记录兴趣、投入与反馈。是否容易进入状态或取得成果需要实际证据，不能由 ISFP 标签推定。",
-            "可以把意义、表达和价值命题作为探索问题：选一个感兴趣的任务，说明为什么想做，再核对技能、训练与资格、现实机会和试做反馈。INFP 标签不能确定职业兴趣或任务适配。",
-            "面对不确定任务时，ISFP 可能先尝试一个小动作，看现实反馈如何；INFP 可能先在脑中展开多种意义路径，判断哪个方向更真实。前者的风险是只看当下感觉，低估长期结构；后者的风险是意义推演太久，迟迟无法进入现实验证。",
-            "协作中，ISFP 通常更需要尊重个人节奏和表达方式。他们不喜欢被过度管理，也不喜欢被迫用高调语言解释自己。INFP 更需要知道团队为什么要做这件事、自己在其中的价值位置是什么，以及沟通是否保持真诚。如果只给任务不给意义，INFP 容易失去动力。",
-            "职业成长建议也应不同。ISFP 需要练习把感受判断转成可沟通的标准：我喜欢这个方案，是因为质感、效率、舒适度还是价值贴合？INFP 需要练习把价值判断转成可执行的小步：我认同这个方向，下一周可以完成什么具体动作？两者都不能只靠类型决定职业选择。"
+            "视觉艺术不能确认 ISFP，写作不能确认 INFP，两者都能擅长或困难。关注感官细节不表示思考少，谈意义不表示更深刻。类型不能预测后勤、钱或未来规划技能。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "ISFP 在关系里常用行动表达在意。他们可能不擅长长篇解释，但会通过陪伴、审美细节、实际帮助、记住偏好和创造舒服环境来传达关心。别人如果只期待明确语言，可能会误以为他们不够投入；事实上，他们只是更相信具体行为比情绪宣言更可靠。",
-            "INFP 在关系里更重视被理解。他们需要的不只是陪伴，还包括对方愿意听见自己的内在逻辑、价值感、矛盾和想象。一个 INFP 即使外表安静，内心可能已经组织了大量关于关系的解释。如果对方只处理表面问题，而不触碰意义层，他们仍可能觉得孤独。",
-            "冲突中，ISFP 可能先撤退到感受安全的地方，等情绪和身体状态稳定后再决定是否沟通。INFP 则可能在心里反复组织语言，试图找到既不背叛自己、又不伤害对方的表达方式。两者都可能沉默，但 ISFP 的沉默更像保护体验边界，INFP 的沉默更像整理内在价值冲突。",
-            "可执行沟通建议是：和 ISFP 沟通时，少一点抽象追问，多一点具体尊重，例如“你需要空间，还是需要我调整这个安排？”和 INFP 沟通时，少一点只问结果，多一点承认意义，例如“我想理解这件事为什么对你重要。”对两者来说，清楚边界比猜测更有效。"
+            "比较三个能选择信息来源的决定：先想要亲身例子，还是可能意义与结果？为何信任，何时相反方式有用？区分偏好与机会，有时只是没有试行条件。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "给 ISFP 的建议：观察指标：当你感到不舒服时，先区分是环境刺激、他人控制、价值冲突，还是单纯疲惫。练习方式：把“我不想继续”写成一个具体原因，而不是只用撤退表达。复盘问题：我是在保护真实边界，还是因为不想解释而让误解继续扩大？",
-            "给 ISFP 的建议：观察指标：当你用行动照顾别人时，留意对方是否真的理解你的在意。练习方式：在行动之外补一句简短说明，例如“我这样做是因为我在意这件事”。复盘问题：我是否把所有关心都藏在行动里，导致别人无法接住？",
-            "给 ISFP 的建议：观察指标：当你选择一个创作或职业方向时，确认它是否只有当下舒服，还是也有长期承接。练习方式：给每个喜欢的方向写下三项现实条件：时间、技能、反馈来源。复盘问题：这个选择能不能支持我持续表达，而不是只满足一时自由感？",
-            "给 ISFP 的建议：观察指标：当别人评价你时，判断自己是否立刻收回表达。练习方式：把反馈分成事实、审美偏好和对方情绪。复盘问题：我是否把别人的偏好误认为自己的价值被否定？",
-            "给 INFP 的建议：观察指标：当你陷入意义复盘时，确认自己是否还在产生新信息。练习方式：给每次复盘设一个结束点，写下一个最小行动。复盘问题：我现在是在理解自己，还是在用理解拖延现实行动？",
-            "给 INFP 的建议：观察指标：当你觉得不被理解时，先区分对方没有理解、对方不同意、还是你还没有说清。练习方式：把内心复杂感受压缩成三句话：我在意什么，我受影响在哪里，我希望下一步怎么做。复盘问题：我是否期待别人自动读懂我的内在世界？",
-            "给 INFP 的建议：观察指标：当你开始一个理想项目时，看它是否有现实容器。练习方式：把一个大主题拆成一周内可完成的具体成果。复盘问题：我的理想是否已经有可以被别人看见的形状？",
-            "给 INFP 的建议：观察指标：当价值受到挑战时，判断自己是否把不同意见理解成否定人格。练习方式：把“他不理解我”改写成“他不同意这个表达 / 这个方案 / 这个时间点”。复盘问题：我能否保护价值，同时允许现实讨论存在？"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "误解一：ISFP 就是艺术型，INFP 就是文学型。更准确的说法是，ISFP 更偏向用具体体验和审美行动确认真实，INFP 更偏向用内在意义和价值叙事确认真实。具体兴趣仍要看个人经验。",
-            "误解二：ISFP 不思考。ISFP 也会有深层判断，只是他们常通过感受、行动和现实选择来表达，而不是先建立长篇理论。",
-            "误解三：INFP 不行动。INFP 也可以很有行动力，只是他们通常需要先确认行动是否符合价值和意义，否则容易难以持续。",
-            "误解四：ISFP 比 INFP 更现实。ISFP 的确更贴近具体体验，但这不等于缺少理想；INFP 更关注内在意义，也不等于脱离现实。",
-            "误解五：一个人测出 ISFP 或 INFP 就能决定职业。人格类型只能提示偏好，不能替代能力、兴趣、训练、行业环境和真实反馈。",
-            "误解六：测评结果应该用来给人贴标签。更合适的用法是把它当作复盘工具，帮助用户观察自己在行动、关系、压力和选择中的反复模式。"
+            "- [ISFP 基础人格](/zh/personality/isfp)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-      "seo_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+      "seo_description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISFP 与 INFP 的区别：直接体验、可能性与价值",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "medical_or_career_decision_claims": false
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "41e62902dae206acc8735b19ff7e698fd51b5a609d2aeb34bb02556867399a65",
-      "summary": "ISFP 和 INFP 都重视真实、自主、个人价值和不被外界粗暴定义的生活方式，但两者进入世界的入口不同。ISFP 更依靠当下体验、感官真实、具体行动和审美选择来确认什么适合自己；INFP 更依靠内在意义、价值叙事、想象世界和长期理想来解释自己。本文用于帮助用户区分两者在行动节奏、情绪复盘、创造路径、关系表达和成长策略中的差异，不用于诊断、筛选或决定职业关系。",
-      "title": "ISFP 和 INFP 的区别：当下体验、内在意义与价值表达"
+      "source_sha256": "fb4ec6d017258e6d1235b47950fd80a5023fbf7762d13aa316bf2b10deb21678",
+      "summary": "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。",
+      "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/isfp-vs-infp",
-            "name": "ISFP vs INFP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISFP 更容易从具体体验、审美行动和现实感受进入判断；INFP 更容易从内在价值、想象世界和意义叙事进入判断。两者都重视真实和自主，但确认真实的路径不同。"
-            },
-            "name": "ISFP 和 INFP 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能简单排序。ISFP 的创造力常落在具体体验、审美选择、空间、行动和真实生活细节中；INFP 的创造力常落在故事、象征、价值命题、文字和内在世界表达中。"
-            },
-            "name": "ISFP 和 INFP 谁更有创造力？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISFP 通常更贴近当下体验和现实反馈，但这不代表他们没有理想。INFP 更关注内在意义和长期价值，但也可以通过作品、行动和承诺进入现实。"
-            },
-            "name": "ISFP 是不是比 INFP 更现实？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "两者都可能敏感。ISFP 更容易对环境、评价、身体感受和具体体验敏感；INFP 更容易对价值冲突、误解、关系意义和自我一致性感到敏感。"
-            },
-            "name": "INFP 是不是比 ISFP 更敏感？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "可以观察他们如何进入任务。ISFP 往往需要具体材料、现实反馈和自由行动空间；INFP 往往需要理解任务意义、价值位置和表达方向。两者都需要边界和尊重。"
-            },
-            "name": "工作中怎么区分 ISFP 和 INFP？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISFP 常通过陪伴、行动和细节表达在意；INFP 更需要价值和内心世界被理解。和 ISFP 沟通要尊重空间，和 INFP 沟通要认真听见意义。"
-            },
-            "name": "关系中怎么理解 ISFP 和 INFP 的差异？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "人格结果描述的是偏好倾向，不是固定命运。经验、环境、关系、职业训练和长期复盘都会影响一个人表达类型的方式。"
-            },
-            "name": "ISFP 和 INFP 会随着时间改变吗？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。ISFP / INFP 的对比只能提供行为和偏好线索。职业选择还需要结合 RIASEC 职业兴趣、Big Five 特质维度、技能证据、现实机会和长期反馈。"
-            },
-            "name": "这个结果能不能决定职业选择？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ISFP",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/isfp-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INFP",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/infp-a"
-          }
-        ]
-      },
-      "name": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+      "@type": "AboutPage",
+      "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/isfp-vs-infp",
+      "name": "ISFP 与 INFP 的区别：直接体验、可能性与价值",
       "url": "https://fermatmind.com/zh/personality/isfp-vs-infp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ISFP 与 INFP 共用 I、F、P，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性。差异不排名创造力、深度、善意或艺术能力。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者都描述内向、情感、知觉：内部思考、价值与对人的影响、向新信息保留空间。类型叙述可能都看选择是否表达个人价值，不表示价值或表达方式相同。\n\nISFP 式问题可能问直接体验是什么样，INFP 式问题可能问打开什么可能与意义。两者都能用经验和想象。实感不表示思考浅，直觉不证明创意更高。\n\n功能栈理论常安排 ISFP 为 Fi–Se–Ni–Te，INFP 为 Fi–Ne–Si–Te。这是解释惯例，不是已测心理机制。A/T 是另外扩展，不能确定 S/N。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | ISFP | INFP |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式、意义与可能性 |\n| 原创学习例子 | 体验小部分活动并检查感受 | 探索活动意味什么、能通向什么 |\n| 可能盲点 | 用一次体验代替代表性检查 | 发展有意义解释但没有实际试行 |\n| 共同实践 | 比较另一例子及其条件 | 尝试小版本，核实真实条件 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：考虑创作课程。一种方式试样课，注意材料、节奏、互动；另一种探索未来能做的工作及长期价值。结合试行、日常任务、成本核查。做法不能确认类型。\n\n原创关系情景：朋友选活动。一方说明上次喜欢什么，另一方想象新可能和意义。问现在想要什么，选可行体验。不把具体偏好解释为缺乏想象，也不把可能性解释为不实际。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "视觉艺术不能确认 ISFP，写作不能确认 INFP，两者都能擅长或困难。关注感官细节不表示思考少，谈意义不表示更深刻。类型不能预测后勤、钱或未来规划技能。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "比较三个能选择信息来源的决定：先想要亲身例子，还是可能意义与结果？为何信任，何时相反方式有用？区分偏好与机会，有时只是没有试行条件。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "这是刻板印象，不是定型或能力规则。艺术兴趣和技能需要信息偏好之外的证据。",
+              "question": "ISFP 是画家，INFP 是作家吗？"
+            },
+            {
+              "answer": "可以。实感是偏好词汇，不限制理解或想象；INFP 也能认真关注具体细节。",
+              "question": "ISFP 可以喜欢抽象知识吗？"
+            },
+            {
+              "answer": "部分功能栈理论安排共同领先 Fi、中间位置不同。这是理论阅读，不是已测共享心理机制。",
+              "question": "两者共用认知功能吗？"
+            },
+            {
+              "answer": "记录处境与反例，两种信息方式都可能有用。阅读练习不能验证分类结果。",
+              "question": "我同时喜欢体验与可能性怎么办？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ISFP 基础人格](/zh/personality/isfp)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
       "jsonld_overrides_json": null,
-      "og_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+      "og_description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+      "og_title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-      "seo_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
-      "twitter_description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+      "seo_description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind",
+      "twitter_description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格"
+      "twitter_title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/isfp-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/isfp-vs-infp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/isfp-vs-infp",
-      "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
+      "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "d8e04cf57c77797e99cc6fcee74d16efd8043934",
+      "metadata_fingerprint": "26de56c19cfb63dea872c669389eb8fe664451df",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-        "title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+        "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/isfp-vs-infp"
       },
@@ -1043,24 +869,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格",
+      "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "对比 ISFP 与 INFP 在价值表达、现实体验、想象世界、行动节奏、关系沟通和成长策略中的差异。",
-        "title": "ISFP 和 INFP 区别：如何区分探险家与调停者人格"
+        "description": "对照 ISFP 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ISFP 与 INFP 的区别：直接体验、可能性与价值 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "2e29342c9570c07a53a45902643d13422722d2cd5e9b487ddb3c0b59eca3a6a7"
+  "source_content_sha256": "fff59cef1bc3e85765aa092f09175af0ea5b3f25ca3d91d5a1fd0cfd88b7fa9c"
 }

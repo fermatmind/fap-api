@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/estj",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "4964d6c7ea6b96927950b82edf475818953d8939",
+      "answer_fingerprint": "83f975f6fb117f4cf31595ad1329b81239aac17b",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "09b25d0423b30ad0c476d20e9276ebcce0c923ad",
-        "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
+        "877c0e0d6aa2931462b286287cd0b8eb392791d3",
+        "8bf1dc6431c1584a899b7736507dfe42ce637f4e",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Evaluate the rule's purpose and actual effect. Clear standards need an appropriate exception and a way to report a problem, rather than automatic enforcement.",
+          "key": "faq-0",
+          "question": "Does ESTJ mean enforcing every rule?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/estj",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does ESTJ indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for ESTJ?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do ESTJ-A and ESTJ-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can ESTJ predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "8bf1dc6431c1584a899b7736507dfe42ce637f4e",
+      "next_step_blocks": [],
       "primary_content_ref": "ESTJ",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,47 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/estj",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "09b25d0423b30ad0c476d20e9276ebcce0c923ad",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "877c0e0d6aa2931462b286287cd0b8eb392791d3",
       "summary_blocks": [
         {
-          "body": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+          "body": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ESTJ - Executive"
+          "title": "ESTJ Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/estj-a",
+        "label": "ESTJ-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/estj-t",
+        "label": "ESTJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/estj-a-vs-estj-t",
+        "label": "ESTJ-A vs ESTJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/estj-vs-entj",
+        "label": "ESTJ vs ENTJ",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/estj",
@@ -162,7 +156,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "9671b3962c4d73e6965b870ebbebfcdf6728ceab",
+      "landing_fingerprint": "8bf1dc6431c1584a899b7736507dfe42ce637f4e",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESTJ",
       "public_surface_ref": null,
@@ -177,10 +171,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+          "body": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ESTJ - Executive"
+          "title": "ESTJ Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +192,7 @@
       "display_type": "ESTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Executive",
         "rarity": null,
@@ -207,105 +201,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
+          "body_md": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ESTJ is commonly described as Te–Si–Ne–Fi. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESTJ-style description asks what needs doing, which facts apply and how responsibilities can be made clear. You might prefer discussing a practical decision and assigning an actionable next step. This can help a group turn an intention into delivery. A possible blind spot is treating an established standard as appropriate before checking its purpose in the present situation.\n\nCounterexample: someone who likes structure can welcome experimentation, and an outgoing person can listen carefully. Strictness, punctuality and job seniority cannot identify ESTJ. Ask how you choose a standard when the old one no longer fits.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a rota repeatedly leaves one shift understaffed. You insist that everyone follow the schedule, but a colleague points out that travel time makes a handover impractical. Check the real constraint before enforcing the old arrangement. A workable standard should address the job, not merely reproduce the document.\n\nTry coordinating a small operational task: establish requirements, consult those doing the work and check the outcome. Separate your interest in organization from demonstrated management skill. Operations, administration and supervision require knowledge, listening and appropriate authority; letters cannot supply them.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: shared chores are uneven, so you make a detailed schedule without consultation. Ask how the work and time should be divided before deciding the method. Clear expectations help when everyone can influence them.\n\nExplain the reason for a request and invite a workable alternative. Keeping commitments matters, but a disagreement about the process is not necessarily a disagreement about responsibility. No type pairing guarantees a good relationship.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several people depart from a plan and you respond by adding more rules. Find whether the failure comes from unclear expectations, missing resources or a genuinely inappropriate choice. Change the relevant cause rather than monitoring every detail.\n\nImpatience can reflect fatigue, incentives or workload. It cannot establish ESTJ or justify harsh treatment.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one rule you expect others to follow, write its purpose and the cost of applying it. Ask someone affected to propose an alternative that meets the same purpose. Test it on a small scale.\n\nReview whether the standard improved the actual outcome and whether concerns could be raised. Keep a case where flexibility helped more than consistency.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESTJ-A](/en/personality/estj-a)\n- [ESTJ-T](/en/personality/estj-t)\n- [ESTJ-A vs ESTJ-T](/en/personality/estj-a-vs-estj-t)\n- [ESTJ vs ENTJ](/en/personality/estj-vs-entj)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
+                "answer": "Evaluate the rule's purpose and actual effect. Clear standards need an appropriate exception and a way to report a problem, rather than automatic enforcement.",
+                "question": "Does ESTJ mean enforcing every rule?"
               },
               {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESTJ indicate intelligence or ability?"
+              },
+              {
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESTJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESTJ-A and ESTJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESTJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/estj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
+        "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/estj",
+          "name": "ESTJ Personality",
+          "url": "https://fermatmind.com/en/personality/estj"
+        },
+        "og_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESTJ Personality Guide",
+        "og_title": "ESTJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESTJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
+        "title": "ESTJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESTJ Personality Guide"
+        "twitter_title": "ESTJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
+        "summary": "",
         "tagline": "Executive",
-        "title": "ESTJ - Executive"
+        "title": "ESTJ Personality"
       },
       "variant_code": null
     },
@@ -321,7 +356,7 @@
       "display_type": "ESTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Executive",
         "rarity": null,
@@ -330,115 +365,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
+          "body_md": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ESTJ is commonly described as Te–Si–Ne–Fi. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESTJ-style description asks what needs doing, which facts apply and how responsibilities can be made clear. You might prefer discussing a practical decision and assigning an actionable next step. This can help a group turn an intention into delivery. A possible blind spot is treating an established standard as appropriate before checking its purpose in the present situation.\n\nCounterexample: someone who likes structure can welcome experimentation, and an outgoing person can listen carefully. Strictness, punctuality and job seniority cannot identify ESTJ. Ask how you choose a standard when the old one no longer fits.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a rota repeatedly leaves one shift understaffed. You insist that everyone follow the schedule, but a colleague points out that travel time makes a handover impractical. Check the real constraint before enforcing the old arrangement. A workable standard should address the job, not merely reproduce the document.\n\nTry coordinating a small operational task: establish requirements, consult those doing the work and check the outcome. Separate your interest in organization from demonstrated management skill. Operations, administration and supervision require knowledge, listening and appropriate authority; letters cannot supply them.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: shared chores are uneven, so you make a detailed schedule without consultation. Ask how the work and time should be divided before deciding the method. Clear expectations help when everyone can influence them.\n\nExplain the reason for a request and invite a workable alternative. Keeping commitments matters, but a disagreement about the process is not necessarily a disagreement about responsibility. No type pairing guarantees a good relationship.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: several people depart from a plan and you respond by adding more rules. Find whether the failure comes from unclear expectations, missing resources or a genuinely inappropriate choice. Change the relevant cause rather than monitoring every detail.\n\nImpatience can reflect fatigue, incentives or workload. It cannot establish ESTJ or justify harsh treatment.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one rule you expect others to follow, write its purpose and the cost of applying it. Ask someone affected to propose an alternative that meets the same purpose. Test it on a small scale.\n\nReview whether the standard improved the actual outcome and whether concerns could be raised. Keep a case where flexibility helped more than consistency.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESTJ-A](/en/personality/estj-a)\n- [ESTJ-T](/en/personality/estj-t)\n- [ESTJ-A vs ESTJ-T](/en/personality/estj-a-vs-estj-t)\n- [ESTJ vs ENTJ](/en/personality/estj-vs-entj)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
-          "is_enabled": false,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [],
-            "recommended_jobs": [],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
           "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": false,
-          "key": "growth.strengths",
-          "payload": {
-            "items": []
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.weaknesses",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
+                "answer": "Evaluate the rule's purpose and actual effect. Clear standards need an appropriate exception and a way to report a problem, rather than automatic enforcement.",
+                "question": "Does ESTJ mean enforcing every rule?"
               },
               {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESTJ indicate intelligence or ability?"
+              },
+              {
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESTJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESTJ-A and ESTJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESTJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/estj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
+        "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/estj",
+          "name": "ESTJ Personality",
+          "url": "https://fermatmind.com/en/personality/estj"
+        },
+        "og_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESTJ Personality Guide",
+        "og_title": "ESTJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESTJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
+        "title": "ESTJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESTJ Personality Guide"
+        "twitter_title": "ESTJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
+        "summary": "",
         "tagline": "Executive",
-        "title": "ESTJ - Executive"
+        "title": "ESTJ Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ESTJ",
-      "excerpt": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+      "excerpt": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
       "hero_image_url": null,
       "hero_kicker": "Executive",
       "hero_quote": null,
-      "hero_summary": "A guide to ESTJ preferences: Extraversion, Sensing, Thinking, and Judging.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -450,66 +526,90 @@
       "slug": "estj",
       "status": "published",
       "subtitle": null,
-      "title": "ESTJ - Executive",
+      "title": "ESTJ Personality",
       "type_code": "ESTJ",
       "type_name": "Executive"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "ESTJ combines preferences for Extraversion, Sensing, Thinking, and Judging. Compare your use of concrete information, consistency in decision criteria, and preference for organizing next steps. These are reflection questions, not evidence that you are skilled at a task or suited to a particular occupation. Read the [preference definitions](https://www.myersbriggs.org/my-mbti-personality-type/the-mbti-preferences/) and compare them with examples from your own experience.",
+        "body_md": "ESTJ describes Extraversion, Sensing, Thinking and Judging preferences. Its narrative emphasizes coordinating concrete responsibilities with clear standards. It does not establish managerial ability, fairness, obedience or a right to enforce your preferred method.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, ESTJ is commonly described as Te–Si–Ne–Fi. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An ESTJ-style description asks what needs doing, which facts apply and how responsibilities can be made clear. You might prefer discussing a practical decision and assigning an actionable next step. This can help a group turn an intention into delivery. A possible blind spot is treating an established standard as appropriate before checking its purpose in the present situation.\n\nCounterexample: someone who likes structure can welcome experimentation, and an outgoing person can listen carefully. Strictness, punctuality and job seniority cannot identify ESTJ. Ask how you choose a standard when the old one no longer fits.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Career choices need evidence about your interests, demonstrated skills, experience, values, and the conditions of a specific job. This page does not recommend or rule out jobs based on ESTJ. Use a course, project, or appropriately supervised task to check your own fit.",
+        "body_md": "Original scenario: a rota repeatedly leaves one shift understaffed. You insist that everyone follow the schedule, but a colleague points out that travel time makes a handover impractical. Check the real constraint before enforcing the old arrangement. A workable standard should address the job, not merely reproduce the document.\n\nTry coordinating a small operational task: establish requirements, consult those doing the work and check the outcome. Separate your interest in organization from demonstrated management skill. Operations, administration and supervision require knowledge, listening and appropriate authority; letters cannot supply them.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: shared chores are uneven, so you make a detailed schedule without consultation. Ask how the work and time should be divided before deciding the method. Clear expectations help when everyone can influence them.\n\nExplain the reason for a request and invite a workable alternative. Keeping commitments matters, but a disagreement about the process is not necessarily a disagreement about responsibility. No type pairing guarantees a good relationship.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "avoid_jobs": [],
-          "recommended_jobs": [],
-          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
-        "sort_order": 70,
-        "title": "Preferred roles"
-      },
-      {
-        "body_html": null,
-        "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+        "body_md": "Original scenario: several people depart from a plan and you respond by adding more rules. Find whether the failure comes from unclear expectations, missing resources or a genuinely inappropriate choice. Change the relevant cause rather than monitoring every detail.\n\nImpatience can reflect fatigue, incentives or workload. It cannot establish ESTJ or justify harsh treatment.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
-        "sort_order": 90,
-        "title": "Growth summary"
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
       },
       {
         "body_html": null,
-        "body_md": null,
-        "is_enabled": false,
-        "payload_json": {
-          "items": []
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
+        "body_md": "For one rule you expect others to follow, write its purpose and the cost of applying it. Ask someone affected to propose an alternative that meets the same purpose. Test it on a small scale.\n\nReview whether the standard improved the actual outcome and whether concerns could be raised. Keep a case where flexibility helped more than consistency.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ESTJ-A](/en/personality/estj-a)\n- [ESTJ-T](/en/personality/estj-t)\n- [ESTJ-A vs ESTJ-T](/en/personality/estj-a-vs-estj-t)\n- [ESTJ vs ENTJ](/en/personality/estj-vs-entj)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 70,
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
@@ -518,335 +618,74 @@
         "payload_json": {
           "items": [
             {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
+              "answer": "Evaluate the rule's purpose and actual effect. Clear standards need an appropriate exception and a way to report a problem, rather than automatic enforcement.",
+              "question": "Does ESTJ mean enforcing every rule?"
             },
             {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does ESTJ indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for ESTJ?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do ESTJ-A and ESTJ-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can ESTJ predict relationship compatibility?"
             }
           ]
         },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
       },
       {
         "body_html": null,
-        "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "ESTJ-A and ESTJ-T share the same ESTJ core. Within structure, decisions and operational follow-through, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "ESTJ-A and ESTJ-T share the same ESTJ core. Within structure, decisions and operational follow-through, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around structure, decisions and operational follow-through, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESTJ core.",
-              "question": "What is the main ESTJ-A vs ESTJ-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. ESTJ situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is ESTJ-A better than ESTJ-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to structure, decisions and operational follow-through-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am ESTJ-A or ESTJ-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support ESTJ work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "ESTJ",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/estj-a-vs-estj-t",
-            "url": "https://fermatmind.com/en/personality/estj-a-vs-estj-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "ESTJ-A profile",
-              "href": "/en/personality/estj-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ESTJ-T profile",
-              "href": "/en/personality/estj-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare ESTJ-A and ESTJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/estj-a-vs-estj-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare ESTJ-A and ESTJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare ESTJ-A and ESTJ-T through structure, decisions and operational follow-through, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/estj-a-vs-estj-t with structure, decisions and operational follow-through rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around structure, decisions and operational follow-through, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESTJ core.",
-                  "question": "What is the main ESTJ-A vs ESTJ-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. ESTJ situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is ESTJ-A better than ESTJ-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to structure, decisions and operational follow-through-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am ESTJ-A or ESTJ-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support ESTJ work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "ESTJ-A vs ESTJ-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "ESTJ-A profile",
-                  "href": "/en/personality/estj-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "ESTJ-T profile",
-                  "href": "/en/personality/estj-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "ESTJ-A and ESTJ-T share the same ESTJ core. Within structure, decisions and operational follow-through, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "ESTJ-A vs ESTJ-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/estj-a-vs-estj-t"
-          },
-          "seo": {
-            "description": "Compare ESTJ-A and ESTJ-T through structure, decisions and operational follow-through, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "ESTJ-A vs ESTJ-T: Key Differences",
-            "title": "ESTJ-A vs ESTJ-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare ESTJ-A and ESTJ-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESTJ-A vs ESTJ-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/estj-a-vs-estj-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/estj-a-vs-estj-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ESTJ-A vs ESTJ-T: Key Differences"
+        "section_key": "sources_and_method",
+        "sort_order": 90,
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/estj",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
-      "seo_title": "ESTJ Personality Guide",
-      "twitter_description": null,
+      "og_title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/estj-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/estj-a"
+        "en": "https://fermatmind.com/en/personality/estj",
+        "zh-CN": "https://fermatmind.com/zh/personality/estj"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/estj-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/estj",
+      "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "09b25d0423b30ad0c476d20e9276ebcce0c923ad",
+      "metadata_fingerprint": "877c0e0d6aa2931462b286287cd0b8eb392791d3",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
-        "title": "ESTJ Personality Guide",
+        "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/estj-a"
+        "url": "https://fermatmind.com/en/personality/estj"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -855,18 +694,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ESTJ Personality Guide",
+      "title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTJ personality type.",
-        "title": "ESTJ Personality Guide"
+        "description": "Understand ESTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESTJ Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "5125ef18f1e5e0c9ed34d07eecf3a5515385bab2857c1cc5f80d8ce4ab4774e1"
+  "source_content_sha256": "1605e4911f0acac89967e275a3536329b7a9249ce7ca3260009828af596db647"
 }

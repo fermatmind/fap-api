@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/istj-vs-isfj",
@@ -11,10 +11,88 @@
   },
   "locale": "en",
   "payload": {
-    "answer_surface_v1": [],
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 11,
+          "key": "compare",
+          "title": "compare"
+        },
+        {
+          "count": 7,
+          "key": "faq",
+          "title": "faq"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "772c046e83368b307a87fd1b13fb1905e2fed8be",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
+      ],
+      "faq_blocks": [
+        {
+          "answer": "Yes. T/F does not assign empathy or reasoning ability. Look at actual actions and specific reasoning rather than stereotypes.",
+          "key": "faq-0",
+          "question": "Can an ISTJ be caring and an ISFJ be analytical?"
+        },
+        {
+          "answer": "No. A helpful action can reflect a value, a duty, a skill or a practical rule. Compare your decision preferences across situations.",
+          "key": "faq-1",
+          "question": "Does helping people identify ISFJ?"
+        },
+        {
+          "answer": "No. A consistent arrangement can serve values and protect people. Consider the criteria you preferred, not only the visible result.",
+          "key": "faq-2",
+          "question": "Does consistency always mean Thinking?"
+        },
+        {
+          "answer": "It can start a discussion about approaches, but it cannot establish competence or assign people to jobs. Evaluate actual skills, needs and responsibility.",
+          "key": "faq-3",
+          "question": "Can we use the comparison to divide team roles?"
+        }
+      ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "istj-vs-isfj",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "449c6a365e7e6cb061ae3879e911653bf5e4dc7e",
+      "summary_blocks": [
+        {
+          "body": "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility.",
+          "href": null,
+          "key": "comparison_summary",
+          "kind": "answer_first",
+          "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions"
+        }
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
+    },
     "comparison": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/istj-vs-isfj"
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
+        "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -24,71 +102,52 @@
         "ISFJ"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/istj-vs-isfj",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "istj-vs-isfj",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
+      "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "ISTJ may protect reliability more through standards, records, and responsibility boundaries, while ISFJ may protect it more through attention to needs, context, and relationship continuity.",
-          "question": "What is the biggest difference between ISTJ and ISFJ?"
+          "answer": "Yes. T/F does not assign empathy or reasoning ability. Look at actual actions and specific reasoning rather than stereotypes.",
+          "question": "Can an ISTJ be caring and an ISFJ be analytical?"
         },
         {
-          "answer": "Both may be conscientious, quiet, careful, and committed. The distinction often appears in what they protect first when a system problem also affects people.",
-          "question": "Why are ISTJ and ISFJ easy to confuse?"
+          "answer": "No. A helpful action can reflect a value, a duty, a skill or a practical rule. Compare your decision preferences across situations.",
+          "question": "Does helping people identify ISFJ?"
         },
         {
-          "answer": "ISTJ may focus first on process reliability and accountability; ISFJ may focus first on practical support and continuity for the people affected. Strong work can require both.",
-          "question": "How may they differ at work?"
+          "answer": "No. A consistent arrangement can serve values and protect people. Consider the criteria you preferred, not only the visible result.",
+          "question": "Does consistency always mean Thinking?"
         },
         {
-          "answer": "Do not use warmth or seriousness as a shortcut. Look at repeated decisions, evidence, boundaries, and behavior across contexts.",
-          "question": "What is a common mistake when comparing them?"
-        },
-        {
-          "answer": "No. It can support reflection only. Important decisions require evidence about skills, values, interests, behavior, constraints, and the actual environment.",
-          "question": "Can this comparison decide a career or relationship?"
+          "answer": "It can start a discussion about approaches, but it cannot establish competence or assign people to jobs. Evaluate actual skills, needs and responsibility.",
+          "question": "Can we use the comparison to divide team roles?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ISTJ profile",
-          "href": "/en/personality/istj-a",
-          "label": "ISTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/istj",
+          "label": "ISTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFJ profile",
-          "href": "/en/personality/isfj-a",
-          "label": "ISFJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/isfj",
+          "label": "ISFJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "Related ESFJ profile",
-          "href": "/en/personality/esfj-a",
-          "label": "Related ESFJ profile",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "ISTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -101,84 +160,105 @@
       "sections": [
         {
           "body": [
-            "ISTJ may first ask which rule, record, duty, or quality standard keeps the situation reliable, while ISFJ may first ask who is affected, which need could be missed, and what practical support keeps the relationship or group stable. Both can care about people and systems; the useful question is what they tend to protect first when time, information, or resources are limited."
+            "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ISFJ": "Needs, habits, and remembered relationship context",
-              "ISTJ": "Process, evidence, and responsibility boundaries",
-              "dimension": "Source of reliability"
-            },
-            {
-              "ISFJ": "May first check who was overlooked or hurt",
-              "ISTJ": "May first check which standard or agreement was broken",
-              "dimension": "During conflict"
-            },
-            {
-              "ISFJ": "Service, support, and attentive coordination",
-              "ISTJ": "Review, compliance, and dependable delivery",
-              "dimension": "Possible work contribution"
-            },
-            {
-              "ISFJ": "May overlook personal boundaries or find it hard to say no",
-              "ISTJ": "May underweight emotional cost",
-              "dimension": "Possible blind spot"
-            }
-          ],
-          "title": "Quick comparison table"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both types may be quiet, conscientious, attentive to detail, and serious about commitments, so a reserved style or preference for routine does not distinguish them. Look at repeated decisions: ISTJ may stabilize the system so people can rely on it, while ISFJ may stabilize the experience so people feel supported within it. Mature behavior often combines both concerns."
+            "Both describe Introversion, Sensing and Judging: inward reflection, concrete information and experience, and organized outer-world arrangements. Their shared narratives may include maintaining a considered commitment. Whether a person is reliable must be checked through actual behavior.",
+            "An ISTJ-style question might ask which consistent rule applies; an ISFJ-style question might ask what a particular person needs and which value the arrangement serves. Both can use criteria and attend to people. A rule can protect people, and a considerate decision can require careful logic.",
+            "Function-stack theory commonly uses Si–Te–Fi–Ne for ISTJ and Si–Fe–Ti–Ne for ISFJ. This is an interpretive account, not proof of measured mental mechanisms. A/T is outside official MBTI and does not replace T/F."
           ],
-          "id": "easy_misread",
-          "title": "Why they can be easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "If a team schedule fails, ISTJ may trace the process, ownership, and record that allowed the error, while ISFJ may first notice who absorbed the disruption and what support is needed. A complete response repairs both the process and the human impact. At work, ISTJ can contribute consistency and auditability, and ISFJ can contribute continuity and practical care; these are possible task preferences, not occupational prescriptions."
+            "| Observation | ISTJ | ISFJ |\n| --- | --- | --- |\n| Code difference | Thinking (T): logical consistency and impersonal criteria | Feeling (F): values and effects on people |\n| Original rota example | Check whether the arrangement applies a consistent standard | Check whether the arrangement addresses people's needs |\n| Possible blind spot | Assuming equal application means the actual effect is fair | Adapting a request without explaining the standard to others |\n| Shared practical step | Inspect the effect of the rule in this situation | Make the reason for an exception explicit |"
           ],
-          "id": "real_scenario_differences",
-          "title": "Differences in a real scenario"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not decide from whether someone appears warm, serious, traditional, or sociable; those behaviors vary with culture, role, experience, and safety. When resources are limited, observe whether the person tends to protect institutional order first or people's feelings and safety first. MBTI cannot establish kindness, competence, loyalty, emotional intelligence, or job suitability; use observable behavior and context for those judgments."
+            "Original work scenario: a colleague requests a rota change. One approach checks the agreed allocation rule; another considers the colleague's caregiving constraint. State the purpose of the rule, compare the practical effects and explain any exception consistently. Neither approach by itself establishes ISTJ or ISFJ.",
+            "Original relationship scenario: a shared errand is unfinished. One person wants a clear allocation for next time; another first asks why the other person could not do it. Combine understanding with a realistic agreement instead of assuming that a focus on tasks lacks care or that a focus on circumstances excuses everything."
           ],
-          "id": "do_not_misjudge",
-          "title": "Do not use these shortcuts"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual ISTJ and ISFJ profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion. Use those pages as reflection prompts and test any interpretation against repeated behavior, other personality traits, interests, skills, values, and environmental demands."
+            "ISTJ is not the uncaring version of ISFJ, and ISFJ is not the less rational version of ISTJ. Both can set boundaries, care for people, verify facts and fulfill commitments. Being helpful, precise or quiet cannot determine T/F. A profession or gender is not a typing rule."
           ],
-          "id": "next_reading",
-          "title": "A useful next step"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare three decisions where a consistent rule and a person's circumstances pulled in different directions. What did you consider first, how did you explain the choice and what did you learn from its effect? Include a case where you preferred the other approach and separate preference from what your role required."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [ISTJ base profile](/en/personality/istj)\n- [ISFJ base profile](/en/personality/isfj)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-      "seo_title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
-      "sitemap_eligible": false,
+      "seo_description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "c1d4707c1e4826bf3ded3484c22909cbe866adc8a89efba726422cd2da027b18",
-      "summary": "ISTJ and ISFJ preferences may both look dependable, careful, reserved, and committed. ISTJ may protect reliability through standards, records, procedures, and clear responsibility boundaries. ISFJ may protect reliability through attention to needs, remembered context, practical support, and relationship continuity. The difference is not who cares more or who is more responsible.",
-      "title": "ISTJ vs ISFJ: Reliability Through Standards and Through Care"
+      "source_sha256": "3574fbcf0358eaac05e0ac47679d466a4ee8aeb207cb232370da74d65efb087a",
+      "summary": "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility.",
+      "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions"
     },
     "comparison_public_projection_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/istj-vs-isfj"
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
+        "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -188,71 +268,52 @@
         "ISFJ"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/istj-vs-isfj",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "istj-vs-isfj",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
+      "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "ISTJ may protect reliability more through standards, records, and responsibility boundaries, while ISFJ may protect it more through attention to needs, context, and relationship continuity.",
-          "question": "What is the biggest difference between ISTJ and ISFJ?"
+          "answer": "Yes. T/F does not assign empathy or reasoning ability. Look at actual actions and specific reasoning rather than stereotypes.",
+          "question": "Can an ISTJ be caring and an ISFJ be analytical?"
         },
         {
-          "answer": "Both may be conscientious, quiet, careful, and committed. The distinction often appears in what they protect first when a system problem also affects people.",
-          "question": "Why are ISTJ and ISFJ easy to confuse?"
+          "answer": "No. A helpful action can reflect a value, a duty, a skill or a practical rule. Compare your decision preferences across situations.",
+          "question": "Does helping people identify ISFJ?"
         },
         {
-          "answer": "ISTJ may focus first on process reliability and accountability; ISFJ may focus first on practical support and continuity for the people affected. Strong work can require both.",
-          "question": "How may they differ at work?"
+          "answer": "No. A consistent arrangement can serve values and protect people. Consider the criteria you preferred, not only the visible result.",
+          "question": "Does consistency always mean Thinking?"
         },
         {
-          "answer": "Do not use warmth or seriousness as a shortcut. Look at repeated decisions, evidence, boundaries, and behavior across contexts.",
-          "question": "What is a common mistake when comparing them?"
-        },
-        {
-          "answer": "No. It can support reflection only. Important decisions require evidence about skills, values, interests, behavior, constraints, and the actual environment.",
-          "question": "Can this comparison decide a career or relationship?"
+          "answer": "It can start a discussion about approaches, but it cannot establish competence or assign people to jobs. Evaluate actual skills, needs and responsibility.",
+          "question": "Can we use the comparison to divide team roles?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ISTJ profile",
-          "href": "/en/personality/istj-a",
-          "label": "ISTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/istj",
+          "label": "ISTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFJ profile",
-          "href": "/en/personality/isfj-a",
-          "label": "ISFJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/isfj",
+          "label": "ISFJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "Related ESFJ profile",
-          "href": "/en/personality/esfj-a",
-          "label": "Related ESFJ profile",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "ISTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -265,221 +326,273 @@
       "sections": [
         {
           "body": [
-            "ISTJ may first ask which rule, record, duty, or quality standard keeps the situation reliable, while ISFJ may first ask who is affected, which need could be missed, and what practical support keeps the relationship or group stable. Both can care about people and systems; the useful question is what they tend to protect first when time, information, or resources are limited."
+            "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ISFJ": "Needs, habits, and remembered relationship context",
-              "ISTJ": "Process, evidence, and responsibility boundaries",
-              "dimension": "Source of reliability"
-            },
-            {
-              "ISFJ": "May first check who was overlooked or hurt",
-              "ISTJ": "May first check which standard or agreement was broken",
-              "dimension": "During conflict"
-            },
-            {
-              "ISFJ": "Service, support, and attentive coordination",
-              "ISTJ": "Review, compliance, and dependable delivery",
-              "dimension": "Possible work contribution"
-            },
-            {
-              "ISFJ": "May overlook personal boundaries or find it hard to say no",
-              "ISTJ": "May underweight emotional cost",
-              "dimension": "Possible blind spot"
-            }
-          ],
-          "title": "Quick comparison table"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "Both types may be quiet, conscientious, attentive to detail, and serious about commitments, so a reserved style or preference for routine does not distinguish them. Look at repeated decisions: ISTJ may stabilize the system so people can rely on it, while ISFJ may stabilize the experience so people feel supported within it. Mature behavior often combines both concerns."
+            "Both describe Introversion, Sensing and Judging: inward reflection, concrete information and experience, and organized outer-world arrangements. Their shared narratives may include maintaining a considered commitment. Whether a person is reliable must be checked through actual behavior.",
+            "An ISTJ-style question might ask which consistent rule applies; an ISFJ-style question might ask what a particular person needs and which value the arrangement serves. Both can use criteria and attend to people. A rule can protect people, and a considerate decision can require careful logic.",
+            "Function-stack theory commonly uses Si–Te–Fi–Ne for ISTJ and Si–Fe–Ti–Ne for ISFJ. This is an interpretive account, not proof of measured mental mechanisms. A/T is outside official MBTI and does not replace T/F."
           ],
-          "id": "easy_misread",
-          "title": "Why they can be easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "If a team schedule fails, ISTJ may trace the process, ownership, and record that allowed the error, while ISFJ may first notice who absorbed the disruption and what support is needed. A complete response repairs both the process and the human impact. At work, ISTJ can contribute consistency and auditability, and ISFJ can contribute continuity and practical care; these are possible task preferences, not occupational prescriptions."
+            "| Observation | ISTJ | ISFJ |\n| --- | --- | --- |\n| Code difference | Thinking (T): logical consistency and impersonal criteria | Feeling (F): values and effects on people |\n| Original rota example | Check whether the arrangement applies a consistent standard | Check whether the arrangement addresses people's needs |\n| Possible blind spot | Assuming equal application means the actual effect is fair | Adapting a request without explaining the standard to others |\n| Shared practical step | Inspect the effect of the rule in this situation | Make the reason for an exception explicit |"
           ],
-          "id": "real_scenario_differences",
-          "title": "Differences in a real scenario"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not decide from whether someone appears warm, serious, traditional, or sociable; those behaviors vary with culture, role, experience, and safety. When resources are limited, observe whether the person tends to protect institutional order first or people's feelings and safety first. MBTI cannot establish kindness, competence, loyalty, emotional intelligence, or job suitability; use observable behavior and context for those judgments."
+            "Original work scenario: a colleague requests a rota change. One approach checks the agreed allocation rule; another considers the colleague's caregiving constraint. State the purpose of the rule, compare the practical effects and explain any exception consistently. Neither approach by itself establishes ISTJ or ISFJ.",
+            "Original relationship scenario: a shared errand is unfinished. One person wants a clear allocation for next time; another first asks why the other person could not do it. Combine understanding with a realistic agreement instead of assuming that a focus on tasks lacks care or that a focus on circumstances excuses everything."
           ],
-          "id": "do_not_misjudge",
-          "title": "Do not use these shortcuts"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual ISTJ and ISFJ profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion. Use those pages as reflection prompts and test any interpretation against repeated behavior, other personality traits, interests, skills, values, and environmental demands."
+            "ISTJ is not the uncaring version of ISFJ, and ISFJ is not the less rational version of ISTJ. Both can set boundaries, care for people, verify facts and fulfill commitments. Being helpful, precise or quiet cannot determine T/F. A profession or gender is not a typing rule."
           ],
-          "id": "next_reading",
-          "title": "A useful next step"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare three decisions where a consistent rule and a person's circumstances pulled in different directions. What did you consider first, how did you explain the choice and what did you learn from its effect? Include a case where you preferred the other approach and separate preference from what your role required."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [ISTJ base profile](/en/personality/istj)\n- [ISFJ base profile](/en/personality/isfj)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-      "seo_title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
-      "sitemap_eligible": false,
+      "seo_description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "c1d4707c1e4826bf3ded3484c22909cbe866adc8a89efba726422cd2da027b18",
-      "summary": "ISTJ and ISFJ preferences may both look dependable, careful, reserved, and committed. ISTJ may protect reliability through standards, records, procedures, and clear responsibility boundaries. ISFJ may protect reliability through attention to needs, remembered context, practical support, and relationship continuity. The difference is not who cares more or who is more responsible.",
-      "title": "ISTJ vs ISFJ: Reliability Through Standards and Through Care"
+      "source_sha256": "3574fbcf0358eaac05e0ac47679d466a4ee8aeb207cb232370da74d65efb087a",
+      "summary": "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility.",
+      "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality",
-            "name": "Personality types",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality/istj-vs-isfj",
-            "name": "ISTJ vs ISFJ",
-            "position": 2
-          }
-        ]
-      },
-      "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISTJ may protect reliability more through standards, records, and responsibility boundaries, while ISFJ may protect it more through attention to needs, context, and relationship continuity."
-            },
-            "name": "What is the biggest difference between ISTJ and ISFJ?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Both may be conscientious, quiet, careful, and committed. The distinction often appears in what they protect first when a system problem also affects people."
-            },
-            "name": "Why are ISTJ and ISFJ easy to confuse?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISTJ may focus first on process reliability and accountability; ISFJ may focus first on practical support and continuity for the people affected. Strong work can require both."
-            },
-            "name": "How may they differ at work?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Do not use warmth or seriousness as a shortcut. Look at repeated decisions, evidence, boundaries, and behavior across contexts."
-            },
-            "name": "What is a common mistake when comparing them?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. It can support reflection only. Important decisions require evidence about skills, values, interests, behavior, constraints, and the actual environment."
-            },
-            "name": "Can this comparison decide a career or relationship?"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ISTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/en/personality/istj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "ISFJ",
-            "position": 2,
-            "url": "https://fermatmind.com/en/personality/isfj-a"
-          }
-        ]
-      },
-      "name": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
+      "@type": "AboutPage",
+      "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://fermatmind.com/en/personality/istj-vs-isfj",
+      "name": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions",
       "url": "https://fermatmind.com/en/personality/istj-vs-isfj"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ISTJ and ISFJ share I, S and J; their codes differ on T/F. Thinking emphasizes logical consistency and impersonal criteria, while Feeling emphasizes values and effects on people. The distinction does not rank kindness, accuracy or responsibility.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "Both describe Introversion, Sensing and Judging: inward reflection, concrete information and experience, and organized outer-world arrangements. Their shared narratives may include maintaining a considered commitment. Whether a person is reliable must be checked through actual behavior.\n\nAn ISTJ-style question might ask which consistent rule applies; an ISFJ-style question might ask what a particular person needs and which value the arrangement serves. Both can use criteria and attend to people. A rule can protect people, and a considerate decision can require careful logic.\n\nFunction-stack theory commonly uses Si–Te–Fi–Ne for ISTJ and Si–Fe–Ti–Ne for ISFJ. This is an interpretive account, not proof of measured mental mechanisms. A/T is outside official MBTI and does not replace T/F.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "What is shared and what differs"
+      },
+      {
+        "body_html": null,
+        "body_md": "| Observation | ISTJ | ISFJ |\n| --- | --- | --- |\n| Code difference | Thinking (T): logical consistency and impersonal criteria | Feeling (F): values and effects on people |\n| Original rota example | Check whether the arrangement applies a consistent standard | Check whether the arrangement addresses people's needs |\n| Possible blind spot | Assuming equal application means the actual effect is fair | Adapting a request without explaining the standard to others |\n| Shared practical step | Inspect the effect of the rule in this situation | Make the reason for an exception explicit |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "Side-by-side comparison"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original work scenario: a colleague requests a rota change. One approach checks the agreed allocation rule; another considers the colleague's caregiving constraint. State the purpose of the rule, compare the practical effects and explain any exception consistently. Neither approach by itself establishes ISTJ or ISFJ.\n\nOriginal relationship scenario: a shared errand is unfinished. One person wants a clear allocation for next time; another first asks why the other person could not do it. Combine understanding with a realistic agreement instead of assuming that a focus on tasks lacks care or that a focus on circumstances excuses everything.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Examples in work and relationships"
+      },
+      {
+        "body_html": null,
+        "body_md": "ISTJ is not the uncaring version of ISFJ, and ISFJ is not the less rational version of ISTJ. Both can set boundaries, care for people, verify facts and fulfill commitments. Being helpful, precise or quiet cannot determine T/F. A profession or gender is not a typing rule.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "Avoid these misreadings"
+      },
+      {
+        "body_html": null,
+        "body_md": "Compare three decisions where a consistent rule and a person's circumstances pulled in different directions. What did you consider first, how did you explain the choice and what did you learn from its effect? Include a case where you preferred the other approach and separate preference from what your role required.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "How to continue your self-observation"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Yes. T/F does not assign empathy or reasoning ability. Look at actual actions and specific reasoning rather than stereotypes.",
+              "question": "Can an ISTJ be caring and an ISFJ be analytical?"
+            },
+            {
+              "answer": "No. A helpful action can reflect a value, a duty, a skill or a practical rule. Compare your decision preferences across situations.",
+              "question": "Does helping people identify ISFJ?"
+            },
+            {
+              "answer": "No. A consistent arrangement can serve values and protect people. Consider the criteria you preferred, not only the visible result.",
+              "question": "Does consistency always mean Thinking?"
+            },
+            {
+              "answer": "It can start a discussion about approaches, but it cannot establish competence or assign people to jobs. Evaluate actual skills, needs and responsibility.",
+              "question": "Can we use the comparison to divide team roles?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "Sources and method limits"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ISTJ base profile](/en/personality/istj)\n- [ISFJ base profile](/en/personality/isfj)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "Related types and comparisons"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/istj-vs-isfj",
       "jsonld_overrides_json": null,
-      "og_description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
+      "og_description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "og_image_url": null,
-      "og_title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
-      "robots": "noindex,follow",
-      "seo_description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-      "seo_title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
-      "twitter_description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
+      "og_title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind",
+      "twitter_description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "twitter_image_url": null,
-      "twitter_title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships"
+      "twitter_title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/istj-vs-isfj"
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
+        "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "canonical_url": "https://fermatmind.com/en/personality/istj-vs-isfj",
-      "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-      "indexability_state": "noindex",
-      "llms_exposure_state": "withhold",
+      "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "4650a2d0573be5f6444e38a5f41f8984a5ed60b0",
+      "metadata_fingerprint": "449c6a365e7e6cb061ae3879e911653bf5e4dc7e",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-        "title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
+        "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/en/personality/istj-vs-isfj"
       },
       "public_summary_fingerprint": null,
-      "robots_policy": "noindex,follow",
+      "robots_policy": "index,follow",
       "runtime_artifact_ref": null,
       "share_safety_state": null,
-      "sitemap_state": "excluded",
+      "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships",
+      "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "A practical ISTJ vs ISFJ comparison covering standards, care, responsibility, communication, work, common misreadings, and next steps.",
-        "title": "ISTJ vs ISFJ: Reliability, Decisions, Work, and Relationships"
+        "description": "Compare ISTJ and ISFJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "ISTJ vs ISFJ: Thinking, Feeling and Everyday Decisions | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "462900679ec56787de0b88730fa07f5f54c13938a404cdcf515fa057b3e0bd0c"
+  "source_content_sha256": "2d4947120d7983e898889aca206bfe404557a88387225b993895a39839d1c935"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/entj-vs-intj",
@@ -11,10 +11,88 @@
   },
   "locale": "en",
   "payload": {
-    "answer_surface_v1": [],
+    "answer_surface_v1": {
+      "answer_bundle": [
+        {
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
+        },
+        {
+          "count": 11,
+          "key": "compare",
+          "title": "compare"
+        },
+        {
+          "count": 7,
+          "key": "faq",
+          "title": "faq"
+        }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "d5a02bef0c4c49c2cadd9eaeba9ccb425650f25a",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
+      ],
+      "faq_blocks": [
+        {
+          "answer": "Yes. E/I is a preference vocabulary, not a competence boundary. Leadership and independent work depend on learned skills, responsibility and context.",
+          "key": "faq-0",
+          "question": "Can an INTJ lead and an ENTJ work alone?"
+        },
+        {
+          "answer": "No. Speaking time can reflect role, topic or comfort. Compare where you direct attention and how you develop a view across situations.",
+          "key": "faq-1",
+          "question": "Is the difference simply talking more?"
+        },
+        {
+          "answer": "No. A/T comes from a separate extension and does not replace E/I. Confidence and Extraversion are not interchangeable labels.",
+          "key": "faq-2",
+          "question": "Does an Assertive suffix make INTJ into ENTJ?"
+        },
+        {
+          "answer": "Keep counterexamples and check the tool and circumstances that produced a result. A reading exercise cannot verify an official best-fit type.",
+          "key": "faq-3",
+          "question": "What if both descriptions fit?"
+        }
+      ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "entj-vs-intj",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
+      ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "33c2aea53cceb0bbed03e7701b411721c7b28697",
+      "summary_blocks": [
+        {
+          "body": "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability.",
+          "href": null,
+          "key": "comparison_summary",
+          "kind": "answer_first",
+          "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples"
+        }
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
+    },
     "comparison": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/entj-vs-intj"
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
+        "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -24,71 +102,52 @@
         "INTJ"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/entj-vs-intj",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "entj-vs-intj",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
+      "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The distinction concerns how strategy enters reality, not leadership strength.",
-          "question": "What is the main difference between ENTJ and INTJ?"
+          "answer": "Yes. E/I is a preference vocabulary, not a competence boundary. Leadership and independent work depend on learned skills, responsibility and context.",
+          "question": "Can an INTJ lead and an ENTJ work alone?"
         },
         {
-          "answer": "Both may be goal-oriented and hold high standards. ENTJ may revise a route through organizational feedback, while INTJ may revise it through independent analysis.",
-          "question": "Why are ENTJ and INTJ easy to confuse?"
+          "answer": "No. Speaking time can reflect role, topic or comfort. Compare where you direct attention and how you develop a view across situations.",
+          "question": "Is the difference simply talking more?"
         },
         {
-          "answer": "In a project crisis, ENTJ may first reset responsibilities and pace, while INTJ may first confirm the root cause and long-term consequences. Both responses can be useful.",
-          "question": "How might ENTJ and INTJ differ at work?"
+          "answer": "No. A/T comes from a separate extension and does not replace E/I. Confidence and Extraversion are not interchangeable labels.",
+          "question": "Does an Assertive suffix make INTJ into ENTJ?"
         },
         {
-          "answer": "Do not infer ENTJ from forceful speech or INTJ from quiet behavior. Repeated responses to uncertainty provide more useful evidence than a single visible trait.",
-          "question": "What is a common mistake when comparing ENTJ and INTJ?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Keep counterexamples and check the tool and circumstances that produced a result. A reading exercise cannot verify an official best-fit type.",
+          "question": "What if both descriptions fit?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ENTJ profile",
-          "href": "/en/personality/entj-a",
-          "label": "ENTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/entj",
+          "label": "ENTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ profile",
-          "href": "/en/personality/intj-a",
-          "label": "INTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intj",
+          "label": "INTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ vs INTP",
-          "href": "/en/personality/intj-vs-intp",
-          "label": "INTJ vs INTP",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "ENTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -101,84 +160,105 @@
       "sections": [
         {
           "body": [
-            "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The key difference is not leadership strength, but how strategy enters reality."
+            "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ENTJ": "Mobilize resources, assign ownership, and set the pace",
-              "INTJ": "Build the model, filter noise, and choose a direction",
-              "dimension": "How they move forward"
-            },
-            {
-              "ENTJ": "May push others to execute too quickly",
-              "INTJ": "May stay with an internal judgment for too long",
-              "dimension": "Under pressure"
-            },
-            {
-              "ENTJ": "Put the issue directly on the table",
-              "INTJ": "Filter out irrelevant information before speaking",
-              "dimension": "Communication style"
-            },
-            {
-              "ENTJ": "Give the team room to understand the reasoning",
-              "INTJ": "Externalize key judgments in time for others to respond",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ENTJ and INTJ may both be goal-oriented and hold high standards. ENTJ may revise the route through organizational feedback, while INTJ may revise it through independent analysis."
+            "Both describe Intuition, Thinking and Judging: attention to patterns or possibilities, logical or impersonal decision criteria, and a preference for organizing outer-world matters. In type narratives both may connect a plan with a longer-term direction. Actual planning skill and ambition need their own evidence.",
+            "An ENTJ-style description may build direction through interaction and coordinated action; an INTJ-style description may first develop a view through private reflection. Either can speak publicly, listen, lead or work alone. Responsibility, topic familiarity and the group can change what is visible.",
+            "Function-stack theory commonly assigns Te–Ni–Se–Fi to ENTJ and Ni–Te–Fi–Se to INTJ. The ordering is theoretical, not proof of separate measured mental mechanisms. A/T is outside official MBTI and cannot determine the E/I difference."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "In a project crisis, ENTJ may first reassign responsibilities and reset the pace, while INTJ may first confirm the root cause and long-term consequences. One helps prevent paralysis; the other helps prevent momentum in the wrong direction."
+            "| Observation | ENTJ | INTJ |\n| --- | --- | --- |\n| Code difference | Extraversion (E): attention toward the outer world | Introversion (I): attention toward inner reflection |\n| Original meeting example | Develop a proposal while discussing it with others | Prepare a considered proposal before discussing it |\n| Possible blind spot | Treating active discussion as evidence that the view is settled | Leaving useful reasoning unshared while refining it privately |\n| Shared practical step | Make exploration and decision distinct | State a draft and a time for feedback |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not label someone ENTJ simply because they speak forcefully, or INTJ simply because they are quiet. Watch whether they respond to uncertainty by mobilizing people or by gathering structural evidence first."
+            "Original work scenario: a team needs a plan for the next quarter. One person wants a discussion to organize the available resources; another wants time to synthesize the constraints first. Send a brief before the meeting, allow private notes and then compare proposals. Neither approach establishes who should lead, and the same person may prefer different approaches across tasks.",
+            "Original relationship scenario: after an important conversation, one friend wants to talk through the implications immediately and another wants time to reflect. Agree on when to resume rather than interpreting continued talk as dominance or a pause as withdrawal of care."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual ENTJ and INTJ profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "A loud manager is not necessarily ENTJ, and a quiet strategist is not necessarily INTJ. E/I is not a shyness, assertiveness or leadership scale. Enjoying solitary work does not exclude E, and effective public speaking does not exclude I. Do not infer a type from role seniority or a single meeting."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare how you approached three unfamiliar decisions when you could choose the process. Did interaction help develop the view, or did you prefer to establish it privately first? What did you need after the discussion? Include the opposite preference in another setting, and separate choice from job requirements."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [ENTJ base profile](/en/personality/entj)\n- [INTJ base profile](/en/personality/intj)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-      "seo_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "6f1512fa1778a5bee3100188943439bac7fb6fe9a294257848b42e1051a9bea9",
-      "summary": "ENTJ may move strategy into reality by organizing people, resources, and pace, while INTJ may first build an internal long-term model and filter noise. The contrast is about how strategy becomes action, not who is a stronger leader or more capable.",
-      "title": "ENTJ vs INTJ: External Direction and Internal Strategy"
+      "source_sha256": "930c2d72614b9fa137edd63602b03102718469ad87cd14190a0497189236c376",
+      "summary": "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability.",
+      "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples"
     },
     "comparison_public_projection_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/entj-vs-intj"
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
+        "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "answer_surface_v1": [],
       "authority_contract_version": "mbti.cross_type_comparison.authority.v1",
@@ -188,71 +268,52 @@
         "INTJ"
       ],
       "canonical_url": "https://fermatmind.com/en/personality/entj-vs-intj",
-      "claim_boundary": "Preference-based educational comparison only; no diagnosis, fixed identity, screening decision, compatibility guarantee, or outcome prediction.",
+      "claim_boundary": "Preference comparison with original educational examples, not an ability, diagnostic or compatibility assessment.",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "entj-vs-intj",
       "comparison_type": "mbti_cross_type",
-      "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
+      "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "faq": [
         {
-          "answer": "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The distinction concerns how strategy enters reality, not leadership strength.",
-          "question": "What is the main difference between ENTJ and INTJ?"
+          "answer": "Yes. E/I is a preference vocabulary, not a competence boundary. Leadership and independent work depend on learned skills, responsibility and context.",
+          "question": "Can an INTJ lead and an ENTJ work alone?"
         },
         {
-          "answer": "Both may be goal-oriented and hold high standards. ENTJ may revise a route through organizational feedback, while INTJ may revise it through independent analysis.",
-          "question": "Why are ENTJ and INTJ easy to confuse?"
+          "answer": "No. Speaking time can reflect role, topic or comfort. Compare where you direct attention and how you develop a view across situations.",
+          "question": "Is the difference simply talking more?"
         },
         {
-          "answer": "In a project crisis, ENTJ may first reset responsibilities and pace, while INTJ may first confirm the root cause and long-term consequences. Both responses can be useful.",
-          "question": "How might ENTJ and INTJ differ at work?"
+          "answer": "No. A/T comes from a separate extension and does not replace E/I. Confidence and Extraversion are not interchangeable labels.",
+          "question": "Does an Assertive suffix make INTJ into ENTJ?"
         },
         {
-          "answer": "Do not infer ENTJ from forceful speech or INTJ from quiet behavior. Repeated responses to uncertainty provide more useful evidence than a single visible trait.",
-          "question": "What is a common mistake when comparing ENTJ and INTJ?"
-        },
-        {
-          "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback.",
-          "question": "Can this comparison decide a career or relationship choice?"
+          "answer": "Keep counterexamples and check the tool and circumstances that produced a result. A reading exercise cannot verify an official best-fit type.",
+          "question": "What if both descriptions fit?"
         }
       ],
-      "indexability_status": "blocked",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ENTJ profile",
-          "href": "/en/personality/entj-a",
-          "label": "ENTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/entj",
+          "label": "ENTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ profile",
-          "href": "/en/personality/intj-a",
-          "label": "INTJ profile",
-          "link_intent": "related_public_page"
+          "href": "/en/personality/intj",
+          "label": "INTJ base profile",
+          "reason": ""
         },
         {
-          "anchor_text": "INTJ vs INTP",
-          "href": "/en/personality/intj-vs-intp",
-          "label": "INTJ vs INTP",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI personality profiles",
           "href": "/en/personality",
-          "label": "MBTI personality profiles",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "Free MBTI test",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "label": "Free MBTI test",
-          "link_intent": "related_public_page"
+          "label": "All 16 types",
+          "reason": ""
         }
       ],
-      "is_indexable": false,
+      "is_indexable": true,
       "is_public": true,
       "last_reviewed_at": null,
       "left_type": "ENTJ",
-      "llms_eligible": false,
+      "llms_eligible": true,
       "locale": "en",
       "public_route_type": "cross-type-comparison",
       "publish_status": "published",
@@ -265,221 +326,273 @@
       "sections": [
         {
           "body": [
-            "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The key difference is not leadership strength, but how strategy enters reality."
+            "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability."
           ],
-          "id": "direct_answer",
-          "title": "The main difference"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ENTJ": "Mobilize resources, assign ownership, and set the pace",
-              "INTJ": "Build the model, filter noise, and choose a direction",
-              "dimension": "How they move forward"
-            },
-            {
-              "ENTJ": "May push others to execute too quickly",
-              "INTJ": "May stay with an internal judgment for too long",
-              "dimension": "Under pressure"
-            },
-            {
-              "ENTJ": "Put the issue directly on the table",
-              "INTJ": "Filter out irrelevant information before speaking",
-              "dimension": "Communication style"
-            },
-            {
-              "ENTJ": "Give the team room to understand the reasoning",
-              "INTJ": "Externalize key judgments in time for others to respond",
-              "dimension": "More mature expression"
-            }
-          ],
-          "title": "Quick comparison"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ENTJ and INTJ may both be goal-oriented and hold high standards. ENTJ may revise the route through organizational feedback, while INTJ may revise it through independent analysis."
+            "Both describe Intuition, Thinking and Judging: attention to patterns or possibilities, logical or impersonal decision criteria, and a preference for organizing outer-world matters. In type narratives both may connect a plan with a longer-term direction. Actual planning skill and ambition need their own evidence.",
+            "An ENTJ-style description may build direction through interaction and coordinated action; an INTJ-style description may first develop a view through private reflection. Either can speak publicly, listen, lead or work alone. Responsibility, topic familiarity and the group can change what is visible.",
+            "Function-stack theory commonly assigns Te–Ni–Se–Fi to ENTJ and Ni–Te–Fi–Se to INTJ. The ordering is theoretical, not proof of separate measured mental mechanisms. A/T is outside official MBTI and cannot determine the E/I difference."
           ],
-          "id": "easy_misread",
-          "title": "Why they are easy to confuse"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "What is shared and what differs"
         },
         {
           "body": [
-            "In a project crisis, ENTJ may first reassign responsibilities and reset the pace, while INTJ may first confirm the root cause and long-term consequences. One helps prevent paralysis; the other helps prevent momentum in the wrong direction."
+            "| Observation | ENTJ | INTJ |\n| --- | --- | --- |\n| Code difference | Extraversion (E): attention toward the outer world | Introversion (I): attention toward inner reflection |\n| Original meeting example | Develop a proposal while discussing it with others | Prepare a considered proposal before discussing it |\n| Possible blind spot | Treating active discussion as evidence that the view is settled | Leaving useful reasoning unshared while refining it privately |\n| Shared practical step | Make exploration and decision distinct | State a draft and a time for feedback |"
           ],
-          "id": "real_scenario_differences",
-          "title": "A real-world contrast"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "Side-by-side comparison"
         },
         {
           "body": [
-            "Do not label someone ENTJ simply because they speak forcefully, or INTJ simply because they are quiet. Watch whether they respond to uncertainty by mobilizing people or by gathering structural evidence first."
+            "Original work scenario: a team needs a plan for the next quarter. One person wants a discussion to organize the available resources; another wants time to synthesize the constraints first. Send a brief before the meeting, allow private notes and then compare proposals. Neither approach establishes who should lead, and the same person may prefer different approaches across tasks.",
+            "Original relationship scenario: after an important conversation, one friend wants to talk through the implications immediately and another wants time to reflect. Agree on when to resume rather than interpreting continued talk as dominance or a pause as withdrawal of care."
           ],
-          "id": "do_not_misjudge",
-          "title": "Avoid this misjudgment"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "Examples in work and relationships"
         },
         {
           "body": [
-            "Continue with the individual ENTJ and INTJ profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
+            "A loud manager is not necessarily ENTJ, and a quiet strategist is not necessarily INTJ. E/I is not a shyness, assertiveness or leadership scale. Enjoying solitary work does not exclude E, and effective public speaking does not exclude I. Do not infer a type from role seniority or a single meeting."
           ],
-          "id": "next_reading",
-          "title": "What to read next"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "Avoid these misreadings"
+        },
+        {
+          "body": [
+            "Compare how you approached three unfamiliar decisions when you could choose the process. Did interaction help develop the view, or did you prefer to establish it privately first? What did you need after the discussion? Include the opposite preference in another setting, and separate choice from job requirements."
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "How to continue your self-observation"
+        },
+        {
+          "body": [
+            "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.",
+            "McCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.",
+            "A newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.",
+            "The situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.",
+            "Content revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.",
+            "- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "Sources and method limits"
+        },
+        {
+          "body": [
+            "- [ENTJ base profile](/en/personality/entj)\n- [INTJ base profile](/en/personality/intj)\n- [All 16 types](/en/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "Related types and comparisons"
         }
       ],
-      "seo_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-      "seo_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
-      "sitemap_eligible": false,
+      "seo_description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples",
+      "sitemap_eligible": true,
       "source_notes": [],
       "source_package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
       "source_refs": [
-        "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "6f1512fa1778a5bee3100188943439bac7fb6fe9a294257848b42e1051a9bea9",
-      "summary": "ENTJ may move strategy into reality by organizing people, resources, and pace, while INTJ may first build an internal long-term model and filter noise. The contrast is about how strategy becomes action, not who is a stronger leader or more capable.",
-      "title": "ENTJ vs INTJ: External Direction and Internal Strategy"
+      "source_sha256": "930c2d72614b9fa137edd63602b03102718469ad87cd14190a0497189236c376",
+      "summary": "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability.",
+      "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality",
-            "name": "Personality types",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/en/personality/entj-vs-intj",
-            "name": "ENTJ vs INTJ",
-            "position": 2
-          }
-        ]
-      },
-      "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The distinction concerns how strategy enters reality, not leadership strength."
-            },
-            "name": "What is the main difference between ENTJ and INTJ?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Both may be goal-oriented and hold high standards. ENTJ may revise a route through organizational feedback, while INTJ may revise it through independent analysis."
-            },
-            "name": "Why are ENTJ and INTJ easy to confuse?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In a project crisis, ENTJ may first reset responsibilities and pace, while INTJ may first confirm the root cause and long-term consequences. Both responses can be useful."
-            },
-            "name": "How might ENTJ and INTJ differ at work?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Do not infer ENTJ from forceful speech or INTJ from quiet behavior. Repeated responses to uncertainty provide more useful evidence than a single visible trait."
-            },
-            "name": "What is a common mistake when comparing ENTJ and INTJ?"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
-            },
-            "name": "Can this comparison decide a career or relationship choice?"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ENTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/en/personality/entj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INTJ",
-            "position": 2,
-            "url": "https://fermatmind.com/en/personality/intj-a"
-          }
-        ]
-      },
-      "name": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
+      "@type": "AboutPage",
+      "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://fermatmind.com/en/personality/entj-vs-intj",
+      "name": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples",
       "url": "https://fermatmind.com/en/personality/entj-vs-intj"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ENTJ and INTJ share N, T and J; their codes differ on E/I. Extraversion directs attention toward the outer world, while Introversion directs attention toward inner reflection. The distinction does not rank leadership, confidence or social ability.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "Both describe Intuition, Thinking and Judging: attention to patterns or possibilities, logical or impersonal decision criteria, and a preference for organizing outer-world matters. In type narratives both may connect a plan with a longer-term direction. Actual planning skill and ambition need their own evidence.\n\nAn ENTJ-style description may build direction through interaction and coordinated action; an INTJ-style description may first develop a view through private reflection. Either can speak publicly, listen, lead or work alone. Responsibility, topic familiarity and the group can change what is visible.\n\nFunction-stack theory commonly assigns Te–Ni–Se–Fi to ENTJ and Ni–Te–Fi–Se to INTJ. The ordering is theoretical, not proof of separate measured mental mechanisms. A/T is outside official MBTI and cannot determine the E/I difference.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "What is shared and what differs"
+      },
+      {
+        "body_html": null,
+        "body_md": "| Observation | ENTJ | INTJ |\n| --- | --- | --- |\n| Code difference | Extraversion (E): attention toward the outer world | Introversion (I): attention toward inner reflection |\n| Original meeting example | Develop a proposal while discussing it with others | Prepare a considered proposal before discussing it |\n| Possible blind spot | Treating active discussion as evidence that the view is settled | Leaving useful reasoning unshared while refining it privately |\n| Shared practical step | Make exploration and decision distinct | State a draft and a time for feedback |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "Side-by-side comparison"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original work scenario: a team needs a plan for the next quarter. One person wants a discussion to organize the available resources; another wants time to synthesize the constraints first. Send a brief before the meeting, allow private notes and then compare proposals. Neither approach establishes who should lead, and the same person may prefer different approaches across tasks.\n\nOriginal relationship scenario: after an important conversation, one friend wants to talk through the implications immediately and another wants time to reflect. Agree on when to resume rather than interpreting continued talk as dominance or a pause as withdrawal of care.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Examples in work and relationships"
+      },
+      {
+        "body_html": null,
+        "body_md": "A loud manager is not necessarily ENTJ, and a quiet strategist is not necessarily INTJ. E/I is not a shyness, assertiveness or leadership scale. Enjoying solitary work does not exclude E, and effective public speaking does not exclude I. Do not infer a type from role seniority or a single meeting.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "Avoid these misreadings"
+      },
+      {
+        "body_html": null,
+        "body_md": "Compare how you approached three unfamiliar decisions when you could choose the process. Did interaction help develop the view, or did you prefer to establish it privately first? What did you need after the discussion? Include the opposite preference in another setting, and separate choice from job requirements.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "How to continue your self-observation"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Yes. E/I is a preference vocabulary, not a competence boundary. Leadership and independent work depend on learned skills, responsibility and context.",
+              "question": "Can an INTJ lead and an ENTJ work alone?"
+            },
+            {
+              "answer": "No. Speaking time can reflect role, topic or comfort. Compare where you direct attention and how you develop a view across situations.",
+              "question": "Is the difference simply talking more?"
+            },
+            {
+              "answer": "No. A/T comes from a separate extension and does not replace E/I. Confidence and Extraversion are not interchangeable labels.",
+              "question": "Does an Assertive suffix make INTJ into ENTJ?"
+            },
+            {
+              "answer": "Keep counterexamples and check the tool and circumstances that produced a result. A reading exercise cannot verify an official best-fit type.",
+              "question": "What if both descriptions fit?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "Sources and method limits"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENTJ base profile](/en/personality/entj)\n- [INTJ base profile](/en/personality/intj)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "Related types and comparisons"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/entj-vs-intj",
       "jsonld_overrides_json": null,
-      "og_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
+      "og_description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "og_image_url": null,
-      "og_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
-      "robots": "noindex,follow",
-      "seo_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-      "seo_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
-      "twitter_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
+      "og_title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "seo_title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind",
+      "twitter_description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
       "twitter_image_url": null,
-      "twitter_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work"
+      "twitter_title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/entj-vs-intj"
+        "en": "https://fermatmind.com/en/personality/entj-vs-intj",
+        "zh-CN": "https://fermatmind.com/zh/personality/entj-vs-intj"
       },
       "canonical_url": "https://fermatmind.com/en/personality/entj-vs-intj",
-      "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-      "indexability_state": "noindex",
-      "llms_exposure_state": "withhold",
+      "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+      "indexability_state": "indexable",
+      "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "449f78b370b52c75cb5cee22f405b2916da561ec",
+      "metadata_fingerprint": "33c2aea53cceb0bbed03e7701b411721c7b28697",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-        "title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
+        "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/en/personality/entj-vs-intj"
       },
       "public_summary_fingerprint": null,
-      "robots_policy": "noindex,follow",
+      "robots_policy": "index,follow",
       "runtime_artifact_ref": null,
       "share_safety_state": null,
-      "sitemap_state": "excluded",
+      "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
+      "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-        "title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work"
+        "description": "Compare ENTJ and INTJ through their actual preference difference, original scenarios, counterexamples and observation questions. Includes sources and limits.",
+        "title": "ENTJ vs INTJ: Extraversion, Introversion and Planning Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "9813d881db4b2735149b4b58b925e35068737973055bc8620e0b5cc003e2eb96"
+  "source_content_sha256": "6b39f24d52f29fed31b549fa7d3ec924d241f03073e6f9eddc650357f6ac5808"
 }

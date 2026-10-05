@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/infp",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "562896895ea3bd0bc9e566391eae764953402631",
+      "answer_fingerprint": "501df3ae2497281870764622623b77c7fd2c3988",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "9e10c3f47f78c312398cb835020f2fddbe866f32",
-        "e8719b9023655bd956894739d0cfbc7f800f1bee",
+        "32c77838c36d4b08c24c47236271ef788df79749",
+        "d18df5abd494bcf99bfb273f65b2ef38a5762406",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "e8719b9023655bd956894739d0cfbc7f800f1bee",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Separate a value from one preferred form of expressing it. A small workable action can serve the value without meeting every ideal.",
+          "key": "faq-0",
+          "question": "Must an INFP always find a perfect expression of their values?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/infp",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does INFP indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for INFP?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do INFP-A and INFP-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can INFP predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "d18df5abd494bcf99bfb273f65b2ef38a5762406",
+      "next_step_blocks": [],
       "primary_content_ref": "INFP",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,52 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/infp",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "9e10c3f47f78c312398cb835020f2fddbe866f32",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "32c77838c36d4b08c24c47236271ef788df79749",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for INFP profiles.",
+          "body": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "INFP - Mediator"
+          "title": "INFP Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/infp-a",
+        "label": "INFP-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/infp-t",
+        "label": "INFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/infp-a-vs-infp-t",
+        "label": "INFP-A vs INFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/infj-vs-infp",
+        "label": "INFJ vs INFP",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/isfp-vs-infp",
+        "label": "ISFP vs INFP",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/infp",
@@ -162,7 +161,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "e8719b9023655bd956894739d0cfbc7f800f1bee",
+      "landing_fingerprint": "d18df5abd494bcf99bfb273f65b2ef38a5762406",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INFP",
       "public_surface_ref": null,
@@ -177,10 +176,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for INFP profiles.",
+          "body": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "INFP - Mediator"
+          "title": "INFP Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +197,7 @@
       "display_type": "INFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for INFP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Mediator",
         "rarity": null,
@@ -207,156 +206,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+          "body_md": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, INFP is commonly described as Fi–Ne–Si–Te. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An INFP-style description asks whether a choice feels consistent with what matters to you. You might want private reflection before explaining a view, and consider several ways to honor a value. This can protect an overlooked concern. A possible blind spot is waiting for an option that expresses every ideal before trying an imperfect but useful step.\n\nCounterexample: a values-focused person can reason carefully about budgets and maintain practical routines. Being emotional, artistic or conflict-averse cannot identify INFP. Observe how you weigh competing priorities when they cannot all be satisfied.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a writing assignment conflicts with a message you care about. Identify the specific concern, ask which parts can change and propose wording that meets the brief without misrepresenting your view. A value becomes useful in work when you can explain the tradeoff and deliver a concrete alternative.\n\nExplore a task before choosing a title: drafting, listening to a client's needs, reviewing an ethical dilemma or developing an idea all have different daily demands. Investigate deadlines, qualifications and routine duties. A meaningful occupation still needs skills, workable conditions and a realistic path into it.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you agree to a plan to avoid disappointing a friend, then feel that your own preference was overlooked. Say what you would prefer before resentment builds. The other person cannot know a boundary that has never been stated.\n\nListening compassionately does not require agreement, and disagreement does not necessarily reject your values. Ask what the person meant before interpreting a comment as a judgment of who you are. Type letters cannot supply a best partner or compatibility score.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: an unfinished project feels like proof that you are not living up to your ideals. Separate the project's next action from the larger story about your identity. Choose a small deliverable and revise its scope to match the time available.\n\nLow mood, attention difficulties or feeling disconnected can have many causes. An INFP label cannot diagnose them or make them a necessary part of your personality.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one difficult choice, name the value at stake and two practical ways to honor it. List the cost of each and the information still missing. Try one reversible step instead of waiting for a perfect expression.\n\nReview both the output and your experience. Keep an example where you chose a practical compromise without abandoning the value; it can challenge the idea that authenticity requires an ideal outcome.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [INFP-A](/en/personality/infp-a)\n- [INFP-T](/en/personality/infp-t)\n- [INFP-A vs INFP-T](/en/personality/infp-a-vs-infp-t)\n- [INFJ vs INFP](/en/personality/infj-vs-infp)\n- [ISFP vs INFP](/en/personality/isfp-vs-infp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "investment-analyst",
-                "title": "Investment Analyst"
-              },
-              {
-                "slug": "physician",
-                "title": "Physician"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Separate a value from one preferred form of expressing it. A small workable action can serve the value without meeting every ideal.",
+                "question": "Must an INFP always find a perfect expression of their values?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does INFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for INFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do INFP-A and INFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can INFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/infp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
+        "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/infp",
+          "name": "INFP Personality",
+          "url": "https://fermatmind.com/en/personality/infp"
+        },
+        "og_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "INFP Personality Guide",
+        "og_title": "INFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "INFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
+        "title": "INFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "INFP Personality Guide"
+        "twitter_title": "INFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for INFP profiles.",
+        "summary": "",
         "tagline": "Mediator",
-        "title": "INFP - Mediator"
+        "title": "INFP Personality"
       },
       "variant_code": null
     },
@@ -372,7 +361,7 @@
       "display_type": "INFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for INFP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Mediator",
         "rarity": null,
@@ -381,166 +370,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+          "body_md": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, INFP is commonly described as Fi–Ne–Si–Te. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An INFP-style description asks whether a choice feels consistent with what matters to you. You might want private reflection before explaining a view, and consider several ways to honor a value. This can protect an overlooked concern. A possible blind spot is waiting for an option that expresses every ideal before trying an imperfect but useful step.\n\nCounterexample: a values-focused person can reason carefully about budgets and maintain practical routines. Being emotional, artistic or conflict-averse cannot identify INFP. Observe how you weigh competing priorities when they cannot all be satisfied.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a writing assignment conflicts with a message you care about. Identify the specific concern, ask which parts can change and propose wording that meets the brief without misrepresenting your view. A value becomes useful in work when you can explain the tradeoff and deliver a concrete alternative.\n\nExplore a task before choosing a title: drafting, listening to a client's needs, reviewing an ethical dilemma or developing an idea all have different daily demands. Investigate deadlines, qualifications and routine duties. A meaningful occupation still needs skills, workable conditions and a realistic path into it.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you agree to a plan to avoid disappointing a friend, then feel that your own preference was overlooked. Say what you would prefer before resentment builds. The other person cannot know a boundary that has never been stated.\n\nListening compassionately does not require agreement, and disagreement does not necessarily reject your values. Ask what the person meant before interpreting a comment as a judgment of who you are. Type letters cannot supply a best partner or compatibility score.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: an unfinished project feels like proof that you are not living up to your ideals. Separate the project's next action from the larger story about your identity. Choose a small deliverable and revise its scope to match the time available.\n\nLow mood, attention difficulties or feeling disconnected can have many causes. An INFP label cannot diagnose them or make them a necessary part of your personality.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one difficult choice, name the value at stake and two practical ways to honor it. List the cost of each and the information still missing. Try one reversible step instead of waiting for a perfect expression.\n\nReview both the output and your experience. Keep an example where you chose a practical compromise without abandoning the value; it can challenge the idea that authenticity requires an ideal outcome.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [INFP-A](/en/personality/infp-a)\n- [INFP-T](/en/personality/infp-t)\n- [INFP-A vs INFP-T](/en/personality/infp-a-vs-infp-t)\n- [INFJ vs INFP](/en/personality/infj-vs-infp)\n- [ISFP vs INFP](/en/personality/isfp-vs-infp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "investment-analyst",
-                "title": "Investment Analyst"
-              },
-              {
-                "slug": "physician",
-                "title": "Physician"
-              },
-              {
-                "slug": "data-scientist",
-                "title": "Data Scientist"
-              },
-              {
-                "slug": "frontend-engineer",
-                "title": "Frontend Engineer"
-              },
-              {
-                "slug": "fullstack-engineer",
-                "title": "Fullstack Engineer"
-              },
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Separate a value from one preferred form of expressing it. A small workable action can serve the value without meeting every ideal.",
+                "question": "Must an INFP always find a perfect expression of their values?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does INFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for INFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do INFP-A and INFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can INFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/infp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
+        "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/infp",
+          "name": "INFP Personality",
+          "url": "https://fermatmind.com/en/personality/infp"
+        },
+        "og_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "INFP Personality Guide",
+        "og_title": "INFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "INFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
+        "title": "INFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "INFP Personality Guide"
+        "twitter_title": "INFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for INFP profiles.",
+        "summary": "",
         "tagline": "Mediator",
-        "title": "INFP - Mediator"
+        "title": "INFP Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "INFP",
-      "excerpt": "Role recommendations and work-environment guidance for INFP profiles.",
+      "excerpt": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
       "hero_image_url": null,
       "hero_kicker": "Mediator",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for INFP profiles.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,454 +531,166 @@
       "slug": "infp",
       "status": "published",
       "subtitle": null,
-      "title": "INFP - Mediator",
+      "title": "INFP Personality",
       "type_code": "INFP",
       "type_name": "Mediator"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+        "body_md": "INFP describes Introversion, Intuition, Feeling and Perceiving preferences. Its narrative emphasizes personal meaning and exploring ways to express a value. It does not establish empathy, artistic talent, moral superiority or an obligation to mediate conflict.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, INFP is commonly described as Fi–Ne–Si–Te. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An INFP-style description asks whether a choice feels consistent with what matters to you. You might want private reflection before explaining a view, and consider several ways to honor a value. This can protect an overlooked concern. A possible blind spot is waiting for an option that expresses every ideal before trying an imperfect but useful step.\n\nCounterexample: a values-focused person can reason carefully about budgets and maintain practical routines. Being emotional, artistic or conflict-averse cannot identify INFP. Observe how you weigh competing priorities when they cannot all be satisfied.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Compare actual duties, interests, demonstrated skills, training and qualification requirements, costs, and opportunities before choosing a role. The type label does not prioritize professions or establish where you perform best.",
+        "body_md": "Original scenario: a writing assignment conflicts with a message you care about. Identify the specific concern, ask which parts can change and propose wording that meets the brief without misrepresenting your view. A value becomes useful in work when you can explain the tradeoff and deliver a concrete alternative.\n\nExplore a task before choosing a title: drafting, listening to a client's needs, reviewing an ethical dilemma or developing an idea all have different daily demands. Investigate deadlines, qualifications and routine duties. A meaningful occupation still needs skills, workable conditions and a realistic path into it.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: you agree to a plan to avoid disappointing a friend, then feel that your own preference was overlooked. Say what you would prefer before resentment builds. The other person cannot know a boundary that has never been stated.\n\nListening compassionately does not require agreement, and disagreement does not necessarily reject your values. Ask what the person meant before interpreting a comment as a judgment of who you are. Type letters cannot supply a best partner or compatibility score.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: an unfinished project feels like proof that you are not living up to your ideals. Separate the project's next action from the larger story about your identity. Choose a small deliverable and revise its scope to match the time available.\n\nLow mood, attention difficulties or feeling disconnected can have many causes. An INFP label cannot diagnose them or make them a necessary part of your personality.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "fullstack-engineer",
-              "title": "Fullstack Engineer"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "investment-analyst",
-              "title": "Investment Analyst"
-            },
-            {
-              "slug": "physician",
-              "title": "Physician"
-            },
-            {
-              "slug": "data-scientist",
-              "title": "Data Scientist"
-            },
-            {
-              "slug": "frontend-engineer",
-              "title": "Frontend Engineer"
-            },
-            {
-              "slug": "fullstack-engineer",
-              "title": "Fullstack Engineer"
-            },
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            }
-          ],
-          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "For one difficult choice, name the value at stake and two practical ways to honor it. List the cost of each and the information still missing. Try one reversible step instead of waiting for a perfect expression.\n\nReview both the output and your experience. Keep an example where you chose a practical compromise without abandoning the value; it can challenge the idea that authenticity requires an ideal outcome.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INFP-A](/en/personality/infp-a)\n- [INFP-T](/en/personality/infp-t)\n- [INFP-A vs INFP-T](/en/personality/infp-a-vs-infp-t)\n- [INFJ vs INFP](/en/personality/infj-vs-infp)\n- [ISFP vs INFP](/en/personality/isfp-vs-infp)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "High-autonomy role scope, clear success metrics, and consistent feedback cadence.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Separate a value from one preferred form of expressing it. A small workable action can serve the value without meeting every ideal.",
+              "question": "Must an INFP always find a perfect expression of their values?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does INFP indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for INFP?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do INFP-A and INFP-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can INFP predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
-            },
-            {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to harmony and emotional tone, so it helps to make your principles explicit. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "INFP-A and INFP-T share the same INFP core. Within values, empathy and personal meaning, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "INFP-A and INFP-T share the same INFP core. Within values, empathy and personal meaning, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around values, empathy and personal meaning, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the INFP core.",
-              "question": "What is the main INFP-A vs INFP-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. INFP situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is INFP-A better than INFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to values, empathy and personal meaning-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am INFP-A or INFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support INFP work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "INFP",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/infp-a-vs-infp-t",
-            "url": "https://fermatmind.com/en/personality/infp-a-vs-infp-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "INFP-A profile",
-              "href": "/en/personality/infp-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "INFP-T profile",
-              "href": "/en/personality/infp-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare INFP-A and INFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/infp-a-vs-infp-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare INFP-A and INFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare INFP-A and INFP-T through values, empathy and personal meaning, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/infp-a-vs-infp-t with values, empathy and personal meaning rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around values, empathy and personal meaning, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the INFP core.",
-                  "question": "What is the main INFP-A vs INFP-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. INFP situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is INFP-A better than INFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to values, empathy and personal meaning-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am INFP-A or INFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support INFP work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "INFP-A vs INFP-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "INFP-A profile",
-                  "href": "/en/personality/infp-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "INFP-T profile",
-                  "href": "/en/personality/infp-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "INFP-A and INFP-T share the same INFP core. Within values, empathy and personal meaning, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "INFP-A vs INFP-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/infp-a-vs-infp-t"
-          },
-          "seo": {
-            "description": "Compare INFP-A and INFP-T through values, empathy and personal meaning, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "INFP-A vs INFP-T: Key Differences",
-            "title": "INFP-A vs INFP-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare INFP-A and INFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "INFP-A vs INFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/infp-a-vs-infp-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/infp-a-vs-infp-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "INFP-A vs INFP-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/infp",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
-      "seo_title": "INFP Personality Guide",
-      "twitter_description": null,
+      "og_title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/infp-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/infp-a"
+        "en": "https://fermatmind.com/en/personality/infp",
+        "zh-CN": "https://fermatmind.com/zh/personality/infp"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/infp-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/infp",
+      "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "9e10c3f47f78c312398cb835020f2fddbe866f32",
+      "metadata_fingerprint": "32c77838c36d4b08c24c47236271ef788df79749",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
-        "title": "INFP Personality Guide",
+        "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/infp-a"
+        "url": "https://fermatmind.com/en/personality/infp"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1008,18 +699,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "INFP Personality Guide",
+      "title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INFP personality type.",
-        "title": "INFP Personality Guide"
+        "description": "Understand INFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "INFP Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "fa83814a43ad76569c3d97e3a80e8cc642b849b1aea97b6d8ce3db0a8c9d6d1a"
+  "source_content_sha256": "b68bb17646f245212905593b2bf2790a8853b5cc2f444cc47fedc0e12c076b19"
 }

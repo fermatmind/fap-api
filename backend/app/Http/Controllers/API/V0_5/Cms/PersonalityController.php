@@ -98,6 +98,8 @@ class PersonalityController extends Controller
                     'last_page' => max(1, (int) ceil($total / $validated['per_page'])),
                 ],
                 'landing_surface_v1' => $hub['landing_surface_v1'] ?? null,
+                'sections' => $hub['sections'] ?? [],
+                'seo_meta' => $hub['seo_meta'] ?? null,
             ]);
         }
 

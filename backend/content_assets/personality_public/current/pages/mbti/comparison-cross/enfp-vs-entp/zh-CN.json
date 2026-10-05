@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enfp-vs-entp",
@@ -12,153 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "ENFP 和 ENTP 最容易混淆，因为他们都外向、灵活、反应快，也都喜欢把一个普通话题推向新的可能性。两者都不太满足于按部就班，都可能在聊天、项目、学习或关系中不断提出“有没有另一种做法”。真正的差异不是一个感性、一个理性，而是他们评估可能性的中心不同：ENFP 更先看人、价值和意义，ENTP 更先看逻辑、机制和可测试性。",
-          "key": "quick_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "快速结论：ENFP 和 ENTP 最大区别是什么"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "ENFP 和 ENTP 的外在节奏很像：都能快速接话，都容易对新鲜信息兴奋，也都可能在一场讨论里连续抛出多个角度。对于不熟悉 MBTI 的人来说，只要看到一个人点子多、话题跳跃、讨厌僵化、喜欢探索，就很容易把 ENFP 和 ENTP 放在同一个框里。事实上，这种相似来自共同的外向直觉倾向：他们都容易看到一个现象背后还能延伸出什么。",
-          "key": "why_they_are_confused",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么 ENFP 和 ENTP 容易被混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "ENFP 和 ENTP 都很容易被“还没有发生的可能性”吸引。他们不太愿意只接受既定答案，也不喜欢把生活变成重复执行。一个新的项目、一段陌生关系、一种新的工具、一套不同的解释框架，都可能让他们迅速进入状态。这种开放性让他们在早期探索、创意启动、跨界沟通和新问题拆解中表现得很活跃。",
-          "key": "shared_traits",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "共同点：同样外向、灵活、好奇并喜欢新可能"
-        },
-        {
-          "body": "ENFP 的可能性探索通常先经过价值感过滤。一个想法是否让人更自由、更真实、更被理解，一个项目是否让人重新看到意义，一段关系是否还有成长空间，这些问题会直接影响 ENFP 是否愿意投入。FermatMind 的 ENFP 内容资产反复强调灵感、真实表达、连接、承诺边界和反馈处理，这些都指向同一个核心：ENFP 的发散不是为了发散本身，而是为了找到更有生命力的路径。",
-          "key": "core_difference",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "核心差异：价值驱动的可能性 vs 逻辑驱动的实验"
-        },
-        {
-          "body": "工作探索可以分别记录两类问题：哪些任务需要理解人的动机、表达想法并形成参与，哪些任务需要检验假设、比较反例和重构机制。把这些任务与自己的兴趣、技能证据和小规模试做反馈比较，不能从 ENFP 或 ENTP 标签推定擅长或适合。",
-          "key": "work_and_learning",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "工作与学习场景差异"
-        },
-        {
-          "body": "在关系里，ENFP 更容易通过热情、好奇、共情和情绪共鸣表达连接。他们会在意对方的故事、感受、变化和未说出口的需求，也会希望关系里有真实、自由和成长。如果关系变得冷淡、机械或缺少回应，ENFP 可能会感到失去生命力，甚至开始怀疑这段关系是否仍然真实。",
-          "key": "communication_and_relationships",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "沟通与关系中的差异"
-        },
-        {
-          "body": "给 ENFP 的建议：观察指标：当你同时开启很多可能性时，记录哪些只是灵感，哪些已经变成对他人的承诺。练习方式：每周把新想法分成“暂存、试验、承诺”三栏，避免把热情自动升级为责任。",
-          "key": "stress_and_growth",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "压力反应与成长建议"
-        },
-        {
-          "body": "误解一：ENFP 感性，ENTP 理性。更准确地说，ENFP 会把人的动机和价值纳入判断，ENTP 会优先测试逻辑和机制；两者都可以理性，也都可能被情绪影响。",
-          "key": "misconceptions",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "常见误解"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "b214d11786397936b2b150bf67f51c0f253167df",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "最大区别在于评估可能性的中心。ENFP 更关注人的动机、价值感、情绪连接和意义；ENTP 更关注观点是否自洽、机制是否有效、规则能否被改写。两者都好奇、灵活、喜欢新可能，但判断路径不同。",
-          "question": "ENFP 和 ENTP 最大区别是什么？"
+          "answer": "可以。F/T 描述决定偏好，不决定有无逻辑或同理心。核实具体推理、行为和效果，不从字母分配技能。",
+          "key": "faq-0",
+          "question": "ENFP 能善分析，ENTP 能关心人吗？"
         },
         {
-          "answer": "不能这样排序。ENTP 更常把逻辑结构放在前台，ENFP 更常把人和价值纳入判断，但这不代表 ENFP 不理性，也不代表 ENTP 没有情绪。理性表现还取决于训练、经验、压力和具体情境。",
-          "question": "ENFP 和 ENTP 哪个更理性？"
+          "answer": "部分功能栈理论安排共同的领先 Ne，但其余位置不同，所以完整栈不同。该惯例属于理论，不是已测心理机制。",
+          "key": "faq-1",
+          "question": "两者认知功能相同吗？"
         },
         {
-          "answer": "不一定。ENTP 常通过挑战观点来测试逻辑，这可能被误读成争吵。成熟的 ENTP 会说明自己是在测试假设，而不是否定对方本人，并在讨论后给出可执行下一步。",
-          "question": "ENTP 是不是更爱吵架？"
+          "answer": "不能。辩论兴趣可能来自话题、经验、听众。比较价值和标准冲突时怎样选择，也看不符合初步印象的例子。",
+          "key": "faq-2",
+          "question": "喜欢争论就说明我是 ENTP 吗？"
         },
         {
-          "answer": "ENFP 更容易把情绪、价值和关系信号纳入判断，但这不等于不稳定。对他们来说，情绪常是理解人和意义的重要信息。关键是把感受转成可确认的事实和请求。",
-          "question": "ENFP 是不是更容易受情绪影响？"
-        },
-        {
-          "answer": "不能用类型推定领导力。可以在同一实际任务中比较如何连接参与、检验假设和组织下一步；领导表现需要责任、技能、沟通、经验与团队反馈证据。",
-          "question": "ENFP 和 ENTP 哪个更适合领导？"
-        },
-        {
-          "answer": "可以用它复盘自己的项目切入方式：你是先问人的意义和参与感，还是先问逻辑漏洞和机制实验？再看自己是否需要补收束、交付、沟通边界或反馈确认。",
-          "question": "工作中怎么使用 ENFP / ENTP 对比结果？"
-        },
-        {
-          "answer": "ENFP 更需要真实回应和价值共鸣，ENTP 更容易通过观点碰撞和共同探索建立连接。误会常出现在：ENFP 觉得 ENTP 太像在挑战人，ENTP 觉得 ENFP 太快把观点讨论理解成关系信号。",
-          "question": "关系中怎么理解 ENFP 和 ENTP 的差异？"
-        },
-        {
-          "answer": "不能。ENFP / ENTP 对比只能提供偏好线索。职业选择还需要结合 Big Five 特质、RIASEC 职业兴趣、技能证据、行业环境、工作节奏和长期复盘。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "不能。讨论实际需要、同意、价值、冲突修复。共用三个字母不保证匹配，也不提供评分。",
+          "key": "faq-3",
+          "question": "这个对比能决定是否相配吗？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "左侧类型详情页（canonical ENFP-A 公开画像）",
-          "href": "/zh/personality/enfp-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENFP-A 人格特点"
-        },
-        {
-          "body": "右侧类型详情页（canonical ENTP-A 公开画像）",
-          "href": "/zh/personality/entp-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENTP-A 人格特点"
-        },
-        {
-          "body": "MBTI 测试页",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "做免费 16 型人格测试"
-        },
-        {
-          "body": "Big Five 交叉验证",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用大五人格交叉验证特质维度"
-        },
-        {
-          "body": "RIASEC 职业兴趣",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用 RIASEC 检查职业兴趣方向"
-        },
-        {
-          "body": "ENFP A/T 对比",
-          "href": "/zh/personality/enfp-a-vs-enfp-t",
-          "key": "internal_link_6",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENFP-A 与 ENFP-T 的区别"
-        },
-        {
-          "body": "ENTP A/T 对比",
-          "href": "/zh/personality/entp-a-vs-entp-t",
-          "key": "internal_link_7",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENTP-A 与 ENTP-T 的区别"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "enfp-vs-entp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "8a7d093a85b97d26079cdb1b12158fa279e5bbe0",
       "summary_blocks": [
         {
-          "body": "ENFP 与 ENTP 都容易被新想法、新关系和新可能点燃，也都不喜欢被僵化规则过早限制。区别在于，ENFP 更常从人的动机、价值感和情绪连接判断一个方向是否值得投入；ENTP 更常从逻辑结构、机制漏洞和概念实验判断一个想法是否站得住。本文不把两者做高低排序，而是帮助用户在真实场景中区分：自己是在追问“这对人和意义有什么影响”，还是在追问“这个系统还能怎样被拆开、重组和验证”。",
+          "body": "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "ENFP 和 ENTP 的区别：可能性探索、价值判断与观点挑战"
+          "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/enfp-vs-entp",
         "zh-CN": "https://fermatmind.com/zh/personality/enfp-vs-entp"
       },
       "answer_surface_v1": {
@@ -314,95 +247,45 @@
         "ENTP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ENFP 与 ENTP 的对比只用于自我理解和复盘：帮助用户观察自己如何探索可能性、处理反馈、表达观点、建立关系和推进创意。人格类型不是身份限制，也不能预测职业成功、收入、录取、晋升、伴侣结果或人生结局。更可靠的使用方式，是把类型结果与真实经历、能力证据、Big Five 特质、RIASEC 职业兴趣和长期反馈一起看。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "enfp-vs-entp",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+      "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "最大区别在于评估可能性的中心。ENFP 更关注人的动机、价值感、情绪连接和意义；ENTP 更关注观点是否自洽、机制是否有效、规则能否被改写。两者都好奇、灵活、喜欢新可能，但判断路径不同。",
-          "question": "ENFP 和 ENTP 最大区别是什么？"
+          "answer": "可以。F/T 描述决定偏好，不决定有无逻辑或同理心。核实具体推理、行为和效果，不从字母分配技能。",
+          "question": "ENFP 能善分析，ENTP 能关心人吗？"
         },
         {
-          "answer": "不能这样排序。ENTP 更常把逻辑结构放在前台，ENFP 更常把人和价值纳入判断，但这不代表 ENFP 不理性，也不代表 ENTP 没有情绪。理性表现还取决于训练、经验、压力和具体情境。",
-          "question": "ENFP 和 ENTP 哪个更理性？"
+          "answer": "部分功能栈理论安排共同的领先 Ne，但其余位置不同，所以完整栈不同。该惯例属于理论，不是已测心理机制。",
+          "question": "两者认知功能相同吗？"
         },
         {
-          "answer": "不一定。ENTP 常通过挑战观点来测试逻辑，这可能被误读成争吵。成熟的 ENTP 会说明自己是在测试假设，而不是否定对方本人，并在讨论后给出可执行下一步。",
-          "question": "ENTP 是不是更爱吵架？"
+          "answer": "不能。辩论兴趣可能来自话题、经验、听众。比较价值和标准冲突时怎样选择，也看不符合初步印象的例子。",
+          "question": "喜欢争论就说明我是 ENTP 吗？"
         },
         {
-          "answer": "ENFP 更容易把情绪、价值和关系信号纳入判断，但这不等于不稳定。对他们来说，情绪常是理解人和意义的重要信息。关键是把感受转成可确认的事实和请求。",
-          "question": "ENFP 是不是更容易受情绪影响？"
-        },
-        {
-          "answer": "不能用类型推定领导力。可以在同一实际任务中比较如何连接参与、检验假设和组织下一步；领导表现需要责任、技能、沟通、经验与团队反馈证据。",
-          "question": "ENFP 和 ENTP 哪个更适合领导？"
-        },
-        {
-          "answer": "可以用它复盘自己的项目切入方式：你是先问人的意义和参与感，还是先问逻辑漏洞和机制实验？再看自己是否需要补收束、交付、沟通边界或反馈确认。",
-          "question": "工作中怎么使用 ENFP / ENTP 对比结果？"
-        },
-        {
-          "answer": "ENFP 更需要真实回应和价值共鸣，ENTP 更容易通过观点碰撞和共同探索建立连接。误会常出现在：ENFP 觉得 ENTP 太像在挑战人，ENTP 觉得 ENFP 太快把观点讨论理解成关系信号。",
-          "question": "关系中怎么理解 ENFP 和 ENTP 的差异？"
-        },
-        {
-          "answer": "不能。ENFP / ENTP 对比只能提供偏好线索。职业选择还需要结合 Big Five 特质、RIASEC 职业兴趣、技能证据、行业环境、工作节奏和长期复盘。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "不能。讨论实际需要、同意、价值、冲突修复。共用三个字母不保证匹配，也不提供评分。",
+          "question": "这个对比能决定是否相配吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ENFP-A 人格特点",
-          "href": "/zh/personality/enfp-a",
-          "label": "查看 ENFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ENFP-A 公开画像）"
+          "href": "/zh/personality/enfp",
+          "label": "ENFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 ENTP-A 人格特点",
-          "href": "/zh/personality/entp-a",
-          "label": "查看 ENTP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical ENTP-A 公开画像）"
+          "href": "/zh/personality/entp",
+          "label": "ENTP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ENFP-A 与 ENFP-T 的区别",
-          "href": "/zh/personality/enfp-a-vs-enfp-t",
-          "label": "查看 ENFP-A 与 ENFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENFP A/T 对比"
-        },
-        {
-          "anchor_text": "查看 ENTP-A 与 ENTP-T 的区别",
-          "href": "/zh/personality/entp-a-vs-entp-t",
-          "label": "查看 ENTP-A 与 ENTP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENTP A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -422,125 +305,104 @@
       "sections": [
         {
           "body": [
-            "ENFP 和 ENTP 最容易混淆，因为他们都外向、灵活、反应快，也都喜欢把一个普通话题推向新的可能性。两者都不太满足于按部就班，都可能在聊天、项目、学习或关系中不断提出“有没有另一种做法”。真正的差异不是一个感性、一个理性，而是他们评估可能性的中心不同：ENFP 更先看人、价值和意义，ENTP 更先看逻辑、机制和可测试性。",
-            "ENFP 的探索通常带着关系温度。他们会问：这个想法会不会让人更有生命力？这件事是否符合真实的价值？这段关系有没有被看见、被理解、被尊重？因此，ENFP 的创意常常不是冷冰冰的点子，而是把人的故事、情绪、动机和未来可能性连接起来。FermatMind 的 ENFP-A / ENFP-T 资产都强调灵感探索、真实表达与承诺边界，这也说明 ENFP 的核心不是单纯外向热闹，而是把可能性和人连接起来。",
-            "ENTP 的探索更像一套持续运行的概念实验系统。他们会问：这个观点的前提是什么？规则能不能被重写？反例在哪里？如果把机制拆开，是否会得到更好的路径？FermatMind 的 ENTP-A / ENTP-T 资产都把核心放在可能性探索、逻辑拆解和落地承诺之间的张力上。ENTP 不一定是在“吵架”，很多时候是在用挑战测试观点的稳定性。",
-            "所以，如果一个人更在意“这个方向是否真实、有意义、能不能让人被点燃”，他可能更接近 ENFP 的判断方式；如果一个人更在意“这个说法是否自洽、漏洞在哪里、能不能被改造成更聪明的系统”，他可能更接近 ENTP 的判断方式。但这仍然只是倾向，不是身份判决。具体判断还需要结合长期行为、真实反馈、Big Five 特质维度和职业兴趣等证据。"
+            "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ENFP 和 ENTP 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ENFP 和 ENTP 的外在节奏很像：都能快速接话，都容易对新鲜信息兴奋，也都可能在一场讨论里连续抛出多个角度。对于不熟悉 MBTI 的人来说，只要看到一个人点子多、话题跳跃、讨厌僵化、喜欢探索，就很容易把 ENFP 和 ENTP 放在同一个框里。事实上，这种相似来自共同的外向直觉倾向：他们都容易看到一个现象背后还能延伸出什么。",
-            "混淆还来自他们都不喜欢过早定型。ENFP 不愿意把人的未来写死，ENTP 不愿意把想法的边界写死。ENFP 会觉得一个人还有别的可能，ENTP 会觉得一个观点还有别的解法。二者都可能反对“事情只能这样”，只是反对的理由不同：ENFP 是因为那样会压缩人的真实和成长，ENTP 是因为那样会限制模型、规则和实验。",
-            "在社交中，两者也都可能显得有感染力。ENFP 的感染力常来自情绪共鸣、故事感和对人的好奇；ENTP 的感染力常来自观点碰撞、幽默反转和对规则的挑战。一个 ENFP 可能把沉闷的场面变成一段有温度的连接，一个 ENTP 可能把僵住的议题变成一场新的脑力游戏。外界看到的都是“活跃”，但背后的驱动并不一样。",
-            "因此，区分 ENFP 和 ENTP，不应只看一个人是否外向、是否话多、是否有创意。更关键的问题是：他在提出新想法时，最想保护的是人的价值和感受，还是观点的逻辑和机制？他在被反驳时，首先受影响的是关系连接和意义感，还是论证结构和规则可行性？这些问题比“谁更感性、谁更理性”准确得多。"
+            "两者都描述外向、直觉、知觉：关注外部、模式或可能性、对新信息保留空间。类型叙述中都可能通过讨论探索选项，但社交精力、想象力、兴趣不必相同。",
+            "差异是考虑决定的偏好。ENFP 式问题可能问方案是否符合价值、服务其中的人；ENTP 式问题可能问解释和标准是否成立。两者都能考虑价值与逻辑，偏好不决定是否拥有某种能力。",
+            "功能栈理论常用 Ne–Fi–Te–Si 描述 ENFP，Ne–Ti–Fe–Si 描述 ENTP。这是理论惯例，不证明不同心理机制，也不是给别人定型的捷径。A/T 是另外扩展，不能解决 F/T 区分。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ENFP 和 ENTP 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "ENFP 和 ENTP 都很容易被“还没有发生的可能性”吸引。他们不太愿意只接受既定答案，也不喜欢把生活变成重复执行。一个新的项目、一段陌生关系、一种新的工具、一套不同的解释框架，都可能让他们迅速进入状态。这种开放性让他们在早期探索、创意启动、跨界沟通和新问题拆解中表现得很活跃。",
-            "两者也都可能对常规流程缺乏耐心。如果一件事只是为了维持形式，而不能带来新的理解、新的连接或更好的效果，他们往往会想改掉它。ENFP 可能会问：“这个流程有没有让人变得麻木？”ENTP 可能会问：“这个流程的逻辑还成立吗？”问法不同，但都说明他们很难长期忍受没有意义或没有机制价值的重复。",
-            "他们在人际中都可能显得轻快、好接近、有话题。ENFP 常通过热情、共情和真实表达拉近距离；ENTP 常通过幽默、挑战和脑力互动激活对话。两者都可能让身边人觉得“和这个人聊天不会无聊”。但这种外在活跃并不代表他们没有深度，也不代表他们不会疲惫。真正消耗他们的，往往不是互动本身，而是被迫在不真实、无趣或不允许探索的环境里消耗。",
-            "共同点之外，必须保留边界。ENFP 和 ENTP 的差异不能用来预测谁更适合某种职业、谁更有创造力或谁更擅长关系。人格类型只是观察偏好的工具。一个 ENFP 可以非常理性，一个 ENTP 也可以非常在意关系。准确的使用方式，是把类型当作复盘线索，再回到真实行为、长期反馈、能力证据和具体环境中验证。"
+            "| 观察点 | ENFP | ENTP |\n| --- | --- | --- |\n| 代码差别 | 情感 F：价值与对人的影响 | 思考 T：逻辑一致与非个人化标准 |\n| 原创资助例子 | 核查方案是否保留既定目的 | 核查选择规则是否一致 |\n| 可能的盲点 | 把重视的目的当作实施已合理 | 把一致规则当作已包含全部人的后果 |\n| 共同实践 | 说明价值并检验实际效果 | 说明规则并查遗漏了谁的需要 |"
           ],
-          "id": "shared_traits",
-          "title": "共同点：同样外向、灵活、好奇并喜欢新可能"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "ENFP 的可能性探索通常先经过价值感过滤。一个想法是否让人更自由、更真实、更被理解，一个项目是否让人重新看到意义，一段关系是否还有成长空间，这些问题会直接影响 ENFP 是否愿意投入。FermatMind 的 ENFP 内容资产反复强调灵感、真实表达、连接、承诺边界和反馈处理，这些都指向同一个核心：ENFP 的发散不是为了发散本身，而是为了找到更有生命力的路径。",
-            "ENTP 的可能性探索则更像概念和机制的实验。一个观点越稳定，他们越想测试它的边界；一个规则越被默认，他们越想知道它是否可以被重写。ENTP 的挑战不是单纯反叛，而是通过反问、对比、拆解和重构，让观点暴露出真正的强度。FermatMind 的 ENTP 内容资产强调逻辑拆解、快速试错、重构思路和落地承诺，这说明 ENTP 的核心不是爱争，而是用碰撞寻找更好的解释。",
-            "这也解释了两者在讨论中的差异。ENFP 可能会把一个想法拉回人的体验：“这个方案对用户、团队、关系有什么影响？”ENTP 可能会把一个想法推向机制测试：“这个方案的假设是什么？如果换个前提会怎样？”两者都在推进讨论，只是推进方向不同。ENFP 更像在问方向是否有意义，ENTP 更像在问结构是否站得住。",
-            "如果把这个差异说成 F/T 的简单二分，就会写浅。ENFP 并不是不讲逻辑，而是会把人的动机、价值和情绪证据纳入判断；ENTP 并不是不在意人，而是更习惯先测试观点和机制，再处理关系反馈。成熟的 ENFP 需要让价值感进入可执行结构，成熟的 ENTP 需要让逻辑挑战保留关系可承受度。"
+            "原创工作情景：团队为社区项目分有限资助。一种方式看受益者与使命，另一种检查筛选标准能否一致适用。结合两边：说明目的、应用标准、核查后果。同一人可以贡献两种做法。",
+            "原创关系情景：朋友对取消安排有分歧。一方关注承诺意义，另一方比较理由与下次是否适用同样规则。问实际需要与涉及价值，不把标准关注解释为不关心，也不把感受关注解释为不会推理。"
           ],
-          "id": "core_difference",
-          "title": "核心差异：价值驱动的可能性 vs 逻辑驱动的实验"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "工作探索可以分别记录两类问题：哪些任务需要理解人的动机、表达想法并形成参与，哪些任务需要检验假设、比较反例和重构机制。把这些任务与自己的兴趣、技能证据和小规模试做反馈比较，不能从 ENFP 或 ENTP 标签推定擅长或适合。",
-            "面对产品、流程或策略问题，可以尝试列出一个假设、一个反例和一个可验证的小步骤。是否愿意做、是否做得好，需要真实任务和反馈；ENTP 标签不能证明试验或重构能力。",
-            "面对不确定任务时，ENFP 往往先问：这件事为什么值得做？谁会被影响？有没有更能激发人的讲法？ENTP 往往先问：这个问题的假设是什么？最小可测试版本是什么？如果第一条路径失败，替代方案是什么？因此，ENFP 可能先建立意义和参与动机，ENTP 可能先搭建试错框架和逻辑验证路径。",
-            "协作中，ENFP 需要注意不要把所有灵感都立刻变成承诺。太多开放可能会让团队兴奋，也可能让团队无法判断优先级。ENTP 需要注意不要把所有讨论都变成挑战。一个观点值得测试，不代表对方随时准备接受高强度反问。职业成长上，ENFP 要练习收束，ENTP 要练习承接；ENFP 要把人的可能性落成下一步，ENTP 要把概念实验变成可被团队跟进的行动边界。"
+            "爱辩论不能确认 ENTP，温暖不能确认 ENFP。F 不表示情绪不稳，T 不表示缺少情绪。两者都能严谨推理、深切关心、维护日常、完成工作。幽默、职业兴趣、哭泣频率都不是定型规则。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "在关系里，ENFP 更容易通过热情、好奇、共情和情绪共鸣表达连接。他们会在意对方的故事、感受、变化和未说出口的需求，也会希望关系里有真实、自由和成长。如果关系变得冷淡、机械或缺少回应，ENFP 可能会感到失去生命力，甚至开始怀疑这段关系是否仍然真实。",
-            "ENTP 的连接方式更常通过观点碰撞、幽默、共同探索和新体验展开。他们可能会用玩笑、反问或挑战来表达兴趣，因为在他们看来，能一起讨论、一起拆解、一起把一个观点推到更远，本身就是一种亲近。问题在于，对方可能把这种挑战理解成否定，尤其在对方需要情绪承认而不是思维实验时。",
-            "冲突中，ENFP 更容易关注关系是否仍然安全：对方是不是理解我？这件事有没有伤害价值和信任？ENTP 更容易关注问题是否被说清楚：你的论据是什么？这个结论为什么成立？这两种反应都可能有效，也都可能制造误会。ENFP 如果只强调感受，可能让讨论失去结构；ENTP 如果只强调逻辑，可能让对方觉得情绪被压扁。",
-            "更可执行的沟通方式是：ENFP 在表达感受时补上具体事实和请求，例如“我在意的是这件事没有被提前说清，我需要下次有明确确认”；ENTP 在挑战观点前先标注意图，例如“我不是否定你，我是在测试这个方案是否更稳”。这样，ENFP 的价值感不会变成模糊压力，ENTP 的逻辑挑战也不会变成关系攻击。"
+            "比较三个有真实取舍的决定：先查什么标准，什么难以放下，什么会改变想法？保留偏好另一方式的反例，核查是否角色要求。两边都符合时可保留问题，不把叙述认同当作已验证结果。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "给 ENFP 的建议：观察指标：当你同时开启很多可能性时，记录哪些只是灵感，哪些已经变成对他人的承诺。练习方式：每周把新想法分成“暂存、试验、承诺”三栏，避免把热情自动升级为责任。",
-            "给 ENFP 的建议：观察指标：当别人没有立即回应你的热情时，先区分对方是不同意、没理解、没能量，还是只需要时间。复盘问题：我现在是在确认真实反馈，还是在用想象填补沉默？",
-            "给 ENFP 的建议：练习方式：把价值感翻译成行动句。不要只说“我觉得这个项目应该更有温度”，而是说“我们可以先访谈三位用户，确认他们真正卡在哪里”。",
-            "给 ENFP 的建议：复盘问题：我最想保护的是人的感受、长期意义，还是我自己对自由和变化的需求？当这三者冲突时，我能不能说出当前优先级。",
-            "给 ENTP 的建议：观察指标：一次讨论后，别人是更清楚下一步，还是只是觉得被你挑战了。练习方式：每次反问前先说明目的——“我想测试这个假设，不是反对你本人”。",
-            "给 ENTP 的建议：练习方式：为每个新想法设定最小验证动作。不要只停留在概念上，而要明确下一步谁做、用什么标准判断、多久复盘。",
-            "给 ENTP 的建议：复盘问题：我现在继续挑战，是为了找到更好的机制，还是因为讨论本身让我兴奋？如果是后者，需要确认它是否仍然服务目标。",
-            "给 ENTP 的建议：观察指标：当别人提出情绪反馈时，你是否马上把它转成论点。成长方向不是放弃逻辑，而是先承认对方体验，再讨论机制。"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "误解一：ENFP 感性，ENTP 理性。更准确地说，ENFP 会把人的动机和价值纳入判断，ENTP 会优先测试逻辑和机制；两者都可以理性，也都可能被情绪影响。",
-            "误解二：ENTP 就是爱吵架。许多 ENTP 的挑战是为了测试观点，而不是为了压倒别人。真正的问题在于他们是否说明了挑战目的，是否照顾了对方承受度。",
-            "误解三：ENFP 没有逻辑。ENFP 不是不讲逻辑，而是更容易先问这件事对人、意义和关系有什么影响。成熟的 ENFP 会把价值感转化成清晰步骤。",
-            "误解四：ENFP 一定更温柔，ENTP 一定更犀利。类型只能描述倾向，不能决定一个人的礼貌、共情、教养或沟通成熟度。",
-            "误解五：P 型都没有执行力。ENFP 和 ENTP 都可能执行力很强，只是他们需要把开放探索收束成具体承诺、验证节点和复盘机制。",
-            "误解六：测出 ENFP 或 ENTP 就能决定职业。人格结果不能预测职业成功、收入、晋升或适配度。职业判断还需要结合能力证据、兴趣、工作环境、行业机会和现实反馈。",
-            "误解七：ENFP 和 ENTP 的差异只在 F/T。真正差异还包括评估问题的中心、处理反馈的方式、沟通意图和成长策略，不能只看一个字母。",
-            "误解八：类型解释可以替代真实沟通。无论是 ENFP 还是 ENTP，如果关系中出现误解，都需要回到具体行为、感受、责任和下一步，而不是用人格标签结束讨论。"
+            "- [ENFP 基础人格](/zh/personality/enfp)\n- [ENTP 基础人格](/zh/personality/entp)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-      "seo_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+      "seo_description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENFP 与 ENTP 的区别：情感、思考与决定情景",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "fermatmind_source_assets_used": [
-          "/mnt/data/enfp-a.md",
-          "/mnt/data/enfp-t.md",
-          "/mnt/data/entp-a.md",
-          "/mnt/data/entp-t.md"
-        ],
-        "medical_or_career_decision_claims": false,
-        "source_basis_summary": [
-          "ENFP-A / ENFP-T 文本资产强调灵感探索、真实表达、关系反馈、承诺边界和可能性连接。",
-          "ENTP-A / ENTP-T 文本资产强调可能性探索、逻辑拆解、观点挑战、快速试错和落地承诺。",
-          "16P 未作为文案来源，仅作为 MBTI 内容页常见信息架构参考；未复制其句子、比喻、CTA 或品牌表达。"
-        ]
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e",
-      "summary": "ENFP 与 ENTP 都容易被新想法、新关系和新可能点燃，也都不喜欢被僵化规则过早限制。区别在于，ENFP 更常从人的动机、价值感和情绪连接判断一个方向是否值得投入；ENTP 更常从逻辑结构、机制漏洞和概念实验判断一个想法是否站得住。本文不把两者做高低排序，而是帮助用户在真实场景中区分：自己是在追问“这对人和意义有什么影响”，还是在追问“这个系统还能怎样被拆开、重组和验证”。",
-      "title": "ENFP 和 ENTP 的区别：可能性探索、价值判断与观点挑战"
+      "source_sha256": "c926d1deeea05dfc035c12c8a9b7977905676b0914a31759bac717060fcdce5d",
+      "summary": "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。",
+      "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/enfp-vs-entp",
         "zh-CN": "https://fermatmind.com/zh/personality/enfp-vs-entp"
       },
       "answer_surface_v1": {
@@ -696,95 +558,45 @@
         "ENTP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、关系判断或职业决定。ENFP 与 ENTP 的对比只用于自我理解和复盘：帮助用户观察自己如何探索可能性、处理反馈、表达观点、建立关系和推进创意。人格类型不是身份限制，也不能预测职业成功、收入、录取、晋升、伴侣结果或人生结局。更可靠的使用方式，是把类型结果与真实经历、能力证据、Big Five 特质、RIASEC 职业兴趣和长期反馈一起看。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "enfp-vs-entp",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+      "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "最大区别在于评估可能性的中心。ENFP 更关注人的动机、价值感、情绪连接和意义；ENTP 更关注观点是否自洽、机制是否有效、规则能否被改写。两者都好奇、灵活、喜欢新可能，但判断路径不同。",
-          "question": "ENFP 和 ENTP 最大区别是什么？"
+          "answer": "可以。F/T 描述决定偏好，不决定有无逻辑或同理心。核实具体推理、行为和效果，不从字母分配技能。",
+          "question": "ENFP 能善分析，ENTP 能关心人吗？"
         },
         {
-          "answer": "不能这样排序。ENTP 更常把逻辑结构放在前台，ENFP 更常把人和价值纳入判断，但这不代表 ENFP 不理性，也不代表 ENTP 没有情绪。理性表现还取决于训练、经验、压力和具体情境。",
-          "question": "ENFP 和 ENTP 哪个更理性？"
+          "answer": "部分功能栈理论安排共同的领先 Ne，但其余位置不同，所以完整栈不同。该惯例属于理论，不是已测心理机制。",
+          "question": "两者认知功能相同吗？"
         },
         {
-          "answer": "不一定。ENTP 常通过挑战观点来测试逻辑，这可能被误读成争吵。成熟的 ENTP 会说明自己是在测试假设，而不是否定对方本人，并在讨论后给出可执行下一步。",
-          "question": "ENTP 是不是更爱吵架？"
+          "answer": "不能。辩论兴趣可能来自话题、经验、听众。比较价值和标准冲突时怎样选择，也看不符合初步印象的例子。",
+          "question": "喜欢争论就说明我是 ENTP 吗？"
         },
         {
-          "answer": "ENFP 更容易把情绪、价值和关系信号纳入判断，但这不等于不稳定。对他们来说，情绪常是理解人和意义的重要信息。关键是把感受转成可确认的事实和请求。",
-          "question": "ENFP 是不是更容易受情绪影响？"
-        },
-        {
-          "answer": "不能用类型推定领导力。可以在同一实际任务中比较如何连接参与、检验假设和组织下一步；领导表现需要责任、技能、沟通、经验与团队反馈证据。",
-          "question": "ENFP 和 ENTP 哪个更适合领导？"
-        },
-        {
-          "answer": "可以用它复盘自己的项目切入方式：你是先问人的意义和参与感，还是先问逻辑漏洞和机制实验？再看自己是否需要补收束、交付、沟通边界或反馈确认。",
-          "question": "工作中怎么使用 ENFP / ENTP 对比结果？"
-        },
-        {
-          "answer": "ENFP 更需要真实回应和价值共鸣，ENTP 更容易通过观点碰撞和共同探索建立连接。误会常出现在：ENFP 觉得 ENTP 太像在挑战人，ENTP 觉得 ENFP 太快把观点讨论理解成关系信号。",
-          "question": "关系中怎么理解 ENFP 和 ENTP 的差异？"
-        },
-        {
-          "answer": "不能。ENFP / ENTP 对比只能提供偏好线索。职业选择还需要结合 Big Five 特质、RIASEC 职业兴趣、技能证据、行业环境、工作节奏和长期复盘。",
-          "question": "这个结果能不能决定职业选择？"
+          "answer": "不能。讨论实际需要、同意、价值、冲突修复。共用三个字母不保证匹配，也不提供评分。",
+          "question": "这个对比能决定是否相配吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ENFP-A 人格特点",
-          "href": "/zh/personality/enfp-a",
-          "label": "查看 ENFP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ENFP-A 公开画像）"
+          "href": "/zh/personality/enfp",
+          "label": "ENFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 ENTP-A 人格特点",
-          "href": "/zh/personality/entp-a",
-          "label": "查看 ENTP-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical ENTP-A 公开画像）"
+          "href": "/zh/personality/entp",
+          "label": "ENTP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ENFP-A 与 ENFP-T 的区别",
-          "href": "/zh/personality/enfp-a-vs-enfp-t",
-          "label": "查看 ENFP-A 与 ENFP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENFP A/T 对比"
-        },
-        {
-          "anchor_text": "查看 ENTP-A 与 ENTP-T 的区别",
-          "href": "/zh/personality/entp-a-vs-entp-t",
-          "label": "查看 ENTP-A 与 ENTP-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENTP A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -804,260 +616,250 @@
       "sections": [
         {
           "body": [
-            "ENFP 和 ENTP 最容易混淆，因为他们都外向、灵活、反应快，也都喜欢把一个普通话题推向新的可能性。两者都不太满足于按部就班，都可能在聊天、项目、学习或关系中不断提出“有没有另一种做法”。真正的差异不是一个感性、一个理性，而是他们评估可能性的中心不同：ENFP 更先看人、价值和意义，ENTP 更先看逻辑、机制和可测试性。",
-            "ENFP 的探索通常带着关系温度。他们会问：这个想法会不会让人更有生命力？这件事是否符合真实的价值？这段关系有没有被看见、被理解、被尊重？因此，ENFP 的创意常常不是冷冰冰的点子，而是把人的故事、情绪、动机和未来可能性连接起来。FermatMind 的 ENFP-A / ENFP-T 资产都强调灵感探索、真实表达与承诺边界，这也说明 ENFP 的核心不是单纯外向热闹，而是把可能性和人连接起来。",
-            "ENTP 的探索更像一套持续运行的概念实验系统。他们会问：这个观点的前提是什么？规则能不能被重写？反例在哪里？如果把机制拆开，是否会得到更好的路径？FermatMind 的 ENTP-A / ENTP-T 资产都把核心放在可能性探索、逻辑拆解和落地承诺之间的张力上。ENTP 不一定是在“吵架”，很多时候是在用挑战测试观点的稳定性。",
-            "所以，如果一个人更在意“这个方向是否真实、有意义、能不能让人被点燃”，他可能更接近 ENFP 的判断方式；如果一个人更在意“这个说法是否自洽、漏洞在哪里、能不能被改造成更聪明的系统”，他可能更接近 ENTP 的判断方式。但这仍然只是倾向，不是身份判决。具体判断还需要结合长期行为、真实反馈、Big Five 特质维度和职业兴趣等证据。"
+            "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ENFP 和 ENTP 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ENFP 和 ENTP 的外在节奏很像：都能快速接话，都容易对新鲜信息兴奋，也都可能在一场讨论里连续抛出多个角度。对于不熟悉 MBTI 的人来说，只要看到一个人点子多、话题跳跃、讨厌僵化、喜欢探索，就很容易把 ENFP 和 ENTP 放在同一个框里。事实上，这种相似来自共同的外向直觉倾向：他们都容易看到一个现象背后还能延伸出什么。",
-            "混淆还来自他们都不喜欢过早定型。ENFP 不愿意把人的未来写死，ENTP 不愿意把想法的边界写死。ENFP 会觉得一个人还有别的可能，ENTP 会觉得一个观点还有别的解法。二者都可能反对“事情只能这样”，只是反对的理由不同：ENFP 是因为那样会压缩人的真实和成长，ENTP 是因为那样会限制模型、规则和实验。",
-            "在社交中，两者也都可能显得有感染力。ENFP 的感染力常来自情绪共鸣、故事感和对人的好奇；ENTP 的感染力常来自观点碰撞、幽默反转和对规则的挑战。一个 ENFP 可能把沉闷的场面变成一段有温度的连接，一个 ENTP 可能把僵住的议题变成一场新的脑力游戏。外界看到的都是“活跃”，但背后的驱动并不一样。",
-            "因此，区分 ENFP 和 ENTP，不应只看一个人是否外向、是否话多、是否有创意。更关键的问题是：他在提出新想法时，最想保护的是人的价值和感受，还是观点的逻辑和机制？他在被反驳时，首先受影响的是关系连接和意义感，还是论证结构和规则可行性？这些问题比“谁更感性、谁更理性”准确得多。"
+            "两者都描述外向、直觉、知觉：关注外部、模式或可能性、对新信息保留空间。类型叙述中都可能通过讨论探索选项，但社交精力、想象力、兴趣不必相同。",
+            "差异是考虑决定的偏好。ENFP 式问题可能问方案是否符合价值、服务其中的人；ENTP 式问题可能问解释和标准是否成立。两者都能考虑价值与逻辑，偏好不决定是否拥有某种能力。",
+            "功能栈理论常用 Ne–Fi–Te–Si 描述 ENFP，Ne–Ti–Fe–Si 描述 ENTP。这是理论惯例，不证明不同心理机制，也不是给别人定型的捷径。A/T 是另外扩展，不能解决 F/T 区分。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ENFP 和 ENTP 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "ENFP 和 ENTP 都很容易被“还没有发生的可能性”吸引。他们不太愿意只接受既定答案，也不喜欢把生活变成重复执行。一个新的项目、一段陌生关系、一种新的工具、一套不同的解释框架，都可能让他们迅速进入状态。这种开放性让他们在早期探索、创意启动、跨界沟通和新问题拆解中表现得很活跃。",
-            "两者也都可能对常规流程缺乏耐心。如果一件事只是为了维持形式，而不能带来新的理解、新的连接或更好的效果，他们往往会想改掉它。ENFP 可能会问：“这个流程有没有让人变得麻木？”ENTP 可能会问：“这个流程的逻辑还成立吗？”问法不同，但都说明他们很难长期忍受没有意义或没有机制价值的重复。",
-            "他们在人际中都可能显得轻快、好接近、有话题。ENFP 常通过热情、共情和真实表达拉近距离；ENTP 常通过幽默、挑战和脑力互动激活对话。两者都可能让身边人觉得“和这个人聊天不会无聊”。但这种外在活跃并不代表他们没有深度，也不代表他们不会疲惫。真正消耗他们的，往往不是互动本身，而是被迫在不真实、无趣或不允许探索的环境里消耗。",
-            "共同点之外，必须保留边界。ENFP 和 ENTP 的差异不能用来预测谁更适合某种职业、谁更有创造力或谁更擅长关系。人格类型只是观察偏好的工具。一个 ENFP 可以非常理性，一个 ENTP 也可以非常在意关系。准确的使用方式，是把类型当作复盘线索，再回到真实行为、长期反馈、能力证据和具体环境中验证。"
+            "| 观察点 | ENFP | ENTP |\n| --- | --- | --- |\n| 代码差别 | 情感 F：价值与对人的影响 | 思考 T：逻辑一致与非个人化标准 |\n| 原创资助例子 | 核查方案是否保留既定目的 | 核查选择规则是否一致 |\n| 可能的盲点 | 把重视的目的当作实施已合理 | 把一致规则当作已包含全部人的后果 |\n| 共同实践 | 说明价值并检验实际效果 | 说明规则并查遗漏了谁的需要 |"
           ],
-          "id": "shared_traits",
-          "title": "共同点：同样外向、灵活、好奇并喜欢新可能"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "ENFP 的可能性探索通常先经过价值感过滤。一个想法是否让人更自由、更真实、更被理解，一个项目是否让人重新看到意义，一段关系是否还有成长空间，这些问题会直接影响 ENFP 是否愿意投入。FermatMind 的 ENFP 内容资产反复强调灵感、真实表达、连接、承诺边界和反馈处理，这些都指向同一个核心：ENFP 的发散不是为了发散本身，而是为了找到更有生命力的路径。",
-            "ENTP 的可能性探索则更像概念和机制的实验。一个观点越稳定，他们越想测试它的边界；一个规则越被默认，他们越想知道它是否可以被重写。ENTP 的挑战不是单纯反叛，而是通过反问、对比、拆解和重构，让观点暴露出真正的强度。FermatMind 的 ENTP 内容资产强调逻辑拆解、快速试错、重构思路和落地承诺，这说明 ENTP 的核心不是爱争，而是用碰撞寻找更好的解释。",
-            "这也解释了两者在讨论中的差异。ENFP 可能会把一个想法拉回人的体验：“这个方案对用户、团队、关系有什么影响？”ENTP 可能会把一个想法推向机制测试：“这个方案的假设是什么？如果换个前提会怎样？”两者都在推进讨论，只是推进方向不同。ENFP 更像在问方向是否有意义，ENTP 更像在问结构是否站得住。",
-            "如果把这个差异说成 F/T 的简单二分，就会写浅。ENFP 并不是不讲逻辑，而是会把人的动机、价值和情绪证据纳入判断；ENTP 并不是不在意人，而是更习惯先测试观点和机制，再处理关系反馈。成熟的 ENFP 需要让价值感进入可执行结构，成熟的 ENTP 需要让逻辑挑战保留关系可承受度。"
+            "原创工作情景：团队为社区项目分有限资助。一种方式看受益者与使命，另一种检查筛选标准能否一致适用。结合两边：说明目的、应用标准、核查后果。同一人可以贡献两种做法。",
+            "原创关系情景：朋友对取消安排有分歧。一方关注承诺意义，另一方比较理由与下次是否适用同样规则。问实际需要与涉及价值，不把标准关注解释为不关心，也不把感受关注解释为不会推理。"
           ],
-          "id": "core_difference",
-          "title": "核心差异：价值驱动的可能性 vs 逻辑驱动的实验"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "工作探索可以分别记录两类问题：哪些任务需要理解人的动机、表达想法并形成参与，哪些任务需要检验假设、比较反例和重构机制。把这些任务与自己的兴趣、技能证据和小规模试做反馈比较，不能从 ENFP 或 ENTP 标签推定擅长或适合。",
-            "面对产品、流程或策略问题，可以尝试列出一个假设、一个反例和一个可验证的小步骤。是否愿意做、是否做得好，需要真实任务和反馈；ENTP 标签不能证明试验或重构能力。",
-            "面对不确定任务时，ENFP 往往先问：这件事为什么值得做？谁会被影响？有没有更能激发人的讲法？ENTP 往往先问：这个问题的假设是什么？最小可测试版本是什么？如果第一条路径失败，替代方案是什么？因此，ENFP 可能先建立意义和参与动机，ENTP 可能先搭建试错框架和逻辑验证路径。",
-            "协作中，ENFP 需要注意不要把所有灵感都立刻变成承诺。太多开放可能会让团队兴奋，也可能让团队无法判断优先级。ENTP 需要注意不要把所有讨论都变成挑战。一个观点值得测试，不代表对方随时准备接受高强度反问。职业成长上，ENFP 要练习收束，ENTP 要练习承接；ENFP 要把人的可能性落成下一步，ENTP 要把概念实验变成可被团队跟进的行动边界。"
+            "爱辩论不能确认 ENTP，温暖不能确认 ENFP。F 不表示情绪不稳，T 不表示缺少情绪。两者都能严谨推理、深切关心、维护日常、完成工作。幽默、职业兴趣、哭泣频率都不是定型规则。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "在关系里，ENFP 更容易通过热情、好奇、共情和情绪共鸣表达连接。他们会在意对方的故事、感受、变化和未说出口的需求，也会希望关系里有真实、自由和成长。如果关系变得冷淡、机械或缺少回应，ENFP 可能会感到失去生命力，甚至开始怀疑这段关系是否仍然真实。",
-            "ENTP 的连接方式更常通过观点碰撞、幽默、共同探索和新体验展开。他们可能会用玩笑、反问或挑战来表达兴趣，因为在他们看来，能一起讨论、一起拆解、一起把一个观点推到更远，本身就是一种亲近。问题在于，对方可能把这种挑战理解成否定，尤其在对方需要情绪承认而不是思维实验时。",
-            "冲突中，ENFP 更容易关注关系是否仍然安全：对方是不是理解我？这件事有没有伤害价值和信任？ENTP 更容易关注问题是否被说清楚：你的论据是什么？这个结论为什么成立？这两种反应都可能有效，也都可能制造误会。ENFP 如果只强调感受，可能让讨论失去结构；ENTP 如果只强调逻辑，可能让对方觉得情绪被压扁。",
-            "更可执行的沟通方式是：ENFP 在表达感受时补上具体事实和请求，例如“我在意的是这件事没有被提前说清，我需要下次有明确确认”；ENTP 在挑战观点前先标注意图，例如“我不是否定你，我是在测试这个方案是否更稳”。这样，ENFP 的价值感不会变成模糊压力，ENTP 的逻辑挑战也不会变成关系攻击。"
+            "比较三个有真实取舍的决定：先查什么标准，什么难以放下，什么会改变想法？保留偏好另一方式的反例，核查是否角色要求。两边都符合时可保留问题，不把叙述认同当作已验证结果。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "给 ENFP 的建议：观察指标：当你同时开启很多可能性时，记录哪些只是灵感，哪些已经变成对他人的承诺。练习方式：每周把新想法分成“暂存、试验、承诺”三栏，避免把热情自动升级为责任。",
-            "给 ENFP 的建议：观察指标：当别人没有立即回应你的热情时，先区分对方是不同意、没理解、没能量，还是只需要时间。复盘问题：我现在是在确认真实反馈，还是在用想象填补沉默？",
-            "给 ENFP 的建议：练习方式：把价值感翻译成行动句。不要只说“我觉得这个项目应该更有温度”，而是说“我们可以先访谈三位用户，确认他们真正卡在哪里”。",
-            "给 ENFP 的建议：复盘问题：我最想保护的是人的感受、长期意义，还是我自己对自由和变化的需求？当这三者冲突时，我能不能说出当前优先级。",
-            "给 ENTP 的建议：观察指标：一次讨论后，别人是更清楚下一步，还是只是觉得被你挑战了。练习方式：每次反问前先说明目的——“我想测试这个假设，不是反对你本人”。",
-            "给 ENTP 的建议：练习方式：为每个新想法设定最小验证动作。不要只停留在概念上，而要明确下一步谁做、用什么标准判断、多久复盘。",
-            "给 ENTP 的建议：复盘问题：我现在继续挑战，是为了找到更好的机制，还是因为讨论本身让我兴奋？如果是后者，需要确认它是否仍然服务目标。",
-            "给 ENTP 的建议：观察指标：当别人提出情绪反馈时，你是否马上把它转成论点。成长方向不是放弃逻辑，而是先承认对方体验，再讨论机制。"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "误解一：ENFP 感性，ENTP 理性。更准确地说，ENFP 会把人的动机和价值纳入判断，ENTP 会优先测试逻辑和机制；两者都可以理性，也都可能被情绪影响。",
-            "误解二：ENTP 就是爱吵架。许多 ENTP 的挑战是为了测试观点，而不是为了压倒别人。真正的问题在于他们是否说明了挑战目的，是否照顾了对方承受度。",
-            "误解三：ENFP 没有逻辑。ENFP 不是不讲逻辑，而是更容易先问这件事对人、意义和关系有什么影响。成熟的 ENFP 会把价值感转化成清晰步骤。",
-            "误解四：ENFP 一定更温柔，ENTP 一定更犀利。类型只能描述倾向，不能决定一个人的礼貌、共情、教养或沟通成熟度。",
-            "误解五：P 型都没有执行力。ENFP 和 ENTP 都可能执行力很强，只是他们需要把开放探索收束成具体承诺、验证节点和复盘机制。",
-            "误解六：测出 ENFP 或 ENTP 就能决定职业。人格结果不能预测职业成功、收入、晋升或适配度。职业判断还需要结合能力证据、兴趣、工作环境、行业机会和现实反馈。",
-            "误解七：ENFP 和 ENTP 的差异只在 F/T。真正差异还包括评估问题的中心、处理反馈的方式、沟通意图和成长策略，不能只看一个字母。",
-            "误解八：类型解释可以替代真实沟通。无论是 ENFP 还是 ENTP，如果关系中出现误解，都需要回到具体行为、感受、责任和下一步，而不是用人格标签结束讨论。"
+            "- [ENFP 基础人格](/zh/personality/enfp)\n- [ENTP 基础人格](/zh/personality/entp)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-      "seo_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+      "seo_description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENFP 与 ENTP 的区别：情感、思考与决定情景",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "fermatmind_source_assets_used": [
-          "/mnt/data/enfp-a.md",
-          "/mnt/data/enfp-t.md",
-          "/mnt/data/entp-a.md",
-          "/mnt/data/entp-t.md"
-        ],
-        "medical_or_career_decision_claims": false,
-        "source_basis_summary": [
-          "ENFP-A / ENFP-T 文本资产强调灵感探索、真实表达、关系反馈、承诺边界和可能性连接。",
-          "ENTP-A / ENTP-T 文本资产强调可能性探索、逻辑拆解、观点挑战、快速试错和落地承诺。",
-          "16P 未作为文案来源，仅作为 MBTI 内容页常见信息架构参考；未复制其句子、比喻、CTA 或品牌表达。"
-        ]
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "a7b14d279daa3d2ccaaffa9442b5254f8e6f75e1ea0d3bf7a5c08817b912af7e",
-      "summary": "ENFP 与 ENTP 都容易被新想法、新关系和新可能点燃，也都不喜欢被僵化规则过早限制。区别在于，ENFP 更常从人的动机、价值感和情绪连接判断一个方向是否值得投入；ENTP 更常从逻辑结构、机制漏洞和概念实验判断一个想法是否站得住。本文不把两者做高低排序，而是帮助用户在真实场景中区分：自己是在追问“这对人和意义有什么影响”，还是在追问“这个系统还能怎样被拆开、重组和验证”。",
-      "title": "ENFP 和 ENTP 的区别：可能性探索、价值判断与观点挑战"
+      "source_sha256": "c926d1deeea05dfc035c12c8a9b7977905676b0914a31759bac717060fcdce5d",
+      "summary": "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。",
+      "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/enfp-vs-entp",
-            "name": "ENFP vs ENTP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "最大区别在于评估可能性的中心。ENFP 更关注人的动机、价值感、情绪连接和意义；ENTP 更关注观点是否自洽、机制是否有效、规则能否被改写。两者都好奇、灵活、喜欢新可能，但判断路径不同。"
-            },
-            "name": "ENFP 和 ENTP 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能这样排序。ENTP 更常把逻辑结构放在前台，ENFP 更常把人和价值纳入判断，但这不代表 ENFP 不理性，也不代表 ENTP 没有情绪。理性表现还取决于训练、经验、压力和具体情境。"
-            },
-            "name": "ENFP 和 ENTP 哪个更理性？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不一定。ENTP 常通过挑战观点来测试逻辑，这可能被误读成争吵。成熟的 ENTP 会说明自己是在测试假设，而不是否定对方本人，并在讨论后给出可执行下一步。"
-            },
-            "name": "ENTP 是不是更爱吵架？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ENFP 更容易把情绪、价值和关系信号纳入判断，但这不等于不稳定。对他们来说，情绪常是理解人和意义的重要信息。关键是把感受转成可确认的事实和请求。"
-            },
-            "name": "ENFP 是不是更容易受情绪影响？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能用类型直接判断领导力。ENFP 可能擅长激发愿景、连接人和动机；ENTP 可能擅长挑战假设、打开方案和重构机制。真正的领导表现还要看责任感、沟通、执行、经验和团队情境。"
-            },
-            "name": "ENFP 和 ENTP 哪个更适合领导？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "可以用它复盘自己的项目切入方式：你是先问人的意义和参与感，还是先问逻辑漏洞和机制实验？再看自己是否需要补收束、交付、沟通边界或反馈确认。"
-            },
-            "name": "工作中怎么使用 ENFP / ENTP 对比结果？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ENFP 更需要真实回应和价值共鸣，ENTP 更容易通过观点碰撞和共同探索建立连接。误会常出现在：ENFP 觉得 ENTP 太像在挑战人，ENTP 觉得 ENFP 太快把观点讨论理解成关系信号。"
-            },
-            "name": "关系中怎么理解 ENFP 和 ENTP 的差异？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。ENFP / ENTP 对比只能提供偏好线索。职业选择还需要结合 Big Five 特质、RIASEC 职业兴趣、技能证据、行业环境、工作节奏和长期复盘。"
-            },
-            "name": "这个结果能不能决定职业选择？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ENFP",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/enfp-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "ENTP",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/entp-a"
-          }
-        ]
-      },
-      "name": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+      "@type": "AboutPage",
+      "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/enfp-vs-entp",
+      "name": "ENFP 与 ENTP 的区别：情感、思考与决定情景",
       "url": "https://fermatmind.com/zh/personality/enfp-vs-entp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ENFP 与 ENTP 共用 E、N、P，代码差别是 F/T。情感偏好强调决定中的价值与对人的影响，思考偏好强调逻辑一致与非个人化标准，不是感性与理性能力排名。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者都描述外向、直觉、知觉：关注外部、模式或可能性、对新信息保留空间。类型叙述中都可能通过讨论探索选项，但社交精力、想象力、兴趣不必相同。\n\n差异是考虑决定的偏好。ENFP 式问题可能问方案是否符合价值、服务其中的人；ENTP 式问题可能问解释和标准是否成立。两者都能考虑价值与逻辑，偏好不决定是否拥有某种能力。\n\n功能栈理论常用 Ne–Fi–Te–Si 描述 ENFP，Ne–Ti–Fe–Si 描述 ENTP。这是理论惯例，不证明不同心理机制，也不是给别人定型的捷径。A/T 是另外扩展，不能解决 F/T 区分。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | ENFP | ENTP |\n| --- | --- | --- |\n| 代码差别 | 情感 F：价值与对人的影响 | 思考 T：逻辑一致与非个人化标准 |\n| 原创资助例子 | 核查方案是否保留既定目的 | 核查选择规则是否一致 |\n| 可能的盲点 | 把重视的目的当作实施已合理 | 把一致规则当作已包含全部人的后果 |\n| 共同实践 | 说明价值并检验实际效果 | 说明规则并查遗漏了谁的需要 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：团队为社区项目分有限资助。一种方式看受益者与使命，另一种检查筛选标准能否一致适用。结合两边：说明目的、应用标准、核查后果。同一人可以贡献两种做法。\n\n原创关系情景：朋友对取消安排有分歧。一方关注承诺意义，另一方比较理由与下次是否适用同样规则。问实际需要与涉及价值，不把标准关注解释为不关心，也不把感受关注解释为不会推理。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "爱辩论不能确认 ENTP，温暖不能确认 ENFP。F 不表示情绪不稳，T 不表示缺少情绪。两者都能严谨推理、深切关心、维护日常、完成工作。幽默、职业兴趣、哭泣频率都不是定型规则。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "比较三个有真实取舍的决定：先查什么标准，什么难以放下，什么会改变想法？保留偏好另一方式的反例，核查是否角色要求。两边都符合时可保留问题，不把叙述认同当作已验证结果。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "可以。F/T 描述决定偏好，不决定有无逻辑或同理心。核实具体推理、行为和效果，不从字母分配技能。",
+              "question": "ENFP 能善分析，ENTP 能关心人吗？"
+            },
+            {
+              "answer": "部分功能栈理论安排共同的领先 Ne，但其余位置不同，所以完整栈不同。该惯例属于理论，不是已测心理机制。",
+              "question": "两者认知功能相同吗？"
+            },
+            {
+              "answer": "不能。辩论兴趣可能来自话题、经验、听众。比较价值和标准冲突时怎样选择，也看不符合初步印象的例子。",
+              "question": "喜欢争论就说明我是 ENTP 吗？"
+            },
+            {
+              "answer": "不能。讨论实际需要、同意、价值、冲突修复。共用三个字母不保证匹配，也不提供评分。",
+              "question": "这个对比能决定是否相配吗？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ENFP 基础人格](/zh/personality/enfp)\n- [ENTP 基础人格](/zh/personality/entp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
       "jsonld_overrides_json": null,
-      "og_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+      "og_description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+      "og_title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-      "seo_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
-      "twitter_description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+      "seo_description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind",
+      "twitter_description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格"
+      "twitter_title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/enfp-vs-entp",
         "zh-CN": "https://fermatmind.com/zh/personality/enfp-vs-entp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/enfp-vs-entp",
-      "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
+      "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "391e47456df2ca3977222a579f43415cceaaf491",
+      "metadata_fingerprint": "8a7d093a85b97d26079cdb1b12158fa279e5bbe0",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-        "title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+        "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/enfp-vs-entp"
       },
@@ -1067,24 +869,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格",
+      "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "对比 ENFP 与 ENTP 在创意探索、沟通方式、关系需求、工作节奏、压力反应和成长策略中的差异。",
-        "title": "ENFP 和 ENTP 区别：如何区分竞选者与辩论家人格"
+        "description": "对照 ENFP 与 ENTP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ENFP 与 ENTP 的区别：情感、思考与决定情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "72803221fd96ca0c60f710cd146e5c0110e98947a050f6cda6332de6d99cc3cd"
+  "source_content_sha256": "e72d5988ada5fbb2f935184b0618604a51662967fbeb060924521b1b5df882e2"
 }

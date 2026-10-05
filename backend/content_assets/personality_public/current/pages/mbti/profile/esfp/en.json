@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/esfp",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "d507c95c15e026b14495d7ed439b49eb2f81b182",
+      "answer_fingerprint": "3da0992da834f43df92a1d57c3db0c54cc8578b8",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "838864bb7bbd6c767162678f8757858f4958f61a",
-        "a1c501289f70d77da536e07ed88c53e8701f1bdf",
+        "504be946e08d82bdfd7e7df63de841a282062ea3",
+        "623844f621e8aecc59eee21068236a5e1dbe6b00",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "a1c501289f70d77da536e07ed88c53e8701f1bdf",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "A code does not establish a person's preferred schedule or energy level. Ask what kind of participation feels worthwhile and how much capacity they have.",
+          "key": "faq-0",
+          "question": "Does ESFP mean enjoying every social event?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/esfp",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does ESFP indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for ESFP?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do ESFP-A and ESFP-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can ESFP predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "623844f621e8aecc59eee21068236a5e1dbe6b00",
+      "next_step_blocks": [],
       "primary_content_ref": "ESFP",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,42 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Compare actual job tasks and requirements; a type description is an optional prompt.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Compare course content, entry requirements and your own experience before choosing a major.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Discuss a concrete collaboration event and check whether the description matches your experience.",
-          "href": "/en/personality/esfp",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Use a specific conversation to examine needs and misunderstandings rather than ranking compatible types.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Use the questionnaire as a reflection prompt, then examine one behavior in context.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "838864bb7bbd6c767162678f8757858f4958f61a",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "504be946e08d82bdfd7e7df63de841a282062ea3",
       "summary_blocks": [
         {
-          "body": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+          "body": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ESFP - Entertainer"
+          "title": "ESFP Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/esfp-a",
+        "label": "ESFP-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/esfp-t",
+        "label": "ESFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/esfp-a-vs-esfp-t",
+        "label": "ESFP-A vs ESFP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/esfp",
@@ -162,7 +151,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "a1c501289f70d77da536e07ed88c53e8701f1bdf",
+      "landing_fingerprint": "623844f621e8aecc59eee21068236a5e1dbe6b00",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESFP",
       "public_surface_ref": null,
@@ -177,10 +166,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+          "body": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ESFP - Entertainer"
+          "title": "ESFP Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +187,7 @@
       "display_type": "ESFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Entertainer",
         "rarity": null,
@@ -207,156 +196,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "In the four-letter framework, ESFP refers to extraversion, sensing, feeling and perceiving preferences. You can use these terms to ask whether you prefer discussing an idea while doing something concrete, considering people affected by it, and leaving room to adjust. These are reflection prompts, not measured strengths or a description every ESFP must match.",
+          "body_md": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "A type label cannot tell you to prioritize cloud architecture, HR or consulting, or exclude nursing and brand management. For any listed role, examine its actual tasks, required skills, training and conditions. Try a small, fictional task: discuss two plans with another person, then record what you learned from the conversation and what you still need to check. Do not treat the role lists as validated suitability rankings.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESFP is commonly described as Se–Fi–Te–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESFP-style description asks what is happening in the immediate situation and what would make the experience worthwhile for people. You might prefer learning through participation and adapting as the activity unfolds. This can help a group respond to what is actually happening. A possible blind spot is extending an enjoyable moment without checking the commitments that support it.\n\nCounterexample: an expressive person can enjoy quiet reflection and maintain a budget. A Sensing preference does not make analysis inaccessible, and a Perceiving preference does not prevent planning. Being the life of a party, liking fashion or enjoying performance cannot identify ESFP.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a workshop feels flat, so you add an interactive exercise. Check whether it helps the learning aim and whether everyone can participate. Adjust the activity using actual responses, then record what the next facilitator needs to know. Energy is useful when it serves the purpose.\n\nTry a task involving a live experience, practical service or direct feedback. Look at preparation, repetition and administration as well as the enjoyable moment. Performance, hospitality, education and care roles require skills and sometimes qualifications; the nickname cannot establish talent or fit.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: a shared outing is going well and you suggest staying longer. A friend needs to leave for an early shift. Ask about their commitments and make it easy to decline. Shared enjoyment does not require identical availability.\n\nTalk about a difficulty even when a pleasant activity could distract from it. Feeling preferences do not guarantee emotional insight, and a lively interaction cannot predict long-term compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a busy social week leaves an important routine task unfinished. Choose a short period to complete it and renegotiate an optional activity. Planning can protect what you enjoy rather than oppose it.\n\nSeeking distraction, feeling restless or being low in energy can have many causes. Do not treat financial difficulty, poor concentration or low mood as inevitable ESFP characteristics.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Before one activity, name its purpose, the time available and one commitment that must remain protected. During it, ask what participants actually need rather than assuming shared enthusiasm.\n\nAfterward, complete one small follow-up and record a case where preparation improved the experience. Keep a counterexample to the stereotype that enjoyment and responsibility cannot coexist.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESFP-A](/en/personality/esfp-a)\n- [ESFP-T](/en/personality/esfp-t)\n- [ESFP-A vs ESFP-T](/en/personality/esfp-a-vs-esfp-t)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              },
-              {
-                "slug": "nurse",
-                "title": "Nurse"
-              },
-              {
-                "slug": "supply-chain-manager",
-                "title": "Supply Chain Manager"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              },
-              {
-                "slug": "nurse",
-                "title": "Nurse"
-              }
-            ],
-            "work_env": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Can you separate an observation from a guess in a shared activity?"
+                "answer": "A code does not establish a person's preferred schedule or energy level. Ask what kind of participation feels worthwhile and how much capacity they have.",
+                "question": "Does ESFP mean enjoying every social event?"
               },
               {
-                "body": null,
-                "title": "Can you explain a change after listening to another person?"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Can you finish one agreed follow-up and show what you checked?"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESFP-A and ESFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Do you leave enough time to record what a discussion changed?"
-              },
-              {
-                "body": null,
-                "title": "What information still needs checking before acting on a first impression?"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "If you prefer working through a concern by talking or doing a shared activity, ask whether the other person wants to talk now or reflect first. State the concrete event, its effect on you and one request; check how they understood it. Any person may prefer a different pace or response, regardless of type. This is a communication exercise, not a prediction of trust or compatibility.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/esfp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/esfp",
+          "name": "ESFP Personality",
+          "url": "https://fermatmind.com/en/personality/esfp"
+        },
+        "og_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESFP Personality Guide",
+        "og_title": "ESFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "title": "ESFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESFP Personality Guide"
+        "twitter_title": "ESFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+        "summary": "",
         "tagline": "Entertainer",
-        "title": "ESFP - Entertainer"
+        "title": "ESFP Personality"
       },
       "variant_code": null
     },
@@ -372,7 +351,7 @@
       "display_type": "ESFP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Entertainer",
         "rarity": null,
@@ -381,166 +360,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "In the four-letter framework, ESFP refers to extraversion, sensing, feeling and perceiving preferences. You can use these terms to ask whether you prefer discussing an idea while doing something concrete, considering people affected by it, and leaving room to adjust. These are reflection prompts, not measured strengths or a description every ESFP must match.",
+          "body_md": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "A type label cannot tell you to prioritize cloud architecture, HR or consulting, or exclude nursing and brand management. For any listed role, examine its actual tasks, required skills, training and conditions. Try a small, fictional task: discuss two plans with another person, then record what you learned from the conversation and what you still need to check. Do not treat the role lists as validated suitability rankings.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESFP is commonly described as Se–Fi–Te–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESFP-style description asks what is happening in the immediate situation and what would make the experience worthwhile for people. You might prefer learning through participation and adapting as the activity unfolds. This can help a group respond to what is actually happening. A possible blind spot is extending an enjoyable moment without checking the commitments that support it.\n\nCounterexample: an expressive person can enjoy quiet reflection and maintain a budget. A Sensing preference does not make analysis inaccessible, and a Perceiving preference does not prevent planning. Being the life of a party, liking fashion or enjoying performance cannot identify ESFP.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a workshop feels flat, so you add an interactive exercise. Check whether it helps the learning aim and whether everyone can participate. Adjust the activity using actual responses, then record what the next facilitator needs to know. Energy is useful when it serves the purpose.\n\nTry a task involving a live experience, practical service or direct feedback. Look at preparation, repetition and administration as well as the enjoyable moment. Performance, hospitality, education and care roles require skills and sometimes qualifications; the nickname cannot establish talent or fit.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: a shared outing is going well and you suggest staying longer. A friend needs to leave for an early shift. Ask about their commitments and make it easy to decline. Shared enjoyment does not require identical availability.\n\nTalk about a difficulty even when a pleasant activity could distract from it. Feeling preferences do not guarantee emotional insight, and a lively interaction cannot predict long-term compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a busy social week leaves an important routine task unfinished. Choose a short period to complete it and renegotiate an optional activity. Planning can protect what you enjoy rather than oppose it.\n\nSeeking distraction, feeling restless or being low in energy can have many causes. Do not treat financial difficulty, poor concentration or low mood as inevitable ESFP characteristics.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "Before one activity, name its purpose, the time available and one commitment that must remain protected. During it, ask what participants actually need rather than assuming shared enthusiasm.\n\nAfterward, complete one small follow-up and record a case where preparation improved the experience. Keep a counterexample to the stereotype that enjoyment and responsibility cannot coexist.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESFP-A](/en/personality/esfp-a)\n- [ESFP-T](/en/personality/esfp-t)\n- [ESFP-A vs ESFP-T](/en/personality/esfp-a-vs-esfp-t)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              },
-              {
-                "slug": "nurse",
-                "title": "Nurse"
-              },
-              {
-                "slug": "supply-chain-manager",
-                "title": "Supply Chain Manager"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cloud-architect",
-                "title": "Cloud Architect"
-              },
-              {
-                "slug": "hr-business-partner",
-                "title": "HR Business Partner"
-              },
-              {
-                "slug": "management-consultant",
-                "title": "Management Consultant"
-              },
-              {
-                "slug": "business-analyst",
-                "title": "Business Analyst"
-              },
-              {
-                "slug": "brand-manager",
-                "title": "Brand Manager"
-              },
-              {
-                "slug": "nurse",
-                "title": "Nurse"
-              }
-            ],
-            "work_env": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Can you separate an observation from a guess in a shared activity?"
+                "answer": "A code does not establish a person's preferred schedule or energy level. Ask what kind of participation feels worthwhile and how much capacity they have.",
+                "question": "Does ESFP mean enjoying every social event?"
               },
               {
-                "body": null,
-                "title": "Can you explain a change after listening to another person?"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESFP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Can you finish one agreed follow-up and show what you checked?"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESFP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESFP-A and ESFP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESFP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Do you leave enough time to record what a discussion changed?"
-              },
-              {
-                "body": null,
-                "title": "What information still needs checking before acting on a first impression?"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "If you prefer working through a concern by talking or doing a shared activity, ask whether the other person wants to talk now or reflect first. State the concrete event, its effect on you and one request; check how they understood it. Any person may prefer a different pace or response, regardless of type. This is a communication exercise, not a prediction of trust or compatibility.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/esfp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/esfp",
+          "name": "ESFP Personality",
+          "url": "https://fermatmind.com/en/personality/esfp"
+        },
+        "og_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESFP Personality Guide",
+        "og_title": "ESFP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESFP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+        "title": "ESFP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESFP Personality Guide"
+        "twitter_title": "ESFP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+        "summary": "",
         "tagline": "Entertainer",
-        "title": "ESFP - Entertainer"
+        "title": "ESFP Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ESFP",
-      "excerpt": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+      "excerpt": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
       "hero_image_url": null,
       "hero_kicker": "Entertainer",
       "hero_quote": null,
-      "hero_summary": "Explore the ESFP preference description through concrete experience and conversation. A label does not establish job skills or relationship outcomes.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,454 +521,166 @@
       "slug": "esfp",
       "status": "published",
       "subtitle": null,
-      "title": "ESFP - Entertainer",
+      "title": "ESFP Personality",
       "type_code": "ESFP",
       "type_name": "Entertainer"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "In the four-letter framework, ESFP refers to extraversion, sensing, feeling and perceiving preferences. You can use these terms to ask whether you prefer discussing an idea while doing something concrete, considering people affected by it, and leaving room to adjust. These are reflection prompts, not measured strengths or a description every ESFP must match.",
+        "body_md": "ESFP describes Extraversion, Sensing, Feeling and Perceiving preferences. Its narrative emphasizes engaging with present experience and the people involved. It does not establish entertainment talent, popularity, spending habits or an inability to think deeply.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**F — Feeling**: A preference for considering values and the effects on people in decisions; it does not imply weak reasoning.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESFP is commonly described as Se–Fi–Te–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An ESFP-style description asks what is happening in the immediate situation and what would make the experience worthwhile for people. You might prefer learning through participation and adapting as the activity unfolds. This can help a group respond to what is actually happening. A possible blind spot is extending an enjoyable moment without checking the commitments that support it.\n\nCounterexample: an expressive person can enjoy quiet reflection and maintain a budget. A Sensing preference does not make analysis inaccessible, and a Perceiving preference does not prevent planning. Being the life of a party, liking fashion or enjoying performance cannot identify ESFP.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "A type label cannot tell you to prioritize cloud architecture, HR or consulting, or exclude nursing and brand management. For any listed role, examine its actual tasks, required skills, training and conditions. Try a small, fictional task: discuss two plans with another person, then record what you learned from the conversation and what you still need to check. Do not treat the role lists as validated suitability rankings.",
+        "body_md": "Original scenario: a workshop feels flat, so you add an interactive exercise. Check whether it helps the learning aim and whether everyone can participate. Adjust the activity using actual responses, then record what the next facilitator needs to know. Energy is useful when it serves the purpose.\n\nTry a task involving a live experience, practical service or direct feedback. Look at preparation, repetition and administration as well as the enjoyable moment. Performance, hospitality, education and care roles require skills and sometimes qualifications; the nickname cannot establish talent or fit.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: a shared outing is going well and you suggest staying longer. A friend needs to leave for an early shift. Ask about their commitments and make it easy to decline. Shared enjoyment does not require identical availability.\n\nTalk about a difficulty even when a pleasant activity could distract from it. Feeling preferences do not guarantee emotional insight, and a lively interaction cannot predict long-term compatibility.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: a busy social week leaves an important routine task unfinished. Choose a short period to complete it and renegotiate an optional activity. Planning can protect what you enjoy rather than oppose it.\n\nSeeking distraction, feeling restless or being low in energy can have many causes. Do not treat financial difficulty, poor concentration or low mood as inevitable ESFP characteristics.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "brand-manager",
-              "title": "Brand Manager"
-            },
-            {
-              "slug": "nurse",
-              "title": "Nurse"
-            },
-            {
-              "slug": "supply-chain-manager",
-              "title": "Supply Chain Manager"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "cloud-architect",
-              "title": "Cloud Architect"
-            },
-            {
-              "slug": "hr-business-partner",
-              "title": "HR Business Partner"
-            },
-            {
-              "slug": "management-consultant",
-              "title": "Management Consultant"
-            },
-            {
-              "slug": "business-analyst",
-              "title": "Business Analyst"
-            },
-            {
-              "slug": "brand-manager",
-              "title": "Brand Manager"
-            },
-            {
-              "slug": "nurse",
-              "title": "Nurse"
-            }
-          ],
-          "work_env": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "Before one activity, name its purpose, the time available and one commitment that must remain protected. During it, ask what participants actually need rather than assuming shared enthusiasm.\n\nAfterward, complete one small follow-up and record a case where preparation improved the experience. Keep a counterexample to the stereotype that enjoyment and responsibility cannot coexist.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ESFP-A](/en/personality/esfp-a)\n- [ESFP-T](/en/personality/esfp-t)\n- [ESFP-A vs ESFP-T](/en/personality/esfp-a-vs-esfp-t)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "Use a fictional shared-activity plan to observe how you gather concrete information, discuss effects on participants and adapt when a condition changes. Compare the first plan with your revision; improvement in that example is not proof of a stable ability or an effect caused by your type.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "A code does not establish a person's preferred schedule or energy level. Ask what kind of participation feels worthwhile and how much capacity they have.",
+              "question": "Does ESFP mean enjoying every social event?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does ESFP indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for ESFP?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do ESFP-A and ESFP-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can ESFP predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Can you separate an observation from a guess in a shared activity?"
-            },
-            {
-              "body": null,
-              "title": "Can you explain a change after listening to another person?"
-            },
-            {
-              "body": null,
-              "title": "Can you finish one agreed follow-up and show what you checked?"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Do you leave enough time to record what a discussion changed?"
-            },
-            {
-              "body": null,
-              "title": "What information still needs checking before acting on a first impression?"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "If you prefer working through a concern by talking or doing a shared activity, ask whether the other person wants to talk now or reflect first. State the concrete event, its effect on you and one request; check how they understood it. Any person may prefer a different pace or response, regardless of type. This is a communication exercise, not a prediction of trust or compatibility.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around energy, presence and shared experience, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESFP core.",
-              "question": "What is the main ESFP-A vs ESFP-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. ESFP situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is ESFP-A better than ESFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to energy, presence and shared experience-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am ESFP-A or ESFP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support ESFP work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "ESFP",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/esfp-a-vs-esfp-t",
-            "url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "ESFP-A profile",
-              "href": "/en/personality/esfp-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ESFP-T profile",
-              "href": "/en/personality/esfp-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/esfp-a-vs-esfp-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare ESFP-A and ESFP-T through energy, presence and shared experience, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/esfp-a-vs-esfp-t with energy, presence and shared experience rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around energy, presence and shared experience, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESFP core.",
-                  "question": "What is the main ESFP-A vs ESFP-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. ESFP situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is ESFP-A better than ESFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to energy, presence and shared experience-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am ESFP-A or ESFP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support ESFP work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "ESFP-A vs ESFP-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "ESFP-A profile",
-                  "href": "/en/personality/esfp-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "ESFP-T profile",
-                  "href": "/en/personality/esfp-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "ESFP-A and ESFP-T share the same ESFP core. Within energy, presence and shared experience, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "ESFP-A vs ESFP-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t"
-          },
-          "seo": {
-            "description": "Compare ESFP-A and ESFP-T through energy, presence and shared experience, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "ESFP-A vs ESFP-T: Key Differences",
-            "title": "ESFP-A vs ESFP-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare ESFP-A and ESFP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESFP-A vs ESFP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/esfp-a-vs-esfp-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ESFP-A vs ESFP-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/esfp",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
-      "seo_title": "ESFP Personality Guide",
-      "twitter_description": null,
+      "og_title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/esfp-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/esfp-a"
+        "en": "https://fermatmind.com/en/personality/esfp",
+        "zh-CN": "https://fermatmind.com/zh/personality/esfp"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/esfp-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/esfp",
+      "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "838864bb7bbd6c767162678f8757858f4958f61a",
+      "metadata_fingerprint": "504be946e08d82bdfd7e7df63de841a282062ea3",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
-        "title": "ESFP Personality Guide",
+        "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/esfp-a"
+        "url": "https://fermatmind.com/en/personality/esfp"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1008,18 +689,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ESFP Personality Guide",
+      "title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESFP personality type.",
-        "title": "ESFP Personality Guide"
+        "description": "Understand ESFP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESFP Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "7d16e0241dbba490c77158a8c728048dbde3d5bf6013e278a468e5b4fecfa9d5"
+  "source_content_sha256": "a51c91f17e5685c2db2cb1e7962e393e837a5a9f743018ee6073d9f56808280a"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/istj-vs-isfj",
@@ -12,109 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-          "key": "direct_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "最大区别"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。",
-          "key": "easy_misread",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么容易混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。",
-          "key": "real_scenario_differences",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "真实场景差异"
-        },
-        {
-          "body": "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。",
-          "key": "do_not_misjudge",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "不要这样误判"
-        },
-        {
-          "body": "继续查看 ISTJ、ISFJ 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。",
-          "key": "next_reading",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "下一步阅读"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "59e3bcc22c31c24037a42bfbae3ba48298a35ce4",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-          "question": "ISTJ 和 ISFJ 最大区别是什么？"
+          "answer": "能。T/F 不分配同理心或推理能力。看实际行动和具体推理，不靠刻板印象。",
+          "key": "faq-0",
+          "question": "ISTJ 能关心人，ISFJ 能善分析吗？"
         },
         {
-          "answer": "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。",
-          "question": "为什么 ISTJ 和 ISFJ 容易被混淆？"
+          "answer": "不能。帮助可能来自价值、责任、技能或实际规则。比较不同场景中的决定偏好。",
+          "key": "faq-1",
+          "question": "帮忙能确认 ISFJ 吗？"
         },
         {
-          "answer": "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。",
-          "question": "在工作场景怎么区分 ISTJ 和 ISFJ？"
+          "answer": "不是。一致安排能服务价值、保护人。看偏好的标准，不只看可见结果。",
+          "key": "faq-2",
+          "question": "一致性一定表示思考偏好吗？"
         },
         {
-          "answer": "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。",
-          "question": "判断 ISTJ 和 ISFJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "能启动关于做法的讨论，不能证明能力或分配岗位。核查实际技能、需要、责任。",
+          "key": "faq-3",
+          "question": "可以凭此对比分配团队岗位吗？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "",
-          "href": "/zh/personality/istj-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ISTJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/isfj-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ISFJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/esfj-a",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ESFJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 人格"
-        },
-        {
-          "body": "",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 免费测试"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "istj-vs-isfj",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "a0af67d7f1cf491212e09d3d44cd5bb75a2b9dce",
       "summary_blocks": [
         {
-          "body": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
+          "body": "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性"
+          "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
         "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "answer_surface_v1": {
@@ -226,64 +203,45 @@
         "ISFJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/istj-vs-isfj",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "istj-vs-isfj",
       "comparison_type": "mbti_cross_type",
-      "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-          "question": "ISTJ 和 ISFJ 最大区别是什么？"
+          "answer": "能。T/F 不分配同理心或推理能力。看实际行动和具体推理，不靠刻板印象。",
+          "question": "ISTJ 能关心人，ISFJ 能善分析吗？"
         },
         {
-          "answer": "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。",
-          "question": "为什么 ISTJ 和 ISFJ 容易被混淆？"
+          "answer": "不能。帮助可能来自价值、责任、技能或实际规则。比较不同场景中的决定偏好。",
+          "question": "帮忙能确认 ISFJ 吗？"
         },
         {
-          "answer": "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。",
-          "question": "在工作场景怎么区分 ISTJ 和 ISFJ？"
+          "answer": "不是。一致安排能服务价值、保护人。看偏好的标准，不只看可见结果。",
+          "question": "一致性一定表示思考偏好吗？"
         },
         {
-          "answer": "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。",
-          "question": "判断 ISTJ 和 ISFJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "能启动关于做法的讨论，不能证明能力或分配岗位。核查实际技能、需要、责任。",
+          "question": "可以凭此对比分配团队岗位吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ISTJ A",
-          "href": "/zh/personality/istj-a",
-          "label": "ISTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/istj",
+          "label": "ISTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFJ A",
-          "href": "/zh/personality/isfj-a",
-          "label": "ISFJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/isfj",
+          "label": "ISFJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ESFJ A",
-          "href": "/zh/personality/esfj-a",
-          "label": "ESFJ A",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -303,87 +261,104 @@
       "sections": [
         {
           "body": [
-            "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。"
+            "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ISFJ": "需要、习惯、关系记忆",
-              "ISTJ": "流程、证据、责任边界",
-              "dimension": "可靠性的来源"
-            },
-            {
-              "ISFJ": "先确认人是否被忽略",
-              "ISTJ": "先确认规则是否被破坏",
-              "dimension": "冲突中"
-            },
-            {
-              "ISFJ": "在真实任务中记录是否愿意服务、支持、细节照顾；效果看技能与反馈。",
-              "ISTJ": "在真实任务中记录是否愿意复核、合规、稳定交付；效果看技能与反馈。",
-              "dimension": "工作探索问题"
-            },
-            {
-              "ISFJ": "忽略边界和拒绝",
-              "ISTJ": "忽略情绪成本",
-              "dimension": "盲点"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。"
+            "两者都描述内向、实感、判断：内部思考、具体信息与经验、组织外部安排。共同叙述可能包括维护考虑过的承诺，实际可靠需要行为证据。",
+            "ISTJ 式问题可能问适用哪个一致规则，ISFJ 式问题可能问这个人需要什么、安排服务什么价值。两者都能用标准、关注人。规则能保护人，体贴决定也需要严谨逻辑。",
+            "功能栈理论常用 Si–Te–Fi–Ne 描述 ISTJ，Si–Fe–Ti–Ne 描述 ISFJ。这是解释叙述，不证明已测心理机制。A/T 不属于官方 MBTI，不代替 T/F。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。"
+            "| 观察点 | ISTJ | ISFJ |\n| --- | --- | --- |\n| 代码差别 | 思考 T：逻辑一致与非个人化标准 | 情感 F：价值与对人的影响 |\n| 原创排班例子 | 检查安排是否应用一致标准 | 检查安排是否满足人的需要 |\n| 可能盲点 | 默认同样执行就有公平效果 | 调整请求却未向别人说明标准 |\n| 共同实践 | 核查规则在此处的效果 | 明确说明例外原因 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。"
+            "原创工作情景：同事请求换班。一种方式检查分配规则，另一种考虑照护限制。说明规则目的、比较效果、一致解释例外。单一方式不能确定 ISTJ 或 ISFJ。",
+            "原创关系情景：共同杂务未完成。一方想明确下次分工，另一方先问为什么没完成。结合了解与现实约定，不把任务关注解释为不关心，也不把处境关注解释为一切都可免除。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 ISTJ、ISFJ 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "ISTJ 不是不关心版 ISFJ，ISFJ 不是不理性版 ISTJ。两者都能设限、关心人、查事实、履行承诺。帮忙、精确、安静不能确定 T/F，职业或性别不是规则。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较三个一致规则与个人处境冲突的决定：先考虑什么，怎样解释，实际效果让你学到什么？加入相反方式的例子，区分偏好与角色要求。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [ISTJ 基础人格](/zh/personality/istj)\n- [ISFJ 基础人格](/zh/personality/isfj)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+      "seo_description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-      "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性"
+      "source_sha256": "9364a4f9a0b060d0beec6b8b69e9d11fef6ad075275b0c12ac06c906dbad6911",
+      "summary": "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。",
+      "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
         "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "answer_surface_v1": {
@@ -495,64 +470,45 @@
         "ISFJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/istj-vs-isfj",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "istj-vs-isfj",
       "comparison_type": "mbti_cross_type",
-      "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-          "question": "ISTJ 和 ISFJ 最大区别是什么？"
+          "answer": "能。T/F 不分配同理心或推理能力。看实际行动和具体推理，不靠刻板印象。",
+          "question": "ISTJ 能关心人，ISFJ 能善分析吗？"
         },
         {
-          "answer": "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。",
-          "question": "为什么 ISTJ 和 ISFJ 容易被混淆？"
+          "answer": "不能。帮助可能来自价值、责任、技能或实际规则。比较不同场景中的决定偏好。",
+          "question": "帮忙能确认 ISFJ 吗？"
         },
         {
-          "answer": "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。",
-          "question": "在工作场景怎么区分 ISTJ 和 ISFJ？"
+          "answer": "不是。一致安排能服务价值、保护人。看偏好的标准，不只看可见结果。",
+          "question": "一致性一定表示思考偏好吗？"
         },
         {
-          "answer": "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。",
-          "question": "判断 ISTJ 和 ISFJ 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "能启动关于做法的讨论，不能证明能力或分配岗位。核查实际技能、需要、责任。",
+          "question": "可以凭此对比分配团队岗位吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "ISTJ A",
-          "href": "/zh/personality/istj-a",
-          "label": "ISTJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/istj",
+          "label": "ISTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFJ A",
-          "href": "/zh/personality/isfj-a",
-          "label": "ISFJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/isfj",
+          "label": "ISFJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ESFJ A",
-          "href": "/zh/personality/esfj-a",
-          "label": "ESFJ A",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -572,198 +528,250 @@
       "sections": [
         {
           "body": [
-            "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。"
+            "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "ISFJ": "需要、习惯、关系记忆",
-              "ISTJ": "流程、证据、责任边界",
-              "dimension": "可靠性的来源"
-            },
-            {
-              "ISFJ": "先确认人是否被忽略",
-              "ISTJ": "先确认规则是否被破坏",
-              "dimension": "冲突中"
-            },
-            {
-              "ISFJ": "在真实任务中记录是否愿意服务、支持、细节照顾；效果看技能与反馈。",
-              "ISTJ": "在真实任务中记录是否愿意复核、合规、稳定交付；效果看技能与反馈。",
-              "dimension": "工作探索问题"
-            },
-            {
-              "ISFJ": "忽略边界和拒绝",
-              "ISTJ": "忽略情绪成本",
-              "dimension": "盲点"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。"
+            "两者都描述内向、实感、判断：内部思考、具体信息与经验、组织外部安排。共同叙述可能包括维护考虑过的承诺，实际可靠需要行为证据。",
+            "ISTJ 式问题可能问适用哪个一致规则，ISFJ 式问题可能问这个人需要什么、安排服务什么价值。两者都能用标准、关注人。规则能保护人，体贴决定也需要严谨逻辑。",
+            "功能栈理论常用 Si–Te–Fi–Ne 描述 ISTJ，Si–Fe–Ti–Ne 描述 ISFJ。这是解释叙述，不证明已测心理机制。A/T 不属于官方 MBTI，不代替 T/F。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。"
+            "| 观察点 | ISTJ | ISFJ |\n| --- | --- | --- |\n| 代码差别 | 思考 T：逻辑一致与非个人化标准 | 情感 F：价值与对人的影响 |\n| 原创排班例子 | 检查安排是否应用一致标准 | 检查安排是否满足人的需要 |\n| 可能盲点 | 默认同样执行就有公平效果 | 调整请求却未向别人说明标准 |\n| 共同实践 | 核查规则在此处的效果 | 明确说明例外原因 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。"
+            "原创工作情景：同事请求换班。一种方式检查分配规则，另一种考虑照护限制。说明规则目的、比较效果、一致解释例外。单一方式不能确定 ISTJ 或 ISFJ。",
+            "原创关系情景：共同杂务未完成。一方想明确下次分工，另一方先问为什么没完成。结合了解与现实约定，不把任务关注解释为不关心，也不把处境关注解释为一切都可免除。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 ISTJ、ISFJ 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "ISTJ 不是不关心版 ISFJ，ISFJ 不是不理性版 ISTJ。两者都能设限、关心人、查事实、履行承诺。帮忙、精确、安静不能确定 T/F，职业或性别不是规则。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "比较三个一致规则与个人处境冲突的决定：先考虑什么，怎样解释，实际效果让你学到什么？加入相反方式的例子，区分偏好与角色要求。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [ISTJ 基础人格](/zh/personality/istj)\n- [ISFJ 基础人格](/zh/personality/isfj)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+      "seo_description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。",
-      "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性"
+      "source_sha256": "9364a4f9a0b060d0beec6b8b69e9d11fef6ad075275b0c12ac06c906dbad6911",
+      "summary": "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。",
+      "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/istj-vs-isfj",
-            "name": "ISTJ vs ISFJ",
-            "position": 2
-          }
-        ]
-      },
-      "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISTJ 更容易用规则、记录和标准保证可靠，ISFJ 更容易用照顾、记忆和关系稳定保证可靠。最大区别不是谁更负责，而是责任感优先服务什么。"
-            },
-            "name": "ISTJ 和 ISFJ 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "ISTJ 和 ISFJ 都可能认真、低调、守承诺。区别在于 ISTJ 更常先维护系统，ISFJ 更常先维护人。"
-            },
-            "name": "为什么 ISTJ 和 ISFJ 容易被混淆？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "团队排班出错时，ISTJ 会追问流程为何失效，ISFJ 会先看谁被影响最大。成熟团队需要同时修流程和补偿人的压力。"
-            },
-            "name": "在工作场景怎么区分 ISTJ 和 ISFJ？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不要用是否温柔或是否严肃判断。看他们在资源有限时优先保护制度秩序，还是优先保护人的感受和安全。"
-            },
-            "name": "判断 ISTJ 和 ISFJ 时最容易犯什么错？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。"
-            },
-            "name": "这个对比能决定职业或关系选择吗？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ISTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/istj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "ISFJ",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/isfj-a"
-          }
-        ]
-      },
-      "name": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+      "@type": "AboutPage",
+      "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/istj-vs-isfj",
+      "name": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定",
       "url": "https://fermatmind.com/zh/personality/istj-vs-isfj"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ISTJ 与 ISFJ 共用 I、S、J，代码差别是 T/F。思考强调逻辑一致与非个人化标准，情感强调价值与对人的影响，不排名善意、准确或责任心。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者都描述内向、实感、判断：内部思考、具体信息与经验、组织外部安排。共同叙述可能包括维护考虑过的承诺，实际可靠需要行为证据。\n\nISTJ 式问题可能问适用哪个一致规则，ISFJ 式问题可能问这个人需要什么、安排服务什么价值。两者都能用标准、关注人。规则能保护人，体贴决定也需要严谨逻辑。\n\n功能栈理论常用 Si–Te–Fi–Ne 描述 ISTJ，Si–Fe–Ti–Ne 描述 ISFJ。这是解释叙述，不证明已测心理机制。A/T 不属于官方 MBTI，不代替 T/F。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | ISTJ | ISFJ |\n| --- | --- | --- |\n| 代码差别 | 思考 T：逻辑一致与非个人化标准 | 情感 F：价值与对人的影响 |\n| 原创排班例子 | 检查安排是否应用一致标准 | 检查安排是否满足人的需要 |\n| 可能盲点 | 默认同样执行就有公平效果 | 调整请求却未向别人说明标准 |\n| 共同实践 | 核查规则在此处的效果 | 明确说明例外原因 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：同事请求换班。一种方式检查分配规则，另一种考虑照护限制。说明规则目的、比较效果、一致解释例外。单一方式不能确定 ISTJ 或 ISFJ。\n\n原创关系情景：共同杂务未完成。一方想明确下次分工，另一方先问为什么没完成。结合了解与现实约定，不把任务关注解释为不关心，也不把处境关注解释为一切都可免除。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "ISTJ 不是不关心版 ISFJ，ISFJ 不是不理性版 ISTJ。两者都能设限、关心人、查事实、履行承诺。帮忙、精确、安静不能确定 T/F，职业或性别不是规则。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "比较三个一致规则与个人处境冲突的决定：先考虑什么，怎样解释，实际效果让你学到什么？加入相反方式的例子，区分偏好与角色要求。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "能。T/F 不分配同理心或推理能力。看实际行动和具体推理，不靠刻板印象。",
+              "question": "ISTJ 能关心人，ISFJ 能善分析吗？"
+            },
+            {
+              "answer": "不能。帮助可能来自价值、责任、技能或实际规则。比较不同场景中的决定偏好。",
+              "question": "帮忙能确认 ISFJ 吗？"
+            },
+            {
+              "answer": "不是。一致安排能服务价值、保护人。看偏好的标准，不只看可见结果。",
+              "question": "一致性一定表示思考偏好吗？"
+            },
+            {
+              "answer": "能启动关于做法的讨论，不能证明能力或分配岗位。核查实际技能、需要、责任。",
+              "question": "可以凭此对比分配团队岗位吗？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ISTJ 基础人格](/zh/personality/istj)\n- [ISFJ 基础人格](/zh/personality/isfj)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/istj-vs-isfj",
       "jsonld_overrides_json": null,
-      "og_description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "og_description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+      "og_title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
-      "twitter_description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "seo_description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind",
+      "twitter_description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind"
+      "twitter_title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/istj-vs-isfj",
         "zh-CN": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/istj-vs-isfj",
-      "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "f3a6c251e56230f43effbb4be12909e25cdebe7a",
+      "metadata_fingerprint": "a0af67d7f1cf491212e09d3d44cd5bb75a2b9dce",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+        "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/istj-vs-isfj"
       },
@@ -773,24 +781,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind",
+      "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "ISTJ 和 ISFJ 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "ISTJ 和 ISFJ 的区别：制度可靠性与照顾可靠性 | FermatMind"
+        "description": "对照 ISTJ 与 ISFJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ISTJ 与 ISFJ 的区别：思考、情感与日常决定 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "fadf0040d61ee3039ba31636eca0cf407c5795cc80c3bcc24ddbe1a6ed57558e"
+  "source_content_sha256": "9a5e9fcdb8375a3b5c89898c7d623974933669ea0ca865cc8d53b8769947b94e"
 }

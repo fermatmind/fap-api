@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/estj-vs-entj",
@@ -12,153 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "ESTJ 和 ENTJ 最大区别，不是一个守旧、一个进取，也不是谁更适合管理。更准确地说，ESTJ 更容易先看现实秩序是否清楚：规则是否被执行，责任是否明确，流程是否稳定，结果是否按标准交付。ENTJ 更容易先看战略结构是否有效：目标是否足够大，资源是否被正确配置，系统是否需要被重构，当前路径是否能带来长期胜率。",
-          "key": "quick_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "快速结论：ESTJ 和 ENTJ 最大区别是什么"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "ESTJ 和 ENTJ 容易被混淆，是因为他们在外显行为上有很多重叠。两者都可能说话直接、行动果断、不喜欢含糊拖延，也都倾向于把讨论拉回目标、结果、责任和执行。旁人看到的往往是“这个人很有组织力、很能推动事情”，但没有进一步区分他们推动事情的依据是什么。",
-          "key": "why_they_are_confused",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么 ESTJ 和 ENTJ 容易被混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "ESTJ 和 ENTJ 的共同点，是都不太喜欢事情长时间停在模糊状态。一个目标如果没有负责人，一个方案如果没有时间表，一个讨论如果只有情绪没有结论，他们都会感到消耗。对他们来说，清晰不是形式要求，而是让资源、时间和人的努力不被浪费的基础。",
-          "key": "shared_traits",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "共同点：同样果断、重视效率与组织结果"
-        },
-        {
-          "body": "ESTJ 的核心入口是执行秩序。他们会本能地寻找已验证的方法、明确的角色、稳定的流程和可复查的标准。一个系统如果能按规则运转，ESTJ 往往愿意持续维护和优化它。对他们来说，秩序不是束缚，而是让承诺可以被兑现、让责任不被稀释的现实工具。",
-          "key": "core_difference",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "核心差异：执行秩序 vs 战略重构"
-        },
-        {
-          "body": "在工作节奏上，ESTJ 更偏向把事情拆成清楚步骤，然后稳定推进。他们喜欢明确的时间表、责任人、标准和复盘节点。比如项目延期时，ESTJ 可能先检查执行链条：哪个环节没有按时交付，哪个标准没有说清，谁需要补位。这个方式能快速恢复秩序，但如果环境正在发生结构性变化，也可能只是在旧系统里修补。",
-          "key": "work_and_learning",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "工作与学习场景差异"
-        },
-        {
-          "body": "在关系中，ESTJ 表达在意的方式常常是负责、安排和解决问题。他们可能不会说很多柔软的话，但会记得时间、处理事项、维护家庭或团队秩序。对他们来说，稳定和可靠本身就是一种重视。问题在于，如果对方期待的是情绪回应，ESTJ 的实际支持可能会被误读成只讲道理、不懂感受。",
-          "key": "communication_and_relationships",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "沟通与关系中的差异"
-        },
-        {
-          "body": "给 ESTJ 的建议：把“规则被破坏”拆成具体问题：是标准没说清、资源不足、责任不明，还是对方态度确实有问题。观察指标是自己是否一压力大就开始重复强调纪律。",
-          "key": "stress_and_growth",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "压力反应与成长建议"
-        },
-        {
-          "body": "误解一：ESTJ 比 ENTJ 更传统。更准确地说，ESTJ 更重视已验证的秩序，ENTJ 更重视系统是否能支持更大目标。传统不是 ESTJ 的本质，重构也不是 ENTJ 的全部。",
-          "key": "misconceptions",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "常见误解"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "af8f7fc3e0f52029f11a65782c92c9b3e5b8e91d",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "四字母词汇中的区别是 S/N：具体信息与经验、模式与可能性两种观察角度。它不是执行能力与战略能力的排序。",
-          "question": "ESTJ 和 ENTJ 最大区别是什么？"
+          "answer": "能。S/N 不分配技能，也不禁止某种做法。策略需要具体证据，细节工作两者都能学习和实践。",
+          "key": "faq-0",
+          "question": "ESTJ 能做策略，ENTJ 能做细节吗？"
         },
         {
-          "answer": "不能用类型决定领导力或职位。需要工作样本、经验、沟通、团队条件与实际成果，两个标签都不构成能力证明。",
-          "question": "ESTJ 和 ENTJ 哪个更适合领导？"
+          "answer": "本页没有智力排名。信息偏好不是能力分数。",
+          "key": "faq-1",
+          "question": "ENTJ 比 ESTJ 更聪明吗？"
         },
         {
-          "answer": "不能由 S 认定守旧。任何人都可能支持或反对变化，要核对其理由、经验和当前条件。",
-          "question": "ESTJ 会不会比 ENTJ 更守旧？"
+          "answer": "不能。习惯可能来自家庭、文化或实际收益。比较不同选择中如何收集和信任信息。",
+          "key": "faq-2",
+          "question": "喜欢传统能确定 ESTJ 吗？"
         },
         {
-          "answer": "不能由类型认定强势程度。观察具体沟通、权限与决定的影响，不给同一动作推断固定人格原因。",
-          "question": "ENTJ 会不会比 ESTJ 更强势？"
-        },
-        {
-          "answer": "可以比较你如何使用具体记录与可能性假设，但一次工作动作不能定类型；阅读与自述也不是能力测试。",
-          "question": "工作中怎么区分自己是 ESTJ 还是 ENTJ？"
-        },
-        {
-          "answer": "不由类型预测关系方式。围绕具体事件询问对方需要什么，并核对事实、感受与下一步。",
-          "question": "ESTJ 和 ENTJ 在关系里有什么不同？"
-        },
-        {
-          "answer": "不能由类型比较压力大小。应看实际任务、环境、支持和个人经历，不把类型词汇当健康判断。",
-          "question": "ESTJ 和 ENTJ 哪个更容易有压力？"
-        },
-        {
-          "answer": "不能。职业选择需要实际能力、资格、兴趣、机会与条件证据；类型描述只能提供反思问题。",
-          "question": "这个对比能不能决定职业选择？"
+          "answer": "不可以。核查实际技能、责任、经验和岗位要求。类型不是招聘或岗位分配工具。",
+          "key": "faq-3",
+          "question": "可以凭类型分配管理岗位吗？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "左侧类型详情页（canonical ESTJ-A 公开画像）",
-          "href": "/zh/personality/estj-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ESTJ-A 人格特点"
-        },
-        {
-          "body": "右侧类型详情页（canonical ENTJ-A 公开画像）",
-          "href": "/zh/personality/entj-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENTJ-A 人格特点"
-        },
-        {
-          "body": "MBTI 测试页",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "做免费 16 型人格测试"
-        },
-        {
-          "body": "Big Five 交叉验证",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用大五人格交叉验证特质维度"
-        },
-        {
-          "body": "RIASEC 职业兴趣",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "用 RIASEC 检查职业兴趣方向"
-        },
-        {
-          "body": "ESTJ A/T 对比",
-          "href": "/zh/personality/estj-a-vs-estj-t",
-          "key": "internal_link_6",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ESTJ-A 与 ESTJ-T 的区别"
-        },
-        {
-          "body": "ENTJ A/T 对比",
-          "href": "/zh/personality/entj-a-vs-entj-t",
-          "key": "internal_link_7",
-          "kind": "backend_authoritative_internal_link",
-          "title": "查看 ENTJ-A 与 ENTJ-T 的区别"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "estj-vs-entj",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "82d75c12f7a2c5b2d4960d57ecad68f9a6b0d749",
       "summary_blocks": [
         {
-          "body": "ESTJ 与 ENTJ 在四字母偏好词汇中共享 E、T、J，区别在 S/N。本文把具体资料与可能性推演做成对照练习，不把“执行”或“战略”当类型拥有的能力，也不据此分配领导职位。",
+          "body": "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "ESTJ 和 ENTJ 的区别：执行秩序、战略重构与组织推进"
+          "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/estj-vs-entj",
         "zh-CN": "https://fermatmind.com/zh/personality/estj-vs-entj"
       },
       "answer_surface_v1": {
@@ -314,95 +247,45 @@
         "ENTJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、领导力筛选、关系判断或职业决定。ESTJ 与 ENTJ 的对比只用于帮助用户理解行为倾向、压力反应、管理方式、决策依据和成长策略。人格类型是自我理解和复盘工具，不是身份限制，也不能证明能力、收入、晋升、职业成功或关系质量。具体建议需要结合真实经历、能力证据、工作环境、长期反馈和其他测评结果共同判断。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "estj-vs-entj",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+      "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "四字母词汇中的区别是 S/N：具体信息与经验、模式与可能性两种观察角度。它不是执行能力与战略能力的排序。",
-          "question": "ESTJ 和 ENTJ 最大区别是什么？"
+          "answer": "能。S/N 不分配技能，也不禁止某种做法。策略需要具体证据，细节工作两者都能学习和实践。",
+          "question": "ESTJ 能做策略，ENTJ 能做细节吗？"
         },
         {
-          "answer": "不能用类型决定领导力或职位。需要工作样本、经验、沟通、团队条件与实际成果，两个标签都不构成能力证明。",
-          "question": "ESTJ 和 ENTJ 哪个更适合领导？"
+          "answer": "本页没有智力排名。信息偏好不是能力分数。",
+          "question": "ENTJ 比 ESTJ 更聪明吗？"
         },
         {
-          "answer": "不能由 S 认定守旧。任何人都可能支持或反对变化，要核对其理由、经验和当前条件。",
-          "question": "ESTJ 会不会比 ENTJ 更守旧？"
+          "answer": "不能。习惯可能来自家庭、文化或实际收益。比较不同选择中如何收集和信任信息。",
+          "question": "喜欢传统能确定 ESTJ 吗？"
         },
         {
-          "answer": "不能由类型认定强势程度。观察具体沟通、权限与决定的影响，不给同一动作推断固定人格原因。",
-          "question": "ENTJ 会不会比 ESTJ 更强势？"
-        },
-        {
-          "answer": "可以比较你如何使用具体记录与可能性假设，但一次工作动作不能定类型；阅读与自述也不是能力测试。",
-          "question": "工作中怎么区分自己是 ESTJ 还是 ENTJ？"
-        },
-        {
-          "answer": "不由类型预测关系方式。围绕具体事件询问对方需要什么，并核对事实、感受与下一步。",
-          "question": "ESTJ 和 ENTJ 在关系里有什么不同？"
-        },
-        {
-          "answer": "不能由类型比较压力大小。应看实际任务、环境、支持和个人经历，不把类型词汇当健康判断。",
-          "question": "ESTJ 和 ENTJ 哪个更容易有压力？"
-        },
-        {
-          "answer": "不能。职业选择需要实际能力、资格、兴趣、机会与条件证据；类型描述只能提供反思问题。",
-          "question": "这个对比能不能决定职业选择？"
+          "answer": "不可以。核查实际技能、责任、经验和岗位要求。类型不是招聘或岗位分配工具。",
+          "question": "可以凭类型分配管理岗位吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ESTJ-A 人格特点",
-          "href": "/zh/personality/estj-a",
-          "label": "查看 ESTJ-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ESTJ-A 公开画像）"
+          "href": "/zh/personality/estj",
+          "label": "ESTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 ENTJ-A 人格特点",
-          "href": "/zh/personality/entj-a",
-          "label": "查看 ENTJ-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical ENTJ-A 公开画像）"
+          "href": "/zh/personality/entj",
+          "label": "ENTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ESTJ-A 与 ESTJ-T 的区别",
-          "href": "/zh/personality/estj-a-vs-estj-t",
-          "label": "查看 ESTJ-A 与 ESTJ-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ESTJ A/T 对比"
-        },
-        {
-          "anchor_text": "查看 ENTJ-A 与 ENTJ-T 的区别",
-          "href": "/zh/personality/entj-a-vs-entj-t",
-          "label": "查看 ENTJ-A 与 ENTJ-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENTJ A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -422,94 +305,104 @@
       "sections": [
         {
           "body": [
-            "四字母框架中，两者的区别是感觉/直觉偏好：可以分别观察具体事实与经验、模式与可能性在你理解问题时的作用。偏好词汇不证明执行质量、战略水平、领导力或收入。",
-            "下面的例子是编辑设计的自我观察任务，任何类型都可以使用两种视角；不将完成方式当作类型判定。"
+            "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ESTJ 和 ENTJ 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两个人都迅速安排任务，可能是职责、经验和时间限制所致。果断或重视结果不是单独的类型测量规则，也不能说明其判断主要来自经验还是推演。",
-            "在同一场虚构延期会议中，先记录已发生的交付和资源，再列出后续可能的变化。观察自己想先检查哪部分，以及补上另一部分后判断如何改变。"
+            "两者都描述外向、思考、判断：关注外部、逻辑或非个人化标准、有组织安排。类型叙述可能都包括推进实际行动，但管理技能不能从代码推断。",
+            "ESTJ 式问题可能问记录和观察流程显示什么，ENTJ 式问题可能问观察提示什么更大模式或未来方向。两者都需事实与解释。S 不局限过去，N 不保证远见。",
+            "功能栈理论常用 Te–Si–Ne–Fi 描述 ESTJ，Te–Ni–Se–Fi 描述 ENTJ。解释惯例不证明已测心理机制。A/T 是另外扩展，不是本页 S/N 区别。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ESTJ 和 ENTJ 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "E、T、J 是共同的偏好词汇，不是组织能力、责任感或效率证书。两个标签相同的字母不能证明实际行为相同。",
-            "想了解工作表现，应看任务产出、约束、沟通和反馈；不要用“领导型”之类称呼替代这些证据。"
+            "| 观察点 | ESTJ | ENTJ |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式与可能性 |\n| 原创服务例子 | 查记录步骤与重复例外 | 看需求变化是否需新模式 |\n| 可能盲点 | 默认旧流程仍满足变化需要 | 把大解释延伸到事实之外 |\n| 共同实践 | 核实条件是否变化 | 用具体观察检验解释 |"
           ],
-          "id": "shared_traits",
-          "title": "共同字母与能力证据的区别"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "S/N 对照可用于观察你如何接收和解释资料：具体记录、已有经验与直接线索，或模式、联系与可能性。两边都需要事实核查，也都可以学习不同方法。",
-            "用两份虚构资料练习：一份记录过去三次交付，另一份列出未来资源变化的三种假设。分别注明事实与假设，再写出哪个判断需要更多信息。资料侧重点不同，不代表哪种人更守旧或进取。"
+            "原创工作情景：服务等待变长。一种方式查人员、步骤、重复例外，另一种问需求是否变到需新模式。结合两边：定义已观察问题、检验模式、有限试行。两种做法不决定谁是 ESTJ 或 ENTJ。",
+            "原创关系情景：朋友安排较贵活动。一方想核查成本与旧安排，另一方探索新形式。比较限制与收益，不把一方叫僵化、另一方叫不现实。"
           ],
-          "id": "core_difference",
-          "title": "S/N：具体资料与可能性推演"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "给虚构小项目列一张现有步骤表，再列一张可替代方案表。比较所需资源、未确认条件和如何评价结果；保留两种表，不急着选“最像我”的类型。",
-            "学习时，可分别用具体例题和概念关系图理解同一主题，再检查各自哪里帮助理解、哪里仍不清楚。一次练习体验不证明能力、长期偏好或适合行业。"
+            "遵守程序不证明 ESTJ，谈愿景不证明 ENTJ。两者都能创新、管理细节、抽象思考。喜欢具体证据不表示智力低，喜欢可能性不表示策略更好。岗位与用词不能定型。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "在一段具体沟通里，同时说明观察到什么和想到哪些可能原因。问对方需要事实澄清、讨论选项还是情绪回应；不用其类型代替这个询问。",
-            "若对方希望先听，可以先确认感受再讨论方案。这是普通沟通尝试，不是某类人格专用技巧，也没有在本页验证改善关系的效果。"
+            "选三个没有规则规定起点的问题：先找什么信息，信任什么，什么让解释改变？加入另一方式更有用的反例，区分信息偏好、专业知识、任务必需证据。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "把虚构项目中的压力分成已确认的延误、对后果的假设和可以询问的条件。资料不足时，不把不安解释为类型固有弱点。",
-            "选择一个低风险学习或记录任务，写明下一步与复盘问题。真实生产、健康、支付和安全事项必须保留其所需授权与检查，不拿试运行建议替代制度。"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "S 不等于守旧，N 不等于战略才能；E 不等于沟通能力，T 不等于没有感情，J 也不等于执行可靠。字母描述偏好，具体能力与行为要另看证据。",
-            "不能由 ESTJ 或 ENTJ 判断谁更强势、更成熟、更适合领导或更有压力；这些问题需要具体情境和独立证据。职业决定、筛选和关系预测不属于本页用途。"
+            "- [ESTJ 基础人格](/zh/personality/estj)\n- [ENTJ 基础人格](/zh/personality/entj)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-      "seo_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+      "seo_description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "fermatmind_source_basis": [
-          "ESTJ-A/ESTJ-T FermatMind 线上人格页文本资产显示 ESTJ 主题围绕组织执行、规则责任、结果导向、稳定执行与反馈校准。",
-          "ENTJ-A/ENTJ-T FermatMind 线上人格页文本资产显示 ENTJ 主题围绕战略推进、资源协调、目标拆解、组织调整与复盘校准。"
-        ],
-        "medical_or_career_decision_claims": false
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc",
-      "summary": "ESTJ 与 ENTJ 在四字母偏好词汇中共享 E、T、J，区别在 S/N。本文把具体资料与可能性推演做成对照练习，不把“执行”或“战略”当类型拥有的能力，也不据此分配领导职位。",
-      "title": "ESTJ 和 ENTJ 的区别：执行秩序、战略重构与组织推进"
+      "source_sha256": "fa4f44041d6e848730000855932f6567771dcb3956dd3ed87884042adfab468b",
+      "summary": "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。",
+      "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/estj-vs-entj",
         "zh-CN": "https://fermatmind.com/zh/personality/estj-vs-entj"
       },
       "answer_surface_v1": {
@@ -665,95 +558,45 @@
         "ENTJ"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
-      "claim_boundary": "本文不用于医学诊断、心理治疗、招聘筛选、领导力筛选、关系判断或职业决定。ESTJ 与 ENTJ 的对比只用于帮助用户理解行为倾向、压力反应、管理方式、决策依据和成长策略。人格类型是自我理解和复盘工具，不是身份限制，也不能证明能力、收入、晋升、职业成功或关系质量。具体建议需要结合真实经历、能力证据、工作环境、长期反馈和其他测评结果共同判断。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "estj-vs-entj",
       "comparison_type": "mbti_cross_type",
-      "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+      "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "四字母词汇中的区别是 S/N：具体信息与经验、模式与可能性两种观察角度。它不是执行能力与战略能力的排序。",
-          "question": "ESTJ 和 ENTJ 最大区别是什么？"
+          "answer": "能。S/N 不分配技能，也不禁止某种做法。策略需要具体证据，细节工作两者都能学习和实践。",
+          "question": "ESTJ 能做策略，ENTJ 能做细节吗？"
         },
         {
-          "answer": "不能用类型决定领导力或职位。需要工作样本、经验、沟通、团队条件与实际成果，两个标签都不构成能力证明。",
-          "question": "ESTJ 和 ENTJ 哪个更适合领导？"
+          "answer": "本页没有智力排名。信息偏好不是能力分数。",
+          "question": "ENTJ 比 ESTJ 更聪明吗？"
         },
         {
-          "answer": "不能由 S 认定守旧。任何人都可能支持或反对变化，要核对其理由、经验和当前条件。",
-          "question": "ESTJ 会不会比 ENTJ 更守旧？"
+          "answer": "不能。习惯可能来自家庭、文化或实际收益。比较不同选择中如何收集和信任信息。",
+          "question": "喜欢传统能确定 ESTJ 吗？"
         },
         {
-          "answer": "不能由类型认定强势程度。观察具体沟通、权限与决定的影响，不给同一动作推断固定人格原因。",
-          "question": "ENTJ 会不会比 ESTJ 更强势？"
-        },
-        {
-          "answer": "可以比较你如何使用具体记录与可能性假设，但一次工作动作不能定类型；阅读与自述也不是能力测试。",
-          "question": "工作中怎么区分自己是 ESTJ 还是 ENTJ？"
-        },
-        {
-          "answer": "不由类型预测关系方式。围绕具体事件询问对方需要什么，并核对事实、感受与下一步。",
-          "question": "ESTJ 和 ENTJ 在关系里有什么不同？"
-        },
-        {
-          "answer": "不能由类型比较压力大小。应看实际任务、环境、支持和个人经历，不把类型词汇当健康判断。",
-          "question": "ESTJ 和 ENTJ 哪个更容易有压力？"
-        },
-        {
-          "answer": "不能。职业选择需要实际能力、资格、兴趣、机会与条件证据；类型描述只能提供反思问题。",
-          "question": "这个对比能不能决定职业选择？"
+          "answer": "不可以。核查实际技能、责任、经验和岗位要求。类型不是招聘或岗位分配工具。",
+          "question": "可以凭类型分配管理岗位吗？"
         }
       ],
-      "indexability_status": "released_by_mbti_cross_publisher_49",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "查看 ESTJ-A 人格特点",
-          "href": "/zh/personality/estj-a",
-          "label": "查看 ESTJ-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "左侧类型详情页（canonical ESTJ-A 公开画像）"
+          "href": "/zh/personality/estj",
+          "label": "ESTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "查看 ENTJ-A 人格特点",
-          "href": "/zh/personality/entj-a",
-          "label": "查看 ENTJ-A 人格特点",
-          "link_intent": "related_public_page",
-          "reason": "右侧类型详情页（canonical ENTJ-A 公开画像）"
+          "href": "/zh/personality/entj",
+          "label": "ENTJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "做免费 16 型人格测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "做免费 16 型人格测试",
-          "link_intent": "related_public_page",
-          "reason": "MBTI 测试页"
-        },
-        {
-          "anchor_text": "用大五人格交叉验证特质维度",
-          "href": "/zh/tests/big-five-personality-test-ocean-model",
-          "label": "用大五人格交叉验证特质维度",
-          "link_intent": "related_public_page",
-          "reason": "Big Five 交叉验证"
-        },
-        {
-          "anchor_text": "用 RIASEC 检查职业兴趣方向",
-          "href": "/zh/tests/holland-career-interest-test-riasec",
-          "label": "用 RIASEC 检查职业兴趣方向",
-          "link_intent": "related_public_page",
-          "reason": "RIASEC 职业兴趣"
-        },
-        {
-          "anchor_text": "查看 ESTJ-A 与 ESTJ-T 的区别",
-          "href": "/zh/personality/estj-a-vs-estj-t",
-          "label": "查看 ESTJ-A 与 ESTJ-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ESTJ A/T 对比"
-        },
-        {
-          "anchor_text": "查看 ENTJ-A 与 ENTJ-T 的区别",
-          "href": "/zh/personality/entj-a-vs-entj-t",
-          "label": "查看 ENTJ-A 与 ENTJ-T 的区别",
-          "link_intent": "related_public_page",
-          "reason": "ENTJ A/T 对比"
+          "href": "/zh/personality",
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -773,229 +616,250 @@
       "sections": [
         {
           "body": [
-            "四字母框架中，两者的区别是感觉/直觉偏好：可以分别观察具体事实与经验、模式与可能性在你理解问题时的作用。偏好词汇不证明执行质量、战略水平、领导力或收入。",
-            "下面的例子是编辑设计的自我观察任务，任何类型都可以使用两种视角；不将完成方式当作类型判定。"
+            "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。"
           ],
+          "groups": [],
           "id": "quick_answer",
-          "title": "快速结论：ESTJ 和 ENTJ 最大区别是什么"
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两个人都迅速安排任务，可能是职责、经验和时间限制所致。果断或重视结果不是单独的类型测量规则，也不能说明其判断主要来自经验还是推演。",
-            "在同一场虚构延期会议中，先记录已发生的交付和资源，再列出后续可能的变化。观察自己想先检查哪部分，以及补上另一部分后判断如何改变。"
+            "两者都描述外向、思考、判断：关注外部、逻辑或非个人化标准、有组织安排。类型叙述可能都包括推进实际行动，但管理技能不能从代码推断。",
+            "ESTJ 式问题可能问记录和观察流程显示什么，ENTJ 式问题可能问观察提示什么更大模式或未来方向。两者都需事实与解释。S 不局限过去，N 不保证远见。",
+            "功能栈理论常用 Te–Si–Ne–Fi 描述 ESTJ，Te–Ni–Se–Fi 描述 ENTJ。解释惯例不证明已测心理机制。A/T 是另外扩展，不是本页 S/N 区别。"
           ],
-          "id": "why_they_are_confused",
-          "title": "为什么 ESTJ 和 ENTJ 容易被混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "E、T、J 是共同的偏好词汇，不是组织能力、责任感或效率证书。两个标签相同的字母不能证明实际行为相同。",
-            "想了解工作表现，应看任务产出、约束、沟通和反馈；不要用“领导型”之类称呼替代这些证据。"
+            "| 观察点 | ESTJ | ENTJ |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式与可能性 |\n| 原创服务例子 | 查记录步骤与重复例外 | 看需求变化是否需新模式 |\n| 可能盲点 | 默认旧流程仍满足变化需要 | 把大解释延伸到事实之外 |\n| 共同实践 | 核实条件是否变化 | 用具体观察检验解释 |"
           ],
-          "id": "shared_traits",
-          "title": "共同字母与能力证据的区别"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "S/N 对照可用于观察你如何接收和解释资料：具体记录、已有经验与直接线索，或模式、联系与可能性。两边都需要事实核查，也都可以学习不同方法。",
-            "用两份虚构资料练习：一份记录过去三次交付，另一份列出未来资源变化的三种假设。分别注明事实与假设，再写出哪个判断需要更多信息。资料侧重点不同，不代表哪种人更守旧或进取。"
+            "原创工作情景：服务等待变长。一种方式查人员、步骤、重复例外，另一种问需求是否变到需新模式。结合两边：定义已观察问题、检验模式、有限试行。两种做法不决定谁是 ESTJ 或 ENTJ。",
+            "原创关系情景：朋友安排较贵活动。一方想核查成本与旧安排，另一方探索新形式。比较限制与收益，不把一方叫僵化、另一方叫不现实。"
           ],
-          "id": "core_difference",
-          "title": "S/N：具体资料与可能性推演"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "给虚构小项目列一张现有步骤表，再列一张可替代方案表。比较所需资源、未确认条件和如何评价结果；保留两种表，不急着选“最像我”的类型。",
-            "学习时，可分别用具体例题和概念关系图理解同一主题，再检查各自哪里帮助理解、哪里仍不清楚。一次练习体验不证明能力、长期偏好或适合行业。"
+            "遵守程序不证明 ESTJ，谈愿景不证明 ENTJ。两者都能创新、管理细节、抽象思考。喜欢具体证据不表示智力低，喜欢可能性不表示策略更好。岗位与用词不能定型。"
           ],
-          "id": "work_and_learning",
-          "title": "工作与学习场景差异"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
         },
         {
           "body": [
-            "在一段具体沟通里，同时说明观察到什么和想到哪些可能原因。问对方需要事实澄清、讨论选项还是情绪回应；不用其类型代替这个询问。",
-            "若对方希望先听，可以先确认感受再讨论方案。这是普通沟通尝试，不是某类人格专用技巧，也没有在本页验证改善关系的效果。"
+            "选三个没有规则规定起点的问题：先找什么信息，信任什么，什么让解释改变？加入另一方式更有用的反例，区分信息偏好、专业知识、任务必需证据。"
           ],
-          "id": "communication_and_relationships",
-          "title": "沟通与关系中的差异"
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
         },
         {
           "body": [
-            "把虚构项目中的压力分成已确认的延误、对后果的假设和可以询问的条件。资料不足时，不把不安解释为类型固有弱点。",
-            "选择一个低风险学习或记录任务，写明下一步与复盘问题。真实生产、健康、支付和安全事项必须保留其所需授权与检查，不拿试运行建议替代制度。"
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
           ],
-          "id": "stress_and_growth",
-          "title": "压力反应与成长建议"
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
         },
         {
           "body": [
-            "S 不等于守旧，N 不等于战略才能；E 不等于沟通能力，T 不等于没有感情，J 也不等于执行可靠。字母描述偏好，具体能力与行为要另看证据。",
-            "不能由 ESTJ 或 ENTJ 判断谁更强势、更成熟、更适合领导或更有压力；这些问题需要具体情境和独立证据。职业决定、筛选和关系预测不属于本页用途。"
+            "- [ESTJ 基础人格](/zh/personality/estj)\n- [ENTJ 基础人格](/zh/personality/entj)\n- [浏览 16 型目录](/zh/personality)"
           ],
-          "id": "misconceptions",
-          "title": "常见误解"
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-      "seo_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+      "seo_description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景",
       "sitemap_eligible": true,
-      "source_notes": {
-        "competitor_reference_used_for_structure_only": true,
-        "copied_competitor_text": false,
-        "copy_boundary": "结构参考不等于文案复刻；本文为 FermatMind 原创表达。",
-        "fermatmind_source_basis": [
-          "ESTJ-A/ESTJ-T FermatMind 线上人格页文本资产显示 ESTJ 主题围绕组织执行、规则责任、结果导向、稳定执行与反馈校准。",
-          "ENTJ-A/ENTJ-T FermatMind 线上人格页文本资产显示 ENTJ 主题围绕战略推进、资源协调、目标拆解、组织调整与复盘校准。"
-        ],
-        "medical_or_career_decision_claims": false
-      },
+      "source_notes": [],
       "source_package_id": "MBTI-CROSS-APPROVAL-48",
       "source_refs": [
-        "MBTI-CROSS-APPROVAL-48",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "b73514962b2d72be47c9004f2b5e5fb7572ea82f918c2a0f5a3374e15b2f36cc",
-      "summary": "ESTJ 与 ENTJ 在四字母偏好词汇中共享 E、T、J，区别在 S/N。本文把具体资料与可能性推演做成对照练习，不把“执行”或“战略”当类型拥有的能力，也不据此分配领导职位。",
-      "title": "ESTJ 和 ENTJ 的区别：执行秩序、战略重构与组织推进"
+      "source_sha256": "fa4f44041d6e848730000855932f6567771dcb3956dd3ed87884042adfab468b",
+      "summary": "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。",
+      "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/estj-vs-entj",
-            "name": "ESTJ vs ENTJ",
-            "position": 2
-          }
-        ]
-      },
-      "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "四字母词汇中的区别是 S/N：具体信息与经验、模式与可能性两种观察角度。它不是执行能力与战略能力的排序。"
-            },
-            "name": "ESTJ 和 ENTJ 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能用类型决定领导力或职位。需要工作样本、经验、沟通、团队条件与实际成果，两个标签都不构成能力证明。"
-            },
-            "name": "ESTJ 和 ENTJ 哪个更适合领导？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能由 S 认定守旧。任何人都可能支持或反对变化，要核对其理由、经验和当前条件。"
-            },
-            "name": "ESTJ 会不会比 ENTJ 更守旧？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能由类型认定强势程度。观察具体沟通、权限与决定的影响，不给同一动作推断固定人格原因。"
-            },
-            "name": "ENTJ 会不会比 ESTJ 更强势？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "可以比较你如何使用具体记录与可能性假设，但一次工作动作不能定类型；阅读与自述也不是能力测试。"
-            },
-            "name": "工作中怎么区分自己是 ESTJ 还是 ENTJ？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不由类型预测关系方式。围绕具体事件询问对方需要什么，并核对事实、感受与下一步。"
-            },
-            "name": "ESTJ 和 ENTJ 在关系里有什么不同？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能由类型比较压力大小。应看实际任务、环境、支持和个人经历，不把类型词汇当健康判断。"
-            },
-            "name": "ESTJ 和 ENTJ 哪个更容易有压力？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。职业选择需要实际能力、资格、兴趣、机会与条件证据；类型描述只能提供反思问题。"
-            },
-            "name": "这个对比能不能决定职业选择？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "ESTJ",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/estj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "ENTJ",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/entj-a"
-          }
-        ]
-      },
-      "name": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+      "@type": "AboutPage",
+      "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/estj-vs-entj",
+      "name": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景",
       "url": "https://fermatmind.com/zh/personality/estj-vs-entj"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "ESTJ 与 ENTJ 共用 E、T、J，代码差别是 S/N。实感强调具体信息与经验，直觉强调模式与可能性；差异不排名智力、领导或策略能力。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者都描述外向、思考、判断：关注外部、逻辑或非个人化标准、有组织安排。类型叙述可能都包括推进实际行动，但管理技能不能从代码推断。\n\nESTJ 式问题可能问记录和观察流程显示什么，ENTJ 式问题可能问观察提示什么更大模式或未来方向。两者都需事实与解释。S 不局限过去，N 不保证远见。\n\n功能栈理论常用 Te–Si–Ne–Fi 描述 ESTJ，Te–Ni–Se–Fi 描述 ENTJ。解释惯例不证明已测心理机制。A/T 是另外扩展，不是本页 S/N 区别。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | ESTJ | ENTJ |\n| --- | --- | --- |\n| 代码差别 | 实感 S：具体信息与经验 | 直觉 N：模式与可能性 |\n| 原创服务例子 | 查记录步骤与重复例外 | 看需求变化是否需新模式 |\n| 可能盲点 | 默认旧流程仍满足变化需要 | 把大解释延伸到事实之外 |\n| 共同实践 | 核实条件是否变化 | 用具体观察检验解释 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：服务等待变长。一种方式查人员、步骤、重复例外，另一种问需求是否变到需新模式。结合两边：定义已观察问题、检验模式、有限试行。两种做法不决定谁是 ESTJ 或 ENTJ。\n\n原创关系情景：朋友安排较贵活动。一方想核查成本与旧安排，另一方探索新形式。比较限制与收益，不把一方叫僵化、另一方叫不现实。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "遵守程序不证明 ESTJ，谈愿景不证明 ENTJ。两者都能创新、管理细节、抽象思考。喜欢具体证据不表示智力低，喜欢可能性不表示策略更好。岗位与用词不能定型。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "选三个没有规则规定起点的问题：先找什么信息，信任什么，什么让解释改变？加入另一方式更有用的反例，区分信息偏好、专业知识、任务必需证据。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "能。S/N 不分配技能，也不禁止某种做法。策略需要具体证据，细节工作两者都能学习和实践。",
+              "question": "ESTJ 能做策略，ENTJ 能做细节吗？"
+            },
+            {
+              "answer": "本页没有智力排名。信息偏好不是能力分数。",
+              "question": "ENTJ 比 ESTJ 更聪明吗？"
+            },
+            {
+              "answer": "不能。习惯可能来自家庭、文化或实际收益。比较不同选择中如何收集和信任信息。",
+              "question": "喜欢传统能确定 ESTJ 吗？"
+            },
+            {
+              "answer": "不可以。核查实际技能、责任、经验和岗位要求。类型不是招聘或岗位分配工具。",
+              "question": "可以凭类型分配管理岗位吗？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ESTJ 基础人格](/zh/personality/estj)\n- [ENTJ 基础人格](/zh/personality/entj)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
       "jsonld_overrides_json": null,
-      "og_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+      "og_description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+      "og_title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-      "seo_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
-      "twitter_description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+      "seo_description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind",
+      "twitter_description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格"
+      "twitter_title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/estj-vs-entj",
         "zh-CN": "https://fermatmind.com/zh/personality/estj-vs-entj"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/estj-vs-entj",
-      "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
+      "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "8f05d9e49358b4b433a25b7fb3a8932b2bce53b6",
+      "metadata_fingerprint": "82d75c12f7a2c5b2d4960d57ecad68f9a6b0d749",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-        "title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+        "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/estj-vs-entj"
       },
@@ -1005,24 +869,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格",
+      "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "对比 ESTJ 与 ENTJ 在管理方式、决策依据、组织推进、战略规划、压力反应和成长策略中的差异。",
-        "title": "ESTJ 和 ENTJ 区别：如何区分总经理型与指挥官型人格"
+        "description": "对照 ESTJ 与 ENTJ 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "ESTJ 与 ENTJ 的区别：实感、直觉与证据情景 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "f77bfeadb9eb6e49ea372372cb7580c79361f3c0e48efc829bb29eed36e706bb"
+  "source_content_sha256": "63e233b894bb1e378892242d074222c75c7c463167d20f34bd9a8d2b95f503cf"
 }

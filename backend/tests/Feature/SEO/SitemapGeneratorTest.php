@@ -31,6 +31,27 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_mbti_discovery_matches_all_current_bilingual_pages_instead_of_legacy_db_copy(): void
+    {
+        config(['fap.testing_personality_legacy_public_db_fixture' => false]);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+        $manifest = json_decode(file_get_contents(base_path('content_assets/personality_public/current/manifest.json')), true, 512, JSON_THROW_ON_ERROR);
+        $expected = collect($manifest['files'])
+            ->where('framework', 'mbti')
+            ->pluck('canonical_path')
+            ->sort()->values()->all();
+        $generator = app(SitemapGenerator::class);
+        foreach ([$generator->generateSitemapUrls(), $generator->generateLlmsUrls()] as $urls) {
+            $actual = collect($urls)
+                ->pluck('loc')
+                ->map(static fn (string $url): string => (string) parse_url($url, PHP_URL_PATH))
+                ->filter(static fn (string $path): bool => preg_match('#^/(?:en|zh)/personality(?:/[a-z]{4}(?:-[at]|-a-vs-[a-z]{4}-t|-vs-[a-z]{4})?)?$#', $path) === 1)
+                ->sort()->values()->all();
+            $this->assertCount(144, $actual);
+            $this->assertSame($expected, $actual);
+        }
+    }
+
     public function test_generate_excludes_exact_pr24_fixture_cohort_from_explicit_legacy_fallback_without_deleting_rows(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -1205,6 +1226,8 @@ class SitemapGeneratorTest extends TestCase
      */
     private function createPersonalityProfile(array $overrides = []): PersonalityProfile
     {
+        config(['fap.testing_personality_legacy_public_db_fixture' => true]);
+
         /** @var PersonalityProfile */
         return PersonalityProfile::query()->create(array_merge([
             'org_id' => 0,

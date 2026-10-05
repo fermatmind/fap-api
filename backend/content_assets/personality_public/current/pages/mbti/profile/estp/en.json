@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/estp",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "48894f1b53bdc67fe337c61ca07d5455c765c48d",
+      "answer_fingerprint": "5c661060b19477f3554e49273dd6b5baa86a7463",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "657215551ca6527befb46f7563a7beb0970295bb",
-        "e21d4826a7c4208576f41497cc9e0417030fe985",
+        "f924d07938872cb012f5af80088919780080de8d",
+        "306fd2c3d97ed87844b4d99bcef72746fbcdaedd",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "e21d4826a7c4208576f41497cc9e0417030fe985",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Do not infer a person's risk tolerance from a code. Check the decision's possible loss, reversibility, safety constraints and the person's actual choices.",
+          "key": "faq-0",
+          "question": "Does ESTP mean being a risk-taker?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/estp",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does ESTP indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for ESTP?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do ESTP-A and ESTP-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can ESTP predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "306fd2c3d97ed87844b4d99bcef72746fbcdaedd",
+      "next_step_blocks": [],
       "primary_content_ref": "ESTP",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,42 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/estp",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "657215551ca6527befb46f7563a7beb0970295bb",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "f924d07938872cb012f5af80088919780080de8d",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESTP profiles.",
+          "body": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "ESTP - Entrepreneur"
+          "title": "ESTP Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/estp-a",
+        "label": "ESTP-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/estp-t",
+        "label": "ESTP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/estp-a-vs-estp-t",
+        "label": "ESTP-A vs ESTP-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/estp",
@@ -162,7 +151,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "e21d4826a7c4208576f41497cc9e0417030fe985",
+      "landing_fingerprint": "306fd2c3d97ed87844b4d99bcef72746fbcdaedd",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "ESTP",
       "public_surface_ref": null,
@@ -177,10 +166,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for ESTP profiles.",
+          "body": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "ESTP - Entrepreneur"
+          "title": "ESTP Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +187,7 @@
       "display_type": "ESTP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESTP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Entrepreneur",
         "rarity": null,
@@ -207,156 +196,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ESTP uses four preference labels: Extraversion, Sensing, Thinking, and Perceiving. Use them as questions about interaction, concrete information, decision criteria, and flexibility. They do not establish risk tolerance, ability, leadership, or a best career.",
+          "body_md": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESTP is commonly described as Se–Ti–Fe–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESTP-style description asks what is happening now and what action would reveal useful information. You might prefer an interactive trial to a long discussion detached from the situation. This can make a stalled problem tangible. A possible blind spot is treating a promising immediate response as evidence that longer-term consequences are covered.\n\nCounterexample: a person who likes live feedback can still plan carefully and avoid unnecessary risk. Extraversion does not require constant sociability. Sports, quick decisions or disliking theory cannot identify ESTP; look at your preferred approach when you have alternatives.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a service desk faces a queue and you suggest a different order for handling requests. Test it for a limited period, record wait times and check whether anyone is disadvantaged. A fast workaround needs an outcome check and a handover, not only an energetic start.\n\nExplore a bounded task involving live interaction or practical experimentation. Check whether you enjoy preparation, documentation and routine follow-through as well. Sales, field work, business and emergency services require different skills and qualifications; the Entrepreneur nickname is not evidence of a business aptitude.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you suggest changing an evening's plan because a new opportunity appears. Your friend has organized transport around the original plan. Ask before changing it and compare the practical costs. Flexibility should include the other person's commitments.\n\nA quick response can be helpful, but a sensitive conversation may need time. Ask whether the other person wants an immediate solution or space to explain. Neither shared excitement nor a type pairing predicts compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a problem escalates and doing something immediately feels preferable to waiting. Identify the consequence of being wrong, the safety limits and who has authority to act. A reversible trial differs from an action with lasting consequences.\n\nRestlessness or impulsive behavior cannot confirm ESTP or a diagnosis. Examine time pressure, fatigue and the setting rather than treating risk as a personality requirement.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one small opportunity, state the benefit, the downside and the condition that would make you stop. Run a reversible trial within your competence, then compare its actual result with the first impression.\n\nRecord an occasion where pausing helped more than acting quickly. Keeping that counterexample prevents a useful action preference from becoming a rule for every decision.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESTP-A](/en/personality/estp-a)\n- [ESTP-T](/en/personality/estp-t)\n- [ESTP-A vs ESTP-T](/en/personality/estp-a-vs-estp-t)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              },
-              {
-                "slug": "researcher",
-                "title": "Researcher"
-              },
-              {
-                "slug": "pharmacist",
-                "title": "Pharmacist"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "Cybersecurity Analyst"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "Operations Manager"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              },
-              {
-                "slug": "researcher",
-                "title": "Researcher"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Choose one practical task and record what you noticed first, how you checked a constraint, and whether you changed your approach after feedback. Include a case where planning or reflection mattered more than immediate action. The exercise describes a situation; it does not predict a type or guarantee performance.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Do not infer a person's risk tolerance from a code. Check the decision's possible loss, reversibility, safety constraints and the person's actual choices.",
+                "question": "Does ESTP mean being a risk-taker?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESTP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESTP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESTP-A and ESTP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESTP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/estp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
+        "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/estp",
+          "name": "ESTP Personality",
+          "url": "https://fermatmind.com/en/personality/estp"
+        },
+        "og_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESTP Personality Guide",
+        "og_title": "ESTP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESTP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
+        "title": "ESTP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESTP Personality Guide"
+        "twitter_title": "ESTP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESTP profiles.",
+        "summary": "",
         "tagline": "Entrepreneur",
-        "title": "ESTP - Entrepreneur"
+        "title": "ESTP Personality"
       },
       "variant_code": null
     },
@@ -372,7 +351,7 @@
       "display_type": "ESTP",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for ESTP profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Entrepreneur",
         "rarity": null,
@@ -381,166 +360,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "ESTP uses four preference labels: Extraversion, Sensing, Thinking, and Perceiving. Use them as questions about interaction, concrete information, decision criteria, and flexibility. They do not establish risk tolerance, ability, leadership, or a best career.",
+          "body_md": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+          "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESTP is commonly described as Se–Ti–Fe–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An ESTP-style description asks what is happening now and what action would reveal useful information. You might prefer an interactive trial to a long discussion detached from the situation. This can make a stalled problem tangible. A possible blind spot is treating a promising immediate response as evidence that longer-term consequences are covered.\n\nCounterexample: a person who likes live feedback can still plan carefully and avoid unnecessary risk. Extraversion does not require constant sociability. Sports, quick decisions or disliking theory cannot identify ESTP; look at your preferred approach when you have alternatives.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a service desk faces a queue and you suggest a different order for handling requests. Test it for a limited period, record wait times and check whether anyone is disadvantaged. A fast workaround needs an outcome check and a handover, not only an energetic start.\n\nExplore a bounded task involving live interaction or practical experimentation. Check whether you enjoy preparation, documentation and routine follow-through as well. Sales, field work, business and emergency services require different skills and qualifications; the Entrepreneur nickname is not evidence of a business aptitude.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you suggest changing an evening's plan because a new opportunity appears. Your friend has organized transport around the original plan. Ask before changing it and compare the practical costs. Flexibility should include the other person's commitments.\n\nA quick response can be helpful, but a sensitive conversation may need time. Ask whether the other person wants an immediate solution or space to explain. Neither shared excitement nor a type pairing predicts compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a problem escalates and doing something immediately feels preferable to waiting. Identify the consequence of being wrong, the safety limits and who has authority to act. A reversible trial differs from an action with lasting consequences.\n\nRestlessness or impulsive behavior cannot confirm ESTP or a diagnosis. Examine time pressure, fatigue and the setting rather than treating risk as a personality requirement.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For one small opportunity, state the benefit, the downside and the condition that would make you stop. Run a reversible trial within your competence, then compare its actual result with the first impression.\n\nRecord an occasion where pausing helped more than acting quickly. Keeping that counterexample prevents a useful action preference from becoming a rule for every decision.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [ESTP-A](/en/personality/estp-a)\n- [ESTP-T](/en/personality/estp-t)\n- [ESTP-A vs ESTP-T](/en/personality/estp-a-vs-estp-t)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              },
-              {
-                "slug": "researcher",
-                "title": "Researcher"
-              },
-              {
-                "slug": "pharmacist",
-                "title": "Pharmacist"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "cybersecurity-analyst",
-                "title": "Cybersecurity Analyst"
-              },
-              {
-                "slug": "operations-manager",
-                "title": "Operations Manager"
-              },
-              {
-                "slug": "sales-manager",
-                "title": "Sales Manager"
-              },
-              {
-                "slug": "financial-planner",
-                "title": "Financial Planner"
-              },
-              {
-                "slug": "content-strategist",
-                "title": "Content Strategist"
-              },
-              {
-                "slug": "researcher",
-                "title": "Researcher"
-              }
-            ],
-            "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Choose one practical task and record what you noticed first, how you checked a constraint, and whether you changed your approach after feedback. Include a case where planning or reflection mattered more than immediate action. The exercise describes a situation; it does not predict a type or guarantee performance.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Do not infer a person's risk tolerance from a code. Check the decision's possible loss, reversibility, safety constraints and the person's actual choices.",
+                "question": "Does ESTP mean being a risk-taker?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does ESTP indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for ESTP?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do ESTP-A and ESTP-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can ESTP predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/estp",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
+        "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/estp",
+          "name": "ESTP Personality",
+          "url": "https://fermatmind.com/en/personality/estp"
+        },
+        "og_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "ESTP Personality Guide",
+        "og_title": "ESTP Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "ESTP Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
+        "title": "ESTP Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "ESTP Personality Guide"
+        "twitter_title": "ESTP Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for ESTP profiles.",
+        "summary": "",
         "tagline": "Entrepreneur",
-        "title": "ESTP - Entrepreneur"
+        "title": "ESTP Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "ESTP",
-      "excerpt": "Role recommendations and work-environment guidance for ESTP profiles.",
+      "excerpt": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
       "hero_image_url": null,
       "hero_kicker": "Entrepreneur",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for ESTP profiles.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,454 +521,166 @@
       "slug": "estp",
       "status": "published",
       "subtitle": null,
-      "title": "ESTP - Entrepreneur",
+      "title": "ESTP Personality",
       "type_code": "ESTP",
       "type_name": "Entrepreneur"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "ESTP uses four preference labels: Extraversion, Sensing, Thinking, and Perceiving. Use them as questions about interaction, concrete information, decision criteria, and flexibility. They do not establish risk tolerance, ability, leadership, or a best career.",
+        "body_md": "ESTP describes Extraversion, Sensing, Thinking and Perceiving preferences. Its narrative emphasizes engaging with a concrete situation and testing an actionable response. It does not establish entrepreneurship, risk tolerance, sales skill or competence in a crisis.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**E — Extraversion**: Attention directed toward people, activity and the outer world; it does not require constant sociability.\n\n**S — Sensing**: Attention to concrete information and experience; it does not exclude imagination.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**P — Perceiving**: A preference for keeping the outer world open to incoming information; it does not imply laziness or an inability to plan.\n\nIn function-stack theory, ESTP is commonly described as Se–Ti–Fe–Ni. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An ESTP-style description asks what is happening now and what action would reveal useful information. You might prefer an interactive trial to a long discussion detached from the situation. This can make a stalled problem tangible. A possible blind spot is treating a promising immediate response as evidence that longer-term consequences are covered.\n\nCounterexample: a person who likes live feedback can still plan carefully and avoid unnecessary risk. Extraversion does not require constant sociability. Sports, quick decisions or disliking theory cannot identify ESTP; look at your preferred approach when you have alternatives.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Use the listed roles as prompts for further research, not prescriptions. Compare actual duties, training and qualification requirements, interests, skills, costs, and opportunities. Personality labels cannot decide which role you should enter or avoid.",
+        "body_md": "Original scenario: a service desk faces a queue and you suggest a different order for handling requests. Test it for a limited period, record wait times and check whether anyone is disadvantaged. A fast workaround needs an outcome check and a handover, not only an energetic start.\n\nExplore a bounded task involving live interaction or practical experimentation. Check whether you enjoy preparation, documentation and routine follow-through as well. Sales, field work, business and emergency services require different skills and qualifications; the Entrepreneur nickname is not evidence of a business aptitude.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: you suggest changing an evening's plan because a new opportunity appears. Your friend has organized transport around the original plan. Ask before changing it and compare the practical costs. Flexibility should include the other person's commitments.\n\nA quick response can be helpful, but a sensitive conversation may need time. Ask whether the other person wants an immediate solution or space to explain. Neither shared excitement nor a type pairing predicts compatibility.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: a problem escalates and doing something immediately feels preferable to waiting. Identify the consequence of being wrong, the safety limits and who has authority to act. A reversible trial differs from an action with lasting consequences.\n\nRestlessness or impulsive behavior cannot confirm ESTP or a diagnosis. Examine time pressure, fatigue and the setting rather than treating risk as a personality requirement.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "content-strategist",
-              "title": "Content Strategist"
-            },
-            {
-              "slug": "researcher",
-              "title": "Researcher"
-            },
-            {
-              "slug": "pharmacist",
-              "title": "Pharmacist"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "cybersecurity-analyst",
-              "title": "Cybersecurity Analyst"
-            },
-            {
-              "slug": "operations-manager",
-              "title": "Operations Manager"
-            },
-            {
-              "slug": "sales-manager",
-              "title": "Sales Manager"
-            },
-            {
-              "slug": "financial-planner",
-              "title": "Financial Planner"
-            },
-            {
-              "slug": "content-strategist",
-              "title": "Content Strategist"
-            },
-            {
-              "slug": "researcher",
-              "title": "Researcher"
-            }
-          ],
-          "work_env": "High-autonomy role scope, clear success metrics, and consistent feedback cadence."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "For one small opportunity, state the benefit, the downside and the condition that would make you stop. Run a reversible trial within your competence, then compare its actual result with the first impression.\n\nRecord an occasion where pausing helped more than acting quickly. Keeping that counterexample prevents a useful action preference from becoming a rule for every decision.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [ESTP-A](/en/personality/estp-a)\n- [ESTP-T](/en/personality/estp-t)\n- [ESTP-A vs ESTP-T](/en/personality/estp-a-vs-estp-t)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "Choose one practical task and record what you noticed first, how you checked a constraint, and whether you changed your approach after feedback. Include a case where planning or reflection mattered more than immediate action. The exercise describes a situation; it does not predict a type or guarantee performance.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Do not infer a person's risk tolerance from a code. Check the decision's possible loss, reversibility, safety constraints and the person's actual choices.",
+              "question": "Does ESTP mean being a risk-taker?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does ESTP indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for ESTP?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do ESTP-A and ESTP-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can ESTP predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
-            },
-            {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "You usually build trust through direct dialogue, shared activity, and fast feedback. You tend to value people who are reliable, concrete, and consistent in day-to-day follow-through. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer flexibility, openness, and room to adapt.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "ESTP-A and ESTP-T share the same ESTP core. Within action, opportunity and real-time adaptation, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "quick_answer": "ESTP-A and ESTP-T share the same ESTP core. Within action, opportunity and real-time adaptation, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-          },
-          "faq": [
-            {
-              "answer": "Around action, opportunity and real-time adaptation, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESTP core.",
-              "question": "What is the main ESTP-A vs ESTP-T difference?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. A/T describes style differences, not a ranking. ESTP situations can reward steadiness, caution or revision in different ways.",
-              "question": "Is ESTP-A better than ESTP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "Look at your response to action, opportunity and real-time adaptation-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-              "question": "How can I tell whether I am ESTP-A or ESTP-T?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "No. It can support ESTP work-style reflection, but it should not replace skills, experience, values or context.",
-              "question": "Can this comparison decide my career path?",
-              "reason": "Covers comparison intent and claim boundary."
-            },
-            {
-              "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-              "question": "Is A/T an official MBTI dimension?",
-              "reason": "Covers comparison intent and claim boundary."
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "ESTP",
-            "locale": "en",
-            "page_type": "comparison",
-            "path": "/en/personality/estp-a-vs-estp-t",
-            "url": "https://fermatmind.com/en/personality/estp-a-vs-estp-t"
-          },
-          "internal_links": [
-            {
-              "anchor_text": "ESTP-A profile",
-              "href": "/en/personality/estp-a",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "ESTP-T profile",
-              "href": "/en/personality/estp-t",
-              "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "MBTI personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "reason": "Connect organic readers to the safe public MBTI test route.",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Big Five personality test",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "reason": "Offer a dimensional-model cross-check without private result routes.",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "blocked_reason": null,
-            "current_surface": {
-              "description": "Compare ESTP-A and ESTP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "framework": "mbti64",
-            "locale": "en",
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_required": [
-              "schema_validation",
-              "trademark_claim_gate",
-              "claim_risk_gate",
-              "duplicate_template_gate",
-              "private_route_gate",
-              "result_page_leakage_gate",
-              "seo_projection_gate",
-              "bilingual_consistency_gate"
-            ],
-            "recommendation_id": "mbti64-agent-expansion-88:/en/personality/estp-a-vs-estp-t",
-            "recommendations": {
-              "description": {
-                "current": "Compare ESTP-A and ESTP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-                "reason": "Make the SERP description answer the page intent while preserving method boundaries.",
-                "recommended": "Compare ESTP-A and ESTP-T through action, opportunity and real-time adaptation, confidence, stress recovery, feedback style, work rhythm and relationships."
-              },
-              "differentiation_notes": [
-                "Differentiate /en/personality/estp-a-vs-estp-t with action, opportunity and real-time adaptation rather than generic MBTI copy.",
-                "Comparison copy must compare A and T directly; do not paste two variant profiles together.",
-                "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
-              ],
-              "faq": [
-                {
-                  "answer": "Around action, opportunity and real-time adaptation, the main difference is usually confidence style, stress response, feedback processing and self-correction, not a change in the ESTP core.",
-                  "question": "What is the main ESTP-A vs ESTP-T difference?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. A/T describes style differences, not a ranking. ESTP situations can reward steadiness, caution or revision in different ways.",
-                  "question": "Is ESTP-A better than ESTP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "Look at your response to action, opportunity and real-time adaptation-related pressure, criticism, uncertainty and post-decision review rather than treating the label as a verdict.",
-                  "question": "How can I tell whether I am ESTP-A or ESTP-T?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "No. It can support ESTP work-style reflection, but it should not replace skills, experience, values or context.",
-                  "question": "Can this comparison decide my career path?",
-                  "reason": "Covers comparison intent and claim boundary."
-                },
-                {
-                  "answer": "This page treats A/T as an identity-style layer in FermatMind public profiles, not as an official native MBTI dimension.",
-                  "question": "Is A/T an official MBTI dimension?",
-                  "reason": "Covers comparison intent and claim boundary."
-                }
-              ],
-              "h1": {
-                "current": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity",
-                "reason": "Keep H1 concise and aligned with the canonical page query.",
-                "recommended": "ESTP-A vs ESTP-T: Key Differences"
-              },
-              "internal_links": [
-                {
-                  "anchor_text": "ESTP-A profile",
-                  "href": "/en/personality/estp-a",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "ESTP-T profile",
-                  "href": "/en/personality/estp-t",
-                  "reason": "Return comparison readers to the underlying A/T variant profile pages.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "MBTI personality test",
-                  "href": "/en/tests/mbti-personality-test-16-personality-types",
-                  "reason": "Connect organic readers to the safe public MBTI test route.",
-                  "safe_public_route": true
-                },
-                {
-                  "anchor_text": "Big Five personality test",
-                  "href": "/en/tests/big-five-personality-test-ocean-model",
-                  "reason": "Offer a dimensional-model cross-check without private result routes.",
-                  "safe_public_route": true
-                }
-              ],
-              "quick_answer": {
-                "current": "",
-                "reason": "Add an answer-first summary that distinguishes this page without deterministic claims.",
-                "recommended": "ESTP-A and ESTP-T share the same ESTP core. Within action, opportunity and real-time adaptation, the useful difference is how the two A/T styles handle confidence, pressure, feedback and self-correction, not which one is better."
-              },
-              "title": {
-                "current": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity | FermatMind",
-                "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot.",
-                "recommended": "ESTP-A vs ESTP-T: Confidence, Stress and Work Style | FermatMind"
-              }
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            },
-            "status": "draft_recommendation",
-            "target_url": "https://fermatmind.com/en/personality/estp-a-vs-estp-t"
-          },
-          "seo": {
-            "description": "Compare ESTP-A and ESTP-T through action, opportunity and real-time adaptation, confidence, stress recovery, feedback style, work rhythm and relationships.",
-            "h1": "ESTP-A vs ESTP-T: Key Differences",
-            "title": "ESTP-A vs ESTP-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_agent_projection_draft_v1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "current_surface": {
-              "description": "Compare ESTP-A and ESTP-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.",
-              "faq_count": 13,
-              "h1": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity",
-              "internal_link_count": 38,
-              "quick_answer": "",
-              "title": "ESTP-A vs ESTP-T: Traits, Careers, Love & Rarity | FermatMind"
-            },
-            "observed_signal": {
-              "average_position": null,
-              "clicks": null,
-              "ctr": null,
-              "evidence_state": "gsc_pending",
-              "impressions": null,
-              "notes": [
-                "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
-              ]
-            },
-            "qa_result": {
-              "blockers": [],
-              "decision": "PASS_READY_FOR_CMS_DRAFT",
-              "gates": {
-                "bilingual_consistency_gate": "pass",
-                "claim_risk_gate": "pass",
-                "duplicate_template_gate": "pass",
-                "private_route_gate": "pass",
-                "result_page_leakage_gate": "pass",
-                "schema_validation": "pass",
-                "seo_projection_gate": "pass",
-                "trademark_claim_gate": "pass"
-              },
-              "locale": "en",
-              "page_type": "comparison",
-              "target_url": "https://fermatmind.com/en/personality/estp-a-vs-estp-t",
-              "warnings": [
-                "GSC_EVIDENCE_PENDING"
-              ]
-            },
-            "qa_summary": {
-              "bilingual_asymmetric_type_count": 0,
-              "blocked_count": 0,
-              "checked_recommendation_count": 88,
-              "duplicate_signature_group_count": 0,
-              "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
-              "normalized_editorial_duplicate_signature_group_count": 0,
-              "pass_ready_for_cms_draft_count": 88,
-              "warning_count": 1
-            },
-            "reference_patterns_used": [
-              {
-                "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim.",
-                "pattern_id": "a_vs_t_comparison_structure",
-                "source_url": "https://fermatmind.com/en/personality/intj-a-vs-intj-t"
-              }
-            ],
-            "source_inputs": {
-              "cms_or_api_snapshot": "live_html_surface_fetch",
-              "reference_pack": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json",
-              "seo_signal": "GSC_EVIDENCE_PENDING",
-              "source_ledger": "docs/seo/personality/mbti64-optimized-pilot-reference-pack-2026-06-21.json"
-            }
-          },
-          "url": "/en/personality/estp-a-vs-estp-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "ESTP-A vs ESTP-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/estp",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
-      "seo_title": "ESTP Personality Guide",
-      "twitter_description": null,
+      "og_title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/estp-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/estp-a"
+        "en": "https://fermatmind.com/en/personality/estp",
+        "zh-CN": "https://fermatmind.com/zh/personality/estp"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/estp-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/estp",
+      "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "657215551ca6527befb46f7563a7beb0970295bb",
+      "metadata_fingerprint": "f924d07938872cb012f5af80088919780080de8d",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
-        "title": "ESTP Personality Guide",
+        "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/estp-a"
+        "url": "https://fermatmind.com/en/personality/estp"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1008,18 +689,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "ESTP Personality Guide",
+      "title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the ESTP personality type.",
-        "title": "ESTP Personality Guide"
+        "description": "Understand ESTP through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "ESTP Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "d40496f7e6a8c72da66a7f4844b79e84a36749ef5264e432de50551a1ca01226"
+  "source_content_sha256": "8f96c48bb50317f91c04cdc592fb0bb66c0cff31b07250350672c0c6306854aa"
 }

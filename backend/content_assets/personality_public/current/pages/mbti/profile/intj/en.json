@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/intj",
@@ -25,44 +25,48 @@
         }
       ],
       "answer_contract_version": "answer.surface.v1",
-      "answer_fingerprint": "4777e5346775795d8d18aa2a76934635c6f97009",
+      "answer_fingerprint": "1e03e6ecdf4d17e0b34375d1d44102b1e207e205",
       "answer_scope": "public_indexable_detail",
       "attribution_scope": "public_personality_answer",
       "compare_blocks": [],
       "evidence_refs": [
-        "adf495f0851943f8ca1f91ccb8241734100bda39",
-        "4f61e5b2d739235cf60525cecd8f24d2a31a3c03",
+        "dab275346718bf69529a7c2f15d01cbee1f60c82",
+        "ddce91814bb3e261f9141df9404d0c613a0537b0",
         "personality_public_projection_v1",
         "mbti_public_projection_v1",
         "personality_sections",
         "scene_summary_blocks"
       ],
-      "faq_blocks": [],
-      "indexability_state": "indexable",
-      "landing_surface_ref": "4f61e5b2d739235cf60525cecd8f24d2a31a3c03",
-      "next_step_blocks": [
+      "faq_blocks": [
         {
-          "body": null,
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "start_test",
-          "kind": "start_test",
-          "title": "Take the test"
+          "answer": "Use the plan as a working hypothesis. Specify a sign that would require changing it and distinguish the goal from a particular route.",
+          "key": "faq-0",
+          "question": "Does an INTJ description mean I must keep a long-term plan?"
         },
         {
-          "body": null,
-          "href": "/en/career/recommendations/mbti/intj",
-          "key": "career_recommendation",
-          "kind": "content_continue",
-          "title": "View career recommendations"
+          "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+          "key": "faq-1",
+          "question": "Does INTJ indicate intelligence or ability?"
         },
         {
-          "body": null,
-          "href": "/en/topics/mbti",
-          "key": "topic_cluster",
-          "kind": "discover",
-          "title": "Browse topic hub"
+          "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+          "key": "faq-2",
+          "question": "Which careers are best for INTJ?"
+        },
+        {
+          "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+          "key": "faq-3",
+          "question": "What do INTJ-A and INTJ-T add?"
+        },
+        {
+          "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+          "key": "faq-4",
+          "question": "Can INTJ predict relationship compatibility?"
         }
       ],
+      "indexability_state": "indexable",
+      "landing_surface_ref": "ddce91814bb3e261f9141df9404d0c613a0537b0",
+      "next_step_blocks": [],
       "primary_content_ref": "INTJ",
       "public_safety_state": "public_indexable",
       "public_surface_ref": null,
@@ -72,57 +76,52 @@
         "start_test"
       ],
       "runtime_artifact_ref": null,
-      "scene_summary_blocks": [
-        {
-          "body": "Review career recommendations first, then validate from the type page.",
-          "href": "/en/career/recommendations",
-          "key": "career_direction",
-          "kind": "scene_entry",
-          "title": "Career direction"
-        },
-        {
-          "body": "Use the MBTI topic hub as the decision frame before choosing a major path.",
-          "href": "/en/topics/mbti",
-          "key": "major_selection",
-          "kind": "scene_entry",
-          "title": "Major selection"
-        },
-        {
-          "body": "Keep this type page as reference when comparing collaboration patterns.",
-          "href": "/en/personality/intj",
-          "key": "team_collaboration",
-          "kind": "scene_entry",
-          "title": "Team collaboration"
-        },
-        {
-          "body": "Jump from type detail back to topic context for relationship cues.",
-          "href": "/en/topics/mbti",
-          "key": "relationship_patterns",
-          "kind": "scene_entry",
-          "title": "Relationship patterns"
-        },
-        {
-          "body": "Start the test directly to generate structured growth suggestions.",
-          "href": "/en/tests/mbti-personality-test-16-personality-types",
-          "key": "growth_planning",
-          "kind": "scene_entry",
-          "title": "Growth planning"
-        }
-      ],
-      "seo_surface_ref": "adf495f0851943f8ca1f91ccb8241734100bda39",
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "dab275346718bf69529a7c2f15d01cbee1f60c82",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for INTJ profiles.",
+          "body": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
           "href": null,
           "key": "type_summary",
           "kind": "answer_first",
-          "title": "INTJ - Architect"
+          "title": "INTJ Personality"
         }
       ],
       "surface_type": "personality_public_detail",
       "version": "answer.surface.v1"
     },
-    "internal_links": [],
+    "internal_links": [
+      {
+        "href": "/en/personality/intj-a",
+        "label": "INTJ-A",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/intj-t",
+        "label": "INTJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/intj-a-vs-intj-t",
+        "label": "INTJ-A vs INTJ-T",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/entj-vs-intj",
+        "label": "ENTJ vs INTJ",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality/intj-vs-intp",
+        "label": "INTJ vs INTP",
+        "reason": "Read the distinct preference or comparison page."
+      },
+      {
+        "href": "/en/personality",
+        "label": "All 16 types",
+        "reason": ""
+      }
+    ],
     "landing_surface_v1": {
       "attribution_scope": "public_personality_landing",
       "content_continue_target": "/en/career/recommendations/mbti/intj",
@@ -162,7 +161,7 @@
       "entry_type": "personality_profile",
       "indexability_state": "indexable",
       "landing_contract_version": "landing.surface.v1",
-      "landing_fingerprint": "4f61e5b2d739235cf60525cecd8f24d2a31a3c03",
+      "landing_fingerprint": "ddce91814bb3e261f9141df9404d0c613a0537b0",
       "landing_scope": "public_indexable_detail",
       "primary_content_ref": "INTJ",
       "public_surface_ref": null,
@@ -177,10 +176,10 @@
       "start_test_target": "/en/tests/mbti-personality-test-16-personality-types",
       "summary_blocks": [
         {
-          "body": "Role recommendations and work-environment guidance for INTJ profiles.",
+          "body": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
           "key": "hero",
           "kind": "answer_first",
-          "title": "INTJ - Architect"
+          "title": "INTJ Personality"
         }
       ],
       "surface_family": "personality",
@@ -198,7 +197,7 @@
       "display_type": "INTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for INTJ profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Architect",
         "rarity": null,
@@ -207,156 +206,146 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for INTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, INTJ is commonly described as Ni–Te–Fi–Se. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An INTJ-style account often begins with a picture of how a system could work, then asks which constraints and decisions stand between that picture and reality. The useful contribution is a direction other people can test. The possible blind spot is treating a coherent plan as if the world has already confirmed it.\n\nCounterexample: someone can prefer settled plans and still enjoy improvisation, art or a busy social life. Being reserved, blunt or ambitious does not identify INTJ. Examine how you prefer to organize a choice when a deadline or someone else's rules do not force your approach.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a product team has six possible improvements and limited capacity. You propose one outcome, sequence the dependencies and identify an early milestone. Before the team commits, ask a colleague to challenge the weakest assumption and describe an alternative route. A roadmap is useful only if the constraints and feedback remain visible.\n\nTry a planning task, a research task and a delivery task before deciding which work you enjoy. Strategy, engineering and management demand skills and experience that a type result cannot certify. Compare autonomy, meeting load, accountability and the cost of a wrong decision in the actual role.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you plan a trip efficiently, but your friend wanted to choose parts of it together. Ask which decisions they want to share and which they prefer you to handle. A workable plan can still miss another person's priorities.\n\nExplain the care behind an action without assuming it was obvious. When a disagreement arises, distinguish a request for understanding from a request to optimize a solution. A Thinking preference does not indicate an absence of feelings, and no partner type guarantees compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a carefully designed schedule fails because an outside dependency changes. Repeatedly tightening the schedule will not fix that dependency. Separate what is still under your control, what needs renegotiation and what can wait. Build a smaller plan around the available facts.\n\nThis illustrates a planning problem, not a type-specific stress mechanism. Anxiety, exhaustion or an urge to control everything need their own contextual explanation; the letters cannot diagnose them.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For a current plan, state the outcome and the assumption most likely to fail. Decide what early evidence would make you change course. Ask someone affected by the plan to identify an overlooked cost.\n\nAt the review date compare expected and observed results. Did you revise the plan when the facts changed? Did other people understand the reason for a decision? Keep a successful improvisation as a counterexample to any claim that you always need control.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [INTJ-A](/en/personality/intj-a)\n- [INTJ-T](/en/personality/intj-t)\n- [INTJ-A vs INTJ-T](/en/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/en/personality/entj-vs-intj)\n- [INTJ vs INTP](/en/personality/intj-vs-intp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "teacher",
-                "title": "Teacher"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "Backend Engineer"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "product-manager",
-                "title": "Product Manager"
-              },
-              {
-                "slug": "ui-ux-designer",
-                "title": "UI/UX Designer"
-              },
-              {
-                "slug": "digital-marketing-manager",
-                "title": "Digital Marketing Manager"
-              },
-              {
-                "slug": "lawyer",
-                "title": "Lawyer"
-              },
-              {
-                "slug": "teacher",
-                "title": "Teacher"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              }
-            ],
-            "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Use the plan as a working hypothesis. Specify a sign that would require changing it and distinguish the goal from a particular route.",
+                "question": "Does an INTJ description mean I must keep a long-term plan?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does INTJ indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for INTJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do INTJ-A and INTJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can INTJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/intj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
+        "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/intj",
+          "name": "INTJ Personality",
+          "url": "https://fermatmind.com/en/personality/intj"
+        },
+        "og_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "INTJ Personality Guide",
+        "og_title": "INTJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "INTJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
+        "title": "INTJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "INTJ Personality Guide"
+        "twitter_title": "INTJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for INTJ profiles.",
+        "summary": "",
         "tagline": "Architect",
-        "title": "INTJ - Architect"
+        "title": "INTJ Personality"
       },
       "variant_code": null
     },
@@ -372,7 +361,7 @@
       "display_type": "INTJ",
       "offer_set": [],
       "profile": {
-        "hero_summary": "Role recommendations and work-environment guidance for INTJ profiles.",
+        "hero_summary": "",
         "keywords": [],
         "nickname": "Architect",
         "rarity": null,
@@ -381,166 +370,156 @@
       "runtime_type_code": null,
       "sections": [
         {
-          "body_md": "Role recommendations and work-environment guidance for INTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+          "body_md": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
           "is_enabled": true,
-          "key": "overview",
+          "key": "quick_answer",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Overview"
+          "source": "current",
+          "title": "quick_answer"
         },
         {
-          "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+          "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, INTJ is commonly described as Ni–Te–Fi–Se. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
           "is_enabled": true,
-          "key": "career.summary",
+          "key": "meaning",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Career summary"
+          "source": "current",
+          "title": "What the letters mean"
+        },
+        {
+          "body_md": "An INTJ-style account often begins with a picture of how a system could work, then asks which constraints and decisions stand between that picture and reality. The useful contribution is a direction other people can test. The possible blind spot is treating a coherent plan as if the world has already confirmed it.\n\nCounterexample: someone can prefer settled plans and still enjoy improvisation, art or a busy social life. Being reserved, blunt or ambitious does not identify INTJ. Examine how you prefer to organize a choice when a deadline or someone else's rules do not force your approach.",
+          "is_enabled": true,
+          "key": "core_traits",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Patterns, strengths and counterexamples"
+        },
+        {
+          "body_md": "Original scenario: a product team has six possible improvements and limited capacity. You propose one outcome, sequence the dependencies and identify an early milestone. Before the team commits, ask a colleague to challenge the weakest assumption and describe an alternative route. A roadmap is useful only if the constraints and feedback remain visible.\n\nTry a planning task, a research task and a delivery task before deciding which work you enjoy. Strategy, engineering and management demand skills and experience that a type result cannot certify. Compare autonomy, meeting load, accountability and the cost of a wrong decision in the actual role.",
+          "is_enabled": true,
+          "key": "work_style",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Work and career exploration"
+        },
+        {
+          "body_md": "Original scenario: you plan a trip efficiently, but your friend wanted to choose parts of it together. Ask which decisions they want to share and which they prefer you to handle. A workable plan can still miss another person's priorities.\n\nExplain the care behind an action without assuming it was obvious. When a disagreement arises, distinguish a request for understanding from a request to optimize a solution. A Thinking preference does not indicate an absence of feelings, and no partner type guarantees compatibility.",
+          "is_enabled": true,
+          "key": "relationships",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Relationships and communication"
+        },
+        {
+          "body_md": "Original scenario: a carefully designed schedule fails because an outside dependency changes. Repeatedly tightening the schedule will not fix that dependency. Separate what is still under your control, what needs renegotiation and what can wait. Build a smaller plan around the available facts.\n\nThis illustrates a planning problem, not a type-specific stress mechanism. Anxiety, exhaustion or an urge to control everything need their own contextual explanation; the letters cannot diagnose them.",
+          "is_enabled": true,
+          "key": "stress_and_recovery",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Pressure and recovery"
+        },
+        {
+          "body_md": "For a current plan, state the outcome and the assumption most likely to fail. Decide what early evidence would make you change course. Ask someone affected by the plan to identify an overlooked cost.\n\nAt the review date compare expected and observed results. Did you revise the plan when the facts changed? Did other people understand the reason for a decision? Keep a successful improvisation as a counterexample to any claim that you always need control.",
+          "is_enabled": true,
+          "key": "growth_edges",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "A practical observation exercise"
+        },
+        {
+          "body_md": "- [INTJ-A](/en/personality/intj-a)\n- [INTJ-T](/en/personality/intj-t)\n- [INTJ-A vs INTJ-T](/en/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/en/personality/entj-vs-intj)\n- [INTJ vs INTP](/en/personality/intj-vs-intp)\n- [All 16 types](/en/personality)",
+          "is_enabled": true,
+          "key": "related_content",
+          "payload": [],
+          "render": "rich_text",
+          "source": "current",
+          "title": "Related types and comparisons"
         },
         {
           "body_md": null,
           "is_enabled": true,
-          "key": "career.preferred_roles",
-          "payload": {
-            "avoid_jobs": [
-              {
-                "slug": "teacher",
-                "title": "Teacher"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              },
-              {
-                "slug": "backend-engineer",
-                "title": "Backend Engineer"
-              }
-            ],
-            "recommended_jobs": [
-              {
-                "slug": "product-manager",
-                "title": "Product Manager"
-              },
-              {
-                "slug": "ui-ux-designer",
-                "title": "UI/UX Designer"
-              },
-              {
-                "slug": "digital-marketing-manager",
-                "title": "Digital Marketing Manager"
-              },
-              {
-                "slug": "lawyer",
-                "title": "Lawyer"
-              },
-              {
-                "slug": "teacher",
-                "title": "Teacher"
-              },
-              {
-                "slug": "machine-learning-engineer",
-                "title": "Machine Learning Engineer"
-              }
-            ],
-            "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-          },
-          "render": "preferred_role_list",
-          "source": "base",
-          "title": "Preferred roles"
-        },
-        {
-          "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
-          "is_enabled": true,
-          "key": "growth.summary",
-          "payload": [],
-          "render": "rich_text",
-          "source": "base",
-          "title": "Growth summary"
-        },
-        {
-          "body_md": null,
-          "is_enabled": true,
-          "key": "growth.strengths",
+          "key": "faq",
           "payload": {
             "items": [
               {
-                "body": null,
-                "title": "Strategic pattern recognition"
+                "answer": "Use the plan as a working hypothesis. Specify a sign that would require changing it and distinguish the goal from a particular route.",
+                "question": "Does an INTJ description mean I must keep a long-term plan?"
               },
               {
-                "body": null,
-                "title": "Stable execution under constraints"
+                "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+                "question": "Does INTJ indicate intelligence or ability?"
               },
               {
-                "body": null,
-                "title": "Strong ownership on meaningful goals"
+                "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+                "question": "Which careers are best for INTJ?"
+              },
+              {
+                "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+                "question": "What do INTJ-A and INTJ-T add?"
+              },
+              {
+                "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+                "question": "Can INTJ predict relationship compatibility?"
               }
             ]
           },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth strengths"
+          "render": "faq",
+          "source": "current",
+          "title": "Frequently asked questions"
         },
         {
-          "body_md": null,
+          "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
           "is_enabled": true,
-          "key": "growth.weaknesses",
-          "payload": {
-            "items": [
-              {
-                "body": null,
-                "title": "Over-specialization without cross-functional exposure"
-              },
-              {
-                "body": null,
-                "title": "Delayed feedback loops causing slower iteration"
-              }
-            ]
-          },
-          "render": "bullets",
-          "source": "base",
-          "title": "Growth weaknesses"
-        },
-        {
-          "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-          "is_enabled": true,
-          "key": "relationships.summary",
+          "key": "sources_and_method",
           "payload": [],
           "render": "rich_text",
-          "source": "base",
-          "title": "Relationships summary"
+          "source": "current",
+          "title": "Sources and method limits"
         }
       ],
       "seo": {
         "canonical_url": "https://fermatmind.com/en/personality/intj",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
-        "jsonld": [],
-        "og_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
+        "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "jsonld": {
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+          "inLanguage": "en",
+          "mainEntityOfPage": "https://fermatmind.com/en/personality/intj",
+          "name": "INTJ Personality",
+          "url": "https://fermatmind.com/en/personality/intj"
+        },
+        "og_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "og_image_url": null,
-        "og_title": "INTJ Personality Guide",
+        "og_title": "INTJ Personality: Meaning, Patterns and Practical Examples",
         "robots": "index,follow",
-        "title": "INTJ Personality Guide",
-        "twitter_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
+        "title": "INTJ Personality: Meaning, Patterns and Practical Examples",
+        "twitter_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
         "twitter_image_url": null,
-        "twitter_title": "INTJ Personality Guide"
+        "twitter_title": "INTJ Personality: Meaning, Patterns and Practical Examples"
       },
       "summary_card": {
         "public_tags": [],
         "subtitle": null,
-        "summary": "Role recommendations and work-environment guidance for INTJ profiles.",
+        "summary": "",
         "tagline": "Architect",
-        "title": "INTJ - Architect"
+        "title": "INTJ Personality"
       },
       "variant_code": null
     },
     "profile": {
       "canonical_type_code": "INTJ",
-      "excerpt": "Role recommendations and work-environment guidance for INTJ profiles.",
+      "excerpt": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
       "hero_image_url": null,
       "hero_kicker": "Architect",
       "hero_quote": null,
-      "hero_summary": "Role recommendations and work-environment guidance for INTJ profiles.",
+      "hero_summary": null,
       "is_indexable": true,
       "is_public": true,
       "keywords": [],
@@ -552,749 +531,166 @@
       "slug": "intj",
       "status": "published",
       "subtitle": null,
-      "title": "INTJ - Architect",
+      "title": "INTJ Personality",
       "type_code": "INTJ",
       "type_name": "Architect"
     },
     "sections": [
       {
         "body_html": null,
-        "body_md": "Role recommendations and work-environment guidance for INTJ profiles. This profile tends to do best when goals are explicit, feedback is available, and growth loops stay visible.",
+        "body_md": "INTJ describes Introversion, Intuition, Thinking and Judging preferences. The type description emphasizes independent reflection and organizing possibilities into a plan. It does not establish strategic skill, intelligence or leadership ability.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "overview",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "**I — Introversion**: Attention directed toward the inner world of thoughts and reflection; it does not mean shyness or poor social skill.\n\n**N — Intuition**: Attention to patterns, meanings and possibilities; it does not indicate higher intelligence.\n\n**T — Thinking**: A preference for considering logical consistency and impersonal criteria in decisions; it does not imply an absence of feelings.\n\n**J — Judging**: A preference for organizing and settling matters in the outer world; it is not a measure of discipline or judgment quality.\n\nIn function-stack theory, INTJ is commonly described as Ni–Te–Fi–Se. This is a theoretical reading convention; it does not establish a measured mental process or a developmental timetable.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "meaning",
+        "sort_order": 10,
+        "title": "What the letters mean"
+      },
+      {
+        "body_html": null,
+        "body_md": "An INTJ-style account often begins with a picture of how a system could work, then asks which constraints and decisions stand between that picture and reality. The useful contribution is a direction other people can test. The possible blind spot is treating a coherent plan as if the world has already confirmed it.\n\nCounterexample: someone can prefer settled plans and still enjoy improvisation, art or a busy social life. Being reserved, blunt or ambitious does not identify INTJ. Examine how you prefer to organize a choice when a deadline or someone else's rules do not force your approach.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits",
         "sort_order": 20,
-        "title": "Overview"
+        "title": "Patterns, strengths and counterexamples"
       },
       {
         "body_html": null,
-        "body_md": "Use work examples to compare autonomy, goals, and feedback. Try one small task against your skills and practical constraints; a four-letter type does not establish career suitability or justify recommended occupations.",
+        "body_md": "Original scenario: a product team has six possible improvements and limited capacity. You propose one outcome, sequence the dependencies and identify an early milestone. Before the team commits, ask a colleague to challenge the weakest assumption and describe an alternative route. A roadmap is useful only if the constraints and feedback remain visible.\n\nTry a planning task, a research task and a delivery task before deciding which work you enjoy. Strategy, engineering and management demand skills and experience that a type result cannot certify. Compare autonomy, meeting load, accountability and the cost of a wrong decision in the actual role.",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "career.summary",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "Work and career exploration"
+      },
+      {
+        "body_html": null,
+        "body_md": "Original scenario: you plan a trip efficiently, but your friend wanted to choose parts of it together. Ask which decisions they want to share and which they prefer you to handle. A workable plan can still miss another person's priorities.\n\nExplain the care behind an action without assuming it was obvious. When a disagreement arises, distinguish a request for understanding from a request to optimize a solution. A Thinking preference does not indicate an absence of feelings, and no partner type guarantees compatibility.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "relationships",
         "sort_order": 40,
-        "title": "Career summary"
+        "title": "Relationships and communication"
       },
       {
         "body_html": null,
-        "body_md": null,
+        "body_md": "Original scenario: a carefully designed schedule fails because an outside dependency changes. Repeatedly tightening the schedule will not fix that dependency. Separate what is still under your control, what needs renegotiation and what can wait. Build a smaller plan around the available facts.\n\nThis illustrates a planning problem, not a type-specific stress mechanism. Anxiety, exhaustion or an urge to control everything need their own contextual explanation; the letters cannot diagnose them.",
         "is_enabled": true,
-        "payload_json": {
-          "avoid_jobs": [
-            {
-              "slug": "teacher",
-              "title": "Teacher"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "Machine Learning Engineer"
-            },
-            {
-              "slug": "backend-engineer",
-              "title": "Backend Engineer"
-            }
-          ],
-          "recommended_jobs": [
-            {
-              "slug": "product-manager",
-              "title": "Product Manager"
-            },
-            {
-              "slug": "ui-ux-designer",
-              "title": "UI/UX Designer"
-            },
-            {
-              "slug": "digital-marketing-manager",
-              "title": "Digital Marketing Manager"
-            },
-            {
-              "slug": "lawyer",
-              "title": "Lawyer"
-            },
-            {
-              "slug": "teacher",
-              "title": "Teacher"
-            },
-            {
-              "slug": "machine-learning-engineer",
-              "title": "Machine Learning Engineer"
-            }
-          ],
-          "work_env": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels."
-        },
-        "render_variant": "preferred_role_list",
-        "section_key": "career.preferred_roles",
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "stress_and_recovery",
+        "sort_order": 50,
+        "title": "Pressure and recovery"
+      },
+      {
+        "body_html": null,
+        "body_md": "For a current plan, state the outcome and the assumption most likely to fail. Decide what early evidence would make you change course. Ask someone affected by the plan to identify an overlooked cost.\n\nAt the review date compare expected and observed results. Did you revise the plan when the facts changed? Did other people understand the reason for a decision? Keep a successful improvisation as a counterexample to any claim that you always need control.",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "growth_edges",
+        "sort_order": 60,
+        "title": "A practical observation exercise"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INTJ-A](/en/personality/intj-a)\n- [INTJ-T](/en/personality/intj-t)\n- [INTJ-A vs INTJ-T](/en/personality/intj-a-vs-intj-t)\n- [ENTJ vs INTJ](/en/personality/entj-vs-intj)\n- [INTJ vs INTP](/en/personality/intj-vs-intp)\n- [All 16 types](/en/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
         "sort_order": 70,
-        "title": "Preferred roles"
+        "title": "Related types and comparisons"
       },
       {
         "body_html": null,
-        "body_md": "Compare autonomy, goal clarity, and feedback in real work examples; evaluate skills and practical constraints separately from type labels.",
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "Use the plan as a working hypothesis. Specify a sign that would require changing it and distinguish the goal from a particular route.",
+              "question": "Does an INTJ description mean I must keep a long-term plan?"
+            },
+            {
+              "answer": "No. A preference description is not an aptitude score. Evaluate a specific skill through relevant work, learning and feedback.",
+              "question": "Does INTJ indicate intelligence or ability?"
+            },
+            {
+              "answer": "This page does not rank careers by type. Compare actual tasks, interests, demonstrated skills, qualifications, working conditions and constraints. Use a small task trial or an informational conversation.",
+              "question": "Which careers are best for INTJ?"
+            },
+            {
+              "answer": "They add an A/T description outside the official four-preference framework. Follow the separate variant and comparison pages to explore that vocabulary without confusing it with the base type.",
+              "question": "What do INTJ-A and INTJ-T add?"
+            },
+            {
+              "answer": "No compatibility score is supplied. Discuss needs, values, boundaries and actual patterns of repair; shared or different letters do not guarantee an outcome.",
+              "question": "Can INTJ predict relationship compatibility?"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 80,
+        "title": "Frequently asked questions"
+      },
+      {
+        "body_html": null,
+        "body_md": "The official MBTI describes four preference pairs. A/T belongs to a separate extension; shared letters do not make different tests equivalent. Type narratives and cognitive functions are theoretical interpretations, not established psychological mechanisms.\n\nMcCrae and Costa (1989) compared the 1985 MBTI with NEO-PI self-reports and peer ratings in 267 men and 201 women aged 19–93; the abstract does not identify a representative country sample. Their analysis did not support true dichotomies or qualitatively distinct types and found overlap with dimensions of the five-factor model. Instrument editions and samples matter: the publisher reports later revisions, and this page does not establish the reliability or validity of a FermatMind score. That specific study does not validate these scenarios, determine an individual's type or settle every question about later instruments.\n\nA newer review by Erford and colleagues (2025) synthesized 193 studies using English-language MBTI Form M, published during 1999–2024. It reported favorable internal-consistency estimates (0.845–0.921) and convergent evidence, while finding no independent structural-validity or test–retest studies in its eligible literature beyond the manual. Score consistency does not establish distinct natural types, validate A/T, or transfer to FermatMind. Both supportive findings and remaining gaps depend on the specific instrument and samples.\n\nThe situations and exercises on this page are original educational examples, not clinical guidance or findings about groups. Compare them with your experience, including counterexamples. Do not use type alone to diagnose, hire, choose a career or screen a relationship.\n\nContent revised 5 October 2026. This is a source-based educational synthesis, not a claim of independent clinical review.\n\n- [MBTI facts](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [16Personalities framework](https://www.16personalities.com/articles/our-theory)\n- [McCrae & Costa (1989), study abstract](https://scholars.duke.edu/publication/1458465)\n- [Erford et al. (2025), Form M psychometric synthesis](https://doi.org/10.1002/jcad.70006)\n- [MBTI ethical use](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
         "is_enabled": true,
         "payload_json": null,
         "render_variant": "rich_text",
-        "section_key": "growth.summary",
+        "section_key": "sources_and_method",
         "sort_order": 90,
-        "title": "Growth summary"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Strategic pattern recognition"
-            },
-            {
-              "body": null,
-              "title": "Stable execution under constraints"
-            },
-            {
-              "body": null,
-              "title": "Strong ownership on meaningful goals"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.strengths",
-        "sort_order": 100,
-        "title": "Growth strengths"
-      },
-      {
-        "body_html": null,
-        "body_md": null,
-        "is_enabled": true,
-        "payload_json": {
-          "items": [
-            {
-              "body": null,
-              "title": "Over-specialization without cross-functional exposure"
-            },
-            {
-              "body": null,
-              "title": "Delayed feedback loops causing slower iteration"
-            }
-          ]
-        },
-        "render_variant": "bullets",
-        "section_key": "growth.weaknesses",
-        "sort_order": 110,
-        "title": "Growth weaknesses"
-      },
-      {
-        "body_html": null,
-        "body_md": "You usually build trust through steady one-on-one conversations, reflection, and protected space. You tend to connect more deeply with people who enjoy discussing patterns, future possibilities, and meaning. In conflict you often default to logic and boundaries, so it helps to add explicit emotional acknowledgment. In close relationships and teamwork, you usually prefer clarity, commitment, and predictable pace.",
-        "is_enabled": true,
-        "payload_json": null,
-        "render_variant": "rich_text",
-        "section_key": "relationships.summary",
-        "sort_order": 140,
-        "title": "Relationships summary"
-      },
-      {
-        "body_html": null,
-        "body_md": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
-        "is_enabled": true,
-        "payload_json": {
-          "content": {
-            "career_work_style": {
-              "a_work_style": "INTJ-A is often effective when a team needs a decisive owner: someone to define the architecture, set the standard, and move through ambiguity without constant reassurance.",
-              "body": "Both INTJ-A and INTJ-T can fit strategic, technical, analytical, or systems-heavy work. The useful distinction is not job title; it is operating condition. INTJ-A often benefits from high-autonomy ownership, while INTJ-T often benefits from environments where critique, iteration, and precision are explicit parts of the workflow. For career exploration, treat this as an environment-fit filter rather than a job prescription: INTJ-A often needs decision authority and strategic ownership, while INTJ-T often benefits from roles where review cycles and risk analysis are valued.",
-              "h2": "Career and work style differences",
-              "shared_strengths": [
-                "strategic planning",
-                "systems design",
-                "long-range analysis",
-                "independent problem solving",
-                "high standards for competence"
-              ],
-              "t_work_style": "INTJ-T is often effective when a team needs a rigorous reviewer: someone to test assumptions, find the hidden failure mode, and refine the model before it becomes expensive."
-            },
-            "core_traits_comparison": {
-              "body": "Both INTJ-A and INTJ-T keep the recognizable Architect pattern: they prefer strategic clarity, independent reasoning, long-range planning, and systems that make sense internally. The difference is not that one is smarter, colder, rarer, or more capable. The difference is usually visible in the emotional and behavioral layer around the same INTJ core. A useful way to read this comparison is to separate strategy from regulation: the INTJ core explains the strategic lens, while the A/T layer explains how secure or self-critical that lens feels under pressure.",
-              "h2": "What stays the same in both INTJ-A and INTJ-T",
-              "items": [
-                "Both tend to distrust vague claims and prefer models, principles, or evidence.",
-                "Both usually value autonomy and can become frustrated when process replaces progress.",
-                "Both often think in second-order effects: what happens after the immediate decision?",
-                "Both may need deliberate effort to make their reasoning legible to people who process socially.",
-                "Both can over-index on competence and under-communicate warmth unless they make it explicit."
-              ]
-            },
-            "quick_answer": "The INTJ-A vs INTJ-T difference is not a change in the INTJ core type. Both patterns are strategic, independent, systems-oriented, and future-focused. The A/T layer mainly changes how an Architect handles confidence, stress, feedback, and self-correction: INTJ-A tends to act with steadier self-trust, while INTJ-T tends to examine risks, mistakes, and personal standards more intensely.",
-            "relationships_love": {
-              "a_relationship_pattern": "INTJ-A may show commitment through reliability, planning, and direct problem-solving. The risk is sounding detached when the other person needs emotional acknowledgment before solutions.",
-              "body": "In relationships, both INTJ patterns usually prefer depth, honesty, and consistency over constant emotional performance. INTJ-A may communicate with a calmer, more definite tone. INTJ-T may communicate with more internal intensity, especially when uncertainty, rejection, or misalignment is involved. In close relationships, the A/T difference often appears less in affection and more in repair style: INTJ-A may need reminders to revisit emotional nuance, while INTJ-T may need reassurance that uncertainty is not the same as failure.",
-              "h2": "Relationships and communication",
-              "t_relationship_pattern": "INTJ-T may notice subtle shifts in tone or trust and spend more time interpreting them. The risk is privately overanalyzing signals instead of asking direct clarifying questions."
-            },
-            "side_by_side_summary": {
-              "h2": "INTJ-A vs INTJ-T at a glance",
-              "rows": [
-                {
-                  "a_variant": "More likely to commit once the logic is good enough and the risk is bounded.",
-                  "dimension": "Decision confidence",
-                  "t_variant": "More likely to re-check assumptions, edge cases, and hidden weaknesses before committing."
-                },
-                {
-                  "a_variant": "Often protects long-term focus by moving past criticism quickly.",
-                  "dimension": "Stress response",
-                  "t_variant": "Often uses discomfort as a signal to refine the plan or raise the standard."
-                },
-                {
-                  "a_variant": "Prefers concise feedback that confirms whether the strategy works.",
-                  "dimension": "Feedback style",
-                  "t_variant": "Prefers detailed feedback that exposes what could fail or improve."
-                },
-                {
-                  "a_variant": "Can operate well in autonomous roles where decisions cannot be endlessly reopened.",
-                  "dimension": "Work rhythm",
-                  "t_variant": "Can operate well in analytical roles where revision, testing, and error detection matter."
-                },
-                {
-                  "a_variant": "May appear calm, self-contained, and hard to sway.",
-                  "dimension": "Relationship pattern",
-                  "t_variant": "May appear intense, private, and more affected by relational uncertainty."
-                },
-                {
-                  "a_variant": "Needs to avoid dismissing useful doubt too quickly.",
-                  "dimension": "Growth edge",
-                  "t_variant": "Needs to avoid treating every doubt as proof that the plan is weak."
-                }
-              ]
-            },
-            "stress_confidence": {
-              "a_pattern": "INTJ-A may recover from criticism quickly and keep the project moving. This is useful in leadership, product, operations, and high-ambiguity strategy work. The blind spot is premature certainty: if the Architect stops listening too early, a preventable flaw can survive.",
-              "body": "The clearest INTJ-A vs INTJ-T difference appears when a plan is challenged. INTJ-A often protects execution by stabilizing around the chosen strategy. INTJ-T often protects quality by interrogating the chosen strategy again.",
-              "h2": "Confidence and stress: the main A/T split",
-              "t_pattern": "INTJ-T may treat pressure as a interpretive tool. This is useful in research, engineering, writing, investing analysis, or any role where one overlooked assumption matters. The blind spot is over-review: if every imperfection reopens the entire plan, execution slows."
-            },
-            "which_one_fits": {
-              "body": "Use A/T as a reflective lens, not as a permanent label. If your INTJ pattern is stable but your self-confidence and stress response change across life stages, your A/T result may also feel more fluid than the four-letter type code.",
-              "h2": "Which one fits you better?",
-              "self_check_prompts": [
-                "When a plan is criticized, do you usually stabilize and proceed, or reopen the model and revise?",
-                "Do you lose more time from overconfidence or from over-checking?",
-                "Do you prefer feedback that is brief and decisive, or detailed and interpretive?",
-                "Under stress, do you become more detached and decisive, or more self-critical and perfectionistic?",
-                "Do people experience you as hard to shake, or as intense and internally demanding?"
-              ]
-            }
-          },
-          "faq": [
-            {
-              "answer": "The main difference is usually confidence and stress response. INTJ-A tends to act with steadier self-trust, while INTJ-T tends to re-check assumptions and refine plans more intensely under pressure.",
-              "question": "What is the main INTJ-A vs INTJ-T difference?"
-            },
-            {
-              "answer": "No. INTJ-A and INTJ-T describe different operating styles around the same INTJ core. INTJ-A can be more decisive; INTJ-T can be more corrective and quality-focused.",
-              "question": "Is INTJ-A better than INTJ-T?"
-            },
-            {
-              "answer": "A/T can feel more situational than the four-letter type pattern. Confidence, stress load, work environment, and life stage can all affect whether the A or T description feels more accurate.",
-              "question": "Can an INTJ change from A to T?"
-            },
-            {
-              "answer": "Neither label determines leadership ability. INTJ-A may be comfortable making firm decisions, while INTJ-T may catch risks earlier. Strong leadership can use either pattern well.",
-              "question": "Which INTJ type is better for leadership?"
-            },
-            {
-              "answer": "Yes. Use this comparison page to separate the A/T layer, then read the individual profile pages if you want a more focused explanation of either INTJ-A or INTJ-T.",
-              "question": "Should I read the INTJ-A and INTJ-T profile pages too?"
-            },
-            {
-              "answer": "People can show more A-like or T-like behavior depending on stress, life stage and environment. Treat A/T as a self-observation lens, not a permanent status.",
-              "question": "Can an INTJ move between A and T patterns?"
-            },
-            {
-              "answer": "Use it as a practical reflection guide: compare the repeated patterns with your own behavior, then use the public 16 personality test route if you want a broader type check.",
-              "question": "How should I use this INTJ-A vs INTJ-T page?"
-            }
-          ],
-          "identity": {
-            "canonical_type_code": "INTJ",
-            "variant_pair": [
-              "INTJ-A",
-              "INTJ-T"
-            ]
-          },
-          "internal_links": [
-            {
-              "anchor_text": "Explore all 16 personality types",
-              "href": "/en/personality",
-              "role": "hub",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Read the INTJ-A profile",
-              "href": "/en/personality/intj-a",
-              "role": "sibling_variant",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Read the INTJ-T profile",
-              "href": "/en/personality/intj-t",
-              "role": "sibling_variant",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Take the 16 personality test",
-              "href": "/en/tests/mbti-personality-test-16-personality-types",
-              "role": "test",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Compare your type with the Big Five model",
-              "href": "/en/tests/big-five-personality-test-ocean-model",
-              "role": "related_test",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Explore career interests with the Holland/RIASEC test",
-              "href": "/en/tests/holland-career-interest-test-riasec",
-              "role": "related_test",
-              "safe_public_route": true
-            },
-            {
-              "anchor_text": "Method and limits",
-              "href": "/en/personality/intj-a-vs-intj-t#method-boundary",
-              "role": "method",
-              "safe_public_route": true
-            }
-          ],
-          "raw_row": {
-            "above_the_fold_module": {
-              "answer_card_points": [
-                "Same core: strategic, independent, systems-oriented Architect reasoning.",
-                "INTJ-A tends to move with steadier self-trust once the logic is acceptable.",
-                "INTJ-T tends to revisit assumptions, risks and personal standards more intensely.",
-                "Neither label is better; the useful question is which pressure pattern repeats in real life."
-              ],
-              "answer_card_title": "INTJ-A vs INTJ-T in one minute",
-              "best_next_step": "Use the self-check prompts, then take the public 16 personality test if your A/T pattern is still unclear."
-            },
-            "canonical_target": "/en/personality/intj-a-vs-intj-t",
-            "claim_risk_notes": [
-              "No superiority claim between A and T variants.",
-              "No deterministic hiring, career, relationship, medical, or admissions claim.",
-              "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
-            ],
-            "content": {
-              "career_work_style": {
-                "a_work_style": "INTJ-A is often effective when a team needs a decisive owner: someone to define the architecture, set the standard, and move through ambiguity without constant reassurance.",
-                "body": "Both INTJ-A and INTJ-T can fit strategic, technical, analytical, or systems-heavy work. The useful distinction is not job title; it is operating condition. INTJ-A often benefits from high-autonomy ownership, while INTJ-T often benefits from environments where critique, iteration, and precision are explicit parts of the workflow. For career exploration, treat this as an environment-fit filter rather than a job prescription: INTJ-A often needs decision authority and strategic ownership, while INTJ-T often benefits from roles where review cycles and risk analysis are valued.",
-                "h2": "Career and work style differences",
-                "shared_strengths": [
-                  "strategic planning",
-                  "systems design",
-                  "long-range analysis",
-                  "independent problem solving",
-                  "high standards for competence"
-                ],
-                "t_work_style": "INTJ-T is often effective when a team needs a rigorous reviewer: someone to test assumptions, find the hidden failure mode, and refine the model before it becomes expensive."
-              },
-              "core_traits_comparison": {
-                "body": "Both INTJ-A and INTJ-T keep the recognizable Architect pattern: they prefer strategic clarity, independent reasoning, long-range planning, and systems that make sense internally. The difference is not that one is smarter, colder, rarer, or more capable. The difference is usually visible in the emotional and behavioral layer around the same INTJ core. A useful way to read this comparison is to separate strategy from regulation: the INTJ core explains the strategic lens, while the A/T layer explains how secure or self-critical that lens feels under pressure.",
-                "h2": "What stays the same in both INTJ-A and INTJ-T",
-                "items": [
-                  "Both tend to distrust vague claims and prefer models, principles, or evidence.",
-                  "Both usually value autonomy and can become frustrated when process replaces progress.",
-                  "Both often think in second-order effects: what happens after the immediate decision?",
-                  "Both may need deliberate effort to make their reasoning legible to people who process socially.",
-                  "Both can over-index on competence and under-communicate warmth unless they make it explicit."
-                ]
-              },
-              "quick_answer": "The INTJ-A vs INTJ-T difference is not a change in the INTJ core type. Both patterns are strategic, independent, systems-oriented, and future-focused. The A/T layer mainly changes how an Architect handles confidence, stress, feedback, and self-correction: INTJ-A tends to act with steadier self-trust, while INTJ-T tends to examine risks, mistakes, and personal standards more intensely.",
-              "relationships_love": {
-                "a_relationship_pattern": "INTJ-A may show commitment through reliability, planning, and direct problem-solving. The risk is sounding detached when the other person needs emotional acknowledgment before solutions.",
-                "body": "In relationships, both INTJ patterns usually prefer depth, honesty, and consistency over constant emotional performance. INTJ-A may communicate with a calmer, more definite tone. INTJ-T may communicate with more internal intensity, especially when uncertainty, rejection, or misalignment is involved. In close relationships, the A/T difference often appears less in affection and more in repair style: INTJ-A may need reminders to revisit emotional nuance, while INTJ-T may need reassurance that uncertainty is not the same as failure.",
-                "h2": "Relationships and communication",
-                "t_relationship_pattern": "INTJ-T may notice subtle shifts in tone or trust and spend more time interpreting them. The risk is privately overanalyzing signals instead of asking direct clarifying questions."
-              },
-              "side_by_side_summary": {
-                "h2": "INTJ-A vs INTJ-T at a glance",
-                "rows": [
-                  {
-                    "a_variant": "More likely to commit once the logic is good enough and the risk is bounded.",
-                    "dimension": "Decision confidence",
-                    "t_variant": "More likely to re-check assumptions, edge cases, and hidden weaknesses before committing."
-                  },
-                  {
-                    "a_variant": "Often protects long-term focus by moving past criticism quickly.",
-                    "dimension": "Stress response",
-                    "t_variant": "Often uses discomfort as a signal to refine the plan or raise the standard."
-                  },
-                  {
-                    "a_variant": "Prefers concise feedback that confirms whether the strategy works.",
-                    "dimension": "Feedback style",
-                    "t_variant": "Prefers detailed feedback that exposes what could fail or improve."
-                  },
-                  {
-                    "a_variant": "Can operate well in autonomous roles where decisions cannot be endlessly reopened.",
-                    "dimension": "Work rhythm",
-                    "t_variant": "Can operate well in analytical roles where revision, testing, and error detection matter."
-                  },
-                  {
-                    "a_variant": "May appear calm, self-contained, and hard to sway.",
-                    "dimension": "Relationship pattern",
-                    "t_variant": "May appear intense, private, and more affected by relational uncertainty."
-                  },
-                  {
-                    "a_variant": "Needs to avoid dismissing useful doubt too quickly.",
-                    "dimension": "Growth edge",
-                    "t_variant": "Needs to avoid treating every doubt as proof that the plan is weak."
-                  }
-                ]
-              },
-              "stress_confidence": {
-                "a_pattern": "INTJ-A may recover from criticism quickly and keep the project moving. This is useful in leadership, product, operations, and high-ambiguity strategy work. The blind spot is premature certainty: if the Architect stops listening too early, a preventable flaw can survive.",
-                "body": "The clearest INTJ-A vs INTJ-T difference appears when a plan is challenged. INTJ-A often protects execution by stabilizing around the chosen strategy. INTJ-T often protects quality by interrogating the chosen strategy again.",
-                "h2": "Confidence and stress: the main A/T split",
-                "t_pattern": "INTJ-T may treat pressure as a interpretive tool. This is useful in research, engineering, writing, investing analysis, or any role where one overlooked assumption matters. The blind spot is over-review: if every imperfection reopens the entire plan, execution slows."
-              },
-              "which_one_fits": {
-                "body": "Use A/T as a reflective lens, not as a permanent label. If your INTJ pattern is stable but your self-confidence and stress response change across life stages, your A/T result may also feel more fluid than the four-letter type code.",
-                "h2": "Which one fits you better?",
-                "self_check_prompts": [
-                  "When a plan is criticized, do you usually stabilize and proceed, or reopen the model and revise?",
-                  "Do you lose more time from overconfidence or from over-checking?",
-                  "Do you prefer feedback that is brief and decisive, or detailed and interpretive?",
-                  "Under stress, do you become more detached and decisive, or more self-critical and perfectionistic?",
-                  "Do people experience you as hard to shake, or as intense and internally demanding?"
-                ]
-              }
-            },
-            "excluded_queries": [
-              "intj-a meaning",
-              "intj-t meaning",
-              "intj personality type",
-              "intj architect personality",
-              "mbti test"
-            ],
-            "faq": [
-              {
-                "answer": "The main difference is usually confidence and stress response. INTJ-A tends to act with steadier self-trust, while INTJ-T tends to re-check assumptions and refine plans more intensely under pressure.",
-                "question": "What is the main INTJ-A vs INTJ-T difference?"
-              },
-              {
-                "answer": "No. INTJ-A and INTJ-T describe different operating styles around the same INTJ core. INTJ-A can be more decisive; INTJ-T can be more corrective and quality-focused.",
-                "question": "Is INTJ-A better than INTJ-T?"
-              },
-              {
-                "answer": "A/T can feel more situational than the four-letter type pattern. Confidence, stress load, work environment, and life stage can all affect whether the A or T description feels more accurate.",
-                "question": "Can an INTJ change from A to T?"
-              },
-              {
-                "answer": "Neither label determines leadership ability. INTJ-A may be comfortable making firm decisions, while INTJ-T may catch risks earlier. Strong leadership can use either pattern well.",
-                "question": "Which INTJ type is better for leadership?"
-              },
-              {
-                "answer": "Yes. Use this comparison page to separate the A/T layer, then read the individual profile pages if you want a more focused explanation of either INTJ-A or INTJ-T.",
-                "question": "Should I read the INTJ-A and INTJ-T profile pages too?"
-              },
-              {
-                "answer": "People can show more A-like or T-like behavior depending on stress, life stage and environment. Treat A/T as a self-observation lens, not a permanent status.",
-                "question": "Can an INTJ move between A and T patterns?"
-              },
-              {
-                "answer": "Use it as a practical reflection guide: compare the repeated patterns with your own behavior, then use the public 16 personality test route if you want a broader type check.",
-                "question": "How should I use this INTJ-A vs INTJ-T page?"
-              }
-            ],
-            "information_gain": {
-              "fermatmind_specific_path": "The page routes readers from comparison intent into the public 16 personality test and later sibling profiles while keeping result and account routes out of the funnel.",
-              "unique_user_value": "It gives self-check prompts that help users distinguish decisive execution from corrective self-review without turning the page into a standalone INTJ-A or INTJ-T profile.",
-              "why_this_page_is_not_template_content": "This page frames INTJ-A and INTJ-T through Architect-specific decision confidence, critique handling, strategic autonomy, and over-review patterns instead of generic A/T substitution."
-            },
-            "internal_links": [
-              {
-                "anchor_text": "Explore all 16 personality types",
-                "href": "/en/personality",
-                "role": "hub",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Read the INTJ-A profile",
-                "href": "/en/personality/intj-a",
-                "role": "sibling_variant",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Read the INTJ-T profile",
-                "href": "/en/personality/intj-t",
-                "role": "sibling_variant",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Take the 16 personality test",
-                "href": "/en/tests/mbti-personality-test-16-personality-types",
-                "role": "test",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Compare your type with the Big Five model",
-                "href": "/en/tests/big-five-personality-test-ocean-model",
-                "role": "related_test",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Explore career interests with the Holland/RIASEC test",
-                "href": "/en/tests/holland-career-interest-test-riasec",
-                "role": "related_test",
-                "safe_public_route": true
-              },
-              {
-                "anchor_text": "Method and limits",
-                "href": "/en/personality/intj-a-vs-intj-t#method-boundary",
-                "role": "method",
-                "safe_public_route": true
-              }
-            ],
-            "locale": "en",
-            "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
-            "page_type": "comparison",
-            "primary_query": "intj-a vs intj-t difference",
-            "qa_flags_for_codex": [
-              "Do not publish or search-release until the audited lookup-route classification is resolved."
-            ],
-            "route_safety": {
-              "forbidden_route_patterns_absent_from_internal_links": true,
-              "lookup_route_classification_required_before_publish_or_search_release": true,
-              "related_big_five_riasec_routes": {
-                "routes": [
-                  "/en/tests/big-five-personality-test-ocean-model",
-                  "/en/tests/holland-career-interest-test-riasec"
-                ],
-                "source": "related-test-route-scope-decision-2026-06-18",
-                "status": "verified_and_added"
-              },
-              "target_test_route_verified_from_intent_map": true,
-              "v2_1_related_test_links_added": true
-            },
-            "secondary_queries": [
-              "intj-a vs intj-t",
-              "intj-a and intj-t differences",
-              "assertive architect vs turbulent architect",
-              "intj-a or intj-t",
-              "intj a t difference"
-            ],
-            "seo": {
-              "breadcrumb_title": "INTJ-A vs INTJ-T",
-              "h1": "INTJ-A vs INTJ-T: Key Differences",
-              "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
-              "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
-              "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind"
-            },
-            "serp_ctr_package_v2": {
-              "avoid_in_snippet": [
-                "provider-claim implication",
-                "32-type framing",
-                "rarity bait",
-                "career outcome certainty"
-              ],
-              "breadcrumb_title": "INTJ-A vs INTJ-T",
-              "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
-              "h1": "INTJ-A vs INTJ-T: Key Differences",
-              "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
-              "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
-              "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind"
-            },
-            "status": "draft_for_codex_qa",
-            "target_intent": "Comparison intent for users deciding how INTJ-A and INTJ-T differ in confidence, pressure response, work style, and relationships.",
-            "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
-            "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
-            "url": "/en/personality/intj-a-vs-intj-t",
-            "v2_optimization": {
-              "conversion_design": {
-                "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths.",
-                "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
-                "primary_cta_label": "Take the 16 personality test"
-              },
-              "duplicate_defense": {
-                "faq_reuse_allowed": false,
-                "page_specific_examples_required": true,
-                "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent."
-              },
-              "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
-              "related_test_link_patch": {
-                "routes_added": [
-                  "/en/tests/big-five-personality-test-ocean-model",
-                  "/en/tests/holland-career-interest-test-riasec"
-                ],
-                "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
-                "source": "related-test-route-scope-decision-2026-06-18",
-                "version": "pilot-v2.1"
-              },
-              "serp_intent_guard": {
-                "above_fold_answer_required": true,
-                "do_not_rank_for": [
-                  "intj-a meaning",
-                  "intj-t meaning",
-                  "intj personality type",
-                  "intj architect personality",
-                  "mbti test"
-                ],
-                "rank_for": "intj-a vs intj-t difference"
-              }
-            }
-          },
-          "seo": {
-            "breadcrumb_title": "INTJ-A vs INTJ-T",
-            "h1": "INTJ-A vs INTJ-T: Key Differences",
-            "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
-            "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
-            "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind"
-          },
-          "snapshot_key": "mbti64_comparison_draft_v2_1",
-          "source": "mbti64_v2_1_comparison_revision_promotion",
-          "structured_metadata": {
-            "above_the_fold_module": {
-              "answer_card_points": [
-                "Same core: strategic, independent, systems-oriented Architect reasoning.",
-                "INTJ-A tends to move with steadier self-trust once the logic is acceptable.",
-                "INTJ-T tends to revisit assumptions, risks and personal standards more intensely.",
-                "Neither label is better; the useful question is which pressure pattern repeats in real life."
-              ],
-              "answer_card_title": "INTJ-A vs INTJ-T in one minute",
-              "best_next_step": "Use the self-check prompts, then take the public 16 personality test if your A/T pattern is still unclear."
-            },
-            "claim_risk_notes": [
-              "No superiority claim between A and T variants.",
-              "No deterministic hiring, career, relationship, medical, or admissions claim.",
-              "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
-            ],
-            "excluded_queries": [
-              "intj-a meaning",
-              "intj-t meaning",
-              "intj personality type",
-              "intj architect personality",
-              "mbti test"
-            ],
-            "information_gain": {
-              "fermatmind_specific_path": "The page routes readers from comparison intent into the public 16 personality test and later sibling profiles while keeping result and account routes out of the funnel.",
-              "unique_user_value": "It gives self-check prompts that help users distinguish decisive execution from corrective self-review without turning the page into a standalone INTJ-A or INTJ-T profile.",
-              "why_this_page_is_not_template_content": "This page frames INTJ-A and INTJ-T through Architect-specific decision confidence, critique handling, strategic autonomy, and over-review patterns instead of generic A/T substitution."
-            },
-            "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
-            "primary_query": "intj-a vs intj-t difference",
-            "qa_flags_for_codex": [
-              "Do not publish or search-release until the audited lookup-route classification is resolved."
-            ],
-            "route_safety": {
-              "forbidden_route_patterns_absent_from_internal_links": true,
-              "lookup_route_classification_required_before_publish_or_search_release": true,
-              "related_big_five_riasec_routes": {
-                "routes": [
-                  "/en/tests/big-five-personality-test-ocean-model",
-                  "/en/tests/holland-career-interest-test-riasec"
-                ],
-                "source": "related-test-route-scope-decision-2026-06-18",
-                "status": "verified_and_added"
-              },
-              "target_test_route_verified_from_intent_map": true,
-              "v2_1_related_test_links_added": true
-            },
-            "secondary_queries": [
-              "intj-a vs intj-t",
-              "intj-a and intj-t differences",
-              "assertive architect vs turbulent architect",
-              "intj-a or intj-t",
-              "intj a t difference"
-            ],
-            "serp_ctr_package_v2": {
-              "avoid_in_snippet": [
-                "provider-claim implication",
-                "32-type framing",
-                "rarity bait",
-                "career outcome certainty"
-              ],
-              "breadcrumb_title": "INTJ-A vs INTJ-T",
-              "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
-              "h1": "INTJ-A vs INTJ-T: Key Differences",
-              "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
-              "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
-              "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind"
-            },
-            "status": "draft_for_codex_qa",
-            "target_intent": "Comparison intent for users deciding how INTJ-A and INTJ-T differ in confidence, pressure response, work style, and relationships.",
-            "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
-            "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
-            "v2_optimization": {
-              "conversion_design": {
-                "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths.",
-                "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
-                "primary_cta_label": "Take the 16 personality test"
-              },
-              "duplicate_defense": {
-                "faq_reuse_allowed": false,
-                "page_specific_examples_required": true,
-                "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent."
-              },
-              "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
-              "related_test_link_patch": {
-                "routes_added": [
-                  "/en/tests/big-five-personality-test-ocean-model",
-                  "/en/tests/holland-career-interest-test-riasec"
-                ],
-                "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
-                "source": "related-test-route-scope-decision-2026-06-18",
-                "version": "pilot-v2.1"
-              },
-              "serp_intent_guard": {
-                "above_fold_answer_required": true,
-                "do_not_rank_for": [
-                  "intj-a meaning",
-                  "intj-t meaning",
-                  "intj personality type",
-                  "intj architect personality",
-                  "mbti test"
-                ],
-                "rank_for": "intj-a vs intj-t difference"
-              }
-            }
-          },
-          "url": "/en/personality/intj-a-vs-intj-t"
-        },
-        "render_variant": "rich_text",
-        "section_key": "mbti64_comparison_a_vs_t",
-        "sort_order": 920,
-        "title": "INTJ-A vs INTJ-T: Key Differences"
+        "title": "Sources and method limits"
       }
     ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/en/personality/intj",
       "jsonld_overrides_json": null,
-      "og_description": null,
+      "og_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "og_image_url": null,
-      "og_title": null,
-      "robots": null,
-      "seo_description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
-      "seo_title": "INTJ Personality Guide",
-      "twitter_description": null,
+      "og_title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "robots": "index,follow",
+      "seo_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+      "seo_title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "twitter_description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "twitter_image_url": null,
-      "twitter_title": null
+      "twitter_title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
-        "en": "https://fermatmind.com/en/personality/intj-a",
-        "zh-CN": "https://fermatmind.com/zh/personality/intj-a"
+        "en": "https://fermatmind.com/en/personality/intj",
+        "zh-CN": "https://fermatmind.com/zh/personality/intj"
       },
-      "canonical_url": "https://fermatmind.com/en/personality/intj-a",
-      "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
+      "canonical_url": "https://fermatmind.com/en/personality/intj",
+      "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "adf495f0851943f8ca1f91ccb8241734100bda39",
+      "metadata_fingerprint": "dab275346718bf69529a7c2f15d01cbee1f60c82",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
-        "title": "INTJ Personality Guide",
+        "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
         "type": "article",
-        "url": "https://fermatmind.com/en/personality/intj-a"
+        "url": "https://fermatmind.com/en/personality/intj"
       },
       "public_summary_fingerprint": null,
       "robots_policy": "index,follow",
@@ -1303,18 +699,19 @@
       "sitemap_state": "included",
       "structured_data_keys": [
         "AboutPage",
+        "BreadcrumbList",
         "DefinedTerm"
       ],
       "surface_type": "mbti_personality_public_detail",
-      "title": "INTJ Personality Guide",
+      "title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "Discover strengths, weaknesses, relationship patterns, and career direction for the INTJ personality type.",
-        "title": "INTJ Personality Guide"
+        "description": "Understand INTJ through clear definitions, original work and relationship examples, counterexamples and sources. Use preferences without treating them as ability scores.",
+        "title": "INTJ Personality: Meaning, Patterns and Practical Examples | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.public.detail.v1",
-  "source_content_sha256": "0b31a0cea4ec38b63a060c7ececa26e39247b8d8ac3a5c0bdb3711b213aeeb09"
+  "source_content_sha256": "bcacd3cfc61c88cd77370d7d57b5c437165d97de8a0732500feeecaacbacb4cf"
 }

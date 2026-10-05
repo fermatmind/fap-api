@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/infj-vs-infp",
@@ -12,109 +12,86 @@
   "locale": "zh-CN",
   "payload": {
     "answer_surface_v1": {
-      "answer_contract_version": "mbti.comparison.answer_surface.v1",
-      "compare_blocks": [
+      "answer_bundle": [
         {
-          "body": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-          "key": "direct_answer",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "最大区别"
+          "count": 1,
+          "key": "summary",
+          "title": "summary"
         },
         {
-          "body": "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。",
-          "key": "easy_misread",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "为什么容易混淆"
+          "count": 9,
+          "key": "compare",
+          "title": "compare"
         },
         {
-          "body": "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。",
-          "key": "real_scenario_differences",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "真实场景差异"
-        },
-        {
-          "body": "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。",
-          "key": "do_not_misjudge",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "不要这样误判"
-        },
-        {
-          "body": "继续查看 INFJ、INFP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。",
-          "key": "next_reading",
-          "kind": "backend_authoritative_comparison_section",
-          "title": "下一步阅读"
+          "count": 5,
+          "key": "faq",
+          "title": "faq"
         }
+      ],
+      "answer_contract_version": "answer.surface.v1",
+      "answer_fingerprint": "22620525904c4d57b0f6aff105a3548b1e6b7935",
+      "answer_scope": "public_indexable_detail",
+      "attribution_scope": "public_personality_answer",
+      "compare_blocks": [],
+      "evidence_refs": [
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
       "faq_blocks": [
         {
-          "answer": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-          "question": "INFJ 和 INFP 最大区别是什么？"
+          "answer": "能。J/P 不测量自律或灵活技能，处境与习惯能产生两种行为。",
+          "key": "faq-0",
+          "question": "INFP 能维持日常，INFJ 能随机应变吗？"
         },
         {
-          "answer": "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。",
-          "question": "为什么 INFJ 和 INFP 容易被混淆？"
+          "answer": "不是。任何品质都不属于单一类型。代码差别是 J/P，功能故事属于理论，不是这些品质的实证划分。",
+          "key": "faq-1",
+          "question": "真正区别是同理心与真实吗？"
         },
         {
-          "answer": "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。",
-          "question": "在工作场景怎么区分 INFJ 和 INFP？"
+          "answer": "不能确定类型或诊断。直接了解原因，并在普通处境中比较偏好。",
+          "key": "faq-2",
+          "question": "低落或敏感能帮助区分吗？"
         },
         {
-          "answer": "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。",
-          "question": "判断 INFJ 和 INFP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留为自我观察假设，核查工具，寻找反例。本页不能替你确认官方最适类型。",
+          "key": "faq-3",
+          "question": "两种描述都共鸣怎么办？"
         }
       ],
-      "next_step_blocks": [
-        {
-          "body": "",
-          "href": "/zh/personality/infj-a",
-          "key": "internal_link_1",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INFJ A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/infp-a",
-          "key": "internal_link_2",
-          "kind": "backend_authoritative_internal_link",
-          "title": "INFP A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality/isfp-a",
-          "key": "internal_link_3",
-          "kind": "backend_authoritative_internal_link",
-          "title": "ISFP A"
-        },
-        {
-          "body": "",
-          "href": "/zh/personality",
-          "key": "internal_link_4",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 人格"
-        },
-        {
-          "body": "",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "key": "internal_link_5",
-          "kind": "backend_authoritative_internal_link",
-          "title": "MBTI 免费测试"
-        }
+      "indexability_state": "indexable",
+      "landing_surface_ref": null,
+      "next_step_blocks": [],
+      "primary_content_ref": "infj-vs-infp",
+      "public_safety_state": "public_indexable",
+      "public_surface_ref": null,
+      "related_surface_keys": [
+        "personality_detail",
+        "topic_cluster",
+        "start_test"
       ],
+      "runtime_artifact_ref": null,
+      "scene_summary_blocks": [],
+      "seo_surface_ref": "a45e644cf5a64abc6ebe96b60cafe521a5bc7d7f",
       "summary_blocks": [
         {
-          "body": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
+          "body": "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。",
+          "href": null,
           "key": "comparison_summary",
           "kind": "answer_first",
-          "title": "INFJ 和 INFP 的区别：意义结构与价值真实性"
+          "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择"
         }
-      ]
+      ],
+      "surface_type": "personality_comparison_public_detail",
+      "version": "answer.surface.v1"
     },
     "comparison": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "answer_surface_v1": {
@@ -226,64 +203,45 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/infj-vs-infp",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "infj-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-          "question": "INFJ 和 INFP 最大区别是什么？"
+          "answer": "能。J/P 不测量自律或灵活技能，处境与习惯能产生两种行为。",
+          "question": "INFP 能维持日常，INFJ 能随机应变吗？"
         },
         {
-          "answer": "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。",
-          "question": "为什么 INFJ 和 INFP 容易被混淆？"
+          "answer": "不是。任何品质都不属于单一类型。代码差别是 J/P，功能故事属于理论，不是这些品质的实证划分。",
+          "question": "真正区别是同理心与真实吗？"
         },
         {
-          "answer": "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。",
-          "question": "在工作场景怎么区分 INFJ 和 INFP？"
+          "answer": "不能确定类型或诊断。直接了解原因，并在普通处境中比较偏好。",
+          "question": "低落或敏感能帮助区分吗？"
         },
         {
-          "answer": "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。",
-          "question": "判断 INFJ 和 INFP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留为自我观察假设，核查工具，寻找反例。本页不能替你确认官方最适类型。",
+          "question": "两种描述都共鸣怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INFJ A",
-          "href": "/zh/personality/infj-a",
-          "label": "INFJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/infj",
+          "label": "INFJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INFP A",
-          "href": "/zh/personality/infp-a",
-          "label": "INFP A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/infp",
+          "label": "INFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFP A",
-          "href": "/zh/personality/isfp-a",
-          "label": "ISFP A",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -303,87 +261,104 @@
       "sections": [
         {
           "body": [
-            "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。"
+            "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INFJ": "看关系模式和长期影响",
-              "INFP": "看个人感受和价值一致性",
-              "dimension": "共情入口"
-            },
-            {
-              "INFJ": "引导、解释、连接线索",
-              "INFP": "书写、倾听、保护真实感",
-              "dimension": "表达方式"
-            },
-            {
-              "INFJ": "过度替他人解释意义",
-              "INFP": "过度退回个人感受",
-              "dimension": "冲突风险"
-            },
-            {
-              "INFJ": "不替别人定义人生",
-              "INFP": "把价值转成可沟通边界",
-              "dimension": "成熟表现"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。"
+            "两者描述内向、直觉、情感：内部思考、模式或可能性、价值与对人的影响。不证明两人信念、敏感度、人生目的相同。",
+            "INFJ 式叙述可能把有意义的目标组织成方向，INFP 式叙述可能先保留多种表达价值的方式。两者都能有条理、随性、果断或犹豫。期限、家庭责任、学到的技能可能比类型更能解释可见行为。",
+            "功能栈理论常用 Ni–Fe–Ti–Se 描述 INFJ，Fi–Ne–Si–Te 描述 INFP。这是另外的理论解释，不证明不同意识形式，也不是验证过的区分捷径。A/T 是独立扩展。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。"
+            "| 观察点 | INFJ | INFP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：偏好确定外部安排 | 知觉 P：偏好向新信息保留空间 |\n| 原创项目例子 | 选择组织有意义目标的方向 | 探索尊重价值的多种形式 |\n| 可能成本 | 听到相关替代前确定解释 | 需要承诺时仍保留全部形式 |\n| 共同实践 | 说明什么能重新打开方向 | 确定怎样足够启动小试验 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。"
+            "原创工作情景：志愿者规划支持活动。一种方式定目的与顺序，另一种探索尊重参与者价值的形式。询问实际需要，限定探索时间，约定小试行。同一人能贡献两种做法。",
+            "原创关系情景：朋友讨论有意义的变化。一方想定下一步，另一方想先理解各选项代表什么。决定现在必须确定什么、什么能等待。不把结束讨论解释为控制，也不把需要时间解释为不关心。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 INFJ、INFP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "整洁不能确认 INFJ，艺术兴趣不能确认 INFP。同理心、灵性、情绪强度、觉得不被理解都不能区分。J/P 描述外部事务偏好，不是道德或自律分数。一次困难经历的回应不能给人定型。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "回想三个有真实过程选择的决定：想确定什么，想保留什么，偏好何时有用或有成本？比较私人选择与共同承诺，保留反例与未知。练习不能验证测验结果。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [INFJ 基础人格](/zh/personality/infj)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+      "seo_description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-      "title": "INFJ 和 INFP 的区别：意义结构与价值真实性"
+      "source_sha256": "741e67706d8b531580b40d5501e59922ab3eb4a7934a2ebc26fc75cb5421b1dc",
+      "summary": "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。",
+      "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择"
     },
     "comparison_public_projection_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "answer_surface_v1": {
@@ -495,64 +470,45 @@
         "INFP"
       ],
       "canonical_url": "https://fermatmind.com/zh/personality/infj-vs-infp",
-      "claim_boundary": "人格内容仅用于自我理解，不用于医学诊断、招聘筛选、职业决定或关系预测。",
+      "claim_boundary": "偏好对比与原创教育例子，不是能力、诊断或关系匹配评估。",
       "comparison_contract_version": "mbti.cross_type_comparison.public.v1",
       "comparison_slug": "infj-vs-infp",
       "comparison_type": "mbti_cross_type",
-      "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "faq": [
         {
-          "answer": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-          "question": "INFJ 和 INFP 最大区别是什么？"
+          "answer": "能。J/P 不测量自律或灵活技能，处境与习惯能产生两种行为。",
+          "question": "INFP 能维持日常，INFJ 能随机应变吗？"
         },
         {
-          "answer": "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。",
-          "question": "为什么 INFJ 和 INFP 容易被混淆？"
+          "answer": "不是。任何品质都不属于单一类型。代码差别是 J/P，功能故事属于理论，不是这些品质的实证划分。",
+          "question": "真正区别是同理心与真实吗？"
         },
         {
-          "answer": "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。",
-          "question": "在工作场景怎么区分 INFJ 和 INFP？"
+          "answer": "不能确定类型或诊断。直接了解原因，并在普通处境中比较偏好。",
+          "question": "低落或敏感能帮助区分吗？"
         },
         {
-          "answer": "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。",
-          "question": "判断 INFJ 和 INFP 时最容易犯什么错？"
-        },
-        {
-          "answer": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。",
-          "question": "这个对比能决定职业或关系选择吗？"
+          "answer": "保留为自我观察假设，核查工具，寻找反例。本页不能替你确认官方最适类型。",
+          "question": "两种描述都共鸣怎么办？"
         }
       ],
-      "indexability_status": "released_by_mbti_index_24b",
+      "indexability_status": "indexable",
       "internal_links": [
         {
-          "anchor_text": "INFJ A",
-          "href": "/zh/personality/infj-a",
-          "label": "INFJ A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/infj",
+          "label": "INFJ 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "INFP A",
-          "href": "/zh/personality/infp-a",
-          "label": "INFP A",
-          "link_intent": "related_public_page"
+          "href": "/zh/personality/infp",
+          "label": "INFP 基础人格",
+          "reason": ""
         },
         {
-          "anchor_text": "ISFP A",
-          "href": "/zh/personality/isfp-a",
-          "label": "ISFP A",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 人格",
           "href": "/zh/personality",
-          "label": "MBTI 人格",
-          "link_intent": "related_public_page"
-        },
-        {
-          "anchor_text": "MBTI 免费测试",
-          "href": "/zh/tests/mbti-personality-test-16-personality-types",
-          "label": "MBTI 免费测试",
-          "link_intent": "related_public_page"
+          "label": "浏览 16 型目录",
+          "reason": ""
         }
       ],
       "is_indexable": true,
@@ -572,198 +528,250 @@
       "sections": [
         {
           "body": [
-            "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。"
+            "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。"
           ],
-          "id": "direct_answer",
-          "title": "最大区别"
-        },
-        {
-          "body": [],
-          "id": "quick_judgment_table",
-          "rows": [
-            {
-              "INFJ": "看关系模式和长期影响",
-              "INFP": "看个人感受和价值一致性",
-              "dimension": "共情入口"
-            },
-            {
-              "INFJ": "引导、解释、连接线索",
-              "INFP": "书写、倾听、保护真实感",
-              "dimension": "表达方式"
-            },
-            {
-              "INFJ": "过度替他人解释意义",
-              "INFP": "过度退回个人感受",
-              "dimension": "冲突风险"
-            },
-            {
-              "INFJ": "不替别人定义人生",
-              "INFP": "把价值转成可沟通边界",
-              "dimension": "成熟表现"
-            }
-          ],
-          "title": "快速判断表"
+          "groups": [],
+          "id": "quick_answer",
+          "items": [],
+          "title": "quick_answer"
         },
         {
           "body": [
-            "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。"
+            "两者描述内向、直觉、情感：内部思考、模式或可能性、价值与对人的影响。不证明两人信念、敏感度、人生目的相同。",
+            "INFJ 式叙述可能把有意义的目标组织成方向，INFP 式叙述可能先保留多种表达价值的方式。两者都能有条理、随性、果断或犹豫。期限、家庭责任、学到的技能可能比类型更能解释可见行为。",
+            "功能栈理论常用 Ni–Fe–Ti–Se 描述 INFJ，Fi–Ne–Si–Te 描述 INFP。这是另外的理论解释，不证明不同意识形式，也不是验证过的区分捷径。A/T 是独立扩展。"
           ],
-          "id": "easy_misread",
-          "title": "为什么容易混淆"
+          "groups": [],
+          "id": "core_traits_comparison",
+          "items": [],
+          "title": "相同点与核心差异"
         },
         {
           "body": [
-            "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。"
+            "| 观察点 | INFJ | INFP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：偏好确定外部安排 | 知觉 P：偏好向新信息保留空间 |\n| 原创项目例子 | 选择组织有意义目标的方向 | 探索尊重价值的多种形式 |\n| 可能成本 | 听到相关替代前确定解释 | 需要承诺时仍保留全部形式 |\n| 共同实践 | 说明什么能重新打开方向 | 确定怎样足够启动小试验 |"
           ],
-          "id": "real_scenario_differences",
-          "title": "真实场景差异"
+          "groups": [],
+          "id": "side_by_side_summary",
+          "items": [],
+          "title": "逐项对照"
         },
         {
           "body": [
-            "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。"
+            "原创工作情景：志愿者规划支持活动。一种方式定目的与顺序，另一种探索尊重参与者价值的形式。询问实际需要，限定探索时间，约定小试行。同一人能贡献两种做法。",
+            "原创关系情景：朋友讨论有意义的变化。一方想定下一步，另一方想先理解各选项代表什么。决定现在必须确定什么、什么能等待。不把结束讨论解释为控制，也不把需要时间解释为不关心。"
           ],
-          "id": "do_not_misjudge",
-          "title": "不要这样误判"
+          "groups": [],
+          "id": "work_style",
+          "items": [],
+          "title": "工作与关系的实际情景"
         },
         {
           "body": [
-            "继续查看 INFJ、INFP 的单独页面、A/T 页面和 MBTI 测试页，避免只凭一个对比标签下结论。"
+            "整洁不能确认 INFJ，艺术兴趣不能确认 INFP。同理心、灵性、情绪强度、觉得不被理解都不能区分。J/P 描述外部事务偏好，不是道德或自律分数。一次困难经历的回应不能给人定型。"
           ],
-          "id": "next_reading",
-          "title": "下一步阅读"
+          "groups": [],
+          "id": "common_misreads",
+          "items": [],
+          "title": "避免误判"
+        },
+        {
+          "body": [
+            "回想三个有真实过程选择的决定：想确定什么，想保留什么，偏好何时有用或有成本？比较私人选择与共同承诺，保留反例与未知。练习不能验证测验结果。"
+          ],
+          "groups": [],
+          "id": "which_one_fits",
+          "items": [],
+          "title": "怎样继续观察自己"
+        },
+        {
+          "body": [
+            "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。",
+            "McCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。",
+            "Erford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。",
+            "本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。",
+            "内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。",
+            "- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)"
+          ],
+          "groups": [],
+          "id": "sources_and_method",
+          "items": [],
+          "title": "来源与方法边界"
+        },
+        {
+          "body": [
+            "- [INFJ 基础人格](/zh/personality/infj)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)"
+          ],
+          "groups": [],
+          "id": "related_content",
+          "items": [],
+          "title": "相关类型与对比"
         }
       ],
-      "seo_description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+      "seo_description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择",
       "sitemap_eligible": true,
-      "source_notes": [
-        "Codex-native repaired comparison draft for backend CMS dry-run, not production CMS truth.",
-        "Comparison content repairs scenario specificity and FAQ depth without changing renderer code.",
-        "No Search Console indexing, sitemap, llms, or production import action is performed in this PR."
-      ],
+      "source_notes": [],
       "source_package_id": "mbti-cms-22-final-dry-run-2026-07-05",
       "source_refs": [
-        "mbti-cms-22-final-dry-run-2026-07-05",
-        "mbti.cross_type_comparison.authority.v1",
-        "mbti.cross_type_comparison.readmodel.v1"
+        "https://www.themyersbriggs.com/en-us/support/mbti-facts",
+        "https://www.16personalities.com/articles/our-theory",
+        "https://scholars.duke.edu/publication/1458465",
+        "https://doi.org/10.1002/jcad.70006",
+        "https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm"
       ],
-      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
-      "summary": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。",
-      "title": "INFJ 和 INFP 的区别：意义结构与价值真实性"
+      "source_sha256": "741e67706d8b531580b40d5501e59922ab3eb4a7934a2ebc26fc75cb5421b1dc",
+      "summary": "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。",
+      "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择"
     },
     "jsonld": {
       "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality",
-            "name": "人格类型",
-            "position": 1
-          },
-          {
-            "@type": "ListItem",
-            "item": "https://fermatmind.com/zh/personality/infj-vs-infp",
-            "name": "INFJ vs INFP",
-            "position": 2
-          }
-        ]
-      },
-      "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "hasPart": {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "INFJ 更容易把人的处境组织成一个可理解的意义结构，INFP 更容易先确认内在价值是否真实。最大区别不是谁更温柔，而是共情之后如何判断。"
-            },
-            "name": "INFJ 和 INFP 最大区别是什么？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "两者都可能敏感、理想主义、重意义。区别在于 INFJ 更常组织关系图景，INFP 更常守住个人真实。"
-            },
-            "name": "为什么 INFJ 和 INFP 容易被混淆？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "朋友陷入困境时，INFJ 可能帮助对方看见模式和未来路径；INFP 可能先确认对方真实感受有没有被尊重。两种支持都重要，但节奏不同。"
-            },
-            "name": "在工作场景怎么区分 INFJ 和 INFP？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不要用是否外向、是否会安慰人判断 INFJ/INFP。观察他们面对价值冲突时，是先建构整体意义，还是先确认内在真实。"
-            },
-            "name": "判断 INFJ 和 INFP 时最容易犯什么错？"
-          },
-          {
-            "@type": "Question",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "不能。它只能帮助观察信息处理和压力反馈差异，重要选择仍需要结合能力、经验、价值观、环境和长期反馈。"
-            },
-            "name": "这个对比能决定职业或关系选择吗？"
-          }
-        ]
-      },
-      "mainEntity": {
-        "@type": "ItemList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "name": "INFJ",
-            "position": 1,
-            "url": "https://fermatmind.com/zh/personality/infj-a"
-          },
-          {
-            "@type": "ListItem",
-            "name": "INFP",
-            "position": 2,
-            "url": "https://fermatmind.com/zh/personality/infp-a"
-          }
-        ]
-      },
-      "name": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+      "@type": "AboutPage",
+      "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://fermatmind.com/zh/personality/infj-vs-infp",
+      "name": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择",
       "url": "https://fermatmind.com/zh/personality/infj-vs-infp"
     },
+    "sections": [
+      {
+        "body_html": null,
+        "body_md": "INFJ 与 INFP 共用 I、N、F，代码差别是 J/P。判断强调确定外部安排，知觉强调向新信息保留空间。差异不排名同理心、深度或个人真实程度。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "quick_answer",
+        "sort_order": 0,
+        "title": "quick_answer"
+      },
+      {
+        "body_html": null,
+        "body_md": "两者描述内向、直觉、情感：内部思考、模式或可能性、价值与对人的影响。不证明两人信念、敏感度、人生目的相同。\n\nINFJ 式叙述可能把有意义的目标组织成方向，INFP 式叙述可能先保留多种表达价值的方式。两者都能有条理、随性、果断或犹豫。期限、家庭责任、学到的技能可能比类型更能解释可见行为。\n\n功能栈理论常用 Ni–Fe–Ti–Se 描述 INFJ，Fi–Ne–Si–Te 描述 INFP。这是另外的理论解释，不证明不同意识形式，也不是验证过的区分捷径。A/T 是独立扩展。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "core_traits_comparison",
+        "sort_order": 10,
+        "title": "相同点与核心差异"
+      },
+      {
+        "body_html": null,
+        "body_md": "| 观察点 | INFJ | INFP |\n| --- | --- | --- |\n| 代码差别 | 判断 J：偏好确定外部安排 | 知觉 P：偏好向新信息保留空间 |\n| 原创项目例子 | 选择组织有意义目标的方向 | 探索尊重价值的多种形式 |\n| 可能成本 | 听到相关替代前确定解释 | 需要承诺时仍保留全部形式 |\n| 共同实践 | 说明什么能重新打开方向 | 确定怎样足够启动小试验 |",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "side_by_side_summary",
+        "sort_order": 20,
+        "title": "逐项对照"
+      },
+      {
+        "body_html": null,
+        "body_md": "原创工作情景：志愿者规划支持活动。一种方式定目的与顺序，另一种探索尊重参与者价值的形式。询问实际需要，限定探索时间，约定小试行。同一人能贡献两种做法。\n\n原创关系情景：朋友讨论有意义的变化。一方想定下一步，另一方想先理解各选项代表什么。决定现在必须确定什么、什么能等待。不把结束讨论解释为控制，也不把需要时间解释为不关心。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "work_style",
+        "sort_order": 30,
+        "title": "工作与关系的实际情景"
+      },
+      {
+        "body_html": null,
+        "body_md": "整洁不能确认 INFJ，艺术兴趣不能确认 INFP。同理心、灵性、情绪强度、觉得不被理解都不能区分。J/P 描述外部事务偏好，不是道德或自律分数。一次困难经历的回应不能给人定型。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "common_misreads",
+        "sort_order": 40,
+        "title": "避免误判"
+      },
+      {
+        "body_html": null,
+        "body_md": "回想三个有真实过程选择的决定：想确定什么，想保留什么，偏好何时有用或有成本？比较私人选择与共同承诺，保留反例与未知。练习不能验证测验结果。",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "which_one_fits",
+        "sort_order": 50,
+        "title": "怎样继续观察自己"
+      },
+      {
+        "body_html": null,
+        "body_md": null,
+        "is_enabled": true,
+        "payload_json": {
+          "items": [
+            {
+              "answer": "能。J/P 不测量自律或灵活技能，处境与习惯能产生两种行为。",
+              "question": "INFP 能维持日常，INFJ 能随机应变吗？"
+            },
+            {
+              "answer": "不是。任何品质都不属于单一类型。代码差别是 J/P，功能故事属于理论，不是这些品质的实证划分。",
+              "question": "真正区别是同理心与真实吗？"
+            },
+            {
+              "answer": "不能确定类型或诊断。直接了解原因，并在普通处境中比较偏好。",
+              "question": "低落或敏感能帮助区分吗？"
+            },
+            {
+              "answer": "保留为自我观察假设，核查工具，寻找反例。本页不能替你确认官方最适类型。",
+              "question": "两种描述都共鸣怎么办？"
+            }
+          ]
+        },
+        "render_variant": "faq",
+        "section_key": "faq",
+        "sort_order": 60,
+        "title": "常见问题"
+      },
+      {
+        "body_html": null,
+        "body_md": "官方 MBTI 描述四组偏好。A/T 属于另外的扩展；使用相似字母不表示不同测验完全等价。类型叙述与认知功能属于理论解释，不是已证实的心理机制。\n\nMcCrae 与 Costa（1989）在 267 名男性、201 名女性（19–93 岁）中，对照 1985 年 MBTI 与 NEO-PI 自评及同伴评价；摘要未说明具有代表性的国家样本。其分析不支持真实二分或性质截然不同的类型，并发现与五因素模型部分维度重合。工具版本与样本不可混用：出版方介绍了后续修订，本页没有证明费马测试分数的信度或效度。这项具体研究不能验证本页情景、判定个人类型，也不能解决所有后续测验的问题。\n\nErford 等（2025）另汇总了 1999–2024 年使用英文版 MBTI Form M 的 193 项研究，报告较好的内部一致性（0.845–0.921）及与相似构念的聚合证据；但其纳入的文献中，手册以外没有独立结构效度或重测信度研究。分数一致性不等于证实自然类型，也不能验证 A/T 或移用于费马测试。支持证据和研究缺口都要结合具体工具与样本理解。\n\n本页情景与练习为原创教育示例，不是临床指导或群体研究结论。对照真实经历和反例使用；不能仅凭类型诊断、招聘、选定职业或筛选伴侣。\n\n内容修订于 2026 年 10 月 5 日。本页为基于来源的教育性整理，不声称经过独立临床审校。\n\n- [四组偏好与使用范围](https://www.themyersbriggs.com/en-us/support/mbti-facts)\n- [A/T 来源与框架](https://www.16personalities.com/articles/our-theory)\n- [研究摘要](https://scholars.duke.edu/publication/1458465)\n- [Form M 信效度综述](https://doi.org/10.1002/jcad.70006)\n- [类型使用伦理](https://www.myersbriggs.org/using-type-as-a-professional/mbti-code-of-ethics/home.htm)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "sources_and_method",
+        "sort_order": 70,
+        "title": "来源与方法边界"
+      },
+      {
+        "body_html": null,
+        "body_md": "- [INFJ 基础人格](/zh/personality/infj)\n- [INFP 基础人格](/zh/personality/infp)\n- [浏览 16 型目录](/zh/personality)",
+        "is_enabled": true,
+        "payload_json": null,
+        "render_variant": "rich_text",
+        "section_key": "related_content",
+        "sort_order": 80,
+        "title": "相关类型与对比"
+      }
+    ],
     "seo_meta": {
       "canonical_url": "https://fermatmind.com/zh/personality/infj-vs-infp",
       "jsonld_overrides_json": null,
-      "og_description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "og_description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "og_image_url": null,
-      "og_title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+      "og_title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind",
       "robots": "index,follow",
-      "seo_description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-      "seo_title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
-      "twitter_description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "seo_description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+      "seo_title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind",
+      "twitter_description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "twitter_image_url": null,
-      "twitter_title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind"
+      "twitter_title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind",
+      "updated_at": "2026-10-05"
     },
     "seo_surface_v1": {
       "alternates": {
+        "en": "https://fermatmind.com/en/personality/infj-vs-infp",
         "zh-CN": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
       "canonical_url": "https://fermatmind.com/zh/personality/infj-vs-infp",
-      "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
+      "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
       "indexability_state": "indexable",
       "llms_exposure_state": "allow",
       "metadata_contract_version": "seo.surface.v1",
-      "metadata_fingerprint": "14c0af3c360621798f7a520307b5102a26176c01",
+      "metadata_fingerprint": "a45e644cf5a64abc6ebe96b60cafe521a5bc7d7f",
       "metadata_scope": "public_indexable_detail",
       "og_payload": {
-        "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+        "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind",
         "type": "article",
         "url": "https://fermatmind.com/zh/personality/infj-vs-infp"
       },
@@ -773,24 +781,20 @@
       "share_safety_state": null,
       "sitemap_state": "included",
       "structured_data_keys": [
-        "Answer",
+        "AboutPage",
         "BreadcrumbList",
-        "CollectionPage",
-        "FAQPage",
-        "ItemList",
-        "ListItem",
-        "Question"
+        "DefinedTerm"
       ],
       "surface_type": "mbti_personality_cross_type_comparison",
-      "title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind",
+      "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind",
       "twitter_payload": {
         "card": "summary_large_image",
-        "description": "INFJ 和 INFP 有什么区别？用最大区别、快速判断表、容易误判、真实场景和 FAQ 快速判断。",
-        "title": "INFJ 和 INFP 的区别：意义结构与价值真实性 | FermatMind"
+        "description": "对照 INFJ 与 INFP 的实际偏好差别、原创情景、反例与观察问题，附研究来源和方法边界。",
+        "title": "INFJ 与 INFP 的区别：判断、知觉与有意义的选择 | FermatMind"
       },
       "version": "seo.surface.v1"
     }
   },
   "payload_contract": "mbti.cross_type_comparison.public.v1",
-  "source_content_sha256": "c80786e2e8616aa4f56f9c5df85f8f4afb6213b7ca28a5a5c5576badad6ebfa9"
+  "source_content_sha256": "5a352d5981d2c676e51bef19e1cd14e716359f46124ad71a88b45d63f01b682b"
 }

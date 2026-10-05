@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '57503703711caea999d727e68206d8107def3561159e7f0988e649bf032a6427';
+    private const AGGREGATE = '95de3b7bced31d5861681e9b38aa54194e00cfcb1581f32a57efbe9000e5f045';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -98,12 +98,12 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 
         foreach (['mbti_public_projection_v1', 'personality_public_projection_v1'] as $projection) {
             $sections = array_column($response->json("{$projection}.sections"), null, 'key');
-            $this->assertStringContainsString('本页不据'.strtoupper($type).'类型', $sections['career.summary']['body_md']);
-            $this->assertFalse($sections['career.preferred_roles']['is_enabled']);
-            $this->assertSame([], $sections['career.preferred_roles']['payload']['recommended_jobs']);
-            $this->assertSame([], $sections['career.preferred_roles']['payload']['avoid_jobs']);
-            $this->assertFalse($sections['growth.strengths']['is_enabled']);
-            $this->assertSame([], $sections['growth.strengths']['payload']['items']);
+            $this->assertArrayNotHasKey('career.preferred_roles', $sections);
+            $this->assertArrayNotHasKey('growth.strengths', $sections);
+            $this->assertNotEmpty($sections['work_style']['body_md']);
+            $this->assertStringContainsString('不能仅凭类型', $sections['sources_and_method']['body_md']);
+            $this->assertSame([], $response->json("{$projection}.dimensions"));
+            $this->assertNull($response->json("{$projection}.profile.rarity"));
         }
     }
 
@@ -133,6 +133,9 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
             ->assertHeader('X-Fermat-Content-Aggregate', self::AGGREGATE)
+            ->assertJsonPath('sections.0.section_key', 'quick_answer')
+            ->assertJsonPath('sections.4.section_key', 'sources_and_method')
+            ->assertJsonPath('seo_meta.canonical_url', 'https://fermatmind.com/zh/personality')
             ->assertJsonPath('pagination.total', 16)
             ->assertJsonPath('items.0.slug', 'intj')
             ->assertJsonMissingPath('items.0.id');
