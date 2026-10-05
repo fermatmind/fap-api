@@ -80,12 +80,16 @@ final class CareerCurrentAuthorityReleaseIntentTest extends TestCase
             $root.'/backend/scripts/ci/verify_career_current_authority_release.sh',
         ));
         self::assertStringContainsString('source_merge_sha == $source', $workflow);
-        self::assertStringContainsString('.authority.component_28_count == 1046', $workflow);
+        self::assertStringContainsString('.authority.verified_identity_count == 1046', $workflow);
+        self::assertStringContainsString('.file_readback.file_hash_match_count == 2092', $workflow);
         self::assertStringContainsString('automatic_retry_allowed == false', $workflow);
         self::assertStringContainsString(
-            "\$receipt['authority']['component_28_count'] = \$result['authority']['valid_component_order_count'] ?? null;",
+            "foreach (['package', 'authority', 'file_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as \$key)",
             $publisher,
         );
+        self::assertStringContainsString('$receipt[$key] = $result[$key];', $publisher);
+        self::assertStringContainsString("(\$result['authority']['verified_identity_count'] ?? null) !== 1046", $publisher);
+        self::assertStringContainsString("(\$result['file_readback']['verified_locale_page_count'] ?? null) !== 2092", $publisher);
         self::assertStringContainsString(
             "'career-current-authority|'.\$sourceMergeSha.'|'.\$assetsSha256.'|'.\$versionlessProjectionSha256",
             $publisher,

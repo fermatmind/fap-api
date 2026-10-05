@@ -223,7 +223,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             self::assertGreaterThanOrEqual(1, substr_count($workflow, $path));
         }
         self::assertStringContainsString(
-            '.public_readback.verified_slug_count == 1046',
+            '.file_readback.verified_slug_count == 1046',
             $workflow,
         );
         self::assertStringContainsString('verify_career_current_authority_release.sh', $workflow);
@@ -233,9 +233,11 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertStringContainsString('.source_merge_sha == $source', $workflow);
         self::assertStringContainsString('.manifest_sha256 == $manifest', $workflow);
         self::assertStringContainsString(
-            '.public_readback.verified_locale_page_count == 2092',
+            '.file_readback.verified_locale_page_count == 2092',
             $workflow,
         );
+        self::assertStringContainsString('.file_readback.delivery_mode == "file_authoritative"', $workflow);
+        self::assertStringContainsString('.file_readback.file_hash_match_count == 2092', $workflow);
     }
 
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void
