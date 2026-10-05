@@ -8,6 +8,7 @@ use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Display\CareerPageProjector;
 use App\Models\Occupation;
 use App\Support\PublicProjectionCache;
+use Illuminate\Support\Facades\Log;
 
 /** Reader copy comes exclusively from locale files; publication and identity remain business authority. */
 final class CareerFilePageReader
@@ -52,6 +53,10 @@ final class CareerFilePageReader
                 } catch (\Throwable) {
                     // A full/unwritable derived store cannot suppress validated file copy.
                     // Publication/identity and file validation above still fail closed.
+                    Log::notice('career_optional_page_cache_write_failed', [
+                        'canonical_slug' => $slug,
+                        'locale' => $locale,
+                    ]);
                 }
             }
         }
