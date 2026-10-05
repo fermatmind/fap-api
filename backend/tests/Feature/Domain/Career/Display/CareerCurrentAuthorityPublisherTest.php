@@ -17,33 +17,37 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         );
         $publisher = app(CareerCurrentAuthorityPublisher::class);
         $first = $publisher->execute(base_path());
-        self::assertSame('career.detail.page.v1', $first['public_readback']['render_contract_version']);
-        self::assertSame(2092, $first['public_readback']['cache_content_match_count']);
-        self::assertSame(2092, $first['write_counts']['cache_candidate_write_count']);
+        self::assertSame('file_authoritative', $first['file_readback']['delivery_mode']);
+        self::assertSame(2092, $first['file_readback']['file_hash_match_count']);
+        self::assertSame(0, $first['write_counts']['cache_candidate_write_count']);
         self::assertSame(0, $first['write_counts']['database_update_count']);
         self::assertSame(0, $first['write_counts']['cache_pointer_activation_count']);
         $this->travel(2)->days();
         $second = $publisher->execute(base_path(), false, [[
             'slug' => 'accountants-and-auditors',
             'locale' => 'en',
-        ]], [
-            'identity_count' => 2092,
-            'unchanged' => 2091,
-            'changed' => 1,
-            'sha256' => str_repeat('a', 64),
-        ]);
+        ]]);
         self::assertTrue($second['idempotent_noop']);
         self::assertSame(1, $second['authority']['changed_slug_count']);
         self::assertSame(1, $second['authority']['changed_locale_page_count']);
         self::assertSame($first['state_sha256'], $second['state_sha256']);
         $page = app(\App\Domain\Career\Display\CareerPageProjector::class)->read('actors', 'en');
         \App\Support\PublicProjectionCache::forget(\App\Services\Career\CareerFilePageReader::cacheKey($page));
-        try {
-            $publisher->execute(base_path(), false, [['slug' => 'accountants-and-auditors', 'locale' => 'en']]);
-            self::fail('An unchanged missing page must stop a content-only publication.');
-        } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure $error) {
-            self::assertSame('CURRENT_UNCHANGED_FILE_PAGE_DRIFT', $error->safeCode);
-            self::assertSame('confirmed_zero_write', $error->writeCommitState);
-        }
+        $cold = $publisher->execute(base_path(), false, [['slug' => 'accountants-and-auditors', 'locale' => 'en']]);
+        self::assertSame($first['state_sha256'], $cold['state_sha256']);
+        self::assertSame(0, $cold['write_counts']['cache_candidate_write_count']);
+        self::assertNull(\App\Support\PublicProjectionCache::get(\App\Services\Career\CareerFilePageReader::cacheKey($page)));
+    }
+
+    public function test_corrupt_installed_file_binding_fails_even_with_no_cache_requirement(): void
+    {
+        $index = app(\App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader::class)->indexForPublish(base_path());
+        $index['entries']['actors']['zh-CN']['sha256'] = str_repeat('0', 64);
+        $loader = \Mockery::mock(\App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader::class);
+        $loader->shouldReceive('indexForPublish')->once()->andReturn($index);
+        $publisher = new CareerCurrentAuthorityPublisher($loader, app(\App\Services\Career\PublicCareerAuthorityResponseCache::class));
+        $this->expectException(\App\Domain\Career\Display\CareerCurrentAuthorityPublisherFailure::class);
+        $this->expectExceptionMessage('CURRENT_FILE_AUTHORITY_READBACK_FAILED');
+        $publisher->execute(base_path());
     }
 }

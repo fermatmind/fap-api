@@ -100,6 +100,18 @@ final class CareerFilePageReaderTest extends TestCase
         \Illuminate\Support\Facades\Queue::assertNothingPushed();
     }
 
+    public function test_file_read_survives_optional_cache_write_failure(): void
+    {
+        $this->publication(true);
+        $repository = \Illuminate\Support\Facades\Cache::store();
+        $store = \Mockery::mock($repository)->makePartial();
+        $store->shouldReceive('forever')->andThrow(new \RuntimeException('OOM cache write'));
+        \Illuminate\Support\Facades\Cache::swap($store);
+        $response = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN');
+        $response->assertOk()->assertJsonPath('career_page.subject.canonical_slug', 'actors');
+        self::assertNotEmpty($response->json('career_page.content.blocks'));
+    }
+
     public function test_signed_verification_reads_files_without_creating_derived_cache(): void
     {
         $this->publication(true);

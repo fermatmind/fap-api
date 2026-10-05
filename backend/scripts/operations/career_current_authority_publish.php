@@ -13,7 +13,7 @@ use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 
 // Corrective releases rebind this operation to the repository package digest;
-// the publisher remains the only path that may commit and verify public authority.
+// files activate with the release; this operation verifies their installed bytes.
 $env = static function (string $name): string {
     $value = getenv($name);
 
@@ -129,7 +129,7 @@ $receipt = [
     'idempotent_noop' => false,
     'package' => null,
     'authority' => null,
-    'public_readback' => null,
+    'file_readback' => null,
     'manual_hold_verified' => false,
     'state_sha256' => null,
     'write_counts' => $zeroCounts,
@@ -221,8 +221,8 @@ try {
         || data_get($productionParity, 'validation_scope.locales') !== ['en', 'zh-CN']
         || data_get($productionParity, 'validation_scope.locale_page_count') !== 2092
         || data_get($productionParity, 'full_scan.counts.locale_pages') !== 2092
-        || data_get($productionParity, 'full_scan.counts.encoded') !== 2092
-        || data_get($productionParity, 'full_scan.counts.decoded') !== 2092
+        || data_get($productionParity, 'full_scan.counts.verified_files') !== 2092
+        || data_get($productionParity, 'full_scan.delivery_mode') !== 'file_authoritative'
         || data_get($productionParity, 'redis.mode') !== 'readonly'
         || ($productionParity['write_counts'] ?? null) !== $expectedParityWriteCounts
         || ! hash_equals(
@@ -261,12 +261,10 @@ try {
 
     /** @var CareerCurrentAuthorityPublisher $publisher */
     $publisher = $app->make(CareerCurrentAuthorityPublisher::class);
-    $cacheSnapshot = $changedPages !== null ? data_get($productionParity, 'full_scan.cache_snapshot') : null;
-    $result = $publisher->execute($backendRoot, $fullScan, $changedPages, $cacheSnapshot);
-    foreach (['package', 'authority', 'public_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
+    $result = $publisher->execute($backendRoot, $fullScan, $changedPages);
+    foreach (['package', 'authority', 'file_readback', 'manual_hold_verified', 'idempotent_noop', 'write_counts', 'state_sha256'] as $key) {
         $receipt[$key] = $result[$key];
     }
-    $receipt['authority']['component_28_count'] = $result['authority']['valid_component_order_count'] ?? null;
     if (($result['package']['source_format'] ?? null) !== 'content_v3_per_page'
         || ! hash_equals(
             $assetsSha256,
@@ -279,11 +277,11 @@ try {
         || ! hash_equals($versionlessProjectionSha256, (string) ($result['package']['versionless_projection_sha256'] ?? ''))
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
-        || ($result['authority']['valid_component_order_count'] ?? null) !== 1046
+        || ($result['authority']['verified_identity_count'] ?? null) !== 1046
         || ($changedPages !== null && ($result['authority']['changed_locale_page_count'] ?? null) !== count($changedPages))
         || ($result['manual_hold_verified'] ?? null) !== true
-        || ($fullScan && ($result['public_readback']['verified_slug_count'] ?? null) !== 1046)
-        || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2092)
+        || ($fullScan && ($result['file_readback']['verified_slug_count'] ?? null) !== 1046)
+        || ($fullScan && ($result['file_readback']['verified_locale_page_count'] ?? null) !== 2092)
         || ($result['write_counts']['occupation_write_count'] ?? null) !== 0
         || ($result['write_counts']['generation_write_count'] ?? null) !== 0
         || ($result['write_counts']['discoverability_write_count'] ?? null) !== 0

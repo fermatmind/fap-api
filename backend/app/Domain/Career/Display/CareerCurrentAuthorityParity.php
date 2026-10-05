@@ -29,8 +29,6 @@ final class CareerCurrentAuthorityParity
 
     private const PACKAGE_SLICE_SLUGS = ['accountants-and-auditors', 'actors'];
 
-    private const PRODUCTION_VALIDATION_SLUGS = ['accountants-and-auditors'];
-
     public function __construct(
         private readonly CareerCurrentAuthorityPackageLoader $loader,
         private readonly CareerJobDetailCanonicalCacheReader $reader,
@@ -78,17 +76,17 @@ final class CareerCurrentAuthorityParity
         $authority = $this->loader->indexForPublish($backendRoot);
         $slugs = $authority['slugs'];
         $this->assertAuthorityShape($authority);
-        $activeAuthority = $activeBackendRoot !== '' ? $this->loader->indexForPublish($activeBackendRoot) : null;
-        if ($activeAuthority !== null && ($mode !== self::MODE_PRODUCTION_PREACTIVATION
-            || $redisMode !== 'readonly' || $activeAuthority['slugs'] !== $slugs)) {
-            throw new RuntimeException('CAREER_PARITY_ACTIVE_AUTHORITY_INVALID');
-        }
         $redis = $this->redisContract($redisMode);
-        $full = $this->scanPages($authority, $slugs, true, $redisMode, $mode === self::MODE_PACKAGE, $activeAuthority);
-        if ($redisMode === 'readonly') {
-            self::assertCapacityWithinBudget($full['bytes']['worst_state_amplification'] + $redis['used_memory_bytes'], 0, self::LOCKED_CAREER_BUDGET_BYTES);
+        if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
+            // Validate installed authority, not optional cache coverage or a second
+            // full display/codec compilation. CI owns that complete offline scan.
+            $full = $this->scanFiles($authority);
+            $slice = null;
+            self::assertCapacityWithinBudget(0, $redis['used_memory_bytes'], self::LOCKED_CAREER_BUDGET_BYTES);
+        } else {
+            $full = $this->scanPages($authority, $slugs, true, $redisMode, true);
+            $slice = $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         }
-        $slice = $this->scanPages($authority, self::PACKAGE_SLICE_SLUGS, false, 'none');
         if ($databaseMutationCount !== 0) {
             throw new RuntimeException('CAREER_PARITY_DATABASE_WRITE_DETECTED');
         }
@@ -121,7 +119,7 @@ final class CareerCurrentAuthorityParity
             ],
             'architecture_slice' => $slice,
             'full_scan' => $full,
-            'redis' => $redis + $full['redis'],
+            'redis' => $redis + ($full['redis'] ?? []),
             'write_counts' => $zeroWrites,
         ];
         if ($mode === self::MODE_PRODUCTION_PREACTIVATION) {
@@ -138,6 +136,31 @@ final class CareerCurrentAuthorityParity
         return $receipt;
     }
 
+    /** Validate every installed JSON against the manifest and body contract without projecting it. */
+    public function scanFiles(array $authority): array
+    {
+        $hashes = [];
+        $bytes = 0;
+        foreach ($authority['slugs'] as $slug) {
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $content = $this->loader->pageFromPublishIndex($authority, $slug, $locale);
+                $hashes[] = $content['source_content_sha256'];
+                $bytes += $authority['entries'][$slug][$locale]['bytes'];
+                unset($content);
+            }
+        }
+
+        return [
+            'status' => 'pass',
+            'delivery_mode' => 'file_authoritative',
+            'counts' => ['slugs' => count($authority['slugs']), 'locales' => 2,
+                'locale_pages' => count($hashes), 'verified_files' => count($hashes)],
+            'source_semantic_aggregate_sha256' => CareerCurrentAuthorityPackage::hashValue($hashes),
+            'installed_bytes' => $bytes,
+            'cache_write_count' => 0,
+        ];
+    }
+
     /**
      * @param  array{root:string,entries:array<string,array<string,array<string,mixed>>>}  $authority
      * @param  list<string>  $slugs
@@ -149,7 +172,6 @@ final class CareerCurrentAuthorityParity
         bool $includeCapacity,
         string $redisMode,
         bool $includeProjectionIndex = false,
-        ?array $activeAuthority = null,
     ): array {
         $hashes = array_fill_keys(['content_v3', 'codec_roundtrip'], []);
         $counts = [
@@ -170,9 +192,7 @@ final class CareerCurrentAuthorityParity
         ];
         $memoryUsageKeys = [];
         $projectionIndex = [];
-        $cacheSnapshot = ['unchanged' => 0, 'changed' => 0, 'present' => 0, 'identities' => []];
         foreach (array_chunk($slugs, 32) as $chunk) {
-            $cacheCandidates = [];
             foreach ($chunk as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                     $content = $this->loader->pageFromPublishIndex($authority, $slug, $locale);
@@ -191,15 +211,6 @@ final class CareerCurrentAuthorityParity
                     $projectionSha256 = CareerCurrentAuthorityPackage::hashValue($payload);
                     $codecSha256 = CareerCurrentAuthorityPackage::hashValue($stored);
                     $hashes['codec_roundtrip'][] = $projectionSha256;
-                    if ($activeAuthority !== null) {
-                        $cacheCandidates[] = [
-                            'identity' => $slug.'|'.$locale,
-                            'key' => \App\Services\Career\CareerFilePageReader::cacheKey($payload),
-                            'page' => $payload,
-                            'unchanged' => ($activeAuthority['entries'][$slug][$locale]['sha256'] ?? null)
-                                === ($authority['entries'][$slug][$locale]['sha256'] ?? null),
-                        ];
-                    }
                     if ($includeProjectionIndex) {
                         $entry = $authority['entries'][$slug][$locale] ?? null;
                         if (! is_array($entry)
@@ -241,31 +252,6 @@ final class CareerCurrentAuthorityParity
                     unset($content, $payload, $stored);
                 }
             }
-            if ($activeAuthority !== null) {
-                $keys = array_column($cacheCandidates, 'key');
-                $values = Cache::many($keys);
-                $expiring = Cache::expiringCareerPageKeys($keys);
-                foreach ($cacheCandidates as $candidate) {
-                    $value = $values[$candidate['key']] ?? null;
-                    if ($candidate['unchanged']) {
-                        if ($value !== $candidate['page'] || isset($expiring[$candidate['key']])) {
-                            throw new RuntimeException('CAREER_PARITY_UNCHANGED_CACHE_DRIFT');
-                        }
-                        $cacheSnapshot['unchanged']++;
-                    } else {
-                        if (($value !== null && $value !== $candidate['page'])
-                            || isset($expiring[$candidate['key']])) {
-                            throw new RuntimeException('CAREER_PARITY_CHANGED_CACHE_DRIFT');
-                        }
-                        $cacheSnapshot['changed']++;
-                    }
-                    $cacheSnapshot['present'] += (int) ($value !== null);
-                    $cacheSnapshot['identities'][] = [
-                        $candidate['identity'], $candidate['unchanged'],
-                        $value === null ? null : CareerCurrentAuthorityPackage::hashValue($value),
-                    ];
-                }
-            }
             gc_collect_cycles();
         }
         foreach ($this->memoryUsageBatch($memoryUsageKeys) as $usage) {
@@ -291,15 +277,6 @@ final class CareerCurrentAuthorityParity
         if ($includeProjectionIndex) {
             $result['projection_index'] = $projectionIndex;
             $result['projection_index_sha256'] = CareerCurrentAuthorityPackage::hashValue($projectionIndex);
-        }
-        if ($activeAuthority !== null) {
-            $result['cache_snapshot'] = [
-                'unchanged' => $cacheSnapshot['unchanged'],
-                'changed' => $cacheSnapshot['changed'],
-                'present' => $cacheSnapshot['present'],
-                'identity_count' => count($cacheSnapshot['identities']),
-                'sha256' => CareerCurrentAuthorityPackage::hashValue($cacheSnapshot['identities']),
-            ];
         }
 
         return $result;

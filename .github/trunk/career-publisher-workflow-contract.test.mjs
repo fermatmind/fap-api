@@ -98,7 +98,7 @@ test("the actual production receipt predicate rejects sampled and incomplete inv
     release_sha: values.sha, active_sha: values.active,
     package: { digest: values.package, projection_digest: values.projection, compiler_digest: values.compiler, codec_digest: values.codec },
     validation_scope: { canonical_slugs: Array.from({ length: 1046 }, (_, i) => `role-${i}`), slug_count: 1046, locales: ["en", "zh-CN"], locale_page_count: 2092 },
-    full_scan: { counts: Object.fromEntries(["locale_pages", "encoded", "decoded"].map(key => [key, 2092])) },
+    full_scan: { delivery_mode: "file_authoritative", counts: {locale_pages: 2092, verified_files: 2092} },
     redis: { mode: "readonly" }, write_counts: { database_write_count: 0, cache_write_count: 0 }, receipt_digest: "a".repeat(64),
   };
   const accepted = value => spawnSync("jq", [...args, predicate], { input: JSON.stringify(value), encoding: "utf8" }).status === 0;
@@ -106,8 +106,8 @@ test("the actual production receipt predicate rejects sampled and incomplete inv
   for (const mutate of [
     r => { r.validation_scope.canonical_slugs = ["accountants-and-auditors"]; r.validation_scope.locale_page_count = 2; },
     r => { r.validation_scope.canonical_slugs[1045] = r.validation_scope.canonical_slugs[0]; },
-    r => { r.full_scan.counts.encoded = 2091; },
-    r => { r.full_scan.counts.decoded = 2091; },
+    r => { r.full_scan.counts.verified_files = 2091; },
+    r => { r.full_scan.delivery_mode = "cache_only"; },
     r => { r.write_counts.cache_write_count = 1; },
   ]) { const invalid = structuredClone(receipt); mutate(invalid); assert.equal(accepted(invalid), false); }
 });

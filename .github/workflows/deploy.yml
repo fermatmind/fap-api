@@ -2300,13 +2300,8 @@ jobs:
               and .validation_scope.locales == ["en", "zh-CN"]
               and .validation_scope.locale_page_count == 2092
               and .full_scan.counts.locale_pages == 2092
-              and .full_scan.counts.encoded == 2092
-              and .full_scan.counts.decoded == 2092
-              and (if "${{ needs.policy.outputs.career_package }}" == "true" then
-                .full_scan.cache_snapshot.identity_count == 2092
-                and .full_scan.cache_snapshot.unchanged + .full_scan.cache_snapshot.changed == 2092
-                and (.full_scan.cache_snapshot.sha256 | test("^[a-f0-9]{64}$"))
-                else true end)
+              and .full_scan.counts.verified_files == 2092
+              and .full_scan.delivery_mode == "file_authoritative"
               and .redis.mode == "readonly"
               and ([.write_counts[]] | all(. == 0))
               and (.receipt_digest | test("^[0-9a-f]{64}$"))
@@ -2465,10 +2460,13 @@ jobs:
               and .package.file_count == 2092
               and .authority.target_count == 1046
               and .authority.unique_slug_count == 1046
-              and .authority.component_28_count == 1046
+              and .authority.verified_identity_count == 1046
               and .manual_hold_verified == true
-              and (.full_scan == false or .public_readback.verified_slug_count == 1046)
-              and (.full_scan == false or .public_readback.verified_locale_page_count == 2092)
+              and .file_readback.delivery_mode == "file_authoritative"
+              and .file_readback.file_hash_match_count == 2092
+              and .write_counts.cache_candidate_write_count == 0
+              and (.full_scan == false or .file_readback.verified_slug_count == 1046)
+              and (.full_scan == false or .file_readback.verified_locale_page_count == 2092)
               and .write_counts.occupation_write_count == 0
               and .write_counts.generation_write_count == 0
               and .write_counts.discoverability_write_count == 0

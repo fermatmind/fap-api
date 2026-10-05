@@ -26,9 +26,18 @@ final class CareerFilePageReader
             return null;
         }
         $entry = $this->pages->fileEntry($slug, $locale);
+        $path = $this->content->authority()['root'].'/'.$entry['path'];
+        if (! is_file($path) || is_link($path) || filesize($path) !== $entry['bytes']
+            || ! hash_equals($entry['sha256'], hash_file('sha256', $path))) {
+            throw new \App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
+        }
         $sourceHash = (string) $entry['source_content_sha256'];
         $key = self::cacheKeyFromIdentity($slug, $locale, $sourceHash);
-        $cached = PublicProjectionCache::get($key);
+        try {
+            $cached = PublicProjectionCache::get($key);
+        } catch (\Throwable) {
+            $cached = null;
+        }
         if ($this->validCachedPage($cached, $slug, $locale, $sourceHash)) {
             $page = $cached;
         } else {
@@ -38,7 +47,12 @@ final class CareerFilePageReader
                 // The cache key is content-addressed by source_content_sha256;
                 // a new body produces a new key, so the old immutable value
                 // does not need a time-based expiry.
-                PublicProjectionCache::forever($key, $page);
+                try {
+                    PublicProjectionCache::forever($key, $page);
+                } catch (\Throwable) {
+                    // A full/unwritable derived store cannot suppress validated file copy.
+                    // Publication/identity and file validation above still fail closed.
+                }
             }
         }
         $occupation = Occupation::query()->with(['aliases', 'crosswalks'])->where('canonical_slug', $slug)->first();

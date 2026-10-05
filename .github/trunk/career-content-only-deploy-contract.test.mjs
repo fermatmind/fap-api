@@ -78,10 +78,10 @@ test('remote extraction runs the same executable tar validator against generated
   });
 });
 
-test('publisher batches full readback and fails closed on out-of-set drift', () => {
-  assert.match(publisher, /array_chunk\(\$identities, 64\)/);
-  assert.match(publisher, /PublicProjectionCache::many\(array_column\(\$candidates, 'key'\)\)/);
-  assert.match(publisher, /CURRENT_UNCHANGED_FILE_PAGE_DRIFT/);
+test('publisher verifies installed files and leaves optional caches untouched', () => {
+  assert.match(publisher, /hash_file\('sha256', \$path\)/);
+  assert.match(publisher, /CURRENT_FILE_AUTHORITY_READBACK_FAILED/);
+  assert.doesNotMatch(publisher, /PublicProjectionCache::|candidateChunk/);
   assert.match(publisher, /changed_locale_page_set_sha256/);
 });
 

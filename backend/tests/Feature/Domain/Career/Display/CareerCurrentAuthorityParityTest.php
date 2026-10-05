@@ -55,6 +55,23 @@ final class CareerCurrentAuthorityParityTest extends TestCase
         self::assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $receipt['receipt_digest']);
     }
 
+    public function test_production_file_scan_validates_bodies_without_display_or_cache_compilation(): void
+    {
+        $loader = app(\App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader::class);
+        $authority = $loader->indexForPublish(base_path());
+        $authority['slugs'] = ['accountants-and-auditors', 'actors'];
+        $pages = app(\App\Domain\Career\Display\CareerPageProjector::class);
+        $parity = new CareerCurrentAuthorityParity($loader, app(\App\Domain\Career\Display\CareerJobDetailCanonicalCacheReader::class), $pages);
+        $scan = $parity->scanFiles($authority);
+        self::assertSame('file_authoritative', $scan['delivery_mode']);
+        self::assertSame(4, $scan['counts']['verified_files']);
+        self::assertSame(0, $scan['cache_write_count']);
+        $authority['entries']['actors']['zh-CN']['sha256'] = str_repeat('0', 64);
+        $this->expectException(\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure::class);
+        $this->expectExceptionMessage('CURRENT_CONTENT_V3_FILE_HASH_MISMATCH');
+        $parity->scanFiles($authority);
+    }
+
     public function test_it_is_deterministic_for_the_same_sha_package_compiler_and_codec(): void
     {
         $parity = app(CareerCurrentAuthorityParity::class);
