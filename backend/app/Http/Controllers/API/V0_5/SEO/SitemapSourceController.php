@@ -200,7 +200,7 @@ class SitemapSourceController extends Controller
         $path = (string) ($parts['path'] ?? '/');
         $query = isset($parts['query']) && $parts['query'] !== '' ? '?'.$parts['query'] : '';
 
-        return 'https://fermatmind.com'.$path.$query;
+        return $this->fallbackBaseUrl().$path.$query;
     }
 
     private function isCareerJobDetailUrl(string $loc): bool

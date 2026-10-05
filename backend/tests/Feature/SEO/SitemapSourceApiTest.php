@@ -5,6 +5,7 @@ namespace Tests\Feature\SEO;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
@@ -285,6 +286,7 @@ class SitemapSourceApiTest extends TestCase
     public function test_sitemap_source_exports_only_canonical_public_mbti_base_routes(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
+        config([PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG => true]);
 
         foreach (['INTJ', 'ENFP'] as $typeCode) {
             foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
