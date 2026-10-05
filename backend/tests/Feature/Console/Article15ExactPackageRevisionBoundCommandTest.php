@@ -25,6 +25,45 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     private const MANIFEST_SHA = '6fa5fb22df81062fed26ebf7743cd24c0e42f67c28d5b5ef2d61f7ec7fd3e13c';
 
+    private ?string $fixtureRoot = null;
+
+    private string $fixtureManifestSha;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Exercise the frozen content contracts with the implementation actually
+        // running in this test, without rewriting the production authority.
+        $root = $this->isolatedPackageRepository('current-implementation');
+        $this->fixtureRoot = $root;
+        $manifest = $this->manifest();
+        foreach ($manifest['bindings']['projection_contract']['implementation_file_sha256'] as $path => $sha) {
+            $manifest['bindings']['projection_contract']['implementation_file_sha256'][$path] = hash_file('sha256', $root.'/'.$path);
+        }
+        unset($manifest['execution_manifest_sha256']);
+        $this->fixtureManifestSha = $this->canonicalHashForTest($manifest);
+        $manifest['execution_manifest_sha256'] = $this->fixtureManifestSha;
+        File::put($root.'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH,
+            json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n");
+        config(['article15_test.repository_root' => $root]);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($root));
+    }
+
+    public function test_fixture_binds_running_implementation_and_preserves_frozen_authority(): void
+    {
+        $sourceRoot = dirname(base_path());
+        $frozen = json_decode(file_get_contents($sourceRoot.'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame(self::MANIFEST_SHA, $frozen['execution_manifest_sha256']);
+        unset($frozen['execution_manifest_sha256']);
+        self::assertSame(self::MANIFEST_SHA, $this->canonicalHashForTest($frozen));
+
+        foreach ($this->manifest()['bindings']['projection_contract']['implementation_file_sha256'] as $path => $sha) {
+            self::assertSame(hash_file('sha256', $sourceRoot.'/'.$path), $sha);
+            self::assertSame(hash_file('sha256', $sourceRoot.'/'.$path), hash_file('sha256', $this->fixtureRoot.'/'.$path));
+        }
+    }
+
     public function test_seeded_current_state_matches_public_article_projection(): void
     {
         $this->seedBatch('ALL');
@@ -256,8 +295,12 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             config(['article15_test.repository_root' => $root]);
 
             $this->assertSame(1, Artisan::call('articles:article15-exact-package', $this->snapshotOptions()), $mutation);
+            if ($mutation === 'projection_contract') {
+                $payload = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+                self::assertSame('projection_contract_file_sha256_mismatch', $payload['error']);
+            }
             $this->assertSame(0, ArticleEditorialPackageImport::query()->count(), $mutation);
-            config(['article15_test.repository_root' => null]);
+            config(['article15_test.repository_root' => $this->fixtureRoot]);
             File::deleteDirectory($root);
         }
     }
@@ -277,7 +320,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
             $this->assertStringContainsString('package_dual_body_lock_mismatch', (string) $payload['error'], $mutation);
             $this->assertSame(0, ArticleEditorialPackageImport::query()->count(), $mutation);
 
-            config(['article15_test.repository_root' => null]);
+            config(['article15_test.repository_root' => $this->fixtureRoot]);
             File::deleteDirectory($root);
         }
     }
@@ -414,6 +457,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     {
         Event::fake([PublicAuthorityChanged::class]);
         $this->seedBatch('B');
+        // Count the operation's notifications, independently of fixture creation.
+        Event::fake([PublicAuthorityChanged::class]);
         $exitCode = Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', 'B', true));
         $this->assertSame(0, $exitCode, Artisan::output());
 
@@ -439,6 +484,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('publish', 'B', true)));
         $this->assertSame($revisionCount, ArticleTranslationRevision::query()->count());
         $this->assertStringContainsString('already_applied', Artisan::output());
+        Event::assertDispatchedTimes(PublicAuthorityChanged::class, 5);
     }
 
     public function test_keep_publication_uses_pinned_revision_despite_stale_article_and_ancestor_bodies(): void
@@ -500,6 +546,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     {
         Event::fake([PublicAuthorityChanged::class]);
         $this->seedBatch('C');
+        Event::fake([PublicAuthorityChanged::class]);
         $this->assertSame(0, Artisan::call('articles:article15-exact-package', $this->commandOptions('draft-import', 'C', true)));
         $before = app(Article15ExactPackageRevisionBoundAdapter::class)->currentLockHashes('C');
         $publicBefore = $this->publicFingerprint('C');
@@ -566,7 +613,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         return [
             '--phase' => $phase,
             '--batch' => $batch,
-            '--execution-manifest-sha256' => self::MANIFEST_SHA,
+            '--execution-manifest-sha256' => $this->fixtureManifestSha,
             '--expected-state-sha256' => $hashes['state_sha256'],
             '--expected-revision-set-sha256' => $hashes['revision_set_sha256'],
             '--json' => true,
@@ -580,7 +627,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         return [
             '--phase' => 'snapshot',
             '--batch' => 'ALL',
-            '--execution-manifest-sha256' => self::MANIFEST_SHA,
+            '--execution-manifest-sha256' => $this->fixtureManifestSha,
             '--dry-run' => true,
             '--json' => true,
         ];
@@ -748,7 +795,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     /** @return array<string,mixed> */
     private function manifest(): array
     {
-        return json_decode(file_get_contents(dirname(base_path()).'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH), true, 512, JSON_THROW_ON_ERROR);
+        return json_decode(file_get_contents(($this->fixtureRoot ?? dirname(base_path())).'/'.Article15ExactPackageRevisionBoundAdapter::MANIFEST_PATH), true, 512, JSON_THROW_ON_ERROR);
     }
 
     private function publicFingerprint(string $batch): string
@@ -795,7 +842,7 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
 
     private function isolatedPackageRepository(string $mutation): string
     {
-        $sourceRoot = dirname(base_path());
+        $sourceRoot = $this->fixtureRoot ?? dirname(base_path());
         $root = storage_path('framework/testing/article15-'.$mutation.'-'.bin2hex(random_bytes(4)));
         $manifest = $this->manifest();
         $paths = [

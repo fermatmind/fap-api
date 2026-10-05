@@ -284,7 +284,11 @@ final class ArticlePublishService
         if ($invalidateDiscoverabilityCaches) {
             $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
         }
-        $this->dispatchUrlTruthChange($article, 'authority_revision');
+        // The locked Article15 lane's prepared SEO meta already notifies after
+        // commit; ordinary and SEO13 promotions retain their existing dispatch.
+        if ($source !== self::ARTICLE15_ATOMIC_PROMOTION_SOURCE || $recordReleaseAudit || $invalidateDiscoverabilityCaches) {
+            $this->dispatchUrlTruthChange($article, 'authority_revision');
+        }
 
         return $article;
     }
@@ -509,10 +513,9 @@ final class ArticlePublishService
         foreach ($targets as $target) {
             $article = Article::query()->withoutGlobalScopes()->findOrFail((int) $target['article_id']);
             ContentReleaseAudit::log('article', $article, self::ARTICLE15_ATOMIC_PROMOTION_SOURCE, false);
-            if (($target['body_write'] ?? true) !== true) {
-                $this->dispatchUrlTruthChange($article, 'authority_revision');
-            }
         }
+        // Each prepared SEO meta emits its authority notification after commit;
+        // Targets must not publish a second notification here.
         $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
 
         return $readback;

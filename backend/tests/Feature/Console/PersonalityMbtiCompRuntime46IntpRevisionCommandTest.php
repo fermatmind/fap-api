@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Domain\Personality\Current\PersonalityLegacyPublicAuthorityArchive;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
@@ -28,6 +29,14 @@ final class PersonalityMbtiCompRuntime46IntpRevisionCommandTest extends TestCase
     private const PROMOTION_AUTHORIZATION_SHA = 'c9b3c3fa7f68a73e946f6bbc0a3f02ea6a95f3cbf5e9d3141778dd7d6408e03d';
 
     private const POST_SECTIONS_SHA = '6f7148e9787127ce128e19f0a37832be78119c7f1d9dcdf3a5f4d83aa8295ab9';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // This archived command's publication assertions use its legacy DB fixture.
+        config()->set(PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG, true);
+    }
 
     public function test_command_is_registered_and_exact_dry_run_is_read_only(): void
     {
@@ -195,6 +204,13 @@ final class PersonalityMbtiCompRuntime46IntpRevisionCommandTest extends TestCase
         self::assertSame('index,follow', $response->json('seo_meta.robots'));
         self::assertSame('https://fermatmind.com/zh/personality/intp-a-vs-intp-t', $response->json('seo_meta.canonical_url'));
         self::assertSame(self::POST_SECTIONS_SHA, hash('sha256', (string) json_encode($this->canonicalize((array) $response->json('comparison_public_projection_v1.sections')), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
+
+        config()->set(PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG, false);
+        $current = $this->getJson('/api/v0.5/personality/comparisons/intp-a-vs-intp-t?locale=zh-CN');
+        $current->assertOk()->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+        $installed = json_decode(file_get_contents(base_path('content_assets/personality_public/current/pages/mbti/comparison-at/intp-a-vs-intp-t/zh-CN.json')), true, 512, JSON_THROW_ON_ERROR);
+        self::assertJsonValueSame($installed['payload']['comparison_public_projection_v1']['sections'], $current->json('comparison_public_projection_v1.sections'));
+        config()->set(PersonalityLegacyPublicAuthorityArchive::TEST_LEGACY_DB_FIXTURE_CONFIG, true);
 
         self::assertSame(0, Artisan::call('personality:mbti-comp-runtime46-intp-promote', $writeOptions));
         self::assertSame('skipped_existing', $this->summary()['action']);
