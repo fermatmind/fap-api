@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Domain\Career\Compilation;
 
-use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use Tests\TestCase;
 
 final class CareerC2EvidenceCohortContractTest extends TestCase
@@ -60,12 +60,13 @@ final class CareerC2EvidenceCohortContractTest extends TestCase
             self::assertSame($cohort['required_claim_keys'], $claimsBySlug[$slug]);
         }
 
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
-        self::assertCount(1046, $package['pages']);
+        $loader = app(CareerCurrentAuthorityPackageLoader::class);
+        $package = $loader->indexForPublish(base_path());
+        self::assertCount(1046, $package['entries']);
         self::assertNotContains('software-developers', $package['slugs']);
         foreach ($cohort['evidence_bound_slugs'] as $slug) {
             foreach (['en', 'zh-CN'] as $locale) {
-                $page = $package['pages'][$slug][$locale];
+                $page = $loader->pageFromPublishIndex($package, $slug, $locale);
                 self::assertContains($page['content_state'], ['enhanced', 'legacy']);
                 if ($page['content_state'] === 'legacy') {
                     // Archived evidence is not Current publication authority.

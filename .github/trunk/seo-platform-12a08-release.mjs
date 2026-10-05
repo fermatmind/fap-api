@@ -112,8 +112,17 @@ export function parseLegacyNightlyFailures(log) {
     .map(match => { const path = pestClassPath(match[1]); return {failed_test:path, focused_test:focusedClass(path, match[0])}; });
   if ([...log.matchAll(/Fatal error:/g)].length !== memoryFailures.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
   if (!log.includes('FAILED')) {
-    if (!memoryFailures.length || /\bFAIL\s{2,}Tests\\/.test(log)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    return memoryFailures;
+    if (!memoryFailures.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    // OOM may abort Pest before its final FAILED summaries. Preserve every
+    // fully named failed class from progress output and revalidate it too.
+    const failedLines = log.split('\n').filter(line => /\bFAIL\s{2,}Tests\\/.test(line));
+    const namedFailures = failedLines.map(line => {
+      const match = /\bFAIL\s{2,}(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)\s*$/.exec(line);
+      if (!match) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+      const path = pestClassPath(match[1]);
+      return {failed_test:path, focused_test:focusedClass(path, log)};
+    });
+    return [...new Map([...namedFailures, ...memoryFailures].map(item => [item.failed_test, item])).values()];
   }
   const declared = new Map();
   for (const match of log.matchAll(/\bFAIL\s{2,}(Tests\\(?:Feature|Unit)\\[A-Za-z0-9_\\]+Test)\s*$/gm)) {

@@ -410,3 +410,13 @@ test('incomplete Nightly XML retains digest-bound OOM evidence and requires the 
   assert.throws(()=>readNightlyArtifactEvidence(...zip(['nightly-full-phpunit.xml.invalid','nightly-full-phpunit.log'])),/UNKNOWN/);
  } finally {rmSync(root,{recursive:true,force:true});}
 });
+
+
+test('OOM before the Pest summary still revalidates every fully named prior failure', async () => {
+ const {parseLegacyNightlyFailures}=await import('./seo-platform-12a08-release.mjs');
+ const log='FAIL  Tests\\Feature\\Career\\PublicProjectionMigrationTest\n'
+  +'FAIL  Tests\\Feature\\Console\\Article15ExactPackageRevisionBoundCommandTest\n'
+  +'Fatal error: Premature end of PHP process when running Tests\\Feature\\Domain\\Career\\Compilation\\CareerC2EvidenceCohortContractTest::test_cohort.\nAllowed memory size of 2147483648 bytes exhausted';
+ assert.deepEqual(parseLegacyNightlyFailures(log).map(item=>item.focused_test), ['PublicProjectionMigrationTest','Article15ExactPackageRevisionBoundCommandTest','CareerC2EvidenceCohortContractTest']);
+ assert.throws(()=>parseLegacyNightlyFailures(log+'\nFAIL  Tests\\Feature\\Truncated…'),/UNKNOWN/);
+});
