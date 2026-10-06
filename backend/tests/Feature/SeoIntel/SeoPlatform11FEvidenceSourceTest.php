@@ -86,6 +86,60 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertFalse($verifier->refreshable('commercial_funnel_cro', 'CRO_MAPPING_FAILED'));
     }
 
+    public function test_reporting_lag_stale_source_stays_held_and_enters_existing_refresh_plan(): void
+    {
+        config(['seo_intel.gsc_reporting_timezone' => 'UTC']);
+        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(3)->toDateString())->delete();
+
+        $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+        $diagnosis = $loader->diagnoseForScope('mission:reporting-lag', 'search_measurement', 'tests', 'en', 'production_runtime');
+        $this->assertSame('GSC_STALE', $diagnosis->diagnostic()['hold_reason']);
+        $this->assertFalse($diagnosis->ready());
+        $this->assertSame('held', $diagnosis->bundles()[0]['source_capability_state']);
+        $this->assertSame('stale', $diagnosis->bundles()[0]['freshness_state']);
+        $this->assertSame('pass', $diagnosis->bundles()[0]['payload']['quality_gate_status']);
+
+        $verifier = app(MeasurementSnapshotVerifier::class);
+        $snapshot = $verifier->verify(str_repeat('a', 40), 'tests', 'production');
+        $this->assertSame('HOLD', $snapshot['status']);
+        $this->assertSame('GSC_STALE', $snapshot['search_measurement']['hold_reason']);
+        $this->assertTrue($snapshot['search_measurement']['refresh_eligible']);
+        $command = app(\App\Console\Commands\SeoCompetitiveReleasePrepareCommand::class);
+        $plan = (new \ReflectionMethod($command, 'refreshPlan'))->invoke($command, $snapshot, $verifier, 'production');
+        $this->assertNull($plan['hold_reason']);
+        $this->assertSame('full_refresh', $plan['actions']['gsc']);
+        $this->assertSame('reused', $plan['actions']['cro']);
+    }
+
+    public function test_reporting_lag_stale_rows_do_not_make_a_failed_dashboard_query_refreshable(): void
+    {
+        config([
+            'seo_intel.gsc_reporting_timezone' => 'UTC',
+            'database.connections.measurement_dashboard_failure' => [
+                'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '',
+            ],
+        ]);
+        DB::table('seo_gsc_daily')->where('report_date', now('UTC')->subDays(3)->toDateString())->delete();
+        $this->app->instance(
+            \App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService::class,
+            new \App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService('measurement_dashboard_failure'),
+        );
+
+        try {
+            $verifier = app(MeasurementSnapshotVerifier::class);
+            $snapshot = $verifier->verify(str_repeat('a', 40), 'tests', 'production');
+            $this->assertSame('HOLD', $snapshot['status']);
+            $this->assertSame('GSC_READMODEL_UNHEALTHY', $snapshot['search_measurement']['hold_reason']);
+            $this->assertFalse($snapshot['search_measurement']['refresh_eligible']);
+            $command = app(\App\Console\Commands\SeoCompetitiveReleasePrepareCommand::class);
+            $plan = (new \ReflectionMethod($command, 'refreshPlan'))->invoke($command, $snapshot, $verifier, 'production');
+            $this->assertSame('GSC_READMODEL_UNHEALTHY', $plan['hold_reason']);
+            $this->assertSame('not_run', $plan['actions']['gsc']);
+        } finally {
+            DB::purge('measurement_dashboard_failure');
+        }
+    }
+
     public function test_loader_uses_read_only_current_authority_metadata_when_url_truth_is_empty(): void
     {
         DB::table('seo_urls')->delete();

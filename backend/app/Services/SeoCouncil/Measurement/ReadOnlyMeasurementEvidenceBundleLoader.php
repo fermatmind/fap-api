@@ -193,6 +193,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             : $latestDate;
         $scopeWindowsComplete = $latestDate !== null;
         $readmodelHealthy = true;
+        $reportingLagStale = true;
         $windowMetrics = [];
         $computedReadmodels = [];
         $currentWindowRows = [];
@@ -219,6 +220,12 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             } catch (Throwable) {
                 $computed = [];
             }
+            $reportingLagStale = $reportingLagStale
+                && ($computed['state'] ?? null) === 'stale'
+                && ($computed['data_available'] ?? null) === true
+                && ($computed['failure_code'] ?? null) === null
+                && ($computed['measurement_state'] ?? null) === 'MEASUREMENT_HOLD'
+                && ($computed['measurement_hold_reason'] ?? null) === 'gsc_data_missing_or_beyond_reporting_lag';
             $familyMetrics = collect((array) data_get($computed, 'breakdowns.page_family', []))
                 ->firstWhere('dimension', $pageFamily);
             $computedHealthy = ($computed['measurement_state'] ?? null) === 'production_healthy'
@@ -237,7 +244,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         $windowComplete = $scopeWindowsComplete || $currentSnapshotVerified;
 
         $stale = ! $currentSnapshotVerified
-            && ($latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay()));
+            && ($reportingLagStale || $latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay()));
         $fresh = ! $stale
             && ! $latestDate?->greaterThan(now('UTC')->subDays($lagDays)->startOfDay());
         $qualityReasons = array_values(array_map('strval', (array) ($quality['reasons'] ?? [])));
