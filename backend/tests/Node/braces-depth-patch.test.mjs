@@ -16,7 +16,7 @@ function fixture() {
   const root = mkdtempSync(path.join(os.tmpdir(), 'braces-depth-patch-'));
   temporary.push(root);
   const location = path.join(root, 'node_modules/braces');
-  cpSync(path.join(here, '../Fixtures/braces-3.0.3'), location, { recursive: true });
+  cpSync(path.join(here, 'fixtures/braces-3.0.3'), location, { recursive: true });
   // Reconstruct upstream's second EOF newline without storing a whitespace violation.
   const stringify = path.join(location, 'lib/stringify.js');
   writeFileSync(stringify, readFileSync(stringify, 'utf8') + '\n');
