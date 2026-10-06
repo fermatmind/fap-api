@@ -604,6 +604,7 @@ test("Chinese MBTI trait publication follows both assets and its publisher", () 
 
 test("M3 evidence lifecycle reuses fixed-source ingestion without full Council closeout", () => {
   for (const runtimePath of [
+    "backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php",
     "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php",
     "backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php",
   ]) {

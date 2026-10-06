@@ -62,3 +62,5 @@ M3 生命周期代码发布复用现有 classifier → CI 11G 聚焦验证 → p
 M3 必需的 staging 依赖准备复用现有 inactive measurement candidate、固定 90 天/web 的只读 GSC 同步和 org 0 CRO readmodel 刷新。这些步骤及其严格 readiness/产物检查随 competitive_required 执行；full Council closeout 仍只由原 runtime_closeout 条件执行。缺省的同步配置使用该路径原有的 90/web 固定契约，显式错误配置仍拒绝；不修改云权限、采集器、来源 registry 或普通运行时写开关。
 
 固定来源 terms/license 自动复验与正文抓取遵守同一份已审核 source policy 的 `max_content_bytes`（仍受现有 1 MiB 全局响应上限限制）；robots 保持独立的 64 KiB 上限。移除复验路径独有的硬编码 256 KiB，避免在已批准的 512 KiB 来源预算内错误 HOLD。未改 source policy/hash/TTL、固定 URL、TLS/redirect、robots 和语义审查；超出来源预算或全局上限仍 HOLD，原响应不保存。
+
+共享自然运行时观测在固定冻结时间前读取一次，M1/M2/M3 使用该内存快照。慢 authority 读取期间的新自然回执不混入更早的冻结请求；缺失、损坏、实际未来完成时间及失败窗口仍失败关闭，不补跑或改写历史。生产证据 reader 的变更也沿用现有固定来源采集，以生成绑定新生产 SHA 的真实回执。

@@ -74,6 +74,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         if (! in_array($missionId, Platform12DailyMissionSet::IDS, true)) {
             throw new \InvalidArgumentException('DAILY_MISSION_UNKNOWN');
         }
+        // Read this shared natural observation before fixing the frozen time.
+        // A slow authority read must not pull a later completed runtime receipt
+        // into an earlier envelope. Keep failures and integrity checks intact.
+        try {
+            $runtimeWindow = $this->runtime->readWindow();
+        } catch (Throwable) {
+            $runtimeWindow = [];
+        }
         $at = CarbonImmutable::now('UTC');
         $input = ['evaluated_at' => $at->format('Y-m-d\TH:i:s\Z')];
         $sources = [];
@@ -98,7 +106,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         if ($missionId === Platform12DailyMissionSet::IDS[0]) {
             $gsc = $read('gsc_scheduled_receipt', fn (): array => $this->gsc($at));
             $input['gsc'] = $gsc === null ? null : array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true]);
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeWindow));
             $api = $read('public_api_health', fn (): array => $this->publicApi($at));
             $input['runtime'] = [
                 'core_runtime_state' => ($probe['state'] ?? null) === 'complete' ? 'AVAILABLE' : 'UNAVAILABLE',
@@ -116,14 +124,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             $input['url_truth'] = $this->urlTruthEvidence($truth);
             $input['clustering'] = $read('issue_cluster', fn (): array => $this->clusters());
             $input['d1_observation'] = $read('d1_observation', fn (): array => $this->d1($at));
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeWindow));
             $input['runtime_observation'] = ($probe['state'] ?? null) === 'complete'
                 ? ['availability' => 'AVAILABLE', 'observation_count' => $probe['slot_count']]
                 : ['availability' => 'UNAVAILABLE'];
             $input['sitemap_observation'] = $read('sitemap_observation', fn (): array => $this->sitemap());
         } else {
-            $negative = $read('private_route_negative_set', function () use ($at): array {
-                $window = $this->runtimeWindow($at);
+            $negative = $read('private_route_negative_set', function () use ($at, $runtimeWindow): array {
+                $window = $this->runtimeWindow($at, $runtimeWindow);
                 $negative = data_get($window, 'receipts.0.production_calibration.private_negative_set');
                 if (($window['fresh'] ?? false) !== true || ! is_array($negative)
                     || ($negative['checked'] ?? false) !== true) {
@@ -238,9 +246,9 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'dedupe_unique_count' => (clone $query)->distinct()->count('issue_uid')];
     }
 
-    private function runtimeWindow(CarbonImmutable $at): array
+    private function runtimeWindow(CarbonImmutable $at, ?array $window = null): array
     {
-        $window = $this->runtime->readWindow($at->toAtomString());
+        $window ??= $this->runtime->readWindow($at->toAtomString());
         if (($window['receipts'] ?? []) === []) {
             throw new \RuntimeException('RUNTIME_OBSERVATION_MISSING');
         }

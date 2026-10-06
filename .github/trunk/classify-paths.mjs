@@ -169,7 +169,8 @@ export function classifyPaths(inputPaths) {
   // M3 lifecycle releases need the existing fixed-source production collector.
   // Unrelated Platform 12 releases keep their deferred 11G behavior.
   const m3EvidenceLifecycle = paths.some(path =>
-    path === "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"
+    path === "backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php"
+    || path === "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"
     || path === "backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php");
   const seoCompetitiveEvidence = m3EvidenceLifecycle
     || (SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE" && seoCompetitiveEvidenceAffected);

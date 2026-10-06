@@ -53,6 +53,81 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         parent::tearDown();
     }
 
+    #[DataProvider('runtimeSnapshotMissions')]
+    public function test_runtime_observation_is_loaded_before_the_frozen_capture_time(string $mission, string $source): void
+    {
+        Schema::connection('seo_intel')->create('seo_runtime_probe_receipts', function (Blueprint $table): void {
+            $table->string('trigger_mode');
+            $table->text('scheduled_for');
+            $table->text('receipt_json');
+        });
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        CarbonImmutable::setTestNow($at);
+        foreach ([0, 10, 20] as $minutes) {
+            $receipt = [
+                'schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+                'trigger_mode' => 'scheduled', 'status' => 'success',
+                'scheduled_for' => $at->subMinutes($minutes)->startOfMinute()->toAtomString(),
+                'completed_at' => $at->subMinutes($minutes)->addSeconds(5)->toAtomString(),
+                'production_calibration' => ['private_negative_set' => ['checked' => true,
+                    'http_probe_count' => 22, 'accepted_http_probe_count' => 22,
+                    'exposure_count' => 0, 'unobserved_count' => 0]],
+            ];
+            $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+            DB::connection('seo_intel')->table('seo_runtime_probe_receipts')->insert([
+                'trigger_mode' => 'scheduled', 'scheduled_for' => $receipt['scheduled_for'],
+                'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            ]);
+        }
+        // A natural receipt completes while the query is in progress.
+        DB::listen(function ($query) use ($at): void {
+            if (str_contains($query->sql, 'seo_runtime_probe_receipts') && str_starts_with($query->sql, 'select')) {
+                CarbonImmutable::setTestNow($at->addSeconds(10));
+            }
+        });
+        $capture = app(Platform12ProductionEvidenceReader::class)->capture($mission);
+        $this->assertSame($at->addSeconds(10)->format('Y-m-d\TH:i:s\Z'), $capture['captured_at']);
+        $this->assertNotContains($source, $capture['source_gaps']);
+        $this->assertContains($source, array_column($capture['sources'], 'id'));
+        Http::assertNothingSent();
+    }
+
+    public static function runtimeSnapshotMissions(): array
+    {
+        return [
+            'M1' => [Platform12DailyMissionSet::IDS[0], 'scheduled_runtime_probe'],
+            'M2' => [Platform12DailyMissionSet::IDS[1], 'scheduled_runtime_probe'],
+            'M3' => [Platform12DailyMissionSet::IDS[2], 'private_route_negative_set'],
+        ];
+    }
+
+    public function test_runtime_snapshot_still_rejects_corruption_future_completion_and_missing_receipts(): void
+    {
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        $receipt = ['schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+            'trigger_mode' => 'scheduled', 'completed_at' => $at->toAtomString(), 'status' => 'MEASUREMENT_HOLD'];
+        $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+        $window = ['state' => 'MEASUREMENT_HOLD', 'receipts' => [$receipt]];
+        $this->assertSame('MEASUREMENT_HOLD', $this->read('runtimeWindow', $at, $window)['state']);
+        foreach (['corrupt', 'future', 'missing'] as $case) {
+            $invalid = $window;
+            if ($case === 'corrupt') {
+                $invalid['receipts'][0]['receipt_hash'] = str_repeat('0', 64);
+            } elseif ($case === 'future') {
+                $invalid['receipts'][0]['completed_at'] = $at->addSecond()->toAtomString();
+                $invalid['receipts'][0]['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($invalid['receipts'][0]);
+            } else {
+                $invalid['receipts'] = [];
+            }
+            try {
+                $this->read('runtimeWindow', $at, $invalid);
+                $this->fail('An invalid runtime snapshot must remain HOLD: '.$case);
+            } catch (\RuntimeException $error) {
+                $this->assertSame($case === 'missing' ? 'RUNTIME_OBSERVATION_MISSING' : 'RUNTIME_RECEIPT_INVALID', $error->getMessage());
+            }
+        }
+    }
+
     public function test_gsc_reads_latest_scheduled_attempt_including_failure_and_valid_zero(): void
     {
         Schema::connection('seo_intel')->create('seo_gsc_sync_runs', function (Blueprint $table): void {
