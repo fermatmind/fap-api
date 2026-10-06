@@ -1100,6 +1100,7 @@ class ArticleController extends Controller
             ->where('org_id', $orgId)
             ->where('slug', $slug)
             ->where('locale', $locale)
+            ->whereNull('articles.deleted_at')
             ->publiclyReadable()
             ->with($this->articleRelations())
             ->first();

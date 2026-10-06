@@ -144,6 +144,33 @@ final class ArticleBlogPublicApiTest extends TestCase
         }
     }
 
+    public function test_actual_soft_deletes_with_active_or_null_lifecycle_are_not_public_detail_or_seo(): void
+    {
+        Schema::table('articles', static function (\Illuminate\Database\Schema\Blueprint $table): void {
+            $table->string('lifecycle_state', 32)->nullable()->change();
+        });
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach ([Article::LIFECYCLE_ACTIVE, null] as $lifecycle) {
+                $suffix = $locale.'-'.($lifecycle ?? 'null');
+                $public = $this->createArticle(['slug' => 'readable-'.$suffix, 'locale' => $locale, 'lifecycle_state' => $lifecycle]);
+                $deleted = $this->createArticle(['slug' => 'deleted-detail-'.$suffix, 'locale' => $locale, 'lifecycle_state' => $lifecycle]);
+                $this->assertTrue($deleted->delete());
+                $readback = Article::withoutGlobalScopes()->findOrFail($deleted->id);
+                $this->assertTrue($readback->trashed());
+                $this->assertNotNull($readback->deleted_at);
+                $this->assertSame($lifecycle, $readback->lifecycle_state);
+                $this->assertSame('published', $readback->status);
+                $this->assertTrue($readback->is_public);
+                $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $readback->publishedRevision->revision_status);
+                $this->getJson('/api/v0.5/articles/'.$public->slug.'?locale='.$locale)->assertOk()
+                    ->assertJsonPath('article.id', $public->id);
+                $this->getJson('/api/v0.5/articles/'.$public->slug.'/seo?locale='.$locale)->assertOk();
+                $this->getJson('/api/v0.5/articles/'.$deleted->slug.'?locale='.$locale)->assertNotFound();
+                $this->getJson('/api/v0.5/articles/'.$deleted->slug.'/seo?locale='.$locale)->assertNotFound();
+            }
+        }
+    }
+
     public function test_real_unpublish_path_removes_cached_latest_and_featured_without_stale_fallback(): void
     {
         $category = $this->category();
