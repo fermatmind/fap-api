@@ -112,7 +112,7 @@ final class CareerArticleStructuredDataBuilder
     ): array {
         $rootName = match ($routeKind) {
             'career_guide_public_detail' => 'Career guides',
-            'article_public_detail' => 'Articles',
+            'article_public_detail' => str_contains($rootPath, '/zh/articles') ? '费马博客' : 'FermatMind Blog',
             default => 'Career',
         };
 

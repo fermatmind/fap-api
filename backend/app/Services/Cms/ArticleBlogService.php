@@ -23,7 +23,7 @@ final class ArticleBlogService
     public function read(int $orgId, string $locale, callable $project): array
     {
         $empty = ['schema_version' => 1, 'configuration_state' => 'unconfigured',
-            'title' => null, 'description' => null, 'categories' => [], 'featured_items' => []];
+            'title' => null, 'description' => null, 'is_indexable' => false, 'categories' => [], 'featured_items' => []];
         $surface = LandingSurface::withoutGlobalScopes()->where('org_id', $orgId)
             ->where('surface_key', 'articles_index')->where('locale', $locale)->publishedPublic()
             ->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '<=', now()))
@@ -61,7 +61,7 @@ final class ArticleBlogService
         $featured = $ids === [] ? [] : $this->query->selected($orgId, $locale, $ids)->map($project)->all();
 
         return ['schema_version' => 1, 'configuration_state' => 'published',
-            'title' => $surface->title, 'description' => $surface->description,
+            'title' => $surface->title, 'description' => $surface->description, 'is_indexable' => (bool) $surface->is_indexable,
             'categories' => $categories, 'featured_items' => $featured];
     }
 }

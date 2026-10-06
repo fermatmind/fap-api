@@ -76,5 +76,12 @@ final class CareerArticleStructuredDataBuilderTest extends TestCase
             $detailUrl,
             data_get($payload, 'fragments.breadcrumb_list.itemListElement.1.item')
         );
+        $this->assertSame('FermatMind Blog', data_get($payload, 'fragments.breadcrumb_list.itemListElement.0.name'));
+        $zh = app(CareerArticleStructuredDataBuilder::class)->build('article_public_detail', [
+            'headline' => '职业探索',
+            'url' => 'https://fermatmind.com/zh/articles/career-exploration',
+            'breadcrumb_root_url' => 'https://fermatmind.com/zh/articles',
+        ]);
+        $this->assertSame('费马博客', data_get($zh, 'fragments.breadcrumb_list.itemListElement.0.name'));
     }
 }

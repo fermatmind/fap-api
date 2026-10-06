@@ -147,6 +147,19 @@ final class ArticleBlogPublicApiTest extends TestCase
         $this->getJson('/api/v0.5/articles?locale=en&category=../private')->assertStatus(422);
     }
 
+    public function test_blog_indexability_comes_from_the_actual_cms_surface_even_with_a_cached_list(): void
+    {
+        $surface = $this->surface('en', []);
+        $surface->update(['is_indexable' => false]);
+        $url = '/api/v0.5/articles?locale=en&include_blog=1';
+        $this->getJson($url)->assertJsonPath('blog_v1.is_indexable', false)
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'indexable');
+        $surface->update(['is_indexable' => true]);
+        $this->getJson($url)->assertHeader('X-FM-Article-List-Cache', 'hit')->assertJsonPath('blog_v1.is_indexable', true);
+        $surface->update(['is_public' => false]);
+        $this->getJson($url)->assertJsonPath('blog_v1.configuration_state', 'unconfigured')->assertJsonPath('blog_v1.is_indexable', false);
+    }
+
     private function category(): ArticleCategory
     {
         return ArticleCategory::withoutGlobalScopes()->create(['org_id' => 0, 'slug' => 'personality', 'name' => 'Shared category', 'is_active' => true]);

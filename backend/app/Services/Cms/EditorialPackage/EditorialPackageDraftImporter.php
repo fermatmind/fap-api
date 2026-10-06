@@ -661,8 +661,23 @@ final class EditorialPackageDraftImporter
     }
 
     /**
-     * @return list<array<string,mixed>>
+     * @return array{status:string,matches:list<array<string,mixed>>}
      */
+    public function inspectCandidateClaims(array $fields): array
+    {
+        $matches = $this->claimMatches([
+            'title' => $fields['title'], 'seo_title' => $fields['seo_title'],
+            'meta_description' => $fields['seo_description'], 'excerpt' => $fields['excerpt'],
+            'body_markdown' => $fields['content_md'],
+        ]);
+        $bounded = $matches !== [] && collect($matches)->every(
+            static fn (array $match): bool => ($match['boundary_context'] ?? null) === true
+        );
+
+        return ['status' => $matches === [] ? 'passed' : ($bounded ? 'warning' : 'blocked'), 'matches' => $matches];
+    }
+
+    /** @return list<array<string,mixed>> */
     private function claimMatches(array $package): array
     {
         $fields = [

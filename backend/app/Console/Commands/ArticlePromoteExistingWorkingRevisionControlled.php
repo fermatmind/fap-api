@@ -60,7 +60,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--expected-slug= : Expected existing slug lock}
         {--expected-canonical= : Expected canonical path or URL lock}
         {--confirm= : Exact user confirmation phrase}
-        {--ack-claim-warning= : Article id whose boundary-context claim warnings are acknowledged}
+        {--ack-claim-warning= : Legacy article id or exact blog candidate claim acknowledgement token}
         {--preview-approved : Acknowledge authenticated preview QA passed for this exact working revision}
         {--schema-hold : Confirm schema generation/enqueue stays held}
         {--hreflang-hold : Confirm hreflang enablement stays held}
@@ -228,7 +228,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
             $workspace = app(\App\Services\Cms\BlogV1RevisionWorkspace::class);
             $sha = (string) $this->option('blog-v1-sha256');
             $package = $workspace->loadSource((string) $this->option('blog-v1-file'), $sha);
-            $plan = $workspace->plan($package, true);
+            $ack = (string) $this->option('ack-claim-warning');
+            $plan = $workspace->plan($package, true, $ack);
             $confirmation = BlogV1RevisionWorkspaceCommand::confirmation('promote', $sha, $plan['state_sha256']);
             if (! $plan['ok']) {
                 $this->line(json_encode([...$plan, 'expected_confirmation' => $confirmation], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
@@ -236,8 +237,8 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 return self::FAILURE;
             }
             if ($execute) {
-                if (! $this->option('preview-approved') || (string) $this->option('ack-claim-warning') !== 'blog-v1-eight') {
-                    throw new RuntimeException('blog_preview_or_claim_ack_missing');
+                if (! $this->option('preview-approved')) {
+                    throw new RuntimeException('blog_preview_missing');
                 }
                 foreach ($this->requiredHoldOptions() as $hold) {
                     if (! $this->option($hold)) {
@@ -246,7 +247,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
                 }
                 $actor = BlogV1RevisionWorkspaceCommand::executionActor($confirmation, (string) $this->option('confirm'),
                     (int) $this->option('admin-user-id'), (string) $this->option('deployed-sha'));
-                $result = $workspace->promote($package, (string) $this->option('expected-state-sha256'), $actor);
+                $result = $workspace->promote($package, (string) $this->option('expected-state-sha256'), $actor, $ack);
             } else {
                 $result = $plan;
             }

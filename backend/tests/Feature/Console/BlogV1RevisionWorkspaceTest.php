@@ -8,6 +8,7 @@ use App\Console\Commands\BlogV1RevisionWorkspaceCommand as Command;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
@@ -214,11 +215,12 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
     public function test_surface_audit_failure_rolls_back_both_locale_drafts(): void
     {
         $this->fixtures();
+        $this->actor();
         $p = $this->surfaces();
         $service = app(Workspace::class);
-        $plan = $service->surface($p, 'surface-plan', false, '', 0);
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64));
         $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
-        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-stage', true, $plan['state_sha256'], 1), 'audit_failed');
+        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-stage', true, $plan['state_sha256'], 1, str_repeat('b', 64)), 'audit_failed');
         $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->count());
     }
 
@@ -228,15 +230,15 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
         $p = $this->surfaces();
         $actor = $this->actor();
         $service = app(Workspace::class);
-        $plan = $service->surface($p, 'surface-plan', false, '', 0);
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64));
         $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->count());
-        $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id);
+        $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64));
         $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->publishedPublic()->count());
-        $plan = $service->surface($p, 'surface-plan', false, '', 0);
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64));
         $changed = $p;
         $changed['surfaces'][0]['title'] = 'Changed after preview';
-        $this->refused(fn () => $service->surface($changed, 'surface-publish', true, $plan['state_sha256'], $actor->id), 'blog_surface_preview_candidate_drift');
-        $service->surface($p, 'surface-publish', true, $plan['state_sha256'], $actor->id);
+        $this->refused(fn () => $service->surface($changed, 'surface-publish', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64)), 'blog_surface_preview_candidate_drift');
+        $service->surface($p, 'surface-publish', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64));
         $this->assertSame(2, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->publishedPublic()->count());
     }
 
@@ -245,11 +247,11 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
         $this->fixtures();
         $p = $this->surfaces();
         $p['surfaces'][0]['blog_v1']['featured_article_ids'] = [40];
-        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-plan', false, '', 0), 'blog_surface_featured_locale_invalid');
+        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64)), 'blog_surface_featured_locale_invalid');
         $p = $this->surfaces();
         LandingSurface::withoutGlobalScopes()->create(['org_id' => 0, 'surface_key' => 'articles_index', 'locale' => 'en',
             'title' => 'Other owner surface', 'status' => 'published', 'is_public' => true, 'payload_json' => ['other' => true]]);
-        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-plan', false, '', 0), 'blog_surface_existing_authority_collision');
+        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64)), 'blog_surface_existing_authority_collision');
     }
 
     public function test_native_command_rejects_package_bytes_operator_and_release_without_writes(): void
@@ -269,6 +271,167 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
             app()['env'] = $environment;
         }
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_unbounded_claim_cannot_be_overridden_by_the_old_fixed_acknowledgement(): void
+    {
+        $p = $this->fixtures();
+        $p['articles'][0]['after_fields']['content_md'] .= "\n\n精准匹配职业。";
+        $actor = $this->stageAndApprove($p);
+        $service = app(Workspace::class);
+        $before = $service->snapshot();
+        $plan = $service->plan($p, true, 'blog-v1-eight');
+        $this->assertContains('blog_claim_blocked', array_column($plan['promotion_blockers'], 'code'));
+        $this->refused(fn () => $service->promote($p, Hash::hash($before), $actor->id, 'blog-v1-eight'), 'blog_claim_blocked');
+        $this->assertSame($before, $service->snapshot());
+    }
+
+    public function test_boundary_claim_requires_exact_current_candidate_acknowledgement(): void
+    {
+        $p = $this->fixtures();
+        $p['articles'][0]['after_fields']['content_md'] .= "\n\n不能预测职业成功。";
+        $actor = $this->stageAndApprove($p);
+        $service = app(Workspace::class);
+        $plan = $service->plan($p, true, 'blog-v1-eight');
+        $this->assertFalse($plan['ok']);
+        $this->assertStringStartsWith('blog-v1-claims:', $plan['required_claim_acknowledgement']);
+        $this->assertCount(7, $plan['claim_records']);
+        $this->assertTrue($service->plan($p, true, $plan['required_claim_acknowledgement'])['ok']);
+        $this->refused(fn () => $service->promote($p, $plan['state_sha256'], $actor->id, 'blog-v1-eight'), 'blog_claim_warning_ack_required');
+        $this->assertSame(7, $service->promote($p, $plan['state_sha256'], $actor->id, $plan['required_claim_acknowledgement'])['publication_count']);
+    }
+
+    public function test_claim_records_must_bind_the_new_revision_and_nonboundary_warning_is_rejected(): void
+    {
+        $p = $this->fixtures();
+        $actor = $this->stageAndApprove($p);
+        $service = app(Workspace::class);
+        $plan = $service->plan($p, true);
+        $record = ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', 3)->firstOrFail();
+        $record->update(['claim_result_json' => ['status' => 'warning', 'matches' => [['boundary_context' => false]]]]);
+        $this->refused(fn () => $service->promote($p, $plan['state_sha256'], $actor->id, 'blog-v1-eight'), 'blog_complete_state_drift');
+        $before = $service->snapshot();
+        $this->refused(fn () => $service->promote($p, Hash::hash($before), $actor->id, 'blog-v1-eight'), 'blog_claim_warning_not_boundary_context');
+        $this->assertSame($before, $service->snapshot());
+        $binding = $record->validation_summary_json;
+        $binding['working_revision_id'] = Article::withoutGlobalScopes()->findOrFail(3)->published_revision_id;
+        $record->update(['validation_summary_json' => $binding, 'claim_result_json' => ['status' => 'passed', 'matches' => []]]);
+        $this->assertContains('blog_fresh_candidate_claim_required', array_column($service->plan($p, true)['promotion_blockers'], 'code'));
+    }
+
+    public function test_unknown_private_surfaces_are_not_owned_even_if_the_payload_matches(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $p = $this->surfaces();
+        foreach ($p['surfaces'] as $candidate) {
+            LandingSurface::withoutGlobalScopes()->create(['org_id' => 0, 'surface_key' => 'articles_index', 'locale' => $candidate['locale'],
+                'title' => $candidate['title'], 'description' => $candidate['description'], 'status' => 'draft',
+                'is_public' => false, 'is_indexable' => false, 'payload_json' => ['blog_v1' => $candidate['blog_v1']]]);
+        }
+        $before = LandingSurface::withoutGlobalScopes()->get()->toArray();
+        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64)), 'blog_surface_task_provenance_required');
+        $this->assertSame($before, LandingSurface::withoutGlobalScopes()->get()->toArray());
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_owned_surface_repeat_is_zero_increment_and_proof_package_id_and_state_drift_are_refused(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $p = $this->surfaces();
+        $service = app(Workspace::class);
+        $sha = str_repeat('b', 64);
+        $foreign = LandingSurface::withoutGlobalScopes()->create(['org_id' => 0, 'surface_key' => 'articles_index', 'locale' => 'fr', 'title' => 'Foreign owner', 'payload_json' => []]);
+        $foreignBefore = $foreign->fresh()->getAttributes();
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, $sha);
+        $stage = $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, $sha);
+        $this->assertCount(2, $stage['new_surface_ids']);
+        $this->assertSame($stage['new_surface_ids'], array_column($stage['surface_records'], 'id'));
+        $before = LandingSurface::withoutGlobalScopes()->get()->toArray();
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, $sha);
+        $repeat = $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, $sha);
+        $this->assertSame([], $repeat['new_surface_ids']);
+        $this->assertSame($stage['surface_records'], $repeat['surface_records']);
+        $this->assertSame($before, LandingSurface::withoutGlobalScopes()->get()->toArray());
+        $this->assertSame($foreignBefore, $foreign->fresh()->getAttributes());
+        $this->refused(fn () => $service->surface($p, 'surface-plan', false, '', 0, str_repeat('c', 64)), 'blog_surface_task_provenance_required');
+        foreach (AuditLog::withoutGlobalScopes()->get() as $audit) {
+            $meta = $audit->meta_json;
+            $meta['surface_records'][0]['id'] = 99999;
+            $audit->update(['meta_json' => $meta]);
+        }
+        $this->refused(fn () => $service->surface($p, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        $this->assertSame($before, LandingSurface::withoutGlobalScopes()->get()->toArray());
+    }
+
+    public function test_second_locale_validation_failure_rolls_back_first_surface_creation(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $p = $this->surfaces();
+        $service = app(Workspace::class);
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64));
+        $p['surfaces'][1]['blog_v1']['featured_article_ids'] = [241];
+        $this->refused(fn () => $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64)), 'blog_surface_featured_locale_invalid');
+        $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->whereIn('locale', ['en', 'zh-CN'])->count());
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_surface_actual_id_owner_and_native_state_must_match_the_trusted_stage_audit(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $p = $this->surfaces();
+        $service = app(Workspace::class);
+        $sha = str_repeat('b', 64);
+        $plan = $service->surface($p, 'surface-plan', false, '', 0, $sha);
+        $stage = $service->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, $sha);
+        $surface = LandingSurface::withoutGlobalScopes()->findOrFail($stage['new_surface_ids'][0]);
+        \Illuminate\Support\Facades\DB::table('landing_surfaces')->where('id', $surface->id)->update(['description' => 'Unreviewed concurrent change']);
+        $this->refused(fn () => $service->surface($p, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        \Illuminate\Support\Facades\DB::table('landing_surfaces')->where('id', $surface->id)->update(['description' => $surface->description]);
+        $audit = AuditLog::withoutGlobalScopes()->where('action', 'blog_v1_surface-stage')->firstOrFail();
+        $original = $audit->meta_json;
+        $audit->update(['meta_json' => [...$original, 'authorized_operator_id' => 99999]]);
+        $this->refused(fn () => $service->surface($p, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        $audit->update(['meta_json' => $original]);
+        \Illuminate\Support\Facades\DB::table('landing_surfaces')->where('id', $surface->id)->update(['id' => 99999]);
+        $this->refused(fn () => $service->surface($p, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        $this->assertSame(2, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->whereIn('locale', ['en', 'zh-CN'])->count());
+    }
+
+    public function test_claim_drift_after_first_publication_rolls_back_the_entire_cohort_and_cache(): void
+    {
+        $p = $this->fixtures();
+        $actor = $this->stageAndApprove($p);
+        $before = app(Workspace::class)->snapshot();
+        $realAudit = app(AuditLogger::class);
+        $calls = 0;
+        $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andReturnUsing(function (...$arguments) use ($realAudit, &$calls): void {
+            $realAudit->log(...$arguments);
+            if (++$calls === 1) {
+                ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', 31)
+                    ->update(['claim_result_json' => json_encode(['status' => 'blocked', 'matches' => []])]);
+            }
+        });
+        $key = \App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::CACHE_KEY_FRESH;
+        \Illuminate\Support\Facades\Cache::put($key, ['unchanged' => 'public-cache'], 300);
+        $this->refused(fn () => app(Workspace::class)->promote($p, Hash::hash($before), $actor->id), 'blog_claim_blocked');
+        $this->assertSame($before, app(Workspace::class)->snapshot());
+        $this->assertSame(['unchanged' => 'public-cache'], \Illuminate\Support\Facades\Cache::get($key));
+    }
+
+    private function stageAndApprove(array $package): AdminUser
+    {
+        $actor = $this->actor();
+        $service = app(Workspace::class);
+        $service->stage($package, Hash::hash($service->snapshot()), $actor->id);
+        foreach (array_diff(Workspace::IDS, [10]) as $id) {
+            app(ArticleTranslationWorkflowService::class)->approveEditorialWorkingRevision(Article::withoutGlobalScopes()->findOrFail($id), $actor->id);
+        }
+
+        return $actor;
     }
 
     private function fixtures(): array

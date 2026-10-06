@@ -8,9 +8,12 @@ use App\Console\Commands\UpdateArticlePublicReaderMetadata;
 use App\Events\PublicAuthorityChanged;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleTranslationRevision;
+use App\Models\AuditLog;
 use App\Models\LandingSurface;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\EditorialPackage\EditorialPackageDraftImporter;
 use App\Support\ArticleSourceTargetSnapshot;
 use App\Support\CanonicalTranslationPayloadHash as Hash;
 use Illuminate\Http\Request;
@@ -43,6 +46,7 @@ final class BlogV1RevisionWorkspace
         private readonly CmsEditorialReviewAttestationService $reviews,
         private readonly ArticleTranslationWorkflowService $workflow,
         private readonly AuditLogger $audit,
+        private readonly EditorialPackageDraftImporter $claimPolicy,
     ) {}
 
     public function loadSource(string $file, string $sha): array
@@ -83,6 +87,8 @@ final class BlogV1RevisionWorkspace
             $row['review_attestations'] = ($lock ? $attestations->lockForUpdate() : $attestations)->get()->map(fn ($item) => (array) $item)->all();
             $editorial = DB::table('editorial_reviews')->where('content_type', 'article')->where('content_id', $article->id)->orderBy('id');
             $row['editorial_reviews'] = ($lock ? $editorial->lockForUpdate() : $editorial)->get()->map(fn ($item) => (array) $item)->all();
+            $imports = ArticleEditorialPackageImport::withoutGlobalScopes()->where('article_id', $article->id)->orderBy('id');
+            $row['imports'] = ($lock ? $imports->lockForUpdate() : $imports)->get()->map(fn ($item) => $item->getAttributes())->all();
             $sourceId = (int) ($article->source_article_id ?: $article->translated_from_article_id ?: 0);
             if ($sourceId > 0 && $sourceId !== $article->id) {
                 $sourceQuery = Article::withoutGlobalScopes()->withTrashed()->whereKey($sourceId);
@@ -105,11 +111,12 @@ final class BlogV1RevisionWorkspace
         return $state;
     }
 
-    public function plan(array $package, bool $promotion = false): array
+    public function plan(array $package, bool $promotion = false, string $claimAcknowledgement = ''): array
     {
         $state = $this->snapshot();
         $rows = $this->validateCandidates($package, false);
         $blockers = [];
+        $claims = [];
         if ($promotion) {
             foreach ($rows as $row) {
                 if ($row['verify_only']) {
@@ -123,16 +130,22 @@ final class BlogV1RevisionWorkspace
                 }
                 try {
                     $this->assertReview($article, $article->workingRevision);
+                    $claims[] = $this->claimRecord($article, $article->workingRevision);
                 } catch (RuntimeException $error) {
                     $blockers[] = ['article_id' => $article->id, 'code' => $error->getMessage()];
                 }
             }
         }
+        $requiredAck = $this->claimAcknowledgement($claims);
+        if ($requiredAck !== null && ! hash_equals($requiredAck, $claimAcknowledgement)) {
+            $blockers[] = ['article_id' => null, 'code' => 'blog_claim_warning_ack_required'];
+        }
 
         return ['ok' => $blockers === [], 'readonly' => true, 'source_sha256' => self::SOURCE_SHA256,
             'state_sha256' => Hash::hash($state), 'target_count' => 8, 'new_revision_count' => 7,
             'verify_only_ids' => [10], 'targets' => $rows, 'publication_count' => 0,
-            'review_attestation_created' => false, 'promotion_blockers' => $blockers];
+            'review_attestation_created' => false, 'promotion_blockers' => $blockers,
+            'claim_records' => $claims, 'required_claim_acknowledgement' => $requiredAck];
     }
 
     /** Called only after command package-byte, operator, release and confirmation gates. */
@@ -143,6 +156,7 @@ final class BlogV1RevisionWorkspace
             $this->assertState($expectedState, $before);
             $this->validateCandidates($package, false);
             $newIds = [];
+            $newImportIds = [];
             foreach ($this->targets($package) as $target) {
                 $article = $this->article($target['article_id']);
                 if ($article->id === 10 || $article->working_revision_id !== $article->published_revision_id) {
@@ -167,6 +181,15 @@ final class BlogV1RevisionWorkspace
                 }
                 $this->headings->assertNoBodyH1((string) $candidate->content_md);
                 $candidate->save();
+                $import = ArticleEditorialPackageImport::withoutGlobalScopes()->create([
+                    'org_id' => 0, 'article_id' => $article->id, 'slug' => $article->slug, 'locale' => $article->locale,
+                    'title' => $candidate->title, 'content_track' => 'blog-v1-b4', 'status' => 'imported',
+                    'intended_status' => 'working_revision_human_review', 'imported_by' => $actor,
+                    'body_hash' => hash('sha256', $candidate->content_md),
+                    'validation_summary_json' => $this->claimBinding($article, $candidate),
+                    'claim_result_json' => $this->claimPolicy->inspectCandidateClaims($candidate->only(self::FIELDS)),
+                ]);
+                $newImportIds[(string) $article->id] = $import->id;
                 $article->forceFill(['working_revision_id' => $candidate->id])->saveQuietly();
                 $newIds[(string) $article->id] = $candidate->id;
             }
@@ -178,6 +201,7 @@ final class BlogV1RevisionWorkspace
                     $old['article']['working_revision_id'] = $newIds[(string) $id];
                     unset($old['article']['updated_at'], $new['article']['updated_at']);
                     $new['history'] = array_values(array_filter($new['history'], fn ($row) => $row['revision_id'] !== $newIds[(string) $id]));
+                    $new['imports'] = array_values(array_filter($new['imports'], fn ($row) => $row['id'] !== $newImportIds[(string) $id]));
                 }
                 if (Hash::hash($old) !== Hash::hash($new)) {
                     throw new RuntimeException('blog_stage_public_state_changed');
@@ -186,18 +210,27 @@ final class BlogV1RevisionWorkspace
             $this->validateCandidates($package, false);
             $this->log('blog_v1_working_revisions_staged', $expectedState, $actor, ['new_revision_ids' => $newIds]);
 
-            return ['ok' => true, 'readonly' => false, 'new_revision_ids' => $newIds,
+            return ['ok' => true, 'readonly' => false, 'new_revision_ids' => $newIds, 'new_claim_import_ids' => $newImportIds,
                 'state_sha256' => Hash::hash($after), 'publication_count' => 0, 'review_attestation_created' => false];
         });
     }
 
     /** Existing controlled-promotion command is the sole console entry for this transition. */
-    public function promote(array $package, string $expectedState, int $actor): array
+    public function promote(array $package, string $expectedState, int $actor, string $claimAcknowledgement = ''): array
     {
-        return DB::transaction(function () use ($package, $expectedState, $actor): array {
+        return DB::transaction(function () use ($package, $expectedState, $actor, $claimAcknowledgement): array {
             $before = $this->snapshot(true);
             $this->assertState($expectedState, $before);
             $this->validateCandidates($package, true);
+            $claims = [];
+            foreach (array_diff(self::IDS, [10]) as $id) {
+                $article = $this->article($id);
+                $claims[$id] = $this->claimRecord($article, $article->workingRevision);
+            }
+            $requiredAck = $this->claimAcknowledgement(array_values($claims));
+            if ($requiredAck !== null && ! hash_equals($requiredAck, $claimAcknowledgement)) {
+                throw new RuntimeException('blog_claim_warning_ack_required');
+            }
             $published = [];
             foreach ($this->targets($package) as $target) {
                 $article = $this->article($target['article_id']);
@@ -207,8 +240,11 @@ final class BlogV1RevisionWorkspace
                 $this->publisher->promoteExistingWorkingRevision(
                     $article->id, $article->working_revision_id, $article->published_revision_id,
                     source: 'blog_v1_existing_article_promotion', dispatchFollowUp: false,
-                    transactionGuard: function (Article $locked, ArticleTranslationRevision $revision) use ($target): void {
+                    transactionGuard: function (Article $locked, ArticleTranslationRevision $revision) use ($target, $claims): void {
                         $this->assertReview($locked, $revision);
+                        if (Hash::hash($claims[$locked->id]) !== Hash::hash($this->claimRecord($locked, $revision))) {
+                            throw new RuntimeException('blog_claim_result_drift');
+                        }
                         $locked->forceFill(['category_id' => $this->categoryFor($locked, $target)])->saveQuietly();
                     },
                 );
@@ -233,7 +269,8 @@ final class BlogV1RevisionWorkspace
                 }
                 $published[(string) $article->id] = $fresh->published_revision_id;
             }
-            $this->log('blog_v1_existing_revisions_promoted', $expectedState, $actor, ['published_revision_ids' => $published]);
+            $this->log('blog_v1_existing_revisions_promoted', $expectedState, $actor, ['published_revision_ids' => $published,
+                'claim_records_sha256' => Hash::hash(array_values($claims)), 'claim_acknowledgement' => $requiredAck]);
             if (Hash::hash($before['10']) !== Hash::hash($this->snapshot(true)['10'])) {
                 throw new RuntimeException('blog_verify_only_public_state_changed');
             }
@@ -246,26 +283,36 @@ final class BlogV1RevisionWorkspace
     public function surface(array $package, string $phase, bool $execute, string $expectedState, int $actor, string $packageSha = ''): array
     {
         if (($package['schema'] ?? null) !== 'blog_v1_landing_surfaces.v1'
-            || ! is_array($package['surfaces'] ?? null) || count($package['surfaces']) !== 2) {
+            || ! is_array($package['surfaces'] ?? null) || count($package['surfaces']) !== 2
+            || ! in_array($phase, ['surface-plan', 'surface-stage', 'surface-publish'], true)
+            || ($execute && $phase === 'surface-plan')
+            || preg_match('/\A[a-f0-9]{64}\z/', $packageSha) !== 1) {
             throw new RuntimeException('blog_surface_package_invalid');
         }
 
         return DB::transaction(function () use ($package, $phase, $execute, $expectedState, $actor, $packageSha): array {
-            $q = LandingSurface::withoutGlobalScopes()->where('org_id', 0)->where('surface_key', 'articles_index')->orderBy('locale')->orderBy('id');
+            $q = LandingSurface::withoutGlobalScopes()->where('org_id', 0)->where('surface_key', 'articles_index')
+                ->whereIn('locale', ['en', 'zh-CN'])->orderBy('locale')->orderBy('id');
             $rows = ($execute ? $q->lockForUpdate() : $q)->get();
             if ($rows->count() > 2 || $rows->pluck('locale')->unique()->count() !== $rows->count()) {
                 throw new RuntimeException('blog_surface_identity_collision');
             }
+            $auditQuery = AuditLog::withoutGlobalScopes()->where('org_id', 0)->where('target_type', 'blog_v1')
+                ->where('target_id', 'fixed_eight')->where('action', 'blog_v1_surface-stage')->orderBy('id');
+            $proofs = ($execute ? $auditQuery->lockForUpdate() : $auditQuery)->get();
             $state = ['surfaces' => $rows->map(function ($row) use ($execute): array {
                 $blocks = $row->blocks();
 
                 return ['surface' => $row->getAttributes(), 'blocks' => ($execute ? $blocks->lockForUpdate() : $blocks)->get()->map(fn ($block) => $block->getAttributes())->all()];
-            })->all(), 'article_authority' => $this->snapshot($execute)];
+            })->all(), 'surface_provenance' => $proofs->map(fn ($proof) => $proof->getAttributes())->all(),
+                'article_authority' => $this->snapshot($execute)];
             $beforeSha = Hash::hash($state);
             if ($execute) {
                 $this->assertState($expectedState, $state);
             }
             $locales = [];
+            $records = [];
+            $newIds = [];
             foreach ($package['surfaces'] as $candidate) {
                 $locale = $candidate['locale'] ?? null;
                 $config = $candidate['blog_v1'] ?? null;
@@ -308,7 +355,24 @@ final class BlogV1RevisionWorkspace
                     || $surface->description !== $candidate['description'] || Hash::hash($surface->payload_json['blog_v1'] ?? null) !== Hash::hash($config))) {
                     throw new RuntimeException('blog_surface_preview_candidate_drift');
                 }
+                if ($surface) {
+                    $owner = $this->assertSurfaceProvenance($surface, $candidate, $packageSha, $proofs->all(), $execute ? $actor : null);
+                }
                 if (! $execute) {
+                    $records[] = $surface ? $this->surfaceRecord($surface, $candidate, $packageSha, $owner) : ['id' => null, 'org_id' => 0, 'surface_key' => 'articles_index', 'locale' => $locale];
+
+                    continue;
+                }
+                if (! $this->reviews->isConfiguredSoloOwner($actor)) {
+                    throw new RuntimeException('blog_surface_configured_owner_required');
+                }
+                if (! $surface && $rows->isNotEmpty()) {
+                    throw new RuntimeException('blog_surface_existing_authority_collision');
+                }
+                if ($surface && $phase === 'surface-stage') {
+                    // Repeat staging proves ownership and state, then performs zero row writes.
+                    $records[] = $this->surfaceRecord($surface, $candidate, $packageSha, $actor);
+
                     continue;
                 }
                 $surface ??= new LandingSurface(['org_id' => 0, 'surface_key' => 'articles_index', 'locale' => $locale]);
@@ -324,14 +388,58 @@ final class BlogV1RevisionWorkspace
                 if ($publish) {
                     event(new PublicAuthorityChanged('landing_surface', (string) $surface->id, $locale, Hash::hash($surface->getAttributes()), 'publish'));
                 }
+                $records[] = $this->surfaceRecord($fresh, $candidate, $packageSha, $actor);
+                if (! $publish) {
+                    $newIds[] = $fresh->id;
+                }
             }
             if ($execute) {
-                $this->log('blog_v1_'.$phase, $beforeSha, $actor, ['surface_locales' => $locales, 'surface_package_sha256' => $packageSha]);
+                $this->log('blog_v1_'.$phase, $beforeSha, $actor, ['surface_locales' => $locales,
+                    'surface_package_sha256' => $packageSha, 'surface_records' => $records, 'new_surface_ids' => $newIds]);
+                if ($phase === 'surface-stage') {
+                    $written = $auditQuery->get()->last();
+                    if (! $written || ($written->meta_json['surface_records'] ?? null) !== $records
+                        || ($written->meta_json['surface_package_sha256'] ?? null) !== $packageSha) {
+                        throw new RuntimeException('blog_surface_provenance_readback_failed');
+                    }
+                }
             }
 
             return ['ok' => true, 'readonly' => ! $execute, 'state_sha256' => $beforeSha, 'surface_count' => 2,
+                'surface_records' => $records, 'new_surface_ids' => $newIds, 'surface_package_sha256' => $packageSha,
                 'publication_count' => $execute && $phase === 'surface-publish' ? 2 : 0, 'review_attestation_created' => false];
         });
+    }
+
+    private function surfaceRecord(LandingSurface $surface, array $candidate, string $packageSha, ?int $owner = null): array
+    {
+        return ['id' => $surface->id, 'org_id' => $surface->org_id, 'surface_key' => $surface->surface_key,
+            'locale' => $surface->locale, 'owner_admin_user_id' => $owner,
+            'source_sha256' => self::SOURCE_SHA256, 'surface_package_sha256' => $packageSha,
+            'candidate_sha256' => Hash::hash($candidate), 'surface_state_sha256' => Hash::hash($surface->getAttributes())];
+    }
+
+    private function assertSurfaceProvenance(LandingSurface $surface, array $candidate, string $packageSha, array $proofs, ?int $actor): int
+    {
+        foreach (array_reverse($proofs) as $proof) {
+            $meta = $proof->meta_json;
+            $owner = (int) ($meta['authorized_operator_id'] ?? 0);
+            if ($proof->result !== 'success' || ($meta['source_sha256'] ?? null) !== self::SOURCE_SHA256
+                || ($meta['surface_package_sha256'] ?? null) !== $packageSha
+                || ! $this->reviews->isConfiguredSoloOwner($owner) || ($actor !== null && $actor !== $owner)) {
+                continue;
+            }
+            $records = $meta['surface_records'] ?? [];
+            if (! is_array($records) || count($records) !== 2
+                || collect($records)->pluck('locale')->sort()->values()->all() !== ['en', 'zh-CN']) {
+                continue;
+            }
+            $record = collect($records)->firstWhere('id', $surface->id);
+            if (is_array($record) && Hash::hash($record) === Hash::hash($this->surfaceRecord($surface, $candidate, $packageSha, $owner))) {
+                return $owner;
+            }
+        }
+        throw new RuntimeException('blog_surface_task_provenance_required');
     }
 
     private function validateCandidates(array $package, bool $promotion): array
@@ -450,6 +558,57 @@ final class BlogV1RevisionWorkspace
             || ! $this->completeness->inspect($article->locale, $candidate->content_md, $candidate->only(self::FIELDS))['ok']) {
             throw new RuntimeException('blog_actual_revision_review_or_preflight_missing');
         }
+    }
+
+    private function claimBinding(Article $article, ArticleTranslationRevision $candidate): array
+    {
+        return ['source_sha256' => self::SOURCE_SHA256, 'org_id' => $article->org_id,
+            'article_id' => $article->id, 'slug' => $article->slug, 'locale' => $article->locale,
+            'working_revision_id' => $candidate->id, 'created_by' => $candidate->created_by,
+            'candidate_fields_sha256' => Hash::hash($candidate->only(self::FIELDS)),
+            'body_sha256' => hash('sha256', $candidate->content_md)];
+    }
+
+    private function claimRecord(Article $article, ArticleTranslationRevision $candidate): array
+    {
+        $binding = $this->claimBinding($article, $candidate);
+        $records = ArticleEditorialPackageImport::withoutGlobalScopes()->where('org_id', 0)
+            ->where('article_id', $article->id)->where('content_track', 'blog-v1-b4')
+            ->lockForUpdate()->get()->filter(fn ($record) => (int) ($record->validation_summary_json['working_revision_id'] ?? 0) === $candidate->id);
+        if ($records->count() !== 1) {
+            throw new RuntimeException('blog_fresh_candidate_claim_required');
+        }
+        $record = $records->first();
+        if ($record->status !== 'imported' || $record->slug !== $article->slug || $record->locale !== $article->locale
+            || (int) $record->imported_by !== (int) $candidate->created_by
+            || $record->body_hash !== $binding['body_sha256']
+            || Hash::hash($record->validation_summary_json) !== Hash::hash($binding)) {
+            throw new RuntimeException('blog_candidate_claim_binding_drift');
+        }
+        $result = $record->claim_result_json;
+        if (($result['status'] ?? null) === 'blocked') {
+            throw new RuntimeException('blog_claim_blocked');
+        }
+        if (($result['status'] ?? null) === 'warning'
+            && (! is_array($result['matches'] ?? null) || $result['matches'] === []
+                || ! collect($result['matches'])->every(fn ($match) => is_array($match) && ($match['boundary_context'] ?? null) === true))) {
+            throw new RuntimeException('blog_claim_warning_not_boundary_context');
+        }
+        if (! in_array($result['status'] ?? null, ['passed', 'warning'], true)
+            || Hash::hash($result) !== Hash::hash($this->claimPolicy->inspectCandidateClaims($candidate->only(self::FIELDS)))) {
+            throw new RuntimeException('blog_claim_result_drift');
+        }
+
+        return [...$binding, 'claim_import_id' => $record->id, 'claim_status' => $result['status'],
+            'claim_result_sha256' => Hash::hash($result)];
+    }
+
+    private function claimAcknowledgement(array $claims): ?string
+    {
+        usort($claims, fn ($a, $b) => $a['article_id'] <=> $b['article_id']);
+
+        return collect($claims)->contains(fn ($claim) => $claim['claim_status'] === 'warning')
+            ? 'blog-v1-claims:'.Hash::hash($claims) : null;
     }
 
     private function assertState(string $expected, array $state): void
