@@ -39,6 +39,7 @@ final readonly class Platform12EvidenceSelection
             $reference = $this->currentReference($rows, $at, $sha);
         } catch (Throwable) {
             // A broken reference cannot retire any history or erase known faults.
+            $reference = null;
         }
         $exits = [];
         $selected = $rows->filter(function (object $row) use ($reference, $at, &$exits): bool {
@@ -57,6 +58,7 @@ final readonly class Platform12EvidenceSelection
                 }
             } catch (Throwable) {
                 // Invalid, unrelated and unproven records stay in the safety check.
+                return true;
             }
 
             return true;
