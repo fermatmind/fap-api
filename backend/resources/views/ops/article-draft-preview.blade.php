@@ -133,6 +133,11 @@
                     <div class="field"><span>Canonical metadata value</span>{{ $canonicalUrl ?? 'not set' }}</div>
                     <div class="field"><span>SEO title</span>{{ $seoTitle }}</div>
                     <div class="field"><span>SEO description</span>{{ $seoDescription !== '' ? $seoDescription : 'not set' }}</div>
+                    @if ($blogCandidate !== [])
+                        <div class="field" data-preview-blog-category><span>Candidate category ID (not public)</span>{{ $blogCandidate['category_id'] ?? 'unclassified' }}</div>
+                        <div class="field"><span>Frozen blog package SHA-256</span>{{ $blogCandidate['source_sha256'] ?? 'missing' }}</div>
+                        <div class="field"><span>Human review</span>Required for this exact working revision</div>
+                    @endif
                     @if ($article15Metadata !== [])
                         <div class="field"><span>Proposed reading minutes</span>{{ $article15Metadata['reading_minutes'] ?? 'not set' }}</div>
                         <div class="field"><span>Proposed related test</span>{{ $article15Metadata['related_test_slug'] ?? 'not set' }}</div>

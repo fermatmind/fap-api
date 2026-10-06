@@ -68,6 +68,7 @@ final class ArticleDraftPreviewController extends Controller
             'bodyVisual' => $this->previewBodyVisual($record, $contentMd),
             'redactionCount' => $redacted['count'],
             'article15Metadata' => $article15Metadata,
+            'blogCandidate' => (array) data_get($revision?->authority_metadata_json, 'blog_v1_candidate', []),
             'previewContext' => [
                 'is_preview' => true,
                 'article_id' => (int) $record->id,

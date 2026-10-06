@@ -282,7 +282,9 @@ final class ArticlePublishService
         }
 
         if ($invalidateDiscoverabilityCaches) {
-            $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+            // Promotion may be enclosed by a controlled cohort transaction.
+            // A later guard or audit failure must preserve the public cache.
+            DB::afterCommit(fn () => $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches());
         }
         // The locked Article15 lane's prepared SEO meta already notifies after
         // commit; ordinary and SEO13 promotions retain their existing dispatch.
