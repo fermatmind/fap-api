@@ -4,8 +4,8 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 export const SCOPE_VERSION = 'seo-council-a08-dependencies.v3';
 export const LEGACY_SCOPE_VERSION = 'seo-council-a08-dependencies.v2';
-// Keep rollback readers compatible until this dual-scope reader is accepted in production.
-export const PRODUCER_SCOPE_VERSION = LEGACY_SCOPE_VERSION;
+// The accepted dual-scope reader and its rollback version both consume v3.
+export const PRODUCER_SCOPE_VERSION = SCOPE_VERSION;
 export const MISSIONS = ['seo.platform12.daily_gsc_core_runtime', 'seo.platform12.daily_url_truth_reconciliation', 'seo.platform12.daily_private_policy_evidence_drift'];
 const base = 'backend/app/Services/SeoCouncil/Platform12/';
 // All three production readers consume the same scheduled Runtime receipt window.
