@@ -4,7 +4,7 @@ import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync,chmodSync} from 
 import {tmpdir} from 'node:os';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,digest} from './seo-platform-12a08-activation.mjs';
-import {verifyState,hasActivationEvidence,build} from './seo-platform-12a08-release.mjs';
+import {verifyState,hasActivationEvidence,build,bindControlled} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
 test('A08 unavailable activation evidence skips before candidate checks; existing evidence stays fail closed',()=>{
  for (const activation of [null,{schema_version:'seo.platform12_a08_activation.v1'}]) {
@@ -55,6 +55,107 @@ test('Current probe readback dependencies require M1 revalidation without conten
  assert.equal(result.operations.publisher_required,false);
  assert.equal(result.operations.seo_council_orchestration,false);
  assert.equal(result.flags.seo_discoverability,false);
+});
+test('shared Runtime changes invalidate every mission proof through build and transition',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-shared-runtime-`), original=process.cwd();
+ const git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
+ const service='backend/app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php';
+ const helper='backend/app/Services/SeoIntel/Runtime/RevisionEvidenceAdapter.php';
+ const evaluator='backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailyGscCoreRuntimeEvaluator.php';
+ const vector={policy:'c'.repeat(64)}, artifact=`sha256:${'d'.repeat(64)}`;
+ const junit=`<testsuite>${[...new Set(Object.values(CHECKS).flat())].map(name=>`<testcase class="${name}" name="offline_shape"/>`).join('')}</testsuite>`;
+ const seal=body=>({...body,receipt_digest:digest(JSON.stringify(body))});
+ // Offline shapes exercise production binding rules; they are not live source or CI evidence.
+ const sources=sha=>Object.fromEntries(MISSIONS.map(id=>[id,seal({schema_version:'seo.a08_source_check.v1',
+  repository:'fermatmind/fap-api',environment:'production',sha,mission_id:id,real_runtime:true,
+  mission_submitted:false,notification_sent:false,business_write_enabled:false,version_vector:vector,
+  source_wiring_status:'VERIFIED',source_gaps:[],observed_verdict:'READY',sources:[],
+  captured_at:new Date(Date.now()-1000).toISOString(),expires_at:new Date(Date.now()+60000).toISOString()})]));
+ const buildAt=(sha,previous,sourceReports)=>build({sha,checks:scopedReceipt(junit,sha,root),
+  ci:{id:1,run_attempt:1,head_sha:sha,conclusion:'success',status:'completed',event:'push',head_branch:'main'},
+  jobs:['Staging exact-SHA deploy and smoke','Production exact-SHA activation, smoke, and LKG fallback'].map((name,index)=>
+   ({name,status:'completed',conclusion:'success',completed_at:'2026-01-01T00:00:00Z',run_id:2,id:index+1})),
+  staging:{sha,business_guards_closed:true,operations_readonly:true},
+  production:{sha,business_guards_closed:true,operations_readonly:true,version_vector:vector,version_vector_hash:digest(JSON.stringify(vector)),activation:previous},
+  artifactDigests:{ci:artifact,staging:artifact,production:artifact},stagingSafety:{pause_resume_verified:true},sources:sourceReports});
+ const accept=(manifest,id)=>bindControlled(manifest,seal({schema_version:'seo.a08_controlled_acceptance.v1',
+  environment:'production',sha:manifest.bound_production_sha,mission_id:id,version_vector:vector,
+  fingerprint:manifest.missions[id].checks.fingerprint,source_receipt_digest:manifest.missions[id].source_acceptance.receipt_digest,
+  terminal_committed:true,receipt_hash:'e'.repeat(64),receipt_to_ui_verified:true,runtime_boundaries_verified:true,
+  business_write_enabled:false,observed_verdict:'READY'}),artifact);
+ const transition=new URL('./seo-platform-12a08-transition.mjs',import.meta.url).pathname;
+ const prepare=(manifest,index)=>{
+  writeFileSync(`${root}/activation.json`,JSON.stringify(manifest));
+  writeFileSync(`${root}/a08-install-after.json`,JSON.stringify({paused:false,generation:'1'.repeat(32),selected_missions:MISSIONS}));
+  writeFileSync(`${root}/output`,'');
+  execFileSync(process.execPath,[transition,'prepare',String(index)],{cwd:root,env:{...process.env,GITHUB_OUTPUT:`${root}/output`}});
+  return readFileSync(`${root}/output`,'utf8').trim();
+ };
+ try {
+  git('init','-q');git('config','user.email','test@example.test');git('config','user.name','Test');
+  for(const path of [service,helper,evaluator]) {
+   mkdirSync(`${root}/${path.slice(0,path.lastIndexOf('/'))}`,{recursive:true});
+   writeFileSync(`${root}/${path}`,readFileSync(new URL(`../../${path}`,import.meta.url)));
+  }
+  git('add','--',service,helper,evaluator);git('commit','-qm','offline baseline');process.chdir(root);
+  const source=git('rev-parse','HEAD'), initial=fingerprint(root,source);
+  const previous=buildAt(source,null,sources(source));
+  for(const id of MISSIONS) accept(previous,id);
+  git('commit','--allow-empty','-qm','unchanged descendant');
+  const unchanged=git('rev-parse','HEAD'), candidate=sha=>({production_sha:sha,version_vector:vector});
+  for(const id of MISSIONS) assert.equal(mayCarry(previous,candidate(unchanged),id,root),true);
+  const carried=buildAt(unchanged,previous);
+  for(const id of MISSIONS) {
+   assert.equal(carried.missions[id].source_acceptance.source_sha,source);
+   assert.equal(carried.missions[id].source_acceptance.bound_sha,unchanged);
+   assert.equal(carried.missions[id].end_to_end_acceptance.status,'pass');
+  }
+  const before=readFileSync(`${root}/${service}`,'utf8');
+  assert.ok(before.includes('public const SLOT_MINUTES = 10;'));
+  writeFileSync(`${root}/${service}`,before.replace('public const SLOT_MINUTES = 10;','public const SLOT_MINUTES = 11;'));
+  git('add','--',service);git('commit','-qm','offline runtime semantics change');
+  const changed=git('rev-parse','HEAD'), prints=fingerprint(root,changed);
+  assert.equal(git('diff','--name-only',unchanged,changed),service);
+  assert.equal(prints.public,initial.public);
+  for(const id of MISSIONS) {
+   assert.notEqual(prints[id],initial[id]);
+   assert.equal(mayCarry(previous,candidate(changed),id,root),false);
+  }
+  assert.throws(()=>build({checks:null,sha:changed,production:{activation:previous,version_vector:vector}}),
+   /A08_FOCUSED_REVALIDATION_REQUIRED/);
+  const pending=buildAt(changed,previous);
+  for(const id of MISSIONS) {
+   assert.equal(pending.missions[id].source_acceptance.status,'pending');
+   assert.equal(pending.missions[id].end_to_end_acceptance.status,'pending');
+  }
+  for(const index of [1,2]) assert.equal(prepare(pending,index),'ready=false'); // No fresh source yet.
+  const fresh=buildAt(changed,previous,sources(changed));
+  for(const id of MISSIONS) {
+   assert.equal(fresh.missions[id].source_acceptance.source_sha,changed);
+   assert.equal(fresh.missions[id].end_to_end_acceptance.status,'pending');
+  }
+  accept(fresh,MISSIONS[0]);
+  assert.equal(prepare(fresh,1),'ready=true'); // Fresh M2 source requires a new terminal, not old pass.
+  assert.equal(prepare(fresh,2),'ready=false'); // M2 terminal remains a prerequisite.
+  accept(fresh,MISSIONS[1]);assert.equal(prepare(fresh,2),'ready=true');
+  git('restore',`--source=${source}`,'--',service);
+  writeFileSync(`${root}/${helper}`,readFileSync(`${root}/${helper}`,'utf8')+'\n// offline helper change\n');
+  git('add','--',service,helper);git('commit','-qm','offline shared helper change');
+  const helperSha=git('rev-parse','HEAD');
+  assert.equal(git('diff','--name-only',source,helperSha),helper);
+  for(const id of MISSIONS) assert.equal(mayCarry(previous,candidate(helperSha),id,root),false);
+  git('restore',`--source=${source}`,'--',helper);
+  writeFileSync(`${root}/${evaluator}`,readFileSync(`${root}/${evaluator}`,'utf8')+'\n// offline M1-only change\n');
+  git('add','--',helper,evaluator);git('commit','-qm','offline single mission change');
+  const single=git('rev-parse','HEAD');
+  assert.equal(git('diff','--name-only',source,single),evaluator);
+  assert.deepEqual(MISSIONS.map(id=>mayCarry(previous,candidate(single),id,root)),[false,true,true]);
+  const classification=classifyPaths(['.github/trunk/seo-platform-12a08-activation.mjs','.github/trunk/seo-platform-12a08-activation-contract.test.mjs']);
+  assert.equal(classification.operations.a08_scoped_checks,true);
+  assert.equal(classification.operations.a08_gate_only,true);
+  assert.equal(classification.deploy,true);
+  assert.equal(classification.operations.publisher_required,false);
+ } finally {process.chdir(original);rmSync(root,{recursive:true,force:true});}
 });
 test('offline receipts cannot omit test scope or manufacture real source evidence',()=>{
  assert.throws(()=>scopedReceipt('<testcase name="unrelated"/>',execFileSync('git',['rev-parse','HEAD']).toString().trim()),/COVERAGE|RESULTS/);
