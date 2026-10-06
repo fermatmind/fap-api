@@ -261,6 +261,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 throw new \RuntimeException('RUNTIME_RECEIPT_INVALID');
             }
         }
+        // The query may have crossed the existing freshness boundary before
+        // the frozen capture time was fixed. Never extend the provider's TTL.
+        $window['fresh'] = ($window['fresh'] ?? false) === true
+            && CarbonImmutable::parse($window['receipts'][0]['completed_at'])
+                ->gte($at->subMinutes(ScheduledRuntimeProbeReceiptService::SLOT_MINUTES * 2));
+        if (! $window['fresh']) {
+            $window['state'] = \App\Services\SeoIntel\Runtime\UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD;
+        }
 
         return $window;
     }

@@ -101,6 +101,20 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         ];
     }
 
+    public function test_runtime_snapshot_expiring_during_read_is_not_fresh_at_the_frozen_time(): void
+    {
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        $receipt = ['schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+            'trigger_mode' => 'scheduled', 'completed_at' => $at->subMinutes(20)->subSecond()->toAtomString(), 'status' => 'success'];
+        $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+        // It was fresh at query start, then crossed the existing 20-minute
+        // boundary before the envelope's frozen capture time was fixed.
+        $window = ['state' => 'complete', 'fresh' => true, 'receipts' => [$receipt]];
+        $result = $this->read('runtimeWindow', $at, $window);
+        $this->assertFalse($result['fresh']);
+        $this->assertSame('MEASUREMENT_HOLD', $result['state']);
+    }
+
     public function test_runtime_snapshot_still_rejects_corruption_future_completion_and_missing_receipts(): void
     {
         $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
