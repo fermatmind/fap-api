@@ -140,12 +140,11 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             if ($negative !== null) {
                 $input['private_routes'] = array_diff_key($negative, ['observed_at' => true]);
             }
-            $input['evidence_freshness'] = $read('evidence_expiry', function () use ($at): array {
-                $query = $this->connection()->table('seo_evidence_bundles');
-                $total = (clone $query)->count();
-                $expired = (clone $query)->where('expires_at', '<=', $at->format('Y-m-d H:i:s'))->count();
+            $selection = null;
+            $input['evidence_freshness'] = $read('evidence_expiry', function () use ($at, &$selection): array {
+                $selection = app(Platform12EvidenceSelection::class)->read($at, $this->releaseSha());
 
-                return ['total_count' => $total, 'fresh_count' => $total - $expired, 'expired_count' => $expired];
+                return $selection['freshness'];
             });
             $input['drift'] = $read('registry_version_vector', function (): array {
                 $expected = app(Platform12RuntimeControl::class)->frozenVersionVector();
@@ -158,7 +157,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
                 return $drift;
             });
-            $safety = $read('stored_evidence_safety', fn (): array => $this->evidenceSafety($at));
+            $safety = $read('stored_evidence_safety', fn (): array => $this->evidenceSafety($at, $selection['rows'] ?? null));
             if ($safety !== null) {
                 foreach (['query_security', 'injection', 'posture'] as $component) {
                     $input[$component] = $safety[$component];
@@ -373,13 +372,12 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         return ['availability' => 'AVAILABLE', 'observation_count' => $count];
     }
 
-    private function evidenceSafety(CarbonImmutable $at): array
+    private function evidenceSafety(CarbonImmutable $at, ?\Illuminate\Support\Collection $selected = null): array
     {
         // Scan only the minimized Evidence authority, not raw GSC or user tables.
         // A bounded complete active set is required; overflow is an explicit HOLD.
-        $rows = $this->connection()->table('seo_evidence_bundles')
-            ->where('expires_at', '>', $at->format('Y-m-d H:i:s'))->limit(201)
-            ->get(['bundle_hash', 'bundle_json']);
+        $rows = $selected ?? $this->connection()->table('seo_evidence_bundles')->limit(201)
+            ->get(['bundle_id', 'bundle_version', 'bundle_hash', 'expires_at', 'bundle_json']);
         if ($rows->count() > 200) {
             throw new \RuntimeException('EVIDENCE_SCAN_BUDGET_HOLD');
         }
@@ -389,11 +387,27 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $valid = true;
         foreach ($rows as $row) {
             if (! is_string($row->bundle_json) || strlen($row->bundle_json) > 131072) {
-                throw new \RuntimeException('EVIDENCE_PAYLOAD_BUDGET_HOLD');
+                $valid = false;
+
+                continue;
             }
-            $bundle = json_decode($row->bundle_json, true, 64, JSON_THROW_ON_ERROR);
-            $verdict = app(SeoEvidenceBundleVerifier::class)->verify($bundle);
-            $valid = $valid && $verdict['valid'] && ($bundle['bundle_hash'] ?? null) === $row->bundle_hash;
+            try {
+                $bundle = json_decode($row->bundle_json, true, 64, JSON_THROW_ON_ERROR);
+                $verdict = app(SeoEvidenceBundleVerifier::class)->verify($bundle);
+            } catch (Throwable) {
+                $valid = false;
+
+                continue;
+            }
+            try {
+                $rowValid = ($bundle['bundle_id'] ?? null) === $row->bundle_id
+                    && ($bundle['bundle_version'] ?? null) === (int) $row->bundle_version
+                    && CarbonImmutable::parse($bundle['captured_at'])->lessThanOrEqualTo($at)
+                    && CarbonImmutable::parse($bundle['expires_at'])->equalTo(CarbonImmutable::parse($row->expires_at));
+            } catch (Throwable) {
+                $rowValid = false;
+            }
+            $valid = $valid && $rowValid && $verdict['valid'] && ($bundle['bundle_hash'] ?? null) === $row->bundle_hash;
             $pii = $pii || $verdict['code'] === 'PRIVATE_DATA_PRESENT';
             $injection = $injection || $verdict['code'] === 'INJECTION_BLOCKED';
             $retention = $retention && $verdict['code'] !== 'POLICY_BINDING_INVALID';

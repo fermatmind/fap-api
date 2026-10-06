@@ -600,3 +600,20 @@ test("Chinese MBTI trait publication follows both assets and its publisher", () 
   }
   assert.equal(classifyPaths(["backend/routes/api.php"]).operations.mbti_trait_content_publish, false);
 });
+
+
+test("M3 evidence lifecycle reuses fixed-source ingestion without full Council closeout", () => {
+  for (const runtimePath of [
+    "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php",
+    "backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php",
+  ]) {
+    const result = classifyPaths([runtimePath,
+      "backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php",
+      ".github/trunk/classify-paths.mjs"]);
+    assert.equal(result.deploy, true);
+    assert.equal(result.operations.seo_competitive_evidence, true);
+    assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, true);
+    assert.equal(result.operations.a08_gate_only, true);
+    assert.equal(result.operations.a08_readonly_wiring, true);
+  }
+});

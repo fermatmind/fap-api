@@ -166,8 +166,13 @@ export function classifyPaths(inputPaths) {
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const publisherRequired = paths.some(isCareerPublisherBoundary);
   const seoCompetitiveEvidenceAffected = paths.some(isSeoCompetitiveEvidenceBoundary);
-  const seoCompetitiveEvidence = SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE"
-    && seoCompetitiveEvidenceAffected;
+  // M3 lifecycle releases need the existing fixed-source production collector.
+  // Unrelated Platform 12 releases keep their deferred 11G behavior.
+  const m3EvidenceLifecycle = paths.some(path =>
+    path === "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"
+    || path === "backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php");
+  const seoCompetitiveEvidence = m3EvidenceLifecycle
+    || (SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE" && seoCompetitiveEvidenceAffected);
   const opsPresentation = paths.some((path) => SEO_OPS_PRESENTATION_PATHS.has(path));
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
@@ -178,7 +183,7 @@ export function classifyPaths(inputPaths) {
   // operations. A08 consumes existing observations and must never start 11F sync.
   const a08ReadonlyWiring = paths.some(path => /Platform12|seo[_-].*a08/.test(path))
     && paths.filter(isSeoCouncilOrchestrationBoundary).every(path =>
-      /^backend\/app\/Services\/SeoCouncil\/Platform12\/(?:Platform12(?:ActivationEvidence|RuntimeControl|ProductionEvidenceReader|SourceCheck|DailyScheduler|DailyMissionSet|FrozenMission|DailyEvaluator|EvidenceReader|SchedulerStore|SchedulerVersionVector|ReadOnlyRuntimeGate)\.php$|Evaluation\/Platform12Daily(?:GscCoreRuntime|UrlTruth|SecurityDrift)Evaluator\.php$|Notification\/|Operations\/)/.test(path)
+      /^backend\/app\/Services\/SeoCouncil\/Platform12\/(?:Platform12(?:ActivationEvidence|RuntimeControl|ProductionEvidenceReader|EvidenceSelection|SourceCheck|DailyScheduler|DailyMissionSet|FrozenMission|DailyEvaluator|EvidenceReader|SchedulerStore|SchedulerVersionVector|ReadOnlyRuntimeGate)\.php$|Evaluation\/Platform12Daily(?:GscCoreRuntime|UrlTruth|SecurityDrift)Evaluator\.php$|Notification\/|Operations\/)/.test(path)
       || /^backend\/app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command\.php$/.test(path)
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
@@ -239,7 +244,7 @@ export function classifyPaths(inputPaths) {
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
     seo_competitive_evidence_progress: "COMPLETE",
-    seo_competitive_evidence_blocks_delivery: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE",
+    seo_competitive_evidence_blocks_delivery: seoCompetitiveEvidence,
   };
   let testsChanged = false;
 

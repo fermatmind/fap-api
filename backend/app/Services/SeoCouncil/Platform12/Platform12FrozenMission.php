@@ -114,7 +114,7 @@ final readonly class Platform12FrozenMission
             'private_routes' => ['tested_count', 'rejected_count'],
             'query_security' => ['hmac_state', 'key_version_state', 'pii_state'],
             'drift' => ['role', 'binding', 'policy', 'tool', 'schema', 'prompt'],
-            'evidence_freshness' => ['total_count', 'fresh_count', 'expired_count'],
+            'evidence_freshness' => ['total_count', 'fresh_count', 'expired_count', 'stored_count', 'superseded_count', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash'],
             'injection' => ['prompt_state', 'tool_metadata_state'],
             'tools' => ['requested_count', 'authorized_count'],
             'posture' => ['retention_state', 'egress_state'],
@@ -139,6 +139,18 @@ final readonly class Platform12FrozenMission
         if (isset($scan['input']['private_routes'])) {
             $scan['input']['negative_route_counts'] = $scan['input']['private_routes'];
             unset($scan['input']['private_routes']);
+        }
+
+        if (isset($scan['input']['evidence_freshness']['superseded_bundle_hashes'])) {
+            $hashes = $scan['input']['evidence_freshness']['superseded_bundle_hashes'];
+            if (! is_string($hashes) || strlen($hashes) > 12999
+                || ($hashes !== '' && preg_match('/^[a-f0-9]{64}(?:,[a-f0-9]{64}){0,199}$/D', $hashes) !== 1)) {
+                return false;
+            }
+            // Normalize only this validated, bounded hash list for privacy scans.
+            $scan['input']['evidence_freshness']['superseded_bundle_hashes'] = array_map(
+                static fn (string $hash): array => ['hash' => $hash], $hashes === '' ? [] : explode(',', $hashes),
+            );
         }
 
         return ! app(PolicyGatewayPrivacyGuard::class)->containsPrivateData($scan);
