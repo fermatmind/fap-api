@@ -93,6 +93,8 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $revision = dirname(base_path()).'/REVISION';
         $oldRevision = is_file($revision) ? file_get_contents($revision) : null;
         $oldCache = $_ENV['APP_CONFIG_CACHE'] ?? null;
+        $oldServerCache = $_SERVER['APP_CONFIG_CACHE'] ?? null;
+        $oldProcessCache = getenv('APP_CONFIG_CACHE');
         $oldEnvironment = app()->environment();
         mkdir($directory, 0700);
         try {
@@ -102,6 +104,8 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
                 chmod($directory.'/'.$name, 0600);
             }
             $_ENV['APP_CONFIG_CACHE'] = $directory.'/competitive-config.php';
+            $_SERVER['APP_CONFIG_CACHE'] = $_ENV['APP_CONFIG_CACHE'];
+            putenv('APP_CONFIG_CACHE='.$_ENV['APP_CONFIG_CACHE']);
             app()->detectEnvironment(fn () => 'staging');
             config(['seo_intel.write_enabled' => true]);
             DB::connection()->enableQueryLog();
@@ -127,6 +131,12 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             } else {
                 $_ENV['APP_CONFIG_CACHE'] = $oldCache;
             }
+            if ($oldServerCache === null) {
+                unset($_SERVER['APP_CONFIG_CACHE']);
+            } else {
+                $_SERVER['APP_CONFIG_CACHE'] = $oldServerCache;
+            }
+            putenv($oldProcessCache === false ? 'APP_CONFIG_CACHE' : 'APP_CONFIG_CACHE='.$oldProcessCache);
             if ($oldRevision === null) {
                 unlink($revision);
             } else {

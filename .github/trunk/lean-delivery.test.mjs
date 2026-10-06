@@ -6,7 +6,7 @@ import {tmpdir} from 'node:os';
 import {verifyProductionBinding} from './production-evidence.mjs';
 import {candidateDisposition} from './admit-release.mjs';
 import {selectOperations} from './impact-consumers.mjs';
-import {repairDomains} from './nightly-repair.mjs';
+import {repairDomains,phpRepairBaseline} from './nightly-repair.mjs';
 import {scopeFor,LEGACY_SCOPE_VERSION,fingerprint} from './seo-platform-12a08-activation.mjs';
 const a='a'.repeat(40),b='b'.repeat(40);
 const proof=()=>({run:{id:8,run_attempt:1,head_sha:b},artifact:{name:`trunk-production-${a}`},timing:{schema_version:'fermatmind.trunk-delivery-timing.v1',sha:a,ci_run_id:7,deploy_run_id:8,deploy_run_attempt:1,production_outcome:'success',production_smoke_completed_at:'2026-10-06T01:00:00Z'},ci:{id:7,head_sha:a,head_branch:'main',event:'push',status:'completed',conclusion:'success',run_attempt:1},receipt:{schema_version:'fermatmind.trunk-validation.v1',sha:a,ci_run_id:'7',result:'success',classification:{deploy:true}},job:{conclusion:'success'}});
@@ -46,3 +46,5 @@ test('prepared guard rejects active, wrong SHA and cross-environment candidates 
 });
 
 test('feature modes follow actual consumers and shared inputs, avoiding a duplicate static matrix',()=>{assert.deepEqual(selectOperations(['.github/trunk/seo-platform-12a08-activation.mjs']).test_modes,['legacy']);assert.deepEqual(selectOperations(['backend/app/Services/UnresolvedNewService.php']).test_modes,['legacy','v2']);assert.deepEqual(selectOperations(['backend/tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php']).test_modes,['legacy','v2']);});
+
+test('PHP repair baselines exclude green workflows that never ran PHP',async()=>{const runs=[{id:2,head_sha:b},{id:1,head_sha:a}].map(r=>({...r,status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}));assert.equal(await phpRepairBaseline(runs,id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===2?'skipped':'failure'}],b,()=>true),a);const plan=repairDomains(['.github/workflows/nightly.yml'],process.cwd(),['SEO_TEST_MYSQL_DATABASE','git_history']);for(const name of ['SeoIntelGscReadSnapshotMysqlTest','SeoPlatform12A08ActivationEvidenceTest'])assert.ok(plan.php_files.some(p=>p.endsWith(name+'.php')));});

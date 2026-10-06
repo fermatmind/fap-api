@@ -23,6 +23,7 @@ export const COMMON_DEPENDENCIES = [
   'backend/app/Services/SeoAgentEvidence/', 'backend/app/Services/SeoCouncil/', 'backend/resources/seo-agent/',
   'backend/scripts/deploy/',
   '.github/trunk/seo-platform-12a08-activation.mjs', '.github/trunk/seo-platform-12a08-release.mjs',
+  '.github/trunk/nightly-relevance.mjs', '.github/trunk/impact-consumers.mjs', '.github/trunk/nightly-repair.mjs',
   '.github/trunk/seo-platform-12a08-transition.mjs', '.github/trunk/seo-platform-12a08-evidence-download.mjs', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
 ];
 export function scopeFor(path, version = SCOPE_VERSION) {

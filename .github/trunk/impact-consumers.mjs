@@ -80,3 +80,21 @@ export function selectOperations(paths, root=process.cwd()) {
   if(operations.content_pack_checks && !operations.content_test_files.length) throw new Error('CONTENT_CONSUMER_SELECTION_EMPTY');
   return operations;
 }
+
+// Workflow environment and checkout inputs are consumed by PHP topology/history tests.
+export function nightlyExecutionInputs(base,head,root=process.cwd()) {
+ const patch=execFileSync('git',['diff','--unified=0',base,head,'--','.github/workflows/nightly.yml'],{cwd:root}).toString();
+ const inputs=new Set();
+ for(const line of patch.split('\n')) {
+  if(!/^[+-](?![+-])/.test(line))continue;
+  const key=/^[+-]\s+((?:SEO_TEST_MYSQL|RUN_DELIVERY_REDIS|REDIS)_[A-Z0-9_]+):/.exec(line)?.[1];
+  if(key)inputs.add(key);
+  if(/^[+-]\s+fetch-depth:/.test(line))inputs.add('git_history');
+  if(/^[+-]\s+(?:DB_[A-Z_]+|MYSQL_DATABASE|php-version|extensions):/.test(line))inputs.add('*');
+ }
+ return [...inputs];
+}
+
+export function executionConsumes(body,inputs) {
+ return inputs.some(key=>key==='*'||(key==='git_history'?/['"]git['"]\s*,\s*['"](?:show|log|diff|rev-list|merge-base|cat-file)['"]|\bgit\s+(?:show|log|diff|rev-list|merge-base|cat-file)\b|\bgit\s*\(\s*['"](?:show|log|diff|rev-list|merge-base|cat-file)['"]/.test(body??''):body?.includes(key)));
+}

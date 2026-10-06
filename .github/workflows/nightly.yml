@@ -49,6 +49,7 @@ jobs:
       - id: scope
         env:
           PUSH_BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
         run: node .github/trunk/nightly-repair.mjs
 
   scheduler-evidence-monitor:
