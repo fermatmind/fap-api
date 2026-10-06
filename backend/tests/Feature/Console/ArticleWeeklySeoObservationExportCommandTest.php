@@ -47,6 +47,14 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->insertGscDaily($canonicalUrl, '2026-06-20', clicks: 2, impressions: 120, positionMilli: 8400);
         $this->insertGscDaily($canonicalUrl, '2026-06-21', clicks: 1, impressions: 80, positionMilli: 7600);
         $this->insertSeoConversionDaily($canonicalPath);
+        $foreign = (array) DB::table('analytics_seo_conversion_daily')->first();
+        unset($foreign['id']);
+        $foreign['org_id'] = 17;
+        $foreign['landing_pv_count'] = 999;
+        DB::table('analytics_seo_conversion_daily')->insert($foreign);
+        $foreign['org_id'] = 0;
+        $foreign['lang'] = 'en';
+        DB::table('analytics_seo_conversion_daily')->insert($foreign);
 
         $exitCode = Artisan::call('articles:weekly-seo-observation-export', [
             '--article-ids' => '53',
@@ -60,7 +68,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['read_only']);
-        $this->assertSame('article_weekly_seo_observation_export.v3', $payload['schema_version']);
+        $this->assertSame('article_weekly_seo_observation_export.v4', $payload['schema_version']);
         $this->assertSame(1, data_get($payload, 'summary.article_count'));
         $this->assertSame(3, data_get($payload, 'summary.gsc_clicks'));
         $this->assertSame(200, data_get($payload, 'summary.gsc_impressions'));
@@ -79,6 +87,31 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertFalse($payload['publish_attempted']);
         $this->assertFalse($payload['schema_hreflang_write_attempted']);
         $this->assertFalse($payload['sitemap_llms_mutation_attempted']);
+    }
+
+    public function test_absent_observation_rows_are_null_and_existing_zero_rows_are_zero(): void
+    {
+        $this->createReleasedArticle();
+        $this->createGscDailyTable();
+        $options = ['--article-ids' => '53', '--from' => '2026-06-19', '--to' => '2026-06-25', '--json' => true];
+        $this->assertSame(0, Artisan::call('articles:weekly-seo-observation-export', $options));
+        $payload = $this->jsonOutput();
+        $this->assertSame('unobserved', data_get($payload, 'articles.0.gsc.observation_state'));
+        $this->assertNull(data_get($payload, 'articles.0.gsc.clicks'));
+        $this->assertNull(data_get($payload, 'summary.gsc_clicks'));
+        $this->assertSame('unobserved', data_get($payload, 'articles.0.site_conversion.observation_state'));
+        $this->assertNull(data_get($payload, 'articles.0.site_conversion.landing_pv_count'));
+        $this->assertSame('Asia/Shanghai', data_get($payload, 'date_range.site_timezone'));
+        $url = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertGscDaily($url, '2026-06-20', clicks: 0, impressions: 1, positionMilli: 10000);
+        $this->insertSeoConversionDaily('/zh/articles/gaokao-score-major-shortlist-riasec-checklist');
+        DB::table('analytics_seo_conversion_daily')->update(['landing_pv_count' => 0]);
+        $this->assertSame(0, Artisan::call('articles:weekly-seo-observation-export', $options));
+        $payload = $this->jsonOutput();
+        $this->assertSame('observed', data_get($payload, 'articles.0.gsc.observation_state'));
+        $this->assertSame(0, data_get($payload, 'articles.0.gsc.clicks'));
+        $this->assertSame(0, data_get($payload, 'articles.0.site_conversion.landing_pv_count'));
+        $this->assertSame(1, data_get($payload, 'articles.0.site_conversion.observed_rows'));
     }
 
     public function test_missing_gsc_table_warns_without_blocking_export(): void
@@ -102,6 +135,9 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertFalse(data_get($payload, 'articles.0.gsc.table_available'));
         $this->assertContains('seo_gsc_daily_missing', data_get($payload, 'articles.0.gsc.warnings'));
+        $this->assertNull(data_get($payload, 'articles.0.gsc.clicks'));
+        $this->assertSame(0, Artisan::call('articles:weekly-seo-observation-export', ['--article-ids' => '53']));
+        $this->assertStringContainsString('gsc_clicks=unavailable', Artisan::output());
     }
 
     public function test_slug_lock_mismatch_is_reported_in_closeout_row(): void
@@ -159,7 +195,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode, Artisan::output());
-        $this->assertSame('article_weekly_seo_observation_export.v3', $payload['schema_version']);
+        $this->assertSame('article_weekly_seo_observation_export.v4', $payload['schema_version']);
         $this->assertSame([54, 53], data_get($payload, 'summary.returned_article_ids'));
         $this->assertSame([55], data_get($payload, 'summary.missing_requested_article_ids'));
         $this->assertSame(3, data_get($payload, 'summary.requested_article_count'));
