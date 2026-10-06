@@ -59,6 +59,24 @@ test("scoped M3 staging collects verified evidence without full Council closeout
   assert.match(deploy.slice(end, deploy.indexOf("- name:", end)), /if-no-files-found: error/);
 });
 
+test("M3 reuses staging measurement preparation while keeping Council closeout separate", () => {
+  for (const name of ["Materialize inactive staging measurement candidate", "Verify staging measurement source readiness", "Upload sanitized staging measurement source receipt", "Enforce staging measurement source readiness"]) {
+    const start = deploy.indexOf(`- name: ${name}`);
+    const end = deploy.indexOf("- name:", start + 1);
+    assert.ok(start > 0 && end > start);
+    assert.match(deploy.slice(start, end), /if: .*needs\.policy\.outputs\.seo_council_runtime_closeout == 'true' \|\| needs\.policy\.outputs\.seo_competitive_evidence == 'true'/);
+  }
+  const start = deploy.indexOf("- name: Verify staging measurement source readiness");
+  const end = deploy.indexOf("- name: Upload sanitized staging measurement source receipt", start);
+  const readiness = deploy.slice(start, end);
+  assert.match(readiness, /vars\.SEO_INTEL_GSC_SYNC_WINDOW_DAYS \|\| '90'/);
+  assert.match(readiness, /vars\.SEO_INTEL_GSC_SYNC_SEARCH_TYPES \|\| 'web'/);
+  assert.match(readiness, /test "\$GSC_SYNC_WINDOW_DAYS" = 90/);
+  assert.match(readiness, /test "\$GSC_SYNC_SEARCH_TYPES" = web/);
+  const closeout = deploy.slice(end, deploy.indexOf("- name: Finalize staging competitive evidence", end));
+  assert.match(closeout, /- name: Finalize staging SEO Council closeout\n\s+if: needs\.policy\.outputs\.seo_council_runtime_closeout == 'true'\n/);
+});
+
 test("competitive persistence uses an ephemeral writer without changing runtime authority", () => {
   const stagingStart = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
   const stagingEnd = deploy.indexOf("- uses: actions/upload-artifact", stagingStart);

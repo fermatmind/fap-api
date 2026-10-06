@@ -180,7 +180,8 @@ export function classifyPaths(inputPaths) {
   const a08GateOnly = paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
     /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   // Scope the Council side of a mixed release separately from content/cache
-  // operations. A08 consumes existing observations and must never start 11F sync.
+  // operations. Ordinary A08 consumes existing observations; a required M3
+  // collector prepares its measurement dependencies outside full Council closeout.
   const a08ReadonlyWiring = paths.some(path => /Platform12|seo[_-].*a08/.test(path))
     && paths.filter(isSeoCouncilOrchestrationBoundary).every(path =>
       /^backend\/app\/Services\/SeoCouncil\/Platform12\/(?:Platform12(?:ActivationEvidence|RuntimeControl|ProductionEvidenceReader|EvidenceSelection|SourceCheck|DailyScheduler|DailyMissionSet|FrozenMission|DailyEvaluator|EvidenceReader|SchedulerStore|SchedulerVersionVector|ReadOnlyRuntimeGate)\.php$|Evaluation\/Platform12Daily(?:GscCoreRuntime|UrlTruth|SecurityDrift)Evaluator\.php$|Notification\/|Operations\/)/.test(path)

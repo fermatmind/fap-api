@@ -732,7 +732,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 90
       - name: Materialize inactive staging measurement candidate
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
           SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
@@ -751,7 +751,7 @@ jobs:
             -o private_result_authority_publish_required=false --no-interaction
       - name: Verify staging measurement source readiness
         id: measurement_source_readiness
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
         continue-on-error: true
         shell: bash
         env:
@@ -762,8 +762,8 @@ jobs:
           GSC_SYNC_ENABLED: ${{ vars.SEO_INTEL_GSC_SYNC_ENABLED }}
           GSC_AUTH_MODE: ${{ vars.SEO_INTEL_GSC_AUTH_MODE }}
           GSC_SCOPE: ${{ vars.SEO_INTEL_GSC_SCOPE }}
-          GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS }}
-          GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES }}
+          GSC_SYNC_WINDOW_DAYS: ${{ vars.SEO_INTEL_GSC_SYNC_WINDOW_DAYS || '90' }}
+          GSC_SYNC_SEARCH_TYPES: ${{ vars.SEO_INTEL_GSC_SYNC_SEARCH_TYPES || 'web' }}
           GSC_SYNC_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
           GSC_SYNC_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
           PROXY_PORT: "18444"
@@ -1101,7 +1101,7 @@ jobs:
             }
           ' > artifacts/measurement-source-readiness/receipt.json
       - name: Upload sanitized staging measurement source receipt
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' && steps.measurement_source_readiness.outcome == 'success'
+        if: (needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true') && steps.measurement_source_readiness.outcome == 'success'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: measurement-source-readiness-${{ github.event.workflow_run.head_sha }}
@@ -1109,7 +1109,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Enforce staging measurement source readiness
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' && steps.measurement_source_readiness.outcome != 'success'
+        if: (needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true') && steps.measurement_source_readiness.outcome != 'success'
         run: |
           printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
           exit 1

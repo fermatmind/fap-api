@@ -58,3 +58,5 @@ M3 当前集合绑定实际生产 REVISION 的 `seo.competitive_evidence_closeou
 只有新的有效且未过期生产 bundle，才能替代同生产环境、tests/en、competitive_evidence、同固定 cohort/source set、完整校验通过且捕获更早的历史记录。原行、hash、captured_at、expires_at 均不改动；自然冻结证据及正式结果保留退出 bundle hashes、替代 bundle/receipt hash、生产 SHA 和 `SUPERSEDED_BY_VERIFIED_PRODUCTION_RECEIPT`。其他范围、损坏或替代依据不足的记录继续参加新鲜度与安全检查；已知安全故障仍 DENY。
 
 M3 生命周期代码发布复用现有 classifier → CI 11G 聚焦验证 → production competitive-release-prepare → smoke → finalize 路径，来源由固定 registry 限制。其测量依赖未就绪时保持 HOLD，不补零、不改 TTL、不开放 Council/model/tool/通知业务执行。A08 仍走 scoped/readonly 分支；共享依赖变化仅触发其必要 M1/M2 聚焦检查和独立端到端复验，不重跑完整 A08。其他生产发布未提供本 SHA 的有效回执时，当前检查保持 HOLD。
+
+M3 必需的 staging 依赖准备复用现有 inactive measurement candidate、固定 90 天/web 的只读 GSC 同步和 org 0 CRO readmodel 刷新。这些步骤及其严格 readiness/产物检查随 competitive_required 执行；full Council closeout 仍只由原 runtime_closeout 条件执行。缺省的同步配置使用该路径原有的 90/web 固定契约，显式错误配置仍拒绝；不修改云权限、采集器、来源 registry 或普通运行时写开关。
