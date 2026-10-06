@@ -45,6 +45,20 @@ test("competitive ingestion is measurement-gated and environment independent", (
   assert.match(deploy, /cro_measurement\.hold_reason == "NONE"/);
 });
 
+test("scoped M3 staging collects verified evidence without full Council closeout", () => {
+  const start = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
+  const end = deploy.indexOf("- uses: actions/upload-artifact", start);
+  const staging = deploy.slice(start, end);
+
+  assert.ok(start > 0 && end > start);
+  assert.match(staging, /^\s+if: needs\.policy\.outputs\.seo_competitive_evidence == 'true'$/m);
+  assert.doesNotMatch(staging, /seo_council_runtime_closeout|seo-intel:gsc-sync|analytics:refresh-seo-conversion-daily/);
+  assert.match(staging, /seo:competitive-evidence-ingest --cohort=competitive\.big-five\.live\.v2 --write-evidence/);
+  assert.match(staging, /search_measurement\.freshness_state == "fresh"/);
+  assert.match(staging, /cro_measurement\.freshness_state == "fresh"/);
+  assert.match(deploy.slice(end, deploy.indexOf("- name:", end)), /if-no-files-found: error/);
+});
+
 test("competitive persistence uses an ephemeral writer without changing runtime authority", () => {
   const stagingStart = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
   const stagingEnd = deploy.indexOf("- uses: actions/upload-artifact", stagingStart);
