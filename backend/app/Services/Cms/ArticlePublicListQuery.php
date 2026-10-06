@@ -8,12 +8,36 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
+use App\Models\ContentMaterialDecision;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\JoinClause;
 
 final class ArticlePublicListQuery
 {
+    /** Fresh, bounded feed reads never use the list's stale/LKG payload. */
+    public function feed(int $orgId, string $locale): \Illuminate\Database\Eloquent\Collection
+    {
+        $changedAt = ContentMaterialDecision::query()
+            ->select('material_changed_at')
+            ->whereColumn('org_id', 'articles.org_id')
+            ->whereColumn('locale', 'articles.locale')
+            ->where('family', 'article')
+            ->where('authority_revision_kind', 'article_translation_revision')
+            ->whereColumn('authority_revision', 'articles.published_revision_id')
+            ->where('publication_state', 'published')
+            ->orderByDesc('id')->limit(1);
+        $articles = $this->publicQuery(['org_id' => $orgId])
+            ->where('articles.locale', $locale)
+            ->whereNotNull('articles.published_at')
+            ->selectSub($changedAt, 'feed_material_changed_at')
+            ->orderByRaw('COALESCE(feed_material_changed_at, list_revision.published_at, articles.published_at) DESC')
+            ->orderByDesc('articles.id')->limit(100)->get();
+        $this->hydrate($articles);
+
+        return $articles;
+    }
+
     /**
      * @param  array{org_id:int,locale:?string,related_test_slug:?string,voice:?string,page:int,per_page:int}  $filters
      * @return LengthAwarePaginator<int, Article>

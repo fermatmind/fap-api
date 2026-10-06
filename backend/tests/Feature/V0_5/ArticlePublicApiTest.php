@@ -818,6 +818,7 @@ final class ArticlePublicApiTest extends TestCase
     public function test_article_detail_projects_cms_cta_slots_and_visible_faq_without_private_targets(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
+        $this->ensurePublicRiasecRegistry();
 
         $editorialPackage = [
             'answer_surface_policy' => 'editor_supplied',
@@ -935,8 +936,9 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertStringNotContainsString('English visible FAQ?', (string) $zhSeo->getContent());
     }
 
-    public function test_article_detail_fallback_uses_related_public_test_before_mbti_default(): void
+    public function test_article_detail_uses_explicit_related_public_test_without_unrelated_default(): void
     {
+        $this->ensurePublicRiasecRegistry();
         $this->createArticle([
             'slug' => 'riasec-fallback-article',
             'locale' => 'en',
@@ -1244,6 +1246,18 @@ final class ArticlePublicApiTest extends TestCase
     /**
      * @param  array<string, mixed>  $overrides
      */
+    private function ensurePublicRiasecRegistry(): void
+    {
+        \App\Models\ScaleRegistry::withoutGlobalScopes()->updateOrCreate(['code' => 'RIASEC', 'org_id' => 0], [
+            'primary_slug' => 'holland-career-interest-test-riasec', 'driver_type' => 'riasec',
+            'slugs_json' => ['holland-career-interest-test-riasec'],
+            'is_public' => true, 'is_active' => true,
+        ]);
+        \App\Models\ScaleSlug::withoutGlobalScopes()->updateOrCreate([
+            'org_id' => 0, 'slug' => 'holland-career-interest-test-riasec',
+        ], ['scale_code' => 'RIASEC', 'is_primary' => true]);
+    }
+
     private function createArticle(
         array $overrides = [],
         array $revisionOverrides = [],
