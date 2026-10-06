@@ -64,6 +64,20 @@ final class SeoPlatform11FEvidenceDiagnosticReasonTest extends TestCase
         $this->assertSame(MeasurementEvidenceLoadResult::NONE, $resolver->cro($ready));
     }
 
+    public function test_database_failure_categories_never_expose_exception_content(): void
+    {
+        foreach ([1045 => 'permission', 2003 => 'transport', 1054 => 'schema', 1213 => 'storage', 9999 => 'unexpected'] as $driver => $expected) {
+            $exception = new \PDOException('secret host SQL token');
+            $exception->errorInfo = ['HY000', $driver, 'private SQL and credentials'];
+            $category = \App\Services\SeoCouncil\Measurement\ReadOnlyMeasurementEvidenceBundleLoader::failureCategory($exception);
+            $this->assertSame($expected, $category);
+            $diagnostic = MeasurementEvidenceLoadResult::make('search_measurement', [], 'unavailable', 'unknown', 'GSC_READMODEL_UNHEALTHY', null, $category)->diagnostic();
+            $this->assertSame('GSC_READMODEL_UNHEALTHY', $diagnostic['hold_reason']);
+            $this->assertSame($expected, $diagnostic['failure_category']);
+            $this->assertStringNotContainsString('secret', json_encode($diagnostic, JSON_THROW_ON_ERROR));
+        }
+    }
+
     public function test_diagnostic_projection_contains_only_enums_boolean_and_hash(): void
     {
         foreach ([

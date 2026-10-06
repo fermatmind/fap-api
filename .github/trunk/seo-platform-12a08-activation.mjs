@@ -2,7 +2,10 @@
 import { createHash } from 'node:crypto';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-export const SCOPE_VERSION = 'seo-council-a08-dependencies.v2';
+export const SCOPE_VERSION = 'seo-council-a08-dependencies.v3';
+export const LEGACY_SCOPE_VERSION = 'seo-council-a08-dependencies.v2';
+// Keep rollback readers compatible until this dual-scope reader is accepted in production.
+export const PRODUCER_SCOPE_VERSION = LEGACY_SCOPE_VERSION;
 export const MISSIONS = ['seo.platform12.daily_gsc_core_runtime', 'seo.platform12.daily_url_truth_reconciliation', 'seo.platform12.daily_private_policy_evidence_drift'];
 const base = 'backend/app/Services/SeoCouncil/Platform12/';
 // All three production readers consume the same scheduled Runtime receipt window.
@@ -18,10 +21,16 @@ export const COMMON_DEPENDENCIES = [
   'backend/database/migrations/', 'backend/app/Http/Middleware/', 'backend/app/Policies/', 'backend/app/Models/',
   'backend/app/Support/', 'backend/app/Services/Auth/', 'backend/app/Providers/', 'backend/app/Services/SeoAgentPolicyGateway/', 'backend/app/Services/SeoAgentGovernance/',
   'backend/app/Services/SeoAgentEvidence/', 'backend/app/Services/SeoCouncil/', 'backend/resources/seo-agent/',
-  'backend/app/Filament/Ops/', 'backend/resources/views/filament/ops/', 'backend/scripts/deploy/',
-  '.github/trunk/', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
+  'backend/scripts/deploy/',
+  '.github/trunk/seo-platform-12a08-activation.mjs', '.github/trunk/seo-platform-12a08-release.mjs',
+  '.github/trunk/seo-platform-12a08-transition.mjs', '.github/trunk/seo-platform-12a08-evidence-download.mjs', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
 ];
-export function scopeFor(path) {
+export function scopeFor(path, version = SCOPE_VERSION) {
+  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version)) throw new Error('A08_SCOPE_VERSION_HOLD');
+  if (version === LEGACY_SCOPE_VERSION && (path.startsWith('.github/trunk/') || path.startsWith('backend/app/Filament/Ops/') || path.startsWith('backend/resources/views/filament/ops/'))) return ['public'];
+  if (version === SCOPE_VERSION && (/\.test\.[cm]?js$|(?:^|\/)tests\//.test(path)
+    || path === 'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php'
+    )) return [];
   const mission = MISSIONS.filter(id => MISSION_DEPENDENCIES[id].some(p => path.startsWith(p)));
   if (mission.length) return mission;
   if (/^backend\/content_assets\/(?:personality_public|career)\/current\/.*\.json$/.test(path)) return ['public'];
@@ -31,7 +40,7 @@ export function scopeFor(path) {
 }
 export const inRuntimeScope = path => scopeFor(path).length > 0;
 export const digest = value => createHash('sha256').update(value).digest('hex');
-export function fingerprint(root = process.cwd(), ref = 'HEAD') {
+export function fingerprint(root = process.cwd(), ref = 'HEAD', version = SCOPE_VERSION) {
   const rows = execFileSync('git', ['ls-tree', '-r', '-z', ref], { cwd: root, maxBuffer: 32 * 1024 * 1024 }).toString().split('\0').filter(Boolean);
   const result = Object.fromEntries(['public', ...MISSIONS].map(id => [id, []]));
   const semanticRows = rows.filter(row=>/^backend\/content_assets\/(?:personality_public|career)\/current\/.*\.json$/.test(row.slice(row.indexOf('\t')+1)));
@@ -74,7 +83,7 @@ export function fingerprint(root = process.cwd(), ref = 'HEAD') {
   }
   for (const row of rows) {
     const path = row.slice(row.indexOf('\t') + 1);
-    for (const id of scopeFor(path)) result[id].push(semantic.has(row) ? `${path}\0${semantic.get(row)}` : row);
+    for (const id of scopeFor(path, version)) result[id].push(semantic.has(row) ? `${path}\0${semantic.get(row)}` : row);
   }
   return Object.fromEntries(Object.entries(result).map(([id, rows]) => {
     const hash = createHash('sha256');
@@ -101,8 +110,10 @@ export function mayCarry(manifest, candidate, mission, root = process.cwd()) {
     || manifest?.repository !== 'fermatmind/fap-api' || !MISSIONS.includes(mission)
     || !/^[a-f0-9]{40}$/.test(manifest.bound_production_sha) || !/^[a-f0-9]{40}$/.test(candidate.production_sha)) return false;
   const ancestor = spawnSync('git', ['merge-base', '--is-ancestor', manifest.bound_production_sha, candidate.production_sha], { cwd: root });
-  const fingerprints = fingerprint(root, candidate.production_sha);
-  const old = fingerprint(root, manifest.bound_production_sha);
+  const version = manifest.validation?.public_checks?.scope_version ?? SCOPE_VERSION;
+  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version) || (manifest.missions?.[mission]?.checks?.scope_version ?? version) !== version) return false;
+  const fingerprints = fingerprint(root, candidate.production_sha, version);
+  const old = fingerprint(root, manifest.bound_production_sha, version);
   return ancestor.status === 0 && old.public === fingerprints.public && old[mission] === fingerprints[mission]
     && manifest.validation?.public_checks?.fingerprint === old.public
     && manifest.missions?.[mission]?.checks?.fingerprint === old[mission]
@@ -114,20 +125,24 @@ export function validateNightly(receipt, metadata) {
     || receipt?.workflow_sha !== metadata?.sha) throw new Error('NIGHTLY_SCOPE_HOLD');
   return true;
 }
-export const CHECKS = {
+export const LEGACY_CHECKS = {
   public: ['SeoPlatform12A01MissionCatalogTest','SeoPlatform12A02SchedulerStorageTest','SeoPlatform12A03SchedulerFencingTest','SeoPlatform12A04ProductionPersistenceTest','SeoPlatform12A05ReadOnlyRuntimeGateTest','SeoPlatform12A08ActivationEvidenceTest','SeoPlatform12A08SourceCheckTest','SeoPlatform12A08DailyWiringTest','SeoPlatform12A08LegacyScheduleContractTest','MigrationPurityGateTest','SeoPlatform12F01NotificationPolicyContractTest','SeoPlatform12F02NotificationOutboxTest','SeoPlatform11C','SeoOperationsPageTest','SeoUxImpl06AgentCouncilTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12E04TraceDrilldownUiSafetyTest'],
   [MISSIONS[0]]: ['SeoPlatform12B01DailyGscCoreRuntimeTest','SeoPlatform12A08ProductionEvidenceTest'],
   [MISSIONS[1]]: ['SeoPlatform12B02DailyUrlTruthTest','SeoPlatform12A08ProductionEvidenceTest'],
   [MISSIONS[2]]: ['SeoPlatform12B03DailySecurityDriftTest','SeoPlatform12A08ProductionEvidenceTest'],
 };
-export function scopedReceipt(junit, sha, root = process.cwd()) {
+// Presentation tests remain changed-test/full Council/Nightly regressions. They
+// do not confer production authorization; policy and outbox boundaries remain.
+export const CHECKS = {...LEGACY_CHECKS, public:LEGACY_CHECKS.public.filter(name=>!['SeoOperationsPageTest','SeoUxImpl06AgentCouncilTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12E04TraceDrilldownUiSafetyTest'].includes(name))};
+export function scopedReceipt(junit, sha, root = process.cwd(), version = SCOPE_VERSION) {
+  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version)) throw new Error('A08_SCOPE_VERSION_HOLD');
   if (!/^[a-f0-9]{40}$/.test(sha) || !junit.includes('<testcase') || /<(?:failure|error)\b/.test(junit)) throw new Error('SCOPED_TEST_RESULTS_HOLD');
   const cases = [...junit.matchAll(/<testcase\b[^>]*?(?:\/>|>[\s\S]*?<\/testcase>)/g)].map(match=>match[0]);
-  const prints = fingerprint(root, sha);
+  const prints = fingerprint(root, sha, version);
   const checks = {};
-  for (const [id, tests] of Object.entries(CHECKS)) {
+  for (const [id, tests] of Object.entries(version === LEGACY_SCOPE_VERSION ? LEGACY_CHECKS : CHECKS)) {
     if (!tests.every(test => cases.some(item=>item.includes(test)) && cases.filter(item=>item.includes(test)).every(item=>!/<skipped\b/.test(item)))) throw new Error(`SCOPED_TEST_COVERAGE_HOLD:${id}`);
-    checks[id] = {scope_id:id,check_scope: 'a08_scoped_checks', sha, scope_version: SCOPE_VERSION, status: 'pass', fingerprint: prints[id], result_digest: digest(junit), tests};
+    checks[id] = {scope_id:id,check_scope: 'a08_scoped_checks', sha, scope_version: version, status: 'pass', fingerprint: prints[id], result_digest: digest(junit), tests};
   }
   return {schema_version: 'seo.a08_scoped_checks.v2', sha, check_scope: 'a08_scoped_checks', checks,
     covered_classes: [...new Set(cases.flatMap(item=>[...item.matchAll(/class(?:name)?="([^"]+)"/g)].map(match=>match[1])))].filter(name=>cases.filter(item=>item.includes(name)).every(item=>!/<skipped\b/.test(item))),
@@ -137,7 +152,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const [cmd, input, sha, output] = process.argv.slice(2);
   if (cmd === 'fingerprint') process.stdout.write(JSON.stringify(fingerprint(input))+'\n');
   else if (cmd === 'scoped-receipt') {
-    const receipt = scopedReceipt(readFileSync(input, 'utf8'), sha);
+    const receipt = scopedReceipt(readFileSync(input, 'utf8'), sha, process.cwd(), PRODUCER_SCOPE_VERSION);
     if (process.argv[6]) receipt.nightly_source = JSON.parse(readFileSync(process.argv[6], 'utf8'));
     writeFileSync(output, JSON.stringify(receipt)+'\n');
   }

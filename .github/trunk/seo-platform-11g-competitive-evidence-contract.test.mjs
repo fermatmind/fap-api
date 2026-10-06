@@ -19,7 +19,8 @@ test("11G uses the permanent exact-SHA control plane", () => {
   for (const source of [classifier, ci, deploy, deployer]) {
     assert.match(source, /seo_competitive_evidence/);
   }
-  assert.match(ci, /SeoPlatform11B\*\.php tests\/Feature\/SeoIntel\/SeoPlatform11G\*\.php/);
+  assert.match(ci, /boundary_tests=\(tests\/Feature\/SeoIntel\/SeoPlatform11B\*\.php\)/);
+  assert.match(ci, /php artisan test --compact "\$\{boundary_tests\[@\]\}" tests\/Feature\/SeoIntel\/SeoPlatform11G\*\.php/);
   assert.match(ci, /SEO-PLATFORM-11G/);
   assert.match(ci, /dependency_ingestion\.external_reads == 0/);
   assert.match(deploy, /seo-competitive-evidence-staging/);
@@ -46,8 +47,8 @@ test("competitive ingestion is measurement-gated and environment independent", (
 });
 
 test("scoped M3 staging collects verified evidence without full Council closeout", () => {
-  const start = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
-  const end = deploy.indexOf("- uses: actions/upload-artifact", start);
+  const start = deploy.indexOf("- name: Prepare staging competitive evidence on inactive candidate");
+  const end = deploy.indexOf("- name: Deploy staging and run repository smoke chain", start);
   const staging = deploy.slice(start, end);
 
   assert.ok(start > 0 && end > start);
@@ -56,7 +57,7 @@ test("scoped M3 staging collects verified evidence without full Council closeout
   assert.match(staging, /seo:competitive-evidence-ingest --cohort=competitive\.big-five\.live\.v2 --write-evidence/);
   assert.match(staging, /search_measurement\.freshness_state == "fresh"/);
   assert.match(staging, /cro_measurement\.freshness_state == "fresh"/);
-  assert.match(deploy.slice(end, deploy.indexOf("- name:", end)), /if-no-files-found: error/);
+  assert.match(deploy, /name: seo-competitive-evidence-staging[^]*?if-no-files-found: error/);
 });
 
 test("M3 reuses staging measurement preparation while keeping Council closeout separate", () => {
@@ -73,13 +74,13 @@ test("M3 reuses staging measurement preparation while keeping Council closeout s
   assert.match(readiness, /vars\.SEO_INTEL_GSC_SYNC_SEARCH_TYPES \|\| 'web'/);
   assert.match(readiness, /test "\$GSC_SYNC_WINDOW_DAYS" = 90/);
   assert.match(readiness, /test "\$GSC_SYNC_SEARCH_TYPES" = web/);
-  const closeout = deploy.slice(end, deploy.indexOf("- name: Finalize staging competitive evidence", end));
+  const closeout = deploy.slice(end, deploy.indexOf("- name: Read staging competitive evidence after activation", end));
   assert.match(closeout, /- name: Finalize staging SEO Council closeout\n\s+if: needs\.policy\.outputs\.seo_council_runtime_closeout == 'true'\n/);
 });
 
 test("competitive persistence uses an ephemeral writer without changing runtime authority", () => {
-  const stagingStart = deploy.indexOf("- name: Finalize staging competitive evidence after 11F readiness");
-  const stagingEnd = deploy.indexOf("- uses: actions/upload-artifact", stagingStart);
+  const stagingStart = deploy.indexOf("- name: Prepare staging competitive evidence on inactive candidate");
+  const stagingEnd = deploy.indexOf("- name: Deploy staging and run repository smoke chain", stagingStart);
   const staging = deploy.slice(stagingStart, stagingEnd);
   const productionStart = deploy.indexOf("- name: Deploy once and automatically restore LKG after committed smoke failure");
   const productionEnd = deploy.indexOf("- name: Read production competitive evidence receipt", productionStart);
@@ -179,7 +180,7 @@ test("production validates local write configuration without requiring live GSC 
   assert.doesNotMatch(preflight, /\b(?:ssh|scp|curl)\b/);
 });
 
-test("production preparation reuses valid snapshots and bounds conditional parallel refresh", () => {
+test("production preparation reuses valid snapshots and bounds conditional serial refresh", () => {
   const command = readFileSync(
     new URL("../../backend/app/Console/Commands/SeoCompetitiveReleasePrepareCommand.php", import.meta.url),
     "utf8",
@@ -196,7 +197,7 @@ test("production preparation reuses valid snapshots and bounds conditional paral
   assert.match(command, /seo\.competitive_release_prepare\.v1/);
   assert.match(command, /PROCESS_TIMEOUT_SECONDS = 1500/);
   assert.match(command, /SUPERVISOR_TIMEOUT_SECONDS = 1800/);
-  assert.match(command, /->start\(\)/);
+  assert.match(command, /->run\(\)/);
   assert.match(command, /GSC_REFRESH_TIMEOUT/);
   assert.match(command, /CRO_REFRESH_TIMEOUT/);
   assert.match(command, /MEASUREMENT_REVALIDATION_HOLD/);

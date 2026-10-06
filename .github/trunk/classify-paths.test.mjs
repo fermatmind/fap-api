@@ -29,7 +29,7 @@ test("reviewed Ops presentation keeps CI and deployment without live Council sou
   for (const path of SEO_OPS_PRESENTATION_PATHS) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.seo_ops_presentation_only, true, path);
-    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
     assert.equal(result.operations.seo_agent_policy_gateway, true, path);
     assert.equal(result.flags.seo_discoverability, false, path);
     assert.equal(result.flags.application_code, true, path);
@@ -74,7 +74,7 @@ test("mixed runtime, security, sources, authorities and unknown paths retain rea
   ]) {
     const result = classifyPaths([...SEO_OPS_PRESENTATION_PATHS, path]);
     assert.equal(result.operations.seo_ops_presentation_only, false, path);
-    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
     assert.equal(result.deploy, true, path);
   }
 });
@@ -88,7 +88,7 @@ test("daily Council wiring and its tests retain the Council validation boundary"
     "backend/resources/views/filament/ops/components/ops-system-health-workspace.blade.php",
     "backend/resources/views/filament/ops/components/ops-trace-drilldown-workspace.blade.php",
   ]) {
-    assert.equal(classifyPaths([path]).operations.seo_council_orchestration, true, path);
+    assert.equal(classifyPaths([path]).operations.seo_council_orchestration, !classifyPaths([path]).operations.a08_focused, path);
     assert.equal(has([path], "seo_discoverability"), false, path);
   }
 });
@@ -115,7 +115,7 @@ test("deploys classifier changes without activating deferred Council evidence", 
     ".github/trunk/classify-paths.mjs",
     ".github/trunk/classify-paths.test.mjs",
   ]);
-  assert.deepEqual(result.categories, ["infrastructure_deployment"]);
+  assert.deepEqual(result.categories, ["docs_rules_tests_only", "infrastructure_deployment"]);
   assert.equal(result.deploy, true);
   assert.equal(result.tests_changed, true);
   assert.equal(result.operations.seo_council_orchestration, false);
@@ -399,7 +399,7 @@ test("binds deterministic SEO Council orchestration to every 11D through 11L lay
     "deploy.php",
   ]) {
     const result = classifyPaths([path]);
-    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
     assert.equal(result.flags.seo_discoverability, false, path);
     assert.equal(result.flags.cache_runtime_projection, false, path);
   }
@@ -423,7 +423,7 @@ test("binds Platform 12 scheduler storage to migration and Council receipts with
     const result = classifyPaths([path]);
     assert.equal(result.flags.backward_compatible_migration, true, path);
     assert.equal(result.flags.seo_discoverability, false, path);
-    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
     assert.equal(result.operations.seo_competitive_evidence, false, path);
     assert.equal(result.deploy, true, path);
   }
@@ -504,7 +504,7 @@ test("11G activation control change deploys without competitive ingestion", () =
     ".github/trunk/classify-paths.test.mjs",
   ]);
   assert.equal(result.deploy, true);
-  assert.deepEqual(result.categories, ["infrastructure_deployment"]);
+  assert.deepEqual(result.categories, ["docs_rules_tests_only", "infrastructure_deployment"]);
   assert.equal(result.operations.seo_competitive_evidence, false);
   assert.equal(result.operations.seo_council_orchestration, false);
 });
@@ -515,7 +515,7 @@ test("Platform 12 Council changes do not block on deferred competitive evidence"
     "backend/resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json",
   ]) {
     const result = classifyPaths([path]);
-    assert.equal(result.operations.seo_council_orchestration, true, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
     assert.equal(result.operations.seo_competitive_evidence, false, path);
     assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, false, path);
   }
@@ -618,3 +618,8 @@ test("M3 evidence lifecycle reuses fixed-source ingestion without full Council c
     assert.equal(result.operations.a08_readonly_wiring, true);
   }
 });
+
+test('named Python and Shell tests remain tests-only and require actual native execution',()=>{ const result=classifyPaths(['scripts/test_delivery.py','scripts/deploy/test_readback.sh']); assert.equal(result.tests_changed,true); assert.equal(result.deploy,false); });
+
+// An authorization scope promotion needs source/terminal acceptance, including on an enabled runtime.
+test('A08 producer scope promotion requires real acceptance and preserves enabled operator state',()=>{const c=classifyPaths(['.github/trunk/seo-platform-12a08-activation.mjs']);assert.equal(c.operations.a08_gate_only,false);assert.equal(c.operations.a08_focused,true);assert.equal(c.operations.a08_scoped_checks,true);});

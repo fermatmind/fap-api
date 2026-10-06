@@ -136,11 +136,47 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertSame(0, $runtime->status()['effective_enabled_missions']);
     }
 
+    public function test_old_producer_scope_is_readable_and_missing_or_unknown_scope_is_rejected(): void
+    {
+        $reader = app(\App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::class);
+        $manifest = $this->manifest();
+        foreach (['public', ...Platform12DailyMissionSet::IDS] as $scope) {
+            $key = $scope === 'public' ? 'validation.public_checks' : 'missions.'.$scope.'.checks';
+            data_set($manifest, $key.'.scope_version', 'seo-council-a08-dependencies.v2');
+            data_set($manifest, $key.'.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::LEGACY_REQUIRED_TESTS[$scope]);
+        }
+        $this->assertSame('READY', $reader->validate($manifest, $this->sha));
+        data_set($manifest, 'validation.public_checks.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::REQUIRED_TESTS['public']);
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($manifest, $this->sha));
+        data_set($manifest, 'validation.public_checks.scope_version', 'unknown');
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($manifest, $this->sha));
+    }
+
+    public function test_supported_legacy_producer_output_remains_readable_by_the_lkg_consumer(): void
+    {
+        $process = new \Symfony\Component\Process\Process(['git', 'show',
+            'f52866f5bd565cffa4999bd0214e1ed90190abbc:backend/app/Services/SeoCouncil/Platform12/Platform12ActivationEvidence.php'], dirname(base_path()));
+        $process->mustRun();
+        $path = $this->directory.'/legacy-reader.php';
+        file_put_contents($path, str_replace('class Platform12ActivationEvidence', 'class LegacyCompatibleActivationEvidence', $process->getOutput()));
+        require_once $path;
+        $reader = new \App\Services\SeoCouncil\Platform12\LegacyCompatibleActivationEvidence(
+            app(RuntimeCapabilitySnapshotBuilder::class), app(SeoRegistryHasher::class));
+        $manifest = $this->manifest();
+        foreach (['public', ...Platform12DailyMissionSet::IDS] as $scope) {
+            $key = $scope === 'public' ? 'validation.public_checks' : 'missions.'.$scope.'.checks';
+            data_set($manifest, $key.'.scope_version', 'seo-council-a08-dependencies.v2');
+            data_set($manifest, $key.'.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::LEGACY_REQUIRED_TESTS[$scope]);
+        }
+        $this->assertSame('READY', $reader->validate($manifest, $this->sha));
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($this->manifest(), $this->sha));
+    }
+
     private function manifest(): array
     {
         $vector = app(RuntimeCapabilitySnapshotBuilder::class)->snapshot()['version_vector'];
         $artifact = 'sha256:'.str_repeat('c', 64);
-        $check = ['check_scope' => 'a08_scoped_checks', 'sha' => $this->sha, 'scope_version' => 'seo-council-a08-dependencies.v2',
+        $check = ['check_scope' => 'a08_scoped_checks', 'sha' => $this->sha, 'scope_version' => 'seo-council-a08-dependencies.v3',
             'status' => 'pass', 'fingerprint' => str_repeat('d', 64), 'result_digest' => str_repeat('e', 64), 'scope_id' => 'public', 'tests' => \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::REQUIRED_TESTS['public']];
         $deploy = ['sha' => $this->sha, 'check_scope' => 'deployment_smoke_and_readonly_state', 'status' => 'pass',
             'completed_job' => true, 'run_id' => 12, 'artifact_digest' => $artifact, 'pause_preserved' => true, 'business_guards_closed' => true];

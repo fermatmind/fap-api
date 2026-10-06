@@ -32,8 +32,27 @@ set('career_content_package_sha256', '');
 set('career_content_package_base_sha', '');
 set('career_content_package_tree_sha', '');
 set('private_result_authority_publish_required', true);
+set('release_operations', '');
 set('mbti_result_introductions_publish', false);
 set('mbti_trait_content_publish', false);
+
+/** Legacy callers remain conservative; exact-SHA workflows pass every operation. */
+function deployOperation(string $name): bool
+{
+    $encoded = (string) get('release_operations', '');
+    if ($encoded === '') {
+        return str_ends_with($name, '_private_publish')
+            ? (bool) get('private_result_authority_publish_required', true)
+            : true;
+    }
+    $bytes = base64_decode($encoded, true);
+    $operations = $bytes === false ? null : json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+    if (! is_array($operations) || ! array_key_exists($name, $operations) || ! is_bool($operations[$name])) {
+        throw new \RuntimeException('Invalid exact-SHA deployment operation selection.');
+    }
+
+    return $operations[$name];
+}
 
 set('sentry_release', function () {
     return get('release_name');
@@ -760,6 +779,11 @@ before('deploy:symlink', 'guard:public-dns-health');
  * L1 runtime activation.
  */
 task('guard:career-detail-cache-coverage', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged guard:career-detail-cache-coverage consumer.');
+
+        return;
+    }
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping Career detail cache coverage because this isolated release does not mutate Career authority caches.</comment>');
 
@@ -818,6 +842,11 @@ task('guard:career-detail-cache-coverage', function () {
  * read-only gate below as the activation authority.
  */
 task('career:repair-published-detail-cache-coverage', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged career:repair-published-detail-cache-coverage consumer.');
+
+        return;
+    }
     set('career_detail_post_repair_coverage', null);
     if (deploySkipsAuthorityMutations()) {
         writeln('<comment>Skipping Career detail cache repair because this isolated release does not mutate Career authority caches.</comment>');
@@ -875,6 +904,11 @@ before('deploy:symlink', 'guard:queue-reload-capability');
  * closed when the shared private authority artifact is missing or malformed.
  */
 task('guard:career-runtime-projection-authority', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged guard:career-runtime-projection-authority consumer.');
+
+        return;
+    }
     if (in_array(deployMode(), ['code_only', 'candidate_only', 'career_content_only', 'career_first_publish'], true)) {
         writeln('<comment>Skipping Career runtime projection gate for isolated code/candidate release.</comment>');
 
@@ -902,6 +936,11 @@ BASH,
  * candidates or consume production Redis capacity.
  */
 task('career:rebuild-directory-after-detail-repair', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged career:rebuild-directory-after-detail-repair');
+
+        return;
+    }
     if (deployBooleanOption('a08_gate_only', false)) {
         return;
     }
@@ -923,6 +962,11 @@ task('career:rebuild-directory-after-detail-repair', function () {
 });
 
 task('guard:career-discoverability-pre-sitemap', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged guard:career-discoverability-pre-sitemap consumer.');
+
+        return;
+    }
     if (deployMode() !== 'standard') {
         return;
     }
@@ -934,6 +978,11 @@ task('guard:career-discoverability-pre-sitemap', function () {
 });
 
 task('guard:career-discoverability-post-sitemap', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged guard:career-discoverability-post-sitemap consumer.');
+
+        return;
+    }
     // This postcondition belongs to the sitemap warm operation. A08 gate-only
     // releases preserve that cache and still run the authority and pre-sitemap checks.
     if (deployBooleanOption('a08_gate_only', false) || deployMode() !== 'standard') {
@@ -2749,6 +2798,11 @@ BASH);
 });
 
 task('seo:url-truth-reconciliation-receipt', function () {
+    if (! deployOperation('url_truth')) {
+        writeln('Skip unchanged seo:url-truth-reconciliation-receipt consumer.');
+
+        return;
+    }
     if (deployIsCareerContentOnly()) {
         writeln('<comment>Skip URL Truth probe because the Career URL set is unchanged.</comment>');
 
@@ -2819,6 +2873,11 @@ BASH);
 });
 
 task('seo:url-truth-controlled-reconcile', function () {
+    if (! deployOperation('url_truth')) {
+        writeln('Skip unchanged seo:url-truth-controlled-reconcile consumer.');
+
+        return;
+    }
     if (deploySkipsAuthorityMutations() || deploySeoPlatform10SkipsDisabledStaging('URL Truth reconciliation')) {
         return;
     }
@@ -2884,6 +2943,11 @@ BASH, timeout: 1800);
 });
 
 task('seo:url-truth-incremental-cms-canary', function () {
+    if (! deployOperation('url_truth')) {
+        writeln('Skip unchanged seo:url-truth-incremental-cms-canary consumer.');
+
+        return;
+    }
     $canaryMode = currentHost()->getAlias() === 'staging' ? '--allow-measurement-hold' : '';
     within('{{release_path}}/backend', function () use ($canaryMode): void {
         $script = str_replace('__CANARY_MODE__', $canaryMode, <<<'BASH'
@@ -2983,11 +3047,16 @@ BASH);
 });
 
 task('artisan:scales:seed-default', function () {
+    if (! deployOperation('scales_seed')) {
+        writeln('Skip unchanged artisan:scales:seed-default consumer.');
+
+        return;
+    }
     run('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT=1 {{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' fap:scales:seed-default --no-interaction --ansi');
 });
 
 task('big5:publish-private-result-authority', function () {
-    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+    if (! deployOperation('big5_private_publish')) {
         writeln('Skipping unchanged Big Five private result authority publication.');
 
         return;
@@ -3029,7 +3098,7 @@ BASH);
 });
 
 task('riasec:publish-private-result-authority', function () {
-    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+    if (! deployOperation('riasec_private_publish')) {
         writeln('Skipping unchanged RIASEC private result authority publication.');
 
         return;
@@ -3071,7 +3140,7 @@ BASH);
 });
 
 task('enneagram:publish-private-result-authority', function () {
-    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+    if (! deployOperation('enneagram_private_publish')) {
         writeln('Skipping unchanged Enneagram private result authority publication.');
 
         return;
@@ -3113,7 +3182,7 @@ BASH);
 });
 
 task('eq60:publish-private-result-authority', function () {
-    if (filter_var(get('private_result_authority_publish_required', true), FILTER_VALIDATE_BOOLEAN) !== true) {
+    if (! deployOperation('eq60_private_publish')) {
         writeln('Skipping unchanged EQ60 private result authority publication.');
 
         return;
@@ -3255,6 +3324,11 @@ task('cache:accept-public-projection', function () {
 });
 
 task('career:prune-public-cache-versions', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged career:prune-public-cache-versions');
+
+        return;
+    }
     if (deployUsesCareerContentPackage()) {
         return;
     }
@@ -3264,6 +3338,11 @@ task('career:prune-public-cache-versions', function () {
 });
 
 task('career:warm-public-authority-cache', function () {
+    if (! deployOperation('career_cache')) {
+        writeln('Skip unchanged career:warm-public-authority-cache consumer.');
+
+        return;
+    }
     if (deployBooleanOption('a08_gate_only', false) || deployUsesCareerContentPackage()) {
         writeln('<info>A08 gate-only delivery: no cache warm.</info>');
 
@@ -4828,6 +4907,9 @@ task('healthcheck:queue-smoke', function () {
 // This staging-only step publishes only the existing Chinese accountant and actor files.
 foreach (['publish', 'rollback'] as $accountantOperation) {
     task('career:staging-accountant-'.$accountantOperation, function () use ($accountantOperation): void {
+        if ($accountantOperation === 'publish' && ! deployOperation('career_cache')) {
+            return;
+        }
         if (deployUsesCareerContentPackage()) {
             return;
         }
@@ -4851,6 +4933,11 @@ foreach (['publish', 'rollback'] as $accountantOperation) {
 }
 
 task('healthcheck:staging-big-five-report-delivery', function () {
+    if (! deployOperation('big5_tests')) {
+        writeln('Skip unchanged healthcheck:staging-big-five-report-delivery');
+
+        return;
+    }
     if (deployUsesCareerContentPackage()) {
         return;
     }
@@ -5473,6 +5560,36 @@ task('deploy:career-first-publish', [
  * The owning workflow verifies the release identity and inactive state after
  * this task returns successfully.
  */
+task('guard:prepared-candidate', function () {
+    if (currentHost()->getAlias() !== 'staging' || get('deploy_mode') !== 'standard') {
+        throw new \RuntimeException('Prepared candidate resume is staging standard only.');
+    }
+    set('release_path', '{{deploy_path}}/releases/{{release_name}}');
+    run(<<<'BASH'
+set -euo pipefail
+candidate='{{release_path}}'
+active="$(readlink -f '{{deploy_path}}/current')"
+test ! -L "$candidate"
+test "$(readlink -f "$candidate")" != "$active"
+test "$(cat "$candidate/REVISION")" = '{{revision}}'
+test -r "$candidate/backend/.env"
+test -r "$candidate/backend/vendor/autoload.php"
+cd "$candidate/backend"
+{{bin/composer}} check-platform-reqs --no-dev --no-interaction
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); if (! $app->environment("staging")) exit(1);'
+BASH);
+});
+
+// The already installed inactive candidate keeps its environment-local vendor and caches.
+task('deploy:prepared', [
+    'guard:deploy-shell-config',
+    'guard:forbid-destructive',
+    'deploy:lock',
+    'guard:prepared-candidate',
+    'artisan:migrate',
+    'deploy:publish',
+]);
+
 task('deploy:candidate-only', [
     'guard:deploy-shell-config',
     'guard:forbid-destructive',

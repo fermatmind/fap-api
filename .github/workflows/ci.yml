@@ -43,6 +43,12 @@ jobs:
       a08_scoped_checks: ${{ steps.classify.outputs.a08_scoped_checks }}
       seo_competitive_evidence: ${{ steps.classify.outputs.seo_competitive_evidence }}
       classification: ${{ steps.classify.outputs.classification }}
+      a08_focused: ${{ steps.classify.outputs.a08_focused }}
+      big5_tests: ${{ steps.classify.outputs.big5_tests }}
+      mbti_modes: ${{ steps.classify.outputs.mbti_modes }}
+      test_modes: ${{ steps.classify.outputs.test_modes }}
+      content_pack_checks: ${{ steps.classify.outputs.content_pack_checks }}
+      content_test_files: ${{ steps.classify.outputs.content_test_files }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
@@ -96,6 +102,12 @@ jobs:
             echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
             echo "seo_competitive_evidence=$(jq -r .operations.seo_competitive_evidence "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
+            echo "a08_focused=$(jq -r .operations.a08_focused "$RUNNER_TEMP/classification.json")"
+            echo "big5_tests=$(jq -r .operations.big5_tests "$RUNNER_TEMP/classification.json")"
+            echo "content_pack_checks=$(jq -r .operations.content_pack_checks "$RUNNER_TEMP/classification.json")"
+            echo "content_test_files=$(jq -c .operations.content_test_files "$RUNNER_TEMP/classification.json")"
+            echo "mbti_modes=$(jq -r .operations.mbti_modes "$RUNNER_TEMP/classification.json")"
+            echo "test_modes=$(jq -c .operations.test_modes "$RUNNER_TEMP/classification.json")"
           } >> "$GITHUB_OUTPUT"
           cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
       - name: Test classifier and migration policy
@@ -155,6 +167,7 @@ jobs:
   content-pack-build-validate:
     name: content-pack-build-validate
     needs: [classify, hygiene]
+    if: needs.classify.outputs.content_pack_checks == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -162,38 +175,44 @@ jobs:
         with:
           fetch-depth: 0
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
+        if: needs.classify.outputs.content_pack_checks == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
         with:
           php-version: '8.4'
           coverage: none
           tools: composer:v2
       - name: Validate the current authority pack only
-        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
+        if: needs.classify.outputs.content_pack_checks == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
         working-directory: backend
         run: |
           composer install --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
-          php artisan career:current-manifest
-          php artisan personality:current-manifest
-          if [ '${{ needs.classify.outputs.career_current_authority_release }}' = 'true' ]; then
-            bash scripts/ci/verify_career_current_authority_release.sh
+          if [ '${{ needs.classify.outputs.personality_current_authority_release }}' = true ]; then php artisan personality:current-manifest; fi
+          if [ '${{ needs.classify.outputs.content_pack_checks }}' = true ]; then
+            mkdir -p storage/app/private/content_packs_index
+            php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
+            mapfile -t selected < <(jq -r '.[]' <<<'${{ needs.classify.outputs.content_test_files }}')
+            test "${#selected[@]}" -gt 0
+            php artisan test "${selected[@]}" --no-ansi
           fi
-          mkdir -p storage/app/private/content_packs_index
-          php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
-          php artisan test --filter='(ContentPacksIndexArtifact|ContentLint|ContentCompile)' --no-ansi
-      - if: needs.classify.outputs.content != 'true' && needs.classify.outputs.personality_current_authority_release != 'true'
+      - if: needs.classify.outputs.content_pack_checks != 'true' && needs.classify.outputs.personality_current_authority_release != 'true'
         run: echo "No content authority path changed."
 
   verify-mbti:
     name: verify-mbti-${{ matrix.mode }}
+    if: needs.classify.outputs.deploy == 'true' || needs.classify.outputs.tests_changed == 'true'
+    env:
+      FEATURE_SELFCHECK_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+      FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+      FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+      FEATURE_CONTENT_STORE_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
     needs: [classify, hygiene]
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        mode: [legacy, v2]
+        mode: ${{ fromJSON(needs.classify.outputs.test_modes) }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
@@ -217,7 +236,7 @@ jobs:
           cp -n .env.example .env || true
           php artisan key:generate --force
       - name: Validate expand-only migrations
-        if: needs.classify.outputs.migration == 'true'
+        if: matrix.mode == 'legacy' && needs.classify.outputs.migration == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -251,6 +270,15 @@ jobs:
             touch "$RUNNER_TEMP/fap-ci-seo-intel.sqlite"
             php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           fi
+      - name: Lint and format changed PHP inputs once
+        if: matrix.mode == 'legacy' && (needs.classify.outputs.deploy == 'true' || needs.classify.outputs.tests_changed == 'true')
+        working-directory: backend
+        run: |
+          mapfile -t changed_php < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- '*.php' | sed -n 's#^backend/##p')
+          if [ "${#changed_php[@]}" -gt 0 ]; then
+            for file in "${changed_php[@]}"; do php -l "$file" >/dev/null; done
+            ./vendor/bin/pint --test "${changed_php[@]}"
+          fi
       - name: Focused runtime contracts
         if: needs.classify.outputs.deploy == 'true'
         working-directory: backend
@@ -260,45 +288,41 @@ jobs:
           FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
           FEATURE_CONTENT_STORE_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
         run: |
-          php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+          if [ '${{ matrix.mode }}' = legacy ]; then php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi; fi
+          if [ '${{ needs.classify.outputs.mbti_modes }}' = true ]; then
+            php artisan test tests/Feature/V0_3/AttemptSubmitAuthTest.php tests/Feature/V0_3/AttemptSubmitIdempotencyTest.php tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php --no-ansi
+          fi
           if [ '${{ needs.classify.outputs.payment }}' = 'true' ]; then php artisan test tests/Feature/Commerce tests/Unit/Services/Commerce --no-ansi; fi
           if [ '${{ needs.classify.outputs.cache }}' = 'true' ]; then php artisan test --filter='(Cache|Projection|Redis|Fence|Lkg)' --no-ansi; fi
           if [ '${{ needs.classify.outputs.seo }}' = 'true' ] && [ '${{ needs.classify.outputs.tests_changed }}' != 'true' ] && [ '${{ needs.classify.outputs.career_first_publish }}' != 'true' ]; then
             echo "::error::SEO runtime changes must include focused changed tests."
             exit 1
           fi
-      - name: Execute changed PHP tests for tests-only and mixed scopes
-        if: matrix.mode == 'legacy' && needs.classify.outputs.tests_changed == 'true'
-        working-directory: backend
-        shell: bash
-        run: |
-          set -euo pipefail
-          mapfile -t changed_php_test_paths < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' | grep -E '^backend/tests/.+Test\.php$' || true)
-          mapfile -t changed_tests < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- ':(top)backend/tests/**/*Test.php' | sed 's#^backend/##')
-          if [ "${#changed_php_test_paths[@]}" -ne "${#changed_tests[@]}" ]; then
-            echo "::error::Changed PHP tests were not fully selected: expected ${#changed_php_test_paths[@]}, selected ${#changed_tests[@]}." >&2
-            exit 1
-          fi
-          if [ "${#changed_tests[@]}" -gt 0 ]; then php artisan test "${changed_tests[@]}" --no-ansi; fi
+      - name: Execute changed PHP JS Python and Shell tests with inherited FEATURE inputs
+        if: needs.classify.outputs.tests_changed == 'true'
+        env:
+          TRUNK_TESTS_VERIFIED_SHA: ${{ github.sha }}
+        run: node .github/trunk/run-changed-tests.mjs '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' '${{ matrix.mode }}'
       - if: needs.classify.outputs.deploy != 'true'
         run: echo "Docs/rules/tests-only scope does not deploy."
 
   verify-bigfive:
     name: verify-bigfive
     needs: [classify, hygiene]
+    if: needs.classify.outputs.big5_tests == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        if: (needs.classify.outputs.content == 'true' && needs.classify.outputs.career_content_only != 'true') || needs.classify.outputs.application == 'true'
+        if: needs.classify.outputs.big5_tests == 'true'
         with:
           php-version: '8.4'
           coverage: none
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, redis
       - name: Focused Big Five regression
-        if: (needs.classify.outputs.content == 'true' && needs.classify.outputs.career_content_only != 'true') || needs.classify.outputs.application == 'true'
+        if: needs.classify.outputs.big5_tests == 'true'
         working-directory: backend
         run: |
           composer install --no-interaction --prefer-dist --no-progress
@@ -306,7 +330,7 @@ jobs:
           php artisan key:generate --force
           bash scripts/ci/prepare_sqlite.sh
           php artisan test --filter='(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
-      - if: (needs.classify.outputs.content != 'true' || needs.classify.outputs.career_content_only == 'true') && needs.classify.outputs.application != 'true'
+      - if: needs.classify.outputs.big5_tests != 'true'
         run: echo "Big Five runtime boundary unchanged."
 
   career-publisher-parity:
@@ -626,8 +650,8 @@ jobs:
 
   seo-council-orchestration:
     name: SEO Platform 11D-11L deterministic Council orchestration
-    needs: classify
-    if: needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true'
+    needs: [classify, seo-agent-policy-gateway]
+    if: always() && (needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true') && (needs.seo-agent-policy-gateway.result == 'success' || needs.seo-agent-policy-gateway.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -653,8 +677,35 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          if [ '${{ needs.classify.outputs.a08_focused }}' = true ]; then
+            cp -n .env.example .env || true
+            php artisan key:generate --force
+            node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
+            node --input-type=module - <<'JS' > "$RUNNER_TEMP/a08-required-paths.txt"
+          import {CHECKS,LEGACY_CHECKS,PRODUCER_SCOPE_VERSION,LEGACY_SCOPE_VERSION} from '../.github/trunk/seo-platform-12a08-activation.mjs';
+          const checks=PRODUCER_SCOPE_VERSION===LEGACY_SCOPE_VERSION?LEGACY_CHECKS:CHECKS;
+          import {execFileSync} from 'node:child_process';
+          const files=execFileSync('git',['ls-files','tests'],{encoding:'utf8'}).trim().split('\n');
+          const selected=new Set();
+          for(const name of new Set(Object.values(checks).flat())) {
+            const matches=files.filter(path=>path.endsWith(`/${name}.php`) || (name==='SeoPlatform11C' && path.split('/').at(-1).startsWith(name)));
+            if(!matches.length)throw new Error(`Missing required A08 consumer: ${name}`);
+            matches.forEach(path=>selected.add(path));
+          }
+          console.log([...selected].sort().join('\n'));
+          JS
+            mapfile -t required_paths < "$RUNNER_TEMP/a08-required-paths.txt"
+            mapfile -t nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
+            php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}" "${nightly_paths[@]}"
+            exit 0
+          fi
           php scripts/seo/export_seo_council_contracts.php --check
-          bash scripts/export_openapi.sh --check
+          if [ '${{ needs.classify.outputs.seo_agent_policy_gateway }}' = true ]; then
+            test '${{ needs.seo-agent-policy-gateway.result }}' = success
+            echo "Reuse exact-SHA pre-config OpenAPI check from policy gateway."
+          else
+            bash scripts/export_openapi.sh --check
+          fi
           export APP_CONFIG_CACHE="$RUNNER_TEMP/seo-council-config.php"
           cp -n .env.example .env || true
           php artisan key:generate --force
@@ -968,6 +1019,7 @@ jobs:
             and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' ../seo-council-orchestration-closeout.json >/dev/null
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: needs.classify.outputs.seo_council_orchestration == 'true'
         with:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration-closeout.json
@@ -985,8 +1037,8 @@ jobs:
 
   seo-competitive-evidence:
     name: SEO Platform 11G competitive evidence offline evaluation
-    needs: classify
-    if: needs.classify.outputs.seo_competitive_evidence == 'true'
+    needs: [classify, seo-agent-evidence-boundary]
+    if: always() && needs.classify.outputs.seo_competitive_evidence == 'true' && (needs.seo-agent-evidence-boundary.result == 'success' || needs.seo-agent-evidence-boundary.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -1004,7 +1056,13 @@ jobs:
           composer install --no-interaction --prefer-dist --no-progress
           php scripts/seo/export_seo_agent_evidence_contracts.php --check
           php scripts/seo/export_seo_council_contracts.php --check
-          php artisan test --compact tests/Feature/SeoIntel/SeoPlatform11B*.php tests/Feature/SeoIntel/SeoPlatform11G*.php
+          boundary_tests=()
+          if [ '${{ needs.classify.outputs.seo_agent_evidence_boundary }}' = true ]; then
+            test '${{ needs.seo-agent-evidence-boundary.result }}' = success
+          else
+            boundary_tests=(tests/Feature/SeoIntel/SeoPlatform11B*.php)
+          fi
+          php artisan test --compact "${boundary_tests[@]}" tests/Feature/SeoIntel/SeoPlatform11G*.php
           php artisan seo:competitive-evidence-closeout --expected-sha="$GITHUB_SHA" --environment=ci_candidate --json > ../seo-competitive-evidence-closeout.json
           jq -e --arg sha "$GITHUB_SHA" '
             .receipt_version == "seo.competitive_evidence_closeout.v3"
@@ -1087,9 +1145,13 @@ jobs:
           SEO_COMPETITIVE_EVIDENCE_RESULT: ${{ needs.seo-competitive-evidence.result }}
         run: |
           set -euo pipefail
-          for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT" "$CAREER_PARITY_RESULT"; do
+          for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CAREER_PARITY_RESULT"; do
             test "$result" = success
           done
+          require_result() { if [ "$1" = true ]; then test "$2" = success; else test "$2" = skipped; fi; }
+          require_result "$(jq -r '.operations.content_pack_checks or .operations.personality_current_authority_release' trunk-path-classification.json)" "$CONTENT_PACK_RESULT"
+          require_result "$(jq -r '.deploy or .tests_changed' trunk-path-classification.json)" "$VERIFY_MBTI_RESULT"
+          require_result "$(jq -r '.operations.big5_tests' trunk-path-classification.json)" "$VERIFY_BIGFIVE_RESULT"
           required="$(jq -r .operations.publisher_required trunk-path-classification.json)"
           jq -e --arg sha "$GITHUB_SHA" --argjson required "$required" '
             .release_sha == $sha

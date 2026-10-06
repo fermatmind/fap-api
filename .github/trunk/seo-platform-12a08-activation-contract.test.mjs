@@ -3,8 +3,8 @@ import test from 'node:test';
 import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync,chmodSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,digest} from './seo-platform-12a08-activation.mjs';
-import {verifyState,hasActivationEvidence,build,bindControlled} from './seo-platform-12a08-release.mjs';
+import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,LEGACY_CHECKS,LEGACY_SCOPE_VERSION,SCOPE_VERSION,digest} from './seo-platform-12a08-activation.mjs';
+import {verifyState,hasActivationEvidence,build,bindControlled,equivalentSource} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
 test('A08 unavailable activation evidence skips before candidate checks; existing evidence stays fail closed',()=>{
  for (const activation of [null,{schema_version:'seo.platform12_a08_activation.v1'}]) {
@@ -69,7 +69,7 @@ test('shared Runtime changes invalidate every mission proof through build and tr
  const sources=sha=>Object.fromEntries(MISSIONS.map(id=>[id,seal({schema_version:'seo.a08_source_check.v1',
   repository:'fermatmind/fap-api',environment:'production',sha,mission_id:id,real_runtime:true,
   mission_submitted:false,notification_sent:false,business_write_enabled:false,version_vector:vector,
-  source_wiring_status:'VERIFIED',source_gaps:[],observed_verdict:'READY',sources:[],
+  source_wiring_status:'VERIFIED',source_gaps:[],observed_verdict:'READY',sources:[{id:'offline-source',hash:'1'.repeat(64),observed_at:'2026-01-01T00:00:00Z'}],
   captured_at:new Date(Date.now()-1000).toISOString(),expires_at:new Date(Date.now()+60000).toISOString()})]));
  const buildAt=(sha,previous,sourceReports)=>build({sha,checks:scopedReceipt(junit,sha,root),
   ci:{id:1,run_attempt:1,head_sha:sha,conclusion:'success',status:'completed',event:'push',head_branch:'main'},
@@ -104,7 +104,7 @@ test('shared Runtime changes invalidate every mission proof through build and tr
   git('commit','--allow-empty','-qm','unchanged descendant');
   const unchanged=git('rev-parse','HEAD'), candidate=sha=>({production_sha:sha,version_vector:vector});
   for(const id of MISSIONS) assert.equal(mayCarry(previous,candidate(unchanged),id,root),true);
-  const carried=buildAt(unchanged,previous);
+  const carried=buildAt(unchanged,previous,sources(unchanged));
   for(const id of MISSIONS) {
    assert.equal(carried.missions[id].source_acceptance.source_sha,source);
    assert.equal(carried.missions[id].source_acceptance.bound_sha,unchanged);
@@ -152,7 +152,7 @@ test('shared Runtime changes invalidate every mission proof through build and tr
   assert.deepEqual(MISSIONS.map(id=>mayCarry(previous,candidate(single),id,root)),[false,true,true]);
   const classification=classifyPaths(['.github/trunk/seo-platform-12a08-activation.mjs','.github/trunk/seo-platform-12a08-activation-contract.test.mjs']);
   assert.equal(classification.operations.a08_scoped_checks,true);
-  assert.equal(classification.operations.a08_gate_only,true);
+  assert.equal(classification.operations.a08_gate_only,false);
   assert.equal(classification.deploy,true);
   assert.equal(classification.operations.publisher_required,false);
  } finally {process.chdir(original);rmSync(root,{recursive:true,force:true});}
@@ -376,7 +376,8 @@ test('mixed content release retains its gates without invoking old Council inges
  assert.equal(result.operations.a08_gate_only,false);
  assert.equal(result.operations.a08_readonly_wiring,true);
  assert.equal(result.operations.a08_scoped_checks,true);
- assert.equal(result.operations.seo_council_orchestration,true);
+ assert.equal(result.operations.seo_council_orchestration,false);
+ assert.equal(result.operations.a08_focused,true);
  assert.equal(result.flags.backward_compatible_migration,true);
  for(const path of ['backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php','backend/routes/api.php','backend/app/Services/SeoCouncil/Platform12/Platform12ModelRuntime.php']) {
   assert.equal(classifyPaths([...mixed,path]).operations.a08_readonly_wiring,false);
@@ -403,7 +404,7 @@ test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key
  } finally {rmSync(dir,{recursive:true,force:true});}
  assert.match(deployer,/if \(deployBooleanOption\('a08_gate_only', false\)\) \{\n        deployInstallSeoIntelRuntimeEnvironment\(deploySeoQueryHmacEnvironment\(\)\);\n\n        return;/);
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
- for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,2);
+ for(const key of Object.keys(pair)) assert.equal(deploy.split(`${key}: \${{ secrets.${key} }}`).length-1,3);
 });
 
 test('authorized M3 requires safe source and terminal artifacts plus preceding mission acceptance',async()=>{
@@ -520,4 +521,32 @@ test('OOM before the Pest summary still revalidates every fully named prior fail
   +'Fatal error: Premature end of PHP process when running Tests\\Feature\\Domain\\Career\\Compilation\\CareerC2EvidenceCohortContractTest::test_cohort.\nAllowed memory size of 2147483648 bytes exhausted';
  assert.deepEqual(parseLegacyNightlyFailures(log).map(item=>item.focused_test), ['PublicProjectionMigrationTest','Article15ExactPackageRevisionBoundCommandTest','CareerC2EvidenceCohortContractTest']);
  assert.throws(()=>parseLegacyNightlyFailures(log+'\nFAIL  Tests\\Feature\\Truncated…'),/UNKNOWN/);
+});
+
+test('fresh code receipts do not carry expired, drifted or unobserved source acceptance on the same SHA',()=>{
+ const now=Date.now(), source={status:'pass',mission_id:MISSIONS[0],environment:'production',version_vector:{policy:'fixed'},
+  sources:[{id:'pointer',hash:'a'.repeat(64),observed_at:'2026-01-01T00:00:00Z'}],expires_at:new Date(now+60000).toISOString()};
+ const body={...source,real_runtime:true,source_wiring_status:'VERIFIED',source_gaps:[],captured_at:new Date(now-1000).toISOString()};
+ const seal=report=>({...report,receipt_digest:digest(JSON.stringify(report))});
+ assert.equal(equivalentSource(source,seal(body),now),true);
+ for(const changed of [{sources:[{...body.sources[0],hash:'b'.repeat(64)}]}, {sources:[{...body.sources[0],observed_at:'2026-01-02T00:00:00Z'}]},
+  {version_vector:{policy:'changed'}},{expires_at:new Date(now-1).toISOString()},{source_gaps:['fence_changed']},{sources:[]}]) {
+  assert.equal(equivalentSource(source,seal({...body,...changed}),now),false);
+ }
+ assert.equal(equivalentSource({...source,expires_at:undefined},seal(body),now),false);
+ assert.equal(equivalentSource(source,null,now),false);
+ assert.throws(()=>equivalentSource(source,{...seal(body),receipt_digest:'0'.repeat(64)},now),/DIGEST/);
+});
+test('legacy scope output is explicit and complete; unknown scope cannot grant authorization',()=>{
+ const root=mkdtempSync(tmpdir()+'/a08-legacy-'),git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
+ try {
+  git('init','-q');git('config','user.name','Test');git('config','user.email','test@example.test');git('commit','--allow-empty','-qm','fixture');
+  const sha=git('rev-parse','HEAD'),junit=`<testsuite>${[...new Set(Object.values(LEGACY_CHECKS).flat())].map(name=>`<testcase class="${name}"/>`).join('')}</testsuite>`;
+  const old=scopedReceipt(junit,sha,root,LEGACY_SCOPE_VERSION),current=scopedReceipt(junit,sha,root);
+  assert.equal(old.checks.public.scope_version,LEGACY_SCOPE_VERSION);
+  assert.deepEqual(old.checks.public.tests,LEGACY_CHECKS.public);
+  assert.equal(current.checks.public.scope_version,SCOPE_VERSION);
+  assert.ok(current.checks.public.tests.length<old.checks.public.tests.length);
+  assert.throws(()=>scopedReceipt(junit,sha,root,'unknown'),/SCOPE_VERSION/);
+ } finally {rmSync(root,{recursive:true,force:true});}
 });

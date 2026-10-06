@@ -39,7 +39,7 @@ test("M3 source preparation stays separate from full closeout and ordinary prese
   const m3 = classifyPaths(["backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"]);
   assert.equal(m3.operations.seo_competitive_evidence, true);
   assert.equal(m3.operations.a08_readonly_wiring, true);
-  assert.equal((deploy.match(/council_orchestration='\$\{\{ needs\.policy\.outputs\.seo_council_runtime_closeout \}\}'/g) || []).length, 2);
+  assert.equal((deploy.match(/council_orchestration='\$\{\{ needs\.policy\.outputs\.seo_council_runtime_closeout \}\}'/g) || []).length, 3);
   assert.doesNotMatch(deploy, /needs\.policy\.outputs\.seo_council_orchestration/);
   assert.match(deploy, /measurement_source_readiness:\$source_readiness/);
   assert.match(deploy, /council_runtime_closeout_required:\(\$council_closeout == "true"\)/);
@@ -57,7 +57,7 @@ test("presentation still requires privacy, RBAC, exact SHA, both environments an
   assert.match(deploy, /and \.sha == \$sha/);
   assert.match(deploy, /and \.ci_run_id == \$run/);
   assert.match(deploy, /and \.result == "success"/);
-  assert.match(deploy, /GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED/);
+  assert.match(deploy, /MEASUREMENT_PREPARE_FAILED/);
   assert.match(deploy, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
   assert.doesNotMatch(deploy, /seo:council-runtime resume|seo:council-scheduled --acceptance|workflow_dispatch:/);
 });

@@ -69,7 +69,8 @@ test('daily operations and weekly complete checks have independent schedules and
     ['full-phpunit', 'codeql'],
     ['codeql', 'gsc-read-model-sync'],
   ]) {
-    assert.ok(jobSection(job, next).includes(`if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '${weeklySchedule}')`));
+    assert.match(jobSection(job,next), /needs: repair-scope/);
+    assert.ok(jobSection(job,next).includes(`github.event.schedule == '${weeklySchedule}'`));
   }
   for (const [job, next] of [['scheduler-evidence-monitor', 'dependency-audit'], ['gsc-read-model-sync', 'nightly-summary']]) {
     assert.ok(jobSection(job, next).includes(`if: github.event_name == 'schedule' && github.event.schedule == '${dailySchedule}'`));
@@ -97,7 +98,7 @@ function runSummary(schedule, overrides = {}) {
     const run = spawnSync('bash', ['-c', lines.join('\n')], {
       cwd: root,
       encoding: 'utf8',
-      env: { ...process.env, GITHUB_SHA: 'a'.repeat(40), SCHEDULE: schedule, EVENT_NAME: 'schedule', ...results, ...overrides },
+      env: { ...process.env, GITHUB_SHA: 'a'.repeat(40), SCHEDULE: schedule, EVENT_NAME: 'schedule', REPAIR_SCOPE:JSON.stringify(schedule===''?{authority:'true',php_required:'true',dependency:'true',workflow:'true',security:'true'}:{}), ...results, ...overrides },
     });
     assert.equal(run.status, 0, run.stderr);
     const receipt = JSON.parse(readFileSync(join(root, 'artifacts/nightly-summary/receipt.json'), 'utf8'));
@@ -158,7 +159,7 @@ test('full PHPUnit rejects empty or malformed JUnit and retains original diagnos
   assert.match(section, /set -o pipefail/);
   assert.match(section, /2>&1 \| tee "\$RUNNER_TEMP\/nightly-full-phpunit\.log"/);
   const marker = "          php <<'PHP'\n";
-  const start = section.indexOf(marker);
+  const start = section.indexOf(marker, section.indexOf("- name: Validate full PHPUnit JUnit completeness"));
   assert.notEqual(start, -1);
   const source = section.slice(start + marker.length).split('          PHP')[0]
     .split('\n').map(line => line.slice(10)).join('\n');
@@ -193,12 +194,12 @@ test('only complete-evidence implementation and producer repair changes trigger 
     '.github/workflows/nightly.yml',
     '.github/trunk/seo-platform-12a08-evidence-download.mjs',
     '.github/trunk/seo-platform-12a08-release.mjs',
-    'backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php',
-    'backend/tests/Unit/Domain/Career/Display/CareerContentV3PageUpdaterTest.php',
+    '.github/trunk/nightly-*.mjs',
+    'backend/tests/**',
   ]);
   const receipt = runSummary('', { EVENT_NAME: 'push' });
   assert.equal(receipt.status, 'pass');
-  assert.equal(receipt.check_scope, 'full_evidence_repair');
+  assert.equal(receipt.check_scope, 'focused_evidence_repair');
   assert.equal(receipt.event, 'push');
   assert.equal(Object.values(receipt.domains).filter(domain => domain.required).length, 5);
   assert.equal(receipt.domains.scheduler_evidence.required, false);

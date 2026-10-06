@@ -19,6 +19,21 @@ use Throwable;
 
 final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEvidenceBundleLoader, MeasurementEvidenceDiagnosticLoader
 {
+    public static function failureCategory(Throwable $exception): string
+    {
+        $info = $exception instanceof \PDOException ? ($exception->errorInfo ?? []) : [];
+        $state = (string) ($info[0] ?? $exception->getCode());
+        $driver = (int) ($info[1] ?? 0);
+
+        return match (true) {
+            in_array($driver, [1044, 1045, 1142, 1143], true) || $state === '28000' => 'permission',
+            in_array($driver, [2002, 2003, 2005, 2006, 2013], true) || str_starts_with($state, '08') => 'transport',
+            in_array($driver, [1054, 1146], true) || in_array($state, ['42S02', '42S22'], true) => 'schema',
+            in_array($driver, [1205, 1213], true) || $state === '40001' => 'storage',
+            default => 'unexpected',
+        };
+    }
+
     private const WINDOWS = [7, 28, 90];
 
     public function __construct(
@@ -156,9 +171,9 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         try {
             $rows = $this->searchRowsForScope($connection, $pageFamily, $locale);
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
             return MeasurementEvidenceLoadResult::make(
-                'search_measurement', [], 'unavailable', 'unknown', 'GSC_READMODEL_UNHEALTHY'
+                'search_measurement', [], 'unavailable', 'unknown', 'GSC_READMODEL_UNHEALTHY', null, self::failureCategory($exception)
             );
         }
         if ($rows === []) {
@@ -193,6 +208,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             : $latestDate;
         $scopeWindowsComplete = $latestDate !== null;
         $readmodelHealthy = true;
+        $failureCategory = null;
         $reportingLagStale = true;
         $windowMetrics = [];
         $computedReadmodels = [];
@@ -217,7 +233,8 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 && count(array_unique(array_column($windowRows, 'report_date'))) === $days;
             try {
                 $computed = $this->dashboard->searchPerformance(['days' => $days, 'locale' => $locale]);
-            } catch (Throwable) {
+            } catch (Throwable $exception) {
+                $failureCategory = self::failureCategory($exception);
                 $computed = [];
             }
             $reportingLagStale = $reportingLagStale
@@ -232,6 +249,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 && is_array($familyMetrics);
             if (! $computedHealthy && ! $currentSnapshotVerified) {
                 $readmodelHealthy = false;
+                $failureCategory ??= is_array($familyMetrics) ? 'readmodel_state' : 'scope_missing';
             }
             $computedReadmodels[$days] = $computed;
             $windowMetrics[] = [
@@ -330,6 +348,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
             $fresh ? 'fresh' : 'stale',
             $reason,
             $authorityRevision,
+            $reason === 'GSC_READMODEL_UNHEALTHY' ? $failureCategory : null,
         );
     }
 

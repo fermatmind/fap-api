@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: [CI, Nightly]
+    workflows: [CI]
     types: [completed]
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: trunk-deploy-${{ github.repository }}
+  group: ${{ github.event.workflow_run.name == 'CI' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.run_attempt == 1 && github.run_attempt == 1 && format('trunk-deploy-{0}', github.repository) || format('trunk-rejected-{0}', github.run_id) }}
   cancel-in-progress: false
 
 env:
@@ -37,9 +37,11 @@ jobs:
     outputs:
       a08_scoped_checks: ${{ steps.receipt.outputs.a08_scoped_checks }}
       a08_gate_only: ${{ steps.receipt.outputs.a08_gate_only }}
-      deploy: ${{ steps.receipt.outputs.deploy }}
+      release_required: ${{ steps.receipt.outputs.deploy }}
+      deploy: ${{ steps.receipt.outputs.deploy == 'true' && steps.admission.outputs.deploy == 'true' }}
       infrastructure: ${{ steps.receipt.outputs.infrastructure }}
       classification: ${{ steps.receipt.outputs.classification }}
+      operations: ${{ steps.receipt.outputs.operations }}
       artifact_digest: ${{ steps.artifact.outputs.digest }}
       config_fingerprint: ${{ steps.receipt.outputs.config_fingerprint }}
       career_current: ${{ steps.receipt.outputs.career_current }}
@@ -407,6 +409,7 @@ jobs:
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "infrastructure=$(jq -r .classification.flags.infrastructure_deployment "$receipt")"
             echo "classification=$classification"
+            echo "operations=$(jq -c .classification.operations "$receipt" | base64 -w0)"
             echo "config_fingerprint=$(sha256sum "$receipt" | awk '{print $1}')"
             echo "career_current=$career_current"
             echo "career_current_release=$career_current_release"
@@ -433,11 +436,24 @@ jobs:
             echo "mbti_trait_content_publish=$(jq -r '.classification.operations.mbti_trait_content_publish // false' "$receipt")"
           } >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        if: steps.receipt.outputs.career_current == 'true'
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           persist-credentials: false
+      - id: admission
+        name: Skip already accepted candidates before staging setup
+        if: steps.receipt.outputs.deploy == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: node .github/trunk/admit-release.mjs
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: steps.receipt.outputs.deploy == 'true' && steps.admission.outputs.deploy == 'false'
+        with:
+          name: trunk-deploy-skip-${{ github.event.workflow_run.head_sha }}
+          path: trunk-deploy-skip.json
+          if-no-files-found: error
+          retention-days: 90
       - id: career-package-artifact
         if: steps.receipt.outputs.career_package == 'true'
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
@@ -653,7 +669,8 @@ jobs:
         env:
           A08_GATE_ONLY: ${{ needs.policy.outputs.a08_gate_only }}
         run: bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-before.json
-      - name: Deploy staging and run repository smoke chain
+      - name: Materialize inactive staging measurement candidate
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
         env:
           SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
           SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
@@ -669,86 +686,14 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}'
-          deploy_task=deploy
-          deploy_mode=standard
-          if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
-            deploy_task=deploy:career-content-only
-            deploy_mode=career_content_only
-          elif [ '${{ needs.policy.outputs.career_first_publish }}' = true ]; then
-            deploy_task=deploy:career-first-publish
-            deploy_mode=career_first_publish
-          fi
-          package_args=()
-          if [ "$deploy_mode" = career_content_only ] || [ "$deploy_mode" = career_first_publish ]; then
-            package_args=(
-              -o career_content_package_archive="$CAREER_CONTENT_PACKAGE_ARCHIVE"
-              -o career_content_package_sha256='${{ needs.policy.outputs.career_package_archive_sha256 }}'
-              -o career_content_package_base_sha='${{ needs.policy.outputs.career_package_base_sha }}'
-              -o career_content_package_tree_sha='${{ needs.policy.outputs.career_package_tree_sha }}'
-            )
-          fi
-          deploy_timeout=30m
-          if test "$council_orchestration" = true; then deploy_timeout=60m; fi
-          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode="$deploy_mode" \
-            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
+          timeout --signal=TERM --kill-after=30s 20m php /tmp/dep.phar deploy:candidate-only staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=candidate_only \
+            -o private_result_authority_publish_required=false \
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
-            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
-            -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
-            -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
-            -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
-            -o seo_council_orchestration="$council_orchestration" \
+            -o seo_council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}' \
             -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
-            -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
-            -o seo_council_closeout_deferred="$council_orchestration" "${package_args[@]}" --no-interaction
-      - name: Publish and read back exact staging MBTI zh result package
-        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
-        env:
-          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
-          ADMIN_ACTOR: ${{ needs.policy.outputs.mbti_zh_result_actor }}
-          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
-        run: bash backend/scripts/deploy/publish_mbti_zh_result_staging.sh
-      - name: Verify sanitized staging MBTI authority receipt
-        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
-        env:
-          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
-          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
-        run: |
-          jq -e --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" '
-            .contract_version == "mbti.zh_result_staging_publish.v1"
-            and (.status == "PASS" or .status == "PASS_ALREADY_ACTIVE")
-            and .release_sha == $sha and .package_hash == $package and .operation_key == $operation
-            and .record_count == 32 and .disabled_slot_count == 224 and .public_api_readback_count == 32
-            and ([.negative_guarantees[]] | all(. == false))
-          ' artifacts/mbti-zh-result-staging-publish/receipt.json >/dev/null
-      - name: Upload staging MBTI authority receipt
-        if: always() && needs.policy.outputs.mbti_zh_result_staging_release == 'true'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: mbti-zh-result-staging-publish-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/mbti-zh-result-staging-publish/receipt.json
-          if-no-files-found: ignore
-          retention-days: 90
-      - name: Materialize inactive staging measurement candidate
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
-        env:
-          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
-          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
-          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
-          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
-          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
-          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
-          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
-          SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
-          SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
-          timeout --signal=TERM --kill-after=30s 20m php /tmp/dep.phar deploy:candidate-only staging -f deploy.php --revision "$DEPLOY_SHA" \
-            -o release_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=candidate_only \
-            -o private_result_authority_publish_required=false --no-interaction
+            -o release_operations='${{ needs.policy.outputs.operations }}' --no-interaction
       - name: Verify staging measurement source readiness
         id: measurement_source_readiness
         if: needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true'
@@ -773,24 +718,24 @@ jobs:
             printf 'measurement_source_readiness=HOLD reason=%s\n' "$1" >&2
             exit 1
           }
-          test -n "$GSC_SERVICE_ACCOUNT_JSON" || fail GSC_SECRET_MISSING
-          [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
-          test "$GSC_ENABLED" = true || fail GSC_DISABLED
-          test "$GSC_LIVE_API_ENABLED" = true || fail GSC_LIVE_API_DISABLED
-          test "$GSC_SYNC_ENABLED" = true || fail GSC_SYNC_DISABLED
-          test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
-          test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
-          test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
-          test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
+          # Healthy snapshots need no external GSC request or credentials.
+          # The refresh command validates these inputs only when refresh is selected.
+          if [ -n "$GSC_SERVICE_ACCOUNT_JSON" ]; then
+            [[ "$GSC_PROPERTY_URL" =~ ^sc-domain:[A-Za-z0-9.-]+$ ]] || fail GSC_PROPERTY_INVALID
+            test "$GSC_AUTH_MODE" = service_account || fail GSC_AUTH_MODE_INVALID
+            test "$GSC_SCOPE" = https://www.googleapis.com/auth/webmasters.readonly || fail GSC_SCOPE_NOT_READONLY
+            test "$GSC_SYNC_WINDOW_DAYS" = 90 || fail GSC_WINDOW_INVALID
+            test "$GSC_SYNC_SEARCH_TYPES" = web || fail GSC_SEARCH_TYPE_INVALID
+          fi
           test -n "$GSC_SYNC_DB_USERNAME" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
           test -n "$GSC_SYNC_DB_PASSWORD" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
 
           local_key="$RUNNER_TEMP/service-account.json"
           local_env="$RUNNER_TEMP/readiness.env"
           local_sync_env="$RUNNER_TEMP/sync-db.env"
-          remote_tmp="/tmp/fermatmind-11f-source-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          remote_tmp="/tmp/fermatmind-11g-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           remote_key="$remote_tmp/service-account.json"
-          remote_env="$remote_tmp/readiness.env"
+          remote_env="$remote_tmp/measurement.env"
           remote_sync_env="$remote_tmp/sync-db.env"
           proxy_pid=""
           tunnel_pid=""
@@ -801,21 +746,21 @@ jobs:
           cleanup() {
             if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
             if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
-            "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_sync_env'; rmdir '$remote_tmp' 2>/dev/null || true" \
+            "${ssh_base[@]}" "rm -f '$remote_key' '$remote_env' '$remote_sync_env' '$remote_tmp/competitive-writer.env' '$remote_tmp/competitive-config.php'; rmdir '$remote_tmp' 2>/dev/null || true" \
               >/dev/null 2>&1 || true
             rm -f "$local_key" "$local_env" "$local_sync_env"
           }
           trap cleanup EXIT HUP INT TERM
 
           umask 077
-          printf '%s' "$GSC_SERVICE_ACCOUNT_JSON" > "$local_key"
-          jq -e '
-            .type == "service_account"
-            and (.client_email | type == "string" and length > 0)
-            and (.private_key | type == "string" and length > 0)
-            and .token_uri == "https://oauth2.googleapis.com/token"
-          ' "$local_key" >/dev/null || fail GSC_CREDENTIAL_INVALID
+          if [ -n "$GSC_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$GSC_SERVICE_ACCOUNT_JSON" > "$local_key"
+            jq -e '.type == "service_account" and (.client_email | type == "string" and length > 0) and (.private_key | type == "string" and length > 0) and .token_uri == "https://oauth2.googleapis.com/token"' "$local_key" >/dev/null || fail GSC_CREDENTIAL_INVALID
+          else
+            printf '{}' > "$local_key"
+          fi
           {
+            if [ -n "$GSC_SERVICE_ACCOUNT_JSON" ]; then
             printf 'SEO_INTEL_GSC_ENABLED=%q\n' "$GSC_ENABLED"
             printf 'SEO_INTEL_GSC_LIVE_API_ENABLED=%q\n' "$GSC_LIVE_API_ENABLED"
             printf 'SEO_INTEL_GSC_SYNC_ENABLED=%q\n' "$GSC_SYNC_ENABLED"
@@ -825,6 +770,7 @@ jobs:
             printf 'SEO_INTEL_GSC_SCOPE=%q\n' "$GSC_SCOPE"
             printf 'SEO_INTEL_GSC_SYNC_WINDOW_DAYS=%q\n' "$GSC_SYNC_WINDOW_DAYS"
             printf 'SEO_INTEL_GSC_SYNC_SEARCH_TYPES=%q\n' "$GSC_SYNC_SEARCH_TYPES"
+            fi
             printf 'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true\n'
             printf 'SEO_INTEL_WRITE_ENABLED=false\n'
           } > "$local_env"
@@ -862,244 +808,29 @@ jobs:
           printf -v q_env '%q' "$remote_env"
           printf -v q_sync_env '%q' "$remote_sync_env"
           printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
-          candidate_name="source-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
+          candidate_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
           printf -v q_candidate '%q' "$candidate_name"
           printf -v q_sha '%q' "$DEPLOY_SHA"
           cache_path="/tmp/fermatmind-11f-config-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
           printf -v q_cache '%q' "$cache_path"
-          remote_prefix="set -euo pipefail; releases=\$(readlink -f $q_path/releases); candidate=\$(readlink -f \"\$releases/$q_candidate\"); test -n \"\$candidate\"; case \"\$candidate\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(cat \"\$candidate/REVISION\")\" = $q_sha; cd \"\$candidate/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
+          remote_prefix="set -euo pipefail; releases=\$(readlink -f $q_path/releases); candidate=\$(readlink -f \"\$releases/$q_candidate\"); test -n \"\$candidate\"; case \"\$candidate\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(cat \"\$candidate/REVISION\")\" = $q_sha; test \"\$candidate\" != \"\$(readlink -f $q_path/current)\"; cd \"\$candidate/backend\"; set -a; . $q_env; set +a; export HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache;"
 
-          preflight_json="$RUNNER_TEMP/staging-gsc-preflight.json"
-          preflight_stderr="$RUNNER_TEMP/staging-gsc-preflight.stderr"
-          set +e
-          "${ssh_base[@]}" "$remote_prefix php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json --no-interaction --no-ansi" \
-            > "$preflight_json" 2> "$preflight_stderr"
-          preflight_exit=$?
-          set -e
-          if [ "$preflight_exit" -ne 0 ]; then
-            if grep -Eiq 'banner exchange|connection (timed out|reset|closed)|broken pipe|kex_exchange_identification' "$preflight_stderr"; then
-              fail GSC_PREFLIGHT_TRANSPORT_FAILED
-            fi
-            fail GSC_PREFLIGHT_COMMAND_FAILED
-          fi
-          jq -e '
-            .status == "success"
-            and .dry_run == true
-            and .writes_attempted == false
-            and .writes_committed == false
-            and .external_calls_attempted == false
-            and .metadata.live_readiness.status == "ready"
-            and .metadata.live_readiness.read_only == true
-            and .metadata.live_readiness.credential_valid == true
-            and .metadata.live_readiness.readonly_scope_valid == true
-            and .metadata.live_readiness.restricted_egress.status == "restricted"
-            and .metadata.live_readiness.search_provider_submission_allowed == false
-          ' "$preflight_json" >/dev/null || fail GSC_PREFLIGHT_HOLD
-
-          sync_raw="$RUNNER_TEMP/staging-gsc-sync.raw"
-          sync_json="$RUNNER_TEMP/staging-gsc-sync.json"
-          sync_stderr="$RUNNER_TEMP/staging-gsc-sync.stderr"
-          set +e
-          "${ssh_base[@]}" "$remote_prefix set -a; . $q_sync_env; set +a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync --window=90 --search-types=web --full-window --trigger=manual --json --no-interaction --no-ansi" \
-            > "$sync_raw" 2> "$sync_stderr"
-          sync_exit=$?
-          set -e
-          awk 'started || /^[[:space:]]*\{/ { started=1; print }' "$sync_raw" > "$sync_json"
-          if ! jq -e 'type == "object"' "$sync_json" >/dev/null 2>&1; then
-            test -s "$sync_raw" || fail GSC_SYNC_OUTPUT_EMPTY
-            fail GSC_SYNC_OUTPUT_INVALID
-          fi
-          if [ "$sync_exit" -ne 0 ]; then
-            sync_issue="$(jq -r '.issue // ""' "$sync_json")"
-            case "$sync_issue" in
-              gsc_authentication_failed)
-                fail GSC_SEARCH_ANALYTICS_ACCESS_DENIED
-                ;;
-              gsc_oauth_transport_failed)
-                fail GSC_OAUTH_TRANSPORT_FAILED
-                ;;
-              gsc_oauth_rate_limited|gsc_oauth_service_unavailable)
-                fail GSC_OAUTH_TEMPORARILY_UNAVAILABLE
-                ;;
-              gsc_oauth_invalid_grant)
-                fail GSC_OAUTH_INVALID_GRANT
-                ;;
-              gsc_oauth_invalid_client)
-                fail GSC_OAUTH_INVALID_CLIENT
-                ;;
-              gsc_oauth_invalid_scope)
-                fail GSC_OAUTH_INVALID_SCOPE
-                ;;
-              gsc_oauth_rejected|gsc_oauth_token_missing)
-                fail GSC_OAUTH_RESPONSE_INVALID
-                ;;
-              gsc_authentication_request_failed|gsc_access_token_resolution_failed)
-                fail GSC_AUTHENTICATION_LOCAL_FAILURE
-                ;;
-              gsc_disconnected)
-                fail GSC_SYNC_PREFLIGHT_CHANGED
-                ;;
-              gsc_searchanalytics_timeout_or_transport_failure)
-                fail GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED
-                ;;
-              gsc_searchanalytics_request_failed)
-                fail GSC_SEARCH_ANALYTICS_REQUEST_FAILED
-                ;;
-              gsc_rate_limited)
-                fail GSC_RATE_LIMITED
-                ;;
-              gsc_pagination_limit_exceeded)
-                fail GSC_PAGINATION_LIMIT_EXCEEDED
-                ;;
-              gsc_empty_response)
-                fail GSC_EMPTY_RESPONSE
-                ;;
-              gsc_data_quality_gate_failed)
-                fail GSC_DATA_QUALITY_FAILED
-                ;;
-              gsc_read_model_schema_missing)
-                fail GSC_SCHEMA_MISSING
-                ;;
-              seo_intel_write_disabled)
-                fail GSC_SCOPED_WRITE_GATE_DISABLED
-                ;;
-              gsc_sync_internal_failure)
-                fail GSC_SYNC_INTERNAL_FAILURE
-                ;;
-              *)
-                fail GSC_SYNC_COMMAND_FAILED
-                ;;
-            esac
-          fi
-          jq -e '
-            .status == "success"
-            and .window_days == 90
-            and .fetch_mode == "full_window"
-            and .search_types == ["web"]
-            and .pages_fetched > 0
-            and .rows_seen > 0
-            and .rows_upserted > 0
-            and .mapped_rows > 0
-            and .unmapped_rows == 0
-            and (.excluded_non_authority_rows | type == "number" and . >= 0)
-            and .duplicate_natural_keys == 0
-            and .quality_gate.status == "pass"
-            and (.data_max_date | type == "string" and length == 10)
-            and (.data_lag_days | type == "number" and . <= 10)
-            and .read_only_gsc == true
-            and .search_submission_allowed == false
-            and .restricted_egress.status == "restricted"
-          ' "$sync_json" >/dev/null || fail GSC_SYNC_QUALITY_HOLD
-
-          from_date="$(date -u -d '89 days ago' +%F)"
-          to_date="$(date -u +%F)"
-          cro_dry_run_json="$RUNNER_TEMP/staging-cro-dry-run.json"
-          cro_dry_run_stderr="$RUNNER_TEMP/staging-cro-dry-run.stderr"
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --dry-run --trigger=manual --json --no-interaction --no-ansi" \
-            > "$cro_dry_run_json" 2> "$cro_dry_run_stderr" \
-            || fail CRO_DRY_RUN_COMMAND_FAILED
-          jq -e '
-            .schema_version == "analytics-seo-conversion-refresh-dry-run.v1"
-            and .status == "not_executed"
-            and .org_scope_mode == "bounded"
-            and .org_scope_count == 1
-            and (.attempted_rows | type == "number" and . >= 0)
-            and ((.expected_metrics | keys | sort) == [
-              "article_to_test_click_count",
-              "complete_test_count",
-              "landing_pv_count",
-              "result_ready_count",
-              "return_public_content_count",
-              "start_test_count",
-              "view_result_count"
-            ])
-            and ((.expected_metrics | to_entries) | all(.value | type == "number" and . >= 0))
-            and .raw_session_or_business_identifiers_exposed == false
-          ' "$cro_dry_run_json" >/dev/null || fail CRO_NO_REAL_AGGREGATE_SOURCE
-
-          cro_refresh_json="$RUNNER_TEMP/staging-cro-refresh.json"
-          cro_refresh_stderr="$RUNNER_TEMP/staging-cro-refresh.stderr"
-          "${ssh_base[@]}" "$remote_prefix export SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false; php artisan analytics:refresh-seo-conversion-daily --from=$from_date --to=$to_date --org=0 --trigger=manual --json --no-interaction --no-ansi" \
-            > "$cro_refresh_json" 2> "$cro_refresh_stderr" \
-            || fail CRO_REFRESH_COMMAND_FAILED
-          jq -e '
-            .schema_version == "analytics-seo-conversion-refresh-receipt.v2"
-            and .environment == "staging"
-            and (.readmodel_snapshot_hash | type == "string" and test("^[a-f0-9]{64}$"))
-            and (.receipt_hash | type == "string" and test("^[a-f0-9]{64}$"))
-            and .status == "success"
-            and .org_scope_mode == "bounded"
-            and .org_scope_count == 1
-            and (.attempted_rows | type == "number" and . >= 0)
-            and (.upserted_rows | type == "number" and . >= 0)
-            and .readback_receipt.status == "pass"
-            and ((.readback_receipt.expected_metrics | keys | sort) == [
-              "article_to_test_click_count",
-              "complete_test_count",
-              "landing_pv_count",
-              "result_ready_count",
-              "return_public_content_count",
-              "start_test_count",
-              "view_result_count"
-            ])
-            and ((.readback_receipt.persisted_metrics | keys | sort) == [
-              "article_to_test_click_count",
-              "complete_test_count",
-              "landing_pv_count",
-              "result_ready_count",
-              "return_public_content_count",
-              "start_test_count",
-              "view_result_count"
-            ])
-            and ((.readback_receipt.expected_metrics | to_entries) | all(.value | type == "number" and . >= 0))
-            and ((.readback_receipt.persisted_metrics | to_entries) | all(.value | type == "number" and . >= 0))
-            and .readback_receipt.raw_session_or_business_identifiers_exposed == false
-            and .raw_query_exposed == false
-            and .raw_session_or_business_identifiers_exposed == false
-            and .private_paths_allowed == false
-            and .search_submission_allowed == false
-          ' "$cro_refresh_json" >/dev/null || fail CRO_READMODEL_UNHEALTHY
-
+          writer_env="$remote_tmp/competitive-writer.env"
+          printf -v q_writer '%q' "$writer_env"
+          "${ssh_base[@]}" "umask 077; { cat $q_env; cat $q_sync_env; printf 'SEO_INTEL_WRITE_ENABLED=true\\nAPP_CONFIG_CACHE=%s\\n' '$remote_tmp/competitive-config.php'; } > $q_writer; chmod 0600 $q_writer"
+          readiness_json="$RUNNER_TEMP/staging-measurement-readiness.json"
+          "${ssh_base[@]}" "$remote_prefix set -a; . $q_writer; set +a; php artisan seo:competitive-release-prepare --candidate-sha=$q_sha --measurement-only --gsc-env=$q_env --writer-env=$q_writer --json --no-interaction --no-ansi" > "$readiness_json" || {
+            jq -r '"measurement_prepare_reason=" + (.reason_code // "MEASUREMENT_PREPARE_FAILED"), "measurement_failure_category=" + (.measurement_failure_category // "none")' "$readiness_json" | grep -E '^(measurement_prepare_reason=[A-Z_]{3,64}|measurement_failure_category=(permission|transport|schema|storage|unexpected|readmodel_state|scope_missing|none))$' >&2 || true
+            fail MEASUREMENT_PREPARE_FAILED
+          }
+          jq -e --arg sha "$DEPLOY_SHA" '
+            .schema_version == "seo.measurement_source_readiness.v2" and .status == "READY"
+            and .candidate_sha == $sha and .environment == "staging"
+            and .cms_writes == 0 and .search_writes == 0 and .competitive_publication == false
+            and (.measurement_snapshot_set_hash | test("^[a-f0-9]{64}$"))
+          ' "$readiness_json" >/dev/null || fail MEASUREMENT_READINESS_HOLD
           mkdir -p artifacts/measurement-source-readiness
-          jq -n --arg sha "$DEPLOY_SHA" --slurpfile gsc "$sync_json" --slurpfile cro "$cro_refresh_json" '
-            {
-              schema_version: "seo.measurement_source_readiness.v1",
-              environment: "staging",
-              candidate_sha: $sha,
-              status: "pass",
-              dependency_ingestion: {
-                gsc_external_read_performed: true,
-                read_only_gsc: true,
-                search_submission_allowed: false,
-                restricted_egress: "restricted",
-                pages_fetched: $gsc[0].pages_fetched,
-                rows_seen: $gsc[0].rows_seen,
-                mapped_rows: $gsc[0].mapped_rows,
-                unmapped_rows: $gsc[0].unmapped_rows,
-                excluded_non_authority_rows: $gsc[0].excluded_non_authority_rows,
-                duplicate_natural_keys: $gsc[0].duplicate_natural_keys,
-                data_lag_days: $gsc[0].data_lag_days
-              },
-              cro_refresh: {
-                status: $cro[0].status,
-                attempted_rows: $cro[0].attempted_rows,
-                upserted_rows: $cro[0].upserted_rows,
-                readback_status: $cro[0].readback_receipt.status,
-                private_data_present: false
-              },
-              council_runtime: {
-                model_calls: 0,
-                tool_calls: 0,
-                external_calls: 0,
-                cms_writes: 0,
-                url_truth_writes: 0,
-                search_writes: 0,
-                business_writes: 0,
-                production_permissions: 0,
-                execution_allowed: false
-              }
-            }
-          ' > artifacts/measurement-source-readiness/receipt.json
+          cp "$readiness_json" artifacts/measurement-source-readiness/receipt.json
       - name: Upload sanitized staging measurement source receipt
         if: (needs.policy.outputs.seo_council_runtime_closeout == 'true' || needs.policy.outputs.seo_competitive_evidence == 'true') && steps.measurement_source_readiness.outcome == 'success'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -1113,19 +844,7 @@ jobs:
         run: |
           printf 'staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD\n' >&2
           exit 1
-      - name: Finalize staging SEO Council closeout
-        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          printf -v q_path '%q' "$DEPLOY_PATH"
-          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
-            "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < $q_path/current/REVISION")"
-          test "$active" = "$DEPLOY_SHA"
-          timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar seo:council-orchestration-closeout staging \
-            -f deploy.php -o seo_council_orchestration=true --no-interaction
-      - name: Finalize staging competitive evidence after 11F readiness
+      - name: Prepare staging competitive evidence on inactive candidate
         if: needs.policy.outputs.seo_competitive_evidence == 'true'
         shell: bash
         env:
@@ -1167,7 +886,7 @@ jobs:
           printf -v q_sha '%q' "$DEPLOY_SHA"
           printf -v q_writer_env '%q' "$remote_writer_env"
           printf -v q_config '%q' "$remote_config"
-          remote="set -euo pipefail; writer_env=$q_writer_env; test -f \"\$writer_env\"; test ! -L \"\$writer_env\"; set -a; . \"\$writer_env\"; set +a; test \"\${APP_CONFIG_CACHE:-}\" = $q_config; test ! -e \"\$APP_CONFIG_CACHE\"; test \"\${SEO_INTEL_WRITE_ENABLED:-}\" = true; test -n \"\${SEO_INTEL_DB_USERNAME:-}\"; test -n \"\${SEO_INTEL_DB_PASSWORD:-}\"; active=\$(tr -d '\r\n' < $q_path/current/REVISION); test \"\$active\" = $q_sha; cd $q_path/current/backend; receipt=\$(SEO_RELEASE_SHA=$q_sha SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true php artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi); dir=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence; mkdir -p \"\$dir\"; file=\"\$dir/$q_sha.json\"; test ! -e \"\$file\"; tmp=\$(mktemp \"\$dir/.$q_sha.XXXXXX\"); trap 'rm -f \"\$tmp\"' EXIT; printf '%s\n' \"\$receipt\" > \"\$tmp\"; chmod 0640 \"\$tmp\"; ln \"\$tmp\" \"\$file\"; printf '%s\n' \"\$receipt\""
+          remote="set -euo pipefail; writer_env=$q_writer_env; test -f \"\$writer_env\"; test ! -L \"\$writer_env\"; set -a; . \"\$writer_env\"; set +a; test \"\${APP_CONFIG_CACHE:-}\" = $q_config; test ! -e \"\$APP_CONFIG_CACHE\"; test \"\${SEO_INTEL_WRITE_ENABLED:-}\" = true; test -n \"\${SEO_INTEL_DB_USERNAME:-}\"; test -n \"\${SEO_INTEL_DB_PASSWORD:-}\"; candidate=$q_path/releases/trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}; test \"\$candidate\" != \"\$(readlink -f $q_path/current)\"; active=\$(tr -d '\r\n' < \"\$candidate/REVISION\"); test \"\$active\" = $q_sha; cd \"\$candidate/backend\"; receipt=\$(SEO_RELEASE_SHA=$q_sha SEO_COMPETITIVE_EXTERNAL_READ_ENABLED=true SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED=true php artisan seo:competitive-evidence-ingest --cohort=competitive.big-five.live.v2 --write-evidence --json --no-interaction --no-ansi); dir=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence; mkdir -p \"\$dir\"; file=\"\$dir/$q_sha.json\"; test ! -e \"\$file\"; tmp=\$(mktemp \"\$dir/.$q_sha.XXXXXX\"); trap 'rm -f \"\$tmp\"' EXIT; printf '%s\n' \"\$receipt\" > \"\$tmp\"; chmod 0640 \"\$tmp\"; ln \"\$tmp\" \"\$file\"; printf '%s\n' \"\$receipt\""
           "${ssh_base[@]}" "$remote" > seo-competitive-evidence-staging.json
           jq -e --arg sha "$DEPLOY_SHA" '
             .receipt_version == "seo.competitive_evidence_closeout.v3"
@@ -1189,6 +908,107 @@ jobs:
             and .ready_for_11H == false and ."11i_handoff_ready" == false
             and .execution_allowed == false and .external_calls == 0 and .production_permissions == 0
           ' seo-competitive-evidence-staging.json >/dev/null
+      - name: Deploy staging and run repository smoke chain
+        env:
+          SEO_INTEL_DB_HOST: ${{ secrets.SEO_INTEL_DB_HOST }}
+          SEO_INTEL_DB_PORT: ${{ secrets.SEO_INTEL_DB_PORT }}
+          SEO_INTEL_DB_DATABASE: ${{ secrets.SEO_INTEL_DB_DATABASE }}
+          SEO_INTEL_DB_USERNAME: ${{ secrets.SEO_INTEL_DB_USERNAME }}
+          SEO_INTEL_DB_PASSWORD: ${{ secrets.SEO_INTEL_DB_PASSWORD }}
+          SEO_INTEL_MIGRATION_DB_USERNAME: ${{ secrets.SEO_INTEL_MIGRATION_DB_USERNAME }}
+          SEO_INTEL_MIGRATION_DB_PASSWORD: ${{ secrets.SEO_INTEL_MIGRATION_DB_PASSWORD }}
+          SEO_COUNCIL_DB_USERNAME: ${{ secrets.SEO_COUNCIL_DB_USERNAME }}
+          SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
+          SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
+          council_orchestration='${{ needs.policy.outputs.seo_council_runtime_closeout }}'
+          deploy_task=deploy
+          if [ '${{ needs.policy.outputs.seo_council_runtime_closeout }}' = true ] || [ '${{ needs.policy.outputs.seo_competitive_evidence }}' = true ]; then deploy_task=deploy:prepared; fi
+          deploy_mode=standard
+          if [ '${{ needs.policy.outputs.career_content_only }}' = true ]; then
+            deploy_task=deploy:career-content-only
+            deploy_mode=career_content_only
+          elif [ '${{ needs.policy.outputs.career_first_publish }}' = true ]; then
+            deploy_task=deploy:career-first-publish
+            deploy_mode=career_first_publish
+          fi
+          package_args=()
+          if [ "$deploy_mode" = career_content_only ] || [ "$deploy_mode" = career_first_publish ]; then
+            package_args=(
+              -o career_content_package_archive="$CAREER_CONTENT_PACKAGE_ARCHIVE"
+              -o career_content_package_sha256='${{ needs.policy.outputs.career_package_archive_sha256 }}'
+              -o career_content_package_base_sha='${{ needs.policy.outputs.career_package_base_sha }}'
+              -o career_content_package_tree_sha='${{ needs.policy.outputs.career_package_tree_sha }}'
+            )
+          fi
+          deploy_timeout=30m
+          if test "$council_orchestration" = true; then deploy_timeout=60m; fi
+          timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode="$deploy_mode" \
+            -o seo_platform_10_closeout='${{ needs.policy.outputs.seo_platform_10_closeout }}' \
+            -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
+            -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
+            -o release_operations='${{ needs.policy.outputs.operations }}' \
+            -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
+            -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
+            -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
+            -o career_data_recovery='${{ needs.policy.outputs.career_data_recovery }}' \
+            -o seo_council_orchestration="$council_orchestration" \
+            -o a08_gate_only='${{ needs.policy.outputs.a08_gate_only }}' \
+            -o seo_competitive_evidence='${{ needs.policy.outputs.seo_competitive_evidence }}' \
+            -o seo_council_closeout_deferred="$council_orchestration" "${package_args[@]}" --no-interaction
+      - name: Publish and read back exact staging MBTI zh result package
+        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        env:
+          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
+          ADMIN_ACTOR: ${{ needs.policy.outputs.mbti_zh_result_actor }}
+          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
+        run: bash backend/scripts/deploy/publish_mbti_zh_result_staging.sh
+      - name: Verify sanitized staging MBTI authority receipt
+        if: needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        env:
+          PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
+          OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
+        run: |
+          jq -e --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" '
+            .contract_version == "mbti.zh_result_staging_publish.v1"
+            and (.status == "PASS" or .status == "PASS_ALREADY_ACTIVE")
+            and .release_sha == $sha and .package_hash == $package and .operation_key == $operation
+            and .record_count == 32 and .disabled_slot_count == 224 and .public_api_readback_count == 32
+            and ([.negative_guarantees[]] | all(. == false))
+          ' artifacts/mbti-zh-result-staging-publish/receipt.json >/dev/null
+      - name: Upload staging MBTI authority receipt
+        if: always() && needs.policy.outputs.mbti_zh_result_staging_release == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-zh-result-staging-publish-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/mbti-zh-result-staging-publish/receipt.json
+          if-no-files-found: ignore
+          retention-days: 90
+      - name: Finalize staging SEO Council closeout
+        if: needs.policy.outputs.seo_council_runtime_closeout == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < $q_path/current/REVISION")"
+          test "$active" = "$DEPLOY_SHA"
+          timeout --signal=TERM --kill-after=30s 15m php /tmp/dep.phar seo:council-orchestration-closeout staging \
+            -f deploy.php -o seo_council_orchestration=true --no-interaction
+      - name: Read staging competitive evidence after activation
+        if: needs.policy.outputs.seo_competitive_evidence == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_sha '%q' "$DEPLOY_SHA"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ConnectionAttempts=3 -o IdentitiesOnly=yes -i "$DEPLOY_IDENTITY_FILE_STG" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "set -euo pipefail; test \"\$(cat $q_path/current/REVISION)\" = $q_sha; file=$q_path/shared/backend/storage/app/release-receipts/seo-competitive-evidence/$q_sha.json; test -f \"\$file\"; test ! -L \"\$file\"; cat \"\$file\"" > "$RUNNER_TEMP/staging-competitive-readback.json"
+          cmp seo-competitive-evidence-staging.json "$RUNNER_TEMP/staging-competitive-readback.json"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always() && needs.policy.outputs.seo_competitive_evidence == 'true'
         with:
@@ -1640,6 +1460,9 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
       - name: Refuse stale or non-forward production activation
         id: baseline
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
         run: |
           set -euo pipefail
           test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
@@ -1647,14 +1470,16 @@ jobs:
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
           [[ "$active" =~ ^[0-9a-f]{40}$ ]]
           git fetch --no-tags origin "$active"
-          if ! git merge-base --is-ancestor "$active" "$DEPLOY_SHA"; then
-            echo "Candidate is older than or divergent from active production; skip out-of-order activation."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          test "$active" != "$DEPLOY_SHA"
-          echo "skip=false" >> "$GITHUB_OUTPUT"
+          ACTIVE_SHA="$active" node .github/trunk/admit-release.mjs
           echo "active=$active" >> "$GITHUB_OUTPUT"
+      - name: Upload verified late nonactivation receipt
+        if: steps.baseline.outputs.skip == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: trunk-deploy-skip-${{ github.event.workflow_run.head_sha }}
+          path: trunk-deploy-skip.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Read production A08 state before deployment
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         env:
@@ -1668,6 +1493,7 @@ jobs:
           --api=https://api.fermatmind.com
           --output="$RUNNER_TEMP/career-first-publish-seo-before.json"
       - name: Deploy once and automatically restore LKG after committed smoke failure
+        id: activation
         if: steps.baseline.outputs.skip != 'true'
         env:
           SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY: ${{ secrets.SEO_INTEL_CRAWLER_LOG_SOURCE_AUTHORITY }}
@@ -1870,6 +1696,7 @@ jobs:
             -o seo_agent_evidence_boundary='${{ needs.policy.outputs.seo_agent_evidence_boundary }}' \
             -o seo_agent_policy_gateway='${{ needs.policy.outputs.seo_agent_policy_gateway }}' \
             -o private_result_authority_publish_required='${{ needs.policy.outputs.private_result_authority_publish_required }}' \
+            -o release_operations='${{ needs.policy.outputs.operations }}' \
             -o mbti_result_introductions_publish='${{ needs.policy.outputs.mbti_result_introductions_publish }}' \
             -o mbti_trait_content_publish='${{ needs.policy.outputs.mbti_trait_content_publish }}' \
             -o seo_council_orchestration="$production_council_closeout" \
@@ -2557,7 +2384,8 @@ jobs:
         run: |
           jq -n --arg sha "$DEPLOY_SHA" --arg pushed "$PUSHED_AT" --arg ci "$CI_COMPLETED_AT" \
             --arg completed "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg run "$GITHUB_RUN_ID" \
-            '{schema_version:"fermatmind.trunk-delivery-timing.v1",sha:$sha,pushed_at:$pushed,ci_completed_at:$ci,production_smoke_completed_at:$completed,deploy_run_id:$run}' \
+            --arg repository "$GITHUB_REPOSITORY" --arg ci_run '${{ github.event.workflow_run.id }}' --arg outcome '${{ steps.activation.outcome }}' \
+            '{schema_version:"fermatmind.trunk-delivery-timing.v1",sha:$sha,pushed_at:$pushed,ci_completed_at:$ci,repository:$repository,ci_run_id:$ci_run,deploy_run_attempt:1,production_outcome:$outcome,production_smoke_completed_at:(if $outcome == "success" then $completed else null end),deploy_run_id:$run}' \
             > trunk-delivery-timing.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
@@ -2947,7 +2775,17 @@ jobs:
   docs-only:
     name: Docs-only deployment skip receipt
     needs: policy
-    if: needs.policy.outputs.deploy != 'true'
+    if: needs.policy.outputs.release_required == 'false'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Validated docs/rules/tests-only SHA; application deployment intentionally skipped."
+      - name: Write exact-SHA nonactivation receipt
+        env:
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          jq -n --arg repository "$GITHUB_REPOSITORY" --arg sha "$DEPLOY_SHA" --arg ci "$CI_RUN_ID" --arg run "$GITHUB_RUN_ID" '{schema_version:"fermatmind.trunk-deploy-skip.v1",repository:$repository,sha:$sha,ci_run_id:$ci,deploy_run_id:$run,deploy_run_attempt:1,reason:"docs_rules_tests_only",mutation_started:false}' > trunk-deploy-skip.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: trunk-deploy-skip-${{ github.event.workflow_run.head_sha }}
+          path: trunk-deploy-skip.json
+          if-no-files-found: error
+          retention-days: 90

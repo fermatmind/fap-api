@@ -86,6 +86,70 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertFalse($verifier->refreshable('commercial_funnel_cro', 'CRO_MAPPING_FAILED'));
     }
 
+    public function test_staging_measurement_command_reuses_healthy_real_snapshots_without_publication_or_refresh(): void
+    {
+        $sha = str_repeat('a', 40);
+        $directory = '/tmp/fermatmind-11g-staging-'.getmypid().'-1';
+        $revision = dirname(base_path()).'/REVISION';
+        $oldRevision = is_file($revision) ? file_get_contents($revision) : null;
+        $oldCache = $_ENV['APP_CONFIG_CACHE'] ?? null;
+        $oldEnvironment = app()->environment();
+        mkdir($directory, 0700);
+        try {
+            file_put_contents($revision, $sha);
+            foreach (['measurement.env', 'competitive-writer.env'] as $name) {
+                file_put_contents($directory.'/'.$name, '');
+                chmod($directory.'/'.$name, 0600);
+            }
+            $_ENV['APP_CONFIG_CACHE'] = $directory.'/competitive-config.php';
+            app()->detectEnvironment(fn () => 'staging');
+            config(['seo_intel.write_enabled' => true]);
+            DB::connection()->enableQueryLog();
+            $code = \Illuminate\Support\Facades\Artisan::call('seo:competitive-release-prepare', [
+                '--candidate-sha' => $sha, '--measurement-only' => true,
+                '--gsc-env' => $directory.'/measurement.env', '--writer-env' => $directory.'/competitive-writer.env', '--json' => true,
+            ]);
+            $payload = json_decode(trim(\Illuminate\Support\Facades\Artisan::output()), true, flags: JSON_THROW_ON_ERROR);
+            $this->assertSame(0, $code, json_encode($payload));
+            $this->assertSame('staging', $payload['environment']);
+            $this->assertSame(['gsc' => 'reused', 'cro' => 'reused'], $payload['measurement_actions']);
+            $this->assertSame(0, $payload['cms_writes']);
+            $this->assertSame(0, $payload['search_writes']);
+            $this->assertFalse($payload['competitive_publication']);
+            foreach (DB::connection()->getQueryLog() as $query) {
+                $this->assertDoesNotMatchRegularExpression('/^\s*(?:insert|update|delete|create|drop|alter)\b/i', $query['query']);
+            }
+            $this->assertFileDoesNotExist($directory.'/competitive-config.php');
+        } finally {
+            app()->detectEnvironment(fn () => $oldEnvironment);
+            if ($oldCache === null) {
+                unset($_ENV['APP_CONFIG_CACHE']);
+            } else {
+                $_ENV['APP_CONFIG_CACHE'] = $oldCache;
+            }
+            if ($oldRevision === null) {
+                unlink($revision);
+            } else {
+                file_put_contents($revision, $oldRevision);
+            }
+            unlink($directory.'/measurement.env');
+            unlink($directory.'/competitive-writer.env');
+            rmdir($directory);
+        }
+    }
+
+    public function test_refresh_processes_execute_serially_and_reject_empty_success_output(): void
+    {
+        $command = app(\App\Console\Commands\SeoCompetitiveReleasePrepareCommand::class);
+        $method = new \ReflectionMethod($command, 'runRefreshes');
+        $result = $method->invoke($command, [
+            'gsc' => new \Symfony\Component\Process\Process(['php', '-r', 'echo json_encode(["status"=>"success","window_days"=>90,"search_types"=>["web"]]);']),
+            'cro' => new \Symfony\Component\Process\Process(['php', '-r', 'echo json_encode(["status"=>"success","readback_receipt"=>["status"=>"pass"]]);']),
+        ]);
+        $this->assertNull($result);
+        $this->assertSame('GSC_REFRESH_FAILED', $method->invoke($command, ['gsc' => new \Symfony\Component\Process\Process(['php', '-r', 'exit(0);'])]));
+    }
+
     public function test_reporting_lag_stale_source_stays_held_and_enters_existing_refresh_plan(): void
     {
         config(['seo_intel.gsc_reporting_timezone' => 'UTC']);

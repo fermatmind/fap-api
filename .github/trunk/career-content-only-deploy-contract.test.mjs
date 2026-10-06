@@ -109,11 +109,12 @@ function coverageTasks(options = {}) {
   return JSON.parse(execFileSync('php', ['-r', `
 namespace Deployer;
 $input = json_decode(base64_decode('${input}'), true);
-$config = ['release_path' => '/fixture/candidate'];
+$config = ['release_path' => '/fixture/candidate', 'release_operations' => $input['operations'] ?? ''];
 $commands = [];
 $runOptions = [];
 $host = $input['host'] ?? 'production';
 function get($key, $default = null) { return $GLOBALS['config'][$key] ?? $default; }
+${deploy.slice(deploy.indexOf('function deployOperation('), deploy.indexOf("\nset('sentry_release'"))}
 function set($key, $value) { $GLOBALS['config'][$key] = $value; }
 function currentHost() { return new class { function getAlias() { return $GLOBALS['host']; } }; }
 function deploySkipsAuthorityMutations() { return $GLOBALS['input']['skip'] ?? false; }

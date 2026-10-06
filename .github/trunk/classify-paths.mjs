@@ -178,7 +178,7 @@ export function classifyPaths(inputPaths) {
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
   );
-  const a08GateOnly = paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
+  const a08GateOnly = !paths.includes(".github/trunk/seo-platform-12a08-activation.mjs") && paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
     /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   // Scope the Council side of a mixed release separately from content/cache
   // operations. Ordinary A08 consumes existing observations; a required M3
@@ -192,6 +192,7 @@ export function classifyPaths(inputPaths) {
   const operations = {
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
+    a08_focused: a08ReadonlyWiring,
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_content_only: false,
@@ -238,11 +239,11 @@ export function classifyPaths(inputPaths) {
     seo_agent_policy_gateway: opsPresentation || paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
-    seo_council_orchestration: opsPresentation || paths.some((path) =>
+    seo_council_orchestration: !a08ReadonlyWiring && (opsPresentation || paths.some((path) =>
       isSeoCouncilOrchestrationBoundary(path)
       && !(SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "DEFERRED_NON_BLOCKING"
         && isDeferredCompetitiveCouncilBoundary(path))
-    ) || seoCompetitiveEvidence,
+    ) || seoCompetitiveEvidence),
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
     seo_competitive_evidence_progress: "COMPLETE",
@@ -259,10 +260,12 @@ export function classifyPaths(inputPaths) {
       /^\.agents\//,
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
+      /(?:^|\/)(?:test_[^/]+|[^/]+_test)\.(?:py|sh)$/,
     ]);
     const testPath = matches(path, [
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
+      /(?:^|\/)(?:test_[^/]+|[^/]+_test)\.(?:py|sh)$/,
     ]);
     const seoCouncilControlPlane = SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path)
       || SEO_CLASSIFIER_CONTROL_PLANE_PATHS.has(path);
@@ -326,7 +329,7 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (path.startsWith(".agents/") || (docsOnly && !seoCouncilControlPlane)) {
+    if (path.startsWith(".agents/") || (docsOnly && (!seoCouncilControlPlane || testPath))) {
       // Repository Skills are instructions and static helpers. Domain words in
       // their names or prose must not promote a rules-only change to runtime.
       // Documentation paths remain evidence even when their filenames contain

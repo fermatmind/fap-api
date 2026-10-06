@@ -22,13 +22,18 @@ final class SeoPlatform12SchedulerClockMysqlTest extends TestCase
         parent::setUp();
         $socket = getenv('SEO_TEST_MYSQL_SOCKET');
         $database = getenv('SEO_TEST_MYSQL_DATABASE');
-        if (! is_string($socket) || $socket === '' || ! is_string($database) || $database === '') {
+        $host = getenv('SEO_TEST_MYSQL_HOST');
+        if ((! is_string($socket) || $socket === '') && (! is_string($host) || $host === '') || ! is_string($database) || $database === '') {
             $this->markTestSkipped('Requires an isolated local MySQL database and socket.');
+        }
+        if (is_string($host) && $host !== '') {
+            $this->assertSame('127.0.0.1', $host, 'TCP topology must be disposable loopback CI.');
         }
         $this->assertMatchesRegularExpression('/^seo_operations_[a-z0-9_]+_test$/D', $database);
         config(['database.connections.seo_intel' => [
-            'driver' => 'mysql', 'unix_socket' => $socket, 'database' => $database,
-            'username' => 'root', 'password' => '', 'charset' => 'utf8mb4',
+            'driver' => 'mysql', 'unix_socket' => is_string($socket) ? $socket : '', 'database' => $database,
+            'host' => $host ?: '127.0.0.1', 'port' => getenv('SEO_TEST_MYSQL_PORT') ?: 3306,
+            'username' => 'root', 'password' => getenv('SEO_TEST_MYSQL_PASSWORD') ?: '', 'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci', 'prefix' => '', 'strict' => true,
             'options' => [\PDO::MYSQL_ATTR_FOUND_ROWS => false],
         ], 'seo_council.connection' => 'seo_intel', 'seo_council.scheduler_enabled' => false]);

@@ -1,3 +1,5 @@
+import { selectOperations } from './impact-consumers.mjs';
+import { githubProductionEvidence } from './production-evidence.mjs';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { classifyPaths } from './classify-paths.mjs';
 import { analyzeCareerContentOnlyFromGit } from './classify-career-content-only.mjs';
@@ -7,31 +9,35 @@ const productionJob = 'Production exact-SHA activation, smoke, and LKG fallback'
 const activationStep = 'Deploy once and automatically restore LKG after committed smoke failure';
 const validSha = (value) => /^[a-f0-9]{40}$/.test(value ?? '') && value !== '0'.repeat(40);
 
-export async function productionBaseline({ listRuns, listJobs }) {
+export async function productionBaseline({ listRuns, listJobs, candidateSha, skipEvidence }) {
+  if (typeof candidateSha !== 'function') throw new Error('Production binding reader is required');
   for (let page = 1; ; page++) {
     const runs = await listRuns(page);
     if (!Array.isArray(runs)) throw new Error('Invalid deployment run response');
     for (const run of runs) {
-      // The production job commits the active release. A later, independent
-      // evidence job can fail without undoing that activation.
-      if (run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion)
+      if (!['completed', 'in_progress'].includes(run.status)
+        || (run.status === 'completed' && !['success', 'failure'].includes(run.conclusion))
         || run.head_branch !== 'main' || run.event !== 'workflow_run' || run.run_attempt !== 1) continue;
-      if (!Number.isSafeInteger(run.id) || !validSha(run.head_sha)) throw new Error('Invalid deployment identity');
+      if (!Number.isSafeInteger(run.id)) throw new Error('Invalid deployment identity');
       const jobs = await listJobs(run.id);
       if (!Array.isArray(jobs)) throw new Error('Invalid deployment jobs response');
-      const production = jobs.filter((job) => job.name === productionJob);
+      const production = jobs.filter(job => job.name === productionJob);
+      if (!production.length && (run.status === 'in_progress' || run.conclusion === 'failure')) continue;
       if (production.length !== 1) throw new Error('Ambiguous production job evidence');
       const job = production[0];
-      // Successful docs-only workflows have a skipped production job.
-      if (job.conclusion === 'skipped') continue;
-      // A failed preactivation or publisher release did not become the active
-      // production baseline. Keep the older accepted runtime in the diff.
-      if (run.conclusion === 'failure' && job.status === 'completed' && job.conclusion === 'failure') continue;
-      if (job.status !== 'completed' || job.conclusion !== 'success'
-        || job.steps?.filter((step) => step.name === activationStep && step.conclusion === 'success').length !== 1) {
+      if (job.conclusion === 'skipped' || (job.conclusion === 'success' && job.steps?.some(step=>step.name===activationStep && step.conclusion==='skipped'))) {
+        if (skipEvidence) await skipEvidence(run,jobs);
+        continue;
+      }
+      const activated = job.steps?.filter(step=>step.name===activationStep&&step.conclusion==='success').length===1;
+      if (job.status !== 'completed' || (job.conclusion === 'failure' && !activated)) continue;
+      if (!['success','failure'].includes(job.conclusion)
+        || job.steps?.filter(step => step.name === activationStep && step.conclusion === 'success').length !== 1) {
         throw new Error('Successful workflow lacks production activation evidence');
       }
-      return { sha: run.head_sha, runId: run.id };
+      const sha = await candidateSha(run,job);
+      if (!validSha(sha)) throw new Error('Invalid production candidate binding');
+      return { sha, runId: run.id };
     }
     if (runs.length < 100) throw new Error('No successful production activation found');
   }
@@ -66,6 +72,7 @@ export function applyCareerContentOnly(classification, careerReceipt) {
   classification.operations.career_content_only = careerContentOnly;
   classification.operations.career_first_publish = careerFirstPublish;
   if (careerContentOnly || careerFirstPublish) classification.operations.a08_scoped_checks = false;
+  if (careerContentOnly && careerReceipt.invariants?.indexability_unchanged === true && careerReceipt.invariants?.discoverability === false) classification.operations.url_truth = false;
   if (careerFirstPublish || ['BODY_ELIGIBILITY_CHANGED', 'BODY_ELIGIBILITY_UNPROVEN', 'MANIFEST_IDENTITY_CHANGED'].includes(careerReceipt.reason)) {
     classification.flags.seo_discoverability = true;
     if (!classification.categories.includes('seo_discoverability')) {
@@ -80,9 +87,7 @@ export function applyCareerContentOnly(classification, careerReceipt) {
   return classification;
 }
 
-async function cli() {
-  const repository = process.env.GITHUB_REPOSITORY;
-  if (!/^[\w.-]+\/[\w.-]+$/.test(repository ?? '')) throw new Error('Invalid repository');
+export async function resolveProductionBaseline(repository) {
   const api = (path, query) => {
     try {
       return JSON.parse(execFileSync('gh', ['api', `repos/${repository}/${path}`, '--jq', query], {
@@ -92,7 +97,9 @@ async function cli() {
       throw new Error('Unable to read deployment evidence from GitHub');
     }
   };
-  const baseline = await productionBaseline({
+  const evidence = githubProductionEvidence(repository);
+  return productionBaseline({
+    candidateSha: evidence, skipEvidence: evidence.skip,
     // Read the ordered workflow history without the API status filter. The
     // resolver already verifies every terminal state and production activation
     // step locally; relying on the filtered endpoint can return a stale subset
@@ -104,6 +111,12 @@ async function cli() {
       return result.jobs;
     },
   });
+}
+
+async function cli() {
+  const repository = process.env.GITHUB_REPOSITORY;
+  if (!/^[\w.-]+\/[\w.-]+$/.test(repository ?? '')) throw new Error('Invalid repository');
+  const baseline = await resolveProductionBaseline(repository);
   const classification = classifyRelease({
     pushBase: process.env.PUSH_BEFORE, head: process.env.GITHUB_SHA, baseline,
     isAncestor: (base, head) => spawnSync('git', ['merge-base', '--is-ancestor', base, head]).status === 0,
@@ -116,6 +129,7 @@ async function cli() {
     process.env.GITHUB_SHA,
     classification.paths,
   );
+  Object.assign(classification.operations, selectOperations(classification.paths));
   applyCareerContentOnly(classification, careerReceipt);
   writeFileSync('career-content-change-receipt.json', `${JSON.stringify(careerReceipt, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify(classification, null, 2)}\n`);

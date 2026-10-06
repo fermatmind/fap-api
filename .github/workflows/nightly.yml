@@ -1,16 +1,16 @@
 name: Nightly
-run-name: "${{ github.event_name == 'push' && 'Full evidence repair' || github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
+run-name: "${{ github.event_name == 'push' && 'Focused evidence repair' || github.event.schedule == '17 18 * * *' && 'Daily operations' || 'Weekly full checks' }} · ${{ github.sha }}"
 
 on:
-  # Refresh complete evidence only when its producer/consumer changes, never for ordinary content.
+  # Repair affected evidence domains; scheduled weekly checks remain complete.
   push:
     branches: [main]
     paths:
       - '.github/workflows/nightly.yml'
       - '.github/trunk/seo-platform-12a08-evidence-download.mjs'
       - '.github/trunk/seo-platform-12a08-release.mjs'
-      - 'backend/tests/Unit/Domain/Career/Compilation/CareerShardedCurrentAssemblerTest.php'
-      - 'backend/tests/Unit/Domain/Career/Display/CareerContentV3PageUpdaterTest.php'
+      - '.github/trunk/nightly-*.mjs'
+      - 'backend/tests/**'
   schedule:
     # Daily operations: 02:17 Asia/Shanghai.
     - cron: "17 18 * * *"
@@ -27,6 +27,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  repair-scope:
+    name: Select push repair consumers; schedules retain their full scope
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    outputs:
+      php_required: ${{ steps.scope.outputs.php_required }}
+      php_files: ${{ steps.scope.outputs.php_files }}
+      workflow: ${{ steps.scope.outputs.workflow }}
+      authority: ${{ steps.scope.outputs.authority }}
+      dependency: ${{ steps.scope.outputs.dependency }}
+      security: ${{ steps.scope.outputs.security }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24
+      - id: scope
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: node .github/trunk/nightly-repair.mjs
+
   scheduler-evidence-monitor:
     name: Daily production scheduler evidence archive
     if: github.event_name == 'schedule' && github.event.schedule == '17 18 * * *'
@@ -122,7 +146,8 @@ jobs:
 
   dependency-audit:
     name: Dependency contract and vulnerability audit
-    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
+    needs: repair-scope
+    if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.dependency == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -141,7 +166,8 @@ jobs:
 
   workflow-contracts:
     name: Workflow, classifier, and secret contracts
-    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
+    needs: repair-scope
+    if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.workflow == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -156,7 +182,8 @@ jobs:
 
   authority-contract:
     name: MBTI, Personality, and Sitemap authority contract
-    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
+    needs: repair-scope
+    if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.authority == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
     services:
@@ -198,8 +225,9 @@ jobs:
       - run: bash backend/scripts/ci_verify_mbti.sh
 
   full-phpunit:
-    name: Full PHPUnit regression and performance contracts
-    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
+    name: ${{ github.event_name == 'push' && 'Focused PHPUnit regression and performance contracts' || 'Full PHPUnit regression and performance contracts' }}
+    needs: repair-scope
+    if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.php_required == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     # The measured full suite exceeded 90 minutes before completing all cases.
     # Retain the complete suite and its JUnit verdict instead of truncating evidence.
@@ -226,6 +254,11 @@ jobs:
       DB_PASSWORD: root
       REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
+      SEO_TEST_MYSQL_HOST: 127.0.0.1
+      SEO_TEST_MYSQL_PORT: "3306"
+      SEO_TEST_MYSQL_DATABASE: fap_ci
+      SEO_TEST_MYSQL_PASSWORD: root
+      RUN_DELIVERY_REDIS_TOPOLOGY: "1"
       RUN_BIG5_OCEAN_GATE: "1"
       RUN_ENNEAGRAM_GATE: "1"
     steps:
@@ -244,13 +277,38 @@ jobs:
         run: touch .env
       - working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Prepare dedicated disposable topology database
+        working-directory: backend
+        run: |
+          # shellcheck disable=SC2016
+          php -r '$pdo=new PDO("mysql:host=127.0.0.1;port=3306;dbname=fap_ci", "root", "root"); $pdo->exec("CREATE DATABASE seo_operations_nightly_test");'
       - name: Run full PHPUnit and retain machine-readable evidence
         id: full-tests
         continue-on-error: true
         working-directory: backend
         run: |
           set -o pipefail
-          php artisan test --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            mapfile -t selected < <(jq -r '.[]' <<<'${{ needs.repair-scope.outputs.php_files }}')
+            test "${#selected[@]}" -gt 0
+            php artisan test "${selected[@]}" --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
+          else
+            php artisan test --no-ansi --log-junit="$RUNNER_TEMP/nightly-full-phpunit.xml" 2>&1 | tee "$RUNNER_TEMP/nightly-full-phpunit.log"
+          fi
+      - name: Prove full-suite MySQL and Redis consumers ran without skips
+        if: github.event_name == 'schedule' && !cancelled()
+        working-directory: backend
+        run: |
+          php <<'PHP'
+          <?php
+          $xml = simplexml_load_file(getenv('RUNNER_TEMP').'/nightly-full-phpunit.xml');
+          if (! $xml) exit(1);
+          foreach (['SeoIntelGscReadSnapshotMysqlTest', 'SeoIntelGscRunClockMysqlTest', 'SeoPlatform12SchedulerClockMysqlTest', 'DeliveryRedisTopologyTest'] as $class) {
+              $cases = $xml->xpath('//testcase[contains(@class, "'.$class.'") or contains(@classname, "'.$class.'")]');
+              if (! $cases) exit(1);
+              foreach ($cases as $case) if (isset($case->skipped) || isset($case->failure) || isset($case->error)) exit(1);
+          }
+          PHP
       - name: Validate full PHPUnit JUnit completeness
         if: always()
         working-directory: backend
@@ -288,7 +346,8 @@ jobs:
 
   codeql:
     name: CodeQL and Semgrep security scan
-    if: github.event_name == 'push' || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0')
+    needs: repair-scope
+    if: always() && !cancelled() && ((github.event_name == 'push' && needs.repair-scope.outputs.security == 'true') || (github.event_name == 'schedule' && github.event.schedule == '37 18 * * 0'))
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -519,6 +578,7 @@ jobs:
   nightly-summary:
     name: Final failure-domain receipt
     needs:
+      - repair-scope
       - authority-contract
       - full-phpunit
       - dependency-audit
@@ -532,6 +592,7 @@ jobs:
     env:
       SCHEDULE: ${{ github.event.schedule }}
       EVENT_NAME: ${{ github.event_name }}
+      REPAIR_SCOPE: ${{ toJSON(needs.repair-scope.outputs) }}
       AUTHORITY_RESULT: ${{ needs.authority-contract.result }}
       FULL_PHPUNIT_RESULT: ${{ needs.full-phpunit.result }}
       DEPENDENCY_RESULT: ${{ needs.dependency-audit.result }}
@@ -546,6 +607,7 @@ jobs:
           set -euo pipefail
           mkdir -p artifacts/nightly-summary
           jq -n \
+            --argjson repair "$REPAIR_SCOPE" \
             --arg sha "$GITHUB_SHA" \
             --arg schedule "$SCHEDULE" \
             --arg event "$EVENT_NAME" \
@@ -557,25 +619,25 @@ jobs:
             --arg scheduler "$SCHEDULER_RESULT" \
             --arg gsc "$GSC_RESULT" '
             ($schedule == "17 18 * * *") as $daily |
-            ($schedule == "37 18 * * 0" or $event == "push") as $weekly |
+            ($schedule == "37 18 * * 0") as $weekly |
             {
               schema_version: "nightly-failure-domain-summary.v2",
               workflow_sha: $sha,
               schedule: $schedule,
               event: $event,
-              check_scope: (if $daily then "daily_operations" elif $event == "push" then "full_evidence_repair" elif $weekly then "weekly_full_checks" else "unknown" end),
+              check_scope: (if $daily then "daily_operations" elif $event == "push" then "focused_evidence_repair" elif $weekly then "weekly_full_checks" else "unknown" end),
               production_rollback_requested: false,
               domains: {
-                authority_contract: {result: $authority, required: $weekly},
-                full_phpunit: {result: $full_phpunit, required: $weekly},
-                dependency_audit: {result: $dependency, required: $weekly},
-                workflow_contracts: {result: $workflow, required: $weekly},
-                security_scan: {result: $security, required: $weekly},
+                authority_contract: {result: $authority, required: ($weekly or ($event == "push" and $repair.authority == "true"))},
+                full_phpunit: {result: $full_phpunit, required: ($weekly or ($event == "push" and $repair.php_required == "true"))},
+                dependency_audit: {result: $dependency, required: ($weekly or ($event == "push" and $repair.dependency == "true"))},
+                workflow_contracts: {result: $workflow, required: ($weekly or ($event == "push" and $repair.workflow == "true"))},
+                security_scan: {result: $security, required: ($weekly or ($event == "push" and $repair.security == "true"))},
                 scheduler_evidence: {result: $scheduler, required: $daily},
                 gsc_readonly_sync: {result: $gsc, required: $daily}
               }
             } |
-            .status = (if (($daily or $weekly) and
+            .status = (if (($daily or $weekly or $event == "push") and
               (.domains | all(.[]; if .required then .result == "success" else .result == "skipped" end)))
               then "pass" else "fail" end)
           ' > artifacts/nightly-summary/receipt.json

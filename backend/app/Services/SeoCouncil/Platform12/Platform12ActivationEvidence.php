@@ -12,7 +12,7 @@ final readonly class Platform12ActivationEvidence
 {
     public const SCHEMA = 'seo.platform12_a08_activation.v2';
 
-    public const REQUIRED_TESTS = [
+    public const LEGACY_REQUIRED_TESTS = [
         'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
             'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
             'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest', 'SeoPlatform12A08SourceCheckTest',
@@ -23,6 +23,18 @@ final readonly class Platform12ActivationEvidence
         Platform12DailyMissionSet::IDS[0] => ['SeoPlatform12B01DailyGscCoreRuntimeTest', 'SeoPlatform12A08ProductionEvidenceTest'],
         Platform12DailyMissionSet::IDS[1] => ['SeoPlatform12B02DailyUrlTruthTest', 'SeoPlatform12A08ProductionEvidenceTest'],
         Platform12DailyMissionSet::IDS[2] => ['SeoPlatform12B03DailySecurityDriftTest', 'SeoPlatform12A08ProductionEvidenceTest'],
+    ];
+
+    public const REQUIRED_TESTS = [
+        'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
+            'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
+            'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest',
+            'SeoPlatform12A08SourceCheckTest', 'SeoPlatform12A08DailyWiringTest',
+            'SeoPlatform12A08LegacyScheduleContractTest', 'MigrationPurityGateTest',
+            'SeoPlatform12F01NotificationPolicyContractTest', 'SeoPlatform12F02NotificationOutboxTest', 'SeoPlatform11C'],
+        Platform12DailyMissionSet::IDS[0] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[0]],
+        Platform12DailyMissionSet::IDS[1] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[1]],
+        Platform12DailyMissionSet::IDS[2] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[2]],
     ];
 
     public function __construct(
@@ -146,11 +158,11 @@ final readonly class Platform12ActivationEvidence
     {
         return is_array($check) && ($check['scope_id'] ?? null) === $scope && ($check['check_scope'] ?? null) === 'a08_scoped_checks'
             && ($check['sha'] ?? null) === $sha && ($check['status'] ?? null) === 'pass'
-            && ($check['scope_version'] ?? null) === 'seo-council-a08-dependencies.v2'
+            && in_array($check['scope_version'] ?? null, ['seo-council-a08-dependencies.v2', 'seo-council-a08-dependencies.v3'], true)
             && $this->digest($check['fingerprint'] ?? null)
             && $this->digest($check['result_digest'] ?? null)
             && is_array($check['tests'] ?? null)
-            && array_diff(self::REQUIRED_TESTS[$scope], $check['tests']) === [];
+            && array_diff(($check['scope_version'] === 'seo-council-a08-dependencies.v2' ? self::LEGACY_REQUIRED_TESTS : self::REQUIRED_TESTS)[$scope], $check['tests']) === [];
     }
 
     private function permissionsClosed(mixed $permissions): bool

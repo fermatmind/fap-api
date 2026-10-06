@@ -1,3 +1,5 @@
+import { relevantNightlyFailures } from './nightly-relevance.mjs';
+import {parseJUnitNightlyFailures,parseLegacyNightlyFailures} from './seo-platform-12a08-release.mjs';
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
@@ -21,6 +23,10 @@ const loadNightly = run => {
   } else {
     evidence = {log:fullJob.conclusion === 'success' ? '' : execFileSync('gh', ['api', '--allow-escape-sequences', `repos/${repo}/actions/jobs/${fullJob.id}/logs`], {maxBuffer:32*1024*1024}).toString()};
   }
+  if (fullJob.conclusion === 'failure') {
+    const failures = evidence.junit !== undefined ? parseJUnitNightlyFailures(evidence.junit) : parseLegacyNightlyFailures(evidence.log);
+    evidence.relevance = relevantNightlyFailures(failures,run.head_sha,process.env.GITHUB_SHA === sha || !sha ? process.env.GITHUB_SHA : sha);
+  }
   return {jobs, evidence, source:{run_id:run.id, sha:run.head_sha, artifact_digest:artifact?.digest ?? null}};
 };
 if (process.argv[2] === '--nightly-revalidation-paths') {
@@ -30,7 +36,7 @@ if (process.argv[2] === '--nightly-revalidation-paths') {
     const loaded = loadNightly(run);
     if (!loaded) continue;
     const available = execFileSync('git', ['ls-files', 'tests'], {encoding:'utf8'}).trim().split('\n');
-    paths = nightlyRevalidationPaths(run, loaded.jobs, loaded.evidence, available);
+    paths = nightlyRevalidationPaths(run, loaded.jobs, loaded.evidence, available, process.env.GITHUB_SHA);
     source = loaded.source;
     break;
   }

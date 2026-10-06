@@ -44,6 +44,7 @@ final class CompetitiveMeasurementReadiness
                 'context_status' => 'HOLD',
                 'hold_reason' => (string) ($diagnostic['hold_reason'] ?? 'MEASUREMENT_HOLD'),
                 'bundle_hash' => hash('sha256', $modeId.'|missing'),
+                ...isset($diagnostic['failure_category']) ? ['failure_category' => $diagnostic['failure_category']] : [],
             ];
             if (! $result->ready() || count($result->bundles()) !== 1) {
                 $modes[$modeId] = $mode;

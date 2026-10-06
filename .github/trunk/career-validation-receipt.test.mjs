@@ -34,7 +34,8 @@ function fixture(required = true) {
   assert.ok(Buffer.byteLength(JSON.stringify(change)) > 256 * 1024);
   write('career-content-change-receipt.json', change);
   write('trunk-path-classification.json', {
-    operations: { publisher_required: required, career_first_publish: required,
+    deploy: true, tests_changed:false, flags:{content_assets:true},
+    operations: { content_pack_checks:false,big5_tests:false,personality_current_authority_release:false,publisher_required: required, career_first_publish: required,
       career_content_only: false, a08_scoped_checks: false },
     scope: { validation_base_sha: base }, career_content_change: change,
   });
@@ -50,6 +51,8 @@ function fixture(required = true) {
   });
   const env = { ...process.env, GITHUB_SHA: sha, GITHUB_RUN_ID: '123' };
   for (const name of ['CLASSIFY', 'HYGIENE', 'SUPPLY_CHAIN', 'CONTENT_PACK', 'VERIFY_MBTI', 'VERIFY_BIGFIVE', 'CAREER_PARITY']) env[`${name}_RESULT`] = 'success';
+  env.CONTENT_PACK_RESULT='skipped';
+  env.VERIFY_BIGFIVE_RESULT='skipped';
   for (const name of ['SEO_PLATFORM_11A_CLOSEOUT', 'SEO_AGENT_EVIDENCE_BOUNDARY', 'SEO_AGENT_POLICY_GATEWAY', 'SEO_COUNCIL_ORCHESTRATION', 'SEO_COMPETITIVE_EVIDENCE']) env[`${name}_RESULT`] = 'skipped';
   return { root, write, change, run: () => spawnSync('bash', ['-c', script], { cwd: root, env, encoding: 'utf8' }) };
 }
