@@ -11,6 +11,8 @@ require 'recipe/laravel.php';
  */
 set('application', 'fap-api');
 set('repository', 'git@github.com:fermatmind/fap-api.git');
+// Deployer resolves --revision through target; it does not define revision config.
+set('revision', fn () => get('target'));
 
 set('git_tty', false);
 set('keep_releases', 5);
@@ -5564,6 +5566,9 @@ task('guard:prepared-candidate', function () {
     if (currentHost()->getAlias() !== 'staging' || get('deploy_mode') !== 'standard') {
         throw new \RuntimeException('Prepared candidate resume is staging standard only.');
     }
+    if (preg_match('/\A[a-f0-9]{40}\z/D', (string) get('revision')) !== 1) {
+        throw new \RuntimeException('Prepared candidate requires an exact revision.');
+    }
     set('release_path', '{{deploy_path}}/releases/{{release_name}}');
     run(<<<'BASH'
 set -euo pipefail
@@ -5604,6 +5609,8 @@ task('deploy:candidate-only', [
     'guard:public-content-release',
     'fap:deploy-unlock-owned',
 ]);
+fail('deploy:prepared', 'deploy:failed');
+fail('deploy:candidate-only', 'deploy:failed');
 
 /**
  * A schema-only release installs the approved code revision and runs exactly one
