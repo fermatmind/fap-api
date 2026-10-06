@@ -17,7 +17,8 @@ test('A08 unavailable activation evidence skips before candidate checks; existin
  assert.equal(hasActivationEvidence(null,{activation:{schema_version:'seo.platform12_a08_activation.v2'}}),true);
  assert.throws(()=>build({checks:null,production:{activation:{schema_version:'seo.platform12_a08_activation.v2'}},sha:'candidate'}),/A08_FOCUSED_REVALIDATION_REQUIRED/);
  const downloader=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
- assert.match(downloader,/const nightlyRuns = activationEvidence \? api\(/);
+ assert.match(downloader,/const listedNightlyRuns = activationEvidence \? api\(/);
+ assert.match(downloader,/const nightlyRuns = activationEvidence \? nightlyEvidenceRuns\(checks\?\.nightly_source,/);
  assert.match(downloader,/if \(!nightly && activationEvidence\)/);
 });
 test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
@@ -244,7 +245,7 @@ test('A08 activation gate skips only unavailable evidence and fails closed other
  } finally {rmSync(dir,{recursive:true,force:true});}
 });
 test('Nightly closeout reads the immutable CI source even after a newer run completes',async()=>{
- const {nightlyEvidenceRuns,newerNightlyFailures}=await import('./seo-platform-12a08-release.mjs');
+ const {nightlyEvidenceRuns,newerNightlyFailures,unresolvedNightlyDomains}=await import('./seo-platform-12a08-release.mjs');
  const source={run_id:7,sha:'a'.repeat(40),artifact_digest:`sha256:${'b'.repeat(64)}`};
  const run={id:7,head_sha:source.sha,status:'completed',conclusion:'success',run_attempt:1,head_branch:'main',path:'.github/workflows/nightly.yml',event:'push',created_at:'2026-10-06T10:00:00Z'};
  let listed=false;
@@ -263,6 +264,12 @@ test('Nightly closeout reads the immutable CI source even after a newer run comp
  assert.throws(()=>selectNightlyArtifact([],run,{name:'Focused PHPUnit regression and performance contracts'}),/BINDING/);
  assert.throws(()=>selectNightlyArtifact([],run,{name:'Full PHPUnit regression and performance contracts',steps:[{name:'Upload full PHPUnit evidence'}]}),/BINDING/);
  assert.equal(selectNightlyArtifact([],run,{name:'Full PHPUnit regression and performance contracts',steps:[]}),null);
+ const failed={...newer,conclusion:'failure'}, repaired={...newer,id:9,created_at:'2026-10-06T10:02:00Z'};
+ const domain='Workflow, classifier, and secret contracts';
+ assert.deepEqual(unresolvedNightlyDomains([failed,repaired],run,id=>[{name:domain,conclusion:id===9?'success':'failure'}],()=>true),[]);
+ assert.deepEqual(unresolvedNightlyDomains([failed,repaired],run,id=>[{name:domain,conclusion:id===9?'success':'failure'}],()=>false),[{run_id:8,name:domain,conclusion:'failure'}]);
+ assert.deepEqual(unresolvedNightlyDomains([failed,repaired],run,id=>[{name:domain,conclusion:id===9?'skipped':'failure'}]),[{run_id:8,name:domain,conclusion:'failure'}]);
+ assert.deepEqual(unresolvedNightlyDomains([failed,repaired],run,id=>[{name:'CodeQL and Semgrep security scan',conclusion:id===9?'skipped':'failure'}]),[{run_id:8,name:'CodeQL and Semgrep security scan',conclusion:'failure'}]);
 });
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
  const {assessNightly,completedNightlyFullJob,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');

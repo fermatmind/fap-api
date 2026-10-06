@@ -256,6 +256,20 @@ export function newerNightlyFailures(runs, pinned) {
     return created > baseline;
   });
 }
+export function unresolvedNightlyDomains(runs, pinned, readJobs, isAncestor = () => false) {
+  const baseline = Date.parse(pinned.created_at), latest = new Map();
+  if (!Number.isFinite(baseline)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  const recent = runs.filter(run => run.status === 'completed' && run.head_branch === 'main'
+    && ['push', 'schedule'].includes(run.event) && Date.parse(run.created_at) > baseline)
+    .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+  for (const run of recent) for (const job of readJobs(run.id)) {
+    if (!['success', 'failure'].includes(job.conclusion)
+      || ['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts', 'Final failure-domain receipt'].includes(job.name)) continue;
+    if (job.conclusion === 'success' && !isAncestor(run.head_sha)) continue;
+    if (!latest.has(job.name)) latest.set(job.name, {run_id:run.id, name:job.name, conclusion:job.conclusion});
+  }
+  return [...latest.values()].filter(job => job.conclusion === 'failure');
+}
 // Revalidate only the failures in the same immutable Nightly evidence used at closeout.
 // This is a temporary selection from evidence, not a permanent expansion of scoped CI.
 export function nightlyRevalidationPaths(run, jobs, evidence, availablePaths, candidateSha = null, root = process.cwd()) {

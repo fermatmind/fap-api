@@ -3,7 +3,7 @@ import {parseJUnitNightlyFailures,parseLegacyNightlyFailures} from './seo-platfo
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyEvidenceRuns, newerNightlyFailures, nightlyRevalidationPaths, readNightlyArtifactEvidence } from './seo-platform-12a08-release.mjs';
+import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyEvidenceRuns, newerNightlyFailures, unresolvedNightlyDomains, nightlyRevalidationPaths, readNightlyArtifactEvidence } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -78,12 +78,26 @@ const nightlyRuns = activationEvidence ? nightlyEvidenceRuns(checks?.nightly_sou
   () => listedNightlyRuns) : [];
 // Keep the CI proof immutable while preserving the existing fail-closed flow
 // for later related failures and security/authority failure domains.
-if (activationEvidence && checks?.nightly_source) for (const run of newerNightlyFailures(listedNightlyRuns, nightlyRuns[0])) {
-  const jobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
-  if (jobs.some(job => job.conclusion === 'failure' && !['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts', 'Final failure-domain receipt'].includes(job.name))) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
-  const loaded = loadNightly(run);
-  if (!loaded) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-  assessNightly(run, loaded.jobs, loaded.evidence, checks);
+if (activationEvidence && checks?.nightly_source) {
+  const cache = new Map(), readJobs = id => {
+    if (!cache.has(id)) {
+      const result = api(`actions/runs/${id}/jobs?per_page=100`);
+      if (result.total_count !== result.jobs?.length) throw new Error('NIGHTLY_JOB_INVENTORY_HOLD');
+      cache.set(id, result.jobs);
+    }
+    return cache.get(id);
+  };
+  const isAncestor = head => {
+    if (!/^[a-f0-9]{40}$/.test(head ?? '')) return false;
+    try { execFileSync('git', ['merge-base', '--is-ancestor', head, sha], {stdio:'ignore'}); return true; } catch { return false; }
+  };
+  if (unresolvedNightlyDomains(listedNightlyRuns, nightlyRuns[0], readJobs, isAncestor).length) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  for (const run of newerNightlyFailures(listedNightlyRuns, nightlyRuns[0])) {
+    if (!readJobs(run.id).some(job => ['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts'].includes(job.name) && job.conclusion === 'failure')) continue;
+    const loaded = loadNightly(run);
+    if (!loaded) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    assessNightly(run, loaded.jobs, loaded.evidence, checks);
+  }
 }
 let nightly = null;
 for (const run of nightlyRuns) {
