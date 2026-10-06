@@ -220,12 +220,41 @@ export function completedNightlyFullJob(jobs) {
   if (matching.length !== 1 || !['success','failure'].includes(matching[0].conclusion)) return null;
   return matching[0];
 }
-export function selectNightlyArtifact(artifacts, run) {
+export function selectNightlyArtifact(artifacts, run, job = null) {
   const name = `nightly-full-phpunit-${run.head_sha}-${run.id}`;
   const matching = artifacts.filter(item => item.name === name);
-  if (!matching.length) return null;
+  if (!matching.length) {
+    if (job?.name === 'Focused PHPUnit regression and performance contracts'
+      || job?.steps?.some(step => step.name === 'Upload full PHPUnit evidence')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+    return null; // Explicit legacy full-job log compatibility only.
+  }
   if (matching.length !== 1 || matching[0].expired || !/^sha256:[a-f0-9]{64}$/.test(matching[0].digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
   return matching[0];
+}
+export function nightlyEvidenceRuns(source, readRun, listRuns) {
+  if (!source) return listRuns();
+  if (!Number.isSafeInteger(source.run_id) || source.run_id <= 0
+    || !/^[a-f0-9]{40}$/.test(source.sha ?? '')
+    || (source.artifact_digest !== null && !/^sha256:[a-f0-9]{64}$/.test(source.artifact_digest ?? ''))) {
+    throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  }
+  const run = readRun(source.run_id);
+  if (run.id !== source.run_id || run.head_sha !== source.sha || run.status !== 'completed'
+    || !['success', 'failure'].includes(run.conclusion) || run.run_attempt !== 1
+    || run.head_branch !== 'main' || run.path !== '.github/workflows/nightly.yml'
+    || !['push', 'schedule'].includes(run.event)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  return [run];
+}
+export function newerNightlyFailures(runs, pinned) {
+  const baseline = Date.parse(pinned.created_at);
+  if (!Number.isFinite(baseline)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  return runs.filter(run => {
+    if (run.id === pinned.id || run.status !== 'completed' || run.conclusion !== 'failure'
+      || run.head_branch !== 'main' || !['push', 'schedule'].includes(run.event)) return false;
+    const created = Date.parse(run.created_at);
+    if (!Number.isFinite(created)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+    return created > baseline;
+  });
 }
 // Revalidate only the failures in the same immutable Nightly evidence used at closeout.
 // This is a temporary selection from evidence, not a permanent expansion of scoped CI.

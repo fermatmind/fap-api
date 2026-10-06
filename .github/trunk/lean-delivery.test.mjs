@@ -48,3 +48,16 @@ test('prepared guard rejects active, wrong SHA and cross-environment candidates 
 test('feature modes follow actual consumers and shared inputs, avoiding a duplicate static matrix',()=>{assert.deepEqual(selectOperations(['.github/trunk/seo-platform-12a08-activation.mjs']).test_modes,['legacy']);assert.deepEqual(selectOperations(['backend/app/Services/UnresolvedNewService.php']).test_modes,['legacy','v2']);assert.deepEqual(selectOperations(['backend/tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php']).test_modes,['legacy','v2']);});
 
 test('PHP repair baselines exclude green workflows that never ran PHP',async()=>{const runs=[{id:2,head_sha:b},{id:1,head_sha:a}].map(r=>({...r,status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}));assert.equal(await phpRepairBaseline(runs,id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===2?'skipped':'failure'}],b,()=>true),a);const plan=repairDomains(['.github/workflows/nightly.yml'],process.cwd(),['SEO_TEST_MYSQL_DATABASE','git_history']);for(const name of ['SeoIntelGscReadSnapshotMysqlTest','SeoPlatform12A08ActivationEvidenceTest'])assert.ok(plan.php_files.some(p=>p.endsWith(name+'.php')));});
+
+test('staging transport preserves the exact temporary env filenames consumed by prepare',()=>{
+ const source=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
+ const start=source.indexOf('      - name: Verify staging measurement source readiness');
+ const section=source.slice(start,source.indexOf('      - name: Upload sanitized staging measurement source receipt',start));
+ const assignments=section.split('\n').filter(line=>/^\s+(?:local_key|local_env|local_sync_env|remote_tmp|remote_key|remote_env|remote_sync_env)=/.test(line)).map(line=>line.trim()).join('\n');
+ const root=mkdtempSync(tmpdir()+'/measurement-copy-');
+ const run=text=>spawnSync('bash',['-c',`set -euo pipefail\numask 077\n${text}\nprintf 'SAFE_TEST_INPUT=true\\n' > "$local_env"\nprintf '{}' > "$local_key"\nprintf 'SAFE_TEST_DB=1\\n' > "$local_sync_env"\nmkdir "$remote_tmp"\ntrap 'rm -rf "$remote_tmp"' EXIT\ncp "$local_key" "$local_env" "$local_sync_env" "$remote_tmp/"\ntest -f "$remote_key"\ntest -f "$remote_sync_env"\ntest -f "$remote_env"\n. "$remote_env"\ntest "$SAFE_TEST_INPUT" = true\ncat "$remote_env" "$remote_sync_env" > "$remote_tmp/competitive-writer.env"\ntest -s "$remote_tmp/competitive-writer.env"`],{env:{...process.env,RUNNER_TEMP:root,GITHUB_RUN_ID:String(process.pid),GITHUB_RUN_ATTEMPT:'991'},encoding:'utf8'});
+ try {
+  assert.equal(run(assignments).status,0);
+  assert.notEqual(run(assignments.replace('local_env="$RUNNER_TEMP/measurement.env"','local_env="$RUNNER_TEMP/readiness.env"')).status,0);
+ } finally {rmSync(root,{recursive:true,force:true});}
+});

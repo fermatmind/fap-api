@@ -243,6 +243,27 @@ test('A08 activation gate skips only unavailable evidence and fails closed other
   }
  } finally {rmSync(dir,{recursive:true,force:true});}
 });
+test('Nightly closeout reads the immutable CI source even after a newer run completes',async()=>{
+ const {nightlyEvidenceRuns,newerNightlyFailures}=await import('./seo-platform-12a08-release.mjs');
+ const source={run_id:7,sha:'a'.repeat(40),artifact_digest:`sha256:${'b'.repeat(64)}`};
+ const run={id:7,head_sha:source.sha,status:'completed',conclusion:'success',run_attempt:1,head_branch:'main',path:'.github/workflows/nightly.yml',event:'push',created_at:'2026-10-06T10:00:00Z'};
+ let listed=false;
+ assert.deepEqual(nightlyEvidenceRuns(source,id=>{assert.equal(id,7);return run;},()=>{listed=true;return [{...run,id:8}];}),[run]);
+ assert.equal(listed,false);
+ for(const changed of [{id:8},{head_sha:'c'.repeat(40)},{status:'in_progress'},{conclusion:'cancelled'},{run_attempt:2},{head_branch:'other'},{path:'.github/workflows/ci.yml'},{event:'pull_request'}]) assert.throws(()=>nightlyEvidenceRuns(source,()=>({...run,...changed}),()=>[]),/BINDING/);
+ for(const changed of [{run_id:'7'},{sha:'bad'},{artifact_digest:'bad'}]) assert.throws(()=>nightlyEvidenceRuns({...source,...changed},()=>run,()=>[]),/BINDING/);
+ assert.deepEqual(nightlyEvidenceRuns(null,()=>{throw new Error('unexpected pinned read');},()=>[run]),[run]);
+ assert.deepEqual(nightlyEvidenceRuns({...source,artifact_digest:null},()=>run,()=>[]),[run]);
+ const newer={...run,id:8,created_at:'2026-10-06T10:01:00Z'};
+ assert.deepEqual(newerNightlyFailures([newer,run],run),[]);
+ assert.deepEqual(newerNightlyFailures([{...newer,conclusion:'failure'}],run),[{...newer,conclusion:'failure'}]);
+ assert.deepEqual(newerNightlyFailures([{...newer,conclusion:'failure',created_at:'2026-10-06T09:00:00Z'}],run),[]);
+ assert.throws(()=>newerNightlyFailures([{...newer,conclusion:'failure',created_at:'bad'}],run),/BINDING/);
+ const {selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
+ assert.throws(()=>selectNightlyArtifact([],run,{name:'Focused PHPUnit regression and performance contracts'}),/BINDING/);
+ assert.throws(()=>selectNightlyArtifact([],run,{name:'Full PHPUnit regression and performance contracts',steps:[{name:'Upload full PHPUnit evidence'}]}),/BINDING/);
+ assert.equal(selectNightlyArtifact([],run,{name:'Full PHPUnit regression and performance contracts',steps:[]}),null);
+});
 test('Nightly evidence accepts both Pest paths, deduplicates, and stays fail-closed',async()=>{
  const {assessNightly,completedNightlyFullJob,parseLegacyNightlyFailures,parseJUnitNightlyFailures,selectNightlyArtifact}=await import('./seo-platform-12a08-release.mjs');
  const run={id:1,head_sha:'a'.repeat(40)};

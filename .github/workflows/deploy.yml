@@ -731,7 +731,7 @@ jobs:
           test -n "$GSC_SYNC_DB_PASSWORD" || fail GSC_SYNC_DB_CREDENTIAL_MISSING
 
           local_key="$RUNNER_TEMP/service-account.json"
-          local_env="$RUNNER_TEMP/readiness.env"
+          local_env="$RUNNER_TEMP/measurement.env"
           local_sync_env="$RUNNER_TEMP/sync-db.env"
           remote_tmp="/tmp/fermatmind-11g-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           remote_key="$remote_tmp/service-account.json"

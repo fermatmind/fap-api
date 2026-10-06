@@ -3,7 +3,7 @@ import {parseJUnitNightlyFailures,parseLegacyNightlyFailures} from './seo-platfo
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { digest, mayCarry, MISSIONS } from './seo-platform-12a08-activation.mjs';
-import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyRevalidationPaths, readNightlyArtifactEvidence } from './seo-platform-12a08-release.mjs';
+import { verifyState, hasActivationEvidence, assessNightly, completedNightlyFullJob, selectNightlyArtifact, nightlyEvidenceRuns, newerNightlyFailures, nightlyRevalidationPaths, readNightlyArtifactEvidence } from './seo-platform-12a08-release.mjs';
 const repo = process.env.GITHUB_REPOSITORY;
 if (repo !== 'fermatmind/fap-api') throw new Error('REPOSITORY_HOLD');
 const sha = process.env.DEPLOY_SHA;
@@ -12,7 +12,7 @@ const loadNightly = run => {
   const jobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
   const fullJob = completedNightlyFullJob(jobs);
   if (!fullJob) return null;
-  const artifact = selectNightlyArtifact(api(`actions/runs/${run.id}/artifacts?per_page=100`).artifacts, run);
+  const artifact = selectNightlyArtifact(api(`actions/runs/${run.id}/artifacts?per_page=100`).artifacts, run, fullJob);
   let evidence;
   if (artifact) {
     const bytes = execFileSync('gh', ['api', `repos/${repo}/actions/artifacts/${artifact.id}/zip`], {maxBuffer:64*1024*1024});
@@ -72,7 +72,19 @@ if (!ciArtifact || !/^sha256:[a-f0-9]{64}$/.test(ciArtifact.digest)) throw new E
 artifactDigests.ci = ciArtifact.digest;
 const checks = artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null;
 const activationEvidence = hasActivationEvidence(checks, production);
-const nightlyRuns = activationEvidence ? api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs : [];
+const listedNightlyRuns = activationEvidence ? api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs : [];
+const nightlyRuns = activationEvidence ? nightlyEvidenceRuns(checks?.nightly_source,
+  id => api(`actions/runs/${id}`),
+  () => listedNightlyRuns) : [];
+// Keep the CI proof immutable while preserving the existing fail-closed flow
+// for later related failures and security/authority failure domains.
+if (activationEvidence && checks?.nightly_source) for (const run of newerNightlyFailures(listedNightlyRuns, nightlyRuns[0])) {
+  const jobs = api(`actions/runs/${run.id}/jobs?per_page=100`).jobs;
+  if (jobs.some(job => job.conclusion === 'failure' && !['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts', 'Final failure-domain receipt'].includes(job.name))) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  const loaded = loadNightly(run);
+  if (!loaded) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  assessNightly(run, loaded.jobs, loaded.evidence, checks);
+}
 let nightly = null;
 for (const run of nightlyRuns) {
   const loaded = loadNightly(run);
