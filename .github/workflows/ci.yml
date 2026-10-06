@@ -671,37 +671,44 @@ jobs:
       - name: Install backend dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
-      - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
+      - name: Run scoped A08 consumer and relevant Nightly contracts
+        if: needs.classify.outputs.a08_focused == 'true'
         working-directory: backend
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if [ '${{ needs.classify.outputs.a08_focused }}' = true ]; then
-            cp -n .env.example .env || true
-            php artisan key:generate --force
-            node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
-            node --input-type=module - <<'JS' > "$RUNNER_TEMP/a08-required-paths.txt"
+          cp -n .env.example .env || true
+          php artisan key:generate --force
+          node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
+          node --input-type=module - <<'JS' > "$RUNNER_TEMP/a08-required-paths.txt"
           import {CHECKS,LEGACY_CHECKS,PRODUCER_SCOPE_VERSION,LEGACY_SCOPE_VERSION} from '../.github/trunk/seo-platform-12a08-activation.mjs';
           const checks=PRODUCER_SCOPE_VERSION===LEGACY_SCOPE_VERSION?LEGACY_CHECKS:CHECKS;
           import {execFileSync} from 'node:child_process';
           const files=execFileSync('git',['ls-files','tests'],{encoding:'utf8'}).trim().split('\n');
           const selected=new Set();
           for(const name of new Set(Object.values(checks).flat())) {
-            const matches=files.filter(path=>path.endsWith(`/${name}.php`) || (name==='SeoPlatform11C' && path.split('/').at(-1).startsWith(name)));
-            if(!matches.length)throw new Error(`Missing required A08 consumer: ${name}`);
-            matches.forEach(path=>selected.add(path));
+          const matches=files.filter(path=>path.endsWith(`/${name}.php`) || (name==='SeoPlatform11C' && path.split('/').at(-1).startsWith(name)));
+          if(!matches.length)throw new Error(`Missing required A08 consumer: ${name}`);
+          matches.forEach(path=>selected.add(path));
           }
           console.log([...selected].sort().join('\n'));
           JS
-            mapfile -t required_paths < "$RUNNER_TEMP/a08-required-paths.txt"
-            mapfile -t nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
-            php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}" "${nightly_paths[@]}"
-            exit 0
-          fi
+          mapfile -t required_paths < "$RUNNER_TEMP/a08-required-paths.txt"
+          mapfile -t nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
+          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}" "${nightly_paths[@]}"
+      - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
+        if: needs.classify.outputs.a08_focused != 'true'
+        working-directory: backend
+        env:
+          GH_TOKEN: ${{ github.token }}
+          POLICY_GATEWAY_REQUIRED: ${{ needs.classify.outputs.seo_agent_policy_gateway }}
+          POLICY_GATEWAY_RESULT: ${{ needs.seo-agent-policy-gateway.result }}
+        run: |
+          set -euo pipefail
           php scripts/seo/export_seo_council_contracts.php --check
-          if [ '${{ needs.classify.outputs.seo_agent_policy_gateway }}' = true ]; then
-            test '${{ needs.seo-agent-policy-gateway.result }}' = success
+          if [ "$POLICY_GATEWAY_REQUIRED" = true ]; then
+            test "$POLICY_GATEWAY_RESULT" = success
             echo "Reuse exact-SHA pre-config OpenAPI check from policy gateway."
           else
             bash scripts/export_openapi.sh --check

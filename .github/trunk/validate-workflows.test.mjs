@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 
-import { validateWorkflowSet } from "./validate-workflows.mjs";
+import { validateWorkflowSet, templatedRunLengths } from "./validate-workflows.mjs";
 
 const ciWorkflowPath = resolve(import.meta.dirname, "../workflows/ci.yml");
 
@@ -109,3 +109,5 @@ test("changed language runner uses exact range from repo root and inherits the m
   const source=readFileSync(ciWorkflowPath,'utf8');
   assert.match(source,/run: node \.github\/trunk\/run-changed-tests\.mjs '\$\{\{ needs\.classify\.outputs\.base_sha \}\}' '\$\{\{ github\.sha \}\}' '\$\{\{ matrix\.mode \}\}'/);
 });
+
+test('checks the actual templated run length that GitHub rejects before job creation',()=>{const sample="        run: |\n          echo '${{ github.sha }}'\n"+'          x\n'.repeat(11000);assert.ok(templatedRunLengths(sample)[0].length>21000);const result=validateWorkflowSet(resolve(import.meta.dirname,'../..'),'final');assert.equal(result.valid,true,result.errors.join('\n'));});

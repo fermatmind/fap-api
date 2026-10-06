@@ -148,7 +148,7 @@ test('unknown schedules and unexpected out-of-schedule execution fail closed', (
 
 test('full PHPUnit has parent revision history and an empty test environment file', () => {
   const fullPhpunit = jobSection('full-phpunit', 'codeql');
-  assert.match(fullPhpunit, /persist-credentials: false\s+fetch-depth: 2/);
+  assert.match(fullPhpunit, /persist-credentials: false\s+fetch-depth: 0/);
   assert.match(fullPhpunit, /working-directory: backend\s+run: touch \.env/);
   assert.ok(fullPhpunit.indexOf('run: touch .env') < fullPhpunit.indexOf('php artisan test --no-ansi'));
 });
@@ -207,3 +207,5 @@ test('only complete-evidence implementation and producer repair changes trigger 
     assert.equal(runSummary('', { EVENT_NAME: 'push', [key]: 'skipped' }).status, 'fail');
   }
 });
+
+test('Nightly preserves the main disposable database and binds topology consumers to their separate database',()=>{const section=jobSection('full-phpunit','codeql');assert.match(section,/MYSQL_DATABASE: fap_ci/);assert.match(section,/SEO_TEST_MYSQL_DATABASE: seo_operations_nightly_test/);assert.match(section,/CREATE DATABASE seo_operations_nightly_test/);assert.match(section,/fetch-depth: 0/);});
