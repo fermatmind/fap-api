@@ -378,6 +378,70 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
         $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
     }
 
+    public function test_surface_proof_object_reordering_passes_but_every_value_type_and_list_order_drift_is_refused(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $package = $this->surfaces();
+        $service = app(Workspace::class);
+        $sha = str_repeat('b', 64);
+        $plan = $service->surface($package, 'surface-plan', false, '', 0, $sha);
+        $service->surface($package, 'surface-stage', true, $plan['state_sha256'], $actor->id, $sha);
+        $audit = AuditLog::withoutGlobalScopes()->where('action', 'blog_v1_surface-stage')->firstOrFail();
+        $original = $audit->meta_json;
+        $reordered = $original;
+        foreach ($reordered['surface_records'] as &$record) {
+            krsort($record);
+        }
+        unset($record);
+        $audit->update(['meta_json' => $reordered]);
+        $this->assertTrue($service->surface($package, 'surface-plan', false, '', 0, $sha)['ok']);
+        $before = LandingSurface::withoutGlobalScopes()->get()->toArray();
+        foreach (['id' => (float) $original['surface_records'][0]['id'], 'owner_admin_user_id' => '1',
+            'candidate_sha256' => str_repeat('c', 64), 'surface_state_sha256' => str_repeat('c', 64)] as $key => $value) {
+            $changed = $original;
+            $changed['surface_records'][0][$key] = $value;
+            // Preserve JSON double identity; the regular Eloquent serializer drops .0.
+            \Illuminate\Support\Facades\DB::table('audit_logs')->where('id', $audit->id)->update([
+                'meta_json' => json_encode($changed, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION),
+            ]);
+            $this->refused(fn () => $service->surface($package, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        }
+        $changed = $original;
+        $changed['surface_records'] = array_reverse($changed['surface_records']);
+        $audit->update(['meta_json' => $changed]);
+        $this->refused(fn () => $service->surface($package, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        $audit->update(['meta_json' => [...$original, 'authorized_operator_id' => '1']]);
+        $this->refused(fn () => $service->surface($package, 'surface-plan', false, '', 0, $sha), 'blog_surface_task_provenance_required');
+        $this->assertSame($before, LandingSurface::withoutGlobalScopes()->get()->toArray());
+    }
+
+    public function test_audit_type_drift_during_stage_rolls_back_both_created_surfaces_and_audit(): void
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        $package = $this->surfaces();
+        $service = app(Workspace::class);
+        $plan = $service->surface($package, 'surface-plan', false, '', 0, str_repeat('b', 64));
+        $before = $service->snapshot();
+        $event = 'eloquent.created: '.AuditLog::class;
+        \Illuminate\Support\Facades\Event::listen($event, static function (AuditLog $audit): void {
+            if ($audit->action === 'blog_v1_surface-stage') {
+                $meta = $audit->meta_json;
+                $meta['surface_records'][0]['owner_admin_user_id'] = '1';
+                $audit->forceFill(['meta_json' => $meta])->saveQuietly();
+            }
+        });
+        try {
+            $this->refused(fn () => $service->surface($package, 'surface-stage', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64)), 'blog_surface_provenance_readback_failed');
+        } finally {
+            \Illuminate\Support\Facades\Event::forget($event);
+        }
+        $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->count());
+        $this->assertSame(0, AuditLog::withoutGlobalScopes()->count());
+        $this->assertSame($before, $service->snapshot());
+    }
+
     public function test_surface_actual_id_owner_and_native_state_must_match_the_trusted_stage_audit(): void
     {
         $this->fixtures();

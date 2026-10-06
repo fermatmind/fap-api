@@ -398,7 +398,7 @@ final class BlogV1RevisionWorkspace
                     'surface_package_sha256' => $packageSha, 'surface_records' => $records, 'new_surface_ids' => $newIds]);
                 if ($phase === 'surface-stage') {
                     $written = $auditQuery->get()->last();
-                    if (! $written || ($written->meta_json['surface_records'] ?? null) !== $records
+                    if (! $written || ! $this->surfaceRecordsMatch($written, $records)
                         || ($written->meta_json['surface_package_sha256'] ?? null) !== $packageSha) {
                         throw new RuntimeException('blog_surface_provenance_readback_failed');
                     }
@@ -419,23 +419,52 @@ final class BlogV1RevisionWorkspace
             'candidate_sha256' => Hash::hash($candidate), 'surface_state_sha256' => Hash::hash($surface->getAttributes())];
     }
 
+    private function surfaceRecordsMatch(AuditLog $audit, array $expected): bool
+    {
+        $records = $this->surfaceAuditRecords($audit);
+
+        return $records !== null && Hash::sameValue($records, $expected);
+    }
+
+    /** The array cast alone loses the distinction between a JSON list and a numeric-key object. */
+    private function surfaceAuditRecords(AuditLog $audit): ?array
+    {
+        $raw = $audit->getRawOriginal('meta_json');
+        if (! is_string($raw)) {
+            return null;
+        }
+        $json = json_decode($raw);
+        $records = $json instanceof \stdClass ? ($json->surface_records ?? null) : null;
+        if (! is_array($records) || count($records) !== 2
+            || ! array_is_list($records) || count(array_filter($records, static fn ($record): bool => $record instanceof \stdClass)) !== 2) {
+            return null;
+        }
+
+        $castRecords = $audit->meta_json['surface_records'] ?? null;
+        if (! is_array($castRecords) || ($audit->meta_json['surface_locales'] ?? null) !== array_column($castRecords, 'locale')) {
+            return null;
+        }
+
+        return $castRecords;
+    }
+
     private function assertSurfaceProvenance(LandingSurface $surface, array $candidate, string $packageSha, array $proofs, ?int $actor): int
     {
         foreach (array_reverse($proofs) as $proof) {
             $meta = $proof->meta_json;
-            $owner = (int) ($meta['authorized_operator_id'] ?? 0);
-            if ($proof->result !== 'success' || ($meta['source_sha256'] ?? null) !== self::SOURCE_SHA256
+            $owner = $meta['authorized_operator_id'] ?? null;
+            if (! is_int($owner) || $proof->result !== 'success' || ($meta['source_sha256'] ?? null) !== self::SOURCE_SHA256
                 || ($meta['surface_package_sha256'] ?? null) !== $packageSha
                 || ! $this->reviews->isConfiguredSoloOwner($owner) || ($actor !== null && $actor !== $owner)) {
                 continue;
             }
-            $records = $meta['surface_records'] ?? [];
+            $records = $this->surfaceAuditRecords($proof);
             if (! is_array($records) || count($records) !== 2
                 || collect($records)->pluck('locale')->sort()->values()->all() !== ['en', 'zh-CN']) {
                 continue;
             }
             $record = collect($records)->firstWhere('id', $surface->id);
-            if (is_array($record) && Hash::hash($record) === Hash::hash($this->surfaceRecord($surface, $candidate, $packageSha, $owner))) {
+            if (is_array($record) && Hash::sameValue($record, $this->surfaceRecord($surface, $candidate, $packageSha, $owner))) {
                 return $owner;
             }
         }
