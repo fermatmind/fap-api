@@ -16,6 +16,7 @@ use App\Services\SeoAgentEvidence\External\NativeExternalDnsResolver;
 use App\Services\SeoAgentEvidence\External\PinnedTlsExternalContentTransport;
 use App\Services\SeoAgentEvidence\External\RobotsPolicyEvaluator;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class SeoPlatform11G2GatewayAdapterTest extends TestCase
@@ -108,11 +109,28 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
         );
     }
 
-    public function test_competitive_gateway_retries_timeout_once_and_auto_reviews_safe_policy_drift(): void
+    /** @return array<string, array{int, int, int, bool}> */
+    public static function competitivePolicyResponseBudgets(): array
+    {
+        return [
+            'small approved policy' => [0, 524288, 524288, true],
+            'policy above former fixed cap within reviewed budget' => [384000, 524288, 524288, true],
+            'policy beyond reviewed budget' => [524289, 524288, 524288, false],
+            'smaller reviewed budget remains enforced' => [200000, 131072, 131072, false],
+            'global response ceiling remains enforced' => [1048577, 2097152, 1048576, false],
+        ];
+    }
+
+    #[DataProvider('competitivePolicyResponseBudgets')]
+    public function test_competitive_gateway_retries_timeout_once_and_auto_reviews_safe_policy_drift(int $policyBytes, int $reviewedBudget, int $expectedBudget, bool $ready): void
     {
         $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
-        $transport = new class implements ExternalContentTransport
+        $transport = new class($policyBytes) implements ExternalContentTransport
         {
+            public function __construct(private readonly int $policyBytes) {}
+
+            public ?int $policyBudget = null;
+
             /** @var list<string> */
             public array $requests = [];
 
@@ -129,6 +147,16 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
                     'https://example.com/policy' => '<main><h1>Terms of Service</h1><p>User conduct and service access.</p><p>Public REST API for AI agents. No API key. Structured metadata embed.</p></main>',
                     default => '<main><section class="hero"><h1>Public Big Five</h1><a href="/tests/related">Related test</a></section></main>',
                 };
+
+                if ($url === 'https://example.com/policy') {
+                    $this->policyBudget = $maxBytes;
+                    if ($this->policyBytes > strlen($body)) {
+                        $body .= '<script>'.str_repeat('a', $this->policyBytes - strlen($body) - 17).'</script>';
+                    }
+                }
+                if (strlen($body) > $maxBytes) {
+                    throw new ExternalContentGatewayException('CONTENT_RESPONSE_TOO_LARGE', 'size');
+                }
 
                 return [
                     'status' => 200,
@@ -169,7 +197,7 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'robots_evidence_hash' => $hasher->hash('user-agent: * disallow:'),
             'minimum_request_interval' => 1,
             'max_concurrency' => 1,
-            'max_content_bytes' => 524288,
+            'max_content_bytes' => $reviewedBudget,
             'allowed_content_types' => ['text/html', 'text/plain'],
             'connect_timeout_seconds' => 3,
             'request_timeout_seconds' => 8,
@@ -213,7 +241,18 @@ final class SeoPlatform11G2GatewayAdapterTest extends TestCase
             'release_ref' => 'release_'.str_repeat('a', 64),
         ], app(CompetitiveSourceRegistry::class)->semanticRegistry());
 
-        $this->assertSame('ready', $result['status'], json_encode($result, JSON_THROW_ON_ERROR));
+        if ($ready) {
+            $this->assertSame('ready', $result['status'], json_encode($result, JSON_THROW_ON_ERROR));
+        }
+        $this->assertSame($expectedBudget, $transport->policyBudget);
+        if (! $ready) {
+            $this->assertSame('held', $result['status']);
+            $this->assertSame('CONTENT_RESPONSE_TOO_LARGE', $result['safe_error_code']);
+            $this->assertSame('size', $result['dependency_ingestion']['failed_stage']);
+            $this->assertFalse($result['context_eligible']);
+
+            return;
+        }
         $this->assertSame(4, $result['dependency_ingestion']['external_reads']);
         $this->assertSame(1, $result['dependency_ingestion']['retry_count']);
         $this->assertCount(3, $result['dependency_ingestion']['policy_observations']);
