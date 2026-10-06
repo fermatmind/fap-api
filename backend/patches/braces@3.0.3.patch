@@ -1,0 +1,181 @@
+diff --git a/lib/compile.js b/lib/compile.js
+index dce69beb90ece5c3b0ca234a949418f9f34eedbc..e391a9cafc285ec8e27caf53057b764c63672f9e 100644
+--- a/lib/compile.js
++++ b/lib/compile.js
+@@ -2,9 +2,13 @@
+
+ const fill = require('fill-range');
+ const utils = require('./utils');
++const { assertDepth, assertAstDepth } = require('./depth');
+
+ const compile = (ast, options = {}) => {
+-  const walk = (node, parent = {}) => {
++  assertAstDepth(ast);
++  const walk = (node, parent = {}, depth = ast.type === 'root' ? 0 : 1) => {
++    if (node.nodes) assertDepth(depth);
++    if (Array.isArray(node.value)) throw new TypeError('AST text values must not be arrays');
+     const invalidBlock = utils.isInvalidBrace(parent);
+     const invalidNode = node.invalid === true && options.escapeInvalid === true;
+     const invalid = invalidBlock === true || invalidNode === true;
+@@ -47,7 +51,7 @@ const compile = (ast, options = {}) => {
+
+     if (node.nodes) {
+       for (const child of node.nodes) {
+-        output += walk(child, node);
++        output += walk(child, node, depth + 1);
+       }
+     }
+
+diff --git a/lib/depth.js b/lib/depth.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..1d92fd7709fd280135455ef8edfb1b54e0b25710
+--- /dev/null
++++ b/lib/depth.js
+@@ -0,0 +1,37 @@
++'use strict';
++
++const MAX_DEPTH = 128;
++
++const assertDepth = depth => {
++  if (depth > MAX_DEPTH) {
++    const error = new SyntaxError(`AST nesting depth exceeds maximum of ${MAX_DEPTH}`);
++    error.code = 'BRACES_MAX_DEPTH_EXCEEDED';
++    throw error;
++  }
++};
++
++const assertAstDepth = ast => {
++  const pending = [{ node: ast, depth: ast && ast.type === 'root' ? 0 : 1 }];
++
++  while (pending.length > 0) {
++    const { node, depth } = pending.pop();
++    if (!node) continue;
++    // Parser text values are strings. Arrays would reach expansion's recursive flatten.
++    if (Array.isArray(node.value)) {
++      throw new TypeError('AST text values must not be arrays');
++    }
++    if (!node.nodes) continue;
++    assertDepth(depth);
++    // Do not consume single-use/custom iterators before the public walker uses them.
++    // Each walker also enforces this bound while consuming its actual representation.
++    const repeatable = Array.isArray(node.nodes)
++      ? node.nodes[Symbol.iterator] === Array.prototype[Symbol.iterator]
++      : node.nodes instanceof Set && node.nodes[Symbol.iterator] === Set.prototype[Symbol.iterator];
++    if (!repeatable) continue;
++    for (const child of node.nodes) {
++      pending.push({ node: child, depth: child && child.nodes ? depth + 1 : depth });
++    }
++  }
++};
++
++module.exports = { assertDepth, assertAstDepth };
+diff --git a/lib/expand.js b/lib/expand.js
+index 35b2c41d6afdb8f0197959e26079f266e48370d3..07bd0955a70f98937de275e3d0413c05a51094e1 100644
+--- a/lib/expand.js
++++ b/lib/expand.js
+@@ -3,6 +3,7 @@
+ const fill = require('fill-range');
+ const stringify = require('./stringify');
+ const utils = require('./utils');
++const { assertDepth, assertAstDepth } = require('./depth');
+
+ const append = (queue = '', stash = '', enclose = false) => {
+   const result = [];
+@@ -31,15 +32,20 @@ const append = (queue = '', stash = '', enclose = false) => {
+ };
+
+ const expand = (ast, options = {}) => {
++  assertAstDepth(ast);
+   const rangeLimit = options.rangeLimit === undefined ? 1000 : options.rangeLimit;
+
+-  const walk = (node, parent = {}) => {
++  const walk = (node, parent = {}, depth = ast.type === 'root' ? 0 : 1) => {
++    if (node.nodes) assertDepth(depth);
++    if (Array.isArray(node.value)) throw new TypeError('AST text values must not be arrays');
+     node.queue = [];
+
+     let p = parent;
++    let parentDepth = 0;
+     let q = parent.queue;
+
+     while (p.type !== 'brace' && p.type !== 'root' && p.parent) {
++      assertDepth(++parentDepth);
+       p = p.parent;
+       q = p.queue;
+     }
+@@ -74,8 +80,10 @@ const expand = (ast, options = {}) => {
+     const enclose = utils.encloseBrace(node);
+     let queue = node.queue;
+     let block = node;
++    let blockDepth = 0;
+
+     while (block.type !== 'brace' && block.type !== 'root' && block.parent) {
++      assertDepth(++blockDepth);
+       block = block.parent;
+       queue = block.queue;
+     }
+@@ -100,7 +108,7 @@ const expand = (ast, options = {}) => {
+       }
+
+       if (child.nodes) {
+-        walk(child, node);
++        walk(child, node, depth + 1);
+       }
+     }
+
+diff --git a/lib/parse.js b/lib/parse.js
+index 3a6988e629f52aee6609dc5ec290a5e9ff47cecb..5e7f1ac8508fae5626cb98659d77c0dac1ac7a02 100644
+--- a/lib/parse.js
++++ b/lib/parse.js
+@@ -1,6 +1,7 @@
+ 'use strict';
+
+ const stringify = require('./stringify');
++const { assertDepth } = require('./depth');
+
+ /**
+  * Constants
+@@ -143,6 +144,7 @@ const parse = (input, options = {}) => {
+      */
+
+     if (value === CHAR_LEFT_PARENTHESES) {
++      assertDepth(stack.length);
+       block = push({ type: 'paren', nodes: [] });
+       stack.push(block);
+       push({ type: 'text', value });
+@@ -195,6 +197,7 @@ const parse = (input, options = {}) => {
+      */
+
+     if (value === CHAR_LEFT_CURLY_BRACE) {
++      assertDepth(stack.length);
+       depth++;
+
+       const dollar = prev.value && prev.value.slice(-1) === '$' || block.dollar === true;
+diff --git a/lib/stringify.js b/lib/stringify.js
+index 8bcf872c31894f81a8c64d9202fd607e4fd7ea2b..bf621ad97639eee24f0ac29d46d1ca5e5aec9626 100644
+--- a/lib/stringify.js
++++ b/lib/stringify.js
+@@ -1,9 +1,13 @@
+ 'use strict';
+
+ const utils = require('./utils');
++const { assertDepth, assertAstDepth } = require('./depth');
+
+ module.exports = (ast, options = {}) => {
+-  const stringify = (node, parent = {}) => {
++  assertAstDepth(ast);
++  const stringify = (node, parent = {}, depth = ast.type === 'root' ? 0 : 1) => {
++    if (node.nodes) assertDepth(depth);
++    if (Array.isArray(node.value)) throw new TypeError('AST text values must not be arrays');
+     const invalidBlock = options.escapeInvalid && utils.isInvalidBrace(parent);
+     const invalidNode = node.invalid === true && options.escapeInvalid === true;
+     let output = '';
+@@ -21,7 +25,7 @@ module.exports = (ast, options = {}) => {
+
+     if (node.nodes) {
+       for (const child of node.nodes) {
+-        output += stringify(child);
++        output += stringify(child, {}, depth + 1);
+       }
+     }
+     return output;
