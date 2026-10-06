@@ -11,6 +11,7 @@ use App\Models\LandingSurface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class ArticleBlogPublicApiTest extends TestCase
@@ -95,6 +96,52 @@ final class ArticleBlogPublicApiTest extends TestCase
             ->assertJsonCount(1, 'blog_v1.featured_items')->assertJsonPath('blog_v1.categories.0.article_count', 1);
         $this->assertSame([$valid->id], array_column($response->json('items'), 'id'));
         $this->assertSame([$valid->id], array_column($response->json('blog_v1.featured_items'), 'id'));
+    }
+
+    public function test_actual_soft_deletes_with_active_or_null_lifecycle_are_excluded_from_every_public_projection(): void
+    {
+        // Simulate legacy nullable lifecycle rows only in this isolated test database.
+        Schema::table('articles', static function (\Illuminate\Database\Schema\Blueprint $table): void {
+            $table->string('lifecycle_state', 32)->nullable()->change();
+        });
+        $category = $this->category();
+        $expectedByLocale = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            $featuredIds = [];
+            foreach ([Article::LIFECYCLE_ACTIVE, null] as $lifecycle) {
+                $suffix = $lifecycle ?? 'null';
+                $attributes = ['locale' => $locale, 'category_id' => $category->id, 'lifecycle_state' => $lifecycle];
+                $public = $this->createArticle(array_merge($attributes, ['slug' => 'public-'.$locale.'-'.$suffix]));
+                $expectedByLocale[$locale][] = $public->id;
+                $featuredIds[] = $public->id;
+                $deleted = $this->createArticle(array_merge($attributes, ['slug' => 'deleted-'.$locale.'-'.$suffix]));
+                $featuredIds[] = $deleted->id;
+                $this->assertTrue($deleted->delete());
+                $readback = Article::withoutGlobalScopes()->findOrFail($deleted->id);
+                $this->assertTrue($readback->trashed());
+                $this->assertNotNull($readback->deleted_at);
+                $this->assertSame($lifecycle, $readback->lifecycle_state);
+                $this->assertSame('published', $readback->status);
+                $this->assertTrue($readback->is_public);
+                $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $readback->publishedRevision->revision_status);
+            }
+            $this->surface($locale, $featuredIds);
+        }
+
+        foreach ($expectedByLocale as $locale => $expectedIds) {
+            $feed = $this->getJson('/api/v0.5/articles-feed?locale='.$locale)->assertOk()->assertJsonCount(2, 'items');
+            $list = $this->getJson('/api/v0.5/articles?locale='.$locale)->assertOk()
+                ->assertJsonCount(2, 'items')->assertJsonPath('pagination.total', 2);
+            $blog = $this->getJson('/api/v0.5/articles?locale='.$locale.'&include_blog=1&category=personality')->assertOk()
+                ->assertJsonCount(2, 'items')->assertJsonPath('pagination.total', 2)
+                ->assertJsonCount(2, 'blog_v1.featured_items')->assertJsonCount(1, 'blog_v1.categories')
+                ->assertJsonPath('blog_v1.categories.0.article_count', 2);
+            foreach ([$feed->json('items'), $list->json('items'), $blog->json('items'), $blog->json('blog_v1.featured_items')] as $items) {
+                $actualIds = array_column($items, 'id');
+                sort($actualIds);
+                $this->assertSame($expectedIds, $actualIds);
+            }
+        }
     }
 
     public function test_real_unpublish_path_removes_cached_latest_and_featured_without_stale_fallback(): void

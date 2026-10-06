@@ -84,6 +84,7 @@ final class ArticlePublicListQuery
                     ->on('list_category.org_id', '=', 'articles.org_id');
             })
             ->where('articles.org_id', $filters['org_id'])
+            ->whereNull('articles.deleted_at')
             ->published()
             ->where(fn (Builder $q) => $q->whereNull('articles.published_at')->orWhere('articles.published_at', '<=', now()))
             ->where(fn (Builder $q) => $q->whereNull('articles.scheduled_at')->orWhere('articles.scheduled_at', '<=', now()))
