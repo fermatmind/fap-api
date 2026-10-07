@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\BigFive\AuthorityV2\StructuredData\BigFiveStructuredDataProjector;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
+use App\Support\ArticleBrandByline;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use App\Support\PublicSeoTitleNormalizer;
@@ -99,7 +100,7 @@ final class ArticleSeoService
         $image = PublicMediaUrlGuard::sanitizeNullableUrl(
             $seo?->og_image_url ?? $this->resolveArticleImageUrl($article)
         );
-        $structuredData = $this->buildStructuredData($article, $revision, $seo, $canonical, $locale);
+        $structuredData = ArticleBrandByline::project($this->buildStructuredData($article, $revision, $seo, $canonical, $locale), $article, $locale);
         $bigFiveStructuredData = $this->buildBigFiveStructuredDataProjection(
             $article,
             $revision,
@@ -107,6 +108,8 @@ final class ArticleSeoService
             $canonical,
             $locale,
         );
+
+        $bigFiveStructuredData = ArticleBrandByline::project($bigFiveStructuredData, $article, $locale);
 
         return [
             'title' => $title,
@@ -228,7 +231,7 @@ final class ArticleSeoService
 
             return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls(
-                    $jsonLd
+                    ArticleBrandByline::project($jsonLd, $article, $locale)
                 )
             );
         }
@@ -256,7 +259,7 @@ final class ArticleSeoService
 
         return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
             CanonicalFrontendUrl::normalizeNestedUrls(
-                $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug)
+                ArticleBrandByline::project($this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug), $article, $locale)
             )
         );
     }

@@ -61,6 +61,32 @@ final class ArticleSeoServiceTest extends TestCase
         ]);
     }
 
+    public function test_brand_byline_is_projected_without_changing_cms_history_or_schema_gates(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        foreach (['en' => 'FermatMind', 'zh-CN' => '费马测试'] as $locale => $name) {
+            $article = Article::query()->create([
+                'org_id' => 0, 'slug' => 'brand-byline-'.$locale, 'locale' => $locale,
+                'title' => 'Brand byline', 'excerpt' => 'Existing article summary.',
+                'content_md' => '# Existing article', 'author_name' => 'Fermat Institute',
+                'status' => 'published', 'is_public' => true, 'is_indexable' => true,
+                'published_at' => Carbon::create(2026, 3, 12, 8, 0, 0, 'UTC'),
+                'updated_at' => Carbon::create(2026, 4, 1, 9, 0, 0, 'UTC'),
+            ]);
+            $service = app(ArticleSeoService::class);
+            $jsonLd = $service->generateJsonLd($article);
+            $this->assertSame(['@type' => 'Organization', 'name' => $name,
+                'url' => 'https://fermatmind.com/'.($locale === 'en' ? 'en' : 'zh').'/brand'], $jsonLd['author']);
+            $this->assertSame('2026-03-12T08:00:00+00:00', $jsonLd['datePublished']);
+            $authority = $service->buildSeoPayload($article)['article_authority_v1'];
+            $this->assertFalse($authority['published_revision_backed']);
+            $this->assertFalse(data_get($authority, 'structured_data_eligibility.article.enabled'));
+            $this->assertNull(data_get($authority, 'structured_data_fragments.article'));
+            $this->assertSame('Fermat Institute', $article->fresh()->author_name);
+            $this->assertSame('2026-03-12T08:00:00+00:00', $article->fresh()->published_at->toAtomString());
+        }
+    }
+
     public function test_build_seo_payload_converges_fermat_www_to_apex(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
