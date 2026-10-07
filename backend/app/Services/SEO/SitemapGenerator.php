@@ -17,6 +17,7 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\TopicProfile;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
+use App\Services\Cms\ArticleBlogService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
@@ -48,6 +49,7 @@ class SitemapGenerator
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
+        private readonly ArticleBlogService $articleBlogService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
         private readonly PersonalityProfileService $personalityProfileService,
@@ -337,6 +339,14 @@ class SitemapGenerator
         }
 
         foreach ($listLastModified as $locale => $lastmod) {
+            // Match the public archive's CMS projection; an unpublished or missing
+            // configuration still serves the existing indexable legacy archive.
+            $blog = $this->articleBlogService->read(0, (string) $locale, static fn (Article $article): array => []);
+            if ($blog['configuration_state'] === 'invalid'
+                || ($blog['configuration_state'] === 'published' && $blog['is_indexable'] !== true)) {
+                continue;
+            }
+
             $url = $this->articleSeoService->buildListUrl((string) $locale);
             if ($url === null) {
                 continue;

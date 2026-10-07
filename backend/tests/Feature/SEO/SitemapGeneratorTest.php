@@ -8,6 +8,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
 use App\Models\ContentPage;
+use App\Models\LandingSurface;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
@@ -530,6 +531,67 @@ class SitemapGeneratorTest extends TestCase
 
         $this->assertStringContainsString('https://fermatmind.com/en/method-boundaries', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/en/item-design-notes', $xml);
+    }
+
+    public function test_article_list_discovery_matches_published_blog_qualification_and_legacy_archives(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->createArticle(['locale' => $locale, 'slug' => 'eligible-detail']);
+        }
+        $this->createArticle([
+            'locale' => 'en', 'slug' => 'held-english-detail',
+            'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false,
+        ]);
+        app(PublicCareerAuthorityResponseCache::class)->warm();
+
+        $validPayload = ['blog_v1' => ['schema_version' => 1, 'categories' => [], 'featured_article_ids' => []]];
+        $cases = [
+            'public-indexable' => [[], 'published', true],
+            'public-noindex' => [['is_indexable' => false], 'published', false],
+            'draft-legacy-archive' => [['status' => 'draft', 'is_indexable' => false], 'unconfigured', true],
+            'nonpublic-legacy-archive' => [['is_public' => false, 'is_indexable' => false], 'unconfigured', true],
+            'scheduled-legacy-archive' => [['scheduled_at' => now()->addDay(), 'is_indexable' => false], 'unconfigured', true],
+            'future-publication-legacy-archive' => [['published_at' => now()->addDay(), 'is_indexable' => false], 'unconfigured', true],
+            'elapsed-schedule-indexable' => [['scheduled_at' => now()->subDay()], 'published', true],
+            'missing-config-legacy-archive' => [['payload_json' => [], 'is_indexable' => false], 'unconfigured', true],
+            'invalid-published-config' => [['payload_json' => ['blog_v1' => ['schema_version' => 99]]], 'invalid', false],
+            'missing-surface-legacy-archive' => [null, 'unconfigured', true],
+        ];
+
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            $otherLocale = $locale === 'en' ? 'zh-CN' : 'en';
+            $otherSegment = $segment === 'en' ? 'zh' : 'en';
+            LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->delete();
+            $defaults = [
+                'org_id' => 0, 'surface_key' => 'articles_index', 'title' => 'CMS-owned blog',
+                'description' => 'CMS-owned introduction.', 'status' => 'published',
+                'is_public' => true, 'is_indexable' => true, 'published_at' => now()->subDay(),
+                'scheduled_at' => null, 'payload_json' => $validPayload,
+            ];
+            LandingSurface::withoutGlobalScopes()->create(array_merge($defaults, ['locale' => $otherLocale]));
+
+            foreach ($cases as $name => [$overrides, $configurationState, $indexable]) {
+                LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->where('locale', $locale)->delete();
+                if ($overrides !== null) {
+                    LandingSurface::withoutGlobalScopes()->create(array_merge($defaults, ['locale' => $locale], $overrides));
+                }
+                $this->getJson('/api/v0.5/articles?org_id=0&include_blog=1&locale='.$locale)
+                    ->assertOk()->assertJsonPath('blog_v1.configuration_state', $configurationState)
+                    ->assertJsonPath('blog_v1.is_indexable', $configurationState === 'published' ? $indexable : false);
+
+                $context = $locale.':'.$name;
+                $generator = app(SitemapGenerator::class);
+                foreach ([$generator->generateSitemapUrls(), $generator->generateLlmsUrls()] as $surfaceUrls) {
+                    $urls = array_column($surfaceUrls, 'loc');
+                    $this->assertSame($indexable, in_array('https://fermatmind.com/'.$segment.'/articles', $urls, true), $context);
+                    $this->assertContains('https://fermatmind.com/'.$otherSegment.'/articles', $urls, $context);
+                    $this->assertContains('https://fermatmind.com/en/articles/eligible-detail', $urls, $context);
+                    $this->assertContains('https://fermatmind.com/zh/articles/eligible-detail', $urls, $context);
+                    $this->assertNotContains('https://fermatmind.com/en/articles/held-english-detail', $urls, $context);
+                }
+            }
+        }
     }
 
     public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void
