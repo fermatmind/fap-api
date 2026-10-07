@@ -86,8 +86,13 @@ final class SeoCompetitiveEvidenceIngest extends Command
         $selection = app(\App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection::class);
         $state = $control->status();
         $mission = \App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2];
-        if (! app()->environment('production') || ! $control->allowsMission($mission)) {
+        if (! app()->runningInConsole() || ! app()->environment('production') || ! $control->allowsMission($mission)) {
             return $this->emit(['status' => 'HOLD', 'hold_reason' => 'REFRESH_NOT_AUTHORIZED', 'external_reads' => 0], self::SUCCESS);
+        }
+        if ($this->option('dry-run') || $this->option('no-write') || $this->option('write-evidence')
+            || $this->option('finalize-activation') || $this->option('preactivation-receipt')
+            || ! in_array(trim((string) $this->option('cohort')), ['', \App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection::COHORT], true)) {
+            return $this->emit(['status' => 'HOLD', 'hold_reason' => 'REFRESH_MODE_INVALID', 'external_reads' => 0], self::SUCCESS);
         }
         $sha = trim((string) file_get_contents(config('seo_council.release_revision_path')));
         $cycle = now('UTC')->format('Y-m-d');
@@ -131,9 +136,8 @@ final class SeoCompetitiveEvidenceIngest extends Command
             $reason = 'COMPETITIVE_WRITE_BOUNDARY_HELD';
             $reads = 0;
             try {
-                // Configured collection and writer authority remain mandatory; no runtime privilege lift.
-                config()->set('seo_agent_evidence.competitive.release_sha', $sha);
-                if ($this->writeBoundaryAllowed()) {
+                // Separate fixed-M3 authorization is mandatory; selection alone grants no collection.
+                if ($this->installNaturalRefreshScope($sha, $state['generation']) && $this->writeBoundaryAllowed()) {
                     $cohort = $registry->cohort(\App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection::COHORT);
                     $result = $ingestion->ingest($cohort, $registry->sourcesFor($cohort), 'production', $sha, true, $cycle);
                     $reads = (int) data_get($result, 'dependency_ingestion.external_reads', 0);
@@ -222,6 +226,26 @@ final class SeoCompetitiveEvidenceIngest extends Command
             && config('seo_agent_evidence.competitive.external_read_enabled', false) === true
             && config('seo_agent_evidence.competitive.evidence_write_enabled', false) === true
             && preg_match('/^[a-f0-9]{40}$/', (string) config('seo_agent_evidence.competitive.release_sha', '')) === 1;
+    }
+
+    private function installNaturalRefreshScope(string $sha, string $generation): bool
+    {
+        if (! app()->runningInConsole() || ! app()->environment('production')
+            || preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1
+            || config('seo_agent_evidence.competitive.m3_refresh.external_read_enabled', false) !== true
+            || config('seo_agent_evidence.competitive.m3_refresh.evidence_write_enabled', false) !== true
+            || ! app(\App\Services\SeoCouncil\Platform12\Platform12RuntimeControl::class)->allowsMission(
+                \App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet::IDS[2], false, $generation,
+            )) {
+            return false;
+        }
+        // Only this short-lived natural refresh process gains the existing policy installer inputs.
+        // The caller restores the complete evidence config on success and every failure path.
+        config()->set('seo_agent_evidence.competitive.release_sha', $sha);
+        config()->set('seo_agent_evidence.competitive.external_read_enabled', true);
+        config()->set('seo_agent_evidence.competitive.evidence_write_enabled', true);
+
+        return true;
     }
 
     /** @param array<string, mixed> $payload */

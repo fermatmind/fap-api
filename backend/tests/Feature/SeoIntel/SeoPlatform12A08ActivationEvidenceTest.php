@@ -37,11 +37,100 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
 
     protected function tearDown(): void
     {
-        foreach (glob($this->directory.'/*') ?: [] as $file) {
-            unlink($file);
-        }
-        rmdir($this->directory);
+        (new \Illuminate\Filesystem\Filesystem)->deleteDirectory($this->directory);
         parent::tearDown();
+    }
+
+    public function test_m3_collection_authorization_is_independent_and_scope_is_console_production_only(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->change(false, Platform12DailyMissionSet::IDS);
+        $runtime->reconcile();
+        $generation = $runtime->status()['generation'];
+        $this->assertTrue($runtime->allowsMission(Platform12DailyMissionSet::IDS[2]));
+        $command = app(\App\Console\Commands\SeoCompetitiveEvidenceIngest::class);
+        $scope = new \ReflectionMethod($command, 'installNaturalRefreshScope');
+        $original = config('seo_agent_evidence');
+        foreach ([[false, false], [true, false], [false, true]] as [$read, $write]) {
+            config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => $read, 'evidence_write_enabled' => $write]);
+            $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+            $this->assertFalse(config('seo_agent_evidence.competitive.external_read_enabled'));
+            $this->assertFalse(config('seo_agent_evidence.bundle_write_enabled'));
+        }
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        $this->assertFalse($scope->invoke($command, 'invalid', $generation));
+        $this->assertFalse($scope->invoke($command, $this->sha, str_repeat('0', 32)));
+        $console = new \ReflectionProperty($this->app, 'isRunningInConsole');
+        $console->setValue($this->app, false);
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $console->setValue($this->app, true);
+        $this->app->instance('env', 'staging');
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $this->app->instance('env', 'production');
+        $this->assertTrue($scope->invoke($command, $this->sha, $generation));
+        $this->assertTrue(config('seo_agent_evidence.competitive.external_read_enabled'));
+        // General writes/egress wait for the original fixed-cohort policy installer.
+        foreach (['bundle_write_enabled', 'external_fetch_enabled', 'retention_delete_enabled', 'agent_external_egress'] as $key) {
+            $this->assertFalse(config('seo_agent_evidence.'.$key));
+        }
+        $this->assertSame($original['connection'], config('seo_agent_evidence.connection'));
+        $cohort = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry::class)->cohort('competitive.big-five.live.v2');
+        app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry::class)
+            ->installForControlledCli($cohort, 'production', $this->sha);
+        $this->assertCount(count($cohort['source_ids']), config('seo_agent_evidence.allowed_sources'));
+        $this->assertTrue(config('seo_agent_evidence.bundle_write_enabled'));
+        $this->assertTrue(config('seo_agent_evidence.external_fetch_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.retention_delete_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.agent_external_egress'));
+        config()->set('seo_agent_evidence', $original);
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        $runtime->change(true);
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $runtime->reconcile();
+        $this->assertFalse($scope->invoke($command, $this->sha, $runtime->status()['generation']));
+    }
+
+    public function test_m3_natural_command_restores_scope_after_failure_and_rejects_other_modes(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->change(false, Platform12DailyMissionSet::IDS);
+        $runtime->reconcile();
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        config()->set('seo_agent_evidence.connection', 'seo_intel');
+        \Illuminate\Support\Facades\DB::purge('seo_intel');
+        (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
+        \Illuminate\Support\Facades\Http::preventStrayRequests();
+        $originalStorage = storage_path();
+        $original = config('seo_agent_evidence');
+        $this->app->useStoragePath($this->directory);
+        try {
+            $this->artisan('seo:competitive-evidence-ingest', ['--write-evidence' => true, '--cohort' => 'competitive.big-five.live.v2', '--json' => true])
+                ->expectsOutputToContain('COMPETITIVE_WRITE_BOUNDARY_HELD')->assertFailed();
+            foreach (['--no-write' => true, '--cohort' => 'unapproved-cohort', '--finalize-activation' => true] as $option => $value) {
+                $this->artisan('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true, $option => $value])
+                    ->expectsOutputToContain('REFRESH_MODE_INVALID')->assertSuccessful();
+            }
+            $this->artisan('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true])
+                ->expectsOutputToContain('"status":"HOLD"')->assertSuccessful();
+            $path = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+            $marker = json_decode(file_get_contents($path), true);
+            $this->assertSame('failed', $marker['refresh_status']);
+            $this->assertNotSame('COMPETITIVE_WRITE_BOUNDARY_HELD', $marker['reason']);
+            $this->assertSame($original, config('seo_agent_evidence'));
+            $this->assertSame(0, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+            \Illuminate\Support\Facades\Http::assertNothingSent();
+        } finally {
+            $this->app->useStoragePath($originalStorage);
+            \Illuminate\Support\Facades\DB::purge('seo_intel');
+        }
     }
 
     public function test_scoped_evidence_does_not_authorize_or_unpause_and_source_acceptance_is_separate(): void

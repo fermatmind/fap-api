@@ -67,6 +67,51 @@ PHP;
         $this->assertFalse(config('seo_agent_evidence.competitive.evidence_write_enabled'));
         $command = app(\App\Console\Commands\SeoCompetitiveEvidenceIngest::class);
         $this->assertFalse((new \ReflectionMethod($command, 'writeBoundaryAllowed'))->invoke($command));
+        $this->assertFalse(config('seo_agent_evidence.competitive.m3_refresh.external_read_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.competitive.m3_refresh.evidence_write_enabled'));
+    }
+
+    public function test_cached_m3_authorization_does_not_enable_general_read_or_write_capabilities(): void
+    {
+        $directory = sys_get_temp_dir().'/m3-refresh-config-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $env = [
+            'APP_ENV' => 'production', 'APP_CONFIG_CACHE' => $directory.'/config.php',
+            'SEO_COMPETITIVE_EXTERNAL_READ_ENABLED' => 'false',
+            'SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED' => 'false',
+            'SEO_M3_REFRESH_EXTERNAL_READ_ENABLED' => 'true',
+            'SEO_M3_REFRESH_EVIDENCE_WRITE_ENABLED' => 'true',
+        ];
+        $script = <<<'PHP'
+require 'vendor/autoload.php';
+$app = require 'bootstrap/app.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$result = config('seo_agent_evidence.competitive.m3_refresh');
+foreach (['external_read_enabled', 'evidence_write_enabled'] as $key) {
+    $result['general_'.$key] = config('seo_agent_evidence.competitive.'.$key);
+}
+foreach (['bundle_write_enabled', 'external_fetch_enabled', 'retention_delete_enabled', 'agent_external_egress'] as $key) {
+    $result[$key] = config('seo_agent_evidence.'.$key);
+}
+echo json_encode($result);
+PHP;
+        try {
+            foreach ([false, true] as $cached) {
+                if ($cached) {
+                    (new Process([PHP_BINARY, 'artisan', 'config:cache'], base_path(), $env))->mustRun();
+                }
+                $process = new Process([PHP_BINARY, '-r', $script], base_path(), $env);
+                $process->mustRun();
+                $this->assertSame([
+                    'external_read_enabled' => true, 'evidence_write_enabled' => true,
+                    'general_external_read_enabled' => false, 'general_evidence_write_enabled' => false,
+                    'bundle_write_enabled' => false, 'external_fetch_enabled' => false,
+                    'retention_delete_enabled' => false, 'agent_external_egress' => false,
+                ], json_decode($process->getOutput(), true));
+            }
+        } finally {
+            File::deleteDirectory($directory);
+        }
     }
 
     public function test_release_prepare_validates_the_resolved_cache_path_before_writer_access(): void
