@@ -212,7 +212,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         $actions = ['gsc' => 'not_run', 'cro' => 'not_run'];
         foreach ([
             'search_measurement' => 'gsc',
-            'cro_measurement' => 'cro',
+            'commercial_funnel_cro' => 'cro',
         ] as $modeId => $key) {
             $mode = (array) ($measurement[$key === 'gsc' ? 'search_measurement' : 'cro_measurement'] ?? []);
             if (($mode['hold_reason'] ?? null) === 'NONE') {
