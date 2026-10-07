@@ -29,9 +29,14 @@ afterEach(() => { for (const root of temporary.splice(0)) rmSync(root, { recursi
 
 test('applies the common patch, verifies it and remains idempotent', () => {
   const { root, location } = fixture();
-  assert.deepEqual(applyBracesDepthPatch(root), { instances: 1, changedFiles: 5 });
+  assert.deepEqual(applyBracesDepthPatch(root), { instances: 1, changedFiles: 6 });
   assert.deepEqual(applyBracesDepthPatch(root), { instances: 1, changedFiles: 0 });
   assert.deepEqual(applyBracesDepthPatch(root, { checkOnly: true }), { instances: 1, changedFiles: 0 });
+  const utils = createRequire(path.join(location, 'package.json'))('./lib/utils.js');
+  assert.deepEqual(utils.flatten(['a', [undefined, null, false, 0, ['b']]]), ['a', null, false, 0, 'b']);
+  let queue = 'x'; for (let i = 0; i < 128; i++) queue = [queue];
+  assert.deepEqual(utils.flatten(queue), ['x']);
+  assert.throws(() => utils.flatten([queue]), { name: 'SyntaxError', code: 'BRACES_MAX_DEPTH_EXCEEDED' });
   const depth = createRequire(path.join(location, 'package.json'))('./lib/depth.js');
   let node = { type: 'text', value: 'x' };
   for (let i = 0; i < 128; i++) node = { type: 'custom', nodes: new Set([node]) };
@@ -65,7 +70,7 @@ test('patches all locked nested instances', () => {
   cpSync(location, nested, { recursive: true });
   lock.packages['node_modules/parent/node_modules/braces'] = { version: '3.0.3', dev: true };
   writeFileSync(path.join(root, 'package-lock.json'), JSON.stringify(lock));
-  assert.deepEqual(applyBracesDepthPatch(root), { instances: 2, changedFiles: 10 });
+  assert.deepEqual(applyBracesDepthPatch(root), { instances: 2, changedFiles: 12 });
   assert.equal(hash(path.join(location, 'lib/depth.js')), hash(path.join(nested, 'lib/depth.js')));
 });
 

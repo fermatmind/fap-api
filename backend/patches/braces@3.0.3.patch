@@ -70,18 +70,37 @@ index 0000000000000000000000000000000000000000..1d92fd7709fd280135455ef8edfb1b54
 +
 +module.exports = { assertDepth, assertAstDepth };
 diff --git a/lib/expand.js b/lib/expand.js
-index 35b2c41d6afdb8f0197959e26079f266e48370d3..07bd0955a70f98937de275e3d0413c05a51094e1 100644
+index 35b2c41d6afdb8f0197959e26079f266e48370d3..ad99497dae46ee99ad8de6836d9804a4f9ffe013 100644
 --- a/lib/expand.js
 +++ b/lib/expand.js
-@@ -3,6 +3,7 @@
+@@ -3,8 +3,10 @@
  const fill = require('fill-range');
  const stringify = require('./stringify');
  const utils = require('./utils');
 +const { assertDepth, assertAstDepth } = require('./depth');
 
- const append = (queue = '', stash = '', enclose = false) => {
+-const append = (queue = '', stash = '', enclose = false) => {
++const append = (queue = '', stash = '', enclose = false, depth = 0) => {
++  assertDepth(depth);
    const result = [];
-@@ -31,15 +32,20 @@ const append = (queue = '', stash = '', enclose = false) => {
+
+   queue = [].concat(queue);
+@@ -18,12 +20,12 @@ const append = (queue = '', stash = '', enclose = false) => {
+   for (const item of queue) {
+     if (Array.isArray(item)) {
+       for (const value of item) {
+-        result.push(append(value, stash, enclose));
++        result.push(append(value, stash, enclose, depth + 1));
+       }
+     } else {
+       for (let ele of stash) {
+         if (enclose === true && typeof ele === 'string') ele = `{${ele}}`;
+-        result.push(Array.isArray(ele) ? append(item, ele, enclose) : item + ele);
++        result.push(Array.isArray(ele) ? append(item, ele, enclose, depth + 1) : item + ele);
+       }
+     }
+   }
+@@ -31,15 +33,20 @@ const append = (queue = '', stash = '', enclose = false) => {
  };
 
  const expand = (ast, options = {}) => {
@@ -103,7 +122,7 @@ index 35b2c41d6afdb8f0197959e26079f266e48370d3..07bd0955a70f98937de275e3d0413c05
        p = p.parent;
        q = p.queue;
      }
-@@ -74,8 +80,10 @@ const expand = (ast, options = {}) => {
+@@ -74,8 +81,10 @@ const expand = (ast, options = {}) => {
      const enclose = utils.encloseBrace(node);
      let queue = node.queue;
      let block = node;
@@ -114,7 +133,7 @@ index 35b2c41d6afdb8f0197959e26079f266e48370d3..07bd0955a70f98937de275e3d0413c05
        block = block.parent;
        queue = block.queue;
      }
-@@ -100,7 +108,7 @@ const expand = (ast, options = {}) => {
+@@ -100,7 +109,7 @@ const expand = (ast, options = {}) => {
        }
 
        if (child.nodes) {
@@ -179,3 +198,54 @@ index 8bcf872c31894f81a8c64d9202fd607e4fd7ea2b..bf621ad97639eee24f0ac29d46d1ca5e
        }
      }
      return output;
+diff --git a/lib/utils.js b/lib/utils.js
+index d19311fe044ad5157624077670dc297e8b53da49..ae9df571bd14bf1e2ae94b38b6543f816290d177 100644
+--- a/lib/utils.js
++++ b/lib/utils.js
+@@ -1,5 +1,7 @@
+ 'use strict';
+
++const { assertDepth } = require('./depth');
++
+ exports.isInteger = num => {
+   if (typeof num === 'number') {
+     return Number.isInteger(num);
+@@ -100,23 +102,22 @@ exports.reduce = nodes => nodes.reduce((acc, node) => {
+
+ exports.flatten = (...args) => {
+   const result = [];
++  const frames = [{ array: args, index: 0, depth: 0 }];
+
+-  const flat = arr => {
+-    for (let i = 0; i < arr.length; i++) {
+-      const ele = arr[i];
+-
+-      if (Array.isArray(ele)) {
+-        flat(ele);
+-        continue;
+-      }
+-
+-      if (ele !== undefined) {
+-        result.push(ele);
+-      }
++  while (frames.length > 0) {
++    const frame = frames[frames.length - 1];
++    if (frame.index >= frame.array.length) {
++      frames.pop();
++      continue;
+     }
+-    return result;
+-  };
+-
+-  flat(args);
++    const value = frame.array[frame.index++];
++    if (Array.isArray(value)) {
++      const depth = frame.depth + 1;
++      assertDepth(depth);
++      frames.push({ array: value, index: 0, depth });
++    } else if (value !== undefined) {
++      result.push(value);
++    }
++  }
+   return result;
+ };

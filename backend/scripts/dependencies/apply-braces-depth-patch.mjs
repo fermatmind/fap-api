@@ -5,13 +5,14 @@ import { fileURLToPath } from 'node:url';
 
 const backend = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const patchPath = path.join(backend, 'patches/braces@3.0.3.patch');
-const patchHash = 'f0b1d9ddc6e63d1a63bd89de4de72918feb14bb1e0d8967bc7dba7bf0777c823';
+const patchHash = '276d438aeecf9b15aa52d7b3afabed2d2850d29443a76222c149fe273d2f9846';
 const files = {
   'lib/compile.js': ['dc98f22eee3d511785d92a00758d5f0d48efed5f5813bdecc2de430c529b5c9f', '24e22b382578decec2e8a8d1f28d513d15fc66a03146e4063295a97b6431cc41'],
   'lib/depth.js': [null, 'c595951422c340325678768bc3f380312d366cbd2c0243a111f625c600c5be77'],
-  'lib/expand.js': ['41ccc196ebfa7b7781a634e721eb744e4e7bcb54cba427a7e3d6806a1b9e58f7', '1a6b08487a7465e0a35a5ab54c68dfcc4a79849b4eb8061aae64439aed6304c8'],
+  'lib/expand.js': ['41ccc196ebfa7b7781a634e721eb744e4e7bcb54cba427a7e3d6806a1b9e58f7', '259d58eccf4c5c69a02a32fcf51e818b8c37bc07be400065fc35242a8702ea5c'],
   'lib/parse.js': ['e572166565f15fa6ad9865ae49d678218e32aabfd1b3720f6d0d43d39800d310', '71f633443d6f7db14b8bc28812436a574b761a899bd18d821f00accb41aa7c63'],
   'lib/stringify.js': ['379f22d77bfa1478341ccd49c5e4267464aabcbba03558bab332aac23fc6f23a', '1c7f946eddf99be15d4a959f4a3ab481f2608daed0ffe12be850e9142f61e7f7'],
+  'lib/utils.js': ['b5a7596aa67730412b3c029ef09e84e6b67b8e445cffd35d1d295549c89066c7', '464cdfd4a27aab867fe8b69add53eee580290e7708f5838da8f3402f0e03d709'],
 };
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const fail = message => { throw new Error(`BRACES_PATCH_HOLD: ${message}`); };
