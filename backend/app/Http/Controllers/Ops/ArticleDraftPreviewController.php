@@ -253,7 +253,7 @@ final class ArticleDraftPreviewController extends Controller
                 return $match[1];
             }
 
-            if (preg_match('~^/(?:en|zh)/(?:articles|tests|personality|careers|topics|research)(?:/|[?#]|$)~', $href) !== 1) {
+            if (preg_match('~^/(?:en|zh)/(?:articles|tests|personality|careers|topics|research)(?:/|[?#]|$)|^/(?:en|zh)/(?:science|method-boundaries|reliability-validity|data-privacy|common-misconceptions)(?:[?#]|$)~', $href) !== 1) {
                 return $match[0];
             }
 

@@ -32,6 +32,17 @@ final class BlogV1RevisionWorkspace
 
     public const IDS = [3, 10, 31, 40, 204, 221, 240, 241];
 
+    public const SURFACE_ORIGINAL_PACKAGE = '0678e1d8e0e7929e853547a9a6a77a754100543d02bc7a52f9b360af041ebcfb';
+
+    public const SURFACE_DESCRIPTION_PACKAGE = '7d28b163da11d9a924ceae9ebc254bfcf50472e54a32ee076a3d37b2aca7a543';
+
+    private const SURFACE_DESCRIPTION_DIFF = [
+        'en' => ['FermatMind Blog starts with real questions about personality and interests, learning and career choices, communication and growth, and what research can support. As you read, look for the evidence, its limits and a next step relevant to your question.',
+            'Clear explanations, practical examples, and evidence-informed guidance on personality, careers, communication, and growth—to help you understand assessment results, compare options, and decide what to try next.'],
+        'zh-CN' => ['费马博客从真实问题出发，讨论人格与兴趣、学习和职业选择、沟通与成长，以及研究能支持什么。读文章时，留意依据、适用边界和与你当前问题有关的下一步。',
+            '围绕人格、职业、沟通与成长，用清晰的解释、具体案例和有依据的建议，帮助你读懂测评结果、比较选择，并找到适合自己的下一步。'],
+    ];
+
     private const CATEGORY_CHANGES = [31 => 11, 240 => 11, 241 => 1];
 
     private const FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
@@ -282,6 +293,10 @@ final class BlogV1RevisionWorkspace
 
     public function surface(array $package, string $phase, bool $execute, string $expectedState, int $actor, string $packageSha = ''): array
     {
+
+        if ($phase === 'surface-revise-description') {
+            return $this->reviseSurfaceDescription($package, $execute, $expectedState, $actor, $packageSha);
+        }
         if (($package['schema'] ?? null) !== 'blog_v1_landing_surfaces.v1'
             || ! is_array($package['surfaces'] ?? null) || count($package['surfaces']) !== 2
             || ! in_array($phase, ['surface-plan', 'surface-stage', 'surface-publish'], true)
@@ -298,7 +313,7 @@ final class BlogV1RevisionWorkspace
                 throw new RuntimeException('blog_surface_identity_collision');
             }
             $auditQuery = AuditLog::withoutGlobalScopes()->where('org_id', 0)->where('target_type', 'blog_v1')
-                ->where('target_id', 'fixed_eight')->where('action', 'blog_v1_surface-stage')->orderBy('id');
+                ->where('target_id', 'fixed_eight')->whereIn('action', ['blog_v1_surface-stage', 'blog_v1_surface-revise-description'])->orderBy('id');
             $proofs = ($execute ? $auditQuery->lockForUpdate() : $auditQuery)->get();
             $state = ['surfaces' => $rows->map(function ($row) use ($execute): array {
                 $blocks = $row->blocks();
@@ -411,6 +426,151 @@ final class BlogV1RevisionWorkspace
         });
     }
 
+    /** Exact private copy revision; preserves the original stage audit and every other CMS field. */
+    private function reviseSurfaceDescription(array $package, bool $execute, string $expectedState, int $actor, string $packageSha): array
+    {
+        if ($packageSha !== self::SURFACE_DESCRIPTION_PACKAGE || ($package['schema'] ?? null) !== 'blog_v1_landing_surfaces.v1'
+            || ! is_array($package['surfaces'] ?? null) || ! array_is_list($package['surfaces']) || count($package['surfaces']) !== 2
+            || array_keys($package) !== ['schema', 'surfaces']) {
+            throw new RuntimeException('blog_surface_description_package_drift');
+        }
+
+        return DB::transaction(function () use ($package, $execute, $expectedState, $actor, $packageSha): array {
+            $q = LandingSurface::withoutGlobalScopes()->where('org_id', 0)->where('surface_key', 'articles_index')->orderBy('locale');
+            $rows = ($execute ? $q->lockForUpdate() : $q)->get();
+            $a = AuditLog::withoutGlobalScopes()->where('org_id', 0)->where('target_type', 'blog_v1')
+                ->where('target_id', 'fixed_eight')->whereIn('action', ['blog_v1_surface-stage', 'blog_v1_surface-revise-description'])->orderBy('id');
+            $proofs = ($execute ? $a->lockForUpdate() : $a)->get();
+            $parent = $proofs->firstWhere('id', 1473);
+            if ($rows->pluck('id')->all() !== [20, 21] || $rows->pluck('locale')->all() !== ['en', 'zh-CN']
+                || ! $parent || $parent->action !== 'blog_v1_surface-stage' || $parent->result !== 'success'
+                || ($parent->meta_json['surface_package_sha256'] ?? null) !== self::SURFACE_ORIGINAL_PACKAGE
+                || $proofs->contains('action', 'blog_v1_surface-revise-description')) {
+                throw new RuntimeException('blog_surface_description_parent_drift');
+            }
+            $state = ['surfaces' => $rows->map(function ($row) use ($execute): array {
+                $blocks = $row->blocks();
+
+                return ['surface' => $row->getAttributes(), 'blocks' => ($execute ? $blocks->lockForUpdate() : $blocks)->get()->map(fn ($block) => $block->getAttributes())->all()];
+            })->all(), 'surface_provenance' => $proofs->map(fn ($proof) => $proof->getAttributes())->all(), 'article_authority' => $this->snapshot($execute)];
+            if ($execute) {
+                $this->assertState($expectedState, $state);
+            }
+            $previousRows = $rows->map(fn ($row) => $row->getAttributes())->all();
+            $previousRecords = [];
+            foreach ($rows as $index => $row) {
+                $candidate = $package['surfaces'][$index];
+                $original = ['locale' => $row->locale, 'title' => $row->title, 'description' => $row->description, 'blog_v1' => $row->payload_json['blog_v1'] ?? null];
+                if (! Hash::sameValue($candidate, [...$original, 'description' => self::SURFACE_DESCRIPTION_DIFF[$row->locale][1]])
+                    || $row->description !== self::SURFACE_DESCRIPTION_DIFF[$row->locale][0]
+                    || $row->status !== 'draft' || $row->is_public || $row->is_indexable || $row->blocks()->exists()
+                    || $row->published_at !== null || $row->scheduled_at !== null || $row->schema_version !== 'v1') {
+                    throw new RuntimeException('blog_surface_description_only_required');
+                }
+                $owner = $this->assertSurfaceProvenance($row, $original, self::SURFACE_ORIGINAL_PACKAGE, [$parent], $execute ? $actor : null);
+                if ($owner !== 1) {
+                    throw new RuntimeException('blog_surface_description_owner_drift');
+                }
+                $previousRecords[] = $this->surfaceRecord($row, $original, self::SURFACE_ORIGINAL_PACKAGE, $owner);
+            }
+            $records = [];
+            if ($execute) {
+                foreach ($rows as $index => $row) {
+                    $row->forceFill(['description' => $package['surfaces'][$index]['description']])->save();
+                    $records[] = $this->surfaceRecord($row->fresh(), $package['surfaces'][$index], $packageSha, $actor);
+                }
+                $this->log('blog_v1_surface-revise-description', Hash::hash($state), $actor, [
+                    'surface_locales' => ['en', 'zh-CN'], 'surface_package_sha256' => $packageSha,
+                    'surface_records' => $records, 'new_surface_ids' => [],
+                    'parent_audit_id' => 1473, 'parent_audit_meta_sha256' => Hash::hash($parent->meta_json),
+                    'previous_surface_package_sha256' => self::SURFACE_ORIGINAL_PACKAGE,
+                    'previous_surface_records' => $previousRecords, 'previous_surface_rows' => $previousRows,
+                    'revised_surface_rows' => $rows->map(fn ($row) => $row->fresh()->getAttributes())->all(),
+                ]);
+                $written = $a->get()->last();
+                if (! $written || ! $this->surfaceRecordsMatch($written, $records)
+                    || ! $this->descriptionRevisionProofValid($written, [$parent])
+                    || Hash::hash($this->snapshot()) !== Hash::hash($state['article_authority'])) {
+                    throw new RuntimeException('blog_surface_description_readback_failed');
+                }
+            }
+
+            return ['ok' => true, 'readonly' => ! $execute, 'state_sha256' => Hash::hash($state),
+                'surface_count' => 2, 'surface_records' => $records, 'surface_package_sha256' => $packageSha,
+                'parent_audit_id' => 1473, 'previous_surface_package_sha256' => self::SURFACE_ORIGINAL_PACKAGE,
+                'description_revision_count' => $execute ? 2 : 0, 'publication_count' => 0, 'review_attestation_created' => false];
+        });
+    }
+
+    /** Verify the appended proof against the immutable parent and exact description-only row delta. */
+    private function descriptionRevisionProofValid(AuditLog $proof, array $proofs): bool
+    {
+        $m = $proof->meta_json;
+        $parent = collect($proofs)->firstWhere('id', 1473);
+        $records = $this->surfaceAuditRecords($proof);
+        if (! $parent || $parent->action !== 'blog_v1_surface-stage' || $parent->result !== 'success'
+            || $proof->result !== 'success' || $proof->action !== 'blog_v1_surface-revise-description'
+            || ($m['parent_audit_id'] ?? null) !== 1473 || ($m['authorized_operator_id'] ?? null) !== 1
+            || ($m['source_sha256'] ?? null) !== self::SOURCE_SHA256
+            || ($m['surface_package_sha256'] ?? null) !== self::SURFACE_DESCRIPTION_PACKAGE
+            || ($m['previous_surface_package_sha256'] ?? null) !== self::SURFACE_ORIGINAL_PACKAGE
+            || ($parent->meta_json['surface_package_sha256'] ?? null) !== self::SURFACE_ORIGINAL_PACKAGE
+            || ($parent->meta_json['source_sha256'] ?? null) !== self::SOURCE_SHA256
+            || ($parent->meta_json['authorized_operator_id'] ?? null) !== 1
+            || ($m['parent_audit_meta_sha256'] ?? null) !== Hash::hash($parent->meta_json)
+            || ! Hash::sameValue($m['previous_surface_records'] ?? null, $this->surfaceAuditRecords($parent))
+            || ! is_array($records) || array_column($records, 'id') !== [20, 21]) {
+            return false;
+        }
+        foreach (['previous_surface_rows', 'revised_surface_rows'] as $key) {
+            if (! is_array($m[$key] ?? null) || ! array_is_list($m[$key]) || count($m[$key]) !== 2) {
+                return false;
+            }
+        }
+        foreach (['en', 'zh-CN'] as $index => $locale) {
+            $old = $m['previous_surface_rows'][$index];
+            $new = $m['revised_surface_rows'][$index];
+            if (! is_array($old) || ! is_array($new) || ($old['id'] ?? null) !== 20 + $index || ($new['id'] ?? null) !== 20 + $index
+                || ($old['org_id'] ?? null) !== 0 || ($old['surface_key'] ?? null) !== 'articles_index' || ($old['locale'] ?? null) !== $locale
+                || ($old['description'] ?? null) !== self::SURFACE_DESCRIPTION_DIFF[$locale][0]
+                || ($new['description'] ?? null) !== self::SURFACE_DESCRIPTION_DIFF[$locale][1]
+                || ($m['previous_surface_records'][$index]['surface_state_sha256'] ?? null) !== Hash::hash($old)
+                || ($records[$index]['surface_state_sha256'] ?? null) !== Hash::hash($new)) {
+                return false;
+            }
+            unset($old['description'], $old['updated_at'], $new['description'], $new['updated_at']);
+            if (! Hash::sameValue($old, $new)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function surfacePreviewBinding(LandingSurface $surface): array
+    {
+        $candidate = ['locale' => $surface->locale, 'title' => $surface->title,
+            'description' => $surface->description, 'blog_v1' => $surface->payload_json['blog_v1'] ?? null];
+        $proofs = AuditLog::withoutGlobalScopes()->where('org_id', 0)->where('target_type', 'blog_v1')->where('target_id', 'fixed_eight')
+            ->whereIn('action', ['blog_v1_surface-stage', 'blog_v1_surface-revise-description'])->orderBy('id')->get()->all();
+        foreach (array_reverse($proofs) as $proof) {
+            $package = $proof->meta_json['surface_package_sha256'] ?? '';
+            if (! is_string($package) || preg_match('/\A[a-f0-9]{64}\z/', $package) !== 1) {
+                continue;
+            }
+            try {
+                $owner = $this->assertSurfaceProvenance($surface, $candidate, $package, $proofs, null);
+
+                return ['source_sha256' => self::SOURCE_SHA256, 'package_sha256' => $package,
+                    'candidate_sha256' => Hash::hash($candidate), 'surface_state_sha256' => Hash::hash($surface->getAttributes()),
+                    'owner_admin_user_id' => $owner];
+            } catch (RuntimeException) {
+                continue;
+            }
+        }
+        throw new RuntimeException('blog_surface_task_provenance_required');
+    }
+
     private function surfaceRecord(LandingSurface $surface, array $candidate, string $packageSha, ?int $owner = null): array
     {
         return ['id' => $surface->id, 'org_id' => $surface->org_id, 'surface_key' => $surface->surface_key,
@@ -451,11 +611,17 @@ final class BlogV1RevisionWorkspace
     private function assertSurfaceProvenance(LandingSurface $surface, array $candidate, string $packageSha, array $proofs, ?int $actor): int
     {
         foreach (array_reverse($proofs) as $proof) {
+            if ($packageSha === self::SURFACE_DESCRIPTION_PACKAGE && $proof->action !== 'blog_v1_surface-revise-description') {
+                continue;
+            }
             $meta = $proof->meta_json;
             $owner = $meta['authorized_operator_id'] ?? null;
             if (! is_int($owner) || $proof->result !== 'success' || ($meta['source_sha256'] ?? null) !== self::SOURCE_SHA256
                 || ($meta['surface_package_sha256'] ?? null) !== $packageSha
                 || ! $this->reviews->isConfiguredSoloOwner($owner) || ($actor !== null && $actor !== $owner)) {
+                continue;
+            }
+            if ($proof->action === 'blog_v1_surface-revise-description' && ! $this->descriptionRevisionProofValid($proof, $proofs)) {
                 continue;
             }
             $records = $this->surfaceAuditRecords($proof);

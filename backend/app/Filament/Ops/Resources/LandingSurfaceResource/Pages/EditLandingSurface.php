@@ -35,6 +35,11 @@ class EditLandingSurface extends EditRecord
                 ->url(LandingSurfaceResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
+            Actions\Action::make('previewBlogSurface')
+                ->label('Preview blog layout')
+                ->url(fn () => route('ops.blog.preview', ['surface' => $this->getRecord()->id]))
+                ->openUrlInNewTab()
+                ->visible(fn () => $this->getRecord()->surface_key === 'articles_index' && (int) $this->getRecord()->org_id === 0),
             Actions\DeleteAction::make()
                 ->visible(false),
         ];

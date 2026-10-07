@@ -17,7 +17,7 @@ use Throwable;
 final class BlogV1RevisionWorkspaceCommand extends Command
 {
     protected $signature = 'articles:blog-v1-workspace
-        {--phase=plan : snapshot|plan|stage|surface-plan|surface-stage|surface-publish}
+        {--phase=plan : snapshot|plan|stage|surface-plan|surface-stage|surface-publish|surface-revise-description}
         {--file= : B4 frozen package or exact two-locale native surface package}
         {--sha256= : Exact package bytes SHA-256}
         {--expected-state-sha256= : Complete native state hash from a fresh read-only plan}
@@ -61,8 +61,8 @@ final class BlogV1RevisionWorkspaceCommand extends Command
         $phase = (string) $this->option('phase');
         $execute = (bool) $this->option('execute');
         try {
-            if (! in_array($phase, ['snapshot', 'plan', 'stage', 'surface-plan', 'surface-stage', 'surface-publish'], true)
-                || ($execute && ! in_array($phase, ['stage', 'surface-stage', 'surface-publish'], true))) {
+            if (! in_array($phase, ['snapshot', 'plan', 'stage', 'surface-plan', 'surface-stage', 'surface-publish', 'surface-revise-description'], true)
+                || ($execute && ! in_array($phase, ['stage', 'surface-stage', 'surface-publish', 'surface-revise-description'], true))) {
                 throw new RuntimeException('blog_phase_invalid');
             }
             $file = (string) $this->option('file');

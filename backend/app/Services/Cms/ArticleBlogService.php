@@ -22,12 +22,24 @@ final class ArticleBlogService
 
     public function read(int $orgId, string $locale, callable $project): array
     {
-        $empty = ['schema_version' => 1, 'configuration_state' => 'unconfigured',
-            'title' => null, 'description' => null, 'is_indexable' => false, 'categories' => [], 'featured_items' => []];
         $surface = LandingSurface::withoutGlobalScopes()->where('org_id', $orgId)
             ->where('surface_key', 'articles_index')->where('locale', $locale)->publishedPublic()
             ->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '<=', now()))
             ->where(fn ($q) => $q->whereNull('scheduled_at')->orWhere('scheduled_at', '<=', now()))->first();
+
+        return $this->projectSurface($surface, $orgId, $locale, $project);
+    }
+
+    /** Read-only draft projection, exclusively consumed behind the Ops read gate. */
+    public function preview(LandingSurface $surface, callable $project): array
+    {
+        return $this->projectSurface($surface, (int) $surface->org_id, (string) $surface->locale, $project);
+    }
+
+    private function projectSurface(?LandingSurface $surface, int $orgId, string $locale, callable $project): array
+    {
+        $empty = ['schema_version' => 1, 'configuration_state' => 'unconfigured',
+            'title' => null, 'description' => null, 'is_indexable' => false, 'categories' => [], 'featured_items' => []];
         $config = $surface?->payload_json['blog_v1'] ?? null;
         if ($config === null) {
             return $empty;

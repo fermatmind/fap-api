@@ -486,6 +486,118 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
         $this->assertSame(['unchanged' => 'public-cache'], \Illuminate\Support\Facades\Cache::get($key));
     }
 
+    public function test_description_revision_is_readonly_then_atomic_private_and_publisher_keeps_parent_proof(): void
+    {
+        [$service, $old, $new, $actor] = $this->descriptionFixtures();
+        $parent = AuditLog::withoutGlobalScopes()->findOrFail(1473)->getAttributes();
+        $articles = $service->snapshot();
+        $rows = LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all();
+        $plan = $service->surface($new, 'surface-revise-description', false, '', 0, Workspace::SURFACE_DESCRIPTION_PACKAGE);
+        $this->assertSame($rows, LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all());
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+        $result = $service->surface($new, 'surface-revise-description', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_DESCRIPTION_PACKAGE);
+        $this->assertSame(2, $result['description_revision_count']);
+        $this->assertSame(0, $result['publication_count']);
+        $this->assertSame($parent, AuditLog::withoutGlobalScopes()->findOrFail(1473)->getAttributes());
+        $this->assertSame($articles, $service->snapshot());
+        foreach ([20, 21] as $index => $id) {
+            $row = LandingSurface::withoutGlobalScopes()->findOrFail($id);
+            $this->assertSame($new['surfaces'][$index]['description'], $row->description);
+            $this->assertSame('draft', $row->status);
+            $this->assertFalse($row->is_public);
+            $this->assertFalse($row->is_indexable);
+            $this->assertSame(Workspace::SURFACE_DESCRIPTION_PACKAGE, $service->surfacePreviewBinding($row)['package_sha256']);
+        }
+        $publish = $service->surface($new, 'surface-publish', false, '', 0, Workspace::SURFACE_DESCRIPTION_PACKAGE);
+        $this->assertTrue($publish['ok']);
+        $this->assertSame(0, $publish['publication_count']);
+        $this->refused(fn () => $service->surface($new, 'surface-revise-description', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'blog_surface_description_parent_drift');
+        $proof = AuditLog::withoutGlobalScopes()->where('action', 'blog_v1_surface-revise-description')->firstOrFail();
+        $meta = $proof->meta_json;
+        $meta['parent_audit_meta_sha256'] = str_repeat('f', 64);
+        $proof->update(['meta_json' => $meta]);
+        $this->refused(fn () => $service->surface($new, 'surface-publish', false, '', 0, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'blog_surface_task_provenance_required');
+    }
+
+    public function test_description_revision_rejects_extra_field_state_owner_and_rolls_back_audit_failure(): void
+    {
+        [$service, $old, $new, $actor] = $this->descriptionFixtures();
+        $bad = $new;
+        $bad['surfaces'][0]['blog_v1']['featured_article_ids'] = [];
+        $this->refused(fn () => $service->surface($bad, 'surface-revise-description', false, '', 0, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'blog_surface_description_only_required');
+        $this->refused(fn () => $service->surface($new, 'surface-revise-description', false, '', 0, str_repeat('f', 64)), 'blog_surface_description_package_drift');
+        $plan = $service->surface($new, 'surface-revise-description', false, '', 0, Workspace::SURFACE_DESCRIPTION_PACKAGE);
+        $this->refused(fn () => $service->surface($new, 'surface-revise-description', true, str_repeat('f', 64), $actor->id, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'blog_complete_state_drift');
+        $this->refused(fn () => $service->surface($new, 'surface-revise-description', true, $plan['state_sha256'], 999, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'blog_surface_task_provenance_required');
+        $rows = LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all();
+        $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
+        $this->refused(fn () => app(Workspace::class)->surface($new, 'surface-revise-description', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_DESCRIPTION_PACKAGE), 'audit_failed');
+        $this->assertSame($rows, LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all());
+        $this->assertSame(1, AuditLog::withoutGlobalScopes()->count());
+    }
+
+    public function test_blog_preview_uses_normal_ops_auth_and_bound_private_configuration_without_cms_writes(): void
+    {
+        [$service, $old, $new, $actor] = $this->descriptionFixtures();
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $org = \App\Models\Organization::create(['name' => 'Preview test org', 'owner_user_id' => 9101, 'status' => 'active', 'timezone' => 'UTC', 'locale' => 'en']);
+        $before = LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all();
+        $audits = AuditLog::withoutGlobalScopes()->get()->map->getAttributes()->all();
+        $this->get('/ops/blog-preview/20')->assertUnauthorized();
+        $this->get('/ops/blog-preview/script.js')->assertUnauthorized();
+        $this->withSession(['ops_org_id' => $org->id, 'ops_admin_totp_verified_user_id' => $actor->id])
+            ->actingAs($actor, (string) config('admin.guard', 'admin'));
+        foreach ([20 => 'en', 21 => 'zh'] as $id => $locale) {
+            $response = $this->get('/ops/blog-preview/'.$id)->assertOk()
+                ->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet')
+                ->assertHeader('Referrer-Policy', 'no-referrer')
+                ->assertSee('https://fermatmind.com/'.$locale.'/cms-preview/articles', false)
+                ->assertSee(Workspace::SURFACE_ORIGINAL_PACKAGE)->assertSee('Configured owner: 1')
+                ->assertDontSee('application/ld+json', false)->assertDontSee('content_md', false)
+                ->assertDontSee('admin_token', false);
+            $this->assertStringContainsString('private', $response->headers->get('Cache-Control'));
+            $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
+        }
+        $this->get('/ops/blog-preview/script.js')->assertOk()->assertHeader('Content-Type', 'application/javascript; charset=UTF-8');
+        $this->get('/ops/blog-preview/19')->assertNotFound();
+        $this->assertSame($before, LandingSurface::withoutGlobalScopes()->whereIn('id', [20, 21])->get()->map->getAttributes()->all());
+        $this->assertSame($audits, AuditLog::withoutGlobalScopes()->get()->map->getAttributes()->all());
+        LandingSurface::withoutGlobalScopes()->whereKey(20)->update(['description' => 'Unbound copy']);
+        $this->get('/ops/blog-preview/20')->assertStatus(409)->assertDontSee('Unbound copy');
+    }
+
+    public function test_blog_preview_refuses_ops_reader_without_content_permission(): void
+    {
+        [$service, $old, $new, $actor] = $this->descriptionFixtures();
+        $permission = Permission::firstOrCreate(['name' => PermissionNames::ADMIN_OPS_READ]);
+        $actor->roles->first()->permissions()->sync([$permission->id]);
+        $actor->unsetRelation('roles');
+        $org = \App\Models\Organization::create(['name' => 'Preview test org', 'owner_user_id' => 9101, 'status' => 'active', 'timezone' => 'UTC', 'locale' => 'en']);
+        $this->withSession(['ops_org_id' => $org->id, 'ops_admin_totp_verified_user_id' => $actor->id])
+            ->actingAs($actor, (string) config('admin.guard', 'admin'))
+            ->get('/ops/blog-preview/20')->assertForbidden()->assertJsonPath('message', 'admin_content_read_required');
+    }
+
+    private function descriptionFixtures(): array
+    {
+        $this->fixtures();
+        $actor = $this->actor();
+        // Native stage fixtures bind the same fixed resource IDs and immutable parent.
+        (new LandingSurface)->forceFill(['id' => 19, 'org_id' => 0, 'surface_key' => 'other', 'locale' => 'en'])->save();
+        $old = $this->surfaces();
+        $old['surfaces'][0]['description'] = 'FermatMind Blog starts with real questions about personality and interests, learning and career choices, communication and growth, and what research can support. As you read, look for the evidence, its limits and a next step relevant to your question.';
+        $old['surfaces'][1]['description'] = '费马博客从真实问题出发，讨论人格与兴趣、学习和职业选择、沟通与成长，以及研究能支持什么。读文章时，留意依据、适用边界和与你当前问题有关的下一步。';
+        $service = app(Workspace::class);
+        $plan = $service->surface($old, 'surface-plan', false, '', 0, Workspace::SURFACE_ORIGINAL_PACKAGE);
+        $service->surface($old, 'surface-stage', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_ORIGINAL_PACKAGE);
+        \Illuminate\Support\Facades\DB::table('audit_logs')->where('action', 'blog_v1_surface-stage')->update(['id' => 1473]);
+        $new = $old;
+        $new['surfaces'][0]['description'] = 'Clear explanations, practical examples, and evidence-informed guidance on personality, careers, communication, and growth—to help you understand assessment results, compare options, and decide what to try next.';
+        $new['surfaces'][1]['description'] = '围绕人格、职业、沟通与成长，用清晰的解释、具体案例和有依据的建议，帮助你读懂测评结果、比较选择，并找到适合自己的下一步。';
+
+        return [$service, $old, $new, $actor];
+    }
+
     private function stageAndApprove(array $package): AdminUser
     {
         $actor = $this->actor();

@@ -114,6 +114,13 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             '[中文测评](/zh/tests/holland-career-interest-test-riasec?utm_source=blog&source_article=guide#intro)',
             '[English model](/en/personality/big-five)',
             '[Article](/zh/articles/guide)',
+            '[Science](/zh/science?utm_source=blog#evidence)',
+            '[Boundaries](/zh/method-boundaries)',
+            '[Reliability](/zh/reliability-validity)',
+            '[Privacy](/zh/data-privacy)',
+            '[Misconceptions](/zh/common-misconceptions)',
+            '[Unknown child](/zh/science/private)',
+            '[Sensitive science](/zh/science?%74oken=private-preview-token)',
             '[In-page](#intro)',
             '[External](https://example.org/paper?q=research)',
             '[Private preview](https://ops.fermatmind.com/ops/article-preview/40)',
@@ -138,6 +145,12 @@ final class ArticleDraftPreviewRouteTest extends TestCase
         $this->assertSame('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec?utm_source=blog&source_article=guide#intro', $hrefs['中文测评']);
         $this->assertSame('https://fermatmind.com/en/personality/big-five', $hrefs['English model']);
         $this->assertSame('https://fermatmind.com/zh/articles/guide', $hrefs['Article']);
+        $this->assertSame('https://fermatmind.com/zh/science?utm_source=blog#evidence', $hrefs['Science']);
+        foreach (['Boundaries' => 'method-boundaries', 'Reliability' => 'reliability-validity', 'Privacy' => 'data-privacy', 'Misconceptions' => 'common-misconceptions'] as $label => $path) {
+            $this->assertSame('https://fermatmind.com/zh/'.$path, $hrefs[$label]);
+        }
+        $this->assertSame('/zh/science/private', $hrefs['Unknown child']);
+        $this->assertSame('', $hrefs['Sensitive science']);
         $this->assertSame('#intro', $hrefs['In-page']);
         $this->assertSame('https://example.org/paper?q=research', $hrefs['External']);
         $this->assertSame('', $hrefs['Private preview']);
