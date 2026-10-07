@@ -22,7 +22,7 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 
         $response->assertOk()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1')
-            ->assertHeader('X-Fermat-Content-Aggregate', '95de3b7bced31d5861681e9b38aa54194e00cfcb1581f32a57efbe9000e5f045')
+            ->assertHeader('X-Fermat-Content-Aggregate', 'b481c9ee01728fac0c3541fdb8620059cc32bc84e51fa2efb448b7e865444ace')
             ->assertExactJson(['ok' => true, ...$expected['payload']]);
     }
 
@@ -32,5 +32,32 @@ final class PersonalityCurrentAtComparisonRuntimeTest extends TestCase
 
         self::assertCount(364, $index['entries']);
         self::assertArrayHasKey('mbti|comparison_at|intj-a-vs-intj-t|en', $index['entries']);
+    }
+
+    public function test_at_comparison_compatibility_copy_contains_the_current_visible_body(): void
+    {
+        $files = glob(base_path('content_assets/personality_public/current/pages/mbti/comparison-at/*/*.json'));
+        self::assertCount(32, $files);
+
+        foreach ($files as $file) {
+            $payload = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['payload'];
+            $projection = $payload['comparison_public_projection_v1'];
+            self::assertSame($projection, $payload['comparison'], $file);
+            self::assertSame(
+                $payload['answer_surface_v1']['faq_blocks'][0]['answer'],
+                $projection['faq'][0]['answer'],
+                $file,
+            );
+
+            $visible = array_values(array_filter(
+                $payload['sections'],
+                fn (array $section): bool => $section['section_key'] !== 'faq',
+            ));
+            self::assertSame(array_column($visible, 'section_key'), array_column($projection['sections'], 'id'), $file);
+
+            foreach ($visible as $offset => $section) {
+                self::assertSame($section['body_md'] ?? '', implode("\n\n", $projection['sections'][$offset]['body']), $file);
+            }
+        }
     }
 }
