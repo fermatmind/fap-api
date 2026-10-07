@@ -242,6 +242,9 @@ export function classifyPaths(inputPaths) {
     seo_competitive_evidence_progress: "COMPLETE",
     seo_competitive_evidence_blocks_delivery: false,
   };
+  // One mode drives runner, artifact and exact-SHA receipt consumers.
+  // Focused A08 supplies scoped software proof, never a full Council closeout.
+  if (operations.a08_focused) operations.seo_council_orchestration = false;
   let testsChanged = false;
 
   for (const path of paths) {
