@@ -4006,16 +4006,21 @@ task('scheduler:wait-natural-heartbeat', function () {
         run(<<<'BASH'
 set -euo pipefail
 started_epoch="$(date -u +%s)"
+[[ -L "{{current_path}}" ]]
+# Queue reload can finish after the current release's natural tick starts.
+# Require an observation after atomic activation, not after this later wait.
+activation_epoch="$(stat -c %Y "{{current_path}}")"
+[[ "$activation_epoch" =~ ^[0-9]+$ && "$activation_epoch" -le "$started_epoch" ]]
 deadline_epoch="$((started_epoch + 90))"
 while [[ "$(date -u +%s)" -le "$deadline_epoch" ]]; do
   set +e
   heartbeat="$({{bin/php}} artisan ops:scheduler-heartbeat-check --max-age-seconds=180 --json --no-interaction --no-ansi 2>/dev/null)"
   heartbeat_rc=$?
   set -e
-  if [[ "$heartbeat_rc" -eq 0 ]] && printf '%s' "$heartbeat" | STARTED_EPOCH="$started_epoch" {{bin/php}} -r '
+  if [[ "$heartbeat_rc" -eq 0 ]] && printf '%s' "$heartbeat" | ACTIVATION_EPOCH="$activation_epoch" {{bin/php}} -r '
     $payload = json_decode(stream_get_contents(STDIN), true);
     $observed = is_array($payload) ? strtotime((string) ($payload["observed_at"] ?? "")) : false;
-    exit(($payload["ok"] ?? false) === true && is_int($observed) && $observed >= (int) getenv("STARTED_EPOCH") ? 0 : 1);
+    exit(($payload["ok"] ?? false) === true && is_int($observed) && $observed >= (int) getenv("ACTIVATION_EPOCH") ? 0 : 1);
   '; then
     printf 'scheduler_heartbeat_gate_pass\n'
     exit 0
