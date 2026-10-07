@@ -56,7 +56,7 @@ final readonly class Platform12DailyScheduler
                 $due = $pending ? null : $this->nextSlot($state);
                 if ($due !== null && $due['mission_id'] === Platform12DailyMissionSet::IDS[2]
                     && $due['trigger_mode'] !== 'missed') {
-                    \Illuminate\Support\Facades\Artisan::call('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true]);
+                    $this->refreshEvidence($state);
                     if (! $this->sameGeneration($state)) {
                         return $this->result('PAUSED_BEFORE_RESERVATION');
                     }
@@ -213,6 +213,36 @@ final readonly class Platform12DailyScheduler
             return $this->result('DAILY_RUNTIME_HOLD');
         } finally {
             $this->store->release(self::LEASE, $owner, $fence);
+        }
+    }
+
+    private function refreshEvidence(array $state): void
+    {
+        $failure = null;
+        try {
+            // Same application principal, fixed command and bounded acquisition.
+            // Leave half of the existing 120-second entrypoint budget for evaluation.
+            $result = \Illuminate\Support\Facades\Process::timeout(60)->run([
+                PHP_BINARY, base_path('artisan'), 'seo:competitive-evidence-ingest', '--refresh-if-due', '--json',
+            ]);
+            $payload = strlen($result->output()) <= 131072 ? json_decode(trim($result->output()), true) : null;
+            if (! $result->successful() || ! in_array($payload['status'] ?? null,
+                ['READY', 'REUSED', 'REUSED_CYCLE', 'HOLD', 'DENY', 'WAIT'], true)) {
+                $failure = 'REFRESH_PROCESS_FAILED';
+            }
+        } catch (Throwable $error) {
+            $failure = $error instanceof \Illuminate\Process\Exceptions\ProcessTimedOutException
+                ? 'REFRESH_TIMEOUT' : 'REFRESH_PROCESS_FAILED';
+        }
+        if ($failure !== null) {
+            $this->control->withControlLock(function () use ($state, $failure): void {
+                if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
+                    app(Platform12EvidenceSelection::class)->atomicReference([
+                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(),
+                        'reason' => $failure, 'checked_at' => now('UTC')->toAtomString(),
+                    ]);
+                }
+            });
         }
     }
 

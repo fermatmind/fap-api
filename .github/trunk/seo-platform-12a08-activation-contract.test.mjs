@@ -20,6 +20,8 @@ test('A08 unavailable activation evidence skips before candidate checks; existin
  assert.match(downloader,/NIGHTLY_NOT_A_RELEASE_DEPENDENCY/);
  const ordinary=downloader.slice(downloader.indexOf('const ci ='));
  assert.doesNotMatch(ordinary,/loadNightly|nightlyEvidenceRuns|sources\(\)|a08-staging-safety\.json/);
+ const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
+ assert.match(ci,/if: needs\.classify\.outputs\.seo_council_orchestration == 'true' && needs\.classify\.outputs\.a08_focused != 'true'\n        with:\n          name: seo-council-orchestration/);
 });
 test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
  for(const path of ['backend/routes/api.php','backend/composer.lock','backend/app/Http/Middleware/Auth.php','backend/content_assets/personality_public/current/manifest.json']) assert.deepEqual(scopeFor(path),['public']);

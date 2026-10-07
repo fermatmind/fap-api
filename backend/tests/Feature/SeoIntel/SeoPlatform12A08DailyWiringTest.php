@@ -50,6 +50,59 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
         parent::tearDown();
     }
 
+    public function test_refresh_preparation_has_a_separate_bounded_process_and_does_not_hold_the_evaluation_lease(): void
+    {
+        $state = app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
+        \Illuminate\Support\Facades\Process::fake([
+            '*' => \Illuminate\Support\Facades\Process::result(output: '{"status":"WAIT","external_reads":0}'),
+        ]);
+        $scheduler = app(Platform12DailyScheduler::class);
+        (new \ReflectionMethod($scheduler, 'refreshEvidence'))->invoke($scheduler, $state);
+        \Illuminate\Support\Facades\Process::assertRan(function ($process): bool {
+            $lease = app(Platform12SchedulerStore::class)->acquire('platform12:daily:serial', str_repeat('f', 48), 180);
+            if ($lease['acquired']) {
+                app(Platform12SchedulerStore::class)->release('platform12:daily:serial', str_repeat('f', 48), $lease['fencing_token']);
+            }
+
+            return $lease['acquired'] && $process->timeout === 60 && $process->command === [
+                PHP_BINARY, base_path('artisan'), 'seo:competitive-evidence-ingest', '--refresh-if-due', '--json',
+            ];
+        });
+    }
+
+    public function test_failed_refresh_marks_operational_failure_and_cannot_overwrite_after_pause(): void
+    {
+        $originalStorage = storage_path();
+        $directory = sys_get_temp_dir().'/a08-refresh-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $this->app->useStoragePath($directory);
+        config()->set('seo_council.release_revision_path', $directory.'/REVISION');
+        file_put_contents($directory.'/REVISION', str_repeat('a', 40));
+        try {
+            $runtime = app(Platform12RuntimeControl::class);
+            $state = $runtime->change(false, Platform12DailyMissionSet::IDS);
+            \Illuminate\Support\Facades\Process::fake([
+                '*' => \Illuminate\Support\Facades\Process::result(errorOutput: 'private failure', exitCode: 1),
+            ]);
+            $scheduler = app(Platform12DailyScheduler::class);
+            $refresh = new \ReflectionMethod($scheduler, 'refreshEvidence');
+            $refresh->invoke($scheduler, $state);
+            $path = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+            $marker = json_decode(file_get_contents($path), true);
+            $this->assertSame('failed', $marker['refresh_status']);
+            $this->assertSame('REFRESH_PROCESS_FAILED', $marker['reason']);
+            $this->assertStringNotContainsString('private failure', file_get_contents($path));
+            $runtime->change(true);
+            $bytes = file_get_contents($path);
+            $refresh->invoke($scheduler, $state);
+            $this->assertSame($bytes, file_get_contents($path));
+            $this->assertSame('PAUSED', $runtime->status()['state']);
+        } finally {
+            $this->app->useStoragePath($originalStorage);
+            (new \Illuminate\Filesystem\Filesystem)->deleteDirectory($directory);
+        }
+    }
+
     public function test_daily_slots_have_shanghai_timezone_no_pre_activation_backfill_and_bounded_catchup(): void
     {
         $set = app(Platform12DailyMissionSet::class);
