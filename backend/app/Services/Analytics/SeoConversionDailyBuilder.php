@@ -490,13 +490,23 @@ final class SeoConversionDailyBuilder
         $placeholders = implode(',', array_fill(0, count($eventCodes), '?'));
 
         $query = DB::table('events')
-            ->where('occurred_at', '>=', $from)
-            ->where('occurred_at', '<', $to)
-            ->whereRaw('lower(event_code) in ('.$placeholders.')', $eventCodes)
-            ->select(['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale', 'scale_code']);
+            ->where('events.occurred_at', '>=', $from)
+            ->where('events.occurred_at', '<', $to)
+            ->whereRaw('lower(events.event_code) in ('.$placeholders.')', $eventCodes)
+            ->select(array_map(static fn (string $column): string => 'events.'.$column, ['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale', 'scale_code']));
+
+        // Server result_ready intentionally has no browser identity. Inherit
+        // exclusion from its same-tenant attempt, including historical events,
+        // without copying the anonymous identity into the public aggregate.
+        if (SchemaBaseline::hasTable('attempts')) {
+            $query->leftJoin('attempts', static function ($join): void {
+                $join->on('attempts.id', '=', 'events.attempt_id')
+                    ->on('attempts.org_id', '=', 'events.org_id');
+            })->addSelect('attempts.anon_id as attempt_anon_id');
+        }
 
         if ($orgIds !== []) {
-            $query->whereIn('org_id', $orgIds);
+            $query->whereIn('events.org_id', $orgIds);
         }
 
         return $query->get()->all();

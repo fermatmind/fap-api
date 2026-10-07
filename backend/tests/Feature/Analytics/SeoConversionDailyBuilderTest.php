@@ -171,6 +171,34 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
     }
 
+    public function test_result_ready_inherits_probe_exclusion_from_same_tenant_attempt_without_browser_identity(): void
+    {
+        config(['analytics.smoke_attempt_exclusion.anon_id_prefixes' => ['codex_probe_']]);
+        $day = CarbonImmutable::parse('2026-08-10 11:00:00');
+        DB::table('articles')->insert([
+            'id' => 53, 'org_id' => 0, 'slug' => 'probe-article', 'locale' => 'en',
+            'title' => 'Probe article', 'content_md' => '# Probe article',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => false,
+            'published_at' => $day->subDay(), 'created_at' => $day, 'updated_at' => $day,
+        ]);
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, 0, 'en', $day, $day->addMinute());
+        DB::table('attempts')->where('id', $attemptId)->update(['anon_id' => 'codex_probe_blog_existing']);
+        $this->insertResultReadyEvent($day->addMinutes(2), '53', $attemptId, 0);
+
+        $build = app(SeoConversionDailyBuilder::class)->build($day, $day, [0]);
+        $this->assertSame([], $build['rows']);
+        $this->assertSame(1, DB::table('events')->where('event_code', 'result_ready')->count());
+        $this->assertNull(DB::table('events')->where('event_code', 'result_ready')->value('anon_id'));
+
+        // A mismatched tenant must not lend its probe exclusion to this event.
+        DB::table('attempts')->where('id', $attemptId)->update(['org_id' => 84]);
+        $build = app(SeoConversionDailyBuilder::class)->build($day, $day, [0]);
+        $this->assertCount(1, $build['rows']);
+        $this->assertSame(1, $build['rows'][0]['result_ready_count']);
+        $this->assertStringNotContainsString('codex_probe_', json_encode($build['rows'], JSON_THROW_ON_ERROR));
+    }
+
     public function test_refresh_backfills_legacy_result_ready_from_locked_attempt_context(): void
     {
         $day = CarbonImmutable::parse('2026-08-09 11:00:00');
