@@ -38,6 +38,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->travelBack();
         DB::purge('measurement_source_fixture');
         parent::tearDown();
     }
@@ -359,6 +360,108 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
         $this->assertSame('GSC_WINDOW_INCOMPLETE', $loader->diagnoseForScope('mission:drifted-snapshot', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
     }
 
+    public function test_full_window_proof_survives_utc_pacific_and_dst_boundaries(): void
+    {
+        foreach ([
+            ['2026-10-06T22:40:00Z', '2026-10-07T08:01:00Z'],
+            ['2026-03-08T07:55:00Z', '2026-03-08T11:05:00Z'],
+            ['2026-11-01T06:55:00Z', '2026-11-01T10:05:00Z'],
+        ] as [$collected, $checked]) {
+            $this->travelTo(CarbonImmutable::parse($collected));
+            $receipt = $this->installSparseFullWindowReceipt();
+            $loader = app(ReadOnlyMeasurementEvidenceBundleLoader::class);
+            $this->assertSame('NONE', $loader->diagnoseForScope('mission:clock', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+            $this->travelTo(CarbonImmutable::parse($checked));
+            $this->assertSame('NONE', $loader->diagnoseForScope('mission:clock', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+            $this->assertSame(json_encode($receipt, JSON_THROW_ON_ERROR), DB::table('seo_gsc_sync_runs')->value('receipt_json'));
+        }
+    }
+
+    public function test_full_window_proof_rejects_expired_latest_failed_truncated_and_tampered_sources(): void
+    {
+        foreach (['expired', 'failed', 'running', 'truncated', 'tampered', 'metrics', 'identity'] as $failure) {
+            $this->travelTo(CarbonImmutable::parse('2026-10-06T22:40:00Z'));
+            $receipt = $this->installSparseFullWindowReceipt();
+            if ($failure === 'expired') {
+                $this->travelTo(now('UTC')->addHours(26)->addSecond());
+            } elseif (in_array($failure, ['failed', 'running'], true)) {
+                DB::table('seo_gsc_sync_runs')->insert([
+                    'status' => $failure, 'created_at' => now('UTC')->addSecond(),
+                    'started_at' => now('UTC')->addSecond(), 'finished_at' => $failure === 'failed' ? now('UTC')->addSecond() : null,
+                ]);
+                $this->travelTo(now('UTC')->addSeconds(2));
+            } elseif ($failure === 'metrics') {
+                DB::table('seo_gsc_daily')->where('id', DB::table('seo_gsc_daily')->min('id'))->increment('clicks');
+            } elseif ($failure === 'identity') {
+                DB::table('seo_gsc_daily')->where('id', DB::table('seo_gsc_daily')->min('id'))->update(['report_date' => $receipt['end_date']]);
+            } else {
+                if ($failure === 'truncated') {
+                    $receipt['completeness']['truncated'] = true;
+                    unset($receipt['receipt_hash']);
+                    $receipt['receipt_hash'] = $this->gscReceiptHash($receipt);
+                } else {
+                    $receipt['readmodel_snapshot_hash'] = str_repeat('f', 64);
+                }
+                DB::table('seo_gsc_sync_runs')->update(['receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR)]);
+            }
+            $this->assertNotSame('NONE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:failure', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason'], $failure);
+        }
+    }
+
+    public function test_latest_failed_receipt_is_not_masked_by_a_complete_older_date_set(): void
+    {
+        DB::table('seo_gsc_sync_runs')->insert([
+            'status' => 'failed', 'failure_code' => 'gsc_transport_failed',
+            'started_at' => now('UTC'), 'created_at' => now('UTC'), 'finished_at' => now('UTC'),
+        ]);
+        $this->assertNotSame('NONE', app(ReadOnlyMeasurementEvidenceBundleLoader::class)->diagnoseForScope('mission:latest-failed', 'search_measurement', 'tests', 'en', 'staging_runtime')->diagnostic()['hold_reason']);
+    }
+
+    private function installSparseFullWindowReceipt(): array
+    {
+        config(['seo_intel.gsc_reporting_timezone' => 'America/Los_Angeles']);
+        DB::table('seo_gsc_sync_runs')->delete();
+        DB::table('seo_gsc_daily')->delete();
+        $this->seedReadModels();
+        $end = CarbonImmutable::parse(now('America/Los_Angeles')->subDays(3)->toDateString(), 'UTC');
+        $start = $end->subDays(89);
+        foreach (DB::table('seo_gsc_daily')->orderBy('id')->get() as $index => $row) {
+            if ($index % 3 !== 0 && $index !== 89) {
+                DB::table('seo_gsc_daily')->where('id', $row->id)->delete();
+            } else {
+                DB::table('seo_gsc_daily')->where('id', $row->id)->update(['report_date' => $start->addDays($index)->toDateString()]);
+            }
+        }
+        $snapshot = app(GscRunCloseoutSummarizer::class)->readModelSnapshot(DB::connection(), $start, $end, ['web']);
+        $receipt = [
+            'schema_version' => 'seo.gsc_refresh_receipt.v2', 'environment' => 'staging', 'status' => 'success',
+            'fetch_mode' => 'full_window', 'window_days' => 90, 'requested_start_date' => $start->toDateString(),
+            'start_date' => $start->toDateString(), 'end_date' => $end->toDateString(), 'search_types' => ['web'],
+            'trigger_mode' => 'scheduled', 'reporting_timezone' => 'America/Los_Angeles',
+            'collection_started_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'), 'lag_days_requested' => 3,
+            'pages_fetched' => 90, 'rows_seen' => $snapshot['row_count'], 'mapped_rows' => $snapshot['row_count'],
+            'unmapped_rows' => 0, 'duplicate_natural_keys' => 0, 'quality_gate' => ['status' => 'pass'],
+            'read_only_gsc' => true, 'search_submission_allowed' => false, 'restricted_egress' => ['status' => 'restricted'],
+            'property_hash' => hash('sha256', (string) config('seo_intel.gsc_property_url', '')),
+            'completeness' => ['pagination_complete' => true, 'truncated' => false,
+                'covered_start_date' => $start->toDateString(), 'covered_end_date' => $end->toDateString(),
+                'search_types' => ['web'], 'dimensions' => ['query', 'page', 'device', 'country']],
+            'gsc_data_quality' => ['read_model_after' => $snapshot], 'readmodel_snapshot_hash' => $this->gscReceiptHash($snapshot),
+        ];
+        $receipt['receipt_hash'] = $this->gscReceiptHash($receipt);
+        DB::table('seo_gsc_sync_runs')->insert([
+            'status' => 'success', 'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            'created_at' => now('UTC'), 'started_at' => now('UTC'), 'finished_at' => now('UTC'),
+        ]);
+
+        return $receipt;
+    }
+
+    private function gscReceiptHash(array $value): string
+    {
+        return (new \ReflectionMethod(ReadOnlyMeasurementEvidenceBundleLoader::class, 'canonicalHash'))->invoke(app(ReadOnlyMeasurementEvidenceBundleLoader::class), $value);
+    }
+
     public function test_cro_diagnostics_distinguish_schema_readmodel_stale_and_mapping_failures(): void
     {
         Schema::drop('analytics_seo_conversion_daily');
@@ -537,6 +640,7 @@ final class SeoPlatform11FEvidenceSourceTest extends TestCase
             $table->string('authority_revision');
         });
         Schema::create('seo_gsc_daily', function (Blueprint $table): void {
+            $table->id();
             $table->date('report_date');
             $table->string('canonical_url_hash');
             $table->string('canonical_url');

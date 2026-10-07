@@ -13,6 +13,10 @@ export function changedTestPlan(changes, {vitest=false}={}) {
   else if(/\.sh$/.test(path))plan.shell.push(path);
   else plan.unsupported.push(path);
  }
+ // Read-only measurement input changes must execute their shared consumers even
+ // when the tests themselves did not change. Do not expand to full Council.
+ if(changes.some(({path})=>path==='backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php'))
+  plan.php.push(...['SeoPlatform11FEvidenceSourceTest','SeoPlatform11FEvidenceDiagnosticReasonTest','SeoPlatform11FEvidencePrivacyTest','SeoPlatform11FSearchMeasurementTest','SeoPlatform11FOrchestratorTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`));
  for(const key of Object.keys(plan))plan[key]=[...new Set(plan[key])].sort();
  if(plan.unsupported.length)throw new Error(`Unsupported changed tests: ${plan.unsupported.join(',')}`);
  return plan;

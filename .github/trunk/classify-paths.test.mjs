@@ -495,7 +495,10 @@ test("11G competitive evidence remains deferred without blocking delivery", () =
     "backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php",
   ]);
   assert.equal(measurementSource.operations.seo_competitive_evidence, false);
-  assert.equal(measurementSource.operations.seo_council_orchestration, true);
+  assert.equal(measurementSource.operations.seo_council_orchestration, false);
+  assert.equal(measurementSource.operations.a08_focused, true);
+  assert.equal(measurementSource.operations.a08_scoped_checks, true);
+  assert.equal(classifyPaths(['backend/app/Services/SeoCouncil/Measurement/MeasurementCoordinator.php']).operations.seo_council_orchestration, true);
 });
 
 test("11G activation control change deploys without competitive ingestion", () => {

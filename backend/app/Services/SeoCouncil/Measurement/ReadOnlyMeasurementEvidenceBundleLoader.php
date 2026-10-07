@@ -8,6 +8,7 @@ use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
 use App\Services\SeoAgentEvidence\Privacy\SeoPrivateDataScanner;
 use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\GscRunCloseoutSummarizer;
+use App\Services\SeoIntel\GscRunStartTime;
 use App\Services\SeoIntel\OpsDashboard\SeoConversionFunnelReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
@@ -199,13 +200,10 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         }
         $lagDays = max(0, (int) data_get($quality, 'freshness.lag_days_required', 3));
         $maxAgeDays = max($lagDays, (int) data_get($quality, 'freshness.max_report_age_days', 10));
-        $currentSnapshotVerified = $latestDate !== null
-            && $this->gscFullWindowReceiptCovers($connection, $latestDate, $environment);
-        $windowEnd = $currentSnapshotVerified
-            ? now((string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'))
-                ->subDays($lagDays)
-                ->startOfDay()
-            : $latestDate;
+        $verifiedWindowEnd = $latestDate === null ? null
+            : $this->gscFullWindowReceiptCovers($connection, $latestDate, $environment);
+        $currentSnapshotVerified = $verifiedWindowEnd !== null;
+        $windowEnd = $verifiedWindowEnd ?? $latestDate;
         $scopeWindowsComplete = $latestDate !== null;
         $readmodelHealthy = true;
         $failureCategory = null;
@@ -259,7 +257,12 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                     : $this->rawGscMetrics($windowRows),
             ];
         }
-        $windowComplete = $scopeWindowsComplete || $currentSnapshotVerified;
+        // Legacy read models without collection receipts retain their complete
+        // date-set path. Once collection records exist, a failed/stale/invalid
+        // latest attempt must not be hidden by a complete older row set.
+        $receiptPresent = \App\Support\SchemaBaseline::tableExists('seo_gsc_sync_runs', $connection)
+            && DB::connection($connection)->table('seo_gsc_sync_runs')->exists();
+        $windowComplete = ($scopeWindowsComplete && ! $receiptPresent) || $currentSnapshotVerified;
 
         $stale = ! $currentSnapshotVerified
             && ($reportingLagStale || $latestDate === null || $latestDate->lessThan(now('UTC')->subDays($maxAgeDays)->startOfDay()));
@@ -633,34 +636,43 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
         return true;
     }
 
-    private function gscFullWindowReceiptCovers(string $connection, CarbonImmutable $latestDate, string $environment): bool
+    private function gscFullWindowReceiptCovers(string $connection, CarbonImmutable $latestDate, string $environment): ?CarbonImmutable
     {
         $schema = Schema::connection($connection);
         if (! $this->schemaHas($schema, 'seo_gsc_sync_runs', [
             'status', 'receipt_json', 'finished_at',
         ])) {
-            return false;
+            return null;
         }
-        $receipts = DB::connection($connection)->table('seo_gsc_sync_runs')
-            ->where('status', 'success')
-            ->whereNotNull('receipt_json')
-            ->orderByDesc('finished_at')
-            ->limit(20)
-            ->pluck('receipt_json');
-        foreach ($receipts as $encoded) {
-            try {
-                $receipt = json_decode((string) $encoded, true, 64, JSON_THROW_ON_ERROR);
-                $start = CarbonImmutable::parse((string) ($receipt['requested_start_date'] ?? ''), 'UTC')->startOfDay();
-                $end = CarbonImmutable::parse((string) ($receipt['end_date'] ?? ''), 'UTC')->startOfDay();
-            } catch (Throwable) {
-                continue;
+        try {
+            $row = GscRunStartTime::latest(DB::connection($connection)->table('seo_gsc_sync_runs'), [
+                'status', 'receipt_json', 'finished_at',
+            ]);
+            if ($row === null || $row->status !== 'success' || ! is_string($row->receipt_json)
+                || strlen($row->receipt_json) > 262144 || ! is_string($row->finished_at)) {
+                return null;
             }
+            $receipt = json_decode($row->receipt_json, true, 64, JSON_THROW_ON_ERROR);
+            $started = CarbonImmutable::parse($row->run_started_at_utc, 'UTC');
+            $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
+            $now = CarbonImmutable::now('UTC');
+            if ($finished->lt($started) || $finished->gt($now) || $finished->lt($now->subHours(26))) {
+                return null;
+            }
+            $start = CarbonImmutable::parse((string) ($receipt['requested_start_date'] ?? ''), 'UTC')->startOfDay();
+            $end = CarbonImmutable::parse((string) ($receipt['end_date'] ?? ''), 'UTC')->startOfDay();
             $searchTypes = $receipt['search_types'] ?? null;
             $restricted = data_get($receipt, 'restricted_egress.status');
             $expectedEnvironment = $environment === 'production_runtime' ? 'production' : 'staging';
-            $currentEndDate = now((string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'))
-                ->subDays(max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3)))
-                ->toDateString();
+            $timezone = (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles');
+            $lag = $receipt['lag_days_requested'] ?? max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3));
+            if (! is_int($lag) || $lag < 0 || $lag > 30
+                || isset($receipt['reporting_timezone']) && $receipt['reporting_timezone'] !== $timezone
+                || isset($receipt['collection_started_at'])
+                    && CarbonImmutable::parse($receipt['collection_started_at'], 'UTC')->toDateTimeString() !== $started->toDateTimeString()) {
+                return null;
+            }
+            $currentEndDate = $started->setTimezone($timezone)->subDays($lag)->toDateString();
             $configuredProperty = trim((string) config('seo_intel.gsc_property_url', ''));
             $propertyMatches = $configuredProperty === ''
                 || hash_equals(hash('sha256', $configuredProperty), (string) ($receipt['property_hash'] ?? ''));
@@ -671,8 +683,19 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 ['web'],
             );
             $recordedSnapshot = data_get($receipt, 'gsc_data_quality.read_model_after');
-            $snapshotMatches = is_array($recordedSnapshot)
-                && hash_equals($this->canonicalHash($recordedSnapshot), $this->canonicalHash($currentSnapshot));
+            // Preserve the full historical snapshot/hash, but evaluate its UTC
+            // lag at collection time rather than the current verification day.
+            $snapshotMatches = false;
+            foreach ([$started, $finished] as $clock) {
+                $currentSnapshot['latest_data_lag_days'] = is_string($currentSnapshot['max_report_date'] ?? null)
+                    ? CarbonImmutable::parse($currentSnapshot['max_report_date'], 'UTC')->diffInDays($clock->startOfDay())
+                    : null;
+                if (is_array($recordedSnapshot)
+                    && hash_equals($this->canonicalHash($recordedSnapshot), $this->canonicalHash($currentSnapshot))) {
+                    $snapshotMatches = true;
+                    break;
+                }
+            }
             $newReceiptHashesValid = true;
             if (isset($receipt['schema_version']) || isset($receipt['readmodel_snapshot_hash']) || isset($receipt['receipt_hash'])) {
                 $withoutHash = $receipt;
@@ -681,6 +704,7 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                     && ($receipt['environment'] ?? null) === $expectedEnvironment
                     && is_string($receipt['readmodel_snapshot_hash'] ?? null)
                     && hash_equals($this->canonicalHash($currentSnapshot), (string) $receipt['readmodel_snapshot_hash'])
+                    && $this->gscPaginationComplete($receipt, $start, $end)
                     && is_string($receipt['receipt_hash'] ?? null)
                     && hash_equals($this->canonicalHash($withoutHash), (string) $receipt['receipt_hash']);
             }
@@ -705,11 +729,28 @@ final class ReadOnlyMeasurementEvidenceBundleLoader implements MeasurementEviden
                 && $snapshotMatches
                 && $newReceiptHashesValid
                 && (($receipt['fetch_mode'] ?? null) === 'full_window' || ($receipt['schema_version'] ?? null) === 'seo.gsc_refresh_receipt.v2')) {
-                return true;
+                return $end;
             }
+        } catch (Throwable) {
+            return null;
         }
 
-        return false;
+        return null;
+    }
+
+    private function gscPaginationComplete(array $receipt, CarbonImmutable $start, CarbonImmutable $end): bool
+    {
+        $complete = $receipt['completeness'] ?? [];
+
+        return ($complete['pagination_complete'] ?? null) === true
+            && ($complete['truncated'] ?? null) === false
+            && ($complete['covered_start_date'] ?? null) === ($receipt['start_date'] ?? null)
+            && ($complete['covered_end_date'] ?? null) === $end->toDateString()
+            && ($receipt['start_date'] ?? '') >= $start->toDateString()
+            && ($receipt['start_date'] ?? '') <= $end->toDateString()
+            && (($receipt['fetch_mode'] ?? null) !== 'full_window' || ($receipt['start_date'] ?? null) === $start->toDateString())
+            && ($complete['search_types'] ?? null) === ['web']
+            && ($complete['dimensions'] ?? null) === ['query', 'page', 'device', 'country'];
     }
 
     /** @param array<string,mixed> $read */

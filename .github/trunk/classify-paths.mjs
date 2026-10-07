@@ -149,6 +149,11 @@ export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "DEFERRED_NON_BLOCKING";
 const isDeferredCompetitiveCouncilBoundary = (path) =>
   path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
 
+// This read-only loader has direct measurement and A08 consumers. Its focused
+// tests are selected by the changed-test runner; other Council boundaries stay full.
+const isFocusedCouncilBoundary = (path) => isDeferredCompetitiveCouncilBoundary(path)
+  || path === "backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php";
+
 const isCareerDataRecoveryBoundary = (path) =>
   path === "backend/content_assets/career/career_data_recovery.v1.json"
   || path === "backend/app/Console/Commands/CareerCompileRecommendationSubjects.php"
@@ -184,7 +189,7 @@ export function classifyPaths(inputPaths) {
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
     a08_scopes: selectedScopes(paths),
-    a08_focused: paths.some(inRuntimeScope) && !opsPresentation && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isDeferredCompetitiveCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
+    a08_focused: paths.some(inRuntimeScope) && !opsPresentation && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isFocusedCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_content_only: false,

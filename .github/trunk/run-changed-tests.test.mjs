@@ -36,3 +36,14 @@ printf executed > tests/shell-executed
   assert.throws(()=>runChangedTests({...plan,node:[],python:[]},{root}),/execution failed/);
  }finally{rmSync(root,{recursive:true,force:true});}
 });
+
+test('measurement loader input invokes its real shared PHP consumers without full closeout',()=>{
+ const plan=changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php'}]);
+ const calls=[];
+ runChangedTests(plan,{run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+ assert.equal(calls.length,1);assert.equal(calls[0].cmd,'php');
+ for(const name of ['EvidenceSource','EvidenceDiagnosticReason','EvidencePrivacy','SearchMeasurement','Orchestrator'])
+  assert.ok(calls[0].args.includes(`tests/Feature/SeoIntel/SeoPlatform11F${name}Test.php`),name);
+ assert.deepEqual(changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Measurement/MeasurementCoordinator.php'}]).php,[]);
+ assert.equal(calls[0].args.includes('seo:council-closeout'),false);
+});
