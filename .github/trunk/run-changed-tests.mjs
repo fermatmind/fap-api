@@ -19,6 +19,10 @@ export function changedTestPlan(changes, {vitest=false}={}) {
   plan.php.push(...['SeoPlatform11FEvidenceSourceTest','SeoPlatform11FEvidenceDiagnosticReasonTest','SeoPlatform11FEvidencePrivacyTest','SeoPlatform11FSearchMeasurementTest','SeoPlatform11FOrchestratorTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`));
  if(changes.some(({path})=>['backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php','backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php'].includes(path)))
   plan.php.push(...['SeoPlatform12E01SanitizedOperationsProjectionTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12MissionEvidenceReadTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`),'backend/tests/Feature/Ops/SeoOperationsPageTest.php');
+ // Installation and Ops build inputs consume the bounded braces patch even
+ // when its regression test is unchanged. Reuse the existing fixture suite.
+ if(changes.some(({path})=>['backend/package.json','backend/package-lock.json','backend/patches/braces@3.0.3.patch','backend/scripts/dependencies/apply-braces-depth-patch.mjs','backend/vite.config.js','backend/resources/css/filament/ops/tailwind.config.js'].includes(path)))
+  plan.node.push('backend/tests/Node/braces-depth-patch.test.mjs');
  for(const key of Object.keys(plan))plan[key]=[...new Set(plan[key])].sort();
  if(plan.unsupported.length)throw new Error(`Unsupported changed tests: ${plan.unsupported.join(',')}`);
  return plan;

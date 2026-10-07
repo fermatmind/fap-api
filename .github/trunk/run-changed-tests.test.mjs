@@ -56,3 +56,18 @@ test('frozen Ops projection input really invokes UI, privacy, RBAC and historica
  assert.ok(calls[0].args.includes('tests/Feature/Ops/SeoOperationsPageTest.php'));
  assert.equal(calls[0].args.includes('seo:council-closeout'),false);
 });
+
+test('braces install and build inputs select the unchanged fixture suite and real Node runner',()=>{
+ const inputs=['backend/package.json','backend/package-lock.json','backend/patches/braces@3.0.3.patch','backend/scripts/dependencies/apply-braces-depth-patch.mjs','backend/vite.config.js','backend/resources/css/filament/ops/tailwind.config.js'];
+ for(const path of inputs){
+  const plan=changedTestPlan([{status:'M',path}]);
+  assert.deepEqual(plan.node,['backend/tests/Node/braces-depth-patch.test.mjs'],path);
+  assert.deepEqual(plan.php,[]);
+  const calls=[];runChangedTests(plan,{run:(cmd,args,options)=>{calls.push({cmd,args,cwd:options.cwd});return {status:0};}});
+  assert.deepEqual(calls,[{cmd:'node',args:['--test','backend/tests/Node/braces-depth-patch.test.mjs'],cwd:'.'}]);
+ }
+ assert.deepEqual(changedTestPlan([...inputs,'backend/tests/Node/braces-depth-patch.test.mjs'].map(path=>({status:'M',path}))).node,['backend/tests/Node/braces-depth-patch.test.mjs']);
+ for(const path of ['package.json','pnpm-lock.yaml','backend/app/Services/Example.php'])
+  assert.deepEqual(changedTestPlan([{status:'M',path}],{vitest:true}).node,[]);
+ assert.deepEqual(changedTestPlan([{status:'D',path:inputs[2]}]).node,['backend/tests/Node/braces-depth-patch.test.mjs']);
+});
