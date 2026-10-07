@@ -50,12 +50,10 @@ final readonly class Platform12DailyScheduler
         // outside the evaluation lease and its 120-second software budget.
         if ($acceptanceMission === null && app()->environment('production')) {
             try {
-                $pending = $this->deliveries()->whereIn('mission_id', $state['effective_mission_ids'])
-                    ->where('mission_request_json->slot->runtime_generation', $state['generation'])
-                    ->whereNotIn('status', ['CLOSED', 'HELD', 'FAILED'])->exists();
-                $due = $pending ? null : $this->nextSlot($state);
-                if ($due !== null && $due['mission_id'] === Platform12DailyMissionSet::IDS[2]
-                    && $due['trigger_mode'] !== 'missed') {
+                // Refresh eligibility is independent of the daily evaluation slot.
+                // A consumed HOLD must not suppress retries after acquisition backoff.
+                if (in_array(Platform12DailyMissionSet::IDS[2], $state['effective_mission_ids'], true)
+                    && $this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
                     $this->refreshEvidence($state);
                     if (! $this->sameGeneration($state)) {
                         return $this->result('PAUSED_BEFORE_RESERVATION');
@@ -238,7 +236,7 @@ final readonly class Platform12DailyScheduler
             $this->control->withControlLock(function () use ($state, $failure): void {
                 if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
                     app(Platform12EvidenceSelection::class)->atomicReference([
-                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(),
+                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(true),
                         'reason' => $failure, 'checked_at' => now('UTC')->toAtomString(),
                     ]);
                 }
@@ -283,18 +281,18 @@ final readonly class Platform12DailyScheduler
         return $current['computation_enabled'] && $current['generation'] === $started['generation'];
     }
 
-    private function releaseSha(): string
+    private function releaseSha(bool $full = false): string
     {
         $path = (string) config('seo_council.release_revision_path', dirname(base_path()).'/REVISION');
         $sha = is_file($path) ? strtolower(trim((string) file_get_contents($path))) : '';
         if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
             if (app()->environment('testing')) {
-                return str_repeat('0', 12);
+                return str_repeat('0', $full ? 40 : 12);
             }
             throw new \RuntimeException('RELEASE_REVISION_HOLD');
         }
 
-        return substr($sha, 0, 12);
+        return $full ? $sha : substr($sha, 0, 12);
     }
 
     private function storeVector(Platform12FrozenMission $mission): array

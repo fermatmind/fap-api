@@ -91,6 +91,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
             $marker = json_decode(file_get_contents($path), true);
             $this->assertSame('failed', $marker['refresh_status']);
             $this->assertSame('REFRESH_PROCESS_FAILED', $marker['reason']);
+            $this->assertSame(str_repeat('a', 40), $marker['execution_sha']);
             $this->assertStringNotContainsString('private failure', file_get_contents($path));
             $runtime->change(true);
             $bytes = file_get_contents($path);

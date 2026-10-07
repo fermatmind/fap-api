@@ -37,6 +37,7 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->travelBack();
         (new \Illuminate\Filesystem\Filesystem)->deleteDirectory($this->directory);
         parent::tearDown();
     }
@@ -295,6 +296,96 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         file_put_contents($this->directory.'/activation.json.atomic.json', '{incomplete');
         $this->assertSame('ACTIVATION_EVIDENCE_CORRUPT', $runtime->prerequisite());
         $this->assertSame([], $runtime->status()['effective_mission_ids']);
+    }
+
+    public function test_natural_refresh_remains_eligible_after_terminal_daily_hold_without_another_evaluation(): void
+    {
+        $reader = $this->schedulerFixture();
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:19:00Z'));
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $control = app(Platform12RuntimeControl::class);
+        $control->change(false, [Platform12DailyMissionSet::IDS[2]]);
+        $control->reconcile();
+        \Illuminate\Support\Facades\Process::fake([
+            '*' => \Illuminate\Support\Facades\Process::result(output: '{"status":"HOLD","hold_reason":"REFRESH_BACKOFF","external_reads":0}'),
+        ]);
+        $scheduler = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class);
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:30:00Z'));
+        $first = $scheduler->tick();
+        $this->assertSame('TERMINAL_COMMITTED', $first['status'], json_encode($first));
+        $this->assertSame('HOLD', $first['mission_verdict']);
+        $receipt = json_decode(\Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_run_receipts')->value('receipt_json'), true);
+        $evaluation = collect($receipt['route_plan'])->firstWhere('kind', 'daily_evaluation')['output'];
+        $this->assertSame(['STALE_EVIDENCE_HOLD'], $evaluation['reason_codes']);
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T23:31:00Z'));
+        $this->assertSame('IDLE', $scheduler->tick()['status']);
+        \Illuminate\Support\Facades\Process::assertRanTimes(fn ($process): bool => $process->command === [
+            PHP_BINARY, base_path('artisan'), 'seo:competitive-evidence-ingest', '--refresh-if-due', '--json',
+        ], 2);
+        $this->assertSame(1, $reader->reads);
+        $this->assertSame(1, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
+        $this->assertSame(1, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_run_receipts')->count());
+        $this->travelBack();
+    }
+
+    public function test_natural_refresh_never_runs_without_authorized_m3_or_after_pause(): void
+    {
+        $this->schedulerFixture();
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:31:00Z'));
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $control = app(Platform12RuntimeControl::class);
+        $control->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $control->reconcile();
+        \Illuminate\Support\Facades\Process::fake();
+        $scheduler = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class);
+        $this->assertSame('IDLE', $scheduler->tick()['status']);
+        $control->change(true);
+        $this->assertSame('PAUSED', $scheduler->tick()['status']);
+        \Illuminate\Support\Facades\Process::assertNothingRan();
+        $this->assertSame(0, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
+        $this->travelBack();
+    }
+
+    private function schedulerFixture(): \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
+    {
+        config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        config()->set('seo_council.connection', 'seo_intel');
+        \Illuminate\Support\Facades\DB::purge('seo_intel');
+        foreach (['2026_08_29_030000_create_seo_council_runtime_tables.php', '2026_09_04_010000_create_seo_council_scheduler_storage.php',
+            '2026_09_04_020000_expand_seo_council_scheduler_fencing.php', '2026_09_04_030000_expand_seo_council_run_receipts.php',
+            '2026_09_04_040000_create_seo_council_notification_outbox.php'] as $migration) {
+            (require database_path('migrations/seo_intel/'.$migration))->up();
+        }
+        $reader = new class implements \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
+        {
+            public int $reads = 0;
+
+            public function capture(string $missionId): array
+            {
+                $this->reads++;
+
+                return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                    'private_routes' => ['tested_count' => 30, 'rejected_count' => 30],
+                    'query_security' => ['hmac_state' => 'VALID', 'key_version_state' => 'CURRENT', 'pii_state' => 'ABSENT'],
+                    'drift' => array_fill_keys(['role', 'binding', 'policy', 'tool', 'schema', 'prompt'], 'MATCH'),
+                    'evidence_freshness' => ['total_count' => 1, 'fresh_count' => 0, 'expired_count' => 1],
+                    'injection' => ['prompt_state' => 'PASS', 'tool_metadata_state' => 'PASS'],
+                    'tools' => ['requested_count' => 0, 'authorized_count' => 0],
+                    'posture' => ['retention_state' => 'COMPLIANT', 'egress_state' => 'COMPLIANT']],
+                    'sources' => array_map(fn (string $id): array => ['id' => $id, 'hash' => str_repeat('d', 64),
+                        'read_at' => now('UTC')->toAtomString(), 'observed_at' => now('UTC')->subMinute()->toAtomString()],
+                        \App\Services\SeoCouncil\Platform12\Platform12SourceCheck::SOURCES[$missionId]),
+                    'source_gaps' => [], 'captured_at' => now('UTC')->toAtomString(),
+                    'expires_at' => now('UTC')->addMinutes(10)->toAtomString()];
+            }
+        };
+        $this->app->instance(\App\Services\SeoCouncil\Platform12\Platform12EvidenceReader::class, $reader);
+
+        return $reader;
     }
 
     private function manifest(): array
