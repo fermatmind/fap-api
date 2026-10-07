@@ -103,6 +103,69 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->assertJsonPath('message', 'admin_content_read_required');
     }
 
+    public function test_preview_resolves_bilingual_public_links_without_moving_anchors_or_leaking_private_urls(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        $article = $this->createDraftArticle();
+        $revision = $this->createWorkingRevision($article);
+        $revision->update(['content_md' => implode("\n\n", [
+            '[中文测评](/zh/tests/holland-career-interest-test-riasec?utm_source=blog&source_article=guide#intro)',
+            '[English model](/en/personality/big-five)',
+            '[Article](/zh/articles/guide)',
+            '[In-page](#intro)',
+            '[External](https://example.org/paper?q=research)',
+            '[Private preview](https://ops.fermatmind.com/ops/article-preview/40)',
+            '[Signed](https://example.org/paper?%74oken=private-preview-token)',
+            '[Unsafe](javascript:alert(1))',
+        ])]);
+        $before = $revision->fresh()->getAttributes();
+
+        $response = $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/article-preview/'.$article->id)
+            ->assertOk()
+            ->assertHeader('Referrer-Policy', 'no-referrer')
+            ->assertHeader('X-Robots-Tag', 'noindex, noarchive, nosnippet');
+        $document = new \DOMDocument;
+        @$document->loadHTML($response->getContent());
+        $xpath = new \DOMXPath($document);
+        $hrefs = [];
+        foreach ($xpath->query('//section[@class="body"]//a') as $link) {
+            $hrefs[$link->textContent] = $link->getAttribute('href');
+        }
+        $this->assertSame('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec?utm_source=blog&source_article=guide#intro', $hrefs['中文测评']);
+        $this->assertSame('https://fermatmind.com/en/personality/big-five', $hrefs['English model']);
+        $this->assertSame('https://fermatmind.com/zh/articles/guide', $hrefs['Article']);
+        $this->assertSame('#intro', $hrefs['In-page']);
+        $this->assertSame('https://example.org/paper?q=research', $hrefs['External']);
+        $this->assertSame('', $hrefs['Private preview']);
+        $this->assertSame('', $hrefs['Signed']);
+        $this->assertSame('', $hrefs['Unsafe']);
+        $response->assertDontSee('private-preview-token', false)->assertDontSee('<base', false);
+        $this->assertSame($before, $revision->fresh()->getAttributes());
+        $this->assertNull($article->fresh()->published_revision_id);
+        $this->assertStringContainsString('no-store', (string) $response->headers->get('Cache-Control'));
+    }
+
+    public function test_preview_fails_closed_for_an_invalid_frontend_origin(): void
+    {
+        config(['app.frontend_url' => 'https://user:password@fermatmind.com?token=secret']);
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $org = $this->createOrganization();
+        $article = $this->createDraftArticle();
+        $revision = $this->createWorkingRevision($article);
+        $revision->update(['content_md' => '[Test](/en/tests/big-five-personality-test-ocean)']);
+        $this->withSession($this->opsSession($admin, $org))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/article-preview/'.$article->id)
+            ->assertOk()
+            ->assertDontSee('href="/en/tests/', false)
+            ->assertDontSee('password', false)
+            ->assertDontSee('token=secret', false);
+    }
+
     public function test_preview_route_requires_authenticated_ops_session(): void
     {
         $article = $this->createDraftArticle();
