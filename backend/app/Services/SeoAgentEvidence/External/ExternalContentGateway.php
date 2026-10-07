@@ -282,6 +282,7 @@ final class ExternalContentGateway
         $parts = $this->validateUrl($url, $policy);
         $host = (string) $parts['host'];
         $externalReads = 0;
+        $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
         try {
             foreach (['terms', 'license'] as $kind) {
                 $policyUrl = $policy[$kind.'_url'] ?? null;
@@ -296,9 +297,9 @@ final class ExternalContentGateway
                     return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
                 }
                 $policyResponse = $this->policyEvidence[$policyUrl]
-                    ??= $this->requestPinned('GET', $policyUrl, $policy, 262144, $externalReads);
+                    ??= $this->requestPinned('GET', $policyUrl, $policy, $maxBytes, $externalReads);
                 if ($policyResponse['status'] !== 200 || $this->responseRedirected($policyResponse)
-                    || ! $this->responseWithinLimit($policyResponse, 262144)) {
+                    || ! $this->responseWithinLimit($policyResponse, $maxBytes)) {
                     return $this->hold(strtoupper($kind).'_POLICY_HELD', 'not_scanned', $externalReads);
                 }
                 $contentType = strtolower(trim(explode(';', (string) ($policyResponse['headers']['content-type'] ?? $policyResponse['headers']['Content-Type'] ?? ''))[0]));
@@ -328,7 +329,6 @@ final class ExternalContentGateway
             if (! $this->robotsDecision($host, (string) ($parts['path'] ?? '/'), $policy, $externalReads, $sourceId, $context, true)) {
                 return $this->hold('ROBOTS_HELD', 'not_scanned', $externalReads);
             }
-            $maxBytes = min(1048576, max(1, (int) ($policy['max_content_bytes'] ?? 524288)));
             $response = $this->requestPinned('GET', $url, $policy, $maxBytes, $externalReads);
             if ($response['status'] !== 200 || $this->responseRedirected($response)) {
                 return $this->hold($this->responseRedirected($response) ? 'REDIRECT_BLOCKED' : 'CONTENT_RESPONSE_HELD', 'not_scanned', $externalReads);

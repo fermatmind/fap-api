@@ -74,6 +74,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         if (! in_array($missionId, Platform12DailyMissionSet::IDS, true)) {
             throw new \InvalidArgumentException('DAILY_MISSION_UNKNOWN');
         }
+        // Read this shared natural observation before fixing the frozen time.
+        // A slow authority read must not pull a later completed runtime receipt
+        // into an earlier envelope. Keep failures and integrity checks intact.
+        try {
+            $runtimeWindow = $this->runtime->readWindow();
+        } catch (Throwable) {
+            $runtimeWindow = [];
+        }
         $at = CarbonImmutable::now('UTC');
         $input = ['evaluated_at' => $at->format('Y-m-d\TH:i:s\Z')];
         $sources = [];
@@ -98,7 +106,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         if ($missionId === Platform12DailyMissionSet::IDS[0]) {
             $gsc = $read('gsc_scheduled_receipt', fn (): array => $this->gsc($at));
             $input['gsc'] = $gsc === null ? null : array_diff_key($gsc, ['observed_at' => true, 'source_hash' => true]);
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeWindow));
             $api = $read('public_api_health', fn (): array => $this->publicApi($at));
             $input['runtime'] = [
                 'core_runtime_state' => ($probe['state'] ?? null) === 'complete' ? 'AVAILABLE' : 'UNAVAILABLE',
@@ -116,14 +124,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             $input['url_truth'] = $this->urlTruthEvidence($truth);
             $input['clustering'] = $read('issue_cluster', fn (): array => $this->clusters());
             $input['d1_observation'] = $read('d1_observation', fn (): array => $this->d1($at));
-            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at));
+            $probe = $read('scheduled_runtime_probe', fn (): array => $this->runtimeWindow($at, $runtimeWindow));
             $input['runtime_observation'] = ($probe['state'] ?? null) === 'complete'
                 ? ['availability' => 'AVAILABLE', 'observation_count' => $probe['slot_count']]
                 : ['availability' => 'UNAVAILABLE'];
             $input['sitemap_observation'] = $read('sitemap_observation', fn (): array => $this->sitemap());
         } else {
-            $negative = $read('private_route_negative_set', function () use ($at): array {
-                $window = $this->runtimeWindow($at);
+            $negative = $read('private_route_negative_set', function () use ($at, $runtimeWindow): array {
+                $window = $this->runtimeWindow($at, $runtimeWindow);
                 $negative = data_get($window, 'receipts.0.production_calibration.private_negative_set');
                 if (($window['fresh'] ?? false) !== true || ! is_array($negative)
                     || ($negative['checked'] ?? false) !== true) {
@@ -140,12 +148,11 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             if ($negative !== null) {
                 $input['private_routes'] = array_diff_key($negative, ['observed_at' => true]);
             }
-            $input['evidence_freshness'] = $read('evidence_expiry', function () use ($at): array {
-                $query = $this->connection()->table('seo_evidence_bundles');
-                $total = (clone $query)->count();
-                $expired = (clone $query)->where('expires_at', '<=', $at->format('Y-m-d H:i:s'))->count();
+            $selection = null;
+            $input['evidence_freshness'] = $read('evidence_expiry', function () use ($at, &$selection): array {
+                $selection = app(Platform12EvidenceSelection::class)->read($at, $this->releaseSha());
 
-                return ['total_count' => $total, 'fresh_count' => $total - $expired, 'expired_count' => $expired];
+                return $selection['freshness'];
             });
             $input['drift'] = $read('registry_version_vector', function (): array {
                 $expected = app(Platform12RuntimeControl::class)->frozenVersionVector();
@@ -158,7 +165,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
 
                 return $drift;
             });
-            $safety = $read('stored_evidence_safety', fn (): array => $this->evidenceSafety($at));
+            $safety = $read('stored_evidence_safety', fn (): array => $this->evidenceSafety($at, $selection['rows'] ?? null));
             if ($safety !== null) {
                 foreach (['query_security', 'injection', 'posture'] as $component) {
                     $input[$component] = $safety[$component];
@@ -206,6 +213,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
                 'observed_at' => $observed->toAtomString(), 'trigger_mode' => 'scheduled',
                 'mapping_state' => 'UNAVAILABLE', 'data_quality_state' => 'HOLD',
+                'collection_reason' => $row->status === 'running' ? ($observed->lt($now->subHours(2)) ? 'GSC_COLLECTION_TIMEOUT' : 'GSC_COLLECTION_RUNNING') : 'GSC_COLLECTION_FAILED',
                 'window_state' => 'INCOMPLETE', 'row_count' => (int) $row->rows_seen, 'data_max_date' => null];
         }
         if ($row === null || ! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
@@ -214,18 +222,58 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $receipt = json_decode($row->receipt_json, true, 32, JSON_THROW_ON_ERROR);
         $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
         if (($receipt['schema_version'] ?? null) !== 'seo.gsc_refresh_receipt.v2'
+            || ($receipt['receipt_hash'] ?? null) !== $this->hasher->hashWithout($receipt, 'receipt_hash')
+            || ($receipt['status'] ?? null) !== $row->status
+            || $finished->lt(CarbonImmutable::parse($row->run_started_at_utc, 'UTC'))
             || $finished->gt($now)) {
             throw new \RuntimeException('GSC_RECEIPT_STALE');
         }
 
+        $window = $this->gscWindow($receipt, CarbonImmutable::parse($row->run_started_at_utc, 'UTC'));
+
         return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
+            'collection_reason' => $finished->lt($now->subHours(26)) ? 'GSC_COLLECTION_MISSED' : $window,
+            'zero_query_complete' => data_get($receipt, 'quality_gate.zero_query_complete') === true && $window === 'COMPLETE',
             'observed_at' => $finished->format('Y-m-d\TH:i:s\Z'), 'source_hash' => $this->hasher->hash($receipt),
             'trigger_mode' => $receipt['trigger_mode'] ?? null,
             'mapping_state' => ($receipt['unmapped_rows'] ?? null) === 0 ? 'READY' : 'FAILED',
             'data_quality_state' => $row->status === 'success' && data_get($receipt, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
-            'window_state' => $row->status === 'success' && $finished->gte($now->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
+            'window_state' => $row->status === 'success' && $window === 'COMPLETE' && $finished->gte($now->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
             'row_count' => $receipt['rows_seen'] ?? null, 'data_max_date' => $receipt['data_max_date'] ?? null,
         ];
+    }
+
+    /** The same collection contract is used for current and frozen historical Ops reads. */
+    public function gscWindow(array $receipt, CarbonImmutable $started): string
+    {
+        $timezone = $receipt['reporting_timezone'] ?? null;
+        $days = $receipt['window_days'] ?? null;
+        $lag = $receipt['lag_days_requested'] ?? (int) config('seo_intel.gsc_backfill_lag_days', 3);
+        if ($timezone !== 'America/Los_Angeles'
+            || ! in_array($receipt['fetch_mode'] ?? null, ['full_window', 'incremental'], true)
+            || ! is_array($receipt['search_types'] ?? null) || ($receipt['search_types'] ?? []) === []
+            || array_diff($receipt['search_types'], \App\Services\SeoIntel\GscReadModelSyncService::SEARCH_TYPES) !== [] || ! in_array($days, [7, 28, 90], true)
+            || ! is_int($lag) || $lag < 0 || $lag > 30) {
+            return 'GSC_WINDOW_MISMATCH';
+        }
+        $end = $started->setTimezone($timezone)->subDays($lag)->toDateString();
+        $begin = $started->setTimezone($timezone)->subDays($lag + $days - 1)->toDateString();
+        $complete = $receipt['completeness'] ?? [];
+        if (($receipt['end_date'] ?? null) !== $end || ($receipt['requested_start_date'] ?? null) !== $begin
+            || ($complete['covered_start_date'] ?? null) !== ($receipt['start_date'] ?? null)
+            || ($complete['covered_end_date'] ?? null) !== $end
+            || ($receipt['start_date'] ?? '') < $begin || ($receipt['start_date'] ?? '') > $end
+            || ($receipt['fetch_mode'] ?? null) === 'full_window' && ($receipt['start_date'] ?? null) !== $begin) {
+            return 'GSC_WINDOW_MISMATCH';
+        }
+        if (($complete['pagination_complete'] ?? null) !== true || ($complete['truncated'] ?? null) !== false
+            || ($complete['search_types'] ?? null) !== ($receipt['search_types'] ?? null)
+            || ($complete['dimensions'] ?? null) !== ['query', 'page', 'device', 'country']
+            || ($receipt['pages_fetched'] ?? 0) < 1) {
+            return 'GSC_COLLECTION_TRUNCATED';
+        }
+
+        return 'COMPLETE';
     }
 
     private function clusters(): array
@@ -239,9 +287,9 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             'dedupe_unique_count' => (clone $query)->distinct()->count('issue_uid')];
     }
 
-    private function runtimeWindow(CarbonImmutable $at): array
+    private function runtimeWindow(CarbonImmutable $at, ?array $window = null): array
     {
-        $window = $this->runtime->readWindow($at->toAtomString());
+        $window ??= $this->runtime->readWindow($at->toAtomString());
         if (($window['receipts'] ?? []) === []) {
             throw new \RuntimeException('RUNTIME_OBSERVATION_MISSING');
         }
@@ -253,6 +301,14 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
                 || CarbonImmutable::parse($receipt['completed_at'])->gt($at)) {
                 throw new \RuntimeException('RUNTIME_RECEIPT_INVALID');
             }
+        }
+        // The query may have crossed the existing freshness boundary before
+        // the frozen capture time was fixed. Never extend the provider's TTL.
+        $window['fresh'] = ($window['fresh'] ?? false) === true
+            && CarbonImmutable::parse($window['receipts'][0]['completed_at'])
+                ->gte($at->subMinutes(ScheduledRuntimeProbeReceiptService::SLOT_MINUTES * 2));
+        if (! $window['fresh']) {
+            $window['state'] = \App\Services\SeoIntel\Runtime\UnifiedRuntimeProbeEvaluator::MEASUREMENT_HOLD;
         }
 
         return $window;
@@ -373,27 +429,43 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         return ['availability' => 'AVAILABLE', 'observation_count' => $count];
     }
 
-    private function evidenceSafety(CarbonImmutable $at): array
+    private function evidenceSafety(CarbonImmutable $at, ?\Illuminate\Support\Collection $selected = null): array
     {
         // Scan only the minimized Evidence authority, not raw GSC or user tables.
         // A bounded complete active set is required; overflow is an explicit HOLD.
-        $rows = $this->connection()->table('seo_evidence_bundles')
-            ->where('expires_at', '>', $at->format('Y-m-d H:i:s'))->limit(201)
-            ->get(['bundle_hash', 'bundle_json']);
+        $rows = $selected ?? $this->connection()->table('seo_evidence_bundles')->limit(201)
+            ->get(['bundle_id', 'bundle_version', 'bundle_hash', 'expires_at', 'bundle_json']);
         if ($rows->count() > 200) {
             throw new \RuntimeException('EVIDENCE_SCAN_BUDGET_HOLD');
         }
         $pii = false;
         $injection = false;
         $retention = true;
-        $valid = true;
+        $historyFaults = \Illuminate\Support\Facades\Cache::store(config('seo_council.runtime_cache_store', config('cache.default')))->get('seo:evidence:history:faults', []);
+        $valid = $historyFaults === [];
         foreach ($rows as $row) {
             if (! is_string($row->bundle_json) || strlen($row->bundle_json) > 131072) {
-                throw new \RuntimeException('EVIDENCE_PAYLOAD_BUDGET_HOLD');
+                $valid = false;
+
+                continue;
             }
-            $bundle = json_decode($row->bundle_json, true, 64, JSON_THROW_ON_ERROR);
-            $verdict = app(SeoEvidenceBundleVerifier::class)->verify($bundle);
-            $valid = $valid && $verdict['valid'] && ($bundle['bundle_hash'] ?? null) === $row->bundle_hash;
+            try {
+                $bundle = json_decode($row->bundle_json, true, 64, JSON_THROW_ON_ERROR);
+                $verdict = app(SeoEvidenceBundleVerifier::class)->verify($bundle);
+            } catch (Throwable) {
+                $valid = false;
+
+                continue;
+            }
+            try {
+                $rowValid = ($bundle['bundle_id'] ?? null) === $row->bundle_id
+                    && ($bundle['bundle_version'] ?? null) === (int) $row->bundle_version
+                    && CarbonImmutable::parse($bundle['captured_at'])->lessThanOrEqualTo($at)
+                    && CarbonImmutable::parse($bundle['expires_at'])->equalTo(CarbonImmutable::parse($row->expires_at));
+            } catch (Throwable) {
+                $rowValid = false;
+            }
+            $valid = $valid && $rowValid && $verdict['valid'] && ($bundle['bundle_hash'] ?? null) === $row->bundle_hash;
             $pii = $pii || $verdict['code'] === 'PRIVATE_DATA_PRESENT';
             $injection = $injection || $verdict['code'] === 'INJECTION_BLOCKED';
             $retention = $retention && $verdict['code'] !== 'POLICY_BINDING_INVALID';

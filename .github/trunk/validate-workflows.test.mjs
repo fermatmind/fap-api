@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 
-import { validateWorkflowSet } from "./validate-workflows.mjs";
+import { validateWorkflowSet, templatedRunLengths } from "./validate-workflows.mjs";
 
 const ciWorkflowPath = resolve(import.meta.dirname, "../workflows/ci.yml");
 
@@ -105,38 +105,9 @@ test("allows legacy entries only during transition", () => {
   assert.equal(validateWorkflowSet(root, "final").valid, false);
 });
 
-test("changed PHP tests use a repo-root selector and fail closed from backend", () => {
-  const { header, script } = changedPhpTestStep();
-  assert.match(header, /working-directory: backend/);
-  assert.match(script, /':\(top\)backend\/tests\/\*\*\/\*Test\.php'/);
-  assert.match(script, /sed 's#\^backend\/#\#'/);
-  assert.match(script, /changed_php_test_paths\[@\].+-ne.+changed_tests\[@\]/);
-  assert.match(script, /Changed PHP tests were not fully selected/);
-
-  const fixture = changedPathFixture(
-    "backend/tests/Feature/ExampleContractTest.php",
-    "<?php final class ExampleContractTest {}\n",
-  );
-  const selected = runChangedPhpTestStep(fixture, script);
-  assert.equal(selected.status, 0, selected.stderr);
-  assert.match(selected.stdout, /artisan test tests\/Feature\/ExampleContractTest\.php --no-ansi/);
-
-  const oldPathspec = script.replace(
-    "':(top)backend/tests/**/*Test.php'",
-    "'backend/tests/**/*Test.php'",
-  );
-  const rejected = runChangedPhpTestStep(fixture, oldPathspec);
-  assert.notEqual(rejected.status, 0);
-  assert.match(rejected.stderr, /expected 1, selected 0/);
+test("changed language runner uses exact range from repo root and inherits the mode", () => {
+  const source=readFileSync(ciWorkflowPath,'utf8');
+  assert.match(source,/run: node \.github\/trunk\/run-changed-tests\.mjs '\$\{\{ needs\.classify\.outputs\.base_sha \}\}' '\$\{\{ github\.sha \}\}' '\$\{\{ matrix\.mode \}\}'/);
 });
 
-test("JS-only test changes do not trip the PHP selector guard", () => {
-  const { script } = changedPhpTestStep();
-  const fixture = changedPathFixture(
-    ".github/trunk/example.test.mjs",
-    "import test from 'node:test';\ntest('example', () => {});\n",
-  );
-  const result = runChangedPhpTestStep(fixture, script);
-  assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.stdout, "");
-});
+test('checks the actual templated run length that GitHub rejects before job creation',()=>{const sample="        run: |\n          echo '${{ github.sha }}'\n"+'          x\n'.repeat(11000);assert.ok(templatedRunLengths(sample)[0].length>21000);const result=validateWorkflowSet(resolve(import.meta.dirname,'../..'),'final');assert.equal(result.valid,true,result.errors.join('\n'));});

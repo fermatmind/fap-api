@@ -644,6 +644,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/foundation/giving-records/{recordCode}', [DailyGivingRecordController::class, 'show']);
     Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
         Route::get('/articles', [ArticleController::class, 'index']);
+        Route::get('/articles-feed', [ArticleController::class, 'feed']);
         Route::get('/articles/{slug}', [ArticleController::class, 'show']);
         Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
         Route::get('/research', [ResearchReportController::class, 'index']);

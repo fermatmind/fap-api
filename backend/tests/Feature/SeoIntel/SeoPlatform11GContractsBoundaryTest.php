@@ -7,6 +7,7 @@ namespace Tests\Feature\SeoIntel;
 use App\Console\Commands\SeoCompetitiveReleasePrepareCommand;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceBoundaryGuard;
 use App\Services\SeoAgentEvidence\Competitive\CompetitiveEvidenceContractRegistry;
+use App\Services\SeoAgentEvidence\Competitive\MeasurementSnapshotVerifier;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
 use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceContractRegistry;
 use ReflectionMethod;
@@ -15,6 +16,29 @@ use Tests\TestCase;
 
 final class SeoPlatform11GContractsBoundaryTest extends TestCase
 {
+    public function test_release_prepare_plans_cro_refresh_with_the_verifier_mode_identity(): void
+    {
+        $command = app(SeoCompetitiveReleasePrepareCommand::class);
+        $plan = new ReflectionMethod($command, 'refreshPlan');
+        $verifier = app(MeasurementSnapshotVerifier::class);
+
+        foreach (['CRO_READMODEL_UNHEALTHY', 'CRO_WINDOW_INCOMPLETE'] as $reason) {
+            $result = $plan->invoke($command, [
+                'search_measurement' => ['hold_reason' => 'NONE'],
+                'cro_measurement' => ['hold_reason' => $reason],
+            ], $verifier, 'staging');
+            $this->assertNull($result['hold_reason'], $reason);
+            $this->assertSame(['gsc' => 'reused', 'cro' => 'full_refresh'], $result['actions']);
+        }
+
+        $held = $plan->invoke($command, [
+            'search_measurement' => ['hold_reason' => 'NONE'],
+            'cro_measurement' => ['hold_reason' => 'CRO_MAPPING_FAILED'],
+        ], $verifier, 'staging');
+        $this->assertSame('CRO_MAPPING_FAILED', $held['hold_reason']);
+        $this->assertSame('not_run', $held['actions']['cro']);
+    }
+
     public function test_release_prepare_uses_source_specific_refresh_reasons_and_safe_output_validation(): void
     {
         $command = app(SeoCompetitiveReleasePrepareCommand::class);

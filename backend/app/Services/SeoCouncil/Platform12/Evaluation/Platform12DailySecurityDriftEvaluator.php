@@ -136,7 +136,41 @@ final readonly class Platform12DailySecurityDriftEvaluator
             throw new \InvalidArgumentException('EVIDENCE_FRESHNESS_INVALID');
         }
 
+        $selection = [];
+        // Legacy frozen records remain replayable; every live capture now supplies
+        // the current reference and bounded historical replacement basis.
+        if (array_key_exists('current_reference_state', $source)) {
+            $stored = $this->count($source, 'stored_count');
+            $superseded = $this->count($source, 'superseded_count');
+            $hashes = $source['superseded_bundle_hashes'] ?? null;
+            $exits = $hashes === '' ? [] : (is_string($hashes) ? explode(',', $hashes) : [null]);
+            if ($stored !== $total + $superseded
+                || count($exits) !== $superseded || count(array_unique($exits)) !== count($exits)
+                || ! in_array($source['current_reference_state'], ['VALID', 'UNAVAILABLE'], true)
+                || ($source['historical_exit_reason'] ?? null) !== ($superseded === 0 ? 'NONE' : \App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection::EXIT_REASON)
+                || ($source['current_reference_state'] === 'UNAVAILABLE' && $superseded !== 0)) {
+                throw new \InvalidArgumentException('EVIDENCE_SELECTION_INVALID');
+            }
+            foreach (['selection_hash', ...($source['current_reference_state'] === 'VALID' ? ['current_receipt_hash', 'current_bundle_hash'] : [])] as $key) {
+                if (! is_string($source[$key] ?? null) || preg_match('/^[a-f0-9]{64}$/D', $source[$key]) !== 1) {
+                    throw new \InvalidArgumentException('EVIDENCE_SELECTION_INVALID');
+                }
+            }
+            foreach ($exits as $hash) {
+                if (! is_string($hash) || preg_match('/^[a-f0-9]{64}$/D', $hash) !== 1) {
+                    throw new \InvalidArgumentException('EVIDENCE_SELECTION_INVALID');
+                }
+            }
+            if ($source['current_reference_state'] === 'VALID' && ($total === 0
+                || ! is_string($source['production_sha'] ?? null)
+                || preg_match('/^[a-f0-9]{40}$/D', $source['production_sha']) !== 1)) {
+                throw new \InvalidArgumentException('EVIDENCE_SELECTION_INVALID');
+            }
+            $selection = array_intersect_key($source, array_flip(['current_reference_reason', 'historical_scan_state', 'stored_count', 'superseded_count', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash']));
+        }
+
         return [
+            ...$selection,
             'total_count' => $total,
             'fresh_count' => $fresh,
             'expired_count' => $expired,
@@ -206,6 +240,9 @@ final readonly class Platform12DailySecurityDriftEvaluator
         }
         if ($query['key_version_state'] !== 'CURRENT' || in_array('DRIFT', $drift, true) || in_array('UNAVAILABLE', $drift, true)) {
             $hold[] = 'AUTHORITY_HASH_DRIFT_HOLD';
+        }
+        if (isset($freshness['current_reference_state']) && $freshness['current_reference_state'] !== 'VALID') {
+            $hold[] = 'CURRENT_EVIDENCE_REFERENCE_HOLD';
         }
         if ($freshness['expired_count'] > 0) {
             $hold[] = 'STALE_EVIDENCE_HOLD';

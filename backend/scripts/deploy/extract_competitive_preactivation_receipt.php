@@ -24,6 +24,10 @@ if (($argv[1] ?? null) === '--diagnose') {
     fwrite(STDERR, "competitive_prepare_status=HOLD\n");
     fwrite(STDERR, 'competitive_prepare_stage='.$stage."\n");
     fwrite(STDERR, 'competitive_prepare_reason='.$reason."\n");
+    $category = $payload['measurement_failure_category'] ?? 'none';
+    if (in_array($category, ['permission', 'transport', 'schema', 'storage', 'unexpected', 'readmodel_state', 'scope_missing', 'none'], true)) {
+        fwrite(STDERR, 'competitive_prepare_failure_category='.$category."\n");
+    }
     exit(1);
 }
 

@@ -388,7 +388,12 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $this->seedPreviousSuccess();
         Http::fake(['*' => Http::response(['rows' => []], 200)]);
         $empty = app(GscReadModelSyncService::class)->sync(7, ['web']);
-        $this->assertSame('gsc_empty_response', $empty['issue']);
+        $this->assertSame('success', $empty['status']);
+        $this->assertSame(0, $empty['rows_seen']);
+        $this->assertTrue($empty['quality_gate']['zero_query_complete']);
+        $this->assertTrue($empty['completeness']['pagination_complete']);
+        $this->assertFalse($empty['completeness']['truncated']);
+        $this->assertNull($empty['data_max_date']);
     }
 
     #[Test]

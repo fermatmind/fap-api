@@ -26,6 +26,19 @@ final class SeoPlatform11BRetentionTest extends TestCase
         (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
     }
 
+    public function test_exact_collection_rerun_is_idempotent_but_cannot_hide_corrupt_stored_bytes(): void
+    {
+        config()->set('seo_agent_evidence.bundle_write_enabled', true);
+        $store = app(SeoEvidenceBundleStore::class);
+        $bundle = $this->evidenceBundle();
+        $store->create($bundle);
+        $store->create($bundle);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->update(['bundle_json' => '{}']);
+        $this->expectExceptionMessage('SEO_EVIDENCE_READBACK_INVALID');
+        $store->create($bundle);
+    }
+
     public function test_expand_migration_avoids_mysql_implicit_timestamp_defaults(): void
     {
         $migration = (string) file_get_contents(database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'));

@@ -65,6 +65,9 @@ final class PublicArticleAttributionResolver
             ->whereKey($articleId)
             ->where('status', 'published')
             ->where('is_public', true)
+            ->whereNull('deleted_at')
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
             ->where(static function ($query): void {
                 $query->whereNull('lifecycle_state')
                     ->orWhereNotIn('lifecycle_state', [
@@ -110,6 +113,9 @@ final class PublicArticleAttributionResolver
             ->where('locale', $normalizedLocale)
             ->where('status', 'published')
             ->where('is_public', true)
+            ->whereNull('deleted_at')
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
             ->where(static function ($query): void {
                 $query->whereNull('lifecycle_state')
                     ->orWhereNotIn('lifecycle_state', [

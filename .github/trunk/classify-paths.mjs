@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { inRuntimeScope } from './seo-platform-12a08-activation.mjs';
+import { inRuntimeScope, selectedScopes } from './seo-platform-12a08-activation.mjs';
 import { readFileSync } from "node:fs";
 
 export const CATEGORIES = [
@@ -23,8 +23,6 @@ export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
   "backend/app/Domain/Career/Display/CareerAuthoringMigration.php",
   "backend/docs/career/contracts/career-authoring-structure.v1.json",
   "backend/scripts/career/migrate_authoring_structure.php",
-  ".github/workflows/ci.yml",
-  ".github/workflows/deploy.yml",
   "backend/content_assets/career/career_current_authority_release.v1.json",
   "backend/content_assets/career/current/",
   "backend/app/Domain/Career/Compilation/CareerContentV3Compiler.php",
@@ -115,6 +113,11 @@ export const SEO_OPS_PRESENTATION_PATHS = new Set([
   "backend/lang/zh_CN/seo-agent-roles.php",
 ]);
 
+const SEO_OPS_READ_PROJECTION_PATHS = new Set([
+  'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php',
+  'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php',
+]);
+
 const isPresentationCompanion = (path) =>
   /^backend\/tests\//.test(path)
   || /^(?:docs\/|backend\/docs\/).+\.md$/.test(path)
@@ -131,7 +134,7 @@ const isSeoCouncilOrchestrationBoundary = (path) =>
   || path === "backend/app/Services/Ops/OpsAlertService.php"
   || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
-  || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
+  || (SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path) && !['deploy.php', '.github/workflows/ci.yml', '.github/workflows/deploy.yml'].includes(path));
 
 const isSeoCompetitiveEvidenceBoundary = (path) =>
   /^backend\/(?:app\/Services\/SeoAgentEvidence\/(?:Competitive|External)\/|app\/Services\/SeoCouncil\/(?:Competitive|Platform12)\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|app\/Providers\/(?:SeoAgentEvidence|SeoCouncil)ServiceProvider\.php$|resources\/seo-agent\/(?:evidence\/competitive|council\/platform12)\/|docs\/seo\/generated\/seo-(?:agent-evidence|council)-contract-manifest\.v[345]\.json$|tests\/Feature\/SeoIntel\/SeoPlatform11G)/.test(path)
@@ -140,7 +143,6 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === "backend/scripts/seo/export_seo_agent_evidence_contracts.php"
   || path === "backend/scripts/seo/export_seo_council_contracts.php"
   || /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_(?:create|expand)_seo_council_[a-z0-9_]+\.php$/.test(path)
-  || path === "deploy.php"
   || path === ".github/workflows/ci.yml"
   || path === ".github/workflows/deploy.yml"
   || path === ".github/trunk/classify-paths.mjs"
@@ -151,6 +153,11 @@ export const SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE = "DEFERRED_NON_BLOCKING";
 
 const isDeferredCompetitiveCouncilBoundary = (path) =>
   path.startsWith("backend/app/Services/SeoCouncil/Competitive/");
+
+// This read-only loader has direct measurement and A08 consumers. Its focused
+// tests are selected by the changed-test runner; other Council boundaries stay full.
+const isFocusedCouncilBoundary = (path) => isDeferredCompetitiveCouncilBoundary(path)
+  || path === "backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php";
 
 const isCareerDataRecoveryBoundary = (path) =>
   path === "backend/content_assets/career/career_data_recovery.v1.json"
@@ -166,25 +173,31 @@ export function classifyPaths(inputPaths) {
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const publisherRequired = paths.some(isCareerPublisherBoundary);
   const seoCompetitiveEvidenceAffected = paths.some(isSeoCompetitiveEvidenceBoundary);
-  const seoCompetitiveEvidence = SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE"
-    && seoCompetitiveEvidenceAffected;
+  // Evidence software is tested offline. Business collection is owned by natural operations.
+  const seoCompetitiveEvidence = false;
   const opsPresentation = paths.some((path) => SEO_OPS_PRESENTATION_PATHS.has(path));
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
   );
-  const a08GateOnly = paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
+  const opsReadProjection = paths.some(path => SEO_OPS_READ_PROJECTION_PATHS.has(path))
+    && !paths.some(path => SEO_OPS_PRESENTATION_PATHS.has(path) && !SEO_OPS_READ_PROJECTION_PATHS.has(path))
+    && !paths.some(path => path.startsWith('backend/app/Services/SeoCouncil/Platform12/Operations/') && !SEO_OPS_READ_PROJECTION_PATHS.has(path));
+  const a08GateOnly = !paths.includes(".github/trunk/seo-platform-12a08-activation.mjs") && paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
     /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   // Scope the Council side of a mixed release separately from content/cache
-  // operations. A08 consumes existing observations and must never start 11F sync.
+  // operations. Ordinary A08 consumes existing observations; a required M3
+  // collector prepares its measurement dependencies outside full Council closeout.
   const a08ReadonlyWiring = paths.some(path => /Platform12|seo[_-].*a08/.test(path))
     && paths.filter(isSeoCouncilOrchestrationBoundary).every(path =>
-      /^backend\/app\/Services\/SeoCouncil\/Platform12\/(?:Platform12(?:ActivationEvidence|RuntimeControl|ProductionEvidenceReader|SourceCheck|DailyScheduler|DailyMissionSet|FrozenMission|DailyEvaluator|EvidenceReader|SchedulerStore|SchedulerVersionVector|ReadOnlyRuntimeGate)\.php$|Evaluation\/Platform12Daily(?:GscCoreRuntime|UrlTruth|SecurityDrift)Evaluator\.php$|Notification\/|Operations\/)/.test(path)
+      /^backend\/app\/Services\/SeoCouncil\/Platform12\/(?:Platform12(?:ActivationEvidence|RuntimeControl|ProductionEvidenceReader|EvidenceSelection|SourceCheck|DailyScheduler|DailyMissionSet|FrozenMission|DailyEvaluator|EvidenceReader|SchedulerStore|SchedulerVersionVector|ReadOnlyRuntimeGate)\.php$|Evaluation\/Platform12Daily(?:GscCoreRuntime|UrlTruth|SecurityDrift)Evaluator\.php$|Notification\/|Operations\/)/.test(path)
       || /^backend\/app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command\.php$/.test(path)
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const operations = {
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
+    a08_scopes: selectedScopes(paths),
+    a08_focused: paths.some(inRuntimeScope) && (!opsPresentation || opsReadProjection) && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isFocusedCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_content_only: false,
@@ -231,16 +244,20 @@ export function classifyPaths(inputPaths) {
     seo_agent_policy_gateway: opsPresentation || paths.some((path) =>
       /^backend\/(?:app\/Services\/SeoAgentPolicyGateway\/|app\/Console\/Commands\/SeoPolicyGatewayCloseout\.php$|resources\/seo-agent\/policy-gateway\/|docs\/(?:seo\/generated\/seo-policy-gateway-contract-manifest\.v1\.json$|contracts\/openapi\.snapshot\.json$)|scripts\/seo\/export_seo_policy_gateway_contracts\.php$|tests\/Feature\/SeoIntel\/SeoPlatform11C|tests\/Feature\/Ops\/SeoUxImpl06AgentCouncilTest\.php$|app\/Filament\/Ops\/Support\/SeoAgentCouncilUiContract\.php$|resources\/views\/filament\/ops\/components\/ops-agent-council-workspace\.blade\.php$|app\/Http\/Controllers\/API\/V0_5\/Ops\/SeoIntel\/SeoIntelDashboardController\.php$|routes\/api\.php$)/.test(path)
     ),
-    seo_council_orchestration: opsPresentation || paths.some((path) =>
+    seo_council_orchestration: !a08ReadonlyWiring && (opsPresentation || paths.some((path) =>
       isSeoCouncilOrchestrationBoundary(path)
       && !(SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "DEFERRED_NON_BLOCKING"
         && isDeferredCompetitiveCouncilBoundary(path))
-    ) || seoCompetitiveEvidence,
+    ) || seoCompetitiveEvidence),
+    seo_competitive_checks: seoCompetitiveEvidenceAffected,
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
     seo_competitive_evidence_progress: "COMPLETE",
-    seo_competitive_evidence_blocks_delivery: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE",
+    seo_competitive_evidence_blocks_delivery: false,
   };
+  // One mode drives runner, artifact and exact-SHA receipt consumers.
+  // Focused A08 supplies scoped software proof, never a full Council closeout.
+  if (operations.a08_focused) operations.seo_council_orchestration = false;
   let testsChanged = false;
 
   for (const path of paths) {
@@ -252,10 +269,12 @@ export function classifyPaths(inputPaths) {
       /^\.agents\//,
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
+      /(?:^|\/)(?:test_[^/]+|[^/]+_test)\.(?:py|sh)$/,
     ]);
     const testPath = matches(path, [
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
+      /(?:^|\/)(?:test_[^/]+|[^/]+_test)\.(?:py|sh)$/,
     ]);
     const seoCouncilControlPlane = SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path)
       || SEO_CLASSIFIER_CONTROL_PLANE_PATHS.has(path);
@@ -296,7 +315,8 @@ export function classifyPaths(inputPaths) {
       "backend/app/Domain/Career/Display/CareerContentV3PageUpdater.php",
       "backend/app/Services/Career/CareerIndustryDirectoryReadModel.php",
     ].includes(path);
-    const seo = careerBodyEligibility || (!careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
+    const evidenceSoftware = /^backend\/(?:app\/Services\/SeoAgentEvidence\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|scripts\/deploy\/seo_a08_[^/]+\.php$)/.test(path);
+    const seo = careerBodyEligibility || (!evidenceSoftware && !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,
@@ -319,7 +339,7 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (path.startsWith(".agents/") || (docsOnly && !seoCouncilControlPlane)) {
+    if (path.startsWith(".agents/") || (docsOnly && (!seoCouncilControlPlane || testPath))) {
       // Repository Skills are instructions and static helpers. Domain words in
       // their names or prose must not promote a rules-only change to runtime.
       // Documentation paths remain evidence even when their filenames contain

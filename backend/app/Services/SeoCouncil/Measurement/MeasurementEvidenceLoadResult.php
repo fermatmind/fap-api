@@ -47,6 +47,7 @@ final class MeasurementEvidenceLoadResult
         private readonly string $freshnessState,
         private readonly string $holdReason,
         private readonly string $authorityRevision,
+        private readonly ?string $failureCategory = null,
     ) {}
 
     /** @param list<array<string, mixed>> $bundles */
@@ -57,6 +58,7 @@ final class MeasurementEvidenceLoadResult
         string $freshnessState,
         string $holdReason,
         ?string $authorityRevision = null,
+        ?string $failureCategory = null,
     ): self {
         $modeId = in_array($modeId, ['search_measurement', 'commercial_funnel_cro'], true)
             ? $modeId
@@ -92,7 +94,7 @@ final class MeasurementEvidenceLoadResult
                 ? $authorityRevision
                 : hash('sha256', $modeId.'|'.$holdReason);
 
-        return new self($modeId, $bundles, $sourceState, $freshnessState, $holdReason, $authorityRevision);
+        return new self($modeId, $bundles, $sourceState, $freshnessState, $holdReason, $authorityRevision, in_array($failureCategory, ['permission', 'transport', 'schema', 'storage', 'unexpected', 'readmodel_state', 'scope_missing'], true) ? $failureCategory : null);
     }
 
     /** @return list<array<string, mixed>> */
@@ -116,6 +118,7 @@ final class MeasurementEvidenceLoadResult
             'hold_reason' => $this->holdReason,
             'authority_revision' => $this->authorityRevision,
             'bundle_present' => count($this->bundles) === 1,
+            ...($this->failureCategory === null ? [] : ['failure_category' => $this->failureCategory]),
         ];
     }
 }

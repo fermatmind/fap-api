@@ -1,0 +1,73 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {changedTestPlan,runChangedTests} from './run-changed-tests.mjs';
+test('changed PHP JS Python Shell execute real runner commands; removed and unsupported are explicit',()=>{
+ const p=changedTestPlan(['backend/tests/Feature/AmbtiTest.php','.github/trunk/x.test.mjs','backend/tests/Sre/test_a.py','backend/tests/Sre/test_a.sh'].map(path=>({status:'A',path})).concat([{status:'D',path:'backend/tests/Feature/RemovedTest.php'}]));
+ assert.equal(p.removed.length,1);const calls=[];
+ const old=process.env.FEATURE_CONTENT_STORE_V2;process.env.FEATURE_CONTENT_STORE_V2='true';
+ try{runChangedTests(p,{run:(cmd,args,options)=>{calls.push({cmd,args,env:options.env.FEATURE_CONTENT_STORE_V2});return {status:0};}});}finally{if(old===undefined)delete process.env.FEATURE_CONTENT_STORE_V2;else process.env.FEATURE_CONTENT_STORE_V2=old;}
+ assert.deepEqual(calls.map(c=>c.cmd),['node','python3','bash','php']);assert.ok(calls.every(c=>c.env==='true'));
+ assert.throws(()=>changedTestPlan([{status:'A',path:'backend/tests/Sre/test.rs'}]),/Unsupported/);
+ assert.throws(()=>runChangedTests(p,{run:()=>({status:1})}),/failed/);
+});
+
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync,readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+test('language fixtures really execute assertions and propagate failures',()=>{
+ const root=mkdtempSync(tmpdir()+'/changed-runners-');
+ try {
+  mkdirSync(root+'/tests');
+  writeFileSync(root+'/tests/x.test.mjs',`import test from 'node:test';import assert from 'node:assert/strict';import {writeFileSync} from 'node:fs';test('env',()=>{assert.equal(process.env.FEATURE_CONTENT_STORE_V2,'true');writeFileSync('tests/node-executed','executed');});`);
+  writeFileSync(root+'/tests/test_x.py',`import unittest
+class TestEnvironment(unittest.TestCase):
+ def test_assertion(self): self.assertEqual(2+2,4)
+`);
+  writeFileSync(root+'/tests/test_x.sh',`set -euo pipefail
+test "$FEATURE_CONTENT_STORE_V2" = true
+printf executed > tests/shell-executed
+`);
+  const plan=changedTestPlan(['tests/x.test.mjs','tests/test_x.py','tests/test_x.sh'].map(path=>({path,status:'A'})));
+  const old=process.env.FEATURE_CONTENT_STORE_V2;process.env.FEATURE_CONTENT_STORE_V2='true';
+  try{assert.equal(runChangedTests(plan,{root}).length,3);}finally{if(old===undefined)delete process.env.FEATURE_CONTENT_STORE_V2;else process.env.FEATURE_CONTENT_STORE_V2=old;}
+  assert.equal(readFileSync(root+'/tests/node-executed','utf8'),'executed');
+  assert.equal(readFileSync(root+'/tests/shell-executed','utf8'),'executed');
+  writeFileSync(root+'/tests/test_x.py','value=42');
+  assert.throws(()=>runChangedTests({...plan,node:[],shell:[]},{root}),/execution failed/);
+  writeFileSync(root+'/tests/test_x.sh','exit 4');
+  assert.throws(()=>runChangedTests({...plan,node:[],python:[]},{root}),/execution failed/);
+ }finally{rmSync(root,{recursive:true,force:true});}
+});
+
+test('measurement loader input invokes its real shared PHP consumers without full closeout',()=>{
+ const plan=changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php'}]);
+ const calls=[];
+ runChangedTests(plan,{run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+ assert.equal(calls.length,1);assert.equal(calls[0].cmd,'php');
+ for(const name of ['EvidenceSource','EvidenceDiagnosticReason','EvidencePrivacy','SearchMeasurement','Orchestrator'])
+  assert.ok(calls[0].args.includes(`tests/Feature/SeoIntel/SeoPlatform11F${name}Test.php`),name);
+ assert.deepEqual(changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Measurement/MeasurementCoordinator.php'}]).php,[]);
+ assert.equal(calls[0].args.includes('seo:council-closeout'),false);
+});
+
+test('frozen Ops projection input really invokes UI, privacy, RBAC and historical evidence consumers',()=>{
+ const plan=changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php'}]);
+ const calls=[];runChangedTests(plan,{run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+ assert.equal(calls.length,1);assert.equal(calls[0].cmd,'php');assert.equal(plan.php.length,4);
+ assert.ok(calls[0].args.includes('tests/Feature/SeoIntel/SeoPlatform12MissionEvidenceReadTest.php'));
+ assert.ok(calls[0].args.includes('tests/Feature/Ops/SeoOperationsPageTest.php'));
+ assert.equal(calls[0].args.includes('seo:council-closeout'),false);
+});
+
+test('braces install and build inputs select the unchanged fixture suite and real Node runner',()=>{
+ const inputs=['backend/package.json','backend/package-lock.json','backend/patches/braces@3.0.3.patch','backend/scripts/dependencies/apply-braces-depth-patch.mjs','backend/vite.config.js','backend/resources/css/filament/ops/tailwind.config.js'];
+ for(const path of inputs){
+  const plan=changedTestPlan([{status:'M',path}]);
+  assert.deepEqual(plan.node,['backend/tests/Node/braces-depth-patch.test.mjs'],path);
+  assert.deepEqual(plan.php,[]);
+  const calls=[];runChangedTests(plan,{run:(cmd,args,options)=>{calls.push({cmd,args,cwd:options.cwd});return {status:0};}});
+  assert.deepEqual(calls,[{cmd:'node',args:['--test','backend/tests/Node/braces-depth-patch.test.mjs'],cwd:'.'}]);
+ }
+ assert.deepEqual(changedTestPlan([...inputs,'backend/tests/Node/braces-depth-patch.test.mjs'].map(path=>({status:'M',path}))).node,['backend/tests/Node/braces-depth-patch.test.mjs']);
+ for(const path of ['package.json','pnpm-lock.yaml','backend/app/Services/Example.php'])
+  assert.deepEqual(changedTestPlan([{status:'M',path}],{vitest:true}).node,[]);
+ assert.deepEqual(changedTestPlan([{status:'D',path:inputs[2]}]).node,['backend/tests/Node/braces-depth-patch.test.mjs']);
+});

@@ -49,3 +49,20 @@ System Health separately shows public scoped readiness, pause, selection, accept
 ## Next task
 
 Mission 1 independent read-only source wiring acceptance and trial operation. Supplement only its real source evidence, then explicitly select Mission 1 when authorized. Missions 2 and 3 remain closed. This software release does not declare A08 complete.
+
+
+### M3 当前证据与历史替代
+
+M3 当前集合绑定实际生产 REVISION 的 `seo.competitive_evidence_closeout.v3` CLOSED 回执、通过 smoke 的激活观察、固定 Big Five cohort/source policy、当前公开 manifest 和精确存储 bundle。当前回执缺失、损坏、错误 SHA、bundle 缺失/歧义、hash/expiry 不一致或真实到期均 HOLD。
+
+只有新的有效且未过期生产 bundle，才能替代同生产环境、tests/en、competitive_evidence、同固定 cohort/source set、完整校验通过且捕获更早的历史记录。原行、hash、captured_at、expires_at 均不改动；自然冻结证据及正式结果保留退出 bundle hashes、替代 bundle/receipt hash、生产 SHA 和 `SUPERSEDED_BY_VERIFIED_PRODUCTION_RECEIPT`。其他范围、损坏或替代依据不足的记录继续参加新鲜度与安全检查；已知安全故障仍 DENY。
+
+M3 生命周期代码发布复用现有 classifier → CI 11G 聚焦验证 → production competitive-release-prepare → smoke → finalize 路径，来源由固定 registry 限制。其测量依赖未就绪时保持 HOLD，不补零、不改 TTL、不开放 Council/model/tool/通知业务执行。A08 仍走 scoped/readonly 分支；共享依赖变化仅触发其必要 M1/M2 聚焦检查和独立端到端复验，不重跑完整 A08。其他生产发布未提供本 SHA 的有效回执时，当前检查保持 HOLD。
+
+M3 必需的 staging 依赖准备复用现有 inactive measurement candidate、固定 90 天/web 的只读 GSC 同步和 org 0 CRO readmodel 刷新。这些步骤及其严格 readiness/产物检查随 competitive_required 执行；full Council closeout 仍只由原 runtime_closeout 条件执行。缺省的同步配置使用该路径原有的 90/web 固定契约，显式错误配置仍拒绝；不修改云权限、采集器、来源 registry 或普通运行时写开关。
+
+固定来源 terms/license 自动复验与正文抓取遵守同一份已审核 source policy 的 `max_content_bytes`（仍受现有 1 MiB 全局响应上限限制）；robots 保持独立的 64 KiB 上限。移除复验路径独有的硬编码 256 KiB，避免在已批准的 512 KiB 来源预算内错误 HOLD。未改 source policy/hash/TTL、固定 URL、TLS/redirect、robots 和语义审查；超出来源预算或全局上限仍 HOLD，原响应不保存。
+
+共享自然运行时观测在固定冻结时间前读取一次，M1/M2/M3 使用该内存快照。慢 authority 读取期间的新自然回执不混入更早的冻结请求；缺失、损坏、实际未来完成时间及失败窗口仍失败关闭，不补跑或改写历史。生产证据 reader 的变更也沿用现有固定来源采集，以生成绑定新生产 SHA 的真实回执。
+
+运行时快照在冻结时间处再次沿原 `SLOT_MINUTES * 2`（20 分钟）上限核对新鲜度；读取期间跨过原到期边界的观测保持 `MEASUREMENT_HOLD`。该检查只能收紧读取时的 `fresh` 结果，不延长 TTL，也不把失败窗口改为成功。

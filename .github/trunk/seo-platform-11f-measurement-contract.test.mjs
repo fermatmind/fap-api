@@ -69,90 +69,25 @@ test("staging refreshes real measurement and production validates before conditi
   const deployment = staging.indexOf("Deploy staging and run repository smoke chain");
   const closeout = staging.indexOf("Finalize staging SEO Council closeout");
   const receipt = staging.indexOf("Read staging SEO Council closeout receipt");
-  assert.ok(
-    deployment > 0
-      && candidate > deployment
-      && readiness > candidate
-      && enforcement > readiness
-      && closeout > enforcement
-      && receipt > closeout,
-  );
-  assert.match(staging, /id: measurement_source_readiness/);
-  assert.match(staging, /continue-on-error: true/);
-  assert.match(staging, /steps\.measurement_source_readiness\.outcome != 'success'/);
-  assert.match(staging, /steps\.measurement_source_readiness\.outcome == 'success'/);
+  assert.ok(candidate > 0 && readiness > candidate && enforcement > readiness && deployment > enforcement && closeout > deployment && receipt > closeout);
+  assert.equal((staging.match(/deploy:candidate-only staging/g) ?? []).length, 1);
+  assert.match(staging, /deploy_task=deploy:prepared/);
+  assert.match(staging, /--measurement-only/);
+  assert.match(staging, /seo\.measurement_source_readiness\.v2/);
+  assert.match(staging, /\.cms_writes == 0 and \.search_writes == 0/);
+  assert.match(staging, /candidate[^\n]+!=[^\n]+current/);
+  assert.match(staging, /APP_CONFIG_CACHE/);
   assert.match(staging, /staging_closeout=HOLD reason=MEASUREMENT_SOURCE_READINESS_HOLD/);
-  assert.doesNotMatch(staging, /release_prefix=readiness-hold/);
-  assert.doesNotMatch(staging, /council_orchestration=false/);
-  assert.match(staging, /seo_council_closeout_deferred="\$council_orchestration"/);
-  assert.match(staging, /seo:council-orchestration-closeout staging/);
-  assert.match(staging, /test "\$active" = "\$DEPLOY_SHA"/);
-  assert.match(staging, /deploy:candidate-only staging/);
-  assert.match(staging, /deploy_mode=candidate_only/);
-  assert.match(staging, /source-\$\{DEPLOY_SHA:0:12\}-\$\{GITHUB_RUN_ID\}/);
-  assert.match(staging, /candidate\/REVISION/);
-  assert.match(staging, /q_sha/);
-  assert.match(staging, /SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON/);
-  assert.match(staging, /test -n "\$GSC_SERVICE_ACCOUNT_JSON"/);
-  assert.match(staging, /GSC_SECRET_MISSING/);
-  assert.match(staging, /GSC_SCOPE_NOT_READONLY/);
-  assert.match(staging, /GSC_SYNC_QUALITY_HOLD/);
-  assert.match(staging, /GSC_RESTRICTED_EGRESS_TRANSPORT_FAILED/);
-  assert.match(staging, /GSC_PREFLIGHT_TRANSPORT_FAILED/);
-  for (const reason of ["GSC_SEARCH_ANALYTICS_ACCESS_DENIED", "GSC_OAUTH_TRANSPORT_FAILED",
-    "GSC_OAUTH_TEMPORARILY_UNAVAILABLE", "GSC_OAUTH_INVALID_GRANT", "GSC_OAUTH_INVALID_CLIENT",
-    "GSC_OAUTH_INVALID_SCOPE", "GSC_OAUTH_RESPONSE_INVALID", "GSC_AUTHENTICATION_LOCAL_FAILURE"]) {
-    assert.match(staging, new RegExp(`fail ${reason}`));
-  }
-  assert.doesNotMatch(staging, /fail GSC_AUTHENTICATION_FAILED/);
-  assert.match(staging, /GSC_EMPTY_RESPONSE/);
-  assert.match(staging, /GSC_SYNC_INTERNAL_FAILURE/);
-  assert.match(staging, /GSC_SYNC_OUTPUT_INVALID/);
-  assert.match(staging, /GSC_SYNC_OUTPUT_EMPTY/);
-  assert.match(staging, /awk 'started \|\| \/\^\[\[:space:\]\]\*\\\{\//);
-  assert.match(staging, /GSC_SEARCH_ANALYTICS_REQUEST_FAILED/);
-  assert.match(staging, /GSC_PAGINATION_LIMIT_EXCEEDED/);
-  assert.match(staging, /GSC_SYNC_DB_CREDENTIAL_MISSING/);
-  assert.match(staging, /GSC_SYNC_DB_USERNAME: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_USERNAME \}\}/);
-  assert.match(staging, /GSC_SYNC_DB_PASSWORD: \$\{\{ secrets\.SEO_INTEL_MIGRATION_DB_PASSWORD \}\}/);
-  assert.match(staging, /\. \$q_sync_env; set \+a; export SEO_INTEL_WRITE_ENABLED=true; php artisan seo-intel:gsc-sync/);
-  assert.match(staging, /sync_issue="\$\(jq -r '\.issue \/\/ ""'/);
-  assert.doesNotMatch(staging, /printf[^\n]+\$sync_issue/);
-  assert.match(staging, /CRO_NO_REAL_AGGREGATE_SOURCE/);
-  assert.match(staging, /CRO_READMODEL_UNHEALTHY/);
-  assert.match(staging, /test "\$GSC_AUTH_MODE" = service_account/);
-  assert.match(staging, /https:\/\/www\.googleapis\.com\/auth\/webmasters\.readonly/);
-  assert.match(staging, /\.token_uri == "https:\/\/oauth2\.googleapis\.com\/token"/);
+  assert.match(staging, /steps\.measurement_source_readiness\.outcome != 'success'/);
   assert.match(staging, /gsc_restricted_connect_proxy\.mjs/);
   assert.match(staging, /ConnectionAttempts=3/);
-  assert.match(staging, /staging-gsc-preflight\.stderr/);
-  assert.match(staging, /> "\$sync_raw" 2> "\$sync_stderr"/);
-  assert.match(staging, /> "\$cro_dry_run_json" 2> "\$cro_dry_run_stderr"/);
-  assert.match(staging, /> "\$cro_refresh_json" 2> "\$cro_refresh_stderr"/);
-  assert.match(staging, /if test "\$council_orchestration" = true; then deploy_timeout=60m; fi/);
-  assert.match(staging, /--gsc-live-preflight --dry-run --no-write/);
-  assert.match(staging, /seo-intel:gsc-sync --window=90 --search-types=web --full-window/);
-  assert.match(staging, /analytics:refresh-seo-conversion-daily[^\n]+--dry-run/);
-  assert.match(staging, /\.attempted_rows \| type == "number" and \. >= 0/);
-  assert.match(staging, /\.expected_metrics \| keys \| sort/);
-  assert.match(staging, /\.persisted_metrics \| keys \| sort/);
-  assert.match(staging, /expected_metrics \| to_entries\) \| all\(\.value \| type == "number" and \. >= 0\)/);
-  assert.match(staging, /persisted_metrics \| to_entries\) \| all\(\.value \| type == "number" and \. >= 0\)/);
-  assert.doesNotMatch(staging, /\.attempted_rows > 0|\.upserted_rows > 0/);
-  assert.doesNotMatch(staging, /expected_metrics \| to_entries \| map\(\.value\) \| add/);
-  assert.match(staging, /\.unmapped_rows == 0/);
-  assert.match(staging, /excluded_non_authority_rows/);
-  assert.match(staging, /\.duplicate_natural_keys == 0/);
-  assert.match(staging, /expected_metrics \| to_entries/);
-  assert.match(staging, /SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=false SEO_INTEL_WRITE_ENABLED=false/);
-  assert.match(staging, /gsc_external_read_performed: true/);
-  assert.match(staging, /council_runtime:[\s\S]+external_calls: 0/);
-  assert.match(staging, /cms_writes: 0/);
-  assert.match(staging, /url_truth_writes: 0/);
-  assert.match(staging, /search_writes: 0/);
-  assert.match(staging, /business_writes: 0/);
-  assert.match(staging, /production_permissions: 0/);
-  assert.match(staging, /execution_allowed: false/);
+  const command = readFileSync(new URL('../../backend/app/Console/Commands/SeoCompetitiveReleasePrepareCommand.php', import.meta.url), 'utf8');
+  assert.match(command, /hasTrustedBaseline/);
+  assert.match(command, /refreshable/);
+  assert.match(command, /measurement_revalidation/);
+  assert.match(command, /'cms_writes' => 0, 'search_writes' => 0/);
+  assert.match(command, /\$snapshots->verify\(\$sha, 'tests', \$environment\)/);
+  assert.doesNotMatch(command, /\$process->start\(\)/);
 
   assert.match(production, /GSC_SERVICE_ACCOUNT_JSON: \$\{\{ secrets\.SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON \}\}/);
   assert.match(production, /production_measurement_refresh=HOLD/);

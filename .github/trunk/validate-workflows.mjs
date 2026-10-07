@@ -7,6 +7,23 @@ export const REQUIRED_WORKFLOWS = ["ci.yml", "deploy.yml", "nightly.yml", "recov
 
 const containsDispatch = (source) => /(^|\n)\s*workflow_dispatch\s*:/m.test(source);
 
+export function templatedRunLengths(source) {
+  const lines=source.split('\n'),lengths=[];
+  for(let i=0;i<lines.length;i++) {
+    const match=/^(\s+)run:\s*[|>][+-]?\s*$/.exec(lines[i]);
+    if(!match)continue;
+    const indentation=match[1].length,body=[];
+    for(let j=i+1;j<lines.length;j++) {
+      const line=lines[j];
+      if(line.trim() && line.length-line.trimStart().length<=indentation)break;
+      body.push(line.slice(indentation+2));
+    }
+    const text=body.join('\n');
+    if(text.includes('${{'))lengths.push({line:i+1,length:text.length});
+  }
+  return lengths;
+}
+
 export function validateWorkflowSet(root = process.cwd(), mode = "transition") {
   if (!["transition", "final"].includes(mode)) throw new Error(`unsupported mode: ${mode}`);
   const workflowDir = resolve(root, ".github/workflows");
@@ -33,6 +50,10 @@ export function validateWorkflowSet(root = process.cwd(), mode = "transition") {
   }
   if (mode === "final" && sources["ci.yml"] && /(^|\n)\s*pull_request\s*:/m.test(sources["ci.yml"])) {
     errors.push("final ci.yml must not consume pull requests");
+  }
+
+  for(const [name,source] of Object.entries(sources)) for(const block of templatedRunLengths(source)) {
+    if(block.length>21000)errors.push(`${name}:${block.line} exceeds GitHub's 21000 character templated run limit`);
   }
 
   return { mode, actual, required: REQUIRED_WORKFLOWS, errors, valid: errors.length === 0 };

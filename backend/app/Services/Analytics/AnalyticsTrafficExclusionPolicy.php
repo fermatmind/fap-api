@@ -59,6 +59,7 @@ final class AnalyticsTrafficExclusionPolicy
             || $this->isExcludedAttemptId($meta['attempt_id'] ?? null)
             || $this->isExcludedAttemptId($seoConversion['attempt_id'] ?? null)
             || $this->hasExcludedProbePrefix($event->anon_id ?? null)
+            || $this->hasExcludedProbePrefix($event->attempt_anon_id ?? null)
             || $this->hasExcludedProbePrefix($event->session_id ?? null)
             || $this->hasExcludedProbePrefix($event->request_id ?? null)
             || $this->hasExcludedProbePrefix($seoConversion['anon_id'] ?? null)

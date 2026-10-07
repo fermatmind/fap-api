@@ -2894,6 +2894,25 @@
                 ]
             }
         },
+        "/api/v0.5/articles-feed": {
+            "get": {
+                "operationId": "get_api_v0_5_articles_feed",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ArticleController@feed",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders",
+                    "App\\Http\\Middleware\\RecordPublicContentRuntime"
+                ]
+            }
+        },
         "/api/v0.5/articles/{slug}": {
             "get": {
                 "operationId": "get_api_v0_5_articles_slug_",

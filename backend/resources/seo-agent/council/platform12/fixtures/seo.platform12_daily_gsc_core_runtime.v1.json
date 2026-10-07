@@ -34,11 +34,12 @@
                     "availability": "AVAILABLE",
                     "scheduled_receipt_status": "success",
                     "trigger_mode": "scheduled",
-                    "data_max_date": "2026-09-01",
+                    "data_max_date": null,
                     "row_count": 0,
                     "mapping_state": "READY",
                     "data_quality_state": "READY",
-                    "window_state": "COMPLETE"
+                    "window_state": "COMPLETE",
+                    "zero_query_complete": true
                 },
                 "runtime": {
                     "core_runtime_state": "AVAILABLE",
@@ -59,7 +60,7 @@
                     "availability": "AVAILABLE",
                     "scheduled_receipt_status": "success",
                     "trigger_mode": "scheduled",
-                    "data_max_date": "2026-08-31",
+                    "data_max_date": "2026-08-30",
                     "row_count": 12,
                     "mapping_state": "READY",
                     "data_quality_state": "READY",

@@ -48,6 +48,18 @@ final class ArticlePublicListReadCacheTest extends TestCase
         $this->assertSame(1, $builds);
     }
 
+    public function test_category_and_taxonomy_qualification_partition_cache(): void
+    {
+        $cache = app(ArticlePublicListReadCache::class);
+        foreach ([['personality', 'active'], ['career', 'active'], ['personality', 'inactive']] as [$category, $token]) {
+            $filters = array_replace($this->filters, ['category' => $category, 'category_cache_token' => $token]);
+            $resolved = $cache->resolve($filters, fn (): array => ['identity' => $category.':'.$token]);
+            $this->assertSame('miss', $resolved['state']);
+            $this->assertSame($category.':'.$token, $resolved['payload']['identity']);
+            $this->assertSame('hit', $cache->resolve($filters, fn (): array => [])['state']);
+        }
+    }
+
     public function test_stale_payload_is_returned_when_rebuild_fails(): void
     {
         $cache = app(ArticlePublicListReadCache::class);
@@ -179,6 +191,8 @@ final class ArticlePublicListReadCacheTest extends TestCase
     {
         $fingerprint = hash('xxh3', json_encode([
             'locale' => $this->filters['locale'],
+            'category' => null,
+            'category_cache_token' => null,
             'page' => $this->filters['page'],
             'per_page' => $this->filters['per_page'],
         ], JSON_THROW_ON_ERROR));

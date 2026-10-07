@@ -290,6 +290,9 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
         $workflow = (string) file_get_contents(base_path('../.github/workflows/ci.yml'));
 
         $this->assertStringContainsString('SEO runtime changes must include focused changed tests.', $workflow);
-        $this->assertStringContainsString('php artisan test "${changed_tests[@]}" --no-ansi', $workflow);
+        $this->assertStringContainsString('node .github/trunk/run-changed-tests.mjs', $workflow);
+        $runner = (string) file_get_contents(base_path('../.github/trunk/run-changed-tests.mjs'));
+        $this->assertStringContainsString("execute('php',['artisan','test',", $runner);
+        $this->assertStringContainsString("'--no-ansi'],'backend')", $runner);
     }
 }

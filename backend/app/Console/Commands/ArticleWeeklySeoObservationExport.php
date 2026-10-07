@@ -69,8 +69,8 @@ final class ArticleWeeklySeoObservationExport extends Command
             $summary = (array) ($payload['summary'] ?? []);
             $this->info('weekly SEO observation export complete');
             $this->line('article_count='.(string) ($summary['article_count'] ?? 0));
-            $this->line('gsc_clicks='.(string) ($summary['gsc_clicks'] ?? 0));
-            $this->line('gsc_impressions='.(string) ($summary['gsc_impressions'] ?? 0));
+            $this->line('gsc_clicks='.(isset($summary['gsc_clicks']) ? (string) $summary['gsc_clicks'] : 'unavailable'));
+            $this->line('gsc_impressions='.(isset($summary['gsc_impressions']) ? (string) $summary['gsc_impressions'] : 'unavailable'));
         }
 
         return self::SUCCESS;

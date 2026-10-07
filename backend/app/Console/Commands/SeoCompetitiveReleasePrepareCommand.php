@@ -30,6 +30,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         {--cohort=competitive.big-five.live.v2 : Immutable competitive cohort id}
         {--gsc-env= : Isolated GSC refresh environment file}
         {--writer-env= : Isolated Evidence writer environment file already loaded by the caller}
+        {--measurement-only : Validate or refresh measurement snapshots without competitive publication}
         {--json : Emit machine-readable output}';
 
     protected $description = 'Prepare production competitive evidence with reusable environment-local measurement snapshots.';
@@ -47,6 +48,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         $gscEnv = (string) $this->option('gsc-env');
         $writerEnv = (string) $this->option('writer-env');
         $actions = ['gsc' => 'not_run', 'cro' => 'not_run'];
+        $environment = app()->environment();
 
         try {
             $this->preflight($sha, $cohortId, $gscEnv, $writerEnv);
@@ -56,9 +58,9 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             return $this->hold('local_preflight', 'PREFLIGHT_INTERNAL_HOLD', $actions);
         }
 
-        $measurement = $snapshots->verify($sha, 'tests', 'production');
+        $measurement = $snapshots->verify($sha, 'tests', $environment);
         if (($measurement['status'] ?? null) !== 'READY') {
-            $plan = $this->refreshPlan($measurement, $snapshots, 'production');
+            $plan = $this->refreshPlan($measurement, $snapshots, $environment);
             if (($plan['hold_reason'] ?? null) !== null) {
                 return $this->hold('current_measurement_validation', (string) $plan['hold_reason'], $actions, $measurement);
             }
@@ -71,7 +73,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             if (microtime(true) - $startedAt >= self::SUPERVISOR_TIMEOUT_SECONDS) {
                 return $this->hold('conditional_refresh', 'SUPERVISOR_TIMEOUT', $actions, $measurement);
             }
-            $measurement = $snapshots->verify($sha, 'tests', 'production');
+            $measurement = $snapshots->verify($sha, 'tests', $environment);
             if (($measurement['status'] ?? null) !== 'READY') {
                 return $this->hold(
                     'measurement_revalidation',
@@ -82,6 +84,19 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             }
         } else {
             $actions = ['gsc' => 'reused', 'cro' => 'reused'];
+        }
+
+        if ((bool) $this->option('measurement-only')) {
+            return $this->emit([
+                'schema_version' => 'seo.measurement_source_readiness.v2',
+                'status' => 'READY', 'reason_code' => 'NONE', 'candidate_sha' => $sha,
+                'environment' => $environment, 'measurement_actions' => $actions,
+                'measurement_snapshot_set_hash' => $measurement['measurement_snapshot_set_hash'],
+                'measurement_bundle_set_hash' => $measurement['measurement_bundle_set_hash'],
+                'search_snapshot_hash' => data_get($measurement, 'search_measurement.snapshot_hash'),
+                'cro_snapshot_hash' => data_get($measurement, 'cro_measurement.snapshot_hash'),
+                'cms_writes' => 0, 'search_writes' => 0, 'competitive_publication' => false,
+            ], self::SUCCESS);
         }
 
         try {
@@ -128,7 +143,8 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
 
     private function preflight(string $sha, string $cohortId, string $gscEnv, string $writerEnv): void
     {
-        if (app()->environment() !== 'production') {
+        if (! app()->environment(['production', 'staging'])
+            || (app()->environment('staging') && ! (bool) $this->option('measurement-only'))) {
             throw new RuntimeException('PRODUCTION_ENVIRONMENT_REQUIRED');
         }
         if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1 || $cohortId !== self::COHORT) {
@@ -139,13 +155,13 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             throw new RuntimeException('EXACT_SHA_MISMATCH');
         }
         foreach ([$gscEnv, $writerEnv] as $path) {
-            if (preg_match('#^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/(?:measurement|competitive-writer)\.env$#D', $path) !== 1
+            if (preg_match('#^/tmp/fermatmind-11g-'.app()->environment().'-[1-9][0-9]*-[1-9][0-9]*/(?:measurement|competitive-writer)\.env$#D', $path) !== 1
                 || ! is_file($path) || is_link($path) || (fileperms($path) & 0777) > 0600) {
                 throw new RuntimeException('TEMP_ENV_INVALID');
             }
         }
         $configCache = app()->getCachedConfigPath();
-        if (preg_match('#^/tmp/fermatmind-11g-production-[1-9][0-9]*-[1-9][0-9]*/competitive-config\.php$#D', $configCache) !== 1
+        if (preg_match('#^/tmp/fermatmind-11g-'.app()->environment().'-[1-9][0-9]*-[1-9][0-9]*/competitive-config\.php$#D', $configCache) !== 1
             || ! is_dir(dirname($configCache)) || is_link(dirname($configCache))
             || file_exists($configCache) || is_link($configCache)) {
             throw new RuntimeException('CONFIG_CACHE_INVALID');
@@ -153,7 +169,9 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         if (! (bool) config('seo_intel.write_enabled', false)) {
             throw new RuntimeException('EVIDENCE_WRITER_DISABLED');
         }
-        $this->probeEvidenceWriter($sha);
+        if (! (bool) $this->option('measurement-only')) {
+            $this->probeEvidenceWriter($sha);
+        }
     }
 
     private function probeEvidenceWriter(string $sha): void
@@ -194,7 +212,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
         $actions = ['gsc' => 'not_run', 'cro' => 'not_run'];
         foreach ([
             'search_measurement' => 'gsc',
-            'cro_measurement' => 'cro',
+            'commercial_funnel_cro' => 'cro',
         ] as $modeId => $key) {
             $mode = (array) ($measurement[$key === 'gsc' ? 'search_measurement' : 'cro_measurement'] ?? []);
             if (($mode['hold_reason'] ?? null) === 'NONE') {
@@ -262,13 +280,10 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
     /** @param array<string, Process> $processes */
     private function runRefreshes(array $processes): ?string
     {
-        foreach ($processes as $process) {
-            $process->start();
-        }
         $failure = null;
         foreach ($processes as $key => $process) {
             try {
-                $process->wait();
+                $process->run();
             } catch (ProcessTimedOutException) {
                 $process->stop(3);
                 $failure ??= $this->refreshFailureReason($key, true);
@@ -332,6 +347,7 @@ final class SeoCompetitiveReleasePrepareCommand extends Command
             'cro_snapshot_hash' => (string) data_get($measurement, 'cro_measurement.snapshot_hash', hash('sha256', 'cro-unavailable')),
             'dependency_ingestion' => $this->counts($dependency),
             'preactivation_receipt' => null,
+            'measurement_failure_category' => data_get($measurement, 'search_measurement.failure_category', 'none'),
         ], self::FAILURE);
     }
 

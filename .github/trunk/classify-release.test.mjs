@@ -63,7 +63,7 @@ test('unknown, zero, and non-forward baselines fail closed', () => {
 });
 
 test('skip receipts and failed or rerun workflows cannot become the production baseline', async () => {
-  const baseline = await productionBaseline({
+  const baseline = await productionBaseline({ candidateSha: async (run) => run.head_sha,
     listRuns: async () => [run(10, head), { ...run(9), conclusion: 'failure' }, { ...run(8), run_attempt: 2 }, run(7)],
     listJobs: async (id) => { assert.ok([10, 9, 7].includes(id)); return [job(id === 7 ? 'success' : 'skipped')]; },
   });
@@ -71,7 +71,7 @@ test('skip receipts and failed or rerun workflows cannot become the production b
 });
 
 test('successful production activation remains the baseline after an independent post-production job fails', async () => {
-  const baseline = await productionBaseline({
+  const baseline = await productionBaseline({ candidateSha: async (run) => run.head_sha,
     listRuns: async () => [{ ...run(10, head), conclusion: 'failure' }, run(7)],
     listJobs: async (id) => [job(id === 10 ? 'success' : 'skipped')],
   });
@@ -79,7 +79,7 @@ test('successful production activation remains the baseline after an independent
 });
 
 test('failed production activation retains the older accepted baseline', async () => {
-  const baseline = await productionBaseline({
+  const baseline = await productionBaseline({ candidateSha: async (run) => run.head_sha,
     listRuns: async () => [{ ...run(10, head), conclusion: 'failure' }, run(7)],
     listJobs: async (id) => [job(id === 10 ? 'failure' : 'success')],
   });
@@ -88,13 +88,13 @@ test('failed production activation retains the older accepted baseline', async (
 
 test('timing-only or incomplete activation evidence is rejected', async () => {
   for (const jobs of [[], [job(), job()], [{ ...job(), steps: [{ name: 'Persist push-to-production timing receipt', conclusion: 'success' }] }]]) {
-    await assert.rejects(productionBaseline({ listRuns: async () => [run(7)], listJobs: async () => jobs }));
+    await assert.rejects(productionBaseline({ candidateSha: async (run) => run.head_sha, listRuns: async () => [run(7)], listJobs: async () => jobs }));
   }
 });
 
 test('production baseline search continues past a full page of skipped releases', async () => {
   const pages = [];
-  const baseline = await productionBaseline({
+  const baseline = await productionBaseline({ candidateSha: async (run) => run.head_sha,
     listRuns: async (page) => { pages.push(page); return page === 1 ? Array.from({ length: 100 }, (_, i) => run(1000 + i)) : [run(7)]; },
     listJobs: async (id) => [job(id === 7 ? 'success' : 'skipped')],
   });
@@ -103,8 +103,8 @@ test('production baseline search continues past a full page of skipped releases'
 });
 
 test('missing evidence and API failures cannot silently select deploy-skip', async () => {
-  await assert.rejects(productionBaseline({ listRuns: async () => [], listJobs: async () => [] }), /No successful/);
-  await assert.rejects(productionBaseline({ listRuns: async () => { throw new Error('unavailable'); } }), /unavailable/);
+  await assert.rejects(productionBaseline({ candidateSha: async (run) => run.head_sha, listRuns: async () => [], listJobs: async () => [] }), /No successful/);
+  await assert.rejects(productionBaseline({ candidateSha: async (run) => run.head_sha, listRuns: async () => { throw new Error('unavailable'); } }), /unavailable/);
 });
 
 test('CI uses the release-aware scope for downstream test and migration selection', () => {
@@ -117,4 +117,13 @@ test('CI uses the release-aware scope for downstream test and migration selectio
   assert.match(workflow, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(workflow, /if \[ "\$\{#migrations\[@\]\}" -eq 0 \]; then/);
   assert.doesNotMatch(workflow, /test "\$\{#migrations\[@\]\}" -gt 0/);
+});
+
+test('displayed workflow head does not replace accepted candidate; running operational tail preserves acceptance', async () => {
+  const baseline = await productionBaseline({listRuns:async () => [{...run(10, before),status:'in_progress',conclusion:null}],
+    listJobs:async () => [job()], candidateSha:async () => head});
+  assert.deepEqual(baseline,{sha:head,runId:10});
+});
+test('missing production binding cannot invent a successful baseline', async () => {
+  await assert.rejects(productionBaseline({listRuns:async () => [run(7)],listJobs:async () => [job()]}), /binding reader/);
 });

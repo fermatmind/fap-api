@@ -40,6 +40,7 @@ final class SeoPlatform12B01DailyGscCoreRuntimeTest extends TestCase
     public function test_lag_of_three_days_is_ready_and_four_days_holds(): void
     {
         $evidence = $this->readyEvidence();
+        $evidence['evaluated_at'] = '2026-09-04T08:00:00Z';
         $evidence['gsc']['data_max_date'] = '2026-09-01';
         $ready = app(Platform12DailyGscCoreRuntimeEvaluator::class)->evaluate($evidence);
         $evidence['gsc']['data_max_date'] = '2026-08-31';
@@ -49,6 +50,23 @@ final class SeoPlatform12B01DailyGscCoreRuntimeTest extends TestCase
         $this->assertSame('READY', $ready['state']);
         $this->assertSame(4, $held['gsc']['lag_days']);
         $this->assertSame('DATA_FRESHNESS_HOLD', $held['state']);
+    }
+
+    public function test_complete_zero_requires_query_proof_and_running_timeout_failure_remain_distinct(): void
+    {
+        $evaluator = app(Platform12DailyGscCoreRuntimeEvaluator::class);
+        $evidence = $this->readyEvidence();
+        $evidence['gsc']['row_count'] = 0;
+        $this->assertSame('GSC_UNAVAILABLE_HOLD', $evaluator->evaluate($evidence)['state']);
+        $evidence['gsc']['zero_query_complete'] = true;
+        $evidence['gsc']['data_max_date'] = null;
+        $this->assertSame('VALID_ZERO', $evaluator->evaluate($evidence)['gsc']['capability_state']);
+        foreach (['GSC_COLLECTION_RUNNING' => 'GSC_COLLECTION_WAIT', 'GSC_COLLECTION_TIMEOUT' => 'GSC_COLLECTION_TIMEOUT_HOLD',
+            'GSC_COLLECTION_FAILED' => 'GSC_COLLECTION_FAILED_HOLD', 'GSC_COLLECTION_MISSED' => 'GSC_COLLECTION_MISSED_HOLD',
+            'GSC_WINDOW_MISMATCH' => 'GSC_WINDOW_MISMATCH_HOLD', 'GSC_COLLECTION_TRUNCATED' => 'GSC_COLLECTION_TRUNCATED_HOLD'] as $reason => $state) {
+            $evidence['gsc']['collection_reason'] = $reason;
+            $this->assertSame($state, $evaluator->evaluate($evidence)['state']);
+        }
     }
 
     public function test_catalog_adds_definition_without_runtime_or_schedule_activation(): void

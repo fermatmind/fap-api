@@ -26,6 +26,29 @@ class SitemapSourceCacheTest extends TestCase
     use MockeryPHPUnitIntegration;
     use RefreshDatabase;
 
+    public function test_staging_current_owned_urls_match_the_cache_environment_without_accepting_foreign_hosts(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        $generator = app(SitemapGenerator::class);
+        // Read the actual Current descriptors; legacy DB fixture mode must not hide this boundary.
+        $urls = (new \ReflectionMethod($generator, 'getCurrentMbtiUrls'))->invoke($generator);
+        self::assertNotEmpty($urls);
+        $controller = app(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::class);
+        $projection = app(\App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup::class);
+        $payload = $controller->buildPayloadFromAuthorityUrls($urls, $projection);
+        foreach ($payload['items'] as $item) {
+            self::assertSame('staging.fermatmind.com', parse_url($item['loc'], PHP_URL_HOST));
+        }
+        $controller->storeCache($payload);
+        self::assertSame($payload, \App\Support\PublicProjectionCache::get($controller::CACHE_KEY_FRESH));
+
+        $foreign = $controller->buildPayloadFromAuthorityUrls([
+            ['loc' => 'https://foreign.example/zh/personality/intj', 'lastmod' => '2026-10-05T00:00:00Z'],
+        ], $projection);
+        $this->expectException(\RuntimeException::class);
+        $controller->storeCache($foreign);
+    }
+
     public function test_old_scheduler_writes_cannot_replace_the_current_sitemap_candidate(): void
     {
         $controller = app(\App\Http\Controllers\API\V0_5\SEO\SitemapSourceController::class);

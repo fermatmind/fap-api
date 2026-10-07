@@ -68,8 +68,8 @@ final class Platform12RuntimeControl
                 if ($allowed && $gate['acceptance_ready']) {
                     $acceptance[] = $id;
                 }
-                $naturalAllowed = $allowed && ($gate['end_to_end_accepted'] ?? false) && is_string($first) && strtotime($first) !== false
-                    && ($state['mission_source_hash'][$id] ?? null) === ($gate['source_receipt_digest'] ?? 'unproven');
+                $naturalAllowed = $allowed && (($gate['software_qualified'] ?? false) || ($gate['end_to_end_accepted'] ?? false)) && is_string($first) && strtotime($first) !== false
+                    && (($gate['software_qualified'] ?? false) || ($state['mission_source_hash'][$id] ?? null) === ($gate['source_receipt_digest'] ?? 'unproven'));
                 if ($naturalAllowed) {
                     $effective[] = $id;
                 }
@@ -170,6 +170,45 @@ final class Platform12RuntimeControl
                 : ['state' => 'CONTROL_WRITE_HOLD', 'computation_enabled' => false, 'business_write_enabled' => false];
         } catch (Throwable) {
             return ['state' => 'SHARED_CACHE_HOLD', 'computation_enabled' => false, 'business_write_enabled' => false];
+        }
+    }
+
+    /** Reconcile software before admission; never create a selection or resume it. */
+    public function reconcile(): void
+    {
+        if (! app()->environment('production')) {
+            return;
+        }
+        try {
+            $proof = $this->activation->inspect();
+            if ($proof['state'] !== 'READY' || ($proof['manifest']['software_delivery_only'] ?? false) !== true
+                || ! $this->businessGuardsClosed()) {
+                return;
+            }
+            $this->withControlLock(function () use ($proof): void {
+                $store = $this->store();
+                $state = $store->get(self::CACHE_KEY);
+                if (! is_array($state) || ($state['paused'] ?? true) || $this->selection($state['selected_missions'] ?? []) === []
+                    || ! is_string($state['generation'] ?? null) || preg_match('/^[a-f0-9]{32}$/D', $state['generation']) !== 1
+                    || ($state['catalog_hash'] ?? null) !== $this->contracts->missionCatalog()['catalog_hash']
+                    || ($state['query_key_version'] ?? null) !== config('seo_agent_evidence.query_hmac_key_version')) {
+                    return;
+                }
+                $first = $state['mission_activated_at'] ?? [];
+                foreach ($state['selected_missions'] as $id) {
+                    if ($proof['missions'][$id]['software_qualified'] ?? false) {
+                        // Existing explicit selection is the persistent read-only authorization.
+                        $first[$id] ??= now('UTC')->format('Y-m-d\TH:i:s\Z');
+                    }
+                }
+                if (($state['software_sha'] ?? null) !== $proof['production_sha'] || $first !== ($state['mission_activated_at'] ?? [])) {
+                    $store->forever(self::CACHE_KEY, [...$state, 'software_sha' => $proof['production_sha'],
+                        'mission_activated_at' => $first, 'version_vector' => $proof['manifest']['runtime']['version_vector']]);
+                }
+            });
+        } catch (Throwable) {
+            // A failed reconciliation cannot authorize work; expose a sanitized diagnostic.
+            logger()->warning('seo.platform12.software_reconcile_hold');
         }
     }
 

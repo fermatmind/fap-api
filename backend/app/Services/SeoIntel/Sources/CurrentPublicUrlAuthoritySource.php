@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\Sources;
 
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\SeoIntel\PageFamily\PageFamilyPolicyRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -16,17 +17,22 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
         private readonly CareerDirectoryAuthorityService $careerAuthority,
         private readonly PageFamilyPolicyRegistry $policyRegistry,
         private readonly CareerContentV3AuthorityPackage $careerCurrentAuthority,
+        private readonly CareerContentV3CanonicalReader $careerCurrentReader,
     ) {}
 
     /** @return list<UrlTruthInventoryRecord> */
     public function candidates(): array
     {
+        // Re-read the installed package on each maintenance/job invocation. The reader
+        // is a singleton and may retain a prior manifest within a long-lived process.
+        $this->careerCurrentReader->forgetLoadedAuthority();
+        $index = $this->careerCurrentReader->authority();
         $records = [
             ...(config('seo_intel.enabled', false)
                 ? $this->backendAuthority->completeCandidates()
                 : $this->backendAuthority->candidates()),
-            ...$this->careerRecords(),
-            ...$this->careerCurrentManifestRecords(),
+            ...$this->careerRecords($index),
+            ...$this->careerCurrentManifestRecords($index),
             ...$this->staticRecords(),
         ];
 
@@ -41,6 +47,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
             'complete_authority_read' => (bool) config('seo_intel.enabled', false),
             'backend_authority' => $this->backendAuthority->metadata(),
             'career_authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
+            'career_public_revision_kind' => 'career_current_file_sha256.v1',
             'career_current_manifest_authority' => CareerContentV3AuthorityPackage::CONTRACT_VERSION,
             'page_family_policy_hash' => $this->policyRegistry->policyHash(),
             'sitemap_is_authority' => false,
@@ -50,7 +57,7 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     }
 
     /** @return list<UrlTruthInventoryRecord> */
-    private function careerRecords(): array
+    private function careerRecords(array $index): array
     {
         $records = [];
         foreach (['zh-CN', 'en'] as $locale) {
@@ -78,6 +85,14 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
                 if ($path === '' || $slug === '') {
                     continue;
                 }
+                // Publication remains the directory's qualified identity. The physical
+                // Current file must agree; a stale compiled body flag must fail closed
+                // rather than silently shrink the public denominator.
+                $page = $this->careerCurrentAuthority->pageFromIndexForRuntime($index, $slug, $locale);
+                if (! CareerContentV3CanonicalReader::sourceHasPublicBody($page)) {
+                    throw new \RuntimeException('PUBLIC_AUTHORITY_CAREER_BODY_MISMATCH');
+                }
+                $revision = $index['entries'][$slug][$locale]['sha256'];
                 $records[] = new UrlTruthInventoryRecord(
                     canonicalUrl: $this->canonicalUrl($path),
                     locale: $locale,
@@ -95,9 +110,9 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
                         'canonical_self' => true,
                         'sitemap_eligible' => true,
                         'llms_eligible' => true,
-                        'authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION,
+                        'authority_revision' => $revision,
                     ],
-                    attributes: ['authority_revision' => CareerDirectoryAuthorityService::AUTHORITY_VERSION],
+                    attributes: ['authority_revision' => $revision],
                 );
             }
         }
@@ -106,9 +121,8 @@ final class CurrentPublicUrlAuthoritySource implements UrlTruthInventorySource
     }
 
     /** @return list<UrlTruthInventoryRecord> */
-    private function careerCurrentManifestRecords(): array
+    private function careerCurrentManifestRecords(array $index): array
     {
-        $index = $this->careerCurrentAuthority->manifestIndex(base_path());
         $revision = (string) data_get($index, 'manifest.aggregate_sha256');
         $records = [];
 

@@ -38,12 +38,30 @@ final readonly class Platform12DailyScheduler
         if ($acceptanceMission !== null && ! in_array($acceptanceMission, Platform12DailyMissionSet::IDS, true)) {
             return $this->result('ACCEPTANCE_SCOPE_DENIED');
         }
+        $this->control->reconcile();
         $state = $this->control->status();
         if (! $state['computation_enabled']) {
             return $this->result($state['state']);
         }
         if ($acceptanceMission !== null && ! $this->control->allowsMission($acceptanceMission, true)) {
             return $this->result('MISSION_NOT_AUTHORIZED');
+        }
+        // External acquisition has its own bounded lock and backoff. Keep it
+        // outside the evaluation lease and its 120-second software budget.
+        if ($acceptanceMission === null && app()->environment('production')) {
+            try {
+                // Refresh eligibility is independent of the daily evaluation slot.
+                // A consumed HOLD must not suppress retries after acquisition backoff.
+                if (in_array(Platform12DailyMissionSet::IDS[2], $state['effective_mission_ids'], true)
+                    && $this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
+                    $this->refreshEvidence($state);
+                    if (! $this->sameGeneration($state)) {
+                        return $this->result('PAUSED_BEFORE_RESERVATION');
+                    }
+                }
+            } catch (Throwable) {
+                return $this->result('DAILY_RUNTIME_HOLD');
+            }
         }
         $owner = bin2hex(random_bytes(24));
         $lease = $this->store->acquire(self::LEASE, $owner, 180);
@@ -196,6 +214,36 @@ final readonly class Platform12DailyScheduler
         }
     }
 
+    private function refreshEvidence(array $state): void
+    {
+        $failure = null;
+        try {
+            // Same application principal, fixed command and bounded acquisition.
+            // Leave half of the existing 120-second entrypoint budget for evaluation.
+            $result = \Illuminate\Support\Facades\Process::timeout(60)->run([
+                PHP_BINARY, base_path('artisan'), 'seo:competitive-evidence-ingest', '--refresh-if-due', '--json',
+            ]);
+            $payload = strlen($result->output()) <= 131072 ? json_decode(trim($result->output()), true) : null;
+            if (! $result->successful() || ! in_array($payload['status'] ?? null,
+                ['READY', 'REUSED', 'REUSED_CYCLE', 'HOLD', 'DENY', 'WAIT'], true)) {
+                $failure = 'REFRESH_PROCESS_FAILED';
+            }
+        } catch (Throwable $error) {
+            $failure = $error instanceof \Illuminate\Process\Exceptions\ProcessTimedOutException
+                ? 'REFRESH_TIMEOUT' : 'REFRESH_PROCESS_FAILED';
+        }
+        if ($failure !== null) {
+            $this->control->withControlLock(function () use ($state, $failure): void {
+                if ($this->control->allowsMission(Platform12DailyMissionSet::IDS[2], false, $state['generation'])) {
+                    app(Platform12EvidenceSelection::class)->atomicReference([
+                        'refresh_status' => 'failed', 'execution_sha' => $this->releaseSha(true),
+                        'reason' => $failure, 'checked_at' => now('UTC')->toAtomString(),
+                    ]);
+                }
+            });
+        }
+    }
+
     private function nextSlot(array $state): ?array
     {
         $now = CarbonImmutable::now('UTC');
@@ -233,18 +281,18 @@ final readonly class Platform12DailyScheduler
         return $current['computation_enabled'] && $current['generation'] === $started['generation'];
     }
 
-    private function releaseSha(): string
+    private function releaseSha(bool $full = false): string
     {
         $path = (string) config('seo_council.release_revision_path', dirname(base_path()).'/REVISION');
         $sha = is_file($path) ? strtolower(trim((string) file_get_contents($path))) : '';
         if (preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
             if (app()->environment('testing')) {
-                return str_repeat('0', 12);
+                return str_repeat('0', $full ? 40 : 12);
             }
             throw new \RuntimeException('RELEASE_REVISION_HOLD');
         }
 
-        return substr($sha, 0, 12);
+        return $full ? $sha : substr($sha, 0, 12);
     }
 
     private function storeVector(Platform12FrozenMission $mission): array

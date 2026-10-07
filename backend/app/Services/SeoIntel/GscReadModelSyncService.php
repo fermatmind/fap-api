@@ -74,7 +74,8 @@ final class GscReadModelSyncService
         $connection = DB::connection($connectionName);
         $lagDays = max(0, (int) config('seo_intel.gsc_backfill_lag_days', 3));
         $reportingTimezone = (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles');
-        $endDate = CarbonImmutable::now($reportingTimezone)->subDays($lagDays)->startOfDay();
+        $collectionStarted = CarbonImmutable::now('UTC');
+        $endDate = $collectionStarted->setTimezone($reportingTimezone)->subDays($lagDays)->startOfDay();
         $requestedStartDate = $endDate->subDays($windowDays - 1);
         $startDate = $fullWindow
             ? $requestedStartDate
@@ -92,7 +93,7 @@ final class GscReadModelSyncService
             $searchTypes,
         );
         $runUid = (string) Str::uuid();
-        $now = CarbonImmutable::now('UTC');
+        $now = $collectionStarted;
 
         $run = [
             'sync_run_uid' => $runUid,
@@ -117,11 +118,10 @@ final class GscReadModelSyncService
                 return $this->finishFailure($connection, $runUid, $failure, $pages, count($rows), $preflight);
             }
 
-            if ($rows === []) {
-                return $this->finishFailure($connection, $runUid, 'gsc_empty_response', $pages, 0, $preflight);
-            }
-
-            $quality = $this->qualityGate->evaluate($rows);
+            // Empty is valid only after every requested day/type completed pagination.
+            $quality = $rows === [] && $pages > 0
+                ? ['status' => 'pass', 'rows_checked' => 0, 'reasons' => [], 'opportunity_queue_eligible' => false, 'zero_query_complete' => true]
+                : $this->qualityGate->evaluate($rows, $collectionStarted->setTimezone($reportingTimezone));
             if (($quality['status'] ?? 'blocked') !== 'pass') {
                 return $this->finishFailure(
                     $connection,
@@ -177,6 +177,8 @@ final class GscReadModelSyncService
                 'search_types' => $searchTypes,
                 'trigger_mode' => $triggerMode,
                 'reporting_timezone' => $reportingTimezone,
+                'collection_started_at' => $collectionStarted->format('Y-m-d\TH:i:s\Z'),
+                'lag_days_requested' => $lagDays,
                 'pages_fetched' => $pages,
                 'rows_seen' => count($rows),
                 'rows_upserted' => $upserted,

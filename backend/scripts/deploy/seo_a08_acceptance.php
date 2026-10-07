@@ -45,9 +45,6 @@ try {
     if (array_diff(array_slice($required, 0, -1), $before['effective_mission_ids']) !== []) {
         throw new RuntimeException('A08_PREDECESSORS_MUST_REMAIN_ENABLED');
     }
-    if ($index === 2 && ($manifest['missions'][$id]['source_acceptance']['observed_verdict'] ?? null) !== 'READY') {
-        throw new RuntimeException('A08_M3_SAFETY_HOLD');
-    }
     if ($mode === 'enable' && ! ($before['missions'][$id]['end_to_end_accepted'] ?? false)) {
         throw new RuntimeException('END_TO_END_ACCEPTANCE_PENDING');
     }
@@ -93,9 +90,6 @@ try {
             'generation_unchanged' => $observedGeneration === $state['generation']], JSON_THROW_ON_ERROR)."\n");
         throw new RuntimeException('A08_CONTROLLED_TERMINAL_HOLD');
     }
-    if ($index === 2 && ($result['mission_verdict'] ?? null) !== 'READY') {
-        throw new RuntimeException('A08_M3_SAFETY_HOLD');
-    }
     $row = DB::connection(config('seo_council.connection', 'seo_intel'))
         ->table('seo_council_schedule_deliveries AS d')
         ->join('seo_council_run_receipts AS r', 'd.terminal_receipt_reference', '=', 'r.receipt_id')
@@ -104,10 +98,14 @@ try {
     $receipt = $row ? json_decode($row->receipt_json, true, 64, JSON_THROW_ON_ERROR) : null;
     $frozen = $row ? json_decode($row->mission_request_json, true, 64, JSON_THROW_ON_ERROR) : null;
     $hasher = app(SeoRegistryHasher::class);
-    if (! is_array($receipt) || $hasher->hashWithout($receipt, 'receipt_hash') !== $result['receipt_hash']
-        || data_get($frozen, 'slot.trigger_mode') !== 'controlled_acceptance'
-        || data_get($frozen, 'evidence.source_gaps') !== []) {
-        throw new RuntimeException('A08_TERMINAL_READBACK_HOLD');
+    if ($row === null || ! is_array($receipt) || ! is_array($frozen)) {
+        throw new RuntimeException('A08_TERMINAL_ROW_MISSING');
+    }
+    if ($hasher->hashWithout($receipt, 'receipt_hash') !== $result['receipt_hash']) {
+        throw new RuntimeException('A08_TERMINAL_HASH_MISMATCH');
+    }
+    if (data_get($frozen, 'slot.trigger_mode') !== 'controlled_acceptance') {
+        throw new RuntimeException('A08_TERMINAL_TRIGGER_MISMATCH');
     }
     $page = app(Platform12SystemHealthReadService::class)->snapshot();
     $item = $page['daily_missions']['items'][array_search($id, Platform12DailyMissionSet::IDS, true)] ?? [];

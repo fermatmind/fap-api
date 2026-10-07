@@ -12,7 +12,7 @@ final readonly class Platform12ActivationEvidence
 {
     public const SCHEMA = 'seo.platform12_a08_activation.v2';
 
-    public const REQUIRED_TESTS = [
+    public const LEGACY_REQUIRED_TESTS = [
         'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
             'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
             'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest', 'SeoPlatform12A08SourceCheckTest',
@@ -25,6 +25,18 @@ final readonly class Platform12ActivationEvidence
         Platform12DailyMissionSet::IDS[2] => ['SeoPlatform12B03DailySecurityDriftTest', 'SeoPlatform12A08ProductionEvidenceTest'],
     ];
 
+    public const REQUIRED_TESTS = [
+        'public' => ['SeoPlatform12A01MissionCatalogTest', 'SeoPlatform12A02SchedulerStorageTest',
+            'SeoPlatform12A03SchedulerFencingTest', 'SeoPlatform12A04ProductionPersistenceTest',
+            'SeoPlatform12A05ReadOnlyRuntimeGateTest', 'SeoPlatform12A08ActivationEvidenceTest',
+            'SeoPlatform12A08SourceCheckTest', 'SeoPlatform12A08DailyWiringTest',
+            'SeoPlatform12A08LegacyScheduleContractTest', 'MigrationPurityGateTest',
+            'SeoPlatform12F01NotificationPolicyContractTest', 'SeoPlatform12F02NotificationOutboxTest', 'SeoPlatform11C'],
+        Platform12DailyMissionSet::IDS[0] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[0]],
+        Platform12DailyMissionSet::IDS[1] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[1]],
+        Platform12DailyMissionSet::IDS[2] => self::LEGACY_REQUIRED_TESTS[Platform12DailyMissionSet::IDS[2]],
+    ];
+
     public function __construct(
         private RuntimeCapabilitySnapshotBuilder $capabilities,
         private SeoRegistryHasher $hasher,
@@ -35,19 +47,23 @@ final readonly class Platform12ActivationEvidence
     {
         $path = (string) config('seo_council.activation_receipt_path', '');
         $digestPath = $path.'.sha256';
+        $atomicPath = $path.'.atomic.json';
+        $atomic = is_file($atomicPath);
         $revisionPath = (string) config('seo_council.release_revision_path', dirname(base_path()).'/REVISION');
-        if ($path === '' || is_link($path) || is_link($digestPath)
-            || ! is_file($path) || ! is_readable($path) || filesize($path) > 65536
-            || ! is_file($digestPath) || ! is_readable($digestPath) || filesize($digestPath) > 128
+        if ($path === '' || is_link($path) || is_link($digestPath) || is_link($atomicPath)
+            || ($atomic ? (! is_readable($atomicPath) || filesize($atomicPath) > 131072)
+                : (! is_file($path) || ! is_readable($path) || filesize($path) > 65536
+                    || ! is_file($digestPath) || ! is_readable($digestPath) || filesize($digestPath) > 128))
             || is_link($revisionPath) || ! is_file($revisionPath) || ! is_readable($revisionPath)) {
             return $this->hold(null, 'ACTIVATION_EVIDENCE_MISSING');
         }
 
-        $bytes = file_get_contents($path);
-        $expectedDigest = trim((string) file_get_contents($digestPath));
+        $envelope = $atomic ? json_decode((string) file_get_contents($atomicPath), true) : null;
+        $bytes = $atomic ? ($envelope['bytes'] ?? null) : file_get_contents($path);
+        $expectedDigest = $atomic ? ($envelope['sha256'] ?? '') : trim((string) file_get_contents($digestPath));
         $productionSha = strtolower(trim((string) file_get_contents($revisionPath)));
         $manifest = is_string($bytes) ? json_decode($bytes, true) : null;
-        if (! is_string($bytes) || ! is_array($manifest)
+        if (! is_string($bytes) || strlen($bytes) > 65536 || ! is_array($manifest)
             || ! $this->digest($expectedDigest) || ! hash_equals($expectedDigest, hash('sha256', $bytes))) {
             return $this->hold($productionSha, 'ACTIVATION_EVIDENCE_CORRUPT');
         }
@@ -92,9 +108,10 @@ final readonly class Platform12ActivationEvidence
                 && $this->digest($terminal['receipt_hash'] ?? null)
                 && $this->digest($terminal['receipt_digest'] ?? null)
                 && $this->artifactDigest($terminal['artifact_digest'] ?? null);
-            $missions[$id] = ['end_to_end_accepted' => $endToEnd, 'acceptance_ready' => $code, 'source_accepted' => $accepted,
+            $software = ($manifest['software_delivery_only'] ?? false) === true && $code;
+            $missions[$id] = ['software_qualified' => $software, 'end_to_end_accepted' => $endToEnd, 'acceptance_ready' => $code, 'source_accepted' => $accepted,
                 'source_receipt_digest' => $accepted ? $source['receipt_digest'] : null,
-                'reason' => ! $code ? 'MISSION_SCOPED_EVIDENCE_HOLD' : ($endToEnd ? 'READY' : ($accepted ? 'MISSION_END_TO_END_PENDING' : 'MISSION_SOURCE_ACCEPTANCE_PENDING'))];
+                'reason' => ! $code ? 'MISSION_SCOPED_EVIDENCE_HOLD' : ($software ? 'SOFTWARE_READY_OPERATION_INDEPENDENT' : ($endToEnd ? 'READY' : ($accepted ? 'MISSION_END_TO_END_PENDING' : 'MISSION_SOURCE_ACCEPTANCE_PENDING')))];
         }
 
         return ['state' => 'READY', 'manifest' => $manifest, 'production_sha' => $productionSha, 'missions' => $missions];
@@ -146,11 +163,11 @@ final readonly class Platform12ActivationEvidence
     {
         return is_array($check) && ($check['scope_id'] ?? null) === $scope && ($check['check_scope'] ?? null) === 'a08_scoped_checks'
             && ($check['sha'] ?? null) === $sha && ($check['status'] ?? null) === 'pass'
-            && ($check['scope_version'] ?? null) === 'seo-council-a08-dependencies.v2'
+            && in_array($check['scope_version'] ?? null, ['seo-council-a08-dependencies.v2', 'seo-council-a08-dependencies.v3'], true)
             && $this->digest($check['fingerprint'] ?? null)
             && $this->digest($check['result_digest'] ?? null)
             && is_array($check['tests'] ?? null)
-            && array_diff(self::REQUIRED_TESTS[$scope], $check['tests']) === [];
+            && array_diff(($check['scope_version'] === 'seo-council-a08-dependencies.v2' ? self::LEGACY_REQUIRED_TESTS : self::REQUIRED_TESTS)[$scope], $check['tests']) === [];
     }
 
     private function permissionsClosed(mixed $permissions): bool

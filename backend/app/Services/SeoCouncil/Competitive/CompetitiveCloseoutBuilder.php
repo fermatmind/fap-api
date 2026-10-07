@@ -87,9 +87,10 @@ final class CompetitiveCloseoutBuilder
         $search = (array) ($measurement['search_measurement'] ?? []);
         $cro = (array) ($measurement['cro_measurement'] ?? []);
         $controlledSources = count((array) config('seo_agent_evidence.allowed_sources', []));
-        $releaseRef = $this->releaseIdentity->reference($environment, $candidateSha);
+        $releaseRef = (string) data_get($ingestion, 'dependency_ingestion.release_ref', $this->releaseIdentity->reference($environment, $candidateSha));
         $bundleHash = (string) data_get($ingestion, 'dependency_ingestion.bundle_hash', '');
-        $ready = ($ingestion['status'] ?? null) === 'READY'
+        $ready = $releaseRef === $this->releaseIdentity->reference($environment, $candidateSha, data_get($ingestion, 'dependency_ingestion.collection_cycle'))
+            && ($ingestion['status'] ?? null) === 'READY'
             && ($ingestion['bundle_verification'] ?? null) === 'valid'
             && ($measurement['status'] ?? null) === 'READY'
             && $this->measurementReady($search)
@@ -183,6 +184,15 @@ final class CompetitiveCloseoutBuilder
     /** @param array<string, mixed> $receipt */
     public function verify(array $receipt, string $candidateSha): bool
     {
+        try {
+            if (data_get($receipt, 'dependency_ingestion.release_ref') !== null
+                && data_get($receipt, 'dependency_ingestion.release_ref') !== $this->releaseIdentity->reference(
+                    $receipt['environment'] ?? '', $candidateSha, data_get($receipt, 'dependency_ingestion.collection_cycle'))) {
+                return false;
+            }
+        } catch (\Throwable) {
+            return false;
+        }
         $schema = $this->contracts->schema('seo.competitive_evidence_closeout.v3');
         $expected = (array) ($schema['required'] ?? []);
         $actual = array_keys($receipt);

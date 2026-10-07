@@ -67,6 +67,67 @@ PHP;
         $this->assertFalse(config('seo_agent_evidence.competitive.evidence_write_enabled'));
         $command = app(\App\Console\Commands\SeoCompetitiveEvidenceIngest::class);
         $this->assertFalse((new \ReflectionMethod($command, 'writeBoundaryAllowed'))->invoke($command));
+        $this->assertFalse(config('seo_agent_evidence.competitive.m3_refresh.external_read_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.competitive.m3_refresh.evidence_write_enabled'));
+    }
+
+    public function test_m3_production_defaults_and_explicit_overrides_preserve_general_capabilities_with_and_without_cache(): void
+    {
+        $directory = sys_get_temp_dir().'/m3-refresh-config-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $env = [
+            'SEO_COMPETITIVE_EXTERNAL_READ_ENABLED' => 'false',
+            'SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED' => 'false',
+            'SEO_AGENT_EVIDENCE_BUNDLE_WRITE_ENABLED' => 'false',
+            'SEO_AGENT_EVIDENCE_EXTERNAL_FETCH_ENABLED' => 'false',
+            'SEO_AGENT_EVIDENCE_RETENTION_DELETE_ENABLED' => 'false',
+        ];
+        $script = <<<'PHP'
+require 'vendor/autoload.php';
+$app = require 'bootstrap/app.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+$result = config('seo_agent_evidence.competitive.m3_refresh');
+foreach (['external_read_enabled', 'evidence_write_enabled'] as $key) {
+    $result['general_'.$key] = config('seo_agent_evidence.competitive.'.$key);
+}
+foreach (['bundle_write_enabled', 'external_fetch_enabled', 'retention_delete_enabled', 'agent_external_egress'] as $key) {
+    $result[$key] = config('seo_agent_evidence.'.$key);
+}
+echo json_encode($result);
+PHP;
+        try {
+            $cases = [
+                'production-default' => ['production', false, false, true, true],
+                'production-disabled' => ['production', 'false', 'false', false, false],
+                'production-read-disabled' => ['production', 'false', false, false, true],
+                'production-write-disabled' => ['production', false, 'false', true, false],
+                'production-explicit-enabled' => ['production', 'true', 'true', true, true],
+                'staging-default' => ['staging', false, false, false, false],
+                'testing-default' => ['testing', false, false, false, false],
+                'local-default' => ['local', false, false, false, false],
+            ];
+            foreach ($cases as $case => [$environment, $readOverride, $writeOverride, $read, $write]) {
+                $processEnv = [...$env, 'APP_ENV' => $environment, 'APP_CONFIG_CACHE' => $directory.'/'.$case.'.php',
+                    // Symfony removes inherited variables when the value is false.
+                    'SEO_M3_REFRESH_EXTERNAL_READ_ENABLED' => $readOverride,
+                    'SEO_M3_REFRESH_EVIDENCE_WRITE_ENABLED' => $writeOverride];
+                foreach ([false, true] as $cached) {
+                    if ($cached) {
+                        (new Process([PHP_BINARY, 'artisan', 'config:cache'], base_path(), $processEnv))->mustRun();
+                    }
+                    $process = new Process([PHP_BINARY, '-r', $script], base_path(), $processEnv);
+                    $process->mustRun();
+                    $this->assertSame([
+                        'external_read_enabled' => $read, 'evidence_write_enabled' => $write,
+                        'general_external_read_enabled' => false, 'general_evidence_write_enabled' => false,
+                        'bundle_write_enabled' => false, 'external_fetch_enabled' => false,
+                        'retention_delete_enabled' => false, 'agent_external_egress' => false,
+                    ], json_decode($process->getOutput(), true), $case.($cached ? ':cached' : ':uncached'));
+                }
+            }
+        } finally {
+            File::deleteDirectory($directory);
+        }
     }
 
     public function test_release_prepare_validates_the_resolved_cache_path_before_writer_access(): void

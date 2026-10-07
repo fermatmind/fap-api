@@ -5,6 +5,11 @@ return [
         'release_sha' => env('SEO_RELEASE_SHA', ''),
         'external_read_enabled' => env('SEO_COMPETITIVE_EXTERNAL_READ_ENABLED', false),
         'evidence_write_enabled' => env('SEO_COMPETITIVE_EVIDENCE_WRITE_ENABLED', false),
+        // Independent collection authorization; installed only inside natural M3 CLI refresh.
+        'm3_refresh' => [
+            'external_read_enabled' => env('SEO_M3_REFRESH_EXTERNAL_READ_ENABLED', env('APP_ENV') === 'production'),
+            'evidence_write_enabled' => env('SEO_M3_REFRESH_EVIDENCE_WRITE_ENABLED', env('APP_ENV') === 'production'),
+        ],
     ],
     'bundle_write_enabled' => env('SEO_AGENT_EVIDENCE_BUNDLE_WRITE_ENABLED', false),
     'context_build_enabled' => env('SEO_AGENT_EVIDENCE_CONTEXT_BUILD_ENABLED', false),

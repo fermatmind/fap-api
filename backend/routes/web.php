@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoCouncilMissionController;
 use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use App\Http\Controllers\Ops\ArticleDraftPreviewController;
+use App\Http\Controllers\Ops\BlogSurfacePreviewController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EnsureAdminTotpVerified;
@@ -105,6 +106,20 @@ if (config('admin.panel_enabled')) {
         ])
         ->whereNumber('article')
         ->name('ops.articles.preview');
+
+    Route::prefix('ops/blog-preview')->middleware([
+        SetOpsRequestContext::class,
+        AdminAuth::class,
+        ResolveOrgContext::class,
+        EnsureAdminTotpVerified::class,
+        RequireOpsOrgSelected::class,
+        OpsAccessControl::class,
+        EnsureCmsAdminAuthorized::class.':read',
+    ])->group(function () {
+        Route::get('/script.js', [BlogSurfacePreviewController::class, 'script']);
+        Route::get('/{surface}', BlogSurfacePreviewController::class)
+            ->whereNumber('surface')->name('ops.blog.preview');
+    });
 
     foreach ([
         'categories' => 'article-categories',

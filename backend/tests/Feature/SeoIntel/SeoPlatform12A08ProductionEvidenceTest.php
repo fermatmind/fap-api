@@ -5,7 +5,14 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Services\SEO\SitemapCache;
+use App\Services\SeoAgentEvidence\Bundle\SeoEvidenceBundleFactory;
+use App\Services\SeoAgentEvidence\Competitive\CompetitivePolicyObservationSet;
+use App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry;
+use App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher;
+use App\Services\SeoCouncil\Competitive\CompetitiveCloseoutBuilder;
+use App\Services\SeoCouncil\Platform12\Evaluation\Platform12DailySecurityDriftEvaluator;
 use App\Services\SeoCouncil\Platform12\Platform12DailyMissionSet;
+use App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection;
 use App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,10 +20,18 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Feature\SeoIntel\Concerns\BuildsCompetitiveEvidenceBundle;
 use Tests\TestCase;
 
 final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
 {
+    use BuildsCompetitiveEvidenceBundle;
+
+    private const CURRENT_SHA = 'aabbccddaabbccddaabbccddaabbccddaabbccdd';
+
+    private array $lifecycleFiles = [];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -30,8 +45,101 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
 
     protected function tearDown(): void
     {
+        foreach ($this->lifecycleFiles as $path) {
+            @unlink($path);
+        }
+        CarbonImmutable::setTestNow();
         DB::purge('seo_intel');
         parent::tearDown();
+    }
+
+    #[DataProvider('runtimeSnapshotMissions')]
+    public function test_runtime_observation_is_loaded_before_the_frozen_capture_time(string $mission, string $source): void
+    {
+        Schema::connection('seo_intel')->create('seo_runtime_probe_receipts', function (Blueprint $table): void {
+            $table->string('trigger_mode');
+            $table->text('scheduled_for');
+            $table->text('receipt_json');
+        });
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        CarbonImmutable::setTestNow($at);
+        foreach ([0, 10, 20] as $minutes) {
+            $receipt = [
+                'schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+                'trigger_mode' => 'scheduled', 'status' => 'success',
+                'scheduled_for' => $at->subMinutes($minutes)->startOfMinute()->toAtomString(),
+                'completed_at' => $at->subMinutes($minutes)->addSeconds(5)->toAtomString(),
+                'production_calibration' => ['private_negative_set' => ['checked' => true,
+                    'http_probe_count' => 22, 'accepted_http_probe_count' => 22,
+                    'exposure_count' => 0, 'unobserved_count' => 0]],
+            ];
+            $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+            DB::connection('seo_intel')->table('seo_runtime_probe_receipts')->insert([
+                'trigger_mode' => 'scheduled', 'scheduled_for' => $receipt['scheduled_for'],
+                'receipt_json' => json_encode($receipt, JSON_THROW_ON_ERROR),
+            ]);
+        }
+        // A natural receipt completes while the query is in progress.
+        DB::listen(function ($query) use ($at): void {
+            if (str_contains($query->sql, 'seo_runtime_probe_receipts') && str_starts_with($query->sql, 'select')) {
+                CarbonImmutable::setTestNow($at->addSeconds(10));
+            }
+        });
+        $capture = app(Platform12ProductionEvidenceReader::class)->capture($mission);
+        $this->assertSame($at->addSeconds(10)->format('Y-m-d\TH:i:s\Z'), $capture['captured_at']);
+        $this->assertNotContains($source, $capture['source_gaps']);
+        $this->assertContains($source, array_column($capture['sources'], 'id'));
+        Http::assertNothingSent();
+    }
+
+    public static function runtimeSnapshotMissions(): array
+    {
+        return [
+            'M1' => [Platform12DailyMissionSet::IDS[0], 'scheduled_runtime_probe'],
+            'M2' => [Platform12DailyMissionSet::IDS[1], 'scheduled_runtime_probe'],
+            'M3' => [Platform12DailyMissionSet::IDS[2], 'private_route_negative_set'],
+        ];
+    }
+
+    public function test_runtime_snapshot_expiring_during_read_is_not_fresh_at_the_frozen_time(): void
+    {
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        $receipt = ['schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+            'trigger_mode' => 'scheduled', 'completed_at' => $at->subMinutes(20)->subSecond()->toAtomString(), 'status' => 'success'];
+        $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+        // It was fresh at query start, then crossed the existing 20-minute
+        // boundary before the envelope's frozen capture time was fixed.
+        $window = ['state' => 'complete', 'fresh' => true, 'receipts' => [$receipt]];
+        $result = $this->read('runtimeWindow', $at, $window);
+        $this->assertFalse($result['fresh']);
+        $this->assertSame('MEASUREMENT_HOLD', $result['state']);
+    }
+
+    public function test_runtime_snapshot_still_rejects_corruption_future_completion_and_missing_receipts(): void
+    {
+        $at = CarbonImmutable::parse('2026-10-06T04:21:22Z');
+        $receipt = ['schema_version' => \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::SCHEMA_VERSION,
+            'trigger_mode' => 'scheduled', 'completed_at' => $at->toAtomString(), 'status' => 'MEASUREMENT_HOLD'];
+        $receipt['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($receipt);
+        $window = ['state' => 'MEASUREMENT_HOLD', 'receipts' => [$receipt]];
+        $this->assertSame('MEASUREMENT_HOLD', $this->read('runtimeWindow', $at, $window)['state']);
+        foreach (['corrupt', 'future', 'missing'] as $case) {
+            $invalid = $window;
+            if ($case === 'corrupt') {
+                $invalid['receipts'][0]['receipt_hash'] = str_repeat('0', 64);
+            } elseif ($case === 'future') {
+                $invalid['receipts'][0]['completed_at'] = $at->addSecond()->toAtomString();
+                $invalid['receipts'][0]['receipt_hash'] = \App\Services\SeoIntel\Runtime\ScheduledRuntimeProbeReceiptService::contentHash($invalid['receipts'][0]);
+            } else {
+                $invalid['receipts'] = [];
+            }
+            try {
+                $this->read('runtimeWindow', $at, $invalid);
+                $this->fail('An invalid runtime snapshot must remain HOLD: '.$case);
+            } catch (\RuntimeException $error) {
+                $this->assertSame($case === 'missing' ? 'RUNTIME_OBSERVATION_MISSING' : 'RUNTIME_RECEIPT_INVALID', $error->getMessage());
+            }
+        }
     }
 
     public function test_gsc_reads_latest_scheduled_attempt_including_failure_and_valid_zero(): void
@@ -44,11 +152,23 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         });
         $at = CarbonImmutable::now('UTC');
         $table = DB::connection('seo_intel')->table('seo_gsc_sync_runs');
-        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->addHours(8), 'created_at' => $at->subMinutes(3),
-            'finished_at' => $at->subMinutes(2), 'receipt_json' => json_encode(['schema_version' => 'seo.gsc_refresh_receipt.v2',
-                'trigger_mode' => 'scheduled', 'unmapped_rows' => 0, 'rows_seen' => 0, 'data_max_date' => $at->subDay()->toDateString(),
-                'quality_gate' => ['status' => 'pass']])]);
+        $started = $at->subMinutes(3);
+        $end = $started->setTimezone('America/Los_Angeles')->subDays(3);
+        $receipt = ['schema_version' => 'seo.gsc_refresh_receipt.v2', 'status' => 'success',
+            'trigger_mode' => 'scheduled', 'unmapped_rows' => 0, 'rows_seen' => 0, 'data_max_date' => null,
+            'reporting_timezone' => 'America/Los_Angeles', 'window_days' => 28, 'lag_days_requested' => 3,
+            'fetch_mode' => 'full_window', 'requested_start_date' => $end->subDays(27)->toDateString(),
+            'start_date' => $end->subDays(27)->toDateString(), 'end_date' => $end->toDateString(),
+            'search_types' => ['web'], 'pages_fetched' => 28, 'quality_gate' => ['status' => 'pass', 'zero_query_complete' => true],
+            'completeness' => ['pagination_complete' => true, 'truncated' => false,
+                'covered_start_date' => $end->subDays(27)->toDateString(), 'covered_end_date' => $end->toDateString(),
+                'search_types' => ['web'], 'dimensions' => ['query', 'page', 'device', 'country']]];
+        $receipt['receipt_hash'] = app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hash($receipt);
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->addHours(8), 'created_at' => $started,
+            'finished_at' => $at->subMinutes(2), 'receipt_json' => json_encode($receipt)]);
         $result = $this->read('gsc', $at);
+        $this->assertTrue($result['zero_query_complete']);
+        $this->assertSame('COMPLETE', $result['window_state']);
         $this->assertSame(0, $result['row_count']);
         $this->assertSame('READY', $result['data_quality_state']);
         $table->insert(['trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => $at->subMinute(), 'created_at' => $at->subMinute(),
@@ -190,5 +310,305 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
     {
         return (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, $method))
             ->invoke(app(Platform12ProductionEvidenceReader::class), ...$arguments);
+    }
+
+    public function test_m3_verified_replacement_retires_only_same_cohort_history_and_preserves_immutable_rows(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        $old = $this->lifecycleBundle(str_repeat('b', 40), now('UTC')->subDays(35));
+        $current = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $staging = $this->lifecycleBundle(str_repeat('c', 40), now('UTC')->subDays(35), 'staging');
+        foreach ([$old, $current, $staging] as $bundle) {
+            $this->storeLifecycleBundle($bundle);
+        }
+        $this->writeLifecycleReceipt($current);
+        $before = DB::connection('seo_intel')->table('seo_evidence_bundles')->get()->toJson();
+        $selection = app(Platform12EvidenceSelection::class)->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $this->assertSame('VALID', $selection['freshness']['current_reference_state']);
+        $this->assertSame(3, $selection['freshness']['stored_count']);
+        $this->assertSame(1, $selection['freshness']['superseded_count']);
+        $this->assertSame(1, $selection['freshness']['expired_count']);
+        $this->assertSame($old['bundle_hash'], $selection['freshness']['superseded_bundle_hashes']);
+        $this->assertSame(Platform12EvidenceSelection::EXIT_REASON, $selection['freshness']['historical_exit_reason']);
+        $this->assertSame($before, DB::connection('seo_intel')->table('seo_evidence_bundles')->get()->toJson());
+        $this->assertFalse((bool) config('seo_agent_evidence.bundle_write_enabled'));
+        $this->assertFalse((bool) config('seo_agent_evidence.agent_external_egress'));
+
+        // Unrelated expired evidence still holds; the proven replaced cohort alone passes.
+        $this->assertSame('HOLD', $this->evaluateLifecycle($selection['freshness'])['state']);
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->where('bundle_hash', $staging['bundle_hash'])->delete();
+        $selection = app(Platform12EvidenceSelection::class)->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $receipt = $this->evaluateLifecycle($selection['freshness']);
+        $this->assertSame('READY', $receipt['state']);
+        $this->assertSame($old['bundle_hash'], $receipt['evidence_freshness']['superseded_bundle_hashes']);
+        $frozenEvidence = ['input' => ['evaluated_at' => '2026-10-06T00:00:00Z', 'evidence_freshness' => $selection['freshness']],
+            'sources' => [], 'source_gaps' => [], 'captured_at' => '2026-10-06T00:00:00Z', 'expires_at' => '2026-10-06T00:10:00Z'];
+        $this->assertTrue((new \ReflectionMethod(\App\Services\SeoCouncil\Platform12\Platform12FrozenMission::class, 'safeEvidence'))->invoke(null, $frozenEvidence));
+        $frozenEvidence['input']['evidence_freshness']['superseded_bundle_hashes'] = '4111111111111111';
+        $this->assertFalse((new \ReflectionMethod(\App\Services\SeoCouncil\Platform12\Platform12FrozenMission::class, 'safeEvidence'))->invoke(null, $frozenEvidence));
+        $safety = (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, 'evidenceSafety'))
+            ->invoke(app(Platform12ProductionEvidenceReader::class), CarbonImmutable::now('UTC'), $selection['rows']);
+        $this->assertSame(1, $safety['scanned_count']);
+        $this->assertSame('ABSENT', $safety['query_security']['pii_state']);
+    }
+
+    #[DataProvider('invalidLifecycleReferences')]
+    public function test_m3_missing_stale_or_corrupt_reference_cannot_retire_history(string $failure): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        $old = $this->lifecycleBundle(str_repeat('b', 40), now('UTC')->subDays(35));
+        $at = match ($failure) {
+            'expired_bundle' => now('UTC')->subDays(31),
+            'future_bundle' => now('UTC')->addHour(),
+            default => now('UTC')->subHour(),
+        };
+        $current = $this->lifecycleBundle(self::CURRENT_SHA, $at);
+        $this->storeLifecycleBundle($old);
+        if ($failure !== 'missing_bundle') {
+            $this->storeLifecycleBundle($current);
+        }
+        if ($failure !== 'missing_receipt') {
+            $this->writeLifecycleReceipt($current, $failure);
+        }
+        if ($failure === 'row_hash') {
+            DB::connection('seo_intel')->table('seo_evidence_bundles')->where('bundle_id', $current['bundle_id'])
+                ->update(['bundle_hash' => str_repeat('f', 64)]);
+        }
+        if ($failure === 'row_expiry') {
+            DB::connection('seo_intel')->table('seo_evidence_bundles')->where('bundle_id', $current['bundle_id'])
+                ->update(['expires_at' => now('UTC')->addYear()]);
+        }
+        $selection = app(Platform12EvidenceSelection::class)->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $this->assertSame('UNAVAILABLE', $selection['freshness']['current_reference_state']);
+        $this->assertSame(0, $selection['freshness']['superseded_count']);
+        $this->assertContains($old['bundle_hash'], $selection['rows']->pluck('bundle_hash')->all());
+        $receipt = $this->evaluateLifecycle($selection['freshness']);
+        $this->assertSame('HOLD', $receipt['state']);
+        $this->assertContains('CURRENT_EVIDENCE_REFERENCE_HOLD', $receipt['reason_codes']);
+    }
+
+    public static function invalidLifecycleReferences(): array
+    {
+        return array_map(static fn (string $failure): array => [$failure], [
+            'missing_receipt', 'missing_bundle', 'receipt_hash', 'receipt_hold', 'receipt_sha',
+            'receipt_bundle_hash', 'receipt_registry', 'row_hash', 'row_expiry', 'expired_bundle', 'future_bundle',
+        ]);
+    }
+
+    public function test_m3_corrupt_history_stays_active_and_missing_reference_does_not_hide_denial(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        $old = $this->lifecycleBundle(str_repeat('b', 40), now('UTC')->subDays(35));
+        $current = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $this->storeLifecycleBundle($old);
+        $this->storeLifecycleBundle($current);
+        $this->writeLifecycleReceipt($current);
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->where('bundle_id', $old['bundle_id'])
+            ->update(['bundle_json' => '{broken']);
+        $selection = app(Platform12EvidenceSelection::class)->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $this->assertSame(0, $selection['freshness']['superseded_count']);
+        $this->assertSame(2, $selection['rows']->count());
+        $safety = (new \ReflectionMethod(Platform12ProductionEvidenceReader::class, 'evidenceSafety'))
+            ->invoke(app(Platform12ProductionEvidenceReader::class), CarbonImmutable::now('UTC'), $selection['rows']);
+        $this->assertSame('UNKNOWN', $safety['query_security']['pii_state']);
+        $empty = ['total_count' => 0, 'fresh_count' => 0, 'expired_count' => 0,
+            'stored_count' => 0, 'superseded_count' => 0, 'current_reference_state' => 'UNAVAILABLE',
+            'historical_exit_reason' => 'NONE', 'superseded_bundle_hashes' => '', 'selection_hash' => str_repeat('d', 64)];
+        $this->assertSame('HOLD', $this->evaluateLifecycle($empty)['state']);
+        $this->assertSame('DENY', $this->evaluateLifecycle($empty, true)['state']);
+    }
+
+    public function test_m3_compatible_cross_sha_reuse_preserves_source_and_rejects_dependency_drift_or_failed_refresh(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        $bundle = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $this->storeLifecycleBundle($bundle);
+        $this->writeLifecycleReceipt($bundle);
+        $receipt = json_decode(file_get_contents(storage_path('app/release-receipts/seo-competitive-evidence/'.self::CURRENT_SHA.'.json')), true);
+        $receipt['dependency_ingestion']['dependency_hash'] = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->dependencyHash();
+        $receipt['receipt_hash'] = app(SeoEvidenceCanonicalHasher::class)->hashWithout($receipt, 'receipt_hash');
+        $selection = app(Platform12EvidenceSelection::class);
+        $this->lifecycleFiles[] = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+        $selection->atomicReference($receipt);
+        $nextSha = str_repeat('c', 40);
+        $reference = $selection->currentReference(collect(), CarbonImmutable::now('UTC'), $nextSha);
+        $this->assertSame(self::CURRENT_SHA, $reference['source_sha']);
+        $this->assertSame($bundle['captured_at'], $reference['bundle']['captured_at']);
+        $this->assertSame('VALID', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_state']);
+        config()->set('seo_agent_evidence.query_hmac_key_version', 'changed');
+        $this->assertSame('DEPENDENCY_CHANGED', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_reason']);
+        $selection->atomicReference(['refresh_status' => 'failed', 'execution_sha' => $nextSha, 'reason' => 'SOURCE_POLICY_HOLD']);
+        $this->assertSame('REFRESH_FAILED', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_reason']);
+        Http::assertNothingSent();
+    }
+
+    public function test_m3_paged_history_retains_all_rows_and_requires_complete_safe_replacement_audit(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        for ($index = 0; $index < 201; $index++) {
+            $this->storeLifecycleBundle($this->lifecycleBundle(hash('sha1', 'history-'.$index), now('UTC')->subDays(35)->addSeconds($index)));
+        }
+        $current = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $this->storeLifecycleBundle($current);
+        $this->writeLifecycleReceipt($current);
+        $selection = app(Platform12EvidenceSelection::class);
+        $first = $selection->auditHistory(self::CURRENT_SHA);
+        $this->assertSame(200, $first['scanned']);
+        $this->assertSame('HISTORY_PENDING', $first['state']);
+        try {
+            $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+            $this->fail('Unfinished history cannot confer safety');
+        } catch (\RuntimeException $error) {
+            $this->assertSame('HISTORY_SCAN_PENDING', $error->getMessage());
+        }
+        $this->assertSame('HISTORY_COMPLETE', $selection->auditHistory(self::CURRENT_SHA)['state']);
+        $read = $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $this->assertSame(1, $read['rows']->count());
+        $this->assertSame('PAGED_IN_OPERATIONS', $read['freshness']['historical_scan_state']);
+        $this->assertSame(202, DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->where('id', 1)->update(['bundle_json' => '{broken']);
+        CarbonImmutable::setTestNow(now('UTC')->addHours(25));
+        $this->assertSame('HISTORY_INVALID', $selection->auditHistory(self::CURRENT_SHA)['state']);
+        try {
+            $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+            $this->fail('Corruption cannot be excluded');
+        } catch (\RuntimeException $error) {
+            $this->assertSame('HISTORY_INVALID', $error->getMessage());
+        }
+    }
+
+    public function test_gsc_request_window_is_anchored_to_collection_pt_day_across_dst_and_rejects_truncation(): void
+    {
+        foreach (['2026-03-08T07:59:59Z', '2026-03-08T10:01:00Z', '2026-11-01T08:59:59Z', '2026-11-01T10:01:00Z'] as $time) {
+            $started = CarbonImmutable::parse($time);
+            $end = $started->setTimezone('America/Los_Angeles')->subDays(3);
+            $receipt = ['reporting_timezone' => 'America/Los_Angeles', 'window_days' => 28, 'lag_days_requested' => 3,
+                'fetch_mode' => 'full_window', 'requested_start_date' => $end->subDays(27)->toDateString(),
+                'start_date' => $end->subDays(27)->toDateString(), 'end_date' => $end->toDateString(), 'search_types' => ['web'], 'pages_fetched' => 28,
+                'completeness' => ['covered_start_date' => $end->subDays(27)->toDateString(), 'covered_end_date' => $end->toDateString(),
+                    'pagination_complete' => true, 'truncated' => false, 'search_types' => ['web'], 'dimensions' => ['query', 'page', 'device', 'country']]];
+            $method = new \ReflectionMethod(Platform12ProductionEvidenceReader::class, 'gscWindow');
+            $this->assertSame('COMPLETE', $method->invoke(app(Platform12ProductionEvidenceReader::class), $receipt, $started));
+            $bad = $receipt;
+            $bad['completeness']['truncated'] = true;
+            $this->assertSame('GSC_COLLECTION_TRUNCATED', $method->invoke(app(Platform12ProductionEvidenceReader::class), $bad, $started));
+            $bad = $receipt;
+            $bad['end_date'] = $end->addDay()->toDateString();
+            $this->assertSame('GSC_WINDOW_MISMATCH', $method->invoke(app(Platform12ProductionEvidenceReader::class), $bad, $started));
+        }
+    }
+
+    private function createLifecycleTable(): void
+    {
+        (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
+    }
+
+    private function storeLifecycleBundle(array $bundle): void
+    {
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->insert([
+            'bundle_id' => $bundle['bundle_id'], 'bundle_version' => $bundle['bundle_version'],
+            'bundle_hash' => $bundle['bundle_hash'], 'mission_id' => $bundle['mission_id'],
+            'page_family' => $bundle['page_family'], 'locale' => $bundle['locale'], 'source_type' => $bundle['source_type'],
+            'expires_at' => CarbonImmutable::parse($bundle['expires_at'])->format('Y-m-d H:i:s'),
+            'bundle_json' => json_encode($bundle, JSON_THROW_ON_ERROR), 'created_at' => $bundle['captured_at'],
+        ]);
+    }
+
+    private function lifecycleBundle(string $sha, \Carbon\CarbonInterface $at, string $environment = 'production'): array
+    {
+        $input = $this->competitiveBundleInput($environment, $sha);
+        $input['captured_at'] = $at->format('Y-m-d\TH:i:s\Z');
+        $input['authority_revision'] = hash_file('sha256', base_path('content_assets/personality_public/current/manifest.json'));
+        $registry = app(CompetitiveSourcePolicyRegistry::class);
+        $policies = $registry->policies();
+        $payload = $input['payload'];
+        foreach ($payload['projections'] as &$projection) {
+            $projection['capture']['captured_at'] = $input['captured_at'];
+            $projection['source_policy_ref']['policy_hash'] = $policies[$projection['source_id']]['policy_hash'];
+            $projection['source_policy_ref']['expires_at'] = $at->copy()->addDays(30)->format('Y-m-d\TH:i:s\Z');
+            $projection = $this->sealCompetitiveValue($projection, 'projection_hash');
+        }
+        unset($projection);
+        $payload['source_policy_set_hash'] = $registry->snapshot(Platform12EvidenceSelection::COHORT)['source_policy_set_hash'];
+        foreach ($payload['policy_observations'] as &$observation) {
+            $observation['policy_hash'] = $policies[$observation['source_id']]['policy_hash'];
+            $observation['reviewed_at'] = $at->copy()->min(now('UTC'))->format('Y-m-d\TH:i:s\Z');
+            $observation['valid_until'] = $at->copy()->min(now('UTC'))->addDays(30)->format('Y-m-d\TH:i:s\Z');
+            $observation = app(CompetitivePolicyObservationSet::class)->seal($observation);
+        }
+        unset($observation);
+        $payload['policy_observation_set_hash'] = app(CompetitivePolicyObservationSet::class)->hash($payload['policy_observations']);
+        $finding = $payload['competitive_output']['findings'][0];
+        $finding['evidence_refs'] = array_column($payload['projections'], 'projection_hash');
+        $payload['competitive_output']['findings'][0] = $this->sealCompetitiveValue($finding, 'finding_hash');
+        $payload['competitive_output'] = $this->sealCompetitiveValue($payload['competitive_output'], 'output_hash');
+        $input['payload'] = $payload;
+
+        return app(SeoEvidenceBundleFactory::class)->create($input);
+    }
+
+    private function writeLifecycleReceipt(array $bundle, string $failure = ''): void
+    {
+        $mode = ['source_state' => 'available', 'freshness_state' => 'fresh', 'bundle_verification' => 'valid',
+            'context_status' => 'READY', 'hold_reason' => 'NONE', 'bundle_hash' => str_repeat('e', 64)];
+        $ingestion = ['status' => 'READY', 'hold_reason' => 'NONE', 'bundle_verification' => 'valid',
+            'competitive_output' => $bundle['payload']['competitive_output'],
+            'policy_snapshot' => app(CompetitiveSourcePolicyRegistry::class)->snapshot(Platform12EvidenceSelection::COHORT),
+            'measurement' => ['status' => 'READY', 'hold_reason' => 'NONE',
+                'measurement_bundle_set_hash' => $bundle['payload']['measurement_bundle_set_hash'],
+                'search_measurement' => array_replace($mode, ['bundle_hash' => $bundle['lineage_refs'][0]]),
+                'cro_measurement' => array_replace($mode, ['bundle_hash' => $bundle['lineage_refs'][1]]), 'bundles' => []],
+            'dependency_ingestion' => ['external_reads' => 12, 'bundle_hash' => $bundle['bundle_hash'],
+                'release_ref' => $bundle['payload']['release_ref'],
+                'policy_observations' => $bundle['payload']['policy_observations'],
+                'policy_observation_set_hash' => $bundle['payload']['policy_observation_set_hash'], 'policy_revalidation_count' => 0]];
+        $ordinarySources = config('seo_agent_evidence.allowed_sources', []);
+        config()->set('seo_agent_evidence.allowed_sources', app(CompetitiveSourcePolicyRegistry::class)->policies());
+        $builder = app(CompetitiveCloseoutBuilder::class);
+        $receipt = $builder->finalizeRuntime($builder->buildRuntime($ingestion, self::CURRENT_SHA, 'production'), self::CURRENT_SHA);
+        $this->assertTrue($builder->verify($receipt, self::CURRENT_SHA));
+        $this->assertSame('CLOSED', $receipt['closeout_state']);
+        if ($failure === 'receipt_hash') {
+            $receipt['receipt_hash'] = str_repeat('f', 64);
+        }
+        if ($failure === 'receipt_hold') {
+            $receipt = $builder->buildRuntime($ingestion, self::CURRENT_SHA, 'production');
+        }
+        if ($failure === 'receipt_sha') {
+            $receipt['production_sha'] = str_repeat('c', 40);
+        }
+        if ($failure === 'receipt_bundle_hash') {
+            $receipt['dependency_ingestion']['bundle_hash'] = str_repeat('f', 64);
+        }
+        if ($failure === 'receipt_registry') {
+            $receipt['cohort_hash'] = str_repeat('f', 64);
+            $receipt['receipt_hash'] = app(SeoEvidenceCanonicalHasher::class)->hashWithout($receipt, 'receipt_hash');
+        }
+        config()->set('seo_agent_evidence.allowed_sources', $ordinarySources);
+        $path = storage_path('app/release-receipts/seo-competitive-evidence/'.self::CURRENT_SHA.'.json');
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0755, true);
+        }
+        $this->assertFileDoesNotExist($path);
+        $this->lifecycleFiles[] = $path;
+        file_put_contents($path, json_encode($receipt, JSON_THROW_ON_ERROR));
+    }
+
+    private function evaluateLifecycle(array $freshness, bool $pii = false): array
+    {
+        return app(Platform12DailySecurityDriftEvaluator::class)->evaluate([
+            'evaluated_at' => '2026-10-06T00:00:00Z',
+            'private_routes' => ['tested_count' => 4, 'rejected_count' => 4],
+            'query_security' => ['hmac_state' => 'VALID', 'key_version_state' => 'CURRENT', 'pii_state' => $pii ? 'PRESENT' : 'ABSENT'],
+            'drift' => array_fill_keys(['role', 'binding', 'policy', 'tool', 'schema', 'prompt'], 'MATCH'),
+            'evidence_freshness' => $freshness, 'injection' => ['prompt_state' => 'PASS', 'tool_metadata_state' => 'PASS'],
+            'tools' => ['requested_count' => 0, 'authorized_count' => 0],
+            'posture' => ['retention_state' => 'COMPLIANT', 'egress_state' => 'COMPLIANT'],
+        ]);
     }
 }

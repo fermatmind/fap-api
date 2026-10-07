@@ -37,11 +37,101 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
 
     protected function tearDown(): void
     {
-        foreach (glob($this->directory.'/*') ?: [] as $file) {
-            unlink($file);
-        }
-        rmdir($this->directory);
+        $this->travelBack();
+        (new \Illuminate\Filesystem\Filesystem)->deleteDirectory($this->directory);
         parent::tearDown();
+    }
+
+    public function test_m3_collection_authorization_is_independent_and_scope_is_console_production_only(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->change(false, Platform12DailyMissionSet::IDS);
+        $runtime->reconcile();
+        $generation = $runtime->status()['generation'];
+        $this->assertTrue($runtime->allowsMission(Platform12DailyMissionSet::IDS[2]));
+        $command = app(\App\Console\Commands\SeoCompetitiveEvidenceIngest::class);
+        $scope = new \ReflectionMethod($command, 'installNaturalRefreshScope');
+        $original = config('seo_agent_evidence');
+        foreach ([[false, false], [true, false], [false, true]] as [$read, $write]) {
+            config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => $read, 'evidence_write_enabled' => $write]);
+            $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+            $this->assertFalse(config('seo_agent_evidence.competitive.external_read_enabled'));
+            $this->assertFalse(config('seo_agent_evidence.bundle_write_enabled'));
+        }
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        $this->assertFalse($scope->invoke($command, 'invalid', $generation));
+        $this->assertFalse($scope->invoke($command, $this->sha, str_repeat('0', 32)));
+        $console = new \ReflectionProperty($this->app, 'isRunningInConsole');
+        $console->setValue($this->app, false);
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $console->setValue($this->app, true);
+        $this->app->instance('env', 'staging');
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $this->app->instance('env', 'production');
+        $this->assertTrue($scope->invoke($command, $this->sha, $generation));
+        $this->assertTrue(config('seo_agent_evidence.competitive.external_read_enabled'));
+        // General writes/egress wait for the original fixed-cohort policy installer.
+        foreach (['bundle_write_enabled', 'external_fetch_enabled', 'retention_delete_enabled', 'agent_external_egress'] as $key) {
+            $this->assertFalse(config('seo_agent_evidence.'.$key));
+        }
+        $this->assertSame($original['connection'], config('seo_agent_evidence.connection'));
+        $cohort = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveSourceRegistry::class)->cohort('competitive.big-five.live.v2');
+        app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveSourcePolicyRegistry::class)
+            ->installForControlledCli($cohort, 'production', $this->sha);
+        $this->assertCount(count($cohort['source_ids']), config('seo_agent_evidence.allowed_sources'));
+        $this->assertTrue(config('seo_agent_evidence.bundle_write_enabled'));
+        $this->assertTrue(config('seo_agent_evidence.external_fetch_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.retention_delete_enabled'));
+        $this->assertFalse(config('seo_agent_evidence.agent_external_egress'));
+        config()->set('seo_agent_evidence', $original);
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        $runtime->change(true);
+        $this->assertFalse($scope->invoke($command, $this->sha, $generation));
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $runtime->reconcile();
+        $this->assertFalse($scope->invoke($command, $this->sha, $runtime->status()['generation']));
+    }
+
+    public function test_m3_natural_command_restores_scope_after_failure_and_rejects_other_modes(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->change(false, Platform12DailyMissionSet::IDS);
+        $runtime->reconcile();
+        config()->set('seo_agent_evidence.competitive.m3_refresh', ['external_read_enabled' => true, 'evidence_write_enabled' => true]);
+        config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        config()->set('seo_agent_evidence.connection', 'seo_intel');
+        \Illuminate\Support\Facades\DB::purge('seo_intel');
+        (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
+        \Illuminate\Support\Facades\Http::preventStrayRequests();
+        $originalStorage = storage_path();
+        $original = config('seo_agent_evidence');
+        $this->app->useStoragePath($this->directory);
+        try {
+            $this->artisan('seo:competitive-evidence-ingest', ['--write-evidence' => true, '--cohort' => 'competitive.big-five.live.v2', '--json' => true])
+                ->expectsOutputToContain('COMPETITIVE_WRITE_BOUNDARY_HELD')->assertFailed();
+            foreach (['--no-write' => true, '--cohort' => 'unapproved-cohort', '--finalize-activation' => true] as $option => $value) {
+                $this->artisan('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true, $option => $value])
+                    ->expectsOutputToContain('REFRESH_MODE_INVALID')->assertSuccessful();
+            }
+            $this->artisan('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true])
+                ->expectsOutputToContain('"status":"HOLD"')->assertSuccessful();
+            $path = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+            $marker = json_decode(file_get_contents($path), true);
+            $this->assertSame('failed', $marker['refresh_status']);
+            $this->assertNotSame('COMPETITIVE_WRITE_BOUNDARY_HELD', $marker['reason']);
+            $this->assertSame($original, config('seo_agent_evidence'));
+            $this->assertSame(0, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+            \Illuminate\Support\Facades\Http::assertNothingSent();
+        } finally {
+            $this->app->useStoragePath($originalStorage);
+            \Illuminate\Support\Facades\DB::purge('seo_intel');
+        }
     }
 
     public function test_scoped_evidence_does_not_authorize_or_unpause_and_source_acceptance_is_separate(): void
@@ -136,11 +226,173 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertSame(0, $runtime->status()['effective_enabled_missions']);
     }
 
+    public function test_old_producer_scope_is_readable_and_missing_or_unknown_scope_is_rejected(): void
+    {
+        $reader = app(\App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::class);
+        $manifest = $this->manifest();
+        foreach (['public', ...Platform12DailyMissionSet::IDS] as $scope) {
+            $key = $scope === 'public' ? 'validation.public_checks' : 'missions.'.$scope.'.checks';
+            data_set($manifest, $key.'.scope_version', 'seo-council-a08-dependencies.v2');
+            data_set($manifest, $key.'.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::LEGACY_REQUIRED_TESTS[$scope]);
+        }
+        $this->assertSame('READY', $reader->validate($manifest, $this->sha));
+        data_set($manifest, 'validation.public_checks.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::REQUIRED_TESTS['public']);
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($manifest, $this->sha));
+        data_set($manifest, 'validation.public_checks.scope_version', 'unknown');
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($manifest, $this->sha));
+    }
+
+    public function test_supported_legacy_producer_output_remains_readable_by_the_lkg_consumer(): void
+    {
+        $process = new \Symfony\Component\Process\Process(['git', 'show',
+            'f52866f5bd565cffa4999bd0214e1ed90190abbc:backend/app/Services/SeoCouncil/Platform12/Platform12ActivationEvidence.php'], dirname(base_path()));
+        $process->mustRun();
+        $path = $this->directory.'/legacy-reader.php';
+        file_put_contents($path, str_replace('class Platform12ActivationEvidence', 'class LegacyCompatibleActivationEvidence', $process->getOutput()));
+        require_once $path;
+        $reader = new \App\Services\SeoCouncil\Platform12\LegacyCompatibleActivationEvidence(
+            app(RuntimeCapabilitySnapshotBuilder::class), app(SeoRegistryHasher::class));
+        $manifest = $this->manifest();
+        foreach (['public', ...Platform12DailyMissionSet::IDS] as $scope) {
+            $key = $scope === 'public' ? 'validation.public_checks' : 'missions.'.$scope.'.checks';
+            data_set($manifest, $key.'.scope_version', 'seo-council-a08-dependencies.v2');
+            data_set($manifest, $key.'.tests', \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::LEGACY_REQUIRED_TESTS[$scope]);
+        }
+        $this->assertSame('READY', $reader->validate($manifest, $this->sha));
+        $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($this->manifest(), $this->sha));
+    }
+
+    public function test_software_reconcile_retains_existing_authorization_first_enable_and_pause_and_atomic_integrity(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->reconcile();
+        $this->assertSame([], $runtime->status()['selected_missions']);
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[2]]);
+        $generation = $runtime->status()['generation'];
+        $runtime->reconcile();
+        $first = $runtime->status()['missions'][Platform12DailyMissionSet::IDS[2]]['first_enabled_at'];
+        $this->assertNotNull($first);
+        $this->assertSame([Platform12DailyMissionSet::IDS[2]], $runtime->status()['effective_mission_ids']);
+        $this->assertSame($generation, $runtime->status()['generation']);
+        $this->sha = str_repeat('b', 40);
+        file_put_contents($this->directory.'/REVISION', $this->sha);
+        $next = $this->manifest();
+        $next['software_delivery_only'] = true;
+        $bytes = json_encode($next, JSON_THROW_ON_ERROR);
+        file_put_contents($this->directory.'/activation.json.atomic.json', json_encode(['bytes' => $bytes, 'sha256' => hash('sha256', $bytes)]));
+        // The complete atomic envelope wins while legacy mirrors still contain old bytes.
+        $runtime->reconcile();
+        $this->assertSame($first, $runtime->status()['missions'][Platform12DailyMissionSet::IDS[2]]['first_enabled_at']);
+        $this->assertSame($generation, $runtime->status()['generation']);
+        $this->assertSame([Platform12DailyMissionSet::IDS[2]], $runtime->status()['effective_mission_ids']);
+        $runtime->change(true);
+        $paused = $runtime->status()['generation'];
+        $runtime->reconcile();
+        $this->assertSame($paused, $runtime->status()['generation']);
+        $this->assertSame('PAUSED', $runtime->status()['state']);
+        file_put_contents($this->directory.'/activation.json.atomic.json', '{incomplete');
+        $this->assertSame('ACTIVATION_EVIDENCE_CORRUPT', $runtime->prerequisite());
+        $this->assertSame([], $runtime->status()['effective_mission_ids']);
+    }
+
+    public function test_natural_refresh_remains_eligible_after_terminal_daily_hold_without_another_evaluation(): void
+    {
+        $reader = $this->schedulerFixture();
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:19:00Z'));
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $control = app(Platform12RuntimeControl::class);
+        $control->change(false, [Platform12DailyMissionSet::IDS[2]]);
+        $control->reconcile();
+        \Illuminate\Support\Facades\Process::fake([
+            '*' => \Illuminate\Support\Facades\Process::result(output: '{"status":"HOLD","hold_reason":"REFRESH_BACKOFF","external_reads":0}'),
+        ]);
+        $scheduler = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class);
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:30:00Z'));
+        $first = $scheduler->tick();
+        $this->assertSame('TERMINAL_COMMITTED', $first['status'], json_encode($first));
+        $this->assertSame('HOLD', $first['mission_verdict']);
+        $receipt = json_decode(\Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_run_receipts')->value('receipt_json'), true);
+        $evaluation = collect($receipt['route_plan'])->firstWhere('kind', 'daily_evaluation')['output'];
+        $this->assertSame(['STALE_EVIDENCE_HOLD'], $evaluation['reason_codes']);
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T23:31:00Z'));
+        $this->assertSame('IDLE', $scheduler->tick()['status']);
+        \Illuminate\Support\Facades\Process::assertRanTimes(fn ($process): bool => $process->command === [
+            PHP_BINARY, base_path('artisan'), 'seo:competitive-evidence-ingest', '--refresh-if-due', '--json',
+        ], 2);
+        $this->assertSame(1, $reader->reads);
+        $this->assertSame(1, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
+        $this->assertSame(1, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_run_receipts')->count());
+        $this->travelBack();
+    }
+
+    public function test_natural_refresh_never_runs_without_authorized_m3_or_after_pause(): void
+    {
+        $this->schedulerFixture();
+        $this->travelTo(\Carbon\CarbonImmutable::parse('2026-10-06T22:31:00Z'));
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $control = app(Platform12RuntimeControl::class);
+        $control->change(false, [Platform12DailyMissionSet::IDS[0]]);
+        $control->reconcile();
+        \Illuminate\Support\Facades\Process::fake();
+        $scheduler = app(\App\Services\SeoCouncil\Platform12\Platform12DailyScheduler::class);
+        $this->assertSame('IDLE', $scheduler->tick()['status']);
+        $control->change(true);
+        $this->assertSame('PAUSED', $scheduler->tick()['status']);
+        \Illuminate\Support\Facades\Process::assertNothingRan();
+        $this->assertSame(0, \Illuminate\Support\Facades\DB::connection('seo_intel')->table('seo_council_schedule_deliveries')->count());
+        $this->travelBack();
+    }
+
+    private function schedulerFixture(): \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
+    {
+        config()->set('database.connections.seo_intel', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        config()->set('seo_council.connection', 'seo_intel');
+        \Illuminate\Support\Facades\DB::purge('seo_intel');
+        foreach (['2026_08_29_030000_create_seo_council_runtime_tables.php', '2026_09_04_010000_create_seo_council_scheduler_storage.php',
+            '2026_09_04_020000_expand_seo_council_scheduler_fencing.php', '2026_09_04_030000_expand_seo_council_run_receipts.php',
+            '2026_09_04_040000_create_seo_council_notification_outbox.php'] as $migration) {
+            (require database_path('migrations/seo_intel/'.$migration))->up();
+        }
+        $reader = new class implements \App\Services\SeoCouncil\Platform12\Platform12EvidenceReader
+        {
+            public int $reads = 0;
+
+            public function capture(string $missionId): array
+            {
+                $this->reads++;
+
+                return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
+                    'private_routes' => ['tested_count' => 30, 'rejected_count' => 30],
+                    'query_security' => ['hmac_state' => 'VALID', 'key_version_state' => 'CURRENT', 'pii_state' => 'ABSENT'],
+                    'drift' => array_fill_keys(['role', 'binding', 'policy', 'tool', 'schema', 'prompt'], 'MATCH'),
+                    'evidence_freshness' => ['total_count' => 1, 'fresh_count' => 0, 'expired_count' => 1],
+                    'injection' => ['prompt_state' => 'PASS', 'tool_metadata_state' => 'PASS'],
+                    'tools' => ['requested_count' => 0, 'authorized_count' => 0],
+                    'posture' => ['retention_state' => 'COMPLIANT', 'egress_state' => 'COMPLIANT']],
+                    'sources' => array_map(fn (string $id): array => ['id' => $id, 'hash' => str_repeat('d', 64),
+                        'read_at' => now('UTC')->toAtomString(), 'observed_at' => now('UTC')->subMinute()->toAtomString()],
+                        \App\Services\SeoCouncil\Platform12\Platform12SourceCheck::SOURCES[$missionId]),
+                    'source_gaps' => [], 'captured_at' => now('UTC')->toAtomString(),
+                    'expires_at' => now('UTC')->addMinutes(10)->toAtomString()];
+            }
+        };
+        $this->app->instance(\App\Services\SeoCouncil\Platform12\Platform12EvidenceReader::class, $reader);
+
+        return $reader;
+    }
+
     private function manifest(): array
     {
         $vector = app(RuntimeCapabilitySnapshotBuilder::class)->snapshot()['version_vector'];
         $artifact = 'sha256:'.str_repeat('c', 64);
-        $check = ['check_scope' => 'a08_scoped_checks', 'sha' => $this->sha, 'scope_version' => 'seo-council-a08-dependencies.v2',
+        $check = ['check_scope' => 'a08_scoped_checks', 'sha' => $this->sha, 'scope_version' => 'seo-council-a08-dependencies.v3',
             'status' => 'pass', 'fingerprint' => str_repeat('d', 64), 'result_digest' => str_repeat('e', 64), 'scope_id' => 'public', 'tests' => \App\Services\SeoCouncil\Platform12\Platform12ActivationEvidence::REQUIRED_TESTS['public']];
         $deploy = ['sha' => $this->sha, 'check_scope' => 'deployment_smoke_and_readonly_state', 'status' => 'pass',
             'completed_job' => true, 'run_id' => 12, 'artifact_digest' => $artifact, 'pause_preserved' => true, 'business_guards_closed' => true];

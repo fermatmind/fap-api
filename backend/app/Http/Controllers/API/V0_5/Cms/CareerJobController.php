@@ -118,7 +118,7 @@ final class CareerJobController extends Controller
     {
         $validated = $this->validateReadQuery($request);
         if ($validated instanceof JsonResponse) {
-            return $validated;
+            return $validated->header('Cache-Control', 'private, no-store');
         }
 
         $slug = app(CareerCurrentIdentity::class)->canonicalSlug($slug);
@@ -126,10 +126,11 @@ final class CareerJobController extends Controller
         try {
             $bundle = $reader->read($slug, $validated['locale']);
         } catch (\App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure $error) {
-            return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503);
+            return response()->json(['error' => 'CAREER_PAGE_UNAVAILABLE', 'code' => $error->safeCode], 503)->header('Cache-Control', 'private, no-store');
         }
 
-        return $bundle === null ? response()->json(['error' => 'not found'], 404) : response()->json($reader->seo($bundle));
+        return ($bundle === null ? response()->json(['error' => 'not found'], 404) : response()->json($reader->seo($bundle)))
+            ->header('Cache-Control', 'private, no-store');
     }
 
     /**

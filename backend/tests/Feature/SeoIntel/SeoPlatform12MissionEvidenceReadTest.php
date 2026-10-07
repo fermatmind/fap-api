@@ -34,7 +34,7 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         }
         DB::connection('seo_intel')->getSchemaBuilder()->create('seo_gsc_sync_runs', function (Blueprint $table): void {
             $table->id();
-            foreach (['sync_run_uid', 'trigger_mode', 'finished_at', 'status', 'receipt_json'] as $field) {
+            foreach (['sync_run_uid', 'trigger_mode', 'created_at', 'finished_at', 'status', 'receipt_json'] as $field) {
                 $table->text($field)->nullable();
             }
         });
@@ -69,6 +69,21 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         $this->assertSame('2026-09-18', $missing['data_max_date']);
     }
 
+    public function test_new_gsc_projection_preserves_frozen_hash_and_range_across_later_sources(): void
+    {
+        [$row, $receipt] = $this->fixture('2026-09-21T22:20:00Z', 'scheduled', false, true);
+        $this->storeGsc('later-run', '2026-09-22T08:00:00Z', '2026-09-19');
+        $reader = app(Platform12MissionEvidenceReadService::class);
+        $result = $reader->summary($row, $receipt, CarbonImmutable::parse('2026-09-22T09:00:00Z'));
+        $this->assertSame('2026-09-18', $result['gsc_collection']['end_date']);
+        $this->assertSame('2026-09-15', $result['gsc_collection']['start_date']);
+        $this->assertSame($result['sources'][0]['hash'], $result['gsc_collection']['source_hash']);
+        $r = json_decode(DB::connection('seo_intel')->table('seo_gsc_sync_runs')->where('sync_run_uid', 'original-run')->value('receipt_json'), true);
+        $r['rows_seen']++;
+        DB::connection('seo_intel')->table('seo_gsc_sync_runs')->where('sync_run_uid', 'original-run')->update(['receipt_json' => json_encode($r)]);
+        $this->assertNull($reader->summary($row, $receipt, CarbonImmutable::parse('2026-09-22T09:00:00Z'))['gsc_collection']);
+    }
+
     public function test_same_frozen_source_crosses_utc_day_without_rewriting_natural_result(): void
     {
         [$naturalRow, $natural] = $this->fixture('2026-09-21T22:20:00Z', 'scheduled');
@@ -81,9 +96,9 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         $this->assertSame('scheduled', $a['origin']);
         $this->assertSame('controlled_acceptance', $b['origin']);
         $this->assertSame(3, $a['lag_days']);
-        $this->assertSame(4, $b['lag_days']);
+        $this->assertSame(3, $b['lag_days']);
         $this->assertSame('READY', $a['state']);
-        $this->assertSame('DATA_FRESHNESS_HOLD', $b['state']);
+        $this->assertSame('READY', $b['state']);
         foreach (['en', 'zh_CN'] as $locale) {
             app()->setLocale($locale);
             $html = view('filament.ops.components.ops-mission-result-evidence', ['result' => $b, 'label' => 'latest_controlled'])->render();
@@ -126,7 +141,7 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
     public function test_latest_natural_and_controlled_remain_visible_while_next_delivery_is_pending(): void
     {
         $this->travelTo(CarbonImmutable::parse('2026-09-22T09:00:00Z'));
-        foreach ([['2026-09-21T22:20:00Z', 'scheduled'], ['2026-09-22T00:20:00Z', 'controlled_acceptance']] as [$at, $trigger]) {
+        foreach ([['2026-09-21T22:20:00Z', 'scheduled'], ['2026-09-22T08:20:00Z', 'controlled_acceptance']] as [$at, $trigger]) {
             [$row, $receipt] = $this->fixture($at, $trigger);
             $this->persist($row, $receipt);
         }
@@ -173,13 +188,25 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         $this->assertStringContainsString(__('seo-council.url_truth_counts.denominator').': UNAVAILABLE', $html);
     }
 
-    private function fixture(string $at, string $trigger, bool $urlTruth = false): array
+    private function fixture(string $at, string $trigger, bool $urlTruth = false, bool $modern = false): array
     {
         $r = $this->storeGsc('original-run', '2026-09-21T21:00:00Z', '2026-09-18');
         $hasher = app(SeoRegistryHasher::class);
         $projection = ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => 'success', 'observed_at' => '2026-09-21T21:00:00Z',
             'source_hash' => $hasher->hash($r), 'trigger_mode' => 'scheduled', 'mapping_state' => 'READY', 'data_quality_state' => 'READY',
             'window_state' => 'COMPLETE', 'row_count' => 100, 'data_max_date' => '2026-09-18'];
+        if ($modern) {
+            $r += ['window_days' => 90, 'fetch_mode' => 'incremental', 'pages_fetched' => 4,
+                'requested_start_date' => '2026-06-21', 'lag_days_requested' => 3,
+                'completeness' => ['covered_start_date' => $r['start_date'], 'covered_end_date' => $r['end_date'],
+                    'pagination_complete' => true, 'truncated' => false, 'search_types' => ['web'],
+                    'dimensions' => ['query', 'page', 'device', 'country']], 'search_types' => ['web']];
+            $r['receipt_hash'] = $hasher->hashWithout($r, 'receipt_hash');
+            DB::connection('seo_intel')->table('seo_gsc_sync_runs')->where('sync_run_uid', 'original-run')->update(['receipt_json' => json_encode($r)]);
+            $projection['source_hash'] = $hasher->hash($r);
+            $projection['collection_reason'] = 'COMPLETE';
+            $projection['zero_query_complete'] = false;
+        }
         $evidence = ['input' => ['evaluated_at' => $at, 'gsc' => array_diff_key($projection, ['observed_at' => true, 'source_hash' => true]),
             'runtime' => ['core_runtime_state' => 'AVAILABLE', 'public_api_state' => 'AVAILABLE', 'readback_state' => 'AVAILABLE',
                 'production_sha' => str_repeat('a', 40), 'readback_sha' => str_repeat('a', 40)]],
@@ -220,7 +247,7 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
             'trigger_mode' => 'scheduled', 'reporting_timezone' => 'America/Los_Angeles', 'unmapped_rows' => 0,
             'rows_seen' => 100, 'data_max_date' => $max, 'start_date' => '2026-09-15', 'end_date' => $max, 'quality_gate' => ['status' => 'pass']];
         DB::connection('seo_intel')->table('seo_gsc_sync_runs')->updateOrInsert(['sync_run_uid' => $uid],
-            ['trigger_mode' => 'scheduled', 'status' => 'success', 'finished_at' => CarbonImmutable::parse($finished)->format('Y-m-d H:i:s'), 'receipt_json' => json_encode($r)]);
+            ['trigger_mode' => 'scheduled', 'status' => 'success', 'created_at' => CarbonImmutable::parse($finished)->subMinute()->format('Y-m-d H:i:s'), 'finished_at' => CarbonImmutable::parse($finished)->format('Y-m-d H:i:s'), 'receipt_json' => json_encode($r)]);
 
         return $r;
     }

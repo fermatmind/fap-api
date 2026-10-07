@@ -6,6 +6,12 @@ namespace App\Support;
 
 final class CanonicalTranslationPayloadHash
 {
+    /** Ignore JSON object key order, preserving scalar types and list order. */
+    public static function sameValue(mixed $left, mixed $right): bool
+    {
+        return self::sortObjectKeys($left) === self::sortObjectKeys($right);
+    }
+
     public static function hash(mixed $payload): string
     {
         return hash('sha256', json_encode(

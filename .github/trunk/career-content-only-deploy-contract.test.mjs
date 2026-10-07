@@ -32,7 +32,7 @@ test('dedicated mode preserves parity and atomic publish while excluding unrelat
   assert.match(deploy, /after\('seo:competitive-evidence-preactivation', 'career:current-authority-production-preactivation-parity'\)/);
   assert.match(deploy, /after\('deploy:symlink', 'reload:php-fpm'\)/);
   assert.match(deploy, /Skip queue worker reload for Career body-only release/);
-  assert.match(deploy, /Skip scheduler installation for Career body-only release/);
+  assert.match(readFileSync(new URL('../../deploy/scheduler.php', import.meta.url), 'utf8'), /Skip scheduler installation for Career body-only release/);
   assert.match(deploy, /Skip URL Truth probe because the Career URL set is unchanged/);
   assert.match(deploy, /task\('healthcheck:career-content-only'/);
   assert.match(workflow, /deploy_task=deploy:career-first-publish/);
@@ -109,11 +109,12 @@ function coverageTasks(options = {}) {
   return JSON.parse(execFileSync('php', ['-r', `
 namespace Deployer;
 $input = json_decode(base64_decode('${input}'), true);
-$config = ['release_path' => '/fixture/candidate'];
+$config = ['release_path' => '/fixture/candidate', 'release_operations' => $input['operations'] ?? ''];
 $commands = [];
 $runOptions = [];
 $host = $input['host'] ?? 'production';
 function get($key, $default = null) { return $GLOBALS['config'][$key] ?? $default; }
+${deploy.slice(deploy.indexOf('function deployOperation('), deploy.indexOf("\nset('sentry_release'"))}
 function set($key, $value) { $GLOBALS['config'][$key] = $value; }
 function currentHost() { return new class { function getAlias() { return $GLOBALS['host']; } }; }
 function deploySkipsAuthorityMutations() { return $GLOBALS['input']['skip'] ?? false; }

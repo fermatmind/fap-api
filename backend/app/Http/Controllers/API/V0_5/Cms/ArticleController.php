@@ -11,6 +11,7 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\Article15ExactPackageRevisionBoundAdapter;
+use App\Services\Cms\ArticleBlogService;
 use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublicListQuery;
 use App\Services\Cms\ArticlePublicListReadCache;
@@ -36,6 +37,7 @@ class ArticleController extends Controller
 {
     public function __construct(
         private readonly ArticleService $articleService,
+        private readonly ArticleBlogService $articleBlogService,
         private readonly ArticlePublishService $articlePublishService,
         private readonly ArticlePublicListQuery $articlePublicListQuery,
         private readonly ArticlePublicListReadCache $articlePublicListReadCache,
@@ -57,19 +59,76 @@ class ArticleController extends Controller
             return $validated;
         }
 
+        if ($validated['category'] !== null) {
+            $category = ArticleCategory::withoutGlobalScopes()->where('org_id', $validated['org_id'])
+                ->where('slug', $validated['category'])->first();
+            $validated['category_cache_token'] = $category === null ? 'missing' : hash('sha256', json_encode([
+                $category->id, $category->is_active, $category->name, $category->description,
+            ], JSON_THROW_ON_ERROR));
+        }
+
         $resolved = $this->articlePublicListReadCache->resolve(
             $validated,
             fn (): array => $this->buildArticleListResponse($validated),
         );
 
+        $payload = $resolved['payload'];
+        if ($validated['include_blog']) {
+            $payload['blog_v1'] = $this->articleBlogService->read(
+                $validated['org_id'], $validated['locale'],
+                fn (Article $article): array => $this->publicArticleListPayload($article),
+            );
+        }
+
         return response()
-            ->json($resolved['payload'])
+            ->json($payload)
             ->header('X-FM-Article-List-Cache', $resolved['state']);
     }
 
     /**
      * GET /api/v0.5/articles/{slug}
      */
+    public function feed(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'locale' => ['required', 'in:en,zh-CN'],
+            'org_id' => ['nullable', 'integer', 'in:0'],
+        ]);
+        if (array_diff(array_keys($request->query()), ['locale', 'org_id']) !== []) {
+            return response()->json(['ok' => false, 'error' => 'unsupported_feed_query'], 422);
+        }
+        $locale = $validated['locale'];
+        $items = [];
+        foreach ($this->articlePublicListQuery->feed(0, $locale) as $article) {
+            $revision = $article->publishedRevision;
+            $publishedAt = $article->published_at;
+            $changedAt = $article->getAttribute('feed_material_changed_at');
+            $updatedAt = $changedAt !== null ? \Illuminate\Support\Carbon::parse($changedAt)
+                : ($revision->published_at ?? $publishedAt);
+            if ($updatedAt->isFuture() || $updatedAt->lessThan($publishedAt)
+                || trim((string) $revision->title) === ''
+                || preg_match('/\A[A-Za-z0-9][A-Za-z0-9_-]{0,127}\z/', (string) $article->slug) !== 1) {
+                continue;
+            }
+            $items[] = [
+                'id' => (int) $article->id,
+                'locale' => $locale,
+                'slug' => (string) $article->slug,
+                'title' => (string) $revision->title,
+                'excerpt' => $revision->excerpt,
+                'published_revision_id' => (int) $revision->id,
+                'published_at' => $publishedAt->toIso8601String(),
+                'material_updated_at' => $updatedAt->toIso8601String(),
+                'canonical' => CanonicalFrontendUrl::normalizeAbsoluteUrl(
+                    CanonicalFrontendUrl::APEX_URL.'/'.$this->frontendLocaleSegment($locale).'/articles/'.$article->slug
+                ),
+            ];
+        }
+
+        return response()->json(['ok' => true, 'schema_version' => 'public-article-feed.v1',
+            'locale' => $locale, 'items' => $items])->header('Cache-Control', 'no-store');
+    }
+
     public function show(Request $request, string $slug): JsonResponse
     {
         $locale = trim((string) $request->query('locale', 'en'));
@@ -360,22 +419,7 @@ class ArticleController extends Controller
             )))
             : [];
         $cmsFaqBlocks = $this->publicArticleFaqBlocks($article);
-        $faqBlocks = $cmsFaqBlocks !== [] ? $cmsFaqBlocks : [
-            [
-                'key' => 'article_use',
-                'question' => $locale === 'zh-CN' ? '什么时候适合阅读这篇文章？' : 'When should I use this article?',
-                'answer' => $locale === 'zh-CN'
-                    ? '当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。'
-                    : 'Use this article when you want to connect public content with tests, personality profiles, or career guidance from a single starting point.',
-            ],
-            [
-                'key' => 'article_limits',
-                'question' => $locale === 'zh-CN' ? '这篇文章会替代正式判断吗？' : 'Does this replace formal judgment?',
-                'answer' => $locale === 'zh-CN'
-                    ? '不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。'
-                    : 'No. It offers public explanation and action cues, but does not replace medical, legal, or professional judgment.',
-            ],
-        ];
+        $faqBlocks = $cmsFaqBlocks;
 
         $compareBlocks = array_values(array_filter([
             $category !== null
@@ -399,7 +443,7 @@ class ArticleController extends Controller
         $cmsNextStepBlocks = $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
             $this->publicArticleCtaBundle($article, $locale)
         );
-        $nextStepBlocks = $cmsNextStepBlocks !== [] ? $cmsNextStepBlocks : [
+        $nextStepBlocks = $cmsNextStepBlocks !== [] ? $cmsNextStepBlocks : array_values(array_filter([
             [
                 'key' => 'articles_index',
                 'title' => $locale === 'zh-CN' ? '继续浏览文章' : 'Continue with articles',
@@ -414,14 +458,14 @@ class ArticleController extends Controller
                 'href' => '/'.$segment.'/topics',
                 'kind' => 'discover',
             ],
-            [
+            $this->articleTestTarget($article, $locale) !== null ? [
                 'key' => 'start_test',
                 'title' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
                 'body' => $locale === 'zh-CN' ? '如果你想把阅读转成自我测量，可以从测试入口开始。' : 'If you want to turn reading into self-measurement, continue into an assessment.',
                 'href' => $this->articleTestTarget($article, $locale),
                 'kind' => 'start_test',
-            ],
-        ];
+            ] : null,
+        ]));
 
         return $this->answerSurfaceContractService->build([
             'answer_scope' => 'public_indexable_detail',
@@ -470,7 +514,7 @@ class ArticleController extends Controller
             }
 
             $label = $this->normalizeString($slot['label'] ?? $slot['title'] ?? null);
-            $href = $this->normalizePublicTestHref($slot['href'] ?? $slot['url'] ?? null);
+            $href = $this->normalizePublicTestHref($slot['href'] ?? $slot['url'] ?? null, $locale);
             if ($label === null || $href === null) {
                 continue;
             }
@@ -572,7 +616,7 @@ class ArticleController extends Controller
     {
         $segment = $this->frontendLocaleSegment($locale);
 
-        return [
+        return array_values(array_filter([
             [
                 'key' => 'back_to_articles',
                 'label' => $locale === 'zh-CN' ? '返回文章列表' : 'Back to articles',
@@ -585,26 +629,26 @@ class ArticleController extends Controller
                 'href' => '/'.$segment.'/topics',
                 'kind' => 'discover',
             ],
-            [
+            $this->articleTestTarget($article, $locale) !== null ? [
                 'key' => 'start_test',
                 'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
                 'href' => $this->articleTestTarget($article, $locale),
                 'kind' => 'start_test',
-            ],
-        ];
+            ] : null,
+        ]));
     }
 
-    private function articleTestTarget(Article $article, string $locale): string
+    private function articleTestTarget(Article $article, string $locale): ?string
     {
         $segment = $this->frontendLocaleSegment($locale);
         foreach ($this->publicRelatedTestSlugs($article) as $slug) {
-            $href = $this->normalizePublicTestHref('/'.$segment.'/tests/'.$slug);
+            $href = $this->normalizePublicTestHref('/'.$segment.'/tests/'.$slug, $locale);
             if ($href !== null) {
                 return $href;
             }
         }
 
-        return '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+        return null;
     }
 
     /**
@@ -622,7 +666,7 @@ class ArticleController extends Controller
         return null;
     }
 
-    private function normalizePublicTestHref(mixed $href): ?string
+    private function normalizePublicTestHref(mixed $href, ?string $locale = null): ?string
     {
         if (! is_scalar($href)) {
             return null;
@@ -643,11 +687,18 @@ class ArticleController extends Controller
             return null;
         }
 
-        if (preg_match('#^/(en|zh)/tests/[a-z0-9][a-z0-9-]*$#i', $path) !== 1) {
+        if (preg_match('#^/(en|zh)/tests/([a-z0-9][a-z0-9-]*)$#', $path, $matches) !== 1
+            || ($locale !== null && $matches[1] !== $this->frontendLocaleSegment($locale))) {
+            return null;
+        }
+        $scale = app(\App\Services\Scale\ScaleRegistry::class)->lookupBySlug($matches[2], 0);
+        $canonicalSlug = $scale['primary_slug'] ?? null;
+        if (! is_string($canonicalSlug) || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $canonicalSlug) !== 1
+            || ! ($scale['is_public'] ?? false) || ! ($scale['is_active'] ?? false)) {
             return null;
         }
 
-        return $path;
+        return '/'.$matches[1].'/tests/'.$canonicalSlug;
     }
 
     private function normalizeString(mixed $value): ?string
@@ -907,6 +958,8 @@ class ArticleController extends Controller
             'locale' => ['nullable', 'in:en,zh-CN'],
             'related_test_slug' => ['nullable', 'string', 'max:127'],
             'voice' => ['nullable', 'string', 'max:32'],
+            'category' => ['nullable', 'string', 'max:127', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'include_blog' => ['nullable', 'boolean'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
         ]);
@@ -916,12 +969,17 @@ class ArticleController extends Controller
         }
 
         $validated = $validator->validated();
+        if (($validated['include_blog'] ?? false) && ! isset($validated['locale'])) {
+            return $this->invalidArgumentMessage('locale is required for include_blog.');
+        }
 
         return [
             'org_id' => (int) ($validated['org_id'] ?? 0),
             'locale' => isset($validated['locale']) ? (string) $validated['locale'] : null,
             'related_test_slug' => isset($validated['related_test_slug']) ? trim((string) $validated['related_test_slug']) : null,
             'voice' => isset($validated['voice']) ? trim((string) $validated['voice']) : null,
+            'category' => $validated['category'] ?? null,
+            'include_blog' => (bool) ($validated['include_blog'] ?? false),
             'page' => (int) ($validated['page'] ?? 1),
             'per_page' => (int) ($validated['per_page'] ?? 20),
         ];
@@ -1042,6 +1100,7 @@ class ArticleController extends Controller
             ->where('org_id', $orgId)
             ->where('slug', $slug)
             ->where('locale', $locale)
+            ->whereNull('articles.deleted_at')
             ->publiclyReadable()
             ->with($this->articleRelations())
             ->first();

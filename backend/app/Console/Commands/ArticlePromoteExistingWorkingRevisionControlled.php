@@ -45,6 +45,10 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
     private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
 
     protected $signature = 'articles:promote-existing-working-revision
+        {--blog-v1-file= : Exact frozen B4 blog cohort package; separate fixed-cohort lane}
+        {--blog-v1-sha256= : Exact frozen B4 package SHA-256}
+        {--admin-user-id= : Active configured solo owner for the fixed blog lane}
+        {--deployed-sha= : Exact active production release for the fixed blog lane}
         {--batch= : Fixed controlled batch name; supported value: seo13-20260726}
         {--expected-target-count= : Exact batch target count lock}
         {--expected-state-sha256= : Execute-only immutable preflight state lock}
@@ -56,7 +60,7 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         {--expected-slug= : Expected existing slug lock}
         {--expected-canonical= : Expected canonical path or URL lock}
         {--confirm= : Exact user confirmation phrase}
-        {--ack-claim-warning= : Article id whose boundary-context claim warnings are acknowledged}
+        {--ack-claim-warning= : Legacy article id or exact blog candidate claim acknowledgement token}
         {--preview-approved : Acknowledge authenticated preview QA passed for this exact working revision}
         {--schema-hold : Confirm schema generation/enqueue stays held}
         {--hreflang-hold : Confirm hreflang enablement stays held}
@@ -78,6 +82,9 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
 
     public function handle(ArticlePublishService $publisher, AuditLogger $auditLogger): int
     {
+        if ((string) $this->option('blog-v1-file') !== '') {
+            return $this->handleBlogV1();
+        }
         $batch = trim((string) $this->option('batch'));
         if ($batch !== '') {
             return $this->handleBatch($publisher, $auditLogger, $batch);
@@ -202,6 +209,58 @@ final class ArticlePromoteExistingWorkingRevisionControlled extends Command
         $this->emitSummary($summary);
 
         return ($summary['ok'] ?? false) ? self::SUCCESS : self::FAILURE;
+    }
+
+    /** @review-surface article_translation_revision */
+    private function handleBlogV1(): int
+    {
+        $execute = (bool) $this->option('execute');
+        try {
+            if ($execute && $this->option('dry-run')) {
+                throw new RuntimeException('blog_mutually_exclusive_modes');
+            }
+            foreach (['batch', 'article-id', 'working-revision-id', 'current-published-revision-id', 'translation-group-id',
+                'expected-slug', 'expected-canonical', 'expected-target-count', 'expected-revision-set-sha256'] as $option) {
+                if ((string) $this->option($option) !== '') {
+                    throw new RuntimeException('blog_mixed_promotion_lane_forbidden');
+                }
+            }
+            $workspace = app(\App\Services\Cms\BlogV1RevisionWorkspace::class);
+            $sha = (string) $this->option('blog-v1-sha256');
+            $package = $workspace->loadSource((string) $this->option('blog-v1-file'), $sha);
+            $ack = (string) $this->option('ack-claim-warning');
+            $plan = $workspace->plan($package, true, $ack);
+            $confirmation = BlogV1RevisionWorkspaceCommand::confirmation('promote', $sha, $plan['state_sha256']);
+            if (! $plan['ok']) {
+                $this->line(json_encode([...$plan, 'expected_confirmation' => $confirmation], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+
+                return self::FAILURE;
+            }
+            if ($execute) {
+                if (! $this->option('preview-approved')) {
+                    throw new RuntimeException('blog_preview_missing');
+                }
+                foreach ($this->requiredHoldOptions() as $hold) {
+                    if (! $this->option($hold)) {
+                        throw new RuntimeException('blog_downstream_hold_missing');
+                    }
+                }
+                $actor = BlogV1RevisionWorkspaceCommand::executionActor($confirmation, (string) $this->option('confirm'),
+                    (int) $this->option('admin-user-id'), (string) $this->option('deployed-sha'));
+                $result = $workspace->promote($package, (string) $this->option('expected-state-sha256'), $actor, $ack);
+            } else {
+                $result = $plan;
+            }
+            $this->line(json_encode([...$result, 'expected_confirmation' => $confirmation], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+
+            return self::SUCCESS;
+        } catch (Throwable $error) {
+            $code = $error instanceof RuntimeException && preg_match('/\A[a-z_]+\z/', $error->getMessage()) === 1
+                ? $error->getMessage() : 'blog_controlled_promotion_failed';
+            $this->line(json_encode(['ok' => false, 'readonly' => ! $execute, 'error' => $code], JSON_THROW_ON_ERROR));
+
+            return self::FAILURE;
+        }
     }
 
     private function handleBatch(

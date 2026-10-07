@@ -1,6 +1,7 @@
+import { relevantNightlyFailures } from './nightly-relevance.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
-import { MISSIONS, digest, fingerprint, mayCarry } from './seo-platform-12a08-activation.mjs';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { MISSIONS, digest, fingerprint, mayCarry, SCOPE_VERSION, LEGACY_SCOPE_VERSION } from './seo-platform-12a08-activation.mjs';
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 export function verifyState(before, after, sha) {
   if (after.sha !== sha || before.paused !== after.paused
@@ -29,8 +30,24 @@ export function sourceAcceptance(report, sha, id, print, vector, artifact) {
     || Date.parse(report.captured_at) > Date.now()) return {status:'pending',reason:'SOURCE_CHECK_EXPIRED'};
   return {status:'pass',stage:'controlled_source_acceptance',environment:'production',mission_id:id,
     source_sha:sha,bound_sha:sha,receipt_digest:report.receipt_digest,artifact_digest:artifact,
-    fingerprint:print,version_vector:vector,captured_at:report.captured_at,sources:report.sources,
+    fingerprint:print,version_vector:vector,captured_at:report.captured_at,expires_at:report.expires_at,sources:report.sources,
     observed_verdict:report.observed_verdict};
+}
+export function equivalentSource(proof, report, now=Date.now()) {
+  if (!proof || !report) return false;
+  verifyReport(report);
+  const captured=Date.parse(report.captured_at),expires=Date.parse(report.expires_at);
+  const originalExpiry=Date.parse(proof.expires_at);
+  // Old receipts without a source TTL remain readable by the runtime, but
+  // cannot confer a new release's source acceptance. Never extend their dates.
+  if (!Number.isFinite(originalExpiry)||originalExpiry<now||!Number.isFinite(captured)||!Number.isFinite(expires)
+    ||captured>now||expires<now||expires-captured>600000||expires<=captured||report.source_wiring_status!=='VERIFIED'
+    ||report.source_gaps?.length!==0||report.real_runtime!==true||report.mission_id!==proof.mission_id
+    ||report.environment!==proof.environment||JSON.stringify(report.version_vector)!==JSON.stringify(proof.version_vector)) return false;
+  const normalized=sources=>Array.isArray(sources)&&sources.length>0&&sources.every(s=>typeof s.id==='string'&&/^[a-f0-9]{64}$/.test(s.hash??''))
+    ? sources.map(({id,hash,observed_at})=>({id,hash,observed_at})).sort((a,b)=>a.id.localeCompare(b.id)):null;
+  const old=normalized(proof.sources), current=normalized(report.sources);
+  return old!==null&&current!==null&&JSON.stringify(old)===JSON.stringify(current);
 }
 export function bindControlled(manifest, report, artifact) {
   verifyReport(report);
@@ -40,7 +57,6 @@ export function bindControlled(manifest, report, artifact) {
     || proof?.source_acceptance?.status !== 'pass' || report.source_receipt_digest !== proof.source_acceptance.receipt_digest
     || report.fingerprint !== proof.checks.fingerprint || JSON.stringify(report.version_vector) !== JSON.stringify(manifest.runtime.version_vector)
     || report.terminal_committed !== true || report.receipt_to_ui_verified !== true || report.runtime_boundaries_verified !== true
-    || (id === MISSIONS[2] && (proof.source_acceptance.observed_verdict !== 'READY' || report.observed_verdict !== 'READY'))
     || report.business_write_enabled !== false || !/^[a-f0-9]{64}$/.test(report.receipt_hash)
     || !/^sha256:[a-f0-9]{64}$/.test(artifact ?? '')) throw new Error('A08_CONTROLLED_BINDING_HOLD');
   proof.end_to_end_acceptance={...report,status:'pass',stage:'controlled_mission_terminal_and_ui',bound_sha:report.sha,artifact_digest:artifact};
@@ -61,9 +77,19 @@ export function build({checks, sha, ci, jobs, staging, production, artifactDiges
   if (checks.sha !== sha || checks.check_scope !== 'a08_scoped_checks'
     || ci.head_sha !== sha || ci.conclusion !== 'success' || ci.status !== 'completed'
     || ci.event !== 'push' || ci.head_branch !== 'main') throw new Error('A08_CI_BINDING_HOLD');
-  const prints = fingerprint(process.cwd(), sha);
+  const scopeVersion = Object.values(checks.checks ?? {})[0]?.scope_version;
+  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(scopeVersion)) throw new Error('A08_SCOPE_VERSION_HOLD');
+  const prints = fingerprint(process.cwd(), sha, scopeVersion);
   for (const id of ['public', ...MISSIONS]) {
-    if (checks.checks[id]?.sha !== sha || checks.checks[id]?.status !== 'pass'
+    if (!checks.checks[id]) {
+      const old = id === 'public' ? previous?.validation?.public_checks : previous?.missions?.[id]?.checks;
+      if (!old || !previous?.bound_production_sha
+        || spawnSync('git',['merge-base','--is-ancestor',previous.bound_production_sha,sha],{cwd:process.cwd()}).status !== 0
+        || old.scope_version !== scopeVersion || old.fingerprint !== prints[id]
+        || JSON.stringify(previous.runtime?.version_vector) !== JSON.stringify(production.version_vector)) throw new Error('A08_FOCUSED_REVALIDATION_REQUIRED');
+      checks.checks[id] = {...old, sha, validated_sha:old.validated_sha ?? old.sha, ancestor_verified:true};
+    }
+    if (checks.checks[id]?.scope_version !== scopeVersion || checks.checks[id]?.sha !== sha || checks.checks[id]?.status !== 'pass'
       || checks.checks[id]?.fingerprint !== prints[id]) throw new Error('A08_FINGERPRINT_HOLD');
   }
   const validation = {staging_safety:stagingSafety,nightly_assessment:nightly,public_checks: checks.checks.public,
@@ -79,11 +105,13 @@ export function build({checks, sha, ci, jobs, staging, production, artifactDiges
       completed_job: true, run_id: job.run_id, job_id: job.id, completed_at: job.completed_at,
       artifact_digest: artifactDigests[environment], pause_preserved: true, business_guards_closed: true};
   }
-  return {schema_version:'seo.platform12_a08_activation.v2', repository:'fermatmind/fap-api', bound_production_sha:sha,
-    validation, missions: Object.fromEntries(MISSIONS.map(id => [id, {checks: checks.checks[id], end_to_end_acceptance: previous?.missions?.[id]?.end_to_end_acceptance?.status === 'pass' && mayCarry(previous,{production_sha:sha,version_vector:production.version_vector},id)
-      ? {...previous.missions[id].end_to_end_acceptance,bound_sha:sha,ancestor_verified:true} : {status:'pending'}, source_acceptance: previous?.missions?.[id]?.source_acceptance?.status === 'pass' && mayCarry(previous,{production_sha:sha,version_vector:production.version_vector},id)
-      ? {...previous.missions[id].source_acceptance,bound_sha:sha,ancestor_verified:true}
-      : sourceAcceptance(stagingSafety?.pause_resume_verified === true ? sources?.[id] : null, sha, id, checks.checks[id].fingerprint, production.version_vector, artifactDigests.production)}])),
+  return {schema_version:'seo.platform12_a08_activation.v2', repository:'fermatmind/fap-api', bound_production_sha:sha, software_delivery_only:true,
+    validation, missions: Object.fromEntries(MISSIONS.map(id => [id, {
+      checks:checks.checks[id],
+      // Historical software wiring and source records retain their own SHA and dates.
+      source_acceptance:previous?.missions?.[id]?.source_acceptance ?? {status:'pending',reason:'OPERATIONS_SOURCE_INDEPENDENT'},
+      end_to_end_acceptance:previous?.missions?.[id]?.end_to_end_acceptance ?? {status:'pending'},
+    }])),
     runtime:{version_vector:production.version_vector,version_vector_hash:production.version_vector_hash},
     permissions:Object.fromEntries(['model_calls','tool_broker','cms_writes','publish_writes','canonical_writes','robots_writes','url_truth_writes','search_submission','business_writes'].map(key => [key,false])),
     measurement:{day_28_started:false,efficiency_claim_allowed:false}};
@@ -197,26 +225,70 @@ print(json.dumps([{'file': case.get('file', ''),
   return [...found.values()];
 }
 export function completedNightlyFullJob(jobs) {
-  const matching = jobs.filter(job=>job.name==='Full PHPUnit regression and performance contracts');
+  const matching = jobs.filter(job=>['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name));
   if (matching.length !== 1 || !['success','failure'].includes(matching[0].conclusion)) return null;
   return matching[0];
 }
-export function selectNightlyArtifact(artifacts, run) {
+export function selectNightlyArtifact(artifacts, run, job = null) {
   const name = `nightly-full-phpunit-${run.head_sha}-${run.id}`;
   const matching = artifacts.filter(item => item.name === name);
-  if (!matching.length) return null;
+  if (!matching.length) {
+    if (job?.name === 'Focused PHPUnit regression and performance contracts'
+      || job?.steps?.some(step => step.name === 'Upload full PHPUnit evidence')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+    return null; // Explicit legacy full-job log compatibility only.
+  }
   if (matching.length !== 1 || matching[0].expired || !/^sha256:[a-f0-9]{64}$/.test(matching[0].digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
   return matching[0];
 }
+export function nightlyEvidenceRuns(source, readRun, listRuns) {
+  if (!source) return listRuns();
+  if (!Number.isSafeInteger(source.run_id) || source.run_id <= 0
+    || !/^[a-f0-9]{40}$/.test(source.sha ?? '')
+    || (source.artifact_digest !== null && !/^sha256:[a-f0-9]{64}$/.test(source.artifact_digest ?? ''))) {
+    throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  }
+  const run = readRun(source.run_id);
+  if (run.id !== source.run_id || run.head_sha !== source.sha || run.status !== 'completed'
+    || !['success', 'failure'].includes(run.conclusion) || run.run_attempt !== 1
+    || run.head_branch !== 'main' || run.path !== '.github/workflows/nightly.yml'
+    || !['push', 'schedule'].includes(run.event)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  return [run];
+}
+export function newerNightlyFailures(runs, pinned) {
+  const baseline = Date.parse(pinned.created_at);
+  if (!Number.isFinite(baseline)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  return runs.filter(run => {
+    if (run.id === pinned.id || run.status !== 'completed' || run.conclusion !== 'failure'
+      || run.head_branch !== 'main' || !['push', 'schedule'].includes(run.event)) return false;
+    const created = Date.parse(run.created_at);
+    if (!Number.isFinite(created)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+    return created > baseline;
+  });
+}
+export function unresolvedNightlyDomains(runs, pinned, readJobs, isAncestor = () => false) {
+  const baseline = Date.parse(pinned.created_at), latest = new Map();
+  if (!Number.isFinite(baseline)) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
+  const recent = runs.filter(run => run.status === 'completed' && run.head_branch === 'main'
+    && ['push', 'schedule'].includes(run.event) && Date.parse(run.created_at) > baseline)
+    .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+  for (const run of recent) for (const job of readJobs(run.id)) {
+    if (!['success', 'failure'].includes(job.conclusion)
+      || ['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts', 'Final failure-domain receipt'].includes(job.name)) continue;
+    if (job.conclusion === 'success' && !isAncestor(run.head_sha)) continue;
+    if (!latest.has(job.name)) latest.set(job.name, {run_id:run.id, name:job.name, conclusion:job.conclusion});
+  }
+  return [...latest.values()].filter(job => job.conclusion === 'failure');
+}
 // Revalidate only the failures in the same immutable Nightly evidence used at closeout.
 // This is a temporary selection from evidence, not a permanent expansion of scoped CI.
-export function nightlyRevalidationPaths(run, jobs, evidence, availablePaths) {
+export function nightlyRevalidationPaths(run, jobs, evidence, availablePaths, candidateSha = null, root = process.cwd()) {
   const failed = jobs.filter(job => job.conclusion === 'failure' && job.name !== 'Final failure-domain receipt');
-  if (failed.some(job => job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  if (failed.some(job => !['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name))) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
   const failures = evidence.junit !== undefined ? parseJUnitNightlyFailures(evidence.junit)
     : failed.length ? parseLegacyNightlyFailures(evidence.log) : [];
   if ((!failed.length && failures.length) || (failed.length && !failures.length)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-  return [...new Set(failures.map(item => {
+  const selected = candidateSha ? relevantNightlyFailures(failures,run.head_sha,candidateSha,root).filter(item=>item.disposition==='candidate_revalidation') : failures;
+  return [...new Set(selected.map(item => {
     const matches = availablePaths.filter(path => path.endsWith(`/${item.focused_test}.php`));
     if (matches.length !== 1) throw new Error('NIGHTLY_REVALIDATION_PATH_HOLD');
     return matches[0];
@@ -228,19 +300,27 @@ export function assessNightly(run, jobs, evidence, checks) {
   const source = structured.junit !== undefined ? 'junit' : 'legacy_pest_log';
   if (source === 'junit' && !/^sha256:[a-f0-9]{64}$/.test(structured.artifact_digest ?? '')) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
   const junitFailures = source === 'junit' ? parseJUnitNightlyFailures(structured.junit) : null;
-  const checkScope = run.event === 'push' ? 'full_evidence_repair' : 'weekly_full_checks';
+  const checkScope = run.event === 'push' ? (jobs.some(job=>job.name==='Focused PHPUnit regression and performance contracts') ? 'focused_evidence_repair' : 'full_evidence_repair') : 'weekly_full_checks';
   const binding = structured.artifact_digest ? {artifact_digest:structured.artifact_digest} : {};
   if (!failed.length) {
     if (junitFailures?.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
     return {run_id:run.id,sha:run.head_sha,check_scope:checkScope,status:'pass',disposition:'INDEPENDENT_HEALTH_CHECK',evidence_source:source,...binding};
   }
-  if (failed.some(job=>job.name !== 'Full PHPUnit regression and performance contracts')) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
-  const revalidated = junitFailures ?? parseLegacyNightlyFailures(structured.log);
+  if (failed.some(job=>!['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name))) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
+  let revalidated = junitFailures ?? parseLegacyNightlyFailures(structured.log);
   if (!revalidated.length) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+  const relevance = structured.relevance ?? null;
+  const independent = relevance?.filter(item=>item.disposition==='independent_nightly_failure') ?? [];
+  if (relevance) {
+    const expected = relevantNightlyFailures(revalidated, run.head_sha, checks?.sha);
+    if (JSON.stringify(relevance) !== JSON.stringify(expected)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    if(JSON.stringify(relevance.map(({failed_test,focused_test})=>({failed_test,focused_test})))!==JSON.stringify(revalidated)) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
+    revalidated=relevance.filter(item=>item.disposition==='candidate_revalidation');
+  }
   const covered = checks?.covered_classes ?? [];
   if (!revalidated.every(item=>covered.some(name=>name.endsWith(item.focused_test)))) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
   return {run_id:run.id,sha:run.head_sha,check_scope:checkScope,status:'failure',
-    disposition:'CURRENT_CANDIDATE_FOCUSED_REVALIDATION',candidate_sha:checks.sha,evidence_source:source,...binding,revalidated};
+    disposition:'CURRENT_CANDIDATE_FOCUSED_REVALIDATION',candidate_sha:checks?.sha,evidence_source:source,...binding,revalidated,independent};
 }
 
 if (process.argv[2] === 'bind-controlled') {

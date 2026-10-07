@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Schema;
 
 final class ArticleWeeklySeoObservationExportService
 {
-    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v3';
+    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v4';
 
     public function __construct(
         private readonly ArticleReleaseCloseoutService $closeout,
@@ -83,6 +83,9 @@ final class ArticleWeeklySeoObservationExportService
             'date_range' => [
                 'from' => $from->toDateString(),
                 'to' => $to->toDateString(),
+                'gsc_timezone' => (string) config('seo_intel.gsc_reporting_timezone', 'America/Los_Angeles'),
+                'site_timezone' => (string) config('analytics.funnel_daily.reporting_timezone', 'Asia/Shanghai'),
+                'event_storage_timezone' => (string) config('analytics.funnel_daily.storage_timezone', 'UTC'),
             ],
             'filters' => [
                 'article_ids' => $articleIds,
@@ -110,6 +113,10 @@ final class ArticleWeeklySeoObservationExportService
         $query = Article::query()
             ->withoutGlobalScopes()
             ->with(['seoMeta' => static fn ($relation) => $relation->withoutGlobalScopes()])
+            ->where('org_id', 0)
+            ->whereNull('deleted_at')
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
             ->where('status', 'published')
             ->where('is_public', true)
             ->where(static function ($lifecycleQuery): void {
@@ -186,8 +193,10 @@ final class ArticleWeeklySeoObservationExportService
             return [
                 'table_available' => false,
                 'warnings' => ['seo_gsc_daily_missing'],
-                'clicks' => 0,
-                'impressions' => 0,
+                'observation_state' => 'unavailable',
+                'observed_rows' => null,
+                'clicks' => null,
+                'impressions' => null,
                 'ctr' => null,
                 'average_position' => null,
                 'top_queries' => [],
@@ -227,9 +236,14 @@ final class ArticleWeeklySeoObservationExportService
 
         return [
             'table_available' => true,
-            'warnings' => [],
-            'clicks' => $clicks,
-            'impressions' => $impressions,
+            'warnings' => $rows->isEmpty() ? ['gsc_no_observation_rows'] : [],
+            'observation_state' => $rows->isEmpty() ? 'unobserved' : 'observed',
+            'observed_rows' => $rows->count(),
+            'first_observed_date' => $rows->min('report_date'),
+            'last_observed_date' => $rows->max('report_date'),
+            'observed_days' => $rows->pluck('report_date')->unique()->count(),
+            'clicks' => $rows->isEmpty() ? null : $clicks,
+            'impressions' => $rows->isEmpty() ? null : $impressions,
             'ctr' => $impressions > 0 ? round($clicks / $impressions, 6) : null,
             'average_position' => $positionWeight > 0 ? round(($positionWeighted / $positionWeight) / 1000, 2) : null,
             'top_queries' => $topQueries,
@@ -245,23 +259,31 @@ final class ArticleWeeklySeoObservationExportService
             return [
                 'table_available' => false,
                 'warnings' => ['analytics_seo_conversion_daily_missing'],
-                'landing_pv_count' => 0,
-                'article_to_test_click_count' => 0,
-                'start_test_count' => 0,
-                'complete_test_count' => 0,
+                'observation_state' => 'unavailable',
+                'observed_rows' => null,
+                'landing_pv_count' => null,
+                'article_to_test_click_count' => null,
+                'start_test_count' => null,
+                'complete_test_count' => null,
                 'result_ready_count' => null,
-                'view_result_count' => 0,
+                'view_result_count' => null,
             ];
         }
 
         $hasSourceArticleId = Schema::hasColumn('analytics_seo_conversion_daily', 'source_article_id');
         $hasResultReadyCount = Schema::hasColumn('analytics_seo_conversion_daily', 'result_ready_count');
         $query = DB::table('analytics_seo_conversion_daily')
+            ->selectRaw('COUNT(*) AS observed_rows')
+            ->selectRaw('COUNT(DISTINCT day) AS observed_days')
+            ->selectRaw('MIN(day) AS first_observed_date')
+            ->selectRaw('MAX(day) AS last_observed_date')
             ->selectRaw('SUM(landing_pv_count) AS landing_pv_count')
             ->selectRaw('SUM(article_to_test_click_count) AS article_to_test_click_count')
             ->selectRaw('SUM(start_test_count) AS start_test_count')
             ->selectRaw('SUM(complete_test_count) AS complete_test_count')
             ->selectRaw('SUM(view_result_count) AS view_result_count')
+            ->where('org_id', 0)
+            ->whereIn('lang', str_starts_with($canonicalPath, '/zh/') ? ['zh', 'zh-CN', 'zh-cn'] : ['en', 'en-US', 'en-us'])
             ->whereBetween('day', [$from->toDateString(), $to->toDateString()])
             ->where(function ($query) use ($articleId, $canonicalPath, $hasSourceArticleId): void {
                 if ($hasSourceArticleId) {
@@ -277,17 +299,27 @@ final class ArticleWeeklySeoObservationExportService
         if ($hasResultReadyCount) {
             $query->selectRaw('SUM(result_ready_count) AS result_ready_count');
         }
+        if (Schema::hasColumn('analytics_seo_conversion_daily', 'last_refreshed_at')) {
+            $query->selectRaw('MAX(last_refreshed_at) AS last_refreshed_at');
+        }
         $row = $query->first();
+        $observed = (int) ($row->observed_rows ?? 0) > 0;
 
         return [
             'table_available' => true,
-            'warnings' => $hasResultReadyCount ? [] : ['result_ready_count_unavailable'],
-            'landing_pv_count' => (int) ($row->landing_pv_count ?? 0),
-            'article_to_test_click_count' => (int) ($row->article_to_test_click_count ?? 0),
-            'start_test_count' => (int) ($row->start_test_count ?? 0),
-            'complete_test_count' => (int) ($row->complete_test_count ?? 0),
-            'result_ready_count' => $hasResultReadyCount ? (int) ($row->result_ready_count ?? 0) : null,
-            'view_result_count' => (int) ($row->view_result_count ?? 0),
+            'warnings' => array_merge($hasResultReadyCount ? [] : ['result_ready_count_unavailable'], $observed ? [] : ['site_conversion_no_observation_rows']),
+            'observation_state' => $observed ? 'observed' : 'unobserved',
+            'observed_rows' => (int) ($row->observed_rows ?? 0),
+            'last_refreshed_at' => $row->last_refreshed_at ?? null,
+            'observed_days' => (int) ($row->observed_days ?? 0),
+            'first_observed_date' => $row->first_observed_date ?? null,
+            'last_observed_date' => $row->last_observed_date ?? null,
+            'landing_pv_count' => $observed ? (int) ($row->landing_pv_count ?? 0) : null,
+            'article_to_test_click_count' => $observed ? (int) ($row->article_to_test_click_count ?? 0) : null,
+            'start_test_count' => $observed ? (int) ($row->start_test_count ?? 0) : null,
+            'complete_test_count' => $observed ? (int) ($row->complete_test_count ?? 0) : null,
+            'result_ready_count' => $hasResultReadyCount && $observed ? (int) ($row->result_ready_count ?? 0) : null,
+            'view_result_count' => $observed ? (int) ($row->view_result_count ?? 0) : null,
         ];
     }
 
@@ -303,7 +335,9 @@ final class ArticleWeeklySeoObservationExportService
         $impressions = 0;
         $returnedArticleIds = [];
         $explicitNonIndexableCount = 0;
+        $observedGscArticles = 0;
         foreach ($rows as $row) {
+            $observedGscArticles += data_get($row, 'gsc.observation_state') === 'observed' ? 1 : 0;
             $decision = (string) data_get($row, 'release_closeout.decision', 'UNKNOWN');
             $decisions[$decision] = ($decisions[$decision] ?? 0) + 1;
             $clicks += (int) data_get($row, 'gsc.clicks', 0);
@@ -322,8 +356,10 @@ final class ArticleWeeklySeoObservationExportService
             'missing_requested_article_ids' => array_values(array_diff($requestedArticleIds, $returnedArticleIds)),
             'explicit_public_non_indexable_count' => $explicitNonIndexableCount,
             'release_closeout_decisions' => $decisions,
-            'gsc_clicks' => $clicks,
-            'gsc_impressions' => $impressions,
+            'gsc_observed_article_count' => $observedGscArticles,
+            'gsc_unobserved_or_unavailable_article_count' => count($rows) - $observedGscArticles,
+            'gsc_clicks' => $observedGscArticles > 0 ? $clicks : null,
+            'gsc_impressions' => $observedGscArticles > 0 ? $impressions : null,
             'gsc_ctr' => $impressions > 0 ? round($clicks / $impressions, 6) : null,
         ];
     }

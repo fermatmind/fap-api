@@ -313,6 +313,8 @@ final class ArticlePublicListReadCache
     {
         return hash('xxh3', json_encode([
             'locale' => $filters['locale'],
+            'category' => $filters['category'] ?? null,
+            'category_cache_token' => $filters['category_cache_token'] ?? null,
             'page' => $filters['page'],
             'per_page' => $filters['per_page'],
         ], JSON_THROW_ON_ERROR));

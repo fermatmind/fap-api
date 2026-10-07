@@ -2,10 +2,30 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
+import { classifyPaths } from "./classify-paths.mjs";
 
 const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8");
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
 const deployer = readFileSync(new URL("../../deploy.php", import.meta.url), "utf8");
+
+test("focused A08 selection agrees with the final CI receipt and deployment policy", () => {
+  const classification = classifyPaths([
+    "backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php",
+    "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php",
+    ".github/workflows/ci.yml", ".github/workflows/deploy.yml",
+  ]);
+  assert.equal(classification.operations.a08_focused, true);
+  assert.equal(classification.operations.a08_scoped_checks, true);
+  assert.equal(classification.operations.seo_council_orchestration, false);
+  const full = ci.match(/          council_required="[^\n]+"\n          if \[ "\$council_required" = true \]; then/);
+  assert.ok(full);
+  // Real classification is checked below against the same deploy equality.
+  const match = spawnSync("jq", ["-e", ".seo_council_orchestration.required == .classification.operations.seo_council_orchestration"], {
+    encoding: "utf8", input: JSON.stringify({classification,
+      seo_council_orchestration: {required: false, result: "success", check_scope: "a08_scoped_checks"}}),
+  });
+  assert.equal(match.status, 0, match.stderr);
+});
 
 test("A08-only exact-SHA receipts require successful scoped checks without a legacy closeout", () => {
   const branch = ci.match(/          elif \[ "\$\(jq -r \.operations\.a08_scoped_checks trunk-path-classification\.json\)" = true \]; then[\s\S]*?          fi/);
@@ -103,7 +123,7 @@ test("11D through 11L deployment stays disabled and writes immutable exact-SHA c
   assert.match(deployer, /closeout-environment=\{\{technical_closeout_environment\}\}/);
   assert.doesNotMatch(deployer, /after\('scheduler:wait-natural-heartbeat', 'seo:council-orchestration-closeout'\)/);
   assert.match(deployer, /set\('private_result_authority_publish_required', true\)/);
-  assert.equal((deployer.match(/get\('private_result_authority_publish_required', true\)/g) || []).length, 4);
+  assert.equal((deployer.match(/get\('private_result_authority_publish_required', true\)/g) || []).length, 1);
   assert.match(deployer, /"unavailable_dependency_refs" => \$unavailableRefs/);
   assert.match(deployer, /SEO Council safe source diagnostic/);
   assert.match(deployer, /"url_truth_query_available" => false/);

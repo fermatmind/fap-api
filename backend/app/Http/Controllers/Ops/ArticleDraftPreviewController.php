@@ -53,6 +53,7 @@ final class ArticleDraftPreviewController extends Controller
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
+        $bodyHtml = $this->resolvePublicPreviewLinks($bodyHtml);
 
         $html = View::make('ops.article-draft-preview', [
             'article' => $record,
@@ -68,6 +69,7 @@ final class ArticleDraftPreviewController extends Controller
             'bodyVisual' => $this->previewBodyVisual($record, $contentMd),
             'redactionCount' => $redacted['count'],
             'article15Metadata' => $article15Metadata,
+            'blogCandidate' => (array) data_get($revision?->authority_metadata_json, 'blog_v1_candidate', []),
             'previewContext' => [
                 'is_preview' => true,
                 'article_id' => (int) $record->id,
@@ -205,14 +207,61 @@ final class ArticleDraftPreviewController extends Controller
 
     private function publicUrl(Article $article): ?string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = $this->publicFrontendOrigin();
         $slug = trim((string) $article->slug);
-        if ($baseUrl === '' || $slug === '') {
+        if ($baseUrl === null || $slug === '') {
             return null;
         }
 
         $segment = str_starts_with(strtolower(trim((string) $article->locale)), 'zh') ? 'zh' : 'en';
 
         return $baseUrl.'/'.$segment.'/articles/'.rawurlencode($slug);
+    }
+
+    private function publicFrontendOrigin(): ?string
+    {
+        $url = rtrim(trim((string) config('app.frontend_url', '')), '/');
+        $parts = parse_url($url);
+        if (! is_array($parts)
+            || ! in_array(strtolower((string) ($parts['scheme'] ?? '')), ['http', 'https'], true)
+            || empty($parts['host'])
+            || isset($parts['user']) || isset($parts['pass'])
+            || isset($parts['query']) || isset($parts['fragment'])
+            || ! empty($parts['path'])
+            || ! filter_var($url, FILTER_VALIDATE_URL)) {
+            return null;
+        }
+
+        return $url;
+    }
+
+    private function resolvePublicPreviewLinks(string $html): string
+    {
+        $origin = $this->publicFrontendOrigin();
+
+        // Rewrite only rendered public navigation links. A <base> would also
+        // move local #anchors (and other resources) off this private preview.
+        return preg_replace_callback('/(<a\b[^>]*\s)href="([^"]*)"/i', function (array $match) use ($origin): string {
+            $href = html_entity_decode($match[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $parts = parse_url($href);
+            $path = rawurldecode((string) (is_array($parts) ? ($parts['path'] ?? '') : ''));
+            parse_str((string) (is_array($parts) ? ($parts['query'] ?? '') : ''), $query);
+            $privateQueryKeys = ['token', 'access_token', 'result_access_token', 'order_id', 'payment_intent', 'payment_recovery_token', 'session_id', 'checkout_id', 'signature'];
+            if (preg_match('#(?:^|/)(?:ops|result|results|orders?|payment|pay|share|history)(?:/|$)#i', $path) === 1
+                || preg_match('#^/(?:en|zh)/tests/[^/]+/take(?:/|$)#i', $path) === 1
+                || array_intersect($privateQueryKeys, array_map('strtolower', array_keys($query))) !== []) {
+                return $match[1];
+            }
+
+            if (preg_match('~^/(?:en|zh)/(?:articles|tests|personality|careers|topics|research)(?:/|[?#]|$)|^/(?:en|zh)/(?:science|method-boundaries|reliability-validity|data-privacy|common-misconceptions)(?:[?#]|$)~', $href) !== 1) {
+                return $match[0];
+            }
+
+            if ($origin === null) {
+                return $match[1];
+            }
+
+            return $match[1].'href="'.htmlspecialchars($origin.$href, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8').'" rel="noopener noreferrer"';
+        }, $html) ?? $html;
     }
 }
