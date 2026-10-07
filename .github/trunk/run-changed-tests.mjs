@@ -17,6 +17,8 @@ export function changedTestPlan(changes, {vitest=false}={}) {
  // when the tests themselves did not change. Do not expand to full Council.
  if(changes.some(({path})=>path==='backend/app/Services/SeoCouncil/Measurement/ReadOnlyMeasurementEvidenceBundleLoader.php'))
   plan.php.push(...['SeoPlatform11FEvidenceSourceTest','SeoPlatform11FEvidenceDiagnosticReasonTest','SeoPlatform11FEvidencePrivacyTest','SeoPlatform11FSearchMeasurementTest','SeoPlatform11FOrchestratorTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`));
+ if(changes.some(({path})=>['backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php','backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php'].includes(path)))
+  plan.php.push(...['SeoPlatform12E01SanitizedOperationsProjectionTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12MissionEvidenceReadTest'].map(name=>`backend/tests/Feature/SeoIntel/${name}.php`),'backend/tests/Feature/Ops/SeoOperationsPageTest.php');
  for(const key of Object.keys(plan))plan[key]=[...new Set(plan[key])].sort();
  if(plan.unsupported.length)throw new Error(`Unsupported changed tests: ${plan.unsupported.join(',')}`);
  return plan;

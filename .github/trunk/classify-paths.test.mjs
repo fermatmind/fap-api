@@ -627,3 +627,15 @@ test('named Python and Shell tests remain tests-only and require actual native e
 
 // An authorization scope promotion needs source/terminal acceptance, including on an enabled runtime.
 test('A08 producer scope promotion requires real acceptance and preserves enabled operator state',()=>{const c=classifyPaths(['.github/trunk/seo-platform-12a08-activation.mjs']);assert.equal(c.operations.a08_gate_only,false);assert.equal(c.operations.a08_focused,true);assert.equal(c.operations.a08_scoped_checks,true);});
+
+test('two frozen Ops read projections and their producer select focused consumers, preserving unknown and permission boundaries',()=>{
+ const ops=['backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php','backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php'];
+ for(const paths of [ops,[...ops,'backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php','.github/trunk/run-changed-tests.mjs']]){
+  const c=classifyPaths(paths);assert.equal(c.operations.a08_focused,true);assert.equal(c.operations.a08_scoped_checks,true);
+  assert.equal(c.operations.seo_council_orchestration,false);assert.equal(c.operations.seo_agent_policy_gateway,true);
+  assert.equal(c.operations.seo_competitive_evidence,false);assert.equal(c.operations.publisher_required,false);
+ }
+ const unknown=classifyPaths([...ops,'backend/app/Services/SeoCouncil/Platform12/Operations/UnknownProjection.php']);
+ assert.equal(unknown.operations.a08_focused,false);assert.equal(unknown.operations.a08_scoped_checks,true);
+ assert.equal(classifyPaths([...ops,'backend/app/Http/Middleware/OpsAccessControl.php']).operations.seo_council_orchestration,true);
+});

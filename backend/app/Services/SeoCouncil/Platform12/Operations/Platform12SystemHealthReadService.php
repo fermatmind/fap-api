@@ -194,9 +194,11 @@ final readonly class Platform12SystemHealthReadService
         $selected = $gate['selected'] ?? null;
         $allowed = $gate['run_allowed'] ?? null;
         $pause = $runtime['pause_intent'] ?? null;
+        $softwareQualified = ($gate['software_qualified'] ?? null) === true;
         if (! is_bool($selected) || ! is_bool($allowed) || ! in_array($pause, ['RUNNING', 'PAUSED'], true)
             || ($allowed && (! $selected || $pause === 'PAUSED' || ($runtime['public_gate'] ?? null) !== 'READY'
-                || ! ($gate['acceptance_ready'] ?? false) || ! ($gate['source_accepted'] ?? false) || ! ($gate['end_to_end_accepted'] ?? false)))) {
+                || ! ($gate['acceptance_ready'] ?? false)
+                || (! $softwareQualified && (! ($gate['source_accepted'] ?? false) || ! ($gate['end_to_end_accepted'] ?? false)))))) {
             return 'authorization_unknown';
         }
 

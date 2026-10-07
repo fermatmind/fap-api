@@ -113,6 +113,11 @@ export const SEO_OPS_PRESENTATION_PATHS = new Set([
   "backend/lang/zh_CN/seo-agent-roles.php",
 ]);
 
+const SEO_OPS_READ_PROJECTION_PATHS = new Set([
+  'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12SystemHealthReadService.php',
+  'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php',
+]);
+
 const isPresentationCompanion = (path) =>
   /^backend\/tests\//.test(path)
   || /^(?:docs\/|backend\/docs\/).+\.md$/.test(path)
@@ -174,6 +179,9 @@ export function classifyPaths(inputPaths) {
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
   );
+  const opsReadProjection = paths.some(path => SEO_OPS_READ_PROJECTION_PATHS.has(path))
+    && !paths.some(path => SEO_OPS_PRESENTATION_PATHS.has(path) && !SEO_OPS_READ_PROJECTION_PATHS.has(path))
+    && !paths.some(path => path.startsWith('backend/app/Services/SeoCouncil/Platform12/Operations/') && !SEO_OPS_READ_PROJECTION_PATHS.has(path));
   const a08GateOnly = !paths.includes(".github/trunk/seo-platform-12a08-activation.mjs") && paths.some(path => /Platform12|seo[_-].*a08/.test(path)) && paths.every(path =>
     /^(?:backend\/(?:app\/Services\/SeoCouncil\/|app\/Console\/Commands\/SeoCouncil(?:Runtime|SourceCheck|Scheduled)Command.php|scripts\/deploy\/seo_a08_|lang\/(?:en|zh_CN)\/seo-council.php|resources\/views\/filament\/ops\/components\/ops-system-health-workspace.blade.php|tests\/|docs\/)|\.github\/trunk\/|\.github\/workflows\/(?:ci|deploy).yml$|deploy.php$)/.test(path));
   // Scope the Council side of a mixed release separately from content/cache
@@ -189,7 +197,7 @@ export function classifyPaths(inputPaths) {
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
     a08_scopes: selectedScopes(paths),
-    a08_focused: paths.some(inRuntimeScope) && !opsPresentation && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isFocusedCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
+    a08_focused: paths.some(inRuntimeScope) && (!opsPresentation || opsReadProjection) && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isFocusedCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_content_only: false,

@@ -191,6 +191,27 @@ final class SeoPlatform12E02SystemHealthUiTest extends TestCase
         $this->assertSame('authorization_unknown', app(Platform12SystemHealthReadService::class)->snapshot($runtime)['daily_missions']['items'][1]['gate_next_step']);
     }
 
+    public function test_software_qualified_running_missions_keep_next_run_and_honest_business_hold(): void
+    {
+        $this->dailyReceipt('HELD', 'RECONCILIATION_INCOMPLETE_HOLD', now('UTC')->format('Y-m-d\TH:i:s\Z'));
+        $runtime = $this->runtime(['software_qualified' => true, 'source_accepted' => false, 'end_to_end_accepted' => false]);
+        $snapshot = app(Platform12SystemHealthReadService::class)->snapshot($runtime);
+        $item = $snapshot['daily_missions']['items'][1];
+        $this->assertSame('natural_run_authorized', $item['gate_next_step']);
+        $this->assertNotNull($item['next_run']);
+        $this->assertSame('HOLD', $item['state']);
+        foreach (['en', 'zh_CN'] as $locale) {
+            app()->setLocale($locale);
+            $html = view('filament.ops.components.ops-system-health-workspace', compact('snapshot'))->render();
+            $this->assertStringContainsString(__('seo-council.natural_run_authorized'), $html);
+            $this->assertStringNotContainsString('<button', $html);
+        }
+        foreach ([['software_qualified' => false], ['selected' => false]] as $override) {
+            $denied = $this->runtime(array_replace(['software_qualified' => true, 'source_accepted' => false, 'end_to_end_accepted' => false], $override));
+            $this->assertSame('authorization_unknown', app(Platform12SystemHealthReadService::class)->snapshot($denied)['daily_missions']['items'][1]['gate_next_step']);
+        }
+    }
+
     public function test_pending_delivery_and_lease_are_not_counted_twice_and_future_is_not_backlog(): void
     {
         $this->insertDelivery('CLAIMED', now()->utc());

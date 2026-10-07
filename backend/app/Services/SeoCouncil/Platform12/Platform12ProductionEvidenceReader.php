@@ -243,7 +243,8 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         ];
     }
 
-    private function gscWindow(array $receipt, CarbonImmutable $started): string
+    /** The same collection contract is used for current and frozen historical Ops reads. */
+    public function gscWindow(array $receipt, CarbonImmutable $started): string
     {
         $timezone = $receipt['reporting_timezone'] ?? null;
         $days = $receipt['window_days'] ?? null;

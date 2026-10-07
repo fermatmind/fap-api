@@ -47,3 +47,12 @@ test('measurement loader input invokes its real shared PHP consumers without ful
  assert.deepEqual(changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Measurement/MeasurementCoordinator.php'}]).php,[]);
  assert.equal(calls[0].args.includes('seo:council-closeout'),false);
 });
+
+test('frozen Ops projection input really invokes UI, privacy, RBAC and historical evidence consumers',()=>{
+ const plan=changedTestPlan([{status:'M',path:'backend/app/Services/SeoCouncil/Platform12/Operations/Platform12MissionEvidenceReadService.php'}]);
+ const calls=[];runChangedTests(plan,{run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+ assert.equal(calls.length,1);assert.equal(calls[0].cmd,'php');assert.equal(plan.php.length,4);
+ assert.ok(calls[0].args.includes('tests/Feature/SeoIntel/SeoPlatform12MissionEvidenceReadTest.php'));
+ assert.ok(calls[0].args.includes('tests/Feature/Ops/SeoOperationsPageTest.php'));
+ assert.equal(calls[0].args.includes('seo:council-closeout'),false);
+});

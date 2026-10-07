@@ -7,6 +7,8 @@ namespace App\Services\SeoCouncil\Platform12\Operations;
 use App\Services\SeoAgentGovernance\SeoRegistryHasher;
 use App\Services\SeoCouncil\Platform12\Notification\Platform12NotificationEvidence;
 use App\Services\SeoCouncil\Platform12\Platform12FrozenMission;
+use App\Services\SeoCouncil\Platform12\Platform12ProductionEvidenceReader;
+use App\Services\SeoIntel\GscRunStartTime;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -103,9 +105,11 @@ final readonly class Platform12MissionEvidenceReadService
                 return null;
             }
             // Select the historical observation, never the current latest run.
-            $rows = DB::connection((string) config('seo_intel.connection', 'seo_intel'))->table('seo_gsc_sync_runs')
+            $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
+            $rows = $connection->table('seo_gsc_sync_runs')
                 ->where('trigger_mode', 'scheduled')->where('finished_at', $observed->format('Y-m-d H:i:s'))
                 ->select(['status', 'sync_run_uid'])
+                ->selectRaw(GscRunStartTime::expression($connection).' AS run_started_at_utc')
                 ->selectRaw('CASE WHEN LENGTH(receipt_json) <= 262144 THEN receipt_json ELSE NULL END AS receipt_json')
                 ->limit(3)->get();
             if ($rows->count() > 2) {
@@ -127,6 +131,18 @@ final readonly class Platform12MissionEvidenceReadService
                     'data_quality_state' => $row->status === 'success' && data_get($r, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
                     'window_state' => $row->status === 'success' && $observed->gte($evaluated->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
                     'row_count' => $r['rows_seen'] ?? null, 'data_max_date' => $r['data_max_date'] ?? null];
+                if (array_key_exists('collection_reason', $input) || array_key_exists('zero_query_complete', $input)) {
+                    $started = Platform12OperationsTime::utcDatetime($row->run_started_at_utc);
+                    if ($started === null || $started->gt($observed)
+                        || ($r['receipt_hash'] ?? null) !== $hasher->hashWithout($r, 'receipt_hash')) {
+                        continue;
+                    }
+                    $window = app(Platform12ProductionEvidenceReader::class)->gscWindow($r, $started);
+                    $fresh = $observed->gte($evaluated->subHours(26));
+                    $projection['collection_reason'] = $fresh ? $window : 'GSC_COLLECTION_MISSED';
+                    $projection['zero_query_complete'] = data_get($r, 'quality_gate.zero_query_complete') === true && $window === 'COMPLETE';
+                    $projection['window_state'] = $row->status === 'success' && $window === 'COMPLETE' && $fresh ? 'COMPLETE' : 'INCOMPLETE';
+                }
                 if ($hasher->hash($projection) !== $source['hash']
                     || array_diff_key($projection, ['observed_at' => true, 'source_hash' => true]) != $input) {
                     continue;
