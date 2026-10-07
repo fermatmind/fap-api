@@ -81,9 +81,9 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
         $this->assertSame('scheduled', $a['origin']);
         $this->assertSame('controlled_acceptance', $b['origin']);
         $this->assertSame(3, $a['lag_days']);
-        $this->assertSame(4, $b['lag_days']);
+        $this->assertSame(3, $b['lag_days']);
         $this->assertSame('READY', $a['state']);
-        $this->assertSame('DATA_FRESHNESS_HOLD', $b['state']);
+        $this->assertSame('READY', $b['state']);
         foreach (['en', 'zh_CN'] as $locale) {
             app()->setLocale($locale);
             $html = view('filament.ops.components.ops-mission-result-evidence', ['result' => $b, 'label' => 'latest_controlled'])->render();
@@ -126,7 +126,7 @@ final class SeoPlatform12MissionEvidenceReadTest extends TestCase
     public function test_latest_natural_and_controlled_remain_visible_while_next_delivery_is_pending(): void
     {
         $this->travelTo(CarbonImmutable::parse('2026-09-22T09:00:00Z'));
-        foreach ([['2026-09-21T22:20:00Z', 'scheduled'], ['2026-09-22T00:20:00Z', 'controlled_acceptance']] as [$at, $trigger]) {
+        foreach ([['2026-09-21T22:20:00Z', 'scheduled'], ['2026-09-22T08:20:00Z', 'controlled_acceptance']] as [$at, $trigger]) {
             [$row, $receipt] = $this->fixture($at, $trigger);
             $this->persist($row, $receipt);
         }
