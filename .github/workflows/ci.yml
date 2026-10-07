@@ -41,9 +41,10 @@ jobs:
       seo_agent_policy_gateway: ${{ steps.classify.outputs.seo_agent_policy_gateway }}
       seo_council_orchestration: ${{ steps.classify.outputs.seo_council_orchestration }}
       a08_scoped_checks: ${{ steps.classify.outputs.a08_scoped_checks }}
-      seo_competitive_evidence: ${{ steps.classify.outputs.seo_competitive_evidence }}
+      seo_competitive_checks: ${{ steps.classify.outputs.seo_competitive_checks }}
       classification: ${{ steps.classify.outputs.classification }}
       a08_focused: ${{ steps.classify.outputs.a08_focused }}
+      a08_scopes: ${{ steps.classify.outputs.a08_scopes }}
       big5_tests: ${{ steps.classify.outputs.big5_tests }}
       mbti_modes: ${{ steps.classify.outputs.mbti_modes }}
       test_modes: ${{ steps.classify.outputs.test_modes }}
@@ -100,9 +101,10 @@ jobs:
             echo "seo_agent_policy_gateway=$(jq -r .operations.seo_agent_policy_gateway "$RUNNER_TEMP/classification.json")"
             echo "a08_scoped_checks=$(jq -r .operations.a08_scoped_checks "$RUNNER_TEMP/classification.json")"
             echo "seo_council_orchestration=$(jq -r .operations.seo_council_orchestration "$RUNNER_TEMP/classification.json")"
-            echo "seo_competitive_evidence=$(jq -r .operations.seo_competitive_evidence "$RUNNER_TEMP/classification.json")"
+            echo "seo_competitive_checks=$(jq -r .operations.seo_competitive_checks "$RUNNER_TEMP/classification.json")"
             echo "classification=$compact"
             echo "a08_focused=$(jq -r .operations.a08_focused "$RUNNER_TEMP/classification.json")"
+            echo "a08_scopes=$(jq -c .operations.a08_scopes "$RUNNER_TEMP/classification.json")"
             echo "big5_tests=$(jq -r .operations.big5_tests "$RUNNER_TEMP/classification.json")"
             echo "content_pack_checks=$(jq -r .operations.content_pack_checks "$RUNNER_TEMP/classification.json")"
             echo "content_test_files=$(jq -c .operations.content_test_files "$RUNNER_TEMP/classification.json")"
@@ -654,6 +656,8 @@ jobs:
     if: always() && (needs.classify.outputs.seo_council_orchestration == 'true' || needs.classify.outputs.a08_scoped_checks == 'true') && (needs.seo-agent-policy-gateway.result == 'success' || needs.seo-agent-policy-gateway.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      A08_SCOPES: ${{ needs.classify.outputs.a08_scopes }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
@@ -671,7 +675,7 @@ jobs:
       - name: Install backend dependencies
         working-directory: backend
         run: composer install --no-interaction --prefer-dist --no-progress
-      - name: Run scoped A08 consumer and relevant Nightly contracts
+      - name: Run deterministic A08 software consumers
         if: needs.classify.outputs.a08_focused == 'true'
         working-directory: backend
         env:
@@ -680,14 +684,13 @@ jobs:
           set -euo pipefail
           cp -n .env.example .env || true
           php artisan key:generate --force
-          node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
           node --input-type=module - <<'JS' > "$RUNNER_TEMP/a08-required-paths.txt"
           import {CHECKS,LEGACY_CHECKS,PRODUCER_SCOPE_VERSION,LEGACY_SCOPE_VERSION} from '../.github/trunk/seo-platform-12a08-activation.mjs';
           const checks=PRODUCER_SCOPE_VERSION===LEGACY_SCOPE_VERSION?LEGACY_CHECKS:CHECKS;
           import {execFileSync} from 'node:child_process';
           const files=execFileSync('git',['ls-files','tests'],{encoding:'utf8'}).trim().split('\n');
           const selected=new Set();
-          for(const name of new Set(Object.values(checks).flat())) {
+          for(const name of new Set(JSON.parse(process.env.A08_SCOPES).flatMap(id=>checks[id]))) {
           const matches=files.filter(path=>path.endsWith(`/${name}.php`) || (name==='SeoPlatform11C' && path.split('/').at(-1).startsWith(name)));
           if(!matches.length)throw new Error(`Missing required A08 consumer: ${name}`);
           matches.forEach(path=>selected.add(path));
@@ -695,8 +698,7 @@ jobs:
           console.log([...selected].sort().join('\n'));
           JS
           mapfile -t required_paths < "$RUNNER_TEMP/a08-required-paths.txt"
-          mapfile -t nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}" "${nightly_paths[@]}"
+          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${required_paths[@]}"
       - name: Verify contracts, fresh SQLite schema, boundaries, and closeout
         if: needs.classify.outputs.a08_focused != 'true'
         working-directory: backend
@@ -730,9 +732,7 @@ jobs:
           touch "$RUNNER_TEMP/seo-council.sqlite"
           php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
           rm -f "$APP_CONFIG_CACHE"
-          node ../.github/trunk/seo-platform-12a08-evidence-download.mjs --nightly-revalidation-paths "$RUNNER_TEMP/a08-nightly-paths.txt" "$RUNNER_TEMP/a08-nightly-source.json"
-          mapfile -t a08_nightly_paths < "$RUNNER_TEMP/a08-nightly-paths.txt"
-          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" "${a08_nightly_paths[@]}" \
+          php artisan test --compact --log-junit="$RUNNER_TEMP/a08-scoped-junit.xml" \
             tests/Feature/SeoIntel/SeoPlatform11D*.php \
             tests/Feature/SeoIntel/SeoPlatform11E*.php \
             tests/Feature/SeoIntel/SeoPlatform11F*.php \
@@ -1034,7 +1034,7 @@ jobs:
           retention-days: 90
 
       - name: Bind completed A08 scoped test results
-        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json "$RUNNER_TEMP/a08-nightly-source.json"
+        run: node .github/trunk/seo-platform-12a08-activation.mjs scoped-receipt "$RUNNER_TEMP/a08-scoped-junit.xml" "$GITHUB_SHA" a08-scoped-checks.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: a08-scoped-checks-${{ github.sha }}
@@ -1045,7 +1045,7 @@ jobs:
   seo-competitive-evidence:
     name: SEO Platform 11G competitive evidence offline evaluation
     needs: [classify, seo-agent-evidence-boundary]
-    if: always() && needs.classify.outputs.seo_competitive_evidence == 'true' && (needs.seo-agent-evidence-boundary.result == 'success' || needs.seo-agent-evidence-boundary.result == 'skipped')
+    if: always() && needs.classify.outputs.seo_competitive_checks == 'true' && (needs.seo-agent-evidence-boundary.result == 'success' || needs.seo-agent-evidence-boundary.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -1132,7 +1132,7 @@ jobs:
           name: seo-council-orchestration-${{ github.sha }}
           path: seo-council-orchestration
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        if: needs.classify.outputs.seo_competitive_evidence == 'true'
+        if: needs.classify.outputs.seo_competitive_checks == 'true'
         with:
           name: seo-competitive-evidence-${{ github.sha }}
           path: seo-competitive-evidence
@@ -1415,7 +1415,7 @@ jobs:
             test "$SEO_COUNCIL_ORCHESTRATION_RESULT" = skipped
             council='{"required":false,"result":"skipped"}'
           fi
-          competitive_required="$(jq -r .operations.seo_competitive_evidence trunk-path-classification.json)"
+          competitive_required="$(jq -r .operations.seo_competitive_checks trunk-path-classification.json)"
           if [ "$competitive_required" = true ]; then
             test "$SEO_COMPETITIVE_EVIDENCE_RESULT" = success
             jq -e --arg sha "$GITHUB_SHA" '

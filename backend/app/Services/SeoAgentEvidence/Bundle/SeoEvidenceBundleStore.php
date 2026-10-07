@@ -27,10 +27,20 @@ final class SeoEvidenceBundleStore
             $latest = $connection->table('seo_evidence_bundles')
                 ->where('bundle_id', $bundle['bundle_id'])
                 ->orderByDesc('bundle_version')
-                ->first(['bundle_version', 'bundle_hash', 'bundle_json']);
+                ->first();
             $version = (int) $bundle['bundle_version'];
             if ($latest === null && $version !== 1) {
                 throw new InvalidArgumentException('SEO_EVIDENCE_VERSION_MUST_START_AT_ONE');
+            }
+            if ($latest !== null && (int) $latest->bundle_version === $version
+                && hash_equals((string) $latest->bundle_hash, $bundle['bundle_hash'])) {
+                $stored = json_decode((string) $latest->bundle_json, true, 512, JSON_THROW_ON_ERROR);
+                if (! is_array($stored) || $stored != $bundle || ! $this->verifier->verify($stored)['valid']
+                    || ! CarbonImmutable::parse($latest->expires_at)->equalTo(CarbonImmutable::parse($bundle['expires_at']))) {
+                    throw new InvalidArgumentException('SEO_EVIDENCE_READBACK_INVALID');
+                }
+
+                return; // Exact same verified immutable collection is idempotent.
             }
             if ($latest !== null) {
                 if ($version !== (int) $latest->bundle_version + 1) {

@@ -31,15 +31,40 @@ final readonly class Platform12EvidenceSelection
         $rows = DB::connection((string) config('seo_intel.connection', 'seo_intel'))
             ->table('seo_evidence_bundles')->orderBy('bundle_hash')->limit(201)
             ->get(['bundle_id', 'bundle_version', 'bundle_hash', 'expires_at', 'bundle_json']);
-        if ($rows->count() > 200) {
-            throw new \RuntimeException('EVIDENCE_SCAN_BUDGET_HOLD');
-        }
+        $historyPaged = $rows->count() > 200;
         $reference = null;
+        $reason = 'NONE';
         try {
             $reference = $this->currentReference($rows, $at, $sha);
-        } catch (Throwable) {
+        } catch (Throwable $error) {
+            $reason = preg_match('/^[A-Z_]{3,64}$/D', $error->getMessage()) === 1 ? $error->getMessage() : 'CURRENT_RECEIPT_INVALID';
             // A broken reference cannot retire any history or erase known faults.
             $reference = null;
+        }
+        if ($historyPaged) {
+            $audit = $this->auditState($reference);
+            if ($audit['fault_count'] > 0) {
+                throw new \RuntimeException('HISTORY_INVALID');
+            }
+            if ($reference === null || $audit['state'] !== 'HISTORY_COMPLETE') {
+                throw new \RuntimeException('HISTORY_SCAN_PENDING');
+            }
+            // Current consumers have a bounded necessary set; history uses a separate cursor.
+            $rows = DB::connection((string) config('seo_intel.connection', 'seo_intel'))->table('seo_evidence_bundles as current')
+                ->where('bundle_id', 'not like', 'competitive:production:release_%')
+                ->whereNotExists(function ($query): void {
+                    $query->selectRaw('1')->from('seo_evidence_bundles as newer')
+                        ->whereColumn('newer.bundle_id', 'current.bundle_id')->whereColumn('newer.bundle_version', '>', 'current.bundle_version');
+                })->limit(201)->get(['bundle_id', 'bundle_version', 'bundle_hash', 'expires_at', 'bundle_json']);
+            if ($reference !== null) {
+                $row = $this->connection()->table('seo_evidence_bundles')->where('bundle_hash', $reference['bundle']['bundle_hash'])->first();
+                if ($row !== null) {
+                    $rows->push($row);
+                }
+            }
+            if ($rows->count() > 200) {
+                throw new \RuntimeException('CURRENT_EVIDENCE_SCAN_BUDGET_HOLD');
+            }
         }
         $exits = [];
         $selected = $rows->filter(function (object $row) use ($reference, $at, &$exits): bool {
@@ -71,6 +96,8 @@ final readonly class Platform12EvidenceSelection
             'expired_count' => $expired,
             'stored_count' => $rows->count(),
             'superseded_count' => count($exits),
+            'current_reference_reason' => $reason,
+            'historical_scan_state' => $historyPaged ? 'PAGED_IN_OPERATIONS' : 'BOUNDED_COMPLETE',
             'current_reference_state' => $reference === null ? 'UNAVAILABLE' : 'VALID',
             'production_sha' => $sha,
             'current_receipt_hash' => $reference['receipt']['receipt_hash'] ?? null,
@@ -88,20 +115,32 @@ final readonly class Platform12EvidenceSelection
         return ['rows' => $selected, 'freshness' => $freshness];
     }
 
-    private function currentReference(Collection $rows, CarbonImmutable $at, ?string $sha): array
+    public function currentReference(Collection $rows, CarbonImmutable $at, ?string $sha, ?array $candidate = null): array
     {
         if (! is_string($sha) || preg_match('/^[a-f0-9]{40}$/D', $sha) !== 1) {
             throw new \RuntimeException('CURRENT_RELEASE_MISSING');
         }
-        $path = storage_path('app/release-receipts/seo-competitive-evidence/'.$sha.'.json');
-        if (is_link($path) || ! is_file($path) || ! is_readable($path) || filesize($path) > 131072) {
+        $current = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+        $path = (is_file($current) || is_link($current)) ? $current : storage_path('app/release-receipts/seo-competitive-evidence/'.$sha.'.json');
+        if ($candidate === null && (is_link($path) || ! is_file($path) || ! is_readable($path) || filesize($path) > 131072)) {
             throw new \RuntimeException('CURRENT_RECEIPT_MISSING');
         }
-        $receipt = json_decode((string) file_get_contents($path), true, 64, JSON_THROW_ON_ERROR);
+        $receipt = $candidate ?? json_decode((string) file_get_contents($path), true, 64, JSON_THROW_ON_ERROR);
+        if (($receipt['refresh_status'] ?? null) === 'failed') {
+            throw new \RuntimeException('REFRESH_FAILED');
+        }
+        $sourceSha = $receipt['candidate_sha'] ?? '';
+        if ($sourceSha !== $sha && data_get($receipt, 'dependency_ingestion.dependency_hash') !== app(CompetitiveReleaseIdentity::class)->dependencyHash()) {
+            throw new \RuntimeException('DEPENDENCY_CHANGED');
+        }
+        if (data_get($receipt, 'dependency_ingestion.dependency_hash') !== null
+            && data_get($receipt, 'dependency_ingestion.dependency_hash') !== app(CompetitiveReleaseIdentity::class)->dependencyHash()) {
+            throw new \RuntimeException('DEPENDENCY_CHANGED');
+        }
         $snapshot = app(CompetitiveSourcePolicyRegistry::class)->snapshot(self::COHORT);
-        $releaseRef = app(CompetitiveReleaseIdentity::class)->reference('production', $sha);
+        $releaseRef = app(CompetitiveReleaseIdentity::class)->reference('production', $sourceSha, data_get($receipt, 'dependency_ingestion.collection_cycle'));
         if (! is_array($receipt) || ($receipt['closeout_state'] ?? null) !== 'CLOSED'
-            || ! app(CompetitiveCloseoutBuilder::class)->verify($receipt, $sha)
+            || ! app(CompetitiveCloseoutBuilder::class)->verify($receipt, $sourceSha)
             || array_diff_assoc($snapshot, $receipt) !== []
             || ($receipt['contract_manifest_hash'] ?? null) !== app(CompetitiveEvidenceContractRegistry::class)->manifest()['manifest_hash']
             || data_get($receipt, 'dependency_ingestion.release_ref') !== $releaseRef) {
@@ -113,12 +152,16 @@ final readonly class Platform12EvidenceSelection
             }
         }
         $matches = $rows->filter(static fn (object $row): bool => $row->bundle_id === 'competitive:production:'.$releaseRef);
+        if ($matches->count() === 0) {
+            $matches = $this->connection()->table('seo_evidence_bundles')->where('bundle_id', 'competitive:production:'.$releaseRef)
+                ->get(['bundle_id', 'bundle_version', 'bundle_hash', 'expires_at', 'bundle_json']);
+        }
         if ($matches->count() !== 1) {
             throw new \RuntimeException('CURRENT_BUNDLE_MISSING_OR_AMBIGUOUS');
         }
         $bundle = $this->verifiedRow($matches->first());
         if (! $this->sameScope($bundle)
-            || $bundle['source_ref'] !== $this->hasher->hash(['production', $sha, self::COHORT])
+            || $bundle['source_ref'] !== $this->hasher->hash(['production', $sourceSha, self::COHORT])
             || $bundle['bundle_hash'] !== data_get($receipt, 'dependency_ingestion.bundle_hash')
             || $bundle['authority_revision'] !== hash_file('sha256', base_path('content_assets/personality_public/current/manifest.json'))
             || $bundle['lineage_refs'] !== [$receipt['search_measurement']['bundle_hash'], $receipt['cro_measurement']['bundle_hash']]
@@ -135,7 +178,113 @@ final readonly class Platform12EvidenceSelection
             }
         }
 
-        return ['receipt' => $receipt, 'bundle' => $bundle];
+        return ['receipt' => $receipt, 'bundle' => $bundle, 'source_sha' => $sourceSha];
+    }
+
+    public function publish(array $receipt, string $sha, string $generation): void
+    {
+        $this->currentReference(collect(), CarbonImmutable::now('UTC'), $sha, $receipt);
+        app(Platform12RuntimeControl::class)->withControlLock(function () use ($receipt, $sha, $generation): void {
+            if (! app(Platform12RuntimeControl::class)->allowsMission(Platform12DailyMissionSet::IDS[2], false, $generation)
+                || trim((string) file_get_contents(config('seo_council.release_revision_path'))) !== $sha) {
+                throw new \RuntimeException('REFRESH_CONTROL_CHANGED');
+            }
+            $this->atomicReference($receipt);
+        });
+    }
+
+    public function atomicReference(array $receipt): void
+    {
+        $path = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+        if (is_link($path)) {
+            throw new \RuntimeException('CURRENT_RECEIPT_INVALID');
+        }
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0750, true);
+        }
+        $temp = tempnam(dirname($path), '.current-');
+        try {
+            $bytes = json_encode($receipt, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
+            if (file_put_contents($temp, $bytes, LOCK_EX) !== strlen($bytes)) {
+                throw new \RuntimeException('CURRENT_REFERENCE_WRITE_FAILED');
+            }
+            chmod($temp, 0640);
+            if (! rename($temp, $path)) {
+                throw new \RuntimeException('CURRENT_REFERENCE_WRITE_FAILED');
+            }
+        } finally {
+            if (is_file($temp)) {
+                unlink($temp);
+            }
+        }
+    }
+
+    /** Bounded historical verification. Invalid or unproven history is never excluded. */
+    public function auditHistory(?string $sha = null): array
+    {
+        $store = \Illuminate\Support\Facades\Cache::store(config('seo_council.runtime_cache_store', config('cache.default')));
+        $reference = null;
+        try {
+            $sha ??= trim((string) file_get_contents(config('seo_council.release_revision_path')));
+            $reference = $this->currentReference(collect(), CarbonImmutable::now('UTC'), $sha);
+        } catch (Throwable) {
+            // Integrity scanning continues, but no replacement is authorized.
+            $reference = null;
+        }
+        $key = $this->auditKey($reference);
+        $prior = (array) $store->get('seo:evidence:history:progress', []);
+        $cursor = ($prior['key'] ?? null) === $key ? (int) ($prior['cursor'] ?? 0) : 0;
+        if (($prior['state'] ?? null) === 'HISTORY_COMPLETE' && ($prior['completed_at'] ?? '') < now('UTC')->subDay()->toAtomString()) {
+            $cursor = 0;
+        }
+        $rows = $this->connection()->table('seo_evidence_bundles')->where('id', '>', $cursor)->orderBy('id')->limit(200)->get();
+        $faults = (array) $store->get('seo:evidence:history:faults', []);
+        $unproven = ($prior['key'] ?? null) === $key && $cursor !== 0 ? (int) ($prior['unproven'] ?? 0) : 0;
+        foreach ($rows as $row) {
+            try {
+                $bundle = $this->verifiedRow($row);
+                if (str_starts_with($bundle['bundle_id'], 'competitive:production:')
+                    && ($reference === null || $bundle['bundle_hash'] !== $reference['bundle']['bundle_hash'])
+                    && ! ($reference !== null && $this->sameScope($bundle)
+                        && CarbonImmutable::parse($bundle['captured_at'])->lt(CarbonImmutable::parse($reference['bundle']['captured_at'])))) {
+                    $unproven++;
+                }
+            } catch (Throwable) {
+                $faults[$row->bundle_hash] = 'STORED_EVIDENCE_INVALID';
+            }
+            $cursor = (int) $row->id;
+        }
+        $pending = $this->connection()->table('seo_evidence_bundles')->where('id', '>', $cursor)->exists();
+        $state = $faults !== [] ? 'HISTORY_INVALID' : ($pending ? 'HISTORY_PENDING' : ($unproven > 0 ? 'HISTORY_UNPROVEN' : 'HISTORY_COMPLETE'));
+        $progress = ['key' => $key, 'cursor' => $cursor, 'unproven' => $unproven, 'state' => $state,
+            'completed_at' => $pending ? null : now('UTC')->toAtomString()];
+        $store->forever('seo:evidence:history:progress', $progress);
+        $store->forever('seo:evidence:history:faults', $faults);
+
+        return [...$progress, 'scanned' => $rows->count(), 'fault_count' => count($faults)];
+    }
+
+    private function auditKey(?array $reference): string
+    {
+        return $this->hasher->hash([$reference['bundle']['bundle_hash'] ?? null, app(CompetitiveReleaseIdentity::class)->dependencyHash()]);
+    }
+
+    private function auditState(?array $reference): array
+    {
+        $store = \Illuminate\Support\Facades\Cache::store(config('seo_council.runtime_cache_store', config('cache.default')));
+        $progress = (array) $store->get('seo:evidence:history:progress', []);
+        $complete = ($progress['key'] ?? null) === $this->auditKey($reference)
+            && ($progress['state'] ?? null) === 'HISTORY_COMPLETE'
+            && ($progress['completed_at'] ?? '') >= now('UTC')->subDay()->toAtomString()
+            && ! $this->connection()->table('seo_evidence_bundles')->where('id', '>', $progress['cursor'] ?? 0)->exists();
+
+        return ['state' => $complete ? 'HISTORY_COMPLETE' : 'HISTORY_PENDING',
+            'fault_count' => count((array) $store->get('seo:evidence:history:faults', []))];
+    }
+
+    private function connection(): \Illuminate\Database\ConnectionInterface
+    {
+        return DB::connection((string) config('seo_intel.connection', 'seo_intel'));
     }
 
     private function verifiedRow(object $row): array

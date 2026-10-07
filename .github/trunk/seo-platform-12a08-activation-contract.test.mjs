@@ -3,7 +3,7 @@ import test from 'node:test';
 import {mkdtempSync,writeFileSync,readFileSync,rmSync,mkdirSync,chmodSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {execFileSync,spawnSync} from 'node:child_process';
-import {fingerprint,scopeFor,mayCarry,MISSIONS,scopedReceipt,CHECKS,LEGACY_CHECKS,LEGACY_SCOPE_VERSION,SCOPE_VERSION,digest} from './seo-platform-12a08-activation.mjs';
+import {fingerprint,scopeFor,selectedScopes,mayCarry,MISSIONS,scopedReceipt,CHECKS,LEGACY_CHECKS,LEGACY_SCOPE_VERSION,SCOPE_VERSION,digest} from './seo-platform-12a08-activation.mjs';
 import {verifyState,hasActivationEvidence,build,bindControlled,equivalentSource} from './seo-platform-12a08-release.mjs';
 import {classifyPaths} from './classify-paths.mjs';
 test('A08 unavailable activation evidence skips before candidate checks; existing evidence stays fail closed',()=>{
@@ -17,9 +17,9 @@ test('A08 unavailable activation evidence skips before candidate checks; existin
  assert.equal(hasActivationEvidence(null,{activation:{schema_version:'seo.platform12_a08_activation.v2'}}),true);
  assert.throws(()=>build({checks:null,production:{activation:{schema_version:'seo.platform12_a08_activation.v2'}},sha:'candidate'}),/A08_FOCUSED_REVALIDATION_REQUIRED/);
  const downloader=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
- assert.match(downloader,/const listedNightlyRuns = activationEvidence \? api\(/);
- assert.match(downloader,/const nightlyRuns = activationEvidence \? nightlyEvidenceRuns\(checks\?\.nightly_source,/);
- assert.match(downloader,/if \(!nightly && activationEvidence\)/);
+ assert.match(downloader,/NIGHTLY_NOT_A_RELEASE_DEPENDENCY/);
+ const ordinary=downloader.slice(downloader.indexOf('const ci ='));
+ assert.doesNotMatch(ordinary,/loadNightly|nightlyEvidenceRuns|sources\(\)|a08-staging-safety\.json/);
 });
 test('explicit shared versus mission dependencies exclude ordinary copy, retain identities and authority',()=>{
  for(const path of ['backend/routes/api.php','backend/composer.lock','backend/app/Http/Middleware/Auth.php','backend/content_assets/personality_public/current/manifest.json']) assert.deepEqual(scopeFor(path),['public']);
@@ -57,107 +57,40 @@ test('Current probe readback dependencies require M1 revalidation without conten
  assert.equal(result.operations.seo_council_orchestration,false);
  assert.equal(result.flags.seo_discoverability,false);
 });
-test('shared Runtime changes invalidate every mission proof through build and transition',()=>{
- const root=mkdtempSync(`${tmpdir()}/a08-shared-runtime-`), original=process.cwd();
+test('software delivery carries historical observations unchanged and revalidates affected scopes',()=>{
+ const root=mkdtempSync(`${tmpdir()}/a08-software-`), original=process.cwd();
  const git=(...args)=>execFileSync('git',args,{cwd:root}).toString().trim();
- const service='backend/app/Services/SeoIntel/Runtime/ScheduledRuntimeProbeReceiptService.php';
- const helper='backend/app/Services/SeoIntel/Runtime/RevisionEvidenceAdapter.php';
- const evaluator='backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailyGscCoreRuntimeEvaluator.php';
- const vector={policy:'c'.repeat(64)}, artifact=`sha256:${'d'.repeat(64)}`;
- const junit=`<testsuite>${[...new Set(Object.values(CHECKS).flat())].map(name=>`<testcase class="${name}" name="offline_shape"/>`).join('')}</testsuite>`;
- const seal=body=>({...body,receipt_digest:digest(JSON.stringify(body))});
- // Offline shapes exercise production binding rules; they are not live source or CI evidence.
- const sources=sha=>Object.fromEntries(MISSIONS.map(id=>[id,seal({schema_version:'seo.a08_source_check.v1',
-  repository:'fermatmind/fap-api',environment:'production',sha,mission_id:id,real_runtime:true,
-  mission_submitted:false,notification_sent:false,business_write_enabled:false,version_vector:vector,
-  source_wiring_status:'VERIFIED',source_gaps:[],observed_verdict:'READY',sources:[{id:'offline-source',hash:'1'.repeat(64),observed_at:'2026-01-01T00:00:00Z'}],
-  captured_at:new Date(Date.now()-1000).toISOString(),expires_at:new Date(Date.now()+60000).toISOString()})]));
- const buildAt=(sha,previous,sourceReports)=>build({sha,checks:scopedReceipt(junit,sha,root),
+ const vector={policy:'c'.repeat(64)},artifact=`sha256:${'d'.repeat(64)}`;
+ const junit=scopes=>`<testsuite>${[...new Set(scopes.flatMap(id=>CHECKS[id]))].map(name=>`<testcase class="${name}"/>`).join('')}</testsuite>`;
+ const buildAt=(sha,previous,scopes)=>build({sha,checks:scopedReceipt(junit(scopes),sha,root,SCOPE_VERSION,scopes),
   ci:{id:1,run_attempt:1,head_sha:sha,conclusion:'success',status:'completed',event:'push',head_branch:'main'},
   jobs:['Staging exact-SHA deploy and smoke','Production exact-SHA activation, smoke, and LKG fallback'].map((name,index)=>
    ({name,status:'completed',conclusion:'success',completed_at:'2026-01-01T00:00:00Z',run_id:2,id:index+1})),
   staging:{sha,business_guards_closed:true,operations_readonly:true},
   production:{sha,business_guards_closed:true,operations_readonly:true,version_vector:vector,version_vector_hash:digest(JSON.stringify(vector)),activation:previous},
-  artifactDigests:{ci:artifact,staging:artifact,production:artifact},stagingSafety:{pause_resume_verified:true},sources:sourceReports});
- const accept=(manifest,id)=>bindControlled(manifest,seal({schema_version:'seo.a08_controlled_acceptance.v1',
-  environment:'production',sha:manifest.bound_production_sha,mission_id:id,version_vector:vector,
-  fingerprint:manifest.missions[id].checks.fingerprint,source_receipt_digest:manifest.missions[id].source_acceptance.receipt_digest,
-  terminal_committed:true,receipt_hash:'e'.repeat(64),receipt_to_ui_verified:true,runtime_boundaries_verified:true,
-  business_write_enabled:false,observed_verdict:'READY'}),artifact);
- const transition=new URL('./seo-platform-12a08-transition.mjs',import.meta.url).pathname;
- const prepare=(manifest,index)=>{
-  writeFileSync(`${root}/activation.json`,JSON.stringify(manifest));
-  writeFileSync(`${root}/a08-install-after.json`,JSON.stringify({paused:false,generation:'1'.repeat(32),selected_missions:MISSIONS}));
-  writeFileSync(`${root}/output`,'');
-  execFileSync(process.execPath,[transition,'prepare',String(index)],{cwd:root,env:{...process.env,GITHUB_OUTPUT:`${root}/output`}});
-  return readFileSync(`${root}/output`,'utf8').trim();
- };
+  artifactDigests:{ci:artifact,staging:artifact,production:artifact},stagingSafety:{pause_resume_verified:true},nightly:{status:'independent'}});
  try {
   git('init','-q');git('config','user.email','test@example.test');git('config','user.name','Test');
-  for(const path of [service,helper,evaluator]) {
-   mkdirSync(`${root}/${path.slice(0,path.lastIndexOf('/'))}`,{recursive:true});
-   writeFileSync(`${root}/${path}`,readFileSync(new URL(`../../${path}`,import.meta.url)));
-  }
-  git('add','--',service,helper,evaluator);git('commit','-qm','offline baseline');process.chdir(root);
-  const source=git('rev-parse','HEAD'), initial=fingerprint(root,source);
-  const previous=buildAt(source,null,sources(source));
-  for(const id of MISSIONS) accept(previous,id);
-  git('commit','--allow-empty','-qm','unchanged descendant');
-  const unchanged=git('rev-parse','HEAD'), candidate=sha=>({production_sha:sha,version_vector:vector});
-  for(const id of MISSIONS) assert.equal(mayCarry(previous,candidate(unchanged),id,root),true);
-  const carried=buildAt(unchanged,previous,sources(unchanged));
-  for(const id of MISSIONS) {
-   assert.equal(carried.missions[id].source_acceptance.source_sha,source);
-   assert.equal(carried.missions[id].source_acceptance.bound_sha,unchanged);
-   assert.equal(carried.missions[id].end_to_end_acceptance.status,'pass');
-  }
-  const before=readFileSync(`${root}/${service}`,'utf8');
-  assert.ok(before.includes('public const SLOT_MINUTES = 10;'));
-  writeFileSync(`${root}/${service}`,before.replace('public const SLOT_MINUTES = 10;','public const SLOT_MINUTES = 11;'));
-  git('add','--',service);git('commit','-qm','offline runtime semantics change');
-  const changed=git('rev-parse','HEAD'), prints=fingerprint(root,changed);
-  assert.equal(git('diff','--name-only',unchanged,changed),service);
-  assert.equal(prints.public,initial.public);
-  for(const id of MISSIONS) {
-   assert.notEqual(prints[id],initial[id]);
-   assert.equal(mayCarry(previous,candidate(changed),id,root),false);
-  }
-  assert.throws(()=>build({checks:null,sha:changed,production:{activation:previous,version_vector:vector}}),
-   /A08_FOCUSED_REVALIDATION_REQUIRED/);
-  const pending=buildAt(changed,previous);
-  for(const id of MISSIONS) {
-   assert.equal(pending.missions[id].source_acceptance.status,'pending');
-   assert.equal(pending.missions[id].end_to_end_acceptance.status,'pending');
-  }
-  for(const index of [1,2]) assert.equal(prepare(pending,index),'ready=false'); // No fresh source yet.
-  const fresh=buildAt(changed,previous,sources(changed));
-  for(const id of MISSIONS) {
-   assert.equal(fresh.missions[id].source_acceptance.source_sha,changed);
-   assert.equal(fresh.missions[id].end_to_end_acceptance.status,'pending');
-  }
-  accept(fresh,MISSIONS[0]);
-  assert.equal(prepare(fresh,1),'ready=true'); // Fresh M2 source requires a new terminal, not old pass.
-  assert.equal(prepare(fresh,2),'ready=false'); // M2 terminal remains a prerequisite.
-  accept(fresh,MISSIONS[1]);assert.equal(prepare(fresh,2),'ready=true');
-  git('restore',`--source=${source}`,'--',service);
-  writeFileSync(`${root}/${helper}`,readFileSync(`${root}/${helper}`,'utf8')+'\n// offline helper change\n');
-  git('add','--',service,helper);git('commit','-qm','offline shared helper change');
-  const helperSha=git('rev-parse','HEAD');
-  assert.equal(git('diff','--name-only',source,helperSha),helper);
-  for(const id of MISSIONS) assert.equal(mayCarry(previous,candidate(helperSha),id,root),false);
-  git('restore',`--source=${source}`,'--',helper);
-  writeFileSync(`${root}/${evaluator}`,readFileSync(`${root}/${evaluator}`,'utf8')+'\n// offline M1-only change\n');
-  git('add','--',helper,evaluator);git('commit','-qm','offline single mission change');
-  const single=git('rev-parse','HEAD');
-  assert.equal(git('diff','--name-only',source,single),evaluator);
-  assert.deepEqual(MISSIONS.map(id=>mayCarry(previous,candidate(single),id,root)),[false,true,true]);
-  const classification=classifyPaths(['.github/trunk/seo-platform-12a08-activation.mjs','.github/trunk/seo-platform-12a08-activation-contract.test.mjs']);
-  assert.equal(classification.operations.a08_scoped_checks,true);
-  assert.equal(classification.operations.a08_gate_only,false);
-  assert.equal(classification.deploy,true);
-  assert.equal(classification.operations.publisher_required,false);
- } finally {process.chdir(original);rmSync(root,{recursive:true,force:true});}
+  const path='backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailyGscCoreRuntimeEvaluator.php';
+  mkdirSync(`${root}/${path.slice(0,path.lastIndexOf('/'))}`,{recursive:true});writeFileSync(`${root}/${path}`,'initial');
+  git('add','.');git('commit','-qm','initial');process.chdir(root);
+  const source=git('rev-parse','HEAD'),previous=buildAt(source,null,['public',...MISSIONS]);
+  assert.equal(previous.software_delivery_only,true);
+  for(const id of MISSIONS) previous.missions[id].source_acceptance={status:'pass',source_sha:source,bound_sha:source,captured_at:'2020-01-01',expires_at:'2020-01-02'};
+  writeFileSync(`${root}/${path}`,'changed');git('add','.');git('commit','-qm','M1 change');
+  const sha=git('rev-parse','HEAD');
+  const next=buildAt(sha,previous,[MISSIONS[0]]);
+  for(const id of MISSIONS) assert.deepEqual(next.missions[id].source_acceptance,previous.missions[id].source_acceptance);
+  assert.equal(next.missions[MISSIONS[1]].checks.validated_sha,source);
+  assert.equal(next.missions[MISSIONS[0]].checks.sha,sha);
+  assert.throws(()=>buildAt(sha,previous,[MISSIONS[1]]),/FOCUSED_REVALIDATION/);
+  assert.deepEqual(selectedScopes([path]),[MISSIONS[0]]);
+  assert.deepEqual(selectedScopes(['deploy/scheduler.php']),['public']);
+  assert.deepEqual(selectedScopes(['backend/app/Services/SeoIntel/Runtime/Adapter.php']),MISSIONS);
+  assert.deepEqual(selectedScopes(['backend/config/seo_council.php']),['public',...MISSIONS]);
+ }finally{process.chdir(original);rmSync(root,{recursive:true,force:true});}
 });
+
 test('offline receipts cannot omit test scope or manufacture real source evidence',()=>{
  assert.throws(()=>scopedReceipt('<testcase name="unrelated"/>',execFileSync('git',['rev-parse','HEAD']).toString().trim()),/COVERAGE|RESULTS/);
  assert.throws(()=>scopedReceipt('<testcase/><failure/>','a'.repeat(40)),/RESULTS/);
@@ -191,7 +124,7 @@ test('existing workflows publish completed scoped evidence without runtime opera
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  assert.doesNotMatch(deploy,/workflow_dispatch:|seo:council-runtime (?:resume|pause)|seo:council-scheduled --acceptance/);
  assert.match(deploy,/needs: \[policy, staging, production\]/);
- assert.match(deploy,/a08_gate_only != true/);
+ assert.match(deploy,/seo_council_runtime_closeout=false/);
  assert.match(deploy,/seo-council-a08-activation-\$\{\{/);
  const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
  assert.match(ci,/--log-junit=/);assert.match(ci,/scoped-receipt/);
@@ -204,23 +137,19 @@ test('existing workflows publish completed scoped evidence without runtime opera
  assert.match(evidence,/actions\/jobs\/\$\{fullJob\.id\}\/logs/);
  assert.match(evidence,/\['api',\s*'--allow-escape-sequences',\s*`repos\/\$\{repo\}\/actions\/jobs/);
  assert.doesNotMatch(evidence,/--log-failed/);
- assert.match(evidence,/nightly\.yml\/runs\?status=completed&per_page=100/);
+ assert.match(evidence,/NIGHTLY_NOT_A_RELEASE_DEPENDENCY/);
 });
 test('A08 activation gate skips only unavailable evidence and fails closed otherwise',()=>{
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
  const a08=deploy.split('  a08-evidence:\n')[1].split('\n  docs-only:')[0];
- const block=a08.match(/      - name: Build scoped activation v2 with pending real source acceptance\n        id: a08_activation\n        run: \|\n((?: {10}.*\n)+)/)?.[1];
+ const block=a08.match(/      - name: Build current-SHA software activation preserving operational history\n        id: a08_activation\n        run: \|\n((?: {10}.*\n)+)/)?.[1];
  assert.ok(block,'activation build step must expose a guarded run block');
  const script=block.split('\n').filter(Boolean).map(line=>line.slice(10)).join('\n');
- for(const name of ['Start existing production transport','Publish validated data-only evidence and verify unchanged runtime',
-  'Prepare authorized M1 controlled transition','Prepare authorized M2 controlled transition','Prepare authorized M3 controlled transition']) {
+ for(const name of ['Start existing production transport','Publish validated data-only evidence and verify unchanged runtime']) {
   const step=a08.split(`      - name: ${name}\n`)[1]?.split('\n      - ')[0];
-  assert.match(step ?? '',/if: steps\.a08_activation\.outputs\.ready == 'true'/,`${name} must share the activation gate`);
+  assert.match(step ?? '',/if: steps\.a08_activation\.outputs\.ready == 'true'/);
  }
- for(const index of [1,2,3]) {
-  const gate=`if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m${index}.outputs.ready == 'true'`;
-  assert.equal(a08.split(gate).length-1,3,`M${index} execute, artifact and bind must share the activation gate`);
- }
+ assert.doesNotMatch(a08,/name: .*controlled transition|seo_a08_acceptance|seo-platform-12a08-transition/);
  assert.match(a08,/if: steps\.a08_activation\.outputs\.ready == 'true'\n        with:\n          name: seo-council-a08-activation-/);
  assert.doesNotMatch(a08,/hashFiles\('activation.json'\)/);
  const dir=mkdtempSync(`${tmpdir()}/a08-build-gate-`);
@@ -411,7 +340,8 @@ test('mixed content release retains its gates without invoking old Council inges
   assert.equal(classifyPaths([...mixed,path]).operations.a08_readonly_wiring,false);
  }
  const deploy=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
- assert.match(deploy,/and \.classification\.operations\.a08_readonly_wiring != true/);
+ assert.match(deploy,/seo_council_runtime_closeout=false/);
+ assert.match(deploy,/seo_competitive_evidence=false/);
 });
 
 test('HMAC bootstrap atomically installs the fixed pair and refuses existing-key rotation',()=>{
@@ -444,9 +374,10 @@ test('authorized M3 requires safe source and terminal artifacts plus preceding m
   fingerprint,source_receipt_digest:receipt,terminal_committed:true,receipt_hash:'e'.repeat(64),receipt_to_ui_verified:true,runtime_boundaries_verified:true,business_write_enabled:false,observed_verdict:'READY'};
  const seal=x=>({...x,receipt_digest:digest(JSON.stringify(x))});
  assert.equal(bindControlled(proof(),seal(body),'sha256:'+'f'.repeat(64)).missions[id].end_to_end_acceptance.status,'pass');
- assert.throws(()=>bindControlled(proof(),seal({...body,observed_verdict:'HOLD'}),'sha256:'+'f'.repeat(64)),/CONTROLLED/);
+ assert.equal(bindControlled(proof(),seal({...body,observed_verdict:'HOLD'}),'sha256:'+'f'.repeat(64)).missions[id].end_to_end_acceptance.observed_verdict,'HOLD');
  const unsafe=proof();unsafe.missions[id].source_acceptance.observed_verdict='HOLD';
- assert.throws(()=>bindControlled(unsafe,seal(body),'sha256:'+'f'.repeat(64)),/CONTROLLED/);
+ assert.equal(bindControlled(structuredClone(unsafe),seal(body),'sha256:'+'f'.repeat(64)).missions[id].end_to_end_acceptance.status,'pass');
+ assert.throws(()=>bindControlled(proof(),seal({...body,business_write_enabled:true}),'sha256:'+'f'.repeat(64)),/CONTROLLED/);
  const dir=mkdtempSync(`${tmpdir()}/a08-m3-`), output=`${dir}/output`;
  const state={paused:false,generation:'1'.repeat(32),selected_missions:MISSIONS.slice(0,2)};
  const command=new URL('./seo-platform-12a08-transition.mjs',import.meta.url).pathname;
@@ -459,7 +390,7 @@ test('authorized M3 requires safe source and terminal artifacts plus preceding m
   assert.equal(run(proof()),'ready=true');
   assert.equal(JSON.parse(readFileSync(`${dir}/transition-2.json`)).expected_generation,state.generation);
   assert.equal(run(proof(),true),'ready=false');
-  assert.equal(run(unsafe),'ready=false');
+  assert.equal(run(unsafe),'ready=true');
   const missing=proof();missing.missions[MISSIONS[1]].end_to_end_acceptance.status='pending';assert.equal(run(missing),'ready=false');
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
@@ -500,11 +431,10 @@ test('Nightly revalidation selects actual failed classes and preserves domain ho
  assert.throws(()=>nightlyRevalidationPaths(run,[],evidence,['tests/Architecture/PolicyTest.php']),/UNKNOWN/);
  assert.deepEqual(nightlyRevalidationPaths(run,[],{junit:'<testsuites><testcase file="tests/Feature/PassTest.php"/></testsuites>'},[]),[]);
  const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
- assert.match(ci,/--nightly-revalidation-paths/);
- assert.match(ci,/\$\{a08_nightly_paths\[@\]\}/);
+ assert.doesNotMatch(ci,/--nightly-revalidation-paths|a08_nightly_paths/);
  const downloader=readFileSync(new URL('./seo-platform-12a08-evidence-download.mjs',import.meta.url),'utf8');
- assert.match(downloader,/checks\?\.nightly_source/);
- assert.match(downloader,/JSON.stringify\(loaded.source\)/);
+ assert.doesNotMatch(downloader.slice(downloader.indexOf('const checks =')),/loadNightly/);
+ assert.match(downloader,/NIGHTLY_NOT_A_RELEASE_DEPENDENCY/);
 });
 
 test('incomplete Nightly XML retains digest-bound OOM evidence and requires the named test', async () => {
@@ -577,4 +507,21 @@ test('legacy scope output is explicit and complete; unknown scope cannot grant a
   assert.ok(current.checks.public.tests.length<old.checks.public.tests.length);
   assert.throws(()=>scopedReceipt(junit,sha,root,'unknown'),/SCOPE_VERSION/);
  } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+test('scheduler and braces changes select their real software consumers without content publication or collection',()=>{
+ const scheduler=classifyPaths(['deploy/scheduler.php']);
+ assert.deepEqual(scheduler.operations.a08_scopes,['public']);
+ assert.equal(scheduler.operations.a08_focused,true);
+ assert.equal(scheduler.operations.publisher_required,false);
+ assert.equal(scheduler.operations.seo_council_orchestration,false);
+ for(const path of ['backend/package.json','backend/package-lock.json','backend/scripts/dependencies/apply-braces-depth-patch.mjs']) {
+  const result=classifyPaths([path]);
+  assert.equal(result.deploy,true);
+  assert.equal(result.operations.seo_competitive_evidence,false);
+  assert.equal(result.operations.publisher_required,false);
+ }
+ const ci=readFileSync(new URL('../workflows/ci.yml',import.meta.url),'utf8');
+ assert.match(ci,/JSON.parse\(process.env.A08_SCOPES\).flatMap/);
+ assert.doesNotMatch(ci,/a08_nightly_paths|--nightly-revalidation-paths/);
 });

@@ -103,7 +103,7 @@ final readonly class Platform12FrozenMission
             }
         }
         $fields = [
-            'gsc' => ['availability', 'scheduled_receipt_status', 'trigger_mode', 'mapping_state', 'data_quality_state', 'window_state', 'row_count', 'data_max_date'],
+            'gsc' => ['availability', 'scheduled_receipt_status', 'trigger_mode', 'mapping_state', 'data_quality_state', 'window_state', 'row_count', 'data_max_date', 'collection_reason', 'zero_query_complete'],
             'runtime' => ['core_runtime_state', 'public_api_state', 'readback_state', 'production_sha', 'readback_sha'],
             'authority' => ['availability', 'revision_hash', 'current_public_count'],
             'url_truth' => ['availability', 'revision_hash', 'current_url_truth_count', 'wrong_canonical_count', 'false_noindex_count'],
@@ -114,7 +114,7 @@ final readonly class Platform12FrozenMission
             'private_routes' => ['tested_count', 'rejected_count'],
             'query_security' => ['hmac_state', 'key_version_state', 'pii_state'],
             'drift' => ['role', 'binding', 'policy', 'tool', 'schema', 'prompt'],
-            'evidence_freshness' => ['total_count', 'fresh_count', 'expired_count', 'stored_count', 'superseded_count', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash'],
+            'evidence_freshness' => ['total_count', 'fresh_count', 'expired_count', 'stored_count', 'superseded_count', 'current_reference_reason', 'historical_scan_state', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash'],
             'injection' => ['prompt_state', 'tool_metadata_state'],
             'tools' => ['requested_count', 'authorized_count'],
             'posture' => ['retention_state', 'egress_state'],

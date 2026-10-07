@@ -213,6 +213,7 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
             return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
                 'observed_at' => $observed->toAtomString(), 'trigger_mode' => 'scheduled',
                 'mapping_state' => 'UNAVAILABLE', 'data_quality_state' => 'HOLD',
+                'collection_reason' => $row->status === 'running' ? ($observed->lt($now->subHours(2)) ? 'GSC_COLLECTION_TIMEOUT' : 'GSC_COLLECTION_RUNNING') : 'GSC_COLLECTION_FAILED',
                 'window_state' => 'INCOMPLETE', 'row_count' => (int) $row->rows_seen, 'data_max_date' => null];
         }
         if ($row === null || ! is_string($row->receipt_json) || strlen($row->receipt_json) > 262144) {
@@ -221,18 +222,57 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $receipt = json_decode($row->receipt_json, true, 32, JSON_THROW_ON_ERROR);
         $finished = CarbonImmutable::parse($row->finished_at, 'UTC');
         if (($receipt['schema_version'] ?? null) !== 'seo.gsc_refresh_receipt.v2'
+            || ($receipt['receipt_hash'] ?? null) !== $this->hasher->hashWithout($receipt, 'receipt_hash')
+            || ($receipt['status'] ?? null) !== $row->status
+            || $finished->lt(CarbonImmutable::parse($row->run_started_at_utc, 'UTC'))
             || $finished->gt($now)) {
             throw new \RuntimeException('GSC_RECEIPT_STALE');
         }
 
+        $window = $this->gscWindow($receipt, CarbonImmutable::parse($row->run_started_at_utc, 'UTC'));
+
         return ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => $row->status,
+            'collection_reason' => $finished->lt($now->subHours(26)) ? 'GSC_COLLECTION_MISSED' : $window,
+            'zero_query_complete' => data_get($receipt, 'quality_gate.zero_query_complete') === true && $window === 'COMPLETE',
             'observed_at' => $finished->format('Y-m-d\TH:i:s\Z'), 'source_hash' => $this->hasher->hash($receipt),
             'trigger_mode' => $receipt['trigger_mode'] ?? null,
             'mapping_state' => ($receipt['unmapped_rows'] ?? null) === 0 ? 'READY' : 'FAILED',
             'data_quality_state' => $row->status === 'success' && data_get($receipt, 'quality_gate.status') === 'pass' ? 'READY' : 'HOLD',
-            'window_state' => $row->status === 'success' && $finished->gte($now->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
+            'window_state' => $row->status === 'success' && $window === 'COMPLETE' && $finished->gte($now->subHours(26)) ? 'COMPLETE' : 'INCOMPLETE',
             'row_count' => $receipt['rows_seen'] ?? null, 'data_max_date' => $receipt['data_max_date'] ?? null,
         ];
+    }
+
+    private function gscWindow(array $receipt, CarbonImmutable $started): string
+    {
+        $timezone = $receipt['reporting_timezone'] ?? null;
+        $days = $receipt['window_days'] ?? null;
+        $lag = $receipt['lag_days_requested'] ?? (int) config('seo_intel.gsc_backfill_lag_days', 3);
+        if ($timezone !== 'America/Los_Angeles'
+            || ! in_array($receipt['fetch_mode'] ?? null, ['full_window', 'incremental'], true)
+            || ! is_array($receipt['search_types'] ?? null) || ($receipt['search_types'] ?? []) === []
+            || array_diff($receipt['search_types'], \App\Services\SeoIntel\GscReadModelSyncService::SEARCH_TYPES) !== [] || ! in_array($days, [7, 28, 90], true)
+            || ! is_int($lag) || $lag < 0 || $lag > 30) {
+            return 'GSC_WINDOW_MISMATCH';
+        }
+        $end = $started->setTimezone($timezone)->subDays($lag)->toDateString();
+        $begin = $started->setTimezone($timezone)->subDays($lag + $days - 1)->toDateString();
+        $complete = $receipt['completeness'] ?? [];
+        if (($receipt['end_date'] ?? null) !== $end || ($receipt['requested_start_date'] ?? null) !== $begin
+            || ($complete['covered_start_date'] ?? null) !== ($receipt['start_date'] ?? null)
+            || ($complete['covered_end_date'] ?? null) !== $end
+            || ($receipt['start_date'] ?? '') < $begin || ($receipt['start_date'] ?? '') > $end
+            || ($receipt['fetch_mode'] ?? null) === 'full_window' && ($receipt['start_date'] ?? null) !== $begin) {
+            return 'GSC_WINDOW_MISMATCH';
+        }
+        if (($complete['pagination_complete'] ?? null) !== true || ($complete['truncated'] ?? null) !== false
+            || ($complete['search_types'] ?? null) !== ($receipt['search_types'] ?? null)
+            || ($complete['dimensions'] ?? null) !== ['query', 'page', 'device', 'country']
+            || ($receipt['pages_fetched'] ?? 0) < 1) {
+            return 'GSC_COLLECTION_TRUNCATED';
+        }
+
+        return 'COMPLETE';
     }
 
     private function clusters(): array
@@ -400,7 +440,8 @@ final readonly class Platform12ProductionEvidenceReader implements Platform12Evi
         $pii = false;
         $injection = false;
         $retention = true;
-        $valid = true;
+        $historyFaults = \Illuminate\Support\Facades\Cache::store(config('seo_council.runtime_cache_store', config('cache.default')))->get('seo:evidence:history:faults', []);
+        $valid = $historyFaults === [];
         foreach ($rows as $row) {
             if (! is_string($row->bundle_json) || strlen($row->bundle_json) > 131072) {
                 $valid = false;

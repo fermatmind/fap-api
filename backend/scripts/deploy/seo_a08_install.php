@@ -19,7 +19,7 @@ try {
     }
     app(Platform12RuntimeControl::class)->withControlLock(function () use ($bytes): void {
         $path = config('seo_council.activation_receipt_path');
-        if (is_link($path) || is_link($path.'.sha256')) {
+        if (is_link($path) || is_link($path.'.sha256') || is_link($path.'.atomic.json')) {
             throw new RuntimeException('A08_PATH_HOLD');
         }
         if (! is_dir(dirname($path))) {
@@ -27,17 +27,32 @@ try {
         }
         $temp = tempnam(dirname($path), '.a08-');
         try {
-            file_put_contents($temp, $bytes, LOCK_EX);
+            if (file_put_contents($temp, $bytes, LOCK_EX) !== strlen($bytes)) {
+                throw new RuntimeException('A08_INSTALL_HOLD');
+            }
             chmod($temp, 0640);
-            file_put_contents($temp.'.sha256', hash('sha256', $bytes)."\n", LOCK_EX);
+            if (file_put_contents($temp.'.sha256', hash('sha256', $bytes)."\n", LOCK_EX) !== 65) {
+                throw new RuntimeException('A08_INSTALL_HOLD');
+            }
             chmod($temp.'.sha256', 0640);
-            // Readers may briefly hold on digest mismatch; they can never accept partial bytes.
+            $atomic = json_encode(['bytes' => $bytes, 'sha256' => hash('sha256', $bytes)], JSON_THROW_ON_ERROR);
+            if (file_put_contents($temp.'.atomic.json', $atomic, LOCK_EX) !== strlen($atomic)) {
+                throw new RuntimeException('A08_INSTALL_HOLD');
+            }
+            chmod($temp.'.atomic.json', 0640);
+            // One authoritative rename. Legacy mirrors remain readable for software rollback.
+            if (! rename($temp.'.atomic.json', $path.'.atomic.json')) {
+                throw new RuntimeException('A08_INSTALL_HOLD');
+            }
             if (! rename($temp, $path) || ! rename($temp.'.sha256', $path.'.sha256')) {
                 throw new RuntimeException('A08_INSTALL_HOLD');
             }
         } finally {
             if (is_file($temp)) {
                 unlink($temp);
+            }
+            if (is_file($temp.'.atomic.json')) {
+                unlink($temp.'.atomic.json');
             }
             if (is_file($temp.'.sha256')) {
                 unlink($temp.'.sha256');

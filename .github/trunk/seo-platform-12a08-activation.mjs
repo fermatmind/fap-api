@@ -24,7 +24,7 @@ export const COMMON_DEPENDENCIES = [
   'backend/scripts/deploy/',
   '.github/trunk/seo-platform-12a08-activation.mjs', '.github/trunk/seo-platform-12a08-release.mjs',
   '.github/trunk/nightly-relevance.mjs', '.github/trunk/impact-consumers.mjs', '.github/trunk/nightly-repair.mjs',
-  '.github/trunk/seo-platform-12a08-transition.mjs', '.github/trunk/seo-platform-12a08-evidence-download.mjs', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
+  'deploy/scheduler.php', '.github/trunk/seo-platform-12a08-transition.mjs', '.github/trunk/seo-platform-12a08-evidence-download.mjs', '.github/workflows/ci.yml', '.github/workflows/deploy.yml', '.github/workflows/nightly.yml', 'deploy.php',
 ];
 export function scopeFor(path, version = SCOPE_VERSION) {
   if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version)) throw new Error('A08_SCOPE_VERSION_HOLD');
@@ -38,6 +38,13 @@ export function scopeFor(path, version = SCOPE_VERSION) {
   if (COMMON_DEPENDENCIES.some(p => path.startsWith(p))
     || /(?:^|\/)(?:manifest|[^/]*(?:authority|schema|contract|identity))[^/]*\.json$/.test(path)) return ['public'];
   return [];
+}
+export function selectedScopes(paths) {
+  const scopes = new Set(paths.flatMap(path=>scopeFor(path)));
+  // Scheduler module has only software scheduling consumers. Other common
+  // runtime/config/security inputs retain all three mission regressions.
+  if (scopes.has('public') && paths.some(path=>scopeFor(path).includes('public') && path!=='deploy/scheduler.php')) MISSIONS.forEach(id=>scopes.add(id));
+  return ['public',...MISSIONS].filter(id=>scopes.has(id));
 }
 export const inRuntimeScope = path => scopeFor(path).length > 0;
 export const digest = value => createHash('sha256').update(value).digest('hex');
@@ -135,13 +142,14 @@ export const LEGACY_CHECKS = {
 // Presentation tests remain changed-test/full Council/Nightly regressions. They
 // do not confer production authorization; policy and outbox boundaries remain.
 export const CHECKS = {...LEGACY_CHECKS, public:LEGACY_CHECKS.public.filter(name=>!['SeoOperationsPageTest','SeoUxImpl06AgentCouncilTest','SeoPlatform12E02SystemHealthUiTest','SeoPlatform12E04TraceDrilldownUiSafetyTest'].includes(name))};
-export function scopedReceipt(junit, sha, root = process.cwd(), version = SCOPE_VERSION) {
-  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version)) throw new Error('A08_SCOPE_VERSION_HOLD');
+export function scopedReceipt(junit, sha, root = process.cwd(), version = SCOPE_VERSION, scopes = ['public',...MISSIONS]) {
+  if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(version) || !Array.isArray(scopes) || !scopes.length || scopes.some(id=>!['public',...MISSIONS].includes(id))) throw new Error('A08_SCOPE_VERSION_HOLD');
   if (!/^[a-f0-9]{40}$/.test(sha) || !junit.includes('<testcase') || /<(?:failure|error)\b/.test(junit)) throw new Error('SCOPED_TEST_RESULTS_HOLD');
   const cases = [...junit.matchAll(/<testcase\b[^>]*?(?:\/>|>[\s\S]*?<\/testcase>)/g)].map(match=>match[0]);
   const prints = fingerprint(root, sha, version);
   const checks = {};
   for (const [id, tests] of Object.entries(version === LEGACY_SCOPE_VERSION ? LEGACY_CHECKS : CHECKS)) {
+    if (!scopes.includes(id)) continue;
     if (!tests.every(test => cases.some(item=>item.includes(test)) && cases.filter(item=>item.includes(test)).every(item=>!/<skipped\b/.test(item)))) throw new Error(`SCOPED_TEST_COVERAGE_HOLD:${id}`);
     checks[id] = {scope_id:id,check_scope: 'a08_scoped_checks', sha, scope_version: version, status: 'pass', fingerprint: prints[id], result_digest: digest(junit), tests};
   }
@@ -153,8 +161,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const [cmd, input, sha, output] = process.argv.slice(2);
   if (cmd === 'fingerprint') process.stdout.write(JSON.stringify(fingerprint(input))+'\n');
   else if (cmd === 'scoped-receipt') {
-    const receipt = scopedReceipt(readFileSync(input, 'utf8'), sha, process.cwd(), PRODUCER_SCOPE_VERSION);
-    if (process.argv[6]) receipt.nightly_source = JSON.parse(readFileSync(process.argv[6], 'utf8'));
+    const receipt = scopedReceipt(readFileSync(input, 'utf8'), sha, process.cwd(), PRODUCER_SCOPE_VERSION, process.env.A08_SCOPES ? JSON.parse(process.env.A08_SCOPES) : ['public',...MISSIONS]);
     writeFileSync(output, JSON.stringify(receipt)+'\n');
   }
   else throw new Error('SEO_COUNCIL_A08_COMMAND_DENIED');

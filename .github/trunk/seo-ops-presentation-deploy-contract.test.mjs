@@ -7,18 +7,10 @@ import { classifyPaths, SEO_OPS_PRESENTATION_PATHS } from "./classify-paths.mjs"
 const ci = readFileSync(new URL("../workflows/ci.yml", import.meta.url), "utf8");
 const deploy = readFileSync(new URL("../workflows/deploy.yml", import.meta.url), "utf8");
 
-test("runtime closeout selection consumes the verified CI receipt and defaults old receipts to full checks", () => {
-  const expression = deploy.match(/seo_council_runtime_closeout="\$\(jq -r '([^']+)' "\$receipt"\)"/s)?.[1];
-  assert.ok(expression);
-  const required = (operations) => execFileSync("jq", ["-r", expression], {
-    input: JSON.stringify({ classification: { operations } }), encoding: "utf8",
-  }).trim();
-  const presentation = classifyPaths([...SEO_OPS_PRESENTATION_PATHS]);
-  assert.equal(required(presentation.operations), "false");
-  assert.equal(required(classifyPaths([...presentation.paths, "backend/config/seo_council.php"]).operations), "true");
-  for (const value of [undefined, null, false, "true", 1]) {
-    assert.equal(required({ seo_council_orchestration: true, seo_ops_presentation_only: value }), "true");
-  }
+test("ordinary release never requires operating source closeout, while CI still verifies its selected software", () => {
+  assert.match(deploy, /seo_council_runtime_closeout=false/);
+  assert.match(deploy, /seo_competitive_evidence=false/);
+  assert.doesNotMatch(deploy, /seo_council_runtime_closeout="\$\(jq/);
   assert.match(deploy, /seo_council_runtime_closeout: \$\{\{ steps\.receipt\.outputs\.seo_council_runtime_closeout \}\}/);
   assert.match(deploy, /echo "seo_council_runtime_closeout=\$seo_council_runtime_closeout"/);
   assert.match(deploy, /\.seo_council_orchestration\.required == \.classification\.operations\.seo_council_orchestration/);
@@ -37,7 +29,8 @@ test("M3 source preparation stays separate from full closeout and ordinary prese
   assert.equal(classifyPaths([...SEO_OPS_PRESENTATION_PATHS]).operations.seo_competitive_evidence, false);
   assert.equal(classifyPaths(["backend/app/Services/SeoCouncil/Platform12/Platform12RuntimeControl.php"]).operations.seo_competitive_evidence, false);
   const m3 = classifyPaths(["backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"]);
-  assert.equal(m3.operations.seo_competitive_evidence, true);
+  assert.equal(m3.operations.seo_competitive_evidence, false);
+  assert.equal(m3.operations.seo_competitive_checks, true);
   assert.equal(m3.operations.a08_readonly_wiring, true);
   assert.equal((deploy.match(/council_orchestration='\$\{\{ needs\.policy\.outputs\.seo_council_runtime_closeout \}\}'/g) || []).length, 3);
   assert.doesNotMatch(deploy, /needs\.policy\.outputs\.seo_council_orchestration/);

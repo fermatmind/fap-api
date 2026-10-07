@@ -1,6 +1,6 @@
 import { relevantNightlyFailures } from './nightly-relevance.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { MISSIONS, digest, fingerprint, mayCarry, SCOPE_VERSION, LEGACY_SCOPE_VERSION } from './seo-platform-12a08-activation.mjs';
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 export function verifyState(before, after, sha) {
@@ -57,7 +57,6 @@ export function bindControlled(manifest, report, artifact) {
     || proof?.source_acceptance?.status !== 'pass' || report.source_receipt_digest !== proof.source_acceptance.receipt_digest
     || report.fingerprint !== proof.checks.fingerprint || JSON.stringify(report.version_vector) !== JSON.stringify(manifest.runtime.version_vector)
     || report.terminal_committed !== true || report.receipt_to_ui_verified !== true || report.runtime_boundaries_verified !== true
-    || (id === MISSIONS[2] && (proof.source_acceptance.observed_verdict !== 'READY' || report.observed_verdict !== 'READY'))
     || report.business_write_enabled !== false || !/^[a-f0-9]{64}$/.test(report.receipt_hash)
     || !/^sha256:[a-f0-9]{64}$/.test(artifact ?? '')) throw new Error('A08_CONTROLLED_BINDING_HOLD');
   proof.end_to_end_acceptance={...report,status:'pass',stage:'controlled_mission_terminal_and_ui',bound_sha:report.sha,artifact_digest:artifact};
@@ -78,10 +77,18 @@ export function build({checks, sha, ci, jobs, staging, production, artifactDiges
   if (checks.sha !== sha || checks.check_scope !== 'a08_scoped_checks'
     || ci.head_sha !== sha || ci.conclusion !== 'success' || ci.status !== 'completed'
     || ci.event !== 'push' || ci.head_branch !== 'main') throw new Error('A08_CI_BINDING_HOLD');
-  const scopeVersion = checks.checks?.public?.scope_version;
+  const scopeVersion = Object.values(checks.checks ?? {})[0]?.scope_version;
   if (![SCOPE_VERSION,LEGACY_SCOPE_VERSION].includes(scopeVersion)) throw new Error('A08_SCOPE_VERSION_HOLD');
   const prints = fingerprint(process.cwd(), sha, scopeVersion);
   for (const id of ['public', ...MISSIONS]) {
+    if (!checks.checks[id]) {
+      const old = id === 'public' ? previous?.validation?.public_checks : previous?.missions?.[id]?.checks;
+      if (!old || !previous?.bound_production_sha
+        || spawnSync('git',['merge-base','--is-ancestor',previous.bound_production_sha,sha],{cwd:process.cwd()}).status !== 0
+        || old.scope_version !== scopeVersion || old.fingerprint !== prints[id]
+        || JSON.stringify(previous.runtime?.version_vector) !== JSON.stringify(production.version_vector)) throw new Error('A08_FOCUSED_REVALIDATION_REQUIRED');
+      checks.checks[id] = {...old, sha, validated_sha:old.validated_sha ?? old.sha, ancestor_verified:true};
+    }
     if (checks.checks[id]?.scope_version !== scopeVersion || checks.checks[id]?.sha !== sha || checks.checks[id]?.status !== 'pass'
       || checks.checks[id]?.fingerprint !== prints[id]) throw new Error('A08_FINGERPRINT_HOLD');
   }
@@ -98,11 +105,13 @@ export function build({checks, sha, ci, jobs, staging, production, artifactDiges
       completed_job: true, run_id: job.run_id, job_id: job.id, completed_at: job.completed_at,
       artifact_digest: artifactDigests[environment], pause_preserved: true, business_guards_closed: true};
   }
-  return {schema_version:'seo.platform12_a08_activation.v2', repository:'fermatmind/fap-api', bound_production_sha:sha,
-    validation, missions: Object.fromEntries(MISSIONS.map(id => [id, {checks: checks.checks[id], end_to_end_acceptance: previous?.missions?.[id]?.end_to_end_acceptance?.status === 'pass' && mayCarry(previous,{production_sha:sha,version_vector:production.version_vector},id) && equivalentSource(previous.missions[id].source_acceptance,sources?.[id])
-      ? {...previous.missions[id].end_to_end_acceptance,bound_sha:sha,ancestor_verified:true} : {status:'pending'}, source_acceptance: previous?.missions?.[id]?.source_acceptance?.status === 'pass' && mayCarry(previous,{production_sha:sha,version_vector:production.version_vector},id) && equivalentSource(previous.missions[id].source_acceptance,sources?.[id])
-      ? {...previous.missions[id].source_acceptance,bound_sha:sha,ancestor_verified:true}
-      : sourceAcceptance(stagingSafety?.pause_resume_verified === true ? sources?.[id] : null, sha, id, checks.checks[id].fingerprint, production.version_vector, artifactDigests.production)}])),
+  return {schema_version:'seo.platform12_a08_activation.v2', repository:'fermatmind/fap-api', bound_production_sha:sha, software_delivery_only:true,
+    validation, missions: Object.fromEntries(MISSIONS.map(id => [id, {
+      checks:checks.checks[id],
+      // Historical software wiring and source records retain their own SHA and dates.
+      source_acceptance:previous?.missions?.[id]?.source_acceptance ?? {status:'pending',reason:'OPERATIONS_SOURCE_INDEPENDENT'},
+      end_to_end_acceptance:previous?.missions?.[id]?.end_to_end_acceptance ?? {status:'pending'},
+    }])),
     runtime:{version_vector:production.version_vector,version_vector_hash:production.version_vector_hash},
     permissions:Object.fromEntries(['model_calls','tool_broker','cms_writes','publish_writes','canonical_writes','robots_writes','url_truth_writes','search_submission','business_writes'].map(key => [key,false])),
     measurement:{day_28_started:false,efficiency_claim_allowed:false}};

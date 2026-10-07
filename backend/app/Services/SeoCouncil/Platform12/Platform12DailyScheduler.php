@@ -38,12 +38,32 @@ final readonly class Platform12DailyScheduler
         if ($acceptanceMission !== null && ! in_array($acceptanceMission, Platform12DailyMissionSet::IDS, true)) {
             return $this->result('ACCEPTANCE_SCOPE_DENIED');
         }
+        $this->control->reconcile();
         $state = $this->control->status();
         if (! $state['computation_enabled']) {
             return $this->result($state['state']);
         }
         if ($acceptanceMission !== null && ! $this->control->allowsMission($acceptanceMission, true)) {
             return $this->result('MISSION_NOT_AUTHORIZED');
+        }
+        // External acquisition has its own bounded lock and backoff. Keep it
+        // outside the evaluation lease and its 120-second software budget.
+        if ($acceptanceMission === null && app()->environment('production')) {
+            try {
+                $pending = $this->deliveries()->whereIn('mission_id', $state['effective_mission_ids'])
+                    ->where('mission_request_json->slot->runtime_generation', $state['generation'])
+                    ->whereNotIn('status', ['CLOSED', 'HELD', 'FAILED'])->exists();
+                $due = $pending ? null : $this->nextSlot($state);
+                if ($due !== null && $due['mission_id'] === Platform12DailyMissionSet::IDS[2]
+                    && $due['trigger_mode'] !== 'missed') {
+                    \Illuminate\Support\Facades\Artisan::call('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true]);
+                    if (! $this->sameGeneration($state)) {
+                        return $this->result('PAUSED_BEFORE_RESERVATION');
+                    }
+                }
+            } catch (Throwable) {
+                return $this->result('DAILY_RUNTIME_HOLD');
+            }
         }
         $owner = bin2hex(random_bytes(24));
         $lease = $this->store->acquire(self::LEASE, $owner, 180);

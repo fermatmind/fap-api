@@ -43,7 +43,7 @@ export function phpConsumers(root = process.cwd()) {
 export function selectOperations(paths, root=process.cwd()) {
   const graph=phpConsumers(root);
   const unknown=paths.some(p=>/^backend\/app\/.*\.php$/.test(p)&&!graph.sources.has(p));
-  const shared=unknown||paths.some(p=>p==='deploy.php'||/^\.github\/(?:workflows\/|trunk\/(?:impact-consumers|classify-release|production-evidence|admit-release)\.mjs$)/.test(p))||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));
+  const shared=unknown||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));
   const affected=(roots,inputs=[])=>shared || paths.some(p=>roots.has(p)||inputs.some(prefix=>p.startsWith(prefix)));
   const family={
     big5:graph.consumer([/\/(?:BigFivePrivateResult(?:CompileService|PackLoader)|BigFiveContentCompileService)\.php$/, /\/Services\/(?:Report|Content)\/[^/]*(?:BigFive|Big5)[^/]*\.php$/]),

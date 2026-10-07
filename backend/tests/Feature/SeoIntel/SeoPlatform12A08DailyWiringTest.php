@@ -103,7 +103,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
                 return ['input' => ['evaluated_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
                     'gsc' => ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => 'success',
                         'trigger_mode' => 'scheduled', 'mapping_state' => 'READY', 'data_quality_state' => 'READY',
-                        'window_state' => 'COMPLETE', 'row_count' => 0, 'data_max_date' => now('UTC')->subDay()->toDateString()],
+                        'window_state' => 'COMPLETE', 'row_count' => 1, 'data_max_date' => now('UTC')->subDay()->toDateString()],
                     'runtime' => ['core_runtime_state' => 'AVAILABLE', 'public_api_state' => 'AVAILABLE',
                         'readback_state' => 'AVAILABLE', 'production_sha' => str_repeat('a', 40), 'readback_sha' => str_repeat('a', 40)]],
                     'sources' => [], 'source_gaps' => [], 'captured_at' => now('UTC')->format('Y-m-d\TH:i:s\Z'),
@@ -414,7 +414,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     public function test_verified_acceptance_wait_keeps_hold_and_never_creates_failure_or_recovery(): void
     {
-        $this->clock('2026-09-22T06:34:51Z');
+        $this->clock('2026-09-22T08:34:51Z');
         app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
         $reader = $this->fixtureReader();
         $this->successfulSync($reader);
@@ -435,7 +435,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     public function test_wait_requires_latest_success_quality_mapping_hash_and_before_refresh_boundary(): void
     {
-        $this->clock('2026-09-22T06:34:51Z');
+        $this->clock('2026-09-22T08:34:51Z');
         app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
         $reader = $this->fixtureReader();
         $this->successfulSync($reader);
@@ -564,7 +564,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     public function test_controlled_real_failures_remain_alerts_and_invalid_receipts_cannot_recover(): void
     {
-        $this->clock('2026-09-22T06:34:51Z');
+        $this->clock('2026-09-22T08:34:51Z');
         app(Platform12RuntimeControl::class)->change(false, Platform12DailyMissionSet::IDS);
         $reader = $this->fixtureReader();
         $reader->overrides = ['gsc' => ['scheduled_receipt_status' => 'failed']];
@@ -589,7 +589,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
 
     public function test_legacy_pending_wait_is_audited_without_touching_sending_or_unknown_delivery(): void
     {
-        $this->clock('2026-09-22T06:34:51Z');
+        $this->clock('2026-09-22T08:34:51Z');
         app(Platform12RuntimeControl::class)->change(false, [Platform12DailyMissionSet::IDS[0]]);
         $reader = $this->fixtureReader();
         $this->successfulSync($reader);
@@ -704,7 +704,7 @@ final class SeoPlatform12A08DailyWiringTest extends TestCase
                 $input = match ($missionId) {
                     Platform12DailyMissionSet::IDS[0] => ['gsc' => ['availability' => 'AVAILABLE', 'scheduled_receipt_status' => 'success',
                         'trigger_mode' => 'scheduled', 'mapping_state' => 'READY', 'data_quality_state' => 'READY',
-                        'window_state' => 'COMPLETE', 'row_count' => 0, 'data_max_date' => now('UTC')->subDay()->toDateString()],
+                        'window_state' => 'COMPLETE', 'row_count' => 1, 'data_max_date' => now('UTC')->subDay()->toDateString()],
                         'runtime' => ['core_runtime_state' => 'AVAILABLE', 'public_api_state' => 'AVAILABLE',
                             'readback_state' => 'AVAILABLE', 'production_sha' => str_repeat('a', 40), 'readback_sha' => str_repeat('a', 40)]],
                     Platform12DailyMissionSet::IDS[1] => ['authority' => ['availability' => 'AVAILABLE', 'revision_hash' => str_repeat('a', 64), 'current_public_count' => 100],

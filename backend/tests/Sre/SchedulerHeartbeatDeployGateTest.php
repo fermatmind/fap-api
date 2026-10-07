@@ -92,7 +92,7 @@ BASH);
 
     private function gate(string $observedAt, bool $healthy, int $checkerExit, string $activationEpoch = '90'): Process
     {
-        $source = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $source = (string) file_get_contents(dirname(__DIR__, 3).'/deploy/scheduler.php');
         $task = substr($source, (int) strpos($source, "task('scheduler:wait-natural-heartbeat'"));
         $this->assertSame(1, preg_match("/<<<'BASH'\n(.*?)\nBASH, timeout: 95/s", $task, $matches));
         $script = str_replace(

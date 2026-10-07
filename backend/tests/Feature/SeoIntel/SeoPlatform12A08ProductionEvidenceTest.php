@@ -152,11 +152,23 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
         });
         $at = CarbonImmutable::now('UTC');
         $table = DB::connection('seo_intel')->table('seo_gsc_sync_runs');
-        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->addHours(8), 'created_at' => $at->subMinutes(3),
-            'finished_at' => $at->subMinutes(2), 'receipt_json' => json_encode(['schema_version' => 'seo.gsc_refresh_receipt.v2',
-                'trigger_mode' => 'scheduled', 'unmapped_rows' => 0, 'rows_seen' => 0, 'data_max_date' => $at->subDay()->toDateString(),
-                'quality_gate' => ['status' => 'pass']])]);
+        $started = $at->subMinutes(3);
+        $end = $started->setTimezone('America/Los_Angeles')->subDays(3);
+        $receipt = ['schema_version' => 'seo.gsc_refresh_receipt.v2', 'status' => 'success',
+            'trigger_mode' => 'scheduled', 'unmapped_rows' => 0, 'rows_seen' => 0, 'data_max_date' => null,
+            'reporting_timezone' => 'America/Los_Angeles', 'window_days' => 28, 'lag_days_requested' => 3,
+            'fetch_mode' => 'full_window', 'requested_start_date' => $end->subDays(27)->toDateString(),
+            'start_date' => $end->subDays(27)->toDateString(), 'end_date' => $end->toDateString(),
+            'search_types' => ['web'], 'pages_fetched' => 28, 'quality_gate' => ['status' => 'pass', 'zero_query_complete' => true],
+            'completeness' => ['pagination_complete' => true, 'truncated' => false,
+                'covered_start_date' => $end->subDays(27)->toDateString(), 'covered_end_date' => $end->toDateString(),
+                'search_types' => ['web'], 'dimensions' => ['query', 'page', 'device', 'country']]];
+        $receipt['receipt_hash'] = app(\App\Services\SeoAgentGovernance\SeoRegistryHasher::class)->hash($receipt);
+        $table->insert(['trigger_mode' => 'scheduled', 'status' => 'success', 'started_at' => $at->addHours(8), 'created_at' => $started,
+            'finished_at' => $at->subMinutes(2), 'receipt_json' => json_encode($receipt)]);
         $result = $this->read('gsc', $at);
+        $this->assertTrue($result['zero_query_complete']);
+        $this->assertSame('COMPLETE', $result['window_state']);
         $this->assertSame(0, $result['row_count']);
         $this->assertSame('READY', $result['data_quality_state']);
         $table->insert(['trigger_mode' => 'scheduled', 'status' => 'failed', 'started_at' => $at->subMinute(), 'created_at' => $at->subMinute(),
@@ -407,6 +419,88 @@ final class SeoPlatform12A08ProductionEvidenceTest extends TestCase
             'historical_exit_reason' => 'NONE', 'superseded_bundle_hashes' => '', 'selection_hash' => str_repeat('d', 64)];
         $this->assertSame('HOLD', $this->evaluateLifecycle($empty)['state']);
         $this->assertSame('DENY', $this->evaluateLifecycle($empty, true)['state']);
+    }
+
+    public function test_m3_compatible_cross_sha_reuse_preserves_source_and_rejects_dependency_drift_or_failed_refresh(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        $bundle = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $this->storeLifecycleBundle($bundle);
+        $this->writeLifecycleReceipt($bundle);
+        $receipt = json_decode(file_get_contents(storage_path('app/release-receipts/seo-competitive-evidence/'.self::CURRENT_SHA.'.json')), true);
+        $receipt['dependency_ingestion']['dependency_hash'] = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class)->dependencyHash();
+        $receipt['receipt_hash'] = app(SeoEvidenceCanonicalHasher::class)->hashWithout($receipt, 'receipt_hash');
+        $selection = app(Platform12EvidenceSelection::class);
+        $this->lifecycleFiles[] = storage_path('app/release-receipts/seo-competitive-evidence/current.json');
+        $selection->atomicReference($receipt);
+        $nextSha = str_repeat('c', 40);
+        $reference = $selection->currentReference(collect(), CarbonImmutable::now('UTC'), $nextSha);
+        $this->assertSame(self::CURRENT_SHA, $reference['source_sha']);
+        $this->assertSame($bundle['captured_at'], $reference['bundle']['captured_at']);
+        $this->assertSame('VALID', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_state']);
+        config()->set('seo_agent_evidence.query_hmac_key_version', 'changed');
+        $this->assertSame('DEPENDENCY_CHANGED', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_reason']);
+        $selection->atomicReference(['refresh_status' => 'failed', 'execution_sha' => $nextSha, 'reason' => 'SOURCE_POLICY_HOLD']);
+        $this->assertSame('REFRESH_FAILED', $selection->read(CarbonImmutable::now('UTC'), $nextSha)['freshness']['current_reference_reason']);
+        Http::assertNothingSent();
+    }
+
+    public function test_m3_paged_history_retains_all_rows_and_requires_complete_safe_replacement_audit(): void
+    {
+        CarbonImmutable::setTestNow('2026-10-06T00:00:00Z');
+        $this->createLifecycleTable();
+        for ($index = 0; $index < 201; $index++) {
+            $this->storeLifecycleBundle($this->lifecycleBundle(hash('sha1', 'history-'.$index), now('UTC')->subDays(35)->addSeconds($index)));
+        }
+        $current = $this->lifecycleBundle(self::CURRENT_SHA, now('UTC')->subHour());
+        $this->storeLifecycleBundle($current);
+        $this->writeLifecycleReceipt($current);
+        $selection = app(Platform12EvidenceSelection::class);
+        $first = $selection->auditHistory(self::CURRENT_SHA);
+        $this->assertSame(200, $first['scanned']);
+        $this->assertSame('HISTORY_PENDING', $first['state']);
+        try {
+            $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+            $this->fail('Unfinished history cannot confer safety');
+        } catch (\RuntimeException $error) {
+            $this->assertSame('HISTORY_SCAN_PENDING', $error->getMessage());
+        }
+        $this->assertSame('HISTORY_COMPLETE', $selection->auditHistory(self::CURRENT_SHA)['state']);
+        $read = $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+        $this->assertSame(1, $read['rows']->count());
+        $this->assertSame('PAGED_IN_OPERATIONS', $read['freshness']['historical_scan_state']);
+        $this->assertSame(202, DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+        DB::connection('seo_intel')->table('seo_evidence_bundles')->where('id', 1)->update(['bundle_json' => '{broken']);
+        CarbonImmutable::setTestNow(now('UTC')->addHours(25));
+        $this->assertSame('HISTORY_INVALID', $selection->auditHistory(self::CURRENT_SHA)['state']);
+        try {
+            $selection->read(CarbonImmutable::now('UTC'), self::CURRENT_SHA);
+            $this->fail('Corruption cannot be excluded');
+        } catch (\RuntimeException $error) {
+            $this->assertSame('HISTORY_INVALID', $error->getMessage());
+        }
+    }
+
+    public function test_gsc_request_window_is_anchored_to_collection_pt_day_across_dst_and_rejects_truncation(): void
+    {
+        foreach (['2026-03-08T07:59:59Z', '2026-03-08T10:01:00Z', '2026-11-01T08:59:59Z', '2026-11-01T10:01:00Z'] as $time) {
+            $started = CarbonImmutable::parse($time);
+            $end = $started->setTimezone('America/Los_Angeles')->subDays(3);
+            $receipt = ['reporting_timezone' => 'America/Los_Angeles', 'window_days' => 28, 'lag_days_requested' => 3,
+                'fetch_mode' => 'full_window', 'requested_start_date' => $end->subDays(27)->toDateString(),
+                'start_date' => $end->subDays(27)->toDateString(), 'end_date' => $end->toDateString(), 'search_types' => ['web'], 'pages_fetched' => 28,
+                'completeness' => ['covered_start_date' => $end->subDays(27)->toDateString(), 'covered_end_date' => $end->toDateString(),
+                    'pagination_complete' => true, 'truncated' => false, 'search_types' => ['web'], 'dimensions' => ['query', 'page', 'device', 'country']]];
+            $method = new \ReflectionMethod(Platform12ProductionEvidenceReader::class, 'gscWindow');
+            $this->assertSame('COMPLETE', $method->invoke(app(Platform12ProductionEvidenceReader::class), $receipt, $started));
+            $bad = $receipt;
+            $bad['completeness']['truncated'] = true;
+            $this->assertSame('GSC_COLLECTION_TRUNCATED', $method->invoke(app(Platform12ProductionEvidenceReader::class), $bad, $started));
+            $bad = $receipt;
+            $bad['end_date'] = $end->addDay()->toDateString();
+            $this->assertSame('GSC_WINDOW_MISMATCH', $method->invoke(app(Platform12ProductionEvidenceReader::class), $bad, $started));
+        }
     }
 
     private function createLifecycleTable(): void

@@ -172,6 +172,42 @@ final class SeoPlatform12A08ActivationEvidenceTest extends TestCase
         $this->assertSame('PUBLIC_SCOPED_EVIDENCE_HOLD', $reader->validate($this->manifest(), $this->sha));
     }
 
+    public function test_software_reconcile_retains_existing_authorization_first_enable_and_pause_and_atomic_integrity(): void
+    {
+        $manifest = $this->manifest();
+        $manifest['software_delivery_only'] = true;
+        $this->write($manifest);
+        $runtime = app(Platform12RuntimeControl::class);
+        $runtime->reconcile();
+        $this->assertSame([], $runtime->status()['selected_missions']);
+        $runtime->change(false, [Platform12DailyMissionSet::IDS[2]]);
+        $generation = $runtime->status()['generation'];
+        $runtime->reconcile();
+        $first = $runtime->status()['missions'][Platform12DailyMissionSet::IDS[2]]['first_enabled_at'];
+        $this->assertNotNull($first);
+        $this->assertSame([Platform12DailyMissionSet::IDS[2]], $runtime->status()['effective_mission_ids']);
+        $this->assertSame($generation, $runtime->status()['generation']);
+        $this->sha = str_repeat('b', 40);
+        file_put_contents($this->directory.'/REVISION', $this->sha);
+        $next = $this->manifest();
+        $next['software_delivery_only'] = true;
+        $bytes = json_encode($next, JSON_THROW_ON_ERROR);
+        file_put_contents($this->directory.'/activation.json.atomic.json', json_encode(['bytes' => $bytes, 'sha256' => hash('sha256', $bytes)]));
+        // The complete atomic envelope wins while legacy mirrors still contain old bytes.
+        $runtime->reconcile();
+        $this->assertSame($first, $runtime->status()['missions'][Platform12DailyMissionSet::IDS[2]]['first_enabled_at']);
+        $this->assertSame($generation, $runtime->status()['generation']);
+        $this->assertSame([Platform12DailyMissionSet::IDS[2]], $runtime->status()['effective_mission_ids']);
+        $runtime->change(true);
+        $paused = $runtime->status()['generation'];
+        $runtime->reconcile();
+        $this->assertSame($paused, $runtime->status()['generation']);
+        $this->assertSame('PAUSED', $runtime->status()['state']);
+        file_put_contents($this->directory.'/activation.json.atomic.json', '{incomplete');
+        $this->assertSame('ACTIVATION_EVIDENCE_CORRUPT', $runtime->prerequisite());
+        $this->assertSame([], $runtime->status()['effective_mission_ids']);
+    }
+
     private function manifest(): array
     {
         $vector = app(RuntimeCapabilitySnapshotBuilder::class)->snapshot()['version_vector'];

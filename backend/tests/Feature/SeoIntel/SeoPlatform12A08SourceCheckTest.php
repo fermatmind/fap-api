@@ -101,7 +101,7 @@ final class SeoPlatform12A08SourceCheckTest extends TestCase
         });
         $report = app(Platform12SourceCheck::class)->check(Platform12DailyMissionSet::IDS[0]);
         $this->assertSame('VERIFIED', $report['source_wiring_status']);
-        $this->assertSame('GSC_UNAVAILABLE_HOLD', $report['observed_verdict']);
+        $this->assertSame('GSC_COLLECTION_FAILED_HOLD', $report['observed_verdict']);
         $this->assertFalse($report['real_runtime']);
         $this->assertSame([], array_filter($queries, static fn ($sql) => preg_match('/^\s*(insert|update|delete|replace|create|drop)\b/i', $sql)));
         Mail::assertNothingSent();

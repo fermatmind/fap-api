@@ -65,16 +65,27 @@ final readonly class Platform12DailyGscCoreRuntimeEvaluator
             || ! is_int($rowCount) || $rowCount < 0 || $rowCount > 100000000) {
             return $this->unavailableGsc();
         }
+        $collectionReason = $source['collection_reason'] ?? null;
+        if (in_array($collectionReason, ['GSC_COLLECTION_RUNNING', 'GSC_COLLECTION_TIMEOUT', 'GSC_COLLECTION_FAILED', 'GSC_COLLECTION_MISSED', 'GSC_WINDOW_MISMATCH', 'GSC_COLLECTION_TRUNCATED'], true)) {
+            return [...$this->unavailableGsc(), 'collection_reason' => $collectionReason];
+        }
         if ($availability !== 'AVAILABLE' || $receiptStatus !== 'success' || $triggerMode !== 'scheduled') {
             return $this->unavailableGsc();
         }
 
+        if ($rowCount === 0 && ($source['zero_query_complete'] ?? false) === true && $window === 'COMPLETE' && $quality === 'READY' && $mapping === 'READY') {
+            return [...$this->unavailableGsc(), 'capability_state' => 'VALID_ZERO', 'scheduled_receipt_status' => 'success',
+                'row_count' => 0, 'lag_days' => 0, 'mapping_state' => 'READY', 'data_quality_state' => 'READY', 'window_state' => 'COMPLETE'];
+        }
+        if ($rowCount === 0) {
+            return $this->unavailableGsc();
+        }
         $dataMaxDate = (string) ($source['data_max_date'] ?? '');
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/D', $dataMaxDate) !== 1) {
             return $this->unavailableGsc();
         }
         $maxDate = CarbonImmutable::createFromFormat('!Y-m-d', $dataMaxDate, 'UTC');
-        $evaluation = CarbonImmutable::parse($evaluatedAt, 'UTC')->startOfDay();
+        $evaluation = CarbonImmutable::parse(CarbonImmutable::parse($evaluatedAt, 'UTC')->setTimezone('America/Los_Angeles')->toDateString(), 'UTC');
         if ($maxDate === false || $maxDate->format('Y-m-d') !== $dataMaxDate || $maxDate->gt($evaluation)) {
             return $this->unavailableGsc();
         }
@@ -134,6 +145,7 @@ final readonly class Platform12DailyGscCoreRuntimeEvaluator
     private function state(array $gsc, array $runtime): string
     {
         return match (true) {
+            isset($gsc['collection_reason']) => $gsc['collection_reason'] === 'GSC_COLLECTION_RUNNING' ? 'GSC_COLLECTION_WAIT' : $gsc['collection_reason'].'_HOLD',
             $gsc['capability_state'] === 'UNAVAILABLE' => 'GSC_UNAVAILABLE_HOLD',
             $gsc['capability_state'] === 'MAPPING_FAILED' => 'MAPPING_FAILED_HOLD',
             $gsc['capability_state'] === 'WINDOW_INCOMPLETE' => 'WINDOW_INCOMPLETE_HOLD',

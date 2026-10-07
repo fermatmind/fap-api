@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { inRuntimeScope } from './seo-platform-12a08-activation.mjs';
+import { inRuntimeScope, selectedScopes } from './seo-platform-12a08-activation.mjs';
 import { readFileSync } from "node:fs";
 
 export const CATEGORIES = [
@@ -23,8 +23,6 @@ export const CAREER_PUBLISHER_BOUNDARY_MATRIX = [
   "backend/app/Domain/Career/Display/CareerAuthoringMigration.php",
   "backend/docs/career/contracts/career-authoring-structure.v1.json",
   "backend/scripts/career/migrate_authoring_structure.php",
-  ".github/workflows/ci.yml",
-  ".github/workflows/deploy.yml",
   "backend/content_assets/career/career_current_authority_release.v1.json",
   "backend/content_assets/career/current/",
   "backend/app/Domain/Career/Compilation/CareerContentV3Compiler.php",
@@ -131,7 +129,7 @@ const isSeoCouncilOrchestrationBoundary = (path) =>
   || path === "backend/app/Services/Ops/OpsAlertService.php"
   || path === "backend/app/Services/SeoAgentEvidence/Sources/SeoPlatformDependencyEvidenceAdapter.php"
   || path === ".agents/skills/fermatmind-global-seo-geo-growth-scan/SKILL.md"
-  || SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path);
+  || (SEO_COUNCIL_CONTROL_PLANE_PATHS.has(path) && !['deploy.php', '.github/workflows/ci.yml', '.github/workflows/deploy.yml'].includes(path));
 
 const isSeoCompetitiveEvidenceBoundary = (path) =>
   /^backend\/(?:app\/Services\/SeoAgentEvidence\/(?:Competitive|External)\/|app\/Services\/SeoCouncil\/(?:Competitive|Platform12)\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|app\/Providers\/(?:SeoAgentEvidence|SeoCouncil)ServiceProvider\.php$|resources\/seo-agent\/(?:evidence\/competitive|council\/platform12)\/|docs\/seo\/generated\/seo-(?:agent-evidence|council)-contract-manifest\.v[345]\.json$|tests\/Feature\/SeoIntel\/SeoPlatform11G)/.test(path)
@@ -140,7 +138,6 @@ const isSeoCompetitiveEvidenceBoundary = (path) =>
   || path === "backend/scripts/seo/export_seo_agent_evidence_contracts.php"
   || path === "backend/scripts/seo/export_seo_council_contracts.php"
   || /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_(?:create|expand)_seo_council_[a-z0-9_]+\.php$/.test(path)
-  || path === "deploy.php"
   || path === ".github/workflows/ci.yml"
   || path === ".github/workflows/deploy.yml"
   || path === ".github/trunk/classify-paths.mjs"
@@ -166,14 +163,8 @@ export function classifyPaths(inputPaths) {
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
   const publisherRequired = paths.some(isCareerPublisherBoundary);
   const seoCompetitiveEvidenceAffected = paths.some(isSeoCompetitiveEvidenceBoundary);
-  // M3 lifecycle releases need the existing fixed-source production collector.
-  // Unrelated Platform 12 releases keep their deferred 11G behavior.
-  const m3EvidenceLifecycle = paths.some(path =>
-    path === "backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php"
-    || path === "backend/app/Services/SeoCouncil/Platform12/Platform12EvidenceSelection.php"
-    || path === "backend/app/Services/SeoCouncil/Platform12/Evaluation/Platform12DailySecurityDriftEvaluator.php");
-  const seoCompetitiveEvidence = m3EvidenceLifecycle
-    || (SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "ACTIVE" && seoCompetitiveEvidenceAffected);
+  // Evidence software is tested offline. Business collection is owned by natural operations.
+  const seoCompetitiveEvidence = false;
   const opsPresentation = paths.some((path) => SEO_OPS_PRESENTATION_PATHS.has(path));
   const opsPresentationOnly = opsPresentation && paths.every((path) =>
     SEO_OPS_PRESENTATION_PATHS.has(path) || isPresentationCompanion(path),
@@ -192,7 +183,8 @@ export function classifyPaths(inputPaths) {
   const operations = {
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
-    a08_focused: a08ReadonlyWiring,
+    a08_scopes: selectedScopes(paths),
+    a08_focused: paths.some(inRuntimeScope) && !opsPresentation && !paths.some(path => isSeoCouncilOrchestrationBoundary(path) && !isDeferredCompetitiveCouncilBoundary(path) && !/Platform12|platform12\/|seo[_-].*a08|\.github\/|^deploy|^backend\/tests\//.test(path)),
     a08_scoped_checks: paths.some(inRuntimeScope),
     publisher_required: publisherRequired,
     career_content_only: false,
@@ -244,10 +236,11 @@ export function classifyPaths(inputPaths) {
       && !(SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE === "DEFERRED_NON_BLOCKING"
         && isDeferredCompetitiveCouncilBoundary(path))
     ) || seoCompetitiveEvidence),
+    seo_competitive_checks: seoCompetitiveEvidenceAffected,
     seo_competitive_evidence: seoCompetitiveEvidence,
     seo_competitive_evidence_state: SEO_COMPETITIVE_EVIDENCE_RELEASE_STATE,
     seo_competitive_evidence_progress: "COMPLETE",
-    seo_competitive_evidence_blocks_delivery: seoCompetitiveEvidence,
+    seo_competitive_evidence_blocks_delivery: false,
   };
   let testsChanged = false;
 
@@ -306,7 +299,8 @@ export function classifyPaths(inputPaths) {
       "backend/app/Domain/Career/Display/CareerContentV3PageUpdater.php",
       "backend/app/Services/Career/CareerIndustryDirectoryReadModel.php",
     ].includes(path);
-    const seo = careerBodyEligibility || (!careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
+    const evidenceSoftware = /^backend\/(?:app\/Services\/SeoAgentEvidence\/|app\/Console\/Commands\/SeoCompetitiveEvidence[^/]+\.php$|scripts\/deploy\/seo_a08_[^/]+\.php$)/.test(path);
+    const seo = careerBodyEligibility || (!evidenceSoftware && !careerCurrentManagedCache && !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && !seoCouncilOrchestrationBoundary && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,

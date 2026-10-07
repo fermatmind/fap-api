@@ -33,6 +33,46 @@ final class SeoPlatform11G5SourceReadinessTest extends TestCase
         (require database_path('migrations/seo_intel/2026_08_29_010000_create_seo_evidence_tables.php'))->up();
     }
 
+    public function test_same_sha_real_cycles_have_distinct_identity_and_closeout_preserves_collection_identity(): void
+    {
+        $identity = app(\App\Services\SeoAgentEvidence\Competitive\CompetitiveReleaseIdentity::class);
+        $sha = str_repeat('a', 40);
+        $one = $identity->reference('production', $sha, '2026-10-06');
+        $two = $identity->reference('production', $sha, '2026-10-07');
+        $this->assertNotSame($one, $two);
+        $this->assertSame($one, $identity->reference('production', $sha, '2026-10-06'));
+        $this->assertSame('pass', app(SeoPrivateDataScanner::class)->scan($one)['decision']);
+        $hasher = app(\App\Services\SeoAgentEvidence\Contracts\SeoEvidenceCanonicalHasher::class);
+        $diagnostics = $this->readyPolicyDiagnostics('production', $sha);
+        foreach ($diagnostics['policy_observations'] as &$observation) {
+            $observation['release_ref'] = $two;
+            $observation = app(CompetitivePolicyObservationSet::class)->seal($observation);
+        }
+        unset($observation);
+        $diagnostics['policy_observation_set_hash'] = app(CompetitivePolicyObservationSet::class)->hash($diagnostics['policy_observations']);
+        $ingestion = ['status' => 'READY', 'hold_reason' => 'NONE', 'bundle_verification' => 'valid',
+            'competitive_output' => ['status' => 'READY', '11i_handoff' => ['source_freshness' => 'fresh', 'source_count' => 2]],
+            'policy_snapshot' => app(CompetitiveSourcePolicyRegistry::class)->snapshot('competitive.big-five.live.v2'),
+            'measurement' => $this->readyMeasurement(),
+            'dependency_ingestion' => $diagnostics + ['external_reads' => 12, 'bundle_hash' => str_repeat('d', 64),
+                'release_ref' => $two, 'collection_cycle' => '2026-10-07', 'dependency_hash' => $identity->dependencyHash()]];
+        config()->set('seo_agent_evidence.allowed_sources', app(CompetitiveSourcePolicyRegistry::class)->policies());
+        $builder = app(CompetitiveCloseoutBuilder::class);
+        $receipt = $builder->finalizeRuntime($builder->buildRuntime($ingestion, $sha, 'production'), $sha);
+        $this->assertTrue($builder->verify($receipt, $sha));
+        $this->assertSame('CLOSED', $receipt['closeout_state']);
+        $this->assertSame($two, $receipt['dependency_ingestion']['release_ref']);
+    }
+
+    public function test_natural_refresh_is_not_authorized_by_a_command_invocation_or_staging_environment(): void
+    {
+        \Illuminate\Support\Facades\Http::preventStrayRequests();
+        $this->artisan('seo:competitive-evidence-ingest', ['--refresh-if-due' => true, '--json' => true])
+            ->expectsOutputToContain('REFRESH_NOT_AUTHORIZED')->assertSuccessful();
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_evidence_bundles')->count());
+        \Illuminate\Support\Facades\Http::assertNothingSent();
+    }
+
     public function test_live_cohort_holds_before_external_read_or_write(): void
     {
         $this->artisan('seo:competitive-evidence-ingest', [

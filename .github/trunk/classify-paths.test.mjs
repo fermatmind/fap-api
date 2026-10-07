@@ -29,7 +29,7 @@ test("reviewed Ops presentation keeps CI and deployment without live Council sou
   for (const path of SEO_OPS_PRESENTATION_PATHS) {
     const result = classifyPaths([path]);
     assert.equal(result.operations.seo_ops_presentation_only, true, path);
-    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_readonly_wiring && !["deploy.php", ".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path), path);
     assert.equal(result.operations.seo_agent_policy_gateway, true, path);
     assert.equal(result.flags.seo_discoverability, false, path);
     assert.equal(result.flags.application_code, true, path);
@@ -65,7 +65,7 @@ test("mixed runtime, security, sources, authorities and unknown paths retain rea
     "backend/app/Http/Middleware/FmTokenAuth.php",
     "backend/app/Providers/SeoCouncilServiceProvider.php",
     "backend/config/database.php", "backend/config/cache.php", "backend/config/seo_council.php",
-    "backend/composer.lock", "backend/routes/web.php", "backend/routes/api.php", "deploy.php",
+    "backend/composer.lock", "backend/routes/web.php", "backend/routes/api.php",
     "backend/database/migrations/seo_intel/2026_09_04_010000_create_seo_council_scheduler_storage.php",
     "backend/resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json",
     "backend/docs/seo/generated/seo-council-contract-manifest.v1.json",
@@ -74,7 +74,7 @@ test("mixed runtime, security, sources, authorities and unknown paths retain rea
   ]) {
     const result = classifyPaths([...SEO_OPS_PRESENTATION_PATHS, path]);
     assert.equal(result.operations.seo_ops_presentation_only, false, path);
-    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_readonly_wiring && ![".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path), path);
     assert.equal(result.deploy, true, path);
   }
 });
@@ -88,7 +88,7 @@ test("daily Council wiring and its tests retain the Council validation boundary"
     "backend/resources/views/filament/ops/components/ops-system-health-workspace.blade.php",
     "backend/resources/views/filament/ops/components/ops-trace-drilldown-workspace.blade.php",
   ]) {
-    assert.equal(classifyPaths([path]).operations.seo_council_orchestration, !classifyPaths([path]).operations.a08_focused, path);
+    assert.equal(classifyPaths([path]).operations.seo_council_orchestration, !classifyPaths([path]).operations.a08_readonly_wiring, path);
     assert.equal(has([path], "seo_discoverability"), false, path);
   }
 });
@@ -227,13 +227,13 @@ test("requires publisher parity for every centralized Career publisher boundary"
   }
 });
 
-test("keeps 11B workflow assertions on zero-write Career parity without authorizing publication", () => {
+test("workflow contracts do not imply Career package regeneration", () => {
   const result = classifyPaths([
     ".github/workflows/ci.yml",
     ".github/workflows/deploy.yml",
     "backend/tests/Feature/SeoIntel/SeoPlatform11BProductionCloseoutTest.php",
   ]);
-  assert.equal(result.operations.publisher_required, true);
+  assert.equal(result.operations.publisher_required, false);
   assert.equal(result.operations.career_current_authority_release, false);
   assert.equal(result.operations.seo_agent_evidence_boundary, true);
 });
@@ -399,7 +399,7 @@ test("binds deterministic SEO Council orchestration to every 11D through 11L lay
     "deploy.php",
   ]) {
     const result = classifyPaths([path]);
-    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_readonly_wiring && !["deploy.php", ".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path), path);
     assert.equal(result.flags.seo_discoverability, false, path);
     assert.equal(result.flags.cache_runtime_projection, false, path);
   }
@@ -423,7 +423,7 @@ test("binds Platform 12 scheduler storage to migration and Council receipts with
     const result = classifyPaths([path]);
     assert.equal(result.flags.backward_compatible_migration, true, path);
     assert.equal(result.flags.seo_discoverability, false, path);
-    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_readonly_wiring && !["deploy.php", ".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path), path);
     assert.equal(result.operations.seo_competitive_evidence, false, path);
     assert.equal(result.deploy, true, path);
   }
@@ -515,7 +515,7 @@ test("Platform 12 Council changes do not block on deferred competitive evidence"
     "backend/resources/seo-agent/council/platform12/catalogs/seo.platform12_mission_catalog.v1.json",
   ]) {
     const result = classifyPaths([path]);
-    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_focused, path);
+    assert.equal(result.operations.seo_council_orchestration, !result.operations.a08_readonly_wiring && !["deploy.php", ".github/workflows/ci.yml", ".github/workflows/deploy.yml"].includes(path), path);
     assert.equal(result.operations.seo_competitive_evidence, false, path);
     assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, false, path);
   }
@@ -586,7 +586,7 @@ test("MBTI introduction publication is scoped to its bilingual assets and publis
     assert.equal(result.operations.mbti_result_introductions_publish, true, path);
     assert.equal(result.deploy, true, path);
   }
-  for (const path of ["backend/routes/api.php", "deploy.php", "backend/content_assets/personality_public/current/manifest.json", "README.md"]) {
+  for (const path of ["backend/routes/api.php", "backend/content_assets/personality_public/current/manifest.json", "README.md"]) {
     assert.equal(classifyPaths([path]).operations.mbti_result_introductions_publish, false, path);
   }
 });
@@ -612,8 +612,9 @@ test("M3 evidence lifecycle reuses fixed-source ingestion without full Council c
       "backend/app/Services/SeoCouncil/Platform12/Platform12ProductionEvidenceReader.php",
       ".github/trunk/classify-paths.mjs"]);
     assert.equal(result.deploy, true);
-    assert.equal(result.operations.seo_competitive_evidence, true);
-    assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, true);
+    assert.equal(result.operations.seo_competitive_checks, true);
+    assert.equal(result.operations.seo_competitive_evidence, false);
+    assert.equal(result.operations.seo_competitive_evidence_blocks_delivery, false);
     assert.equal(result.operations.a08_gate_only, true);
     assert.equal(result.operations.a08_readonly_wiring, true);
   }

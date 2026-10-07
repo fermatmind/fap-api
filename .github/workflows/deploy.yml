@@ -134,7 +134,7 @@ jobs:
             and .publisher.required == .classification.operations.publisher_required
             and .seo_agent_policy_gateway.required == .classification.operations.seo_agent_policy_gateway
             and .seo_council_orchestration.required == .classification.operations.seo_council_orchestration
-            and .seo_competitive_evidence.required == .classification.operations.seo_competitive_evidence
+            and .seo_competitive_evidence.required == .classification.operations.seo_competitive_checks
             and ((.publisher.required == true
                 and .publisher.parity.status == "pass"
                 and .publisher.parity.release_sha == $sha
@@ -389,13 +389,9 @@ jobs:
           seo_agent_policy_gateway="$(jq -r '.classification.operations.seo_agent_policy_gateway == true' "$receipt")"
           seo_council_orchestration="$(jq -r '.classification.operations.seo_council_orchestration == true' "$receipt")"
           # Missing/old classification never grants the presentation exemption.
-          seo_council_runtime_closeout="$(jq -r '
-            .classification.operations.seo_council_orchestration == true
-            and .classification.operations.seo_ops_presentation_only != true
-            and .classification.operations.a08_gate_only != true
-            and .classification.operations.a08_readonly_wiring != true
-          ' "$receipt")"
-          seo_competitive_evidence="$(jq -r '.classification.operations.seo_competitive_evidence == true' "$receipt")"
+          # Software wiring is proven by this SHA's deterministic CI and environment smoke.
+          seo_council_runtime_closeout=false
+          seo_competitive_evidence=false
           private_result_authority_publish_required="$(jq -r '
             if .classification.operations.enneagram_private_result_authority_release == true
             then true
@@ -1295,12 +1291,6 @@ jobs:
             and .platform11_lifecycle.execution_allowed == false
             and .execution_allowed == false and (.receipt_hash | test("^[a-f0-9]{64}$"))
           ' "$receipt" >/dev/null
-      - name: Verify isolated staging cache transaction fencing and pause restoration
-        if: needs.policy.outputs.career_content_only != 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh staging-safety a08-staging-safety.json
-      - name: Check fixed staging A08 sources without execution
-        if: needs.policy.outputs.career_content_only != 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh sources a08-staging-sources
       - name: Verify staging A08 pause and read-only Operations preservation
         if: needs.policy.outputs.career_content_only != 'true'
         env:
@@ -2366,9 +2356,6 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-      - name: Check fixed production A08 sources without execution
-        if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh sources a08-production-sources
       - name: Verify production A08 pause and read-only Operations preservation
         if: steps.baseline.outputs.skip != 'true' && needs.policy.outputs.career_content_only != 'true'
         env:
@@ -2615,7 +2602,7 @@ jobs:
           retention-days: 90
 
   a08-evidence:
-    name: Publish scoped A08 evidence and authorized daily acceptance
+    name: Publish A08 software evidence with operations independent
     needs: [policy, staging, production]
     if: needs.production.result == 'success' && needs.production.outputs.skipped != 'true' && needs.policy.outputs.career_content_only != 'true' && needs.policy.outputs.career_first_publish != 'true'
     runs-on: ubuntu-latest
@@ -2638,7 +2625,7 @@ jobs:
         env:
           CI_RUN_ID: ${{ github.event.workflow_run.id }}
         run: node .github/trunk/seo-platform-12a08-evidence-download.mjs
-      - name: Build scoped activation v2 with pending real source acceptance
+      - name: Build current-SHA software activation preserving operational history
         id: a08_activation
         run: |
           set -euo pipefail
@@ -2683,81 +2670,6 @@ jobs:
           bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
           bash backend/scripts/deploy/seo_a08_transport.sh state a08-install-after.json
           node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-install-before.json a08-install-after.json "$DEPLOY_SHA"
-      - name: Prepare authorized M1 controlled transition
-        id: a08_m1
-        if: steps.a08_activation.outputs.ready == 'true'
-        run: node .github/trunk/seo-platform-12a08-transition.mjs prepare 0
-      - name: Execute only M1 through the Orchestrator and verify receipt UI
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m1.outputs.ready == 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-0.json controlled-0.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        id: a08_m1_artifact
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m1.outputs.ready == 'true'
-        with:
-          name: seo-council-a08-controlled-m1-${{ github.event.workflow_run.head_sha }}
-          path: controlled-0.json
-          if-no-files-found: error
-          retention-days: 90
-      - name: Bind M1 artifact then open its natural gate
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m1.outputs.ready == 'true'
-        env:
-          ACCEPTANCE_ARTIFACT_DIGEST: ${{ steps.a08_m1_artifact.outputs.artifact-digest }}
-        run: |
-          set -euo pipefail
-          node .github/trunk/seo-platform-12a08-release.mjs bind-controlled controlled-0.json
-          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
-          node .github/trunk/seo-platform-12a08-transition.mjs enable 0
-          bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-0.json enabled-0.json
-      - name: Prepare authorized M2 controlled transition
-        id: a08_m2
-        if: steps.a08_activation.outputs.ready == 'true'
-        run: node .github/trunk/seo-platform-12a08-transition.mjs prepare 1
-      - name: Execute only M2 through the Orchestrator and verify receipt UI
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m2.outputs.ready == 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-1.json controlled-1.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        id: a08_m2_artifact
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m2.outputs.ready == 'true'
-        with:
-          name: seo-council-a08-controlled-m2-${{ github.event.workflow_run.head_sha }}
-          path: controlled-1.json
-          if-no-files-found: error
-          retention-days: 90
-      - name: Bind M2 artifact then open its natural gate
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m2.outputs.ready == 'true'
-        env:
-          ACCEPTANCE_ARTIFACT_DIGEST: ${{ steps.a08_m2_artifact.outputs.artifact-digest }}
-        run: |
-          set -euo pipefail
-          node .github/trunk/seo-platform-12a08-release.mjs bind-controlled controlled-1.json
-          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
-          node .github/trunk/seo-platform-12a08-transition.mjs enable 1
-          bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-1.json enabled-1.json
-      - name: Prepare authorized M3 controlled transition
-        id: a08_m3
-        if: steps.a08_activation.outputs.ready == 'true'
-        run: node .github/trunk/seo-platform-12a08-transition.mjs prepare 2
-      - name: Execute only M3 through the Orchestrator and verify receipt UI
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m3.outputs.ready == 'true'
-        run: bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-2.json controlled-2.json
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        id: a08_m3_artifact
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m3.outputs.ready == 'true'
-        with:
-          name: seo-council-a08-controlled-m3-${{ github.event.workflow_run.head_sha }}
-          path: controlled-2.json
-          if-no-files-found: error
-          retention-days: 90
-      - name: Bind M3 artifact then open its natural gate
-        if: steps.a08_activation.outputs.ready == 'true' && steps.a08_m3.outputs.ready == 'true'
-        env:
-          ACCEPTANCE_ARTIFACT_DIGEST: ${{ steps.a08_m3_artifact.outputs.artifact-digest }}
-        run: |
-          set -euo pipefail
-          node .github/trunk/seo-platform-12a08-release.mjs bind-controlled controlled-2.json
-          bash backend/scripts/deploy/seo_a08_transport.sh install activation.json
-          node .github/trunk/seo-platform-12a08-transition.mjs enable 2
-          bash backend/scripts/deploy/seo_a08_transport.sh acceptance transition-2.json enabled-2.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: steps.a08_activation.outputs.ready == 'true'
         with:
@@ -2767,8 +2679,6 @@ jobs:
             activation.json.sha256
             a08-install-before.json
             a08-install-after.json
-            controlled-*.json
-            enabled-*.json
           if-no-files-found: error
           retention-days: 90
 

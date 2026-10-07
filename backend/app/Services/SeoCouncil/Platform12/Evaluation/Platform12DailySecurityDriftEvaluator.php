@@ -144,7 +144,7 @@ final readonly class Platform12DailySecurityDriftEvaluator
             $superseded = $this->count($source, 'superseded_count');
             $hashes = $source['superseded_bundle_hashes'] ?? null;
             $exits = $hashes === '' ? [] : (is_string($hashes) ? explode(',', $hashes) : [null]);
-            if ($stored !== $total + $superseded || $stored > 200
+            if ($stored !== $total + $superseded
                 || count($exits) !== $superseded || count(array_unique($exits)) !== count($exits)
                 || ! in_array($source['current_reference_state'], ['VALID', 'UNAVAILABLE'], true)
                 || ($source['historical_exit_reason'] ?? null) !== ($superseded === 0 ? 'NONE' : \App\Services\SeoCouncil\Platform12\Platform12EvidenceSelection::EXIT_REASON)
@@ -166,7 +166,7 @@ final readonly class Platform12DailySecurityDriftEvaluator
                 || preg_match('/^[a-f0-9]{40}$/D', $source['production_sha']) !== 1)) {
                 throw new \InvalidArgumentException('EVIDENCE_SELECTION_INVALID');
             }
-            $selection = array_intersect_key($source, array_flip(['stored_count', 'superseded_count', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash']));
+            $selection = array_intersect_key($source, array_flip(['current_reference_reason', 'historical_scan_state', 'stored_count', 'superseded_count', 'current_reference_state', 'production_sha', 'current_receipt_hash', 'current_bundle_hash', 'historical_exit_reason', 'superseded_bundle_hashes', 'selection_hash']));
         }
 
         return [

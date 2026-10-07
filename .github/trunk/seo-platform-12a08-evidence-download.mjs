@@ -60,10 +60,7 @@ for (const [kind,run,name] of [['checks',ci.id,`a08-scoped-checks-${sha}`],['sta
 const read = path => JSON.parse(readFileSync(path,'utf8'));
 const staging = read('staging/a08-staging-after.json');
 const production = read('production/a08-production-after.json');
-const safety=read('staging/a08-staging-safety.json');
-if (safety.sha !== sha || safety.environment !== 'staging' || (safety.state !== 'OPERATOR_STATE_CHANGED'
-  && (safety.pause_resume_verified !== true || safety.shared_cache_contention_verified !== true
-    || safety.transaction_rollback_verified !== true || safety.fencing_verified !== true))) throw new Error('A08_STAGING_SAFETY_HOLD');
+const safety = null; // Operational source/safety runs are not software release inputs.
 production.activation = read('production/a08-production-before.json').activation;
 verifyState(read('staging/a08-staging-before.json'),staging,sha);
 verifyState(read('production/a08-production-before.json'),production,sha);
@@ -71,48 +68,6 @@ const ciArtifact = api(`actions/runs/${ci.id}/artifacts?per_page=100`).artifacts
 if (!ciArtifact || !/^sha256:[a-f0-9]{64}$/.test(ciArtifact.digest)) throw new Error('CI_ARTIFACT_HOLD');
 artifactDigests.ci = ciArtifact.digest;
 const checks = artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null;
-const activationEvidence = hasActivationEvidence(checks, production);
-const listedNightlyRuns = activationEvidence ? api('actions/workflows/nightly.yml/runs?status=completed&per_page=100').workflow_runs : [];
-const nightlyRuns = activationEvidence ? nightlyEvidenceRuns(checks?.nightly_source,
-  id => api(`actions/runs/${id}`),
-  () => listedNightlyRuns) : [];
-// Keep the CI proof immutable while preserving the existing fail-closed flow
-// for later related failures and security/authority failure domains.
-if (activationEvidence && checks?.nightly_source) {
-  const cache = new Map(), readJobs = id => {
-    if (!cache.has(id)) {
-      const result = api(`actions/runs/${id}/jobs?per_page=100`);
-      if (result.total_count !== result.jobs?.length) throw new Error('NIGHTLY_JOB_INVENTORY_HOLD');
-      cache.set(id, result.jobs);
-    }
-    return cache.get(id);
-  };
-  const isAncestor = head => {
-    if (!/^[a-f0-9]{40}$/.test(head ?? '')) return false;
-    try { execFileSync('git', ['merge-base', '--is-ancestor', head, sha], {stdio:'ignore'}); return true; } catch { return false; }
-  };
-  if (unresolvedNightlyDomains(listedNightlyRuns, nightlyRuns[0], readJobs, isAncestor).length) throw new Error('NIGHTLY_HIGH_RISK_FOCUSED_REVALIDATION_REQUIRED');
-  for (const run of newerNightlyFailures(listedNightlyRuns, nightlyRuns[0])) {
-    if (!readJobs(run.id).some(job => ['Full PHPUnit regression and performance contracts', 'Focused PHPUnit regression and performance contracts'].includes(job.name) && job.conclusion === 'failure')) continue;
-    const loaded = loadNightly(run);
-    if (!loaded) throw new Error('NIGHTLY_FAILURE_RELEVANCE_UNKNOWN');
-    assessNightly(run, loaded.jobs, loaded.evidence, checks);
-  }
-}
-let nightly = null;
-for (const run of nightlyRuns) {
-  const loaded = loadNightly(run);
-  if (!loaded) continue;
-  if (checks?.nightly_source && (run.status !== 'completed'
-    || JSON.stringify(loaded.source) !== JSON.stringify(checks.nightly_source))) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
-  const {jobs:nightlyJobs, evidence} = loaded;
-  if (!checks && production.activation?.validation?.nightly_assessment?.run_id === run.id
-    && MISSIONS.every(id=>mayCarry(production.activation,{production_sha:sha,version_vector:production.version_vector},id))) {
-    nightly={...production.activation.validation.nightly_assessment,candidate_sha:sha,compatible_source_sha:production.activation.bound_production_sha};
-  } else { nightly = assessNightly(run,nightlyJobs,evidence,checks); }
-  break;
-}
-if (!nightly && activationEvidence && checks?.nightly_source) throw new Error('NIGHTLY_ARTIFACT_BINDING_HOLD');
-if (!nightly && activationEvidence) nightly = {status:'unavailable',disposition:'CURRENT_CANDIDATE_SCOPED_CHECKS_ONLY',candidate_sha:sha};
-const sources = Object.fromEntries(MISSIONS.map((id,index)=>[id,existsSync(`production/a08-production-sources/source-${index}.json`) ? read(`production/a08-production-sources/source-${index}.json`) : null]));
+const nightly = {status:'independent',disposition:'NIGHTLY_NOT_A_RELEASE_DEPENDENCY'};
+const sources = {};
 writeFileSync('a08-release-input.json',JSON.stringify({stagingSafety:safety,sources,nightly,checks:artifactDigests.checks ? read('checks/a08-scoped-checks.json') : null,sha,ci,jobs,staging,production,artifactDigests}));

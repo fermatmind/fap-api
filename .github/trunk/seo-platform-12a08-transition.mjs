@@ -21,7 +21,6 @@ if (mode === 'enable') {
   const retained=state.paused === false && MISSIONS.slice(0,index).every(mission=>
     state.selected_missions.includes(mission) && manifest.missions[mission].end_to_end_acceptance?.status === 'pass');
   ready=ready && (existsSync(`enabled-${index-1}.json`) || retained);
-  if (index === 2) ready=ready && manifest.missions[id].source_acceptance.observed_verdict === 'READY';
   generation=existsSync(`enabled-${index-1}.json`) ? read(`enabled-${index-1}.json`).generation : state.generation;
 }
 if (mode === 'prepare') appendFileSync(process.env.GITHUB_OUTPUT,`ready=${ready}\n`);

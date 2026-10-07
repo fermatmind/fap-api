@@ -32,7 +32,7 @@ final class CompetitiveEvidenceIngestionService
      * @param  list<array<string, mixed>>  $sources
      * @return array<string, mixed>
      */
-    public function ingest(array $cohort, array $sources, string $environment, string $releaseSha, bool $write): array
+    public function ingest(array $cohort, array $sources, string $environment, string $releaseSha, bool $write, ?string $cycle = null): array
     {
         $zeroDiagnostics = $this->stageDiagnostics([], 'policy', 'policy');
         $competitorCount = count(array_filter(
@@ -77,7 +77,7 @@ final class CompetitiveEvidenceIngestionService
         try {
             $semantic = $this->registry->semanticRegistry();
             $verifiedPolicies = $this->policies->policies();
-            $releaseRef = $this->releaseIdentity->reference($environment, $releaseSha);
+            $releaseRef = $this->releaseIdentity->reference($environment, $releaseSha, $cycle);
         } catch (Throwable) {
             return $this->hold('SOURCE_POLICY_HOLD', 0, $measurement, $policySnapshot, $zeroDiagnostics);
         }
@@ -280,7 +280,8 @@ final class CompetitiveEvidenceIngestionService
             'policy_snapshot' => $policySnapshot,
             'measurement' => $measurement,
             'write_performed' => $write,
-            'dependency_ingestion' => $gatewayDiagnostics + ['bundle_hash' => (string) $bundle['bundle_hash'], 'release_ref' => $releaseRef],
+            'dependency_ingestion' => $gatewayDiagnostics + ['bundle_hash' => (string) $bundle['bundle_hash'], 'release_ref' => $releaseRef,
+                'collection_cycle' => $cycle, 'dependency_hash' => $this->releaseIdentity->dependencyHash()],
         ];
     }
 
