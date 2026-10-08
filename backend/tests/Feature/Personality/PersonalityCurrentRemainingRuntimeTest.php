@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = 'df285960619ba6a8630f9c205e5894ee49351c6cbe24e550d4a1d2d699ae476e';
+    private const AGGREGATE = '1a8751125a2baf514ff235f8b32078b09a9743c93088fe8161d9bd797ad3211f';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -76,6 +76,12 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             yield "Enneagram remaining {$wing} Chinese" => [
                 "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=zh-CN&org_id=0",
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/zh-CN.json",
+            ];
+        }
+        foreach (['1w2', '1w9', '2w1', '2w3'] as $wing) {
+            yield "Enneagram {$wing} English" => [
+                "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=en&org_id=0",
+                "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/en.json",
             ];
         }
         yield 'MBTI variant' => [
