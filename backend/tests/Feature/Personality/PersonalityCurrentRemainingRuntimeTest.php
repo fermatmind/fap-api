@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = 'b00fdf844a34004c1cb28acfb5f9810c44b687dd2a87f9e66d1c519da4492792';
+    private const AGGREGATE = '2fc4a9136d890be1e4f630023ef338348b1981d4b5111d5df3094043363adde6';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -66,7 +66,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "content_assets/personality_public/current/pages/enneagram/core-type/type-{$number}/en.json",
             ];
         }
-        foreach ([1, 3, 4, 7] as $number) {
+        foreach ([1, 2, 3, 4, 7] as $number) {
             yield "Enneagram Type {$number} Chinese" => [
                 "/api/v0.5/personality-content-assets/enneagram/core_type/type-{$number}?locale=zh-CN&org_id=0",
                 "content_assets/personality_public/current/pages/enneagram/core-type/type-{$number}/zh-CN.json",
