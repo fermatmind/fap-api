@@ -376,6 +376,22 @@ class HealthzController extends Controller
 
         foreach ($paths as $name => $path) {
             $exists = is_dir($path);
+            if ($name === 'bootstrap_cache' && app()->configurationIsCached()) {
+                // Compiled releases give runtime readers read access, not write access.
+                $configPath = app()->getCachedConfigPath();
+                $readable = $exists && is_readable($path) && is_file($configPath) && is_readable($configPath);
+                $allOk = $allOk && $readable;
+                $items[$name] = [
+                    'ok' => $readable,
+                    'path' => $path,
+                    'exists' => $exists,
+                    'readable' => $readable,
+                    'error_code' => $readable ? '' : 'CONFIG_CACHE_NOT_READABLE',
+                ];
+
+                continue;
+            }
+
             if (! $exists) {
                 @mkdir($path, 0775, true);
                 $exists = is_dir($path);
