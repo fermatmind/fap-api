@@ -49,21 +49,57 @@ foreach (['old', 'candidate', 'rollback'] as $name) {
 <?php
 namespace Symfony\\Component\\Console\\Input;
 class ArgvInput {}
+if (trim((string)@file_get_contents(dirname(__DIR__).'/case.txt')) === 'driver_autoload_exit') { exit(17); }
 AUTOLOAD);
     file_put_contents($backend.'/bootstrap/app.php', <<<'APP'
 <?php
+if (trim((string)@file_get_contents(__DIR__.'/../case.txt')) === 'driver_app_exit') { exit(17); }
 return new class(dirname(__DIR__)) {
     private $handler;
+    private $events;
+    private array $before=[];
+    private array $after=[];
     public function __construct(private string $backend) {}
+    private function kind(): string { return trim((string)@file_get_contents($this->backend.'/case.txt')); }
     public function make($class) {
+        if ($class === 'events') {
+            return $this->events ??= new class {
+                private array $listeners=[];
+                public function listen($class,$callback): void { $this->listeners[$class][]=$callback; }
+                public function dispatch($class,$command): void {
+                    foreach ($this->listeners[$class] ?? [] as $callback) { $callback((object)['command'=>$command]); }
+                }
+            };
+        }
+        if ($this->kind() === 'driver_handler_exit') { exit(17); }
         return $this->handler ??= new class {
             public $callback;
             public function reportable($callback) { $this->callback=$callback; }
         };
     }
+    public function beforeBootstrapping($class,$callback): void {
+        if ($this->kind() === 'driver_hooks_exit') { exit(17); }
+        $this->before[$class][]=$callback;
+    }
+    public function afterBootstrapping($class,$callback): void { $this->after[$class][]=$callback; }
     public function handleCommand($input): int {
-        try { require $this->backend.'/artisan'; return 0; }
-        catch (Throwable $error) { ($this->handler->callback)($error); return 1; }
+        try {
+            foreach (['LoadEnvironmentVariables'=>'env','LoadConfiguration'=>'config','HandleExceptions'=>'exceptions','RegisterFacades'=>'facades','SetRequestForConsole'=>'request','RegisterProviders'=>'register','BootProviders'=>'providers'] as $name=>$kind) {
+                $class=implode(chr(92),['Illuminate','Foundation','Bootstrap',$name]);
+                foreach ($this->before[$class] ?? [] as $callback) { $callback(); }
+                if ($this->kind() === 'boot_'.$kind.'_exit') { exit(17); }
+                foreach ($this->after[$class] ?? [] as $callback) { $callback(); }
+                if ($this->kind() === 'boot_after_'.$kind.'_exit') { exit(17); }
+            }
+            $this->events->dispatch('Illuminate\\Console\\Events\\CommandStarting','config:cache');
+            if ($this->kind() === 'command_enter_exit') { exit(17); }
+            $this->events->dispatch('Illuminate\\Console\\Events\\CommandStarting','config:clear');
+            if ($this->kind() === 'command_clear_exit') { exit(17); }
+            $this->events->dispatch('Illuminate\\Console\\Events\\CommandFinished','config:clear');
+            $result=require $this->backend.'/artisan';
+            $this->events->dispatch('Illuminate\\Console\\Events\\CommandFinished','config:cache');
+            return is_int($result) ? $result : 0;
+        } catch (Throwable $error) { ($this->handler->callback)($error); return 1; }
     }
 };
 APP);
@@ -73,6 +109,12 @@ $kind = @file_get_contents(__DIR__.'/case.txt') ?: '';
 $config = ['app'=>['env'=>$kind === 'wrong_environment' ? 'staging' : 'production'], 'fap'=>['events'=>['ingest_token'=>$kind === 'wrong_token' ? 'wrong' : (string) getenv('EVENT_INGEST_TOKEN')]]];
 fwrite(STDOUT, getenv('EVENT_INGEST_TOKEN')); fwrite(STDERR, getenv('EVENT_INGEST_TOKEN'));
 if ($kind === 'child_failure') { exit(1); }
+if ($kind === 'child_exit_other') { exit(17); }
+if ($kind === 'child_signal') { posix_kill(getmypid(),15); }
+if ($kind === 'child_unreported') { return 1; }
+if ($kind === 'progress_invalid_success') { fwrite(fopen('php://fd/3','w'),'public_invalid_progress_fixture'); }
+if ($kind === 'progress_invalid') { fwrite(fopen('php://fd/3','w'),'public_invalid_progress_fixture'); exit(17); }
+if ($kind === 'progress_overflow') { fwrite(fopen('php://fd/3','w'),str_repeat(chr(1),129)); exit(17); }
 if ($kind === 'child_logic') { throw new LogicException(getenv('EVENT_INGEST_TOKEN')); }
 if ($kind === 'child_type') { throw new TypeError(getenv('EVENT_INGEST_TOKEN')); }
 if ($kind === 'child_database') { throw new PDOException(getenv('EVENT_INGEST_TOKEN')); }
@@ -80,6 +122,7 @@ if ($kind === 'child_value') { throw new UnexpectedValueException(getenv('EVENT_
 if ($kind === 'child_runtime') { throw new RuntimeException(getenv('EVENT_INGEST_TOKEN')); }
 file_put_contents(getenv('APP_CONFIG_CACHE'), '<?php return '.var_export($config, true).';');
 chmod(getenv('APP_CONFIG_CACHE'), 0664);
+return 0;
 ARTISAN);
 }
 $current = $root.'/releases/old/backend'; $candidate = $root.'/releases/candidate/backend';
@@ -112,14 +155,17 @@ if ($scenario === 'unsafe_parent') {
     $cacheHash = hash_file('sha256',$current.'/bootstrap/cache/config.php'); reject(fn()=>$prepare(),'adopted unknown credential');
 } else {
     $prepare($scenario === 'disabled' ? '0' : '1');
-    if (in_array($scenario,['cli_child_failure','cli_unknown_failure','cli_child_logic','cli_child_type','cli_child_database','cli_child_value','cli_child_runtime'])) {
-        file_put_contents($candidate.'/case.txt',str_starts_with($scenario,'cli_child_') && $scenario!=='cli_child_failure' ? substr($scenario,4) : 'child_failure');
+    if (str_starts_with($scenario,'cli_') || in_array($scenario,['cli_child_failure','cli_unknown_failure','cli_child_logic','cli_child_type','cli_child_database','cli_child_value','cli_child_runtime','cli_child_exit_other','cli_child_signal','cli_child_unreported'])) {
+        file_put_contents($candidate.'/case.txt',substr($scenario,4));
         if ($scenario === 'cli_unknown_failure') {
             file_put_contents($candidate.'/.event-ingest/input.json','not JSON '.$token);
         }
         $cli=proc_open([PHP_BINARY,'-r',"define('FAP_EVENT_RUNTIME_CLI',true);require ".var_export($argv[1],true).";",'--','compile',$candidate,$new,'production',$root],[0=>['file','/dev/null','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);
         $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
-        $expected=match($scenario) {'cli_child_failure'=>'EVENT_COMPILE_CHILD','cli_child_logic'=>'EVENT_COMPILE_CHILD_LOGIC','cli_child_type'=>'EVENT_COMPILE_CHILD_TYPE','cli_child_database'=>'EVENT_COMPILE_CHILD_DATABASE','cli_child_value'=>'EVENT_COMPILE_CHILD_VALUE','cli_child_runtime'=>'EVENT_COMPILE_CHILD_RUNTIME',default=>'EVENT_COMPILE_AUTHORITY'};
+        $expected=match($scenario) {'cli_child_failure'=>'EVENT_COMPILE_CHILD_EXIT_ONE','cli_child_logic'=>'EVENT_COMPILE_CHILD_LOGIC','cli_child_type'=>'EVENT_COMPILE_CHILD_TYPE','cli_child_database'=>'EVENT_COMPILE_CHILD_DATABASE','cli_child_value'=>'EVENT_COMPILE_CHILD_VALUE','cli_child_runtime'=>'EVENT_COMPILE_CHILD_RUNTIME','cli_child_exit_other'=>'EVENT_COMPILE_CHILD_EXIT_OTHER','cli_child_signal'=>'EVENT_COMPILE_CHILD_SIGNAL','cli_child_unreported'=>'EVENT_COMPILE_CHILD_UNREPORTED',default=>'EVENT_COMPILE_AUTHORITY'};
+        $boundaries=['driver_autoload_exit'=>'AUTOLOAD_ENTER','driver_app_exit'=>'APP_ENTER','driver_handler_exit'=>'HANDLER_ENTER','driver_hooks_exit'=>'HOOKS_ENTER','boot_env_exit'=>'ENV_ENTER','boot_config_exit'=>'CONFIG_ENTER','boot_exceptions_exit'=>'EXCEPTIONS_ENTER','boot_facades_exit'=>'FACADES_ENTER','boot_request_exit'=>'REQUEST_ENTER','boot_register_exit'=>'PROVIDERS_REGISTER_ENTER','boot_providers_exit'=>'PROVIDERS_BOOT_ENTER','boot_after_env_exit'=>'ENV_RETURNED','boot_after_config_exit'=>'CONFIG_RETURNED','command_enter_exit'=>'CONFIG_COMMAND_ENTER','command_clear_exit'=>'CONFIG_CLEAR_ENTER','progress_invalid'=>'PROGRESS_UNKNOWN','progress_overflow'=>'PROGRESS_UNKNOWN'];
+        if (array_key_exists(substr($scenario,4),$boundaries)) { $expected='EVENT_COMPILE_CHILD_EXIT_OTHER'; }
+        if ($scenario!=='cli_unknown_failure') { $expected.='_AT_'.($scenario==='cli_child_unreported' ? 'HANDLE_RETURNED' : ($boundaries[substr($scenario,4)] ?? 'CONFIG_CLEAR_RETURNED')); }
         check(proc_close($cli)===1 && $out==='' && $err==="EVENT_RUNTIME_FAILED:".$expected."\\n",'CLI error classification');
         check(!str_contains($out.$err,$token),'CLI leaked fixture input');
         $unchanged = require $candidate.'/bootstrap/cache/config.php'; check($unchanged['fap']['events']['ingest_token']==='', 'CLI failed candidate cache changed');
@@ -134,6 +180,7 @@ if ($scenario === 'unsafe_parent') {
         symlink($candidate.'/.event-ingest/source.json',$candidate.'/.event-ingest/input.json');
         reject(fn()=>EventIngestRuntime::compile($candidate,$new,'production',$root),'symlink accepted');
     } else {
+        if ($scenario === 'progress_invalid_success') { file_put_contents($candidate.'/case.txt',$scenario); }
         check(EventIngestRuntime::compile($candidate,$new,'production',$root),'not compiled');
         $input = EventIngestRuntime::verify($candidate,$new,'production',$root);
         check((fileperms($candidate.'/bootstrap/cache/config.php')&0777)===0640,'cache permissions');
@@ -231,7 +278,7 @@ echo 'PASS';
   } finally { rmSync(root, { recursive: true, force: true }); }
 }
 
-for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'cli_child_logic', 'cli_child_type', 'cli_child_database', 'cli_child_value', 'cli_child_runtime', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
+for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'cli_child_logic', 'cli_child_type', 'cli_child_database', 'cli_child_value', 'cli_child_runtime', 'cli_child_exit_other', 'cli_child_signal', 'cli_child_unreported', 'cli_driver_autoload_exit', 'cli_driver_app_exit', 'cli_driver_handler_exit', 'cli_driver_hooks_exit', 'cli_boot_env_exit', 'cli_boot_config_exit', 'cli_boot_exceptions_exit', 'cli_boot_facades_exit', 'cli_boot_request_exit', 'cli_boot_register_exit', 'cli_boot_providers_exit', 'cli_boot_after_env_exit', 'cli_boot_after_config_exit', 'cli_command_enter_exit', 'cli_command_clear_exit', 'cli_progress_invalid', 'cli_progress_overflow', 'progress_invalid_success', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
   test(`EVENT candidate/LKG ${scenario}`, {skip: process.platform !== 'linux' ? 'Requires Linux directory setgid inheritance' : false}, () => {
     const result = execute(scenario);
     assert.equal(result.status, 0, result.stderr);

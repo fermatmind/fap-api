@@ -9,6 +9,10 @@ final class EventIngestRuntime
 
     private static int $childFailure = 0;
 
+    private static int $childProgress = 0;
+
+    private static int $childProgressBytes = 0;
+
     public static function failureStage(): string
     {
         // Classify execution boundaries without inspecting exception messages,
@@ -16,17 +20,24 @@ final class EventIngestRuntime
         return match (self::$compileStage) {
             1 => 'EVENT_COMPILE_PATH',
             2 => 'EVENT_COMPILE_AUTHORITY',
-            3 => match (self::$childFailure) {
+            3 => (match (self::$childFailure) {
+                -2 => 'EVENT_COMPILE_CHILD_START',
+                -3 => 'EVENT_COMPILE_CHILD_TIMEOUT',
+                -4 => 'EVENT_COMPILE_CHILD_SIGNAL',
+                -1 => 'EVENT_COMPILE_CHILD_EXIT_UNKNOWN',
+                1 => 'EVENT_COMPILE_CHILD_EXIT_ONE',
                 71 => 'EVENT_COMPILE_CHILD_DATABASE',
                 72 => 'EVENT_COMPILE_CHILD_LOGIC',
                 73 => 'EVENT_COMPILE_CHILD_PHP_WARNING',
                 74 => 'EVENT_COMPILE_CHILD_TYPE',
                 75 => 'EVENT_COMPILE_CHILD_PHP_ERROR',
                 76 => 'EVENT_COMPILE_CHILD_EXCEPTION',
+                77 => 'EVENT_COMPILE_CHILD_UNREPORTED',
                 78 => 'EVENT_COMPILE_CHILD_VALUE',
                 79 => 'EVENT_COMPILE_CHILD_RUNTIME',
-                default => 'EVENT_COMPILE_CHILD',
-            },
+                0 => 'EVENT_COMPILE_CHILD',
+                default => 'EVENT_COMPILE_CHILD_EXIT_OTHER',
+            }).'_AT_'.self::childBoundary(),
             4 => 'EVENT_COMPILE_CANDIDATE',
             5 => 'EVENT_COMPILE_CONFIG',
             6 => 'EVENT_COMPILE_ACTIVATION',
@@ -34,13 +45,91 @@ final class EventIngestRuntime
         };
     }
 
+    private static function childBoundary(): string
+    {
+        return match (self::$childProgress) {
+            1 => 'DRIVER_ENTER',
+            2 => 'AUTOLOAD_ENTER',
+            3 => 'AUTOLOAD_RETURNED',
+            4 => 'APP_ENTER',
+            5 => 'APP_RETURNED',
+            6 => 'HANDLER_ENTER',
+            7 => 'HANDLER_RETURNED',
+            8 => 'HOOKS_ENTER',
+            9 => 'HOOKS_READY',
+            10 => 'HANDLE_ENTER',
+            11 => 'ENV_ENTER',
+            12 => 'ENV_RETURNED',
+            13 => 'CONFIG_ENTER',
+            14 => 'CONFIG_RETURNED',
+            15 => 'EXCEPTIONS_ENTER',
+            16 => 'EXCEPTIONS_RETURNED',
+            17 => 'FACADES_ENTER',
+            18 => 'FACADES_RETURNED',
+            19 => 'REQUEST_ENTER',
+            20 => 'REQUEST_RETURNED',
+            21 => 'PROVIDERS_REGISTER_ENTER',
+            22 => 'PROVIDERS_REGISTER_RETURNED',
+            23 => 'PROVIDERS_BOOT_ENTER',
+            24 => 'PROVIDERS_BOOT_RETURNED',
+            25 => 'CONFIG_COMMAND_ENTER',
+            26 => 'CONFIG_CLEAR_ENTER',
+            27 => 'CONFIG_CLEAR_RETURNED',
+            28 => 'CONFIG_COMMAND_RETURNED',
+            29 => 'HANDLE_RETURNED',
+            0 => 'NOT_OBSERVED',
+            default => 'PROGRESS_UNKNOWN',
+        };
+    }
+
+    private static function readChildProgress($pipe): void
+    {
+        // Dedicated descriptor 3 carries only fixed one-byte checkpoints. Never
+        // read stdout/stderr or retain arbitrary child content as diagnostics.
+        if (! is_resource($pipe)) {
+            self::$childProgress = -1;
+
+            return;
+        }
+        $bytes = fread($pipe, 64);
+        if ($bytes === false) {
+            self::$childProgress = -1;
+
+            return;
+        }
+        self::$childProgressBytes += strlen($bytes);
+        if (self::$childProgressBytes > 128 || self::$childProgress < 0) {
+            self::$childProgress = -1;
+
+            return;
+        }
+        for ($i = 0; $i < strlen($bytes); $i++) {
+            $stage = ord($bytes[$i]);
+            if ($stage < 1 || $stage > 29) {
+                self::$childProgress = -1;
+
+                return;
+            }
+            self::$childProgress = $stage;
+        }
+    }
+
     public static function compilerProgram(): string
     {
         // Run the same Laravel handleCommand/termination path as artisan. Only
         // exception types become fixed exit codes; output remains /dev/null.
+        // Descriptor 3 is a bounded constant-only checkpoint channel, not output.
         return <<<'PHP'
 $backend = $argv[1];
 $kind = 77;
+$reported = false;
+$progress = @fopen('php://fd/3', 'w');
+$mark = static function (int $stage) use ($progress, &$reported): void {
+    if (!$reported && is_resource($progress) && $stage >= 1 && $stage <= 29) {
+        @fwrite($progress, chr($stage));
+    }
+};
+$mark(1);
 $classify = static fn (Throwable $error): int => match (true) {
     $error instanceof PDOException => 71,
     $error instanceof LogicException => 72,
@@ -53,15 +142,46 @@ $classify = static fn (Throwable $error): int => match (true) {
 };
 try {
     define('LARAVEL_START', microtime(true));
+    $mark(2);
     require $backend.'/vendor/autoload.php';
+    $mark(3);
+    $mark(4);
     $app = require $backend.'/bootstrap/app.php';
-    $app->make(Illuminate\Contracts\Debug\ExceptionHandler::class)->reportable(static function (Throwable $error) use (&$kind, $classify): void {
+    $mark(5);
+    $mark(6);
+    $app->make(Illuminate\Contracts\Debug\ExceptionHandler::class)->reportable(static function (Throwable $error) use (&$kind, &$reported, $classify): void {
         $kind = $classify($error);
+        $reported = true;
     });
+    $mark(7);
+    $mark(8);
+    foreach ([
+        Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class => [11, 12],
+        Illuminate\Foundation\Bootstrap\LoadConfiguration::class => [13, 14],
+        Illuminate\Foundation\Bootstrap\HandleExceptions::class => [15, 16],
+        Illuminate\Foundation\Bootstrap\RegisterFacades::class => [17, 18],
+        Illuminate\Foundation\Bootstrap\SetRequestForConsole::class => [19, 20],
+        Illuminate\Foundation\Bootstrap\RegisterProviders::class => [21, 22],
+        Illuminate\Foundation\Bootstrap\BootProviders::class => [23, 24],
+    ] as $bootstrapper => [$before, $after]) {
+        $app->beforeBootstrapping($bootstrapper, static function () use ($mark, $before): void { $mark($before); });
+        $app->afterBootstrapping($bootstrapper, static function () use ($mark, $after): void { $mark($after); });
+    }
+    $app->make('events')->listen(Illuminate\Console\Events\CommandStarting::class, static function ($event) use ($mark): void {
+        if ($event->command === 'config:cache') { $mark(25); }
+        elseif ($event->command === 'config:clear') { $mark(26); }
+    });
+    $app->make('events')->listen(Illuminate\Console\Events\CommandFinished::class, static function ($event) use ($mark): void {
+        if ($event->command === 'config:clear') { $mark(27); }
+        elseif ($event->command === 'config:cache') { $mark(28); }
+    });
+    $mark(9);
     $argv = [$backend.'/artisan', 'config:cache', '--no-ansi'];
     $_SERVER['argv'] = $argv;
     $_SERVER['argc'] = count($argv);
+    $mark(10);
     $status = $app->handleCommand(new Symfony\Component\Console\Input\ArgvInput);
+    $mark(29);
     exit($status === 0 ? 0 : $kind);
 } catch (Throwable $error) {
     // Preserve the original reported exception type if reporting itself fails.
@@ -342,31 +462,47 @@ PHP;
         }
         self::$compileStage = 3;
         self::$childFailure = 0;
+        self::$childProgress = 0;
+        self::$childProgressBytes = 0;
         $environmentVariables = getenv();
         $environmentVariables['EVENT_INGEST_TOKEN'] = $input['token'];
         $environmentVariables['APP_CONFIG_CACHE'] = $candidate;
         // Child output is discarded; neither artisan errors nor fixture failures
         // may echo environment values into SSH/CI logs.
-        $process = proc_open([PHP_BINARY, '-r', self::compilerProgram(), '--', $backend], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']], $pipes, $backend, $environmentVariables);
+        $process = proc_open([PHP_BINARY, '-r', self::compilerProgram(), '--', $backend], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w'], 3 => ['pipe', 'w']], $pipes, $backend, $environmentVariables);
         if (! is_resource($process)) {
+            self::$childFailure = -2;
             throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
+        }
+        $progressPipe = $pipes[3] ?? null;
+        if (is_resource($progressPipe) && ! stream_set_blocking($progressPipe, false)) {
+            fclose($progressPipe);
         }
         $deadline = microtime(true) + 120;
         do {
+            self::readChildProgress($progressPipe);
             $status = proc_get_status($process);
             if (! $status['running']) {
+                self::readChildProgress($progressPipe);
                 break;
             }
             if (microtime(true) > $deadline) {
+                self::$childFailure = -3;
                 proc_terminate($process, 9);
+                if (is_resource($progressPipe)) {
+                    fclose($progressPipe);
+                }
                 proc_close($process);
                 throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
             }
             usleep(20000);
         } while (true);
+        if (is_resource($progressPipe)) {
+            fclose($progressPipe);
+        }
         proc_close($process);
         if ($status['exitcode'] !== 0) {
-            self::$childFailure = $status['exitcode'];
+            self::$childFailure = $status['signaled'] ? -4 : $status['exitcode'];
             throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
         }
         self::$compileStage = 4;

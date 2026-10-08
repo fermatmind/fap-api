@@ -7,6 +7,10 @@ import test from 'node:test';
 
 const helper = resolve(process.env.EVENT_LINUX_BASELINE_HELPER || 'backend/scripts/deploy/event_ingest_runtime.php');
 const fixture = String.raw`<?php
+set_exception_handler(static function (Throwable $error): void {
+    fwrite(STDERR,'EVENT_FIXTURE_UNCAUGHT:'.(class_exists('EventIngestRuntime',false) ? EventIngestRuntime::failureStage() : 'BEFORE_HELPER')."\n");
+    exit(1);
+});
 function check(bool $ok, string $label): void { if (!$ok) { throw new RuntimeException($label); } }
 $root = $argv[2].'/deploy';
 $old = str_repeat('a',40); $new = str_repeat('b',40);
@@ -27,7 +31,10 @@ AUTOLOAD);
 return new class(dirname(__DIR__)) {
     private $handler;
     public function __construct(private string $backend) {}
+    public function beforeBootstrapping($class,$callback): void {}
+    public function afterBootstrapping($class,$callback): void {}
     public function make($class) {
+        if ($class === 'events') { return new class { public function listen($class,$callback): void {} }; }
         return $this->handler ??= new class {
             public $callback;
             public function reportable($callback) { $this->callback=$callback; }
@@ -107,7 +114,7 @@ if ($scenario === 'missing_sgid') {
         check(EventIngestRuntime::install($candidate,$new,'production',$current,$root,''),'install failed');
         if ($scenario === 'native_bad_config') {
             try { EventIngestRuntime::compile($candidate,$new,'production',$root); throw new RuntimeException('invalid native configuration accepted'); }
-            catch (RuntimeException $error) { check($error->getMessage()==='EVENT_CACHE_BUILD_FAILED' && EventIngestRuntime::failureStage()==='EVENT_COMPILE_CHILD_VALUE','native exception classification'); }
+            catch (RuntimeException $error) { check($error->getMessage()==='EVENT_CACHE_BUILD_FAILED' && EventIngestRuntime::failureStage()==='EVENT_COMPILE_CHILD_VALUE_AT_CONFIG_ENTER','native exception classification'); }
             check(readlink($root.'/current')===$pointer && hash_file('sha256',$current.'/bootstrap/cache/config.php')===$hash,'native failure changed LKG');
             echo 'PASS';exit;
         }
