@@ -84,7 +84,18 @@ if ($scenario === 'unsafe_parent') {
     $cacheHash = hash_file('sha256',$current.'/bootstrap/cache/config.php'); reject(fn()=>$prepare(),'adopted unknown credential');
 } else {
     $prepare($scenario === 'disabled' ? '0' : '1');
-    if (in_array($scenario,['wrong_environment','wrong_token','child_failure'])) {
+    if (in_array($scenario,['cli_child_failure','cli_unknown_failure'])) {
+        file_put_contents($candidate.'/case.txt','child_failure');
+        if ($scenario === 'cli_unknown_failure') {
+            file_put_contents($candidate.'/.event-ingest/input.json','not JSON '.$token);
+        }
+        $cli=proc_open([PHP_BINARY,'-r',"define('FAP_EVENT_RUNTIME_CLI',true);require ".var_export($argv[1],true).";",'--','compile',$candidate,$new,'production',$root],[0=>['file','/dev/null','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);
+        $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
+        $expected=$scenario === 'cli_child_failure' ? 'EVENT_COMPILE_CHILD' : 'EVENT_COMPILE_AUTHORITY';
+        check(proc_close($cli)===1 && $out==='' && $err==="EVENT_RUNTIME_FAILED:".$expected."\\n",'CLI error classification');
+        check(!str_contains($out.$err,$token),'CLI leaked fixture input');
+        $unchanged = require $candidate.'/bootstrap/cache/config.php'; check($unchanged['fap']['events']['ingest_token']==='', 'CLI failed candidate cache changed');
+    } elseif (in_array($scenario,['wrong_environment','wrong_token','child_failure'])) {
         file_put_contents($candidate.'/case.txt',$scenario);
         reject(fn()=>EventIngestRuntime::compile($candidate,$new,'production',$root),'bad cache accepted');
         $unchanged = require $candidate.'/bootstrap/cache/config.php'; check($unchanged['fap']['events']['ingest_token']==='', 'failed candidate cache changed');
@@ -143,7 +154,7 @@ if ($scenario === 'unsafe_parent') {
                     $scenario==='lost_rebuild' || $scenario==='lost_prepared' ? 'verify' : 'probe',$target,$targetRevision,'production',$root,'1',''],
                     [0=>['file','/dev/null','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);
                 $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
-                check(proc_close($cli)!==0,'CLI input loss accepted');check($out==='','CLI emitted successful receipt');check($err==="EVENT_RUNTIME_FAILED\n",'CLI leaked raw failure');
+                check(proc_close($cli)!==0,'CLI input loss accepted');check($out==='','CLI emitted successful receipt');check($err==="EVENT_RUNTIME_FAILED:EVENT_OTHER_RUNTIME\n",'CLI leaked raw failure');
             }
             check(hash_file('sha256',$target.'/bootstrap/cache/config.php')===$managedCacheHash,'lost input changed cache');
         } elseif ($scenario==='marker_missing') {
@@ -192,7 +203,7 @@ echo 'PASS';
   } finally { rmSync(root, { recursive: true, force: true }); }
 }
 
-for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
+for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
   test(`EVENT candidate/LKG ${scenario}`, {skip: process.platform !== 'linux' ? 'Requires Linux directory setgid inheritance' : false}, () => {
     const result = execute(scenario);
     assert.equal(result.status, 0, result.stderr);

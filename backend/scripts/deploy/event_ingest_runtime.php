@@ -5,6 +5,23 @@ final class EventIngestRuntime
 {
     private const SCHEMA = 'fermatmind.event-ingest-input.v1';
 
+    private static int $compileStage = 0;
+
+    public static function failureStage(): string
+    {
+        // Classify execution boundaries without inspecting exception messages,
+        // child output, private inputs, paths, or configuration values.
+        return match (self::$compileStage) {
+            1 => 'EVENT_COMPILE_PATH',
+            2 => 'EVENT_COMPILE_AUTHORITY',
+            3 => 'EVENT_COMPILE_CHILD',
+            4 => 'EVENT_COMPILE_CANDIDATE',
+            5 => 'EVENT_COMPILE_CONFIG',
+            6 => 'EVENT_COMPILE_ACTIVATION',
+            default => 'EVENT_OTHER_RUNTIME',
+        };
+    }
+
     public static function binding(string $revision, string $environment): void
     {
         if (! preg_match('/^[a-f0-9]{40}$/D', $revision) || ! in_array($environment, ['staging', 'production'], true)) {
@@ -262,17 +279,20 @@ final class EventIngestRuntime
 
     public static function compile(string $backend, string $revision, string $environment, string $anchor): bool
     {
+        self::$compileStage = 1;
         self::parents($backend, $anchor);
         $private = $backend.'/.event-ingest';
         self::safe($private, true, 0700);
         if (! self::managed($backend)) {
             return false;
         }
+        self::$compileStage = 2;
         $input = self::authority($backend, $revision, $environment);
         $candidate = $private.'/config-candidate.php';
         if (file_exists($candidate)) {
             throw new RuntimeException('EVENT_CACHE_CANDIDATE_EXISTS');
         }
+        self::$compileStage = 3;
         $environmentVariables = getenv();
         $environmentVariables['EVENT_INGEST_TOKEN'] = $input['token'];
         $environmentVariables['APP_CONFIG_CACHE'] = $candidate;
@@ -299,21 +319,25 @@ final class EventIngestRuntime
         if ($status['exitcode'] !== 0) {
             throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
         }
+        self::$compileStage = 4;
         self::safe($candidate, false, 0664);
         if (! chmod($candidate, 0640)) {
             throw new RuntimeException('EVENT_CACHE_PERMISSION_FAILED');
         }
+        self::$compileStage = 5;
         $config = require $candidate;
         if (! is_array($config) || ($config['app']['env'] ?? null) !== $environment
             || ! is_string($config['fap']['events']['ingest_token'] ?? null) || ! hash_equals($input['token'], $config['fap']['events']['ingest_token'])) {
             throw new RuntimeException('EVENT_CONFIG_MISMATCH');
         }
+        self::$compileStage = 6;
         $cacheDirectory = self::safe($backend.'/bootstrap/cache', true, 0755);
         $candidateStat = self::safe($candidate, false, 0640);
         if ($candidateStat['gid'] !== $cacheDirectory['gid'] || ! rename($candidate, $backend.'/bootstrap/cache/config.php')) {
             throw new RuntimeException('EVENT_CACHE_ACTIVATION_FAILED');
         }
         self::config($backend, $input);
+        self::$compileStage = 0;
 
         return true;
     }
@@ -416,8 +440,8 @@ if (defined('FAP_EVENT_RUNTIME_CLI')) {
             echo json_encode($result, JSON_THROW_ON_ERROR)."\n";
         }
     } catch (Throwable $error) {
-        // Only fixed error codes are public, never exception details/paths.
-        fwrite(STDERR, "EVENT_RUNTIME_FAILED\n");
+        // Only fixed stage codes are public, never exception details/paths.
+        fwrite(STDERR, 'EVENT_RUNTIME_FAILED:'.EventIngestRuntime::failureStage()."\n");
         exit(1);
     }
 }
