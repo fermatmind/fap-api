@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import test from 'node:test';
@@ -102,6 +102,10 @@ for (const scenario of (process.env.EVENT_LINUX_BASELINE_HELPER ? ['baseline'] :
     const root=mkdtempSync(join(tmpdir(),'event-linux-groups-'));
     const script=join(root,'fixture.php');
     writeFileSync(script,fixture,{mode:0o644});
+    // A hosted runner's checkout ancestors may be private to its login user.
+    // Export only this public source into our fixture; never chmod the checkout.
+    const fixtureHelper=join(root,'event_ingest_runtime.php');
+    writeFileSync(fixtureHelper,readFileSync(helper),{mode:0o644});
     // Only the synthetic /tmp fixture is prepared as root. The helper and its
     // child run without root, supplemental groups, or retained capabilities.
     const privileged=(args)=>spawnSync(process.getuid()===0 ? args[0] : 'sudo',process.getuid()===0 ? args.slice(1) : ['-n',...args],{encoding:'utf8',timeout:scenario==='native_enabled'?60000:15000});
@@ -109,7 +113,7 @@ for (const scenario of (process.env.EVENT_LINUX_BASELINE_HELPER ? ['baseline'] :
       const setup=privileged(['php',script,'setup',root]);
       assert.equal(setup.status,0,setup.stderr);
       const ready=privileged(['chmod','0755',root]);assert.equal(ready.status,0,ready.stderr);
-      const result=privileged(['setpriv','--reuid=60001','--regid=60001','--clear-groups','--','php',script,'run',root,helper,scenario,resolve('backend/artisan')]);
+      const result=privileged(['setpriv','--reuid=60001','--regid=60001','--clear-groups','--','php',script,'run',root,fixtureHelper,scenario,resolve('backend/artisan')]);
       assert.equal(result.status,0,result.stderr);
       assert.equal(result.stdout,'PASS');assert.equal(result.stderr,'');
     } finally {

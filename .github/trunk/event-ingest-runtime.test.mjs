@@ -12,6 +12,13 @@ function execute(scenario) {
   const root = mkdtempSync(join(tmpdir(), 'event-runtime-fixture-'));
   const php = join(root, 'fixture.php');
   writeFileSync(php, `<?php
+// Match the production CLI's bounded error handling; never let a runner's
+// Xdebug configuration render input arguments from an uncaught exception.
+set_exception_handler(static function (Throwable $error): void {
+    $code = $error->getMessage();
+    fwrite(STDERR, preg_match('/^EVENT_[A-Z_]+$/', $code) ? $code."\\n" : "EVENT_FIXTURE_FAILED\\n");
+    exit(1);
+});
 require $argv[1];
 $root = realpath($argv[2]).'/deploy';
 $scenario = $argv[3];
