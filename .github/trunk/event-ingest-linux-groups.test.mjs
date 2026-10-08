@@ -16,6 +16,29 @@ if ($argv[1] === 'setup') {
         mkdir($backend.'/bootstrap/cache',0755,true);
         file_put_contents(dirname($backend).'/REVISION',$name === 'candidate' ? $new : $old);
         file_put_contents($backend.'/bootstrap/cache/config.php','<?php return '.var_export(['app'=>['env'=>'production'],'fap'=>['events'=>['ingest_token'=>'']]],true).';');
+    mkdir($backend.'/vendor',0755,true);
+    file_put_contents($backend.'/vendor/autoload.php', <<<'AUTOLOAD'
+<?php
+namespace Symfony\Component\Console\Input;
+class ArgvInput {}
+AUTOLOAD);
+    file_put_contents($backend.'/bootstrap/app.php', <<<'APP'
+<?php
+return new class(dirname(__DIR__)) {
+    private $handler;
+    public function __construct(private string $backend) {}
+    public function make($class) {
+        return $this->handler ??= new class {
+            public $callback;
+            public function reportable($callback) { $this->callback=$callback; }
+        };
+    }
+    public function handleCommand($input): int {
+        try { require $this->backend.'/artisan'; return 0; }
+        catch (Throwable $error) { ($this->handler->callback)($error); return 1; }
+    }
+};
+APP);
         file_put_contents($backend.'/artisan', <<<'ARTISAN'
 <?php
 $config=['app'=>['env'=>'production'],'fap'=>['events'=>['ingest_token'=>(string)getenv('EVENT_INGEST_TOKEN')]]];
@@ -69,16 +92,25 @@ if ($scenario === 'missing_sgid') {
         try { EventIngestRuntime::init($candidate,$root); throw new RuntimeException('private group drift accepted'); }
         catch (RuntimeException $e) { check($e->getMessage()==='EVENT_PRIVATE_DIRECTORY_FAILED','wrong group failure'); }
     } else {
-        if ($scenario === 'native_enabled') {
+        if (str_starts_with($scenario,'native_')) {
             foreach (['APP_ENV'=>'production','APP_KEY'=>'public_fixture_only_0123456789abc','DB_CONNECTION'=>'sqlite','DB_DATABASE'=>':memory:','CACHE_STORE'=>'array','QUEUE_CONNECTION'=>'sync','TELESCOPE_ENABLED'=>'false','PULSE_ENABLED'=>'false','NIGHTWATCH_ENABLED'=>'false'] as $key=>$value) { putenv($key.'='.$value); }
             putenv('APP_SERVICES_CACHE='.$candidate.'/.event-ingest/services.php');
             putenv('APP_PACKAGES_CACHE='.$candidate.'/.event-ingest/packages.php');
-            file_put_contents($candidate.'/artisan','<?php require '.var_export($argv[5],true).';');
+            if ($scenario === 'native_bad_config') { putenv('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT=invalid_public_fixture'); }
+            $native=dirname($argv[5]);
+            file_put_contents($candidate.'/vendor/autoload.php','<?php require '.var_export($native.'/vendor/autoload.php',true).';');
+            file_put_contents($candidate.'/bootstrap/app.php','<?php return require '.var_export($native.'/bootstrap/app.php',true).';');
         }
-        $enabled=$scenario!=='disabled';
+        $enabled=$scenario!=='disabled' && $scenario!=='native_disabled';
         $wire=['intent'=>$enabled?'1':'0','token'=>$enabled?'public_fixture_only_0123456789abcdef':''];
         file_put_contents($candidate.'/.event-ingest/incoming.json',json_encode($wire));
         check(EventIngestRuntime::install($candidate,$new,'production',$current,$root,''),'install failed');
+        if ($scenario === 'native_bad_config') {
+            try { EventIngestRuntime::compile($candidate,$new,'production',$root); throw new RuntimeException('invalid native configuration accepted'); }
+            catch (RuntimeException $error) { check($error->getMessage()==='EVENT_CACHE_BUILD_FAILED' && EventIngestRuntime::failureStage()==='EVENT_COMPILE_CHILD_VALUE','native exception classification'); }
+            check(readlink($root.'/current')===$pointer && hash_file('sha256',$current.'/bootstrap/cache/config.php')===$hash,'native failure changed LKG');
+            echo 'PASS';exit;
+        }
         check(EventIngestRuntime::compile($candidate,$new,'production',$root),'compile failed');
         check(EventIngestRuntime::verify($candidate,$new,'production',$root,true,$enabled)['enabled']===$enabled,'readback failed');
         clearstatcache();
@@ -97,8 +129,8 @@ check(readlink($root.'/current')===$pointer && hash_file('sha256',$current.'/boo
 echo 'PASS';
 `;
 
-for (const scenario of (process.env.EVENT_LINUX_BASELINE_HELPER ? ['baseline'] : ['enabled','disabled','rollback','native_enabled','missing_sgid','wrong_private_group','active_candidate'])) {
-  test(`EVENT Linux foreign-group ${scenario}`, {skip:process.platform !== 'linux' ? 'Requires actual Linux setgid semantics' : scenario === 'native_enabled' && !existsSync('backend/vendor/autoload.php') ? 'Native Laravel fixture requires Composer runtime dependencies' : false}, () => {
+for (const scenario of (process.env.EVENT_LINUX_BASELINE_HELPER ? ['baseline'] : ['enabled','disabled','rollback','native_enabled','native_disabled','native_bad_config','missing_sgid','wrong_private_group','active_candidate'])) {
+  test(`EVENT Linux foreign-group ${scenario}`, {skip:process.platform !== 'linux' ? 'Requires actual Linux setgid semantics' : scenario.startsWith('native_') && !existsSync('backend/vendor/autoload.php') ? 'Native Laravel fixture requires Composer runtime dependencies' : false}, () => {
     const root=mkdtempSync(join(tmpdir(),'event-linux-groups-'));
     const script=join(root,'fixture.php');
     writeFileSync(script,fixture,{mode:0o644});
@@ -108,7 +140,7 @@ for (const scenario of (process.env.EVENT_LINUX_BASELINE_HELPER ? ['baseline'] :
     writeFileSync(fixtureHelper,readFileSync(helper),{mode:0o644});
     // Only the synthetic /tmp fixture is prepared as root. The helper and its
     // child run without root, supplemental groups, or retained capabilities.
-    const privileged=(args)=>spawnSync(process.getuid()===0 ? args[0] : 'sudo',process.getuid()===0 ? args.slice(1) : ['-n',...args],{encoding:'utf8',timeout:scenario==='native_enabled'?60000:15000});
+    const privileged=(args)=>spawnSync(process.getuid()===0 ? args[0] : 'sudo',process.getuid()===0 ? args.slice(1) : ['-n',...args],{encoding:'utf8',timeout:scenario.startsWith('native_')?60000:15000});
     try {
       const setup=privileged(['php',script,'setup',root]);
       assert.equal(setup.status,0,setup.stderr);

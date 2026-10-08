@@ -44,12 +44,40 @@ foreach (['old', 'candidate', 'rollback'] as $name) {
     file_put_contents(dirname($backend).'/REVISION', $name === 'candidate' ? $new : $old);
     file_put_contents($backend.'/bootstrap/cache/config.php', '<?php return '.var_export(['app'=>['env'=>'production'], 'fap'=>['events'=>['ingest_token'=>'']]], true).';');
     chmod($backend.'/bootstrap/cache/config.php', 0640);
+    mkdir($backend.'/vendor',0755,true);
+    file_put_contents($backend.'/vendor/autoload.php', <<<'AUTOLOAD'
+<?php
+namespace Symfony\\Component\\Console\\Input;
+class ArgvInput {}
+AUTOLOAD);
+    file_put_contents($backend.'/bootstrap/app.php', <<<'APP'
+<?php
+return new class(dirname(__DIR__)) {
+    private $handler;
+    public function __construct(private string $backend) {}
+    public function make($class) {
+        return $this->handler ??= new class {
+            public $callback;
+            public function reportable($callback) { $this->callback=$callback; }
+        };
+    }
+    public function handleCommand($input): int {
+        try { require $this->backend.'/artisan'; return 0; }
+        catch (Throwable $error) { ($this->handler->callback)($error); return 1; }
+    }
+};
+APP);
     file_put_contents($backend.'/artisan', <<<'ARTISAN'
 <?php
 $kind = @file_get_contents(__DIR__.'/case.txt') ?: '';
 $config = ['app'=>['env'=>$kind === 'wrong_environment' ? 'staging' : 'production'], 'fap'=>['events'=>['ingest_token'=>$kind === 'wrong_token' ? 'wrong' : (string) getenv('EVENT_INGEST_TOKEN')]]];
 fwrite(STDOUT, getenv('EVENT_INGEST_TOKEN')); fwrite(STDERR, getenv('EVENT_INGEST_TOKEN'));
 if ($kind === 'child_failure') { exit(1); }
+if ($kind === 'child_logic') { throw new LogicException(getenv('EVENT_INGEST_TOKEN')); }
+if ($kind === 'child_type') { throw new TypeError(getenv('EVENT_INGEST_TOKEN')); }
+if ($kind === 'child_database') { throw new PDOException(getenv('EVENT_INGEST_TOKEN')); }
+if ($kind === 'child_value') { throw new UnexpectedValueException(getenv('EVENT_INGEST_TOKEN')); }
+if ($kind === 'child_runtime') { throw new RuntimeException(getenv('EVENT_INGEST_TOKEN')); }
 file_put_contents(getenv('APP_CONFIG_CACHE'), '<?php return '.var_export($config, true).';');
 chmod(getenv('APP_CONFIG_CACHE'), 0664);
 ARTISAN);
@@ -84,14 +112,14 @@ if ($scenario === 'unsafe_parent') {
     $cacheHash = hash_file('sha256',$current.'/bootstrap/cache/config.php'); reject(fn()=>$prepare(),'adopted unknown credential');
 } else {
     $prepare($scenario === 'disabled' ? '0' : '1');
-    if (in_array($scenario,['cli_child_failure','cli_unknown_failure'])) {
-        file_put_contents($candidate.'/case.txt','child_failure');
+    if (in_array($scenario,['cli_child_failure','cli_unknown_failure','cli_child_logic','cli_child_type','cli_child_database','cli_child_value','cli_child_runtime'])) {
+        file_put_contents($candidate.'/case.txt',str_starts_with($scenario,'cli_child_') && $scenario!=='cli_child_failure' ? substr($scenario,4) : 'child_failure');
         if ($scenario === 'cli_unknown_failure') {
             file_put_contents($candidate.'/.event-ingest/input.json','not JSON '.$token);
         }
         $cli=proc_open([PHP_BINARY,'-r',"define('FAP_EVENT_RUNTIME_CLI',true);require ".var_export($argv[1],true).";",'--','compile',$candidate,$new,'production',$root],[0=>['file','/dev/null','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);
         $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
-        $expected=$scenario === 'cli_child_failure' ? 'EVENT_COMPILE_CHILD' : 'EVENT_COMPILE_AUTHORITY';
+        $expected=match($scenario) {'cli_child_failure'=>'EVENT_COMPILE_CHILD','cli_child_logic'=>'EVENT_COMPILE_CHILD_LOGIC','cli_child_type'=>'EVENT_COMPILE_CHILD_TYPE','cli_child_database'=>'EVENT_COMPILE_CHILD_DATABASE','cli_child_value'=>'EVENT_COMPILE_CHILD_VALUE','cli_child_runtime'=>'EVENT_COMPILE_CHILD_RUNTIME',default=>'EVENT_COMPILE_AUTHORITY'};
         check(proc_close($cli)===1 && $out==='' && $err==="EVENT_RUNTIME_FAILED:".$expected."\\n",'CLI error classification');
         check(!str_contains($out.$err,$token),'CLI leaked fixture input');
         $unchanged = require $candidate.'/bootstrap/cache/config.php'; check($unchanged['fap']['events']['ingest_token']==='', 'CLI failed candidate cache changed');
@@ -203,7 +231,7 @@ echo 'PASS';
   } finally { rmSync(root, { recursive: true, force: true }); }
 }
 
-for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
+for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'cli_child_logic', 'cli_child_type', 'cli_child_database', 'cli_child_value', 'cli_child_runtime', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
   test(`EVENT candidate/LKG ${scenario}`, {skip: process.platform !== 'linux' ? 'Requires Linux directory setgid inheritance' : false}, () => {
     const result = execute(scenario);
     assert.equal(result.status, 0, result.stderr);

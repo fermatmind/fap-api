@@ -7,6 +7,8 @@ final class EventIngestRuntime
 
     private static int $compileStage = 0;
 
+    private static int $childFailure = 0;
+
     public static function failureStage(): string
     {
         // Classify execution boundaries without inspecting exception messages,
@@ -14,12 +16,58 @@ final class EventIngestRuntime
         return match (self::$compileStage) {
             1 => 'EVENT_COMPILE_PATH',
             2 => 'EVENT_COMPILE_AUTHORITY',
-            3 => 'EVENT_COMPILE_CHILD',
+            3 => match (self::$childFailure) {
+                71 => 'EVENT_COMPILE_CHILD_DATABASE',
+                72 => 'EVENT_COMPILE_CHILD_LOGIC',
+                73 => 'EVENT_COMPILE_CHILD_PHP_WARNING',
+                74 => 'EVENT_COMPILE_CHILD_TYPE',
+                75 => 'EVENT_COMPILE_CHILD_PHP_ERROR',
+                76 => 'EVENT_COMPILE_CHILD_EXCEPTION',
+                78 => 'EVENT_COMPILE_CHILD_VALUE',
+                79 => 'EVENT_COMPILE_CHILD_RUNTIME',
+                default => 'EVENT_COMPILE_CHILD',
+            },
             4 => 'EVENT_COMPILE_CANDIDATE',
             5 => 'EVENT_COMPILE_CONFIG',
             6 => 'EVENT_COMPILE_ACTIVATION',
             default => 'EVENT_OTHER_RUNTIME',
         };
+    }
+
+    public static function compilerProgram(): string
+    {
+        // Run the same Laravel handleCommand/termination path as artisan. Only
+        // exception types become fixed exit codes; output remains /dev/null.
+        return <<<'PHP'
+$backend = $argv[1];
+$kind = 77;
+$classify = static fn (Throwable $error): int => match (true) {
+    $error instanceof PDOException => 71,
+    $error instanceof LogicException => 72,
+    $error instanceof ErrorException => 73,
+    $error instanceof TypeError => 74,
+    $error instanceof Error => 75,
+    $error instanceof UnexpectedValueException => 78,
+    $error instanceof RuntimeException => 79,
+    default => 76,
+};
+try {
+    define('LARAVEL_START', microtime(true));
+    require $backend.'/vendor/autoload.php';
+    $app = require $backend.'/bootstrap/app.php';
+    $app->make(Illuminate\Contracts\Debug\ExceptionHandler::class)->reportable(static function (Throwable $error) use (&$kind, $classify): void {
+        $kind = $classify($error);
+    });
+    $argv = [$backend.'/artisan', 'config:cache', '--no-ansi'];
+    $_SERVER['argv'] = $argv;
+    $_SERVER['argc'] = count($argv);
+    $status = $app->handleCommand(new Symfony\Component\Console\Input\ArgvInput);
+    exit($status === 0 ? 0 : $kind);
+} catch (Throwable $error) {
+    // Preserve the original reported exception type if reporting itself fails.
+    exit($kind === 77 ? $classify($error) : $kind);
+}
+PHP;
     }
 
     public static function binding(string $revision, string $environment): void
@@ -293,12 +341,13 @@ final class EventIngestRuntime
             throw new RuntimeException('EVENT_CACHE_CANDIDATE_EXISTS');
         }
         self::$compileStage = 3;
+        self::$childFailure = 0;
         $environmentVariables = getenv();
         $environmentVariables['EVENT_INGEST_TOKEN'] = $input['token'];
         $environmentVariables['APP_CONFIG_CACHE'] = $candidate;
         // Child output is discarded; neither artisan errors nor fixture failures
         // may echo environment values into SSH/CI logs.
-        $process = proc_open([PHP_BINARY, $backend.'/artisan', 'config:cache', '--no-ansi'], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']], $pipes, $backend, $environmentVariables);
+        $process = proc_open([PHP_BINARY, '-r', self::compilerProgram(), '--', $backend], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']], $pipes, $backend, $environmentVariables);
         if (! is_resource($process)) {
             throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
         }
@@ -317,6 +366,7 @@ final class EventIngestRuntime
         } while (true);
         proc_close($process);
         if ($status['exitcode'] !== 0) {
+            self::$childFailure = $status['exitcode'];
             throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
         }
         self::$compileStage = 4;
