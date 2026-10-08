@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '50165923b64f6ac593efacfd90336083c9da05913f99c83f2b46077a20bc702f';
+    private const AGGREGATE = '31d6dce9f57621dbb3882e311c685bbde9498aec78082a3355ebc6e1a0307500';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -48,6 +48,14 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             '/api/v0.5/personality/comparisons/infj-a-vs-infj-t?locale=en&org_id=0&scale_code=MBTI',
             'content_assets/personality_public/current/pages/mbti/comparison-at/infj-a-vs-infj-t/en.json',
         ];
+        foreach (['gut', 'head', 'heart'] as $center) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                yield "Enneagram {$center} center {$locale}" => [
+                    "/api/v0.5/personality-content-assets/enneagram/center/{$center}?locale={$locale}&org_id=0",
+                    "content_assets/personality_public/current/pages/enneagram/center/{$center}/{$locale}.json",
+                ];
+            }
+        }
         yield 'Enneagram Type 1 English' => [
             '/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=en&org_id=0',
             'content_assets/personality_public/current/pages/enneagram/core-type/type-1/en.json',
@@ -179,6 +187,10 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
 
         $this->getJson('/api/v0.5/personality-content-assets/big_five/domain/not-real?locale=en&org_id=0')
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/center/not-real?locale=zh-CN&org_id=0')
             ->assertNotFound()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
     }
