@@ -140,6 +140,8 @@ jobs:
         run: python3 -m unittest discover -s backend/tests/Sre -p test_nginx_dns_resilience.py
       - name: Validate workflow source when deployment control changed
         if: needs.classify.outputs.infrastructure == 'true'
+        env:
+          GOTOOLCHAIN: go1.26.8
         run: >-
           go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
           .github/workflows/ci.yml
