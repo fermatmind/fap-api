@@ -483,7 +483,11 @@ PHP;
             self::readChildProgress($progressPipe);
             $status = proc_get_status($process);
             if (! $status['running']) {
-                self::readChildProgress($progressPipe);
+                // Observe the overflow byte even when the child exits before
+                // our first poll. Three bounded reads cover the 128-byte budget.
+                for ($i = 0; $i < 3; $i++) {
+                    self::readChildProgress($progressPipe);
+                }
                 break;
             }
             if (microtime(true) > $deadline) {
