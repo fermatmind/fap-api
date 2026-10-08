@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-3/instincts/one-to-one",
@@ -23,94 +23,39 @@
       "entity_key": "type-3/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Training, temperament, sales duty, safety, or attraction norms may shape charisma. Compare the same task across focal, neutral, and anonymous audiences.",
-          "question": "Does charisma establish One-to-one Type Three?"
+          "answer": "The terms overlap in some traditions, but their scope differs. Narrative includes close partnerships and vitality; the Enneagram Institute emphasizes attraction and intensity. Specify which meaning you are exploring. Neither is restricted to sexual activity or romantic relationships.",
+          "question": "Is one-to-one simply another word for sexual?"
         },
         {
-          "answer": "Targeted presentation can be voluntary, rewarded, expected, or unsafe to refuse. Consent and evaluation power help separate strategic compliance from an inferred subtype pattern.",
-          "question": "Why record consent and power in this comparison?"
+          "answer": "No. Support can reflect affection, shared goals, practical responsibilities or professional duties. This interpretation becomes relevant only if creating an admired partnership or being an ideal partner repeatedly carries the proposed pressure to establish your worth.",
+          "question": "Does supporting my partner's success indicate this subtype?"
         },
         {
-          "answer": "Stable presentation across audiences, unchanged standards after a preferred person's disapproval, or appeal limited to paid work would weaken it.",
-          "question": "What weakens the persuasive-appeal hypothesis?"
+          "answer": "No. Appearance, attractiveness, gender expression and the amount of sexual desire do not identify an instinct or core type. This page concerns the meaning and process of seeking admiration, with attention to free choice and relationship conditions.",
+          "question": "Can I identify it from appearance or sexual desire?"
+        },
+        {
+          "answer": "That is useful evidence about this particular situation. Look across comparable occasions before generalizing. If freely chosen interactions repeatedly show no need to maintain an admired role and no associated self-worth pressure, reduce or withdraw that explanation instead of redefining ease as a hidden subtype.",
+          "question": "What if an ordinary preference feels easy to express?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "Type Three: achievement and self-worth",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/self-preservation",
-          "label": "instinctual_subtype:type-3/self-preservation",
+          "label": "Self-preservation Type Three",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/social",
-          "label": "instinctual_subtype:type-3/social",
+          "label": "Social Type Three",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/social"
         }
@@ -184,52 +129,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The traditional description proposes that Type Three result attention may focus on being compelling to a particular person or pair. It is a prompt for comparison, not a claim about attraction as a cause.",
-          "key": "traditional_hypothesis",
-          "title": "Treat persuasive appeal as a traditional hypothesis"
+          "body_md": "The names require care. Narrative's one-to-one includes intimate partnerships, close friendship and vitality. The Enneagram Institute's sexual/attraction places more emphasis on attraction and intensity. Their scopes overlap without being identical. See [Narrative's subtype account](https://www.narrativeenneagram.org/instinctual-subtypes/) and the [Enneagram Institute's instinct explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nNeither account is limited to sex or romance, and enjoying private conversation does not distinguish this instinct. Sexual desire, orientation, gender expression and relationship status cannot establish a subtype.\n\nNarrative's historical Type Three entry uses binary gender-role language. This page does not treat that wording as a requirement to embody a masculine or feminine ideal, or as evidence about anyone's sexuality. The question explored here is whether presenting an admired version of yourself becomes a way to establish worth.",
+          "key": "language_and_scope",
+          "title": "What one-to-one means here"
         },
         {
-          "body_md": "Compare the same pitch, performance, or collaboration for a preferred person, a neutral evaluator, and an anonymous audience. Record evidence, presentation, risk, reciprocity, and whether the result standard shifts.",
-          "key": "matched_comparison",
-          "title": "Match the task while changing the focal person"
+          "body_md": "The traditional [Type Three description](https://www.enneagraminstitute.com/type-3/) connects achievement with personal value. A one-to-one interpretation explores how this concern might be expressed through being an impressive partner, a compelling collaborator or someone whose presence feels especially desirable.\n\nPossible inner questions are “Am I someone this person admires?” and “Can I become the partner they would choose?” Appearance may be involved, but so may competence, attentiveness, humor or an admired partnership's success. Those are possibilities to investigate, not universal subtype traits.\n\nAdapting a presentation can help someone connect and collaborate. The cost arises when a role becomes difficult to leave: you keep offering the impressive version while your preferences, uncertainty or tiredness remain unspoken. Care for a partner and a wish to be admired may coexist; neither should be assumed to explain every helpful act.",
+          "key": "worth_through_appeal",
+          "title": "When being wanted becomes evidence that you are valuable"
         },
         {
-          "body_md": "One-to-one subtype language organizes observations about focal attention, appeal, and paired recognition. It is not evidence about bodily mechanisms, sexuality, chemistry, or a force that determines attraction or behavior.",
-          "key": "instinct_boundary",
-          "title": "Keep one-to-one language non-mechanistic"
+          "body_md": "Imagine that you and a friend are preparing a small public demonstration. The friend compliments your technical work but remains reserved about the partnership. You find yourself polishing your presentation, taking on extra tasks and watching for a more enthusiastic response.\n\nA one-to-one Three interpretation becomes relevant if being admired by this particular person repeatedly determines whether you feel successful. You may be aiming to become their ideal collaborator, even when the demonstration already meets its requirements.\n\nA social Three interpretation would give more weight to the audience's recognition, the team's reputation and your place among contributors. A self-preservation Three interpretation would give more weight to workable resources, continuity and proven practical competence. All three might polish the same demonstration; the action alone cannot identify the reason.\n\nAlso distinguish an admired partnership from an intense connection. Someone may work hard to make a pair look successful without seeking much emotional intensity. That can fit part of the partnership account while offering less support for the Enneagram Institute's attraction emphasis. Do not silently treat these as the same observation.",
+          "key": "collaboration_scene",
+          "title": "A collaboration feels flat even though the work goes well"
         },
         {
-          "body_md": "A person may emphasize a partner's success, a duo's image, or being the ideal collaborator rather than claiming individual credit. This variation must be compared with care, dependency, sponsorship, and role expectations.",
-          "key": "countertype_variation",
-          "title": "Allow partnership success to carry achievement"
+          "body_md": "Attentiveness can make collaboration enjoyable: you notice what engages the other person and bring care to the interaction. Overuse could mean offering more than you want to give, suppressing disagreement or treating every quiet response as a challenge to become more impressive.\n\nRecord the process rather than guessing motives: the other person responds briefly, you infer disappointment, you change a preference or take on work, and the effort leaves you exhausted. Ask whether you checked what the response actually meant. A reserved manner, distraction or different communication style may explain it.\n\nMaterial and relationship conditions matter. Client-facing work, performance training, appearance expectations, economic dependence or unequal evaluation power can reward targeted presentation. If declining is unsafe, accommodation may be protective. Do not interpret coerced compliance as evidence of an instinctual preference.\n\nOther core explanations remain possible. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) distinguish accomplishment-related recognition from being needed or keeping possibilities open. In your own example, ask what feels threatened: your worth as an impressive partner, your place as someone personally needed, or your freedom to follow a lively possibility. Repeated episodes, not charm alone, are needed to explore these differences.",
+          "key": "reciprocity_and_conditions",
+          "title": "Make room for the other person and for your own limits"
         },
         {
-          "body_md": "Sales, entertainment, dating norms, client work, sponsorship, and appearance-based penalties reward targeted appeal. Record consent, power, economic stakes, safety, and who controls the evaluation.",
-          "key": "alternative_environment",
-          "title": "Test sales roles and attraction norms"
+          "body_md": "With a trustworthy, willing person, choose an ordinary low-stakes interaction. State one genuine preference or manageable limit: “I would enjoy the simpler plan,” or “I can help with this part, but not the extra task.” Avoid situations involving danger, essential income or a person who penalizes refusal.\n\nBeforehand, write what you fear losing: enjoyment, approval, the connection or a sense of being worthwhile. Afterwards, record the actual response and whether you could leave the preference in place without rebuilding an impressive role. Ask for clarification before interpreting silence.\n\nThis is an observation exercise, not a test of the other person's affection. Do not create jealousy, withhold care or provoke rejection. Useful support allows ordinary presence, honest limits and mutual choice without requiring a performance.",
+          "key": "honest_preference",
+          "title": "Try a small preference that does not need to impress"
         },
         {
-          "body_md": "The hypothesis weakens when presentation remains stable across focal and anonymous audiences, a preferred person's disapproval does not alter the result standard, or targeted appeal appears only under a paid role.",
-          "key": "counterexample",
-          "title": "Use neutral audiences and consent changes as tests"
-        },
-        {
-          "body_md": "Findings tied to one measure and sample remain bounded to that instrument and context. This page cannot predict attraction, relationship quality, persuasion, sales performance, desirability, or compatibility.",
-          "key": "evidence_boundary",
-          "title": "Keep appeal observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose one comparable task presented to a preferred person, a neutral evaluator, and an anonymous audience.\n\nObservable signal: Record the result standard, evidence, presentation choices, reciprocity, consent, evaluation power, stakes, and response to disapproval.\n\nPage-specific signal: Compare whether the focal person's reaction changes the definition of success while task evidence stays constant.\n\nAlternative explanation: Compare sales duty, attraction norms, performance training, sponsorship, safety, economic stakes, and temperament.\n\nReflection prompt: Name the audience condition that most clearly disconfirms targeted appeal as a subtype modifier.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare sales duty, attraction norms, performance training, sponsorship, safety, economic stakes, and temperament.",
-            "context": "Choose one comparable task presented to a preferred person, a neutral evaluator, and an anonymous audience.",
-            "duration_days": 5,
-            "observable_signal": "Record the result standard, evidence, presentation choices, reciprocity, consent, evaluation power, stakes, and response to disapproval.",
-            "page_specific_signal": "Compare whether the focal person's reaction changes the definition of success while task evidence stays constant.",
-            "reflection_prompt": "Name the audience condition that most clearly disconfirms targeted appeal as a subtype modifier."
-          },
-          "title": "Observation exercise"
+          "body_md": "Repeated observations support exploring this account when becoming admired by a focal person carries self-worth pressure across freely chosen, reasonably safe situations. They challenge it when the adaptation appears only in a rewarded role, when it disappears after unequal conditions change, or when another concern explains the choices more fully.\n\nIf a particular person's response repeatedly has little bearing on your value or choices, withdraw that specific account of targeted admiration. If attraction and intensity are not central, reconsider the attraction-based reading. These findings do not require inventing hidden desire or stronger repression. Keeping consistent task standards after disagreement may simply show sound judgment, so it is not a standalone disproof either.\n\nThe traditional model includes all three instincts. A person can attend to resources, groups and individual connection, with different emphases in different situations. Wings are another explanatory layer; a Three's possible Two or Four wing is not an instinct. Neither a second-highest type score nor a guessed celebrity or profession establishes this subtype.\n\nThe 27-subtype scheme and countertype language are school traditions, not scientific diagnoses or established neural mechanisms. The [Hook review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed evidence across 104 samples. It does not validate this subtype, FermatMind scores or predictions about attraction and relationships. Findings for a particular inventory would remain limited to that inventory and study.\n\nRead [Type Three](/en/personality/enneagram/type-3) for the underlying motivation. Compare [self-preservation Three](/en/personality/enneagram/type-3/instincts/self-preservation) and [social Three](/en/personality/enneagram/type-3/instincts/social) if resources or group standing better explain the pressure.",
+          "key": "revising_the_explanation",
+          "title": "When to loosen or withdraw the subtype explanation"
         }
       ],
       "seo": {
@@ -240,8 +167,8 @@
       "slug": "enneagram/type-3/instincts/one-to-one",
       "source_hash": "815dc86ce14bd04043b4b8cc5517b29d69c373abc481e6ab28199b7434535bfb",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "One-to-one Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through persuasive appeal, admired partnership, or becoming compelling to a specific person. Charisma or appearance cannot establish subtype because sales roles, attraction norms, performance training, and unequal stakes can look the same.",
-      "title": "One-to-one Type Three: persuasive appeal as a matched-comparison hypothesis"
+      "summary": "This traditional subtype description explores Type Three's search for value through appeal, admired partnership and the wish to be compelling. It asks when connection becomes a performance, while keeping attraction, relationship context and school terminology distinct.",
+      "title": "One-to-one Type Three: being admired without losing yourself in the role"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +178,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6055dec1ded4c8a9165821eabcf9d99eeee70a7ee0f490b086178f4228d54626"
+  "source_content_sha256": "09632b6c80238a0683e9b7fb60b91c93ae080b797f2ae6ab79a92da77971118f"
 }

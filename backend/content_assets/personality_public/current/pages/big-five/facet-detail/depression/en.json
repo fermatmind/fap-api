@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/depression",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "depression",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "The facet describes a personality tendency. A depressive disorder is a clinical condition assessed with broader criteria, duration, severity, and impairment.",
-          "question": "How is the Big Five Depression facet different from depressive disorder?"
+          "answer": "The facet describes a general tendency. Clinical depression is assessed from the person's actual symptoms, history, circumstances, and impact on life. A personality result cannot diagnose or exclude it.",
+          "question": "How is the Depression facet different from clinical depression?"
         },
         {
-          "answer": "A trait score cannot decide. Consider qualified support when low mood is persistent, severe, distressing, or interferes with daily functioning.",
-          "question": "Do I need to see a clinician?"
+          "answer": "Yes. Enjoyment and low mood should be understood separately. An enjoyable moment or a cheerful public manner does not settle whether distress is significant.",
+          "question": "Can I enjoy things and still have significant low mood?"
         },
         {
-          "answer": "Yes. A tendency is not a permanent state and does not eliminate positive emotion, meaning, connection, or recovery.",
-          "question": "Can someone with stronger Depression feel happy?"
+          "answer": "Not by itself. The loss, its meaning, and the support available are central to understanding that experience. A difficult period is not a clean measure of a general tendency.",
+          "question": "Does sadness after bereavement reveal my personality level?"
         },
         {
-          "answer": "This package provides no basis for inferring creativity from the facet. Avoid romanticizing suffering or treating it as a creative requirement.",
-          "question": "Is the Depression facet related to creativity?"
+          "answer": "The record cannot establish or promise that. Its purpose is to clarify when a particular experience occurs and what conditions accompany it. Changes after support or a routine adjustment are observations about those occasions.",
+          "question": "Will keeping a record change this facet?"
         },
         {
-          "answer": "This page does not provide an individual genetic estimate or causal explanation. Personality reflects many interacting influences.",
-          "question": "Is the Depression facet inherited?"
+          "answer": "No. It cannot identify an individual's genetic cause, percentage, or prognosis. A score does not provide that causal information.",
+          "question": "Can this result explain whether my low mood is inherited?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "The Depression facet describes proneness to sadness, discouragement, and low mood. The inherited technical label must not be read as a diagnosis of depression or any other disorder.\n\n“Depression within Neuroticism: tendency toward sadness and discouragement” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "In the NEO/IPIP-NEO vocabulary used on this site, Depression concerns a tendency toward low mood and discouragement, including negative feelings about oneself. The technical name does not mean that a person has a depressive disorder or that sadness defines their identity.\n\nA tendency concerns a pattern across occasions. Feeling low today describes a state. Grieving a loss requires attention to what happened and what the person needs. Clinical depression requires an assessment beyond a personality description. These distinctions matter even when the same everyday word is used for all three.",
+          "heading": "A facet name is not a diagnosis",
           "key": "section-01-a507f9d769",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency means disappointment, loss, or discouraging interpretations may pull mood downward more readily or for longer. A weaker tendency means low mood may occur less readily or recovery may feel faster. Neither end establishes a clinical condition, emotional depth, or immunity from depression.",
-          "heading": "Precise Definition",
+          "body": "A stronger tendency can mean that discouragement or negative self-evaluation enters everyday experience more readily. A weaker tendency can mean that these experiences occur less often. Frequency, intensity, and duration should still be observed separately rather than assumed to rise and fall together.\n\nNeither position measures emotional depth, creativity, kindness, resilience, or mental health. A person who usually experiences little discouragement may have a painful period or a depressive disorder. Someone with a stronger tendency may also have satisfying relationships and genuinely enjoyable experiences.\n\nIntermediate descriptions belong to a continuum, not a separate personality type. This page does not set thresholds or prescribe a preferred score.",
+          "heading": "What stronger and weaker tendencies describe",
           "key": "section-02-091349ad59",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Depression belongs to [Neuroticism](/en/personality/big-five/neuroticism). It concerns sadness and discouragement, one component of negative emotional sensitivity.",
-          "heading": "Parent Domain",
+          "body": "The official [NEO/IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) places Depression at N3 and Cheerfulness, corresponding to Positive Emotions, at E6 under Extraversion. They are distinct constructs with different item content, not two names for one score reversed.\n\nAsk about discouragement and enjoyment separately. A person may feel low about a disappointment and still enjoy music later that day. Another may be emotionally quiet without feeling sad. A cheerful manner cannot establish the absence of distress.\n\nThis is not a claim that positive and negative emotion are wholly unrelated. It is a reason to avoid inferring one unmeasured experience from the other.",
+          "heading": "Why enjoyment cannot be used as the opposite score",
           "key": "section-03-33a28573ce",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Depression versus depressive disorder:** A disorder requires clinical assessment of symptoms, duration, severity, context, and functioning; this trait page cannot provide it.\n- **Depression versus Anxiety:** Depression concerns a downward emotional tone; [Anxiety](/en/personality/big-five/facets/anxiety) concerns anticipated threat and worry.\n- **Depression versus Vulnerability:** Depression concerns low mood; [Vulnerability](/en/personality/big-five/facets/vulnerability) concerns difficulty coping under pressure.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine volunteering with a community garden. The group chooses another planting design instead of yours. You feel disappointed, then keep returning to the thought that you have nothing useful to offer. The low mood continues beyond the meeting.\n\nSeparate three questions: what the group decided, how you felt, and what you concluded about yourself. The decision may reflect cost or maintenance requirements. Neither your discouragement nor the group's choice establishes your general ability.\n\nA natural exception would be another proposal being declined under ordinary conditions, without a planned mood exercise or special reassurance, when you felt disappointed but did not become persistently discouraged or devalue yourself broadly. It would not disprove a usual tendency. It could help narrow the explanation to particular stakes, feedback styles, or circumstances.",
+          "heading": "A setback, a broad conclusion, and a natural exception",
           "key": "section-04-c1d13d9db5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible cues include becoming discouraged after setbacks, dwelling on loss, needing longer to regain emotional momentum, or expecting less reward after disappointment. Weaker Depression may appear as quicker mood recovery. Grief, illness, discrimination, isolation, sleep loss, and current circumstances can create similar observations.",
-          "heading": "Behavioral Cues",
+          "body": "Choose a manageable working question, such as: “After ordinary proposal feedback, do I become discouraged and draw a broad negative conclusion about myself?” Do not seek out rejection to create a test.\n\nOn relevant occasions, record the actual feedback, your reported mood, the self-evaluation that arose, and when you later noticed the feeling still present or no longer present. Note any impact on daily activities. Record enjoyment separately. Completing an activity is not proof that the mood has lifted, and missing it may have an unrelated explanation.\n\nInclude feedback occasions where the target discouragement did not occur. Days without relevant feedback offer no opportunity to observe this particular question. Failing to find a counterexample in a limited review is not evidence that exceptions never occur.\n\nMark intentional changes separately: asking for clearer feedback, speaking with a friend, or changing your workload alters the circumstances. Any subsequent difference may help you choose support, but it does not establish a change in personality.",
+          "heading": "A record that includes absence as well as presence",
           "key": "section-05-52618fc664",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may be resilient after work setbacks yet deeply affected by relationship loss. A cheerful public style can coexist with private sadness, and temporary low mood can occur at any trait level. Duration and functional impact require attention beyond a personality label.",
-          "heading": "Contextual Differences",
+          "body": "Repeated similar experiences across relevant occasions can justify retaining a modest working explanation, provided the record is not confined to one unusual period. It cannot validate a trait score.\n\nNarrow the explanation if discouragement clusters around one kind of feedback while comparable occasions often go differently. Perhaps public decisions are harder than private comments, or a particular project matters much more. One natural exception does not erase a usual pattern; recurring differences should be reflected in its wording.\n\nLeave a general trait interpretation open if opportunities were scarce, mood was not recorded, or a major loss or ongoing strain dominates the period. For an ordinary proposal, one useful next step is to ask which concrete requirement it did not meet. That clarifies the task; it does not require you to stop feeling disappointed.",
+          "heading": "Retain, narrow, or leave the question open",
           "key": "section-06-9fe675c9be",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Feeling discouragement strongly after a setback.\n- Taking longer to regain emotional momentum.\n- Noticing loss and limitation readily.\n- Withdrawing while mood is low.\n- Finding hope less accessible during strain.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Actual distress matters more than the label. [NIMH's depression overview](https://www.nimh.nih.gov/health/topics/depression) describes clinical depression as involving symptoms that affect feelings, thinking, and daily activities. Persistent low mood, loss of interest, or difficulty functioning deserves a conversation with a qualified health professional. You do not need every symptom or a high personality score to ask for help.\n\nSeek immediate support for suicidal thoughts or urges to harm yourself. In immediate danger, contact local emergency services or go to an emergency department. [NIMH's help guidance](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) lists US services; readers elsewhere should use services in their location. Observation exercises should not delay support.",
+          "heading": "When understanding needs to include professional support",
           "key": "section-07-0f442271a7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Recovering emotional momentum relatively quickly.\n- Maintaining hope after disappointment.\n- Experiencing sadness without a prolonged downward pull.\n- Underestimating another person’s recovery needs.\n- Appearing steady during loss while still grieving privately.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "The official [IPIP long-form item key](https://ipip.ori.org/newNEOFacetsKey.htm) and [four-item scales](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) inform the N3 vocabulary. They do not establish a diagnosis, an individual's genetic explanation, or the validity of another product's score.\n\nThe [BFI-2 author page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes a different facet structure. A shared Big Five framework does not make every inventory's narrower scales identical. Read the version and score explanation attached to your actual result rather than estimating an unreported Depression score from a domain score or positive-emotion result.\n\nFor the broader domain, read [Neuroticism](/en/personality/big-five/neuroticism). [Anxiety](/en/personality/big-five/facets/anxiety) helps distinguish worry from discouragement, while [Vulnerability](/en/personality/big-five/facets/vulnerability) concerns feeling unable to cope under pressure. See the [30-facet guide](/en/personality/big-five/facets) for the full vocabulary.",
+          "heading": "Source limits and further reading",
           "key": "section-08-d7534c4ab1",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Depression may support sensitivity to loss and a realistic acknowledgment of pain, while costs may include prolonged discouragement or withdrawal. Weaker Depression can support recovery, but it is not proof of resilience or mental health. No level establishes creativity, depth, diagnosis, treatment need, or prognosis.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-6682f17db7",
-          "kind": "rich_text"
-        },
-        {
-          "body": "After a rejected proposal, a designer feels discouraged for several days and doubts the value of the entire project. She asks a colleague to separate the specific feedback from her global conclusion, then schedules one small revision. The pattern is informative without becoming an identity.",
-          "heading": "An Original Case",
-          "key": "section-10-f45f256ba1",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A generally upbeat teacher experiences a major depressive episode and seeks clinical care. A weaker personality tendency does not prevent a disorder, just as a stronger tendency does not diagnose one.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-8c06b0a131",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which setbacks pull your mood down most reliably?\n2. How long does emotional momentum usually take to return?\n3. Do you turn one disappointment into a global conclusion?\n4. What changes in sleep, contact, or routine accompany low mood?\n5. When does a pattern exceed self-observation and warrant support?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-1277733f09",
-          "kind": "rich_text"
-        },
-        {
-          "body": "After one ordinary disappointment, write the specific event, the broad conclusion your mind produced, and one next action that remains possible. This is not treatment. Seek qualified help if low mood is persistent, severe, affects functioning, or includes thoughts of self-harm; use local emergency support for immediate danger.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-f3dc724001",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Neuroticism](/en/personality/big-five/neuroticism) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Anxiety](/en/personality/big-five/facets/anxiety), [Anger](/en/personality/big-five/facets/anger), [Self-Consciousness](/en/personality/big-five/facets/self-consciousness), [Impulsiveness](/en/personality/big-five/facets/impulsiveness), and [Vulnerability](/en/personality/big-five/facets/vulnerability).",
-          "heading": "Continue Reading",
-          "key": "section-14-26cb4b6bd0",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "The Depression facet describes a tendency toward low mood, discouragement, and negative self-evaluation. It must be distinguished from a current difficult period, grief, positive emotion, and clinical depression.",
+        "title": "Depression Facet: Low Mood Without a Diagnostic Label"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/depression",
-      "source_hash": "15661554a091135f03c2e541718397a001b7f7301bfe5340e6bcfd5c8007a20e",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "The Depression facet describes proneness to sadness, discouragement, and low mood. Despite its technical name, it does not diagnose depressive disorder.",
-      "title": "Depression Facet: Tendency Toward Sadness and Discouragement"
+      "source_hash": "1dfa0220fdfdb4ebe836066a9bebff967378d39f2734109c0c7e0ea230d431a4",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "The Depression facet describes a tendency toward low mood, discouragement, and negative self-evaluation. It must be distinguished from a current difficult period, grief, positive emotion, and clinical depression.",
+      "title": "Depression Facet: Low Mood Without a Diagnostic Label"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "N3-depression-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, diagnosis, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "N3-depression-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "N3-depression-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "N3-depression-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "861803c4a814b2893d92166d66b0c407c81b0c387ebf25e60bc5289150351c89"
+  "source_content_sha256": "4163ee39e5604942ca035d9892e26753e1d40095fe006fce4d9f517a419c4b24"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/5w6",
@@ -23,78 +23,34 @@
       "entity_key": "5w6",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Regulation, quality assurance, security duties, team standards, prior incidents, and personal accountability can all require careful verification without revealing an Enneagram motive.",
+          "answer": "No. Requirements, training, recent failures, and responsibility can produce the same behavior. Examine what checking means to you and whether understanding, capability, and managing demands form a recurring Five pattern. Even a good fit remains a reason to compare explanations, not proof.",
           "question": "Does careful verification prove a 5w6 wing?"
         },
         {
-          "answer": "Use the same uncertain task and Type Five core. Compare verification, repeatability, and failure-mode attention with personal synthesis and meaning, then test whether role demands explain the contrast.",
+          "answer": "Use one situation and first examine the Five core in both accounts. Then compare what draws attention: trustworthy knowledge and dependable use, or your own interpretation, meaning, and expression. Either pattern can analyze, create, and verify. Occupation or apparent rationality does not decide the wing.",
           "question": "How should 5w6 be compared with 5w4?"
         },
         {
-          "answer": "Fast reversible experiments, trust in a competent collaborator, comfort with a low-stakes unknown, and stopping redundant checks after risk acceptance should all lower confidence.",
+          "answer": "Repeated observation that checking follows external requirements, while Six-related concerns seldom guide freely chosen activities with comparable stakes, gives the modifier less support. If the Five core also explains little, compare core types again. A single quick decision, ordinary trust, or stopping redundant checks can simply reflect flexibility.",
           "question": "Which evidence weakens the 5w6 modifier?"
         }
       ],
@@ -111,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "Type Five",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "Type Six",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/wings/5w4",
-          "label": "wing:5w4",
+          "label": "5w4 wing",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:5w4"
         }
@@ -169,47 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Test preparation, knowledge, privacy, and capacity observations before adding a possible Six modifier. Rechecking is meaningful only when its purpose and context are known; compliance with a required procedure is not wing evidence by itself.",
+          "body_md": "The 5 names the core pattern; w stands for wing; 6 names an adjacent influence. In this traditional account, Five seeks room to understand, build capability, and manage demands on time and energy. A Six influence may add attention to whether information holds up, a method can be relied on, and help will be available if something goes wrong. It is not a fifty-fifty blend or a conclusion established by a high Six score. The [Enneagram Institute's explanation of wings](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) also acknowledges disagreement among traditions about one or two wings.\n\nAn illustrative sequence is: “Do I understand enough to handle this?” followed by “Will that understanding hold up when I use it?” These concerns can work together. They can also extend preparation indefinitely: there is always another thing to learn and another uncertainty to check before joining in.\n\nThe [traditional Five description](https://www.enneagraminstitute.com/type-5/) centers understanding and competence; the [Six description](https://www.enneagraminstitute.com/type-6/) centers support and security. These are lenses for reflection, not evidence that someone is incapable, anxious, or unable to trust.",
           "key": "core_first_modifier",
-          "title": "Keep Type Five primary and verification secondary"
+          "title": "What stays Five when Six is the wing?"
         },
         {
-          "body_md": "On the same incomplete dataset, 5w6 may emphasize validation, reproducibility, and failure modes, while 5w4 may emphasize personal synthesis, meaning, and an original frame. Change the accountability structure and either response may change.",
+          "body_md": "You are helping run a neighborhood workshop. You need to use an unfamiliar projector, the instructions are incomplete, and someone suggests trying it immediately. All three explanations below could involve reading, asking questions, and testing. The useful question is what would make participation feel possible.\n\n- **A 5w6 explanation:** Understand how the equipment works, then check the important connections and a workable backup. A method you can understand for yourself and rely on in use helps you feel ready.\n- **A 5w4 explanation:** Understanding and autonomy still come first. A Four influence may bring more attention to your own interpretation and the meaning or expression of the workshop. Verification can matter without being the strongest pull on your attention.\n- **A 6w5 explanation:** Dependable support and guidance are central. A Five influence supplies research and analysis. Even after understanding the equipment, you may still want to know whether the arrangements and people involved can be counted on if it fails.\n\nThese are original illustrations of the traditional framework, not expected scripts. The order of questions is a prompt, not a diagnostic rule. A 5w6 can value companionship, a 6w5 can solve a problem independently, and a 5w4 can verify rigorously. “Logical versus emotional” and “science versus art” do not settle the distinction.\n\nThe [Enneagram Institute's Five–Six comparison](https://www.enneagraminstitute.com/misidentifying-5-and-6/) and [Narrative Enneagram's type comparisons](https://www.narrativeenneagram.org/type-comparisons/) discuss similarities alongside differences in attention. Their broader claims about occupations, celebrities, or relative creativity are not adopted here. For the other Five wing, continue to [5w4](/en/personality/enneagram/wings/5w4).",
           "key": "sibling_core_comparison",
-          "title": "Compare 5w6 with 5w4 under one uncertainty"
+          "title": "5w6, 5w4, and 6w5 in the same situation"
         },
         {
-          "body_md": "Record which source is trusted, how contradictory evidence is handled, when a second reviewer is requested, what risk triggers escalation, and what stopping rule permits action. Distinguish voluntary checking from mandated controls.",
+          "body_md": "If this pattern fits your experience, its useful side may be turning understanding into a dependable method other people can use. At the workshop, you can explain the connection, identify a likely problem, and show the next organizer how to recover. Those contributions come from actual knowledge and practice; the wing label does not guarantee them.\n\nThe same approach can become costly when preparation replaces participation. The projector has passed the necessary checks, but you keep reading specifications that will not affect the session. You investigate increasingly unlikely failures while postponing a short rehearsal. Ask: “Which decision would this new information change? Am I resolving a problem, or extending the time before I have to try?”\n\nIn relationships, a request for contact may first look like a problem to analyze. A friend describes a difficult day; you look for causes and solutions, or withdraw because you do not have a complete answer. Try asking, “Would you like me to listen, or help think through options?” If you need space, make the return concrete: “I need a little time to process this. Can we talk again tonight?”\n\nThese examples invite observation. They do not tell you that all 5w6 people respond this way, or that this motive explains every instance.",
           "key": "observable_situations",
-          "title": "Observe checks, escalation, and stopping rules"
+          "title": "When understanding becomes useful—and when it delays living"
         },
         {
-          "body_md": "The modifier hypothesis weakens when the person moves promptly with reversible experiments, tolerates an unverified detail, trusts a competent collaborator, or drops redundant checks after the risk owner accepts them.",
+          "body_md": "Quick action, relaxed company, or trust in a capable collaborator does not automatically contradict 5w6. People can use their usual strategies flexibly, and a Six influence need not mean constant doubt. Examine what repeatedly drives attention rather than whether every adjective fits every day.\n\nFirst test the Five core. Across ordinary situations, is the main concern rarely understanding, capability, or demands on your available time and energy? Is dependable support or guidance repeatedly more central instead? That is a reason to compare [Type Six](/en/personality/enneagram/type-6), rather than explain every mismatch as an unusually strong Six wing.\n\nThen test the proposed modifier. If checking appears only when a role requires it or after a recent failure, while reliability and trustworthy backing seldom draw your attention in freely chosen activities with similar stakes, the checking provides less support for a Six-wing interpretation. You can retain Five as a possibility while leaving the wing open.\n\nWhen checking decreases with lower stakes, the first conclusion is that context matters. This weakens “more checks mean more 5w6”; it does not, on its own, establish that a wing is absent.",
           "key": "counterexample",
-          "title": "Test flexible action when stakes are low"
+          "title": "What would make the explanation fit less well?"
         },
         {
-          "body_md": "Quality assurance, cybersecurity, laboratory practice, finance controls, aviation, incident response, or a recent failure may teach extensive verification. Unequal accountability or fear of blame may also explain repeated checking.",
+          "body_md": "The person responsible for the projector has reasons to check more than a participant: a failure will become their problem. Training, required procedures, unclear handovers, previous mistakes, and unequal responsibility can all produce careful checking. A reversible everyday choice may bring a different response.\n\nCounting checks is therefore insufficient. Record what each check addressed, whether it uncovered anything new, who faced the consequences, and which requirements applied. Keep necessary safeguards in place; this exercise is not a reason to bypass them. Following a procedure is not evidence of a particular core or wing.\n\nAllow explanations to coexist: “I want to understand this, and the last failure also changed how careful I am.” With someone else, ask, “What is still unresolved that makes it hard to begin?” That question is more useful than inferring a type from silence, a job title, or the number of questions asked.",
           "key": "alternative_explanations",
-          "title": "Compare regulated roles and learned methods"
+          "title": "Account for the situation before interpreting the person"
         },
         {
-          "body_md": "5w6 is not a security clearance, risk score, competence rating, or forecast of loyalty. Wing research remains limited, so verification patterns stay contextual and open to disconfirmation.",
+          "body_md": "The [abstract of Hook and colleagues' systematic review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed evidence for Enneagram reliability and validity across 104 independent samples, with little research supporting secondary theories such as wings and movement between types. This does not make every description useless, but it does not establish 5w6 as a clearly validated, stable scientific category.\n\nThe motives and wing relationship on this page come from traditional theory. The scenarios and exercises offer questions to examine, not validation of FermatMind scores, norms, or individual typing. A 5w6 label does not establish a diagnosis, intelligence level, loyalty, or suitability for a career. Growth arrows, health levels, and claims about an inborn permanent type are not treated here as demonstrated laws.\n\nIf the core remains uncertain, read [Type Five](/en/personality/enneagram/type-5) before choosing a wing. Return to the [Enneagram overview](/en/personality/enneagram) if you need to compare the nine patterns. A useful observation does not require a finished label.",
           "key": "wing_boundary",
-          "title": "Do not convert reliability into a type claim"
+          "title": "What the research allows you to conclude"
         },
         {
-          "body_md": "Duration: 5\n\nContext: Choose one low-stakes decision, one regulated task, and one peer review across five days.\n\nObservable signal: Record source authority, contradictory evidence, requested reviewers, escalation threshold, risk owner, and stopping rule.\n\nPage-specific signal: Compare verification with personal synthesis while keeping task uncertainty and the Type Five core constant.\n\nAlternative explanation: Check regulation, quality assurance, security duty, team norms, prior incidents, and unequal blame exposure.\n\nReflection prompt: Use the low-stakes event to test whether checking decreases when accountability and consequence are reduced.",
+          "body_md": "Over the next few days, choose two or three small decisions you can safely try, and compare them with a task that already has clear requirements. Do not manufacture risk or deliberately make yourself distressed.\n\nBefore acting, complete three sentences: “What I still need to understand is…”; “The reliability or support issue is…”; and “I can begin once…” For the projector, that might mean confirming that your file plays, keeping a workable backup, and then doing a short rehearsal. Your stopping condition must fit the real task, not a theory about your personality.\n\nAfterward, note which step increased readiness, which searches changed no decision, and what trying revealed that preparation did not. If you asked for help, distinguish a request for specific knowledge from a wish to share uncertainty with someone. Either need can be expressed directly.\n\nInclude one experience that fits the 5w6 explanation and one that fits poorly. If knowledge preparation is consistently only a means to another central concern, reconsider the core. If Five remains useful but the wing is unclear, leave it open. The aim is a better next action, not a wing score or a promised developmental outcome.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check regulation, quality assurance, security duty, team norms, prior incidents, and unequal blame exposure.",
-            "context": "Choose one low-stakes decision, one regulated task, and one peer review across five days.",
-            "duration_days": 5,
-            "observable_signal": "Record source authority, contradictory evidence, requested reviewers, escalation threshold, risk owner, and stopping rule.",
-            "page_specific_signal": "Compare verification with personal synthesis while keeping task uncertainty and the Type Five core constant.",
-            "reflection_prompt": "Use the low-stakes event to test whether checking decreases when accountability and consequence are reduced."
-          },
-          "title": "Observation exercise"
+          "title": "Try making preparation serve participation"
         }
       ],
       "seo": {
@@ -220,8 +168,8 @@
       "slug": "enneagram/wings/5w6",
       "source_hash": "d37b8f45c03c54fbe043aa61951f5cea26ed8144aa707173e5bf942334381d2d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "5w6 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Six may modify how information is checked for verification, reliability, and risk. Careful procedure does not establish 5w6 because regulated work, quality assurance, security roles, team norms, and accountability can require the same behavior.",
-      "title": "5w6: a core-first hypothesis about verification and reliable method"
+      "summary": "In traditional Enneagram wing theory, 5w6 describes a Five pattern shaped by an adjacent Six influence: building understanding and capability while looking for dependable information, methods, and support. Explore how this differs from 5w4 and 6w5, where preparation helps or holds you back, and how to examine the pattern without typing yourself from caution alone.",
+      "title": "5w6: a Type Five core with a Six wing"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6d8cec91d582d2b78083b237e2b1235f074517555009072d4ef1efa6e7c6d80d"
+  "source_content_sha256": "c893fcbddc31ad18167471a66076be3ca735410a67fc1a80c33416a200b23bb9"
 }

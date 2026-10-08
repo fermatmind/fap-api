@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-7/instincts/self-preservation",
@@ -23,94 +23,35 @@
       "entity_key": "type-7/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Scarcity, caregiving, migration, entrepreneurship, disability access, or disaster preparation can demand resourcefulness. Compare behavior after essential access becomes stable.",
-          "question": "Does resourcefulness establish self-preservation Seven?"
+          "answer": "Neither. Spending can buy convenience, experiences, or alternatives; saving can preserve future choice. Income, family habits, and responsibilities can explain both. Examine whether expansion continues after the plan is adequate and what it is helping the person manage, rather than using spending or thrift to assign a subtype.",
+          "question": "Must self-preservation Seven be a big spender—or very frugal?"
         },
         {
-          "answer": "Record what each person gives, whether obligations are explicit, how long the relationship persists after a need is met, and whether refusal remains possible without losing essential support.",
-          "question": "How should reciprocal alliances be evaluated here?"
+          "answer": "The number of relationships is not the criterion. A lively circle can support meals, shared resources, and comfortable life together; it can also support group identity or a particularly compelling connection. Ask what the relationships mean to the person and examine actual interactions rather than guessing their motives.",
+          "question": "How can a very sociable person still have a self-preservation focus?"
         },
         {
-          "answer": "If reliable housing, food, transport, and care sharply reduce practical option seeking and instrumental networking, the environmental explanation should gain weight over subtype.",
-          "question": "Which material change can disconfirm this subtype?"
+          "answer": "One quiet choice neither confirms nor disproves it. Repeated satisfaction with simple arrangements under stable resources and comparable responsibilities is more informative, especially when disappointment does not trigger another set of options. If that pattern persists, lower the interpretation's weight instead of invoking hidden instinct or repression to preserve it.",
+          "question": "Does sometimes wanting a quiet life disprove this interpretation?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "Type Seven core description",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/social",
-          "label": "instinctual_subtype:type-7/social",
+          "label": "Type Seven social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/social"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "instinctual_subtype:type-7/one-to-one",
+          "label": "Type Seven one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The tradition proposes that possibility attention may focus on supplies, useful contacts, comfortable arrangements, and practical routes around constraint. Treat this as a question about repeated function, not a conclusion from material success.",
-          "key": "traditional_hypothesis",
-          "title": "Frame resourceful option building as a tentative tradition"
+          "body_md": "A starting question for Type Seven is how to keep life worth anticipating without feeling trapped by deprivation, disappointment, or a situation with no exit. In the self-preservation interpretation, workable resources and living arrangements can provide that room: a comfortable base, several ways to get things done, and people with whom to enjoy life. The core motive remains satisfaction and freedom of choice; the attention moves toward the practical conditions that support them. The [Enneagram Institute's Type Seven description](https://www.enneagraminstitute.com/type-7/) supplies the traditional account of this core motive.\n\nConsider someone preparing a meal with friends. They check transport, arrange food, and think of something enjoyable to do afterward. That can make the evening easier for everyone. The informative part comes next: once the essentials are secure, can they enjoy the meal, or do they add another dish, activity, and alternative venue because the existing plan still feels insufficient?\n\nOne busy evening does not reveal a motive. Dietary requirements, access needs, and pickup arrangements may fully explain the planning. Establish what is necessary before interpreting the remaining urge to expand.",
+          "key": "enough_and_options",
+          "title": "When preparation does—and does not—bring relief"
         },
         {
-          "body_md": "Use two periods with similar duties but different access to money, food, housing, transport, and care. Ask whether alliance building and practical option expansion remain equally prominent once scarcity is reduced.",
-          "key": "matched_comparison",
-          "title": "Compare households after resources stabilize"
+          "body_md": "The [Narrative Enneagram's subtype description](https://www.narrativeenneagram.org/instinctual-subtypes/) places self-preservation Seven in abundant life with family and friends. Reducing it to stockpiling or cultivating useful contacts misses that shared enjoyment. Someone might bring people together over a meal, share tools and local knowledge, or quietly maintain a few reliable arrangements.\n\nUsed well, this approach gives people practical room to enjoy themselves. Resources are available, commitments are clear, and an unexpected problem need not cancel everything. Overused, the arrangements demand so much buying, coordinating, and promising that the comfortable life becomes harder to inhabit. Recipients may also be unsure whether an offer is a gift or carries an unspoken expectation of return.\n\nObserve what each addition actually solves, whose workload grows, and whether a refusal leaves the relationship and essential support intact. Warm hospitality does not establish instrumental intent; a small social circle does not rule out resource attention.",
+          "key": "circle_of_abundance",
+          "title": "A trusted circle can be about enjoyment as well as support"
         },
         {
-          "body_md": "Self-preservation here names a traditional attention lens for resources and continuity, not evidence about bodily mechanisms. Medical needs, disability access, and material danger require their own facts and qualified support.",
-          "key": "instinct_boundary",
-          "title": "Describe an attention convention rather than physiology"
+          "body_md": "Imagine friends organizing a weekend repair workshop. The venue cancels, the budget is halved, and one collaborator says they can attend for only two hours. These original examples compare possible attention patterns; they are not scripts everyone must follow.\n\n- A self-preservation Seven interpretation asks where to find usable space and tools so the day remains comfortable and enjoyable. An effective response finds a sufficient replacement. An overextended response keeps adding contacts, activities, and reciprocal favors rather than accepting a smaller event.\n- A social Seven interpretation asks what the workshop means for the group and how to preserve its shared purpose. An effective response renegotiates roles and promises. An overextended response takes on more work in the name of helping everyone.\n- A one-to-one Seven interpretation asks whether an exciting exchange with a particular collaborator could open a compelling new direction. An effective response agrees on a small experiment. An overextended response turns two hours of participation into an imagined long-term partnership.\n\nAll three people might make calls or enthusiastically offer help. Compare what captures attention first, which limit is difficult to accept, and what remains unfinished after the practical problem is solved. One person can care about all three domains.",
+          "key": "cancelled_venue",
+          "title": "What might each Seven try to rescue first?"
         },
         {
-          "body_md": "A person may look sociable, generous, or commercially agile while still tracking access and fallback routes. Conversely, private budgeting or a small trusted network may carry the same proposed function.",
-          "key": "countertype_variation",
-          "title": "Allow warmth and pragmatism to coexist with limits"
+          "body_md": "Six and Seven interpretations can both involve careful preparation and trusted contacts. Once a reliable arrangement is confirmed, does attention settle around knowing what is dependable, or move toward further worthwhile experiences and options? This is a question about function, not a rule that cautious people are Sixes and optimistic people are Sevens.\n\nA Two interpretation can resemble Seven in hospitality. If a friend no longer needs the help, what is harder to lose: the position of being needed, or the opportunity for enjoyable exchange and new possibilities? Both concerns can coexist. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer traditional distinctions, not substitutes for a person's account of an actual event.\n\nUnstable income, insecure housing, caregiving, migration requirements, or local mutual-aid practices may directly require multiple channels. If additional searching declines when access becomes reliable, give that explanation more weight. Repeated satisfaction with simple arrangements, without reopening options to bypass disappointment, also weakens this page's fit. Do not rename a mismatch as a deeply hidden subtype.",
+          "key": "other_reasons",
+          "title": "Backup plans can have other purposes"
         },
         {
-          "body_md": "Housing insecurity, food cost, chronic illness, dependent care, immigration rules, disaster preparation, and informal economies can make resources and alliances necessary. Do not psychologize adaptive provisioning.",
-          "key": "alternative_environment",
-          "title": "Put scarcity and care obligations ahead of subtype"
+          "body_md": "Choose a safe, inexpensive plan whose essentials are already covered, such as a meal with friends. Identify non-negotiable needs, choose one main arrangement and one genuinely necessary fallback, and record further ideas without immediately buying anything or promising more work.\n\nBefore, during, and after the event, note what you want to add, what concrete gap it would solve, and what disappointment you might otherwise have to acknowledge. Did leaving it out actually harm the experience? Track cost, coordination time, others' added work, and your own participation.\n\nDo not remove necessary food, medication, transport, access, or care provisions to test yourself. A collaborator can help by naming what is already sufficient and protecting a finishing point without dismissing your ideas.\n\nIf additions consistently answer real needs and stop once those needs are met, withdraw or reduce the explanation that expansion is avoiding a sense of constraint. If postponing extras repeatedly reveals that feeling, and you recognize their soothing function, the interpretation becomes more useful to explore. It still does not establish a subtype.",
+          "key": "finish_one_plan",
+          "title": "Let one adequate arrangement do its job"
         },
         {
-          "body_md": "Confidence falls when stable access sharply reduces deal seeking, stockpiling, comfort planning, or instrumental networking, especially if the person then prefers one simple route and accepts material limits without replacement plans.",
-          "key": "counterexample",
-          "title": "Test whether security reduces resource scanning"
-        },
-        {
-          "body_md": "Evidence from an instrument and sample cannot establish a universal subtype structure. This page offers a revisable observation exercise and cannot rank financial skill, health, resilience, generosity, or future security.",
-          "key": "evidence_boundary",
-          "title": "Keep ontology and cross-cultural claims closed"
-        },
-        {
-          "body_md": "Duration: 6\n\nContext: Compare one resource-tight day and one adequately supplied day within six days while holding the main household or work obligation as constant as possible.\n\nObservable signal: Log access to food, money, transport, care, comfort, useful contacts, promises exchanged, and the number of practical alternatives pursued.\n\nPage-specific signal: Test whether alliance and option building continue after essential access becomes reliably available.\n\nAlternative explanation: Review scarcity, housing risk, disability access, caregiving, migration status, disaster preparation, and local mutual-aid norms.\n\nReflection prompt: Name the resource change that best explains the behavior, then reduce the subtype interpretation if that explanation fits better.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Review scarcity, housing risk, disability access, caregiving, migration status, disaster preparation, and local mutual-aid norms.",
-            "context": "Compare one resource-tight day and one adequately supplied day within six days while holding the main household or work obligation as constant as possible.",
-            "duration_days": 6,
-            "observable_signal": "Log access to food, money, transport, care, comfort, useful contacts, promises exchanged, and the number of practical alternatives pursued.",
-            "page_specific_signal": "Test whether alliance and option building continue after essential access becomes reliably available.",
-            "reflection_prompt": "Name the resource change that best explains the behavior, then reduce the subtype interpretation if that explanation fits better."
-          },
-          "title": "Observation exercise"
+          "body_md": "The three instincts are traditional attention domains, not three kinds of people who lack the other two. Wings describe neighboring type influences; subtypes describe where a core motive is expressed. A second-highest score does not establish either one.\n\nNarrative one-to-one includes intimate partners, close friendships, and vitality. The [Enneagram Institute's sexual/attraction account](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction and stimulation. They overlap without being identical, and neither means only sex or romance. The twenty-seven combinations and labels such as countertype belong to teaching traditions, not established neural mechanisms or repeatable scientific diagnoses.\n\nThe [abstract of Hook and colleagues' 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence. This page does not validate FermatMind's forms, subtype scoring, or individual classification, and it does not rank financial skill, generosity, or future security.\n\nStart with the [Type Seven core description](/en/personality/enneagram/type-7) if the underlying motive is uncertain. Compare [social Seven](/en/personality/enneagram/type-7/instincts/social) if shared responsibility is the greater concern.",
+          "key": "scope_and_reading",
+          "title": "Keep the map proportionate to the evidence"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-7/instincts/self-preservation",
       "source_hash": "cb1a19d52f459ddcfb841ede9fcd6dda492acedea6bb34e10f9adcc17014ec20",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Seven self-preservation is a traditional, evidence-limited hypothesis combining Type Seven possibility with practical options, resources, comfort access, and reciprocal alliances. Networking or provisioning does not establish subtype because scarcity, caregiving, housing security, disability access, migration, and ordinary mutual aid can produce the same behavior.",
-      "title": "Type Seven self-preservation: a practical options, resources, and reciprocal alliance hypothesis"
+      "summary": "The self-preservation Seven interpretation places Type Seven's search for satisfaction and freedom of choice in resources, comfort, and life with a trusted circle. The useful question is not how much someone spends or saves, but whether an adequate arrangement lets them settle into the present or prompts another round of options and backup plans.",
+      "title": "Type 7 Self-Preservation: Making Room for Life, Then Letting Enough Be Enough"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6ff4612c19802531cefcf80a18f74eac31377f5f33b40bf776bd60ab818c479b"
+  "source_content_sha256": "18cd3166771b087d8abc107dbcf424972ac7bd6f0efca12a74fd5c5a04053d35"
 }

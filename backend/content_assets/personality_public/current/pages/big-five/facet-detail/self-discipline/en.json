@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/self-discipline",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "self-discipline",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. A label cannot identify motive, health, executive demands, workload, or context.",
-          "question": "Does weaker Self-Discipline mean laziness?"
+          "answer": "The facet cannot establish that judgment. Check whether the task was possible, whether the next step was clear, and whether the difficulty involved starting, continuing, or returning. Workload, missing skills, and health can also affect an unfinished task.",
+          "question": "Does weak Self-Discipline mean I am lazy?"
         },
         {
-          "answer": "Task design and follow-through habits can improve. This page does not promise a stable trait or score change.",
-          "question": "Can Self-Discipline improve through training?"
+          "answer": "Yes. Beginning and sustaining attention are different stages. Look at the uncertainty, discomfort, or competing activity before the first step rather than assuming that your concentration once underway explains the delayed start.",
+          "question": "Can I concentrate well but struggle to begin?"
         },
         {
-          "answer": "No. Persistence does not determine interests, spontaneity, humor, or lifestyle.",
-          "question": "Are highly self-disciplined people boring?"
+          "answer": "No. They show that action occurred under urgency in those tasks. Also check errors, lost sleep, compressed review time, and work transferred to others before deciding whether to keep that arrangement.",
+          "question": "Do productive deadline bursts prove that this is my best working style?"
         },
         {
-          "answer": "Habit makes behavior more automatic; Self-Discipline is relevant when intended action still meets friction.",
-          "question": "How is Self-Discipline different from habit?"
+          "answer": "Only the circumstances can tell you what happened. A useful task abandoned despite an available opportunity is different from an obsolete task stopped deliberately or a task blocked by missing resources.",
+          "question": "Is stopping a project evidence of poor discipline?"
         },
         {
-          "answer": "No. These are different dimensions and can combine in any pattern.",
-          "question": "Does Extraversion or Introversion determine Self-Discipline?"
+          "answer": "The immediate finding is that this task arrangement may help you begin. Record the intentional trial separately from ordinary behavior. A short improvement does not demonstrate a stable trait or score change.",
+          "question": "If a smaller first step works, has my personality changed?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Self-Discipline concerns starting intended tasks and persisting when novelty, pleasure, or immediate motivation declines. It is not moral worth, a universal reserve of willpower, an employment signal, or proof that someone is lazy.\n\n“Self-Discipline within Conscientiousness: starting and persisting through task friction” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Within the NEO/IPIP-NEO vocabulary used on this site, Self-Discipline is a facet of Conscientiousness. It concerns beginning intended work and continuing when the work becomes tedious or effortful. It does not require a strict lifestyle or a crowded schedule.\n\nA task gives you several different things to observe: whether you began, whether you continued relevant work, and whether you returned after an interruption. Starting slowly and then working steadily is different from starting immediately and leaving the final steps unfinished. A single label can hide that distinction.\n\nStronger, intermediate, and weaker tendencies describe positions along a continuum. They are not separate kinds of people. Nor does the facet establish the quality of your work, your capacity to concentrate, or how much responsibility you should receive.",
+          "heading": "Look at the journey from intention to action",
           "key": "section-01-ec756ac170",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "The relevant friction may be boredom, effort, delay, ambiguity, or competing reward. A stronger tendency more often continues despite that friction. A weaker tendency may need urgency, interest, accountability, or a smaller first step. Health, sleep, executive demands, depression, disability, and environment require separate consideration.",
-          "heading": "Precise Definition",
+          "body": "Before recording a delayed start, ask whether the next action was known and possible. A volunteer asked to organize audio recordings may still be waiting for permission to access the files. That is an unavailable task, not an observed failure to begin.\n\nWith access, adequate time, and a clear next step, repeatedly switching to unrelated activities offers a different clue. Notice what happens before the switch: uncertainty about the instructions, dislike of repetition, concern about errors, or a genuinely higher priority. These explanations need different responses.\n\nAttention during work is another question. Frequent requests can break an otherwise steady effort. A person may also stay at the desk while struggling to follow the material. Neither pattern, by itself, identifies a trait level or a clinical attention condition.\n\nFinally, check the finish line. If every completed section creates another unbounded revision, the task may be difficult to finish because its scope keeps changing. More persistence does not solve an undefined agreement.",
+          "heading": "Check whether the task was available to do",
           "key": "section-02-845371a51b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Self-Discipline belongs to [Conscientiousness](/en/personality/big-five/conscientiousness), supporting the execution side of intended behavior.",
-          "heading": "Parent Domain",
+          "body": "[Achievement Striving](/en/personality/big-five/facets/achievement-striving) concerns the standards you aim for. Self-Discipline concerns carrying intended steps forward. An ambitious goal can coexist with delayed action; a modest goal can receive consistent follow-through.\n\n[Competence](/en/personality/big-five/facets/competence) concerns perceived effectiveness, which is also distinct from demonstrated skill. Confidence about the work is not evidence that it was started or completed.\n\n[Deliberation](/en/personality/big-five/facets/deliberation) concerns checking before a choice. Still gathering necessary information is different from postponing action after the choice is settled.\n\n[Order](/en/personality/big-five/facets/order) concerns structure. An orderly system can make work easier to resume, but tidy surroundings do not establish persistence. A familiar routine may carry one task with little friction, so also notice what happens when that routine is unavailable.",
+          "heading": "Separate the goal, the plan, and the follow-through",
           "key": "section-03-94b297b9fd",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Self-Discipline versus Achievement Striving:** [Achievement Striving](/en/personality/big-five/facets/achievement-striving) sets ambitious standards; Self-Discipline carries steps through.\n- **Self-Discipline versus Order:** [Order](/en/personality/big-five/facets/order) structures materials and routines; persistence can be strong in a loose system.\n- **Self-Discipline versus habit:** Habit reduces decision and effort through repetition. Self-Discipline is most visible when automaticity is insufficient.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine that you have agreed to check the captions on six short community recordings. You begin two, then leave the rest untouched. The unfinished count alone tells little. Were the remaining recordings accessible? Did you know how to resolve an unclear word? Were you interrupted by another responsibility?\n\nSuppose the files and instructions were available, you had an ordinary free hour, and you repeatedly moved to unrelated browsing before opening the third recording. That is a usable observation of delayed action. If you opened it and stopped at unfamiliar terminology, seek the missing knowledge rather than calling the entire episode weak discipline.\n\nA stronger tendency might appear in starting without repeated prompts and returning to the remaining captions after a break. That may help the agreed work move forward, but accuracy still depends on listening and checking. A weaker tendency may make reminders more useful; it does not establish greater creativity or flexibility.\n\nIf the recordings no longer need captions, finishing them merely because you began is a separate decision about value. Stopping an obsolete task is not automatically a failure of follow-through.",
+          "heading": "An interrupted task does not explain itself",
           "key": "section-04-f718f4d43c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Self-Discipline may appear as beginning before urgency, continuing routine work, and returning after interruption. Weaker Self-Discipline may appear as delayed starts, abandoned maintenance, or strong performance only under deadline. Interest, clarity, reward design, workload, and support can change expression.",
-          "heading": "Behavioral Cues",
+          "body": "Test the wording of your working hypothesis against events that already happened. If it is “I never start dull tasks without pressure,” look for an unprompted occasion when you began a similarly dull, clear task with no new reward or technique. Naturally updating a list or sorting a small set of documents can challenge the word “never.”\n\nIf those tasks start easily while vague assignments stall, narrow the hypothesis to unclear work. If delayed starts recur when resources, time, and instructions are comparable, retain that specific pattern as something to investigate rather than declaring a fixed identity.\n\nKeep unavailable opportunities separate. A week dominated by care duties or inaccessible files provides little opportunity to observe ordinary follow-through. Set the broad hypothesis aside in that situation. “I did not find an exception in this review” is also different from proving that no exceptions exist.",
+          "heading": "Find an ordinary exception before making the claim broader",
           "key": "section-05-6953a7366d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may persist intensely in meaningful craft and stall on administration. Another may complete work through external structure but struggle alone. Compare tasks with similar importance and friction before generalizing.",
-          "heading": "Contextual Differences",
+          "body": "Choose a small, low-stakes recurring task. Observe a few occasions under your usual arrangements before changing them. Note whether there was a real opportunity to begin, what you actually did, what interrupted you, and whether you returned.\n\nThen change one feature, such as replacing “work on captions” with “open the next recording and check its first minute.” Keep other conditions reasonably similar and label these occasions as an intentional trial. Do not simultaneously add a timer, a reward, a new workspace, and accountability, then attribute the result to stronger Self-Discipline.\n\nFor both sets of observations, distinguish an available opportunity where the intended behavior did not happen, an unavailable opportunity, and an action that did happen. Record starting, returning, and finishing separately. An interruption that consumed the remaining time is not an opportunity to return that you declined.\n\nIf a clear first step helps, keep it as a useful task arrangement. If it does not, inspect missing skill, excessive scope, or competing responsibilities and reduce or renegotiate the work. Stop if the task is no longer needed. The trial evaluates a practical arrangement; it does not validate a personality interpretation or demonstrate trait change.",
+          "heading": "Try one change and keep two kinds of observations",
           "key": "section-06-84c31a726f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Starting at a planned time without waiting for mood.\n- Continuing through repetitive middle stages.\n- Resuming after a break or error.\n- Persisting with a goal after it loses value.\n- Treating rest as failure instead of part of execution.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) maps Self-Discipline to the NEO C5 facet. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) and the [Maples four-item set](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) differ in coverage, with the shorter set concentrating on starting work.\n\nThese materials concern similar constructs, not interchangeable instruments. The [BFI-2 authors' overview](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes fifteen facets, illustrating that thirty facets are not a universal Big Five inventory.\n\nCheck whether the version you completed actually reports Self-Discipline. A broad Conscientiousness result cannot supply an unreported facet score. A number on a hundred-point scale is not automatically a percentile, and published statistics for an IPIP instrument do not establish statistics for FermatMind.",
+          "heading": "What the tool sources support",
           "key": "section-07-a355fb0d50",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Needing urgency or novelty to begin.\n- Completing short interesting bursts but avoiding maintenance.\n- Benefiting from visible steps and accountability.\n- Switching tasks when friction rises.\n- Showing strong persistence in a narrow personally meaningful domain.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "For the standard you are pursuing, read [Achievement Striving](/en/personality/big-five/facets/achievement-striving). For perceived effectiveness, read [Competence](/en/personality/big-five/facets/competence). For checking before committing, read [Deliberation](/en/personality/big-five/facets/deliberation).\n\n[Order](/en/personality/big-five/facets/order) and [Dutifulness](/en/personality/big-five/facets/dutifulness) help distinguish arrangements and obligations from follow-through. Return to [Conscientiousness](/en/personality/big-five/conscientiousness) for the broader domain or the [30-facet guide](/en/personality/big-five/facets) to compare the vocabulary.",
+          "heading": "Read according to the part that needs clarification",
           "key": "section-08-36a920126b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Self-Discipline can support reliable execution and long projects. Possible costs include inflexibility, sunk-cost persistence, and inadequate recovery. Weaker Self-Discipline can permit rapid switching and responsiveness; possible costs include unfinished obligations and stress from deadline compression. Neither level proves character.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-5bf2a89af4",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A student uses a fifteen-minute start ritual and stops study at a planned bedtime. The system helps her continue without framing exhaustion as virtue. Her result reflects environment, strategy, skill, and the facet together.",
-          "heading": "An Original Case",
-          "key": "section-10-5efbb85cee",
-          "kind": "rich_text"
-        },
-        {
-          "body": "An entrepreneur works intensely on product ideas but repeatedly delays invoices. High persistence in one rewarding domain does not establish broad Self-Discipline, and administrative difficulty does not prove laziness.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-b001e279c2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which friction stops you most often: ambiguity, boredom, effort, or delayed reward?\n2. Do you begin from a plan, urgency, or current interest?\n3. How reliably do you resume after interruption?\n4. When has persistence outlived a goal’s value?\n5. Which environmental supports change follow-through?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-59014e59b6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one avoided task, define a five-minute first action, remove one distraction, and schedule a stop. Repeat for seven days and record starts and returns rather than judging identity. Escalate support when functioning or distress warrants it.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-6d09893d9f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Competence](/en/personality/big-five/facets/competence), [Order](/en/personality/big-five/facets/order), [Dutifulness](/en/personality/big-five/facets/dutifulness), [Achievement Striving](/en/personality/big-five/facets/achievement-striving), [Deliberation](/en/personality/big-five/facets/deliberation).",
-          "heading": "Continue Reading",
-          "key": "section-14-a8f3658a8f",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Self-Discipline describes a tendency to put intended tasks into action and continue them. Separate difficulty starting from interrupted attention, unclear instructions, and missing resources before deciding what to try.",
+        "title": "Self-Discipline: Getting Started, Staying With the Task, and Returning"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/self-discipline",
-      "source_hash": "0f8521dcc10c6b805bb3434df3d2c332f02705809438ab61cd8279ee7738f50a",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Self-Discipline concerns starting intended tasks and continuing when they become effortful or dull. It is not a moral measure, proof of willpower, or a diagnosis of laziness.",
-      "title": "Self-Discipline: Starting and Persisting Through Friction"
+      "source_hash": "8ccb0b93e2d69227f1e9f767f188fa078c1a4a4a938fca2121ba7c974d11d1f2",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Self-Discipline describes a tendency to put intended tasks into action and continue them. Separate difficulty starting from interrupted attention, unclear instructions, and missing resources before deciding what to try.",
+      "title": "Self-Discipline: Getting Started, Staying With the Task, and Returning"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "C5-self-discipline-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "C5-self-discipline-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "C5-self-discipline-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "C5-self-discipline-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "02c8cd64d2a8a1fe9c663c706195c74635641f191d9d191634507aec55add20b"
+  "source_content_sha256": "6435306ce51f791c033c8d9ec1102ed19693f32d33269d122fad7f496c6fd759"
 }

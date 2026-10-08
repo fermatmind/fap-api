@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-3/instincts/social",
@@ -23,94 +23,35 @@
       "entity_key": "type-3/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Pay, authority, safety, recognition of existing work, or limited career options may explain promotion seeking. Compare equal contributions under different titles and audiences.",
-          "question": "Does seeking promotion establish Social Type Three?"
+          "answer": "No. A promotion may bring needed pay, authority, security or acknowledgment of work already performed. Explore this explanation only when group recognition repeatedly carries the proposed pressure to prove your personal value beyond those practical stakes.",
+          "question": "Does wanting a promotion mean I am a social Three?"
         },
         {
-          "answer": "Changing title while holding contribution closer helps reveal whether rank itself changes attention. Sponsorship, power, and real compensation differences must still be recorded.",
-          "question": "Why rotate title in the comparison?"
+          "answer": "Yes, within this framework. Genuine commitment and a wish for recognition can coexist. Examine specific choices and consequences rather than assuming that service conceals manipulation. Accurate reporting, shared credit and sustainable contribution remain useful regardless of type.",
+          "question": "Can a social Three care sincerely about the group?"
         },
         {
-          "answer": "Stable private contribution without credit, challenging a group standard despite status loss, or rank concern confined to a promotion window would weaken it.",
-          "question": "What weakens the social-subtype hypothesis?"
+          "answer": "No. Being overlooked can be unfair and painful for anyone. Look at comparable episodes, what the omission means to you and what changes after fair acknowledgment is restored. A single emotional reaction does not identify a core type or instinct.",
+          "question": "Does feeling hurt when overlooked establish the subtype?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "Type Three: achievement and self-worth",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/self-preservation",
-          "label": "instinctual_subtype:type-3/self-preservation",
+          "label": "Self-preservation Type Three",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-3/instincts/one-to-one",
-          "label": "instinctual_subtype:type-3/one-to-one",
+          "label": "One-to-one Type Three",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The traditional description proposes that Type Three result attention may track position, contribution, and what a group recognizes. It does not establish a social cause or make hierarchy a permanent trait.",
-          "key": "traditional_hypothesis",
-          "title": "Treat rank attention as a traditional hypothesis"
+          "body_md": "The traditional [Type Three account](https://www.enneagraminstitute.com/type-3/) connects achievement with feeling valuable. In a social Three interpretation, the relevant audience is often a group, institution or community whose standards matter to you. The [Narrative subtype description](https://www.narrativeenneagram.org/instinctual-subtypes/) emphasizes prestige and social approval.\n\nThis need not mean liking every party or seeking the most glamorous title. A group may prize technical expertise, public service, academic distinction or moral commitment. The question is whether being seen as an exemplary contributor becomes necessary for feeling that you count.\n\nAttention to group expectations can help you explain a project clearly, connect people and represent shared work. It becomes restrictive if other people's definition of an impressive contribution repeatedly overrides your own judgment.",
+          "key": "recognized_value",
+          "title": "Whose recognition makes an achievement count?"
         },
         {
-          "body_md": "Compare equal contributions under a named leadership title, anonymous collaboration, and public representation. Record effort, credit claims, standard-setting, and response when the title rotates to another person.",
-          "key": "matched_comparison",
-          "title": "Match contribution while changing title and audience"
+          "body_md": "Imagine a volunteer group running a repair day for local residents. The event meets its practical goals, but the public thank-you names another organizer and overlooks your contribution.\n\nA social Three interpretation is worth exploring if your attention quickly turns to who saw the work, whether the omission changes your standing and how to restore a valued role. You might improve the next report, seek a representative position or become unusually discouraged despite the event's success.\n\nA self-preservation Three interpretation might place more weight on whether costs were covered, equipment remained usable and you proved that the event could run reliably. A one-to-one Three interpretation might place more weight on whether a particular collaborator admired you and whether the partnership felt compelling. All three could correct the omission; the meaning of the correction is what differs.\n\nFair credit also has practical consequences. Correcting an inaccurate report is not evidence of vanity. Record what is actually at stake: future access, payment, responsibility, exclusion or simply the wish to be appreciated.",
+          "key": "recognition_in_a_group",
+          "title": "A team succeeds, but somebody else receives the recognition"
         },
         {
-          "body_md": "Social subtype language organizes observations about audience, rank, and group standards. It is not evidence about bodily mechanisms, a universal hierarchy drive, or a category that determines conduct.",
-          "key": "instinct_boundary",
-          "title": "Keep social language observational"
+          "body_md": "Consider the process after an invitation to speak for the group. You notice the audience's expectations, shape a clear account and help others understand why the work matters. That can serve the whole project.\n\nOveruse might look like changing the account to sound more impressive, delaying disclosure of an ordinary setback or spending more time polishing public recognition than helping the people the event was intended to serve. Another cost is agreeing to an admired role that leaves no room for your actual interests or capacity.\n\nThese are possible patterns, not accusations attached to the subtype. To examine one, compare the original task, the expected audience, your changes and their effects. Did a change improve communication, or mainly protect your standing at the expense of accuracy or workload?\n\nA quiet person can be highly attentive to recognition in a small professional circle. An outgoing person may simply enjoy company. Social emphasis is not an extraversion score.",
+          "key": "representation_and_overuse",
+          "title": "Representing the group without turning every contribution into an audition"
         },
         {
-          "body_md": "A person may frame ambition as protecting the team's reputation or meeting a shared standard. That less self-advertising variation still requires comparison with genuine duty, solidarity, and institutional accountability.",
-          "key": "countertype_variation",
-          "title": "Allow service to the group to mask visibility"
+          "body_md": "Promotion rules, unequal pay, discrimination and responsibility for representing others can make visibility necessary. Concern about being overlooked may be a response to a real loss of opportunity. Do not ask someone to surrender deserved credit as a personality experiment.\n\nUse naturally occurring comparisons: a task with fair acknowledgment but no prestigious title, or a similar contribution after a representative role rotates. Notice effort, private disappointment, choices about standards and the actual consequences of the change.\n\nThe explanation gains relevance if recognition repeatedly becomes a verdict on your personal worth even when access, pay and responsibility are protected. It weakens if concern is confined to a specific institutional threat and fades when the inequity is corrected. If comparable episodes consistently center on material continuity or a particular person's admiration, reconsider the proposed instinctual emphasis.\n\nSteady work without public credit does not automatically disprove social Three. Flexible behavior is possible. What would challenge the explanation more directly is repeated evidence that group recognition neither organizes your choices nor carries the proposed self-worth pressure. Do not reinterpret every contrary observation as concealed status-seeking.\n\nWhen core type is uncertain, the [Narrative comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer other questions: are you trying to be recognized for achievement, to become personally needed, or to establish dependable rules and support? Similar leadership or helpfulness can serve different purposes.",
+          "key": "context_and_disconfirmation",
+          "title": "Check the institution before interpreting the person"
         },
         {
-          "body_md": "Formal hierarchy, representation duty, sponsorship, discrimination, scarce promotion slots, and public accountability change how rank is handled. Record who can refuse visibility and who bears the cost of being overlooked.",
-          "key": "alternative_environment",
-          "title": "Test promotion rules and unequal power"
+          "body_md": "For one low-stakes contribution, write down what would make it useful before deciding how to present it. Preserve accurate credit. Include one criterion you personally value, such as clarity, access or completing a neglected practical detail.\n\nIf a willing colleague takes the public presentation, agree on responsibilities and acknowledgment first. Afterwards, note both the result and your reaction. Did you want a correction because the record was wrong, because a real opportunity was threatened, or because being outside the spotlight made the work feel worthless? More than one reason may apply.\n\nSupport can include transparent credit, shared representation and permission to decline a prestigious task. It should not require giving up income, access or protection. Stop the experiment if the arrangement creates those costs.",
+          "key": "fair_credit_experiment",
+          "title": "Keep fair credit and choose one contribution on your own terms"
         },
         {
-          "body_md": "The hypothesis weakens when contribution remains unchanged after title and credit disappear, group standards are challenged despite status cost, or rank concern appears only during a formal promotion cycle.",
-          "key": "counterexample",
-          "title": "Use rotating status and private contribution as tests"
-        },
-        {
-          "body_md": "Instrument-specific findings do not establish universal subtypes. This page cannot predict leadership, promotion, influence, group loyalty, employability, or social value.",
-          "key": "evidence_boundary",
-          "title": "Keep rank observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose one named leadership task, one anonymous group contribution, and one situation where a title rotates.\n\nObservable signal: Record contribution, decision authority, audience, credit, compensation, group standard, refusal cost, and behavior after rotation.\n\nPage-specific signal: Compare whether the same work changes meaning when rank and public recognition change.\n\nAlternative explanation: Compare promotion rules, representation duty, sponsorship, discrimination, solidarity, and unequal power.\n\nReflection prompt: Identify the event where institutional incentives explain rank attention better than subtype.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare promotion rules, representation duty, sponsorship, discrimination, solidarity, and unequal power.",
-            "context": "Choose one named leadership task, one anonymous group contribution, and one situation where a title rotates.",
-            "duration_days": 5,
-            "observable_signal": "Record contribution, decision authority, audience, credit, compensation, group standard, refusal cost, and behavior after rotation.",
-            "page_specific_signal": "Compare whether the same work changes meaning when rank and public recognition change.",
-            "reflection_prompt": "Identify the event where institutional incentives explain rank attention better than subtype."
-          },
-          "title": "Observation exercise"
+          "body_md": "The three instincts are overlapping concerns within the traditional model, not three kinds of people who lack the other needs. Wings and instincts answer different questions: a Three's possible Two or Four wing does not specify where instinctual attention falls. A second-highest type score, profession or guessed celebrity type cannot establish this subtype.\n\nSchool language differs. Narrative's one-to-one includes close partnerships and vitality; the Enneagram Institute's sexual/attraction foregrounds attraction and intensity. Their meanings overlap rather than match exactly, and extend beyond sex or romance. The [Enneagram Institute overview](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) explains its usage.\n\nThe 27 subtypes and terms such as countertype belong to theoretical traditions. They do not establish a scientific diagnosis or neural mechanism. The [Hook review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed evidence across 104 samples; it does not validate FermatMind scores or this subtype. Research about a particular inventory would require its own sample and instrument limits.\n\nRead [Type Three](/en/personality/enneagram/type-3) for the core motivation, then compare [self-preservation Three](/en/personality/enneagram/type-3/instincts/self-preservation) and [one-to-one Three](/en/personality/enneagram/type-3/instincts/one-to-one).",
+          "key": "scope_and_reading",
+          "title": "What this explanation can and cannot establish"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-3/instincts/social",
       "source_hash": "91b0afe7ea941a93c46f12399d7c7fdf0300ab23c85b1590658a4585dc6bca28",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Social Type Three is a traditional, evidence-limited hypothesis that achievement attention may be expressed through rank, recognized contribution, and the standards of a valued group. Public leadership cannot establish subtype because hierarchy, promotion rules, representation duties, and unequal power can produce the same behavior.",
-      "title": "Social Type Three: rank and group standards as a matched-comparison hypothesis"
+      "summary": "This traditional subtype description asks how group recognition, reputation and position can carry Type Three's search for value. It concerns whose standards define success, rather than how outgoing, ambitious or publicly visible you are.",
+      "title": "Social Type Three: achievement in the eyes of a valued group"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "dbc3906a843a99c9e2da1d5d2d12277f2a927b1cc1305fd0362cf00060f0bad6"
+  "source_content_sha256": "79f88e2a70ba04028288b8315941b7fa4a5542bb6bbedcf14804a3e223e6a9ee"
 }

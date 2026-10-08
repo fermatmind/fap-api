@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/conscientiousness-high",
@@ -20,30 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "conscientiousness-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. The range concerns several planning and follow-through tendencies. Perfectionistic behavior has additional possible causes and cannot be inferred from one score.",
-          "question": "Is high Conscientiousness the same as perfectionism?"
+          "answer": "No. A broad result does not establish how you react to mistakes, whether your standards can be revised, or whether they cause distress. Those questions require separate evidence.",
+          "question": "Does a high result mean I am a perfectionist?"
         },
         {
-          "answer": "It may create friction, or your planning may provide useful structure. Fit depends on autonomy, expectations, tools, and how flexibly you adapt systems.",
-          "question": "Will a loosely structured workplace be difficult?"
+          "answer": "Identify where progress stops. Missing information, competing demands, an unclear first step, or concern about making an error can each matter. A high result permits exceptions and does not identify the cause of a particular delay.",
+          "question": "Why do I still put off some tasks?"
         },
         {
-          "answer": "Very high standards, ambiguous criteria, emotion, or overload can delay initiation. A broad score does not explain one behavior by itself.",
-          "question": "Why do some highly conscientious people procrastinate?"
+          "answer": "That cannot be predicted from the range. Check whether responsibilities and handoffs are clear, and whether you can create useful records without burdening colleagues. Try one agreed update point and assess the actual friction.",
+          "question": "Will I struggle in a workplace with few formal processes?"
         },
         {
-          "answer": "It cannot predict one person’s success or job fit. Outcomes also depend on skill, opportunity, health, resources, goals, and the work environment.",
-          "question": "How is high Conscientiousness related to career success?"
+          "answer": "The score cannot establish management ability. Decisions, communication, delegation, relevant expertise, and results need direct assessment. Planning habits are only one part of understanding how someone works.",
+          "question": "Does high Conscientiousness make me a good manager?"
+        },
+        {
+          "answer": "A trait label does not need to be your action target. If one behavior is costly, adjust that behavior in a low-stakes setting and review the consequences. Useful preparation and required checks can remain.",
+          "question": "Should I deliberately become less conscientious?"
         }
       ],
       "framework": "big_five",
@@ -79,163 +76,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "High Conscientiousness may suggest a recurring preference for planning ahead, sustaining effort, tracking obligations, and creating order. These tendencies can support dependable execution. They can also become expensive when standards stay high after the task no longer justifies them.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “High Conscientiousness: advance planning, sustained execution, and preference for order” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Conscientiousness concerns your usual approach to organizing action and pursuing commitments. A higher position can describe a recurring tendency to prepare, keep track of unfinished work, and continue with tasks after the initial interest has faded. It does not require you to be organized in every setting or to finish every task early.\n\nConsider the difference between maintaining a plan and producing a good result. A detailed plan may use incorrect information. Persistent practice may still need better instruction. To understand your approach, examine repeated behavior; to assess competence, examine relevant skills, work, and outcomes.",
+          "heading": "What a higher position describes",
           "key": "section-01-987ff543a9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may externalize commitments, begin before urgency peaks, persist through routine phases, and notice disorder or unfinished work quickly. The pattern can arise from different [Conscientiousness facets](/en/personality/big-five/conscientiousness), so Order, Achievement Striving, and Self-Discipline may not align.",
-          "heading": "What This Range Specifically Means",
+          "body": "Read the instrument name, version, score format, and explanation of the range. A raw score, a score rescaled to 0–100, and a percentile mean different things. A percentile requires an identified reference population, language, sample, and conversion method. A number such as 80 does not establish an 80th percentile by itself.\n\nIf your result sits close to a range boundary, the adjacent label should not be treated as a different kind of person. When thresholds or uncertainty information are unavailable, keep the interpretation broad rather than assigning a precise rank. Also note whether you answered with your regular life, a demanding role, or an unusual recent period in mind.\n\nThe [IPIP guide to personality measures](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) describes multiple inventories. Evidence for one inventory does not automatically validate another inventory or your individual result.",
+          "heading": "Check the score before making comparisons",
           "key": "section-02-e487aa4c93",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not establish competence, intelligence, morality, perfectionism, or future success. A person can execute a poor goal consistently, lack role-specific skill, or overinvest in low-value details. Hiring and performance decisions require direct evidence.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "This site's NEO/IPIP-NEO vocabulary distinguishes Self-Efficacy, Orderliness, Dutifulness, Achievement Striving, Self-Discipline, and Cautiousness. These names identify narrower questions, not six scores that can be reconstructed from a broad result. Their relationship to NEO terminology is documented in the [official comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm).\n\nYou might keep promises while leaving your personal files untidy. You might set ambitious goals but find the first step difficult. Self-Efficacy concerns a person's view of handling tasks; it is not an objective demonstration of skill. If your report does not measure or show a facet, use the vocabulary to ask a question rather than to assign yourself a result.\n\nLikewise, following a procedure does not establish its motive. It may reflect a preference, a role requirement, or a response to a previous mistake.",
+          "heading": "Separate the parts of being conscientious",
           "key": "section-03-e6f6b12c40",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include calendars, checklists, early preparation, documented handoffs, clear standards, and deliberate risk review. You may feel uneasy when responsibilities remain ambiguous. In a flexible environment, you may build a private structure rather than wait for one.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Imagine preparing a volunteer rota for a small community event. Names, time slots, and contact details have been checked. You then keep rearranging the layout and rechecking unchanged entries, delaying its distribution. This is an illustrative situation, not an outcome expected from a high score.\n\nThe question is which edits still serve the rota. Correcting a wrong time matters. Improving a confusing layout may matter. A fifth change to a preferred heading style may add little. If the event schedule changes, the priority becomes updating the facts, even if that means abandoning a carefully prepared version.\n\nExtra review can also reflect unclear approval rules or worry after an earlier error. Record your own reported feelings separately from the editing behavior. Neither repeated editing nor a high score establishes anxiety or perfectionism. Coordination works only if others receive usable information when they need it; the amount of preparation alone does not establish reliability.",
+          "heading": "A practical tension: completing the requirement or extending it",
           "key": "section-04-0fee883b1e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Work may activate strong planning because consequences are visible, while home routines stay relaxed. A meaningful goal may draw persistence that administration does not. Stress can intensify checking or, under overload, temporarily break the very systems you usually rely on.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Start with a narrow working idea: 'After a low-stakes schedule meets its agreed requirements, I often continue reviewing it.' Look at comparable schedules rather than unrelated occasions when you were relaxed.\n\nA natural exception occurs when the requirements are already met, you have a real opportunity to continue, and you send the schedule without further review. A day with no schedule to prepare is not an exception. Neither is an unfinished draft whose facts still need checking. If you cannot recall a contrary instance, record that you have not found one yet.\n\nOne exception can coexist with 'often.' Repeated extra reviews under similar conditions may justify retaining the working idea. If the pattern appears only when responsibilities are disputed, narrow it to that situation. If you cannot identify when the requirement was met, suspend the idea until that is clearer. A new stopping rule creates a changed condition and belongs in a separate record.",
+          "heading": "Look for natural exceptions to the same pattern",
           "key": "section-05-8c925a28d7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include preparation, consistency, reliable closure, anticipation of consequences, and continuity across long tasks. These are tendencies rather than verified performance. They help when priorities are sound and effort is matched to the real cost of error.",
-          "heading": "Possible Strengths",
+          "body": "For a reversible, low-stakes document, specify the information that must be correct, the reader's next action, and any required approval. First observe your ordinary process. Record edits made after those conditions are satisfied, what each edit fixes, and how long it takes. Note discomfort directly if you experience it.\n\nOn a later comparable document, try stopping optional polishing once the agreed requirements are met. Keep required checks and a way to correct errors. Do not reduce checks for safety, medical decisions, payments, or obligations set by your role. Mark this occasion as an intentional trial.\n\nReview usability, meaningful corrections, time cost, and rework. Keep checks that repeatedly catch relevant errors. Restrict cosmetic work if it consumes time without serving the reader. If the documents differ substantially or there were too few opportunities, leave the conclusion open. This can inform a task-specific habit; it cannot verify a personality trait or show that your score has changed.",
+          "heading": "Try a stopping rule without treating it as a personality test",
           "key": "section-06-25c01ee0fe",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Costs may include rigid plans, excessive checking, difficulty delegating, guilt during rest, or treating every request as an obligation. High standards can also delay starting when an imperfect first version feels unacceptable.",
-          "heading": "Possible Costs",
+          "body": "The [middle](/en/personality/big-five/conscientiousness-mid) and [lower](/en/personality/big-five/conscientiousness-low) positions are descriptions along the same dimension. Middle does not guarantee well-calibrated effort, lower does not guarantee improvisational skill, and higher does not guarantee accuracy. Compare the same instrument and similar tasks, including the support available to each person.\n\nRead the [Conscientiousness guide](/en/personality/big-five/conscientiousness) for the whole dimension or the [facet guide](/en/personality/big-five/facets) when a broad description misses an important distinction.\n\nIf checking, worry, or difficulty disengaging causes persistent distress or disrupts daily life, seek assessment from a qualified professional. The [NIMH guide to getting help](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) focuses on symptoms and their impact. A personality label cannot replace that assessment.",
+          "heading": "Compare positions without ranking people",
           "key": "section-07-eeeee6e74d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [mid-range Conscientiousness](/en/personality/big-five/conscientiousness-mid), structure may appear more consistently. Compared with [low Conscientiousness](/en/personality/big-five/conscientiousness-low), advance coordination may feel more natural than improvisation. These are not capability levels.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-89440e7dcd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You receive a two-week project. Within an hour you define milestones, dependencies, review points, and a buffer. The system protects delivery. The trade-off appears when requirements change: preserving the original plan can become less responsible than revising it.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-953a88da8c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may plan work carefully and still postpone a personally important task. Emotion, ambiguity, or perfectionistic standards can interfere with initiation. One behavior should not be used to label the entire person.",
-          "heading": "A Counterexample",
-          "key": "section-10-9b28d2394f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which standards truly protect quality?\n- When does checking stop adding value?\n- What do you keep carrying after it should be renegotiated?\n- Which facets drive your broad result?\n- When has revising a plan improved the outcome?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-87f0dbb204",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Select one low-stakes task and define a good-enough threshold plus a stopping time. Deliver at that point and record the actual consequences. The experiment tests whether calibrated effort preserves quality while reducing unnecessary control.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-d4efcb1b12",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness), compare [mid-range](/en/personality/big-five/conscientiousness-mid) and [low Conscientiousness](/en/personality/big-five/conscientiousness-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-fc552a8946",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A higher Conscientiousness result concerns a stronger pattern of organization and follow-through. It does not establish competence or success. The useful question is how your preparation serves a particular task, including what happens after the agreed requirements are met.",
+        "title": "High Conscientiousness: Planning, Follow-Through, and Knowing When to Stop"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/conscientiousness-high",
-      "source_hash": "7729597b59b2608fbc410363afe3f8453ac66cec0fc77022a981c9c66790d072",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "High Conscientiousness may suggest advance planning, sustained execution, and preference for order. It is not perfectionism, ability, virtue, or guaranteed success.",
-      "title": "High Conscientiousness: Planning and Sustained Execution"
+      "source_hash": "302e750d5710778034ab43f3c13360cc2788f800fd8f400fe12390e5b67ab66c",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A higher Conscientiousness result concerns a stronger pattern of organization and follow-through. It does not establish competence or success. The useful question is how your preparation serves a particular task, including what happens after the agreed requirements are met.",
+      "title": "High Conscientiousness: Planning, Follow-Through, and Knowing When to Stop"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "conscientiousness-high-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, ability, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "conscientiousness-high-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "conscientiousness-high-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "conscientiousness-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "625d8459aed91c4ac8f37d18a48f2f5190b5c5251f2287d57084dec9ae24bef2"
+  "source_content_sha256": "cb73a2a84cfc91b53c4f32d77659b60a14fa0215b7714914235534bfe7f09f61"
 }

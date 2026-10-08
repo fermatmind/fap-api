@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/modesty",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "modesty",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Internal self-evaluation and public status presentation are distinct.",
-          "question": "Does strong Modesty mean low self-esteem?"
+          "answer": "It does not establish low self-esteem. The facet includes self-evaluation content but is not an assessment of overall worth. Understand the person's own evaluation, actual presentation, and situational pressures separately.",
+          "question": "Does stronger Modesty mean low self-esteem?"
         },
         {
-          "answer": "No. Accurate self-advocacy is not boastfulness; judge proportionality and evidence.",
-          "question": "Is weaker Modesty the same as boasting?"
+          "answer": "No. Check accuracy, relevance, and proportional credit. A portfolio review or handover may require an explicit account of personal responsibility. Volunteering that information alone does not decide whether the presentation was excessive.",
+          "question": "Is talking about an achievement necessarily boasting?"
         },
         {
-          "answer": "Substantially in expression and consequences, but this package provides no individual cultural adjustment.",
-          "question": "How much does culture affect judgments of Modesty?"
+          "answer": "Name the task, your actions, relevant evidence, and collaborators' roles. Avoid both minimizing documented responsibility and claiming the entire shared result. Help the interviewer understand the evidence rather than trying to perform a trait label.",
+          "question": "How can I describe my work in an interview?"
         },
         {
-          "answer": "Describe specific actions, evidence, outcomes, and shared contributions accurately.",
-          "question": "How can a modest person handle an interview?"
+          "answer": "Yes, as one explanation to examine. Compare similar discussions across actual settings and note your expectations about reactions. Nationality, a polite phrase, or one quiet conversation cannot establish a stable tendency.",
+          "question": "Could my reserve reflect local expectations?"
         },
         {
-          "answer": "Humility is often used as a broader moral or epistemic ideal. This facet narrowly describes self-presentation tendency.",
-          "question": "How is Modesty different from humility?"
+          "answer": "No. Capability requires evidence from relevant tasks and performance. A facet description or a short record of contribution discussions cannot replace that evidence.",
+          "question": "Can Modesty tell me how capable I am?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Modesty concerns restraint in claiming status, importance, superiority, or special credit. It is not low self-esteem, low ability, lack of ambition, virtue, invisibility, or refusal to describe real contributions.\n\n“Modesty within Agreeableness: restraint in self-presentation and status claims” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Modesty concerns emphasizing personal importance, status, achievements, or superiority. In the NEO/IPIP-NEO vocabulary used on this site, it belongs to Agreeableness.\n\nIt is too narrow to define it solely as public presentation. The [official IPIP items](https://ipip.ori.org/newNEOFacetsKey.htm) include both presentation and self-evaluation. A preference not to discuss achievements therefore does not tell the whole story.\n\nA stronger tendency may involve less emphasis on personal distinction. A weaker tendency may involve more emphasis on one's standing or recognition. Neither establishes whether an achievement is real, a skill is strong, or a person deserves admiration. These are continuous tendencies; a middle position is not a special type that automatically combines reserve with effective self-promotion.",
+          "heading": "More than a preference to stay quiet",
           "key": "section-01-57c495676f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may downplay distinction and emphasize collective contribution. A weaker tendency may state achievements and status more readily. Accuracy, fairness, audience, and cultural context determine whether either presentation is useful.",
-          "heading": "Precise Definition",
+          "body": "Overall self-esteem concerns a person's evaluation of their worth. Competence requires evidence from relevant tasks. Self-presentation concerns what they communicate about themselves in a setting. These questions can be related, but they cannot substitute for one another.\n\nSomeone can acknowledge doing difficult work without presenting it as proof of superiority. Someone else can repeatedly mention achievements while privately doubting their worth. The latter interpretation needs the person's account or other suitable evidence; visible self-promotion alone cannot establish it.\n\nReserve does not prove a lack of expertise, and confident presentation does not prove expertise. If you need to know whether someone can do a job, examine relevant work and performance. Likewise, silence may reflect discomfort, a lack of opportunity, or a preference not to stand out. Do not select a motive from the silence itself.",
+          "heading": "Separate worth, competence, and what was said",
           "key": "section-02-ac9506904f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Modesty belongs to [Agreeableness](/en/personality/big-five/agreeableness), reflecting how status is presented in interpersonal space.",
-          "heading": "Parent Domain",
+          "body": "A portfolio review may require an exact account of personal responsibility. A celebration may invite shared recognition. Saying “we” can accurately describe joint work or hide an important individual role; saying “I” can accurately name responsibility or omit collaborators. The pronoun does not decide the interpretation.\n\nTeams and social groups differ in their expectations about praise and visibility. Check the actual setting rather than assigning a person the conventions associated with their nationality. Ask what information the audience needed and what consequences the speaker anticipated.\n\nRejecting every compliment, minimizing real work, or remaining silent is not a universal ideal. Accurate credit is a more useful communication goal than trying to appear maximally modest.",
+          "heading": "The audience changes the task",
           "key": "section-03-de455caabc",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Modesty versus self-esteem:** Internal evaluation and public presentation are different.\n- **Modesty versus Achievement Striving:** Ambition can be strong while self-promotion remains restrained.\n- **Modesty versus honesty:** Underclaiming can be as inaccurate as exaggeration.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Try a focused hypothesis: “When peers ask about my contribution to a finished project, I usually describe my role as smaller than the project records show.”\n\nIn an invented example, Jordan created the sound design for a short film while another collaborator edited it. In several peer discussions, Jordan describes the work as “a little help with audio” and leaves out the sound-design responsibility. The credits and files support the observation that the role was minimized. They do not establish the motive: reserve, fear of appearing boastful, group conventions, and difficulty describing the work remain alternatives.\n\nA natural counterexample occurs in another ordinary peer discussion, without a credit dispute or a prepared script, when Jordan accurately states the sound-design role and acknowledges the editor. The same opportunity existed, but minimization did not occur. One event can coexist with “usually”; recurring comparable examples should change the explanation.\n\nA gathering where nobody asks about the project is not an opportunity of the same kind. Correcting a mistaken credit is worth recording too, but it has a different immediate task from a routine portfolio discussion.",
+          "heading": "A portfolio example that can be challenged",
           "key": "section-04-c1528eb29b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Modesty may appear as redirecting praise, avoiding status display, or using “we” for shared work. Weaker tendency may appear as naming accomplishments, negotiating visibility, or enjoying recognition. Culture, gender norms, discrimination, and job incentives strongly affect consequences.",
-          "heading": "Behavioral Cues",
+          "body": "For natural contribution discussions, record the question, the documented division of work, the actual description, and constraints such as time or audience expectations. Record your own thoughts separately if you noticed them. Without that information, do not infer self-worth from wording.\n\nDistinguish an opportunity with minimization, an opportunity without it, and no comparable opportunity. Having found no counterexample is an information gap, not proof that there are none. Posting little online or producing excellent work does not replace evidence about this target behavior.\n\nRetain the local hypothesis provisionally if comparable discussions repeatedly show minimization and alternatives remain insufficient. Narrow it if the pattern appears only with one audience. Set it aside if the role or wording is unclear. Revise it if repeated opportunities produce accurate accounts. This exercise can clarify a communication habit; it cannot validate a trait or measure self-esteem.",
+          "heading": "Observe a pattern without turning it into a verdict",
           "key": "section-05-33c833a91a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A person may be modest socially and precise in a résumé. Some environments punish self-promotion; others make invisible work easy to overlook. Observed style does not establish inner worth.",
-          "heading": "Contextual Differences",
+          "body": "For a deliberate practice attempt, choose a safe occasion where the audience needs to know your role. Prepare what you did, the evidence, and what collaborators did. For example: “I designed and mixed the audio; these files show the revisions. Morgan handled the edit.” The aim is accurate information, not a more impressive persona.\n\nCheck whether the listener can identify the division of work and whether you omitted or inflated anyone's contribution. Their praise is not the sole success criterion, and a lack of praise does not assess your worth.\n\nMark this as prepared practice and keep it separate from natural discussions. If your concern is repeatedly redirecting conversations toward yourself, first identify the audience's actual question and give only the relevant account. Neither a prepared description nor a deliberate pause demonstrates personality change.",
+          "heading": "Make one contribution legible",
           "key": "section-06-b59adce3ff",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Sharing credit readily.\n- Avoiding superiority claims.\n- Keeping accomplishments private.\n- Losing opportunities because evidence is omitted.\n- Downplaying expertise that others need to identify.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) includes Modesty alongside NEO Modesty. A shared label does not make instruments interchangeable, and everyday humility can carry broader meanings.\n\nThis page uses the site's Agreeableness vocabulary. It does not establish a separately measured Modesty result. Check the assessment's actual outputs and score explanation rather than deriving the facet from a domain score or assuming percentages are percentiles.\n\nRead [Agreeableness](/en/personality/big-five/agreeableness) for the broader dimension and the [30-facet guide](/en/personality/big-five/facets) for the descriptive structure. For accurate and nonmisleading communication, continue with [Straightforwardness](/en/personality/big-five/facets/straightforwardness). For responding to disagreement about your needs, see [Compliance](/en/personality/big-five/facets/compliance).",
+          "heading": "The facet name and where to go next",
           "key": "section-07-1cddc7762a",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Naming achievements and status directly.\n- Advocating for recognition.\n- Making contribution legible.\n- Claiming disproportionate credit.\n- Turning comparison into a recurring interaction.",
-          "heading": "Possible Expressions When Weaker",
-          "key": "section-08-ae6e05df19",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Modesty can support shared status and reduce competition. Possible costs include underrecognition and inaccurate self-presentation. Weaker Modesty can support visibility and negotiation; possible costs include boastfulness or credit conflict. Neither level measures worth.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-b721215a46",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A researcher describes her exact contribution, credits collaborators, and provides evidence in an interview. Accurate self-advocacy does not require abandoning Modesty.",
-          "heading": "An Original Case",
-          "key": "section-10-ba8290d83b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A frequent self-promoter privately doubts his value. Visible status claims do not establish high self-esteem.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-862d0a8ea2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Do you describe contributions accurately or minimize them?\n2. How do you divide shared credit?\n3. Which audience needs evidence of your work?\n4. When does recognition become comparison?\n5. Which cultural rules shape your self-presentation?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-8fcd9e318f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Write a three-sentence account of one contribution: action, evidence, and collaborator credit. Practice saying it without apology or inflation.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-6fc1fab3ad",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Trust](/en/personality/big-five/facets/trust), [Straightforwardness](/en/personality/big-five/facets/straightforwardness), [Altruism](/en/personality/big-five/facets/altruism), [Compliance](/en/personality/big-five/facets/compliance), [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness).",
-          "heading": "Continue Reading",
-          "key": "section-14-6333c180cd",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Modesty concerns how someone views and emphasizes their own importance and achievements. Understand it without confusing reserve with low self-worth, competence, or the rules of a particular setting.",
+        "title": "Modesty: Self-Presentation, Self-Evaluation, and Real Credit"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/modesty",
-      "source_hash": "fed11ef849304e530237016c5c8c1253291559edd7ff0bee6da10d54d0f2bedc",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Modesty concerns restraint in claiming status, importance, or special credit. It is not low self-esteem, low ability, lack of ambition, or a moral certificate.",
-      "title": "Modesty: Restraint in Self-Presentation"
+      "source_hash": "db562191bc328b42d6a19ae63ec12ebeb946a1c0f384e3764ff50517b90e0724",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Modesty concerns how someone views and emphasizes their own importance and achievements. Understand it without confusing reserve with low self-worth, competence, or the rules of a particular setting.",
+      "title": "Modesty: Self-Presentation, Self-Evaluation, and Real Credit"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "A5-modesty-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "A5-modesty-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "A5-modesty-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "A5-modesty-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6aa260127d31c53f679784cd44d3d1156ea29547657bbf2cf2082a35d30e10a6"
+  "source_content_sha256": "82afbce99f7c89bab94f62f62f832747ffea775b5d181a4795130ee2d169270a"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/extraversion-mid",
@@ -20,30 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "extraversion-mid",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. It is an instrument-specific location, not a universal norm or absence of distinctive tendencies.",
-          "question": "Is mid-range Extraversion just the “ordinary” level?"
+          "answer": "You may find the everyday term useful, but the result does not establish a separate personality type. It also does not tell you how much time you should spend socially or alone.",
+          "question": "Does mid-range Extraversion make me an ambivert?"
         },
         {
-          "answer": "Context, role, fatigue, and practiced behavior can change expression. A feeling of change is not proof of a score trajectory.",
-          "question": "Is it normal to feel more or less extraverted at different times?"
+          "answer": "The score cannot establish either claim. Adaptation depends on the actual demands, choices, skills, and outcomes. A middle location does not guarantee low switching costs or equal comfort across settings.",
+          "question": "Is the middle range the healthiest or most adaptable?"
         },
         {
-          "answer": "Examine actual interaction load, autonomy, recovery, skills, and interests. The range cannot choose a job.",
-          "question": "What should a mid-range person consider when exploring work?"
+          "answer": "No. The domain result cannot reconstruct individual facet scores. Check which facets your assessment actually measured and reported, and what comparison information accompanies them.",
+          "question": "Does my middle score mean every facet is average?"
         },
         {
-          "answer": "The Big Five uses a continuum rather than two fixed types. Mixed facets and context can produce behavior associated with both everyday labels.",
-          "question": "Am I both introverted and extraverted?"
+          "answer": "It is evidence of different observed behavior. To assess flexibility, you would still need to understand choice, effort, role demands, and whether the behavior met the situation's needs. Visible variation alone cannot answer those questions.",
+          "question": "Is variation between quiet and talkative behavior evidence of flexibility?"
+        },
+        {
+          "answer": "Repeated testing is unlikely to resolve an unclear interpretation by itself. First check the instructions, item meaning, version, and score explanation. A middle result can be meaningful without becoming a more extreme label.",
+          "question": "Should I retake the assessment until I get a clearer result?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +81,76 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Mid-range Extraversion may suggest that social approach and quiet focus are both accessible, with context shaping which appears. This is not a generic average. The pattern can involve deliberate switching, mixed facets, or sensitivity to audience and role.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Mid-range Extraversion: preference for flexible social engagement and context-sensitive energy” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A mid-range label means that your result falls within the middle range defined by that assessment. It does not establish that you can switch effortlessly between social and solitary work, that you understand everyone else's needs, or that both settings suit you equally well.\n\nAsk what kind of scale you are reading. The midpoint of a possible score range is different from a population average or a middle percentile. A score of 50 out of 100 does not by itself identify any of those. The relevant assessment's scoring and reference information determine the meaning; this page does not supply a cutoff or norm.\n\nThe category is also less detailed than the experiences behind it. Differences between nearby scores may not warrant different life decisions. Before comparing results, check version, language, scoring, and reference group. A change in the label cannot on its own show how much your usual tendency changed.",
+          "heading": "A middle location is useful information, with limits",
           "key": "section-01-6fef358e42",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may initiate in familiar groups, listen first in unfamiliar ones, enjoy social activity up to a threshold, and alternate collaborative and independent work. A middle domain result can conceal high Warmth with lower Gregariousness or the reverse.",
-          "heading": "What This Range Specifically Means",
+          "body": "You might show a moderate tendency toward participation across many situations. You might enjoy contact but seldom seek a leading role. Or your participation might vary with role, familiarity, and topic. These are different explanations to investigate, not features the middle score confirms.\n\nThis site discusses Warmth, Gregariousness, Assertiveness, Activity, Excitement Seeking, and Positive Emotions using NEO/IPIP-NEO terminology. A domain total cannot tell you which of these is higher or lower, or establish that opposite facets cancel through equal weights. The [IPIP guidance on constructs and inventories](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) distinguishes instruments intended to assess related constructs.\n\nUncertainty in answering is another possibility. An item may concern a situation you rarely encounter, or wording you found unclear. A middle response can also accurately express a moderate preference. Do not infer careless answering from a middle total, or treat every uncertain answer as evidence of adaptable behavior.\n\nThe question is which account fits your available evidence. It is reasonable for more than one to remain possible.",
+          "heading": "Several patterns could sit behind the same label",
           "key": "section-02-acf11b5645",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not mean being ordinary, indecisive, equally comfortable everywhere, or both an introvert and extravert as fixed types. It cannot determine job fit, leadership, or how much interaction a person can handle.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Imagine joining a neighborhood repair group. You reliably enjoy a short exchange about a repair and then work quietly on your own item. This is a fairly consistent preference; it need not alternate from one extreme to another. Your middle result does not require a busier social calendar or a fifty-fifty division of time.\n\nIn a different illustrative case, you initiate optional conversation more often when you are the session's designated equipment contact. That could reflect the role making introductions easier. It might also reflect expertise, expectations, or a desire to be helpful. Required instructions are not evidence of freely chosen social approach.\n\nIf your difficulty is an unclear schedule, negotiate the schedule. If others misread a quiet period, communicate what you are doing. If you want contact but cannot find an opening, investigate that opening. A broad explanation about 'balanced energy' would leave these different problems unresolved.",
+          "heading": "Look for a practical question, rather than a perfect balance",
           "key": "section-03-28ee24347f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include selective participation, comfort in small and medium groups, leading when expertise is relevant, and choosing quiet after dense interaction. You may adapt visibly without feeling that one mode defines you.",
-          "heading": "Common Behavioral Expressions",
+          "body": "One provisional hypothesis might be: 'Outside required instructions, I more often initiate an optional conversation at a group session when I have a clearly defined role than when I attend as a participant.' The target is initiation by choice, not doing the assigned job.\n\nAcross naturally occurring sessions, record whether an appropriate person and an unhurried opening were available, whether you initiated, and whether you wanted contact. Note topic knowledge, familiarity, fatigue, and any pressure separately. A session spent handling an urgent repair may provide no optional opening; do not count it as choosing silence.\n\nNatural counterexamples include initiating as an ordinary participant or not initiating despite an opening when you have the defined role. A single exception does not refute 'more often.' Repeated comparable opportunities without the expected difference make the role explanation less useful. Finding no counterexample is also weak evidence if you only observed sessions with a role.\n\nKeep the description provisionally if the difference recurs in both kinds of setting. Narrow it if familiarity or a particular topic better describes where initiation happens. Set it aside if duties and opportunities cannot be separated. This is a way to improve a situation description, not to verify mid-range personality.",
+          "heading": "Test a situation description, keeping the behavior consistent",
           "key": "section-04-0219d3aed1",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, role clarity may bring assertiveness. In learning, you may alternate discussion and private synthesis. In relationships, familiarity can change talkativeness. Stress, fatigue, and sensory load may shift the balance toward lower stimulation.",
-          "heading": "Possible Differences Across Settings",
+          "body": "If you want to initiate contact without an assigned role, try one small preparation: identify a question you would actually like to ask another participant. Record that preparation as an intervention, then note whether you initiated, wanted to continue, and learned something useful. Do not combine this with your unprompted observations as though the conditions had stayed the same.\n\nIf it helps you make the contact you wanted, you can retain the preparation. If the problem is lack of time or access, work on that condition instead. If the contact is neither wanted nor necessary, a middle score does not oblige you to pursue it.\n\nSuccess does not establish equal comfort in every setting. Difficulty does not establish a deficient personality. Evaluate whether this attempt met this goal, and allow yourself to adjust or stop it.",
+          "heading": "A planned attempt answers a different question",
           "key": "section-05-3836d0e400",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include switching communication modes, bridging talkative and reserved colleagues, and matching participation to the task. Flexibility works best when others know whether you are reflecting or disengaging.",
-          "heading": "Possible Strengths",
+          "body": "A higher result indicates stronger endorsement of the relevant Extraversion content in that assessment; a lower result indicates less. The middle does not receive an additional adaptability score. Preferences, skills, and the effect of a particular arrangement still need to be considered separately at every location.\n\nThe [Extraversion overview](/en/personality/big-five/extraversion) explains the domain. [High Extraversion](/en/personality/big-five/extraversion-high) addresses chosen participation and practical pacing; [low Extraversion](/en/personality/big-five/extraversion-low) distinguishes lower approach from fear or unavailable opportunities. If differences between enjoying contact, taking charge, and seeking stimulation seem more relevant than the total, use the [facet guide](/en/personality/big-five/facets) to clarify the concepts, without inventing facet results.",
+          "heading": "Use the other ranges to clarify, without ranking them",
           "key": "section-06-239315ca0f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Possible costs include overadapting to the room, failing to protect recovery, or leaving preferences implicit until fatigue accumulates. Others may read contextual variation as inconsistency when the reasons are not explained.",
-          "heading": "Possible Costs",
-          "key": "section-07-1fc8596c59",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [high Extraversion](/en/personality/big-five/extraversion-high), stimulation may have a clearer limit. Compared with [low Extraversion](/en/personality/big-five/extraversion-low), initiating may require less preparation in many settings. Middle does not mean every facet is centered.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-4ef68245b2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You facilitate a client call confidently, then block an hour alone to process decisions. The combination supports both live coordination and careful follow-up. The cost arises only if the schedule leaves no transition between the modes.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-373a6f7a42",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may become the most talkative person at a reunion. Familiarity and role can amplify expression without converting a contextual pattern into globally high Extraversion.",
-          "heading": "A Counterexample",
-          "key": "section-10-2f353718f9",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which audiences increase or reduce initiative?\n- How much stimulation remains useful?\n- When do you need preparation before speaking?\n- Which facet creates the strongest contrast?\n- Do others understand your recovery needs?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-ef73d70137",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For seven days, label one interaction as energizing, neutral, or depleting and record group size, role, familiarity, and duration. Look for conditions rather than assigning a permanent identity.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-f6e9fc13f2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion), compare [high](/en/personality/big-five/extraversion-high), [mid-range](/en/personality/big-five/extraversion-mid), and [low Extraversion](/en/personality/big-five/extraversion-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-41977a69c2",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A middle Extraversion result does not automatically indicate adaptability or equal comfort with company and solitude. Clarify the score, consider different explanations, and observe one specific behavior across relevant situations.",
+        "title": "Mid-Range Extraversion: Understanding What a Middle Result Leaves Open"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/extraversion-mid",
-      "source_hash": "12446806e62358c9a8cb85aa708c4bc55eda93aa16e77013e0d939863493e5a5",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Mid-range Extraversion may suggest flexible social engagement that shifts with audience, role, and stimulation. It is not a lack of personality or a half-introvert type.",
-      "title": "Mid-Range Extraversion: Flexible Social Engagement"
+      "source_hash": "519b682941bb5cbcb891a481fbae298f37175b985ac669d68ba130e8fb7aadeb",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A middle Extraversion result does not automatically indicate adaptability or equal comfort with company and solitude. Clarify the score, consider different explanations, and observe one specific behavior across relevant situations.",
+      "title": "Mid-Range Extraversion: Understanding What a Middle Result Leaves Open"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "extraversion-mid-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, social ability, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "extraversion-mid-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "extraversion-mid-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "extraversion-mid-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4e506035a4d6039c645d8b30ba28c5add3ebb6b37c01fbf6c156d88212f8de3b"
+  "source_content_sha256": "423a010e1baa66c740038683574f10841b8be539b26b4fd0abb7b6339728816d"
 }

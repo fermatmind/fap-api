@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/neuroticism-high",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "neuroticism-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Neuroticism is a personality dimension, not a diagnosis. Appropriate clinical assessment uses different evidence.",
-          "question": "Does high Neuroticism mean an anxiety disorder?"
+          "answer": "No. A personality range cannot establish or rule out an anxiety disorder. Clinical assessment considers symptoms, their impact, and relevant circumstances using different evidence.",
+          "question": "Does a high result mean I have an anxiety disorder?"
         },
         {
-          "answer": "Not as a blanket goal. Address a specific behavior or distress with suitable support. This page does not prescribe trait change.",
-          "question": "Should I try to lower my Neuroticism?"
+          "answer": "No. Worry shows that something has your attention. Accuracy requires checking the relevant facts and outcomes. Emotional intensity is not an accuracy score.",
+          "question": "Does worrying more mean I notice risks more accurately?"
         },
         {
-          "answer": "Not categorically. Sensitivity can reveal risk, while prolonged activation can create costs. Context and response matter.",
-          "question": "Is high Neuroticism a disadvantage?"
+          "answer": "Yes, those descriptions can coexist. Performance depends on the task and other factors, and completing it does not show that you felt little distress. Assess experience and performance separately.",
+          "question": "Can I score high and still perform well under pressure?"
         },
         {
-          "answer": "This page does not provide an individual health prediction. Health has many causes, and personality content is not medical advice.",
-          "question": "Does high Neuroticism affect physical health?"
+          "answer": "That cannot be inferred from a high domain label. Read individual facets only if your report actually provides their scores under the relevant measure.",
+          "question": "Are all my Neuroticism facets high?"
         },
         {
-          "answer": "A trait score cannot answer that. Seek appropriate support when distress, impairment, or safety concerns warrant it, independent of the score.",
-          "question": "Do I need to see a mental-health professional?"
+          "answer": "Start with the difficulty you want to address, such as repeated checking that interrupts work or distress after a disagreement. A concrete change in daily life is easier to evaluate than pursuing a range label. The practical attempt on this page does not promise a score change.",
+          "question": "Should lowering the score be my main goal?"
+        },
+        {
+          "answer": "No. Observation is optional. You can seek qualified support whenever distress, effects on daily life, or safety concerns make it useful; you do not need another test or a completed diary.",
+          "question": "Do I need to finish observing myself before asking for help?"
         }
       ],
       "framework": "big_five",
@@ -88,163 +85,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "High Neuroticism may suggest that unpleasant emotion and possible threat activate readily, feel intense, or take longer to settle. The range is non-diagnostic. Sensitivity can reveal risk early, while prolonged activation can narrow attention and make recovery more costly.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “High Neuroticism: high emotional sensitivity, slower recovery, and vigilance for risk” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Neuroticism concerns differences in the tendency to experience negative emotions. A high position can point toward reporting more worry, irritation, discouragement, embarrassment, or feelings of being overwhelmed within the content covered by the measure. It does not require every feeling to be present or every situation to be difficult.\n\nThe useful question is which experiences recur and where. You can feel anxious while completing a task competently. You can also feel unsettled after a practical problem has been resolved. Neither outward composure nor task completion tells us exactly what you felt.\n\nThis is not a test of whether your concerns are correct. A strong feeling can prompt a useful question, but evidence and relevant knowledge are needed to evaluate the answer. More worry does not establish better judgment, empathy, or preparation.",
+          "heading": "What the high end describes",
           "key": "section-01-a5e8f45849",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may notice uncertainty, criticism, bodily tension, or possible failure quickly. Worry, irritation, discouragement, self-consciousness, urges, and feeling overwhelmed correspond to different facets and should not be treated as one symptom cluster.",
-          "heading": "What This Range Specifically Means",
+          "body": "To interpret high, check the questionnaire version, scoring direction, and the rule used to name the range. A score can describe a location on a scale or a comparison with a defined reference group. Those meanings should not be assumed interchangeable.\n\nA score out of 100 is not automatically a percentile. A percentile requires a reference population and a specified conversion; language, sample, and version matter. This guide cannot supply missing cutoffs, a personal percentile, or an uncertainty interval.\n\nIf your result is near a boundary, read the neighboring description as another set of possibilities. A small numerical difference does not establish a separate personality type. Before comparing results over time, check whether the measure and instructions stayed the same and consider the circumstances you had in mind when answering.",
+          "heading": "Read the label in the context of its measure",
           "key": "section-02-6670741065",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer an anxiety disorder, depressive disorder, trauma, weakness, instability, poor resilience, or need for treatment. Clinical questions require symptoms, duration, impairment, context, and appropriate assessment—not a personality range.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "In the NEO/IPIP-NEO vocabulary used on this site, the narrower labels are Anxiety, Anger, Depression, Self-Consciousness, Impulsiveness, and Vulnerability. The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) maps similar constructs; notably, IPIP Immoderation corresponds to NEO Impulsiveness.\n\nThese distinctions can help you ask whether the main difficulty is anticipating trouble, feeling irritated, feeling low, fearing embarrassment, struggling with cravings, or feeling unable to cope. They do not let you reconstruct six personal scores from one domain result. Use a facet score only when your report actually supplies it under the relevant measure.\n\nA facet called Depression is not a diagnosis of depressive disorder. A current episode of feeling low, a personality description, and a clinical assessment answer different questions. The same distinction applies to Anxiety. This page does not turn a familiar psychological term into a health conclusion.",
+          "heading": "Related experiences are not interchangeable",
           "key": "section-03-c6c59bc12d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include contingency planning, replaying feedback, seeking clarity, checking for error, and needing longer recovery after conflict. The same vigilance may be accurate in one situation and overgeneralized in another.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Consider a hypothetical everyday situation. A volunteer coordinator asks for one small change to a poster. You make the change and receive confirmation that it is sufficient. Later, while working on something else, you repeatedly reopen the message and worry that the request meant the coordinator disliked your work.\n\nKeep the facts, feelings, and behavior separate. The message may contain a concrete request. Your own account tells you whether you felt worried or ashamed. Reopening it is an observable action, but does not by itself reveal the emotion behind it. You might also be checking a detail for legitimate practical reasons.\n\nOther explanations remain possible: earlier feedback was unclear, the relationship has a difficult history, you were unusually tired, or another requirement really remains unresolved. The useful need might be a clear completion criterion or time to settle after feedback. None of those needs establishes that you lack ability or that the other person is necessarily critical.",
+          "heading": "When feedback keeps occupying attention",
           "key": "section-04-c747c3e4b3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, risk sensitivity may expose weak assumptions but consume attention under ambiguity. In learning, evaluation may prompt preparation or rumination. In relationships, delayed replies may feel more consequential. Safety and support strongly affect expression.",
-          "heading": "Possible Differences Across Settings",
+          "body": "A working hypothesis could be: after a routine revision is accepted and no new issue has appeared, I often worry about its meaning and reopen the feedback while trying to do another task. Keep that same target when looking for an exception.\n\nA naturally occurring comparable occasion would be another accepted revision where, without imposing a new checking rule, you report little lingering worry and do not repeatedly reopen the message. If you stay away from the message but still feel highly worried, only the checking behavior is absent. If there was no feedback, or the revision remains unresolved, you did not have the relevant opportunity.\n\nRecord comparable opportunities with the behavior absent as well as present. Repeated occurrences can justify keeping the limited interpretation for now. If the pattern appears mainly with one relationship or unclear requests, narrow it to that context. If you lack comparable occasions or did not note your feelings, suspend the conclusion. One exception does not erase an often pattern, and failing to find one does not prove it universal.",
+          "heading": "Check a narrow interpretation against ordinary exceptions",
           "key": "section-05-4e2c66fcce",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include early risk detection, awareness of emotional signals, anticipation of consequences, and sensitivity to interpersonal change. These tendencies help when signals are checked against evidence and converted into proportionate action.",
-          "heading": "Possible Strengths",
+          "body": "For a low-stakes revision that has genuinely been accepted, you could write down what was requested, what you completed, and whether any action remains. Choose a reasonable time to revisit the message if needed, while remaining responsive to new information or real deadlines.\n\nMark this as a deliberate change in conditions. Record whether unnecessary reopening decreases, whether the next task is less interrupted, and how you actually feel. Reduced checking with unchanged worry is a different outcome from feeling less worried. Neither outcome establishes a change in personality.\n\nKeep the arrangement if it helps the concrete task without neglecting an obligation. Revise or stop it if it increases distress, misses necessary information, or does not help. It is an optional organizational attempt, not a treatment or an instruction to dismiss every concern.",
+          "heading": "Try a practical change and evaluate its actual effect",
           "key": "section-06-9cd8e6b14c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include rumination, avoidance, repeated reassurance, self-criticism, sleep-disrupting worry, or recovery that outlasts the event. This page describes possible patterns and does not determine clinical significance.",
-          "heading": "Possible Costs",
+          "body": "A collaborator or partner may need less reassurance than you do. That difference does not show that either person cares more, reads the situation more accurately, or has better character. You can make a specific request such as asking whether a disagreement has been resolved, rather than asking someone to prove that your worry is justified by a score.\n\nReal mistreatment, repeated broken agreements, or unsafe circumstances need attention in their own right. A personality label should not be used to invalidate those facts. Conversely, a resolved disagreement may still leave you distressed, and that experience can also deserve support.\n\nIf distress persists or affects everyday functioning, seek assessment from a qualified health or mental-health professional. The [NIMH guide to getting help](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) considers symptoms and their impact, rather than a personality range. Seek prompt help for thoughts of suicide or self-harm; contact local emergency or crisis services when there is immediate danger. A diary is not a prerequisite for help.",
+          "heading": "Support can address the experience without ranking people",
           "key": "section-07-e90e120a08",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [mid-range Neuroticism](/en/personality/big-five/neuroticism-mid), sensitivity or recovery cost may appear more consistently. Compared with [low Neuroticism](/en/personality/big-five/neuroticism-low), stress signals may activate sooner. These are not diagnostic bands.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "Read the [Neuroticism overview](/en/personality/big-five/neuroticism) for the broader dimension. The [mid-range guide](/en/personality/big-five/neuroticism-mid) explains why a central position does not imply ideal emotional balance, while the [low-range guide](/en/personality/big-five/neuroticism-low) separates less negative emotion from care and reliable action.\n\nUse the [facet guide](/en/personality/big-five/facets) when different kinds of discomfort need distinguishing. Its vocabulary helps frame questions; it does not add measurements to your report.",
+          "heading": "Choose the next explanation you need",
           "key": "section-08-ee12c53349",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A vague message arrives before a deadline. You quickly identify several failure paths and ask for clarification. That protects the work. The cost appears if the threat model keeps expanding after the answer is clear; a written stop condition helps attention return.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-9dc5c3333c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score high and remain composed during an emergency because training and role clarity organize action. Strong performance in one crisis does not erase sensitivity elsewhere or prove the broad result wrong.",
-          "heading": "A Counterexample",
-          "key": "section-10-87dc1ea969",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which signals are usually accurate?\n- How long does recovery take after the event ends?\n- What turns concern into useful action?\n- Which facet drives the broad range?\n- When does reassurance help, and when does checking repeat?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-a3b6e5b2df",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For one low-stakes worry, write the feared outcome, one available action, and a time to review. Do not recheck before that time unless new evidence appears. Record whether the boundary preserves preparation while reducing repetition.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-5d11eb1809",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Neuroticism](/en/personality/big-five/neuroticism), compare [high](/en/personality/big-five/neuroticism-high), [mid-range](/en/personality/big-five/neuroticism-mid), and [low Neuroticism](/en/personality/big-five/neuroticism-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-0f78a0f5fa",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A high result points toward more negative emotional experience on a particular measure. It does not establish poor coping, accurate threat detection, or a mental-health diagnosis.",
+        "title": "High Neuroticism: Making Sense of Worry and Lingering Negative Feelings"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/neuroticism-high",
-      "source_hash": "dc54672c0828ce9ee78df90c134b5b8ce8ffef8fa57d6906537d64cf06296e83",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "High Neuroticism may suggest stronger emotional sensitivity, slower recovery, and vigilance for risk. It is not an anxiety disorder, weakness, or a diagnosis.",
-      "title": "High Neuroticism: Emotional Sensitivity and Risk Vigilance"
+      "source_hash": "bbd35b7d7e114e34c7d6ab2e529349dd2281a6300154be56a2a5cb593dbbc34c",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A high result points toward more negative emotional experience on a particular measure. It does not establish poor coping, accurate threat detection, or a mental-health diagnosis.",
+      "title": "High Neuroticism: Making Sense of Worry and Lingering Negative Feelings"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "neuroticism-high-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "neuroticism-high-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "neuroticism-high-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "neuroticism-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "8b70b518c713dff735d824306374d65b74e199103a06377f328a7dedfd8b2bf7"
+  "source_content_sha256": "e6f81241b8d832f475563628141af2f267728cb7cf2821cd349cef4520719eff"
 }

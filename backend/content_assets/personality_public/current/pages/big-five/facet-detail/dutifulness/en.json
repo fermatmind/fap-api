@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/dutifulness",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "dutifulness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "Not inevitably. Risk rises when obligation is not paired with boundaries, consent, and renegotiation.",
-          "question": "Are people with strong Dutifulness easy to exploit?"
+          "answer": "No. A commitment may feel important while resources, memory, or execution still fail. For a specific responsibility, examine previous conduct, present capacity, clear ownership, communication, and actual completion.",
+          "question": "Does high Dutifulness establish reliability?"
         },
         {
-          "answer": "No. Morality requires direct evidence of conduct, reasons, and impact.",
-          "question": "Does weaker Dutifulness mean immorality?"
+          "answer": "Not by itself. The person may be responding to unclear scope, changed conditions, or a conflicting obligation. Establish what they believe is owed and how they handle existing agreements before interpreting the refusal.",
+          "question": "Does questioning a rule indicate low Dutifulness?"
         },
         {
-          "answer": "Dutifulness centers on obligation; people pleasing centers on approval or conflict avoidance. They can overlap but are not identical.",
-          "question": "How is Dutifulness different from people pleasing?"
+          "answer": "Ask why the agreement matters, whether declining was a realistic option, and what happens naturally across different relationships. Motives can overlap and may remain uncertain. One helpful action or one explanation cannot establish a pure motive.",
+          "question": "How can I distinguish duty from wanting approval?"
         },
         {
-          "answer": "Commitment habits can be practiced. This page does not promise a stable trait or score change.",
-          "question": "Can Dutifulness be strengthened through practice?"
+          "answer": "No. Renegotiation handles changed circumstances, but the revised terms need to be understood and accepted. It also does not erase an impact already created by the original agreement. Check what the affected person can now rely on.",
+          "question": "Is a renegotiated promise automatically a kept promise?"
         },
         {
-          "answer": "Development has many influences. This package provides no individual causal claim.",
-          "question": "Does childhood education determine Dutifulness?"
+          "answer": "The facet does not establish that outcome. Look at whether they can refuse, whether scope is clear, whether requests keep expanding, and whether the relationship permits negotiation. Those concrete conditions matter without requiring a personality label.",
+          "question": "Are people with strong Dutifulness necessarily vulnerable to exploitation?"
+        },
+        {
+          "answer": "Reminders can be evaluated as a practical method for reducing omissions and making commitments visible. Better follow-through over a short period does not establish a stronger stable trait or a changed facet score.",
+          "question": "Does using reminders strengthen the trait?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Dutifulness concerns how strongly promises, rules, role obligations, and a sense of “what I should do” guide action. It is not a morality scale, a trust certificate, obedience, kindness, or proof that a commitment was wise.\n\n“Dutifulness within Conscientiousness: commitment to obligations and promises” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "An agreement can continue to matter after it becomes inconvenient. Dutifulness concerns the weight given to promises, rules, and role obligations in choosing what to do. The question is how strongly the obligation remains part of the decision, not how many requests someone accepts.\n\nThis site uses Dutifulness within the NEO/IPIP-NEO vocabulary of [Conscientiousness](/en/personality/big-five/conscientiousness). The [official IPIP mapping](https://ipip.ori.org/newNEO_FacetsTable.htm) describes a corresponding construct similar to the NEO facet. Its [public short-form items](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) include commitments and duties. These references do not establish equivalence between questionnaires, or prove that a particular assessment measured the facet. Do not infer an unreported Dutifulness score from a domain result.\n\nFelt obligation is also not a guarantee of completion. Whether a person can perform a particular job needs evidence about the task, their resources, and their actual conduct.",
+          "heading": "What remains after saying yes?",
           "key": "section-01-d593c3dea5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency gives internally felt weight to commitments even when no one is watching. A weaker tendency may treat obligations as more negotiable, contextual, or subordinate to autonomy and changing priorities. Conduct still has to be judged directly.",
-          "heading": "Precise Definition",
+          "body": "People can do the same thing because they accepted an obligation, fear a penalty, want approval, or have several reasons at once. An action seen under close supervision cannot cleanly reveal how binding the agreement feels to the person.\n\nAsk what was accepted, what the person believes is owed, and whether declining or negotiating was a realistic option. A junior worker agreeing to every request may have little freedom to refuse. A private commitment may still involve concern about another person's reaction. Neither observation justifies declaring the motive entirely internal or entirely external.\n\nApproval seeking and avoidance of conflict are useful possibilities to examine, but 'people pleasing' is not a diagnosis or a personality type established by this page. A sense of duty can coexist with those concerns. Refusing an instruction can likewise express a competing obligation rather than a light attitude toward all obligations.",
+          "heading": "Compliance does not reveal the whole motive",
           "key": "section-02-8bfa6ce22a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Dutifulness belongs to [Conscientiousness](/en/personality/big-five/conscientiousness), where commitments can organize sustained behavior.",
-          "heading": "Parent Domain",
+          "body": "A stronger tendency may give an accepted obligation continuing weight even when attention shifts elsewhere. A weaker tendency may allow current priorities or judgments to outweigh that earlier agreement more readily. What happens next still matters: was the agreement reconsidered openly, overlooked, or changed without telling someone who depended on it?\n\nA person can care deeply about a promise and miss the deadline because the work exceeds the available time. Someone else can feel relatively little personal attachment to an agreement and still complete it through clear ownership, reminders, or a well-designed routine. Neither outcome lets you skip the distinction between felt obligation and execution.\n\nIntermediate results do not automatically establish good boundaries or negotiation skills. They may reflect a moderate tendency, differences between roles, or uncertainty in responses. Stronger, weaker, and intermediate positions are descriptions along a continuum, not moral categories or certificates of trust.",
+          "heading": "The tendency and the outcome must remain separate",
           "key": "section-03-fb93853858",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Dutifulness versus Agreeableness:** Agreeableness concerns interpersonal orientation. Duty may be followed despite conflict or declined while remaining caring.\n- **Dutifulness versus people pleasing:** Approval seeking centers on others’ reactions; duty can be privately held and boundary-aware.\n- **Dutifulness versus Self-Discipline:** [Self-Discipline](/en/personality/big-five/facets/self-discipline) concerns execution; Dutifulness concerns felt obligation.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Consider a volunteer treasurer who has agreed to prepare a club's annual statement. An event organizer then asks for an urgent reimbursement summary that would consume the same available evening. The treasurer's hesitation may concern the earlier agreement, uncertainty about the new request, or simply the amount of work. Completing both would not by itself reveal which motive mattered.\n\nFirst establish the deadlines, required scope, and who depends on each output. If both cannot be done, communicate that conflict while there is still time to adjust. A partial summary, a revised date, or a transfer of agreed responsibility may be possible. Do not call the matter resolved until the people affected understand and accept the arrangement.\n\nThe relevant behavior includes acknowledging the old commitment, identifying the limit, and communicating the impact. Staying silent while attempting everything can leave others unable to plan. Declining the extra request may protect an existing obligation rather than contradict a strong sense of duty.",
+          "heading": "Two obligations can both be real and still conflict",
           "key": "section-04-c838706f26",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Dutifulness may appear as honoring promises, checking role expectations, discomfort after letting someone down, or doing required work without supervision. Weaker Dutifulness may appear as renegotiating commitments, resisting rules without a clear rationale, or prioritizing current judgment. Power, coercion, safety, and fairness matter.",
-          "heading": "Behavioral Cues",
+          "body": "Before accepting work, establish what is included, when it is needed, and what should happen if a necessary condition changes. Distinguish an explicit agreement from a request you have not accepted and an expectation nobody has discussed. A legitimate role obligation also needs an understood scope; it does not make every nearby problem yours to solve.\n\nIf you already agreed and later discover a limit, address the reliance created by the original promise. Explain what changed, what you can still do, and which parts need another arrangement. A revised agreement is not automatically the same as having completed the original one, and another person may not have an easy fallback.\n\nNeither strong nor weak Dutifulness guarantees this skill. Judge the boundary by whether the responsibilities are understood, the workload is possible, and changes are communicated, rather than treating a refusal or an apology as a facet test.",
+          "heading": "A boundary needs a clear agreement",
           "key": "section-05-c517e4d18e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Duty can be strong toward family and weak toward an institution perceived as illegitimate, or vice versa. Conflicting obligations force prioritization. A single refusal may reflect an ethical boundary, workload, or changed agreement rather than low Dutifulness.",
-          "heading": "Contextual Differences",
+          "body": "Someone who describes themselves as very dutiful may, on an ordinary occasion with a clear agreement and adequate resources, let a commitment slip without following up. That event deserves a place in the description. It may narrow the claim to certain relationships or types of duty; it should not be discarded simply because it does not fit.\n\nA person described as low in duty may naturally keep track of an unsupervised promise long after the other person stops reminding them. If the behavior recurs, a blanket description that agreements never carry weight is too broad.\n\nA refusal is not always such a counterexample. An employee who declines to confirm an unverified record may be protecting an obligation to provide accurate information. A missed task when essential input never arrived is different again: there may have been no actual opportunity to complete it. Natural counterexamples help revise an interpretation; deliberately breaking a promise to test yourself is unnecessary.",
+          "heading": "Include ordinary events that challenge the label",
           "key": "section-06-2f88acfc10",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Treating a promise as a meaningful constraint.\n- Completing unobserved obligations.\n- Checking whether others depend on a commitment.\n- Overcommitting when “no” feels like failure.\n- Following a rule after its purpose has disappeared.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Choose a few existing commitments with limited consequences. Note the wording, each person's understanding, whether acceptance was voluntary, the resources available, external reminders or supervision, any competing obligation, and what happened afterward. Record the felt importance separately from completion.\n\nKeep three outcomes distinct: an opportunity followed by action, an opportunity without action, and no usable opportunity. Include ordinary early renegotiation, spontaneous follow-up, and noncompletion. A task not yet due is not a missed commitment, and not encountering a counterexample is not evidence that one cannot occur.\n\nIf commitments repeatedly retain weight across ordinary settings with real choice, keep a provisional, limited interpretation. If it happens only in one relationship or with formal agreements, narrow it accordingly. If observations are dominated by coercion, unclear expectations, or overload, suspend the trait conclusion and address those conditions first. A short record can inform coordination; it cannot validate personality, establish character, or generate a facet score.",
+          "heading": "Observe the agreement, the opportunity, and the response",
           "key": "section-07-a100e7b521",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Reassessing obligations as circumstances change.\n- Giving personal judgment more weight than convention.\n- Declining commitments that lack clear value.\n- Underestimating coordination costs created for others.\n- Needing explicit consequences or ownership.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "For a small, ambiguous task, confirm an exact scope and date with the person affected. For example, replace an unclear offer of help with an agreement to check the attendance list by Thursday, without also taking responsibility for catering. If you already accepted a broader role, explain and negotiate the change rather than silently redefining it.\n\nThen check whether the clearer agreement reduced missed expectations, exposed a conflict earlier, and could actually be completed. Ask whether the other person still had to compensate for something they expected you to do. Improvement suggests that agreement design or support helped. If it did not, investigate workload, difficulty, and missing resources.\n\nMark this as a deliberate intervention, separate from naturally occurring behavior. It is not evidence of a stable trait change. For difficulty beginning the work, continue with [Self-Discipline](/en/personality/big-five/facets/self-discipline); for decisions before accepting, see [Deliberation](/en/personality/big-five/facets/deliberation); for escalating personal targets, read [Achievement Striving](/en/personality/big-five/facets/achievement-striving). The [Conscientiousness guide](/en/personality/big-five/conscientiousness) and [30-facet guide](/en/personality/big-five/facets) provide the broader context.",
+          "heading": "Make one commitment easier to understand",
           "key": "section-08-92e747c218",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Dutifulness can support continuity and dependable coordination. Possible costs include exploitation, guilt, rigid rule following, and neglect of personal limits. Weaker Dutifulness can support autonomy and rule revision; possible costs include broken expectations or trust repair. Neither level establishes moral character.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-85028aa772",
-          "kind": "rich_text"
-        },
-        {
-          "body": "An employee agrees to cover a shift, later notices exhaustion, and renegotiates early rather than silently failing. Her felt obligation remains strong, but boundaries and communication prevent duty from becoming self-erasure.",
-          "heading": "An Original Case",
-          "key": "section-10-b38312b9cd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A volunteer questions an outdated procedure and refuses to follow it until safety is clarified. The refusal is not evidence of low morality or low duty; it may represent a competing obligation to prevent harm.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-32adbd6680",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. What does a promise feel like after circumstances change?\n2. Which institutions or relationships receive your strongest sense of duty?\n3. How do you rank two conflicting obligations?\n4. When does guilt signal a real repair versus an unrealistic standard?\n5. Can you renegotiate early instead of overcommitting?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-a5793d3619",
-          "kind": "rich_text"
-        },
-        {
-          "body": "List current commitments and mark each as explicit, assumed, or inherited. Choose one that needs clarification and confirm scope, deadline, and exit conditions. The experiment studies agreement quality, not moral worth.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-e86d18c9be",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Competence](/en/personality/big-five/facets/competence), [Order](/en/personality/big-five/facets/order), [Achievement Striving](/en/personality/big-five/facets/achievement-striving), [Self-Discipline](/en/personality/big-five/facets/self-discipline), [Deliberation](/en/personality/big-five/facets/deliberation).",
-          "heading": "Continue Reading",
-          "key": "section-14-cc9637e505",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Dutifulness concerns how obligations constrain choices. Understanding it requires separating felt duty from compelled compliance, approval seeking, execution, and the practical consequences of conflicting commitments.",
+        "title": "Dutifulness: The Weight of a Promise and the Limits of an Agreement"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/dutifulness",
-      "source_hash": "d717e8a54366b2c554242d6e2554d584b8a19a7cc7723ca93221a14e187ed32f",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Dutifulness concerns how strongly promises, rules, and obligations guide action. It is not a measure of morality, obedience, kindness, or whether someone deserves trust.",
-      "title": "Dutifulness: Commitment to Obligations"
+      "source_hash": "fb869640469befa3b6d774b4aeb04935a06b684f7152d98ee4ed6b911cf45bab",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Dutifulness concerns how obligations constrain choices. Understanding it requires separating felt duty from compelled compliance, approval seeking, execution, and the practical consequences of conflicting commitments.",
+      "title": "Dutifulness: The Weight of a Promise and the Limits of an Agreement"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "C3-dutifulness-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "C3-dutifulness-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "C3-dutifulness-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "C3-dutifulness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "af377bd3cfe1e43cacd48302269293c13d5c4ecbec0e780b729b15ab247a06b3"
+  "source_content_sha256": "688a1805d09d60e069e1e5b056d5df9dbbc8b97ca8ed9b6b8625ef19949358f1"
 }

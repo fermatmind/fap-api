@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram",
@@ -23,101 +23,51 @@
       "entity_key": "enneagram",
       "entity_type": "hub",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "不会。总览提供九种可比较的工作假设。只有当一个假设能解释多个具体事件、经得住重要反例，并且比角色或处境等替代解释更合适时，它才暂时具有参考价值。",
-          "question": "九型人格总览会给每个人确定永久类型吗？"
+          "answer": "不必。很多关注可以共存，情境与角色也会影响行动。先比较两三种候选在重要事情冲突时优先保护什么，再找相似经历与反例。共鸣可以帮助提出问题，不能独自确认类型。",
+          "question": "好几种模式都像我，必须马上确定一个吗？"
         },
         {
-          "answer": "行为记录能把实际发生的事情与后来推测的动机分开。这样可以比较注意、解释和行动的顺序，避免把一个听起来熟悉的形容词误当成模式证据。",
-          "question": "为什么先记录行为而不是先选性格形容词？"
+          "answer": "不能。最高分提供一个值得比较的候选，并不确认类型。还需与其他候选一起检查动机、反复出现的代价和反例。结果不能单独证明能力、医学状态、职业适配或未来成就，其他量表的研究也不能自动证明费马题本的这些用途。",
+          "question": "九型测试中，最高分就能确定我的类型吗？"
         },
         {
-          "answer": "当相似事件出现不同优先顺序、另一种原因更贴近可见行为，或原判断主要由角色、文化、疲劳、激励、技能和临时压力造成时，就应修正或放弃最初解释。",
-          "question": "什么证据应该改变最初的九型解释？"
+          "answer": "前面的数字表示主模式。6w5 仍主要比较可靠依据、支持与保障；5w6 仍主要比较理解、能力和有限资源。它们都可能分析和查资料，不能仅凭外在风格或第二高分互换。",
+          "question": "6w5 和 5w6 有什么关键差别？"
+        },
+        {
+          "answer": "先分别理解程度选择和成对取舍的含义，不直接比较两份数值。保留各自较突出的候选，检查它们是否能解释不同情境中的动机与代价；候选顺序变化本身不证明人格变化，也不要求反复重测直到得到唯一号码。",
+          "question": "105 题与 144 题结果不同，该怎么继续？"
+        },
+        {
+          "answer": "不能。中心将 8／9／1、2／3／4、5／6／7 按传统共同主题分组；本能讨论自我保存、社会和一对一等生活领域的注意。每种核心模式都可以讨论三种本能关注。",
+          "question": "中心和本能都分三组，能一一对应吗？"
+        },
+        {
+          "answer": "要先看来源采用的定义。Narrative 的 one-to-one 涵盖亲密关系、密切友谊、性与生命活力；Enneagram Institute 的 sexual／attraction 特别强调吸引、刺激和强度，并提醒所有本能关注都可能重视一对一关系。不能只靠喜欢深谈判定，也不能据此判断性取向。",
+          "question": "one-to-one 与 sexual 是不是同一个意思？"
+        },
+        {
+          "answer": "不能这样判断。帮助可能来自关心、责任或维持和平；整洁可能是工作要求；强势也可能来自检验危险或坚持原则。需要比较行为背后的关注和反复出现的代价。",
+          "question": "帮助别人、爱整洁或很强势，分别就是 2、1、8 吗？"
         }
       ],
       "framework": "enneagram",
@@ -240,49 +190,106 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "观察九种模式时，可以选择一次请求明确、选项冲突且结果可见的决定。依次记录最先被注意的事项、被推迟的选项、当时给出的解释和他人实际看到的行动，暂时不要急着贴上类型标签。",
-          "key": "observable_pattern",
-          "title": "先观察一次有分歧的决定"
+          "body_md": "九型人格是一套传统的人格解释框架，用九种模式讨论反复出现的关注与动机：你最容易注意什么，什么让你觉得自己有价值或能应对生活，以及重要的东西受到威胁时，你习惯怎样回应。\n\n阅读目录：[九种动机速查](#shared_event) · [三中心](#centers) · [侧翼](#wings) · [三本能](#instincts) · [105／144 题本与结果](#forms) · [科学证据](#evidence) · [常见问题](#faq)。\n\n跳到本页类型说明：[1号](#type_1) · [2号](#type_2) · [3号](#type_3) · [4号](#type_4) · [5号](#type_5) · [6号](#type_6) · [7号](#type_7) · [8号](#type_8) · [9号](#type_9)。\n\n这里的“模式”不只是性格优点或缺点，而是一条可以观察的联系：在意某件事，采用一种策略，得到一些帮助，也可能因策略用得过多而付出代价。数字没有好坏与高低之分。\n\n[Enneagram Institute 的系统说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)与[The Narrative Enneagram 的总览](https://www.narrativeenneagram.org/the-enneagram/)都重视内在动机，但它们属于九型传统的解释来源。阅读时可以先问“这个解释是否照亮了我的经验”，并把它与“这个分类是否得到充分科学支持”分别考虑。\n\n一个人可能同时在意标准、关系和成果。主模式候选要比较的是：这些关注发生冲突时，哪一种反复取得优先位置。一次行动、一个职业或一个讨喜的昵称，都不足以确认类型。",
+          "key": "understanding_motivation",
+          "title": "九型人格是什么？先看行为背后的动机"
         },
         {
-          "body_md": "用反例修正假设，是寻找一件条件相近却没有出现预期模式的事件。若反例更符合角色要求、文化习惯、激励、安全感、疲劳、熟练技能或临时压力，就应降低原有解释的可信度。",
-          "key": "counterexample",
-          "title": "用反例修正假设"
+          "body_md": "你和几位朋友筹备一场社区分享会。活动临时换了场地，负责人准备立即发布通知。几个人都说：“再等十分钟，我们先讨论一下。”外在行动相同，却可能服务于下面这些不同关注。\n\n| 类型 | 这十分钟可能想保护什么 | 可能想先解决的问题 |\n| --- | --- | --- |\n| [1号](/zh/personality/enneagram/type-1) | 正确、公平与负责 | 新安排是否让部分参与者受到不合理对待？ |\n| [2号](/zh/personality/enneagram/type-2) | 关心与被需要的连接 | 那位已经忙了一天的朋友需要什么支持？ |\n| [3号](/zh/personality/enneagram/type-3) | 有价值、得到认可的成果 | 怎样调整才不至于让活动失去成效？ |\n| [4号](/zh/personality/enneagram/type-4) | 真实表达与个人意义 | 换场地后，活动还能呈现我们真正想说的东西吗？ |\n| [5号](/zh/personality/enneagram/type-5) | 理解、应对能力与有限资源 | 新场地具体需要做什么，我能承担多少？ |\n| [6号](/zh/personality/enneagram/type-6) | 可靠依据、支持与保障 | 场地确认了吗，失败时有没有可信的备选安排？ |\n| [7号](/zh/personality/enneagram/type-7) | 选择空间与值得期待的体验 | 能不能换一种更有趣、不会被限制住的形式？ |\n| [8号](/zh/personality/enneagram/type-8) | 自主与保护边界的力量 | 谁决定了这件事，大家是否被迫接受了不合理条件？ |\n| [9号](/zh/personality/enneagram/type-9) | 内心平稳与关系和平 | 能否让不同意见被听见，避免大家因此分裂？ |\n\n这些是供比较的可能理由，不是九种人的固定台词。同一种关注也可能支持立即发通知：1 为了及时履行告知责任，2 为了让参与者少担心，6 为了避免信息不明，9 为了结束悬而未决的紧张。\n\n更有区分力的问题是：如果标准、成果、资源和关系无法同时照顾，你最不愿牺牲哪一个？还要检查，这十分钟是否只是完成你担任负责人的必要职责。",
+          "key": "shared_event",
+          "title": "九种动机速查：同样等十分钟，理由有何不同"
         },
         {
-          "body_md": "传统框架把相关模式归入腹中心、心中心和脑中心。理解三中心标签，可以帮助整理关于行动、连接和预判的问题；这些标签不能定义医学类别，也不能说明神经系统或证明神经科学结论。",
-          "key": "center_boundary",
-          "title": "三中心只是传统整理方式"
+          "body_md": "1 模式容易看见现实与应有标准的落差，希望自己的行动经得起良心与原则的检验。它在意的不只是“不能出错”，还可能是“如果明知不妥却放任，我就没有尽到责任”。这种完整性与正确性的关注，是[1 型传统描述](https://www.enneagraminstitute.com/type-1/)的重点。\n\n它的有效作用是把问题指出来，建立公平、清晰和可遵守的标准。分享会换场地时，这种关注可能促使团队确认无障碍条件或兑现原有承诺。代价出现在所有偏差都变成必须纠正的过错时：必要改进与个人偏好难以分开，对自己和别人持续不满，休息也显得不够正当。\n\n与 6 比较时，可以问：即使可靠的人已确认方案安全，我是否仍因它违背原则而反对？与 3 比较时，可以问：即使结果很受欢迎，我是否仍无法接受取得成果的方式？\n\n一次小调整是先说清哪项标准必须满足，哪项只是自己的偏好，再观察这种区分是否让讨论更具体。",
+          "key": "type_1",
+          "title": "1号：维护原则，努力把事情做得正确"
         },
         {
-          "body_md": "总览提供的是自我观察词汇，不是固定身份、能力高低、健康状态、关系结论或未来结果。一个熟悉的描述并不足以确认哪种模式最有用，仍需比较多个事件和替代解释。",
-          "key": "boundary",
-          "title": "把结论保留为可修改版本"
+          "body_md": "2 模式容易把注意力放在人身上：谁需要帮助，我怎样才能让对方感到被关心，我们的关系是否仍然亲近？它可能通过提供支持感到自己值得被爱、对别人有意义。[2 型传统描述](https://www.enneagraminstitute.com/type-2/)既讨论温暖与慷慨，也讨论被需要和得到回应的愿望。\n\n这种策略能让实际困难得到及时照顾。筹备活动时，它可能发现那个始终说“我没事”的朋友已经承担太多。代价是自己的需要被隐藏在帮助之中：没有说出口的期待不断增加，对方没有回应时，失落容易变成委屈、提醒付出或干预。\n\n与 9 比较时，留意你更怕“我不再被需要或重视”，还是“表达不同意见会打破平静”。两者都可能答应帮忙，但理由并不一样。帮助别人也可能只是责任、友情或专业训练，不能单独确认 2。\n\n可以先询问对方是否需要这份帮助，同时直接说明自己能做多少、需要什么，观察不靠额外付出维持关系时会有什么感受。",
+          "key": "type_2",
+          "title": "2号：希望被爱，通过照顾建立亲近"
         },
         {
-          "body_md": "持续天数: 5\n\n情境: 选择一个反复出现的共同决定，要求其中有明确请求、两个现实选项，以及能够描述最终行动的另一位参与者。\n\n可观察信号: 每次记录最先说出的担忧、被推迟的选项、他人看到的行动和事后解释，并把事实与推测分栏书写。\n\n本页特定信号: 同一事件至少比较两种九型模式假设，不要在第一次记录后就寻找唯一的类型结论。\n\n替代解释: 在保留任何模式假设之前，写出一种角色、文化、激励、疲劳、安全感、技能或具体处境造成相同行动的可能。\n\n复盘问题: 指出最能削弱初步判断的反例，并写明以后出现什么证据时，你会继续修正或直接放弃这个解释。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "在保留任何模式假设之前，写出一种角色、文化、激励、疲劳、安全感、技能或具体处境造成相同行动的可能。",
-            "context": "选择一个反复出现的共同决定，要求其中有明确请求、两个现实选项，以及能够描述最终行动的另一位参与者。",
-            "duration_days": 5,
-            "observable_signal": "每次记录最先说出的担忧、被推迟的选项、他人看到的行动和事后解释，并把事实与推测分栏书写。",
-            "page_specific_signal": "同一事件至少比较两种九型模式假设，不要在第一次记录后就寻找唯一的类型结论。",
-            "reflection_prompt": "指出最能削弱初步判断的反例，并写明以后出现什么证据时，你会继续修正或直接放弃这个解释。"
-          },
-          "title": "观察练习"
+          "body_md": "3 模式关心什么算成功，以及怎样让自己的贡献得到认可。成功不一定指收入或职位，也可能是可靠的家长、优秀的学生，或能把社区活动办好的人；具体标准会随环境而变。[3 型传统描述](https://www.enneagraminstitute.com/type-3/)把这种追求与个人价值感联系起来。\n\n它的有效作用是抓住目标、适应条件，把投入转化为可见结果。场地变化后，它可能迅速重排流程，保住活动最重要的成果。代价是受到奖励的表现逐渐替代真实意愿：总要显得能干，承认疲惫和失败变难，也可能把感受当作妨碍推进的事情。\n\n与 1 比较时，看原则与成绩冲突后哪一个更难放下；与 7 比较时，看你更想完成一个能证明价值的目标，还是保留更多令人期待的体验。\n\n可以分别写下“别人会认可什么”和“我自己真正想完成什么”。两者有差异时，先承认差异，不急着把它包装成同一个目标。",
+          "key": "type_3",
+          "title": "3号：希望有价值，把能力变成被看见的成果"
+        },
+        {
+          "body_md": "4 模式关注自己是谁、什么对自己有特殊意义，以及内在经验是否得到忠实表达。注意力也可能落在缺失上：别人似乎拥有某种轻松、归属或完整，而自己没有。[4 型传统描述](https://www.enneagraminstitute.com/type-4/)讨论的是身份与意义的关注，不能简化成“有艺术天赋”或“情绪多”。\n\n这种关注能保留细微感受，发现统一方案遗漏的个人经验。分享会换场地时，它可能提醒大家：流程仍然完整，但原本想营造的交流意义已经改变。代价是不断与理想状态或别人比较，让眼前已有的东西显得不够，行动也可能一直等待合适的感受。\n\n与 3 比较时，可以问：获得认可但表达不再像自己，是否比成果不够出色更难承受？与 5 比较时，看退后独处主要是在整理个人感受，还是保护精力并弄清问题。\n\n可以同时记录“还缺少什么”和“现在已经有什么”，再做一项不必等到情绪完全合适的小行动。这是一种观察选择，不是成长效果保证。",
+          "key": "type_4",
+          "title": "4号：寻找真实身份，希望个人经验被理解"
+        },
+        {
+          "body_md": "5 模式容易追问自己是否理解得足够，以及时间、精力、知识和空间能否承受外界要求。面对复杂任务，它可能先退后研究，尽量在参与之前建立可独立使用的理解。[5 型传统描述](https://www.enneagraminstitute.com/type-5/)的核心涉及能力感，而非智力等级。\n\n这种策略能带来深入分析、独立判断和清楚的投入边界。在新场地的信息混乱时，它可能整理出真正需要解决的技术或安排问题。代价是准备不断延长，保存资源变成回避参与，实际合作与关系需要反而越来越陌生。\n\n与 6 比较时，问自己：缺的是“我还没理解到足以应对”，还是“方案和支持还没有可信到足以行动”？与 9 比较时，留意退后是在维护个人边界，还是为了减少意见碰撞。\n\n可以为准备设一个具体终点，例如弄清两项关键条件后参与一次短讨论。随后看实际消耗与预期是否相同，而不是预先认定自己一定承受不了。",
+          "key": "type_5",
+          "title": "5号：希望能够应对，通过理解和边界保存资源"
+        },
+        {
+          "body_md": "6 模式关注依据是否可信、承诺是否可靠、困难出现时能否得到支持与指引。它可能信任熟悉的伙伴或程序，也可能不断检验甚至挑战这些依靠。[6 型传统描述](https://www.enneagraminstitute.com/type-6/)同时包含谨慎与主动对抗威胁的表现，因此外表大胆并不能排除这项关注。\n\n它的有效作用是发现漏洞、把责任说清楚，维护经得起考验的合作。活动临时换场地时，它可能要求确认联系人、开放时间和备用方案。代价是确认没有终点：刚得到的保证又成为新的疑点，迟迟不能决定，或者把尚未发生的危险当成已经确定的事实。\n\n与 1 比较时，问自己更担心违背标准，还是失去可靠保障；与 8 比较时，看挑战主要是在检验危险与可信度，还是维护自主、拒绝被控制。\n\n可以先确定什么信息足够支持这次决定，并区分已发生的问题与设想的风险。新证据出现时再调整，观察不断索取确认是否真的增加了可用信息。",
+          "key": "type_6",
+          "title": "6号：寻找可靠的支持，在不确定中确认可信依据"
+        },
+        {
+          "body_md": "7 模式容易被值得期待的选项吸引，希望生活仍有空间、乐趣与满足。限制、失落或痛苦出现时，它可能迅速提出新计划、换一种解释，或者把注意力移向下一个机会。[7 型传统描述](https://www.enneagraminstitute.com/type-7/)将这些行为与避免匮乏和痛苦的动机联系起来。\n\n这种策略能让受阻的局面出现新入口。新场地不适合原方案时，它可能提出轮流分享、户外讨论或其他可行形式。代价是寻找可能逐渐取代作出选择：新点子很多，承诺难以收尾，需要面对的失望与重复工作不断被推到以后。\n\n与 3 比较时，看忙碌更多服务于成果认可，还是可期待的体验；与 9 比较时，看避免不舒服主要依靠打开新选项，还是降低冲突的存在感。热爱旅行或有很多兴趣，都不能单独确认 7。\n\n可以选定一个可完成的方案，并留意自己在不能继续加选项时最想逃开什么。真实的资源限制同样需要被考虑。",
+          "key": "type_7",
+          "title": "7号：保有自由与满足，寻找新的可能"
+        },
+        {
+          "body_md": "8 模式关注是否有行动自主权，自己和在意的人是否会被伤害、控制或迫使退让。它可能用明确立场与直接行动建立保护。[8 型传统描述](https://www.enneagraminstitute.com/type-8/)也讨论了接受帮助与承认脆弱时的困难。\n\n它的有效作用是在问题被回避时承担压力，把不合理条件摆到桌面上。活动场地突然附加条件时，它可能为大家争取谈判空间。代价是过度依靠力量：不同意见都像挑战，协商变成较量，原本想保护的人也可能失去表达机会。\n\n与 1 比较时，看反对主要来自原则要求，还是无法接受自主权被夺走；与 6 比较时，看行动主要在抵抗控制，还是检验并解除不确定的威胁。嗓门大、担任领导或敢于争论，都不是充分依据。\n\n可以先明确自己真正需要保护的边界，再给别人一个完整说话的机会，观察听取意见是否真的削弱了自主。",
+          "key": "type_8",
+          "title": "8号：掌握自己的生活，直接保护边界"
+        },
+        {
+          "body_md": "9 模式希望内心和关系不被持续冲突打断，容易看见各方都有道理，寻找能让生活继续顺畅的共同点。[9 型传统描述](https://www.enneagraminstitute.com/type-9/)同时提醒，维持和平可能伴随对自己优先事项的忽略。\n\n它的有效作用是倾听、容纳差异，让紧张的人重新找到合作空间。换场地引发争执时，它可能帮助大家把各自担心的事说出来。代价是“先不说”变成长期搁置，表面的和气遮住真实分歧；没有表达的反对也可能通过拖延和不行动出现。\n\n与 2 比较时，看答应别人主要为了获得亲近与回应，还是保持关系不受扰动；与 5 比较时，看不参与是在保护有限资源，还是不想进入冲突。安静和慢节奏都不能确认 9，一个人也可能很忙，却一直在做别人更重视的事。\n\n可以在听完别人的意见前先写下一项自己的偏好，并在讨论中说出来，观察表达不同是否一定破坏连接。",
+          "key": "type_9",
+          "title": "9号：维持平稳与连接，让不同要求能够共存"
+        },
+        {
+          "body_md": "传统九型把 8、9、1 放在腹／身体中心，2、3、4 放在心中心，5、6、7 放在头／脑中心。[Enneagram Institute 的中心说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)分别以愤怒、羞耻与恐惧组织这些主题。它们是传统解释分组，不是脑区、神经系统或能力等级；所有人都能思考、感受和行动，也都可能体验这些情绪。\n\n**腹／身体中心：怎样处理边界、行动与不满？** 8 较倾向于直接运用力量维护自主；9 较倾向于降低冲突和不满的存在感，保住平稳；1 较倾向于约束冲动，把不满转成改进要求。面对“你们只能接受这个安排”，可能的区别是直接争取决定权、先缓和分歧，或指出安排不符合什么标准。它们不是分别等于暴躁、没脾气和爱批评。\n\n**心中心：怎样确认个人价值与身份？** 2 较倾向于从亲近、照顾和他人回应中确认价值；3 较倾向于通过成功表现确认价值，有时暂时搁置感受；4 较倾向于维护独特而真实的个人经验，也可能反复注意缺失。贡献没有被看见时，三者可能分别尝试提供更多照顾、拿出更有说服力的成果，或说明未被理解的意义。心中心不等于人人都善于表达情绪。\n\n**头／脑中心：怎样应对不确定与恐惧？** 5 较倾向于退后理解，减少消耗，准备到足以应对；6 较倾向于寻找并检验可靠依据与支持；7 较倾向于打开选项，用期待和新可能应对限制。原计划失效时，可能分别先弄清具体条件、确认备用保障，或设计新的玩法。头中心不等于智力较高，也不要求外表显得害怕。\n\n中心能指出共同问题；要区分具体候选，还需回到每一种模式处理这个问题的方式。",
+          "key": "centers",
+          "title": "三中心：共同主题与组内差异一起看"
+        },
+        {
+          "body_md": "翼是传统九型对相邻影响的描述，相邻按圆周位置计算。1 的邻位是 9 和 2，6 的邻位是 5 和 7，9 的邻位是 8 和 1。6w5 表示以 6 为主模式、借用 5 邻位来描述某些表达特点，不表示两种人格各占一半。\n\n仍在担心活动安排是否可靠时，一个暂用 6w5 描述的人，可能偏向独自查清信息、保留投入；一个暂用 6w7 描述的人，可能较常通过交谈、伙伴与替代选项取得支持。这里共同的比较重点仍是 6 的可靠与保障关注。学会活跃气氛不自动否定 6w5，会认真研究也不自动证明 6w5。\n\n**6w5 与 5w6 不是同一个组合。** 两者都可能查资料，但 6w5 的主要问题可能是“这样做是否可靠，有没有可信支持”；5w6 的主要问题可能是“我能否理解并应对，资源会不会被耗尽”。先检验主模式，再谈修饰，不能靠是否内向区分。\n\n**第二高分不是翼的定义。** 第一候选为 6、第二候选为 3，不能写成 6w3。第二候选恰好为 5 时，也还需要比较 5 是表达风格，还是更适合解释主要动机。\n\n[Enneagram Institute 的翼说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)承认传统之间对一翼、两翼及其作用有分歧。翼的研究支持也有限，保留“主模式暂有候选，翼尚不确定”比强行补齐组合更合适。",
+          "key": "wings",
+          "title": "侧翼是什么？6w5 和 5w6 为什么不同"
+        },
+        {
+          "body_md": "本能关注回答的是“注意力优先落在生活的哪一块”，中心回答的是“哪些类型共享一个情绪与应对主题”。身体中心不等于自我保存，心中心不等于一对一，头中心也不等于社会。传统上，每个主模式都可以讨论三种本能关注。\n\n**自我保存（self-preservation）** 关注维持生活的条件，例如身体需要、休息、食物、住所、金钱和可持续的精力。它不等于自私；照顾家人的资源也可能属于这个领域。\n\n**社会（social）** 关注归属、群体角色、共同规则、责任与连接。它不等于外向或爱参加聚会。很少发言的人，也可能持续关心自己是否被纳入、团队责任是否清楚。\n\n**一对一（one-to-one）** 需要结合使用它的传统来理解。[The Narrative Enneagram 的本能说明](https://www.narrativeenneagram.org/instinctual-subtypes/)使用这一名称，涵盖伴侣关系、亲密关系、密切友谊、性与生命活力，也称其为 sexual 副型。[Enneagram Institute 的 sexual／attraction 说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)则特别突出吸引、彼此之间的化学反应、刺激与投入强度，并明确指出三种本能关注都可能重视一对一关系。因此，“喜欢与一个人深谈”不足以确认 sexual，两个学派的名称也不能不加说明就当成完全相同的定义。它们不是性取向分类。\n\n以暂时保留的 6 候选为例，同样关注可靠保障，有人最先问新场地是否让体力与交通费用可承受；有人最先问团队分工、规则与归属；有人最先在意一位重要伙伴之间的信任与投入。这是同一动机在不同领域的比较，不是三种新的核心动机，也不要求照搬某学派的全部副型描述。\n\n“头中心、6、5 翼、社会关注”可以放在一起理解：中心给出共同的不确定主题，6 给出主要动机，5 翼描述相邻修饰，社会关注指出经常在意的生活领域。任何一层都不能由一次聊天或一次排名自动确定。",
+          "key": "instincts",
+          "title": "三本能：同一种动机经常落在哪个生活领域"
+        },
+        {
+          "body_md": "| 题本 | 作答方式 | 结果帮助比较什么 |\n| --- | --- | --- |\n| 105 题 | 对每个描述作五级程度回应 | 对不同描述的认同程度；多个描述可以同时获得较强回应 |\n| 144 题 | 每对描述选 A 或 B | 在这些配对中的相对取舍 |\n\n假设两个描述是“先弄清问题再加入讨论”与“先确认伙伴能提供支持”，选择前者并不表示后者完全不适用。这个例子只说明作答方式，不是题本原题。\n\n105 题的程度回应与 144 题的选择次数来自不同任务，数值不能直接互换。两种展示分数都不是人群百分位；看到 80，不能理解为超过了 80% 的人。144 题的相对选择尤其不能直接当作跨人群的绝对人格强度，也不能把某种描述较少被选解释成缺乏能力或需求。\n\n候选顺序不同，不能单独说明人格改变、某一版不准，或其中一版揭示了更真实的你。先按各自作答方式理解结果，再用本页的动机区别比较真实经历。其他九型量表的研究不能自动证明费马这两份题本的可靠性或效度。",
+          "key": "forms",
+          "title": "105 题与 144 题九型测试：作答方式与结果读法"
+        },
+        {
+          "body_md": "[Hook 等人的系统综述（2021，PubMed 摘要）](https://pubmed.ncbi.nlm.nih.gov/33332604/)总结了 104 个独立样本，报告可靠性与效度的证据有支持也有限制。摘要提到，部分因素分析与理论有一定符合，部分分量表与大五等其他构念呈现符合理论预期的关系；同时，因素分析通常得到少于九个因素，翼与跨型移动等次级理论的研究支持较少。\n\n综述摘要还指出，在它所回顾的研究中，没有研究用聚类技术推导出九种类型。这是那篇综述对所纳入文献的判断，不能直接改写成“截至今天仍没有这样的研究”。本页使用的是权威摘要，没有把摘要当成全文来推断具体样本的语言、研究设计或效果大小。\n\n摘要提到若干研究报告个人或灵性成长方面的帮助，但仅凭这些摘要信息，不能承诺测评会改善关系、职业或心理健康，也不能判断费马题本具有同样效果。觉得描述很像自己，也不能替代对分类、测量和具体用途的验证。\n\n因此，本页将九种动机、中心、翼与本能作为传统的比较词汇。它们可以成为进一步提问的起点，不能单独用于医学判断、招聘筛选、职业匹配或关系定论。",
+          "key": "evidence",
+          "title": "科学证据支持到哪里"
+        },
+        {
+          "body_md": "九型图内部的连线，让一些传统进一步讨论人在压力、放松或成长时怎样借用其他模式的反应。例如，Riso–Hudson 的说明把 1 与 4、7 联系起来。The Narrative Enneagram 使用压力点与安全点，并对情境作出自己的解释；不同传统的含义不必完全相同。\n\n发展层级则试图讨论同一种关注怎样变得灵活，或怎样变得僵硬：维护标准可以帮助改进，也可能成为不断苛责；关心别人可以支持关系，也可能遮住自己的需要。\n\n这些都是传统解释，不能当作必然发生的转换路线、临床分级或健康评分。一个 1 候选在压力下表现不同，不表示“变成了 4”；采取一个看起来像 7 的行动，也不能证明已经成长。理解真实变化，仍要看当时的压力、资源、责任与行动后果。",
+          "key": "other_traditional_ideas",
+          "title": "箭头与发展层级为什么会出现"
+        },
+        {
+          "body_md": "先选两种有真实理由值得保留的候选，阅读它们的核心型页面。例如，反复检查可能值得比较 1 与 6；退后研究可能值得比较 5 与 6；不断答应别人可能值得比较 2 与 9。[The Narrative Enneagram 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)示范了先找相似处、再找内在差异的读法，不能把其中的概括当作每个人必然符合的规则。\n\n拿一个真实事件，分别写下当时可选的行动、你最早担心的事情、你不愿失去的东西，以及策略实际帮了什么、带来什么代价。先记录当时说过的话，再写事后对动机的解释，避免把解释当作直接观察。\n\n例如，5 与 6 都可能在新场地确认前不行动。可以继续问：如果联系人很可信，但你尚未理解工作量，你仍不愿参与吗？如果工作量已经清楚，但承诺没有得到确认，你仍不愿参与吗？前后两个条件分别帮助比较能力与资源、可靠与支持的关注；答案也可能显示两者都很重要。\n\n再找条件相近却反应不同的经历。一个人在熟悉任务中愿意立即参与，不自动否定 5；它可能说明准备已足够。一个人在有可信保障时敢于行动，不自动否定 6。若“害怕不被支持”的解释在有无支持的情境中都缺少对应经验，而职责更能解释检查行为，就应降低对 6 的把握。\n\n主模式较清楚后，再比较相邻翼及反向组合；想理解同一动机为何在不同生活领域表现不同，再读本能副型页面。中心页面适合进一步比较同组的共同主题与内部差异。保留两种候选或暂时不定翼，都可以是合理的下一步。\n\n例如，以六号为主模式候选时，可从 [6w5](/zh/personality/enneagram/wings/6w5) 和 [6w7](/zh/personality/enneagram/wings/6w7) 比较同一核心的不同修饰，再用 [5w6](/zh/personality/enneagram/wings/5w6) 对照反向组合是否改变了核心关注。想比较生活领域，可读六号的 [自我保存](/zh/personality/enneagram/type-6/instincts/self-preservation)、[社会](/zh/personality/enneagram/type-6/instincts/social)与[一对一](/zh/personality/enneagram/type-6/instincts/one-to-one)页面。这些是阅读路径示例，不表示你应选择六号；可按自己的核心候选继续比较。",
+          "key": "compare_next",
+          "title": "怎样把两种候选真正放在一起比较"
         }
       ],
       "seo": {
-        "description": "这份九型人格总览把九种模式作为一种传统的观察地图，用来比较人在具体情境中先注意什么、如何解释以及怎样回应。三中心在这里是整理问题的解释性标签，而不是给人定型的结论；任何理解都需要结合反例、角色、文化和当下处境继续修正。",
-        "title": "九型人格总览：从具体情境观察九种模式"
+        "description": "九型人格是什么，九种类型如何区分？用同一场景比较各型动机、策略与代价，了解三中心、侧翼和本能，分清 105 题与 144 题结果的读法与科学证据边界。",
+        "title": "九型人格是什么？九种类型与动机详解"
       },
       "sitemap_eligible": true,
       "slug": "enneagram",
       "source_hash": "d49806d8d46eaa8be28522c28a3d444075fba5b4ea273eca9f2c4cc6d0b46607",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "这份九型人格总览把九种模式作为一种传统的观察地图，用来比较人在具体情境中先注意什么、如何解释以及怎样回应。三中心在这里是整理问题的解释性标签，而不是给人定型的结论；任何理解都需要结合反例、角色、文化和当下处境继续修正。",
-      "title": "九型人格总览：从具体情境观察九种模式"
+      "summary": "九型人格是一套传统的人格解释框架，用九种动机模式理解同一行为背后不同的理由。比较各型策略的作用与代价，再了解三中心、侧翼、本能，以及 105 题和 144 题的结果读法。",
+      "title": "九型人格总览：九种类型的动机与差异"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -292,92 +299,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "217984d29a75feaaa5508ba683b8cf8cf4387aec6143f205b6d6eb7d1c4cf7fb"
+  "source_content_sha256": "030decfb4135944905cb7714537291ac04a3f3d30b52cc2182225b2953acfb36"
 }

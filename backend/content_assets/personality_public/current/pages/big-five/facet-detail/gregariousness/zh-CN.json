@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/big-five/facets/gregariousness",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "gregariousness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "不是。社恐是害怕社交、担心被评价的焦虑状态；合群性弱是偏好独处、人多会累但不会害怕。一个合群性弱的人可以是完全自信和放松的——他只是选择少去人多的地方。",
-          "question": "Q1：合群性弱是不是社恐？"
+          "answer": "不能这样判断。较少群体互动的偏好与害怕评价、紧张或回避并非同一个问题，也可以同时存在。观察自己是满意地选择较少互动，还是想参加却被持续的恐惧或痛苦阻碍。若痛苦持续并影响生活，应寻求合格专业人员评估，而不是用人格标签解释完所有情况。",
+          "question": "合群性较低是不是社交焦虑？"
         },
         {
-          "answer": "不一定。合群性的核心是\"与人共处\"的偏好。有些合群性强的人在线上的活跃度很高——因为线上也是一种\"跟人在一起\"的方式；有些人则认为线上互动不能替代真实的共处。这取决于个体对\"共处\"的定义。",
-          "question": "Q2：合群性强的人在线上一样活跃吗？"
+          "answer": "技能与偏好可以不同。你可能能清晰沟通、照顾场面，却更愿意把休闲时间用于较少互动。也要检查是否最近社交负荷过大，或聚会内容不合适；一次不想参加不能直接代表长期偏好。",
+          "question": "社交能力很好，为什么还是不想聚会？"
         },
         {
-          "answer": "根本的偏好有较强稳定性，但行为可调。一个合群性较弱的人可能因为社群责任感或职业需要而增加社交频率。一个合群性强的人也可能从独处中学会新的生活节奏。",
-          "question": "Q3：合群性能改变吗？"
+          "answer": "不一定。更喜欢群体共处不等于不能享受独处，也不保证每次聚会都令人满意。独处可能服务于休息、兴趣或专注；需要看它在具体生活中的作用。",
+          "question": "合群性较强的人一定不喜欢独处吗？"
         },
         {
-          "answer": "不一定。有些合群性强的人同时也具备独处能力——他们只是偏好人多，但一个人在的时候也能安排好自己的生活。但有少部分合群性很强的人确实对独处感到明显的不适。",
-          "question": "Q4：合群性强的人就没有独处能力吗？"
+          "answer": "只能提供该互动形式中的线索。工作要求、共同兴趣、回复习惯和群体熟悉程度都可能增加消息量。可以继续观察，在没有回复义务时，你是否仍愿意加入实时的多人互动。",
+          "question": "群聊很活跃，能说明合群性较强吗？"
         },
         {
-          "answer": "一些社交能力出众的人——特别是以社交为工作的人——可能在人群中游刃有余，但内心对独处有强烈的渴望。他们的社交是\"技能驱动\"而非\"偏好驱动\"的。这恰好说明：合群性不等于社交能力。\n\n---\n\n---\n\n---",
-          "question": "Q5：怎么看待\"社交牛人也不一定合群\"？"
+          "answer": "参加机会减少是一个重要替代解释。先看是否有合适的社群、时间和可行交通，以及你是否希望增加联系。没有机会时，不应把缺席当作偏好减少的证据。",
+          "question": "搬到新城市后参加很少，是不是变得不合群了？"
+        },
+        {
+          "answer": "这说明这些活动在当前条件下变得更合适或更熟悉，不能单凭几次体验判断人格改变。可以保留有效的安排，并把主动尝试与平时自然发生的选择分开记录。",
+          "question": "尝试几次聚会后更喜欢了，算人格改变吗？"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,88 @@
       "llms_eligible": true,
       "locale": "zh-CN",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
-        "expert_endorsement": false,
-        "limitations": [
-          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
-          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
-        ]
+        "not_for": [
+          "不能据此作临床诊断或单独决定录用、录取。"
+        ],
+        "summary": "此页帮助理解人格概念和核对日常行为。实际分数应按所用工具的计分方法、参考样本与适用范围解读。"
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "“合群性（外向性）：享受与他人共处的程度”在本页中是 NEO/IPIP-NEO 30 侧面框架下的描述性构念。IPIP 官方使用“测量与 NEO 侧面相似的构念”来描述这些量表，并列出具体条目映射（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）；这不表示不同量表、翻译或产品分数完全等同。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
-          "heading": "证据与解释边界",
+          "body": "合群性（Gregariousness）是本站采用的 NEO/IPIP-NEO 面向词汇，归于[外向性](/zh/personality/big-five/extraversion)。它描述一个人对群体共处、较多互动和参与群体活动的偏好。理解它时，可以问：当时间、费用和身体状态允许，活动内容也合适，你更愿意加入一群人，还是选择较少互动？\n\n倾向较强时，群体活动本身可能更有吸引力；倾向较弱时，较小的互动范围或独处可能更合心意。中间位置可能表现为有时选择群体、有时选择安静，也可能取决于熟悉程度或活动形式。这些都是连续差异，不是三种互斥人格。\n\n参加次数只是线索。它同时受邀请、交通、工作、照护责任和活动是否适合影响。没有这些背景，不能从一个人的日历直接判断合群性。",
+          "heading": "合群性关心的是想不想与一群人在一起",
           "key": "section-01-3ddccb5b2c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "合群性（Gregariousness）在大五人格中指的是一个人享受与他人共处、偏好群体活动而非独处的程度。它的核心问题不是\"你能不能社交\"，而是：当你有一整天的空闲时间，你是倾向于找一群人聚在一起，还是倾向于一个人待着——以及在做这个选择时，你的内心是\"太好了\"还是\"没办法\"？\n\n这一点至关重要：合群性不等于社交技能。一个人可能合群性很低——就是不喜欢扎堆、人多就觉得累——但仍然可以在需要的时候展现出色的社交能力。他不做这件事是因为不想，不是因为不会。同样地，一个人可以合群性很高——就是喜欢人、离不开热闹——但社交技巧粗糙，经常在人群中惹人烦。\n\n合群性测量的是一种\"社会性偏好\"：你需要多少人来填充你的生活？一个人独处时是感到满足还是感到孤独？一群人的存在让你充电还是放电？",
-          "heading": "精确定义",
+          "body": "社交技能关心的是如何沟通、回应、处理分歧；合群性关心的是是否想要更多群体互动。一个人可以把聚会安排得井井有条，却不想经常参加；也可以很喜欢聚会，同时需要学习轮流发言。\n\n[热情](/zh/personality/big-five/facets/warmth)关注对具体人的亲近与友好。愿不愿意坐进一个大群体，不能代替你如何对待坐在身边的人。喜欢安静的手作小组，也不必意味着喜欢嘈杂的庆典；需要区分群体共处与[刺激寻求](/zh/personality/big-five/facets/excitement-seeking)。\n\n孤独感关注实际关系与自己希望的关系是否满足。一个少参加聚会的人可能对现有联系满意，也可能很想与人联系却缺少合适机会。一个经常参加聚会的人也可能感到缺少亲近关系。因此，人数既不是孤独的量表，也不是归属感的保证。\n\n害怕评价、感到紧张、缺少交往机会与偏好较少互动也可能同时存在。不能用“合群性较低”排除痛苦或焦虑，更不能据此作诊断。",
+          "heading": "少参加、会交往和孤独，是不同的问题",
           "key": "section-02-08a168fa42",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "合群性属于**外向性（Extraversion）**维度。在外向性的六个侧面中，合群性是最直接反映\"社会参与量\"的要素——它决定了一个人愿意在多大程度上把自己置身于人群之中。与热情不同，合群性关心的是\"人数的选择\"而非\"情感的温度\"。",
-          "heading": "所属维度",
+          "body": "较有解释力的线索包括：有可行邀请时是否愿意参加；参加后是否想延长共处；没有任务要求时是否会主动加入其他人的活动；在相似活动中偏好怎样的群体规模。请同时记下自己的意愿，而不只记下到场与否。\n\n例如，你连续几次参加同一个兴趣小组，却都只是为了完成课程。到场说明你履行了安排，未必说明群体共处本身有吸引力。相反，你没有参加某次聚会，但当天必须接送家人；这次缺席不能作为偏好独处的证据。\n\n线上与线下也应分别看。文字讨论、实时语音、熟人小群和开放大群提供的互动不同。线上消息多，不自动等于更喜欢面对面的群体活动。",
+          "heading": "在真实选择里寻找行为线索",
           "key": "section-03-69fd26bebc",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **合群性 vs 热情**：合群性是\"我喜欢人多\"，热情是\"我对人暖\"。一个常年在人群中的销售经理，对人礼貌专业但不怎么建立深层情感连接，就是高合群性、低热情。一个独居作家，每年大多数时间一个人过，但偶尔见朋友时，每个人都觉得被深深看见和温暖对待——这是低合群性、高热情。\n- **合群性 vs 刺激寻求**：合群性让你去人多的地方，刺激寻求让你去令人兴奋的地方。一场安静的聚餐满足的是合群性，一场摇滚音乐节同时满足合群性和刺激寻求。一个人可能喜欢安静读书会（高合群性、低刺激寻求），另一个人可能喜欢一个人去蹦极（低合群性、高刺激寻求）。\n- **合群性 vs 积极情绪**：积极情绪是\"快不快乐\"，合群性是\"人多不多\"。一个合群性强但不特别快乐的人，在人群中依然可能选择待在人多的地方——热闹本身对他就有吸引力。",
-          "heading": "与相邻侧面的区别",
+          "body": "以下是帮助辨别的假设情境。小陈参加陶艺课程时，常留到结束后继续与同学聊天，还主动询问下一次共同练习的时间。因此，他暂时认为自己喜欢群体活动。\n\n但课程外出现一次自发的同学聚餐邀请时，时间和交通都方便，他仍选择不去。回想后，他发现自己喜欢的是几个人边做陶艺边聊天，不太喜欢没有共同活动的大桌聚餐。这是自然出现的反例：它使“我喜欢各种群体活动”过于宽泛，却不否定“我喜欢围绕共同兴趣的小组互动”。\n\n另外一次，他因临时加班错过陶艺课。那次没有可行的参加机会，不属于同一种反例。再后来，他为了比较体验，特意答应参加聚餐；这是主动尝试，应单独记录，不能与平时自发选择混为一谈。",
+          "heading": "一个活动形式改变解释的例子",
           "key": "section-04-fed9cb80fb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "合群性倾向较强的人在生活中可能：周末如果没有朋友聚会就觉得\"少了什么\"；到了一个新城市第一件事是找社群、找组织；一个人吃饭、看电影、旅行对他们来说不太自然——不是不可以，而是内心倾向于\"喊个人一起\"；在独处一段时间后，会主动寻求与人接触，就像渴了想喝水一样自然；对各种社交邀请，默认的回答是\"好\"，除非有特别的原因拒绝。\n\n合群性倾向较弱的人则可能：对社交活动有\"能量预算\"——不是每次都想去，需要挑选；一个人做的事情在他们看来不是\"凑合\"，而是\"很好的安排\"；独处时不会感到孤独，反而感到自由和恢复；对\"必须参加的社交场合\"可能需要提前心理准备和事后恢复期；更珍惜少而深的连接，而非多而广的接触。",
-          "heading": "行为线索",
+          "body": "如果你常主动增加群体活动，可以检查安排是否挤掉了睡眠、必要事务或你重视的一对一联系。需要调整的是具体日程，不必把喜欢共处解释为缺乏独立能力。一次聚会后的疲惫也不等于这种偏好不真实。\n\n如果你通常选择较少互动，可以先问这种安排是否符合自己的愿望。满意时，不需要仅因别人更热闹而增加聚会；想要更多联系时，可以寻找适合的形式，例如固定的小组活动。少参加不能保证专注、自省或关系更深，也不意味着需要被“纠正”。\n\n与他人共同安排活动时，把需求说具体会更有用：愿意参加什么活动、待多久、希望多少人、什么时候需要安静。双方可以协商这些条件，不必先判断谁更合群。",
+          "heading": "怎样安排共处，同时照顾实际需要",
           "key": "section-05-15f77f4f2a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "合群性的表达高度依赖于身边有谁。一个合群性一般的人，面对真正的知己小团体可能表现得像合群性很强，但面对陌生人的大型聚会可能就退居一角。这并不代表他\"装\"或\"矛盾\"——合群性是偏好，不是无条件反射。合群性强的人在\"对\"的人群中如鱼得水，在\"错\"的人群中可能变得安静甚至局促。\n\n职业和生活阶段也会影响合群性的行为表现。一个合群性很强的人如果长期必须在家里工作，可能会有明显的缺失感；一个合群性较弱的人如果从事需要频繁社交的工作，可能会在职业上成功但私生活中需要大量的独处来恢复。",
-          "heading": "情境差异",
+          "body": "先选一个具体问题，例如“在有选择的休闲时间，我是否经常想加入熟悉的多人活动？”在接下来几次自然出现的安排中，记录活动内容、群体大小、熟悉程度、是否有可行机会、原本想不想参加、实际选择和结束后的感受。\n\n区分三种情况：有机会而没有参加，可能帮助理解选择，但仍需记录原因；没有机会，如时间冲突或活动不便，只能说明限制；没有找到相反情形，则要看是否真的出现过不同选择，不能写成“没有反例，所以已经证实”。自然地选择独处或选择共处，都可帮助修正原先印象。\n\n随后可以做一次自愿、容易退出的尝试：与熟悉的小组短时间共处，或在原本连续安排活动的日程中保留一段安静时间。事先写下预期，结束后检查是否愿意重复、哪些条件影响体验。不要为了观察而取消必要支持、勉强参加让你明显不适的场合。\n\n若在相近条件下多次自发选择同一形式，可以暂时保留这个局部描述；若只有共同兴趣的小组符合，就缩小到该情境；若机会不足、最近过度疲劳或体验难以分清，就搁置判断。短期记录用于改进安排，不验证人格，也不证明一次练习改变了合群性。",
+          "heading": "把观察、反例和主动尝试分别记下",
           "key": "section-06-60df58e497",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当合群性倾向较强时，一个人可能：\n- 把社交当作生活的重要组件，不是\"顺便\"而是一种基本需求；\n- 在独处数天后，感到一种无法忽略的\"往外走\"的冲动；\n- 容易在人群中感到舒适——即使不说话，知道周围有人本身就令人安心；\n- 做决定时会考虑\"别人在做什么\"和\"能不能一起做\"；\n- 但可能很少体验深度独处，有时对自己不够了解。",
-          "heading": "倾向较强时的可能表现",
+          "body": "[IPIP 的 NEO 对应表](https://ipip.ori.org/newNEO_FacetsTable.htm)将 Gregariousness 对应到 NEO 的同名面向。[IPIP 长版条目](https://ipip.ori.org/newNEOFacetsKey.htm)涉及群体参与、聚会与独处偏好；[Maples 四条目版本](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm)使用较少条目，覆盖范围有所不同。\n\n这些官方材料解释的是相似构念及具体量表条目，不表示不同工具或翻译的分数可以互换。本页也不据此认定某份费马题本测量了所有面向，或从外向性总分推算你的合群性。若实际结果没有这一面向的输出，可把本页作为观察词汇，而不是补出的测量结果。",
+          "heading": "来源支持到哪里",
           "key": "section-07-e4578a32fd",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当合群性倾向较弱时，一个人可能：\n- 社交和独处像是收入和支出——每次社交后需要相应时间的独处来\"回血\"；\n- 一个人旅行、吃饭、看电影不但不苦，反而是一种享受；\n- 对社交邀请有一套自己的过滤机制——\"这顿饭值不值我去\"不是冷漠，是能量管理；\n- 更依赖少数深层关系而非广泛社交网络来获得归属感；\n- 但在需要团队紧密协作或群体动员的环境中，可能感到心力消耗更快。",
-          "heading": "倾向较弱时的可能表现",
+          "body": "想理解群体偏好与整个维度的关系，可以读[外向性](/zh/personality/big-five/extraversion)；想比较“愿意共处”与“对人亲近”，读[热情](/zh/personality/big-five/facets/warmth)；想理解在群体中是否主动主导，读[果断性](/zh/personality/big-five/facets/assertiveness)。\n\n如果你关心的是活动节奏，继续读[活跃度](/zh/personality/big-five/facets/activity)；如果关心刺激强度或愉快情绪，分别读[刺激寻求](/zh/personality/big-five/facets/excitement-seeking)和[积极情绪](/zh/personality/big-five/facets/positive-emotions)。[面向总览](/zh/personality/big-five/facets)可帮助把这些问题放回同一框架。",
+          "heading": "根据你的问题继续阅读",
           "key": "section-08-aa92038459",
-          "kind": "rich_text"
-        },
-        {
-          "body": "合群性倾向较强的人，优势在于社交网络的广度和厚度——他们有更多信息来源和支持系统，很少在需要帮助时找不到人。他们也更容易融入新环境、建立新联系。代价是：独处能力的减弱——有时过度依赖外界刺激来填充内心，难以面对真正的安静；社交疲惫也可能积累，但因为\"习惯\"而不被察觉。\n\n合群性倾向较弱的人，优势在于独立自足——他们不需要别人来\"装满\"自己的时间。这种人通常更善于自省，有丰富的内心世界。代价是：在需要广泛协作或人脉运营的领域，需要额外的能量投入；有时可能错过那些偶然的兴趣相投——因为拒绝群体活动的同时，也减少了一些不可能预见的连接。",
-          "heading": "优势与代价",
-          "key": "section-09-45c784e6a4",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**案例**：刘阳是一家公益机构的社区协调员，每天和几十个人打交道——居民、志愿者、政府部门。他对此毫无压力，甚至下班后通常还有精力去参加各种活动：读书会、羽毛球、社区园艺。他的太太说他\"像个不需要充电的手机\"。有一次机构组织两天一夜的团建，回程大巴上所有人都累得不想说话，刘阳却正在和旁边的人讨论下周末约什么活动。他不是在\"表现积极\"——他是真的觉得有人就是比自己一个人有意思。",
-          "heading": "一个原创案例",
-          "key": "section-10-9f659d3bbc",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**反例**：徐青是独立插画师，在家工作。她平均每周大约只和两三个人面对面互动——一个好朋友每周约一次饭、客户偶尔线上开会。有一次朋友问她：\"你不觉得孤独吗？\"她想了一下说：\"不会。我一个人画画的时候脑子转得很快。人多的时候，我的注意力会被分散。\"她的社交能力其实不差——和客户沟通时清晰得体，和朋友相处时放松有趣——但她从不主动组织聚会，也从不觉得社交是\"必需品\"。对她来说，独处不是\"没有人在\"，而是\"我自己在\"。",
-          "heading": "一个原创反例",
-          "key": "section-11-c79691e240",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. 独处一整天后，你感到的是放松满足还是某种\"想找人\"的冲动？\n2. 当朋友突然取消约好的聚会时，你的第一反应是遗憾还是松了一口气？\n3. 过去一个月里，你主动组织的社交活动有多少？参与多少？两者的比例说明了什么？\n4. 你心中理想的周末是安静的还是热闹的——或者两者交替？\n5. 如果你搬到一个新城市，没有认识的人，你的第一件事会是什么？",
-          "heading": "自我观察问题",
-          "key": "section-12-66f169be1d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- **社交收支账本**：如果你倾向较弱，花一周记录每次社交互动后的能量变化——是增加还是减少。不同的人、不同的场景，效果是否不同？\n- **独处挑战**：如果你倾向较强，尝试连续两个周末的其中一天完全自己过——不约人、不刷社交网络。观察\"安静时刻\"的内心反应。\n- **一对一 vs 群体**：安排一次一对一的深度交流，再安排一次五人以上的群体活动。对比结束后你的感受——你更喜欢哪一种？两种分别给了你什么？",
-          "heading": "低风险行动实验",
-          "key": "section-13-766e260d06",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- 返回父维度：[外向性](/zh/personality/big-five/extraversion) · [30 个侧面总览](/zh/personality/big-five/facets)\n- 同维度侧面：[热情](/zh/personality/big-five/facets/warmth) · [果断性](/zh/personality/big-five/facets/assertiveness) · [活跃度](/zh/personality/big-five/facets/activity) · [刺激寻求](/zh/personality/big-five/facets/excitement-seeking) · [积极情绪](/zh/personality/big-five/facets/positive-emotions)",
-          "heading": "继续阅读",
-          "key": "section-14-2642de991b",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "合群性描述对群体共处和互动的偏好。把想不想参加、能不能参加、是否擅长交往和有没有孤独感分开，才能更准确地理解自己的社交安排。",
+        "title": "合群性：你偏好多少群体互动"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/gregariousness",
-      "source_hash": "0cf536027b26002cd7c7d4c1941005f16de8cbc8a08c840d1f24358865b4a6fe",
-      "source_package": "big5-zh-v3-52-page-release",
-      "summary": "合群性反映一个人享受与他人共处、偏好群体活动而非独处的程度——不等于社交技能，你可能合群性低但仍然善于与人打交道。",
-      "title": "合群性（外向性）：享受与他人共处的程度"
+      "source_hash": "7a3d8c272e0949dc1f841385e484526a61253e51531bbb6665cbc97844657811",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "合群性描述对群体共处和互动的偏好。把想不想参加、能不能参加、是否擅长交往和有没有孤独感分开，才能更准确地理解自己的社交安排。",
+      "title": "合群性：你偏好多少群体互动"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E2-gregariousness-facet_definition-1",
-            "limitation": "IPIP 描述的是与 NEO 侧面相似的构念，不证明量表、翻译或产品分数完全等同。",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "contextual"
-          },
-          {
-            "claim_id": "E2-gregariousness-product-boundary",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E2-gregariousness-content-method",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "模型研究不等于费马测试产品验证。",
-          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E2-gregariousness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "80fab9de187797b41ba79d1db9ea441dc62d0694d82d573497848402da9ac33f"
+  "source_content_sha256": "0e7317b84206f9404323584dbe7931cede0eeb1f152f36e29d7138d65b347342"
 }

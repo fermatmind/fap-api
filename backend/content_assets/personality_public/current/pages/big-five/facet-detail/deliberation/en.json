@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/deliberation",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "deliberation",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Deliberation can end in a timely, clear choice.",
-          "question": "Does strong Deliberation mean indecision?"
+          "answer": "Time alone cannot show that. A short pause can check an important constraint, while a long delay may repeat an unresolved worry. Record what was considered and whether it added information or changed the choice.",
+          "question": "Does taking longer mean I am more deliberative?"
         },
         {
-          "answer": "No. Fast choices may reflect expertise, reversibility, or appropriate urgency.",
-          "question": "Does weaker Deliberation mean recklessness?"
+          "answer": "It does not establish that conclusion. Judgment also depends on the evidence, relevant knowledge, values, and constraints. Evaluate the process separately from an outcome that may include luck or unforeseen events.",
+          "question": "Does strong Deliberation mean better judgment?"
         },
         {
-          "answer": "More review can help, but quality also depends on evidence, values, expertise, deadlines, and stopping rules.",
-          "question": "Is stronger Deliberation always better for major decisions?"
+          "answer": "No. Familiarity, clear rules, and genuine time limits can make decisions fast. Ask whether an available and necessary check was skipped instead of inferring a trait from speed.",
+          "question": "Are fast decisions necessarily impulsive?"
         },
         {
-          "answer": "Agree on stakes, decision owner, information needs, deadline, and what can be tested reversibly.",
-          "question": "How can people with different decision tempos work together?"
+          "answer": "Identify the question each new round is meant to answer. If it resolves a new constraint, continued review may be useful. If the conditions are met and the same comparison restarts without new evidence, record postponement and clarify a stopping condition.",
+          "question": "How can I tell review from repeated postponement?"
         },
         {
-          "answer": "Roles, incentives, training, and consequences can change behavior. This page does not predict stable score change.",
-          "question": "Can environment change Deliberation?"
+          "answer": "Agree on the decision owner, actual deadline, necessary checks, and unresolved information. Discuss what remains to be supplied rather than labeling one person reckless and the other indecisive.",
+          "question": "How can people with different decision tempos collaborate?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Deliberation concerns the tendency to pause, compare consequences, and consider alternatives before acting. It describes decision tempo and checking—not intelligence, anxiety, superior judgment, or guaranteed safety.\n\n“Deliberation within Conscientiousness: considering consequences before action” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Deliberation, a Conscientiousness facet in the NEO/IPIP-NEO vocabulary used here, concerns weighing consequences and alternatives before acting. The relevant pause can be brief. Hours spent revisiting the same thought are not automatically evidence of more deliberation.\n\nLook for actions before commitment: checking a constraint, considering another workable option, or noticing who will be affected. These describe a process. They do not establish intelligence, courage, or the quality of the eventual decision.\n\nStronger, intermediate, and weaker tendencies are continuous descriptions rather than separate personality types. The same person may use a different process when the choice is familiar, the time is limited, or someone else owns the decision.",
+          "heading": "The useful question is what happens before commitment",
           "key": "section-01-af390007c0",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency more often inserts a review step between impulse and action. A weaker tendency more often acts on an adequate first read and updates from feedback. Either can be effective or costly depending on stakes, reversibility, information, and time.",
-          "heading": "Precise Definition",
+          "body": "A useful check changes what you know or reveals a relevant limit. Repeating the same comparison may add no evidence. Extra time cannot compensate automatically for unreliable information, missing expertise, or a preference that you never allow to be challenged.\n\nEvaluate process and outcome separately. A considered choice can encounter an unforeseen problem; an unchecked choice can work by chance. Ask what was reasonably knowable at the time rather than treating satisfaction afterward as proof of good judgment.\n\nThree questions can make review more concrete: Which finding changed my preference? What fact would make me reject my preferred option? What unresolved question would another round of checking answer? If the third answer is unclear, inspect the purpose of more review before extending it.",
+          "heading": "More review and better judgment are different claims",
           "key": "section-02-a903fadfcc",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Deliberation belongs to [Conscientiousness](/en/personality/big-five/conscientiousness), where considering consequences can support planned behavior.",
-          "heading": "Parent Domain",
+          "body": "There is a difference between choosing quickly because the time window is short and skipping an available, relevant check. Likewise, waiting for someone else's approval is not necessarily your own delayed choice.\n\nEstablish the actual deadline, the available information, and who has authority to decide. Familiar work may need only a short check. A mandated response may leave no meaningful opportunity to compare options. Record these conditions rather than treating every quick action as weaker Deliberation.\n\nRepeated postponement needs its own explanation. New information can justify another review. If the necessary conditions are already met and no new question is being resolved, record that the choice remains unmade. This may involve uncertainty, competing priorities, or fear of responsibility; it does not identify an anxiety condition.\n\nOnce a choice is settled, difficulty starting the agreed action belongs to a different stage. [Self-Discipline](/en/personality/big-five/facets/self-discipline) helps explain that distinction. [Order](/en/personality/big-five/facets/order) concerns structure, while [Dutifulness](/en/personality/big-five/facets/dutifulness) concerns obligations.",
+          "heading": "A deadline is part of the situation",
           "key": "section-03-4b521052e1",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Deliberation versus anxiety:** Worry may delay action through threat sensitivity; Deliberation can be calm and procedural.\n- **Deliberation versus indecision:** Comparing options can end in a timely choice. Indecision is an outcome, not the facet itself.\n- **Deliberation versus Self-Discipline:** [Self-Discipline](/en/personality/big-five/facets/self-discipline) concerns executing after a choice.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine that you help a local history group choose when to send its next newsletter. Before naming a date, you check when photographs will be available and when another volunteer can proofread. One constraint changes the proposed date. That is evidence that checking influenced this particular choice, not proof of generally superior judgment.\n\nOn a later issue, the same information is available, but you repeatedly reopen the date without identifying another unanswered question. The problem now is how to finish the decision and communicate it, rather than how to keep considering indefinitely.\n\nA quick commitment can move work forward but can also overlook a dependency. More checking can reveal a dependency but consume the time needed to act. Observe which consequence occurred; neither speed nor slowness supplies an advantage on its own.\n\nIf the coordinator selected the date and you merely entered it, this episode offers little evidence about how you independently decide.",
+          "heading": "Watch one ordinary choice unfold",
           "key": "section-04-655026bb84",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Deliberation may appear as reading terms, checking downstream effects, asking for time, or using pre-mortems. Weaker Deliberation may appear as quick commitments, learning by doing, or deciding with partial information. Expertise can make fast judgment look less deliberative because prior learning is compressed.",
-          "heading": "Behavioral Cues",
+          "body": "If your hypothesis is “I always examine a choice before agreeing,” look for a recent ordinary commitment made without checking, even though time and information were available. An occasion without deadline pressure or an intentional speed exercise can challenge the word “always.” Narrow the claim to the decisions where checking actually occurs.\n\nIf your hypothesis is “I never pause first,” look for an occasion when you spontaneously checked a practical constraint and then chose, without a reminder or a new checklist. Do not dismiss it simply because the decision was small.\n\nRepeated comparable occasions can support retaining a specific process hypothesis. Decisions made by other people, unavailable information, and urgent instructions instead support setting a broad interpretation aside. Not finding a counterexample in a short review does not prove that none exists. A deliberately introduced checklist is a trial of a method, not a natural counterexample.",
+          "heading": "An unplanned exception matters",
           "key": "section-05-59504e7c30",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "High-stakes, irreversible decisions may activate checking in almost anyone. Emergencies reward speed. A person may deliberate financially and decide quickly socially. Compare within similar stakes rather than assigning one global label.",
-          "heading": "Contextual Differences",
+          "body": "First observe several ordinary choices without changing your process. Record who could decide, how much time was available, what was checked, and whether a choice was reached. Keep these natural observations separate from the next step.\n\nFor a low-stakes choice that can be adjusted, deliberately write down its purpose, two necessary conditions, one unresolved fact that might change the choice, and a decision time. This is a practical trial rather than a validated test of Deliberation.\n\nChoose when the necessary conditions are met and the remaining question would not materially change the options. If an essential condition is missing, defer explicitly, reduce the scope, or ask the person who has the relevant authority. Do not use a timer to ignore a real constraint.\n\nDistinguish an available opportunity where checking did not happen, a choice without the resources or authority to check, and checking that actually occurred. Then note whether the check added usable information, whether settled questions were reopened, and whether the agreed decision time was met.\n\nKeep the method if it reduces repetitive review while retaining necessary checks. Simplify or stop it if the procedure costs more than the choice warrants. Improvement supports that method for those decisions; it does not demonstrate a personality change or guarantee better outcomes.",
+          "heading": "Try a stopping condition on a reversible choice",
           "key": "section-06-dab95ff0d5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Identifying second-order consequences.\n- Creating criteria before choosing.\n- Catching preventable risk.\n- Missing a time-limited opportunity.\n- Rechecking after information is already sufficient.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) maps Cautiousness to NEO Deliberation. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) and [Maples shorter set](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) concern similar constructs. They are not performance tests establishing whether someone's decisions are correct.\n\nThis site's thirty-facet vocabulary is one framework. The [BFI-2 authors' description](https://www.ocf.berkeley.edu/~johnlab/bfi.html) uses fifteen facets, so its structure should not be treated as the same inventory.\n\nCheck which version you completed and whether it reports this facet. Do not derive an unreported Deliberation score from Conscientiousness, create your own thresholds or weights, or assume that a hundred-point score is a percentile. Instrument statistics in the sources do not establish FermatMind product statistics.",
+          "heading": "Why the sources also use Cautiousness",
           "key": "section-07-14ac15b564",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Moving rapidly from signal to action.\n- Learning through reversible trials.\n- Keeping momentum under uncertainty.\n- Committing before dependencies are understood.\n- Repairing decisions that a brief pause might have improved.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "If the decision is settled but action stalls, read [Self-Discipline](/en/personality/big-five/facets/self-discipline). If you are unsure of your perceived effectiveness, read [Competence](/en/personality/big-five/facets/competence). If the standard keeps rising, read [Achievement Striving](/en/personality/big-five/facets/achievement-striving).\n\n[Order](/en/personality/big-five/facets/order) and [Dutifulness](/en/personality/big-five/facets/dutifulness) distinguish structure and obligation from review before commitment. Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets) for the wider framework.",
+          "heading": "Continue with the question that remains",
           "key": "section-08-e9a0575f64",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Deliberation can improve risk visibility and coordination on consequential decisions. Possible costs include delay, analysis load, and weak responsiveness. Weaker Deliberation can support speed and experimentation; possible costs include avoidable error and repair. Neither level proves courage, judgment, or competence.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-4d4692eec6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A product lead separates a reversible interface test from an irreversible contract. She decides the test in minutes and reviews the contract with criteria and counsel. Deliberation adapts to stakes rather than becoming a blanket rule.",
-          "heading": "An Original Case",
-          "key": "section-10-250eb896ad",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A firefighter acts rapidly during a known emergency protocol. Speed reflects training and context, not necessarily weak Deliberation or recklessness.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-980c4ecf9d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which decisions trigger a pause, and are their stakes actually higher?\n2. What evidence tells you that review is sufficient?\n3. Do you decide faster in domains of expertise?\n4. Which recent fast decision required repair?\n5. Which recent slow decision lost value through delay?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-855a1a45dd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For one week, label decisions reversible or hard to reverse. Give reversible choices a short timer and consequential choices a written criterion list. Review whether tempo matched stakes rather than declaring fast or slow universally better.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-d37e82287d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Competence](/en/personality/big-five/facets/competence), [Order](/en/personality/big-five/facets/order), [Dutifulness](/en/personality/big-five/facets/dutifulness), [Achievement Striving](/en/personality/big-five/facets/achievement-striving), [Self-Discipline](/en/personality/big-five/facets/self-discipline).",
-          "heading": "Continue Reading",
-          "key": "section-14-3332262b71",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Deliberation concerns considering consequences before acting. Examine what a pause adds, how much time is actually available, and whether repeated review is still resolving a question.",
+        "title": "Deliberation: Checking Before You Commit, Then Reaching a Decision"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/deliberation",
-      "source_hash": "a2105d5791a0073ee23492b0681ebe08ce0a68f2cc5a920b217ee2d9a5072da2",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Deliberation concerns pausing to consider consequences before acting. It is not indecision, anxiety, superior judgment, intelligence, or a guarantee of safe choices.",
-      "title": "Deliberation: Considering Consequences Before Acting"
+      "source_hash": "c9ade62e6f3eb22bfda6f382d6fa621ab9530c6aa6d4288292ac1c9e1ef5294f",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Deliberation concerns considering consequences before acting. Examine what a pause adds, how much time is actually available, and whether repeated review is still resolving a question.",
+      "title": "Deliberation: Checking Before You Commit, Then Reaching a Decision"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "C6-deliberation-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "C6-deliberation-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "C6-deliberation-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "C6-deliberation-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "b091dade15a25ed80e6ab9a0768c757ad898018f85776f39349debdd75716e54"
+  "source_content_sha256": "7061548a7efa2b1210204cb41eee1c8f867156a6265cd0d477d37b7253a2f2bf"
 }

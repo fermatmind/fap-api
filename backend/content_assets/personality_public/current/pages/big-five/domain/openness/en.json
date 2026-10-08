@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/openness",
@@ -20,52 +20,39 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "openness",
       "entity_type": "domain",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        },
-        {
-          "citation_label": "Meta-analytic relations between personality and cognitive ability",
-          "limitation": "The PNAS metadata confirms the title, authors, DOI, and publication details. Use to reject the simplification that Openness equals intelligence.",
-          "public_url": "https://www.pnas.org/doi/10.1073/pnas.2212794120",
-          "source_id": "S10"
-        },
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        },
-        {
-          "citation_label": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
-          "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
-          "source_id": "S2"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "They are different constructs. Research associations vary by cognitive ability and by whether Openness is measured at the domain, aspect, or facet level. An Openness score cannot establish or predict an individual’s IQ ([S10](https://www.pnas.org/doi/10.1073/pnas.2212794120)).",
+          "answer": "Yes. Meta-analysis has observed group-level associations between openness-related traits and cognitive abilities. The pattern varies across broad domains, narrower aspects or facets, and ability types: global Openness relates more strongly to verbal and verbally oriented knowledge abilities than to quantitative abilities, while intellect-related and experiencing components show different patterns. These associations do not establish causation or turn your Openness score into an individual IQ result. Ability questions require appropriate ability assessment.",
           "question": "Is Openness related to IQ?"
         },
         {
-          "answer": "No. Practical execution depends on knowledge, constraints, habits, skills, and other tendencies. Higher Openness may increase option generation, but a person can still plan carefully and finish reliably.",
+          "answer": "No. Assess the actual execution: how a direction was selected, what constraints were considered, and whether the work was completed. Exploration interest can coexist with careful delivery, and unfinished work can have causes a personality label does not identify.",
           "question": "Does high Openness mean being impractical?"
         },
         {
-          "answer": "No. It may indicate preference for concrete evidence, familiar approaches, or controlled change. Rigidity is a context-specific judgment and should not be inferred from one broad score.",
+          "answer": "No. Preferring a familiar approach differs from refusing to consider evidence. Examine a situation in which relevant new evidence was available, whether it was understood, and why the person retained or revised the decision.",
           "question": "Does low Openness mean rigid thinking?"
         },
         {
-          "answer": "Behavior can vary with experience, roles, incentives, and context. This page does not provide an individual forecast or a fixed timeline. Use repeated observations with the same instrument if change itself is the question.",
+          "answer": "Yes. Ideas and Actions concern different directions of exploration. Activities also depend on feasibility, responsibilities, and cost. Describe interest and action separately rather than forcing both into one global story.",
+          "question": "Can I enjoy unfamiliar ideas but dislike changes to my routine?"
+        },
+        {
+          "answer": "Not necessarily. Inner experience, attention to that experience, expression, and emotion skills are different questions. A quiet person can have rich feelings, and a fluent speaker can still misunderstand or handle them poorly.",
+          "question": "Does difficulty expressing feelings mean low emotional openness?"
+        },
+        {
+          "answer": "Yes. Longitudinal meta-analysis has observed average changes in Openness, including increases in adolescence and decreases in old age. Those group trends cannot guarantee your direction, amount, or timetable of change. A fluctuating test score, trying a new activity or exploring more for a short time, and a longer-term shift in tendency are different observations. Short trials can examine behavioral conditions; a lasting change needs comparable repeated measurement and context, rather than one successful exercise or one changed score.",
           "question": "Can Openness change?"
         },
         {
-          "answer": "They describe different tendencies. A person can enjoy novel ideas and also organize execution carefully, or prefer familiar methods while struggling with follow-through. Inspect facets and situations instead of assuming the domain labels must align.",
+          "answer": "Identify the practical conflict, such as continuing to explore while a task needs delivery. Agree on an exploration limit, decision criteria, and a completion standard. The two tendencies can coexist; their scores do not guarantee creativity or follow-through.",
           "question": "What if Openness and Conscientiousness seem to conflict?"
+        },
+        {
+          "answer": "Only an explicitly defined percentile permits a relative-population interpretation. A score expressed out of 100 may instead be a scale-range conversion. Check the instrument, reference population, language, and conversion method.",
+          "question": "Does a score of 70 mean I am above 70% of people?"
         }
       ],
       "framework": "big_five",
@@ -136,221 +123,94 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Openness to Experience is the O in the Big Five OCEAN model. It describes how readily a person engages with imagination, unfamiliar ideas, aesthetic experience, emotional nuance, new activities, and the possibility that established assumptions could be revised. It is a broad, continuous tendency. It does not divide people into “creative” and “uncreative” types, and it does not rank their intelligence, education, sophistication, or worth.\n\nThis page places Openness to Experience—curiosity, imagination, and receptivity to new experience—within the Big Five continuous-domain framework ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). The six facets below use NEO/IPIP-NEO vocabulary. The official IPIP resource says its scales measure constructs similar to NEO facets, while the BFI-2 uses a different 15-facet architecture ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm); [S2](https://pubmed.ncbi.nlm.nih.gov/27055049/)). These labels must not be treated as fully equivalent across instruments.\n\nOpenness and cognitive ability are different constructs. A large-scale meta-analysis found that relationships vary by personality level—domain, aspect, or facet—and by the type of cognitive ability being examined. That evidence cannot be compressed into “Openness equals intelligence” or used to predict an individual’s IQ from an Openness result ([S10](https://www.pnas.org/doi/10.1073/pnas.2212794120)).\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Openness to Experience is a continuous Big Five domain concerned with engagement in ideas, experiences, imagination, and forms of expression. Exploration can happen privately: dwelling on a fictional possibility or attending closely to music does not require an adventurous itinerary.\n\nA useful starting question is what draws your attention when you have a real choice. Do you want to spend time with something unfamiliar, or return to an approach you already know? Then ask what kind of unfamiliarity is involved. An abstract explanation, a different activity, and an emotional experience are not interchangeable.\n\nSuppose a workshop offers a demonstrated procedure and an optional discussion of its assumptions. Choosing the discussion may reveal intellectual interest. It does not establish stronger reasoning. Skipping it may reflect limited time, unfamiliar vocabulary, or a need to finish the practical task. One choice is a clue whose meaning depends on its conditions.",
+          "heading": "What the domain is trying to describe",
           "key": "section-01-4163a2d509",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Openness asks how a person tends to meet information and experience that do not already fit a familiar template. Someone may enjoy exploring a concept before deciding whether it is useful, notice symbolism or form in art, examine an emotion closely, vary routines for the sake of discovery, or reconsider a rule when the situation changes. These behaviors can share a willingness to stay with novelty or ambiguity long enough to learn from it.\n\nThe domain is broader than curiosity alone. A person can be highly curious about technical systems yet prefer familiar food, or enjoy imaginative fiction while holding stable practical routines. A domain score summarizes several narrower tendencies and can hide an uneven facet pattern. Interpretation becomes more useful when it names the behavior, the context, and the cost of that behavior rather than relying on the broad label.",
-          "heading": "What Openness Observes",
+          "body": "A higher tendency can appear as sustained interest in unfamiliar interpretations, imaginative possibilities, aesthetic experiences, or varied activities. Whether this produces useful work depends on what happens next: checking evidence, learning a skill, making decisions, and completing the task.\n\nA lower tendency can appear as preference for familiar experiences or established approaches. Someone may consider new evidence carefully without wanting novelty for its own sake. Familiarity preference does not establish reliability, efficiency, or an inability to reconsider a belief.\n\nA middle result may describe a moderate overall tendency or conceal differences across facets and settings. Enjoying theoretical discussion while keeping daily routines unchanged is one possible pattern, not the meaning of every middle score. A middle position does not certify balance or an ability to switch styles.\n\nThese positions describe degrees, not three personality types. Use the instrument's explanation of its scale and reference group rather than importing cutoffs from another test.",
+          "heading": "Reading higher, lower, and middle positions",
           "key": "section-02-8c7ad7868e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Openness is not intelligence, artistic talent, cultural status, political identity, or a guarantee of original work. A person can reason exceptionally well while preferring established methods. Another person can seek novelty enthusiastically without having the knowledge or skill to turn an idea into a sound result. Education and access also shape which books, places, art forms, and experiences are available, so observed behavior is never a pure display of a trait.\n\nLow Openness does not mean a closed mind. It may appear as preference for concrete evidence, tested methods, familiar routines, or a narrower change budget. High Openness does not mean impracticality. It may be paired with strong planning and disciplined execution. Neither end is inherently more rational, creative, mature, or ethical.",
-          "heading": "What Openness Is Not",
+          "body": "This site uses NEO/IPIP-NEO interpretive vocabulary. The examples below illustrate distinctions; they are not assessment items or additional measured results.\n\n- [Imagination](/en/personality/big-five/facets/imagination) concerns fantasy and imagined possibilities. Inventing an alternative scene while reading is a relevant clue; producing a convincing story requires separate skills.\n- [Aesthetics](/en/personality/big-five/facets/aesthetics) concerns interest in art and beauty. Lingering over the arrangement of light in a room differs from knowing how to design that room.\n- [Feelings](/en/personality/big-five/facets/feelings) concerns emotional experience and engagement with it. Noticing mixed feelings after an important conversation does not establish accurate emotion recognition or regulation.\n- [Actions](/en/personality/big-five/facets/actions) concerns variation in activities and routines. Trying a different community activity when attendance is feasible provides more information than a travel history shaped by money or access.\n- [Ideas](/en/personality/big-five/facets/ideas) concerns intellectual exploration. Following a question about how an argument works differs from successfully evaluating that argument.\n- [Values](/en/personality/big-five/facets/values) concerns examination of established judgments and conventions. Reconsidering why an old agreement still applies is relevant even if the agreement is ultimately retained.\n\nThe labels on this site combine NEO and IPIP interpretive names; they are not all original NEO labels. In the [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm), NEO Fantasy (O1) corresponds to IPIP Imagination, the name used here. NEO Aesthetics, Feelings, Actions, Ideas, and Values correspond respectively to IPIP Artistic Interests, Emotionality, Adventurousness, Intellect, and Liberalism. The latter includes culturally specific political and normative content. These are similar constructs, not identical items, instruments, or scoring rules, and this guide cannot infer your political identity.",
+          "heading": "Six facets, six different questions",
           "key": "section-03-40b41bd203",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Toward the higher end, people may generate alternatives readily, enjoy conceptual exploration, tolerate ambiguity for longer, and seek variety in ideas or experiences. This can support discovery when the problem is uncertain. It can also make it harder to stop exploring, select one direction, or respect constraints that are not intellectually interesting but still matter.\n\nToward the lower end, people may favor concrete instructions, proven methods, predictable environments, and decisions grounded in immediate usefulness. This can support consistency and efficient execution when requirements are stable. It can also make rapid reframing or experimentation feel needlessly disruptive. Mid-range results can reflect selective openness: curiosity in some areas, familiarity in others, or a deliberate shift based on stakes.\n\nRead the continuum as a pattern of probability, not a script. Expertise, role expectations, fatigue, safety, time pressure, and incentives can all change what appears in a given moment.",
-          "heading": "Behavioral Tendencies Across the Continuum",
+          "body": "Curiosity may be narrow. Someone can investigate every unfamiliar mechanical fault while having little interest in fiction. Another person may be absorbed by visual expression without enjoying conceptual debate. Specify the direction of interest before applying the broad domain label.\n\nNovel ideas also need evaluation. A proposal can be unusual but inaccurate, or familiar and well suited to the problem. Examine the work itself, its constraints, and feedback. Frequent changes of plan might reflect exploration, unclear requirements, or avoidance of a difficult step; the Openness label does not decide among these explanations.\n\nIntellectual interest is not an IQ result. Educational credentials, reading habits, and vocabulary cannot replace the relevant assessment of either personality or ability.\n\nEmotional engagement is not emotional competence. Feeling deeply, talking readily, recognizing another person's state, and responding effectively are different observations. Record them separately rather than giving one behavior credit for all four.",
+          "heading": "Preference, ability, and outcomes need separate evidence",
           "key": "section-04-c0220e7d47",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "This package uses six NEO/IPIP-NEO facet labels. [Imagination](/en/personality/big-five/facets/imagination) concerns fantasy, mental simulation, and invented possibilities. [Aesthetics](/en/personality/big-five/facets/aesthetics) concerns responsiveness to art, form, beauty, and sensory composition. [Feelings](/en/personality/big-five/facets/feelings) concerns attention to emotional experience and nuance.\n\n[Actions](/en/personality/big-five/facets/actions) concerns willingness to vary activities and routines. [Ideas](/en/personality/big-five/facets/ideas) concerns intellectual curiosity and enjoyment of complex thought. [Values](/en/personality/big-five/facets/values) concerns readiness to examine conventions and revise assumptions. These are interpretive labels within this package, not independent personality types, abilities, or interchangeable scales across every Big Five instrument.",
-          "heading": "The Six Facets of Openness",
+          "body": "In a research assignment, opening more sources may clarify the question or merely postpone writing. Before adding another source, name the uncertainty it should resolve. A stopping rule might be to explain two competing accounts, identify the evidence that distinguishes them, and then complete the assigned draft. Judge the rule by whether it helps the task.\n\nIn a team, a proposed new process should have a concrete purpose. A colleague who asks to keep the existing process may be protecting an essential handoff, responding to previous failures, or expressing familiarity preference. Agree on the problem, the cost of a reversible trial, and the evidence needed to keep it. Neither person needs to become a permanent innovator or traditionalist.\n\nIn a relationship, an unfamiliar shared activity can mean discovery to one person and unwanted effort to another. State the need, available energy, and option to decline. Participation out of consideration for a partner is different from spontaneous interest; declining once is not evidence of rejection.\n\nThese arrangements address current choices. Better performance, compatibility, or creativity must be observed rather than promised by a trait score.",
+          "heading": "Make exploration useful in a specific situation",
           "key": "section-05-e84b2b42a3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "In learning, higher Openness may show as following questions beyond the syllabus, connecting distant concepts, experimenting with formats, or wanting to understand why a method works. The benefit is often breadth and reframing. The risk is accumulating possibilities without enough repetition, or abandoning a useful basic method because a newer one is more stimulating.\n\nLower Openness may support stepwise practice, reliable use of examples, and comfort mastering a standard procedure. The risk is not lack of intelligence; it is that an unfamiliar problem may be forced into an old template too quickly. A practical adjustment is to separate exploration from execution: first list alternatives, then choose explicit criteria and finish one route.",
-          "heading": "Learning and Task Settings",
+          "body": "Consider the hypothesis that you avoid unfamiliar experiences. An unplanned evening spent investigating a surprising historical question is a natural counterexample. Compare it with an activity you declined: did you have enough time, a genuine choice, and comparable risks? If intellectual exploration is frequent but changes of activity are uncommon, narrow the description to the latter.\n\nSomeone who often proposes alternatives may naturally choose a known method when an affordable alternative is available. That is informative. Using the only method permitted by a safety requirement is less informative about preference.\n\nA deliberately scheduled novelty exercise is a trial, not a natural counterexample. Completing it shows what happened under the arranged conditions. Failing to recall an exception does not establish that none exists; memory, opportunity, and the range of settings observed remain limited.",
+          "heading": "Counterexamples that change the interpretation",
           "key": "section-06-821a50a3cb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, higher Openness may help when a team needs hypotheses, future scenarios, product concepts, or a reframing of an old problem. Colleagues may experience this as inventive and flexible, or as abstract and difficult to pin down. Lower Openness may help stabilize operations, preserve lessons embedded in existing process, and test whether a proposed change solves a real problem. Colleagues may experience this as grounded, or as resistant if the reasons are not stated.\n\nNeither tendency determines job fit or performance. Strong work usually combines exploration with constraints, domain knowledge, feedback, and execution. Teams can make the trade-off explicit by assigning one phase to divergent options and another to convergence, ownership, and deadlines.",
-          "heading": "Work and Collaboration Settings",
+          "body": "Choose a question you can actually observe, such as whether you usually pass over unfamiliar explanations when the cost is low. A week can be a convenient recording window, not a personality validation period. If few relevant choices occur, extend the window or leave the question unresolved.\n\nRecord the options, time, energy, initial interest, actual choice, and what followed. Keep four situations distinct: a feasible opportunity you did not take; no feasible opportunity; spontaneous engagement; and engagement you deliberately arranged. Interest without action deserves its own note.\n\nRetain a provisional description when comparable opportunities repeatedly show the same preference. Narrow it when natural exceptions cluster in a particular subject or setting. Set it aside when opportunities are scarce, the period was unusually stressful, or competing explanations remain equally plausible. Having found no counterexample is not enough by itself.\n\nThen change one condition. Make an unfamiliar explanation shorter and easier to stop, or give sprawling exploration one question and a stopping point. Check whether this changed initiation, useful understanding, and effort. Keep a helpful arrangement and drop an unhelpful one. The experiment tests a practical option; it does not prove a trait has changed.",
+          "heading": "Observe opportunities before testing a small adjustment",
           "key": "section-07-c79242fdc9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "In conversation, higher Openness may appear as curiosity about unfamiliar perspectives, metaphor, hypothetical questions, or a willingness to revise a view. It can become tiring if every practical decision turns into an open-ended debate. Lower Openness may favor direct language, shared routines, and agreements that can be acted on. It can feel dismissive if novelty is rejected before the other person explains why it matters.\n\nDifferences are easier to negotiate when people name their needs. “I want ten minutes to explore alternatives” is clearer than calling someone rigid. “I need a concrete example and a decision criterion” is clearer than calling someone unrealistic. The goal is coordination, not deciding which style is superior.",
-          "heading": "Communication and Relationship Settings",
+          "body": "Check the instrument, language, and score definition. A percentage of a possible scale range is different from a percentile relative to a reference population. Do not supply missing norms or assume that the same number means the same thing across tests.\n\nA domain result cannot reconstruct six unreported facet scores. Use facet results only when the report explicitly provides them, and do not assume equal weighting from this explanatory map.\n\nThe [IPIP inventory guide](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) describes several Big Five and Five-Factor Model instruments. The [BFI-2 authors' introduction](https://www.ocf.berkeley.edu/~johnlab/bfi.html) specifies five domains and 15 facets. This site's six-facet vocabulary belongs to the NEO/IPIP-NEO framework; it is not a universal architecture or evidence about a particular product's validity.\n\nUse the page for interpretation and self-observation. It cannot decide intelligence, clinical status, suitability for a job, or the quality of a creative outcome.\n\n[Stanek and Ones' meta-analysis of personality and cognitive ability](https://www.pnas.org/doi/10.1073/pnas.2212794120) reports group-level associations in its Openness results, distinguishing personality levels, intellect and experiencing components, and ability types such as verbal and quantitative abilities. These findings do not provide individual IQ conversions or establish causation.\n\nThe abstract of [Roberts, Walton, and Viechtbauer's longitudinal meta-analysis](https://pubmed.ncbi.nlm.nih.gov/16435954/) reports changes in average Openness across life stages. Those trends do not prescribe an individual's direction, amount, or timetable, or show that one exploration exercise changes a trait.",
+          "heading": "What a score and a facet guide can tell you",
           "key": "section-08-eddaafb8eb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stress can narrow attention and reduce willingness to experiment, even for someone usually open. It can also produce restless option-seeking: switching plans repeatedly because committing feels risky. A familiar routine may become a stabilizer rather than evidence that a trait has changed. Conversely, abrupt novelty-seeking may be an attempt to escape pressure rather than a stable preference.\n\nBefore interpreting behavior under strain, ask what changed in workload, safety, sleep, resources, and consequences. Compare several situations and distinguish a recurring pattern from a short-term coping response.",
-          "heading": "Under Stress",
+          "body": "For a broad position, compare the [higher](/en/personality/big-five/openness-high), [middle](/en/personality/big-five/openness-mid), and [lower](/en/personality/big-five/openness-low) guides. Note both fitting examples and mismatches.\n\nFor a more precise question, choose [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Feelings](/en/personality/big-five/facets/feelings), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas), or [Values](/en/personality/big-five/facets/values). You do not need to infer a position on every facet to describe one useful pattern.\n\nThe [Big Five overview](/en/personality/big-five) and [30-facet map](/en/personality/big-five/facets) explain how the levels fit together. Continue reading to sharpen your question rather than assemble a fixed identity.",
+          "heading": "Choose the next page by the unresolved question",
           "key": "section-09-0afd16b5a9",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Possible strengths include generating alternatives, noticing nuance, connecting ideas, appreciating multiple forms of expression, and adapting mental models. Accompanying costs can include overcomplication, difficulty closing options, boredom with maintenance, or underestimating the coordination cost of change.\n\nAt the other end, possible strengths include practicality, consistency, focus on tested procedures, and respect for constraints. Accompanying costs can include slower adoption of unfamiliar methods or overlooking a solution that initially sounds unconventional. These are trade-offs, not promises. The same behavior can help in one environment and hinder in another.",
-          "heading": "Potential Strengths and Accompanying Costs",
-          "key": "section-10-595708a8df",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Look actively for counterexamples. A person who avoids new social settings may still explore complex ideas every day. Someone who loves travel may rely on fixed methods at work. Expertise can make experimentation feel safer in one domain, while accountability can make it costly in another. Culture and opportunity shape which forms of openness are visible.\n\nIf the score conflicts with lived experience, do not force the story. Check which items were answered, which facet dominates, whether the reference period was unusual, and whether the result reflects preference or actual opportunity.",
-          "heading": "Context Changes and Counterexamples",
-          "key": "section-11-a244a406ff",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For one week, capture three moments: when you chose a familiar route, when you explored an alternative, and when you stopped exploring. Record the stakes, time available, information quality, and outcome. Ask what you were protecting or seeking. This reveals whether your pattern is broad or context-specific.\n\nThen run a small experiment. If exploration tends to sprawl, set a time box and a decision rule. If familiarity dominates, test one reversible alternative and define what would count as useful evidence. The purpose is not to move your score; it is to expand your behavioral options.",
-          "heading": "How to Observe Your Own Openness",
-          "key": "section-12-96872d16dc",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Start with the broad domain, then inspect the six facets and concrete examples. Compare [high](/en/personality/big-five/openness-high), [mid-range](/en/personality/big-five/openness-mid), and [low](/en/personality/big-five/openness-low) descriptions as hypotheses, not categories. Give more weight to patterns repeated across settings than to one memorable event.\n\nRead Openness alongside the [Big Five model guide](/en/personality/big-five) and [30-facet guide](/en/personality/big-five/facets). Conscientiousness can help explain whether ideas are converted into plans, while Extraversion may shape whether exploration is social or solitary. No combination is a diagnosis or a career verdict.",
-          "heading": "How to Read an Openness Report",
-          "key": "section-13-ad174edc9e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Explore the three canonical range guides—[high Openness](/en/personality/big-five/openness-high), [mid-range Openness](/en/personality/big-five/openness-mid), and [low Openness](/en/personality/big-five/openness-low)—or open the [full facet map](/en/personality/big-five/facets) to examine the six narrower tendencies.",
-          "heading": "Continue Reading",
-          "key": "section-14-a3727210ca",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Openness describes engagement with imagination, aesthetics, emotional experience, unfamiliar activities, and ideas. Distinguish preference from skill and action by examining facets, opportunities, and counterexamples.",
+        "title": "Openness: How You Engage with Ideas, Experience, and Inner Life"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/openness",
-      "source_hash": "dcf7a96dba43ec835ffcd1104c4e0cf441d354b4f3619d2fb52e9b4ad65316fd",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Openness to Experience describes tendencies toward imagination, ideas, aesthetics, emotional awareness, novelty, and reconsidering assumptions. It is a continuum, not a measure of intelligence or value.",
-      "title": "Openness to Experience: Curiosity, Imagination, and Flexibility"
+      "source_hash": "11a343cc80de60b831fd3b1c25de63b5264e97fffb384ec535e044733eab1872",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Openness describes engagement with imagination, aesthetics, emotional experience, unfamiliar activities, and ideas. Distinguish preference from skill and action by examining facets, opportunities, and counterexamples.",
+      "title": "Openness: How You Engage with Ideas, Experience, and Inner Life"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "openness-measurement_method-1",
-            "limitation": "Supports a continuous domain and labeled NEO/IPIP-NEO vocabulary, not scale equivalence or FermatMind product validity.",
-            "source_ids": [
-              "S1",
-              "S11",
-              "S2"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-cognitive_association-2",
-            "limitation": "Group-level associations do not equate Openness with intelligence or predict one person's IQ.",
-            "source_ids": [
-              "S10"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-product-boundary",
-            "limitation": "Public product and method boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "openness-content-method",
-            "limitation": "Editorial provenance; no clinical review, expert endorsement, or product validation is claimed.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "openness-measurement_method-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          },
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Stanek, K. C.; Ones, D. S.",
-            "claim_ids": [
-              "openness-cognitive_association-2"
-            ],
-            "doi": "10.1073/pnas.2212794120",
-            "id": "S10",
-            "limitation": "The PNAS metadata confirms the title, authors, DOI, and publication details. Use to reject the simplification that Openness equals intelligence.",
-            "public_url": "https://www.pnas.org/doi/10.1073/pnas.2212794120",
-            "source_type": "peer_reviewed_research",
-            "title": "Meta-analytic relations between personality and cognitive ability",
-            "year": 2023
-          },
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "openness-measurement_method-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          },
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Soto, C. J.; John, O. P.",
-            "claim_ids": [
-              "openness-measurement_method-1"
-            ],
-            "doi": "10.1037/pspp0000096",
-            "id": "S2",
-            "limitation": "PMID and DOI metadata agree. The BFI-2 15-facet hierarchy demonstrates that lower-order structures differ across instruments.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/27055049/",
-            "source_type": "peer_reviewed_research",
-            "title": "The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power",
-            "year": 2017
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "171faa6e9a499ea68c86427d8e91399c06230b3d1779ec0d73ac08b523380955"
+  "source_content_sha256": "42992eda530668d8c4fda9c20d51e65b46f47e809e2f077b3137faa25287f527"
 }

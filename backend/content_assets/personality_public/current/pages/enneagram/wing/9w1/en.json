@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/9w1",
@@ -23,79 +23,43 @@
       "entity_key": "9w1",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "Orderly mediation does not prove 9w1. Professional facilitation, compliance duties, cultural courtesy, or junior status can produce the same restraint; examine whether stability remains primary and when standards are voiced.",
-          "question": "Does orderly mediation prove 9w1?"
+          "answer": "No. The One modifier concerns how standards, ideals, or restraint may participate in expression. It does not certify morality or conscientiousness. Excessive self-expectation and silent correction can also make cooperation harder; examine their actual effects.",
+          "question": "Does 9w1 mean a more moral or conscientious Nine?"
         },
         {
-          "answer": "9w1 should be compared with core One through decision timing: a Nine-centered pattern may delay correction to preserve continuity, while a One-centered pattern may act sooner because an error violates an internal standard.",
-          "question": "How should 9w1 be compared with core One?"
+          "answer": "Yes, as a comparison to explore. Speaking openly may be greater flexibility rather than evidence against the core or wing. Look at what matters most to you and whether you can express a standard while allowing discussion, instead of maintaining apparent harmony through silence.",
+          "question": "Can 9w1 still be useful if I voice unpopular opinions?"
         },
         {
-          "answer": "Evidence weakens a quiet-correction hypothesis when the person states unpopular standards promptly, tolerates open procedural friction, revises a rule after new facts, and does not require calm before acting.",
-          "question": "Which evidence weakens a quiet-correction hypothesis?"
+          "answer": "No. They can come from habits, education, cultural norms, responsibilities, or consideration for others. Explore the Nine core first, then examine whether standards and self-expectations repeatedly modify your choices across situations.",
+          "question": "Do neatness and politeness establish a One wing?"
+        },
+        {
+          "answer": "Not reliably. Timing is affected by responsibility, authority, risk, and experience. Compare what still matters after relationships settle and why you would accept friction to correct a problem. Those reasons are more informative than timing alone.",
+          "question": "Can I distinguish 9w1 from 1w9 by who corrects a problem first?"
+        },
+        {
+          "answer": "You can keep it as a comparison without declaring it confirmed. A wing is not simply the second-highest score. Explore whether Nine fits, then compare its adjacent One and Eight modifiers across recurring situations. Leave the wing open when evidence is insufficient.",
+          "question": "Can I consider 9w1 if One is not my second-highest score?"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +133,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Ask whether the person uses standards to keep participation workable and conflict contained, or whether correctness itself organizes attention. A core-Nine interpretation requires more than tidy behavior.",
-          "key": "core_first_modifier",
-          "title": "Start with continuity before evaluating standards"
-        },
-        {
-          "body_md": "A Nine-centered reading may postpone correction until tension threatens stability; a One-centered reading may correct earlier because error violates an internal standard. Test repeated sequences across equal-power contexts.",
-          "key": "sibling_core_comparison",
-          "title": "Compare Nine with One using decision timing"
-        },
-        {
-          "body_md": "Use a planning review, household routine, or fairness dispute. Record the rule cited, when concern was voiced, what compromise was accepted, and whether unspoken resentment later changes participation.",
+          "body_md": "Imagine a household discussing its chores. Someone changes the allocation at the last minute. You think the change is unreasonable but agree because you do not want the discussion to become tense. Later, you quietly complete the work that was missed, hoping the others will notice the problem. They do not, and you become less willing to participate.\n\nOne possible 9w1 interpretation is that you want the relationship to stay easy while also wanting a reasonable standard. Neither concern has been fully expressed. Others heard agreement; you meant something closer to conditional acceptance.\n\nUsed well, patience gives a discussion room to breathe, and clear standards help people form dependable agreements. You can take care with a task while allowing for different habits. Used too heavily, the strategy can hide your preferences behind an expectation that others should already know what is appropriate. Quiet repairs keep things functioning temporarily but make the actual burden harder to see.\n\nYou may also feel that you need an unanswerable justification before asking for something personal. You have a position, but keep waiting until it is reasonable enough to say aloud. Meanwhile, your needs never quite enter the shared decision.",
           "key": "observable_situations",
-          "title": "Observe process objections and hidden irritation"
+          "title": "You agree aloud while keeping a better arrangement in mind"
         },
         {
-          "body_md": "Confidence should fall when the person routinely names an unpopular standard early, tolerates procedural friction, revises their own rule after evidence, and preserves connection without muting the objection.",
+          "body_md": "In 9w1, Nine remains the core concern with steadiness and connection; an adjacent One wing may add ideals, discernment, restraint, or personal expectations. The traditional distinction is core first, modifier second, rather than an equal blend. See the [Enneagram Institute's explanation of wings](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nThese standards need not be official rules. They might be your idea of a considerate relationship, a carefully completed task, or a better way to live. Ask whether a more reasonable arrangement matters primarily because it helps people cooperate steadily, or whether correctness remains the central concern even when the relationship already feels settled.\n\nA Nine-centered person can disagree firmly and hold an important principle. A One wing does not require permanent silence. Neatness, politeness, and self-discipline are also insufficient evidence. The useful question is how standards participate in recurring trade-offs: do they modify a Nine-centered concern, or does getting things right organize the choices more fundamentally?",
+          "key": "core_first_modifier",
+          "title": "Standards modify Nine; they do not replace it with One"
+        },
+        {
+          "body_md": "Return to the same chore discussion. A possible 9w1 emphasis is turning an arrangement into a reasonable standard that everyone understands and can follow. You might suggest rotating the added work and agreeing when changes are acceptable, so the same friction does not recur.\n\nA possible 9w8 emphasis is clarifying what you will actually take on and what others cannot decide for you. You might first state that you can complete only the original task this week and that the addition needs another arrangement.\n\nBoth solutions can appear in one person. Boundaries matter in a 9w1 reading, and standards can matter in a 9w8 reading. The distinction is not whether you use rules or can refuse. Compare which modifier repeatedly helps you organize a response.\n\nTry two imperfect outcomes: a fair allocation leaves too little personal time, while an allocation that protects your time falls short of your preferred standard. Which part continues to need attention, and why? Ask again in another everyday situation where you have room to choose. There is no prescribed answer, and one choice does not settle a wing.",
+          "key": "sibling_wing_comparison",
+          "title": "9w1 and 9w8 can both want cooperation to continue"
+        },
+        {
+          "body_md": "Both combinations can be careful, idealistic, restrained, and interested in avoiding needless argument. Reversing the numbers changes the core concern. Gentleness does not establish Nine, and criticism does not establish One. The [Narrative Enneagram's One–Nine comparison](https://www.narrativeenneagram.org/type-comparisons/) offers a traditional reference for examining motivation beneath similar behavior.\n\nIn the allocation dispute, a possible 9w1 question is how to keep cooperating while retaining an arrangement you find reasonable. A possible 1w9 question is how to get the arrangement right through a measured approach. A Nine wing may soften a One-centered expression without replacing its concern with correctness and integrity.\n\nSuppose everyone has amicably accepted an arrangement you still consider flawed. Is the harder part reopening a conversation that might disturb the peace, or knowingly leaving the problem unresolved? If a correction requires some continuing disagreement, why would you accept or avoid that cost?\n\nKeep the answers connected to real events. A One-centered person can accommodate, and a Nine-centered person can correct promptly. Responsibility, authority, and practical consequences affect timing. An early or late objection is a clue, not a substitute for understanding the concern and the trade-off.",
+          "key": "sibling_core_comparison",
+          "title": "9w1 and 1w9 can sound equally gentle"
+        },
+        {
+          "body_md": "A prompt objection should not automatically be treated as evidence against 9w1. Separate the levels of explanation.\n\n- Reconsidering the core: across different events, even when relationships feel settled, error, incompleteness, or conflict with an internal standard chiefly organizes your attention and actions. Compare One as a core rather than placing every standards-related concern inside Nine's wing.\n- Insufficient One-wing evidence: Nine fits, but standards and restraint appear only in a specific assigned role. Keep the core candidate and leave the wing open.\n- A stronger situational explanation: you were checking quality, facilitating a discussion, or choosing caution because of unequal power. Duties and constraints may explain the response more directly than a wing.\n- More flexible expression: you name a need before the decision is final, explain a standard, and allow others to discuss it. That weakens a story about needing quiet repair to keep relationships comfortable; it need not weaken a Nine core or a One modifier.\n\nAccepting an imperfect outcome does not disprove a One wing. Correcting something strictly once does not prove it. Also examine how you distinguish a significant principle from an adjustable habit or a personal preference.",
           "key": "counterexample",
-          "title": "Seek visible disagreement without self-erasure"
+          "title": "Speaking up may challenge a habit without challenging a wing"
         },
         {
-          "body_md": "Regulated work, religious practice, quality assurance, junior status, language norms, disability accommodation, and retaliation risk may produce orderly restraint without a wing explanation.",
-          "key": "alternative_explanations",
-          "title": "Check compliance, training, and cultural restraint"
-        },
-        {
-          "body_md": "Wing research is sparse, so 9w1 remains a secondary observation hypothesis. It cannot certify morality, fairness, conscientiousness, self-control, or suitability for any role.",
-          "key": "wing_boundary",
-          "title": "Keep 9w1 provisional and core first"
-        },
-        {
-          "body_md": "Duration: 6\n\nContext: Across six days, choose one procedural disagreement, one fairness concern, and one routine where your preferred standard differs from the group’s.\n\nObservable signal: Record the standard, first moment of concern, exact objection, authority level, accepted compromise, later irritation, and any correction or repair.\n\nPage-specific signal: Compare an orderly silence that protects timing with a silence that leaves a preventable error or hidden resentment.\n\nAlternative explanation: Check compliance duty, professional training, cultural courtesy, junior status, language access, fatigue, and realistic retaliation risk.\n\nReflection prompt: Describe one occasion when voicing a standard earlier improved both accuracy and connection, then revise the 9w1 hypothesis.",
+          "body_md": "The next time you are tempted to fix an unreasonable arrangement silently, write three sentences: what you think would work better, what you personally need, and what you want the other person to do.\n\nFor example, your standard is that additional chores should not always fall to the same person. Your need is an evening off this week. Your request is that another housemate take the added task and that everyone discuss a rotation next time. The three are connected, but you do not have to turn your need for rest into a universal moral rule before asking.\n\nMake the request before the arrangement is finalized, and ask about the other person's constraints. If they propose another method, check whether it meets the actual need. A solution can work without following your original plan.\n\nIf you choose a temporary compromise, state its scope: you can cover this occasion, but future additions need to follow the rotation. Check whether the agreement happens afterward rather than repeatedly completing the work and waiting for others to infer your dissatisfaction.\n\nReview two outcomes: whether your needs entered the discussion and whether the standard became a shared agreement. The aim is cooperation that includes your real position, rather than more criticism or proof of a 9w1 identity.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check compliance duty, professional training, cultural courtesy, junior status, language access, fatigue, and realistic retaliation risk.",
-            "context": "Across six days, choose one procedural disagreement, one fairness concern, and one routine where your preferred standard differs from the group’s.",
-            "duration_days": 6,
-            "observable_signal": "Record the standard, first moment of concern, exact objection, authority level, accepted compromise, later irritation, and any correction or repair.",
-            "page_specific_signal": "Compare an orderly silence that protects timing with a silence that leaves a preventable error or hidden resentment.",
-            "reflection_prompt": "Describe one occasion when voicing a standard earlier improved both accuracy and connection, then revise the 9w1 hypothesis."
-          },
-          "title": "Observation exercise"
+          "title": "Separate the standard, the need, and the request"
+        },
+        {
+          "body_md": "Wings belong to traditional interpretation. The abstract of [Hook and colleagues' 2021 systematic review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports little supporting wing research. 9w1 does not certify morality, conscientiousness, or self-control, and research on other instruments does not establish FermatMind's validity.\n\nIf you are exploring why you accommodate or avoid disagreement, start with [Type Nine](/en/personality/enneagram/type-9). If Nine fits and you want to compare standards with boundaries as modifiers, read [9w8](/en/personality/enneagram/wings/9w8). If correctness, integrity, and internal expectations seem more central, explore [Type One](/en/personality/enneagram/type-1). You can leave the wing undecided and still make one explicit request in your next shared decision.",
+          "key": "wing_boundary",
+          "title": "Explore the core before deciding whether the modifier helps"
         }
       ],
       "seo": {
@@ -220,8 +176,8 @@
       "slug": "enneagram/wings/9w1",
       "source_hash": "2047509d25289f3168230735ff88a0456b378572114968dc3397e69f5611bfcc",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "9w1 is an evidence-limited wing hypothesis that keeps Type Nine’s stability and connection pattern primary while using One-like order, fairness standards, restraint, and quiet correction as possible modifiers. Courtesy, conscientiousness, or procedural care does not establish 9w1 because role expectations, culture, perfectionism, compliance risk, or fear of retaliation may look similar.",
-      "title": "9w1: a core-Nine hypothesis modified by orderly standards"
+      "summary": "9w1 describes a Type Nine core with an adjacent One wing. Inner steadiness and connection may be expressed through ideals, restraint, and clearer standards. Those standards can support cooperation, but they can also remain unspoken while resentment grows. Compare 9w1 with 9w8 and 1w9 through a shared decision, then practice turning a silent expectation into a request others can understand.",
+      "title": "9w1: Making Room for Your Standards Without Losing Connection"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +187,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "7606e6edc9b507ac63263cf6e6d45a70d19b8868049197e3f634d5776f517291"
+  "source_content_sha256": "dbc227544ba2aea192f5207391f40345ca2d30352e97551f87a10aec93fe9ebb"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/centers/head",
@@ -23,78 +23,39 @@
       "entity_key": "head",
       "entity_type": "center",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "不一定。查资料可能是任务要求、职业标准、过往错误、问责压力或普通好奇。需要继续观察信息怎样改变行动，以及不确定较低时相同流程是否仍然出现。",
-          "question": "查很多资料一定属于脑中心模式吗？"
+          "answer": "传统解释关注的是提前想象和安排可能性怎样帮助人面对未知、限制与不舒服的感受。行动可以由这种预期规划组织。乐观和忙碌本身不能确认七号，也不能证明一个人没有恐惧。",
+          "question": "七号看起来乐观、喜欢行动，为什么属于脑中心？"
         },
         {
-          "answer": "可以。一个人可能先确认风险，再寻找替代方案。不要强迫只保留一个标签，而应记录先后顺序、每一步保护了什么，以及哪一步在相近反例中消失。",
-          "question": "谨慎核对和打开选项能同时出现吗？"
+          "answer": "比较查证要解决什么：理解是否足以应对、投入是否可承担，还是来源是否可靠、风险与支持是否清楚。两者可以同时需要这些信息。继续看什么答案能推动行动，以及没有新证据时为何还要查。",
+          "question": "五号与六号都会查证，怎样继续区分？"
         },
         {
-          "answer": "不确定会带来可记录的提问、信息来源、支持、等待时间和选项变化。本练习不测量智力，只比较同一个决定过程如何随情境改变，并检查熟悉任务是否给出不同的反例。",
-          "question": "为什么观察不确定比评价智力更合适？"
+          "answer": "不一定。传统六号描述也包括怀疑、检验和反抗权威，以及主动面对风险。要比较行动是否围绕可靠性、安全和支持组织，不能用服从、勇敢或犹豫单独判型。",
+          "question": "六号一定依赖权威或不敢行动吗？"
+        },
+        {
+          "answer": "不能。资料查询与发散思考可能来自任务、训练、兴趣或现实需要。中心解释需要结合反复关注的动机、信息怎样改变行动，以及熟悉情境中的反例；它不评价智力。",
+          "question": "查很多资料或善于想点子，就代表脑中心吗？"
         }
       ],
       "framework": "enneagram",
@@ -110,25 +71,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-5",
-          "label": "core_type:type-5",
+          "label": "五号：理解与准备",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-5"
         },
         {
           "href": "/zh/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "六号：可靠性与支持",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "七号：选择与可能",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-7"
         }
@@ -167,37 +128,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "比较五号六号七号时，传统描述提示不同路径：五号可能保存注意力并建立理解，六号可能核对可靠性与可用支持，七号可能生成多个选项以保持行动空间。这些路径可以重叠，也不是排他的思考风格。",
-          "key": "within_center_difference",
-          "title": "先比较五号六号七号"
+          "body_md": "脑中心也称思考中心，传统上包括五号、六号和七号。共同问题不是“我聪不聪明”，而是“面对未知，我凭什么继续往前？”\n\n在[Enneagram Institute 的中心解释](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)中，这个中心的情绪主题是恐惧。传统描述中的三条路径很不同：准备和退开、查证和寻找支持、提前想象其他可能。七号的乐观与忙碌也可能涉及不愿被痛苦或限制困住，因此不能只凭表面轻松排除脑中心。\n\n这里的恐惧是理论中的情绪主题，不是说三种类型一定胆小，也不是焦虑问题的诊断。脑中心的人同样会感受、建立关系和直接行动；其他中心的人也可以长于分析。",
+          "key": "uncertainty_and_fear",
+          "title": "谨慎与乐观为什么会同属脑中心"
         },
         {
-          "body_md": "观察脑中心线索时，选择一项信息不完整的陌生决定。记录最先提出的问题、查询了哪个来源、说出了什么风险或可能、行动被延迟多久，以及新证据让可选方案收窄还是增加。",
-          "key": "observable_pattern",
-          "title": "追踪一次不确定决定"
+          "body_md": "**五号：我是否已经理解，也有足够资源应对。** 传统描述强调理解、能力与独立准备。减少干扰、先弄清关键问题，可以让投入更有分寸；若准备不断扩展，却没有回到实际参与，就可能越学越难开始。关注点并非资料越多越好，也不能从学历或独处偏好推断五号。[五号原始描述](https://www.enneagraminstitute.com/type-5/)\n\n**六号：依据、承诺与支持是否可靠。** 传统描述强调安全、指导、信任与检验。追问风险和责任可以发现遗漏，明确需要谁一起承担；若每个答案都引出新的怀疑，就可能不断寻求确认却仍难决定。六号方向也可能主动挑战不可靠的权威，不能把服从或退缩当成必要特征。[六号原始描述](https://www.enneagraminstitute.com/type-6/)\n\n**七号：还有哪些可能，不必被当前困境困住。** 传统描述强调自由、满足、提前设想与避免痛苦。打开选项可以帮助找到出路；如果一遇到失望就转向新的计划，必要的取舍、感受与收尾可能被不断延后。喜欢新鲜体验不证明七号，备选方案也可能只是合理应变。[七号原始描述](https://www.enneagraminstitute.com/type-7/)",
+          "key": "three_routes",
+          "title": "准备、可靠支持与保留选项"
         },
         {
-          "body_md": "用反例修正脑中心假设时，可以选择后果相近但不确定程度较低的熟悉任务。若专业经验、工作量、问责要求、过去失败、信息权限或期限更能说明查证与扩展选项的行为，就应降低原判断的可信度。",
-          "key": "counterexample",
-          "title": "用熟悉任务检验原判断"
+          "body_md": "假设你和朋友准备周末出行，临出发时列车取消，住宿已经预订，替代路线的信息还不完整。下面是为了比较而编写的例子。\n\n五号方向可能先缩小信息任务：“给我一点时间看清路线、花费和需要处理的事情，再决定我能承担哪一种。”暂时退开可能是为了理解和控制投入，不一定是漠不关心。\n\n六号方向可能先核对保障：“哪个消息是官方确认的？末班车是否能赶上？如果走不通，谁和我一起处理？”也可能直接要求负责人说明，因为检验可靠性不一定表现为温顺。\n\n七号方向可能先扩展可能：“可以换一条路线，或者就在附近安排另一种周末。”这种规划可能恢复行动空间；也需要继续看是否愿意处理已经发生的损失，而不是立即用新计划覆盖失望。\n\n三个人都可能查资料、征询朋友或提出备选。区别不在用了哪种工具，而在希望这些行动解决什么：理解与可承担程度、可靠性与共同支持，还是限制与失望带来的困住感。遇到真实的交通或安全风险，充分核对本来就合理，不必解释成类型。",
+          "key": "decision_scene",
+          "title": "同一决定：出发前列车突然取消"
         },
         {
-          "body_md": "脑中心标签不能测量智力，也不能识别固定心理能力。它不能说明某个神经系统或医学类别；分析、谨慎或想象丰富的表现本身，也不足以确认类型或推断结果。",
-          "key": "boundary",
-          "title": "思考线索不是固定能力"
+          "body_md": "回看一项决定，记录最先提出的问题、信息来自哪里、什么让你愿意行动，以及什么又让你停下来。随后区分：\n\n- 我缺的是关键理解和可承担资源，还是只是继续准备比较安心？\n- 我缺的是可靠依据和明确支持，还是已经获得答案却仍在重复寻求确认？\n- 我需要的是可行替代方案，还是不愿承受选定一个方案后失去其他可能的感觉？\n\n这些问题不把反复思考、谨慎或乐观直接归给某一型。[Narrative Enneagram 的组内比较](https://www.narrativeenneagram.org/type-comparisons/)提供的是传统差异参照，不是经过验证的判定阈值。\n\n找一项后果相近但你很熟悉的任务作比较。如果查证主要来自陌生程度、职责、信息权限或过去真实失败，熟悉条件下可能显著减少。反之，同样的准备、确认或打开选项仍反复出现，也只是进一步探索的线索，不是结论。五号候选可以主动求助，六号候选可以独立决定，七号候选也可以专注收尾；要理解这些变化，而不是把它们排除。",
+          "key": "what_is_enough",
+          "title": "观察“什么时候足够”，比统计想了多久更有用"
         },
         {
-          "body_md": "持续天数: 3\n\n情境: 选择一项陌生决定和一项后果相近的熟悉任务，记录期限、信息权限以及由谁共同承担责任。\n\n可观察信号: 列出最先提出的问题、查询来源、被说出的风险或可能、行动前等待时间，以及改变选项范围的那条证据。\n\n本页特定信号: 分别比较保存注意力、核对可靠性与支持、生成替代选项，不要把所有思考或计划都视为同一种线索。\n\n替代解释: 检查专业经验、工作量、问责、过去失败、信息权限、好奇或期限是否能够解释同一信息处理顺序。\n\n复盘问题: 把熟悉任务作为反例，说明关于五号、六号或七号的哪项初步解释在比较后变得较不可信。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "检查专业经验、工作量、问责、过去失败、信息权限、好奇或期限是否能够解释同一信息处理顺序。",
-            "context": "选择一项陌生决定和一项后果相近的熟悉任务，记录期限、信息权限以及由谁共同承担责任。",
-            "duration_days": 3,
-            "observable_signal": "列出最先提出的问题、查询来源、被说出的风险或可能、行动前等待时间，以及改变选项范围的那条证据。",
-            "page_specific_signal": "分别比较保存注意力、核对可靠性与支持、生成替代选项，不要把所有思考或计划都视为同一种线索。",
-            "reflection_prompt": "把熟悉任务作为反例，说明关于五号、六号或七号的哪项初步解释在比较后变得较不可信。"
-          },
-          "title": "观察练习"
+          "body_md": "选择一项风险低、可以修正的决定。先满足现实需要，再尝试与你惯常策略相应的一种做法。\n\n**如果经常准备很久才参与：** 写出这次开始行动必需知道的一个问题，以及足以开始的答案。获得答案后做一个小的实际步骤，例如提出自己的方案，而不是继续研究所有可能。观察新增信息是否真的改变决定，还是只延后参与。\n\n**如果经常重复核对：** 写出已有的可靠依据、尚未解决的风险和一个明确的共同支持安排。事先约定什么新证据才值得重新检查。观察下一次确认是在补充实际缺口，还是在没有新情况时重复寻求确定感。这里不要求忽略真实风险。\n\n**如果经常靠新选项恢复轻松：** 选定一个够用的方案，暂时停止继续增加选项，同时给已经发生的失望一句具体表达。例如：“原计划取消让我失落，但我愿意把这一个替代方案安排完。”观察自己是否完成必要的联系与收尾，而不只是获得下一种期待。\n\n这些做法帮助观察准备、检验和扩展选项分别怎样影响行动，不承诺降低焦虑，也不用于判断心理健康状态。",
+          "key": "action_experiments",
+          "title": "给不同的信息策略设置一个实际出口"
+        },
+        {
+          "body_md": "可以分别阅读[五号：理解与准备](/zh/personality/enneagram/type-5)、[六号：可靠性与支持](/zh/personality/enneagram/type-6)和[七号：选择与可能](/zh/personality/enneagram/type-7)。先选两个能解释同一决定的候选，写下各自解释不了的部分；若它们都不贴近，再回到[九型人格总览](/zh/personality/enneagram)。\n\n本页采用传统动机解释。Hook 等人的综述摘要报告九型研究的信度与效度证据并不一致，不能把学派描述或研究结果直接当作费马测评有效的证明。[综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\n脑中心不是脑区分类、智力等级或神经测量结果。查资料、担忧、想象丰富或做事很快，都不足以确认类型；长期困扰也不能用中心标签作诊断解释。",
+          "key": "reading_and_limits",
+          "title": "下一步比较核心关注，而不是给思考能力排名"
         }
       ],
       "seo": {
@@ -208,8 +166,8 @@
       "slug": "enneagram/centers/head",
       "source_hash": "5a2cfdd2fe98ad217d93db74662279928698c4b608486645952fea8d55fa27cc",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "脑中心是传统九型框架中对五号、六号和七号的归组。观察脑中心线索，可以追踪不确定变重要时，人怎样收集信息、核对支持或打开选项；这不表示思考会取代情绪与行动，五号、六号、七号也可能用相反路径处理同一个未知问题。",
-      "title": "脑中心：记录面对不确定时的信息选择"
+      "summary": "五号可能先理解问题并保护有限资源，六号可能核对可靠性与支持，七号可能打开替代选项以保持余地。脑中心把这些不同路径放在一起，比较人在缺少确定感时怎样寻找可继续行动的依据。它不衡量智力，也不表示其他类型较少思考。",
+      "title": "脑中心：五号、六号与七号怎样面对不确定"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -219,69 +177,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e3b98a8e11c224d1fc804b3f64bb3b08db511a8887854d371aa1e55d060c2472"
+  "source_content_sha256": "153022e607766c998fca902a27bd14147680945a3ab5342a4e0cdd9f24f769e5"
 }

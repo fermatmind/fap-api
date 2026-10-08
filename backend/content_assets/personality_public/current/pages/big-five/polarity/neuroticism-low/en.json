@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/neuroticism-low",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "neuroticism-low",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. It suggests lower reactivity to some unpleasant emotions, not emotional absence or lack of care.",
-          "question": "Does low Neuroticism mean having no emotions?"
+          "answer": "No. It concerns the tendency toward negative emotional experiences covered by a measure. It does not describe the full range of affection, joy, sadness, or emotional expression.",
+          "question": "Does low Neuroticism mean I have no feelings?"
         },
         {
-          "answer": "No problem is inevitable. A possible cost is underrecognizing another person’s concern, which can be addressed through listening and acknowledgment.",
-          "question": "What relationship problems do people with low Neuroticism have?"
+          "answer": "No. Crisis performance requires relevant skills and evidence about actual actions. Less worry does not guarantee competent decisions, and a personality label cannot establish suitability for a role.",
+          "question": "Does a low result prove I am good in a crisis?"
         },
         {
-          "answer": "Not universally. Calm and recovery can help, while low urgency can miss signals. The situation and behavior determine the trade-off.",
-          "question": "Is low Neuroticism an advantage?"
+          "answer": "Ask what the person needs, acknowledge the concern, and respond to the actual request where appropriate. You do not have to reproduce their emotion, but your calm does not show that their concern is unfounded.",
+          "question": "How can I show care without feeling equally worried?"
         },
         {
-          "answer": "Specific coping and regulation skills can be practiced. This page does not promise or prescribe a score change.",
-          "question": "Can I make my Neuroticism score lower?"
+          "answer": "Not necessarily. A general tendency allows exceptions. Consider the event and current circumstances, and do not use either the score or one reaction to invalidate the other.",
+          "question": "Is one intense reaction inconsistent with a low result?"
         },
         {
-          "answer": "This page cannot predict or rule out any mental-health condition. Diagnosis and risk require different evidence and appropriate assessment.",
-          "question": "Does low Neuroticism protect against mental illness?"
+          "answer": "No. It cannot confirm or exclude a health condition or provide a personal risk guarantee. Seek appropriate assessment when actual symptoms, distress, or effects on daily functioning warrant attention.",
+          "question": "Does a low result rule out mental or physical illness?"
+        },
+        {
+          "answer": "There is no need to make worry the goal. Identify the real requirements and complete the relevant checks. Preparation can be evaluated directly without using emotional intensity as a substitute.",
+          "question": "Should I become more worried to prepare properly?"
         }
       ],
       "framework": "big_five",
@@ -88,163 +85,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Low Neuroticism may suggest that unpleasant emotion activates less readily, disrupts attention less, or settles more quickly in many situations. It does not mean emotional absence. Calm can support clear action, while low urgency can occasionally cause important signals to be missed.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Low Neuroticism: calm states, faster recovery, and lower reactivity to stress” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A low Neuroticism result can point toward reporting less worry, irritation, discouragement, embarrassment, or feeling overwhelmed within the content of the measure. It does not mean that you lack affection, enjoyment, concern, or sadness.\n\nUse calm to describe an experience you actually recognize, rather than deducing it from a quiet voice or continued activity. Someone can look composed while feeling distressed. A low score also cannot specify how quickly you will recover from a particular event.\n\nYou do not need to feel more upset to prove that something matters. Care can be discussed through listening, understanding a request, and following through. The quality of those actions remains a separate question.",
+          "heading": "Less negative emotion does not describe your whole emotional life",
           "key": "section-01-c8c657bf47",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may remain even-tempered during ambiguity, recover quickly after criticism, and avoid prolonged worry about low-probability outcomes. Anxiety, Anger, Depression, Self-Consciousness, Impulsiveness, and Vulnerability can still show different patterns.",
-          "heading": "What This Range Specifically Means",
+          "body": "Read the questionnaire version, language, scoring direction, and range explanation. Related measures can use Neuroticism or the opposite direction, Emotional Stability, so the same numerical label should not be transferred without checking its meaning.\n\nIf the result is a percentile, its reference population and conversion need to be identified. A score expressed out of 100 is not automatically a population ranking. This page does not supply missing cutoffs, a personal uncertainty interval, or a health-risk estimate.\n\nFor background on why instruments need separate interpretation, the [official IPIP construct guide](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) describes several Big Five-related inventories. A related construct does not make their items, scoring, or individual results interchangeable.",
+          "heading": "Check what low means in this report",
           "key": "section-02-40db107974",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer superior mental health, invulnerability, lack of empathy, weak emotion, guaranteed resilience, or protection from any disorder. A personality range cannot diagnose, rule out illness, or establish how someone will respond to major adversity.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Feeling little worry can coexist with careful preparation or with an overlooked requirement. Whether a task is handled reliably depends on the relevant checks, actions, and outcomes. The feeling alone does not settle that question.\n\nNor does your reaction reveal how well you understand another person. Someone who is worried may want acknowledgment, information, or practical assistance. Ask which is needed rather than assuming that reassurance is sufficient or that matching their distress is necessary.\n\nDo not add unmeasured conclusions to the result: crisis skill, empathy, physical stress response, and mental-health status are not established by a low label. The site's NEO/IPIP-NEO facet vocabulary can distinguish experiences, but a low domain result does not tell you that every personal facet score is low.",
+          "heading": "Calm is not evidence that a problem has been handled",
           "key": "section-03-3d5f1fbf72",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include steady tone, low reassurance needs, quick return to routine, and comfort making decisions under uncertainty. You may consider a problem once, act, and release it rather than repeatedly reviewing it.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Imagine that a shared weekend class is canceled and moved to a different venue. You report little worry about the change, check the new location, and notify the person traveling with you. They are more unsettled because the replacement arrangement is unfamiliar.\n\nThe relevant questions are whether you felt worried, whether the information was correct, and whether you communicated the change. Those questions have separate answers. A calm response does not guarantee correct information, and a worried response does not establish poor preparation.\n\nFamiliarity with the venue, receiving the update earlier, or having more time available could explain part of your experience. If the other person remains worried, ask what is unresolved. Their concern may point to missing information even when you do not share its intensity.",
+          "heading": "An ordinary change of plan",
           "key": "section-04-b0570ab82b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, calm may stabilize a group but can look dismissive if concern is not acknowledged. In learning, evaluation may consume little attention. In relationships, another person may need more explicit recognition of emotional impact than you naturally provide.",
-          "heading": "Possible Differences Across Settings",
+          "body": "A limited hypothesis could be: when an ordinary shared plan changes, I usually report little worry and still confirm the replacement arrangement before it matters. Record your own feelings and the confirmation action separately.\n\nA natural exception might be a comparable change that leaves you quite worried even though you confirm it on time. That qualifies the low-worry part, not the follow-through part. If you feel little worry but forget to confirm, it shows that calm and action can come apart; it does not establish that low scorers are careless. If no plan changes or someone else handles everything, you have no comparable opportunity.\n\nRepeated relevant occasions may support keeping this limited account provisionally. If calm appears mainly when the replacement is familiar, narrow the account accordingly. If opportunities are absent or your feelings were not recorded, suspend the conclusion. One exception does not overturn usually, and no observed exception does not prove always. This is a way to understand daily situations, not to verify the score.",
+          "heading": "Keep feelings and follow-through separate when observing yourself",
           "key": "section-05-4d34712f6b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include composure, rapid recovery, tolerance of uncertainty, and less attentional capture by possible threat. These help when calm remains responsive to evidence and other people’s signals.",
-          "heading": "Possible Strengths",
+          "body": "If someone says your short response leaves them unsure whether you understood the update, try explicitly confirming the new arrangement and asking whether anything remains unresolved. Use an ordinary, low-stakes occasion; there is no need to manufacture distress or seek out anxious people for an exercise.\n\nMark this as deliberate additional communication. Note whether the person confirms receipt, whether a practical question is resolved, whether you follow through, and how you feel. Agreement that the message helped is not an empathy test. Following through is not evidence that your personality changed.\n\nThis attempt changes the conditions and should be kept separate from natural observations. Retain it when it solves the communication issue, adjust it when a different response is needed, and leave it aside when there is no such problem. A low label does not require you to invent a weakness.",
+          "heading": "Make a communication change only if there is a real need",
           "key": "section-06-d0ea72d435",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include underestimating urgency, missing subtle interpersonal strain, preparing too little for unlikely but serious risk, or assuming others can recover at the same pace. Calm expression does not automatically communicate care.",
-          "heading": "Possible Costs",
+          "body": "Low scorers can experience substantial fear, sadness, or anger. A broad tendency allows exceptions, and the event and current circumstances need to be considered. Do not dismiss a real experience because you believe you should be emotionally stable.\n\nA low result cannot establish that you have a smaller bodily stress response, less risk of illness, or no need for care. Address symptoms and concerns on their own evidence. If distress persists or affects daily life, seek assessment from a qualified professional. The [NIMH guide to getting help](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) considers symptoms and impact rather than personality ranges.\n\nCompared with a high position, a low position refers to the direction of negative emotional experience on a measure. It is not a health or competence ranking, and the middle does not represent a guaranteed ideal response.",
+          "heading": "Distress still deserves attention",
           "key": "section-07-ad06ccaa64",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [mid-range Neuroticism](/en/personality/big-five/neuroticism-mid), low activation may appear across more triggers. Compared with [high Neuroticism](/en/personality/big-five/neuroticism-high), recovery may often be faster. These are not health or resilience ranks.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "The [Neuroticism overview](/en/personality/big-five/neuroticism) explains the broad dimension. Compare the [mid-range guide](/en/personality/big-five/neuroticism-mid) and [high guide](/en/personality/big-five/neuroticism-high) to understand the range descriptions, including their limits.\n\nThe [facet guide](/en/personality/big-five/facets) is useful when particular experiences differ from your broad description. It provides vocabulary, not personal scores. Keep two questions distinct as you read: what did I feel, and what did the situation require me to do?",
+          "heading": "Read further without turning the label into a verdict",
           "key": "section-08-951d6e2812",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A service failure occurs. You stay calm, identify the next action, and keep the team focused. The advantage is clarity. The cost appears if you skip acknowledging a colleague’s distress; one sentence of recognition can preserve both calm and connection.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-15b9753d0c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score low and feel intense fear during a genuine emergency. Proportionate emotion under severe threat does not contradict a generally low-reactivity pattern and should not be pathologized.",
-          "heading": "A Counterexample",
-          "key": "section-10-73d417947f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- When does calm improve the result?\n- Which signals are easiest to overlook?\n- How do others know you understand their concern?\n- Which facet differs from the broad range?\n- When has low urgency delayed preparation?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-e388d3c23c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In one conversation this week, summarize the other person’s concern before offering a solution. Record whether explicit acknowledgment improves coordination without requiring you to imitate their emotional intensity.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-4034bec040",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Neuroticism](/en/personality/big-five/neuroticism), compare [high](/en/personality/big-five/neuroticism-high), [mid-range](/en/personality/big-five/neuroticism-mid), and [low Neuroticism](/en/personality/big-five/neuroticism-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-4bfc739bf3",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A low position points toward less negative emotional experience on a particular measure. It does not mean emotional absence, guaranteed resilience, or protection from health problems.",
+        "title": "Low Neuroticism: Separating Calm, Care, and Reliable Action"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/neuroticism-low",
-      "source_hash": "763f7de63f64a9f0070785baadae44e237d2198455f4b7a9dc7ddc0f9e79424a",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Low Neuroticism may suggest calm, faster recovery, and lower stress reactivity. It does not mean having no emotions, superior resilience, or protection from mental illness.",
-      "title": "Low Neuroticism: Calm and Faster Recovery"
+      "source_hash": "807e8e6ff910508ca24c6952451220d2c2c8403ef7a1807f99c59e96af29f2fb",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A low position points toward less negative emotional experience on a particular measure. It does not mean emotional absence, guaranteed resilience, or protection from health problems.",
+      "title": "Low Neuroticism: Separating Calm, Care, and Reliable Action"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "neuroticism-low-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "neuroticism-low-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "neuroticism-low-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "neuroticism-low-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "195a11dbfa99b58ce1794a0bb042ff76225cbfb533a0345f87b38b9bcc83bdc9"
+  "source_content_sha256": "a5e9479f4f222be13c2444ed1d6e3af55c99247893b10b6d6565172c834137d3"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/neuroticism-mid",
@@ -20,30 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "neuroticism-mid",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. It is an instrument-specific location, not a clinical norm or standard of normality.",
-          "question": "Is mid-range Neuroticism the “normal” level?"
+          "answer": "No. It is a score description under a specific measure. It neither establishes clinical normality nor automatically identifies the population median or most common range.",
+          "question": "Is mid-range Neuroticism the normal level?"
         },
         {
-          "answer": "Read both adjacent descriptions as hypotheses and prioritize facets and lived examples. The boundary is not a categorical divide.",
-          "question": "What if my score is close to a high or low boundary?"
+          "answer": "No. A central score does not measure your ability to switch strategies or respond appropriately. Coping needs to be evaluated in the actual task and circumstances.",
+          "question": "Does the middle mean I have the most flexible coping style?"
         },
         {
-          "answer": "No. Stress response is relevant, but resilience also involves resources, skills, relationships, recovery, meaning, and environment.",
-          "question": "Is Neuroticism the same as resilience?"
+          "answer": "One strong reaction is insufficient to make that judgment. Consider the event, current circumstances, and what you had in mind when answering. A recurring mismatch may be a reason to examine the measure and response conditions.",
+          "question": "Does a very strong reaction mean my result is wrong?"
         },
         {
-          "answer": "This page cannot forecast an individual score trajectory. Focus on current functioning and supports rather than fearing a label.",
-          "question": "Should I worry that my Neuroticism score will increase?"
+          "answer": "Read the current and neighboring guides as possible descriptions to examine. Do not change your score based on a story that feels familiar or treat the boundary as a divide between personality types.",
+          "question": "Which guide should I read near a range boundary?"
+        },
+        {
+          "answer": "No. A domain position does not reconstruct the facet profile. Use narrower scores only when your report actually supplies them under the appropriate measure.",
+          "question": "Can I infer which facets are high from a middle domain score?"
+        },
+        {
+          "answer": "Yes. Your distress, needs, and effects on everyday life matter independently of the label. You do not need a high result or a completed observation exercise before seeking qualified support.",
+          "question": "Can I seek help even though my score is in the middle?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +85,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Mid-range Neuroticism may suggest that stress sensitivity and recovery vary meaningfully by trigger, role, and available support. The middle is not the “normal person” category. It is an instrument-specific range that can contain uneven facets and strong context effects.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Mid-range Neuroticism: interpreting emotional-sensitivity tendencies near the middle of a scale” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A mid-range Neuroticism result places your score in a central range defined by a measure. It does not identify a person who always reacts just enough, recovers on schedule, or switches easily between concern and calm.\n\nThe label also does not say that every related experience is moderate. You may have a noticeable difficulty in one setting and little difficulty in another. Those possibilities need evidence; a middle result alone does not establish a particular pattern of context sensitivity or mixed facets.\n\nThe practical task is to discover what the broad description leaves unresolved. Ask which feelings and circumstances matter to you rather than treating the middle as an ideal emotional state.",
+          "heading": "The middle is a score description",
           "key": "section-01-6272bcec16",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may react strongly to some uncertainties and remain steady in others, recover quickly after practical problems but dwell on interpersonal ones, or show a balance of vigilance and calm. Facets explain which signals carry the most weight.",
-          "heading": "What This Range Specifically Means",
+          "body": "The numerical midpoint of a scale, the median in a reference population, and a range called mid are different things. Check the report's scoring explanation to find out which meaning applies. A central label does not automatically mean average among people your age or typical for your language.\n\nCheck the questionnaire version, language, direction, and range rule. If the output is a percentile, its reference group and conversion must be specified. A percentage-style score cannot substitute for that information. Nor can the cutoff from another questionnaire explain this one.\n\nNear a boundary, neighboring descriptions may both offer relevant questions. Small differences on a continuous dimension do not create mutually exclusive types. This page cannot provide missing thresholds or a personal margin of measurement uncertainty.",
+          "heading": "A scale midpoint is not a population median",
           "key": "section-02-1e5d00ae3e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not establish normality, mental health, resilience, average emotion, or a fixed coping capacity. A score near a range boundary also does not create a categorical difference from someone just across it.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "A middle domain score does not tell you whether all narrower experiences sit near the middle or whether they differ. Do not invent an uneven profile to explain the number, and do not assume that possible facet differences cancel in a known way.\n\nThis site's public facet vocabulary follows NEO/IPIP-NEO, but inventories have different structures. The [BFI-2 authors' overview](https://www.ocf.berkeley.edu/~johnlab/bfi.html), for example, describes five domains and 15 facets. A description borrowed from one inventory cannot establish what another measured.\n\nUse your own facet scores only if your report actually includes them with the relevant scoring explanation. Without them, you can still describe worry, irritation, embarrassment, or discouragement in ordinary language. That description helps identify a current need without pretending to be another measurement.",
+          "heading": "Do not reverse-engineer a facet profile",
           "key": "section-03-6c5a88d058",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include proportionate concern in familiar settings, stronger activation under evaluation, and recovery that depends on control or support. You may prepare for plausible risks without monitoring every possibility.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Imagine two ordinary assignments. In one, the completion criteria are clear. After choosing your next step, you leave the brief alone. In another, the criteria are vague. You have also chosen a next step, but keep reopening the same brief and report feeling worried about whether it is the right approach.\n\nThe target is repeated rereading after you have selected the next action and no new instruction has arrived. It is not successful completion, general busyness, or every feeling you experienced that day. Rereading may be necessary if a real requirement remains unknown; it may also reflect habit, a looming deadline, or previous confusing feedback.\n\nA middle result does not explain which of these applies. Separate what the brief says, what you felt, what you did, and what information was genuinely missing. A completed assignment can coexist with substantial worry, and a calm experience can coexist with a misunderstanding.",
+          "heading": "A concrete comparison: revisiting an assignment brief",
           "key": "section-04-9997657c44",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, clear criteria may produce calm while ambiguous feedback increases concern. In learning, stakes and familiarity may alter evaluation stress. In relationships, trust history can make the same delay feel neutral or threatening.",
-          "heading": "Possible Differences Across Settings",
+          "body": "One tentative hypothesis is: after choosing a next step, I often worry and repeatedly reopen a vague assignment brief, but do this less with clear criteria. Keep the same action and circumstances in view when comparing occasions.\n\nA natural exception could be another vague, ordinary brief that you do not repeatedly reopen and about which you report little worry, without adding a deliberate new strategy. If you do not reopen it but remain worried, record the behavior and feeling separately. If you receive no assignment, have not chosen a next step, or get new instructions, that is not the same opportunity.\n\nIf several reasonably comparable occasions fit, keep the limited interpretation provisionally. If the behavior appears mainly near deadlines, narrow it to deadline pressure rather than ambiguity generally. If you have no comparable occasions, or do not remember your feelings, suspend the comparison. An exception does not disprove often, and finding no exception does not confirm always. A short record does not validate a personality score.",
+          "heading": "Look for comparable occasions, including non-occurrences",
           "key": "section-05-d46c0f5820",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include noticing risk without always being captured by it, adjusting urgency to context, and understanding both highly sensitive and very steady collaborators. These are possibilities, not verified coping skills.",
-          "heading": "Possible Strengths",
+          "body": "If unclear criteria are causing repeated rereading, try asking one specific question or writing down what would count as completion for an ordinary, low-stakes task. Stay responsive to changed requirements and genuine deadlines.\n\nRecord that you deliberately added clarification. Then note whether rereading decreased, whether your worry changed, whether you understood the requirement better, and whether the next action became easier to carry out. Improvement in one of these outcomes does not establish improvement in all of them.\n\nThis is a changed condition, not a natural exception. Keep it if it helps the particular problem; adjust or stop if it adds confusion or does not help. It does not demonstrate an ideal middle personality or promise that your score will move.",
+          "heading": "Address the uncertainty you can actually identify",
           "key": "section-06-e7b4202a15",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include underpreparing in one context and overchecking in another, or interpreting variation as personal inconsistency. Mixed facets can make a broad middle label feel too vague unless examples are recorded.",
-          "heading": "Possible Costs",
+          "body": "You do not need a high label to take distress seriously. Feeling steady during familiar work does not invalidate a difficult experience elsewhere, and an intense response to a significant event need not settle a question about your overall personality.\n\nActual demands, accumulated strain, resources, and current circumstances may matter. A few observations cannot determine their causal contribution. If distress persists or affects daily functioning, consider assessment by a qualified professional. The [NIMH help guide](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) focuses on symptoms and their impact rather than personality ranges.\n\nThe high and low descriptions refer to different positions along a measurement direction. They do not rank skill, health, or the quality of a response. The middle is not a guaranteed combination of advantages from both ends.",
+          "heading": "A central result does not limit your right to support",
           "key": "section-07-ba24e8cec6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [high Neuroticism](/en/personality/big-five/neuroticism-high), activation may be less frequent or recovery faster in many settings. Compared with [low Neuroticism](/en/personality/big-five/neuroticism-low), some threats may capture more attention. Boundaries are interpretive, not clinical.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "The [Neuroticism overview](/en/personality/big-five/neuroticism) explains the broader dimension. Compare the [high guide](/en/personality/big-five/neuroticism-high) and [low guide](/en/personality/big-five/neuroticism-low) to understand the direction of the descriptions, rather than choosing the label you prefer.\n\nThe [facet guide](/en/personality/big-five/facets) can help distinguish related experiences. Bring a question such as whether repeated worry interrupts a particular activity; do not use the directory to supply scores your report does not contain.",
+          "heading": "Read further with a specific question",
           "key": "section-08-a5a5527a12",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A project risk appears. You feel concern, verify the facts, make a backup plan, and return to the main task. In a separate relationship conflict, recovery takes much longer. The contrast points toward context and facets rather than a bland average.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-d9b51c319c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may have an intense reaction during a major loss. The severity of the event can overwhelm an otherwise moderate pattern. One extraordinary response should not be used as a global personality verdict.",
-          "heading": "A Counterexample",
-          "key": "section-10-bc5cf05a79",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which triggers produce the strongest response?\n- What speeds or delays recovery?\n- Does a facet sit far from the domain range?\n- How does control affect concern?\n- What evidence changes your first interpretation?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-4b806d256c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Track three stress episodes for seven days: trigger, first interpretation, intensity, action, and recovery time. Compare contexts instead of averaging them. Use the record to identify one helpful support.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-2ff9313941",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Neuroticism](/en/personality/big-five/neuroticism), compare [high](/en/personality/big-five/neuroticism-high), [mid-range](/en/personality/big-five/neuroticism-mid), and [low Neuroticism](/en/personality/big-five/neuroticism-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-c6be02c278",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A mid-range label describes a position under a particular scoring rule. It does not establish normality, flexible coping, or proportionate emotion in every situation.",
+        "title": "Mid-Range Neuroticism: Understanding a Central Score Without Assuming Balance"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/neuroticism-mid",
-      "source_hash": "ba853d9f5ed2a4b9242e2f79e0b705edbeb2a105f4d5b7732ca95fd570e86abc",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Mid-range Neuroticism may suggest context-sensitive emotional response near the middle of one instrument. It is not the normal level, a diagnostic band, or an absence of sensitivity.",
-      "title": "Mid-Range Neuroticism: Context-Sensitive Emotional Response"
+      "source_hash": "65d4e7bf5b210ea6d2aea7d3bbff341a248a2653322e370df0ca615972422b66",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A mid-range label describes a position under a particular scoring rule. It does not establish normality, flexible coping, or proportionate emotion in every situation.",
+      "title": "Mid-Range Neuroticism: Understanding a Central Score Without Assuming Balance"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "neuroticism-mid-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "neuroticism-mid-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "neuroticism-mid-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "neuroticism-mid-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "cafecf7b74fc01369f6a6fe1ce7fa6bf71f1fa24f6c3c5d1612bdca45bbd672e"
+  "source_content_sha256": "ec10f78d1ae04948d55de4f03e14aed5710bda9e791e71bd44b70b227f9c8690"
 }

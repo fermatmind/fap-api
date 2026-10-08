@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/extraversion-high",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "extraversion-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Preference for interaction does not determine concentration, skill, or the ability to complete solitary work.",
-          "question": "Does high Extraversion mean I cannot work independently?"
+          "answer": "Yes. A general participation tendency does not determine the quality or enjoyment of a particular solitary task. Look at your actual work, interruptions, and preferences rather than treating the label as a limit on concentration.",
+          "question": "Can a highly extraverted person enjoy working alone?"
         },
         {
-          "answer": "This page does not support an individual happiness prediction. Positive Emotions is one facet, and well-being has many contributors.",
-          "question": "Are highly extraverted people happier?"
+          "answer": "Not by itself. Enjoyment, tiredness, and wanting further contact are different experiences. Record the event's duration, demands, and your condition. One tiring event cannot establish whether an assessment result is accurate.",
+          "question": "Does feeling tired after an event contradict a high score?"
         },
         {
-          "answer": "You can practice pacing, listening, and recovery behaviors. This page does not promise a trait-score change.",
-          "question": "Can I make myself less extraverted?"
+          "answer": "No. Wanting contact and handling contact well are separate questions. Clear explanations, listening, respect for boundaries, and follow-through need direct observation and feedback.",
+          "question": "Does high Extraversion mean I am socially skilled?"
         },
         {
-          "answer": "Cultural rewards may affect visibility, but they do not guarantee skill, fairness, fit, or outcomes.",
-          "question": "Is high Extraversion an advantage in cultures that value it?"
+          "answer": "No. A preference for stimulation does not establish poor deliberation or difficulty controlling cravings. The NEO Impulsiveness label and related IPIP Immoderation construct also have a more specific scope than every behavior called impulsive in everyday language.",
+          "question": "Is seeking excitement the same as being impulsive?"
         },
         {
-          "answer": "No. Excitement Seeking is narrower than all impulsive behavior, and Neuroticism also contains an Impulsiveness facet. Do not equate the labels.",
-          "question": "Is high Extraversion the same as impulsivity?"
+          "answer": "Start with the commitments causing the problem. Try a specific change in accepting, scheduling, or ending activities, and check whether it helps. This can be useful without a score target and does not demonstrate a change in personality.",
+          "question": "Should I aim for a lower score if I overcommit?"
         }
       ],
       "framework": "big_five",
@@ -88,163 +81,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "High Extraversion may suggest that social contact, visible participation, and active environments often create momentum. The range does not require constant sociability. It is useful when it clarifies where initiative helps and where stimulation, airtime, or commitments become excessive.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “High Extraversion: social energy, active expression, and pursuit of stimulation” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A high Extraversion label describes a location within the scoring system of a particular assessment. It can point toward stronger endorsement of the interaction, expression, activity, or stimulation content that instrument measures. It does not make every lively behavior a feature of your personality, or require you to enjoy every social setting.\n\nCheck whether the result is a raw score, a transformed scale score, a percentile, or a category. A score displayed out of 100 does not by itself show your position among other people. Comparisons need a compatible version, language, scoring method, and reference group. This page cannot establish your category threshold or the uncertainty around your score. A small change near a category boundary should not automatically become a story about a new identity.\n\nYour usual preferences and your current capacity can differ. You may want company and still be exhausted. You may enjoy a solitary project without becoming a different type. Describing an interaction as energizing reports an experience; it does not establish a measured energy system.",
+          "heading": "Read the result before adopting the label",
           "key": "section-01-3b4e164dd1",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may initiate contact readily, think aloud, take the floor, maintain a fast pace, and seek group activity or novelty. Warmth, Gregariousness, Assertiveness, Activity, Excitement Seeking, and Positive Emotions can still form an uneven profile.",
-          "heading": "What This Range Specifically Means",
+          "body": "This site's NEO/IPIP-NEO vocabulary separates Warmth, Gregariousness, Assertiveness, Activity, Excitement Seeking, and Positive Emotions. These offer distinct questions about approaching people, group contact, taking a visible role, everyday pace, stimulation, and enjoyable emotion. The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) maps related IPIP and NEO constructs; related scales are not identical instruments.\n\nEnjoying frequent group contact does not tell you whether you enjoy taking charge. An active schedule does not show that you seek danger. A higher domain result also does not establish the score of any particular facet. Use a facet result only if your assessment actually reports it; otherwise treat the vocabulary as a way to ask more precise questions.\n\nDifferent inventories organize the detail differently. The [BFI-2 authors' description](https://www.ocf.berkeley.edu/~johnlab/bfi.html), for example, describes five domains and fifteen facets. A familiar term is not enough to make results interchangeable.",
+          "heading": "Find the aspect that actually fits",
           "key": "section-02-e7a4d0b40e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer happiness, leadership ability, popularity, social skill, impulsivity, or inability to concentrate alone. A person can enjoy interaction and still need privacy, prepare carefully, or perform deep independent work.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Consider an illustrative situation: after a community garden shift, several people stay to talk while others leave. You regularly join the optional conversation and suggest another get-together. The relevant preference is choosing contact when the assigned work is finished. Whether your suggestion helps the group depends on what people want, whether someone can organize it, and whether the invitation leaves room to decline.\n\nA difficulty might be that every suggestion becomes a commitment. If so, the useful question is how you decide which invitations to accept or organize. A different difficulty might be that someone feels unable to end a conversation. That calls for clearer endings and attention to their response. Neither problem follows automatically from a high score.\n\nAt home, frequent invitations can express a wish for shared time, but they do not establish another person's availability. In a study group, saying an idea aloud can put it on the table, but the quality of the explanation still needs checking. Look at the specific effect, rather than treating visible participation as proof of usefulness.",
+          "heading": "Participation has a purpose, a pace, and a recipient",
           "key": "section-03-31b68b2a8e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include starting conversations, organizing gatherings, speaking early in meetings, responding quickly, and enjoying busy schedules. You may seek feedback through live exchange. Others may experience the same pattern as energizing or as too much input.",
-          "heading": "Common Behavioral Expressions",
+          "body": "An animated host may be following a role. A talkative colleague may have information no one else has. A person who attends many events may have work obligations rather than a preference for them. To understand your tendency, ask what happens when participation is genuinely optional and an alternative is available.\n\nSuppose you usually join the informal conversation after the garden shift. On another comparable day, people remain available, you have time, and you spontaneously choose to go home for a quiet afternoon. That is a natural instance of the target behavior not occurring despite an opportunity. One such instance is compatible with usually joining. Repeated instances in comparable circumstances would make a broad description less useful and invite a narrower one.\n\nWanting interaction, carrying it out effectively, and being welcomed are separate matters. High Extraversion does not establish listening skill, leadership, popularity, happiness, or poor self-control. These need their own evidence.",
+          "heading": "Separate a chosen approach from a required performance",
           "key": "section-04-edef204fe0",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, initiative may aid outreach and facilitation. In learning, discussion may make ideas concrete. In relationships, frequent contact may signal care. Under strain, activity can become overbooking or an attempt to avoid quiet reflection.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Use one provisional hypothesis: 'When an informal group conversation is available after a shared activity, and I have time to choose, I usually join it.' Keep the target behavior consistent. Required debriefs, answering a question, and being assigned to host are different events.\n\nFor a few naturally occurring opportunities, note who was available, any competing demands, whether you joined, and whether you wanted to join beforehand. Record enjoyment, tiredness, and pressure separately afterward. Do not infer a feeling merely because you stayed.\n\nInclude opportunities when you chose not to join. If everyone left or you had an urgent appointment, record no suitable opportunity rather than nonparticipation by choice. If you find no natural counterexample, check whether your observations were too few or too similar before drawing a conclusion.\n\nKeep the description provisionally if chosen participation recurs across relevant settings. Narrow it if it mainly appears with familiar people or a specific activity. Set it aside if obligations dominate the record or you cannot tell whether participation was wanted. These observations can inform an arrangement; they cannot validate a trait score.",
+          "heading": "Observe optional participation without turning it into a personality test",
           "key": "section-05-8b186a11d6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include social momentum, rapid outreach, visible enthusiasm, and willingness to act in active environments. These are tendencies, not verified skills. They help when listening and follow-through accompany initiation.",
-          "heading": "Possible Strengths",
+          "body": "If optional conversation repeatedly delays something you value, try stating an ending time before joining. Keep a separate record of this planned attempt: whether you joined, left when intended, enjoyed the contact, and completed the later commitment. An introduced boundary is not a natural counterexample to your earlier pattern.\n\nKeep the arrangement if it meets both your wish for contact and the practical commitment. Adjust it if the ending is too abrupt or the later commitment still suffers. Drop it if it adds effort without solving the problem. The outcome concerns this arrangement, not whether you became less extraverted.\n\nIf your concern is giving others space, evaluate that directly: did they have a chance to respond, and did they feel free to end or decline? Your participation preference and your conversational skills can be considered separately.",
+          "heading": "Change the arrangement, then evaluate the arrangement",
           "key": "section-06-f7689f56cb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include interrupting, underpreparing, crowding quieter voices, accepting too many commitments, or seeking stimulation after attention needs rest. A fast social rhythm can also create coordination debt.",
-          "heading": "Possible Costs",
+          "body": "The ranges describe parts of a continuum rather than exclusive personality types. Compared with a lower result, a higher result can point toward stronger endorsement of the measured Extraversion content. It does not guarantee better performance. A middle result does not automatically indicate superior balance, and a lower result does not guarantee greater concentration.\n\nRead the [Extraversion overview](/en/personality/big-five/extraversion) for the domain as a whole. Use [mid-range Extraversion](/en/personality/big-five/extraversion-mid) to explore why a middle total can have several explanations, or [low Extraversion](/en/personality/big-five/extraversion-low) to distinguish lower approach from fear and limited opportunities. The [facet guide](/en/personality/big-five/facets) can help separate concepts without supplying unmeasured personal scores.",
+          "heading": "Choose the next page for the question you still have",
           "key": "section-07-d62c129910",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [mid-range Extraversion](/en/personality/big-five/extraversion-mid), approach behavior may appear more consistently. Compared with [low Extraversion](/en/personality/big-five/extraversion-low), high-stimulation settings may be more attractive. None is a social-value rank.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-1c152ce911",
-          "kind": "rich_text"
-        },
-        {
-          "body": "At a stalled workshop, you quickly invite views, synthesize themes aloud, and restore momentum. The benefit is activation. The cost appears when your next idea arrives before a quieter participant can finish; a deliberate pause becomes the useful counter-skill.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-2d90b308c8",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score high and spend a weekend happily working alone. Interest, deadlines, and recovery needs can support solitary focus. One quiet episode neither disproves the range nor means the person has changed type.",
-          "heading": "A Counterexample",
-          "key": "section-10-eb360645cb",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- When does social initiative improve coordination?\n- When does stimulation reduce attention?\n- How do you protect quieter input?\n- Which Extraversion facet appears strongest?\n- What recovery do you need after dense interaction?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-75eee1c3c1",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In one recurring meeting, wait five seconds after another person finishes and invite one contribution before adding your next idea. Track whether participation and decision quality change. This tests conversational pacing, not personality.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-748ad1e68b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion), compare [high](/en/personality/big-five/extraversion-high), [mid-range](/en/personality/big-five/extraversion-mid), and [low Extraversion](/en/personality/big-five/extraversion-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-6874e056f0",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A higher Extraversion result can describe a stronger tendency toward participation, expression, activity, or stimulation. Understanding where that tendency appears is more useful than assuming social skill, constant enthusiasm, or unlimited capacity.",
+        "title": "High Extraversion: Making Participation Work for You and Others"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/extraversion-high",
-      "source_hash": "16a0e884f8c118514d835f7471025a1428fbf8bbbca97dd9a0633c8e9163bf83",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "High Extraversion may suggest social initiative, visible expression, and appetite for stimulation. It does not mean constant happiness, impulsivity, or inability to work alone.",
-      "title": "High Extraversion: Social Initiative and Stimulation"
+      "source_hash": "c9f0d485d3740878ba8528d78dfa19d04f4ec79c9f1531604f0abfdba950521a",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A higher Extraversion result can describe a stronger tendency toward participation, expression, activity, or stimulation. Understanding where that tendency appears is more useful than assuming social skill, constant enthusiasm, or unlimited capacity.",
+      "title": "High Extraversion: Making Participation Work for You and Others"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "extraversion-high-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, social ability, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "extraversion-high-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "extraversion-high-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "extraversion-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2d2518d208c9bbc5d2496f714f14e0132fd3db40363a7f950a52793ffe500fed"
+  "source_content_sha256": "270b61510f09a491738d7cbd9432873b66fac53664705306fb0aba5ae1458a9f"
 }

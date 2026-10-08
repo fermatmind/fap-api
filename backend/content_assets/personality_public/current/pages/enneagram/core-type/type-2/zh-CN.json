@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-2",
@@ -23,101 +23,35 @@
       "entity_key": "type-2",
       "entity_type": "core_type",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。照顾可能来自家庭分工、职业职责、社区规范、紧急状况、互惠协议或练习出的善意。只有当需要与连接的关注跨可比情境重复出现，并经得住反例检验时，假设才有用。",
-          "question": "经常照顾别人就能判断为二号吗？"
+          "answer": "不能只据此判断。家庭分工、工作职责、待客文化、互惠约定与实际需要都可能解释照顾行为。二号解释关注的是：有用和被珍惜是否反复联系在一起，以及这种联系怎样影响你的选择。",
+          "question": "我经常照顾别人，是不是就是二号？"
         },
         {
-          "answer": "区分能看出帮助是在回应证据，还是在回应自己的想象。记录请求、同意、替代偏好和被拒绝后的行动，可以保护对方决定权，也让动机假设更具体。",
-          "question": "为什么要区分推测需要和明确请求？"
+          "answer": "不是。关心对方与希望连接可以同时存在，期待感谢也不自动使帮助失去真诚。需要澄清的是期待有没有被说出来、对方有没有同意，以及你能否接受不同回应，而不是用类型怀疑每一次善意。",
+          "question": "二号的帮助是不是都有隐藏目的？"
         },
         {
-          "answer": "帮助前先问一个具体问题，说明自己可投入的时间或精力，并不劝说地接受答案。之后记录连接是否变化、失望是否出现，以及哪项个人需要应改为直接沟通。",
-          "question": "二号适合做什么边界练习？"
+          "answer": "可能。边界和直接表达可以是更灵活的关心方式。它们只有与更广泛的选择一起表明连接和被需要长期不是主要关注时，才会明显削弱二号解释。",
+          "question": "如果我会拒绝，也能直接说自己的需要，还可能符合二号吗？"
         }
       ],
       "framework": "enneagram",
@@ -133,43 +67,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格：九种动机模式",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/heart",
-          "label": "center:heart",
+          "label": "情感中心：价值感与被接纳",
           "relationship": "center_membership",
           "target_identity_key": "center:heart"
         },
         {
           "href": "/zh/personality/enneagram/wings/2w1",
-          "label": "wing:2w1",
+          "label": "2w1：关心中的原则与责任",
           "relationship": "wing_variant",
           "target_identity_key": "wing:2w1"
         },
         {
           "href": "/zh/personality/enneagram/wings/2w3",
-          "label": "wing:2w3",
+          "label": "2w3：关心中的成效与回应",
           "relationship": "wing_variant",
           "target_identity_key": "wing:2w3"
         },
         {
           "href": "/zh/personality/enneagram/type-2/instincts/self-preservation",
-          "label": "instinctual_subtype:type-2/self-preservation",
+          "label": "二号自保副型：日常生活与资源",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-2/instincts/social",
-          "label": "instinctual_subtype:type-2/social",
+          "label": "二号社交副型：群体中的连接",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/social"
         },
         {
           "href": "/zh/personality/enneagram/type-2/instincts/one-to-one",
-          "label": "instinctual_subtype:type-2/one-to-one",
+          "label": "二号一对一副型：重要关系中的连接",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/one-to-one"
         }
@@ -210,57 +144,44 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "检验二号帮助动机，需要分别记录对方说了什么、自己做了什么，以及后来希望得到什么。送餐、介绍资源、安慰或提醒可能来自岗位、亲友习惯、危机需要、互惠约定或礼貌文化，不能只凭行为推定连接动机。",
-          "key": "behavior_motive",
-          "title": "先分开帮助行为与动机"
+          "body_md": "九型传统中的二号解释，把关心他人与确认自己在关系中的价值联系起来：发现一个需要，主动提供帮助，从回应中感到自己被需要、被珍惜。如果“不再需要我的帮助”逐渐被理解成“不再需要我”，原本有温度的付出就可能变成维持连接的主要办法。\n\n这不意味着帮助都是交换，也不意味着二号不会真诚关心人。一个人可以既希望对方过得好，也希望自己的投入得到回应。值得留意的是：你能否承认这两种需要，还是只有把自己描述成完全不求回报的人，才觉得自己值得被喜欢。\n\n[Enneagram Institute 的二号介绍](https://www.enneagraminstitute.com/type-2/)使用 The Helper 这一称呼。但照护工作、待客习惯、友谊、互惠约定或紧急事件，同样会让人提供大量帮助。应比较帮助怎样与连接和自我评价联系起来，而不是只数付出了多少。",
+          "key": "connection_through_helping",
+          "title": "帮助为什么可能不只是把事情办好"
         },
         {
-          "body_md": "若注意力持续扫描谁需要什么、自己能提供什么、关系是否仍亲近，二号假设才值得测试。还要观察当个人需要与他人需要冲突时会怎样选择，以及新信息是否能改变最初的帮助方案。",
-          "key": "motivation_attention",
-          "title": "再观察注意力反复去向"
+          "body_md": "对他人有关注，可以让你记住别人没有说完的困难、及时连接资源，或让新人感到有人愿意陪他们适应。它的价值来自回应真实处境，而不是帮助越多越好。\n\n问题可能从一个很小的跳步开始：你认为对方需要什么，便把这当成对方已经同意的帮助。随后又期待对方多联系你、认可你的重要性，或按你的建议行动。这些期待若没有讨论，接收帮助的人就可能觉得自己突然欠下了一份关系义务。\n\n被拒绝时的失落值得理解，但失落不证明对方拒绝了你这个人。可以把“我都做了这么多”拆成实际贡献、没有得到的回应，以及你现在想提出的请求。你有权表达需要，对方也有权拒绝某种帮助或回报。类型不能替任何一方订下这个约定。",
+          "key": "help_without_an_unspoken_contract",
+          "title": "敏锐的关心，怎样变成没有说出的约定"
         },
         {
-          "body_md": "对人的关注有时支持及时响应、协调资源、营造温度和发现被忽略的困难。代价可能出现在未经询问便代替决定、把拒绝理解为关系否定、长期不说自己的限制，或让帮助附带对方并未同意的回报。",
-          "key": "strengths_tradeoffs",
-          "title": "把敏锐和代价一起看"
+          "body_md": "新人遇到困难，你主动接手他们的任务。这可能为了让对方感到被支持，也可能为了满足服务职责、证明自己能力，或避免项目出问题。更具体的做法是先问：“你想让我示范一次、一起做，还是只给你资料？”同样是关心，陪伴、提供工具与直接接手，对对方的自主性影响不同。\n\n朋友说最近很累，你安排了一整天活动，对方却想独处。二号的连接解释可能让你理解自己为何感觉被冷落，但不能证明朋友不珍惜你。可以说：“我原本想和你相处，所以有些失落。你想休息的话，我们另约时间。”这句话把自己的需要放回了对话，而不是让安排本身替你索取回应。\n\n发生矛盾时，先问眼前需要的是实际帮助、被听见、明确分工，还是彼此陪伴。若主要问题是长期不平等的家务或照护责任，就应处理分工和资源，不能要求承担更多的人仅靠调整人格模式解决。",
+          "key": "helping_in_real_interactions",
+          "title": "在协作和亲近关系里，先确认要解决什么"
         },
         {
-          "body_md": "做选择时可看先照顾谁；收到反馈时可看感谢是否影响继续投入；冲突时可看过去贡献是否被拿来说明委屈。比较二号反馈与角色职责，能避免把照护岗位、家庭分工或服务训练直接当成类型。",
-          "key": "decision_feedback_conflict",
-          "title": "记录选择、反馈和冲突"
+          "body_md": "一次答应、送礼或主动帮助，无法区分这些核心。可以结合相似情境，比较自己最希望维护什么。\n\n- 二号与[九号](/zh/personality/enneagram/type-9)：同样答应一个不想做的请求，二号解释可能更关注仍被需要、维持亲近；九号解释可能更关注不要起冲突、让相处恢复平稳。想象对方允许你拒绝，也保证关系不会疏远：你仍担心失去有用的位置，还是主要松了一口气，因为不用再应付紧张？这只是辨别问题，不是测试题。\n- 二号与[六号](/zh/personality/enneagram/type-6)：两者都可以忠诚、顾及他人。比较付出主要在确认自己被珍惜，还是在建立可靠支持与共同承诺。现实上依赖某个人的工作、住房或安全时，顺从可能是条件所迫，不能直接解释成二号或六号。\n- 二号与[三号](/zh/personality/enneagram/type-3)：两者都可能调整表达、帮助团队并希望得到认可。可以比较对方不再需要帮助但仍亲近你，以及认可你的成果却不愿亲近你这两种情况：哪一种更触动你，为什么？重点是关系位置与成果价值怎样进入自我评价，而不是谁比较温暖。\n- 二号与[一号](/zh/personality/enneagram/type-1)：同样提出改善建议，二号解释更关注回应需要与保持连接，一号解释更关注事情得到负责、正确的处理。两个关注可以并存，要看哪个反复决定你是否介入、何时停止。",
+          "key": "distinguishing_help_and_agreement",
+          "title": "热心、讨好与同意，可能来自不同关注"
         },
         {
-          "body_md": "工作中可观察某人是否在新人开口前主动连接资源；关系中可观察多次帮助后是否出现未说出的期待。此类材料只用于讨论请求和边界，不能作为工作表现、关系适配或未来结果的判断依据。",
-          "key": "work_relationship_examples",
-          "title": "用情境讨论但不推断结果"
+          "body_md": "可以拒绝、直接提出自己的需要、接受别人不想要某种帮助，都可能是关心连接时更灵活的做法。它们不自动推翻二号解释。反过来，难以拒绝也可能来自权力差异、现实依赖、家庭规范或过去形成的应对习惯；仅凭“我会讨好”不足以选定二号。\n\n更值得重新考虑的情况是：跨几种有选择余地的互动，你对是否被需要、被珍惜并没有持续关注；帮助主要随明确职责开始和结束，离开职责后你关心的主题稳定转向可信支持、冲突是否结束或成果是否得到认可。\n\n不要用“你只是没有承认想被爱”消解所有反例。看不到支持二号解释的材料时，可以保留不确定，或比较更贴近实际选择的其他解释。",
+          "key": "flexibility_and_counterexamples",
+          "title": "有边界不排除二号，缺乏边界也不证明二号"
         },
         {
-          "body_md": "2w1 假设加入原则性服务、克制与标准，2w3 假设加入可见成效、适应表达和对回应的关注。常见误判包括岗位照护、九号式避冲突、六号式忠诚、三号式形象管理、文化待客和后天讨好习惯。",
-          "key": "wings_mistypes",
-          "title": "对照两翼和常见误判"
+          "body_md": "下次准备主动帮忙时，先停一下，分别说清三件事：对方实际提出了什么、你猜测他们需要什么、你自己希望得到什么。若你期待借机聊天、相处或得到感谢，可以先承认这一点，不必立即评价它好坏。\n\n向对方提供一个有边界的选择，例如：“我今天能陪你整理半小时，也可以发资料给你。你想要哪一种，或者都不需要？”接受答案后，不继续劝说。若对方不需要帮忙，而你仍想相处，可以另外提出：“那周末能不能一起喝杯茶？”\n\n事后记录：原先以为拒绝会带来什么？对方实际怎样回应？有没有把拒绝一种帮助扩大成拒绝整段关系？自己的直接请求是否得到了明确回答？这项练习用来减少猜测和隐藏期待，不承诺关系一定改善，也不检验你是不是二号。",
+          "key": "ask_before_helping_and_request_directly",
+          "title": "一次小实践：确认请求，也给自己的需要一个位置"
         },
         {
-          "body_md": "寻找二号帮助反例，可以观察当事人是否轻松接受拒绝、直接表达自己的需要、只在职责明确时帮助，或在可比情境中并不持续关注连接。若这些材料稳定出现，应提高角色、文化、安全、互惠和压力解释的权重。",
-          "key": "counterexample",
-          "title": "用拒绝与无认可制造反证"
+          "body_md": "二号在九型传统中属于[情感中心](/zh/personality/enneagram/centers/heart)，这一分组讨论价值感与被接纳的关注。它不意味着二号比其他人更有爱心，或所有情感都由关系决定。\n\n如果通过有用来维持连接确实反复出现，可比较[2w1：关心中的原则与责任](/zh/personality/enneagram/wings/2w1)和[2w3：关心中的成效与回应](/zh/personality/enneagram/wings/2w3)。翼修饰的是同一个二号核心；尽责不自动使人变成一号，表达灵活也不自动使人变成三号。\n\n若你仍不清楚自己为什么答应或帮助，先读[九型人格总览](/zh/personality/enneagram)，再对照与你最接近的核心。副型页面进一步讨论日常资源、群体角色与重要关系中的关注，不应仅凭爱社交、会照顾生活或重视亲密就选定副型。",
+          "key": "heart_center_wings_and_navigation",
+          "title": "二号核心、两种翼与下一步"
         },
         {
-          "body_md": "本页适合提出关于请求、同意、互惠和个人界限的复盘问题，不适合做道德排名、健康或人格结论、招聘筛选、关系裁决、能力判断或永久标签。",
-          "key": "use_boundary",
-          "title": "限定用途与决定权"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 选择三次有明确请求、对方可以真实拒绝且事后结果能够被观察的互动，不用模糊的“我总是照顾人”概括。\n\n可观察信号: 记录最先推测的需要、对方实际请求、提供的帮助、拒绝后的反应，以及后来是否表达回报期待。\n\n本页特定信号: 特别标注在同意之前追求有用、根据新信息调整帮助，或改为直接表达自己需要的节点。\n\n替代解释: 逐项比较亲友规范、岗位职责、互惠约定、危机紧迫、待客文化、害怕冲突和声誉管理。\n\n复盘问题: 选出一次帮助主要跟随职责而非连接的事件，说明什么后续证据会降低或放弃二号假设。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "逐项比较亲友规范、岗位职责、互惠约定、危机紧迫、待客文化、害怕冲突和声誉管理。",
-            "context": "选择三次有明确请求、对方可以真实拒绝且事后结果能够被观察的互动，不用模糊的“我总是照顾人”概括。",
-            "duration_days": 5,
-            "observable_signal": "记录最先推测的需要、对方实际请求、提供的帮助、拒绝后的反应，以及后来是否表达回报期待。",
-            "page_specific_signal": "特别标注在同意之前追求有用、根据新信息调整帮助，或改为直接表达自己需要的节点。",
-            "reflection_prompt": "选出一次帮助主要跟随职责而非连接的事件，说明什么后续证据会降低或放弃二号假设。"
-          },
-          "title": "观察练习"
+          "body_md": "二号的动机与模式来自传统九型描述。不同核心的相似表现也可参照 [The Narrative Enneagram 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)；这些是学派的解释方向，不是单行为判型规则。本页情境和实践是用于讨论请求、同意与连接的示例。\n\n[Hook 等人的系统综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)指出研究证据并不一致，翼与类型间移动的支持有限。这里不把传统描述当作费马测评的效度证明，也不承诺帮助行为能揭示一个永久类型。\n\n本页适合自愿反思和具体沟通，不能用来评定善良程度、给讨好行为作临床解释，或决定招聘、关系去留和个人能力。",
+          "key": "sources_and_scope",
+          "title": "把这些解释留在可以讨论的范围内"
         }
       ],
       "seo": {
@@ -271,8 +192,8 @@
       "slug": "enneagram/type-2",
       "source_hash": "f6bdde8b7ca581e3d7b75b31621c17ee2242cfb7ca48bd50f5de6ca6a84db8e3",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "二号是九型人格传统中关于注意力反复落在他人需要、连接和“成为有用的人”上的观察假设。观察二号需要注意，必须区分对方实际提出的请求、自己推测的需要、提供帮助后的期待，以及被拒绝时的反应；热心本身不能证明固定类型。",
-      "title": "二号观察假设：需要、连接与帮助边界"
+      "summary": "二号模式关注他人的需要，也关注自己能否在关系里成为有用、被珍惜的人。帮助可以建立温暖的连接；当连接必须靠不断付出来维持时，自己的需要与对方的决定权容易被忽略。理解二号，要比较帮助、同意和期待背后的不同理由。",
+      "title": "九型人格2号：关心、连接与说出自己的需要"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -282,92 +203,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "317d959210625895ee8774a16c03f1d2cbf60fa2623bd5a29f3d041a8e694631"
+  "source_content_sha256": "bd675e86a35e64facbb2cfb589179695413b70088abe4bee1716155f2b50e983"
 }

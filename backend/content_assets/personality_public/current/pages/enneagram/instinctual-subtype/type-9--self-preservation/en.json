@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-9/instincts/self-preservation",
@@ -23,94 +23,35 @@
       "entity_key": "type-9/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "Preferring familiar routine does not prove self-preservation Nine. Accessibility, scarcity, pain, caregiving, sensory regulation, or recovery can require predictability; compare resource conditions and whether chosen priorities resume.",
-          "question": "Does preferring familiar routine prove self-preservation Nine?"
+          "answer": "No. Each can reflect preference, culture, available money, accessibility, or sensible planning. Examine repeated decisions, the reason a personal priority is deferred, and what changes when resources and support improve. One behavior cannot establish either the core type or the subtype.",
+          "question": "Do liking comfort, collecting things, or saving money establish self-preservation Nine?"
         },
         {
-          "answer": "Comfort should be separated from priority avoidance by recording its endpoint and consequence: restorative comfort supports re-entry into a chosen task, while displacement repeatedly consumes the protected time without a deliberate decision.",
-          "question": "How should comfort be separated from priority avoidance?"
+          "answer": "Yes, within the traditional framework these are different explanatory layers. Instinct emphasis concerns an area of attention; a Nine wing concerns the influence of the adjacent Eight or One pattern. All three instinct concerns remain available. Neither a wing nor an instinct should be assigned simply from the second-highest core-type score.",
+          "question": "Can self-preservation Nine also be social or have an Eight or One wing?"
         },
         {
-          "answer": "A useful matched comparison observes the same routine under adequate resources and genuine scarcity, while holding the task and available time as constant; behavior that follows necessity weakens the subtype interpretation.",
-          "question": "Which matched comparison is useful for this subtype?"
+          "answer": "The schools overlap but do not use identical definitions. Narrative one-to-one includes close partnerships, friendship, and vitality; the Enneagram Institute’s sexual or attraction account puts more emphasis on attraction and intensity. Neither is limited to sex or romance, and everyone can value individual relationships.",
+          "question": "Is one-to-one just another name for sexual instinct?"
         }
       ],
       "framework": "enneagram",
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The hypothesis asks whether familiar activity helps postpone a personally important priority while preserving immediate steadiness. Comfort by itself is ordinary and provides no type evidence.",
-          "key": "traditional_hypothesis",
-          "title": "Frame comfort as a secondary observation"
+          "body_md": "In the traditional account, Nine seeks peace and connection and may defer a personal preference to avoid disturbance. See the [Enneagram Institute’s Type Nine description](https://www.enneagraminstitute.com/type-9/). Self-preservation asks where that pattern shows up: attention to having enough, maintaining a livable home, and keeping daily life manageable.\n\nThe [Narrative Enneagram’s subtype description](https://www.narrativeenneagram.org/instinctual-subtypes/) emphasizes practical routines and comfort, alongside the possibility of neglecting personal priorities. A useful way to explore this is to ask what happens when a familiar activity competes with something you have already decided matters.\n\nPreparing meals, maintaining equipment, or making a room comfortable can be skilled, generous work. The possible difficulty begins when keeping the immediate environment settled becomes the default answer to an unresolved choice. Someone can finish many useful tasks while leaving one important decision untouched. Productivity alone does not settle the question.",
+          "key": "steadiness_in_daily_life",
+          "title": "When keeping things running becomes the first priority"
         },
         {
-          "body_md": "Observe one routine when food, money, time, and rest are adequate, then compare it during real scarcity. A subtype reading should weaken when behavior tracks resource constraints more closely than conflict or priority.",
-          "key": "matched_comparison",
-          "title": "Compare the same person across resource conditions"
+          "body_md": "Consider an illustrative situation. Alex wants to renegotiate an unfair division of rent and household work. Before speaking to a housemate, Alex cooks, washes the dishes, and sorts supplies: a settled home seems like a better place to talk.\n\nThat preparation can work. Eating and clearing practical distractions may make the conversation easier. But if every available evening becomes another maintenance session, the strategy has changed function. Alex gets short-term relief from the awkward discussion while the unfair arrangement continues. Later, irritation may emerge as slow follow-through or resistance to another household request.\n\nThe observable sequence matters: Alex names a priority, anticipates disruption, moves into familiar tasks, feels temporarily more settled, and does not return to the discussion. This is a hypothesis about those events, not proof of a subtype. If Alex is exhausted after shift work, has pain, or lacks enough food, completing basic care may be the necessary priority. The remedy then starts with resources and support, rather than challenging the routine.",
+          "key": "rent_conversation",
+          "title": "The apartment is ready, but the conversation never starts"
         },
         {
-          "body_md": "Self-preservation here names a traditional attention comparison rather than evidence about bodily mechanisms, physiology, or a universal survival system. Material needs remain real regardless of typology.",
-          "key": "instinct_boundary",
-          "title": "Use attention language, not bodily mechanism claims"
+          "body_md": "Imagine being asked to help at a community workshop on the Saturday you had reserved for a personal project. These are possible attention patterns, not three scripts everyone must follow.\n\nA self-preservation reading asks whether you first consider energy, meals, travel costs, and disruption to your familiar weekend rhythm. You might offer to prepare materials at home because that feels manageable. The concern becomes relevant when neither the workshop nor your personal project receives a clear decision, while familiar chores absorb the day.\n\nA social reading asks whether your place in the group comes forward: who needs help, what a reliable member should do, and whether declining would leave you less connected. Your project may disappear into collective work.\n\nA one-to-one reading asks whether a particular person’s involvement makes the event compelling. You may adopt their Saturday plan before locating your own preference.\n\nAll three could say yes, say no, or bring food. Ask what captured attention and what was lost from view. Everyone has needs for resources, belonging, and close connection; an emphasis does not mean the other concerns are absent.",
+          "key": "one_invitation_three_focuses",
+          "title": "Three Nines receive the same Saturday invitation"
         },
         {
-          "body_md": "A person may be highly productive in maintenance tasks while still delaying a chosen conversation or direction. Visible busyness neither confirms nor refutes the secondary hypothesis without priority data.",
-          "key": "countertype_variation",
-          "title": "Allow visible activity and practical competence"
+          "body_md": "Choose two ordinary occasions with similar demands and enough resources to allow a real choice. Before a familiar routine, write down the action you intend to return to. Afterwards, record whether the routine restored capacity, whether it ended when intended, and whether the action resumed. Do not manufacture scarcity, skip needed meals, or remove accommodations to create a comparison.\n\nThe postponement explanation becomes more plausible if a chosen conversation or project repeatedly drops out when it might disturb the current arrangement, despite adequate time and support. It weakens if the routine has a workable endpoint and you return voluntarily to the difficult action. It also weakens if delays closely follow sleep loss, pain, caregiving, or unstable access to essentials and ease when those conditions improve. Repeated contrary observations are a reason to withdraw this explanation, not to call the pattern more deeply hidden.\n\nQuietness is also insufficient. The [Narrative Enneagram’s type comparisons](https://www.narrativeenneagram.org/type-comparisons/) distinguish several reasons for withdrawal or accommodation. For your own reflection, compare preserving a settled atmosphere with protecting limited time and access, or checking whether a plan is safe. Those questions can reopen a core-type assumption rather than forcing every delay into a Nine account.",
+          "key": "rest_or_displacement",
+          "title": "Separate restoration from postponement"
         },
         {
-          "body_md": "Shift work, insecure housing, disability, pain, caregiving, sensory regulation, food access, and financial volatility can make routine or comfort protective and necessary rather than avoidant.",
-          "key": "alternative_environment",
-          "title": "Account for necessity and accessibility"
+          "body_md": "Try a small sequence on an adequately resourced day: meet the immediate need, then take one bounded step on your chosen priority. Alex might eat dinner and send, “Could we discuss the rent split tomorrow for fifteen minutes?” The aim is to give the issue a time, not to resolve the whole disagreement immediately.\n\nSomeone supporting Alex can ask which task is genuinely necessary and help protect the agreed conversation time. Repeatedly adding reminders, criticism, or more household work may make it harder to identify the actual obstacle. If the housemate responds with intimidation, practical safety and housing options take priority; assertiveness is not a requirement for validating or disproving a subtype.\n\nJudge the experiment by whether it makes a chosen action more possible without sacrificing basic needs. If rest reliably leads back to that action, keep the rest. If the supposed avoidance disappears once workload or access improves, revise the interpretation.",
+          "key": "protect_one_action",
+          "title": "Keep the support and give your choice a place"
         },
         {
-          "body_md": "Confidence should fall when rest or routine has a clear endpoint, restores capacity, and is followed by the planned difficult task without external pressure or concealed resentment.",
-          "key": "counterexample",
-          "title": "Look for comfort followed by deliberate re-entry"
-        },
-        {
-          "body_md": "Instrument-specific findings cannot establish a universal subtype ontology or cross-cultural equivalence. Treat routine, comfort, and priority records as local observations requiring human review.",
-          "key": "evidence_boundary",
-          "title": "Keep subtype inference modest"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: For five days, choose one comfort routine, one maintenance task, and one personally important action that competes for the same time block.\n\nObservable signal: Record resource sufficiency, physical access needs, chosen priority, routine start and stop, interruption response, and whether the important action resumes.\n\nPage-specific signal: Compare the same comfort pattern on a well-resourced day with a day shaped by scarcity, pain, caregiving, or sleep loss.\n\nAlternative explanation: Check poverty, disability, sensory regulation, recovery, shift work, household duty, food access, and unstable housing before inferring motive.\n\nReflection prompt: Identify one routine that restored capacity and one that displaced a chosen priority, then revise the secondary hypothesis separately for each.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check poverty, disability, sensory regulation, recovery, shift work, household duty, food access, and unstable housing before inferring motive.",
-            "context": "For five days, choose one comfort routine, one maintenance task, and one personally important action that competes for the same time block.",
-            "duration_days": 5,
-            "observable_signal": "Record resource sufficiency, physical access needs, chosen priority, routine start and stop, interruption response, and whether the important action resumes.",
-            "page_specific_signal": "Compare the same comfort pattern on a well-resourced day with a day shaped by scarcity, pain, caregiving, or sleep loss.",
-            "reflection_prompt": "Identify one routine that restored capacity and one that displaced a chosen priority, then revise the secondary hypothesis separately for each."
-          },
-          "title": "Observation exercise"
+          "body_md": "The 27 subtype combinations are part of Enneagram teaching traditions. They are not established as 27 reproducible scientific diagnoses or verified neurological mechanisms. Some schools use “countertype” for a subtype whose outward style differs from a familiar picture of its core type; that label cannot resolve contradictory evidence by itself.\n\nThe [abstract of Hook and colleagues’ 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence across 104 independent samples. That finding does not validate this particular subtype interpretation or FermatMind’s scores. Research on a particular instrument must be assessed within its own sample and methods.\n\nFor the underlying motivation, read [Type Nine]( /en/personality/enneagram/type-9). To compare where attention goes, explore [social Nine](/en/personality/enneagram/type-9/instincts/social) and [one-to-one Nine](/en/personality/enneagram/type-9/instincts/one-to-one).",
+          "key": "evidence_and_reading",
+          "title": "Use the account as a question you can revise"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-9/instincts/self-preservation",
       "source_hash": "0cc138fb89132aef09bb0e96e12f736966ea21e8466f20580a0cd1a5f0d15652",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Nine self-preservation is a traditional secondary hypothesis linking a core-Nine stability pattern with attention to routine, comfort, familiar activity, maintenance, and material continuity. It does not describe bodily mechanisms. Repetition may instead reflect poverty, disability, chronic workload, caregiving, recovery, sensory needs, or a rational need for predictable access.",
-      "title": "Type Nine self-preservation: routine comfort as a secondary hypothesis"
+      "summary": "Explore how a Nine’s wish for steadiness may center on home, resources, comfort, and familiar routines. The useful question is whether these supports help you pursue what matters or repeatedly take its place.",
+      "title": "Self-preservation Nine: keeping life steady without losing your priorities"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ed894f06e430b79fd58adbaf991274009ec0fbd611867d4d00c1fdddd13166ae"
+  "source_content_sha256": "b9a9a26b975490b1609e5b2632cbb128e942d396d376cb32dd9139890ec9ef12"
 }

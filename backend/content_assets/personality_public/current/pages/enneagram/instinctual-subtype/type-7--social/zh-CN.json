@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-7/instincts/social",
@@ -23,94 +23,35 @@
       "entity_key": "type-7/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "价值观、信仰、学校要求、职业发展、互助或社群需要都可能解释志愿服务。还要比较选择自由、兑现质量和认可条件的影响，并确认参与者是否能在没有惩罚时退出。",
-          "question": "参加志愿服务为什么不能证明社群第七型？"
+          "answer": "可能。社群关注可以落在群体规则、参与位置、共同理想和责任上，不要求大量社交。一个人也可能因为工作压力而关注这些问题，所以还要看相近、自由选择的情境中，群体关注怎样与第七型动机联系。",
+          "question": "不喜欢聚会，也可能有社群关注吗？"
         },
         {
-          "answer": "所谓牺牲可能真正帮助别人，也可能维护地位、履行被强加的角色或表达自选价值。认可对照能区分原因，但不能给行为贴道德等级；最终还要核对受益者和已兑现结果。",
-          "question": "为什么要同时检查牺牲与认可条件？"
+          "answer": "不能。牺牲可能是自选价值、必要职责、身份期待或不公平劳动，也可能与共同可能性有关。评价现实行动需要看自由选择、兑现结果、受益者和成本分配，亚型名称不能给行为排道德等级。",
+          "question": "为群体放弃享受，是否说明比其他亚型更无私？"
         },
         {
-          "answer": "在没有署名和地位回报时仍稳定完成乏味维护，而且没有急于换到更刺激角色，会削弱以认可张力解释共同可能性的判断；若还能公平分配功劳，反例更明确。",
-          "question": "哪种匿名维护任务会削弱社群假设？"
+          "answer": "它会削弱以认可为主要驱动的解释，但不会自动推翻对共同理想和归属的关注。若多次观察也没有第七型的可能性、满足与受限张力，而明确职责或价值观更充分地解释行动，则应降低整个亚型解释的适用性。",
+          "question": "匿名服务且不求认可，会否推翻社群第七型？"
         }
       ],
       "framework": "enneagram",
@@ -132,19 +73,19 @@
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "九型人格7号",
+          "label": "第七型核心介绍",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "7号：自保本能",
+          "label": "第七型自保亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "7号：一对一本能",
+          "label": "第七型一对一亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "这里的社群本能只作为传统观察标签，不描述身体机制。归属、排斥、地位、法律和组织设计需要直接分析，不能用副型替代制度事实。",
-          "key": "instinct_boundary",
-          "title": "把社群语言限制在注意与角色层面"
+          "body_md": "如果第七型与满足、选择和可能性有关，为什么社群第七型的传统描述会谈到牺牲？[Narrative Enneagram](https://www.narrativeenneagram.org/instinctual-subtypes/)指出的张力，是个人的开阔计划与参与群体所要求的限制之间的关系。想让大家一起拥有更好的未来，本身可以成为一种令人兴奋的可能性；为了它，个人愿意暂缓享受或接下责任。\n\n这里的第七型动机没有自动变成另一种核心。一个人可能一边认真服务，一边期待这项事业让生活变得有意义、有活力，而不必停留在失望与无力中。[Enneagram Institute 的第七型介绍](https://www.enneagraminstitute.com/type-7/)提供核心动机的传统背景。但这只是可以询问的原因，不能看到服务行为就替当事人认定他在避开痛苦。\n\n例如，朋友提出缩小活动规模，有人立即说“我们可以做得更好，大家都值得有机会”。这句话可以是有效的鼓励，也可能在尚未核对人手时，把一个美好的未来变成新的义务。要继续看：本人能否承认能力有限，是否给别人留下拒绝的空间，承诺后来由谁完成。",
+          "key": "chosen_limits",
+          "title": "为什么愿意限制自己，却仍保留第七型核心"
         },
         {
-          "body_md": "传统假设认为，注意可能转向鼓舞群体、延迟即时偏好或成为开启集体未来的人。观察时必须写清谁实际受益、本人是否能拒绝，以及承诺最终是否兑现。",
-          "key": "traditional_hypothesis",
-          "title": "把贡献视为通向共同可能性的暂定路线"
+          "body_md": "社群第七型可以显得认真、节制，甚至比周围的人更愿意放弃私人娱乐。解释上的关键是，这份克制是否与共同理想、归属位置和对更好可能性的期待相连。若只用“第七型爱玩”作标准，就会漏掉这种外观差异；若反过来把自我牺牲当成亚型证明，也同样过快。\n\n即便某些学派使用“反型”来说明与常见外观不同的组合，它也只是传统命名，不是特殊心理机制，更不能把不符合的表现都解释成压抑得更强。一个人持续因价值观或明确职责做事，而没有本页所说的可能性与受限张力，就应允许这套解释不适用。\n\n认可可以是一个因素，但不是社群关注的全部。匿名贡献仍可能承载共同理想；因此，愿意做无署名工作，只能削弱“主要为了得到认可”这个具体解释，不能单独排除社群第七型。反过来，想获得公平署名也可能是合理的劳动权益要求。",
+          "key": "sacrifice_without_rank",
+          "title": "克制的外观，不是美德或反型的证明"
         },
         {
-          "body_md": "照护、倡议、教学、宗教义务、公民责任、边缘群体互助、绩效指标和晋升制度都可能奖励牺牲或公开贡献，这些条件常比副型更直接。",
-          "key": "alternative_environment",
-          "title": "先审计无偿劳动与制度激励"
+          "body_md": "朋友筹办周末修理工作坊，场地取消、预算减半，一位合作者只能参加两小时。社群第七型的解释会特别关注：活动还怎样让大家参与，自己的投入在群体中意味着什么，以及共同目标能否继续令人期待。\n\n策略有效时，组织者会先问大家最看重哪项收益，再把活动缩成能完成的一部分；他说明自己的可用时间，也允许别人调整承诺。理想因此成为协调资源的方向。过用时，他可能承诺“缺的都由我补”，随后又提出更热闹的新计划，最后把清理、联系和收尾转给并未同意的人。也可能把提出边界的人看成不够投入。可观察的代价是工作分配和兑现缺口，不需要猜测他是否高尚或自私。\n\n同一事件下，自保第七型的解释更关注可用场地、工具与舒服好办的安排；一对一第七型的解释更关注某位合作者带来的兴奋与新方向。社群解释则把共同目的和参与位置放在前面。三者都可能牺牲时间或提供物资，区别在这些行动服务的主要关注，以及哪项限制最难接受。\n\n这些是原创比较情境。它们帮助提问，不把实际合作中的人分成三类固定角色。",
+          "key": "shared_workshop",
+          "title": "预算减半时，共同愿景怎样变成公平的分工"
         },
         {
-          "body_md": "保持工作量和群体收益接近，分别记录公开获得认可和匿名维护时的参与程度、兑现质量、怨气、重新选项以及退出自由。",
-          "key": "matched_comparison",
-          "title": "比较有署名与无署名的同等贡献"
+          "body_md": "社群第七型容易与其他核心解释相遇。与第一型比较时，不妨问：如果一个朴素、合规的方案已经足够，仍难放下的是“还没做到应该的标准”，还是“这样会不会丢掉更好的可能性”？与第二型比较时，问：别人不再需要帮助后，失去被需要的位置与失去共同创造的机会，哪一个更牵动自己？与第三型比较时，问：计划受阻后，主要想恢复成果与能力形象，还是重新打开值得期待的未来？[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)支持这些传统区分方向，实际答案仍须来自多次具体经历。\n\n职业职责、照护义务、信仰、互助需要、考核和排斥风险，都可能要求相同的服务行为。不能自由拒绝的人，其投入首先可能是在应对制度条件。先检查工作量、补偿、退出条件与受益者，再谈人格。\n\n如果调整职责或消除晋升激励后，所谓牺牲随之停止，应提高角色解释的权重。若在相近且自由选择的情境中，一个人并不反复依靠共同愿景绕开失望，也不因责任缩小个人选项而产生本页所说的张力，就应降低或撤回这个亚型解释。稳定完成常规任务本身不是反例；它可能只是说明这套策略使用得有边界。",
+          "key": "mistaken_motives",
+          "title": "相似的责任感，可能来自不同原因"
         },
         {
-          "body_md": "副型假设不能衡量慷慨、自私、公民品质、领导力或伦理。量表特定证据不证明跨文化本体，群体后果仍需用事实核对。",
-          "key": "evidence_boundary",
-          "title": "不从贡献推断美德或普遍结构"
+          "body_md": "在下一次低风险的群体任务中，先分别写下三件事：我真实愿意做什么；大家已经同意需要什么；我希望通过这个计划出现什么更好的未来。不要把第三项直接当成第一项和第二项已经达成。\n\n承诺前，说明自己可投入的时间、能完成的最小结果和需要别人明确同意的部分。保留一项正常的私人安排；若确实需要调整，讨论由谁分担，而不是自动由最热心的人补足。新想法可以记录，但先完成当前约定再决定是否增加。\n\n任务结束后，比较自己在灵感阶段与常规收尾中的感受。失去署名、活动变小和必须错过另一件有趣的事，分别带来了什么变化？是缺少认可、担心群体落空、对劳动不公的愤怒，还是难以接受生活选项被缩小？这些原因需要分开。\n\n合作者可以回应具体收益、明确分工，并允许你同时有个人需要。若清楚容量后张力明显消失，说明工作设计可能比亚型更有解释力；若反复出现用扩大愿景代替处理遗憾的过程，才值得继续探索。不要用一次任务给自己或别人定型。",
+          "key": "promise_with_capacity",
+          "title": "让共同理想接受一次容量核对"
         },
         {
-          "body_md": "有人可能为共同目标暂缓享受，也可能热情召集他人想象更好未来。自我克制与感染力都不足以单独支持假设，必须同时寻找反例。",
-          "key": "countertype_variation",
-          "title": "允许克制服务与可见热情并存"
-        },
-        {
-          "body_md": "如果能够坦然选择私人偏好、匿名贡献而不追踪认可、拒绝不公平服务期待，并在热情下降后持续完成常规维护，就应降低社群副型解释。",
-          "key": "counterexample",
-          "title": "寻找不做道德记账的私人选择"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 五天内选择一项可见贡献和一项无署名维护任务，确保二者给同一群体带来的实际收益大致接近。\n\n可观察信号: 记录承诺内容、真实受益者、被延迟的个人偏好、可见认可、出现的怨气、完成质量与拒绝任务的自由度。\n\n本页特定信号: 在地位回报被移除但群体收益和工作量接近时，比较参与和收尾是否发生变化。\n\n替代解释: 核对无偿角色、照护、信仰、行动主义、晋升激励、排斥风险和社群生存需要。\n\n复盘问题: 判断差异主要来自认可、自由选择还是具体群体收益，并据此修正副型解释。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "核对无偿角色、照护、信仰、行动主义、晋升激励、排斥风险和社群生存需要。",
-            "context": "五天内选择一项可见贡献和一项无署名维护任务，确保二者给同一群体带来的实际收益大致接近。",
-            "duration_days": 5,
-            "observable_signal": "记录承诺内容、真实受益者、被延迟的个人偏好、可见认可、出现的怨气、完成质量与拒绝任务的自由度。",
-            "page_specific_signal": "在地位回报被移除但群体收益和工作量接近时，比较参与和收尾是否发生变化。",
-            "reflection_prompt": "判断差异主要来自认可、自由选择还是具体群体收益，并据此修正副型解释。"
-          },
-          "title": "观察练习"
+          "body_md": "社群关注不是外向程度，三本能也不是三种互斥的人。一个人可以重视资源、群体与亲密联结，只是在不同情境中优先处理不同问题。翼讨论相邻核心的修饰；亚型讨论核心动机的生活领域。第二高分、职业名称和名人猜测都不能替代这种辨别。\n\nNarrative 的 one-to-one 包含亲密伙伴、密友与活力；[Enneagram Institute 的 sexual／attraction 模型](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)突出吸引强度。两者部分重合，不能完全互换，更不能按性欲量理解。二十七亚型和反型属于学派解释，不是已验证的神经机制或科学诊断。\n\n[Hook 等人 2021 年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告的证据并不一致。本页不能证明费马亚型测量有效，也不衡量道德、领导力或社会价值。传统描述、特定工具的量表研究与费马产品验证是不同层级，不能互相代替。\n\n要确认共同理想是否仍承载第七型动机，可读[第七型核心介绍](/zh/personality/enneagram/type-7)；若更想辨别着迷于某位合作者的过程，可读[第七型一对一亚型](/zh/personality/enneagram/type-7/instincts/one-to-one)。",
+          "key": "tradition_and_evidence",
+          "title": "使用这套传统时，保留哪些边界"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-7/instincts/social",
       "source_hash": "e339d68522c26fbf7e54cf4070641df8cc01f92de0ef326f1c5b6b742c33353b",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第七型社群副型是传统且证据有限的假设，把第七型可能性与贡献、共同可能性、群体理想和认可张力结合。服务或牺牲不能证明副型；无偿劳动与职业责任、社群生存、地位激励、歧视与角色期待都可能形成相似行为。",
-      "title": "第七型社群副型：贡献、共同可能性与认可张力的观察假设"
+      "summary": "社群第七型的传统解释关注一种张力：希望与大家创造更好的可能性，也不愿因责任失去个人自由和生活乐趣。主动服务、克制享受或鼓舞群体都可能出现在这里，但要看共同理想怎样影响选择、承诺和收尾，不能靠志愿服务或社交人数判型。",
+      "title": "第七型社群亚型：共同理想与个人余地怎样共存"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2596c504db88a099c7fa6571e34c1454e1c0b40716c0d6407395b9d410ab3023"
+  "source_content_sha256": "ac444870752f7e7a1fd0ce56333d5af27e162a014eb1a271880ed8fd00661846"
 }

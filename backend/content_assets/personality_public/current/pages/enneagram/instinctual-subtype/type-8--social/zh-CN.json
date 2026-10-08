@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-8/instincts/social",
@@ -23,94 +23,39 @@
       "entity_key": "type-8/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "法律职责、歧视、工会工作、社群生存、家庭责任或当事人明确请求都可能要求倡导。应继续核对授权和权力分配，并确认行动后的资源是否真正到达受影响成员。",
-          "question": "积极倡导为什么不能证明社群第八型？"
+          "answer": "可能。这里关注的是群体位置、成员联系和共同责任，不是参加活动的频率。不爱聚会不能排除社会关注，爱聚会也不能证明社会第八型。",
+          "question": "不喜欢聚会，也可能有社会本能关注吗？"
         },
         {
-          "answer": "请求式保护从当事人表达的需要出发并保留其决定权；自行介入可能增加风险，甚至让被声称保护的人失去声音，因此必须保留异议、退出和更换代表的渠道。",
-          "question": "为什么必须区分请求式保护与自行保护？"
+          "answer": "不能。帮助可能出于职责、成员请求、关系价值或现实不公平。需要观察力量与自主是否反复通过共同立场得到维护，并核对其他解释；更不能仅凭职业、名人形象或一次倡导来判型。",
+          "question": "总为别人出头，就能说明是社会第八型吗？"
         },
         {
-          "answer": "遵循较弱势成员方案、接受纠正，并在威胁结束后归还权限，会削弱以持续掌握保护性群体力量为中心的解释；归还后不再暗中控制资源，反证才完整。",
-          "question": "哪种领导交接最能削弱社群副型假设？"
+          "answer": "反型是某些副型学派描述外观与核心型常见形象不同的传统术语，不是研究确立的诊断类别。温和、体贴或愿意让步，既不能自动证明社会第八型，也不应被解释成更深的压抑来维持分类。",
+          "question": "别人说社会第八型是反型，这意味着什么？"
+        },
+        {
+          "answer": "单次交接不会。它可以反驳必须持续独占群体力量的具体解释。若长期观察发现，共同位置和责任并非自己的优先关注，角色或其他本能领域更能解释行为，则应减少或撤回社会副型假设。",
+          "question": "把领导职责交出去，会否定社会副型吗？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "第八型核心",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/type-8/instincts/self-preservation",
-          "label": "instinctual_subtype:type-8/self-preservation",
+          "label": "第八型自保副型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-8/instincts/one-to-one",
-          "label": "instinctual_subtype:type-8/one-to-one",
+          "label": "第八型一对一副型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/one-to-one"
         }
@@ -184,52 +129,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "这里的社群本能只是传统观察标签，不描述身体机制。法律、歧视、治理、集体协商和公共安全都需要独立证据与责任流程。",
-          "key": "instinct_boundary",
-          "title": "把社群语言限制在角色与注意层面"
+          "body_md": "关心同伴并不意味着核心主题从自主变成讨好。在传统解释里，社会第八型可能把“我不能任人摆布”扩展为“我们不能任人摆布”。成为有力量的共同体一员，既有归属意义，也能让自己和同伴不再孤立无援。\n\n[Narrative Enneagram 的社会第八型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)强调朋友、共同事业，以及力量受到群体需要的引导。第八型维护自主的核心，可对照 [Enneagram Institute 的核心说明](https://www.enneagraminstitute.com/type-8/)。这是学派描述，不是“所有倡导者都是第八型”的判断。\n\n这种关注可能落在：谁被排除在决定之外、谁值得支持、自己在共同体里承担什么责任，以及群体有没有能力回应不公平。外表可以很有礼貌，也可以不喜欢聚会；社交频率并不能告诉我们，群体位置和共同立场是否是长期优先事项。",
+          "key": "strength_with_others",
+          "title": "为大家出头，为什么仍可能是第八型的主题"
         },
         {
-          "body_md": "传统假设认为，直接力量可能围绕同伴、弱势成员或共同事业组织。观察时必须核对授权、真实受益、问责和权力是否归还。",
-          "key": "traditional_hypothesis",
-          "title": "把群体保护视为暂定自主路线"
+          "body_md": "设想几位住户要协商公共区域维修。周发现几位时间不便的住户没有机会表达意见，于是收集他们愿意提供的信息，把具体需求带到会议，并要求费用和进度公开。这里，保护不是单纯的气势，而是让原本难以进入协商的人拥有实际影响。这个场景是说明性例子，不是研究证据。\n\n接着，一位受影响住户希望先等待进一步报价，周却说：“我已经为大家争取到这一步，不能现在退。”共同责任可能开始变成必须服从自己的共同立场。周承担的工作越多，越容易认为自己最有资格决定；成员的不同意见则可能被听成不忠或软弱。\n\n可观察的过程是：看到成员受限、愿意扛起事情、获得代言位置、把异议理解成削弱团结、继续集中发言。有效作用是组织分散的信息和行动；过用代价是成员逐渐失去选择，保护者也可能忽略自己的时间、疲惫和真实需要。\n\n同样，也有人会主动问“你希望我怎么支持”，接受成员选择较慢的路线，或在任务结束后交回组织职责。这些行为削弱“必须长期掌握群体力量”的说法。它们不自动否定社会关注，却要求我们把团结与独占代言分开。",
+          "key": "repair_meeting",
+          "title": "一次住户维修协商：支持从哪里变成代替"
         },
         {
-          "body_md": "工会职务、保护责任、应急指挥、公民权利工作、家庭角色、迫害经历和公共服务缺位，都可能要求集体防卫而无需副型解释。",
-          "key": "alternative_environment",
-          "title": "先审计职责、歧视与制度缺位"
+          "body_md": "三种关注都可能让人认真准备、主动发言，甚至强硬反对一个方案。区别可以放在同一维修决定中观察。\n\n- 自保第八型的解释更关注费用、维修是否可靠、生活空间能否使用，以及实际条件会不会使自己受制于人。可用方案与保障落实后，主要担心可能下降。\n- 社会第八型的解释更关注住户有没有共同发言权、谁承担不成比例的代价、自己应如何承担保护责任，以及群体能否站稳立场。即使个人费用得到解决，这些问题也可能继续重要。\n- 一对一第八型的解释更关注重要同伴有没有与自己并肩、彼此是否仍直接而投入，以及不同意见有没有改变这段联结。群体决议完成，未必就解决了这部分在意。\n\n不要只看会议上的一句话。可以比较：若自己的利益已得到保障，但其他成员仍无发言机会，会不会继续行动？若群体有公平程序，但重要搭档退出，自己最难放下的是什么？这些变化帮助区分关注，同时也允许一个人有多个真实需要。",
+          "key": "three_ways_into_the_meeting",
+          "title": "同一场会议，自保、社会和一对一关注哪里"
         },
         {
-          "body_md": "保持威胁相近，比较当事成员请求的介入与未协商的介入，记录谁获得发言、资源如何转移、谁承担风险以及是否有申诉。",
-          "key": "matched_comparison",
-          "title": "比较被请求保护与自行介入"
+          "body_md": "为人出头也可能来自第二型式的被需要与关系价值，第六型式的共同信任与可靠安排，或第一型式的正确标准与责任。社会第八型的假设，重点仍是力量和自主如何通过共同体得到维护。可以从 [Narrative Enneagram 的相关类型比较](https://www.narrativeenneagram.org/type-comparisons/)开始，但不要把这些动机简化成“谁更善良”或“谁更勇敢”。\n\n例如，未得到感谢时，自己最在意的是不被需要，还是群体没有能力回应不公平？成员改变立场时，自己是在寻找更多可信依据、担心偏离正确标准，还是感觉大家正在把决定权交出去？答案可能混合，而且需要结合本人经历，不能替别人读取内心。\n\n正式职责、机构失灵、成员直接求助、歧视或紧急任务，都可能要求组织保护，与副型无关。如果介入只随职务出现，职责交接后就自然结束，角色解释可能已经足够。如果长期在没有代言职责的情境里也不特别关注共同位置、责任和群体力量，应撤回社会副型假设，而不是把它称为尚未显露。",
+          "key": "care_duty_and_type",
+          "title": "帮助、尽责和坚持公正，各有不同原因"
         },
         {
-          "body_md": "该副型不能证明公平、忠诚、政治正确或领导合法性。量表特定发现不构成普遍本体，行动后果仍需直接评估。",
-          "key": "evidence_boundary",
-          "title": "不从保护推断公正或道德授权"
+          "body_md": "下一次低风险的共同决定，先问当事成员三个具体问题：需要什么支持；哪些事情由他们自己决定；出现分歧时如何暂停或换一种办法。不要拿真实紧急危险做判型实验，也不要要求对方为了观察你而配合。\n\n可以提出一个有结束点的小任务，例如整理大家同意提交的问题。提交前让相关成员确认内容，也允许他们不同意你的建议。完成以后交回决定权，不把付出的时间变成别人必须继续追随的理由。\n\n记录自己面对纠正时的第一反应，以及随后做了什么。如果事实显示方案可以保护成员，却因为不是自己的路线而难以接受，可以研究是否把保护者的位置与自主绑得过紧。若明确授权和分工就解决了不适，应优先采用角色不清的解释。\n\n接受交接，是对持续独占群体力量的一项反例；它不能单独决定副型。更广泛地看，若共同责任并非反复优先事项，或其他本能领域始终更能解释在意之处，就应降低社会副型解释。这个尝试可以帮助协作，但一次成功不证明自己属于任何类型。",
+          "key": "support_without_owning_the_agenda",
+          "title": "让受影响的人决定支持方式"
         },
         {
-          "body_md": "保护可能表现为直接挑战、法律组织、资源分配、辅导或建立持久程序。声音大小不是关键，成员是否获得更大自主才有信息量。",
-          "key": "countertype_variation",
-          "title": "允许公开对抗与安静建设并存"
-        },
-        {
-          "body_md": "若能拒绝长期代言地位、遵循群体自选策略、接受较弱势成员纠正，并在威胁解除后放下控制，就应降低保护性群体力量解释。",
-          "key": "counterexample",
-          "title": "寻找把力量归还成员的反例"
-        },
-        {
-          "body_md": "持续天数: 4\n\n情境: 四天内选择一次群体保护行动和一次日常治理决定，确保涉及同一批受影响成员并可核对授权。\n\n可观察信号: 记录谁请求行动、谁发言、谁承担风险、转移何种资源、是否允许异议、成员获得何种决定权以及领导何时归还。\n\n本页特定信号: 比较提升当事成员自主的保护，与把权力集中到保护者手中的介入。\n\n替代解释: 核对正式保护职责、工会角色、歧视、制度失灵、迫害、应急指挥和家庭期待。\n\n复盘问题: 找出遵循群体策略效果最好的一次事件，并据此修正自行介入的保护解释。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "核对正式保护职责、工会角色、歧视、制度失灵、迫害、应急指挥和家庭期待。",
-            "context": "四天内选择一次群体保护行动和一次日常治理决定，确保涉及同一批受影响成员并可核对授权。",
-            "duration_days": 4,
-            "observable_signal": "记录谁请求行动、谁发言、谁承担风险、转移何种资源、是否允许异议、成员获得何种决定权以及领导何时归还。",
-            "page_specific_signal": "比较提升当事成员自主的保护，与把权力集中到保护者手中的介入。",
-            "reflection_prompt": "找出遵循群体策略效果最好的一次事件，并据此修正自行介入的保护解释。"
-          },
-          "title": "观察练习"
+          "body_md": "传统中的三本能是生活领域的关注，不是三类人各自只拥有一种本能。社会副型可以重视亲密关系和物质保障；自保或一对一副型也可以参与公共事务。翼型是另一个层次：第八型的第七型或第九型翼，不能等同于社会副型。\n\n某些学派使用“反型”来描述与核心型常见外观不同的副型。这是传统术语，不是把温和行为自动解释成隐藏的强硬，也不是越不符合就越能证明分类。27 副型及反型没有因此成为可重复科学诊断或已证实的神经机制。\n\n学派对一对一本能的定义也不完全一致。Narrative 包括重要伙伴、亲近朋友与活力；[Enneagram Institute 的 sexual/attraction 模型](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更突出吸引强度。两者有交集，不能完全互换，也不只指性或恋爱。\n\n[Hook 等人的 2021 年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告，104 个独立样本的信度与效度证据有好有坏。这不是对费马题本、评分或社会副型判定的验证。本页给出的是反思问题，不能据此推断公正、忠诚、领导资格或未来合作结果；行动是否帮助成员，仍要看实际过程和后果。\n\n继续阅读 [第八型核心](/zh/personality/enneagram/type-8)，或对照 [第八型自保副型](/zh/personality/enneagram/type-8/instincts/self-preservation)和 [第八型一对一副型](/zh/personality/enneagram/type-8/instincts/one-to-one)。",
+          "key": "social_language_and_limits",
+          "title": "社会关注不等于外向，也不赋予保护者正确性"
         }
       ],
       "seo": {
@@ -240,8 +167,8 @@
       "slug": "enneagram/type-8/instincts/social",
       "source_hash": "97b15f38f8d147d2123125b6b986a4e548c60e47721d0339885388d8af0cbbbd",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第八型社群副型是传统且证据有限的假设，把第八型自主与团结、保护、群体力量，以及公正、忠诚与集体行动结合。倡导不能证明副型；倡导职责、歧视与制度失灵、工会角色、社群防卫、政治条件和当事人直接请求都可能形成相似行为。",
-      "title": "第八型社群副型：团结、保护与群体力量的观察假设"
+      "summary": "社会第八型的传统解释，把维护自主的力量放进同伴、群体位置和共同责任中。它可以表现为为人出头，也可以是安静地组织支持。需要辨别的不是是否爱社交，而是保护如何发生、成员是否保有声音，以及共同立场为何如此重要。",
+      "title": "第八型社会副型：团结、责任与保护者的位置"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +178,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "f7232f490c6f045b0faaf6f8573667e02b9dfa2e48ede8a4f8b7585c5c3666fe"
+  "source_content_sha256": "51397376a3d880ae32baac9e0677922a709bfa4a6d27ac03da14b61df0a766a6"
 }

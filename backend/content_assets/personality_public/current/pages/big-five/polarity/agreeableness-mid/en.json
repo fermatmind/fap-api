@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/agreeableness-mid",
@@ -20,30 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "agreeableness-mid",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Contextual adjustment can reflect evidence, trust history, power, and proportional boundaries. Motive cannot be inferred from the score.",
-          "question": "Is mid-range Agreeableness just treating people differently for advantage?"
+          "answer": "No. It does not establish skilful judgement, balanced decisions or a middle position on every facet. Assess a particular decision through its conditions, reasoning and consequences rather than treating the score as a certificate of balance.",
+          "question": "Does a mid-range score mean I have the best of both extremes?"
         },
         {
-          "answer": "Examine actual conflict norms, collaboration load, decision rights, values, skills, and interests. The range cannot choose a job.",
-          "question": "What should a mid-range person consider when exploring work?"
+          "answer": "No. Availability, responsibility, the size of the request and freedom to decline can all change the choice. Comparing similar situations may clarify a behaviour pattern, but it does not validate the assessment or establish a score.",
+          "question": "I sometimes cooperate and sometimes refuse. Does that confirm the result?"
         },
         {
-          "answer": "You can practice specific skills such as listening, direct refusal, verification, or repair. This page does not promise a trait-score change.",
-          "question": "Can I deliberately train Agreeableness?"
+          "answer": "The score cannot answer that. Examine what changed and why: relevant experience, the person's needs and existing commitments may justify a difference. Concealing motives, breaking agreements or favouring someone solely for an advantage needs separate scrutiny of the actual conduct.",
+          "question": "Is adjusting my response to different people manipulative?"
         },
         {
-          "answer": "Make the principle behind compromise or challenge explicit, and help the group separate relational care from evidence and decision rights.",
-          "question": "How can a mid-range person contribute in a team?"
+          "answer": "Yes. Concern, available capacity and acceptance of a task are separate questions. Your own account is needed to know what you felt; clear communication and reliable commitments can be checked through what happened.",
+          "question": "Can I care about someone and still say no?"
+        },
+        {
+          "answer": "No requests means no eligible opportunities, so leave the conclusion open. If requests occurred but you found no exceptions, check comparability and whether any responses were prompted by practice. A short record without exceptions still does not prove general flexibility or a personality score.",
+          "question": "What if my observation week contains no requests or no exceptions?"
+        },
+        {
+          "answer": "The label cannot establish career fit or job performance. Consider actual tasks, skills, interests and constraints. You can practise communicating limits or handling disagreement and evaluate the practical results, but that does not promise a higher Agreeableness score.",
+          "question": "Can I use this label to choose a career or train my score upward?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +85,94 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Mid-range Agreeableness may suggest that cooperation and self-advocacy are both accessible, with trust, stakes, and relationship context shaping the choice. This is not simply treating people differently for advantage; it can reflect calibrated boundaries and mixed facets.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Mid-range Agreeableness: a flexible balance between cooperation and self-assertion” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Agreeableness concerns tendencies related to consideration, trust, helping and responses to interpersonal conflict. It is a continuous dimension. High, low and middle labels make positions easier to discuss; they do not divide people into three exclusive kinds.\n\nA mid-range result tells you that this assessment placed your score in its middle band under its scoring rules. It does not explain how you arrived there. In particular, it does not demonstrate that you can consistently find the right balance between another person's needs and your own.\n\nThe midpoint of a scale, a reporting band and the average of a reference population are different things. Mid-range does not automatically mean the fiftieth percentile or that you selected neutral answers throughout. A number displayed out of one hundred is not automatically a percentile either. To interpret a percentile, you need the relevant version, language, reference sample and conversion method. Use the explanation attached to your particular result rather than deriving a cutoff or rank from this page.",
+          "heading": "Read the score before reading a personality into it",
           "key": "section-01-b80fea59e8",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may collaborate readily when goals align, question a request when costs are unclear, and distinguish a solvable disagreement from a values conflict. A middle domain score can combine high Altruism with low Trust or the reverse.",
-          "heading": "What This Range Specifically Means",
+          "body": "You might recognize a fairly moderate pattern across many interactions. Alternatively, your responses might differ with the cost of a request, the history of a relationship or how freely you can decline. You might also answer differently about trust, helping and conflict. These are possibilities to investigate, not explanations that a total score has already selected.\n\nConsider someone who is happy to help a neighbour carry supplies but wants to check an unfamiliar fundraising claim before donating. Willingness to help and confidence in someone's account are separate questions. Another person may trust the organiser completely and still decline because the requested work conflicts with an existing commitment. Different choices alone do not show flexibility, inconsistency or a particular motive.\n\nThis site's facet vocabulary follows the NEO/IPIP-NEO tradition. The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) distinguishes trust, straightforwardness, altruism, cooperation, modesty and sympathy, with some different labels in the corresponding NEO and IPIP scales. These are mappings between similar constructs, not a declaration that the instruments are identical. Without relevant facet results and scoring information, a middle domain score cannot identify your individual facet pattern or establish how facets contributed to it.",
+          "heading": "Several stories could sit behind the same label",
           "key": "section-02-3159c7a60e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not establish fairness, diplomacy, manipulation, leadership, or moral flexibility. A range cannot tell whether one decision was kind or justified. Conduct and context must be examined directly.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Cooperating can mean contributing to a shared task, taking a concern seriously or working toward a usable arrangement. It does not require accepting every request. Setting a boundary can mean limiting your availability or disagreeing with a proposed plan. It does not require dismissing the person making the request.\n\nBeing willing to consider both people and tasks is different from doing so accurately. Understanding the work, estimating your capacity, communicating a limit and following through are skills with observable results. A middle score does not establish diplomacy, fairness, negotiation ability or leadership.\n\nLikewise, saying yes does not prove that you wanted to help; you might have felt pressured. Saying no does not establish indifference; you might have had no capacity. If the question is about guilt, concern or resentment, record what you actually experienced. If you do not remember, leave that part unknown. The outward choice cannot fill in an unrecorded feeling.",
+          "heading": "Cooperation is a choice; skilful cooperation needs more evidence",
           "key": "section-03-6f330b91b2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include conditional trust, willingness to compromise after reasons are heard, direct feedback with attention to tone, and helping within a defined limit. You may shift style across relationships with different histories.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Imagine that you are helping prepare a neighbourhood event. The organiser asks whether you can take responsibility for the welcome desk. You have a prior commitment and can freely decline. After checking the expected hours, you say, “I can cover the first forty minutes, but I cannot stay for the afternoon. Would that part be useful?” This is an illustrative situation, not a profile of everyone with a middle score.\n\nYou have offered something specific while making the limit visible. Whether it is a good arrangement depends on details: can someone take over, does the organiser understand the handover, and do you actually leave when agreed? A compromise that leaves the desk unattended is not made effective by sounding considerate.\n\nA full yes, a clear no or a suggestion to change the rota could also be reasonable. The question is what you could take on and what the event required. If your prior commitment changes, a different answer need not mean your personality changed. If attendance is compulsory, your participation is not evidence of a freely chosen willingness to help.",
+          "heading": "A request at a community event",
           "key": "section-04-94d8543ddf",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, you may mediate some conflicts and argue strongly in others. In learning, you can support peers while challenging weak claims. In close relationships, established trust may invite accommodation that strangers do not receive.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Now suppose the organiser and another volunteer disagree about whether the desk needs two people. Before offering a compromise, identify the issue: expected queues, accessibility needs, volunteer availability or a preference about how the event should feel. Those questions may call for different information.\n\nYou can acknowledge someone's concern and still disagree with their proposed solution. You can also change your view when the expected attendance turns out to be higher. Neither response is explained simply by occupying the middle of a personality scale.\n\nEvaluate the process directly. Did you understand the other proposal? Did your reasons address the actual problem? Did you distinguish criticism of the plan from criticism of the person? Was responsibility for the final decision clear? Those observations give you something useful to improve. A score cannot tell you whether the solution was correct or whether other people experienced the discussion as fair.",
+          "heading": "Disagreement is not a contest between care and correctness",
           "key": "section-05-76adb0f19f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include bridging care and candor, adapting conflict style, and setting proportional boundaries. The pattern can help groups avoid both superficial harmony and unnecessary contest.",
-          "heading": "Possible Strengths",
+          "body": "If it resembles your experience, try this limited hypothesis: “When someone asks me to take on optional event work, I usually state the time or task scope I can offer before giving my final answer, provided my schedule is known and I can freely decline.” Being explicit that you have no capacity can count as stating a limit. The target is communicating scope, not how much work you accept or whether you feel generous.\n\nFor the next week, note naturally occurring requests that fit those conditions. Record what was requested, your available time, whether declining was a real option, whether you had an opportunity to state scope, and the words you used. Keep feelings in a separate note based on your own recollection. Do not infer them from the answer you gave.\n\nDistinguish three outcomes: an eligible opportunity where you stated scope; an eligible opportunity where you did not; and no eligible opportunity. No request that week is not a missed expression of the behaviour. A request you were not allowed to answer for yourself also falls outside this hypothesis. Record why a situation did not qualify rather than silently treating it as evidence for or against the pattern.",
+          "heading": "Observe one behaviour rather than an imagined balanced personality",
           "key": "section-06-b052f8ead4",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include inconsistent signals, delayed decisions while weighing both sides, or adapting so much that your own preference becomes unclear. Others may need an explanation of the principle behind your choice.",
-          "heading": "Possible Costs",
+          "body": "Suppose a volunteer asks you to make a sign. Your schedule is known, declining is acceptable and there is time to discuss scope. Without any prompt or deliberate practice, you say, “Sure, I will do it,” and never specify the size of the task or your available time. That is a natural exception to the same hypothesis: the target behaviour had an opportunity to occur and did not. The request may have been sensible to accept; the exception concerns stating scope, not whether accepting was wrong.\n\nOne exception does not overturn “usually.” Review it alongside other eligible natural opportunities. If the behaviour appears in most comparable situations, retain the limited hypothesis while keeping the exceptions. If a recurring difference is whether the request comes from a close friend, narrow the hypothesis accordingly and seek more examples under both relationship conditions. If opportunities are scarce, poorly remembered or too different to compare, suspend the conclusion. Finding no exception is also different from having a genuine opportunity where the behaviour was absent.\n\nDo not extend this small record into a finding about your whole personality. It may help you describe a habit in a defined setting; it does not validate a score, establish an optimal level of Agreeableness or predict how you will respond everywhere.",
+          "heading": "What a natural exception would change",
           "key": "section-07-7f592aa344",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [high Agreeableness](/en/personality/big-five/agreeableness-high), agreement may require more verification. Compared with [low Agreeableness](/en/personality/big-five/agreeableness-low), relational impact may carry more weight. Middle does not mean every facet is centered.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "On a separate low-stakes request, deliberately pause to check the work and your availability before replying. Offer a specific commitment or a clear limit: “I can print the signs, but I cannot design them.” Mark this as practice so it remains separate from unprompted behaviour.\n\nAfterward, check whether the other person understood who would do what, whether the task took the expected time and whether either person had to repair a misunderstanding. Record your feelings directly if they matter to you; successful completion alone does not prove that you felt comfortable.\n\nIf the scope was unclear, adjust the wording next time. If the estimate was wrong, improve the estimate rather than diagnosing yourself as too agreeable. If there was no suitable request, leave the exercise incomplete rather than manufacturing a test. The purpose is to evaluate a communication method. It does not promise a change in your trait score, and a prompted success cannot establish that the response is already your usual habit.",
+          "heading": "Try a clearer response, then check its practical effect",
           "key": "section-08-84bef39f40",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Two teammates disagree about scope. You first identify shared constraints, then support the more defensible proposal even though it disappoints one person. Cooperation shapes the process; evidence shapes the decision.",
-          "heading": "A Realistic Scenario",
+          "body": "Read the [Agreeableness overview](/en/personality/big-five/agreeableness) for the broader dimension. Use the [facet guide](/en/personality/big-five/facets) when trust, helping or responses to conflict seem to tell different stories, while keeping vocabulary separate from measured results. The [higher](/en/personality/big-five/agreeableness-high) and [lower](/en/personality/big-five/agreeableness-low) range pages help compare descriptions; neither is a category you must adopt or an ideal you must reach.\n\nThe [IPIP guide to personality measures](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) explains that there are multiple instruments for Big Five constructs. The [BFI-2 authors' page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes a distinct inventory with five domains and fifteen facets. This is one reason not to treat the site's NEO/IPIP-NEO facet vocabulary as the universal architecture of every assessment.\n\nThese tool materials clarify constructs and measurement differences. They do not establish the norms, validity or predictive accuracy of a particular FermatMind result. The scenarios and observation suggestions here are educational ways to examine decisions and their conditions. They are not a diagnosis, a hiring rule or evidence of occupational ability.",
+          "heading": "Where to go next, and what the sources support",
           "key": "section-09-a181f14d84",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may become unusually accommodating during a family crisis. Urgency, care, and role obligations can change behavior without proving a globally high range.",
-          "heading": "A Counterexample",
-          "key": "section-10-9f5d94555d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- What earns or reduces your trust?\n- When do you compromise, and on what principle?\n- Can others predict your boundaries?\n- Which facet creates the strongest contrast?\n- Where does candor need more care, or care more candor?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-4c796b85d3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In one disagreement, write the shared goal, your non-negotiable, and one flexible point before responding. Observe whether this makes cooperation and self-advocacy easier to hold together.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-44e08704da",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness), compare [high](/en/personality/big-five/agreeableness-high), [mid-range](/en/personality/big-five/agreeableness-mid), and [low Agreeableness](/en/personality/big-five/agreeableness-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-cbf8aac491",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A score in the middle does not establish a gift for balance. Explore what the label can mean, how cooperation and boundaries appear in real decisions, and what would make you revise your interpretation.",
+        "title": "Mid-Range Agreeableness: Understanding Choices and Conditions"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/agreeableness-mid",
-      "source_hash": "ae58800966a33ccf30ee6720cdd7b46d74c02d0a355c7457e640c046bd7c63c3",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Mid-range Agreeableness may suggest flexible balance between cooperation and self-advocacy. It is not opportunism, indecision, or an absence of interpersonal values.",
-      "title": "Mid-Range Agreeableness: Cooperation and Self-Advocacy"
+      "source_hash": "4d438bcfa0025dd327cf73908ee378bd58cce16d3572197b0172b2c58e478615",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A score in the middle does not establish a gift for balance. Explore what the label can mean, how cooperation and boundaries appear in real decisions, and what would make you revise your interpretation.",
+      "title": "Mid-Range Agreeableness: Understanding Choices and Conditions"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "agreeableness-mid-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, morality, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "agreeableness-mid-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "agreeableness-mid-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "agreeableness-mid-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "99a458e2f1ac62c8a349678e24cafc09065b9127d9426cac3c5b623cf6bb38cd"
+  "source_content_sha256": "bb65f880bdad65a50d252432eaa53329b05c19e387e3c356dd591dc71bfe71ba"
 }

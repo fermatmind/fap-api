@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/big-five/facets/depression",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "depression",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "大五人格中的抑郁侧面是一种情绪倾向——反映一个人容易感到悲伤、失去兴趣的持续性特质，属于人格的正常变异范围。抑郁症（MDD）是一种符合严格诊断标准的临床疾病，通常伴有持续性功能丧失。大五人格测量的只是一项特质，而非病理状态。",
-          "question": "Q1：大五人格中的抑郁和抑郁症有什么不同？"
+          "answer": "不是诊断结论。这个面向描述低落和沮丧等一般倾向，临床抑郁需要专业评估。低分同样不能排除临床问题。",
+          "question": "抑郁面向得分较高，是不是抑郁症？"
         },
         {
-          "answer": "如果悲伤和低落的情绪持续两周以上，伴随明显的功能受损（无法正常工作和生活、对几乎所有活动丧失兴趣、出现自伤念头等），应尽快寻求心理健康专业人员的评估。本页面的内容不应被用于诊断或取代医疗意见。",
-          "question": "Q2：我需要看医生吗？"
+          "answer": "不能据此排除问题。外在表现、任务完成和内在感受需要分别了解。能笑或能工作，不表示持续痛苦可以忽略。",
+          "question": "还能笑、还能把工作做完，是不是就没有问题？"
         },
         {
-          "answer": "能。抑郁倾向强调的是一种\"基线更低\"的趋势——比别人更容易掉入低潮，但即便是高抑郁的人，在生活中也有快乐和满足的时刻。他们的快乐是在低基线上的上升峰，而不是恒常的高基线。",
-          "question": "Q3：抑郁倾向强的人能快乐吗？"
+          "answer": "不能直接归因。丧失的具体背景、生活变化和支持需要应先被理解。人格标签不能解释全部原因，也不能规定你应该多久恢复。",
+          "question": "经历丧失后一直难过，能不能归因于这个面向？"
         },
         {
-          "answer": "本页不把悲伤、低落或较高抑郁倾向解释为创造优势，也不从该侧面推断内省深度。",
-          "question": "Q4：抑郁倾向和创造力有关系吗？"
+          "answer": "不能从这个面向作这样的判断。创作和理解他人需要各自的实际证据；痛苦也不需要靠某种优势来证明其合理性。",
+          "question": "低落倾向是不是意味着更有创造力或同理心？"
         },
         {
-          "answer": "抑郁倾向和情绪的遗传性有中介程度的遗传率——大概是40-50%的可遗传性。但环境因素同样重要——人生经历和社会环境的交互对抑郁倾向的表达有主要作用。\n\n---\n\n---\n\n---",
-          "question": "Q5：抑郁倾向会遗传吗？"
+          "answer": "不能。个人分数不能确定你的遗传原因、遗传比例或家人的未来情况。这里的条目和解释也不提供这种因果判断。",
+          "question": "我能从分数知道低落是不是遗传的吗？"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,94 @@
       "llms_eligible": true,
       "locale": "zh-CN",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
-        "expert_endorsement": false,
-        "limitations": [
-          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
-          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
-        ]
+        "not_for": [
+          "不能据此作临床诊断或单独决定录用、录取。"
+        ],
+        "summary": "此页帮助理解人格概念和核对日常行为。实际分数应按所用工具的计分方法、参考样本与适用范围解读。"
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "“抑郁（神经质/情绪敏感性）：悲伤和丧失兴趣的倾向”在本页中是 NEO/IPIP-NEO 30 侧面框架下的描述性构念。IPIP 官方使用“测量与 NEO 侧面相似的构念”来描述这些量表，并列出具体条目映射（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）；这不表示不同量表、翻译或产品分数完全等同。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
-          "heading": "证据与解释边界",
+          "body": "本站沿用 NEO/IPIP-NEO 的抑郁面向名称，解释的是较容易感到低落、沮丧，以及出现负面自我评价的倾向。它不是对一个人是否患有抑郁症的判断，也不是说这个人没有希望、没有价值或不能感到快乐。\n\n倾向需要放在多个日常情境中理解。一时心情低落是当下状态；亲人离世、关系结束或遭遇重大损失，需要理解具体经历；临床抑郁则需要专业评估。这些情况不能靠一个共同的词就合并成同一件事。\n\n看见一个人疲倦、少说话或没有参加活动，也还不知道其内在感受。工作负担、身体不适、没有时间和本人喜欢安静，都可能使外在行为相似。",
+          "heading": "先读懂这个容易误解的名称",
           "key": "section-01-e37e3925b6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "抑郁（Depression）在大五人格中指的是一个人体验悲伤、丧失感、兴趣减退和低能量情绪状态的倾向。它的核心问题不是\"你有没有抑郁症\"，而是：你内心的晴雨表的指针是否比一般人更容易指向阴天？这是大五人格中的技术性人格术语，不是临床诊断。\n\n极其重要的是区分大五人格中的抑郁侧面和重度抑郁障碍（MDD）。MDD是一种具有特定诊断标准的临床疾病——包括持续时间、功能受损和心理生物症状的组合模式。大五人格中的抑郁侧面测量的是一种持续较低的积极情绪基线和较高的悲伤倾向——在人格的正常变异范围内。\n\n一个人可以在没有任何临床诊断的情况下有较高的抑郁倾向——在生活中的表现为经常感到\"低落\"、\"没力气\"、\"对什么都提不起劲\"。同样，一个抑郁倾向不太强的人也可能因为重大生活事件（丧失亲人、失业、重大失败）而暂时表现出临床水平的抑郁症状——那是事件伤害作用，不是人格倾向的反映。",
-          "heading": "精确定义",
+          "body": "倾向较强时，日常中可能较容易感到沮丧，或者在不顺心时出现较多对自己的负面评价。倾向较弱时，这类体验通常较少。这不是比较谁更坚强、更有同理心或更会反思。\n\n低落的程度、出现频率和持续情况可以分别观察，不能预设它们总是一起变化。一个人可能容易低落但很快缓和，也可能平时较少低落，却在一次严重损失后久久难受。\n\n中间位置、高位置和低位置都是连续差异的描述，不是固定人格类型。较弱倾向不保证心理健康或免受抑郁障碍影响，较强倾向也不等于已经患病。本页不提供分类阈值。",
+          "heading": "较强或较弱，描述什么、不足以说明什么",
           "key": "section-02-e7bfab3ee5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "抑郁属于**神经质（Neuroticism）**维度——也称情绪敏感性。在神经质的六个侧面中，抑郁测量的是负面情绪中的\"下沉\"维度——不是焦虑那样的向上窜，也不是愤怒那样的外推，而是向下沉入悲伤、无力、失落的情绪谷底。",
-          "heading": "所属维度",
+          "body": "积极情绪和这里的抑郁面向需要分别理解。[IPIP 的 NEO 对应表](https://ipip.ori.org/newNEO_FacetsTable.htm)把 Depression 放在 N3，把 Cheerfulness／Positive Emotions 放在外向性的 E6。它们的构念和条目不同，不能把积极情绪得分倒过来当作抑郁面向得分。\n\n一个人在某天感到低落，也可能在和朋友聊天时感到真实的开心；一个人不常表现兴奋，也不一定悲伤。观察时可以分别问“有没有沮丧”和“有没有愉快体验”，不要只选一条从快乐到抑郁的刻度。\n\n这也不意味着两种体验完全无关。这里能作的判断是：不能只凭笑声、笑容或某个快乐时刻，确认或排除低落倾向及临床问题。",
+          "heading": "快乐不是低落的反向分数",
           "key": "section-03-55ad254c3c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **抑郁 vs 焦虑**：抑郁是指向过去和现在的——\"失败了\"、\"失去了\"、\"我不够好\"；焦虑是指向未来的——\"可能会失败\"、\"可能会失去\"、\"我可能会不够好\"。一个人可以抑郁倾向高而焦虑倾向低——感到悲伤但不担忧；也可以焦虑倾向高而抑郁倾向低——整天担忧但很少伤心。\n- **抑郁 vs 脆弱性**：抑郁是\"我感到低落和无力\"，脆弱性是\"我感到自己无法应付\"。这两者是一个情绪（感觉）和一个自我效能感判断（应付能力）之间的区别。一个人可以觉得伤心但不觉得自己无能应对——或反过来。\n- **抑郁 vs 积极情绪**（外向性侧面）：积极情绪是正向体验的频率和强度，抑郁是负向体验的倾向。它们测量的是情绪中的两个相对独立的光谱——不是相反的两极。一个人可以同时抑郁和快乐都很低（情绪平淡），也可以时而高抑郁时而高快乐（情绪强度高波动大）。",
-          "heading": "与相邻侧面的区别",
+          "body": "在失去重要的人、关系或生活条件后，难过有具体的对象和背景。不要直接说“是因为我抑郁面向高”，也不要替别人规定应该多快恢复。先了解发生了什么、有哪些支持、生活受到怎样的影响。\n\n没有找到明显事件，也不表示低落一定来自人格。个人未必立刻知道影响心情的所有因素。近期持续劳累、身体问题或处境改变，需要与平时的模式分别考虑。\n\n[焦虑](/zh/personality/big-five/facets/anxiety)侧重担忧和恐惧；这里侧重低落与沮丧。两者并不靠“只想过去”或“只想未来”严格分界。[脆弱性](/zh/personality/big-five/facets/vulnerability)则关注压力下感到难以应付；难过本身不能证明处理困难的能力不足。",
+          "heading": "丧失与压力需要被理解，不能被人格解释盖住",
           "key": "section-04-151cab6b7e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "抑郁倾向较强的人在生活中可能：经常感到\"没什么意思\"——日常的兴致不高，做以前喜欢的事也可能觉得\"力道不够\"；在生活遭遇挫折后，恢复的时间可能比别人更长——伤害的情感轨迹走得慢、走得深；对自己和世界常有一种灰蒙蒙的基调——不是时时刻刻，但一旦低谷降临，就很难迅速爬出来；对自身有较强的自责和不满足——不是客观的理性分析，而是一种内化的负面评价习惯。\n\n抑郁倾向较弱的人则可能：在经历不好的事件后能较快恢复；心境上的挫折和困难不会长时间压住内心的总体亮色；自我评价在对事实的反馈中自然修正——不会因为一次失败就对自己整个人判负；日常中对活动有兴趣和动能——即便累，也还对\"明天\"有好心情。\n\n再次强调：以上描述的是人格层面的情绪模式，而不是指临床抑郁症。如果你或你认识的人遇到了持续的、严重的低落和功能丧失，请咨询心理健康专业人士。",
-          "heading": "行为线索",
+          "body": "假设你向社区菜谱征集活动投稿，收到反馈说步骤写得不够清楚。你不仅对这份反馈失望，还连续几天想到“我做什么都不行”，并感到沮丧。\n\n可以观察的是：一次具体反馈之后，低落如何出现，以及自我评价是否从“这份稿件需要修改”扩大为“我整个人都不行”。稿件究竟哪里不清楚，需要看实际反馈和文本；低落程度不能回答写作能力，也不能证明你比别人更有感受力。\n\n自然反例可以来自另一次类似的反馈：在照片说明被要求重写时，你没有事先做情绪练习或找人安慰，觉得失望但没有持续沮丧，也没有把问题扩大成整体自我否定。这使“遇到修改意见就容易持续低落”的解释需要细化。也许某类作品特别重要，也许两次反馈方式不同；一次反例不必抹掉通常的模式。",
+          "heading": "一个具体情境：对稿件的意见，变成了对自己的评价",
           "key": "section-05-f6d097c1f2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "抑郁倾向和事件之间有动态的共振关系。一个有高抑郁倾向的人在稳定和积极的环境中，表现可能和倾向不强的普通人一样——是环境给他提供了足够的支持来保持他的情绪在健康水平。当环境变化——丧失、孤立、受挫——原有的抑郁倾向便得以\"解锁\"。\n\n这种\"环境的耗用模式\"是理解抑郁侧面的关键：不是抑郁倾向强的人总是不快乐，而是他们的快乐对外部环境的依赖比一般人强——环境好了就好，环境收走了支持坏很快就掉下来。",
-          "heading": "情境差异",
+          "body": "先选一个范围有限的假设：“收到普通的修改意见后，我常持续感到沮丧，并对自己作整体负面评价。”记录相关事件，不必主动制造挫折来测试自己。\n\n简记具体反馈、自己实际感到什么、出现了什么自我评价、之后何时仍感到低落，以及生活受到怎样的影响。愉快体验另记一项：有没有享受一顿饭、一次交流或其他事情。完成了任务不代表心情已好，暂停任务也不一定由低落造成。\n\n相关反馈出现，但目标低落和整体自我否定没有出现，应保留为自然记录。没有收到反馈，是没有观察机会。回顾了一段时间仍没找到反例，只能说明这次回顾的范围，不能写成“我每次都会这样”。\n\n如果你主动请对方把意见说得更具体、和朋友交谈或安排休息，注明改变了条件。之后的情绪变化可以帮助选择支持方式；它不证明这些做法改变了人格，更不是治疗效果的验证。",
+          "heading": "把低落、机会和主动调整分别记录",
           "key": "section-06-a1c5519e63",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当抑郁倾向较强时，一个人可能：\n- 即使在没有明显负面事件时，也会时不时感到一阵莫名的低潮——来得没有理由，去得也不太看理由；\n- 回顾过去时，倾向于关注失败和遗憾——成功的回忆很难在心情不佳时浮现；\n- 在新机会出现时，不太容易产生热切的期待——希望和失望平衡中，失望的分量更重；\n- 有时候有退出社交的表现——不是因为喜欢独处，而是觉得和别人在一起也无法改变情绪，索性自己待着；\n- 这种倾向可能伴随一些生理变化——如更容易疲倦、睡眠和食欲的变化——但这些在人格层面主要是轻度且波动的。\n\n再次强调：这里描述的任何表现若严重干扰了日常生活且持续不退，应当寻求专业评估。",
-          "heading": "倾向较强时的可能表现",
+          "body": "若相似体验在多个普通反馈情境中反复出现，而记录并非全部来自同一段特殊压力期，可以暂时保留这个小范围解释。不要把短期记录升级为“我的人格就是这样”。\n\n若低落主要出现在公开评价、某类特别重视的作品或某个人的反馈中，可以缩小假设。若类似反馈中常能自然保持相对平稳，就应减少对宽泛解释的确信。一次例外不足以推翻一般倾向，但反复的条件差异值得重视。\n\n如果没有足够机会、经历了重大丧失，或已持续痛苦、难以照顾自己，就搁置人格判断，把精力用于现实支持和专业评估。对于普通稿件反馈，一个具体下一步可以是请对方指出一处最需要澄清的步骤；目的在于获得可用信息，不是要求自己立刻开心。",
+          "heading": "怎样决定下一步",
           "key": "section-07-4ac3a89c6d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当抑郁倾向较弱时，一个人可能：\n- 挫折过后快速恢复——不是不在意，而是不把一次失败扩大为自己的整体失败；\n- 能自然地注意到日常中的正面元素，即使整体处境不太好；\n- 对生活保持一定的活力和追求——低谷期短，且不会丢失所有兴趣；\n- 在他人眼中显得\"皮实\"\"不容易受影响\"。",
-          "heading": "倾向较弱时的可能表现",
+          "body": "[NIMH 的抑郁说明](https://www.nimh.nih.gov/health/topics/depression)指出，临床抑郁涉及影响感受、思考和日常活动的症状。持续低落、明显失去兴趣或生活受到影响，值得向合格医疗或心理健康专业人员咨询。无需等到所有问题同时出现，也不必先等够某个时长才有资格求助。\n\n若出现自杀想法或伤害自己的冲动，请立即寻求支持；若有即时生命危险，联系当地急救服务或前往急诊。可以请可信的人陪同。[NIMH 的求助说明](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help)提供的是美国服务信息，其他地区应使用所在地的支持渠道。人格观察不应延迟求助。",
+          "heading": "什么时候可以寻求专业帮助",
           "key": "section-08-cd6bce0b48",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "“抑郁倾向”在这里是历史量表中的侧面名称，不应被浪漫化为更有创造力、更会反思或判断更准确，也不应被当作人格缺陷。该侧面不能替代临床症状与功能影响的评估。\n\n抑郁倾向较弱的代价：有时在面对真实的悲情境境中，可能因为心境恢复太快而让人觉得\"不够认真\"或\"没心没肺\"。",
-          "heading": "优势与代价",
+          "body": "[IPIP 长版条目](https://ipip.ori.org/newNEOFacetsKey.htm)及[四条目版](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm)提供了 N3 的构念线索。这些工具材料可以帮助理解名称，不能当作诊断依据、费马产品效度证据或个人遗传原因的解释。\n\n阅读报告时，先核对实际显示的指标和题本版本。不能从神经质总分、外向性分数或一个积极情绪结果推算未报告的抑郁面向分数。\n\n想了解共同的负面情绪背景，读[神经质](/zh/personality/big-five/neuroticism)；想分清担忧与低落，读[焦虑](/zh/personality/big-five/facets/anxiety)；若更关注压力下的应付感，读[脆弱性](/zh/personality/big-five/facets/vulnerability)。其他面向的归属见[30 个面向总览](/zh/personality/big-five/facets)。",
+          "heading": "来源与接下来要读什么",
           "key": "section-09-f365bcc6e6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**案例**：安平是一家图书馆的采编员。她说自己\"有一点下沉的惯性\"——不顺心的时候，她会感觉整个人的情绪往下走，像有一条看不见的重量压在她肩上。有一次她的一个藏书提案被否决了，她花了好几天调整——不是那种能快速翻篇的人。她的同事说：\"安平的悲伤是慢慢来的——不会一下子垮掉，但会一点点渗进去。\"她自己也注意到了——\"我那些悲伤的时期不全是坏的。有时候它们让我能更安静地理解别人的伤痛——他们的故事一旦进入我心里，就走得比较深。\"",
-          "heading": "一个原创案例",
-          "key": "section-10-61cc0094aa",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**反例**：阎海波是急诊科医生，每天面对的是最直接的人类痛苦和生死。但他的心态完全不为这些日常压下去——他的同事们说他\"坐了几十年急诊还是能笑着对患者说话\"。他解释说：\"患者在这里很难受——我也不说好听的。但我分得清楚：他们的痛苦不是我的痛苦。我提供的是救助，不是和他们一起悲伤。\"他有一句常说的话：\"我的工作是帮他们站起来，不是和他们一起倒下去。\"他的抑郁倾向弱得让他在高暴露环境中仍保持心理的稳固，且不失仁心。",
-          "heading": "一个原创反例",
-          "key": "section-11-4cd78a5c34",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. 你通常从挫折中恢复需要多长时间？你是否有过一个\"怎么也好不起来\"的漫长时期？\n2. 有没有觉得平时对生活还满意的人，突然有一天醒来就觉得一切都灰蒙蒙的——这是规律还是偶发？\n3. 你是否容易对自己的过错和失误过度自责？这种自责对你的自我评价影响有多大？\n4. 生命中有没有一些\"无法修复\"的伤痛，它们的回声至今仍能影响你的情绪？\n5. 当你感到低落时，你能区分\"这是情境的反应\"和\"这是我的日常感觉\"吗？",
-          "heading": "自我观察问题",
-          "key": "section-12-086f100fd6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- **阳光练习**：如果你倾向较强，尝试每天主动做至少一件让你在身体上有积极感受的事——阳光下散步、冲一个温水澡、听喜欢的歌——不是治愈抑郁，而是短时唤醒身体中可获得的积极感。\n- **事后的回顾**：记录一次你度过低潮后的反思——是什么让你走出那个状态的？这个反思对下次\"低潮\"可能有帮助。\n- **区分练习**：下一次你感到低落时，写下来：\"是因为今天发生的事感觉到低落\"，还是\"今天没发生什么，但我心情就是不好\"。注意两种原因的差异——它们需要的应对方式不同。",
-          "heading": "低风险行动实验",
-          "key": "section-13-5e83d716fb",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- 返回父维度：[神经质](/zh/personality/big-five/neuroticism) · [30 个侧面总览](/zh/personality/big-five/facets)\n- 同维度侧面：[焦虑](/zh/personality/big-five/facets/anxiety) · [愤怒](/zh/personality/big-five/facets/anger) · [自我意识](/zh/personality/big-five/facets/self-consciousness) · [冲动性](/zh/personality/big-five/facets/impulsiveness) · [脆弱性](/zh/personality/big-five/facets/vulnerability)",
-          "heading": "继续阅读",
-          "key": "section-14-08c5900f4f",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "抑郁面向是 NEO/IPIP-NEO 中关于低落、沮丧及负面自我评价的名称。它不诊断抑郁症，也不能用愉快时刻、外在笑容或一次挫折来确认或排除。",
+        "title": "抑郁面向：区分低落倾向、丧失经历与临床抑郁"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/depression",
-      "source_hash": "57783220eef14efa6c99d3a866ffe701af43e95f8e5bb822ce7f8fe98f327879",
-      "source_package": "big5-zh-v3-52-page-release",
-      "summary": "抑郁反映一个人体验悲伤、丧失感和兴趣减退的倾向——这是大五人格中的技术性人格术语，不是临床诊断。",
-      "title": "抑郁（神经质/情绪敏感性）：悲伤和丧失兴趣的倾向"
+      "source_hash": "845ab86caded40f37d8803e88027326a4c9c86c7c6ccea701197ea0796c9866b",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "抑郁面向是 NEO/IPIP-NEO 中关于低落、沮丧及负面自我评价的名称。它不诊断抑郁症，也不能用愉快时刻、外在笑容或一次挫折来确认或排除。",
+      "title": "抑郁面向：区分低落倾向、丧失经历与临床抑郁"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "N3-depression-facet_definition-1",
-            "limitation": "IPIP 描述的是与 NEO 侧面相似的构念，不证明量表、翻译或产品分数完全等同。",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "contextual"
-          },
-          {
-            "claim_id": "N3-depression-product-boundary",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "N3-depression-content-method",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "模型研究不等于费马测试产品验证。",
-          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "N3-depression-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "f73a606ff79a8fd1fe3532c11ce91b2a1a4bf01196b363817e0258235c293af5"
+  "source_content_sha256": "8e6578e82b720cc423f360576a8abb1a468f222075f8fe3c70cee4d942362c87"
 }

@@ -23,94 +23,35 @@
       "entity_key": "type-2/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Leadership may follow election, seniority, expertise, employment, or collective need. The subtype hypothesis requires recurring connection attention organized through group usefulness and evidence from role changes.",
-          "question": "Does community leadership establish social Type Two?"
+          "answer": "No. These appearances are neither required nor sufficient. Examine whether group roles and contributions repeatedly carry expectations of being needed and accepted, while accounting for the responsibilities of public or behind-the-scenes work.",
+          "question": "Must social Twos be outgoing, popular, or leaders?"
         },
         {
-          "answer": "Introductions and information show how usefulness operates in practice. Recording who benefits, who is excluded, and whether access depends on gratitude or status makes the hypothesis testable without moral ranking.",
-          "question": "Why observe who receives network access?"
+          "answer": "No. Help can have real value while carrying an unstated wish for recognition. Examine whether the expectation was agreed, whether giving exceeds your resources, and whether the recipient can decline or accept help from someone else.",
+          "question": "Does wanting recognition make my help insincere?"
         },
         {
-          "answer": "Contribution that ends with role loss, selective access aimed at recognition, or stronger repeated attention to private comfort or one relationship would weaken it. Institutional incentives should be examined first.",
-          "question": "What weakens the group usefulness hypothesis?"
+          "answer": "Not by itself. Ending duties, fewer resources, exhaustion, and loss of importance can all produce that behavior. Compare optional tasks outside the former role and the person's own account. Withdraw the subtype hypothesis when institutional conditions explain the process adequately without it.",
+          "question": "Is stopping contribution after losing a position a counterexample?"
         }
       ],
       "framework": "enneagram",
@@ -132,19 +73,19 @@
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "Enneagram Type 2",
+          "label": "Type Two: care and relationship needs",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/self-preservation",
-          "label": "Type 2 self-preservation subtype",
+          "label": "Self-preservation Two: daily care and support",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-2/instincts/one-to-one",
-          "label": "Type 2 one-to-one subtype",
+          "label": "One-to-one Two: particular connection and response",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The hypothesis combines Type Two connection attention with a social label for networks, contribution, and a useful place in the group. Organizing people may instead reflect leadership duty, community norms, political skill, fundraising, or institutional incentives.",
-          "key": "traditional_hypothesis",
-          "title": "Describe group usefulness provisionally"
+          "body_md": "[The Enneagram Institute's Type Two introduction](https://www.enneagraminstitute.com/type-2/) centers love and being needed. [Narrative's social Two description](https://www.narrativeenneagram.org/instinctual-subtypes/) focuses on gaining an important role through attending to group needs.\n\nThe hypothesis here is that a person notices who needs support, who has resources, and what an organization lacks, then treats connecting people as evidence of being accepted. This can help newcomers participate, make information accessible, and keep shared work moving. It need not involve enjoying parties. Quiet coordination can still place attention on group relationships.\n\nAn overused strategy may make the role difficult to release. The task needs to succeed, but it also seems to need to pass through this person. Handover starts to feel like becoming unimportant. Examine actual actions and expectations the person acknowledges. Competence, ambition, or influence cannot reveal the motive by themselves; the role may simply be part of a job.",
+          "key": "valued_through_contribution",
+          "title": "A valued role can be behind the scenes"
         },
         {
-          "body_md": "This matched comparison asks about group role and practical comfort by observing whether attention first moves toward a useful place in the group, receiving care, or concentrated connection with one person. Hold the request and available resources as constant as possible.",
-          "key": "matched_comparison",
-          "title": "Compare group, practical, and focused connection"
+          "body_md": "In this invented example, Alex coordinates volunteers for a community workshop. He remembers people's availability and introduces newcomers to experienced members, making participation easier. When another member takes over scheduling, Alex keeps changing arrangements privately and says, “If I'm not watching everything, they won't need me anymore.”\n\nIf Alex confirms that his concern is losing neededness and acceptance rather than scheduling quality, this supports a specific social Two interpretation: service and personal importance have become linked. Bypassing the new coordinator and making access depend on himself are observable costs. They can prevent others from learning and taking responsibility.\n\nThe interpretation changes if the new schedule violates agreed availability, or Alex remains formally accountable for the outcome. Establish decision rights, actual errors, and whether the handover was completed before interpreting his involvement.\n\nStopping service after leaving a role is also ambiguous. It may reflect an ordinary end of duties or a loss of personal value. Compare optional contributions outside the former obligation: what meaning does Alex give his place in the group, and can he support work completed by someone else?",
+          "key": "handover_in_a_workshop",
+          "title": "What feels at risk when someone else takes over?"
         },
         {
-          "body_md": "Social is traditional organizing vocabulary rather than evidence about bodily mechanisms. It makes no claims about neural organization or unchanging social function, and it establishes no leadership value, popularity, fairness, or automatic group orientation.",
-          "key": "instinct_boundary",
-          "title": "Keep social language non-mechanistic"
+          "body_md": "A friend says, “I'm exhausted; I don't know whether I can come.” A social Two interpretation might prioritize a manageable role, someone to share the work, and reassurance that absence will not exclude the friend. The concern is their place within a shared activity.\n\nWith resources, time, and responsibilities held comparable, a self-preservation Two interpretation might first address food, rest, transport, and dependable practical care. A one-to-one Two interpretation might first seek working together and a particular personal response. All three can be considerate and attend to the other areas too.\n\nAsk: “If my friend is rested but the team no longer needs me to coordinate, what still feels unresolved? If the arrangements work well without me, what seems missing?” Allow mixed answers. A group priority may reflect being the designated organizer; a private priority may reflect an explicit request. Look for recurrence across comparable circumstances, rather than treating flexible behavior as a type change.",
+          "key": "shared_request_different_aims",
+          "title": "One workshop, three possible priorities"
         },
         {
-          "body_md": "Subtype traditions vary in how they describe influence, ambition, visibility, and countertypical service. Test the specific group-usefulness claim and let low-status, private, or contradictory events revise it.",
-          "key": "countertype_variation",
-          "title": "Expect schools to describe status differently"
+          "body_md": "[Narrative's type comparisons](https://www.narrativeenneagram.org/type-comparisons/) distinguish Two's relationship focus from Three's achievement focus. As an observation prompt, compare a successful event that leaves little personal connection with an imperfect event whose members still value your care. Which part affects your sense of importance? Neither a forced choice nor one answer settles a type.\n\nA Two can value visible accomplishments, and a Three can care sincerely. A Three wing and a social subtype are different explanations: one concerns neighboring style; the other concerns the recurring domain of relationship attention. A second-highest core score cannot distinguish them.\n\nPay, promotion, election, seniority, organizational norms, and unclear handovers can also reward control of information or position. If the behavior follows those incentives and responsibilities without additional love-or-neededness expectations, the role explanation may already be sufficient.",
+          "key": "lookalikes_and_context",
+          "title": "Separate care, achievement, and responsibility"
         },
         {
-          "body_md": "Committee roles, community organizing, sales, fundraising, politics, and seniority can reward introductions and broad contribution. Compare behavior after role loss, lower visibility, and reduced access before retaining the subtype.",
-          "key": "alternative_environment",
-          "title": "Test leadership and network incentives"
+          "body_md": "Choose a task that does not involve safety or essential care. Agree on its scope, information, and feedback time with the person taking over. Share the necessary material and address actual problems through that agreement. Do not disappear, withhold information, or use spontaneous thanks as a test.\n\nReview whether you bypassed the agreement, whether you most wanted to restore quality or neededness, and whether you could directly ask to stay connected. The recipient's practical difficulties and your relationship needs deserve separate discussion.\n\nRepeatedly tying acceptance to an irreplaceable role in voluntary, low-reward work supports further examination of this cycle. Withdraw the social-priority interpretation if clarifying duties resolves the supposed role anxiety and comparable settings repeatedly show another area of attention taking precedence.\n\nA successful handover or tolerance of limited recognition does not alone disprove social Two; it challenges a particular overused strategy. Equally, do not reinterpret every contrary example as subtler control. A useful hypothesis must be allowed to lose explanatory value.",
+          "key": "contribute_without_owning",
+          "title": "Make one small handover without turning it into a test of loyalty"
         },
         {
-          "body_md": "A social Type Two counterexample weakens a group usefulness hypothesis when contribution stops after status loss, access is shared only for recognition, or matched situations repeatedly prioritize private comfort or one bond.",
-          "key": "counterexample",
-          "title": "Use role transfer as disconfirming evidence"
-        },
-        {
-          "body_md": "Instrument-specific subtype evidence does not justify broad claims about culture, leadership, or personal value. Observe access, consent, reciprocity, and role incentives without turning contribution into identity.",
-          "key": "evidence_boundary",
-          "title": "Keep group conclusions modest"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose one introduction, one group task, and one event where a useful role passes to another person while needs remain visible.\n\nObservable signal: Record who receives access, what contribution is made, which status or recognition is available, and what continues after the role changes.\n\nPage-specific signal: Compare group usefulness with practical comfort and focused one-person connection under a similar request.\n\nAlternative explanation: Test elected duty, seniority, employment, fundraising, political skill, institutional incentives, and community norms against the subtype.\n\nReflection prompt: Identify the event where contribution followed status most closely and state whether role incentives now explain more than the subtype.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Test elected duty, seniority, employment, fundraising, political skill, institutional incentives, and community norms against the subtype.",
-            "context": "Choose one introduction, one group task, and one event where a useful role passes to another person while needs remain visible.",
-            "duration_days": 5,
-            "observable_signal": "Record who receives access, what contribution is made, which status or recognition is available, and what continues after the role changes.",
-            "page_specific_signal": "Compare group usefulness with practical comfort and focused one-person connection under a similar request.",
-            "reflection_prompt": "Identify the event where contribution followed status most closely and state whether role incentives now explain more than the subtype."
-          },
-          "title": "Observation exercise"
+          "body_md": "The tradition treats all three instinctual concerns as present. Social priority does not remove needs for practical security or close bonds, and does not measure leadership, popularity, or moral worth.\n\nTerms differ: [Narrative](https://www.narrativeenneagram.org/instinctual-subtypes/) includes close partnerships and vitality in one-to-one; [the Enneagram Institute](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction and charge in sexual/attraction. They overlap without being identical, and neither means only sex or romance. A private conversation can also serve group belonging.\n\nThe 27 subtypes and countertype terminology belong to interpretive traditions, not reproducible scientific diagnosis or established neural mechanisms. Contradictory observations should revise specific claims, rather than become evidence of a hidden instinct.\n\n[The abstract of Hook and colleagues' 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence. These collaboration examples do not validate 27 subtypes or FermatMind's assessment. Findings about a particular inventory cannot automatically validate FermatMind scoring or predict leadership.\n\nRead [Type Two's core pattern](https://www.fermatmind.com/en/personality/enneagram/type-2), then compare [one-to-one Two](https://www.fermatmind.com/en/personality/enneagram/type-2/instincts/one-to-one): being useful among people versus being particularly important to one person.",
+          "key": "tradition_evidence_and_navigation",
+          "title": "Group attention does not measure sociability or leadership"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-2/instincts/social",
       "source_hash": "54302b6212671590b3f9822f01c599bea3f2a77ed41a2ba59e08fc3c55d238af",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Two social is an evidence-limited subtype hypothesis: Type Two attention to needs and connection remains central, while group roles, networks, contribution, and usefulness to a wider circle may receive added focus. Group usefulness alone does not confirm this subtype because position, leadership duties, and community incentives can look the same.",
-      "title": "Type 2 Social: Connection, Contribution, and Group Roles"
+      "summary": "The social Two hypothesis examines whether understanding a group's needs, connecting resources, and holding a useful role sustain a sense of being needed and accepted. This may happen publicly or behind the scenes; leadership and sociability do not identify the subtype.",
+      "title": "Social Type 2: When Contribution Carries Belonging and Importance"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ce7fd0dbcf293208837e0028f19783eeadb1bf01e5693e3af76ad22c4ba9aedc"
+  "source_content_sha256": "4649da44b6d9122cd5e584f3f8551c487b3bd6cb1017ea2bd4c158c98a368799"
 }

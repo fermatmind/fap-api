@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-9",
@@ -23,101 +23,35 @@
       "entity_key": "type-9",
       "entity_type": "core_type",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "平静调停行为能够单独证明九号假设吗？不能。主持职责、较低权力、现实危险或文化礼仪都可能要求温和处理；应比较当事人的原始偏好、拒绝是否安全、会后承诺是否落地、后续不满与谁承担实际代价。",
-          "question": "平静调停行为能够单独证明九号假设吗"
+          "answer": "不是。需要观察的是自己的立场怎样进入决定，以及紧张出现时是否容易把它放到后面。愤怒也可以提供线索，提醒你有需求或边界尚未表达；它本身不决定类型。",
+          "question": "9号是不是没有主见或没有愤怒？"
         },
         {
-          "answer": "冲突推迟如何与真实同意区分？要核对是否说出清楚偏好、拒绝是否安全、承诺是否进入日程，以及后来是否出现怨气或任务漂移；单次口头答应并不足够。",
-          "question": "冲突推迟如何与真实同意区分"
+          "answer": "不算。两种安排都能接受是一种清楚的选择。更值得检查的是你明明不愿意，却为了尽快结束讨论说都可以，或者后来不断不满却说不清当时希望怎样。",
+          "question": "真心不在意选哪一家餐厅，也算丢失偏好吗？"
         },
         {
-          "answer": "哪些证据会削弱优先级模糊假设？当事人能保护自己的日程、在压力累积前表达分歧、容纳他人失望，并持续完成所选行动时，就应降低该解释。",
-          "question": "哪些证据会削弱优先级模糊假设"
+          "answer": "忙碌不排除这一解释。看看时间主要在完成自己认同的事项，还是被零碎请求带走，以至于自己的重要事情持续延后。先核对负荷和资源，再讨论动机。",
+          "question": "我很忙，也可能是9号吗？"
         }
       ],
       "framework": "enneagram",
@@ -133,43 +67,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/gut",
-          "label": "center:gut",
+          "label": "本能中心：8、9、1号的边界与行动",
           "relationship": "center_membership",
           "target_identity_key": "center:gut"
         },
         {
           "href": "/zh/personality/enneagram/wings/9w8",
-          "label": "wing:9w8",
+          "label": "9w8：9号与8号相邻翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:9w8"
         },
         {
           "href": "/zh/personality/enneagram/wings/9w1",
-          "label": "wing:9w1",
+          "label": "9w1：9号与1号相邻翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:9w1"
         },
         {
           "href": "/zh/personality/enneagram/type-9/instincts/self-preservation",
-          "label": "instinctual_subtype:type-9/self-preservation",
+          "label": "9号自保本能：日常舒适与优先级",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-9/instincts/social",
-          "label": "instinctual_subtype:type-9/social",
+          "label": "9号社交本能：参与群体与自己的位置",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/social"
         },
         {
           "href": "/zh/personality/enneagram/type-9/instincts/one-to-one",
-          "label": "instinctual_subtype:type-9/one-to-one",
+          "label": "9号一对一本能：连接与自己的声音",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/one-to-one"
         }
@@ -210,57 +144,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "在工作中，区分主持人按职责缓和争论与员工因报复风险保持沉默；在关系中，区分经过讨论的让步与没有表达就反复放弃安排。",
-          "key": "work_relationship_examples",
-          "title": "先从承诺成本看工作与关系"
-        },
-        {
-          "body_md": "记录最初想做什么、新请求何时进入、原承诺是否被重新安排，以及谁承担延期成本；不要仅凭平静语气判断是否存在优先级模糊。",
+          "body_md": "在传统九型框架中，第九型主要关注内在平稳、维持连接，以及避免分离与持续紧张。[Enneagram Institute 的第九型说明](https://www.enneagraminstitute.com/type-9/)提供了这一理论描述。它不意味着9号没有个性、没有愤怒，或必须安静。\n\n一种可以观察的策略是：大家意见不同时，先看见各方为什么都有道理；为了让局面舒服些，把自己尚未说出的偏好往后放。这样短期可能少一次争执，但下一次决定又由外界的请求带走，自己的事项便越来越难进入日程。\n\n例如，你原本打算周末完成一项个人计划，家人提出临时安排，你说“都可以”。请回到答应之前：你真的觉得两种安排都好，还是觉得说明偏好会让谈话变麻烦？如果连自己原先想做什么都越来越难想起来，问题不只是会不会拒绝，也包括是否给自己的愿望足够注意。",
           "key": "motivation_attention",
-          "title": "找出自己的事项何时退出日程"
+          "title": "想让事情平稳，为什么会忘了自己想要什么"
         },
         {
-          "body_md": "耐心、全局感和降温能力可能支持长期合作；若紧急差异被抹平、承诺不断漂移或他人只能猜测真实同意，稳定也可能以主体性为代价。",
+          "body_md": "能听懂几种意见，有助于找出共同点。比如两位同事争论排期，你可以把他们各自担心的损失说清，再寻找双方都能执行的安排。有效调和需要差异被看见，而不是把差异说成不存在。\n\n当“先别争”变成唯一目标，问题可能只是延后。你答应帮忙却没有调整原有事项，到了截止时间做不完；别人以为得到承诺，你却觉得被催促。先前没有说出的限制，最终会以延期、不满或回避的形式重新进入关系。\n\n稳定也可以包含明确意见：“我理解你希望周六出发，我更希望周日，因为周六已有安排。”自己的立场不会让理解他人的能力失效。把差异说清，大家才知道真正需要协商的是什么。",
           "key": "strengths_tradeoffs",
-          "title": "同时保留稳定能力与主体成本"
+          "title": "容纳多个立场，也让自己的立场有位置"
         },
         {
-          "body_md": "对照心里决定、实际表达、对方回应和下一步完成情况；若后来出现怨气或失约，回到最早没有说清的决策点并记录补救。",
+          "body_md": "**愿意让步：** 你知道自己的偏好，也了解另一方案的成本，决定这一次采用对方的安排。可以说：“我原本想晚些出发，这次愿意配合早班车。”\n\n**还没决定：** 你需要时间辨别自己想要什么。可以说：“我还没有想清楚，今晚八点前给你答复。”需要考虑与同意不是同一回事。\n\n**暂时不愿表达不同意：** 你知道自己不愿意，但希望答应后压力先消失。先找一个可以安全说清的小范围：“今天不能完成，不过明天下午可以做这一部分。”如果拒绝会带来真实危险，先处理安全与支持，不用强迫自己进行表达实验。\n\n在工作里，主持人暂缓争论可能是在维护会议流程；员工沉默可能与权力差异有关；另一人也可能通过模糊自己的立场避免紧张。相似表现需要不同理解。关系里也一样：观察后来是否自主执行、是否反复积累怨气，能帮助你检验当初的“同意”是否清楚。",
           "key": "decision_feedback_conflict",
-          "title": "把决定反馈冲突放进同一条时间线"
+          "title": "把“都可以”拆成三种不同情况"
         },
         {
-          "body_md": "同意可能来自真诚选择、岗位要求、语言障碍、照护责任或安全计算；先确认拒绝是否可行、后果由谁承担，再讨论避冲突假设。",
-          "key": "behavior_motive",
-          "title": "把配合行为与推断动机拆开"
-        },
-        {
-          "body_md": "若一个人能尽早说出优先级、承受他人失望、给出有范围的拒绝，并在分歧未消失时继续完成选择，九号假设应降低。",
-          "key": "counterexample",
-          "title": "主动寻找及时拒绝与持续行动"
-        },
-        {
-          "body_md": "9w8假设加入扎根抵抗、领地与延后发力，9w1假设加入秩序、原则与克制纠正；还要比较二号帮助、六号谨慎、耗竭和习得性外交。",
+          "body_md": "传统比较将第九型的平稳与连接、第[二型的照顾与被重视](/zh/personality/enneagram/type-2)、第[六型的可靠支持](/zh/personality/enneagram/type-6)区分开。[Narrative Enneagram 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供了比较不同关注的参照，而非分类标准。\n\n**如果你总是优先照顾别人，比较9与2。** 回到一次并不轻松的帮忙：你最希望发生的是大家别再紧张，还是对方感受到你的关心、你在关系中得到回应？别人不再需要这项帮助时，你更多感到轻松，还是失落？两种感受都可能存在；不能用一次回应判型，更不能把2号的照顾一概说成交换。\n\n**如果你希望关系稳定，比较9与6。** 当大家态度友好，但计划细节和可靠性仍不清楚时，你能否安心？当信息已核实、支持也可靠，但对方仍不同意你时，哪种困扰最难放下？这能帮助你比较关系紧张与支持不确定的分量，先排除真实风险。\n\n9w8与9w1是相邻翼的理论描述，分别可用来探讨守住空间、直接表达，或原则和秩序怎样修饰9号模式。继续读[9w8](/zh/personality/enneagram/wings/9w8)或[9w1](/zh/personality/enneagram/wings/9w1)，不必把安静或强硬当作翼型结论。",
           "key": "wings_mistypes",
-          "title": "比较9w8和9w1及常见误判"
+          "title": "照顾别人时，比较9号与2号；寻求安稳时，比较9号与6号"
         },
         {
-          "body_md": "本页只能帮助检查稳定、连接、优先级和冲突推迟，不能评价品德、勇气、领导力、就业能力、关系质量、健康或未来结果。",
-          "key": "use_boundary",
-          "title": "把结论留在观察层"
+          "body_md": "一次明确拒绝、一次争执，或持续完成个人目标，不会自动否定9号解释。这些可能是情境中的灵活选择，也可能是练习后更清楚的表达。9号并不等于被动；生气有时正能提醒你，一项偏好或边界还没有被认真对待。\n\n更能说明核心解释不合的，是跨多个安全、平等的场景，当事人持续清楚自己的优先级，关系紧张很少使它模糊；他反复帮助别人的主要考虑是被需要，或反复退让主要为了获得可靠支持，并且后续选择也支持这些解释。此时应比较2号、6号，或考虑不使用类型。\n\n疲劳、照护负担和较低决定权，也可能让个人计划难以推进。不要把实际资源不足写成“不知道自己想要什么”，更不要把完成慢一概称为懒惰。",
+          "key": "counterexample",
+          "title": "有主见、会生气，仍可以探索9号"
         },
         {
-          "body_md": "持续天数: 5\n\n情境: 五天内选择一次共同排期、一次低风险分歧和一次与既有承诺冲突的新请求，逐项保留当时背景。\n\n可观察信号: 记录最初偏好、说出口的原话、可用拒绝方式、日程位置、后续不满以及真正完成的下一步。\n\n本页特定信号: 比较对方表示失望时个人事项获得时间的速度，与所有人轻易同意时是否存在明显差异。\n\n替代解释: 核对岗位职责、报复风险、文化表达、语言条件、疲劳、残障、照护负担和现实危险。\n\n复盘问题: 找出一次及时表达让协作更清楚的事件，并依据具体结果上调或下调冲突推迟假设。",
+          "body_md": "选一次安全、低风险的共同安排。先独自写下偏好、一个理由和可以接受的替代方案，再听其他人的意见。你可以改变选择，但保留这张记录，看看改变是出于新信息，还是只为让紧张立即消失。\n\n表达时使用一句具体的话：“我倾向……，因为……；如果采用另一方案，我需要……。”不必说得很强硬，也不必让所有人完全满意。若仍未决定，就约定答复时间。\n\n另外，给一件自己在意的小事留出明确时段，并完成最初一步。事后检查：偏好有没有说出口？日程有没有因别人的失望而悄悄取消？如果你选择让步，这次代价是否是自己愿意承担的？练习目标是让选择更清楚，不是靠一次拒绝证明你属于哪一型。",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "核对岗位职责、报复风险、文化表达、语言条件、疲劳、残障、照护负担和现实危险。",
-            "context": "五天内选择一次共同排期、一次低风险分歧和一次与既有承诺冲突的新请求，逐项保留当时背景。",
-            "duration_days": 5,
-            "observable_signal": "记录最初偏好、说出口的原话、可用拒绝方式、日程位置、后续不满以及真正完成的下一步。",
-            "page_specific_signal": "比较对方表示失望时个人事项获得时间的速度，与所有人轻易同意时是否存在明显差异。",
-            "reflection_prompt": "找出一次及时表达让协作更清楚的事件，并依据具体结果上调或下调冲突推迟假设。"
-          },
-          "title": "观察练习"
+          "title": "在听见别人的意见前，先留下一点自己的声音"
+        },
+        {
+          "body_md": "本页的情境与练习用于理解日常选择，不是关于性格好坏或关系前景的判定。对104个样本的[九型研究系统综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告了混合的信度、效度证据；翼和类型间移动的支持有限。这些研究结果不验证费马测试。\n\n可阅读[本能中心](/zh/personality/enneagram/centers/gut)，比较9号与8、1号怎样处理边界和行动。如果核心仍不确定，回到[九型人格总览](/zh/personality/enneagram)比较主要关注。你可以先练习清楚参与，让关系中的和平也包含自己的声音。",
+          "key": "use_boundary",
+          "title": "让平稳包含真实的参与"
         }
       ],
       "seo": {
@@ -271,8 +187,8 @@
       "slug": "enneagram/type-9",
       "source_hash": "bd172abe9190dfed237b445f89e066e1b5b63a0f4f8705ccb327be18008aa612",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "九号是九型人格传统框架中的观察假设，可关注稳定连接、优先级模糊、冲突推迟以及重新接触自身议程的过程。温和或配合本身不能证明动机；调停职责、低权力位置、文化礼仪、疲劳、残障、创伤安全策略或现实危险都可能造成相似表现，替代解释需要核对。",
-      "title": "九号核心：从稳定连接到优先级回收的可修正假设"
+      "summary": "第九型关注内在平稳与关系中的连接。它可以让人容纳不同立场，也可能让自己的偏好在“都可以”之中渐渐模糊。本页帮助你分清愿意让步、尚未决定和没有说出的不同意，把自己的需要带回合作与关系。",
+      "title": "九型人格9号：内在平稳、关系和平与自己的优先级"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -282,92 +198,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "c9305666a4786a52ec5a565e840d4075a74613dfa2e4a34652c4c0f91109d93f"
+  "source_content_sha256": "20be2b4d449d5ced7e0101bb533fc5b4398064541b660a262dad67bc763c756d"
 }

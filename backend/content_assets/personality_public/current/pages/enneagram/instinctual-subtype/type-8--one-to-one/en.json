@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-8/instincts/one-to-one",
@@ -23,94 +23,39 @@
       "entity_key": "type-8/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Conflict style, harassment, actual danger, cultural norms, trauma safety, or an unequal relationship can produce confrontation. Consent and access conditions must be examined.",
-          "question": "Does confrontation establish one-to-one Eight?"
+          "answer": "No. Narrative includes significant partners, close friends, and vitality; EI's sexual/attraction account gives more emphasis to attraction and charged engagement. The meanings overlap without being identical. Libido, relationship count, and visible charm cannot determine subtype.",
+          "question": "Does one-to-one mean high libido or frequent romantic relationships?"
         },
         {
-          "answer": "Use decisions where both people can refuse safely, retain resources, propose changes, and seek support. Influence is mutual only when neither person faces retaliation or essential loss.",
-          "question": "How should mutual influence be tested?"
+          "answer": "Yes, but it cannot identify the subtype by itself. Distinguish practical conditions, shared responsibilities, engagement with this particular person, and deadline or communication problems. Be clear about which school's meaning you are exploring.",
+          "question": "Can an intense creative partnership be a setting for reflection?"
         },
         {
-          "answer": "Accepting a clear no, preserving the other person’s access, allowing them to set the pace, and repairing prior pressure strongly weaken a possession-centered interpretation.",
-          "question": "Which consent event weakens a possession hypothesis?"
+          "answer": "Not from one event. It challenges a specific account of needing possession or dominance. If the proposed attention pattern is not recurrent, or practical arrangements explain the tension sufficiently, reduce or withdraw the subtype hypothesis. A mismatch should not be reinterpreted as deeper suppression.",
+          "question": "Does accepting refusal or influence disprove one-to-one Eight?"
+        },
+        {
+          "answer": "No. Arguments may reflect actual disagreement, communication habits, resource inequality, or harm. Whether both people can refuse, propose changes, and retain necessary resources is more informative about the relationship than conflict intensity. A type cannot establish safety or compatibility.",
+          "question": "Do frequent arguments show that a connection has vitality?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "The core Type Eight pattern",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/self-preservation",
-          "label": "instinctual_subtype:type-8/self-preservation",
+          "label": "Type Eight self-preservation subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-8/instincts/social",
-          "label": "instinctual_subtype:type-8/social",
+          "label": "Type Eight social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-8/social"
         }
@@ -184,52 +129,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The tradition proposes that autonomy may be tested through direct impact on a close other and resistance to being shaped in return. Observe explicit agreements and actual freedom, not chemistry alone.",
-          "key": "traditional_hypothesis",
-          "title": "Treat intense mutual influence as a tentative pattern"
+          "body_md": "Eight's traditional concern with agency and resistance to harm or control does not disappear in close relationships. The one-to-one interpretation proposes a tension: wanting full engagement with someone important while being wary of how much influence that person has. The [Enneagram Institute's Eight description](https://www.enneagraminstitute.com/type-8/) provides the core background.\n\n[The Narrative Enneagram's one-to-one Eight account](https://www.narrativeenneagram.org/instinctual-subtypes/) describes this tension through possession and relinquishing control. Here it becomes an observable question: do I especially seek a direct, engaged response from this person? When they follow their own pace, do I express a need or try to decide for them?\n\nThis does not mean that every significant connection involves possession or that an Eight must control others. Accepting influence and revising one's own position can preserve agency while making connection possible. If resistance to control and maintenance of agency are not recurring core concerns, reconsider the Eight interpretation rather than retaining it solely because the relationship feels intense.",
+          "key": "connection_without_surrendering_agency",
+          "title": "Wanting a full response without losing agency"
         },
         {
-          "body_md": "Use similar decisions where resources are balanced versus concentrated. Record requests, refusals, access loss, retaliation, concessions, and whether both people can revise the agreement safely.",
-          "key": "matched_comparison",
-          "title": "Compare influence under equal and unequal power"
+          "body_md": "Narrative's one-to-one includes significant partners, close friends, and what it calls vitality. The [Enneagram Institute's sexual/attraction description](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) gives more emphasis to attraction, stimulation, and charged engagement. It also cautions that wanting one-to-one relationships does not distinguish an instinct.\n\nA long friendship or creative partnership can therefore be a setting for reflection here. Attraction and vitality can also involve activities and interests rather than romance. Still, valuing friendship does not establish the EI attraction interpretation, and enjoying stimulation does not establish the Narrative account of significant connection. Be clear about which aspect is being explored.\n\nNeither term can be determined by libido, number of relationships, or visible charm. This page uses one-to-one while preserving the difference between schools. Vitality is traditional descriptive language here, not an established physiological or neural mechanism.",
+          "key": "one_to_one_and_attraction",
+          "title": "One-to-one and sexual/attraction overlap without being identical"
         },
         {
-          "body_md": "One-to-one instinct is used here as a traditional attention convention, not evidence about bodily mechanisms. Attraction, trauma, coercion, attachment concerns, and violence need separate qualified support.",
-          "key": "instinct_boundary",
-          "title": "Keep intensity separate from physiology"
+          "body_md": "Imagine two long-standing creative partners preparing an exhibition. Alex notices that Morgan is reducing their shared discussions and has invited someone else to work on part of the project. Alex asks for a conversation: “I want to understand whether we still want to do this together.” Directness can clarify engagement, workload, and expectations. This is an original illustration for comparing motives, not a research sample.\n\nSuppose the conversation becomes, “If you choose someone else, you cannot use our materials.” Separate the existing agreement about materials from any new restriction introduced because the connection feels disappointing. Morgan's agreement to continue may reflect fear of losing resources rather than renewed engagement.\n\nAnother route is for Alex to describe the disappointment, ask whether Morgan still wants to collaborate, allow reduced involvement, and arrange materials and credit under their agreed rules. The connection can remain deeply important without being forced to continue.\n\nObserve the process from noticing changed engagement to expressing a need, interpreting the other person's choice, applying or avoiding pressure, and accepting influence. Clarity and involvement can help collaboration. Overvaluing intensity can mean mistaking calm for distance or a different pace for lack of care, making an honest response increasingly difficult.",
+          "key": "creative_partners",
+          "title": "When a creative partner changes the arrangement"
         },
         {
-          "body_md": "The proposed pattern may appear as overt confrontation, intense loyalty, testing, possessive access rules, or quiet negotiation over who influences whom. Volume does not determine the function.",
-          "key": "countertype_variation",
-          "title": "Allow challenge, devotion, or private control"
+          "body_md": "All three proposed Eight subtypes might request a direct conversation. What remains unresolved afterward can differ.\n\n- A self-preservation focus might track materials, costs, workspace, and dependable delivery, especially whether the change removes practical choices. Reliable arrangements may resolve the principal tension.\n- A social focus might track team position, shared responsibility, participation, and whether the change respects the group's agreed division of work. Reassuring two people's feelings may leave those questions unanswered.\n- A one-to-one focus might track this particular person's engagement, their willingness to respond directly, and the connection's sense of vitality. A successful project may not resolve the loss of that engagement.\n\nVary one condition in the example. If Morgan is temporarily less available because of care responsibilities but clearly remains committed, can Alex accept the changed pace? If resources and team responsibilities are settled yet exclusive engagement remains the recurring concern, the one-to-one interpretation becomes worth exploring. It still needs the person's perspective and other experiences; repeated questioning alone cannot identify a subtype.",
+          "key": "same_partner_change",
+          "title": "The same change can activate three different priorities"
         },
         {
-          "body_md": "Financial dependence, immigration status, workplace hierarchy, disability care, harassment, abuse, custody conflict, or unsafe housing can constrain refusal. These are safety and power facts.",
-          "key": "alternative_environment",
-          "title": "Check coercion and dependence before typology"
+          "body_md": "A deadline, broken communication, an actual breach of agreement, or previous unreliable collaboration can explain urgent questions about involvement. Financial dependence, hierarchy, care needs, or another person's control of necessary resources also affect whether refusal is possible. Establish those facts before attributing the pressure to personality.\n\nThe [Narrative Enneagram's relevant type comparisons](https://www.narrativeenneagram.org/type-comparisons/) also describe overlapping intensity or confrontation among Four, Six, and Eight. Explore whether the recurring concern involves agency, being understood and authenticity, or a dependable basis for trust. Do not use emotional depth, courage, or hesitation as exclusive typing criteria.\n\nIf tension ends when roles become clear, communication returns, or dependency changes, those conditions may explain more than subtype. If this concern with engagement and mutual influence is not recurrent in stable relationships, withdraw the one-to-one hypothesis. Quietness, a nonsexual relationship, or absence of arguments cannot be reinterpreted as proof of suppression. Without the relevant observations, remain uncertain.",
+          "key": "intensity_has_other_causes",
+          "title": "Intensity, vigilance, and confrontation have other explanations"
         },
         {
-          "body_md": "Confidence should drop when a clear no is accepted without pressure, access remains intact, decisions are shared, the person allows themselves to be influenced, and repair follows excess impact.",
-          "key": "counterexample",
-          "title": "Look for unpunished refusal and flexible influence"
+          "body_md": "In a relationship where both people can safely refuse, choose a limited request, such as a twenty-minute project discussion. Explain what you want to discuss and why it matters, while accepting another time or a refusal. Do not manufacture jealousy, withdrawal, or conflict to test the connection.\n\nWhen the other person declines or changes the request, notice your next impulse: understand the reason, offer an alternative, raise your voice, add conditions, or use project resources as leverage. Ask what you wanted most—information, settled responsibilities, or this person's stronger engagement. Do not decide what their refusal means without asking.\n\nObserve a refusal without punishment and whether you can accept a changed plan. This challenges a specific account that possession or continued dominance is necessary for connection. Accepting influence does not automatically disprove one-to-one attention. But if clear arrangements resolve the concern and comparable stable relationships do not show the proposed priority, reduce or withdraw the subtype explanation.\n\nDo not attempt the exercise where refusal could lead to retaliation, loss of essential resources, or actual danger. Address the concrete resource and safety conditions and seek appropriate support. Intensity or a type label cannot make pressure, harassment, or harm acceptable.",
+          "key": "request_without_pressure",
+          "title": "Make one specific request that the other person can decline"
         },
         {
-          "body_md": "This subtype cannot establish intimacy capacity, compatibility, loyalty, or relationship outcomes. Instrument-specific evidence cannot prove universal subtype ontology, and consent can be withdrawn.",
-          "key": "evidence_boundary",
-          "title": "Do not infer compatibility or safe intensity"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Over five days, examine one emotionally intense decision and one ordinary shared choice with the same close person.\n\nObservable signal: Record resources held by each person, exact request, refusal, consequence, access retained, influence accepted, agreement changed, and repair completed.\n\nPage-specific signal: Compare mutual influence when refusal is cost-free with behavior when one person controls essential access.\n\nAlternative explanation: Check financial dependence, immigration status, care needs, workplace hierarchy, harassment, trauma safety, custody, and housing risk.\n\nReflection prompt: Identify the clearest unpunished refusal and use it to revise any possession or control hypothesis.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check financial dependence, immigration status, care needs, workplace hierarchy, harassment, trauma safety, custody, and housing risk.",
-            "context": "Over five days, examine one emotionally intense decision and one ordinary shared choice with the same close person.",
-            "duration_days": 5,
-            "observable_signal": "Record resources held by each person, exact request, refusal, consequence, access retained, influence accepted, agreement changed, and repair completed.",
-            "page_specific_signal": "Compare mutual influence when refusal is cost-free with behavior when one person controls essential access.",
-            "reflection_prompt": "Identify the clearest unpunished refusal and use it to revise any possession or control hypothesis."
-          },
-          "title": "Observation exercise"
+          "body_md": "The three instincts in these traditions do not describe people with only one need. One-to-one attention can coexist with practical security and group responsibility. A Seven or Nine wing concerns an adjacent-type influence and is a different explanatory layer. A second-highest score, occupation, or public figure's image cannot determine subtype.\n\nThe 27 subtypes and “countertype” labels belong to school traditions; they are not reproducible scientific diagnoses, established neural mechanisms, or validated FermatMind scoring categories. [Hook and colleagues' 2021 review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence across 104 independent samples. It cannot validate this individual interpretation or transfer directly to FermatMind products. The examples and exercises here are reflection suggestions, not predictions of compatibility, loyalty, or relationship outcomes.\n\nWhen someone respects your agency while having needs and a pace of their own, explore whether that supports a lasting, freely chosen connection. If your experience does not fit this page, you do not need to discover hidden possession to rescue the classification. Use the explanation that better fits the facts.\n\nContinue with [the core Eight pattern](/en/personality/enneagram/type-8), then compare [self-preservation Eight](/en/personality/enneagram/type-8/instincts/self-preservation) and [social Eight](/en/personality/enneagram/type-8/instincts/social).",
+          "key": "evidence_and_next_steps",
+          "title": "Keep both the connection and the interpretation open"
         }
       ],
       "seo": {
@@ -240,8 +172,8 @@
       "slug": "enneagram/type-8/instincts/one-to-one",
       "source_hash": "3a89b39132872ee56d200f94a65fef5adf2651880cf4e3f942d3a4aa963b29f7",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Eight one-to-one is a traditional, evidence-limited hypothesis combining Type Eight autonomy with intensity, possession, mutual influence, consent, refusal, and equal power. Confrontation or strong bonding does not establish subtype because coercion, trauma safety, unequal dependence, cultural norms, relationship agreements, harassment, and real danger can produce similar behavior.",
-      "title": "Type Eight one-to-one: an intensity, possession, and mutual-influence hypothesis"
+      "summary": "The traditional one-to-one Eight account explores how autonomy enters significant connections: engagement, direct contact, influence, and allowing oneself to be influenced. Intensity cannot identify the subtype. Observe what happens when two people's pace or choices differ, and how each person's freedom is preserved.",
+      "title": "Type 8 One-to-One: Intense Connection and Mutual Influence"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +183,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2b5682bcb8184647e023fd3a15f7de8c0928cb5875d12bd0397504e62b61177c"
+  "source_content_sha256": "831842d40f556e669c948d0f957c43faca852b13e924a6d50d4f725f7b28ab20"
 }

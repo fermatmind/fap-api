@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/achievement-striving",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "achievement-striving",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Outcomes depend on many factors, and this package provides no individual prediction.",
+          "answer": "No. Pursuit, standards, and effort are different from attainment. Skills, resources, opportunity, feedback, and the suitability of the goal still matter. Neither a success nor a failure establishes the tendency on its own.",
           "question": "Does strong Achievement Striving guarantee success?"
         },
         {
-          "answer": "It may reflect selective priorities, sufficiency, or noncompetitive goals. Conduct and chosen aims need direct examination.",
-          "question": "Does weaker Achievement Striving mean lacking ambition or growth?"
+          "answer": "No. Incentives can coexist with interest, standards, and other motives. Examine the person's choices and effort in context. Behavior appearing only under one incentive should first be interpreted within that setting, rather than generalized to all goals.",
+          "question": "Does pursuing a bonus mean the motivation is not Achievement Striving?"
         },
         {
-          "answer": "High standards can exist without rigid error concerns or self-worth dependence. A facet does not diagnose perfectionism.",
-          "question": "How is Achievement Striving different from perfectionism?"
+          "answer": "Not necessarily. The additional demand may not serve the purpose, its cost may be too high, or the person may be pursuing a demanding aim elsewhere. Look at meaningful choices and usable opportunities instead of treating one stopping decision as a whole-person verdict.",
+          "question": "Is choosing a sufficient result the same as lacking ambition?"
         },
         {
-          "answer": "Goals and habits can change. This page does not forecast a stable score trajectory.",
-          "question": "Can this tendency change?"
+          "answer": "No. Standards, concerns about mistakes, and self-evaluation need separate examination and can overlap in different ways. The facet cannot diagnose those patterns. Ask what the standard is for and how the person responds when it is missed.",
+          "question": "Does a high score establish perfectionism?"
         },
         {
-          "answer": "Ask what support is wanted, respect autonomy, notice recovery needs, and avoid making output the only measure of the relationship.",
-          "question": "How can I support a highly achievement-striving partner or friend?"
+          "answer": "They can be tested as ways of managing a particular activity. Check whether they help action, useful feedback, and acceptable effort. A short-term improvement does not establish a stable trait or score change.",
+          "question": "Can small goals or stop rules change the trait?"
+        },
+        {
+          "answer": "Ask which support they want and review the purpose, constraints, and stopping conditions together. Respect a decision to reduce or retire a goal. Avoid making output the sole measure of the relationship, and do not use a personality label to dismiss persistent distress.",
+          "question": "How can I support someone who is deeply invested in a goal?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Achievement Striving concerns attraction to demanding goals, improvement, and standards that require sustained effort. It describes motivational direction—not success, worth, talent, productivity, income, or whether a goal deserves pursuit.\n\n“Achievement Striving within Conscientiousness: drive toward demanding goals and standards” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Wanting to produce something demanding, holding a high standard, and investing effort are relevant to Achievement Striving. They do not guarantee that the result meets the standard. Someone beginning a difficult project can show substantial pursuit while still lacking experience, access, or useful feedback.\n\nIn this site's NEO/IPIP-NEO vocabulary, Achievement Striving belongs to [Conscientiousness](/en/personality/big-five/conscientiousness). The [public IPIP item key](https://ipip.ori.org/newNEOFacetsKey.htm) includes effort and investment as well as standards, so the facet should not be reduced to setting a target without acting. The [official comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) describes similar NEO and IPIP constructs, not interchangeable instruments.\n\nThis explanation does not establish that a particular assessment measured the facet. If a result reports only a domain, do not invent a facet score. Actual attainment needs separate evidence about the work and its conditions.",
+          "heading": "A demanding aim is not an achieved result",
           "key": "section-01-115674ca4a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may set ambitious targets and experience progress as energizing. A weaker tendency may prefer “good enough,” protect nonwork priorities, or invest deeply only in selected goals. Outcomes also depend on skill, health, opportunity, resources, discrimination, and goal quality.",
-          "heading": "Precise Definition",
+          "body": "[Competence](/en/personality/big-five/facets/competence) concerns perceived capability; Achievement Striving concerns pursuit, standards, and investment. Believing you can do something is different from wanting to pursue a more demanding version. Neither belief nor desire is an objective ability test.\n\n[Self-Discipline](/en/personality/big-five/facets/self-discipline) places more emphasis on beginning and sustaining action, including when interest fades. Its behavioral territory can overlap with Achievement Striving. The distinction is useful, but it is not a promise that one facet chooses the goal while another mechanically guarantees completion.\n\nCompetitiveness and status seeking concern comparison and position, which may or may not be part of a goal. Perfectionism can involve high standards together with concerns about mistakes or self-evaluation; it is not captured by a simple contrast between improvement and flawless work. Ask what a missed standard means to the person and what they do next. An Achievement Striving score cannot establish those answers.",
+          "heading": "Related ideas overlap without being identical",
           "key": "section-02-2ec93d54ac",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Achievement Striving belongs to [Conscientiousness](/en/personality/big-five/conscientiousness), where standards can organize effort over time.",
-          "heading": "Parent Domain",
+          "body": "A stronger tendency may involve choosing demanding objectives, seeking further improvement, and investing beyond a minimum requirement. A weaker tendency may involve less persistent escalation of demands or stopping after a sufficient outcome. Look at meaningful choices rather than assuming that one declined promotion describes every part of a life.\n\nA stronger tendency does not guarantee sustained execution, delayed gratification, or better output. A weaker tendency does not establish better recovery, contentment, or an ability to finish more projects. A person may currently have no worthwhile opportunity, or may want a challenge that their resources cannot support.\n\nAn intermediate result can reflect moderate pursuit, differences between settings, or uncertainty in responses. It does not establish wise goal selection or ideal balance. These are positions on a continuum, not separate types or rankings of personal worth.",
+          "heading": "Read the continuum without assigning advantages",
           "key": "section-03-08401b913e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Achievement Striving versus Self-Discipline:** Ambition chooses a demanding destination; [Self-Discipline](/en/personality/big-five/facets/self-discipline) helps continue unpleasant steps.\n- **Achievement Striving versus Competence:** [Competence](/en/personality/big-five/facets/competence) concerns expected capability, not desired level of accomplishment.\n- **Achievement Striving versus perfectionism:** Perfectionism can involve rigid error concerns and self-worth contingencies. A facet score cannot establish it.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "A goal can matter for several reasons: interest, income, recognition, competition, obligation, or avoiding a loss. Achievement Striving does not require motivation to be entirely intrinsic. Nor does working intensely under an incentive establish a broad tendency by itself.\n\nConsider a contractor taking on extra work near the end of a billing period. The behavior may reflect a demanding personal target, a financial need, a client's pressure, or a combination. Ask how much choice exists, which standard the contractor is pursuing, and what happens across naturally different periods and activities.\n\nIf effort rises only under that particular constraint, keep the explanation specific to it. If the person also repeatedly chooses challenging, meaningful aims when similar pressure is absent, a wider provisional description may become reasonable. There is no need to withdraw income, create a penalty, or test someone's loyalty to a goal.",
+          "heading": "External incentives are part of the context",
           "key": "section-04-f223cc9768",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may appear as stretch goals, tracking progress, seeking challenge, or difficulty resting without accomplishment. A weaker tendency may appear as bounded goals, stable satisfaction, selective effort, or declining status competition. Economic pressure and role demands can mimic ambition.",
-          "heading": "Behavioral Cues",
+          "body": "Imagine a home cook trying to develop a reliably enjoyable meal for a small gathering. They choose a more demanding recipe, repeat trials, and ask people what needs adjustment. Early versions may still be disappointing. The chosen challenge and investment are observable; the quality of the meal needs feedback of its own.\n\nLimited equipment, ingredient cost, and available evenings affect what can be attempted. A week without another trial could mean no workable opportunity, an ordinary decision to use the time elsewhere, or a change in the goal. Those explanations cannot be collapsed into a low-striving label.\n\nA different cook might produce excellent food from a familiar recipe without seeking a harder target at all. That result reflects something about the finished work and existing skill; it does not by itself establish strong Achievement Striving. Neither person should have effort or ambition inferred solely from the plate.",
+          "heading": "A concrete goal shows why effort and quality need separate evidence",
           "key": "section-05-a1ea3bf38f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may strive intensely in art but not career hierarchy, or at work but not sport. Burnout, illness, caregiving, and blocked opportunity alter visible pursuit. Compare chosen standards across meaningful domains.",
-          "heading": "Contextual Differences",
+          "body": "When effort keeps expanding, ask what the additional work is for. Is it correcting a problem that matters, exploring a worthwhile improvement, or raising the requirement after the useful result is already available? Include the time, recovery, competing commitments, and demands placed on other people in that assessment.\n\nA stop rule can define the purpose of a particular goal: meet the agreed use and quality requirements, submit the work, and leave optional extensions for another occasion. Stopping at that point is not proof of weak striving. Continuing is not proof of strong striving. Financial pressure or role requirements may also restrict the ability to stop, so the difficulty should not automatically be assigned to personality.\n\nPersistent exhaustion or distress that interferes with everyday life deserves attention to the actual workload and, when needed, assessment by a qualified professional. A facet label cannot establish a health condition or explain away ongoing difficulty.",
+          "heading": "Stopping and continuing both need an explanation",
           "key": "section-06-e8bf5b4b96",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Setting a target beyond minimum requirements.\n- Seeking feedback that supports improvement.\n- Linking time to measurable progress.\n- Escalating standards after success.\n- Neglecting recovery or relationships when goals dominate.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Suppose the hypothesis is: 'I always raise the bar on things that matter to me.' A meaningful project reaches its intended standard; there is time for further work, yet you naturally choose to leave it there and feel no need to increase the target. Record that occasion. It limits 'always,' even if pursuit remains strong elsewhere.\n\nFor the opposite hypothesis—'I rarely choose demanding aims'—a series of voluntary, challenging steps in a personally important activity is a counterexample worth keeping. The description may need to become specific to work, public competition, or goals someone else selected.\n\nNot applying for an opportunity is not automatically a counterexample. The opportunity may be inaccessible, its cost may be unacceptable, or the objective may have little value to the person. Distinguish an available choice from no usable opportunity. Not finding a counterexample in a short record cannot establish that the original label is correct.",
+          "heading": "Let ordinary counterexamples narrow the interpretation",
           "key": "section-07-e0e70724af",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Defining sufficiency and stopping there.\n- Preserving leisure, relationships, or stability over status.\n- Avoiding externally imposed competition.\n- Underinvesting when a meaningful opportunity needs sustained stretch.\n- Choosing depth or care without public achievement markers.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "Choose a meaningful aim with limited consequences and write a modest hypothesis, such as: 'When time is available, I usually choose a harder version and invest effort in it.' During ordinary occasions, note the necessary outcome, the standard you chose, external demands, usable time and resources, actual investment, feedback, and result. Record the result separately from the pursuit.\n\nInclude opportunities followed by additional effort, opportunities without additional effort, and occasions with no usable opportunity. Repeated, voluntary pursuit under reasonably comparable conditions can support retaining a local description. A pattern restricted to a hobby or incentive calls for a narrower interpretation. If the record is dominated by overload, imposed work, or inaccessible resources, suspend the trait conclusion. This is practical observation, not a short-term personality validation.\n\nFor a separate deliberate trial, define a sufficient result, one optional stretch, an effort limit, and a stopping point. Check whether the extra demand produces an identifiable benefit and whether its cost remains acceptable. Reduce or remove it if the cost outweighs the benefit; retain the method if it serves the goal. Mark the trial as an intervention rather than ordinary behavior. Its effect does not establish a stable personality change.\n\nFor trouble getting started, read [Self-Discipline](/en/personality/big-five/facets/self-discipline). For doubts about capability, read [Competence](/en/personality/big-five/facets/competence). If a personal target displaces existing promises, see [Dutifulness](/en/personality/big-five/facets/dutifulness). The [Conscientiousness guide](/en/personality/big-five/conscientiousness) and [30-facet guide](/en/personality/big-five/facets) explain the wider framework.",
+          "heading": "Observe first, then try one bounded goal",
           "key": "section-08-a90312091d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Achievement Striving can support sustained development and challenging projects. Possible costs include overwork, chronic dissatisfaction, narrow identity, and pursuing a harmful metric. Weaker Achievement Striving can protect balance and contentment; possible costs include missed opportunities or underdeveloped goals. Neither level ranks a life.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-1d734e32d6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A researcher sets demanding publication goals but also defines nonnegotiable sleep and family time. Ambition structures work without becoming a total identity. Success still depends on many factors beyond the facet.",
-          "heading": "An Original Case",
-          "key": "section-10-86e67b9531",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A skilled craftsperson rejects promotion, maintains a modest workload, and produces excellent work. Low interest in status and stretch targets does not mean low ability, care, or growth.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-ea74946e29",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Who chose your most demanding current standard?\n2. Does progress energize you, relieve anxiety, or protect self-worth?\n3. What would “enough” look like?\n4. Which goal deserves greater effort, and which should be retired?\n5. What costs rise when the target escalates?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-bfd653c06e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Select one goal and write its purpose, minimum useful outcome, stretch outcome, and stop rule. Track effort and recovery for seven days. The experiment tests goal design, not personal value.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-561d86c892",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Competence](/en/personality/big-five/facets/competence), [Order](/en/personality/big-five/facets/order), [Dutifulness](/en/personality/big-five/facets/dutifulness), [Self-Discipline](/en/personality/big-five/facets/self-discipline), [Deliberation](/en/personality/big-five/facets/deliberation).",
-          "heading": "Continue Reading",
-          "key": "section-14-777f145da1",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Achievement Striving concerns demanding aims, standards, and effort toward them. Separate the tendency from actual attainment, examine external incentives, and judge the costs of a goal without turning ambition or rest into a personality verdict.",
+        "title": "Achievement Striving: Ambitious Aims, Effort, and the Results They Do Not Guarantee"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/achievement-striving",
-      "source_hash": "c21a6dab6b0027bfc3f217dcf245da3e049049ec2493e0718b4a298a39a2f1c2",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Achievement Striving concerns attraction to demanding goals and high standards. It is not guaranteed success, personal worth, perfectionism, or evidence that every goal is valuable.",
-      "title": "Achievement Striving: Drive Toward Demanding Goals"
+      "source_hash": "ce70ad1a8455791a81cc496664d975975022af39a8c77ca9e0ec6ba1bfc5df40",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Achievement Striving concerns demanding aims, standards, and effort toward them. Separate the tendency from actual attainment, examine external incentives, and judge the costs of a goal without turning ambition or rest into a personality verdict.",
+      "title": "Achievement Striving: Ambitious Aims, Effort, and the Results They Do Not Guarantee"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "C4-achievement-striving-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "C4-achievement-striving-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "C4-achievement-striving-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "C4-achievement-striving-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "36f61c218ccea3b92f56a91c18353b9ee11454b6602886c53c7824c3186ed9f6"
+  "source_content_sha256": "f23a707990e963147e210b9d52efc861bb6d5a0acd1ae3935046647a98a7e88c"
 }

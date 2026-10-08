@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/2w3",
@@ -23,79 +23,39 @@
       "entity_key": "2w3",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Charisma may be trained, role-required, culturally expected, or rewarded by an audience. The wing hypothesis needs recurring Type Two connection attention plus visibility-shaped delivery that persists across matched settings.",
-          "question": "Does charismatic helping establish 2w3?"
+          "answer": "No. Social energy, communication skill, and relationship motivation are different questions. Quiet resource coordination could fit the proposed approach, while an outgoing style could come from training, responsibilities, or ordinary enjoyment.",
+          "question": "Does 2w3 have to be outgoing or socially skilled?"
         },
         {
-          "answer": "Observe what remains central when credit disappears. A 2w3 hypothesis keeps another person's need and relational response in view; a Three hypothesis may organize attention more around achievement, effectiveness, and image.",
-          "question": "How does 2w3 differ from a Three hypothesis?"
+          "answer": "No. A wing is an adjacent modifier in the traditional model. Score order cannot replace consideration of the core concern, recurring choices, and explanations involving roles or incentives, even when the runner-up happens to be adjacent.",
+          "question": "Does a highest Two score and second-highest Three score establish 2w3?"
         },
         {
-          "answer": "Private help that remains equally steady, little adaptation to audience response, or action fully explained by targets and incentives would weaken the modifier hypothesis. Off-role examples are especially useful.",
-          "question": "What observation weakens visible effectiveness?"
+          "answer": "No. It may reflect care, clear boundaries, or flexible behavior. Reconsider the interpretation when its proposed concerns repeatedly add little explanatory value across broader observations.",
+          "question": "Does helping without thanks disprove 2w3?"
+        },
+        {
+          "answer": "Both can be warm, effective, and appreciative of recognition. A 2w3 account starts with love, need, and a place in relationships; a 3w2 account starts with confirming value through achievement. Compare what repeatedly feels at stake within the same situation.",
+          "question": "What is the central difference between 2w3 and 3w2?"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +129,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A 2w3 interpretation begins with Type Two attention to needs, then asks whether Three-adjacent adaptation and visible impact shape delivery. Charisma or efficiency without recurring connection attention may reflect work skill, leadership, incentives, or audience training.",
-          "key": "core_first_modifier",
-          "title": "Start with connection, then test visibility"
-        },
-        {
-          "body_md": "A sibling comparison contrasts 2w3 adaptive, visible effectiveness with 2w1 principled and restrained service. Compared with Three, the proposed core remains another person's need and relational response rather than achievement or image alone.",
-          "key": "sibling_core_comparison",
-          "title": "Contrast 2w3 with 2w1 and Three"
-        },
-        {
-          "body_md": "Compare a public event, a private favor, and a task where someone else receives credit. Record whether the offer adapts to actual need, whether contribution continues without visibility, and whether recognition changes warmth or follow-through.",
+          "body_md": "You help a friend organize a gathering: arrange the timing, welcome newcomers, and adjust the atmosphere so everyone feels included. Your friend later asks someone else to organize the next one and says you deserve a break. You appreciate the thought, yet feel a little disappointed.\n\nSeveral explanations are possible. Perhaps your contribution was not fully recognized. Perhaps you miss being the person your friend turns to first. Perhaps you simply enjoy organizing and dislike giving up a familiar activity. Similar reactions can come from different concerns.\n\nTo explore a 2w3 interpretation, ask: **Was doing this well also a way of feeling important to these people and closer to them?** Presentation and execution can serve a relationship concern. One successful event cannot establish that interpretation; compare it with relationships where there is no audience and notice whether being useful repeatedly becomes a route to belonging.\n\nThe situations in this guide are reflection exercises, not validated typing questions.",
           "key": "observable_situations",
-          "title": "Observe private and public contribution"
+          "title": "The event went well. Why does handing it over feel difficult?"
         },
         {
-          "body_md": "A 2w3 counterexample weakens a visible effectiveness hypothesis when help remains equally engaged without an audience, presentation does not shift with response, or achievement goals explain the action while connection attention is absent.",
-          "key": "counterexample",
-          "title": "Use private consistency as a challenge"
+          "body_md": "The traditional [Type Two description](https://www.enneagraminstitute.com/type-2/) connects the pattern with love, being needed, and relational response. Helping can address an actual need while also reassuring you that you matter to someone.\n\nFor this guide, the proposed Three influence concerns how help is delivered: making it effective, communicating the contribution clearly, and adapting the approach to the recipient. You might comfort a struggling friend, then organize resources and introduce someone who can help. The Two core remains central when these actions repeatedly serve a wish for closeness and a meaningful place in that person's life.\n\nThis approach can turn care into practical support. Used too heavily, it can favor contributions that receive a strong response, encourage promises beyond your capacity, or make it difficult to admit that you want care as well as the opportunity to provide it.\n\n2w3 does not mean a fifty-fifty mixture or two core types. In the [traditional wing model](https://www.enneagraminstitute.com/how-the-enneagram-system-works/), Two's adjacent types are One and Three. A runner-up test score does not automatically settle the wing.",
+          "key": "core_first_modifier",
+          "title": "A Three wing changes the approach while connection remains central"
         },
         {
-          "body_md": "Sales, fundraising, community leadership, hospitality, and customer success reward adaptive warmth and visible results. Compare off-role behavior, private contribution, incentives, and status before attributing the style to a wing.",
+          "body_md": "Suppose a friend needs help with a small event. You could welcome guests or prepare a reliable plan. Either action could fit several explanations.\n\n**2w3 and 2w1:** Both require a Two-centered account of connection. A 2w3 interpretation asks how effective, adaptable help can be accepted and appreciated. A 2w1 interpretation asks how care can be provided responsibly and in keeping with an internal standard. Lively hosting and careful planning are not exclusive to either wing. Compare the reasons that repeatedly guide the offer and your judgment of it.\n\n**2w3 and the reverse combination, 3w2:** Now imagine your friend says, “It went really well, but I'd like to handle the next one myself.” What remains difficult? A 2w3 interpretation might center on your place in the relationship: if you are no longer needed, are you still as close? A 3w2 interpretation might center on demonstrated value: did the contribution adequately show your competence, and was its success recognized?\n\nBoth concerns can occur together. The [Narrative Enneagram comparison of Two and Three](https://www.narrativeenneagram.org/type-comparisons/) also describes overlap in helping, action, and approval. Compare several situations, including choices and follow-through; one disappointed reaction cannot determine the core.",
+          "key": "sibling_core_comparison",
+          "title": "Compare 2w1 and 3w2 within the same act of helping"
+        },
+        {
+          "body_md": "Adapting your communication, coordinating resources, and making contributions visible can come from experience or responsibility. A host needs to put guests at ease. A project lead needs to explain results. Someone who regularly coordinates family arrangements may learn to anticipate needs.\n\nFirst ask how much choice you had. If reduced friendliness threatens your appraisal, or declining a family request brings conflict, the setting strongly shapes the behavior. A style that appears only under those conditions offers limited evidence for a wing.\n\nThen consider settings with fewer demands. When nobody expects help, do useful roles still become a recurring route to closeness? Do you also repeatedly consider how to make the offer credible, effective, and responsive to the other person? The label adds something only when the proposed modifier explains more than the core and the setting already explain.\n\nThis does not require treating kindness as a hidden transaction. Caring about someone and wanting to matter to them can coexist. Reflection should make expectations clearer, rather than discredit your goodwill.",
           "key": "alternative_explanations",
-          "title": "Test performance and customer roles"
+          "title": "An effective social style may be a learned skill"
         },
         {
-          "body_md": "Wing evidence is limited, so 2w3 remains a secondary observation hypothesis rather than an independent category. It establishes no charisma, leadership value, moral worth, fixed ability, or future result.",
-          "key": "wing_boundary",
-          "title": "Do not turn effectiveness into identity proof"
+          "body_md": "**A poor core fit:** Across situations where you have a choice, attention may repeatedly organize around performance, evaluation, and proving value without a recurring concern about closeness or a needed role. Reconsider the core, including a Three interpretation. Helping people alone cannot establish Two.\n\n**Insufficient modifier evidence:** The Two theme may fit, while adaptive presentation and visible effectiveness appear only in one assigned role. “Two, wing uncertain” is a reasonable working description. If responsibility and standards more often shape the way you help, compare 2w1 as well.\n\n**A situational explanation:** One polished public event provides little wing evidence when its requirements and your experience explain the approach.\n\n**Ordinary flexibility:** Helping privately, sharing credit, accepting a refusal, or continuing to care without thanks does not automatically disprove 2w3. You can recognize a recurring concern and still make choices that do not depend on approval. Look for priorities and reasons across situations, rather than requiring an appetite for applause every time.",
+          "key": "counterexample",
+          "title": "Separate a poor core fit from an uncertain wing"
         },
         {
-          "body_md": "Duration: 5\n\nContext: Choose one public contribution, one private favor, and one shared task where another person receives the visible credit.\n\nObservable signal: Record the need noticed, audience response, adaptation made, recognition available, and whether follow-through changes when visibility drops.\n\nPage-specific signal: Compare useful action that tracks real need with presentation that tracks applause, status, targets, or access to a visible role.\n\nAlternative explanation: Test sales training, leadership duty, hospitality norms, performance targets, fundraising skill, and reputation incentives against 2w3.\n\nReflection prompt: Identify the event best explained by achievement or audience reward rather than connection and state how the wing hypothesis changes.",
+          "body_md": "At the next naturally occurring opportunity to help, check what is wanted: “Would it help more if I listened, offered ideas, or took care of something practical?” Agree on the support, then name your capacity: “I can spend half an hour sorting this tonight; you would need to handle the next steps.”\n\nIf the offer is declined, pause before proposing something more impressive. Note what you most want to repair: an unresolved need, an impression of being insufficiently capable, or the feeling that the person still needs you. These notes help compare explanations; they are not a type score.\n\nAfterward, write down two separate things: what the person actually received, and what you hoped would happen in the relationship. If the second is “I wish someone would also ask how I am,” consider expressing that need directly in an appropriate relationship.\n\nReview one practical outcome: did you respond more accurately while avoiding an extra promise beyond your capacity? Continue observing the relationship without engineering a lack of gratitude. A successful boundary exercise is useful in its own right and does not confirm a wing.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Test sales training, leadership duty, hospitality norms, performance targets, fundraising skill, and reputation incentives against 2w3.",
-            "context": "Choose one public contribution, one private favor, and one shared task where another person receives the visible credit.",
-            "duration_days": 5,
-            "observable_signal": "Record the need noticed, audience response, adaptation made, recognition available, and whether follow-through changes when visibility drops.",
-            "page_specific_signal": "Compare useful action that tracks real need with presentation that tracks applause, status, targets, or access to a visible role.",
-            "reflection_prompt": "Identify the event best explained by achievement or audience reward rather than connection and state how the wing hypothesis changes."
-          },
-          "title": "Observation exercise"
+          "title": "Give help a boundary and give your own needs a voice"
+        },
+        {
+          "body_md": "The [Hook and colleagues review abstract](https://doi.org/10.1002/jclp.23097) reports little research supporting wings. This guide offers a traditional reflection framework; it does not establish a fixed identity or validate FermatMind's assessment.\n\nIf the relationship theme remains unclear, read [Type Two](/en/personality/enneagram/type-2) and compare [Type Three](/en/personality/enneagram/type-3). If Two seems a useful starting point, explore [2w1](/en/personality/enneagram/wings/2w1) as an alternative way the core might be expressed.\n\nLeaving the wing open is an acceptable outcome. The guide can still help you recognize expectations within an offer of support and express your own needs more directly.",
+          "key": "wing_boundary",
+          "title": "Understand the core before deciding whether the wing helps"
         }
       ],
       "seo": {
@@ -220,8 +172,8 @@
       "slug": "enneagram/wings/2w3",
       "source_hash": "5730b3538db1fc01d5c9845a98d364619e5f629a6c579063e8d796a7b18807b2",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The 2w3 wing is a core-first, evidence-limited hypothesis: Type Two attention to needs and connection may be modified by Three-adjacent adaptability, presentation, and visible effectiveness. Effective help can also reflect sales, leadership, hospitality, or performance incentives rather than a wing.",
-      "title": "2w3: visible effectiveness as a core-first wing hypothesis"
+      "summary": "2w3 describes a Type Two core with a Three-adjacent influence in traditional Enneagram theory. Flexible presentation, organization, and visible contribution may support a wish to feel loved, needed, and important in relationships. The distinction from 3w2 concerns what gives the contribution its personal significance.",
+      "title": "2w3: Building Connection Through Effective Help"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +183,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "42b61063727b62b158710411adfa862629b8d6e560906124d51d4d8d2916f60a"
+  "source_content_sha256": "301d9fbce0b6109df0816d8b479e2ed878b9999b55e23f7b0738d0164534fd57"
 }

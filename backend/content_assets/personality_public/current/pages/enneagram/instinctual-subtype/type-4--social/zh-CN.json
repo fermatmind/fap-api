@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-4/instincts/social",
@@ -23,94 +23,39 @@
       "entity_key": "type-4/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。歧视、语言、身份规则、无障碍缺口和非正式网络都可能造成真实排斥。必须先核实环境证据，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
-          "question": "感到被排斥就一定是第四型社交副型吗？"
+          "answer": "可能。关注归属并不要求喜欢人多的场合，但不喜欢活动也有许多普通原因。可以观察参与之前、期间与之后，注意力具体被什么占据，不用出席频率或社交性作为标准。",
+          "question": "偏重社交关注的人，也可能不喜欢群体活动吗？"
         },
         {
-          "answer": "一个头衔或邀请不一定带来信息、署名、安全和决策权。记录具体入口，能避免把真实障碍改写成人格问题，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
-          "question": "为什么要区分正式纳入与实际入口？"
+          "answer": "单凭这种感受不够。先检查信息入口、选择规则、署名、语言、无障碍条件和权力。如果真实障碍足以解释体验，移除之后疑虑消退，亚型解释就没有增加多少理解。",
+          "question": "感到被排斥，就是社交第四型的证据吗？"
         },
         {
-          "answer": "真实纳入后比较消退、差异关注不跨群体重复，或只在客观不平等环境出现，都会降低该副型解释，并且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
-          "question": "哪些记录会削弱归属比较假设？"
+          "answer": "不能这样推断。批评可能指出真实错误或不公。看他提出了什么、有什么证据，以及实际修正能否回应关切。不能仅因投诉让群体不舒服，就推测它来自身份动机。",
+          "question": "批评群体，说明一个人在刻意与众不同吗？"
+        },
+        {
+          "answer": "关切始终跟随真实排斥、公平入口建立后消退，或在其他友善群体不再重复时，应降低这项解释。无需争取特殊身份，也能完成普通共同贡献的经验，同样是对所提出机制的反例。",
+          "question": "什么时候应该停止采用这个假设？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "第四型：身份与个人意义",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/zh/personality/enneagram/type-4/instincts/self-preservation",
-          "label": "instinctual_subtype:type-4/self-preservation",
+          "label": "第四型自保亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-4/instincts/one-to-one",
-          "label": "instinctual_subtype:type-4/one-to-one",
+          "label": "第四型一对一亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/one-to-one"
         }
@@ -184,52 +129,29 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "传统描述提出，第四型差异关注可能在群体与共同标准中变得明显。这不能证明稳定的社交缺陷或动机。",
-          "key": "traditional_hypothesis",
-          "title": "把归属比较作为传统提示"
+          "body_md": "第四型对身份与个人意义的关注仍是起点，可参照[九型人格研究所的核心型描述](https://www.enneagraminstitute.com/type-4/)。社交关注把这个问题带入人与人共同参与的生活：我怎样在这里属于大家，又不丢掉自己？\n\n[Narrative 的亚型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)把社交第四型与归属中的比较、个人真实感与社会期待之间的张力联系起来。日常可以探索的问题是：这里是否有一个受到尊重、又能容纳我的位置？寻找答案的方式可能是参与、观察、批评，也可能是退出。爱不爱交际不足以区分这些情况。\n\n这种注意力可以有价值：一个人可能发现群体只表扬某种贡献，或者忽略了重要经验。过用的代价在于，反复把某项差异读成“别人自然有资格属于这里，我却没有”。这是一项关于解释过程的假设，不能从害羞、难过或批评直接得出。",
+          "key": "belonging_with_difference",
+          "title": "希望被接纳，也希望是以自己的样子"
         },
         {
-          "body_md": "比较贡献相近但被邀请、被忽略和正式纳入的场景。记录信息、署名、决策权与真实入口，而不只看名义身份。",
-          "key": "matched_comparison",
-          "title": "保持贡献相近并改变实际入口"
+          "body_md": "设想你加入一个筹办活动的邻里小组。大家邀请了你，却不断谈起共同经历，许多决定似乎早在别处作好了。另一位成员的建议很快得到欢迎，你提出的相近建议却没有多少回应。\n\n这里可能确实存在参与障碍。先问：谁能收到准备材料，建议怎样被选择，每个人有没有表达机会？名义成员身份不等于信息、署名、决策入口或安全。缺失的入口需要实际调整，不能先解释成人格问题。\n\n再设想小组共享了材料，明确认可你的贡献，并给你一个有实际影响的角色。如果比较仍持续，可以观察下一步：你是否把认可折算成客气，又找到一个自己根本不同的迹象，或者认为普通的共同角色不足以代表自己的经验？如果这种身份与归属的连接在多个相对友善的群体反复出现，假设会得到更多支持，但仍不能据此确定亚型。\n\n同样的敏感也可以成为有效贡献：指出缺口、提出公平流程，再参与其中。过用时，可能在别人来得及回应前退出，只通过批评表达，或觉得任何角色都太普通、没有意义。记录实际发生了什么、自己怎样理解、提出过什么请求，以及群体如何回应。公平入口已经解决问题，就应据此修正解释。",
+          "key": "joining_a_local_group",
+          "title": "受到邀请，不等于真的有参与空间"
         },
         {
-          "body_md": "社交标签只组织受众、归属和比较线索，不描述身体机制，也不代表普遍社交驱力或固定群体能力。",
-          "key": "instinct_boundary",
-          "title": "让社交语言停留在观察层"
+          "body_md": "在一次社区小型展览里，预算减少，一位合作者得到公开表扬。社交第四型的假设会问：这是否变成了谁的工作算数、自己处于什么位置的问题？行动可能是确认署名、比较角色，或尝试承担表达群体被忽略感受的责任。\n\n另外两个亚型可能优先处理不同问题。自保第四型关注资源与精力是否还足以维持个人认同的贡献；一对一第四型关注某个欣赏的对象或竞争者的回应，是否开始决定自己的价值。即使三个人都反对安排或加倍努力，他们想解决的问题也可能不同。\n\n追求表扬也不能直接确定核心型。[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供了从原因区分相似行为的入口。在这个情境里，可以问：想得到的是成功的认可、被需要的感激、可靠角色的明确，还是个人经验被理解？当事人的说明与反复选择，比动作本身更有解释力。\n\n真实的分配问题也可能已经足够解释一切。署名确实不公，而纠正之后疑虑消退，就不需要再添加隐藏的亚型动机。",
+          "key": "credit_resources_or_a_person",
+          "title": "合作者被表扬时，你最在意什么变化？"
         },
         {
-          "body_md": "个人差异可能表现为指出群体排除了什么，而不是追求个人独特。应比较有证据的制度批评与身份比较。",
-          "key": "countertype_variation",
-          "title": "容纳通过群体批评表达差异"
+          "body_md": "选择一个参与相对安全的群体。有实际障碍时，先请求必要信息、可使用的材料格式、清晰的表达机会或约定好的署名。你不需要为了练习留在歧视或强迫环境里。\n\n入口足够时，做一次范围有限、体现自己在意之事的贡献。与其要求群体确认整个自我，不如问一个具体问题：这个建议哪部分有用，哪部分需要调整？观察自己能否使用反馈，而不是把它当成个人价值的判决。\n\n把群体行为与自己的解释分开记录，也保留一个反例：一次普通的共同任务、一次有用的反馈，或一次无需建立特殊角色也能归属的经验。它挑战的是“必须通过差异确保归属”这项机制，不会自动否定整个核心型。\n\n如果困难只出现在信息不平等、语言不熟悉、新人职责不清或某个不安全群体，并随条件改变而减轻，应优先采用情境解释。如果在更安全的场合没有反复出现身份比较，就放下社交第四型假设。比较反复出现可以继续反思，但不是诊断结论。",
+          "key": "participate_without_a_verdict",
+          "title": "先完成一次贡献，再判断它说明了什么"
         },
         {
-          "body_md": "歧视、阶层、语言、残障、迁移、非正式网络和身份规则都会塑造归属。不能把有记录的障碍心理化。",
-          "key": "alternative_environment",
-          "title": "检验排斥与不平等入口"
-        },
-        {
-          "body_md": "若真实入口改善后比较消退，差异关注不在其他群体重复，或只在客观不平等场景出现，副型假设应减弱。",
-          "key": "counterexample",
-          "title": "用真实纳入与跨群体稳定性反证"
-        },
-        {
-          "body_md": "量表特定发现不能建立普遍副型。本页不能预测受欢迎程度、归属、忠诚、社交技能或群体适配。",
-          "key": "evidence_boundary",
-          "title": "保持归属观察非预测"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 选择贡献相近的被邀请、被忽略和正式纳入场景，并确认三者的任务责任可比较。\n\n可观察信号: 记录信息入口、署名、决策权、受众、本人意义、障碍证据和真实纳入后的变化。\n\n本页特定信号: 比较信息、署名和决策入口真正相等后，差异关注是否仍持续，并保留反例。\n\n替代解释: 对照歧视、阶层、语言、残障、迁移、非正式网络、身份规则和现实安全。\n\n复盘问题: 指出最强的已记录环境障碍，并判断考虑该障碍后副型语言是否仍增加解释。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "对照歧视、阶层、语言、残障、迁移、非正式网络、身份规则和现实安全。",
-            "context": "选择贡献相近的被邀请、被忽略和正式纳入场景，并确认三者的任务责任可比较。",
-            "duration_days": 5,
-            "observable_signal": "记录信息入口、署名、决策权、受众、本人意义、障碍证据和真实纳入后的变化。",
-            "page_specific_signal": "比较信息、署名和决策入口真正相等后，差异关注是否仍持续，并保留反例。",
-            "reflection_prompt": "指出最强的已记录环境障碍，并判断考虑该障碍后副型语言是否仍增加解释。"
-          },
-          "title": "观察练习"
+          "body_md": "社交关注讨论成员身份、角色与共同参与，不是朋友数量或参加聚会的热情。三本能也不是缺少其余两种需要的三类人：资源安全与亲密关系仍然重要。翼与本能是不同解释层，核心型第二高分不能直接确定其中任何一项。\n\n比较一对一描述时，要保留学派口径。Narrative 的一对一包含亲密关系、密友与活力；九型人格研究所的 sexual/attraction 更强调吸引与刺激强度。二者有交集，不完全等同，也都不是性或恋爱数量的测量。可对照[Narrative 本能介绍](https://www.narrativeenneagram.org/instinctual-subtypes/)与[九型人格研究所的模型说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n27种亚型组合及所谓反型属于学派传统，不是已证实的神经类别或可重复科学诊断。[2021年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告，104个样本的信度与效度证据并不一致；它没有验证这些亚型例子或费马评分。某个问卷的研究，也不能建立所有人群中全部亚型描述的效度。\n\n继续比较时，阅读[第四型核心关注](/zh/personality/enneagram/type-4)、[自保第四型](/zh/personality/enneagram/type-4/instincts/self-preservation)或[一对一第四型](/zh/personality/enneagram/type-4/instincts/one-to-one)。",
+          "key": "terms_evidence_and_reading",
+          "title": "社交关注不等于外向"
         }
       ],
       "seo": {
@@ -240,8 +162,8 @@
       "slug": "enneagram/type-4/instincts/social",
       "source_hash": "18f82da0257142cb96203aded516c9834de79434ea15bd2b6755bcec51e4468c",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第四型社交副型是一种传统且证据有限的假设：身份与意义关注可能通过比较、归属，以及感到重要群体拥有自己缺少的部分出现。群体不适不能证明副型；排斥、歧视、身份规则、迁移和不平等入口都可能产生相同体验。",
-      "title": "第四型社交副型：围绕归属比较的匹配观察假设"
+      "summary": "社交第四型的传统视角，关注身份与个人意义怎样进入归属、认可和贡献。它可以帮助区分反复出现的归属比较，以及群体确实需要修正的参与障碍。",
+      "title": "第四型社交亚型：在群体中找到属于自己的位置"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +173,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2ec007ea3efbedf2002b8b86cef12d0b48c0d1a035f5365fa350b7ba9cd4a7b4"
+  "source_content_sha256": "1b4bcfdf53c2ad195b30d79403dac9c1c5a5177dba53a299a34d1c0e53880e77"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-3/instincts/self-preservation",
@@ -23,94 +23,35 @@
       "entity_key": "type-3/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。运维责任、经济压力、照护任务和专业规范都能要求可靠。需要匹配公开与后台任务，并观察现实约束变化后的表现，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。",
-          "question": "很可靠就能判断第三型自保副型吗？"
+          "answer": "在传统框架中有这种可能。一个人可以通过可靠、能干来确认价值，而不是追求公开掌声。但不爱出风头本身不能支持判型，隐私偏好、文化和安全条件也能解释。需要观察表现与个人价值感之间反复出现的联系。",
+          "question": "不爱出风头的人也可能是第三型吗？"
         },
         {
-          "answer": "约束减弱提供自然对照。如果连续性关注随债务、照护或岗位风险明显下降，环境解释可能比副型更充分，但仍不能用单次变化定型，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。",
-          "question": "为什么要观察压力缓解后的变化？"
+          "answer": "不是。存钱可能只是应对收入变化、照护责任或具体目标的合理方式。这项解释关注物质能力对你意味着什么，尤其是挫折是否变成对个人价值的否定，并不衡量一个人有多节俭。",
+          "question": "很会存钱就是自保第三型吗？"
         },
         {
-          "answer": "无人监督就反复放弃维护、资源关注只在临时危机出现，或相同风险下始终追逐公开排名，都会削弱该假设，并同时记录任务要求、现实激励、权力差异与至少一个反例，再决定是否保留这个暂时假设。",
-          "question": "什么情况会削弱自保副型假设？"
+          "answer": "不能。有用的工作可以因许多原因受到重视。在责任与实际后果可比较时，无署名任务提供了一次观察标准和感受的机会。私下的成就仍可能承载价值压力，稳定贡献也可能只是普通的投入与承诺。",
+          "question": "没有署名也愿意做事，能证明这个亚型吗？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-3",
-          "label": "core_type:type-3",
+          "label": "第三型：成就与价值感",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-3"
         },
         {
           "href": "/zh/personality/enneagram/type-3/instincts/social",
-          "label": "instinctual_subtype:type-3/social",
+          "label": "第三型社交亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/social"
         },
         {
           "href": "/zh/personality/enneagram/type-3/instincts/one-to-one",
-          "label": "instinctual_subtype:type-3/one-to-one",
+          "label": "第三型一对一亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-3/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "传统描述提出，第三型成果取向可能通过维持工作、资源和责任的连续运行表达，而不是公开展示名次。这只是待比较的观察语言，不是已发现的原因。",
-          "key": "traditional_hypothesis",
-          "title": "把稳定交付保留为传统描述"
+          "body_md": "在传统的[第三型描述](https://www.enneagraminstitute.com/type-3/)中，成就与个人价值感紧密相连。自保亚型把这种追求更多放在资源、能力和日常生活能否稳妥运转上。\n\n一种可能的内心标准是：“我能养活自己、把事情做好、不成为负担，才算是有价值的人。”这里也可能有形象要求，只是理想形象更像可靠、能干、无需别人操心的人。一个人可以不喜欢炫耀，却很难承认自己需要帮助。\n\n[Narrative 的亚型原文](https://www.narrativeenneagram.org/instinctual-subtypes/)把这一变化与物质成就联系起来。下面的生活情境用于检验理解，不是凭表现给人定型的清单。",
+          "key": "competence_and_security",
+          "title": "当“我能扛住”变成对自己的评价"
         },
         {
-          "body_md": "选择难度与后果接近的一项公开成果和一项无人看见的后台维护，比较完成质量、报错方式、资源保护和署名移除后的投入。还要记录谁承担失败成本。",
-          "key": "matched_comparison",
-          "title": "匹配难度、后果和可见度"
+          "body_md": "设想几位朋友准备一场周末小型工作坊。有人核预算，有人联络场地，有人调整演示内容。大家都忙到很晚，努力程度本身并不能区分亚型。\n\n自保第三型的解释更适合讨论这种关注：费用能否覆盖、设备是否可靠、自己有没有能力把整件事稳妥交付。即使没有掌声，“我把事情撑起来了”也可能成为私下衡量成就的标准。\n\n社交第三型的解释更关注活动能否为团队赢得认可、贡献是否被看见，以及由此形成的群体位置。一对一第三型的解释则可能关注某位重要搭档是否欣赏自己、自己能否成为有吸引力的合作者，以及这段合作是否充满活力。\n\n这些关心可以同时存在。更有辨别力的问题是：哪个环节最容易把一次普通失误变成对自己的否定？投影仪坏了，可以只是“需要换设备”，也可能变成“真正能干的人不会让这种事发生”。后者提供了值得继续观察的具体过程。",
+          "key": "weekend_workshop",
+          "title": "同办一场活动，什么才算成功"
         },
         {
-          "body_md": "这里的自保是传统观察词汇。它不描述身体机制，也不讨论神经组织或恒定功能。它不能证明资源优先级、健康状态或每个人都有相同的自动需要。",
-          "key": "instinct_boundary",
-          "title": "让副型语言停留在可见优先级"
+          "body_md": "提前准备、学习实用技能、说到做到，可以减少家庭或合作中的混乱。这些行为本身有价值，不需要通过人格标签来肯定。\n\n这项解释要提醒的是：如果每个需要都必须先用表现来换取，可靠就可能成为负担。在工作坊里，你可能包办设备修理、拒绝已经安排好的交接，连午饭也推迟，因为开口求助似乎会破坏“我能处理一切”的形象。\n\n可以记录这样的过程：问题出现，你接下责任，有人能够接手，你拒绝，之后疲惫或怨气增加。比起简单写“我很负责”，这个过程更能帮助你理解发生了什么。\n\n关注生活安全也不保证照顾好了身体。为了证明自己能提供保障，一个人反而可能忽略休息和吃饭。但这只能是有待检查的解释；缺少自我照顾不能自动被说成更深、更隐蔽的自保模式。",
+          "key": "reliability_and_cost",
+          "title": "可靠有实际价值，过用时却容不下自己的需要"
         },
         {
-          "body_md": "当事人可能不强调公开野心，却用稳定运行、储备、准备度或“不能出错的人”来衡量能力。这种反常见表达必须用约束变化和反例检验。",
-          "key": "countertype_variation",
-          "title": "容纳不张扬的成就表达"
+          "body_md": "债务、收入不稳、照护责任、岗位缺少替补，都可能要求一个人持续可靠地工作。如果这些条件已经足以解释投入，就不必再加上亚型推断。节俭、焦虑和运维职业都不能证明自保第三型。\n\n可以观察一个资源与支持较充足的普通时段：结果已经合格，是否仍因没有亲自证明能力而觉得不够？没有实际惩罚的求助，是否仍让你觉得自己价值下降？反复出现的具体记录可以支持继续探索这一解释，却不能构成诊断。\n\n还要保留其他核心动机的可能。[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供了成就认可、正确标准与不确定感等不同解释。回到自己的事件，问问压力更接近“我要证明自己值得”、“这件事必须做对”，还是“我要找到可信的保障，避免出问题”。这些主题可能重叠，一句话不能定型。\n\n如果物质约束缓解后压力持续消退，实用安排并不牵动自我价值，或者多次可比较的选择都更围绕群体位置或某个人的欣赏，应减弱或撤回自保第三型解释。一次轻松不必推翻全部理解，但反复的反例必须能改变结论；不能一律用隐藏野心或更强压抑来维持分类。",
+          "key": "limits_and_alternatives",
+          "title": "先分清真实生计压力与价值感压力"
         },
         {
-          "body_md": "收入不稳、债务、照护、迁移、健康资源不足和岗位没有替补，都会让连续性具有现实优先级。比较压力减轻前后，避免把合理应对写成副型。",
-          "key": "alternative_environment",
-          "title": "检验生计、照护与替补条件"
+          "body_md": "选择一件低风险、有人愿意且能够接手的小事，先约定必要结果与补救办法。重要照护、生计和安全责任必须继续得到保障。\n\n交接前写下你的担心：是具体问题、失去控制，还是“别人接手后我就不够有用”？之后记录实际结果、自己的行动，以及结果是否达到约定要求。如果重新做了已经合格的工作，说明理由，不要直接把重做归为亚型证据。\n\n也可以练习直接说明一个需要：“这部分我能完成，那部分需要你接手。”有效支持应真正改变负担，而不只是称赞你不可替代。如果没有可靠替补，或拒绝会带来现实惩罚，先改善安排；不要为了观察人格而制造不安全。",
+          "key": "supported_handover",
+          "title": "从一次有支持的交接开始"
         },
         {
-          "body_md": "若没有监督就放弃维护，资源关注只在短期危机出现，或风险相同时仍持续选择公开名次而非稳定运行，自保副型解释应减弱。",
-          "key": "counterexample",
-          "title": "用风险缓解与公开排名反证"
-        },
-        {
-          "body_md": "量表特定证据不能证明普遍副型。本页不能预测财务结果、岗位绩效、健康、风险承受力或承担责任的适合度。",
-          "key": "evidence_boundary",
-          "title": "保持匹配观察非预测"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 选择一项公开交付、一项无人注意的后台维护，并找到现实压力明显变化的一个时段，同时明确任务责任、受众、现实后果与可拒绝条件。\n\n可观察信号: 记录任务难度、失败后果、责任归属、可见度、资源风险、报错方式和完成质量，同时记录任务证据、受众变化、现实后果与一个反例。\n\n本页特定信号: 重点比较取消署名后稳定交付是否持续，以及压力缓解后资源关注是否变化，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。\n\n替代解释: 对照债务、收入不稳、照护、运维岗位、迁移、可用替补和专业规范，还要说明权力、资源、奖励和岗位约束如何改变观察。\n\n复盘问题: 写出最强环境解释与最清楚反例，再决定是否暂时保留副型假设，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "对照债务、收入不稳、照护、运维岗位、迁移、可用替补和专业规范，还要说明权力、资源、奖励和岗位约束如何改变观察。",
-            "context": "选择一项公开交付、一项无人注意的后台维护，并找到现实压力明显变化的一个时段，同时明确任务责任、受众、现实后果与可拒绝条件。",
-            "duration_days": 5,
-            "observable_signal": "记录任务难度、失败后果、责任归属、可见度、资源风险、报错方式和完成质量，同时记录任务证据、受众变化、现实后果与一个反例。",
-            "page_specific_signal": "重点比较取消署名后稳定交付是否持续，以及压力缓解后资源关注是否变化，必须写下可见行为、任务条件、受众变化与不支持该假设的证据。",
-            "reflection_prompt": "写出最强环境解释与最清楚反例，再决定是否暂时保留副型假设，最后引用一条具体记录，说明保留、减弱或撤回假设的理由。"
-          },
-          "title": "观察练习"
+          "body_md": "传统模型认为一个人具有三种本能关注，自保只是可能更突出的领域，不意味着缺少社交与一对一关注。翼是另一层解释，讨论第三型可能带有的第二型或第四型修饰。测评分数第二高，不能单独确定翼或本能亚型。\n\n若遇到“反型”一词，应把它理解为某些学派对不典型外观的称呼。安静不能证明反型，反型也不能用来挽救被实际观察反复否定的解释。\n\n学派命名也有差别：Narrative 的 one-to-one 包含亲密伙伴与活力，Enneagram Institute 的 sexual/attraction 更强调吸引与强度。两者有交集而非完全同义，也都不限于性行为或恋爱。可参阅[Enneagram Institute 的本能说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。\n\n[Hook 综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)汇总104个样本，报告信度与效度证据混合。这不能证明本亚型或费马评分有效。27亚型属于理论传统，不等于可重复的科学诊断或已证实的神经机制。\n\n理解核心动机可读[第三型](/zh/personality/enneagram/type-3)；若压力似乎落在其他领域，可比较[第三型社交亚型](/zh/personality/enneagram/type-3/instincts/social)与[第三型一对一亚型](/zh/personality/enneagram/type-3/instincts/one-to-one)。",
+          "key": "reading_the_model",
+          "title": "让这项解释始终可以修正"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-3/instincts/self-preservation",
       "source_hash": "0da75ca3d0d0aee419805fc286f6e7f12300cea4d4323c6c73e743399cdf839d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第三型自保副型是一种传统且证据有限的假设：成就注意力可能更多通过稳定交付、资源连续性和较少公开展示来表达。可靠不能证明副型；经济风险、照护责任、运维岗位和缺少替补都可能要求相同行为。",
-      "title": "第三型自保副型：以稳定交付为线索的匹配比较假设"
+      "summary": "这一传统亚型描述关注投向物质安全与可靠能力的成就追求。值得辨别的是：做好工作、维持生活是否成了证明自己有价值的条件，而不是你是否勤奋、节俭或擅长安排。",
+      "title": "第三型自保亚型：通过把生活撑起来确认自己的价值"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "7f6aca24a63618fd2713f5e763fbaec049b76cf7ba56606193a7bf0e4acdf3e4"
+  "source_content_sha256": "b4628e6a1a2df4db131008cea841a49b82fec4445989c3d56e94cc8edb377530"
 }

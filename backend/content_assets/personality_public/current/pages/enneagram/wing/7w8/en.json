@@ -23,79 +23,35 @@
       "entity_key": "7w8",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Market timing, ownership, investor pressure, staffing limits, or crisis conditions may reward fast decisions. Compare how power and refusal are handled when speed offers no special advantage.",
-          "question": "Does entrepreneurial speed prove a 7w8 wing?"
+          "answer": "No. Adjacency is part of wing notation, but adjacency plus a high score does not establish the influence. Examine the Seven motivation first, then compare Six and Eight. Scores from different questionnaires also require their own interpretation.",
+          "question": "If Seven scores highest and Eight second, does that establish 7w8?"
         },
         {
-          "answer": "Name the actual resource, authority, relationship, or information controlled, then record whether it is used transparently and whether affected people retain meaningful refusal and recourse.",
-          "question": "How can leverage be observed without praising dominance?"
+          "answer": "Yes. Confronting a conflict may serve the wish to restore options and satisfaction. Examine why you act and what you want afterwards. If autonomy and avoiding control consistently matter more, revisit the Eight core.",
+          "question": "Can I confront a conflict and still have a Seven core?"
         },
         {
-          "answer": "Choosing consent, shared control, or a slower negotiated route while possessing enough authority to act unilaterally is a strong counterexample to the proposed Eight modifier.",
-          "question": "What is a strong counterexample to direct pursuit?"
+          "answer": "One choice may show flexibility. A stronger reason to leave the wing undecided would be repeated comparable situations in which an Eight influence adds little explanatory value to the Seven pattern.",
+          "question": "Does choosing a smaller plan or respecting a refusal weaken 7w8?"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Begin with repeated option generation and resistance to premature closure. Consider an Eight modifier only when direct pursuit or leverage changes how a preferred possibility is secured, not merely when the role grants authority.",
+          "body_md": "In 7w8, Seven names the proposed core pattern and Eight names an adjacent influence. Saying that the core remains Seven explains the notation; it does not establish that a person's personality is permanently fixed.\n\nTraditional descriptions of Seven emphasize anticipated satisfaction, available choices, and moving away from deprivation, pain, or feeling trapped. An Eight influence may add a direct response: ask for what you want, obtain the resources, and deal with the obstacle yourself. Someone who recognizes this description may both see alternatives and work to make one happen. See the [Enneagram Institute's Type Seven description](https://www.enneagraminstitute.com/type-7/) for this traditional account of the core motivation.\n\nSuppose a much-anticipated trip is canceled. You immediately find alternatives and make the calls needed to arrange one. The possible Seven signal is not the number of calls. It is the urgency behind them: you need something worthwhile to look forward to, rather than being left with the disappointment. The possible Eight influence is the direct way you pursue that opening.\n\nA wing is not a fifty-fifty blend, and a second-highest questionnaire score does not automatically determine it. Seven's adjacent wings are Six and Eight. First consider whether the Seven explanation fits, then compare those influences. The [Enneagram Institute's discussion of wings](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) also records differences between traditions about one wing, two wings, and how strongly either appears.",
           "key": "core_first_modifier",
-          "title": "Keep possibility primary and force secondary"
+          "title": "The wing changes how you pursue something, not the core reason"
         },
         {
-          "body_md": "Observe what happens when budget, policy, or another person blocks a desired route. Record requests, negotiation, use of authority, acceptance of refusal, and who absorbs the consequences of continued pursuit.",
+          "body_md": "In the canceled-trip example, direct action can prevent unnecessary delay. Someone checks refund terms, finds a workable route, and gets a stalled plan moving. Seeing an opportunity and handling resistance can be useful; speed alone does not make the action impulsive.\n\nThe cost appears when action repeatedly lets you skip the disappointment. Before admitting how much the original trip mattered, you may fill the replacement itinerary with more activities. Before asking a companion, you may book on their behalf. Excitement returns briefly, while costs, unfinished arrangements, or resentment remain. The rest or connection you actually wanted can disappear beneath the search for the next thing.\n\nAsk: does this alternative solve the problem, or mainly spare me from feeling that something will not work out? When someone declines, can I state my wish clearly and still leave them a choice? Assess the strategy through its feasibility, completed commitments, and actual satisfaction, rather than through how forcefully it was presented.",
           "key": "observable_situations",
-          "title": "Track leverage under a real boundary"
+          "title": "When direct action helps, and when activity replaces satisfaction"
         },
         {
-          "body_md": "Facing the same obstacle, 7w8 may seek control of resources and move directly, while 7w6 may consult allies and preserve contingencies. Equalize formal power before treating the difference as personal.",
+          "body_md": "Keep the conditions the same: the trip is canceled, money is limited, and everyone can decline a replacement. The following examples are prompts for comparison, not typing rules.\n\nBoth 7w6 and 7w8 may want to recover a promising plan. A Six influence might show through consulting trusted companions, checking refund conditions, and preserving a backup. An Eight influence might show through negotiating directly, making a clear proposal, and taking responsibility for moving it forward. Either person can be brave, cautious, or collaborative. The distinction is not timid versus forceful.\n\nBoth 7w8 and 8w7 may quickly create alternatives. To examine the order of the motivations, imagine that someone else offers an equally appealing plan but will lead it. What remains difficult? If the main problem is losing options, missing out, or being stuck with disappointment, the Seven core deserves further consideration. If the plan is satisfying but you remain preoccupied with being directed by someone else or retaining decision-making power, consider an Eight core.\n\nNow reverse the conditions: you have full authority, but only an unappealing plan is available. What still troubles you? These contrasting conditions reveal more than who interrupts or smiles more. The [Narrative Enneagram's type comparisons](https://www.narrativeenneagram.org/type-comparisons/) describe traditional differences between Six and Seven, and Seven and Eight; this travel example turns them into questions you can examine.",
           "key": "sibling_core_comparison",
-          "title": "Contrast 7w8 with 7w6 on shared stakes"
+          "title": "Compare 7w6, 7w8, and 8w7 in the same canceled plan"
         },
         {
-          "body_md": "Founders, executives, advocates, emergency leads, litigators, or caregivers may need decisive action. Wealth, seniority, citizenship, gender norms, and organizational backing also change whose assertiveness is possible or tolerated.",
+          "body_md": "If you hold the booking, speak the relevant language, or are responsible for obtaining a refund, making the calls may simply be sensible division of labor. Deadlines, available money, and other people's ability to participate also affect the response.\n\nCompare an arrangement you own with a similarly consequential one that someone else owns. Do you still tend to state your wishes directly and pursue alternatives? If you act quickly only in emergencies, without a recurring concern about lost possibilities or disappointment, the event offers little support for 7w8. Negotiation training, occupation, and sociability cannot substitute for an explanation of motivation.\n\nRespecting a refusal does not demonstrate that an Eight influence is absent. Directness and cooperation can coexist. Look for whether direct pursuit repeatedly helps explain how the Seven pattern operates, rather than whether you are forceful enough.",
           "key": "alternative_explanations",
-          "title": "Audit ownership and structural power first"
+          "title": "Check whether responsibility already explains the directness"
         },
         {
-          "body_md": "The modifier weakens when the person accepts a firm limit, shares control without preserving hidden leverage, waits for consent, or chooses a slower collaborative route despite having enough power to push ahead.",
+          "body_md": "A core mismatch: across several different situations, restoring satisfaction and choice is not your central concern. Retaining autonomy or avoiding someone else's control consistently matters more. Revisit Seven versus Eight instead of explaining everything as a particularly strong Eight wing.\n\nInsufficient evidence for the wing: the Seven motivation recurs, but direct pursuit follows authority, familiarity, or urgency almost entirely. You can keep Seven as a candidate without settling on an Eight influence.\n\nContext or flexibility: you wait, invite advice, or make a modest weekend worthwhile after a disappointment. One such choice does not disprove 7w8. It may show that you can adapt. Repeated comparable situations in which another influence fits better would provide a stronger reason to reduce confidence in the wing.\n\nA useful counterexample makes the explanation more precise. It should not require you to remain forceful to keep a label.",
           "key": "counterexample",
-          "title": "Look for restraint when force would work"
+          "title": "Let contrary observations revise the right part of the explanation"
         },
         {
-          "body_md": "7w8 cannot establish courage, leadership potential, aggression, ethics, or competence. Research support for wings is sparse, and concrete consent, policy, and accountability always outrank the typology.",
-          "key": "wing_boundary",
-          "title": "Separate directness from entitlement or capacity"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Over five days, examine one blocked proposal, one resource negotiation, and one interaction where another person can freely refuse.\n\nObservable signal: Record the desired option, formal authority, resources controlled, exact boundary stated, negotiation move, consent response, and distribution of downstream cost.\n\nPage-specific signal: Compare direct pursuit when leverage is available with behavior when control is equal and refusal has no penalty.\n\nAlternative explanation: Check job authority, ownership, advocacy duty, crisis conditions, negotiation training, privilege, and unequal exposure to consequences.\n\nReflection prompt: Identify a moment when honoring a limit protected the relationship or project, and use it to revise the modifier hypothesis.",
+          "body_md": "Use a low-stakes change of plans; there is no need to create a conflict.\n\n1. Before searching for replacements, name the specific loss: perhaps time together that you had anticipated, rather than just an inconvenient booking. Then name what you still want, such as a little novelty this weekend.\n2. Find two feasible alternatives. Compare money, time, and others' wishes, then choose one. Avoid adding activities solely to recover the initial excitement.\n3. Make a direct request while separating your wish from someone else's obligation: “I'd like to try this plan. Would you like to join?” If they decline, retain your own choice and let them retain theirs.\n4. Finish the refund, notification, or booking tasks attached to that route. Afterwards, ask whether you received the rest, experience, or connection you wanted, or mainly enjoyed starting something new.\n\nThis preserves the action-oriented quality described by 7w8 while examining whether it serves fulfillment. Acknowledging disappointment and completing a bounded plan need not mean that a wing has disappeared.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check job authority, ownership, advocacy duty, crisis conditions, negotiation training, privilege, and unequal exposure to consequences.",
-            "context": "Over five days, examine one blocked proposal, one resource negotiation, and one interaction where another person can freely refuse.",
-            "duration_days": 5,
-            "observable_signal": "Record the desired option, formal authority, resources controlled, exact boundary stated, negotiation move, consent response, and distribution of downstream cost.",
-            "page_specific_signal": "Compare direct pursuit when leverage is available with behavior when control is equal and refusal has no penalty.",
-            "reflection_prompt": "Identify a moment when honoring a limit protected the relationship or project, and use it to revise the modifier hypothesis."
-          },
-          "title": "Observation exercise"
+          "title": "When a plan falls through, acknowledge the loss before choosing a route"
+        },
+        {
+          "body_md": "If the core motivation is unclear, start with [Type Seven: fulfillment, options, and disappointment](/en/personality/enneagram/type-7). If it fits reasonably well, compare [7w6: a Seven core with a Six influence](/en/personality/enneagram/wings/7w6) and ask whether the same wishes are pursued differently.\n\nThis page uses traditional core-and-wing descriptions as observation prompts. Its examples and exercise are not a validated procedure for identifying wings. The [abstract of Hook and colleagues' 2021 systematic review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity findings across 104 independent samples and little research supporting secondary ideas such as wings. Those findings do not automatically validate FermatMind questionnaires, scores, or an individual's 7w8 interpretation.\n\nYou can explore a provisional explanation while leaving the wing uncertain. 7w8 does not establish leadership ability, moral character, occupational suitability, or future achievement.",
+          "key": "wing_boundary",
+          "title": "Where to go next, and what this description cannot establish"
         }
       ],
       "seo": {
@@ -220,8 +168,8 @@
       "slug": "enneagram/wings/7w8",
       "source_hash": "e505fe94a3667841079aa653e77b33bd41097d59efae6b2ecb97b6c609cf64d8",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "7w8 is an evidence-limited wing hypothesis: Type Seven attention to possibility remains central, while Type Eight may add leverage, autonomy, direct pursuit, and decisive action. Speed or assertiveness alone does not confirm 7w8 because leadership, ownership, crisis authority, negotiation training, privilege, and unequal power can look the same.",
-      "title": "7w8: Type 7 Core, 8 Wing, and Common Misreads"
+      "summary": "7w8 is a traditional Enneagram description in which Seven's concern with fulfillment, options, and avoiding feeling trapped remains central. An Eight wing may make the pursuit more direct and willing to meet resistance. The useful question is what the action protects, and whether it produces lasting satisfaction.",
+      "title": "7w8: How an Eight Wing Can Help a Seven Turn Possibility into Action"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "52610535ff1bbe129b0ce5367bab95722de236d4380f140c68d1e7fc7d052119"
+  "source_content_sha256": "500c491a7f10ce23364d7878ea0e8dbd64dd5a0b83af39180c1581fef7083574"
 }

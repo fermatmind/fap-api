@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-3/instincts/self-preservation",
@@ -23,94 +23,35 @@
       "entity_key": "type-3/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Operations duty, caregiving, financial risk, or professional standards may require dependability. Use matched tasks and changed constraints before keeping the subtype hypothesis.",
-          "question": "Does being dependable establish self-preservation Type Three?"
+          "answer": "That is possible within the traditional framework. A person may seek value through being capable and dependable rather than through public applause. Avoiding attention alone supports no type: privacy, culture, safety and preference can explain it. Look for repeated links between performance and personal worth.",
+          "question": "Can someone who avoids attention still be a Type Three?"
         },
         {
-          "answer": "The comparison holds task value closer while changing visibility. It helps test whether reliable delivery remains central without recognition, though power, risk, and ownership still need separate recording.",
-          "question": "Why compare credited and uncredited work?"
+          "answer": "No. Saving may be a sensible response to a goal, uncertain income or care responsibilities. This explanation concerns what material competence means to you, especially whether setbacks become judgments of your worth. It is not a measure of thrift.",
+          "question": "Does saving money indicate self-preservation Three?"
         },
         {
-          "answer": "Reliability limited to a crisis, unseen maintenance that is repeatedly abandoned, or a stable preference for visible rank despite equal operational stakes would weaken it.",
-          "question": "What weakens this subtype hypothesis?"
+          "answer": "No. People can value useful work for many reasons. Uncredited work is one opportunity to notice your standards and feelings, provided responsibility and practical consequences are comparable. Private achievement can still carry self-worth pressure, while steady contribution can also reflect ordinary commitment.",
+          "question": "Does working well without credit prove this subtype?"
         }
       ],
       "framework": "enneagram",
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The traditional description proposes that Type Three result attention may be expressed through keeping work, resources, and responsibilities functioning rather than displaying rank. This is a comparison prompt, not a discovered mechanism.",
-          "key": "traditional_hypothesis",
-          "title": "Treat reliable achievement as a traditional hypothesis"
+          "body_md": "In the traditional [Type Three description](https://www.enneagraminstitute.com/type-3/), achievement helps establish a sense of personal value. Self-preservation changes the area in which that achievement is sought: having the resources, skills and practical arrangements to keep life functioning.\n\nAn everyday version might sound like: “If I can provide, stay productive and handle things without becoming a burden, I am doing well as a person.” A quiet, dependable image can matter as much as an impressive public one. Someone may dislike boasting while still finding it difficult to admit that they need help.\n\nThe [Narrative subtype account](https://www.narrativeenneagram.org/instinctual-subtypes/) connects this variation with material success. The following situations are examples for reflection, not a checklist that establishes anyone's subtype.",
+          "key": "competence_and_security",
+          "title": "When being capable becomes a condition of feeling worthwhile"
         },
         {
-          "body_md": "Compare two tasks with similar difficulty and consequence: one publicly credited and one operationally essential but unseen. Record delivery, error reporting, resource protection, and whether reliability remains valuable after recognition is removed.",
-          "key": "matched_comparison",
-          "title": "Match task, risk, and visibility"
+          "body_md": "Imagine that three friends are preparing a small weekend workshop. All three organize carefully and work late, so effort alone tells you little.\n\nA self-preservation Three interpretation becomes relevant when attention repeatedly goes toward covering costs, keeping equipment working and demonstrating that the event can be delivered dependably. Even if nobody applauds, “I made this work” can serve as a private achievement standard.\n\nA social Three interpretation would focus more on whether the workshop earns the group respect, whether the contribution is recognized and what standing follows. A one-to-one Three interpretation might focus on becoming an admired, compelling collaborator for a particular person, or making the partnership feel alive and successful.\n\nThese concerns can coexist. Ask which concern most often turns an ordinary setback into a judgment about your worth. A broken projector might mean “We need a replacement,” or it might become “A capable person would never have let this happen.” The second response gives you something more specific to investigate.",
+          "key": "weekend_workshop",
+          "title": "The same workshop, three different measures of success"
         },
         {
-          "body_md": "Self-preservation labels organize observable priorities such as continuity, workload, and tangible risk. They are not evidence about bodily mechanisms, biological categories, or a cause that determines behavior.",
-          "key": "instinct_boundary",
-          "title": "Use instinct language without mechanism claims"
+          "body_md": "Turning intentions into workable plans can protect a household or team from avoidable disruption. Preparing a backup, learning a useful skill and following through are valuable actions in their own right.\n\nThe proposed pattern becomes costly when every need has to be earned through performance. In the workshop example, you might quietly repair everything, refuse a manageable handover and miss lunch because asking for support would spoil the image of competence. The visible sequence is more useful than the label: a problem appears, you take ownership, help is available, you decline it, and fatigue or resentment grows.\n\nThat sequence also reveals a tension within the description. Attention to security does not necessarily mean good care of your own body. Someone trying to prove that they can provide may ignore rest or meals. This is a possible interpretation to check, not evidence of a hidden instinct whenever self-care is absent.",
+          "key": "reliability_and_cost",
+          "title": "Dependability helps until it makes needs difficult to acknowledge"
         },
         {
-          "body_md": "A person may downplay public ambition while tracking competence through uptime, savings, preparedness, or being the dependable one. That proposed countertype variation must be tested against real constraints rather than assumed.",
-          "key": "countertype_variation",
-          "title": "Allow less visible achievement presentation"
+          "body_md": "Debt, unstable income, caregiving and a role without backup can make dependable work necessary. There is no need to add a subtype explanation when those conditions adequately explain the effort. Frugality, anxiety and an operations job do not establish this subtype.\n\nLook at an ordinary period when resources and support are adequate. Does an acceptable result still feel insufficient because you did not personally prove your usefulness? Does receiving help feel like a reduction in your value, despite no practical penalty? Repeated examples would support exploring this particular interpretation; they would not establish a diagnosis.\n\nOther core interpretations deserve attention too. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) distinguish achievement-related recognition from concerns such as correctness or uncertainty. In your own records, ask whether the pressure is primarily “I must remain worthwhile,” “This must be right,” or “I need trustworthy protection against what could go wrong.” These can overlap; none is identified by one sentence.\n\nWeaken or withdraw the self-preservation Three explanation if the pressure reliably disappears when material constraints ease, if practical planning does not carry a self-worth judgment, or if repeated comparable choices instead center on group standing or a particular person's admiration. One relaxed day does not settle the question, but contrary evidence must be allowed to change it. Calling every mismatch concealed ambition or stronger repression would make the explanation impossible to test.",
+          "key": "limits_and_alternatives",
+          "title": "Distinguish self-worth pressure from genuine material demands"
         },
         {
-          "body_md": "Debt, unstable income, caregiving, operations work, migration, health access, and limited backup can make continuity rationally urgent. Compare periods where those constraints change before retaining subtype language.",
-          "key": "alternative_environment",
-          "title": "Test material constraints and role load"
+          "body_md": "Choose one low-stakes task that another willing person can safely handle. Agree on the required result and a fallback before handing it over. Keep essential care, income and safety responsibilities covered.\n\nBefore the handover, note what you predict: a practical problem, a loss of control, or a feeling that you will become less valuable. Afterwards, record what happened, what you actually did and whether the result met the agreed standard. If you redo acceptable work, identify the reason rather than automatically interpreting it as subtype evidence.\n\nA helpful experiment is to state one need plainly: “I can do this part; I need you to cover that part.” Support works best when it changes the workload, not when it merely praises how indispensable you are. If there is no reliable backup or refusal would carry a real penalty, improve the arrangement first. Do not manufacture insecurity to investigate personality.",
+          "key": "supported_handover",
+          "title": "Try a small handover without creating a real risk"
         },
         {
-          "body_md": "The hypothesis weakens when reliability drops once no one sees it, resource attention appears only during a temporary crisis, or the person readily accepts operational uncertainty while consistently pursuing visible rank instead.",
-          "key": "counterexample",
-          "title": "Use safe experimentation and visible recognition as tests"
-        },
-        {
-          "body_md": "Instrument-specific evidence does not establish universal subtypes. This page cannot predict financial outcomes, job performance, health, risk tolerance, or suitability for responsibility.",
-          "key": "evidence_boundary",
-          "title": "Keep matched observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose one credited deliverable and one unseen maintenance task with similar effort, plus a period when material risk changes.\n\nObservable signal: Record difficulty, consequence, ownership, visibility, resource exposure, error disclosure, and completion quality.\n\nPage-specific signal: Compare whether dependable output persists when public credit is removed but operational value stays constant.\n\nAlternative explanation: Compare workload, debt, caregiving, job design, migration, backup resources, and professional duty.\n\nReflection prompt: State whether continuity attention survives the strongest environmental explanation and identify the clearest disconfirming event.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare workload, debt, caregiving, job design, migration, backup resources, and professional duty.",
-            "context": "Choose one credited deliverable and one unseen maintenance task with similar effort, plus a period when material risk changes.",
-            "duration_days": 5,
-            "observable_signal": "Record difficulty, consequence, ownership, visibility, resource exposure, error disclosure, and completion quality.",
-            "page_specific_signal": "Compare whether dependable output persists when public credit is removed but operational value stays constant.",
-            "reflection_prompt": "State whether continuity attention survives the strongest environmental explanation and identify the clearest disconfirming event."
-          },
-          "title": "Observation exercise"
+          "body_md": "The traditional model includes all three instinctual concerns in a person; self-preservation is a proposed emphasis, not possession of one instinct and absence of the others. Wings describe a different layer: the possible influence of Type Two or Four on a Three. A second-highest test score cannot by itself establish either a wing or an instinct.\n\nIf you encounter the term countertype, treat it as a school-specific description of an unexpected outward style. Quietness does not prove a countertype, and the term cannot rescue an explanation that your observations repeatedly contradict.\n\nThe naming also varies by school. Narrative's one-to-one includes close partnerships and vitality; the Enneagram Institute's sexual/attraction emphasizes attraction and intensity. These accounts overlap without being identical, and neither is restricted to sex or romance. See the [Enneagram Institute's instinct model](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nThe [Hook review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity across 104 samples. That does not validate this subtype or FermatMind scoring. The 27-subtype scheme is a theoretical tradition, not a reproducible scientific diagnosis or an established neural mechanism.\n\nFor the underlying motivation, read [Type Three](/en/personality/enneagram/type-3). Compare [social Three](/en/personality/enneagram/type-3/instincts/social) and [one-to-one Three](/en/personality/enneagram/type-3/instincts/one-to-one) when a different area of life seems to carry the pressure.",
+          "key": "reading_the_model",
+          "title": "Use the model as a revisable explanation"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-3/instincts/self-preservation",
       "source_hash": "edf16aaa9ad7ba366305b254a9ab187aa98c7e4d34d962e0b02b196ac7878c4a",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Self-preservation Type Three is a traditional, evidence-limited hypothesis that achievement attention may appear through dependable output, material continuity, and reduced emphasis on public display. Reliability cannot establish subtype because workload, financial risk, caregiving, and operational roles can require the same pattern.",
-      "title": "Self-preservation Type Three: reliable output as a matched-comparison hypothesis"
+      "summary": "This traditional subtype description explores achievement directed toward material security and dependable competence. The useful question is whether providing and performing have become evidence of your personal worth, rather than whether you work hard or save money.",
+      "title": "Self-preservation Type Three: proving your worth by making life work"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "2417e18ec482704ea7b7d37b711cfa84cecdcbad68ee82a9b13829074dcb1f17"
+  "source_content_sha256": "67168023ccc1694b1705f66ab07d7c866531befe3016fab64f462e1c54e47b35"
 }

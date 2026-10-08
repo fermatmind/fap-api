@@ -23,79 +23,35 @@
       "entity_key": "2w1",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Professional codes, family values, community expectations, or religious commitments may explain principled care. The wing hypothesis needs Type Two connection attention plus repeated standards-shaped delivery and meaningful counterexamples.",
-          "question": "Does principled caregiving establish 2w1?"
+          "answer": "No. Family habits, role expectations, limited resources or difficulty asking can produce the same behavior. Compare core motives before considering whether principles and self-demands repeatedly modify giving. Acknowledging capacity and needs can be useful regardless of type.",
+          "question": "Does avoiding requests and taking everything on myself mean 2w1?"
         },
         {
-          "answer": "Hold the service task constant and observe what remains central. A 2w1 hypothesis keeps another person's need and connection in view; a One hypothesis may focus more directly on correctness, responsibility, and fixing the process.",
-          "question": "How does 2w1 differ from a One hypothesis?"
+          "answer": "A wing cannot rank selflessness, goodness or maturity. Both interpretations can include thoughtful support and unstated relational expectations. Examine the actual interaction and its effects rather than assigning moral value to the label.",
+          "question": "Is 2w1 more selfless than 2w3?"
         },
         {
-          "answer": "Standards that vanish around authority, help driven mainly by public approval, or service that continues without any recurring connection attention would weaken it. Formal duty and ethics training should be compared first.",
-          "question": "What weakens the responsible service hypothesis?"
+          "answer": "No. Connection can be expressed in many ways, and continued support may reflect care, a commitment or duty. Compare whether relational concerns repeatedly organize attention and choices, not whether someone asks for verbal gratitude. One occasion with or without thanks cannot settle the core or wing.",
+          "question": "Does helping without thanks rule out a Two core?"
         }
       ],
       "framework": "enneagram",
@@ -111,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "Enneagram overview",
+          "label": "Enneagram: nine patterns of motivation",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "Enneagram Type 2",
+          "label": "Type Two: care, connection and being needed",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "Enneagram Type 1",
+          "label": "Type One: standards, responsibility and improvement",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/wings/2w3",
-          "label": "2w3 wing",
+          "label": "2w3: expressing connection and contribution",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:2w3"
         }
@@ -169,47 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A 2w1 interpretation begins with Type Two attention to needs, then asks whether One-adjacent standards shape how help is delivered. Responsible conduct without recurring connection attention may be explained by ethics, profession, family rules, religious service, or learned discipline.",
+          "body_md": "In 2w1, Two names the core and One the adjacent wing. The [traditional Type Two description](https://www.enneagraminstitute.com/type-2/) emphasizes care, closeness, being loved and being needed. Considering this interpretation means examining how relational concerns repeatedly shape attention and decisions, rather than counting how many people you help.\n\nYou may readily notice a gap in someone's support and feel more connected while responding to it. When the helping ends, what may remain difficult is not the unfinished task but whether you still matter in the relationship. That is a question to explore, not a claim that every act of giving contains a bargain.\n\nA One-related modifier may introduce requirements for the support: it should be reliable, fair and consistent with your principles, rather than merely comforting in the moment. You may hesitate to ask directly for something while trying to express care through conscientious commitments. Wanting connection and wanting to be a responsible giver can pull on you together. Responsibility without recurring relational attention is not enough to establish 2w1.",
           "key": "core_first_modifier",
-          "title": "Keep needs and connection at the core"
+          "title": "Connection is the core; principles shape the giving"
         },
         {
-          "body_md": "A sibling comparison contrasts 2w1 measured, principled service with 2w3 visible effectiveness and adaptation. Compared with One, the proposed core remains attention to another person's need and the relationship, rather than correction of the standard itself.",
-          "key": "sibling_core_comparison",
-          "title": "Contrast 2w1 with 2w3 and One"
-        },
-        {
-          "body_md": "Useful situations include a recipient requesting another method, a volunteer role with explicit limits, and help that receives no thanks. Record whether the standard protects consent and quality or becomes a reason to override the person receiving help.",
+          "body_md": "Imagine offering to handle a routine task for an overwhelmed friend. You explain the time and scope you can provide. Later, your friend prefers another method and no longer needs you to handle it. This is an original reflection scenario, not a prediction about people described as 2w1.\n\nPrinciples can make support dependable: you avoid careless promises, confirm the need, respect privacy and complete the agreement. Responsibility then gives the recipient something they can rely on without taking away their choice.\n\nOveruse can turn the demand inward: because I care, I must keep going; admitting tiredness or wanting support would seem insufficiently selfless. It can also turn outward: my way is responsible, so you should accept it. The first can exceed your capacity; the second can make an offer hard to decline. Resentment may accumulate around expectations that were never stated, even without an explicit demand for thanks.\n\nAsk what the principle is doing. Is it protecting choices and commitments, or requiring you to continue and the other person to accept? The latter is an interaction to address, not proof of a wing.",
           "key": "observable_situations",
-          "title": "Observe standards after a different preference"
+          "title": "When reliable support becomes pressure to keep giving"
         },
         {
-          "body_md": "A 2w1 counterexample weakens a responsible service hypothesis when standards disappear around status, help changes mainly to gain approval, or duty remains while connection attention does not recur. Those cases invite role, One, Three, or reputation explanations.",
-          "key": "counterexample",
-          "title": "Use flexible, recognition-driven help as a test"
+          "body_md": "Keep the friend's need for support constant. All three interpretations can be consistent with useful assistance.\n\n**Compared with 2w3:** both require a Two core. A 2w1 modifier may emphasize whether giving is principled and responsible, favoring a clear limit over a careless promise. A 2w3 modifier may emphasize adapting communication and organization so the support works, is well received and conveys the contribution. A 2w1 can organize an event, and a 2w3 can give carefully or anonymously. Public versus private help is not a typing rule.\n\n**Compared with the reverse combination, 1w2:** suppose your friend lets someone else take over and the task is handled well. What still concerns you? Recurring attention to your place in the relationship invites a Two interpretation. Recurring attention to whether the task was handled properly invites a One interpretation. Then consider a close relationship in which the task is not being handled responsibly. Which concern most consistently directs your choices?\n\nIn 2w1, principles modify connection-oriented giving. In 1w2, relational involvement modifies a standards-oriented approach. Either person can respect limits or feel disappointed. One refusal, one missing thank-you or an occupation does not settle the distinction.",
+          "key": "sibling_core_comparison",
+          "title": "2w1, 2w3 and 1w2: where is the priority?"
         },
         {
-          "body_md": "Nurses, teachers, caseworkers, volunteers, and family caregivers may follow service standards because the role requires them. Compare behavior outside the role and after authority, risk, and accountability change before retaining the wing hypothesis.",
+          "body_md": "An institution may require service limits and fairness. A family may have an established care arrangement. You may simply understand that making decisions for someone without consent creates problems. Responsible support does not belong exclusively to any wing.\n\nCompare everyday relationships where you are not supervised, have no formal care duty and can decline. Do you still tend to maintain connection through giving while using principles to shape your commitments? If conscientiousness follows the role, that explanation may be sufficient. If connection recurs but the standards come only from one institution, the One modifier may remain unclear.\n\nExpressing a need, receiving support or declining because you lack capacity does not automatically contradict 2w1. Changing a method does not necessarily abandon a principle. Distinguish the value you want to protect from one particular way of protecting it.",
           "key": "alternative_explanations",
-          "title": "Test training and institutional duty"
+          "title": "Care duties and rules may already explain the behavior"
         },
         {
-          "body_md": "Wing research is sparse, so 2w1 remains a secondary observation hypothesis rather than an independent category or measure of goodness. It assigns no moral rank, health status, fixed ability, or outcome conclusion.",
-          "key": "wing_boundary",
-          "title": "Keep responsible service evidence limited"
+          "body_md": "**Revisit the core:** across freely chosen situations, helping mainly follows correctness or duty, and your relationship position or being needed does not repeatedly organize your attention once the task is complete. Compare One, role responsibility or another explanation rather than retaining Two because you seem considerate.\n\n**Leave the wing undecided:** relational concerns recur, but standards shape the giving only where a rule requires them. You can retain Two as a candidate without selecting a One wing.\n\n**Allow flexibility:** accepting an equally workable method, staying connected after a declined offer or stopping because you need rest may show boundaries and adaptability. None automatically disproves the core or wing.\n\n**Investigate exceptions:** inconsistent principles across recipients or a strong response to public recognition deserves attention. Examine power, reciprocity, real risks and relational expectations before jumping to 2w3 or another type. Ask why the principle changed and whether the change recurs in comparable situations.",
+          "key": "counterexample",
+          "title": "Which observations should change the interpretation?"
         },
         {
-          "body_md": "Duration: 4\n\nContext: Choose one formal service task, one informal offer, and one declined suggestion where a quality standard and consent are visible.\n\nObservable signal: Record the need noticed, standard named, permission requested, method chosen, and response when the recipient asks for another approach.\n\nPage-specific signal: Distinguish a standard that protects care quality from a standard used to override preference or secure appreciation.\n\nAlternative explanation: Compare professional codes, family rules, religious or civic duty, risk management, authority, and reputation with the 2w1 hypothesis.\n\nReflection prompt: Identify the event where duty explains the behavior without connection attention and state how much the wing hypothesis should weaken.",
+          "body_md": "Before your next offer, ask what the other person actually wants. Then answer three separate questions: what can I provide, what limits or principles must I explain, and what do I want from this relationship? The third might be company, contact or understanding. It does not have to be hidden inside a service commitment.\n\nOffer a specific choice: I can help you organize this for half an hour today, or I can just listen. Which would you prefer? If they want a different approach, check whether it still meets the need. If you cannot provide it, explain the limit rather than insisting that you know the responsible solution.\n\nFinish the agreed portion on time. If you want contact, arrange a separate conversation; if you need support, make a specific request. Extending the helping does not have to be your only invitation to connection. Do not deliberately withdraw support to test whether someone cares.\n\nAfterward, check whether the commitment was clear and fulfilled, whether the recipient could decline or change the method, and whether you expressed your own need. If resentment remains, identify an unstated expectation or a burden beyond your capacity. This practice is for adjusting the interaction, not proving 2w1.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare professional codes, family rules, religious or civic duty, risk management, authority, and reputation with the 2w1 hypothesis.",
-            "context": "Choose one formal service task, one informal offer, and one declined suggestion where a quality standard and consent are visible.",
-            "duration_days": 4,
-            "observable_signal": "Record the need noticed, standard named, permission requested, method chosen, and response when the recipient asks for another approach.",
-            "page_specific_signal": "Distinguish a standard that protects care quality from a standard used to override preference or secure appreciation.",
-            "reflection_prompt": "Identify the event where duty explains the behavior without connection attention and state how much the wing hypothesis should weaken."
-          },
-          "title": "Observation exercise"
+          "title": "State the support and the relational need separately"
+        },
+        {
+          "body_md": "The [abstract of Hook and colleagues' systematic review](https://doi.org/10.1002/jclp.23097) reports little research supporting wings. Keep 2w1 as an evidence-limited reflection hypothesis. These scenarios and practices are not validated typing procedures or evidence for FermatMind's assessment validity.\n\nA wing is not an equal mixture or an automatic consequence of a second-highest score. 2w1 does not mean kinder, more mature or better suited to care work. It cannot establish health status or predict relationship outcomes. An unclear wing can remain undecided.\n\nIf you are unsure why you help, read [Type Two: care, connection and being needed](/en/personality/enneagram/type-2). To compare another way of expressing support, read [2w3: expressing connection and contribution](/en/personality/enneagram/wings/2w3). If standards and responsibility repeatedly matter more than your relational position, revisit the existing [Type One: standards, responsibility and improvement](/en/personality/enneagram/type-1) page.",
+          "key": "wing_boundary",
+          "title": "Responsible giving is not a health level or validity claim"
         }
       ],
       "seo": {
@@ -220,8 +168,8 @@
       "slug": "enneagram/wings/2w1",
       "source_hash": "cc068d74da322b0f4f853081f8a8abd2a9dc0f90ba171804c727ef651e8a9eca",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "2w1 is an evidence-limited wing hypothesis: Type Two attention to needs and connection remains central, while Type One may add standards, restraint, and responsible service. Responsible help alone does not confirm 2w1 because duty, ethics training, and formal care roles can look the same.",
-      "title": "2w1: Type 2 Core, 1 Wing, and Common Misreads"
+      "summary": "2w1 keeps Type Two concerns about care and connection at the core. A possible One wing may add principles, restraint and responsibility to the way support is offered. Disciplined or apparently selfless behavior cannot establish the wing; the recipient's choices and the giver's own needs also matter.",
+      "title": "2w1: Giving responsibly while acknowledging your own needs"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "77f11fbccd66c0b7d67411609663bec72f54430a44c14db5977ac28e884bd7d2"
+  "source_content_sha256": "a79eef2f2931dc228e15679b2eed97c7ce9b382b1a8ec74ea6fad3a4ffc49efb"
 }

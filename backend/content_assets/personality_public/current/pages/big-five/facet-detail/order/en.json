@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/order",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "order",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. A personality preference is not a diagnosis. Clinical assessment uses symptoms, distress, impairment, duration, and other evidence.",
-          "question": "Is strong Order the same as obsessive-compulsive disorder?"
+          "answer": "No. Check whether the person wanted a different arrangement and had the time, space, and authority to create it. Repeated choices with a real opportunity are more informative than one crowded or unusually busy week, and the interpretation should remain limited to the settings observed.",
+          "question": "Does a messy workspace establish low Order?"
         },
         {
-          "answer": "No. Responsibility and results require direct evidence.",
-          "question": "Does weaker Order mean someone is irresponsible?"
+          "answer": "It does not establish performance. Check accuracy, completeness, usability, and the cost of maintaining the arrangement. A particular system may help a task, but that result cannot be inferred from the preference or generalized to every task.",
+          "question": "Does stronger Order mean better performance?"
         },
         {
-          "answer": "Yes. Structure and idea generation can combine in many ways.",
-          "question": "Can Order coexist with creativity?"
+          "answer": "Yes. A procedure may be required, learned, or useful for a particular outcome. Look separately at whether it works and whether the person chooses comparable structure when there is no requirement.",
+          "question": "Can someone follow a systematic procedure without liking order?"
         },
         {
-          "answer": "Agree on shared outcomes, minimum standards, ownership, and zones where personal systems can differ.",
-          "question": "How can people with different Order preferences live or work together?"
+          "answer": "Identify what everyone needs to use, who maintains it, and which failures create work for others. Agree on a sufficient shared standard and leave room for different personal arrangements. Review the agreement against actual use rather than appearance alone.",
+          "question": "How should people with different preferences share a space?"
         },
         {
-          "answer": "Visible habits may change with roles and constraints. This page does not predict an individual score trajectory.",
-          "question": "Can Order change across life stages?"
+          "answer": "No. A preference for organization is not a diagnostic assessment and cannot exclude a disorder. If recurring thoughts or behaviors feel difficult to control and persistently cause distress or interfere with daily life, seek an assessment from a qualified mental health professional.",
+          "question": "Can an Order score diagnose or rule out OCD?"
+        },
+        {
+          "answer": "The immediate finding is that a changed method helped a particular problem. Keep deliberate trials separate from ordinary behavior. Better retrieval or a tidier surface over a short period cannot establish a stable trait or score change.",
+          "question": "If a new filing system helps, has my personality changed?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Order concerns preference for organized spaces, predictable placement, and explicit structure. It describes how much arrangement helps a person function—not whether they are responsible, clean, creative, healthy, or morally better.\n\n“Order within Conscientiousness: preference for structure and organization” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A shared folder may be carefully arranged because its owner likes consistent categories, because a client requires them, or because someone else maintains the folder. The visible result does not tell you which explanation applies. Order concerns the preference for structure and the tendency to maintain it when a person has some choice.\n\nIn this site's NEO/IPIP-NEO vocabulary, Order is a facet of [Conscientiousness](/en/personality/big-five/conscientiousness). The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) pairs IPIP Orderliness with NEO Order as similar constructs. That relationship does not make scores interchangeable. A guide to the facet also does not establish that a particular assessment measured it; a domain score alone cannot supply an unreported Order score.",
+          "heading": "An organized result can have several explanations",
           "key": "section-01-5b444cd5a7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may use lists, categories, routines, and designated places to reduce friction. A weaker tendency may tolerate flexible placement, improvise sequences, or maintain a system that looks irregular to others. Visible tidiness is only one expression.",
-          "heading": "Precise Definition",
+          "body": "Preference asks how much you want an orderly arrangement. Procedure asks how you carry out a task. Quality asks whether the result meets its purpose. A procedure can be useful without being personally appealing, and a pleasing arrangement can still contain mistakes.\n\nConsider a person preparing materials for a workshop. They might check every item against a packing list because missing equipment would disrupt the event, while leaving their personal notes loosely grouped. Another person might enjoy making a symmetrical display but forget a required item. To assess the work, check completeness and usability. To understand the preference, ask what arrangement the person chooses when the task does not dictate one.\n\n[Self-Discipline](/en/personality/big-five/facets/self-discipline) concerns starting and sustaining action; [Dutifulness](/en/personality/big-five/facets/dutifulness) concerns the weight of obligations; [Deliberation](/en/personality/big-five/facets/deliberation) concerns considering an action before taking it. One well-organized folder cannot establish any of these other tendencies.",
+          "heading": "Preference, procedure, and quality answer different questions",
           "key": "section-02-69d2035fb9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Order belongs to [Conscientiousness](/en/personality/big-five/conscientiousness), where structure can support planning and follow-through.",
-          "heading": "Parent Domain",
+          "body": "A stronger tendency may show up in choosing consistent labels, designated places, or an advance arrangement of materials. A weaker tendency may involve less investment in a stable arrangement, acceptance of temporary placement, or a preference to begin without extensive setup.\n\nNeither description guarantees a useful system. Designated places help a particular task only if they make retrieval or coordination easier at an acceptable maintenance cost. A less structured arrangement is workable only if the people using it can actually use it; being untroubled by disorder does not establish adaptability or creativity.\n\nAn intermediate position may reflect a moderate preference, differences between settings, or uncertainty in responses. It is not a certificate of balance. These positions describe a continuum rather than separate kinds of people.",
+          "heading": "Reading stronger, weaker, and intermediate tendencies",
           "key": "section-03-4f0621d9d6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Order versus Dutifulness:** [Dutifulness](/en/personality/big-five/facets/dutifulness) concerns obligation; an organized system can serve or ignore commitments.\n- **Order versus Self-Discipline:** [Self-Discipline](/en/personality/big-five/facets/self-discipline) concerns persistence, even in a messy environment.\n- **Order versus Deliberation:** [Deliberation](/en/personality/big-five/facets/deliberation) concerns considering consequences before action, not arranging materials.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine an amateur photographer who sorts images by event and keeps several unfinished selections together. A collaborator wants every image placed immediately into a year-and-month hierarchy. Their disagreement may involve Order, but it may also involve different retrieval needs: one searches by story, the other by date.\n\nBefore judging either person, try to identify the failure. Can both find the current selection? Are duplicate versions causing mistakes? Is one person repeatedly reconstructing the other's arrangement? An agreed index or naming rule for shared work may solve the problem while leaving private working areas different.\n\nThe useful distinction is between a personal preference and a dependency others must rely on. Consistent organization can impose unnecessary work if it serves only one person's aesthetic standard. An informal arrangement can impose unnecessary work if other people cannot locate what they need. Measure that effect directly rather than assigning either side a personality advantage.",
+          "heading": "When personal organization becomes a shared requirement",
           "key": "section-04-23ddf1ad30",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Order may appear as labeled storage, advance agendas, stable routines, or discomfort when systems change without notice. Weaker Order may appear as flexible sequencing, tolerance for visual complexity, or relying on memory and retrieval rather than placement. Shared-space rules and job demands can mask preference.",
-          "heading": "Behavioral Cues",
+          "body": "Suppose someone describes themselves as unable to work unless everything is ordered. During an ordinary collaboration, they have time and permission to reorganize the materials, but naturally leave the temporary arrangement in place and complete the work. Record that event. It limits the claim that order is necessary in every setting, even if the person still prefers it in others.\n\nConversely, a person who calls themselves generally indifferent to organization may repeatedly sort a personally meaningful collection without being asked. That is a reason to narrow the description to particular materials or settings, rather than dismissing the behavior as an exception that does not count.\n\nA crowded home during renovations is different: there may be no practical opportunity to maintain the preferred arrangement. Disorder under that constraint is not a clean counterexample to a strong preference. Nor does an externally maintained, tidy workplace establish a preference that has never had to be expressed.",
+          "heading": "What a natural counterexample can reveal",
           "key": "section-05-02218b3335",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A person may organize client work precisely but keep a relaxed home, or maintain a tidy desk while improvising time. Caregiving, small housing, workload, disability, and organizational culture affect visible order. Clinical symptoms cannot be inferred from preference for structure.",
-          "heading": "Contextual Differences",
+          "body": "Start with a small hypothesis, such as: 'When I can choose, I usually restore my personal materials to a consistent arrangement.' For ordinary occasions when you use those materials, note the available space and time, any external requirements, what you wanted to do, what you actually did, and whether the arrangement later helped or obstructed use.\n\nRecord an opportunity followed by organization, an opportunity without organization, and the absence of an opportunity as separate events. Include spontaneous departures from your usual pattern. If you have not encountered a counterexample, record that limited search; do not treat it as proof that none exists.\n\nRepeated choices across reasonably comparable, unconstrained occasions can justify keeping a provisional description. A pattern limited to shared handoffs or a specific collection calls for a narrower description. If all the observations occur under deadlines, limited space, or someone else's system, suspend the trait interpretation. These notes can guide a practical discussion, but they are not a personality validation or a substitute for a measured facet score.",
+          "heading": "Keep an observation that can be revised",
           "key": "section-06-4d814ea5c9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Creating repeatable locations and procedures.\n- Preparing materials before work begins.\n- Detecting missing items or sequence drift quickly.\n- Spending too long arranging before acting.\n- Feeling unnecessary strain when others alter a system.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "If the recurring difficulty is retrieving current documents, try one simple location for current versions while preserving the existing files. Note retrieval failures, time spent searching, time spent maintaining the arrangement, and whether a collaborator can use it. Keep it if it reduces the identified difficulty; simplify or undo it if maintenance grows or others become more confused.\n\nIf preparation is repeatedly delaying the work, set a modest limit on optional setup and begin once the materials are usable. Keep all required checks and shared agreements. There is no need to manufacture disorder or abandon necessary procedures.\n\nLabel these occasions as deliberate changes to a method. They do not belong in the same category as spontaneous choices under ordinary conditions. An intervention that improves retrieval tells you about that intervention in that setting, not whether your underlying Order has increased or decreased.",
+          "heading": "Test a working arrangement, not a personality claim",
           "key": "section-07-40a94a25aa",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Finding items through flexible or personal cues.\n- Rearranging plans as information changes.\n- Starting work without first creating a full system.\n- Losing time to preventable search or forgotten details.\n- Resisting structure that would reduce recurring friction.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "If the issue is a good plan that never gets started, read [Self-Discipline](/en/personality/big-five/facets/self-discipline). If it is a commitment that still feels binding despite a disorganized workspace, read [Dutifulness](/en/personality/big-five/facets/dutifulness). For the relationship between demanding standards and arrangement, see [Achievement Striving](/en/personality/big-five/facets/achievement-striving). The [Conscientiousness guide](/en/personality/big-five/conscientiousness) and [30-facet guide](/en/personality/big-five/facets) explain the wider context.\n\nThe [IPIP item key](https://ipip.ori.org/newNEOFacetsKey.htm) supplies a vocabulary reference, not an ability test. Facet structures also differ between instruments: the [BFI-2 author page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes fifteen facets across five domains. Before reading any actual result, check the instrument, version, measured facet, and score format. A score on a 0–100 scale is not automatically a percentile, and neither format establishes the quality of someone's work.",
+          "heading": "Use the next guide for the question you actually have",
           "key": "section-08-2825a514dd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Order can reduce search cost and support handoffs. Possible costs include rigidity, setup overhead, or conflict over shared standards. Weaker Order can support improvisation and low setup cost; possible costs include missed items and coordination friction. Neither level predicts responsibility or output quality.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-348779779e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A designer keeps a meticulously named file system but generates concepts through loose sketches. Structure protects the production pipeline while creativity remains exploratory. Order and originality are not opposites.",
-          "heading": "An Original Case",
-          "key": "section-10-7eb0ca20b6",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A nurse’s home desk looks chaotic, yet medication checks and shift handoffs are exact because the clinical environment uses strong external systems. Low visible household order does not prove irresponsibility.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-b4adb50995",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which kinds of disorder create real friction versus mere discomfort?\n2. How much setup helps before it delays useful work?\n3. Are your systems legible to collaborators?\n4. Where do you rely on memory instead of an external structure?\n5. How do you react when someone changes a shared arrangement?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-a91385839f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one recurring source of search or delay and assign it a simple location or checklist for seven days. If you already organize heavily, cap setup time and begin the task when the limit expires. Measure friction rather than aesthetic neatness.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-1fcfb01872",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Competence](/en/personality/big-five/facets/competence), [Dutifulness](/en/personality/big-five/facets/dutifulness), [Achievement Striving](/en/personality/big-five/facets/achievement-striving), [Self-Discipline](/en/personality/big-five/facets/self-discipline), [Deliberation](/en/personality/big-five/facets/deliberation).",
-          "heading": "Continue Reading",
-          "key": "section-14-2a3583988c",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Order concerns the appeal of organized surroundings and arrangements. Separate that preference from the procedures a task requires, the resources available, and the quality of the finished work.",
+        "title": "Order: Preference for Structure, Beyond a Tidy Surface"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/order",
-      "source_hash": "dc726370c0b781e40b16e4bb90c8ec37d38e3994966698be5557d8b070a272d3",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Order concerns preference for organization, predictable placement, and structured routines. It is not obsessive-compulsive disorder, responsibility, cleanliness, or moral superiority.",
-      "title": "Order: Preference for Structure and Organization"
+      "source_hash": "174333dd4916b4d2ea701a8303d888a756ab3c349c6988a2910e5845692e28f9",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Order concerns the appeal of organized surroundings and arrangements. Separate that preference from the procedures a task requires, the resources available, and the quality of the finished work.",
+      "title": "Order: Preference for Structure, Beyond a Tidy Surface"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "C2-order-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "C2-order-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "C2-order-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "C2-order-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4cca59429922e2d0dec230db4c2bf9da50e29ab7f89af1bb1d34300018963609"
+  "source_content_sha256": "3193dd021aa5e12380ad21a58e1beb40e4aed2ff02a62f447be01f7505e26c65"
 }

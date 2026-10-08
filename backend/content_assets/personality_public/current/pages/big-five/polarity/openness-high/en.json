@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/openness-high",
@@ -20,40 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "openness-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        },
-        {
-          "citation_label": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
-          "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
-          "source_id": "S4"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Job experience depends on task design, autonomy, skill, purpose, and other tendencies. A stable role can still contain deep learning or controlled improvement.",
-          "question": "Does high Openness mean I am unsuited to stable, repetitive work?"
+          "answer": "Yes. Enjoying unfamiliar ideas can coexist with a preference for predictable work arrangements. Look at the actual tasks, opportunities for interest, skills, and your experience of the role. The range cannot decide whether a job suits you.",
+          "question": "Can I be highly open and enjoy a predictable job?"
         },
         {
-          "answer": "No. Novelty seeking may contribute to switching, but follow-through also depends on Conscientiousness, motivation, workload, and systems.",
-          "question": "Is high Openness the same as constantly losing interest?"
+          "answer": "Interest and output are different. Knowledge, practice, resources, and task requirements still need examining. Your interest may also appear more in appreciation or imagination than in making things. A high range is not a creativity score.",
+          "question": "Why do I score high but struggle to produce original work?"
         },
         {
-          "answer": "This page does not support that individual inference. Openness and Neuroticism are separate domains, and one range cannot establish another.",
-          "question": "Are highly open people more likely to be anxious?"
+          "answer": "It does not establish the cause. Examine what happened when you stopped: a competing interest, unclear goal, difficult step, lack of feedback, or insufficient time. Exploration can be one possibility without explaining every unfinished project.",
+          "question": "Does high Openness explain why I leave projects unfinished?"
         },
         {
-          "answer": "Group-average longitudinal findings cannot predict an individual direction or fixed age point ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)).",
-          "question": "Does Openness decline with age?"
+          "answer": "No. An Openness result cannot establish an anxiety state or a diagnosis. If anxiety is persistently distressing or interfering with daily life, seek qualified professional help rather than interpreting it through this range.",
+          "question": "Does high Openness indicate anxiety?"
         },
         {
-          "answer": "You can practice specific behaviors such as trying a reversible alternative or seeking a new perspective. This page does not promise a score change or intervention effect.",
-          "question": "Can I deliberately increase my Openness?"
+          "answer": "A limit changes the conditions of one task. Assess whether it helped you finish without losing necessary information. It does not establish a change in personality or promise a different test score.",
+          "question": "Will limiting research make me less open?"
         }
       ],
       "framework": "big_five",
@@ -89,185 +76,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "A high Openness range may suggest an active tendency to approach unfamiliar ideas, images, experiences, and ways of framing a problem. It describes probability, not destiny. The useful question is where exploration improves learning and where it creates excess options, unfinished experiments, or avoidable disruption.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “High Openness to Experience: active curiosity, exploration, and approach to new experience” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nA meta-analysis of longitudinal research reported group-average change in some personality traits across the life course, but it cannot predict how one person, one specific facet, or a fixed age point will change ([S4](https://pubmed.ncbi.nlm.nih.gov/16435954/)).\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "An unfamiliar explanation may hold your attention even before you know what it is useful for. You might enjoy considering an unusual interpretation, imagining alternatives, or spending time with experiences that do not immediately make sense. A high Openness result offers a broad description of that interest. It does not require you to welcome every change or abandon familiar routines.\n\nHigh, middle, and low are descriptions of positions along a continuum, not three separate kinds of people. Read the result alongside the questionnaire version, language, score format, and explanation of its range labels. A score out of 100 is not automatically a percentile; a percentile needs an identified reference population. This guide supplies no cutoffs or score conversion.\n\nIf the description feels wrong, ask what period and role you had in mind while answering, and whether some items were unclear. A single episode cannot settle a broad tendency. Crossing a label boundary is also not enough to establish a meaningful change in who you are.",
+          "heading": "A stronger pull toward exploration",
           "key": "section-01-d44239bfad",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "The range suggests that novelty and ambiguity may attract attention rather than immediately feel like noise. You may enjoy exploring a concept before its use is proven, vary routines to discover alternatives, or notice aesthetic and emotional detail. The six [Openness facets](/en/personality/big-five/openness) can still differ substantially.",
-          "heading": "What This Range Specifically Means",
+          "body": "Enjoying unfamiliar ideas does not establish that you can evaluate them accurately. Wanting to make something new does not establish the skill to produce it. An Openness range cannot grade intelligence, artistic ability, moral judgment, political identity, or job suitability, and it cannot supply your scores on the other Big Five domains.\n\nThis site's public explanations use NEO/IPIP-NEO terms: Imagination, Aesthetics, Feelings, Actions, Ideas, and Values. The [official IPIP item material](https://ipip.ori.org/newNEOFacetsKey.htm) illustrates different content within this domain. Those terms help you ask more precise questions; a high overall result does not establish that every facet is high or that your questionnaire measures each one separately.\n\nFor example, an appetite for abstract discussion and a preference for changing everyday activities need separate observations. Feelings is not a certificate of emotional insight, and Values is not a ranking of whose beliefs are better.",
+          "heading": "Interest does not establish skill",
           "key": "section-02-bcf19d7064",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer intelligence, artistic talent, political identity, education, sophistication, or superior judgment. High Openness does not guarantee original output. Ideas become useful through knowledge, feedback, selection, and execution. The score also cannot decide whether a stable or repetitive job will be satisfying.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Imagine preparing a short audio piece for a local history group. While checking one account of an event, you discover an unfamiliar interpretation and start following its references. You enjoy the investigation. The recording deadline, however, has not moved.\n\nTwo questions now need separate answers. Did you voluntarily explore an additional interpretation because it interested you? Did that exploration improve the piece you needed to finish? The first concerns a pattern of interest. The second needs evidence from the task. Opening more sources does not automatically produce a better account.\n\nA detour might also reflect uncertainty about the brief, difficulty finding a usable source, or worry about making a mistake. Record your own reason rather than inferring curiosity from the number of tabs you opened. If exploration matters to you, tell a collaborator what you want to investigate and when you will return to a decision. That makes the need discussable.",
+          "heading": "When an interesting detour becomes a competing task",
           "key": "section-03-eca1f4e1d7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include reading outside an immediate need, generating several approaches, enjoying metaphor or theory, seeking unfamiliar environments, and revising an assumption after new evidence. The same person may be exploratory in ideas and conservative with money, food, or relationships.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Suppose your working hypothesis is: “When I prepare a low-stakes piece and can choose freely, I usually investigate an interpretation beyond my initial plan.” On another occasion, you have enough time and an accessible alternative, but naturally stay with your first account. You feel satisfied rather than deprived. That is a relevant exception to this particular hypothesis.\n\nA compulsory format with no room for alternatives is a lack of opportunity, not the same exception. Deliberately setting a rule to use only your first source changes the conditions; it is a practice attempt, not an unprompted choice.\n\nOne exception is compatible with “usually.” Repeated comparable exceptions invite a narrower account: perhaps the pull appears mainly when the subject is unfamiliar, or mainly in leisure reading. High Openness does not imply that you seek novelty consistently in every area of life.",
+          "heading": "A natural exception is informative",
           "key": "section-04-e8fb693605",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "In learning, exploration may widen connections. At work, it may support reframing uncertain problems. In relationships, it may appear as curiosity about another viewpoint. Under deadline pressure, the same tendency may produce too many options. Expertise and psychological safety often determine whether novelty feels productive.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Keep the hypothesis tied to one behavior: voluntarily investigating an additional interpretation while preparing a low-stakes piece. For a few naturally occurring opportunities, note whether you could realistically choose, whether you explored, what drew you to it, and whether it changed your final decision.\n\nDistinguish exploration that occurred naturally, a genuine opportunity where it did not occur, and occasions where the alternative was unavailable or the brief allowed no choice. Keep any prompted exploration or deliberately imposed limit in a separate category. Describe interest, worry, obligation, or boredom in your own words; the behavior cannot tell you which feeling was present.\n\nRetain the situation-specific hypothesis provisionally if it recurs across comparable natural opportunities. Narrow it if it applies only to one subject or setting. Set it aside if opportunities are too few, motives remain unclear, or repeated comparable observations do not fit. Not finding an exception is not proof, especially when there was little opportunity to encounter one. These notes help with decisions; they do not validate a personality score.",
+          "heading": "Observe one pattern before trying to change it",
           "key": "section-05-a3bd1186f4",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include option generation, tolerance for ambiguity, imaginative simulation, aesthetic attention, and willingness to reconsider a model. These are tendencies, not verified abilities. They help most when the problem genuinely needs discovery and when evaluation criteria eventually narrow the field.",
-          "heading": "Possible Strengths",
+          "body": "If expanding the research is repeatedly crowding out the recording, write down what the finished piece must accomplish. Choose a research window you can afford, then ask whether each new source changes something necessary. Put interesting material that does not serve this brief into a later-reading list.\n\nLabel this as an intervention. Check completion, missing information, and your experience of the limit. Keep it if it helps; loosen it if the task needed more investigation; clarify the brief if the problem was uncertainty about the goal. A successful attempt shows that a particular working arrangement helped, not that your Openness changed.\n\nExploration without an output can also be worthwhile to you. A personal interest does not need to become a productivity project.",
+          "heading": "Try an endpoint when there is a real cost",
           "key": "section-06-bbdf284a63",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Costs can include novelty chasing, overcomplication, boredom with maintenance, difficulty committing, or changing a system before others can adapt. Exploration may also become avoidance if opening another possibility delays a decision whose criteria are already clear.",
-          "heading": "Possible Costs",
+          "body": "Within the same scoring interpretation, a higher range emphasizes a stronger interest in exploration and a lower range a greater preference for familiar experience. A middle result does not automatically establish balanced switching between them. None of these positions guarantees ability, performance, or a clinical condition.\n\nRead [Openness to Experience](/en/personality/big-five/openness) for the broader domain, or the [30-facet guide](/en/personality/big-five/facets) when different kinds of interest need separating. Check whether your actual report includes the facets you want to discuss. The [mid-range](/en/personality/big-five/openness-mid) and [low-range](/en/personality/big-five/openness-low) pages offer comparisons of preference, not alternative identities to adopt.",
+          "heading": "What to compare next",
           "key": "section-07-b52450bb71",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [mid-range Openness](/en/personality/big-five/openness-mid), the pull toward exploration may appear more consistently across settings. Compared with [low Openness](/en/personality/big-five/openness-low), unfamiliarity may carry more intrinsic appeal. These are relative descriptions within one instrument, not universal thresholds.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-3f96d5a216",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A team asks for one onboarding improvement. You quickly map several user journeys, compare examples from unrelated products, and propose three prototypes. This broadens the solution space. The trade-off appears when the team needs one version by Friday: choosing criteria and stopping exploration become the essential counter-skills.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-614303a52e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score high overall yet insist on a familiar method in a safety-critical task. That is not hypocrisy. Consequences, expertise, and accountability can appropriately override novelty preference. One counterexample does not invalidate the range; repeated counterexamples invite a facet-level review.",
-          "heading": "A Counterexample",
-          "key": "section-10-12a4e79108",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- When did exploring another option materially improve the result?\n- When did novelty delay a decision that was already good enough?\n- Which settings invite curiosity, and which make you prefer certainty?\n- How do you decide that exploration is complete?\n- Which facet—Imagination, Aesthetics, Feelings, Actions, Ideas, or Values—appears strongest?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-9497a1857f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one reversible decision. Spend fifteen minutes generating exactly three alternatives, then select one using two written criteria. Record whether the limit improved focus without reducing insight. This tests a behavior; it does not attempt to change a score or prove a trait.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-8d6f8696d7",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness), compare [mid-range Openness](/en/personality/big-five/openness-mid) and [low Openness](/en/personality/big-five/openness-low), or inspect the [30-facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-335ee78b12",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Higher Openness can suggest a stronger interest in unfamiliar experiences and ways of thinking. It does not establish creativity, adaptability, or performance. The useful question is how exploration fits the situation you are actually in.",
+        "title": "High Openness: Making Room for Exploration and Knowing When to Choose"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/openness-high",
-      "source_hash": "0cbf6d31580dba3fb6102eb5bbe621d261905458d392ff0efcdd94803d73a05e",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "A high Openness range may suggest active approach toward unfamiliar ideas and experiences. It is not intelligence, ability, a creative guarantee, or a fixed personality type.",
-      "title": "High Openness to Experience: Curiosity and Active Exploration"
+      "source_hash": "82a222013aa24e61223fd93b6552b0dff8e786e9ab16246baba16c88a5feae05",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Higher Openness can suggest a stronger interest in unfamiliar experiences and ways of thinking. It does not establish creativity, adaptability, or performance. The useful question is how exploration fits the situation you are actually in.",
+      "title": "High Openness: Making Room for Exploration and Knowing When to Choose"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "openness-high-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, ability, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-high-longitudinal_change-2",
-            "limitation": "Group averages do not predict an individual trajectory or intervention effect.",
-            "source_ids": [
-              "S4"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-high-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "openness-high-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "openness-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          },
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Roberts, B. W.; Walton, K. E.; Viechtbauer, W.",
-            "claim_ids": [
-              "openness-high-longitudinal_change-2"
-            ],
-            "doi": "10.1037/0033-2909.132.1.1",
-            "id": "S4",
-            "limitation": "PMID, DOI, title, and authors agree. Supports group mean-level change only, not individual prediction or a fixed retest interval.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/16435954/",
-            "source_type": "peer_reviewed_research",
-            "title": "Patterns of mean-level change in personality traits across the life course: A meta-analysis of longitudinal studies",
-            "year": 2006
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "f8b6f14def830e81eea6d99dc35bafd77dcb9c505a715fde7d50b998e34b1eec"
+  "source_content_sha256": "dce0bdcec877acbe300404a08718b4ae455cd08aab9e4f093024607033ab28d1"
 }

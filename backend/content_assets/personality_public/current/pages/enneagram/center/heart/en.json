@@ -23,78 +23,39 @@
       "entity_key": "heart",
       "entity_type": "center",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Visible emotion can reflect temperament, culture, stress, relationship safety, or communication norms. A stronger observation compares what attention and presentation changed across similar social events.",
-          "question": "Does visible emotion prove a heart-center pattern?"
+          "answer": "The traditional grouping concerns recurring questions about value and identity, rather than the behavior used most often. A Three interpretation may connect getting things done with being valued. Practicality and competence by themselves do not establish Three.",
+          "question": "Why is Three in the heart center if the person seems practical and rational?"
         },
         {
-          "answer": "Helping may express care, duty, reciprocity, expertise, conflict avoidance, or a wish to be needed. The action becomes informative only when its context, explanation, alternatives, and counterexamples are recorded.",
-          "question": "Why can the same helpful act support different interpretations?"
+          "answer": "Consider the hoped-for result: closer connection and being needed, or an effective outcome and acknowledgment of the contribution. Both concerns may be present, and the action may simply reflect duty or care. Compare several events and counterexamples.",
+          "question": "How can the same helpful action fit either Two or Three?"
         },
         {
-          "answer": "Track visible changes after praise, comparison, or exclusion, then ask what the person actually reported. Keep recognition as one hypothesis alongside goals, norms, mood, safety, habit, and relationship expectations.",
-          "question": "How should recognition be observed without mind-reading?"
+          "answer": "No. They can reflect interests, culture, experience, or current circumstances. A Four candidate calls for closer examination of identity, personal meaning, and being understood, rather than using style or emotional intensity as a substitute for motivation.",
+          "question": "Do unusual taste or strong feelings indicate Four?"
+        },
+        {
+          "answer": "No. Recognition may mean a response from someone close, accurate understanding, or meeting an internalized standard of value. A private setting can help comparison, but the underlying concern and alternative explanations still matter.",
+          "question": "Does disliking public praise rule out the heart center?"
         }
       ],
       "framework": "enneagram",
@@ -167,37 +128,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "For a heart-center observation, select a moment of praise, criticism, inclusion, or comparison. Record what changed in tone, self-description, helping behavior, goal emphasis, or withdrawal, and separate the visible adjustment from any inferred need for recognition.",
-          "key": "observable_pattern",
-          "title": "Start with one feedback event"
+          "body_md": "The heart or feeling center traditionally groups Types Two, Three, and Four. One way to understand their shared territory is to ask: how do I experience myself as worthy of love, respect, or understanding?\n\nThe [Enneagram Institute's center account](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) associates this grouping with shame. Here that means exploring a possible whole-self judgment such as “I am not enough,” rather than labeling a person as shameful, vain, or morally deficient.\n\nA person might respond by moving toward others, proving useful through results, or trying to express a personal truth. Those responses can look warm, businesslike, or inward-looking. Heart-center language concerns a traditional motivation pattern; it does not measure empathy, social skill, or emotional intensity.",
+          "key": "value_and_identity",
+          "title": "The shared question is about worth"
         },
         {
-          "body_md": "Two, Three, and Four differ in the traditional model: Two may orient toward being useful to another person, Three toward demonstrating valued effectiveness, and Four toward expressing a personally distinctive meaning. The same generous or polished action can still have another explanation.",
-          "key": "within_center_difference",
-          "title": "Two, Three, and Four organize connection differently"
+          "body_md": "**Two may focus on a place in the relationship.** The traditional description emphasizes love, connection, giving, and being needed. Attending to another person's needs can sustain care. If worth becomes too dependent on giving, however, personal needs may remain unspoken and an unwanted offer of help may feel like rejection of the person. Helping alone cannot establish this motive. [Type Two description](https://www.enneagraminstitute.com/type-2/)\n\n**Three may focus on demonstrating valued effectiveness.** The traditional pattern emphasizes achievement and recognition. Adapting a method to a goal can make a contribution clear. When worth depends too heavily on performance, feelings and limits may be pushed aside in pursuit of external or internalized expectations. The valued achievement need not be money, status, or public attention. [Type Three description](https://www.enneagraminstitute.com/type-3/)\n\n**Four may focus on whether the actual person is understood.** The traditional description emphasizes identity and personal significance. Naming a subtle experience can make it easier to understand. But repeatedly defining oneself by what seems missing can obscure existing connections and turn a temporary disappointment into a story about the whole self. Unusual taste is not evidence of this motive. [Type Four description](https://www.enneagraminstitute.com/type-4/)\n\nEach route can involve sincere care and effort. They are not rankings of kindness, competence, or authenticity.",
+          "key": "three_value_strategies",
+          "title": "Being needed, being valued, and being understood"
         },
         {
-          "body_md": "Use a counterexample from a private or low-visibility task where recognition was unlikely. If the behavior remains unchanged, revise the heart-center hypothesis and consider care obligations, professional standards, habit, aesthetic preference, current mood, or the demands of the relationship.",
-          "key": "counterexample",
-          "title": "Compare a setting without recognition"
+          "body_md": "Suppose several friends prepare a dinner together. At the end, everyone thanks another organizer but says nothing about your work. The following interpretations are invented to make a comparison possible; disappointment after this event does not identify a type.\n\nA Two interpretation might be: “I thought caring for them would bring us closer. Do I matter to them?” The person might offer still more help or feel hurt by the absence of a relational response.\n\nA Three interpretation might be: “They do not realize how much of the evening worked because of my contribution.” The person might explain what they handled or choose a more visible responsibility next time. The concern may be whether effort received appropriate recognition.\n\nA Four interpretation might be: “They see an interchangeable helper, not what this meant to me.” General praise may miss the point if the person wants a particular experience and intention to be understood.\n\nAny of these concerns could lead to silence, continued helping, sadness, or a direct request for fair acknowledgment. A genuinely overlooked contribution is also a straightforward situational explanation. Explore that before making the event about personality.",
+          "key": "recognition_scene",
+          "title": "One event: your contribution goes unmentioned"
         },
         {
-          "body_md": "The center label does not mean that a person only feels while others think or act. It is not a medical or neurological classification, and emotional expression alone cannot establish motive, identity, interpersonal capacity, or later outcomes.",
-          "key": "boundary",
-          "title": "Emotion is not an exclusive channel"
+          "body_md": "Separate the event, the feeling, and the interpretation. “My contribution was not mentioned” describes an event. “I felt disappointed” describes a feeling. “I have no value to them” is an interpretation that needs examination.\n\nConsider three changes to the situation:\n\n- Would being warmly included, even without being needed as a helper, restore the connection I wanted?\n- Would clear acknowledgment of the result satisfy me if I disliked the way I had to work?\n- Would accurate understanding matter more than being regarded as unusually special?\n\nThe questions distinguish possible concerns about relationship, performance, and personal meaning. They are not a scoring system. The [Narrative Enneagram's type comparisons](https://www.narrativeenneagram.org/type-comparisons/) provide a traditional reference for differences among Two, Three, and Four.\n\nAlso examine something you do privately. Continuing the same behavior without an audience does not automatically rule out a heart interpretation: expectations about being a good person or a successful person may already be internalized. Ask what the behavior was serving, and whether care responsibilities, habit, preference, stress, or a real injustice explains it more convincingly.",
+          "key": "refine_hypothesis",
+          "title": "Ask what would address the concern"
         },
         {
-          "body_md": "Duration: 6\n\nContext: Select three feedback events and one private task, noting who was present, what kind of recognition was available, and what outcome the situation required.\n\nObservable signal: Record changes in tone, helping, pace, self-description, goal emphasis, or withdrawal before interpreting what connection or recognition meant.\n\nPage-specific signal: Contrast response to interpersonal need, valued performance, and personal distinctiveness instead of labeling every emotional reaction as one heart-center pattern.\n\nAlternative explanation: List a care obligation, professional norm, cultural display rule, safety concern, mood, habit, or relationship expectation that could produce the same presentation.\n\nReflection prompt: Use the private-task counterexample to decide which heart-center interpretation became weaker and what evidence would justify revising it again.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "List a care obligation, professional norm, cultural display rule, safety concern, mood, habit, or relationship expectation that could produce the same presentation.",
-            "context": "Select three feedback events and one private task, noting who was present, what kind of recognition was available, and what outcome the situation required.",
-            "duration_days": 6,
-            "observable_signal": "Record changes in tone, helping, pace, self-description, goal emphasis, or withdrawal before interpreting what connection or recognition meant.",
-            "page_specific_signal": "Contrast response to interpersonal need, valued performance, and personal distinctiveness instead of labeling every emotional reaction as one heart-center pattern.",
-            "reflection_prompt": "Use the private-task counterexample to decide which heart-center interpretation became weaker and what evidence would justify revising it again."
-          },
-          "title": "Observation exercise"
+          "body_md": "You do not need a settled type to try one small change. Choose the response you most recognize in yourself and use a low-stakes interaction.\n\n**If giving is your usual way to secure connection:** ask whether help is wanted, make room for a refusal, and state one need of your own directly. “I'd also like some company this evening.” Notice whether a declined offer immediately becomes a judgment about the relationship.\n\n**If delivering results is your usual way to secure value:** write two separate lines before starting: “What does this task require?” and “What do I want or need?” If they conflict, communicate one limit rather than only improving your performance. Notice whether your feelings become part of the decision.\n\n**If being accurately seen is your recurring concern:** describe one feeling and one request without making a global claim about yourself. “I felt disappointed because this mattered to me; I'd like to explain why.” Then take a small meaningful action without requiring ideal understanding or an ideal mood first.\n\nThese experiments address different habitual strategies. They are ways to observe and communicate, not guaranteed methods for changing personality or following a fixed growth path.",
+          "key": "specific_practice",
+          "title": "Make the condition attached to worth more visible"
+        },
+        {
+          "body_md": "Start with [Two on connection and giving](/en/personality/enneagram/type-2), [Three on effectiveness and value](/en/personality/enneagram/type-3), or [Four on identity and personal meaning](/en/personality/enneagram/type-4). Then read another member that could explain the same action. Keep a counterexample alongside each point of recognition. Use the [Enneagram overview](/en/personality/enneagram) if you need a broader comparison.\n\nThe explanations here use traditional theory. Hook and colleagues' review abstract reports mixed research findings; these descriptions do not establish the validity of FermatMind assessments. [Review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\nShame, a wish for recognition, and visible emotion cannot diagnose a psychological condition or confirm a core type. When considering another person, listen to their account rather than assigning a hidden motive they have not reported.",
+          "key": "reading_and_boundary",
+          "title": "Read a plausible alternative, too"
         }
       ],
       "seo": {
@@ -208,8 +166,8 @@
       "slug": "enneagram/centers/heart",
       "source_hash": "73a500009574139e6aabb09fb600853e8fa732340995c062eedd5caa686e4bd0",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The Enneagram heart center groups Types Two, Three, and Four. Use it to compare how connection, recognition, and self-presentation show up in the same social situation—not to assume that emotion overrides thought or action.",
-      "title": "Heart Center: Types 2, 3, and 4 in Relationships"
+      "summary": "Two may look for connection through responding to others, Three for value through recognized effectiveness, and Four for identity through personally meaningful experience. The heart center compares these concerns about worth and being seen. It does not classify people by how emotional they appear, and a practical, action-oriented person can still be concerned with recognition.",
+      "title": "Heart Center: How Types 2, 3, and 4 Seek a Sense of Value"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -219,69 +177,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "a808f9cb87fd638d025c4536b94e1e36fbb045122608904321e97cc5e952c176"
+  "source_content_sha256": "43c0a6d3706c96c81b67c442e2312e70edfe2300d1c1bae0c7b1da5480b8ffb3"
 }

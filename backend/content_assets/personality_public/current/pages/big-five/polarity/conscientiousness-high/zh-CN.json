@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/big-five/conscientiousness-high",
@@ -20,30 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "conscientiousness-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "不是。规划和持续执行的倾向不能单独说明一个人是否存在完美主义、焦虑或相关困扰。观察标准是否适合任务、能否调整，以及实际影响；不要用区间做诊断。",
-          "question": "问：高尽责性是不是等于完美主义？"
+          "answer": "不是。高位置涉及多种规划、组织和跟进倾向。是否反复追求难以满足的标准、怎样面对错误以及由此产生什么代价，需要单独了解；一个总分不能回答这些问题，也不能作诊断。",
+          "question": "高尽责性是不是等于完美主义？"
         },
         {
-          "answer": "需要看目标、权限、工具和协作约定。过程自由可能方便自己组织，也可能让依赖不清；区间不能保证适应或脱颖而出。可以先澄清交付标准和检查点。",
-          "question": "问：在松散的工作环境中会不适应吗？"
+          "answer": "先找拖延发生在哪一步。目标不清、缺少材料、任务太大、当前负担过重或担心出错，都可能与迟迟开始有关。高位置允许例外，也不解释每次行为的原因。选一次事件，核对当时是否具备开始条件。",
+          "question": "我分数较高，为什么仍然拖延？"
         },
         {
-          "answer": "原因可能涉及标准不清、情绪、资源、任务难度或当前负担，不能先认定为完美主义焦虑。可以先选一个可撤回的起步动作，并记录哪个障碍仍在。",
-          "question": "问：为什么有些高尽责性的人反而容易拖延？"
+          "answer": "不一定。看职责是否清楚、哪些交接依赖别人、你能否自己设置必要的记录。可以先与合作者约定一个交付标准和一个更新时点，再观察实际摩擦；不能用高分预判适应结果。",
+          "question": "工作环境很松散，我一定会不适应吗？"
         },
         {
-          "answer": "群体元分析中，尽责性与总体表现指标的关联相对更强，但关联会因结果类别变化；这不能预测某个人的成功、职业适配或工作表现，也不构成招聘用途证据。\n\n---\n\n---\n\n---",
-          "question": "问：高尽责性和职业成功的关系如何？"
+          "answer": "不能据此判断。管理还涉及专业判断、沟通、授权和具体成果。规划习惯可以作为了解工作方式的一条线索，但岗位决定需要直接证据。",
+          "question": "高尽责性说明我适合管理岗位吗？"
+        },
+        {
+          "answer": "不需要。先区分必要检查与额外润色，再针对已经产生代价的一种低风险行为尝试调整。若额外检查持续发现关键问题，就保留它；改变做法也不等于改变人格。",
+          "question": "我应该减少所有检查，让自己更灵活吗？"
         }
       ],
       "framework": "big_five",
@@ -84,163 +81,82 @@
       "llms_eligible": true,
       "locale": "zh-CN",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
-        "expert_endorsement": false,
-        "limitations": [
-          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
-          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
-        ]
+        "not_for": [
+          "不能据此作临床诊断或单独决定录用、录取。"
+        ],
+        "summary": "此页帮助理解人格概念和核对日常行为。实际分数应按所用工具的计分方法、参考样本与适用范围解读。"
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Big Five 研究支持用连续维度描述个体差异（[S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)）。本页的“高尽责性：提前规划、持续执行与对秩序感的偏好”是这份内容包对连续分数的解释区间，不是诊断类别、能力等级、职业适配结论，也不是未经公开常模支持的百分位判断。不同工具可能输出原始分、标准分、百分位或区间标签，不能直接互换。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
-          "heading": "证据与解释边界",
+          "body": "尽责性关注一个人通常怎样组织行动、对待承诺和推进目标。较高位置可以用来理解较常主动安排步骤、保留记录、在任务进入重复阶段后继续跟进的倾向。它描述的是一般模式，仍然允许忙乱、遗漏、拖延和随意的日子。\n\n准备充分与结果正确是两件事。你可以很认真地完成一个要求，却误解了要求；也可以有计划地练习，却仍缺少某项技能。判断倾向，看重复出现的行动方式；判断能力与表现，还要看工作样本、结果和实际条件。",
+          "heading": "高尽责性具体在说什么",
           "key": "section-01-2b0bd5f656",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "高尽责性可用于描述较常出现的提前规划、持续投入、记录承诺和建立秩序的倾向。不同侧面可能并不一致：喜欢整理文件，不等于在每一种长期任务上都能坚持；经常检查，也不能说明检查源于偏好、岗位要求还是担忧。\n\n可观察开会前是否准备资料、交付前如何核对，以及需求改变时是否更新计划。区间标签不测量能力，也不能直接说明一个行为的动机。",
-          "heading": "这个区间具体表示什么",
+          "body": "如果报告将你的结果标为较高，先看题本版本、分数种类和区间说明。原始分、换算到百分制的分数与百分位不能互换。百分位还需要明确比较人群、语言、样本和换算方法；不能把“80分”直接读成超过80%的人。\n\n靠近区间边界时，相邻标签不应被理解为两种截然不同的人。若报告没有提供阈值、常模或误差说明，可以先保留“这次回答较偏向规划与跟进”的有限解释，暂不作精确排名。回答时想到的是近期加班、某一职责还是平常生活，也值得记下；这些线索不能自行换算为分数修正。\n\n[IPIP 官方构念说明](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)区分了多种大五工具。一个工具的研究证据不能直接证明另一个工具，更不能单凭这页解释验证你的个人结果。",
+          "heading": "先确认“高”以什么为依据",
           "key": "section-02-38d68c64e2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "不能从该区间推断智力、创造力、道德、专业能力或未来成功，也不能保证不会出错。计划可以服务于不合适的目标，重复检查可以遗漏真正的风险。判断表现需要具体工作样本、结果和条件；判断心理状态需要独立证据。",
-          "heading": "不能从这个区间推断什么",
+          "body": "本站使用 NEO/IPIP-NEO 的面向词汇进一步解释尽责性：自我效能、秩序性、责任感、成就追求、自律性和审慎性。[官方 NEO/IPIP 对照表](https://ipip.ori.org/newNEO_FacetsTable.htm)说明这些是相对应的解释构念，不是所有大五工具共同使用的唯一目录。\n\n一个人可能喜欢分类归档，却不喜欢开始漫长的整理工作；也可能对答应别人的事持续跟进，对个人目标却很少设高标准。自我效能涉及对处理任务的自我判断，也不能充当客观能力测试。\n\n如果你的实际报告没有测量或提供某个面向，不要从总位置补出它的高低。面向词汇可以帮助提出更具体的问题，例如“我是在维护秩序，还是在履行一个承诺”，但答案需要另找事件证据。",
+          "heading": "爱整齐、愿意负责和能坚持不是同一个问题",
           "key": "section-03-39e9c9db48",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "可能的表现包括记录待办事项、预留时间、核对交接内容，以及在行动前询问约束。它们是观察线索，不能理解为必然提前完成、极少拖延或始终准确。比较重复事件，并记录任务清晰度、可用资源和实际后果。",
-          "heading": "常见行为表现",
+          "body": "在多人协作里，记录谁需要什么、何时交接，能够让别人看见你的安排。是否有用，可以直接检查：记录是否减少了重复询问，变更后是否仍准确，投入的时间是否覆盖了关键问题。不能仅凭高分认定你可靠或项目会按期完成。\n\n一个说明性情境：你负责给小型读书会发活动通知。日期、地点、材料和回复方式已经核对，但你又花了很久调整字号、标点和排列。你需要区分三种工作：修正事实错误、让信息容易理解，以及满足个人外观标准。前两者仍可能必要，第三者是否值得继续，要看实际用途和成本。\n\n如果场地临时改变，继续完善旧版的格式反而会耽误更新。此时应重新确认事实和交接，而不是因为已经投入很多就保留旧安排。改变计划本身不说明尽责性降低。\n\n额外检查也可能源于要求不清、过去出错后的担忧或需要他人批准。只有你本人报告了担忧，才能记录那种感受；重复修改不能替你证明内心焦虑。",
+          "heading": "准备何时有用，何时挤占了真正的任务",
           "key": "section-04-a092be626f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "同一个人可能认真规划工作，却在私人事务上较随意；对熟悉任务容易坚持，对模糊任务仍会迟迟不开始。职责、工具和资源都可能改变表现。\n\n在协作中，提前交代依赖关系可能有帮助，过细的安排也可能增加他人的负担。是否可靠、适合某行业或表现出色，需要独立核查；本页不根据区间推断健康或财务结果。",
-          "heading": "不同场景中的可能差异",
+          "body": "可以先提出一个具体想法：“在低风险通知已经满足约定后，我仍经常继续检查或改写。”这里观察的是额外检查，不是整个人是否尽责。\n\n回看近期相似通知。完成标准已经满足、也有时间继续修改，而你自然选择发送并停止，就是有机会但没有出现额外检查的例子。若那天没有通知任务，或关键信息尚未确认，则没有进入这个观察机会；不能把它算成停止检查。若只是想不起相反事件，记为尚未找到反例，不等于不存在反例。\n\n一次自然停止不会推翻“经常继续检查”。若多次可比事件都继续修改，且要求没有变化，可以暂时保留这一工作假设；若只在公开人数较多时出现，缩小为那个情境；若无法判断是否已满足标准，先搁置，补清标准再观察。新设停止闹钟之后的表现另记，它属于主动改变条件后的尝试。",
+          "heading": "找自然反例，检验一个范围有限的想法",
           "key": "section-05-cf4ded2e93",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "提前准备、记录承诺和持续跟进可能在目标合理、要求清楚时帮助协作。但倾向不能保证达成率、获得信任、控制风险或长期健康收益。检查准备是否覆盖关键问题、进度是否可见，以及结果是否符合约定，比用分数认定优势更有用。",
-          "heading": "可能的优势",
+          "body": "选一份后果很小、容易更正的个人或社群通知。开始前写下必须正确的事实、读者必须能完成的动作，以及仍须遵守的审核要求。先按原有方式完成，记录必要检查结束之后又做了什么、用了多久、有没有发现真正影响使用的问题，并单独记下自己的感受。\n\n下一次相近任务可以尝试一个停止条件：必要信息已核对、读者动作已清楚，就暂时结束额外润色。保留纠错渠道，不削减安全、医疗、支付或工作要求的检查。记录这次使用了新条件，不能与自然停止混为一谈。\n\n比较可用性、返工和时间成本。如果额外修改反复发现关键问题，就保留相应检查；如果只调整个人偏好的外观，可以把这类润色限制在较小范围；如果几次任务难度不同、没有足够机会，暂不判断。目标是找到适合任务的做法，不是用一周证明人格或承诺降低特质分数。",
+          "heading": "一个可检查的下一步：把必要检查与额外润色分开",
           "key": "section-06-62f28ec35d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "可能观察到检查超过收益、计划改变后不易调整、难以协商标准或休息时仍想着未完成事项。这些行为并非所有高区间者都会出现，也不能直接解释为完美主义或临床焦虑。把代价落到一个具体事件，再考虑适合本人的调整。",
-          "heading": "可能的代价",
+          "body": "较高、[中等](/zh/personality/big-five/conscientiousness-mid)和[较低尽责性](/zh/personality/big-five/conscientiousness-low)是同一连续维度的解释位置，不是互斥人格类型。高位置不保证处处有序，中间不保证适度，低位置也不保证善于即兴。比较时应使用同一工具，并看同一种任务中的规划、启动和跟进，避免用办公室的表现对比另一个人的休闲习惯。\n\n如果你想理解整个维度，继续读[尽责性](/zh/personality/big-five/conscientiousness)；如果总位置和生活经验不一致，可以到[面向总览](/zh/personality/big-five/facets)辨认更具体的解释问题，而不是给未测面向补分。\n\n认真规划不等于完美主义，也不能判断临床状态。若检查、担忧或无法停止工作已经持续造成痛苦或影响日常生活，可以寻求合格专业人员评估。[NIMH 求助说明](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help)强调症状与生活影响；人格记录不能替代这种评估。",
+          "heading": "怎样比较另外两个位置，接着读什么",
           "key": "section-07-e0f3f0d777",
-          "kind": "rich_text"
-        },
-        {
-          "body": "与中等或较低区间相比，较高区间可能更常表现出规划与持续跟进的偏好。三个区间都不是能力等级；中间不保证灵活，较低不保证善于即兴，较高也不保证跨场景一致。结合侧面和实际事件解释。",
-          "heading": "与另外两个区间的区别",
-          "key": "section-08-93fcd255a8",
-          "kind": "rich_text"
-        },
-        {
-          "body": "以下是虚构观察例，不是实际项目业绩：项目协调员在两周任务中列出依赖、核对点和缓冲。第一周客户改变要求，她需要决定哪些安排仍有用，哪些要重做。观察重点是计划是否跟着事实更新，以及交接是否清楚；不能从规划习惯保证项目按期或不会出问题。",
-          "heading": "一个真实感场景",
-          "key": "section-09-f4737779c5",
-          "kind": "rich_text"
-        },
-        {
-          "body": "何峰是中学物理老师，尽责性倾向较高。每次备课都准备得非常细致，PPT上的每个动画效果、每个例题推导步骤都反复检查三遍以上。渐渐地备课时间越来越长——\"总觉得还可以更完美\"。有一段时间他甚至开始回想课堂上的每一句话，审视\"那个例子的引入顺序是不是不够流畅\"。持续的自我审查让他失去了教学的松弛感，学生也觉得他的课堂\"太紧\"。\n\n后来他去旁听了一位风格松散的老师的课——准备显然不如他充分，但即兴回应和课堂上的笑声让他意识到：在某些情境中，\"完成\"比\"完美\"更重要，人与人的连接往往发生在不完美的缝隙里。",
-          "heading": "一个反例",
-          "key": "section-10-a3dc1e6a2e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. 完成重要任务后，你能轻松放下转向下一件事，还是会花大量时间反复检查和优化？\n2. 当计划被打乱时，你的第一反应是什么？需要多长时间调整？\n3. 你上一次真正放松、\"什么都不做\"是什么时候？当时内心感受如何？\n4. 你身边的人是否说过\"别那么紧张\"\"放轻松一点\"？你能理解他们为什么这么说吗？\n5. 在你的标准中，\"够好\"和\"完美\"的界限在哪里？对别人来说清晰吗？",
-          "heading": "三到五个自我观察问题",
-          "key": "section-11-fbc645affc",
-          "kind": "rich_text"
-        },
-        {
-          "body": "选一个可撤回、后果很小的个人任务，先写下必须满足的要求和停止时间。按要求完成后记录检查的收益、遗漏和时间成本，再决定是否调整。不要减少支付、医疗、安全、生产发布或其他高风险事项的必要检查，也不违背工作要求。这个记录用于观察习惯，不是治疗或特质改变承诺。",
-          "heading": "一个七天低风险实验",
-          "key": "section-12-00f553ab95",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- 返回父维度：[尽责性](/zh/personality/big-five/conscientiousness)\n- 同维度区间：[高尽责性](/zh/personality/big-five/conscientiousness-high) · [中等尽责性](/zh/personality/big-five/conscientiousness-mid) · [低尽责性](/zh/personality/big-five/conscientiousness-low)\n- 继续细分：[30 个侧面总览](/zh/personality/big-five/facets)",
-          "heading": "继续阅读",
-          "key": "section-13-f1384a4c63",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "较高尽责性描述规划、组织和持续跟进方面的较强倾向。读懂这个位置，需要同时看分数依据、具体任务和行为代价；它不保证能力、成功，也不等于完美主义。",
+        "title": "高尽责性：理解规划、持续跟进与标准的成本"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/conscientiousness-high",
-      "source_hash": "92ec2bd740c5ae2e546bf66ffa346e58fcec3d1b41628819a43bf0e34792f2af",
-      "source_package": "big5-zh-v3-52-page-release",
-      "summary": "尽责性倾向较高的人通常倾向于提前规划、有条理地执行任务并维持环境的秩序感。这在执行密集型任务中是重要优势，但也可能带来过度准备和灵活应对不足的代价。",
-      "title": "高尽责性：提前规划、持续执行与对秩序感的偏好"
+      "source_hash": "56417ad5468540232bba79d290d43cdd03925d21c88486029d8c8343fea74cbe",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "较高尽责性描述规划、组织和持续跟进方面的较强倾向。读懂这个位置，需要同时看分数依据、具体任务和行为代价；它不保证能力、成功，也不等于完美主义。",
+      "title": "高尽责性：理解规划、持续跟进与标准的成本"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "conscientiousness-high-model_structure-1",
-            "limitation": "支持一般模型或层级背景，不支持费马测试具体分数、常模或个体预测。",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "conscientiousness-high-product-boundary",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "conscientiousness-high-content-method",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "模型研究不等于费马测试产品验证。",
-          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "conscientiousness-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID、题名、作者、年份和 DOI 一致；用于五维结构与词汇研究背景，不用于产品级效度。",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e20aaa9d3c06259d085d596b08dfcce484ec4f4824d175f66c477e78f5d495c1"
+  "source_content_sha256": "a6d47f6f2c845e63af8d83be2b5e18d8145277c53d4234cf2f49c2d988152fae"
 }

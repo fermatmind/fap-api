@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/centers/head",
@@ -23,78 +23,39 @@
       "entity_key": "head",
       "entity_type": "center",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Research may be required by the task, professional standards, previous errors, accountability, or simple curiosity. Compare how information changes action and whether the same process appears when uncertainty is low.",
-          "question": "Does extensive research always indicate a head-center pattern?"
+          "answer": "The traditional explanation concerns anticipating and arranging possibilities as a response to uncertainty, limits, and uncomfortable feelings. Action can be organized by that planning. Optimism and busyness alone neither establish Seven nor show the absence of fear.",
+          "question": "Why is an optimistic, active Seven placed in the head center?"
         },
         {
-          "answer": "A person may verify risks and still generate alternatives before committing. Instead of forcing one label, record the sequence, what each step protected, and which step disappeared in a comparable counterexample.",
-          "question": "How can caution and option-making appear in one event?"
+          "answer": "Consider what the research needs to settle: sufficient understanding and manageable involvement, or trustworthy information, risks, and support. Both may need all of these. Look at what evidence enables action and why another check is requested when nothing new has changed.",
+          "question": "How can I compare Five and Six when both research carefully?"
         },
         {
-          "answer": "Uncertainty creates observable choices about questions, sources, support, time, and alternatives. Intelligence is not being measured here; the exercise only compares how one decision process changed across contexts.",
-          "question": "What makes uncertainty more informative than general intelligence?"
+          "answer": "No. The traditional description also includes questioning, resisting authority, and actively confronting risk. Compare whether the action is organized around reliability, security, and support. Obedience, courage, and hesitation cannot independently identify Six.",
+          "question": "Must Six rely on authority or hesitate to act?"
+        },
+        {
+          "answer": "Not on its own. Both can reflect the task, training, interest, or a practical requirement. Explore recurring concerns, how information changes action, and counterexamples from familiar settings. The center does not rate intelligence.",
+          "question": "Does extensive research or strong idea generation indicate a head type?"
         }
       ],
       "framework": "enneagram",
@@ -167,37 +128,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "To observe head center clues, use an unfamiliar decision with incomplete information. Record the first question asked, which source was consulted, what risk or possibility was named, how long action was delayed, and whether new evidence narrowed or expanded the available options.",
-          "key": "observable_pattern",
-          "title": "Trace one uncertainty sequence"
+          "body_md": "The head or thinking center traditionally groups Types Five, Six, and Seven. Its everyday question is not “How intelligent am I?” but “What lets me proceed when I do not know what will happen?”\n\nThe [Enneagram Institute's account of the centers](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) associates this grouping with fear. Traditional responses include preparing at a distance, testing what can be relied on, and anticipating other possibilities. Seven's upbeat activity can therefore belong in the comparison, even when fear is not visible.\n\nThis is theory language, not a claim that the three types are necessarily timid or have an anxiety condition. People in this grouping also feel, relate, and act directly. People in other centers can be highly analytical.",
+          "key": "uncertainty_and_fear",
+          "title": "Why caution and optimism can share a center"
         },
         {
-          "body_md": "Five, Six, and Seven differ in the traditional account: Five may conserve attention while building understanding, Six may test reliability and available support, and Seven may generate alternatives to keep movement possible. These routes can overlap and are not exclusive thinking styles.",
-          "key": "within_center_difference",
-          "title": "Five, Six, and Seven use different routes"
+          "body_md": "**Five may ask whether understanding and resources are sufficient.** The traditional description emphasizes competence and independent preparation. Limiting interruptions and clarifying a problem can make participation more manageable. If preparation keeps expanding without practical engagement, however, knowing more may not make starting easier. Education and a preference for solitude do not establish Five. [Type Five description](https://www.enneagraminstitute.com/type-5/)\n\n**Six may ask whether information, commitments, and support are dependable.** The traditional pattern emphasizes security and testing trust. Questions can expose a missing safeguard or clarify who shares responsibility. Repeated checking can also produce more doubt without a decision. Challenging an unreliable authority fits this comparison as readily as seeking guidance; compliance is not a requirement. [Type Six description](https://www.enneagraminstitute.com/type-6/)\n\n**Seven may ask what else remains possible.** The traditional description emphasizes freedom, satisfaction, anticipation, and avoiding pain. Alternatives can reveal a workable route forward. If every disappointment immediately opens another plan, necessary choices, feelings, and unfinished commitments may be deferred. Enjoying novelty or having a backup plan does not establish Seven. [Type Seven description](https://www.enneagraminstitute.com/type-7/)",
+          "key": "three_routes",
+          "title": "Understanding, dependable support, and alternatives"
         },
         {
-          "body_md": "A useful counterexample is a familiar task with similar consequences but little uncertainty. Let that counterexample change the head hypothesis when expertise, workload, prior failure, accountability, access to information, or the decision deadline better explains the observed checking or option-making.",
-          "key": "counterexample",
-          "title": "Check a familiar routine"
+          "body_md": "Imagine that you and friends are about to leave for a weekend away. The train is cancelled, accommodation is already booked, and replacement routes are not yet clear. These are invented examples for comparing concerns.\n\nA Five interpretation might begin by containing the information task: “Give me a moment to understand the routes, costs, and demands before I decide what I can take on.” Stepping back may serve understanding and manageable involvement rather than indifference.\n\nA Six interpretation might begin with reliability: “Which update is confirmed? Can we actually catch the connection? Who will help if the route fails?” The person might also challenge the organizer directly. Testing support need not look submissive.\n\nA Seven interpretation might begin with possibilities: “We could take a different route, or make a different weekend out of this.” That can restore room to act. It is still useful to ask whether the original loss gets addressed or is quickly covered by a more exciting plan.\n\nAll three could research, ask a friend, and generate alternatives. The distinction is what those actions aim to resolve: sufficient understanding and capacity, trustworthy safeguards and support, or feeling trapped by limitation and disappointment. Real travel risks also justify careful checking without any type explanation.",
+          "key": "decision_scene",
+          "title": "One decision: the train is cancelled just before departure"
         },
         {
-          "body_md": "The center label does not measure intelligence or identify a fixed mental capacity. It does not describe a neurological system or medical category, and an analytical, cautious, or imaginative response cannot by itself establish type or predict a result.",
-          "key": "boundary",
-          "title": "Thinking is not a fixed capacity"
+          "body_md": "For a real decision, record your first question, the source you used, what made action possible, and what stopped you again. Then ask:\n\n- Am I missing essential understanding or resources, or has further preparation become easier than participating?\n- Am I missing dependable evidence or support, or repeating a request for certainty after the question has been answered?\n- Do I need a workable alternative, or am I reluctant to accept the options I must give up by choosing?\n\nThese questions examine a process rather than classifying caution, analysis, or optimism. The [Narrative Enneagram's comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer traditional distinctions within the center, not validated cutoffs.\n\nCompare a familiar task with similar consequences. Checking may decrease when unfamiliarity, limited access, responsibility, or a previous real failure explains it. If the same preparation, reassurance-seeking, or option-making recurs, that is a reason to explore further, not a conclusion. A Five candidate can seek help, a Six candidate can decide independently, and a Seven candidate can finish patiently. Understand the change instead of treating flexibility as disqualifying.",
+          "key": "what_is_enough",
+          "title": "Notice what makes information enough"
         },
         {
-          "body_md": "Duration: 3\n\nContext: Choose one unfamiliar decision and one familiar routine with similar consequences, recording the deadline, information access, and who shares responsibility.\n\nObservable signal: List the first question, the source consulted, the named risk or possibility, the time before action, and the evidence that changed the option set.\n\nPage-specific signal: Compare conserving attention, checking reliability and support, and generating alternatives rather than treating all thought or planning as identical.\n\nAlternative explanation: Note whether expertise, workload, accountability, a prior failure, information access, curiosity, or the deadline could explain the same sequence.\n\nReflection prompt: Use the familiar routine as a counterexample and state which Five, Six, or Seven interpretation became less plausible after comparison.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Note whether expertise, workload, accountability, a prior failure, information access, curiosity, or the deadline could explain the same sequence.",
-            "context": "Choose one unfamiliar decision and one familiar routine with similar consequences, recording the deadline, information access, and who shares responsibility.",
-            "duration_days": 3,
-            "observable_signal": "List the first question, the source consulted, the named risk or possibility, the time before action, and the evidence that changed the option set.",
-            "page_specific_signal": "Compare conserving attention, checking reliability and support, and generating alternatives rather than treating all thought or planning as identical.",
-            "reflection_prompt": "Use the familiar routine as a counterexample and state which Five, Six, or Seven interpretation became less plausible after comparison."
-          },
-          "title": "Observation exercise"
+          "body_md": "Choose a low-risk decision that can be revised. Meet its practical requirements first, then try an experiment related to your usual strategy.\n\n**If preparation often delays participation:** identify one question that must be answered before starting and what answer would be sufficient. Once you have it, take a small practical step, such as offering a proposal. Notice whether additional information changes the decision or mainly postpones involvement.\n\n**If you repeatedly check:** list the dependable evidence already available, the unresolved risk, and one concrete support arrangement. Decide what new evidence would justify reopening the check. Notice whether the next request closes a genuine gap or repeats a search for certainty. Do not ignore actual hazards.\n\n**If a new possibility quickly replaces disappointment:** choose one adequate alternative and pause further option-making. Name the loss without immediately improving it: “I'm disappointed that the original plan is gone, and I'll finish arranging this replacement.” Notice whether you complete the contacts and loose ends rather than only finding something new to anticipate.\n\nThese are observation experiments about how preparation, checking, and alternatives affect action. They do not promise relief from anxiety or assess mental health.",
+          "key": "action_experiments",
+          "title": "Give each information strategy a route into action"
+        },
+        {
+          "body_md": "Read [Five on understanding and preparation](/en/personality/enneagram/type-5), [Six on reliability and support](/en/personality/enneagram/type-6), and [Seven on options and possibility](/en/personality/enneagram/type-7). Begin with two candidates that could explain one decision, and write down what each fails to explain. Return to the [Enneagram overview](/en/personality/enneagram) if both are poor fits.\n\nThis page uses traditional motivation descriptions. Hook and colleagues' review abstract reports mixed reliability and validity evidence; neither school descriptions nor research findings automatically validate FermatMind assessments. [Review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\nThe head center is not a brain-region classification, intelligence level, or neurological measurement. Researching, worrying, imagining, and acting quickly cannot individually confirm a type. A center label also cannot diagnose persistent distress.",
+          "key": "reading_and_limits",
+          "title": "Compare the concern, not the person's intelligence"
         }
       ],
       "seo": {
@@ -208,8 +166,8 @@
       "slug": "enneagram/centers/head",
       "source_hash": "b4dc993d58abf460a4f3aa77c0a3924cd8ef0e7f43d5b2e3df22d30c377deca1",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The head center is the traditional grouping for Types Five, Six, and Seven. A head-center observation follows how someone gathers information, checks support, or opens options when uncertainty matters; it does not claim that thinking replaces emotion or action, and Five, Six, and Seven can manage the same unknown in contrasting ways.",
-      "title": "Head center: track how uncertainty is handled"
+      "summary": "Five may build understanding and protect limited resources, Six may test reliability and support, and Seven may create alternatives to preserve room to move. The head center compares these different ways of finding a basis for action when certainty is missing. It does not measure intelligence or imply that other types think less.",
+      "title": "Head Center: How Types 5, 6, and 7 Respond to Uncertainty"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -219,69 +177,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "904fdb8f5b70852811a0172e3e22751b7703e072a1bd9049ff68fde378a206a8"
+  "source_content_sha256": "64e0be2ba4c60327af970de74865edfba4f9bcb57d23c3d76eb7670c8f465a4a"
 }

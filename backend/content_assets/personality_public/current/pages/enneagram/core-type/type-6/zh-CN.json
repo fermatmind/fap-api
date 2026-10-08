@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-6",
@@ -23,101 +23,43 @@
       "entity_key": "type-6",
       "entity_type": "core_type",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。法律职责、不安全条件、既往故障、不平等问责、歧视或模糊任务都会要求谨慎提问；应观察证据和责任变化后核对是否同步更新。",
-          "question": "谨慎提问可以直接判断第六型吗？"
+          "answer": "不一定。传统第六型模式既可以通过合作寻找支持，也可以主动挑战威胁或不可靠的权威。辨认时应看可靠性与支持的需要，不能用服从或反抗来判型。",
+          "question": "第六型一定胆小或服从权威吗？"
         },
         {
-          "answer": "忠诚可能来自感情、伦理、生计、互惠、社群生存或自愿承诺。比较时必须记录同意、可选方案、退出成本与权力，不能从持续关系反推动机。",
-          "question": "为什么忠诚必须与类型假设分开？"
+          "answer": "可能。类型解释关注惯常处理未知与支持的方式，不要求某种情绪一直存在。焦虑本身也有许多原因，不能单独说明类型。",
+          "question": "没有明显焦虑，还可能认同第六型吗？"
         },
         {
-          "answer": "证据充分后停止核对、能做可逆行动、接受支持而不反复测试，并依据清楚理由回应权威，都会削弱把谨慎归因于类型的判断；复盘时还应记录真实后果、决定权限与支持是否持续可用。",
-          "question": "哪些反例会削弱不确定性假设？"
+          "answer": "看核对是否补齐真实缺口，答案能否改变行动，以及是否有根据后果与职责设定的停止条件。如果反复得到同样的信息却无法更新决定，可以检查询问是否主要在寻求短暂的放心。",
+          "question": "怎样区分合理谨慎与反复寻求保证？"
+        },
+        {
+          "answer": "不意味着。信任需要回应事实、履约与修复。类型标签不能要求你接受失信、不公平或伤害，也不能把合理退出解释成缺乏忠诚。",
+          "question": "忠诚是否意味着必须继续不可靠的关系？"
+        },
+        {
+          "answer": "不会自动说明。果断可以是支持充分、责任明确或个人能力发展的结果。若可靠性与支持在多个领域长期都不是主要关注，才更值得重新考虑核心解释。",
+          "question": "果断行动，会不会说明我不是第六型？"
         }
       ],
       "framework": "enneagram",
@@ -133,43 +75,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/head",
-          "label": "center:head",
+          "label": "思维中心：面对未知的不同方式",
           "relationship": "center_membership",
           "target_identity_key": "center:head"
         },
         {
           "href": "/zh/personality/enneagram/wings/6w5",
-          "label": "wing:6w5",
+          "label": "6w5：第六型与第五型翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:6w5"
         },
         {
           "href": "/zh/personality/enneagram/wings/6w7",
-          "label": "wing:6w7",
+          "label": "6w7：第六型与第七型翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:6w7"
         },
         {
           "href": "/zh/personality/enneagram/type-6/instincts/self-preservation",
-          "label": "instinctual_subtype:type-6/self-preservation",
+          "label": "第六型的自保本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-6/instincts/social",
-          "label": "instinctual_subtype:type-6/social",
+          "label": "第六型的社交本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/social"
         },
         {
           "href": "/zh/personality/enneagram/type-6/instincts/one-to-one",
-          "label": "instinctual_subtype:type-6/one-to-one",
+          "label": "第六型的一对一本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/one-to-one"
         }
@@ -210,57 +152,49 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "观察哪个未知最受关注、什么证据足以行动、向谁寻求支持，以及预案是否真的关闭问题。要跨不同后果比较，不把一次谨慎写成恒定警觉。",
+          "body_md": "在传统九型解释中，第六型希望面对困难时有可信的支持与方向，担心没有可靠依据，或到了关键时刻只能独自承担。注意力可能先发现承诺中的空白、事情会怎样出错，以及谁能一起处理。\n\n这套策略的逻辑是：核对可靠性、形成预案、维护合作关系，便能带着未知继续前进。支持可以来自人，也可以来自清楚的程序、经过检验的知识或共同约定。\n\n因此，寻求支持与质疑支持并不矛盾。你可能认真遵守一个可信协议，也可能强烈反对失信的权威。需要辨认的是背后的可靠性问题，而不是把顺从或反抗当成固定特征。",
           "key": "motivation_attention",
-          "title": "记录未知事项怎样获得优先级"
+          "title": "真正要寻找的，是可以依靠的依据与支持"
         },
         {
-          "body_md": "合同不清、系统曾失败或责任不平等都会增加提问；忠诚也可能来自感情、伦理、生计、互助或自愿续订的承诺。必须记录当事人的理由与退出空间。",
+          "body_md": "同样反复核对一项计划，有人正在履行安全职责，有人面对刚发生的故障，有人不清楚责任边界，也有人即使在低风险决定中仍难以放心。先分清现实要求，再考虑惯常模式。\n\n忠诚也可能来自感情、伦理、互惠或生计，不表示一个人必须认同第六型。离开不公平关系，反而可能是认真回应现实证据。\n\n第六型模式还可能表现为主动面对威胁、强势提问或保护同伴。看起来勇敢，并不证明没有担忧；看起来紧张，也不证明你属于第六型。更有用的是问：“我在确认什么，什么条件会让我愿意行动？”",
           "key": "behavior_motive",
-          "title": "把提问与忠诚放回具体责任"
+          "title": "谨慎、忠诚和勇敢，都不能单独判型"
         },
         {
-          "body_md": "决定中观察备选方案是推动行动还是不断重开问题；反馈中记录怎样权衡权威和证据；冲突中核对是否明确担忧、请求支持并公平检验协议。",
+          "body_md": "团队准备采用一个新方案，你提出“失败时谁负责、如何恢复”。这些问题若补齐了真实缺口，就在帮助团队行动。\n\n但如果每个回答又引出一个没有尽头的假设，大家可能一直不知道怎样才算准备充分。可以区分必须满足的条件、尚可接受的未知，以及何时重新检查。条件应由实际后果与职责决定，而不只是由当下是否放心决定。\n\n收到建议时，也可分开评价内容与提出建议的人。可信的人可能判断失误，不熟悉的人可能提供好证据。依靠支持和使用自己的判断，可以一起发生。",
           "key": "decision_feedback_conflict",
-          "title": "比较核对、承诺与修复过程"
+          "title": "核对是否有效，要看新证据能否改变决定"
         },
         {
-          "body_md": "关注不确定性可能支持发现风险、负责规划、互助和识别薄弱假设。代价可能是低概率威胁占满注意、安慰很快失效，或把每次分歧都变成信任测试。",
+          "body_md": "这套关注可能帮助你提前发现薄弱环节，让责任更清楚，认真履行承诺，并在别人需要时保持支持。它也可能推动团队把“应该没问题”变成可说明的依据。\n\n过度使用时，可能的威胁占据了大部分注意，而实际概率、可恢复性和已有支持变得不够醒目。反复询问却很少接纳答案，会让安慰迅速失效；把分歧理解成站队问题，则可能让合作变成忠诚检验。\n\n是否继续核对，应看它带来了什么新信息，能否改变行动。这个判断不要求你忽略真实危险，也不把同伴的耐心当成无限资源。",
           "key": "strengths_tradeoffs",
-          "title": "同时看到准备能力与协调成本"
+          "title": "可靠性关注的作用，以及无法结束的成本"
         },
         {
-          "body_md": "工作中要区分安全负责人上报法定隐患与同事反复核对可逆选择；关系中要区分澄清协议与持续测试承诺。职责、同意和权力会改变解释。",
+          "body_md": "朋友不同意你的计划，你可能担心这是否意味着对方不会支持你。可以把担忧说具体：“你是不同意这个选择，还是无法在我遇到困难时提供我希望的帮助？”接着明确需要的支持是什么，也允许对方说明自己的能力与边界。\n\n工作中也可以把“能不能信任你”改成可讨论的承诺：谁完成哪一步，什么时候反馈，变更如何通知。信任不必一次解决，它可以随履约、解释和修复逐步更新。\n\n如果确实存在持续失信、歧视或权力滥用，应处理现实问题，不能以“你只是第六型多疑”取消合理质疑。",
           "key": "work_relationship_examples",
-          "title": "用后果与权力区分同样动作"
+          "title": "谈清楚需要，不用分歧检验对方站不站在你这边"
         },
         {
-          "body_md": "6w5 假设增加证据、分析和私下准备，6w7 假设增加选项、社交协调和主动试验。还应比较第五型研究、第七型寻路、现实焦虑、法律职责、不安全环境与制度失信。",
+          "body_md": "传统九型比较关注动作背后的目的，不能用严肃、强势或理性等形容词判型。\n\n- 与[第一型](/zh/personality/enneagram/type-1)比较：两者都可能重责任、守规则并提出改进。第六型解释更关注规则或支持是否可靠、出了问题如何应对；第一型解释更关注做法是否符合应有标准与自己的原则。回看一次规则已经保证安全、你仍不接受的情况：问题主要是标准不对，还是依据与责任仍不可信？两型都可以有原则，也都可以担心风险。\n- 与[第八型](/zh/personality/enneagram/type-8)比较：两者都可能对抗、保护别人并拒绝控制。第六型的挑战可能为了查清可靠性、排除威胁或确认支持；第八型的挑战可能为了保有自主、避免被支配。可比较澄清支持以后，最在意的是共同安排可信，还是仍要保有决定权。行动快慢或声音大小不能决定答案。\n- 与[第五型](/zh/personality/enneagram/type-5)比较：两者都可能深入研究。第六型更关注依据与支持是否能依靠；第五型更关注理解是否充分，以及自己能否承担参与。向别人询问与独立研究，都可能服务其中任何一种需要。\n\n6w5与6w7仍以第六型为核心，分别借相邻第五型和第七型的关注解释分析、私人准备，或选项与互动等修饰。核心未明确时，先继续比较，不必急着选翼。可阅读[6w5](/zh/personality/enneagram/wings/6w5)与[6w7](/zh/personality/enneagram/wings/6w7)。",
           "key": "wings_mistypes",
-          "title": "比较翼型修饰与现实替代项"
+          "title": "与1、8、5号比较：要维护的究竟是什么"
         },
         {
-          "body_md": "如果充分证据能结束核对、支持被接受而不反复测试、当事人能带着未知做可逆行动，并依据透明理由回应权威，就应下调第六型假设。",
+          "body_md": "你可以信任别人、勇敢行动，并在证据足够时停止核对，同时仍认同第六型的关注。一次果断决定不自动排除这个模式，也不该把成长解释成不再有该类型。\n\n更有力的反例是：不同领域的检查都紧随实际风险、职责与近期故障变化，风险消除后自然停止；可信支持与承诺并非长期主要问题，反而是原则、自主、理解或其他关注更能解释你的选择。\n\n若谨慎来自真实不安全条件，就优先保留现实解释。不要为了维持类型判断，把每个合乎情境的行为都改写成隐藏的担忧。",
           "key": "counterexample",
-          "title": "寻找证据到位后能够更新的信任"
+          "title": "停止核对，是灵活性；长期不以可靠性为核心，才更能挑战解释"
         },
         {
-          "body_md": "本页只能复盘不确定性、支持、核对与预案，不能诊断焦虑或创伤，不能认证忠诚、评定安全权限、筛选求职者、推断行为，也不能固定身份。",
+          "body_md": "[Enneagram Institute的第六型说明](https://www.enneagraminstitute.com/type-6/)讨论支持、指导，以及遵守或质疑权威的不同表现。其[1与6的比较](https://www.enneagraminstitute.com/misidentifying-1-and-6/)及[The Narrative Enneagram的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供传统辨别方法。本页把这些方法用于具体动机比较，不采用名人归类或临床层级评定人。\n\n[Hook等人的2021年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告九型研究的信度与效度证据不一致，翼和类型间移动的研究支持有限。它不能证明费马测评效度，也不能据此诊断焦虑、认证忠诚或判断关系安全。\n\n可回到[九型人格总览](/zh/personality/enneagram)比较其他核心；若想理解5、6、7号面对未知的共同主题，可阅读[思维中心](/zh/personality/enneagram/centers/head)。",
           "key": "use_boundary",
-          "title": "不把信任变成诊断或忠诚认证"
+          "title": "传统信任模式，不是焦虑或忠诚的诊断"
         },
         {
-          "body_md": "持续天数: 5\n\n情境: 连续五天选择一个低风险选择、一项受治理约束的决定和一次信任沟通事件。\n\n可观察信号: 记录真实后果、缺失证据、支持来源、权威角色、预案、决定时间与后来更新。\n\n本页特定信号: 比较达到明确证据门槛而且下一步仍然可逆以后，反复核对的次数与持续时间是否真正下降。\n\n替代解释: 核对法律职责、资源不稳、歧视、近期故障、创伤安全、权力和责任归属。\n\n复盘问题: 写出一次透明理由最能解释行动的事件，并据此明确下调第六型假设。",
+          "body_md": "选择一件可调整、后果有限的日常决定，例如安排一次活动或选择一个短期协作方式。真实安全、法律或职责要求仍需照常满足。\n\n开始前写清楚：已经知道的事实、真正缺失的信息、可以接受的未知，以及出现什么新证据时才需要重开决定。向一位相关的人提出一个具体问题，说明你需要的是事实、建议还是实际支持。\n\n得到回答后，用原先的条件作决定。如果仍想再问，先记录：“这次会带来哪条新信息？”若只是希望得到完全相同的保证，可以尝试完成原定的小步骤，再按约定复查。\n\n最后比较预期与实际后果：哪些核对有用，哪些没有改变选择？保留一次合理改变决定的情况。目标是练习随证据更新，并不要求自己永远放心，也不是证明你属于第六型。",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "核对法律职责、资源不稳、歧视、近期故障、创伤安全、权力和责任归属。",
-            "context": "连续五天选择一个低风险选择、一项受治理约束的决定和一次信任沟通事件。",
-            "duration_days": 5,
-            "observable_signal": "记录真实后果、缺失证据、支持来源、权威角色、预案、决定时间与后来更新。",
-            "page_specific_signal": "比较达到明确证据门槛而且下一步仍然可逆以后，反复核对的次数与持续时间是否真正下降。",
-            "reflection_prompt": "写出一次透明理由最能解释行动的事件，并据此明确下调第六型假设。"
-          },
-          "title": "观察练习"
+          "title": "给一次低风险决定设定结束核对的条件"
         }
       ],
       "seo": {
@@ -271,8 +205,8 @@
       "slug": "enneagram/type-6",
       "source_hash": "c5cedddf79a5059371c7da05db6c983be2f057794b7711e31b9d093f9985afa9",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第六型是九型人格中的传统观察假设，关注点可能反复落在不确定性、可信支持、潜在问题与可执行预案上。提问、谨慎、忠诚或怀疑不能证明动机，因为真实风险、治理职责、歧视处境、创伤安全、资源不稳与近期故障都可能形成相似表现。本页直接说明不确定支持问题如何观察、谨慎忠诚怀疑如何比较，以及真实风险治理歧视如何核对。",
-      "title": "第六型：不确定性、支持与信任更新的可修正假设"
+      "summary": "第六型的传统模式，关注面对未知时可以相信什么、依靠谁，以及承诺与责任是否可靠。它可能通过核对、预案、合作或主动质疑建立安全感，并不等于胆小、服从或总是焦虑。辨认时应观察这些动作如何帮助行动，又何时变成难以结束的信任检验。",
+      "title": "九型人格6号：可信支持、可靠承诺与面对未知"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -282,92 +216,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9f099301a51339dfb16dadf5cd7f3a119dd34f65e88e516d7fdfca6880bf512a"
+  "source_content_sha256": "8190a313b0ef9a7cd6d2e1716a327eebf082cf96f406a519c0dc3175a70725e5"
 }

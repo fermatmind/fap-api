@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/centers/gut",
@@ -23,78 +23,39 @@
       "entity_key": "gut",
       "entity_type": "center",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。快速行动也可能来自紧急程度、岗位训练、权限、习惯或安全要求。需要比较当时关注的问题、可见行动顺序，以及相同压力下出现不同回应的反例。",
-          "question": "行动很快就能说明属于腹中心模式吗？"
+          "answer": "可以考虑。传统描述包括直接表达、淡化或搁置、约束和纠正等不同处理方式。重点是边界、平稳或正当性怎样反复影响选择，不是愤怒出现的次数。也不要因为不易生气就直接推断九号。",
+          "question": "不容易生气的人也可能考虑腹中心吗？"
         },
         {
-          "answer": "可以。安静可能是有意克制、暂缓冲突、不确定或情境谨慎。真正需要观察的是压力如何被处理、行动何时发生，以及相近条件下是否出现另一种回应，而不是只看一个人是否显得强势。",
-          "question": "安静或退让的回应还能用于腹中心比较吗？"
+          "answer": "回到一件具体事件，比较自己最不能接受的部分是被控制、失去选择权，还是行为违反了应当遵守的标准。两者可以重叠；再看恢复自主或修正规则后，哪一种变化更能解释不满的减轻。一次答案不足以定型。",
+          "question": "八号和一号都反对不公平，怎样继续比较？"
         },
         {
-          "answer": "按标准纠偏通常关注行动是否符合某项要求，直接抵抗则更关注控制或侵入本身。现实中同一行为可能服务不同动机，因此必须结合原话、背景和反例判断。",
-          "question": "按标准纠偏与直接抵抗有什么区别？"
+          "answer": "不能。拖延可能来自疲劳、信息不足、资源限制或不安全的权力关系。只有把延后放回自己的优先事项、冲突感受与后续行动中，并比较其他情境，才适合讨论九号候选。",
+          "question": "拖延就说明九号吗？"
+        },
+        {
+          "answer": "不是。腹中心是八号、九号、一号的传统归组；本能副型讨论的是某个核心模式在不同生活关注领域中的呈现。这里的“本能中心”名称不能用来推断任何人的本能副型。",
+          "question": "腹中心和本能副型是一回事吗？"
         }
       ],
       "framework": "enneagram",
@@ -110,25 +71,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "八号：自主与保护",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/zh/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "九号：平稳与自身需要",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/zh/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "一号：标准与完整性",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-1"
         }
@@ -167,37 +128,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "区分八号九号一号，可以从传统描述中的不同重点开始：八号可能直接测试权力和边界，九号可能先维持稳定并推迟摩擦，一号可能按照内在标准纠正行动。这些只是观察提示，并不是每个人都必须遵守的规则。",
+          "body_md": "腹中心也称身体中心或本能中心，传统上包括八号、九号和一号。这里的共同问题可以从日常经验理解：当外界要我改变、让步或服从时，我怎样保有自己的位置？\n\n在[Enneagram Institute 的中心解释](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)中，腹中心的情绪主题是愤怒。但归组依据是怎样处理这个主题，不是看谁发火最多。八号可能把不满直接带进行动；九号可能先淡化冲突，连自己的不满也暂时搁置；一号可能约束不满，把它转为合乎标准的纠正。表达、避开与约束，是很不一样的处理方式。\n\n因此，安静不等于没有边界，讲道理也不等于属于脑中心。腹中心关注的是回应背后反复出现的重点。所有类型都会思考、感受和行动，也都可能愤怒；这些名称不表示某种情绪只属于一个中心。",
+          "key": "center_theme",
+          "title": "为什么强势、温和与克制会在同一个中心"
+        },
+        {
+          "body_md": "**八号：先确认自己仍有选择权。** 传统八号描述强调自主、保护与抗拒被控制。面对干涉时，关注点可能是“你不能替我决定”。直接表达有助于让边界清楚；若每次分歧都变成力量较量，就可能挤掉协商空间，也难以说出需要帮助或受到伤害的部分。这里比较的是自主问题，不是把声音大、职位高或勇敢等同于八号。[八号原始描述](https://www.enneagraminstitute.com/type-8/)\n\n**九号：先让局面维持可承受的平稳。** 传统九号描述重视内在安定与关系和谐。回应可能是缓和、配合、暂不表态，也可能用拖延守住自己尚未说出的意愿。这种方式能减少无谓摩擦；过度使用时，自己的优先事项可能越来越模糊，别人也可能把未明确拒绝当成同意。九号并非必然没有主见或不会生气。[九号原始描述](https://www.enneagraminstitute.com/type-9/)\n\n**一号：先确认行动是否正当、是否符合要求。** 传统一号描述强调完整性、责任与改进。关注点可能是“即使可以这样做，也不应该这样做”。克制与纠正能守住重要标准；若偏好都升级成必须遵守的要求，就容易持续紧绷、责备自己或催促别人。严谨可以来自训练和任务要求，不能单独确认一号。[一号原始描述](https://www.enneagraminstitute.com/type-1/)",
           "key": "within_center_difference",
-          "title": "先区分八号九号一号"
+          "title": "三种维护自己位置的方式"
         },
         {
-          "body_md": "观察腹中心线索时，选择一次边界、期限或不公平要求变得突出的事件。记录最先出现的动作、当时使用的原话、回应前经过的时间，以及行动更接近正面抵抗、暂缓介入还是标准纠偏。",
-          "key": "observable_pattern",
-          "title": "记录压力到行动的完整顺序"
+          "body_md": "假设室友未经讨论，搬走了你常用的桌子，还要求你今晚把物品全部清走。下面是为了比较动机而编写的情境，不是三种类型必须说出的台词。\n\n偏向八号的解释可能首先抓住决定权：“可以重新安排，但不能不问我就定下来。”即使新布局更方便，未经同意的控制仍可能是重点。\n\n偏向九号的解释可能先处理气氛：“先别争，明天再看看。”当晚也许答应，之后却迟迟不动。值得继续问的是：延后是在收集信息，还是不想让争执打破平稳，也还没明确自己的选择？\n\n偏向一号的解释可能首先提出程序与共同标准：“公共区域的改动应当先讨论，清理要求也应对每个人一致。”即使改动并未损害自己的利益，违背合理约定仍可能让人不满。\n\n三个人都可能反对，也都可能平静地谈。真正可比较的是：恢复选择权、降低摩擦、让规则合理，哪一项最能说明这次回应？一个人也可能同时在意三项。",
+          "key": "shared_event",
+          "title": "同一件事：室友没商量就改了公共空间"
         },
         {
-          "body_md": "用反例修正腹中心假设时，应选择与原事件具有相近后果和权力关系、却出现不同回应的情境。若角色许可、安全感、疲劳、文化期待、已训练的协商技能或具体关系更能解释差异，就要降低原判断的可信度。",
-          "key": "counterexample",
-          "title": "寻找条件相近的平静反例"
+          "body_md": "回看具体事件时，先记录自己当时真正说了什么、做了什么，再回答几个问题：\n\n- 如果对方恢复了我的选择权，但方案仍不够理想，我最主要的不满会减少吗？这可以检验自主是否是核心关注。\n- 如果讨论可以安全、平静地进行，我能否说清自己的偏好？如果可以，先前的退让可能主要来自权力关系或冲突风险。\n- 如果规则公平，但结果不完全合我心意，我能否接受？如果仍无法接受，要区分重要原则与个人偏好。\n\n这些提问不按答案给人分型。[Narrative Enneagram 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供了组内差异的传统参照；实际观察仍要允许反例改变解释。\n\n例如，受过协商训练的八号候选可以很温和，九号候选遇到重要底线可以坚决，一号候选也可以接受不同做法。一次灵活回应不会自动推翻核心候选；但如果反应主要随权限、安全、疲劳或任务要求变化，而且没有反复出现的自主、平稳或标准主题，就应降低相应解释的把握。不要把沉默一律解释为九号，也不要把直接反对一律解释为八号。",
+          "key": "distinguishing_questions",
+          "title": "用条件变化检验解释，不用音量判型"
         },
         {
-          "body_md": "腹中心标签不能定义医学类别，也不能识别某个神经系统或固定身体能力。身体感受可以成为记录线索，却不能单独证明动机、类型、能力或未来结果。",
-          "key": "boundary",
-          "title": "不要把身体本能写成生理结论"
+          "body_md": "找一件后果较小、可以安全表达不同意见的事，选择最贴近自己惯常回应的一项尝试。目的不是改变类型，而是看看是否还有可用的回应方式。\n\n**常常先顶回去：** 先写下真正需要守住的边界，再提出一个允许对方参与的方案。例如：“我的物品不能未经同意被移动；我们可以一起讨论桌子放哪里。”复盘时看边界是否仍清楚，以及是否少了一场不必要的力量较量。\n\n**常常先答应或延后：** 在考虑所有人的想法前，先说出自己的一个偏好，并给出下一步时间。例如：“我不想把桌子搬走，明晚七点我们一起讨论替代位置。”复盘时看自己是否实际参与决定，还是又用模糊的配合代替了选择。\n\n**常常先纠正：** 把要求分成“确实影响共同利益的标准”和“我更喜欢的做法”。只就前者提出清楚请求，并允许后者有不同实现。例如：“公共区域的改动需要共同同意；具体怎么摆可以有几种方案。”复盘时看自己是否保住重要原则，又容许了合理差异。\n\n这些是围绕三种模式设计的自我观察尝试，没有保证改善效果。若现实中存在威胁或惩罚风险，应先考虑实际安全与可用支持，不用是否敢于当面反对来判断类型。",
+          "key": "practice",
+          "title": "把惯常回应变成一次更明确的选择"
         },
         {
-          "body_md": "持续天数: 4\n\n情境: 选择四次后果相近的边界或期限事件，同时标明谁拥有权限，以及直接表达分歧在当时是否安全。\n\n可观察信号: 记录第一项可见行动、被说出的边界或标准、回应前的等待时间，以及最后是抵抗、延后、纠偏还是改变方向。\n\n本页特定信号: 分别比较直接顶回、暂缓介入和按标准纠偏，不要把所有果断行为都合并成同一种腹中心线索。\n\n替代解释: 逐次检查紧急程度、岗位要求、疲劳、安全、文化习惯、协商训练或关系历史能否独立解释这次回应。\n\n复盘问题: 找出一个低压力反例，并说明它如何削弱关于八号、九号或一号的初步比较。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "逐次检查紧急程度、岗位要求、疲劳、安全、文化习惯、协商训练或关系历史能否独立解释这次回应。",
-            "context": "选择四次后果相近的边界或期限事件，同时标明谁拥有权限，以及直接表达分歧在当时是否安全。",
-            "duration_days": 4,
-            "observable_signal": "记录第一项可见行动、被说出的边界或标准、回应前的等待时间，以及最后是抵抗、延后、纠偏还是改变方向。",
-            "page_specific_signal": "分别比较直接顶回、暂缓介入和按标准纠偏，不要把所有果断行为都合并成同一种腹中心线索。",
-            "reflection_prompt": "找出一个低压力反例，并说明它如何削弱关于八号、九号或一号的初步比较。"
-          },
-          "title": "观察练习"
+          "body_md": "选择一个最能解释自己的候选，再认真读另一个看起来也相近的模式：比较[八号的自主与保护](/zh/personality/enneagram/type-8)、[九号的平稳与自我优先事项](/zh/personality/enneagram/type-9)，或[一号的标准与完整性](/zh/personality/enneagram/type-1)。每读一页，保留一个支持例子和一个削弱解释的例子；若三个都不贴近，可以回到[九型人格总览](/zh/personality/enneagram)扩大比较。\n\n本页的中心解释来自传统九型理论。Hook 等人的系统综述摘要报告九型研究的信度与效度证据并不一致，不能据此证明费马测评有效。[综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\n腹中心不对应特定脑区、身体能力或医学类别。身体紧绷可以帮助回忆情境，却不能测出动机或确定类型；这里的练习也不是诊断工具。",
+          "key": "evidence_and_next",
+          "title": "怎样继续比较"
         }
       ],
       "seo": {
@@ -208,8 +166,8 @@
       "slug": "enneagram/centers/gut",
       "source_hash": "e5fa9f5debf7510a6ad45b0af6cd6885b8bd1ffe22f566a5ffee64295a0a0cc4",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "腹中心是九型人格传统框架中对八号、九号和一号的归组。观察腹中心线索，重点是压力、边界或纠偏要求出现后，行动如何启动、延迟或改变；这并不表示身体本能会控制所有选择，同一中心内部也可能出现很不一样的回应。",
-      "title": "腹中心：观察压力出现时怎样进入行动"
+      "summary": "八号直接维护自主，九号倾向于保持平稳，一号倾向于按标准约束和纠偏。腹中心把这三种不同回应放在一起，比较人在受到推动、干涉或不合理要求时，怎样维护自己的位置并进入行动。它是传统九型分组，不是身体或神经系统的测量分类。",
+      "title": "腹中心：八号、九号与一号怎样处理边界和愤怒"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -219,69 +177,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4913214d489c280842f52b8dd799bff515df4ad291739655eab50db7c8f04b32"
+  "source_content_sha256": "3d29cd3bf6b649d66b089f298504cd567de5f7c971bbc81521073df957dbc702"
 }

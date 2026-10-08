@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram",
@@ -23,101 +23,51 @@
       "entity_key": "enneagram",
       "entity_type": "hub",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. The overview offers nine comparison hypotheses, and a useful hypothesis should survive concrete examples, meaningful counterexamples, and competing explanations rather than becoming a permanent identity claim.",
-          "question": "Does the Enneagram overview assign one permanent type?"
+          "answer": "No. Many concerns can coexist, and roles and circumstances affect action. Compare what two or three candidates prioritize when important interests compete, then examine similar experiences and counterexamples. Recognition can generate questions without settling a type.",
+          "question": "Several patterns sound like me. Must I choose one immediately?"
         },
         {
-          "answer": "A visible decision separates what happened from the motive later inferred. That distinction makes it easier to compare attention, explanation, and action without treating a familiar adjective as proof of a pattern.",
-          "question": "Why begin with a visible decision instead of a trait list?"
+          "answer": "No. The highest-scoring candidate gives you a pattern to compare, not a confirmed type. Examine its motivation, recurring costs and counterexamples alongside other candidates. Results cannot independently establish ability, medical status, career suitability or future achievement. Research on another instrument does not automatically validate those uses for FermatMind.",
+          "question": "Does my highest score confirm my Enneagram type?"
         },
         {
-          "answer": "Revise it when comparable events show different priorities, when another explanation fits the behavior better, or when the interpretation depends mainly on role, culture, fatigue, incentives, learned skill, or current pressure.",
-          "question": "What should change an initial Enneagram interpretation?"
+          "answer": "The first number indicates the main pattern. A 6w5 interpretation centers on dependable grounds, support, and protection; a 5w6 interpretation centers on understanding, capability, and limited resources. Both can involve analysis and research. Outward style or a second-highest score cannot make them interchangeable.",
+          "question": "What is the key difference between 6w5 and 5w6?"
+        },
+        {
+          "answer": "Understand ratings and paired choices separately rather than directly comparing their numbers. Consider prominent candidates from each and examine whether their motivations and costs explain your experiences. A changed ranking does not by itself establish personality change or require repeated testing until one number remains.",
+          "question": "What should I do if my 105-item and 144-item results differ?"
+        },
+        {
+          "answer": "No. Centers group 8/9/1, 2/3/4, and 5/6/7 around traditional shared themes. Instinctual attention concerns areas such as self-preservation, social involvement, and one-to-one engagement. Each main pattern can be considered in relation to all three areas.",
+          "question": "Can the three centers be matched to the three instincts?"
+        },
+        {
+          "answer": "Check the source's definition. The Narrative Enneagram's one-to-one account includes intimate relationships, close friendships, sexuality, and vitality. The Enneagram Institute's sexual or attraction account especially emphasizes attraction, stimulation, and intensity, while noting that all instinctual orientations can value one-to-one relationships. Enjoying deep conversation cannot settle the distinction or identify sexual orientation.",
+          "question": "Do one-to-one and sexual mean the same thing?"
+        },
+        {
+          "answer": "No. Helping can express care, duty, or a wish for peace. Tidiness may follow from work requirements. Assertiveness can test a threat or defend a principle. Compare the concern behind the action and its recurring consequences.",
+          "question": "Does helpfulness mean 2, tidiness mean 1, and assertiveness mean 8?"
         }
       ],
       "framework": "enneagram",
@@ -240,49 +190,106 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "To compare nine patterns, begin with one decision that had a clear request, competing options, and a visible action. Record what received attention first, what concern shaped the explanation, and what another person could observe before attaching a type label.",
-          "key": "observable_pattern",
-          "title": "Compare patterns through one decision"
+          "body_md": "The Enneagram is a traditional framework for interpreting personality through nine recurring patterns of attention and motivation. It asks what readily catches your attention, what helps you feel worthwhile or able to cope, and how you tend to respond when something important is threatened.\n\nJump to: [Nine motivations at a glance](#shared_event) · [Centers](#centers) · [Wings](#wings) · [Instincts](#instincts) · [105- and 144-item forms](#forms) · [Scientific evidence](#evidence) · [FAQ](#faq).\n\nRead a type on this page: [Type 1](#type_1) · [Type 2](#type_2) · [Type 3](#type_3) · [Type 4](#type_4) · [Type 5](#type_5) · [Type 6](#type_6) · [Type 7](#type_7) · [Type 8](#type_8) · [Type 9](#type_9).\n\nA pattern connects a concern with a strategy, the help that strategy can provide, and the costs of relying on it too heavily. The numbers do not rank people or indicate better and worse personalities.\n\nBoth the [Enneagram Institute's system explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) and [The Narrative Enneagram's overview](https://www.narrativeenneagram.org/the-enneagram/) emphasize underlying motivation. These are sources for understanding Enneagram traditions. Whether an interpretation illuminates an experience is a separate question from whether a classification has sufficient scientific support.\n\nStandards, relationships, and achievement can all matter to one person. A possible main pattern concerns what repeatedly takes priority when those interests compete. One action, an occupation, or an appealing type name cannot settle the question.",
+          "key": "understanding_motivation",
+          "title": "What is the Enneagram? Start with motivation"
         },
         {
-          "body_md": "The traditional model groups patterns into gut, heart, and head centers. Three centers are interpretive labels for organizing questions about action, connection, and anticipation; they do not define medical categories. They do not describe neurological systems or establish neuroscience findings.",
-          "key": "center_boundary",
-          "title": "Treat three centers as interpretive labels"
+          "body_md": "You and some friends are organizing a community event. The venue changes at short notice, and the organizer wants to announce the new arrangement immediately. Several people say, “Give us ten minutes to discuss it first.” That shared action could serve different concerns.\n\n| Type | What those ten minutes might protect | A question that might come first |\n| --- | --- | --- |\n| [Type 1](/en/personality/enneagram/type-1) | Integrity, fairness, and responsibility | Does the new arrangement treat some participants unfairly? |\n| [Type 2](/en/personality/enneagram/type-2) | Care and a connection in which one matters | What support does our already exhausted friend need? |\n| [Type 3](/en/personality/enneagram/type-3) | A worthwhile, recognized achievement | How do we keep the event effective and successful? |\n| [Type 4](/en/personality/enneagram/type-4) | Authentic expression and personal meaning | Can this arrangement still convey what we wanted to share? |\n| [Type 5](/en/personality/enneagram/type-5) | Understanding, capability, and limited resources | What does the new venue require, and how much can I take on? |\n| [Type 6](/en/personality/enneagram/type-6) | Trustworthy grounds, support, and safeguards | Is the venue confirmed, and is there a dependable backup? |\n| [Type 7](/en/personality/enneagram/type-7) | Freedom of choice and a satisfying experience | Could we find a more promising format instead of getting stuck? |\n| [Type 8](/en/personality/enneagram/type-8) | Autonomy and the power to protect boundaries | Who decided this, and are we being pushed into unreasonable terms? |\n| [Type 9](/en/personality/enneagram/type-9) | Inner steadiness and peaceful connection | Can everyone be heard without the disagreement dividing us? |\n\nThese are possibilities for comparison, not lines that people of each type must say. The same concern could support announcing the change immediately: responsibility might require prompt notice, care might favor reducing participants' worry, dependable coordination might require clear information, and a wish for peace might favor ending the uncertainty.\n\nAsk what you would least want to sacrifice if standards, results, resources, and relationships could not all be protected. Also consider whether asking for more time simply follows from your responsibilities as an organizer.",
+          "key": "shared_event",
+          "title": "Nine motivations at a glance: one action, different reasons"
         },
         {
-          "body_md": "A counterexample is a comparable event in which the expected pattern did not appear. Use that counterexample to revise the pattern hypothesis, then test whether role expectations, culture, incentives, fatigue, practiced skill, safety, or the immediate situation explain the difference more directly.",
-          "key": "counterexample",
-          "title": "Let a counterexample revise the pattern"
+          "body_md": "The 1 pattern readily notices the gap between a situation and an appropriate standard. It seeks actions that can withstand the scrutiny of conscience and principle. The concern may extend beyond avoiding mistakes to feeling responsible for correcting something known to be wrong. Integrity is central to the [traditional description of 1](https://www.enneagraminstitute.com/type-1/).\n\nThis strategy can make expectations clear and protect fairness. A venue change might prompt attention to accessibility or an existing promise. Its cost emerges when every difference becomes a fault to correct: necessary standards blend with personal preferences, criticism persists, and rest requires justification.\n\nCompare 1 with 6 by asking whether you would still object on principle after trustworthy people confirmed the safeguards. Compare it with 3 by asking whether a popular result would satisfy you if the method conflicted with your standards.\n\nOne practical observation is to separate a requirement that must be met from a preference you would like met, then notice how that distinction affects the discussion.",
+          "key": "type_1",
+          "title": "Type 1: maintaining integrity and doing what is right"
         },
         {
-          "body_md": "Use the overview as a revisable vocabulary for self-observation. It cannot establish a fixed identity, ability, health status, relationship verdict, or future outcome, and one familiar description is not enough to decide which pattern is useful.",
-          "key": "boundary",
-          "title": "Keep the overview provisional"
+          "body_md": "The 2 pattern attends to people: who needs help, how care can be expressed, and whether a relationship remains close. Providing support may help someone feel lovable and significant to another person. The [traditional description of 2](https://www.enneagraminstitute.com/type-2/) discusses warmth and generosity alongside the wish to be needed and receive a response.\n\nThis strategy can bring timely, personal support. During the event preparations, it might reveal that the friend who keeps saying they are fine has taken on too much. Its cost appears when helping conceals one's own needs. Unspoken expectations accumulate, and a disappointing response can lead to resentment, reminders of past effort, or unwanted involvement.\n\nCompare 2 with 9 by asking whether the harder prospect is no longer feeling wanted or disturbing a peaceful connection. Either concern can lead to agreeing to help. Friendship, duty, and professional training can also explain helpfulness.\n\nTry asking whether the help is wanted and stating both your limits and your needs. Notice what happens when connection does not depend on doing more.",
+          "key": "type_2",
+          "title": "Type 2: seeking love and closeness through care"
         },
         {
-          "body_md": "Duration: 5\n\nContext: Choose one recurring decision with a clear request, two realistic options, and another participant who can describe the action they observed.\n\nObservable signal: For each event, record the first concern you voiced, the option you delayed, the action another person saw, and the explanation you gave afterward.\n\nPage-specific signal: Compare the event against two different Enneagram pattern hypotheses instead of searching immediately for one type label.\n\nAlternative explanation: Before choosing a pattern hypothesis, write one role, cultural, incentive, fatigue, safety, skill, or situational explanation for the same action.\n\nReflection prompt: Name the counterexample that most weakens the initial interpretation and state what later evidence would make you revise or discard it.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Before choosing a pattern hypothesis, write one role, cultural, incentive, fatigue, safety, skill, or situational explanation for the same action.",
-            "context": "Choose one recurring decision with a clear request, two realistic options, and another participant who can describe the action they observed.",
-            "duration_days": 5,
-            "observable_signal": "For each event, record the first concern you voiced, the option you delayed, the action another person saw, and the explanation you gave afterward.",
-            "page_specific_signal": "Compare the event against two different Enneagram pattern hypotheses instead of searching immediately for one type label.",
-            "reflection_prompt": "Name the counterexample that most weakens the initial interpretation and state what later evidence would make you revise or discard it."
-          },
-          "title": "Observation exercise"
+          "body_md": "The 3 pattern attends to what counts as success and how a contribution can be recognized. Success need not mean money or status: an environment might value being a dependable parent, an excellent student, or an effective community organizer. The [traditional description of 3](https://www.enneagraminstitute.com/type-3/) connects achievement with a sense of personal worth.\n\nThis strategy can clarify a goal, adapt to conditions, and turn effort into results. After the venue changes, it might help redesign the schedule around the event's most valuable outcome. Its cost is that rewarded performance can replace personal wishes. Appearing capable becomes essential, while exhaustion, failure, and feelings become difficult to acknowledge.\n\nCompare 3 with 1 by examining a conflict between standards and achievement. Compare it with 7 by asking whether a busy schedule chiefly secures a result that demonstrates value or keeps promising experiences available.\n\nWrite down what others would recognize as success and what you personally want to accomplish. If the answers differ, acknowledge the difference before trying to make them sound identical.",
+          "key": "type_3",
+          "title": "Type 3: demonstrating worth through recognized achievement"
+        },
+        {
+          "body_md": "The 4 pattern attends to identity, personal significance, and faithful expression of inner experience. Attention can also settle on what seems absent: an ease, belonging, or completeness that other people appear to possess. The [traditional description of 4](https://www.enneagraminstitute.com/type-4/) concerns identity and meaning, rather than simply artistic talent or frequent emotion.\n\nThis attention can preserve emotional detail and notice experiences a standardized plan overlooks. After a venue change, it might reveal that the schedule still works but the intended meaning of the gathering has changed. Its cost is persistent comparison with an ideal or another person's life, making present resources seem insufficient and action dependent on the right feeling.\n\nCompare 4 with 3 by asking how it feels to receive recognition for something that no longer expresses you. Compare it with 5 by examining whether time alone chiefly helps process personal feelings or conserve energy and understand a problem.\n\nRecord both what is missing and what is already available. Then try one small action that need not await a perfect mood. Treat this as an observation, without assuming it guarantees growth.",
+          "key": "type_4",
+          "title": "Type 4: finding identity and having personal experience understood"
+        },
+        {
+          "body_md": "The 5 pattern asks whether understanding is sufficient and whether available time, energy, knowledge, and space can meet external demands. A complex task may prompt withdrawal to investigate and establish understanding that can be used independently. The [traditional description of 5](https://www.enneagraminstitute.com/type-5/) concerns capability, not an intelligence ranking.\n\nThis strategy can provide depth, independent judgment, and clear limits on involvement. When information about the new venue is confused, it might identify the practical problems that actually need solving. Its cost is that preparation keeps expanding, conserving resources becomes avoidance, and participation or connection is continually postponed.\n\nCompare 5 with 6 by asking whether the missing piece is enough understanding to cope or enough trustworthy support to act. Compare it with 9 by examining whether stepping back protects personal resources or reduces contact with disagreement.\n\nSet a concrete endpoint for preparation, such as clarifying two essential conditions before joining a short discussion. Then compare the actual demands with the demands you anticipated.",
+          "key": "type_5",
+          "title": "Type 5: becoming capable through understanding and boundaries"
+        },
+        {
+          "body_md": "The 6 pattern attends to the reliability of evidence and commitments, and to the availability of support and guidance when difficulties arise. It may trust familiar partners or procedures while also testing or challenging them. The [traditional description of 6](https://www.enneagraminstitute.com/type-6/) includes caution and active confrontation of threats, so outward boldness does not rule out this concern.\n\nThis attention can uncover gaps, clarify responsibility, and sustain dependable cooperation. A last-minute venue change might prompt checks on the contact person, opening times, and backup arrangements. Its cost is confirmation without an endpoint: reassurance becomes another thing to doubt, decisions stall, or imagined dangers are treated as established facts.\n\nCompare 6 with 1 by distinguishing a violated standard from a lost safeguard. Compare it with 8 by asking whether a challenge principally tests a threat and its trustworthiness or protects autonomy against control.\n\nDecide what information would be sufficient for this particular decision. Separate actual problems from possible risks, then notice whether further reassurance provides new information.",
+          "key": "type_6",
+          "title": "Type 6: finding dependable support and trustworthy grounds"
+        },
+        {
+          "body_md": "The 7 pattern notices promising options and seeks room for enjoyment, possibility, and satisfaction. Restriction, loss, or pain may prompt a new plan, a different interpretation, or a shift toward the next opportunity. The [traditional description of 7](https://www.enneagraminstitute.com/type-7/) connects these responses with avoiding deprivation and pain.\n\nThis strategy can open a route through a blocked situation. An unsuitable venue might inspire rotating discussions, an outdoor session, or another workable format. Its cost is that generating possibilities replaces choosing: commitments remain unfinished, and disappointment or repetitive work is repeatedly deferred.\n\nCompare 7 with 3 by asking whether activity mainly serves recognized achievement or anticipated experience. Compare it with 9 by examining whether discomfort is managed through more alternatives or through reducing the prominence of conflict. Travel and varied interests cannot establish 7.\n\nChoose one plan with a feasible endpoint. When adding further options is no longer available, notice what you most want to escape, while also taking real resource constraints seriously.",
+          "key": "type_7",
+          "title": "Type 7: preserving freedom and moving toward satisfaction"
+        },
+        {
+          "body_md": "The 8 pattern attends to freedom of action and whether oneself or important others might be harmed, controlled, or forced to yield. Clear positions and direct action can provide protection. The [traditional description of 8](https://www.enneagraminstitute.com/type-8/) also addresses difficulties with receiving help and acknowledging vulnerability.\n\nThis strategy can absorb pressure and bring an avoided problem into discussion. If the venue suddenly imposes unreasonable terms, it might secure room to negotiate. Its cost is overreliance on force: disagreement becomes a challenge, negotiation becomes a contest, and the people being protected may lose their own chance to speak.\n\nCompare 8 with 1 by distinguishing a demand of principle from a loss of autonomy. Compare it with 6 by examining whether action chiefly resists control or tests and addresses an uncertain threat. Volume, leadership, and willingness to argue are insufficient evidence.\n\nIdentify the boundary you actually need to protect, then let someone else finish explaining their view. Observe whether hearing them truly reduces your autonomy.",
+          "key": "type_8",
+          "title": "Type 8: maintaining autonomy and protecting boundaries directly"
+        },
+        {
+          "body_md": "The 9 pattern seeks an inner and relational steadiness that ongoing conflict does not interrupt. It readily recognizes different perspectives and looks for common ground that allows life to continue smoothly. The [traditional description of 9](https://www.enneagraminstitute.com/type-9/) also describes how preserving peace can obscure personal priorities.\n\nThis strategy can support receptive listening and renewed cooperation. During the venue disagreement, it might help people explain their concerns without turning them into opposing camps. Its cost is that a temporary decision not to speak becomes a lasting postponement. Pleasant agreement hides unresolved differences, and unexpressed resistance may emerge as delay or inaction.\n\nCompare 9 with 2 by distinguishing a wish for closeness and appreciation from a wish to keep connection undisturbed. Compare it with 5 by asking whether nonparticipation protects resources or avoids friction. A person can also be very busy while repeatedly attending to other people's priorities.\n\nWrite down one preference before hearing everyone else's views, then express it. Observe whether a difference of opinion necessarily damages connection.",
+          "key": "type_9",
+          "title": "Type 9: sustaining steadiness and peaceful connection"
+        },
+        {
+          "body_md": "The traditional model groups 8, 9, and 1 in the gut or body center; 2, 3, and 4 in the heart center; and 5, 6, and 7 in the head center. The [Enneagram Institute's explanation of centers](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) organizes these themes around anger, shame, and fear. They are traditional interpretive groupings, not brain regions, neurological systems, or ability rankings. Everyone thinks, feels, and acts, and everyone can experience those emotions.\n\n**Gut or body: boundaries, action, and dissatisfaction.** The 8 pattern tends to use direct force to maintain autonomy. The 9 pattern tends to reduce the prominence of conflict and dissatisfaction to preserve steadiness. The 1 pattern tends to restrain impulses and turn dissatisfaction into requirements for improvement. Faced with “You must accept this arrangement,” they might respectively contest who gets to decide, ease the disagreement, or identify a standard the arrangement fails to meet. They do not simply mean angry, never angry, and critical.\n\n**Heart: personal worth and identity.** The 2 pattern tends to seek value through closeness, care, and responses from others. The 3 pattern tends to seek value through successful performance, sometimes postponing feelings. The 4 pattern tends to preserve distinctive, authentic experience while also attending to what seems missing. An overlooked contribution might invite more care, a stronger demonstration of achievement, or an explanation of personal meaning that has not been understood. The heart center does not imply that everyone readily expresses emotion.\n\n**Head: uncertainty and fear.** The 5 pattern tends to build understanding and conserve resources before participating. The 6 pattern tends to find and test dependable grounds and support. The 7 pattern tends to open options and anticipate possibilities rather than remain with restriction. A failed plan might prompt investigation of conditions, confirmation of backup safeguards, or a new format. The head center does not imply higher intelligence or a visibly fearful manner.\n\nA center identifies a shared question. Distinguishing candidates requires examining their different ways of responding to it.",
+          "key": "centers",
+          "title": "Three shared themes, with different responses inside each center"
+        },
+        {
+          "body_md": "A wing is a traditional description of influence from a neighboring pattern on the Enneagram circle. The circle wraps around: 1 neighbors 9 and 2, 6 neighbors 5 and 7, and 9 neighbors 8 and 1. A 6w5 description places 6 first and uses the neighboring 5 pattern to describe some features of expression. It does not divide a person into equal halves.\n\nWhile considering whether the event arrangement is dependable, someone provisionally described as 6w5 might investigate privately and limit involvement. A provisional 6w7 description might emphasize conversation, companions, and alternative arrangements. The shared focus remains the 6 concern with reliability and support. Learning to enliven a discussion does not automatically disprove 6w5, and studying a problem carefully does not establish it.\n\n**6w5 and 5w6 are different combinations.** Both may research an issue. In a 6w5 interpretation, the main question might be whether the arrangement and its support can be trusted. In a 5w6 interpretation, it might be whether personal understanding and resources are sufficient to cope. Examine the main motivation before its modification; introversion does not settle the difference.\n\n**Second place in a score ranking does not define a wing.** A leading 6 candidate followed by 3 cannot produce 6w3. If the second candidate is 5, compare a modifying style with the possibility that 5 better explains the main motivation.\n\nThe [Enneagram Institute's wing explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) acknowledges disagreement between traditions about one wing, two wings, and their operation. Research support for wings is also limited. A possible main pattern with an undecided wing is a reasonable conclusion.",
+          "key": "wings",
+          "title": "Enneagram wings: why 6w5 and 5w6 differ"
+        },
+        {
+          "body_md": "Instinctual attention asks which area of life receives priority. Centers ask which patterns share an emotional and coping theme. The body center does not equal self-preservation, the heart center does not equal one-to-one, and the head center does not equal social. Each main pattern can be considered in relation to all three instinctual areas.\n\n**Self-preservation** concerns conditions that sustain life, including bodily needs, rest, food, housing, money, and usable energy. It does not mean selfishness: providing resources for a family may also occupy this area.\n\n**Social** concerns belonging, group roles, shared expectations, responsibility, and connection. It does not mean extraversion or enjoying parties. Someone who rarely speaks can remain highly attentive to inclusion and shared responsibilities.\n\n**One-to-one** requires attention to the tradition using the term. [The Narrative Enneagram's subtype explanation](https://www.narrativeenneagram.org/instinctual-subtypes/) uses it for partnering, intimate relationships, close friendships, sexuality, and vitality, and also calls it the sexual subtype. The [Enneagram Institute's sexual or attraction explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) particularly emphasizes attraction, chemistry, stimulation, and intensity of engagement. It explicitly notes that all three instinctual orientations can value one-to-one relationships. Enjoying a deep conversation with one person therefore cannot establish its sexual emphasis, and the traditions' definitions should not be treated as fully interchangeable. These descriptions do not classify sexual orientation.\n\nConsider a provisional 6 candidate concerned with dependable protection. One person first notices whether travel costs and physical demands are manageable; another asks about group responsibilities and agreements; another focuses on trust and engagement with an important partner. These illustrate a motivation appearing in different areas, rather than three new core motivations or a requirement to adopt every subtype claim from one school.\n\nA description combining the head center, 6, a 5 wing, and social attention answers four different questions: a shared uncertainty theme, a main motivation, a neighboring modification, and an area that often receives priority. One conversation or ranking cannot establish the whole combination.",
+          "key": "instincts",
+          "title": "Instinctual attention: where a motivation appears in life"
+        },
+        {
+          "body_md": "| Form | Response task | What the profile helps you compare |\n| --- | --- | --- |\n| 105 items | Rate agreement with each description on five levels | How strongly you endorse descriptions; several can receive strong ratings at once |\n| 144 items | Choose A or B in each pair of descriptions | Relative preferences within those pairings |\n\nIf two descriptions concern understanding a problem before joining a discussion and first confirming support from companions, choosing the former does not mean the latter never applies. This example explains the task; it is not an item from the questionnaire.\n\nRatings in the 105-item form and choices in the 144-item form come from different tasks, so their numbers are not interchangeable. Neither display score is a population percentile: 80 does not mean that you exceed 80% of people. The 144-item form's relative choices should especially not be treated as absolute personality intensity across people. A description being selected less often does not establish an absent ability or need.\n\nA different candidate order cannot by itself show personality change, inaccuracy in one form, or a truer self revealed by the other. Understand each task separately, then compare its candidates against experience. Studies of another Enneagram instrument do not automatically establish the reliability or validity of these FermatMind forms.",
+          "key": "forms",
+          "title": "105-item vs. 144-item Enneagram tests: how to read results"
+        },
+        {
+          "body_md": "The [PubMed abstract of Hook and colleagues' systematic review, published in 2021](https://pubmed.ncbi.nlm.nih.gov/33332604/), summarizes 104 independent samples and reports both supportive findings and limitations in reliability and validity. Some factor analyses partly aligned with theory, and some subscales related to other constructs, including the Big Five, in theory-consistent ways. However, factor analyses typically identified fewer than nine factors, and research support for secondary ideas such as wings and movement between types was limited.\n\nThe abstract also states that none of the reviewed work used clustering techniques to derive the nine types. That statement concerns the literature included in that review. It cannot be extended into a claim that no such research exists today. This page relies on the authoritative abstract, rather than using it as though it supplied the full paper's sample languages, study designs, or effect sizes.\n\nThe abstract reports that several studies found benefits for personal or spiritual growth. That information alone cannot justify promises that testing will improve relationships, careers, or mental health, or establish the same effects for FermatMind's forms. Recognizing yourself in a description likewise does not validate its classification, measurement, or proposed uses.\n\nThis page therefore presents motivations, centers, wings, and instincts as traditional vocabulary for comparison. They can generate further questions, but cannot independently justify medical judgments, hiring decisions, career matching, or relationship verdicts.",
+          "key": "evidence",
+          "title": "What the scientific evidence supports"
+        },
+        {
+          "body_md": "The lines inside the Enneagram symbol support further interpretations in some traditions about responses under stress, security, or growth. The Riso–Hudson account, for example, connects 1 with 4 and 7. The Narrative Enneagram uses stress and security points with its own explanation of circumstances; the traditions' meanings need not be identical.\n\nLevels of development attempt to discuss how the same concern can operate flexibly or become rigid. Maintaining a standard can support improvement or persistent criticism. Caring can support connection or repeatedly obscure personal needs.\n\nThese are traditional interpretations, not inevitable routes of transformation, clinical classifications, or health scores. A different response under pressure does not mean a possible 1 has become a 4. Adopting an action associated with 7 cannot demonstrate growth by itself. Examine the actual pressures, resources, responsibilities, and consequences when interpreting change.",
+          "key": "other_traditional_ideas",
+          "title": "Why you may encounter arrows and levels of development"
+        },
+        {
+          "body_md": "Choose two candidates you have concrete reasons to consider, then read their core-type pages. Repeated checking might invite a comparison of 1 and 6; stepping back to research might invite 5 and 6; repeatedly agreeing to requests might invite 2 and 9. [The Narrative Enneagram's type comparisons](https://www.narrativeenneagram.org/type-comparisons/) demonstrate a method of examining similarity before underlying differences. Their generalizations should not be treated as rules every person must follow.\n\nTake a real event and record the available actions, your earliest concern, what you were unwilling to lose, and what your strategy actually helped or cost. Keep words spoken at the time separate from later interpretations of motive.\n\nFor example, both 5 and 6 might postpone involvement before the new venue is confirmed. Ask whether you would still hesitate if the contact person were trustworthy but you did not yet understand the workload. Then ask whether you would still hesitate if the workload were clear but the commitment remained unconfirmed. These conditions help compare capability and resources with reliability and support. Both may matter.\n\nFind a similar event in which the response differed. Immediate involvement in a familiar task does not automatically disprove 5; preparation may already be sufficient. Acting boldly with dependable support does not disprove 6. If a fear of lacking support has little connection to your experience whether support is present or absent, while your assigned responsibilities better explain the checking, reduce your confidence in that interpretation.\n\nOnce the main motivation becomes clearer, explore adjacent wings and reversed combinations. Read instinctual subtype pages when the question concerns different areas of life, and center pages when you want to examine a shared theme and its internal differences. Keeping two candidates, or leaving the wing undecided, can be a useful next step.\n\nFor example, with Six as a core candidate, compare [6w5](/en/personality/enneagram/wings/6w5) with [6w7](/en/personality/enneagram/wings/6w7), then use [5w6](/en/personality/enneagram/wings/5w6) to examine whether reversing the combination changes the central concern. To compare areas of life, read the Six pages for [self-preservation](/en/personality/enneagram/type-6/instincts/self-preservation), [social](/en/personality/enneagram/type-6/instincts/social), and [one-to-one](/en/personality/enneagram/type-6/instincts/one-to-one). These are example reading paths, not a suggestion that you should choose Six; continue with the core candidates supported by your experience.",
+          "key": "compare_next",
+          "title": "How to make a useful comparison between candidates"
         }
       ],
       "seo": {
-        "description": "This Enneagram overview presents nine patterns as a traditional map for noticing recurring attention, interpretation, and response. It also introduces three centers as interpretive labels for comparing patterns, while keeping any conclusion provisional and open to context, counterexamples, and other explanations.",
-        "title": "Enneagram overview: a nine-pattern observation map"
+        "description": "Explore the nine Enneagram types through motivations, examples and differences. Learn about centers, wings, instincts and 105- vs. 144-item test results.",
+        "title": "Enneagram Types: Nine Motivations Explained"
       },
       "sitemap_eligible": true,
       "slug": "enneagram",
       "source_hash": "edc9d1be84727dedc8450b6ec17c9080b9daf5988d3667d8cc2d745640c87e79",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "This Enneagram overview presents nine patterns as a traditional map for noticing recurring attention, interpretation, and response. It also introduces three centers as interpretive labels for comparing patterns, while keeping any conclusion provisional and open to context, counterexamples, and other explanations.",
-      "title": "Enneagram overview: a nine-pattern observation map"
+      "summary": "The Enneagram is a traditional personality framework that describes nine patterns of attention and motivation. Compare their strategies and costs, then explore centers, wings, instincts and what the 105- and 144-item results mean.",
+      "title": "Enneagram Types: Understand the Nine Motivations"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -292,92 +299,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "472421ccfe8287c9a186c7aae587a38a3abbe81b75aa656c81b166cd4678c216"
+  "source_content_sha256": "3c377c5db9a5e44b1f3234e290270ceaef3748fab19b5f608f15aa5d26ca79b2"
 }

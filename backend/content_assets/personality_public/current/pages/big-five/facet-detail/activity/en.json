@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/activity",
@@ -20,34 +20,35 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "activity",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Health requires separate medical and behavioral evidence.",
-          "question": "Does stronger Activity mean better health?"
+          "answer": "No. Evaluate completed work, quality, time, and resource costs directly. Frequent activity and rapid transitions can accompany progress or repeated work; the routine alone does not determine the result.",
+          "question": "Does higher Activity mean greater productivity?"
         },
         {
-          "answer": "No. Pace does not determine value or output.",
-          "question": "Is weaker Activity a waste of time?"
+          "answer": "Not necessarily. A preference for fewer activities or a more leisurely routine does not establish physical capacity. Current health and energy need separate evidence.",
+          "question": "Does lower Activity mean low physical energy?"
         },
         {
-          "answer": "They can change behavior, but this page does not predict a stable trait change.",
-          "question": "Can external incentives change Activity?"
+          "answer": "Identify which demands are obligatory, then look for periods with fewer demands and feasible choices. If no such period is available, keep the interpretation uncertain rather than treating imposed busyness as a preference.",
+          "question": "How can I distinguish preference from workload?"
         },
         {
-          "answer": "They can interact, but energy also depends on health, sleep, context, and resources.",
-          "question": "How is Activity related to energy?"
+          "answer": "Yes. Many activities can be done alone. The appeal of group company is a separate question; a full schedule does not tell us how much social contact someone wants.",
+          "question": "Can I be very active without being sociable?"
         },
         {
-          "answer": "Compare chosen pace across periods with similar constraints and ask what happens when obligations ease.",
-          "question": "How can I tell preference from situational busyness?"
+          "answer": "No. Extra time must actually be used to understand the problem, check information, or improve the work. Evaluate those changes and the result rather than assuming that a slower pace has a particular advantage.",
+          "question": "Does slowing down guarantee deeper work?"
+        },
+        {
+          "answer": "The immediate evidence is that your behaviour responded to a demand. A single period cannot establish lasting trait change. Observe what you freely choose when that demand eases, and keep deliberate adjustments separate.",
+          "question": "If a deadline makes me speed up, has my trait changed?"
+        },
+        {
+          "answer": "No. A personality description should not replace attention to sleep, health, stress, or functioning. Seek appropriate professional assessment when a marked change, persistent distress, or impairment occurs.",
+          "question": "Should persistent exhaustion or a sudden change be treated as Activity?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +99,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Activity concerns preference for a fast pace, movement, and having several things underway. It describes tempo—not health, physical fitness, productivity, worth, employment value, or a clinical mood state.\n\n“Activity within Extraversion: preference for a fast and busy pace” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Activity belongs to [Extraversion](/en/personality/big-five/extraversion) in the NEO/IPIP-NEO vocabulary used here. It concerns being active and busy, together with behavioural pace. It need not involve other people.\n\nA stronger tendency may appear in voluntarily maintaining more activity or a brisker routine. A weaker tendency may involve preferring fewer activities or a more leisurely routine. Intermediate descriptions can include a mixture. None creates a separate personality type or a ranking of diligence.\n\nKeep amount and speed visible rather than compressing everything into 'busy'. You can have many commitments and move through them steadily, or have few commitments and feel rushed throughout. Those are different patterns to investigate within your day; this page does not create additional measured facets from them.",
+          "heading": "What Activity describes",
           "key": "section-01-6ba990f3ec",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency often feels comfortable with momentum and fuller schedules. A weaker tendency may prefer fewer transitions, slower sequencing, and more unstructured time. Actual output depends on priorities, skill, health, resources, and whether activity serves a useful goal.",
-          "heading": "Precise Definition",
+          "body": "A schedule describes what occupies time. Productivity concerns what is accomplished, at what quality, and with what resources. Repeated interruptions and redoing work can fill a day without improving the result. A lighter schedule does not automatically produce thoughtful or high-quality work either.\n\nGoals, standards, persistence, skills, and resources are further questions. Do not infer them from pace. For a task that matters, identify the deliverable and evaluate it directly.\n\n[Excitement Seeking](/en/personality/big-five/facets/excitement-seeking) concerns attraction to stimulation rather than simply maintaining activity. Familiar errands can keep someone busy without being exciting. Activity also does not establish [Positive Emotions](/en/personality/big-five/facets/positive-emotions): an active day can be pleasant, frustrating, or both.",
+          "heading": "Measure useful output separately",
           "key": "section-02-ef10144fc2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Activity belongs to [Extraversion](/en/personality/big-five/extraversion), reflecting energetic behavioral tempo.",
-          "heading": "Parent Domain",
+          "body": "Current energy and physical capacity are not interchangeable with a preferred routine. Sleep, pain, illness, medication, disability, and practical demands can change what is possible. Someone can want more activity than their current condition permits, or have adequate energy and prefer a lighter schedule.\n\nObligations matter just as much. A person working across several responsibilities may move continually while wishing for fewer demands. Observing them at their busiest does not establish that they chose the pace.\n\nRestlessness, tension, or persistent exhaustion should not be dismissed as a personality style. This facet cannot diagnose or rule out a health condition. A marked change, ongoing distress, or difficulty functioning deserves appropriate professional assessment.",
+          "heading": "Energy and obligations change the visible pattern",
           "key": "section-03-344170cb97",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Activity versus Achievement Striving:** Activity concerns pace; achievement concerns demanding goals.\n- **Activity versus physical energy:** Sleep, illness, medication, disability, and conditioning can affect energy independently.\n- **Activity versus Excitement Seeking:** [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking) concerns intensity of stimulation, not simply busyness.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Look at periods when necessary tasks are complete and a realistic choice remains. Do you spontaneously add activities, continue an existing one, or keep the time open? Does the chosen routine feel like something you want to repeat?\n\nRecord activity amount, transitions, and urgency separately. Then record what was completed and how much recovery was needed. Enjoying a full afternoon does not prove that its output was better; finishing a task in a quiet afternoon does not establish a generally low Activity tendency.\n\nA comparison is more informative when workload and practical conditions are reasonably similar. A day after poor sleep and a day after a deadline has passed are useful context, but not interchangeable observations.",
+          "heading": "Notice what happens when there is room to choose",
           "key": "section-04-64f7071b8d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Activity may appear as brisk transitions, full calendars, moving while talking, or discomfort with idle time. Weaker Activity may appear as deliberate pace, fewer simultaneous commitments, long focus blocks, or enjoyment of open time. External workload can mimic preference.",
-          "heading": "Behavioral Cues",
+          "body": "Consider this illustrative situation. A person spends several weekends helping a friend relocate, fitting errands and language study around transport trips. They begin to think that they naturally prefer a constantly occupied weekend.\n\nAfter the move is complete, an ordinary weekend offers several feasible activities. Without deliberately testing themselves, they choose one language lesson and leave the rest of the afternoon open. That is a natural counterexample to the broad impression. Their earlier activity was partly a response to helping someone, so the interpretation should allow for that obligation.\n\nA weekend spent resting because they are ill provides different information: the available capacity changed. A later afternoon with several small activities intentionally scheduled for comparison is different again. It is a planned adjustment, not evidence of their spontaneous default.",
+          "heading": "An exception to the 'always busy' impression",
           "key": "section-05-ed6a04c950",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A caregiver may live at a fast pace without wanting it. Someone may be active physically but slow in decision making. Health and life stage can constrain expression, so current busyness is not a pure trait measure.",
-          "heading": "Contextual Differences",
+          "body": "If your routine involves frequent activity, check whether transitions cause omissions, repeated work, or inadequate recovery. A buffer between activities may solve a scheduling problem without changing what you enjoy.\n\nIf you prefer a less crowded routine, check whether necessary responses and commitments are still met. When a specific delay matters, an earlier start, a clearer notification rule, or a smaller first step may be more useful than trying to appear busy all day.\n\nWhen coordinating with someone else, agree on deadlines, availability, and transition time. Preferences can inform the arrangement, while responsibility is assessed from what actually happens. Faster pace does not excuse errors, and a preference for a leisurely routine does not settle whether an obligation was met.",
+          "heading": "Adjust for the task you actually need to complete",
           "key": "section-06-cb179f43f6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Moving quickly between tasks.\n- Maintaining several active commitments.\n- Feeling engaged by a full day.\n- Confusing motion with progress.\n- Underestimating transition and recovery costs.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Start with a narrow question: 'When demands ease, do I still spontaneously add activity?' Observe several naturally available periods. Note obligatory and optional activities, sleep or health constraints, transitions, completed work, and recovery needs.\n\nAn available period in which you choose not to add activity is different from a period in which work or physical limits leave no opportunity. Record spontaneous choices in both directions. If no counterexample to your initial impression appears, ask whether you have observed anything beyond the same demanding routine. Missing evidence is not confirmation.\n\nThen change one manageable feature. If a schedule is crowded, add a buffer between two non-urgent activities. If a particular task is delayed, set a feasible start time for that familiar task. Keep normal sleep and appropriate physical limits; rushing or increasing exertion is unnecessary for the exercise.\n\nState the intended benefit before the trial. Afterwards, check completion, mistakes, recovery, and whether you would repeat the arrangement. Label the event as deliberately organised. Retain a provisional local description if similar choices recur with comparable demands and real freedom. Narrow it if the pattern occurs mainly before deadlines. Suspend the personality interpretation if changing workload or current health dominates the evidence. This is feedback about arrangements, not trait validation or a promise of personality change.",
+          "heading": "Keep ordinary observations and planned adjustments distinct",
           "key": "section-07-432e833b6d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Preferring sequential focus.\n- Protecting unscheduled time.\n- Moving deliberately without urgency.\n- Appearing slow in fast coordination environments.\n- Producing depth despite low visible busyness.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) links Activity Level with NEO Activity. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) includes both busyness and leisurely pace; the [Maples four-item scale](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) samples less content. Self-report item content does not establish actual multitasking skill or productive performance.\n\nThis page explains a public facet vocabulary. It does not add scores absent from your result, specify weighting or percentile thresholds, or establish validation for a particular FermatMind questionnaire.\n\nRead [Extraversion](/en/personality/big-five/extraversion) for the parent domain. For group preference, see [Gregariousness](/en/personality/big-five/facets/gregariousness); for taking charge, see [Assertiveness](/en/personality/big-five/facets/assertiveness); for friendly connection, see [Warmth](/en/personality/big-five/facets/warmth). [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), [Positive Emotions](/en/personality/big-five/facets/positive-emotions), and the [facet guide](/en/personality/big-five/facets) offer further comparisons.",
+          "heading": "Sources and further distinctions",
           "key": "section-08-a5ccdc6ade",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Activity can support momentum and comfort with rapid transitions. Possible costs include fragmentation, exhaustion, and shallow prioritization. Weaker Activity can support depth and recovery; possible costs include slow response where tempo matters. Neither level predicts health or productivity.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-ed3030f0a8",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A consultant keeps a full day but reviews whether each block advances a priority. Her pace is high; the review prevents activity from becoming an outcome measure.",
-          "heading": "An Original Case",
-          "key": "section-10-72aca1ce6c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A novelist works slowly for four focused hours and produces a completed manuscript. Low visible busyness is not wasted time or low productivity.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-b26ba34e0b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Does a full schedule energize or deplete you?\n2. How much transition can you absorb before quality falls?\n3. Is current pace chosen or imposed?\n4. When does motion replace progress?\n5. What pace supports your health and obligations now?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-7b1cc52f07",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Track pace, useful output, and recovery for three days. Add one buffer if overscheduled, or one timed activation block if under-responsive. Evaluate function rather than celebrating busyness.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-45decbb06c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Warmth](/en/personality/big-five/facets/warmth), [Gregariousness](/en/personality/big-five/facets/gregariousness), [Assertiveness](/en/personality/big-five/facets/assertiveness), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), [Positive Emotions](/en/personality/big-five/facets/positive-emotions).",
-          "heading": "Continue Reading",
-          "key": "section-14-9518329579",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Activity concerns the amount and pace of activity you tend to prefer. It does not establish productivity, fitness, or health, and a demanding schedule may reflect obligations rather than a chosen way of living.",
+        "title": "Activity: Preferred Busyness and Behavioural Pace"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/activity",
-      "source_hash": "e59f2063618d430c0acac645816f16c228de6b78771151f59446a1df1b1f25ee",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Activity concerns preference for a fast pace, movement, and having things underway. It is not health, fitness, productivity, worth, or a clinical mood indicator.",
-      "title": "Activity: Preference for a Fast and Busy Pace"
+      "source_hash": "24b9109a0e9baf52134857877d9aaa815a0d17c6b556045db3b7d94d0cfa5688",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Activity concerns the amount and pace of activity you tend to prefer. It does not establish productivity, fitness, or health, and a demanding schedule may reflect obligations rather than a chosen way of living.",
+      "title": "Activity: Preferred Busyness and Behavioural Pace"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E4-activity-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "E4-activity-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E4-activity-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E4-activity-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "10ce0151e0740faaa3bf8d98d0f6cb6c06f0555d81415120d0ed2187909da057"
+  "source_content_sha256": "059e6cafc09d562b1293203a5368f415749331b81438323f57b486106378c6a7"
 }

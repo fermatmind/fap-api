@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/feelings",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "feelings",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Awareness and differentiation are not the same as frequency, intensity, or instability.",
-          "question": "Does strong Feelings mean being emotional?"
+          "answer": "Not by itself. Some related instruments include emotional intensity and highs and lows, but control concerns what happens next. Examine your actions in specific situations rather than inferring regulation skill from this facet.",
+          "question": "Does stronger Feelings mean poor emotional control?"
         },
         {
-          "answer": "No. This facet does not measure a global intelligence, empathy, social skill, or regulation ability.",
-          "question": "Does weaker Feelings mean low emotional intelligence?"
+          "answer": "A brief outward response does not settle the inner experience. Compare what you noticed privately with what you chose to disclose, and keep both observations. Privacy, timing, and the person listening may matter.",
+          "question": "Can I experience emotion strongly while saying very little?"
         },
         {
-          "answer": "Not by itself. Consider direct evidence of functioning, needs, distress, and relationships rather than treating a facet label as a defect.",
-          "question": "Is rarely thinking about emotion a problem?"
+          "answer": "Vocabulary can help you describe an experience, but it also reflects learning and practice. Distinguish the tendency to experience and attend to feelings from the skill of describing them. One detailed account is insufficient.",
+          "question": "Does a detailed emotional vocabulary establish stronger Feelings?"
         },
         {
-          "answer": "No. Some practices train internal attention, but a practice history and a personality tendency are different constructs.",
-          "question": "Is this facet the same as meditation experience?"
+          "answer": "This facet is not a complete empathy assessment. Some related item sets include experience of others’ emotions, but they cannot establish your overall accuracy or care. Check another person’s account and observe how you respond to their needs.",
+          "question": "Does weaker Feelings mean I lack empathy?"
         },
         {
-          "answer": "Emotion labeling and body-signal observation can expand a behavior repertoire. This page does not promise a trait or score change.",
-          "question": "Can emotional awareness be practiced?"
+          "answer": "Record that directly. You can distinguish no obvious feeling from an unclear feeling or a reaction noticed later. Do not invent an emotion word to complete the exercise; the absence or uncertainty is part of the observation.",
+          "question": "What should I record when I do not notice a feeling?"
+        },
+        {
+          "answer": "It shows a different response during that prompted activity. Attention, wording, or understanding of the event may have changed. Keep it separate from ordinary observations; a few prompted responses cannot demonstrate a trait change or validate a test.",
+          "question": "If a prompt makes me more reflective, has my personality changed?"
         }
       ],
       "framework": "big_five",
@@ -103,169 +100,100 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Feelings concerns how much attention a person gives to internal emotion and how finely they distinguish it. The question is not how volatile or intense emotion is, but whether someone notices, names, and explores states such as disappointment, sadness, irritation, anticipation, or mixed feelings.\n\n“Feelings within Openness: depth of attention to inner emotional experience” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "This facet offers a way to explore how emotion enters your experience and whether you tend to notice and examine it. The material can include pleasure, disappointment, relief, or an uncertain response you have not yet understood.\n\nThe terminology here comes from the NEO Feelings facet and related IPIP constructs. The [official NEO–IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) pairs Feelings with Emotionality. This is a personality description, rather than a test of whether you can identify the correct emotion.\n\nKnowing many emotion words and having a vivid emotional experience are different kinds of evidence. A fluent description may reflect vocabulary or practice; a strong reaction may reflect an unusually significant event. Neither observation settles the broader tendency.",
+          "heading": "What the Feelings facet describes",
           "key": "section-01-cb40a8d153",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency can resemble a high-resolution internal vocabulary: “hurt after being misunderstood” rather than simply “bad.” A weaker tendency does not mean emotion is absent. Attention may remain with events, tasks, bodily action, or external facts, and emotion may be named in broader terms.\n\nThis facet is not a diagnosis, emotion-regulation score, empathy measure, or claim about “emotional intelligence.”",
-          "heading": "Precise Definition",
+          "body": "Openness provides a context for considering inner experience alongside other forms of experience. Feelings is one narrower part of that context, rather than a substitute for the whole domain.\n\nThe actual item sets also matter. The [longer official IPIP facet key](https://ipip.ori.org/newNEOFacetsKey.htm) includes intensity, self-examination, and awareness. The [four-item version developed by Maples and colleagues](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) emphasizes intensity and emotional highs and lows. A definition that excludes intensity altogether would therefore be misleading.\n\nThese sources clarify the concept. They do not identify the questions or scoring rules of every assessment that uses a similar label.",
+          "heading": "Its place within Openness—and the importance of the instrument",
           "key": "section-02-1b6a959edb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Feelings belongs to [Openness to Experience](/en/personality/big-five/openness) because openness can involve receptivity to internal as well as external experience.",
-          "heading": "Parent Domain",
+          "body": "**Distress:** Neuroticism includes tendencies toward worry and irritation. It is a different construct from this Openness facet, but different domain labels do not guarantee that every item has unrelated content. Examine a troubling event directly rather than treating a facet name as an explanation.\n\n**Expression:** Feeling something and showing it are separate observations. [Gross and John’s research on emotional expressivity](https://pubmed.ncbi.nlm.nih.gov/9107009/) distinguishes subjective experience from expressive behavior. A restrained response does not reveal everything that happened internally.\n\n**Aesthetic interest:** Admiring a building’s design and attending to the feeling it evokes offer different perspectives on the same encounter. One event need not belong to only one facet.\n\n**Empathy and regulation:** Some related IPIP items concern other people’s emotions, but this facet is not a complete assessment of empathy or emotional intelligence. Understanding another person calls for checking their account; handling an emotion calls for observing what you actually do.",
+          "heading": "Separate experience, distress, expression, and skill",
           "key": "section-03-2bad46ca6b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Feelings versus Aesthetics:** [Aesthetics](/en/personality/big-five/facets/aesthetics) concerns receptivity to beauty; Feelings concerns recognizing the internal response.\n- **Feelings versus Neuroticism:** [Neuroticism](/en/personality/big-five/neuroticism) concerns tendencies in unpleasant emotional reactivity and recovery. Feelings concerns attention and differentiation. A person may notice emotions precisely while remaining generally steady.\n- **Feelings versus empathy:** Empathy concerns other people’s states; this facet centers on one’s own inner experience.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Start with an ordinary question: after an experience, what happens to your attention?\n\nYou might often return to the feeling an event brought up and want to understand its significance. After receiving an unexpected note of thanks, for example, you might revisit both the pleasure and the awkwardness of being acknowledged.\n\nAlternatively, you might usually move on without exploring the emotional response. You can appreciate the note, answer it, and return to your day. That is something to record, rather than a reason to assume either indifference or superior task focus.\n\nThese are prompts for exploration, not scoring criteria. More attention does not establish better communication, and less attention does not establish better decisions. Those outcomes require their own evidence.",
+          "heading": "Look for patterns without assigning a role",
           "key": "section-04-7580609ae8",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may involve differentiated emotion words, journaling, pausing to understand a reaction, or including felt response in a decision. A weaker tendency may involve broad labels, emphasis on what happened rather than how it felt, and preference for explicit facts in decisions. Expression norms, language, privacy, and practice can change what others observe.",
-          "heading": "Behavioral Cues",
+          "body": "Consider Avery, who receives encouraging feedback while several work requests are arriving. Avery replies briefly and continues with the requests. Later, while walking home, Avery returns to the feedback and notices a strong mixture of pleasure and disbelief.\n\nThe later experience challenges an inference based only on the short reply. It does not establish a facet level either: the feedback may have mattered unusually much, and the earlier moment offered little time to reflect.\n\nA different counterexample is someone who describes emotions fluently during a familiar presentation but says that the phrases were rehearsed. Expressive language alone does not establish a corresponding inner experience.\n\nWhen observations disagree, keep both. Compare the event’s importance, available time, company, and willingness to disclose. A useful provisional description might be: “I attend to feelings more when I have privacy.”",
+          "heading": "A quiet response can be a natural counterexample",
           "key": "section-05-f1ae29651e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "During emergencies, competition, caregiving, or precision work, attention may shift outward even for someone who usually notices emotion closely. Quiet reflection or counseling may make differences more visible. Cultural restraint can reduce public expression without proving low internal awareness.",
-          "heading": "Contextual Differences",
+          "body": "Over the next few days, choose a few naturally occurring, ordinary moments. Something pleasant, something unwelcome, or something that brought no obvious feeling can all be recorded. There is no need to manufacture an experience, complete a daily quota, or collect all three kinds.\n\nFor each moment, make a short note:\n\n1. What happened, and which facts could be checked?\n2. Before writing, had I already noticed a feeling? Was it prominent, slight, or unclear?\n3. What did I do, and did my understanding change later?\n4. What conditions matter—time pressure, tiredness, personal importance, or reluctance to discuss it?\n\nFirst check whether there was a suitable opportunity. If that kind of event has not occurred, or conditions did not allow observation, write “No suitable opportunity occurred.” This does not support weaker Feelings. It differs from having an event and an opportunity to observe it, but noticing no obvious feeling or not noticing a feeling at the time.\n\nKeep “no obvious feeling,” “did not notice at the time,” and “did not want to say” separate. If you noticed a physical change, record it without automatically assigning an emotional cause; tense shoulders might also follow a long period at a desk.\n\nCheck whether an ordinary, unprompted moment challenges your initial impression. If none has been found, write “No natural counterexample found yet.” Do not manufacture one or treat its absence as confirmation. Keep a change after a prompt in the prompted notes; it cannot fill the place of a natural counterexample. These notes describe situations. They do not measure your personality or validate an assessment.",
+          "heading": "Observe ordinary moments before adding a prompt",
           "key": "section-06-cb8d347a35",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Distinguishing several emotions within one event.\n- Treating emotion as information to examine rather than an automatic command.\n- Noticing bodily changes and asking what they may signal.\n- Expressing internal needs with relatively specific language.\n- Delaying action when reflection becomes prolonged.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "If you want to explore another response after the ordinary observations, choose one small event and allow up to two minutes. Ask: “What mattered to me here? Is there a feeling I want to attend to?” An unclear answer is acceptable.\n\nThen choose a concrete next step. You could thank someone, clarify an arrangement, or return to what you were doing when nothing needs attention.\n\nMark this note as prompted. Do not combine it with the unprompted observations as though they were the same evidence. Review whether the pause clarified a relevant detail, helped you choose an action, or took more attention than you wanted to give it.\n\nThe result concerns this particular behavior in this situation. It does not demonstrate a trait change.",
+          "heading": "Try a deliberate pause as a separate activity",
           "key": "section-07-ae84d89b4b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Describing internal states with simple, broad terms.\n- Evaluating a day through completed actions more than felt quality.\n- Trusting observable evidence over “what feels right.”\n- Discovering an emotion after behavior or bodily tension has already changed.\n- Moving quickly into action without much internal analysis.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "**A clear feeling, an uncertain explanation:** Keep the feeling and the explanation separate. Feeling overlooked after an unanswered message does not establish another person’s intention. Check whether they received it before deciding what the silence means.\n\n**A clear inner response, little wish to disclose:** Choose what is relevant to share. “I need time to consider that arrangement” may be sufficient. Attending to an experience does not require a detailed public account.\n\n**Repeated reflection with no new information:** Set an endpoint for this round of reflection and complete one relevant action. Check whether the issue moved forward, rather than judging yourself by how long you considered the feeling.\n\n**Little emotional attention and no practical difficulty:** You can keep your usual approach. Use a brief prompt when a particular situation calls for it; there is no need to seek a stronger facet description.\n\nWhen the natural notes are provisionally consistent, keep a description of those particular situations. When they differ, narrow the original hypothesis to the conditions where it fits. If suitable opportunities or notes are scarce, or the event's significance, time pressure, and other explanations remain hard to distinguish, set the tendency judgment aside until relevant experiences occur. Not finding a natural counterexample does not require arranging one to complete the notes.",
+          "heading": "Use the observation to choose a next step",
           "key": "section-08-9b857d55e2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Feelings can support nuanced self-description and clearer communication of needs. Possible costs include overanalysis, rumination-like attention, or delaying an adequate decision while seeking emotional certainty. The facet itself does not establish any of these outcomes.\n\nWeaker Feelings can support rapid task focus and less internal monitoring. A possible cost is missing early signals or making close relationships do extra interpretive work. It is a style difference unless direct evidence shows impairment or distress.",
-          "heading": "Strengths and Costs",
+          "body": "The [IPIP guide to personality constructs](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) describes scales measuring constructs similar to NEO facets, rather than interchangeable instruments. Other tools organize facets differently: the [BFI-2 authors’ page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes a 15-facet structure.\n\nThis page explains public terminology. It does not calculate a score, percentile, ability estimate, or prediction from your notes. The examples are illustrative, and the observation activities are editorial suggestions rather than validated procedures for measuring or changing this facet.\n\nTheir practical purpose is modest: to replace a broad impression with a more concrete description that includes context and counterexamples.",
+          "heading": "What the sources and exercises can establish",
           "key": "section-09-1ae6cdaf27",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "During a project review, a programmer recalls a vague sense of unease before launch. He did not yet have a technical argument, but he can identify that internal signal and investigate what information it may have reflected. Awareness is useful only when paired with evidence; the feeling does not prove the product decision was wrong.",
-          "heading": "An Original Case",
+          "body": "Read [Openness to Experience](/en/personality/big-five/openness) for the broader domain, or the [30-facet guide](/en/personality/big-five/facets) to compare narrower concepts. For the distinction concerning unpleasant emotional tendencies, see [Neuroticism](/en/personality/big-five/neuroticism).\n\nOther Openness facets include [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas), and [Values](/en/personality/big-five/facets/values). Interest in emotional experience does not imply the same tendency across all of them.",
+          "heading": "Continue with the question you want to answer",
           "key": "section-10-c9210f4089",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A customer manager remains composed during a hostile call and reports feeling fine. Hours later, muscle tension and poor sleep help her recognize anger. The emotion existed without being promptly named. This does not diagnose suppression or show that she lacks care.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-9bbda19081",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How specific is your answer when someone asks how you feel?\n2. Do disappointment and sadness, or anxiety and anticipation, feel distinguishable to you?\n3. Does felt response enter major decisions, and how do you check it against evidence?\n4. When did you last revise your understanding of an emotion?\n5. Which bodily changes prompt you to consider an emotional signal?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-c62a2b945d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For three days, choose three different words for notable emotional states and record the event, body signal, and action urge separately. If you already monitor emotion frequently, add a ten-minute limit and then return to the next concrete task. The exercise observes attention; it does not assess mental health.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-dc67ae4064",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas), [Values](/en/personality/big-five/facets/values).",
-          "heading": "Continue Reading",
-          "key": "section-14-c05c738e69",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Feelings is a narrower facet of Openness concerning emotional experience and attention to inner feelings. It does not by itself establish emotional intelligence, expressiveness, or regulation skill. Concrete situations help make the distinction useful.",
+        "title": "Feelings within Openness: How You Experience and Attend to Emotion"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/feelings",
-      "source_hash": "cf5b4ffcb05c6f33b538cddfa3f81ebc3f10e03da64c7c71467e5c54155241ff",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Feelings concerns attention to, differentiation of, and interest in one’s internal emotional experience. It is not emotional instability, empathy, or a mental-health indicator.",
-      "title": "Feelings: Attention to Inner Emotional Experience"
+      "source_hash": "094683a4b1115b2cfa663de940985f58a4c50e274965cff7234acb6d2dd89a80",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Feelings is a narrower facet of Openness concerning emotional experience and attention to inner feelings. It does not by itself establish emotional intelligence, expressiveness, or regulation skill. Concrete situations help make the distinction useful.",
+      "title": "Feelings within Openness: How You Experience and Attend to Emotion"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "O3-feelings-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "O3-feelings-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "O3-feelings-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "O3-feelings-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "39c71443dc9b9adb4816d54e6eecbb869691b701f80eaad7521ddc79a56d42e6"
+  "source_content_sha256": "a06b842388793139679c30b6b977494950d2bdb4ab08ae2dd972ef518aafb115"
 }

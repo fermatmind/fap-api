@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/centers/gut",
@@ -23,78 +23,39 @@
       "entity_key": "gut",
       "entity_type": "center",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Quick action can reflect urgency, training, authority, habit, or safety demands. Compare the stated concern, the visible sequence, and at least one event in which similar pressure produced a different response.",
-          "question": "Is quick action enough to identify a gut-center pattern?"
+          "answer": "Yes, as a possibility. The traditional grouping includes different ways of expressing, setting aside, and regulating anger. Explore how boundaries, steadiness, or rightness shape choices across events. Low visible anger does not by itself establish Nine.",
+          "question": "Can someone who rarely feels angry consider the gut center?"
         },
         {
-          "answer": "Yes. A quiet response may involve deliberate restraint, postponed conflict, uncertainty, or situational caution. The useful question is how pressure was handled, not whether the person looked forceful.",
-          "question": "Can a quiet response still belong in a gut-center comparison?"
+          "answer": "Ask what was hardest to accept in a specific event: losing choice through someone else's control, or a violation of an important standard. Then consider whether restoring autonomy or correcting the rule would have addressed the main concern. The motives can overlap, and one answer cannot settle type.",
+          "question": "How can I compare Eight and One when both oppose unfairness?"
         },
         {
-          "answer": "Correction usually refers to bringing action closer to a standard, while direct resistance focuses on contesting control or intrusion. In practice the same behavior can serve either motive, so the distinction needs examples and counterexamples.",
-          "question": "What distinguishes correction from direct resistance?"
+          "answer": "Not on its own. A delay may reflect exhaustion, missing information, limited resources, or an unsafe power relationship. Consider what happened to the person's own preference and what they eventually did, then compare other situations.",
+          "question": "Does postponing a disagreement point to Nine?"
+        },
+        {
+          "answer": "No. The instinctive or gut center groups Eight, Nine, and One. Instinctual subtypes concern how a core pattern appears in different areas of life. Belonging to this traditional center does not identify an instinctual subtype.",
+          "question": "Is the instinctive center the same as an instinctual subtype?"
         }
       ],
       "framework": "enneagram",
@@ -110,25 +71,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-8",
-          "label": "core_type:type-8",
+          "label": "Type 8: Autonomy and protection",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-8"
         },
         {
           "href": "/en/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "Type 9: Steadiness and personal needs",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "Type 1: Standards and integrity",
           "relationship": "center_member",
           "target_identity_key": "core_type:type-1"
         }
@@ -167,37 +128,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "To observe gut center clues, choose a moment when a boundary, deadline, or unfair demand became salient. Note the first visible move, the words used to justify it, whether energy moved toward confrontation, delay, or correction, and what happened after the pressure changed.",
-          "key": "observable_pattern",
-          "title": "Notice the pressure-to-action sequence"
+          "body_md": "The gut center, also called the body or instinctive center, traditionally groups Types Eight, Nine, and One. A useful everyday question is: when something outside me demands a response, how do I maintain my own position?\n\nThe [Enneagram Institute's account of the centers](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) identifies anger as this center's emotional theme. That does not make its members the three visibly angriest types. The distinction concerns handling the theme: expressing it, losing contact with it, or keeping it under control.\n\nThis is why a quiet Nine and a restrained One can share a grouping with a direct Eight. Looking calm is not the same as feeling no pressure, and making a reasoned case does not automatically make someone a head type. Everyone can think, feel, act, and experience anger; the grouping describes a traditional pattern of concern rather than an exclusive human function.",
+          "key": "center_theme",
+          "title": "Why these three contrasting patterns belong together"
         },
         {
-          "body_md": "Eight, Nine, and One differ in the traditional account: Eight may test power through direct engagement, Nine may preserve steadiness by postponing friction, and One may compare action with an internal standard. These are prompts for observation, not rules, and any person may show another response.",
+          "body_md": "**Eight may ask, “Do I still have a choice?”** The traditional description emphasizes protection and resistance to being controlled. Clear pushback can establish a necessary boundary. When every disagreement becomes a contest, however, the person may lose room for cooperation or for admitting that something hurt. Forcefulness alone is not evidence of this motive. [Type Eight description](https://www.enneagraminstitute.com/type-8/)\n\n**Nine may ask, “Can this remain manageable and peaceful?”** The traditional pattern favors stability and harmony, sometimes putting personal preferences in the background. Easing tension can keep discussion possible. Repeated accommodation or postponement can also leave a need unspoken until others mistake the absence of objection for agreement. This does not mean Nine has no will or never gets angry. [Type Nine description](https://www.enneagraminstitute.com/type-9/)\n\n**One may ask, “Is this the right way to proceed?”** The traditional description emphasizes integrity, responsibility, and improvement. Restraint and correction can protect a meaningful standard. Trouble can arise when a preferred method becomes a rule everyone must follow, or when correction turns into persistent self-reproach. Precision can also come from training rather than type. [Type One description](https://www.enneagraminstitute.com/type-1/)",
           "key": "within_center_difference",
-          "title": "Eight, Nine, and One differ within the center"
+          "title": "Autonomy, steadiness, and doing what is right"
         },
         {
-          "body_md": "A counterexample should match the original event in stakes and authority while showing a different response. Let the counterexample change the gut hypothesis if role permission, fatigue, safety, practiced negotiation, cultural expectations, or the specific relationship better accounts for the action.",
-          "key": "counterexample",
-          "title": "Use a calm counterexample"
+          "body_md": "Imagine that someone rearranges a shared room, removes the table you use, and tells you to clear your belongings that evening. These responses are invented examples for comparison, not predictions about people with particular types.\n\nAn Eight interpretation might center on the unilateral decision: “We can change the room, but you cannot decide for me.” Even a better layout may not settle the issue if the person's choice was bypassed.\n\nA Nine interpretation might first reduce the immediate friction: “Let's leave it for tonight.” The person might agree outwardly but never get around to moving anything. The useful follow-up is whether the delay served a practical need or kept disagreement and a personal preference out of view.\n\nA One interpretation might center on the procedure: “Changes to a shared space need an agreement, and the rule should apply to everyone.” The objection might remain even if the change happened to benefit that person.\n\nAny of the three could object calmly, raise their voice, or propose a compromise. Compare what the response was trying to protect: choice, steadiness, or a defensible standard. More than one concern may be active.",
+          "key": "shared_event",
+          "title": "One event: a plan is changed without asking you"
         },
         {
-          "body_md": "The center label does not define a medical category. It does not identify a neurological system or a fixed bodily capacity. Bodily sensations may be useful observations, but they do not prove motive, type, competence, or a future result.",
-          "key": "boundary",
-          "title": "Do not turn instinct into anatomy"
+          "body_md": "Use a real event and your own reported concern rather than assigning a motive to someone from the outside.\n\n- If my choice had been restored, would most of my objection have eased even if the outcome remained imperfect?\n- If disagreement were safe and unlikely to become a fight, could I state what I wanted?\n- If a fair shared standard were met, could I accept a method different from my preferred one?\n\nThese questions explore possible explanations; they do not award a type. The [Narrative Enneagram's comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer a traditional reference for differences within this grouping, not validated decision rules.\n\nLook for events with similar stakes but different responses. An Eight candidate can negotiate gently, a Nine candidate can defend an important limit, and a One candidate can accept several reasonable methods. Flexibility does not automatically disprove a candidate. But if authority, safety, fatigue, or an explicit responsibility explains the change better than a recurring concern about autonomy, steadiness, or standards, reduce your confidence in that interpretation.",
+          "key": "distinguishing_questions",
+          "title": "Change the conditions before deciding what the behavior means"
         },
         {
-          "body_md": "Duration: 4\n\nContext: Track four boundary or deadline moments with comparable stakes, including who had authority and whether direct disagreement was safe.\n\nObservable signal: Record the first visible action, the exact boundary or standard named, the time before responding, and whether the person confronted, deferred, corrected, or changed course.\n\nPage-specific signal: Compare direct pushback, delayed engagement, and standards-based correction rather than treating all decisive behavior as the same gut-center clue.\n\nAlternative explanation: For each event, note whether urgency, job role, fatigue, safety, culture, learned negotiation, or relationship history could explain the response without a center hypothesis.\n\nReflection prompt: Identify one calm or low-pressure counterexample and explain whether it weakens the proposed Eight, Nine, or One comparison.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "For each event, note whether urgency, job role, fatigue, safety, culture, learned negotiation, or relationship history could explain the response without a center hypothesis.",
-            "context": "Track four boundary or deadline moments with comparable stakes, including who had authority and whether direct disagreement was safe.",
-            "duration_days": 4,
-            "observable_signal": "Record the first visible action, the exact boundary or standard named, the time before responding, and whether the person confronted, deferred, corrected, or changed course.",
-            "page_specific_signal": "Compare direct pushback, delayed engagement, and standards-based correction rather than treating all decisive behavior as the same gut-center clue.",
-            "reflection_prompt": "Identify one calm or low-pressure counterexample and explain whether it weakens the proposed Eight, Nine, or One comparison."
-          },
-          "title": "Observation exercise"
+          "body_md": "Choose a small disagreement in which speaking openly is safe. Try the experiment that matches the response you tend to overuse.\n\n**If you usually push back immediately:** name the actual boundary before challenging the whole proposal. “Please ask before moving my things. Let's decide together where the table could go.” Notice whether the boundary remains clear while the other person has room to contribute.\n\n**If you usually accommodate or postpone:** state one preference before finding a solution for everybody else. Add a concrete next step: “I want to keep a table here. Can we discuss alternatives tomorrow evening?” Notice whether you participate in the eventual decision rather than letting delay stand in for a choice.\n\n**If you usually correct:** separate a shared requirement from your preferred method. “We need agreement before changing the room; several layouts could work.” Notice whether you preserve the important standard without making every difference an error.\n\nThese are reflection experiments, not promised treatments or a route to another type. If disagreement carries a real threat or penalty, attend to practical safety and support. Willingness to confront someone is not a typing test.",
+          "key": "practice",
+          "title": "Try a response that makes the underlying need clearer"
+        },
+        {
+          "body_md": "Read the pattern that seems most plausible and one serious alternative: [Eight on autonomy and protection](/en/personality/enneagram/type-8), [Nine on steadiness and personal priorities](/en/personality/enneagram/type-9), or [One on standards and integrity](/en/personality/enneagram/type-1). Keep an example that supports each explanation and another that weakens it. If none fits well, return to the [Enneagram overview](/en/personality/enneagram).\n\nCenter explanations belong to traditional Enneagram theory. Hook and colleagues' review abstract reports mixed reliability and validity findings; it does not validate FermatMind assessments. [Review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/)\n\n“Gut” does not identify a brain region, bodily ability, or medical category. Physical tension can be part of an observation, but it cannot establish motive or type. The exercises here are not diagnostic tools.",
+          "key": "evidence_and_next",
+          "title": "Choose a comparison to read next"
         }
       ],
       "seo": {
@@ -208,8 +166,8 @@
       "slug": "enneagram/centers/gut",
       "source_hash": "fceffd48a4077dcbbd574e0f29161c964a66130960c3155712396b073fd5fdae",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The gut center is a traditional Enneagram grouping for Types Eight, Nine, and One. A gut-center observation asks what happens when pressure calls for action, resistance, restraint, or correction; it does not mean that bodily instinct controls every choice, and the three types can respond quite differently.",
-      "title": "Gut center: observe how action meets pressure"
+      "summary": "Eight may protect autonomy directly, Nine may preserve steadiness, and One may restrain and correct according to a standard. The gut center brings these contrasting responses together to explore what happens when a person feels pushed, interrupted, or required to give way. It is a traditional Enneagram grouping, not a measure of anatomy or nervous-system function.",
+      "title": "Gut Center: How Types 8, 9, and 1 Handle Boundaries and Anger"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -219,69 +177,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "b8085c8b1fe946337d6b600033f335b069167b341c2ed1553efc71e5d01bd52d"
+  "source_content_sha256": "cb587ba0f806fc0cc312e2b001b41dd4c4a81d0a8c93b54aa49640599a486dc4"
 }

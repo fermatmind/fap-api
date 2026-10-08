@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/actions",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "actions",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Preference for unfamiliar experience is distinct from responsibility, mood, and commitment.",
-          "question": "Does strong Actions mean being restless or unreliable?"
+          "answer": "It does not establish either. Novelty, intensity, and willingness to accept risk are different questions, although they can occur together. An unfamiliar activity can be quiet and carefully chosen.",
+          "question": "Does strong Actions mean I like danger or intense stimulation?"
         },
         {
-          "answer": "No. Meaning can come from depth, mastery, relationships, and familiar rituals rather than novelty.",
-          "question": "Does weaker Actions imply a boring life?"
+          "answer": "First identify why you declined and whether participation was feasible. Cost, scheduling, access, or unclear conditions may explain the decision. One refusal does not determine the facet, and even recurring choices should be interpreted within their actual range.",
+          "question": "What does declining one new activity tell me?"
         },
         {
-          "answer": "Not exactly. It includes low-risk variation; adventure often implies greater uncertainty or risk.",
-          "question": "Is this facet the same as adventurousness?"
+          "answer": "No. Work, relocation, care responsibilities, and necessity can create extensive exposure. Separate chosen exploration from required experience, and consider what opportunities were available.",
+          "question": "Does extensive travel establish a strong tendency?"
         },
         {
-          "answer": "No individual level follows from age. Resources, health, roles, and opportunity may change visible behavior.",
-          "question": "Do older people necessarily score lower on Actions?"
+          "answer": "No. Learning can occur inside a familiar activity, and conceptual curiosity is different from entering unfamiliar activities. Skill, persistence, and interest in ideas should be assessed separately.",
+          "question": "Does enjoying familiar routines mean I dislike learning?"
         },
         {
-          "answer": "Choose one low-cost, reversible change. The aim is behavioral observation, not forcing a personality transformation.",
-          "question": "Where can I start if I want more variety?"
+          "answer": "Choose an activity related to your purpose, with manageable costs and a clear way to stop. Set your limits, try it, and assess whether it deserves repetition. A small change within an existing activity can also be useful.",
+          "question": "What is a reasonable first step if I want more variety?"
+        },
+        {
+          "answer": "It shows what you did under those conditions. Label it separately from ordinary spontaneous choices. You can use the result to decide what to do next without treating one activity as proof of personality, courage, or ability.",
+          "question": "Does completing a deliberate trial prove that I am adventurous?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Actions concerns the voluntary tendency to try unfamiliar activities, visit new places, or vary everyday experience. The relevant question is whether novelty itself invites approach—not how many countries, hobbies, or restaurants appear on a résumé.\n\n“Actions within Openness: active exploration of unfamiliar activities” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Actions concerns willingness to enter unfamiliar activities, places, or ways of doing everyday things rather than staying entirely with known options. Here it is an Openness facet in the site's NEO/IPIP-NEO explanatory vocabulary. It is not a general measure of getting things done.\n\nA useful starting question is whether unfamiliarity adds to an option's appeal when both alternatives are feasible. A long record of new experiences may come from obligations. A small record may reflect limited opportunity despite substantial interest.\n\nPositions are continuous and can vary by area. You might welcome a different leisure activity while wanting a reliable work routine. You might consider a new option only when its purpose is clear. Neither pattern requires a global identity as adventurous or unadventurous.",
+          "heading": "What makes an unfamiliar option attractive?",
           "key": "section-01-bf62fc9a51",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A person can have many externally required experiences while preferring familiarity, or live within tight constraints while actively seeking small variations. This facet therefore distinguishes voluntary approach from exposure caused by work, money, family, migration, or necessity.\n\nNovelty can be mild: a different route, recipe, class, or routine. Actions does not require danger or adrenaline.",
-          "heading": "Precise Definition",
+          "body": "Novelty concerns whether an experience is unfamiliar. Intensity concerns the level of stimulation. Trying a quiet new activity can provide novelty without much intensity; repeating a familiar demanding activity can provide intensity without much novelty. The motives can also coexist.\n\nRisk assessment asks about possible harm or loss, missing information, protective conditions, and ways to stop. Interest in a new experience does not require ignoring those questions. Declining an option with unclear conditions does not establish weak interest in novelty.\n\nStarting, performing, and continuing are also different. A first session says little about later skill or persistence. A preference for familiar activities does not guarantee expertise, reliability, or depth. Assess those outcomes from relevant behavior rather than assigning them to a facet position.",
+          "heading": "Novelty is different from intensity and risk",
           "key": "section-02-72006ac90c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Actions belongs to [Openness to Experience](/en/personality/big-five/openness). It expresses openness behaviorally by entering an unfamiliar experience rather than only imagining or analyzing it.",
-          "heading": "Parent Domain",
+          "body": "A visible invitation is not necessarily a usable opportunity. Scheduling, care responsibilities, transport, fees, physical requirements, and access conditions may rule it out. Record those conditions before treating a refusal as a preference.\n\nDistinguish wanting to participate, being able to participate, and actually participating. Required travel or a compulsory change of tools shows exposure, but not voluntary attraction to change. A person can be competent in a new setting while wishing it had remained familiar.\n\nA lower interest in novelty need not mean fear. Someone may understand an option and still prefer an existing activity. If the concern is uncertainty about costs or participation conditions, keep that explanation available instead of immediately converting it into a trait claim.",
+          "heading": "Check whether the choice was genuinely available",
           "key": "section-03-964dbd5dba",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Actions versus Excitement Seeking:** Actions broadens experience; Excitement Seeking favors intensity and stimulation. New cuisine can express Actions without danger.\n- **Actions versus Imagination:** [Imagination](/en/personality/big-five/facets/imagination) explores internally; Actions tests something in lived experience.\n- **Actions versus Self-Discipline:** Actions concerns starting something unfamiliar. Self-Discipline concerns carrying intended work through. The tendencies may combine in any pattern.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Elena usually does the same exercise routine. When a local center offers an introductory session in a movement practice she has not tried, she checks the participation requirements, price, and ability to stop. She then books because she wants to experience the unfamiliar activity. The choice illustrates interest in novelty alongside checking conditions. It does not establish how well she will perform.\n\nAn alternative explanation could be a recommendation connected to a specific task or a wish to accompany a friend. If that is what drove the booking, novelty alone is not the best explanation.\n\nA natural counterexample to “I always choose the new option” would be another feasible, freely offered activity that she declines because she prefers her existing routine. A natural counterexample to “I never want anything unfamiliar” would be an unprompted booking driven by her own curiosity. Both help replace absolute statements with a narrower account.\n\nNo feasible opportunity, a feasible opportunity without participation, and no exception found so far are different observations. An experiment arranged specifically to challenge a belief should be labeled as deliberate, rather than counted as spontaneous evidence.",
+          "heading": "An illustrative choice with clear limits",
           "key": "section-04-c94cd29b58",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may appear in trying unfamiliar food, routes, classes, tools, or travel plans. A weaker tendency may appear in returning to trusted places, evaluating novelty through cost and necessity, or deepening existing activities. Visible breadth also depends on time, money, disability, caregiving, safety, and local opportunity.",
-          "heading": "Behavioral Cues",
+          "body": "Exploration can require time, money, and learning effort. Check what happened rather than assuming frequent explorers become distracted. Did the activity fit your budget? Did it displace an obligation? Is there a reason to return?\n\nFamiliarity can meet a current need without guaranteeing mastery or efficiency. If an existing approach keeps failing to solve the problem, ask whether one relevant alternative deserves a bounded trial. You do not have to develop an appetite for novelty in general.\n\nWhen a choice affects other people, discuss the purpose, costs, and evaluation criteria together. Personal interest in a new method is not sufficient grounds to change everyone's routine. Agreement about a small trial can make the decision easier to assess.",
+          "heading": "Assess costs and usefulness in the actual activity",
           "key": "section-05-caec62dff8",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Life stage and responsibility can sharply constrain behavior. Someone with strong exploratory interest may use recipes, books, or local walks when travel is unavailable. Another person may travel extensively for work without choosing novelty. Separate desire, opportunity, and observed behavior.",
-          "heading": "Contextual Differences",
+          "body": "Begin with a specific hypothesis, such as: “When costs are similar, I tend to choose an unfamiliar activity during my free time.” Record ordinary occasions when both options were feasible. Include your reasons, the constraints, and what you actually selected. If no usable choice arose, record no opportunity. If you chose familiarity despite having the opportunity, keep that entry too.\n\nIf you want more variety, separately arrange a low-cost activity that fits your conditions and allows you to stop. Set a time and spending limit beforehand. There is no need to add danger to make the experience count. Mark it as a deliberate trial and record interest beforehand, the experience itself, and your judgment afterward.\n\nParticipation is not the only outcome. You may like the novelty but dislike that particular activity, discover an interest you did not expect, or decide the familiar alternative serves you better. If you stop, note whether the reason was interest, a condition of participation, or reaching your agreed limit.\n\nRetain a limited hypothesis if similar voluntary choices recur across suitable opportunities. Narrow it if it holds only in one area or with company. Revise it if feasible opportunities repeatedly produce a different choice, or if obligations explain participation better. Suspend judgment when usable opportunities are too scarce.\n\nUse the result to choose a next step: repeat, deepen an existing activity, try a different relevant option, or stop. A deliberate trial can inform that decision without validating a stable trait or demonstrating personality change.",
+          "heading": "Make one bounded trial useful",
           "key": "section-06-f973051375",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Seeking periodic variation to interrupt repetition.\n- Choosing an unfamiliar option when stakes are manageable.\n- Sampling several hobbies or domains.\n- Adapting relatively quickly to a new setting.\n- Needing a selection rule when exploration fragments time or attention.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) relates Adventurousness to NEO Actions as similar constructs. In this guide, Actions emphasizes unfamiliar experience rather than treating the name as a preference for danger.\n\nThe [long-form item key](https://ipip.ori.org/newNEOFacetsKey.htm) and [Maples short-form items](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) use different item combinations. The [official explanation of IPIP inventories](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) also distinguishes different instruments.\n\nThis directory does not establish that your form separately measured Actions. Do not manufacture a score from overall Openness, trips taken, or activities completed. Actual scores require the relevant form and scoring documentation; courage, adaptability, and job performance require separate evidence.",
+          "heading": "Why another source may call it Adventurousness",
           "key": "section-07-0563746aea",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Finding restoration in familiar routines and places.\n- Asking what value an unfamiliar activity adds before starting.\n- Choosing tested options when uncertainty offers little benefit.\n- Building depth within a narrower set of practices.\n- Needing extra preparation when change is unavoidable.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "Read [Openness to Experience](/en/personality/big-five/openness) for the broader domain. [Imagination](/en/personality/big-five/facets/imagination) concerns inner situations; [Ideas](/en/personality/big-five/facets/ideas) concerns engagement with concepts and problems.\n\nIf an activity attracts you mainly through art or form, read [Aesthetics](/en/personality/big-five/facets/aesthetics). The [30-facet guide](/en/personality/big-five/facets) helps compare these narrower descriptions.",
+          "heading": "Continue with the distinction that matters to you",
           "key": "section-08-dfe52d4c03",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Actions can build a broad experience base and provide practice adapting to unfamiliar settings. Possible costs include shallow sampling, decision load, expense, or losing patience with ordinary maintenance.\n\nWeaker Actions can support continuity, depth, and efficient use of known routines. Possible costs include slower adaptation or underexploration when circumstances change. Neither level proves courage, flexibility, boredom, or irresponsibility.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-8d2fb4e681",
-          "kind": "rich_text"
-        },
-        {
-          "body": "An employee with a stable twelve-year role uses weekends for pottery, community theater, and local trails. New activity restores his attention, but he remains reliable at work and home. The pattern illustrates chosen breadth, not escape or inability to commit.",
-          "heading": "An Original Case",
-          "key": "section-10-a39ec1aa52",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A reader returns to the same restaurant and orders three familiar dishes. She experiences familiarity as tested comfort, invests deeply in one professional field, and reads widely. Low interest in activity novelty does not mean her life lacks meaning or variety in every domain.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-1eb61181c5",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. What is your first response to a manageable unfamiliar activity?\n2. Does a long period without novelty create boredom, relief, or neither?\n3. Was your last new experience actively sought or externally required?\n4. Would you revisit a loved place or choose an unknown one under the same constraints?\n5. Is novelty a necessity, a useful accent, or a low priority in your current life?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-f6c199751f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For seven days, make one small reversible variation: a route, recipe, tool, or order of tasks. Record expected cost, actual response, and whether the variation deserved repetition. If you already explore frequently, review last year’s experiments and choose one worth deepening instead of adding another.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-dc76079243",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Feelings](/en/personality/big-five/facets/feelings), [Ideas](/en/personality/big-five/facets/ideas), [Values](/en/personality/big-five/facets/values).",
-          "heading": "Continue Reading",
-          "key": "section-14-4b6cf295ab",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Explore willingness to try unfamiliar activities while separating novelty from intensity, risk decisions, obligations, and the opportunities actually available to you.",
+        "title": "Actions: Unfamiliar Experiences, Risk, and Real Opportunity"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/actions",
-      "source_hash": "632204b53cf29b4692cef45df39fc76a7720520f7572bc7c57da02c9a1443643",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Actions concerns voluntary exploration of unfamiliar activities, places, and everyday experiences. It is not impulsivity, risk taking, restlessness, or proof of an adventurous life.",
-      "title": "Actions: Willingness to Try Unfamiliar Activities"
+      "source_hash": "e0753ba0f081578d6fe03eb2654a2ef166ac9c753c6a9aa2cf79a4de549e91a1",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Explore willingness to try unfamiliar activities while separating novelty from intensity, risk decisions, obligations, and the opportunities actually available to you.",
+      "title": "Actions: Unfamiliar Experiences, Risk, and Real Opportunity"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "O4-actions-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "O4-actions-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "O4-actions-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "O4-actions-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "035993f36967ef89ffba4b0f45bf40553ee982e84c82c424cb62a5771ee3dd4c"
+  "source_content_sha256": "d16942dfa9c735c210e1db12807dd8850b4cb6b8d32c2672534375ce48d06150"
 }

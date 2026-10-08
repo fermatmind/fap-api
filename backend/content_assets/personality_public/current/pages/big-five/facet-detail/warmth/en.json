@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/warmth",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "warmth",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Warm expression and approval seeking are different processes.",
-          "question": "Is Warmth the same as pleasing other people?"
+          "answer": "It does not establish that conclusion. Friendly expression and understanding another person's feelings or needs are different questions. Listening, checking your understanding, and respecting their choice provide more direct evidence than tone alone.",
+          "question": "Does weaker Warmth mean less empathy?"
         },
         {
-          "answer": "Yes. Leadership requires direct evidence of judgment, coordination, results, and conduct.",
-          "question": "Can someone with weaker Warmth be a good leader?"
+          "answer": "Yes. Preference for the amount of company and the way connection is expressed during contact are separate questions. Limited social contact can coexist with natural friendliness in suitable interactions.",
+          "question": "Can someone who prefers solitude be warm?"
         },
         {
-          "answer": "No. Role, safety, familiarity, culture, and energy can change expression.",
-          "question": "Is it contradictory to be warm in one setting and cool in another?"
+          "answer": "That difference alone cannot establish insincerity. Familiarity, safety, language comfort, and role expectations may differ. Examine the actual conduct rather than treating a change in expression as proof of motive.",
+          "question": "Is being friendly with friends but reserved with strangers insincere?"
         },
         {
-          "answer": "It can be misread when intensity, timing, or boundaries do not fit the relationship. Sincerity requires direct evidence.",
-          "question": "Can too much Warmth seem insincere?"
+          "answer": "These can be expression cues, but they are not universal criteria. Relationship conventions and individual communication styles affect them. A single gesture or its absence cannot determine how much someone cares.",
+          "question": "Does smiling or making eye contact prove Warmth?"
         },
         {
-          "answer": "Specific greeting and appreciation behaviors can be practiced. This page does not promise a trait change.",
-          "question": "Can I become more expressive?"
+          "answer": "Use an expression you mean and that fits the relationship, such as a specific thank-you. Allow the other person to finish the interaction and reduce contact if they request it. Practice does not guarantee greater closeness or demonstrate personality change.",
+          "question": "How can I express friendliness without creating pressure?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Warmth concerns readiness to approach people with visible friendliness, affection, and interpersonal connection. It describes expression and approach—not kindness, morality, trustworthiness, people pleasing, leadership, or relationship quality.\n\n“Warmth within Extraversion: readiness for friendly interpersonal connection” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Warmth is an Extraversion facet in the NEO/IPIP-NEO vocabulary used on this site. It concerns readiness for friendly interpersonal closeness. Loudness, the length of a conversation, and the number of people present do not define it.\n\nYou may prefer limited company yet be affectionate when you meet someone. You may also enjoy group activity while maintaining personal distance. [Gregariousness](/en/personality/big-five/facets/gregariousness) concerns preference for group company, a different question.\n\nA stronger tendency may bring personal connection into an interaction sooner. A weaker tendency may involve more reserve or slower familiarity. Intermediate expression can vary by relationship. These are continuous descriptions, not warm and cold categories of people.",
+          "heading": "Notice how personal connection enters an interaction",
           "key": "section-01-ee6be34448",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may greet readily, use an affectionate tone, and signal personal interest early. A weaker tendency may remain formal or private until familiarity develops. Both can care deeply; the difference is how quickly and visibly connection enters interaction.",
-          "heading": "Precise Definition",
+          "body": "Expression, understanding, and response deserve separate observations. An animated greeting can coexist with a mistaken assumption about what someone needs. A restrained response can follow careful listening to a request for privacy.\n\nIf understanding matters, let the other person describe the concern and check what they want from you. Asking whether they want suggestions or simply a listener gives more direct information than deciding that an affectionate tone proves empathy. They can decline the conversation.\n\nHelping, keeping a promise, agreeing with an opinion, and expressing closeness are also different actions. You can decline a request kindly. Neither strong expression nor reserve establishes how well someone holds boundaries, how sincere they are, or how good their relationships will be.",
+          "heading": "Friendly expression does not tell you whether someone was understood",
           "key": "section-02-8ae7bb37a3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Warmth belongs to [Extraversion](/en/personality/big-five/extraversion), reflecting approach toward interpersonal contact.",
-          "heading": "Parent Domain",
+          "body": "An established friend and a person you have just met provide different opportunities for connection. A formal setting may also invite a different style from a relaxed conversation. Describe those conditions before making a broad claim about your typical Warmth.\n\nForms of friendliness do not have one universal meaning. First names, direct eye contact, personal questions, and frequent messages can feel comfortable to one person and intrusive to another. Do not assume a preference from nationality or treat your own familiar style as the standard.\n\nNotice the conventions in the actual relationship and ask about contact preferences when appropriate. Language comfort, fatigue, role requirements, and safety can affect what becomes visible. A short reply or limited facial expression alone cannot establish a lack of care.",
+          "heading": "Compare relationships under similar conditions",
           "key": "section-03-7cbbd28fd3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Warmth versus Agreeableness:** Agreeableness concerns cooperation and interpersonal orientation; Warmth concerns visible friendly connection.\n- **Warmth versus Gregariousness:** [Gregariousness](/en/personality/big-five/facets/gregariousness) concerns preference for group company, not affection toward one person.\n- **Warmth versus Trust:** Trust concerns expectations of others’ intentions. A warm person may still verify.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine joining a small community choir. During an ordinary break, you spontaneously thank another member for helping you find the right page and ask how their practice went. They choose to continue talking. That is a specific instance of friendly approach, not evidence that you accurately understand all their feelings.\n\nAt the next rehearsal, the same person is concentrating on a difficult passage. You give them space. There is not an equivalent opportunity for conversation, so less visible expression should not automatically become a failed instance of Warmth.\n\nOn another break, both of you are available, but you stay with practical questions about the music. Record that you maintained a more reserved interaction. Do not infer indifference. Conversely, personal questions can be friendly in intention while exceeding what someone wishes to discuss.\n\nMore visible connection may clarify your interest, but it can also create a mismatch in familiarity. Reserve may be harder to interpret, or it may fit both people's expectations. Check the actual response instead of assigning a benefit to either end in advance.",
+          "heading": "A rehearsal offers more than one explanation",
           "key": "section-04-7701a4f3ff",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Warmth may appear as quick greetings, inclusive language, expressive appreciation, and easier personal disclosure. Weaker Warmth may appear as restrained tone, slower familiarity, task-first interaction, or care shown through action rather than affect. Culture, role, power, safety, and communication norms shape expression.",
-          "heading": "Behavioral Cues",
+          "body": "If you think “I never approach people I do not know well,” look for an ordinary occasion when you did so without a work script, reminder, or planned exercise. A spontaneous expression of interest in a safe setting can challenge “never.” You might narrow the description to unfamiliar formal situations instead.\n\nIf you think “I always make an interaction personal,” look for a safe, familiar occasion with a real opportunity for connection when you naturally remained task-focused. That exception may narrow the claim to particular relationships or roles. It should not automatically be explained away as someone else's fault.\n\nRepeated expression under comparable conditions can support retaining a specific behavioral description. Little contact, prescribed interactions, or persistent language difficulty instead support setting a broad interpretation aside. Not finding an exception in a brief review is not verification of a personality trait. Deliberately adding a greeting afterward is a separate trial.",
+          "heading": "Use spontaneous exceptions to refine the description",
           "key": "section-05-fe843df6c7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may be warm with family and formal at work, or friendly with customers while private in close relationships. Fatigue and unfamiliar language can reduce visible expression. One “cold” interaction is weak evidence.",
-          "heading": "Contextual Differences",
+          "body": "First observe several interactions as they normally occur. Record familiarity, whether an appropriate opportunity existed, what you did, and any explicit response. Do not invent the other person's private feelings to fill a gap.\n\nThen choose a safe, low-stakes interaction and intentionally add one expression you mean, such as a specific thank-you. Label it as a trial. Avoid private questions merely to appear warm, and do not expect the other person to respond enthusiastically.\n\nKeep natural behavior and deliberate trials separate. In each, distinguish an appropriate opportunity where the expression did not occur, no meaningful opportunity for contact, and expression that did occur. Also note your comfort, whether the person clearly continued or ended the interaction, and any change in familiarity. An absence of refusal is not permission for greater intimacy.\n\nKeep an expression if it seems suitable for the relationship. Reduce contact if the other person asks for less. Narrow your description if spontaneous connection occurs mainly with familiar people. Set the conclusion aside when opportunities or feedback are too limited, and stop the trial if it feels intrusive or forced. This examines an expression method; it does not establish improved empathy, a changed trait, or a higher score.",
+          "heading": "Try one expression and leave room for the other person",
           "key": "section-06-8126f6f7b9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Signaling welcome early.\n- Expressing affection or appreciation visibly.\n- Building rapport before task discussion.\n- Crossing another person’s desired boundary through excessive familiarity.\n- Being mistaken for agreement because tone is friendly.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP mapping](https://ipip.ori.org/newNEO_FacetsTable.htm) pairs Friendliness with NEO Warmth. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) and [Maples four-item set](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) cover similar constructs with different item ranges. Their everyday wording should not be treated as an empathy performance test.\n\nThe [BFI-2 authors' overview](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes fifteen facets. That structure is not interchangeable with this site's thirty-facet vocabulary, and a public vocabulary page does not establish that every assessment version measures the named facet separately.\n\nCheck the version and actual output of your assessment. Do not infer Warmth from an Extraversion total or supply new thresholds, weights, or percentile interpretations. Statistics for a source instrument do not establish FermatMind product properties, and this description cannot determine leadership or relationship quality.",
+          "heading": "Warmth and Friendliness in the tool materials",
           "key": "section-07-66c65f4ec2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Waiting for trust or familiarity before personal expression.\n- Showing care through reliability or practical help.\n- Maintaining professional distance easily.\n- Being misread as rejection or indifference.\n- Needing explicit signals when connection matters.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "Read [Gregariousness](/en/personality/big-five/facets/gregariousness) if the question concerns how much group company you want. Read [Assertiveness](/en/personality/big-five/facets/assertiveness) if it concerns expressing a position or taking an active role in discussion.\n\n[Activity](/en/personality/big-five/facets/activity), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), and [Positive Emotions](/en/personality/big-five/facets/positive-emotions) help distinguish pace, stimulation, and positive feeling from interpersonal closeness. Return to [Extraversion](/en/personality/big-five/extraversion) or the [30-facet guide](/en/personality/big-five/facets) for the wider framework.",
+          "heading": "Continue with the distinction you need",
           "key": "section-08-a5cafa2c93",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Warmth can make approach and rapport easier. Possible costs include boundary mismatch, emotional labor, or unintended impressions of intimacy. Weaker Warmth can support privacy and clear distance; possible costs include being harder to read. Neither level proves care, sincerity, or leadership.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-07adfad2ea",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A project manager begins meetings by noticing people and welcoming newcomers, then states decisions directly. Friendly expression coexists with firm boundaries; Warmth does not imply compliance.",
-          "heading": "An Original Case",
-          "key": "section-10-dff37de09c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A reserved physician rarely uses an animated tone but remembers patient constraints and follows up carefully. Low visible Warmth does not establish low care or poor professional conduct.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-883467903e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How quickly do you shift from formal to personal interaction?\n2. Which signals do you use to show welcome?\n3. When has friendliness exceeded another person’s preferred distance?\n4. How do people know you care when expression is restrained?\n5. Where does role or culture change your style?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-2e5c81f116",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In three low-stakes interactions, add one genuine signal of welcome and observe the response. If you already express strongly, pause to check the other person’s preferred level of familiarity. Do not force intimacy.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-89ebe92006",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Gregariousness](/en/personality/big-five/facets/gregariousness), [Assertiveness](/en/personality/big-five/facets/assertiveness), [Activity](/en/personality/big-five/facets/activity), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), [Positive Emotions](/en/personality/big-five/facets/positive-emotions).",
-          "heading": "Continue Reading",
-          "key": "section-14-6b2014cfbe",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Warmth describes a tendency toward interpersonal closeness and friendly expression. Familiarity, shared conventions, and the other person's preferences help explain what you see; expressiveness alone does not establish empathy.",
+        "title": "Warmth: Friendly Connection Without Guessing at Empathy"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/warmth",
-      "source_hash": "b2751e059222b7573277ee1b03fdb9d288c8e257bc098c8a5ff7e64f9f1dcd9d",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Warmth concerns readiness to approach others with visible friendliness and connection. It is not kindness, morality, people pleasing, trust, or proof of relationship quality.",
-      "title": "Warmth: Readiness for Friendly Connection"
+      "source_hash": "d1c5165c163970b48578da325d5822bc5b1f905bd7fcda43354224b11884feb6",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Warmth describes a tendency toward interpersonal closeness and friendly expression. Familiarity, shared conventions, and the other person's preferences help explain what you see; expressiveness alone does not establish empathy.",
+      "title": "Warmth: Friendly Connection Without Guessing at Empathy"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E1-warmth-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "E1-warmth-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E1-warmth-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E1-warmth-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6f4459af43ebcfc517c8ed3e9158a7fbaeefa8e769012b475f1b14d6dce06b32"
+  "source_content_sha256": "f60c9bc282580b86447adc7729b3442366f8f0a6f9667ee68e6dad2e4df73f51"
 }

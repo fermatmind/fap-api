@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/openness-low",
@@ -20,30 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "openness-low",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Innovation also depends on expertise, problem knowledge, skill, collaboration, and execution. Lower broad novelty preference does not rule out original work.",
+          "answer": "No. The range cannot determine your ability to solve a particular problem. Examine knowledge, skills, resources, and actual work. Lower Openness also does not automatically establish depth of expertise or execution skill.",
           "question": "Does low Openness mean I cannot innovate?"
         },
         {
-          "answer": "No. Change a behavior only when a specific cost matters. A range is not a deficit that requires correction.",
-          "question": "Do I need to change this range deliberately?"
+          "answer": "The score is a position interpreted within a measurement system. Closed-mindedness is usually a judgment about refusing to consider information. Examine the specific decision process rather than substituting a trait label.",
+          "question": "How is a low score different from being closed-minded?"
         },
         {
-          "answer": "The score cannot predict relationship quality. Curiosity, communication, safety, values, and learned skills matter directly.",
-          "question": "Will low Openness harm relationships?"
+          "answer": "Yes. A broad tendency allows exceptions and differences across settings. Record whether the choice was spontaneous and freely available. Repeated comparable examples can help narrow an overly broad description.",
+          "question": "Can I choose something new just because it interests me?"
         },
         {
-          "answer": "Low Openness is a trait-range interpretation. Being closed-minded describes refusing to consider relevant evidence in a particular situation. They are not equivalent.",
-          "question": "How is low Openness different from a closed mind?"
+          "answer": "It does not establish relationship quality. Examine actual communication, shared decisions, and conflicts. This range guarantees neither stable attachment nor difficulty caring about other people.",
+          "question": "Does low Openness predict poor relationships?"
+        },
+        {
+          "answer": "There is no need based on the label alone. Start with a real problem or a goal you want to pursue. If a small attempt serves it, choose manageable conditions and assess the experience. A count of completed attempts cannot establish personality change.",
+          "question": "Should I force myself to try something new every week?"
         }
       ],
       "framework": "big_five",
@@ -79,163 +76,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "A low Openness range may suggest preference for familiar frameworks, concrete usefulness, and depth within territory that has earned trust. It is not intellectual limitation or refusal to learn. The pattern may favor controlled change, accumulated experience, and methods whose consequences are easier to anticipate.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Low Openness to Experience: depth, familiarity, and preference for established frameworks” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "An experience may not appeal to you simply because it is new. You may more often find a familiar activity or established way of understanding something satisfying. That is a possible meaning of lower Openness. It does not mean that you cannot learn, never explore, or need a practical payoff for every interest.\n\nLow describes a position along a continuum, not a separate type of person. It cannot grade intelligence, originality, moral worth, or professional potential. It also does not establish exceptional concentration, careful execution, or reliable performance. Preferring a known method and using it well are different questions.\n\nRead the result with its questionnaire version, language, score unit, and range definition. A low label cannot tell you how many people scored above you without relevant reference information. Different instruments' range labels are not interchangeable, and this guide provides no cutoffs or norm conversion.",
+          "heading": "Familiarity can be a preference",
           "key": "section-01-d1cb115685",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "The range may indicate that novelty needs a practical reason, sufficient evidence, or a clear implementation path before it receives attention. You may prefer refining a known craft, following concrete examples, or preserving a routine that reliably coordinates people. Facets can still show exceptions.",
-          "heading": "What This Range Specifically Means",
+          "body": "This site's public explanations use NEO/IPIP-NEO terms for Imagination, Aesthetics, Feelings, Actions, Ideas, and Values. The [official four-item facet material](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) illustrates distinct content, not the identity of the questionnaire you took.\n\nDisliking changes to an everyday activity does not establish a lack of aesthetic interest. Not seeking theoretical discussions does not determine intelligence. A lower overall score cannot supply six lower facet scores, and reading a facet description cannot create a measurement your report did not include.\n\nValues is not a moral ranking or a reliable identification of political affiliation. Feelings is not a verdict about emotional health. Use the vocabulary to separate questions, then check what your actual report measured.",
+          "heading": "A broad result leaves specific interests open",
           "key": "section-02-0add85cbcb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer low intelligence, lack of imagination, cultural narrowness, political identity, or inability to innovate. Innovation can come from deep expertise and incremental improvement. A preference for familiarity also does not prove stubbornness; refusal to update despite strong evidence is a separate behavior.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Imagine choosing an optional evening course. You prefer returning to a subject you already know rather than attending an unfamiliar workshop. Before attributing the choice to Openness, compare the options. Does the workshop cost more, require a longer journey, or provide an unclear description? A preference expressed under unequal conditions needs a qualified explanation.\n\n“I would rather continue with this familiar subject” expresses a current preference. “I want to know what the workshop involves before deciding” expresses an information need. “I cannot afford either course now” describes a constraint. Treating all three as resistance to novelty obscures the next step.\n\nThe distinction matters at work too. Missing training, access, or a usable explanation of a new procedure is a conditions problem. Choosing the familiar procedure when those conditions are adequate raises a different question. The range label cannot settle either one.",
+          "heading": "Is the unfamiliar choice unattractive or simply unavailable?",
           "key": "section-03-1f0b7c26ca",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include favoring direct language, established procedures, familiar environments, and questions with observable use. You may learn best through worked examples, invest deeply in a small set of interests, and ask how a proposed change improves the current system before supporting it.",
-          "heading": "Common Behavioral Expressions",
+          "body": "A specific decision can be examined without making a judgment about your whole personality. What information did you consider? What concern remained? What evidence would have changed your mind?\n\nClear questions and a stated decision condition can help others understand why you want to retain an arrangement. If the stated concern has been addressed but you repeatedly reject the proposal without checking the evidence, examine that behavior directly. A low score neither excuses nor establishes it.\n\nThe same standard applies at every range. Higher Openness does not guarantee openness to relevant evidence, and a familiar method can be appropriate or ineffective. If the old arrangement no longer meets the requirement, identify the mismatch and the smallest useful adjustment rather than assuming either novelty or continuity will solve it.",
+          "heading": "Evaluate the decision process",
           "key": "section-04-1a2da86ad9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, continuity may protect quality. In learning, concrete examples may make abstraction accessible. In relationships, stable rituals may communicate care. You may still seek novelty in a hobby where risks are low. Under pressure, proven routines can become especially valuable.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Suppose your hypothesis is: “When optional courses have similar cost, access, and time demands, I usually choose a familiar subject.” On one occasion, without a practice assignment or pressure from others, you discover an unfamiliar workshop and enroll because you want to understand it. That is a relevant natural exception.\n\nAttendance because an employer required it, a friend already booked it, or no other option existed does not answer the same question. Enrolling to practice trying something new deliberately changes the conditions. Keep that attempt separate. Enjoying the session afterward also cannot tell you what you felt before choosing.\n\nOne exception does not refute “usually.” Repeated spontaneous choices of unfamiliar subjects under comparable conditions justify narrowing the account. Perhaps familiarity matters only when descriptions are vague, or only during busy periods. Do not discard those examples to preserve a label.",
+          "heading": "A genuine exception keeps the description honest",
           "key": "section-05-85b50d3b89",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include practical focus, respect for constraints, preservation of institutional knowledge, steady refinement, and less distraction from novelty alone. These tendencies can help when reliability matters more than broad exploration or when a system carries hidden lessons.",
-          "heading": "Possible Strengths",
+          "body": "Keep one target behavior: choosing the familiar subject when an optional course offers a realistic alternative. Note whether both choices were accessible, whether cost and time were similar, which you chose, and your own account of interest or concern.\n\nDistinguish genuine opportunities where you retained familiarity, genuine opportunities where you naturally chose the unfamiliar option, and situations without a comparable choice. Log deliberately arranged attempts separately. A lack of opportunity cannot support the preference, and an absence of recorded exceptions is not proof.\n\nProvisionally retain the narrow hypothesis if it recurs across comparable natural opportunities. Narrow it to cost, information, or workload conditions if those explain the pattern. Set a broad interpretation aside when opportunities are sparse, motives are unclear, or repeated comparable choices do not fit. These observations do not rescore or validate your personality.",
+          "heading": "Observe comparable choices",
           "key": "section-06-cfb416a6b4",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Costs can include dismissing an unfamiliar proposal too early, applying an old template to a changed problem, or underinvesting in exploration before requirements are clear. Others may interpret a request for evidence as resistance if the decision threshold remains unstated.",
-          "heading": "Possible Costs",
+          "body": "If you want to explore a subject but a full course feels burdensome, find a manageable introduction with a clear cost, duration, and option to stop. Record what you expected, whether interest was present, what happened, and what burden remained.\n\nThis is an intervention, not a natural exception. Continue if the experience is worth the cost; seek clearer information if uncertainty was the obstacle; stop if it remains unappealing or does not serve your goal. Completing it does not prove a natural preference for novelty or promise a higher Openness score.\n\nFamiliar activities may already be satisfying. A lower label alone is not a reason to replace them.",
+          "heading": "Make a small attempt only when it serves you",
           "key": "section-07-1338b7d195",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [mid-range Openness](/en/personality/big-five/openness-mid), novelty may need stronger justification across more settings. Compared with [high Openness](/en/personality/big-five/openness-high), familiar structure may be intrinsically more comfortable. None is a universal performance level.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "The [high-range page](/en/personality/big-five/openness-high) focuses on a stronger attraction to exploration. The [mid-range page](/en/personality/big-five/openness-mid) explains why a middle position does not automatically mean flexible balance. These are comparisons within a scoring interpretation, not exclusive identities or rankings of performance.\n\nRead [Openness to Experience](/en/personality/big-five/openness) for the broader domain and the [30-facet guide](/en/personality/big-five/facets) if one particular kind of experience is the issue. Check which measurements your report actually provides. No range guarantees ability, relationship quality, or a clinical state.",
+          "heading": "Compare preferences rather than worth",
           "key": "section-08-eef1697081",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A department proposes replacing a reliable workflow. You ask for failure data, a migration plan, and a limited pilot before changing anything. This caution protects continuity. It becomes costly only if the pilot succeeds and you keep rejecting the evidence because the old process feels familiar.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-7841ed8bd0",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score low overall and still design an original solution inside a field you know deeply. Expertise can support innovation without broad novelty seeking. That counterexample challenges the stereotype, not necessarily the range interpretation.",
-          "heading": "A Counterexample",
-          "key": "section-10-059b8d4930",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- What evidence makes a new approach worth testing?\n- Where has familiarity protected quality?\n- When has a proven method outlived its usefulness?\n- Which low-risk settings make exploration easier?\n- Do particular facets depart from the broad range?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-77485a2d16",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Select one routine and ask a colleague for one alternative. Test only the smallest reversible part, with a success criterion and rollback point. Record whether the experiment added value. The goal is calibrated evidence, not forcing novelty or changing your personality.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-e10ab34d60",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness), compare [high Openness](/en/personality/big-five/openness-high) and [mid-range Openness](/en/personality/big-five/openness-mid), or inspect the [30-facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-42b38a5b37",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Lower Openness can suggest a greater preference for familiar experiences and ways of understanding things. It does not establish limited intelligence, exceptional focus, or reliability. Examine what you prefer and what the situation actually permits.",
+        "title": "Low Openness: Understanding Familiarity and Evaluating Reasons to Change"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/openness-low",
-      "source_hash": "0fd8bcd054962e6928eee03a8b9a17f37527e47b6ba34e2b068272f35866ef85",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "A low Openness range may suggest preference for familiar frameworks, concrete evidence, and depth within known territory. It is not rigid thinking, low intelligence, or inability to innovate.",
-      "title": "Low Openness to Experience: Familiarity and Practical Depth"
+      "source_hash": "a1018f37bf9a95d5798dc48fb6509fd2ecc51c2ac0b8a906111d8f136b460bcb",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Lower Openness can suggest a greater preference for familiar experiences and ways of understanding things. It does not establish limited intelligence, exceptional focus, or reliability. Examine what you prefer and what the situation actually permits.",
+      "title": "Low Openness: Understanding Familiarity and Evaluating Reasons to Change"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "openness-low-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, ability, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-low-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "openness-low-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "openness-low-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4ff0973d93dac511846bed050824b75a89643b0bc15336da65190e0b841b6518"
+  "source_content_sha256": "539b5d4fd9907f8a00bf6eb5206f5b976ed68a30b685b507d615f76ce995bebd"
 }

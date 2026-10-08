@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/straightforwardness",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "straightforwardness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "Not necessarily. Directness does not require sharing confidential or irrelevant information.",
-          "question": "Are highly straightforward people indiscreet?"
+          "answer": "It does not justify a global moral verdict. It also should not be reduced automatically to ordinary tact: relevant item sets include deception and exploitation. Confirm the instrument and examine specific conduct instead of using the label to convict or excuse someone.",
+          "question": "Does weaker Straightforwardness mean I am immoral?"
         },
         {
-          "answer": "No. Privacy, tact, and strategy are not identical to deception.",
-          "question": "Does weaker Straightforwardness mean lying?"
+          "answer": "No. You can state that a topic is private without fabricating an account. Relevant accuracy and disclosure boundaries are separate questions; candor does not require revealing everything or sharing someone else's information.",
+          "question": "Is protecting my privacy incompatible with candor?"
         },
         {
-          "answer": "State the relevant truth, choose timing and tone, avoid unnecessary judgment, and leave room for response.",
-          "question": "How can I stay direct without hurting people?"
+          "answer": "Not by itself. Check whether it preserves the relevant meaning or creates a false understanding. Tone, timing, and politeness alone cannot establish manipulation or rule it out.",
+          "question": "Is diplomatic wording manipulation?"
         },
         {
-          "answer": "No. Manipulation requires behavior-specific evidence.",
-          "question": "Does weaker Straightforwardness mean being manipulative?"
+          "answer": "State the relevant facts and position, distinguish knowledge from uncertainty, avoid unrelated personal judgments or private details, and allow clarification. This can improve the exchange without guaranteeing that nobody feels disappointed.",
+          "question": "How can I be candid without being unnecessarily hurtful?"
         },
         {
-          "answer": "Clear requests and disclosure practices can be learned. This page does not promise trait change.",
-          "question": "Can Straightforwardness be learned?"
+          "answer": "One event is insufficient. Verify the facts, what the speaker knew, and what the recipient understood, then examine repeated comparable opportunities. Keep prepared communication practice separate from naturally occurring behavior.",
+          "question": "Does one misleading message disprove a usually candid pattern?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Straightforwardness concerns preference for presenting intentions and positions directly rather than managing them strategically. It is not an honesty certificate, compulsory disclosure, bluntness, innocence, or proof of deception.\n\n“Straightforwardness within Agreeableness: direct presentation of intentions” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Straightforwardness concerns candidly representing intentions and dealing with others without relying on deception, false concern, or manipulation to obtain something. It is an Agreeableness facet in the NEO/IPIP-NEO vocabulary used here.\n\nA stronger tendency may involve stating relevant intentions and reservations more openly. A weaker tendency needs behavior-specific interpretation; it cannot automatically be recast as diplomatic skill or treated as proof of bad character.\n\nThese are continuous tendencies. A middle position does not guarantee a blend of honesty and effective diplomacy. Someone can speak bluntly while making an inaccurate claim, or speak gently while preserving the relevant truth. Check what was represented and understood rather than judging candor from tone alone.",
+          "heading": "Direct wording is only part of the question",
           "key": "section-01-3ff7cd25b2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency favors plain statements and lower interpersonal maneuvering. A weaker tendency may adapt wording, sequence information, preserve privacy, or negotiate indirectly. Ethical quality depends on accuracy, consent, impact, and purpose—not style alone.",
-          "heading": "Precise Definition",
+          "body": "The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) associates Morality with NEO Straightforwardness. The label does not make it an inventory of every ethical choice.\n\nThe [official short-form items](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) nevertheless include cheating and taking advantage, so reducing the content to tact or timing would also be inaccurate. Avoid both a global moral verdict and an explanation that erases manipulation from the construct.\n\nA score cannot establish what happened in a particular exchange. Evaluate a disputed statement against the relevant facts and context; neither a high score nor a claim to be straightforward provides an exemption from that check.",
+          "heading": "Why the label Morality can mislead",
           "key": "section-02-e9febdd7fe",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Straightforwardness belongs to [Agreeableness](/en/personality/big-five/agreeableness), reflecting direct versus strategically managed interpersonal presentation.",
-          "heading": "Parent Domain",
+          "body": "Tact can preserve the meaning while changing the delivery: “I can't meet that deadline; can we agree on Friday?” can be both gentle and clear. Candor does not require insults or unnecessary personal judgments.\n\nPrivacy concerns information that need not be disclosed. “I don't discuss my finances” states a boundary without inventing an account. Keeping information private is not inherently deceptive, and sharing someone else's confidential information is not a requirement of Straightforwardness.\n\nMisrepresentation needs a closer look at statements and omissions. If a person knows a commitment is unconfirmed but encourages someone to rely on it as settled, describing the exchange merely as strategic timing misses the problem. Explicitly stating the uncertainty leaves room to decide without manufacturing certainty.\n\nConfidentiality duties, incomplete knowledge, expression norms, and fear of retaliation can change the available choices. Do not infer a hidden motive from one refusal to answer or treat protective behavior under threat as an uncomplicated everyday preference.",
+          "heading": "Privacy, tact, and misrepresentation are different",
           "key": "section-03-cb227f987f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Straightforwardness versus honesty:** Truthfulness is conduct that needs direct evidence.\n- **Straightforwardness versus Assertiveness:** Assertiveness concerns taking the floor; directness concerns presentation of intent.\n- **Straightforwardness versus tact:** Tact can make a true message usable without hiding its core meaning.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Use a concrete hypothesis: “When I invite friends to an event with a relevant attendance condition, I usually explain that condition before they decide.” Relevant conditions might include a ticket price or a minimum number of people needed for the event to proceed.\n\nIn an invented example, Avery's invitations repeatedly name the known ticket price and explain that the booking is provisional. Messages and booking information support this local observation. They do not prove candor in every relationship or establish that friends trust Avery more.\n\nA natural counterexample occurs when another comparable invitation is sent and Avery knows there is a required charge but presents attendance as free. There was an opportunity to state the relevant condition, and the target behavior did not occur. Verify what Avery knew, the actual message, and the recipient's understanding before deciding whether it was a mistake, an omission, or intentional misdirection.\n\nOne event does not disprove “usually.” Repeated comparable omissions should change the explanation. An event whose cost Avery did not know, or a conversation unrelated to attendance, is not the same opportunity.",
+          "heading": "An invitation example with a natural counterexample",
           "key": "section-04-8fda2e1993",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Straightforwardness may appear as saying what is wanted, disclosing a conflict of interest, or avoiding hints. Weaker tendency may appear as reading the room, staging a negotiation, using diplomacy, or keeping motives private. Culture and power affect what directness costs.",
-          "heading": "Behavioral Cues",
+          "body": "For natural invitations of the chosen kind, record the condition, what you knew at the time, what you said, and whether clarification was needed. Avoid collecting unrelated private information.\n\nSeparate opportunities with accurate disclosure, opportunities without it, and no comparable opportunity. Not locating a counterexample is different from establishing that none exists. Short sentences, a refusal to share private matters, or a polished delivery do not substitute for this target behavior.\n\nProvisionally retain the local explanation if comparable exchanges repeatedly support it and alternatives remain insufficient. Narrow it if the pattern appears only in written invitations. Set it aside when the facts or message are unclear. Revise it when repeated opportunities produce contrary evidence. This record can identify a communication problem; it cannot validate a trait or rank moral worth.",
+          "heading": "Track relevant disclosure rather than bluntness",
           "key": "section-05-9e6f64f79f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Directness may be safe among peers and risky under coercive authority. Privacy in one domain does not prove manipulation. Written communication may increase clarity for someone indirect in live conversation.",
-          "heading": "Contextual Differences",
+          "body": "For a safe, low-stakes practice attempt, state the known condition, the uncertain part, and the decision being requested. For example: “Tickets are $12. The event will go ahead only if we reach the minimum booking. Let me know whether you want to join on those terms.”\n\nCheck whether the recipient can identify the cost and uncertainty, whether your account matches what you knew, and whether a correction is needed. Their willingness to attend is not the sole measure of success. An accurate invitation can lead to a refusal.\n\nMark this as prepared practice, separate from natural exchanges. If you already disclose too much, keep the relevant condition while removing unrelated or confidential details. Neither a better message nor a recipient's approval demonstrates a change in Straightforwardness. Where disclosure creates a real safety risk, prioritize the situation and suitable support rather than treating fuller disclosure as a universal goal.",
+          "heading": "Try one clearer invitation",
           "key": "section-06-6e5bcf6afa",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Naming a request and reason.\n- Disclosing relevant reservations.\n- Reducing guesswork for collaborators.\n- Delivering truth without enough care.\n- Revealing information that was not theirs to share.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Related labels do not establish identical instruments, translations, or scores. This page does not confirm that your assessment reported a separate Straightforwardness result. Do not derive it from overall Agreeableness or turn one conversation into a facet score. A percentage also needs its stated meaning; it is not automatically a percentile.\n\nFor expectations about other people's intentions, read [Trust](/en/personality/big-five/facets/trust). For yielding after a disagreement, read [Compliance](/en/personality/big-five/facets/compliance). For representing your own contributions, read [Modesty](/en/personality/big-five/facets/modesty). [Agreeableness](/en/personality/big-five/agreeableness) and the [30-facet guide](/en/personality/big-five/facets) provide the broader context.",
+          "heading": "Reported results and useful distinctions",
           "key": "section-07-7aeefe348f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Sequencing information strategically.\n- Protecting privacy and face.\n- Using indirect signals in high-context settings.\n- Creating ambiguity about commitments.\n- Manipulating others when strategy replaces informed consent.",
-          "heading": "Possible Expressions When Weaker",
-          "key": "section-08-8db729d4c2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Straightforwardness can support clarity and lower interpretation cost. Possible costs include bluntness, privacy violations, or poor timing. Weaker Straightforwardness can support diplomacy and negotiation; possible costs include mistrust and hidden expectations. Neither level establishes honesty.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-00d59e1004",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A manager says a proposal will not be funded, explains the criteria, and acknowledges disappointment. Directness and care coexist.",
-          "heading": "An Original Case",
-          "key": "section-10-e063fac394",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A negotiator uses careful sequencing but states every material term accurately. Strategic communication does not automatically mean deception.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-5a1a354bc9",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How often do others have to infer your request?\n2. What information is relevant versus merely private?\n3. Does tact preserve or obscure the core message?\n4. When has directness become avoidable harm?\n5. When has indirectness created costly ambiguity?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-f8443c2cb2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Rewrite one low-stakes request as outcome, reason, and boundary in three sentences. If you are already direct, add one sentence acknowledging impact. Evaluate clarity and consent.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-1b38c50922",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Trust](/en/personality/big-five/facets/trust), [Altruism](/en/personality/big-five/facets/altruism), [Compliance](/en/personality/big-five/facets/compliance), [Modesty](/en/personality/big-five/facets/modesty), [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness).",
-          "heading": "Continue Reading",
-          "key": "section-14-eb5d98d58e",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Straightforwardness concerns candid dealing and less reliance on deception or manipulation to get what one wants. It is broader than blunt wording and narrower than a verdict on someone's morality.",
+        "title": "Straightforwardness: Candor, Privacy, and Misleading Signals"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/straightforwardness",
-      "source_hash": "f63a2a3796ac67817012d56deba0c14bcce968107f1417067ea28cabaeefa68e",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Straightforwardness concerns preference for direct rather than strategically managed presentation of intentions. It is not an honesty certificate, bluntness, or total disclosure.",
-      "title": "Straightforwardness: Directness About Intentions"
+      "source_hash": "997f331d68d9e1b6349276c3d64dc2cd8752b0ca9ebd5ea663332d5b7a5562c8",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Straightforwardness concerns candid dealing and less reliance on deception or manipulation to get what one wants. It is broader than blunt wording and narrower than a verdict on someone's morality.",
+      "title": "Straightforwardness: Candor, Privacy, and Misleading Signals"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "A2-straightforwardness-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "A2-straightforwardness-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "A2-straightforwardness-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "A2-straightforwardness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "d234d813742d1ccafec8a02afc70e17f5259c1e1957f6d00a7ff6cdeac8acd4f"
+  "source_content_sha256": "ffafd19967c4ebc573b7954bff41b8525b8292738b3c12f14334089777703b44"
 }

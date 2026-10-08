@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/openness-mid",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "openness-mid",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. It may reflect meaningful selectivity, mixed facets, or contextual switching. A middle location is not an absence of tendencies.",
-          "question": "Does mid-range Openness mean I have “no personality”?"
+          "answer": "No. One domain's middle position does not describe your whole personality or erase specific interests and preferences. It also does not automatically establish a balanced or flexible style.",
+          "question": "Does mid-range Openness mean I lack personality?"
         },
         {
-          "answer": "The range cannot select a job. Work fit depends on interests, skills, knowledge, values, opportunity, and the actual environment.",
-          "question": "What jobs suit someone with mid-range Openness?"
+          "answer": "You cannot infer that from the total. Check whether the questionnaire measured facets and whether the report provides them. Without those results, mixed facets remain one possible explanation rather than a measured fact.",
+          "question": "Does my middle total mean that high and low facets cancel out?"
         },
         {
-          "answer": "It can be, especially when topics, stakes, or facets differ. Repeated examples are more informative than one episode.",
-          "question": "Is being very curious sometimes and uninterested at other times consistent with mid-range Openness?"
+          "answer": "No. Topic, knowledge, fatigue, opportunity, and cost can change your response, and people at other score positions also vary by situation. The pattern alone cannot identify a range.",
+          "question": "Does being curious one day and uninterested the next identify this range?"
         },
         {
-          "answer": "No range needs improvement by default. Focus on a current cost and practice a relevant behavior only when it serves your goal.",
-          "question": "Does mid-range Openness need improvement?"
+          "answer": "Compare their questionnaire versions, languages, time frames, score formats, and range rules first. Different labels do not automatically establish a personality change. This guide cannot determine which measurement is more accurate.",
+          "question": "One test says middle and another says high. Which is correct?"
         },
         {
-          "answer": "Creative output depends on expertise, opportunity, skill, persistence, and evaluation, not one personality range. Openness is not a creativity score.",
-          "question": "Why can a mid-range person look more creative than a high-range person?"
+          "answer": "It does not establish mediation skill. Assess listening, communication, judgment, and actual work in the relevant setting. A middle position is not evidence that you already balance competing perspectives well.",
+          "question": "Does a middle score make me a good mediator?"
         }
       ],
       "framework": "big_five",
@@ -83,163 +76,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Mid-range Openness may suggest that exploration is selective rather than consistently sought or avoided. You may welcome a new idea when it serves a clear purpose and prefer familiarity when cost, time, or uncertainty rises. This is not “no personality.” It can be an active way of matching novelty to context.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Mid-range Openness to Experience: flexible switching and finding a personal rhythm between familiarity and novelty” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Openness concerns interest in unfamiliar experiences, imagination, and different ways of understanding things. A mid-range result first says that your overall score falls within the middle range defined by this tool. It does not establish an ability to switch smoothly between exploration and familiarity.\n\nYou might have a moderate interest across several areas, markedly different interests in different settings, or answers that need checking for ambiguity. These are possibilities to investigate, not facts contained in the label. A middle total cannot establish that high and low facets cancel out, and this guide does not assume equal facet weights.\n\nCheck the questionnaire version, language, score unit, and range explanation. The midpoint of a scale is not automatically the population average, and a score near the middle of a 100-point display is not automatically the 50th percentile. Without the relevant scoring and reference information, keep those meanings separate.",
+          "heading": "What the middle position actually tells you",
           "key": "section-01-abafcca358",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "The range may reflect curiosity with a threshold. You might explore when a topic feels meaningful, evidence is available, or change is reversible, then return to a proven method for execution. Different facets may sit at different levels, producing strong Ideas but lower Actions, or the reverse.",
-          "heading": "What This Range Specifically Means",
+          "body": "The site's public explanations use the NEO/IPIP-NEO terms Imagination, Aesthetics, Feelings, Actions, Ideas, and Values. The [official comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) maps related NEO and IPIP constructs; it does not make the instruments identical.\n\nThose terms can sharpen a question. Enjoying theoretical discussion and changing a familiar activity are different things to observe. But without actual facet results, you cannot turn those observations into a measured profile of high Ideas and low Actions.\n\nOther questionnaires organize facets differently. The [BFI-2 authors' page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) describes five domains and fifteen facets. Before comparing profiles, establish what each questionnaire measured. A public explanation cannot fill in scores your report did not provide.",
+          "heading": "A useful vocabulary is not an extra measurement",
           "key": "section-02-c694eada02",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not mean average intelligence, average creativity, indecision, or lack of conviction. It cannot identify a suitable career or show that you are equally open in every setting. “Middle” is a location on one instrument’s continuum, not a universal norm or quality grade.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Imagine that you voluntarily read an unfamiliar explanation in an environmental history newsletter, but usually skip a similarly accessible account of furniture design. Both are available during a quiet break, take about the same time, and are optional. You might wonder whether your exploration depends strongly on the subject.\n\nCheck alternatives before calling it a personality pattern. Is one article written more clearly? Does prior knowledge make it easier to see why it matters? Are you encountering the other subject only when tired? Unequal opportunities cannot cleanly explain a difference in preference.\n\nA middle result also does not require this split. You might show a modest interest in both topics, or struggle with decisions in both. Neither selective enthusiasm nor indecision automatically identifies a mid-range person. The result should help you formulate a question, not oblige you to perform a stereotype of balance.",
+          "heading": "When selective interest makes the label feel vague",
           "key": "section-03-71f06c969b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may enjoy a new restaurant but keep a stable work process, question some conventions while preserving others, or alternate experimental phases with routine consolidation. Interest can rise sharply around one topic and remain low elsewhere. This selectivity is the pattern to investigate.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Suppose a friend invites you to a new evening class. Some interest is present, but a weekly commitment feels too large. Separate wanting to know more from having time, money, or energy to participate.\n\n“I am curious, but cannot commit this month” describes interest constrained by circumstances. “Even with time available, I would rather spend that evening on something familiar” describes a current preference. Those answers lead to different decisions. Neither demonstrates superior flexibility or a deficient personality.\n\nIf others experience your choices as inconsistent, explaining the relevant condition can help the conversation. Whether that explanation works is something to check with them; the score does not establish communication skill.",
+          "heading": "Name the choice you need to make",
           "key": "section-04-6eaca3bb1c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, you may accept change after seeing a concrete benefit. In learning, you may connect ideas but still want examples. In relationships, you may be curious about perspectives while preferring stable rituals. Under stress, familiarity may become more valuable because it reduces cognitive load.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Use a narrow hypothesis: “When time and difficulty are similar and reading is optional, I usually explore an unfamiliar explanation in environmental history but not in furniture design.” Keep the target behavior the same: voluntarily reading an unfamiliar explanation. Buying a book or attending a required talk is not an equivalent observation.\n\nFor naturally occurring opportunities, note access, available time, difficulty, whether you read, and your own account of interest. Distinguish a natural occurrence, a genuine opportunity where reading did not happen, and a lack of opportunity. Record prompted or deliberately scheduled reading separately. A missing opportunity does not establish disinterest, and finding no exception may simply reflect limited exposure.\n\nA natural counterexample would be voluntarily reading a comparable design article without a practice assignment and reporting interest in understanding it. One exception is compatible with “usually.” Repeated exceptions weaken the subject-based distinction. Provisionally retain the hypothesis if the difference recurs under comparable conditions; narrow it if difficulty or prior knowledge explains the pattern; set it aside when evidence is sparse or inconsistent. None of these outcomes calculates a facet score.",
+          "heading": "Check selectivity with comparable opportunities",
           "key": "section-05-10ed3d826e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include balancing exploration with practicality, translating novel proposals into established systems, and adjusting the amount of change to the stakes. You may help a group bridge enthusiastic innovators and cautious operators when you make decision criteria explicit.",
-          "heading": "Possible Strengths",
+          "body": "If there is a subject you want to understand but keep postponing, choose one manageable account, reserve a short reading window, and allow yourself to stop. Note interest before starting, difficulties during reading, and whether you learned something you wanted to know.\n\nThis deliberately changes the conditions. Keep it separate from spontaneous choices. A useful short introduction may justify trying that format again; unfamiliar terminology may justify some background reading; continued lack of interest may justify leaving the subject alone. Completing the attempt does not prove a pre-existing natural preference, and stopping does not establish low Openness.\n\nA middle result needs no correction by default. Work on a behavior when it serves a real goal. A brief observation or practice period cannot validate or promise to change your personality score.",
+          "heading": "A small attempt can answer a practical question",
           "key": "section-06-c99c198e92",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Costs can include waiting too long to explore in one setting and opening too many options in another. Because the pattern is selective, others may experience it as inconsistency if you do not explain why a specific change meets or fails your threshold.",
-          "heading": "Possible Costs",
+          "body": "The [high-range page](/en/personality/big-five/openness-high) asks about a stronger pull toward exploration. The [low-range page](/en/personality/big-five/openness-low) asks about a stronger preference for familiar experience. These comparisons require the same scoring interpretation; they are not rankings of ability or three exclusive types.\n\nRead [Openness to Experience](/en/personality/big-five/openness) or the [30-facet guide](/en/personality/big-five/facets) when your question concerns different directions of interest. If two test results disagree, start with their versions, languages, and score definitions. Choosing whichever description sounds more flattering will not resolve the measurement question.",
+          "heading": "Compare ranges without turning them into identities",
           "key": "section-07-d2a5c3e4a3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [high Openness](/en/personality/big-five/openness-high), novelty may need a clearer purpose or safer boundary. Compared with [low Openness](/en/personality/big-five/openness-low), unfamiliarity may be easier to approach when conditions fit. Mid-range does not mean exactly halfway on every facet.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-3abf6603a3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Your team proposes a new planning tool. You resist an immediate migration, test it on one project, and keep the existing system for everything else. After the trial shows a clear benefit, you adopt selected features. The pattern combines controlled exploration with continuity.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-0e103e83a5",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You might become intensely curious about a new field and spend weeks exploring it. That does not automatically imply high domain-wide Openness. A specific interest, available time, or expertise can amplify behavior in one context while other areas remain stable.",
-          "heading": "A Counterexample",
-          "key": "section-10-f5284ad7ce",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- What conditions make novelty worth the effort?\n- Where do you explore readily, and where do you protect familiarity?\n- Do your facets show a mixed pattern?\n- How do you explain a selective yes or no to change?\n- When has a small pilot changed your mind?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-9d3a9363e5",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one familiar routine and test a reversible variation for seven days. Define one benefit and one cost before starting. At the end, keep, modify, or reject the change based on those criteria. The experiment examines your threshold rather than pushing you toward either end.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-8f5d9e8d90",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness), compare [high Openness](/en/personality/big-five/openness-high) and [low Openness](/en/personality/big-five/openness-low), or inspect the [30-facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-bf2f135370",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A middle Openness result does not establish flexibility, average creativity, or a mix of high and low facets. It leaves several explanations open. Separate the score's meaning from the patterns you can actually observe.",
+        "title": "Mid-Range Openness: Reading a Middle Score Without Inventing Balance"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/openness-mid",
-      "source_hash": "4b07275547b051c773677164ded8fedaf86d2dc20f3db0211c81235ad0ca3e0e",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Mid-range Openness may suggest selective exploration: novelty in some contexts and preference for familiarity in others. It is an active pattern, not an absence of personality.",
-      "title": "Mid-Range Openness to Experience: Selective Exploration"
+      "source_hash": "9a336eab84c5c05e2eab96f6c54ec4b33bb9afa613dc56a9a711b0fd5080e805",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A middle Openness result does not establish flexibility, average creativity, or a mix of high and low facets. It leaves several explanations open. Separate the score's meaning from the patterns you can actually observe.",
+      "title": "Mid-Range Openness: Reading a Middle Score Without Inventing Balance"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "openness-mid-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, ability, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "openness-mid-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "openness-mid-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "openness-mid-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4f3c78743bd2e4d429199b58b085f2371cf9fbc40349a8eafdbe3332565039b1"
+  "source_content_sha256": "8326ea18e87003c4629838a85cb5c64d523b47e1cec0776fe86e1ad44e3000f9"
 }

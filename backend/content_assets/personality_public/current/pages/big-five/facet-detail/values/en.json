@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/values",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "values",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Someone may hold clear principles after examining and choosing them.",
-          "question": "Does strong Values mean having no principles?"
+          "answer": "No. You can examine a principle's reasons and application and deliberately retain it. Greater willingness does not guarantee that every belief has been reviewed, and review does not require repeated changes of position.",
+          "question": "Does stronger Values mean having no principles?"
         },
         {
-          "answer": "No. This facet is not a moral or political label. Any current position can be held with more or less ongoing examination.",
-          "question": "Does weaker Values mean being backward or conservative?"
+          "answer": "The conclusion alone does not establish it. A traditional position may have been reconsidered and retained. Look at what happens when relevant reasons are available and there is a usable opportunity to consider them.",
+          "question": "Does a traditional position show weaker Values?"
         },
         {
-          "answer": "No individual ideology or vote follows from this page, and the package provides no such product-level predictive evidence.",
-          "question": "Can Values predict political ideology or voting?"
+          "answer": "Yes. Understanding a reason does not require accepting its conclusion. You can identify a factual problem, a different priority, or a personal boundary. A facet label should not be used to pressure anyone into agreement.",
+          "question": "Can I understand an opposing view and still disagree?"
         },
         {
-          "answer": "Exposure and perspective-taking may expand behavior. This page does not promise a stable trait change.",
-          "question": "Can someone train greater openness in Values?"
+          "answer": "That would be too broad a claim. Related IPIP Liberalism scales contain political and religious items, so their measurement content needs to be distinguished. This guide still cannot determine an individual's political identity, religion, voting choice, or moral standing.",
+          "question": "Is Values entirely unrelated to political positions?"
         },
         {
-          "answer": "No. Disagreement can arise from many causes. The facet concerns the process of examining beliefs, not merely reaching a different conclusion.",
-          "question": "Does disagreeing with family prove strong Values?"
+          "answer": "It may clarify the reasons you are considering, but it may also be only a response to an exercise. Keep arranged practice separate from natural review, check the argument fairly, and decide whether to retain, revise, or suspend judgment. One exercise does not demonstrate a personality change.",
+          "question": "Will writing arguments against my view change this trait?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Values concerns willingness to examine and reevaluate established beliefs, traditions, and social norms. It describes a way of relating to beliefs—not which political, religious, ethical, or personal conclusions someone holds.\n\n“Values within Openness: willingness to reexamine established beliefs and norms” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "In the NEO/IPIP-NEO vocabulary used on this site, Values concerns willingness to reexamine established beliefs, traditions, and social norms. It belongs to Openness to Experience. A familiar rule may prompt questions about its reasons, the needs it serves, and whether its application still fits the circumstances.\n\nReview does not require abandonment. You can consider competing reasons and retain a commitment, change one condition, or postpone judgment while seeking information. Counting changes of opinion is therefore an inadequate shortcut. A stable conclusion does not, by itself, reveal an unwillingness to examine it.\n\nStronger, weaker, and middle descriptions refer to continuous differences rather than political or moral types. Stronger willingness does not mean that every belief has been carefully reviewed. Weaker willingness does not mean that reflection never occurs. The issue, the available opportunity, and the actual process all matter.",
+          "heading": "What happens when a familiar belief comes under review?",
           "key": "section-01-e047c4408b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "When encountering “this is how it has always been done,” a stronger tendency asks why, where the rule came from, and whether it still fits. A weaker tendency may give established answers, continuity, or inherited frameworks more initial weight.\n\nNeither pattern determines morality or ideology. A person may examine tradition and deliberately retain it, or accept a currently progressive norm without much reflection. The process and the conclusion must be separated.",
-          "heading": "Precise Definition",
+          "body": "Your position is what you currently support. Examination concerns how you consider reasons for it and reasons against it. Two people can reach the same position through careful review, inherited assumptions, social pressure, or quite different experiences. The conclusion alone cannot identify the facet.\n\nMoral judgment requires attention to actions, responsibilities, consequences, and ethical reasons. This facet is not a ranking of virtue. Reconsidering a norm does not establish that someone treats people well, and respecting a tradition does not establish prejudice. Examination also does not require treating a harmful proposal as equally acceptable.\n\nAgreement is a separate observation. You may say yes to preserve a relationship, avoid a penalty, or end an exhausting conversation. Those circumstances do not show voluntary reconsideration. You can also understand another person's reasoning, respect their boundaries, and still disagree.\n\nIdeas concerns interest in concepts; Actions concerns unfamiliar activities. A taste for debate or a varied lifestyle cannot establish that you have examined your own commitments.",
+          "heading": "A position, a moral judgment, and agreement answer different questions",
           "key": "section-02-f06652b236",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Values belongs to [Openness to Experience](/en/personality/big-five/openness) in the NEO/IPIP-NEO vocabulary used by this package. The page does not claim that this is the only possible structure across all Openness measures.",
-          "heading": "Parent Domain",
+          "body": "Some disagreements turn on a factual assumption that can be checked. Others turn on the relative weight of continuity, fairness, freedom, care, or another valued concern. People can agree on the facts and still choose differently because they prioritize those concerns differently.\n\nFor one belief, ask what you think is happening, what principle you want to protect, and whether the current rule is the only way to protect it. That makes the possible exits clearer: correct a factual assumption, revise how a principle is applied, retain a reasoned priority, or acknowledge an unresolved conflict.\n\nWith stronger willingness, you may reopen such questions more readily. Whether the review is useful still depends on the quality of the reasons and the decision that is needed. With weaker willingness, you may initially rely on an established framework. Check what happens when an exception or changed condition actually arises rather than assuming either rigidity or reliable decisiveness.\n\nMixed patterns are possible. You might review institutional rules readily and rarely revisit a personal commitment. You might also examine a belief privately while declining to discuss it in a setting where disagreement carries a cost.",
+          "heading": "Separate factual assumptions from competing priorities",
           "key": "section-03-279f0a9864",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Values versus Ideas:** [Ideas](/en/personality/big-five/facets/ideas) concerns interest in thinking; Values specifically brings norms and personal commitments under review.\n- **Values versus Actions:** [Actions](/en/personality/big-five/facets/actions) broadens lived activities. Novel behavior does not necessarily revise a belief.\n- **Values versus rebellion:** Rejecting authority can have many motives. Values concerns examination, which may end in retention, revision, or uncertainty.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine a volunteer group whose rule says that every meeting must be attended in person. One member values equal participation and initially supports the rule. When a member with limited transport explains the difficulty, the first member considers whether physical presence is the best available measure of participation. They support a remote option while keeping the expectation that everyone contributes.\n\nThe informative part is the consideration of the original reason and the changed circumstances. Supporting the new option could also result from friendship, pressure from the coordinator, or a wish to end the dispute. The decision alone does not separate these explanations.\n\nA natural counterexample might be another routine group rule, discussed without pressure and with relevant information, where the same person declines to consider any alternative. That would narrow a broad description of willingness to review norms. It would not erase the earlier episode.\n\nConversely, a person known for retaining group traditions may voluntarily examine a proposal and still reject it because an important practical concern remains unanswered. Keeping the rule is compatible with having reviewed it. These are illustrative situations, not a measurement of a real participant.",
+          "heading": "A revised rule can preserve the original principle",
           "key": "section-04-8f5aea555f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may involve tracing where beliefs came from, considering several cultural frameworks, changing a view after new evidence, or distinguishing “common” from “right.” A weaker tendency may involve trusting time-tested rules, preferring clearer moral reference points, and maintaining stable commitments. Public speech may reflect safety and conformity pressures more than private examination.",
-          "heading": "Behavioral Cues",
+          "body": "Look back at low-stakes disagreements that occurred naturally. Note the original judgment, the different reason you encountered, whether you chose to investigate it, what facts you checked, what priorities remained in conflict, and what you retained or changed. A public statement and private review need not match.\n\nDistinguish an available, reasonably safe opportunity followed by examination; an available opportunity where examination did not occur; and no usable opportunity. Missing information, immediate time pressure, or the realistic cost of expressing disagreement may prevent an informative observation. Forced agreement should be recorded as pressure rather than evidence of openness.\n\nProvisionally retain a limited hypothesis if several comparable natural episodes show voluntary consideration of unfamiliar reasons. Narrow it if that happens only with particular topics or when little is personally at stake. Set the facet interpretation aside when appeasement, pressure, or a major information gap explains the record more directly.\n\nNot finding a counterexample means that none was found in the situations considered. It does not establish that you always behave this way. A brief record can refine an account of your experiences, but cannot validate a personality trait or another person's moral character.",
+          "heading": "Observe the process, including opportunities that were absent",
           "key": "section-05-74859fafd0",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Pluralistic settings may make belief review visible. Homogeneous or punitive settings may keep it private. Life transitions, migration, education, family responsibility, and direct experience can also activate reevaluation. One controversial opinion cannot establish the broader tendency.",
-          "heading": "Contextual Differences",
+          "body": "Choose a routine norm you can examine without putting an important relationship or obligation at risk. Write down its purpose, the factual assumptions supporting its current form, a relevant exception, and the costs of an alternative. Represent the alternative accurately; you do not need to invent respectable reasons for unsupported claims.\n\nChoose an explicit next step. Retain the current practice and explain why, revise its application, or defer the conclusion until a named piece of information is available. If an agreement is needed now, state what will happen meanwhile and what would justify reopening it.\n\nRecord this as an arranged exercise, separately from naturally occurring review. Evaluate whether you understood the reasons, separated facts from priorities, and reached an explainable next step. Completing the exercise does not show that the facet increased, and keeping your original position is not a failed attempt.",
+          "heading": "Conduct one review without making agreement the goal",
           "key": "section-06-be2668a42a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Naming the source and assumptions behind a belief.\n- Trying to understand the logic of an opposing worldview.\n- Revising a position without treating revision as weakness.\n- Defining a good life through personally examined commitments.\n- Remaining uncertain longer when several value systems have coherent reasons.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) pairs NEO Values with IPIP Liberalism as similar constructs. The [long-form items](https://ipip.ori.org/newNEOFacetsKey.htm) and [Maples short form](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) contain political and religious positions. They cannot accurately be described as measuring only a position-free examination process.\n\nThis page uses Values to explain willingness to revisit beliefs. It is not a description of every related instrument's items, nor a basis for assigning a reader a political identity, religion, or voting choice. A particular result needs the relevant instrument, version, and interpretation rules; a public explanation cannot supply an unreported measurement.\n\nThe [BFI-2 authors' page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) also uses Open-Mindedness as a broader domain name. That domain, everyday open-mindedness, and the Values facet should not be exchanged simply because their names sound similar. These sources establish terminology and instrument distinctions, not FermatMind product validation.",
+          "heading": "Related labels do not imply identical measurements",
           "key": "section-07-defcf7ebd2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Treating some questions as sufficiently settled.\n- Maintaining a stable reference framework across adulthood.\n- Giving family, tradition, community, or established consensus substantial weight.\n- Preferring clearer boundaries over prolonged moral ambiguity.\n- Finding rapid cultural change harder to integrate.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "For the broader domain, read [Openness to Experience](/en/personality/big-five/openness). For interest in conceptual discussion, read [Ideas](/en/personality/big-five/facets/ideas). For unfamiliar activities, read [Actions](/en/personality/big-five/facets/actions).\n\n[Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), and [Feelings](/en/personality/big-five/facets/feelings) address other areas of experience. The [30-facet guide](/en/personality/big-five/facets) explains the vocabulary without turning one observed pattern into results for the other facets.",
+          "heading": "Continue with the part of openness you mean",
           "key": "section-08-1556b0fbe3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Values can support adaptation across cultures and deliberate self-renewal. Possible costs include indecision, appearing uncommitted, or drifting into indiscriminate relativism.\n\nWeaker Values can support continuity, identity coherence, and decisive action under a trusted framework. Possible costs include slower adaptation or insufficient review when circumstances change. Neither tendency proves open-mindedness in every domain, virtue, prejudice, courage, or conformity.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-89693c3a60",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A woman reviews expectations inherited from a traditional family one by one. She retains respect for elders, revises assumptions about women’s roles, and can explain why. Her pattern is neither blanket rebellion nor obedience; the relevant feature is deliberate examination.",
-          "heading": "An Original Case",
-          "key": "section-10-87f1de6b92",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A young man holds strong mainstream values but rarely asks where they came from. When friends disagree, he reports that his own framework simply feels settled. His conclusions alone do not identify the facet; the limited examination process is the relevant clue.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-1a3ea9246d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Can you name several central values and where they came from?\n2. When meeting an opposing worldview, do you first judge, investigate, or disengage?\n3. Which belief changed in the past five years, and what prompted the change?\n4. Which questions feel settled beyond useful review?\n5. When everyone follows a practice, do you distinguish prevalence from justification?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-da1429a964",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose three beliefs you hold and trace each to family, experience, community, evidence, or a specific influence. Then write the strongest fair reason for one position you reject. The purpose is to observe examination, not force a new conclusion or weaken a valued commitment.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-a9188a0fa0",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Feelings](/en/personality/big-five/facets/feelings), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas).",
-          "heading": "Continue Reading",
-          "key": "section-14-86da6c9b23",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Values concerns willingness to reconsider established beliefs, traditions, and norms. Examination can end in retaining, revising, or suspending a judgment; it should be distinguished from the position you hold and the pressure to agree.",
+        "title": "Values: Reexamining Beliefs and Traditions"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/values",
-      "source_hash": "2999b41026a9a9715f140e57966ef7de9a56b7ec3f9dff085fd76ebb8f7a4607",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Values concerns willingness to examine and reevaluate established beliefs, traditions, and social norms. It is not a political label, moral rank, rebellion, or absence of principles.",
-      "title": "Values: Willingness to Reexamine Established Beliefs"
+      "source_hash": "31a5d6f3ae9b75b15cdd47f69301f284d26adcb0fe595f7407309002dc822ec0",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Values concerns willingness to reconsider established beliefs, traditions, and norms. Examination can end in retaining, revising, or suspending a judgment; it should be distinguished from the position you hold and the pressure to agree.",
+      "title": "Values: Reexamining Beliefs and Traditions"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "O6-values-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "O6-values-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "O6-values-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "O6-values-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "b8bfff9836614a0cd37a1a4aa96d397d3aef4c7fb95207f472b40b132f0a8352"
+  "source_content_sha256": "eeb3bc227fff94243ceb9bc23541d951bf4c54b8b1f56094ac78c1026f5b08cb"
 }

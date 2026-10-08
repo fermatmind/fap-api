@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets",
@@ -20,48 +20,47 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "facets",
       "entity_type": "facet_hub",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        },
-        {
-          "citation_label": "Between facets and domains: 10 aspects of the Big Five",
-          "limitation": "PMID and DOI metadata agree. Supports the existence of alternative hierarchical models, not the package-specific 30-facet framework.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
-          "source_id": "S5"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "Start from the concrete problem you want to understand. For execution and follow-through, begin with the six Conscientiousness facets. For social interaction, begin with Extraversion or Agreeableness. Expand only when another domain offers a plausible alternative explanation.",
+          "answer": "There is no single facet count used by every Big Five instrument. This directory follows the thirty-facet NEO/IPIP-NEO vocabulary. BFI-2 uses fifteen facets. Identify the particular instrument and its definitions before comparing structures.",
+          "question": "Is thirty the official number of Big Five facets?"
+        },
+        {
+          "answer": "No. An educational page and a personal measurement are different things. Your questionnaire and report must explicitly identify a reported facet before you interpret its score. Five domain scores cannot be used to reconstruct thirty unreported facet scores.",
+          "question": "Does a facet page mean my test measured that trait?"
+        },
+        {
+          "answer": "Start with the situation you want to understand. For example, hesitation about joining a group may concern group preference, initiating contact, being evaluated, or practical constraints. Choose one or two plausible facets and check the alternatives. If the question is still broad, begin with the parent domain.",
           "question": "Which facet should I read first?"
         },
         {
-          "answer": "That can be informative rather than erroneous. A broad domain summarizes narrower tendencies according to a particular instrument’s items and scoring. Stronger and weaker facets can offset one another, leaving a middle domain result. Check the instrument’s scoring documentation before assuming a simple average.",
-          "question": "What if my facet scores and domain score seem inconsistent?"
+          "answer": "A broad result does not determine every narrower tendency. First confirm that the report provides both levels, then check the instrument's scoring and score metric. Do not assume equal weighting or explain every difference as high and low facets cancelling out. Percentiles cannot simply be averaged.",
+          "question": "Why might a domain result and its facets seem inconsistent?"
         },
         {
-          "answer": "Describe behavior and context instead of introducing yourself through labels. “I compare options carefully before a high-stakes decision, but once a plan is set I work without much supervision” communicates more than listing Deliberation and Self-Discipline ranges. Concrete examples also make it easier for another person to offer counterevidence.",
-          "question": "How should I explain my facet pattern to someone else?"
+          "answer": "No. You may have had few relevant opportunities or overlooked contrary behavior. Separate genuine opportunities without the expected behavior from occasions when the behavior was not possible. Comparable natural observations can support a provisional everyday idea; limited patterns call for a narrower idea, and unclear evidence calls for setting it aside.",
+          "question": "If I find no counterexamples, have I confirmed the trait?"
         },
         {
-          "answer": "Such a pattern would be unusual, but it is not a diagnosis. It could reflect how the scale is scored, a broad tendency to reject questionnaire statements, misunderstanding of items, or a temporary negative self-view. Review response quality and the instrument’s guidance before interpreting the pattern, and do not assume that a retest after a fixed number of weeks is universally appropriate.",
-          "question": "Is it a problem if all 30 facets are low?"
+          "answer": "That pattern alone cannot establish a problem or its cause. Check whether the report actually contains facet scores, their direction and reference, the questionnaire version, and how the items were answered. Do not infer a diagnosis, a response bias, or a temporary negative self-view from the pattern alone.",
+          "question": "What if all thirty reported facets are low?"
         },
         {
-          "answer": "This package does not provide facet-specific evidence about longitudinal stability, age-related rates of change, or intervention effects. Group findings at the domain level cannot simply be transferred to every facet in this framework. Individual change claims require a specified instrument, repeated measurement, and an appropriate research design.",
-          "question": "Can facets change?"
+          "answer": "It shows what happened with that practice under those conditions. Record deliberate preparation or environmental changes separately from spontaneous behavior. A later test difference also requires attention to instrument, language, scoring, timing, and measurement error before it can be interpreted as trait change.",
+          "question": "Does a successful practice mean my personality changed?"
         },
         {
-          "answer": "No. Instruments can differ in definitions, item counts, hierarchy, scoring, and reference samples. The 30-facet NEO/IPIP-NEO vocabulary used here does not map directly onto the BFI-2’s 15 facets, even when both instruments use the five broad domain names.",
-          "question": "Can I compare facet results from different tests directly?"
+          "answer": "Not automatically. NEO and IPIP-NEO concern similar constructs but use different instruments, and IPIP-NEO versions can select different items. BFI-2 has a different facet structure. Direct score comparison requires evidence about the measures, metrics, and reference samples, rather than a match between names.",
+          "question": "Can similarly named facets from different tests be compared?"
         },
         {
-          "answer": "Facets can help you ask better questions about an environment, such as whether it demands frequent improvisation or strict procedure. They do not measure occupational skill and cannot select a career, predict performance, or justify hiring decisions. Career exploration also requires knowledge of the work, interests, skills, experience, opportunity, and direct practice.",
-          "question": "Can facets be used for career planning?"
+          "answer": "They can suggest questions about a work setting, but they do not establish skill, performance, or fit. Someone who rarely takes the conversational lead may still have strong leadership skills. Career exploration also needs actual task information, interests, demonstrated abilities, resources, and experience.",
+          "question": "Can facets tell me which career I would perform well in?"
+        },
+        {
+          "answer": "No. They are facet names in this personality tradition. Temporary states, recurring tendencies, and clinical conditions should be distinguished. Persistent distress or difficulty functioning should be assessed by a qualified professional rather than diagnosed from a personality label.",
+          "question": "Are Anxiety, Depression, or Impulsiveness diagnoses?"
         }
       ],
       "framework": "big_five",
@@ -257,163 +256,100 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "The five domains provide a broad personality map. Facets add resolution. If “high Conscientiousness” feels too general because you value order but struggle with follow-through, or set ambitious goals while missing details, a facet-level view helps identify which narrower tendencies may be contributing to the broad result.\n\nThis page uses a 30-facet NEO/IPIP-NEO interpretive framework. The official IPIP resource lists three sets of scales intended to measure constructs similar to the 30 NEO facets and distinguishes the historical and measurement traditions behind the lexical Big Five, FFM, BFI, and NEO/IPIP families ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)). Other research has proposed different hierarchical arrangements, including a 10-aspect level ([S5](https://pubmed.ncbi.nlm.nih.gov/17983306/)). Thirty facets are therefore not the one universal structure used by every Big Five instrument.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.\n\nFacet descriptions are best treated as hypotheses about recurring patterns. They do not prove why a behavior occurred, and they do not measure talent, virtue, diagnosis, or occupational destiny.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A broad description can feel accurate in one setting and unhelpful in another. You might enjoy welcoming someone into a small gathering while avoiding a crowded event. Those experiences raise separate questions about warmth and preference for groups; the word extraversion alone does not settle them.\n\nA facet is a narrower tendency within a personality domain. A particular invitation, conversation, or decision is an event shaped by its circumstances. The event may offer a clue, but it cannot establish a facet or explain its own cause.\n\nStart with something you want to understand: Which kinds of company do I seek? What makes it difficult to start a task? When do I reconsider a familiar view? Choose one or two relevant facets and keep the question specific enough to examine.\n\nHigher, lower, and middle positions describe a continuum. They do not divide people into separate types or rank their worth. This page provides an interpretive vocabulary, not personal measurements. A facet's presence in the directory does not mean your questionnaire assessed it.",
+          "heading": "Use the directory to sharpen a question",
           "key": "section-01-0f0e263bb4",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A facet is a narrower tendency within a broad personality domain. Domains summarize large families of behavior; facets distinguish more specific patterns within those families. A behavior is narrower still because it occurs at a particular time under particular conditions.\n\nConsider two people with similar Conscientiousness results. One keeps a carefully organized workspace but often needs external deadlines to finish. The other works in visible clutter yet can sustain attention for hours once a task begins. The first pattern may involve stronger Order than Self-Discipline; the second may involve the reverse. The domain label alone cannot show that contrast.\n\nThe value of facets is not that they create 30 new personality types. It is that they replace “Which category am I?” with “Which more specific tendencies seem to appear, and under what conditions?”",
-          "heading": "What Is a Facet?",
+          "body": "FermatMind's public directory uses the NEO/IPIP-NEO interpretive vocabulary: six facets under each of five domains. This is one way of organizing narrower tendencies. It is not a universal list required by every Big Five instrument.\n\nThe [official IPIP guide](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) describes a 300-item NEO-related inventory and two 120-item selections developed using different methods. The same item count therefore need not identify the same questionnaire. IPIP scales are intended to measure constructs similar to NEO facets; they are not the proprietary NEO instrument.\n\nNames also differ. The [NEO/IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) pairs Warmth with Friendliness, Deliberation with Cautiousness, and other related labels. Such correspondence does not make the items, scores, or reference samples interchangeable. The [BFI-2 authors' description](https://www.ocf.berkeley.edu/~johnlab/bfi.html) identifies a different inventory with 60 items and 15 facets.\n\nBefore interpreting a result, identify the instrument, version, language, reported scales, and score metric. If your report gives only five domains, this directory cannot supply the missing facet scores. It can help you decide what to ask next.",
+          "heading": "Thirty facets belong to a particular tradition",
           "key": "section-02-6ad72aab30",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "This package uses the terminology of a 30-facet NEO/IPIP-NEO framework: six facets beneath each of the five domains. It is not the BFI-2 hierarchy, which uses three facets per domain and 15 in total. Names or scores from different instruments should not be treated as interchangeable merely because they sit beneath a domain with the same label.\n\nThe framework serves three editorial purposes. It supplies a more precise vocabulary than the five broad domains, helps readers distinguish different behavioral routes to a similar domain result, and keeps each narrower construct tied to an explicitly named measurement tradition. It does not establish that the facets are independent or that the product has validated facet scores for every population.",
-          "heading": "The Facet Framework Used by FermatMind",
+          "body": "Read [Openness](/en/personality/big-five/openness) for orientation, then follow the question that matters:\n\n- [Imagination](/en/personality/big-five/facets/imagination): inner scenes and imagined possibilities.\n- [Aesthetics](/en/personality/big-five/facets/aesthetics): engagement with art and beauty.\n- [Feelings](/en/personality/big-five/facets/feelings): vividness of emotional experience and attention to it.\n- [Actions](/en/personality/big-five/facets/actions): willingness to try unfamiliar activities.\n- [Ideas](/en/personality/big-five/facets/ideas): interest in abstract questions.\n- [Values](/en/personality/big-five/facets/values): willingness to reconsider established views.\n\nThese distinctions prevent one interest from standing in for the whole domain. Someone may enjoy discussing an unfamiliar ethical argument while preferring a familiar daily routine. Ideas and Actions concern different experiences. Feelings does not measure emotional regulation skill, and interest in ideas does not establish intelligence.\n\nIf you avoid a new class, consider whether the obstacle is novelty, cost, scheduling, or lack of access. If you spontaneously explore unfamiliar material in another setting, keep that example too. The useful question is where the pattern appears, rather than which broad label fits one choice.",
+          "heading": "Openness: separate different kinds of experience",
           "key": "section-03-8e68063d36",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "The short descriptions below explain the construct each name is intended to point toward. They are not score interpretations by themselves.\n\n### Openness to Experience\n\n| Facet | Brief description |\n|---|---|\n| Imagination | Tendency to form rich inner scenes, possibilities, and imagined alternatives |\n| Aesthetics | Sensitivity to art, music, nature, form, and beauty |\n| Feelings | Attention to and differentiation of one’s emotional experience |\n| Actions | Willingness to try unfamiliar activities, places, and routines |\n| Ideas | Interest in abstract concepts, theories, and new knowledge |\n| Values | Willingness to examine and reconsider established values and conventions |\n\n### Conscientiousness\n\n| Facet | Brief description |\n|---|---|\n| Competence | Confidence in one’s ability to handle tasks effectively |\n| Order | Preference for organization, neatness, and structured surroundings |\n| Dutifulness | Tendency to honor commitments, rules, and internal standards of obligation |\n| Achievement Striving | Drive to set demanding goals and work toward them |\n| Self-Discipline | Tendency to begin and persist with tasks despite distraction |\n| Deliberation | Tendency to consider consequences and alternatives before acting |\n\n### Extraversion\n\n| Facet | Brief description |\n|---|---|\n| Warmth | Tendency to form emotional connections and express friendliness |\n| Gregariousness | Degree of enjoyment of company and preference for group activity |\n| Assertiveness | Tendency to state views, take the lead, and maintain a position |\n| Activity | Preference for a busy pace and energetic engagement |\n| Excitement Seeking | Preference for stimulation, intensity, and exciting experiences |\n| Positive Emotions | Frequency of joy, enthusiasm, and other positive affect |\n\n### Agreeableness\n\n| Facet | Brief description |\n|---|---|\n| Trust | Tendency to expect broadly benign intentions from other people |\n| Straightforwardness | Tendency toward clear, non-manipulative expression; not a duty to disclose everything |\n| Altruism | Concern for others’ welfare and willingness to help |\n| Compliance | Tendency to de-escalate, compromise, or yield during conflict |\n| Modesty | Tendency not to overstate oneself and to acknowledge limits |\n| Tender-Mindedness | Tendency to include suffering, vulnerability, and humane concern in judgment |\n\n### Neuroticism\n\nThese labels describe personality tendencies and must not be used as clinical diagnoses.\n\n| Facet | Brief description |\n|---|---|\n| Anxiety | Tendency to experience tension, worry, and fear |\n| Anger | Tendency to experience frustration, irritation, and hostility |\n| Depression | Tendency to experience sadness, helplessness, and reduced interest |\n| Self-Consciousness | Tendency to feel uncomfortable or scrutinized in social settings |\n| Impulsiveness | Difficulty delaying gratification when strong urges arise |\n| Vulnerability | Tendency to feel overwhelmed or less able to cope under stress |",
-          "heading": "Complete Map of Five Domains and 30 Facets",
+          "body": "The [Conscientiousness](/en/personality/big-five/conscientiousness) facets direct attention to different parts of organizing and undertaking tasks:\n\n- [Competence](/en/personality/big-five/facets/competence): confidence in handling tasks.\n- [Order](/en/personality/big-five/facets/order): preference for organization.\n- [Dutifulness](/en/personality/big-five/facets/dutifulness): the pull of commitments and obligations.\n- [Achievement Striving](/en/personality/big-five/facets/achievement-striving): pursuit of demanding goals.\n- [Self-Discipline](/en/personality/big-five/facets/self-discipline): starting and continuing tasks.\n- [Deliberation](/en/personality/big-five/facets/deliberation): considering consequences before acting.\n\nCompetence here concerns a person's sense of effectiveness; actual skill needs separate evidence. Wanting an ambitious outcome does not guarantee a prompt start. Deliberation concerns consideration before action, while Self-Discipline concerns getting underway and following through.\n\nSuppose a renewal form remains unfinished. You might be uncertain about a requirement, waiting for necessary documents, overwhelmed by other obligations, or putting off an available task. Record which conditions apply before treating the delay as a personality pattern. A prepared checklist that helps on the next occasion is evidence about that support, not a new trait score.",
+          "heading": "Conscientiousness: distinguish confidence, obligation, and follow-through",
           "key": "section-04-356befa364",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "In instruments that report both levels, the relationship between domain and facet scores depends on the items and scoring rules. Do not assume that every tool adds or weights six facets in the same way. Even when two reports show similar domain results, their distributions of narrower tendencies may differ.\n\nThat difference matters when a broad description feels contradictory. “High Conscientiousness” may summarize strong Order and Deliberation for one person, but strong Achievement Striving and Self-Discipline for another. Looking at facets can produce a better question: not “Am I conscientious?” but “Which forms of structure, persistence, caution, or goal pursuit recur in my life?”\n\nRead the domain first for orientation. Then inspect the facets within the domain that is most relevant or confusing. Reading all 30 at once often creates information overload without improving the decision you are trying to make.",
-          "heading": "Why Similar Domain Scores Can Hide Different Facet Patterns",
+          "body": "Begin with [Extraversion](/en/personality/big-five/extraversion), then distinguish:\n\n- [Warmth](/en/personality/big-five/facets/warmth): friendly closeness with people.\n- [Gregariousness](/en/personality/big-five/facets/gregariousness): attraction to group company.\n- [Assertiveness](/en/personality/big-five/facets/assertiveness): taking initiative and expressing a position.\n- [Activity](/en/personality/big-five/facets/activity): preferred pace and amount of activity.\n- [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking): attraction to intense stimulation.\n- [Positive Emotions](/en/personality/big-five/facets/positive-emotions): experiences of joy and enthusiasm.\n\nBeing welcoming does not require wanting a large audience. A busy pace does not establish productivity. Assertiveness does not establish sound judgment or leadership skill, and Positive Emotions cannot tell you how quickly someone recovers from stress.\n\nIf you hesitate to host an event, ask what you are hesitating about: the size of the group, initiating contact, practical work, expense, or the expectation of entertaining everyone. Each calls for a different next step. One hesitation cannot determine your position on the domain.",
+          "heading": "Extraversion: company, initiative, pace, and enjoyment",
           "key": "section-05-a32315158d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "**1. Find the strongest contrast within a domain.** Compare its most elevated and least elevated facets. A high Order result with middle Self-Discipline may help explain why a person likes an organized desk but still starts major work close to the deadline.\n\n**2. Look across domains for reinforcement or tension.** Strong Ideas with weaker Self-Discipline may feel like broad curiosity without sustained depth. Strong Neuroticism alongside strong Positive Emotions may involve frequent tension while preserving the capacity to respond warmly to positive events. These are hypotheses to test, not formulas.\n\n**3. Match the pattern to the situation.** Strong Assertiveness with weaker Compliance may help during a difficult negotiation but create friction in a close relationship unless the person deliberately changes pace. A facet suggests what may come naturally; it does not dictate what someone should do everywhere.\n\n**4. Remove all-or-nothing interpretations.** “Higher” and “lower” are ranges on a continuum, not switches. A tendency changes probability, and a sufficiently strong situation can produce behavior that runs against the baseline. The purpose of facet analysis is precision, not a more elaborate stereotype.",
-          "heading": "A Four-Step Method for Reading Facet Combinations",
+          "body": "Within [Agreeableness](/en/personality/big-five/agreeableness), the directory separates:\n\n- [Trust](/en/personality/big-five/facets/trust): expectations about other people's intentions.\n- [Straightforwardness](/en/personality/big-five/facets/straightforwardness): expression without deception or manipulation.\n- [Altruism](/en/personality/big-five/facets/altruism): willingness to help.\n- [Compliance](/en/personality/big-five/facets/compliance): yielding or reducing confrontation in conflict.\n- [Modesty](/en/personality/big-five/facets/modesty): reluctance to emphasize personal importance.\n- [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness): consideration of suffering and need.\n\nConcern does not require agreement. Helping someone does not show that you trust every person, and being straightforward does not require revealing private information. Compliance describes a tendency in disagreement; it is not an instruction to accept an unreasonable demand.\n\nFor example, you might offer a friend a lift while declining to lend your car. The two decisions concern different requests and consequences. Neither provides a general verdict on kindness, trust, or character. Examine the choice and its conditions before assigning a label.",
+          "heading": "Agreeableness: helping and yielding are separate questions",
           "key": "section-06-80beefe2e7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "This content package uses the 30-facet vocabulary associated with the NEO and IPIP-NEO tradition. The NEO-PI-R manual describes six facets under each domain. The official IPIP resource provides public-item scales intended to measure constructs similar to those facets; it does not claim that those scales are identical to a proprietary instrument ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)).\n\nWithin this package, the framework gives readers a finer observational vocabulary, separates different tendencies inside a domain, and uses publicly checkable IPIP construct and item mappings as a terminology boundary.\n\nSeveral limits remain. Facets should not be assumed to operate independently. Their everyday expression can differ across cultures and contexts, while this package does not claim separate cross-cultural validation for its English translation or Chinese product scores. Thirty facets also cannot exhaust every important feature of personality. They are a useful entry point, not a complete map of a person.",
-          "heading": "History and Limits of the 30-Facet Framework",
+          "body": "Read [Neuroticism](/en/personality/big-five/neuroticism) alongside these narrower terms:\n\n- [Anxiety](/en/personality/big-five/facets/anxiety): tension, worry, and fear.\n- [Anger](/en/personality/big-five/facets/anger): irritation and anger.\n- [Depression](/en/personality/big-five/facets/depression): low mood and negative self-feelings.\n- [Self-Consciousness](/en/personality/big-five/facets/self-consciousness): discomfort about being noticed or evaluated.\n- [Impulsiveness](/en/personality/big-five/facets/impulsiveness): difficulty resisting strong urges.\n- [Vulnerability](/en/personality/big-five/facets/vulnerability): feeling unable to cope under pressure.\n\nSelf-Consciousness is not a general measure of self-reflection. Impulsiveness in this tradition concerns urges and restraint, rather than every quick decision. Vulnerability is not a verdict that a person is weak or lacks practical coping skills.\n\nThese are facet labels, not diagnoses. A difficult afternoon, a recurring tendency, and a clinical condition require different kinds of understanding. Neither a directory nor a personality score can establish a diagnosis. Persistent distress or interference with daily life warrants assessment by a qualified professional; you do not need to settle on a facet label first.",
+          "heading": "Neuroticism: identify the experience without making a diagnosis",
           "key": "section-07-b51a7850fb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Not as clinical assessment.** Labels such as Anxiety, Depression, and Anger are personality terms here, not diagnostic labels. Serious or persistent distress requires appropriate professional assessment.\n- **Not for occupational screening.** A facet is not a hiring criterion, and a narrow tendency does not predict one person’s job performance or fit.\n- **Not as simple arithmetic.** Strong Order plus weaker Self-Discipline does not automatically equal “organized procrastinator.” A person may build calendars, reminders, or accountability systems that change what the combination looks like.\n- **Not as ability scores.** Lower Assertiveness does not prove weak persuasion, and lower Ideas does not prove lack of knowledge. Facets describe tendencies, not competence.\n\nContradictory combinations can be especially informative when treated carefully. Strong Achievement Striving with strong Anxiety may create a recurring tension between aiming high and fearing failure. Strong Altruism with weaker Self-Discipline may make it easy to help others while postponing personal tasks. Strong Ideas with weaker Deliberation may support quick intellectual exploration while leaving important decisions underexamined.\n\nThe next step is usually not to “change a trait.” It is to design support for the conditions that cause problems: a decision checklist when Deliberation is weak, external accountability when Self-Discipline is weak, or a defined time window for worry when Anxiety occupies too much of the day. Those are low-risk behavioral hypotheses, not treatment claims.",
-          "heading": "How Facets Must Not Be Used",
+          "body": "A broad domain cannot specify every narrower tendency. Two people with similar Agreeableness results could differ in their willingness to help, their initial trust, and their approach to disagreement. One might volunteer readily while carefully checking unfamiliar requests; another might readily assume good intentions but protect their time by declining help. These are conceptual examples, not inferred facet scores.\n\nIf an instrument reports both levels, consult its actual scoring rules. Do not assume that six facets are equally weighted, that a domain must be their simple average, or that facet percentiles can be combined into a domain percentile. A difference between reported scores does not explain itself.\n\nThe same care applies to combinations. Several higher and lower results do not create a new personality type. A middle result does not automatically mean flexibility or balance. Select the distinctions relevant to your question, then examine behavior and circumstances. A numerical gap between facets cannot establish why someone acted as they did.",
+          "heading": "Similar domain results can leave different questions unanswered",
           "key": "section-08-cb5356a8e3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- [Openness](/en/personality/big-five/openness): [Imagination](/en/personality/big-five/facets/imagination), [Aesthetics](/en/personality/big-five/facets/aesthetics), [Feelings](/en/personality/big-five/facets/feelings), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas), and [Values](/en/personality/big-five/facets/values)\n- [Conscientiousness](/en/personality/big-five/conscientiousness): [Competence](/en/personality/big-five/facets/competence), [Order](/en/personality/big-five/facets/order), [Dutifulness](/en/personality/big-five/facets/dutifulness), [Achievement Striving](/en/personality/big-five/facets/achievement-striving), [Self-Discipline](/en/personality/big-five/facets/self-discipline), and [Deliberation](/en/personality/big-five/facets/deliberation)\n- [Extraversion](/en/personality/big-five/extraversion): [Warmth](/en/personality/big-five/facets/warmth), [Gregariousness](/en/personality/big-five/facets/gregariousness), [Assertiveness](/en/personality/big-five/facets/assertiveness), [Activity](/en/personality/big-five/facets/activity), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), and [Positive Emotions](/en/personality/big-five/facets/positive-emotions)\n- [Agreeableness](/en/personality/big-five/agreeableness): [Trust](/en/personality/big-five/facets/trust), [Straightforwardness](/en/personality/big-five/facets/straightforwardness), [Altruism](/en/personality/big-five/facets/altruism), [Compliance](/en/personality/big-five/facets/compliance), [Modesty](/en/personality/big-five/facets/modesty), and [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness)\n- [Neuroticism](/en/personality/big-five/neuroticism): [Anxiety](/en/personality/big-five/facets/anxiety), [Anger](/en/personality/big-five/facets/anger), [Depression](/en/personality/big-five/facets/depression), [Self-Consciousness](/en/personality/big-five/facets/self-consciousness), [Impulsiveness](/en/personality/big-five/facets/impulsiveness), and [Vulnerability](/en/personality/big-five/facets/vulnerability)\n- Return to the [Big Five overview](/en/personality/big-five)",
-          "heading": "Continue Reading",
+          "body": "Consider the question: Why do I welcome time with a friend but hesitate when several people suggest a shared outing? Start with [Warmth](/en/personality/big-five/facets/warmth) and [Gregariousness](/en/personality/big-five/facets/gregariousness). Avoid translating either choice into a global introvert label.\n\nMake the working idea precise: When I am free, interested in the activity, and comfortable with the people involved, I tend to choose meeting one person over joining a larger group. The target behavior is choosing the individual meeting when both options are genuinely available and comparable. Check that either can be chosen freely, that the activities and company are similarly appealing, and that time, transport, cost, noise, fatigue, or caring responsibilities do not make one option impractical. Record what you chose and why. Enjoying the conversation and skillfully managing it are separate observations.\n\n**Opportunity without the expected behavior:** An individual meeting and a larger gathering both meet those conditions, but you freely choose the gathering. The target behavior—choosing the individual meeting—did not occur. Record the reason and any remaining differences between the options. This is one exception to record; it does not by itself overturn a usual preference or prove a Gregariousness level. Declining a group invitation alone cannot show which option you prefer.\n\n**No relevant opportunity:** Only the group invitation is available, or work or transport prevents you from choosing one of the two options. There is no usable comparison. Record that limitation rather than treating attendance or nonattendance as evidence of the preference or as a counterexample.\n\n**A natural exception:** Keep an unprompted choice of the gathering over a genuinely comparable individual meeting as a natural observation. One such choice can coexist with a tendency to choose individual meetings. Check what made it different. If choices vary mainly with the activity, narrow the idea to that activity, such as a preference for individual meetings when the purpose is quiet conversation. If group choices recur under comparable conditions, reconsider how often the original pattern occurs and whether the explanation still fits.\n\n**A planned attempt:** For one manageable occasion, agree on an end time and choose a quieter venue. Record that these conditions were intentionally arranged, whether you attended, and whether the arrangement made the experience workable. This examines a practical support. It does not establish your usual unassisted preference or prove that your personality changed.\n\nKeep an idea provisionally when natural observations repeatedly fit comparable conditions and no clear opposing pattern has emerged. Narrow it when the pattern belongs to particular settings. Set it aside when opportunities are scarce, circumstances are unclear, or competing explanations remain unresolved. Not finding a counterexample is not the same as showing that none exists. These notes can improve everyday choices; they are not a personality validation exercise.",
+          "heading": "A practical example: wanting connection without wanting every group",
           "key": "section-09-379b2f4dd7",
-          "kind": "rich_text"
+          "kind": "markdown"
+        },
+        {
+          "body": "For the broad model, return to the [Big Five overview](/en/personality/big-five). For a specific experience, follow the relevant facet link above. If several names seem interchangeable, read their parent domain and compare the two definitions closest to your question before adding more labels.\n\nIf you have a report, check which facets it actually provides and what the numbers mean. A percentile needs an identified reference population; a number displayed out of 100 does not explain its own metric. If the report has no facet results, use the directory to organize questions rather than manufacture measurements.\n\nThe [official IPIP construct guide](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm), [NEO/IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm), [long-form item material](https://ipip.ori.org/newNEOFacetsKey.htm), [Maples short-form item material](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm), and [BFI-2 authors' page](https://www.ocf.berkeley.edu/~johnlab/bfi.html) explain terminology and instrument differences. Statistics in those materials belong to the instruments and studies described there. They do not establish the reliability, validity, or norms of a FermatMind assessment.\n\nThe examples here are prompts for checking everyday explanations. They are not questionnaire items, clinical interventions, or promises of trait change. For career exploration, also examine the work itself, interests, demonstrated skills, resources, and direct experience. A tendency alone cannot establish occupational fit or individual performance.",
+          "heading": "Choose the next page, and keep the evidence in scope",
+          "key": "local-section-10",
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Use this NEO/IPIP-NEO vocabulary to distinguish narrower tendencies, choose a relevant facet, and examine situations and counterexamples. A directory of facets is not a record of what your test measured.",
+        "title": "The 30 Big Five Facets: Find the Question Behind the Label"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets",
-      "source_hash": "89562341b6c35ea99814cf5d04158c68659ec4b160bb6d0a1e04ceabc5750655",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Facets are narrower tendencies within the five Big Five domains. They help explain why two people with similar domain scores may show that domain in very different ways.",
-      "title": "The 30 Big Five Facets: A Guide to More Specific Personality Tendencies"
+      "source_hash": "281f6ca9be44d92c3ac87658f0503fac66cc6ae2ac42d13561678fecd4f1006f",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Use this NEO/IPIP-NEO vocabulary to distinguish narrower tendencies, choose a relevant facet, and examine situations and counterexamples. A directory of facets is not a record of what your test measured.",
+      "title": "The 30 Big Five Facets: Find the Question Behind the Label"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "facets-measurement_method-1",
-            "limitation": "Supports this package's labeled interpretive framework, not a universal facet hierarchy, scale equivalence, or product validity.",
-            "source_ids": [
-              "S11",
-              "S5"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "facets-measurement_method-2",
-            "limitation": "Different Big Five instruments and scoring systems must not be treated as interchangeable.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "facets-product-boundary",
-            "limitation": "Public product and method boundary; it is not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "facets-content-method",
-            "limitation": "Editorial provenance statement; it does not claim clinical review, expert endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "facets-measurement_method-1",
-              "facets-measurement_method-2"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          },
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "DeYoung, C. G.; Quilty, L. C.; Peterson, J. B.",
-            "claim_ids": [
-              "facets-measurement_method-1"
-            ],
-            "doi": "10.1037/0022-3514.93.5.880",
-            "id": "S5",
-            "limitation": "PMID and DOI metadata agree. Supports the existence of alternative hierarchical models, not the package-specific 30-facet framework.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/17983306/",
-            "source_type": "peer_reviewed_research",
-            "title": "Between facets and domains: 10 aspects of the Big Five",
-            "year": 2007
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "4fa60b39f3162307931dab9f0845260ecc900c545b6e9e5b9309413a9515c69c"
+  "source_content_sha256": "ad4e4bb700d2f42140b4cf10facc03b830e8d591db16d6292c91efac7984f665"
 }

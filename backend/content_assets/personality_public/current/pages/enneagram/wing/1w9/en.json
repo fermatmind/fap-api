@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/1w9",
@@ -23,79 +23,35 @@
       "entity_key": "1w9",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Calm delivery may reflect skill, safety, hierarchy, culture, low urgency, or deliberate conflict management. The 1w9 hypothesis is only useful when steady pacing repeatedly modifies a Type One correction pattern across comparable situations.",
-          "question": "Does a calm Type One automatically indicate 1w9?"
+          "answer": "Not automatically. A wing describes an adjacent modifier of a core, not any second-highest score. Even when a higher score belongs to an adjacent type, first compare core motives and then look for recurring evidence of the modifier. Close scores or unclear observations can leave several candidates open.",
+          "question": "If Nine is my second-highest score, does that make me 1w9?"
         },
         {
-          "answer": "Look at follow-through. Restraint that preserves a workable channel and later produces a specific repair differs from silence that leaves the problem untouched. Record the timing, the correction proposed, and the consequence rather than rating the person's tone.",
-          "question": "How is 1w9 restraint different from avoiding responsibility?"
+          "answer": "Yes. Restraint does not mean having no anger or always communicating indirectly. Examine why direct action was appropriate and how you usually handle comparable disagreements. One emotional response cannot establish or exclude a wing.",
+          "question": "Can I consider 1w9 if I sometimes get angry or correct someone directly?"
         },
         {
-          "answer": "Use one shared defect and compare the first response. A 1w9 hypothesis expects more space, documentation, or de-escalation before repair; a 1w2 hypothesis expects earlier relational involvement. Either pattern may reverse under role or safety pressure.",
-          "question": "What observation separates 1w9 from 1w2?"
+          "answer": "Not by itself. Lack of authority, exhaustion or failed cooperation can prevent a repair. Distinguish still caring about an issue you cannot resolve from mainly wanting the tension to disappear. Even a recurring version of the latter invites comparison rather than confirming another type.",
+          "question": "Does silence without a repair point to 9w1?"
         }
       ],
       "framework": "enneagram",
@@ -111,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "Enneagram overview",
+          "label": "Enneagram: nine patterns of motivation",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "Enneagram Type 1",
+          "label": "Type One: standards, responsibility and improvement",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/type-9",
-          "label": "Enneagram Type 9",
+          "label": "Type Nine: harmony and your own position",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/en/personality/enneagram/wings/1w2",
-          "label": "1w2 wing",
+          "label": "1w2: improvement through involvement",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:1w2"
         }
@@ -169,47 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A 1w9 interpretation begins with Type One standards and correction, then asks whether Nine-adjacent restraint changes the delivery. The modifier should not replace the core concern: quiet speech without repeated attention to discrepancies may reflect temperament, hierarchy, culture, fatigue, or strategic timing.",
+          "body_md": "In 1w9, One names the core and Nine the adjacent wing. In [traditional wing theory](https://www.enneagraminstitute.com/how-the-enneagram-system-works/), the wing modifies the core; it does not mean two types contribute equal halves.\n\nStart with a recurring concern rather than a style of speech. When an agreement and the actual work do not match, why does the discrepancy stay with you? If fairness, responsibility and self-reproach about leaving something wrong repeatedly organize your attention, a One interpretation deserves comparison. Having standards is broader than being tidy, serious or critical.\n\nA Nine wing may help explain how you handle that concern: listening to different positions, allowing time to think, or choosing an opening that makes disagreement easier to discuss. You may want a change while also wanting the disagreement to leave the relationship intact. The tension between those aims is more informative than how softly you speak.",
           "key": "core_first_modifier",
-          "title": "Keep the core hypothesis first"
+          "title": "The core question remains: Have I done this properly?"
         },
         {
-          "body_md": "A sibling comparison contrasts 1w9 restraint with 1w2 direct involvement. Both may correct the same defect, while 1w9 may document and wait for a calm opening and 1w2 may enter the interaction to help immediately. Compared with Nine, the distinguishing hypothesis is sustained concern with correction rather than comfort alone.",
-          "key": "sibling_core_comparison",
-          "title": "Compare sibling wing and core behavior"
-        },
-        {
-          "body_md": "Useful situations include a meeting where a flawed plan is accepted provisionally, a review comment delivered after reflection, and a household agreement revised without confrontation. Observe whether lower friction helps a concrete repair occur or merely postpones an uncomfortable decision.",
+          "body_md": "Imagine a handoff meeting that is about to end. You notice that the checklist omits an agreed verification step. This is an example for reflection, not a behavioral test for a wing.\n\nYou might check the likely consequence before sending the owner a focused message: what is missing, why it matters and how it could be restored. That pause can make feedback easier to understand and give the owner room to help solve the problem. Useful restraint still makes the disagreement visible.\n\nThe same approach can become costly if you keep waiting for a perfect opening. You revisit the issue privately and grow frustrated, while everyone else assumes you agreed. The task may remain unresolved, or you may quietly take on all the rework. You might also propose harmless adjustments without mentioning the discrepancy that actually matters.\n\nThe useful question is whether the pause has a purpose and an endpoint, and whether it enables shared action. A repair that fails because you lack resources or authority is a different situation from a concern that nobody knows you have.",
           "key": "observable_situations",
-          "title": "Watch the handoff after disagreement"
+          "title": "When a calmer approach helps—and when it leaves things unresolved"
         },
         {
-          "body_md": "A 1w9 counterexample weakens a calm correction hypothesis when apparent restraint repeatedly ends in disengagement, when standards disappear around authority, or when the person pursues harmony while leaving known defects untouched. Those cases invite a Nine hypothesis, role caution, low energy, or learned conflict avoidance.",
-          "key": "counterexample",
-          "title": "Seek a counterexample to quiet correction"
+          "body_md": "Keep the checklist omission constant. Compare both the approach you favor and what would allow you to stop worrying about it.\n\n**Compared with 1w2:** both interpretations require a One core. A 1w9 interpretation may emphasize making room for perspectives and reducing friction before a revision. A 1w2 interpretation may emphasize entering the collaboration to explain, demonstrate or repair together. Either person can be active, warm or willing to use written feedback. Introversion and extraversion do not settle the comparison.\n\n**Compared with the reverse combination, 9w1:** either person may be considerate, principled and reliable. Suppose everyone is friendly again, but the missing step remains. Why does it still bother you? Under a 1w9 interpretation, the unresolved standard or responsibility remains central. Under a 9w1 interpretation, coordination and inner or interpersonal peace remain central, with One-related principles shaping that pursuit. Now consider the reverse: the checklist is correct, but the group is still tense. Where does your attention go?\n\nThese questions do not require choosing between accuracy and relationships. Use your own account alongside actual decisions and follow-through; another person's outward behavior gives limited access to their motives.",
+          "key": "sibling_core_comparison",
+          "title": "The same omission: 1w9, 1w2 and 9w1"
         },
         {
-          "body_md": "A junior employee may delay objections because speaking costs status; a bilingual team may use slower written feedback to reduce ambiguity; a caregiver may conserve energy. Compare those explanations with the proposed wing by checking whether standards-and-repair attention persists when power, language, and fatigue change.",
+          "body_md": "Restraint may have a straightforward explanation. Challenging someone with greater authority may be ineffective. Written feedback may be clearer when working in a less familiar language. Exhaustion may temporarily limit your capacity to raise or pursue an issue.\n\nUse comparable events that have already happened rather than manufacturing conflict. When you have more autonomy, familiarity or energy, do you still tend to make room for disagreement while retaining a clear judgment about the problem? If the approach follows the conditions, a situational explanation may be sufficient.\n\nSpeaking directly, acting promptly or accepting an equally effective alternative does not automatically contradict 1w9. It may show that you can choose a method suited to the task. The question is whether a Nine-related modifier adds useful understanding to a recurring One concern.",
           "key": "alternative_explanations",
-          "title": "Test role and cultural alternatives"
+          "title": "Separate caution, role demands and flexibility"
         },
         {
-          "body_md": "Wing research is sparse, so 1w9 should remain a secondary observation hypothesis rather than an independent personality category. It does not establish a biological system, diagnostic group, fixed capacity, or outcome forecast, and it requires concrete counterexamples before use.",
-          "key": "wing_boundary",
-          "title": "Keep wing evidence limited"
+          "body_md": "**An uncertain core:** across situations where you can choose freely, standards and responsibility do not repeatedly organize your attention. Instead, your main concern is the tension, distance or possible loss of connection created by disagreement. Reconsider the One core rather than retaining 1w9 because you appear calm and dependable.\n\n**An uncertain wing:** a One pattern recurs, but the gentler or more receptive approach appears only in one role. You can retain One as a candidate without deciding on a wing.\n\n**Blocked action:** you clearly raised the concern but could not obtain authorization, time or cooperation. An unchanged outcome does not by itself show avoidance. Check what was within your control.\n\n**Flexible judgment:** new evidence makes the original standard inappropriate, or urgency calls for a direct conversation. Revising your position can be consistent with responsibility. Ask whether you can explain the reason for the change.",
+          "key": "counterexample",
+          "title": "What weakens the core, and what only leaves the wing uncertain?"
         },
         {
-          "body_md": "Duration: 4\n\nContext: Choose two low-stakes disagreements and one delayed feedback exchange where a concrete standard and repair decision are visible.\n\nObservable signal: Record when the discrepancy is noticed, when it is voiced, which channel is chosen, and whether a specific repair follows the quieter delivery.\n\nPage-specific signal: Distinguish calm pacing that enables correction from calm pacing that ends in withdrawal, indefinite delay, or unchanged standards.\n\nAlternative explanation: Compare hierarchy, cultural politeness, language processing, conflict skill, energy limits, and immediate safety with the 1w9 modifier hypothesis.\n\nReflection prompt: Name the event that best contradicts quiet correction and state whether it points toward Nine, 1w2, role caution, or another situational account.",
+          "body_md": "For your next manageable disagreement, write two sentences: what specifically needs to change, and what you fear could happen if you say so. Keep the concern about the task separate from the concern about the conversation.\n\nIf you need time, make the arrangement visible: I have a different view about the verification step. I will put it in writing tonight so we can discuss it tomorrow afternoon. This gives the pause a purpose and an endpoint.\n\nRaise the most consequential discrepancy and ask about the other person's constraints: We agreed to include this step, and I am concerned we could miss an error without it. What is making it difficult now? Agree on a feasible action, an owner and a time to revisit it.\n\nAfterward, check whether your concern was understood, whether the other person could participate in the decision, and whether the issue entered a workable process. If it did not, distinguish unclear communication, limited authority and unresolved disagreement. This is a communication experiment, not a wing test or an obligation to fix everything yourself.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare hierarchy, cultural politeness, language processing, conflict skill, energy limits, and immediate safety with the 1w9 modifier hypothesis.",
-            "context": "Choose two low-stakes disagreements and one delayed feedback exchange where a concrete standard and repair decision are visible.",
-            "duration_days": 4,
-            "observable_signal": "Record when the discrepancy is noticed, when it is voiced, which channel is chosen, and whether a specific repair follows the quieter delivery.",
-            "page_specific_signal": "Distinguish calm pacing that enables correction from calm pacing that ends in withdrawal, indefinite delay, or unchanged standards.",
-            "reflection_prompt": "Name the event that best contradicts quiet correction and state whether it points toward Nine, 1w2, role caution, or another situational account."
-          },
-          "title": "Observation exercise"
+          "title": "Give a necessary pause a clear endpoint"
+        },
+        {
+          "body_md": "Wings belong to a traditional framework and have limited research support. The [abstract of Hook and colleagues' systematic review](https://doi.org/10.1002/jclp.23097) reports little research on wings. The examples here are reflection prompts, not validated typing rules or evidence for FermatMind's assessment validity.\n\nYou can keep 1w9 as a possibility, or keep only One as a candidate. The label does not establish an inborn, permanent identity, a health level, a fixed ability or a forecast of career or relationship outcomes.\n\nIf the core remains uncertain, begin with [Type One: standards, responsibility and improvement](/en/personality/enneagram/type-1). If the core seems more useful than the wing, compare [1w2: improvement through involvement](/en/personality/enneagram/wings/1w2) using the same real event.",
+          "key": "wing_boundary",
+          "title": "Use the interpretation provisionally"
         }
       ],
       "seo": {
@@ -220,8 +168,8 @@
       "slug": "enneagram/wings/1w9",
       "source_hash": "c71e67061a1ed5e15392de91b3140e49b66194ddfd4a6eab909989d667c52343",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The 1w9 wing is a core-first, evidence-limited hypothesis: Type One attention to standards may be modified by Nine-adjacent restraint, steadier pacing, lower visible friction, and time to settle before correction. This does not create an independent category or prove that calm behavior comes from a wing.",
-      "title": "1w9: a core-first hypothesis about quiet correction"
+      "summary": "1w9 describes a Type One core with a possible Nine wing: doing things correctly and responsibly remains central, while steadiness, receptiveness and reduced friction may shape the approach. Quiet speech or one compromise cannot establish the wing.",
+      "title": "1w9: Making room for disagreement while pursuing improvement"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "8370e9438edff3939cdb636a8cc7025cf56a5fea55f295caccd0aca82f4034df"
+  "source_content_sha256": "31f17e17c0b81d66dca7880087778bf88d00112b2891a297ddc5f5dbfbe89e39"
 }

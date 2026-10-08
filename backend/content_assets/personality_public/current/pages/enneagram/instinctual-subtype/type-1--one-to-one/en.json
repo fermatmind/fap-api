@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-1/instincts/one-to-one",
@@ -23,94 +23,39 @@
       "entity_key": "type-1/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Intensity may arise from unresolved harm, unequal labor, attachment threat, power, stress, or poor conflict skills. The subtype hypothesis requires repeated One correction attention plus matched comparisons and reciprocal standards.",
-          "question": "Does intense criticism in a relationship prove one-to-one Type One?"
+          "answer": "No. Broken agreements, stress, unequal responsibilities, and communication habits can produce similar conduct. Examine how standards interact with a particular bond or engagement, and compare contextual explanations. Jealousy is neither required nor permission to restrict someone.",
+          "question": "Do strong criticism or jealousy establish one-to-one One?"
         },
         {
-          "answer": "Consent distinguishes collaborative change from pressure. Record whether the other person can decline, propose another standard, or end the discussion safely. A typology label never overrides boundaries, autonomy, or evidence of harm.",
-          "question": "Why is consent part of the observation?"
+          "answer": "Yes. Narrative one-to-one includes close friendships and vitality, and EI sexual/attraction is not limited to sexual acts. The accounts still differ. Specify whether you are observing a particular bond, attraction intensity, or both, instead of using relationship status or sexual desire as a criterion.",
+          "question": "Can this description be relevant without a romantic relationship?"
         },
         {
-          "answer": "Use the same issue across settings. Focused reform directs urgency toward a particular person or bond; social Type One directs attention toward rules and examples for a group. Role authority and relationship history may still explain either pattern.",
-          "question": "How can focused reform be compared with social Type One?"
+          "answer": "No. Check whether the request was agreed, whether there is a concrete problem, whether time and resources are sufficient, and whether another method could work. A subtype cannot determine compatibility or turn refusal into proof of not caring. Discuss actual boundaries and collaboration conditions.",
+          "question": "Does refusing my suggested improvement mean our subtypes are incompatible?"
+        },
+        {
+          "answer": "No. Wings concern adjacent type styles, while instinctual subtypes concern attention. A second-highest score cannot automatically establish a wing or an instinct emphasis. Occupation, celebrity resemblance, and an isolated intimate behavior are also insufficient.",
+          "question": "Can a wing or second-highest score establish this subtype?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "core_type:type-1",
+          "label": "Type One",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/self-preservation",
-          "label": "instinctual_subtype:type-1/self-preservation",
+          "label": "Self-preservation Type One",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-1/instincts/social",
-          "label": "instinctual_subtype:type-1/social",
+          "label": "Social Type One",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-1/social"
         }
@@ -184,52 +129,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The hypothesis combines Type One standards-and-correction attention with a one-to-one label for concentrated energy toward a particular bond or person. Intensity alone is ambiguous; attachment, conflict history, authority, attraction, caregiving, or immediate harm can focus the same behavior.",
-          "key": "traditional_hypothesis",
-          "title": "Treat focused reform as provisional"
+          "body_md": "[Narrative one-to-one](https://www.narrativeenneagram.org/instinctual-subtypes/) includes intimate partners, close friendships, and vitality. [EI sexual/attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction and stimulation. The terms overlap without being identical; neither means only sex or romance.\n\nKeep two questions available rather than collapsing them. Do you repeatedly prioritize engagement with a particular important person? Do absorbing people or activities repeatedly concentrate your attention and effort? Both may apply, or only one. Enjoying deep conversations does not necessarily fit an attraction-intensity account; being absorbed in a project does not necessarily make close relationships the leading concern.\n\nThese are traditional ways of describing attention, not established biological circuits. Practical security and group connection remain part of life too. A subtype does not identify people who lack the other two concerns, and the amount of sexual desire is not a criterion.",
+          "key": "terms_before_portrait",
+          "title": "One-to-One and Sexual Are Overlapping Terms"
         },
         {
-          "body_md": "A matched comparison contrasts focused reform with self-preservation upkeep and social rule-setting. Keep the problem similar, then observe whether attention first targets one person's change, practical maintenance and reserves, or a standard that should govern the wider group.",
-          "key": "matched_comparison",
-          "title": "Match one issue across three priorities"
+          "body_md": "The traditional One concern is integrity and correction, rather than intensity itself. The [EI One description](https://www.enneagraminstitute.com/type-1/) gives that core account.\n\nThe question here is whether this concern repeatedly concentrates on an important bond, shared commitment, or engaging activity. One possible sequence is feeling deeply invested, noticing a gap between the collaboration and an ideal, then urgently wanting both people to improve it. If a suggestion is declined, disappointment may involve both the standard and the sense that engagement has not been returned. Ask what the person actually experiences; do not assume criticism is an expression of love.\n\nThe [Narrative One subtype portrait](https://www.narrativeenneagram.org/instinctual-subtypes/) discusses zeal, jealousy, and self-control. Jealousy is not a required feature or permission to restrict another person. An outward presentation may differ from a core concern, but the specific explanation must still be open to contradiction.",
+          "key": "improvement_in_the_bond",
+          "title": "The Standard Remains Important; the Bond Adds Urgency"
         },
         {
-          "body_md": "One-to-one is traditional vocabulary, not a biological drive, neurological capacity, fixed intensity trait, or compatibility measure. The label cannot establish relationship quality, attraction, consent, safety, or who should remain together.",
-          "key": "instinct_boundary",
-          "title": "Reject biological certainty and compatibility claims"
+          "body_md": "Imagine two friends making a podcast about their neighborhood. Riley is excited by the collaborator's ideas, helps check facts, and proposes standards that both can apply to each other's work. The effort creates better material and a sense of shared engagement.\n\nLater, the collaborator wants a looser editing style. Riley repeatedly asks for another recording. The reason shifts from a specific unclear passage to the claim that someone who cared equally would be willing to do it again. An editing disagreement has become a test of the bond. The collaborator may agree just to end the argument.\n\nThis original scene cannot establish Riley's subtype. A factual error, an agreed quality requirement, unequal labor, or a mentoring role might justify correction. Ask whether the problem is specific, whether another satisfactory method is acceptable, and whether extra work outside the agreement can be declined. Threats or repeated boundary violations require attention as actual conduct, rather than justification through a personality label.",
+          "key": "two_people_one_project",
+          "title": "When an Invitation Becomes a Test of Commitment"
         },
         {
-          "body_md": "Subtype traditions differ about intensity, anger, and countertypical presentations. Specify the observable proposition rather than importing a whole portrait, and let contradictory events or a clearer relational explanation change the working hypothesis.",
-          "key": "countertype_variation",
-          "title": "Name variation across traditions"
+          "body_md": "Keep the recording, deadline, and responsibilities comparable:\n\n- Self-preservation One may first secure backups, equipment, and sustainable time for the work.\n- Social One may first consider shared duties toward listeners, interviewees, and the wider group.\n- One-to-one One may first attend to this collaborator's engagement, their joint commitment, and the vitality of working together.\n\nAll three could request another take. Ask what the request is protecting and what dissatisfaction remains after the specific problem is repaired. Volume and forcefulness reveal less than that process. Working with one person does not establish one-to-one emphasis, and disagreement does not establish a search for attraction intensity.\n\nThe [Narrative comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer distinctions involving One, Two, and Eight. Ask whether the hardest part concerns an unmet standard, a needed relational response, or interference with autonomy. Motives can overlap; a gentle or forceful manner does not answer the question.",
+          "key": "same_edit_three_priorities",
+          "title": "The Same Revision Request Can Protect Different Things"
         },
         {
-          "body_md": "A damaged agreement, unequal responsibility, mentoring duty, repeated boundary breach, or safety concern can concentrate correction on one person. Compare other relationships and observe what changes after power, consent, and immediate risk are addressed.",
-          "key": "alternative_environment",
-          "title": "Test relationship history and power"
+          "body_md": "Choose a manageable collaboration issue that both people are willing to discuss. Name the specific problem and effect, such as conflicting dates that would confuse listeners. Separate the original agreement from personal preferences. Ask whether the other person wants to work on it together, and allow a different method that achieves the purpose.\n\nState the relational need separately: perhaps you want some time working closely together and feeling mutual engagement. Acceptance of your preferred solution should not become the sole proof of caring. Agree on the scope, effort limit, and when to pause. A refusal can lead to negotiation about tasks, responsibilities, or the collaboration itself. Continue to address genuine accuracy and safety requirements.\n\nA supportive person can value your investment while noticing when suggestions become pressure. Record when urgency rises, whether disagreement is possible, whether the standard is reciprocal, and whether the conversation makes collaboration easier. The exercise distinguishes needs, standards, and control; it does not certify maturity or compatibility.",
+          "key": "make_an_invitation",
+          "title": "Make Shared Improvement an Invitation Someone Can Decline"
         },
         {
-          "body_md": "A one-to-one Type One counterexample weakens focused reform when urgency vanishes after status changes, standards apply only to the other person, or the person consistently prioritizes private upkeep and public rules over changing a particular bond.",
-          "key": "counterexample",
-          "title": "Use reciprocal flexibility as a challenge"
+          "body_md": "If urgency concerns one broken agreement and subsides after repair, relationship history may explain it better. If requests for one person's change occur mainly while mentoring, the role may matter more. If comparable decisions repeatedly prioritize practical provision or group expectations while particular engagement is peripheral, reduce the one-to-one hypothesis's weight.\n\nStandards applied only to the other person do not determine a core type. They do undermine the specific explanation that an exchange is reciprocal improvement, especially if disagreement is treated as disloyalty. Address the pressure itself. Conversely, accepting refusal, remaining calm, or enjoying time alone does not automatically negate a one-to-one concern; compare the actual priority rather than a required emotional appearance.\n\nIf the predicted process repeatedly fails to appear, allow the conclusion that the account does not fit or remains uncertain. Hidden-subtype, stronger-suppression, or countertype explanations must not make the label impossible to withdraw.",
+          "key": "when_to_reconsider",
+          "title": "What Would Change the Explanation?"
         },
         {
-          "body_md": "Instrument-specific evidence does not establish universal subtype ontology or cross-cultural equivalence. This draft cannot diagnose either person, predict compatibility or relationship outcomes, certify consent, complete human review, or authorize release.",
-          "key": "evidence_boundary",
-          "title": "Keep relational inference modest"
-        },
-        {
-          "body_md": "Duration: 4\n\nContext: Choose one recurring disagreement with clear consent to reflect, plus two comparable issues involving a group rule and a practical maintenance task.\n\nObservable signal: Record whose change receives urgency, whether the standard is reciprocal, how refusal is handled, and which concrete repair follows.\n\nPage-specific signal: Compare focused reform of one bond with group-wide standard-setting and private upkeep while keeping the underlying issue as similar as possible.\n\nAlternative explanation: Test conflict history, unequal labor, attraction, mentoring duty, power, boundary breaches, immediate risk, and communication skill against the subtype.\n\nReflection prompt: Identify the event where urgency followed power or history rather than reciprocal standards and state which explanation should replace or weaken the subtype.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Test conflict history, unequal labor, attraction, mentoring duty, power, boundary breaches, immediate risk, and communication skill against the subtype.",
-            "context": "Choose one recurring disagreement with clear consent to reflect, plus two comparable issues involving a group rule and a practical maintenance task.",
-            "duration_days": 4,
-            "observable_signal": "Record whose change receives urgency, whether the standard is reciprocal, how refusal is handled, and which concrete repair follows.",
-            "page_specific_signal": "Compare focused reform of one bond with group-wide standard-setting and private upkeep while keeping the underlying issue as similar as possible.",
-            "reflection_prompt": "Identify the event where urgency followed power or history rather than reciprocal standards and state which explanation should replace or weaken the subtype."
-          },
-          "title": "Observation exercise"
+          "body_md": "Twenty-seven subtypes and countertype language belong to Enneagram schools. Countertype describes a tradition's account of a presentation differing from its usual portrait; it is not another core type or a way to keep a classification correct regardless of behavior. These accounts are not reproducible scientific diagnoses.\n\nThe [abstract of Hook and colleagues' 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence. Traditional descriptions, questionnaire studies, and product validation are separate matters. These sources do not validate FermatMind's one-to-one One scoring or predict compatibility, consent, or relationship outcomes.\n\nRead [Type One](/en/personality/enneagram/type-1), then compare [self-preservation One](/en/personality/enneagram/type-1/instincts/self-preservation) and [social One](/en/personality/enneagram/type-1/instincts/social).",
+          "key": "limits_and_reading",
+          "title": "A Subtype Offers Questions, Not a Relationship Verdict"
         }
       ],
       "seo": {
@@ -240,8 +172,8 @@
       "slug": "enneagram/type-1/instincts/one-to-one",
       "source_hash": "478c6d960bd7a74940cdea3e68f99a5eeef9770b2c5e9ea691ec90166304512a",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "One-to-one Type One is a traditional type-by-instinct hypothesis in which One attention to correction may become especially concentrated in a particular relationship, commitment, or person's change. One focused reform is observable, but it is not proof of biological intensity, compatibility, or a universal subtype.",
-      "title": "One-to-one Type One: focused reform as a traditional hypothesis"
+      "summary": "One-to-one Type One explores how a concern with doing things properly may concentrate on an important bond, shared commitment, or absorbing activity. Enthusiasm can support collaboration but also turn expectations into pressure. Criticism, jealousy, and sexual desire cannot establish the subtype.",
+      "title": "One-to-One Type One: Shared Improvement, Engagement, and Boundaries"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +183,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "a2bb77b4237a4dfcfffb9ce7f33a23d225d321ef8eed6d9f51e37293c0dae8e4"
+  "source_content_sha256": "e0518d4621fa8014bbbe46278a409080112f07cb0bfe6a4ddc8295f9f9a0b9a5"
 }

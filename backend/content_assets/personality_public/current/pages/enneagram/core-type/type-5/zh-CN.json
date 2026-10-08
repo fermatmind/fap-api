@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-5",
@@ -23,101 +23,39 @@
       "entity_key": "type-5",
       "entity_type": "core_type",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。职业标准、学习任务、好奇心、语言理解与现实不确定性都可能增加检索量。应比较资料收集的具体用途，并用相反事件主动降低假设置信度。",
-          "question": "查很多资料就能判断是第五型吗？"
+          "answer": "不等于。内向是表现或偏好，智力需要相应测量。第五型的传统解释关注通过理解、准备与资源边界获得胜任感，不能据此评定能力。",
+          "question": "第五型等于内向或智力高吗？"
         },
         {
-          "answer": "隐私可能来自保密义务、文化边界、安全顾虑、无障碍需求或普通偏好；精力也会随健康、工作量、照护责任、资源与场所要求变化，不能据此固定类型。",
-          "question": "为什么隐私和精力必须放回情境？"
+          "answer": "不是。重视私人空间可以与亲近、求助和合作并存。有时减少需要是一种保护容量的策略，不代表真实需要已经消失，也不代表关系不重要。",
+          "question": "第五型是不是不需要别人？"
         },
         {
-          "answer": "能在信息不全时及时行动、自在求助、灵活披露，并在暂停后可靠返回协作，都会削弱把准备或容量保护视为首要解释的判断；复盘时还要记录这些反例发生的职责、时限与安全条件，避免只保留支持类型的事件。",
-          "question": "哪些证据会削弱胜任准备假设？"
+          "answer": "回看研究结束后仍未解决的主要问题：是自己是否理解并能承担参与，还是支持、依据与责任是否可信？两种关注可以并存，需要比较多个具体经历，不能用一次担忧决定。",
+          "question": "我既研究资料又担心可靠性，怎么比较5与6？"
+        },
+        {
+          "answer": "看现实负荷、暂停是否有说明，以及能否按约定回来处理问题。清楚的时限和参与范围能兼顾休息与责任；单次沉默无法说明动机。",
+          "question": "怎样区分保护精力与回避沟通？"
         }
       ],
       "framework": "enneagram",
@@ -133,43 +71,43 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/centers/head",
-          "label": "center:head",
+          "label": "思维中心：面对未知的不同方式",
           "relationship": "center_membership",
           "target_identity_key": "center:head"
         },
         {
           "href": "/zh/personality/enneagram/wings/5w4",
-          "label": "wing:5w4",
+          "label": "5w4：第五型与第四型翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:5w4"
         },
         {
           "href": "/zh/personality/enneagram/wings/5w6",
-          "label": "wing:5w6",
+          "label": "5w6：第五型与第六型翼",
           "relationship": "wing_variant",
           "target_identity_key": "wing:5w6"
         },
         {
           "href": "/zh/personality/enneagram/type-5/instincts/self-preservation",
-          "label": "instinctual_subtype:type-5/self-preservation",
+          "label": "第五型的自保本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-5/instincts/social",
-          "label": "instinctual_subtype:type-5/social",
+          "label": "第五型的社交本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/social"
         },
         {
           "href": "/zh/personality/enneagram/type-5/instincts/one-to-one",
-          "label": "instinctual_subtype:type-5/one-to-one",
+          "label": "第五型的一对一本能副型",
           "relationship": "instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-5/one-to-one"
         }
@@ -210,57 +148,49 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "观察一个人何时认为资料已经够用、进入讨论前需要什么准备，以及时间、注意力和私人空间如何分配。把这些记录当作具体情境中的工作假设，不把节能或谨慎写成固定本质。",
+          "body_md": "在传统九型解释中，第五型希望有能力处理生活，担心自己无法应对要求，或参与之后承担不了持续的消耗。知识、技能、私人空间和可支配时间，因此可能成为重要的保障。\n\n这套策略的逻辑是：先观察、弄清结构、准备好，再进入情境；如果要求太多，就减少需求或保持距离，让自己仍有余地。理解本身也可以带来乐趣，但辨认第五型时，还要观察它是否经常承担“这样我才有能力面对”的作用。\n\n这并不说明你实际能力不足，也不证明你的精力比别人少。它描述的是对胜任与参与成本的关注，不是智力、知识水平或健康状态的测量。",
           "key": "motivation_attention",
-          "title": "先记录准备门槛与参与成本"
+          "title": "先理解，再参与：这套策略想解决什么"
         },
         {
-          "body_md": "会前阅读可能为了准确、岗位合规、语言理解或正常准备；单独工作也可能为了专注、照顾感官需求、遵守保密或适应远程安排。必须询问当事人的任务目的与现实约束。",
+          "body_md": "会前认真阅读，可能为了完成专业职责、理解陌生语言或弥补信息不足；独处可能为了专注、休息、保密或满足感官需要。只有这些行为，不能判断第五型。\n\n更有辨别力的问题是：“我还在收集什么，它会改变下一步吗？”若资料确实影响决定，继续准备有实际用途；若问题已经能处理，却总觉得必须再了解一层才能参加，准备可能正在替你推迟暴露于未知。\n\n同样要核对资源。工作量已经超负荷时，减少承诺是现实需要，不能把真实疲劳解释成一种性格上的不愿投入。",
           "key": "behavior_motive",
-          "title": "把求知和独处分解为可核对行为"
+          "title": "查资料、独处与少说话，都有其他理由"
         },
         {
-          "body_md": "记录补充信息是否真的改变选择，还是不断推迟行动；收到反馈时，观察其先澄清概念、暂停整理或提出局部方案。冲突后是否按约定时间回来，比一次沉默更有解释力。",
+          "body_md": "团队需要选择一个工具，你仍想读完更多资料。可以把问题拆成：决定必须知道什么，哪些未知可以在试用中了解，什么结果会要求改变选择。\n\n若第五型模式正在起作用，你可能希望先形成完整理解，再把观点交给别人。这能保护准确性，也可能让团队迟迟得不到一个可讨论的初稿。分享“目前知道的、尚不确定的、建议先试的”，可以让理解与参与一起推进。\n\n收到反馈或发生冲突后，需要时间整理并没有问题。说明暂停多久、何时回来、回来讨论什么，能让私人思考成为协作的一部分，而不是让别人猜测你是否还愿意参与。",
           "key": "decision_feedback_conflict",
-          "title": "比较决定、反馈与重新进入"
+          "title": "判断准备是否足够，要看它怎样支持下一步"
         },
         {
-          "body_md": "持续求证可能支持精确建模、自主学习、提出好问题和容纳复杂性。代价也可能出现：准备耗尽决策窗口、隐私阻断必要协作，或在没有核实的情况下高估参与所需精力。",
+          "body_md": "这套关注可能支持深入研究、独立检查假设、精确区分概念，以及在复杂问题面前保持耐心。减少不必要的干扰，也可能让有限的时间用于真正重要的事情。\n\n过度依赖它时，知识会替代行动：已经具备的能力一直没有经过实际尝试，参与成本却在想象中越来越高。保护空间也可能变成不分享必要信息，让合作伙伴无法安排自己的工作。\n\n另一个可观察的代价是，为了减少消耗而不提出需要。短期似乎省事，长期却失去本来可以获得的帮助。观察这些情况，并不需要把独处或明确边界本身视为问题。",
           "key": "strengths_tradeoffs",
-          "title": "同时看见理解力与协调成本"
+          "title": "深入理解的价值，和距离过大的代价"
         },
         {
-          "body_md": "工作中要区分保护敏感资料的研究员与迟迟不分享草稿的同事；关系中要区分请求整理时间与逃避约定沟通。表面撤退相同，但职责、同意和后续履约不同。",
+          "body_md": "朋友想谈一件复杂的事，你担心一旦开始就会占去整个晚上。一个具体的回应可以是：“我今天可以认真听二十分钟，之后需要休息。如果还没谈完，我们约明天继续。”它同时保留了联系与资源边界。\n\n若你只是消失，对方可能理解为拒绝；若你勉强答应全部，又可能更不愿意下次参与。可以比较自己预估的消耗、实际消耗，以及一次有限参与是否比想象中更可行。\n\n在工作中，同事暂不分享内容也可能是因为保密、权限或事实尚未核实。讨论边界应尊重这些真实要求，而不能以类型标签要求别人开放私人信息。",
           "key": "work_relationship_examples",
-          "title": "用责任和后续行动区分场景"
+          "title": "把边界说具体，给关系留下入口"
         },
         {
-          "body_md": "5w4 假设强调个人综合、意义与原创性，5w6 假设强调验证、可靠性与风险核对。还应比较第四型表达、第六型警觉、内向偏好、专门训练、疲劳、无障碍需要、创伤安全与岗位限制。",
+          "body_md": "第五型与[第六型](/zh/personality/enneagram/type-6)都可能分析、提问、准备和怀疑。传统比较中的重点，是这些动作最后想建立什么：第五型更关注自己是否理解并能够承担；第六型更关注依据、支持与责任安排是否可信，能否依靠它们面对未知。\n\n例如，两个人都研究一项合作方案。一个希望弄清机制，并确认参与不会不断扩张自己的投入；另一个希望确认合作方是否可靠、出了问题谁会支持、承诺是否会兑现。不能用“独立思考”和“相信权威”硬分两型：两者都可以独立判断，也都可以求助。\n\n还可以比较两种相似的退出：与[第四型](/zh/personality/enneagram/type-4)比较，留出空间主要为了整理个人意义，还是为了理解与管理参与？与[第九型](/zh/personality/enneagram/type-9)比较，少回应主要为了保护容量，还是为了避免打破平静与引发冲突？这些原因可以同时存在，应回到反复出现的优先关注。\n\n5w4和5w6仍以第五型为核心。前者借相邻第四型关注个人意义与表达，后者借相邻第六型关注验证与可靠性。若可信支持本身才是主要问题，需要继续比较第五型与第六型，而不是仅用5w6解释。可阅读[5w4](/zh/personality/enneagram/wings/5w4)与[5w6](/zh/personality/enneagram/wings/5w6)。",
           "key": "wings_mistypes",
-          "title": "比较翼型修饰与常见替代解释"
+          "title": "5与6：需要更多理解，还是更可信的支持"
         },
         {
-          "body_md": "如果一个人能在资料不完整时行动、自然求助、按关系需要调整披露程度，并在安全且责任明确时愿意投入精力，就应降低对第五型准备与容量保护假设的信心。",
+          "body_md": "一次积极合作、公开表达或带着未知行动，可以说明你有弹性，并不自动否定第五型。重要的是，你如何判断参与可行，而不是参与的次数有多少。\n\n更能削弱解释的情况是：资料收集始终由任务本身决定，信息足够便自然结束；私人空间主要随实际负荷变化；在不同领域中，胜任准备与保护容量并没有反复成为核心问题。此时，专业训练、工作条件或普通偏好可能解释得更好。\n\n不要把所有反例都重新解释成“隐藏的第五型”。如果另一种解释更贴近本人理由和实际过程，就应给它更高权重。",
           "key": "counterexample",
-          "title": "主动寻找有信息也能行动的反例"
+          "title": "愿意分享和求助，不会自动排除第五型"
         },
         {
-          "body_md": "本页只能帮助复盘准备、知识、隐私和精力分配，不能诊断焦虑或神经差异，不能衡量智力、评定专家水平、筛选求职者、预测绩效，也不能固定个人身份。",
+          "body_md": "[Enneagram Institute的第五型说明](https://www.enneagraminstitute.com/type-5/)讨论理解与胜任感；其[5与6的比较](https://www.enneagraminstitute.com/misidentifying-5-and-6/)和[The Narrative Enneagram的比较](https://www.narrativeenneagram.org/type-comparisons/)提供传统区别。本页采用动机与情境进行比较，不采用职业、学术背景或名人归类来判型。\n\n[Hook等人的2021年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告九型研究的信度与效度证据不一致，翼和类型间移动的研究支持有限。这些资料不能证明费马测评的分数效度，也不能用来推断智力、专业水平或诊断。\n\n若想比较整体模型，可回到[九型人格总览](/zh/personality/enneagram)；若想理解5、6、7号处理未知的共同主题，可阅读[思维中心](/zh/personality/enneagram/centers/head)。",
           "key": "use_boundary",
-          "title": "不把胜任感变成能力判定"
+          "title": "理解型模式，不能替代能力评价"
         },
         {
-          "body_md": "持续天数: 5\n\n情境: 连续五天选择一次资料任务、一次协作决定和一次关系沟通，覆盖不同参与成本。\n\n可观察信号: 记录截止时间、已有信息、实际提问、当事人陈述的精力、隐私需要与重新进入时间。\n\n本页特定信号: 比较补充知识是否改变决定，还是只把面对不确定下一步的时点继续后移。\n\n替代解释: 逐项核对工作负荷、保密要求、无障碍需要、专业训练、远程安排、文化规范与安全处境。\n\n复盘问题: 写出一个普通约束解释力更强的事件，并明确下调第五型工作假设。",
+          "body_md": "选一件低风险、可以调整的小任务，例如分享一个初稿、询问一个具体问题，或与朋友约定一段谈话。先写清楚完成它所需的最低信息，以及你愿意投入的时间。\n\n保留必要的保密和职责要求，然后完成一个有限动作。可以只分享目前的结论与不确定处，或提出一个明确的帮助请求，不必承诺无限后续投入。\n\n结束后比较：你原先预估会消耗多少，实际发生了什么？新增知识是否真的改变了行动？哪部分理解只能通过参与获得？也记录一次边界确实需要保留的情况，不强迫自己把所有距离都撤掉。\n\n下一步可以是调整参与范围，或更早分享一个可讨论的版本。这不是验证你属于第五型的测试。",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "逐项核对工作负荷、保密要求、无障碍需要、专业训练、远程安排、文化规范与安全处境。",
-            "context": "连续五天选择一次资料任务、一次协作决定和一次关系沟通，覆盖不同参与成本。",
-            "duration_days": 5,
-            "observable_signal": "记录截止时间、已有信息、实际提问、当事人陈述的精力、隐私需要与重新进入时间。",
-            "page_specific_signal": "比较补充知识是否改变决定，还是只把面对不确定下一步的时点继续后移。",
-            "reflection_prompt": "写出一个普通约束解释力更强的事件，并明确下调第五型工作假设。"
-          },
-          "title": "观察练习"
+          "title": "试一次有限参与，让现实检验准备"
         }
       ],
       "seo": {
@@ -271,8 +201,8 @@
       "slug": "enneagram/type-5",
       "source_hash": "41d6c2e3eb6f09ddddc5d1fdbf71bbab89f128ba64af490ffee492c946b02379",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第五型是九型人格中的传统观察假设，关注点可能反复落在知识、胜任准备、私人空间与可用精力上。查资料、独处或少表达并不能证明动机，因为专业训练、工作负荷、无障碍需求、保密规则、远程协作、文化习惯与安全处境都可能形成相似表现。本页直接说明知识胜任准备如何观察、私人空间可用精力如何比较，以及专业训练工作负荷保密规则如何核对。",
-      "title": "第五型：知识、胜任准备与精力边界的可修正假设"
+      "summary": "第五型的传统模式，是通过理解问题、积累准备和保护可用资源，让自己能够应对生活。它不等于智力高、内向或不需要关系。辨认时应看：求知与距离是否反复承担了增加胜任感的作用，以及准备何时帮助参与、何时让参与不断推迟。",
+      "title": "九型人格5号：理解、胜任感与资源边界"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -282,92 +212,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.application.exploratory_not_predictive",
-            "limitation": "Exploratory associations do not establish causation, prediction, hiring suitability, career destiny, or guaranteed outcomes.",
-            "source_ids": [
-              "sutton_2013_work_outcomes",
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.center.traditional_model",
-            "limitation": "Center groupings are theory vocabulary, not independently established biological systems, diagnoses, or fixed capacities.",
-            "source_ids": [
-              "riso_hudson_1999_wisdom",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.application.exploratory_not_predictive",
-              "claim.center.traditional_model"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.center.traditional_model"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Anna Sutton; Christopher Allinson; Helen Williams",
-            "claim_ids": [
-              "claim.application.exploratory_not_predictive"
-            ],
-            "doi": "10.1016/j.emj.2012.12.004",
-            "id": "sutton_2013_work_outcomes",
-            "limitation": "An exploratory work-context study does not establish causal effects, universal prediction, hiring suitability, or FermatMind score validity.",
-            "public_url": "https://doi.org/10.1016/j.emj.2012.12.004",
-            "source_type": "peer_reviewed_research",
-            "title": "Personality type and work-related outcomes: An exploratory application of the Enneagram model",
-            "year": 2013
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "086b0f7d39a42be0b5c618a685ba2b647ff94a6bdaf0a4a22da923cb54ef0762"
+  "source_content_sha256": "2156986bb44a83eb54aee8b632b5b90a44a58d8e2549c66c5eea610d09c7aac6"
 }

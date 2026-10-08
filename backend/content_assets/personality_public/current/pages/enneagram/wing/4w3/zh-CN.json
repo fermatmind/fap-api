@@ -23,79 +23,39 @@
       "entity_key": "4w3",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "不一定。作品集要求、晋升、平台机制和表达训练都可能要求个人品牌。还要比较第四型意义核心、岗位外行为和明确反例。",
-          "question": "经营个人品牌就一定是 4w3 吗？"
+          "answer": "不一定。受众意识可以出现在安静的书面表达或少量重要关系中，表达能力和成绩还受训练、资源与机会影响。要比较的是为何投入呈现、希望回应确认什么，而不是社交频率或结果高低。",
+          "question": "4w3 一定外向、擅长社交或很有成就吗？"
         },
         {
-          "answer": "保持同一项精致交付不变，比较注意力中心。4w3 假设仍围绕个人意义与署名；第三型假设更可能围绕被认可的结果与可信表现。",
-          "question": "怎样区分 4w3 与第三型？"
+          "answer": "不能只凭分数顺序确定。翼首先要求核心型的解释比较贴合，再比较相邻修饰在不同情境中的作用。第二高分也可能反映职责、近期经历或相似题目，不应直接变成翼型结论。",
+          "question": "三号是我的第二高分，就能确定是 4w3 吗？"
         },
         {
-          "answer": "私人表达持续带来满足、包装只在付费岗位出现，或受众不回应也不改变署名关注，都会削弱该修饰解释。",
-          "question": "哪些记录会削弱可见表达假设？"
+          "answer": "修改方式与改写意义不同。可以调整篇幅、例子和节奏，同时保留你真正想表达的内容。检查改动服务的具体目的，比用“有没有修改”判断真实程度更有帮助。",
+          "question": "我为了让别人听懂而修改表达，是不是不够真实？"
+        },
+        {
+          "answer": "不需要立即选定。先比较在类似事情中哪种方式更常被主动使用，以及职责、奖励和安全条件是否解释了差异。能够在公开与私人表达之间灵活选择，本身不否定任何一个候选。",
+          "question": "我既重视回应，又享受独自表达，需要选定一个翼吗？"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +129,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "先观察个人意义是否持续重要，再看公开交付如何修饰表达。只有舞台感而没有意义关注时，应优先比较第三型主题、岗位训练或平台规则。",
+          "body_md": "4w3 的“4”仍是核心。按这一传统解释，四号反复关心的是自身身份与个人意义：我的体验是否有位置，我是否只是在重复别人期待的样子，别人理解的是我，还是一个方便的形象？三号翼可能给这种关注增加行动、呈现和受众意识，使人更愿意把内在体验整理成别人能够接触的东西。\n\n比如准备一次家庭聚会的发言，你不仅想把流程完成，也想说清这段共同经历对自己的意义。三号翼的修饰可能体现为：你会考虑开场、节奏、听众是否听得进去，还愿意反复练习。表达技巧服务于个人意义，核心并没有变成“只要表现成功就够了”。\n\n这种组合也可能带来拉扯：希望表达真实，又希望获得回应；不愿被模板代替，又会观察哪种方式更受欢迎。出现这些拉扯并不等于虚伪，也不证明你一定是 4w3。关键是观察它们是否反复组织你的选择，而不只是某一次必须公开发言。",
           "key": "core_first_modifier",
-          "title": "先保留身份意义核心"
+          "title": "想被看见，也想被看见的是自己"
         },
         {
-          "body_md": "4w3 可能把表达带向受众，4w5 更重私人深度。与第三型相比，4w3 假设仍把个人意义和署名放在核心，而不是把结果价值本身放在核心。",
+          "body_md": "假设家人建议删去发言中一个对你很重要、但听众不容易理解的细节。三个候选都可能接受修改，也都可能反对；单看最后有没有删，分不出动机。\n\n- 4w3 的解释更关注：怎样既保留这个细节代表的自我意义，又让别人听懂？你可能重写表达、寻找更有效的例子，并在意听众是否真正接住它。\n- 4w5 同样保留四号核心，但可能先拉开距离，在私人草稿中继续理解这个细节，再决定哪些内容适合分享。问题更接近：我还没有说清，是否需要先保护它的复杂性？\n- 3w4 的核心是三号。四号影响可以增加个人风格与意义，但选择更可能围绕：怎样完成一段有价值、得到认可的发言，而个人特色如何帮助它成立？\n\n4w3 和 3w4 不是同一组材料换个顺序那么简单。比较的是，当成功呈现与个人意义发生冲突时，哪一种困扰更容易持续占据注意力。4w3 可以务实改稿，3w4 也可以坚持原则；它们都不等于“真实”与“不真实”的分组。\n\n再问自己：没有掌声，但有人准确理解了我的意思，我会怎样看待这次发言？获得赞扬，但我觉得关键体验被改写了，又会怎样？答案应结合实际经历，而不是选一个听起来更好的选项。",
           "key": "sibling_core_comparison",
-          "title": "4w3和4w5有什么区别？"
+          "title": "同一段发言，4w3、4w5 与 3w4 会怎样取舍"
         },
         {
-          "body_md": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改。记录保护了什么意义、改变了什么呈现，以及署名是否影响投入。",
+          "body_md": "把感受转成有结构的表达，可以减少别人理解你的难度。考虑受众、练习表达、完成一件可分享的成果，也能让个人意义走出反复想象，进入真实交流。被理解不必依赖别人自动猜中你的内心。\n\n代价常出现在回应变成唯一裁判的时候。一次冷淡反应可能被扩大为“我的体验没有价值”；你可能不断改写自己、比较谁更受欢迎，或把普通沟通也变成必须出彩的表演。原本帮助意义抵达他人的策略，开始反过来决定什么体验才值得保留。\n\n这里可以区分三件事：我想说什么、别人实际听到了什么、这次交流达到了什么目的。三者有关联，却不完全相同。听众疲劳、时间太短、对方不熟悉背景，都可能导致回应不佳。赞扬也未必代表准确理解。先询问具体反馈，比仅凭热度判断自我价值更有用。",
           "key": "observable_situations",
-          "title": "比较署名、匿名与修改"
+          "title": "呈现能力为什么有效，又何时开始耗损"
         },
         {
-          "body_md": "若表达长期保持私人且满足，可见包装只在岗位内出现，或受众回应不改变呈现和署名关注，4w3 假设应减弱。",
+          "body_md": "如果在多种可自由选择的情境中，你很少围绕个人意义、身份或被准确理解作取舍，主要持续困扰的是表现是否够成功，那么需要重新比较核心型，而不只是把三号翼解释得越来越强。\n\n如果四号核心比较贴合，但你通常不主动把表达带向受众，反而更愿意先独自理解、选择性分享，那么三号翼的依据可能不足，可以继续比较 4w5，也可以暂时不选翼。\n\n如果精致呈现只出现在学校评分、工作要求或平台奖励的场景，先保留职责与激励的解释。发言训练、收入需要、公开署名规则都会改变行为；不要为了验证翼型而放弃合理的署名、报酬或职业权益。\n\n反过来，能够享受私人表达、接受匿名贡献，或在别人不回应时继续做有意义的事，并不自动推翻 4w3。这些也可能是灵活性。更值得检验的是：当受众、奖励和责任不同，关于意义与回应的注意力是否仍反复出现，以及你能否在需要时选择另一种方式。",
           "key": "counterexample",
-          "title": "用私人持续与岗位可见度反证"
+          "title": "哪些观察需要改写你的解释"
         },
         {
-          "body_md": "创意行业、教学、筹款和内容平台会奖励个人可见度。比较岗位外行为，以及署名、报酬和受众入口变化后的选择。",
-          "key": "alternative_explanations",
-          "title": "检验作品集与晋升制度"
-        },
-        {
-          "body_md": "翼型研究有限。4w3 不能证明魅力、创造力、真实程度、录用价值、影响力或未来认可。 且必须记录具体情境、现实限制、权力差异和一个能够推翻当前解释的反例。",
-          "key": "wing_boundary",
-          "title": "把可见表达限制为次级假设"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改，尽量匹配投入与难度。\n\n可观察信号: 记录被保护的意义、署名、受众、修改、奖励、责任和没有认可后的投入变化。\n\n本页特定信号: 比较作品相近时，公开署名与匿名条件下哪一处呈现具体改变，并保留原始版本。\n\n替代解释: 对照作品集规则、晋升激励、平台机制、表达训练、报酬、资源和受众入口。\n\n复盘问题: 指出职业可见度更能解释行为的一项记录，并说明如何下调 4w3 假设。",
+          "body_md": "选择一件确实需要交流的小事：一段发言、给朋友的一条说明，或一份共同计划。不要为了练习公开本来不愿公开的私人经历。\n\n1. 写一句“即使没有赞扬，我也希望对方理解的是……”。这是你想保留的意义。\n2. 再写一句“为了帮助对方理解，我可以调整……”。可以调整长度、例子、语气或呈现顺序，不必把调整等同于背叛自己。\n3. 完成交流后，问一个具体问题，例如“你觉得我最想说明的是什么？”先核对理解，再看赞扬多少。\n4. 只做一次有理由的修订，并记录：它帮助意义更清楚，还是只是追逐更好看的回应？如果仍需要修改，说明现实用途，而不是无限优化。\n\n另找一次不需要公开呈现的类似事情作比较。私人版本是否仍有意义？公开版本多出的投入是为了让人理解、获得认可，还是满足职责？这项比较没有定型分数。它的实际用途是帮助你既保留有意义的内容，也停止不再服务交流的包装。",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "对照作品集规则、晋升激励、平台机制、表达训练、报酬、资源和受众入口。",
-            "context": "选择一件公开署名作品、一项匿名贡献和一次回应不佳后的修改，尽量匹配投入与难度。",
-            "duration_days": 5,
-            "observable_signal": "记录被保护的意义、署名、受众、修改、奖励、责任和没有认可后的投入变化。",
-            "page_specific_signal": "比较作品相近时，公开署名与匿名条件下哪一处呈现具体改变，并保留原始版本。",
-            "reflection_prompt": "指出职业可见度更能解释行为的一项记录，并说明如何下调 4w3 假设。"
-          },
-          "title": "观察练习"
+          "title": "下一次分享前，先决定什么值得保留"
+        },
+        {
+          "body_md": "翼在传统九型中指相邻类型的修饰，不是四号与三号各占一半，也不是第二高分自动确定的类型。不同学派对翼的使用存在差异；还没有足够依据把这一描述当作永久身份。\n\n这里的动机区分参考 [Enneagram Institute 的四号说明](https://www.enneagraminstitute.com/type-4/)与[三号说明](https://www.enneagraminstitute.com/type-3/)，属于传统解释。本文的情境与练习是用于自我观察的示例，不是经过验证的定型规则。[Hook 等人的系统综述摘要](https://doi.org/10.1002/jclp.23097)指出翼型支持研究很少；它也不构成费马题本或结果的效度证据。\n\n如果还不确定核心，先读[四号核心型](/zh/personality/enneagram/type-4)；若核心比较贴合，再读 [4w5](/zh/personality/enneagram/wings/4w5)，比较你怎样处理意义、距离与受众。需要重新理解整体框架时，可回到[九型人格总览](/zh/personality/enneagram)。",
+          "key": "wing_boundary",
+          "title": "怎样使用这份描述，并继续比较"
         }
       ],
       "seo": {
@@ -220,8 +167,8 @@
       "slug": "enneagram/wings/4w3",
       "source_hash": "4b3934152240ec86a832f9299802dfe1c4dbbce241e8330b4adc526fd8e24bce",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "4w3 指以4号为核心、3号为相邻翼影响的传统九型人格描述假设。4w3 是证据有限的翼型观察：四号对身份与意义的关注仍是核心，三号可能增加可见交付、受众认可和情境适配。个人品牌不能单独确认 4w3；作品集规则、晋升激励和表达训练也会产生相似表现。",
-      "title": "4w3：四号核心、三号翼影响与常见误判"
+      "summary": "4w3 指四号核心受到相邻三号翼影响的传统九型描述：想弄清并表达“这对我意味着什么”，同时更关注怎样让表达被看见、被理解、产生回应。它与 4w5、3w4 的区别在于动机的组织方式，不能靠外向、成绩、个人品牌或第二高分判断。",
+      "title": "4w3：四号如何把个人意义带向他人"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +178,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9bad373b854598183400c456c11d6d3543ea5124e482db0a1c1400089d4e6b8e"
+  "source_content_sha256": "0cefdd734ef844c220a631a7344e590fc62b1db228437b70172f012344b500d7"
 }

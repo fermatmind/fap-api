@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/self-consciousness",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "self-consciousness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "This facet describes a personality tendency around evaluation. Social anxiety can refer to experiences or a clinical disorder requiring broader assessment.",
-          "question": "How is Self-Consciousness different from social anxiety?"
+          "answer": "It does not establish that. Discomfort under evaluation and an overall judgment of your own worth are different questions, even when they overlap in experience.",
+          "question": "Does stronger Self-Consciousness mean low self-esteem?"
         },
         {
-          "answer": "No. Evaluation sensitivity and overall self-worth are distinct, and this page does not infer one from the other.",
-          "question": "Does strong Self-Consciousness mean low self-esteem?"
+          "answer": "Yes. Evaluate the task using relevant performance evidence and describe your internal discomfort separately. One does not cancel the other.",
+          "question": "Can I be good at a task and still feel embarrassed while doing it?"
         },
         {
-          "answer": "Use low-stakes practice, clear preparation, and attention to the message. Seek qualified help if distress is severe or persistently limiting.",
-          "question": "How can someone with strong Self-Consciousness approach public speaking?"
+          "answer": "Familiarity, expectations, power differences, and actual treatment may matter. Compare concrete encounters rather than assuming the difference must reflect a fixed personality level.",
+          "question": "Why am I comfortable with some observers but not others?"
         },
         {
-          "answer": "Recording can make evaluation feel permanent, less controllable, and directed at the self. Context-specific variation is expected.",
-          "question": "Why can I talk at a party but feel tense on camera?"
+          "answer": "Not necessarily. You may have no contribution, no opportunity, or another reason to remain quiet. The relevant feeling needs your own account rather than an inference from silence.",
+          "question": "If I do not speak, does that mean I fear judgment?"
         },
         {
-          "answer": "Not by itself. Consider professional support when distress or avoidance significantly and persistently affects daily life.",
-          "question": "Does Self-Consciousness require professional treatment?"
+          "answer": "A facet label alone cannot decide. Persistent distress or avoidance that limits daily life warrants a conversation with a qualified professional, who can assess the actual problem and appropriate support.",
+          "question": "Does this facet require treatment?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Self-Consciousness concerns sensitivity to embarrassment, scrutiny, and social evaluation. In this technical usage, it is not the same as reflective self-awareness and does not diagnose social anxiety.\n\n“Self-Consciousness within Neuroticism: sensitivity to embarrassment and social evaluation” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "In the NEO/IPIP-NEO vocabulary used here, Self-Consciousness concerns discomfort around scrutiny and possible evaluation: feeling embarrassed, intimidated, or uneasy about drawing attention to yourself.\n\nThis technical usage differs from reflective self-awareness. It does not rank how well you understand your motives, how thoughtful you are, or how much you care about other people. It is also not another name for selfishness.\n\nThe central information is the person's experience. Speaking readily does not establish comfort. Remaining quiet does not establish fear. Behaviour and felt embarrassment need separate descriptions.",
+          "heading": "What being self-conscious means here",
           "key": "section-01-2e2057cd75",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency means attention from others may make embarrassment, awkwardness, or possible judgment more salient. A weaker tendency means scrutiny may create less internal discomfort. The facet does not measure insight, conscience, humility, social competence, or whether evaluation is actually negative.",
-          "heading": "Precise Definition",
+          "body": "With a stronger tendency, evaluation may bring embarrassment or inhibition more readily. With a weaker tendency, comparable scrutiny may cause less discomfort. An intermediate position can involve moderate reactions or differences between situations. These positions are continuous descriptions, not distinct types.\n\nCompetence requires evidence about a task: accuracy, relevant knowledge, practice, or whether requirements were met. Confidence can refer to a belief about one task or a broader view of oneself. Neither can be read directly from discomfort under evaluation.\n\nA skilled person may feel awkward while demonstrating a skill. A relaxed person may make mistakes. Stronger Self-Consciousness does not establish exceptional audience awareness; a weaker tendency does not establish persuasive ability or social skill.",
+          "heading": "Comfort is different from competence and confidence",
           "key": "section-02-8a8ceed536",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Self-Consciousness belongs to [Neuroticism](/en/personality/big-five/neuroticism). It focuses on negative emotional sensitivity in situations where the self feels visible to other people.",
-          "heading": "Parent Domain",
+          "body": "Separate anticipated judgment from actual treatment. What did people say or do? Were you corrected respectfully, laughed at, excluded, or repeatedly demeaned? A vague expectation and documented mistreatment are different evidence.\n\nIf discomfort is concentrated in a group that humiliates people, practical safety, boundaries, and support may matter more than interpreting a trait. Feeling more comfortable in a respectful setting is useful contextual information, not proof that you should tolerate hostility until you become confident.\n\nUnfamiliar language, group conventions, power differences, or formal assessment can also affect an encounter. A hesitation or verbal stumble cannot identify its own cause.",
+          "heading": "Do not turn a hostile setting into an internal flaw",
           "key": "section-03-a300cf36c7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Self-Consciousness versus reflective self-awareness:** Reflection concerns noticing one’s thoughts and behavior; this facet concerns discomfort under perceived evaluation.\n- **Self-Consciousness versus Anxiety:** [Anxiety](/en/personality/big-five/facets/anxiety) can involve many threats; Self-Consciousness is more specifically social-evaluative.\n- **Self-Consciousness versus social skill:** A skilled speaker can feel intense scrutiny, while a relaxed speaker may still lack practice.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine helping at a repair café. You know how to replace a bicycle brake cable, but when a visitor watches closely, you become preoccupied with looking incompetent and feel embarrassed. You still complete the repair correctly.\n\nThe repair outcome is evidence about that task. Your reported embarrassment is evidence about the experience of being observed. The visitor's actual conduct must be checked separately; watching a repair does not by itself establish negative judgment.\n\nOn another ordinary shift, a visitor also watches you do a familiar repair. Without a special rehearsal, reassurance, or attention exercise, you feel fairly comfortable and do not keep evaluating how you look. That is a natural exception involving a relevant opportunity. It does not erase a usual pattern, but it invites questions about the interaction, familiarity, and perceived stakes.",
+          "heading": "A practical demonstration, with a natural exception",
           "key": "section-04-79f92471a2",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible cues include rehearsing how one appears, blushing or tensing when observed, avoiding the center of attention, or replaying an awkward moment. Weaker Self-Consciousness may appear as ease under observation. Camera use, audience status, language, discrimination, and unfamiliar norms can alter the pattern.",
-          "heading": "Behavioral Cues",
+          "body": "Try a narrow working question: “When someone watches me demonstrate a familiar task, do I feel embarrassed and become preoccupied with how I appear?” Keep the target experience consistent.\n\nFor relevant encounters, note whether someone was actually watching, your own felt discomfort, the judgment you anticipated, what the other person did, and the task result. Do not substitute a completed demonstration for an absence of embarrassment.\n\nInclude watched demonstrations where the target discomfort did not occur. A shift with no observers offers no opportunity for this particular observation. If a limited review yields no natural exception, leave that as a limit of the record rather than concluding that you are uncomfortable whenever anyone watches.\n\nMark deliberate changes separately. Explaining the task before starting or preparing a prompt changes the conditions. A more comfortable encounter afterward may show that the arrangement helps you; it cannot establish that your personality changed.",
+          "heading": "Record the feeling, the opportunity, and the conditions",
           "key": "section-05-df1681bd27",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may chat comfortably at a party yet tense up when recorded because the audience feels durable and less controllable. Familiar groups may reduce scrutiny, while formal evaluation increases it. Real stigma or hostile treatment should not be reduced to an internal trait.",
-          "heading": "Contextual Differences",
+          "body": "Keep the working explanation provisional if similar reported discomfort appears across several ordinary observation opportunities and is not limited to one hostile setting. A short record is not a validated personality assessment.\n\nNarrow the explanation if the pattern repeatedly differs by condition: perhaps unfamiliar visitors feel harder than regular attendees, or direct questioning matters more than observation alone. One comfortable encounter does not refute a usual tendency, but repeated natural differences should qualify it.\n\nSet a broad trait explanation aside if opportunities were scarce, feelings were unrecorded, or actual mistreatment dominates. A small optional next step in a respectful setting might be to explain one part of the task before demonstrating it. Record both the experience and the task outcome. Participation is a choice, not a required test of courage.",
+          "heading": "How the explanation can become more precise",
           "key": "section-06-7d6f706a72",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Monitoring how one appears to an audience.\n- Feeling embarrassment quickly after a small mistake.\n- Preparing carefully for visible performance.\n- Avoiding participation despite having useful ideas.\n- Replaying perceived social errors afterward.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "[Anxiety](/en/personality/big-five/facets/anxiety) can involve many threats; Self-Consciousness focuses more specifically on evaluation. Wanting company is another question again. You can enjoy meeting people and still feel embarrassed, or prefer solitude while feeling comfortable when attention turns to you.\n\nThis facet does not diagnose social anxiety disorder. [NIMH's social anxiety guidance](https://www.nimh.nih.gov/health/publications/social-anxiety-disorder-more-than-just-shyness) discusses fear under scrutiny and its effect on everyday life. If distress or avoidance persists and limits activities, work, study, or relationships, speak with a qualified health professional. You do not need a particular trait result to seek support.\n\nThe observations on this page are not exposure therapy. Do not use a hostile or unsafe encounter as a challenge you must endure.",
+          "heading": "Related experiences and when to seek support",
           "key": "section-07-df0dd7aed9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Speaking or performing with limited self-monitoring.\n- Recovering quickly from an awkward moment.\n- Trying visible tasks without much evaluation concern.\n- Missing cues that an audience needs adjustment.\n- Appearing comfortable even without strong social skill.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "The official [IPIP item key](https://ipip.ori.org/newNEOFacetsKey.htm) and [four-item scales](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) identify N4 content involving embarrassment, intimidation, and approaching others. Related content does not make every self-confidence scale an interchangeable reversed version of Self-Consciousness.\n\nThis public vocabulary is separate from what a particular assessment measured or reported. Check the instrument version and score explanation in your actual report. Do not reconstruct an unreported facet from a broad domain score, a confidence judgment, or one public performance.\n\nRead [Neuroticism](/en/personality/big-five/neuroticism) for the parent domain. If concern extends beyond evaluation, continue with [Anxiety](/en/personality/big-five/facets/anxiety); if the central experience is discouragement afterward, read [Depression](/en/personality/big-five/facets/depression). The [30-facet guide](/en/personality/big-five/facets) explains the wider organisation.",
+          "heading": "What the vocabulary establishes",
           "key": "section-08-c9cf7afa7d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Self-Consciousness can support audience awareness and preparation; costs may include inhibition and excessive replay. Weaker Self-Consciousness can support spontaneous participation, but may reduce sensitivity to impression or context. Neither level establishes confidence, self-esteem, social skill, or a clinical condition.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-63dbe10f48",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A researcher knows her material but feels highly visible during recorded presentations. She practices with a small camera, keeps three cue cards, and directs attention to the audience’s question. Her discomfort remains, yet it no longer decides whether she contributes.",
-          "heading": "An Original Case",
-          "key": "section-10-4bbc428322",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A relaxed party guest speaks easily but repeatedly interrupts others. Low Self-Consciousness does not guarantee social awareness or communication skill.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-e6ebea1fa2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which audiences make you feel most visible?\n2. Does discomfort begin before, during, or after attention?\n3. What do you predict others are noticing?\n4. Does evidence support that prediction?\n5. Which small participation step preserves choice?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-1d78518675",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose a low-stakes, brief act of visibility, such as asking one prepared question. Before and after, record what you predicted others would notice and what evidence appeared. This is an observation exercise, not exposure therapy or clinical treatment.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-fb5846c5d1",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Neuroticism](/en/personality/big-five/neuroticism) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Anxiety](/en/personality/big-five/facets/anxiety), [Anger](/en/personality/big-five/facets/anger), [Depression](/en/personality/big-five/facets/depression), [Impulsiveness](/en/personality/big-five/facets/impulsiveness), and [Vulnerability](/en/personality/big-five/facets/vulnerability).",
-          "heading": "Continue Reading",
-          "key": "section-14-85c062005d",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Self-Consciousness concerns embarrassment and unease when you feel visible or evaluated. It does not directly measure reflective awareness, actual competence, self-worth, or social anxiety disorder.",
+        "title": "Self-Consciousness Facet: Discomfort Under Evaluation"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/self-consciousness",
-      "source_hash": "234401a691e5d55caa80ef68039e5933e51c818f903dbd8426d0a387126440c3",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Self-Consciousness concerns sensitivity to embarrassment, scrutiny, and social evaluation. It is not the same as reflective self-awareness or a diagnosis.",
-      "title": "Self-Consciousness Facet: Sensitivity to Embarrassment and Evaluation"
+      "source_hash": "b5f796544f326ef58bf202827a56eb01d60e1b122811b326ef8acfe6bd7c92b3",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Self-Consciousness concerns embarrassment and unease when you feel visible or evaluated. It does not directly measure reflective awareness, actual competence, self-worth, or social anxiety disorder.",
+      "title": "Self-Consciousness Facet: Discomfort Under Evaluation"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "N4-self-consciousness-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, diagnosis, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "N4-self-consciousness-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "N4-self-consciousness-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "N4-self-consciousness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "3f7c06628f5494ad84ef93bfeee5258ee50cb61d842adc6451e2a64e70eb2917"
+  "source_content_sha256": "5d60ab330cb0c296e7ab3bd708575092a147fa6a7a0d78ddcb7b82a276d6abea"
 }

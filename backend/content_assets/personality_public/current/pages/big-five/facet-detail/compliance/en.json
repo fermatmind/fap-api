@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/compliance",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "compliance",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Yielding can be selective and strategic; boundaries need direct observation.",
-          "question": "Does strong Compliance make someone a pushover?"
+          "answer": "It does not establish boundary quality. Examine whether needs can be stated, what alternatives are available, and whether important conditions are respected. Yielding on minor preferences can coexist with firm limits, but the tendency does not guarantee those limits.",
+          "question": "Does stronger Compliance mean poor boundaries?"
         },
         {
-          "answer": "Yes. Cooperation and conflict style are distinct.",
-          "question": "Can someone with weaker Compliance cooperate?"
+          "answer": "Yes. People can contest an arrangement and then work reliably under the agreement they reach. Check listening, reasons, and follow-through rather than using the amount of compromise as a cooperation score.",
+          "question": "Can someone who rarely yields still cooperate?"
         },
         {
-          "answer": "Check choice, safety, values, alternatives, and whether needs can be voiced without retaliation.",
-          "question": "How can I distinguish wise yielding from fearful yielding?"
+          "answer": "Look at the available options, the likely consequences of disagreement, and your own account of the decision. A pleasant tone or later discomfort alone cannot settle the question. If refusal was unsafe, do not treat acceptance as uncomplicated evidence of preference.",
+          "question": "How do I distinguish voluntary compromise from pressure?"
         },
         {
-          "answer": "Specific listening and negotiation skills can be trained. This page does not promise trait change.",
-          "question": "Can conflict de-escalation skills be trained?"
+          "answer": "No. Usually allows exceptions. Check whether comparable opportunities repeatedly produce a different response; that may justify narrowing or revising the explanation. An event without a workable alternative is not a comparable test.",
+          "question": "Does occasionally holding my ground disprove a tendency to yield?"
         },
         {
-          "answer": "No. A facet page cannot diagnose any personality disorder or condition.",
-          "question": "Is weaker Compliance a clinical antagonistic personality?"
+          "answer": "This page makes no such promise. Evaluate the request by whether it was understood and whether the resulting arrangement met the relevant needs. Keep deliberate practice separate from observations of your usual response.",
+          "question": "Will practicing a clearer request change my trait score?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,76 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Compliance concerns willingness to yield, compromise, forgive, or de-escalate during interpersonal conflict. It is not obedience, weakness, fear, cooperation in every setting, or a duty to accept coercion or harm.\n\n“Compliance within Agreeableness: willingness to yield or de-escalate in conflict” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "You want one arrangement and another person wants a different one. Compliance concerns your tendency to accommodate, compromise, or reduce confrontation once that disagreement exists. Continuing to contest, retaliate, or sustain an argument is also relevant; counting concessions alone gives an incomplete picture.\n\nWithin the NEO/IPIP-NEO vocabulary used here, Compliance is an Agreeableness facet. A stronger tendency may involve dropping a minor preference or looking for an acceptable alternative sooner. A weaker tendency may involve pursuing the original position or challenging the request for longer. These are positions on a continuum, not cooperative and uncooperative types. A middle position does not certify unusually good judgment about which disputes matter.\n\nWhether a compromise was sensible, a boundary was respected, or a shared task went well requires evidence beyond the tendency.",
+          "heading": "What happens when preferences collide?",
           "key": "section-01-f37d459f13",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency gives relationship preservation and reduced conflict more weight. A weaker tendency gives position defense, competition, or direct contest more weight. The quality of either response depends on stakes, rights, evidence, safety, and power.",
-          "heading": "Precise Definition",
+          "body": "Cooperation concerns working toward something together. Conflict style concerns what happens when the participants disagree. People can argue over an arrangement and then reliably carry it out; they can also agree immediately and fail to follow through.\n\nIndependent judgment is another question: what evidence shaped the view, and what would justify revising it? Holding a position does not establish principled reasoning. Yielding does not establish weak reasoning.\n\nExpression and concession can coexist. “I prefer Saturday, but Sunday is workable” makes a preference visible while leaving room to accommodate. Silence is harder to interpret: the person may agree, lack a chance to respond, or anticipate a penalty for speaking. Neither silence nor a calm tone reveals whether the choice felt voluntary.",
+          "heading": "Compromise does not establish judgment or cooperation",
           "key": "section-02-c4ea8f4926",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compliance belongs to [Agreeableness](/en/personality/big-five/agreeableness), reflecting conflict response within interpersonal coordination.",
-          "heading": "Parent Domain",
+          "body": "A concession may reflect a minor preference, a persuasive reason, fatigue, a desire to end friction, or fear of consequences. A facet label cannot identify the motive.\n\nFor one event, separate what you wanted, what was requested, the alternatives that were genuinely available, and whether disagreement could be expressed safely. Record your own recollection of the decision if you have one. If you did not notice your feelings, leave them unknown rather than treating a friendly response as proof of comfort.\n\nCompliance under threat is a different observation condition from negotiation between peers. Protecting yourself by temporarily accepting a demand does not mean you preferred it, and no trait description obliges you to accept harm. Where speaking up creates a real risk, address the situation and appropriate support before treating it as a practice opportunity.",
+          "heading": "Check the options before explaining the response",
           "key": "section-03-7974891fa6",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Compliance versus obedience:** Obedience concerns authority; Compliance can occur among equals.\n- **Compliance versus cooperation:** Firm disagreement can still support a shared goal.\n- **Compliance versus fear:** Yielding may be strategic, caring, coerced, or fear-based. A trait score cannot identify motive.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Consider this specific hypothesis: “When fellow club members and I can genuinely choose either of two workable event dates, I usually offer to change my preferred date first to end the disagreement.”\n\nIn an invented example, Casey makes that offer in several planning conversations. Their notes confirm that they did have a preferred date and could attend either. That recurring response fits the hypothesis. It could still reflect low interest in scheduling or tiredness rather than a broader pattern across conflicts, and it does not prove skill at managing a group.\n\nA natural counterexample occurs when another comparable date disagreement arises and Casey keeps the preferred date on the table instead of offering the first concession. There was an opportunity for the target behavior, and it did not happen. One such event is compatible with “usually.” Repeated examples should reduce confidence in the original explanation or narrow it to a particular group.\n\nAn event with only one date Casey can attend is not an equivalent opportunity. Nor is a date already imposed by someone who controls participation. Keep those events visible without using them as interchangeable evidence.",
+          "heading": "A club-planning example with a relevant counterexample",
           "key": "section-04-91b1525716",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Compliance may appear as compromising quickly, softening disagreement, or letting minor issues go. Weaker tendency may appear as contesting terms, defending a position, or sustaining debate. Culture, safety, discrimination, and power can force behavior that does not reflect preference.",
-          "heading": "Behavioral Cues",
+          "body": "For naturally occurring, low-stakes date discussions, note the original preference, both workable options, the first response, and the final arrangement. Distinguish an opportunity followed by a first concession, an opportunity without that concession, and no qualifying opportunity. A week with no scheduling disagreement tells you little. Not finding a counterexample is also different from establishing that none exists.\n\nProvisionally retain the hypothesis if the same response recurs in comparable conditions and other explanations remain insufficient. Narrow it if the pattern is limited to one group. Set it aside when preferences or available choices are unclear. Revise it when repeated comparable opportunities produce a different response. This is a way to understand a local habit, not validate a personality trait.\n\nFor a deliberate attempt, prepare a preferred date, an acceptable alternative, and one genuine constraint. State them before deciding what to concede. Evaluate whether everyone understood the options and whether the final date met the constraint. Label this as practice: a clearer conversation does not demonstrate a change in Compliance.",
+          "heading": "Keep an observation separate from a practice attempt",
           "key": "section-05-10862b6c35",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A person may yield over restaurant choice and remain firm on ethics or safety. Compliance under threat should not be celebrated as personality. Online, work, and family conflict can activate different responses.",
-          "heading": "Contextual Differences",
+          "body": "The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) places Cooperation alongside NEO Compliance while describing similar constructs. That relationship does not make instruments or scores interchangeable.\n\nThis educational page does not establish that your assessment produced a separate Compliance score. Check the instrument and reported outputs; do not infer an unreported facet from overall Agreeableness or assume a percentage is a percentile.\n\nRead [Agreeableness](/en/personality/big-five/agreeableness) for the broader interpersonal dimension and the [30-facet guide](/en/personality/big-five/facets) for the vocabulary's structure. If the difficulty is stating intentions clearly, try [Straightforwardness](/en/personality/big-five/facets/straightforwardness). If it is interpreting what others intend, try [Trust](/en/personality/big-five/facets/trust).",
+          "heading": "Names, reported scores, and useful next pages",
           "key": "section-06-f5e4af2e80",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Looking for common ground.\n- De-escalating low-value conflict.\n- Forgiving and moving on.\n- Surrendering important needs too early.\n- Becoming difficult to read because disagreement stays hidden.",
-          "heading": "Possible Expressions When Stronger",
-          "key": "section-07-766bae3826",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Defending a position under pressure.\n- Surfacing disagreement directly.\n- Negotiating harder for resources.\n- Escalating a conflict that could be resolved.\n- Treating compromise as loss.",
-          "heading": "Possible Expressions When Weaker",
-          "key": "section-08-5d895080db",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Compliance can support repair and lower conflict cost. Possible costs include suppressed needs and exploitation. Weaker Compliance can support advocacy and resistance to unfair pressure; possible costs include escalation and damaged coordination. Neither level proves weakness or hostility.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-f6c5871e4b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A team member yields on presentation style but refuses to omit a safety finding. Selective de-escalation and firm boundaries coexist.",
-          "heading": "An Original Case",
-          "key": "section-10-8fcb62bbfb",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A direct negotiator contests price strongly, documents commitments, and works cooperatively after agreement. Low yielding does not mean inability to collaborate.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-9a35f339bb",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. Which conflicts are low value, and which involve a real boundary?\n2. Do you yield by choice or from fear of consequences?\n3. Can others tell when you disagree?\n4. What happens after you win or concede?\n5. How does power change your available options?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-90bc029912",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For one low-stakes disagreement, name the shared goal, one nonnegotiable, and one flexible point. If safety or coercion is involved, prioritize appropriate support rather than practicing compliance.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-aa66498e4b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Trust](/en/personality/big-five/facets/trust), [Straightforwardness](/en/personality/big-five/facets/straightforwardness), [Altruism](/en/personality/big-five/facets/altruism), [Modesty](/en/personality/big-five/facets/modesty), [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness).",
-          "heading": "Continue Reading",
-          "key": "section-14-511e44f3c2",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Compliance describes how readily someone yields or reduces confrontation during interpersonal disagreement. Read it alongside the available choices, the substance of the dispute, and the person's actual needs.",
+        "title": "Compliance: Compromise, Disagreement, and Room to Choose"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/compliance",
-      "source_hash": "496589024390a17aff8f0a6376b26f5ec7b56223a8f723da7d73160af1d0e146",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Compliance concerns willingness to yield, compromise, or de-escalate during conflict. It is not obedience, weakness, fear, cooperation, or a requirement to accept harm.",
-      "title": "Compliance: Willingness to De-Escalate Conflict"
+      "source_hash": "50e5a13e8b7125f9fdcd7ac67da81fd377646c2c75a5e18935c008021d721aa3",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Compliance describes how readily someone yields or reduces confrontation during interpersonal disagreement. Read it alongside the available choices, the substance of the dispute, and the person's actual needs.",
+      "title": "Compliance: Compromise, Disagreement, and Room to Choose"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "A4-compliance-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "A4-compliance-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "A4-compliance-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "A4-compliance-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "fe74192303bd19d47ce20c1316e4ae6e3d57f62b9cf7bc5f8ce406f8d1bc321b"
+  "source_content_sha256": "bcddc0fb99bc0d9b4aebe31d0f1afccbf148f9ce3f1cef92612985d9d7efe0c6"
 }

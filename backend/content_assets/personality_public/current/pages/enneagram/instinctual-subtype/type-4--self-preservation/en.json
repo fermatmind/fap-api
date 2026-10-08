@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-4/instincts/self-preservation",
@@ -23,94 +23,39 @@
       "entity_key": "type-4/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Duty, money, safety, discrimination, or limited support may require endurance. Compare meaning attention under matched strain and safer conditions.",
-          "question": "Does enduring hardship establish self-preservation Type Four?"
+          "answer": "Risk-taking is compatible with the Narrative description, especially when a more authentic or sustainable life seems to lie elsewhere. It is not identifying evidence by itself. Compare the person’s stated reason, available options, practical constraints, and response to a safer alternative that protects the same value.",
+          "question": "Can a self-preservation Four take financial risks?"
         },
         {
-          "answer": "A person cannot be interpreted as choosing restraint when asking for help carries punishment, cost, or no realistic response. Power and resources belong in the comparison.",
-          "question": "Why record whether help is genuinely available?"
+          "answer": "No. Limited support, caring duties, unsafe disclosure, and learned expectations can produce the same behavior. Check whether help is genuinely available and what changes when the person can accept it safely. If there is no recurring link to identity or personal meaning, the proposed subtype mechanism is weak.",
+          "question": "Does being stoic or doing everything alone identify this subtype?"
         },
         {
-          "answer": "Restraint that vanishes in safety, effort with no recurring personal meaning, or easy acceptance of support without identity concern should weaken it.",
-          "question": "What weakens the contained-meaning hypothesis?"
+          "answer": "A comfortable routine is compatible with many core patterns and instincts. It could support a personally meaningful life, or simply meet ordinary needs. Do not infer a type from comfort, and do not invent hidden dissatisfaction when the person reports being content.",
+          "question": "Would enjoying a comfortable routine contradict Type Four?"
+        },
+        {
+          "answer": "It becomes less useful when decisions consistently follow practical constraints, flexible compromises preserve what matters without an identity struggle, or the apparent pattern disappears when resources and safety improve. Those observations should revise the explanation rather than be absorbed into a new version of it.",
+          "question": "What observation would make this explanation less useful?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +71,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "Type Four: identity and personal meaning",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/social",
-          "label": "instinctual_subtype:type-4/social",
+          "label": "Social Type Four",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/social"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/one-to-one",
-          "label": "instinctual_subtype:type-4/one-to-one",
+          "label": "One-to-one Type Four",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/one-to-one"
         }
@@ -184,52 +129,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The traditional description proposes that Type Four meaning may be carried through effort and restraint rather than overt expression. It is a prompt, not an explanation of why someone endures.",
-          "key": "traditional_hypothesis",
-          "title": "Treat contained effort as a traditional hypothesis"
+          "body_md": "The Type Four starting point is a concern with personal identity and significance, as described in the [Enneagram Institute’s Type Four overview](https://www.enneagraminstitute.com/type-4/). In a self-preservation reading, that concern meets the practical conditions that let someone live in a way they recognize as their own.\n\nA person might maintain a modest home, protect time for a meaningful project, or take demanding paid work to sustain an independent way of living. The observation worth exploring is the connection between the practical choice and its personal meaning: ‘This arrangement lets me remain myself.’ Saving money, working hard, or enjoying comfort alone tells us little about subtype.\n\nThis can create a tension. A secure arrangement may support a valued life, yet also begin to feel like an arrangement in which that life is disappearing. The [Narrative Enneagram’s subtype account](https://www.narrativeenneagram.org/instinctual-subtypes/) describes self-preservation Four through a willingness to act or take risks when security or a more authentic life seems to lie elsewhere. That is a traditional description, not evidence that every such move has the same cause.",
+          "key": "security_and_identity",
+          "title": "What are you trying to preserve?"
         },
         {
-          "body_md": "Compare similar difficult tasks in a safe voluntary setting and a setting where disclosure has costs. Record effort, meaning, help-seeking, available choice, and what changes when strain eases.",
-          "key": "matched_comparison",
-          "title": "Match strain while changing disclosure safety"
+          "body_md": "Imagine someone whose rent is rising. An available room would reduce expenses, but the household rules would remove the quiet evening time they use for a personally important project. They calculate the savings and feel relieved, then imagine the daily routine and feel that something essential would be lost.\n\nA useful response could be to ask about the rules, negotiate a small protected time slot, or compare another affordable option. Here, attending to meaning helps prevent a superficially sensible choice from becoming unsustainable. Attending to resources keeps the valued activity possible.\n\nThe strategy becomes costly if every compromise is treated as a betrayal of identity. The person might reject workable housing, move repeatedly, or take on more paid work than their energy permits. Another version is enduring an unsuitable arrangement while telling themselves that doing it alone proves their worth. Risk-taking and restraint can look opposite while serving a similar personal story—but that explanation needs evidence in the person’s own account.\n\nWatch the sequence: what practical problem appears, what the person believes it means about their life, what alternatives are genuinely available, and what happens after a manageable compromise. If they accept the affordable room and continue their project without an identity struggle, that is evidence against the proposed conflict in this situation. Do not redescribe their flexibility as a hidden form of the same subtype.",
+          "key": "a_move_with_two_costs",
+          "title": "A safer home that feels less like your life"
         },
         {
-          "body_md": "The label organizes observations about practical strain, continuity, and expression. It is not evidence about bodily mechanisms, a biological category, or fixed tolerance.",
-          "key": "instinct_boundary",
-          "title": "Keep self-preservation language non-mechanistic"
+          "body_md": "Consider a small community exhibition. The budget is cut, one collaborator receives public praise, and everyone must revise their contribution. These are illustrative comparisons, not a way to classify the participants.\n\n- A self-preservation Four hypothesis asks whether attention first goes to the resources that sustain a personally meaningful contribution: ‘Can I afford this, and can I still make something that feels like mine?’ The person might reduce the scale, secure paid work, or reconsider participation.\n- A social Four hypothesis asks what the changed arrangement means for their place in the group: ‘Whose contribution counts, and is there a respected place for mine?’ The person might seek clearer credit or discuss whose work has been overlooked.\n- A one-to-one Four hypothesis asks whether a particular person’s praise or engagement has become the measure of personal value: ‘Why does their contribution seem to reach that person in a way mine does not?’ The person might seek a direct exchange or become more competitive.\n\nAll three could work late, object to the budget, or withdraw. Ask what each action is intended to restore. A lost fee, an unfair credit system, and a strained collaboration are also real problems; the subtype comparison must not erase them.",
+          "key": "one_project_three_priorities",
+          "title": "The same setback, three possible priorities"
         },
         {
-          "body_md": "Personally significant struggle may be kept private or converted into dependable action. That variation must be tested against necessity, learned restraint, and cultural expectations.",
-          "key": "countertype_variation",
-          "title": "Allow restrained expression to differ from the stereotype"
+          "body_md": "Quiet effort does not establish self-preservation Four. Someone may have caring responsibilities, little money, an unsafe manager, or no reliable person to ask for help. Under those conditions, restraint may be a requirement rather than a preferred identity strategy.\n\nBefore interpreting ‘I must manage alone,’ ask whether support is affordable, competent, safe, and free of humiliating conditions. If assistance becomes genuinely available and the person uses it without the proposed identity conflict, reduce the solo-endurance explanation. If their choices track rent, health, and workload without a recurring concern about personal significance, the self-preservation Four lens may add little.\n\nOther core patterns can also produce demanding effort. The [Narrative Enneagram’s type comparisons](https://www.narrativeenneagram.org/type-comparisons/) are useful prompts for examining reasons. In this example, ask whether the difficulty is chiefly about doing what is right, preventing something from going wrong, conserving limited capacity, or preserving a personally meaningful way of life. These motives can coexist; one successful answer does not settle a person’s type.\n\nSome schools use ‘countertype’ for a presentation that differs from a familiar core-type stereotype. This is a term within a tradition, not a scientific category that can rescue a failing explanation. Being practical, cheerful, or emotionally reserved does not prove that someone is a Four whose feelings are more deeply hidden.",
+          "key": "restraint_is_not_a_type",
+          "title": "Why endurance and independence can mislead"
         },
         {
-          "body_md": "Caregiving, poverty, discrimination, unsafe workplaces, migration, and lack of support can make endurance necessary. Record whether refusal and help are genuinely available.",
-          "key": "alternative_environment",
-          "title": "Test duty, money, and safety"
+          "body_md": "Choose one current decision where practical security and personal meaning appear to conflict. Use a low-stakes decision, such as arranging an evening or reducing the scope of a voluntary project, rather than risking your housing or livelihood to test a label.\n\nWrite down the concrete need, the activity or value you want to preserve, and one less costly way to preserve it. For example: ‘I need sufficient rest and paid hours; I want time for this project; I will protect one short session rather than keep working every night.’ If safe help is available, make one specific request rather than waiting for someone to recognize the entire situation.\n\nAfter trying it, record whether the meaningful activity survived, whether practical strain changed, and whether accepting a limit or support felt like a loss of identity. A recurring tension under reasonably safe conditions may make this lens worth exploring. A response explained by shortage, fatigue, or role obligations should shift attention toward those conditions. If the proposed identity tension does not recur, put that hypothesis aside.\n\nA useful result is a more workable choice. You do not need to prove your subtype, endure more, or make an irreversible change.",
+          "key": "protect_one_meaningful_activity",
+          "title": "Try a smaller way to protect what matters"
         },
         {
-          "body_md": "The hypothesis weakens when contained expression disappears as soon as safety improves, effort has no recurring personal meaning, or support is readily accepted without identity concern.",
-          "key": "counterexample",
-          "title": "Use safer conditions and accepted help as tests"
-        },
-        {
-          "body_md": "Evidence tied to one instrument cannot establish a universal subtype. This page cannot predict resilience, health, hardship, work capacity, or coping outcomes.",
-          "key": "evidence_boundary",
-          "title": "Keep endurance observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose two difficult tasks with similar stakes but different disclosure safety, plus one period when strain eases.\n\nObservable signal: Record effort, practical consequence, personal meaning, help available, refusal cost, disclosure, and change after conditions improve.\n\nPage-specific signal: Compare the exact expression and help-seeking change when safety improves while task difficulty stays similar.\n\nAlternative explanation: Compare caregiving, money, discrimination, migration, culture, role duty, and available support.\n\nReflection prompt: Identify whether necessity explains contained effort better than subtype and cite one disconfirming observation.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare caregiving, money, discrimination, migration, culture, role duty, and available support.",
-            "context": "Choose two difficult tasks with similar stakes but different disclosure safety, plus one period when strain eases.",
-            "duration_days": 5,
-            "observable_signal": "Record effort, practical consequence, personal meaning, help available, refusal cost, disclosure, and change after conditions improve.",
-            "page_specific_signal": "Compare the exact expression and help-seeking change when safety improves while task difficulty stays similar.",
-            "reflection_prompt": "Identify whether necessity explains contained effort better than subtype and cite one disconfirming observation."
-          },
-          "title": "Observation exercise"
+          "body_md": "The three instincts are attention domains within these traditions; people have needs in all three domains. A self-preservation emphasis does not remove social needs or close relationships. Wings describe an adjacent-type influence, while subtype language asks where a core concern receives attention. A second-highest core-type score cannot establish either a wing or an instinct.\n\nThe schools also differ in terminology. Narrative’s one-to-one account includes intimate relationships, close friendships, and vitality; the Enneagram Institute’s sexual/attraction account emphasizes attraction and stimulation. They overlap, but are not interchangeable or limited to sex and romance. See the [Narrative subtype introduction](https://www.narrativeenneagram.org/instinctual-subtypes/) and the [Enneagram Institute’s explanation of instincts](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nThe 27 combinations and countertype descriptions belong to school traditions, not established diagnostic categories or demonstrated neural mechanisms. The [2021 systematic review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence across 104 samples. It does not validate these examples or FermatMind scoring. Findings about a particular subtype questionnaire remain specific to that instrument and sample.\n\nFor further comparison, read [Type Four’s core pattern](/en/personality/enneagram/type-4), [social Type Four](/en/personality/enneagram/type-4/instincts/social), or [one-to-one Type Four](/en/personality/enneagram/type-4/instincts/one-to-one).",
+          "key": "scope_and_further_reading",
+          "title": "How to read this subtype description"
         }
       ],
       "seo": {
@@ -240,8 +167,8 @@
       "slug": "enneagram/type-4/instincts/self-preservation",
       "source_hash": "9267f7152d7363c6d516645bf5a6bb71303c05e794b06d89e7bbe75e0fc6691d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Self-preservation Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through contained expression, endurance, and personally significant effort under practical strain. Endurance cannot establish subtype because caregiving, unsafe settings, financial limits, and role duty can require the same restraint.",
-      "title": "Self-preservation Type Four: contained meaning under strain as a matched-comparison hypothesis"
+      "summary": "This traditional subtype lens asks how the search for personal identity and meaning meets practical needs such as housing, money, energy, and continuity. The useful question is what security is meant to protect—and when pursuing a more authentic life starts to undermine it.",
+      "title": "Self-preservation Type Four: making room for an authentic life"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +178,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "35848fa74b1bfc6579f10ba4b975b62e4604e1e432cc0642d590e45dc6a80b25"
+  "source_content_sha256": "88f8a1e699ca37960e7f2cc23b268c582d886ac2031a1d9953e9453753b05e88"
 }

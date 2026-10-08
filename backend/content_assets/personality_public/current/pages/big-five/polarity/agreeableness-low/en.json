@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/agreeableness-low",
@@ -20,30 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "agreeableness-low",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Agreeableness is not a morality scale. Character judgments require direct evidence of conduct, choices, and context.",
-          "question": "Does low Agreeableness mean I am a bad person?"
+          "answer": "No such conclusion follows from the broad score. Look at actual choices, commitments, and responses to others' needs. A skeptical or less accommodating orientation can coexist with sustained care, while a caring intention still needs to be checked against its effect.",
+          "question": "Does low Agreeableness mean I do not care about people?"
         },
         {
-          "answer": "Specific listening, repair, and communication behaviors can be practiced. This page does not promise or require a trait-score change.",
-          "question": "Can low Agreeableness change through practice?"
+          "answer": "No. Stating a need or protecting a limit is not enough to identify a low Agreeableness pattern. People across the range can assert themselves. Examine how disagreement is handled and what the particular instrument measures.",
+          "question": "Is low Agreeableness the same as being assertive?"
         },
         {
-          "answer": "No. Direct challenge can be useful. Outcomes depend on skill, norms, trust, roles, and how disagreement is handled.",
-          "question": "Do people with low Agreeableness inevitably cause team problems?"
+          "answer": "Skepticism alone does not establish accuracy or objectivity. Check the evidence you used, the alternatives you considered, and what would lead you to revise your judgment. A challenge can be justified or mistaken.",
+          "question": "Does skepticism make my decisions more objective?"
         },
         {
-          "answer": "Share behavior and context rather than a label. The score is private interpretive information and should not replace evidence of how you actually work with people.",
-          "question": "What if I worry that this score will shape how others see me?"
+          "answer": "More agreement is not the only relevant goal. Make your objection specific, hear information that bears on it, and follow through on genuine commitments. Whether cooperation is working depends on the task and the actual exchanges, not simply the number of times you say yes.",
+          "question": "Do I have to agree more often to work well with others?"
+        },
+        {
+          "answer": "Address the action that caused harm, such as an insult, interruption, or misleading statement, while explaining the substantive issue separately. A valid objection does not make every way of expressing it appropriate, and a low score does not remove responsibility.",
+          "question": "What if I caused harm while making a valid point?"
+        },
+        {
+          "answer": "Check that you had comparable opportunities and recorded ordinary discussions rather than only conflicts. You may provisionally retain a narrow behavior hypothesis, but sparse opportunities or uncertain memories call for setting it aside. A short record with no exception does not establish a personality type or confirm the score.",
+          "question": "What if I find no natural exception to my response pattern?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +85,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Low Agreeableness may suggest a stronger default toward skepticism, direct challenge, competition, or protecting one’s own position. It is not a judgment that someone is bad. These tendencies can expose weak claims and protect boundaries, or create unnecessary friction when applied without calibration.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Low Agreeableness: direct expression, competitive orientation, and priority for self-interest” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A low Agreeableness result suggests that your responses lean toward less ready trust, less willingness to yield, or a more challenging interpersonal stance, according to the instrument's rules. In a disagreement, preserving your position may receive more immediate attention than reaching an agreeable exchange.\n\nThis does not establish superior reasoning, negotiation skill, independence, or resistance to deception. It also does not establish cruelty, dishonesty, or an inability to care. The content and consequences of an action need their own evidence.\n\nIf you often think, 'I raised a practical problem, so why did the discussion turn personal?', examine the exchange itself. What was your objection? What information did you have? Did you hear the answer? Those questions can reveal something useful that the broad score cannot decide.",
+          "heading": "What a low result can mean",
           "key": "section-01-ff15ca9847",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may test intent before extending trust, prefer unambiguous disagreement, resist social pressure, and negotiate directly. Lower Compliance does not mean obedience failure; it may reflect reluctance to yield when interests conflict.",
-          "heading": "What This Range Specifically Means",
+          "body": "Identify the questionnaire, language, form length, score unit, and range rules before comparing results. A low raw score, a low score on a 0–100 display, and a low percentile communicate different things. A percentile requires a specified reference population and conversion; a percentage of the possible score does not supply that comparison.\n\nThis page does not assign a universal cutoff. A range label cannot quantify how much better you resist pressure or how much worse you cooperate. If the result lacks enough detail for a precise comparison, keep your interpretation broad.\n\nConsider the situations you recalled while answering. Responses focused on one unreliable collaborator may describe a different context from responses about people generally. A later score difference also needs context; it does not by itself prove a personality change.",
+          "heading": "Check what low is relative to",
           "key": "section-02-bb3af4d8b9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer cruelty, dishonesty, inability to care, poor teamwork, or moral failure. A direct style can be fair or unfair depending on conduct. Low Tender-Mindedness is not proof of absent empathy or a clinical condition.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Saying no or asking for evidence is not enough to distinguish these possibilities. A useful objection identifies a disputed condition and remains open to information that bears on it. Ridicule or repeated interruption can prevent that information from entering the conversation. Assess those actions directly rather than excusing them with a low score.\n\nSome questioning is required by a role. Checking a reimbursement receipt does not by itself indicate generalized distrust. Brief wording may also reflect fatigue, time pressure, or a communication convention. Compare interactions where you have meaningful choices before describing a recurring interpersonal default.\n\nThe site's NEO/IPIP-NEO vocabulary separates Trust, Straightforwardness, Altruism, Compliance, Modesty, and Tender-Mindedness. A low domain score does not imply that all six are low. Straightforwardness is not simply blunt delivery. The [official IPIP item material](https://ipip.ori.org/newNEOFacetsKey.htm) shows distinct content for these similar constructs; reading the vocabulary does not create additional measured facet results.",
+          "heading": "A challenge can be clear, hostile, or simply required",
           "key": "section-03-d2da0dc19b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include challenging assumptions, bargaining hard, questioning consensus, prioritizing outcomes over comfort, and protecting time or resources. You may respect people who state positions clearly and become impatient with indirect requests.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Consider an illustrative situation. A volunteer group proposes moving its weekly session to an earlier hour. You respond, 'That will not work,' because the current time suits you. Before the organizer explains why a change was proposed, you repeat that people should keep the existing arrangement. The group now has your objection, but not a clear account of what condition needs to be protected.\n\nA narrow hypothesis is: 'In negotiable disagreements about a shared schedule, I usually reject a proposal before asking for its reasons.' The behavior is the order of inquiry and rejection. Whether the group ultimately keeps the old time does not show that you gathered the relevant information.\n\nAlternative explanations matter. You may already know that several members cannot arrive earlier. You may be protecting a commitment the group previously made. You may have misunderstood the proposed time. Or you may be carrying frustration from an earlier change. Record what was already known rather than assuming every quick objection reflects the same tendency.\n\nYou can preserve a real limit while clarifying the proposal: 'I cannot arrive before six. What problem is the earlier start meant to solve?' The answer might reveal a room booking problem, an optional setup period, or a conflict that has no easy solution. None requires agreement. It provides a basis for deciding whether to maintain, revise, or narrow the objection.",
+          "heading": "An objection during a shared schedule decision",
           "key": "section-04-4a00f1ce73",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, skepticism may improve risk review but erode trust if every exchange becomes adversarial. In learning, debate may sharpen ideas. In relationships, directness can clarify needs or make vulnerability feel unsafe, depending on tone and repair.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Questioning can contribute when it exposes a missing condition or an unsupported claim. It can also become costly when every answer is treated as insufficient without stating what would count as relevant evidence. More suspicion does not automatically produce better judgment.\n\nIn the scheduling example, attendance constraints and venue availability bear on the decision. A general claim that the organizer cannot be trusted is not a substitute for examining those details. If past behavior matters, explain the specific connection and what confirmation would resolve it.\n\nThe same discipline helps with interpersonal impact. If someone says your delivery discouraged them from sharing information, ask which part of the exchange had that effect. You can acknowledge an interruption or correct a misleading remark while keeping a substantive objection. Repair does not require pretending that the proposal was sound.\n\nConcern can also take a form that differs from the recipient's needs. Offering a solution does not establish that a person wanted one. Ask whether they want discussion, practical help, or time to explain before evaluating your response as supportive.",
+          "heading": "Skepticism needs a question it can answer",
           "key": "section-05-b07d07172b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include candid challenge, resistance to manipulation, negotiation, boundary protection, and willingness to raise unpopular concerns. These help when evidence and accountability constrain the contest.",
-          "heading": "Possible Strengths",
+          "body": "Keep the observation focused on negotiable disagreements about a shared schedule. A natural exception could occur when another member proposes swapping two sessions and you spontaneously ask about availability, listen, and only then accept or reject the change. It addresses the same order of behavior. A generous act in an unrelated setting does not test this hypothesis.\n\nRecord the proposal, the information you already had, whether there was a genuine disagreement, whether you could safely ask questions, the order of your response, and what answer you heard. A compulsory timetable with no room for discussion is a different kind of event. An announcement that creates no disagreement is not an opportunity for this target behavior.\n\nAn eligible disagreement where you inquire before judging is an opportunity in which rejection-before-inquiry did not occur. A period without an eligible disagreement is a period without an opportunity. If you find no natural exception despite several comparable opportunities, retain the hypothesis only provisionally and check whether your notes capture ordinary exchanges as well as arguments.\n\nOne exception does not disprove usually. Repeated behavior across comparable people and conditions may justify retaining the narrow hypothesis. If quick rejection mainly occurs when a known commitment would be broken, narrow the explanation to that condition and check whether more inquiry was actually needed. If memories are uncertain, opportunities are few, or circumstances differ too much, set the hypothesis aside. This is a way to assess a behavioral explanation, not validate a trait score.",
+          "heading": "Find exceptions within the relevant opportunities",
           "key": "section-06-73785f272d",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include escalation, reduced psychological safety, missed relational information, difficulty repairing harm, or treating cooperation as surrender. Constant suspicion can also impose verification costs on everyone.",
-          "heading": "Possible Costs",
+          "body": "In a safe, low-stakes shared decision, state the condition you need to preserve, ask one relevant question, and hear the answer before judging. For example: 'I need to leave by eight. Does the new schedule still allow that?' You do not have to add praise or agree merely to make the exchange sound friendlier.\n\nMark this as a deliberate trial, separate from spontaneous behavior. Note whether the question supplied new information, corrected a misunderstanding, or clarified your reason for continuing to object. Check whether the other person can identify the actual disputed condition. Also note when the extra question repeats information already provided or adds avoidable delay.\n\nContinue the approach if it produces usable information at an acceptable cost. If the difficulty is an unstable scheduling process, discuss that process. If necessary details are withheld, withholding agreement may remain appropriate. If ridicule or interruption continues after the facts are clear, address that behavior separately. The trial does not promise cooperation, relationship improvement, or a higher Agreeableness score.",
+          "heading": "Try one informative objection",
           "key": "section-07-eb202968bb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [mid-range Agreeableness](/en/personality/big-five/agreeableness-mid), self-advocacy or skepticism may dominate more situations. Compared with [high Agreeableness](/en/personality/big-five/agreeableness-high), harmony may carry less automatic weight. This is not a morality rank.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "A higher range may describe a stronger cooperative orientation, but it does not establish better character or interpersonal skill. A lower range does not establish sharper analysis. People at either end can cooperate, challenge a claim, and act fairly.\n\nThe middle range is not a certificate of balance. A moderate overall score may leave substantial differences between particular tendencies unresolved, and appropriate adjustment must be observed in actual situations. High, middle, and low are positions within an interpretation, not mutually exclusive personality identities.\n\nRead the [Agreeableness guide](/en/personality/big-five/agreeableness) for the domain's scope, [high Agreeableness](/en/personality/big-five/agreeableness-high) for questions about care and limits, and [mid-range Agreeableness](/en/personality/big-five/agreeableness-mid) for a closer look at the middle position. The [facet guide](/en/personality/big-five/facets) can help distinguish questions about trust, helping, and disagreement without assuming unreported scores.\n\nThe [IPIP guide to constructs and inventories](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) explains why different questionnaires are not interchangeable. The examples here are illustrative, and the practical suggestions examine a particular interaction; they are not evidence of clinical status, occupational suitability, or an individual's future outcomes.",
+          "heading": "Use comparison to ask better questions",
           "key": "section-08-eedac1beb9",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A proposal has enthusiastic support but weak cost assumptions. You challenge it directly and prevent a poor commitment. The contribution is valuable; the trade-off is whether your wording lets the group use the evidence without turning the review into a personal contest.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-b66f671d92",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score low and provide sustained care to someone you love. Relationship, values, and chosen commitments can produce generous behavior that a broad interpersonal default does not erase.",
-          "heading": "A Counterexample",
-          "key": "section-10-cd808b6f9f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- When does skepticism improve a decision?\n- When does directness reduce usable feedback?\n- How do you repair after causing impact?\n- Which facet differs from the broad range?\n- What evidence is enough to extend trust?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-c1c61de447",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Before one challenge, state the shared goal and ask one clarifying question before presenting your objection. Record whether the additional step improves accuracy or receptivity without weakening the boundary.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-de466b6cfe",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness), compare [high](/en/personality/big-five/agreeableness-high), [mid-range](/en/personality/big-five/agreeableness-mid), and [low Agreeableness](/en/personality/big-five/agreeableness-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-1f1f2f0a3f",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Low Agreeableness can describe a more skeptical or less accommodating interpersonal orientation. Examine what your objections are based on, distinguish directness from hostility, and test a specific communication choice without treating the score as an ability label.",
+        "title": "Low Agreeableness: Questioning Claims Without Losing the Conversation"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/agreeableness-low",
-      "source_hash": "880e90540b992034d758517f88c8f870d0dcb093ca98927fc048f71ce07ba463",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Low Agreeableness may suggest direct expression, stronger skepticism, and priority for self-interest or contest. It does not mean being bad, cruel, dishonest, or unable to cooperate.",
-      "title": "Low Agreeableness: Direct Challenge and Strong Boundaries"
+      "source_hash": "6413653eb3138271078057d363e3cecc5cbfbfac69e8a0c5153c366032fd20b6",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Low Agreeableness can describe a more skeptical or less accommodating interpersonal orientation. Examine what your objections are based on, distinguish directness from hostility, and test a specific communication choice without treating the score as an ability label.",
+      "title": "Low Agreeableness: Questioning Claims Without Losing the Conversation"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "agreeableness-low-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, morality, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "agreeableness-low-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "agreeableness-low-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "agreeableness-low-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "3f148c94a6149f49cdd3f874c13dc0a897979e2c72355463cd6ad3a659803bba"
+  "source_content_sha256": "bf59a161f5c9cd0378f96a9658031321fe150773bea68e3709f3f517e7230c85"
 }

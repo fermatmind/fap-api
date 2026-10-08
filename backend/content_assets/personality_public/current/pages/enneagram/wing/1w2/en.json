@@ -23,79 +23,35 @@
       "entity_key": "1w2",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Kind correction may be part of management, teaching, parenting, customer support, or practiced diplomacy. The hypothesis needs repeated Type One attention to standards plus a distinct pattern of involved help, tested against consent and counterexamples.",
-          "question": "Does correcting other people kindly establish 1w2?"
+          "answer": "That is not a reliable distinction. Both interpretations can include emotion, reflection, participation and independent work. Compare the One core and whether involvement or reduced friction repeatedly modifies the approach. Sociability, occupation or one emotional response cannot establish a wing.",
+          "question": "Is 1w2 more emotional or outgoing than 1w9?"
         },
         {
-          "answer": "Consent reveals whether involvement responds to the other person's need or to the helper's own urgency to improve the situation. A declined offer also creates useful evidence about flexibility, ownership, and whether relationship pressure replaces collaboration.",
-          "question": "Why record whether assistance was invited?"
+          "answer": "One reaction is insufficient. You may worry that an error remains, feel that your effort was disregarded, or fear distance in the relationship. Separate those concerns and compare what repeatedly influences your choices. The emotion following one refusal does not distinguish 1w2 from 2w1.",
+          "question": "Does feeling hurt when help is declined mean I am actually 2w1?"
         },
         {
-          "answer": "Ask what remains central when appreciation is absent. A 1w2 hypothesis expects the standard and repair concern to persist, while a Two hypothesis may better explain attention organized around being needed or maintaining connection. Neither inference is automatic.",
-          "question": "What distinguishes 1w2 from a Two hypothesis?"
+          "answer": "Separate the responsibility to raise an issue from permission to do another person's work. State the error and any necessary requirement clearly. Who makes the revision and how much you may intervene depend on actual duties and agreements. A wing label cannot expand your authority over the task.",
+          "question": "If I found a real error, do I still need consent?"
         }
       ],
       "framework": "enneagram",
@@ -111,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "Enneagram overview",
+          "label": "Enneagram: nine patterns of motivation",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-1",
-          "label": "Enneagram Type 1",
+          "label": "Type One: standards, responsibility and improvement",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-1"
         },
         {
           "href": "/en/personality/enneagram/type-2",
-          "label": "Enneagram Type 2",
+          "label": "Type Two: care, connection and being needed",
           "relationship": "adjacent_influence_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/en/personality/enneagram/wings/1w9",
-          "label": "1w9 wing",
+          "label": "1w9: making room for disagreement",
           "relationship": "sibling_wing_variant",
           "target_identity_key": "wing:1w9"
         }
@@ -169,47 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "A 1w2 interpretation first asks whether Type One standards and correction organize attention, then whether Two-adjacent involvement changes how improvement is pursued. Helping alone is insufficient: professional duty, caregiving, reciprocity, status, or a clear request can produce the same action.",
+          "body_md": "In 1w2, One is the core and Two the adjacent wing. The [traditional Type One description](https://www.enneagraminstitute.com/type-1/) emphasizes integrity, principles and improvement as motivations. Before considering the wing, examine whether those concerns repeatedly organize your choices.\n\nSuppose you see someone struggling and offer to work alongside them. What first drew you in? Was it an error or an unfulfilled responsibility, or concern about being needed and staying connected? These motives can coexist. The useful question is how they influence decisions across different events.\n\nA Two-related modifier may help explain why you want improvement to come with support: explaining the issue, demonstrating a method, trying it together or attending to whether the feedback can be received. It does not mean that every 1w2 is outgoing or more generous than someone else. Personal involvement is a proposed modifier, not a moral score.",
           "key": "core_first_modifier",
-          "title": "Begin with standards, then test involvement"
+          "title": "Helping may be the method; compare the core first"
         },
         {
-          "body_md": "A sibling comparison places 1w2 direct involvement beside 1w9 measured distance. Faced with the same flawed handoff, 1w2 may offer to repair it alongside the owner, while 1w9 may document the issue and choose a calmer opening. Compared with Two, the proposed core remains the standard being corrected.",
-          "key": "sibling_core_comparison",
-          "title": "Contrast direct help with quieter restraint"
-        },
-        {
-          "body_md": "Useful situations include editing a colleague's work, intervening in a family routine, and volunteering to fix a shared process. Record whether help was invited, whether the original owner retains a choice, and whether the correction improves the situation or creates obligation and resentment.",
+          "body_md": "Imagine a colleague asks you to review some material. You find a passage that conflicts with facts you both confirmed, explain the discrepancy and offer to find an accurate wording together. This is an original comparison scenario, not a prediction about everyone described as 1w2.\n\nParticipation can make improvement more accessible. The other person receives both a clear concern and practical support, rather than being left alone with criticism.\n\nThe cost appears when the scope grows without agreement. Reviewing one passage becomes rewriting the entire document, or you insist on your own method. Responsibility and helpfulness can combine into an expectation: because I noticed it and can fix it, I should keep working until I am satisfied. You take on unagreed work while the owner loses choice and begins to experience feedback as a takeover.\n\nCheck both the basis for the correction and the agreed scope of your involvement. Finding a real error does not automatically give you authority over the entire task.",
           "key": "observable_situations",
-          "title": "Observe consent and ownership"
+          "title": "How working together can turn into taking over"
         },
         {
-          "body_md": "A 1w2 counterexample weakens an involved improvement hypothesis when help tracks approval rather than a stable standard, disappears without gratitude, or protects closeness while known defects remain. Those events invite a Two hypothesis, role expectations, impression management, or fear of rejection.",
-          "key": "counterexample",
-          "title": "Look for involvement without standards"
+          "body_md": "Use the same document revision rather than contrasting a warm person with a cool one.\n\n**Compared with 1w9:** both interpretations keep One at the core. A 1w2 modifier may favor improvement through interaction—explaining, revising together or practicing a skill. A 1w9 modifier may favor organizing the discrepancy, considering the owner's reasons and making disagreement easier to discuss. Either person can help directly or send written feedback. Look for a recurring strategy rather than one communication channel.\n\n**Compared with the reverse combination, 2w1:** either person can be careful, considerate and demanding of their own contribution. Suppose someone else fixes the error and your help is not used. Does resolution make it easier to let go, or does your place in the relationship remain especially important? Now suppose the owner is grateful but the passage remains inaccurate. What continues to trouble you?\n\nA 1w2 interpretation centers correctness and responsibility, with connection shaping the approach. A 2w1 interpretation centers care and connection, with standards shaping how support is given. Gratitude is not a requirement for a Two core, and helping without thanks does not exclude it. Compare repeated choices rather than treating one disappointment as an answer.",
+          "key": "sibling_core_comparison",
+          "title": "1w2, 1w9 and 2w1 can help with different priorities"
         },
         {
-          "body_md": "Managers, parents, senior specialists, and community volunteers may intervene because their role assigns responsibility. Compare the wing hypothesis with explicit duty, reciprocal norms, gendered expectations, crisis urgency, and practiced mentoring by observing what changes when consent and recognition differ.",
+          "body_md": "A role may already explain the behavior. You are responsible for reviewing the work, someone has asked you to demonstrate a skill, or your household has agreed that a particular task belongs to you. None of those facts independently establishes a Two wing.\n\nCompare existing situations without the review responsibility, explicit request or urgent consequence. Do you still tend to pursue improvement by working with someone rather than simply naming the issue? Why does that approach matter to you? If it occurs only when required, the role explanation may be enough.\n\nFlexibility also matters. You may step back when the owner can manage, act directly under an explicit responsibility, or update a standard when facts change. These choices do not automatically weaken the core. Observe whether you can adjust your participation to the actual need.",
           "key": "alternative_explanations",
-          "title": "Test care roles and reciprocity"
+          "title": "Active involvement may simply be part of the role"
         },
         {
-          "body_md": "Research provides little support for wings, so 1w2 remains a secondary, evidence-limited observation hypothesis. It cannot certify altruism, moral worth, diagnostic status, or relationship success, and it should be revised when concrete counterexamples fit another explanation.",
-          "key": "wing_boundary",
-          "title": "Do not turn service into wing proof"
+          "body_md": "**Reconsider the core:** if choices across freely chosen situations mainly follow being needed or preserving closeness, while standards and responsibility do not recur, compare Two or other explanations. Being exacting while helping is not enough to retain a One core.\n\n**Leave the wing open:** if a One concern is clear but collaborative involvement appears only when you are asked or required to instruct, the additional evidence for a Two wing may be weak.\n\n**Respecting refusal is not a contradiction:** stopping after a declined offer or accepting another effective method may show that you distinguish the standard from the method and the task's ownership.\n\n**Pressure is not proof:** continuing to take over after refusal may involve urgency, unclear roles or poor collaboration skills. Address the boundary rather than using a wing to justify the action. Likewise, ending help after receiving no thanks could reflect limited capacity or the completion of an agreement; understand the circumstances first.",
+          "key": "counterexample",
+          "title": "Separate an uncertain core from an uncertain wing"
         },
         {
-          "body_md": "Duration (days): 5\n\nContext: Choose three repair situations involving another person's work or routine, including one invited offer, one unsolicited impulse, and one declined offer.\n\nObservable signal: Record the standard named, who owns the decision, whether consent was requested, the help actually given, and the recipient's observable response.\n\nPage-specific signal: Track whether direct involvement becomes more flexible after refusal or whether urgency shifts into pressure, correction, or unrequested takeover.\n\nAlternative explanation: Compare formal duty, caregiving norms, reciprocal obligation, mentoring skill, crisis urgency, and desire for appreciation with the 1w2 modifier hypothesis.\n\nReflection prompt: Identify the strongest event where involvement followed connection rather than standards, then state which alternative explanation now deserves more weight.",
+          "body_md": "When you next want to improve someone else's work, separate three things: an agreed requirement, a problem that affects the outcome, and your preferred way of doing it. A difference in preference alone may not require intervention.\n\nIf a correction is needed, describe it and offer a choice: This passage differs from the information we confirmed. Would you like me to flag the issue, revise this part with you, or leave it for you to handle? A genuine choice includes declining help.\n\nWork within the agreed scope, then return the decision and remaining task to its owner. If they choose another method, check whether it satisfies the shared requirement rather than whether it matches yours. When a review duty is mandatory, explain its scope and requirements clearly instead of presenting required action as an optional personal favor.\n\nAfterward, identify what was hardest: the unresolved problem, your method not being used, or the absence of a relational response. Find an event that least fits your current explanation. The aim is better collaboration and a revisable understanding, not making every offer support 1w2.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare formal duty, caregiving norms, reciprocal obligation, mentoring skill, crisis urgency, and desire for appreciation with the 1w2 modifier hypothesis.",
-            "context": "Choose three repair situations involving another person's work or routine, including one invited offer, one unsolicited impulse, and one declined offer.",
-            "duration_days": 5,
-            "observable_signal": "Record the standard named, who owns the decision, whether consent was requested, the help actually given, and the recipient's observable response.",
-            "page_specific_signal": "Track whether direct involvement becomes more flexible after refusal or whether urgency shifts into pressure, correction, or unrequested takeover.",
-            "reflection_prompt": "Identify the strongest event where involvement followed connection rather than standards, then state which alternative explanation now deserves more weight."
-          },
-          "title": "Observation exercise"
+          "title": "Agree on the scope before repairing one thing together"
+        },
+        {
+          "body_md": "The [abstract of Hook and colleagues' systematic review](https://doi.org/10.1002/jclp.23097) reports little research supporting wings. Use 1w2 as a limited reflection hypothesis. These comparisons and practices are not validated classification procedures or evidence for FermatMind's assessment validity.\n\nA wing is not any second-highest score or an equal mixture of two types. It cannot certify altruism, moral worth, health or relationship prospects. You can keep One as a candidate without selecting a wing.\n\nTo revisit the core, read [Type One: standards, responsibility and improvement](/en/personality/enneagram/type-1). To compare another approach to improvement, read [1w9: making room for disagreement](/en/personality/enneagram/wings/1w9). If connection seems to organize the helping more strongly, use the existing [Type Two: care, connection and being needed](/en/personality/enneagram/type-2) page to compare the core again.",
+          "key": "wing_boundary",
+          "title": "Keep involvement separate from a definite personality conclusion"
         }
       ],
       "seo": {
@@ -220,8 +168,8 @@
       "slug": "enneagram/wings/1w2",
       "source_hash": "dfb97d837b6ce187a8a1d2f5b42c3ff6ed856afcfd3b6e2cd1a10098abd92a1c",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "1w2 is an evidence-limited wing hypothesis: Type One standards remain central, while Type Two may add hands-on help and relationship repair. Helpful correction alone does not confirm 1w2 because role duties, care training, and learned service can look the same.",
-      "title": "1w2: Type 1 Core, 2 Wing, and Common Misreads"
+      "summary": "1w2 keeps Type One concerns about standards and responsibility at the core. A possible Two wing may make explanation, collaboration and hands-on help a preferred way to improve things. Helpfulness alone cannot establish the wing; motives, ownership and the response to a declined offer matter.",
+      "title": "1w2: Pursuing improvement through personal involvement"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "9682eccc2f28ebc72b7976ab7633b711f81db5e09f6cbf7e2c5e45ff09d690c5"
+  "source_content_sha256": "cf8d9e98053d03f24ea30b7c3c97cc58f7b9bb4b81d3fde541cd4e43102f8a7f"
 }

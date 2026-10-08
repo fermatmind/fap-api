@@ -23,94 +23,35 @@
       "entity_key": "type-6/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Scarcity, housing insecurity, disability access, caregiving, unsafe work, migration, and mutual-aid obligations can produce the same priorities. Compare matched periods of access and responsibility before retaining a self-preservation subtype hypothesis.",
-          "question": "Do practical safety, warm alliances, and resource continuity prove this subtype?"
+          "answer": "No. Income, access, caregiving, learned financial habits, and realistic risk can explain those actions. Explore the interpretation only if Type Six’s concern with dependable support fits and practical continuity repeatedly takes priority beyond the immediate circumstances.",
+          "question": "Does saving money or checking supplies make me a self-preservation Six?"
         },
         {
-          "answer": "Use similar workloads across a resource-secure period and an access-constrained period, and record whether observable behavior changes when the matched condition changes.",
-          "question": "What makes the self-preservation Type Six comparison fair?"
+          "answer": "Yes. Sociability does not settle instinctual priority. Hosting people could express enjoyment, community participation, attraction, or a wish to build dependable everyday support. Ask what the connection is doing for you rather than counting how many people you meet.",
+          "question": "Can I be outgoing and still explore this subtype?"
         },
         {
-          "answer": "flexible sharing after replenishment, support from several people, and relaxed limits when scarcity ends are formal counterexamples that should reduce confidence rather than be dismissed as exceptions.",
-          "question": "Which changed-resource counterexample weakens the safety-continuity hypothesis?"
+          "answer": "That is useful information and a helpful outcome. It weakens a specific claim that you keep seeking reassurance after practical needs are met. If your concerns are consistently explained by actual shortages and disappear when those shortages end, reduce confidence in the subtype interpretation.",
+          "question": "What if a clear backup plan lets me relax?"
         }
       ],
       "framework": "enneagram",
@@ -132,19 +73,19 @@
         },
         {
           "href": "/en/personality/enneagram/type-6",
-          "label": "Enneagram Type 6",
+          "label": "Type Six: security and dependable support",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/social",
-          "label": "Type 6 social subtype",
+          "label": "Type Six social: belonging and responsibility",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/social"
         },
         {
           "href": "/en/personality/enneagram/type-6/instincts/one-to-one",
-          "label": "Type 6 one-to-one subtype",
+          "label": "Type Six one-to-one: connection and intensity",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/one-to-one"
         }
@@ -184,52 +125,29 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Within a Type Six core hypothesis, the self-preservation subtype may emphasize practical safety, dependable resources, and warm alliances. Check material access and relationship conditions first, then keep the subtype idea secondary and revisable.",
-          "key": "traditional_hypothesis",
-          "title": "State the tradition as a secondary testable idea"
+          "body_md": "Start with the core question, not the shopping habits: when something becomes uncertain, what would help you feel able to proceed? The [Enneagram Institute’s Type Six description](https://www.enneagraminstitute.com/type-6/) places security and support at the center of its traditional account.\n\nA self-preservation reading brings that question into ordinary life: can the rent be paid, is the journey workable, and will someone help if the plan changes? These are sensible concerns for anyone. The subtype idea becomes worth exploring when practical continuity and accessible personal support repeatedly receive priority, including when immediate needs are already covered.\n\nThe [Narrative Enneagram](https://www.narrativeenneagram.org/instinctual-subtypes/) emphasizes warmth in its self-preservation Six portrait. One possible interpretation is that a friendly alliance serves as usable backup. A person may be generous and sociable while still wondering whether help will be available. Warmth is neither proof of the subtype nor evidence of a particular childhood history.",
+          "key": "support_close_to_home",
+          "title": "What makes everyday life feel supported?"
         },
         {
-          "body_md": "Compare similar workloads during one resource-secure period and one period of constrained access. Record whether alliance seeking or contingency planning changes when supplies, housing, or reliable help are restored.",
-          "key": "matched_comparison",
-          "title": "Use matched situations before interpreting the pattern"
+          "body_md": "Consider this illustrative situation: friends have arranged a weekend away, but the accommodation is cancelled. Everyone starts asking questions. The questions alone cannot distinguish a subtype; their purpose and what settles them are more informative.\n\n- A self-preservation Six reading would focus on a workable place to sleep, transport costs, and a dependable person to contact. A confirmed replacement room may bring more relief than enthusiastic encouragement.\n- A social Six reading would focus on the shared agreement: who may change the booking, how costs will be divided, and whether anyone is being left with an unfair obligation.\n- A one-to-one Six reading might focus on a particular companion’s response: are we facing this together, and does our connection still feel engaged? The person might become unusually direct or try to restore a lively sense of partnership.\n\nAll three could book a replacement hotel. The difference is the concern the booking addresses. The same person can attend to all three, and a dangerous or unaffordable situation naturally makes practical safety urgent regardless of subtype.\n\nFor the self-preservation interpretation, preparation is useful when it turns uncertainty into a feasible plan. It becomes costly when each confirmed arrangement generates another request for reassurance, or when a friend’s inability to help is treated as evidence that the entire alliance is unreliable.",
+          "key": "changed_weekend_plan",
+          "title": "One changed plan, three different concerns"
         },
         {
-          "body_md": "The self-preservation label organizes resource-continuity observations; it is not evidence about bodily mechanisms, neural systems, fixed functions, or a universal biological category.",
-          "key": "instinct_boundary",
-          "title": "Reject bodily and neurological mechanism claims"
+          "body_md": "Imagine regularly bringing dinner to a neighbor who has helped with childcare. This may be freely chosen reciprocity. It may also carry an unspoken hope: if I keep the relationship warm, I will not be stranded next time. An observation worth making is whether declining the dinner, being unavailable once, or offering a different kind of help produces a disproportionate loss of confidence in the relationship.\n\nThe [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) distinguish Six’s search for reassurance from Two’s investment in being needed, and contrast Six’s questioning with Nine’s accommodation. These are traditional prompts for reflection, not a way to identify someone from generosity.\n\nAsk what you would miss if the person could not help: their affection, your place as a valued helper, a peaceful relationship, or a practical source of backup? More than one answer can be true. If the recurring concern is chiefly appreciation or avoiding disagreement, reconsider whether the self-preservation Six explanation is doing useful work.\n\nA clearer request often serves the relationship better than extra favors: “Could you be my backup on Tuesday? It is fine to say no; I can ask someone else.” That makes support negotiable without turning kindness into a debt.",
+          "key": "warmth_and_hidden_requests",
+          "title": "When kindness carries an unspoken request"
         },
         {
-          "body_md": "A person may host, share, or appear calm while managing real scarcity or caregiving duties. That visible style alone cannot prove or disprove a self-preservation subtype hypothesis.",
-          "key": "countertype_variation",
-          "title": "Allow behavior that looks unlike the stereotype"
+          "body_md": "Choose two ordinary, low-stakes decisions, such as arranging a meal or making a familiar journey. Keep available money, access needs, responsibilities, and the practical consequences as similar as possible. Do not create scarcity or withdraw somebody’s support for an experiment.\n\nBefore asking for reassurance, write down one workable plan, one appropriate fallback, and the information that would justify changing your mind. Make one explicit request if help is needed. After the answer, record what happened next: did you act, ask the same question again, add another fallback, or discover a real gap in the plan? Also note time spent and whether the other person understood the request.\n\nThe aim is a usable stopping point, not becoming someone who never prepares. Continue safety checks when the situation actually requires them. If housing instability, disability access, caregiving, or unreliable assistance explains the repeated checking, address that condition directly.\n\nConfidence in the subtype interpretation should fall if the pattern appears only during a resource shortage and resolves when dependable access returns, or if group responsibility or a particular connection consistently explains the concern better. A single relaxed decision does not settle the question. Across several comparable occasions, an explanation that adds little beyond circumstances can be set aside rather than rescued as a hidden or suppressed subtype.",
+          "key": "enough_backup",
+          "title": "Try defining enough backup"
         },
         {
-          "body_md": "Scarcity, housing insecurity, disability access, caregiving, unsafe work, migration, and mutual-aid obligations can shape the same response. Address those material realities directly rather than translating them into personality essence.",
-          "key": "alternative_environment",
-          "title": "Audit material, institutional, and relational conditions"
-        },
-        {
-          "body_md": "Lower confidence when the record shows flexible sharing after replenishment, support from several people, and relaxed limits when scarcity ends, and preserve the environmental account as a live alternative.",
-          "key": "counterexample",
-          "title": "Use changed conditions as a disconfirmation test"
-        },
-        {
-          "body_md": "Instrument-specific evidence cannot establish universal subtype ontology or cross-cultural equivalence, and this page cannot forecast safety, resource sufficiency, or future conduct.",
-          "key": "evidence_boundary",
-          "title": "Keep subtype inference local and non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Compare one resource-secure week with one access-constrained week, then include a shared-supply decision under similar workload.\n\nObservable signal: Record housing and supply continuity, access needs, caregiving duty, who offers support, the boundary requested, and whether it changes after replenishment.\n\nPage-specific signal: Observe whether alliance seeking and contingency planning decrease when replacement supplies and reliable access are restored.\n\nAlternative explanation: Test scarcity, housing insecurity, disability access, unsafe work, caregiving, and mutual-aid obligations before retaining a subtype account.\n\nReflection prompt: Identify the resource change that most clearly altered the safety plan, and lower the hypothesis if material continuity explains the shift.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Test scarcity, housing insecurity, disability access, unsafe work, caregiving, and mutual-aid obligations before retaining a subtype account.",
-            "context": "Compare one resource-secure week with one access-constrained week, then include a shared-supply decision under similar workload.",
-            "duration_days": 5,
-            "observable_signal": "Record housing and supply continuity, access needs, caregiving duty, who offers support, the boundary requested, and whether it changes after replenishment.",
-            "page_specific_signal": "Observe whether alliance seeking and contingency planning decrease when replacement supplies and reliable access are restored.",
-            "reflection_prompt": "Identify the resource change that most clearly altered the safety plan, and lower the hypothesis if material continuity explains the shift."
-          },
-          "title": "Observation exercise"
+          "body_md": "Within these traditions, people have all three instincts. A self-preservation emphasis does not mean lacking social concern or intimate relationships. Wings describe a different layer: a Five or Seven wing is an adjacent-type influence, while this page concerns the area of life receiving attention. A second-highest type score does not establish either layer.\n\nTerminology also varies. Narrative’s one-to-one category includes intimate bonds and vitality; the [Enneagram Institute’s sexual or attraction category](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction and intensity. They overlap without being identical, and neither is confined to sex or romance.\n\nTwenty-seven subtypes and labels such as countertype belong to Enneagram traditions. They are not reproducible scientific diagnoses or demonstrated neural mechanisms. The [abstract of Hook and colleagues’ 2021 review](https://doi.org/10.1002/jclp.23097) reports mixed reliability and validity across 104 samples. That finding does not validate FermatMind scores or a particular subtype assignment. Evidence about a named inventory would also remain specific to its instrument and study population.\n\nIf the core motivation is still uncertain, read [Type Six]( /en/personality/enneagram/type-6). To compare where support is sought, continue with [Type Six social](/en/personality/enneagram/type-6/instincts/social) or [Type Six one-to-one](/en/personality/enneagram/type-6/instincts/one-to-one).",
+          "key": "using_the_lens",
+          "title": "Use the lens without turning it into a verdict"
         }
       ],
       "seo": {
@@ -240,8 +158,8 @@
       "slug": "enneagram/type-6/instincts/self-preservation",
       "source_hash": "24b64a7b6647dc83bbc10ed70721f4fe6d980dec00665f449ebc8e5c5a65383d",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Six self-preservation is an evidence-limited subtype hypothesis: Type Six concerns about uncertainty and trust remain central, while practical safety, supportive alliances, and resource continuity may receive added focus. These behaviors alone do not confirm this subtype because scarcity, housing insecurity, disability access, caregiving, unsafe work, and mutual-aid needs can look the same.",
-      "title": "Type 6 Self-Preservation: Safety, Support, and Contingency"
+      "summary": "The self-preservation lens asks how Type Six concerns about dependable support show up in everyday resources, home life, and trusted alliances. Explore when preparation and warmth help, when they become costly, and how to distinguish a recurring priority from a reasonable response to difficult circumstances.",
+      "title": "Type 6 Self-Preservation: Building Safety Through Practical Support"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +169,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "933f19f762049dbad480a2129511d8fc5875619ff230fa6bb7115657ef1a8fe9"
+  "source_content_sha256": "5dc88d77ede78814a8ae43feab267a13353598df72d44b82394dc9245acc5e23"
 }

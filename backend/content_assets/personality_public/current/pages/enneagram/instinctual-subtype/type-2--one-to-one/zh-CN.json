@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-2/instincts/one-to-one",
@@ -23,94 +23,35 @@
       "entity_key": "type-2/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "不是。强度可能来自新亲密、未解决冲突、照护、权力、危机或吸引。需要同时看到二号式连接关注、匹配比较、同意和能削弱假设的反例。",
-          "question": "强烈关注一个人就是二号一对一吗？"
+          "answer": "不是。Narrative 与 Enneagram Institute 的口径有差别，前者包含亲密伙伴与活力，后者强调吸引强度。两者都不限于性或恋爱；性欲量、恋爱状态和喜欢深谈都不能单独确定亚型。",
+          "question": "一对一亚型就是性欲强，或只关心恋爱吗？"
         },
         {
-          "answer": "互惠能显示当帮助者需要支持或对方拒绝时，标准是否仍然一致。它让隐性期待变得可观察，但不表示所有关系都必须进行完全相等的交换。",
-          "question": "为什么要观察集中照顾中的互惠？"
+          "answer": "不能。新亲密、照护、危机、明确合作承诺和权力差异都可能集中注意力。需要同时检验2号式关系动机、特别回应的重复优先性，以及条件变化后仍然存在或消失的过程。",
+          "question": "非常关注一个人，就是一对一2号吗？"
         },
         {
-          "answer": "轻松接受界限、可用性可由明确协议解释，或注意力更稳定地落在资源和群体角色，都会削弱假设。依恋历史和即时安全应先被检查，并与其他关系中的相同请求进行匹配比较。",
-          "question": "哪些材料会削弱集中关注假设？"
+          "answer": "这个事件本身不能支持该结论。对方可能不需要这种帮助、想采用别的方式，或没有时间。可以直接询问并尊重答案。帮助不能自动取得特别位置，也不能使对方负有亲近、恋爱或性方面的义务。",
+          "question": "对方拒绝我的帮助，是在拒绝我吗？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-2",
-          "label": "core_type:type-2",
+          "label": "2号核心型：关怀与关系需要",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-2"
         },
         {
           "href": "/zh/personality/enneagram/type-2/instincts/self-preservation",
-          "label": "instinctual_subtype:type-2/self-preservation",
+          "label": "2号自保亚型：生活照料与支持",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-2/instincts/social",
-          "label": "instinctual_subtype:type-2/social",
+          "label": "2号社群亚型：贡献与群体位置",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-2/social"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "不同副型传统对吸引、追求、选择性和反型表现的说法并不一致。每次只检验一个集中关注命题，让拒绝、互惠和较平静的事件能够修订假设。",
-          "key": "countertype_variation",
-          "title": "先承认强度描述有差异"
+          "body_md": "[Narrative](https://www.narrativeenneagram.org/instinctual-subtypes/)的 one-to-one 包括亲密伙伴与活力；[Enneagram Institute](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)的 sexual/attraction 强调吸引强度。两者有交集而非完全同义，均不限于性或恋爱。\n\n因此，本页不会把所有深谈、亲密友情或强烈兴趣自动合并成同一种本能。先确定自己想解释的是长期亲近、两人之间的特别回应，还是某种吸引与充满活力的投入，再检验具体过程。性欲量、是否恋爱、是否喜欢独处，都不能代替这个区分。\n\n传统认为三种本能关注并存。一个人可以珍惜某段关系，同时重视生活保障和群体归属。本页只提供一对一2号的观察假设，不决定其他关注的强弱，也不决定关系应不应该继续。",
+          "key": "which_one_to_one",
+          "title": "先分清“一对一”在说什么"
         },
         {
-          "body_md": "这个传统组合把二号的需要与连接关注，同一对一标签下集中于某段关系的精力放在一起。高可用性也可能来自依恋、吸引、照护、旧冲突、危机、责任不等或明确承诺。",
-          "key": "traditional_hypothesis",
-          "title": "提出集中连接假设"
+          "body_md": "[Enneagram Institute 的2号介绍](https://www.enneagraminstitute.com/type-2/)以爱与被需要感描述核心型。[Narrative 的一对一2号描述](https://www.narrativeenneagram.org/instinctual-subtypes/)关注借细致回应争取选定之人的注意。\n\n可以研究的具体循环是：注意到某个人的情绪或兴趣，投入有针对性的支持，从对方的反应感到被重视，随后越来越需要确认自己的特别位置。细致回应本身可以很有价值：记住对方正在做的事、给出合适的鼓励、共同投入一个有活力的项目，都能帮助人感到被理解。\n\n过用时，特别关照可能附带未说明的独占期待。对方与别人合作、需要安静或没有立即回复，被解释为自己不再重要。这样的反应需要本人确认和事件支持；不能从热情、吸引力或嫉妒单独推出亚型，更不能把施压说成关系必需品。",
+          "key": "particular_response",
+          "title": "关怀怎样变成“我对你特别重要”"
         },
         {
-          "body_md": "匹配比较二号一对一与实际舒适时，可看注意力先到某段关系还是资源照顾；再与社群比较，观察是否先争取群体中的有用位置。请求、资源和风险应尽量一致。",
-          "key": "matched_comparison",
-          "title": "匹配比较关系、舒适和群体角色"
+          "body_md": "以下是原创情境。若言与朋友准备一场工作坊，常记得朋友最在意的细节，及时给予鼓励，两人一起做事很有活力。朋友后来约另一位成员讨论，并说今晚不方便聊天。若言仍发去多条关心信息，最后说：“我这样支持你，你怎么还需要别人？”\n\n若若言明确承认，自己希望这些支持保证两人之间独特的位置，那么一对一2号解释得到具体支持：关怀与特别回应绑在一起。可观察代价是，在对方已经说明时间边界后继续追问，或把接受其他帮助当成关系威胁。\n\n如果朋友违背了原有排他合作协议，争议也可能来自明确承诺；应先核对协议是否存在、是否合理、双方是否仍同意。若朋友临时出现急迫风险，集中关心也可能是必要照护。在这些条件下，不应把所有急迫投入都归为亚型。\n\n对方不方便聊天，只能说明当时的可用性；它本身不能证明拒绝这段关系。若言也可以表达失落并协商后续时间，同时接受对方有其他朋友和合作选择。",
+          "key": "a_collaborator_needs_space",
+          "title": "一位合作者需要空间时"
         },
         {
-          "body_md": "一对一在此是传统观察词。它不描述身体机制，也不讨论神经组织、恒定强度或关系适配。类型语言不能证明吸引、同意、安全，也不能决定谁应继续一段关系。",
-          "key": "instinct_boundary",
-          "title": "把同意和安全放在标签前"
+          "body_md": "朋友在工作坊前说：“我最近太累，不知道能不能来。”一对一2号解释可能先提出两人一起完成一个环节，并特别留意朋友是否还愿意回应这份联结。自保2号解释可能优先饭食、休息、接送与可靠照料；社群2号解释可能优先调整角色、协调替补，并维持朋友在团队中的位置。\n\n这些帮助都可以发生在私下。区分时，可问：“如果对方休息充分、团队也接纳他，但不再特别找我，我还觉得哪里没有解决？”若答案主要指向生活保障，就不宜坚持一对一优先；若担心的是退出集体后的归属，社群解释可能更贴近。答案可以混合，也可以因情境而变化。\n\n还要避免把强烈投入误认成同一核心型。[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)区分2号的他人需要关注与4号的自我感受关注。对应这个例子，可以观察自己主要在调整什么：努力成为对方需要的人，还是希望自己的独特感受被理解。两种愿望可以同时存在，必须靠跨事件的材料进一步区分。",
+          "key": "three_ways_to_help",
+          "title": "同样关心一个人，优先解决的可能不同"
         },
         {
-          "body_md": "新亲密、旧冲突、照护职责、分工不等、权力、反复越界或即时风险，都可能让注意力集中到一个人。应比较其他关系和风险下降后的表现。",
-          "key": "alternative_environment",
-          "title": "检查依恋、权力和危机"
+          "body_md": "在一段安全、双方愿意沟通的关系里，选一个小请求，例如：“我想周末和你一起做这件事，你愿意吗？不方便也可以告诉我。”明确请求之后，按约定等待，接受对方提出其他时间或拒绝。不要故意冷落、制造竞争或反复试探忠诚。\n\n复盘时记录请求、对方明确说出的安排、自己随后做了什么，以及哪些结论其实没有被对方表达。观察想靠近的愿望能否直接提出，是否需要先提供大量帮助，才能觉得自己有资格要回应。这个练习用于改善沟通，不要求双方等量回报每一项付出。\n\n新关系、依恋经历、危机、照护责任、分工不等与权力差异都可能集中注意力。比较较平静的时期和其他关系，优先处理真实失约、负担或安全问题。若互动有威胁或报复，就不适合用减少联系来做观察实验。\n\n若在多段可比、稳定的关系中，特别回应并非反复优先事项，投入主要跟随明确照护协议或即时任务，就应撤回一对一优先的假设。接受拒绝只会削弱“用关怀索取独占回应”的具体解释，不会单独否定整个亚型；没有施压也不能被解释成施压更隐蔽。",
+          "key": "ask_without_claiming",
+          "title": "表达想靠近的愿望，给回应留下选择"
         },
         {
-          "body_md": "检验二号一对一互惠界限反例，可以寻找轻松接受拒绝、可用性完全随明确协议变化，或匹配情境长期优先实际舒适和群体贡献的事件。",
-          "key": "counterexample",
-          "title": "用互惠界限制造反证"
-        },
-        {
-          "body_md": "量表特定副型证据不支持关系适配、吸引、同意或关系质量结论。直接沟通、自主、安全和环境解释始终优先。",
-          "key": "evidence_boundary",
-          "title": "限制关系推断"
-        },
-        {
-          "body_md": "持续天数: 4\n\n情境: 选择一段双方同意复盘的亲近关系，再选时间和责任相似的实际请求与群体请求进行匹配比较。\n\n可观察信号: 记录谁的需要最急迫、可用时间如何协商、界限是否被接受，以及互惠需要是否直接说出。\n\n本页特定信号: 在底层请求相近时比较集中关注、实际舒适和群体有用三种优先级。\n\n替代解释: 逐项检验依恋、吸引、照护职责、分工不等、旧冲突、权力、越界和危机。\n\n复盘问题: 找出一次明确协议比集中关注更能解释可用性的事件，说明副型假设应如何改变。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "逐项检验依恋、吸引、照护职责、分工不等、旧冲突、权力、越界和危机。",
-            "context": "选择一段双方同意复盘的亲近关系，再选时间和责任相似的实际请求与群体请求进行匹配比较。",
-            "duration_days": 4,
-            "observable_signal": "记录谁的需要最急迫、可用时间如何协商、界限是否被接受，以及互惠需要是否直接说出。",
-            "page_specific_signal": "在底层请求相近时比较集中关注、实际舒适和群体有用三种优先级。",
-            "reflection_prompt": "找出一次明确协议比集中关注更能解释可用性的事件，说明副型假设应如何改变。"
-          },
-          "title": "观察练习"
+          "body_md": "一对一亚型与翼是不同解释层。2号的1翼或3翼讨论相邻风格，一对一讨论关系注意力的领域；不能用第二高核心型分数决定亚型，也不能凭职业或名人类比判断。\n\n27亚型和“反型”名称属于学派传统，不是可重复的科学诊断、已证实的神经机制或关系适配结果。外观不符合时，应修改具体假设，不应认定对方隐藏了更强的本能。任何标签都不能证明双方同意、保证吸引或替代对关系质量的实际判断。\n\n[Hook 等人的2021年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告了混合的信度与效度证据。本页的原创情境与练习不构成27亚型或费马题本验证；特定量表研究不能自动支持费马评分、个体分类或伴侣匹配。\n\n可先读[2号核心型](https://www.fermatmind.com/zh/personality/enneagram/type-2)，再比较[2号自保亚型](https://www.fermatmind.com/zh/personality/enneagram/type-2/instincts/self-preservation)，看自己反复希望获得的是特别回应，还是稳定的相互照料。暂时无法区分时，可以把假设留在未定状态。",
+          "key": "scope_and_next_reading",
+          "title": "特别联结不能替代关系事实"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-2/instincts/one-to-one",
       "source_hash": "51008cd4c777ffa03baafd38585efb2f4116258f199519e1e598e67f1463fe24",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "二号一对一副型是传统的“类型 × 本能”假设，观察二号式需要与连接是否集中在一段关系，通过专注、可用性和直接参与表现。观察二号一对一集中关注，必须记录同意、拒绝、互惠和其他关系中的可比事件。",
-      "title": "二号一对一副型：集中关注、可用性与互惠"
+      "summary": "一对一2号假设关注的是：2号式关怀是否反复集中在选定的人与特别回应上。它可能带来细致理解、鼓励和关系活力；当付出被用来保证独特位置时，也可能把对方的自主误读为拒绝。",
+      "title": "2号一对一亚型：特别联结、吸引与回应"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "390307a32c3fee42853c30d93673b2e93c2140c162918df91aec627cd93837ac"
+  "source_content_sha256": "460e1d55d6ae24095daf1ee876a30eeee4be0e70b36c0661b28d9ddf8b6ec5aa"
 }

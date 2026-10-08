@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/positive-emotions",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "positive-emotions",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Expectation and felt positive affect are different.",
-          "question": "Does weaker Positive Emotions mean pessimism?"
+          "answer": "Not by itself. The facet includes experience and expression, but the two can differ. Ask about felt enjoyment, context and expression habits. A face alone cannot establish someone's usual positive feelings.",
+          "question": "Does rarely smiling mean low Positive Emotions?"
         },
         {
-          "answer": "Not necessarily. Realism requires evidence and judgment, not a low level of joy.",
-          "question": "Are people with stronger Positive Emotions unrealistic?"
+          "answer": "No. Life satisfaction concerns how you evaluate your life; positive emotions concern what you feel. You can feel content with your choices without frequent exuberance, or enjoy a moment while wanting major changes in your life.",
+          "question": "Is Positive Emotions the same as life satisfaction?"
         },
         {
-          "answer": "Attention and expression practices can change behavior. This page does not promise a trait, happiness, or clinical outcome.",
-          "question": "Can Positive Emotions be cultivated?"
+          "answer": "It does not establish their expectations. Optimism asks what they believe will happen. Enjoyment can coexist with cautious predictions, and a calm person can expect a good outcome. Ask about expectations directly.",
+          "question": "Does stronger Positive Emotions make someone more optimistic?"
         },
         {
-          "answer": "No. Forced positivity dismisses valid experience; this facet describes a tendency in felt and expressed affect.",
-          "question": "Is strong Positive Emotions the same as forced positivity?"
+          "answer": "No. A personality facet is not a diagnosis, and a high position does not rule out distress. Persistent difficulties, loss of interest or disrupted daily functioning are reasons to seek qualified assessment independently of the facet.",
+          "question": "Can a low position diagnose depression?"
         },
         {
-          "answer": "They are different questions. A person may experience frequent joy with either stable or variable overall emotion.",
-          "question": "How is emotional volatility related to Positive Emotions?"
+          "answer": "A deliberate expression may change how a moment is communicated, but it cannot establish trait change. Keep actual feelings separate from the display and distinguish intentional practice from spontaneous behavior. There is no need to force a positive report.",
+          "question": "Will practicing cheerful behavior change my personality?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Positive Emotions concerns readiness to experience and express joy, enthusiasm, amusement, and delight. It is not a happiness score, optimism, gratitude, mental health, emotional stability, or proof that life circumstances are good.\n\n“Positive Emotions within Extraversion: readiness for joy and enthusiasm” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Positive Emotions is an Extraversion facet in the NEO/IPIP-NEO vocabulary used on this site. It concerns a tendency to experience and express joy, amusement and enthusiasm. Some people readily feel and show delight; others feel it without an obvious display; still others experience many ordinary moments as neutral.\n\nThe corresponding IPIP scale, Cheerfulness, includes both enjoyment and outward expression. It should therefore not be reduced to either a private mood alone or a count of smiles. To understand a person, ask about both.\n\nStronger, weaker and intermediate positions describe continuous differences. They are not happy, unhappy and neutral personality types. One lively evening, subdued photograph or serious conversation cannot establish the person's usual pattern.",
+          "heading": "Enjoyment has an inside and an outside",
           "key": "section-01-537faa8f19",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may register and display positive affect readily. A weaker tendency may experience satisfaction quietly, less frequently, or with lower outward intensity. Both can value life, act realistically, and experience the full emotional range.",
-          "heading": "Precise Definition",
+          "body": "Life satisfaction is an evaluation of how your life is going. Positive feeling is an experience. You may approve of your choices without often feeling exuberant, or enjoy a moment while believing that important parts of your life need attention.\n\nOptimism concerns expectations about what will happen. Someone can enjoy an activity while expecting a difficult outcome. Someone else may calmly expect success without feeling excited. Pace and interpersonal warmth ask different questions again: being busy or welcoming does not disclose how much enjoyment you feel.\n\nFrequent positive feeling does not establish low distress, emotional stability or good mental health. Infrequent visible joy does not diagnose depression. A personality facet, a recent emotional state and a clinical condition require different evidence; a high position cannot rule out a problem either.",
+          "heading": "What a cheerful moment does not settle",
           "key": "section-02-7ba3ed9fcf",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Positive Emotions belongs to [Extraversion](/en/personality/big-five/extraversion), reflecting positive approach-related affect in this vocabulary.",
-          "heading": "Parent Domain",
+          "body": "During a casual board-game evening, Rowan looks attentive but rarely laughs. A friend assumes Rowan is not enjoying it. Later, Rowan says that solving a cooperative puzzle was delightful and describes replaying the moment on the journey home. That account matters even though the enjoyment was not very visible.\n\nThere are still questions worth asking. Was the enjoyment present during play or mainly afterward? Did Rowan want to share it? Was concentration, unfamiliar company or personal expression style relevant? The answer may concern expression in that setting rather than a broad lack of joy.\n\nThe reverse can happen too. Someone may smile throughout an event to be courteous while feeling little enjoyment. Observed behavior is useful, but it does not authorize you to fill in the person's private feelings.",
+          "heading": "Read the person's account, not only the display",
           "key": "section-03-ce42490e90",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Positive Emotions versus optimism:** Optimism concerns expectations about future outcomes; this facet concerns felt positive affect.\n- **Positive Emotions versus Neuroticism:** Neuroticism concerns unpleasant emotional reactivity. Positive and negative affect are not simple opposites.\n- **Positive Emotions versus Warmth:** [Warmth](/en/personality/big-five/facets/warmth) concerns interpersonal connection; joy can arise alone.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "A workable observation might begin with: 'In relaxed leisure settings with familiar people, I usually express enjoyment spontaneously.' This is a hypothesis about expression. It is not a mental-health assessment or a complete description of the facet.\n\nSuppose you often share enjoyable moments during games. On one comparable evening, time and company are available, but you do not express enjoyment. Your contemporaneous note says you felt pleased and preferred to keep it private. That is a natural exception to the expression hypothesis, not evidence that enjoyment was absent.\n\nIf another evening brings neither enjoyment nor expression, record those separately. If the usual leisure activity never occurs, or there is no appropriate opportunity to express a feeling, record the missing opportunity. Silence, absence of enjoyment and absence of opportunity must not become one category.\n\nOne exception is compatible with 'usually.' Repeated differences between group and one-to-one settings may justify narrowing the description. Missing feeling reports or incomparable settings justify leaving it undecided.",
+          "heading": "Test a narrow description of expression",
           "key": "section-04-59009e2b0b",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Positive Emotions may appear as visible laughter, quick enthusiasm, celebration, and noticing enjoyable moments. Weaker tendency may appear as restrained expression, calm satisfaction, or neutral tone. Culture, depression, grief, medication, safety, and current events can alter expression and require separate evidence.",
-          "heading": "Behavioral Cues",
+          "body": "Notice a few naturally occurring occasions involving activities you ordinarily like. Record what you actually felt: pleasant, neutral, unpleasant or mixed. When enjoyment was present, note when it appeared, how it seemed to last and whether you expressed it. There is no requirement to produce a happy moment each day.\n\nInclude occasions when an opportunity existed but no spontaneous expression occurred, and occasions with no relevant opportunity. Keep the feeling report alongside the behavior. If you cannot recall the feeling, write that down rather than substituting a smile. Recent events, tiredness and social expectations can be recorded as context without assuming they caused the outcome.\n\nYou may later try communicating one real enjoyable moment more explicitly. For example, tell a friend which part of the game you liked. Mark this as a deliberate attempt, separate from natural expression. Check whether the message was understood and whether it felt comfortable. It is a communication experiment, not evidence of increased happiness or trait change.\n\nRetain the narrow hypothesis if comparable natural occasions repeatedly support it; narrow it if the pattern belongs to particular relationships or settings; set it aside if opportunities or recollections are inadequate. Questions about felt enjoyment still require your own experience reports.",
+          "heading": "Keep a record that permits neutral answers",
           "key": "section-05-7b7b793593",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may be expressive with friends and restrained at work. A period of loss can reduce positive affect without defining personality. Some cultures reward energetic display; others value moderation. Do not infer an internal state solely from facial style.",
-          "heading": "Contextual Differences",
+          "body": "A facet page cannot assess a clinical condition. Persistent distress, a marked loss of interest or difficulty managing daily life deserves attention in its own right. You can consult a qualified mental-health professional or health care provider without first deciding where you belong on a personality continuum.\n\n[NIMH's guidance on seeking help](https://www.nimh.nih.gov/health/publications/my-mental-health-do-i-need-help) focuses on symptoms and their effects on daily functioning. Its service numbers are U.S. resources; use appropriate services where you live. A reflection exercise should not delay seeking support.\n\nIn everyday relationships, allow positive and difficult feelings to be described together. Enjoying one moment does not mean a problem has disappeared, and a person does not owe others a cheerful display.",
+          "heading": "Give distress its own route to support",
           "key": "section-06-9b59e16297",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Showing delight readily.\n- Sharing enthusiasm with others.\n- Recovering attention toward enjoyable cues.\n- Minimizing legitimate concern through premature positivity.\n- Being expected to maintain group morale.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP mapping](https://ipip.ori.org/newNEO_FacetsTable.htm) links Cheerfulness with NEO Positive Emotions. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) and [four-item version](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) show differences in item coverage. These materials support the vocabulary, not a conclusion about your health, happiness or unmeasured facets.\n\nRead [Extraversion](/en/personality/big-five/extraversion) for the broader dimension. [Warmth](/en/personality/big-five/facets/warmth) addresses interpersonal connection, [Activity](/en/personality/big-five/facets/activity) addresses pace, and [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking) addresses the appeal of intensity. The [30-facet guide](/en/personality/big-five/facets) helps place those questions beside one another.",
+          "heading": "The terminology and where to read next",
           "key": "section-07-6b0bf62c56",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Experiencing satisfaction quietly.\n- Using a measured emotional tone.\n- Remaining serious during positive events.\n- Being misread as pessimistic or disengaged.\n- Needing deliberate attention to small sources of enjoyment.",
-          "heading": "Possible Expressions When Weaker",
-          "key": "section-08-44a6d824eb",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Positive Emotions can support shared celebration and access to rewarding cues. Possible costs include pressure to perform positivity or overlooking mixed feelings. Weaker Positive Emotions can support emotional moderation and realism in tone; possible costs include low visibility of appreciation. Neither level predicts well-being or diagnosis.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-7ef6980177",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A facilitator laughs readily and celebrates small team wins, yet still records risks and disappointment. Positive affect coexists with realistic evaluation.",
-          "heading": "An Original Case",
-          "key": "section-10-29c9ee1d80",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A reserved parent rarely shows exuberance but reports steady contentment and acts with consistent care. Low outward intensity is not proof of unhappiness.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-9496d273fd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How quickly do positive cues change your felt state?\n2. How much of joy is internal versus visible?\n3. Do others accurately read your appreciation?\n4. When does positivity help, and when does it silence concern?\n5. How have grief, stress, culture, or role changed expression?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-a433fa74b4",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For seven days, record one pleasant moment and its intensity without forcing gratitude or denying other emotions. If you express strongly, also name one mixed or difficult feeling. Seek appropriate support for persistent distress rather than interpreting it through a trait page.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-b4894af462",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Warmth](/en/personality/big-five/facets/warmth), [Gregariousness](/en/personality/big-five/facets/gregariousness), [Assertiveness](/en/personality/big-five/facets/assertiveness), [Activity](/en/personality/big-five/facets/activity), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking).",
-          "heading": "Continue Reading",
-          "key": "section-14-a0020ccaad",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Positive Emotions concerns a tendency to experience and express joy, amusement and enthusiasm. Felt enjoyment, visible expression, life satisfaction and mental health need separate attention.",
+        "title": "Positive Emotions: Feeling Enjoyment and Showing It"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/positive-emotions",
-      "source_hash": "92a99c8493d125ceddf0c9b0a64bb344ab545c83ef1dfd7897b7c0723df975df",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Positive Emotions concerns readiness to experience and express joy, enthusiasm, and amusement. It is not a happiness score, optimism, mental health, or emotional stability.",
-      "title": "Positive Emotions: Readiness to Experience and Express Joy"
+      "source_hash": "66b2ba59feba0c8779a503c2e947cba19597667e9c96ec5efc5bb080d6332972",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Positive Emotions concerns a tendency to experience and express joy, amusement and enthusiasm. Felt enjoyment, visible expression, life satisfaction and mental health need separate attention.",
+      "title": "Positive Emotions: Feeling Enjoyment and Showing It"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E6-positive-emotions-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "E6-positive-emotions-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E6-positive-emotions-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E6-positive-emotions-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "cf6341b71d5710be0f0d32a53f1ca0516be9716cf87f2b6d5f1fe7f6b0eb2679"
+  "source_content_sha256": "574461ce02fe909746d4c070d3be2cd829949edb0f19da97a05caeaee28581fc"
 }

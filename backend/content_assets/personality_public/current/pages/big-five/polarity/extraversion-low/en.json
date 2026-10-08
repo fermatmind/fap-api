@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/extraversion-low",
@@ -20,30 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "extraversion-low",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Preference for lower stimulation is not a reason to avoid useful or valued relationships. Choose formats and pacing that work.",
-          "question": "Does low Extraversion mean I should avoid social contact?"
+          "answer": "The result does not prescribe avoidance. Consider whether you want the contact, what the event requires, and whether a workable format exists. Important relationships and a preference for less group activity can coexist.",
+          "question": "Should I avoid social events because my result is low?"
         },
         {
-          "answer": "Prepare examples, request structure when possible, practice aloud, and protect transition time. Skill can be trained independently of trait preference.",
-          "question": "How can I handle a socially intense setting such as an interview?"
+          "answer": "No. Listening needs evidence of understanding and an appropriate response. Speaking less is one visible behavior; it does not show what you understood or how the other person experienced the conversation.",
+          "question": "Does low Extraversion mean I am a better listener?"
         },
         {
-          "answer": "This score cannot establish or suggest an autism diagnosis. Clinical and neurodevelopmental questions require appropriate assessment.",
-          "question": "Is low Extraversion related to Asperger syndrome?"
+          "answer": "Treat the wish for company and the fear as separate information. The score cannot establish the cause. If the fear is distressing or restricts daily life, seek an appropriate professional assessment rather than using a personality label to dismiss it.",
+          "question": "What if I want company but fear negative judgment?"
         },
         {
-          "answer": "You can practice specific approach and communication behaviors. This page does not promise a trait change or require one.",
-          "question": "Can I make myself more extraverted?"
+          "answer": "No. An Extraversion score cannot provide or exclude those diagnoses. Questions about a neurodevelopmental condition require an assessment suited to that concern.",
+          "question": "Can a low score identify autism or another neurodevelopmental condition?"
+        },
+        {
+          "answer": "Yes. Learn the format, prepare relevant examples, and rehearse explaining one clearly. Check whether you answer the actual question. This is preparation for a task, not evidence of a personality change or a guarantee of the outcome.",
+          "question": "Can I prepare for an interview without becoming more extraverted?"
+        },
+        {
+          "answer": "One enjoyable event cannot determine the accuracy of a broad result. It can be a useful natural exception to a specific behavior description. Compare relevant opportunities and record your actual wishes and feelings without turning one event into a new identity.",
+          "question": "Does enjoying a group event invalidate my result?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +85,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Low Extraversion may suggest that lower-stimulation settings, selective relationships, and inward processing are often more comfortable. It does not imply dislike of people. The useful distinction is between preference, learned skill, anxiety, and environmental overload.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Low Extraversion: preference for quiet settings, deeper one-to-one interaction, and an inner world” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A low Extraversion label places your result toward the lower part of that assessment's scale. It can indicate less endorsement of the participation, expression, activity, or stimulation content it measures. It does not establish that you dislike people, lack important relationships, or should avoid contact.\n\nRead the scoring explanation before interpreting the location. A raw score, a score transformed onto a 100-point scale, and a percentile are different outputs. The last requires a specified reference group. Comparisons also need compatible versions, languages, and scoring methods. This page cannot supply your cutoff, percentile, or measurement uncertainty.\n\nA result is not an instruction about how much interaction to tolerate. Whether you want company, enjoy it, or feel tired afterward should be asked separately. Calling solitude restorative can describe an experience without proving an energy mechanism.",
+          "heading": "What a lower result can describe",
           "key": "section-01-30eac98845",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may prepare before speaking, prefer small groups, maintain fewer but deeper interactions, and protect uninterrupted focus. Warmth can be high even when Gregariousness is low. The broad range does not require every facet to be low.",
-          "heading": "What This Range Specifically Means",
+          "body": "This site uses the NEO/IPIP-NEO terms Warmth, Gregariousness, Assertiveness, Activity, Excitement Seeking, and Positive Emotions. They distinguish different aspects of Extraversion. The [official IPIP item key](https://ipip.ori.org/newNEOFacetsKey.htm) presents separate scales for related constructs; it does not provide a way to recover your facet scores from a domain label.\n\nYou could prefer less group contact while readily approaching a familiar person. You could enjoy participating without wanting to direct the activity. A lower total cannot identify which account fits, and unreported facets should remain unreported.\n\nIt also cannot establish a compensating set of skills. Quiet behavior does not prove careful listening. Spending time alone does not prove concentration or independence. Maintaining fewer contacts does not prove greater loyalty or depth. Evaluate those qualities through the relevant work and relationships.",
+          "heading": "Reserve does not settle the other questions",
           "key": "section-02-653e3e507a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer shyness, social anxiety, autism, loneliness, weak leadership, low confidence, or poor communication. Those concepts require different evidence. A reserved person can negotiate, teach, interview, sell, and facilitate effectively.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Consider an optional group outing. You might prefer another activity and decline without much concern. You might want to go but worry about being judged. Or you might want to go and be unable to arrange transport or care responsibilities. The same absence can have different explanations.\n\nAsk about desire, opportunity, and barriers rather than reading them from your attendance. Fear of evaluation, shyness, and a clinical anxiety disorder are not interchangeable with an Extraversion score. A lower score neither diagnoses nor rules out a clinical concern.\n\nIf fear causes ongoing distress or interferes with work, education, or relationships, seek an appropriate assessment from a qualified professional. You do not need to wait for a threshold set by a personality page. The [NIMH explanation of social anxiety](https://www.nimh.nih.gov/health/publications/social-anxiety-disorder-more-than-just-shyness) discusses these concerns and assessment; the observations here are not treatment.",
+          "heading": "Not wanting to join differs from wanting to join but holding back",
           "key": "section-03-dda268b852",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include listening before contributing, choosing written communication, enjoying solitary work, leaving crowded settings earlier, and preferring planned interaction. You may speak decisively when the topic or role is clear.",
-          "heading": "Common Behavioral Expressions",
+          "body": "In an illustrative situation, a housing committee discusses a maintenance decision rapidly. You have relevant information but seldom take the floor. The immediate question is whether the information reaches the decision, not whether your quietness is an advantage or a defect. A brief written note, a requested turn, or a scheduled follow-up may help; check what actually works for the group.\n\nIn a friendship, you can want to stay connected while declining a particular group outing. Saying that directly and proposing an alternative can clarify your intention. It cannot guarantee that the alternative suits the other person, so their response still matters.\n\nVisible participation can also occur naturally with a lower result. If you usually decline optional group outings but freely accept one under comparable conditions, that is an exception to the attendance pattern. It need not be explained away as pretending. Repeated comparable exceptions would justify revising how broadly you describe that pattern.",
+          "heading": "Make needed communication possible in a workable format",
           "key": "section-04-699d8b09bf",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, quiet focus may support analysis and preparation. In learning, private rehearsal may precede discussion. In relationships, one-to-one depth may matter more than frequency. Under pressure, reducing input can be a coping choice rather than withdrawal from people.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Use a provisional hypothesis such as: 'When I have time, want contact with the people involved, and can freely decline, I usually turn down optional group outings.' Keep the target as accepting or declining this kind of invitation. Being quiet at work or spending an evening alone is not the same behavior.\n\nFor natural invitations, record format, duration, familiarity, practical availability, and your decision. Separately record whether you wanted to attend, any fear, tiredness, or competing preference. Declining does not tell you which feeling was present.\n\nA freely accepted outing is a natural counterexample to the hypothesis. A freely declined outing fits it. No invitation, unavailable transport, or a conflicting responsibility means no suitable opportunity; it is not evidence of a choice to avoid company. No counterexample found is also inconclusive when invitations were scarce or all involved the same setting.\n\nKeep a limited preference description if chosen declines recur and your recorded wishes fit that account. Narrow it if duration, noise, or unfamiliarity describes the pattern more accurately. Set the preference explanation aside if wanted contact was mainly blocked by fear or practical constraints. This can clarify what needs attention without validating a personality score.",
+          "heading": "Record choice, missed opportunities, and exceptions",
           "key": "section-05-15a9629b5c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include concentration, listening, thoughtful contribution, selective relationship investment, and comfort working independently. These are tendencies rather than guaranteed abilities, and visibility may still need deliberate support.",
-          "heading": "Possible Strengths",
+          "body": "If you want a connection but not the current group format, propose a shorter meeting or a call with a clear purpose and a negotiable duration. Mark it as a planned change. It is a test of a different arrangement, not a natural observation under the original conditions.\n\nRecord whether you made the invitation, whether the other person was available, whether the contact met its purpose, and your own enjoyment, fatigue, and concern. Their unavailability is not evidence that you lack skill. Keep the arrangement if it meets both people's needs; adjust its timing or format if necessary; stop if it does not address the problem.\n\nThe goal can be one needed conversation or one valued relationship. A lower score does not prescribe a social quota, and a successful attempt does not demonstrate that your trait changed.",
+          "heading": "Try a useful contact, with a specific outcome in mind",
           "key": "section-06-a88bb8b855",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include undercommunicating progress, delaying outreach, being overlooked in fast discussions, or letting useful relationships fade through too little contact. Environments that reward constant performance can add avoidable strain.",
-          "heading": "Possible Costs",
+          "body": "A lower result can point toward less of the measured Extraversion content, while a higher result points toward more. Neither location establishes ability or value. The middle also does not guarantee equal comfort with group activity and solitude.\n\nUse the [Extraversion overview](/en/personality/big-five/extraversion) for the broader definition. Read [high Extraversion](/en/personality/big-five/extraversion-high) for questions about participation and pacing, or [mid-range Extraversion](/en/personality/big-five/extraversion-mid) for the different explanations a middle result leaves open. The [facet guide](/en/personality/big-five/facets) can clarify narrower concepts without creating personal results your assessment did not report.",
+          "heading": "Compare the ranges without adding a hierarchy",
           "key": "section-07-a6afc13f9e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [mid-range Extraversion](/en/personality/big-five/extraversion-mid), preparation and low stimulation may matter more consistently. Compared with [high Extraversion](/en/personality/big-five/extraversion-high), frequent interaction may carry a higher recovery cost. This is not a deficit tier.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-d43e20df0c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Before an interview, you request the agenda, prepare concise examples, and arrive early for a quiet transition. During the conversation you answer clearly and ask focused questions. Preparation supports social performance without requiring an extraverted identity.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-678b359852",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score low and lead a lively class every week. Expertise, structure, and a meaningful role can support visible expression. The recovery afterward may still reveal the broader preference.",
-          "heading": "A Counterexample",
-          "key": "section-10-acc9268a8f",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which interaction formats allow your best contribution?\n- When does preparation help, and when does it become avoidance?\n- How do you make progress visible?\n- Which facet differs from the domain range?\n- What kind of recovery restores attention?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-007e10dc6d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one useful relationship and initiate a short, structured contact this week. Set the purpose and duration in advance. Record whether the structure reduced friction without forcing excessive stimulation.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-726cb8fcb7",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion), compare [high](/en/personality/big-five/extraversion-high), [mid-range](/en/personality/big-five/extraversion-mid), and [low Extraversion](/en/personality/big-five/extraversion-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-ca31a9b62c",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A lower Extraversion result can indicate less approach toward the interaction, activity, or stimulation measured by an assessment. It cannot establish social inability, deeper relationships, superior focus, or a diagnosis.",
+        "title": "Low Extraversion: Distinguishing Preference, Connection, and Barriers"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/extraversion-low",
-      "source_hash": "76a5e2efe10756501778e63cd130ace6323680ff87c8ffde4a408513431e51c7",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Low Extraversion may suggest preference for quiet settings, deeper one-to-one interaction, and inward focus. It is not shyness, social anxiety, loneliness, or poor skill.",
-      "title": "Low Extraversion: Quiet Focus and Deeper Interaction"
+      "source_hash": "3ff418014c50178c770cb05814317092d883a529759f414ba8e126d788b6c5f7",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A lower Extraversion result can indicate less approach toward the interaction, activity, or stimulation measured by an assessment. It cannot establish social inability, deeper relationships, superior focus, or a diagnosis.",
+      "title": "Low Extraversion: Distinguishing Preference, Connection, and Barriers"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "extraversion-low-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, social ability, diagnosis, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "extraversion-low-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "extraversion-low-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "extraversion-low-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "3a689e34d2c919bab784cbc072bc1908b31883d7e5603dc7b695b3599bd0bd08"
+  "source_content_sha256": "bde313a69c68e685d83791745164411c257e100186ef4ff3f46d450fafd7d082"
 }

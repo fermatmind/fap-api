@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-8/instincts/self-preservation",
@@ -23,94 +23,35 @@
       "entity_key": "type-8/self-preservation",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。照护、贫困、财产职责、无障碍、危险工作或灾害准备都可能要求物资管理。应比较条件稳定后谁继续控制权限，以及共享后是否仍保留暗中否决权。",
-          "question": "很会准备物资是否就能判断自保第八型？"
+          "answer": "不能。消费习惯、收入能力和准备行为都可能来自家庭经验、现实稀缺或工作职责。需要继续核对：资源是否反复被用来维护不受制于人的自主，以及条件稳定后这种关注是否仍然突出。",
+          "question": "很节俭、很会赚钱，或者总准备备用物资，就属于自保第八型吗？"
         },
         {
-          "answer": "写清实体或数字边界、法律责任、已知风险、被排除的人、开放条件，以及风险处理后控制是否真正放松；同时记录谁可以复核风险和修改进入规则。",
-          "question": "怎样记录领地而不先假定内在动机？"
+          "answer": "未必。共同责任需要明确约定。只有在安排已经可靠、对方也尊重边界时，仍因别人拥有影响力而反复接管，依赖与自主的解释才值得继续研究。若澄清责任就能解决问题，应采用更直接的解释。",
+          "question": "接受帮助以后仍想把事情安排清楚，是不是害怕依赖？"
         },
         {
-          "answer": "稀缺解除后采用透明预算、共享钥匙、授权他人采购，并愿意依赖另一位可靠的人，都会削弱持续物质控制解释；若遇到小失误后仍维持授权，反例更稳定。",
-          "question": "哪种资源共享会削弱自保副型假设？"
+          "answer": "不等于。九号翼是相邻类型的修饰假设，自保副型是资源与生活保障领域的关注假设。安静、沉稳或不爱社交都不能把两个概念合并，测评第二高分也不能自动确定它们。",
+          "question": "第八型九号翼是否等于自保副型？"
         }
       ],
       "framework": "enneagram",
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "选择责任接近的稀缺期与稳定期，分别记录钥匙、资金、食物、交通、储物和许可，看真实风险下降后共同治理是否扩大。",
-          "key": "matched_comparison",
-          "title": "比较资源稳定前后的控制方式"
+          "body_md": "在传统九型解释中，第八型关心自己是否会被伤害或控制，并倾向于主动维护决定权。这是核心主题；自保副型进一步问：这种维护自主的努力，是否经常集中在实际生活的资源和进入权上？可参考 [Enneagram Institute 的第八型说明](https://www.enneagraminstitute.com/type-8/)。\n\n例如，有人重视备用资金，并不主要为了显得成功，而是因为“有这笔钱，我就不必接受不合理的条件”；守住工作空间，也不只是喜欢独处，而是因为“我需要有一块不会随时被别人改变规则的地方”。这是本页提出的观察方向，不是从储蓄或空间偏好直接判型。\n\n[Narrative Enneagram 的副型介绍](https://www.narrativeenneagram.org/instinctual-subtypes/)把自保第八型的力量与物质保障联系起来。转成日常问题，可以问：当供应、住房、收入或身体精力不可靠时，我是否很快进入“先掌握实际条件”的状态？又是否容易把接受帮助理解为把自己交到别人手里？",
+          "key": "resources_and_autonomy",
+          "title": "资源为什么会与自主绑在一起"
         },
         {
-          "body_md": "传统假设认为，自主注意可能集中于供应、进入权、空间与直接满足实际需要。必须观察谁受益，以及物质稳定恢复后控制是否仍保持。",
-          "key": "traditional_hypothesis",
-          "title": "把物质控制写成暂定观察"
+          "body_md": "设想一个小团队共用工作室。供应商临时取消交货，负责采购的林立即联系替代渠道、补齐材料，并明确哪些物品可以共同使用。团队因此按时完成任务。这里的直接行动有实际作用：把等待变成可执行的办法，减少别人对不可靠供应的依赖。这个例子用于说明可能的过程，不是研究个案。\n\n问题出现在供应已经恢复后。林仍要求每笔小额采购都经自己批准，别人提出共用备用库存时，他回答：“最后还不是我来兜底。”原本有效的责任感，可能转成只有自己能够保障安全的假设。别人越没有机会参与，他越容易看到他们缺乏经验，继而继续包办。\n\n要观察的是这段循环，而不是给林贴上强硬标签：发现缺口、迅速补位、把依赖视为风险、保留决定权、他人参与减少。过度使用的代价可能包括疲惫、重复采购和合作变得被动。实际自主也需要自己的时间与精力；持续透支不能仅凭“我撑得住”来判断是否必要。\n\n同样的提供行为，也可能是温和而慷慨的。关键区别在于：提供之后，别人是否仍能表达不同需要、参与决定，并在不欠人情的条件下使用资源？",
+          "key": "provision_and_cost",
+          "title": "供给能解决问题，也可能变成全部由我决定"
         },
         {
-          "body_md": "有人可能大量提供但保留最终决定，也有人生活简朴却严守少量领地。消费水平、资产多少和外显强硬都不能直接证明功能。",
-          "key": "countertype_variation",
-          "title": "同时容纳慷慨供给与谨慎占有"
+          "body_md": "下面比较同一个工作室交货问题中的三条可能路线。它们都可以表现为联系供应商、协调伙伴或强硬谈判，因此行为相似并不奇怪。\n\n- 自保关注可能先落在材料是否够用、替代来源是否可靠、谁能进入库存，以及团队会不会因此受制于供应商。实际可用的资源恢复后，事情往往更容易放下。\n- 社会关注可能先落在谁替团队承担损失、成员有没有共同发言权，以及怎样维护大家的立场。库存补齐后，群体责任和分工问题可能仍然重要。\n- 一对一关注可能先落在重要搭档有没有与自己并肩、合作是否仍有投入和活力，以及对方改变计划是否意味着联结变了。供应问题解决，不一定就解决了关系中的在意。\n\n这些是用来比较注意力的提问，不是三个互斥的行为剧本。一个人可以同时关心物资、团队和搭档。更有信息量的是：在不同事件中，哪个问题最先抓住自己，什么变化最能让自己放松，以及事后反复回想的究竟是哪一部分。",
+          "key": "same_supply_problem",
+          "title": "同一次供应变化，三种第八型关注有什么不同"
         },
         {
-          "body_md": "这里的自保只是资源与连续性的传统注意标签，不描述身体机制。健康、营养、残障、暴力和住房危险必须依据直接事实处理。",
-          "key": "instinct_boundary",
-          "title": "只使用注意惯例而不描述身体机制"
+          "body_md": "可以结合 [Narrative Enneagram 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)继续辨别。第五型与第八型都可能维护空间和资源，但前者的传统解释更强调减少消耗、避免侵入，后者更强调直接维护自己的行动与决定权。第六型也可能积极准备和对抗风险，不过需要核对：自己主要在寻找可信安排和确定性，还是在抵抗由别人掌握自己的条件？这些区别都要结合多次经历，不能靠一次反应速度区分。\n\n现实条件常常更有解释力。收入不稳、照护任务、住房限制、失窃经历、无障碍需求，或正式承担采购责任，都可能要求谨慎管理资源。即使不喜欢这种管理，一个人也可能因为职责而坚持。\n\n如果限制只出现在确有风险的事项中，风险解除后就能开放资源，现实需要可能足以解释行为。如果长期观察发现，自己并不特别关注资源自主，反而持续在意共同立场或特定关系中的投入，应降低乃至撤回自保副型假设。不要把不符合解释成“隐藏得更深”。",
+          "key": "other_reasons_for_boundaries",
+          "title": "守住资源，不一定是自保第八型"
         },
         {
-          "body_md": "如果稳定资源带来共享钥匙、透明预算、采购授权、灵活空间，并能依赖另一位可靠的人而不保留否决权，就应降低物质控制假设。",
-          "key": "counterexample",
-          "title": "用危险解除后的共享权限检验"
+          "body_md": "选择一项金额有限、失败后可以纠正、不会影响基本生活或重要工作的共同采购。不要拿房租、必要照护或危险岗位做实验。先说清预算、最低要求、谁负责执行，以及什么客观情况需要重新协商。\n\n让另一位可靠伙伴在约定范围内决定。记录自己最初担心的事情：实际缺货、对方不了解需要、欠人情，还是别人有权改变安排本身？执行中如果想接管，先说明新出现的事实，而不是把自己的不舒服当作风险证据。伙伴可以拒绝额外要求，也可以提出修改。\n\n复盘两件事：采购有没有满足需要；对方拥有决定权时，自己是否仍感到必须收回。如果客观条件已满足，却反复因为别人参与而感到受制，这支持继续研究“资源与自主被绑在一起”的解释，但仍不足以确定副型。\n\n如果明确职责和可靠供给就能消除紧张，应优先采用职责或供应解释。愿意共享决定权，反驳的是“必须持续独占控制”的具体说法，并不自动否定任何第八型理解；如果资源主题在其他相似、稳定情境中也不突出，则可以撤回本页的副型假设。出现实际损失、责任不清或对方不愿参与时，停止尝试，恢复双方同意的安排。",
+          "key": "small_shared_purchase",
+          "title": "用一笔小额共同采购，观察控制是否必要"
         },
         {
-          "body_md": "贫困、被驱逐风险、失窃、照护、无障碍、危险岗位、灾后恢复和法律保护不平等，都可能让资源控制成为必要适应。",
-          "key": "alternative_environment",
-          "title": "把稀缺与安全事实放在副型之前"
-        },
-        {
-          "body_md": "该副型不能评价韧性、理财、健康、强硬程度或财产权。量表特定证据不能证明副型结构普遍存在或跨文化等价。",
-          "key": "evidence_boundary",
-          "title": "不推断生存能力或普遍本体"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 五天内比较一次资源受限决定与一次供应充分决定，尽量保持家庭责任、参与者和任务结果一致。\n\n可观察信号: 列出钥匙、资金、食物、交通、储物、许可的控制者，风险证据、共享请求与资源改善后释放的权限。\n\n本页特定信号: 测量稀缺与即时危险明确降低后，实际控制是否仍以相同强度持续。\n\n替代解释: 核对被驱逐风险、失窃、无障碍、照护、危险工作、灾后恢复和法律保护差异。\n\n复盘问题: 指出最能解释控制的资源变化；若稳定后出现共享，就降低副型解释权重。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "核对被驱逐风险、失窃、无障碍、照护、危险工作、灾后恢复和法律保护差异。",
-            "context": "五天内比较一次资源受限决定与一次供应充分决定，尽量保持家庭责任、参与者和任务结果一致。",
-            "duration_days": 5,
-            "observable_signal": "列出钥匙、资金、食物、交通、储物、许可的控制者，风险证据、共享请求与资源改善后释放的权限。",
-            "page_specific_signal": "测量稀缺与即时危险明确降低后，实际控制是否仍以相同强度持续。",
-            "reflection_prompt": "指出最能解释控制的资源变化；若稳定后出现共享，就降低副型解释权重。"
-          },
-          "title": "观察练习"
+          "body_md": "三本能在这些传统里指不同生活领域的关注，并不是三类人各自缺少其余两种需要。翼型讨论相邻类型的修饰，第八型的翼是第七型或第九型；本能副型讨论关注落在哪里。这是两个解释层，不能用第二高分把它们互相替代。\n\n名称也有学派差别。Narrative 的 one-to-one 包括重要伙伴、亲近朋友与生命活力；[Enneagram Institute 的 sexual/attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更突出吸引与强度。两者有交集，不能完全互换，也都不只涉及性或恋爱。\n\n27 副型以及某些学派所说的“反型”，属于传统解释。它们不是可重复的科学诊断，也不是已经证实的神经机制。[Hook 等人的 2021 年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告：104 个独立样本中的信度与效度证据有好有坏。这不构成对费马题本、分数或本页副型解释的验证。本页情境和尝试是帮助反思的建议，不是经过验证的判型程序。\n\n继续阅读可先回到 [第八型核心]( /zh/personality/enneagram/type-8 )，再对照 [第八型社会副型](/zh/personality/enneagram/type-8/instincts/social)与 [第八型一对一副型](/zh/personality/enneagram/type-8/instincts/one-to-one)。比较哪个解释更符合完整经历，也保留“目前无法判断”的结论。",
+          "key": "scope_and_reading",
+          "title": "把副型当作可修正的理解，再继续阅读"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-8/instincts/self-preservation",
       "source_hash": "9c0f9b213f6af9e0e3a5345bb7df577bea59289a0a05146e40ec0a83a49e8073",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第八型自保副型是传统且证据有限的假设，把第八型自主与物质控制、领地、直接需要，以及资源可得、生存与实际自主结合。准备物资或守护空间不能证明副型；稀缺、住房风险与无障碍需要、照护、危险工作、财产责任和既往失窃都可能要求相同行为。",
-      "title": "第八型自保副型：物质控制、领地与直接需要的观察假设"
+      "summary": "当第八型维护自主、抵抗受制于人的主题，主要落在收入、供应、空间和实际生活安排上，自保副型可以作为一种观察假设。关键不是有多少钱、是否节俭，而是资源为何重要，以及条件稳定后，自己能否接受可靠的共同安排。",
+      "title": "第八型自保副型：用可靠资源守住自主"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "cb904928c0e41779a698a97f835832cf18e53fea6c206fe0ce9ec236d02b07e3"
+  "source_content_sha256": "eae7e83886138dba080964c16707e161defe33134d9e5884bbbae11add53c221"
 }

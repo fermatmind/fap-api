@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-4/instincts/social",
@@ -23,94 +23,39 @@
       "entity_key": "type-4/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Exclusion may be real and produced by discrimination, access, language, status, or informal networks. Verify the environment before considering subtype.",
-          "question": "Does feeling excluded establish Social Type Four?"
+          "answer": "Yes. Paying attention to belonging does not require enjoying crowds. However, disliking events also has many ordinary explanations. Explore what occupies attention before, during, and after participation rather than using attendance or sociability as the criterion.",
+          "question": "Can someone with a social emphasis dislike group events?"
         },
         {
-          "answer": "A title or invitation may not provide information, credit, safety, or decision power. Concrete access evidence prevents a real barrier from becoming a personality claim.",
-          "question": "Why compare formal inclusion with actual access?"
+          "answer": "Not by itself. Check information access, selection rules, credit, language, accessibility, and power. If a real barrier explains the experience and removing it resolves the concern, the subtype explanation adds little.",
+          "question": "Is feeling excluded evidence of social Four?"
         },
         {
-          "answer": "Comparison resolved by real inclusion, no recurrence across groups, or concern limited to demonstrably unequal settings should weaken the subtype explanation.",
-          "question": "What weakens the belonging-comparison hypothesis?"
+          "answer": "No. Criticism may identify a real mistake or injustice. Ask what the person is proposing, what evidence supports it, and whether a practical correction satisfies the concern. Do not infer an identity motive merely because a complaint makes the group uncomfortable.",
+          "question": "Does challenging a group mean someone is trying to be different?"
+        },
+        {
+          "answer": "Stop relying on it when concerns track actual exclusion, disappear with fair access, or do not recur in other welcoming groups. An ordinary contribution made without a need to secure a distinctive identity is also a counterexample to that proposed mechanism.",
+          "question": "When should I stop using this hypothesis?"
         }
       ],
       "framework": "enneagram",
@@ -184,52 +129,29 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The description proposes that Type Four difference attention may become visible around groups and shared standards. It does not prove a stable social deficit or motive.",
-          "key": "traditional_hypothesis",
-          "title": "Treat belonging comparison as a traditional hypothesis"
+          "body_md": "Type Four’s concern with identity and significance remains the starting point; see the [Enneagram Institute’s core description](https://www.enneagraminstitute.com/type-4/). A social emphasis brings that concern into the question of how one belongs and contributes among other people.\n\nThe [Narrative subtype description](https://www.narrativeenneagram.org/instinctual-subtypes/) connects social Four with comparison around belonging and the tension between personal authenticity and social expectations. A useful everyday question is: ‘Can there be a respected place here for someone like me?’ The answer may be sought through participation, careful observation, criticism, or withdrawal. Sociability alone does not distinguish these possibilities.\n\nThis attention can have value. Someone may notice that a group praises only one style of contribution or overlooks an experience that matters. It becomes costly when a particular difference is repeatedly treated as proof that everyone else has a natural right to belong while the person does not. That is a hypothesis about a sequence of interpretations, not a conclusion drawn from shyness, sadness, or criticism.",
+          "key": "belonging_with_difference",
+          "title": "Wanting to belong as yourself"
         },
         {
-          "body_md": "Compare the same contribution when the person is invited, overlooked, and formally included. Record access, credit, interpretation of difference, and whether belonging changes after evidence of inclusion.",
-          "key": "matched_comparison",
-          "title": "Match contribution while changing inclusion"
+          "body_md": "Imagine joining a neighborhood group planning an event. You have been invited, but conversation is full of shared history and decisions made elsewhere. Another member’s suggestion is quickly welcomed; your similar suggestion receives little response.\n\nThere may be a genuine access problem. Ask who receives the preparation notes, how proposals are selected, and whether everyone has a turn to speak. Formal membership does not guarantee information, credit, decision access, or safety. Missing access calls for a practical change, not a personality explanation.\n\nNow imagine the group shares the notes, recognizes your contribution, and assigns you a role with real influence. If comparison persists, examine its next step: do you discount the recognition as politeness, locate a new sign that you are fundamentally different, or believe that an ordinary shared role cannot represent your experience? Repetition across reasonably welcoming groups would make the identity-and-belonging hypothesis more plausible. It still would not prove a subtype.\n\nThe same sensitivity could lead to a constructive contribution: naming what is missing, requesting a fair process, and taking part in it. Overuse could mean retreating before others can respond, communicating only through criticism, or treating every role as too ordinary to be meaningful. Record what actually occurred, what you inferred, what you asked for, and how the group responded. If fair access resolves the difficulty, revise the interpretation accordingly.",
+          "key": "joining_a_local_group",
+          "title": "An invitation does not settle whether there is room for you"
         },
         {
-          "body_md": "The label organizes audience, belonging, and comparison observations. It is not evidence about bodily mechanisms, a universal social drive, or fixed group capacity.",
-          "key": "instinct_boundary",
-          "title": "Keep social language observational"
+          "body_md": "In a small community exhibition, the budget is cut and one collaborator receives public praise. A social Four reading asks whether this becomes a question about whose work counts and where the person stands in the group. They might request clearer credit, compare their role with others’, or try to become the person who expresses the group’s overlooked emotional reality.\n\nCompare two other possible priorities. A self-preservation Four reading asks whether there are still enough resources and energy to sustain a personally meaningful contribution. A one-to-one Four reading asks whether the response of a particular admired person or rival now seems to decide personal value. These are different organizing questions, even if all three people object or work harder.\n\nDo not use praise-seeking to settle the core type either. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer starting questions about different reasons for similar behavior. In this situation, ask whether the desired response is recognition of success, appreciation for being needed, clarity about a dependable role, or recognition of an experience that feels personally distinctive. The person’s own explanation and repeated choices matter more than the outward act.\n\nA real allocation problem may be the whole explanation. If credit was unfairly withheld and correcting it resolves the concern, there is no need to add a hidden subtype motive.",
+          "key": "credit_resources_or_a_person",
+          "title": "When a collaborator receives praise, what changes for you?"
         },
         {
-          "body_md": "Personal difference may be expressed through naming what a group excludes rather than seeking individual distinction. Compare evidence-based critique with identity comparison.",
-          "key": "countertype_variation",
-          "title": "Allow difference to be voiced as group critique"
+          "body_md": "Choose a group where participation is reasonably safe. Start with an actual barrier if there is one: request the necessary information, an accessible format, a clear contribution window, or an agreed credit arrangement. You do not have to remain in a discriminatory or coercive setting for this exercise.\n\nWhen access is adequate, make one bounded contribution that reflects something you care about. Instead of asking the group to confirm your whole identity, ask a concrete question: ‘Which part of this suggestion is useful, and what needs changing?’ Notice whether you can use the response without making it a verdict on your personal worth.\n\nKeep separate notes on the group’s behavior and your interpretation. Also record a counterexample: a time you shared an ordinary task, received useful feedback, or belonged without having to establish a distinctive role. Such an example challenges the proposed need to secure belonging through difference; it does not automatically exclude the whole core type.\n\nIf difficulty appears only with unequal access, an unfamiliar language, a poorly defined newcomer role, or a particular unsafe group—and diminishes when that condition changes—prefer the situational explanation. If no recurring identity comparison is evident across safer settings, put the social Four hypothesis aside. Repeated comparison can warrant further reflection, but it is not a diagnosis.",
+          "key": "participate_without_a_verdict",
+          "title": "Try one contribution before deciding what your place means"
         },
         {
-          "body_md": "Discrimination, class, language, disability, relocation, informal networks, and status rules shape belonging. Do not psychologize a documented barrier.",
-          "key": "alternative_environment",
-          "title": "Test exclusion and unequal access"
-        },
-        {
-          "body_md": "The hypothesis weakens when documented inclusion resolves the comparison, difference attention does not recur across groups, or concern appears only where access is actually unequal.",
-          "key": "counterexample",
-          "title": "Use real inclusion and cross-group stability as tests"
-        },
-        {
-          "body_md": "Evidence from one subtype instrument cannot make belonging patterns universal across groups or cultures. This page cannot predict popularity, inclusion, loyalty, social skill, or group fit.",
-          "key": "evidence_boundary",
-          "title": "Keep belonging observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Choose one equal contribution across an invited, overlooked, and formally included group condition.\n\nObservable signal: Record access, information, credit, decision power, audience, stated meaning, barrier evidence, and response after inclusion changes.\n\nPage-specific signal: Compare whether difference attention persists after information, credit, and decision access become genuinely equal.\n\nAlternative explanation: Compare discrimination, class, language, disability, relocation, networks, and status rules.\n\nReflection prompt: Identify the strongest documented barrier and state whether subtype language adds anything after that barrier is considered.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare discrimination, class, language, disability, relocation, networks, and status rules.",
-            "context": "Choose one equal contribution across an invited, overlooked, and formally included group condition.",
-            "duration_days": 5,
-            "observable_signal": "Record access, information, credit, decision power, audience, stated meaning, barrier evidence, and response after inclusion changes.",
-            "page_specific_signal": "Compare whether difference attention persists after information, credit, and decision access become genuinely equal.",
-            "reflection_prompt": "Identify the strongest documented barrier and state whether subtype language adds anything after that barrier is considered."
-          },
-          "title": "Observation exercise"
+          "body_md": "Social attention concerns membership, roles, and participation, not the number of friends or enthusiasm for parties. The three instincts are not three kinds of people who lack the other two: material security and close relationships still matter. Wings and instincts are different interpretive layers; neither can be established from a second-highest core-type score.\n\nWhen comparing this page with one-to-one descriptions, keep the schools’ meanings visible. Narrative includes intimate relationships, close friendships, and vitality in its one-to-one account. The Enneagram Institute emphasizes attraction and stimulation in sexual/attraction. There is overlap, not complete equivalence, and neither is simply a measure of sex or romance. Compare the [Narrative instinct introduction](https://www.narrativeenneagram.org/instinctual-subtypes/) with the [Enneagram Institute’s model explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nThe 27 subtype combinations and terms such as countertype belong to traditions. They are not demonstrated neural categories or reproducible scientific diagnoses. The [2021 review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence across 104 samples; it does not validate these subtype examples or FermatMind scoring. Research on a specific questionnaire does not establish all subtype descriptions across populations.\n\nContinue with [Type Four’s core concern](/en/personality/enneagram/type-4), [self-preservation Type Four](/en/personality/enneagram/type-4/instincts/self-preservation), or [one-to-one Type Four](/en/personality/enneagram/type-4/instincts/one-to-one).",
+          "key": "terms_evidence_and_reading",
+          "title": "Social does not mean outgoing"
         }
       ],
       "seo": {
@@ -240,8 +162,8 @@
       "slug": "enneagram/type-4/instincts/social",
       "source_hash": "854afe6c6de5ffd72643013ad032c2104076a721def982d2814ae26dc1afdb84",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Social Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through comparison, belonging, and sensitivity to what a valued group seems to possess. Group discomfort cannot establish subtype because exclusion, discrimination, status rules, relocation, and unequal access can create the same experience.",
-      "title": "Social Type Four: belonging comparison as a matched-comparison hypothesis"
+      "summary": "The social Four lens explores how identity and personal meaning become entangled with membership, recognition, and contribution. It can help distinguish a recurring comparison about belonging from an actual barrier that the group needs to change.",
+      "title": "Social Type Four: finding a place without losing yourself"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +173,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "693aff9d3b9698bb357f206834900747a4b89d3bc9652a407f8905c8be0ef451"
+  "source_content_sha256": "8f2ea1c141c0e38659782317c8e1ec8c04da458ea9898f7345aae7b89eae9b65"
 }

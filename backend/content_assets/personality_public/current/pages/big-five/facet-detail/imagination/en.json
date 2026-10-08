@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/imagination",
@@ -20,38 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "imagination",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. It concerns generating inner scenes. Creative output also depends on selection, skill, execution, opportunity, and persistence.",
-          "question": "Does strong Imagination equal creativity?"
+          "answer": "No. It describes an activity, while creative ability needs evidence from ideas or work in a specific task. Look at quality, usefulness, development, and revision. Daydreaming may supply material without producing an effective result.",
+          "question": "Does frequent daydreaming show that I am good at creative work?"
         },
         {
-          "answer": "No. Concrete attention, close observation, logic, humor, expertise, and relationships can all be rich without frequent internal imagery.",
-          "question": "Does weaker Imagination make someone boring?"
+          "answer": "Look at the purpose, repetition, controllability, and effect of those thoughts, as well as current pressures. A preparation exercise and unwanted recurring worry need different explanations. This facet cannot diagnose the experience; persistent distress or interference merits assessment by a qualified professional.",
+          "question": "What if most of my imagined scenes concern things going wrong?"
         },
         {
-          "answer": "Deliberate imagery practice may expand a behavior repertoire. This page does not promise a stable trait or score change.",
-          "question": "Can Imagination be trained?"
+          "answer": "Yes, inner situations may be developed through dialogue, sound, words, or relationships. Picture clarity alone should not stand in for the full facet, and it does not establish creative ability or its absence.",
+          "question": "Can I have imaginative interests without clear mental pictures?"
         },
         {
-          "answer": "Children may express pretend play and spontaneous fantasy more visibly, but age alone cannot determine one person’s facet level.",
-          "question": "Do children necessarily have stronger Imagination than adults?"
+          "answer": "Find the missing practical step: checking a condition, choosing an option, allocating resources, or completing an action. Work on one such step and assess its result. Richness of simulation does not establish execution, and a facet label will not identify the missing step for you.",
+          "question": "Why do my imagined plans fail to become real plans?"
         },
         {
-          "answer": "A personality facet does not establish impaired reality testing. Clinical concerns require different evidence and appropriate assessment.",
-          "question": "Can strong Imagination make someone confuse fantasy with reality?"
+          "answer": "No. It would show what you did with instructions, time, and selected material. Keep that evidence separate from naturally occurring behavior. You can assess whether the exercises were useful without treating them as a demonstration of lasting trait or score change.",
+          "question": "Would a week of story exercises prove that my personality changed?"
         },
         {
-          "answer": "Daydreaming is one possible expression. Imagination also includes deliberate mental rehearsal, scene construction, and narrative simulation.",
-          "question": "How is this facet different from daydreaming?"
+          "answer": "It cannot supply a separate facet score. Instruments differ in their content and structure. If your result does not provide Imagination under the relevant measurement rules, do not invent that result from the domain score.",
+          "question": "Can a high Openness score tell me my Imagination score?"
         }
       ],
       "framework": "big_five",
@@ -102,169 +95,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Imagination concerns how readily your mind produces images, scenes, stories, and alternative versions of events. It describes an inward cognitive tendency, not artistic ability, intelligence, creativity, or reality testing.\n\n“Imagination within Openness: richness and activity of the inner world” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Imagination concerns a tendency to engage with invented situations, daydreams, and inner stories. A useful question is whether you enjoy developing a possibility when nobody has asked you to do so. The experience may involve pictures, dialogue, sounds, or words; one vivid image is not a complete description of the tendency.\n\nIn this guide, Imagination is part of the NEO/IPIP-NEO vocabulary used to explain Openness. Stronger and weaker positions describe a continuum. They do not divide readers into dreamers and realists. You might readily invent fictional settings but rarely imagine your own future, or enjoy an occasional daydream without seeking one regularly.",
+          "heading": "What this facet describes",
           "key": "section-01-dfa4f60edb",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Imagination is the tendency to generate an active and richly represented inner world. It can include spontaneous daydreams, mental simulation of future or past situations, and narratives that add possible meanings to experience.\n\nThe construct is narrower than creativity. Creativity also involves selecting, developing, and expressing ideas. Someone may imagine vividly without producing anything, while another person may create useful work through technique, constraints, and execution despite limited mental imagery.",
-          "heading": "Precise Definition",
+          "body": "A scenario can show what might happen. A practical plan also needs constraints, verified information, resources, and a next action. Mentally running through an event does not establish that the event is feasible or that you will organize it well. Planning with a spreadsheet or a physical model can work without an elaborate inner scene.\n\nWorry can also contain imagined events. Ask what occupies the mind, whether the thinking is chosen, and what it does to the task in front of you. Repeated anticipation of a threat, preparation for a difficult conversation, and playful invention should not all be counted as the same activity. This facet cannot determine whether someone has a clinical condition.\n\nCreative work needs its own evidence. Consider the idea or finished work, the purpose it serves, the skill involved, and the revisions required. Frequent invention does not guarantee a good result. Someone who seldom daydreams may produce original work by studying examples, testing materials, and responding to feedback.\n\nRelated interests can overlap. Ideas concerns engagement with concepts and problems; Aesthetics concerns interest in and response to aesthetic qualities. Neither can be inferred from how often you enter an inner story.",
+          "heading": "Three distinctions that prevent overreading",
           "key": "section-02-984f97df55",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Imagination belongs to [Openness to Experience](/en/personality/big-five/openness). It is the most internally scenic of the six Openness facets: novelty can unfold in the mind even when behavior remains familiar.",
-          "heading": "Parent Domain",
+          "body": "Imagine being asked to help explain a complicated service. You may spontaneously invent a fictional customer journey, or you may begin by collecting actual questions. Either approach could lead to a useful explanation. For this facet, notice whether scene construction was an activity you wanted to pursue. For the work, check whether readers understood the service.\n\nA stronger tendency may be visible in willingly extending imagined events beyond what the immediate task requires. A weaker tendency may mean doing this infrequently or mainly when there is a clear purpose. A middle position may depend on the topic. None of those descriptions establishes memory accuracy, attention control, empathy, or professional ability.",
+          "heading": "Notice the process, then assess the outcome separately",
           "key": "section-03-25574de9a3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Imagination versus Ideas:** Imagination emphasizes scenes and narrative; [Ideas](/en/personality/big-five/facets/ideas) emphasizes concepts, theories, and reasoning.\n- **Imagination versus Aesthetics:** [Aesthetics](/en/personality/big-five/facets/aesthetics) concerns response to beauty in the external world; Imagination concerns internally generated representations.\n- **Imagination versus Feelings:** [Feelings](/en/personality/big-five/facets/feelings) concerns noticing and differentiating emotion. An imagined scene may evoke emotion, but the processes are not identical.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "While volunteering at a repair workshop, Maya sees an unusual broken lamp. Before finding its actual history, she privately invents two fictional households in which it might have been used. She enjoys developing the details and knows they are inventions. This supports a narrow working observation: this object prompted voluntary story construction.\n\nPerhaps she is preparing a writing assignment, or perhaps antique objects are the only subjects that reliably prompt this response. Those explanations matter. They would make a claim about imagination across everyday life too broad.\n\nA natural counterexample would be another unhurried encounter with an intriguing object, without an instruction to invent anything, in which she stays with the practical details and feels no wish to extend a story. Repeated examples of that kind would require revising an expectation that inner scenarios arise almost whenever she has an opening. Not encountering a suitable situation is different from encountering one and not imagining. Failing to find a counterexample is also different from having evidence that there are none.",
+          "heading": "An illustrative case with an alternative explanation",
           "key": "section-04-a5c425f847",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency may appear as vivid imagery while reading, frequent “what if” scenarios, metaphor-rich descriptions, or attention drifting into internally generated stories. A weaker tendency may appear as closer attention to current facts, literal descriptions, preference for informational reading, or decisions organized through explicit evidence rather than scene simulation.\n\nThese are clues, not diagnostic signs. Worry, intrusive imagery, distraction, and storytelling skill each require separate evidence.",
-          "heading": "Behavioral Cues",
+          "body": "You can enjoy imaginative activity without turning it into output. If you want a usable result, identify the transition that is missing: selecting an idea, drafting it, checking a fact, or asking someone to try it. Evaluate that step directly.\n\nFor example, choose one imagined explanation of the repair process and write a short draft. Ask a reader which instruction remains unclear. Their answer is evidence about the draft, not a measurement of your personality. If inner imagery is sparse, diagrams, sample objects, reference pictures, and written sequences are available ways to work.\n\nWhen inner experiences cause continuing distress or interfere substantially with daily life, discuss the experiences with a qualified professional. A facet description cannot diagnose them or certify that they are harmless.",
+          "heading": "Choose a response to the actual difficulty",
           "key": "section-05-47bcf10876",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Imagination may recede during precise, externally demanding work and become more visible during solitude, repetitive tasks, reading, or relaxed travel. Training, role expectations, fatigue, and whether a person uses visual imagery at all can change its expression. One setting should not define the whole facet.",
-          "heading": "Contextual Differences",
+          "body": "Write a modest hypothesis, such as: “When an object has an unknown history, I often invent a story about it.” During ordinary encounters, note whether there was enough time to engage, whether invention was required, what actually happened, and whether it helped or interrupted what you were doing. Record “no opportunity” when there was no suitable encounter.\n\nThen, if useful, deliberately write two different histories for a fictional object. Mark this as prompted activity. It shows what you did under an instruction; it is not a natural counterexample to infrequent spontaneous imagination, and it does not demonstrate a trait increase.\n\nKeep the hypothesis provisionally if similar voluntary activity appears in several suitable settings. Narrow it if it appears only with particular subjects. Revise it if usable opportunities repeatedly pass without the expected behavior, or if an assignment explains the activity better. Set it aside if opportunities are sparse, circumstances are unusually stressful, or recall is unreliable.\n\nTo decide whether to repeat the exercise, check its practical result: did it help you produce a clearer draft, identify a possibility to investigate, or simply enjoy a quiet interval? A short record can inform that choice without validating a personality label.",
+          "heading": "Observe first; label a deliberate exercise separately",
           "key": "section-06-b2e59c1a44",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Spontaneously building scenes or continuing inner stories.\n- Simulating conversations and possible outcomes in detail.\n- Responding readily to metaphor, symbol, and narrative.\n- Mentally previewing choices before acting.\n- Needing deliberate attention anchors when inner material competes with the task.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) relates Imagination to NEO Fantasy as similar constructs. The [long-form item key](https://ipip.ori.org/newNEOFacetsKey.htm) and [Maples short-form items](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) document their respective item sets.\n\nAn explanatory facet page does not establish that your questionnaire separately measured this facet. Use the actual form and scoring documentation when reading a result. Do not calculate Imagination from a broad Openness score or substitute a result from a differently designed instrument. General instrument research does not by itself validate a FermatMind product.",
+          "heading": "Where the terminology comes from",
           "key": "section-07-af14a5467e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Staying anchored to what is observable and present.\n- Describing events through sequence, facts, and practical details.\n- Preferring nonfiction or concrete examples over immersive fiction.\n- Comparing choices through explicit criteria rather than vivid simulation.\n- Generating imagery deliberately when a task requires it rather than automatically.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "For the broader dimension, read [Openness to Experience](/en/personality/big-five/openness). For conceptual exploration rather than imagined scenes, read [Ideas](/en/personality/big-five/facets/ideas).\n\n[Aesthetics](/en/personality/big-five/facets/aesthetics) addresses your response to art and beauty; [Actions](/en/personality/big-five/facets/actions) addresses entering unfamiliar activities. The [30-facet guide](/en/personality/big-five/facets) helps place these terms alongside the rest of the directory.",
+          "heading": "Read according to the distinction you need",
           "key": "section-08-ebd384ae14",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Imagination can support scenario generation, storytelling, reframing, and perspective simulation. Possible costs include distraction, multiplying hypothetical paths, or allowing simulation to substitute for action. These are tendencies, not guaranteed skills or impairments.\n\nWeaker Imagination can support present-task focus and concrete communication. A possible cost is needing more deliberate effort when work depends on metaphor, mental rehearsal, or multiple imagined futures. Neither level ranks the quality of a mind.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-ca9261aba4",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A chemistry teacher invents short fictional histories for fellow passengers during her commute. She clearly knows they are stories. Occasionally she turns the same scene-building ability into an analogy that helps students picture a reaction. The example shows active inner representation, not proof of teaching ability or creativity in every domain.",
-          "heading": "An Original Case",
-          "key": "section-10-92fca16a91",
-          "kind": "rich_text"
-        },
-        {
-          "body": "An advertising writer rarely sees pictures in his mind. During brainstorming he lists observable features and relationships instead of images, yet he writes precise product copy and appreciates poetry. His occupational title does not establish a strong Imagination facet.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-2c5d909b0a",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. While waiting alone, do scenes and stories arise, or does attention stay with the surroundings?\n2. When reading fiction, how vivid are people and places in your mind?\n3. Do recurring imagined settings or narratives occupy your attention?\n4. Do you preview a future choice as a scene or compare it through explicit reasoning?\n5. When attention drifts, is the material scenic, conceptual, emotional, or worry-based?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-2a284450cd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "For seven days, record one spontaneous image or scene each day. If imagery is frequent, add a two-minute sensory grounding exercise before a precision task. If it is infrequent, deliberately construct a three-sentence scene from an ordinary observation. Treat the result as context-specific data, not a score-changing exercise.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-98157a7ea9",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Openness to Experience](/en/personality/big-five/openness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Aesthetics](/en/personality/big-five/facets/aesthetics), [Feelings](/en/personality/big-five/facets/feelings), [Actions](/en/personality/big-five/facets/actions), [Ideas](/en/personality/big-five/facets/ideas), [Values](/en/personality/big-five/facets/values).",
-          "heading": "Continue Reading",
-          "key": "section-14-f7d8ed9b65",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Explore the tendency to enter imagined situations, and learn how to distinguish it from worry, practical planning, and the quality of creative work.",
+        "title": "Imagination: Inner Scenarios, Plans, and Creative Work"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/imagination",
-      "source_hash": "98d299366cb244a344ea9f9727b79ee70e5936a738a907605f0a2879eb0a0407",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Imagination concerns how readily the mind generates images, scenes, stories, and alternative possibilities. It is not creativity, artistic skill, or loss of contact with reality.",
-      "title": "Imagination: An Active Inner World"
+      "source_hash": "aeae396255ec780ae39ce04bbf8916e245c1d1c63c5a2d2db2d47c96e457ac11",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Explore the tendency to enter imagined situations, and learn how to distinguish it from worry, practical planning, and the quality of creative work.",
+      "title": "Imagination: Inner Scenarios, Plans, and Creative Work"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "O1-imagination-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "O1-imagination-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "O1-imagination-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "O1-imagination-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "8e83525590f1a1b45fb2e0f730c6b11b44453506f26977898d6d2e61ee12b375"
+  "source_content_sha256": "7c14d10aef58ab0871f3b4a8ce8a83335f6616d2d6b06680551bd8c1b1e79093"
 }

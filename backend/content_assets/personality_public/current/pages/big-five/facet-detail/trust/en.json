@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/trust",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "trust",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Trust is an expectation tendency, not moral character.",
-          "question": "Does strong Trust make someone a good person?"
+          "answer": "No. Checks can reflect standard procedures or consequential stakes. Your initial expectations about intentions need to be considered separately from the safeguard.",
+          "question": "Does checking a contract mean I have low Trust?"
         },
         {
-          "answer": "Yes. Closeness can grow through evidence, time, boundaries, and repair.",
-          "question": "Can someone with weaker Trust build close relationships?"
+          "answer": "The facet alone cannot establish that. Starting assumptions, verification, available evidence, and the situation all matter. Good faith can coexist with firm boundaries.",
+          "question": "Does strong Trust mean I am easily fooled?"
         },
         {
-          "answer": "No. Strong Trust can be informed, and caution can be miscalibrated. Judge evidence directly.",
-          "question": "Is Trust the same as ignorance or immaturity?"
+          "answer": "A trait description cannot diagnose or exclude a disorder. Caution may fit the evidence. If suspicion or related distress persistently affects your life, seek qualified assessment.",
+          "question": "Does low Trust indicate a mental disorder?"
         },
         {
-          "answer": "Sometimes, through safety, accountability, consistent behavior, and choice. This page cannot prescribe or guarantee repair.",
-          "question": "Can Trust be rebuilt after fraud or betrayal?"
+          "answer": "No. It supports that specific agreement. Broader reliance requires relevant evidence and appropriate limits, including a separate assessment of capability.",
+          "question": "Should one kept promise lead to unrestricted trust?"
         },
         {
-          "answer": "Norms and institutions can shape expression, but this package provides no individual cultural correction.",
-          "question": "Does culture affect Trust?"
+          "answer": "No. Continued contact is your choice, informed by safety, conduct, and accountability. A general personality description cannot require reconciliation or guarantee repair.",
+          "question": "Must I rebuild trust after betrayal?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Trust concerns the initial expectation that other people are generally honest and well-intentioned. It is not morality, gullibility, certainty, a safety assessment, or proof that one specific person deserves access.\n\n“Trust within Agreeableness: expectations about others’ intentions” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Trust concerns a general expectation that other people mean well and that their statements are broadly credible, rather than a readiness to suspect hidden motives. It belongs to Agreeableness in the NEO/IPIP-NEO vocabulary used here.\n\nAn ambiguous interaction makes the starting point visible. If your name disappears from a draft event schedule, do you first imagine a copying error or an attempt to exclude you? Neither interpretation establishes what happened.\n\nStronger, weaker, and intermediate positions lie on a continuum. They do not establish intelligence, your own honesty, or whether a particular person deserves access to your money, information, or time.",
+          "heading": "The explanation you reach for before you know",
           "key": "section-01-20c1401c0f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency begins with more benign expectations; a weaker tendency begins with more caution or suspicion. Healthy decisions still require evidence, boundaries, stakes, and verification. Experience can shape behavior without fully defining a general tendency.",
-          "heading": "Precise Definition",
+          "body": "A person can mean well and misunderstand an instruction. They can complete one task and be unable to handle another. You can expect good faith while requiring a clear agreement, checking important facts, or limiting the consequences of an error.\n\nThose safeguards do not reveal a trait on their own. Reading terms may be a standard requirement; skipping a check may reflect a trivial consequence. To understand Trust, ask about expectations as well as actions.\n\nYour own trustworthy conduct is another question. So are readiness to help and willingness to yield in conflict. [Straightforwardness](/en/personality/big-five/facets/straightforwardness) examines your communication, rather than your expectation of someone else's intentions.",
+          "heading": "Good intentions are not a performance guarantee",
           "key": "section-02-a8bc9ebc99",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Trust belongs to [Agreeableness](/en/personality/big-five/agreeableness), reflecting how readily cooperative intent is attributed to others.",
-          "heading": "Parent Domain",
+          "body": "With a more trusting starting point, you may ask for clarification without first assuming an offense. If repeated contradictions then accumulate, the question becomes whether you are updating your interpretation. Repeatedly explaining away evidence is a behavior to examine, not an inevitable consequence of strong Trust.\n\nWith a more skeptical starting point, you may want corroboration before accepting an explanation. If supporting evidence arrives but you keep introducing a new reason to doubt it, consider what would actually change your mind. Skepticism does not establish superior accuracy.\n\nIntermediate positions can depend on the relationship or the issue. A history of broken agreements, unequal interests, and the consequences of being wrong belong in the assessment. Different treatment of a familiar friend and a new supplier is not automatically inconsistent.",
+          "heading": "Different starting points create different questions",
           "key": "section-03-dd18e2b7d3",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Trust versus Warmth:** Warmth concerns friendly expression; Trust concerns expectations of intent.\n- **Trust versus Straightforwardness:** [Straightforwardness](/en/personality/big-five/facets/straightforwardness) concerns one’s own communication strategy.\n- **Trust versus verified reliability:** Direct history and safeguards should guide consequential reliance.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Imagine a volunteer event organizer sends a draft schedule without Morgan's name in the helper list. Before asking, Morgan writes down a first interpretation: perhaps an older list was copied. That note supports a benign initial expectation in this instance.\n\nThe organizer explains that an old file was used. The file history is consistent with the account, and the next draft restores the name. This supports the explanation for the omission; it does not prove the organizer's inner motives or reliability in every situation.\n\nIf omissions recur, Morgan can request a confirmation step. The same check could be used by someone who is initially trusting or someone who is initially wary. Checking the list and expecting ill intent should not be treated as the same observation.",
+          "heading": "An omitted name is evidence of an omission",
           "key": "section-04-881ee67fd9",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Trust may appear as sharing responsibility early, interpreting ambiguity benignly, or accepting statements provisionally. Weaker Trust may appear as checking, limiting access, reading incentives, or requiring history. Fraud exposure, discrimination, trauma, role, and power can alter visible behavior.",
-          "heading": "Behavioral Cues",
+          "body": "Use a specific hypothesis: When a new event collaborator leaves me out of a draft and the reason is unclear, I usually first consider an innocent mistake. Observe the initial explanation, not whether the event eventually succeeds.\n\nWhen a comparable omission occurs naturally, record the known facts and your first interpretation before clarification. Add later evidence separately. A clear ambiguous omission followed by an immediate suspicion of deliberate exclusion is an opportunity without the expected response. An event with no omission, or one whose cause you already know, supplies no equivalent opportunity.\n\nA single exception does not refute usually. Similar starting assumptions across comparable situations support retaining a limited description. If the pattern occurs only with collaborators who already have a good track record, narrow its scope. If entries are written after learning the outcome, or relevant events are scarce, set the hypothesis aside. No exception found is not the same as no exception possible.",
+          "heading": "Record natural exceptions before the outcome is known",
           "key": "section-05-5edf22e499",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may trust friends but verify vendors, or be cautious online and open in a local community. Higher stakes justify more checking at any trait level. A protective response after betrayal is not reducible to a personality label.",
-          "heading": "Contextual Differences",
+          "body": "For a deliberate attempt, choose a reversible task with negligible consequences, such as asking a collaborator to check a publicly available venue opening time. Agree on the question and a time to compare the answer with the venue's published information. Do not use money, private data, account access, or valuable possessions for this exercise.\n\nWrite down your expectation about intentions separately from your expectation about task performance. Afterward, compare the agreement, the result, and any independently checkable explanation. Successful completion supports this small task; an error may concern attention, understanding, or time rather than deception.\n\nMark the exercise as arranged rather than naturally occurring. Evaluate whether your conclusion changed in proportion to the evidence. You need not become more trusting to benefit, and this attempt does not demonstrate personality change.",
+          "heading": "Try one bounded collaboration and inspect the update",
           "key": "section-06-75dd34156e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Assuming good faith at first contact.\n- Delegating with limited monitoring.\n- Repairing misunderstandings through dialogue.\n- Missing manipulation cues when verification is absent.\n- Feeling personally hurt when trust is violated.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Rebuilding trust in a particular relationship depends on what has happened, what the other person now does, and what contact you choose. A personality description cannot oblige you to restore access, reconcile, or forgive.\n\nIf betrayal or persistent suspicion causes distress, support is available without treating the issue as a trait defect. This page cannot diagnose that distress or forecast a relationship's repair. Cultural comparisons likewise require suitable language, sample, and instrument evidence rather than assumptions about one individual.",
+          "heading": "Past harm and present boundaries still count",
           "key": "section-07-e3e1e72225",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Seeking evidence before reliance.\n- Separating politeness from access.\n- Detecting incentives and inconsistencies.\n- Withholding cooperation after adequate evidence appears.\n- Making closeness develop slowly but deliberately.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "The [official IPIP facet items](https://ipip.ori.org/newNEOFacetsKey.htm) cover good intentions, credibility, and suspicion of hidden motives. The [correspondence table](https://ipip.ori.org/newNEO_FacetsTable.htm) relates the scale to NEO Trust. These are construct materials, not a test of fraud detection.\n\nThe [IPIP inventory guide](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) distinguishes inventories measuring similar constructs. This page does not make different instruments' scores interchangeable, supply unmeasured facets, or establish a percentile conversion.\n\nRead [Agreeableness](/en/personality/big-five/agreeableness) for the broader interpersonal context, [Altruism](/en/personality/big-five/facets/altruism) for readiness to help, and [Compliance](/en/personality/big-five/facets/compliance) for responses to conflict.",
+          "heading": "Sources and related questions",
           "key": "section-08-f7a7a12401",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Trust can lower coordination friction and make cooperation easier. Possible costs include exploitation or delayed detection of harm. Weaker Trust can support risk control; possible costs include guarded relationships and excessive monitoring. Neither level establishes goodness or intelligence.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-bf4f1b73e2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A founder gives a new contractor limited access, clear milestones, and respectful autonomy. Trust is paired with verification rather than treated as all-or-nothing.",
-          "heading": "An Original Case",
-          "key": "section-10-53cfc37990",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A person cautious after fraud builds a close relationship gradually through consistent behavior and explicit boundaries. Lower initial Trust does not prevent intimacy.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-50ff1d5cd3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. What is your default interpretation of ambiguous intent?\n2. Which stakes trigger verification?\n3. Does evidence revise suspicion and confidence symmetrically?\n4. What access can be granted in stages?\n5. When does caution protect you, and when does it block cooperation?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-d6868daf2e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one low-stakes collaboration and define a small reversible trust step plus a verification point. Observe whether expectations update with evidence. Do not use this exercise where safety is uncertain.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-68f1731994",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Straightforwardness](/en/personality/big-five/facets/straightforwardness), [Altruism](/en/personality/big-five/facets/altruism), [Compliance](/en/personality/big-five/facets/compliance), [Modesty](/en/personality/big-five/facets/modesty), [Tender-Mindedness](/en/personality/big-five/facets/tender-mindedness).",
-          "heading": "Continue Reading",
-          "key": "section-14-e9864d1b55",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Trust describes what you initially expect of other people's intentions. Good faith, dependable performance, and safeguards are separate questions.",
+        "title": "Trust: Starting Assumptions and Evidence That Changes Them"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/trust",
-      "source_hash": "7dc79bac88139d3e94549f2bf35569ff3a3abe9b133e3378a2a7f64e43b5ffd7",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Trust concerns the initial expectation that others are generally honest and well-intentioned. It is not morality, gullibility, certainty, or proof that a specific person is safe.",
-      "title": "Trust: Expectations About Others’ Intentions"
+      "source_hash": "dabf9c4f6b1135219a6ac7267d30e4d023ed63dff1244cbb878cb0fa8e3dea20",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Trust describes what you initially expect of other people's intentions. Good faith, dependable performance, and safeguards are separate questions.",
+      "title": "Trust: Starting Assumptions and Evidence That Changes Them"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "A1-trust-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "A1-trust-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "A1-trust-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "A1-trust-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "d695a51426ecd922ee94e3d97e4220487779e1dd6a535c8f77eba4b845a3f14e"
+  "source_content_sha256": "aad54f1d2085ffc35241e128f5c892969fd8a6df2fd8a0d201fa5e963e728b2c"
 }

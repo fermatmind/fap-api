@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/wings/3w4",
@@ -23,79 +23,39 @@
       "entity_key": "3w4",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Training, specialization, branding requirements, or a client brief may create a signature style. The hypothesis needs Type Three result attention plus repeated distinctiveness and counterexamples.",
-          "question": "Does a signature style establish 3w4?"
+          "answer": "A wing description cannot establish that. It is not a creativity measure or an ability ranking. The importance of personal expression is distinct from creative skill, training, and the quality of actual work.",
+          "question": "Is 3w4 more creative than 3w2?"
         },
         {
-          "answer": "Hold the expressive work constant. A 3w4 hypothesis keeps credible delivery and demonstrated value central; a Four hypothesis may emphasize identity, meaning, and emotional congruence more directly.",
-          "question": "How does 3w4 differ from a Four hypothesis?"
+          "answer": "No. They may reflect interests, training, task requirements, or energy management. Consider whether the Three core fits and whether meaning and distinctiveness repeatedly modify your judgment of achievement.",
+          "question": "Do artistic interests, solitude, or deep work establish 3w4?"
         },
         {
-          "answer": "Standardized work preferred across settings, private exploration with no conversion to a valued outcome, or distinctiveness appearing only under portfolio rules would weaken it.",
-          "question": "What weakens the distinctive-craft hypothesis?"
+          "answer": "Examine how those concerns relate. A 3w4 account starts with demonstrated value, with distinctive expression entering the standard of success. A 4w3 account starts with identity and meaning, with achievement supporting their expression. Emotion versus efficiency and single decisions cannot settle the distinction.",
+          "question": "How do I compare 3w4 and 4w3 when both value distinction and recognition?"
+        },
+        {
+          "answer": "No. Those can be task requirements or flexible choices. Leave the wing uncertain or reduce confidence when the proposed modifier repeatedly adds little explanatory value across situations with genuine choice.",
+          "question": "Does using a standard method or delivering anonymously disprove 3w4?"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +129,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Begin with Type Three result attention, then ask whether distinctiveness and personal expression repeatedly shape what counts as a credible result. Originality without result tracking may reflect craft interest, Four themes, expertise, or a field that rewards novelty.",
-          "key": "core_first_modifier",
-          "title": "Keep valued delivery at the core"
-        },
-        {
-          "body_md": "Compared with 3w2 relational reach, 3w4 may emphasize a recognizable body of work. Compared with Four, the proposed core remains delivering and demonstrating value rather than preserving identity or emotional meaning as the central concern.",
-          "key": "sibling_core_comparison",
-          "title": "Contrast 3w4 with 3w2 and Four"
-        },
-        {
-          "body_md": "Compare the same work under anonymous review, public attribution, and a restrictive brief. Record which revisions improve evidence, which preserve a signature, and which respond mainly to anticipated recognition.",
+          "body_md": "You complete a proposal. It is accurate, useful, and well received, yet it differs from the work you imagine representing you. You want another revision: perhaps a different presentation, perhaps more of your own judgment, so the result does more than meet the requirements.\n\nFirst identify the problem the revision would solve. It might improve understanding, express expertise developed through practice, or answer a worry that an undistinguished result does not adequately demonstrate your value. Several reasons can coexist.\n\nA 3w4 lens asks how personal expression enters the demonstration of value. Do you repeatedly want the result to show a contribution that is recognizably yours and difficult to replace? That question is more useful here than whether you enjoy creative activities.\n\nThese are original comparison exercises, not validated typing questions. The work need not be artistic: an explanation, arrangement, or practical solution can also provide material for reflection.",
           "key": "observable_situations",
-          "title": "Observe revision under anonymous and named review"
+          "title": "It works well, but it does not feel like your contribution"
         },
         {
-          "body_md": "The hypothesis weakens when the person prefers standardized excellence without distinctiveness, explores privately with no need to convert work into a valued result, or adopts a signature only because a portfolio brief requires it.",
-          "key": "counterexample",
-          "title": "Use generic excellence and unmarketed exploration as tests"
+          "body_md": "The traditional [Three description](https://www.enneagraminstitute.com/type-3/) concerns achievement and recognition; the [Four description](https://www.enneagraminstitute.com/type-4/) concerns identity and personal significance. This guide explores how the latter might modify the former, rather than combining two cores.\n\nYou might want a reliable result to carry your own judgment, expression, or distinctive contribution. A personal standard can encourage you to deepen the work instead of adopting an answer merely because it is easily praised.\n\nThat approach can make the contribution more substantial and specific. Overused, distinctiveness can become another performance requirement: useful but ordinary work feels insufficient, revisions serve mainly to separate you from others, or someone else's recognition feels like evidence against your own value.\n\nThese are possibilities to examine, not predictions about everyone who considers 3w4. Under the [traditional adjacent-wing definition](https://www.enneagraminstitute.com/how-the-enneagram-system-works/), Three's wing directions are Two and Four. A wing is neither an equal mixture nor an automatic label for the second-highest score.",
+          "key": "core_first_modifier",
+          "title": "The Four influence shapes success while Three remains the core"
         },
         {
-          "body_md": "Design, research, writing, product, and performance fields may reward novelty and a recognizable portfolio. Compare other settings, access to resources, client constraints, training, and career stage before retaining a wing explanation.",
+          "body_md": "**3w4 and 3w2:** Both interpretations start with a Three-centered concern about demonstrated value. After the requirements are met, a 3w4 lens examines revisions intended to express a distinctive contribution. A 3w2 lens examines efforts to help people understand, participate in, and appreciate the result. Both can communicate and refine their work. Compare recurring reasons rather than assigning sociability to one wing and solitude to the other.\n\n**3w4 and 4w3:** Imagine a useful, well-received result with a fairly generic presentation alongside a more personally meaningful result that few people yet understand. Do not immediately choose one. Ask what each would seem to cost you.\n\nFor a 3w4 interpretation, examine how distinctive expression helps demonstrate value: it may form part of what makes an achievement feel excellent. For a 4w3 interpretation, examine how achievement and recognition support the expression of identity and meaning. If successful work does not feel like you, is the difficulty that it fails to demonstrate your particular value, or that it misrepresents who you are?\n\nThe [Narrative Enneagram comparison of Three and Four](https://www.narrativeenneagram.org/type-comparisons/) is a traditional reference, not a validated forced-choice rule. Four can pursue achievement seriously, and Three can uphold personal values. One decision cannot establish the core.",
+          "key": "sibling_core_comparison",
+          "title": "Compare 3w2 and the reverse combination, 4w3"
+        },
+        {
+          "body_md": "Some tasks explicitly require originality, brand consistency, or a recognizable style. Preserving those features fulfills the brief. Long practice and specialization can also produce a personal method without requiring a wing explanation.\n\nCompare choices beyond those demands. When originality is not required, attribution is unimportant, and a standard method would work, does personal expression still repeatedly change your judgment of the result's value? What improvement does it bring, and what does it cost?\n\nDo not assume that anonymous and public tasks differ only in recognition. Anonymous work may face strict evaluation. Private practice may prepare a future deliverable. Note the actual audience, purpose, resources, and room for adjustment before assuming nobody will see or assess the result.\n\nYou can also enjoy exploration without turning it into proof of value. One such experience does not disprove 3w4; it shows why the label need not explain every interest.",
           "key": "alternative_explanations",
-          "title": "Test field norms and specialization"
+          "title": "Distinctiveness can come from the brief or from practice"
         },
         {
-          "body_md": "Wing evidence is sparse. The 3w4 hypothesis assigns no creativity score, artistic identity, employability, superiority, mental-health meaning, or prediction about achievement.",
-          "key": "wing_boundary",
-          "title": "Keep distinctive craft evidence limited"
+          "body_md": "**A poor core fit:** Across different situations, identity and personal meaning may organize your choices, with recognition serving their expression rather than achievement organizing the whole concern. Reconsider the core, including Four. Accomplishment is insufficient evidence for Three.\n\n**Insufficient modifier evidence:** Results may be central while distinctiveness matters only in work that requires originality. The Four modifier remains uncertain. Keep the core open to further observation, leave the wing unspecified, or compare 3w2.\n\n**A task explanation:** A distinctive proposal designed to satisfy a personal-brand requirement may be fully explained by the brief and your skill.\n\n**Ordinary flexibility:** Using a standard approach, producing excellent uncredited work, creating for pleasure, or dropping a stylistic revision does not automatically disprove 3w4. The description does not require distinctiveness in every decision. Consider what repeatedly enters your success criteria when there is genuine room to choose.",
+          "key": "counterexample",
+          "title": "Direct contrary evidence at the specific explanation"
         },
         {
-          "body_md": "Duration (days): 4\n\nContext: Choose one anonymous review, one named portfolio item, and one restrictive client brief involving comparable work.\n\nObservable signal: Record the success criterion, revision reason, evidence improved, signature retained, audience known, and attribution available.\n\nPage-specific signal: Separate revisions that improve the result from revisions mainly preserving recognizability.\n\nAlternative explanation: Compare professional training, portfolio rules, client demand, field novelty, resources, and career stage.\n\nReflection prompt: Name where specialization explains distinctiveness without a 3w4 modifier.",
+          "body_md": "Choose a small piece of work you can safely adjust. Before the next revision, write the requirements separately from the judgment or expression you want to preserve. Agree on a practical stopping point: once the requirements are met, keep only an expressive improvement with a clear purpose.\n\nFor each proposed change, state what it would do: correct an error, improve understanding, express an important judgment, or make the work feel more recognizably yours. A change can have more than one reason. The aim is to decide whether it warrants the time.\n\nAsk an appropriate reader specific questions: “What remains unclear? Which judgment changed your understanding?” Do not make praise for originality the only useful feedback. If an expression matters, explain its purpose within the work rather than saying only that an alternative is not your style.\n\nAfter delivery, make space for a small exploration that does not need to be displayed. During your review, ask whether the work met its requirements and whether you avoided a revision intended only to preserve recognizability. Let useful ordinary work and interesting unfinished exploration each have a place. Neither needs to become a typing test.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare professional training, portfolio rules, client demand, field novelty, resources, and career stage.",
-            "context": "Choose one anonymous review, one named portfolio item, and one restrictive client brief involving comparable work.",
-            "duration_days": 4,
-            "observable_signal": "Record the success criterion, revision reason, evidence improved, signature retained, audience known, and attribution available.",
-            "page_specific_signal": "Separate revisions that improve the result from revisions mainly preserving recognizability.",
-            "reflection_prompt": "Name where specialization explains distinctiveness without a 3w4 modifier."
-          },
-          "title": "Observation exercise"
+          "title": "Give revisions a reason and give the work a stopping point"
+        },
+        {
+          "body_md": "The [Hook review abstract](https://doi.org/10.1002/jclp.23097) reports little research supporting wings. This traditional reflection guide cannot establish creativity, artistic identity, or future achievement, and it does not validate FermatMind's assessment.\n\nIf the core is uncertain, compare [Type Three](/en/personality/enneagram/type-3) with [Type Four](/en/personality/enneagram/type-4). If Three offers a useful starting point, explore [3w2](/en/personality/enneagram/wings/3w2) as another approach to achieving and presenting value.\n\nYou can use the exercise without choosing a wing. A practical outcome is being able to explain which expression matters, recognize a revision that mainly protects an image, and stop when the work is sufficient.",
+          "key": "wing_boundary",
+          "title": "Understand expression without rating creativity"
         }
       ],
       "seo": {
@@ -220,8 +172,8 @@
       "slug": "enneagram/wings/3w4",
       "source_hash": "e1fde4f38c742da6f8d7720a8b359b7aabdda18dc5b67a2f3713a7a8a5985679",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "The 3w4 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Four-adjacent distinctiveness, personal expression, and comparison with an ideal. A polished signature style cannot establish a wing because specialization, portfolio demands, and aesthetic training can produce it.",
-      "title": "3w4: distinctive craft as a core-first wing hypothesis"
+      "summary": "3w4 describes a Type Three core with a Four-adjacent influence in traditional Enneagram theory. Results and demonstrated value remain central, while personal expression, distinctiveness, and meaning may shape what counts as success. It is not a creativity rating or a label determined by artistic interests.",
+      "title": "3w4: Making a Distinctive Contribution Through Results"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +183,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "1f9fe00d99f2ffd16b0574670aba8595b3b1aae98274b74ee09495ce56013106"
+  "source_content_sha256": "b7dbc8248b7f5b0884e44c21d621d1265456d18e3d8f722db61abd0a766d1c15"
 }

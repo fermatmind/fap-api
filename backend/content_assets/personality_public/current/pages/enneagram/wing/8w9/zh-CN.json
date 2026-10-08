@@ -23,79 +23,35 @@
       "entity_key": "8w9",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "不足。资历、安保责任、文化沟通、疲劳或熟练流程都可能形成平静权威。更应观察同等条件下领地怎样开放、控制何时释放，以及他人能否提出不同方案。",
-          "question": "平静而有权威是否足以证明 8w9？"
+          "answer": "可能，但安静本身没有足够区分力。要看你是否持续清楚自己的立场，主要关注自主与边界，还是为了减少疏离和冲突而压低自己的愿望。音量不能替代动机。",
+          "question": "我很安静，不喜欢争吵，也可能是 8w9 吗？"
         },
         {
-          "answer": "要记录等待是在收集事实、保存精力、遵循程序、回避不适还是积累压力；不知道功能和后果，时间长短没有稳定含义，也不能把沉默自动视为温和。",
-          "question": "延迟回应应该怎样避免被过度解释？"
+          "answer": "不是。等待可能是核对事实、遵守程序、疲劳或沟通习惯。它也可能在减少不适。先了解功能，再观察它是否反复修饰八号模式；九号翼不要求一定拖延。",
+          "question": "延迟回应是不是九号翼的标志？"
         },
         {
-          "answer": "迅速开放原本稳定控制的领域、接受另一套可信流程，并在压力积累前讨论侵扰，会有力挑战领地与延迟修饰；还要确认这种灵活性不是被更高权力强迫。",
-          "question": "哪次共享控制最能挑战 8w9 假设？"
+          "answer": "不会自动说明。你可能在边界明确、知情自愿的条件下共享决定权，这可以体现灵活性。是否需要修正翼解释，要看多个相近情境中的整体模式，而不是一次合作。",
+          "question": "主动沟通、愿意共享决定权，会不会说明我不是 8w9？"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "面对相同侵扰，8w9 可能守住位置等待杠杆，8w7 可能新增路线并加速行动。不能拿不同截止时间和不同处罚风险的情境直接比较。",
-          "key": "sibling_core_comparison",
-          "title": "8w9和8w7有什么区别？"
-        },
-        {
-          "body_md": "先检验直接影响、边界防守和受控反应，再观察低外显强度是否通过持久压力或延迟介入修饰自主模式。仅仅安静不具备区分力。",
+          "body_md": "8w9 中，八号仍是主要动机解释，九号是相邻修饰。传统八号描述关注自主、保护边界和避免受控；九号描述则关注内外平和、连接和减少令人不安的冲突。九号翼可能让八号式边界表达较为平稳，更愿意保留既有节奏、听取意见或避免无谓升级。它不把核心自动改成“只求大家和气”。相关传统口径见 [Enneagram Institute 的八号介绍](https://www.enneagraminstitute.com/type-8/)与[九号介绍](https://www.enneagraminstitute.com/type-9/)。\n\n例如，合住的人临时提出改变公共空间的使用安排。你平静听完，也愿意调整细节，但对一项重要安排有清楚的“不”：谁都不能单方面决定，必须共同确认。支持八号核心的，是自主和边界是否仍然清晰；可能的九号修饰，是你如何通过稳定、容纳和较少升级来表达它。\n\n8w9 不是八号和九号各占一半，也不是“八号不够强，所以变成九号”。翼只能取相邻类型；八号的另一翼是七号。第二高分不能自动确定翼。不同传统对一个翼、两个翼的解释有分歧，可参见 [Enneagram Institute 的翼说明](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)。这里的核心顺序是描述的逻辑，不是对先天、终生类型的实证结论。",
           "key": "core_first_modifier",
-          "title": "保持自主为主、稳态为次"
+          "title": "看起来温和，核心为什么仍可能是八号"
         },
         {
-          "body_md": "场地责任、安保岗位、集体协商、沟通文化、疲劳、慢性疼痛、哀伤或制度拖延，都可能造成耐心稳守与行动减少。",
-          "key": "alternative_explanations",
-          "title": "检查财产、文化与恢复要求"
+          "body_md": "让各方拥有相同的发言权，也都承担空间调整的成本。\n\n8w9 与 8w7 都可能坚持共同决定。8w9 的修饰假设更关注保留可持续的安排：把边界说清，调整必要部分，避免为了争议重做一切。8w7 的修饰假设更关注增加行动空间：重新分区、尝试另一种时间表，甚至寻找新的使用方式。快慢和音量只是表面；两者都可能采取另一种办法。\n\n8w9 与 9w8 都可能看起来安静、随和，也都可能在某个点突然坚决。要分辨核心，可设想：别人愿意维持亲近、没有争吵，却要求由他们单方面决定空间使用。最难接受的是自己的决定权被拿走，还是提出异议会打破平和与连接？前者更值得从八号核心检验，后者更值得从九号核心检验。\n\n再设想你的决定权已经得到承认，但讨论仍然有分歧。你能否接受一点紧张，只要边界清楚？还是更想尽快消除不和，甚至一时忘记自己原本想要什么？这能帮助比较平静的功能，不能单凭一次退让或争执确定类型。\n\n[Narrative Enneagram 的八与九比较](https://www.narrativeenneagram.org/type-comparisons/)强调传统描述中的自主表达与维持和谐差异。本页把这种差异用于自我观察，不把“八号爱冲突、九号不会反对”当作普遍规则。",
+          "key": "sibling_core_comparison",
+          "title": "同一次空间调整，分辨 8w7 与 9w8"
         },
         {
-          "body_md": "写明最初边界、采取行动前的时间、控制资源、语气变化、升级条件，以及威胁结束后是否放松控制，避免把沉默直接解释为稳定力量。",
+          "body_md": "稳定的作用是让重要的边界不必每次都通过激烈争执重新建立。你可以不急于改变全部安排，也能认真听取别人的具体需要。清楚的共同规则会减少反复猜测，使合作更可持续。\n\n但平静并不保证沟通充分。如果你觉得“我的立场已经很明显”，却没有把它说出来，别人可能把沉默当作同意。你则可能认为对方正在不断侵入，直到累积到某个点才强硬拒绝。反过来，你也可能一直维持旧安排，却不给别人讨论它的机会。看似没有争吵，实际上分歧只是被固定住了。\n\n因此，不只记录回应等了多久，还要问等待在做什么：核对事实、保留平稳节奏、遵守程序，还是不愿让不舒服的讨论进入生活？平静且明确的回应与沉默不动，是两种不同的事。\n\n有效的稳定能说清楚什么需要保护、什么可以调整、何时再讨论。僵持则让边界和偏好混在一起，把所有变化都当成威胁。",
           "key": "observable_situations",
-          "title": "记录领地、等待和释放条件"
+          "title": "稳定可以保护生活，也可能让分歧无处表达"
         },
         {
-          "body_md": "8w9 不能证明情绪稳定、领导质量或冲突能力。翼型证据有限，而且缓慢压力仍可能产生强迫效果，需要直接追责。",
-          "key": "wing_boundary",
-          "title": "不能从平静力量推断安全性"
-        },
-        {
-          "body_md": "若能及时调整路线、共享既有领地、提前发起不舒服的对话，并在出现可信流程后释放控制，就应降低延迟与领地修饰假设。",
+          "body_md": "如果你在多个关系中反复先顺从、模糊自己的愿望，主要担心异议会造成疏离，即使自主已经得到保障也急于消除一切分歧，九号核心可能比八号核心更值得比较。不要只因为后来坚决拒绝，就确定为 8w9。\n\n如果八号的边界关注较清楚，但安静与等待只出现在疲劳、程序限制或不熟悉的环境里，九号修饰的依据可能不足。熟悉事务、拥有正式责任或沟通文化也可以解释稳重表现。可以比较一次流程允许立即对话的事情与一次必须等待的事情，看看平稳方式是否仍有额外解释价值。\n\n如果你及时说出异议、共同调整规则，或主动分享决定权，这些选择不自动否定 8w9。它们可能说明你既保护自主，又能灵活合作。需要修正的是“九号翼必然拖延、守住领地不动”这种过窄解释。\n\n若在相近条件下，开新路线比稳定维持反复更贴合，可再比较七号翼；如果两种方式都有、没有清楚差别，就保留不确定。",
           "key": "counterexample",
-          "title": "寻找快速灵活且不损害自主的事件"
+          "title": "分别检验八号核心、九号修饰和环境要求"
         },
         {
-          "body_md": "持续天数: 6\n\n情境: 六天内选择一次边界争议和一次共享空间决定，提前核对双方的正式权限、进入权与申诉方式。\n\n可观察信号: 记录首次侵扰、回应延迟、主张领地、升级条件、对方请求、协商流程和最终释放控制的时点。\n\n本页特定信号: 比较同一合法利益下的持久稳守，与较早开展对话并允许共同治理的行为。\n\n替代解释: 检查场地职责、安保规则、沟通文化、资历、疲劳、疼痛、哀伤和制度拖延。\n\n复盘问题: 用最早出现的灵活回应作为反例；若环境能解释等待，就降低翼型判断信心。",
+          "body_md": "选择一件已经有轻微不满、但没有安全风险的共同生活或协作小事。不要等到“实在受不了”才开始。\n\n1. 分开写三句话：发生了什么事实；我想保留什么重要需要；我习惯的安排是什么。最后一项未必是不可改变的边界。\n2. 用一句明确、平静的话开启讨论：“临时改变使用时间让我无法安排自己的事情。我希望改动前先共同确认。”再请对方说出他们的需要。\n3. 选一个可以试行的小调整，例如提前一天告知，而不是一次决定所有未来情况。约定一个复盘时间，让稳定来自清楚的安排，而不是谁一直不松口。\n4. 若当下确实需要等待，明确说明原因和回复时间：“我今晚核对日程，明天答复。”这样别人不必猜沉默代表同意、拒绝还是犹豫。\n5. 复盘时问：边界是否变清楚？对方能否提出不同意见？试行安排是否真的减少了摩擦？如果需要已得到保障，我是否仍在坚持旧方式，只因为改变令人不舒服？\n\n实践目标是让平静与清晰同时存在。你不必靠升级证明坚定，也不必靠隐藏分歧维持稳定。",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "检查场地职责、安保规则、沟通文化、资历、疲劳、疼痛、哀伤和制度拖延。",
-            "context": "六天内选择一次边界争议和一次共享空间决定，提前核对双方的正式权限、进入权与申诉方式。",
-            "duration_days": 6,
-            "observable_signal": "记录首次侵扰、回应延迟、主张领地、升级条件、对方请求、协商流程和最终释放控制的时点。",
-            "page_specific_signal": "比较同一合法利益下的持久稳守，与较早开展对话并允许共同治理的行为。",
-            "reflection_prompt": "用最早出现的灵活回应作为反例；若环境能解释等待，就降低翼型判断信心。"
-          },
-          "title": "观察练习"
+          "title": "把尚未说出的边界变成一次可讨论的安排"
+        },
+        {
+          "body_md": "先用 [八号核心：自主与边界](/zh/personality/enneagram/type-8)检查动机。如果八号核心较贴合，再读 [8w7：通过更多路线争取自主](/zh/personality/enneagram/wings/8w7)。如果真正难分的是“怕被控制”与“怕失去连接”，可从本页原导航进入 [九号核心：平和、连接与自己的愿望](/zh/personality/enneagram/type-9)。\n\n这页是传统解释与原创观察情境，不是经过验证的翼型分类程序。2021 年 [Hook 等人的系统综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告信度、效度证据混合，支持翼等次级理论的研究很少。它不能证明费马某个题本或 8w9 解释有效，也不能把平静推成情绪稳定、可靠领导或良好关系的保证。\n\n可以暂时识别八号模式而不确定翼。看见自己的边界怎样表达、哪些习惯可以调整，已经是有用的结果。",
+          "key": "wing_boundary",
+          "title": "下一步与研究边界"
         }
       ],
       "seo": {
@@ -220,8 +163,8 @@
       "slug": "enneagram/wings/8w9",
       "source_hash": "41bc9d246ca225970c9906e6a94f2953465181924c2efa1c2cabfb9883b9c542",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "8w9 指以8号为核心、9号为相邻翼影响的传统九型人格描述假设。8w9 是证据有限的翼型观察：八号对自主与掌控的关注仍是核心，九号可能增加稳定力量、耐受和延迟反应。平静权威或强烈存在感不能单独确认 8w9；财产职责、文化克制、恢复需要、资历、安保岗位和缓慢流程也会产生相似表现。",
-      "title": "8w9：八号核心、九号翼影响与常见误判"
+      "summary": "8w9 以八号对自主和边界的关注为核心，九号翼可能增加平稳、接纳和维持连续性的方式。安静不等于没有立场，坚定也不必伴随高声或扩张。分辨重点是平静在保护自主，还是在避免失去连接，以及稳定什么时候变成了不愿沟通的僵持。",
+      "title": "8w9：八号核心怎样以稳定、少升级的方式守住边界"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "系统综述指出翼型支持研究很少（little research）；翼型只能作为证据有限的观察假设。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "263a31d7ecce16699872a72ae518e8a603388973a042b628aafb6a96e7318648"
+  "source_content_sha256": "e9f08e208d90ff8108ebfa69a5fbf61c427d8d515b11f6b4aa09868b0f26a3d5"
 }

@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-4/instincts/one-to-one",
@@ -23,94 +23,43 @@
       "entity_key": "type-4/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Conflict, competition, attraction norms, trauma history, or unequal power may intensify expression. Use matched topics and consent-aware comparisons.",
-          "question": "Does intense expression establish One-to-one Type Four?"
+          "answer": "No. Narrative includes close friendships and vitality, while the Enneagram Institute’s sexual/attraction account emphasizes attraction and stimulation. Their meanings overlap but are not identical. Neither libido nor relationship status identifies this subtype.",
+          "question": "Does one-to-one mean romantic or sexual relationships only?"
         },
         {
-          "answer": "A close person may welcome, tolerate, or fear intensity, and power can limit refusal. Recording limits prevents coercion from becoming a subtype example.",
-          "question": "Why must consent be recorded in a focal comparison?"
+          "answer": "No. Competition may follow the rules of a task, financial stakes, evaluation pressure, or ordinary enjoyment. The specific hypothesis concerns whether comparison with a focal person repeatedly carries identity and significance concerns after those conditions are considered.",
+          "question": "Does competitiveness establish one-to-one Four?"
         },
         {
-          "answer": "Intensity explained by objective stakes, stable expression across audiences, or reliable de-escalation after a clear limit should weaken it.",
-          "question": "What weakens the focal-intensity hypothesis?"
+          "answer": "Yes. The description does not require conflict or escalation. Repeated calm contact without the proposed comparative struggle is evidence against an explanation that says intensity must establish value; it should not be renamed hidden intensity.",
+          "question": "Can a person with this emphasis have calm, stable relationships?"
+        },
+        {
+          "answer": "Accept the limit. Make a concrete request at an appropriate time, and seek another willing source of conversation or feedback if needed. An instinct label gives no entitlement to another person’s attention, disclosure, or emotional response.",
+          "question": "What if the other person does not want a deeper conversation?"
+        },
+        {
+          "answer": "It weakens when reactions follow objective stakes rather than the particular person, repair of a concrete breach resolves the response, or similar exchanges repeatedly remain meaningful without identity comparison. These observations challenge the proposed mechanism rather than serving as a complete typing rule.",
+          "question": "What would weaken the focal-comparison explanation?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +75,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-4",
-          "label": "core_type:type-4",
+          "label": "Type Four: identity and personal meaning",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-4"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/self-preservation",
-          "label": "instinctual_subtype:type-4/self-preservation",
+          "label": "Self-preservation Type Four",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-4/instincts/social",
-          "label": "instinctual_subtype:type-4/social",
+          "label": "Social Type Four",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-4/social"
         }
@@ -184,52 +133,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The description proposes that Type Four difference attention may concentrate around a specific person or rivalry. It is not a claim that intensity causes attachment.",
-          "key": "traditional_hypothesis",
-          "title": "Treat focal intensity as a traditional hypothesis"
+          "body_md": "The core Type Four question concerns identity and personal significance, described in the [Enneagram Institute’s Type Four overview](https://www.enneagraminstitute.com/type-4/). A one-to-one reading asks whether that concern concentrates around a particular person, exchange, or rivalry.\n\nThe [Narrative Enneagram’s subtype account](https://www.narrativeenneagram.org/instinctual-subtypes/) describes competitiveness as one way of responding to a sense of deficiency. In an everyday interpretation, a person might hope that a vivid exchange will make their particular experience unmistakably matter, or compare themselves with someone whose impact they admire.\n\nThe important observation is not emotional volume. It is the proposed sequence: a specific person’s response becomes especially significant, comparison acquires personal meaning, and the person tries to restore their sense of value through stronger engagement or competition. That sequence needs to be observed, including the person’s own account. Intensity by itself cannot establish it.",
+          "key": "a_particular_response",
+          "title": "Why this person’s response matters so much"
         },
         {
-          "body_md": "Compare the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator. Record intensity, evidence, consent, repair, and stakes.",
-          "key": "matched_comparison",
-          "title": "Match the topic while changing the focal person"
+          "body_md": "Narrative’s one-to-one description includes intimate relationships, close friendships, and vitality. The Enneagram Institute’s sexual/attraction description emphasizes attraction and stimulation, including compelling activities as well as people. Their accounts overlap, but organizing a description around a close bond is not exactly the same as organizing it around attraction and charge. Compare the [Narrative introduction](https://www.narrativeenneagram.org/instinctual-subtypes/) with the [Enneagram Institute’s explanation](https://www.enneagraminstitute.com/how-the-enneagram-system-works/).\n\nNeither term should be reduced to sexual activity, libido, orientation, or the number of romantic partners. Enjoying deep friendship is not sufficient evidence either: people with any instinct emphasis can value intimate conversations. On this page, the practical question is whether focal engagement and comparison repeatedly carry a concern about personal identity and significance. Descriptions of vitality or charge do not establish a biological mechanism.",
+          "key": "terms_that_overlap",
+          "title": "One-to-one and sexual/attraction are not identical terms"
         },
         {
-          "body_md": "The label organizes focal attention, comparison, and intensity. It is not evidence about bodily mechanisms, chemistry, sexuality, or a force determining attraction.",
-          "key": "instinct_boundary",
-          "title": "Keep one-to-one language non-mechanistic"
+          "body_md": "Imagine two friends working on a short presentation. One receives an enthusiastic response from someone they both admire. The other begins revising late into the night, asking increasingly personal questions about whose contribution felt more compelling.\n\nThere is a constructive possibility: the admired response highlights something worth learning. The person can request specific feedback, bring more of their own perspective into the work, and enjoy the energy of collaborating with someone who challenges them. Direct exchange can clarify differences that a polite group discussion leaves vague.\n\nThe strategy becomes costly if feedback stops being information and becomes a verdict: ‘If their contribution reaches you more strongly, mine—and therefore I—must be lacking.’ The person may repeatedly seek reassurance, dismiss praise as insufficient, provoke a sharper response, or turn cooperation into a competition the other person never agreed to enter.\n\nObserve what changes when feedback is specific and consistent. Does the person use it to improve the work, or return to the comparative question? Is the same criticism manageable from a neutral reviewer but identity-threatening from this particular person? A repeated difference under similar stakes could support the focal-comparison hypothesis. If responses instead track actual evaluation power, a threatened payment, or an unresolved disagreement, those conditions may explain the pattern better.\n\nA calm exchange that remains meaningful is a counterexample to the claim that this connection needs escalation to feel real. Respecting a limit is healthy behavior, not automatic evidence against the whole subtype; repeated comfortable exchanges without the proposed comparison should nevertheless weaken that particular explanation.",
+          "key": "two_people_one_collaboration",
+          "title": "A collaboration that starts to feel like a contest"
         },
         {
-          "body_md": "Difference may appear as challenging another person, outperforming a rival, or demanding unmistakable engagement. Compare this with real competition and unsafe conflict.",
-          "key": "countertype_variation",
-          "title": "Allow competition to carry difference concerns"
+          "body_md": "At a community exhibition, the budget is reduced and one collaborator receives public praise. A one-to-one Four hypothesis asks whether a particular admired person or rival becomes the center of the response: ‘What did they evoke in that person that I did not?’ The person might seek an individual conversation, compete more strongly, or reconsider what the connection means.\n\nA social Four hypothesis instead asks about place and recognition within the group: ‘Whose work is valued here, and is there room for mine?’ A self-preservation Four hypothesis asks about the conditions that sustain the contribution: ‘Can I afford to continue, and can I keep the part that matters to me?’ None of these questions excludes the others. Compare which one repeatedly organizes decisions after practical circumstances are understood.\n\nForceful expression also does not settle the core type. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) encourage examining reasons beneath similar appearances. Ask whether a challenge aims to prevent domination, secure appreciation by being needed, obtain recognition of success, or address a felt lack of personal significance. Do not assume the loudest person is one-to-one Four, or that a cooperative person must be hiding the same mechanism.",
+          "key": "shared_event_different_questions",
+          "title": "Compare the three Fourth-type priorities in one event"
         },
         {
-          "body_md": "Relationship conflict, competitive fields, trauma history, cultural scripts, harassment, and evaluation power can intensify expression. Consent and safety are mandatory context.",
-          "key": "alternative_environment",
-          "title": "Test conflict, power, and attraction norms"
+          "body_md": "Before interpreting intensity, check what is happening between the people. Broken agreements, unclear credit, cultural expectations, workplace evaluation, harassment, and unsafe conflict can all produce heightened reactions. If a concrete breach explains the response and repair resolves it, a subtype story may be unnecessary.\n\nAlso ask whether both people can decline the exchange without punishment. A colleague who controls assignments, a partner who controls housing, or a friend who threatens withdrawal may limit that freedom. Apparent participation is not reliable evidence of willingness under those conditions.\n\nAn instinct label does not excuse pressure, provocation, humiliation, or repeated requests after refusal. You can want closeness and still stop when someone sets a limit. If there is coercion or danger, prioritize a safer setting and appropriate practical support rather than testing how much intensity the relationship can hold.",
+          "key": "consent_and_real_stakes",
+          "title": "A stronger response is not always a better connection"
         },
         {
-          "body_md": "The hypothesis weakens when intensity follows objective stakes rather than focal identity, remains stable across audiences, or reliably decreases when another person sets a limit.",
-          "key": "counterexample",
-          "title": "Use neutral response and respected limits as tests"
+          "body_md": "In a safe, voluntary exchange, choose one small topic that matters to you. Ask whether the other person has time for it. Make the request concrete: ‘Could you tell me what you understood in this part and where it became unclear?’ Avoid asking them to rank you against another person or prove the strength of the bond.\n\nAgree on a time limit and accept a refusal. Afterward, distinguish the response, the meaning you assigned to it, and your next action. Did limited feedback still help? Could you remain connected without producing a more dramatic response? If you were tempted to reopen the comparison, what practical or personal question was still unresolved?\n\nCompare with a naturally occurring exchange about a similar topic with a neutral person; do not manufacture conflict or jealousy. Account for expertise, evaluation power, and relationship history before attributing differences to subtype.\n\nIf reactions are explained by real stakes, consistently change after a broken agreement is repaired, or show no recurring link between focal comparison and identity, put that hypothesis aside. If meaningful calm contact is repeatedly possible without ranking personal worth, that specifically challenges the proposed dependence on competitive intensity. These are reflection prompts, not a validated subtype assessment.",
+          "key": "one_clear_request",
+          "title": "Try asking for engagement without ranking your worth"
         },
         {
-          "body_md": "Results from one measure remain context-bound. This page cannot predict attraction, conflict, compatibility, creativity, or relationship quality.",
-          "key": "evidence_boundary",
-          "title": "Keep focal observations non-predictive"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Use the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator.\n\nObservable signal: Record topic, stakes, evidence, intensity, consent, limit, evaluation power, repair, and change after refusal.\n\nPage-specific signal: Compare whether the same evidence produces different intensity only when a particular relationship or rivalry is present.\n\nAlternative explanation: Compare conflict, competition, trauma history, cultural scripts, harassment, attraction norms, and power.\n\nReflection prompt: Identify the condition where stakes or safety explain intensity better than subtype and cite one respected limit.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Compare conflict, competition, trauma history, cultural scripts, harassment, attraction norms, and power.",
-            "context": "Use the same disagreement or creative challenge with a close person, neutral collaborator, and anonymous evaluator.",
-            "duration_days": 5,
-            "observable_signal": "Record topic, stakes, evidence, intensity, consent, limit, evaluation power, repair, and change after refusal.",
-            "page_specific_signal": "Compare whether the same evidence produces different intensity only when a particular relationship or rivalry is present.",
-            "reflection_prompt": "Identify the condition where stakes or safety explain intensity better than subtype and cite one respected limit."
-          },
-          "title": "Observation exercise"
+          "body_md": "People have material, social, and close-connection needs; an emphasis does not remove the other instincts. A wing concerns an adjacent-type influence, while subtype language concerns the domain receiving attention. Neither a second-highest core-type score nor a guess about someone’s occupation or public persona establishes an instinct.\n\nThe 27 subtype combinations and countertype terminology belong to traditions. Countertype is not permission to turn every mismatch into hidden intensity or stronger repression. These descriptions are not established neural mechanisms or reproducible scientific diagnoses. The [2021 systematic review abstract](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence across 104 samples; it does not validate these examples or FermatMind scoring. Evidence for a particular questionnaire remains tied to that instrument and sample.\n\nIf this description is useful, its value should show up in clearer requests, better handling of feedback, and respect for limits. It does not predict attraction, compatibility, creativity, or the quality of a relationship.\n\nFor comparison, read [Type Four’s core pattern](/en/personality/enneagram/type-4), [self-preservation Type Four](/en/personality/enneagram/type-4/instincts/self-preservation), or [social Type Four](/en/personality/enneagram/type-4/instincts/social).",
+          "key": "reading_without_fixing_identity",
+          "title": "Use the description without making it a fixed identity"
         }
       ],
       "seo": {
@@ -240,8 +176,8 @@
       "slug": "enneagram/type-4/instincts/one-to-one",
       "source_hash": "1dbfc6fb3eb73b6db69c98365aaf7dabc52d79dbb6d1ab5dd70aeba6b3baf142",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "One-to-one Type Four is a traditional, evidence-limited hypothesis that identity-and-meaning attention may appear through focal comparison, intensity, and testing whether a specific relationship can hold difference. Intense expression cannot establish subtype because conflict, attraction norms, trauma history, competition, and unequal power can look similar.",
-      "title": "One-to-one Type Four: focal intensity as a matched-comparison hypothesis"
+      "summary": "This traditional lens explores what happens when a particular connection or rivalry becomes a focus for identity and significance. It asks how vivid engagement can support expression—and when comparison turns another person’s response into a verdict on your value.",
+      "title": "One-to-one Type Four: connection, comparison, and personal value"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +187,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "42a1063bb8f76d515ae472f73ceadf19002eb179ec369827cc06f3df9dd309d0"
+  "source_content_sha256": "179df546a7abbf46398dd001e2d9cbe9281659db7d5471a223b22c798dcb4eb2"
 }

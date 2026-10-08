@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/big-five/facets/warmth",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "warmth",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "不。热情是从自己内心发出的友善和亲近倾向，讨好是为了获得他人认可或避免冲突而做出的行为调整。前者是内在的，后者是策略性的。",
-          "question": "Q1：热情是不是等于讨好别人？"
+          "answer": "不能这样推断。亲近表达和理解他人的感受、需要是不同问题。看是否认真倾听、核对理解并尊重对方的选择，比用语气或表情判断同理能力更直接。",
+          "question": "热情较弱表示同理心差吗？"
         },
         {
-          "answer": "可以。很多优秀的领导者并不以情感温暖著称——他们靠的是愿景、决策力和公正。但热情弱的领导可能需要有意识地补充人际连接的方式。",
-          "question": "Q2：热情弱的人能当好领导者吗？"
+          "answer": "可以。接触数量的偏好与接触时的亲近方式需要分开看。一个人可以偏好较少的相伴，同时在合适的交流中自然表达友善。",
+          "question": "喜欢独处的人也可以很热情吗？"
         },
         {
-          "answer": "不矛盾。你可能在靠近你的内在倾向中间区域——这时候情境会成为关键因素。也可能你对不同人展现出不同的热情水平——这是正常的个性弹性，而非人格不一致。",
-          "question": "Q3：我既能很热情也能很冷淡，这是矛盾吗？"
+          "answer": "这种差别本身不能说明真诚与否。熟悉程度、角色、语言和安全感可能不同。先记录这些条件与具体行为，再判断是否有违背自己意愿或误导对方的行为。",
+          "question": "对熟人亲切，对陌生人克制，是不真诚吗？"
         },
         {
-          "answer": "有可能。在某些文化和情境中，过快的热情可能被解读为\"假\"或\"有所图\"。关键在于你的热情是否携带了对他人的真实关注——有内容的温暖通常不会被误解。",
-          "question": "Q4：太热情会不会显得不真诚？"
+          "answer": "这些只能是具体表达线索，不是通用判据。不同关系的习惯和个人交流方式会影响它们。不要用单一表情、眼神或回复长度判断关心程度。",
+          "question": "是不是笑得多、眼神接触多就更热情？"
         },
         {
-          "answer": "可以尝试调整行为，例如记住对方关心的小事、在安全情境中主动问候，并记录双方感受。这是在练习表达方式，本页不承诺练习会改变核心倾向、提高分数或使他人的回应必然更好。",
-          "question": "Q5：我能变得更有热情吗？"
+          "answer": "选择真实、适合关系的表达，例如具体感谢，并给对方结束交流的空间。若对方明确希望少联系，就降低接触强度。练习某种表达不保证对方更喜欢你，也不证明人格改变。",
+          "question": "怎样表达亲近又不让对方有压力？"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,88 @@
       "llms_eligible": true,
       "locale": "zh-CN",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted draft; terminology, boundary and evidence review by FermatMind Editorial",
-        "expert_endorsement": false,
-        "limitations": [
-          "用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。",
-          "本内容包不提供费马测试的产品级信度、效度、中文常模或个体预测证据。"
-        ]
+        "not_for": [
+          "不能据此作临床诊断或单独决定录用、录取。"
+        ],
+        "summary": "此页帮助理解人格概念和核对日常行为。实际分数应按所用工具的计分方法、参考样本与适用范围解读。"
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "“热情（外向性）：与他人建立情感连接的倾向”在本页中是 NEO/IPIP-NEO 30 侧面框架下的描述性构念。IPIP 官方使用“测量与 NEO 侧面相似的构念”来描述这些量表，并列出具体条目映射（[S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)）；这不表示不同量表、翻译或产品分数完全等同。\n\n费马测试尚未在本包中公开该页面对应分数的产品级信度、效度、中文常模或个体预测证据。正文只用于自我观察与教育说明，不用于临床诊断、招聘筛选、升学录取或替代职业决定。\n\n> **内容方法与更新时间**：本内容由 FermatMind Editorial 在 AI 辅助起草基础上，根据公开人格心理学来源进行术语、边界与证据核验。内容用于自我认知与教育说明，不构成临床诊断、招聘筛选或个体结果预测。实质更新：2026-07-18；审阅方式：solo_operator；未经过临床专家审阅。\n\n---",
-          "heading": "证据与解释边界",
+          "body": "在本站的 NEO/IPIP-NEO 面向词汇中，热情属于外向性，关注与人接触时是否容易亲近，以及友善和个人关注怎样进入互动。它不以声量、聊天时长或见了多少人为定义。\n\n你可能喜欢较少的人际接触，但在接触时很亲切；也可能常在人群中，却更愿保持礼貌距离。[合群性](/zh/personality/big-five/facets/gregariousness)关注群体相伴的偏好，不能代替热情。\n\n较强倾向可能使亲近较快出现，较弱倾向可能需要更多熟悉或保持较多距离，居中表现可能随关系变化。它们是连续描述，不是“暖心型”和“冷漠型”两种人。一次问候也不足以建立稳定人格判断。",
+          "heading": "热情关注人与人之间的亲近方式",
           "key": "section-01-ff36d65b02",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "热情（Warmth）在大五人格中指的是一个人与他人建立情感连接和表达友善的内在倾向。它的核心不是\"社交技能好不好\"，而是：你在面对一个人（特别是陌生人或刚认识的人）时，内心升起的是亲近的冲动还是保持距离的自然反应？你是\"先热\"的人，还是\"慢慢热\"甚至\"不需要热\"的人？\n\n热情不等于外向。一个人可以喜欢独处（合群性低）但仍然在与人相处时很容易展现温暖；另一个人可以总是在人群中，但与人互动时并不携带多少情感温度。热情测量的是人际互动中的\"情感温度\"，而非社交活动的频率或规模。\n\n热情的另一个关键在于\"非选择性\"——倾向较强的人对大多数人都展现出类似水平的友善和亲近感，不是只对熟人温暖。这种温暖的表达通常不需要对方的\"回报\"——对热情强的人来说，表达友善本身就是一件自然甚至愉悦的事，而不是一种有条件的交换。",
-          "heading": "精确定义",
+          "body": "表达、理解和回应是三件需要分别观察的事。你可以用轻松语气问候，却猜错对方此刻的需要；也可以表达克制，却认真听懂对方希望安静、不想被追问。热情线索不能证明同理能力强弱。\n\n若想知道一次回应是否贴合对方，先让对方说出需要，再确认自己的理解。例如“你希望我帮忙找办法，还是先听你说？”能提供比语气热不热更直接的信息。对方仍可以拒绝回答，拒绝也应被尊重。\n\n同样，提供帮助、守住承诺、赞同观点和表达亲近各有差别。友善地拒绝请求是可能的；热情并不保证没有边界，克制也不保证边界更清楚。真诚与否要看具体行为和一致性，不能从亲近速度判断。",
+          "heading": "表达亲近，不等于已经理解对方",
           "key": "section-02-2cd16a282f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "热情属于**外向性（Extraversion）**维度。在外向性的六个侧面中，热情与合群性共同构成了人际层面的外向性，但热情更侧重\"情感的连接\"，合群性更侧重\"人数的偏好\"。热情是外向性中偏\"情\"的那一半。",
-          "heading": "所属维度",
+          "body": "比较时尽量保留关系条件。与你认识多年的朋友谈近况，与在正式接待场合见陌生人，不是同样的观察机会。你在前者会主动问候、后者只谈事务，先说明这两个情境，而不急着给出整体高低结论。\n\n同一种表达还可能被不同的人理解为不同意思。直呼名字、持续眼神接触或询问私人近况，有人觉得亲切，有人觉得不合适。不要以自己的熟悉方式作为唯一标准，也不要凭地区或国籍预设对方偏好。\n\n可以留意具体关系里的习惯，并在合适时询问对方喜欢怎样联系。语言熟练程度、疲劳、角色要求与安全感也值得记录。表情少、文字回复短或不习惯眼神接触，都不能单独证明缺少热情或关心。",
+          "heading": "熟悉程度与互动规范会改变可见表达",
           "key": "section-03-737c44c523",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **热情 vs 合群性**：这是外向性中最需要区分的侧面对。合群性是\"我喜欢人多\"，热情是\"我对人暖\"。一个人可能喜欢很多人在一起但与人相处时保持礼貌距离（高合群性、低热情），也可能在独处为主的生活中，一旦与人接触就能迅速建立温暖连接（低合群性、高热情）。\n- **热情 vs 利他**：热情是表达友善，利他是提供帮助。热情强的人对他人友好但不一定主动提供实质帮助；利他强的人可能帮助他人很多，但互动方式不一定特别温暖。\n- **热情 vs 积极情绪**：积极情绪是关于\"我有多快乐\"，热情是关于\"我让别人感到多温暖\"。一个内心充满快乐但不善于表达温暖的人，积极情绪可能很高但热情不一定高。",
-          "heading": "与相邻侧面的区别",
+          "body": "假设你经常在楼道遇见同一位邻居。开始几次你只点头，后来记得对方常推着自行车，见面自然问了一句“今天骑车还顺利吗？”对方笑着回答。这是一次主动亲近的线索，不证明你已经懂得对方所有感受，也不证明以后关系一定更好。\n\n另一晚对方拿着手机、明显忙于通话，你只是点头让路。这里没有相同的聊天机会，不应把少说话记成热情下降。\n\n如果你有空、对方也愿意停留，却仍习惯只谈必要事项，可以记录那次选择了较多距离。但不能进一步推断你不在乎人。反过来，连续追问近况让对方想结束，也提醒你：表达亲近已经出现，是否合适却是另一个问题。\n\n较强表达可能让用意更容易被看见，也可能超出对方愿意接受的熟悉程度；较克制表达可能让用意难以判断，也可能正符合双方习惯。是否发生误读，需要核对实际回应，而不是给每一端预设优点。",
+          "heading": "一个问候里的主动、克制和误读",
           "key": "section-04-38e1da9d1c",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "热情倾向较强的人在生活中可能：初次见面时很容易微笑、点头，用自然的肢体语言传达\"我对你没有防御\"；说话时语调中带有明显的温度和起伏；在生活中习惯性地对人表示善意——对服务员、司机、邻居都保持尊重和友好；别人觉得\"容易接近\"、\"好相处\"、\"可以随便问他问题\"；在团体中经常扮演\"打破僵局\"或\"让对方放松\"的角色。\n\n热情倾向较弱的人则可能：初次见面时保持礼貌但不过于亲近——不是不友善，而是不急于建立连接；可能需要较长的时间才能与人建立情感上的舒适感；在互动中更注重事实和效率而非情感温度；别人可能需要\"花时间\"才能接近他们——一旦接近可能发现他们并不冷漠，只是不自动升温。",
-          "heading": "行为线索",
+          "body": "若你认为“我对不熟的人都不主动”，找一件没有练习任务、工作脚本或别人提醒的真实往事。是否曾在安全、合适的接触中自然向一个不熟的人表达关注？这能反驳“都不主动”，可以把假设缩小为“正式或陌生场合里较少主动”。\n\n若你认为“我总会主动让互动亲近”，也检查熟悉、安全且确实有表达机会的情况：是否曾自然保持事务距离，没有问候或个人关注？这可以提醒你把结论缩小到某些关系或角色，不能把每个例外解释成对方的问题。\n\n比较相近关系条件后，某种表达反复出现，可以暂时保留对应的行为描述。若没有接触机会、互动只能照规定进行，或一直处于疲劳和语言不便的情境，搁置广泛判断。暂时没找到反例，仍不是人格已经验证。随后刻意增加问候的表现，要作为主动尝试另记。",
+          "heading": "用自然反例检查“我一向如此”",
           "key": "section-05-b24467e0d7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "热情的表达受情境和安全感的强烈影响。一个人在一个熟悉和友好的环境中可能展现出高于自身基线的热情，而在一个陌生或有压力的环境中可能显得更疏离。这不是\"装的\"，而是热情作为外向性的一个方面，对环境的社会信号比较敏感。\n\n此外，文化背景也会影响热情的表达方式。在一些文化中，初次见面的热情可能表现为微笑和直接的眼神交流；在另一些文化中，同样的热情可能通过更含蓄的方式表达——如记住对方的名字、询问对方的状态。",
-          "heading": "情境差异",
+          "body": "先观察几次原有的人际接触，不要求自己改变。记录对方熟悉程度、是否有合适的互动机会，你实际做了什么，以及对方的明确回应。没有说出的回应不要替对方编写。\n\n然后选一段安全、低风险的日常联系，只增加一个你确实愿意说的表达，例如对共同事务说一句具体感谢。不要为了表现热情追问隐私，也不要将回应热烈当成对方必须完成的任务。把这几次标记为主动尝试。\n\n自然表现和主动尝试都区分三种情况：有适合的机会但亲近表达未出现；没有接触或对方正在忙而没有机会；表达确实出现。进一步写下自己是否舒适、对方是否明确继续或结束，以及熟悉程度有没有变化。没有拒绝不等于欢迎更亲密的接触。\n\n如果某种表达适合双方，可以保留。若对方希望更少接触，减少强度；若只在熟悉的人面前自然出现，把观察范围缩小到这些关系；若机会太少或反馈不清，先搁置结论。没有必要强迫陌生互动来收集材料。这个尝试检查表达办法，不能证明同理能力、人格或测评分数发生改变。",
+          "heading": "尝试一种真实表达，并检查是否合适",
           "key": "section-06-11adf7a9a0",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当热情倾向较强时，一个人可能：\n- 在新环境中是第一个主动打招呼或自我介绍的人；\n- 与不同社会阶层、背景的人都能自然地展开互动，没有明显的社交距离感；\n- 在他人有情绪困扰时，本能地想要靠近和安慰，而不是思考\"我该说什么\"；\n- 偶尔可能因为过于友善而被人误解为\"别有用心\"或\"不真诚\"——尤其是遇到对友善信号解读更谨慎的人时；\n- 在需要保持严肃距离的场合，可能难以压抑自己倾向于接近和连接的本能。",
-          "heading": "倾向较强时的可能表现",
+          "body": "[IPIP 官方映射表](https://ipip.ori.org/newNEO_FacetsTable.htm)把 Friendliness 对应到 NEO 的 Warmth，本站沿用热情这一公开身份。[长版条目](https://ipip.ori.org/newNEOFacetsKey.htm)与[Maples 四条目版本](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm)提供不同范围的相似构念线索；不能把其中的日常措辞当作同理能力测验。\n\n[BFI-2 作者说明](https://www.ocf.berkeley.edu/~johnlab/bfi.html)使用十五个面向，不能与这里的三十面向目录直接等同。本站公开目录也不能说明你完成的每种题本都单独测了热情。\n\n阅读结果时核对具体版本和实际输出，不从外向性总分推算热情，不新增高低阈值或常模解释。来源中的研究统计不证明费马产品的测量性质，热情描述也不能决定领导能力或关系质量。",
+          "heading": "工具中的 Warmth 与 Friendliness",
           "key": "section-07-6143692cc8",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "当热情倾向较弱时，一个人可能：\n- 在新环境中保持观察和分析的姿态，不急于建立个人化的联系；\n- 与人的关系更多是通过任务、共同目标和理性交流搭建的，而非情感纽带；\n- 对他人的情绪需求不是不在意，而是不习惯于用自己的情感回应；\n- 可能被他人误解为\"冷\"、\"不好接近\"或\"不太关心人\"，尽管他们的关心可以以其他方式表达；\n- 在不需要\"升温\"的环境中——如某些专业性强的协作场景——能保持清晰的边界感和效率。",
-          "heading": "倾向较弱时的可能表现",
+          "body": "如果你主要困惑“喜欢独处还能不能亲切”，读[合群性](/zh/personality/big-five/facets/gregariousness)。如果问题是讨论时是否表达立场或主动影响，读[果断性](/zh/personality/big-five/facets/assertiveness)。\n\n若你把忙碌、兴奋或快乐与热情混在一起，可分别读[活跃度](/zh/personality/big-five/facets/activity)、[刺激寻求](/zh/personality/big-five/facets/excitement-seeking)和[积极情绪](/zh/personality/big-five/facets/positive-emotions)。回到[外向性](/zh/personality/big-five/extraversion)看父维度，或通过[30 个面向总览](/zh/personality/big-five/facets)理解不同问题的分工。",
+          "heading": "继续区分接触数量、表达主导与情绪",
           "key": "section-08-39e48c2ae2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "较强的热情倾向可能使友善表达和主动连接更自然；实际是否建立信任、改善协作或适应客户工作，还要观察他人反应、文化、边界、技能和情境。投入过多也可能带来消耗。\n\n较弱的热情倾向不表示缺少关心，也不证明客观判断更好或领导能力更强。关心可以通过可靠行动和清楚沟通表达；如果对方难以理解你的用意，可以尝试补充一句解释，再观察是否有帮助。高低倾向都不能单独预测关系或工作表现。",
-          "heading": "优势与代价",
-          "key": "section-09-e519c0230c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**案例**：周彤是一家中型公司的行政主管。公司每次新员工入职，她都主动带新同事去各部门介绍，中午还会问要不要一起吃饭。她的办公室抽屉里永远有一些小零食，不是为了自己吃，是给来找她的人准备的。有一次一个新员工在茶水间不小心打翻了咖啡，正在手忙脚乱的时候，周彤路过，二话没说蹲下来帮忙擦，一边擦一边说：\"没事没事，我刚来的时候摔过一整盒便当，比你惨多了。\"她不是故意要\"社交\"，她只是觉得\"对人好一点\"是一件不需要思考的事。同事说她\"像暖气\"，不是热得让人受不了，但走进去就是暖的。",
-          "heading": "一个原创案例",
-          "key": "section-10-4b9538ba3e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "**反例**：韩宁是同一个公司的数据工程师。他的工作能力无可挑剔，但他入职三年，大多数同事都只需要和他\"开会讨论需求\"。他打招呼的方式是点一下头，偶尔会说\"早\"。不是他不友善——如果有人主动问他问题，他会认真回答，甚至会仔细准备资料。但他的默认状态是\"不需要建立情绪连接\"。有一次公司的实习生说：\"韩老师人挺好的，就是每次跟他说话我都会不自觉地紧张，好像我在占用他的时间。\"韩宁不介意被人觉得\"有点冷\"——对他来说，这不是一种损失。",
-          "heading": "一个原创反例",
-          "key": "section-11-3aeb7c358c",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. 面对一个陌生人，你的第一反应是想靠近了解，还是保持距离观察？\n2. 你对人表达友善时，更多是出于习惯和本能，还是经过思考和选择？\n3. 休息时，你的情感能量是靠独处恢复，还是靠与人互动恢复——还是要看和什么人的互动？\n4. 上一次有人对你说\"你好暖\"或\"你真冷\"是什么情境？你觉得那个评价准确吗？\n5. 如果你今天必须和十个不认识的人社交三小时，你内心升起的是期待还是疲惫？",
-          "heading": "自我观察问题",
-          "key": "section-12-c1e6a22f1b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- **微暖练习**：如果你倾向较弱，尝试连续三天，每天对一个陌生人（如咖啡师、保安、快递员）说一句比平常多一点点温暖的话。观察对方和你自己的反应。\n- **冷静边界**：如果你倾向较强且有时感到情感透支，尝试在下一周设定一个\"不主动升温\"的人际情境——比如开会时不主动化解冷场——看看会发生什么。\n- **观察日记**：花一周时间，注意身边哪些人的互动让你觉得\"暖\"，哪些让你觉得\"冷\"。写下他们具体做了什么（或没做什么）。这能帮你更具体地理解热情的\"表达语言\"。",
-          "heading": "低风险行动实验",
-          "key": "section-13-c02d5ee36b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- 返回父维度：[外向性](/zh/personality/big-five/extraversion) · [30 个侧面总览](/zh/personality/big-five/facets)\n- 同维度侧面：[合群性](/zh/personality/big-five/facets/gregariousness) · [果断性](/zh/personality/big-five/facets/assertiveness) · [活跃度](/zh/personality/big-five/facets/activity) · [刺激寻求](/zh/personality/big-five/facets/excitement-seeking) · [积极情绪](/zh/personality/big-five/facets/positive-emotions)",
-          "heading": "继续阅读",
-          "key": "section-14-aeb3f4be77",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "热情描述在人际互动中容易靠近他人、感到亲近并表达友善的倾向。表达强弱不能替代同理能力；结合熟悉程度、互动规范和对方偏好，才能理解具体行为。",
+        "title": "热情：亲近表达、熟悉程度与同理心怎样区分"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/warmth",
-      "source_hash": "0ddeb7e8ed3e070fefedeae9288925eba648ef1e48b548ac5df5050accbdc550",
-      "source_package": "big5-zh-v3-52-page-release",
-      "summary": "热情反映一个人与他人建立情感连接和表达友善的倾向——初次见面时是否容易展现温暖，是否享受与他人的情感互动。",
-      "title": "热情（外向性）：与他人建立情感连接的倾向"
+      "source_hash": "a36270fb27f72c4469c860680866c30bc29ad1f181ca020a039e3472b3761d3d",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "热情描述在人际互动中容易靠近他人、感到亲近并表达友善的倾向。表达强弱不能替代同理能力；结合熟悉程度、互动规范和对方偏好，才能理解具体行为。",
+      "title": "热情：亲近表达、熟悉程度与同理心怎样区分"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E1-warmth-facet_definition-1",
-            "limitation": "IPIP 描述的是与 NEO 侧面相似的构念，不证明量表、翻译或产品分数完全等同。",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "contextual"
-          },
-          {
-            "claim_id": "E1-warmth-product-boundary",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E1-warmth-content-method",
-            "limitation": "这是公开的产品/方法边界声明，不是经验性研究结论。",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "模型研究不等于费马测试产品验证。",
-          "不用于临床诊断、招聘筛选、升学录取或个体结果预测。"
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E1-warmth-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "IPIP 官方说明明确区分 lexical Big Five、FFM、BFI 与 NEO/IPIP 体系，并使用 ‘similar constructs’ 而非量表等同。具体条目映射见 https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm。 该官方网页未标注出版年；year 记录本次公开核验的访问快照年，不代表出版年份。",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "ceeceb299fc25cb8cff144301af1f6bcb9f4b9959f7067f5cc9b021438bd2e5c"
+  "source_content_sha256": "edaa0e518e4deeeb6ecb6034e22ed9ccd78dd2852a8d1b7f576f82f2c6c1b408"
 }

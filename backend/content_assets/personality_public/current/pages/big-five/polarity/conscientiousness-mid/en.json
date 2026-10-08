@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/conscientiousness-mid",
@@ -20,30 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "conscientiousness-mid",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. A middle result can reflect mixed facets or selective effort. It is not an ability test.",
-          "question": "Does mid-range Conscientiousness mean weak self-discipline?"
+          "answer": "It does not establish a separate Self-Discipline result or an ability level. Check what was measured, then identify whether your practical concern involves starting, continuing, organizing, or keeping a commitment.",
+          "question": "Does a middle result mean average self-discipline?"
         },
         {
-          "answer": "Not by default. Address a specific behavior or cost rather than trying to move a trait label.",
-          "question": "Do I need to increase Conscientiousness?"
+          "answer": "No. A trait score is not a percentage of your day spent behaving in a particular way. Differences between activities need their own evidence.",
+          "question": "Does middle mean I am disciplined half the time?"
         },
         {
-          "answer": "The range cannot establish leadership capacity. Selective structure may help in some settings, but skill, judgment, trust, and results matter directly.",
-          "question": "Does mid-range Conscientiousness offer an advantage in leadership?"
+          "answer": "That contrast alone does not establish balance or health. Roles, demands, tools, and available time may differ. Check whether either pattern creates a cost you want to address.",
+          "question": "Am I balanced because I work carefully but relax at home?"
         },
         {
-          "answer": "No. Roles, stakes, interest, support, and fatigue can produce coherent variation. Examine the pattern before judging it.",
-          "question": "Am I unstable if I am disciplined sometimes and relaxed at other times?"
+          "answer": "The label cannot establish leadership ability. Good decisions, communication, coordination, and outcomes require direct evidence. A middle score does not guarantee well-timed flexibility.",
+          "question": "Does the middle offer a leadership advantage?"
+        },
+        {
+          "answer": "Start with a concrete goal rather than a score target. If an important task is repeatedly delayed, try a small change to its conditions and review the result. If there is no actual problem, you need not add a new system.",
+          "question": "Should I aim for a higher result?"
         }
       ],
       "framework": "big_five",
@@ -79,163 +76,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Mid-range Conscientiousness may suggest that structure is used selectively. You may plan important work carefully, improvise when consequences are low, and adjust routines as priorities change. The pattern is not missing discipline; it often reflects different thresholds across tasks and facets.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “Mid-range Conscientiousness: finding a personal rhythm between order and flexibility” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Conscientiousness concerns your usual approach to organizing action and following through on goals and obligations. A middle position says where this assessment places your result. It does not explain why you act as you do.\n\nSome people may describe a fairly moderate pattern across tasks. Others may recognize a strong preference for order alongside difficulty getting started, or careful follow-through in one setting and little planning in another. Someone may also have answered uncertainly because different roles suggested different answers. These are possibilities to investigate, not profiles contained in the word 'middle.'\n\nIt is therefore premature to conclude either that you lack discipline or that you have achieved an ideal compromise.",
+          "heading": "A middle result is a starting point",
           "key": "section-01-d865dbcfe5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may keep systems for consequential commitments while allowing spontaneity elsewhere. A middle result can also conceal high Dutifulness with lower Order, or strong Achievement Striving with variable Self-Discipline. Facets and examples explain more than the word “middle.”",
-          "heading": "What This Range Specifically Means",
+          "body": "Check whether the label refers to a score interval, the scale's numerical midpoint, or a comparison with a reference group. Half of the possible score is not automatically the population average. A percentage of the maximum possible score is not a percentile.\n\nFor a percentile, identify the population, language, instrument version, and conversion. For a range label, use that tool's explanation without inventing thresholds. Small differences around a boundary should not be treated as a change of personality type.\n\nThe [BFI-2 author's description](https://www.ocf.berkeley.edu/~johnlab/bfi.html) illustrates that an instrument has its own structure and scoring context. Its information cannot supply missing rules for another assessment. Fatigue, uncertain answers, and the role you had in mind are relevant observations, not a basis for recalculating your score yourself.",
+          "heading": "Middle of a scale and middle of a population differ",
           "key": "section-02-934cf55e33",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "It does not indicate insufficient willpower, average competence, inconsistent character, or leadership potential. It cannot show whether a specific deadline will be met or whether a person should become more structured.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "The NEO/IPIP-NEO terms used here include Self-Efficacy, Orderliness, Dutifulness, Achievement Striving, Self-Discipline, and Cautiousness. The [official IPIP item sets](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) show that these address different kinds of self-description.\n\nBeing comfortable with a tidy system differs from setting demanding goals or beginning routine work. A broad middle result cannot tell you which part is stronger, nor whether your actual assessment measured every part. If there are no facet results, describe the behavior without assigning a facet score.\n\nThen examine the situation. Was the next step clear? Were materials available? Did someone else supply the schedule? The fact that two activities look equally important does not make their conditions comparable.",
+          "heading": "Ask a narrower question before choosing an explanation",
           "key": "section-03-471c30a9c5",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include planning in broad milestones, organizing after complexity rises, meeting important obligations while letting minor tasks accumulate, and switching between steady progress and deadline bursts. The pattern may be efficient or fragile depending on workload.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Imagine that you upload a photograph promptly for a weekly camera-club challenge, while your personal photo archive remains untouched. You may interpret this as wisely allocating effort. Another explanation is that the challenge specifies one file and a deadline, whereas 'sort the archive' has no clear first step or endpoint.\n\nFocus on one observable action: beginning a short photo-sorting session. Compare occasions when the files and equipment were ready and you had usable time. Record the start, available cues, and the defined task, rather than comparing a finished club submission with the appearance of an entire archive.\n\nIf you deliberately choose not to maintain the archive and that choice has no relevant cost, there may be no problem to solve. If you want to share a collection and repeatedly cannot find the images, there is a concrete obstacle. Neither conclusion follows from the middle label.",
+          "heading": "When external structure may explain the contrast",
           "key": "section-04-5a6ef01381",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Work may provide calendars and accountability that home lacks. Interest can make persistence easy, while low-value administration receives minimal structure. During uncertainty, you may first improvise and add process only after repeated errors reveal a need.",
-          "heading": "Possible Differences Across Settings",
+          "body": "Suppose your working idea is: 'Without an external deadline, I often postpone starting a short photo-sorting session.' A natural exception would be starting that same activity, with ready materials and available time, under your ordinary conditions and without new prompting.\n\nA scheduled club meeting is not a contrary example of self-starting the sorting task. No ready files or no usable time means there was no suitable opportunity. If the conditions were present but you did not start, record that separately. If you started and later stopped, that raises a question about persistence rather than initiation.\n\nRetain the working idea provisionally if postponement recurs in comparable opportunities. Narrow it if the pattern occurs mainly when the task has no endpoint. Suspend it if conditions are unclear or examples are too sparse. One spontaneous start does not disprove 'often,' and failing to find an exception does not establish a universal pattern.",
+          "heading": "A natural exception can narrow the working idea",
           "key": "section-05-8daf129094",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include proportional planning, tolerance for change, and the ability to translate between highly structured and spontaneous collaborators. You may avoid both overengineering and total ambiguity when decision thresholds are clear.",
-          "heading": "Possible Strengths",
+          "body": "For a low-stakes personal collection, first record how you ordinarily approach a brief sorting session. Then make one change: define an endpoint such as selecting five photographs for a named folder. Avoid adding several reminders and rewards at once, because you would no longer know which condition you were exploring.\n\nFor each opportunity, note whether materials and time were available, whether you began, where you stopped, and whether the selection was usable later. Mark sessions with the new endpoint as intentional trials. They are evidence about that support, not natural exceptions to the original pattern.\n\nIf a clear endpoint repeatedly makes starting easier, keep it as a useful option. If there is no difference, reconsider the task or competing demands. If opportunities did not occur, leave the question unanswered. A short record can guide a practical choice; it cannot verify the trait score, demonstrate a permanent change, or establish that structure is always what you need.",
+          "heading": "Change one condition and review the result",
           "key": "section-06-8a0358fd93",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Costs can include uneven follow-through, hidden reliance on urgency, or confusion for others when one task receives detailed planning and another does not. Selective structure works best when priorities and commitments are communicated.",
-          "heading": "Possible Costs",
+          "body": "The [higher](/en/personality/big-five/conscientiousness-high) and [lower](/en/personality/big-five/conscientiousness-low) positions describe the same continuous dimension. Higher is not constant organization, lower is not demonstrated adaptability, and middle is not proven judgment about the right amount of effort. Compare similar tasks with similar support, using the same instrument.\n\nFor the whole dimension, read [Conscientiousness](/en/personality/big-five/conscientiousness). For distinctions the total misses, use the [facet guide](/en/personality/big-five/facets), while checking what your assessment actually measured.\n\nChoose an action because a specific goal or commitment needs attention. There is no automatic requirement to move a middle result upward. If your current approach serves your goals without a meaningful cost, more structure may not be necessary.",
+          "heading": "Compare the other positions and decide what matters",
           "key": "section-07-637ae1ca8e",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Compared with [high Conscientiousness](/en/personality/big-five/conscientiousness-high), systems may be lighter or more situational. Compared with [low Conscientiousness](/en/personality/big-five/conscientiousness-low), important obligations may trigger structure sooner. Middle does not mean every facet is centered.",
-          "heading": "How This Differs From the Other Two Ranges",
-          "key": "section-08-492027284b",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You lead a small launch. You set three milestones and owners but skip a detailed daily plan. When a dependency slips, you add a short checklist for the risky handoff. The approach preserves flexibility while applying structure where failure would compound.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-a782b5218d",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You might maintain an exact training schedule for months. A strong routine in one valued domain does not necessarily imply globally high Conscientiousness; motivation, feedback, and environment may support that behavior.",
-          "heading": "A Counterexample",
-          "key": "section-10-cd22591d95",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Which commitments trigger planning automatically?\n- Where do you rely on urgency?\n- Which facet appears stronger or weaker than the total?\n- Do others understand your priority thresholds?\n- When did adding or removing structure help?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-752ca24005",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Choose one recurring commitment that often becomes rushed. Add only a start cue and a completion definition for seven days. Record whether this minimal structure improves reliability without creating unnecessary overhead.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-16c46561fd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Conscientiousness](/en/personality/big-five/conscientiousness), compare [high](/en/personality/big-five/conscientiousness-high) and [low Conscientiousness](/en/personality/big-five/conscientiousness-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-b8c605ad81",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "A middle result does not establish balance, flexibility, or average ability. It leaves several explanations open. Useful interpretation separates the score's reference point from differences between tasks, aspects, and available support.",
+        "title": "Mid-Range Conscientiousness: Understanding What the Middle Leaves Open"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/conscientiousness-mid",
-      "source_hash": "32c4d1aa8a54a2958e47b5c71bb2bf30197cf5c7a2e0acdaa1ea0268906d57e9",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Mid-range Conscientiousness may suggest a personal rhythm between order and flexibility. It is not weak self-discipline or an absence of reliable tendencies.",
-      "title": "Mid-Range Conscientiousness: Structure When It Matters"
+      "source_hash": "d719007572d9bda8ee8abd822f20138402ff92a9782369fb9d6e4425d9d5d9c0",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "A middle result does not establish balance, flexibility, or average ability. It leaves several explanations open. Useful interpretation separates the score's reference point from differences between tasks, aspects, and available support.",
+      "title": "Mid-Range Conscientiousness: Understanding What the Middle Leaves Open"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "conscientiousness-mid-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, ability, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "conscientiousness-mid-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "conscientiousness-mid-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "conscientiousness-mid-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "20e387bd71e5916041df1cd849c54d2866d3e055841a5e85c2c93321115d7174"
+  "source_content_sha256": "e4d244c8e6ea8712e5f8f0370e2bb1fb0936c13e0d70d6868af16627fc7c78aa"
 }

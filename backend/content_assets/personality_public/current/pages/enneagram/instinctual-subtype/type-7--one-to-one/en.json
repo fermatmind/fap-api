@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-7/instincts/one-to-one",
@@ -23,94 +23,35 @@
       "entity_key": "type-7/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Early-stage novelty, loneliness, chemistry, persuasion, scarce opportunity, or unequal power can intensify attraction. The comparison must include consent, facts, and later ordinary contact.",
-          "question": "Does intense attraction establish one-to-one Seven?"
+          "answer": "No. The schools' overlapping but different accounts include partners, close friendships, vitality, or attraction intensity. Friendship and collaboration can be worth observing, but investment, deep conversation, or creative enjoyment alone cannot establish subtype. Examine how connection participates in Seven's proposed core motive.",
+          "question": "Does one-to-one attention require intense romantic involvement?"
         },
         {
-          "answer": "Separate direct statements and observed actions from imagined traits, predicted futures, and preferred interpretations. Ask the other person rather than treating a compelling story as shared reality.",
-          "question": "How can projection be recorded without mind reading?"
+          "answer": "Accepting refusal weakens explanations about ignoring facts or pressuring someone to maintain intensity. It does not by itself exclude attention to connection and vitality. If repeated experiences also lack the imagined expansion or avoidance process described here, reduce the overall interpretation rather than invoking hidden subtype or repression.",
+          "question": "If I accept refusal, does that mean this subtype cannot fit?"
         },
         {
-          "answer": "Respecting a clear refusal, keeping prior obligations, and allowing the imagined future to shrink without renewed pressure strongly challenge an intensity-preserving interpretation.",
-          "question": "Which consent response challenges idealized possibility?"
+          "answer": "No. Novelty, professional interest, creative engagement, and scarce opportunities can produce the same excitement. Separately record the role of individual connection, the gap between facts and imagination, and later adjustments. An interesting project does not establish one-to-one instinct, and strong excitement does not establish Type Seven.",
+          "question": "Is being easily excited by new ideas enough?"
         }
       ],
       "framework": "enneagram",
@@ -132,19 +73,19 @@
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "Enneagram Type 7",
+          "label": "Type Seven core description",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "Type 7: self-preservation instinct",
+          "label": "Type Seven self-preservation subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/social",
-          "label": "Type 7: social instinct",
+          "label": "Type Seven social subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/social"
         }
@@ -184,52 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The tradition proposes that possibility may become vivid through an idealized person, project, encounter, or future. Observe what is known, what is imagined, and how the picture changes when ordinary details arrive.",
-          "key": "traditional_hypothesis",
-          "title": "Frame fascination as a tentative attention pattern"
+          "body_md": "Meeting someone with whom conversation flows can quickly suggest travel, collaboration, or a different life. That may be real inspiration. It may also build an extensive future on limited acquaintance. The one-to-one Seven interpretation asks how an exciting connection makes satisfaction and possibility feel close while ordinary limits and disappointment recede.\n\nThe core remains Seven's interest in satisfaction, freedom, and worthwhile anticipation. The [Enneagram Institute's Seven description](https://www.enneagraminstitute.com/type-7/) provides a traditional account, not facts about an individual. Someone can keep commitments, accommodate sadness, and experience fascination quietly. Visible enthusiasm or constant happiness is not required.\n\nTrack a concrete sequence: what the other person actually said, what you imagined from it, what plans followed, and whether subsequent ordinary facts changed your actions. Without that sequence, liking someone or enjoying creative work is insufficient support for this interpretation.",
+          "key": "future_in_encounter",
+          "title": "When an encounter feels like an opening into a new world"
         },
         {
-          "body_md": "Track the same relationship or project at initial excitement and after routine interaction. Compare promises, curiosity about disconfirming facts, consent checks, and completion once novelty no longer supplies momentum.",
-          "key": "matched_comparison",
-          "title": "Compare first intensity with later reciprocal contact"
+          "body_md": "The [Narrative Enneagram's one-to-one account](https://www.narrativeenneagram.org/instinctual-subtypes/) includes intimate partners, close friendships, and vitality. The [Enneagram Institute's sexual/attraction account](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction, stimulation, and intensity. Stable closeness and intense attraction are not the same phenomenon, so the terms cannot simply be exchanged.\n\nThis page uses one-to-one as its identity and discusses attraction where relevant. It is not limited to sex or romance: a friend, creative partner, or particularly compelling exchange can be worth observing. An interesting project alone still does not establish this instinct. Ask how individual connection and vitality participate in Seven's pattern of possibility.\n\nDepth of conversation, libido, relationship frequency, and social popularity do not provide enough information to make that distinction.",
+          "key": "school_terms",
+          "title": "One-to-one and sexual/attraction overlap without being identical"
         },
         {
-          "body_md": "Fascination may appear as animated pursuit, private fantasy, artistic immersion, or unusually positive interpretation. Surface volume is less useful than the gap between projected possibility and confirmed reality.",
-          "key": "countertype_variation",
-          "title": "Allow quiet absorption as well as visible excitement"
+          "body_md": "Friends are organizing a weekend repair workshop. The venue cancels, the budget is halved, and one collaborator clearly offers only two hours. You have just discussed a compelling new direction, and they have expressed interest.\n\nA one-to-one Seven interpretation asks whether you turn that exchange into a much larger shared future. Used effectively, excitement becomes a small experiment achievable in two hours, with the other person's agreement. Overused, it might lead to pitching a long partnership, neglecting ordinary preparation, or treating interest as consent to continued involvement. The observable gap is between confirmed information and assumed commitment—not an inferred attachment style.\n\nIn the same event, a self-preservation Seven interpretation prioritizes workable space, tools, and comfort. A social Seven interpretation prioritizes shared purpose, participation, and responsibilities. A one-to-one interpretation gives particular weight to the fresh direction associated with this collaborator. All three can propose new plans; compare what makes a plan compelling and how facts revise it.\n\nRespecting the two-hour limit weakens an explanation about preserving intensity at the expense of facts. It does not automatically exclude attention to connection and vitality. These original examples compare processes, not single-behavior typing rules.",
+          "key": "two_hour_partner",
+          "title": "What changes after a collaborator says “only two hours”?"
         },
         {
-          "body_md": "One-to-one instinct here is a traditional attention convention, not evidence about bodily mechanisms. Attraction, trauma response, attachment concerns, mood symptoms, and coercion need separate qualified assessment.",
-          "key": "instinct_boundary",
-          "title": "Use intensity as an observation label only"
+          "body_md": "Narrative's traditional account includes both being captivated and making new ideas compelling to others. In ordinary collaboration, this can make a vague possibility vivid enough for someone to try. Overused, the story may outrun the evidence: an unconfirmed opportunity sounds inevitable, or silence is interpreted as agreement.\n\nSeparate your enthusiasm from another person's consent. An invitation can specify what is known, what is a hope, what effort is involved, and how to decline without a relationship penalty. Nobody owes you the continuation of your excitement.\n\nLoneliness, relocation, an early creative phase, scarce opportunities, sales incentives, or unequal power can produce similar behavior. If it recedes when those conditions change, prefer the more direct explanation. Where coercion, deception, or an unsafe exit is present, address those facts rather than recasting them as charisma or deep connection.",
+          "key": "suggestion_both_ways",
+          "title": "Fascination can draw you in—and draw others in"
         },
         {
-          "body_md": "A new relationship, creative commission, charismatic leader, marketing funnel, love-bombing, relocation, or scarce opportunity may amplify idealization. Verify consent, incentives, authority, and access to exit.",
-          "key": "alternative_environment",
-          "title": "Check novelty, persuasion, and power conditions"
+          "body_md": "Four and Seven interpretations can both involve intensity and idealization. When facts disappoint, ask whether you are more concerned with authentic expression and missing depth, or with finding another possibility that makes life worth anticipating. Fours can anticipate the future and Sevens can grieve deeply, so one emotional response does not decide the core. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) offer traditional questions, not fixed emotional checklists.\n\nTwo can resemble Seven in warmth and attraction. When someone no longer wants your help or the proposed plan, what is harder to lose: being liked and needed, or the exciting future already imagined? The person must answer this themselves, and several concerns may coexist.\n\nIf repeated comparable situations do not show imagination in connection helping bypass disappointment or expand options, lower this page's fit. Do not call the missing process a hidden one-to-one Seven. If only the narrower hypothesis of ignoring facts is unsupported, withdraw that hypothesis without denying every concern for closeness and vitality.",
+          "key": "similar_intensity",
+          "title": "When Four or Two seems equally plausible"
         },
         {
-          "body_md": "The hypothesis weakens when the person asks for inconvenient facts, accepts an unglamorous pace, respects a firm refusal, keeps prior commitments, and remains engaged after the imagined future becomes more limited.",
-          "key": "counterexample",
-          "title": "Look for ordinary reality that remains welcome"
+          "body_md": "Choose a voluntary, low-risk exchange or collaboration invitation. Make three columns: what the other person explicitly said or did, what you inferred, and what you hope will happen. The latter two belong to you; they are not the other person's promises.\n\nOffer one small step that either party can revise or decline, and confirm time, scope, and willingness. When an inconvenient fact arrives—one-time availability, no public display, a slower pace—revise the plan before introducing a larger vision. Keep existing responsibilities and allow some ordinary, less exciting contact.\n\nAfterward, record whether you actually adjusted, whether refusal was freely available, and what remained interesting as novelty declined. Was the next step based on confirmation or primarily an attempt to restore excitement? A collaborator can help by distinguishing inspiration from agreement and answering clearly rather than ambiguously encouraging everything.\n\nThis is not a reason to delay necessary decisions or enlist someone unwillingly in an observation exercise. Address real risks first. If imagination consistently follows facts and new connections do not repeatedly bypass disappointment, withdraw the relevant idealization or avoidance explanation. Curiosity about the real relationship matters more than preserving a subtype name.",
+          "key": "facts_and_small_step",
+          "title": "Give imagination a route back to facts"
         },
         {
-          "body_md": "This subtype cannot establish compatibility, intimacy capacity, creativity, or relationship outcomes. Instrument-specific findings do not prove universal subtype structure, and safety or consent facts must never be reframed as typology.",
-          "key": "evidence_boundary",
-          "title": "Keep attraction and compatibility claims out"
-        },
-        {
-          "body_md": "Duration: 4\n\nContext: Over four days, choose one compelling person or project and compare the first narrative with two later ordinary interactions.\n\nObservable signal: Write separately what was directly confirmed, what was inferred, what refusal or constraint appeared, which prior promise remained, and what action followed after novelty declined.\n\nPage-specific signal: Measure the gap between idealized potential and reciprocal facts rather than rating the strength of excitement.\n\nAlternative explanation: Check early attraction, creative flow, persuasive tactics, unequal authority, scarce opportunity, loneliness, relocation, and access to a safe exit.\n\nReflection prompt: Name one inconvenient fact that changed the picture and show whether behavior adjusted without pressuring anyone to preserve intensity.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check early attraction, creative flow, persuasive tactics, unequal authority, scarce opportunity, loneliness, relocation, and access to a safe exit.",
-            "context": "Over four days, choose one compelling person or project and compare the first narrative with two later ordinary interactions.",
-            "duration_days": 4,
-            "observable_signal": "Write separately what was directly confirmed, what was inferred, what refusal or constraint appeared, which prior promise remained, and what action followed after novelty declined.",
-            "page_specific_signal": "Measure the gap between idealized potential and reciprocal facts rather than rating the strength of excitement.",
-            "reflection_prompt": "Name one inconvenient fact that changed the picture and show whether behavior adjusted without pressuring anyone to preserve intensity."
-          },
-          "title": "Observation exercise"
+          "body_md": "The three instincts are traditional attention domains, not mutually exclusive sets of needs. Wings and subtypes address different layers; neighboring core influences do not replace connection-focused attention, and a second-highest score does not establish either. Twenty-seven subtype combinations and countertype labels are not repeatable scientific diagnoses or verified neural mechanisms.\n\nThe [abstract of Hook and colleagues' 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence. This page does not validate FermatMind's forms or subtype scoring, nor establish intimacy skills, libido, creativity, compatibility, or relationship outcomes. Traditional accounts and research on a particular instrument cannot automatically become product evidence.\n\nRead the [Type Seven core description](/en/personality/enneagram/type-7) if the underlying motive is uncertain. Compare [social Seven](/en/personality/enneagram/type-7/instincts/social) when the attraction centers more on collective participation and purpose.",
+          "key": "evidence_and_next",
+          "title": "An interpretation is not a compatibility verdict"
         }
       ],
       "seo": {
@@ -240,8 +168,8 @@
       "slug": "enneagram/type-7/instincts/one-to-one",
       "source_hash": "4c1fc2b62243a78fa2b8f5bce543f8290abd4488dec9ad738620c3b5e64e14a5",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Seven one-to-one is a traditional, evidence-limited hypothesis combining Type Seven possibility with fascination, idealized possibility, intensity, and projection toward a person or experience. Excitement does not establish subtype because novelty, attraction, creative immersion, manipulation, unequal power, unmet needs, and ordinary early-stage enthusiasm can look similar.",
-      "title": "Type Seven one-to-one: a fascination, idealized possibility, and intensity hypothesis"
+      "summary": "The one-to-one Seven interpretation asks how a person, exchange, or experience comes to carry an exciting future. It retains Seven's interest in satisfaction and room for choice while focusing attention on connection, attraction, and vitality. Examine how imagination guides action and responds to facts, rather than measuring excitement or counting relationships.",
+      "title": "Type 7 One-to-One: Bringing Fascination Into Real Connection"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e70a08d20924235860c482ebd413a7705a32e2b844b46e47e417f5e9d220c57b"
+  "source_content_sha256": "76d693715b9f16e9654416ae29c81cc5039bb645cee808ee1affda88cd2f8d2c"
 }

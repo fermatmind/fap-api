@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/enneagram/type-9/instincts/one-to-one",
@@ -23,94 +23,35 @@
       "entity_key": "type-9/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "Intense attunement does not prove one-to-one Nine. Affection, collaborative skill, translation, caregiving, or safety dependence may produce close coordination; examine preference provenance and access to refusal.",
-          "question": "Does intense attunement prove one-to-one Nine?"
+          "answer": "No. Intensity can arise from attraction, creative collaboration, affection, novelty, or circumstances. Explore both the Nine motivation and the proposed attention pattern. If your independent preferences remain clear and freely expressed, that challenges the specific preference-loss account even when connection is intense.",
+          "question": "Does enjoying intense connection make me one-to-one Nine?"
         },
         {
-          "answer": "Preference merging should be compared across power by recording each choice before discussion, then checking money, housing, care, language, and exit access; agreement under costly refusal is not clean subtype evidence.",
-          "question": "How should preference merging be compared across power?"
+          "answer": "Not necessarily. Knowing your preference and choosing a trade-off differs from discovering afterwards that your preference was never considered. Check whether refusal was available, whether the decision can be revisited, and whether both people’s commitments receive a place.",
+          "question": "Is compromise a sign that I have lost myself?"
         },
         {
-          "answer": "Evidence challenges a shared-identity hypothesis when the person keeps a separate plan, names disagreement before attuning, tolerates temporary distance, and reconnects without surrendering consent or preference.",
-          "question": "Which evidence challenges a shared-identity hypothesis?"
+          "answer": "No. In the traditional framework, everyone has all three instinct concerns. A Nine wing refers to an adjacent Eight or One influence and is a different explanatory layer. Neither instinct emphasis nor a wing should be assigned from a second-highest core-type score, occupation, or a guessed celebrity comparison.",
+          "question": "Does one-to-one replace other instincts or determine my wing?"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/en/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "Enneagram overview",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/en/personality/enneagram/type-9",
-          "label": "core_type:type-9",
+          "label": "Type Nine: the core pattern",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-9"
         },
         {
           "href": "/en/personality/enneagram/type-9/instincts/self-preservation",
-          "label": "instinctual_subtype:type-9/self-preservation",
+          "label": "Self-preservation Nine",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-9/instincts/social",
-          "label": "instinctual_subtype:type-9/social",
+          "label": "Social Nine",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-9/social"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Ask what the person wanted before a close other expressed a plan, then observe whether the preference stays available during connection. Affection and compromise are ordinary and not subtype evidence.",
-          "key": "traditional_hypothesis",
-          "title": "Track preference before attunement"
+          "body_md": "In the traditional Nine account, preserving peace and connection can make a separate preference difficult to assert. Read the [Enneagram Institute’s Type Nine description](https://www.enneagraminstitute.com/type-9/) for that core motivation. One-to-one attention asks whether a particular bond becomes the main place where this happens.\n\nYou might find direction or renewed energy in someone’s company. Shared interest can make an activity feel more alive, and close attention can support nuanced cooperation. The difficulty to examine is whether contact repeatedly replaces checking your own choice: another person proposes a plan, you join it, and only later discover that a separate commitment has vanished.\n\nThat process is different from a deliberate compromise. If you know what you wanted, understand the trade-off, and freely choose the shared option, your preference has not necessarily been lost. Affection, attentiveness, and agreement do not establish a subtype.",
+          "key": "connection_and_choice",
+          "title": "When “we” arrives before “what do I want?”"
         },
         {
-          "body_md": "Use one decision where both people have money, exit, and speaking power, then compare a decision shaped by dependency. Agreement under unequal consequences cannot establish preference merging.",
-          "key": "matched_comparison",
-          "title": "Compare equal and unequal influence"
+          "body_md": "The [Narrative Enneagram’s one-to-one account](https://www.narrativeenneagram.org/instinctual-subtypes/) includes close relationships and vitality; its Nine description also discusses union beyond a romantic partnership. The [Enneagram Institute’s sexual or attraction account](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) puts more emphasis on attraction and intensity.\n\nThe accounts overlap, but valuing a close friendship does not by itself identify the Institute’s sexual emphasis. Nor does a desire for stimulation automatically show the preference-merging process explored on this page. Specify which idea you are examining instead of treating the labels as interchangeable.\n\nNeither account is limited to sexual activity or romance. Libido, relationship status, and number of partners are not subtype measures. These are traditional ways of describing attention, not evidence of a particular hormone, nervous-system circuit, or universal bonding mechanism.",
+          "key": "school_terms",
+          "title": "Why one-to-one and sexual are not exact synonyms"
         },
         {
-          "body_md": "One-to-one instinct is a traditional attention comparison rather than evidence about bodily mechanisms, chemistry, or a universal pair-bond system. Consent and access to exit remain primary.",
-          "key": "instinct_boundary",
-          "title": "Describe relational attention without mechanism"
+          "body_md": "Consider an illustrative collaboration between close friends, Jamie and Noor. Jamie has planned to submit an independent design proposal. Noor suggests spending the weekend on a joint exhibition. Their conversation is exciting, and Jamie says yes before mentioning the submission deadline.\n\nJoining forces could be a good choice. Mutual enthusiasm might produce work neither would make alone. But after several similar weekends, Jamie realizes the individual proposal never progresses. At first the shared plan feels relieving: no disagreement interrupts the connection. Later, disappointment may appear as withdrawal or resentment even though Noor was never told about the competing plan.\n\nWhat would support the interpretation? Jamie had a distinct preference beforehand, had room to express it, and repeatedly lost access to it when an important person’s plan became vivid. What would challenge it? Jamie can explain the trade-off, preserve another time for the proposal, or disagree and reconnect without abandoning the choice.\n\nIf Noor controls payment, accommodation, or access to essential care, saying yes has different consequences. If Jamie is providing translation or agreed assistance, coordination may be a real duty. Clarify those conditions before interpreting agreement as merging.",
+          "key": "shared_project_example",
+          "title": "The joint project is vivid; the individual project disappears"
         },
         {
-          "body_md": "A person may initiate contact, advocate strongly for the relationship, or enjoy intense shared activity while still losing track of a separate agenda in specific decisions.",
-          "key": "countertype_variation",
-          "title": "Allow intensity and visible initiative"
+          "body_md": "A community workshop asks for help on a Saturday reserved for your personal project. A one-to-one hypothesis asks whether one person’s attendance transforms the invitation: you want the shared experience, their enthusiasm draws you in, and your original plan becomes hard to find.\n\nA social comparison asks about your place in the group and responsibility to its members, even if that particular person does not attend. A self-preservation comparison asks about energy, resources, and maintaining a workable routine, with familiar chores potentially taking over the decision.\n\nAll three concerns can operate in the same person. Saying yes, feeling disappointed, or preferring a small gathering cannot identify which concern is central. Compare what changes when the particular person cannot come, the group has enough helpers, or practical demands are reduced. Do not deliberately threaten a relationship or remove needed support to test a theory.\n\nThe [Narrative Enneagram’s type comparisons](https://www.narrativeenneagram.org/type-comparisons/) are also a reminder to reconsider the core pattern. In your examples, ask whether connection quiets a separate agenda, whether you are seeking appreciation for being needed, or whether you are protecting a distinct sense of personal identity. Treat these as competing questions, not a checklist that assigns Nine, Two, or Four.",
+          "key": "shared_invitation",
+          "title": "One Saturday request, three possible centers of attention"
         },
         {
-          "body_md": "Translation duty, caregiving, disability assistance, migration status, financial dependence, abuse, housing insecurity, and cultural expectations may constrain separate choices.",
-          "key": "alternative_environment",
-          "title": "Control for care and coercion"
+          "body_md": "Choose a low-stakes decision with someone who respects refusal. Before hearing their proposal, note what you would choose and why. Then say it plainly: “I want Saturday morning for my submission. I’d enjoy working together in the afternoon.” Invite a real discussion; the goal is not to get your way every time.\n\nAfterwards, record what changed, whether the change was freely chosen, and whether the separate commitment actually happened. A supportive friend can ask for your preference before making a suggestion and avoid treating disagreement as rejection. Do not use another person’s silence as consent.\n\nIf you repeatedly keep an independent plan, tolerate a temporary difference, and reconnect without erasing it, confidence in the preference-loss explanation should fall. If the difficulty is specific to unequal finances, care obligations, or fear of retaliation, those conditions may explain more. Withdraw the subtype explanation where contrary observations persist; do not redescribe them as hidden merging or stronger repression. Where refusal is unsafe, prioritize practical support rather than this exercise.",
+          "key": "preference_before_discussion",
+          "title": "Name a small preference before discussing the shared plan"
         },
         {
-          "body_md": "Confidence should fall when the person names a preference first, sustains a separate plan, tolerates temporary disconnection, refuses pressure, and reconnects without erasing the disagreement.",
-          "key": "counterexample",
-          "title": "Look for closeness with intact separateness"
-        },
-        {
-          "body_md": "Evidence from one subtype measure cannot turn relational attunement into a universal category across cultures. Observations must never excuse coercion or treat another person’s consent as typology data.",
-          "key": "evidence_boundary",
-          "title": "Keep relational inference provisional"
-        },
-        {
-          "body_md": "Duration: 4\n\nContext: Over four days, choose one shared purchase, one social plan, and one disagreement with a close person where each party can state a preference.\n\nObservable signal: Record each preference before discussion, money and exit access, first proposal, changes made, pressure cues, final agreement, and separate follow-through.\n\nPage-specific signal: Compare attunement in an equal-power decision with agreement where housing, care, language, or finances make refusal costly.\n\nAlternative explanation: Check affection, cultural compromise, translation, disability support, migration status, coercion, financial dependence, and actual safety.\n\nReflection prompt: Identify one close interaction where separateness improved trust, then revise the preference-merging hypothesis while preserving consent boundaries.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check affection, cultural compromise, translation, disability support, migration status, coercion, financial dependence, and actual safety.",
-            "context": "Over four days, choose one shared purchase, one social plan, and one disagreement with a close person where each party can state a preference.",
-            "duration_days": 4,
-            "observable_signal": "Record each preference before discussion, money and exit access, first proposal, changes made, pressure cues, final agreement, and separate follow-through.",
-            "page_specific_signal": "Compare attunement in an equal-power decision with agreement where housing, care, language, or finances make refusal costly.",
-            "reflection_prompt": "Identify one close interaction where separateness improved trust, then revise the preference-merging hypothesis while preserving consent boundaries."
-          },
-          "title": "Observation exercise"
+          "body_md": "The 27 combinations belong to Enneagram traditions, not established reproducible scientific diagnoses. A school’s “countertype” label describes a departure from a familiar outward stereotype; it cannot prove that a core pattern remains present regardless of the evidence.\n\nThe [abstract of Hook and colleagues’ 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed reliability and validity evidence. It does not validate this relational interpretation or FermatMind subtype scoring. A study of one questionnaire also cannot establish every subtype across people, languages, or products.\n\nReturn to [Type Nine](/en/personality/enneagram/type-9) if the core motivation needs reconsideration. For another area of attention, compare [self-preservation Nine](/en/personality/enneagram/type-9/instincts/self-preservation) and [social Nine](/en/personality/enneagram/type-9/instincts/social). The aim is a more observable choice, including the choice to stop using a description that does not explain your experience.",
+          "key": "limits_and_reading",
+          "title": "Let the description help without making it unfalsifiable"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-9/instincts/one-to-one",
       "source_hash": "ebb3c272d4856a70b66f6a21e4460527505fbc9086f224f2c1ce902485d42280",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Nine one-to-one is a traditional secondary hypothesis linking a core-Nine stability pattern with attunement, shared identity, intense connection, and difficulty locating a separate preference. It does not describe bodily mechanisms. Similar agreement can arise from care, language brokerage, disability support, financial dependence, coercion, or a realistic need for safety.",
-      "title": "Type Nine one-to-one: attunement and preference merging as a secondary hypothesis"
+      "summary": "Explore whether connection with a particular person brings vitality while making your separate plans harder to locate. Closeness and compromise are not problems in themselves; the question is whether a real choice remains available.",
+      "title": "One-to-one Nine: close connection with a preference of your own"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "efc242ce664e66a1a1919d271132e302b2d7cb4ee59408e1389b1fa20f0a87f8"
+  "source_content_sha256": "ca1d7340ac691bbdeaac11b75583e3102b4dec987989931283348f2d16abc64e"
 }

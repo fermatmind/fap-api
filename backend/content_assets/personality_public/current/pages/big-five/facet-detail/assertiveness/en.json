@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/assertiveness",
@@ -20,34 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "assertiveness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "Not necessarily. Expression and cooperation are distinct.",
-          "question": "Are highly assertive people uncooperative?"
+          "answer": "No. Initiative and cooperation answer different questions. Look at information sharing, consideration of objections, willingness to revise, and whether people can contribute. Speaking often does not settle any of those questions.",
+          "question": "Does strong Assertiveness mean being uncooperative?"
         },
         {
-          "answer": "Yes. Leadership quality requires direct evidence beyond speaking style.",
-          "question": "Can someone with weaker Assertiveness lead?"
+          "answer": "No. Taking a position or seeking influence does not by itself establish aggression. Threats, humiliation, retaliation, or preventing others from contributing require separate attention. A personality label does not excuse harmful conduct.",
+          "question": "Is Assertiveness the same as aggression?"
         },
         {
-          "answer": "Social bias can alter labels and consequences. That context should not be mistaken for an intrinsic score.",
-          "question": "Can gender affect how Assertiveness is judged?"
+          "answer": "That must be assessed from their work. Clear responsibility, sound decisions, coordination, follow-through, and accountability matter. A quieter communication style can use written proposals or structured discussion, but its effectiveness still needs evidence.",
+          "question": "Can someone who rarely takes the floor lead effectively?"
         },
         {
-          "answer": "Specific speaking, boundary, and facilitation behaviors can be practiced. This page does not promise trait change.",
-          "question": "Can Assertiveness be practiced?"
+          "answer": "Responsibility may provide a clear reason and permission to direct. Expertise can also make the action easier. Describe that pattern specifically rather than assuming that role-based behaviour reveals your default in every group.",
+          "question": "Why do I take charge only when the task is mine?"
         },
         {
-          "answer": "Assertiveness states or directs; rudeness concerns disregard and conduct. Judge behavior directly.",
-          "question": "How is Assertiveness different from rudeness?"
+          "answer": "The channels differ. A written objection can clearly seek influence without taking conversational space. Record both the content and the channel; one observation cannot establish the person's overall tendency.",
+          "question": "Is a written objection less assertive than speaking in a meeting?"
+        },
+        {
+          "answer": "This guide makes no such promise. Practice can be evaluated by whether a request was clearer, necessary information reached the group, or others had room to respond. A short exercise is evidence about that behaviour under those conditions, not lasting trait change.",
+          "question": "Will communication practice change my personality score?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +95,94 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Assertiveness concerns readiness to speak, state a position, influence direction, and occupy conversational space. It is not aggression, leadership, competence, status, certainty, or permission to override others.\n\n“Assertiveness within Extraversion: readiness to speak and influence direction” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "In the NEO/IPIP-NEO vocabulary used on this site, Assertiveness is a facet of [Extraversion](/en/personality/big-five/extraversion). It concerns taking charge, expressing positions, and seeking to influence what other people do.\n\nA stronger tendency may be visible when someone volunteers a proposal or takes a coordinating role without being asked. A weaker tendency may involve less spontaneous direction and more willingness to let another person initiate. Neither tells us whether the proposal is good.\n\nIntermediate descriptions can include variation across settings. They do not identify a separate type or guarantee ideal judgment about when to speak. The useful question is how readily a person seeks influence when the opportunity is real and the role does not already require it.",
+          "heading": "A tendency to step forward",
           "key": "section-01-f5626ef92a",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency enters discussion quickly and may propose decisions or coordinate action. A weaker tendency may wait, contribute selectively, influence through questions or written work, and avoid unnecessary direction. Quality and ethics depend on what is said and how others are treated.",
-          "heading": "Precise Definition",
+          "body": "The word assertive is also used for communication that makes a request or boundary clear while respecting other people. That is a description of how communication is handled. The personality facet concerns a tendency to step forward; it does not automatically establish the quality of that communication.\n\nSomeone who rarely seeks the lead can make a precise request when needed. Someone who frequently takes charge can give unclear instructions, ignore questions, or make it difficult to disagree. Check clarity, listening, and the response to feedback directly.\n\nPractising a concise request can be useful for a particular conversation. Its success is whether the request was understood and appropriately discussed, not whether you sounded more like a high scorer.",
+          "heading": "The personality facet is not a communication certificate",
           "key": "section-02-f73b44cfd7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Assertiveness belongs to [Extraversion](/en/personality/big-five/extraversion), reflecting active social expression.",
-          "heading": "Parent Domain",
+          "body": "A proposal, disagreement, or decision can be expressed without threatening anyone. It can also be accompanied by contempt or pressure. Evaluate those behaviours separately. A strong tendency to take charge neither guarantees respectful conduct nor proves aggression.\n\nCooperation concerns what happens between people who need to work together. Does the person share information, consider objections, and revise a plan when the evidence changes? An outspoken objection may help a group avoid a problem; silence may conceal one. Assertiveness and cooperation are not opposite ends of a single scale.\n\n[Gregariousness](/en/personality/big-five/facets/gregariousness) concerns wanting group company. A person can enjoy joining a group without wanting to direct it. [Warmth](/en/personality/big-five/facets/warmth) concerns friendly connection, which cannot be inferred from how often someone takes the floor.",
+          "heading": "Influence, aggression, and cooperation",
           "key": "section-03-bf9c653f80",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Assertiveness versus aggression:** Aggression can harm or threaten; assertive expression can remain respectful.\n- **Assertiveness versus Warmth:** [Warmth](/en/personality/big-five/facets/warmth) concerns friendly connection, not directional speech.\n- **Assertiveness versus leadership:** Leadership also requires judgment, listening, coordination, accountability, and results.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "A chairperson announcing a decision is carrying out a role. A junior participant remaining silent may have been given no opening. Both observations are incomplete without knowing what each person was expected and permitted to do.\n\nExpertise, language, status, repeated interruptions, and the consequences of disagreement can change visible behaviour. An opinion sent in writing also differs from one offered during a rapid conversation. Record the channel instead of assuming that only speech counts.\n\nUseful clues are more specific: did the person volunteer a view without being assigned to do so, seek a coordinating position, or try to redirect a discussion? Even then, ask whether the situation required that action.",
+          "heading": "Before judging initiative, check permission and responsibility",
           "key": "section-04-e1f4477547",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Assertiveness may appear as volunteering an opinion, interrupting drift, assigning next steps, or speaking early. Weaker Assertiveness may appear as listening first, using writing, supporting another speaker, or withholding a view until invited. Power, bias, language, psychological safety, and role permission strongly affect visibility.",
-          "heading": "Behavioral Cues",
+          "body": "Consider an illustrative school volunteer committee. One member is responsible for organising an equipment purchase. They open the discussion, set out options, and ask others to supply missing cost information. It is tempting to conclude that they naturally take the lead in every group.\n\nAt a later meeting about a different event, they have an open invitation to contribute but freely leave direction to another member. They offer a view only when asked. This is a natural exception to the broad impression. A more accurate description may be that they actively coordinate when a task belongs to them.\n\nIf they cannot speak at another meeting because discussion ends before their turn, that is lack of opportunity rather than voluntary restraint. If they deliberately volunteer first next time as a practice exercise, record that separately too.",
+          "heading": "A role-based impression and a natural counterexample",
           "key": "section-05-28fd38554f",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Someone may direct confidently within expertise and remain quiet among senior leaders. Gendered and cultural judgments may label the same behavior differently. Observed silence can reflect exclusion rather than trait preference.",
-          "heading": "Contextual Differences",
+          "body": "Speaking early can bring an overlooked issue into view. It can also give an untested idea undue influence. Check whether the speaker distinguishes evidence from assumptions, invites relevant information, and updates when necessary.\n\nSpeaking less can leave room for others, but it does not prove good listening or deeper thought. Ask whether the person understood the discussion and whether important information reached the decision makers through some appropriate channel.\n\nLeadership quality needs evidence about judgment, coordination, follow-through, and accountability. Seeking the lead is one behaviour. It cannot replace those outcomes or establish occupational competence.",
+          "heading": "Judge the contribution, not its volume",
           "key": "section-06-128b9e9722",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Stating a recommendation without extended invitation.\n- Taking coordination responsibility.\n- Challenging a proposal publicly.\n- Crowding out slower contributors.\n- Sounding more certain than evidence warrants.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "Begin with a few ordinary, low-stakes discussions. Note one target behaviour, such as volunteering a proposal, along with role requirements, available speaking space, your initial intention, and whether the contribution was understood.\n\nWhen an opening exists but you do not use it, note why: no disagreement, a choice to listen, inadequate preparation, or concern about consequences. When no suitable opening exists, mark the limitation. Look for spontaneous exceptions in both directions: unexpectedly taking charge, or freely yielding when you could have led. If none appear, ask whether relevant opportunities actually arose.\n\nThen choose a reversible adjustment. If an important request often goes unsaid, prepare its substance and express it at an appropriate time. If you tend to settle the direction quickly, offer a provisional proposal and ask for missing information before closing the discussion. Do not manufacture disagreement or overstep authority to complete an exercise. A situation involving a real risk of retaliation is not a useful practice setting.\n\nKeep the deliberate trial separate from natural behaviour. Retain a provisional description if spontaneous initiative recurs without a role requirement. Narrow it if it appears mainly within your responsibility or expertise. Suspend the personality interpretation if opportunity, safety, or preparation is unclear. Evaluate the trial by clarity and participation, not by a claim that your trait changed.",
+          "heading": "Try one communication adjustment with a clear purpose",
           "key": "section-07-2d38562e74",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Building influence through listening and synthesis.\n- Preparing before speaking.\n- Allowing others to lead when direction is adequate.\n- Leaving important disagreement unvoiced.\n- Contributing more fully through asynchronous channels.",
-          "heading": "Possible Expressions When Weaker",
+          "body": "The [IPIP comparison table](https://ipip.ori.org/newNEO_FacetsTable.htm) lists Assertiveness and its NEO counterpart. The [longer item set](https://ipip.ori.org/newNEOFacetsKey.htm) includes taking charge, influence, and holding back opinions; the [Maples four-item scale](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) uses fewer direction-related items. These materials establish construct content, not leadership quality.\n\nThis page does not establish the facet coverage, weighting, cutoffs, or norms of a specific FermatMind questionnaire. Do not infer an Assertiveness score from a broad Extraversion result or equate same-named scores across instruments. The examples help distinguish behaviour; they are not a selection rule or an individual performance prediction.",
+          "heading": "Read the evidence at the level it supports",
           "key": "section-08-097bec9442",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Assertiveness can support visible direction and rapid issue surfacing. Possible costs include dominance, weak listening, or status overreach. Weaker Assertiveness can support reflection and distributed space; possible costs include lost influence or unraised risk. Neither level predicts leadership quality.",
-          "heading": "Strengths and Costs",
+          "body": "For the parent domain, read [Extraversion](/en/personality/big-five/extraversion). If your question is about liking a group rather than directing it, read [Gregariousness](/en/personality/big-five/facets/gregariousness). For friendly connection, read [Warmth](/en/personality/big-five/facets/warmth).\n\n[Activity](/en/personality/big-five/facets/activity) concerns the pace and amount of activity. [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), [Positive Emotions](/en/personality/big-five/facets/positive-emotions), and the [facet guide](/en/personality/big-five/facets) help separate other aspects of the broader domain.",
+          "heading": "Choose the next distinction",
           "key": "section-09-fe59ccbde3",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A quiet team lead circulates a written decision frame, asks each person for input, then makes the call. Leadership is clear even though conversational Assertiveness is restrained.",
-          "heading": "An Original Case",
-          "key": "section-10-f424dd6147",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A loud meeting participant speaks first and often but provides little evidence and avoids accountability. High visible Assertiveness is not competence.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-fcc0c2c3fa",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How quickly do you state a view in a new group?\n2. What makes you take or yield the floor?\n3. Do others have room after you speak?\n4. Which medium makes your influence clearest?\n5. When did silence protect thought, and when did it hide important information?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-44640b8397",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In one low-stakes meeting, state a concise view earlier than usual or, if you usually lead, invite two quieter voices before concluding. Observe information quality and participation rather than judging personality.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-1060cd5d56",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Extraversion](/en/personality/big-five/extraversion) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Warmth](/en/personality/big-five/facets/warmth), [Gregariousness](/en/personality/big-five/facets/gregariousness), [Activity](/en/personality/big-five/facets/activity), [Excitement Seeking](/en/personality/big-five/facets/excitement-seeking), [Positive Emotions](/en/personality/big-five/facets/positive-emotions).",
-          "heading": "Continue Reading",
-          "key": "section-14-afbaaa92a1",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Assertiveness concerns the tendency to step forward, express a position, and seek influence. Communication skill, cooperation, aggression, leadership quality, and role obligations require separate evidence.",
+        "title": "Assertiveness: Speaking Up and Taking Charge"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/assertiveness",
-      "source_hash": "80f7bad5c2c527499c1ec81f4bed229622633e2b37327e969176bebd52e902a0",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Assertiveness concerns readiness to speak, influence direction, and take the floor. It is not aggression, competence, leadership, dominance, or permission to disregard others.",
-      "title": "Assertiveness: Readiness to Speak and Direct"
+      "source_hash": "bed755b04d3c4d02cdf91f8ed5e3c8c559752fa39c28edb9d9f4e7624a68f12d",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Assertiveness concerns the tendency to step forward, express a position, and seek influence. Communication skill, cooperation, aggression, leadership quality, and role obligations require separate evidence.",
+      "title": "Assertiveness: Speaking Up and Taking Charge"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "E3-assertiveness-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "E3-assertiveness-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "E3-assertiveness-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "E3-assertiveness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "66b30d6ac5b5460a26a34cb256b55b72f4d47b6d49e7229809b9a34edcf58765"
+  "source_content_sha256": "ee2310bb93f2d328deb4e0252593046d1dc65b9daf343e51532a303855841c3d"
 }

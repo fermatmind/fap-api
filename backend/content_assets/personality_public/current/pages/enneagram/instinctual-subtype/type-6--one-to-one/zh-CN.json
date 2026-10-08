@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-6/instincts/one-to-one",
@@ -23,94 +23,35 @@
       "entity_key": "type-6/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "不能。真实危险、骚扰、歧视、自卫训练、竞赛规则、创伤安全与权力不平等都可能使直接挑战成为现实应对。应先保护安全，并核对危险程度、同意、退出机会、权力差和训练背景。",
-          "question": "直接挑战、勇气展示与检验威胁能够直接证明这个副型吗？"
+          "answer": "不是。反恐惧在传统六型讨论中描述接近而非回避令人害怕的事物；一对一解释关注注意力较常落入的领域。直接回应可能有不同原因，也可能出现在不同本能关注中。",
+          "question": "反恐惧六型与一对一六型是同一个意思吗？"
         },
         {
-          "answer": "选择两次紧张程度相近的互动，分别核对危险、同意、退出机会、权力差和相关训练。在不制造风险的前提下，比较当事人直接挑战、求助或离开的选择，并观察安全恢复后的变化。",
-          "question": "怎样设计第六型一对一副型的公平比较？"
+          "answer": "不能。欲望会随关系、健康、处境与个人偏好变化。两个学派都不只是按一个人想要多少性来定义其类别。本页更关注可靠支持、重要联结与活力是否反复相连，而不是把欲望当作判型捷径。",
+          "question": "强烈吸引或性欲能够确定这个亚型吗？"
         },
         {
-          "answer": "在安全恢复后能够平静协商、自然退出，或在相同危险条件下不再重复挑战，都会削弱直接挑战假设。记录实际危险、权力差和退出机会，避免把安全策略误写成固定副型。",
-          "question": "安全恢复后的哪些反例会削弱直接挑战假设？"
+          "answer": "描述不产生能力或表现要求。力量与美感是 Narrative 传统描述处理恐惧的方式；直接表达和审美活动还有许多其他意义。若没有反复关联到支持是否可靠的顾虑，它们就很难成为保留亚型解释的理由。",
+          "question": "必须强势或有艺术才能，才符合传统描述吗？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-6",
-          "label": "core_type:type-6",
+          "label": "第六型：安全与可靠支持",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-6"
         },
         {
           "href": "/zh/personality/enneagram/type-6/instincts/self-preservation",
-          "label": "instinctual_subtype:type-6/self-preservation",
+          "label": "第六型自保亚型：日常资源与后援",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-6/instincts/social",
-          "label": "instinctual_subtype:type-6/social",
+          "label": "第六型社群亚型：归属与责任",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-6/social"
         }
@@ -184,52 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "在第六型核心成立的前提下，该副型可能强调直接挑战、勇气展示与回应感知威胁；先核对现实条件，再把它作为次要且可撤销的观察。",
-          "key": "traditional_hypothesis",
-          "title": "把传统说法转成可检验二级观察"
+          "body_md": "这个名称需要先说清楚。[Narrative Enneagram 的一对一](https://www.narrativeenneagram.org/instinctual-subtypes/)涵盖亲密关系、密切友谊与活力；[Enneagram Institute 的 sexual／attraction](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更强调吸引与强度。两者有共同部分，但并不完全相同。\n\n友谊、创作搭档或让人投入的活动，都可以进入这个讨论；它不只涉及性或恋爱。有伴侣、喜欢单独聊天或性欲较强，都不能确定本能亚型。\n\n要保留六型解释，[Enneagram Institute 六型描述](https://www.enneagraminstitute.com/type-6/)中的可靠支持仍应是核心问题。本页提出一个值得观察的问题：不确定出现时，注意力是否反复围绕某段重要联结组织起来——我们是否靠得住，这次互动是否仍有投入和活力？这是可以检验的可能性，不是对每段亲密关系的预设。",
+          "key": "two_school_vocabularies",
+          "title": "这里的一对一指什么？"
         },
         {
-          "body_md": "比较两次在危险、同意、退出机会、权力与训练上相匹配的紧张互动。记录当这些安全条件稳定时，当事人选择直接挑战、寻求支持还是离开现场。",
-          "key": "matched_comparison",
-          "title": "先匹配情境再解释表现"
+          "body_md": "[Narrative 的亚型描述](https://www.narrativeenneagram.org/instinctual-subtypes/)谈到以力量或创造美感来应对恐惧的两种呈现。这些是传统描述，不是经过验证的行为测试。\n\n用一个原创情境说明第一种可能：与重要搭档出现分歧时，当事人把立场说得更强，想知道这段合作能不能承受分歧。有效部分是把顾虑明确说出来；过用的代价则是为了获得确定而升级冲突，对方因此防御，又被当成不可靠的新证据。\n\n第二种可能，可以放在一场难谈的对话里：选择熟悉的房间、有共同意义的音乐，或先一起做一项创作。这样的安排可能帮助两人更稳当地接近不确定。若经营气氛替代了说明问题，或者一个不完美的晚上被理解成关系正在失败，就会产生代价。\n\n这两个示例都不能让强势、装饰、审美或创作能力成为亚型证据。要保留解释，应观察到策略与“支持是否可靠”的顾虑反复相连。如果缺少这条联系，就应撤回解释。",
+          "key": "strength_beauty",
+          "title": "为什么传统同时谈力量与美感？"
         },
         {
-          "body_md": "就直接挑战与感知威胁观察而言，它不描述身体机制，也不讨论神经组织或恒定功能；该标签不能证明天生战斗或配对反应。",
-          "key": "instinct_boundary",
-          "title": "拒绝身体与神经机制推断"
+          "body_md": "设想一个说明性情境：信任的搭档建议删掉共同演示中的一部分，你立即强烈回应。在称它为一对一模式之前，先辨认什么受到威胁。\n\n- 按自保六型理解，可能主要在意此前准备是否白费、返工成本，以及实际后援还够不够。\n- 按社群六型理解，可能主要在意团队原本的约定、谁能批准变更，以及谁向听众承担责任。\n- 按一对一六型理解，可能主要在意这位搭档的个人投入：改变是否意味着对方正在退出我们共同做的事情？回应的语气与活力，可能比建议内容更突出。\n\n这些顾虑都可能带来直接追问，也可以同时存在。预算、角色与建议本身说清楚以后，哪一种顾虑仍然没有缓解？\n\n对一对一解释而言，一个可能有用的信号是：讨论反复从事情本身转向寻找关系是否可靠的证据。能够直接询问投入程度，再回到任务，有助于让支持变清楚。如果反应主要跟随不良规划或对方反复违约变化，这些事实本身就可能足以解释。",
+          "key": "feedback_conversation",
+          "title": "搭档提出改变共同计划"
         },
         {
-          "body_md": "当事人可能表现为轻声表达、离开、寻求帮助或间接抵抗，因此外显风格不能单独证实或否定这个副型假设。",
-          "key": "countertype_variation",
-          "title": "允许不符合刻板印象的外显风格"
+          "body_md": "[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)把具有对抗呈现的六型与八型作为可能混淆的组合。可以利用相似处提出更好的问题，不必按强硬程度给人分类。在演示情境里，反对主要为了获得可靠支持、保有自主，还是另有原因？\n\n有用的记录包括过程顺序：最先注意到什么，随后作了什么解释，提出了什么要求，以及什么让互动安定下来。不能只因为一个自信的人提出反对，就推断其背后藏着恐惧。如果支持与信任没有成为反复出现的顾虑，应重新检查六型核心解释本身。\n\n同样，创造美感不能确定六型与四型，也不能证明一对一关注。这件事可能表达创作、享受、文化中的待客方式，或对话本身的实际需要。意义应来自当事人的说明与多次观察。\n\n轻声回应也完全可能，不必重新解释成隐藏的对抗。如果相近且安全的互动中，持续观察到普通协商而非检验关系，就应降低对“直接挑战”这一具体解释的信心。",
+          "key": "directness_without_typing",
+          "title": "直接程度不能决定核心型"
         },
         {
-          "body_md": "真实危险、骚扰、歧视、自卫训练、竞赛规则、创伤安全与权力不平等都会塑造相似反应；这些现实问题应先得到直接处理，不能被改写成人格本质。",
-          "key": "alternative_environment",
-          "title": "先审计物质、制度与关系条件"
+          "body_md": "选择两次与可信任的人进行的普通对话，双方都能自由拒绝或暂停。不要通过制造嫉妒、假装离开或制造危险来观察任何人的反应。\n\n不确定出现时，把三件事分开：对方实际说了或做了什么，你据此怎样解释关系，以及现在需要什么。把间接考验换成一个清楚请求：“你还愿意和我一起完成这件事吗？如果愿意，我们能否说清下一步？”对方仍有权作出与你期待不同的回答。\n\n记录得到回答后是否能回到任务，是否还想要求另一种投入证明，以及能否容纳普通的语气或活力差异。另一次对话中，也可以在对方同意的前提下，尝试平静的环境，而不是提高互动强度。比较哪一种安排更有助于说清楚；这不是诊断测试。\n\n过去反复违约、胁迫、骚扰、权力差或真实不安全的遭遇，都可能解释警惕和直接抵抗。应处理这些条件，并保留离开与求助的选择。任何成长练习都不要求留在不安全的互动里。",
+          "key": "direct_request_trial",
+          "title": "直接请求联结，不用考验来确认"
         },
         {
-          "body_md": "如果出现安全场景中平静协商、自然退出并在危险匹配后不重复挑战，就应降低该副型假设的信心，并保留环境解释。",
-          "key": "counterexample",
-          "title": "用条件变化主动寻找反例"
+          "body_md": "只有在相近情境中，反复观察到对支持的顾虑与联结的重要性或强度相连，一对一解释才更值得作为个人反思保留。不能仅因某个例子让人共鸣，就把它当成归属证据。\n\n以下情况应降低信心：相关表现只围绕一个不可靠搭档出现，并在可靠沟通后消退；真实危险或权力不平等更能解释反应；或者实际资源与群体问责始终更突出。如果吸引、创作投入或亲近感没有与六型关注反复相连，这个解释增加的理解很少，可以撤回。\n\n一次平静互动不能决定类型，但反复的反例有意义。不能把它们改称压抑、更强的反型或隐藏本能，使解释永远无法被质疑。\n\n传统模型仍认为一个人具有三种本能。五翼或七翼是相邻类型影响的另一层解释。第二高的类型分数、名人示例或职业，都不能确定这个亚型。",
+          "key": "revising_interpretation",
+          "title": "什么时候应调整或撤回解释？"
         },
         {
-          "body_md": "量表特定证据不能证明普遍副型本体或跨文化等价性，本页也不用于推断勇气、攻击性、匹配、忠诚或关系结果。",
-          "key": "evidence_boundary",
-          "title": "把副型推断限制在本地观察"
-        },
-        {
-          "body_md": "持续天数: 5\n\n情境: 选择两个紧张程度相近的互动，再加入一次安全恢复后的跟进，且不为观察制造新的风险。\n\n可观察信号: 记录真实危险、同意、退出选择、权力差、相关训练、采取的挑战方式，以及能够安全离开后的变化。\n\n本页特定信号: 只在匹配危险、权力、同意与退出机会后比较直接程度，并观察安全与自主恢复时挑战是否缓和。\n\n替代解释: 检验真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全和权力不平等。\n\n复盘问题: 用最安全的匹配互动寻找直接表现的非副型解释；若该解释更符合记录，就下调一对一副型假设。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "检验真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全和权力不平等。",
-            "context": "选择两个紧张程度相近的互动，再加入一次安全恢复后的跟进，且不为观察制造新的风险。",
-            "duration_days": 5,
-            "observable_signal": "记录真实危险、同意、退出选择、权力差、相关训练、采取的挑战方式，以及能够安全离开后的变化。",
-            "page_specific_signal": "只在匹配危险、权力、同意与退出机会后比较直接程度，并观察安全与自主恢复时挑战是否缓和。",
-            "reflection_prompt": "用最安全的匹配互动寻找直接表现的非副型解释；若该解释更符合记录，就下调一对一副型假设。"
-          },
-          "title": "观察练习"
+          "body_md": "部分九型传统用反型描述外观与某型通常印象形成反差的呈现。主动接近令人害怕的事情，仍可能为了处理不确定；这不意味着每次勇敢回应都属于一对一六型。反型是传统术语，不是独立的科学诊断。\n\n二十七亚型同样是传统框架，不能证明神经性的战斗反应、生物吸引机制或经验证的费马归属规则。[Hook 等人 2021 年综述摘要](https://doi.org/10.1002/jclp.23097)报告了混合的信度与效度证据。特定量表的发现仍属于那项研究及其工具，不能验证全部亚型描述或本产品分数。\n\n了解底层关注，可以阅读[第六型核心](/zh/personality/enneagram/type-6)。实际后援的差异见[第六型自保亚型](/zh/personality/enneagram/type-6/instincts/self-preservation)，成员位置与共同责任的差异见[第六型社群亚型](/zh/personality/enneagram/type-6/instincts/social)。",
+          "key": "evidence_and_next_steps",
+          "title": "这个解释能够支持什么？"
         }
       ],
       "seo": {
@@ -240,8 +168,8 @@
       "slug": "enneagram/type-6/instincts/one-to-one",
       "source_hash": "c9fdbf5a2e132611fb05374c6d4d7881700fd92c221bbae53847a7e0feb77c6e",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第六型一对一副型是传统二级假设，关注点可能落在直接挑战、勇气展示与检验威胁。这种表现不能证明副型，因为真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等都可能塑造相同行为。本页直接说明直接挑战、勇气展示与检验威胁如何观察、真实危险、自卫训练、歧视、骚扰、竞赛规则、创伤安全与权力不平等如何比较，以及危险程度、同意、退出机会与训练如何匹配。",
-      "title": "第六型一对一副型：直接挑战、勇气展示与检验威胁的假设"
+      "summary": "一对一视角探索，第六型寻求可靠支持的需要如何集中到某段重要联结及其中的活力。区分直接表达与检验信任，理解力量与美感的传统描述，并避免用吸引、对抗或单一行为判型。",
+      "title": "第六型一对一亚型：在重要联结与活力中面对不确定"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "6842d77d478a40627f8d48c49a16e6ea98907bb7ed0d5577150f18ac18ffbfa7"
+  "source_content_sha256": "080f20f45518e91136c233eded3ff5a04a30c0fc763ec103d2b30a42ee7091e7"
 }

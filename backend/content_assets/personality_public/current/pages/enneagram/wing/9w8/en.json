@@ -23,79 +23,43 @@
       "entity_key": "9w8",
       "entity_type": "wing",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       },
       "faq": [
         {
-          "answer": "Grounded boundary force does not prove 9w8. Property duty, safety responsibility, advocacy, or a repeated breach may require firmness; test whether stability seeking reliably precedes force and whether repair restores shared ground.",
-          "question": "Does grounded boundary force prove 9w8?"
+          "answer": "Firmness can help sustain peace by making cooperation possible without endless accommodation. A Nine core does not require an absence of anger or permanent agreement. Examine what the firmness serves and what you hope to restore once the boundary is clear.",
+          "question": "How can a peace-seeking Nine be firm?"
         },
         {
-          "answer": "9w8 can be compared with core Eight by tracking timing: the Nine-centered hypothesis often delays mobilization to preserve continuity, while an Eight-centered hypothesis may address autonomy and power sooner; neither pattern is established by volume.",
-          "question": "How can 9w8 be compared with core Eight?"
+          "answer": "A second-highest score alone is not enough. In wing theory, the modifier is adjacent to the core; Nine's neighbors are Eight and One. First explore whether Nine fits your recurring motivations, then compare whether Eight-like modification appears across situations.",
+          "question": "If Eight is my second-highest score, does that make me 9w8?"
         },
         {
-          "answer": "A counterexample weakens a delayed-force reading when the person states boundaries early, negotiates territory without entrenchment, or repeatedly seeks control before any accommodation attempt; record authority and consequences as controls.",
-          "question": "Which counterexample weakens a delayed-force reading?"
+          "answer": "Neither feature decides the comparison. 9w8 can be expressed calmly, and 9w1 can include direct refusal. Both can use rules. Ask what the rules serve and which concern keeps taking priority when personal boundaries and an ideal arrangement pull in different directions.",
+          "question": "I rarely get angry and I use rules. Does that mean I am 9w1?"
+        },
+        {
+          "answer": "No. It may show that accumulated frustration is no longer necessary for you to state a limit. Communication flexibility and the core-and-wing question are separate. Continue to examine whether steadiness and connection remain central and whether the boundary modifier remains useful.",
+          "question": "Does learning to say no promptly disprove 9w8?"
+        },
+        {
+          "answer": "No. Traditions differ in their accounts of how the two wings operate. You can compare both or use only the Nine core for now. One firm response and one rule-focused response do not establish two equally strong wings.",
+          "question": "Do I have to choose immediately if both Nine wings fit?"
         }
       ],
       "framework": "enneagram",
@@ -169,47 +133,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "Test whether the person first tries to preserve continuity or shared ground, then becomes direct when a boundary is repeatedly crossed. Immediate dominance without a stability pattern weakens a core-Nine reading.",
+          "body_md": "In traditional Enneagram language, the first number identifies the core; the adjacent wing modifies its expression. 9w8 therefore keeps Nine central. It does not describe an equal mixture of Nine and Eight. The [Enneagram Institute's explanation of wings](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) makes this distinction.\n\nFor self-observation, consider the tension between wanting an easy, connected life and needing room to make your own choices. You may prefer cooperation without constant argument, yet be willing to name a limit when an arrangement becomes intrusive. Eight-like expression can mean a direct refusal or practical protective action; it need not mean a loud voice.\n\nFor example, you might accommodate a household plan until accommodation starts to mean that someone else can assign your time whenever they wish. A clear boundary may help restore a way of living together that feels workable. If, across many situations, the continuing concern is chiefly who controls decisions, including when relationships already feel settled, compare Nine and Eight as possible cores. One firm response cannot settle that question.",
           "key": "core_first_modifier",
-          "title": "Keep stability primary and force secondary"
+          "title": "The Eight wing changes the expression, not the core"
         },
         {
-          "body_md": "A Nine-centered hypothesis expects delayed mobilization and a wish to restore workable calm; an Eight-centered hypothesis may test autonomy and power earlier. Observe timing and repair, not surface volume.",
-          "key": "sibling_core_comparison",
-          "title": "Compare Nine with Eight rather than blending labels"
-        },
-        {
-          "body_md": "Use a workspace boundary, household agreement, or project ownership dispute. Record the prior agreement, number of indirect signals, exact refusal, force used, and whether cooperation resumes afterward.",
+          "body_md": "Imagine that your housemates repeatedly hand you extra cleaning at the last minute. At first you do it because a small task seems easier than an argument. Eventually you say that you will complete only what you originally agreed to do, and that someone else needs to take the added work.\n\nA possible 9w8 reading is that preserving an easy shared rhythm comes first, with a clear limit protecting your ability to remain involved. But the same refusal could reflect a full schedule, a broken agreement, or learned communication skills. It does not establish a wing.\n\nUsed well, accommodation leaves room for ordinary adjustments, while boundaries make cooperation sustainable. Your wishes remain part of the arrangement. Used too heavily, the sequence can become tolerate, refuse, then stop discussing it. Others think you consented all along; you feel you have already given enough. Everyone is working from a different account of the agreement.\n\nAnother cost appears when every proposed change is treated as an intrusion. Even a workable alternative gets blocked. There may be little open conflict, but nothing moves forward. Ask both what the refusal protected and whether it left room for a genuine negotiation.",
           "key": "observable_situations",
-          "title": "Track territory, refusal, and re-entry"
+          "title": "A shared chore: keeping peace or postponing a disagreement?"
         },
         {
-          "body_md": "Confidence should fall when the person consistently seeks control before shared ground is tested, treats compromise as surrender, or expands authority beyond the agreed boundary without later correction.",
+          "body_md": "Keep the chore dispute unchanged. Both descriptions retain a Nine-centered concern with steadiness and connection. Compare the kind of solution you repeatedly turn toward.\n\nFor a 9w8 hypothesis, look at boundaries and practical capacity: what you agree to take on, what others cannot assume you will do, and how to end an intrusive arrangement. You might explain that you have reserved Saturday for yourself, can finish the original task, and will not accept the addition.\n\nFor a 9w1 hypothesis, look at standards and a workable shared order: what makes the allocation reasonable, how everyone can follow the same agreement, and what principle would prevent recurring friction. You might propose that extra tasks rotate, with a clear process for changing the schedule.\n\nEither person could mention fairness, refuse directly, or write a rota. A more revealing comparison is what happens when a fair arrangement still consumes your personal space, or an arrangement that protects your space still feels insufficiently fair. Which concern keeps asking for your attention, and why? Compare other ordinary situations with similar freedom to choose. This is a reflective question, not a validated typing test.",
+          "key": "sibling_wing_comparison",
+          "title": "9w8 and 9w1 can reject the same task for different reasons"
+        },
+        {
+          "body_md": "Both combinations can look steady, protective, and determined. Reversing the numbers changes which concern is central. The [Narrative Enneagram's Eight–Nine comparison](https://www.narrativeenneagram.org/type-comparisons/) directs attention to motivation beneath similar appearances.\n\nIn the chore dispute, a possible 9w8 question is how to protect a limit so shared life can feel settled again. A possible 8w9 question is whether your time and decisions remain yours to govern. A Nine wing may give an Eight-centered response a quieter form, while autonomy remains the organizing concern.\n\nConsider two repairs. One restores friendliness but still lets others assign your time without asking. The other clearly protects your choice but requires an uncomfortable conversation to continue. Your reasons for accepting or rejecting either offer more information than how quickly you first objected.\n\nA Nine-centered person can act promptly; an Eight-centered person can wait patiently. Experience, authority, and risk affect timing. Compare the reasons, trade-offs, and concerns that remain after the disagreement, rather than treating speed or volume as a shortcut.",
+          "key": "sibling_core_comparison",
+          "title": "9w8 and 8w9 reverse the priority, not just the tone"
+        },
+        {
+          "body_md": "Different observations should change different judgments.\n\n- A possible core mismatch: across relationships and choices, steadiness and connection are not central, while retaining control of decisions and resisting dependence repeatedly organize your actions. Reconsider the core instead of asking the Eight wing to explain everything.\n- Insufficient wing evidence: the Nine description fits, but firm limits or protective actions appear only in one unusual incident. Keep Nine as a candidate and leave the wing open.\n- A stronger situational explanation: you were responsible for the shared space, had an immovable commitment, or were responding to repeated broken agreements. People of many types can be firm under those conditions. Look at what happens when the duty or breach is absent.\n- Greater flexibility: you state limits earlier and revise an arrangement when new information matters. That challenges a story about needing to build up frustration before acting. It does not automatically challenge a Nine core or an Eight wing.\n\nYielding once does not disprove an Eight wing. Getting angry once does not prove it. Aim each counterexample at the particular claim it actually tests.",
           "key": "counterexample",
-          "title": "Look for early escalation without accommodation"
+          "title": "Ask which part of the explanation a counterexample challenges"
         },
         {
-          "body_md": "Security work, union representation, caregiving responsibility, prior violations, discrimination, physical risk, and lack of formal recourse can require grounded resistance without indicating a wing pattern.",
-          "key": "alternative_explanations",
-          "title": "Control for duty, threat, and access to recourse"
-        },
-        {
-          "body_md": "The wing label is a traditional comparison and does not establish an enduring identity or verified capacity. Use it only after a core-Nine pattern is independently plausible and retain ordinary situational explanations.",
-          "key": "wing_boundary",
-          "title": "Treat 9w8 as secondary and evidence limited"
-        },
-        {
-          "body_md": "Duration: 4\n\nContext: Over four days, select one boundary request, one shared-space dispute, and one protective action involving an explicit prior agreement.\n\nObservable signal: Record when the boundary was noticed, indirect cues, exact direct statement, legitimate authority, force level, other party’s response, and completed repair.\n\nPage-specific signal: Compare delayed grounded resistance with an event where the same person states a limit before irritation accumulates.\n\nAlternative explanation: Check assigned duty, ownership, safety risk, discrimination, prior breach, communication training, and access to neutral review.\n\nReflection prompt: Name one incident where earlier low-force clarity protected both stability and consent, and adjust the 9w8 modifier hypothesis.",
+          "body_md": "Use your next ordinary, negotiable request. Give yourself a moment before answering. Divide your response into what you can do, what you cannot do, and what remains open for discussion.\n\nFor example, you can clean the kitchen as agreed, cannot add the living room this week, and are willing to discuss exchanging next week's tasks. After stating the limit, check what the other person understood. Silence is not the same as an agreement.\n\nIf you are protecting someone else, ask what help they want before speaking on their behalf. Effective protection leaves that person a choice.\n\nAfterward, record three concrete outcomes: whether your limit was understood, whether the agreement was followed, and whether you remained willing to participate in later cooperation. If you kept using delay or distance to communicate an unstated complaint, name the need that was still missing from the conversation.\n\nCompare this with an earlier incident in which you waited longer to refuse. Did early clarity reduce misunderstandings? You are testing a more sustainable way to cooperate, not conducting an experiment that can prove a 9w8 identity.",
           "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check assigned duty, ownership, safety risk, discrimination, prior breach, communication training, and access to neutral review.",
-            "context": "Over four days, select one boundary request, one shared-space dispute, and one protective action involving an explicit prior agreement.",
-            "duration_days": 4,
-            "observable_signal": "Record when the boundary was noticed, indirect cues, exact direct statement, legitimate authority, force level, other party’s response, and completed repair.",
-            "page_specific_signal": "Compare delayed grounded resistance with an event where the same person states a limit before irritation accumulates.",
-            "reflection_prompt": "Name one incident where earlier low-force clarity protected both stability and consent, and adjust the 9w8 modifier hypothesis."
-          },
-          "title": "Observation exercise"
+          "title": "State your capacity before resentment has to do the talking"
+        },
+        {
+          "body_md": "The Nine–Eight combination belongs to traditional theory. The abstract of [Hook and colleagues' 2021 systematic review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports little research supporting wings. This description cannot certify strength, leadership, or relationship outcomes, and it is not evidence of a fixed identity validated by FermatMind.\n\nIf you are still exploring whether steadiness and connection are central, start with [Type Nine](/en/personality/enneagram/type-9). If Nine fits but the modifier is unclear, compare [9w1](/en/personality/enneagram/wings/9w1). If autonomy and resistance to control seem more central, read [Type Eight](/en/personality/enneagram/type-8). You can leave the wing undecided while putting one clearer boundary into practice.",
+          "key": "wing_boundary",
+          "title": "Keep the observation useful and the label provisional"
         }
       ],
       "seo": {
@@ -220,8 +176,8 @@
       "slug": "enneagram/wings/9w8",
       "source_hash": "b7199293d60cbbf06e4d5606e2ea178a9d8812901b8fea29c72dc5ff627eaf6c",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "9w8 is an evidence-limited wing hypothesis: Type Nine attention to stability and connection remains central, while Type Eight may add grounded resistance, firmer boundaries, and protection. Becoming firm after staying quiet does not confirm 9w8 because role authority, property duties, danger, training, and unequal power can produce the same sequence.",
-      "title": "9w8: Type 9 Core, 8 Wing, and Common Misreads"
+      "summary": "9w8 describes a Type Nine core with an adjacent Eight wing. A wish for inner steadiness and connection may be expressed through firmer limits, practical protection, and a willingness to hold ground. The useful question is what that firmness serves. Explore the distinction from 9w1 and 8w9 through an everyday disagreement, then try a clearer way to state what you can take on.",
+      "title": "9w8: Keeping the Peace While Holding a Boundary"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -231,70 +187,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.wing.traditional_secondary_hypothesis",
-            "limitation": "The systematic review found little research supporting wings; a wing remains an evidence-limited observation prompt, not a validated subtype or fixed identity.",
-            "source_ids": [
-              "hook_2021_systematic_review",
-              "riso_hudson_1999_wisdom"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "The systematic review found little research supporting wings; a wing remains an evidence-limited observation hypothesis."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Don Richard Riso; Russ Hudson",
-            "claim_ids": [
-              "claim.wing.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "riso_hudson_1999_wisdom",
-            "limitation": "A practitioner/theory text is not independent psychometric validation and cannot be sole scientific evidence.",
-            "public_url": "https://www.penguinrandomhouse.com/books/154581/the-wisdom-of-the-enneagram-by-don-richard-riso-and-ross-hudson/9780553378207/",
-            "source_type": "book",
-            "title": "The Wisdom of the Enneagram: The Complete Guide to Psychological and Spiritual Growth for the Nine Personality Types",
-            "year": 1999
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "7c3c4dc1d6d3ec9bc4a029ac5a223b37406f4106530c9fd56029254999110b61"
+  "source_content_sha256": "2120c8dc8e3a1c98883fd8ebd63b9e232647ab1b00839f07d46085f0bd81fa87"
 }

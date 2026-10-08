@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/zh/personality/enneagram/type-7/instincts/one-to-one",
@@ -23,94 +23,35 @@
       "entity_key": "type-7/one-to-one",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "关系初期新鲜感、孤独、化学反应、说服策略、稀缺机会或权力不等都可能放大吸引，必须加入同意、事实和后续普通接触，并确认双方是否拥有对等退出条件。",
-          "question": "强烈吸引为什么不能证明一对一第七型？"
+          "answer": "不是。不同学派的口径涉及亲密伙伴、密友、活力或吸引强度，范围并不完全相同。友谊或合作也可以值得观察，但单纯投入、喜欢深聊或享受创作，不能确认亚型。还要看联结怎样与第七型动机共同影响行动。",
+          "question": "只有恋爱很投入，才算一对一关注吗？"
         },
         {
-          "answer": "把对方的原话和可观察行动，与自己想象的特质、未来预期和偏好解释分开书写；不确定时直接询问，不把故事当作共同现实，也不替对方补写未表达的承诺。",
-          "question": "怎样记录投射而不假装读懂他人内心？"
+          "answer": "接受拒绝会削弱忽略事实、施压维持强度的具体解释，不会单独排除联结与活力关注。若多次经历也没有本页描述的想象扩张或绕开失望过程，则应进一步降低整个解释的权重，不用压抑或隐藏亚型来维持它。",
+          "question": "我愿意接受拒绝，会不会说明不是这个亚型？"
         },
         {
-          "answer": "尊重清楚拒绝、继续履行既有承诺，并允许想象中的未来缩小而不再次施压，是挑战维持强度解释的重要反例；还要观察这种尊重在失望之后能否持续。",
-          "question": "哪种同意反应最能挑战理想化假设？"
+          "answer": "不够。新鲜感、专业兴趣、创作状态和稀缺机会都可能造成同样的兴奋。要分别记录个体联结的作用、事实与想象的差距，以及后来如何修改行动。项目很有趣不等于一对一本能，兴奋很强也不等于第七型。",
+          "question": "很容易被一个新点子吸引，已经足够判断吗？"
         }
       ],
       "framework": "enneagram",
@@ -126,25 +67,25 @@
       "internal_links": [
         {
           "href": "/zh/personality/enneagram",
-          "label": "hub:enneagram",
+          "label": "九型人格总览",
           "relationship": "framework_parent",
           "target_identity_key": "hub:enneagram"
         },
         {
           "href": "/zh/personality/enneagram/type-7",
-          "label": "core_type:type-7",
+          "label": "第七型核心介绍",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "instinctual_subtype:type-7/self-preservation",
+          "label": "第七型自保亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/zh/personality/enneagram/type-7/instincts/social",
-          "label": "instinctual_subtype:type-7/social",
+          "label": "第七型社群亚型",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/social"
         }
@@ -184,52 +125,39 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "对同一段关系或项目，分别记录最初兴奋和进入日常互动后的承诺、对不利事实的好奇、同意核对和实际收尾，避免只保存高峰印象。",
-          "key": "matched_comparison",
-          "title": "比较初始强度与后续普通接触"
+          "body_md": "有人遇到一个谈得来的伙伴，很快想到一起旅行、合作或改变生活。这可以是真实的灵感，也可能是在有限了解上提前建立了一整幅未来。一对一第七型的解释关注后一个过程如何发生：令人兴奋的联结让选择与满足显得近在眼前，而平淡、遗憾和限制暂时退到了背景。\n\n核心仍是第七型对于满足、自由和值得期待的可能性的关注。[Enneagram Institute 的第七型介绍](https://www.enneagraminstitute.com/type-7/)提供的是传统动机背景，而不是关于某个人的事实判断。一个人可以在关系中保持承诺、容纳悲伤，也可以安静地着迷；外显热烈或始终快乐都不是必要条件。\n\n可以观察一条具体链条：对方实际说了什么；自己从中想到了什么；因此增加了哪些计划；后来出现的普通事实有没有改变行动。如果这种链条没有出现，单纯喜欢一个人或投入一项创作，不足以支持本页解释。",
+          "key": "future_in_encounter",
+          "title": "相遇为什么会像一个新世界的入口"
         },
         {
-          "body_md": "传统假设认为，可能性会通过被理想化的人、项目、相遇或未来变得鲜明。需要分开记录已经知道的事实、自己补充的想象，以及普通细节出现后的修正。",
-          "key": "traditional_hypothesis",
-          "title": "把着迷写成暂定注意模式"
+          "body_md": "[Narrative Enneagram 的 one-to-one 口径](https://www.narrativeenneagram.org/instinctual-subtypes/)包含亲密伙伴、密友与活力；[Enneagram Institute 的 sexual／attraction 口径](https://www.enneagraminstitute.com/how-the-enneagram-system-works/)更强调吸引、刺激与交流中的强度。两者有交集，但一段稳定的亲密关系与强烈的吸引体验不是同一件事，不能把两个标签完全互换。\n\n本页使用一对一作为页面身份，并在需要时说明吸引与着迷。它不只讨论性或恋爱，也可以涉及一位朋友、创作伙伴，或一段令人特别投入的交流。不过，只有一个项目很有趣，仍不能据此认定一对一本能；还要辨别个体联结、活力与第七型可能性怎样参与其中。\n\n喜欢深度谈话、性生活多或少、恋爱频率和社交人数，都没有足够信息完成这种辨别。",
+          "key": "school_terms",
+          "title": "一对一与 sexual／attraction 的交集和差别"
         },
         {
-          "body_md": "着迷可能表现为热烈追求、私下幻想、艺术沉浸或异常积极的解读。声音大小并不关键，投射的可能性与被确认现实之间的差距更有信息量。",
-          "key": "countertype_variation",
-          "title": "同时容纳安静沉浸和外显兴奋"
+          "body_md": "设想朋友筹办周末修理工作坊：场地取消、预算减半，一位合作者明确说自己只能参加两小时。你们刚刚聊出一个很有吸引力的新方向，他也表达了兴趣。\n\n一对一第七型的解释会追问：你是否把这次交流理解成一个更大的共同未来？有效的策略是把兴奋转成两小时内能完成的小尝试，再请对方确认。过用时，你可能继续介绍长期合作、忽略普通筹备，或把“有兴趣”当成对方已经愿意持续投入。可观察的差距是确认内容与实际承诺，不必猜测任何人的依恋或内心。\n\n在同一事件下，自保第七型的解释优先找可用场地、工具和方便舒服的安排；社群第七型的解释优先维持共同目的、参与位置和责任分配；一对一解释更关注这位合作者带来的鲜活方向。三者都可能提新方案，区别在什么让方案值得追，以及事实收紧之后如何修正。\n\n尊重两小时限制，能削弱“必须维持强度而忽略事实”的解释，却不会自动排除对联结与活力的关注。这些原创情境用于比较过程，不把尊重边界或失望反应当成单一判型题。",
+          "key": "two_hour_partner",
+          "title": "合作者说“只有两小时”之后"
         },
         {
-          "body_md": "新关系、创意委托、魅力型权威、营销漏斗、情感轰炸、搬迁或稀缺机会都可能放大理想化，应核对激励、权限、同意和安全退出渠道。",
-          "key": "alternative_environment",
-          "title": "检查新鲜感、说服策略与权力条件"
+          "body_md": "Narrative 对这个亚型的传统描述不仅谈被吸引，也谈通过个人感染力把别人带进新想法。日常合作中，好的版本可能是把一个还模糊的方向讲得生动，让别人愿意试一次。过用时，叙述的吸引力可能超过事实：一个尚未确认的机会被说成即将发生，别人的沉默被当成赞成。\n\n先区分自己的兴奋与对方的同意。邀请可以说明哪些已知、哪些只是愿景、需要什么投入，以及对方怎样拒绝而不付出关系代价。对方没有义务维持你的兴奋，也不需要证明自己足够开放才有资格拒绝。\n\n孤独、新环境、创作初期、稀缺机会、销售激励或权力不等，都可能放大同样的表现。如果兴奋主要来自这些条件，条件改变后就消退，应采用更直接的解释。若存在强迫、欺骗或不能安全退出的事实，先处理具体关系条件，不用亚型语言把它们重新解释成魅力或深度联结。",
+          "key": "suggestion_both_ways",
+          "title": "着迷可以被带动，也可以带动别人"
         },
         {
-          "body_md": "这里的一对一本能只是传统注意惯例，不描述身体机制。吸引、创伤反应、依恋困扰、情绪症状和强迫控制需要分开处理并寻求合适支持。",
-          "key": "instinct_boundary",
-          "title": "用注意标签而不描述身体机制"
+          "body_md": "第四型与第七型的传统解释都可能涉及强烈体验和理想化。遇到令人失望的事实时，可以问：我更在意这段经历是否真实表达自己、哪里缺少深刻满足，还是急于寻找另一个可能性，让生活继续值得期待？第四型也会期待未来，第七型也会认真悲伤，所以一次反应不能决定核心。[Narrative 的类型比较](https://www.narrativeenneagram.org/type-comparisons/)提供的是观察方向，不是固定情绪清单。\n\n与第二型比较时，吸引力和热情都可能很突出。对方不需要帮助、也不愿继续这个计划之后，最难放下的是被喜欢和被需要的位置，还是那个已经展开的兴奋未来？答案需要本人确认，也可能显示几种关注共同存在。\n\n若跨多个相近情境，联结中的想象并未反复承担绕开失望、扩张选择的作用，本页解释就应降权。不要把缺少这种过程改称为隐藏的一对一第七型。若只是“忽略事实”的假设不成立，则撤回这一假设即可，不需要否认所有亲密与活力关注。",
+          "key": "similar_intensity",
+          "title": "与第四型、第二型相似时，继续问什么"
         },
         {
-          "body_md": "该副型不能证明相容性、亲密能力、创造力或关系结果。量表特定发现不构成普遍副型结构，任何安全与同意事实都不能被类型重构。",
-          "key": "evidence_boundary",
-          "title": "关闭相容性与关系结果推断"
+          "body_md": "选择一次自愿、低风险的交流或合作邀请。写三栏：对方明确说过、做过什么；我据此推断了什么；我希望发生什么。把后两栏当成自己的内容，不能当作对方的承诺。\n\n提出一个双方都能撤回的小步骤，并请对方确认时间、范围与意愿。后续遇到不方便的事实，例如只能参与一次、不愿公开展示、节奏比预期慢，先修改计划，不立即用更大的愿景消解限制。保留原有责任，也让这次接触出现普通、不那么精彩的部分。\n\n复盘时记录：我有没有真的调整；双方是否有自由拒绝的条件；新鲜感下降后还有什么值得了解；下一步是基于确认事实，还是主要为了恢复兴奋？合作者可以帮助区分灵感与约定，用清楚、友善的表达代替模糊附和。\n\n这不是延迟必要决定或要求别人配合观察。若交流涉及现实风险，先处理风险。若想象能持续随事实调整，也没有反复用新联结绕开失望，就撤回本页中有关理想化或回避的解释。对真实关系保持好奇，比保住亚型名称更有用。",
+          "key": "facts_and_small_step",
+          "title": "给想象一个事实出口"
         },
         {
-          "body_md": "如果愿意询问不方便的事实、接受平淡节奏、尊重明确拒绝、保留原有承诺，并在理想未来缩小后继续诚实互动，就应降低该假设。",
-          "key": "counterexample",
-          "title": "观察普通现实是否仍被欢迎"
-        },
-        {
-          "body_md": "持续天数: 4\n\n情境: 四天内选择一个很有吸引力的人或项目，把第一印象与之后两次普通互动分别记录，避免事后合并叙事。\n\n可观察信号: 分栏写下对方直接确认的事实、自己推断的内容、出现的拒绝或限制、保留的旧承诺，以及新鲜感下降后的行动。\n\n本页特定信号: 测量理想化潜力与相互确认事实之间的具体差距，而不是给兴奋强度打分或推断他人动机。\n\n替代解释: 检查初期吸引、创作心流、说服策略、权威不等、稀缺机会、孤独、搬迁与安全退出条件。\n\n复盘问题: 指出一个改变原先画面的不方便事实，并说明自己是否在不施压他人的前提下调整了行动。",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "检查初期吸引、创作心流、说服策略、权威不等、稀缺机会、孤独、搬迁与安全退出条件。",
-            "context": "四天内选择一个很有吸引力的人或项目，把第一印象与之后两次普通互动分别记录，避免事后合并叙事。",
-            "duration_days": 4,
-            "observable_signal": "分栏写下对方直接确认的事实、自己推断的内容、出现的拒绝或限制、保留的旧承诺，以及新鲜感下降后的行动。",
-            "page_specific_signal": "测量理想化潜力与相互确认事实之间的具体差距，而不是给兴奋强度打分或推断他人动机。",
-            "reflection_prompt": "指出一个改变原先画面的不方便事实，并说明自己是否在不施压他人的前提下调整了行动。"
-          },
-          "title": "观察练习"
+          "body_md": "三本能属于传统关注模型，不意味着一个人只有一类需要。翼与亚型是不同解释层：相邻核心的修饰，不能代替联结领域的注意，也不能由第二高分直接确定。二十七亚型及“反型”等命名不等同于可重复的科学诊断或已验证的神经机制。\n\n[Hook 等人 2021 年综述摘要](https://pubmed.ncbi.nlm.nih.gov/33332604/)报告信度与效度证据混合。本页没有证明费马题本或亚型评分有效，也不能推断亲密能力、性欲、创造力、关系相容性或未来结果。传统来源和特定量表研究不能自动变成费马的产品证据。\n\n如果还不确定一段兴奋是否来自第七型核心，可读[第七型核心介绍](/zh/personality/enneagram/type-7)。若吸引其实主要围绕群体参与和共同目的，可对照[第七型社群亚型](/zh/personality/enneagram/type-7/instincts/social)。",
+          "key": "evidence_and_next",
+          "title": "这是一种解释，不是相容性结论"
         }
       ],
       "seo": {
@@ -240,8 +168,8 @@
       "slug": "enneagram/type-7/instincts/one-to-one",
       "source_hash": "7a6223dd3dcfae82d078f3c5616541da6c6bb8934dfab7d152d81421aa3152d8",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "第七型一对一副型是传统且证据有限的假设，把第七型可能性与着迷、理想化可能性、强度及对人或体验的投射结合。兴奋不能证明副型；新鲜感、吸引、创作投入、操纵与权力不等、未满足需要与关系初期热情都可能产生相似表现。",
-      "title": "第七型一对一副型：着迷、理想化可能性与强度的观察假设"
+      "summary": "一对一第七型的传统解释关注：某个人、交流或体验如何承载一个令人兴奋的未来。它保留第七型寻找满足与选择余地的动机，同时把注意力带到联结、吸引和活力。要辨别的是想象怎样影响行动、怎样接受事实修正，而不是兴奋有多强或恋爱有多少。",
+      "title": "第七型一对一亚型：让着迷遇见真实的联结"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +179,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "页面只能使用带限制条件的观察性表述；不得把类型写成固定身份、诊断、能力或未来结果。",
-          "量表特定（instrument-specific）证据不能证明副型具有普遍本体或跨文化等价性。"
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "本页研究说明依据摘要；不同量表和样本的结果不能直接证明费马题本的效度。",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "e8edf5b2e089606826539b3728b7cb95d2d8e8021e4be9ac27bbfb3b756c7e08"
+  "source_content_sha256": "1d46f028509fefc4526fa1c695ce27a4b9a41cc9ac9509abd6ebe2a4190eb49d"
 }

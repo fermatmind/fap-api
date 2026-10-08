@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/agreeableness-high",
@@ -20,30 +20,31 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "agreeableness-high",
       "entity_type": "polarity",
-      "evidence_notes": [
-        {
-          "citation_label": "An alternative 'description of personality': The Big-Five factor structure",
-          "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-          "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-          "source_id": "S1"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. The range suggests tendencies, not an obligation. Boundaries and direct disagreement remain compatible with cooperation.",
-          "question": "Does high Agreeableness mean I always accommodate others?"
+          "answer": "The score cannot establish that. Voluntary care, habit, role expectations, and concern about the consequences of saying no can all produce agreement. Examine what you wanted, what you could afford to do, and whether declining was a realistic option.",
+          "question": "Does high Agreeableness mean I am a people-pleaser?"
         },
         {
-          "answer": "No range determines job outcomes. Cooperation may help some tasks and create costs when support labor or necessary challenge is unmanaged.",
-          "question": "Is high Agreeableness a workplace disadvantage?"
+          "answer": "Yes. Concern for others can coexist with a clear objection or refusal. Consider how you explain the issue, respond to relevant information, and keep commitments across interactions. One forceful disagreement does not determine your position on the whole dimension.",
+          "question": "Can I be highly agreeable and disagree firmly?"
         },
         {
-          "answer": "Not necessarily. Initial trust can coexist with verification, evidence, boundaries, and leaving harmful situations.",
-          "question": "Are highly agreeable people easier to deceive?"
+          "answer": "It does not demonstrate teamwork skill. Wanting to cooperate is different from coordinating tasks, spotting misunderstandings, or handling a difficult handoff. Use evidence from actual work and the conditions in which it happened.",
+          "question": "Does a high score mean I am good at teamwork?"
         },
         {
-          "answer": "State the limit early, avoid overexplaining, and offer an alternative only when it is genuinely available. Practice on low-stakes requests.",
-          "question": "How can I get better at saying no?"
+          "answer": "Start with the particular risk rather than a general personality target. You can assume workable intent while verifying an important claim or commitment. Check evidence relevant to the decision; a high score cannot tell you whether this person should be trusted.",
+          "question": "Should I become less trusting?"
+        },
+        {
+          "answer": "That can happen. A clear refusal is useful information, not a guarantee of agreement or approval. Check whether you stated the limit accurately and respectfully, then consider the person's response and the relationship's conditions. Repeated retaliation requires attention to support and safety.",
+          "question": "What if a clear refusal still upsets someone?"
+        },
+        {
+          "answer": "You have evidence that a deliberate response may help in the situations you tried. Keep it separate from your spontaneous behavior and check whether the benefit persists. A successful short trial does not establish a trait change or a new score range.",
+          "question": "If the pause works, have I changed my personality?"
         }
       ],
       "framework": "big_five",
@@ -84,163 +85,88 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "High Agreeableness may suggest a recurring tendency to protect cooperation, extend trust, help, and consider interpersonal impact. This is not moral superiority. The useful task is preserving care without making boundaries, dissent, or self-protection disappear.\n\nBig Five research supports describing individual differences with continuous dimensions ([S1](https://pubmed.ncbi.nlm.nih.gov/2283588/)). This page’s “High Agreeableness: orientation toward interpersonal harmony, trust, and cooperation” is this package’s interpretive range for a continuous score. It is not a diagnostic category, ability level, career-fit conclusion, or percentile claim unsupported by public norms. Different instruments may report raw scores, standardized scores, percentiles, or range labels; those outputs are not directly interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the scores discussed by this package. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "A high Agreeableness result suggests that your responses lean toward concern for other people, trust, cooperation, and less antagonistic interaction, according to the instrument's interpretation. You may give another person's needs considerable weight when deciding what to do together.\n\nThat orientation does not require automatic agreement. You can care about someone and decline their request. You can prefer cooperation and challenge an unfair arrangement. A score cannot establish that you understand emotions accurately, resolve disputes well, or make a relationship work; those outcomes require information, skills, and participation from others.\n\nA useful question is therefore specific: when does your willingness to cooperate lead to a clear, voluntary commitment, and when do you agree before your own needs enter the conversation?",
+          "heading": "What the high range describes",
           "key": "section-01-ed33134146",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "You may offer support readily, soften disagreement, share credit, and assume workable intent until evidence changes. Trust, Straightforwardness, Altruism, Compliance, Modesty, and Tender-Mindedness can still vary.",
-          "heading": "What This Range Specifically Means",
+          "body": "Check the instrument, language, form length, score unit, and explanation of its ranges. A number on a 0–100 scale is not automatically a percentile. A percentile needs an identified reference population and a documented conversion; the number alone does not tell you how many people you exceed.\n\nThe word high also depends on the instrument's range rules. This page does not supply a universal cutoff. If the result provides only a range label, treat that label as a broad starting point rather than a precise measure of how cooperative you are relative to another person.\n\nReview what you had in mind while answering. A recent dispute, one unusually demanding relationship, or uncertainty about an item's wording may matter to your reading. A change on a later test does not by itself show that your underlying trait has changed.",
+          "heading": "Read the score before adopting the description",
           "key": "section-02-93a67f4171",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Do not infer goodness, honesty, weakness, obedience, gullibility, or relationship quality. Compliance means a tendency to de-escalate or compromise, not accepting harm. A high range cannot decide whether trust is warranted.",
-          "heading": "What Cannot Be Inferred From This Range",
+          "body": "Imagine that a friend asks to move a dinner reservation to a time that conflicts with your evening plans. You immediately say that the later time is fine, then spend the evening rearranging things you had wanted to do. You may have sincerely wanted to accommodate your friend. You may also have underestimated the inconvenience, followed an established role in the friendship, or feared a negative reaction.\n\nThe observable question is whether you checked your own availability before agreeing. It is not possible to infer your willingness from the word yes, a pleasant tone, or the absence of an argument. If the motive matters, record what you actually remember feeling and wanting; leave it unknown when you do not know.\n\nFor this situation, try the narrow hypothesis: 'When an optional plan change is safe to decline, I usually agree before checking its effect on my schedule.' This does not mean 'I always give in,' and it does not describe every aspect of Agreeableness. It gives you one behavior and a relevant class of opportunities to examine.",
+          "heading": "A caring intention can lead to different actions",
           "key": "section-03-7111b5476e",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible expressions include checking how a decision affects others, volunteering help, seeking common ground, and delivering criticism gently. You may notice relational strain early and spend effort repairing it.",
-          "heading": "Common Behavioral Expressions",
+          "body": "Avoiding disagreement can serve several purposes. You might genuinely prefer the other person's suggestion, expect that discussion will be unproductive, be tired, or have good reason to avoid retaliation. These possibilities should not all be described as a cooperative personality. The freedom to disagree matters when comparing situations.\n\nLikewise, considering another person's needs does not guarantee that you have identified them correctly. Ask rather than assuming that a helpful gesture is wanted. If a colleague needs a decision, extra reassurance may not answer the practical question; if a friend wants to be heard, taking over the problem may not help.\n\nThe site's NEO/IPIP-NEO facet vocabulary distinguishes Trust, Straightforwardness, Altruism, Compliance, Modesty, and Tender-Mindedness. These offer more specific interpretive questions; a broad high score does not establish six high facet scores. The [official IPIP comparison](https://ipip.ori.org/newNEO_FacetsTable.htm) concerns similar constructs across instruments, not interchangeable measurements. Compliance here should not be read as an obligation to accept harm.",
+          "heading": "Care is different from conflict avoidance or interpersonal skill",
           "key": "section-04-a53575bd22",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "At work, cooperation may smooth handoffs but increase invisible support labor. In learning, peer help can deepen understanding. In close relationships, care may appear as accommodation. Under power imbalance, yielding can reflect safety rather than trait.",
-          "heading": "Possible Differences Across Settings",
+          "body": "A willingness to consider other people can support a shared plan when everyone knows what has been agreed. The same willingness can create confusion when an important reservation remains unspoken. If you say a deadline is acceptable while knowing that you cannot meet it, others have little chance to revise the arrangement.\n\nA clear limit can preserve the useful part of cooperation: 'I can review the introduction on Thursday; I cannot review the whole document this week.' That statement gives the other person usable information. It is not a promise that they will respond well, and it is not evidence that your trait score has moved.\n\nTrust also applies to particular commitments. A generous interpretation of someone's intentions can coexist with checking payment terms, access requests, or who owns a task. Neither a high score nor a warm interaction establishes that a person is reliable. Look for relevant evidence and follow-through.",
+          "heading": "Where cooperation needs a visible limit",
           "key": "section-05-2333471026",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Potential strengths include collaboration, repair, compassionate attention, and willingness to support shared goals. These tendencies are most sustainable when requests, ownership, and limits are explicit.",
-          "heading": "Possible Strengths",
+          "body": "Return to optional plan changes that you could safely decline. A natural exception might occur when a friend asks to move a walk to another day and, without rehearsing a new strategy, you check your calendar before deciding. This is an exception to the same sequence of behavior: agreement before checking availability. Choosing to help in a different kind of situation would not answer that question.\n\nRecord the proposed change, whether declining was a realistic option, whether you checked your schedule before agreeing, what you said, and what you remember wanting. A routine work obligation or a request backed by a threat belongs in a different context; do not count it as an equivalent free choice.\n\nAn eligible request followed by a calendar check is an opportunity where the hypothesized behavior did not occur. A day without an optional change request is a day without an opportunity. If you have recorded eligible opportunities but found no natural exception, you may provisionally retain the behavior hypothesis while checking whether you selected only frustrating events.\n\nOne exception does not refute usually. If the pattern repeats across comparable opportunities, retain it cautiously. If it mainly appears with one person or with unclear plans, narrow it to those conditions. If opportunities are sparse, memories are uncertain, or the conditions cannot be compared, set the hypothesis aside. None of these decisions validates a personality score.",
+          "heading": "Look for natural exceptions to the same hypothesis",
           "key": "section-06-43037604ff",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Possible costs include overcommitment, delayed refusal, conflict avoidance, unspoken resentment, or giving trust before verification. Harmony can become fragile when disagreement is hidden rather than resolved.",
-          "heading": "Possible Costs",
+          "body": "For a low-stakes, optional plan change, try delaying agreement long enough to check your availability: 'Let me check that time before I commit.' Then give a definite answer, including any limit that matters. You do not need to invent an alternative when none is available.\n\nMark this as a deliberate trial, separately from natural behavior. Note whether you checked before agreeing, whether both people understood the commitment, whether you could keep it, and whether additional changes were introduced later. Keep track of comparable requests where you did not use the pause. There is no need to manufacture a request on a quiet day.\n\nContinue the wording if it makes commitments clearer at an acceptable cost. If confusion remains because plans keep changing, address that arrangement. If declining brings threats or retaliation, communication practice alone does not resolve the safety problem. This trial evaluates a way of responding; it does not prove or promise a change in Agreeableness.",
+          "heading": "Try a pause, then check what it changes",
           "key": "section-07-f79cb425df",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Compared with [mid-range Agreeableness](/en/personality/big-five/agreeableness-mid), cooperation may receive priority more consistently. Compared with [low Agreeableness](/en/personality/big-five/agreeableness-low), direct contest may feel less natural. This is not a virtue scale.",
-          "heading": "How This Differs From the Other Two Ranges",
+          "body": "High and low ranges describe different positions on the instrument's continuum, not separate kinds of people or ranks of goodness. Someone in the low range can act generously and cooperate fairly. Someone in the high range can be skeptical, assert a boundary, or compete.\n\nA middle score is not automatic evidence of balanced judgment or effortless flexibility. It may reflect mixed responses, different specific tendencies, or context. Actual flexibility needs evidence that you can adjust appropriately while preserving the important goals of an interaction.\n\nRead the [Agreeableness guide](/en/personality/big-five/agreeableness) for the domain's scope, [mid-range Agreeableness](/en/personality/big-five/agreeableness-mid) to examine what a middle position can mean, and [low Agreeableness](/en/personality/big-five/agreeableness-low) to compare a more skeptical or challenging orientation. The [facet guide](/en/personality/big-five/facets) helps when the broad description leaves important differences unresolved.\n\nThe [IPIP guide to constructs and inventories](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm) explains why Big Five questionnaires should not be treated as a single interchangeable test. The examples and recording suggestions here support reflection on specific behavior; they do not establish clinical status, job suitability, or individual outcomes.",
+          "heading": "Compare ranges without turning them into types",
           "key": "section-08-03d1c39ded",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A colleague asks for urgent help while your own deadline is near. You understand the need and want to assist. A useful boundary is offering twenty minutes or another resource instead of silently absorbing the entire task.",
-          "heading": "A Realistic Scenario",
-          "key": "section-09-14f0edaa36",
-          "kind": "rich_text"
-        },
-        {
-          "body": "You may score high and refuse a request firmly when it violates safety or values. Clear refusal is compatible with concern. It can protect both people from a promise you cannot keep.",
-          "heading": "A Counterexample",
-          "key": "section-10-dc7ddf19a7",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- When does helping remain sustainable?\n- Which requests are hardest to refuse?\n- How do you express dissent without hiding it?\n- Which Agreeableness facet is strongest?\n- What evidence changes your initial trust?",
-          "heading": "Three to Five Self-Observation Questions",
-          "key": "section-11-f787c0a73a",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Use one boundary sentence this week: acknowledge the need, state your limit, and offer only what is genuinely available. Record whether clarity protects cooperation better than automatic agreement.",
-          "heading": "A Seven-Day Low-Risk Experiment",
-          "key": "section-12-219e50c819",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness), compare [high](/en/personality/big-five/agreeableness-high), [mid-range](/en/personality/big-five/agreeableness-mid), and [low Agreeableness](/en/personality/big-five/agreeableness-low), or inspect the [facet guide](/en/personality/big-five/facets).",
-          "heading": "Continue Reading",
-          "key": "section-13-08cbc7bcb0",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "High Agreeableness describes a stronger orientation toward trust, concern, and cooperation. Learn how to separate that tendency from reluctant agreement, examine competing explanations, and make commitments you can actually keep.",
+        "title": "High Agreeableness: Making Room for Care and Clear Limits"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/agreeableness-high",
-      "source_hash": "adefd0ba11dd924f5d3d76e2a4d7e7ec3ee111fa1cea48b9858010b1ba1a9e07",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "High Agreeableness may suggest trust, cooperation, and attention to interpersonal harmony. It does not mean moral superiority, obedience, or accepting harm.",
-      "title": "High Agreeableness: Cooperation With Boundaries"
+      "source_hash": "6c6d9ae74389e4e0617000ed957b1c34ace0cd8b2a0f04815c4bd26e9380233e",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "High Agreeableness describes a stronger orientation toward trust, concern, and cooperation. Learn how to separate that tendency from reluctant agreement, examine competing explanations, and make commitments you can actually keep.",
+      "title": "High Agreeableness: Making Room for Care and Clear Limits"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "agreeableness-high-model_structure-1",
-            "limitation": "Supports a continuous domain, not product norms, morality, career fit, or individual prediction.",
-            "source_ids": [
-              "S1"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "agreeableness-high-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "agreeableness-high-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Goldberg, L. R.",
-            "claim_ids": [
-              "agreeableness-high-model_structure-1"
-            ],
-            "doi": "10.1037/0022-3514.59.6.1216",
-            "id": "S1",
-            "limitation": "PMID, title, author, year, and DOI agree. Use for the lexical five-factor structure and broad model background, not product-level validity.",
-            "public_url": "https://pubmed.ncbi.nlm.nih.gov/2283588/",
-            "source_type": "peer_reviewed_research",
-            "title": "An alternative 'description of personality': The Big-Five factor structure",
-            "year": 1990
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "878b2438d9b372b14ae21b1dd76fa980d4617ae9b2355f06147987eeed299a43"
+  "source_content_sha256": "53c67ce5710d164d81d6d288cb864db62e89a065973b55c68d40fdd7d679697e"
 }

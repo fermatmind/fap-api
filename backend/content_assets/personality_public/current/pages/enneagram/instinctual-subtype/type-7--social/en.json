@@ -23,94 +23,35 @@
       "entity_key": "type-7/social",
       "entity_type": "instinctual_subtype",
       "evidence_notes": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "claim_mapping": [],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       },
       "faq": [
         {
-          "answer": "No. Values, faith, school requirements, professional development, mutual aid, or community necessity may explain volunteering. Compare free choice, follow-through, and recognition effects.",
-          "question": "Does volunteering prove a social Seven subtype?"
+          "answer": "Yes. Group rules, participation, shared ideals, and responsibility do not require frequent socializing. Work pressure can also direct attention there. Examine how the concern connects with Seven's core motive in comparable situations where the person has meaningful freedom of choice.",
+          "question": "Can social attention fit someone who dislikes parties?"
         },
         {
-          "answer": "A stated sacrifice may benefit others, protect status, meet an imposed role, or express a chosen value. Recognition conditions help separate these explanations without assigning moral worth.",
-          "question": "Why examine sacrifice and recognition together?"
+          "answer": "No. Sacrifice may reflect chosen values, necessary duties, identity expectations, or unfair labor, as well as shared possibility. Evaluate freedom, results, beneficiaries, and cost distribution. Subtype names do not rank moral worth.",
+          "question": "Does giving up pleasure make social Seven more selfless?"
         },
         {
-          "answer": "Steady participation in uncredited maintenance, without resentment or a need to reopen more stimulating roles, weakens a recognition-centered account of shared possibility.",
-          "question": "What anonymous task weakens the social hypothesis?"
+          "answer": "It weakens a primarily recognition-driven explanation, but does not automatically remove concern for shared ideals or belonging. If repeated observations also lack Seven's proposed tension around satisfaction, possibility, and constraint, while duties or values explain the action better, reduce the overall subtype interpretation.",
+          "question": "Does anonymous service without recognition disprove social Seven?"
         }
       ],
       "framework": "enneagram",
@@ -132,19 +73,19 @@
         },
         {
           "href": "/en/personality/enneagram/type-7",
-          "label": "Enneagram Type 7",
+          "label": "Type Seven core description",
           "relationship": "primary_core_type",
           "target_identity_key": "core_type:type-7"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/self-preservation",
-          "label": "Type 7 self-preservation subtype",
+          "label": "Type Seven self-preservation subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/self-preservation"
         },
         {
           "href": "/en/personality/enneagram/type-7/instincts/one-to-one",
-          "label": "Type 7 one-to-one subtype",
+          "label": "Type Seven one-to-one subtype",
           "relationship": "sibling_instinctual_subtype",
           "target_identity_key": "instinctual_subtype:type-7/one-to-one"
         }
@@ -184,52 +125,34 @@
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body_md": "The tradition suggests that attention may move toward inspiring a group, postponing an immediate preference, or becoming the person who opens a better collective future. Observe who benefits and what choice remains available.",
-          "key": "traditional_hypothesis",
-          "title": "Treat contribution as a proposed route to possibility"
+          "body_md": "If Seven concerns satisfaction and possibility, why does its social description discuss sacrifice? The [Narrative Enneagram](https://www.narrativeenneagram.org/instinctual-subtypes/) identifies a tension between personal expansion and the limits involved in participating with others. Creating a better future together can itself be an exciting possibility, worth postponing an immediate pleasure or accepting responsibility for.\n\nThe core motive need not change. Service might make life feel purposeful and open rather than disappointing or powerless. The [Enneagram Institute's Seven description](https://www.enneagraminstitute.com/type-7/) provides the traditional background. This remains a possible explanation to ask about, not permission to decide that someone helps others to avoid pain.\n\nWhen friends suggest a smaller event, someone responds that everyone deserves a better opportunity. That can be effective encouragement. It can also turn an appealing future into an obligation before anyone checks capacity. What happens next matters: can the organizer acknowledge limits, allow refusals, and identify who will finish the promised work?",
+          "key": "chosen_limits",
+          "title": "Why accepting limits can still express Seven's core motive"
         },
         {
-          "body_md": "Social instinct is used here as a traditional observation label, not evidence about bodily mechanisms. Belonging, exclusion, status, law, and organizational design require direct contextual analysis.",
-          "key": "instinct_boundary",
-          "title": "Keep social language at the level of attention and roles"
+          "body_md": "A social Seven interpretation can fit someone who looks serious and willingly gives up entertainment. The question is whether that restraint connects with shared ideals, participation, and anticipation of better possibilities. Assuming all Sevens must look playful misses this variation; treating self-sacrifice as proof makes the opposite mistake.\n\nSome schools use countertype language for combinations that differ from a familiar surface description. Such labels belong to a teaching tradition. They do not establish a special mechanism or justify explaining every mismatch as stronger repression. Sustained action grounded in values or explicit duties, without the possibility-and-constraint tension described here, may mean this account does not fit.\n\nRecognition can matter, but it is not the whole of social attention. Anonymous service may still express a shared ideal. It challenges a recognition-driven explanation specifically, rather than automatically ruling out social Seven. Wanting fair credit may also be a legitimate concern about labor.",
+          "key": "sacrifice_without_rank",
+          "title": "Restraint is neither a virtue ranking nor a subtype test"
         },
         {
-          "body_md": "Hold the task and group benefit constant, then compare participation when credit is public versus absent. Record whether energy, promise completion, resentment, and option seeking change with recognition.",
-          "key": "matched_comparison",
-          "title": "Compare recognized and anonymous contribution"
+          "body_md": "Friends are arranging a weekend repair workshop. The venue cancels, the budget is halved, and one collaborator can attend for only two hours. A social Seven interpretation pays particular attention to keeping people involved, the meaning of personal contribution, and whether the shared purpose remains worth anticipating.\n\nAn effective organizer asks which benefit matters most, reduces the event to a deliverable part, states their own available time, and lets others revise commitments. Overused, the strategy might become a promise to cover every gap, followed by more exciting ideas while cleanup and coordination fall to people who never agreed. It might also frame reasonable boundaries as lack of commitment. The observable problem is the distribution and completion of work, not whether the organizer is noble or selfish.\n\nIn the same event, a self-preservation Seven interpretation prioritizes usable space, tools, and workable comfort. A one-to-one Seven interpretation prioritizes the compelling exchange and new direction associated with a particular collaborator. Social attention places shared purpose and participation first. All three may give time or supplies; compare the concern those actions serve and the limit that is difficult to accept.\n\nThese are original comparison examples, not fixed roles for actual people.",
+          "key": "shared_workshop",
+          "title": "Turn a smaller budget into a fairer promise"
         },
         {
-          "body_md": "This hypothesis can include delaying pleasure for a cause as well as energizing others around a shared possibility. Neither self-denial nor charisma is sufficient without repeated context and counterexamples.",
-          "key": "countertype_variation",
-          "title": "Expect both restraint and visible enthusiasm"
+          "body_md": "Compare a One interpretation by asking what remains difficult when a modest, acceptable plan is sufficient: an unmet standard, or the loss of a better possibility? Compare Two by asking what is harder when help is no longer needed: losing the needed position, or losing the opportunity to create something together? Compare Three by asking whether a setback mainly prompts restoring an image of accomplishment or reopening an appealing future. The [Narrative type comparisons](https://www.narrativeenneagram.org/type-comparisons/) supply traditional distinctions; answers need repeated, specific experiences.\n\nProfessional duties, care obligations, faith, community necessity, appraisal systems, and exclusion risks can require the same service. If refusing is costly, institutional conditions may explain participation first. Check workload, compensation, exit conditions, and beneficiaries before interpreting personality.\n\nIf sacrifice ends when duties or promotion incentives change, give the role explanation more weight. If freely chosen, comparable situations repeatedly lack Seven's proposed tension around possibility and restriction, reduce or withdraw the subtype account. Steady routine follow-through is not itself a disconfirmation; it may simply show that the strategy has workable boundaries.",
+          "key": "mistaken_motives",
+          "title": "Similar responsibility can serve different motives"
         },
         {
-          "body_md": "Care work, activism, teaching, religious duty, citizenship demands, marginalized-group survival, performance metrics, and promotion systems may reward sacrifice or public contribution. These forces can be more explanatory than subtype.",
-          "key": "alternative_environment",
-          "title": "Audit unpaid labor and institutional incentives"
+          "body_md": "For a low-risk group task, separately record what you want to contribute, what people have actually agreed is needed, and the better future you hope the project will create. The third item does not establish consent to the first two.\n\nBefore committing, state your time, the smallest useful result, and any work needing others' explicit agreement. Keep one ordinary personal plan. If it must change, discuss how to share the cost rather than assuming the most enthusiastic person will fill every gap. Record new ideas and finish the existing agreement before adding them.\n\nAfterward, compare inspiration with routine completion. What changed when credit disappeared, the event became smaller, or you had to miss another enjoyable activity? Separate lack of recognition, concern for the group, unfair labor, and discomfort with reduced options.\n\nCollaborators can support concrete benefits, clear roles, and permission to have personal needs. If clear capacity removes the tension, work design may explain it better than subtype. A repeated pattern of enlarging the vision rather than acknowledging disappointment deserves further exploration, without assigning anyone a type from one task.",
+          "key": "promise_with_capacity",
+          "title": "Give the shared ideal a capacity check"
         },
         {
-          "body_md": "Confidence should decline when the person comfortably chooses a private preference, contributes anonymously without tracking recognition, refuses unfair service expectations, or stays with routine group maintenance after inspiration fades.",
-          "key": "counterexample",
-          "title": "Look for private enjoyment without moral accounting"
-        },
-        {
-          "body_md": "The subtype hypothesis does not measure generosity, selfishness, citizenship, leadership, or ethics. Instrument-specific evidence cannot establish universal ontology or cultural equivalence, and group consequences remain factual questions.",
-          "key": "evidence_boundary",
-          "title": "Do not infer virtue or universal structure"
-        },
-        {
-          "body_md": "Duration: 5\n\nContext: Across five days, select one visible contribution and one anonymous maintenance task that offer comparable benefit to the same group.\n\nObservable signal: Record promised work, actual beneficiary, personal preference deferred, recognition available, resentment stated, completion quality, and freedom to decline.\n\nPage-specific signal: Compare engagement when status is removed but the collective benefit and workload remain similar.\n\nAlternative explanation: Check unpaid role expectations, care duties, faith practice, activism, promotion incentives, exclusion risk, and community survival needs.\n\nReflection prompt: Identify whether recognition, free choice, or concrete group benefit best explains the difference and revise the subtype claim accordingly.",
-          "key": "observation_exercise",
-          "observation_exercise": {
-            "alternative_explanation": "Check unpaid role expectations, care duties, faith practice, activism, promotion incentives, exclusion risk, and community survival needs.",
-            "context": "Across five days, select one visible contribution and one anonymous maintenance task that offer comparable benefit to the same group.",
-            "duration_days": 5,
-            "observable_signal": "Record promised work, actual beneficiary, personal preference deferred, recognition available, resentment stated, completion quality, and freedom to decline.",
-            "page_specific_signal": "Compare engagement when status is removed but the collective benefit and workload remain similar.",
-            "reflection_prompt": "Identify whether recognition, free choice, or concrete group benefit best explains the difference and revise the subtype claim accordingly."
-          },
-          "title": "Observation exercise"
+          "body_md": "Social attention is not extraversion. The three instincts are not mutually exclusive kinds of people: resources, group life, and close connection can all matter. Wings concern neighboring core influences; subtypes concern the life domain of a core motive. A second-highest score, occupation, or celebrity guess cannot substitute for this distinction.\n\nNarrative one-to-one includes partners, close friendships, and vitality. The [Enneagram Institute's sexual/attraction model](https://www.enneagraminstitute.com/how-the-enneagram-system-works/) emphasizes attraction intensity. They overlap without being interchangeable and cannot be read from libido. Twenty-seven subtype combinations and countertype labels are school traditions, not verified neural mechanisms or scientific diagnoses.\n\nThe [abstract of Hook and colleagues' 2021 review](https://pubmed.ncbi.nlm.nih.gov/33332604/) reports mixed evidence. This page does not validate FermatMind subtype measurement or assess morality, leadership, or social worth. Traditional accounts, studies of specific instruments, and evidence for a FermatMind product answer different questions.\n\nRead the [Type Seven core description](/en/personality/enneagram/type-7) to examine the underlying motive. Compare [one-to-one Seven](/en/personality/enneagram/type-7/instincts/one-to-one) when fascination with a particular collaborator is the greater question.",
+          "key": "tradition_and_evidence",
+          "title": "Keep tradition, measurement, and product evidence distinct"
         }
       ],
       "seo": {
@@ -240,8 +163,8 @@
       "slug": "enneagram/type-7/instincts/social",
       "source_hash": "acc0603b201d8fb43284bfc0c274ba4375beb11ad4f899879ef35a57a214d621",
       "source_package": "enneagram-public-authority-v2-release-gate-22",
-      "summary": "Type Seven social is an evidence-limited subtype hypothesis: Type Seven attention to possibility remains central, while contribution, group ideals, shared options, and recognition may receive added focus. Service or sacrifice alone does not confirm this subtype because unpaid labor, professional duty, community survival, status incentives, discrimination, and role expectations can look the same.",
-      "title": "Type 7 Social: Contribution, Possibility, and Group Roles"
+      "summary": "The social Seven interpretation explores a tension between creating better possibilities with others and retaining freedom and enjoyment. Service, restraint, and group enthusiasm can all appear here. What matters is how a shared ideal shapes choices, promises, and follow-through—not the number of friends someone has or whether they volunteer.",
+      "title": "Type 7 Social: Sharing a Better Future Without Losing Personal Room"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
@@ -251,85 +174,26 @@
       },
       "schema_eligible": true,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "claim.framework.nine_type_observation",
-            "limitation": "The framework label does not prove that every person has one fixed type or that nine latent factors are universally recovered.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.evidence.mixed_and_instrument_specific",
-            "limitation": "No cited result transfers automatically to FermatMind scores, norms, translations, or individual interpretations.",
-            "source_ids": [
-              "hook_2021_systematic_review"
-            ]
-          },
-          {
-            "claim_id": "claim.subtype.traditional_secondary_hypothesis",
-            "limitation": "One instrument-specific study does not establish universal subtype ontology, cross-cultural equivalence, diagnosis, or FermatMind validity.",
-            "source_ids": [
-              "naranjo_1994_character_neurosis",
-              "yanartas_2022_types_subtypes",
-              "hook_2021_systematic_review"
-            ]
-          }
-        ],
+        "claim_mapping": [],
         "eligible": true,
-        "limitations": [
-          "The page may use only limited observational wording; type is not a fixed identity, diagnosis, ability, or future outcome.",
-          "Instrument-specific evidence from one measure and sample does not establish universal subtype ontology or cross-cultural equivalence."
-        ],
+        "limitations": [],
         "sources": [
           {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
+            "accessed_at": "2026-10-08",
             "author_or_organization": "Joshua N. Hook; Todd W. Hall; Don E. Davis; Daryl R. Van Tongeren; Mackenzie Conner",
-            "claim_ids": [
-              "claim.framework.nine_type_observation",
-              "claim.evidence.mixed_and_instrument_specific",
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
+            "claim_ids": [],
             "doi": "10.1002/jclp.23097",
             "id": "hook_2021_systematic_review",
-            "limitation": "The 104-sample review combines heterogeneous instruments and does not validate FermatMind, establish universal nine-factor recovery, or support deterministic individual typing.",
-            "public_url": "https://doi.org/10.1002/jclp.23097",
+            "limitation": "Research statements on this page rely on the abstract; findings from different instruments and samples do not directly establish the validity of FermatMind forms.",
+            "public_url": "https://pubmed.ncbi.nlm.nih.gov/33332604/",
             "source_type": "peer_reviewed_research",
             "title": "The Enneagram: A systematic review of the literature and directions for future research",
             "year": 2021
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Claudio Naranjo",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": null,
-            "id": "naranjo_1994_character_neurosis",
-            "limitation": "Historical theory language, including clinical-sounding labels, is not contemporary diagnosis, causal evidence, or validation.",
-            "public_url": "https://openlibrary.org/books/OL8251823M/Character_and_Neurosis",
-            "source_type": "book",
-            "title": "Character and Neurosis: An Integrative View",
-            "year": 1994
-          },
-          {
-            "accessed_at": "2026-07-15T00:00:00+00:00",
-            "author_or_organization": "Ömer Yanartaş; Cem Malakcıoğlu; İsmail Acarkan; Erdoğdu Akça",
-            "claim_ids": [
-              "claim.subtype.traditional_secondary_hypothesis"
-            ],
-            "doi": "10.21673/anadoluklin.1104082",
-            "id": "yanartas_2022_types_subtypes",
-            "limitation": "The predominantly female, highly educated Turkish sample and instrument-specific results do not establish cross-cultural universality, subtype ontology, or FermatMind equivalence.",
-            "public_url": "https://doi.org/10.21673/anadoluklin.1104082",
-            "source_type": "peer_reviewed_research",
-            "title": "Validity and reliability of enneagram personality types and subtypes inventory in a Turkish sample",
-            "year": 2022
           }
         ]
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "fe15e3108abadbd3ac3f237634d3bdd1857d4a76961bc6e4d2317ac06c1e9584"
+  "source_content_sha256": "a5438602449241c53580c40d16e44babd3a1ea37bb5c7a406062adc5a176adb4"
 }

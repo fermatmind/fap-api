@@ -1,5 +1,5 @@
 {
-  "content_state": "baseline",
+  "content_state": "enhanced",
   "contract_version": "personality.page.content.v1",
   "identity": {
     "canonical_path": "/en/personality/big-five/facets/tender-mindedness",
@@ -20,34 +20,27 @@
       "contract_version": "personality_public_asset.v1",
       "entity_key": "tender-mindedness",
       "entity_type": "facet_detail",
-      "evidence_notes": [
-        {
-          "citation_label": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-          "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-          "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-          "source_id": "S11"
-        }
-      ],
+      "evidence_notes": [],
       "faq": [
         {
-          "answer": "No. Concern and firmness can coexist.",
-          "question": "Does strong Tender-Mindedness mean being soft?"
+          "answer": "No. Concern does not establish accuracy. Ask whether your interpretation fits what the person actually says and whether important information is missing.",
+          "question": "Does strong Tender-Mindedness mean I understand people accurately?"
         },
         {
-          "answer": "Yes. Care can be expressed through reliable action, ethics, and evidence-based decisions.",
-          "question": "Can someone with weaker Tender-Mindedness care for others?"
+          "answer": "No. Their difficulty can matter to you without producing the same emotion in you. Shared distress also does not, by itself, establish useful understanding.",
+          "question": "Must I share someone's sadness to care?"
         },
         {
-          "answer": "High exposure and weak boundaries may contribute to strain, but this page provides no individual causal or clinical conclusion.",
-          "question": "Can strong Tender-Mindedness cause emotional exhaustion?"
+          "answer": "Yes. Responsibility, principles, and commitments can motivate help. Whether it works depends on the person's need and the helper's resources and actions.",
+          "question": "Can someone with weaker concern provide good help?"
         },
         {
-          "answer": "Compassion centers concern and response; pity may include distance or hierarchy. Usage varies by context.",
-          "question": "How is compassion different from pity?"
+          "answer": "No. Concern can coexist with a clear limit. Consider your actual feeling, the reason for the limit, and how you communicated it separately.",
+          "question": "Does saying no show that I do not care?"
         },
         {
-          "answer": "Perspective-taking and listening behaviors can be practiced. This page does not promise trait change.",
-          "question": "Can sympathetic attention be practiced?"
+          "answer": "This page does not promise that. The questions help evaluate one response. Prompted behavior and a short observation record do not establish enduring trait change.",
+          "question": "Will practicing these questions change my personality?"
         }
       ],
       "framework": "big_five",
@@ -98,169 +91,82 @@
       "llms_eligible": true,
       "locale": "en",
       "method_boundary": {
-        "clinical_reviewed": false,
-        "content_method": "AI-assisted translation and editorial adaptation; terminology, evidence relationships, and claim boundaries reviewed against the locked zh-CN authority.",
-        "expert_endorsement": false,
-        "limitations": [
-          "For self-understanding and education; not clinical diagnosis, hiring screening, admission, or individual-outcome prediction.",
-          "This package publishes no product-level reliability, validity, norm, percentile, or predictive claim."
-        ]
+        "not_for": [
+          "Do not use this page for clinical diagnosis or as the sole basis for hiring or admission."
+        ],
+        "summary": "Use this page to understand personality concepts and examine everyday behavior. Interpret actual scores using the instrument’s scoring method, reference sample, and intended use."
       },
       "robots": "index,follow",
       "schema": [],
       "schema_runtime_eligible": true,
       "sections": [
         {
-          "body": "Tender-Mindedness concerns how readily sympathetic concern for suffering and vulnerability enters attention and judgment. It is not weakness, empathy ability, pity, moral superiority, clinical sensitivity, or proof that a compassionate-seeming decision is correct.\n\n“Tender-Mindedness within Agreeableness: sympathetic concern in judgment” is used on this page as a descriptive construct within the NEO/IPIP-NEO 30-facet framework. The official IPIP resource describes scales that measure constructs similar to NEO facets and lists item mappings ([S11](https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm)); this does not make scores from different instruments, translations, or products interchangeable.\n\nFermatMind has not published product-level reliability, validity, Chinese norms, or individual predictive evidence for the score discussed on this page. This material is for self-observation and education. It is not for clinical diagnosis, hiring screening, school admission, or replacing a career decision.\n\n> **Content method and update:** FermatMind Editorial prepared this page with AI-assisted drafting and checked terminology, boundaries, and evidence against public personality-psychology sources. It is for self-understanding and education; it is not clinical diagnosis, hiring screening, or individual-outcome prediction. Substantive update: 2026-07-19; review mode: solo_operator; not clinically reviewed.",
-          "heading": "Evidence and Interpretation Boundaries",
+          "body": "Tender-Mindedness describes a tendency to feel sympathetic concern when other people are suffering or struggling. Their difficulty matters to you, and you want it to ease. The label belongs to the NEO/IPIP-NEO facet vocabulary used on this site, within Agreeableness.\n\nPeople differ continuously in this tendency. Stronger, weaker, and intermediate positions are descriptions, not separate kinds of people or grades of kindness. You may feel substantial concern for some difficulties and little for others.\n\nConcern can inform a decision without settling it. Caring about a person's hardship does not require agreeing with their explanation, granting their request, or promising an outcome you cannot deliver.",
+          "heading": "What another person's difficulty brings into your attention",
           "key": "section-01-1c349f7001",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A stronger tendency gives human impact and felt concern substantial weight. A weaker tendency may emphasize rules, evidence, consistency, or distance from emotion. Sound decisions can require both concern and disciplined analysis.",
-          "heading": "Precise Definition",
+          "body": "Concern asks whether their hardship matters to you. Understanding asks whether your account of their experience is accurate. Emotional contagion asks whether their emotion spreads to you. Useful help asks whether your response fits their need and your resources.\n\nA housemate feels discouraged after an unsuccessful job application. You might care deeply while wrongly assuming they want interview advice. You might share their anxiety without knowing what worries them. Or you might help with a practical task while feeling relatively little distress yourself.\n\nThe [official introduction to Davis's Interpersonal Reactivity Index](https://www.eckerd.edu/psychology/iri/) distinguishes perspective taking, empathic concern, and personal distress as self-reported tendencies. This supports asking separate questions; it does not make that instrument interchangeable with this facet or establish anyone's accuracy at understanding others.",
+          "heading": "Four questions that should stay separate",
           "key": "section-02-b782b2f3d7",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Tender-Mindedness belongs to [Agreeableness](/en/personality/big-five/agreeableness), reflecting sympathetic interpersonal orientation.",
-          "heading": "Parent Domain",
+          "body": "When concern arises readily, another person's difficulty may remain on your mind after a conversation. You may want to acknowledge it before discussing solutions. If that wish turns into unwanted advice or an unrealistic promise, the response needs adjustment; the feeling alone does not establish helpfulness.\n\nWhen concern arises less readily, you may understand the facts without a strong emotional pull. You can still act respectfully and meet an obligation. That pattern does not establish cruelty, superior objectivity, or fitness for emergency work.\n\nAn intermediate pattern can be selective or variable. Familiarity with the problem, recent fatigue, available information, and the setting may matter. These are explanations to consider, not reasons to assume that an invisible feeling must be present whenever behavior looks calm.",
+          "heading": "Stronger concern, quieter concern, and mixed patterns",
           "key": "section-03-f64c7361bf",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- **Tender-Mindedness versus Altruism:** [Altruism](/en/personality/big-five/facets/altruism) concerns readiness to help; concern can exist without action and action without strong feeling.\n- **Tender-Mindedness versus empathy skill:** Accurately understanding another person is not identical to sympathetic concern.\n- **Tender-Mindedness versus pity:** Pity can imply distance or hierarchy; concern need not.",
-          "heading": "Distinguishing Neighboring Facets",
+          "body": "Consider an illustrative situation. A housemate says a rejected application has left them uncertain about next month's expenses. Alex records their immediate reaction: they feel concerned and want the pressure to ease. Alex offers to rewrite the housemate's résumé, but the housemate says the immediate problem is understanding which bills can be rescheduled.\n\nThe concern is supported by Alex's own contemporaneous account. The first offer does not demonstrate accurate understanding or useful help. Alex asks what information would be useful and offers to look up one bill's published payment options, with the housemate's agreement.\n\nA different person might quietly complete the same task without much sympathetic feeling. Their action would show what they did, not how they felt. Conversely, failing to complete a task might reflect limited time or knowledge rather than absent concern.",
+          "heading": "Concern can be real while the proposed help misses",
           "key": "section-04-2a933470e0",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "Stronger Tender-Mindedness may appear as attending to personal impact, responding emotionally to suffering, or advocating for vulnerable people. Weaker tendency may appear as focusing on policy, evidence, or aggregate outcomes. Professional training, emotional load, culture, and role can shape display.",
-          "heading": "Behavioral Cues",
+          "body": "Try a limited hypothesis: When someone I live with directly describes a financial difficulty, I usually feel spontaneous concern. The target is your own feeling at the time, not whether you offer advice or solve the problem.\n\nFor naturally occurring conversations, note what you heard, your immediate feeling, and your subsequent behavior separately. If you heard a clear difficulty and could attend to your reaction, but concern did not arise, record an opportunity without the expected response. If there was no disclosure, you were absent, or the difficulty was not apparent, record no relevant opportunity. Do not treat a week without such conversations as evidence of low concern.\n\nOne exception can coexist with usually. Repeated concern in comparable situations supports retaining this limited description; a pattern restricted to familiar problems suggests narrowing it. If feelings were reconstructed afterward or comparable opportunities were scarce, set the hypothesis aside. Finding no exception in a short record is not proof that exceptions do not occur.",
+          "heading": "Look for exceptions to one specific expectation",
           "key": "section-05-905a8ffd44",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "A clinician may maintain calm distance while providing excellent care. A person may feel strongly about animals and less about abstract social cases. Repeated exposure can reduce visible response without proving absence of concern.",
-          "heading": "Contextual Differences",
+          "body": "In an ordinary conversation, first notice any concern that has already arisen. Then deliberately ask whether the person wants listening, information, or help with a specific task. Mark this as a prompted communication attempt rather than a natural observation.\n\nOffer only what you can reasonably do. Later, check whether the offer was wanted and whether you fulfilled it. Useful outcomes include discovering a mistaken assumption, reducing an unwanted intervention, or keeping a smaller promise. More intense emotion is not the success criterion.\n\nIf the person does not want help, respecting that answer can be an appropriate response. This exercise evaluates listening and follow-through, not a change in personality. If attending to others' difficulties leaves you persistently distressed, you can seek support without first assigning yourself a trait label.",
+          "heading": "Make the next response easier to evaluate",
           "key": "section-06-6c51d81107",
-          "kind": "rich_text"
+          "kind": "markdown"
         },
         {
-          "body": "- Noticing suffering quickly.\n- Bringing human impact into decisions.\n- Offering emotional validation.\n- Becoming overwhelmed by repeated exposure.\n- Favoring an immediate case while missing wider consequences.",
-          "heading": "Possible Expressions When Stronger",
+          "body": "The [official IPIP correspondence table](https://ipip.ori.org/newNEO_FacetsTable.htm) links Sympathy with NEO Tender-Mindedness. Its [four-item facet material](https://ipip.ori.org/30FacetNEO-PI-RItems_Maples_etal.htm) includes concern for people in difficult circumstances. These materials ground the topic; they do not establish helping skill or individual outcomes.\n\nFacet arrangements differ across inventories. The [BFI-2 authors' introduction](https://www.ocf.berkeley.edu/~johnlab/bfi.html), for example, describes 15 facets. This page supplies explanatory vocabulary, not additional measured scores or scoring instructions for a FermatMind version.\n\nRead [Altruism](/en/personality/big-five/facets/altruism) to examine readiness to help, and [Trust](/en/personality/big-five/facets/trust) to distinguish caring about someone from expecting good intentions. [Agreeableness](/en/personality/big-five/agreeableness) and the [facet guide](/en/personality/big-five/facets) put those questions in context.",
+          "heading": "What the sources establish and where to read next",
           "key": "section-07-abc4515bc2",
-          "kind": "rich_text"
-        },
-        {
-          "body": "- Maintaining distance under emotional pressure.\n- Applying consistent rules.\n- Prioritizing aggregate evidence.\n- Sounding cold when concern is not expressed.\n- Missing information carried by lived experience.",
-          "heading": "Possible Expressions When Weaker",
-          "key": "section-08-5d6942c8dd",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Stronger Tender-Mindedness can support compassionate attention and advocacy. Possible costs include emotional exhaustion, boundary strain, and partiality. Weaker tendency can support calm analysis; possible costs include interpersonal distance and underweighting harm. Neither level proves goodness or professional quality.",
-          "heading": "Strengths and Costs",
-          "key": "section-09-c5e793ca97",
-          "kind": "rich_text"
-        },
-        {
-          "body": "A policy analyst listens to affected families, then tests whether a compassionate proposal helps the broader population. Concern informs the question without replacing evidence.",
-          "heading": "An Original Case",
-          "key": "section-10-e3f0246959",
-          "kind": "rich_text"
-        },
-        {
-          "body": "An emergency clinician speaks briefly and calmly while delivering technically and ethically careful care. Restrained affect does not establish indifference.",
-          "heading": "An Original Counterexample",
-          "key": "section-11-f8a2299937",
-          "kind": "rich_text"
-        },
-        {
-          "body": "1. How quickly does another person’s distress enter your attention?\n2. Does concern improve or narrow judgment?\n3. What boundaries preserve care over time?\n4. Do rules hide important human costs?\n5. Can you express concern without promising an unavailable outcome?",
-          "heading": "Self-Observation Questions",
-          "key": "section-12-0d70bd3c65",
-          "kind": "rich_text"
-        },
-        {
-          "body": "In one decision, write the affected person’s likely experience, the evidence, and the wider consequences in separate columns. If exposure is overwhelming, reduce load and seek appropriate support.",
-          "heading": "Low-Risk Action Experiment",
-          "key": "section-13-5519ba1cef",
-          "kind": "rich_text"
-        },
-        {
-          "body": "Return to [Agreeableness](/en/personality/big-five/agreeableness) or the [30-facet guide](/en/personality/big-five/facets). Continue with [Trust](/en/personality/big-five/facets/trust), [Straightforwardness](/en/personality/big-five/facets/straightforwardness), [Altruism](/en/personality/big-five/facets/altruism), [Compliance](/en/personality/big-five/facets/compliance), [Modesty](/en/personality/big-five/facets/modesty).",
-          "heading": "Continue Reading",
-          "key": "section-14-33fcabbf79",
-          "kind": "rich_text"
+          "kind": "markdown"
         }
       ],
-      "seo": [],
+      "seo": {
+        "description": "Tender-Mindedness concerns how readily another person's hardship moves you. Accurate understanding, shared emotion, and effective help require separate evidence.",
+        "title": "Tender-Mindedness: Concern, Understanding, and Useful Help"
+      },
       "sitemap_eligible": true,
       "slug": "big-five/facets/tender-mindedness",
-      "source_hash": "90710979247d384c54b36c982915aa3e5f1d058d67a89fb656e014ca3d8a9c11",
-      "source_package": "big-five-en52-52-page-release-20260719",
-      "summary": "Tender-Mindedness concerns how readily sympathetic concern enters attention and judgment. It is not weakness, empathy skill, pity, or proof that a decision is correct.",
-      "title": "Tender-Mindedness: Sympathetic Concern for Others"
+      "source_hash": "f4d0a35af034da705fe9b171d231a84eecc44c675315fcde1bb440d083147ef1",
+      "source_package": "big-five-local-content-candidate-20261008",
+      "summary": "Tender-Mindedness concerns how readily another person's hardship moves you. Accurate understanding, shared emotion, and effective help require separate evidence.",
+      "title": "Tender-Mindedness: Concern, Understanding, and Useful Help"
     },
     "personality_public_content_asset_v2": {
       "compatible_v1_contract_version": "personality_public_asset.v1",
       "contract_version": "personality_public_asset.v2",
-      "editorial_authority": {
-        "author": {
-          "name": "FermatMind Editorial",
-          "organization": "FermatMind",
-          "role": "Editorial"
-        }
-      },
+      "editorial_authority": [],
       "schema_eligible": false,
       "visible_evidence": {
-        "claim_mapping": [
-          {
-            "claim_id": "A6-tender-mindedness-facet_definition-1",
-            "limitation": "Supports construct and item-mapping context, not cross-instrument equivalence, product norms, or individual prediction.",
-            "source_ids": [
-              "S11"
-            ],
-            "support_level": "direct"
-          },
-          {
-            "claim_id": "A6-tender-mindedness-product-boundary",
-            "limitation": "Public product boundary; not an empirical research claim.",
-            "source_ids": [],
-            "support_level": "not_required"
-          },
-          {
-            "claim_id": "A6-tender-mindedness-content-method",
-            "limitation": "Editorial provenance without clinical review, endorsement, or product validation.",
-            "source_ids": [],
-            "support_level": "not_required"
-          }
-        ],
-        "eligible": true,
-        "limitations": [
-          "General Big Five research does not establish FermatMind product validation.",
-          "Not for diagnosis, screening, admission, or individual-outcome prediction."
-        ],
-        "sources": [
-          {
-            "accessed_at": "2026-07-18T00:00:00+00:00",
-            "author_or_organization": "Oregon Research Institute IPIP project",
-            "claim_ids": [
-              "A6-tender-mindedness-facet_definition-1"
-            ],
-            "doi": null,
-            "id": "S11",
-            "limitation": "Official IPIP documentation distinguishes lexical Big Five, FFM, BFI, and NEO/IPIP families and describes similar rather than identical constructs. This official page does not state a publication year; year records the verified public snapshot year, not a publication date.",
-            "public_url": "https://ipip.ori.org/Finding_Scales_to_Measure_Particular_Constructs.htm",
-            "source_type": "official_documentation",
-            "title": "Finding Scales to Measure Particular Personality Constructs / IPIP scales measuring constructs similar to the 30 NEO-PI-R facets",
-            "year": 2026
-          }
-        ]
+        "claim_mapping": [],
+        "eligible": false,
+        "limitations": [],
+        "sources": []
       }
     }
   },
   "payload_contract": "personality_public_asset.v2",
-  "source_content_sha256": "14cfc769918930621274aeacc8cd551c3dfdaa019d472bba583d5d37b932e2d5"
+  "source_content_sha256": "ee1c103ebddf87171795ab8b3e0935b1947956c23dd18b21e5c7b80e3867356d"
 }
