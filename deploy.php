@@ -1047,7 +1047,9 @@ function deployEventRuntime(string $command, string $root, array $extra = [], ?s
         $arguments[] = deployShellArg($argument);
     }
 
-    return run('{{bin/php}} -r '.deployShellArg($program).' -- '.implode(' ', $arguments));
+    // Match the platform PHP used by php8.4-fpm. Login profiles may resolve
+    // "php" to another runtime without the required process functions.
+    return run('/usr/bin/php8.4 -r '.deployShellArg($program).' -- '.implode(' ', $arguments));
 }
 
 function deployEventManaged(string $root): bool
