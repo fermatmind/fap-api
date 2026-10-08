@@ -13,6 +13,10 @@ final class EventIngestRuntime
 
     private static int $childProgressBytes = 0;
 
+    private static int $parentOperation = 0;
+
+    private static int $parentFailureKind = 0;
+
     public static function failureStage(): string
     {
         // Classify execution boundaries without inspecting exception messages,
@@ -20,7 +24,7 @@ final class EventIngestRuntime
         return match (self::$compileStage) {
             1 => 'EVENT_COMPILE_PATH',
             2 => 'EVENT_COMPILE_AUTHORITY',
-            3 => (match (self::$childFailure) {
+            3 => (self::$childFailure === 0 ? self::parentFailureStage() : match (self::$childFailure) {
                 -2 => 'EVENT_COMPILE_CHILD_START',
                 -3 => 'EVENT_COMPILE_CHILD_TIMEOUT',
                 -4 => 'EVENT_COMPILE_CHILD_SIGNAL',
@@ -43,6 +47,35 @@ final class EventIngestRuntime
             6 => 'EVENT_COMPILE_ACTIVATION',
             default => 'EVENT_OTHER_RUNTIME',
         };
+    }
+
+    private static function parentFailureStage(): string
+    {
+        $kind = match (self::$parentFailureKind) {
+            1 => 'TYPE',
+            2 => 'VALUE',
+            3 => 'PHP_WARNING',
+            4 => 'PHP_ERROR',
+            5 => 'RUNTIME',
+            6 => 'EXCEPTION',
+            default => 'UNCLASSIFIED',
+        };
+        $operation = match (self::$parentOperation) {
+            1 => 'ENVIRONMENT',
+            2 => 'PROGRAM',
+            3 => 'OPEN',
+            4 => 'PIPE',
+            5 => 'CLOCK',
+            6 => 'READ',
+            7 => 'STATUS',
+            8 => 'WAIT',
+            9 => 'PIPE_CLOSE',
+            10 => 'CLOSE',
+            11 => 'EXIT_CHECK',
+            default => 'UNKNOWN',
+        };
+
+        return 'EVENT_COMPILE_PARENT_'.$kind.'_DURING_'.$operation;
     }
 
     private static function childBoundary(): string
@@ -464,50 +497,82 @@ PHP;
         self::$childFailure = 0;
         self::$childProgress = 0;
         self::$childProgressBytes = 0;
-        $environmentVariables = getenv();
-        $environmentVariables['EVENT_INGEST_TOKEN'] = $input['token'];
-        $environmentVariables['APP_CONFIG_CACHE'] = $candidate;
-        // Child output is discarded; neither artisan errors nor fixture failures
-        // may echo environment values into SSH/CI logs.
-        $process = proc_open([PHP_BINARY, '-r', self::compilerProgram(), '--', $backend], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w'], 3 => ['pipe', 'w']], $pipes, $backend, $environmentVariables);
-        if (! is_resource($process)) {
-            self::$childFailure = -2;
-            throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
-        }
-        $progressPipe = $pipes[3] ?? null;
-        if (is_resource($progressPipe) && ! stream_set_blocking($progressPipe, false)) {
-            fclose($progressPipe);
-        }
-        $deadline = microtime(true) + 120;
-        do {
-            self::readChildProgress($progressPipe);
-            $status = proc_get_status($process);
-            if (! $status['running']) {
-                // Observe the overflow byte even when the child exits before
-                // our first poll. Three bounded reads cover the 128-byte budget.
-                for ($i = 0; $i < 3; $i++) {
-                    self::readChildProgress($progressPipe);
-                }
-                break;
-            }
-            if (microtime(true) > $deadline) {
-                self::$childFailure = -3;
-                proc_terminate($process, 9);
-                if (is_resource($progressPipe)) {
-                    fclose($progressPipe);
-                }
-                proc_close($process);
+        self::$parentOperation = 0;
+        self::$parentFailureKind = 0;
+        try {
+            self::$parentOperation = 1;
+            $environmentVariables = getenv();
+            $environmentVariables['EVENT_INGEST_TOKEN'] = $input['token'];
+            $environmentVariables['APP_CONFIG_CACHE'] = $candidate;
+            self::$parentOperation = 2;
+            $program = self::compilerProgram();
+            self::$parentOperation = 3;
+            // Child output is discarded; neither artisan errors nor fixture failures
+            // may echo environment values into SSH/CI logs.
+            $process = proc_open([PHP_BINARY, '-r', $program, '--', $backend], [0 => ['file', '/dev/null', 'r'], 1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w'], 3 => ['pipe', 'w']], $pipes, $backend, $environmentVariables);
+            if (! is_resource($process)) {
+                self::$childFailure = -2;
                 throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
             }
-            usleep(20000);
-        } while (true);
-        if (is_resource($progressPipe)) {
-            fclose($progressPipe);
-        }
-        proc_close($process);
-        if ($status['exitcode'] !== 0) {
-            self::$childFailure = $status['signaled'] ? -4 : $status['exitcode'];
-            throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
+            self::$parentOperation = 4;
+            $progressPipe = $pipes[3] ?? null;
+            if (is_resource($progressPipe) && ! stream_set_blocking($progressPipe, false)) {
+                fclose($progressPipe);
+            }
+            self::$parentOperation = 5;
+            $deadline = microtime(true) + 120;
+            do {
+                self::$parentOperation = 6;
+                self::readChildProgress($progressPipe);
+                self::$parentOperation = 7;
+                $status = proc_get_status($process);
+                if (! $status['running']) {
+                    // Observe the overflow byte even when the child exits before
+                    // our first poll. Three bounded reads cover the 128-byte budget.
+                    for ($i = 0; $i < 3; $i++) {
+                        self::$parentOperation = 6;
+                        self::readChildProgress($progressPipe);
+                    }
+                    break;
+                }
+                self::$parentOperation = 5;
+                if (microtime(true) > $deadline) {
+                    self::$childFailure = -3;
+                    proc_terminate($process, 9);
+                    if (is_resource($progressPipe)) {
+                        fclose($progressPipe);
+                    }
+                    proc_close($process);
+                    throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
+                }
+                self::$parentOperation = 8;
+                usleep(20000);
+            } while (true);
+            self::$parentOperation = 9;
+            if (is_resource($progressPipe)) {
+                fclose($progressPipe);
+            }
+            self::$parentOperation = 10;
+            proc_close($process);
+            self::$parentOperation = 11;
+            if ($status['exitcode'] !== 0) {
+                self::$childFailure = $status['signaled'] ? -4 : $status['exitcode'];
+                throw new RuntimeException('EVENT_CACHE_BUILD_FAILED');
+            }
+        } catch (Throwable $error) {
+            if (self::$childFailure === 0) {
+                // Class metadata only. Never inspect message, trace, arguments,
+                // environment values, or any contents of the private input.
+                self::$parentFailureKind = match (true) {
+                    $error instanceof TypeError => 1,
+                    $error instanceof ValueError => 2,
+                    $error instanceof ErrorException => 3,
+                    $error instanceof Error => 4,
+                    $error instanceof RuntimeException => 5,
+                    default => 6,
+                };
+            }
+            throw $error;
         }
         self::$compileStage = 4;
         self::safe($candidate, false, 0664);

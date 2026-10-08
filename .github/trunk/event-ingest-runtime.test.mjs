@@ -162,7 +162,15 @@ if ($scenario === 'unsafe_parent') {
         }
         $args=[PHP_BINARY];
         $prefix='';
-        if ($scenario==='cli_progress_overflow_delayed') {
+        if ($scenario==='cli_parent_env_type' || $scenario==='cli_parent_open_value') {
+            $args[]='-d';
+            $args[]=$scenario==='cli_parent_env_type' ? 'disable_functions=getenv' : 'disable_functions=proc_open';
+            // Static exception fixtures only; the replacement does not read any
+            // environment/credential or child output and never spawns a child.
+            $prefix=$scenario==='cli_parent_env_type'
+                ? 'function getenv($name=null,$local=false) { throw new TypeError("public_parent_fixture"); }'
+                : 'function proc_open($command,$descriptors,&$pipes,$cwd=null,$env=null) { throw new ValueError("public_parent_fixture"); }';
+        } elseif ($scenario==='cli_progress_overflow_delayed') {
             // Force one status poll to see an already-finished real child, so
             // short final reads cannot miss byte 129. No child output is read.
             $args[]='-d'; $args[]='disable_functions=proc_get_status';
@@ -171,10 +179,10 @@ if ($scenario === 'unsafe_parent') {
         array_push($args,'-r',$prefix."define('FAP_EVENT_RUNTIME_CLI',true);require ".var_export($argv[1],true).";",'--','compile',$candidate,$new,'production',$root);
         $cli=proc_open($args,[0=>['file','/dev/null','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);
         $out=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);
-        $expected=match($scenario) {'cli_child_failure'=>'EVENT_COMPILE_CHILD_EXIT_ONE','cli_child_logic'=>'EVENT_COMPILE_CHILD_LOGIC','cli_child_type'=>'EVENT_COMPILE_CHILD_TYPE','cli_child_database'=>'EVENT_COMPILE_CHILD_DATABASE','cli_child_value'=>'EVENT_COMPILE_CHILD_VALUE','cli_child_runtime'=>'EVENT_COMPILE_CHILD_RUNTIME','cli_child_exit_other'=>'EVENT_COMPILE_CHILD_EXIT_OTHER','cli_child_signal'=>'EVENT_COMPILE_CHILD_SIGNAL','cli_child_unreported'=>'EVENT_COMPILE_CHILD_UNREPORTED',default=>'EVENT_COMPILE_AUTHORITY'};
+        $expected=match($scenario) {'cli_parent_env_type'=>'EVENT_COMPILE_PARENT_TYPE_DURING_ENVIRONMENT','cli_parent_open_value'=>'EVENT_COMPILE_PARENT_VALUE_DURING_OPEN','cli_child_failure'=>'EVENT_COMPILE_CHILD_EXIT_ONE','cli_child_logic'=>'EVENT_COMPILE_CHILD_LOGIC','cli_child_type'=>'EVENT_COMPILE_CHILD_TYPE','cli_child_database'=>'EVENT_COMPILE_CHILD_DATABASE','cli_child_value'=>'EVENT_COMPILE_CHILD_VALUE','cli_child_runtime'=>'EVENT_COMPILE_CHILD_RUNTIME','cli_child_exit_other'=>'EVENT_COMPILE_CHILD_EXIT_OTHER','cli_child_signal'=>'EVENT_COMPILE_CHILD_SIGNAL','cli_child_unreported'=>'EVENT_COMPILE_CHILD_UNREPORTED',default=>'EVENT_COMPILE_AUTHORITY'};
         $boundaries=['driver_autoload_exit'=>'AUTOLOAD_ENTER','driver_app_exit'=>'APP_ENTER','driver_handler_exit'=>'HANDLER_ENTER','driver_hooks_exit'=>'HOOKS_ENTER','boot_env_exit'=>'ENV_ENTER','boot_config_exit'=>'CONFIG_ENTER','boot_exceptions_exit'=>'EXCEPTIONS_ENTER','boot_facades_exit'=>'FACADES_ENTER','boot_request_exit'=>'REQUEST_ENTER','boot_register_exit'=>'PROVIDERS_REGISTER_ENTER','boot_providers_exit'=>'PROVIDERS_BOOT_ENTER','boot_after_env_exit'=>'ENV_RETURNED','boot_after_config_exit'=>'CONFIG_RETURNED','command_enter_exit'=>'CONFIG_COMMAND_ENTER','command_clear_exit'=>'CONFIG_CLEAR_ENTER','progress_invalid'=>'PROGRESS_UNKNOWN','progress_overflow'=>'PROGRESS_UNKNOWN','progress_overflow_delayed'=>'PROGRESS_UNKNOWN'];
         if (array_key_exists(substr($scenario,4),$boundaries)) { $expected='EVENT_COMPILE_CHILD_EXIT_OTHER'; }
-        if ($scenario!=='cli_unknown_failure') { $expected.='_AT_'.($scenario==='cli_child_unreported' ? 'HANDLE_RETURNED' : ($boundaries[substr($scenario,4)] ?? 'CONFIG_CLEAR_RETURNED')); }
+        if ($scenario!=='cli_unknown_failure') { $expected.='_AT_'.(str_starts_with($scenario,'cli_parent_') ? 'NOT_OBSERVED' : ($scenario==='cli_child_unreported' ? 'HANDLE_RETURNED' : ($boundaries[substr($scenario,4)] ?? 'CONFIG_CLEAR_RETURNED'))); }
         check(proc_close($cli)===1 && $out==='' && $err==="EVENT_RUNTIME_FAILED:".$expected."\\n",'CLI error classification');
         check(!str_contains($out.$err,$token),'CLI leaked fixture input');
         $unchanged = require $candidate.'/bootstrap/cache/config.php'; check($unchanged['fap']['events']['ingest_token']==='', 'CLI failed candidate cache changed');
@@ -287,7 +295,7 @@ echo 'PASS';
   } finally { rmSync(root, { recursive: true, force: true }); }
 }
 
-for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'cli_child_logic', 'cli_child_type', 'cli_child_database', 'cli_child_value', 'cli_child_runtime', 'cli_child_exit_other', 'cli_child_signal', 'cli_child_unreported', 'cli_driver_autoload_exit', 'cli_driver_app_exit', 'cli_driver_handler_exit', 'cli_driver_hooks_exit', 'cli_boot_env_exit', 'cli_boot_config_exit', 'cli_boot_exceptions_exit', 'cli_boot_facades_exit', 'cli_boot_request_exit', 'cli_boot_register_exit', 'cli_boot_providers_exit', 'cli_boot_after_env_exit', 'cli_boot_after_config_exit', 'cli_command_enter_exit', 'cli_command_clear_exit', 'cli_progress_invalid', 'cli_progress_overflow', 'cli_progress_overflow_delayed', 'progress_invalid_success', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
+for (const scenario of ['enabled', 'disabled', 'unmanaged', 'missing_token', 'unsafe_current_cache', 'unsafe_parent', 'unsafe_input', 'symlink_input', 'unknown_legacy_token', 'wrong_environment', 'wrong_token', 'child_failure', 'cli_child_failure', 'cli_unknown_failure', 'cli_child_logic', 'cli_child_type', 'cli_child_database', 'cli_child_value', 'cli_child_runtime', 'cli_child_exit_other', 'cli_child_signal', 'cli_child_unreported', 'cli_driver_autoload_exit', 'cli_driver_app_exit', 'cli_driver_handler_exit', 'cli_driver_hooks_exit', 'cli_boot_env_exit', 'cli_boot_config_exit', 'cli_boot_exceptions_exit', 'cli_boot_facades_exit', 'cli_boot_request_exit', 'cli_boot_register_exit', 'cli_boot_providers_exit', 'cli_boot_after_env_exit', 'cli_boot_after_config_exit', 'cli_command_enter_exit', 'cli_command_clear_exit', 'cli_progress_invalid', 'cli_progress_overflow', 'cli_progress_overflow_delayed', 'cli_parent_env_type', 'cli_parent_open_value', 'progress_invalid_success', 'wrong_revision', 'rollback', 'inherit', 'lost_inherit', 'lost_prepared', 'lost_postactivation', 'lost_rebuild', 'lost_rollback', 'marker_missing', 'directory_missing', 'marker_corrupt', 'marker_unsafe']) {
   test(`EVENT candidate/LKG ${scenario}`, {skip: process.platform !== 'linux' ? 'Requires Linux directory setgid inheritance' : false}, () => {
     const result = execute(scenario);
     assert.equal(result.status, 0, result.stderr);
