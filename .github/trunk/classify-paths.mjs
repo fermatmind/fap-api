@@ -328,6 +328,7 @@ export function classifyPaths(inputPaths) {
     ]);
     const migration = /^backend\/database\/migrations\/.+\.php$/.test(path);
     const infrastructure = matches(path, [
+      /^backend\/scripts\/deploy\/event_ingest_runtime\.php$/,
       /^\.github\//,
       /^(?:deploy|infrastructure|infra)\//,
       /^(?:deploy\.php|docker-compose[^/]*|Dockerfile[^/]*)$/,

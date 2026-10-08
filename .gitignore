@@ -54,3 +54,9 @@ _audit/
 .env.*
 **/.DS_Store
 **/__MACOSX/
+
+# Release-local private runtime input and generated receipt (not source).
+/backend/.event-ingest/
+/event-ingest-runtime-*.json
+
+/backend/.event-ingest-managed.json

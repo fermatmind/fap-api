@@ -1029,6 +1029,79 @@ task('guard:filament-assets', function () {
     }
 });
 
+/** Run the reviewed public helper from the runner, including fresh old-SHA LKG releases. */
+function deployEventRuntime(string $command, string $root, array $extra = [], ?string $boundRevision = null): string
+{
+    $source = file_get_contents(__DIR__.'/backend/scripts/deploy/event_ingest_runtime.php');
+    $program = "define('FAP_EVENT_RUNTIME_CLI', true); eval('?>'.base64_decode('".base64_encode($source)."'));";
+    $revision = $boundRevision ?? trim((string) (getenv('DEPLOY_SHA') ?: ''));
+    $environment = currentHost()->getAlias();
+    if (! preg_match('/^[a-f0-9]{40}$/D', $revision) || ! in_array($environment, ['staging', 'production'], true)) {
+        throw new \RuntimeException('EVENT_BINDING_INVALID');
+    }
+    $backendArgument = $root === '{{current_path}}'
+        ? deployShellArg(trim(run('readlink -f '.deployPlaceholderPathArg($root, 'backend'))))
+        : deployPlaceholderPathArg($root, 'backend');
+    $arguments = [deployShellArg($command), $backendArgument, deployShellArg($revision), deployShellArg($environment), deployPlaceholderPathArg('{{deploy_path}}')];
+    foreach ($extra as $argument) {
+        $arguments[] = deployShellArg($argument);
+    }
+
+    return run('{{bin/php}} -r '.deployShellArg($program).' -- '.implode(' ', $arguments));
+}
+
+function deployEventManaged(string $root): bool
+{
+    $marker = deployPlaceholderPathArg($root, 'backend/.event-ingest-managed.json');
+    $private = deployPlaceholderPathArg($root, 'backend/.event-ingest');
+
+    return test('test -e '.$marker.' || test -L '.$marker.' || test -e '.$private.' || test -L '.$private);
+}
+
+function deployEventExpectation(string $root, bool $rollback = false): array
+{
+    $intent = (string) getenv('EVENT_INGEST_ENABLED');
+    if (! in_array($intent, ['', '0', '1'], true)) {
+        throw new \RuntimeException('EVENT_INTENT_INVALID');
+    }
+    $rollbackSource = (string) (getenv('EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE') ?: '') !== '';
+    $restoring = $rollback || $rollbackSource;
+    $required = $rollbackSource || $intent !== '' || deployEventManaged($root);
+
+    return [$required, $restoring || $intent === '' ? null : $intent === '1'];
+}
+
+function deployEventReceipt(string $root, ?string $boundRevision = null): void
+{
+    [$required, $expectedEnabled] = deployEventExpectation($root, $boundRevision !== null);
+    $json = trim(deployEventRuntime('probe', $root, [$required ? '1' : '0', $expectedEnabled === null ? '' : ($expectedEnabled ? '1' : '0')], $boundRevision));
+    $receipt = json_decode($json, true, 16, JSON_THROW_ON_ERROR);
+    $environment = currentHost()->getAlias();
+    $revision = $boundRevision ?? trim((string) (getenv('DEPLOY_SHA') ?: ''));
+    $keys = array_keys($receipt);
+    sort($keys);
+    $expected = $receipt['status'] === 'unmanaged'
+        ? ['environment', 'revision', 'schema_version', 'status']
+        : ['config_cached', 'empty_envelope_status', 'enabled', 'environment', 'release_bound', 'revision', 'schema_version', 'status'];
+    if (($required && (($receipt['status'] ?? null) !== 'verified' || ($receipt['config_cached'] ?? null) !== true
+            || ($receipt['release_bound'] ?? null) !== true || ! is_bool($receipt['enabled'] ?? null)
+            || ($receipt['empty_envelope_status'] ?? null) !== (($receipt['enabled'] ?? null) === true ? 422 : 503)
+            || ($expectedEnabled !== null && $receipt['enabled'] !== $expectedEnabled)))
+        || (! $required && ($receipt['status'] ?? null) !== 'unmanaged')
+        || $keys !== $expected || $receipt['schema_version'] !== 'fermatmind.event-ingest-runtime.v1'
+        || $receipt['revision'] !== $revision || $receipt['environment'] !== $environment) {
+        throw new \RuntimeException('EVENT_RECEIPT_INVALID');
+    }
+    $repository = (string) (getenv('GITHUB_REPOSITORY') ?: '');
+    $runId = (string) (getenv('GITHUB_RUN_ID') ?: '');
+    $attempt = (string) (getenv('GITHUB_RUN_ATTEMPT') ?: '');
+    if ($repository !== 'fermatmind/fap-api' || ! preg_match('/^[1-9][0-9]*$/D', $runId) || ! preg_match('/^[1-9][0-9]*$/D', $attempt)) {
+        throw new \RuntimeException('EVENT_WORKFLOW_BINDING_INVALID');
+    }
+    $receipt['workflow'] = ['repository' => $repository, 'run_id' => $runId, 'run_attempt' => $attempt];
+    file_put_contents(__DIR__.'/event-ingest-runtime-'.$environment.'-'.$revision.'.json', json_encode($receipt, JSON_THROW_ON_ERROR)."\n");
+}
+
 task('bootstrap-cache:clear-release', function () {
     within('{{release_path}}/backend', function () {
         run(<<<'BASH'
@@ -1055,13 +1128,16 @@ BASH);
 });
 
 task('bootstrap-cache:rebuild-current', function () {
-    within('{{current_path}}/backend', function () {
+    $managed = deployEventManaged('{{current_path}}');
+    if ($managed) {
+        deployEventRuntime('verify', '{{current_path}}', [], trim(run('cat '.deployPlaceholderPathArg('{{current_path}}', 'REVISION'))));
+    }
+    within('{{current_path}}/backend', function () use ($managed) {
         run(<<<'BASH'
 {{bin/php}} -r '
 require "vendor/autoload.php";
 $app = require "bootstrap/app.php";
 $paths = [
-    $app->getCachedConfigPath(),
     $app->getCachedEventsPath(),
     $app->getCachedPackagesPath(),
     $app->getCachedServicesPath(),
@@ -1077,7 +1153,9 @@ foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*
 '
 BASH);
         run('{{bin/php}} artisan package:discover --ansi');
-        run('{{bin/php}} artisan config:cache --ansi');
+        if (! $managed) {
+            run('{{bin/php}} artisan config:cache --ansi');
+        }
         run('{{bin/php}} artisan route:cache --ansi');
         run('{{bin/php}} artisan event:cache --ansi');
     });
@@ -1093,6 +1171,7 @@ task('rollback:healthcheck', [
     'rollback:healthcheck:seo-council-anonymous',
     'rollback:healthcheck:public-static-media-assets',
     'rollback:healthcheck:ops-entry-contract',
+    'rollback:healthcheck:event-ingest',
 ]);
 
 /**
@@ -1118,7 +1197,66 @@ task('artisan:storage:link', function () {
 });
 
 task('artisan:config:cache', function () {
-    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
+    $intent = (string) (getenv('EVENT_INGEST_ENABLED') ?: '');
+    // getenv('0') is false-like; retain an explicit disable intention.
+    if (getenv('EVENT_INGEST_ENABLED') === '0') {
+        $intent = '0';
+    }
+    if (! in_array($intent, ['', '0', '1'], true)) {
+        throw new \RuntimeException('EVENT_INTENT_INVALID');
+    }
+    $rollback = (string) (getenv('EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE') ?: '');
+    $currentBackend = trim(run('readlink -f '.deployPlaceholderPathArg('{{current_path}}', 'backend')));
+    $managed = $intent !== '' || $rollback !== '' || deployEventManaged('{{current_path}}');
+    if (getenv('DEPLOY_INCIDENT_RECOVERY') === 'true' && $rollback === '' && deployEventManaged('{{current_path}}')) {
+        throw new \RuntimeException('EVENT_LKG_SOURCE_REQUIRED');
+    }
+    if (! $managed) {
+        run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
+
+        return;
+    }
+    invoke('prepare:release-bootstrap-cache-access');
+    deployEventRuntime('init', '{{release_path}}');
+    $local = tempnam(sys_get_temp_dir(), 'event-ingest-runtime-');
+    if (! is_string($local) || ! chmod($local, 0600)) {
+        throw new \RuntimeException('EVENT_INPUT_ALLOCATION_FAILED');
+    }
+    $remote = '{{release_path}}/backend/.event-ingest/incoming.json';
+    try {
+        $wire = ['intent' => $rollback === '' ? $intent : '0', 'token' => $rollback === '' && $intent === '1' ? (string) (getenv('EVENT_INGEST_TOKEN') ?: '') : ''];
+        file_put_contents($local, json_encode($wire, JSON_THROW_ON_ERROR));
+        unset($wire);
+        putenv('EVENT_INGEST_TOKEN');
+        upload($local, $remote);
+        deployEventRuntime('install', '{{release_path}}', [$currentBackend, $rollback]);
+        deployEventRuntime('compile', '{{release_path}}');
+        [, $expectedEnabled] = deployEventExpectation('{{current_path}}');
+        deployEventRuntime('verify', '{{release_path}}', [$expectedEnabled === null ? '' : ($expectedEnabled ? '1' : '0')]);
+    } finally {
+        unlink($local);
+        // Exact inactive input only, never a parent directory or config cache.
+        run('rm -f -- '.deployShellArg($remote));
+    }
+});
+
+task('event-ingest:candidate-verify', function () {
+    $intent = getenv('EVENT_INGEST_ENABLED');
+    $managed = $intent === '0' || $intent === '1'
+        || (string) (getenv('EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE') ?: '') !== ''
+        || deployEventManaged('{{current_path}}')
+        || deployEventManaged('{{release_path}}');
+    if ($managed) {
+        [, $expectedEnabled] = deployEventExpectation('{{current_path}}');
+        deployEventRuntime('verify', '{{release_path}}', [$expectedEnabled === null ? '' : ($expectedEnabled ? '1' : '0')]);
+    }
+});
+
+task('event-ingest:runtime-receipt', function () {
+    deployEventReceipt('{{current_path}}');
+});
+task('rollback:healthcheck:event-ingest', function () {
+    deployEventReceipt('{{current_path}}', trim(run('cat '.deployPlaceholderPathArg('{{current_path}}', 'REVISION'))));
 });
 
 function deploySeoQueryHmacEnvironment(): array
@@ -3989,11 +4127,30 @@ task('prepare:release-bootstrap-cache-access', function () {
         'backend/bootstrap/cache',
     );
 
+    $intent = getenv('EVENT_INGEST_ENABLED');
+    $managed = $intent === '0' || $intent === '1'
+        || (string) (getenv('EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE') ?: '') !== ''
+        || deployEventManaged('{{current_path}}')
+        || deployEventManaged('{{release_path}}');
+    $mode = $managed ? '2755' : '2775';
+    if ($managed) {
+        deployEventRuntime('prepare', '{{release_path}}');
+        // Prepare only this inactive candidate. PHP must not chmod foreign-group
+        // setgid directories after these existing privileged operations.
+        foreach (['', 'backend', 'backend/bootstrap'] as $relative) {
+            $directory = deployPlaceholderPathArg('{{release_path}}', $relative);
+            run(
+                'test -d '.$directory
+                .' && test ! -L '.$directory
+                .' && sudo -n /usr/bin/chmod 2755 '.$directory,
+            );
+        }
+    }
     run(
         'test -d '.$cacheDir
         .' && test ! -L '.$cacheDir
         .' && sudo -n /usr/bin/chown '.$ownerGroup.' '.$cacheDir
-        .' && sudo -n /usr/bin/chmod 2775 '.$cacheDir,
+        .' && sudo -n /usr/bin/chmod '.$mode.' '.$cacheDir,
     );
 });
 
@@ -5393,6 +5550,7 @@ after('guard:career-discoverability-pre-sitemap', 'seo:warm-sitemap-source-cache
 after('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitemap');
 after('guard:career-discoverability-post-sitemap', 'guard:public-content-release');
 after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');
+before('deploy:symlink', 'event-ingest:candidate-verify');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('ensure:nginx-public-static-media-route', 'ensure:nginx-api-http-redirect');
 after('deploy:symlink', 'reload:php-fpm');
@@ -5420,6 +5578,7 @@ after('healthcheck:ops-entry-contract', 'seo:agent-evidence-boundary-closeout');
 after('healthcheck:ops-entry-contract', 'seo:agent-policy-gateway-closeout');
 after('queue:reload-workers', 'healthcheck:queue-smoke');
 after('healthcheck:queue-smoke', 'healthcheck:staging-big-five-report-delivery');
+before('healthcheck:staging-big-five-report-delivery', 'event-ingest:runtime-receipt');
 after('healthcheck:staging-big-five-report-delivery', 'career:staging-accountant-publish');
 
 /**

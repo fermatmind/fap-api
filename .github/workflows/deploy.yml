@@ -679,6 +679,8 @@ jobs:
           SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
+          EVENT_INGEST_ENABLED: ${{ vars.EVENT_INGEST_ENABLED }}
+          EVENT_INGEST_TOKEN: ${{ vars.EVENT_INGEST_ENABLED == '1' && secrets.EVENT_INGEST_TOKEN || '' }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -917,6 +919,8 @@ jobs:
           SEO_COUNCIL_DB_PASSWORD: ${{ secrets.SEO_COUNCIL_DB_PASSWORD }}
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
+          EVENT_INGEST_ENABLED: ${{ vars.EVENT_INGEST_ENABLED }}
+          EVENT_INGEST_TOKEN: ${{ vars.EVENT_INGEST_ENABLED == '1' && secrets.EVENT_INGEST_TOKEN || '' }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
@@ -1311,6 +1315,7 @@ jobs:
           name: trunk-staging-${{ github.event.workflow_run.head_sha }}
           path: |
             staging-timing.json
+            event-ingest-runtime-staging-*.json
             a08-staging-before.json
             a08-staging-after.json
             a08-staging-sources/
@@ -1508,6 +1513,8 @@ jobs:
           PROXY_PORT: "18445"
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY }}
           SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION: ${{ secrets.SEO_AGENT_EVIDENCE_QUERY_HMAC_KEY_VERSION }}
+          EVENT_INGEST_ENABLED: ${{ vars.EVENT_INGEST_ENABLED }}
+          EVENT_INGEST_TOKEN: ${{ vars.EVENT_INGEST_ENABLED == '1' && secrets.EVENT_INGEST_TOKEN || '' }}
         run: |
           set -euo pipefail
           fail() {
@@ -1702,6 +1709,11 @@ jobs:
           if [ "$current" = "$DEPLOY_SHA" ]; then
             echo "Production activation committed but smoke failed; rebuilding and restoring the exact LKG once."
             php /tmp/dep.phar fap:deploy-unlock-owned production -f deploy.php --no-interaction
+            export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE=""
+            event_lkg="$DEPLOY_PATH/releases/trunk-${candidate_sha:0:12}-${GITHUB_RUN_ID}/backend/.event-ingest/lkg.json"
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
+              export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE="$event_lkg"
+            fi
             export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
             set +e
             php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
@@ -2322,7 +2334,12 @@ jobs:
           current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
           test "$current" = "$candidate_sha"
-          export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
+          export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE=""
+            event_lkg="$DEPLOY_PATH/releases/trunk-${candidate_sha:0:12}-${GITHUB_RUN_ID}/backend/.event-ingest/lkg.json"
+            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "test -f '$event_lkg'"; then
+              export EVENT_INGEST_RUNTIME_ROLLBACK_SOURCE="$event_lkg"
+            fi
+            export DEPLOY_SHA="$lkg_sha" DEPLOY_REVISION="$lkg_sha" DEPLOY_MODE=code_only DEPLOY_INCIDENT_RECOVERY=true
           set +e
           php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$lkg_sha" \
             -o release_name="lkg-${lkg_sha:0:12}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
@@ -2380,6 +2397,7 @@ jobs:
           name: trunk-production-${{ github.event.workflow_run.head_sha }}
           path: |
             trunk-delivery-timing.json
+            event-ingest-runtime-production-*.json
             a08-production-before.json
             a08-production-after.json
             a08-production-sources/

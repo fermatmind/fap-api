@@ -12,6 +12,23 @@ final class MbtiAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_empty_envelope_authentication_probe_never_creates_an_event(): void
+    {
+        $before = DB::table('events')->count();
+        config()->set('fap.events.ingest_token', 'public_probe_fixture_0123456789abcdef');
+        $this->withHeaders(['X-Track-Ingest-Token' => 'public_probe_fixture_0123456789abcdef'])
+            ->postJson('/api/v0.5/seo/attribution/events', [])
+            ->assertStatus(422)->assertJsonPath('error_code', 'VALIDATION_FAILED')
+            ->assertJsonStructure(['details' => ['eventName']]);
+        $this->withHeaders(['X-Track-Ingest-Token' => 'wrong_fixture'])
+            ->postJson('/api/v0.5/seo/attribution/events', [])
+            ->assertStatus(401)->assertJsonPath('error_code', 'UNAUTHORIZED');
+        config()->set('fap.events.ingest_token', '');
+        $this->postJson('/api/v0.5/seo/attribution/events', [])
+            ->assertStatus(503)->assertJsonPath('error_code', 'INGEST_DISABLED');
+        $this->assertSame($before, DB::table('events')->count());
+    }
+
     public function test_browser_page_view_ingest_uses_request_ip_without_a_server_token(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
