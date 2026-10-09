@@ -1,11 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHmac } from 'node:crypto';
-import { readFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { spawnSync, execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
 import { inspectPackage, workflowSignature, isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
 import { buildExecution, publish } from './eq-new-source-publish.mjs';
 import { classifyPaths } from './classify-paths.mjs';
+import { selectOperations } from './impact-consumers.mjs';
 
 const binding = inspectPackage('backend');
 const env = { EQ_PUBLISH_ENVIRONMENT: 'staging', DEPLOY_PATH: '/srv/application', DEPLOY_USER: 'deploy', DEPLOY_HOST: 'host.invalid', DEPLOY_PORT: '22', DEPLOY_SHA: 'a'.repeat(40), GITHUB_RUN_ID: '1234', GITHUB_RUN_ATTEMPT: '1', CONTENT_PROMOTION_AUTOMATION_KEY: 'test-key-'.repeat(8) };
@@ -62,6 +65,30 @@ test('exact EQ registration excludes only that delta; policy and private adapter
   assert.equal(isEqOnlyPromotionRegistration(before,after),true);
   assert.equal(isEqOnlyPromotionRegistration(before,after.replace("'eq' => 'audit_compatible'","'eq' => 'fail_closed_legacy_audit'")),false);
   assert.equal(isEqOnlyPromotionRegistration(before,after+'\n'),false);
+});
+
+test('real pack consumer graph excludes proven EQ registration from private pack checks only', () => {
+  const root=mkdtempSync(join(tmpdir(),'eq-pack-impact-'));
+  const config='backend/config/content_promotion.php';
+  const after=readFileSync(config,'utf8');
+  const before=after.replace("        'content_assets/eq_public/candidate/20261009-new-articles',\n",'')
+    .replace(", 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'",'');
+  const put=(path,bytes)=>{mkdirSync(dirname(join(root,path)),{recursive:true});writeFileSync(join(root,path),bytes);};
+  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim();
+  const commit=()=>{git('add','--','backend');git('-c','user.name=EQ test','-c','user.email=eq-test@example.invalid','commit','-qm','fixture');return git('rev-parse','HEAD');};
+  try {
+    git('init','-q');
+    for(const path of ['backend/app/Services/Content/ContentPackV2Resolver.php','backend/app/Services/ContentPromotion/PromotionContextFactory.php','backend/tests/Unit/Content/ContentPackV2ResolverMaterializationTest.php','backend/tests/Unit/Services/Content/ContentPacksIndexArtifactTest.php']) put(path,readFileSync(path,'utf8'));
+    put(config,before);const base=commit();put(config,after);const head=commit();
+    const exact=selectOperations([config],root,{base,head});
+    assert.equal(exact.content_pack_checks,false);
+    for(const family of ['big5','riasec','enneagram','eq60']) assert.equal(exact[family+'_private_publish'],false);
+    assert.equal(selectOperations([config],root).content_pack_checks,true);
+    assert.equal(selectOperations(['backend/app/Services/Content/ContentPackV2Resolver.php'],root,{base,head}).content_pack_checks,true);
+    assert.equal(selectOperations([config,'backend/content_packs/EQ_60/v1/raw/copy.json'],root,{base,head}).content_pack_checks,true);
+    put(config,after+'\n');const drift=commit();
+    assert.equal(selectOperations([config],root,{base,head:drift}).content_pack_checks,true);
+  } finally {rmSync(root,{recursive:true,force:true});}
 });
 
 test('actual LKG admission predicate refuses an unavailable or unbound business recovery',()=>{

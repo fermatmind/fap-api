@@ -78,7 +78,10 @@ export function selectOperations(paths, root=process.cwd(), range={}) {
   operations.test_modes=operations.mbti_modes||affected(featureInputs,['backend/app/Services/Commerce/'])?['legacy','v2']:['legacy'];
   const packInputs=['content_packages/','backend/content_packs/','backend/content_assets/riasec/'];
   const packConsumers=graph.consumer([/\/Services\/Content\/(?:Content(?:Compile|Lint|PacksIndex|PackV2)[^/]*|(?:BigFive|Riasec|Enneagram|Eq60)[^/]*)\.php$/]);
-  operations.content_pack_checks=unknown||paths.some(p=>packInputs.some(prefix=>p.startsWith(prefix))||packConsumers.has(p));
+  // The byte-proven EQ-only registration changes no private pack policy or
+  // canonical-JSON behavior consumed by ContentPackV2Resolver. Keep unknown
+  // config deltas and every actual pack/runtime input conservative.
+  operations.content_pack_checks=unknown||privatePaths.some(p=>packInputs.some(prefix=>p.startsWith(prefix))||packConsumers.has(p));
   const intersects=(deps,p)=>deps.has(p)||[...deps].some(input=>!input.endsWith('.php')&&p.startsWith(input.replace(/\/$/,'')+'/'));
   const selected=graph.files.filter(p=>/Test\.php$/.test(p)&&paths.some(input=>intersects(graph.closure([p]),input)));
   if(operations.content_pack_checks && !selected.length) {
