@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '7462fa600c52c82c68334c94bab3dab4674c2743227a310bf39233dcca18a94e';
+    private const AGGREGATE = '093013b4f4e0a12d93c18f2ce41d4281e0be4df215fb0bb9939f2faca474453c';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -84,7 +84,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/en.json",
             ];
         }
-        foreach (['type-1/one-to-one', 'type-1/self-preservation', 'type-1/social', 'type-2/one-to-one', 'type-2/self-preservation'] as $subtype) {
+        foreach (['type-1/one-to-one', 'type-1/self-preservation', 'type-1/social', 'type-2/one-to-one', 'type-2/self-preservation', 'type-2/social', 'type-3/one-to-one', 'type-3/self-preservation', 'type-3/social', 'type-4/one-to-one'] as $subtype) {
             [$type, $instinct] = explode('/', $subtype);
             $code = rawurlencode($subtype);
             foreach (['en', 'zh-CN'] as $locale) {
