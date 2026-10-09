@@ -55,7 +55,16 @@ test('permanent workflow serializes source publishing and includes automatic LKG
   assert.ok(staging.indexOf('id: eq-source-publish')<staging.indexOf('Record staging timing'));
   assert.ok(production.indexOf('id: eq-source-publish')<production.indexOf('Restore exact LKG after Career publisher failure'));
   assert.match(production,/steps\.career-publish\.outcome == 'failure' \|\| steps\.eq-source-publish\.outcome == 'failure'/);
-  assert.match(production,/steps\.baseline\.outputs\.skip != 'true' && fromJSON\(needs\.policy\.outputs\.operations\)\.eq_new_source_articles_publish == true/);
+  assert.match(production,/steps\.baseline\.outputs\.skip != 'true' && fromJSON\(needs\.policy\.outputs\.classification\)\.operations\.eq_new_source_articles_publish == true/);
+  // The existing policy exports raw classification JSON and Base64 operations
+  // for Deployer. GitHub fromJSON must consume the former in both environments.
+  assert.match(workflow,/echo "classification=\$classification"/);
+  assert.match(workflow,/echo "operations=\$\(jq -c \.classification\.operations "\$receipt" \| base64 -w0\)"/);
+  for (const phase of [staging,production]) {
+    const condition=phase.split('name: Publish exact reviewed EQ Chinese source articles')[1].split('\n')[1];
+    assert.match(condition,/fromJSON\(needs\.policy\.outputs\.classification\)\.operations\.eq_new_source_articles_publish/);
+    assert.doesNotMatch(condition,/fromJSON\(needs\.policy\.outputs\.operations\)/);
+  }
 });
 
 test('exact EQ registration excludes only that delta; policy and private adapter changes remain conservative', () => {

@@ -1304,7 +1304,7 @@ jobs:
           node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-staging-before.json a08-staging-after.json "$DEPLOY_SHA"
       - id: eq-source-publish
         name: Publish exact reviewed EQ Chinese source articles
-        if: fromJSON(needs.policy.outputs.operations).eq_new_source_articles_publish == true
+        if: fromJSON(needs.policy.outputs.classification).operations.eq_new_source_articles_publish == true
         env:
           EQ_PUBLISH_ENVIRONMENT: staging
           CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
@@ -2354,7 +2354,7 @@ jobs:
           fi
       - id: eq-source-publish
         name: Publish exact reviewed EQ Chinese source articles
-        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.operations).eq_new_source_articles_publish == true
+        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.eq_new_source_articles_publish == true
         env:
           EQ_PUBLISH_ENVIRONMENT: production
           CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
