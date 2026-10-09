@@ -1,0 +1,138 @@
+{
+  "scope": "仅冻结候选内容；不判定CMS、页面QA、实际上线、产品效度或自然排名",
+  "pages": [
+    {
+      "page_id": "IQ-01",
+      "locales": [
+        {
+          "locale": "en",
+          "body_sha256": "67cf9abcb1b6a1feb6917edaf078f1dd924f581cda5ff56ed362e0698ccd421c",
+          "candidate_json_sha256": "4d879c1c07db2c3fb2d491848f886586b5d94f42a1ac3cb818c3b6e5aeaab80e",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "candidate_location": "publication-review-input/IQ-01-en.md:3-13；JSON metadata及11项FAQ",
+              "source_location": "research/current/IQ-01-en-lookup.json：forms、capabilities、commercial；IQ-01-en-ssr.txt:98-99,125",
+              "result": "冻结API提供30题、estimated_minutes=20、free_only和FREE；正文准确写为预计时间，没有将20分钟写成硬时限，没有借legacy代码宣称Raven或Mensa身份。标题、摘要、正文和FAQ一致。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-01-en.md:17-29",
+              "source_location": "候选内完整教学网格",
+              "result": "逐行逐列复核数量与方向，缺项为五个向下箭头。错误规则与错误答案均有具体反例；正文明确这是教学示例，并承认有限网格不能排除所有想象规则。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-01-en.md:33-45；FAQ计分、Beta及截断条目",
+              "source_location": "research/source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php:19-29,59-76；Iq/IqOwnerOriginal30BankService.php:188-194；research/current/IQ-01-en-ssr.txt:71-77",
+              "result": "源码与公开原始投影支持公式和资格边界。独立重算18/30=60%；R=8时z=1.4277286、Beta=121；R=0为62；R=11为144；所有整数R=12至30均截断为145。正文没有把模拟基线称为人口常模或百分位，也没有承诺报告界面必然显示Beta。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-01-en.md:49-59",
+              "source_location": "research/original-source-extracts-v2/standards-2014.txt：PDF第21-23页、第113-114页",
+              "result": "效度与具体解释、用途相联系；年龄资格和跨年龄比较需要相应证据。正文没有转借外部工具效度，下一步可执行，重复提分没有被解释为一般智力增长。"
+            }
+          ],
+          "unverified": [
+            "未实际完成30题作答、提交或报告读取；冻结测试源码只是实现证据，本轮没有运行该测试。",
+            "未枚举生产release snapshot全部题目、核私有答案键或当前生产计分配置；题数和商业范围按冻结API原始响应判断。",
+            "教学示例是否绝对未与所有题库偶合，没有进行跨题库查重；其内部推理正确。",
+            "CTA、内链当前可访问性、桌面/手机呈现、CMS接受及生产状态不在本轮范围。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-06",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "0b2af518b7bc0d4f9406ca98aba2572fe87d4f604fb727753071071b1767c30c",
+          "candidate_json_sha256": "f1d4e03a1574057d7977e2a6ba563b45e754fcb9a4ae526fdb78d3c1de6904b4",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "candidate_location": "publication-review-input/IQ-06-zh-CN.md:1-25",
+              "source_location": "research/original-source-extracts/hampshire-2012.txt：PDF第2页、第5页、第12-13页；wais-5.txt：PDF第1-4页",
+              "result": "区分构念、任务与分数；Hampshire研究的12任务、互联网自选参与与成分解释有原文依据，未写成智力只有三个独立部分。WAIS-5五域及16岁至90岁11个月归属于对应版本，没有转作费马资格。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-zh-CN.md:29-63",
+              "source_location": "research/original-source-extracts-v2/standards-2014.txt：PDF第21-23页、第113-114页；独立数学重算",
+              "result": "原始分、正确率、标准分和百分位分开解释；常模人群、采集与版本要求及用途效度归因正确。16/20=80%，z=1、转换分115、正态模型百分位84.1345%；另一假定参照组得到100；115±1.96×3=109.12至120.88。所有参数标为教学假设，未冒充真实常模或本站区间。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-zh-CN.md:49",
+              "source_location": "候选完整虚构多任务案例；wais-5.txt：PDF第4页工具结构",
+              "result": "同图形成绩、不同记忆与语言观察的反例成立；没有直接平均成综合IQ，也没有推出诊断。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-zh-CN.md:69-75",
+              "source_location": "Pearson Raven’s 2原页Overview与Product Details；ITC原PDF：C-2、C-3、C-4、SSI-2",
+              "result": "Raven’s 2年龄4-90岁与出版方减轻语言文化影响的归因准确；未宣称文化无关。跨语言等值、适配常模与分数比较需要证据，与ITC相关原文一致。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-zh-CN.md:79-125；JSON metadata、title、excerpt及9项FAQ",
+              "source_location": "候选全文；原始GOAL及attachments/逐页内容Brief.md的IQ-06任务",
+              "result": "没有用一次测验计算个人遗传比例或固定上限；给出明确正式评估选择问题。一般认知测量职责独立于本站工具指南，标题摘要承诺已在正文兑现。9项JSON FAQ逐项与正文完全一致。"
+            }
+          ],
+          "unverified": [
+            "Standards只审读冻结的相关完整页，不声称审完240页；Hampshire审读相关引言、方法、结果和限制，不声称审完补充材料。",
+            "未审阅WAIS-5或Raven’s 2付费技术手册、未验证其所有科学和营销主张；候选也没有据此宣称费马效度。",
+            "本轮不提供遗传率数值或遗传研究综述的验收；候选只限定单次成绩不能支持的个人推断。",
+            "实际CMS正文、FAQ呈现、索引状态、内链读回、上线及排名均未验收。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "b76ca07dbb70ff631a86980a8e2767f817bf43f112af8fd0fa85b87d0b3f0231",
+          "candidate_json_sha256": "c4804ad204e8bfaef4193c0670b692b4f6e648357fed9bae84ad656065d813e7",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "candidate_location": "publication-review-input/IQ-06-en.md:1-25",
+              "source_location": "research/original-source-extracts/hampshire-2012.txt：PDF第2页、第5页、第12-13页；wais-5.txt：PDF第1-4页",
+              "result": "独立审读英文概念解释和来源归因；g与不同任务要求没有被互相否定。Hampshire研究被限定为互联网志愿样本，五认知域与年龄范围准确归于WAIS-5版本，没有验证费马或把矩阵任务写成完整认知评估。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-en.md:29-65",
+              "source_location": "research/original-source-extracts-v2/standards-2014.txt：PDF第21-23页、第113-114页；独立数学重算",
+              "result": "raw score、percentage correct、transformed score、model percentile明确分开。80%、115、84.1345%、另一参照组100及109.12-120.88区间全部重算成立。参数、任务和误差估计均明确虚构；信度、效度和用途区别正确。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-en.md:51,71-77",
+              "source_location": "候选多任务反例；Pearson Raven’s 2原页Overview与Product Details；ITC原PDF：C-2、C-3、C-4、SSI-2",
+              "result": "同分不同任务观察的反例没有生成诊断或无效综合分。专业工具范围、非语言文化限制、跨版本和跨语言可比要求正确；外部来源未被当作费马产品证据。"
+            },
+            {
+              "candidate_location": "publication-review-input/IQ-06-en.md:81-127；JSON metadata、title、excerpt及9项FAQ",
+              "source_location": "候选英文完整正文；原始GOAL及attachments/逐页内容Brief.md的IQ-06任务",
+              "result": "英文自然可读，正式评估与低风险探索路径具体。标题和摘要与正文一致；9项JSON FAQ完整出现在正文且逐项相同。英文结论独立形成，没有继承中文判断。"
+            }
+          ],
+          "unverified": [
+            "原始科学材料阅读范围限定于上述相关页和章节，未完成全部技术手册或补充材料审稿。",
+            "未验证费马人群常模、信效度、跨语言等值或专业诊断能力；候选没有声称这些已成立。",
+            "未核实际CMS、桌面/手机QA、内链当前状态、生产接受、搜索收录或自然排名。"
+          ]
+        }
+      ]
+    }
+  ],
+  "actual_checks": [
+    "读取适用本地AGENTS、独立核查Skill真实路径及其authority、implementation-review、experience参考。",
+    "对三个md和三个json重新计算SHA-256；三个candidate_sha256均与md实际字节一致。",
+    "核对原始提取文本SHA；原始索引内七个有文本的记录均匹配。",
+    "完整阅读三个候选正文、metadata和FAQ；IQ-06两语言各9项FAQ与CMS正文逐项一致。",
+    "用Python独立重算Beta边界与教学算例；没有执行应用、数据库或业务测试。",
+    "使用只读Web访问Pearson Raven’s 2和ITC原始来源相关段落。"
+  ],
+  "actual_limits": [
+    "宿主为read-only；最初shell here-doc需要临时文件而被系统拒绝，随后改用不写文件的读取方式。",
+    "未修改任何候选、资产、仓库、CMS、权限、进度或定时；未提交、推送、部署、启动子Agent或执行受控业务入口。",
+    "没有读取作者报告、candidates/reviews、source-supplement或旧审查结论。",
+    "PASS仅绑定上述六个实际文件SHA及本次内容范围。"
+  ]
+}

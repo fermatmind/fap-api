@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\ContentPromotion;
 
 use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
+use App\Services\ContentPromotion\Adapters\IqPublicScalePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Top100FrozenCmsBatchPromotionAdapter;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use DomainException;
@@ -23,7 +24,7 @@ final class ExactPackagePromotionService
     {
         $adapter = $this->registry->resolve($context->lane, $context->subscope);
         $previous = null;
-        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter)) {
+        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter || $adapter instanceof IqPublicScalePromotionAdapter)) {
             $previous = $this->receipts->readPrevious('content_promotion_preflight_receipt', $context);
         } elseif ($phase === 'publish') {
             $previous = $this->receipts->readPrevious('cms_draft_import_receipt', $context);
@@ -54,6 +55,17 @@ final class ExactPackagePromotionService
 
             return $this->receipts->write($receiptPath, $normalized);
         } catch (Throwable $throwable) {
+            if ($adapter instanceof IqPublicScalePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
+                if ($phase === 'publish' && ($result['written_count'] ?? 0) === 0) {
+                    throw new DomainException('iq_public_scale_receipt_failed_without_new_write', previous: $throwable);
+                }
+                $reference = (string) ($result['rollback_reference'] ?? data_get($previous, 'receipt.rollback_reference', ''));
+                if ($reference === '') {
+                    throw new DomainException('iq_public_scale_receipt_failed_without_rollback_reference', previous: $throwable);
+                }
+                $adapter->rollback($context, $reference);
+                throw new DomainException('iq_public_scale_receipt_failed_rollback_succeeded', previous: $throwable);
+            }
             if ($adapter instanceof EqNewSourceArticlePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
                 $reference = (string) ($result['rollback_reference'] ?? data_get($previous, 'receipt.rollback_reference', ''));
                 if ($reference === '') {
@@ -260,18 +272,18 @@ final class ExactPackagePromotionService
             'search_mutation_count' => 0,
             'deploy_mutation_count' => 0,
             ...$this->top100Evidence($context, $result),
-            ...$this->eqSourceEvidence($adapter, $result),
+            ...$this->scopedPublicEvidence($adapter, $result),
         ];
     }
 
-    private function eqSourceEvidence(ExactPackagePromotionAdapter $adapter, array $result): array
+    private function scopedPublicEvidence(ExactPackagePromotionAdapter $adapter, array $result): array
     {
-        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter) {
+        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter && ! $adapter instanceof IqPublicScalePromotionAdapter) {
             return [];
         }
         $hash = (string) ($result['target_state_sha256'] ?? '');
         if (preg_match('/\A[a-f0-9]{64}\z/', $hash) !== 1) {
-            throw new DomainException('eq_source_receipt_prestate_missing');
+            throw new DomainException($adapter instanceof IqPublicScalePromotionAdapter ? 'iq_public_scale_receipt_prestate_missing' : 'eq_source_receipt_prestate_missing');
         }
 
         return ['target_state_sha256' => $hash];

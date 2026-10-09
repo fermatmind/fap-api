@@ -1,0 +1,32 @@
+{
+  "schema": "fermatmind.iq_public_entry_package.v1",
+  "org_id": 0,
+  "code": "IQ_RAVEN",
+  "primary_slug": "iq-test-intelligence-quotient-assessment",
+  "targets": [
+    {
+      "page_id": "IQ-01",
+      "locale": "zh-CN",
+      "content_locale_key": "zh",
+      "body_file": "IQ-01-zh-CN.md",
+      "input_file": "IQ-01-zh-CN.json",
+      "review_file": "iq-all-source-fresh-result.json"
+    },
+    {
+      "page_id": "IQ-01",
+      "locale": "en",
+      "content_locale_key": "en",
+      "body_file": "IQ-01-en.md",
+      "input_file": "IQ-01-en.json",
+      "review_file": "iq-publication-three-fresh-result.json"
+    }
+  ],
+  "files": {
+    "IQ-01-en.json": "4d879c1c07db2c3fb2d491848f886586b5d94f42a1ac3cb818c3b6e5aeaab80e",
+    "IQ-01-en.md": "67cf9abcb1b6a1feb6917edaf078f1dd924f581cda5ff56ed362e0698ccd421c",
+    "IQ-01-zh-CN.json": "c52ca45ef05f4ad491d90ba331328da4f303e39f56600f22e68da57fc3c569a6",
+    "IQ-01-zh-CN.md": "ced815e0b60de8477a99a5f586e10c5a870c27543260bdbcc772c7206cf0c21a",
+    "iq-all-source-fresh-result.json": "2370e3909608fad1a3ff5a9b2af52e607d4a14bd80f3c880ae8b1f1132074ca0",
+    "iq-publication-three-fresh-result.json": "acb4d104ac7831dddb02efd6a62563fa6aa4668b1024dd40ab723cfe197c2f62"
+  }
+}

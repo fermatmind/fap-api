@@ -44,7 +44,15 @@ class ScaleRegistry
 
     public function __construct(
         private ScaleIdentityResolver $identityResolver,
+        private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
+
+    private function versionedCacheKey(string $key, int $orgId): string
+    {
+        // Capture before reading the database. A delayed old read may only
+        // populate its old generation, never the generation activated later.
+        return $key.':generation='.$this->publicScaleCatalogCache->generation($orgId);
+    }
 
     public function listVisible(int $orgId = 0): array
     {
@@ -52,7 +60,7 @@ class ScaleRegistry
             return $this->listActivePublic(0);
         }
 
-        $cacheKey = CacheKeys::scaleRegistryActive($orgId);
+        $cacheKey = $this->versionedCacheKey(CacheKeys::scaleRegistryActive($orgId), $orgId);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
@@ -95,7 +103,7 @@ class ScaleRegistry
 
     public function listActivePublic(int $orgId = 0): array
     {
-        $cacheKey = CacheKeys::scaleRegistryActive(0);
+        $cacheKey = $this->versionedCacheKey(CacheKeys::scaleRegistryActive(0), 0);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $cached;
@@ -135,7 +143,7 @@ class ScaleRegistry
             return null;
         }
 
-        $cacheKey = CacheKeys::scaleRegistryByCode($orgId, $requestedCode);
+        $cacheKey = $this->versionedCacheKey(CacheKeys::scaleRegistryByCode($orgId, $requestedCode), $orgId);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $this->canExposeRegistryRow($cached, $orgId) ? $cached : null;
@@ -169,7 +177,7 @@ class ScaleRegistry
         }
 
         $cacheSuffix = $allowAlias ? "compat:{$slug}" : "canonical:{$slug}";
-        $cacheKey = CacheKeys::scaleRegistryBySlug($orgId, $cacheSuffix);
+        $cacheKey = $this->versionedCacheKey(CacheKeys::scaleRegistryBySlug($orgId, $cacheSuffix), $orgId);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
             return $this->canExposeRegistryRow($cached, $orgId) ? $cached : null;

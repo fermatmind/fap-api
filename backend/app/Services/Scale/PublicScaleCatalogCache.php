@@ -44,12 +44,21 @@ class PublicScaleCatalogCache
 
     public function bumpGeneration(int $orgId): int
     {
+        $before = $this->generation($orgId);
         $key = CacheKeys::publicScaleRegistryGeneration($orgId);
         $store = $this->store();
         $store->add($key, 1);
         $next = $store->increment($key);
 
-        return is_numeric($next) && (int) $next > 1 ? (int) $next : 2;
+        if (! is_numeric($next) || (int) $next <= $before || (float) $next !== (float) (int) $next) {
+            throw new \RuntimeException('public_scale_generation_bump_failed');
+        }
+        $persisted = $this->generation($orgId);
+        if ($persisted < (int) $next || $persisted <= $before) {
+            throw new \RuntimeException('public_scale_generation_bump_failed');
+        }
+
+        return $persisted;
     }
 
     /**

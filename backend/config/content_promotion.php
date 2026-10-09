@@ -18,6 +18,7 @@ return [
     'authority_roots' => [
         'content_assets/en-content-parity',
         'content_assets/eq_public/candidate/20261009-new-articles',
+        'content_assets/iq_public/entry/20261009-v1',
         'content_packs',
         'content_baselines',
         'database/seeders/data',
@@ -39,7 +40,7 @@ return [
         'W3' => ['W3-ARTICLES' => 'audit_compatible', 'W3-CAREER-GUIDES' => 'audit_compatible', 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'],
         'W4' => ['riasec' => 'audit_compatible'],
         'W5' => ['enneagram' => 'audit_compatible'],
-        'W6' => ['iq' => 'fail_closed_legacy_audit'],
+        'W6' => ['iq' => 'fail_closed_legacy_audit', 'iq-public-scale' => 'audit_compatible'],
         'W7' => ['eq' => 'audit_compatible'],
         'W8' => ['career-jobs' => 'audit_compatible'],
         'TOP100' => ['frozen-20260812-v1' => 'audit_compatible'],

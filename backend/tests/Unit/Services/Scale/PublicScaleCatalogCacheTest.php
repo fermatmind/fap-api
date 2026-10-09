@@ -7,9 +7,12 @@ namespace Tests\Unit\Services\Scale;
 use App\Services\Scale\PublicScaleCatalogCache;
 use App\Services\Scale\PublicScaleCatalogUnavailable;
 use App\Support\CacheKeys;
+use Illuminate\Cache\Repository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class PublicScaleCatalogCacheTest extends TestCase
@@ -34,6 +37,23 @@ final class PublicScaleCatalogCacheTest extends TestCase
     {
         Carbon::setTestNow();
         parent::tearDown();
+    }
+
+    #[DataProvider('failedGenerationBumps')]
+    public function test_failed_generation_increment_cannot_report_success(mixed $next): void
+    {
+        $store = Mockery::mock(Repository::class);
+        $store->shouldReceive('get')->with(CacheKeys::publicScaleRegistryGeneration(0))->andReturn(7);
+        $store->shouldReceive('add')->once()->with(CacheKeys::publicScaleRegistryGeneration(0), 1)->andReturn(false);
+        $store->shouldReceive('increment')->once()->with(CacheKeys::publicScaleRegistryGeneration(0))->andReturn($next);
+        Cache::shouldReceive('store')->with('array')->andReturn($store);
+        $this->expectExceptionMessage('public_scale_generation_bump_failed');
+        app(PublicScaleCatalogCache::class)->bumpGeneration(0);
+    }
+
+    public static function failedGenerationBumps(): array
+    {
+        return ['failure' => [false], 'invalid' => ['invalid'], 'not persisted' => [8], 'not advanced' => [7], 'fractional' => [8.5]];
     }
 
     public function test_fresh_hit_does_not_rebuild_and_locales_are_isolated(): void

@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
+import { isIqOnlyPromotionRegistration } from './iq-public-scale-package.mjs';
 // Resolve actual PHP consumers through App symbols and literal configuration reads.
 // Dynamic container bindings, routes, schema, bootstrap and dependency inputs are shared.
 export function phpConsumers(root = process.cwd()) {
@@ -42,14 +43,14 @@ export function phpConsumers(root = process.cwd()) {
   return {files, sources, edges, closure, consumer};
 }
 export function selectOperations(paths, root=process.cwd(), range={}) {
-  let eqOnlyRegistration=false;
+  let publicOnlyRegistration=false;
   if (paths.includes('backend/config/content_promotion.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
     try {
       const read=sha=>execFileSync('git',['show',`${sha}:backend/config/content_promotion.php`],{cwd:root,encoding:'utf8'});
-      eqOnlyRegistration=isEqOnlyPromotionRegistration(read(range.base),read(range.head));
+      publicOnlyRegistration=isEqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqOnlyPromotionRegistration(read(range.base),read(range.head));
     } catch { /* Indeterminate changes retain every conservative private consumer. */ }
   }
-  const privatePaths=paths.filter(path=>!(eqOnlyRegistration&&path==='backend/config/content_promotion.php'));
+  const privatePaths=paths.filter(path=>!(publicOnlyRegistration&&path==='backend/config/content_promotion.php'));
   const graph=phpConsumers(root);
   const unknown=paths.some(p=>/^backend\/app\/.*\.php$/.test(p)&&!graph.sources.has(p));
   const shared=unknown||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));

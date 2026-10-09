@@ -148,17 +148,26 @@ class ScaleRegistryWriter
 
     public function invalidateCache(int $orgId = 0, ?string $code = null, ?string $slug = null): void
     {
-        Cache::forget(CacheKeys::scaleRegistryActive($orgId));
-
+        $keys = [CacheKeys::scaleRegistryActive($orgId)];
         if ($code !== null) {
-            Cache::forget(CacheKeys::scaleRegistryByCode($orgId, $code));
+            $keys[] = CacheKeys::scaleRegistryByCode($orgId, $code);
         }
-
         if ($slug !== null) {
-            Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, $slug));
-            Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, 'compat:'.$slug));
-            Cache::forget(CacheKeys::scaleRegistryBySlug($orgId, 'canonical:'.$slug));
+            foreach ([$slug, 'compat:'.$slug, 'canonical:'.$slug] as $suffix) {
+                $keys[] = CacheKeys::scaleRegistryBySlug($orgId, $suffix);
+            }
         }
+        $generation = $this->publicScaleCatalogCache->generation($orgId);
+        foreach ($keys as $key) {
+            Cache::forget($key);
+            Cache::forget($key.':generation='.$generation);
+        }
+    }
+
+    /** @param list<string> $slugs */
+    public function invalidatePublicContentProjection(int $orgId, string $code, array $slugs): void
+    {
+        $this->invalidatePublicProjection($orgId, $code, $slugs);
     }
 
     /**

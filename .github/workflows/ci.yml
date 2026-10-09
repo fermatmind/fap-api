@@ -306,6 +306,12 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.eq_new_source_articles_checks == true
         working-directory: backend
         run: php artisan test tests/Unit/ContentPromotion/EqPublicArticlePackageTest.php tests/Unit/ContentPromotion/EqNewSourceArticlePromotionAdapterTest.php tests/Unit/ContentPromotion/EqSourceExecutionMutexTest.php --no-ansi
+      - name: Verify exact IQ public entry package and publication failure paths
+        if: fromJSON(needs.classify.outputs.classification).operations.iq_public_scale_checks == true
+        working-directory: backend
+        run: |
+          php artisan test tests/Unit/ContentPromotion/IqPublicEntryPackageTest.php tests/Unit/ContentPromotion/IqPublicScalePromotionAdapterTest.php --no-ansi
+          node --test ../.github/trunk/iq-public-scale-online-qa.integration.mjs
       - name: Execute changed PHP JS Python and Shell tests with inherited FEATURE inputs
         if: needs.classify.outputs.tests_changed == 'true'
         env:

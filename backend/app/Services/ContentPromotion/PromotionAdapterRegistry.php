@@ -10,6 +10,7 @@ use App\Services\ContentPromotion\Adapters\CareerGuideCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerJobCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Eq60CompiledPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
+use App\Services\ContentPromotion\Adapters\IqPublicScalePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
@@ -36,6 +37,7 @@ final class PromotionAdapterRegistry
         PromotionRollbackSnapshotService $snapshots,
         ArticleMaterialDecisionService $articleMaterialDecisions,
         EqNewSourceArticlePromotionAdapter $eqNewSources,
+        IqPublicScalePromotionAdapter $iqPublicScale,
     ) {
         $adapters = [
             $mbtiComparison,
@@ -48,6 +50,7 @@ final class PromotionAdapterRegistry
             new LegacyAuditIncompatiblePromotionAdapter('w6_iq_legacy', 'W6', 'iq'),
             new Eq60CompiledPromotionAdapter($eq60Authority, $snapshots),
             $eqNewSources,
+            $iqPublicScale,
             new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
             new Top100FrozenCmsBatchPromotionAdapter($top100Authority, $snapshots),
         ];
