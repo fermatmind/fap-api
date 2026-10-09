@@ -11,6 +11,8 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -26,6 +28,127 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
     private const SLUG = 'riasec-holland-career-interest-test-explained';
 
     private const CANONICAL = '/zh/articles/riasec-holland-career-interest-test-explained';
+
+    public function test_guarded_plan_is_read_only_and_guarded_execute_forks_only_working_revision(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $published = $article->publishedRevision->getAttributes();
+        $baseline = $this->baselineOptions($article);
+        $package = $this->writeExistingUpdatePackage();
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$baseline, '--dry-run' => true, '--json' => true,
+        ])));
+        $this->assertTrue($this->jsonOutput()['ok']);
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$baseline, '--execute' => true, '--json' => true,
+        ])));
+        $article->refresh()->load(['publishedRevision', 'workingRevision']);
+        $this->assertSame($published, $article->publishedRevision->getAttributes());
+        $this->assertNotSame((int) $article->published_revision_id, (int) $article->working_revision_id);
+        $this->assertSame(1, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    #[DataProvider('rejectedBaselines')]
+    public function test_guarded_execute_rejects_wrong_or_incomplete_baseline_without_writes(string $option, mixed $value, string $code): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $before = $article->publishedRevision->getAttributes();
+        $baseline = $this->baselineOptions($article);
+        $baseline[$option] = $value;
+        $package = $this->writeExistingUpdatePackage();
+
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$baseline, '--execute' => true, '--json' => true,
+        ])));
+        $this->assertErrorCode($this->jsonOutput(), $code);
+        $article->refresh()->load('workingRevision');
+        $this->assertSame($before, $article->workingRevision->getAttributes());
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public static function rejectedBaselines(): array
+    {
+        return [
+            'wrong organization' => ['--expected-org-id', '1', 'baseline_expected_org_id_mismatch'],
+            'stale working revision' => ['--expected-working-revision-id', '9999', 'baseline_expected_working_revision_id_mismatch'],
+            'stale published revision' => ['--expected-published-revision-id', '9999', 'baseline_expected_published_revision_id_mismatch'],
+            'wrong working bytes' => ['--expected-working-body-sha256', str_repeat('0', 64), 'baseline_expected_working_body_sha256_mismatch'],
+            'wrong published bytes' => ['--expected-published-body-sha256', str_repeat('0', 64), 'baseline_expected_published_body_sha256_mismatch'],
+            'partial guard' => ['--expected-published-body-sha256', null, 'baseline_guard_incomplete'],
+            'invalid organization' => ['--expected-org-id', '-1', 'baseline_guard_invalid'],
+            'zero revision' => ['--expected-working-revision-id', '0', 'baseline_guard_invalid'],
+            'invalid raw hash' => ['--expected-working-body-sha256', 'not-a-hash', 'baseline_guard_invalid'],
+        ];
+    }
+
+    public function test_guard_uses_exact_stored_body_bytes_including_crlf_and_surrounding_whitespace(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $raw = "\r\n## Existing RIASEC article\r\n\r\n旧正文。  \r\n";
+        $article->workingRevision->forceFill(['content_md' => $raw])->save();
+        $article->refresh()->load(['workingRevision', 'publishedRevision']);
+        $baseline = $this->baselineOptions($article);
+        $package = $this->writeExistingUpdatePackage();
+        $normalizedHash = hash('sha256', trim(str_replace("\r\n", "\n", $raw)));
+
+        $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$baseline, '--expected-working-body-sha256' => $normalizedHash, '--execute' => true, '--json' => true,
+        ])));
+        $this->assertErrorCode($this->jsonOutput(), 'baseline_expected_working_body_sha256_mismatch');
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+
+        $this->assertSame(0, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            ...$baseline, '--execute' => true, '--json' => true,
+        ])));
+        $article->refresh()->load('publishedRevision');
+        $this->assertSame($raw, $article->publishedRevision->getRawOriginal('content_md'));
+    }
+
+    public function test_guarded_execute_rechecks_body_inside_transaction_before_any_revision_write(): void
+    {
+        $article = $this->createExistingPublishedArticle40();
+        $before = $article->publishedRevision->getAttributes();
+        $baseline = $this->baselineOptions($article);
+        $package = $this->writeExistingUpdatePackage();
+        $reads = 0;
+        $event = 'eloquent.retrieved: '.Article::class;
+        Event::listen($event, function (Article $read) use (&$reads, $article): void {
+            if ((int) $read->id === (int) $article->id && ++$reads === 2) {
+                DB::table('article_translation_revisions')->where('id', $article->working_revision_id)
+                    ->update(['content_md' => "Concurrent editor's current body\n"]);
+            }
+        });
+        try {
+            $this->assertSame(1, Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+                ...$baseline, '--execute' => true, '--json' => true,
+            ])));
+            $payload = $this->jsonOutput();
+            $this->assertErrorCode($payload, 'runtime_error');
+            $this->assertSame('baseline_expected_working_body_sha256_mismatch', $payload['errors'][0]['message']);
+            $this->assertGreaterThanOrEqual(2, $reads);
+        } finally {
+            Event::forget($event);
+        }
+        $article->refresh()->load('workingRevision');
+        $this->assertSame($before, $article->workingRevision->getAttributes());
+        $this->assertSame(1, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    private function baselineOptions(Article $article): array
+    {
+        return [
+            '--expected-org-id' => (string) $article->org_id,
+            '--expected-working-revision-id' => (string) $article->working_revision_id,
+            '--expected-published-revision-id' => (string) $article->published_revision_id,
+            '--expected-working-body-sha256' => hash('sha256', (string) $article->workingRevision->getRawOriginal('content_md')),
+            '--expected-published-body-sha256' => hash('sha256', (string) $article->publishedRevision->getRawOriginal('content_md')),
+        ];
+    }
 
     public function test_dry_run_accepts_exact_article_40_without_database_writes(): void
     {

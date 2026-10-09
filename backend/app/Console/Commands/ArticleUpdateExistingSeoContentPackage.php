@@ -18,6 +18,11 @@ final class ArticleUpdateExistingSeoContentPackage extends Command
         {--locale=zh-CN : Expected locale}
         {--expected-slug= : Locked existing article slug}
         {--expected-canonical= : Locked existing canonical route}
+        {--expected-org-id= : Expected organization; supply all five baseline options together}
+        {--expected-working-revision-id= : Expected current working revision}
+        {--expected-published-revision-id= : Expected current published revision}
+        {--expected-working-body-sha256= : SHA256 of exact stored working body bytes}
+        {--expected-published-body-sha256= : SHA256 of exact stored published body bytes}
         {--dry-run : Validate and plan without writing to the database}
         {--execute : Apply the working revision update}
         {--json : Emit a JSON summary}
@@ -66,6 +71,11 @@ final class ArticleUpdateExistingSeoContentPackage extends Command
             'locale' => (string) $this->option('locale'),
             'expected_slug' => (string) $this->option('expected-slug'),
             'expected_canonical' => (string) $this->option('expected-canonical'),
+            'expected_org_id' => $this->option('expected-org-id'),
+            'expected_working_revision_id' => $this->option('expected-working-revision-id'),
+            'expected_published_revision_id' => $this->option('expected-published-revision-id'),
+            'expected_working_body_sha256' => $this->option('expected-working-body-sha256'),
+            'expected_published_body_sha256' => $this->option('expected-published-body-sha256'),
             'dry_run' => $dryRun,
             'execute' => $execute,
             'json' => (bool) $this->option('json'),

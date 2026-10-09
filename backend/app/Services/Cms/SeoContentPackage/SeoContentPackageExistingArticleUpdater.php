@@ -74,6 +74,22 @@ final class SeoContentPackageExistingArticleUpdater
                 ->firstOrFail();
 
             $this->assertArticleIdentity($locked, $item);
+            if ($item['baseline_guard'] !== []) {
+                // Re-read exact revision rows under the transaction before any fork/save.
+                foreach (['workingRevision' => 'working_revision_id', 'publishedRevision' => 'published_revision_id'] as $relation => $field) {
+                    $locked->setRelation($relation, ArticleTranslationRevision::query()
+                        ->withoutGlobalScopes()
+                        ->where('org_id', (int) $locked->org_id)
+                        ->where('article_id', (int) $locked->id)
+                        ->whereKey($locked->{$field})
+                        ->lockForUpdate()
+                        ->first());
+                }
+                $baselineErrors = $this->baselineErrors($locked, $item['baseline_guard']);
+                if ($baselineErrors !== []) {
+                    throw new RuntimeException((string) $baselineErrors[0]['code']);
+                }
+            }
             $createdIsolatedWorkingRevision = $this->usesPublishedRevisionAsWorkingRevision($locked);
             $locked = $this->ensureIsolatedWorkingRevision($locked);
 
@@ -135,6 +151,7 @@ final class SeoContentPackageExistingArticleUpdater
         $expectedTranslationGroupId = trim((string) ($options['translation_group_id'] ?? ''));
 
         $this->validateCommandSafety($options, $errors);
+        $baselineGuard = $this->baselineGuard($options, $errors);
 
         if ($articleId <= 0) {
             $errors[] = $this->issue('article_id', 'missing_article_id', '--article-id is required.');
@@ -168,12 +185,14 @@ final class SeoContentPackageExistingArticleUpdater
             $article = $this->findArticle($articleId);
             if ($article instanceof Article) {
                 $this->validateArticle($article, $expectedLocale, $expectedSlug, $expectedCanonical, $expectedTranslationGroupId, $errors);
+                $errors = array_merge($errors, $this->baselineErrors($article, $baselineGuard));
             } elseif ($articleId > 0) {
                 $errors[] = $this->issue('article_id', 'article_not_found', 'Target article was not found.');
             }
             $item = $this->buildPackageItem($packageRoot, $manifest, $identityLock, $expectedLocale, $errors, $warnings);
             if ($article instanceof Article && $item !== []) {
                 $item['article'] = $article;
+                $item['baseline_guard'] = $baselineGuard;
                 $this->validateItemAgainstLocks($item, $article, $expectedSlug, $expectedCanonical, $expectedTranslationGroupId, $errors);
                 $this->validateJsonFieldSerialization($item, $errors, $warnings);
             }
@@ -199,6 +218,7 @@ final class SeoContentPackageExistingArticleUpdater
             'identity_lock_status' => $identityLock !== [] ? 'valid_json' : 'missing_or_invalid',
             'active_surface_guard_scan' => $guardScan,
             'safety_flags' => $this->safetyFlagSnapshot($options),
+            'baseline_guard' => $baselineGuard,
             'articles' => $plannedArticle,
             'package_item' => $ok ? $item : [],
             'errors' => $errors,
@@ -506,6 +526,64 @@ final class SeoContentPackageExistingArticleUpdater
             || (string) $article->translation_group_id !== (string) $item['translation_group_id']) {
             throw new RuntimeException('target article identity changed before update.');
         }
+    }
+
+    /** @param array<string,mixed> $options @param list<array<string,mixed>> $errors */
+    private function baselineGuard(array $options, array &$errors): array
+    {
+        $keys = ['expected_org_id', 'expected_working_revision_id', 'expected_published_revision_id',
+            'expected_working_body_sha256', 'expected_published_body_sha256'];
+        $guard = [];
+        foreach ($keys as $key) {
+            $value = $options[$key] ?? null;
+            if ($value !== null && $value !== '') {
+                $guard[$key] = is_scalar($value) ? (string) $value : '';
+            }
+        }
+        if ($guard === []) {
+            return [];
+        }
+        if (count($guard) !== count($keys)) {
+            $errors[] = $this->issue('baseline_guard', 'baseline_guard_incomplete', 'Supply all five expected baseline options together.');
+
+            return [];
+        }
+        foreach ($guard as $key => $value) {
+            $valid = str_ends_with($key, '_sha256')
+                ? preg_match('/^[a-f0-9]{64}$/D', $value) === 1
+                : preg_match('/^(?:0|[1-9][0-9]*)$/D', $value) === 1
+                    && filter_var($value, FILTER_VALIDATE_INT, ['options' => ['min_range' => $key === 'expected_org_id' ? 0 : 1]]) !== false;
+            if (! $valid) {
+                $errors[] = $this->issue($key, 'baseline_guard_invalid', 'Expected baseline value has an invalid format.');
+            }
+        }
+
+        return $guard;
+    }
+
+    /** @param array<string,string> $guard @return list<array<string,mixed>> */
+    private function baselineErrors(Article $article, array $guard): array
+    {
+        if ($guard === []) {
+            return [];
+        }
+        $actual = [
+            'expected_org_id' => (string) $article->org_id,
+            'expected_working_revision_id' => (string) $article->working_revision_id,
+            'expected_published_revision_id' => (string) $article->published_revision_id,
+            'expected_working_body_sha256' => $article->workingRevision instanceof ArticleTranslationRevision
+                ? hash('sha256', (string) $article->workingRevision->getRawOriginal('content_md')) : '',
+            'expected_published_body_sha256' => $article->publishedRevision instanceof ArticleTranslationRevision
+                ? hash('sha256', (string) $article->publishedRevision->getRawOriginal('content_md')) : '',
+        ];
+        $errors = [];
+        foreach ($actual as $key => $value) {
+            if (! hash_equals($guard[$key], $value)) {
+                $errors[] = $this->issue($key, 'baseline_'.$key.'_mismatch', 'Current article baseline does not match the supplied expected value.');
+            }
+        }
+
+        return $errors;
     }
 
     /**
