@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = 'eca3c2b6322b8e558e9961b532370b28ae24c9fed416f2ebee745dec61b6f84e';
+    private const AGGREGATE = 'ac7f9f3b6ded4cbedbc5c6386d86897b8abe771e4f271b78ac8eb2c2af82a54d';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -78,7 +78,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/zh-CN.json",
             ];
         }
-        foreach (['1w2', '1w9', '2w1', '2w3', '3w2', '3w4', '4w3', '4w5', '5w6', '6w5', '6w7', '7w6', '7w8'] as $wing) {
+        foreach (['1w2', '1w9', '2w1', '2w3', '3w2', '3w4', '4w3', '4w5', '5w6', '6w5', '6w7', '7w6', '7w8', '8w7', '8w9', '9w1', '9w8'] as $wing) {
             yield "Enneagram {$wing} English" => [
                 "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=en&org_id=0",
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/en.json",
