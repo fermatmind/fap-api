@@ -1319,7 +1319,7 @@ jobs:
           retention-days: 30
       - id: iq-public-publish
         name: Publish exact reviewed bilingual IQ public entry
-        if: fromJSON(needs.policy.outputs.operations).iq_public_scale_publish == true
+        if: fromJSON(needs.policy.outputs.classification).operations.iq_public_scale_publish == true
         env:
           IQ_PUBLISH_ENVIRONMENT: staging
           CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
@@ -2369,7 +2369,7 @@ jobs:
           retention-days: 30
       - id: iq-public-publish
         name: Publish exact reviewed bilingual IQ public entry
-        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.operations).iq_public_scale_publish == true
+        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.iq_public_scale_publish == true
         env:
           IQ_PUBLISH_ENVIRONMENT: production
           CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}

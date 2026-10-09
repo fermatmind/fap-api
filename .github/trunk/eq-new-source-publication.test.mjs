@@ -60,6 +60,7 @@ test('permanent workflow serializes source publishing and includes automatic LKG
   // for Deployer. GitHub fromJSON must consume the former in both environments.
   assert.match(workflow,/echo "classification=\$classification"/);
   assert.match(workflow,/echo "operations=\$\(jq -c \.classification\.operations "\$receipt" \| base64 -w0\)"/);
+  assert.doesNotMatch(workflow,/fromJSON\(needs\.policy\.outputs\.operations\)/);
   for (const phase of [staging,production]) {
     const condition=phase.split('name: Publish exact reviewed EQ Chinese source articles')[1].split('\n')[1];
     assert.match(condition,/fromJSON\(needs\.policy\.outputs\.classification\)\.operations\.eq_new_source_articles_publish/);
