@@ -9,6 +9,7 @@ export const executorPaths = [
   'app/Console/Commands/ContentPromoteExactPackage.php',
   'app/Services/ContentPromotion/Adapters/IqPublicScalePromotionAdapter.php',
   'app/Services/ContentPromotion/IqPublicEntryPackage.php',
+  'app/Services/ContentPromotion/IqPublicEntryFrontendRevalidator.php',
   'app/Services/ContentPromotion/ExactPackagePromotionService.php',
   'app/Services/ContentPromotion/PromotionContextFactory.php',
   'app/Services/ContentPromotion/PromotionReceiptStore.php',

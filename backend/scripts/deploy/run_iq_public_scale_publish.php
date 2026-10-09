@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Services\ContentPromotion\Adapters\IqPublicScalePromotionAdapter;
 use App\Services\ContentPromotion\ExactPackagePromotionService;
+use App\Services\ContentPromotion\IqPublicEntryFrontendRevalidator;
 use App\Services\ContentPromotion\IqPublicEntryPackage;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Contracts\Console\Kernel;
@@ -15,6 +16,7 @@ umask(0077);
 $root = dirname(__DIR__, 2);
 $context = null;
 $adapter = null;
+$frontend = null;
 $publicationAttempted = false;
 $started = microtime(true);
 try {
@@ -48,6 +50,7 @@ try {
         'app/Console/Commands/ContentPromoteExactPackage.php',
         'app/Services/ContentPromotion/Adapters/IqPublicScalePromotionAdapter.php',
         'app/Services/ContentPromotion/IqPublicEntryPackage.php',
+        'app/Services/ContentPromotion/IqPublicEntryFrontendRevalidator.php',
         'app/Services/ContentPromotion/ExactPackagePromotionService.php',
         'app/Services/ContentPromotion/PromotionContextFactory.php',
         'app/Services/ContentPromotion/PromotionReceiptStore.php',
@@ -103,11 +106,16 @@ try {
         throw new DomainException('iq_public_execution_already_claimed_or_invalid');
     }
     $adapter = $app->make(IqPublicScalePromotionAdapter::class);
+    $frontend = $app->make(IqPublicEntryFrontendRevalidator::class);
     if ($request['mode'] === 'recover') {
         $restored = $adapter->recoverFailedPublication($context);
+        if ($restored) {
+            $frontend->revalidate();
+        }
         echo json_encode(['ok' => true, 'mode' => 'recover', 'restored' => $restored, 'recovery_status' => $restored ? 'restored' : 'not_required', 'source_commit' => $context->sourceCommit], JSON_THROW_ON_ERROR).PHP_EOL;
         exit(0);
     }
+    $frontend->assertConfigured();
     $previous = '';
     $completed = [];
     foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
@@ -123,6 +131,7 @@ try {
         $completed[] = ['phase' => $phase, 'receipt_sha256' => $result['receipt_sha256'], 'readback_count' => 2];
         $previous = $path;
     }
+    $frontend->revalidate();
     echo json_encode([
         'schema' => 'iq.public_scale.publish.v1', 'ok' => true,
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
@@ -135,6 +144,9 @@ try {
     if ($publicationAttempted && $context !== null && $adapter !== null) {
         try {
             $restored = $adapter->recoverFailedPublication($context);
+            if ($restored) {
+                $frontend->revalidate();
+            }
         } catch (Throwable) {
             $restored = false;
         }

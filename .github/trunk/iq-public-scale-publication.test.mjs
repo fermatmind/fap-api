@@ -78,6 +78,18 @@ test('both environments publish in the existing workflow and LKG requires comple
   const workflow = readFileSync(new URL('../workflows/deploy.yml', import.meta.url), 'utf8');
   const staging = workflow.split('  staging:')[1].split('  production:')[0];
   const production = workflow.split('  production:')[1];
+  // policy.operations is Base64 for transport; classification is raw JSON.
+  // Exercise the actual referenced output, including a false publish flag.
+  for (const block of [staging, production]) {
+    const condition = block.split('name: Publish exact reviewed bilingual IQ public entry')[1].split('\n')[1];
+    const match = condition.match(/fromJSON\(needs\.policy\.outputs\.(\w+)\)\.operations\.iq_public_scale_publish/);
+    assert.ok(match, 'publisher must parse the raw classification output');
+    for (const selected of [true, false]) {
+      const classification = JSON.stringify({ operations: { iq_public_scale_publish: selected } });
+      const outputs = { classification, operations: Buffer.from(JSON.stringify({ iq_public_scale_publish: selected })).toString('base64') };
+      assert.equal(JSON.parse(outputs[match[1]]).operations.iq_public_scale_publish, selected);
+    }
+  }
   assert.ok(staging.indexOf('id: iq-public-publish') < staging.indexOf('Record staging timing'));
   assert.ok(production.indexOf('id: iq-public-publish') < production.indexOf('Restore exact LKG after Career publisher failure'));
   const block = production.split("if [ '${{ steps.iq-public-publish.outcome }}' = failure ]; then")[1];
