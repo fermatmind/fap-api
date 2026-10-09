@@ -219,6 +219,8 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_guide_public_detail')
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'career_guide_detail')
+            ->assertJsonPath('landing_surface_v1.start_test_target', '/en/tests/mbti-personality-test-16-personality-types')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/en/tests/mbti-personality-test-16-personality-types')
             ->assertJsonPath('answer_surface_v1.answer_contract_version', 'answer.surface.v1')
             ->assertJsonPath('answer_surface_v1.answer_scope', 'public_indexable_detail')
             ->assertJsonPath('answer_surface_v1.surface_type', 'career_guide_public_detail')
@@ -246,6 +248,30 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonMissingPath('related_jobs.0.pivot');
 
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
+    }
+
+    public function test_iq_eq_guide_ctas_match_both_assessments_in_each_locale(): void
+    {
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $segment) {
+            $this->createGuide([
+                'guide_code' => 'iq-eq-balance-at-work',
+                'slug' => 'iq-eq-balance-at-work',
+                'locale' => $locale,
+                'status' => CareerGuide::STATUS_PUBLISHED,
+                'is_public' => true,
+                'published_at' => now()->subDay(),
+            ]);
+
+            $eqHref = '/'.$segment.'/tests/eq-test-emotional-intelligence-assessment';
+            $iqHref = '/'.$segment.'/tests/iq-test-intelligence-quotient-assessment';
+            $this->getJson('/api/v0.5/career-guides/iq-eq-balance-at-work?locale='.$locale)
+                ->assertOk()
+                ->assertJsonPath('landing_surface_v1.start_test_target', $eqHref)
+                ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', $eqHref)
+                ->assertJsonPath('landing_surface_v1.cta_bundle.1.href', $iqHref)
+                ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', $eqHref)
+                ->assertJsonPath('answer_surface_v1.next_step_blocks.1.href', $iqHref);
+        }
     }
 
     public function test_detail_returns_not_found_for_missing_hidden_and_locale_mismatch_guides(): void

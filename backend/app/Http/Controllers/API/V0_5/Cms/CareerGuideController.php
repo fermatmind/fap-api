@@ -168,6 +168,10 @@ final class CareerGuideController extends Controller
         $relatedJobs = $this->careerGuideService->relatedJobsPayload($guide);
         $relatedArticles = $this->careerGuideService->relatedArticlesPayload($guide);
         $relatedProfiles = $this->careerGuideService->relatedPersonalityProfilesPayload($guide);
+        $isIqEqGuide = (int) $guide->org_id === 0 && $guide->slug === 'iq-eq-balance-at-work';
+        $testTarget = '/'.$segment.'/tests/'.($isIqEqGuide
+            ? 'eq-test-emotional-intelligence-assessment'
+            : 'mbti-personality-test-16-personality-types');
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_detail',
@@ -183,7 +187,7 @@ final class CareerGuideController extends Controller
             ],
             'discoverability_keys' => ['career_guide', 'career_job', 'article_detail', 'personality_profile'],
             'continue_reading_keys' => ['career_job', 'article_detail', 'personality_profile'],
-            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'start_test_target' => $testTarget,
             'result_resume_target' => null,
             'content_continue_target' => trim((string) (($relatedJobs[0]['slug'] ?? null) !== null
                 ? '/'.$segment.'/career/jobs/'.rawurlencode((string) $relatedJobs[0]['slug'])
@@ -193,10 +197,20 @@ final class CareerGuideController extends Controller
             'cta_bundle' => array_values(array_filter([
                 [
                     'key' => 'start_test',
-                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
-                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'label' => $isIqEqGuide
+                        ? ($locale === 'zh-CN' ? '开始 EQ 自评' : 'Take the EQ self-report')
+                        : ($locale === 'zh-CN' ? '开始测试' : 'Take the test'),
+                    'href' => $testTarget,
                     'kind' => 'start_test',
                 ],
+                $isIqEqGuide
+                    ? [
+                        'key' => 'iq_beta_test',
+                        'label' => $locale === 'zh-CN' ? '探索 IQ Beta 推理测试' : 'Explore the IQ Beta reasoning test',
+                        'href' => '/'.$segment.'/tests/iq-test-intelligence-quotient-assessment',
+                        'kind' => 'start_test',
+                    ]
+                    : null,
                 ($relatedJobs[0]['slug'] ?? null) !== null
                     ? [
                         'key' => 'related_job',
