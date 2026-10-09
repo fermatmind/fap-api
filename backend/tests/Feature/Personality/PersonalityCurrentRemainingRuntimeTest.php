@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = '122a73b9006fe4b9293686236b1cd63b67d53307d48bc049681005b00edcd9db';
+    private const AGGREGATE = '130ab75951be6f4809b33da7bb48a267937181984bf88f121d60bb370f28be6e';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -83,6 +83,21 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "/api/v0.5/personality-content-assets/enneagram/wing/{$wing}?locale=en&org_id=0",
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/en.json",
             ];
+        }
+        foreach (['type-1/one-to-one', 'type-1/self-preservation', 'type-1/social', 'type-2/one-to-one', 'type-2/self-preservation'] as $subtype) {
+            [$type, $instinct] = explode('/', $subtype);
+            $code = rawurlencode($subtype);
+            foreach (['en', 'zh-CN'] as $locale) {
+                $file = "content_assets/personality_public/current/pages/enneagram/instinctual-subtype/{$type}--{$instinct}/{$locale}.json";
+                yield "Enneagram subtype {$subtype} query {$locale}" => [
+                    "/api/v0.5/personality-content-assets?framework=enneagram&entity_type=instinctual_subtype&code={$code}&locale={$locale}&org_id=0",
+                    $file,
+                ];
+                yield "Enneagram subtype {$subtype} slug {$locale}" => [
+                    "/api/v0.5/personality-content-assets/enneagram/enneagram/{$type}/instincts/{$instinct}?locale={$locale}&org_id=0",
+                    $file,
+                ];
+            }
         }
         yield 'MBTI variant' => [
             '/api/v0.5/personality/intj-a?locale=en&org_id=0&scale_code=MBTI',
@@ -197,6 +212,14 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
 
         $this->getJson('/api/v0.5/personality-content-assets/enneagram/center/not-real?locale=zh-CN&org_id=0')
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=enneagram&entity_type=instinctual_subtype&code=type-1%2Fnot-real&locale=en&org_id=0')
+            ->assertNotFound()
+            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/enneagram/type-1/instincts/not-real?locale=zh-CN&org_id=0')
             ->assertNotFound()
             ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
     }
