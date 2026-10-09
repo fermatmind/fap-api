@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileSection;
 use App\Models\TopicProfileSeoMeta;
+use App\Services\Cms\IqEqTopicFaqProjection;
 use App\Services\Cms\TopicEntryResolverService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Cms\TopicProfileService;
@@ -297,7 +298,7 @@ final class TopicController extends Controller
             'answer_scope' => $profile->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'topic_public_detail',
             'summary_blocks' => $summaryBlocks,
-            'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
+            'faq_blocks' => IqEqTopicFaqProjection::blocks($profile, $sections, $this->answerSurfaceContractService),
             'compare_blocks' => $compareBlocks,
             'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => array_slice($nextStepBlocks, 0, 4),

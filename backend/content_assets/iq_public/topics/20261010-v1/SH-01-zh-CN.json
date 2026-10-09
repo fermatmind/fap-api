@@ -1,0 +1,78 @@
+{
+  "page_id": "SH-01",
+  "locale": "zh-CN",
+  "candidate_sha256": "223b43e79eb523d75f3060822d853b2c15956543df219cfab927e0328226739d",
+  "metadata": {
+    "title": "IQ与EQ：区别、测试选择和结果阅读",
+    "description": "比较认知任务表现与情绪、关系自评，了解费马30题视觉练习和60题EQ自评的区别。通过项目延期案例，选择工具、分数、概念、练习或工作阅读路径。"
+  },
+  "faq_items": [
+    {
+      "question": "IQ和EQ有什么区别？",
+      "answer": "认知测验通过任务观察认知表现；情绪智力相关工具关注情绪信息及相关行为，但方法可以是能力任务、自评或情境判断。本站视觉作答成绩与EQ-60自我描述是不同信息。"
+    },
+    {
+      "question": "IQ高、EQ低是否是一种固定人格？",
+      "answer": "本站两种结果不能建立这种稳定类型。先核具体工具、字段和条件，再把结果转为需要现实证据检验的问题。"
+    },
+    {
+      "question": "EQ-60的四维是什么？",
+      "answer": "自我觉察、情绪调节、共情理解、关系管理。目前它们是自评解释框架，不是已经充分验证的能力分量表。"
+    },
+    {
+      "question": "POMP75是否表示超过75%的人？",
+      "answer": "不是。POMP表示在理论可得分范围中的位置，不需要人口样本就可以定义。百分位要另看参照分布与方法；本页教学例子不是本站当前公式承诺。"
+    },
+    {
+      "question": "能把IQ和EQ分数比较或合成总能力吗？",
+      "answer": "不能。信息来源、构念和参照不同，数字不在共同能力尺度上。本站结果不能用于招聘、绩效、岗位筛选或职业成功预测。"
+    },
+    {
+      "question": "共情是否意味着猜到对方感受或总要让步？",
+      "answer": "不是。应把感受判断当作待确认的猜测，让对方纠正；理解困难也可以同时保留清楚的责任与边界。"
+    },
+    {
+      "question": "先选哪一种测试？",
+      "answer": "想体验视觉规则判断，选30题推理练习；想整理自己的情绪与关系倾向，选60题自评。若面对正式评估或高风险决定，应另找合适工具与专业支持。"
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "现有主题身份、双测试和工作入口",
+      "url": "https://fermatmind.com/zh/topics/iq-eq",
+      "read_scope": "实读SH-01-zh-CN-api.json、seo.json、ssr.txt与HTML元数据；阅读共享EQ专业审查意见。",
+      "limitation": "冻结200/index状态不证明当前部署、完整交互或所有新增承接页可用。"
+    },
+    {
+      "claim": "本站原创30图形任务与模拟Beta身份",
+      "url": "https://fermatmind.com/zh/tests/iq-test-intelligence-quotient-assessment",
+      "read_scope": "实读当前冻结lookup、SSR及bank service、Beta代码、presentation和result shell。",
+      "limitation": "不是全面智力、人口常模或生产全流程验证，不承诺Beta在UI显示。"
+    },
+    {
+      "claim": "EQ-60自评四维、非MSCEIT／非能力／非高风险用途及证据状态",
+      "url": "https://fermatmind.com/zh/tests/eq-test-emotional-intelligence-assessment",
+      "read_scope": "实读source-current的scientific_contract.json、psychometric_evidence_status.json、score_system.json中的global_index及dimensions；对照shared-eq-result.md。",
+      "limitation": "raw说明与证据状态不是已完成效度研究；实际生产norm、报告显示及运行状态未核。POMP示例为通用虚构范围，不声称当前EQ公式。"
+    },
+    {
+      "claim": "能力任务与自我报告、自我感知是不同测量信息",
+      "url": "https://aec6905spring2013.wordpress.com/wp-content/uploads/2013/01/mayersaloveycaruso-2004.pdf",
+      "read_scope": "实读source-supplement-02.md；宿主记录2004原文摘要／导言p1及p7方法区别。",
+      "limitation": "本Agent未独立读取新增原文段落，20页未全文；其他工具验证不能转给EQ60。"
+    },
+    {
+      "claim": "分数解释必须对应用途",
+      "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+      "read_scope": "实读source-supplement-02.md中p20及相关标准范围记录。",
+      "limitation": "新增原文未冻结给本Agent；不声明本站合规或产品效度。"
+    }
+  ],
+  "unresolved": [
+    "新增IQ06及EQ新页没有可用性证据，当前候选五路径使用现有工具与指南承接；新增概念／计分／实践专页应在实际发布后再投影。",
+    "所有链接最终同语言正文、状态与交互需宿主上线前复核；现有英文noindex问题不能由本作者改资格。",
+    "2004原文与测验标准新增范围仅有宿主阅读记录；fresh需原始段落。",
+    "未做CMS投影、独立审稿、双端QA、提交或上线；不发PASS。"
+  ],
+  "state": "author_candidate_not_reviewed"
+}

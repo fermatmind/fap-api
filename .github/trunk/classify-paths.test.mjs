@@ -639,3 +639,33 @@ test('two frozen Ops read projections and their producer select focused consumer
  assert.equal(unknown.operations.a08_focused,false);assert.equal(unknown.operations.a08_scoped_checks,true);
  assert.equal(classifyPaths([...ops,'backend/app/Http/Middleware/OpsAccessControl.php']).operations.seo_council_orchestration,true);
 });
+
+test('IQ Article publication is fixed-package-only and its implementation selects focused checks', () => {
+  for (const path of ['backend/content_assets/iq_public/articles/20261010-v1/manifest.json', 'backend/content_assets/iq_public/articles/20261010-v1/snapshots/IQ-06/en.json']) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.iq_public_articles_publish, true);
+    assert.equal(result.operations.iq_public_articles_checks, true);
+    assert.equal(result.operations.iq_public_scale_publish, false);
+    assert.equal(result.operations.eq_new_source_articles_publish, false);
+  }
+  for (const path of ['backend/app/Services/ContentPromotion/Adapters/IqPublicArticlePromotionAdapter.php', 'backend/app/Services/Cms/IqPublicArticleFaqProjection.php', '.github/trunk/iq-public-article-publish.mjs', 'backend/scripts/deploy/run_iq_public_article_publish.php']) {
+    const result = classifyPaths([path]);
+    assert.equal(result.operations.iq_public_articles_checks, true);
+    assert.equal(result.operations.iq_public_articles_publish, false);
+  }
+  assert.equal(classifyPaths(['backend/content_assets/iq_public/articles/other/manifest.json']).operations.iq_public_articles_publish, false);
+});
+
+test('IQ EQ Topic publication requires its fixed package and never selects other publishers', () => {
+  const candidate = classifyPaths(['backend/content_assets/iq_public/topics/20261010-v1/manifest.json']);
+  assert.equal(candidate.operations.iq_eq_topic_publish, true);
+  assert.equal(candidate.operations.iq_eq_topic_checks, true);
+  assert.equal(candidate.operations.iq_public_articles_publish, false);
+  assert.equal(candidate.operations.iq_public_scale_publish, false);
+  for (const path of ['backend/app/Services/ContentPromotion/IqEqTopicPrerequisites.php', '.github/trunk/iq-eq-topic-publish.mjs', 'backend/scripts/deploy/run_iq_eq_topic_publish.php']) {
+    const implementation = classifyPaths([path]);
+    assert.equal(implementation.operations.iq_eq_topic_checks, true);
+    assert.equal(implementation.operations.iq_eq_topic_publish, false);
+  }
+  assert.equal(classifyPaths(['backend/content_assets/iq_public/topics/other/manifest.json']).operations.iq_eq_topic_publish, false);
+});

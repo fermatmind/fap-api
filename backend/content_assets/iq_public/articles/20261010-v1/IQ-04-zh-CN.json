@@ -1,0 +1,53 @@
+{
+  "page_id": "IQ-04",
+  "locale": "zh-CN",
+  "baseline_api_sha256": "e39cf8e813165692a75c158d7ff7adc67e11b87148f8dd5b142d88682b861229",
+  "candidate_sha256": "2640ead56d6487cc917161f560b372616aae0f02c83626b5b0b031a9e8531972",
+  "metadata": {
+    "title": "在线推理测试结果怎么读？题型、策略、状态与不确定性",
+    "description": "从四层解读一次作答，用同样18/30的合成对照区分报告字段、个人观察与解释假设，并找到可复盘的下一步。"
+  },
+  "faq_items": [
+    {
+      "question": "在线 IQ 测试分数能换算成百分位吗？",
+      "answer": "只有在工具公开了适用常模、计分方法和参照群体时，百分位才有可解释基础。当前公开资料不足时，不应自行换算。"
+    },
+    {
+      "question": "一次分数低需要立刻重测吗？",
+      "answer": "通常不需要立刻重复。先记录环境、题型和错误策略，避免把熟悉效应误认为更准确。"
+    },
+    {
+      "question": "为什么我在不同网站得到不同分数？",
+      "answer": "题目、难度、计分、常模、限时和呈现方式可能不同。相同名称不代表结果可以直接比较。"
+    },
+    {
+      "question": "能从错题看出具体认知缺陷吗？",
+      "answer": "不能仅凭普通在线测试诊断认知缺陷。错题可以用于策略复盘；存在真实健康或学习担忧时，应寻求适当专业评估。"
+    },
+    {
+      "question": "结果能预测学习或职业成功吗？",
+      "answer": "不能单独预测。现实结果还受知识、动机、机会、健康、资源、协作和长期行为影响。"
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "正确题数与正确率是成绩字段；总用时不能还原逐题过程，分组表现不能直接成为稳定类型。",
+      "url": "https://fermatmind.com/zh/articles/iq-test-narrative-portrait",
+      "read_scope": "已逐字读取冻结 research/current/IQ-04-zh-CN-api.json 的完整 article.content_md；另读 research/source-current/fap-web/lib/iq/presentation.ts 全文，核 correct、total、percentCorrect、durationMs 和 dimensions 的取值结构。",
+      "limitation": "源码快照不是生产运行证明；未读取真实用户、题目答案键或完整结果流程。18/30与个人日志均为合成教学预设，不声称页面实际展示这些案例数据。"
+    },
+    {
+      "claim": "重复测验可能受到练习与辅导影响，不能给费马指定重测效应或最佳间隔。",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+      "read_scope": "本角色实读 attachments/web-science-primary-addendum.json 内冻结的 PubMed 摘要；并读 research/source-supplement-01.md 的补证范围。",
+      "limitation": "仅摘要，组织与教育选择测验研究；未读论文全文，不外推费马效果量、最佳重测间隔或增智效果。"
+    }
+  ],
+  "unresolved": [
+    "当前生产题本绑定、完整结果页面显示及逐题记录能力未验收；候选不承诺存在逐题日志或跳题功能。",
+    "旧参考列表中的 Deary 全文及测验标准对应原段落未在本角色冻结输入中完整实读，因此去除其为本页案例或具体效果背书的概括。",
+    "未完成候选独立审稿、真实预览、双端QA或发布；只读宿主未落盘，未提交、推送、部署或操作CMS。",
+    "排名、超越知乎及三引擎前三未核实。"
+  ],
+  "state": "author_candidate_not_reviewed"
+}

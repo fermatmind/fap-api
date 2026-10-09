@@ -29,3 +29,6 @@ node_modules export-ignore
 node_modules/** export-ignore
 backend/node_modules export-ignore
 backend/node_modules/** export-ignore
+
+# Preserve the reviewed Markdown hard-break bytes in the exact IQ package.
+backend/content_assets/iq_public/articles/20261010-v1/IQ-04-en.md whitespace=-blank-at-eol

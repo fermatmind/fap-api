@@ -60,6 +60,21 @@ final class PromotionReceiptStore
             throw new DomainException('previous_receipt_contract_mismatch');
         }
 
+        if ($context->lane === 'W3' && in_array($context->subscope, ['IQ-PUBLIC-ARTICLES', 'IQ-EQ-TOPIC'], true)) {
+            if (($receipt['workflow_run_id'] ?? null) !== $context->workflowRunId
+                || ($receipt['workflow_run_attempt'] ?? null) !== $context->workflowRunAttempt
+                || ($receipt['executor_release_sha256'] ?? null) !== $context->executorReleaseSha256) {
+                throw new DomainException('iq_article_execution_identity_mismatch');
+            }
+            $digest = $receipt['receipt_content_sha256'] ?? '';
+            unset($receipt['receipt_content_sha256']);
+            if (! is_string($digest) || preg_match('/\A[a-f0-9]{64}\z/', $digest) !== 1
+                || ! hash_equals(hash('sha256', PromotionContextFactory::canonicalJson($receipt)), $digest)) {
+                throw new DomainException('iq_article_previous_receipt_digest_invalid');
+            }
+            $receipt['receipt_content_sha256'] = $digest;
+        }
+
         return ['receipt' => $receipt, 'sha256' => hash('sha256', $bytes), 'path' => $path];
     }
 }

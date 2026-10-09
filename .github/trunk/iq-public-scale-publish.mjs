@@ -38,6 +38,9 @@ export function recoveryFailure(execution, execute = request => transport(execut
     const result = JSON.parse(response.stdout ?? '');
     completed = response.status === 0 && result.ok === true && result.mode === 'recover'
       && result.source_commit === execution.request.source_commit
+      && result.workflow_run_id === execution.request.workflow_run_id && result.workflow_run_attempt === execution.request.workflow_run_attempt
+      && result.package_sha256 === execution.binding.package_sha256
+      && result.executor_release_sha256 === execution.binding.executor_release_sha256 && result.sanitized === true
       && ((result.restored === true && result.recovery_status === 'restored') || (result.restored === false && result.recovery_status === 'not_required'));
   } catch { /* Failed recovery keeps the release failed. */ }
   const error = new Error('IQ_PUBLICATION_FAILED');

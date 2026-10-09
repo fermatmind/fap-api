@@ -310,8 +310,20 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.iq_public_scale_checks == true
         working-directory: backend
         run: |
-          php artisan test tests/Unit/ContentPromotion/IqPublicEntryPackageTest.php tests/Unit/ContentPromotion/IqPublicEntryFrontendRevalidatorTest.php tests/Unit/ContentPromotion/IqPublicScalePromotionAdapterTest.php --no-ansi
-          node --test ../.github/trunk/iq-public-scale-online-qa.integration.mjs
+          php artisan test tests/Unit/ContentPromotion/IqPublicEntryPackageTest.php tests/Unit/ContentPromotion/IqPublicEntryFrontendRevalidatorTest.php tests/Unit/ContentPromotion/IqPublicScalePromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionBootstrapSignatureTest.php --no-ansi
+          node --test ../.github/trunk/iq-public-scale-online-qa.integration.mjs ../.github/trunk/iq-public-scale-publication.test.mjs
+      - name: Verify exact bilingual IQ Article package and publication failure paths
+        if: fromJSON(needs.classify.outputs.classification).operations.iq_public_articles_checks == true
+        working-directory: backend
+        run: |
+          php artisan test tests/Unit/ContentPromotion/IqPublicArticlePackageTest.php tests/Unit/ContentPromotion/IqPublicArticlePromotionAdapterTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/SEO/ArticleSeoServiceTest.php --no-ansi
+          node --test ../.github/trunk/iq-public-article-publication.test.mjs ../.github/trunk/iq-public-article-online-qa.test.mjs
+      - name: Verify exact bilingual IQ EQ Topic dependencies and publication failure paths
+        if: fromJSON(needs.classify.outputs.classification).operations.iq_eq_topic_checks == true
+        working-directory: backend
+        run: |
+          php artisan test tests/Unit/ContentPromotion/IqEqTopicPackageTest.php tests/Unit/ContentPromotion/IqEqTopicProjectionTest.php tests/Unit/ContentPromotion/IqEqTopicFaqProjectionTest.php tests/Unit/ContentPromotion/IqEqTopicPrerequisitesTest.php tests/Unit/ContentPromotion/IqEqTopicPromotionAdapterTest.php tests/Feature/V0_5/TopicsPublicApiTest.php --no-ansi
+          node --test ../.github/trunk/iq-eq-topic-publication.test.mjs ../.github/trunk/iq-eq-topic-online-qa.test.mjs
       - name: Execute changed PHP JS Python and Shell tests with inherited FEATURE inputs
         if: needs.classify.outputs.tests_changed == 'true'
         env:

@@ -1,0 +1,206 @@
+{
+  "schema": "iq.article_exact_payload_review.v1",
+  "scope": "IQ-02…06 frozen exact Article payloads; byte fidelity and title/excerpt/metadata reader promises",
+  "overall_decision": "PASS",
+  "saved": false,
+  "checks": {
+    "files_read": 30,
+    "index_hashes_match": true,
+    "content_md_utf8_byte_equal": true,
+    "faq_source_equal": true,
+    "faq_present_in_body": true,
+    "seo_source_equal": true,
+    "identity_equal": true,
+    "body_h1_count": 0,
+    "english_seo_limits_pass": true
+  },
+  "unverified_scope": [
+    "Full scientific source review and professional manuals",
+    "IQ-03 actual required-answer and next-question interaction",
+    "Runtime publisher implementation and production release binding",
+    "CMS/public API/SSR readback and structured FAQ extraction",
+    "Desktop/mobile visuals and link/CTA behavior",
+    "Indexability, technical SEO, rankings and business effects",
+    "FermatMind population norms, reliability and validity"
+  ],
+  "targets": [
+    {
+      "page_id": "IQ-02",
+      "locale": "zh-CN",
+      "body_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+      "candidate_json_sha256": "e120372bf9a7e60792e1923466349aa87ad5bbdddd43907447a3f316c54a0306",
+      "snapshot_json_sha256": "af1f562521068190f5042a5f228458b9a53f4531e9326af1921ff345b69f00ef",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-02-zh-CN.md:24",
+          "detail": "标题摘要承诺由分数、题型、常模及正式测验比较兑现；正确率、百分位和随机Beta明确区分，模拟计算及截断结果正确。正文、7条FAQ和SEO字段精确一致。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-02",
+      "locale": "en",
+      "body_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+      "candidate_json_sha256": "716d7f9b365eac9b91fcf5734aac1b29bebc57a24656cb5bacaac81fbeee966e",
+      "snapshot_json_sha256": "0a76110c1a181bb29383598bff55fb08474a7112d9ad016d5bd01164683b2556",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-02-en.md:96",
+          "detail": "英文独立解释原始成绩、百分比、模拟Beta和人群标准分；未将Beta121称为人口IQ，重测案例保留替代解释。正文、7条FAQ及SEO精确一致；SEO长度57/146。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "body_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+      "candidate_json_sha256": "481182c66049b8c680f494f8f52c33dc99f9fe345da3d32ca30257ea47e41c8c",
+      "snapshot_json_sha256": "ea663a4d3a47ff8848c5d1958c046e4c4ea1072c075393c2a7f4bda3a2a11782",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-03-zh-CN.md:3",
+          "detail": "30题、预计约20分钟、作答建议和结果限制兑现标题摘要；原创规则反例及18/30合成结果完整，独立常模与Beta显示承诺分开。正文、5条FAQ及SEO精确一致。"
+        },
+        {
+          "type": "unverified",
+          "location": "article-package-review-input-v1/IQ-03-zh-CN.md:47",
+          "detail": "先选择才能继续及全部30题必须作答的真实前端操作链未在允许源码冻结包中独立核实；本次PASS不覆盖实际交互。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "body_sha256": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
+      "candidate_json_sha256": "9aad77c68aec75784b736f1d3f04f4b6e2db44e503ed494f18a47a13fcec371e",
+      "snapshot_json_sha256": "1f9ca2a2d84aeb90c896fd7c107e2ea35fe1ab0bce8f030f19d76afe53bc3687",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-03-en.md:91",
+          "detail": "英文工具说明、合成结果和失败状态可独立理解；未承诺正式Raven、Mensa资格或结果必显示Beta。正文、5条FAQ及SEO精确一致；SEO长度50/160。"
+        },
+        {
+          "type": "unverified",
+          "location": "article-package-review-input-v1/IQ-03-en.md:47",
+          "detail": "Required-answer and next-question controls未在允许源码冻结包中独立核实；本次PASS不覆盖实际交互。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-04",
+      "locale": "zh-CN",
+      "body_sha256": "2640ead56d6487cc917161f560b372616aae0f02c83626b5b0b031a9e8531972",
+      "candidate_json_sha256": "835f0371284f9011f481ee36b2c329ca46a679d795474d8a5994667cfd3b5c3b",
+      "snapshot_json_sha256": "b04f6ebd28b2c65caf21f16f2167c5d029bf87cba45b3ba6cd8bc8027a90eaf4",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-04-zh-CN.md:15",
+          "detail": "四层解读及同样18/30的对照兑现标题摘要；报告数据、个人日志和因果假设分开，三案例包含验证、失败调整及禁止推断。正文、5条FAQ及SEO精确一致。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-04",
+      "locale": "en",
+      "body_sha256": "ec96c693dcfbfa5290839e23c19317e4a3bf31f6777ef6d7b854ec1f914745d6",
+      "candidate_json_sha256": "57c19fa7bc87b5ca88f5498f715e50e904896633f7007494b8a620837f3ee0a8",
+      "snapshot_json_sha256": "a459b1148c2ddc26d264e51ee99a7632ebb73f84e9043a04e32ab1be033b4f42",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-04-en.md:15",
+          "detail": "英文四层与虚构18/30比较完整、可理解，未从总分生成速度或稳定类型。正文、5条FAQ及SEO精确一致；SEO长度53/150。"
+        },
+        {
+          "type": "non_blocking_language",
+          "location": "article-package-review-input-v1/IQ-04-en.md:94",
+          "source_location": "article-package-review-input-v1/IQ-04-zh-CN.md:95",
+          "detail": "Most questions provide consistent reasoning的主体不自然，实际应指当事人对答案给出理由；上下文仍能理解，非实质阻断。",
+          "minimal_correction": "The person gives consistent reasons for most answers; difficult items take longer.",
+          "candidate_modified": false
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "zh-CN",
+      "body_sha256": "fac19ad660514ba97362a8f77eee501ec8c7d713d05b2511c3ae699ce7479a8e",
+      "candidate_json_sha256": "7423d68487e13c47f814dd2431ff32d6bd8ea3980de4a24d49bc759a1c6edd07",
+      "snapshot_json_sha256": "17c26ac83b67ceef86dc08d2e970d16cbdefa526e89098f6c7887d31c8644e19",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-05-zh-CN.md:73",
+          "detail": "四周编辑性安排、原创标签卡片反例、错误日志和真实学习复盘兑现标题摘要；明确未验证、不保证IQ或现实能力提升。正文、5条FAQ及SEO精确一致。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "en",
+      "body_sha256": "8f35bcc64c60c05e2e066f4cb817f3929f44bd7c03934e934ce6f3edde93f7d0",
+      "candidate_json_sha256": "fc38a3616ae1d498e8ce79d7673d05d3e2b93da060bcd7e119ed1ff0f7115e3e",
+      "snapshot_json_sha256": "a5df2f6f24ff767999e19626f162545bc4c6f3ef9f2ddd9cff0b11a999d2f035",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-05-en.md:148",
+          "detail": "英文练习、反例和失败调整完整；区分重复记忆、新题观察与迁移因果，没有把研究转成四周方案效果证明。正文、5条FAQ及SEO精确一致；SEO长度49/153。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-06",
+      "locale": "zh-CN",
+      "body_sha256": "0b2af518b7bc0d4f9406ca98aba2572fe87d4f604fb727753071071b1767c30c",
+      "candidate_json_sha256": "f1d4e03a1574057d7977e2a6ba563b45e754fcb9a4ae526fdb78d3c1de6904b4",
+      "snapshot_json_sha256": "39543acae5a304e5397fa046eb9b7d44511c1c83b80f8124994bf5b95134fa1b",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-06-zh-CN.md:37",
+          "detail": "一般测量知识兑现标题摘要；构念、任务、分数分开，虚构80%/115/84.1及误差区间可重算。正文、9条FAQ及SEO精确一致，未借其他工具验证本站。"
+        },
+        {
+          "type": "unverified",
+          "location": "article-package-review-input-v1/IQ-06-zh-CN.md:11",
+          "detail": "未在本轮完整重读Hampshire原研究及WAIS-5、Raven’s 2、ITC原始材料；PASS不能扩大为所有科学来源已重审。"
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-06",
+      "locale": "en",
+      "body_sha256": "b76ca07dbb70ff631a86980a8e2767f817bf43f112af8fd0fa85b87d0b3f0231",
+      "candidate_json_sha256": "10be858fdacaa1e6c1e69c529dc92239a0c47241b52b6988a4a436e79c6b16d0",
+      "snapshot_json_sha256": "988841d5cf9cd7f95155a7f13741d9eccc6701161cfad7183450f7bc4734fbbe",
+      "decision": "PASS",
+      "findings": [
+        {
+          "type": "verified",
+          "location": "article-package-review-input-v1/IQ-06-en.md:37",
+          "detail": "英文独立解释认知任务、参照及不确定性，虚构计算正确；文化、版本与正式评估路径兑现摘要。正文、9条FAQ及SEO精确一致；SEO长度52/145。"
+        },
+        {
+          "type": "unverified",
+          "location": "article-package-review-input-v1/IQ-06-en.md:11",
+          "detail": "未在本轮完整重读Hampshire原研究及WAIS-5、Raven’s 2、ITC原始材料；PASS不能扩大为所有科学来源已重审。"
+        }
+      ]
+    }
+  ]
+}

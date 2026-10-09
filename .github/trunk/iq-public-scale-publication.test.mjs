@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { readFileSync, writeFileSync, mkdtempSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { inspectPackage, packageSha256, isIqOnlyPromotionRegistration } from './iq-public-scale-package.mjs';
+import { inspectPackage, packageSha256, isIqOnlyPromotionRegistration, workflowSignature } from './iq-public-scale-package.mjs';
 import { classifyPaths } from './classify-paths.mjs';
 import { buildExecution, publish, recoveryFailure } from './iq-public-scale-publish.mjs';
 
@@ -41,7 +41,7 @@ test('a wrong exact SHA invokes only one recovery and never retries publication'
     modes.push(request.mode);
     return request.mode === 'publish'
       ? { status: 0, stdout: JSON.stringify({ ...success(), source_commit: 'c'.repeat(40) }) }
-      : { status: 0, stdout: JSON.stringify({ ok: true, mode: 'recover', source_commit: env.DEPLOY_SHA, restored: true, recovery_status: 'restored' }) };
+      : { status: 0, stdout: JSON.stringify({ ok: true, mode: 'recover', source_commit: env.DEPLOY_SHA, workflow_run_id:'12', workflow_run_attempt:1, package_sha256:packageSha256, executor_release_sha256:execution().binding.executor_release_sha256, sanitized:true, restored: true, recovery_status: 'restored' }) };
   }), error => error.message === 'IQ_PUBLICATION_FAILED' && error.receipt.recovery_completed === true);
   assert.deepEqual(modes, ['publish', 'recover']);
 });
@@ -66,7 +66,9 @@ test('only the exact IQ entry package selects publication; implementation-only c
   assert.equal(classifyPaths(['backend/content_packs/IQ_RAVEN/private.json']).operations.iq_public_scale_publish, false);
 });
 test('config exemption proves the exact IQ delta or the known unreleased EQ plus IQ delta', () => {
-  const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8');
+  const after = readFileSync(`${backend}/config/content_promotion.php`, 'utf8')
+    .replace("        'content_assets/iq_public/articles/20261010-v1',\n", '').replace(", 'IQ-PUBLIC-ARTICLES' => 'audit_compatible'", '')
+    .replace("        'content_assets/iq_public/topics/20261010-v1',\n", '').replace(", 'IQ-EQ-TOPIC' => 'audit_compatible'", '');
   const before = after.replace("        'content_assets/iq_public/entry/20261009-v1',\n", '').replace(", 'iq-public-scale' => 'audit_compatible'", '');
   assert.equal(isIqOnlyPromotionRegistration(before, after), true);
   const earlier = before.replace("        'content_assets/eq_public/candidate/20261009-new-articles',\n", '').replace(", 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'", '');
@@ -124,4 +126,13 @@ for (const started of [false, true]) test(`real CLI failure ${started ? 'after' 
     if (started) assert.equal(readFileSync(marker, 'utf8').trim().split('\n').length, 2);
     else assert.equal(receipt.recovery_status, 'not_required');
   } finally { rmSync(directory, { recursive: true, force: true }); }
+});
+
+test('entry HMAC changes with executor bytes and another recovery execution cannot authorize LKG',()=>{
+  const binding=inspectPackage(backend);const sign=b=>workflowSignature(b,env.CONTENT_PROMOTION_AUTOMATION_KEY,env.DEPLOY_SHA,'12',1);
+  assert.notEqual(sign(binding),sign({...binding,executor_release_sha256:'e'.repeat(64)}));
+  const good={ok:true,mode:'recover',source_commit:env.DEPLOY_SHA,workflow_run_id:'12',workflow_run_attempt:1,package_sha256:packageSha256,executor_release_sha256:binding.executor_release_sha256,sanitized:true,restored:true,recovery_status:'restored'};
+  assert.equal(recoveryFailure(execution(),()=>({status:0,stdout:JSON.stringify(good)})).receipt.recovery_completed,true);
+  for(const patch of [{workflow_run_id:'13'},{workflow_run_attempt:2},{package_sha256:'f'.repeat(64)},{executor_release_sha256:'e'.repeat(64)},{sanitized:false}])
+    assert.equal(recoveryFailure(execution(),()=>({status:0,stdout:JSON.stringify({...good,...patch})})).receipt.recovery_completed,false);
 });

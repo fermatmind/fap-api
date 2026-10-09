@@ -383,7 +383,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
             'executor_release_sha256' => str_repeat('b', 64), 'release_policy_sha256' => $policy,
             'workflow_signature' => hash_hmac('sha256', implode('|', [
                 'content-promotion-v2', $source, '12', '1', 'W6', IqPublicScalePromotionAdapter::SUBSCOPE,
-                IqPublicEntryPackage::SHA256, $policy, '2',
+                IqPublicEntryPackage::SHA256, $policy, '2', str_repeat('b', 64),
             ]), $key),
         ] as $field => $value) {
             config(['content_promotion.execution.'.$field => $value]);

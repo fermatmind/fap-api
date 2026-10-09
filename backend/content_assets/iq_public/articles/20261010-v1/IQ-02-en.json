@@ -1,0 +1,81 @@
+{
+  "page_id": "IQ-02",
+  "locale": "en",
+  "baseline_api_sha256": "8e010fed0696579da6b4d5eb43e6b1526851127c3eef0d246d8593d871a782b3",
+  "candidate_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+  "metadata": {
+    "title": "Are Online IQ Tests Accurate? Scores and Limits Explained",
+    "description": "Understand online IQ scores, reasoning tasks, and how they differ from formal intelligence assessments. Use results for reflection, not diagnosis."
+  },
+  "faq_items": [
+    {
+      "question": "Are Online IQ Tests Accurate?",
+      "answer": "Evaluate the specific instrument and intended use; online versus in-person delivery alone does not settle accuracy. FermatMind's current original 30-item form records particular matrix-reasoning performance. Its published random-simulation Beta does not support population IQ or percentile interpretations. Formal interpretation additionally requires applicable norms, standardized administration, and measurement evidence for the proposed use."
+    },
+    {
+      "question": "Is the FermatMind IQ Test a Formal Intelligence Assessment?",
+      "answer": "The online reasoning tasks described here should not be equated with a formal intelligence assessment. Matrix reasoning, pattern recognition, and abstract problem solving describe the tasks. Without applicable norms, scoring, and measurement evidence, do not interpret this attempt as a formal IQ or population ranking."
+    },
+    {
+      "question": "How Should IQ Scores Be Read?",
+      "answer": "Distinguish correct counts, percentage correct, simulated Beta, and standard scores supported by applicable norms. On this form, 18/30 means 60% correct. Eight correct answers yield Beta 121 under the published formula, not a population IQ of 121. Every correct count from 12 to 30 yields Beta 145, so it cannot reveal the correct count. Population percentiles require relevant norms and cannot be directly converted from percentage correct or Beta."
+    },
+    {
+      "question": "What Types of Questions Do IQ Tests Usually Include?",
+      "answer": "Intelligence assessments differ in scope; some include verbal comprehension, working memory, or processing-speed tasks. FermatMind's current original 30-item form focuses on visual matrices, pattern recognition, and abstract reasoning. It does not establish measurement of intelligence as a whole, and its item-group results are not validated ability subscales."
+    },
+    {
+      "question": "Can IQ Determine a Person's Ability?",
+      "answer": "One score cannot summarize every ability or determine personal worth. This site's result records particular reasoning-task performance and cannot independently support conclusions about career fit, future income, admission, hiring, or diagnosis. Interpretations supported by other intelligence assessments require their own instrument-specific and intended-use evidence; this site's limitations do not settle those questions."
+    },
+    {
+      "question": "How Are IQ and EQ Different?",
+      "answer": "IQ focuses more on reasoning-task, pattern-recognition, and abstract problem-solving performance. EQ focuses more on emotional awareness, regulation, relationship communication, and stress recovery. They observe different aspects, cannot replace each other, and cannot determine personal worth."
+    },
+    {
+      "question": "What Should You Do After an IQ Test?",
+      "answer": "Do not focus only on scores. First record which question types caused difficulty, then review solving strategies and your attention at the time. Short-cycle practice can help test whether the difficulty was simply unfamiliarity, and your learning goals can inform the next direction for practice."
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "The common mean-100, SD-15 scale requires applicable norms; percentage correct, percentiles, and measurement uncertainty have different meanings.",
+      "url": "https://www.123test.com/interpretation-of-an-iq-score/",
+      "read_scope": "Independently read the frozen original-page extract in attachments/web-123test-read.json, L61–95, particularly L76–90; also read the host's current full-page coverage record in research/current-source-notes.md.",
+      "limitation": "An English explanatory baseline, not validation of FermatMind. Classification labels, extreme-score population calculations, and commercial accuracy claims were not adopted. This author did not independently reread the original page's later sections."
+    },
+    {
+      "claim": "Age, language, target-population equivalence, norms, and measurement evidence must be evaluated for the particular version.",
+      "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+      "read_scope": "Read the frozen source record in research/current-source-notes.md, documenting host coverage of PC-2/PC-3 on pages 8–9, C-2 on pages 17–18, C-3 on page 21, and related explanations.",
+      "limitation": "This author read the frozen coverage record, not all 41 original PDF pages. No FermatMind age range, fairness finding, standard error, or confidence interval is inferred."
+    },
+    {
+      "claim": "The current original form has 30 one-point items; Beta uses a random-response simulation baseline, with 0→62, 8→121, and 12–30→145.",
+      "url": "https://fermatmind.com/en/tests/iq-test-intelligence-quotient-assessment",
+      "read_scope": "Read the English entry's frozen SSR text and the complete frozen IqBetaStandardScore.php; independently recalculated six inputs: 0, 8, 11, 12, 18, and 30.",
+      "limitation": "Supports the frozen published algorithm, not live production release binding or a promise that the result UI displays Beta. No answer keys or real attempts were read, and no scoring service was executed."
+    },
+    {
+      "claim": "Simulated Beta does not establish separately presented normative scores; item-group percentages describe this attempt's grouped items.",
+      "url": "https://fermatmind.com/en/articles/iq-test-tool-guide",
+      "read_scope": "Implementation evidence is the frozen presentation.ts:90–139 and the scan's documented result call chain. The public guide URL supplies a reader continuation path.",
+      "limitation": "The guide itself is not UI behavior evidence. The frontend separately checks normative_reasoning eligibility, reference population, and versions; the code does not establish that applicable population norms or a qualifying result currently exist."
+    },
+    {
+      "claim": "Retest improvement may involve practice effects; two results do not establish general-intelligence growth or an ideal retest interval.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+      "read_scope": "Read the frozen abstract-coverage record in research/source-supplement-01.md, which explicitly records unsuccessful full-PDF retrieval.",
+      "limitation": "The research concerns cognitive-test retesting in organizational and educational selection. No effect size, interval, or intervention finding is transferred to FermatMind. Alex's scenario and next steps are synthetic teaching and observation suggestions."
+    }
+  ],
+  "unresolved": [
+    "English article 197/revision 768 is publicly readable in the frozen package but is_indexable=false and SSR noindex; private qualification and hold reasons remain unverified. This proposal does not change those states.",
+    "Live result presentation, eligible normative data, and production release binding were not established; Beta display is deliberately not promised.",
+    "The Markdown has seven FAQ items, while the current answer and structured FAQ projections primarily contain the first six. Retain the existing extraction and schema eligibility rules, and verify wording consistency for the items actually projected.",
+    "Some scientific evidence is available here only as frozen source-coverage records. No complete original-paper, test-manual, or guideline rereading is claimed.",
+    "Only read-only author work was performed. No files, CMS records, product assets, permissions, schedules, or progress records were modified.",
+    "Fresh review, complete replacement validation, real candidate API/SSR and device QA, publication, and ranking acceptance remain outstanding."
+  ],
+  "state": "author_candidate_not_reviewed"
+}

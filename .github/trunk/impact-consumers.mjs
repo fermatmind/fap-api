@@ -1,7 +1,9 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
 import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
-import { isIqOnlyPromotionRegistration } from './iq-public-scale-package.mjs';
+import { isIqOnlyPromotionRegistration, isIqOnlyContextFactoryChange } from './iq-public-scale-package.mjs';
+import { isIqArticleOnlyPromotionRegistration, isIqArticleOnlyContextFactoryChange } from './iq-public-article-package.mjs';
+import { isIqEqTopicOnlyPromotionRegistration, isIqEqTopicOnlyContextFactoryChange } from './iq-eq-topic-package.mjs';
 // Resolve actual PHP consumers through App symbols and literal configuration reads.
 // Dynamic container bindings, routes, schema, bootstrap and dependency inputs are shared.
 export function phpConsumers(root = process.cwd()) {
@@ -44,13 +46,20 @@ export function phpConsumers(root = process.cwd()) {
 }
 export function selectOperations(paths, root=process.cwd(), range={}) {
   let publicOnlyRegistration=false;
+  let iqArticleSignatureOnly=false;
   if (paths.includes('backend/config/content_promotion.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
     try {
       const read=sha=>execFileSync('git',['show',`${sha}:backend/config/content_promotion.php`],{cwd:root,encoding:'utf8'});
-      publicOnlyRegistration=isEqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqOnlyPromotionRegistration(read(range.base),read(range.head));
+      publicOnlyRegistration=isEqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqArticleOnlyPromotionRegistration(read(range.base),read(range.head))||isIqEqTopicOnlyPromotionRegistration(read(range.base),read(range.head));
     } catch { /* Indeterminate changes retain every conservative private consumer. */ }
   }
-  const privatePaths=paths.filter(path=>!(publicOnlyRegistration&&path==='backend/config/content_promotion.php'));
+  if (paths.includes('backend/app/Services/ContentPromotion/PromotionContextFactory.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
+    try {
+      const read=sha=>execFileSync('git',['show',`${sha}:backend/app/Services/ContentPromotion/PromotionContextFactory.php`],{cwd:root,encoding:'utf8'});
+      iqArticleSignatureOnly=isIqOnlyContextFactoryChange(read(range.base),read(range.head))||isIqArticleOnlyContextFactoryChange(read(range.base),read(range.head))||isIqEqTopicOnlyContextFactoryChange(read(range.base),read(range.head));
+    } catch { /* Unknown Factory changes retain all private consumers. */ }
+  }
+  const privatePaths=paths.filter(path=>!(publicOnlyRegistration&&path==='backend/config/content_promotion.php') && !(iqArticleSignatureOnly&&path==='backend/app/Services/ContentPromotion/PromotionContextFactory.php'));
   const graph=phpConsumers(root);
   const unknown=paths.some(p=>/^backend\/app\/.*\.php$/.test(p)&&!graph.sources.has(p));
   const shared=unknown||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));

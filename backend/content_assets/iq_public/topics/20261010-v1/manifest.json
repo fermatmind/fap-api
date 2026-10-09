@@ -1,0 +1,79 @@
+{
+  "schema": "fermatmind.iq_eq_topic_package.v1",
+  "package": "content_assets/iq_public/topics/20261010-v1",
+  "scope_count": 2,
+  "rows": [
+    {
+      "page_id": "SH-01",
+      "identity": {
+        "org_id": 0,
+        "slug": "iq-eq",
+        "locale": "zh-CN"
+      },
+      "body_file": "SH-01-zh-CN.md",
+      "metadata_file": "SH-01-zh-CN.json",
+      "snapshot_file": "SH-01-zh-CN.snapshot.json",
+      "body_sha256": "223b43e79eb523d75f3060822d853b2c15956543df219cfab927e0328226739d",
+      "metadata_sha256": "afc3fd61850fb886b306e34726d2d73f00ff6845769862c1338cc53d48d88b8f",
+      "snapshot_sha256": "b03c952541d1b4517030116618bc8cbb5cc458e326342a8341c7cdf4a3677a4f"
+    },
+    {
+      "page_id": "SH-01",
+      "identity": {
+        "org_id": 0,
+        "slug": "iq-eq",
+        "locale": "en"
+      },
+      "body_file": "SH-01-en.md",
+      "metadata_file": "SH-01-en.json",
+      "snapshot_file": "SH-01-en.snapshot.json",
+      "body_sha256": "3ad3cb84913a24f02d877b0d16537bacfa6d82b1df0630572e8ad2dfdaf07976",
+      "metadata_sha256": "4b066a30af8454db16f4f074fa8eec3b9596850b70cd0f6e4c78f7a84cbe3457",
+      "snapshot_sha256": "198c34edc71353d7948fd858342b587633c4ead0af18076764d4c84b95420927"
+    }
+  ],
+  "files": [
+    {
+      "path": "SH-01-en.json",
+      "sha256": "4b066a30af8454db16f4f074fa8eec3b9596850b70cd0f6e4c78f7a84cbe3457",
+      "bytes": 5383
+    },
+    {
+      "path": "SH-01-en.md",
+      "sha256": "3ad3cb84913a24f02d877b0d16537bacfa6d82b1df0630572e8ad2dfdaf07976",
+      "bytes": 8533
+    },
+    {
+      "path": "SH-01-en.snapshot.json",
+      "sha256": "198c34edc71353d7948fd858342b587633c4ead0af18076764d4c84b95420927",
+      "bytes": 12792
+    },
+    {
+      "path": "SH-01-zh-CN.json",
+      "sha256": "afc3fd61850fb886b306e34726d2d73f00ff6845769862c1338cc53d48d88b8f",
+      "bytes": 5007
+    },
+    {
+      "path": "SH-01-zh-CN.md",
+      "sha256": "223b43e79eb523d75f3060822d853b2c15956543df219cfab927e0328226739d",
+      "bytes": 7437
+    },
+    {
+      "path": "SH-01-zh-CN.snapshot.json",
+      "sha256": "b03c952541d1b4517030116618bc8cbb5cc458e326342a8341c7cdf4a3677a4f",
+      "bytes": 11441
+    },
+    {
+      "path": "exact-payload-review.json",
+      "sha256": "1428ba0d38076cb513636bbbf2668b4b9120ec9c7b73f594bd53f037922172d6",
+      "bytes": 1256
+    }
+  ],
+  "boundaries": [
+    "copy-only fixed org0 iq-eq bilingual identity",
+    "preserve publication/indexability/robots/canonical/media/foreign drafts",
+    "require actual published IQ/EQ reading targets before public write",
+    "no search submission"
+  ],
+  "package_sha256": "ad0e2d75cdee2f969582620fb6157267dc661c688122900a12ca4a4f7359f2af"
+}

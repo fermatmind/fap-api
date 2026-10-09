@@ -1,0 +1,70 @@
+# IQ and EQ: Differences, Test Choices and Reading Paths
+
+IQ and EQ address different questions. Cognitive assessments use tasks to examine aspects of cognitive performance. Emotional-intelligence measures concern emotional information and related behaviour, but their methods vary: performance tasks, self-report and scenario judgments provide different kinds of evidence.
+
+FermatMind’s current visual-reasoning exercise records performance on 30 original questions. EQ-60 organizes your self-descriptions across 60 items. Their numbers are not interchangeable, do not establish who is better, and cannot be combined into a stable personality type or career-ability rank.
+
+## Compare the methods before choosing a test
+
+| Question | FermatMind visual reasoning | FermatMind EQ-60 |
+|---|---|---|
+| What do you do? | Compare visual relationships and choose answers | Describe how you tend to feel and act |
+| Where does the information come from? | Performance on this set of tasks | Your descriptions in this response session |
+| What is covered? | 30 original visual matrix questions | Self-Awareness, Emotion Regulation, Empathy and Relationship Management |
+| How should results be approached? | Start with number correct and accuracy; interpret Beta separately | Check fields and references, then consider dimensions, response quality and real events |
+| What is not established? | Complete intelligence, a fixed cognitive type or a career ceiling | Observed communication skill, other people’s feelings or job performance |
+| What helps next? | Check a strategy on new material | Check a self-perception against an event and another person’s confirmation |
+
+EQ-60’s four dimensions are its current interpretation framework. Self-Awareness concerns noticing emotions and triggers; Emotion Regulation concerns pausing, recovering and choosing a response; Empathy concerns others’ possible feelings and perspectives; Relationship Management concerns expression, collaboration, boundaries and repair.
+
+EQ-60 is not MSCEIT or a validated emotional-ability test. Its content evidence is preliminary and its norms provisional; internal consistency, retest, structure, external associations and language/group equivalence still require validation. Self-report can support reflection without proving behaviour. Believing that you understand someone is different from checking that you understood them on a particular occasion.
+
+## Similar-looking numbers may have different references
+
+A visual-task result of 18/30 means 60% correct. The published Beta calculation uses a simulated random-response baseline, not population IQ norms. Its existence also does not promise that Beta is displayed in the current report interface.
+
+If an EQ measure uses POMP, that describes position within its possible score range, not how many people scored lower. For a generic fictional scale ranging from 20 to 100, a score of 80 has a range position of (80−20)÷(100−20)×100% = 75%. This is not percentile 75 and is not a statement of FermatMind’s current formula.
+
+A standard score or percentile needs its own reference, version and status. An EQ standard score is not an IQ. A provisional reference does not, without further evidence, establish a representative population rank. Do not add, subtract or compare these numbers as if they measured one common ability.
+
+## One delayed project, two questions to investigate
+
+This is a synthetic scenario, not user data, an assessment item or evidence of an intervention’s effect.
+
+During a project review, Maya notices that requirements approval, production and acceptance were estimated as parallel activities even though they must happen in sequence. The schedule is too short. After Maya says, “Your estimate was wrong,” a colleague stops explaining the constraints. Maya considers herself understanding, but has not checked what the silence means.
+
+First separate observations from interpretations. The dependency estimate is wrong; the colleague stopped contributing to the conversation. The first problem calls for checking assumptions, dependencies and durations. The second calls for checking reactions, wording and guesses about the other person. Neither establishes low IQ or low EQ.
+
+Consider alternatives. The estimate might reflect missing requirements, limited technical knowledge or time pressure. Silence might reflect fatigue, a need to think, power differences or concern about blame. Those explanations lead to different adjustments, and a test score cannot choose among them.
+
+Work on both questions. Mark which activities must occur in sequence and which assumptions remain unknown. Then ask, “Is your main concern the deadline, resources, responsibility, or something else?” Let the colleague correct the interpretation before agreeing on one concrete change, such as a revised acceptance window or a named requirements owner. Understanding a constraint does not require Maya to accept work she cannot reasonably take on.
+
+Review the outcome: does the new schedule withstand dependency checks and counterexamples, does the colleague confirm that the concern was understood, and are responsibilities clearer? If not, examine resources, authority, task definition or timing rather than simply retaking tests. Where humiliation, retaliation or safety concerns are present, do not expect someone to solve the situation by showing more EQ; seek appropriate support and channels.
+
+## Five ways to continue
+
+### 1. Explore a tool
+
+Choose the [original 30-question visual reasoning exercise](/en/tests/iq-test-intelligence-quotient-assessment) to experience visual rule-finding. Choose the [60-item emotional and relational self-report](/en/tests/eq-test-emotional-intelligence-assessment) to organize self-perceptions. Choose by the question you want to explore, not by the prospect of a higher number.
+
+### 2. Understand a result
+
+For cognitive-task numbers, start with [IQ scores and interpretation limits](/en/articles/iq-test-score-and-limits-explained), distinguishing accuracy, Beta and population references. For EQ, start with the [60-item emotional and relational self-report entry](/en/tests/eq-test-emotional-intelligence-assessment) to identify the dimensions, self-report method and scoring explanation. Any displayed percentile needs its actual reference information; POMP cannot supply it.
+
+### 3. Understand scope and concepts
+
+Read the [FermatMind IQ test guide](/en/articles/iq-test-tool-guide) for the distinction between this visual exercise and a comprehensive cognitive assessment. Read the [60-item emotional and relational self-report entry](/en/tests/eq-test-emotional-intelligence-assessment) for its method and use boundaries, then use the comparison here to distinguish self-description from performance measurement. These are existing tool-level routes; the essential comparison is explained on this page.
+
+### 4. Practise an observable action
+
+Use [IQ practice and retesting](/en/articles/iq-test-growth-guide) to examine rule-checking and counterexamples. For emotional and relational reflection, use the project example on this page and focus on one event: name a feeling, check a concern, make a clear request or state a boundary. Evaluate changes with new material and real feedback, not a score increase alone.
+
+### 5. Reflect on work
+
+Use the project example above to review a real task. Record dependencies, resources, wording and colleague feedback separately, then choose one observable adjustment. Neither FermatMind result is for hiring, promotion, performance appraisal or role screening, and neither establishes career success. Begin with the work and its conditions, then seek relevant evidence.
+
+## There is no universal importance ratio
+
+Reasoning and emotional activity can both contribute within the same situation. Dividing them into “IQ handles tasks; EQ handles people” is too simple. The relevant evidence depends on the problem. There is no universal 20%-IQ/80%-EQ formula for success, and these two results cannot produce a personal probability of success.
+
+For the distinction between emotional-ability measurement and self-report, see [Mayer, Salovey and Caruso’s theoretical review](https://aec6905spring2013.wordpress.com/wp-content/uploads/2013/01/mayersaloveycaruso-2004.pdf). It supplies a methodological distinction, not validation for EQ-60. For matching interpretations to uses, see the [testing standards](https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf).

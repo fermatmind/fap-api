@@ -1,0 +1,108 @@
+{
+  "schema": "fermatmind.iq_public_article_package.v1",
+  "boundaries": {
+    "preserve_existing_indexability": true,
+    "preserve_foreign_working_revisions": true,
+    "new_source_pair_indexable": false,
+    "search_submission": false,
+    "private_payload_write": false,
+    "eq_write": false
+  },
+  "targets": [
+    {
+      "page_id": "IQ-02",
+      "locale": "zh-CN",
+      "slug": "iq-test-score-and-limits-explained",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-02",
+      "locale": "en",
+      "slug": "iq-test-score-and-limits-explained",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "zh-CN",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-03",
+      "locale": "en",
+      "slug": "iq-test-tool-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-04",
+      "locale": "zh-CN",
+      "slug": "iq-test-narrative-portrait",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-04",
+      "locale": "en",
+      "slug": "iq-test-narrative-portrait",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "zh-CN",
+      "slug": "iq-test-growth-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-05",
+      "locale": "en",
+      "slug": "iq-test-growth-guide",
+      "operation": "existing_public_update"
+    },
+    {
+      "page_id": "IQ-06",
+      "locale": "zh-CN",
+      "slug": "what-is-iq-and-how-it-is-measured",
+      "operation": "new_source_pair"
+    },
+    {
+      "page_id": "IQ-06",
+      "locale": "en",
+      "slug": "what-is-iq-and-how-it-is-measured",
+      "operation": "new_source_pair"
+    }
+  ],
+  "files": {
+    "IQ-02-en.json": "716d7f9b365eac9b91fcf5734aac1b29bebc57a24656cb5bacaac81fbeee966e",
+    "IQ-02-en.md": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+    "IQ-02-en.snapshot.json": "0a76110c1a181bb29383598bff55fb08474a7112d9ad016d5bd01164683b2556",
+    "IQ-02-zh-CN.json": "e120372bf9a7e60792e1923466349aa87ad5bbdddd43907447a3f316c54a0306",
+    "IQ-02-zh-CN.md": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+    "IQ-02-zh-CN.snapshot.json": "af1f562521068190f5042a5f228458b9a53f4531e9326af1921ff345b69f00ef",
+    "IQ-03-en.json": "9aad77c68aec75784b736f1d3f04f4b6e2db44e503ed494f18a47a13fcec371e",
+    "IQ-03-en.md": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
+    "IQ-03-en.snapshot.json": "1f9ca2a2d84aeb90c896fd7c107e2ea35fe1ab0bce8f030f19d76afe53bc3687",
+    "IQ-03-zh-CN.json": "481182c66049b8c680f494f8f52c33dc99f9fe345da3d32ca30257ea47e41c8c",
+    "IQ-03-zh-CN.md": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+    "IQ-03-zh-CN.snapshot.json": "ea663a4d3a47ff8848c5d1958c046e4c4ea1072c075393c2a7f4bda3a2a11782",
+    "IQ-04-en.json": "57c19fa7bc87b5ca88f5498f715e50e904896633f7007494b8a620837f3ee0a8",
+    "IQ-04-en.md": "ec96c693dcfbfa5290839e23c19317e4a3bf31f6777ef6d7b854ec1f914745d6",
+    "IQ-04-en.snapshot.json": "a459b1148c2ddc26d264e51ee99a7632ebb73f84e9043a04e32ab1be033b4f42",
+    "IQ-04-zh-CN.json": "835f0371284f9011f481ee36b2c329ca46a679d795474d8a5994667cfd3b5c3b",
+    "IQ-04-zh-CN.md": "2640ead56d6487cc917161f560b372616aae0f02c83626b5b0b031a9e8531972",
+    "IQ-04-zh-CN.snapshot.json": "b04f6ebd28b2c65caf21f16f2167c5d029bf87cba45b3ba6cd8bc8027a90eaf4",
+    "IQ-05-en.json": "fc38a3616ae1d498e8ce79d7673d05d3e2b93da060bcd7e119ed1ff0f7115e3e",
+    "IQ-05-en.md": "8f35bcc64c60c05e2e066f4cb817f3929f44bd7c03934e934ce6f3edde93f7d0",
+    "IQ-05-en.snapshot.json": "a5df2f6f24ff767999e19626f162545bc4c6f3ef9f2ddd9cff0b11a999d2f035",
+    "IQ-05-zh-CN.json": "7423d68487e13c47f814dd2431ff32d6bd8ea3980de4a24d49bc759a1c6edd07",
+    "IQ-05-zh-CN.md": "fac19ad660514ba97362a8f77eee501ec8c7d713d05b2511c3ae699ce7479a8e",
+    "IQ-05-zh-CN.snapshot.json": "17c26ac83b67ceef86dc08d2e970d16cbdefa526e89098f6c7887d31c8644e19",
+    "IQ-06-en.json": "10be858fdacaa1e6c1e69c529dc92239a0c47241b52b6988a4a436e79c6b16d0",
+    "IQ-06-en.md": "b76ca07dbb70ff631a86980a8e2767f817bf43f112af8fd0fa85b87d0b3f0231",
+    "IQ-06-en.snapshot.json": "988841d5cf9cd7f95155a7f13741d9eccc6701161cfad7183450f7bc4734fbbe",
+    "IQ-06-zh-CN.json": "f1d4e03a1574057d7977e2a6ba563b45e754fcb9a4ae526fdb78d3c1de6904b4",
+    "IQ-06-zh-CN.md": "0b2af518b7bc0d4f9406ca98aba2572fe87d4f604fb727753071071b1767c30c",
+    "IQ-06-zh-CN.snapshot.json": "39543acae5a304e5397fa046eb9b7d44511c1c83b80f8124994bf5b95134fa1b",
+    "iq-all-source-fresh-result.json": "2370e3909608fad1a3ff5a9b2af52e607d4a14bd80f3c880ae8b1f1132074ca0",
+    "iq-article-exact-payload-review.json": "bbe2528e70f6d58d59a4cb34ba2e27f1e903ddce4d92b5e164bcd7ad358768e3",
+    "iq-publication-three-fresh-result.json": "acb4d104ac7831dddb02efd6a62563fa6aa4668b1024dd40ab723cfe197c2f62"
+  }
+}

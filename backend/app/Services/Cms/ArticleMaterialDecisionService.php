@@ -106,9 +106,11 @@ final class ArticleMaterialDecisionService
             throw new InvalidArgumentException('Article must be private before recording unpublish material state.');
         }
 
+        $evidenceRef = $this->evidenceRef($evidenceRef ?? 'article:'.$article->id.':unpublish');
         $latest = $this->latestForUpdate($article);
         if ($latest instanceof ContentMaterialDecision
-            && (string) $latest->publication_state === 'unpublished') {
+            && (string) $latest->publication_state === 'unpublished'
+            && (string) $latest->evidence_ref === $evidenceRef) {
             return $latest;
         }
 
@@ -130,7 +132,7 @@ final class ArticleMaterialDecisionService
             'decision_code' => $knownFingerprint ? 'unpublish' : 'unpublish_hold_unknown_legacy_fingerprint',
             'material_changed' => $knownFingerprint,
             'material_changed_at' => $knownFingerprint ? $effectiveAt : null,
-            'evidence_ref' => $this->evidenceRef($evidenceRef ?? 'article:'.$article->id.':unpublish'),
+            'evidence_ref' => $evidenceRef,
             'decision_key' => $this->decisionKey(
                 $article,
                 $latest?->id,

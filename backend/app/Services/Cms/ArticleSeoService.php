@@ -581,7 +581,7 @@ final class ArticleSeoService
 
         $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
         $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
-        $faqLimit = 8;
+        $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, 8);
 
         $mainEntity = [];
         foreach ($faqItems as $index => $item) {

@@ -1,0 +1,66 @@
+{
+  "page_id": "IQ-05",
+  "locale": "en",
+  "baseline_api_sha256": "af2282b59e463fd3e9aed989bc0949f29efaf7bdce79bdac53ff4a0b8eebabd3",
+  "candidate_sha256": "8f35bcc64c60c05e2e066f4cb817f3929f44bd7c03934e934ce6f3edde93f7d0",
+  "metadata": {
+    "title": "IQ Test Practice and Review: A Four-Week Schedule",
+    "description": "Use an original rule example, counterexamples, error logs, and an adjustable four-week schedule to review strategies in new materials and learning tasks."
+  },
+  "faq_items": [
+    {
+      "question": "Can Four Weeks of Training Raise IQ?",
+      "answer": "This four-week schedule has not been validated for effectiveness and does not guarantee an IQ increase. You can record strategy use, specific errors, and performance on similar new items, but those personal observations do not by themselves establish transfer, a training cause, or increased overall intelligence."
+    },
+    {
+      "question": "How Long Should I Practice Each Day?",
+      "answer": "Use small amounts that do not noticeably affect study, work, or rest. A fixed frequency and high-quality reviews are usually easier to observe than large amounts of practice in one session."
+    },
+    {
+      "question": "Should I Repeat the Same Test?",
+      "answer": "Using the same question bank to demonstrate improvement is not recommended because memory and familiarity effects interfere with judgments. Use lawfully obtained, permitted practice with similar but unused materials, and record conditions and reasoning. Better performance on new materials still does not establish transfer or increased intelligence from a personal before-and-after comparison alone."
+    },
+    {
+      "question": "If My Score Does Not Improve, Has Training Failed?",
+      "answer": "Not necessarily. First examine error types, strategy execution, and consistency. If these also do not improve, adjust strategies or stop rather than blaming yourself."
+    },
+    {
+      "question": "Can Children or Students Follow This Training?",
+      "answer": "This article presents general learning strategies, not an educational or clinical program. Guardians and appropriate education professionals should choose tools for minors based on actual needs. Online results must not be used to label children's ability."
+    }
+  ],
+  "source_bindings": [
+    {
+      "claim": "The existing schedule and fictional metrics remain editorial examples; the added exercise tests candidates against supplied evidence rather than teaching test-bank answers.",
+      "url": "https://fermatmind.com/en/articles/iq-test-growth-guide",
+      "read_scope": "独立完整读取 research/current/IQ-05-en-api.json 的 article.content_md，并核冻结英文SEO字段与SSR文字。英文教学和现实学习段落为本轮独立组织的自拟内容。",
+      "limitation": "不是中文验收继承；未验证该安排效果。无真实用户数据，无本站或竞品答案键读取。"
+    },
+    {
+      "claim": "Working-memory evidence cannot validate this matrix-practice schedule or rule out all learning.",
+      "url": "https://discovery.ucl.ac.uk/id/eprint/10120081/1/1745691616635612.pdf",
+      "read_scope": "本角色读取 research/current-source-notes.md 的方法423–496行、讨论933–1012行及摘要范围概括；本角色没有原PDF对应段落。",
+      "limitation": "仅用于限制跨任务外推，不声称作者原文全文实读，不给机制或效果量。"
+    },
+    {
+      "claim": "Task improvement, similar untrained tasks, and real-world outcomes require separate observations; individual gains alone do not establish training causation.",
+      "url": "https://doi.org/10.1177/1529100616661983",
+      "read_scope": "本角色读取 research/source-supplement-01.md 的宿主概括；宿主记录原PDF消费者建议与设计限制5831–5901行已读，本角色未收到这些原段落。",
+      "limitation": "不声称本角色阅读全文；限于输入概括的设计边界，不为四周方案背书，不写公司、机制或效果量结论。"
+    },
+    {
+      "claim": "Retesting may be affected by practice and coaching, without establishing a FermatMind interval or gain.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+      "read_scope": "实读 attachments/web-science-primary-addendum.json 中冻结的完整原研究摘要和 research/source-supplement-01.md。",
+      "limitation": "组织及教育选择测验，摘要范围；不能转为本页练习效果或增智保证。"
+    }
+  ],
+  "unresolved": [
+    "作者未直接读到Simons与S4对应方法、限制原段落；source_bindings明确区分宿主读取记录和本角色读取。直接原文核查要求仍需补包后复核。",
+    "旧 article.title 位于正文之外，宿主需同步H1和SEO标题；不要只更新SEO而保留四周保证改善式H1。",
+    "逐题计时与跳题仅限具备这些条件的外部练习，不是费马实际功能承诺。",
+    "英文noindex原因、当前私有working revision与发布资格未核；本提案不修改资格、robots、slug或schema。",
+    "未落盘、未独立审稿、未完成候选预览、双端QA或发布，未提交推送部署；英文排名未核实。"
+  ],
+  "state": "author_candidate_not_reviewed"
+}

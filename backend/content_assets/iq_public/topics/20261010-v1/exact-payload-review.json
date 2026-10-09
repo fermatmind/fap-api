@@ -1,0 +1,33 @@
+{
+  "schema": "fermatmind.iq_eq_topic_exact_review.v1",
+  "approval_kind": "verified_native_professional_candidate_review",
+  "reviewer_role": "fm_independent_reviewer",
+  "source_native_result_sha256": "26056de61d0ff6a603bf4badbc4ff8905ddf8d173e6de08bb6a848b6a115bb39",
+  "scope": "SH-01 exact zh-CN/en text projection only; no runtime or production approval",
+  "rows": [
+    {
+      "page_id": "SH-01",
+      "identity": {
+        "org_id": 0,
+        "slug": "iq-eq",
+        "locale": "zh-CN"
+      },
+      "decision": "PASS",
+      "body_sha256": "223b43e79eb523d75f3060822d853b2c15956543df219cfab927e0328226739d",
+      "metadata_sha256": "afc3fd61850fb886b306e34726d2d73f00ff6845769862c1338cc53d48d88b8f",
+      "snapshot_sha256": "b03c952541d1b4517030116618bc8cbb5cc458e326342a8341c7cdf4a3677a4f"
+    },
+    {
+      "page_id": "SH-01",
+      "identity": {
+        "org_id": 0,
+        "slug": "iq-eq",
+        "locale": "en"
+      },
+      "decision": "PASS",
+      "body_sha256": "3ad3cb84913a24f02d877b0d16537bacfa6d82b1df0630572e8ad2dfdaf07976",
+      "metadata_sha256": "4b066a30af8454db16f4f074fa8eec3b9596850b70cd0f6e4c78f7a84cbe3457",
+      "snapshot_sha256": "198c34edc71353d7948fd858342b587633c4ead0af18076764d4c84b95420927"
+    }
+  ]
+}

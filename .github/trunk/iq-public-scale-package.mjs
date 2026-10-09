@@ -59,7 +59,7 @@ export function inspectPackage(backendRoot) {
 }
 export function workflowSignature(binding, key, source, run, attempt) {
   if (typeof key !== 'string' || key.length < 32 || !/^[a-f0-9]{40}$/.test(source) || !/^[1-9][0-9]*$/.test(String(run)) || attempt !== 1) throw new Error('IQ_WORKFLOW_IDENTITY_INVALID');
-  const material = ['content-promotion-v2', source, run, attempt, binding.lane, binding.subscope, binding.package_sha256, binding.release_policy_sha256, binding.expected_row_count].join('|');
+  const material = ['content-promotion-v2', source, run, attempt, binding.lane, binding.subscope, binding.package_sha256, binding.release_policy_sha256, binding.expected_row_count, binding.executor_release_sha256].join('|');
   return createHmac('sha256', key).update(material).digest('hex');
 }
 
@@ -75,4 +75,14 @@ export function isIqOnlyPromotionRegistration(before, after) {
   // separately proven registration delta may accompany this exact IQ delta.
   const withoutIq = after.replace(addedRoot, root).replace(addedLane, lane);
   return addIq(withoutIq) === after && isEqOnlyPromotionRegistration(before, withoutIq);
+}
+
+export function isIqOnlyContextFactoryChange(before, after) {
+  const addition = `        // The IQ entry executor contract binds its exact implementation bytes.
+        // Existing lanes retain their established signature wire format.
+        if ($lane === 'W6' && $subscope === 'iq-public-scale') {
+            $signatureMaterial .= '|'.$executorReleaseSha256;
+        }
+`;
+  return !before.includes(addition) && after.includes(addition) && after.replace(addition, '') === before;
 }

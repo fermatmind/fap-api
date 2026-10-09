@@ -18,6 +18,7 @@ use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
+use App\Services\Cms\IqPublicArticleFaqProjection;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -558,6 +559,7 @@ class ArticleController extends Controller
             (int) $article->id,
             (int) ($article->published_revision_id ?? 0),
         ) ? 8 : 6;
+        $faqLimit = IqPublicArticleFaqProjection::limit($article, $metadata, $faqLimit);
         $blocks = [];
 
         foreach ($faqItems as $index => $item) {

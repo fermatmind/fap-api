@@ -25,7 +25,7 @@ try {
         throw new DomainException('iq_public_request_invalid');
     }
     $request = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
-    if (! is_array($request) || array_diff(array_keys($request), [
+    if (! is_array($request) || count($request) !== 8 || array_diff(array_keys($request), [
         'source_commit', 'workflow_run_id', 'workflow_run_attempt',
         'package_sha256', 'executor_release_sha256', 'release_policy_sha256',
         'workflow_signature', 'mode',
@@ -97,8 +97,15 @@ try {
         throw new DomainException('iq_public_execution_lock_invalid');
     }
     $mutex = fopen($lockPath, 'c');
-    if (! is_resource($mutex) || ! flock($mutex, LOCK_EX)) {
+    if (! is_resource($mutex)) {
         throw new DomainException('iq_public_execution_lock_failed');
+    }
+    $lockDeadline = microtime(true) + ($request['mode'] === 'recover' ? 180 : 0);
+    while (! flock($mutex, LOCK_EX | LOCK_NB)) {
+        if (microtime(true) >= $lockDeadline) {
+            throw new DomainException('iq_public_execution_lock_failed');
+        }
+        usleep(200000);
     }
     $directory = $receiptRoot.'/'.$context->sourceCommit.'-'.$context->workflowRunId.'-1';
     if (is_link($directory) || ($request['mode'] === 'publish' && file_exists($directory))
@@ -112,7 +119,7 @@ try {
         if ($restored) {
             $frontend->revalidate();
         }
-        echo json_encode(['ok' => true, 'mode' => 'recover', 'restored' => $restored, 'recovery_status' => $restored ? 'restored' : 'not_required', 'source_commit' => $context->sourceCommit], JSON_THROW_ON_ERROR).PHP_EOL;
+        echo json_encode(['ok' => true, 'mode' => 'recover', 'restored' => $restored, 'recovery_status' => $restored ? 'restored' : 'not_required', 'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId, 'workflow_run_attempt' => $context->workflowRunAttempt, 'package_sha256' => $context->packageSha256, 'executor_release_sha256' => $context->executorReleaseSha256, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
         exit(0);
     }
     $frontend->assertConfigured();

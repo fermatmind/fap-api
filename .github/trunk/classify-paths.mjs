@@ -194,6 +194,10 @@ export function classifyPaths(inputPaths) {
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const operations = {
+    iq_eq_topic_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/20261010-v1/")),
+    iq_eq_topic_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/") || /IqEqTopic/.test(path) || /iq-eq-topic/.test(path) || path === "backend/scripts/deploy/run_iq_eq_topic_publish.php"),
+    iq_public_articles_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/articles/20261010-v1/")),
+    iq_public_articles_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/articles/") || /IqPublicArticle(?:PromotionAdapter|Package|FaqProjection)/.test(path) || /iq-public-article/.test(path) || path === "backend/scripts/deploy/run_iq_public_article_publish.php"),
     iq_public_scale_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/entry/20261009-v1/")),
     iq_public_scale_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/") || /IqPublic(?:ScalePromotionAdapter|EntryPackage|EntryFrontendRevalidator)/.test(path) || /iq-public-scale/.test(path) || path === "backend/scripts/deploy/run_iq_public_scale_publish.php"),
     eq_new_source_articles_publish: paths.some(path => /^backend\/content_assets\/eq_public\/(?:candidate\/20261009-new-articles\/assets\.json|reviews\/20261009-new-articles\/)/.test(path)),

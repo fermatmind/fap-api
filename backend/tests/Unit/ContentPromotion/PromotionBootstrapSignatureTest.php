@@ -75,4 +75,38 @@ PHP;
             File::deleteDirectory($directory);
         }
     }
+
+    public function test_iq_entry_executor_is_bound_by_the_actual_php_factory(): void
+    {
+        $key = str_repeat('test-key', 8);
+        $policy = hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy')));
+        $environment = [
+            'APP_ENV' => 'testing', 'APP_CONFIG_CACHE' => sys_get_temp_dir().'/iq-entry-no-cache-'.bin2hex(random_bytes(8)).'.php',
+            'CONTENT_PROMOTION_AUTOMATION_KEY' => $key,
+            'CONTENT_PROMOTION_SOURCE_COMMIT' => str_repeat('a', 40),
+            'CONTENT_PROMOTION_WORKFLOW_RUN_ID' => '123456', 'CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT' => '1',
+            'CONTENT_PROMOTION_EXPECTED_ROW_COUNT' => '2', 'CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256' => str_repeat('b', 64),
+            'CONTENT_PROMOTION_RELEASE_POLICY_SHA256' => $policy,
+        ];
+        $material = implode('|', ['content-promotion-v2', str_repeat('a', 40), '123456', '1', 'W6', 'iq-public-scale',
+            \App\Services\ContentPromotion\IqPublicEntryPackage::SHA256, $policy, '2', str_repeat('b', 64)]);
+        $environment['CONTENT_PROMOTION_WORKFLOW_SIGNATURE'] = hash_hmac('sha256', $material, $key);
+        $script = <<<'PHP'
+require 'vendor/autoload.php';
+$app = require 'bootstrap/app.php';
+$app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+try {
+    $context = $app->make(App\Services\ContentPromotion\PromotionContextFactory::class)
+        ->make(App\Services\ContentPromotion\IqPublicEntryPackage::PACKAGE, App\Services\ContentPromotion\IqPublicEntryPackage::SHA256, 'W6', 'iq-public-scale');
+    echo $context->executorReleaseSha256;
+} catch (DomainException $exception) {
+    echo $exception->getMessage();
+}
+PHP;
+        foreach ([[], ['CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256' => str_repeat('c', 64)]] as $override) {
+            $process = new Process([PHP_BINARY, '-r', $script], base_path(), array_replace($environment, $override));
+            $process->mustRun();
+            self::assertSame($override === [] ? str_repeat('b', 64) : 'workflow_identity_signature_invalid', $process->getOutput());
+        }
+    }
 }

@@ -1,0 +1,430 @@
+{
+  "pages": [
+    {
+      "page_id": "IQ-01",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "ced815e0b60de8477a99a5f586e10c5a870c27543260bdbcc772c7206cf0c21a",
+          "candidate_json_sha256": "c52ca45ef05f4ad491d90ba331328da4f303e39f56600f22e68da57fc3c569a6",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
+              "actual_read_scope": "已完整读取冻结实现并独立复算。候选“R = 0的实际公式输出为62”“当前整数正确题数12–30都会得到封顶值145”与均值5.096、标准差2.034、四舍五入及55–145截断一致；R=8得到121。实现明确使用随机模拟基线，且不具备人口常模及百分位解释资格。",
+              "limitation": "这是冻结源代码事实，不证明当前生产部署或界面显示。候选已明确区分技术指标与报告显示。"
+            },
+            {
+              "url": "source-current/fap-api/backend/app/Services/Iq/IqOwnerOriginal30BankService.php",
+              "actual_read_scope": "读取第1–130、136–209、320–340及570–590行，核对原创30题身份、正确题计分、原始成绩回退及版本边界；同时读取冻结入口API相关字段和前端presentation.ts第70–140行。",
+              "limitation": "未读取答案键，未运行完整作答流程；约20分钟属于入口预计用时，不是已验证硬性倒计时。"
+            },
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "读取原始PDF第21–23页的用途与效度论述，以及冻结摘录中的5.7–5.11。候选“公开公式不等于人群常模”符合解释需有用途、参照人群及相应证据的原则。",
+              "limitation": "未读240页全文。冻结索引所指PDF第20页没有提供所需效度正文，已直接读取原始PDF相关页弥补；来源不验证费马工具。"
+            }
+          ],
+          "unverified": [
+            "PASS仅为冻结正文与meta的科学主张及来源对齐裁定；14份正文均逐文件完整读取，正文hash与各自JSON记录一致。",
+            "已读取任务、真实路径下的独立核查Skill、适用AGENTS、GOAL及相关原始包；未读取candidates或reviews，未继承作者意见。",
+            "宿主明确为read-only；实际命令尝试创建shell heredoc临时文件被系统拒绝，随后仅用无写入的读取命令。未改候选、未调用业务写入或生产入口；此证据不等于对全部宿主权限完成隔离审计。",
+            "未核CMS、线上QA、当前生产SHA、搜索排名或产品心理测量验证；部分current材料只核对相关字段和段落，未逐页完整复读全部旧SSR投影。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "67cf9abcb1b6a1feb6917edaf078f1dd924f581cda5ff56ed362e0698ccd421c",
+          "candidate_json_sha256": "d5262cf615cd7f80c4bfcff07105785ee3b8396782bc29fbc7a922186567f689",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
+              "actual_read_scope": "完整读取并复算。候选“A raw score of zero maps to 62”及“All integer raw scores from 12 through 30 map to 145”均成立；8题对应121也成立。模拟基线与非人口常模的说明对齐实现。",
+              "limitation": "冻结代码不能证明线上界面；候选未承诺Beta实际显示。"
+            },
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "原始PDF第21–23页及冻结摘录5.7–5.11支持用途、常模和适用性边界。候选“This is not a population-normed IQ of 121”没有把缩放公式当作常模证据。",
+              "limitation": "已通过原PDF修补冻结效度摘录缺口；未读全文，也不据此认定工具已验证。"
+            },
+            {
+              "url": "https://www.mensa.org/getting-your-iq-tested-faqs/",
+              "actual_read_scope": "读取FAQ中练习挑战与获认可、适当施测的资格测试区别，网页第223–240行及对应检索段落。候选关于非Mensa资格证明的边界成立。",
+              "limitation": "未核具体机构对任何个人报告的接收政策。"
+            }
+          ],
+          "unverified": [
+            "英文正文及JSON独立完整读取、hash一致；不核线上流程、CMS、QA或排名。",
+            "冻结原创30题身份与结果显示条件已核；生产版本及人口常模验证未核。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-02",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "1cccf6af1b519380e23c6f8cc4520bc242517ae9c636c51e79f6efd1cc793a46",
+          "candidate_json_sha256": "58ea752cbebf2a9ebe91da8f8cc232caf71d6f99cf80e98e52f9f4e8929d83eb",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "读取原PDF第21–23页、冻结5.4–5.11及原PDF第115页5.12。候选“正式 IQ 解释需要标准化施测、适用常模和相应用途的测量证据”及不直接交换不同工具分数的说明对齐；5.12要求版本可交换的依据与等值证据。",
+              "limitation": "冻结摘录缺少5.12，已直接补读。未核任何工具的具体等值研究或付费手册。"
+            },
+            {
+              "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+              "actual_read_scope": "读取原始冻结网页段落中PC2、PC3、TD5、C1、C2，并直接补读原PDF第22–24页C3、C4；核对本地适用性、构念/方法/题目差异和常模不能自动移植。",
+              "limitation": "未读41页全文；跨语言可比性应按用途验证，不意味着每一种本地使用都必须进行跨语言分数比较。候选没有作这种扩大解释。"
+            },
+            {
+              "url": "https://pubmed.ncbi.nlm.nih.gov/17371085/",
+              "actual_read_scope": "读取检索返回的原始PubMed摘要，并交叉读取作者机构Cornell记录摘要：50项研究、107个样本、134436人，重复施测及练习可影响认知测验成绩。候选仅用其支持重测影响，不指定费马最佳间隔。",
+              "limitation": "未读论文全文；PubMed直接打开未返回完整正文。摘要证据不验证本站效应量或重测周期。"
+            }
+          ],
+          "unverified": [
+            "常见100/15刻度、正确率、模拟Beta、人口百分位的区分已核；本站具体常模有效性未核。",
+            "观察表是编辑性提示，候选没有从总分推算实际未提供的能力分项。",
+            "正文及meta完整读取、hash一致；不核QA、发布或排名。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "e6d227a7662768d6394be7665f21a3ce7012a5508a308ae642d0b60c4f1b1ffd",
+          "candidate_json_sha256": "153d538e3f15f2ede9682f4adbf2abeca23930d90c83d2ad7c6d1e93e129f8de",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "原PDF第21–23页、5.4–5.11冻结原文及第115页5.12已读。候选“percentage correct and Beta are not population IQ scores or percentiles”与冻结实现和用途/常模原则一致。",
+              "limitation": "5.12的冻结材料缺口已补核；没有认定网上施测本身必然无效，也没有将常见刻度视为验证。"
+            },
+            {
+              "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+              "actual_read_scope": "实际读取PC2、PC3、TD5、C1–C4相关原始段落，支持语言、当地证据、常模及工具之间不能直接换算的边界。",
+              "limitation": "未核费马跨语言等值性；指南原则不能代替本站研究。"
+            },
+            {
+              "url": "https://ecommons.cornell.edu/entities/publication/97becf46-3c0a-4de4-a48f-79b715ba8446",
+              "actual_read_scope": "读取Hausknecht等2007年论文的完整机构摘要，与PubMed摘要交叉核对练习及重测效应。",
+              "limitation": "仅摘要；不支持具体个人的提升原因、最佳间隔或本站效应量。"
+            }
+          ],
+          "unverified": [
+            "英文正文及meta独立完整读取、hash一致。",
+            "人口常模、正式测验资格、界面字段可用性、线上QA及排名不在本轮裁定内。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-03",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "b337184434550fe8d9e81fd0a1e55cb2549645a39816d3d6a63b17397c2094bd",
+          "candidate_json_sha256": "4532fd4f4c677dc262f61f4c1461b052bb0c3d94d726254c811d7bf9fc708025",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "source-current/fap-web/lib/iq/presentation.ts",
+              "actual_read_scope": "读取第70–140行并对照冻结后端计分。候选“本指南不承诺结果页会显示 Beta；缺少合格参照时，不能用 Beta 或60%填补空缺”符合标准分/百分位显示所需的可用、资格、参照人群、常模及模型版本条件。",
+              "limitation": "未运行浏览器全流程；该结论属于冻结实现，而非线上验收。"
+            },
+            {
+              "url": "https://www.intestcom.org/files/guideline_test_adaptation_2ed.pdf",
+              "actual_read_scope": "已读PC2、PC3及C1–C4相应原始段落。候选“公式公开不等于具备适用人群常模或信效度证据”成立，年龄、语言和版本不得自动移植。",
+              "limitation": "本工具本地验证和跨语言研究未核。"
+            },
+            {
+              "url": "https://test.mensa.no/Home/Test/en",
+              "actual_read_scope": "读取原始页面开头第0–23行及结尾第724–758行；核对在线练习与专业测试的区别。另读Mensa International资格FAQ。",
+              "limitation": "未分析测试题，未借用其35题/25分钟参数，也未据其证明费马科学有效。"
+            }
+          ],
+          "unverified": [
+            "候选30题、约20分钟预计用时与原始入口相关字段一致；倒计时和完整交互未核。",
+            "合成例题、个人日志与报告字段已分开；未把18/30推成人口百分位。",
+            "正文及meta完整读取、hash一致；不核QA或排名。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "4c0bfebd678dacad5f883f7f8748269b98af5a3597b6994c1fb73718713caaa5",
+          "candidate_json_sha256": "ccecf2810cbeaafdc56c2f5f226c58973b9b8214b9d0770f7e085db729469eff",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "source-current/fap-web/lib/iq/presentation.ts",
+              "actual_read_scope": "第70–140行核对英文候选“This guide does not promise a displayed Beta score”及合格人口参照条件；随机Beta不替代人口标准分的描述与实现一致。",
+              "limitation": "只证明冻结调用逻辑，未核当前部署和报告实际显示。"
+            },
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "原PDF第21–23页及常模/可比性相关5.7–5.12已读，支持公式、工具覆盖、使用情境和证据之间的区分。",
+              "limitation": "未将这些原则视为对原创30题的验证。"
+            },
+            {
+              "url": "https://www.mensa.org/getting-your-iq-tested-faqs/",
+              "actual_read_scope": "读取资格与练习区别的FAQ；候选“it is not an official Raven assessment or evidence of Mensa eligibility”与原创题本身份和官方资格要求一致。",
+              "limitation": "未核具体个人资格或接收机构政策；亦未核英文CTA追踪参数的线上行为。"
+            }
+          ],
+          "unverified": [
+            "英文正文及meta独立完整读取、hash一致。",
+            "20分钟是预计用时；完整施测流程、线上QA、资格认证和排名未核。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-04",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "2640ead56d6487cc917161f560b372616aae0f02c83626b5b0b031a9e8531972",
+          "candidate_json_sha256": "bce475a55e222e1e3d7f88f265b871d4363f774a279c10ceb9f2a1dfb3283c8e",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "已读用途效度与构念覆盖相关原PDF第21–23页。候选“没有常模和分项证据时，不应推算百分位或给自己贴‘高智商’‘低智商’标签”符合证据范围。",
+              "limitation": "四层复盘是编辑性解释框架，不是经验证的测量模型；候选未将其包装为诊断。"
+            },
+            {
+              "url": "https://gwern.net/doc/dual-n-back/2016-simons.pdf",
+              "actual_read_scope": "直接读取原论文PDF第68–69页、印刷第170–171页，含消费者结论和研究设计问题；另读第63页干预与对照改善比较段落。用于核对个人前后日志不能建立因果或远迁移。",
+              "limitation": "冻结本地第76–84页实际都是参考文献，不能支持这些主张；直接原PDF补核已弥补。未读84页全文。"
+            }
+          ],
+          "unverified": [
+            "同分人物及日志为明确虚构示例；其时间、策略解释属于待检验假设，不是从总分推算的已核个人事实。",
+            "Deary延伸阅读未作全文核查；正文未将其作为具体强结论的独立证据。",
+            "正文及meta完整读取、hash一致；不核临床用途、线上QA或排名。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "ec96c693dcfbfa5290839e23c19317e4a3bf31f6777ef6d7b854ec1f914745d6",
+          "candidate_json_sha256": "03409194f5ba8b68864c446d79854fbaae00f7130a156afa43c0612454b084c9",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "原PDF第21–23页支持用途与覆盖边界。候选“Specific differences can only be discussed when the product actually provides item-type or process-level data”正确保留数据缺失限制。",
+              "limitation": "来源不验证四层复盘的预测或诊断能力；候选没有此类承诺。"
+            },
+            {
+              "url": "https://gwern.net/doc/dual-n-back/2016-simons.pdf",
+              "actual_read_scope": "原PDF第68–69页及第63页相关段落已直接读取。候选“does not establish that time pressure caused every error”与因果设计要求相容，未把练习日志当作迁移试验证据。",
+              "limitation": "本地摘录仅参考文献的缺口已补核；未全文阅读，也未验证虚构人物对应的干预效果。"
+            }
+          ],
+          "unverified": [
+            "编辑性四层框架和虚构日志是候选中的观察建议，不是实际用户研究。",
+            "Deary进一步阅读全文未核；未据其裁定未出现的强主张。",
+            "英文正文及meta完整读取、hash一致；不核QA、发布或排名。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-05",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "fac19ad660514ba97362a8f77eee501ec8c7d713d05b2511c3ae699ce7479a8e",
+          "candidate_json_sha256": "59853351ccee44dbf88ff1f77d740bb5b11633e5508e688f580e6383e833f8bf",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://discovery.ucl.ac.uk/id/eprint/10120081/1/1745691616635612.pdf",
+              "actual_read_scope": "直接读取冻结的原始网页全文段落记录：原PDF第6–7页方法、网页行423–535，以及第12–14页讨论、行933–1048。方法明确研究计算机工作记忆训练，排除纯任务切换、抑制及推理训练；有活跃对照时缺乏令人信服的远迁移证据。",
+              "limitation": "本地下载HTTP 403，未读23页全文；保留的原始段落足以核本页窄主张。不能用该元分析验证矩阵四周安排或证明所有学习无效；候选没有如此推广。"
+            },
+            {
+              "url": "https://gwern.net/doc/dual-n-back/2016-simons.pdf",
+              "actual_read_scope": "直接读取PDF第68–69页消费者建议和设计问题表，并读第63页对照比较段落。候选“熟练某类题可能提高相似任务表现，但不能据此保证完整智力或现实能力同步提升”符合研究范围。",
+              "limitation": "冻结摘录仅参考文献的缺口已补核。个人前后日志不能验证因果；候选明确将安排及数据标为编辑示例。"
+            }
+          ],
+          "unverified": [
+            "候选“四周安排是可调整、可停止的编辑性练习示例”对证据状态表述准确；其题量、周期和效果未获得试验验证。",
+            "合成题规则及演示数据计算已核，包括中位数；这不构成训练有效性证据。",
+            "正文及meta完整读取、hash一致；不核实际干预、QA或排名。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "8f35bcc64c60c05e2e066f4cb817f3929f44bd7c03934e934ce6f3edde93f7d0",
+          "candidate_json_sha256": "04333d13cd9371504198c10826cc1534aba92c28e5bf565a0420dfe2cf9a8c45",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://discovery.ucl.ac.uk/id/eprint/10120081/1/1745691616635612.pdf",
+              "actual_read_scope": "读取冻结原始网页记录中的方法第6–7页及讨论第12–14页。工作记忆训练范围、纯推理训练排除标准、对照条件与远迁移局限均已核。",
+              "limitation": "原始下载403，但直接保存的原文段落可支持本页限定性表述；未读全文。不能推导矩阵练习无效或一切学习无效。"
+            },
+            {
+              "url": "https://gwern.net/doc/dual-n-back/2016-simons.pdf",
+              "actual_read_scope": "原PDF第68–69页与第63页相关段落已读。候选“It is not a validated intelligence-enhancement, educational intervention, or clinical program”正确说明计划状态；日志不证明因果及现实迁移的边界成立。",
+              "limitation": "直接读取已修补冻结参考文献摘录缺口；未验证四周剂量或本站个人提升。"
+            }
+          ],
+          "unverified": [
+            "英文四周安排和演示数字均为编辑性、虚构示例；未声称研究验证。",
+            "英文正文及meta完整读取、hash一致；不核实际训练效果、线上QA或排名。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "IQ-06",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "af6914ba1f3824152c1a56bd1c7e1c1124d06c1a908d156edea94d6f02f4b2c5",
+          "candidate_json_sha256": "3107a0987055bec548a58e5507bfa138b6f2c8ec5d72731e2856f1ff3c5aa201",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://westminsterresearch.westminster.ac.uk/download/32950b993ecf28e916b39015f571fc3da38e1d1f7af456c35e561a31ada40152/1255023/2012%20-%20Hampshire%20-%20Neuron.pdf",
+              "actual_read_scope": "读取原始提取文本第2页摘要/导言、第5页互联网样本与结果、第11–12页讨论、第13页方法。候选“它不是人口概率抽样，不证明智力只能分成三个独立部分”成立：12任务、互联网招募、清理后44600人及任务覆盖限制可直接核；讨论没有简单否定g。",
+              "limitation": "未读14页全部及补充分析。志愿样本不能当人口常模，也不验证本站题本。"
+            },
+            {
+              "url": "https://www.pearsonclinical.asia/content/dam/school/global/clinical/asia/assets/wais-5/wais-5-overview-brochure.pdf",
+              "actual_read_scope": "完整读取官方4页概览并打开原URL；第1、3页列五个认知域，第2页给出16岁至90岁11个月以及2023–2024常模采集、2024出版信息。候选年龄和域说明一致。",
+              "limitation": "未读付费手册，不证明其他语言版本或费马工具适用；没有采用宣传性最高可靠性主张。"
+            },
+            {
+              "url": "https://www.pearsonassessments.com/store/usd/p/100001960.html",
+              "actual_read_scope": "读取Raven's 2官方产品页Overview第279–302行及ProductDetails第311–325行，核对4–90岁和工具身份。候选没有把减少语言文化负担写成文化完全无关。",
+              "limitation": "产品页不是费马验证证据；未读Raven's 2付费技术手册。"
+            },
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "读取用途、构念覆盖及5.8–5.12相关原文。虚构例中16/20=80%、z=1对应115、正态模型百分位约84.1，以及SEM=3时115±1.96×3约109–121均复算成立。",
+              "limitation": "这些是明确虚构且带假设的教学计算，不是本站常模、真实百分位或真实置信区间。"
+            }
+          ],
+          "unverified": [
+            "没有把共同因素g、三成分研究与某一矩阵任务混为同一结论；这是对候选表述和原研究范围的核查。",
+            "单一成绩不能推算个人遗传百分比；未核个体遗传、诊断或真实置信区间。",
+            "正文及meta完整读取、hash一致；冻结current显示该新页尚无对应现页，不据此裁定发布状态；不核QA或排名。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "6e3a1e8f0b5315d1a5dda538e5fe8a2efc05f98c43fca4cad35cb2beef858e6e",
+          "candidate_json_sha256": "971b58593b14615b534b2f2e265c83d028365c1db877252bf6fe0147d4f96b16",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://westminsterresearch.westminster.ac.uk/download/32950b993ecf28e916b39015f571fc3da38e1d1f7af456c35e561a31ada40152/1255023/2012%20-%20Hampshire%20-%20Neuron.pdf",
+              "actual_read_scope": "第2、5、11–13页实际相关段落已读。候选“a large internet volunteer sample”及“not population probability sampling”准确；未将三成分理解成恰好三个独立能力或g不存在。",
+              "limitation": "未读全部14页及补充材料；研究不是本站常模或效度研究。"
+            },
+            {
+              "url": "https://www.pearsonclinical.asia/content/dam/school/global/clinical/asia/assets/wais-5/wais-5-overview-brochure.pdf",
+              "actual_read_scope": "官方4页全部读取，五域与16–90:11年龄界限核实；英文候选明确限定版本，不转用于儿童、其他语言或费马练习。",
+              "limitation": "没有核付费手册、当地常模或费马适用性。"
+            },
+            {
+              "url": "https://www.pearsonassessments.com/store/usd/p/100001960.html",
+              "actual_read_scope": "官方Overview及ProductDetails对应行已读；Raven's 2的4–90岁与语言文化负担说明成立，并与本站原创30题保持区别。",
+              "limitation": "仅官方公开概览；不证明文化完全无关或费马采用官方题本。"
+            },
+            {
+              "url": "https://www.testingstandards.net/uploads/7/6/6/4/76643089/standards_2014edition.pdf",
+              "actual_read_scope": "用途、常模及可比性原文已读。候选“A large number of website users does not automatically form a representative sample”成立；虚构刻度、百分位及SEM演算均核算。",
+              "limitation": "常见100/15尺度及正态近似不产生真实常模；候选保留了模型及虚构数据前提。"
+            }
+          ],
+          "unverified": [
+            "英文正文及meta独立完整读取、hash一致。",
+            "真实工具SEM、当地常模、个体遗传解释、当前页面上线、线上QA和排名未核。"
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "SH-01",
+      "locales": [
+        {
+          "locale": "zh-CN",
+          "body_sha256": "223b43e79eb523d75f3060822d853b2c15956543df219cfab927e0328226739d",
+          "candidate_json_sha256": "dd3c67e8024277db050e30be45f63d8f726e95155ec6902bc2b53fa0ec338a02",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://aec6905spring2013.wordpress.com/wp-content/uploads/2013/01/mayersaloveycaruso-2004.pdf",
+              "actual_read_scope": "直接读取原论文PDF第8页、印刷第203页、网页第604–709行，重点第662–700行区分自我感知EI与MSCEIT/MEIS能力测量。候选“它不是MSCEIT或已经验证的能力测验”及“自评有反思价值”保持了方法差别，未贬低所有自评。",
+              "limitation": "冻结第1页是JSTOR封面、第7页是信度表述，不足以单独支撑该区别；直接原PDF补核已弥补。未读20页全文，不把论文信度转给EQ-60。"
+            },
+            {
+              "url": "source-current/fap-api/backend/resources/assessments/eq/scientific_contract.json",
+              "actual_read_scope": "完整读取EQ冻结scientific_contract.json及psychometric_evidence_status.json；核对60题自评、非MSCEIT/非能力测验、初步内容证据、阶段性常模，以及尚待内部一致性、重测、结构、外部关联和等值性验证。",
+              "limitation": "这是产品冻结证据状态，不证明相关研究已完成；不具备临床或招聘资格。"
+            },
+            {
+              "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
+              "actual_read_scope": "完整读取IQ模拟Beta实现；核对两种工具分数不宜直接比较。候选虚构20–100区间中80分按POMP换算75%计算正确，并明确不等于百分位或本站公式。",
+              "limitation": "合成分数例子不能证明两工具同尺度或有效性；未核实际报告显示。"
+            }
+          ],
+          "unverified": [
+            "IQ表现任务与EQ自评提供不同证据来源的区分已核；项目情境及行动路径是编辑性示例，不是诊断或有效性试验。",
+            "正文、meta及冻结SH-01中英文SSR已读取；hash一致。",
+            "不核CMS、线上QA、页面链接行为、排名或IQ/EQ真实心理测量效度。"
+          ]
+        },
+        {
+          "locale": "en",
+          "body_sha256": "3ad3cb84913a24f02d877b0d16537bacfa6d82b1df0630572e8ad2dfdaf07976",
+          "candidate_json_sha256": "9ab54af6685bc9bf06143a9ce1862ca650773fa572ae3324f94d786de90c400f",
+          "decision": "PASS",
+          "findings": [],
+          "source_checks": [
+            {
+              "url": "https://aec6905spring2013.wordpress.com/wp-content/uploads/2013/01/mayersaloveycaruso-2004.pdf",
+              "actual_read_scope": "原PDF第8页、印刷第203页、第604–709行实际读取。候选“Self-report can support reflection without proving behaviour”与能力任务、自我感知和不同工具证据差异相容。",
+              "limitation": "已补核冻结封面及信度页不能支持的方法区别；未读全文，也未把自评判为无价值。"
+            },
+            {
+              "url": "source-current/fap-api/backend/resources/assessments/eq/scientific_contract.json",
+              "actual_read_scope": "完整读取冻结科学契约和证据状态文件。候选“EQ-60 is not MSCEIT or a validated emotional-ability test”以及初步/待验证状态与权威记录一致。",
+              "limitation": "记录不等于研究成果；真实信度、重测、结构、效标及跨语言等值性仍未核实。"
+            },
+            {
+              "url": "source-current/fap-api/backend/app/Services/Assessment/IqBetaStandardScore.php",
+              "actual_read_scope": "完整读取模拟基线及非人口常模标志；18/30=60%以及虚构POMP例子均复算。英文候选没有把正确率、Beta或范围位置解释成人口百分位。",
+              "limitation": "不能据此认定实际UI显示Beta；也不能把IQ与EQ数字组成稳定人格或职业能力等级。"
+            }
+          ],
+          "unverified": [
+            "英文正文及meta独立完整读取、hash一致；虚构项目情境没有被用作真实用户事实或因果证据。",
+            "PASS仅覆盖来源对齐；未核CMS、线上QA、排名、当前部署或两工具的真实心理测量验证。"
+          ]
+        }
+      ]
+    }
+  ]
+}
