@@ -17,6 +17,7 @@ return [
     ],
     'authority_roots' => [
         'content_assets/en-content-parity',
+        'content_assets/eq_public/candidate/20261009-new-articles',
         'content_packs',
         'content_baselines',
         'database/seeders/data',
@@ -35,7 +36,7 @@ return [
     'adapter_capabilities' => [
         'W1' => ['mbti-comparisons' => 'audit_compatible', 'mbti-results' => 'audit_compatible'],
         'W2' => ['big-five' => 'audit_compatible'],
-        'W3' => ['W3-ARTICLES' => 'audit_compatible', 'W3-CAREER-GUIDES' => 'audit_compatible'],
+        'W3' => ['W3-ARTICLES' => 'audit_compatible', 'W3-CAREER-GUIDES' => 'audit_compatible', 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'],
         'W4' => ['riasec' => 'audit_compatible'],
         'W5' => ['enneagram' => 'audit_compatible'],
         'W6' => ['iq' => 'fail_closed_legacy_audit'],

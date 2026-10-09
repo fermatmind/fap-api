@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { readFileSync, existsSync } from 'node:fs';
+import { isEqOnlyPromotionRegistration } from './eq-new-source-package.mjs';
 // Resolve actual PHP consumers through App symbols and literal configuration reads.
 // Dynamic container bindings, routes, schema, bootstrap and dependency inputs are shared.
 export function phpConsumers(root = process.cwd()) {
@@ -40,7 +41,15 @@ export function phpConsumers(root = process.cwd()) {
   const consumer = expressions => closure(files.filter(path=>expressions.some(re=>re.test(path))));
   return {files, sources, edges, closure, consumer};
 }
-export function selectOperations(paths, root=process.cwd()) {
+export function selectOperations(paths, root=process.cwd(), range={}) {
+  let eqOnlyRegistration=false;
+  if (paths.includes('backend/config/content_promotion.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
+    try {
+      const read=sha=>execFileSync('git',['show',`${sha}:backend/config/content_promotion.php`],{cwd:root,encoding:'utf8'});
+      eqOnlyRegistration=isEqOnlyPromotionRegistration(read(range.base),read(range.head));
+    } catch { /* Indeterminate changes retain every conservative private consumer. */ }
+  }
+  const privatePaths=paths.filter(path=>!(eqOnlyRegistration&&path==='backend/config/content_promotion.php'));
   const graph=phpConsumers(root);
   const unknown=paths.some(p=>/^backend\/app\/.*\.php$/.test(p)&&!graph.sources.has(p));
   const shared=unknown||paths.some(p=>/^backend\/(?:routes\/|bootstrap\/|database\/migrations\/|app\/(?:Http\/Middleware\/|Providers\/)|composer\.(?:json|lock)$|config\/(?:app|database|auth|cache|fap|content_packs)\.php$)/.test(p));
@@ -53,10 +62,10 @@ export function selectOperations(paths, root=process.cwd()) {
   };
   const publisher=graph.consumer([/\/Console\/Commands\/Packs2?Publish\.php$/, /\/Services\/Content\/ContentPackV2(?:Resolver|Materializer|RuntimeTruthService)\.php$/]);
   const familyInputs=['backend/content_packs/BIG5_OCEAN/','backend/content_packs/RIASEC/','backend/content_assets/riasec/','backend/content_packs/ENNEAGRAM/','backend/content_packs/EQ_60/'];
-  const commonPublisher=shared||paths.some(p=>!familyInputs.some(prefix=>p.startsWith(prefix))&&(publisher.has(p)||p.startsWith('backend/scripts/content_packs/')||p.startsWith('backend/app/Services/Content/ContentPack')))
+  const commonPublisher=shared||privatePaths.some(p=>!familyInputs.some(prefix=>p.startsWith(prefix))&&(publisher.has(p)||p.startsWith('backend/scripts/content_packs/')||p.startsWith('backend/app/Services/Content/ContentPack')))
   const input={big5:['backend/content_packs/BIG5_OCEAN/'],riasec:['backend/content_assets/riasec/','backend/content_packs/RIASEC/'],enneagram:['backend/content_packs/ENNEAGRAM/'],eq60:['backend/content_packs/EQ_60/']};
   const operations={};
-  for(const [name,roots] of Object.entries(family)) operations[`${name}_private_publish`]=commonPublisher||affected(roots,input[name]);
+  for(const [name,roots] of Object.entries(family)) operations[`${name}_private_publish`]=commonPublisher||shared||privatePaths.some(p=>roots.has(p)||input[name].some(prefix=>p.startsWith(prefix)));
   const career=graph.consumer([/\/Domain\/Career\/(?:Display|Compilation)\//,/\/Services\/Career\//]);
   const url=graph.consumer([/\/Services\/(?:SeoIntel\/UrlTruth|SeoIntel\/Sitemap|SEO\/Sitemap)/,/\/Http\/Controllers\/API\/V0_5\/SEO\/SitemapSourceController\.php$/,/\/Listeners\/QueueUrlTruthIncrementalSync\.php$/]);
   operations.career_cache=affected(career,['backend/content_assets/career/current/']);

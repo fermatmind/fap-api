@@ -129,7 +129,7 @@ async function cli() {
     process.env.GITHUB_SHA,
     classification.paths,
   );
-  Object.assign(classification.operations, selectOperations(classification.paths));
+  Object.assign(classification.operations, selectOperations(classification.paths, process.cwd(), {base: classification.scope.validation_base_sha, head: process.env.GITHUB_SHA}));
   applyCareerContentOnly(classification, careerReceipt);
   writeFileSync('career-content-change-receipt.json', `${JSON.stringify(careerReceipt, null, 2)}\n`);
   process.stdout.write(`${JSON.stringify(classification, null, 2)}\n`);

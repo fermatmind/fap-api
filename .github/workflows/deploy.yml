@@ -1302,6 +1302,21 @@ jobs:
         run: |
           bash backend/scripts/deploy/seo_a08_transport.sh state a08-staging-after.json
           node .github/trunk/seo-platform-12a08-release.mjs verify-state a08-staging-before.json a08-staging-after.json "$DEPLOY_SHA"
+      - id: eq-source-publish
+        name: Publish exact reviewed EQ Chinese source articles
+        if: fromJSON(needs.policy.outputs.operations).eq_new_source_articles_publish == true
+        env:
+          EQ_PUBLISH_ENVIRONMENT: staging
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/eq-new-source-publish.mjs
+      - name: Upload sanitized EQ source publication receipt
+        if: always() && steps.eq-source-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: eq-new-source-staging-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/eq-new-source-publication/staging.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Record staging timing
         if: always()
         run: |
@@ -2322,11 +2337,36 @@ jobs:
               --before="$RUNNER_TEMP/career-first-publish-seo-before.json" \
               > "$dir/first-publish-seo.json"
           fi
+      - id: eq-source-publish
+        name: Publish exact reviewed EQ Chinese source articles
+        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.operations).eq_new_source_articles_publish == true
+        env:
+          EQ_PUBLISH_ENVIRONMENT: production
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/eq-new-source-publish.mjs
+      - name: Upload sanitized EQ source publication receipt
+        if: always() && steps.eq-source-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: eq-new-source-production-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/eq-new-source-publication/production.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Restore exact LKG after Career publisher failure
-        if: failure() && steps.career-publish.outcome == 'failure'
+        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure')
         shell: bash
         run: |
           set -euo pipefail
+          if [ '${{ steps.eq-source-publish.outcome }}' = failure ]; then
+            # A code switch cannot recover a still-running business publisher.
+            # Stop here when the exact execution could not be closed/restored.
+            jq -e --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" '
+              .schema == "eq.new_source_articles.publish.v1" and .ok == false
+              and .source_commit == $sha and .workflow_run_id == $run
+              and .workflow_run_attempt == 1 and .sanitized == true
+              and .recovery_completed == true
+            ' "$RUNNER_TEMP/eq-new-source-publication/production.json" >/dev/null
+          fi
           candidate_sha="$DEPLOY_SHA"
           lkg_sha='${{ steps.baseline.outputs.active }}'
           [[ "$candidate_sha" =~ ^[0-9a-f]{40}$ ]]

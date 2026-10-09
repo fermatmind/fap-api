@@ -1,0 +1,1 @@
+这六条是本任务已独立审稿的准确公开 Article 候选，不是 private EQ raw/compiled authority。正文与metadata逐字段等于各locale实际fresh审稿输入；原生输入与输出保留原字节，外置reviews是审稿证据。当前未注册为可执行package，不声明CMS审批、生产发表、可索引或上线。注册/执行必须沿当前既有受控自动链落实精确scope、读回及回滚。

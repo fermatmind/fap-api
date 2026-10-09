@@ -194,6 +194,8 @@ export function classifyPaths(inputPaths) {
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const operations = {
+    eq_new_source_articles_publish: paths.some(path => /^backend\/content_assets\/eq_public\/(?:candidate\/20261009-new-articles\/assets\.json|reviews\/20261009-new-articles\/)/.test(path)),
+    eq_new_source_articles_checks: paths.some(path => /^backend\/content_assets\/eq_public\//.test(path) || /Eq(?:NewSourceArticlePromotionAdapter|PublicArticlePackage|SourceExecutionMutex)/.test(path) || /eq-new-source/.test(path) || path === "backend/scripts/deploy/run_eq_new_source_article_publish.php"),
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,
     a08_scopes: selectedScopes(paths),

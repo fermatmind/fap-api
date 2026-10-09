@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Top100FrozenCmsBatchPromotionAdapter;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use DomainException;
@@ -22,7 +23,7 @@ final class ExactPackagePromotionService
     {
         $adapter = $this->registry->resolve($context->lane, $context->subscope);
         $previous = null;
-        if ($phase === 'draft-import' && $context->lane === 'TOP100') {
+        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter)) {
             $previous = $this->receipts->readPrevious('content_promotion_preflight_receipt', $context);
         } elseif ($phase === 'publish') {
             $previous = $this->receipts->readPrevious('cms_draft_import_receipt', $context);
@@ -53,6 +54,14 @@ final class ExactPackagePromotionService
 
             return $this->receipts->write($receiptPath, $normalized);
         } catch (Throwable $throwable) {
+            if ($adapter instanceof EqNewSourceArticlePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
+                $reference = (string) ($result['rollback_reference'] ?? data_get($previous, 'receipt.rollback_reference', ''));
+                if ($reference === '') {
+                    throw new DomainException('eq_source_receipt_failed_without_rollback_reference', previous: $throwable);
+                }
+                $adapter->rollback($context, $reference);
+                throw new DomainException('eq_source_receipt_failed_rollback_succeeded', previous: $throwable);
+            }
             if ($context->lane !== 'TOP100'
                 || ! in_array($phase, ['draft-import', 'publish', 'live-qa'], true)
                 || ! $adapter instanceof Top100FrozenCmsBatchPromotionAdapter) {
@@ -251,7 +260,21 @@ final class ExactPackagePromotionService
             'search_mutation_count' => 0,
             'deploy_mutation_count' => 0,
             ...$this->top100Evidence($context, $result),
+            ...$this->eqSourceEvidence($adapter, $result),
         ];
+    }
+
+    private function eqSourceEvidence(ExactPackagePromotionAdapter $adapter, array $result): array
+    {
+        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter) {
+            return [];
+        }
+        $hash = (string) ($result['target_state_sha256'] ?? '');
+        if (preg_match('/\A[a-f0-9]{64}\z/', $hash) !== 1) {
+            throw new DomainException('eq_source_receipt_prestate_missing');
+        }
+
+        return ['target_state_sha256' => $hash];
     }
 
     /** @param array<string,mixed> $result @return array<string,int|string> */
