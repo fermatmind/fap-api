@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityCurrentRemainingRuntimeTest extends TestCase
 {
-    private const AGGREGATE = 'a6d1f38d2fd250776fb4b2b657c8af7c62bcb8c3bc910b58f8fb1c8e33d4e900';
+    private const AGGREGATE = '18ac3ee495f10045231b70d56f1661faa7bbae4ed9d02ba3fc7f0232330501a2';
 
     #[DataProvider('detailCases')]
     public function test_public_detail_is_served_from_its_per_page_authority(string $url, string $file): void
@@ -84,7 +84,7 @@ final class PersonalityCurrentRemainingRuntimeTest extends TestCase
                 "content_assets/personality_public/current/pages/enneagram/wing/{$wing}/en.json",
             ];
         }
-        foreach (['type-1/one-to-one', 'type-1/self-preservation', 'type-1/social', 'type-2/one-to-one', 'type-2/self-preservation', 'type-2/social', 'type-3/one-to-one', 'type-3/self-preservation', 'type-3/social', 'type-4/one-to-one'] as $subtype) {
+        foreach (['type-1/one-to-one', 'type-1/self-preservation', 'type-1/social', 'type-2/one-to-one', 'type-2/self-preservation', 'type-2/social', 'type-3/one-to-one', 'type-3/self-preservation', 'type-3/social', 'type-4/one-to-one', 'type-4/self-preservation', 'type-4/social', 'type-5/one-to-one', 'type-5/self-preservation', 'type-5/social'] as $subtype) {
             [$type, $instinct] = explode('/', $subtype);
             $code = rawurlencode($subtype);
             foreach (['en', 'zh-CN'] as $locale) {
