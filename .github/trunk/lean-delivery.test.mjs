@@ -47,7 +47,7 @@ test('prepared guard rejects active, wrong SHA and cross-environment candidates 
 
 test('feature modes follow actual consumers and shared inputs, avoiding a duplicate static matrix',()=>{assert.deepEqual(selectOperations(['.github/trunk/seo-platform-12a08-activation.mjs']).test_modes,['legacy']);assert.deepEqual(selectOperations(['backend/app/Services/UnresolvedNewService.php']).test_modes,['legacy','v2']);assert.deepEqual(selectOperations(['backend/tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php']).test_modes,['legacy','v2']);});
 
-test('PHP repair baselines exclude green workflows that never ran PHP',async()=>{const runs=[{id:2,head_sha:b},{id:1,head_sha:a}].map(r=>({...r,status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}));assert.equal(await phpRepairBaseline(runs,id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===2?'skipped':'failure'}],b,()=>true),a);const plan=repairDomains(['.github/workflows/nightly.yml'],process.cwd(),['SEO_TEST_MYSQL_DATABASE','git_history']);for(const name of ['SeoIntelGscReadSnapshotMysqlTest','SeoPlatform12A08ActivationEvidenceTest'])assert.ok(plan.php_files.some(p=>p.endsWith(name+'.php')));});
+test('PHP repair baselines exclude green workflows that never ran PHP',async()=>{const runs=[{id:2,head_sha:b},{id:1,head_sha:a}].map(r=>({...r,status:'completed',conclusion:'success',head_branch:'main',run_attempt:1}));assert.equal(await phpRepairBaseline(runs,id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===2?'skipped':'success'}],b,()=>true),a);const plan=repairDomains(['.github/workflows/nightly.yml'],process.cwd(),['SEO_TEST_MYSQL_DATABASE','git_history']);for(const name of ['SeoIntelGscReadSnapshotMysqlTest','SeoPlatform12A08ActivationEvidenceTest'])assert.ok(plan.php_files.some(p=>p.endsWith(name+'.php')));});
 
 test('staging transport preserves the exact temporary env filenames consumed by prepare',()=>{
  const source=readFileSync(new URL('../workflows/deploy.yml',import.meta.url),'utf8');
@@ -60,4 +60,23 @@ test('staging transport preserves the exact temporary env filenames consumed by 
   assert.equal(run(assignments).status,0);
   assert.notEqual(run(assignments.replace('local_env="$RUNNER_TEMP/measurement.env"','local_env="$RUNNER_TEMP/readiness.env"')).status,0);
  } finally {rmSync(root,{recursive:true,force:true});}
+});
+
+
+test('PHP repair retains failed consumers until a successful PHP job establishes the baseline',async()=>{
+ const runs=[{id:3,head_sha:'c'.repeat(40),conclusion:'failure'},{id:2,head_sha:b,conclusion:'failure'},{id:1,head_sha:a,conclusion:'success'}].map(r=>({...r,status:'completed',head_branch:'main',run_attempt:1}));
+ const jobs=id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===1?'success':'failure'}];
+ assert.equal(await phpRepairBaseline(runs,jobs,'c'.repeat(40),()=>true),a);
+ await assert.rejects(phpRepairBaseline(runs.slice(0,2),jobs,'c'.repeat(40),()=>true),/NIGHTLY_PHP_BASE_HOLD/);
+ // A non-PHP failure does not invalidate independently successful PHP evidence.
+ assert.equal(await phpRepairBaseline(runs,id=>[{name:'Focused PHPUnit regression and performance contracts',conclusion:id===3?'success':'failure'}],'c'.repeat(40),()=>true),'c'.repeat(40));
+});
+
+test('Nightly provisions the host Redis executable before isolated projection tests',()=>{
+ const source=readFileSync(new URL('../workflows/nightly.yml',import.meta.url),'utf8');
+ const full=source.slice(source.indexOf('  full-phpunit:'),source.indexOf('  codeql:'));
+ const setup=full.indexOf('sudo apt-get install -y --no-install-recommends redis-server');
+ assert.ok(setup>=0);
+ assert.ok(setup<full.indexOf('php artisan test'));
+ assert.match(full.slice(setup,full.indexOf('php artisan test')),/redis-server --version/);
 });

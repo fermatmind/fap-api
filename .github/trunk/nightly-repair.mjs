@@ -12,7 +12,7 @@ export async function phpRepairBaseline(runs,listJobs,head,isAncestor) {
  for(const run of runs.slice(0,20)) {
   if(run.status!=='completed'||!['success','failure'].includes(run.conclusion)||run.head_branch!=='main'||run.run_attempt!==1||!isAncestor(run.head_sha,head))continue;
   const jobs=await listJobs(run.id);
-  if(jobs.some(job=>['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name)&&['success','failure'].includes(job.conclusion)))return run.head_sha;
+  if(jobs.some(job=>['Full PHPUnit regression and performance contracts','Focused PHPUnit regression and performance contracts'].includes(job.name)&&job.conclusion==='success'))return run.head_sha;
  }
  throw new Error('NIGHTLY_PHP_BASE_HOLD');
 }

@@ -273,6 +273,11 @@ jobs:
           coverage: none
           tools: composer:v2
           extensions: mbstring, intl, pdo_sqlite, sqlite3, pdo_mysql, redis
+      - name: Install host Redis for isolated projection tests
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends redis-server
+          redis-server --version
       - name: Prepare empty test environment file
         working-directory: backend
         run: touch .env
