@@ -306,6 +306,11 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.eq_new_source_articles_checks == true
         working-directory: backend
         run: php artisan test tests/Unit/ContentPromotion/EqPublicArticlePackageTest.php tests/Unit/ContentPromotion/EqNewSourceArticlePromotionAdapterTest.php tests/Unit/ContentPromotion/EqSourceExecutionMutexTest.php --no-ansi
+      - name: Verify exact existing EQ pages and native publication rollback
+        if: fromJSON(needs.classify.outputs.classification).operations.eq_existing_public_pages_checks == true
+        working-directory: backend
+        run: |
+          php artisan test tests/Unit/ContentPromotion/EqExistingPublicPagePackageTest.php tests/Unit/ContentPromotion/EqPublicRegistryTextPatchTest.php tests/Unit/ContentPromotion/EqExistingPublicPageStateTest.php tests/Unit/ContentPromotion/EqExistingPublicPageWriterTest.php tests/Unit/ContentPromotion/EqExistingPublicPagePromotionAdapterTest.php --no-ansi
       - name: Verify exact IQ public entry package and publication failure paths
         if: fromJSON(needs.classify.outputs.classification).operations.iq_public_scale_checks == true
         working-directory: backend

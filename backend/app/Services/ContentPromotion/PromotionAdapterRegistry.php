@@ -9,6 +9,7 @@ use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerGuideCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerJobCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Eq60CompiledPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\EqExistingPublicPagePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\IqEqTopicPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\IqPublicArticlePromotionAdapter;
@@ -42,6 +43,7 @@ final class PromotionAdapterRegistry
         IqPublicScalePromotionAdapter $iqPublicScale,
         IqPublicArticlePromotionAdapter $iqPublicArticles,
         IqEqTopicPromotionAdapter $iqEqTopic,
+        EqExistingPublicPagePromotionAdapter $eqExistingPublic,
     ) {
         $adapters = [
             $mbtiComparison,
@@ -57,6 +59,7 @@ final class PromotionAdapterRegistry
             $iqPublicScale,
             $iqPublicArticles,
             $iqEqTopic,
+            $eqExistingPublic,
             new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
             new Top100FrozenCmsBatchPromotionAdapter($top100Authority, $snapshots),
         ];

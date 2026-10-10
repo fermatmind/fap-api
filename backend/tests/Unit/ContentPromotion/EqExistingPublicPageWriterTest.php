@@ -1,0 +1,198 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\ContentPromotion;
+
+use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
+use App\Models\CareerGuide;
+use App\Models\CareerGuideRevision;
+use App\Models\CareerGuideSeoMeta;
+use App\Services\ContentPromotion\EqExistingPublicPagePackage;
+use App\Services\ContentPromotion\EqExistingPublicPageState;
+use App\Services\ContentPromotion\EqExistingPublicPageWriter;
+use App\Services\ContentPromotion\PromotionContext;
+use App\Services\Scale\ScaleRegistryWriter;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Tests\TestCase;
+
+final class EqExistingPublicPageWriterTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private const SHA = '427f656fc3d6ac40eac4819c749e4962a54df0aca1ce7549ccd2eb12e25896ad';
+
+    public function test_atomic_native_publication_keeps_working_draft_relations_flags_and_human_review_empty(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        $writer = app(EqExistingPublicPageWriter::class);
+        $result = DB::transaction(fn () => $writer->publish($this->context(), $before));
+        self::assertSame(6, $result['written_count']);
+        $after = $result['state'];
+        self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
+        self::assertSame($before['scale_slugs'], $after['scale_slugs']);
+        foreach ($before['registries'] as $index => $registry) {
+            $oldValues = $registry['values'];
+            $newValues = $after['registries'][$index]['values'];
+            unset($oldValues['content_i18n_json'], $newValues['content_i18n_json']);
+            self::assertSame($oldValues, $newValues);
+            foreach (['en', 'zh'] as $locale) {
+                foreach ($registry['content'][$locale]['faq'] as $faqIndex => $faq) {
+                    self::assertSame($faq['q'], $after['registries'][$index]['content'][$locale]['faq'][$faqIndex]['q']);
+                    self::assertSame($faq['id'], $after['registries'][$index]['content'][$locale]['faq'][$faqIndex]['id']);
+                }
+            }
+        }
+        foreach ($before['guides'] as $key => $guide) {
+            self::assertSame($guide['maps'], $after['guides'][$key]['maps']);
+            self::assertSame($guide['values']['is_indexable'], $after['guides'][$key]['values']['is_indexable']);
+            self::assertSame($guide['revisions'][0], $after['guides'][$key]['revisions'][0]);
+        }
+        foreach ($after['articles'] as $article) {
+            self::assertNull($article['published']['reviewed_by']);
+            self::assertNull($article['published']['reviewed_at']);
+            self::assertSame('verified_automated_exact_package', json_decode($article['published']['authority_metadata_json'], true)['approval_kind']);
+        }
+        $replay = DB::transaction(fn () => $writer->publish($this->context(), $after));
+        self::assertSame(0, $replay['written_count']);
+        self::assertSame($after, $replay['state']);
+    }
+
+    public function test_failure_at_the_last_guide_restores_every_prior_native_write_in_the_transaction(): void
+    {
+        $this->seedNativeTargets();
+        $guide = CareerGuide::query()->where('locale', 'en')->firstOrFail();
+        CareerGuideSeoMeta::query()->where('career_guide_id', $guide->id)->delete();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before));
+            self::fail('Missing final SEO authority must fail atomically');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_seo_authority_missing', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
+    public function test_operator_draft_drift_is_rejected_before_publication(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        ArticleTranslationRevision::query()->where('revision_number', 2)->update(['content_md' => 'New operator bytes']);
+        $changed = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before));
+            self::fail('Operator changes must invalidate prestate');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_prestate_drift', $error->getMessage());
+        }
+        self::assertSame($changed, $states->read(self::SHA));
+    }
+
+    public function test_post_commit_restore_preserves_user_working_bytes_and_immutable_history(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        $writer = app(EqExistingPublicPageWriter::class);
+        $published = DB::transaction(fn () => $writer->publish($this->context(), $before))['state'];
+        DB::transaction(fn () => $writer->restore($this->context(), $before, $published));
+        $restored = $states->read(self::SHA);
+        self::assertSame($before['registries'], $restored['registries']);
+        self::assertSame($before['articles'], $restored['articles']);
+        foreach ($before['guides'] as $key => $guide) {
+            self::assertSame($guide['values'], $restored['guides'][$key]['values']);
+            self::assertSame($guide['seo'], $restored['guides'][$key]['seo']);
+            self::assertCount(2, $restored['guides'][$key]['revisions']);
+            self::assertSame($guide['revisions'][0], $restored['guides'][$key]['revisions'][0]);
+        }
+        DB::transaction(fn () => $writer->restore($this->context(), $before, $published));
+        self::assertSame($restored, $states->read(self::SHA));
+    }
+
+    public function test_restore_does_not_overwrite_a_later_operator_change(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        $writer = app(EqExistingPublicPageWriter::class);
+        $published = DB::transaction(fn () => $writer->publish($this->context(), $before))['state'];
+        ArticleTranslationRevision::query()->where('content_md', 'Operator working r2')->update(['content_md' => 'Later operator change']);
+        $changed = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => $writer->restore($this->context(), $before, $published));
+            self::fail('Rollback must preserve later operator changes');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_rollback_concurrent_state', $error->getMessage());
+        }
+        self::assertSame($changed, $states->read(self::SHA));
+    }
+
+    public function test_paired_english_public_revision_binds_updated_source_without_rewriting_its_working_draft(): void
+    {
+        $this->seedNativeTargets();
+        $chinese = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $english = Article::query()->where('locale', 'en')->firstOrFail();
+        $english->forceFill(['translation_status' => 'published', 'source_locale' => 'zh-CN',
+            'source_article_id' => $chinese->id, 'translated_from_article_id' => $chinese->id,
+            'translation_group_id' => $chinese->translation_group_id, 'translated_from_version_hash' => $chinese->source_version_hash])->saveQuietly();
+        ArticleTranslationRevision::query()->where('article_id', $english->id)->update([
+            'source_article_id' => $chinese->id, 'source_locale' => 'zh-CN', 'translation_group_id' => $chinese->translation_group_id,
+            'source_version_hash' => $chinese->source_version_hash, 'translated_from_version_hash' => $chinese->source_version_hash,
+        ]);
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        $after = DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before))['state'];
+        self::assertSame($after['articles']['EQ-02:zh-CN']['values']['source_version_hash'], $after['articles']['EQ-02:en']['published']['source_version_hash']);
+        self::assertSame($after['articles']['EQ-02:zh-CN']['values']['source_version_hash'], $after['articles']['EQ-02:en']['values']['translated_from_version_hash']);
+        self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
+    }
+
+    private function context(): PromotionContext
+    {
+        return new PromotionContext(base_path(EqExistingPublicPagePackage::PACKAGE), self::SHA, 'W3', 'EQ-EXISTING-PUBLIC-PAGES',
+            str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), 6, str_repeat('e', 64));
+    }
+
+    public static function seedNativeTargets(): void
+    {
+        config(['content_packs.public_scale_cache_store' => 'array']);
+        $localeContent = ['why_choose' => ['intro' => 'Original public intro', 'items' => array_fill(0, 4, ['body' => 'Original public body', 'link' => ['href' => '#original', 'label' => 'Original link']])],
+            'faq' => array_fill(0, 11, ['a' => 'Original answer', 'q' => 'Original question', 'id' => 'original',
+                'references' => [['href' => 'https://example.org', 'label' => 'Original reference']], 'related_links' => [['href' => '#choose-version', 'label' => 'Original link']]])];
+        app(ScaleRegistryWriter::class)->upsertScale([
+            'org_id' => 0, 'code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment',
+            'slugs_json' => ['eq-test-emotional-intelligence-assessment'], 'driver_type' => 'eq_60',
+            'default_locale' => 'en', 'is_public' => true, 'is_active' => true, 'is_indexable' => true,
+            'content_i18n_json' => ['en' => $localeContent, 'zh' => $localeContent],
+        ]);
+        foreach (['zh-CN', 'en'] as $locale) {
+            $article = Article::query()->create(['org_id' => 0, 'slug' => 'eq-test-tool-guide', 'locale' => $locale,
+                'title' => 'Published title', 'excerpt' => 'Published excerpt', 'content_md' => 'Published public body', 'status' => 'published', 'is_public' => true]);
+            $revision = ArticleTranslationRevision::query()->create([
+                'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+                'translation_group_id' => $article->translation_group_id, 'locale' => $locale, 'source_locale' => $locale,
+                'revision_number' => 1, 'revision_status' => 'published', 'title' => 'Published title', 'excerpt' => 'Published excerpt', 'content_md' => 'Published public body',
+            ]);
+            $working = $revision;
+            if ($locale === 'en') {
+                $working = $revision->replicate();
+                $working->forceFill(['revision_number' => 2, 'revision_status' => 'machine_draft', 'content_md' => 'Operator working r2'])->save();
+            }
+            $article->forceFill(['published_revision_id' => $revision->id, 'working_revision_id' => $working->id])->saveQuietly();
+            ArticleSeoMeta::query()->create(['article_id' => $article->id, 'org_id' => 0, 'locale' => $locale, 'seo_title' => 'Original title', 'seo_description' => 'Original description']);
+            $guide = CareerGuide::query()->create(['org_id' => 0, 'guide_code' => 'eq-work-'.$locale, 'slug' => 'iq-eq-balance-at-work',
+                'locale' => $locale, 'title' => 'Work guide', 'excerpt' => 'Guide excerpt', 'body_md' => 'Original guide body', 'status' => 'published', 'is_public' => true]);
+            CareerGuideSeoMeta::query()->create(['career_guide_id' => $guide->id, 'seo_title' => 'Original title', 'seo_description' => 'Original description']);
+            $guide->relatedArticles()->attach($article->id, ['sort_order' => 10]);
+            CareerGuideRevision::query()->create(['career_guide_id' => $guide->id, 'revision_no' => 1,
+                'snapshot_json' => ['guide' => ['body_md' => 'Original guide body']], 'note' => 'Original fixture history']);
+        }
+    }
+}

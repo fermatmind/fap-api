@@ -1317,6 +1317,21 @@ jobs:
           path: ${{ runner.temp }}/eq-new-source-publication/staging.json
           if-no-files-found: error
           retention-days: 30
+      - id: eq-existing-publish
+        name: Publish exact reviewed six existing bilingual EQ public pages
+        if: fromJSON(needs.policy.outputs.classification).operations.eq_existing_public_pages_publish == true
+        env:
+          EQ_PUBLISH_ENVIRONMENT: staging
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/eq-existing-public-publish.mjs
+      - name: Upload sanitized existing EQ page publication receipt
+        if: always() && steps.eq-existing-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: eq-existing-public-staging-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/eq-existing-public-publication/staging.json
+          if-no-files-found: error
+          retention-days: 30
       - id: iq-public-publish
         name: Publish exact reviewed bilingual IQ public entry
         if: fromJSON(needs.policy.outputs.classification).operations.iq_public_scale_publish == true
@@ -2397,6 +2412,21 @@ jobs:
           path: ${{ runner.temp }}/eq-new-source-publication/production.json
           if-no-files-found: error
           retention-days: 30
+      - id: eq-existing-publish
+        name: Publish exact reviewed six existing bilingual EQ public pages
+        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.eq_existing_public_pages_publish == true
+        env:
+          EQ_PUBLISH_ENVIRONMENT: production
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/eq-existing-public-publish.mjs
+      - name: Upload sanitized existing EQ page publication receipt
+        if: always() && steps.eq-existing-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: eq-existing-public-production-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/eq-existing-public-publication/production.json
+          if-no-files-found: error
+          retention-days: 30
       - id: iq-public-publish
         name: Publish exact reviewed bilingual IQ public entry
         if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.iq_public_scale_publish == true
@@ -2443,7 +2473,7 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Restore exact LKG after Career publisher failure
-        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure')
+        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure')
         shell: bash
         run: |
           set -euo pipefail
@@ -2456,6 +2486,14 @@ jobs:
               and .workflow_run_attempt == 1 and .sanitized == true
               and .recovery_completed == true
             ' "$RUNNER_TEMP/eq-new-source-publication/production.json" >/dev/null
+          fi
+          if [ '${{ steps.eq-existing-publish.outcome }}' = failure ]; then
+            jq -e --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" '
+              .schema == "eq.existing_public_pages.publish.v1" and .ok == false
+              and .source_commit == $sha and .workflow_run_id == $run
+              and .workflow_run_attempt == 1 and .sanitized == true
+              and .recovery_completed == true
+            ' "$RUNNER_TEMP/eq-existing-public-publication/production.json" >/dev/null
           fi
           if [ '${{ steps.iq-public-publish.outcome }}' = failure ]; then
             jq -e --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" '

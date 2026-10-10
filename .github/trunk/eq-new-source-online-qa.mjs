@@ -22,9 +22,10 @@ export function assertSsrCandidate(document, row) {
   if(!document.articleVisible || document.body.replace(/\s/gu,'') !== expectedVisibleBody(row.snapshot.content_md)) throw new Error('EQ_SSR_BODY_MISMATCH');
 }
 // This function runs inside the actual browser, where external CSS and layout exist.
-async function browserVisibleDocument() {
+async function browserVisibleDocument(selector, expandDetails) {
   const start=Date.now();
-  while ((document.readyState!=='complete' || !document.querySelector('article[data-testid="article-detail-content"]')) && Date.now()-start<12000) await new Promise(resolve=>setTimeout(resolve,100));
+  while ((document.readyState!=='complete' || !document.querySelector(selector)) && Date.now()-start<12000) await new Promise(resolve=>setTimeout(resolve,100));
+  if (expandDetails) for (const detail of document.querySelectorAll(`${selector} details`)) detail.open=true;
   await new Promise(resolve=>setTimeout(resolve,500));
   const visible = element => {
     for(let node=element;node instanceof Element;node=node.parentElement) {
@@ -56,7 +57,7 @@ async function browserVisibleDocument() {
     }
     return parts.join('');
   };
-  const articles=[...document.querySelectorAll('article[data-testid="article-detail-content"]')];
+  const articles=[...document.querySelectorAll(selector)];
   return {title:document.title,description:document.querySelector('meta[name="description"]')?.content ?? '',
     headings:[...document.querySelectorAll('h1')].filter(visible).map(text),
     articleVisible:articles.length===1 && visible(articles[0]),body:articles.length===1 ? text(articles[0]) : ''};
@@ -87,7 +88,8 @@ export async function closeOwnedBrowser(child, close, profile) {
   }
   rmSync(profile,{recursive:true,force:true});
 }
-export async function renderedDocument(url) {
+export async function renderedDocument(url, {selector='article[data-testid="article-detail-content"]', width=1366, expandDetails=false} = {}) {
+  if(!['article[data-testid="article-detail-content"]','main article','main'].includes(selector) || ![390,1366].includes(width)) throw new Error('EQ_BROWSER_OPTIONS_INVALID');
   const browser=['/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(path=>existsSync(path));
   if (!browser) throw new Error('EQ_BROWSER_UNAVAILABLE');
   const profile=mkdtempSync(join(tmpdir(),'eq-public-reader-'));
@@ -119,11 +121,12 @@ export async function renderedDocument(url) {
     const {targetId}=await request('Target.createTarget',{url:'about:blank'});
     const {sessionId}=await request('Target.attachToTarget',{targetId,flatten:true});
     await request('Page.enable',{},sessionId);loadSession=sessionId;
+    await request('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width===390},sessionId);
     const loaded=new Promise((resolve,reject)=>pending.set('load',{resolve,reject}));loaded.catch(()=>{});
     const navigation=await request('Page.navigate',{url},sessionId);
     if(navigation.errorText) throw new Error('EQ_BROWSER_READBACK_FAILED');
     await loaded;
-    const result=await request('Runtime.evaluate',{expression:`(${browserVisibleDocument.toString()})()`,awaitPromise:true,returnByValue:true},sessionId);
+    const result=await request('Runtime.evaluate',{expression:`(${browserVisibleDocument.toString()})(${JSON.stringify(selector)},${Boolean(expandDetails)})`,awaitPromise:true,returnByValue:true},sessionId);
     if(result.exceptionDetails || !result.result?.value) throw new Error('EQ_BROWSER_READBACK_FAILED');
     return result.result.value;
   } finally {

@@ -201,6 +201,9 @@ export function classifyPaths(inputPaths) {
     iq_public_scale_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/entry/20261009-v1/")),
     iq_public_scale_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/") || /IqPublic(?:ScalePromotionAdapter|EntryPackage|EntryFrontendRevalidator)/.test(path) || /iq-public-scale/.test(path) || path === "backend/scripts/deploy/run_iq_public_scale_publish.php"),
     eq_new_source_articles_publish: paths.some(path => /^backend\/content_assets\/eq_public\/(?:candidate\/20261009-new-articles\/assets\.json|reviews\/20261009-new-articles\/)/.test(path)),
+    eq_existing_public_pages_publish: paths.some(path => path === 'backend/content_assets/eq_public/candidate/20261010-existing-pages/assets.json'
+      || /^backend\/content_assets\/eq_public\/reviews\/20261010-existing-pages\/(?:eq-existing-v3-zh-CN-v1|eq-existing-v3-en-v1|eq-existing-v2-en-v1|eq-existing-v4-en-entry-label-v1|sh02-iq-cross-v3|sh02-iq-cross-v4-en)\/(?:candidate\.json|report\.md)$/.test(path)),
+    eq_existing_public_pages_checks: paths.some(path => /EqExistingPublicPage|EqPublicRegistryTextPatch|eq-existing-public|20261010-existing-pages/.test(path)),
     eq_new_source_articles_checks: paths.some(path => /^backend\/content_assets\/eq_public\//.test(path) || /Eq(?:NewSourceArticlePromotionAdapter|PublicArticlePackage|SourceExecutionMutex)/.test(path) || /eq-new-source/.test(path) || path === "backend/scripts/deploy/run_eq_new_source_article_publish.php"),
     a08_gate_only: a08GateOnly,
     a08_readonly_wiring: a08ReadonlyWiring,

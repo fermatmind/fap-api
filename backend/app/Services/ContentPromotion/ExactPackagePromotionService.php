@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\ContentPromotion\Adapters\EqExistingPublicPagePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\IqEqTopicPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\IqPublicArticlePromotionAdapter;
@@ -26,7 +27,7 @@ final class ExactPackagePromotionService
     {
         $adapter = $this->registry->resolve($context->lane, $context->subscope);
         $previous = null;
-        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter || $adapter instanceof IqPublicScalePromotionAdapter || $adapter instanceof IqPublicArticlePromotionAdapter || $adapter instanceof IqEqTopicPromotionAdapter)) {
+        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter || $adapter instanceof EqExistingPublicPagePromotionAdapter || $adapter instanceof IqPublicScalePromotionAdapter || $adapter instanceof IqPublicArticlePromotionAdapter || $adapter instanceof IqEqTopicPromotionAdapter)) {
             $previous = $this->receipts->readPrevious('content_promotion_preflight_receipt', $context);
         } elseif ($phase === 'publish') {
             $previous = $this->receipts->readPrevious('cms_draft_import_receipt', $context);
@@ -57,6 +58,17 @@ final class ExactPackagePromotionService
 
             return $this->receipts->write($receiptPath, $normalized);
         } catch (Throwable $throwable) {
+            if ($adapter instanceof EqExistingPublicPagePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
+                if ($phase === 'publish' && ($result['written_count'] ?? 0) === 0) {
+                    throw new DomainException('eq_existing_receipt_failed_without_new_write', previous: $throwable);
+                }
+                $reference = (string) ($result['rollback_reference'] ?? data_get($previous, 'receipt.rollback_reference', ''));
+                if ($reference === '') {
+                    throw new DomainException('eq_existing_receipt_failed_without_rollback_reference', previous: $throwable);
+                }
+                $adapter->rollback($context, $reference);
+                throw new DomainException('eq_existing_receipt_failed_rollback_succeeded', previous: $throwable);
+            }
             if ($adapter instanceof IqPublicArticlePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
                 if ($phase === 'publish' && ($result['written_count'] ?? 0) === 0) {
                     throw new DomainException('iq_article_receipt_failed_without_new_write', previous: $throwable);
@@ -302,7 +314,7 @@ final class ExactPackagePromotionService
 
     private function scopedPublicEvidence(ExactPackagePromotionAdapter $adapter, array $result): array
     {
-        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter && ! $adapter instanceof IqPublicScalePromotionAdapter && ! $adapter instanceof IqPublicArticlePromotionAdapter && ! $adapter instanceof IqEqTopicPromotionAdapter) {
+        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter && ! $adapter instanceof EqExistingPublicPagePromotionAdapter && ! $adapter instanceof IqPublicScalePromotionAdapter && ! $adapter instanceof IqPublicArticlePromotionAdapter && ! $adapter instanceof IqEqTopicPromotionAdapter) {
             return [];
         }
         $hash = (string) ($result['target_state_sha256'] ?? '');
