@@ -571,10 +571,11 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $seo = Article::query()->where('slug', 'what-is-iq-and-how-it-is-measured')->where('locale', 'en')->firstOrFail()->seoMeta;
         $original = $seo->schema_json;
         foreach ([
-            'answer_surface_policy' => 'disabled', 'answer_surface_visibility' => 'hidden',
-            'iq_article_exact_package_v1.package_sha256' => str_repeat('f', 64),
-            'iq_article_exact_package_v1.snapshot_sha256' => str_repeat('f', 64),
-        ] as $path => $value) {
+            ['answer_surface_policy', 'disabled'], ['answer_surface_visibility', 'hidden'],
+            ['answer_surface_policy', null], ['answer_surface_visibility', false],
+            ['iq_article_exact_package_v1.package_sha256', str_repeat('f', 64)],
+            ['iq_article_exact_package_v1.snapshot_sha256', str_repeat('f', 64)],
+        ] as [$path, $value]) {
             $schema = $original;
             Arr::set($schema, 'editorial_package_v1.'.$path, $value);
             $seo->forceFill(['schema_json' => $schema])->saveQuietly();

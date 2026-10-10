@@ -164,6 +164,13 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         foreach ([[1, 1.0], [1, '1'], [true, 1], [null, ''], [['a' => null], []], [['one', 'two'], ['two', 'one']], ['copy', 'copy ']] as [$actual, $expected]) {
             self::assertFalse($compare->invoke($adapter, $actual, $expected));
         }
+        foreach ([
+            [['zh' => ['faq' => [['a' => null]]]], ['zh' => ['faq' => [[]]]]],
+            [['en' => ['public' => false]], ['en' => ['public' => null]]],
+            [['en' => ['faq' => ['0' => 'one', '2' => 'two']]], ['en' => ['faq' => ['one', 'two']]]],
+        ] as [$actual, $expected]) {
+            self::assertFalse($compare->invoke($adapter, $actual, $expected));
+        }
     }
 
     public function test_faq_list_reordering_remains_a_content_change_and_blocks_owned_rollback(): void

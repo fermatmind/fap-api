@@ -146,6 +146,7 @@ final class EqExistingPublicPageWriterTest extends TestCase
         foreach ($before['guides'] as $key => $guide) {
             self::assertSame($guide['values'], $restored['guides'][$key]['values']);
             self::assertSame($guide['seo'], $restored['guides'][$key]['seo']);
+            self::assertSame($guide['maps'], $restored['guides'][$key]['maps']);
             self::assertCount(2, $restored['guides'][$key]['revisions']);
             self::assertSame($guide['revisions'][0], $restored['guides'][$key]['revisions'][0]);
         }
@@ -187,11 +188,13 @@ final class EqExistingPublicPageWriterTest extends TestCase
             self::assertSame($before['articles'][$key]['values']['is_indexable'], $article['values']['is_indexable']);
         }
         $correctiveHistory = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
+        $correctiveGuideHistory = CareerGuideRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
         self::assertSame(count($history) + 2, count($correctiveHistory));
         self::assertSame(0, DB::transaction(fn () => $writer->publish($next, $after))['written_count']);
         self::assertSame($correctiveHistory, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
         DB::transaction(fn () => $writer->restore($next, $restored, $after));
         self::assertSame($correctiveHistory, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
+        self::assertSame($correctiveGuideHistory, CareerGuideRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
         self::assertSame($before['articles'], $states->read(self::SHA)['articles']);
     }
 

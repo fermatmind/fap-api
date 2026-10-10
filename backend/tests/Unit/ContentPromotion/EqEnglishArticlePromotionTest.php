@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
@@ -458,7 +459,14 @@ final class EqEnglishArticlePromotionTest extends TestCase
         self::assertSame($sourcesBefore, Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all());
     }
 
-    public function test_recovery_refuses_a_concurrent_protected_target_change(): void
+    public static function protectedTargetChanges(): array
+    {
+        return [['reviewer_name', 'Concurrent owner edit'], ['status', 'draft'],
+            ['is_public', false], ['is_indexable', true]];
+    }
+
+    #[DataProvider('protectedTargetChanges')]
+    public function test_recovery_refuses_a_concurrent_protected_target_change(string $field, mixed $value): void
     {
         $this->seedSources();
         $adapter = app(ArticleCmsPromotionAdapter::class);
@@ -466,18 +474,20 @@ final class EqEnglishArticlePromotionTest extends TestCase
         $this->previous('cms_draft_import_receipt', $adapter->draftImport($this->context));
         $published = $adapter->publish($this->context);
         $target = Article::query()->where('locale', 'en')->firstOrFail();
-        $target->forceFill(['reviewer_name' => 'Concurrent owner edit'])->saveQuietly();
+        $target->forceFill([$field => $value])->saveQuietly();
         $changed = $target->fresh()->getAttributes();
         $sources = Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all();
         try {
             $adapter->rollback($this->context, $published['rollback_reference']);
             self::fail('Recovery must leave concurrent protected data intact.');
         } catch (\DomainException $error) {
-            self::assertSame('eq_english_rollback_concurrent_change', $error->getMessage());
+            self::assertSame(in_array($field, ['status', 'is_public'], true)
+                ? 'article_promotion_rollback_public_projection_drift'
+                : 'eq_english_rollback_concurrent_change', $error->getMessage());
         }
         self::assertSame($changed, $target->fresh()->getAttributes());
         self::assertSame($sources, Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all());
-        self::assertSame(3, Article::query()->where('locale', 'en')->where('is_public', true)->count());
+        self::assertSame($field === 'is_public' ? 2 : 3, Article::query()->where('locale', 'en')->where('is_public', true)->count());
     }
 
     public function test_english_cache_invalidation_runs_after_the_publication_transaction_and_failure_restores_targets(): void

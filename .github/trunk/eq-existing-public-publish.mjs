@@ -47,6 +47,14 @@ const failureCodes = new Set([
   'eq_existing_phase_receipt_invalid', 'eq_existing_execution_failed',
   'eq_existing_frontend_revalidation_not_configured', 'eq_existing_frontend_revalidation_failed',
 ]);
+const onlineFailureCodes = new Map([
+  'EQ_EXISTING_ONLINE_ENVIRONMENT', 'EQ_EXISTING_ONLINE_RESPONSE', 'EQ_EXISTING_ONLINE_PAYLOAD_LIMIT',
+  'EQ_EXISTING_ONLINE_IDENTITY', 'EQ_EXISTING_ONLINE_REGISTRY_BODY', 'EQ_EXISTING_ONLINE_BODY',
+  'EQ_EXISTING_ENTRY_METADATA', 'EQ_EXISTING_ENTRY_RENDERED_BODY', 'EQ_EXISTING_ENTRY_FAQ',
+  'EQ_SSR_TITLE_MISMATCH', 'EQ_SSR_SEO_TITLE_MISMATCH', 'EQ_SSR_METADATA_MISMATCH', 'EQ_SSR_BODY_MISMATCH',
+  'EQ_BROWSER_OPTIONS_INVALID', 'EQ_BROWSER_UNAVAILABLE', 'EQ_BROWSER_READBACK_FAILED', 'EQ_BROWSER_EXIT_UNCONFIRMED',
+].map(code => [code, code.toLowerCase()]));
+for (const code of onlineFailureCodes.values()) failureCodes.add(code);
 export function recoveryFailure(execution, execute = request => transport(execution, request), failureCode = 'eq_existing_execution_failed') {
   let recoveryCompleted = false;
   try {
@@ -88,6 +96,15 @@ export function publish(execution, execute = request => transport(execution, req
     throw recoveryFailure(execution, execute, failureCode);
   }
 }
+export async function acceptOnline(execution, receipt, environment, backendRoot,
+  verify = verifyOnlineCandidates, execute = request => transport(execution, request)) {
+  try {
+    receipt.online_acceptance = await verify(environment, backendRoot);
+    return receipt;
+  } catch (error) {
+    throw recoveryFailure(execution, execute, onlineFailureCodes.get(error?.message));
+  }
+}
 async function cli() {
   const env=process.env;
   if(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==env.DEPLOY_SHA) throw new Error('EQ_CHECKOUT_SHA_MISMATCH');
@@ -95,9 +112,7 @@ async function cli() {
   const directory=resolve(env.RUNNER_TEMP,'eq-existing-public-publication');
   mkdirSync(directory,{recursive:true,mode:0o700});
   try {
-    const receipt=publish(execution);
-    try { receipt.online_acceptance=await verifyOnlineCandidates(env.EQ_PUBLISH_ENVIRONMENT,resolve('backend')); }
-    catch { throw recoveryFailure(execution); }
+    const receipt=await acceptOnline(execution,publish(execution),env.EQ_PUBLISH_ENVIRONMENT,resolve('backend'));
     writeFileSync(resolve(directory,`${env.EQ_PUBLISH_ENVIRONMENT}.json`),JSON.stringify(receipt)+'\n',{flag:'wx',mode:0o600});
   } catch(original) {
     const error=original.receipt?original:recoveryFailure(execution);

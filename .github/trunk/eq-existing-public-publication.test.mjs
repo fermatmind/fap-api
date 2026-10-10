@@ -5,7 +5,7 @@ import {readFileSync, mkdtempSync, mkdirSync, copyFileSync, writeFileSync, rmSyn
 import {tmpdir} from 'node:os';
 import {dirname, join} from 'node:path';
 import {inspectPackage, readCandidateRows, workflowSignature, packagePath, executorPaths, isEqExistingOnlyPromotionRegistration, isEqExistingOnlyContextFactoryChange} from './eq-existing-public-package.mjs';
-import {buildExecution,publish} from './eq-existing-public-publish.mjs';
+import {buildExecution,publish,acceptOnline} from './eq-existing-public-publish.mjs';
 import {verifyOnlineCandidates} from './eq-existing-public-online-qa.mjs';
 import {expectedVisibleBody} from './eq-new-source-online-qa.mjs';
 import {classifyPaths} from './classify-paths.mjs';
@@ -180,4 +180,32 @@ test('frontend refresh failures preserve fixed diagnostic codes and recover the 
     assert.deepEqual(calls.map(row=>row.mode),['publish','recover']);
     assert.equal(calls[1].source_commit,execution.request.source_commit);
   }
+});
+test('online failure retains only a fixed diagnostic and recovers the exact signed publication once',async()=>{
+  for(const [message,expected] of [
+    ['EQ_EXISTING_ENTRY_RENDERED_BODY','eq_existing_entry_rendered_body'],
+    ['EQ_EXISTING_ENTRY_FAQ','eq_existing_entry_faq'],
+    ['EQ_SSR_BODY_MISMATCH','eq_ssr_body_mismatch'],
+    ['EQ_BROWSER_READBACK_FAILED','eq_browser_readback_failed'],
+    ['EQ_EXISTING_ENTRY_RENDERED_BODY private URL and secret','eq_existing_execution_failed'],
+    ['private URL and secret','eq_existing_execution_failed'],
+  ]) {
+    const execution=buildExecution(env,'backend'),calls=[];
+    const receipt=publish(execution,()=>({status:0,stdout:JSON.stringify(response())}));
+    await assert.rejects(acceptOnline(execution,receipt,'staging','backend',
+      async()=>{throw new Error(message);},request=>{
+        calls.push(request);
+        return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',restored:true,recovery_status:'restored',source_commit:request.source_commit})};
+      }),error=>error.receipt.error_code===expected&&error.receipt.recovery_completed===true
+        &&!JSON.stringify(error.receipt).includes('private URL'));
+    assert.deepEqual(calls,[{...execution.request,mode:'recover'}]);
+  }
+});
+test('accepted online publication retains its six-page verdict without invoking recovery',async()=>{
+  const execution=buildExecution(env,'backend'),receipt=publish(execution,()=>({status:0,stdout:JSON.stringify(response())}));
+  const verdict={environment:'staging',api_readback_count:6,seo_readback_count:4,ssr_readback_count:6,rendered_viewport_count:12};
+  assert.equal(await acceptOnline(execution,receipt,'staging','backend',async(environment,root)=>{
+    assert.equal(environment,'staging');assert.equal(root,'backend');return verdict;
+  },()=>assert.fail('Accepted publication must not recover')),receipt);
+  assert.deepEqual(receipt.online_acceptance,verdict);
 });
