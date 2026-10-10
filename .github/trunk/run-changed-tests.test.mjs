@@ -71,3 +71,20 @@ test('braces install and build inputs select the unchanged fixture suite and rea
   assert.deepEqual(changedTestPlan([{status:'M',path}],{vitest:true}).node,[]);
  assert.deepEqual(changedTestPlan([{status:'D',path:inputs[2]}]).node,['backend/tests/Node/braces-depth-patch.test.mjs']);
 });
+
+
+test('IQ topic seed dependency selects both real consumers in each PHP mode and keeps unknown helpers fail closed',()=>{
+ const helper='backend/tests/Unit/ContentPromotion/Concerns/SeedsIqEqTopicPrerequisites.php';
+ const expected=['backend/tests/Unit/ContentPromotion/IqEqTopicPrerequisitesTest.php','backend/tests/Unit/ContentPromotion/IqEqTopicPromotionAdapterTest.php'].sort();
+ for(const status of ['A','M','D']){
+  const plan=changedTestPlan([{status,path:helper},...expected.map(path=>({status:'M',path}))]);
+  assert.deepEqual(plan.php,expected);assert.deepEqual(plan.unsupported,[]);
+  assert.deepEqual(plan.removed,status==='D'?[helper]:[]);
+  for(const mode of ['legacy','v2']){
+   const calls=[];runChangedTests(plan,{mode,run:(cmd,args)=>{calls.push({cmd,args});return {status:0};}});
+   assert.deepEqual(calls,[{cmd:'php',args:['artisan','test',...expected.map(path=>path.replace(/^backend\//,'')),'--no-ansi']}]);
+   assert.throws(()=>runChangedTests(plan,{mode,run:()=>({status:1})}),/Changed test execution failed/);
+  }
+ }
+ assert.throws(()=>changedTestPlan([{status:'M',path:helper.replace('SeedsIqEqTopicPrerequisites','OtherHelper')}]),/Unsupported changed tests/);
+});

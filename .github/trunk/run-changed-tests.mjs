@@ -5,6 +5,13 @@ export function changedTestPlan(changes, {vitest=false}={}) {
  for(const {status,path} of changes){
   if(!/(?:^|\/)(?:tests?|__tests__)\/|(?:Test\.php|\.test\.[cm]?[jt]sx?|(?:test_[^/]+|[^/]+_test)\.(?:py|sh))$/.test(path))continue;
   if(/(?:fixtures|snapshots)\//.test(path)||/\.(?:json|md|xml|yaml|yml|snap|csv|png)$/.test(path))continue;
+  // This IQ/SH-01 seed trait is a dependency, not an executable test.
+  // Changes must run both real consumers; unknown PHP helpers still fail closed.
+  if(path==='backend/tests/Unit/ContentPromotion/Concerns/SeedsIqEqTopicPrerequisites.php'){
+   plan.php.push('backend/tests/Unit/ContentPromotion/IqEqTopicPrerequisitesTest.php','backend/tests/Unit/ContentPromotion/IqEqTopicPromotionAdapterTest.php');
+   if(status==='D')plan.removed.push(path);
+   continue;
+  }
   if(status==='D'){plan.removed.push(path);continue;}
   if(/Test\.php$/.test(path))plan.php.push(path);
   else if(vitest && /^tests\/.*\.test\.[jt]sx?$/.test(path))plan.vitest.push(path);
