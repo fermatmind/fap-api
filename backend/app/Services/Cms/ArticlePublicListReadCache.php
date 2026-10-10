@@ -88,7 +88,10 @@ final class ArticlePublicListReadCache
                         Cache::forget($this->previousGenerationKey());
                     }
 
-                    Cache::forever($this->generationKey(), $this->newGeneration());
+                    $written = Cache::forever($this->generationKey(), $this->newGeneration());
+                    if (! $preserveLkg && ! $written) {
+                        throw new \RuntimeException('article_list_generation_write_failed');
+                    }
                 });
         } catch (Throwable $throwable) {
             $this->recordInvalidationFailure($throwable);

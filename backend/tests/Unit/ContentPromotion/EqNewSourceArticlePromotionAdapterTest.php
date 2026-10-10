@@ -15,7 +15,10 @@ use App\Services\ContentPromotion\PromotionContextFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Mockery;
+use RuntimeException;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 
@@ -73,6 +76,84 @@ final class EqNewSourceArticlePromotionAdapterTest extends TestCase
         self::assertSame($restored, Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all());
         self::assertSame($before, $control->fresh()->getAttributes());
         self::assertSame($beforeWorking, $working->fresh()->getAttributes());
+    }
+
+    public function test_published_noop_rejects_changed_revision_identity_and_empty_or_stale_source_hash(): void
+    {
+        $context = $this->context();
+        $adapter = app(EqNewSourceArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $import = $adapter->draftImport($context);
+        $this->previous($context, 'cms_draft_import_receipt', $import);
+        $adapter->publish($context);
+        $article = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $revision = $article->workingRevision;
+        $original = $revision->getAttributes();
+        foreach (['org_id' => 7, 'locale' => 'en', 'source_locale' => 'en', 'source_article_id' => 999,
+            'translation_group_id' => 'foreign-group', 'source_version_hash' => null] as $field => $value) {
+            $revision->forceFill([$field => $value])->saveQuietly();
+            try {
+                $adapter->preflight($context);
+                self::fail('Changed source identity must not enter published no-op: '.$field);
+            } catch (DomainException $error) {
+                self::assertContains($error->getMessage(), ['eq_source_projection_invalid', 'eq_source_foreign_or_unpublishable_draft']);
+            } finally {
+                $revision->setRawAttributes($original)->saveQuietly();
+            }
+        }
+        foreach ([null, str_repeat('9', 64)] as $hash) {
+            $article->forceFill(['source_version_hash' => $hash])->saveQuietly();
+            $revision->forceFill(['source_version_hash' => $hash])->saveQuietly();
+            try {
+                $adapter->preflight($context);
+                self::fail('Matching empty or stale source hashes must fail');
+            } catch (DomainException $error) {
+                self::assertSame('eq_source_projection_invalid', $error->getMessage());
+            }
+        }
+    }
+
+    public function test_publish_retry_counts_only_the_successful_transaction_attempt(): void
+    {
+        $context = $this->context();
+        $adapter = app(EqNewSourceArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $import = $adapter->draftImport($context);
+        $this->previous($context, 'cms_draft_import_receipt', $import);
+        $publicSaves = 0;
+        Event::listen('eloquent.saved: '.Article::class, static function (Article $article) use (&$publicSaves): void {
+            if ($article->is_public && ++$publicSaves === 2) {
+                throw new RuntimeException('Simulated retryable deadlock after one completed source write');
+            }
+        });
+        // RefreshDatabase owns an outer transaction. Replay the same callback
+        // after a real savepoint rollback, matching Laravel's top-level retry.
+        $manager = DB::getFacadeRoot();
+        $connection = $manager->connection();
+        $mock = Mockery::mock($manager)->makePartial();
+        $mock->shouldReceive('transaction')->once()->with(Mockery::type('Closure'), 3)
+            ->andReturnUsing(static function ($callback) use ($connection) {
+                try {
+                    return $connection->transaction($callback);
+                } catch (RuntimeException $error) {
+                    if (! str_starts_with($error->getMessage(), 'Simulated retryable deadlock')) {
+                        throw $error;
+                    }
+
+                    return $connection->transaction($callback);
+                }
+            });
+        DB::swap($mock);
+        try {
+            $result = $adapter->publish($context);
+        } finally {
+            DB::swap($manager);
+        }
+        self::assertSame(5, $publicSaves);
+        self::assertSame(3, $result['written_count']);
+        self::assertSame(3, $result['published_count']);
+        self::assertSame(3, Article::query()->where('is_public', true)->count());
+        self::assertSame(3, $adapter->liveQa($context)['readback_count']);
     }
 
     public function test_import_rejects_a_changed_native_draft_since_preflight(): void
@@ -241,6 +322,42 @@ final class EqNewSourceArticlePromotionAdapterTest extends TestCase
         app(EqNewSourceArticlePromotionAdapter::class)->draftImport($this->context());
     }
 
+    public function test_a_new_release_preserves_already_published_exact_sources_and_their_provenance(): void
+    {
+        $context = $this->context();
+        $adapter = app(EqNewSourceArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
+        $adapter->publish($context);
+        $before = Article::query()->get()->map->getAttributes()->all();
+        $revisions = ArticleTranslationRevision::query()->get()->map->getAttributes()->all();
+        $next = $this->context(str_repeat('e', 40), '1002');
+        self::assertFalse($adapter->recoverFailedPublication($next));
+        $this->previous($next, 'content_promotion_preflight_receipt', $adapter->preflight($next));
+        $import = $adapter->draftImport($next);
+        self::assertSame(0, $import['written_count']);
+        $this->previous($next, 'cms_draft_import_receipt', $import);
+        $published = $adapter->publish($next);
+        self::assertSame(0, $published['written_count']);
+        self::assertSame(3, $published['published_count']);
+        self::assertSame(3, $adapter->liveQa($next)['readback_count']);
+        $adapter->rollback($next, $published['rollback_reference']);
+        self::assertSame($before, Article::query()->get()->map->getAttributes()->all());
+        self::assertSame($revisions, ArticleTranslationRevision::query()->get()->map->getAttributes()->all());
+    }
+
+    public function test_already_public_foreign_or_changed_source_is_never_accepted_as_a_noop(): void
+    {
+        $context = $this->context();
+        $adapter = app(EqNewSourceArticlePromotionAdapter::class);
+        $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
+        $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
+        $adapter->publish($context);
+        Article::query()->first()->workingRevision->forceFill(['authority_package_sha256' => str_repeat('f', 64)])->saveQuietly();
+        $this->expectExceptionMessage('eq_source_projection_invalid');
+        $adapter->preflight($this->context(str_repeat('e', 40), '1002'));
+    }
+
     public function test_publish_rejects_changes_after_import_readback(): void
     {
         $context = $this->context();
@@ -268,7 +385,7 @@ final class EqNewSourceArticlePromotionAdapterTest extends TestCase
         config(['content_promotion.execution.previous_receipt' => $file]);
     }
 
-    private function context(): PromotionContext
+    private function context(?string $sourceCommit = null, string $run = '1001'): PromotionContext
     {
         $bytes = file_get_contents(base_path(EqPublicArticlePackage::PACKAGE.'/assets.json'));
         $package = json_decode($bytes, true, 32, JSON_THROW_ON_ERROR);
@@ -287,9 +404,9 @@ final class EqNewSourceArticlePromotionAdapterTest extends TestCase
         return new PromotionContext(
             packageDirectory: base_path(EqPublicArticlePackage::PACKAGE), packageSha256: hash('sha256', $chain),
             lane: 'W3', subscope: EqNewSourceArticlePromotionAdapter::SUBSCOPE,
-            sourceCommit: str_repeat('a', 40), executorReleaseSha256: str_repeat('b', 64),
+            sourceCommit: $sourceCommit ?? str_repeat('a', 40), executorReleaseSha256: str_repeat('b', 64),
             releasePolicySha256: hash('sha256', PromotionContextFactory::canonicalJson(config('content_promotion.release_policy'))),
-            workflowRunId: '1001', workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64),
+            workflowRunId: $run, workflowRunAttempt: 1, workflowSignature: str_repeat('c', 64),
             expectedRowCount: 3, idempotencyKey: str_repeat('d', 64),
         );
     }

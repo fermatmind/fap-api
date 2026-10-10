@@ -114,6 +114,25 @@ final class ArticlePublicListReadCacheTest extends TestCase
         $this->assertSame('previous-generation', $resolved['payload']['items'][0]['slug']);
     }
 
+    public function test_strict_invalidation_propagates_a_false_generation_write_and_default_mode_remains_compatible(): void
+    {
+        $manager = Cache::getFacadeRoot();
+        $manager->forever($this->generationKey(), 'old-generation');
+        $mock = \Mockery::mock($manager)->makePartial();
+        Cache::swap($mock);
+        $mock->shouldReceive('forever')->with($this->generationKey(), \Mockery::type('string'))->twice()->andReturn(false);
+        $cache = app(ArticlePublicListReadCache::class);
+        try {
+            $cache->invalidate(false);
+            $this->fail('Strict invalidation must propagate a failed generation write.');
+        } catch (RuntimeException $failure) {
+            $this->assertSame('article_list_generation_write_failed', $failure->getMessage());
+        }
+        $this->assertSame('old-generation', $manager->get($this->generationKey()));
+        $cache->invalidate();
+        $this->assertSame('old-generation', $manager->get($this->generationKey()));
+    }
+
     public function test_generation_fence_rejects_payload_written_after_invalidation(): void
     {
         $cache = app(ArticlePublicListReadCache::class);

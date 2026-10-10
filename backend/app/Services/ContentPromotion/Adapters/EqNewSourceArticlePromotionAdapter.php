@@ -73,11 +73,15 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
         $previous = $this->receipts->readPrevious('content_promotion_preflight_receipt', $context);
         $written = 0;
         $state = DB::transaction(function () use ($rows, $context, $previous, &$written): array {
+            $written = 0;
             $before = $this->state($rows, true);
             $this->assertReceiptState($previous, $before, $context);
             foreach ($rows as $row) {
                 $this->assertOwnedDraft($row, $before[$this->key($row)], $context);
                 $article = $this->article($row, true);
+                if ($article?->is_public) {
+                    continue;
+                }
                 if ($article && (string) $article->workingRevision?->authority_package_sha256 === $context->packageSha256) {
                     $this->assertProjection($row, $article, $context, false);
 
@@ -142,7 +146,9 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
         $rows = $this->rows($context);
         $previous = $this->receipts->readPrevious('cms_draft_import_receipt', $context);
         $reference = null;
-        $state = DB::transaction(function () use ($rows, $context, $previous, &$reference): array {
+        $written = 0;
+        $state = DB::transaction(function () use ($rows, $context, $previous, &$reference, &$written): array {
+            $written = 0;
             $before = $this->state($rows, true);
             $this->assertReceiptState($previous, $before, $context);
             $reference = $this->snapshots->capture($context, $this->targets($rows), self::PACK, 'before_publication', array_values($before), array_column($rows, 'identity'), [
@@ -152,6 +158,10 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
             ]);
             foreach ($rows as $row) {
                 $article = $this->article($row, true);
+                $this->assertOwnedDraft($row, $before[$this->key($row)], $context);
+                if ($article?->is_public) {
+                    continue;
+                }
                 $this->assertProjection($row, $article, $context, false);
                 $revision = $article->workingRevision;
                 $publishedAt = now();
@@ -165,6 +175,7 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
                 $this->decisions->recordPublished($article, $revision, $publishedAt);
                 ContentReleaseAudit::log('article', $article, self::PACK, false);
                 $this->assertProjection($row, $article->fresh(), $context, true);
+                $written++;
             }
 
             return $this->state($rows, true);
@@ -176,7 +187,7 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
             throw new DomainException('eq_source_post_publish_failed_rollback_succeeded', previous: $error);
         }
 
-        return $this->result($context, 3, 3, $reference, $this->hash($state));
+        return $this->result($context, $written, 3, $reference, $this->hash($state));
     }
 
     public function liveQa(PromotionContext $context): array
@@ -283,6 +294,11 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
             foreach ($rows as $row) {
                 $article = $this->article($row, false);
                 if ($article?->is_public && $article->workingRevision?->authority_package_sha256 === $context->packageSha256) {
+                    if (data_get($article->workingRevision->authority_metadata_json, 'source_commit') !== $context->sourceCommit) {
+                        $this->assertOwnedDraft($row, $this->state([$row], false)[$this->key($row)], $context);
+
+                        continue;
+                    }
                     throw new DomainException('eq_source_recovery_snapshot_missing');
                 }
             }
@@ -338,6 +354,22 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
         }
         $article = $state['article'];
         $revision = $state['revision'];
+        if (($article['status'] ?? null) === 'published' && (int) ($article['is_public'] ?? 0) === 1) {
+            $metadata = json_decode((string) ($revision['authority_metadata_json'] ?? ''), true, 16, JSON_THROW_ON_ERROR);
+            if (($article['source_article_id'] ?? null) !== null || ($article['source_locale'] ?? null) !== 'zh-CN'
+                || ($article['lifecycle_state'] ?? null) !== 'active'
+                || (int) ($article['is_indexable'] ?? 0) !== 0 || (int) ($article['sitemap_eligible'] ?? 0) !== 0 || (int) ($article['llms_eligible'] ?? 0) !== 0
+                || ($revision['authority_source_package'] ?? null) !== EqPublicArticlePackage::PACKAGE
+                || ($metadata['independent_review_input'] ?? null) !== $row['independent_review_input']
+                || ($metadata['independent_review_output'] ?? null) !== $row['independent_review_output']
+                || preg_match('/\A[a-f0-9]{40}\z/', (string) ($metadata['source_commit'] ?? '')) !== 1
+                || ! hash_equals((string) ($article['source_version_hash'] ?? ''), (string) ($revision['source_version_hash'] ?? ''))) {
+                throw new DomainException('eq_source_foreign_or_unpublishable_draft');
+            }
+            $this->assertProjection($row, $this->article($row, false), $context, true);
+
+            return;
+        }
         if (($article['status'] ?? null) !== 'draft' || (int) ($article['is_public'] ?? 0) !== 0
             || ($article['published_revision_id'] ?? null) !== null || ($article['deleted_at'] ?? null) !== null
             || ($article['source_article_id'] ?? null) !== null || ($article['source_locale'] ?? null) !== 'zh-CN'
@@ -367,6 +399,14 @@ final class EqNewSourceArticlePromotionAdapter implements ExactPackagePromotionA
     {
         $revision = $article?->workingRevision;
         if (! $article || ! $revision || $article->trashed() || ! $article->isSourceArticle()
+            || (int) $revision->org_id !== (int) $article->org_id
+            || (int) $revision->article_id !== (int) $article->id
+            || (int) $revision->source_article_id !== (int) $article->id
+            || $revision->locale !== $article->locale || $revision->source_locale !== $article->source_locale
+            || $revision->translation_group_id !== $article->translation_group_id
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) $article->source_version_hash) !== 1
+            || ! hash_equals($article->computeSourceVersionHash(), (string) $article->source_version_hash)
+            || ! hash_equals((string) $article->source_version_hash, (string) $revision->source_version_hash)
             || (string) $revision->authority_package_sha256 !== $context->packageSha256
             || (string) $revision->authority_asset_key !== $this->key($row)
             || (string) $revision->revision_status !== ($published ? ArticleTranslationRevision::STATUS_PUBLISHED : ArticleTranslationRevision::STATUS_APPROVED)
