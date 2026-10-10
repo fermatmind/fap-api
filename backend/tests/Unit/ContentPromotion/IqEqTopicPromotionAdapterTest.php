@@ -66,8 +66,9 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
         $this->previous($context, 'content_promotion_preflight_receipt', $adapter->preflight($context));
         $this->previous($context, 'cms_draft_import_receipt', $adapter->draftImport($context));
         $armed = true;
-        DB::listen(function ($query) use (&$armed): void {
-            if ($armed && str_starts_with($query->sql, 'update "topic_profiles"')) {
+        $updatePrefix = 'update '.DB::connection()->getQueryGrammar()->wrapTable('topic_profiles').' ';
+        DB::listen(function ($query) use (&$armed, $updatePrefix): void {
+            if ($armed && str_starts_with($query->sql, $updatePrefix)) {
                 $armed = false;
                 throw new RuntimeException('topic_sql_failure');
             }
@@ -78,6 +79,7 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
         } catch (RuntimeException $e) {
             self::assertSame('topic_sql_failure', $e->getMessage());
         }
+        self::assertFalse($armed, 'The real profile update must trigger the injected SQL failure.');
         self::assertSame($before, $this->publicState());
         self::assertSame(1, ContentReleaseSnapshot::query()->where('pack_id', 'iq-eq-topic')->count());
         $this->expectExceptionMessage('iq_eq_topic_failed_sha_terminal');
@@ -154,9 +156,24 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
     {
         $this->seedTopics();
         $adapter = app(IqEqTopicPromotionAdapter::class);
+        $injectedField = null;
+        $injectedValue = null;
+        $hydrated = 0;
+        // Strict MySQL cannot store malformed dates. Inject raw hydration bytes
+        // before the adapter's string casts, without changing schema or SQL mode.
+        TopicProfile::retrieved(function (TopicProfile $profile) use (&$injectedField, &$injectedValue, &$hydrated): void {
+            if ($profile->locale === 'en' && $injectedField !== null) {
+                $attributes = $profile->getAttributes();
+                $attributes[$injectedField] = $injectedValue;
+                $profile->setRawAttributes($attributes, true);
+                $hydrated++;
+            }
+        });
         foreach (['published_at', 'scheduled_at'] as $field) {
             foreach (['2026-02-30', 'yesterday'] as $value) {
-                DB::table('topic_profiles')->where('locale', 'en')->update([$field => $value]);
+                $injectedField = $field;
+                $injectedValue = $value;
+                $hydrated = 0;
                 $before = $this->publicState();
                 try {
                     $adapter->preflight($this->context());
@@ -164,9 +181,9 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
                 } catch (\DomainException $error) {
                     self::assertSame('iq_eq_topic_publication_hold', $error->getMessage());
                 }
+                self::assertGreaterThan(0, $hydrated, 'The adapter must inspect the malformed raw hydration bytes.');
                 self::assertSame($before, $this->publicState());
                 self::assertSame(0, DB::table('topic_profile_revisions')->count());
-                DB::table('topic_profiles')->where('locale', 'en')->update([$field => null]);
             }
         }
     }

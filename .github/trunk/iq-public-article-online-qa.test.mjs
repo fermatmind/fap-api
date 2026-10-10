@@ -168,7 +168,7 @@ test('canonical identity rejects another HTTPS port in SSR and actual API readba
   await assert.rejects(verifyOnlineCandidates('production',backend,onlineFetcher(payload=>{if(payload.meta)payload.meta.canonical=payload.meta.canonical.replace('fermatmind.com/','fermatmind.com:8443/');}),()=>'',pre),/IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
 });
 
-for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for the visible ${surface} copy after the initial document loads`, async () => {
+for (const mountedShell of [false, true]) for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for the visible ${surface} copy ${mountedShell ? 'inside an already visible shell' : 'after the initial document loads'}`, async () => {
   const content = surface === 'article'
     ? '<article data-testid="article-detail-content"><p>Reviewed article copy.</p></article>'
     : surface === 'entry'
@@ -176,11 +176,15 @@ for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for
       : '<main><section id="overview"><p>Reviewed topic copy.</p></section><section id="faq"><p>Reviewed topic FAQ.</p></section></main>';
   const server = createServer((_request, response) => {
     response.writeHead(200, { 'Content-Type': 'text/html' });
-    response.end(`<html><body><div id="mount">Loading copy</div><script>setTimeout(() => document.getElementById('mount').innerHTML = ${JSON.stringify(content)}, 2500)</script></body></html>`);
+    response.end(`<html><body><div id="mount">${mountedShell ? content.replace(/Reviewed[^<]+/g, 'Loading copy.') : 'Loading copy'}</div><script>setTimeout(() => document.getElementById('mount').innerHTML = ${JSON.stringify(content)}, 2500)</script></body></html>`);
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   try {
-    const actual = await renderPage(`http://127.0.0.1:${server.address().port}/document`, { surface });
+    const verifyDOM = html => {
+      assert.match(articleDom(html, surface).body, new RegExp(`Reviewed ${surface} copy`));
+      if (surface === 'topic') assert.match(articleDom(html, 'topic_faq').body, /Reviewed topic FAQ/);
+    };
+    const actual = await renderPage(`http://127.0.0.1:${server.address().port}/document`, { surface, verifyDOM });
     assert.match(articleDom(actual, surface).body, new RegExp(`Reviewed ${surface} copy`));
     if (surface === 'topic') assert.match(articleDom(actual, 'topic_faq').body, /Reviewed topic FAQ/);
   } finally {
@@ -188,6 +192,25 @@ for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for
   }
 });
 
+
+test('visible but permanently wrong copy expires into the original strict online rejection', async () => {
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end(renderedFixture(rows[0]).replace(/(<article[^>]*>)[\s\S]*?(<\/article>)/, '$1Wrong published body.$2'));
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const prestate = await readOnlinePrestate('production', backend, onlineFetcher(undefined, true));
+    let renderCount = 0;
+    await assert.rejects(verifyOnlineCandidates('production', backend, onlineFetcher(), (_url, options) => {
+      renderCount++;
+      return renderPage(`http://127.0.0.1:${server.address().port}/document`, options);
+    }, prestate), /IQ_ARTICLE_SSR_BODY_MISMATCH/);
+    assert.equal(renderCount, 1);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
+});
 
 test('IQ renderer closes its owned browser before profile cleanup on success and render failure', async () => {
   const directory = mkdtempSync(join(tmpdir(), 'iq-browser-lifecycle-test-'));
@@ -212,7 +235,7 @@ input.on('data', chunk => {
    output.end(JSON.stringify({ id: message.id, result: {} }) + '\\0', () => process.exit(0)); return;
   }
   let result = message.method === 'Target.createTarget' ? { targetId: 'target' } : message.method === 'Target.attachToTarget' ? { sessionId: 'session' } : {};
-  if (message.method === 'Runtime.evaluate') result = ${failed} ? { exceptionDetails: {} } : { result: { value: '<html>Rendered</html>' } };
+  if (message.method === 'Runtime.evaluate') result = ${failed} ? { exceptionDetails: {} } : { result: { value: { html: '<html>Rendered</html>', ready: true } } };
   output.write(JSON.stringify({ id: message.id, result }) + '\\0');
  }
 });`;

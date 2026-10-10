@@ -199,9 +199,9 @@ export async function readOnlinePrestate(environment, backendRoot, fetcher = fet
   }
   return result;
 }
-export async function renderPage(url, { surface = 'article' } = {}) {
+export async function renderPage(url, { surface = 'article', verifyDOM = null } = {}) {
   const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'] }[surface];
-  if (!Array.isArray(selectors)) throw new Error('IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID');
+  if (!Array.isArray(selectors) || (verifyDOM !== null && typeof verifyDOM !== 'function')) throw new Error('IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID');
   // Read the hydrated DOM and computed visibility in the same real Chrome page.
   // CDP uses this child process's private pipes; no public debugging port exists.
   const profile = mkdtempSync(join(tmpdir(), 'iq-article-online-qa-'));
@@ -255,21 +255,33 @@ export async function renderPage(url, { surface = 'article' } = {}) {
           };
           const ready = () => location.href === ${JSON.stringify(url)} && ${JSON.stringify(selectors)}.every(selector =>
             [...document.querySelectorAll(selector)].filter(visible).length === 1);
-          const deadline = Date.now() + 12000;
-          while (!ready() && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 100));
-          if (!ready()) throw new Error('published surface not ready');
           await document.fonts.ready;
           for (const element of document.querySelectorAll('html, body, body *')) {
             const style = getComputedStyle(element);
             if (style.display === 'none' || ['hidden','collapse'].includes(style.visibility)
               || style.contentVisibility === 'hidden' || Number(style.opacity) === 0)
               element.setAttribute('data-iq-qa-hidden', 'true');
+            else element.removeAttribute('data-iq-qa-hidden');
           }
-          return document.documentElement.outerHTML;
+          return { html: document.documentElement.outerHTML, ready: ready() };
         })()`;
-        const result = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, sessionId);
-        if (result.exceptionDetails || typeof result.result?.value !== 'string' || result.result.value.length > 2000000) throw new Error('DOM failed');
-        return result.result.value;
+        let deadline = null;
+        while (true) {
+          const result = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true }, sessionId);
+          const captured = result.result?.value;
+          if (result.exceptionDetails || typeof captured?.html !== 'string' || captured.html.length > 2000000 || typeof captured.ready !== 'boolean') throw new Error('DOM failed');
+          deadline ??= Date.now() + 12000;
+          if (captured.ready) {
+            try { await verifyDOM?.(captured.html); return captured.html; } catch {}
+          }
+          if (Date.now() >= deadline) {
+            if (!captured.ready) throw new Error('published surface not ready');
+            // The caller repeats its original strict assertion on expiry, retaining
+            // the specific mismatch. Waiting never turns invalid copy into a pass.
+            return captured.html;
+          }
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
       })(),
       new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('render timeout')), 45000); }),
     ]);
@@ -306,7 +318,8 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
       || (!article.is_indexable && !String(seo.meta?.robots).split(/[,\s]+/).includes('noindex'))) throw new Error('IQ_ARTICLE_ONLINE_SEO_MISMATCH');
     let responseRobots = null;
     await read(`${web}${path}`, 'text/html', fetcher, false, headers => { responseRobots = headers.get('x-robots-tag'); });
-    assertSsrCandidate(await renderer(`${web}${path}`), row, seo.meta, environment, responseRobots);
+    const verifyDOM = html => assertSsrCandidate(html, row, seo.meta, environment, responseRobots);
+    verifyDOM(await renderer(`${web}${path}`, { verifyDOM }));
   }
   return { api_readback_count: 10, seo_readback_count: 10, ssr_readback_count: 10, environment };
 }
