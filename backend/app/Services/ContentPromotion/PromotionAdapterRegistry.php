@@ -44,12 +44,13 @@ final class PromotionAdapterRegistry
         IqPublicArticlePromotionAdapter $iqPublicArticles,
         IqEqTopicPromotionAdapter $iqEqTopic,
         EqExistingPublicPagePromotionAdapter $eqExistingPublic,
+        PromotionReceiptStore $receipts,
     ) {
         $adapters = [
             $mbtiComparison,
             $mbtiResults,
             new PersonalityCmsPromotionAdapter('W2', 'big-five', $personalityAuthority, $snapshots),
-            new ArticleCmsPromotionAdapter($articleAuthority, $snapshots, $articleMaterialDecisions),
+            new ArticleCmsPromotionAdapter($articleAuthority, $snapshots, $articleMaterialDecisions, $receipts),
             new CareerGuideCmsPromotionAdapter($careerAuthority, $snapshots),
             new RiasecContentPromotionAdapter($riasecAuthority, $snapshots),
             new PersonalityCmsPromotionAdapter('W5', 'enneagram', $personalityAuthority, $snapshots),

@@ -11,14 +11,17 @@ use App\Models\ContentReleaseSnapshot;
 use App\Services\Cms\ArticleMaterialDecisionService;
 use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
+use App\Services\ContentPromotion\EqEnglishArticlePackage;
 use App\Services\ContentPromotion\PromotionAdapterResultFactory;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\ContentPromotion\PromotionPhaseIdentity;
+use App\Services\ContentPromotion\PromotionReceiptStore;
 use App\Services\ContentPromotion\PromotionRollbackSnapshotService;
 use App\Services\ContentPromotion\PromotionTargetSet;
 use DomainException;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 /** @review-surface article */
 final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
@@ -27,6 +30,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
         private readonly ArticleCmsPromotionAuthority $authority,
         private readonly PromotionRollbackSnapshotService $snapshots,
         private readonly ArticleMaterialDecisionService $materialDecisions,
+        private readonly PromotionReceiptStore $receipts,
     ) {}
 
     public function id(): string
@@ -48,22 +52,49 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     {
         $package = $this->authority->inspect($context);
 
-        return PromotionAdapterResultFactory::make($context, 0, count($package['targets']), 0, null, $this->zero());
+        return PromotionAdapterResultFactory::make($context, 0, count($package['targets']), 0, null, $this->zero()) + $this->eqEvidence($context);
     }
 
     public function draftImport(PromotionContext $context): array
     {
-        $result = $this->authority->importDraft($context);
+        $result = $this->isEqEnglishContext($context)
+            ? DB::transaction(function () use ($context): array {
+                $this->assertEqPreviousState($context, 'content_promotion_preflight_receipt');
+
+                return $this->authority->importDraft($context);
+            }, 3)
+            : $this->authority->importDraft($context);
 
         // Candidate-only W3 rows have no English Article to snapshot until the
         // non-public draft is created. The publication snapshot remains the
         // sole rollback authority and is captured immediately before publish.
         return PromotionAdapterResultFactory::make($context, $result['created_count'], $result['readback_count'], 0, null, $this->zero(), [
             'created_count' => $result['created_count'], 'updated_count' => 0, 'unchanged_count' => $result['unchanged_count'],
-        ]);
+        ]) + $this->eqEvidence($context);
     }
 
     public function publish(PromotionContext $context): array
+    {
+        if ($this->isEqEnglishContext($context)) {
+            $result = DB::transaction(function () use ($context): array {
+                $this->assertEqPreviousState($context, 'cms_draft_import_receipt');
+
+                return $this->publishPackage($context);
+            }, 3);
+            try {
+                $this->authority->invalidateDiscoverabilityCaches(false);
+            } catch (Throwable $failure) {
+                $this->rollback($context, $result['rollback_reference']);
+                throw new DomainException('eq_english_cache_failed_rollback_succeeded', previous: $failure);
+            }
+
+            return $result;
+        }
+
+        return $this->publishPackage($context);
+    }
+
+    private function publishPackage(PromotionContext $context): array
     {
         $package = $this->authority->inspect($context);
         $reference = $this->capture($context, $package, 'before_publication');
@@ -72,7 +103,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
         return PromotionAdapterResultFactory::make($context, $result['changed_count'], $result['readback_count'], $result['readback_count'], $reference, $this->zero(), [
             'created_count' => 0, 'updated_count' => $result['changed_count'], 'unchanged_count' => $result['unchanged_count'],
-        ]);
+        ]) + $this->eqEvidence($context);
     }
 
     public function liveQa(PromotionContext $context): array
@@ -81,7 +112,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
         return PromotionAdapterResultFactory::make($context, 0, $result['readback_count'], $result['readback_count'], null, $this->zero(), [
             'created_count' => 0, 'updated_count' => 0, 'unchanged_count' => $result['readback_count'],
-        ]);
+        ]) + $this->eqEvidence($context);
     }
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
@@ -92,6 +123,9 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
         $candidate = ContentReleaseSnapshot::query()->find((int) $match[1]);
         $identities = $candidate instanceof ContentReleaseSnapshot ? (array) data_get($candidate->meta_json, 'target_identities', []) : [];
         $snapshot = $this->snapshots->resolve($context, PromotionTargetSet::fromIdentities($identities), 'article-cms', 'before_publication', $rollbackReference);
+        if ($this->isEqEnglishContext($context)) {
+            $this->assertEqSnapshot($context, $snapshot);
+        }
         DB::transaction(function () use ($snapshot, $context, $rollbackReference): void {
             foreach ((array) data_get($snapshot->meta_json, 'rows', []) as $row) {
                 if (! is_array($row) || (string) ($row['package_sha256'] ?? '') !== $context->packageSha256) {
@@ -115,6 +149,9 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                     ->where('article_id', $article->id)
                     ->where('locale', $article->locale)
                     ->first();
+                if (($row['eq_english'] ?? false) === true) {
+                    $this->assertEqProtectedState($article, $revision, $seo, $row);
+                }
                 $this->assertExpectedPublishedProjection($article, $revision, $seo, $row);
                 foreach ((array) ($row['revision_statuses_before'] ?? []) as $revisionId => $status) {
                     if ((int) $revisionId === (int) $revision->id) {
@@ -184,6 +221,10 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ->first(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'phase_idempotency_key') === $phaseKey
                     && data_get($snapshot->meta_json, 'target_fingerprint') === $targets->fingerprint());
             if ($existing instanceof ContentReleaseSnapshot) {
+                if ($this->isEqEnglishContext($context)) {
+                    $this->assertEqSnapshot($context, $existing);
+                }
+
                 return 'content-release-snapshot:'.$existing->id;
             }
         }
@@ -204,6 +245,11 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ->first();
             $publicationTimestamp = now()->startOfSecond()->toISOString();
             $rows[] = [
+                ...($this->isEqEnglishContext($context) ? [
+                    'eq_english' => true, 'protected_article_before' => $article->getAttributes(),
+                    'protected_revision_before' => $packageRevision?->getAttributes(),
+                    'protected_seo_before' => $seo?->getAttributes(),
+                ] : []),
                 'article_id' => $article->id, 'asset_key' => $target['asset_key'], 'package_sha256' => $context->packageSha256,
                 'article_before' => $this->articleState($article), 'revision_statuses_before' => $statuses,
                 'seo_before' => $seo instanceof ArticleSeoMeta ? ['id' => $seo->id, 'values' => $this->seoState($seo)] : [],
@@ -214,7 +260,90 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
             ];
         }
 
-        return $this->snapshots->capture($context, $targets, 'article-cms', $phase, $rows, $targets->identities());
+        return $this->snapshots->capture($context, $targets, 'article-cms', $phase, $rows, $targets->identities(), $this->isEqEnglishContext($context) ? [
+            'workflow_run_id' => $context->workflowRunId, 'workflow_run_attempt' => $context->workflowRunAttempt,
+            'executor_release_sha256' => $context->executorReleaseSha256,
+        ] : []);
+    }
+
+    public function isEqEnglishContext(PromotionContext $context): bool
+    {
+        return $this->authority->isEqEnglishContext($context);
+    }
+
+    private function eqEvidence(PromotionContext $context): array
+    {
+        return $this->isEqEnglishContext($context) ? ['target_state_sha256' => hash('sha256', PromotionContextFactory::canonicalJson($this->authority->eqEnglishState($context)))] : [];
+    }
+
+    private function assertEqPreviousState(PromotionContext $context, string $kind): void
+    {
+        $previous = $this->receipts->readPrevious($kind, $context)['receipt'];
+        if (data_get($previous, 'workflow_run_id') !== $context->workflowRunId
+            || data_get($previous, 'workflow_run_attempt') !== $context->workflowRunAttempt
+            || data_get($previous, 'executor_release_sha256') !== $context->executorReleaseSha256) {
+            throw new DomainException('eq_english_previous_workflow_mismatch');
+        }
+        $actual = hash('sha256', PromotionContextFactory::canonicalJson($this->authority->eqEnglishState($context, true)));
+        if (! hash_equals($actual, (string) ($previous['target_state_sha256'] ?? ''))) {
+            throw new DomainException('eq_english_prestate_drift');
+        }
+    }
+
+    private function assertEqSnapshot(PromotionContext $context, ContentReleaseSnapshot $snapshot): void
+    {
+        $package = app(EqEnglishArticlePackage::class)->read($context);
+        $targets = PromotionTargetSet::fromIdentities(array_column($package['candidates'], 'identity'));
+        if (data_get($snapshot->meta_json, 'target_fingerprint') !== $targets->fingerprint()
+            || data_get($snapshot->meta_json, 'workflow_run_id') !== $context->workflowRunId
+            || data_get($snapshot->meta_json, 'workflow_run_attempt') !== $context->workflowRunAttempt
+            || data_get($snapshot->meta_json, 'executor_release_sha256') !== $context->executorReleaseSha256) {
+            throw new DomainException('eq_english_recovery_scope_mismatch');
+        }
+    }
+
+    public function recoverFailedPublication(PromotionContext $context): bool
+    {
+        $package = app(EqEnglishArticlePackage::class)->read($context);
+        $snapshots = ContentReleaseSnapshot::query()->where('pack_id', 'article-cms')
+            ->where('reason', 'content_promotion_before_publication')->get()
+            ->filter(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'source_commit') === $context->sourceCommit
+                && data_get($snapshot->meta_json, 'package_sha256') === $context->packageSha256
+                && data_get($snapshot->meta_json, 'workflow_run_id') === $context->workflowRunId
+                && data_get($snapshot->meta_json, 'workflow_run_attempt') === $context->workflowRunAttempt
+                && data_get($snapshot->meta_json, 'executor_release_sha256') === $context->executorReleaseSha256);
+        if ($snapshots->count() > 1) {
+            throw new DomainException('eq_english_recovery_snapshot_ambiguous');
+        }
+        if ($snapshots->isEmpty()) {
+            foreach ($package['candidates'] as $row) {
+                $article = Article::query()->withoutGlobalScopes()->withTrashed()->where($row['identity'])->first();
+                if ($article?->is_public && $article->publishedRevision?->authority_package_sha256 === $context->packageSha256) {
+                    throw new DomainException('eq_english_recovery_snapshot_missing');
+                }
+            }
+
+            return false;
+        }
+        $this->rollback($context, 'content-release-snapshot:'.$snapshots->first()->id);
+
+        return true;
+    }
+
+    private function assertEqProtectedState(Article $article, ArticleTranslationRevision $revision, ?ArticleSeoMeta $seo, array $row): void
+    {
+        foreach ([
+            [$article->getAttributes(), $row['protected_article_before'] ?? [], ['status', 'is_public', 'published_at', 'published_revision_id', 'working_revision_id', 'translation_status', 'updated_at']],
+            [$revision->getAttributes(), $row['protected_revision_before'] ?? [], ['revision_status', 'published_at', 'updated_at']],
+            [$seo?->getAttributes() ?? [], $row['protected_seo_before'] ?? [], ['updated_at']],
+        ] as [$actual, $before, $mutable]) {
+            foreach ($mutable as $field) {
+                unset($actual[$field], $before[$field]);
+            }
+            if (PromotionContextFactory::canonicalJson($actual) !== PromotionContextFactory::canonicalJson($before)) {
+                throw new DomainException('eq_english_rollback_concurrent_change');
+            }
+        }
     }
 
     /** @param array{targets:list<array<string,mixed>>} $package */
@@ -287,10 +416,18 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     private function isRestored(Article $article, ArticleTranslationRevision $revision, array $row): bool
     {
         $before = (array) ($row['article_before'] ?? []);
-
-        return (int) $article->published_revision_id === (int) ($before['published_revision_id'] ?? 0)
+        $restored = (int) $article->published_revision_id === (int) ($before['published_revision_id'] ?? 0)
             && (int) $article->working_revision_id === (int) ($before['working_revision_id'] ?? 0)
             && (string) $revision->revision_status === (string) ($row['package_revision_status_before'] ?? ArticleTranslationRevision::STATUS_APPROVED);
+        if ($restored && ($row['eq_english'] ?? false)) {
+            if (PromotionContextFactory::canonicalJson($this->articleState($article)) !== PromotionContextFactory::canonicalJson($before)) {
+                throw new DomainException('eq_english_rollback_concurrent_change');
+            }
+            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->where('locale', 'en')->lockForUpdate()->first();
+            $this->assertEqProtectedState($article, $revision, $seo, $row);
+        }
+
+        return $restored;
     }
 
     /** @return array<string,mixed> */

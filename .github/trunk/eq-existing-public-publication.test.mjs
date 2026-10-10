@@ -162,3 +162,22 @@ test('stale EQ entry leaf and hidden native Guide body both fail online acceptan
   },renderer),/EQ_EXISTING_ONLINE_REGISTRY_BODY/);
   await assert.rejects(verifyOnlineCandidates('staging','backend',fetcher,async url=>({...await renderer(url),...(url.includes('/career/guides/')?{articleVisible:false}:{})})),/EQ_SSR_BODY_MISMATCH/);
 });
+
+test('frontend refresh implementation is included in exact executor binding',()=>fixture(root=>{
+  const path=join(root,'app/Services/ContentPromotion/EqExistingPublicPageFrontendRevalidator.php');
+  writeFileSync(path,readFileSync(path)+'\nchanged');
+  assert.notEqual(inspectPackage(root).executor_release_sha256,binding.executor_release_sha256);
+}));
+test('frontend refresh failures preserve fixed diagnostic codes and recover the same execution',()=>{
+  for(const code of ['eq_existing_frontend_revalidation_not_configured','eq_existing_frontend_revalidation_failed']) {
+    const execution=buildExecution(env,'backend'),calls=[];
+    assert.throws(()=>publish(execution,request=>{
+      calls.push(request);
+      return {status:request.mode==='recover'?0:1,stdout:JSON.stringify(request.mode==='recover'
+        ?{ok:true,mode:'recover',restored:true,recovery_status:'restored',source_commit:request.source_commit}
+        :{ok:false,error_code:code})};
+    }),error=>error.receipt.error_code===code&&error.receipt.recovery_completed===true);
+    assert.deepEqual(calls.map(row=>row.mode),['publish','recover']);
+    assert.equal(calls[1].source_commit,execution.request.source_commit);
+  }
+});

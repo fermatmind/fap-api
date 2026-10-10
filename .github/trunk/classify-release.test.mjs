@@ -127,3 +127,24 @@ test('displayed workflow head does not replace accepted candidate; running opera
 test('missing production binding cannot invent a successful baseline', async () => {
   await assert.rejects(productionBaseline({listRuns:async () => [run(7)],listJobs:async () => [job()]}), /binding reader/);
 });
+
+test('business publication failure after core activation retains LKG baseline and all pending publishers', async () => {
+  const read=[];
+  const baseline=await productionBaseline({
+    listRuns:async()=>[{...run(10,before),conclusion:'failure'},run(7)],
+    listJobs:async id=>[{...job(),conclusion:id===10?'failure':'success',steps:[{name:'Deploy once and automatically restore LKG after committed smoke failure',conclusion:'success'},{name:'Publish exact reviewed six existing bilingual EQ public pages',conclusion:id===10?'failure':'success'},{name:'Restore LKG after business publication failure',conclusion:id===10?'success':'skipped'}]}],
+    candidateSha:async r=>{read.push(r.id);return r.head_sha;},
+  });
+  assert.deepEqual(baseline,{sha:prod,runId:7});
+  assert.deepEqual(read,[7]);
+  const result=classifyRelease({pushBase:before,head,baseline,isAncestor:()=>true,
+    diffPaths:base=>base===before?['backend/content_assets/eq_public/candidate/20261009-new-articles/en-publication.json']:[
+      'backend/content_assets/eq_public/candidate/20261009-new-articles/assets.json',
+      'backend/content_assets/eq_public/candidate/20261010-existing-pages/assets.json',
+      'backend/content_assets/iq_public/entry/20261009-v1/assets.json',
+      'backend/content_assets/iq_public/articles/20261010-v1/assets.json',
+      'backend/content_assets/iq_public/topics/20261010-v1/assets.json',
+    ]});
+  for(const operation of ['eq_new_source_articles_publish','eq_existing_public_pages_publish','eq_new_english_articles_publish','iq_public_scale_publish','iq_public_articles_publish','iq_eq_topic_publish']) assert.equal(result.operations[operation],true,operation);
+  assert.equal(result.scope.validation_base_sha,prod);
+});

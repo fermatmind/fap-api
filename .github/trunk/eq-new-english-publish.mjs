@@ -1,8 +1,8 @@
 import { execFileSync, spawnSync } from 'node:child_process';
-import {mkdirSync,writeFileSync} from 'node:fs';
-import {resolve} from 'node:path';
-import { inspectPackage, workflowSignature } from './eq-existing-public-package.mjs';
-import {verifyOnlineCandidates} from './eq-existing-public-online-qa.mjs';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { inspectPackage, workflowSignature } from './eq-new-english-package.mjs';
+import { verifyOnlineCandidates } from './eq-new-source-online-qa.mjs';
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
 export function buildExecution(env, backendRoot) {
@@ -24,7 +24,7 @@ export function buildExecution(env, backendRoot) {
   const backend = `${env.DEPLOY_PATH}/current/backend`;
   // The transport invokes the deployed script as the existing application user.
   // Signature and exact active REVISION are revalidated there before any writes.
-  const command = `sudo -n -u www-data -- php ${quote(`${backend}/scripts/deploy/run_eq_existing_public_page_publish.php`)}`;
+  const command = `sudo -n -u www-data -- php ${quote(`${backend}/scripts/deploy/run_eq_new_english_article_publish.php`)}`;
   const args = ['-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=10', '-o', 'ConnectionAttempts=1'];
   const identity = env.EQ_PUBLISH_ENVIRONMENT === 'staging' ? env.DEPLOY_IDENTITY_FILE_STG : env.DEPLOY_IDENTITY_FILE_PROD;
   if (identity) args.push('-o', 'IdentitiesOnly=yes', '-i', identity);
@@ -40,14 +40,13 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
 // Only these known codes may enter the immutable, sanitized receipt.
 const failureCodes = new Set([
   'workflow_identity_signature_invalid', 'release_policy_sha256_mismatch',
-  'eq_existing_request_invalid', 'eq_existing_workflow_identity_invalid',
-  'eq_existing_active_revision_mismatch', 'eq_existing_executor_invalid',
-  'eq_existing_executor_digest_mismatch', 'eq_existing_phase_start_failed',
-  'eq_existing_phase_timeout_or_output_limit', 'eq_existing_phase_failed',
-  'eq_existing_phase_receipt_invalid', 'eq_existing_execution_failed',
-  'eq_existing_frontend_revalidation_not_configured', 'eq_existing_frontend_revalidation_failed',
+  'eq_english_request_invalid', 'eq_english_workflow_identity_invalid',
+  'eq_english_active_revision_mismatch', 'eq_english_executor_invalid',
+  'eq_english_executor_digest_mismatch', 'eq_english_phase_start_failed',
+  'eq_english_phase_timeout', 'eq_english_phase_failed',
+  'eq_english_phase_receipt_invalid', 'eq_english_execution_failed',
 ]);
-export function recoveryFailure(execution, execute = request => transport(execution, request), failureCode = 'eq_existing_execution_failed') {
+export function recoveryFailure(execution, execute = request => transport(execution, request), failureCode = 'eq_english_execution_failed') {
   let recoveryCompleted = false;
   try {
     const recovered = execute({ ...execution.request, mode: 'recover' });
@@ -58,15 +57,15 @@ export function recoveryFailure(execution, execute = request => transport(execut
         || (result.recovery_status === 'not_required' && result.restored === false));
   } catch { /* Unavailable recovery remains a failed delivery. */ }
   const error = new Error('EQ_PUBLICATION_FAILED');
-  error.receipt = { schema: 'eq.existing_public_pages.publish.v1', ok: false,
+  error.receipt = { schema: 'eq.new_english_articles.publish.v1', ok: false,
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
-    error_code: failureCodes.has(failureCode) ? failureCode : 'eq_existing_execution_failed',
+    error_code: failureCodes.has(failureCode) ? failureCode : 'eq_english_execution_failed',
     recovery_completed: recoveryCompleted, sanitized: true };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {
-  let failureCode = 'eq_existing_execution_failed';
+  let failureCode = 'eq_english_execution_failed';
   try {
     const result = execute(execution.request);
     const output = JSON.parse(result.stdout ?? '');
@@ -76,33 +75,38 @@ export function publish(execution, execute = request => transport(execution, req
       || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1
       || output.package_sha256 !== execution.binding.package_sha256
-      || output.published_count !== 6 || output.sanitized !== true
+      || output.published_count !== 3 || output.sanitized !== true
       || output.phases?.map(row => row.phase).join('|') !== 'preflight|draft-import|publish|live-qa'
-      || output.phases.some(row => row.readback_count !== 6 || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('EQ_PUBLICATION_RESPONSE_INVALID');
-    return { schema: 'eq.existing_public_pages.publish.v1', ok: true,
+      || output.phases.some(row => row.readback_count !== 3 || !/^[a-f0-9]{64}$/.test(row.receipt_sha256))) throw new Error('EQ_PUBLICATION_RESPONSE_INVALID');
+    return { schema: 'eq.new_english_articles.publish.v1', ok: true,
       source_commit: output.source_commit, workflow_run_id: output.workflow_run_id,
       workflow_run_attempt: 1, package_sha256: output.package_sha256,
-      published_count: 6, phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 6 })),
+      published_count: 3, phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 3 })),
       sanitized: true };
   } catch {
     throw recoveryFailure(execution, execute, failureCode);
   }
 }
 async function cli() {
-  const env=process.env;
-  if(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==env.DEPLOY_SHA) throw new Error('EQ_CHECKOUT_SHA_MISMATCH');
-  const execution=buildExecution(env,resolve('backend'));
-  const directory=resolve(env.RUNNER_TEMP,'eq-existing-public-publication');
-  mkdirSync(directory,{recursive:true,mode:0o700});
+  const env = process.env;
+  if (execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim() !== env.DEPLOY_SHA) throw new Error('EQ_CHECKOUT_SHA_MISMATCH');
+  const execution = buildExecution(env, resolve('backend'));
+  const directory = resolve(env.RUNNER_TEMP, 'eq-new-english-publication');
+  mkdirSync(directory, { recursive: true, mode: 0o700 });
   try {
-    const receipt=publish(execution);
-    try { receipt.online_acceptance=await verifyOnlineCandidates(env.EQ_PUBLISH_ENVIRONMENT,resolve('backend')); }
-    catch { throw recoveryFailure(execution); }
-    writeFileSync(resolve(directory,`${env.EQ_PUBLISH_ENVIRONMENT}.json`),JSON.stringify(receipt)+'\n',{flag:'wx',mode:0o600});
-  } catch(original) {
-    const error=original.receipt?original:recoveryFailure(execution);
-    writeFileSync(resolve(directory,`${env.EQ_PUBLISH_ENVIRONMENT}.json`),JSON.stringify(error.receipt)+'\n',{flag:'wx',mode:0o600});
+    const receipt = publish(execution);
+    try {
+      receipt.online_acceptance = await verifyOnlineCandidates(env.EQ_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, undefined, 'en');
+    } catch {
+      throw recoveryFailure(execution);
+    }
+    writeFileSync(resolve(directory, `${env.EQ_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(receipt)}\n`, { flag: 'wx', mode: 0o600 });
+  } catch (original) {
+    const error = original.receipt ? original : recoveryFailure(execution);
+    if (error.receipt) writeFileSync(resolve(directory, `${env.EQ_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(error.receipt)}\n`, { flag: 'wx', mode: 0o600 });
     throw error;
   }
 }
-if(import.meta.url===`file://${process.argv[1]}`) cli().catch(()=>{process.stderr.write('EQ_EXISTING_PUBLIC_PUBLICATION_FAILED\n');process.exitCode=1;});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  cli().catch(() => { process.stderr.write('EQ_NEW_ENGLISH_PUBLICATION_FAILED\n'); process.exitCode = 1; });
+}

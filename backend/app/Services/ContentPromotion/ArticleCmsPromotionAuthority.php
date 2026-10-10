@@ -48,6 +48,9 @@ final class ArticleCmsPromotionAuthority
         if ($context->lane !== 'W3' || $context->subscope !== self::CONTROL_SUBSCOPE) {
             throw new DomainException('article_promotion_context_invalid');
         }
+        if ($this->isEqEnglishContext($context)) {
+            return $this->inspectEqEnglishPackage($context);
+        }
         if (is_file($context->packageDirectory.'/promotion_manifest.json')) {
             return $this->inspectExternalFrozenPackage($context);
         }
@@ -293,6 +296,121 @@ final class ArticleCmsPromotionAuthority
         return ['targets' => $targets, 'package_sha256' => $context->packageSha256];
     }
 
+    public function isEqEnglishContext(PromotionContext $context): bool
+    {
+        return realpath($context->packageDirectory) === realpath(base_path(EqPublicArticlePackage::PACKAGE));
+    }
+
+    /** Bind all six paired states; publication and rollback still write English only. */
+    public function eqEnglishState(PromotionContext $context, bool $lock = false): array
+    {
+        $package = app(EqEnglishArticlePackage::class)->read($context);
+        $state = [];
+        foreach ([...$package['sources'], ...$package['candidates']] as $row) {
+            $query = Article::query()->withoutGlobalScopes()->withTrashed()->where($row['identity']);
+            $articles = ($lock ? $query->lockForUpdate() : $query)->get();
+            if ($articles->count() > 1) {
+                throw new DomainException('eq_english_target_collision');
+            }
+            $article = $articles->first();
+            $revisions = [];
+            $seo = null;
+            if ($article) {
+                $query = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)
+                    ->whereIn('id', array_filter([$article->working_revision_id, $article->published_revision_id]))->orderBy('id');
+                $revisions = ($lock ? $query->lockForUpdate() : $query)->get()->map->getAttributes()->all();
+                $query = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->where('locale', $row['identity']['locale']);
+                $seo = ($lock ? $query->lockForUpdate() : $query)->first();
+            }
+            $state[] = ['identity' => $row['identity'], 'article' => $article?->getAttributes(), 'revisions' => $revisions, 'seo' => $seo?->getAttributes()];
+        }
+
+        return $state;
+    }
+
+    private function inspectEqEnglishPackage(PromotionContext $context): array
+    {
+        $package = app(EqEnglishArticlePackage::class)->read($context);
+        $sources = [];
+        foreach ($package['sources'] as $row) {
+            $source = Article::query()->withoutGlobalScopes()->withTrashed()->where($row['identity'])->get();
+            if ($source->count() !== 1) {
+                throw new DomainException('eq_english_source_identity_invalid');
+            }
+            $source = $source->first();
+            $revision = $source->publishedRevision;
+            if (! $source->isSourceArticle() || $source->trashed() || $source->lifecycle_state !== 'active'
+                || $source->status !== 'published' || ! $source->is_public || ! $revision
+                || (int) $source->working_revision_id !== (int) $revision->id
+                || $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+                || (int) $revision->org_id !== (int) $source->org_id || (int) $revision->article_id !== (int) $source->id
+                || (int) $revision->source_article_id !== (int) $source->id
+                || $revision->locale !== $source->locale || $revision->source_locale !== $source->source_locale
+                || $revision->translation_group_id !== $source->translation_group_id
+                || preg_match('/\A[a-f0-9]{64}\z/', (string) $source->source_version_hash) !== 1
+                || ! hash_equals($source->computeSourceVersionHash(), (string) $source->source_version_hash)
+                || $revision->authority_source_package !== EqPublicArticlePackage::PACKAGE
+                || $revision->authority_asset_key !== '0:zh-CN:'.$source->slug
+                || data_get($revision->authority_metadata_json, 'independent_review_input') !== $row['independent_review_input']
+                || data_get($revision->authority_metadata_json, 'independent_review_output') !== $row['independent_review_output']
+                || $revision->authority_package_sha256 !== $package['marker']['source_package_sha256']
+                || data_get($revision->authority_metadata_json, 'source_commit') !== $package['source_commit']
+                || ! hash_equals((string) $source->source_version_hash, (string) $revision->source_version_hash)) {
+                throw new DomainException('eq_english_source_publication_invalid');
+            }
+            foreach ($row['snapshot'] as $field => $value) {
+                if ((string) $revision->$field !== $value
+                    || (in_array($field, ['title', 'excerpt', 'content_md'], true) && (string) $source->$field !== $value)) {
+                    throw new DomainException('eq_english_source_payload_drift');
+                }
+            }
+            $sources[$row['page_id']] = [$source, $revision];
+        }
+        $targets = [];
+        foreach ($package['candidates'] as $row) {
+            [$source, $sourceRevision] = $sources[$row['page_id']];
+            $key = '0:en:'.$row['identity']['slug'];
+            $articles = Article::query()->withoutGlobalScopes()->withTrashed()->where($row['identity'])->get();
+            if ($articles->count() > 1) {
+                throw new DomainException('eq_english_target_collision');
+            }
+            $article = $articles->first();
+            if ($article) {
+                $revision = $article->workingRevision ?? $article->publishedRevision;
+                if ($article->trashed() || $article->lifecycle_state !== 'active'
+                    || (int) $article->source_article_id !== (int) $source->id
+                    || (int) $article->translated_from_article_id !== (int) $source->id
+                    || (string) $article->translated_from_version_hash !== (string) $source->source_version_hash
+                    || (string) $article->translation_group_id !== (string) $source->translation_group_id
+                    || $article->source_locale !== 'zh-CN' || $article->is_indexable || $article->sitemap_eligible || $article->llms_eligible
+                    || ! $revision || $revision->authority_package_sha256 !== $context->packageSha256
+                    || $revision->authority_asset_key !== $key
+                    || (int) $revision->source_article_id !== (int) $source->id
+                    || ! in_array($revision->revision_status, [ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::STATUS_PUBLISHED], true)
+                    || ($article->is_public && ($article->working_revision_id !== null || (int) $article->published_revision_id !== (int) $revision->id))) {
+                    throw new DomainException('eq_english_foreign_or_held_target');
+                }
+                if ((! $article->is_public && ($article->status !== 'draft' || $article->published_revision_id !== null
+                    || (int) $article->working_revision_id !== (int) $revision->id || $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED))
+                    || ($article->is_public && ($article->status !== 'published' || $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED))) {
+                    throw new DomainException('eq_english_foreign_or_held_target');
+                }
+            }
+            $targets[] = [
+                'article' => $article, 'source_article' => $source, 'source_revision' => $sourceRevision,
+                'identity' => $row['identity'], 'asset_key' => $key,
+                'translation_pair_identity' => $source->translation_group_id,
+                'candidate_only' => true, 'eq_english' => true, 'snapshot' => $row['snapshot'],
+                'source_hash' => hash('sha256', PromotionContextFactory::canonicalJson($row)),
+                'review_input' => $row['independent_review_input'], 'review_output' => $row['independent_review_output'],
+                'source_commit' => $package['source_commit'],
+            ];
+        }
+        usort($targets, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
+
+        return ['targets' => $targets, 'package_sha256' => $context->packageSha256];
+    }
+
     /** @return array{created_count:int,unchanged_count:int,readback_count:int} */
     public function importDraft(PromotionContext $context): array
     {
@@ -307,6 +425,10 @@ final class ArticleCmsPromotionAuthority
                 $revision = $this->exactRevision($article, $context, $target);
                 if ($revision instanceof ArticleTranslationRevision) {
                     if ((int) $article->published_revision_id === (int) $revision->id || (string) $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
+                        if (($target['eq_english'] ?? false) && $article->working_revision_id === null
+                            && (int) $article->published_revision_id === (int) $revision->id) {
+                            continue;
+                        }
                         throw new DomainException('article_promotion_draft_already_published');
                     }
                     if ((int) $article->working_revision_id !== (int) $revision->id || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
@@ -320,6 +442,17 @@ final class ArticleCmsPromotionAuthority
                 }
                 $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create($this->revisionPayload($article, $context, $target));
                 $article->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
+                if (($target['eq_english'] ?? false) === true) {
+                    if ($article->seoMeta()->exists()) {
+                        throw new DomainException('eq_english_foreign_seo_meta');
+                    }
+                    ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+                        'org_id' => 0, 'article_id' => $article->id, 'locale' => 'en',
+                        'seo_title' => $revision->seo_title, 'seo_description' => $revision->seo_description,
+                        'og_title' => $revision->seo_title, 'og_description' => $revision->seo_description,
+                        'is_indexable' => false,
+                    ]);
+                }
                 ArticleEditorialPackageImport::query()->withoutGlobalScopes()->create([
                     'org_id' => $article->org_id, 'article_id' => $article->id, 'slug' => $article->slug, 'locale' => 'en', 'title' => $revision->title,
                     'content_track' => 'content-promotion-w3-articles', 'status' => ArticleEditorialPackageImport::STATUS_IMPORTED, 'intended_status' => ArticleTranslationRevision::STATUS_APPROVED,
@@ -400,7 +533,9 @@ final class ArticleCmsPromotionAuthority
 
             return ['changed_count' => $changed, 'unchanged_count' => count($package['targets']) - $changed, 'readback_count' => count($package['targets'])];
         }, 3);
-        $this->invalidateDiscoverabilityCaches();
+        if (! $this->isEqEnglishContext($context)) {
+            $this->invalidateDiscoverabilityCaches();
+        }
 
         return $result;
     }
@@ -426,7 +561,7 @@ final class ArticleCmsPromotionAuthority
             if (($payload['ok'] ?? false) !== true || ! hash_equals(PromotionContextFactory::canonicalJson($expectedSnapshot), PromotionContextFactory::canonicalJson($publicSnapshot))) {
                 throw new DomainException('article_promotion_public_api_readback_invalid');
             }
-            if (($target['candidate_only'] ?? false) !== true && (! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.title'))
+            if ((($target['candidate_only'] ?? false) !== true || ($target['eq_english'] ?? false)) && (! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.title'))
                 || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.description'))
                 || ! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.og_payload.title'))
                 || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.og_payload.description')))) {
@@ -462,7 +597,7 @@ final class ArticleCmsPromotionAuthority
             ? $this->projectedSourceVersionHash($article, $snapshot)
             : ($this->revisionWorkspace->sourceVersionHashFor($article) ?: $article->source_version_hash));
 
-        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : ($article->translated_from_version_hash ?: $revisionSourceHash), 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article), 'candidate_only' => (bool) ($target['candidate_only'] ?? false)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
+        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : ($article->translated_from_version_hash ?: $revisionSourceHash), 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => ($target['eq_english'] ?? false) ? EqPublicArticlePackage::PACKAGE : 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article), 'candidate_only' => (bool) ($target['candidate_only'] ?? false), ...(($target['eq_english'] ?? false) ? ['approval_kind' => 'verified_automated_exact_package', 'independent_review_input' => $target['review_input'], 'independent_review_output' => $target['review_output'], 'source_commit' => $target['source_commit'], 'publication_commit' => $context->sourceCommit] : [])], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
     }
 
     /** @param array<string,mixed> $target */
@@ -489,7 +624,7 @@ final class ArticleCmsPromotionAuthority
 
         return Article::query()->withoutGlobalScopes()->create([
             'org_id' => $lockedSource->org_id, 'category_id' => $lockedSource->category_id, 'author_admin_user_id' => $lockedSource->author_admin_user_id,
-            'author_name' => $lockedSource->author_name, 'reviewer_name' => $lockedSource->reviewer_name, 'reading_minutes' => $lockedSource->reading_minutes,
+            'author_name' => $lockedSource->author_name, 'reviewer_name' => ($target['eq_english'] ?? false) ? null : $lockedSource->reviewer_name, 'reading_minutes' => $lockedSource->reading_minutes,
             'slug' => $target['identity']['slug'], 'locale' => 'en', 'translation_group_id' => $target['translation_pair_identity'],
             'source_locale' => 'zh-CN', 'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
             'source_article_id' => $lockedSource->id, 'translated_from_article_id' => $lockedSource->id,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\EqExistingPublicPagePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\EqNewSourceArticlePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\IqEqTopicPromotionAdapter;
@@ -26,8 +27,9 @@ final class ExactPackagePromotionService
     public function execute(PromotionContext $context, string $phase, string $receiptPath): array
     {
         $adapter = $this->registry->resolve($context->lane, $context->subscope);
+        $eqEnglish = $adapter instanceof ArticleCmsPromotionAdapter && $adapter->isEqEnglishContext($context);
         $previous = null;
-        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $adapter instanceof EqNewSourceArticlePromotionAdapter || $adapter instanceof EqExistingPublicPagePromotionAdapter || $adapter instanceof IqPublicScalePromotionAdapter || $adapter instanceof IqPublicArticlePromotionAdapter || $adapter instanceof IqEqTopicPromotionAdapter)) {
+        if ($phase === 'draft-import' && ($context->lane === 'TOP100' || $eqEnglish || $adapter instanceof EqNewSourceArticlePromotionAdapter || $adapter instanceof EqExistingPublicPagePromotionAdapter || $adapter instanceof IqPublicScalePromotionAdapter || $adapter instanceof IqPublicArticlePromotionAdapter || $adapter instanceof IqEqTopicPromotionAdapter)) {
             $previous = $this->receipts->readPrevious('content_promotion_preflight_receipt', $context);
         } elseif ($phase === 'publish') {
             $previous = $this->receipts->readPrevious('cms_draft_import_receipt', $context);
@@ -68,6 +70,14 @@ final class ExactPackagePromotionService
                 }
                 $adapter->rollback($context, $reference);
                 throw new DomainException('eq_existing_receipt_failed_rollback_succeeded', previous: $throwable);
+            }
+            if ($eqEnglish && in_array($phase, ['publish', 'live-qa'], true)) {
+                $reference = (string) ($result['rollback_reference'] ?? data_get($previous, 'receipt.rollback_reference', ''));
+                if ($reference === '') {
+                    throw new DomainException('eq_english_receipt_failed_without_rollback_reference', previous: $throwable);
+                }
+                $adapter->rollback($context, $reference);
+                throw new DomainException('eq_english_receipt_failed_rollback_succeeded', previous: $throwable);
             }
             if ($adapter instanceof IqPublicArticlePromotionAdapter && in_array($phase, ['publish', 'live-qa'], true)) {
                 if ($phase === 'publish' && ($result['written_count'] ?? 0) === 0) {
@@ -308,18 +318,19 @@ final class ExactPackagePromotionService
             'search_mutation_count' => 0,
             'deploy_mutation_count' => 0,
             ...$this->top100Evidence($context, $result),
-            ...$this->scopedPublicEvidence($adapter, $result),
+            ...$this->scopedPublicEvidence($context, $adapter, $result),
         ];
     }
 
-    private function scopedPublicEvidence(ExactPackagePromotionAdapter $adapter, array $result): array
+    private function scopedPublicEvidence(PromotionContext $context, ExactPackagePromotionAdapter $adapter, array $result): array
     {
-        if (! $adapter instanceof EqNewSourceArticlePromotionAdapter && ! $adapter instanceof EqExistingPublicPagePromotionAdapter && ! $adapter instanceof IqPublicScalePromotionAdapter && ! $adapter instanceof IqPublicArticlePromotionAdapter && ! $adapter instanceof IqEqTopicPromotionAdapter) {
+        $eqEnglish = $adapter instanceof ArticleCmsPromotionAdapter && $adapter->isEqEnglishContext($context);
+        if (! $eqEnglish && ! $adapter instanceof EqNewSourceArticlePromotionAdapter && ! $adapter instanceof EqExistingPublicPagePromotionAdapter && ! $adapter instanceof IqPublicScalePromotionAdapter && ! $adapter instanceof IqPublicArticlePromotionAdapter && ! $adapter instanceof IqEqTopicPromotionAdapter) {
             return [];
         }
         $hash = (string) ($result['target_state_sha256'] ?? '');
         if (preg_match('/\A[a-f0-9]{64}\z/', $hash) !== 1) {
-            throw new DomainException($adapter instanceof IqPublicScalePromotionAdapter ? 'iq_public_scale_receipt_prestate_missing' : ($adapter instanceof IqPublicArticlePromotionAdapter ? 'iq_article_receipt_prestate_missing' : 'eq_source_receipt_prestate_missing'));
+            throw new DomainException($eqEnglish ? 'eq_english_receipt_prestate_missing' : ($adapter instanceof IqPublicScalePromotionAdapter ? 'iq_public_scale_receipt_prestate_missing' : ($adapter instanceof IqPublicArticlePromotionAdapter ? 'iq_article_receipt_prestate_missing' : 'eq_source_receipt_prestate_missing')));
         }
 
         return ['target_state_sha256' => $hash];

@@ -200,6 +200,8 @@ export function classifyPaths(inputPaths) {
     iq_public_articles_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/articles/") || /IqPublicArticle(?:PromotionAdapter|Package|FaqProjection)/.test(path) || /iq-public-article/.test(path) || path === "backend/scripts/deploy/run_iq_public_article_publish.php"),
     iq_public_scale_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/entry/20261009-v1/")),
     iq_public_scale_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/") || /IqPublic(?:ScalePromotionAdapter|EntryPackage|EntryFrontendRevalidator)/.test(path) || /iq-public-scale/.test(path) || path === "backend/scripts/deploy/run_iq_public_scale_publish.php"),
+    eq_new_english_articles_publish: paths.includes('backend/content_assets/eq_public/candidate/20261009-new-articles/en-publication.json'),
+    eq_new_english_articles_checks: paths.some(path => /EqEnglishArticle|eq-new-english/.test(path) || path === 'backend/content_assets/eq_public/candidate/20261009-new-articles/en-publication.json' || /ArticleCmsPromotion(?:Adapter|Authority)/.test(path)),
     eq_new_source_articles_publish: paths.some(path => /^backend\/content_assets\/eq_public\/(?:candidate\/20261009-new-articles\/assets\.json|reviews\/20261009-new-articles\/)/.test(path)),
     eq_existing_public_pages_publish: paths.some(path => path === 'backend/content_assets/eq_public/candidate/20261010-existing-pages/assets.json'
       || /^backend\/content_assets\/eq_public\/reviews\/20261010-existing-pages\/(?:eq-existing-v3-zh-CN-v1|eq-existing-v3-en-v1|eq-existing-v2-en-v1|eq-existing-v4-en-entry-label-v1|sh02-iq-cross-v3|sh02-iq-cross-v4-en)\/(?:candidate\.json|report\.md)$/.test(path)),

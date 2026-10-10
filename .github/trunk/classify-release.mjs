@@ -29,8 +29,9 @@ export async function productionBaseline({ listRuns, listJobs, candidateSha, ski
         if (skipEvidence) await skipEvidence(run,jobs);
         continue;
       }
-      const activated = job.steps?.filter(step=>step.name===activationStep&&step.conclusion==='success').length===1;
-      if (job.status !== 'completed' || (job.conclusion === 'failure' && !activated)) continue;
+      // Business publication and its automatic recovery are part of this job.
+      // A successful core activation step cannot override its failed outcome.
+      if (job.status !== 'completed' || job.conclusion === 'failure') continue;
       if (!['success','failure'].includes(job.conclusion)
         || job.steps?.filter(step => step.name === activationStep && step.conclusion === 'success').length !== 1) {
         throw new Error('Successful workflow lacks production activation evidence');

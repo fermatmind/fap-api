@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 // Called only by the existing exact-SHA deployment workflow. No editorial
 // payload, credential or remote path is emitted to workflow logs.
-use App\Services\ContentPromotion\Adapters\EqExistingPublicPagePromotionAdapter;
-use App\Services\ContentPromotion\EqExistingPublicPageFrontendRevalidator;
-use App\Services\ContentPromotion\EqExistingPublicPagePackage;
+use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
+use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
+use App\Services\ContentPromotion\EqEnglishArticlePackage;
 use App\Services\ContentPromotion\EqSourceExecutionMutex;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Contracts\Console\Kernel;
@@ -15,14 +15,13 @@ umask(0077);
 $root = dirname(__DIR__, 2);
 $context = null;
 $adapter = null;
-$frontend = null;
 $completed = [];
 $publicationAttempted = false;
 $started = microtime(true);
 try {
     $requestBytes = stream_get_contents(STDIN, 16385);
     if (! is_string($requestBytes) || strlen($requestBytes) > 16384) {
-        throw new DomainException('eq_existing_request_invalid');
+        throw new DomainException('eq_english_request_invalid');
     }
     $request = json_decode($requestBytes, true, 32, JSON_THROW_ON_ERROR);
     if (! is_array($request) || array_diff(array_keys($request), [
@@ -30,47 +29,46 @@ try {
         'package_sha256', 'executor_release_sha256', 'release_policy_sha256',
         'workflow_signature', 'mode',
     ]) !== []) {
-        throw new DomainException('eq_existing_request_invalid');
+        throw new DomainException('eq_english_request_invalid');
     }
     foreach (['source_commit' => 40, 'package_sha256' => 64, 'executor_release_sha256' => 64, 'release_policy_sha256' => 64, 'workflow_signature' => 64] as $field => $length) {
         if (! is_string($request[$field] ?? null) || preg_match('/\A[a-f0-9]{'.$length.'}\z/', $request[$field]) !== 1) {
-            throw new DomainException('eq_existing_request_invalid');
+            throw new DomainException('eq_english_request_invalid');
         }
     }
     if (! is_string($request['workflow_run_id'] ?? null)
         || preg_match('/\A[1-9][0-9]{0,19}\z/', $request['workflow_run_id']) !== 1
         || ($request['workflow_run_attempt'] ?? null) !== 1
         || ! in_array($request['mode'] ?? '', ['publish', 'recover'], true)) {
-        throw new DomainException('eq_existing_workflow_identity_invalid');
+        throw new DomainException('eq_english_workflow_identity_invalid');
     }
     $revision = @file_get_contents(dirname($root).'/REVISION');
     if (! is_string($revision) || trim($revision) !== $request['source_commit']) {
-        throw new DomainException('eq_existing_active_revision_mismatch');
+        throw new DomainException('eq_english_active_revision_mismatch');
     }
     $executorPaths = [
         'app/Console/Commands/ContentPromoteExactPackage.php',
-        'app/Services/ContentPromotion/Adapters/EqExistingPublicPagePromotionAdapter.php',
-        'app/Services/ContentPromotion/EqExistingPublicPageFrontendRevalidator.php',
-        'app/Services/ContentPromotion/EqExistingPublicPagePackage.php',
-        'app/Services/ContentPromotion/EqExistingPublicPageState.php',
-        'app/Services/ContentPromotion/EqExistingPublicPageWriter.php',
-        'app/Services/ContentPromotion/EqPublicRegistryTextPatch.php',
+        'app/Services/ContentPromotion/Adapters/ArticleCmsPromotionAdapter.php',
+        'app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php',
+        'app/Services/ContentPromotion/EqEnglishArticlePackage.php',
+        'app/Services/ContentPromotion/PromotionAdapterRegistry.php',
+        'app/Services/ContentPromotion/EqPublicArticlePackage.php',
         'app/Services/ContentPromotion/EqSourceExecutionMutex.php',
         'app/Services/ContentPromotion/ExactPackagePromotionService.php',
         'app/Services/ContentPromotion/PromotionContextFactory.php',
-        'scripts/deploy/run_eq_existing_public_page_publish.php',
+        'scripts/deploy/run_eq_new_english_article_publish.php',
     ];
     sort($executorPaths, SORT_STRING);
     $executorMaterial = '';
     foreach ($executorPaths as $path) {
         $file = $root.'/'.$path;
         if (is_link($file) || ! is_file($file)) {
-            throw new DomainException('eq_existing_executor_invalid');
+            throw new DomainException('eq_english_executor_invalid');
         }
         $executorMaterial .= $path."\n".hash_file('sha256', $file)."\n";
     }
     if (! hash_equals(hash('sha256', $executorMaterial), $request['executor_release_sha256'])) {
-        throw new DomainException('eq_existing_executor_digest_mismatch');
+        throw new DomainException('eq_english_executor_digest_mismatch');
     }
     foreach (['source_commit', 'workflow_run_id', 'workflow_run_attempt', 'executor_release_sha256', 'release_policy_sha256', 'workflow_signature'] as $field) {
         $name = 'CONTENT_PROMOTION_'.strtoupper($field);
@@ -78,20 +76,19 @@ try {
         $_SERVER[$name] = (string) $request[$field];
         $_ENV[$name] = (string) $request[$field];
     }
-    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=6');
-    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '6';
+    putenv('CONTENT_PROMOTION_EXPECTED_ROW_COUNT=3');
+    $_SERVER['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = $_ENV['CONTENT_PROMOTION_EXPECTED_ROW_COUNT'] = '3';
     require $root.'/vendor/autoload.php';
     $app = require $root.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
     $context = $app->make(PromotionContextFactory::class)->make(
-        package: EqExistingPublicPagePackage::PACKAGE,
+        package: EqEnglishArticlePackage::PACKAGE,
         packageSha256: $request['package_sha256'], lane: 'W3',
-        subscope: EqExistingPublicPagePromotionAdapter::SUBSCOPE,
+        subscope: ArticleCmsPromotionAuthority::CONTROL_SUBSCOPE,
     );
-    $adapter = $app->make(EqExistingPublicPagePromotionAdapter::class);
-    $frontend = $app->make(EqExistingPublicPageFrontendRevalidator::class);
-    $app->make(EqExistingPublicPagePackage::class)->read($root, $context->packageSha256);
-    $receiptRoot = $root.'/storage/app/content-promotion/eq-existing-public';
+    $adapter = $app->make(ArticleCmsPromotionAdapter::class);
+    $app->make(EqEnglishArticlePackage::class)->read($context);
+    $receiptRoot = $root.'/storage/app/content-promotion/eq-new-english';
     $execution = $context->sourceCommit.'-'.$context->workflowRunId.'-1';
     $mutex = EqSourceExecutionMutex::acquire($receiptRoot, $execution);
     // Recovery reserves the same one-shot execution directory even when no
@@ -99,13 +96,9 @@ try {
     $directory = EqSourceExecutionMutex::claimExecution($receiptRoot, $execution, $request['mode'] === 'recover');
     if ($request['mode'] === 'recover') {
         $restored = $adapter->recoverFailedPublication($context);
-        if ($restored) {
-            $frontend->revalidate();
-        }
         echo json_encode(['ok' => true, 'mode' => 'recover', 'restored' => $restored, 'recovery_status' => $restored ? 'restored' : 'not_required', 'source_commit' => $context->sourceCommit], JSON_THROW_ON_ERROR).PHP_EOL;
         exit(0);
     }
-    $frontend->assertConfigured();
     $previous = '';
     $environment = getenv();
     foreach (['preflight' => 'content_promotion_preflight_receipt', 'draft-import' => 'cms_draft_import_receipt', 'publish' => 'cms_publication_receipt', 'live-qa' => 'cms_live_qa_receipt'] as $phase => $kind) {
@@ -116,13 +109,13 @@ try {
         $environment['CONTENT_PROMOTION_PREVIOUS_RECEIPT'] = $previous;
         $process = proc_open([
             PHP_BINARY, $root.'/artisan', 'content:promote-exact-package',
-            '--package='.EqExistingPublicPagePackage::PACKAGE,
+            '--package='.EqEnglishArticlePackage::PACKAGE,
             '--expected-package-sha256='.$context->packageSha256,
-            '--lane=W3', '--subscope='.EqExistingPublicPagePromotionAdapter::SUBSCOPE,
+            '--lane=W3', '--subscope='.ArticleCmsPromotionAuthority::CONTROL_SUBSCOPE,
             '--phase='.$phase, '--receipt='.$receiptPath, '--json',
         ], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w'], 3 => $mutex], $pipes, $root, $environment);
         if (! is_resource($process)) {
-            throw new DomainException('eq_existing_phase_start_failed');
+            throw new DomainException('eq_english_phase_start_failed');
         }
         fclose($pipes[0]);
         stream_set_blocking($pipes[1], false);
@@ -139,7 +132,7 @@ try {
                 fclose($pipes[1]);
                 fclose($pipes[2]);
                 proc_close($process);
-                throw new DomainException('eq_existing_phase_timeout_or_output_limit');
+                throw new DomainException('eq_english_phase_timeout_or_output_limit');
             }
             if ($status['running']) {
                 usleep(10000);
@@ -152,7 +145,7 @@ try {
         $exit = $status['exitcode'] >= 0 ? $status['exitcode'] : $closed;
         $output = json_decode(trim($stdout), true, 32, JSON_THROW_ON_ERROR);
         if ($exit !== 0 || ($output['ok'] ?? null) !== true || ($output['receipt_kind'] ?? null) !== $kind) {
-            throw new DomainException('eq_existing_phase_failed');
+            throw new DomainException('eq_english_phase_failed');
         }
         $bytes = file_get_contents($receiptPath);
         $receipt = json_decode($bytes, true, 64, JSON_THROW_ON_ERROR);
@@ -162,20 +155,19 @@ try {
             || ($receipt['workflow_run_id'] ?? null) !== $context->workflowRunId
             || ($receipt['workflow_run_attempt'] ?? null) !== 1
             || ($receipt['package_sha256'] ?? null) !== $context->packageSha256
-            || ($receipt['readback_count'] ?? null) !== 6
-            || ($receipt['expected_count'] ?? null) !== 6
+            || ($receipt['readback_count'] ?? null) !== 3
+            || ($receipt['expected_count'] ?? null) !== 3
             || ($receipt['result'] ?? null) !== 'SUCCEEDED') {
-            throw new DomainException('eq_existing_phase_receipt_invalid');
+            throw new DomainException('eq_english_phase_receipt_invalid');
         }
-        $completed[] = ['phase' => $phase, 'receipt_sha256' => hash('sha256', $bytes), 'readback_count' => 6];
+        $completed[] = ['phase' => $phase, 'receipt_sha256' => hash('sha256', $bytes), 'readback_count' => 3];
         $previous = $receiptPath;
     }
-    $frontend->revalidate();
     echo json_encode([
-        'schema' => 'eq.existing_public_pages.publish.v1', 'ok' => true,
+        'schema' => 'eq.new_english_articles.publish.v1', 'ok' => true,
         'source_commit' => $context->sourceCommit, 'workflow_run_id' => $context->workflowRunId,
         'workflow_run_attempt' => 1, 'package_sha256' => $context->packageSha256,
-        'published_count' => 6, 'phases' => $completed,
+        'published_count' => 3, 'phases' => $completed,
         'elapsed_seconds' => round(microtime(true) - $started, 3), 'sanitized' => true,
     ], JSON_THROW_ON_ERROR).PHP_EOL;
 } catch (Throwable $error) {
@@ -183,16 +175,13 @@ try {
     if ($publicationAttempted && $context !== null && $adapter !== null) {
         try {
             $recovered = $adapter->recoverFailedPublication($context);
-            if ($recovered) {
-                $frontend->revalidate();
-            }
         } catch (Throwable) {
             $recovered = false;
         }
     }
     $code = $error->getMessage();
     if (preg_match('/\A[a-z0-9_]{1,96}\z/', $code) !== 1) {
-        $code = 'eq_existing_execution_failed';
+        $code = 'eq_english_execution_failed';
     }
     echo json_encode(['ok' => false, 'error_code' => $code, 'recovery_completed' => $recovered, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
     exit(1);

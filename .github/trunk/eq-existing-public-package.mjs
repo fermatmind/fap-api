@@ -8,6 +8,7 @@ export const packagePath='content_assets/eq_public/candidate/20261010-existing-p
 export const executorPaths=[
   'app/Console/Commands/ContentPromoteExactPackage.php',
   'app/Services/ContentPromotion/Adapters/EqExistingPublicPagePromotionAdapter.php',
+  'app/Services/ContentPromotion/EqExistingPublicPageFrontendRevalidator.php',
   'app/Services/ContentPromotion/EqExistingPublicPagePackage.php',
   'app/Services/ContentPromotion/EqExistingPublicPageState.php',
   'app/Services/ContentPromotion/EqExistingPublicPageWriter.php',

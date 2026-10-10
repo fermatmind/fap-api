@@ -310,7 +310,11 @@ jobs:
         if: fromJSON(needs.classify.outputs.classification).operations.eq_existing_public_pages_checks == true
         working-directory: backend
         run: |
-          php artisan test tests/Unit/ContentPromotion/EqExistingPublicPagePackageTest.php tests/Unit/ContentPromotion/EqPublicRegistryTextPatchTest.php tests/Unit/ContentPromotion/EqExistingPublicPageStateTest.php tests/Unit/ContentPromotion/EqExistingPublicPageWriterTest.php tests/Unit/ContentPromotion/EqExistingPublicPagePromotionAdapterTest.php --no-ansi
+          php artisan test tests/Unit/ContentPromotion/EqExistingPublicPagePackageTest.php tests/Unit/ContentPromotion/EqPublicRegistryTextPatchTest.php tests/Unit/ContentPromotion/EqExistingPublicPageStateTest.php tests/Unit/ContentPromotion/EqExistingPublicPageWriterTest.php tests/Unit/ContentPromotion/EqExistingPublicPagePromotionAdapterTest.php tests/Unit/ContentPromotion/EqExistingPublicPageFrontendRevalidatorTest.php --no-ansi
+      - name: Verify exact reviewed EQ English articles and paired-source failure paths
+        if: fromJSON(needs.classify.outputs.classification).operations.eq_new_english_articles_checks == true
+        working-directory: backend
+        run: php artisan test tests/Unit/ContentPromotion/EqEnglishArticlePromotionTest.php tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php --no-ansi
       - name: Verify exact IQ public entry package and publication failure paths
         if: fromJSON(needs.classify.outputs.classification).operations.iq_public_scale_checks == true
         working-directory: backend
