@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
+import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { readCandidateRows } from './iq-public-article-package.mjs';
-import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates } from './iq-public-article-online-qa.mjs';
+import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
 const row = { identity: { locale: 'en', slug: 'iq-test-tool-guide' }, snapshot: {
   title: 'IQ practice guide', seo_title: 'IQ Practice and Limits', seo_description: 'Use reasoning practice with clear limits.',
@@ -152,4 +155,44 @@ test('canonical identity rejects another HTTPS port in SSR and actual API readba
     'href="https://fermatmind.com:8443/en/articles/'),row,meta,env),/IQ_ARTICLE_SSR_CANONICAL_MISMATCH/);
   const pre=await readOnlinePrestate('production',backend,onlineFetcher(undefined,true));
   await assert.rejects(verifyOnlineCandidates('production',backend,onlineFetcher(payload=>{if(payload.meta)payload.meta.canonical=payload.meta.canonical.replace('fermatmind.com/','fermatmind.com:8443/');}),()=>'',pre),/IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
+});
+
+
+test('IQ renderer closes its owned browser before profile cleanup on success and render failure', async () => {
+  const directory = mkdtempSync(join(tmpdir(), 'iq-browser-lifecycle-test-'));
+  const previous = process.env.CHROME_BIN;
+  try {
+    for (const failed of [false, true]) {
+      const marker = join(directory, failed ? 'failed.json' : 'success.json');
+      const executable = join(directory, 'fake-browser');
+      const source = `#!${process.execPath}
+const fs = require('node:fs');
+const profile = process.argv.find(x => x.startsWith('--user-data-dir=')).split('=')[1];
+const input = fs.createReadStream(null, { fd: 3 }), output = fs.createWriteStream(null, { fd: 4 });
+let buffer = '';
+process.on('SIGTERM', () => { fs.writeFileSync(${JSON.stringify(marker)}, JSON.stringify({ graceful: false, profile })); process.exit(0); });
+input.on('data', chunk => {
+ buffer += chunk;
+ let end;
+ while ((end = buffer.indexOf('\\0')) >= 0) {
+  const message = JSON.parse(buffer.slice(0, end)); buffer = buffer.slice(end + 1);
+  if (message.method === 'Browser.close') {
+   fs.writeFileSync(${JSON.stringify(marker)}, JSON.stringify({ graceful: true, profile }));
+   output.end(JSON.stringify({ id: message.id, result: {} }) + '\\0', () => process.exit(0)); return;
+  }
+  let result = message.method === 'Target.createTarget' ? { targetId: 'target' } : message.method === 'Target.attachToTarget' ? { sessionId: 'session' } : {};
+  if (message.method === 'Runtime.evaluate') result = ${failed} ? { exceptionDetails: {} } : { result: { value: '<html>Rendered</html>' } };
+  output.write(JSON.stringify({ id: message.id, result }) + '\\0');
+ }
+});`;
+      writeFileSync(executable, source, { mode: 0o700 }); process.env.CHROME_BIN = executable;
+      if (failed) await assert.rejects(renderPage('https://example.invalid'), /IQ_ARTICLE_ONLINE_RENDER_FAILED/);
+      else assert.equal(await renderPage('https://example.invalid'), '<html>Rendered</html>');
+      const state = JSON.parse(readFileSync(marker, 'utf8'));
+      assert.equal(state.graceful, true); assert.equal(existsSync(state.profile), false);
+    }
+  } finally {
+    if (previous === undefined) delete process.env.CHROME_BIN; else process.env.CHROME_BIN = previous;
+    rmSync(directory, { recursive: true, force: true });
+  }
 });

@@ -148,3 +148,13 @@ test('online failure receipts retain only allowlisted failure codes and still re
     assert.equal(error.receipt.recovery_completed, false);
   }
 });
+
+test('unknown runtime failures expose only standard exception types and safe errno values', () => {
+  const cause = new Error('secret profile path'); cause.code = 'ENOTEMPTY';
+  const receipt = recoveryFailure(execution(), () => ({ status: 1 }), cause).receipt;
+  assert.equal(receipt.failure_errno, 'ENOTEMPTY'); assert.equal(receipt.failure_type, 'Error');
+  cause.name = 'secret'; cause.code = 'private';
+  const redacted = recoveryFailure(execution(), () => ({ status: 1 }), cause).receipt;
+  assert.equal(redacted.failure_type, 'Error'); assert.equal(redacted.failure_errno, undefined);
+  assert.equal(JSON.stringify(redacted).includes('secret'), false);
+});

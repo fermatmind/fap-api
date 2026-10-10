@@ -58,12 +58,10 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
   const api = environment === 'staging' ? 'https://staging-api.fermatmind.com' : 'https://api.fermatmind.com';
   const web = environment === 'staging' ? 'https://staging.fermatmind.com' : 'https://fermatmind.com';
   const read = async (url, type) => {
-    // Match the existing bounded public scale smoke budget. A cold public read
-    // must not be treated as failed at the shorter backend request budget.
     const surface = type === 'application/json' ? 'API' : 'PAGE';
     let response, bytes;
     try {
-      response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(40000), headers: { 'Cache-Control': 'no-cache' } });
+      response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15000), headers: { 'Cache-Control': 'no-cache' } });
       if (response.status !== 200 || !response.headers.get('content-type')?.includes(type)) throw new Error('IQ_ONLINE_RESPONSE_INVALID');
       bytes = await response.text();
     } catch (error) {

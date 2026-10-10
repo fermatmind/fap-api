@@ -31,6 +31,8 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
   input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
+const failureTypes = new Set(['Error', 'TypeError', 'SyntaxError', 'RangeError']);
+const failureErrnos = new Set(['ENOTEMPTY', 'EACCES', 'ENOENT', 'ENOBUFS', 'ETIMEDOUT', 'EPIPE']);
 const onlineFailureCodes = new Set([
   'IQ_ONLINE_API_TIMEOUT', 'IQ_ONLINE_PAGE_TIMEOUT', 'IQ_ONLINE_API_TRANSPORT_FAILED', 'IQ_ONLINE_PAGE_TRANSPORT_FAILED',
   'IQ_ONLINE_RESPONSE_INVALID', 'IQ_ONLINE_PAYLOAD_LIMIT', 'IQ_ONLINE_IDENTITY_MISMATCH', 'IQ_ONLINE_BODY_MISMATCH',
@@ -55,7 +57,9 @@ export function recoveryFailure(execution, execute = request => transport(execut
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
     recovery_completed: completed, transport_started: true, sanitized: true,
-    ...(cause ? { failure_code: onlineFailureCodes.has(cause.message) ? cause.message : 'IQ_ONLINE_ACCEPTANCE_FAILED' } : {}) };
+    ...(cause ? { failure_code: onlineFailureCodes.has(cause.message) ? cause.message : 'IQ_ONLINE_ACCEPTANCE_FAILED',
+      failure_type: failureTypes.has(cause.name) ? cause.name : 'Error',
+      ...(failureErrnos.has(cause.code) ? { failure_errno: cause.code } : {}) } : {}) };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {

@@ -1,8 +1,9 @@
 import { execFileSync, spawn } from 'node:child_process';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { readCandidateRows } from './iq-public-article-package.mjs';
+import { closeOwnedBrowser } from './eq-new-source-online-qa.mjs';
 
 const clean = value => String(value).replace(/\s+/gu, ' ').trim();
 const bodyPlain = value => clean(value).replace(/\s/gu, '');
@@ -255,15 +256,12 @@ export async function renderPage(url) {
   } catch {
     throw new Error('IQ_ARTICLE_ONLINE_RENDER_FAILED');
   } finally {
-    clearTimeout(timer); fail();
-    if (child.exitCode === null && child.signalCode === null) {
-      await new Promise(resolve => {
-        const killTimer = setTimeout(() => { child.kill('SIGKILL'); }, 2000);
-        child.once('exit', () => { clearTimeout(killTimer); resolve(); });
-        child.kill('SIGTERM');
-      });
-    }
-    rmSync(profile, { recursive: true, force: true });
+    clearTimeout(timer);
+    try {
+      // Browser.close lets the browser and its workers release the profile.
+      // Reuse the same bounded lifecycle already used by EQ acceptance.
+      await closeOwnedBrowser(child, () => send('Browser.close'), profile);
+    } finally { fail(); }
   }
 }
 
