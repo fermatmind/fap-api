@@ -195,17 +195,21 @@ test('synchronous repair timeout cannot become successful coverage or continue a
   assert.equal(result.coverage, null);
 });
 
-test('full Current production budget composes complete preactivation checks without narrowing mixed scopes', () => {
+test('Career cache and Current production budgets preserve complete mixed-scope checks', () => {
   const start = workflow.indexOf('          deploy_timeout=30m', workflow.indexOf('          lkg_sha='));
   assert.notEqual(start, -1);
   const end = workflow.indexOf('          set +e', start);
   const budget = workflow.slice(start, end);
-  for (const [current, competitive, council, expected] of [
-    [false, false, false, '30m'], [false, true, false, '35m'],
-    [true, false, false, '60m'], [true, true, false, '60m'],
-    [false, false, true, '60m'], [true, true, true, '60m'],
+  for (const [current, cache, competitive, council, expected] of [
+    [false, false, false, false, '30m'], [false, false, true, false, '35m'],
+    [true, false, false, false, '60m'], [true, false, true, false, '60m'],
+    [false, false, false, true, '60m'], [true, false, true, true, '60m'],
+    [false, true, false, false, '60m'], [false, true, true, false, '60m'],
+    [false, true, false, true, '60m'], [true, true, true, true, '60m'],
   ]) {
-    const script = budget.replaceAll('${{ needs.policy.outputs.career_current }}', String(current));
+    const script = budget
+      .replaceAll('${{ needs.policy.outputs.career_current }}', String(current))
+      .replaceAll('${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}', String(cache));
     const actual = execFileSync('bash', ['-c', `${script}\nprintf '%s' "$deploy_timeout"`], {
       encoding: 'utf8',
       env: { ...process.env, competitive_evidence: String(competitive), production_council_closeout: String(council) },

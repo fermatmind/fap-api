@@ -183,8 +183,19 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         } catch (DomainException $error) {
             self::assertSame('iq_public_scale_published_content_drift', $error->getMessage());
         }
-        $this->expectExceptionMessage('iq_public_scale_rollback_concurrent_content');
-        $adapter->rollback($context, $published['rollback_reference']);
+        $beforeRecovery = [];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $beforeRecovery[$table] = (array) DB::table($table)->where('code', IqPublicEntryPackage::CODE)->first();
+        }
+        try {
+            $adapter->rollback($context, $published['rollback_reference']);
+            self::fail('Recovery must not restore either registry after an owned content change.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_public_scale_rollback_concurrent_content', $error->getMessage());
+        }
+        foreach ($beforeRecovery as $table => $row) {
+            self::assertSame($row, (array) DB::table($table)->where('code', IqPublicEntryPackage::CODE)->first());
+        }
     }
 
     public function test_third_code_alias_refreshes_after_publication_and_rollback(): void

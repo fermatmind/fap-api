@@ -1769,9 +1769,10 @@ jobs:
           fi
           deploy_timeout=30m
           if test "$competitive_evidence" = true; then deploy_timeout=35m; fi
-          # Full Current parity, coverage repair, directory warm, and both sitemap
-          # readbacks exceed 30m together; retain their individual fail-closed bounds.
+          # Career cache repair and both sitemap readbacks also run without a
+          # Current asset change; retain every task's individual fail-closed bound.
           if test '${{ needs.policy.outputs.career_current }}' = true; then deploy_timeout=60m; fi
+          if test '${{ fromJSON(needs.policy.outputs.classification).operations.career_cache }}' = true; then deploy_timeout=60m; fi
           if test "$production_council_closeout" = true; then deploy_timeout=60m; fi
           set +e
           timeout --signal=TERM --kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task" production -f deploy.php --revision "$DEPLOY_SHA" \

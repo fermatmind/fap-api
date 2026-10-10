@@ -186,8 +186,12 @@ final class EqExistingPublicPageWriterTest extends TestCase
             self::assertSame($next->sourceCommit, json_decode($article['published']['authority_metadata_json'], true)['source_commit']);
             self::assertSame($before['articles'][$key]['values']['is_indexable'], $article['values']['is_indexable']);
         }
+        $correctiveHistory = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
+        self::assertSame(count($history) + 2, count($correctiveHistory));
         self::assertSame(0, DB::transaction(fn () => $writer->publish($next, $after))['written_count']);
+        self::assertSame($correctiveHistory, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
         DB::transaction(fn () => $writer->restore($next, $restored, $after));
+        self::assertSame($correctiveHistory, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
         self::assertSame($before['articles'], $states->read(self::SHA)['articles']);
     }
 

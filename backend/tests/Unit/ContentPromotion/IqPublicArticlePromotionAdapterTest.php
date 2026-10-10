@@ -669,12 +669,14 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $seo->forceFill(['schema_json' => $schema])->saveQuietly();
         $adapter->rollback($context, $publication['rollback_reference']);
         self::assertSame('Original answer', data_get($seo->fresh()->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items.0.answer'));
-        foreach (['order', 'answer'] as $change) {
+        foreach (['order', 'answer', 'missing', 'type'] as $change) {
             $changed = $schema;
             if ($change === 'order') {
                 Arr::set($changed, 'editorial_package_v1.answer_surface_v1.faq_items', array_reverse($faqs));
+            } elseif ($change === 'missing') {
+                unset($changed['editorial_package_v1']['answer_surface_v1']['faq_items'][0]['answer']);
             } else {
-                Arr::set($changed, 'editorial_package_v1.answer_surface_v1.faq_items.0.answer', 'Later answer');
+                Arr::set($changed, 'editorial_package_v1.answer_surface_v1.faq_items.0.answer', $change === 'type' ? null : 'Later answer');
             }
             $seo->forceFill(['schema_json' => $changed])->saveQuietly();
             try {

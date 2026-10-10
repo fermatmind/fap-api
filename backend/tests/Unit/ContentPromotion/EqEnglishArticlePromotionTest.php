@@ -465,9 +465,19 @@ final class EqEnglishArticlePromotionTest extends TestCase
         $this->previous('content_promotion_preflight_receipt', $adapter->preflight($this->context));
         $this->previous('cms_draft_import_receipt', $adapter->draftImport($this->context));
         $published = $adapter->publish($this->context);
-        Article::query()->where('locale', 'en')->first()->forceFill(['reviewer_name' => 'Concurrent owner edit'])->saveQuietly();
-        $this->expectExceptionMessage('eq_english_rollback_concurrent_change');
-        $adapter->rollback($this->context, $published['rollback_reference']);
+        $target = Article::query()->where('locale', 'en')->firstOrFail();
+        $target->forceFill(['reviewer_name' => 'Concurrent owner edit'])->saveQuietly();
+        $changed = $target->fresh()->getAttributes();
+        $sources = Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all();
+        try {
+            $adapter->rollback($this->context, $published['rollback_reference']);
+            self::fail('Recovery must leave concurrent protected data intact.');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_english_rollback_concurrent_change', $error->getMessage());
+        }
+        self::assertSame($changed, $target->fresh()->getAttributes());
+        self::assertSame($sources, Article::query()->where('locale', 'zh-CN')->get()->map->getAttributes()->all());
+        self::assertSame(3, Article::query()->where('locale', 'en')->where('is_public', true)->count());
     }
 
     public function test_english_cache_invalidation_runs_after_the_publication_transaction_and_failure_restores_targets(): void
