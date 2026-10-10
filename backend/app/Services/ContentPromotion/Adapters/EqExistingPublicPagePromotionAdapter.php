@@ -256,7 +256,8 @@ final class EqExistingPublicPagePromotionAdapter implements ExactPackagePromotio
     private function snapshot(PromotionContext $context, array $rows, string $phase): ?ContentReleaseSnapshot
     {
         $key = PromotionPhaseIdentity::idempotencyKey($context, $phase, $this->targets($rows));
-        $snapshot = ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_'.$phase)->orderBy('id')->get()
+        $ids = ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_'.$phase)->orderBy('id')->pluck('id');
+        $snapshot = ContentReleaseSnapshot::query()->whereIn('id', $ids)->get()->sortBy('id')->values()
             ->first(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'phase_idempotency_key') === $key);
 
         return $snapshot === null ? null : $this->resolve($context, $rows, $phase, 'content-release-snapshot:'.$snapshot->id);

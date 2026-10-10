@@ -226,7 +226,7 @@ final class EqExistingPublicPageWriter
             'source_locale' => $sourceLocale, 'translated_from_version_hash' => $translatedFromHash,
             'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'source_version_hash' => $revisionSourceHash,
-            'supersedes_revision_id' => $old['id'], 'authority_asset_key' => 'EQ-02:'.$article->locale,
+            'supersedes_revision_id' => $old['id'], 'authority_asset_key' => 'EQ-02:'.$article->locale.':'.$context->sourceCommit,
             'authority_source_package' => EqExistingPublicPagePackage::PACKAGE,
             'authority_source_hash' => $this->states->hash($row['snapshot']), 'authority_package_sha256' => $context->packageSha256,
             'authority_metadata_json' => $this->provenance($row, $context), ...$row['snapshot'], 'approved_at' => now(), 'published_at' => now(),

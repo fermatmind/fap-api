@@ -153,6 +153,44 @@ final class EqExistingPublicPageWriterTest extends TestCase
         self::assertSame($restored, $states->read(self::SHA));
     }
 
+    public function test_corrective_commit_after_restoration_preserves_history_and_working_drafts(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $writer = app(EqExistingPublicPageWriter::class);
+        $before = $states->read(self::SHA);
+        $context = $this->context();
+        $failed = DB::transaction(fn () => $writer->publish($context, $before))['state'];
+        $history = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
+        DB::transaction(fn () => $writer->restore($context, $before, $failed));
+        $restored = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => $writer->publish($context, $restored));
+            self::fail('A restored execution cannot reclaim its immutable revision.');
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $error) {
+            self::assertStringContainsString('authority', $error->getMessage());
+        }
+        self::assertSame($restored, $states->read(self::SHA));
+        $next = new PromotionContext($context->packageDirectory, $context->packageSha256, $context->lane, $context->subscope,
+            str_repeat('f', 40), $context->executorReleaseSha256, $context->releasePolicySha256, '12346', 1,
+            $context->workflowSignature, $context->expectedRowCount, $context->idempotencyKey);
+        $published = DB::transaction(fn () => $writer->publish($next, $restored));
+        self::assertSame(6, $published['written_count']);
+        $after = $published['state'];
+        self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
+        foreach ($history as $revision) {
+            self::assertSame($revision, ArticleTranslationRevision::query()->findOrFail($revision['id'])->getAttributes());
+        }
+        foreach ($after['articles'] as $key => $article) {
+            self::assertNotSame($failed['articles'][$key]['published']['id'], $article['published']['id']);
+            self::assertSame($next->sourceCommit, json_decode($article['published']['authority_metadata_json'], true)['source_commit']);
+            self::assertSame($before['articles'][$key]['values']['is_indexable'], $article['values']['is_indexable']);
+        }
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($next, $after))['written_count']);
+        DB::transaction(fn () => $writer->restore($next, $restored, $after));
+        self::assertSame($before['articles'], $states->read(self::SHA)['articles']);
+    }
+
     public function test_restore_does_not_overwrite_a_later_operator_change(): void
     {
         $this->seedNativeTargets();
