@@ -67,9 +67,22 @@ export function workflowSignature(binding, key, source, run, attempt) {
 // Only this exact registration delta is unrelated to private-result publication.
 // Every other shared-config change keeps conservative private consumer selection.
 export function isEqOnlyPromotionRegistration(before, after) {
-  const root = "        'content_assets/en-content-parity',\n";
-  const lane = "        'W3' => ['W3-ARTICLES' => 'audit_compatible', 'W3-CAREER-GUIDES' => 'audit_compatible'],";
-  if (!before.includes(root) || !before.includes(lane)) return false;
-  return before.replace(root, `${root}        '${packagePath}',\n`)
-    .replace(lane, lane.replace("],", ", 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'],")) === after;
+  const root = `        '${packagePath}',\n`;
+  const lane = ", 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'";
+  // Other already-registered public lanes must remain byte-identical. Requiring
+  // W3 to end immediately after Career rejects a valid EQ-only delta once IQ
+  // article/topic registrations exist, even when their policy is unchanged.
+  const rootAnchor = "    'authority_roots' => [\n        'content_assets/en-content-parity',\n";
+  const laneAnchor = "    'adapter_capabilities' => [\n"
+    + "        'W1' => ['mbti-comparisons' => 'audit_compatible', 'mbti-results' => 'audit_compatible'],\n"
+    + "        'W2' => ['big-five' => 'audit_compatible'],\n"
+    + "        'W3' => ['W3-ARTICLES' => 'audit_compatible', 'W3-CAREER-GUIDES' => 'audit_compatible'";
+  for (const key of ['authority_roots', 'adapter_capabilities', 'W3']) {
+    if ([...before.matchAll(new RegExp(`(['"])${key}\\1\\s*=>`, 'g'))].length !== 1) return false;
+  }
+  if (/(['"])EQ-NEW-SOURCE-ARTICLES\1\s*=>/.test(before)
+    || /(['"])content_assets\/eq_public\/candidate\/20261009-new-articles\1/.test(before)) return false;
+  if (before.split(rootAnchor).length !== 2 || before.split(laneAnchor).length !== 2
+    || before.includes(root) || before.includes(lane) || !after.includes(root) || !after.includes(lane)) return false;
+  return before.replace(rootAnchor, rootAnchor + root).replace(laneAnchor, laneAnchor + lane) === after;
 }

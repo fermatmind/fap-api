@@ -109,6 +109,79 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         }
     }
 
+    public function test_mysql_object_key_roundtrip_preserves_publication_live_qa_replay_and_rollback(): void
+    {
+        $this->seedEntry();
+        $before = [];
+        $sort = static function (mixed $value) use (&$sort): mixed {
+            if (! is_array($value)) {
+                return $value;
+            }
+            if (! array_is_list($value)) {
+                uksort($value, static fn (string $a, string $b): int => strlen($a) <=> strlen($b) ?: strcmp($a, $b));
+            }
+
+            return array_map($sort, $value);
+        };
+        DB::connection()->getPdo()->sqliteCreateFunction('iq_mysql_json', static fn (string $json): string => json_encode($sort(json_decode($json, true, 64, JSON_THROW_ON_ERROR)), JSON_THROW_ON_ERROR));
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            $before[$table] = json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true);
+            DB::statement("CREATE TRIGGER iq_mysql_order_{$table} AFTER UPDATE OF content_i18n_json ON {$table} BEGIN UPDATE {$table} SET content_i18n_json = iq_mysql_json(NEW.content_i18n_json) WHERE org_id = NEW.org_id AND code = NEW.code; END");
+        }
+        foreach (['INSERT', 'UPDATE OF meta_json'] as $index => $operation) {
+            DB::statement("CREATE TRIGGER iq_mysql_snapshot_{$index} AFTER {$operation} ON content_release_snapshots BEGIN UPDATE content_release_snapshots SET meta_json = iq_mysql_json(NEW.meta_json) WHERE id = NEW.id; END");
+        }
+        $context = $this->context();
+        $adapter = app(IqPublicScalePromotionAdapter::class);
+        $this->prepare($adapter, $context);
+        $draftReceipt = config('content_promotion.execution.previous_receipt');
+        $published = $adapter->publish($context);
+        self::assertSame(2, $published['written_count']);
+        $this->previous($context, 'cms_publication_receipt', $published);
+        self::assertSame(2, $adapter->liveQa($context)['published_count']);
+        config(['content_promotion.execution.previous_receipt' => $draftReceipt]);
+        self::assertSame(0, $adapter->publish($context)['written_count']);
+        $next = new PromotionContext($context->packageDirectory, $context->packageSha256, $context->lane, $context->subscope, str_repeat('f', 40), $context->executorReleaseSha256, $context->releasePolicySha256, '13', 1, str_repeat('f', 64), 2, $context->idempotencyKey);
+        $this->prepare($adapter, $next);
+        self::assertSame(0, $adapter->publish($next)['written_count']);
+        $adapter->rollback($context, $published['rollback_reference']);
+        self::assertTrue($adapter->recoverFailedPublication($context));
+        foreach ($before as $table => $content) {
+            self::assertSame($sort($content), json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true));
+        }
+    }
+
+    public function test_json_comparison_preserves_scalar_types_fields_and_list_order(): void
+    {
+        $adapter = app(IqPublicScalePromotionAdapter::class);
+        $compare = new \ReflectionMethod($adapter, 'sameJsonValue');
+        self::assertTrue($compare->invoke($adapter, ['a' => 1, 'b' => ['x' => 'copy']], ['b' => ['x' => 'copy'], 'a' => 1]));
+        foreach ([[1, 1.0], [1, '1'], [true, 1], [null, ''], [['a' => null], []], [['one', 'two'], ['two', 'one']], ['copy', 'copy ']] as [$actual, $expected]) {
+            self::assertFalse($compare->invoke($adapter, $actual, $expected));
+        }
+    }
+
+    public function test_faq_list_reordering_remains_a_content_change_and_blocks_owned_rollback(): void
+    {
+        $this->seedEntry();
+        $context = $this->context();
+        $adapter = app(IqPublicScalePromotionAdapter::class);
+        $this->prepare($adapter, $context);
+        $published = $adapter->publish($context);
+        $this->previous($context, 'cms_publication_receipt', $published);
+        $content = json_decode(DB::table('scales_registry_v2')->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true);
+        $content['en']['faq'] = array_reverse($content['en']['faq']);
+        DB::table('scales_registry_v2')->where('code', IqPublicEntryPackage::CODE)->update(['content_i18n_json' => json_encode($content)]);
+        try {
+            $adapter->liveQa($context);
+            self::fail('FAQ list order must remain exact.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_public_scale_published_content_drift', $error->getMessage());
+        }
+        $this->expectExceptionMessage('iq_public_scale_rollback_concurrent_content');
+        $adapter->rollback($context, $published['rollback_reference']);
+    }
+
     public function test_third_code_alias_refreshes_after_publication_and_rollback(): void
     {
         $this->seedEntry();

@@ -117,13 +117,13 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                     $content = $registry['content'];
                     foreach ($rows as $row) {
                         foreach (self::LEAVES as $leaf) {
-                            if (($content[$row['key']][$leaf] ?? null) !== $row['patch'][$leaf]) {
+                            if (! $this->sameJsonValue($content[$row['key']][$leaf] ?? null, $row['patch'][$leaf])) {
                                 $changedLocales[$row['key']] = true;
                             }
                         }
                         $content[$row['key']] = array_replace($content[$row['key']], $row['patch']);
                     }
-                    if ($content === $registry['content']) {
+                    if ($this->sameJsonValue($content, $registry['content'])) {
                         continue;
                     }
                     $changed = DB::table($registry['table'])->where('org_id', 0)->where('code', IqPublicEntryPackage::CODE)
@@ -166,7 +166,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
             }
             foreach ($rows as $row) {
                 foreach (self::LEAVES as $leaf) {
-                    if (data_get($public, 'content_i18n_json.'.$row['key'].'.'.$leaf) !== $row['patch'][$leaf]) {
+                    if (! $this->sameJsonValue(data_get($public, 'content_i18n_json.'.$row['key'].'.'.$leaf), $row['patch'][$leaf])) {
                         throw new DomainException('iq_public_scale_public_readback_drift');
                     }
                 }
@@ -198,7 +198,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
                     foreach (self::LEAVES as $leaf) {
                         $actual = $content[$row['key']][$leaf] ?? null;
                         $old = $saved['content'][$row['key']][$leaf] ?? null;
-                        if ($actual !== $row['patch'][$leaf] && $actual !== $old) {
+                        if (! $this->sameJsonValue($actual, $row['patch'][$leaf]) && ! $this->sameJsonValue($actual, $old)) {
                             throw new DomainException('iq_public_scale_rollback_concurrent_content');
                         }
                         if (array_key_exists($leaf, $saved['content'][$row['key']])) {
@@ -276,12 +276,36 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
         foreach ($state['registries'] as $registry) {
             foreach ($rows as $row) {
                 foreach (self::LEAVES as $leaf) {
-                    if (($registry['content'][$row['key']][$leaf] ?? null) !== $row['patch'][$leaf]) {
+                    if (! $this->sameJsonValue($registry['content'][$row['key']][$leaf] ?? null, $row['patch'][$leaf])) {
                         throw new DomainException('iq_public_scale_published_content_drift');
                     }
                 }
             }
         }
+    }
+
+    private function sameJsonValue(mixed $actual, mixed $expected): bool
+    {
+        if (! is_array($actual) || ! is_array($expected)) {
+            return $actual === $expected;
+        }
+        if (array_is_list($actual) !== array_is_list($expected) || count($actual) !== count($expected)) {
+            return false;
+        }
+        if (! array_is_list($actual)) {
+            ksort($actual);
+            ksort($expected);
+        }
+        if (array_keys($actual) !== array_keys($expected)) {
+            return false;
+        }
+        foreach ($actual as $key => $value) {
+            if (! $this->sameJsonValue($value, $expected[$key])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function protectedHash(array $state): string
@@ -329,8 +353,8 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
 
     private function assertSnapshotRows(ContentReleaseSnapshot $snapshot, array $rows): void
     {
-        if (data_get($snapshot->meta_json, 'rows') !== $rows
-            || data_get($snapshot->meta_json, 'target_identities') !== $this->targets($rows)->identities()
+        if (! $this->sameJsonValue(data_get($snapshot->meta_json, 'rows'), $rows)
+            || ! $this->sameJsonValue(data_get($snapshot->meta_json, 'target_identities'), $this->targets($rows)->identities())
             || data_get($snapshot->meta_json, 'state_sha256') !== $this->hash((array) data_get($snapshot->meta_json, 'state', []))) {
             throw new DomainException('iq_public_scale_snapshot_targets_invalid');
         }

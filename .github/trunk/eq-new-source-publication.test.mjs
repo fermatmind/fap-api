@@ -90,6 +90,19 @@ test('exact EQ registration excludes only that delta; policy and private adapter
   assert.equal(isEqOnlyPromotionRegistration(before,after),true);
   assert.equal(isEqOnlyPromotionRegistration(before,after.replace("'eq' => 'audit_compatible'","'eq' => 'fail_closed_legacy_audit'")),false);
   assert.equal(isEqOnlyPromotionRegistration(before,after+'\n'),false);
+  const root = "        'content_assets/eq_public/candidate/20261009-new-articles',\n";
+  const capability = ", 'EQ-NEW-SOURCE-ARTICLES' => 'audit_compatible'";
+  const wrongLane = after.replace(capability, '').replace("'W7' => ['eq' => 'audit_compatible'", "'W7' => ['eq' => 'audit_compatible'" + capability);
+  const wrongRoot = after.replace(root, '').replace("    'execution' => [\n", "    'execution' => [\n" + root);
+  assert.equal(isEqOnlyPromotionRegistration(before, wrongLane), false);
+  assert.equal(isEqOnlyPromotionRegistration(before, wrongRoot), false);
+  const apply = source => source.replace("        'content_assets/en-content-parity',\n", "        'content_assets/en-content-parity',\n" + root)
+    .replace("'W3-CAREER-GUIDES' => 'audit_compatible'", "'W3-CAREER-GUIDES' => 'audit_compatible'" + capability);
+  const w3 = before.split('\n').find(line => line.trimStart().startsWith("'W3' =>"));
+  const moved = before.replace(w3 + '\n', '').replace("    'execution' => [\n", "    'execution' => [\n" + w3 + '\n');
+  const duplicate = before.replace(w3 + '\n', w3 + "\n        'W3' => [],\n");
+  const existing = before.replace("'W3-CAREER-GUIDES' => 'audit_compatible'", "'W3-CAREER-GUIDES' => 'audit_compatible', 'EQ-NEW-SOURCE-ARTICLES'=>'audit_compatible'");
+  for (const invalid of [moved, duplicate, existing]) assert.equal(isEqOnlyPromotionRegistration(invalid, apply(invalid)), false);
 });
 
 test('real pack consumer graph excludes proven EQ registration from private pack checks only', () => {
