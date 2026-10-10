@@ -228,7 +228,12 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                     $article->forceFill($patch)->save();
                     $seo = $this->seo($article, true);
                     if (! $seo) {
-                        throw new DomainException('iq_article_seo_missing');
+                        // The public API already supports a native SEO fallback.
+                        // Preserve its qualification while binding reviewed copy.
+                        $seo = new ArticleSeoMeta([
+                            'org_id' => $article->org_id, 'article_id' => $article->id,
+                            'locale' => $article->locale, 'is_indexable' => $article->is_indexable,
+                        ]);
                     }
                     $schema = $seo->schema_json ?? [];
                     $metadata = (array) ($schema['editorial_package_v1'] ?? []);
@@ -353,7 +358,24 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                 } else {
                     $schema['editorial_package_v1'] = $metadata;
                 }
-                $seo->forceFill([...Arr::only($saved['seo'], self::SEO_COPY), 'schema_json' => $schema])->saveQuietly();
+                if ($saved['seo'] === null) {
+                    $expectedSchema = ['editorial_package_v1' => [
+                        'answer_surface_policy' => 'editor_supplied', 'answer_surface_visibility' => 'visible',
+                        'answer_surface_v1' => ['faq_items' => $row['snapshot']['faq_items']],
+                        'iq_article_exact_package_v1' => $this->publicationBinding($row, $revision, $context),
+                    ]];
+                    // Only this exact identity and untouched package-owned row
+                    // can be removed; a later operator edit aborts the transaction.
+                    if ($seo->org_id !== 0 || (int) $seo->article_id !== (int) $article->id || $seo->locale !== $article->locale
+                        || $seo->is_indexable !== (bool) $saved['article']['is_indexable']
+                        || $seo->canonical_url !== null || $seo->og_image_url !== null || $seo->robots !== null
+                        || ! $this->sameJson($seo->schema_json, $expectedSchema)) {
+                        throw new DomainException('iq_article_rollback_created_seo_drift');
+                    }
+                    $seo->delete();
+                } else {
+                    $seo->forceFill([...Arr::only($saved['seo'], self::SEO_COPY), 'schema_json' => $schema])->saveQuietly();
+                }
                 $patch = [...Arr::only($saved['article'], self::ARTICLE_COPY), 'published_revision_id' => $saved['article']['published_revision_id']];
                 if ((int) $article->working_revision_id === (int) $revision->id) {
                     $patch['working_revision_id'] = $saved['article']['working_revision_id'];
@@ -503,7 +525,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
                         throw new DomainException('iq_article_new_identity_collision');
                     }
                 }
-            } elseif (! is_array($article) || $article['status'] !== 'published' || ! $article['is_public'] || ! $article['published_revision_id'] || ! $saved['seo']
+            } elseif (! is_array($article) || $article['status'] !== 'published' || ! $article['is_public'] || ! $article['published_revision_id']
                 || in_array($article['lifecycle_state'] ?? null, [Article::LIFECYCLE_ARCHIVED, Article::LIFECYCLE_SOFT_DELETED], true)) {
                 throw new DomainException('iq_article_existing_public_authority_required');
             }
@@ -692,6 +714,13 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
             throw new DomainException('iq_article_rollback_restored_copy_drift');
         }
         $seo = $this->seo($article, true);
+        if ($saved['seo'] === null) {
+            if ($seo !== null) {
+                throw new DomainException('iq_article_rollback_restored_seo_drift');
+            }
+
+            return;
+        }
         if (! $seo || Arr::only($seo->getAttributes(), self::SEO_COPY) !== Arr::only($saved['seo'], self::SEO_COPY)) {
             throw new DomainException('iq_article_rollback_restored_seo_drift');
         }

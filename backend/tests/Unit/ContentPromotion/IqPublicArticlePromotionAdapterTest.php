@@ -82,6 +82,53 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         self::assertTrue($adapter->recoverFailedPublication($context));
     }
 
+    public function test_missing_native_english_seo_is_published_and_rolled_back_without_changing_qualification_or_foreign_drafts(): void
+    {
+        $before = $this->seedExisting();
+        ArticleSeoMeta::query()->where('locale', 'en')->delete();
+        $drafts = ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->get()->map->getAttributes()->all();
+        [$adapter, $context, $publication] = $this->publish();
+        self::assertSame(10, $adapter->liveQa($context)['readback_count']);
+        foreach ($before as $id => $row) {
+            $article = Article::query()->findOrFail($id);
+            self::assertSame((bool) $row['is_indexable'], $article->is_indexable);
+            self::assertSame((bool) $row['is_indexable'], $article->seoMeta->is_indexable);
+            self::assertSame((bool) $row['sitemap_eligible'], $article->sitemap_eligible);
+            self::assertSame((bool) $row['llms_eligible'], $article->llms_eligible);
+            if ($article->locale === 'en') {
+                self::assertNull($article->seoMeta->robots);
+                self::assertNull($article->seoMeta->canonical_url);
+            }
+        }
+        $adapter->rollback($context, $publication['rollback_reference']);
+        self::assertSame(0, ArticleSeoMeta::query()->where('locale', 'en')->whereIn('article_id', array_keys($before))->count());
+        foreach ($before as $id => $row) {
+            $article = Article::query()->findOrFail($id);
+            foreach (['title', 'excerpt', 'content_md', 'published_revision_id', 'working_revision_id'] as $field) {
+                self::assertSame($row[$field], $article->getAttributes()[$field]);
+            }
+        }
+        self::assertSame($drafts, ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->get()->map->getAttributes()->all());
+        self::assertTrue($adapter->recoverFailedPublication($context));
+    }
+
+    public function test_rollback_refuses_to_delete_a_created_native_seo_row_with_later_operator_changes(): void
+    {
+        $before = $this->seedExisting();
+        ArticleSeoMeta::query()->where('locale', 'en')->delete();
+        [$adapter, $context, $publication] = $this->publish();
+        $seo = ArticleSeoMeta::query()->where('locale', 'en')->whereIn('article_id', array_keys($before))->firstOrFail();
+        $seo->forceFill(['og_image_url' => 'https://fermatmind.com/operator-image.png'])->saveQuietly();
+        try {
+            $adapter->rollback($context, $publication['rollback_reference']);
+            self::fail('Later operator SEO changes must prevent row deletion.');
+        } catch (DomainException $error) {
+            self::assertSame('iq_article_rollback_created_seo_drift', $error->getMessage());
+        }
+        self::assertSame('https://fermatmind.com/operator-image.png', $seo->fresh()->og_image_url);
+        self::assertSame(10, Article::query()->where('is_public', true)->count());
+    }
+
     public function test_preflight_detects_a_changed_foreign_draft_without_creating_any_package_rows(): void
     {
         $this->seedExisting();
@@ -111,6 +158,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
     public function test_failure_on_the_last_article_rolls_back_the_whole_publication_transaction(): void
     {
         $this->seedExisting();
+        ArticleSeoMeta::query()->where('locale', 'en')->delete();
         [$adapter, $context] = $this->import();
         $beforeArticles = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
         $beforeRevisions = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
