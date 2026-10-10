@@ -20,6 +20,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
 use Tests\TestCase;
 
@@ -196,16 +197,26 @@ final class MediaLibraryPublicApiTest extends TestCase
         }
     }
 
-    public function test_filament_upload_generates_public_media_path_instead_of_temporary_path(): void
-    {
+    #[DataProvider('filamentSourceImages')]
+    public function test_filament_upload_generates_public_media_path_instead_of_temporary_path(
+        string $originalName,
+        string $imageExtension,
+        string $expectedMimeType,
+        string $storedExtension
+    ): void {
         Storage::fake('public');
 
         $this->actingAsContentWriter();
 
+        $image = UploadedFile::fake()->image('source.'.$imageExtension, 1239, 1280);
+        $upload = UploadedFile::fake()
+            ->createWithContent($originalName, file_get_contents($image->getPathname()))
+            ->mimeType($expectedMimeType);
+
         Livewire::test(CreateMediaAsset::class)
             ->fillForm([
                 'org_id' => 0,
-                'uploaded_source' => UploadedFile::fake()->image('receipt.png', 1239, 1280),
+                'uploaded_source' => $upload,
                 'asset_key' => 'daily-giving-unicef-receipt-2026-06-05',
                 'disk' => 'public_static',
                 'path' => null,
@@ -232,19 +243,52 @@ final class MediaLibraryPublicApiTest extends TestCase
             (string) $asset->path
         );
         $this->assertFalse(str_starts_with((string) $asset->path, '/tmp/'));
+        $this->assertStringEndsWith('.'.$storedExtension, (string) $asset->path);
         $this->assertStringStartsWith(
             'https://assets.fermatmind.com/storage/media-library/sources/org-0/media-asset-'.$asset->id.'-daily-giving-unicef-receipt-2026-06-05/source-',
             (string) $asset->url
         );
         $this->assertSame(1239, (int) $asset->width);
         $this->assertSame(1280, (int) $asset->height);
-        $this->assertSame('image/png', (string) $asset->mime_type);
+        $this->assertSame($expectedMimeType, (string) $asset->mime_type);
         $this->assertSame(MediaAsset::SYNC_SKIPPED, (string) $asset->sync_status);
         $this->assertSame(MediaAsset::CDN_SKIPPED, (string) $asset->cdn_status);
         $this->assertSame(6, $asset->variants()->count());
         $this->assertArrayNotHasKey('source_original_name', $asset->payload_json ?? []);
 
         Storage::disk('public')->assertExists((string) $asset->path);
+    }
+
+    public static function filamentSourceImages(): array
+    {
+        return [
+            'jpeg' => ['receipt.jpg', 'jpg', 'image/jpeg', 'jpg'],
+            'png' => ['receipt.png', 'png', 'image/png', 'png'],
+            'webp' => ['receipt.webp', 'webp', 'image/webp', 'webp'],
+            'png with html extension' => ['receipt.html', 'png', 'image/png', 'jpg'],
+            'png with svg extension' => ['receipt.svg', 'png', 'image/png', 'jpg'],
+        ];
+    }
+
+    public function test_filament_upload_rejects_non_image_content(): void
+    {
+        Storage::fake('public');
+
+        $this->actingAsContentWriter();
+
+        Livewire::test(CreateMediaAsset::class)
+            ->fillForm([
+                'org_id' => 0,
+                'uploaded_source' => UploadedFile::fake()
+                    ->createWithContent('receipt.png', '<html>Not an image</html>')
+                    ->mimeType('text/html'),
+                'asset_key' => 'invalid-image-upload',
+            ])
+            ->call('create')
+            ->assertHasFormErrors(['uploaded_source']);
+
+        $this->assertSame(0, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame([], Storage::disk('public')->allFiles('media-library'));
     }
 
     public function test_slug_colliding_asset_keys_use_distinct_variant_directories(): void
