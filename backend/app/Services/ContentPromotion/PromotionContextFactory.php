@@ -49,6 +49,9 @@ final class PromotionContextFactory
             $releasePolicySha256,
             (string) $expectedRowCount,
         ]);
+        if ($lane === 'W3' && $subscope === 'EQ-EXISTING-PUBLIC-PAGES') {
+            $signatureMaterial .= '|'.$executorReleaseSha256;
+        }
         // The IQ entry executor contract binds its exact implementation bytes.
         // Existing lanes retain their established signature wire format.
         if ($lane === 'W6' && $subscope === 'iq-public-scale') {
@@ -62,9 +65,6 @@ final class PromotionContextFactory
         // The IQ/EQ topic executor contract binds its exact implementation bytes.
         // Existing lanes retain their established signature wire format.
         if ($lane === 'W3' && $subscope === 'IQ-EQ-TOPIC') {
-            $signatureMaterial .= '|'.$executorReleaseSha256;
-        }
-        if ($lane === 'W3' && $subscope === 'EQ-EXISTING-PUBLIC-PAGES') {
             $signatureMaterial .= '|'.$executorReleaseSha256;
         }
         if (strlen($workflowIdentityKey) < 32

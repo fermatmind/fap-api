@@ -18,10 +18,10 @@ return [
     'authority_roots' => [
         'content_assets/en-content-parity',
         'content_assets/eq_public/candidate/20261009-new-articles',
-        'content_assets/eq_public/candidate/20261010-existing-pages',
         'content_assets/iq_public/entry/20261009-v1',
         'content_assets/iq_public/articles/20261010-v1',
         'content_assets/iq_public/topics/20261010-v1',
+        'content_assets/eq_public/candidate/20261010-existing-pages',
         'content_packs',
         'content_baselines',
         'database/seeders/data',

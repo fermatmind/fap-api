@@ -61,17 +61,27 @@ export function workflowSignature(binding,key,source,run,attempt) {
 }
 export function isEqExistingOnlyPromotionRegistration(before,after) {
   const root=`        '${packagePath}',\n`,cap=", 'EQ-EXISTING-PUBLIC-PAGES' => 'audit_compatible'";
-  if(before.includes('EQ-EXISTING-PUBLIC-PAGES') || before.includes(packagePath) || after.split(root).length!==2 || after.split(cap).length!==2) return false;
+  if(after.split(root).length!==2 || after.split(cap).length!==2) return false;
   const roots=after.match(/    'authority_roots' => \[\n([\s\S]*?)    \],/);
   const w3=after.match(/        'W3' => \[[^\n]*\],\n/);
   if(!roots?.[1].includes(root) || !w3?.[0].includes(cap)) return false;
+  if(before.includes('EQ-EXISTING-PUBLIC-PAGES') || before.includes(packagePath)) {
+    const oldPosition="        'content_assets/eq_public/candidate/20261009-new-articles',\n"+root+"        'content_assets/iq_public/entry/20261009-v1',\n";
+    const newPosition="        'content_assets/iq_public/topics/20261010-v1',\n"+root+"        'content_packs',\n";
+    return before.split(root).length===2 && before.split(cap).length===2
+      && before.includes(oldPosition) && after.includes(newPosition) && before.replace(root,'')===after.replace(root,'');
+  }
   const without=after.replace(root,'').replace(cap,'');
   return without===before || isIqEqTopicOnlyPromotionRegistration(before,without) || isEqOnlyPromotionRegistration(before,without);
 }
 export function isEqExistingOnlyContextFactoryChange(before,after) {
   const block="        if ($lane === 'W3' && $subscope === 'EQ-EXISTING-PUBLIC-PAGES') {\n            $signatureMaterial .= '|'.$executorReleaseSha256;\n        }\n";
-  if(before.includes('EQ-EXISTING-PUBLIC-PAGES') || after.split(block).length!==2) return false;
-  if(!after.includes(`${block}        if (strlen($workflowIdentityKey) < 32\n`)) return false;
+  if(after.split(block).length!==2) return false;
+  if(!after.includes(`${block}        // The IQ entry executor contract binds its exact implementation bytes.\n`)) return false;
+  if(before.includes('EQ-EXISTING-PUBLIC-PAGES')) {
+    return before.split(block).length===2 && before.includes(`${block}        if (strlen($workflowIdentityKey) < 32\n`)
+      && before.replace(block,'')===after.replace(block,'');
+  }
   const without=after.replace(block,'');
   return without===before || isIqEqTopicOnlyContextFactoryChange(before,without);
 }

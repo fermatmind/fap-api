@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {createHmac} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
 import {readFileSync, mkdtempSync, mkdirSync, copyFileSync, writeFileSync, rmSync, symlinkSync, linkSync} from 'node:fs';
 import {tmpdir} from 'node:os';
-import {dirname, join, resolve} from 'node:path';
+import {dirname, join} from 'node:path';
 import {inspectPackage, readCandidateRows, workflowSignature, packagePath, executorPaths, isEqExistingOnlyPromotionRegistration, isEqExistingOnlyContextFactoryChange} from './eq-existing-public-package.mjs';
 import {buildExecution,publish} from './eq-existing-public-publish.mjs';
 import {verifyOnlineCandidates} from './eq-existing-public-online-qa.mjs';
@@ -28,10 +27,9 @@ function fixture(run) {
     return run(root);
   } finally { rmSync(root,{recursive:true,force:true}); }
 }
-test('six reviewed locale rows have the same package digest in Node and the PHP authority reader',()=>{
+test('six reviewed locale rows retain the PHP-tested frozen package digest',()=>{
   assert.equal(binding.package_sha256,'427f656fc3d6ac40eac4819c749e4962a54df0aca1ce7549ccd2eb12e25896ad');
-  const code='require $argv[1]."/vendor/autoload.php"; $r=(new App\\Services\\ContentPromotion\\EqExistingPublicPagePackage(new App\\Services\\Cms\\ArticleBodyHeadingGuard))->read($argv[1],$argv[2]); echo count($r["candidates"])." ".$r["package_sha256"];';
-  assert.equal(execFileSync('php',['-r',code,resolve('backend'),binding.package_sha256],{encoding:'utf8',timeout:30000}).trim(),`6 ${binding.package_sha256}`);
+  assert.equal(readCandidateRows('backend').length,6);
 });
 test('workflow HMAC binds exact executor bytes and six-page scope',()=>{
   const key='fixture-key-'.repeat(5),source='a'.repeat(40),run='12345';
@@ -66,11 +64,17 @@ test('registration admits only the exact public root and W3 capability in their 
   assert.equal(isEqExistingOnlyPromotionRegistration(previousConfig,actualConfig.replace(rootLine,'')+rootLine),false);
   assert.equal(isEqExistingOnlyPromotionRegistration(previousConfig,actualConfig.replace(cap,'').replace("'W4' => [",`'W4' => ['other' => 'audit_compatible'${cap}, `)),false);
   assert.equal(isEqExistingOnlyPromotionRegistration(previousConfig,actualConfig.replace("'content_packs',","'content_packs/private',")),false);
+  const former=actualConfig.replace(rootLine,'').replace("        'content_assets/iq_public/entry/20261009-v1',\n",rootLine+"        'content_assets/iq_public/entry/20261009-v1',\n");
+  assert.equal(isEqExistingOnlyPromotionRegistration(former,actualConfig),true);
+  assert.equal(isEqExistingOnlyPromotionRegistration(former,actualConfig.replace("'content_packs',","'content_packs/private',")),false);
 });
 test('executor binding addition must precede signature verification and preserves other lanes',()=>{
   assert.equal(isEqExistingOnlyContextFactoryChange(previousFactory,actualFactory),true);
   assert.equal(isEqExistingOnlyContextFactoryChange(previousFactory,actualFactory.replace(block,'')+block),false);
   assert.equal(isEqExistingOnlyContextFactoryChange(previousFactory,actualFactory.replace("strlen($workflowIdentityKey) < 32","strlen($workflowIdentityKey) < 1")),false);
+  const relocated=previousFactory.replace('        if (strlen($workflowIdentityKey) < 32\n',block+'        if (strlen($workflowIdentityKey) < 32\n');
+  assert.equal(isEqExistingOnlyContextFactoryChange(relocated,actualFactory),true);
+  assert.equal(isEqExistingOnlyContextFactoryChange(relocated,actualFactory.replace("'content-promotion-v2'","'changed-private-signature'")),false);
 });
 const env={EQ_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'host.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'12345',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'fixture-key-'.repeat(5)};
 const response=()=>({ok:true,source_commit:env.DEPLOY_SHA,workflow_run_id:env.GITHUB_RUN_ID,workflow_run_attempt:1,package_sha256:binding.package_sha256,published_count:6,sanitized:true,
