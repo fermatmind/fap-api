@@ -150,6 +150,151 @@ final class EqExistingPublicPageWriterTest extends TestCase
         self::assertSame($before, $states->read(self::SHA));
     }
 
+    public static function bindingConflicts(): array
+    {
+        return [['revision_id', false], ['revision_locale', false], ['article_pointers', false],
+            ['article_locale', false], ['revision_id', true], ['revision_locale', true]];
+    }
+
+    #[DataProvider('bindingConflicts')]
+    public function test_conflicting_source_bindings_fail_atomically_including_no_op(string $conflict, bool $alreadyPublished): void
+    {
+        $this->seedNativeTargets();
+        $chinese = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $english = Article::query()->where('locale', 'en')->firstOrFail();
+        $chinese->forceFill(['translation_status' => 'approved'])->saveQuietly();
+        $english->forceFill(['translation_status' => 'published', 'source_locale' => 'zh-CN',
+            'source_article_id' => $chinese->id, 'translated_from_article_id' => $chinese->id,
+            'translation_group_id' => $chinese->translation_group_id])->saveQuietly();
+        ArticleTranslationRevision::query()->where('article_id', $english->id)->update([
+            'source_article_id' => $chinese->id, 'source_locale' => 'zh-CN', 'translation_group_id' => $chinese->translation_group_id,
+        ]);
+        $states = app(EqExistingPublicPageState::class);
+        $writer = app(EqExistingPublicPageWriter::class);
+        if ($alreadyPublished) {
+            DB::transaction(fn () => $writer->publish($this->context(), $states->read(self::SHA)));
+            $english->refresh();
+        }
+        match ($conflict) {
+            'revision_id' => ArticleTranslationRevision::query()->whereKey($english->published_revision_id)->update(['source_article_id' => $english->id]),
+            'revision_locale' => ArticleTranslationRevision::query()->whereKey($english->published_revision_id)->update(['source_locale' => 'en']),
+            'article_pointers' => $english->forceFill(['translated_from_article_id' => $english->id])->saveQuietly(),
+            'article_locale' => $english->forceFill(['source_locale' => 'en'])->saveQuietly(),
+        };
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => $writer->publish($this->context(), $before));
+            self::fail('Conflicting provenance must not be published or replayed');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_article_source_identity', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
+    public static function selfReferences(): array
+    {
+        return [['source', false], ['approved', false], ['source', true], ['approved', true]];
+    }
+
+    #[DataProvider('selfReferences')]
+    public function test_self_referencing_sources_fail_atomically(string $status, bool $alreadyPublished): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $writer = app(EqExistingPublicPageWriter::class);
+        if ($alreadyPublished) {
+            DB::transaction(fn () => $writer->publish($this->context(), $states->read(self::SHA)));
+        }
+        $chinese = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $chinese->forceFill(['translation_status' => $status, 'source_article_id' => $chinese->id,
+            'translated_from_article_id' => $chinese->id])->saveQuietly();
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => $writer->publish($this->context(), $before));
+            self::fail('A source cannot enter the translation branch through self pointers');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_article_source_identity', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
+    public static function staleVersions(): array
+    {
+        return [['chinese_body'], ['revision_hash'], ['article_hash']];
+    }
+
+    #[DataProvider('staleVersions')]
+    public function test_matching_english_body_refreshes_source_version_and_preserves_working_draft(string $stale): void
+    {
+        $this->seedNativeTargets();
+        $chinese = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $english = Article::query()->where('locale', 'en')->firstOrFail();
+        $chinese->forceFill(['translation_status' => 'approved'])->saveQuietly();
+        $english->forceFill(['translation_status' => 'published', 'source_locale' => 'zh-CN',
+            'source_article_id' => $chinese->id, 'translated_from_article_id' => $chinese->id,
+            'translation_group_id' => $chinese->translation_group_id])->saveQuietly();
+        ArticleTranslationRevision::query()->where('article_id', $english->id)->update([
+            'source_article_id' => $chinese->id, 'source_locale' => 'zh-CN', 'translation_group_id' => $chinese->translation_group_id,
+        ]);
+        $states = app(EqExistingPublicPageState::class);
+        $writer = app(EqExistingPublicPageWriter::class);
+        DB::transaction(fn () => $writer->publish($this->context(), $states->read(self::SHA)));
+        $chinese->refresh();
+        $english->refresh();
+        // These matching bodies belong to prior, non-package publication.
+        // Current exact-package revisions remain immutable and unique.
+        ArticleTranslationRevision::query()->whereIn('id', [$chinese->published_revision_id, $english->published_revision_id])->update([
+            'authority_package_sha256' => null, 'authority_asset_key' => null, 'authority_source_package' => null,
+            'authority_source_hash' => null, 'authority_metadata_json' => null,
+        ]);
+        if ($stale === 'chinese_body') {
+            $chinese->forceFill(['content_md' => 'Earlier Chinese source body']);
+            $oldHash = $chinese->computeSourceVersionHash();
+            $chinese->forceFill(['source_version_hash' => $oldHash])->saveQuietly();
+            ArticleTranslationRevision::query()->whereKey($chinese->published_revision_id)->update([
+                'content_md' => 'Earlier Chinese source body', 'source_version_hash' => $oldHash, 'translated_from_version_hash' => $oldHash,
+            ]);
+            ArticleTranslationRevision::query()->whereKey($english->published_revision_id)->update([
+                'source_version_hash' => $oldHash, 'translated_from_version_hash' => $oldHash,
+            ]);
+            $english->forceFill(['translated_from_version_hash' => $oldHash])->saveQuietly();
+        } elseif ($stale === 'revision_hash') {
+            ArticleTranslationRevision::query()->whereKey($english->published_revision_id)->update([
+                'source_version_hash' => str_repeat('f', 64), 'translated_from_version_hash' => str_repeat('f', 64),
+            ]);
+        } else {
+            $english->forceFill(['translated_from_version_hash' => str_repeat('f', 64)])->saveQuietly();
+        }
+        $before = $states->read(self::SHA);
+        $result = DB::transaction(fn () => $writer->publish($this->context(), $before));
+        $after = $result['state'];
+        self::assertSame($stale === 'chinese_body' ? 2 : 1, $result['written_count']);
+        self::assertNotSame($before['articles']['EQ-02:en']['published']['id'], $after['articles']['EQ-02:en']['published']['id']);
+        self::assertSame($after['articles']['EQ-02:zh-CN']['values']['source_version_hash'], $after['articles']['EQ-02:en']['published']['source_version_hash']);
+        self::assertSame($after['articles']['EQ-02:en']['published']['source_version_hash'], $after['articles']['EQ-02:en']['published']['translated_from_version_hash']);
+        self::assertSame($after['articles']['EQ-02:en']['published']['source_version_hash'], $after['articles']['EQ-02:en']['values']['translated_from_version_hash']);
+        self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->context(), $after))['written_count']);
+    }
+
+    public function test_drift_in_a_current_exact_package_version_fails_without_rewriting_immutable_history(): void
+    {
+        $this->seedNativeTargets();
+        $states = app(EqExistingPublicPageState::class);
+        $writer = app(EqExistingPublicPageWriter::class);
+        DB::transaction(fn () => $writer->publish($this->context(), $states->read(self::SHA)));
+        $english = Article::query()->where('locale', 'en')->firstOrFail();
+        ArticleTranslationRevision::query()->whereKey($english->published_revision_id)->update(['source_version_hash' => str_repeat('f', 64)]);
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => $writer->publish($this->context(), $before));
+            self::fail('The same exact package cannot replace drifted immutable provenance');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_source_version_drift', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
     public static function sourceStatuses(): array
     {
         return [['source'], ['approved']];

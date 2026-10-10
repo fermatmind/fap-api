@@ -171,10 +171,6 @@ final class EqExistingPublicPageWriter
 
     private function article(array $row, array $current, PromotionContext $context): bool
     {
-        if ($this->matches($row, $current)) {
-            return false;
-        }
-        $this->assertSeo($current, 'article_id');
         $article = Article::query()->withoutGlobalScopes()->findOrFail($current['values']['id']);
         $old = $current['published'];
         // Approved source rows may retain their original workflow status.
@@ -182,27 +178,47 @@ final class EqExistingPublicPageWriter
         $isSource = $article->isSourceArticle()
             || ($article->translation_status === Article::TRANSLATION_STATUS_APPROVED
                 && $article->locale === 'zh-CN' && $article->source_locale === 'zh-CN'
-                && $article->source_article_id === null && $article->translated_from_article_id === null
-                && (int) $old['source_article_id'] === (int) $article->id
-                && $old['source_locale'] === 'zh-CN'
-                && $old['translation_group_id'] === $article->translation_group_id);
-        $article->forceFill(['title' => $row['snapshot']['title'], 'excerpt' => $row['snapshot']['excerpt'], 'content_md' => $row['snapshot']['content_md'], 'content_html' => null]);
-        $sourceHash = $article->computeSourceVersionHash();
-        $revisionSourceHash = $sourceHash;
-        $translatedFromHash = $sourceHash;
+                && $article->source_article_id === null && $article->translated_from_article_id === null);
+        $sourceId = (int) $article->id;
+        $sourceLocale = $article->locale;
+        $translatedSourceHash = null;
         if (! $isSource) {
             $source = $article->sourceArticle();
-            if (! $source instanceof Article || (int) $source->org_id !== 0 || $source->slug !== $article->slug
-                || $source->locale !== 'zh-CN' || $source->translation_group_id !== $article->translation_group_id
+            if (($article->source_article_id !== null && $article->translated_from_article_id !== null
+                    && (int) $article->source_article_id !== (int) $article->translated_from_article_id)
+                || ! $source instanceof Article || (int) $source->id === (int) $article->id
+                || (int) $source->org_id !== 0 || $source->slug !== $article->slug
+                || $source->locale !== 'zh-CN' || $article->source_locale !== $source->locale
+                || $source->translation_group_id !== $article->translation_group_id
                 || preg_match('/\A[a-f0-9]{64}\z/', (string) $source->source_version_hash) !== 1) {
                 throw new DomainException('eq_existing_writer_article_source_identity');
             }
-            $revisionSourceHash = $translatedFromHash = $source->source_version_hash;
+            $sourceId = (int) $source->id;
+            $sourceLocale = $source->locale;
+            $translatedSourceHash = $source->source_version_hash;
         }
+        if ((int) $old['source_article_id'] !== $sourceId || $old['source_locale'] !== $sourceLocale) {
+            throw new DomainException('eq_existing_writer_article_source_identity');
+        }
+        $article->forceFill(['title' => $row['snapshot']['title'], 'excerpt' => $row['snapshot']['excerpt'], 'content_md' => $row['snapshot']['content_md'], 'content_html' => null]);
+        $sourceHash = $article->computeSourceVersionHash();
+        $revisionSourceHash = $translatedFromHash = $isSource ? $sourceHash : $translatedSourceHash;
+        // Body equality alone cannot keep an obsolete source-version binding.
+        $versionMatches = $old['source_version_hash'] === $revisionSourceHash
+            && $old['translated_from_version_hash'] === $translatedFromHash
+            && $article->source_version_hash === $sourceHash
+            && ($isSource || $article->translated_from_version_hash === $translatedFromHash);
+        if ($this->matches($row, $current) && $versionMatches) {
+            return false;
+        }
+        if (! $versionMatches && $old['authority_package_sha256'] === $context->packageSha256) {
+            throw new DomainException('eq_existing_writer_source_version_drift');
+        }
+        $this->assertSeo($current, 'article_id');
         $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
-            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $old['source_article_id'],
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $sourceId,
             'translation_group_id' => $article->translation_group_id, 'locale' => $article->locale,
-            'source_locale' => $old['source_locale'], 'translated_from_version_hash' => $translatedFromHash,
+            'source_locale' => $sourceLocale, 'translated_from_version_hash' => $translatedFromHash,
             'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'source_version_hash' => $revisionSourceHash,
             'supersedes_revision_id' => $old['id'], 'authority_asset_key' => 'EQ-02:'.$article->locale,
