@@ -37,6 +37,12 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
 
     public function test_bilingual_publish_and_rollback_preserve_foreign_drafts_and_indexability(): void
     {
+        // Publication and recovery evict derived sitemap reads but must preserve a live warmer's mutex.
+        $sitemapOwner = \Illuminate\Support\Facades\Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($sitemapOwner->get());
+        $sitemapBefore = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/en/tests', 'lastmod' => '2026-10-10T18:00:00Z']]];
+        \Illuminate\Support\Facades\Cache::put('seo:sitemap-source:v2:fresh', $sitemapBefore, 600);
         $before = $this->seedExisting();
         $drafts = ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->get()->map->getAttributes()->all();
         $control = Article::query()->create(['org_id' => 17, 'slug' => 'iq-test-tool-guide', 'locale' => 'en', 'title' => 'Other tenant', 'content_md' => 'Unrelated original', 'status' => 'draft']);
@@ -44,6 +50,8 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         [$adapter, $context, $publication] = $this->publish();
         self::assertSame(10, $publication['published_count']);
         self::assertSame(10, $adapter->liveQa($context)['readback_count']);
+        self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
+        self::assertNull(\Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
         foreach ($before as $id => $row) {
             $article = Article::query()->findOrFail($id);
             foreach (['is_indexable', 'sitemap_eligible', 'llms_eligible'] as $field) {
@@ -80,6 +88,9 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         self::assertSame($drafts, ArticleTranslationRevision::query()->where('revision_status', ArticleTranslationRevision::STATUS_MACHINE_DRAFT)->get()->map->getAttributes()->all());
         self::assertSame($controlBefore, $control->fresh()->getAttributes());
         self::assertTrue($adapter->recoverFailedPublication($context));
+        self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
+        self::assertNull(\Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertTrue($sitemapOwner->release());
     }
 
     public function test_missing_native_english_seo_is_published_and_rolled_back_without_changing_qualification_or_foreign_drafts(): void

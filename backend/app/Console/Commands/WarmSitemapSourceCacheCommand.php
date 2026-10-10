@@ -6,7 +6,9 @@ namespace App\Console\Commands;
 
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Support\PublicProjectionCache as Cache;
+use Illuminate\Cache\Lock;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Cache\LockTimeoutException;
 
 final class WarmSitemapSourceCacheCommand extends Command
 {
@@ -35,18 +37,27 @@ final class WarmSitemapSourceCacheCommand extends Command
         $start = microtime(true);
 
         try {
-            $controller = app(SitemapSourceController::class);
-            $generator = app(\App\Services\SEO\SitemapGenerator::class);
-            $projection = app(\App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup::class);
-
             $lock = Cache::lock(SitemapSourceController::CACHE_KEY_LOCK, SitemapSourceController::LOCK_TTL_SECONDS);
-            if (! $lock->get()) {
+            try {
+                // Deployment refresh must coordinate with the five-minute warmer.
+                // Wait at most one existing lease; ordinary scheduler ticks stay nonblocking.
+                $acquired = (bool) $this->option('refresh-if-changed')
+                    ? $lock->block(SitemapSourceController::LOCK_TTL_SECONDS)
+                    : $lock->get();
+            } catch (LockTimeoutException) {
+                $acquired = false;
+            }
+            if (! $acquired) {
                 $this->emitResult('locked', 0, round(microtime(true) - $start, 3));
 
                 return self::FAILURE;
             }
 
             try {
+                // Resolve authority readers after contention, so waiting cannot bind an old projection.
+                $controller = app(SitemapSourceController::class);
+                $generator = app(\App\Services\SEO\SitemapGenerator::class);
+                $projection = app(\App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup::class);
                 $authorityUrls = $generator->generateSitemapUrls();
                 $payload = $controller->buildPayloadFromAuthorityUrls($authorityUrls, $projection);
                 if ((int) ($payload['count'] ?? 0) < 1) {
@@ -54,9 +65,10 @@ final class WarmSitemapSourceCacheCommand extends Command
                 }
 
                 if ((bool) $this->option('refresh-if-changed')) {
-                    return $this->refreshIfChanged($controller, $payload, $authorityUrls, $start);
+                    return $this->refreshIfChanged($controller, $payload, $authorityUrls, $start, $lock);
                 }
 
+                $this->assertPublicationLease($lock);
                 $controller->storeCache($payload);
 
                 return $this->emitResult('warmed', (int) ($payload['count'] ?? 0), round(microtime(true) - $start, 3));
@@ -72,6 +84,15 @@ final class WarmSitemapSourceCacheCommand extends Command
         }
     }
 
+    private function assertPublicationLease(Lock $lock): void
+    {
+        // A build that outlived its lease must not publish or release a successor's lock.
+        // Redis renewal is atomic and succeeds only for this lock's owner token.
+        if (! $lock->isOwnedByCurrentProcess() || ! $lock->refresh()) {
+            throw new \RuntimeException('Sitemap source warm lock ownership lost.');
+        }
+    }
+
     /**
      * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
      * @param  list<array<string, mixed>>  $authorityUrls
@@ -81,6 +102,7 @@ final class WarmSitemapSourceCacheCommand extends Command
         array $payload,
         array $authorityUrls,
         float $start,
+        Lock $lock,
     ): int {
         $fingerprint = $this->buildFingerprint($authorityUrls);
         $cachedFingerprint = Cache::get(self::FINGERPRINT_CACHE_KEY);
@@ -91,6 +113,7 @@ final class WarmSitemapSourceCacheCommand extends Command
             && $this->cachePayloadIsReadable($cachedPayload)
         ) {
             // Renew freshness only after the authority fingerprint, including removals, matches.
+            $this->assertPublicationLease($lock);
             $controller->storeCache($cachedPayload);
 
             return $this->emitResult(
@@ -100,6 +123,7 @@ final class WarmSitemapSourceCacheCommand extends Command
             );
         }
 
+        $this->assertPublicationLease($lock);
         $controller->storeCache($payload);
         $storedPayload = Cache::get(SitemapSourceController::CACHE_KEY_FRESH);
         if (! $this->cachePayloadIsReadable($storedPayload)) {
@@ -110,6 +134,7 @@ final class WarmSitemapSourceCacheCommand extends Command
             ...$fingerprint,
             'generated_at' => now()->utc()->format('Y-m-d\TH:i:s\Z'),
         ];
+        $this->assertPublicationLease($lock);
         if (! Cache::forever(self::FINGERPRINT_CACHE_KEY, $receipt)) {
             throw new \RuntimeException('Sitemap source authority fingerprint could not be published.');
         }

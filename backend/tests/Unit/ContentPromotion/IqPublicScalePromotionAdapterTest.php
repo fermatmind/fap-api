@@ -85,6 +85,12 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
 
     public function test_publication_and_rollback_refresh_prewarmed_bilingual_http_lookup(): void
     {
+        // Publication and recovery invalidate only their owned readers, never a live sitemap warmer.
+        $sitemapOwner = \Illuminate\Support\Facades\Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($sitemapOwner->get());
+        $sitemapBefore = ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/en/tests', 'lastmod' => '2026-10-10T18:00:00Z']]];
+        \Illuminate\Support\Facades\Cache::put('seo:sitemap-source:v2:fresh', $sitemapBefore, 600);
         $this->seedEntry();
         $before = [];
         foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $key) {
@@ -97,6 +103,8 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $adapter = app(IqPublicScalePromotionAdapter::class);
         $this->prepare($adapter, $context);
         $published = $adapter->publish($context);
+        self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
+        self::assertSame($sitemapBefore, \Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
         foreach (app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256) as $row) {
             $response = $this->getJson('/api/v0.3/scales/lookup?slug='.IqPublicEntryPackage::SLUG.'&locale='.$row['identity']['locale'])->assertOk();
             foreach ($row['patch'] as $leaf => $expected) {
@@ -107,6 +115,9 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         foreach (['zh-CN' => 'zh', 'en' => 'en'] as $locale => $key) {
             self::assertSame($before[$locale], $this->getJson('/api/v0.3/scales/lookup?slug='.IqPublicEntryPackage::SLUG.'&locale='.$locale)->assertOk()->json('content_i18n_json.'.$key));
         }
+        self::assertTrue($sitemapOwner->isOwnedByCurrentProcess());
+        self::assertSame($sitemapBefore, \Illuminate\Support\Facades\Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertTrue($sitemapOwner->release());
     }
 
     public function test_mysql_object_key_roundtrip_preserves_publication_live_qa_replay_and_rollback(): void

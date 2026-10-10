@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
-use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
-use App\Domain\Career\Display\CareerContentV3CanonicalReader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -17,7 +15,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Sleep;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Symfony\Component\Process\Process;
 use Tests\Fixtures\Career\CareerGenerationAuthorityFixture;
 use Tests\TestCase;
 
@@ -57,7 +57,7 @@ class SitemapSourceCacheTest extends TestCase
                 'lastmod' => '2026-10-05T00:00:00Z']]];
         $controller->storeCache($candidate);
 
-        // The still-active release runs this legacy write every five minutes.
+        // Historical v1 workers cannot replace v2's serving copy.
         Cache::put('seo:sitemap-source:v1:fresh', [...$candidate, 'count' => 0, 'items' => []], 600);
         Cache::forever('seo:sitemap-source:warm-fingerprint:v1', ['old' => true]);
 
@@ -81,6 +81,7 @@ class SitemapSourceCacheTest extends TestCase
 
     protected function tearDown(): void
     {
+        Sleep::fake(false);
         Carbon::setTestNow();
         File::deleteDirectory(storage_path('app/private/career_generation_authority'));
         parent::tearDown();
@@ -214,6 +215,164 @@ class SitemapSourceCacheTest extends TestCase
         $this->assertNull($stale);
     }
 
+    public function test_deployment_refresh_waits_for_the_actual_scheduler_lock_then_validates_its_own_payload(): void
+    {
+        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($owner->get());
+        $this->mockSimpleSitemapAuthority();
+        Sleep::fake();
+        Sleep::whenFakingSleep(static function () use ($owner): void {
+            self::assertTrue($owner->isOwnedByCurrentProcess());
+            self::assertTrue($owner->release());
+        });
+
+        $this->runRefreshIfChanged('rebuilt');
+        Sleep::assertSleptTimes(1);
+        self::assertSame('https://fermatmind.com/zh/tests', Cache::get('seo:sitemap-source:v2:fresh')['items'][0]['loc']);
+        self::assertIsArray(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($next->get());
+        self::assertTrue($next->release());
+    }
+
+    public function test_scheduler_busy_and_deployment_wait_timeout_preserve_the_live_owner_and_previous_payload(): void
+    {
+        Carbon::setTestNow('2026-10-10 18:00:00 UTC');
+        $original = $this->originalSitemapPayload();
+        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
+        $owner = Cache::lock('seo:sitemap-source:v2:lock', 300);
+        self::assertTrue($owner->get());
+        $this->mock(SitemapGenerator::class)->shouldNotReceive('generateSitemapUrls');
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->expectsOutputToContain('"status":"locked"')->assertFailed();
+        self::assertTrue($owner->isOwnedByCurrentProcess());
+        Sleep::fake();
+        Sleep::whenFakingSleep(static fn () => Carbon::setTestNow(now()->addSeconds(121)));
+        $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')
+            ->expectsOutputToContain('"status":"locked"')->assertFailed();
+        Sleep::assertSleptTimes(1);
+        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertTrue($owner->isOwnedByCurrentProcess());
+        self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        self::assertTrue($owner->release());
+    }
+
+    public function test_expired_build_cannot_publish_or_release_a_successor_warmers_lock(): void
+    {
+        Carbon::setTestNow('2026-10-10 18:00:00 UTC');
+        $original = $this->originalSitemapPayload();
+        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
+        $successor = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        $this->mock(SitemapGenerator::class)->shouldReceive('generateSitemapUrls')->once()
+            ->andReturnUsing(static function () use ($successor): array {
+                Carbon::setTestNow(now()->addSeconds(121));
+                self::assertTrue($successor->get());
+
+                return [['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-10-10T18:00:00Z']];
+            });
+        $this->artisan('seo:warm-sitemap-source-cache --refresh-if-changed --json')
+            ->expectsOutputToContain('"status":"failed"')->assertFailed();
+        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+        self::assertTrue($successor->isOwnedByCurrentProcess());
+        self::assertTrue($successor->release());
+    }
+
+    public function test_expired_lease_without_a_successor_still_fails_before_publication(): void
+    {
+        Carbon::setTestNow('2026-10-10 18:00:00 UTC');
+        $original = $this->originalSitemapPayload();
+        Cache::put('seo:sitemap-source:v2:fresh', $original, 600);
+        $this->mock(SitemapGenerator::class)->shouldReceive('generateSitemapUrls')->once()
+            ->andReturnUsing(static function (): array {
+                Carbon::setTestNow(now()->addSeconds(121));
+
+                return [['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-10-10T18:00:00Z']];
+            });
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->expectsOutputToContain('"status":"failed"')->assertFailed();
+        self::assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+    }
+
+    public function test_deployment_refresh_coordinates_with_a_real_independent_file_lock_owner(): void
+    {
+        $directory = sys_get_temp_dir().'/sitemap-lock-'.bin2hex(random_bytes(8));
+        config(['cache.default' => 'file', 'cache.stores.file.path' => $directory, 'cache.stores.file.lock_path' => $directory]);
+        app('cache')->forgetDriver('file');
+        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($owner->get());
+        $this->mockSimpleSitemapAuthority();
+        $child = new Process([PHP_BINARY, '-r',
+            'require $argv[1]; $store=new Illuminate\\Cache\\FileStore(new Illuminate\\Filesystem\\Filesystem,$argv[2]); usleep(400000); exit($store->restoreLock("seo:sitemap-source:v2:lock",$argv[3])->release()?0:1);',
+            base_path('vendor/autoload.php'), $directory, $owner->owner(),
+        ]);
+        $child->setTimeout(10);
+        try {
+            $child->start();
+            $this->runRefreshIfChanged('rebuilt');
+            self::assertSame(0, $child->wait());
+            self::assertSame('backend_sitemap_generator', Cache::get('seo:sitemap-source:v2:fresh')['source']);
+            $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+            self::assertTrue($next->get());
+            self::assertTrue($next->release());
+        } finally {
+            if ($child->isRunning()) {
+                $child->stop();
+            }
+            File::deleteDirectory($directory);
+        }
+    }
+
+    private function mockSimpleSitemapAuthority(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $this->mock(SitemapGenerator::class)->shouldReceive('generateSitemapUrls')->once()
+            ->andReturn([['loc' => 'https://fermatmind.com/zh/tests', 'lastmod' => '2026-10-10T18:00:00Z']]);
+    }
+
+    private function originalSitemapPayload(): array
+    {
+        return ['ok' => true, 'source' => 'backend_sitemap_generator', 'count' => 1,
+            'items' => [['loc' => 'https://fermatmind.com/en/tests', 'lastmod' => '2026-10-10T17:00:00Z']]];
+    }
+
+    public function test_isolated_projection_warm_coordinates_through_the_default_mutex_without_accepting_legacy_payload(): void
+    {
+        $statePath = \App\Support\PublicProjectionCache::statePath();
+        $originalState = is_file($statePath) ? file_get_contents($statePath) : null;
+        config(['cache.stores.public_projection' => ['driver' => 'array', 'serialize' => false]]);
+        app('cache')->forgetDriver('public_projection');
+        $legacy = $this->originalSitemapPayload();
+        Cache::put('seo:sitemap-source:v2:fresh', $legacy, 600);
+        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($owner->get());
+        $this->mockSimpleSitemapAuthority();
+        Sleep::fake();
+        Sleep::whenFakingSleep(static function () use ($owner): void {
+            self::assertTrue($owner->release());
+        });
+        try {
+            \App\Support\PublicProjectionCache::writeState(['version' => 1, 'mode' => 'isolated']);
+            $this->runRefreshIfChanged('rebuilt');
+            Sleep::assertSleptTimes(1);
+            self::assertSame($legacy, Cache::get('seo:sitemap-source:v2:fresh'));
+            self::assertSame('https://fermatmind.com/zh/tests', \App\Support\PublicProjectionCache::get('seo:sitemap-source:v2:fresh')['items'][0]['loc']);
+            self::assertNull(Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+            self::assertIsArray(\App\Support\PublicProjectionCache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY));
+            $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+            self::assertTrue($next->get());
+            self::assertTrue($next->release());
+        } finally {
+            $owner->release();
+            if ($originalState === null) {
+                File::delete($statePath);
+            } else {
+                file_put_contents($statePath, $originalState);
+            }
+        }
+    }
+
     public function test_refresh_if_changed_rebuilds_once_then_verifies_unchanged_authority(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -240,35 +399,47 @@ class SitemapSourceCacheTest extends TestCase
 
     public function test_refresh_if_changed_rebuilds_when_published_indexable_authority_changes(): void
     {
-        config(['app.frontend_url' => 'https://fermatmind.com']);
-        config(['app.url' => 'https://fermatmind.com']);
-        // Both synthetic identities represent body-qualified pages in this
-        // fingerprint transition test; installed Current pages are unrelated.
-        $content = new class(app(CareerContentV3AuthorityPackage::class)) extends CareerContentV3CanonicalReader
-        {
-            public function hasPublicBody(string $slug, string $locale, ?string $backendRoot = null): bool
-            {
-                return true;
-            }
-        };
-        app()->instance(CareerContentV3CanonicalReader::class, $content);
-        $this->seedFingerprintAuthority('fingerprint-authority-baseline');
+        config(['app.frontend_url' => 'https://fermatmind.com', 'app.url' => 'https://fermatmind.com']);
+        $attributes = ['org_id' => 0, 'locale' => 'en', 'title' => 'Authority test', 'content_md' => 'Published fixture',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => true, 'sitemap_eligible' => true,
+            'published_at' => now()->subMinute()];
+        $createPublishedArticle = static function (string $slug) use ($attributes): \App\Models\Article {
+            $article = \App\Models\Article::query()->create([...$attributes, 'slug' => $slug]);
+            $revision = \App\Models\ArticleTranslationRevision::query()->create([
+                'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+                'translation_group_id' => $article->translation_group_id,
+                'locale' => 'en', 'source_locale' => 'en', 'revision_number' => 1,
+                'revision_status' => \App\Models\ArticleTranslationRevision::STATUS_PUBLISHED,
+                'title' => $article->title, 'content_md' => $article->content_md,
+                'source_version_hash' => $article->source_version_hash, 'published_at' => now()->subMinute(),
+            ]);
+            $article->forceFill(['published_revision_id' => $revision->id])->saveQuietly();
+            self::assertTrue(\App\Models\Article::query()->withoutGlobalScopes()->whereKey($article->id)->publiclySitemapEligible()->exists());
 
+            return $article;
+        };
+        $beforeArticle = $createPublishedArticle('mutex-authority-before');
         $this->runRefreshIfChanged('rebuilt');
         $before = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
-        $this->assertIsArray($before);
+        self::assertContains('https://fermatmind.com/en/articles/mutex-authority-before', array_column(Cache::get('seo:sitemap-source:v2:fresh')['items'], 'loc'));
 
-        $this->appendCareerDirectoryAuthorityFixture('fingerprint-authority-change');
-
+        $owner = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($owner->get());
+        Sleep::fake();
+        Sleep::whenFakingSleep(static function () use ($owner, $beforeArticle, $createPublishedArticle): void {
+            // Real publication qualification can change while deployment waits.
+            $beforeArticle->forceFill(['is_public' => false])->saveQuietly();
+            $createPublishedArticle('mutex-authority-after');
+            self::assertTrue($owner->release());
+        });
         $this->runRefreshIfChanged('rebuilt');
+        Sleep::assertSleptTimes(1);
         $after = Cache::get(\App\Console\Commands\WarmSitemapSourceCacheCommand::FINGERPRINT_CACHE_KEY);
         $fresh = Cache::get('seo:sitemap-source:v2:fresh');
-
-        $this->assertIsArray($after);
-        $this->assertNotSame($before['fingerprint_sha256'], $after['fingerprint_sha256']);
-        $this->assertIsArray($fresh);
-        $this->assertSame('backend_sitemap_generator', $fresh['source']);
-        $this->assertGreaterThan(0, $fresh['count']);
+        self::assertNotSame($before['fingerprint_sha256'], $after['fingerprint_sha256']);
+        self::assertSame('backend_sitemap_generator', $fresh['source']);
+        self::assertContains('https://fermatmind.com/en/articles/mutex-authority-after', array_column($fresh['items'], 'loc'));
+        self::assertNotContains('https://fermatmind.com/en/articles/mutex-authority-before', array_column($fresh['items'], 'loc'));
     }
 
     public function test_refresh_if_changed_fails_safe_for_corrupt_schema_or_code_receipts(): void
@@ -305,9 +476,14 @@ class SitemapSourceCacheTest extends TestCase
         });
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
         $this->assertSame($original, Cache::get('seo:sitemap-source:v2:fresh'));
+        $next = Cache::lock('seo:sitemap-source:v2:lock', 120);
+        self::assertTrue($next->get());
+        self::assertTrue($next->release());
         Cache::forget('seo:sitemap-source:v2:fresh');
         $this->artisan('seo:warm-sitemap-source-cache --json')->assertFailed();
         $this->assertNull(Cache::get('seo:sitemap-source:v2:fresh'));
+        self::assertTrue($next->get());
+        self::assertTrue($next->release());
         $this->getJson('/api/v0.5/seo/sitemap-source')->assertHeader('X-Fermat-Cache', 'fallback');
     }
 
@@ -512,26 +688,6 @@ class SitemapSourceCacheTest extends TestCase
             $this->projectionItem($slug, 'en'),
             $this->projectionItem($slug, 'zh'),
         ]);
-    }
-
-    private function appendCareerDirectoryAuthorityFixture(string $slug): void
-    {
-        foreach (['en', 'zh-CN'] as $locale) {
-            $prefix = PublicCareerAuthorityResponseCache::DIRECTORY_VERSIONED_CACHE_KEY_PREFIX.':'.$locale;
-            $version = Cache::get($prefix.':active');
-            $this->assertIsString($version);
-            $payloadKey = $prefix.':versions:'.$version;
-            $payload = Cache::get($payloadKey);
-            $this->assertIsArray($payload);
-            $payload['items'][] = [
-                'slug' => $slug,
-                'canonical_path' => '/'.($locale === 'en' ? 'en' : 'zh').'/career/jobs/'.$slug,
-                'updated_at' => '2026-07-29T12:00:00+00:00',
-                'indexable' => true,
-                'detail_ready' => true,
-            ];
-            Cache::forever($payloadKey, $payload);
-        }
     }
 
     private function runRefreshIfChanged(string $expectedStatus): void
