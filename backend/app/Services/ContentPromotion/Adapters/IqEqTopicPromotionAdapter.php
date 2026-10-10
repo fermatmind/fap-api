@@ -358,6 +358,8 @@ final class IqEqTopicPromotionAdapter implements ExactPackagePromotionAdapter
                     $placeholderId = $metadata['created_faq_section_id'];
                 }
             }
+            // Validate stored dates before datetime casts can normalize invalid input.
+            $profile->mergeCasts(['published_at' => 'string', 'scheduled_at' => 'string']);
             $state[] = ['profile' => $profile->attributesToArray(), 'sections' => $related(TopicProfileSection::class),
                 'entries' => $related(TopicProfileEntry::class), 'seo' => $seo[0], 'revisions' => $related(TopicProfileRevision::class),
                 'owned_faq_placeholder_id' => $placeholderId];

@@ -19,9 +19,8 @@ final class IqEqTopicProjection
         }
         if (($profile['topic_code'] ?? null) !== 'iq-eq'
             || ($profile['status'] ?? null) !== 'published' || ($profile['is_public'] ?? null) !== true
-            || empty($profile['published_at']) || strtotime($profile['published_at']) === false
-            || strtotime($profile['published_at']) > time()
-            || (! empty($profile['scheduled_at']) && strtotime($profile['scheduled_at']) > time())) {
+            || $this->dateBlocksPublication($profile['published_at'] ?? null)
+            || $this->dateBlocksPublication($profile['scheduled_at'] ?? null)) {
             throw new DomainException('iq_eq_topic_publication_hold');
         }
         if (! is_array($before['seo'] ?? null) || ($before['seo']['profile_id'] ?? null) !== $profile['id']) {
@@ -88,5 +87,24 @@ final class IqEqTopicProjection
         }
 
         return $after;
+    }
+
+    private function dateBlocksPublication(mixed $value): bool
+    {
+        // Public Topic readers treat NULL as an immediate published state.
+        // A supplied date must still be valid and must not be in the future.
+        if ($value === null) {
+            return false;
+        }
+        if (! is_string($value) || preg_match('/\A[0-9]{4}-[0-9]{2}-[0-9]{2}(?:[T ][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})?)?\z/', $value) !== 1) {
+            return true;
+        }
+        $parsed = date_parse($value);
+        if ($parsed['warning_count'] !== 0 || $parsed['error_count'] !== 0) {
+            return true;
+        }
+        $timestamp = strtotime($value);
+
+        return $timestamp === false || $timestamp > time();
     }
 }

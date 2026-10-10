@@ -35,6 +35,7 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
     public function test_atomic_bilingual_publish_full_http_qa_and_recovery_preserve_boundaries(): void
     {
         $this->seedTopics();
+        TopicProfile::query()->withoutGlobalScopes()->update(['published_at' => null, 'scheduled_at' => null]);
         $before = $this->publicState();
         $adapter = app(IqEqTopicPromotionAdapter::class);
         $context = $this->context();
@@ -45,6 +46,7 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
         $this->previous($context, 'cms_draft_import_receipt', $draft);
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
+        self::assertSame(2, TopicProfile::query()->withoutGlobalScopes()->whereNull('published_at')->whereNull('scheduled_at')->count());
         $this->previous($context, 'cms_publication_receipt', $published);
         self::assertSame(2, $adapter->liveQa($context)['readback_count']);
         $adapter->rollback($context, $published['rollback_reference']);
@@ -146,6 +148,27 @@ final class IqEqTopicPromotionAdapterTest extends TestCase
         }
         self::assertSame($before, $this->publicState());
         self::assertSame(0, \App\Models\TopicProfileRevision::query()->count());
+    }
+
+    public function test_preflight_rejects_invalid_raw_dates_before_orm_normalization(): void
+    {
+        $this->seedTopics();
+        $adapter = app(IqEqTopicPromotionAdapter::class);
+        foreach (['published_at', 'scheduled_at'] as $field) {
+            foreach (['2026-02-30', 'yesterday'] as $value) {
+                DB::table('topic_profiles')->where('locale', 'en')->update([$field => $value]);
+                $before = $this->publicState();
+                try {
+                    $adapter->preflight($this->context());
+                    self::fail('Must refuse invalid raw '.$field);
+                } catch (\DomainException $error) {
+                    self::assertSame('iq_eq_topic_publication_hold', $error->getMessage());
+                }
+                self::assertSame($before, $this->publicState());
+                self::assertSame(0, DB::table('topic_profile_revisions')->count());
+                DB::table('topic_profiles')->where('locale', 'en')->update([$field => null]);
+            }
+        }
     }
 
     private function seedTopics(): void

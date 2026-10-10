@@ -80,6 +80,55 @@ final class IqEqTopicProjectionTest extends TestCase
         }
     }
 
+    public function test_published_bilingual_topics_allow_null_dates_without_fabricating_them(): void
+    {
+        foreach (app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256) as $row) {
+            foreach ([null, '2026-01-01 00:00:00', '2026-01-01T00:00:00.000000Z'] as $publishedAt) {
+                $before = $this->state($row);
+                $before['profile']['published_at'] = $publishedAt;
+                $before['profile']['scheduled_at'] = null;
+                $after = app(IqEqTopicProjection::class)->candidate($row, $before);
+                self::assertSame($publishedAt, $after['profile']['published_at']);
+                self::assertNull($after['profile']['scheduled_at']);
+                self::assertSame($before['profile']['status'], $after['profile']['status']);
+                self::assertSame($before['profile']['is_public'], $after['profile']['is_public']);
+            }
+        }
+    }
+
+    public function test_null_publication_date_does_not_override_holds_or_invalid_dates(): void
+    {
+        $row = $this->row();
+        foreach ([
+            ['status' => 'draft'], ['is_public' => false],
+            ['published_at' => gmdate('c', time() + 86400)],
+            ['scheduled_at' => gmdate('c', time() + 86400)],
+            ['published_at' => 'not-a-date'], ['scheduled_at' => 'not-a-date'],
+            ['published_at' => ''], ['scheduled_at' => ''],
+            ['published_at' => '2026-02-30'], ['scheduled_at' => '2026-02-30'],
+            ['published_at' => 'yesterday'], ['scheduled_at' => 'yesterday'],
+        ] as $patch) {
+            $before = $this->state($row);
+            $before['profile'] = array_replace($before['profile'], ['published_at' => null, 'scheduled_at' => null], $patch);
+            try {
+                app(IqEqTopicProjection::class)->candidate($row, $before);
+                self::fail('Must refuse held or invalid publication state');
+            } catch (DomainException $error) {
+                self::assertSame('iq_eq_topic_publication_hold', $error->getMessage());
+            }
+        }
+    }
+
+    public function test_independent_english_identity_conflict_is_rejected_with_null_publication_date(): void
+    {
+        $row = app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256)[1];
+        $before = $this->state($row);
+        $before['profile']['published_at'] = null;
+        $before['profile']['locale'] = 'zh-CN';
+        $this->expectExceptionMessage('iq_eq_topic_profile_identity_invalid');
+        app(IqEqTopicProjection::class)->candidate($row, $before);
+    }
+
     private function row(): array
     {
         return app(IqEqTopicPackage::class)->read(base_path(), IqEqTopicPackage::SHA256)[0];
