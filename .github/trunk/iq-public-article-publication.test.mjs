@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, workflowSignature, executorPaths, packageSha256, isIqArticleOnlyContextFactoryChange, isIqArticleOnlyPromotionRegistration } from './iq-public-article-package.mjs';
-import { buildExecution, publish, recoveryFailure } from './iq-public-article-publish.mjs';
+import { buildExecution, publish, recoveryFailure, acceptOnline } from './iq-public-article-publish.mjs';
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
 const env = { IQ_ARTICLE_PUBLISH_ENVIRONMENT: 'staging', DEPLOY_PATH: '/srv/application', DEPLOY_HOST: 'example.invalid', DEPLOY_USER: 'deploy', DEPLOY_PORT: '22',
@@ -60,6 +60,27 @@ test('another execution recovery and raw transport diagnostics remain failed and
   const error = recoveryFailure(execution(), () => ({ status: 0, stdout: JSON.stringify({ ...recovery(), workflow_run_id: '9999', private_details: 'private topology' }), stderr: 'secret' }));
   assert.equal(error.receipt.recovery_completed, false);
   assert.equal(JSON.stringify(error.receipt).includes('private topology'), false);
+});
+test('actual online acceptance retains prestate and recovers one signed execution with only a fixed error code', async () => {
+  for (const [failure, expected] of [[new Error('IQ_ARTICLE_SSR_BODY_MISMATCH'), 'IQ_ARTICLE_SSR_BODY_MISMATCH'],
+    [new SyntaxError('private response must not be exposed'), 'IQ_ARTICLE_ONLINE_PAYLOAD_INVALID'],
+    [new Error('secret topology and raw response'), 'IQ_ARTICLE_ONLINE_UNKNOWN_FAILURE']]) {
+    const modes = [], current = execution(), before = { synthetic: { is_indexable: false } };
+    const receipt = publish(current, request => { modes.push(request.mode); return { status: 0, stdout: JSON.stringify(success()) }; });
+    await assert.rejects(acceptOnline(current, receipt, 'production', backend, before,
+      async (...args) => { assert.equal(args[4], before); throw failure; },
+      request => { modes.push(request.mode); assert.deepEqual(request, { ...current.request, mode: 'recover' });
+        return { status: 0, stdout: JSON.stringify(recovery()) }; }),
+    error => error.receipt.ok === false && error.receipt.online_error_code === expected && error.receipt.recovery_completed === true
+      && !JSON.stringify(error.receipt).includes('private response') && !JSON.stringify(error.receipt).includes('secret topology'));
+    assert.deepEqual(modes, ['publish', 'recover']);
+  }
+});
+test('an online failure cannot admit an unconfirmed recovery through its diagnostic', async () => {
+  await assert.rejects(acceptOnline(execution(), success(), 'production', backend, {},
+    async () => { throw new Error('IQ_ARTICLE_ONLINE_TIMEOUT'); },
+    () => ({ status: 0, stdout: JSON.stringify({ ...recovery(), executor_release_sha256: 'c'.repeat(64) }) })),
+  error => error.receipt.ok === false && error.receipt.online_error_code === 'IQ_ARTICLE_ONLINE_TIMEOUT' && error.receipt.recovery_completed === false);
 });
 test('the PHP driver rejects malformed signed input before bootstrapping or exposing values', () => {
   const response = spawnSync('php', [`${backend}/scripts/deploy/run_iq_public_article_publish.php`], { input: '{"workflow_signature":"do-not-output-this"}', encoding: 'utf8' });

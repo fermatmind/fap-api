@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { createServer } from 'node:http';
 import { readCandidateRows } from './iq-public-article-package.mjs';
 import { assertSsrCandidate, articleDom, readOnlinePrestate, verifyOnlineCandidates, renderPage } from './iq-public-article-online-qa.mjs';
 
@@ -33,6 +34,16 @@ test('a link label cannot substitute for a missing reviewed destination', () => 
 
 const backend = fileURLToPath(new URL('../../backend/', import.meta.url));
 const rows = readCandidateRows(backend);
+test('prestate transport and timeout failures stay failed without exposing raw diagnostics or retrying publication', async () => {
+  for (const [failure, code] of [[new Error('private transport response'), 'IQ_ARTICLE_ONLINE_TRANSPORT_FAILED'],
+    [new DOMException('private timeout response', 'TimeoutError'), 'IQ_ARTICLE_ONLINE_TIMEOUT']]) {
+    let attempts = 0;
+    await assert.rejects(readOnlinePrestate('production', backend, async (_url, options) => {
+      attempts++; assert.equal(options.redirect, 'error'); assert.ok(options.signal); throw failure;
+    }), error => error.message === code);
+    assert.equal(attempts, 1);
+  }
+});
 const escapeHtml = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 function renderedFixture(candidate) {
   const path = `/${candidate.identity.locale === 'en' ? 'en' : 'zh'}/articles/${candidate.identity.slug}`;
@@ -155,6 +166,26 @@ test('canonical identity rejects another HTTPS port in SSR and actual API readba
     'href="https://fermatmind.com:8443/en/articles/'),row,meta,env),/IQ_ARTICLE_SSR_CANONICAL_MISMATCH/);
   const pre=await readOnlinePrestate('production',backend,onlineFetcher(undefined,true));
   await assert.rejects(verifyOnlineCandidates('production',backend,onlineFetcher(payload=>{if(payload.meta)payload.meta.canonical=payload.meta.canonical.replace('fermatmind.com/','fermatmind.com:8443/');}),()=>'',pre),/IQ_ARTICLE_ONLINE_SEO_MISMATCH/);
+});
+
+for (const surface of ['article', 'entry', 'topic']) test(`real Chrome waits for the visible ${surface} copy after the initial document loads`, async () => {
+  const content = surface === 'article'
+    ? '<article data-testid="article-detail-content"><p>Reviewed article copy.</p></article>'
+    : surface === 'entry'
+      ? '<main data-test-landing-read-source="cms"><p>Reviewed entry copy.</p></main>'
+      : '<main><section id="overview"><p>Reviewed topic copy.</p></section><section id="faq"><p>Reviewed topic FAQ.</p></section></main>';
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end(`<html><body><div id="mount">Loading copy</div><script>setTimeout(() => document.getElementById('mount').innerHTML = ${JSON.stringify(content)}, 2500)</script></body></html>`);
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const actual = await renderPage(`http://127.0.0.1:${server.address().port}/document`, { surface });
+    assert.match(articleDom(actual, surface).body, new RegExp(`Reviewed ${surface} copy`));
+    if (surface === 'topic') assert.match(articleDom(actual, 'topic_faq').body, /Reviewed topic FAQ/);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
 });
 
 

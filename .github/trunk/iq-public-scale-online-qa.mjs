@@ -81,7 +81,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     }
     const page = `${web}/${row.key}/tests/${slug}`;
     const response = await read(page, 'text/html');
-    assertSsrCandidate(await renderer(page), row, { robots: payload.is_indexable ? 'index,follow' : 'noindex,nofollow' }, environment, response.robots);
+    assertSsrCandidate(await renderer(page, { surface: 'entry' }), row, { robots: payload.is_indexable ? 'index,follow' : 'noindex,nofollow' }, environment, response.robots);
   }
   return { api_readback_count: 2, ssr_readback_count: 2, seo_readback_count: 2, cta_readback_count: 2, environment };
 }

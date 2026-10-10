@@ -57,7 +57,7 @@ export async function verifyOnlineCandidates(environment, backendRoot, fetcher =
     const allowed = environment === 'staging' ? ['fermatmind.com', 'www.fermatmind.com', 'staging.fermatmind.com'] : ['fermatmind.com', 'www.fermatmind.com'];
     if (canonicalUrl.protocol !== 'https:' || !allowed.includes(canonicalUrl.hostname) || canonicalUrl.pathname !== path
       || canonicalUrl.port || canonicalUrl.search || canonicalUrl.hash || canonicalUrl.username || canonicalUrl.password) throw new Error('IQ_EQ_TOPIC_ONLINE_CANONICAL_DRIFT');
-    const response = await read(web+path, 'text/html', fetcher); const html = await renderer(web+path);
+    const response = await read(web+path, 'text/html', fetcher); const html = await renderer(web+path, { surface: 'topic' });
     assertSsrCandidate(html, { identity:row.identity, snapshot:{ title:row.snapshot.profile_patch.title, content_md:row.snapshot.section_candidates[0].body_md,
       seo_title:row.snapshot.seo_text_candidate.title, seo_description:row.snapshot.seo_text_candidate.description } }, seo, environment, response.robots, 'topic');
     const dom = articleDom(html, 'topic_faq');

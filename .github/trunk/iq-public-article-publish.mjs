@@ -6,6 +6,14 @@ import { inspectPackage, workflowSignature, packageSha256 } from './iq-public-ar
 import { verifyOnlineCandidates, readOnlinePrestate } from './iq-public-article-online-qa.mjs';
 
 const quote = value => `'${String(value).replaceAll("'", "'\\''")}'`;
+const onlineFailureCodes = new Set([
+  'IQ_ARTICLE_SSR_DOM_INVALID', 'IQ_ARTICLE_SSR_LINK_MISMATCH', 'IQ_ARTICLE_SSR_LINK_VARIANT_LIMIT',
+  'IQ_ARTICLE_SSR_BODY_MISMATCH', 'IQ_ARTICLE_SSR_METADATA_MISMATCH', 'IQ_ARTICLE_SSR_CANONICAL_MISMATCH', 'IQ_ARTICLE_SSR_ROBOTS_MISMATCH',
+  'IQ_ARTICLE_ONLINE_RESPONSE_INVALID', 'IQ_ARTICLE_ONLINE_PAYLOAD_LIMIT', 'IQ_ARTICLE_ONLINE_PRESTATE_REQUIRED',
+  'IQ_ARTICLE_ONLINE_IDENTITY_MISMATCH', 'IQ_ARTICLE_ONLINE_BODY_MISMATCH', 'IQ_ARTICLE_ONLINE_FAQ_MISMATCH',
+  'IQ_ARTICLE_ONLINE_QUALIFICATION_MISMATCH', 'IQ_ARTICLE_ONLINE_SEO_MISMATCH', 'IQ_ARTICLE_ONLINE_RENDER_FAILED',
+  'IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID', 'IQ_ARTICLE_ONLINE_TIMEOUT', 'IQ_ARTICLE_ONLINE_TRANSPORT_FAILED',
+]);
 export function buildExecution(env, backendRoot) {
   if (!['staging', 'production'].includes(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT)
     || !/^\/[a-zA-Z0-9_./-]+$/.test(env.DEPLOY_PATH ?? '')
@@ -31,7 +39,7 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
   input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
-export function recoveryFailure(execution, execute = request => transport(execution, request)) {
+export function recoveryFailure(execution, execute = request => transport(execution, request), onlineError = null) {
   let completed = false;
   try {
     const response = execute({ ...execution.request, mode: 'recover' });
@@ -47,7 +55,9 @@ export function recoveryFailure(execution, execute = request => transport(execut
   error.receipt = { schema: 'iq.public_articles.publish.v1', ok: false,
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
-    recovery_completed: completed, transport_started: true, sanitized: true };
+    recovery_completed: completed, transport_started: true, sanitized: true,
+    ...(onlineError ? { online_error_code: onlineFailureCodes.has(onlineError?.message) ? onlineError.message
+      : onlineError?.name === 'SyntaxError' ? 'IQ_ARTICLE_ONLINE_PAYLOAD_INVALID' : 'IQ_ARTICLE_ONLINE_UNKNOWN_FAILURE' } : {}) };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {
@@ -76,6 +86,15 @@ function failedBeforeTransport(env) {
     transport_started: false, recovery_completed: true, recovery_status: 'not_required', sanitized: true };
   return error;
 }
+export async function acceptOnline(execution, receipt, environment, backendRoot, prestate,
+  verify = verifyOnlineCandidates, execute = request => transport(execution, request)) {
+  try {
+    receipt.online_acceptance = await verify(environment, backendRoot, fetch, undefined, prestate);
+    return receipt;
+  } catch (error) {
+    throw recoveryFailure(execution, execute, error);
+  }
+}
 async function cli() {
   const env = process.env;
   let execution = null;
@@ -87,12 +106,7 @@ async function cli() {
     execution = buildExecution(env, resolve('backend'));
     const prestate = await readOnlinePrestate(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'));
     transportStarted = true;
-    const receipt = publish(execution);
-    try {
-      receipt.online_acceptance = await verifyOnlineCandidates(env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, undefined, prestate);
-    } catch {
-      throw recoveryFailure(execution);
-    }
+    const receipt = await acceptOnline(execution, publish(execution), env.IQ_ARTICLE_PUBLISH_ENVIRONMENT, resolve('backend'), prestate);
     writeFileSync(resolve(directory, `${env.IQ_ARTICLE_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(receipt)}\n`, { flag: 'wx', mode: 0o600 });
   } catch (original) {
     const error = original.receipt ? original : transportStarted ? recoveryFailure(execution) : failedBeforeTransport(env);
@@ -102,5 +116,7 @@ async function cli() {
   }
 }
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
-  cli().catch(() => { process.stderr.write('IQ_ARTICLE_PUBLIC_SCALE_PUBLICATION_FAILED\n'); process.exitCode = 1; });
+  cli().catch(error => { process.stderr.write('IQ_ARTICLE_PUBLICATION_FAILED\n');
+    if (error.receipt?.online_error_code) process.stderr.write(error.receipt.online_error_code + '\n');
+    process.exitCode = 1; });
 }

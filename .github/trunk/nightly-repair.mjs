@@ -4,6 +4,13 @@ import {phpConsumers,nightlyExecutionInputs,executionConsumes} from './impact-co
 export function repairDomains(paths,root=process.cwd(),executionInputs=[]) {
  const graph=phpConsumers(root),required=new Set(paths.filter(p=>/^backend\/tests\/.*Test\.php$/.test(p)));
  for(const file of graph.files.filter(p=>/^backend\/tests\/.*Test\.php$/.test(p))) if(paths.some(p=>graph.closure([file]).has(p))||executionConsumes(graph.sources.get(file),executionInputs)) required.add(file);
+ // These runner guards can recover a publication and switch the release to LKG.
+ // Revalidate the existing publication transactions and their derived-cache recovery,
+ // including dynamic artisan callers that the PHP symbol graph cannot resolve.
+ if(paths.some(p=>/^\.github\/trunk\/(?:iq-public-(?:article|scale)|iq-eq-topic|eq-(?:existing-public|new-source|new-english))-(?:publish|online-qa)\.mjs$/.test(p))) {
+  for(const file of graph.files) if(/^backend\/tests\/Unit\/ContentPromotion\/(?:ArticleCms|Eq(?:English|ExistingPublic|NewSource|PublicArticle|SourceExecution)|Iq|Promotion)[^/]*Test\.php$/.test(file)
+   || /^backend\/tests\/Feature\/(?:SEO\/SitemapSourceCache|Career\/PublicProjectionMigration)Test\.php$/.test(file)) required.add(file);
+ }
  const control=paths.some(p=>/^\.github\/(?:workflows\/nightly\.yml|trunk\/)/.test(p));
  const highRisk=paths.some(p=>/^backend\/(?:composer\.|database\/|bootstrap\/|app\/(?:Http\/Middleware|Policies|Providers)\/)/.test(p));
  return {php_required:required.size>0,php_files:[...required].sort().map(p=>p.slice(8)),workflow:control,authority:highRisk||paths.some(p=>/^backend\/content_/.test(p)),dependency:paths.some(p=>/^backend\/composer\./.test(p)),security:highRisk};

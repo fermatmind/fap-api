@@ -80,3 +80,17 @@ test('Nightly provisions the host Redis executable before isolated projection te
  assert.ok(setup<full.indexOf('php artisan test'));
  assert.match(full.slice(setup,full.indexOf('php artisan test')),/redis-server --version/);
 });
+
+test('a publication runner correction rechecks transaction, foreign-draft and cache recovery consumers',()=>{
+ const plan=repairDomains(['.github/trunk/iq-public-article-online-qa.mjs']);
+ for(const file of ['tests/Unit/ContentPromotion/EqEnglishArticlePromotionTest.php',
+  'tests/Unit/ContentPromotion/IqPublicArticlePromotionAdapterTest.php',
+  'tests/Unit/ContentPromotion/IqPublicScalePromotionAdapterTest.php',
+  'tests/Feature/SEO/SitemapSourceCacheTest.php',
+  'tests/Feature/Career/PublicProjectionMigrationTest.php']) assert.ok(plan.php_files.includes(file),file);
+ assert.equal(plan.php_required,true);
+ assert.equal(plan.php_files.some(p=>p.startsWith('tests/Feature/Commerce/')),false);
+ assert.equal(plan.php_files.some(p=>/\/(?:CareerCms|Riasec|Mbti|Top100)/.test(p)),false);
+ assert.equal(repairDomains(['docs/ordinary-document.md']).php_required,false);
+ assert.equal(repairDomains(['.github/trunk/iq-public-article-online-qa.test.mjs']).php_required,false);
+});

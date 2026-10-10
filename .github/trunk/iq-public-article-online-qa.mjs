@@ -176,11 +176,15 @@ function hosts(environment) {
   return environment === 'staging' ? ['https://staging-api.fermatmind.com', 'https://staging.fermatmind.com'] : ['https://api.fermatmind.com', 'https://fermatmind.com'];
 }
 async function read(url, type, fetcher, allowAbsent = false, captureHeaders = null) {
-  const response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15000), headers: { 'Cache-Control': 'no-cache' } });
+  let response;
+  try { response = await fetcher(url, { redirect: 'error', signal: AbortSignal.timeout(15000), headers: { 'Cache-Control': 'no-cache' } }); }
+  catch (error) { throw new Error(['TimeoutError', 'AbortError'].includes(error?.name) ? 'IQ_ARTICLE_ONLINE_TIMEOUT' : 'IQ_ARTICLE_ONLINE_TRANSPORT_FAILED'); }
   if (allowAbsent && response.status === 404) return null;
   if (response.status !== 200 || !response.headers.get('content-type')?.includes(type)) throw new Error('IQ_ARTICLE_ONLINE_RESPONSE_INVALID');
   if (captureHeaders) captureHeaders(response.headers);
-  const bytes = await response.text();
+  let bytes;
+  try { bytes = await response.text(); }
+  catch (error) { throw new Error(['TimeoutError', 'AbortError'].includes(error?.name) ? 'IQ_ARTICLE_ONLINE_TIMEOUT' : 'IQ_ARTICLE_ONLINE_TRANSPORT_FAILED'); }
   if (bytes.length > 2000000) throw new Error('IQ_ARTICLE_ONLINE_PAYLOAD_LIMIT');
   return bytes;
 }
@@ -195,7 +199,9 @@ export async function readOnlinePrestate(environment, backendRoot, fetcher = fet
   }
   return result;
 }
-export async function renderPage(url) {
+export async function renderPage(url, { surface = 'article' } = {}) {
+  const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'] }[surface];
+  if (!Array.isArray(selectors)) throw new Error('IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID');
   // Read the hydrated DOM and computed visibility in the same real Chrome page.
   // CDP uses this child process's private pipes; no public debugging port exists.
   const profile = mkdtempSync(join(tmpdir(), 'iq-article-online-qa-'));
@@ -234,11 +240,25 @@ export async function renderPage(url) {
         const target = await send('Target.createTarget', { url: 'about:blank' });
         const { sessionId } = await send('Target.attachToTarget', { targetId: target.targetId, flatten: true });
         await send('Page.enable', {}, sessionId);
-        await send('Page.navigate', { url }, sessionId);
+        const navigation = await send('Page.navigate', { url }, sessionId);
+        if (navigation.errorText) throw new Error('navigation failed');
         const expression = `(async () => {
           if (document.readyState !== 'complete') await new Promise(resolve => window.addEventListener('load', resolve, {once:true}));
+          const visible = element => {
+            if (!element.getClientRects().length) return false;
+            for (let node = element; node; node = node.parentElement) {
+              const style = getComputedStyle(node);
+              if (style.display === 'none' || ['hidden','collapse'].includes(style.visibility)
+                || style.contentVisibility === 'hidden' || Number(style.opacity) === 0) return false;
+            }
+            return true;
+          };
+          const ready = () => location.href === ${JSON.stringify(url)} && ${JSON.stringify(selectors)}.every(selector =>
+            [...document.querySelectorAll(selector)].filter(visible).length === 1);
+          const deadline = Date.now() + 12000;
+          while (!ready() && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 100));
+          if (!ready()) throw new Error('published surface not ready');
           await document.fonts.ready;
-          await new Promise(resolve => setTimeout(resolve, 1000));
           for (const element of document.querySelectorAll('html, body, body *')) {
             const style = getComputedStyle(element);
             if (style.display === 'none' || ['hidden','collapse'].includes(style.visibility)
