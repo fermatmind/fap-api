@@ -93,9 +93,14 @@ final class EqExistingPublicPageWriter
         foreach ($before['registries'] as $registry) {
             DB::table($registry['table'])->where('org_id', 0)->where('code', 'EQ_60')->update(['content_i18n_json' => $registry['values']['content_i18n_json']]);
         }
-        foreach ($before['articles'] as $saved) {
+        foreach ($before['articles'] as $key => $saved) {
             $this->restoreValues('articles', $saved['values']);
-            $this->restoreValues('article_seo_meta', $saved['seo'][0]);
+            if ($saved['seo'] === []) {
+                DB::table('article_seo_meta')->where('id', $expectedPublished['articles'][$key]['seo'][0]['id'])
+                    ->where('article_id', $saved['values']['id'])->where('org_id', 0)->where('locale', 'en')->delete();
+            } else {
+                $this->restoreValues('article_seo_meta', $saved['seo'][0]);
+            }
             $article = Article::query()->withoutGlobalScopes()->findOrFail($saved['values']['id']);
             $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($saved['published']['id']);
             $this->material->recordPublished($article, $revision, now(), 'rollback');
@@ -263,6 +268,12 @@ final class EqExistingPublicPageWriter
 
     private function assertSeo(array $current, string $foreignKey): void
     {
+        // The existing English article may use native revision SEO without a metadata row.
+        // Its exact-package publication can materialize that row; all other missing authorities fail closed.
+        if ($foreignKey === 'article_id' && $current['seo'] === []
+            && $current['identity'] === ['org_id' => 0, 'slug' => 'eq-test-tool-guide', 'locale' => 'en']) {
+            return;
+        }
         if (count($current['seo']) !== 1 || (int) $current['seo'][0][$foreignKey] !== (int) $current['values']['id']) {
             throw new DomainException('eq_existing_writer_seo_authority_missing');
         }
@@ -270,6 +281,16 @@ final class EqExistingPublicPageWriter
 
     private function updateSeo(string $table, array $current, array $row): void
     {
+        if ($table === 'article_seo_meta' && $current['seo'] === []) {
+            DB::table($table)->insert([
+                'org_id' => 0, 'article_id' => $current['values']['id'], 'locale' => 'en',
+                'seo_title' => $row['snapshot']['seo_title'], 'seo_description' => $row['snapshot']['seo_description'],
+                'is_indexable' => (bool) $current['values']['is_indexable'],
+                'created_at' => now(), 'updated_at' => now(),
+            ]);
+
+            return;
+        }
         DB::table($table)->where('id', $current['seo'][0]['id'])->update([
             'seo_title' => $row['snapshot']['seo_title'], 'seo_description' => $row['snapshot']['seo_description'],
         ]);

@@ -80,6 +80,42 @@ final class EqExistingPublicPageWriterTest extends TestCase
         self::assertSame($before, $states->read(self::SHA));
     }
 
+    public function test_missing_english_article_seo_is_materialized_without_changing_qualification_or_user_draft_and_restored(): void
+    {
+        $this->seedNativeTargets();
+        $article = Article::query()->where('locale', 'en')->firstOrFail();
+        $article->forceFill(['is_indexable' => false])->saveQuietly();
+        ArticleSeoMeta::query()->where('article_id', $article->id)->delete();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        $writer = app(EqExistingPublicPageWriter::class);
+        $after = DB::transaction(fn () => $writer->publish($this->context(), $before))['state'];
+        self::assertCount(1, $after['articles']['EQ-02:en']['seo']);
+        self::assertFalse((bool) $after['articles']['EQ-02:en']['seo'][0]['is_indexable']);
+        self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
+        self::assertSame(0, DB::transaction(fn () => $writer->publish($this->context(), $after))['written_count']);
+        DB::transaction(fn () => $writer->restore($this->context(), $before, $after));
+        self::assertSame($before['articles'], $states->read(self::SHA)['articles']);
+    }
+
+    public function test_new_english_article_seo_is_rolled_back_when_a_later_native_write_fails(): void
+    {
+        $this->seedNativeTargets();
+        $article = Article::query()->where('locale', 'en')->firstOrFail();
+        ArticleSeoMeta::query()->where('article_id', $article->id)->delete();
+        $guide = CareerGuide::query()->where('locale', 'en')->firstOrFail();
+        CareerGuideSeoMeta::query()->where('career_guide_id', $guide->id)->delete();
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before));
+            self::fail('Later missing guide SEO must reject every prior write.');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_seo_authority_missing', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
     public function test_operator_draft_drift_is_rejected_before_publication(): void
     {
         $this->seedNativeTargets();
