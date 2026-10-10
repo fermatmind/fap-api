@@ -31,7 +31,14 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
   input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
-export function recoveryFailure(execution, execute = request => transport(execution, request)) {
+const onlineFailureCodes = new Set([
+  'IQ_ONLINE_API_TIMEOUT', 'IQ_ONLINE_PAGE_TIMEOUT', 'IQ_ONLINE_API_TRANSPORT_FAILED', 'IQ_ONLINE_PAGE_TRANSPORT_FAILED',
+  'IQ_ONLINE_RESPONSE_INVALID', 'IQ_ONLINE_PAYLOAD_LIMIT', 'IQ_ONLINE_IDENTITY_MISMATCH', 'IQ_ONLINE_BODY_MISMATCH',
+  'IQ_ARTICLE_ONLINE_RENDER_FAILED', 'IQ_SSR_MAIN_INVALID', 'IQ_SSR_DOM_INVALID', 'IQ_SSR_LINK_MISMATCH',
+  'IQ_SSR_LINK_VARIANT_LIMIT', 'IQ_SSR_BODY_MISMATCH', 'IQ_SSR_METADATA_MISMATCH', 'IQ_SSR_CANONICAL_MISMATCH',
+  'IQ_SSR_ROBOTS_MISMATCH', 'IQ_SSR_CTA_MISMATCH',
+]);
+export function recoveryFailure(execution, execute = request => transport(execution, request), cause = null) {
   let completed = false;
   try {
     const response = execute({ ...execution.request, mode: 'recover' });
@@ -47,7 +54,8 @@ export function recoveryFailure(execution, execute = request => transport(execut
   error.receipt = { schema: 'iq.public_scale.publish.v1', ok: false,
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
-    recovery_completed: completed, transport_started: true, sanitized: true };
+    recovery_completed: completed, transport_started: true, sanitized: true,
+    ...(cause ? { failure_code: onlineFailureCodes.has(cause.message) ? cause.message : 'IQ_ONLINE_ACCEPTANCE_FAILED' } : {}) };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {
@@ -89,8 +97,8 @@ async function cli() {
     const receipt = publish(execution);
     try {
       receipt.online_acceptance = await verifyOnlineCandidates(env.IQ_PUBLISH_ENVIRONMENT, resolve('backend'));
-    } catch {
-      throw recoveryFailure(execution);
+    } catch (error) {
+      throw recoveryFailure(execution, undefined, error);
     }
     writeFileSync(resolve(directory, `${env.IQ_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(receipt)}\n`, { flag: 'wx', mode: 0o600 });
   } catch (original) {

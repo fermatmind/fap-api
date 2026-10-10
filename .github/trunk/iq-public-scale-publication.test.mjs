@@ -136,3 +136,15 @@ test('entry HMAC changes with executor bytes and another recovery execution cann
   for(const patch of [{workflow_run_id:'13'},{workflow_run_attempt:2},{package_sha256:'f'.repeat(64)},{executor_release_sha256:'e'.repeat(64)},{sanitized:false}])
     assert.equal(recoveryFailure(execution(),()=>({status:0,stdout:JSON.stringify({...good,...patch})})).receipt.recovery_completed,false);
 });
+
+
+test('online failure receipts retain only allowlisted failure codes and still recover once', () => {
+  for (const message of ['IQ_ONLINE_API_TIMEOUT', 'IQ_SSR_BODY_MISMATCH', 'secret https://private.invalid/raw']) {
+    let calls = 0;
+    const error = recoveryFailure(execution(), () => { calls++; return { status: 1 }; }, new Error(message));
+    assert.equal(calls, 1);
+    assert.equal(error.receipt.failure_code, message.startsWith('IQ_') ? message : 'IQ_ONLINE_ACCEPTANCE_FAILED');
+    assert.equal(JSON.stringify(error.receipt).includes('private.invalid'), false);
+    assert.equal(error.receipt.recovery_completed, false);
+  }
+});
