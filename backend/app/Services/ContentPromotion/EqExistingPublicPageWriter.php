@@ -177,11 +177,20 @@ final class EqExistingPublicPageWriter
         $this->assertSeo($current, 'article_id');
         $article = Article::query()->withoutGlobalScopes()->findOrFail($current['values']['id']);
         $old = $current['published'];
+        // Approved source rows may retain their original workflow status.
+        // Accept only a self-bound published source revision, never a translation.
+        $isSource = $article->isSourceArticle()
+            || ($article->translation_status === Article::TRANSLATION_STATUS_APPROVED
+                && $article->locale === 'zh-CN' && $article->source_locale === 'zh-CN'
+                && $article->source_article_id === null && $article->translated_from_article_id === null
+                && (int) $old['source_article_id'] === (int) $article->id
+                && $old['source_locale'] === 'zh-CN'
+                && $old['translation_group_id'] === $article->translation_group_id);
         $article->forceFill(['title' => $row['snapshot']['title'], 'excerpt' => $row['snapshot']['excerpt'], 'content_md' => $row['snapshot']['content_md'], 'content_html' => null]);
         $sourceHash = $article->computeSourceVersionHash();
         $revisionSourceHash = $sourceHash;
         $translatedFromHash = $sourceHash;
-        if (! $article->isSourceArticle()) {
+        if (! $isSource) {
             $source = $article->sourceArticle();
             if (! $source instanceof Article || (int) $source->org_id !== 0 || $source->slug !== $article->slug
                 || $source->locale !== 'zh-CN' || $source->translation_group_id !== $article->translation_group_id
@@ -202,7 +211,7 @@ final class EqExistingPublicPageWriter
             'authority_metadata_json' => $this->provenance($row, $context), ...$row['snapshot'], 'approved_at' => now(), 'published_at' => now(),
         ]);
         $article->forceFill(['source_version_hash' => $sourceHash, 'published_revision_id' => $revision->id]);
-        if (! $article->isSourceArticle()) {
+        if (! $isSource) {
             $article->forceFill(['translated_from_version_hash' => $translatedFromHash]);
         }
         if ($current['values']['working_revision_id'] === $old['id']) {

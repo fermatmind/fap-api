@@ -17,6 +17,7 @@ use App\Services\ContentPromotion\PromotionContext;
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class EqExistingPublicPageWriterTest extends TestCase
@@ -134,10 +135,32 @@ final class EqExistingPublicPageWriterTest extends TestCase
         self::assertSame($changed, $states->read(self::SHA));
     }
 
-    public function test_paired_english_public_revision_binds_updated_source_without_rewriting_its_working_draft(): void
+    public function test_non_source_status_without_source_binding_still_fails_atomically(): void
+    {
+        $this->seedNativeTargets();
+        Article::query()->where('locale', 'zh-CN')->update(['translation_status' => 'published']);
+        $states = app(EqExistingPublicPageState::class);
+        $before = $states->read(self::SHA);
+        try {
+            DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before));
+            self::fail('An unbound translation must not become a source');
+        } catch (\DomainException $error) {
+            self::assertSame('eq_existing_writer_article_source_identity', $error->getMessage());
+        }
+        self::assertSame($before, $states->read(self::SHA));
+    }
+
+    public static function sourceStatuses(): array
+    {
+        return [['source'], ['approved']];
+    }
+
+    #[DataProvider('sourceStatuses')]
+    public function test_paired_english_public_revision_binds_updated_source_without_rewriting_its_working_draft(string $sourceStatus): void
     {
         $this->seedNativeTargets();
         $chinese = Article::query()->where('locale', 'zh-CN')->firstOrFail();
+        $chinese->forceFill(['translation_status' => $sourceStatus])->saveQuietly();
         $english = Article::query()->where('locale', 'en')->firstOrFail();
         $english->forceFill(['translation_status' => 'published', 'source_locale' => 'zh-CN',
             'source_article_id' => $chinese->id, 'translated_from_article_id' => $chinese->id,
@@ -149,6 +172,7 @@ final class EqExistingPublicPageWriterTest extends TestCase
         $states = app(EqExistingPublicPageState::class);
         $before = $states->read(self::SHA);
         $after = DB::transaction(fn () => app(EqExistingPublicPageWriter::class)->publish($this->context(), $before))['state'];
+        self::assertSame($sourceStatus, $after['articles']['EQ-02:zh-CN']['values']['translation_status']);
         self::assertSame($after['articles']['EQ-02:zh-CN']['values']['source_version_hash'], $after['articles']['EQ-02:en']['published']['source_version_hash']);
         self::assertSame($after['articles']['EQ-02:zh-CN']['values']['source_version_hash'], $after['articles']['EQ-02:en']['values']['translated_from_version_hash']);
         self::assertSame($before['articles']['EQ-02:en']['working'], $after['articles']['EQ-02:en']['working']);
