@@ -67,7 +67,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $alias = $reader->getByCode('IQ_INTELLIGENCE_QUOTIENT', 0);
         foreach (app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256) as $row) {
             foreach ($row['patch'] as $leaf => $expected) {
-                self::assertSame($expected, $alias['content_i18n_json'][$row['key']][$leaf]);
+                self::assertJsonValueSame($expected, $alias['content_i18n_json'][$row['key']][$leaf]);
             }
         }
         self::assertGreaterThan($generation, app(PublicScaleCatalogCache::class)->generation(0));
@@ -100,7 +100,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         foreach (app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256) as $row) {
             $response = $this->getJson('/api/v0.3/scales/lookup?slug='.IqPublicEntryPackage::SLUG.'&locale='.$row['identity']['locale'])->assertOk();
             foreach ($row['patch'] as $leaf => $expected) {
-                self::assertSame($expected, $response->json('content_i18n_json.'.$row['key'].'.'.$leaf));
+                self::assertJsonValueSame($expected, $response->json('content_i18n_json.'.$row['key'].'.'.$leaf));
             }
         }
         $adapter->rollback($context, $published['rollback_reference']);
@@ -123,13 +123,18 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
 
             return array_map($sort, $value);
         };
-        DB::connection()->getPdo()->sqliteCreateFunction('iq_mysql_json', static fn (string $json): string => json_encode($sort(json_decode($json, true, 64, JSON_THROW_ON_ERROR)), JSON_THROW_ON_ERROR));
         foreach (['scales_registry_v2', 'scales_registry'] as $table) {
             $before[$table] = json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true);
-            DB::statement("CREATE TRIGGER iq_mysql_order_{$table} AFTER UPDATE OF content_i18n_json ON {$table} BEGIN UPDATE {$table} SET content_i18n_json = iq_mysql_json(NEW.content_i18n_json) WHERE org_id = NEW.org_id AND code = NEW.code; END");
         }
-        foreach (['INSERT', 'UPDATE OF meta_json'] as $index => $operation) {
-            DB::statement("CREATE TRIGGER iq_mysql_snapshot_{$index} AFTER {$operation} ON content_release_snapshots BEGIN UPDATE content_release_snapshots SET meta_json = iq_mysql_json(NEW.meta_json) WHERE id = NEW.id; END");
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            DB::connection()->getPdo()->sqliteCreateFunction('iq_mysql_json', static fn (string $json): string => json_encode($sort(json_decode($json, true, 64, JSON_THROW_ON_ERROR)), JSON_THROW_ON_ERROR));
+            foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+                $before[$table] = json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true);
+                DB::statement("CREATE TRIGGER iq_mysql_order_{$table} AFTER UPDATE OF content_i18n_json ON {$table} BEGIN UPDATE {$table} SET content_i18n_json = iq_mysql_json(NEW.content_i18n_json) WHERE org_id = NEW.org_id AND code = NEW.code; END");
+            }
+            foreach (['INSERT', 'UPDATE OF meta_json'] as $index => $operation) {
+                DB::statement("CREATE TRIGGER iq_mysql_snapshot_{$index} AFTER {$operation} ON content_release_snapshots BEGIN UPDATE content_release_snapshots SET meta_json = iq_mysql_json(NEW.meta_json) WHERE id = NEW.id; END");
+            }
         }
         $context = $this->context();
         $adapter = app(IqPublicScalePromotionAdapter::class);
@@ -147,7 +152,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $adapter->rollback($context, $published['rollback_reference']);
         self::assertTrue($adapter->recoverFailedPublication($context));
         foreach ($before as $table => $content) {
-            self::assertSame($sort($content), json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true));
+            self::assertJsonValueSame($content, json_decode(DB::table($table)->where('code', IqPublicEntryPackage::CODE)->value('content_i18n_json'), true));
         }
     }
 
@@ -198,7 +203,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $actual = $reader->getByCode('IQ_HISTORICAL_PUBLIC', 0);
         foreach (app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256) as $row) {
             foreach ($row['patch'] as $leaf => $expected) {
-                self::assertSame($expected, $actual['content_i18n_json'][$row['key']][$leaf]);
+                self::assertJsonValueSame($expected, $actual['content_i18n_json'][$row['key']][$leaf]);
             }
         }
         $adapter->rollback($context, $published['rollback_reference']);
@@ -213,7 +218,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $this->prepare($adapter, $context);
         $fired = false;
         DB::listen(function ($event) use (&$fired, $adapter, $context): void {
-            if (! $fired && str_starts_with($event->sql, 'select') && str_contains($event->sql, 'from "scales_registry_v2"')) {
+            if (! $fired && str_starts_with($event->sql, 'select') && preg_match('/from [`"]scales_registry_v2[`"]/', $event->sql) === 1) {
                 // The query already has its old result; publication interleaves
                 // before that result is returned and cached by the reader.
                 $fired = true;
@@ -237,7 +242,7 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $published = $adapter->publish($context);
         $fired = false;
         DB::listen(function ($event) use (&$fired, $adapter, $context, $published): void {
-            if (! $fired && str_starts_with($event->sql, 'select') && str_contains($event->sql, 'from "scales_registry_v2"')) {
+            if (! $fired && str_starts_with($event->sql, 'select') && preg_match('/from [`"]scales_registry_v2[`"]/', $event->sql) === 1) {
                 $fired = true;
                 $adapter->rollback($context, $published['rollback_reference']);
             }
@@ -290,12 +295,26 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
         $adapter = app(IqPublicScalePromotionAdapter::class);
         $this->prepare($adapter, $context);
         $before = $this->databaseState();
-        DB::statement("CREATE TRIGGER iq_test_reject_legacy BEFORE UPDATE ON scales_registry BEGIN SELECT RAISE(ABORT, 'iq_test_legacy_failure'); END");
+        $injectFailure = true;
+        if (DB::connection()->getDriverName() === 'mysql') {
+            DB::listen(static function ($event) use (&$injectFailure): void {
+                if ($injectFailure && str_starts_with($event->sql, 'update `scales_registry`')) {
+                    $injectFailure = false;
+                    DB::statement("SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'iq_test_legacy_failure'");
+                }
+            });
+        } else {
+            DB::statement("CREATE TRIGGER iq_test_reject_legacy BEFORE UPDATE ON scales_registry BEGIN SELECT RAISE(ABORT, 'iq_test_legacy_failure'); END");
+        }
         try {
             $adapter->publish($context);
             self::fail('Second table failure must fail the transaction.');
         } catch (\Illuminate\Database\QueryException $error) {
             self::assertStringContainsString('iq_test_legacy_failure', $error->getMessage());
+        }
+        $injectFailure = false;
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            DB::statement('DROP TRIGGER iq_test_reject_legacy');
         }
         self::assertSame($before, $this->databaseState());
         self::assertSame(0, DB::table('content_release_snapshots')->where('pack_id', 'iq-public-scale')->where('reason', 'content_promotion_before_publication')->count());

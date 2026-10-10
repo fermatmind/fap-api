@@ -163,14 +163,31 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         $beforeArticles = Article::query()->orderBy('id')->get()->map->getAttributes()->all();
         $beforeRevisions = ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all();
         $beforeSeo = ArticleSeoMeta::query()->orderBy('id')->get()->map->getAttributes()->all();
-        DB::unprepared("CREATE TRIGGER iq_abort_last_publish BEFORE UPDATE ON articles WHEN NEW.slug='what-is-iq-and-how-it-is-measured' AND NEW.locale='en' AND NEW.is_public=1 BEGIN SELECT RAISE(ABORT, 'iq_test_atomic_failure'); END");
+        $injectFailure = true;
+        if (DB::connection()->getDriverName() === 'mysql') {
+            // Trigger DDL would implicitly commit the test's outer transaction.
+            // Raise a real SQL error after the final write without changing it.
+            DB::listen(static function ($event) use (&$injectFailure): void {
+                $bindings = $event->bindings;
+                if ($injectFailure && str_starts_with($event->sql, 'update `articles`')
+                    && Article::query()->where('id', end($bindings))->where('slug', 'what-is-iq-and-how-it-is-measured')->where('locale', 'en')->where('is_public', true)->exists()) {
+                    $injectFailure = false;
+                    DB::statement("SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'iq_test_atomic_failure'");
+                }
+            });
+        } else {
+            DB::unprepared("CREATE TRIGGER iq_abort_last_publish BEFORE UPDATE ON articles WHEN NEW.slug='what-is-iq-and-how-it-is-measured' AND NEW.locale='en' AND NEW.is_public=1 BEGIN SELECT RAISE(ABORT, 'iq_test_atomic_failure'); END");
+        }
         try {
             $adapter->publish($context);
             self::fail('Injected database failure must abort.');
         } catch (\Illuminate\Database\QueryException $error) {
             self::assertStringContainsString('iq_test_atomic_failure', $error->getMessage());
         } finally {
-            DB::unprepared('DROP TRIGGER iq_abort_last_publish');
+            $injectFailure = false;
+            if (DB::connection()->getDriverName() === 'sqlite') {
+                DB::unprepared('DROP TRIGGER iq_abort_last_publish');
+            }
         }
         self::assertSame($beforeArticles, Article::query()->orderBy('id')->get()->map->getAttributes()->all());
         self::assertSame($beforeRevisions, ArticleTranslationRevision::query()->orderBy('id')->get()->map->getAttributes()->all());
@@ -217,7 +234,7 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
         self::assertSame($before[$id]['content_md'], $restored->content_md);
         self::assertSame('noindex,nofollow', $restored->seoMeta->robots);
         self::assertSame('Later note', data_get($restored->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.operator_note'));
-        self::assertSame([['question' => 'Original question', 'answer' => 'Original answer']], data_get($restored->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
+        self::assertJsonValueSame([['question' => 'Original question', 'answer' => 'Original answer']], data_get($restored->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
     }
 
     public function test_owned_copy_drift_aborts_the_entire_rollback(): void
@@ -667,6 +684,17 @@ final class IqPublicArticlePromotionAdapterTest extends TestCase
                 self::assertSame('iq_article_rollback_restored_faq_drift', $error->getMessage());
             }
         }
+    }
+
+    public function test_recovery_replay_rejects_restored_seo_value_drift(): void
+    {
+        $this->seedExisting();
+        [$adapter, $context, $publication] = $this->publish();
+        $adapter->rollback($context, $publication['rollback_reference']);
+        ArticleSeoMeta::query()->firstOrFail()->forceFill(['seo_title' => 'Concurrent changed SEO title'])->saveQuietly();
+
+        $this->expectExceptionMessage('iq_article_rollback_restored_seo_drift');
+        $adapter->rollback($context, $publication['rollback_reference']);
     }
 
     public function test_marker_cannot_claim_a_failed_snapshot_after_a_corrective_publication(): void

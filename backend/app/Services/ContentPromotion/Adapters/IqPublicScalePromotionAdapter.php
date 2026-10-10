@@ -333,7 +333,9 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
     private function snapshot(PromotionContext $context, array $rows, string $phase): ?ContentReleaseSnapshot
     {
         $targets = $this->targets($rows);
-        $snapshot = ContentReleaseSnapshot::query()->where('pack_id', self::PACK_ID)->where('reason', 'content_promotion_'.$phase)->orderBy('id')->get()
+        // Keep large JSON payloads out of MySQL's SQL sort buffer.
+        $ids = ContentReleaseSnapshot::query()->where('pack_id', self::PACK_ID)->where('reason', 'content_promotion_'.$phase)->orderBy('id')->pluck('id');
+        $snapshot = ContentReleaseSnapshot::query()->whereIn('id', $ids)->get()->sortBy('id')->values()
             ->first(static fn (ContentReleaseSnapshot $row): bool => data_get($row->meta_json, 'phase_idempotency_key') === PromotionPhaseIdentity::idempotencyKey($context, $phase, $targets));
         if ($snapshot !== null) {
             $resolved = $this->snapshots->resolve($context, $targets, self::PACK_ID, $phase, 'content-release-snapshot:'.$snapshot->id);

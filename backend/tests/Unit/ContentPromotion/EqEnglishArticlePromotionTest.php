@@ -37,6 +37,21 @@ final class EqEnglishArticlePromotionTest extends TestCase
 
     private array $receiptFiles = [];
 
+    private bool $isolatedSqliteDriverTest = false;
+
+    protected function beforeRefreshingDatabase(): void
+    {
+        // This one test exports an in-memory database for real child processes.
+        // Other publication and recovery cases keep the suite's native driver.
+        if ($this->name() === 'test_signed_driver_executes_real_child_phases_and_recovery_against_isolated_sqlite'
+            && config('database.default') !== 'sqlite') {
+            $this->isolatedSqliteDriverTest = true;
+            config(['database.default' => 'sqlite', 'database.connections.sqlite.database' => ':memory:']);
+            DB::purge('sqlite');
+            \Illuminate\Foundation\Testing\RefreshDatabaseState::$migrated = false;
+        }
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -69,6 +84,9 @@ final class EqEnglishArticlePromotionTest extends TestCase
             file_put_contents($this->markerPath, $this->originalMarker);
         }
         parent::tearDown();
+        if ($this->isolatedSqliteDriverTest) {
+            \Illuminate\Foundation\Testing\RefreshDatabaseState::$migrated = false;
+        }
     }
 
     public function test_exact_reviewed_english_targets_publish_and_rollback_without_changing_sources_or_other_working_drafts(): void

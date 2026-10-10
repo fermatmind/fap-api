@@ -683,7 +683,11 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
     private function sourceSnapshots(PromotionContext $context): \Illuminate\Support\Collection
     {
-        return ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_before_publication')->orderBy('id')->get()
+        // Sort only identifiers in SQL: MySQL otherwise includes the large JSON
+        // snapshot in its sort buffer and can prevent publication recovery.
+        $ids = ContentReleaseSnapshot::query()->where('pack_id', self::PACK)->where('reason', 'content_promotion_before_publication')->orderBy('id')->pluck('id');
+
+        return ContentReleaseSnapshot::query()->whereIn('id', $ids)->get()->sortBy('id')->values()
             ->filter(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'source_commit') === $context->sourceCommit && data_get($snapshot->meta_json, 'package_sha256') === $context->packageSha256);
     }
 
@@ -721,7 +725,7 @@ final class IqPublicArticlePromotionAdapter implements ExactPackagePromotionAdap
 
             return;
         }
-        if (! $seo || Arr::only($seo->getAttributes(), self::SEO_COPY) !== Arr::only($saved['seo'], self::SEO_COPY)) {
+        if (! $seo || PromotionContextFactory::canonicalJson(Arr::only($seo->getAttributes(), self::SEO_COPY)) !== PromotionContextFactory::canonicalJson(Arr::only($saved['seo'], self::SEO_COPY))) {
             throw new DomainException('iq_article_rollback_restored_seo_drift');
         }
         $current = (array) data_get($seo->schema_json, 'editorial_package_v1', []);
