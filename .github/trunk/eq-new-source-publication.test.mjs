@@ -48,6 +48,21 @@ test('malformed, incomplete or lost postpublication responses trigger exact reco
 test('unavailable recovery remains a failed delivery', () => {
   assert.throws(() => publish(buildExecution(env,'backend'), () => ({status:255, stdout:'',stderr:'secret topology'})), error => error.receipt.recovery_completed===false && !JSON.stringify(error.receipt).includes('secret'));
 });
+test('actual missing runtime signing key is diagnosed without leaking remote output', () => {
+  const execution = buildExecution(env, 'backend');
+  for (const [code, expected] of [
+    ['workflow_identity_signature_invalid', 'workflow_identity_signature_invalid'],
+    ['private_remote_path_or_secret', 'eq_source_execution_failed'],
+  ]) {
+    const calls = [];
+    assert.throws(() => publish(execution, request => {
+      calls.push(request.mode);
+      return { status: 1, stdout: JSON.stringify({ok:false,error_code:code,detail:'private body and topology'}) };
+    }), error => error.receipt.error_code === expected && error.receipt.recovery_completed === false
+      && !JSON.stringify(error.receipt).includes('private'));
+    assert.deepEqual(calls, ['publish', 'recover']);
+  }
+});
 test('permanent workflow serializes source publishing and includes automatic LKG recovery', () => {
   const workflow=readFileSync('.github/workflows/deploy.yml','utf8');
   const staging=workflow.split('  staging:')[1].split('  production:')[0];

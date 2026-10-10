@@ -35,7 +35,18 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
   input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
-export function recoveryFailure(execution, execute = request => transport(execution, request)) {
+// Remote failures previously lost even the fixed domain error code, leaving
+// a missing signing key indistinguishable from a failed publication phase.
+// Only these known codes may enter the immutable, sanitized receipt.
+const failureCodes = new Set([
+  'workflow_identity_signature_invalid', 'release_policy_sha256_mismatch',
+  'eq_source_request_invalid', 'eq_source_workflow_identity_invalid',
+  'eq_source_active_revision_mismatch', 'eq_source_executor_invalid',
+  'eq_source_executor_digest_mismatch', 'eq_source_phase_start_failed',
+  'eq_source_phase_timeout', 'eq_source_phase_failed',
+  'eq_source_phase_receipt_invalid', 'eq_source_execution_failed',
+]);
+export function recoveryFailure(execution, execute = request => transport(execution, request), failureCode = 'eq_source_execution_failed') {
   let recoveryCompleted = false;
   try {
     const recovered = execute({ ...execution.request, mode: 'recover' });
@@ -49,13 +60,16 @@ export function recoveryFailure(execution, execute = request => transport(execut
   error.receipt = { schema: 'eq.new_source_articles.publish.v1', ok: false,
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
+    error_code: failureCodes.has(failureCode) ? failureCode : 'eq_source_execution_failed',
     recovery_completed: recoveryCompleted, sanitized: true };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {
+  let failureCode = 'eq_source_execution_failed';
   try {
     const result = execute(execution.request);
     const output = JSON.parse(result.stdout ?? '');
+    if (output.ok === false && failureCodes.has(output.error_code)) failureCode = output.error_code;
     if (result.status !== 0 || output.ok !== true
       || output.source_commit !== execution.request.source_commit
       || output.workflow_run_id !== execution.request.workflow_run_id
@@ -70,7 +84,7 @@ export function publish(execution, execute = request => transport(execution, req
       published_count: 3, phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 3 })),
       sanitized: true };
   } catch {
-    throw recoveryFailure(execution, execute);
+    throw recoveryFailure(execution, execute, failureCode);
   }
 }
 async function cli() {
