@@ -79,6 +79,12 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
             $this->assertSame(900, (int) $fresh->cover_image_height);
             $this->assertSame('https://assets.fermatmind.com/articles/career-map/og_1200x630.jpg', (string) $fresh->seoMeta?->og_image_url);
             $this->assertSame('article.career.exploration.map.cover.v1', (string) data_get($fresh->cover_image_variants, 'editorial_package_v1.cover_media_asset_key'));
+            foreach (['cta_slots', 'references', 'answer_surface_v1', 'validation_v1'] as $field) {
+                $this->assertSame(
+                    data_get($article->cover_image_variants, 'editorial_package_v1.'.$field),
+                    data_get($fresh->cover_image_variants, 'editorial_package_v1.'.$field),
+                );
+            }
 
             $this->assertSame($before[(int) $article->id], $this->protectedSnapshot($fresh));
         }
@@ -100,6 +106,55 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
         );
         $this->assertFalse((bool) data_get($publicPayload, 'body_visual.fallback_authorized'));
         $this->assertArrayNotHasKey('editorial_package_v1', (array) data_get($publicPayload, 'cover_image_variants', []));
+    }
+
+    public function test_cover_only_plan_and_execute_preserve_each_locales_editorial_and_body_metadata(): void
+    {
+        $articles = $this->createPublishedPair();
+        $metadata = $this->writeResolvedMetadata(static function (array &$payload): void {
+            unset($payload['body_visual_asset_key'], $payload['body_visual_image_url'], $payload['body_visual_fallback_authorized']);
+        });
+        $options = [
+            '--article-ids' => $this->articleIds($articles),
+            '--translation-group-id' => self::TRANSLATION_GROUP_ID,
+            '--resolved-metadata' => $metadata,
+            '--json' => true,
+            '--no-publish' => true,
+            '--no-schema' => true,
+            '--no-hreflang' => true,
+            '--no-search' => true,
+            '--no-sitemap-llms-change' => true,
+        ];
+        $exitCode = Artisan::call('articles:update-image-metadata', $options);
+        $planned = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $coverFields = array_flip(['cover_media_asset_key', 'social_image_metadata', 'image_metadata_updated_by']);
+        foreach ($articles as $index => $article) {
+            $existing = data_get($article->cover_image_variants, 'editorial_package_v1');
+            $after = data_get($planned, 'after.'.$index.'.cover_image_variants.editorial_package_v1');
+            $this->assertSame(array_diff_key($existing, $coverFields), array_diff_key($after, $coverFields));
+            $this->assertSame($article->cover_image_variants, $article->fresh()->cover_image_variants);
+        }
+
+        $options['--execute'] = true;
+        $exitCode = Artisan::call('articles:update-image-metadata', $options);
+        $executed = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertSame($planned['after'], $executed['after']);
+
+        $options['--resolved-metadata'] = $this->writeResolvedMetadata(static function (array &$payload): void {
+            $payload['body_visual_asset_key'] = null;
+            $payload['body_visual_image_url'] = null;
+            $payload['body_visual_fallback_authorized'] = false;
+        });
+        $this->assertSame(0, Artisan::call('articles:update-image-metadata', $options), Artisan::output());
+        foreach ($articles as $article) {
+            $editorial = data_get($article->fresh()->cover_image_variants, 'editorial_package_v1');
+            $this->assertSame('', $editorial['body_visual_asset_key']);
+            $this->assertNull($editorial['body_visual_image_url']);
+            $this->assertFalse($editorial['body_visual_fallback_authorized']);
+            $this->assertSame((string) $article->locale, $editorial['validation_v1']['locale']);
+        }
     }
 
     public function test_execute_requires_all_no_side_effect_flags(): void
@@ -239,6 +294,15 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
                     'url' => 'https://assets.fermatmind.com/articles/old/hero.jpg',
                     'width' => 1200,
                     'height' => 630,
+                ],
+                'editorial_package_v1' => [
+                    'cta_slots' => [['label' => $locale.' CTA', 'href' => '/'.$locale.'/tests']],
+                    'references' => [['label' => $locale.' source', 'url' => 'https://example.org/'.$locale]],
+                    'answer_surface_v1' => ['faq_items' => [['question' => $locale.' FAQ', 'answer' => $locale.' answer']]],
+                    'validation_v1' => ['locale' => $locale, 'source_checked' => true],
+                    'body_visual_asset_key' => 'article.old.body.'.$locale,
+                    'body_visual_image_url' => 'https://assets.fermatmind.com/articles/old/body-'.$locale.'.jpg',
+                    'body_visual_fallback_authorized' => true,
                 ],
             ],
             'related_test_slug' => 'holland-career-interest-test-riasec',

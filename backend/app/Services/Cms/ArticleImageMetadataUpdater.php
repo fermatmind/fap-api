@@ -218,11 +218,17 @@ final class ArticleImageMetadataUpdater
         $variants['editorial_package_v1'] = [
             'cover_media_asset_key' => $coverMediaAssetKey,
             'social_image_metadata' => is_array($metadata['social_image_metadata'] ?? null) ? $metadata['social_image_metadata'] : [],
-            'body_visual_asset_key' => trim((string) ($metadata['body_visual_asset_key'] ?? '')),
-            'body_visual_image_url' => $bodyVisualUrl,
-            'body_visual_fallback_authorized' => (bool) ($metadata['body_visual_fallback_authorized'] ?? false),
             'image_metadata_updated_by' => 'articles:update-image-metadata',
         ];
+        foreach (['body_visual_asset_key', 'body_visual_image_url', 'body_visual_fallback_authorized'] as $field) {
+            if (array_key_exists($field, $metadata)) {
+                $variants['editorial_package_v1'][$field] = match ($field) {
+                    'body_visual_asset_key' => trim((string) $metadata[$field]),
+                    'body_visual_image_url' => $bodyVisualUrl,
+                    'body_visual_fallback_authorized' => (bool) $metadata[$field],
+                };
+            }
+        }
 
         return [
             'cover_media_asset_key' => $coverMediaAssetKey,
@@ -247,7 +253,7 @@ final class ArticleImageMetadataUpdater
             'cover_image_alt' => $normalized['cover_image_alt'],
             'cover_image_width' => $normalized['cover_image_width'],
             'cover_image_height' => $normalized['cover_image_height'],
-            'cover_image_variants' => $normalized['cover_image_variants'],
+            'cover_image_variants' => $this->mergedCoverVariants($article, $normalized),
         ])->saveQuietly();
 
         /** @var ArticleSeoMeta $seoMeta */
@@ -303,10 +309,26 @@ final class ArticleImageMetadataUpdater
         $snapshot['cover_image_alt'] = $normalized['cover_image_alt'];
         $snapshot['cover_image_width'] = $normalized['cover_image_width'];
         $snapshot['cover_image_height'] = $normalized['cover_image_height'];
-        $snapshot['cover_image_variants'] = $normalized['cover_image_variants'];
+        $snapshot['cover_image_variants'] = $this->mergedCoverVariants($article, $normalized);
         $snapshot['og_image_url'] = $normalized['og_image_url'];
 
         return $snapshot;
+    }
+
+    /**
+     * @param  array<string,mixed>  $normalized
+     * @return array<string,mixed>
+     */
+    private function mergedCoverVariants(Article $article, array $normalized): array
+    {
+        $variants = $normalized['cover_image_variants'];
+        $existingEditorial = data_get($article->cover_image_variants, 'editorial_package_v1', []);
+        $variants['editorial_package_v1'] = array_replace(
+            is_array($existingEditorial) ? $existingEditorial : [],
+            $variants['editorial_package_v1'],
+        );
+
+        return $variants;
     }
 
     /**
