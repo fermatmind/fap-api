@@ -5,8 +5,9 @@ import { renderPage } from './iq-public-article-online-qa.mjs';
 
 const equal = (a,b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const compact = x => String(x ?? '').normalize('NFKC').replace(/[\s\p{P}\p{S}]/gu,'');
-const plain = x => x.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1')
-  .replace(/\[\^[^\]]+\]/g,'').replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
+const plain = x => /^\s*```[\w-]*\s*$/.test(x) ? '' : x.replace(/!\[[^\]]*\]\([^)]*\)/g,'').replace(/\[([^\]]+)\]\([^)]*\)/g,'$1')
+  .replace(/^\s*\[\^([0-9A-Za-z-]+)\]:\s*/,'$1 ').replace(/\[\^([0-9A-Za-z-]+)\]/g,'$1')
+  .replace(/^\s*(?:>\s*)+|^\s*(?:#{1,6}\s*|[-*+]\s+|\d+[.)]\s+)/g,'').replace(/[*`_]/g,'');
 export const pathFor = row => {
   const {slug,locale} = row.identity; const segment = locale === 'en' ? 'en' : 'zh';
   if (row.kind === 'article') return `/${segment}/articles/${slug}`;
@@ -80,7 +81,7 @@ export function assertDom(row,html,before,environment) {
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   const copy=row.snapshot.content_md;
-  const lines = copy ? copy.split('\n').filter(line=>line.trim() && !/^[\s|:-]+$/.test(line) && !/^#(?:content_md|summary|faq)\s*$/.test(line) && !/^\[\^[^\]]+\]:/.test(line)).flatMap(line=>line.split('|'))
+  const lines = copy ? copy.split('\n').filter(line=>line.trim() && !/^[\s|:-]+$/.test(line) && !/^#(?:content_md|summary|faq)\s*$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean) : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));

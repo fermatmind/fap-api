@@ -64,11 +64,28 @@ test('publication retains bounded page diagnostics and separate recovery errors 
  assert.equal(unsafe.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
  assert.ok(!JSON.stringify(unsafe.receipt).includes('secret'));
 });
+test('fenced Markdown requires visible code content without treating language delimiters as reader copy',()=>{
+ const row={page_id:'PAGE-04',kind:'article',identity:{locale:'en',slug:'task-plan'},snapshot:{title:'Task plan',content_md:'Use this chain:\n\n```text\nProject → deliverable → next action → 15-minute start\n```'}};
+ const code='<pre><code>Project → deliverable → next action → 15-minute start</code></pre>';
+ const html='<html><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com/en/articles/task-plan"></head><body><main><h1>Task plan</h1><p>Use this chain:</p>'+code+'</main></body></html>';
+ const before={dom:{canonical:['https://fermatmind.com/en/articles/task-plan'],robots:[],alternates:[]}};
+ assertDom(row,html,before,'production');
+ assert.throws(()=>assertDom(row,html.replace(code,''),before,'production'),/VISIBLE_BODY/);
+ assert.throws(()=>assertDom(row,html.replace(code,'<script>Project → deliverable → next action → 15-minute start</script>'),before,'production'),/VISIBLE_BODY/);
+});
 
 test('API transport errors retain only recognized causes without endpoint or response bytes',async()=>{
  await assert.rejects(()=>read('https://example.invalid',async()=>{throw new TypeError('private endpoint',{cause:{code:'UND_ERR_SOCKET'}})}),/PUBLIC_CONTENT_53_API_TRANSPORT_UND_ERR_SOCKET/);
  await assert.rejects(()=>read('https://example.invalid',async()=>{throw new Error('private body')}),/PUBLIC_CONTENT_53_API_TRANSPORT_FAILED/);
  await assert.rejects(()=>read('https://example.invalid',async()=>({status:200,text:async()=>{throw new Error('private response body')}})),/PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED/);
+});
+test('inline citation labels and their rendered bibliography remain required visible copy',()=>{
+ const row={page_id:'PAGE-08',kind:'article',identity:{locale:'en',slug:'trait-evidence'},snapshot:{title:'Trait evidence',content_md:'Trait dimensions are continuous.[^1]\n\n[^1]: John, O. P. (2008). *Trait taxonomy*. Guilford Press.'}};
+ const reference='<ol><li><span>【1】</span><span>John, O. P. (2008). <em>Trait taxonomy</em>. Guilford Press.</span></li></ol>';
+ const html='<html><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com/en/articles/trait-evidence"></head><body><main><h1>Trait evidence</h1><p>Trait dimensions are continuous.<sup>【1】</sup></p>'+reference+'</main></body></html>';
+ const before={dom:{canonical:['https://fermatmind.com/en/articles/trait-evidence'],robots:[],alternates:[]}};
+ assertDom(row,html,before,'production');
+ assert.throws(()=>assertDom(row,html.replace(reference,''),before,'production'),/VISIBLE_BODY/);
 });
 
 test('async publication accepts the complete signed protocol without invoking recovery',async()=>{
