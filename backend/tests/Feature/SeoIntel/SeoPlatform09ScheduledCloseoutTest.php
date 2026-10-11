@@ -62,6 +62,25 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
     }
 
     #[Test]
+    public function writer_readback_and_replay_preserve_the_actual_start_seconds(): void
+    {
+        $this->seedLedgerAndCandidate();
+        $slot = CarbonImmutable::parse('2026-09-10T13:45:04Z');
+        $service = $this->receiptService();
+        $first = $service->record('scheduled', $slot);
+        $before = (array) DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->first();
+        $replay = $service->record('scheduled', $slot->second(59));
+
+        $this->assertSame('scheduled_completed', $first['status']);
+        $this->assertSame('2026-09-10T13:45:04Z', $first['scheduled_for']);
+        $this->assertSame(4, $slot->second);
+        $this->assertTrue($replay['idempotent_replay']);
+        $this->assertSame($first['receipt_hash'], $replay['receipt_hash']);
+        $this->assertSame($before, (array) DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->first());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->count());
+    }
+
+    #[Test]
     public function natural_slot_is_idempotent_and_does_not_duplicate_selected_cards(): void
     {
         $this->seedLedgerAndCandidate();

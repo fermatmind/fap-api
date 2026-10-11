@@ -162,7 +162,7 @@ final class SeoWeeklyDecisionReceiptValidator
                     // The natural writer admits the scheduled minute, including
                     // the actual start seconds. Keep those immutable bytes and
                     // compare the same minute contract used by isCapabilitySlot.
-                    $scheduledFor?->startOfMinute()->getTimestamp() === $expectedSlot->setTimezone('UTC')->getTimestamp(),
+                    $scheduledFor?->startOfMinute()->getTimestamp() === $expectedSlot->setTimezone('UTC')->startOfMinute()->getTimestamp(),
                     'capability_expected_slot_mismatch',
                 );
             }
