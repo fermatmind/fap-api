@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Events\PublicAuthorityChanged;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
@@ -26,6 +28,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
     public function test_dry_run_plans_sitemap_and_llms_release_without_writes(): void
     {
         $article = $this->createPublishedIndexableArticle();
+        Event::fake([PublicAuthorityChanged::class]);
 
         $exitCode = Artisan::call('articles:discoverability-release', [
             '--article-id' => (string) $article->id,
@@ -52,6 +55,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertFalse((bool) $fresh->sitemap_eligible);
         $this->assertFalse((bool) $fresh->llms_eligible);
         $this->assertSame(0, AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_discoverability_release')->count());
+        Event::assertNotDispatched(PublicAuthorityChanged::class);
     }
 
     public function test_execute_releases_only_sitemap_and_llms_eligibility(): void
@@ -60,6 +64,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $contentHash = hash('sha256', (string) $article->content_md);
         $publishedRevisionId = (int) $article->published_revision_id;
         $schemaHash = hash('sha256', (string) json_encode($article->seoMeta?->schema_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE));
+        Event::fake([PublicAuthorityChanged::class]);
 
         $exitCode = Artisan::call('articles:discoverability-release', [
             '--article-id' => '53',
@@ -91,6 +96,22 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertSame($contentHash, hash('sha256', (string) $fresh->content_md));
         $this->assertSame($publishedRevisionId, (int) $fresh->published_revision_id);
         $this->assertSame($schemaHash, hash('sha256', (string) json_encode($fresh->seoMeta?->schema_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE)));
+        $expectedRevision = hash('sha256', json_encode([
+            'article',
+            (string) $fresh->id,
+            (string) $fresh->locale,
+            (string) $fresh->status,
+            (bool) $fresh->is_public,
+            (int) $fresh->published_revision_id,
+            $fresh->updated_at?->toIso8601String(),
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+        Event::assertDispatchedTimes(PublicAuthorityChanged::class, 1);
+        Event::assertDispatched(PublicAuthorityChanged::class, static fn (PublicAuthorityChanged $event): bool => $event->pageEntityType === 'article'
+            && $event->entityIdentity === (string) $fresh->id
+            && $event->locale === (string) $fresh->locale
+            && $event->revision === $expectedRevision
+            && $event->change === 'authority_revision'
+        );
 
         $audit = AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_discoverability_release')->first();
         $this->assertInstanceOf(AuditLog::class, $audit);
@@ -104,6 +125,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
     public function test_execute_requires_confirmation_and_safety_flags(): void
     {
         $this->createPublishedIndexableArticle();
+        Event::fake([PublicAuthorityChanged::class]);
 
         $exitCode = Artisan::call('articles:discoverability-release', [
             '--article-id' => '53',
@@ -121,6 +143,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $fresh = Article::query()->withoutGlobalScopes()->findOrFail(53);
         $this->assertFalse((bool) $fresh->sitemap_eligible);
         $this->assertFalse((bool) $fresh->llms_eligible);
+        Event::assertNotDispatched(PublicAuthorityChanged::class);
     }
 
     public function test_slug_lock_and_indexability_preflight_block_without_write(): void
@@ -132,6 +155,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
             'is_indexable' => false,
             'robots' => 'noindex,nofollow',
         ]);
+        Event::fake([PublicAuthorityChanged::class]);
 
         $exitCode = Artisan::call('articles:discoverability-release', [
             '--article-id' => '53',
@@ -150,6 +174,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $fresh = Article::query()->withoutGlobalScopes()->findOrFail(53);
         $this->assertFalse((bool) $fresh->sitemap_eligible);
         $this->assertFalse((bool) $fresh->llms_eligible);
+        Event::assertNotDispatched(PublicAuthorityChanged::class);
     }
 
     /**

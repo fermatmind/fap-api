@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Events\PublicAuthorityChanged;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
@@ -127,6 +128,23 @@ final class ArticleDiscoverabilityRelease extends Command
                     'llms_eligible' => true,
                     'updated_at' => now(),
                 ]);
+
+            $article = Article::query()->withoutGlobalScopes()->findOrFail($articleId);
+            event(new PublicAuthorityChanged(
+                pageEntityType: 'article',
+                entityIdentity: (string) $article->id,
+                locale: (string) $article->locale,
+                revision: hash('sha256', json_encode([
+                    'article',
+                    (string) $article->id,
+                    (string) $article->locale,
+                    (string) $article->status,
+                    (bool) $article->is_public,
+                    (int) ($article->published_revision_id ?? 0),
+                    $article->updated_at?->toIso8601String(),
+                ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES)),
+                change: 'authority_revision',
+            ));
 
             return $this->preflight($articleId, $expectedSlug) ?? $lockedPlan;
         });
