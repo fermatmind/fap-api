@@ -200,7 +200,7 @@ export async function readOnlinePrestate(environment, backendRoot, fetcher = fet
   return result;
 }
 export async function renderPage(url, { surface = 'article', verifyDOM = null } = {}) {
-  const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'], public_page: ['main'] }[surface];
+  const selectors = { article: ['article[data-testid="article-detail-content"]'], entry: ['main[data-test-landing-read-source]'], topic: ['#overview', '#faq'], public_page: ['main:not(main main)'] }[surface];
   if (!Array.isArray(selectors) || (verifyDOM !== null && typeof verifyDOM !== 'function')) throw new Error('IQ_ARTICLE_ONLINE_RENDER_OPTIONS_INVALID');
   // Read the hydrated DOM and computed visibility in the same real Chrome page.
   // CDP uses this child process's private pipes; no public debugging port exists.

@@ -36,7 +36,7 @@ $walk = function($node) use (&$walk) {
  $text=''; foreach($node->childNodes as $child) $text .= ' '.$walk($child); return $text;
 };
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
-echo json_encode(['body'=>$values('//main'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+echo json_encode(['body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
