@@ -71,7 +71,7 @@ final class UpdateArticlePublicReaderMetadataTest extends TestCase
         $p = $this->package($article->fresh());
         $this->assertSame(0, $this->runPackage($p, $this->actor()), Artisan::output());
         $this->assertCount(1, data_get($article->fresh()->seoMeta->schema_json, 'editorial_package_v1.answer_surface_v1.faq_items'));
-        $this->assertSame($items, data_get($article->fresh()->cover_image_variants, 'editorial_package_v1.answer_surface_v1.faq_items'));
+        $this->assertJsonValueSame($items, data_get($article->fresh()->cover_image_variants, 'editorial_package_v1.answer_surface_v1.faq_items'));
         $response = app(ArticleController::class)->show(Request::create('/api/v0.5/articles/'.$article->slug, 'GET',
             ['locale' => 'en', 'org_id' => 0]), $article->slug);
         $this->assertSame(200, $response->getStatusCode());

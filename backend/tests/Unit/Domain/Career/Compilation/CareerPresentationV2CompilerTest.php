@@ -7,6 +7,7 @@ namespace Tests\Unit\Domain\Career\Compilation;
 use App\Domain\Career\Compilation\CareerPresentationV2Compiler;
 use App\Domain\Career\Display\CareerContentV3Contract;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV2Contract;
 use Tests\TestCase;
@@ -15,14 +16,16 @@ final class CareerPresentationV2CompilerTest extends TestCase
 {
     public function test_current_package_uses_per_page_schema_bilingual_identities_and_explicit_body_states(): void
     {
-        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $loader = app(CareerCurrentAuthorityPackageLoader::class);
+        $package = $loader->indexForPublish(base_path());
         self::assertArrayNotHasKey('rows', $package);
-        self::assertCount(1046, $package['pages']);
+        self::assertCount(1046, $package['entries']);
         self::assertCount(2092, $package['manifest']['files']);
         $enhanced = $legacy = 0;
-        foreach ($package['pages'] as $slug => $localized) {
+        foreach ($package['entries'] as $slug => $localized) {
             self::assertSame(['en', 'zh-CN'], array_keys($localized));
-            foreach ($localized as $locale => $page) {
+            foreach (array_keys($localized) as $locale) {
+                $page = $loader->pageFromPublishIndex($package, $slug, $locale);
                 CareerContentV3Contract::assert($page);
                 self::assertSame($locale, $page['locale']);
                 self::assertSame($slug, $page['subject']['canonical_slug']);

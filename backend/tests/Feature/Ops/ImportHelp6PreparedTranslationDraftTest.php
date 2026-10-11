@@ -223,7 +223,7 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
             $before = ContentPageSourceTargetSnapshot::hash($target);
             $sourceBefore = ContentPageSourceTargetSnapshot::hash($source);
             $publicBefore = $published->getAttributes();
-            $oldBefore = $working->getAttributes();
+            $oldBefore = $working->fresh()->getAttributes();
             $this->assertSame(1, $this->runCommand($file, $sha));
             $this->assertSame(1, $this->runCommand($file, $sha, ['--cohort' => 'arbitrary']));
             $this->assertSame(0, $this->runCommand($file, $sha, ['--cohort' => 'core3']));
@@ -411,7 +411,7 @@ final class ImportHelp6PreparedTranslationDraftTest extends TestCase
                 '--confirm' => sprintf('Import %s target %d with package %s.', $label, $target->id, $sha)]));
             $result = json_decode(Artisan::output(), true);
             $draft = CmsTranslationRevision::findOrFail($result['after']['new_revision_id']);
-            $this->assertSame($package['copy']['faq_items'], $draft->payload_json['faq_items']);
+            $this->assertJsonValueSame($package['copy']['faq_items'], $draft->payload_json['faq_items']);
             $this->assertSame($package['copy']['seo_description'], $draft->payload_json['meta_description']);
             $this->assertNull($draft->payload_json['summary']);
             $this->assertFalse($draft->payload_json['is_indexable']);

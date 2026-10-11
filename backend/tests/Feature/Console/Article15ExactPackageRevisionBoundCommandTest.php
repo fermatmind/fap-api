@@ -32,6 +32,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        // CTA eligibility is backed by the real canonical scale registry, not syntax alone.
+        $this->seed(\Database\Seeders\ScaleRegistrySeeder::class);
 
         // Exercise the frozen content contracts with the implementation actually
         // running in this test, without rewriting the production authority.
@@ -670,6 +672,16 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
                 'llms_eligible' => true,
                 'published_at' => now()->subDay(),
             ]);
+            // Frozen default CTAs require a native edge when the old scalar related-test field is empty.
+            foreach ((array) data_get($current, 'primary_cta.current', []) as $cta) {
+                if (($cta['key'] ?? null) === 'start_test' && empty($article->related_test_slug)) {
+                    \App\Models\ArticleTestEdge::query()->create([
+                        'org_id' => 0, 'article_id' => $article->id, 'locale' => $article->locale,
+                        'test_slug' => basename($cta['href']), 'role' => 'primary', 'sort_order' => 0,
+                        'safety_level' => 'normal', 'visibility' => 'public', 'source' => 'article15-test-fixture',
+                    ]);
+                }
+            }
             $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->forceCreate([
                 'id' => $target['published_revision_id'],
                 'org_id' => 0,
@@ -716,7 +728,8 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         $ctas = (array) data_get($package, 'current_to_proposed.primary_cta.current', []);
         $metadata = [];
 
-        if (! $this->isDefaultFaqProjection($faq, $locale)) {
+        // Supply the frozen FAQ explicitly; the public reader no longer invents default FAQs.
+        if ($faq !== []) {
             $faqMetadata = $faq;
             if ((int) $target['article_id'] === 51) {
                 $faqMetadata[0] = [
@@ -753,16 +766,6 @@ final class Article15ExactPackageRevisionBoundCommandTest extends TestCase
         }
 
         return $metadata;
-    }
-
-    /** @param list<array<string,mixed>> $faq */
-    private function isDefaultFaqProjection(array $faq, string $locale): bool
-    {
-        $questions = array_column($faq, 'question');
-
-        return $questions === ($locale === 'zh-CN'
-            ? ['什么时候适合阅读这篇文章？', '这篇文章会替代正式判断吗？']
-            : ['When should I use this article?', 'Does this replace formal judgment?']);
     }
 
     /** @param list<array<string,mixed>> $ctas */

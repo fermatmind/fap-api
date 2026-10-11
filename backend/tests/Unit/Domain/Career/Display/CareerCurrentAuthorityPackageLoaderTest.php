@@ -15,18 +15,25 @@ final class CareerCurrentAuthorityPackageLoaderTest extends TestCase
 {
     public function test_installed_manifest_selects_only_the_per_page_authority(): void
     {
-        ini_set('memory_limit', '2048M');
         $backendRoot = dirname(__DIR__, 5);
         $loader = new CareerCurrentAuthorityPackageLoader(
             new CareerContentV3AuthorityPackage,
         );
 
-        $installed = $loader->loadForPublish($backendRoot);
+        $installed = $loader->indexForPublish($backendRoot);
+        $count = 0;
+        foreach ($installed['entries'] as $slug => $localized) {
+            foreach (array_keys($localized) as $locale) {
+                self::assertSame($locale, $loader->pageFromPublishIndex($installed, $slug, $locale)['locale']);
+                $count++;
+            }
+        }
+        self::assertSame(2092, $count);
 
         self::assertSame('content_v3_per_page', $installed['summary']['source_format']);
         self::assertSame(1046, $installed['summary']['career_count']);
         self::assertSame(2092, $installed['summary']['locale_page_count']);
-        self::assertCount(1046, $installed['pages']);
+        self::assertCount(1046, $installed['entries']);
         self::assertCount(2092, $installed['manifest']['files']);
         self::assertDirectoryDoesNotExist($backendRoot.'/content_assets/career/current/identity');
     }

@@ -74,6 +74,10 @@ final class SeoCurrentPublicAuthorityPrecedenceTest extends TestCase
 
     public function test_incomplete_backend_source_cannot_be_used_as_a_retirement_set(): void
     {
+        // This failure path requires a genuinely empty schema even when the suite uses MySQL.
+        config(['database.connections.seo_missing_schema' => [
+            'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '',
+        ], 'database.default' => 'seo_missing_schema']);
         $source = app(BackendAuthorityUrlTruthSource::class);
         try {
             $source->completeCandidates();

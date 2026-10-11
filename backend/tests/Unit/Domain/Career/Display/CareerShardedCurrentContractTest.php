@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain\Career\Display;
 
 use App\Domain\Career\Display\CareerContentV3AuthorityPackage;
+use App\Domain\Career\Display\CareerCurrentAuthorityPackageLoader;
 use PHPUnit\Framework\TestCase;
 
 /** Historical filename retained so test selection remains stable across the atomic authority migration. */
@@ -34,9 +35,8 @@ final class CareerShardedCurrentContractTest extends TestCase
 
     public function test_installed_current_contains_only_manifest_and_per_page_files(): void
     {
-        ini_set('memory_limit', '2048M');
         $backendRoot = dirname(__DIR__, 5);
-        $authority = (new CareerContentV3AuthorityPackage)->load($backendRoot);
+        $authority = (new CareerCurrentAuthorityPackageLoader(new CareerContentV3AuthorityPackage))->indexForPublish($backendRoot);
         $root = $backendRoot.'/content_assets/career/current';
 
         self::assertSame(1046, $authority['summary']['career_count']);

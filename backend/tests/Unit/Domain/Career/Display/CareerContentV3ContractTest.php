@@ -54,16 +54,14 @@ final class CareerContentV3ContractTest extends TestCase
     public function test_projection_is_stable_across_mysql_json_object_key_order(): void
     {
         $package = app(CareerContentV3AuthorityPackage::class);
-        $first = $package->load(base_path());
-        $summary = $first['summary'];
-        $page = $first['pages']['accountants-and-auditors']['zh-CN'];
-        unset($first);
-        $second = $package->load(base_path());
+        $first = $package->manifestIndex(base_path());
+        $page = $package->pageFromIndex($first, 'accountants-and-auditors', 'zh-CN');
+        $second = $package->manifestIndex(base_path());
 
-        self::assertSame($summary, $second['summary']);
+        self::assertSame($first['manifest'], $second['manifest']);
         self::assertSame(
             $page,
-            $second['pages']['accountants-and-auditors']['zh-CN'],
+            $package->pageFromIndex($second, 'accountants-and-auditors', 'zh-CN'),
         );
     }
 

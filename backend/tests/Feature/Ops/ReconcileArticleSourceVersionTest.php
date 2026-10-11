@@ -473,7 +473,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $source = $source->fresh();
             $new = $source->publishedRevision;
             $audit = AuditLog::withoutGlobalScopes()->where('action', 'article_source_version_reconciled')->firstOrFail();
-            $this->assertSame($before, $audit->meta_json['existing_english_targets']);
+            $this->assertJsonValueSame($before, $audit->meta_json['existing_english_targets']);
             $restore = ['--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id,
                 '--new-revision-id' => (int) $new->id,
                 '--source-updated-at' => (string) $source->getRawOriginal('updated_at'),
@@ -625,7 +625,7 @@ final class ReconcileArticleSourceVersionTest extends TestCase
             $this->assertNull($new->approved_at);
             $this->assertSame($targets, ArticleSourceTargetSnapshot::capture($source));
             $audit = AuditLog::where('action', 'article_source_version_reconciled')->firstOrFail();
-            $this->assertSame($history, $audit->meta_json['preserved_source_revisions']);
+            $this->assertJsonValueSame($history, $audit->meta_json['preserved_source_revisions']);
             $restore = ['--source-id' => (int) $source->id, '--audit-id' => (int) $audit->id, '--new-revision-id' => (int) $new->id,
                 '--source-updated-at' => (string) $source->getRawOriginal('updated_at'), '--revision-updated-at' => (string) $new->getRawOriginal('updated_at')];
             $this->assertSame(0, Artisan::call('articles:restore-source-version', $restore + ['--dry-run' => true]));

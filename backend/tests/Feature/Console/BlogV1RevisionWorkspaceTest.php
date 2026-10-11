@@ -31,6 +31,9 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
 
     public function test_readonly_plan_and_repeat_stage_preserve_public_payload_history_and_eligibility(): void
     {
+        // MySQL retains sequence advances after rolled-back tests; the owner fixture must still be ID 1.
+        AdminUser::withoutGlobalScopes()->forceCreate(['id' => 900, 'name' => 'Sequence predecessor',
+            'email' => 'sequence-predecessor@example.test', 'password' => 'test-secret', 'is_active' => 1])->delete();
         $p = $this->fixtures();
         $service = app(Workspace::class);
         $before = $service->snapshot();
@@ -215,12 +218,12 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
     public function test_surface_audit_failure_rolls_back_both_locale_drafts(): void
     {
         $this->fixtures();
-        $this->actor();
+        $actor = $this->actor();
         $p = $this->surfaces();
         $service = app(Workspace::class);
         $plan = $service->surface($p, 'surface-plan', false, '', 0, str_repeat('b', 64));
         $this->mock(AuditLogger::class)->shouldReceive('log')->once()->andThrow(new RuntimeException('audit_failed'));
-        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-stage', true, $plan['state_sha256'], 1, str_repeat('b', 64)), 'audit_failed');
+        $this->refused(fn () => app(Workspace::class)->surface($p, 'surface-stage', true, $plan['state_sha256'], $actor->id, str_repeat('b', 64)), 'audit_failed');
         $this->assertSame(0, LandingSurface::withoutGlobalScopes()->where('surface_key', 'articles_index')->count());
     }
 
@@ -401,6 +404,8 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
             'candidate_sha256' => str_repeat('c', 64), 'surface_state_sha256' => str_repeat('c', 64)] as $key => $value) {
             $changed = $original;
             $changed['surface_records'][0][$key] = $value;
+            // MySQL treats integer→equal double as a no-op unless another JSON value changes.
+            $changed['_fixture_drift_key'] = $key;
             // Preserve JSON double identity; the regular Eloquent serializer drops .0.
             \Illuminate\Support\Facades\DB::table('audit_logs')->where('id', $audit->id)->update([
                 'meta_json' => json_encode($changed, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION),
@@ -589,7 +594,16 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
         $old['surfaces'][1]['description'] = '费马博客从真实问题出发，讨论人格与兴趣、学习和职业选择、沟通与成长，以及研究能支持什么。读文章时，留意依据、适用边界和与你当前问题有关的下一步。';
         $service = app(Workspace::class);
         $plan = $service->surface($old, 'surface-plan', false, '', 0, Workspace::SURFACE_ORIGINAL_PACKAGE);
-        $service->surface($old, 'surface-stage', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_ORIGINAL_PACKAGE);
+        // Bind the historical command's exact IDs without relying on a rolled-back MySQL sequence.
+        $event = 'eloquent.creating: '.LandingSurface::class;
+        \Illuminate\Support\Facades\Event::listen($event, static function (LandingSurface $surface): void {
+            $surface->id = $surface->locale === 'en' ? 20 : 21;
+        });
+        try {
+            $service->surface($old, 'surface-stage', true, $plan['state_sha256'], $actor->id, Workspace::SURFACE_ORIGINAL_PACKAGE);
+        } finally {
+            \Illuminate\Support\Facades\Event::forget($event);
+        }
         \Illuminate\Support\Facades\DB::table('audit_logs')->where('action', 'blog_v1_surface-stage')->update(['id' => 1473]);
         $new = $old;
         $new['surfaces'][0]['description'] = 'Clear explanations, practical examples, and evidence-informed guidance on personality, careers, communication, and growth—to help you understand assessment results, compare options, and decide what to try next.';
@@ -670,7 +684,7 @@ final class BlogV1RevisionWorkspaceTest extends TestCase
 
     private function actor(): AdminUser
     {
-        $actor = AdminUser::withoutGlobalScopes()->firstOrCreate(['id' => 1], ['name' => 'Synthetic owner', 'email' => 'blog-owner@example.test', 'password' => 'test-secret', 'is_active' => 1]);
+        $actor = AdminUser::withoutGlobalScopes()->find(1) ?? AdminUser::withoutGlobalScopes()->forceCreate(['id' => 1, 'name' => 'Synthetic owner', 'email' => 'blog-owner@example.test', 'password' => 'test-secret', 'is_active' => 1]);
         $role = Role::firstOrCreate(['name' => 'blog-test-owner']);
         $permission = Permission::firstOrCreate(['name' => PermissionNames::ADMIN_CONTENT_PUBLISH]);
         $role->permissions()->syncWithoutDetaching([$permission->id]);

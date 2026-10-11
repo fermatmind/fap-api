@@ -160,7 +160,7 @@ final class CareerCurrentIdentityTest extends TestCase
     public function test_invalid_scope_definitions_are_rejected(): void
     {
         $package = app(CareerContentV3AuthorityPackage::class);
-        $manifest = $package->load(base_path())['manifest'];
+        $manifest = $package->manifestIndex(base_path())['manifest'];
         $slug = 'drywall-and-ceiling-tile-installers-and-tapers';
         $valid = $manifest['identity_scopes'][$slug];
         foreach ([

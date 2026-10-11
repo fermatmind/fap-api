@@ -721,12 +721,12 @@ final class ArticleTranslationRevisionContractTest extends TestCase
 
         $editor = Livewire::test(EditArticle::class, ['record' => $article->getKey()]);
         $this->assertIsString($editor->get('data.cover_image_variants'));
-        $this->assertSame($variants, json_decode($editor->get('data.cover_image_variants'), true));
+        $this->assertJsonValueSame($variants, json_decode($editor->get('data.cover_image_variants'), true));
         $variants['hero']['width'] = 1200;
         $editor->fillForm(['cover_image_variants' => json_encode($variants, JSON_THROW_ON_ERROR)])
             ->call('save')->assertHasNoFormErrors();
         $after = $article->fresh();
-        $this->assertSame($variants, $after->cover_image_variants);
+        $this->assertJsonValueSame($variants, $after->cover_image_variants);
         $this->assertSame($before->content_md, $after->content_md);
         $this->assertSame($before->working_revision_id, $after->working_revision_id);
         $this->assertSame($before->published_revision_id, $after->published_revision_id);
@@ -748,18 +748,18 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $editor = Livewire::test(EditArticle::class, ['record' => $article->getKey()]);
         $editor->set('data.cover_media_asset_id', $asset->id);
         $selected = json_decode($editor->get('data.cover_image_variants'), true, 64, JSON_THROW_ON_ERROR);
-        $this->assertSame($variants['editorial_package_v1'], $selected['editorial_package_v1']);
+        $this->assertJsonValueSame($variants['editorial_package_v1'], $selected['editorial_package_v1']);
         $this->assertSame('https://assets.fermatmind.com/storage/media-library/hero.jpg', $selected['hero']['url']);
         $editor->call('save')->assertHasNoFormErrors();
         $variants = $selected;
-        $this->assertSame($variants, $article->fresh()->cover_image_variants);
+        $this->assertJsonValueSame($variants, $article->fresh()->cover_image_variants);
         $this->assertSame($revision, $article->fresh()->workingRevision->getAttributes());
 
         foreach (['{broken', '"[object Object]"', '[{"url":"wrong list"}]'] as $invalid) {
             Livewire::test(EditArticle::class, ['record' => $article->getKey()])
                 ->fillForm(['cover_image_variants' => $invalid])
                 ->call('save')->assertHasFormErrors(['cover_image_variants']);
-            $this->assertSame($variants, $article->fresh()->cover_image_variants);
+            $this->assertJsonValueSame($variants, $article->fresh()->cover_image_variants);
             $this->assertSame($revision, $article->fresh()->workingRevision->getAttributes());
         }
     }

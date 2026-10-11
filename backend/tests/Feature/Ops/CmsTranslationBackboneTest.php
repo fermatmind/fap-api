@@ -255,7 +255,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertNotSame((int) $revision->id, (int) $result['after']['working_revision_id']);
         $this->assertSame('draft', $result['after']['working_status']);
         $this->assertContains('seo_title', $result['after']['row_vs_published_payload_conflict_keys']);
-        $this->assertSame($oldPayload, $revision->fresh()->payload_json);
+        $this->assertJsonValueSame($oldPayload, $revision->fresh()->payload_json);
         $this->assertSame('published', $revision->fresh()->revision_status);
         $this->assertSame('EN body', $target->fresh()->content_md);
         $this->assertSame('published', $target->fresh()->status);
@@ -297,7 +297,7 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
         $this->assertSame((int) $revision->id, (int) $target->fresh()->published_revision_id);
         $this->assertSame('archived', $draft->fresh()->revision_status);
-        $this->assertSame($oldPayload, $revision->fresh()->payload_json);
+        $this->assertJsonValueSame($oldPayload, $revision->fresh()->payload_json);
         $this->assertSame('published', $target->fresh()->status);
         $this->assertSame(1, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_page_payload_draft_fork_restored')->count());
         $this->assertDatabaseCount('cms_translation_revisions', 2);
@@ -365,7 +365,7 @@ final class CmsTranslationBackboneTest extends TestCase
             unset($current['working_revision_id'], $current['updated_at'], $expected['working_revision_id'], $expected['updated_at']);
             $this->assertSame($expected, $current);
             $working = $saved->workingRevision;
-            $this->assertSame($payload, $working->payload_json);
+            $this->assertJsonValueSame($payload, $working->payload_json);
             $this->assertSame('draft', $working->revision_status);
             $this->assertNull($working->approved_at);
             $this->assertNull($working->reviewed_at);
@@ -444,8 +444,8 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->assertSame('draft@example.com', $savedPayload['support_contact']);
         $this->assertSame('draft-policy', $savedPayload['policy_version']);
         $this->assertSame('Draft Reviewer', $savedPayload['reviewer']);
-        $this->assertSame([['level' => 2, 'text' => 'Draft heading']], $savedPayload['headings_json']);
-        $this->assertSame([['question' => 'Draft question?', 'answer' => 'Draft answer.']], $savedPayload['faq_items']);
+        $this->assertJsonValueSame([['level' => 2, 'text' => 'Draft heading']], $savedPayload['headings_json']);
+        $this->assertJsonValueSame([['question' => 'Draft question?', 'answer' => 'Draft answer.']], $savedPayload['faq_items']);
         $this->assertTrue($savedPayload['schema_enabled']);
         $this->assertNull($after->support_contact);
         $this->assertFalse((bool) $after->schema_enabled);

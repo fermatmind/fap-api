@@ -48,7 +48,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             }
             $code = $record->variant->runtime_type_code;
             $response = $this->getJson('/api/v0.5/personality/'.strtolower($code).'/desktop-clone?locale=zh-CN')->assertOk();
-            $response->assertJsonPath('content.faq', $assets[$code]['faq']);
+            $this->assertJsonValueSame($assets[$code]['faq'], $response->json('content.faq'));
             foreach (MbtiResultChapterCopy::CHAPTERS as $chapter) {
                 $response->assertJsonPath('content.chapters.'.$chapter.'.intro', $assets[$code]['chapters'][$chapter]);
             }
@@ -83,7 +83,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             $this->assertStringContainsString('Content outside approved MBTI editorial text fields changed', $exception->getMessage());
         }
         $this->assertSame($before, PersonalityProfileVariantRevision::query()->count());
-        $this->assertSame($content, $record->fresh()->content_json);
+        $this->assertJsonValueSame($content, $record->fresh()->content_json);
     }
 
     public function test_chapter_promotion_rejects_an_edit_after_draft_without_overwriting_it(): void

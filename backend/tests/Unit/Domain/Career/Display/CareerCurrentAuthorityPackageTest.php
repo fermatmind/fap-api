@@ -42,11 +42,10 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
 
     public function test_it_validates_the_complete_current_authority_and_locked_provenance(): void
     {
-        ini_set('memory_limit', '2048M');
-
-        $package = (new CareerCurrentAuthorityPackageLoader(
+        $loader = new CareerCurrentAuthorityPackageLoader(
             new CareerContentV3AuthorityPackage,
-        ))->load(dirname(__DIR__, 5));
+        );
+        $package = $loader->indexForPublish(dirname(__DIR__, 5));
 
         self::assertSame(1046, $package['summary']['career_count']);
         self::assertSame(2092, $package['summary']['locale_page_count']);
@@ -61,18 +60,20 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
             $package['manifest']['set_hashes']['source_semantic_aggregate_sha256'],
             $package['summary']['versionless_projection_sha256'],
         );
-        foreach ($package['pages'] as $localized) {
+        foreach ($package['entries'] as $slug => $localized) {
             self::assertSame(['en', 'zh-CN'], array_keys($localized));
-            self::assertSame('career.detail.content.v3', $localized['en']['contract_version']);
-            self::assertSame('career.detail.content.v3', $localized['zh-CN']['contract_version']);
+            foreach (array_keys($localized) as $locale) {
+                self::assertSame('career.detail.content.v3', $loader->pageFromPublishIndex($package, $slug, $locale)['contract_version']);
+            }
         }
-        self::assertNotEmpty($package['pages']['accountants-and-auditors']['en']['blocks']);
-        self::assertNotEmpty($package['pages']['accountants-and-auditors']['zh-CN']['blocks']);
-        foreach ($package['pages'] as $slug => $localized) {
+        self::assertNotEmpty($loader->pageFromPublishIndex($package, 'accountants-and-auditors', 'en')['blocks']);
+        self::assertNotEmpty($loader->pageFromPublishIndex($package, 'accountants-and-auditors', 'zh-CN')['blocks']);
+        foreach ($package['entries'] as $slug => $localized) {
             if ($slug === 'accountants-and-auditors') {
                 continue;
             }
-            foreach ($localized as $page) {
+            foreach (array_keys($localized) as $locale) {
+                $page = $loader->pageFromPublishIndex($package, $slug, $locale);
                 if ($page['content_state'] === 'legacy') {
                     self::assertSame([], $page['blocks']);
                     self::assertNull($page['subject']['summary']);
@@ -85,7 +86,7 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         }
         self::assertSame($package['summary']['enhanced_locale_page_count'], $package['manifest']['coverage']['enhanced_locale_pages']);
         self::assertSame($package['summary']['legacy_locale_page_count'], $package['manifest']['coverage']['legacy_locale_pages']);
-        self::assertArrayNotHasKey('software-developers', $package['pages']);
+        self::assertArrayNotHasKey('software-developers', $package['entries']);
     }
 
     public function test_publish_runner_loads_authority_classes_before_validating_execution_contract(): void

@@ -411,13 +411,19 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertNotSame('0', $cache->versionToken('INTJ-A', 'en', 0, 'mbti'));
 
         $response = $this->getJson('/api/v0.5/personality/INTJ-A?locale=en');
-        $response->assertOk()
-            ->assertJsonPath('ok', true)
-            ->assertJsonCount(2, 'internal_links')
-            ->assertJsonPath('internal_links.0.key', 'variant_at_pair')
-            ->assertJsonPath('internal_links.0.label', 'Compare INTJ-A and INTJ-T')
-            ->assertJsonPath('internal_links.1.key', 'variant_to_comparison')
-            ->assertJsonPath('internal_links.1.label', 'INTJ-A vs INTJ-T');
+        $response->assertOk()->assertJsonPath('ok', true)
+            ->assertHeader('X-Fermat-Content-Authority', 'personality.page.content.v1');
+        $current = app(\App\Domain\Personality\Current\PersonalityCurrentPageReader::class)
+            ->payload('mbti', 'variant', 'intj-a', 'en');
+        $this->assertJsonValueSame($current['internal_links'], $response->json('internal_links'));
+        // The legacy CMS promotion remains exact but cannot override Current reader authority.
+        $section = PersonalityProfileVariantSection::query()
+            ->where('personality_profile_variant_id', PersonalityProfileVariant::query()->where('runtime_type_code', 'INTJ-A')->value('id'))
+            ->where('section_key', 'mbti_content15_internal_links')->firstOrFail();
+        $this->assertCount(2, $section->payload_json['items']);
+        $this->assertSame(['variant_at_pair', 'variant_to_comparison'], array_column($section->payload_json['items'], 'role'));
+        $this->assertSame(['Compare INTJ-A and INTJ-T', 'INTJ-A vs INTJ-T'], array_column($section->payload_json['items'], 'anchor_text'));
+        $this->assertSame(['/en/personality/intj-t', '/en/personality/intj-a-vs-intj-t'], array_column($section->payload_json['items'], 'href'));
 
         $reordered = PersonalityProfileVariantSection::query()
             ->orderBy('id')
