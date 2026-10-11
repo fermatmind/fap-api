@@ -416,11 +416,18 @@ final class EqExistingPublicPageWriterTest extends TestCase
         $localeContent = ['why_choose' => ['intro' => 'Original public intro', 'items' => array_fill(0, 4, ['body' => 'Original public body', 'link' => ['href' => '#original', 'label' => 'Original link']])],
             'faq' => array_fill(0, 11, ['a' => 'Original answer', 'q' => 'Original question', 'id' => 'original',
                 'references' => [['href' => 'https://example.org', 'label' => 'Original reference']], 'related_links' => [['href' => '#choose-version', 'label' => 'Original link']]])];
+        $content = ['en' => $localeContent, 'zh' => $localeContent];
+        // Install synthetic authority before exercising the real publisher; ordinary upsert must not replace a live intro.
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            DB::table($table)->where('org_id', 0)->where('code', 'EQ_60')->update([
+                'content_i18n_json' => json_encode($content, JSON_THROW_ON_ERROR),
+            ]);
+        }
         app(ScaleRegistryWriter::class)->upsertScale([
             'org_id' => 0, 'code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment',
             'slugs_json' => ['eq-test-emotional-intelligence-assessment'], 'driver_type' => 'eq_60',
             'default_locale' => 'en', 'is_public' => true, 'is_active' => true, 'is_indexable' => true,
-            'content_i18n_json' => ['en' => $localeContent, 'zh' => $localeContent],
+            'content_i18n_json' => $content,
         ]);
         foreach (['zh-CN', 'en'] as $locale) {
             $article = Article::query()->create(['org_id' => 0, 'slug' => 'eq-test-tool-guide', 'locale' => $locale,

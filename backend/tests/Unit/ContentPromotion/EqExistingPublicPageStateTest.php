@@ -78,11 +78,18 @@ final class EqExistingPublicPageStateTest extends TestCase
     private function seedNativeTargets(): void
     {
         config(['content_packs.public_scale_cache_store' => 'array']);
+        $content = ['en' => ['why_choose' => ['intro' => 'Original']], 'zh' => ['why_choose' => ['intro' => '原文']]];
+        // Fixture initialization is separate from the guarded runtime update contract.
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            DB::table($table)->where('org_id', 0)->where('code', 'EQ_60')->update([
+                'content_i18n_json' => json_encode($content, JSON_THROW_ON_ERROR),
+            ]);
+        }
         app(ScaleRegistryWriter::class)->upsertScale([
             'org_id' => 0, 'code' => 'EQ_60', 'primary_slug' => 'eq-test-emotional-intelligence-assessment',
             'slugs_json' => ['eq-test-emotional-intelligence-assessment'], 'driver_type' => 'eq_60',
             'default_locale' => 'en', 'is_public' => true, 'is_active' => true, 'is_indexable' => true,
-            'content_i18n_json' => ['en' => ['why_choose' => ['intro' => 'Original']], 'zh' => ['why_choose' => ['intro' => '原文']]],
+            'content_i18n_json' => $content,
         ]);
         foreach (['zh-CN', 'en'] as $locale) {
             $article = Article::query()->create(['org_id' => 0, 'slug' => 'eq-test-tool-guide', 'locale' => $locale,
