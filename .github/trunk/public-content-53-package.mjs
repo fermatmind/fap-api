@@ -71,14 +71,19 @@ export function workflowSignature(binding, key, source, run, attempt) {
 
 export function isPublic53OnlyPromotionRegistration(before, after) {
   const root = `        '${packagePath}',\n`;
+  const environment = "    'public_content_53_environment' => env('PUBLIC_CONTENT_53_ENVIRONMENT', 'production'),\n";
   const lane = ", 'PUBLIC-CONTENT-53' => 'audit_compatible'";
+  if (before.includes(root) && before.includes(lane) && !before.includes(environment)
+    && after.includes(environment) && after.replace(environment, '') === before) return true;
   return !before.includes(root) && !before.includes(lane) && after.includes(root) && after.includes(lane)
-    && after.replace(root, '').replace(lane, '') === before;
+    && after.replace(root, '').replace(lane, '').replace(environment, '') === before;
 }
 export function isPublic53OnlyContextFactoryChange(before, after) {
   const addition = `        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
-            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');
+            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.PublicContent53Package::environment();
         }
 `;
-  return !before.includes(addition) && after.includes(addition) && after.replace(addition, '') === before;
+  const legacy = addition.replace('PublicContent53Package::environment()', "(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')");
+  return after.includes(addition) && ((!before.includes(addition) && after.replace(addition, '') === before)
+    || (before.includes(legacy) && after.replace(addition, '') === before.replace(legacy, '')));
 }

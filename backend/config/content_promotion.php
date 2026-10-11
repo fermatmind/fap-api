@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'contract_version' => 'fermatmind.content_promotion.v2',
     'workflow_identity_key' => env('CONTENT_PROMOTION_AUTOMATION_KEY'),
+    'public_content_53_environment' => env('PUBLIC_CONTENT_53_ENVIRONMENT', 'production'),
     'execution' => [
         'source_commit' => env('CONTENT_PROMOTION_SOURCE_COMMIT'),
         'workflow_run_id' => env('CONTENT_PROMOTION_WORKFLOW_RUN_ID'),

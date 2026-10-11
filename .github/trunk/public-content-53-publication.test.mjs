@@ -14,12 +14,18 @@ test('fixed reviewed package covers exactly the existing native identities',()=>
  assert.ok(rows.every(x=>['en','zh-CN'].includes(x.identity.locale)));assert.equal(rows.filter(x=>x.kind==='profile').length,2);
 });
 test('public-only registration proof rejects unrelated policy or canonical changes',()=>{
- const config=readFileSync(resolve(root,'config/content_promotion.php'),'utf8');const base=config.replace("        'content_assets/public_content_53',\n",'').replace(", 'PUBLIC-CONTENT-53' => 'audit_compatible'",'');
+ const config=readFileSync(resolve(root,'config/content_promotion.php'),'utf8');const base=config.replace("    'public_content_53_environment' => env('PUBLIC_CONTENT_53_ENVIRONMENT', 'production'),\n",'').replace("        'content_assets/public_content_53',\n",'').replace(", 'PUBLIC-CONTENT-53' => 'audit_compatible'",'');
  assert.equal(isPublic53OnlyPromotionRegistration(base,config),true);
+ const legacyConfig=config.replace("    'public_content_53_environment' => env('PUBLIC_CONTENT_53_ENVIRONMENT', 'production'),\n",'');
+ assert.equal(isPublic53OnlyPromotionRegistration(legacyConfig,config),true);
+ assert.equal(isPublic53OnlyPromotionRegistration(legacyConfig,config.replace("'W2'","'W22'")),false);
  assert.equal(isPublic53OnlyPromotionRegistration(base,config.replace("'W2'", "'W22'")),false);
  const factory=readFileSync(resolve(root,'app/Services/ContentPromotion/PromotionContextFactory.php'),'utf8');
- const addition="        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {\n            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');\n        }\n";
+ const addition="        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {\n            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.PublicContent53Package::environment();\n        }\n";
  assert.equal(isPublic53OnlyContextFactoryChange(factory.replace(addition,''),factory),true);
+ const legacyFactory=factory.replace('PublicContent53Package::environment()',"(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')");
+ assert.equal(isPublic53OnlyContextFactoryChange(legacyFactory,factory),true);
+ assert.equal(isPublic53OnlyContextFactoryChange(legacyFactory,factory.replace('ksort($nested','sort($nested')),false);
  assert.equal(isPublic53OnlyContextFactoryChange(factory.replace(addition,''),factory.replace('ksort($nested','sort($nested')),false);
 });
 test('publication transport fails closed and recovers malformed phase counts',()=>{

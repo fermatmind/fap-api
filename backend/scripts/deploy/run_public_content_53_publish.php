@@ -105,6 +105,8 @@ try {
     require $root.'/vendor/autoload.php';
     $app = require $root.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
+    // The validated per-run environment must override the release config cache.
+    config(['content_promotion.public_content_53_environment' => $request['environment']]);
     $context = $app->make(PromotionContextFactory::class)->make(
         PublicContent53Package::PACKAGE, $request['package_sha256'], 'W3', PublicContent53PromotionAdapter::SUBSCOPE,
     );

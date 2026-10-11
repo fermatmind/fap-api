@@ -50,7 +50,7 @@ final class PromotionContextFactory
             (string) $expectedRowCount,
         ]);
         if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
-            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');
+            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.PublicContent53Package::environment();
         }
         if ($lane === 'W3' && $subscope === 'EQ-EXISTING-PUBLIC-PAGES') {
             $signatureMaterial .= '|'.$executorReleaseSha256;

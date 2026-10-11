@@ -125,7 +125,7 @@ final class PublicContent53Package
 
     public static function environment(): string
     {
-        $value = getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production';
+        $value = config('content_promotion.public_content_53_environment', 'production');
         if (! in_array($value, ['staging', 'production'], true)) {
             throw new DomainException('public_content_53_environment_invalid');
         }

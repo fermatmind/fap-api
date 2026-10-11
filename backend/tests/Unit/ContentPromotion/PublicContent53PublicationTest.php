@@ -62,16 +62,10 @@ final class PublicContent53PublicationTest extends TestCase
         return [[false], [true]];
     }
 
-    protected function tearDown(): void
-    {
-        putenv('PUBLIC_CONTENT_53_ENVIRONMENT');
-        parent::tearDown();
-    }
-
     #[DataProvider('environments')]
     public function test_fixed_native_transaction_roundtrip_preserves_drafts_and_qualification(string $environment): void
     {
-        putenv('PUBLIC_CONTENT_53_ENVIRONMENT='.$environment);
+        config(['content_promotion.public_content_53_environment' => $environment]);
         $this->seedTargets();
         $states = app(PublicContent53State::class);
         $before = $states->read($this->digest());
@@ -106,7 +100,7 @@ final class PublicContent53PublicationTest extends TestCase
         $before = $states->read($this->digest());
         $armed = true;
         DB::listen(function ($query) use (&$armed): void {
-            if ($armed && str_starts_with($query->sql, 'update "topic_profiles"')) {
+            if ($armed && preg_match('/^update [`"]topic_profiles[`"]/i', $query->sql) === 1) {
                 $armed = false;
                 throw new DomainException('injected_late_failure');
             }
@@ -196,6 +190,9 @@ final class PublicContent53PublicationTest extends TestCase
 require 'vendor/autoload.php';
 $app = require 'bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+if (isset($argv[2])) {
+    config(['content_promotion.public_content_53_environment' => $argv[2]]);
+}
 try {
     $context = $app->make(App\Services\ContentPromotion\PromotionContextFactory::class)
         ->make(App\Services\ContentPromotion\PublicContent53Package::PACKAGE, $argv[1], 'W3', 'PUBLIC-CONTENT-53');
@@ -208,6 +205,24 @@ PHP;
             $process = new Process([PHP_BINARY, '-r', $script, $this->digest()], base_path(), array_replace($environment, $override));
             $process->mustRun();
             self::assertSame($override === [] ? str_repeat('b', 64) : 'workflow_identity_signature_invalid', $process->getOutput());
+        }
+        $cached = config()->all();
+        $cached['content_promotion']['workflow_identity_key'] = $key;
+        $cached['content_promotion']['public_content_53_environment'] = 'production';
+        $cachePath = tempnam(sys_get_temp_dir(), 'public53-config-');
+        file_put_contents($cachePath, '<?php return '.var_export($cached, true).';');
+        chmod($cachePath, 0600);
+        $stage = array_replace($environment, ['APP_CONFIG_CACHE' => $cachePath, 'PUBLIC_CONTENT_53_ENVIRONMENT' => 'staging']);
+        $stage['CONTENT_PROMOTION_WORKFLOW_SIGNATURE'] = hash_hmac('sha256', implode('|', ['content-promotion-v2', str_repeat('a', 40), '123456', '1',
+            'W3', 'PUBLIC-CONTENT-53', $this->digest(), $policy, '50', str_repeat('b', 64), 'staging']), $key);
+        try {
+            foreach ([[], ['staging']] as $override) {
+                $process = new Process([PHP_BINARY, '-r', $script, $this->digest(), ...$override], base_path(), $stage);
+                $process->mustRun();
+                self::assertSame($override === [] ? 'workflow_identity_signature_invalid' : str_repeat('b', 64), $process->getOutput());
+            }
+        } finally {
+            unlink($cachePath);
         }
     }
 
@@ -288,7 +303,7 @@ PHP;
         $draft = $revision->replicate();
         $draft->forceFill(['revision_number' => 2, 'revision_status' => 'machine_draft', 'content_md' => 'Private operator draft'])->save();
         $article->forceFill(['published_revision_id' => $revision->id, 'working_revision_id' => $draft->id])->saveQuietly();
-        ArticleSeoMeta::query()->create(['article_id' => $article->id, 'org_id' => 0, 'locale' => $article->locale, 'seo_title' => $article->title, 'seo_description' => $article->excerpt]);
+        ArticleSeoMeta::query()->create(['article_id' => $article->id, 'org_id' => 0, 'locale' => $article->locale, 'seo_title' => mb_substr($article->title, 0, 60), 'seo_description' => mb_substr($article->excerpt, 0, 160)]);
 
         return $article;
     }
