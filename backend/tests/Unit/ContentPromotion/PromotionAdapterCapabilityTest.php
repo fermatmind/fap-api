@@ -48,8 +48,8 @@ final class PromotionAdapterCapabilityTest extends TestCase
         $registry = app(PromotionAdapterRegistry::class);
         $capabilities = $registry->capabilitiesByLaneSubscope();
 
-        self::assertCount(16, $capabilities);
-        self::assertCount(16, $registry->capabilities());
+        self::assertCount(17, $capabilities);
+        self::assertCount(17, $registry->capabilities());
         self::assertSame('audit_compatible', $capabilities['W1/mbti-comparisons']);
         self::assertSame('audit_compatible', $capabilities['W1/mbti-results']);
         self::assertSame('audit_compatible', $capabilities['W2/big-five']);
@@ -58,6 +58,7 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertSame('audit_compatible', $capabilities['W3/EQ-EXISTING-PUBLIC-PAGES']);
         self::assertSame('audit_compatible', $capabilities['W3/IQ-PUBLIC-ARTICLES']);
         self::assertSame('audit_compatible', $capabilities['W3/IQ-EQ-TOPIC']);
+        self::assertSame('audit_compatible', $capabilities['W3/PUBLIC-CONTENT-53']);
         self::assertSame('audit_compatible', $capabilities['W6/iq-public-scale']);
         self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
         self::assertSame('audit_compatible', $capabilities['W3/W3-CAREER-GUIDES']);
@@ -65,7 +66,7 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertSame('audit_compatible', $capabilities['W4/riasec']);
         self::assertSame('audit_compatible', $capabilities['W7/eq']);
         self::assertSame('audit_compatible', $capabilities['TOP100/frozen-20260812-v1']);
-        self::assertSame(15, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(16, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
         self::assertSame(1, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 

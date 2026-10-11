@@ -22,7 +22,7 @@ final class RiasecTechnicalNoteService
     /**
      * @return array<string,mixed>
      */
-    public function contract(): array
+    public function contract(string $locale = 'zh-CN'): array
     {
         $standard = $this->measurementContract->forFormCode('riasec_60', 60);
         $enhanced = $this->measurementContract->forFormCode('riasec_140', 140);
@@ -31,12 +31,13 @@ final class RiasecTechnicalNoteService
             'technical_note_v1' => [
                 'schema_version' => self::SCHEMA_VERSION,
                 'scale_code' => 'RIASEC',
+                'canonical_locale' => $locale,
                 'technical_note_version' => self::TECHNICAL_NOTE_VERSION,
                 'measurement_contract_version' => RiasecMeasurementContract::SCHEMA_VERSION,
                 'method_boundary_version' => self::METHOD_BOUNDARY_VERSION,
-                'sections' => $this->sections(),
-                'method_boundaries' => $this->methodBoundaries(),
-                'lifecycle_copy_v1' => $this->lifecycleCopy->lifecycleCopyContract(),
+                'sections' => $this->sections($locale),
+                'method_boundaries' => $this->methodBoundaries($locale),
+                'lifecycle_copy_v1' => $this->lifecycleCopy->lifecycleCopyContract(locale: $locale),
                 'form_contracts' => [
                     'riasec_60' => [
                         'form_code' => 'riasec_60',
@@ -82,7 +83,7 @@ final class RiasecTechnicalNoteService
                         'cross_form_raw_score_delta',
                     ],
                 ],
-                'disclaimers' => $this->disclaimers(),
+                'disclaimers' => $this->disclaimers($locale),
                 'generated_at' => CarbonImmutable::now()->toIso8601String(),
             ],
         ];
@@ -91,10 +92,10 @@ final class RiasecTechnicalNoteService
     /**
      * @return list<array<string,string>>
      */
-    private function sections(): array
+    private function sections(string $locale): array
     {
         $sections = [];
-        foreach ($this->lifecycleCopy->technicalNoteSummarySections() as $section) {
+        foreach (($locale === 'en' ? $this->englishCopy()['summary_sections'] : $this->lifecycleCopy->technicalNoteSummarySections($locale)) as $section) {
             if ($section['section_key'] === '' || $section['data_status'] === '') {
                 continue;
             }
@@ -113,16 +114,21 @@ final class RiasecTechnicalNoteService
     /**
      * @return array<string,array<string,string>>
      */
-    private function methodBoundaries(): array
+    private function methodBoundaries(string $locale): array
     {
-        return $this->lifecycleCopy->technicalNoteRuntimeContract()['method_boundaries'];
+        return $locale === 'en' ? $this->englishCopy()['runtime_method_boundaries'] : $this->lifecycleCopy->technicalNoteRuntimeContract($locale)['method_boundaries'];
     }
 
     /**
      * @return list<array<string,string>>
      */
-    private function disclaimers(): array
+    private function englishCopy(): array
     {
-        return $this->lifecycleCopy->technicalNoteRuntimeContract()['disclaimers'];
+        return json_decode(file_get_contents(base_path('content_assets/public_content_53/riasec_technical_note.en.json')), true, 32, JSON_THROW_ON_ERROR);
+    }
+
+    private function disclaimers(string $locale): array
+    {
+        return $locale === 'en' ? $this->englishCopy()['runtime_disclaimers'] : $this->lifecycleCopy->technicalNoteRuntimeContract($locale)['disclaimers'];
     }
 }

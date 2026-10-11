@@ -67,6 +67,9 @@ final class PromotionContextFactory
         if ($lane === 'W3' && $subscope === 'IQ-EQ-TOPIC') {
             $signatureMaterial .= '|'.$executorReleaseSha256;
         }
+        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
+            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');
+        }
         if (strlen($workflowIdentityKey) < 32
             || preg_match('/\A[a-f0-9]{64}\z/', $workflowSignature) !== 1
             || ! hash_equals(hash_hmac('sha256', $signatureMaterial, $workflowIdentityKey), $workflowSignature)) {

@@ -21,15 +21,16 @@ final class EnneagramTechnicalNoteService
     /**
      * @return array<string,mixed>
      */
-    public function contract(): array
+    public function contract(string $locale = 'zh-CN'): array
     {
-        $pack = $this->packLoader->loadRegistryPack();
+        $pack = $this->packLoader->loadRegistryPack(locale: $locale);
         $manifest = is_array($pack['manifest'] ?? null) ? $pack['manifest'] : [];
         $registry = is_array($pack['technical_note_registry'] ?? null) ? $pack['technical_note_registry'] : [];
         $methodRegistry = is_array($pack['method_registry'] ?? null) ? $pack['method_registry'] : [];
         $releaseHash = trim((string) ($pack['release_hash'] ?? ''));
         $authority = is_array($pack['authority'] ?? null) ? $pack['authority'] : [];
 
+        $publicCopy = $locale === 'en' ? json_decode(file_get_contents(base_path('content_assets/public_content_53/enneagram_public_copy.en.json')), true, 64, JSON_THROW_ON_ERROR) : null;
         $sections = [];
         foreach ((array) ($registry['entries'] ?? []) as $entry) {
             if (! is_array($entry)) {
@@ -41,6 +42,13 @@ final class EnneagramTechnicalNoteService
                 continue;
             }
 
+            if ($publicCopy !== null) {
+                $copy = $publicCopy['sections'][$sectionKey] ?? null;
+                if (! is_array($copy)) {
+                    throw new \DomainException('technical_note_section_locale_unavailable');
+                }
+                $entry = array_replace($entry, $copy);
+            }
             $sections[] = [
                 'section_key' => $sectionKey,
                 'title' => trim((string) ($entry['title'] ?? '')),
@@ -66,8 +74,8 @@ final class EnneagramTechnicalNoteService
                 'canonical_locale' => $authority['locale'] ?? null,
                 'technical_note_version' => self::TECHNICAL_NOTE_VERSION,
                 'sections' => $sections,
-                'method_boundaries' => $this->methodBoundaries($methodRegistry),
-                'metric_definitions' => $this->metricCatalog->publicDefinitions(),
+                'method_boundaries' => $this->methodBoundaries($methodRegistry, $publicCopy['method_boundaries'] ?? null),
+                'metric_definitions' => $this->publicMetrics($locale),
                 'data_status_summary' => [
                     'sections' => $this->sectionStatusSummary($sections),
                     'metrics' => $this->metricCatalog->publicDataStatusSummary(),
@@ -76,10 +84,30 @@ final class EnneagramTechnicalNoteService
                     'pending_sample' => $this->sectionKeysByStatus($sections, 'pending_sample'),
                     'not_claimed' => ['clinical_validity', 'hiring_screening_suitability', 'cross_form_numeric_equivalence'],
                 ],
-                'disclaimers' => array_values((array) data_get($pack, 'surface_registry.entries.technical_note.disclaimers', [])),
+                'disclaimers' => $publicCopy['disclaimers'] ?? array_values((array) data_get($pack, 'surface_registry.entries.technical_note.disclaimers', [])),
+                'public_copy_sha256' => $locale === 'en' ? hash_file('sha256', base_path('content_assets/public_content_53/enneagram_public_copy.en.json')) : null,
                 'generated_at' => CarbonImmutable::now()->toIso8601String(),
             ],
         ];
+    }
+
+    private function publicMetrics(string $locale): array
+    {
+        $metrics = $this->metricCatalog->publicDefinitions();
+        if ($locale !== 'en') {
+            return $metrics;
+        }
+        $copy = json_decode(file_get_contents(base_path('content_assets/public_content_53/enneagram_metrics.en.json')), true, 32, JSON_THROW_ON_ERROR);
+        foreach ($metrics as &$metric) {
+            $translated = $copy[$metric['metric_key']] ?? null;
+            if (! is_array($translated) || array_keys($translated) !== ['label', 'description', 'numerator_source', 'denominator_source', 'minimum_sample_guidance', 'privacy_notes']) {
+                throw new \DomainException('technical_note_metric_locale_unavailable');
+            }
+            $metric = array_replace($metric, $translated);
+        }
+        unset($metric);
+
+        return $metrics;
     }
 
     private function mapRegistryDataStatus(string $status): string
@@ -96,7 +124,7 @@ final class EnneagramTechnicalNoteService
      * @param  array<string,mixed>  $methodRegistry
      * @return array<string,mixed>
      */
-    private function methodBoundaries(array $methodRegistry): array
+    private function methodBoundaries(array $methodRegistry, ?array $publicCopy = null): array
     {
         $entries = [];
         foreach ((array) ($methodRegistry['entries'] ?? []) as $entry) {
@@ -108,6 +136,12 @@ final class EnneagramTechnicalNoteService
                 continue;
             }
 
+            if ($publicCopy !== null) {
+                if (! isset($publicCopy[$key])) {
+                    throw new \DomainException('technical_note_method_locale_unavailable');
+                }
+                $entry = array_replace($entry, $publicCopy[$key]);
+            }
             $entries[$key] = [
                 'label' => trim((string) ($entry['label'] ?? '')),
                 'copy' => trim((string) ($entry['copy'] ?? '')),

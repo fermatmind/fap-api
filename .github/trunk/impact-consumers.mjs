@@ -5,6 +5,7 @@ import { isEqExistingOnlyPromotionRegistration, isEqExistingOnlyContextFactoryCh
 import { isIqOnlyPromotionRegistration, isIqOnlyContextFactoryChange } from './iq-public-scale-package.mjs';
 import { isIqArticleOnlyPromotionRegistration, isIqArticleOnlyContextFactoryChange } from './iq-public-article-package.mjs';
 import { isIqEqTopicOnlyPromotionRegistration, isIqEqTopicOnlyContextFactoryChange } from './iq-eq-topic-package.mjs';
+import { isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 // Resolve actual PHP consumers through App symbols and literal configuration reads.
 // Dynamic container bindings, routes, schema, bootstrap and dependency inputs are shared.
 export function phpConsumers(root = process.cwd()) {
@@ -51,13 +52,13 @@ export function selectOperations(paths, root=process.cwd(), range={}) {
   if (paths.includes('backend/config/content_promotion.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
     try {
       const read=sha=>execFileSync('git',['show',`${sha}:backend/config/content_promotion.php`],{cwd:root,encoding:'utf8'});
-      publicOnlyRegistration=isEqExistingOnlyPromotionRegistration(read(range.base),read(range.head))||isEqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqArticleOnlyPromotionRegistration(read(range.base),read(range.head))||isIqEqTopicOnlyPromotionRegistration(read(range.base),read(range.head));
+      publicOnlyRegistration=isPublic53OnlyPromotionRegistration(read(range.base),read(range.head))||isEqExistingOnlyPromotionRegistration(read(range.base),read(range.head))||isEqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqOnlyPromotionRegistration(read(range.base),read(range.head))||isIqArticleOnlyPromotionRegistration(read(range.base),read(range.head))||isIqEqTopicOnlyPromotionRegistration(read(range.base),read(range.head));
     } catch { /* Indeterminate changes retain every conservative private consumer. */ }
   }
   if (paths.includes('backend/app/Services/ContentPromotion/PromotionContextFactory.php') && /^[a-f0-9]{40}$/.test(range.base??'') && /^[a-f0-9]{40}$/.test(range.head??'')) {
     try {
       const read=sha=>execFileSync('git',['show',`${sha}:backend/app/Services/ContentPromotion/PromotionContextFactory.php`],{cwd:root,encoding:'utf8'});
-      iqArticleSignatureOnly=isEqExistingOnlyContextFactoryChange(read(range.base),read(range.head))||isIqOnlyContextFactoryChange(read(range.base),read(range.head))||isIqArticleOnlyContextFactoryChange(read(range.base),read(range.head))||isIqEqTopicOnlyContextFactoryChange(read(range.base),read(range.head));
+      iqArticleSignatureOnly=isPublic53OnlyContextFactoryChange(read(range.base),read(range.head))||isEqExistingOnlyContextFactoryChange(read(range.base),read(range.head))||isIqOnlyContextFactoryChange(read(range.base),read(range.head))||isIqArticleOnlyContextFactoryChange(read(range.base),read(range.head))||isIqEqTopicOnlyContextFactoryChange(read(range.base),read(range.head));
     } catch { /* Unknown Factory changes retain all private consumers. */ }
   }
   const privatePaths=paths.filter(path=>!(publicOnlyRegistration&&path==='backend/config/content_promotion.php') && !(iqArticleSignatureOnly&&path==='backend/app/Services/ContentPromotion/PromotionContextFactory.php'));

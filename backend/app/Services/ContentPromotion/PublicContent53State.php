@@ -1,0 +1,176 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\ContentPromotion;
+
+use App\Http\Controllers\API\V0_5\Cms\ArticleController;
+use App\Http\Controllers\API\V0_5\Cms\ContentPageController;
+use App\Http\Controllers\API\V0_5\Cms\LandingSurfaceController;
+use App\Http\Controllers\API\V0_5\Cms\TopicController;
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
+use App\Models\ContentPage;
+use DomainException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+/** Private rollback state and the real public consumer projection. */
+final class PublicContent53State
+{
+    public function __construct(private readonly PublicContent53Package $package) {}
+
+    public function read(string $sha, bool $lock = false): array
+    {
+        if ($lock && DB::transactionLevel() < 1) {
+            throw new DomainException('public_content_53_lock_requires_transaction');
+        }
+        $state = [];
+        foreach ($this->package->read(base_path(), $sha)['candidates'] as $row) {
+            $table = ['article' => 'articles', 'page' => 'content_pages', 'surface' => 'landing_surfaces', 'profile' => 'topic_profiles'][$row['kind']];
+            $where = $row['identity'];
+            if ($row['kind'] === 'surface') {
+                $where['surface_key'] = $where['slug'];
+                unset($where['slug']);
+            }
+            $records = $this->query($table, $where, $lock);
+            if (count($records) !== 1 || $records[0]['status'] !== 'published' || ! (bool) $records[0]['is_public']
+                || ($records[0]['deleted_at'] ?? null) !== null) {
+                throw new DomainException('public_content_53_identity_or_hold');
+            }
+            $values = $records[0];
+            foreach (['published_at', 'scheduled_at'] as $field) {
+                if (($values[$field] ?? null) !== null && strtotime($values[$field]) > time()) {
+                    throw new DomainException('public_content_53_future_publication');
+                }
+            }
+            $saved = ['table' => $table, 'values' => $values, 'relations' => []];
+            if ($row['kind'] === 'article') {
+                $published = $this->query('article_translation_revisions', ['id' => $values['published_revision_id'] ?? 0], $lock);
+                $working = $this->query('article_translation_revisions', ['id' => $values['working_revision_id'] ?? 0], $lock);
+                if (count($published) !== 1 || count($working) !== 1) {
+                    throw new DomainException('public_content_53_article_revision_missing');
+                }
+                $article = new Article;
+                $article->setRawAttributes($values, true);
+                $revision = new ArticleTranslationRevision;
+                $revision->setRawAttributes($published[0], true);
+                if (! $revision->isPubliclyReadableForArticle($article)) {
+                    throw new DomainException('public_content_53_article_revision_hold');
+                }
+                $saved['published'] = $published[0];
+                $saved['working'] = $working[0];
+                // Source rows and divergent drafts enter the CAS boundary too.
+                $sourceId = $values['source_article_id'] ?? $values['translated_from_article_id'] ?? $values['id'];
+                $saved['source'] = $this->query('articles', ['id' => $sourceId], $lock);
+                $saved['relations']['article_seo_meta'] = $this->query('article_seo_meta', ['article_id' => $values['id']], $lock);
+            } elseif ($row['kind'] === 'page') {
+                $page = new ContentPage;
+                $page->setRawAttributes($values, true);
+                if (! $page->passesPublicReadinessGate()) {
+                    throw new DomainException('public_content_53_page_hold');
+                }
+                $saved['published'] = $this->query('cms_translation_revisions', ['id' => $values['published_revision_id'] ?? 0], $lock);
+                $saved['working'] = $this->query('cms_translation_revisions', ['id' => $values['working_revision_id'] ?? 0], $lock);
+                $saved['source'] = $values['source_content_id'] ? $this->query('content_pages', ['id' => $values['source_content_id']], $lock) : [];
+            } elseif ($row['kind'] === 'profile') {
+                foreach (['topic_profile_sections', 'topic_profile_entries', 'topic_profile_seo_meta'] as $related) {
+                    $saved['relations'][$related] = $this->query($related, ['profile_id' => $values['id']], $lock);
+                }
+            } else {
+                $saved['relations']['page_blocks'] = $this->query('page_blocks', ['landing_surface_id' => $values['id']], $lock);
+            }
+            $state[$row['page_id']] = $saved;
+        }
+
+        return $state;
+    }
+
+    public function projection(array $row): array
+    {
+        $paths = ['article' => 'articles', 'page' => 'content-pages', 'surface' => 'landing-surfaces', 'profile' => 'topics'];
+        $controllers = ['article' => ArticleController::class, 'page' => ContentPageController::class,
+            'surface' => LandingSurfaceController::class, 'profile' => TopicController::class];
+        $request = Request::create('/api/v0.5/'.$paths[$row['kind']].'/'.$row['identity']['slug'], 'GET', ['org_id' => 0, 'locale' => $row['identity']['locale']]);
+        $response = app($controllers[$row['kind']])->show($request, $row['identity']['slug']);
+        $data = $response->getData(true);
+        $value = $data[$row['kind']] ?? null;
+        if ($response->getStatusCode() !== 200 || ($data['ok'] ?? null) !== true || ! is_array($value)
+            || ($value['locale'] ?? null) !== $row['identity']['locale']) {
+            throw new DomainException('public_content_53_public_consumer_unavailable');
+        }
+        $projection = array_intersect_key($value, $row['snapshot']);
+        if ($row['kind'] === 'profile') {
+            $projection['sections'] = $data['sections'];
+            $projection['entry_groups'] = $data['entry_groups'];
+            $projection['seo_text'] = ['title' => $data['seo_meta']['seo_title'], 'description' => $data['seo_meta']['seo_description']];
+        }
+
+        return $projection;
+    }
+
+    public function assertBaseline(array $rows): void
+    {
+        foreach ($rows as $row) {
+            $projection = $this->projection($row);
+            // A staging environment may already contain the accepted candidate.
+            if ($this->hash($projection) !== $this->hash(PublicContent53Package::before($row)) && $this->hash($projection) !== $this->hash($row['snapshot'])) {
+                throw new DomainException('public_content_53_reviewed_prestate_drift');
+            }
+        }
+    }
+
+    public function assertLockedBaseline(array $rows, array $state): void
+    {
+        foreach ($rows as $row) {
+            $saved = $state[$row['page_id']];
+            if ($row['kind'] === 'profile') {
+                $projection = $this->projection($row); // Topic readers have no cache.
+            } else {
+                $values = $row['kind'] === 'article' ? $saved['published'] : $saved['values'];
+                $projection = [];
+                foreach ($row['snapshot'] as $field => $_) {
+                    $value = $values[$field] ?? null;
+                    if (in_array($field, ['faq_items', 'payload_json'], true)) {
+                        $value = is_string($value) ? json_decode($value, true, 64, JSON_THROW_ON_ERROR) : ($value ?? []);
+                    }
+                    $projection[$field] = $value;
+                }
+            }
+            if ($this->hash($projection) !== $this->hash(PublicContent53Package::before($row)) && $this->hash($projection) !== $this->hash($row['snapshot'])) {
+                throw new DomainException('public_content_53_locked_copy_drift');
+            }
+            foreach ((PublicContent53Package::environment() === 'staging' ? $row['staging_source_identity'] : $row['source_identity']) as $field => $expected) {
+                // Revision numbers are environment-local; the current revision
+                // and all source bindings are locked in the private state CAS.
+                if (in_array($field, ['id', 'published_revision_id', 'source_article_id'], true)) {
+                    continue;
+                }
+                if (($saved['values'][$field] ?? null) !== $expected) {
+                    throw new DomainException('public_content_53_locked_identity_drift');
+                }
+            }
+        }
+    }
+
+    public function assertPublished(array $rows, array $state): void
+    {
+        foreach ($rows as $row) {
+            if ($this->hash($this->projection($row)) !== $this->hash($row['snapshot'])) {
+                throw new DomainException('public_content_53_public_readback_drift');
+            }
+        }
+    }
+
+    public function hash(array $value): string
+    {
+        return hash('sha256', PromotionContextFactory::canonicalJson($value));
+    }
+
+    private function query(string $table, array $where, bool $lock): array
+    {
+        $query = DB::table($table)->where($where)->orderBy('id');
+
+        return ($lock ? $query->lockForUpdate() : $query)->get()->map(static fn (object $record): array => (array) $record)->all();
+    }
+}

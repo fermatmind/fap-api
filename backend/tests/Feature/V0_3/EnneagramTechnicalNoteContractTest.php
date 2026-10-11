@@ -56,4 +56,20 @@ final class EnneagramTechnicalNoteContractTest extends TestCase
             'test_goal',
         ], $sectionKeys);
     }
+
+    public function test_english_projection_is_complete_and_unsupported_locale_fails_closed(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        $zh = $this->getJson('/api/v0.3/scales/ENNEAGRAM/technical-note?locale=zh-CN')->assertOk()->json('technical_note_v1');
+        $en = $this->getJson('/api/v0.3/scales/ENNEAGRAM/technical-note?locale=en')->assertOk()->json('technical_note_v1');
+        self::assertSame('en', $en['canonical_locale']);
+        self::assertSame(array_column($zh['sections'], 'section_key'), array_column($en['sections'], 'section_key'));
+        self::assertSame(array_column($zh['sections'], 'data_status'), array_column($en['sections'], 'data_status'));
+        self::assertSame(array_keys($zh['method_boundaries']), array_keys($en['method_boundaries']));
+        self::assertSame(array_column($zh['disclaimers'], 'key'), array_column($en['disclaimers'], 'key'));
+        $visible = [$en['sections'], $en['method_boundaries'], $en['disclaimers'], $en['metric_definitions'] ?? []];
+        self::assertSame(0, preg_match('/\p{Han}/u', json_encode($visible, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)));
+        self::assertSame($zh['data_status_summary'], $en['data_status_summary']);
+        $this->getJson('/api/v0.3/scales/ENNEAGRAM/technical-note?locale=fr')->assertStatus(422);
+    }
 }

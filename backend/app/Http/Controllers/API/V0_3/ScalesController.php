@@ -136,9 +136,14 @@ class ScalesController extends Controller
         }
 
         $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
+        $locale = trim((string) $request->query('locale', $request->header('X-FAP-Locale', 'zh-CN')));
+        if (! in_array($locale, ['en', 'zh', 'zh-CN'], true)) {
+            return response()->json(['ok' => false, 'error_code' => 'INVALID_LOCALE'], 422);
+        }
+        $locale = $locale === 'en' ? 'en' : 'zh-CN';
         $contract = $resolvedScaleCode === 'RIASEC'
-            ? $riasecTechnicalNoteService->contract()
-            : $enneagramTechnicalNoteService->contract();
+            ? $riasecTechnicalNoteService->contract($locale)
+            : $enneagramTechnicalNoteService->contract($locale);
 
         return response()->json(array_merge([
             'ok' => true,

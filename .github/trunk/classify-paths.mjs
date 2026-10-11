@@ -194,6 +194,8 @@ export function classifyPaths(inputPaths) {
       || /^backend\/(?:tests\/|lang\/(?:en|zh_CN)\/seo-council\.php$|resources\/views\/filament\/ops\/components\/ops-(?:system-health|trace-drilldown)-workspace\.blade\.php$)/.test(path)
       || /^\.github\/(?:trunk\/|workflows\/(?:ci|deploy)\.yml$)/.test(path));
   const operations = {
+    public_content_53_publish: paths.some(path => path.startsWith("backend/content_assets/public_content_53/")),
+    public_content_53_checks: paths.some(path => /PublicContent53|public.content.53/.test(path)),
     iq_eq_topic_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/20261010-v1/")),
     iq_eq_topic_checks: paths.some(path => path.startsWith("backend/content_assets/iq_public/topics/") || /IqEqTopic/.test(path) || /iq-eq-topic/.test(path) || path === "backend/scripts/deploy/run_iq_eq_topic_publish.php"),
     iq_public_articles_publish: paths.some(path => path.startsWith("backend/content_assets/iq_public/articles/20261010-v1/")),

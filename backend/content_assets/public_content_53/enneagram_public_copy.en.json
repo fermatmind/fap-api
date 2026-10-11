@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "test_goal": {
+      "title": "Test target",
+      "body": "The FermatMind Enneagram Test provides readable and observable hypotheses about personality patterns. It presents a primary candidate, top three candidates, the full nine-type profile, and close-call comparison before returning the reader to real situations. The technical note explains how modules are derived from response signals and interpretation rules, and which content remains theoretical or provisional."
+    },
+    "e105_fc144_forms": {
+      "title": "E105 and FC144 two forms",
+      "body": "The E105 five-point Likert form uses rating responses to form a full nine-type profile and top three candidates. The FC144 two-option forced-choice form records relative preference signals across paired choices. Both forms have the same evidence status but different response tasks and scoring sources; FC144 does not overwrite E105's primary candidate."
+    },
+    "score_space_boundary": {
+      "title": "Score space boundary",
+      "body": "E105 scores come from rating intensity; FC144 scores come from relative preferences in paired choices. The results share a presentation format, but their numbers have different meanings and cannot be directly compared. Sharing one interpretation model does not mean sharing one score space."
+    },
+    "dominance_gap": {
+      "title": "Dominance Gap",
+      "body": "Dominance Gap describes the relative gap between Top1 and Top2 in the same form and the same score space, and is used to help the system choose a conservative tone of clear, close-call or diffuse. E105 is different from the question types and scoring units of FC144. The gap cannot be used as a unified ruler across forms, groups, or time; nor is it a measurement error range, statistical confidence interval, norm ranking, external validity proof, or personality certainty."
+    },
+    "confidence_band": {
+      "title": "Confidence Band",
+      "body": "Interpretation states describe a clearer leading pattern, close leading candidates, a diffuse pattern or limited response quality. They control wording, module visibility and suggested actions; they do not prove one type. A clearer pattern is concentrated within this response and form; close candidates need side-by-side reading; a diffuse pattern needs less certainty about one type; limited response quality cannot support strong interpretations."
+    },
+    "close_call": {
+      "title": "Close-call",
+      "body": "When the two leading candidates are close, the page offers side-by-side comparison and seven-day observation rather than a forced choice. A close-call manages uncertainty; it does not change the measured result."
+    },
+    "diffuse": {
+      "title": "Diffuse",
+      "body": "A diffuse profile contains several type signals without a clear leading pattern. This reduces certainty about one type; it does not mean failure, invalidity, confusion or poor response quality. Read the three leading candidates, center distribution and counterexamples from recent real situations, then use repeatable observation tasks. Narrow the interpretation only when those clues recur in actual situations."
+    },
+    "low_quality": {
+      "title": "Response-quality limits",
+      "body": "When response-quality signals are triggered, the interpretation is narrowed and retaking the same form is suggested. This labels the limits of this response, not the person’s reliability."
+    },
+    "retake_stability": {
+      "title": "Retake Stability",
+      "body": "Test-retest stability is an indicator that will be tracked in subsequent Technical Notes. This version first discloses the definition and collection plan, and does not commit to specific stability rate figures in advance. Stability evidence needs to distinguish between retests of the same form, cross-form agreement, short-term status fluctuations, and user feedback; when the sample, time interval, and answer quality are insufficient, the page will not interpret a retest difference as a personality change."
+    },
+    "e105_fc144_agreement": {
+      "title": "E105 / FC144 Agreement",
+      "body": "The agreement between E105 and FC144 is used to evaluate the overlap between the two question types on Top1 or Top3, rather than proving that the scores can be directly compared between the two. This version first defines indicators and collection directions, and then evaluates whether to disclose specific indicators based on samples. Agreement can only show the degree of agreement between the two question types in the ranking of candidates, and cannot independently prove the external validity, clinical validity or career prediction ability of the Enneagram model."
+    },
+    "resonance_feedback": {
+      "title": "Resonance Feedback",
+      "body": "Day-seven feedback and the type the user recognizes after observation are recorded as self-observation evidence for research and content calibration. They do not silently overwrite the measured leading candidate. Feedback can suggest cautious wording, counterexamples or clearer explanations; agreement with a description is not evidence of measurement accuracy."
+    },
+    "method_boundaries": {
+      "title": "method boundaries",
+      "body": "This test is used for understanding personality patterns and self-observation, and is not used for clinical diagnosis, recruitment screening, treatment recommendations, hard judgments on health levels, or absolute personality characterization. Wing, arrow, subtype and development stage languages ​​are only reserved as interpretation layers or future modules in the current version, and no hard judgment will be made. Technical Note's evidence levels are by default divided into: launched product rules, operational indicators being collected, planned stability indicators, and an explanation framework that is only a theoretical background; these levels cannot be mixed into the same certainty."
+    },
+    "privacy": {
+      "title": "Privacy and data",
+      "body": "Public explanations use aggregated method metrics and do not expose individual answers, private observation text or identifiable feedback. Shared pages omit private observation details by default. A user’s self-observed type is not the system’s final type. Feedback, sample material and technical indicators follow minimum-necessary use, aggregate display and traceable provenance. Planned or collecting indicators show definitions and collection direction, not invented values."
+    }
+  },
+  "method_boundaries": {
+    "e105_standard_methodology": {
+      "label": "E105 rating method",
+      "copy": "The E105 five-point Likert form uses rating responses to form a full nine-type profile, top three candidates, a leading-candidate gap, and close-call comparison within one scoring context. It is a starting point for self-observation, and its scores are interpreted only within E105."
+    },
+    "fc144_forced_choice_methodology": {
+      "label": "FC144 paired-choice method",
+      "copy": "The FC144 two-option forced-choice form records relative preference signals across paired choices and can provide another observation after a close-call result. Both forms have the same evidence status. FC144 does not replace E105's primary candidate, top three candidates, or raw scoring facts, and its results are interpreted only within the FC144 scoring context."
+    },
+    "same_model_not_same_score_space": {
+      "label": "One model, separate score spaces",
+      "copy": "E105 and FC144 use the same Enneagram interpretation framework but different response tasks, scoring sources, and error structures, so they do not share a scoring space. History, sharing, PDF, and retest surfaces retain each form's source. The page does not directly compare their values or interpret cross-form differences in the top three candidates as personality change."
+    },
+    "cross_form_compare_blocked": {
+      "label": "Cross-form comparison limits",
+      "copy": "Cross-form comparison is disabled. Unless a validated equivalence mapping becomes available, E105 and FC144 remain in separate scoring contexts, and history, sharing, and result-review surfaces do not infer improvement, decline, health status, or measurement precision from their differences."
+    },
+    "non_diagnostic_boundary": {
+      "label": "Non-diagnostic use",
+      "copy": "This result supports personality-pattern reflection, self-observation, and dialogue. Current research does not support treating the Enneagram as a well-validated clinical scale. It is not used for mental-health judgment, treatment recommendations, hiring, job matching, competency evaluation, or individual risk assessment. Scores, leading candidates, close-call, diffuse, and response-quality states remain hypotheses to check against real situations."
+    },
+    "user_confirmed_type_boundary": {
+      "label": "Self-observation feedback",
+      "copy": "A user-confirmed type records the user's own resonance after observation. It is not a system rescore or external confirmation. History and sharing surfaces present it only as a self-observation note; it does not overwrite the primary candidate, top three candidates, scorer output, or original scoring facts."
+    },
+    "low_quality_boundary": {
+      "label": "Response-quality limits",
+      "copy": "When response-quality signals are triggered, results remain readable with narrower interpretation and light observation suggestions. Retaking the same form when you have sufficient time and a more stable response context is preferred. Switching forms offers another observation; it must not bypass quality limits, seek a preferred answer, prove personality change or compare score gains and losses."
+    },
+    "diffuse_boundary": {
+      "label": "Diffuse-profile interpretation",
+      "copy": "Diffuse means the nine type signals do not yet form a clear leading pattern. The page lowers certainty about any one number and prioritizes the top three candidates, center distribution, recent counterexamples, and a seven-day observation task. Retesting provides another response sample; it does not automatically correct the result to a particular type."
+    },
+    "close_call_boundary": {
+      "label": "Close-candidate interpretation",
+      "copy": "A close-call means the first and second candidates are close. The page turns their differences into side-by-side comparison, counterexample checks, and seven-day observation questions without requiring a forced type decision."
+    }
+  },
+  "disclaimers": [
+    {
+      "key": "not_diagnostic",
+      "label": "Not diagnostic",
+      "copy": "This test supports personality-pattern reflection and is not for clinical diagnosis or treatment advice."
+    },
+    {
+      "key": "not_clinical",
+      "label": "No clinical-validity claim",
+      "copy": "This version makes no claim of external clinical validity, accuracy, or predictive ability."
+    },
+    {
+      "key": "not_hiring_screening",
+      "label": "Not for hiring",
+      "copy": "This test is not for hiring, promotion, termination, or employment screening."
+    },
+    {
+      "key": "no_hard_theory_judgement",
+      "label": "No hard theory judgment",
+      "copy": "Wing, arrow, subtype, and health level are not hard system conclusions in this version."
+    },
+    {
+      "key": "no_cross_form_numeric_compare",
+      "label": "No cross-form numeric comparison",
+      "copy": "E105 and FC144 share one model but use different scoring spaces and are not compared numerically by default."
+    },
+    {
+      "key": "user_confirmed_type_boundary",
+      "label": "Self-observation boundary",
+      "copy": "The type a user recognizes after observation records personal reflection. It never silently overwrites the measured leading candidate."
+    }
+  ]
+}

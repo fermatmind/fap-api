@@ -1392,6 +1392,21 @@ jobs:
           path: ${{ runner.temp }}/iq-eq-topic-publication/staging.json
           if-no-files-found: error
           retention-days: 30
+      - id: public-content-53-publish
+        name: Publish the exact reviewed 53 public-page content package
+        if: fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish == true
+        env:
+          PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT: staging
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/public-content-53-publish.mjs
+      - name: Upload sanitized public-page content publication receipt
+        if: always() && steps.public-content-53-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-content-53-staging-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/public-content-53-publication/staging.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Record staging timing
         if: always()
         run: |
@@ -2503,8 +2518,23 @@ jobs:
           path: ${{ runner.temp }}/iq-eq-topic-publication/production.json
           if-no-files-found: error
           retention-days: 30
+      - id: public-content-53-publish
+        name: Publish the exact reviewed 53 public-page content package
+        if: steps.baseline.outputs.skip != 'true' && fromJSON(needs.policy.outputs.classification).operations.public_content_53_publish == true
+        env:
+          PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT: production
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: node .github/trunk/public-content-53-publish.mjs
+      - name: Upload sanitized public-page content publication receipt
+        if: always() && steps.public-content-53-publish.outcome != 'skipped'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-content-53-production-${{ env.DEPLOY_SHA }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/public-content-53-publication/production.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Restore exact LKG after Career publisher failure
-        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure')
+        if: failure() && (steps.career-publish.outcome == 'failure' || steps.eq-source-publish.outcome == 'failure' || steps.eq-existing-publish.outcome == 'failure' || steps.eq-english-publish.outcome == 'failure' || steps.iq-public-publish.outcome == 'failure' || steps.iq-article-publish.outcome == 'failure' || steps.iq-topic-publish.outcome == 'failure' || steps.public-content-53-publish.outcome == 'failure')
         shell: bash
         run: |
           set -euo pipefail
@@ -2557,6 +2587,14 @@ jobs:
               and .workflow_run_attempt == 1 and .sanitized == true
               and .recovery_completed == true
             ' "$RUNNER_TEMP/iq-eq-topic-publication/production.json" >/dev/null
+          fi
+          if [ '${{ steps.public-content-53-publish.outcome }}' = failure ]; then
+            jq -e --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" '
+              .schema == "public.content53.publish.v1" and .ok == false
+              and .source_commit == $sha and .workflow_run_id == $run
+              and .workflow_run_attempt == 1 and .sanitized == true
+              and .recovery_completed == true
+            ' "$RUNNER_TEMP/public-content-53-publication/production.json" >/dev/null
           fi
           candidate_sha="$DEPLOY_SHA"
           lkg_sha='${{ steps.baseline.outputs.active }}'
