@@ -14,6 +14,8 @@ use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileSection;
 use App\Models\TopicProfileSeoMeta;
+use App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter;
+use App\Services\ContentPromotion\ExactPackagePromotionService;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\ContentPromotion\PublicContent53FrontendRevalidator;
@@ -53,6 +55,11 @@ final class PublicContent53PublicationTest extends TestCase
     public static function environments(): array
     {
         return [['staging'], ['production']];
+    }
+
+    public static function receiptFailures(): array
+    {
+        return [[false], [true]];
     }
 
     protected function tearDown(): void
@@ -192,6 +199,65 @@ PHP;
             $process = new Process([PHP_BINARY, '-r', $script, $this->digest()], base_path(), array_replace($environment, $override));
             $process->mustRun();
             self::assertSame($override === [] ? str_repeat('b', 64) : 'workflow_identity_signature_invalid', $process->getOutput());
+        }
+    }
+
+    #[DataProvider('receiptFailures')]
+    public function test_real_four_phase_service_preserves_state_binding_and_restores_on_receipt_failure(bool $receiptFailure): void
+    {
+        $this->seedTargets();
+        config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
+            'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-secret']);
+        Http::preventStrayRequests();
+        Http::fake(function ($request) {
+            $payload = $request->data();
+            $content = $payload['content'];
+            $tags = ($content['type'] === 'article') ? ['article-detail:'.$content['locale'].':'.$content['slug'], 'article-seo:'.$content['locale'].':'.$content['slug']] : [];
+
+            return Http::response(['ok' => true, 'revalidated_paths' => $payload['cache_signal']['paths'], 'rejected_paths' => [], 'invalidated_tags' => $tags]);
+        });
+        $directory = sys_get_temp_dir().'/public-53-service-'.bin2hex(random_bytes(8));
+        mkdir($directory, 0700);
+        $service = app(ExactPackagePromotionService::class);
+        $states = app(PublicContent53State::class);
+        $context = $this->context();
+        $before = $states->read($this->digest());
+        $previous = '';
+        $publicationReference = '';
+        try {
+            foreach (['preflight', 'draft-import', 'publish', 'live-qa'] as $phase) {
+                config(['content_promotion.execution.previous_receipt' => $previous]);
+                $path = $directory.'/'.$phase.'.json';
+                if ($receiptFailure && $phase === 'publish') {
+                    file_put_contents($path, 'Immutable existing receipt');
+                    try {
+                        $service->execute($context, $phase, $path);
+                        self::fail('Must restore a publication whose receipt cannot be written');
+                    } catch (DomainException $error) {
+                        self::assertSame('public_content_53_receipt_failed_rollback_succeeded', $error->getMessage());
+                    }
+                    self::assertSame('Immutable existing receipt', file_get_contents($path));
+                    break;
+                }
+                $result = $service->execute($context, $phase, $path);
+                self::assertSame('SUCCEEDED', $result['receipt']['result']);
+                self::assertSame(50, $result['receipt']['readback_count']);
+                self::assertSame($states->hash($states->read($this->digest())), $result['receipt']['target_state_sha256']);
+                self::assertSame(hash_file('sha256', $path), $result['receipt_sha256']);
+                if ($phase === 'publish') {
+                    $publicationReference = $result['receipt']['rollback_reference'];
+                }
+                $previous = $path;
+            }
+            if (! $receiptFailure) {
+                app(PublicContent53PromotionAdapter::class)->rollback($context, $publicationReference);
+            }
+            self::assertSame($before, $states->read($this->digest()));
+        } finally {
+            foreach (glob($directory.'/*') as $file) {
+                unlink($file);
+            }
+            rmdir($directory);
         }
     }
 
