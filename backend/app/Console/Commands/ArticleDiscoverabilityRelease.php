@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ArticleMaterialDecisionService;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,10 @@ final class ArticleDiscoverabilityRelease extends Command
 
     protected $description = 'Safely release sitemap and llms eligibility for one already-published locked article.';
 
-    public function handle(AuditLogger $auditLogger): int
+    public function handle(AuditLogger $auditLogger, ArticleMaterialDecisionService $materialDecisions): int
     {
         try {
-            $summary = $this->buildSummary($auditLogger);
+            $summary = $this->buildSummary($auditLogger, $materialDecisions);
         } catch (RuntimeException $exception) {
             $summary = $this->failureSummary('runtime_error', $exception->getMessage());
         } catch (Throwable $exception) {
@@ -50,7 +51,7 @@ final class ArticleDiscoverabilityRelease extends Command
     /**
      * @return array<string,mixed>
      */
-    private function buildSummary(AuditLogger $auditLogger): array
+    private function buildSummary(AuditLogger $auditLogger, ArticleMaterialDecisionService $materialDecisions): array
     {
         $execute = (bool) $this->option('execute');
         $dryRun = ! $execute;
@@ -105,7 +106,7 @@ final class ArticleDiscoverabilityRelease extends Command
             return $this->summary(true, true, 'would_release_article_discoverability', $articleId, $expectedSlug, $expectedConfirmation, $plan, []);
         }
 
-        $executedPlan = DB::transaction(function () use ($articleId, $expectedSlug): array {
+        $executedPlan = DB::transaction(function () use ($articleId, $expectedSlug, $materialDecisions): array {
             $lockedPlan = $this->preflight($articleId, $expectedSlug, lockForUpdate: true);
             if ($lockedPlan === null) {
                 throw new RuntimeException('planned article disappeared before discoverability release.');
@@ -130,6 +131,14 @@ final class ArticleDiscoverabilityRelease extends Command
                 ]);
 
             $article = Article::query()->withoutGlobalScopes()->findOrFail($articleId);
+            $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($article->published_revision_id);
+            $materialDecisions->recordPublished(
+                $article,
+                $revision,
+                now(),
+                'publish',
+                'article_discoverability_release:article:'.$article->id.':revision:'.$revision->id,
+            );
             event(new PublicAuthorityChanged(
                 pageEntityType: 'article',
                 entityIdentity: (string) $article->id,

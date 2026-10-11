@@ -9,10 +9,13 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
+use App\Models\ContentMaterialDecision;
+use App\Services\Cms\ArticleMaterialDecisionService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -56,6 +59,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertFalse((bool) $fresh->llms_eligible);
         $this->assertSame(0, AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_discoverability_release')->count());
         Event::assertNotDispatched(PublicAuthorityChanged::class);
+        $this->assertSame(0, ContentMaterialDecision::query()->count());
     }
 
     public function test_execute_releases_only_sitemap_and_llms_eligibility(): void
@@ -120,6 +124,64 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertSame('articles:discoverability-release', data_get($audit->meta_json, 'command'));
         $this->assertTrue((bool) data_get($audit->meta_json, 'no_search'));
         $this->assertSame(['articles.sitemap_eligible', 'articles.llms_eligible'], data_get($audit->meta_json, 'updates_scope'));
+        $decision = ContentMaterialDecision::query()->sole();
+        $this->assertSame('article:'.$article->id, $decision->authority_subject_key);
+        $this->assertSame((string) $publishedRevisionId, $decision->authority_revision);
+        $this->assertSame((string) $article->locale, $decision->locale);
+        $this->assertSame('article_discoverability_release:article:'.$article->id.':revision:'.$publishedRevisionId, $decision->evidence_ref);
+    }
+
+    public function test_release_records_current_search_surface_and_repeated_release_is_idempotent(): void
+    {
+        $article = $this->createPublishedIndexableArticle();
+        $initial = DB::transaction(fn () => app(ArticleMaterialDecisionService::class)->recordPublished(
+            $article,
+            $article->publishedRevision,
+            now(),
+        ));
+        $schema = $article->seoMeta->schema_json;
+        $schema['hreflang_gate_v1']['enabled'] = true;
+        $article->seoMeta->forceFill(['schema_json' => $schema])->save();
+        Event::fake([PublicAuthorityChanged::class]);
+        $options = [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--confirm' => 'I explicitly approve articles:discoverability-release execute for article id 53 slug gaokao-score-major-shortlist-riasec-checklist after dry-run passes.',
+            '--execute' => true,
+            '--json' => true,
+            '--no-content-change' => true,
+            '--no-publish' => true,
+            '--no-search' => true,
+            '--no-schema-hreflang' => true,
+            '--no-revalidation' => true,
+        ];
+
+        $this->assertSame(0, Artisan::call('articles:discoverability-release', $options), Artisan::output());
+        $released = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        $this->assertSame(2, ContentMaterialDecision::query()->count());
+        $this->assertSame('material_change', $released->decision_code);
+        $this->assertNotSame($initial->search_surface_fingerprint, $released->search_surface_fingerprint);
+        $this->assertSame((string) $article->published_revision_id, $released->authority_revision);
+        $fresh = $article->fresh(['seoMeta']);
+        $this->assertTrue((bool) $fresh->sitemap_eligible);
+        $this->assertTrue((bool) $fresh->llms_eligible);
+        $this->assertSame($schema, $fresh->seoMeta->schema_json);
+        $this->assertSame($article->content_md, $fresh->content_md);
+        $this->assertSame($article->published_revision_id, $fresh->published_revision_id);
+
+        $this->assertSame(0, Artisan::call('articles:discoverability-release', $options), Artisan::output());
+        $this->assertSame(2, ContentMaterialDecision::query()->count());
+        $this->assertSame($released->id, ContentMaterialDecision::query()->latest('id')->value('id'));
+
+        $schema['schema_gates_v1']['faq'] = true;
+        $fresh->seoMeta->forceFill(['schema_json' => $schema])->save();
+        $this->assertSame(0, Artisan::call('articles:discoverability-release', $options), Artisan::output());
+        $schemaChanged = ContentMaterialDecision::query()->latest('id')->firstOrFail();
+        $this->assertSame(3, ContentMaterialDecision::query()->count());
+        $this->assertSame('material_change', $schemaChanged->decision_code);
+        $this->assertNotSame($released->search_surface_fingerprint, $schemaChanged->search_surface_fingerprint);
+        $this->assertSame((string) $article->published_revision_id, $schemaChanged->authority_revision);
+        $this->assertSame($schema, $fresh->seoMeta->fresh()->schema_json);
     }
 
     public function test_execute_requires_confirmation_and_safety_flags(): void
@@ -144,6 +206,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertFalse((bool) $fresh->sitemap_eligible);
         $this->assertFalse((bool) $fresh->llms_eligible);
         Event::assertNotDispatched(PublicAuthorityChanged::class);
+        $this->assertSame(0, ContentMaterialDecision::query()->count());
     }
 
     public function test_slug_lock_and_indexability_preflight_block_without_write(): void
@@ -175,6 +238,7 @@ final class ArticleDiscoverabilityReleaseCommandTest extends TestCase
         $this->assertFalse((bool) $fresh->sitemap_eligible);
         $this->assertFalse((bool) $fresh->llms_eligible);
         Event::assertNotDispatched(PublicAuthorityChanged::class);
+        $this->assertSame(0, ContentMaterialDecision::query()->count());
     }
 
     /**
