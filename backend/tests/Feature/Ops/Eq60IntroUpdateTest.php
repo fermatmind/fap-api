@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ScaleRegistryResource\Pages\EditScaleRegistry;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\ContentPromotion\IqPublicEntryPackage;
 use App\Services\Scale\PublicScaleCatalogCache;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRegistryWriter;
@@ -21,6 +22,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -300,6 +302,30 @@ final class Eq60IntroUpdateTest extends TestCase
         foreach (['scales_registry_v2', 'scales_registry'] as $table) {
             $content = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'EQ_60')->value('content_i18n_json'), true);
             self::assertSame($request['after'], $content['en']['why_choose']['intro']);
+        }
+    }
+
+    public function test_seed_default_preserves_the_reviewed_iq_entry_modules_in_both_tables(): void
+    {
+        self::assertSame(0, Artisan::call('fap:scales:seed-default', ['--no-interaction' => true]));
+        $rows = app(IqPublicEntryPackage::class)->read(base_path(), IqPublicEntryPackage::SHA256);
+        $before = [];
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            $content = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'IQ_RAVEN')->value('content_i18n_json'), true, 512, JSON_THROW_ON_ERROR);
+            foreach ($rows as $row) {
+                $content[$row['key']] = array_replace($content[$row['key']] ?? [], $row['patch']);
+            }
+            DB::table($table)->where('org_id', 0)->where('code', 'IQ_RAVEN')->update(['content_i18n_json' => json_encode($content, JSON_THROW_ON_ERROR)]);
+            $before[$table] = $content;
+        }
+        self::assertSame(0, Artisan::call('fap:scales:seed-default', ['--no-interaction' => true]));
+        foreach (['scales_registry_v2', 'scales_registry'] as $table) {
+            $after = json_decode(DB::table($table)->where('org_id', 0)->where('code', 'IQ_RAVEN')->value('content_i18n_json'), true, 512, JSON_THROW_ON_ERROR);
+            foreach ($rows as $row) {
+                foreach (['landing_copy', 'why_choose', 'faq'] as $leaf) {
+                    self::assertJsonValueSame($before[$table][$row['key']][$leaf], $after[$row['key']][$leaf]);
+                }
+            }
         }
     }
 

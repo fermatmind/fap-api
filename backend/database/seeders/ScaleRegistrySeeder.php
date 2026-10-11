@@ -859,7 +859,7 @@ final class ScaleRegistrySeeder extends Seeder
                 $row = DB::table($table)->where('org_id', 0)->where('code', $attributes['code'])->lockForUpdate()->first();
                 $content = json_decode($row->content_i18n_json ?? '{}', true, 512, JSON_THROW_ON_ERROR);
                 foreach (['zh', 'en'] as $locale) {
-                    foreach (['faq', 'why_choose', 'version_comparison', 'landing_entry'] as $key) {
+                    foreach (['landing_copy', 'faq', 'why_choose', 'version_comparison', 'landing_entry'] as $key) {
                         if (array_key_exists($key, $content[$locale] ?? [])) {
                             $published[$table][$locale][$key] = $content[$locale][$key];
                         }
