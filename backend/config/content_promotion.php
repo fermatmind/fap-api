@@ -22,11 +22,11 @@ return [
         'content_assets/iq_public/articles/20261010-v1',
         'content_assets/iq_public/topics/20261010-v1',
         'content_assets/eq_public/candidate/20261010-existing-pages',
-        'content_assets/public_content_53',
         'content_packs',
         'content_baselines',
         'database/seeders/data',
         'content_assets/seo-top100/SEO-TOP100-FROZEN-20260812-v1',
+        'content_assets/public_content_53',
     ],
     // Independent W9 evidence is intentionally outside the frozen producer
     // package. A package may name an exact report here, but cannot self-approve

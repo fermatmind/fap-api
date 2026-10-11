@@ -49,6 +49,9 @@ final class PromotionContextFactory
             $releasePolicySha256,
             (string) $expectedRowCount,
         ]);
+        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
+            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');
+        }
         if ($lane === 'W3' && $subscope === 'EQ-EXISTING-PUBLIC-PAGES') {
             $signatureMaterial .= '|'.$executorReleaseSha256;
         }
@@ -66,9 +69,6 @@ final class PromotionContextFactory
         // Existing lanes retain their established signature wire format.
         if ($lane === 'W3' && $subscope === 'IQ-EQ-TOPIC') {
             $signatureMaterial .= '|'.$executorReleaseSha256;
-        }
-        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
-            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production');
         }
         if (strlen($workflowIdentityKey) < 32
             || preg_match('/\A[a-f0-9]{64}\z/', $workflowSignature) !== 1
