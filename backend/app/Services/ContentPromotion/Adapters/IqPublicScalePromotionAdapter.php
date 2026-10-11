@@ -18,7 +18,6 @@ use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRegistryWriter;
 use DomainException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Throwable;
 
 /** Publishes only IQ-01 public copy; never impersonates a human CMS reviewer. */
@@ -243,9 +242,7 @@ final class IqPublicScalePromotionAdapter implements ExactPackagePromotionAdapte
     {
         $registries = [];
         foreach (['scales_registry_v2', 'scales_registry'] as $table) {
-            if (! Schema::hasTable($table)) {
-                throw new DomainException('iq_public_scale_table_missing');
-            }
+            // Both authority tables are migration prerequisites; query failure must abort publication.
             $query = DB::table($table)->where('org_id', 0)->where('code', IqPublicEntryPackage::CODE);
             $values = ($lock ? $query->lockForUpdate() : $query)->get()->map(static fn (object $row): array => (array) $row)->all();
             if (count($values) !== 1) {

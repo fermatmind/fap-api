@@ -7,7 +7,6 @@ namespace App\Services\ContentPromotion;
 use App\Models\Article;
 use DomainException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 /** Read-only prerequisites: Topic copy must not promise unpublished IQ pages. */
 final class IqEqTopicPrerequisites
@@ -82,9 +81,7 @@ final class IqEqTopicPrerequisites
     {
         $tables = config('fap.scales_registry.use_v2', true) ? ['scales_registry_v2', 'scales_registry'] : ['scales_registry'];
         foreach ($tables as $table) {
-            if (! Schema::hasTable($table)) {
-                continue;
-            }
+            // Never substitute legacy authority when the configured authority query fails.
             $rows = DB::table($table)->where('org_id', 0)->where('code', $code)
                 ->when($lock, fn ($query) => $query->lockForUpdate())->get();
             if ($rows->count() > 1) {

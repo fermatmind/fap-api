@@ -6,13 +6,38 @@ namespace Tests\Unit\ContentPromotion;
 
 use App\Models\Article;
 use App\Services\ContentPromotion\IqEqTopicPrerequisites;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
 use Tests\TestCase;
 
 final class IqEqTopicPrerequisitesTest extends TestCase
 {
     use RefreshDatabase;
     use \Tests\Unit\ContentPromotion\Concerns\SeedsIqEqTopicPrerequisites;
+
+    public function test_authority_read_failure_cannot_fall_back_to_a_published_legacy_entry(): void
+    {
+        config(['fap.scales_registry.use_v2' => true]);
+        $this->seedArticles();
+        $this->seedIqEntry();
+        $legacy = DB::table('scales_registry')->where('org_id', 0)->where('code', 'IQ_RAVEN')->first();
+        self::assertTrue((bool) $legacy->is_public);
+        $prerequisites = app(IqEqTopicPrerequisites::class);
+        $manager = DB::getFacadeRoot();
+        $failure = new QueryException('testing', 'select authority', [], new RuntimeException('authority_read_failed'));
+        DB::partialMock()->shouldReceive('table')->with('scales_registry_v2')->once()->andThrow($failure);
+        try {
+            $prerequisites->assertPublished();
+            self::fail('A healthy legacy row must not hide a failed configured authority.');
+        } catch (QueryException $exception) {
+            self::assertSame($failure, $exception);
+        } finally {
+            DB::swap($manager);
+        }
+        self::assertEquals($legacy, DB::table('scales_registry')->where('org_id', 0)->where('code', 'IQ_RAVEN')->first());
+    }
 
     public function test_absent_required_page_fails_before_scale_read_or_any_business_write(): void
     {

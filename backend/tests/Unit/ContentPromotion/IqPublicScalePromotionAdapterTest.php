@@ -11,6 +11,7 @@ use App\Services\ContentPromotion\PromotionContext;
 use App\Services\Scale\PublicScaleCatalogCache;
 use App\Services\Scale\ScaleRegistryWriter;
 use DomainException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Mockery;
@@ -24,6 +25,30 @@ final class IqPublicScalePromotionAdapterTest extends TestCase
     private array $receiptFiles = [];
 
     private array $receiptDirectories = [];
+
+    public function test_authority_read_failure_aborts_before_any_snapshot_or_projection_write(): void
+    {
+        $this->seedEntry();
+        $before = $this->databaseState();
+        $snapshotCount = ContentReleaseSnapshot::query()->count();
+        $generation = app(PublicScaleCatalogCache::class)->generation(0);
+        $adapter = app(IqPublicScalePromotionAdapter::class);
+        $context = $this->context();
+        $manager = DB::getFacadeRoot();
+        $failure = new QueryException('testing', 'select authority', [], new RuntimeException('authority_read_failed'));
+        DB::partialMock()->shouldReceive('table')->with('scales_registry_v2')->once()->andThrow($failure);
+        try {
+            $adapter->preflight($context);
+            self::fail('An unreadable authority must not produce a successful preflight.');
+        } catch (QueryException $exception) {
+            self::assertSame($failure, $exception);
+        } finally {
+            DB::swap($manager);
+        }
+        self::assertSame($before, $this->databaseState());
+        self::assertSame($snapshotCount, ContentReleaseSnapshot::query()->count());
+        self::assertSame($generation, app(PublicScaleCatalogCache::class)->generation(0));
+    }
 
     protected function tearDown(): void
     {
