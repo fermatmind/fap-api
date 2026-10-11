@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish } from './public-content-53-publish.mjs';
 import { assertDom, pathFor } from './public-content-53-online-qa.mjs';
-const root=resolve('backend');
+const root=fileURLToPath(new URL('../../backend',import.meta.url));
 test('fixed reviewed package covers exactly the existing native identities',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
  assert.equal(binding.expected_row_count,50);assert.equal(rows.length,50);assert.equal(new Set(rows.map(x=>x.page_id)).size,50);
