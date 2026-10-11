@@ -80,10 +80,12 @@ export function isPublic53OnlyPromotionRegistration(before, after) {
 }
 export function isPublic53OnlyContextFactoryChange(before, after) {
   const addition = `        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {
-            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.PublicContent53Package::environment();
+            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.config('content_promotion.public_content_53_environment', 'production');
         }
 `;
-  const legacy = addition.replace('PublicContent53Package::environment()', "(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')");
+  const readEnvironment = "config('content_promotion.public_content_53_environment', 'production')";
+  const legacy = ["(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')", 'PublicContent53Package::environment()']
+    .map(value => addition.replace(readEnvironment, value));
   return after.includes(addition) && ((!before.includes(addition) && after.replace(addition, '') === before)
-    || (before.includes(legacy) && after.replace(addition, '') === before.replace(legacy, '')));
+    || legacy.some(value => before.includes(value) && after.replace(addition, '') === before.replace(value, '')));
 }

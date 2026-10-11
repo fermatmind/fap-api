@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
 import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
+import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 test('fixed reviewed package covers exactly the existing native identities',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
@@ -21,12 +22,19 @@ test('public-only registration proof rejects unrelated policy or canonical chang
  assert.equal(isPublic53OnlyPromotionRegistration(legacyConfig,config.replace("'W2'","'W22'")),false);
  assert.equal(isPublic53OnlyPromotionRegistration(base,config.replace("'W2'", "'W22'")),false);
  const factory=readFileSync(resolve(root,'app/Services/ContentPromotion/PromotionContextFactory.php'),'utf8');
- const addition="        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {\n            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.PublicContent53Package::environment();\n        }\n";
+ const addition="        if ($lane === 'W3' && $subscope === 'PUBLIC-CONTENT-53') {\n            $signatureMaterial .= '|'.$executorReleaseSha256.'|'.config('content_promotion.public_content_53_environment', 'production');\n        }\n";
  assert.equal(isPublic53OnlyContextFactoryChange(factory.replace(addition,''),factory),true);
- const legacyFactory=factory.replace('PublicContent53Package::environment()',"(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')");
+ const readEnvironment="config('content_promotion.public_content_53_environment', 'production')";
+ const legacyFactory=factory.replace(readEnvironment,"(getenv('PUBLIC_CONTENT_53_ENVIRONMENT') ?: 'production')");
  assert.equal(isPublic53OnlyContextFactoryChange(legacyFactory,factory),true);
+ assert.equal(isPublic53OnlyContextFactoryChange(factory.replace(readEnvironment,'PublicContent53Package::environment()'),factory),true);
  assert.equal(isPublic53OnlyContextFactoryChange(legacyFactory,factory.replace('ksort($nested','sort($nested')),false);
  assert.equal(isPublic53OnlyContextFactoryChange(factory.replace(addition,''),factory.replace('ksort($nested','sort($nested')),false);
+});
+test('public signature configuration does not make the package a private publisher dependency',()=>{
+ const graph=phpConsumers(resolve(root,'..'));
+ const publishers=graph.consumer([/\/Console\/Commands\/Packs2?Publish\.php$/, /\/Services\/Content\/ContentPackV2(?:Resolver|Materializer|RuntimeTruthService)\.php$/]);
+ assert.equal(publishers.has('backend/app/Services/ContentPromotion/PublicContent53Package.php'),false);
 });
 test('publication transport fails closed and recovers malformed phase counts',async()=>{
  const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
