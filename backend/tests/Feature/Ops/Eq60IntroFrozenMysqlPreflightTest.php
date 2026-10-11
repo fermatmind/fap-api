@@ -14,7 +14,7 @@ final class Eq60IntroFrozenMysqlPreflightTest extends TestCase
 
     private function fixture(string $file): string
     {
-        return dirname(__DIR__, 2).'/Fixtures/Q02EqIntro/'.$file;
+        return dirname(__DIR__, 2).'/fixtures/q02-eq-intro/'.$file;
     }
 
     public function test_snapshot_is_exact_current_prepared_writer(): void
