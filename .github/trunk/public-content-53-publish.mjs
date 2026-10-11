@@ -21,7 +21,7 @@ export function buildExecution(env, backendRoot) {
     mode: 'publish', environment: binding.environment,
   };
   const command = `sudo -n -u www-data -- php ${quote(`${env.DEPLOY_PATH}/current/backend/scripts/deploy/run_public_content_53_publish.php`)}`;
-  const args = ['-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=10', '-o', 'ConnectionAttempts=1'];
+  const args = ['-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=10', '-o', 'ConnectionAttempts=1', '-o', 'ServerAliveInterval=15', '-o', 'ServerAliveCountMax=8', '-o', 'TCPKeepAlive=yes'];
   const identity = env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT === 'staging' ? env.DEPLOY_IDENTITY_FILE_STG : env.DEPLOY_IDENTITY_FILE_PROD;
   if (identity) args.push('-o', 'IdentitiesOnly=yes', '-i', identity);
   args.push('-p', env.DEPLOY_PORT, `${env.DEPLOY_USER}@${env.DEPLOY_HOST}`, command);
@@ -35,7 +35,13 @@ const transport = (execution, request) => new Promise(resolve => {
 });
 const parseResponse = bytes => {
   try { return JSON.parse(bytes ?? ''); }
-  catch { throw new Error('PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'); }
+  catch {
+    const error = new Error('PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID');
+    const value = String(bytes ?? '').trim();
+    error.response_shape = !value ? 'empty' : /^[{[]/.test(value) ? 'json_like' : 'text';
+    error.response_byte_count = Math.min(Buffer.byteLength(String(bytes ?? '')), 262144);
+    throw error;
+  }
 };
 const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_PAGE-[0-9]{2}(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
 export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
@@ -57,12 +63,18 @@ export async function recoveryFailure(execution, execute = request => transport(
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
     recovery_completed: completed, transport_started: true, error_code: diagnosticCode(cause),
-    ...(!completed && recoveryCode ? { recovery_error_code: recoveryCode } : {}), sanitized: true };
+    ...(!completed && recoveryCode ? { recovery_error_code: recoveryCode } : {}),
+    ...(['empty','json_like','text'].includes(cause?.response_shape) && Number.isInteger(cause?.response_byte_count)
+      && cause.response_byte_count >= 0 && cause.response_byte_count <= 262144
+      ? { transport_response: { shape: cause.response_shape, byte_count: cause.response_byte_count } } : {}), sanitized: true };
   return error;
 }
 export async function publish(execution, execute = request => transport(execution, request)) {
   try {
     const response = await execute(execution.request);
+    // A failed SSH process is not an invalid JSON protocol response. Preserve
+    // only its bounded exit status; never expose command, stderr or request bytes.
+    if (response.status !== 0) throw new Error('PUBLIC_CONTENT_53_SSH_EXIT_' + (Number.isInteger(response.status) && response.status >= 1 && response.status <= 255 ? response.status : 'FAILED'));
     const output = parseResponse(response.stdout);
     if (output.ok === false && /^public_content_53_[a-z0-9_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
     if (response.status !== 0 || output.ok !== true || output.schema !== 'public.content53.publish.v1'

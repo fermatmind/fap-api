@@ -38,7 +38,7 @@ test('public signature configuration does not make the package a private publish
 });
 test('publication transport fails closed and recovers malformed phase counts',async()=>{
  const env={PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT:'staging',DEPLOY_PATH:'/srv/app',DEPLOY_USER:'deploy',DEPLOY_HOST:'example.invalid',DEPLOY_PORT:'22',DEPLOY_SHA:'a'.repeat(40),GITHUB_RUN_ID:'123',GITHUB_RUN_ATTEMPT:'1',CONTENT_PROMOTION_AUTOMATION_KEY:'k'.repeat(40)};
- const execution=buildExecution(env,root);assert.ok(execution.args.includes('StrictHostKeyChecking=yes'));
+ const execution=buildExecution(env,root);assert.ok(execution.args.includes('StrictHostKeyChecking=yes'));assert.ok(execution.args.includes('ServerAliveInterval=15'));assert.ok(execution.args.includes('ServerAliveCountMax=8'));assert.ok(execution.args.includes('TCPKeepAlive=yes'));
  let recovery=0;
  await assert.rejects(()=>publish(execution,async request=>{if(request.mode==='recover'){recovery++;return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',restored:false,recovery_status:'not_required',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:request.package_sha256,executor_release_sha256:request.executor_release_sha256,sanitized:true})};}return {status:0,stdout:'{}'};}),error=>error.receipt.recovery_completed === true);
  assert.equal(recovery,1);
@@ -97,7 +97,7 @@ test('async publication accepts the complete signed protocol without invoking re
  });
  assert.deepEqual(calls,['publish']);assert.equal(receipt.ok,true);assert.equal(receipt.published_count,50);
  const invalid=()=>({status:0,stdout:'invalid private response bytes'});
- await assert.rejects(()=>publish(execution,invalid),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'&&!JSON.stringify(error.receipt).includes('private'));
+ await assert.rejects(()=>publish(execution,invalid),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'&&error.receipt.transport_response?.shape==='text'&&!JSON.stringify(error.receipt).includes('private'));
 });
 
 
@@ -117,4 +117,16 @@ test('bare internal paths require visible labels on the matching public route an
  for(const replacement of ['https://external.invalid/method-boundaries','/wrong-route','/zh/method-boundaries'])assert.throws(()=>assertDom(row,html.replace('href="/method-boundaries"','href="'+replacement+'"'),before,'production'),/LINK/);
  assert.throws(()=>assertDom(row,html.replace('Related pages include ',''),before,'production'),/VISIBLE_BODY/);
  assert.throws(()=>assertDom(row,html.replace('<a href="/method-boundaries">','<a hidden href="/method-boundaries">'),before,'production'),/LINK/);
+});
+
+
+test('failed SSH exit is classified before JSON parsing and still invokes exact recovery',async()=>{
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};
+ const calls=[];
+ await assert.rejects(()=>publish(execution,async request=>{
+  calls.push(request.mode);
+  if(request.mode==='publish')return {status:255,stdout:'private transport bytes'};
+  return {status:0,stdout:JSON.stringify({ok:true,mode:'recover',source_commit:request.source_commit,workflow_run_id:request.workflow_run_id,workflow_run_attempt:1,package_sha256:execution.binding.package_sha256,executor_release_sha256:execution.binding.executor_release_sha256,restored:true,recovery_status:'restored',sanitized:true})};
+ }),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_SSH_EXIT_255'&&error.receipt.recovery_completed===true&&!JSON.stringify(error.receipt).includes('private'));
+ assert.deepEqual(calls,['publish','recover']);
 });
