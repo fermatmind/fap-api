@@ -18,6 +18,7 @@ use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapt
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\PersonalityCmsPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\PublicContent53PromotionAdapter;
 use App\Services\ContentPromotion\Adapters\RiasecContentPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Top100FrozenCmsBatchPromotionAdapter;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
@@ -44,6 +45,7 @@ final class PromotionAdapterRegistry
         IqPublicArticlePromotionAdapter $iqPublicArticles,
         IqEqTopicPromotionAdapter $iqEqTopic,
         EqExistingPublicPagePromotionAdapter $eqExistingPublic,
+        PublicContent53PromotionAdapter $publicContent53,
         PromotionReceiptStore $receipts,
     ) {
         $adapters = [
@@ -61,6 +63,7 @@ final class PromotionAdapterRegistry
             $iqPublicArticles,
             $iqEqTopic,
             $eqExistingPublic,
+            $publicContent53,
             new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
             new Top100FrozenCmsBatchPromotionAdapter($top100Authority, $snapshots),
         ];

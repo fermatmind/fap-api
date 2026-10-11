@@ -1,0 +1,122 @@
+{
+  "top_gap_distribution": {
+    "label": "Top gap distribution",
+    "description": "Distribution of the gap between Top1 and Top2 within the same form, used to describe the basis for clear or close-call interpretation.",
+    "numerator_source": "The within-form Top1\u2013Top2 gap from the public result projection.",
+    "denominator_source": "All results with an Enneagram public projection v2.",
+    "minimum_sample_guidance": "Day7 feedback samples are not required.",
+    "privacy_notes": "Only aggregate gap distributions are public; individual raw answers are not."
+  },
+  "close_call_rate": {
+    "label": "Close-call rate",
+    "description": "Proportion of results whose interpretation scope is close-call.",
+    "numerator_source": "Number of close-call results.",
+    "denominator_source": "All results with an Enneagram public projection v2.",
+    "minimum_sample_guidance": "Long-term tracking requires stable coverage of the questionnaire.",
+    "privacy_notes": "Only aggregate proportions are reported."
+  },
+  "diffuse_rate": {
+    "label": "Diffuse rate",
+    "description": "Proportion of results whose interpretation scope is diffuse.",
+    "numerator_source": "Number of diffuse results.",
+    "denominator_source": "All results with an Enneagram public projection v2.",
+    "minimum_sample_guidance": "Long-term tracking requires stable coverage of the questionnaire.",
+    "privacy_notes": "Only aggregate proportions are reported."
+  },
+  "low_quality_rate": {
+    "label": "Low-quality rate",
+    "description": "Proportion of results triggering the low-quality boundary.",
+    "numerator_source": "Number of results where low-quality status is triggered.",
+    "denominator_source": "All results with an Enneagram public projection v2.",
+    "minimum_sample_guidance": "Long-term tracking requires stable coverage of the questionnaire.",
+    "privacy_notes": "Uses policy outputs without retrieving raw answers."
+  },
+  "pair_frequency": {
+    "label": "Pair frequency",
+    "description": "Frequency of close-call pairs, used to guide pair-library coverage.",
+    "numerator_source": "Counts of close-call pairs in classification or dynamics.",
+    "denominator_source": "All close-call results.",
+    "minimum_sample_guidance": "Long-term tracking requires stable close-call coverage.",
+    "privacy_notes": "Only aggregate frequencies at the pair level are reported."
+  },
+  "top1_resonance_rate": {
+    "label": "Top1 resonance rate",
+    "description": "Proportion of Day7 observations whose final resonance points to Top1.",
+    "numerator_source": "Number of Day7 observations identifying Top1.",
+    "denominator_source": "All observations with submitted Day7 feedback.",
+    "minimum_sample_guidance": "Stable Day7 feedback samples are needed before publishing values.",
+    "privacy_notes": "Only aggregate observations are counted; individual confirmations are not shown."
+  },
+  "top2_resonance_rate": {
+    "label": "Top2 resonance rate",
+    "description": "Proportion of Day7 observations whose final resonance points to Top2.",
+    "numerator_source": "Number of Day7 observations identifying Top2.",
+    "denominator_source": "All observations with submitted Day7 feedback.",
+    "minimum_sample_guidance": "Stable Day7 feedback samples are needed before publishing values.",
+    "privacy_notes": "Only aggregate observations are counted; individual confirmations are not shown."
+  },
+  "retake_consistency_index": {
+    "label": "Retake consistency index",
+    "description": "Definition of Top1/Top3 consistency for the same person retaking the same form.",
+    "numerator_source": "Count of consistent pairs meeting same-form retake conditions.",
+    "denominator_source": "All Enneagram attempt pairs meeting same-form retake conditions.",
+    "minimum_sample_guidance": "Stable same-form retake samples are needed before publishing values.",
+    "privacy_notes": "Only anonymous aggregates are used; individual retake histories are not returned."
+  },
+  "e105_fc144_agreement": {
+    "label": "E105 / FC144 agreement",
+    "description": "Definition of Top1/Top3 overlap for the same person taking E105 and FC144.",
+    "numerator_source": "Count of qualifying cross-form pairs with Top1 or Top3 overlap.",
+    "denominator_source": "All Enneagram attempt pairs meeting E105/FC144 pairing conditions.",
+    "minimum_sample_guidance": "Paired samples from both forms are needed before publishing values.",
+    "privacy_notes": "Agreement does not mean numerical scores can be directly compared across forms."
+  },
+  "close_call_conversion": {
+    "label": "Close-call conversion",
+    "description": "Definition of subsequent FC144 participation or Day7 feedback after a close-call result.",
+    "numerator_source": "Count of close-call results followed by FC144 or Day7 participation.",
+    "denominator_source": "All close-call results.",
+    "minimum_sample_guidance": "Stable samples of subsequent close-call activity are needed before publishing values.",
+    "privacy_notes": "Only an aggregate activity funnel is examined, not individual reasons for decisions."
+  },
+  "misidentification_matrix": {
+    "label": "Misidentification matrix",
+    "description": "Definition of transitions between initial Top1 and the type identified in Day7 self-observation.",
+    "numerator_source": "Paired counts of Top1 and the user-confirmed type.",
+    "denominator_source": "All Day7 observations identifying a user-confirmed type.",
+    "minimum_sample_guidance": "Longer-term Day7 sample accumulation is needed before publishing values.",
+    "privacy_notes": "Only aggregate matrices are public; individual confirmations are not."
+  },
+  "observation_completion_rate": {
+    "label": "Observation completion rate",
+    "description": "Proportion of assigned observations reaching Day7 or 100% completion.",
+    "numerator_source": "Number of completed observation states.",
+    "denominator_source": "All assigned observation states.",
+    "minimum_sample_guidance": "The current observation table supports computation.",
+    "privacy_notes": "Only task-completion rates are counted, not feedback text."
+  },
+  "day7_return_rate": {
+    "label": "Day7 return rate",
+    "description": "Proportion of assigned seven-day observation tasks with submitted Day7 feedback.",
+    "numerator_source": "Number of observations with a Day7 submission time.",
+    "denominator_source": "All observations with an assignment time.",
+    "minimum_sample_guidance": "The current observation table supports computation.",
+    "privacy_notes": "Only task-return rates are counted, not feedback text."
+  },
+  "form_switch_rate": {
+    "label": "Form-switch rate",
+    "description": "Definition of switching from E105 to FC144 or between Enneagram forms.",
+    "numerator_source": "Count of users or attempts with a form switch.",
+    "denominator_source": "All users or attempts eligible for repeated Enneagram measurement.",
+    "minimum_sample_guidance": "Sufficient form-switch samples are needed before publishing values.",
+    "privacy_notes": "Only aggregate proportions are public, not individual form-switch histories."
+  },
+  "low_quality_close_call_relation": {
+    "label": "Low-quality / close-call relation",
+    "description": "Joint distribution of low-quality and close-call policy outputs in the same set of results.",
+    "numerator_source": "Cross-count of low-quality and close-call conditions.",
+    "denominator_source": "All results with an Enneagram public projection v2.",
+    "minimum_sample_guidance": "The current policy outputs support joint-distribution computation.",
+    "privacy_notes": "Only aggregate policy distributions are examined; individual results are not extrapolated into labels."
+  }
+}

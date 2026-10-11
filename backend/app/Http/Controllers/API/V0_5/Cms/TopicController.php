@@ -177,6 +177,15 @@ final class TopicController extends Controller
         $segment = $this->frontendLocaleSegment($locale);
         $firstFeatured = $this->firstEntryForGroups($entryGroups, ['featured', 'articles', 'personalities', 'related']);
         $firstTest = $this->firstEntryForGroups($entryGroups, ['tests']);
+        if ($locale === 'en' && $profile->slug === 'big-five') {
+            foreach ($entryGroups['featured'] ?? [] as $entry) {
+                if (($entry['entry_type'] ?? '') === 'scale' && ($entry['target_key'] ?? '') === 'BIG5_OCEAN'
+                    && ($entry['url'] ?? '') === '/en/tests/big-five-personality-test-ocean-model') {
+                    $firstTest = $entry;
+                    break;
+                }
+            }
+        }
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_detail',
