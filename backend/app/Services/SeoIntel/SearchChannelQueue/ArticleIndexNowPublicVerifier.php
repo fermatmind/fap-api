@@ -47,7 +47,7 @@ final class ArticleIndexNowPublicVerifier
         $title = $this->text($xpath, '//title');
         $description = $this->attribute($xpath, '//meta[translate(@name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")="description"]', 'content');
         $heading = $this->text($xpath, '//main//h1');
-        $main = $this->text($xpath, '//main');
+        $main = $this->text($xpath, '//main[.//h1]');
         $issues = [];
 
         if ($canonical !== $canonicalUrl) {

@@ -44,4 +44,31 @@ final class ArticleIndexNowPublicVerifierTest extends TestCase
         self::assertContains('public_description_not_current', $issues);
         self::assertContains('public_article_body_missing', $issues);
     }
+
+    public function test_uses_article_main_with_heading_after_short_placeholder_main(): void
+    {
+        $url = 'https://fermatmind.com/zh/articles/example';
+        $seo = new ArticleSeoMeta(['seo_title' => 'Current title', 'seo_description' => 'Current description']);
+        Http::fake([$url => Http::response('<html><head><title>Current title | FermatMind</title>'
+            .'<link rel="canonical" href="'.$url.'"><meta name="robots" content="index, follow">'
+            .'<meta name="description" content="Current description"></head><body><main>Loading.</main>'
+            .'<div><main><header><h1>Article title</h1></header>'
+            .str_repeat('Real public article content with source boundaries. ', 10)
+            .'</main></div></body></html>', 200)]);
+
+        self::assertSame([], app(ArticleIndexNowPublicVerifier::class)->issues($url, $seo));
+    }
+
+    public function test_long_navigation_main_cannot_substitute_for_short_article_main(): void
+    {
+        $url = 'https://fermatmind.com/zh/articles/example';
+        $seo = new ArticleSeoMeta(['seo_title' => 'Current title', 'seo_description' => 'Current description']);
+        Http::fake([$url => Http::response('<html><head><title>Current title | FermatMind</title>'
+            .'<link rel="canonical" href="'.$url.'"><meta name="robots" content="index, follow">'
+            .'<meta name="description" content="Current description"></head><body><main><nav>'
+            .str_repeat('Navigation links and unrelated page content. ', 10)
+            .'</nav></main><main><h1>Article title</h1>Short body.</main></body></html>', 200)]);
+
+        self::assertSame(['public_article_body_missing'], app(ArticleIndexNowPublicVerifier::class)->issues($url, $seo));
+    }
 }
