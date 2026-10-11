@@ -74,7 +74,13 @@ export async function publish(execution, execute = request => transport(executio
     const response = await execute(execution.request);
     // A failed SSH process is not an invalid JSON protocol response. Preserve
     // only its bounded exit status; never expose command, stderr or request bytes.
-    if (response.status !== 0) throw new Error('PUBLIC_CONTENT_53_SSH_EXIT_' + (Number.isInteger(response.status) && response.status >= 1 && response.status <= 255 ? response.status : 'FAILED'));
+    if (response.status !== 0) {
+      let failure;
+      try { failure = JSON.parse(response.stdout ?? ''); } catch { /* No valid remote business error. */ }
+      if (failure?.ok === false && failure.sanitized === true && /^public_content_53_[a-z0-9_]+$/.test(failure.error_code ?? ''))
+        throw new Error(failure.error_code);
+      throw new Error('PUBLIC_CONTENT_53_SSH_EXIT_' + (Number.isInteger(response.status) && response.status >= 1 && response.status <= 255 ? response.status : 'FAILED'));
+    }
     const output = parseResponse(response.stdout);
     if (output.ok === false && /^public_content_53_[a-z0-9_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
     if (response.status !== 0 || output.ok !== true || output.schema !== 'public.content53.publish.v1'

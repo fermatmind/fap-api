@@ -130,3 +130,9 @@ test('failed SSH exit is classified before JSON parsing and still invokes exact 
  }),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_SSH_EXIT_255'&&error.receipt.recovery_completed===true&&!JSON.stringify(error.receipt).includes('private'));
  assert.deepEqual(calls,['publish','recover']);
 });
+
+
+test('nonzero remote business failures retain their typed cause rather than becoming SSH errors',async()=>{
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64)}};
+ await assert.rejects(()=>publish(execution,async()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'public_content_53_revalidation_http_429',sanitized:true})})),error=>error.receipt.error_code==='public_content_53_revalidation_http_429');
+});
