@@ -72,9 +72,9 @@ export function assertDom(row,html,before,environment) {
   const copy=row.snapshot.content_md;
   const lines = copy ? copy.split('\n').filter(line=>line.trim() && !/^[\s|:-]+$/.test(line) && !/^#(?:content_md|summary|faq)\s*$/.test(line) && !/^\[\^[^\]]+\]:/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean) : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
-  for (const line of lines) {
+  for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
-    if (text && !body.includes(text)) throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}`);
+    if (text && !body.includes(text)) throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   if (dom.canonical.length !== 1 || !equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)
     || !equal(dom.alternates,before.dom.alternates)) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
@@ -101,7 +101,7 @@ export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fet
     const deadline=Date.now()+360000;let last;
     while (true) {
       try { const verifyDOM=html=>assertDom(row,html,before,environment);verifyDOM(await renderer(web+pathFor(row),{surface:'public_page',verifyDOM}));break; }
-      catch(error) {last=error;if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
+      catch(error) {last=error?.message?.startsWith('PUBLIC_CONTENT_53_') ? error : new Error(`PUBLIC_CONTENT_53_BROWSER_FAILED_${row.page_id}`);if(Date.now()>=deadline) throw last;await new Promise(resolve=>setTimeout(resolve,10000));}
     }
   }
   return {environment,api_readback_count:50,dom_readback_count:50};

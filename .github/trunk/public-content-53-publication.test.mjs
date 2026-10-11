@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { inspectPackage, readCandidateRows, isPublic53OnlyPromotionRegistration, isPublic53OnlyContextFactoryChange } from './public-content-53-package.mjs';
-import { buildExecution, publish } from './public-content-53-publish.mjs';
+import { buildExecution, publish, recoveryFailure } from './public-content-53-publish.mjs';
 import { assertDom, pathFor } from './public-content-53-online-qa.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
 test('fixed reviewed package covers exactly the existing native identities',()=>{
@@ -38,4 +38,15 @@ test('DOM acceptance cannot pass from script-only content or HTTP availability',
   assert.throws(()=>assertDom(row,html.replace('</main>', '<h1>Duplicate title</h1></main>'),before,'production'),/DOM_STRUCTURE/);
  assert.throws(()=>assertDom(row,html.replace('<p>Expected visible paragraph.</p>','<script>Expected visible paragraph.</script>'),before,'production'),/VISIBLE_BODY/);
  assert.equal(pathFor({kind:'surface',identity:{locale:'zh-CN',slug:'tests_category_career'}}),'/zh/tests/category/career');
+});
+test('publication retains bounded page diagnostics and separate recovery errors without raw output',()=>{
+ const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123'},binding:{package_sha256:'b'.repeat(64),executor_release_sha256:'c'.repeat(64)}};
+ const failed=()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'public_content_53_revalidation_http_429'})});
+ const error=recoveryFailure(execution,failed,new Error('PUBLIC_CONTENT_53_VISIBLE_BODY_PAGE-02_ITEM_14'));
+ assert.equal(error.receipt.error_code,'PUBLIC_CONTENT_53_VISIBLE_BODY_PAGE-02_ITEM_14');
+ assert.equal(error.receipt.recovery_error_code,'public_content_53_revalidation_http_429');
+ assert.equal(error.receipt.recovery_completed,false);
+ const unsafe=recoveryFailure(execution,failed,new Error('https://private.invalid/token=secret'));
+ assert.equal(unsafe.receipt.error_code,'PUBLIC_CONTENT_53_PUBLICATION_FAILED');
+ assert.ok(!JSON.stringify(unsafe.receipt).includes('secret'));
 });

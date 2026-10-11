@@ -143,10 +143,10 @@ final class PublicContent53PublicationTest extends TestCase
         config(['ops.content_release_observability.hmac_revalidation_url' => 'https://staging.fermatmind.com/api/content-release/revalidate',
             'ops.content_release_observability.hmac_revalidation_secret' => 'test-only-revalidation-secret']);
         Http::preventStrayRequests();
-        $reject = false;
+        $reject = 0;
         Http::fake(function ($request) use (&$reject) {
             if ($reject) {
-                return Http::response(['ok' => false], 503);
+                return Http::response(['ok' => false], $reject);
             }
             $timestamp = $request->header('X-FM-Content-Release-Timestamp')[0];
             $nonce = $request->header('X-FM-Content-Release-Nonce')[0];
@@ -162,12 +162,21 @@ final class PublicContent53PublicationTest extends TestCase
         app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
         Http::assertSentCount(42);
         $before = app(PublicContent53State::class)->read($this->digest());
-        $reject = true;
+        foreach ([503, 429, 200] as $status) {
+            $reject = $status;
+            try {
+                app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
+                self::fail('Must reject failed frontend receipt');
+            } catch (DomainException $e) {
+                self::assertSame($status === 200 ? 'public_content_53_revalidation_failed' : 'public_content_53_revalidation_http_'.$status, $e->getMessage());
+            }
+        }
+        Http::fake(fn () => throw new \Illuminate\Http\Client\ConnectionException('private transport details'));
         try {
             app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
-            self::fail('Must reject failed frontend receipt');
+            self::fail('Must reject a failed transport');
         } catch (DomainException $e) {
-            self::assertSame('public_content_53_revalidation_failed', $e->getMessage());
+            self::assertSame('public_content_53_revalidation_transport_failed', $e->getMessage());
         }
         self::assertSame($before, app(PublicContent53State::class)->read($this->digest()));
     }

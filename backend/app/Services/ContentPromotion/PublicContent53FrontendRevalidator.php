@@ -41,12 +41,19 @@ final class PublicContent53FrontendRevalidator
             $body = json_encode(['content' => $content, 'cache_signal' => ['paths' => $paths]], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
             $timestamp = (string) time();
             $nonce = bin2hex(random_bytes(16));
-            $response = Http::acceptJson()->timeout(15)->connectTimeout(5)->withoutRedirecting()
-                ->withHeaders(['X-FM-Content-Release-Timestamp' => $timestamp, 'X-FM-Content-Release-Nonce' => $nonce,
-                    'X-FM-Content-Release-Signature' => 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret)])
-                ->withBody($body, 'application/json')->post($endpoint);
+            try {
+                $response = Http::acceptJson()->timeout(15)->connectTimeout(5)->withoutRedirecting()
+                    ->withHeaders(['X-FM-Content-Release-Timestamp' => $timestamp, 'X-FM-Content-Release-Nonce' => $nonce,
+                        'X-FM-Content-Release-Signature' => 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret)])
+                    ->withBody($body, 'application/json')->post($endpoint);
+            } catch (\Illuminate\Http\Client\ConnectionException $error) {
+                throw new DomainException('public_content_53_revalidation_transport_failed', previous: $error);
+            }
             $receipt = $response->json();
-            if (! $response->successful() || ($receipt['ok'] ?? null) !== true || ($receipt['revalidated_paths'] ?? null) !== $paths
+            if (! $response->successful()) {
+                throw new DomainException('public_content_53_revalidation_http_'.$response->status());
+            }
+            if (($receipt['ok'] ?? null) !== true || ($receipt['revalidated_paths'] ?? null) !== $paths
                 || ($receipt['rejected_paths'] ?? null) !== [] || ($receipt['invalidated_tags'] ?? null) !== $tags) {
                 throw new DomainException('public_content_53_revalidation_failed');
             }

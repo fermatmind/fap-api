@@ -170,6 +170,6 @@ try {
             $restored = false;
         }
     }
-    echo json_encode(['ok' => false, 'error_code' => ($error instanceof DomainException && preg_match('/\Apublic_content_53_[a-z_]+\z/', $error->getMessage()) ? $error->getMessage() : 'public_content_53_publication_failed'), 'recovery_completed' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
+    echo json_encode(['ok' => false, 'error_code' => ($error instanceof DomainException && preg_match('/\Apublic_content_53_[a-z0-9_]+\z/', $error->getMessage()) ? $error->getMessage() : 'public_content_53_publication_failed'), 'recovery_completed' => $restored, 'sanitized' => true], JSON_THROW_ON_ERROR).PHP_EOL;
     exit(1);
 }

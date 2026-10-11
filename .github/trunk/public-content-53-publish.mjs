@@ -31,12 +31,14 @@ const transport = (execution, request) => spawnSync('ssh', execution.args, {
   input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
   stdio: ['pipe', 'pipe', 'pipe'],
 });
-const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+|public_content_53_[a-z_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
+const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_PAGE-[0-9]{2}(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
 export function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;
+  let recoveryCode;
   try {
     const response = execute({ ...execution.request, mode: 'recover' });
     const result = JSON.parse(response.stdout ?? '');
+    if (result.ok === false) recoveryCode = diagnosticCode({ message: result.error_code });
     completed = response.status === 0 && result.ok === true && result.mode === 'recover'
       && result.source_commit === execution.request.source_commit
       && result.workflow_run_id === execution.request.workflow_run_id && result.workflow_run_attempt === 1
@@ -48,14 +50,15 @@ export function recoveryFailure(execution, execute = request => transport(execut
   error.receipt = { schema: 'public.content53.publish.v1', ok: false,
     source_commit: execution.request.source_commit, workflow_run_id: execution.request.workflow_run_id,
     workflow_run_attempt: 1, package_sha256: execution.binding.package_sha256,
-    recovery_completed: completed, transport_started: true, error_code: diagnosticCode(cause), sanitized: true };
+    recovery_completed: completed, transport_started: true, error_code: diagnosticCode(cause),
+    ...(!completed && recoveryCode ? { recovery_error_code: recoveryCode } : {}), sanitized: true };
   return error;
 }
 export function publish(execution, execute = request => transport(execution, request)) {
   try {
     const response = execute(execution.request);
     const output = JSON.parse(response.stdout ?? '');
-    if (output.ok === false && /^public_content_53_[a-z_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
+    if (output.ok === false && /^public_content_53_[a-z0-9_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
     if (response.status !== 0 || output.ok !== true || output.schema !== 'public.content53.publish.v1'
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
       || output.workflow_run_attempt !== 1 || output.package_sha256 !== execution.binding.package_sha256
