@@ -140,7 +140,10 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
         $exitCode = Artisan::call('articles:update-image-metadata', $options);
         $executed = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
-        $this->assertSame($planned['after'], $executed['after']);
+        $this->assertSame(
+            $this->normalizeJsonObjects($planned['after']),
+            $this->normalizeJsonObjects($executed['after']),
+        );
 
         $options['--resolved-metadata'] = $this->writeResolvedMetadata(static function (array &$payload): void {
             $payload['body_visual_asset_key'] = null;
@@ -482,6 +485,21 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
             'seo_is_indexable' => (bool) $article->seoMeta?->is_indexable,
             'schema_json' => $article->seoMeta?->schema_json,
         ];
+    }
+
+    private function normalizeJsonObjects(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->normalizeJsonObjects($item);
+        }
+        if (! array_is_list($value)) {
+            ksort($value, SORT_STRING);
+        }
+
+        return $value;
     }
 
     /**
