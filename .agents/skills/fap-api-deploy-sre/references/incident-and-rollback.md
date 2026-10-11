@@ -12,7 +12,7 @@ Never expose raw logs, environment values, database credentials, private paths, 
 
 ## Separately controlled actions
 
-Require exact action-specific authorization for:
+Outside the classifier-selected automatic `deploy.yml` lane, require exact action-specific authorization for:
 
 - deploy lock removal;
 - process termination or service restart;
@@ -22,9 +22,11 @@ Require exact action-specific authorization for:
 - CMS/content/database/Redis mutation;
 - SSH/sudo permission changes.
 
+Existing automatic migration/cache/content operations and same-attempt bounded LKG restoration retain the task's continuous authorization; diagnosis does not grant an ad-hoc production write. Manual recovery is reserved for a real incident after applicable automatic restoration failed.
+
 ## Rollback assessment
 
-Prove before requesting approval:
+For recovery assessment, prove:
 
 - current and target release SHA/ID;
 - target immutable release exists and was previously healthy;
@@ -32,12 +34,12 @@ Prove before requesting approval:
 - queue worker and Scheduler expectations;
 - post-rollback schema, health, scale, and content smoke set.
 
-Use only the protected repository rollback path. Never edit the active symlink or invoke Deployer directly as a substitute.
+Use only `recovery.yml` for separately controlled manual recovery. Never edit the active symlink or invoke Deployer directly as a substitute; ordinary same-attempt restoration stays owned by `deploy.yml`.
 
 ## Failure policy
 
 - Eligibility or preflight failure: no deployment retry until inputs/control are fixed.
-- Transport failure before activation: preserve evidence; fresh approval is required.
+- Transport failure before activation: preserve evidence, diagnose within the same scope, and push a new corrective commit into the original automatic chain. Do not rerun the failed SHA or request a new chat approval for that authorized repair.
 - Activation ambiguity: read-only investigation; no automatic retry.
 - Migration ambiguity: do not roll back application or data until migration state is proven.
 - Smoke failure with healthy revision: diagnose the failing dependency before changing release state.

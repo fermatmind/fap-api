@@ -24,13 +24,12 @@ Protect CMS publishing authority, editorial review gates, public content API con
 - Do not modify unrelated files or stage unrelated dirty files.
 - Do not process Informational findings unless explicitly requested.
 - Do not expose exploit-ready details in public PR titles or bodies.
-- Do not merge unless required checks pass and scope is clean.
+- Deliver ordinary changes through current AGENTS.md, isolated worktrees, path-limited commits and direct main push; bind applicable exact-SHA CI and automatic deployment evidence.
 - Do not close security findings unless source and test evidence prove they are fixed.
 - Stop if active Critical, High, or Medium findings appear during Low or Informational work.
 - Do not weaken previously fixed security boundaries.
-- Required checks for fap-api are hygiene, verify-mbti-v2, and verify-mbti-legacy.
-- Deploy Application must remain green for deploy or runtime-impacting PRs.
-- CMS and Media Library metadata remain the source of truth for publishable content.
+- Use the current path classifier and four workflows; retired required-check names, PR gates and Deploy Application are historical evidence only.
+- Resolve field ownership from current AGENTS.md and the resource contract: CMS, manifest-bound Current files and their projections are distinct; Media Library owns publishable media metadata.
 - Frontend output, sitemap presence, llms presence, or JSON-LD presence never substitutes for CMS/backend authority.
 - Private result, report, attempt, recovery, history, share-token, order, checkout, and payment URLs must never enter public feeds or public content evidence.
 
@@ -38,7 +37,7 @@ Protect CMS publishing authority, editorial review gates, public content API con
 
 | Concern | Authority | Required review |
 | --- | --- | --- |
-| Editorial body, answer blocks, FAQ, sections | CMS/backend content records | content boundary, duplication, claim safety, visible completeness |
+| Editorial body, answer blocks, FAQ, sections | Resource-specific current CMS or manifest-bound file authority | content boundary, duplication, claim safety, visible completeness |
 | SEO title, description, canonical, robots | backend SEO/public read model | canonical and robots coherence; no local consumer invention |
 | JSON-LD | backend structured-data projection | visible FAQ parity, canonical parity, supported schema only |
 | Public profile/comparison API | fap-api read models | publication, locale, effective indexability, payload bounds |
@@ -52,15 +51,17 @@ Protect CMS publishing authority, editorial review gates, public content API con
 2. Establish the exact inventory and classify each record as repair, verify-only, or excluded. Do not manufacture changes for verify-only records.
 3. Validate content and claims before preparing an import package. For personality assets, include semantic quality, duplicate risk, FAQ parity, internal links, and framework boundaries.
 4. Run the resource-specific dry-run planner. A dry-run must be deterministic, write-free, and fail closed on schema, slug, locale, record count, or hash mismatch.
-5. Build an exact approval artifact. Production options must come from that artifact and explicit operator authorization; never infer them from a filename, branch, latest `main`, a prior task, or chat history alone.
-6. Execute draft import, public content promotion, and discoverability promotion as separate controlled stages. A completed stage does not authorize the next stage.
+5. Bind the reviewed exact package to source hash, current source/group/revision/version, scope and count. Read staging and production pre-state separately, including missing SEO, published and working pointers, and manual holds. A translation-provider gap does not prevent review of an existing translation; missing publication capability belongs to the engineering owner.
+6. Follow the resource-specific classifier-selected automatic exact-package lane under the current user authorization. Keep draft, public content and discoverability controls distinct; ordinary safe delivery does not add PRs, dispatches or chat approvals. A generic deploy is not authority to publish an unselected package or broaden discoverability.
 7. Read back CMS state and public APIs. Validate fields and parity, not only HTTP status.
-8. Warm bounded public read models when the published surface requires it, then repeat readback.
+8. Let the existing automatic lane perform its selected bounded cache/reader work, then verify actual consumers. Before a new publication path is delivered, cover conflict rejection, transactional rollback and restore→new-owner publication without overwriting immutable history or working drafts.
 9. Validate canonical, robots, JSON-LD, FAQ parity, sitemap, llms, llms-full, and private URL exclusions when discoverability is in scope.
 10. Keep GSC submission, URL Inspection, indexing requests, and search submission in a separate explicitly authorized task.
 11. Include a Repository rule impact note when ownership, publishing, public API, media, SEO, or feed behavior changes.
 
-## MBTI personality publication gates
+## Historical MBTI command boundaries
+
+The following records describe existing command-specific controls; they are not the ordinary manual delivery path. Use them only when the explicit task targets that command/cohort and current authority confirms it. Do not reuse historical hashes or add per-stage chat approvals to an already authorized automatic lane.
 
 MBTI publication uses three independent write gates.
 
@@ -94,20 +95,15 @@ For the completed Chinese 52-URL MBTI cohort and its historical batch evidence, 
 
 - A production write must bind to one reviewed package, one expected source hash, one authorization payload hash, one scope mode, and one record count.
 - Public and discoverability promotion additionally bind to their current dry-run promotion package hash.
-- Run dry-run against the deployed command revision and current production pre-state before requesting write authorization.
+- Bind dry-run to the applicable command revision and current environment pre-state; existing continuous authorization covers its selected automatic lane, while an unselected package or scope needs clarification.
 - If any hash, slug, locale, section key, record count, or pre-state differs, reject the whole batch.
 - Do not partially apply a fail-closed batch unless the command and approval artifact explicitly define partial behavior.
 - A prior approval is not reusable after package, command revision, data pre-state, or scope changes.
-- A deployment approval is not a CMS/database write approval, and a CMS write approval is not a deployment approval.
+- Software activation and content publication are separate authorities. The existing exact-package lane may perform both only when its classifier, package and current user scope bind the operation; neither implies search mutation.
 
 ## MBTI readback and warmup
 
-After profile publication or read-model changes:
-
-```bash
-cd /Users/rainie/Desktop/GitHub/fap-api/backend
-php artisan personality:warm-public-read-models --types=<COMMA_SEPARATED_TYPES> --locales=zh-CN
-```
+For a task explicitly targeting the historical MBTI command, use its existing bounded warm operation only within that authorization. Ordinary releases use the classifier-selected workflow operation; do not run a manual warm merely to validate this Skill.
 
 Then validate the public detail and SEO APIs for every affected profile. For comparisons, validate comparison detail/index read models. Required evidence includes:
 
@@ -134,18 +130,9 @@ Also validate referenced paths, command names, and changed-file scope. Do not ru
 
 ### CMS planner, importer, promotion, or public read-model change
 
-Run focused tests for the changed command/service/controller first. Then run the repository-required MBTI verification:
+Run focused success, conflict, failure and restore/republication tests for the touched command/service/controller; use production-relevant database engine/query/JSON semantics when that boundary changes. Confirm failure injection reaches the intended business transaction and preserves public state and drafts. Object-key reordering may be equivalent; scalar types, values, list order, FAQ answers and deletion are not.
 
-```bash
-cd /Users/rainie/Desktop/GitHub/fap-api/backend
-php artisan route:list --path=api --except-vendor --no-ansi
-
-cd /Users/rainie/Desktop/GitHub/fap-api
-bash backend/scripts/ci_verify_mbti.sh
-git diff --check
-```
-
-Run migrations only when migration/schema behavior is in scope, using an isolated test database. Do not create a migration requirement for docs-only or read-model-only work.
+Run route:list only for changed route wiring, isolated migrations only for schema work, and the full MBTI chain only for an affected high-risk boundary or explicit request; routine heavy regression belongs to Nightly. Run the relevant formatting/static checks and git diff --check. Documentation/Skill-only delivery requires CI and deploy-skip, with no database commands or application deployment.
 
 Before starting a heavy full test, obey the repository concurrency guard and confirm no other FermatMind PHPUnit, Composer, or verify suite is already running.
 
@@ -160,7 +147,7 @@ Always report:
 - acceptance commands and results.
 - public API, media, SEO/schema, and feed impact.
 - whether production write, deploy, or GSC operations were executed; default is no.
-- PR number, CI status, merge commit, and branch cleanup when applicable.
+- exact commit SHA, CI and deploy-skip or applicable staging/production evidence, plus task worktree cleanup. Report a PR only when explicitly requested.
 - deferred editorial or operational tasks.
 - confirmation that no unrelated files were touched.
 
@@ -174,4 +161,4 @@ Stop if:
 - package authority, locale, slug mapping, pre-state, or production authorization is ambiguous.
 - unpublished content can leak, frontend fallback content is introduced, media authority is bypassed, or migrations fail.
 - the requested action would combine draft import, public promotion, discoverability promotion, deployment, or GSC mutation without their separate controls.
-- a production/CMS/database write, deployment, or search mutation is requested without its exact explicit authorization.
+- the selected package or mutation is outside the current authorization. Safe ordinary automatic delivery remains continuously authorized; search, destructive or permission changes retain their separate boundaries.

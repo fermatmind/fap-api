@@ -1,6 +1,6 @@
 # Backend control plane
 
-Last verified: 2026-08-10.
+Current control-plane source must be checked at the exact candidate SHA; historical examples do not bind a new release.
 
 ## Runtime roles
 
@@ -43,3 +43,11 @@ exact pushed SHA
   -> bounded smoke and automatic LKG restoration on committed failure
   -> production receipt/release record
 ```
+
+## Complete acceptance and bounded consumers
+
+Production baseline discovery requires the complete successful production job, its activation step and immutable actual candidate binding; workflow head_sha and a deploy-skip are not an application baseline. Include unreleased runtime paths when selecting consumers.
+
+For a newly selected publication path, read each environment's real source lineage, missing/existing SEO, published/working pointers and holds. Verify conflict rejection and restore→new-owner publication as well as first publication. Follow the frontend route and shared cache/worker generation rather than stopping at the backend adapter.
+
+Budget the selected consumer sequence cumulatively, including cache repair, discovery checks and reload. An outer timeout does not make a lock acquire wait: inspect actual owner, wait and lease/recheck code. Preserve foreign locks and reread authority after waiting. Use current limits; do not copy a historical job duration as an ETA or relax unrelated child limits.

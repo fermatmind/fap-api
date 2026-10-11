@@ -33,9 +33,9 @@ Operate backend releases through the four-workflow trunk control plane. Do not r
 1. Fetch `origin`; record requested SHA and current `origin/main`.
 2. Prove the candidate is contained in `main` and resolve its exact push/CI receipt.
 3. Require the exact-SHA path-aware CI result to be successful.
-4. Classify changed paths: code-only, runtime/config, schema, authority/content, workflow-only, or unknown.
-5. Require a successful exact-SHA `deploy.yml` staging phase and its receipt evidence.
-6. Confirm no conflicting production mutation workflow is active.
+4. Before requiring deployment evidence, resolve the release classifier union of pushed paths and unreleased runtime differences. A pure docs/rules change with no pending runtime requires exact-SHA CI and deploy-skip only; report staging/production as not applicable and finish closeout.
+5. For runtime-selected releases, require a successful exact-SHA `deploy.yml` staging phase and its receipt evidence.
+6. Inspect every classifier-selected publication/restore/readback consumer, the unreleased runtime union, each child limit and the outer job budget; CI duration or core activation time is not the whole deployment duration. Confirm no conflicting production mutation workflow is active.
 7. With explicit read-only SSH permission, compare active production revision and verify Nginx, PHP-FPM, Supervisor workers, Scheduler, RDS dependency health, and local production Redis.
 8. Confirm `deploy.yml` will consume only the exact successful CI receipt and will serialize activation without replacing the in-flight SHA.
 
@@ -72,7 +72,8 @@ Verify:
 - application uses Alibaba RDS and the approved local production Redis topology;
 - `/up`, flags, public scale authority, MBTI, Big Five, Enneagram, and RIASEC representative checks pass;
 - migration/schema, public-content, and runtime-authority checks required by the workflow pass;
-- every classifier-selected content, migration, cache, or SEO operation completed inside the exact-SHA deploy run; no out-of-scope DNS, secret, permission, or destructive mutation occurred.
+- every classifier-selected content, migration, cache, or SEO operation completed inside the exact-SHA deploy run; a successful activation step cannot override a failed publisher or incomplete production job; no out-of-scope DNS, secret, permission, or destructive mutation occurred.
+- for affected public readers, bind backend and frontend revisions and sampling start/end; distinguish authoritative data, pointer/cache generation, complete streamed HTML and visible DOM across publication or recovery. Diagnose independent Nightly domains from complete original failed logs; a focused PASS does not close their failures.
 
 Use fixed timeouts and bounded retries. Ordinary contract 4xx fails immediately; retry only the transport/status classes explicitly allowed by repository helpers.
 
