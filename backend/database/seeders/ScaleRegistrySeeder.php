@@ -849,7 +849,10 @@ final class ScaleRegistrySeeder extends Seeder
 
         return DB::transaction(function () use ($writer, $attributes) {
             $published = [];
-            foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            $tables = $attributes['code'] === 'EQ_60'
+                ? ['scales_registry_v2', 'scales_registry']
+                : ['scales_registry', 'scales_registry_v2'];
+            foreach ($tables as $table) {
                 if (! Schema::hasTable($table)) {
                     continue;
                 }
@@ -860,6 +863,15 @@ final class ScaleRegistrySeeder extends Seeder
                         if (array_key_exists($key, $content[$locale] ?? [])) {
                             $published[$table][$locale][$key] = $content[$locale][$key];
                         }
+                    }
+                }
+            }
+            // Preserve the public EQ intro before the wide write, not only in its later readback.
+            if ($attributes['code'] === 'EQ_60') {
+                foreach ($published as $fields) {
+                    $intro = data_get($fields, 'en.why_choose.intro');
+                    if (is_string($intro)) {
+                        data_set($attributes, 'content_i18n_json.en.why_choose.intro', $intro);
                     }
                 }
             }

@@ -38,6 +38,8 @@ class ScaleRegistryWriter
         $data['slugs_json'] = $authoritativeSlugs;
 
         [$scale, $affectedSlugs] = DB::transaction(function () use ($data, $orgId, $code, $primarySlug, $authoritativeSlugs, $projectedSlugs): array {
+            $this->assertExistingEqIntroUnchanged($data);
+
             $affectedSlugs = array_values(array_unique([
                 ...$this->existingSlugs($orgId, $code),
                 ...$this->existingProjectedSlugs($orgId, $code),
@@ -87,6 +89,208 @@ class ScaleRegistryWriter
         $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
 
         return $scale;
+    }
+
+    /** The single public EQ intro seam; never accepts a generic row or JSON patch. */
+    public const EQ_INTRO_TARGET = [
+        'org_id' => 0,
+        'id' => 3,
+        'code' => 'EQ_60',
+        'primary_slug' => 'eq-test-emotional-intelligence-assessment',
+        'field' => 'content_i18n_json.en.why_choose.intro',
+    ];
+
+    public function eqIntroBaseline(array $target): array
+    {
+        $this->assertEqIntroTarget($target);
+        [$v2, $legacy, $content] = $this->eqIntroRows(false);
+
+        return [
+            'target' => self::EQ_INTRO_TARGET,
+            'baseline' => $this->eqIntroFingerprint($v2, $legacy),
+            'before' => $content['en']['why_choose']['intro'],
+        ];
+    }
+
+    /** Plan and execute use exactly the same validation; execution rechecks under both locks. */
+    public function updateEqIntro(array $request, bool $execute = false): array
+    {
+        $this->assertExactKeys($request, ['target', 'baseline', 'before', 'after']);
+        $this->assertEqIntroTarget($request['target'] ?? null);
+        $this->assertExactKeys($request['baseline'] ?? null, ['v2', 'legacy']);
+        foreach ($request['baseline'] as $hash) {
+            if (! is_string($hash) || ! preg_match('/^[a-f0-9]{64}$/D', $hash)) {
+                throw new \DomainException('Invalid EQ intro baseline.');
+            }
+        }
+        $request['baseline'] = ['v2' => $request['baseline']['v2'], 'legacy' => $request['baseline']['legacy']];
+        $before = $request['before'];
+        $after = $request['after'];
+        if (! is_string($before) || ! is_string($after)
+            || ! mb_check_encoding($after, 'UTF-8') || strlen($after) > 8192
+            || ! str_starts_with($after, $before."\n\n")
+            || trim(substr($after, strlen($before) + 2)) === '') {
+            throw new \DomainException('EQ intro must append nonempty text to the exact original.');
+        }
+        // A final cache outcome cannot be truthfully returned before an outer transaction commits.
+        if ($execute && DB::transactionLevel() !== 0) {
+            throw new \DomainException('EQ intro execute requires its own top-level transaction.');
+        }
+
+        $operation = function () use ($request, $execute, $before, $after): array {
+            [$v2, $legacy, $content] = $this->eqIntroRows($execute);
+            if ($this->eqIntroFingerprint($v2, $legacy) !== $request['baseline']
+                || $content['en']['why_choose']['intro'] !== $before) {
+                throw new \DomainException('Stale EQ intro baseline; obtain a fresh plan.');
+            }
+            $result = ['status' => 'PLAN_READY', 'target' => self::EQ_INTRO_TARGET,
+                'baseline' => $request['baseline'], 'before' => $before, 'after' => $after];
+            if (! $execute) {
+                return $result;
+            }
+
+            // Fixed, bound JSON leaf update: no model casts, row upsert, timestamp or slug writes.
+            foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+                $count = DB::update(
+                    "UPDATE {$table} SET content_i18n_json = JSON_SET(content_i18n_json, '$.en.why_choose.intro', ?) WHERE org_id = ? AND code = ?",
+                    [$after, 0, 'EQ_60'],
+                );
+                if ($count !== 1) {
+                    throw new \DomainException('EQ intro dual-table update count mismatch.');
+                }
+            }
+            [$newV2, $newLegacy, $newContent] = $this->eqIntroRows(true);
+            $expected = $content;
+            $expected['en']['why_choose']['intro'] = $after;
+            // DB JSON serialization can change; every other value/type and column must be identical.
+            if ($newContent !== $expected || ! $this->eqIntroContentMatches($v2, $newV2, $after)
+                || ! $this->eqIntroProtectedColumnsMatch($v2, $newV2)
+                || ! $this->eqIntroProtectedColumnsMatch($legacy, $newLegacy)) {
+                throw new \DomainException('EQ intro protected readback mismatch.');
+            }
+            $result['post_baseline'] = $this->eqIntroFingerprint($newV2, $newLegacy);
+            $result['status'] = 'APPLIED';
+
+            return $result;
+        };
+        if (! $execute) {
+            return $operation();
+        }
+        $result = DB::transaction($operation);
+        try {
+            $this->invalidateCache(0, 'EQ_EMOTIONAL_INTELLIGENCE');
+            $this->invalidatePublicProjection(0, 'EQ_60', $this->existingSlugs(0, 'EQ_60'));
+        } catch (\Throwable) {
+            // The transaction has committed. Never pretend this is a rollback or retry the body write.
+            $result['status'] = 'PARTIAL_CACHE_CLOSEOUT';
+        }
+
+        return $result;
+    }
+
+    private function assertEqIntroTarget(mixed $target): void
+    {
+        $this->assertExactKeys($target, array_keys(self::EQ_INTRO_TARGET));
+        foreach (self::EQ_INTRO_TARGET as $key => $value) {
+            if ($target[$key] !== $value) {
+                throw new \DomainException('Unsupported EQ intro target.');
+            }
+        }
+    }
+
+    private function assertExactKeys(mixed $value, array $keys): void
+    {
+        if (! is_array($value)) {
+            throw new \DomainException('Invalid EQ intro contract.');
+        }
+        $actual = array_keys($value);
+        sort($actual);
+        sort($keys);
+        if ($actual !== $keys) {
+            throw new \DomainException('Unexpected EQ intro contract fields.');
+        }
+    }
+
+    private function eqIntroRows(bool $lock): array
+    {
+        if (! $this->useV2Table() || ! in_array(DB::connection()->getDriverName(), ['sqlite', 'mysql'], true)) {
+            throw new \DomainException('Unsupported EQ intro authority or database.');
+        }
+        $rows = [];
+        foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+            $query = DB::table($table)->where('org_id', 0)->where('code', 'EQ_60');
+            $found = ($lock ? $query->lockForUpdate() : $query)->get();
+            if ($found->count() !== 1) {
+                throw new \DomainException('EQ intro requires exactly one existing row per table.');
+            }
+            $row = (array) $found->first();
+            if (($row['code'] ?? null) !== self::EQ_INTRO_TARGET['code']
+                || ($row['primary_slug'] ?? null) !== self::EQ_INTRO_TARGET['primary_slug']
+                || ($table === self::V2_TABLE && (int) ($row['id'] ?? 0) !== 3)) {
+                throw new \DomainException('EQ intro identity mismatch.');
+            }
+            $rows[] = $row;
+        }
+        if ($rows[0]['content_i18n_json'] !== $rows[1]['content_i18n_json']) {
+            throw new \DomainException('EQ intro dual-table content differs.');
+        }
+        try {
+            $content = json_decode($rows[0]['content_i18n_json'], true, 512, JSON_THROW_ON_ERROR);
+        } catch (\Throwable) {
+            throw new \DomainException('Invalid EQ intro content JSON.');
+        }
+        if (! is_string($content['en']['why_choose']['intro'] ?? null)) {
+            throw new \DomainException('Missing EQ intro string.');
+        }
+
+        return [$rows[0], $rows[1], $content];
+    }
+
+    private function eqIntroFingerprint(array $v2, array $legacy): array
+    {
+        return [
+            'v2' => hash('sha256', json_encode($v2, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+            'legacy' => hash('sha256', json_encode($legacy, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)),
+        ];
+    }
+
+    private function eqIntroContentMatches(array $before, array $after, string $intro): bool
+    {
+        // Object-mode decoding distinguishes empty objects from lists; preserve numeric types too.
+        $expected = json_decode($before['content_i18n_json'], false, 512, JSON_THROW_ON_ERROR);
+        $actual = json_decode($after['content_i18n_json'], false, 512, JSON_THROW_ON_ERROR);
+        $expected->en->why_choose->intro = $intro;
+        $flags = JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+
+        return json_encode($expected, $flags) === json_encode($actual, $flags);
+    }
+
+    private function eqIntroProtectedColumnsMatch(array $before, array $after): bool
+    {
+        unset($before['content_i18n_json'], $after['content_i18n_json']);
+
+        return $before === $after;
+    }
+
+    private function assertExistingEqIntroUnchanged(array $data): void
+    {
+        if ((int) $data['org_id'] !== 0 || $data['code'] !== 'EQ_60') {
+            return;
+        }
+        foreach ([self::V2_TABLE, self::LEGACY_TABLE] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+            $row = DB::table($table)->where('org_id', 0)->where('code', 'EQ_60')->lockForUpdate()->first();
+            if ($row === null) {
+                continue;
+            }
+            $original = data_get(json_decode((string) $row->content_i18n_json, true), 'en.why_choose.intro');
+            $proposed = data_get(json_decode((string) $this->encodeJson($data['content_i18n_json'] ?? null), true), 'en.why_choose.intro');
+            if (is_string($original) && $proposed !== $original) {
+                throw new \DomainException('Existing EQ_60 intro requires the restricted intro contract.');
+            }
+        }
     }
 
     public function syncSlugsForScale(ScaleRegistryModel $scale): void
