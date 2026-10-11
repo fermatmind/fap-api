@@ -46,8 +46,9 @@ $walk = function($node) use (&$walk) {
  if ($node instanceof DOMText) return $node->nodeValue;
  $text=''; foreach($node->childNodes as $child) $text .= ' '.$walk($child); return $text;
 };
+$labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
-echo json_encode(['body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
@@ -76,16 +77,56 @@ function changedStrings(before,after) {
   if (!after || typeof after !== 'object') return [];
   return Object.entries(after).flatMap(([k,v])=>changedStrings(before?.[k],v));
 }
+// Match only the three documented field headings/prefixes removed by
+// ContentPageTemplate. Ordinary headings and their reader copy remain required.
+function readerLine(line, kind) {
+  if (kind !== 'page') return line;
+  const markers = new Set(['content_md','content_html','visible_faq_items']);
+  const normalize = value => value.trim().replace(/^[`*_]+|[`*_]+$/g,'').toLowerCase().replace(/[\s-]+/g,'_');
+  const heading = /^\s*#{1,6}\s+(.+?)\s*$/.exec(line);
+  if (heading && markers.has(normalize(heading[1]))) return '';
+  const prefix = /^\s*([A-Za-z][A-Za-z0-9_-]*)\s*:\s*(.*)$/.exec(line);
+  return prefix && markers.has(normalize(prefix[1])) ? prefix[2].trim() : line;
+}
+function internalTarget(href, environment) {
+  try {
+    const url = new URL(href,'https://fermatmind.com');
+    if (url.protocol !== 'https:' || url.username || url.password
+      || !['fermatmind.com','www.fermatmind.com',...(environment === 'staging' ? ['staging.fermatmind.com']:[])].includes(url.hostname)) return null;
+    return url;
+  } catch { return null; }
+}
+function readerVariants(line, row, dom, environment) {
+  let variants = [plain(line)];
+  // Bare internal paths are rendered as human anchor labels. Require the
+  // corresponding visible anchor, its same public route, and every non-link word.
+  const paths = [...new Set(variants[0].match(/(?<![A-Za-z0-9_./:@?=&%#-])\/(?:(?:zh|en)\/)?(?:articles|tests|science|career|personality|topics|method-boundaries|reliability-validity|item-design-notes|common-misconceptions|data-privacy|help|support|business)(?:\/[A-Za-z0-9._~:/?#@!$&'*+,;=%-]+)?/g) ?? [])]
+    .map(path=>path.replace(/[.。．，,、；;：:！？!?）)\]】》>]+$/g,''));
+  for (const path of paths) {
+    const expected = internalTarget(path,environment);
+    if (!expected) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
+    const localized = /^\/(?:en|zh)(?:\/|$)/.test(expected.pathname) ? expected.pathname : `/${row.identity.locale === 'en' ? 'en' : 'zh'}${expected.pathname}`;
+    const labels = Object.entries(dom.link_labels).flatMap(([href, values])=>{
+      const actual = internalTarget(href,environment);
+      return actual && [expected.pathname,localized].includes(actual.pathname) && actual.hash === expected.hash ? values : [];
+    }).filter(label=>compact(label));
+    if (!labels.length) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
+    variants = variants.flatMap(text=>[...new Set(labels)].map(label=>text.replaceAll(path,label)));
+    if (variants.length > 128) throw new Error(`PUBLIC_CONTENT_53_LINK_VARIANT_LIMIT_${row.page_id}`);
+  }
+  return variants;
+}
 export function assertDom(row,html,before,environment) {
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
   const copy=row.snapshot.content_md;
-  const lines = copy ? copy.split('\n').filter(line=>line.trim() && !/^[\s|:-]+$/.test(line) && !/^#(?:content_md|summary|faq)\s*$/.test(line)).flatMap(line=>line.split('|'))
+  const lines = copy ? copy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean) : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
-    if (text && !body.includes(text)) throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
+    if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))
+      throw new Error(`PUBLIC_CONTENT_53_VISIBLE_BODY_${row.page_id}_ITEM_${index + 1}`);
   }
   if (dom.canonical.length !== 1 || !equal(dom.canonical,before.dom.canonical) || !equal(dom.robots,before.dom.robots)
     || !equal(dom.alternates,before.dom.alternates)) throw new Error(`PUBLIC_CONTENT_53_DISCOVERABILITY_DRIFT_${row.page_id}`);
@@ -94,7 +135,7 @@ export function assertDom(row,html,before,environment) {
     || url.pathname !== path || url.search || url.hash) throw new Error(`PUBLIC_CONTENT_53_CANONICAL_${row.page_id}`);
   for (const link of copy?.matchAll(/\[[^\]]+\]\((\/(?:en|zh)\/[^)]+)\)/g) ?? []) {
     const target=new URL(link[1],'https://fermatmind.com');
-    if (target.pathname.includes('\\') || !dom.links.some(href=>{try{return new URL(href,'https://fermatmind.com').pathname === target.pathname;}catch{return false;}})) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
+    if (target.pathname.includes('\\') || !dom.links.some(href=>{try{return internalTarget(href,environment)?.pathname === target.pathname;}catch{return false;}})) throw new Error(`PUBLIC_CONTENT_53_LINK_${row.page_id}`);
   }
   if (row.page_id === 'PAGE-37') {
     const cta=dom.links.map(href=>new URL(href,'https://fermatmind.com')).find(u=>u.searchParams.get('cta_id') === 'start_test');

@@ -99,3 +99,22 @@ test('async publication accepts the complete signed protocol without invoking re
  const invalid=()=>({status:0,stdout:'invalid private response bytes'});
  await assert.rejects(()=>publish(execution,invalid),error=>error.receipt.error_code==='PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'&&!JSON.stringify(error.receipt).includes('private'));
 });
+
+
+test('content-page field markers follow the real template without dropping reader headings or paragraphs',()=>{
+ const row={page_id:'PAGE-52',kind:'page',identity:{locale:'zh-CN',slug:'science'},snapshot:{title:'测评科学',content_md:'# content_md\n## **content-html**\n### `visible faq items`\ncontent_md: 真实正文必须保留。\n## 方法边界\n仍需验证。'}};
+ const html='<html><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com/zh/science"></head><body><main><h1>测评科学</h1><p>真实正文必须保留。</p><h2>方法边界</h2><p>仍需验证。</p></main></body></html>';
+ const before={dom:{canonical:['https://fermatmind.com/zh/science'],robots:[],alternates:[]}};
+ assertDom(row,html,before,'production');
+ assert.throws(()=>assertDom(row,html.replace('真实正文必须保留。',''),before,'production'),/VISIBLE_BODY/);
+ assert.throws(()=>assertDom(row,html.replace('<h2>方法边界</h2>',''),before,'production'),/VISIBLE_BODY/);
+});
+test('bare internal paths require visible labels on the matching public route and retain surrounding copy',()=>{
+ const row={page_id:'PAGE-30',kind:'page',identity:{locale:'en',slug:'science'},snapshot:{title:'Science',content_md:'Related pages include /method-boundaries and /item-design-notes.'}};
+ const html='<html><head><meta charset="utf-8"><link rel="canonical" href="https://fermatmind.com/en/science"></head><body><main><h1>Science</h1><p>Related pages include <a href="/method-boundaries">Method boundaries</a> and <a href="/en/item-design-notes">Item design notes</a>.</p></main></body></html>';
+ const before={dom:{canonical:['https://fermatmind.com/en/science'],robots:[],alternates:[]}};
+ assertDom(row,html,before,'production');
+ for(const replacement of ['https://external.invalid/method-boundaries','/wrong-route','/zh/method-boundaries'])assert.throws(()=>assertDom(row,html.replace('href="/method-boundaries"','href="'+replacement+'"'),before,'production'),/LINK/);
+ assert.throws(()=>assertDom(row,html.replace('Related pages include ',''),before,'production'),/VISIBLE_BODY/);
+ assert.throws(()=>assertDom(row,html.replace('<a href="/method-boundaries">','<a hidden href="/method-boundaries">'),before,'production'),/LINK/);
+});
