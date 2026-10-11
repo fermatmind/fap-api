@@ -18,13 +18,23 @@ const hosts = env => {
   if (!['staging','production'].includes(env)) throw new Error('PUBLIC_CONTENT_53_ENV_INVALID');
   return env === 'staging' ? ['https://staging-api.fermatmind.com','https://staging.fermatmind.com'] : ['https://api.fermatmind.com','https://fermatmind.com'];
 };
-async function read(url, fetcher) {
-  const response = await fetcher(url, {redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Cache-Control':'no-cache'}});
+export async function read(url, fetcher) {
+  let response, bytes;
+  try { response = await fetcher(url, {redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Cache-Control':'no-cache'}}); }
+  catch (error) {
+    const code = error?.cause?.code ?? error?.name;
+    const known = new Set(['UND_ERR_SOCKET','UND_ERR_CONNECT_TIMEOUT','UND_ERR_HEADERS_TIMEOUT','ECONNRESET','ENOTFOUND','TimeoutError','AbortError']);
+    throw new Error('PUBLIC_CONTENT_53_API_TRANSPORT_' + (known.has(code) ? code.toUpperCase() : 'FAILED'));
+  }
   if (response.status !== 200) throw new Error('PUBLIC_CONTENT_53_RESPONSE_INVALID');
-  const bytes = await response.text();
+  try { bytes = await response.text(); }
+  catch { throw new Error('PUBLIC_CONTENT_53_API_BODY_TRANSPORT_FAILED'); }
   if (bytes.length > 2500000) throw new Error('PUBLIC_CONTENT_53_RESPONSE_LIMIT');
   return bytes;
 }
+const parseApi = bytes => {
+  try { return JSON.parse(bytes); } catch { throw new Error('PUBLIC_CONTENT_53_API_JSON_INVALID'); }
+};
 export function domOf(html) {
   const code = String.raw`
 $doc = new DOMDocument; libxml_use_internal_errors(true);
@@ -53,7 +63,7 @@ const apiPath = row => `/api/v0.5/${{article:'articles',page:'content-pages',sur
 export async function readOnlinePrestate(environment,backendRoot,fetcher=fetch) {
   const [api,web] = hosts(environment); const result={};
   for (const row of readCandidateRows(backendRoot).candidates) {
-    const data=JSON.parse(await read(api+apiPath(row),fetcher));const value=projection(row,data);
+    const data=parseApi(await read(api+apiPath(row),fetcher));const value=projection(row,data);
     if (!equal(value,environment === 'staging' ? row.staging_before : row.before) && !equal(value,row.snapshot)) throw new Error(`PUBLIC_CONTENT_53_PRESTATE_DRIFT_${row.page_id}`);
     const native=data[row.kind];
     result[row.page_id]={id:native.id,flags:Object.fromEntries(['is_indexable','sitemap_eligible','llms_eligible','translation_group_id','source_locale'].filter(k=>Object.hasOwn(native,k)).map(k=>[k,native[k]])),dom:domOf(await read(web+pathFor(row),fetcher))};
@@ -94,7 +104,7 @@ export function assertDom(row,html,before,environment) {
 export async function verifyOnlineCandidates(environment,backendRoot,fetcher=fetch,renderer=renderPage,prestate) {
   const [api,web]=hosts(environment);if(!prestate) throw new Error('PUBLIC_CONTENT_53_PRESTATE_REQUIRED');
   for (const row of readCandidateRows(backendRoot).candidates) {
-    const data=JSON.parse(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
+    const data=parseApi(await read(api+apiPath(row),fetcher));const before=prestate[row.page_id];const native=data[row.kind];
     if(!before || !equal(projection(row,data),row.snapshot) || native.id !== before.id || Object.entries(before.flags).some(([k,v])=>!equal(native[k],v))) throw new Error(`PUBLIC_CONTENT_53_NATIVE_READBACK_${row.page_id}`);
     // One publication only. Existing 300-second public fetch caches can settle
     // while exact candidate DOM assertions remain strict and bounded.

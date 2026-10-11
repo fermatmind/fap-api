@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, execFile } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,17 +27,23 @@ export function buildExecution(env, backendRoot) {
   args.push('-p', env.DEPLOY_PORT, `${env.DEPLOY_USER}@${env.DEPLOY_HOST}`, command);
   return { binding, request, args };
 }
-const transport = (execution, request) => spawnSync('ssh', execution.args, {
-  input: JSON.stringify(request), encoding: 'utf8', timeout: 800000, maxBuffer: 262144,
-  stdio: ['pipe', 'pipe', 'pipe'],
+const transport = (execution, request) => new Promise(resolve => {
+  const child = execFile('ssh', execution.args, { encoding: 'utf8', timeout: 800000, maxBuffer: 262144 },
+    (error, stdout) => resolve({ status: error ? (Number.isInteger(error.code) ? error.code : 1) : 0, stdout }));
+  child.stdin.on('error', () => {});
+  child.stdin.end(JSON.stringify(request));
 });
+const parseResponse = bytes => {
+  try { return JSON.parse(bytes ?? ''); }
+  catch { throw new Error('PUBLIC_CONTENT_53_PUBLICATION_JSON_INVALID'); }
+};
 const diagnosticCode = error => /^(?:PUBLIC_CONTENT_53_[A-Z0-9_]+(?:_PAGE-[0-9]{2}(?:_ITEM_[0-9]{1,4})?)?|public_content_53_[a-z0-9_]+)$/.test(error?.message ?? '') ? error.message : 'PUBLIC_CONTENT_53_PUBLICATION_FAILED';
-export function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
+export async function recoveryFailure(execution, execute = request => transport(execution, request), cause) {
   let completed = false;
   let recoveryCode;
   try {
-    const response = execute({ ...execution.request, mode: 'recover' });
-    const result = JSON.parse(response.stdout ?? '');
+    const response = await execute({ ...execution.request, mode: 'recover' });
+    const result = parseResponse(response.stdout);
     if (result.ok === false) recoveryCode = diagnosticCode({ message: result.error_code });
     completed = response.status === 0 && result.ok === true && result.mode === 'recover'
       && result.source_commit === execution.request.source_commit
@@ -54,10 +60,10 @@ export function recoveryFailure(execution, execute = request => transport(execut
     ...(!completed && recoveryCode ? { recovery_error_code: recoveryCode } : {}), sanitized: true };
   return error;
 }
-export function publish(execution, execute = request => transport(execution, request)) {
+export async function publish(execution, execute = request => transport(execution, request)) {
   try {
-    const response = execute(execution.request);
-    const output = JSON.parse(response.stdout ?? '');
+    const response = await execute(execution.request);
+    const output = parseResponse(response.stdout);
     if (output.ok === false && /^public_content_53_[a-z0-9_]+$/.test(output.error_code ?? '')) throw new Error(output.error_code);
     if (response.status !== 0 || output.ok !== true || output.schema !== 'public.content53.publish.v1'
       || output.source_commit !== execution.request.source_commit || output.workflow_run_id !== execution.request.workflow_run_id
@@ -69,7 +75,7 @@ export function publish(execution, execute = request => transport(execution, req
       workflow_run_attempt: 1, package_sha256: output.package_sha256, published_count: 50,
       phases: output.phases.map(row => ({ phase: row.phase, receipt_sha256: row.receipt_sha256, readback_count: 50 })), sanitized: true };
   } catch (cause) {
-    throw recoveryFailure(execution, execute, cause);
+    throw await recoveryFailure(execution, execute, cause);
   }
 }
 function failedBeforeTransport(env) {
@@ -92,15 +98,15 @@ async function cli() {
     execution = buildExecution(env, resolve('backend'));
     const prestate = await readOnlinePrestate(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'));
     transportStarted = true;
-    const receipt = publish(execution);
+    const receipt = await publish(execution);
     try {
       receipt.online_acceptance = await verifyOnlineCandidates(env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT, resolve('backend'), fetch, undefined, prestate);
     } catch (cause) {
-      throw recoveryFailure(execution, undefined, cause);
+      throw await recoveryFailure(execution, undefined, cause);
     }
     writeFileSync(resolve(directory, `${env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(receipt)}\n`, { flag: 'wx', mode: 0o600 });
   } catch (original) {
-    const error = original.receipt ? original : transportStarted ? recoveryFailure(execution) : failedBeforeTransport(env);
+    const error = original.receipt ? original : transportStarted ? await recoveryFailure(execution) : failedBeforeTransport(env);
     error.receipt.error_code ??= diagnosticCode(original);
     mkdirSync(directory, { recursive: true, mode: 0o700 });
     writeFileSync(resolve(directory, `${env.PUBLIC_CONTENT_53_PUBLISH_ENVIRONMENT}.json`), `${JSON.stringify(error.receipt)}\n`, { flag: 'wx', mode: 0o600 });

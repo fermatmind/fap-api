@@ -28,6 +28,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
@@ -171,6 +172,48 @@ final class PublicContent53PublicationTest extends TestCase
             self::fail('Must reject a failed transport');
         } catch (DomainException $e) {
             self::assertSame('public_content_53_revalidation_transport_failed', $e->getMessage());
+        }
+        Sleep::fake();
+        try {
+            $limited = true;
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::preventStrayRequests();
+            Http::fake(function ($request) use (&$limited) {
+                $timestamp = $request->header('X-FM-Content-Release-Timestamp')[0];
+                $nonce = $request->header('X-FM-Content-Release-Nonce')[0];
+                self::assertSame('sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$request->body(), 'test-only-revalidation-secret'),
+                    $request->header('X-FM-Content-Release-Signature')[0]);
+                if ($limited) {
+                    $limited = false;
+
+                    return Http::response(['ok' => false, 'error_code' => 'RATE_LIMITED'], 429, ['Retry-After' => '1']);
+                }
+                $content = $request->data()['content'];
+                $tags = $content['type'] === 'article' ? ['article-detail:'.$content['locale'].':'.$content['slug'], 'article-seo:'.$content['locale'].':'.$content['slug']] : [];
+
+                return Http::response(['ok' => true, 'revalidated_paths' => $request->data()['cache_signal']['paths'], 'rejected_paths' => [], 'invalidated_tags' => $tags]);
+            });
+            app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
+            Http::assertSentCount(43);
+            Sleep::assertSleptTimes(1);
+            Sleep::assertSlept(fn ($duration) => $duration->totalSeconds === 1.0);
+            $requests = Http::recorded();
+            self::assertNotSame($requests[0][0]->header('X-FM-Content-Release-Nonce'), $requests[1][0]->header('X-FM-Content-Release-Nonce'));
+            Sleep::fake();
+            Http::swap(new \Illuminate\Http\Client\Factory);
+            Http::preventStrayRequests();
+            Http::fake(fn () => Http::response(['ok' => false, 'error_code' => 'RATE_LIMITED'], 429, ['Retry-After' => '600']));
+            try {
+                app(PublicContent53FrontendRevalidator::class)->revalidate($rows);
+                self::fail('A second rate limit must fail closed');
+            } catch (DomainException $error) {
+                self::assertSame('public_content_53_revalidation_http_429', $error->getMessage());
+            }
+            Http::assertSentCount(2);
+            Sleep::assertSleptTimes(1);
+            Sleep::assertSlept(fn ($duration) => $duration->totalSeconds === 300.0);
+        } finally {
+            Sleep::fake(false);
         }
         self::assertSame($before, app(PublicContent53State::class)->read($this->digest()));
     }

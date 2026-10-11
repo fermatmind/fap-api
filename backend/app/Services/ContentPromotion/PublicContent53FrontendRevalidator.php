@@ -7,6 +7,7 @@ namespace App\Services\ContentPromotion;
 use App\Models\Article;
 use DomainException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 
 /** Uses the existing signed, bounded frontend endpoint; never submits URLs. */
 final class PublicContent53FrontendRevalidator
@@ -14,6 +15,7 @@ final class PublicContent53FrontendRevalidator
     public function revalidate(array $rows): void
     {
         [$endpoint, $secret] = $this->configuration();
+        $rateLimitWaited = false;
         foreach ($rows as $row) {
             $segment = $row['identity']['locale'] === 'en' ? 'en' : 'zh';
             $slug = $row['identity']['slug'];
@@ -39,17 +41,30 @@ final class PublicContent53FrontendRevalidator
                 continue;
             }
             $body = json_encode(['content' => $content, 'cache_signal' => ['paths' => $paths]], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
-            $timestamp = (string) time();
-            $nonce = bin2hex(random_bytes(16));
-            try {
-                $response = Http::acceptJson()->timeout(15)->connectTimeout(5)->withoutRedirecting()
-                    ->withHeaders(['X-FM-Content-Release-Timestamp' => $timestamp, 'X-FM-Content-Release-Nonce' => $nonce,
-                        'X-FM-Content-Release-Signature' => 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret)])
-                    ->withBody($body, 'application/json')->post($endpoint);
-            } catch (\Illuminate\Http\Client\ConnectionException $error) {
-                throw new DomainException('public_content_53_revalidation_transport_failed', previous: $error);
-            }
-            $receipt = $response->json();
+            do {
+                $timestamp = (string) time();
+                $nonce = bin2hex(random_bytes(16));
+                try {
+                    $response = Http::acceptJson()->timeout(15)->connectTimeout(5)->withoutRedirecting()
+                        ->withHeaders(['X-FM-Content-Release-Timestamp' => $timestamp, 'X-FM-Content-Release-Nonce' => $nonce,
+                            'X-FM-Content-Release-Signature' => 'sha256='.hash_hmac('sha256', $timestamp.'.'.$nonce.'.'.$body, $secret)])
+                        ->withBody($body, 'application/json')->post($endpoint);
+                } catch (\Illuminate\Http\Client\ConnectionException $error) {
+                    throw new DomainException('public_content_53_revalidation_transport_failed', previous: $error);
+                }
+                $receipt = $response->json();
+                if ($response->status() === 429 && ($receipt['error_code'] ?? null) === 'RATE_LIMITED' && ! $rateLimitWaited) {
+                    // The existing endpoint uses a 300-second window. Permit one
+                    // bounded wait for derived-cache recovery, with a fresh nonce.
+                    $retryAfter = filter_var($response->header('Retry-After'), FILTER_VALIDATE_INT,
+                        ['options' => ['min_range' => 1, 'max_range' => 300]]);
+                    $rateLimitWaited = true;
+                    Sleep::for($retryAfter === false ? 300 : $retryAfter)->seconds();
+
+                    continue;
+                }
+                break;
+            } while (true);
             if (! $response->successful()) {
                 throw new DomainException('public_content_53_revalidation_http_'.$response->status());
             }
