@@ -184,8 +184,10 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         );
         $this->assertStringContainsString('BASH, timeout: 60);', $weeklyCloseout);
         $this->assertStringNotContainsString('timeout: 2100', $weeklyCloseout);
-        $this->assertStringContainsString("task('scheduler:wait-natural-heartbeat'", $deploy);
-        $this->assertStringContainsString('started_epoch + 90', $deploy);
+        $this->assertStringContainsString("require __DIR__.'/deploy/scheduler.php'", $deploy);
+        $scheduler = (string) file_get_contents(base_path('../deploy/scheduler.php'));
+        $this->assertStringContainsString("task('scheduler:wait-natural-heartbeat'", $scheduler);
+        $this->assertStringContainsString('started_epoch + 90', $scheduler);
         $this->assertStringNotContainsString('artisan schedule:work --no-interaction --no-ansi', $deploy);
         $this->assertStringContainsString('/api/v0.5/ops/seo-intel/weekly-decisions', $deploy);
         $this->assertStringNotContainsString('seo:weekly-decisions --trigger=scheduled', $deploy);
@@ -193,7 +195,13 @@ final class SeoPlatform09ScheduledCloseoutTest extends TestCase
         $this->assertMatchesRegularExpression('/staging:[\s\S]+timeout-minutes: 120[\s\S]+environment: staging/', $workflow);
         $this->assertMatchesRegularExpression('/production:[\s\S]+timeout-minutes: 120[\s\S]+environment: production/', $workflow);
         $this->assertSame(2, substr_count($workflow, 'kill-after=30s "$deploy_timeout" php /tmp/dep.phar "$deploy_task"'));
-        $this->assertMatchesRegularExpression('/concurrency:\s+group: trunk-deploy-\$\{\{ github\.repository \}\}\s+cancel-in-progress: false/', $workflow);
+        $this->assertMatchesRegularExpression('/concurrency:\s+group: ([^\n]+)\s+cancel-in-progress: false/', $workflow);
+        preg_match('/concurrency:\s+group: ([^\n]+)/', $workflow, $concurrency);
+        $this->assertStringContainsString("format('trunk-deploy-{0}', github.repository)", $concurrency[1]);
+        $this->assertStringContainsString("github.event.workflow_run.conclusion == 'success'", $concurrency[1]);
+        $this->assertStringContainsString("github.event.workflow_run.head_branch == 'main'", $concurrency[1]);
+        $this->assertStringContainsString('github.event.workflow_run.run_attempt == 1', $concurrency[1]);
+        $this->assertStringContainsString("format('trunk-rejected-{0}', github.run_id)", $concurrency[1]);
         $this->assertStringContainsString('TRUNK_DEPLOY_SERIALIZED: "true"', $workflow);
         $this->assertStringContainsString('DEPLOY_LOCK_RUN_ID: ${{ github.run_id }}', $workflow);
         $this->assertStringContainsString("task('fap:reclaim-stale-serialized-ci-lock'", $deploy);

@@ -155,6 +155,47 @@ final class SchedulerEvidenceMonitorTest extends TestCase
     }
 
     #[Test]
+    public function natural_slot_seconds_do_not_invalidate_an_immutable_receipt_pair(): void
+    {
+        $now = CarbonImmutable::parse('2026-10-08T14:01:00Z');
+        $heartbeat = new SchedulerHeartbeatService($this->heartbeatPath);
+        $heartbeat->record('completed', 0, $now);
+
+        foreach ([4, 59] as $seconds) {
+            foreach (['seo_weekly_decision_receipts', 'seo_weekly_decision_capability_receipts'] as $table) {
+                DB::connection('seo_intel')->table($table)->delete();
+            }
+            $slot = CarbonImmutable::parse('2026-10-08T13:45:00Z')->addSeconds($seconds);
+            $this->assertTrue(SeoWeeklyDecisionReceiptService::isCapabilitySlot($slot));
+            $expected = $this->insertNaturalReceipt($slot);
+            $before = DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->first();
+
+            $receipt = $this->monitor($heartbeat)->evaluate(false, $now);
+
+            $this->assertSame('pass', $receipt['status']);
+            $this->assertSame('natural_receipt_verified', $receipt['weekly']['reason']);
+            $this->assertSame([], $receipt['weekly']['mismatch_codes']);
+            $this->assertSame($expected['receipt_hash'], $receipt['weekly']['receipt_hash']);
+            $this->assertEquals($before, DB::connection('seo_intel')->table('seo_weekly_decision_capability_receipts')->first());
+        }
+    }
+
+    #[Test]
+    public function another_minute_cannot_satisfy_the_expected_natural_slot(): void
+    {
+        $now = CarbonImmutable::parse('2026-10-08T14:01:00Z');
+        $heartbeat = new SchedulerHeartbeatService($this->heartbeatPath);
+        $heartbeat->record('completed', 0, $now);
+        $this->insertNaturalReceipt(CarbonImmutable::parse('2026-10-08T13:46:00Z'));
+
+        $receipt = $this->monitor($heartbeat)->evaluate(false, $now);
+
+        $this->assertSame('fail', $receipt['status']);
+        $this->assertContains('capability_not_natural_slot', $receipt['weekly']['mismatch_codes']);
+        $this->assertContains('capability_expected_slot_mismatch', $receipt['weekly']['mismatch_codes']);
+    }
+
+    #[Test]
     public function heartbeat_alerts_once_on_failure_and_once_on_recovery(): void
     {
         Http::fake();

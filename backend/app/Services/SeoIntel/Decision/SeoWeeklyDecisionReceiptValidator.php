@@ -159,7 +159,10 @@ final class SeoWeeklyDecisionReceiptValidator
             if ($expectedSlot !== null) {
                 self::appendUnless(
                     $codes,
-                    $scheduledFor?->getTimestamp() === $expectedSlot->setTimezone('UTC')->getTimestamp(),
+                    // The natural writer admits the scheduled minute, including
+                    // the actual start seconds. Keep those immutable bytes and
+                    // compare the same minute contract used by isCapabilitySlot.
+                    $scheduledFor?->startOfMinute()->getTimestamp() === $expectedSlot->setTimezone('UTC')->getTimestamp(),
                     'capability_expected_slot_mismatch',
                 );
             }
