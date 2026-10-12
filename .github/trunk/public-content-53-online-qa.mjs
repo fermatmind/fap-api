@@ -132,6 +132,14 @@ export function assertDom(row,html,before,environment) {
       || !equal(dom.description.map(compact),description ? [compact(description)] : []))
       throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
   }
+  const translatedCategory = row.kind === 'surface' && ['PAGE-33','PAGE-34'].includes(row.page_id) && row.source_snapshot;
+  if (translatedCategory) {
+    const seo=row.snapshot.payload_json.seo;
+    const h1=row.identity.slug === 'tests_category_career' ? 'Free career tests' : 'Free personality tests';
+    if (!equal(dom.title.map(compact),[compact(`${seo.title} | FermatMind`)])
+      || !equal(dom.description.map(compact),[compact(seo.description)]) || compact(dom.h1[0]) !== compact(h1))
+      throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
+  }
   const translatedTestsHub = row.kind === 'surface' && row.page_id === 'PAGE-32' && row.identity.slug === 'tests' && row.identity.locale === 'en' && row.source_snapshot;
   if (translatedTestsHub) {
     // TestsHubExperience renders family test cards. tests/page.tsx consumes
@@ -153,7 +161,9 @@ export function assertDom(row,html,before,environment) {
   const lines = copy ? copy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean)
       : translatedTestsHub ? changedStrings(row.before.payload_json.families,row.snapshot.payload_json.families)
-        : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
+        : translatedCategory ? ['hero','featured','allTests','differences','trust','resources','breadcrumb']
+            .flatMap(key=>changedStrings(row.before.payload_json[key],row.snapshot.payload_json[key]))
+          : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));
   for (const [index, line] of lines.entries()) {
     const text=compact(plain(line));
     if (text && !body.includes(text) && !readerVariants(line,row,dom,environment).some(variant=>body.includes(compact(variant))))

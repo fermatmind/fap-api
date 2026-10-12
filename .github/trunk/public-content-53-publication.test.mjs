@@ -37,14 +37,14 @@ test('tests hub JSON-LD must retain the exact translated text, identity, route a
 });
 test('active full-page package binds only the reviewed eligible English pages',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,7);assert.equal(rows.length,7);
- assert.equal(new Set(rows.map(row=>row.page_id)).size,7);
- const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery','tests'];
+ assert.equal(binding.expected_row_count,9);assert.equal(rows.length,9);
+ assert.equal(new Set(rows.map(row=>row.page_id)).size,9);
+ const allowed=['help-about','help-team','help-used-and-mentioned','help-payment-refund','help-unlock-failure','help-result-recovery','tests','tests_category_career','tests_category_personality'];
  assert.deepEqual(rows.map(row=>row.identity.slug).sort(),allowed.sort());
  assert.ok(rows.every(row=>['page','surface'].includes(row.kind) && row.identity.org_id===0 && row.identity.locale==='en'));
  assert.equal(rows.find(row=>row.identity.slug==='help-payment-refund').snapshot.faq_items.length,4);
  assert.ok(rows.find(row=>row.identity.slug==='help-unlock-failure').snapshot.content_md.includes('24 hours'));
- assert.equal(rows.filter(row=>row.staging_source_snapshot).length,1);
+ assert.equal(rows.filter(row=>row.staging_source_snapshot).length,3);
  assert.equal(rows.find(row=>row.page_id==='PAGE-32').kind,'surface');
 });
 test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
@@ -193,4 +193,19 @@ test('ASCII FAQ control comments stay in the exact API candidate without becomin
  const html='<html><head><link rel="canonical" href="https://fermatmind.com/en/help/payment-refund"></head><body><main><h1>Payment</h1><h3>Refund conditions</h3><p>Request within 7 days.</p></main></body></html>';
  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
  assert.throws(()=>assertDom(row,html.replace('Request within 7 days.',''),before,'production'),/VISIBLE_BODY/);
+});
+
+test('category acceptance binds metadata and visible sections without mistaking unused final CTA data for DOM prose',()=>{
+ for(const row of readCandidateRows(root).candidates.filter(row=>['PAGE-33','PAGE-34'].includes(row.page_id))) {
+  const payload=row.snapshot.payload_json,path=pathFor(row);
+  const strings=value=>typeof value==='string'?[value]:value&&typeof value==='object'?Object.values(value).flatMap(strings):[];
+  const copy=['hero','featured','allTests','differences','trust','resources','breadcrumb'].flatMap(key=>strings(payload[key]));
+  const h1=row.page_id==='PAGE-33'?'Free career tests':'Free personality tests';
+  const head='<html><head><title>'+payload.seo.title+' | FermatMind</title><meta name="description" content="'+payload.seo.description+'"><link rel="canonical" href="https://fermatmind.com'+path+'"></head><body><main><h1>'+h1+'</h1>';
+  const html=head+copy.map(s=>'<p>'+s+'</p>').join('')+'</main></body></html>';
+  const before={dom:{canonical:['https://fermatmind.com'+path],robots:[],alternates:[]}};
+  assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+  assert.throws(()=>assertDom(row,html.replace(payload.seo.description,'Old SEO summary'),before,'production'),/METADATA/);
+  for(const [index,item] of payload.differences.items.entries()) if(item.description !== row.before.payload_json.differences.items[index].description) assert.throws(()=>assertDom(row,html.replaceAll('<p>'+item.description+'</p>',''),before,'production'),/VISIBLE_BODY/);
+ }
 });
