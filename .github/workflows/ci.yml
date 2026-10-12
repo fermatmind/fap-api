@@ -173,7 +173,8 @@ jobs:
     needs: [classify, hygiene]
     if: needs.classify.outputs.content_pack_checks == 'true' || needs.classify.outputs.personality_current_authority_release == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Shared pack consumers include exhaustive report/locale matrices.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
