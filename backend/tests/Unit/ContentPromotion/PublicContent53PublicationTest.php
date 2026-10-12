@@ -362,8 +362,10 @@ PHP;
         return hash('sha256', $chain);
     }
 
-    private function translationContext(int $count = 1): PromotionContext
+    private function translationContext(?int $count = null): PromotionContext
     {
+        $count ??= count(app(PublicContent53Package::class)->read(base_path(), $this->translationDigest())['candidates']);
+
         return new PromotionContext(base_path(PublicContent53Package::PACKAGE), $this->translationDigest(), 'W3', 'PUBLIC-CONTENT-53',
             str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '12345', 1, str_repeat('d', 64), $count, str_repeat('e', 64));
     }
@@ -374,14 +376,22 @@ PHP;
         config(['content_promotion.public_content_53_environment' => $environment]);
         $this->seedTargets();
         $rows = app(PublicContent53Package::class)->read(base_path(), $this->translationDigest())['candidates'];
-        $row = $rows[0];
+        $englishIds = [];
+        foreach ($rows as $candidate) {
+            $target = ContentPage::query()->updateOrCreate($candidate['identity'],
+                ['path' => '/en/'.$candidate['identity']['slug'], 'content_html' => ''] + PublicContent53Package::before($candidate) + [
+                    'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'review_state' => 'approved',
+                    'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
+                ]);
+            $englishIds[] = $target->id;
+            ContentPage::query()->updateOrCreate(array_replace($candidate['identity'], ['locale' => 'zh-CN']),
+                ['path' => '/zh/'.$candidate['identity']['slug'], 'content_html' => ''] + PublicContent53Package::source($candidate) + [
+                    'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'review_state' => 'approved',
+                    'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
+                ]);
+        }
         $english = ContentPage::query()->where('slug', 'about')->where('locale', 'en')->firstOrFail();
-        $english->forceFill(PublicContent53Package::before($row))->save();
-        ContentPage::query()->create(['org_id' => 0, 'slug' => 'about', 'locale' => 'zh-CN', 'path' => '/zh/about'] + $row['source_snapshot'] + [
-            'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'review_state' => 'approved',
-            'publish_allowed' => true, 'operator_approval_required' => false, 'claim_gate_status' => 'passed',
-        ]);
-        $otherPages = DB::table('content_pages')->where('id', '!=', $english->id)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
+        $otherPages = DB::table('content_pages')->whereNotIn('id', $englishIds)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all();
         $draft = CmsTranslationRevision::query()->create([
             'org_id' => 0, 'content_type' => 'content_page', 'content_id' => $english->id,
             'translation_group_id' => $english->translation_group_id, 'locale' => 'en', 'source_locale' => $english->source_locale,
@@ -395,10 +405,10 @@ PHP;
         $states->assertBaseline($rows);
         $writer = app(PublicContent53Writer::class);
         $after = DB::transaction(fn () => $writer->publish($this->translationContext(), $before));
-        self::assertSame(1, $after['written_count']);
+        self::assertSame(count($rows), $after['written_count']);
         Cache::flush();
         $states->assertPublished($rows, $after['state']);
-        self::assertSame($otherPages, DB::table('content_pages')->where('id', '!=', $english->id)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
+        self::assertSame($otherPages, DB::table('content_pages')->whereNotIn('id', $englishIds)->orderBy('id')->get()->map(static fn ($record): array => (array) $record)->all());
         self::assertSame($draftBefore, $draft->fresh()->toArray());
         self::assertSame($draft->id, $english->fresh()->working_revision_id);
         self::assertSame(0, DB::transaction(fn () => $writer->publish($this->translationContext(), $after['state']))['written_count']);
@@ -418,7 +428,7 @@ PHP;
 
     public static function invalidTranslationPackages(): array
     {
-        return [['excluded'], ['missing-paragraph'], ['unbound-review'], ['empty-title']];
+        return [['excluded'], ['missing-paragraph'], ['unbound-review'], ['empty-title'], ['null-invented'], ['staging-source-unbound'], ['brand-extra-chinese']];
     }
 
     #[DataProvider('invalidTranslationPackages')]
@@ -429,7 +439,16 @@ PHP;
         mkdir($directory, 0700, true);
         $package = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-batch.json')), true, 64, JSON_THROW_ON_ERROR);
         $proof = json_decode(file_get_contents(base_path(PublicContent53Package::PACKAGE.'/translation-review.json')), true, 64, JSON_THROW_ON_ERROR);
-        if ($case === 'excluded') {
+        if ($case === 'null-invented') {
+            foreach (['source_snapshot', 'before', 'staging_before', 'snapshot'] as $version) {
+                $package['candidates'][0][$version]['kicker'] = null;
+            }
+            $package['candidates'][0]['snapshot']['kicker'] = 'Invented';
+        } elseif ($case === 'staging-source-unbound') {
+            $package['candidates'][0]['staging_source_snapshot'] = $package['candidates'][0]['source_snapshot'];
+        } elseif ($case === 'brand-extra-chinese') {
+            $package['candidates'][0]['snapshot']['content_md'] .= '费马测试';
+        } elseif ($case === 'excluded') {
             $package['candidates'][0]['identity']['slug'] = 'personality';
         } elseif ($case === 'missing-paragraph') {
             $package['candidates'][0]['snapshot']['content_md'] = preg_replace('/\n\n[^#\n][^\n]+(?=\n\n)/u', '', $package['candidates'][0]['snapshot']['content_md'], 1);

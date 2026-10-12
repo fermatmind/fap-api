@@ -64,6 +64,16 @@ final class PublicContent53Package
         'PAGE-53' => ['surface', 'tests_category_career', 'zh-CN'],
     ];
 
+    private const TRANSLATION_PAGES = [
+        'PAGE-02' => 'about', 'PAGE-25' => 'careers', 'PAGE-26' => 'charter',
+        'PAGE-27' => 'help-faq', 'PAGE-28' => 'help-for-business-and-research',
+        'PAGE-29' => 'privacy', 'PAGE-30' => 'science', 'PAGE-31' => 'terms',
+        'PAGE-BRAND' => 'brand', 'PAGE-FOUNDATION' => 'foundation', 'PAGE-POLICIES' => 'policies',
+        'PAGE-METHOD-BOUNDARIES' => 'method-boundaries', 'PAGE-ITEM-DESIGN' => 'item-design-notes',
+        'PAGE-RELIABILITY' => 'reliability-validity', 'PAGE-DATA-PRIVACY' => 'data-privacy',
+        'PAGE-MISCONCEPTIONS' => 'common-misconceptions', 'PAGE-CONTACT' => 'help-contact',
+    ];
+
     public function read(string $backendRoot, string $expectedSha256): array
     {
         $root = realpath($backendRoot);
@@ -143,7 +153,7 @@ final class PublicContent53Package
         if (($package['schema'] ?? null) !== 'fermatmind.public_content_translation.v1'
             || ($package['source_locale'] ?? null) !== 'zh-CN' || ($package['target_locale'] ?? null) !== 'en'
             || ($package['excluded_families'] ?? null) !== ['career', 'personality', 'blog']
-            || count($rows) !== 1 || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
+            || count($rows) < 1 || count($rows) > count(self::TRANSLATION_PAGES) || ($proof['schema'] ?? null) !== 'fermatmind.public_content_translation.review.v1'
             || ($proof['candidate_sha256'] ?? null) !== hash('sha256', $bytes)
             || ($proof['verdict'] ?? null) !== 'PASS' || count($proof['pages'] ?? []) !== count($rows)) {
             throw new DomainException('public_content_53_translation_review_or_scope_invalid');
@@ -151,29 +161,62 @@ final class PublicContent53Package
         $seen = [];
         foreach ($rows as $row) {
             $id = $row['page_id'] ?? '';
-            // About is the first accepted pilot; later cohorts extend this fixed scope.
-            if ($id !== 'PAGE-02' || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
-                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => 'about', 'locale' => 'en']
+            if (! isset(self::TRANSLATION_PAGES[$id]) || isset($seen[$id]) || ($row['kind'] ?? null) !== 'page'
+                || ($row['identity'] ?? null) !== ['org_id' => 0, 'slug' => self::TRANSLATION_PAGES[$id], 'locale' => 'en']
                 || ($row['source_identity'] ?? null) !== [] || ($row['staging_source_identity'] ?? null) !== []) {
                 throw new DomainException('public_content_53_translation_scope_invalid');
             }
             $seen[$id] = true;
-            $fields = ['content_md', 'faq_items', 'summary', 'title'];
-            foreach (['before', 'staging_before', 'snapshot', 'source_snapshot'] as $version) {
-                $actual = array_keys($row[$version] ?? []);
+            $fields = array_keys($row['source_snapshot'] ?? []);
+            sort($fields);
+            if (array_diff(['title', 'summary', 'content_md', 'faq_items'], $fields)
+                || array_diff($fields, ['title', 'summary', 'content_md', 'faq_items', 'kicker', 'seo_title', 'meta_description'])) {
+                throw new DomainException('public_content_53_translation_fields_invalid');
+            }
+            $versions = ['before', 'staging_before', 'snapshot', 'source_snapshot'];
+            if (isset($row['staging_source_snapshot'])) {
+                $versions[] = 'staging_source_snapshot';
+            }
+            foreach ($versions as $version) {
+                $value = $row[$version] ?? [];
+                $actual = array_keys($value);
                 sort($actual);
-                if ($actual !== $fields || ! is_array($row[$version]['faq_items'])
-                    || array_filter(['title', 'summary', 'content_md'], fn ($field) => ! is_string($row[$version][$field]) || trim($row[$version][$field]) === '')) {
+                if ($actual !== $fields || ! is_array($value['faq_items'])
+                    || array_filter(['title', 'content_md'], fn ($field) => ! is_string($value[$field]) || trim($value[$field]) === '')
+                    || array_filter(array_diff($fields, ['title', 'content_md', 'faq_items']), fn ($field) => $value[$field] !== null && ! is_string($value[$field]))) {
                     throw new DomainException('public_content_53_translation_fields_invalid');
+                }
+                foreach ($value['faq_items'] as $faq) {
+                    if (! is_array($faq) || ! is_string($faq['question'] ?? null) || ! is_string($faq['answer'] ?? null)
+                        || trim($faq['question']) === '' || trim($faq['answer']) === '') {
+                        throw new DomainException('public_content_53_translation_fields_invalid');
+                    }
+                }
+            }
+            foreach ($fields as $field) {
+                if ($row['source_snapshot'][$field] === null && $row['snapshot'][$field] !== null) {
+                    throw new DomainException('public_content_53_translation_null_changed');
+                }
+            }
+            $readable = $row['snapshot'];
+            // Only the two source-bound official Chinese name literals in the
+            // reviewed Brand naming paragraph may survive English translation.
+            if (self::TRANSLATION_PAGES[$id] === 'brand' && str_contains($row['source_snapshot']['content_md'], '正式中文名称')) {
+                foreach (['“费马测试（FermatMind）”', '“费马测试”'] as $literal) {
+                    if (substr_count($row['source_snapshot']['content_md'], $literal) < 1 || substr_count($readable['content_md'], $literal) !== 1) {
+                        throw new DomainException('public_content_53_translation_brand_literal_invalid');
+                    }
+                    $readable['content_md'] = str_replace($literal, '', $readable['content_md']);
                 }
             }
             $review = $proof['pages'][$id] ?? [];
             if (($review['verdict'] ?? null) !== 'PASS'
                 || ($review['source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['source_snapshot']))
                 || ($review['snapshot_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['snapshot']))
+                || (isset($row['staging_source_snapshot']) && ($review['staging_source_sha256'] ?? null) !== hash('sha256', PromotionContextFactory::canonicalJson($row['staging_source_snapshot'])))
                 || $this->structure($row['source_snapshot']['content_md']) !== $this->structure($row['snapshot']['content_md'])
                 || count($row['source_snapshot']['faq_items']) !== count($row['snapshot']['faq_items'])
-                || preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($row['snapshot'], JSON_UNESCAPED_UNICODE)) === 1) {
+                || preg_match('/[\x{3400}-\x{9fff}]/u', json_encode($readable, JSON_UNESCAPED_UNICODE)) === 1) {
                 throw new DomainException('public_content_53_translation_coverage_invalid');
             }
         }
@@ -201,6 +244,11 @@ final class PublicContent53Package
         }
 
         return $value;
+    }
+
+    public static function source(array $row): array
+    {
+        return self::environment() === 'staging' ? ($row['staging_source_snapshot'] ?? $row['source_snapshot']) : $row['source_snapshot'];
     }
 
     public static function before(array $row): array

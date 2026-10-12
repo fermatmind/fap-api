@@ -93,8 +93,8 @@ final class PublicContent53State
                     throw new DomainException('public_content_53_translation_source_hold');
                 }
                 $saved['translation_source'] = $source[0];
-                $sourceProjection = array_intersect_key($sourcePage->toArray(), $row['source_snapshot']);
-                if ($this->hash($sourceProjection) !== $this->hash($row['source_snapshot'])) {
+                $sourceProjection = array_intersect_key($sourcePage->toArray(), PublicContent53Package::source($row));
+                if ($this->hash($sourceProjection) !== $this->hash(PublicContent53Package::source($row))) {
                     throw new DomainException('public_content_53_translation_source_drift');
                 }
             }
@@ -133,7 +133,7 @@ final class PublicContent53State
             if (isset($row['source_snapshot'])) {
                 $source = $row;
                 $source['identity']['locale'] = 'zh-CN';
-                if ($this->hash($this->projection($source)) !== $this->hash($row['source_snapshot'])) {
+                if ($this->hash($this->projection($source)) !== $this->hash(PublicContent53Package::source($row))) {
                     throw new DomainException('public_content_53_translation_public_source_drift');
                 }
             }

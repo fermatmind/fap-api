@@ -9,11 +9,16 @@ import { buildExecution, publish, recoveryFailure } from './public-content-53-pu
 import { assertDom, pathFor, read } from './public-content-53-online-qa.mjs';
 import { phpConsumers } from './impact-consumers.mjs';
 const root=fileURLToPath(new URL('../../backend',import.meta.url));
-test('active translation package contains only the reviewed About English identity',()=>{
+test('active full-page package binds only the reviewed eligible English pages',()=>{
  const binding=inspectPackage(root);const rows=readCandidateRows(root).candidates;
- assert.equal(binding.expected_row_count,1);assert.equal(rows.length,1);
- assert.deepEqual(rows[0].identity,{org_id:0,slug:'about',locale:'en'});
- assert.equal(rows[0].kind,'page');assert.ok(rows[0].source_snapshot.content_md.includes('我们的边界'));
+ assert.equal(binding.expected_row_count,17);assert.equal(rows.length,17);
+ assert.equal(new Set(rows.map(row=>row.page_id)).size,17);
+ const allowed=['about','brand','careers','charter','common-misconceptions','data-privacy','foundation','help-contact','help-faq','help-for-business-and-research','item-design-notes','method-boundaries','policies','privacy','reliability-validity','science','terms'];
+ assert.deepEqual(rows.map(row=>row.identity.slug).sort(),allowed.sort());
+ assert.ok(rows.every(row=>row.kind==='page' && row.identity.org_id===0 && row.identity.locale==='en'));
+ assert.equal(rows.find(row=>row.identity.slug==='science').snapshot.summary,null);
+ assert.ok(rows.find(row=>row.identity.slug==='brand').snapshot.content_md.includes('“费马测试（FermatMind）”'));
+ assert.ok(rows.some(row=>row.staging_source_snapshot));
 });
 test('previous immutable 50-row package remains fully validated by its own exact digest',()=>{
  const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -145,4 +150,12 @@ test('failed SSH exit is classified before JSON parsing and still invokes exact 
 test('nonzero remote business failures retain their typed cause rather than becoming SSH errors',async()=>{
  const execution={request:{source_commit:'a'.repeat(40),workflow_run_id:'123',mode:'publish'},binding:{package_sha256:'b'.repeat(64),expected_row_count:1}};
  await assert.rejects(()=>publish(execution,async()=>({status:1,stdout:JSON.stringify({ok:false,error_code:'public_content_53_revalidation_http_429',sanitized:true})})),error=>error.receipt.error_code==='public_content_53_revalidation_http_429');
+});
+
+test('full-page metadata must expose the same approved translated candidate',()=>{
+ const row={page_id:'PAGE-METHOD-BOUNDARIES',kind:'page',identity:{locale:'en',slug:'method-boundaries'},snapshot:{title:'Method boundaries',seo_title:'Assessment Methods',meta_description:'Complete interpretation and usage boundaries.',summary:null,content_md:'Expected paragraph.'}};
+ const html='<html><head><title>Assessment Methods | FermatMind</title><meta name="description" content="Complete interpretation and usage boundaries."><link rel="canonical" href="https://fermatmind.com/en/method-boundaries"></head><body><main><h1>Method boundaries</h1><p>Expected paragraph.</p></main></body></html>';
+ const before={dom:{canonical:['https://fermatmind.com/en/method-boundaries'],robots:[],alternates:[]}};
+ assert.doesNotThrow(()=>assertDom(row,html,before,'production'));
+ assert.throws(()=>assertDom(row,html.replace('Complete interpretation and usage boundaries.','Old English summary.'),before,'production'),/METADATA/);
 });

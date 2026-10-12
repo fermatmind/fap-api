@@ -49,6 +49,7 @@ $walk = function($node) use (&$walk) {
 $labels=[]; foreach($xp->query('//main//a') as $anchor) { $label=$walk($anchor); if (trim($label)!=='') $labels[$anchor->getAttribute('href')][]=$label; }
 $values = function($query,$attr=null) use($xp,$walk) { $out=[];foreach($xp->query($query) as $node) $out[]=$attr===null?$walk($node):$node->getAttribute($attr);return $out;};
 echo json_encode(['link_labels'=>$labels,'body'=>$values('//main[not(ancestor::main)]'),'h1'=>$values('//main//h1'),'links'=>$values('//main//a','href'),
+ 'title'=>$values('//head/title'),'description'=>$values('//meta[@name="description"]','content'),
  'canonical'=>$values('//link[@rel="canonical"]','href'),'robots'=>$values('//meta[@name="robots"]','content'),
  'alternates'=>$values('//link[@rel="alternate"]','href')],JSON_THROW_ON_ERROR);`;
   return JSON.parse(execFileSync('php',['-r',code],{input:html,encoding:'utf8',maxBuffer:3000000,timeout:15000,stdio:['pipe','pipe','pipe']}));
@@ -121,6 +122,13 @@ export function assertDom(row,html,before,environment) {
   const dom=domOf(html); const body=compact(dom.body.join(' '));
   if (dom.body.length !== 1 || dom.h1.length !== 1 || !body) throw new Error(`PUBLIC_CONTENT_53_DOM_STRUCTURE_${row.page_id}`);
   if (row.kind !== 'surface' && compact(dom.h1[0]) !== compact(row.snapshot.title)) throw new Error(`PUBLIC_CONTENT_53_H1_${row.page_id}`);
+  if (row.kind === 'page' && Object.hasOwn(row.snapshot,'seo_title')) {
+    const title = row.snapshot.seo_title || row.snapshot.title;
+    const description = row.snapshot.meta_description || row.snapshot.summary;
+    if (!equal(dom.title.map(compact),[compact(`${title} | FermatMind`)])
+      || !equal(dom.description.map(compact),description ? [compact(description)] : []))
+      throw new Error(`PUBLIC_CONTENT_53_METADATA_${row.page_id}`);
+  }
   const copy=row.snapshot.content_md;
   const lines = copy ? copy.split('\n').map(line=>readerLine(line,row.kind)).filter(line=>line.trim() && !/^[\s|:-]+$/.test(line)).flatMap(line=>line.split('|'))
     : row.kind === 'profile' ? row.snapshot.sections.flatMap(s=>[s.title,s.body_md]).filter(Boolean) : changedStrings(row.before,row.snapshot).filter(s=>!s.startsWith('/') && !s.startsWith('https://'));

@@ -1,15 +1,136 @@
 {
   "schema": "fermatmind.public_content_translation.review.v1",
-  "candidate_sha256": "4ddbcc065034c7a00934c8f04d154f3e61a70fa6e8d557982d5832b97415344f",
+  "candidate_sha256": "adcafc61080630a8299feafc9e0a209c48fef7fa7c0ec6c93e2825600d116a80",
   "verdict": "PASS",
   "pages": {
     "PAGE-02": {
       "verdict": "PASS",
-      "source_sha256": "5cbf1f3555cb0a72bbc2e5637952cc6a1d0db91a6cc53a7d88051eb8c72a43a3",
-      "snapshot_sha256": "b901d7481d4b5caeb1a35183b67b8fad0a88abc2a230f4fd03ecd998d9725ce0",
-      "reviewed_candidate_file_sha256": "bcd0dee7429b30cc7fc623e9292501038a8b3edcc3b8fcdff0a1d535e4926676",
-      "reviewed_units": 39
+      "source_sha256": "b821262b63db5baeba8d1c5fb4060e4c2b13110e0ba1bed2734b97bbd07c69de",
+      "snapshot_sha256": "8bfa5daed419d1a67e5172db17c2d9e48dcb02a6507fe291849423e91067b6da",
+      "reviewed_candidate_file_sha256": "62a2a26179ce80f342dc0b38214861c5df2e74ab4e35f6797b607207df3a1337",
+      "reviewed_units": 42
+    },
+    "PAGE-BRAND": {
+      "verdict": "PASS",
+      "source_sha256": "b1bb8d52448645ffe85b907d1e95803857b5096184f7b340d232ad7e0bdcefb6",
+      "snapshot_sha256": "2faddd59b0817caf044b0e59f4bdb0920b026ab6fdecff61a4ff29293b7d6917",
+      "reviewed_candidate_file_sha256": "bd7c096742b95b05750f1f4bce11e4e8dc74c962d029d62893d7a813e3f7a630",
+      "reviewed_units": 54
+    },
+    "PAGE-25": {
+      "verdict": "PASS",
+      "source_sha256": "3813885a39aaa2d1b8d3065fd4121828326b0aa0e6886b795a514c73b7c81009",
+      "snapshot_sha256": "10c4640917bba8598394ed02fd65a93ebf636ccfcf1f68fe0606936c1ac81ba8",
+      "reviewed_candidate_file_sha256": "a3c67fd76a942629781db3c1315b3d1ffc72eab50174f309b0999f26c105a287",
+      "reviewed_units": 158
+    },
+    "PAGE-26": {
+      "verdict": "PASS",
+      "source_sha256": "352238b45b1e760c1d790f93b721d9638c9e614d7beeb6d9df9d62e8945fc129",
+      "snapshot_sha256": "096c6728dfbd28b883ef550395115c938036e12065fa3459703a88b33a2ef9ed",
+      "reviewed_candidate_file_sha256": "ef2b498cc845f55849432934687a4a2fbd633512173ed141ca19c978dff88d11",
+      "reviewed_units": 35
+    },
+    "PAGE-MISCONCEPTIONS": {
+      "verdict": "PASS",
+      "source_sha256": "eddbcd1726568f96e2bbe401fd31a8a8862c714c18c5fef1927f0be934f3403a",
+      "snapshot_sha256": "2419807607166066e7ac42b9c136e13b9e3d8d9c7b927eb3f2ae44a8a4ce6d40",
+      "reviewed_candidate_file_sha256": "5904077691d7733907c40476a413ae8e5a758a9a4cbfd05ff2f83da5510aad85",
+      "reviewed_units": 47,
+      "staging_source_sha256": "3d2036e498c2cb84dcc45b0652937e158ff3ca8c92540562be2affef492fe1a8"
+    },
+    "PAGE-DATA-PRIVACY": {
+      "verdict": "PASS",
+      "source_sha256": "ea0a581708237977d3f6882f0a54f2feb2a684ed094c1a7529a5e17533ea2733",
+      "snapshot_sha256": "0bbc3db2061264d947208fa1bac95f09c7de0f704943552f8df0c7ad49bd889d",
+      "reviewed_candidate_file_sha256": "a1a27270b615b5190db25bc44914d417a2dacd01f4f2b37d0c2ea6020d782008",
+      "reviewed_units": 43,
+      "staging_source_sha256": "3ccf599dfef7b26e9689825c21953f677f732050139d6f6f7f3b1ccfd8862fa4"
+    },
+    "PAGE-FOUNDATION": {
+      "verdict": "PASS",
+      "source_sha256": "e620e7380d5307a02713ac69dec8bd87f1f53d4b11c2de22212b392a1d896e6e",
+      "snapshot_sha256": "7183c6f28c80c4b584dd499db7627a41e332a4bdd6818a7c774e4a590fcc6c6d",
+      "reviewed_candidate_file_sha256": "e9b54be3af85db712d126522a9774c0edd9cdb22738753218bcd8f2feb5e5e42",
+      "reviewed_units": 60,
+      "staging_source_sha256": "10e328980c982b6468a3650b7365f7f59c311a6b0dde2b9005cd5e7de8fa61da"
+    },
+    "PAGE-CONTACT": {
+      "verdict": "PASS",
+      "source_sha256": "edaac68f3191ebce3b751f1b463c96fca32b2a01d451f919a9ac13b9c9ea07dc",
+      "snapshot_sha256": "20d2cb11912f0dccc508f792898c92c31433d2a0159e5180e6805e26eebab586",
+      "reviewed_candidate_file_sha256": "050f56e84a5d968adddece7e086cfe952fcb51bd1570249d37bdf7f82a45b337",
+      "reviewed_units": 18,
+      "staging_source_sha256": "32954e539319463d96a1a0b3d3e821c4b7550d2a2dc1ebb1ed3c1c023c0b74e8"
+    },
+    "PAGE-27": {
+      "verdict": "PASS",
+      "source_sha256": "b3b312cdcbe1b6e50928e355edba0a2b6c79c0a545ef3713c24bfdeac9ee5b0a",
+      "snapshot_sha256": "cd214dcdd4da36ca50586a36755bf87460cc3d2a11a0a792c9591b9162d7ab0b",
+      "reviewed_candidate_file_sha256": "2ca19efa7ebbd06acac0620e4a395a8c1988c8c8f38e8c5f81a42a6ad8880612",
+      "reviewed_units": 33
+    },
+    "PAGE-28": {
+      "verdict": "PASS",
+      "source_sha256": "eae563dc1bd969e3bdb9b45318fb8c793a7ec1833a0d9fdd00c222c17ab9b34d",
+      "snapshot_sha256": "5ead2bf0f92cb7a47b3da43cb876956f886c42c2d91a9ca7a0c4c39d5b7fc7f8",
+      "reviewed_candidate_file_sha256": "e552875442162414c8e1a54e4b7b7909ca6bd005d6d5d1eff8d73407e7412842",
+      "reviewed_units": 10
+    },
+    "PAGE-ITEM-DESIGN": {
+      "verdict": "PASS",
+      "source_sha256": "aad7ad72c3dbeff526fa78745fdc4ef9e9d4aeef6ddefafefc0f59ef40979495",
+      "snapshot_sha256": "332b54f4878ed84e1966c4900becd0e869e5168f1e7b03bc8cb52506a0e5a1ad",
+      "reviewed_candidate_file_sha256": "4d476eb7aa3df82c7087300abee19b8fd4b8e87682be3f36993a35dad31dc1fc",
+      "reviewed_units": 42,
+      "staging_source_sha256": "d43d7ee83691e8fc93d3093798f5834faddbd52b81e1b0f88b3f09e1cc4427de"
+    },
+    "PAGE-METHOD-BOUNDARIES": {
+      "verdict": "PASS",
+      "source_sha256": "8d33945aeaa69f056d10fcc473e546c1e91dffb7ba181efa8949e7954cccbad1",
+      "snapshot_sha256": "ee57498e9be5828adcd343a7d0a4720e5c11a2766a64e81b482c3c68be1d42be",
+      "reviewed_candidate_file_sha256": "969bcd50d6a901b4c11047458f22c57577a1e1f1e389d40b4b1daf06a5cf654b",
+      "reviewed_units": 23
+    },
+    "PAGE-POLICIES": {
+      "verdict": "PASS",
+      "source_sha256": "fbe901498eb0d8b4d58d6d22b585e0cbda3d3a33dfa81ebacd85a65f288ff78f",
+      "snapshot_sha256": "4215d0a60ba3ebbe0ed8a3a7be6f96dfcdbf2495a7c15dd8fea969180371eef8",
+      "reviewed_candidate_file_sha256": "df743a660c5fddb34a9b6d9b460bd386a56b78a0650f9e167ca19d808a135a2a",
+      "reviewed_units": 35,
+      "staging_source_sha256": "5261f6839fc134a72143895c105eaf67400c6b915c812b40216b020f17eea73f"
+    },
+    "PAGE-29": {
+      "verdict": "PASS",
+      "source_sha256": "16bdc2644ef1b40e7a016c840dc020d94a4687741fcfd9de6f37cf56beee78db",
+      "snapshot_sha256": "58f66b74e750cc528fdae5b1bcaf0de0197d7df72954b7c50972fc29bb8a2e80",
+      "reviewed_candidate_file_sha256": "0b7c2e2b2d47a581e6abd78b05e96c3294019d1fb3c920c1ebfae01332a960f2",
+      "reviewed_units": 81
+    },
+    "PAGE-RELIABILITY": {
+      "verdict": "PASS",
+      "source_sha256": "76a8f5892293c770381f374ff2469ef531cd3a625858704a172c98ef65d7438e",
+      "snapshot_sha256": "41d0168738f529d5d2c9a89d412cd5087db24a98b283fb85df82740e003c4277",
+      "reviewed_candidate_file_sha256": "b4908041dcefd4c94b3937a132578366e25fcb83ec20cd9585702b523b5dbf75",
+      "reviewed_units": 44,
+      "staging_source_sha256": "fb3c5d324e0415554b1cbda5e4ffcbe17382a64d1f0fa6b0fd56ad7f4d2defa5"
+    },
+    "PAGE-30": {
+      "verdict": "PASS",
+      "source_sha256": "47b23a8639896eb75e8901d57ed5a44752a5c7e52c545a189f4af0e67fb722d4",
+      "snapshot_sha256": "2501a6e66b292a541399fd929c43620c4fb20d89072e3d9883492d2747bd58d6",
+      "reviewed_candidate_file_sha256": "efd1e6305734d2e75d5e8e63dff01c82ec70370a18d6e9613e1b49b1bf7b915e",
+      "reviewed_units": 36
+    },
+    "PAGE-31": {
+      "verdict": "PASS",
+      "source_sha256": "5ed60378d596490e0154bf5f1e81ca7375642c21652a1720ad8536bad5ec1e03",
+      "snapshot_sha256": "49478d36897108121e99b3c2c66703ec6c914527073f10f698bdef43b300c21e",
+      "reviewed_candidate_file_sha256": "524966baf678c38915418ed198ef0a6fe3b77f83847767ba0e9b96df3db8c1bb",
+      "reviewed_units": 63
     }
   },
-  "review_summary": "Fresh independent read-only review covered all 39 title, summary, heading, paragraph and list units. Entry-point and reassessment meanings corrected. All conditions, future capabilities and boundaries preserved. No source-claim research or runtime acceptance included."
+  "review_summary": "Fresh independent review covered all 824 units across 17 approved native pages, including complete paragraphs, lists, conditions, exceptions, jurisdiction, FAQs and metadata. Privacy retention-duration wording corrected. About accepted body unchanged. Locale-link counterparts independently verified. Staging Chinese differences are bound read-only CAS baselines, not alternate translation sources.",
+  "independent_semantic_review_sha256": "967e13ef8da3df512ed030ca119ea67c867b78334c6c0a0f30315e9651f75d4e",
+  "frozen_review_packet_sha256": "38aaf3017617b1c60e7d3deea397e8de7cf47b7bff2c5b8eae5ff336b7e31345"
 }
